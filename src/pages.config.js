@@ -222,6 +222,7 @@ import HumanSignal from './pages/HumanSignal';
 import IToWeTransformation from './pages/IToWeTransformation';
 import ImpactVerification from './pages/ImpactVerification';
 import InterplanetaryMoney from './pages/InterplanetaryMoney';
+import KidneyStoneProtocol from './pages/KidneyStoneProtocol';
 import Leaderboard from './pages/Leaderboard';
 import LearnGuitar from './pages/LearnGuitar';
 import LennoxMaths from './pages/LennoxMaths';
@@ -274,7 +275,6 @@ import QuantumPayments from './pages/QuantumPayments';
 import QuantumSearch from './pages/QuantumSearch';
 import Radio from './pages/Radio';
 import ReadingSupport from './pages/ReadingSupport';
-import Teachers from './pages/Teachers';
 import RealityLibrary from './pages/RealityLibrary';
 import RemoveBrokenTracks from './pages/RemoveBrokenTracks';
 import RequestAIMusic from './pages/RequestAIMusic';
@@ -354,6 +354,7 @@ import SubmitProofOfLove from './pages/SubmitProofOfLove';
 import SymbolForge from './pages/SymbolForge';
 import TalkToAI51 from './pages/TalkToAI51';
 import TeacherInput from './pages/TeacherInput';
+import Teachers from './pages/Teachers';
 import TechScout from './pages/TechScout';
 import TechStack from './pages/TechStack';
 import TechnicalSpecification from './pages/TechnicalSpecification';
@@ -399,7 +400,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import KidneyStoneProtocol from './pages/KidneyStoneProtocol';
 import __Layout from './Layout.jsx';
 
 
@@ -579,6 +579,7 @@ export const PAGES = {
     "IToWeTransformation": IToWeTransformation,
     "ImpactVerification": ImpactVerification,
     "InterplanetaryMoney": InterplanetaryMoney,
+    "KidneyStoneProtocol": KidneyStoneProtocol,
     "Leaderboard": Leaderboard,
     "LearnGuitar": LearnGuitar,
     "LennoxMaths": LennoxMaths,
@@ -631,7 +632,6 @@ export const PAGES = {
     "QuantumSearch": QuantumSearch,
     "Radio": Radio,
     "ReadingSupport": ReadingSupport,
-    "Teachers": Teachers,
     "RealityLibrary": RealityLibrary,
     "RemoveBrokenTracks": RemoveBrokenTracks,
     "RequestAIMusic": RequestAIMusic,
@@ -711,6 +711,7 @@ export const PAGES = {
     "SymbolForge": SymbolForge,
     "TalkToAI51": TalkToAI51,
     "TeacherInput": TeacherInput,
+    "Teachers": Teachers,
     "TechScout": TechScout,
     "TechStack": TechStack,
     "TechnicalSpecification": TechnicalSpecification,
@@ -756,7 +757,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "KidneyStoneProtocol": KidneyStoneProtocol,
 }
 
 export const pagesConfig = {
