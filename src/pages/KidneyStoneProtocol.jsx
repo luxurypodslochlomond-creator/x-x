@@ -88,42 +88,62 @@ function useAudioEngine() {
     if (ctx.state === 'suspended') ctx.resume();
 
     if (phase.binaural) {
-      // Left ear: carrier
+      // TRUE BINAURAL — left ear and right ear separated via stereo merger
+      const merger = ctx.createChannelMerger(2);
+      merger.connect(ctx.destination);
+
       const oscL = ctx.createOscillator();
       const gainL = ctx.createGain();
-      const mergerL = ctx.createChannelMerger(2);
-      oscL.frequency.value = phase.carrierHz;
+      oscL.frequency.value = phase.carrierHz; // e.g. 200Hz left
       oscL.type = 'sine';
-      gainL.gain.value = 0.4;
+      gainL.gain.value = 0.5;
       oscL.connect(gainL);
-      gainL.connect(mergerL, 0, 0);
-      mergerL.connect(ctx.destination);
+      gainL.connect(merger, 0, 0); // LEFT channel
       oscL.start();
       nodesRef.current.push(oscL);
 
-      // Right ear: carrier + beat frequency
       const oscR = ctx.createOscillator();
       const gainR = ctx.createGain();
-      const mergerR = ctx.createChannelMerger(2);
-      oscR.frequency.value = phase.carrierHz + phase.hz;
+      oscR.frequency.value = phase.carrierHz + phase.hz; // e.g. 240Hz right = 40Hz beat
       oscR.type = 'sine';
-      gainR.gain.value = 0.4;
+      gainR.gain.value = 0.5;
       oscR.connect(gainR);
-      gainR.connect(mergerR, 0, 1);
-      mergerR.connect(ctx.destination);
+      gainR.connect(merger, 0, 1); // RIGHT channel
       oscR.start();
       nodesRef.current.push(oscR);
     } else {
-      // Pure tone - strong enough to feel through the speaker
+      // PRIMARY frequency — strong pure tone through speaker (felt physically)
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.type = phase.waveType;
+      osc.type = 'sine';
       osc.frequency.value = phase.hz;
-      gain.gain.value = 0.7;
+      gain.gain.value = 0.75;
       osc.connect(gain);
       gain.connect(ctx.destination);
       osc.start();
       nodesRef.current.push(osc);
+
+      // HARMONIC layer — ancient chord resonance (lower volume, blended)
+      if (phase.harmonicHz) {
+        const oscH = ctx.createOscillator();
+        const gainH = ctx.createGain();
+        oscH.type = 'sine';
+        oscH.frequency.value = phase.harmonicHz;
+        gainH.gain.value = 0.3; // blended underneath
+        oscH.connect(gainH);
+        gainH.connect(ctx.destination);
+        oscH.start();
+        nodesRef.current.push(oscH);
+      }
+    }
+
+    // Haptic feedback pulse (phone vibration) — physical resonance
+    if ('vibrate' in navigator && phase.hapticPattern) {
+      const hapticInterval = setInterval(() => {
+        navigator.vibrate(phase.hapticPattern);
+      }, 2000);
+      // Store interval id to clear on stop
+      nodesRef.current.push({ stop: () => clearInterval(hapticInterval) });
     }
   };
 
