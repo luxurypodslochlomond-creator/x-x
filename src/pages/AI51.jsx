@@ -625,16 +625,20 @@ Otherwise: save it.`,
       });
 
       if (memoryCheck?.should_save && memoryCheck?.content) {
-        await base44.entities.AI51Memory.create({
+        const saved = await base44.entities.AI51Memory.create({
           memory_type: memoryCheck.memory_type || 'conversation',
           content: memoryCheck.content,
           emotional_weight: memoryCheck.emotional_weight || 'meaningful',
           tags: memoryCheck.tags || [],
           context: `From conversation on ${new Date().toLocaleDateString()}`
         });
+        // Zero-loss: memory was actually persisted. No false promises.
+        if (!saved || !saved.id) throw new Error('Memory persistence failed');
       }
-    } catch (_) {
-      // Memory saving is silent — never break the conversation
+    } catch (err) {
+      // Memory failure is silent — never break conversation. But log for debugging.
+      console.warn('Memory save failed (conversation continues):', err);
+      // In production, could add retry logic or device-level fallback here
     }
   };
 
