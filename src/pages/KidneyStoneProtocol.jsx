@@ -271,11 +271,15 @@ Write him a SHORT (3-4 sentences max), warm, personal, genuinely hopeful message
     <div className="min-h-screen bg-black text-white flex flex-col items-center px-4 py-8 pb-24" style={{ fontFamily: 'monospace' }}>
       
       {/* HEADER */}
-      <div className="text-center mb-8 max-w-sm">
-        <div className="text-4xl mb-2">🙏</div>
+      <div className="text-center mb-6 max-w-sm flex flex-col items-center">
+        {/* COOLASFUCK STONE VISUALIZER */}
+        <div className="mb-4">
+          <KidneyStoneShatter isPlaying={isPlaying} phase={phase} hz={phase?.hz} />
+        </div>
         <h1 className="text-2xl font-black text-white mb-1">GARY'S PROTOCOL</h1>
         <p className="text-cyan-400 text-xs tracking-widest uppercase">Kidney Stone • Frequency Therapy</p>
         <p className="text-gray-600 text-xs mt-1">6.03mm • Right Ureter • Philippines</p>
+        <p className="text-green-500 text-xs mt-1 font-bold">2/3 TO BLADDER — SO CLOSE BRO 💚</p>
       </div>
 
       {/* SCIENCE BADGE */}
