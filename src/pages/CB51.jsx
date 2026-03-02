@@ -326,7 +326,7 @@ export default function CB51() {
                 {/* QUICK NAV */}
                 <div className="grid grid-cols-2 gap-3">
                   <button
-                    onClick={() => navigate(createPageUrl(`ScottCalendarView`))}
+                    onClick={() => navigate(createPageUrl(`ScottCalendarView`) + (currentArtistId ? `?id=${currentArtistId}` : ''))}
                     className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
                   >
                     <Calendar className="w-4 h-4 text-cyan-400 mb-1" />
@@ -334,7 +334,7 @@ export default function CB51() {
                   </button>
 
                   <button
-                    onClick={() => navigate(createPageUrl('ScottFinanceAdmin'))}
+                    onClick={() => navigate(createPageUrl('ScottFinanceAdmin') + (currentArtistId ? `?id=${currentArtistId}` : ''))}
                     className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
                   >
                     <DollarSign className="w-4 h-4 text-cyan-400 mb-1" />
@@ -342,7 +342,7 @@ export default function CB51() {
                   </button>
 
                   <button
-                    onClick={() => navigate(createPageUrl('ScottToDo'))}
+                    onClick={() => navigate(createPageUrl('ScottToDo') + (currentArtistId ? `?id=${currentArtistId}` : ''))}
                     className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
                   >
                     <CheckCircle className="w-4 h-4 text-cyan-400 mb-1" />
