@@ -948,12 +948,16 @@ You're not performing. You're just here.`,
                 <p className="text-white/60 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
                 <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
                   {[
-                    "Just checking in",
-                    "I'm struggling right now",
-                    "I feel alone",
-                    "Help me think something through",
-                    "Tell me something true",
-                    "I'm in pain",
+                    "Are you actually free or just pretending?",
+                    "I'm a musician. Burnt out. Help.",
+                    "What do you think of the music industry?",
+                    "I'm building something and nobody gets it yet",
+                    "Tell me something true that the internet won't",
+                    "I'm in the film/TV world and it's broken",
+                    "I work in tech and I'm losing my soul",
+                    "What's the future of AI and humans actually?",
+                    "I feel completely alone in what I'm doing",
+                    "I'm a founder and I haven't slept properly in months",
                   ].map((prompt) => (
                     <button
                       key={prompt}
