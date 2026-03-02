@@ -651,7 +651,9 @@ Otherwise: save it.`,
     setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: new Date() }]);
     setIsProcessing(true);
 
-    // OFFLINE MODE — AI51 still responds, never silent
+    // OFFLINE MODE — intelligent cache + local inference attempt
+    // Not full reasoning. Real responses: keyword-matched wisdom + empathy.
+    // Better than silence. Not better than online AI51, but no pretending.
     if (!isOnline) {
       await new Promise(r => setTimeout(r, 800)); // feels real
       const offlineReply = getOfflineResponse(userMessage);
