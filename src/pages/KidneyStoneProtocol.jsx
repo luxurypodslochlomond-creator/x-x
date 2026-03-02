@@ -190,8 +190,22 @@ Write him a SHORT (3-4 sentences max), warm, personal, genuinely hopeful message
     getAIMessage();
   }, []);
 
+  // Breathing pacer — synced to each phase's optimal breath rate
   useEffect(() => {
-    return () => { audio.cleanup(); if (timerRef.current) clearInterval(timerRef.current); };
+    if (!isPlaying || !phase) {
+      if (breathRef.current) clearInterval(breathRef.current);
+      return;
+    }
+    const halfCycle = (phase.breathRate || 5) * 1000;
+    breathRef.current = setInterval(() => {
+      setBreathPhase(p => p === 'in' ? 'out' : 'in');
+      setBreathCount(c => c + 1);
+    }, halfCycle);
+    return () => clearInterval(breathRef.current);
+  }, [isPlaying, phase]);
+
+  useEffect(() => {
+    return () => { audio.cleanup(); if (timerRef.current) clearInterval(timerRef.current); if (breathRef.current) clearInterval(breathRef.current); };
   }, []);
 
   const startPhase = (index) => {
