@@ -868,8 +868,14 @@ You're not performing. You're just here.`,
       setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
       speak(aiMessage, detectedLang);
       saveMemoryIfNeeded(userMessage, aiMessage);
-      // Save to device memory too — no login needed
+      // Save to device memory (encrypted) — no login needed
       extractAndSaveLocalInsight(userMessage, aiMessage);
+      saveEncryptedMemory({
+        type: 'conversation',
+        userMessage,
+        aiMessage,
+        timestamp: new Date().toISOString()
+      });
       setLocalMemory(loadLocalMemory());
       const bridge = detectHealingBridge(userMessage, aiMessage);
       if (bridge) setHealingBridge(bridge);
