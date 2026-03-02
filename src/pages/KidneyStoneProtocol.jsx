@@ -164,7 +164,11 @@ export default function KidneyStoneProtocol() {
   const [aiMessage, setAiMessage] = useState('');
   const [loadingAI, setLoadingAI] = useState(false);
   const [waterCount, setWaterCount] = useState(0);
+  const [breathPhase, setBreathPhase] = useState('in'); // 'in' | 'out'
+  const [breathCount, setBreathCount] = useState(0);
+  const [showScience, setShowScience] = useState(false);
   const timerRef = useRef(null);
+  const breathRef = useRef(null);
   const audio = useAudioEngine();
 
   // Get AI encouragement message on load
