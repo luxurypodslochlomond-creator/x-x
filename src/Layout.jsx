@@ -341,6 +341,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
     { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
+    { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, highlight: true, description: "Frequency stone dissolution" },
   ];
 
   // 2. EARN & CREATE (practical actions)
