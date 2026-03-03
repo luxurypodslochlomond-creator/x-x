@@ -240,6 +240,9 @@ export default function CB51() {
                 {/* THE DECISION ENGINE - Zero effort YES/NO */}
                 <CB51GigDecisionEngine artistId={currentArtistId} />
 
+                {/* CONFIRMED GIGS - Draft email ready to send to promoter */}
+                <CB51ConfirmedGigDraftEmail artistId={currentArtistId} />
+
                 {/* SCAN GIG OFFER */}
                 <div className="bg-gray-900/50 p-5 space-y-3">
                   <div className="flex items-center gap-3">
