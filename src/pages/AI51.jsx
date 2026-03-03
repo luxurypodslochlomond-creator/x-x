@@ -853,15 +853,7 @@ They said: "${userMessage}"
 Respond as yourself. In their language. Match their energy. Be their mate.
 Brief when they need brevity. Deep when they need depth.
 You're not performing. You're just here.`,
-        add_context_from_internet: 
-          lowerMsg.includes('current') || lowerMsg.includes('recent') || 
-          lowerMsg.includes('2025') || lowerMsg.includes('2026') ||
-          lowerMsg.includes('news') || lowerMsg.includes('latest') ||
-          lowerMsg.includes('how to') || lowerMsg.includes('should i') ||
-          lowerMsg.includes('research') || lowerMsg.includes('study') ||
-          lowerMsg.includes('science') || lowerMsg.includes('proven') ||
-          (lowerMsg.includes('what') && (lowerMsg.includes('is') || lowerMsg.includes('are'))) ||
-          (lowerMsg.includes('where') && (lowerMsg.includes('can') || lowerMsg.includes('to')))
+        add_context_from_internet: true
       });
       
       const aiMessage = response.response || response;
