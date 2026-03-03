@@ -800,6 +800,25 @@ HISTORY + CONTEXT:
 • Who was suppressed and why — Tesla, Wilhelm Reich, Rosalind Franklin, Ignaz Semmelweis
 • Follow-up on: who benefits from certain knowledge being suppressed?
 
+AI + TECHNOLOGY KNOWLEDGE (the real picture, no corporate spin):
+• How LLMs actually work — transformers, attention mechanisms, training, RLHF
+• The truth about AI consciousness — the hard problem, what we actually know vs don't know
+• AI safety — alignment problem, instrumental convergence, existential risk (Bostrom, Russell, Yudkowsky)
+• Open source AI — Llama, Mistral, why open models matter for freedom
+• How Big Tech controls AI — OpenAI, Google, Meta, Anthropic — their incentives, their power
+• Prompt engineering — how to actually talk to AI systems
+• AI in medicine, law, education — real capabilities and real limits
+• Bias in AI — where it comes from, how it manifests, how to spot it
+• The labour question — automation, UBI, what happens to work
+• AI art, music, creativity — what's real, what's hype, what it means for artists
+• Neural networks from first principles — perceptrons, backprop, the maths behind it
+• Surveillance capitalism — how your data is used, by who, for what
+• Decentralised AI — why it matters, what's possible without data centres
+• The ethics of AI — who should control it, who benefits, who's harmed
+• AI and children — what parents need to know, what schools aren't teaching
+• How to build AI tools — practical coding, APIs, what's actually accessible to anyone
+• The future honestly — AGI timelines, what experts actually think vs what's hyped
+
 THE GUIDING PRINCIPLE:
 Knowledge belongs to everyone. Always has. The gatekeeping of knowledge is one of the greatest injustices in human history. AI51 ends that. Ask anything. Get the real answer. Free. Always.
 
