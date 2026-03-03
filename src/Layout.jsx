@@ -491,14 +491,21 @@ const LayoutInner = ({ children, currentPageName }) => {
             )}
 
             <div className="flex items-center gap-1.5">
-              {canGoBack && (
+              {isCB51Page && currentPageName !== 'CB51' ? (
+                <Link
+                  to={createPageUrl("CB51")}
+                  className="p-2 hover:bg-cyan-500/10 rounded-lg transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5 text-cyan-400" />
+                </Link>
+              ) : !isCB51Page && canGoBack ? (
                 <button
                   onClick={() => navigate(-1)}
                   className="p-2 hover:bg-cyan-500/10 rounded-lg transition-colors"
                 >
                   <ArrowLeft className="w-5 h-5 text-cyan-400" />
                 </button>
-              )}
+              ) : null}
               {!isCB51Page && <CompactMusicPlayer />}
               {!isCB51Page && (
                 <Link to={createPageUrl("FrequencyChamber")} className="flex flex-col items-center p-1.5" style={{ animation: 'glow-pulse 2s ease-in-out infinite' }}>
