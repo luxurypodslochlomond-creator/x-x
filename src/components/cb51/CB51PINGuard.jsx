@@ -27,7 +27,7 @@ export default function CB51PINGuard({ children }) {
 
       // PIN check - check both localStorage AND cookie (iOS PWA needs cookie)
       const pinVerified = localStorage.getItem('cb51_pin_verified');
-      const cookieVerified = document.cookie.split(';').some(c => c.trim() === 'cb51_pin_verified=true');
+      const cookieVerified = document.cookie.split(';').some(c => c.trim().startsWith('cb51_pin_verified=true'));
       if (pinVerified === 'true' || cookieVerified) {
         setIsAuthed(true);
       } else {
