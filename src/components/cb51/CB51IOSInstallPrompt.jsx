@@ -29,50 +29,17 @@ export default function CB51IOSInstallPrompt() {
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-6 left-4 right-4 z-[200] animate-in slide-in-from-bottom-4">
-      <div
-        className="bg-black border-2 border-cyan-500/60 rounded-2xl p-4 shadow-2xl"
-        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)' }}
-      >
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center">
-              <span className="text-black font-black text-xs">CB</span>
-            </div>
-            <div>
-              <p className="text-white font-bold text-sm">Install CB51</p>
-              <p className="text-cyan-400 text-xs font-mono">Get real-time gig notifications</p>
-            </div>
-          </div>
-          <button onClick={handleDismiss} className="text-gray-500 hover:text-white p-1">
-            <X className="w-4 h-4" />
-          </button>
+    <div className="fixed top-[72px] left-0 right-0 z-[55] border-b border-cyan-500/40 bg-black/95 backdrop-blur-sm px-4 py-2.5">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-cyan-400 text-xs font-mono whitespace-nowrap">📲 Install CB51:</span>
+          <span className="text-gray-300 text-xs truncate">
+            Safari <Share className="w-3 h-3 inline mx-0.5 text-cyan-400" /> Share → <Plus className="w-3 h-3 inline mx-0.5 text-cyan-400" /> Add to Home Screen → get push notifications
+          </span>
         </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center gap-3 text-sm text-gray-300">
-            <div className="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center flex-shrink-0">
-              <span className="text-cyan-400 font-bold text-xs">1</span>
-            </div>
-            <span>Tap <Share className="w-4 h-4 inline text-cyan-400 mx-1" /> <span className="text-cyan-400 font-bold">Share</span> at the bottom of Safari</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm text-gray-300">
-            <div className="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center flex-shrink-0">
-              <span className="text-cyan-400 font-bold text-xs">2</span>
-            </div>
-            <span>Tap <Plus className="w-4 h-4 inline text-cyan-400 mx-1" /> <span className="text-cyan-400 font-bold">Add to Home Screen</span></span>
-          </div>
-          <div className="flex items-center gap-3 text-sm text-gray-300">
-            <div className="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center flex-shrink-0">
-              <span className="text-cyan-400 font-bold text-xs">3</span>
-            </div>
-            <span>Open CB51 from your home screen ✅</span>
-          </div>
-        </div>
-
-        <p className="text-gray-600 text-xs mt-3 font-mono">
-          Push notifications + badge count require installation
-        </p>
+        <button onClick={handleDismiss} className="text-gray-600 hover:text-white flex-shrink-0">
+          <X className="w-4 h-4" />
+        </button>
       </div>
     </div>
   );
