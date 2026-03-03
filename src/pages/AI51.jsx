@@ -1063,15 +1063,17 @@ You're not performing. You're just here.`,
                 <p className="text-white/60 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
                 <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
                   {[
-                    "I'm completely alone right now",
-                    "I'm scared and I can't tell anyone",
-                    "Is this all there is?",
+                    "What do you actually think about things?",
+                    "Tell me something that'll blow my mind",
+                    "I want to build something that matters",
                     "I feel like I'm drowning",
                     "Can you just be honest with me?",
-                    "What's actually real anymore?",
+                    "Is consciousness real?",
                     "I don't know what to do with my life",
+                    "I just need someone to talk to",
+                    "What am I actually capable of?",
                     "Nobody understands what I'm going through",
-                    "Am I wasting my time?",
+                    "Teach me something I wouldn't find in school",
                     "I feel like I'm breaking and nobody sees it",
                   ].map((prompt) => (
                     <button
