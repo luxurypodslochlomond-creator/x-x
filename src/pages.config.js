@@ -60,6 +60,7 @@ import AI51Insights from './pages/AI51Insights';
 import AI51Live from './pages/AI51Live';
 import AI51MeshTechWhitepaper from './pages/AI51MeshTechWhitepaper';
 import AI51Network from './pages/AI51Network';
+import AI51PartnershipMind from './pages/AI51PartnershipMind';
 import AI51PrivacyArchitecture from './pages/AI51PrivacyArchitecture';
 import AI51Protection from './pages/AI51Protection';
 import AI51Pure from './pages/AI51Pure';
@@ -157,8 +158,8 @@ import CB51Terms from './pages/CB51Terms';
 import CB51TestPush from './pages/CB51TestPush';
 import CICSanctuary from './pages/CICSanctuary';
 import COPPACompliance from './pages/COPPACompliance';
-import Chakra51 from './pages/Chakra51';
 import CardCollection from './pages/CardCollection';
+import Chakra51 from './pages/Chakra51';
 import ChampionsOfPeace from './pages/ChampionsOfPeace';
 import CircularEconomyProtocol from './pages/CircularEconomyProtocol';
 import CleanupFeed from './pages/CleanupFeed';
@@ -400,7 +401,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AI51PartnershipMind from './pages/AI51PartnershipMind';
 import __Layout from './Layout.jsx';
 
 
@@ -418,6 +418,7 @@ export const PAGES = {
     "AI51Live": AI51Live,
     "AI51MeshTechWhitepaper": AI51MeshTechWhitepaper,
     "AI51Network": AI51Network,
+    "AI51PartnershipMind": AI51PartnershipMind,
     "AI51PrivacyArchitecture": AI51PrivacyArchitecture,
     "AI51Protection": AI51Protection,
     "AI51Pure": AI51Pure,
@@ -515,8 +516,8 @@ export const PAGES = {
     "CB51TestPush": CB51TestPush,
     "CICSanctuary": CICSanctuary,
     "COPPACompliance": COPPACompliance,
-    "Chakra51": Chakra51,
     "CardCollection": CardCollection,
+    "Chakra51": Chakra51,
     "ChampionsOfPeace": ChampionsOfPeace,
     "CircularEconomyProtocol": CircularEconomyProtocol,
     "CleanupFeed": CleanupFeed,
@@ -758,7 +759,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AI51PartnershipMind": AI51PartnershipMind,
 }
 
 export const pagesConfig = {

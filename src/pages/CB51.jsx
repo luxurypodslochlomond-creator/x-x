@@ -16,6 +16,7 @@ import CB51BandNotificationInbox from '@/components/cb51/CB51BandNotificationInb
 import CB51BadgeManager from '@/components/cb51/CB51BadgeManager';
 import CB51BackgroundSync from '@/components/cb51/CB51BackgroundSync';
 import CB51GigDecisionEngine from '@/components/cb51/CB51GigDecisionEngine';
+import CB51ConfirmedGigDraftEmail from '@/components/cb51/CB51ConfirmedGigDraftEmail';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
