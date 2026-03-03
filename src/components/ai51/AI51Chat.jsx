@@ -287,9 +287,13 @@ export default function AI51Chat({ onMessageSend, isThinking, conversation, loca
     setIsThinking(true);
 
     try {
+      // Build context from conversation history only (not stale memories)
+      const contextMessages = conversation.slice(-5).map(m => `${m.role}: ${m.content}`).join('\n');
+      const fullPrompt = contextMessages ? `Previous context:\n${contextMessages}\n\nUser: ${text}` : text;
+      
       // Try online LLM first
       const response = await base44.integrations.Core.InvokeLLM({
-        prompt: text
+        prompt: fullPrompt
       });
 
       const aiMessage = { role: 'ai', content: response };
