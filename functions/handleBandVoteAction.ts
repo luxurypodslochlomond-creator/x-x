@@ -114,10 +114,30 @@ Deno.serve(async (req) => {
       }
     }
 
-    // If all voted yes, update gig status
+    // If all voted yes, update gig status + generate draft promoter email
     if (allVotedYes) {
+      // Generate draft confirmation email for manager to send to promoter
+      let draftEmail = '';
+      try {
+        const aiDraft = await base44.asServiceRole.integrations.Core.InvokeLLM({
+          prompt: `You are CB51, an AI music manager assistant. Write a professional, friendly confirmation email from the manager to the promoter/agent confirming this gig.
+
+GIG DETAILS:
+- Venue: ${gig.venue || gig.title}
+- Date: ${gig.date_start || 'TBC'}
+- Fee: ${gig.fee ? '£' + gig.fee : 'as agreed'}
+- Promoter: ${gig.promoter_name || 'Hi'}
+
+Keep it short, professional, warm. 3-4 sentences max. No subject line, just the body. Sign off as "The Management".`,
+        });
+        draftEmail = aiDraft;
+      } catch (e) {
+        draftEmail = `Hi ${gig.promoter_name || 'there'},\n\nI'm pleased to confirm that the band are available and would love to accept the offer for ${gig.venue || gig.title} on ${gig.date_start || 'the agreed date'}.\n\nPlease let us know the next steps and we'll get everything confirmed from our end.\n\nBest regards,\nThe Management`;
+      }
+
       await base44.asServiceRole.entities.GigOffer.update(gigOfferId, {
-        status: 'confirmed'
+        status: 'confirmed',
+        ai_draft_accept: draftEmail
       });
     }
 
