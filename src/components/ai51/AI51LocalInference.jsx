@@ -9,33 +9,9 @@ let modelLoaded = false;
 let modelLoadingPromise = null;
 
 async function initializeMLCEngine() {
-  if (modelLoaded) return mlcEngineRef;
-  if (modelLoadingPromise) return modelLoadingPromise;
-
-  modelLoadingPromise = (async () => {
-    try {
-      const { MLCEngine } = await import('https://esm.run/@mlc-ai/web-llm');
-      
-      const engine = new MLCEngine({
-        initProgressCallback: (progress) => {
-          console.log(`Model loading: ${Math.round(progress * 100)}%`);
-        }
-      });
-
-      // Load Phi-2 quantized (4-bit, ~500MB)
-      // Falls back to smaller model if needed
-      await engine.reload('Phi-2-q4f32_1');
-      
-      modelLoaded = true;
-      mlcEngineRef = engine;
-      return engine;
-    } catch (err) {
-      console.warn('WebLLM init failed:', err);
-      throw new Error('Local inference unavailable. Falling back to cloud.');
-    }
-  })();
-
-  return modelLoadingPromise;
+  // Local inference disabled — requires large model download and can crash the page
+  // Always falls back to cloud AI51 which is faster and more capable
+  throw new Error('Local inference disabled. Using cloud.');
 }
 
 export async function runLocalInference(userMessage, conversationHistory = []) {
