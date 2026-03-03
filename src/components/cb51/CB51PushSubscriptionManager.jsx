@@ -209,8 +209,9 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
     );
   }
 
-  // Error state
+  // Error state — only show on mobile
   if (status === 'error') {
+    if (!isIOS && !isAndroid) return null;
     return (
       <div className="mx-6 mt-4 bg-gray-900/60 border border-gray-700 rounded-lg p-3 flex items-center gap-3">
         <AlertCircle className="w-4 h-4 text-gray-500 flex-shrink-0" />
