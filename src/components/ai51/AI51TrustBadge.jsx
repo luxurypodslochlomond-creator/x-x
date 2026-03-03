@@ -31,14 +31,14 @@ export default function AI51TrustBadge() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-end justify-center pb-8 px-4"
-            style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)' }}
+            className="fixed inset-0 z-[9999] flex items-end justify-center px-4"
+            style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', paddingBottom: 'env(safe-area-inset-bottom, 24px)' }}
             onClick={() => setOpen(false)}
           >
             <motion.div
-              initial={{ y: 60, opacity: 0 }}
+              initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 60, opacity: 0 }}
+              exit={{ y: 80, opacity: 0 }}
               transition={{ type: 'spring', damping: 28, stiffness: 300 }}
               onClick={e => e.stopPropagation()}
               className="w-full max-w-sm rounded-2xl p-6 space-y-5"
@@ -46,6 +46,8 @@ export default function AI51TrustBadge() {
                 background: 'rgba(8,4,20,0.98)',
                 border: '1px solid rgba(34,211,238,0.3)',
                 boxShadow: '0 0 60px rgba(34,211,238,0.15)',
+                maxHeight: '85vh',
+                overflowY: 'auto',
               }}
             >
               {/* Header */}
