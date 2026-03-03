@@ -1410,6 +1410,7 @@ You're not performing. You're just here.`,
             <span style={{ fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(168,85,247,0.5)', fontFamily: 'monospace' }}>AI51 → AI*</span>
           </Link>
         </div>
+        </div>
 
         {/* SOUL + PRIVACY — quiet, permanent, honest */}
         <div className="text-center pb-4 px-6 space-y-2" style={{ userSelect: 'none' }}>
