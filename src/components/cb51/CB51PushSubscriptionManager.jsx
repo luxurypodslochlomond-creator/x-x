@@ -145,13 +145,13 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
   // Subscribed — show nothing (all good)
   if (status === 'subscribed' || status === 'checking') return null;
 
-  // Desktop browsers — push notifications are unreliable, hide silently
-  if (!isIOS && !isAndroid) return null;
-
   // iOS in browser (not installed) — silent, don't clutter the UI
   if (isIOS && !isInStandaloneMode) {
     return null;
   }
+
+  // Desktop browsers — push notifications are unreliable, hide silently
+  if (!isIOS && !isAndroid) return null;
 
   // Needs permission — show a clear prompt
   if (status === 'needs_permission') {
