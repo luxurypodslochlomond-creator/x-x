@@ -150,8 +150,7 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
     return null;
   }
 
-  // Desktop browsers — push notifications are unreliable, hide silently
-  if (!isIOS && !isAndroid) return null;
+  // Desktop: only hide if already denied or unsupported — otherwise let them enable
 
   // Needs permission — show a clear prompt
   if (status === 'needs_permission') {
