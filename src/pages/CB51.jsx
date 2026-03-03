@@ -107,6 +107,9 @@ export default function CB51() {
     <CB51PINGuard>
       <CB51ErrorBoundary>
         <div className="min-h-screen bg-black text-white pb-20">
+          {/* iOS INSTALL PROMPT */}
+          <CB51IOSInstallPrompt />
+
           {/* PUSH NOTIFICATIONS - Setup */}
           {user && <CB51PushSubscriptionManager userEmail={user.email} />}
 
