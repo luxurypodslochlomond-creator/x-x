@@ -145,27 +145,9 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
   // Subscribed — show nothing (all good)
   if (status === 'subscribed' || status === 'checking') return null;
 
-  // iOS in browser (not installed) — must install first
+  // iOS in browser (not installed) — silent, don't clutter the UI
   if (isIOS && !isInStandaloneMode) {
-    return (
-      <div className="mx-6 mt-4 bg-amber-950/50 border-2 border-amber-500/60 rounded-lg p-4">
-        <div className="flex items-start gap-3">
-          <Smartphone className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="text-amber-300 font-black text-sm">📲 Install CB51 on your iPhone</p>
-            <p className="text-gray-300 text-xs mt-1 leading-relaxed">
-              To get push notifications on iPhone you need to install the app first:
-            </p>
-            <ol className="text-amber-200 text-xs mt-2 space-y-1 leading-relaxed">
-              <li>1. Tap the <strong>Share button</strong> (box with arrow) at the bottom of Safari</li>
-              <li>2. Scroll down and tap <strong>"Add to Home Screen"</strong></li>
-              <li>3. Tap <strong>Add</strong> — then open CB51 from your home screen</li>
-              <li>4. Notifications will work automatically ✓</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   // Needs permission — show a clear prompt
