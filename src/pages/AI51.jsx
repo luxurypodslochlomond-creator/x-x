@@ -1217,6 +1217,9 @@ You're not performing. You're just here.`,
                     backdropFilter: 'blur(12px)',
                   }}
                 >
+                  {msg.imageUrl && (
+                   <img src={msg.imageUrl} alt="shared" className="w-40 h-auto rounded-xl mb-2 border border-white/10" />
+                  )}
                   <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap">{msg.content}</p>
                   {msg.offline && <p className="text-yellow-300/70 font-sans text-xs mt-1">offline response</p>}
                 </div>
