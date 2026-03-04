@@ -587,11 +587,21 @@ export default function AI51() {
     if (sendMessageContentRef.current) await sendMessageContentRef.current(transcript.trim());
   };
 
+  const handleImageAttach = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    // Upload to get a URL AI51 can actually see
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setAttachedImage({ url: file_url, localPreview: URL.createObjectURL(file) });
+  };
+
   const sendMessage = async () => {
-    if (!inputText.trim() || isProcessing) return;
-    const text = inputText.trim();
+    if ((!inputText.trim() && !attachedImage) || isProcessing) return;
+    const text = inputText.trim() || (attachedImage ? "What do you see in this?" : '');
+    const img = attachedImage;
     setInputText('');
-    if (sendMessageContentRef.current) await sendMessageContentRef.current(text);
+    setAttachedImage(null);
+    if (sendMessageContentRef.current) await sendMessageContentRef.current(text, img?.url);
   };
 
   // SAVE MEMORY — extract meaningful things from conversation and remember them
