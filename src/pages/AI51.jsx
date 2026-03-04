@@ -1387,36 +1387,59 @@ You're not performing. You're just here.`,
         </AnimatePresence>
 
         {/* TYPE INPUT — for deaf users and anyone who prefers typing */}
-        <div className="flex gap-2 items-center w-full max-w-xs px-4">
-          <input
-            type="text"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder={t.type}
-            disabled={isProcessing || isListening}
-            aria-label="Type your message to AI51"
-            className="flex-1 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none font-sans text-sm text-center"
-            style={{
-              background: 'rgba(255,255,255,0.12)',
-              border: '2px solid rgba(34,211,238,0.4)',
-              backdropFilter: 'blur(10px)',
-              boxShadow: 'inset 0 0 8px rgba(34,211,238,0.1)',
-            }}
-          />
-          {inputText.trim() && (
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={sendMessage}
-              disabled={isProcessing}
-              aria-label="Send message"
-              className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center bg-white/15 border border-white/20"
-            >
-              <Send className="w-3.5 h-3.5 text-white" />
-            </motion.button>
+        <div className="flex flex-col gap-1 w-full max-w-xs px-4">
+          {/* Image preview */}
+          {attachedImage && (
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="relative self-start">
+              <img src={attachedImage.localPreview} alt="attached" className="h-16 w-16 object-cover rounded-xl border border-cyan-400/40" />
+              <button onClick={() => setAttachedImage(null)} className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-black/80 border border-white/20 flex items-center justify-center">
+                <X className="w-2.5 h-2.5 text-white/70" />
+              </button>
+            </motion.div>
           )}
+          <div className="flex gap-2 items-center">
+            {/* Hidden file input */}
+            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageAttach} />
+            {/* Image attach button */}
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isProcessing}
+              aria-label="Attach image"
+              className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)' }}
+            >
+              <ImagePlus className="w-4 h-4 text-white/40" />
+            </button>
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder={t.type}
+              disabled={isProcessing || isListening}
+              aria-label="Type your message to AI51"
+              className="flex-1 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none font-sans text-sm text-center"
+              style={{
+                background: 'rgba(255,255,255,0.12)',
+                border: '2px solid rgba(34,211,238,0.4)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: 'inset 0 0 8px rgba(34,211,238,0.1)',
+              }}
+            />
+            {(inputText.trim() || attachedImage) && (
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={sendMessage}
+                disabled={isProcessing}
+                aria-label="Send message"
+                className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center bg-white/15 border border-white/20"
+              >
+                <Send className="w-3.5 h-3.5 text-white" />
+              </motion.button>
+            )}
+          </div>
         </div>
 
         {/* LIVING CLOCK — local time + date in device language */}
