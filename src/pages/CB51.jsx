@@ -39,7 +39,8 @@ export default function CB51() {
         const currentUser = await base44.auth.me();
         setUser(currentUser);
       } catch (err) {
-        navigate(createPageUrl('CB51Login'));
+        // PIN users aren't base44 authed - that's fine, show band member view
+        setUser(null);
       } finally {
         setLoading(false);
       }
