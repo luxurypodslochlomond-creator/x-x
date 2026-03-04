@@ -48,10 +48,16 @@ export default function CB51() {
     checkAuth();
   }, [navigate]);
 
+  // Check PIN auth too - PIN users don't have base44 auth but should see artists
+  const pinVerified = typeof window !== 'undefined' && (
+    localStorage.getItem('cb51_pin_verified') === 'true' ||
+    document.cookie.split(';').some(c => c.trim().startsWith('cb51_pin_verified=true'))
+  );
+
   const { data: artists = [] } = useQuery({
     queryKey: ['cb51Artists'],
     queryFn: () => base44.entities.Artist.filter({}),
-    enabled: !!user,
+    enabled: !!user || pinVerified,
   });
 
   if (loading) {
