@@ -227,6 +227,8 @@ export default function AI51() {
   const [showMemoryNudge, setShowMemoryNudge] = useState(false);
   const [localMemory, setLocalMemory] = useState(null);
   const [preferLocalInference, setPreferLocalInference] = useState(false);
+  const [attachedImage, setAttachedImage] = useState(null); // { url, file }
+  const fileInputRef = useRef(null);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
   const { t } = useLanguageDetection();
