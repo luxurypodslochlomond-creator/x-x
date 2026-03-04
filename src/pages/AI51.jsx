@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Volume2, VolumeX, ChevronLeft, Loader2, WifiOff, Waves, Music, Leaf, Zap, Radio } from 'lucide-react';
+import { Send, Volume2, VolumeX, ChevronLeft, Loader2, WifiOff, Waves, Music, Leaf, Zap, Radio, ImagePlus, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
