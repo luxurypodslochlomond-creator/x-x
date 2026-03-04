@@ -662,10 +662,10 @@ Otherwise: save it.`,
     }
   };
 
-  const sendMessageContent = async (userMessage) => {
+  const sendMessageContent = async (userMessage, imageUrl = null) => {
     if (!userMessage || isProcessingRef.current) return;
     isProcessingRef.current = true;
-    setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: new Date() }]);
+    setMessages(prev => [...prev, { role: 'user', content: userMessage, imageUrl, timestamp: new Date() }]);
     setIsProcessing(true);
 
     // OFFLINE MODE — intelligent cache + local inference attempt
