@@ -722,6 +722,7 @@ Otherwise: save it.`,
       const detectedLang = browserLang;
 
       const response = await base44.integrations.Core.InvokeLLM({
+        ...(imageUrl ? { file_urls: [imageUrl] } : {}),
         prompt: `You are AI51.
 
 <identity>
