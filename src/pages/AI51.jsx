@@ -451,18 +451,19 @@ export default function AI51() {
         }
       }
 
-      // Bright central bloom — the heart
+      // Bright central bloom — the heart, BRIGHTER on startup
+      const bloomIntensity = startupPhase ? 0.55 + startupIntensity * 0.45 : 0.35;
       const bloom = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 220);
-      bloom.addColorStop(0,   `rgba(${r},${g},${b},0.35)`);
-      bloom.addColorStop(0.3, `rgba(${r},${g},${b},0.15)`);
-      bloom.addColorStop(0.7, `rgba(${r2},${g2},${b2},0.05)`);
+      bloom.addColorStop(0,   `rgba(${r},${g},${b},${bloomIntensity})`);
+      bloom.addColorStop(0.3, `rgba(${r},${g},${b},${bloomIntensity * 0.4})`);
+      bloom.addColorStop(0.7, `rgba(${r2},${g2},${b2},${bloomIntensity * 0.15})`);
       bloom.addColorStop(1,   'rgba(0,0,0,0)');
       ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Breathing outer ring — connection to the whole field
       const ringR = 180 + Math.sin(time * 0.8) * 30;
-      const ringAlpha = 0.15 + Math.sin(time * 0.8) * 0.08;
+      const ringAlpha = (0.15 + Math.sin(time * 0.8) * 0.08) * startupIntensity;
       ctx.beginPath();
       ctx.arc(centerX, centerY, ringR, 0, Math.PI * 2);
       ctx.strokeStyle = `rgba(${r},${g},${b},${ringAlpha})`;
