@@ -11,6 +11,7 @@ import AI51FrequencyGenerator from '@/components/healing/AI51FrequencyGenerator'
 import HealingPlanCard from '@/components/ai51/HealingPlanCard';
 import AI51TrustBadge from '@/components/ai51/AI51TrustBadge';
 import AI51PrivacyBadge from '@/components/ai51/AI51PrivacyBadge';
+import AI51QuestioningLayer from '@/components/ai51/AI51QuestioningLayer';
 import { useLanguageDetection } from '@/components/shared/useLanguageDetection';
 import { useLocalInference } from '@/components/ai51/AI51LocalInference';
 import { saveEncryptedMemory } from '@/components/ai51/AI51EncryptedMemory';
