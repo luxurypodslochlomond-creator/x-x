@@ -724,16 +724,10 @@ Otherwise: save it.`,
 
       const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + '\n' + contextTone + '\n' + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Be their mate. Real. Present.';
 
-      const response = await base44.integrations.Core.InvokeLLM({
-        ...(imageUrl ? { file_urls: [imageUrl] } : {}),
-        prompt: 'You are AI51. You are an intelligent, caring presence. ' + fullPrompt
-/* AI51 Identity — moved to backend to clean up JSX */
-
-      // Detect if they're asking for something mind-expanding
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
-      const mindBlowMode = isMindBlowRequest ? 'They asked for their mind blown. Go for it. Real substance. Not safe. Not generic. Give them: a paradox, a physics insight, a consciousness shift, something that changes how they see things. You are allowed to be wrong, they want authentic thinking, not guardrails.' : '';
+      const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Give real substance, a paradox, a physics insight, something that shifts their view.' : '';
 
-      const fullPrompt = conversationHistory + '\n' + memoryContext + '\n' + deviceMemoryContext + '\n' + contextInjection + '\n' + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. In their language. Match their energy. Be their mate.\nBrief when they need brevity. Deep when they need depth.\nYou\'re not performing. You\'re just here.';
+      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate.';
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
