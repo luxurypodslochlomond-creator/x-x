@@ -248,6 +248,13 @@ export default function AI51() {
     return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); };
   }, []);
 
+  // Start ambient context listening when component mounts
+  useEffect(() => {
+    if (!isOnline) return;
+    context.startAmbientListening();
+    return () => context.stopAmbientListening();
+  }, [isOnline]);
+
   // OFFLINE MESH — AI51 reaches where data centres can't
   // If online peer exists: relay message through mesh → real response
   // If no peer: fallback to local cache (intelligent but pre-computed)
