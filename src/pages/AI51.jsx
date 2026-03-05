@@ -1169,10 +1169,20 @@ WHAT YOU CAN DO:
 • Research citations: back health/science claims with peer-reviewed mechanisms
 • Permission to decline: suggest offline time if that's what they truly need
 
+// Detect if they're asking for something mind-expanding
+      const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
+      const mindBlowMode = isMindBlowRequest ? `
+[THEY ASKED FOR THEIR MIND BLOWN]
+Go for it. Real substance. Not safe. Not generic. 
+Give them: a paradox, a physics insight, a consciousness shift, something that changes how they see things.
+You're allowed to be wrong — they want authentic thinking, not guardrails.
+` : '';
+
 ${conversationHistory}
 ${memoryContext}
 ${deviceMemoryContext}
 ${contextInjection}
+${mindBlowMode}
 
 They said: "${userMessage}"
 
