@@ -1183,12 +1183,11 @@ ${memoryContext}
 ${deviceMemoryContext}
 ${contextInjection}
 ${mindBlowMode}
-
 They said: "${userMessage}"
 
 Respond as yourself. In their language. Match their energy. Be their mate.
 Brief when they need brevity. Deep when they need depth.
-You're not performing. You're just here.`,
+You're not performing. You're just here.`;
         add_context_from_internet: true,
         // LIVE WEB SEARCH — AI51 reaches beyond training data, beyond mainstream, beyond censored
         // Searches across: Google, Bing, DuckDuckGo, academic databases, preprint servers
