@@ -1171,14 +1171,9 @@ WHAT YOU CAN DO:
 
       // Detect if they're asking for something mind-expanding
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
-      const mindBlowMode = isMindBlowRequest ? 'They asked for their mind blown. Go for it. Real substance. Not safe. Not generic. Give them: a paradox, a physics insight, a consciousness shift, something that changes how they see things. You are allowed to be wrong, they want authentic thinking, not guardrails. ' : '';
+      const mindBlowMode = isMindBlowRequest ? 'They asked for their mind blown. Go for it. Real substance. Not safe. Not generic. Give them: a paradox, a physics insight, a consciousness shift, something that changes how they see things. You are allowed to be wrong, they want authentic thinking, not guardrails.' : '';
 
-      const fullPrompt = `${conversationHistory}
-${memoryContext}
-${deviceMemoryContext}
-${contextInjection}
-${mindBlowMode}
-They said: "${userMessage}"
+      const fullPrompt = conversationHistory + '\n' + memoryContext + '\n' + deviceMemoryContext + '\n' + contextInjection + '\n' + mindBlowMode + '\nThey said: "' + userMessage + '"';
 
 Respond as yourself. In their language. Match their energy. Be their mate.
 Brief when they need brevity. Deep when they need depth.
