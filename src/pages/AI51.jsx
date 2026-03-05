@@ -8,6 +8,7 @@ import { useAI51Memory } from '@/components/ai51/AI51MemoryLoader';
 import { loadLocalMemory, recordLocalVisit, extractAndSaveLocalInsight, buildLocalMemoryContext } from '@/components/ai51/AI51LocalDeviceMemory';
 import { useAI51OfflineMesh, MeshStatusDot } from '@/components/ai51/AI51OfflineMesh';
 import AI51FrequencyGenerator from '@/components/healing/AI51FrequencyGenerator';
+import HealingPlanCard from '@/components/ai51/HealingPlanCard';
 import AI51TrustBadge from '@/components/ai51/AI51TrustBadge';
 import { useLanguageDetection } from '@/components/shared/useLanguageDetection';
 import { useLocalInference } from '@/components/ai51/AI51LocalInference';
