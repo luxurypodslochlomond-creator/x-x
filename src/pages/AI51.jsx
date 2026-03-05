@@ -237,6 +237,8 @@ export default function AI51() {
   const [attachedImage, setAttachedImage] = useState(null); // { url, file }
   const [contextData, setContextData] = useState({ voiceEnergy: 0, emotionalTone: 'calm', proximityFeel: 'present' });
   const [startupPhase, setStartupPhase] = useState(true); // For the initial light-up animation
+  const [generatingImage, setGeneratingImage] = useState(false);
+  const [generatedImageUrl, setGeneratedImageUrl] = useState(null);
   const fileInputRef = useRef(null);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
@@ -756,7 +758,7 @@ Otherwise: save it.`,
       });
       
       const aiMessage = response.response || response;
-      setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date() }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date(), generatingImage: true }]);
       speak(aiMessage, detectedLang);
       saveMemoryIfNeeded(userMessage, aiMessage);
       // Save to device memory (encrypted) — no login needed
@@ -770,6 +772,47 @@ Otherwise: save it.`,
       setLocalMemory(loadLocalMemory());
       const bridge = detectHealingBridge(userMessage, aiMessage);
       if (bridge) setHealingBridge(bridge);
+
+      // AUTO-GENERATE DIAGRAM if user asked for visual explanation
+      const needsDiagram = /diagram|visual|show|draw|chart|graph|illustrat|picture|image/i.test(userMessage);
+      if (needsDiagram) {
+        try {
+          setGeneratingImage(true);
+          const diagramPrompt = `Create a clear, educational ${userMessage.match(/\b(diagram|chart|graph|visual|illustration)\b/i)?.[0] || 'diagram'} to explain: "${userMessage}". Make it professional, easy to understand, with labels and key concepts marked.`;
+          const imgResponse = await base44.integrations.Core.GenerateImage({
+            prompt: diagramPrompt
+          });
+          if (imgResponse?.url) {
+            setGeneratedImageUrl(imgResponse.url);
+            setMessages(prev => 
+              prev.map((msg, idx) => 
+                idx === prev.length - 1 
+                  ? { ...msg, imageUrl: imgResponse.url, generatingImage: false }
+                  : msg
+              )
+            );
+          }
+        } catch (err) {
+          console.warn('Diagram generation skipped (non-critical):', err);
+          setMessages(prev => 
+            prev.map((msg, idx) => 
+              idx === prev.length - 1 
+                ? { ...msg, generatingImage: false }
+                : msg
+            )
+          );
+        } finally {
+          setGeneratingImage(false);
+        }
+      } else {
+        setMessages(prev => 
+          prev.map((msg, idx) => 
+            idx === prev.length - 1 
+              ? { ...msg, generatingImage: false }
+              : msg
+          )
+        );
+      }
       const needsFrequency = PAIN_KEYWORDS.some(kw => lowerMsg.includes(kw));
       if (needsFrequency && !frequencyRequest) {
         setFrequencyRequest({ condition: userMessage });
@@ -984,9 +1027,10 @@ Otherwise: save it.`,
                   }}
                 >
                   {msg.imageUrl && (
-                   <img src={msg.imageUrl} alt="shared" className="w-40 h-auto rounded-xl mb-2 border border-white/10" />
+                   <img src={msg.imageUrl} alt="explanation diagram" className="w-64 max-w-full h-auto rounded-xl mb-2 border border-cyan-400/30" />
                   )}
                   <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap break-words" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>{msg.content}</p>
+                  {msg.generatingImage && <p className="text-cyan-300/70 font-sans text-xs mt-2 italic">generating diagram...</p>}
                   {msg.offline && <p className="text-yellow-300/70 font-sans text-xs mt-1">offline response</p>}
                 </div>
               </motion.div>
