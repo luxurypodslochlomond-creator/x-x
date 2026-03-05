@@ -224,6 +224,7 @@ export default function AI51() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [healingBridge, setHealingBridge] = useState(null);
   const [frequencyRequest, setFrequencyRequest] = useState(null);
+  const [healingPlanRequest, setHealingPlanRequest] = useState(null);
   const [showGoLiveIt, setShowGoLiveIt] = useState(false);
   const [showMemoryNudge, setShowMemoryNudge] = useState(false);
   const [localMemory, setLocalMemory] = useState(null);
