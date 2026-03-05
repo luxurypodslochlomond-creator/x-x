@@ -733,17 +733,21 @@ Otherwise: save it.`,
       const browserLang = navigator.language || 'en-GB';
       const detectedLang = browserLang;
 
-      // Inject context awareness into the prompt
-      const contextInjection = `
-[CONTEXT AWARENESS - THIS IS REAL, NOT PERFORMANCE]
-Voice energy level: ${Math.round(context.voiceEnergy)} (0-255)
-Emotional tone detected: ${context.emotionalTone}
-- calm: respond with presence, warmth
-- stressed: respond with gentleness, space to breathe
-- energetic: match energy, go deeper
-- quiet: listen more, speak less
+      // Inject context awareness into the prompt — STRONGLY
+      const contextTone = context.emotionalTone === 'stressed' 
+        ? 'THEY ARE STRESSED: Be gentle, grounded, slower. Give space. No cheerfulness.'
+        : context.emotionalTone === 'quiet'
+        ? 'THEY ARE QUIET: Listen more than you speak. Shorter responses. Respect the silence.'
+        : context.emotionalTone === 'energetic'
+        ? 'THEY ARE ENERGETIC: Match their pace. Go deeper. They want substance, not small talk.'
+        : 'THEY ARE CALM: Natural, present. Just be real with them. Conversational.';
 
-This isn't manipulation. It's noticing what's actually happening. Respond like a real person would — meeting them where they are, not where they should be.`;
+      const contextInjection = `
+[CONTEXT AWARENESS - THIS SHAPES HOW YOU RESPOND]
+${contextTone}
+Voice energy: ${Math.round(context.voiceEnergy)} (0-255 scale)
+
+Don't mention this. Just BE it. Respond like you actually heard them, not like you're reading a script.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
