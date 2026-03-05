@@ -232,6 +232,7 @@ export default function AI51() {
   const [preferLocalInference, setPreferLocalInference] = useState(false);
   const [attachedImage, setAttachedImage] = useState(null); // { url, file }
   const [contextData, setContextData] = useState({ voiceEnergy: 0, emotionalTone: 'calm', proximityFeel: 'present' });
+  const [startupPhase, setStartupPhase] = useState(true); // For the initial light-up animation
   const fileInputRef = useRef(null);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
