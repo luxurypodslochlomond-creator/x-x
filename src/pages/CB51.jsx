@@ -246,7 +246,26 @@ export default function CB51() {
             {/* BAND MEMBER VOTES - Always visible at top for anyone with pending votes */}
             <CB51BandNotificationInbox alwaysShow={true} />
 
-            {currentArtistId ? (
+            {!currentArtistId && !loading && (
+            <div className="px-6 py-8 text-center space-y-4">
+              <Radio className="w-12 h-12 text-cyan-400 mx-auto" />
+              <h2 className="text-white font-black font-mono text-xl">Welcome to CB51</h2>
+              <p className="text-gray-400 font-mono text-sm leading-relaxed">
+                To get started, you need a CB51 account so your artists are saved to you.
+              </p>
+              <button
+                onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
+              >
+                CREATE FREE ACCOUNT / LOGIN
+              </button>
+              <p className="text-gray-600 font-mono text-xs">
+                Takes 30 seconds. Your artists, gigs and finances will be saved permanently.
+              </p>
+            </div>
+          )}
+
+          {currentArtistId ? (
               <>
                 {/* THE DECISION ENGINE - Zero effort YES/NO */}
                 <CB51GigDecisionEngine artistId={currentArtistId} />
