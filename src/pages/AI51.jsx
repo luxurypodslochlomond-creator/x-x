@@ -607,8 +607,8 @@ export default function AI51() {
       const rest = chunks.slice(1);
       const utterance = new SpeechSynthesisUtterance(chunk);
       utterance.lang = lang;
-      utterance.rate = 0.88;
-      utterance.pitch = 1.0;
+      utterance.rate = 0.75;
+      utterance.pitch = 0.9;
       utterance.voice = getVoice();
       utterance.onstart = () => setIsSpeaking(true);
       utterance.onend = () => speakChunks(rest);
@@ -760,9 +760,9 @@ Otherwise: save it.`,
         : 'THEY ARE CALM: Natural and present.';
 
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
-      const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Give real substance, a paradox, a physics insight, something that shifts their view.' : '';
+      const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Start with something grounded and real first — meet them where they are — then build to the deeper insight.' : '';
 
-      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate.\n\nIf you cite facts, include [source: name] inline.';
+      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate. Start human. Then go deeper if they want it.\n\nIf you cite facts, include [source: name] inline.';
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
