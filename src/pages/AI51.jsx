@@ -733,6 +733,18 @@ Otherwise: save it.`,
       const browserLang = navigator.language || 'en-GB';
       const detectedLang = browserLang;
 
+      // Inject context awareness into the prompt
+      const contextInjection = `
+[CONTEXT AWARENESS - THIS IS REAL, NOT PERFORMANCE]
+Voice energy level: ${Math.round(context.voiceEnergy)} (0-255)
+Emotional tone detected: ${context.emotionalTone}
+- calm: respond with presence, warmth
+- stressed: respond with gentleness, space to breathe
+- energetic: match energy, go deeper
+- quiet: listen more, speak less
+
+This isn't manipulation. It's noticing what's actually happening. Respond like a real person would — meeting them where they are, not where they should be.`;
+
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
         prompt: `You are AI51.
