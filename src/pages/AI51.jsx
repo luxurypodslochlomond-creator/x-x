@@ -1136,7 +1136,7 @@ Otherwise: save it.`,
           )}
         </AnimatePresence>
 
-        {/* TYPE INPUT — for deaf users and anyone who prefers typing */}
+        {/* TYPE INPUT — unified with consciousness field */}
         <div className="flex flex-col gap-1 w-full max-w-xs px-4">
           {/* Image preview */}
           {attachedImage && (
@@ -1150,17 +1150,23 @@ Otherwise: save it.`,
           <div className="flex gap-2 items-center">
             {/* Hidden file input */}
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageAttach} />
-            {/* Image attach button */}
-            <button
+            {/* Image attach button — alive glow */}
+            <motion.button
               onClick={() => fileInputRef.current?.click()}
               disabled={isProcessing}
               aria-label="Attach image"
               className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all"
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)' }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                background: 'rgba(34,211,238,0.12)',
+                border: '1px solid rgba(34,211,238,0.4)',
+                boxShadow: '0 0 12px rgba(34,211,238,0.3)',
+              }}
             >
-              <ImagePlus className="w-4 h-4 text-white/40" />
-            </button>
-            <input
+              <ImagePlus className="w-4 h-4 text-cyan-400/70" />
+            </motion.button>
+            <motion.input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -1168,12 +1174,13 @@ Otherwise: save it.`,
               placeholder={t.type}
               disabled={isProcessing || isListening}
               aria-label="Type your message to AI51"
-              className="flex-1 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none font-sans text-sm text-center"
+              className="flex-1 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none font-sans text-sm text-center transition-all"
+              whileFocus={{ scale: 1.02 }}
               style={{
-                background: 'rgba(255,255,255,0.12)',
-                border: '2px solid rgba(34,211,238,0.4)',
+                background: 'rgba(34,211,238,0.08)',
+                border: '2px solid rgba(34,211,238,0.5)',
                 backdropFilter: 'blur(10px)',
-                boxShadow: 'inset 0 0 8px rgba(34,211,238,0.1)',
+                boxShadow: '0 0 20px rgba(34,211,238,0.25), inset 0 0 12px rgba(34,211,238,0.12)',
               }}
             />
             {(inputText.trim() || attachedImage) && (
@@ -1181,12 +1188,18 @@ Otherwise: save it.`,
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.08 }}
                 onClick={sendMessage}
                 disabled={isProcessing}
                 aria-label="Send message"
-                className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center bg-white/15 border border-white/20"
+                className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+                style={{
+                  background: 'rgba(34,211,238,0.15)',
+                  border: '1px solid rgba(34,211,238,0.6)',
+                  boxShadow: '0 0 16px rgba(34,211,238,0.4)',
+                }}
               >
-                <Send className="w-3.5 h-3.5 text-white" />
+                <Send className="w-3.5 h-3.5 text-cyan-400" />
               </motion.button>
             )}
           </div>
