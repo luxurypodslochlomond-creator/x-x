@@ -231,11 +231,13 @@ export default function AI51() {
   const [localMemory, setLocalMemory] = useState(null);
   const [preferLocalInference, setPreferLocalInference] = useState(false);
   const [attachedImage, setAttachedImage] = useState(null); // { url, file }
+  const [contextData, setContextData] = useState({ voiceEnergy: 0, emotionalTone: 'calm', proximityFeel: 'present' });
   const fileInputRef = useRef(null);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
   const { t } = useLanguageDetection();
   const { isReady: localInferenceReady, isLoading: localInferenceLoading, generate: generateLocal } = useLocalInference();
+  const context = useAI51ContextAwareness();
 
   // Track online/offline
   useEffect(() => {
