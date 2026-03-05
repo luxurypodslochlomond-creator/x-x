@@ -4,9 +4,9 @@ import { MapPin, Lock, Unlock, Zap, Globe, Volume2, Info, ChevronRight } from 'l
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import AxiomSiteMap from '@/components/axiom/AxiomSiteMap.js';
-import AxiomResonanceMeter from '@/components/axiom/AxiomResonanceMeter.js';
-import AxiomKnowledgeCard from '@/components/axiom/AxiomKnowledgeCard.js';
+import AxiomSiteMap from '@/components/axiom/AxiomSiteMap';
+import AxiomResonanceMeter from '@/components/axiom/AxiomResonanceMeter';
+import AxiomKnowledgeCard from '@/components/axiom/AxiomKnowledgeCard';
 
 const SACRED_SITES = [
   {
