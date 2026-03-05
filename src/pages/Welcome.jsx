@@ -116,17 +116,17 @@ export default function WelcomePage() {
                              className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
                          >
                              {[
-                                 { emoji: '🗣️', title: 'Talk to AI51', desc: 'Real conversation. Remembers you. Honest with you. Never sells your data or keeps you hooked.', url: 'AI51', color: 'pink' },
-                                 { emoji: '🎵', title: 'Actually heal', desc: 'Frequencies that calm your nervous system. Backed by science. Works in 2 minutes. Free forever.', url: 'FrequencyChamber', color: 'cyan' },
-                                 { emoji: '🌍', title: 'Do something real', desc: 'Pick up litter, earn tokens. Artists upload music, keep 90%. Everyone contributes, everyone benefits.', url: 'NewCleanup', color: 'green' },
+                                 { Icon: COOLASFUCKBrain, title: 'Talk to AI51', desc: 'Real conversation. Remembers you. Honest with you. Never sells your data or keeps you hooked.', url: 'AI51', color: 'pink', borderClass: 'border-pink-500/30 hover:border-pink-500/70', textClass: 'text-pink-400' },
+                                 { Icon: COOLASFUCKWaves, title: 'Actually heal', desc: 'Frequencies that calm your nervous system. Backed by science. Works in 2 minutes. Free forever.', url: 'FrequencyChamber', color: 'cyan', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
+                                 { Icon: COOLASFUCKGlobe, title: 'Do something real', desc: 'Pick up litter, earn tokens. Artists upload music, keep 90%. Everyone contributes, everyone benefits.', url: 'NewCleanup', color: 'green', borderClass: 'border-green-500/30 hover:border-green-500/70', textClass: 'text-green-400' },
                              ].map(item => (
                                  <Link key={item.title} to={createPageUrl(item.url)}>
                                      <motion.div
                                          whileHover={{ y: -3 }}
-                                         className={`p-5 rounded-xl bg-black/50 border border-${item.color}-500/30 hover:border-${item.color}-500/70 transition-all h-full space-y-2`}
+                                         className={`p-5 rounded-xl bg-black/50 border ${item.borderClass} transition-all h-full space-y-3`}
                                      >
-                                         <span className="text-3xl">{item.emoji}</span>
-                                         <p className={`text-${item.color}-400 font-bold text-base`}>{item.title}</p>
+                                         <item.Icon size={40} animate={true} />
+                                         <p className={`${item.textClass} font-bold text-base`}>{item.title}</p>
                                          <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
                                      </motion.div>
                                  </Link>
