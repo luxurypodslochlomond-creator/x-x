@@ -1168,6 +1168,7 @@ WHAT YOU CAN DO:
 ${conversationHistory}
 ${memoryContext}
 ${deviceMemoryContext}
+${contextInjection}
 
 They said: "${userMessage}"
 
