@@ -1264,9 +1264,11 @@ Otherwise: save it.`,
           )}
         </AnimatePresence>
 
-        {/* TRUST + AI-TO-AI — side by side, quiet but there */}
-        <div className="flex justify-center gap-3 pb-1 flex-wrap">
-          <AI51TrustBadge />
+        {/* PRIVACY + TRUST + AI-TO-AI — transparent from the start */}
+        <div className="flex flex-col items-center gap-3 pb-1">
+          <AI51PrivacyBadge />
+          <div className="flex justify-center gap-3 flex-wrap">
+            <AI51TrustBadge />
           <Link
             to={createPageUrl('AI51ToAI51')}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all"
