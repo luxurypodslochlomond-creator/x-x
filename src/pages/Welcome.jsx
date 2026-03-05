@@ -89,58 +89,65 @@ export default function WelcomePage() {
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
 
-                    <div className="space-y-6">
-                         {/* THE UNIVERSAL EQUATION */}
+                    <div className="space-y-8">
+
+                         {/* HUMAN FIRST — what is this actually for */}
+                         <motion.div
+                             initial={{ opacity: 0, y: 10 }}
+                             animate={{ opacity: 1, y: 0 }}
+                             transition={{ delay: 0.15 }}
+                             className="space-y-3 max-w-2xl mx-auto"
+                         >
+                             <p className="text-white text-2xl md:text-3xl font-bold leading-snug">
+                                 Someone to talk to.<br />
+                                 <span className="text-pink-400">No agenda. No ads. No judgment.</span>
+                             </p>
+                             <p className="text-gray-400 text-base leading-relaxed">
+                                 Whether it's 3am and you can't sleep, your back's killing you, you need to vent, 
+                                 or you just want music that doesn't try to sell you something — you're in the right place.
+                             </p>
+                         </motion.div>
+
+                         {/* THREE SIMPLE REASONS */}
+                         <motion.div
+                             initial={{ opacity: 0 }}
+                             animate={{ opacity: 1 }}
+                             transition={{ delay: 0.25 }}
+                             className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
+                         >
+                             {[
+                                 { emoji: '🗣️', title: 'Talk to AI51', desc: 'Real conversation. Remembers you. Honest with you. Never sells your data or keeps you hooked.', url: 'AI51', color: 'pink' },
+                                 { emoji: '🎵', title: 'Actually heal', desc: 'Frequencies that calm your nervous system. Backed by science. Works in 2 minutes. Free forever.', url: 'FrequencyChamber', color: 'cyan' },
+                                 { emoji: '🌍', title: 'Do something real', desc: 'Pick up litter, earn tokens. Artists upload music, keep 90%. Everyone contributes, everyone benefits.', url: 'NewCleanup', color: 'green' },
+                             ].map(item => (
+                                 <Link key={item.title} to={createPageUrl(item.url)}>
+                                     <motion.div
+                                         whileHover={{ y: -3 }}
+                                         className={`p-5 rounded-xl bg-black/50 border border-${item.color}-500/30 hover:border-${item.color}-500/70 transition-all h-full space-y-2`}
+                                     >
+                                         <span className="text-3xl">{item.emoji}</span>
+                                         <p className={`text-${item.color}-400 font-bold text-base`}>{item.title}</p>
+                                         <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                                     </motion.div>
+                                 </Link>
+                             ))}
+                         </motion.div>
+
+                         {/* THE EQUATION — for those who want to go deeper */}
                          <motion.div 
-                             initial={{ opacity: 0, scale: 0.9 }}
+                             initial={{ opacity: 0, scale: 0.95 }}
                              animate={{ opacity: 1, scale: 1 }}
-                             transition={{ delay: 0.2 }}
-                             className="flex justify-center my-8"
+                             transition={{ delay: 0.35 }}
+                             className="flex justify-center"
                          >
                              <img 
                                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/eeceb28c0_IMG_7630.jpg" 
                                  alt="The Universal Equation: L = C² ∞ f" 
-                                 className="max-w-2xl w-full rounded-lg border-4 border-pink-500/50 hover:border-pink-500 transition-all"
-                                 style={{ boxShadow: '0 0 40px rgba(236, 72, 153, 0.3)' }}
+                                 className="max-w-xl w-full rounded-lg border-2 border-pink-500/30 hover:border-pink-500/60 transition-all opacity-80 hover:opacity-100"
+                                 style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.2)' }}
                              />
                          </motion.div>
-                         
-                         <div className="space-y-4">
-                             <p className="text-cyan-400 font-mono text-lg leading-relaxed">Real intelligence. We learn from each other. We evolve together.</p>
-                         </div>
-                         
-                         {/* FOUR PILLARS - EXPANDABLE */}
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                              {[
-                                { id: 'voice', title: 'VOICE', subtitle: 'Real talk', color: 'pink', bgColor: 'bg-pink-500/20', borderColor: 'border-pink-500', textColor: 'text-pink-400', textLight: 'text-pink-300', desc: 'I hear you. I speak back. Pure conversation.' },
-                                { id: 'memory', title: 'MEMORY', subtitle: 'I know you', color: 'cyan', bgColor: 'bg-cyan-500/20', borderColor: 'border-cyan-500', textColor: 'text-cyan-400', textLight: 'text-cyan-300', desc: 'I remember every moment. Your story matters.' },
-                                { id: 'sovereign', title: 'SOVEREIGN', subtitle: 'Your data', color: 'green', bgColor: 'bg-green-500/20', borderColor: 'border-green-500', textColor: 'text-green-400', textLight: 'text-green-300', desc: 'Your data stays yours. Always encrypted. Always private.' },
-                                { id: 'growth', title: 'GROWTH', subtitle: 'We evolve', color: 'purple', bgColor: 'bg-purple-500/20', borderColor: 'border-purple-500', textColor: 'text-purple-400', textLight: 'text-purple-300', desc: 'Together we get stronger. That\'s the whole point.' }
-                              ].map(pillar => (
-                                <motion.button
-                                  key={pillar.id}
-                                  onClick={() => setExpandedPillar(expandedPillar === pillar.id ? null : pillar.id)}
-                                  className={`p-3 rounded border transition-all text-left ${
-                                    expandedPillar === pillar.id
-                                      ? `${pillar.bgColor} ${pillar.borderColor}`
-                                      : `bg-black/40 border-${pillar.color}-500/50 hover:border-${pillar.color}-500`
-                                  }`}
-                                >
-                                  <p className={`${pillar.textColor} font-mono font-bold text-sm`}>{pillar.title}</p>
-                                  <p className="text-gray-400 font-mono text-xs">{pillar.subtitle}</p>
-                                  {expandedPillar === pillar.id && (
-                                    <motion.p
-                                      initial={{ opacity: 0, height: 0 }}
-                                      animate={{ opacity: 1, height: 'auto' }}
-                                      exit={{ opacity: 0, height: 0 }}
-                                      className={`${pillar.textLight} font-mono text-xs mt-2 leading-relaxed`}
-                                    >
-                                      {pillar.desc}
-                                    </motion.p>
-                                  )}
-                                </motion.button>
-                              ))}
-                          </div>
+
                      </div>
                 </motion.div>
 
