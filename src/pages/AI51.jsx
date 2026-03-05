@@ -385,6 +385,8 @@ export default function AI51() {
     const rows = Math.ceil(canvas.height / (HEX_SIZE * 1.5)) + 4;
 
     const draw = () => {
+      // STARTUP PHASE — watch it wake up with intensity
+      const startupIntensity = startupPhase ? Math.min(time / 1.6, 1) : 1;
       time += 0.008;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
