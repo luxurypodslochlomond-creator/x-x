@@ -172,15 +172,6 @@ export default function WelcomePage() {
                         </motion.div>
                     </Link>
 
-                    {/* RADIO51 */}
-                    <Link to={createPageUrl('Radio')}>
-                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-purple-500 hover:border-purple-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.2)' }}>
-                            <COOLASFUCKMusicNote size={48} animate={true} />
-                            <h3 className="text-lg font-black font-mono text-purple-400">RADIO51</h3>
-                            <p className="text-xs text-gray-400 font-mono text-center">Lossless music • Free forever</p>
-                        </motion.div>
-                    </Link>
-
                     {/* CLEAN EARTH */}
                     <Link to={createPageUrl('NewCleanup')}>
                         <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-green-500 hover:border-green-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.2)' }}>
