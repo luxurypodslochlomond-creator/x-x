@@ -1371,9 +1371,7 @@ WHAT YOU CAN DO:
                   }} />
                 )}
                 <div
-                  className={`max-w-[80%] px-4 py-3 rounded-2xl ${
-                    msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm'
-                  }`}
+                  className={'max-w-[80%] px-4 py-3 rounded-2xl ' + (msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm')}
                   style={{
                     background: msg.role === 'user'
                       ? 'rgba(255,255,255,0.18)'
