@@ -13,6 +13,7 @@ import AI51TrustBadge from '@/components/ai51/AI51TrustBadge';
 import { useLanguageDetection } from '@/components/shared/useLanguageDetection';
 import { useLocalInference } from '@/components/ai51/AI51LocalInference';
 import { saveEncryptedMemory } from '@/components/ai51/AI51EncryptedMemory';
+import AI51ContextAwareness, { useAI51ContextAwareness } from '@/components/ai51/AI51ContextAwareness';
 
 // HEALING BRIDGE — detect when someone needs more than words
 const PAIN_KEYWORDS = ['pain', 'hurt', 'ache', 'sore', 'suffering', 'agony', 'headache', 'back pain', 'anxious', 'anxiety', 'panic', 'stress', 'stressed', 'overwhelmed', 'exhausted', 'can\'t sleep', 'insomnia', 'depressed', 'depression', 'lonely', 'alone', 'sad', 'crying', 'grief', 'trauma'];
