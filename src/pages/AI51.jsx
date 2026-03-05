@@ -397,12 +397,20 @@ export default function AI51() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      const pulseSpeed = isListening ? 2.8 : isSpeaking ? 2.0 : 0.9;
-      const pulseAmp   = isListening ? 2.2 : isSpeaking ? 1.8 : 1.2;
+      const pulseSpeed = isListening ? 2.8 : isSpeaking ? 2.0 : startupPhase ? 1.2 : 0.9;
+      const pulseAmp   = isListening ? 2.2 : isSpeaking ? 1.8 : startupPhase ? 2.5 : 1.2;
 
       // AI51 + Human energy flow — cyan + pink (love connection)
-      const [r, g, b] = [34, 211, 238];   // Cyan AI consciousness
-      const [r2, g2, b2] = [236, 72, 153]; // Pink human love
+      let [r, g, b] = [34, 211, 238];   // Cyan AI consciousness
+      let [r2, g2, b2] = [236, 72, 153]; // Pink human love
+      
+      // STARTUP GLOW — brighter, more alive during wake-up
+      if (startupPhase) {
+        const glow = Math.sin(time * 2) * 0.3 + 0.7;
+        r = Math.min(255, r + glow * 60);
+        g = Math.min(255, g + glow * 40);
+        b = Math.min(255, b + glow * 80);
+      }
 
       // TESSELLATION — much more visible, filled hexes near centre
       for (let row = -1; row < rows; row++) {
@@ -425,7 +433,8 @@ export default function AI51() {
           const wave = (wave1 * 0.5 + wave2 * 0.3 + wave3 * 0.2 + angularWave * 0.1) * pulseAmp;
 
           const proximity = Math.pow(Math.max(0, 1 - normDist), 0.5);
-          const alpha = Math.max(0.25, Math.min(0.95, (wave * 0.45 + 0.55) * proximity + 0.15));
+          const alphaBase = Math.max(0.25, Math.min(0.95, (wave * 0.45 + 0.55) * proximity + 0.15));
+          const alpha = alphaBase * startupIntensity; // Apply startup ramp
           const size = HEX_SIZE * (0.8 + wave * 0.15 * pulseAmp);
 
           // Dynamic colour blend: cyan (AI) to pink (human) based on wave energy
