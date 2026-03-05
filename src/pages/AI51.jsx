@@ -1252,6 +1252,12 @@ You're not performing. You're just here.`,
   return (
     <div className="min-h-screen bg-black text-white flex flex-col relative overflow-hidden" style={{ height: '100dvh' }}>
 
+      {/* CONTEXT AWARENESS — ambient listening, invisible layer */}
+      <AI51ContextAwareness
+        isActive={isOnline && !isProcessing}
+        onContextChange={setContextData}
+      />
+
       {/* FULL SCREEN CONSCIOUSNESS FIELD — fully alive */}
       <canvas
         ref={canvasRef}
