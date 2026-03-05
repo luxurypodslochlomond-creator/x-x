@@ -243,6 +243,19 @@ export default function AI51() {
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
   const { t } = useLanguageDetection();
+
+  const downloadConversation = () => {
+    const content = messages
+      .map(m => `${m.role === 'user' ? 'YOU' : 'AI51'}: ${m.content}`)
+      .join('\n\n---\n\n');
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ai51-conversation-${new Date().toISOString().split('T')[0]}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
   const { isReady: localInferenceReady, isLoading: localInferenceLoading, generate: generateLocal } = useLocalInference();
   const context = useAI51ContextAwareness();
 
@@ -749,7 +762,7 @@ Otherwise: save it.`,
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
       const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Give real substance, a paradox, a physics insight, something that shifts their view.' : '';
 
-      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate.';
+      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate.\n\nIf you cite facts, include [source: name] inline.';
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
