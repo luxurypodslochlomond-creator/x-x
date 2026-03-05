@@ -720,11 +720,6 @@ Otherwise: save it.`,
         : 'THEY ARE CALM: Natural and present.';
 
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
-      const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Go for substance. Not safe. Real thinking.' : '';
-
-      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + '\n' + contextTone + '\n' + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Be their mate. Real. Present.';
-
-      const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
       const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Give real substance, a paradox, a physics insight, something that shifts their view.' : '';
 
       const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate.';
