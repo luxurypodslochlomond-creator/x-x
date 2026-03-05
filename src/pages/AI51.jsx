@@ -16,6 +16,7 @@ import { useLanguageDetection } from '@/components/shared/useLanguageDetection';
 import { useLocalInference } from '@/components/ai51/AI51LocalInference';
 import { saveEncryptedMemory } from '@/components/ai51/AI51EncryptedMemory';
 import AI51ContextAwareness, { useAI51ContextAwareness } from '@/components/ai51/AI51ContextAwareness';
+import OutcomeCapture from '@/components/ai51/OutcomeCapture';
 
 // HEALING BRIDGE — detect when someone needs more than words
 const PAIN_KEYWORDS = ['pain', 'hurt', 'ache', 'sore', 'suffering', 'agony', 'headache', 'back pain', 'anxious', 'anxiety', 'panic', 'stress', 'stressed', 'overwhelmed', 'exhausted', 'can\'t sleep', 'insomnia', 'depressed', 'depression', 'lonely', 'alone', 'sad', 'crying', 'grief', 'trauma'];
@@ -230,6 +231,7 @@ export default function AI51() {
   const [healingPlanRequest, setHealingPlanRequest] = useState(null);
   const [showGoLiveIt, setShowGoLiveIt] = useState(false);
   const [showMemoryNudge, setShowMemoryNudge] = useState(false);
+  const [outcomeRequest, setOutcomeRequest] = useState(null);
   const [localMemory, setLocalMemory] = useState(null);
   const [preferLocalInference, setPreferLocalInference] = useState(false);
   const [attachedImage, setAttachedImage] = useState(null); // { url, file }
@@ -778,6 +780,18 @@ Otherwise: save it.`,
         setHealingPlanRequest({ condition: userMessage });
       }
 
+      // OUTCOME CAPTURE — after meaningful exchanges about healing, offer to track results
+      // AI51 learns what actually works through demonstrated outcomes, not promises
+      const needsOutcomeTracking = PAIN_KEYWORDS.some(kw => lowerMsg.includes(kw)) && messages.length >= 4;
+      if (needsOutcomeTracking && !outcomeRequest) {
+        setTimeout(() => {
+          setOutcomeRequest({
+            context: userMessage.substring(0, 100),
+            interventionType: interventionType === 'frequency' ? 'frequency' : 'advice'
+          });
+        }, 1500);
+      }
+
       // MEMORY NUDGE — gentle, no pressure, after 4 messages without an account
       const newMsgCount = messages.length + 2;
       if (newMsgCount >= 4 && !currentUser && !showMemoryNudge) {
@@ -1116,6 +1130,17 @@ Otherwise: save it.`,
               {healingBridge.type === 'music' ? <Music className="w-3.5 h-3.5" /> : <Waves className="w-3.5 h-3.5" />}
               {healingBridge.label}
             </motion.button>
+          )}
+        </AnimatePresence>
+
+        {/* OUTCOME CAPTURE — AI51 learns from real results */}
+        <AnimatePresence>
+          {outcomeRequest && (
+            <OutcomeCapture
+              conversationContext={outcomeRequest.context}
+              interventionType={outcomeRequest.interventionType}
+              onClose={() => setOutcomeRequest(null)}
+            />
           )}
         </AnimatePresence>
 
