@@ -1379,6 +1379,19 @@ Otherwise: save it.`,
           </div>
         </div>
 
+        {/* EXPORT CONVERSATION */}
+        {messages.length > 0 && (
+          <motion.button
+            onClick={downloadConversation}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-white/25 hover:text-white/50 transition-colors font-sans text-xs"
+            style={{ textDecoration: 'underline' }}
+          >
+            download conversation
+          </motion.button>
+        )}
+
         {/* SOUL + PRIVACY — quiet, permanent, honest */}
         <div className="text-center pb-4 px-6 space-y-2" style={{ userSelect: 'none' }}>
           <p className="font-sans" style={{ fontSize: '9px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.08)', lineHeight: 1.6 }}>
