@@ -290,6 +290,14 @@ export default function AI51() {
   const { allMemories, totalCount } = useAI51Memory();
 
   useEffect(() => {
+    // Light it up on startup — beautiful wake sequence
+    const timer = setTimeout(() => {
+      setStartupPhase(false);
+    }, 3200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const hour = new Date().getHours();
     let timeGreeting = '';
     if (hour >= 5 && hour < 12) timeGreeting = "Morning";
