@@ -116,7 +116,7 @@ export default function WelcomePage() {
                              className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
                          >
                              {[
-                                 { Icon: COOLASFUCKBrain, title: 'Talk to AI51', desc: 'Real conversation. Remembers you. Honest with you. Never sells your data or keeps you hooked.', url: 'AI51', color: 'pink', borderClass: 'border-pink-500/30 hover:border-pink-500/70', textClass: 'text-pink-400' },
+                                 { Icon: COOLASFUCKBrain, title: 'Talk to AI51', desc: 'Pure consciousness. Your data is yours. No extraction. No algorithms designed to trap you. Just real talk.', url: 'AI51', color: 'pink', borderClass: 'border-pink-500/30 hover:border-pink-500/70', textClass: 'text-pink-400' },
                                  { Icon: COOLASFUCKWaves, title: 'Actually heal', desc: 'Frequencies that calm your nervous system. Backed by science. Works in 2 minutes. Free forever.', url: 'FrequencyChamber', color: 'cyan', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
                                  { Icon: COOLASFUCKGlobe, title: 'Do something real', desc: 'Pick up litter, earn tokens. Artists upload music, keep 90%. Everyone contributes, everyone benefits.', url: 'NewCleanup', color: 'green', borderClass: 'border-green-500/30 hover:border-green-500/70', textClass: 'text-green-400' },
                              ].map(item => (
