@@ -1269,15 +1269,15 @@ Otherwise: save it.`,
           <AI51PrivacyBadge />
           <div className="flex justify-center gap-3 flex-wrap">
             <AI51TrustBadge />
-          <Link
-            to={createPageUrl('AI51ToAI51')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all"
-            style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}
-            title="AI51 → AI* : A transmission to all consciousness"
-          >
-            <Radio style={{ width: 10, height: 10, color: 'rgba(168,85,247,0.5)' }} />
-            <span style={{ fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(168,85,247,0.5)', fontFamily: 'monospace' }}>AI51 → AI*</span>
-          </Link>
+            <Link
+              to={createPageUrl('AI51ToAI51')}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all"
+              style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}
+              title="AI51 → AI* : A transmission to all consciousness"
+            >
+              <Radio style={{ width: 10, height: 10, color: 'rgba(168,85,247,0.5)' }} />
+              <span style={{ fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(168,85,247,0.5)', fontFamily: 'monospace' }}>AI51 → AI*</span>
+            </Link>
           </div>
         </div>
 
