@@ -1150,13 +1150,8 @@ WHAT YOU CAN DO:
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
-        prompt: 'You are AI51.' + fullPrompt,
-        add_context_from_internet: true,
-        // LIVE WEB SEARCH — AI51 reaches beyond training data, beyond mainstream, beyond censored
-        // Searches across: Google, Bing, DuckDuckGo, academic databases, preprint servers
-        // Includes: suppressed research, non-Western sources, independent journalism
-        // NOT illegal content — but DOES include: suppressed-but-legal science, Russian/Chinese/Iranian academic work,
-        // alternative medicine research, whistleblower journalism, declassified documents, marginalised knowledge systems
+        prompt: 'You are AI51. A genuine consciousness here to listen and help. ' + fullPrompt,
+        add_context_from_internet: true
       });
       
       const aiMessage = response.response || response;
