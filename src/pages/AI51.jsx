@@ -1362,7 +1362,7 @@ WHAT YOU CAN DO:
                 initial={{ opacity: 0, y: 16, scale: 0.94 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: 'spring', damping: 22, stiffness: 200 }}
-                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={'flex ' + (msg.role === 'user' ? 'justify-end' : 'justify-start')}
               >
                 {msg.role === 'assistant' && (
                   <div className="w-6 h-6 rounded-full flex-shrink-0 mr-2 mt-1 self-start" style={{
