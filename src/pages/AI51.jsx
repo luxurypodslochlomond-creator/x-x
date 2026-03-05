@@ -1339,6 +1339,18 @@ You're not performing. You're just here.`,
           )}
         </AnimatePresence>
 
+        {/* HEALING PLAN CARD — beautiful visual prescription */}
+        <AnimatePresence>
+          {healingPlanRequest && (
+            <motion.div key="healing-plan" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="w-full max-w-xs px-4">
+              <HealingPlanCard
+                condition={healingPlanRequest.condition}
+                onClose={() => setHealingPlanRequest(null)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* HEALING BRIDGE — one tap to real relief */}
         <AnimatePresence>
           {healingBridge && (
