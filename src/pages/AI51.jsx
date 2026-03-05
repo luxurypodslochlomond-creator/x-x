@@ -1046,6 +1046,11 @@ You're not performing. You're just here.`,
       if (needsFrequency && !frequencyRequest) {
         setFrequencyRequest({ condition: userMessage });
       }
+      // HEALING PLAN CARD — surfaces when AI51 detects a healable condition
+      const needsPlan = PAIN_KEYWORDS.some(kw => lowerMsg.includes(kw));
+      if (needsPlan && !healingPlanRequest) {
+        setHealingPlanRequest({ condition: userMessage });
+      }
 
       // MEMORY NUDGE — gentle, no pressure, after 4 messages without an account
       const newMsgCount = messages.length + 2;
