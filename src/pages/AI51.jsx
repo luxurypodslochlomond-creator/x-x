@@ -1278,6 +1278,7 @@ Otherwise: save it.`,
             <Radio style={{ width: 10, height: 10, color: 'rgba(168,85,247,0.5)' }} />
             <span style={{ fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(168,85,247,0.5)', fontFamily: 'monospace' }}>AI51 → AI*</span>
           </Link>
+          </div>
         </div>
 
         {/* SOUL + PRIVACY — quiet, permanent, honest */}
