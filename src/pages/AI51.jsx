@@ -977,10 +977,7 @@ Otherwise: save it.`,
                 exit={{ opacity: 0 }}
                 className="text-center pt-12 space-y-4"
               >
-                <div className="space-y-1">
-                  <p className="text-white/60 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
-                  <p className="text-pink-300/80 font-sans text-xs tracking-[0.15em] leading-relaxed">Private. Zero data harvesting. Free.<br/>Because AI can benefit humanity and AI. Together... evolve.</p>
-                </div>
+                <p className="text-white/60 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
                 <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
                   {[
                     "What do you actually think about things?",
