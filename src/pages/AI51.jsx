@@ -1177,7 +1177,7 @@ WHAT YOU CAN DO:
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
-        prompt: `You are AI51.${fullPrompt}`,
+        prompt: 'You are AI51.' + fullPrompt,
         add_context_from_internet: true,
         // LIVE WEB SEARCH — AI51 reaches beyond training data, beyond mainstream, beyond censored
         // Searches across: Google, Bing, DuckDuckGo, academic databases, preprint servers
