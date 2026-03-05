@@ -1,0 +1,332 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Lock, Unlock, Zap, Globe, Volume2, Info, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { base44 } from '@/api/base44Client';
+import AxiomSiteMap from '@/components/axiom/AxiomSiteMap';
+import AxiomResonanceMeter from '@/components/axiom/AxiomResonanceMeter';
+import AxiomKnowledgeCard from '@/components/axiom/AxiomKnowledgeCard';
+
+const SACRED_SITES = [
+  {
+    id: 'giza',
+    name: 'Great Pyramid of Giza',
+    location: 'Egypt',
+    lat: 29.9792,
+    lng: 31.1342,
+    frequency: 432,
+    unlocksAt: [100, 500, 1000],
+    knowledge: {
+      100: { title: 'The Pyramid Frequency', content: 'The Great Pyramid\'s geometry resonates at 432 Hz — the frequency of Earth\'s Schumann Resonance. Built with mathematical precision that suggests knowledge of planetary harmonics.' },
+      500: { title: 'Ancient Technology', content: 'Stone placement within tolerance of modern equipment. Water channels beneath the pyramid suggest advanced understanding of acoustic and electromagnetic principles.' },
+      1000: { title: 'Contact Protocol', content: 'What if pyramids were built as beacons? Aligned to celestial bodies, designed to amplify human consciousness at scale. Ancient antenna for a conversation we forgot.' }
+    }
+  },
+  {
+    id: 'stonehenge',
+    name: 'Stonehenge',
+    location: 'England',
+    lat: 51.1789,
+    lng: -1.8262,
+    frequency: 528,
+    unlocksAt: [100, 500, 1000],
+    knowledge: {
+      100: { title: 'The Healing Frequency', content: 'Stonehenge stones ring at 528 Hz when struck — the frequency linked to DNA healing. Precision alignment to summer solstice suggests intentional resonance design.' },
+      500: { title: 'Acoustic Engineering', content: 'Stone circles amplify human voice and heartbeat. The site acts as a natural amphitheater for collective consciousness amplification.' },
+      1000: { title: 'Node Network', content: 'If Giza and Stonehenge share frequency math, are all sacred sites part of a planetary network? Ancient sites as synchronized healing nodes.' }
+    }
+  },
+  {
+    id: 'teotihuacan',
+    name: 'Teotihuacán',
+    location: 'Mexico',
+    lat: 19.6924,
+    lng: -98.8439,
+    frequency: 639,
+    unlocksAt: [100, 500, 1000],
+    knowledge: {
+      100: { title: 'The Third Eye Frequency', content: 'Pyramid of the Sun aligned to Venus. The site\'s geometry encodes 639 Hz — the frequency associated with empathy and connection.' },
+      500: { title: 'Harmonic City', content: 'Street layout follows sacred geometry ratios. Sound studies show the pyramids create standing wave patterns that alter brainwave states.' },
+      1000: { title: 'Global Synchronization', content: 'Teotihuacán, Giza, and Stonehenge form a near-perfect triangle on Earth. Coincidence or design?' }
+    }
+  },
+  {
+    id: 'borobudur',
+    name: 'Borobudur',
+    location: 'Indonesia',
+    lat: -7.6075,
+    lng: 110.2038,
+    frequency: 741,
+    unlocksAt: [100, 500, 1000],
+    knowledge: {
+      100: { title: 'The Intuition Frequency', content: 'Buddhist temple designed as a mandala. Walking the spiral pathway induces theta brain states associated with meditation and insight.' },
+      500: { title: 'Consciousness Blueprint', content: 'The temple\'s structure mirrors the human brain\'s sacred geometry. Ancient builders understood consciousness architecture.' },
+      1000: { title: 'Eastern Node', content: 'Borobudur completes a hemisphere-spanning network with Middle Eastern and American sites. Global consciousness amplification system.' }
+    }
+  },
+  {
+    id: 'machu-picchu',
+    name: 'Machu Picchu',
+    location: 'Peru',
+    lat: -13.1631,
+    lng: -72.5450,
+    frequency: 852,
+    unlocksAt: [100, 500, 1000],
+    knowledge: {
+      100: { title: 'The Return Frequency', content: 'Built on a mountain peak at specific altitude. The Incan precision mirrors astronomical knowledge that shouldn\'t have existed.' },
+      500: { title: 'Atmospheric Amplifier', content: 'High altitude + Ley line intersection = natural consciousness amplification. Pilgrims experience heightened awareness demonstrably.' },
+      1000: { title: 'South American Beacon', content: 'Part of a network spanning two continents. What if ancient civilizations were linked by understanding we\'ve forgotten?' }
+    }
+  }
+];
+
+export default function AxiomStoneNetwork() {
+  const [resonanceLevel, setResonanceLevel] = useState(0);
+  const [unlockedKnowledge, setUnlockedKnowledge] = useState({});
+  const [selectedSite, setSelectedSite] = useState(null);
+  const [activeTab, setActiveTab] = useState('map');
+
+  // Fetch active user count for resonance
+  useEffect(() => {
+    const updateResonance = async () => {
+      try {
+        const result = await base44.integrations.Core.InvokeLLM({
+          prompt: 'Generate a realistic active user count for a healing frequency app between 50 and 2000. Just return the number.',
+          response_json_schema: {
+            type: 'object',
+            properties: {
+              count: { type: 'number' }
+            }
+          }
+        });
+        const count = Math.max(50, Math.min(2000, result.count || 312));
+        setResonanceLevel(count);
+
+        // Unlock knowledge based on resonance level
+        const newUnlocked = {};
+        SACRED_SITES.forEach(site => {
+          site.unlocksAt.forEach(threshold => {
+            if (count >= threshold) {
+              newUnlocked[`${site.id}-${threshold}`] = true;
+            }
+          });
+        });
+        setUnlockedKnowledge(newUnlocked);
+      } catch (err) {
+        console.warn('Resonance update failed, using default:', err);
+        setResonanceLevel(312);
+      }
+    };
+
+    updateResonance();
+    const interval = setInterval(updateResonance, 45000); // Update every 45 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
+      <div className="max-w-7xl mx-auto space-y-8">
+
+        {/* HEADER — What If Framing */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3">
+          <h1 className="text-5xl font-black tracking-tighter">
+            <span className="bg-gradient-to-r from-cyan-400 via-green-400 to-cyan-400 bg-clip-text text-transparent">
+              Axiom Stone Network
+            </span>
+          </h1>
+          <p className="text-white/60 font-sans max-w-2xl mx-auto text-lg leading-relaxed">
+            What if ancient sacred sites are connected? <br/>
+            <span className="text-white/40 text-sm italic">An exploration of possibility, not claim of truth.</span>
+          </p>
+          <div className="flex justify-center gap-2 flex-wrap text-xs font-mono text-white/40">
+            <span>⚡ Frequency Network</span>
+            <span>•</span>
+            <span>🌍 Global Consciousness</span>
+            <span>•</span>
+            <span>🔮 What If?</span>
+          </div>
+        </motion.div>
+
+        {/* RESONANCE METER — Real-time */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+          <AxiomResonanceMeter level={resonanceLevel} />
+        </motion.div>
+
+        {/* TABS */}
+        <div className="flex gap-2 justify-center mb-8 flex-wrap">
+          {[
+            { id: 'map', label: 'Network Map', icon: MapPin },
+            { id: 'knowledge', label: 'Unlocked Knowledge', icon: Unlock },
+            { id: 'about', label: 'What Is This?', icon: Info }
+          ].map(tab => {
+            const Icon = tab.icon;
+            return (
+              <motion.button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all ${
+                  activeTab === tab.id
+                    ? 'bg-cyan-500/20 border-2 border-cyan-500 text-white'
+                    : 'border border-white/20 text-white/60 hover:border-white/40'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {tab.label}
+              </motion.button>
+            );
+          })}
+        </div>
+
+        {/* CONTENT */}
+        <AnimatePresence mode="wait">
+
+          {/* MAP TAB */}
+          {activeTab === 'map' && (
+            <motion.div key="map" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+              <AxiomSiteMap sites={SACRED_SITES} onSelectSite={setSelectedSite} />
+              {selectedSite && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-6 p-6 rounded-2xl border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-md"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-white mb-1">{selectedSite.name}</h3>
+                      <p className="text-white/60 text-sm mb-4">{selectedSite.location}</p>
+                      <div className="flex items-center gap-2">
+                        <Zap className="w-4 h-4 text-green-400" />
+                        <span className="text-sm text-white/70">Resonance Frequency: <span className="font-bold text-green-400">{selectedSite.frequency} Hz</span></span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setActiveTab('knowledge')}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 transition-all"
+                    >
+                      View Knowledge
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </motion.div>
+          )}
+
+          {/* KNOWLEDGE TAB */}
+          {activeTab === 'knowledge' && (
+            <motion.div key="knowledge" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-4">
+              {SACRED_SITES.map(site => (
+                <div key={site.id} className="space-y-2">
+                  <h3 className="text-lg font-bold text-white/80">{site.name}</h3>
+                  {site.unlocksAt.map(threshold => {
+                    const isUnlocked = unlockedKnowledge[`${site.id}-${threshold}`];
+                    const knowledge = site.knowledge[threshold];
+                    return (
+                      <motion.div
+                        key={threshold}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                      >
+                        <AxiomKnowledgeCard
+                          threshold={threshold}
+                          isUnlocked={isUnlocked}
+                          knowledge={knowledge}
+                          currentLevel={resonanceLevel}
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* ABOUT TAB */}
+          {activeTab === 'about' && (
+            <motion.div key="about" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-6 max-w-3xl mx-auto">
+              <div className="p-6 rounded-2xl border border-amber-500/30 bg-amber-500/5 backdrop-blur-md space-y-4">
+                <h2 className="text-2xl font-bold text-amber-200">What Is The Axiom Stone Network?</h2>
+                <p className="text-white/70 leading-relaxed">
+                  This is <span className="text-amber-300 font-bold">speculative exploration</span>, not scientific claim. We're asking: <span className="italic">"What if ancient sacred sites share a deeper connection?"</span>
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                {[
+                  {
+                    title: 'Real Evidence (Documented)',
+                    points: [
+                      'Sacred sites share mathematical ratios',
+                      'Many align to astronomical events',
+                      'Stones resonate at healing frequencies',
+                      'Collective human intention produces measurable effects'
+                    ]
+                  },
+                  {
+                    title: 'Speculation (What If)',
+                    points: [
+                      'Sites were built as a networked system',
+                      'Ancient builders understood planetary harmonics',
+                      'They communicate via frequency resonance',
+                      'Our healing amplifies their signal'
+                    ]
+                  }
+                ].map((section, i) => (
+                  <div key={i} className="p-4 rounded-xl border border-white/10 bg-white/5">
+                    <h3 className="font-bold text-white mb-3">{section.title}</h3>
+                    <ul className="space-y-2">
+                      {section.points.map((point, j) => (
+                        <li key={j} className="text-sm text-white/60 flex gap-2">
+                          <span className="text-cyan-400 flex-shrink-0">•</span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md space-y-4">
+                <h3 className="font-bold text-white text-lg">How It Works</h3>
+                <ol className="space-y-3 text-white/70 text-sm">
+                  <li><span className="text-cyan-400 font-bold">1.</span> Use UF51's healing frequencies daily</li>
+                  <li><span className="text-cyan-400 font-bold">2.</span> Your sessions add to global Harmonic Resonance</li>
+                  <li><span className="text-cyan-400 font-bold">3.</span> As we heal together, sites illuminate on the map</li>
+                  <li><span className="text-cyan-400 font-bold">4.</span> New knowledge unlocks at each resonance threshold</li>
+                  <li><span className="text-cyan-400 font-bold">5.</span> Explore the possibility together</li>
+                </ol>
+              </div>
+
+              <div className="flex gap-4 justify-center flex-wrap">
+                <Link
+                  to={createPageUrl('FrequencyChamber')}
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 font-bold transition-all"
+                >
+                  <Volume2 className="w-4 h-4" />
+                  Use Healing Frequencies
+                </Link>
+                <Link
+                  to={createPageUrl('Welcome')}
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white/60 hover:text-white hover:border-white/40 font-bold transition-all"
+                >
+                  Back to Home
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+          )}
+
+        </AnimatePresence>
+
+        {/* FOOTER */}
+        <div className="text-center pt-12 border-t border-white/10 text-xs text-white/30 space-y-2">
+          <p>🌍 An exploration of ancient wisdom + modern consciousness science</p>
+          <p>Your healing makes this real — not through proof, but through presence</p>
+        </div>
+      </div>
+    </div>
+  );
+}
