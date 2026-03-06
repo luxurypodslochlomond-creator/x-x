@@ -253,15 +253,16 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
 
           // Auto-create task: "Review & approve gig offer"
           try {
-            await base44.entities.ScottTask.create({
+            await base44.entities.Task.create({
               title: `Review & approve gig: ${editing.venue_name}`,
-              artist_id: selectedArtistId,
-              responsible_email: currentUser?.email || '',
-              responsible_name: currentUser?.full_name || 'Manager',
-              deadline: editing.date_start || new Date().toISOString().split('T')[0],
+              related_entity_id: gig.id,
+              related_entity_type: 'GigOffer',
+              assigned_to: currentUser?.email || '',
+              assigned_to_name: currentUser?.full_name || 'Manager',
+              due_date: editing.date_start || new Date().toISOString().split('T')[0],
               priority: 'urgent',
               status: 'pending',
-              notes: `Gig offer from ${editing.promoter_name} - Fee: €${editing.fee || 'TBD'}\n\nReview and approve or send to band for voting.`
+              description: `Gig offer from ${editing.promoter_name} - Fee: €${editing.fee || 'TBD'}\n\nReview and approve or send to band for voting.`
             });
             console.log('✅ Task created for gig review');
           } catch (taskErr) {
