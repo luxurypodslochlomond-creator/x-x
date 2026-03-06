@@ -73,7 +73,7 @@ export default function ScottToDo() {
                 </div>
             )}
 
-            <button onClick={() => setShowAddTask(!showAddTask)} className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded mb-4 flex items-center justify-center gap-2">
+            <button onClick={() => setShowAddTask(!showAddTask)} className="w-full bg-red-500 hover:bg-red-600 text-white font-black py-3 rounded mb-4 flex items-center justify-center gap-2">
                 <Plus className="w-4 h-4" /> ADD TASK
             </button>
 
