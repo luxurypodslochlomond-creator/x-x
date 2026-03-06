@@ -35,10 +35,10 @@ export function useCB51NavBadges(artistId) {
     refetchInterval: 30000
   });
 
-  // Unread messages (if you track them)
+  // Pending messages
   const { data: messages = [] } = useQuery({
     queryKey: ['navBadgeMessages', artistId],
-    queryFn: () => base44.entities.ScottMessage?.filter?.({ artist_id: artistId, read: false }).catch(() => []),
+    queryFn: () => base44.entities.ScottMessage.filter({ artist_id: artistId, status: 'pending' }).catch(() => []),
     enabled: !!artistId,
     refetchInterval: 30000
   });
