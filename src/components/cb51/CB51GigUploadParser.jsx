@@ -7,6 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   const queryClient = useQueryClient();
   const [selectedArtistId, setSelectedArtistId] = useState(artistId || null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    base44.auth.me().then(setCurrentUser).catch(() => {});
+  }, []);
   const [file, setFile] = useState(null);
   const [parsing, setParsing] = useState(false);
   const [extracted, setExtracted] = useState(null);
