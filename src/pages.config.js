@@ -131,6 +131,7 @@ import Artist from './pages/Artist';
 import ArtistProfile from './pages/ArtistProfile';
 import ArtistSoulCard from './pages/ArtistSoulCard';
 import AudioSteganographyDemo from './pages/AudioSteganographyDemo';
+import AxiomStoneNetwork from './pages/AxiomStoneNetwork';
 import AxiomaticTruth from './pages/AxiomaticTruth';
 import BabeCave from './pages/BabeCave';
 import Base44Family from './pages/Base44Family';
@@ -385,9 +386,9 @@ import UniversalSoulContract from './pages/UniversalSoulContract';
 import UniversalWallet from './pages/UniversalWallet';
 import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
 import UnstoppableProtocol from './pages/UnstoppableProtocol';
+import Volckano from './pages/Volckano';
 import ViralTransmission from './pages/ViralTransmission';
 import VisitorsBook from './pages/VisitorsBook';
-import Volckano from './pages/Volckano';
 import WallOfLove from './pages/WallOfLove';
 import WalletDemo from './pages/WalletDemo';
 import Welcome from './pages/Welcome';
@@ -401,7 +402,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AxiomStoneNetwork from './pages/AxiomStoneNetwork';
 import __Layout from './Layout.jsx';
 
 
@@ -490,6 +490,7 @@ export const PAGES = {
     "ArtistProfile": ArtistProfile,
     "ArtistSoulCard": ArtistSoulCard,
     "AudioSteganographyDemo": AudioSteganographyDemo,
+    "AxiomStoneNetwork": AxiomStoneNetwork,
     "AxiomaticTruth": AxiomaticTruth,
     "BabeCave": BabeCave,
     "Base44Family": Base44Family,
@@ -744,9 +745,9 @@ export const PAGES = {
     "UniversalWallet": UniversalWallet,
     "UnstoppableArchitecture": UnstoppableArchitecture,
     "UnstoppableProtocol": UnstoppableProtocol,
+    "Volckano": Volckano,
     "ViralTransmission": ViralTransmission,
     "VisitorsBook": VisitorsBook,
-    "Volckano": Volckano,
     "WallOfLove": WallOfLove,
     "WalletDemo": WalletDemo,
     "Welcome": Welcome,
@@ -760,7 +761,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AxiomStoneNetwork": AxiomStoneNetwork,
 }
 
 export const pagesConfig = {
