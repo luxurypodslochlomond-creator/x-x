@@ -12,6 +12,13 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   useEffect(() => {
     base44.auth.me().then(setCurrentUser).catch(() => {});
   }, []);
+
+  // When artistId prop changes (passed from parent), keep in sync
+  useEffect(() => {
+    if (artistId && !selectedArtistId) {
+      setSelectedArtistId(artistId);
+    }
+  }, [artistId]);
   const [file, setFile] = useState(null);
   const [parsing, setParsing] = useState(false);
   const [extracted, setExtracted] = useState(null);
