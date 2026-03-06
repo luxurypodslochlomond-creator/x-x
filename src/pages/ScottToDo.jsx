@@ -114,7 +114,7 @@ export default function ScottToDo() {
                                     )}
                                     {task.deadline && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">DEADLINE</p>
+                                            <p className="text-red-400 font-mono font-bold text-xs">DEADLINE</p>
                                             <p className="text-white font-mono">{new Date(task.deadline).toLocaleDateString()}</p>
                                         </div>
                                     )}
