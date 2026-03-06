@@ -318,20 +318,22 @@ export default function CB51() {
                 </div>
 
                 {/* BAND MEMBERS */}
-                <div className="border border-gray-800 rounded-xl p-5">
+                <div className="rounded-2xl p-5" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <Users className="w-5 h-5 text-cyan-400" />
+                      <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                        <Users className="w-4 h-4 text-gray-400" />
+                      </div>
                       <div>
-                        <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Team</h2>
-                        <p className="text-gray-500 text-[10px] font-mono mt-0.5">
-                          {artists.find(a => a.id === currentArtistId)?.name || 'Unknown'}
+                        <h2 className="text-white font-bold text-sm">Team</h2>
+                        <p className="text-gray-600 text-[10px] font-mono">
+                          {artists.find(a => a.id === currentArtistId)?.name || ''}
                         </p>
                       </div>
                     </div>
                     <button
                       onClick={() => navigate(createPageUrl(`CB51TeamManagement?id=${currentArtistId}`))}
-                      className="bg-cyan-600 hover:bg-cyan-700 text-white px-3 py-1.5 rounded text-xs font-bold transition-colors"
+                      className="text-cyan-400 border border-cyan-500/30 hover:border-cyan-400 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors"
                     >
                       Manage
                     </button>
