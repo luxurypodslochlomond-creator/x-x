@@ -27,6 +27,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   const [saveError, setSaveError] = useState(null);
   const [savedGig, setSavedGig] = useState(null);
   const [debugLog, setDebugLog] = useState([]);
+  const [manualMode, setManualMode] = useState(false);
 
   const { data: artists = [] } = useQuery({
     queryKey: ['cb51Artists'],
