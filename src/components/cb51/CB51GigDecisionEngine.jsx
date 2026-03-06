@@ -152,7 +152,7 @@ export default function CB51GigDecisionEngine({ artistId }) {
 
   const approveMutation = useMutation({
     mutationFn: async (gig) => {
-      const res = await base44.functions.invoke('approveGigOffer', { gigId: gig.id, artistId: gig.artist_id });
+      const res = await base44.functions.invoke('approveGigOffer', { gigId: gig.id, artistId: gig.artist_id, gigData: gig });
       console.log('approve response:', res);
       return res;
     },
