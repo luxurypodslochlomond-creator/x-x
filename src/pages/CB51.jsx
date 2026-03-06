@@ -296,7 +296,7 @@ export default function CB51() {
                 </div>
 
                 {/* BAND MEMBERS */}
-                <div className="bg-gray-900/50 p-5">
+                <div className="border border-gray-800 rounded-xl p-5">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <Users className="w-5 h-5 text-cyan-400" />
