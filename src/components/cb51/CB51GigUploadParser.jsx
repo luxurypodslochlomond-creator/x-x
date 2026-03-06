@@ -441,102 +441,39 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
               </div>
             )}
 
-            {/* GRID CARDS */}
-            <div className="grid grid-cols-2 gap-2">
-              {/* VENUE */}
-              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+            {/* 3 FIELDS ONLY - Everything else saved silently */}
+            <div className="space-y-2">
+              <div className="bg-black border border-cyan-500/40 rounded-lg p-3">
                 <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">VENUE</label>
                 <input
                   type="text"
                   value={editing.venue_name || ''}
                   onChange={(e) => setEditing({ ...editing, venue_name: e.target.value })}
-                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
-                  placeholder="Required"
+                  className="w-full bg-transparent text-white text-sm font-bold placeholder-gray-600 outline-none"
+                  placeholder="Venue name"
                 />
               </div>
 
-              {/* DATE */}
-              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
+              <div className="bg-black border border-cyan-500/40 rounded-lg p-3">
                 <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">DATE</label>
                 <input
-                  type="text"
+                  type="date"
                   value={editing.date_start || ''}
                   onChange={(e) => setEditing({ ...editing, date_start: e.target.value })}
-                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
-                  placeholder="YYYY-MM-DD"
+                  className="w-full bg-transparent text-white text-sm font-bold outline-none"
                 />
               </div>
 
-              {/* FEE */}
-              <div className="bg-black border-2 border-green-500/40 rounded-lg p-3">
+              <div className="bg-black border border-green-500/40 rounded-lg p-3">
                 <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">FEE</label>
                 <input
-                  type="text"
+                  type="number"
                   value={editing.fee || ''}
                   onChange={(e) => setEditing({ ...editing, fee: e.target.value })}
-                  className="w-full bg-green-900/20 border border-green-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
-                  placeholder="£"
+                  className="w-full bg-transparent text-green-300 text-sm font-bold placeholder-gray-600 outline-none"
+                  placeholder="0"
                 />
               </div>
-
-              {/* PROMOTER */}
-              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
-                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">PROMOTER</label>
-                <input
-                  type="text"
-                  value={editing.promoter_name || ''}
-                  onChange={(e) => setEditing({ ...editing, promoter_name: e.target.value })}
-                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs font-bold placeholder-gray-600"
-                  placeholder="Required"
-                />
-              </div>
-            </div>
-
-            {/* CONTACT DETAILS - Full width */}
-            <div className="space-y-2">
-              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
-                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">EMAIL</label>
-                <input
-                  type="email"
-                  value={editing.promoter_email || ''}
-                  onChange={(e) => setEditing({ ...editing, promoter_email: e.target.value })}
-                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs placeholder-gray-600"
-                  placeholder="promoter@venue.com"
-                />
-              </div>
-
-              {/* LOCATION */}
-              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
-                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">LOCATION</label>
-                <input
-                  type="text"
-                  value={editing.location || ''}
-                  onChange={(e) => setEditing({ ...editing, location: e.target.value })}
-                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs placeholder-gray-600"
-                  placeholder="Address / City"
-                />
-              </div>
-
-              {/* PHONE */}
-              <div className="bg-black border-2 border-cyan-500/40 rounded-lg p-3">
-                <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">PHONE</label>
-                <input
-                  type="tel"
-                  value={editing.promoter_phone || ''}
-                  onChange={(e) => setEditing({ ...editing, promoter_phone: e.target.value })}
-                  className="w-full bg-cyan-900/20 border border-cyan-500/30 rounded px-2 py-2 text-white text-xs placeholder-gray-600"
-                  placeholder="+44..."
-                />
-              </div>
-
-              {editing.offer_details && (
-                <div className="bg-black border-2 border-cyan-500/20 rounded-lg p-3 col-span-2">
-                  <label className="text-gray-500 text-[9px] font-mono uppercase block mb-1">OFFER DETAILS</label>
-                  <div className="bg-cyan-900/10 p-2 rounded text-white text-[11px] max-h-24 overflow-y-auto border border-cyan-500/20">
-                    {editing.offer_details}
-                  </div>
-                </div>
-              )}
             </div>
 
             {saveError && (
