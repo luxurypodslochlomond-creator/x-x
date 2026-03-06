@@ -139,7 +139,7 @@ export default function ScottCalendarView() {
                         <motion.div key={event.id} layout className="bg-black border border-gray-800 rounded overflow-hidden">
                             <button 
                                 onClick={() => setSelectedEvent(selectedEvent?.id === event.id ? null : event)}
-                                className="w-full p-3 flex items-start justify-between hover:bg-cyan-500/10 transition-all text-left"
+                                className="w-full p-3 flex items-start justify-between hover:bg-amber-500/10 transition-all text-left"
                             >
                                 <div className="flex-1">
                                     <p className="text-white font-bold font-mono text-sm">{event.title}</p>
