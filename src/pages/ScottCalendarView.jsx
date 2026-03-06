@@ -206,7 +206,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.time && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">TIME</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">TIME</p>
                                             <p className="text-white font-mono">{event.time}</p>
                                         </div>
                                     )}
