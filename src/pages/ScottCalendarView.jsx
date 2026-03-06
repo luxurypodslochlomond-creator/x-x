@@ -188,7 +188,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.fee && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">FEE</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">FEE</p>
                                             <p className="text-green-400 font-black font-mono">{event.currency || 'GBP'}{event.fee}</p>
                                         </div>
                                     )}
