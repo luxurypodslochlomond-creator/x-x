@@ -299,16 +299,22 @@ export default function CB51() {
                 <CB51ConfirmedGigDraftEmail artistId={currentArtistId} />
 
                 {/* SCAN GIG OFFER */}
-                <div className="border border-cyan-500/20 rounded-xl p-5 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Radio className="w-5 h-5 text-cyan-400" />
-                    <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">New Gig Offer</h2>
-                    <span className="text-gray-600 text-xs font-mono">paste · upload · scan</span>
+                <div className="rounded-2xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.08) 0%, rgba(0,0,0,0.9) 100%)', border: '1px solid rgba(6,182,212,0.2)' }}>
+                  <div className="px-5 pt-5 pb-3 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                      <Radio className="w-4 h-4 text-cyan-400" />
+                    </div>
+                    <div>
+                      <h2 className="text-white font-bold text-sm">New Gig Offer</h2>
+                      <p className="text-gray-600 text-[10px] font-mono">paste · upload · scan</p>
+                    </div>
                   </div>
-                  <CB51GigUploadParser 
-                    artistId={currentArtistId}
-                    onGigCreated={() => {}}
-                  />
+                  <div className="px-5 pb-5">
+                    <CB51GigUploadParser 
+                      artistId={currentArtistId}
+                      onGigCreated={() => {}}
+                    />
+                  </div>
                 </div>
 
                 {/* BAND MEMBERS */}
