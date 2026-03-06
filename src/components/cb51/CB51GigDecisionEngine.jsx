@@ -116,9 +116,16 @@ export default function CB51GigDecisionEngine({ artistId }) {
 
   const { data: pendingGigs = [], isLoading } = useQuery({
     queryKey: ['pendingGigs', artistId],
-    queryFn: () => base44.entities.GigOffer.filter({ artist_id: artistId, status: 'manager_reviewing' }),
+    queryFn: async () => {
+      // Fetch both possible "needs manager review" status values
+      const [a, b] = await Promise.all([
+        base44.entities.GigOffer.filter({ artist_id: artistId, status: 'manager_reviewing' }),
+        base44.entities.GigOffer.filter({ artist_id: artistId, status: 'pending' })
+      ]);
+      return [...a, ...b];
+    },
     enabled: !!artistId,
-    refetchInterval: 30000
+    refetchInterval: 15000
   });
 
   const { data: votingGigs = [] } = useQuery({
