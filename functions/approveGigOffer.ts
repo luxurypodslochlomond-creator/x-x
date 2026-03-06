@@ -41,7 +41,7 @@ Deno.serve(async (req) => {
       manager_approved: true
     });
 
-    // Check if event already exists for this gig to avoid duplicates
+    // CREATE EVENT (Calendar)
     const existingEvents = await base44.asServiceRole.entities.Event.filter({
       artist_id: artistId,
       title: gig.venue || gig.title || 'Gig'
@@ -66,6 +66,42 @@ Deno.serve(async (req) => {
         fee: gig.fee || null,
         notes: gig.offer_details || gig.notes || ''
       });
+    }
+
+    // CREATE INVOICE (Finance) - if fee exists
+    if (gig.fee && gig.fee > 0) {
+      try {
+        await base44.asServiceRole.entities.ScottInvoice.create({
+          artist_id: artistId,
+          amount: gig.fee,
+          currency: gig.currency || 'GBP',
+          description: `Gig: ${gig.venue || gig.title || 'Gig'} on ${gig.date_start || gig.date || 'TBD'}`,
+          date: gig.date_start || gig.date || new Date().toISOString().split('T')[0],
+          status: 'unpaid',
+          accountant_notes: `Promoter: ${gig.promoter_name || gig.promoter || 'Unknown'}`
+        });
+      } catch (err) {
+        console.log('Invoice creation (non-critical):', err.message);
+      }
+    }
+
+    // CREATE TASK (Tasks) - post-show follow-up
+    if (gig.date_start || gig.date) {
+      try {
+        const gigDate = new Date(gig.date_start || gig.date);
+        const followUpDate = new Date(gigDate.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days after gig
+        
+        await base44.asServiceRole.entities.ScottTask.create({
+          artist_id: artistId,
+          title: `Follow-up: ${gig.venue || 'Gig'} ${gig.date_start || gig.date}`,
+          deadline: followUpDate.toISOString().split('T')[0],
+          priority: 'normal',
+          status: 'pending',
+          notes: `Send thank you to ${gig.promoter_name || gig.promoter || 'promoter'}. Confirm payment of £${gig.fee || 0} received.`
+        });
+      } catch (err) {
+        console.log('Task creation (non-critical):', err.message);
+      }
     }
 
     // Notify band members (skip if solo artist)
