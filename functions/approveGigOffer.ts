@@ -53,19 +53,20 @@ Deno.serve(async (req) => {
     });
 
     if (!alreadyHasEvent) {
-    await base44.asServiceRole.entities.Event.create({
-      artist_id: artistId,
-      title: gig.venue || gig.title || 'Gig',
-      date: gig.date || gig.date_start || '',
-      time: gig.time || gig.time_start || '',
-      venue: gig.venue || '',
-      location: gig.location || gig.city || '',
-      promoter: gig.promoter_name || gig.promoter || '',
-      promoter_phone: gig.promoter_phone || '',
-      promoter_email: gig.promoter_email || '',
-      fee: gig.fee || null,
-      notes: gig.offer_details || gig.notes || ''
-    });
+      await base44.asServiceRole.entities.Event.create({
+        artist_id: artistId,
+        title: gig.venue || gig.title || 'Gig',
+        date: gig.date || gig.date_start || '',
+        time: gig.time || gig.time_start || '',
+        venue: gig.venue || '',
+        location: gig.location || gig.city || '',
+        promoter: gig.promoter_name || gig.promoter || '',
+        promoter_phone: gig.promoter_phone || '',
+        promoter_email: gig.promoter_email || '',
+        fee: gig.fee || null,
+        notes: gig.offer_details || gig.notes || ''
+      });
+    }
 
     // Notify band members (skip if solo artist)
     if (!isSoloArtist) {
