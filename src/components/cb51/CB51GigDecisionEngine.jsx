@@ -118,14 +118,14 @@ export default function CB51GigDecisionEngine({ artistId }) {
     queryKey: ['pendingGigs', artistId],
     queryFn: () => base44.entities.GigOffer.filter({ artist_id: artistId, status: 'manager_reviewing' }),
     enabled: !!artistId,
-    refetchInterval: 5000
+    refetchInterval: 30000
   });
 
   const { data: votingGigs = [] } = useQuery({
     queryKey: ['votingGigs', artistId],
     queryFn: () => base44.entities.GigOffer.filter({ artist_id: artistId, status: 'band_voting' }),
     enabled: !!artistId,
-    refetchInterval: 5000
+    refetchInterval: 30000
   });
 
   const currentGig = pendingGigs[0];
