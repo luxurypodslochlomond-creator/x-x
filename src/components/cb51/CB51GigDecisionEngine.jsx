@@ -409,7 +409,7 @@ export default function CB51GigDecisionEngine({ artistId }) {
                     Back
                   </button>
                   <button
-                    onClick={() => rejectMutation.mutate({ gigId: currentGig.id, reason: rejectReason || 'No reason given' })}
+                    onClick={() => rejectMutation.mutate({ gigId: currentGig.id, reason: rejectReason || 'No reason given', gigData: currentGig })}
                     disabled={rejectMutation.isPending}
                     className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white font-black text-sm rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >
