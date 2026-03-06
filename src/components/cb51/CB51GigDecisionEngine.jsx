@@ -172,9 +172,8 @@ export default function CB51GigDecisionEngine({ artistId }) {
   });
 
   const rejectMutation = useMutation({
-    mutationFn: async ({ gigId, reason }) => {
-      const gig = await base44.entities.GigOffer.get(gigId);
-      await base44.functions.invoke('rejectGigOffer', { gigId, artistId: gig.artist_id, reason });
+    mutationFn: async ({ gigId, reason, gigData }) => {
+      await base44.functions.invoke('rejectGigOffer', { gigId, reason, gigData });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
