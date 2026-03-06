@@ -1,84 +1,99 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.20';
 
 /**
  * PROCESS EMAIL DECISION - Handle YES/NO clicks from email links
- * Band member or manager clicks link in email → this updates the decision
+ * Called as GET request from email buttons
+ * YES → records vote immediately, shows thank you page
+ * NO → redirects to a simple reason page
  */
 
 Deno.serve(async (req) => {
-  try {
-    const { decision, gig_id, band_member_email, token } = await req.json();
+  const url = new URL(req.url);
+  const decision = url.searchParams.get('decision');
+  const gig_id = url.searchParams.get('gig_id');
+  const band_member_email = url.searchParams.get('band_member_email');
+  const token = url.searchParams.get('token');
 
-    if (!decision || !gig_id || !token) {
-      return Response.json({ error: 'Missing params' }, { status: 400 });
+  const htmlPage = (title, message, color) => new Response(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>CB51</title>
+      <style>
+        body { background: #0a0f1a; color: white; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; }
+        .card { background: #111827; border: 2px solid ${color}; border-radius: 16px; padding: 40px 32px; max-width: 400px; }
+        h1 { color: ${color}; font-size: 2rem; margin: 0 0 12px; }
+        p { color: #9ca3af; font-size: 1rem; margin: 0; line-height: 1.5; }
+        .logo { color: #06b6d4; font-weight: 900; font-size: 1.5rem; margin-bottom: 24px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="logo">CB51</div>
+        <h1>${title}</h1>
+        <p>${message}</p>
+      </div>
+    </body>
+    </html>
+  `, { headers: { 'Content-Type': 'text/html' } });
+
+  try {
+    if (!decision || !gig_id || !token || !band_member_email) {
+      return htmlPage('❌ Invalid Link', 'This link is missing required information.', '#ef4444');
+    }
+
+    // Verify token
+    const expectedToken = btoa(`${gig_id}:${band_member_email}`).substring(0, 16);
+    if (token !== expectedToken) {
+      return htmlPage('❌ Invalid Link', 'This link has expired or is invalid.', '#ef4444');
     }
 
     const base44 = createClientFromRequest(req);
 
-    // Verify token matches band member (simple security)
-    const expectedToken = btoa(`${gig_id}:${band_member_email}`).substring(0, 16);
-    if (token !== expectedToken) {
-      return Response.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
     // Get gig offer
-    const gigOffer = await base44.asServiceRole.entities.ScottGigOffer.get(gig_id);
+    const gigOffer = await base44.asServiceRole.entities.GigOffer.get(gig_id);
     if (!gigOffer) {
-      return Response.json({ error: 'Gig not found' }, { status: 404 });
+      return htmlPage('❌ Not Found', 'This gig offer no longer exists.', '#ef4444');
     }
 
-    // Update or create band response
-    const existing = await base44.asServiceRole.entities.ScottBandResponse.filter({
-      gig_offer_id: gig_id,
-      band_member_email: band_member_email
-    });
-
-    if (existing.length > 0) {
-      await base44.asServiceRole.entities.ScottBandResponse.update(existing[0].id, {
-        decision: decision === 'yes' ? 'yes' : 'no',
-        reason_if_no: decision === 'no' ? 'Declined via email' : null,
-        responded_at: new Date().toISOString()
-      });
-    } else {
-      await base44.asServiceRole.entities.ScottBandResponse.create({
-        gig_offer_id: gig_id,
-        band_member_email: band_member_email,
-        decision: decision === 'yes' ? 'yes' : 'no',
-        reason_if_no: decision === 'no' ? 'Declined via email' : null,
-        responded_at: new Date().toISOString()
-      });
+    // If NO → redirect to reason page
+    if (decision === 'no') {
+      const reasonUrl = `${url.origin}/api/functions/emailDecisionReason?gig_id=${gig_id}&band_member_email=${encodeURIComponent(band_member_email)}&token=${token}`;
+      return Response.redirect(reasonUrl, 302);
     }
 
-    // Log audit trail
-    try {
-      await base44.asServiceRole.functions.invoke('logAuditTrail', {
-        action: decision === 'yes' ? 'band_voted_yes' : 'band_voted_no',
-        actor_email: band_member_email,
-        actor_name: band_member_email,
-        gig_offer_id: gig_id,
-        venue: gigOffer.venue,
-        fee: gigOffer.fee,
-        details: `Email decision link clicked`
+    // YES → record immediately
+    const existing = await base44.asServiceRole.entities.GigOffer.get(gig_id);
+    const bandResponses = existing.band_responses || [];
+    const alreadyVoted = bandResponses.find(r => r.email === band_member_email);
+
+    if (!alreadyVoted) {
+      bandResponses.push({
+        email: band_member_email,
+        vote: 'yes',
+        voted_at: new Date().toISOString()
       });
-    } catch (e) {
-      console.log('Audit log skipped');
+
+      await base44.asServiceRole.entities.GigOffer.update(gig_id, {
+        band_responses: bandResponses
+      });
+
+      // Check if all band members voted yes
+      try {
+        await base44.asServiceRole.functions.invoke('completeGigApprovalWorkflow', {
+          data: { id: gig_id, status: 'band_voting' }
+        });
+      } catch (e) {
+        console.log('Workflow check:', e.message);
+      }
     }
 
-    // Trigger workflow check (all votes in?)
-    try {
-      await base44.asServiceRole.functions.invoke('completeGigApprovalWorkflow', {
-        data: { id: gig_id, status: 'sent_to_band' }
-      });
-    } catch (e) {
-      console.log('Workflow check:', e.message);
-    }
-
-    return Response.json({ 
-      success: true,
-      message: decision === 'yes' ? 'Vote recorded - thanks!' : 'Vote recorded'
-    });
+    return htmlPage('✅ You\'re In!', `Thanks! Your YES vote for <strong style="color:white">${gigOffer.venue}</strong> has been recorded. The manager will be notified when everyone has responded.`, '#22c55e');
 
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error('Email decision error:', error);
+    return htmlPage('❌ Something went wrong', error.message, '#ef4444');
   }
 });
