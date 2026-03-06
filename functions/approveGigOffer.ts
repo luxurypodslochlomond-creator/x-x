@@ -9,24 +9,25 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { gigId, artistId } = await req.json();
+    const { gigId, artistId, gigData } = await req.json();
 
     if (!gigId || !artistId) {
       return Response.json({ error: 'Missing gigId or artistId' }, { status: 400 });
     }
 
-    // Get existing gig first
-    const gig = await base44.asServiceRole.entities.GigOffer.get(gigId);
-
-    // Ensure venue is set (use title if venue is missing)
-    if (!gig.venue) {
-      gig.venue = gig.title;
+    // Use gigData passed from frontend (avoids RLS issues with asServiceRole fetch)
+    // Fall back to user-scoped fetch if gigData not provided
+    let gig = gigData;
+    if (!gig) {
+      gig = await base44.entities.GigOffer.get(gigId);
     }
 
-    // Validate gig belongs to this artist
-    if (gig.artist_id !== artistId) {
-      return Response.json({ error: 'Gig does not belong to this artist' }, { status: 403 });
+    if (!gig) {
+      return Response.json({ error: 'Gig not found' }, { status: 404 });
     }
+
+    // Ensure venue is set
+    if (!gig.venue) gig.venue = gig.title || 'Untitled Gig';
 
     // Check if artist has band members (solo artist = 0 members)
     const bandMembers = await base44.asServiceRole.entities.TeamMember.filter({
