@@ -25,31 +25,23 @@ export default function ScottArtistHome() {
     });
 
     const { data: bandMembers = [] } = useQuery({
-        queryKey: ['scottBandMembers', artistId],
-        queryFn: async () => {
-            try {
-                const allMembers = await base44.entities.ScottTeamMember.list();
-                return allMembers.filter(m => m.artist_access?.includes(artistId));
-            } catch (e) {
-                console.log('Band members fetch error:', e);
-                return [];
-            }
-        },
+        queryKey: ['bandMembers', artistId],
+        queryFn: () => base44.entities.TeamMember.filter({ artist_id: artistId }),
         enabled: !!artistId
     });
 
     const { data: pendingVotes = [] } = useQuery({
-        queryKey: ['scottPendingVotes', artistId],
-        queryFn: () => base44.entities.ScottGigOffer.filter({ 
+        queryKey: ['pendingVotes', artistId],
+        queryFn: () => base44.entities.GigOffer.filter({ 
             artist_id: artistId,
-            status: 'sent_to_band'
+            status: 'band_voting'
         }),
         enabled: !!artistId,
-        refetchInterval: 10000 // Poll every 10s for new votes
+        refetchInterval: 10000
     });
 
     const addMemberMutation = useMutation({
-        mutationFn: (memberData) => base44.entities.ScottTeamMember.create(memberData),
+        mutationFn: (memberData) => base44.entities.TeamMember.create(memberData),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottBandMembers', artistId] });
             setNewMember({ name: '', email: '' });
@@ -58,7 +50,7 @@ export default function ScottArtistHome() {
     });
 
     const deleteMemberMutation = useMutation({
-        mutationFn: (memberId) => base44.entities.ScottTeamMember.delete(memberId),
+        mutationFn: (memberId) => base44.entities.TeamMember.delete(memberId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['scottBandMembers', artistId] });
         }
@@ -80,8 +72,9 @@ export default function ScottArtistHome() {
         addMemberMutation.mutate({
             name: newMember.name,
             email: newMember.email,
-            artist_access: [artistId],
-            role: 'assistant'
+            artist_id: artistId,
+            role: 'band_member',
+            status: 'invited'
         });
     };
 
