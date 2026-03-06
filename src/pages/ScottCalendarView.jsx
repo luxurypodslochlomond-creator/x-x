@@ -212,7 +212,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.promoter_phone && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER PHONE</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">PROMOTER PHONE</p>
                                             <p className="text-white font-mono">{event.promoter_phone}</p>
                                         </div>
                                     )}
