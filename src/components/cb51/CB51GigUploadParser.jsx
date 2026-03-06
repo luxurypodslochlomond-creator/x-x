@@ -214,24 +214,31 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         throw new Error('No artist selected');
       }
       
-      if (!editing.venue_name || !editing.date_start || !editing.promoter_name) {
-        setSaveError('Need: Venue, Date & Promoter name');
+      if (!editing.venue_name) {
+        setSaveError('Need: Venue name');
         throw new Error('Missing required fields');
       }
 
+      const managerId = currentUser?.id || '';
+      
+      // Use date_start or fallback to today
+      const gigDate = editing.date_start?.trim() || new Date().toISOString().split('T')[0];
+
       const gig = await base44.entities.GigOffer.create({
+            manager_id: managerId,
             artist_id: selectedArtistId,
-            title: editing.venue_name || 'Untitled Gig',
-            venue: editing.venue_name,
-            location: editing.location || '',
-            date_start: editing.date_start,
-            time_start: editing.time_start || '',
+            venue: editing.venue_name || 'Untitled Gig',
+            city: editing.location || '',
+            country: '',
+            date: gigDate,
+            time: editing.time_start || '',
             fee: editing.fee ? Number(editing.fee) : null,
-            promoter_name: editing.promoter_name,
-            promoter_email: editing.promoter_email || '',
-            promoter_phone: editing.promoter_phone || '',
-            offer_details: editing.offer_details || editing.notes || '',
-            status: 'manager_reviewing'
+            currency: 'EUR',
+            promoter: editing.promoter_name || '',
+            promoter_contact: [editing.promoter_email, editing.promoter_phone].filter(Boolean).join(' | '),
+            notes: editing.offer_details || '',
+            status: 'pending',
+            urgency: 'urgent',
           });
 
           // Fire notification after gig created
