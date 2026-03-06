@@ -297,8 +297,8 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         </motion.div>
       )}
 
-      {/* UPLOAD AREA - Always show, AI detects artist */}
-      {!extracted && (
+      {/* UPLOAD AREA + MANUAL ENTRY TOGGLE */}
+      {!extracted && !manualMode && (
         <motion.label
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -317,24 +317,37 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
             {parsing ? (
               <>
                 <Loader className="w-8 h-8 text-cyan-400 mx-auto animate-spin mb-2" />
-                <p className="text-cyan-400 font-bold text-sm">PARSING PDF...</p>
-                {debugLog.length > 0 && (
-                  <div className="mt-3 bg-black/50 rounded p-2 text-left max-h-24 overflow-y-auto">
-                    {debugLog.map((log, i) => (
-                      <p key={i} className="text-cyan-300 text-[10px] font-mono">{log}</p>
-                    ))}
-                  </div>
-                )}
+                <p className="text-cyan-400 font-bold text-sm">READING GIG OFFER...</p>
+                <p className="text-gray-500 text-xs mt-1">Takes ~20 seconds on mobile</p>
               </>
             ) : (
               <>
                 <Upload className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-                <p className="text-white font-bold text-sm">Drop PDF or click</p>
-                <p className="text-gray-500 text-xs mt-1">Contracts, offers, details</p>
+                <p className="text-white font-bold text-sm">Upload PDF / Screenshot</p>
+                <p className="text-gray-500 text-xs mt-1">AI reads it automatically</p>
               </>
             )}
           </div>
         </motion.label>
+      )}
+
+      {/* MANUAL ENTRY OPTION */}
+      {!extracted && !parsing && (
+        <button
+          onClick={() => {
+            setManualMode(!manualMode);
+            if (!manualMode) {
+              setExtracted({});
+              setEditing({ venue_name: '', date_start: '', fee: '', promoter_name: '', promoter_email: '', location: '' });
+            } else {
+              setExtracted(null);
+              setEditing(null);
+            }
+          }}
+          className="w-full text-center text-gray-600 hover:text-cyan-400 text-xs py-1 transition-colors"
+        >
+          {manualMode ? '← Back to upload' : 'Or type it in manually →'}
+        </button>
       )}
 
       {/* SAVED CONFIRMATION - Simple */}
