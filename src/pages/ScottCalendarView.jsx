@@ -200,7 +200,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.capacity && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">CAPACITY</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">CAPACITY</p>
                                             <p className="text-white font-mono">{event.capacity}</p>
                                         </div>
                                     )}
