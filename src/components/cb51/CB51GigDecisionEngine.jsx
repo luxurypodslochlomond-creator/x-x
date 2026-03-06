@@ -362,29 +362,27 @@ export default function CB51GigDecisionEngine({ artistId }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="p-4 pt-2 grid grid-cols-2 gap-3"
+                className="grid grid-cols-2 border-t border-white/5"
               >
                 <button
                   onClick={() => setShowRejectReason(true)}
                   disabled={isBusy}
-                  className="py-5 flex flex-col items-center justify-center gap-2 rounded-2xl transition-all disabled:opacity-40 active:scale-95"
-                  style={{ background: 'rgba(239,68,68,0.08)', border: '1.5px solid rgba(239,68,68,0.25)' }}
+                  className="py-6 flex flex-col items-center justify-center gap-1.5 bg-red-950/30 hover:bg-red-950/60 border-r border-white/5 transition-all disabled:opacity-40 active:scale-95"
                 >
-                  <XCircle className="w-7 h-7 text-red-400" />
-                  <span className="text-red-400 font-black text-sm tracking-widest">NO</span>
+                  <XCircle className="w-8 h-8 text-red-400" />
+                  <span className="text-red-400 font-black text-base tracking-wider">NO</span>
                 </button>
 
                 <button
                   onClick={() => approveMutation.mutate(currentGig)}
                   disabled={isBusy}
-                  className="py-5 flex flex-col items-center justify-center gap-2 rounded-2xl transition-all disabled:opacity-40 active:scale-95"
-                  style={{ background: 'rgba(16,185,129,0.08)', border: '1.5px solid rgba(16,185,129,0.25)', boxShadow: '0 0 20px rgba(16,185,129,0.1)' }}
+                  className="py-6 flex flex-col items-center justify-center gap-1.5 bg-green-950/30 hover:bg-green-950/60 transition-all disabled:opacity-40 active:scale-95"
                 >
                   {approveMutation.isPending
-                    ? <Loader className="w-7 h-7 text-green-400 animate-spin" />
-                    : <CheckCircle className="w-7 h-7 text-green-400" />
+                    ? <Loader className="w-8 h-8 text-green-400 animate-spin" />
+                    : <CheckCircle className="w-8 h-8 text-green-400" />
                   }
-                  <span className="text-green-400 font-black text-sm tracking-widest">YES</span>
+                  <span className="text-green-400 font-black text-base tracking-wider">YES</span>
                 </button>
               </motion.div>
             ) : (
