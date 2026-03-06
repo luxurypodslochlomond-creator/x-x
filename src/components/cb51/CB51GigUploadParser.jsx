@@ -251,6 +251,23 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
             urgency: 'urgent',
           });
 
+          // Auto-create task: "Review & approve gig offer"
+          try {
+            await base44.entities.ScottTask.create({
+              title: `Review & approve gig: ${editing.venue_name}`,
+              artist_id: selectedArtistId,
+              responsible_email: currentUser?.email || '',
+              responsible_name: currentUser?.full_name || 'Manager',
+              deadline: editing.date_start || new Date().toISOString().split('T')[0],
+              priority: 'urgent',
+              status: 'pending',
+              notes: `Gig offer from ${editing.promoter_name} - Fee: €${editing.fee || 'TBD'}\n\nReview and approve or send to band for voting.`
+            });
+            console.log('✅ Task created for gig review');
+          } catch (taskErr) {
+            console.log('Task creation failed (non-critical):', taskErr.message);
+          }
+
           // Fire notification after gig created
           try {
             await base44.functions.invoke('notifyManagerPendingGig', {
