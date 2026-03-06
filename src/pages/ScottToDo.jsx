@@ -126,7 +126,7 @@ export default function ScottToDo() {
                                     )}
                                     {task.status && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">STATUS</p>
+                                            <p className="text-red-400 font-mono font-bold text-xs">STATUS</p>
                                             <p className="text-white font-mono capitalize">{task.status}</p>
                                         </div>
                                     )}
