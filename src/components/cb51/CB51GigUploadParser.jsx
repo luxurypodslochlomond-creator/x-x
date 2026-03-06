@@ -55,12 +55,12 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       }
     }
 
-    // 15 second timeout
+    // 45 second timeout (PDFs can be slow)
     const timeoutId = setTimeout(() => {
       setParsing(false);
       setFile(null);
-      setError('⏱️ Timeout - Try a smaller file or enter manually');
-    }, 15000);
+      setError('⏱️ Took too long - try a smaller file or enter manually');
+    }, 45000);
 
     try {
       console.log('🚀 Starting upload...', selectedFile.name);
