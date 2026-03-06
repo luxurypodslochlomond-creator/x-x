@@ -126,9 +126,18 @@ export default function CB51() {
           {/* BACKGROUND SYNC - Queue actions when offline */}
           <CB51BackgroundSync />
 
+          {/* HEADER */}
+          <div className="px-6 pt-8 pb-4 border-b border-cyan-500/20">
+            <div className="flex items-center gap-3 mb-1">
+              <Radio className="w-7 h-7 text-cyan-400" />
+              <span className="text-2xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
+            </div>
+            <p className="text-gray-500 text-xs font-mono">Your AI co-manager</p>
+          </div>
+
           {/* ARTIST GRID - Show 3 */}
           {artists.length > 0 && (
-            <div className="px-6 pt-6 pb-4">
+            <div className="px-6 pt-5 pb-4">
               <h3 className="text-gray-500 text-xs font-mono uppercase tracking-wider mb-3">Artists</h3>
               <div className="grid grid-cols-3 gap-3 mb-4">
                           {artists.map((artist) => (
