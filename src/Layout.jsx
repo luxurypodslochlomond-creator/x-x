@@ -33,6 +33,7 @@ import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwo
 import CB51OfflineHandler from '@/components/scott/CB51OfflineHandler';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
+import CB51TransmitterLoader from '@/components/cb51/CB51TransmitterLoader';
 // import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
 // import BackgroundSync from '@/components/shared/BackgroundSync';
 import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
