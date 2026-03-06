@@ -127,48 +127,64 @@ export default function CB51() {
           <CB51BackgroundSync />
 
           {/* HEADER */}
-          <div className="px-6 pt-8 pb-4 border-b border-cyan-500/20">
-            <div className="flex items-center gap-3 mb-1">
-              <Radio className="w-7 h-7 text-cyan-400" />
-              <span className="text-2xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
+          <div className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/60 via-black to-black" />
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-cyan-500/5 -translate-y-1/2 translate-x-1/2" />
+            <div className="relative px-6 pt-10 pb-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                    <span className="text-cyan-400 text-[10px] font-mono uppercase tracking-widest">Live</span>
+                  </div>
+                  <h1 className="text-4xl font-black text-white tracking-tight leading-none">CB51</h1>
+                  <p className="text-cyan-400/70 text-xs font-mono mt-1 tracking-wider">AI CO-MANAGER</p>
+                </div>
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                  <Radio className="w-7 h-7 text-black" />
+                </div>
+              </div>
             </div>
-            <p className="text-gray-500 text-xs font-mono">Your AI co-manager</p>
           </div>
 
-          {/* ARTIST GRID - Show 3 */}
+          {/* ARTIST GRID */}
           {artists.length > 0 && (
-            <div className="px-6 pt-5 pb-4">
-              <h3 className="text-gray-500 text-xs font-mono uppercase tracking-wider mb-3">Artists</h3>
-              <div className="grid grid-cols-3 gap-3 mb-4">
+            <div className="px-4 pt-4 pb-2">
+              <div className="flex items-center gap-2 mb-3 px-1">
+                <span className="text-gray-600 text-[10px] font-mono uppercase tracking-widest">Artists</span>
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                           {artists.map((artist) => (
-                            <div key={artist.id} className="relative">
-                              <button
-                                onClick={() => navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`))}
-                                className="flex flex-col items-center gap-2 p-3 transition-all w-full hover:bg-cyan-500/10 rounded-lg cursor-pointer"
-                              >
+                            <button
+                              key={artist.id}
+                              onClick={() => navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`))}
+                              className="flex flex-col items-center gap-2 flex-shrink-0 group"
+                            >
+                              <div className="relative">
                                 {artist.profile_pic_url ? (
                                   <img 
                                     src={artist.profile_pic_url} 
                                     alt={artist.name}
-                                    className="w-14 h-14 rounded-full object-cover"
+                                    className="w-16 h-16 rounded-2xl object-cover ring-2 ring-transparent group-hover:ring-cyan-400 transition-all"
                                   />
                                 ) : (
-                                  <div className="w-14 h-14 rounded-full bg-cyan-500 text-black font-black text-lg flex items-center justify-center">
+                                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-700 text-black font-black text-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
                                     {artist.name.charAt(0).toUpperCase()}
                                   </div>
                                 )}
-                                <p className="text-white font-mono text-xs text-center truncate w-full">{artist.name}</p>
-                              </button>
-                            </div>
+                                <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-green-400 border-2 border-black" />
+                              </div>
+                              <p className="text-gray-300 font-mono text-[11px] text-center truncate w-16">{artist.name}</p>
+                            </button>
                           ))}
                           <button
                             onClick={() => navigate(createPageUrl('CB51AddArtist'))}
-                            className="flex flex-col items-center justify-center gap-2 p-3 cursor-pointer"
+                            className="flex flex-col items-center justify-start gap-2 flex-shrink-0"
                           >
-                            <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-600 flex items-center justify-center">
-                              <Plus className="w-6 h-6 text-gray-500" />
+                            <div className="w-16 h-16 rounded-2xl border-2 border-dashed border-gray-700 hover:border-cyan-500/50 flex items-center justify-center transition-colors">
+                              <Plus className="w-6 h-6 text-gray-600" />
                             </div>
-                            <p className="text-gray-500 font-mono text-xs">Add</p>
+                            <p className="text-gray-600 font-mono text-[11px]">Add</p>
                           </button>
               </div>
             </div>
