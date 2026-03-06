@@ -23,7 +23,7 @@ export default function ScottFinanceAdmin() {
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <h1 className="text-3xl font-black text-white font-mono mb-4">FINANCE</h1>
+            <h1 className="text-3xl font-black text-cyan-400 font-mono mb-4">FINANCE</h1>
 
             <div className="grid grid-cols-1 gap-2">
                 {sections.map((section) => {
