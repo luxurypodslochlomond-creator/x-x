@@ -54,12 +54,12 @@ export default function ScottToDo() {
 
     return (
         <div className="min-h-screen bg-black text-white p-4 pb-24">
-            <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6">
+            <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-600 hover:text-red-400 transition-all mb-6">
                 <ArrowLeft className="w-4 h-4" />
                 <span className="text-sm font-bold font-mono">BACK</span>
             </button>
 
-            <h1 className="text-3xl font-black text-white font-mono mb-4">TASKS</h1>
+            <h1 className="text-3xl font-black text-red-400 font-mono mb-4">TASKS</h1>
 
             {showAddTask && (
                 <div className="bg-black border border-gray-800 rounded p-4 mb-4 space-y-3">
