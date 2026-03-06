@@ -74,6 +74,7 @@ export default function CB51() {
   }
 
   const currentArtistId = activeArtistId || (artists.length > 0 ? artists[0].id : null);
+  const badges = useCB51NavBadges(currentArtistId);
 
   const handleAddMember = async () => {
     if (!newMemberName.trim() || !newMemberEmail.trim() || !currentArtistId) return;
