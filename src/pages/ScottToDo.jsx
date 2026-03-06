@@ -85,7 +85,7 @@ export default function ScottToDo() {
                         <motion.div key={task.id} layout className="bg-black border border-gray-800 rounded overflow-hidden">
                             <button 
                                 onClick={() => setSelectedTask(selectedTask?.id === task.id ? null : task)} 
-                                className="w-full p-3 flex items-start gap-3 hover:bg-cyan-500/10 transition-all text-left"
+                                className="w-full p-3 flex items-start gap-3 hover:bg-red-500/10 transition-all text-left"
                             >
                                 <button onClick={(e) => { e.stopPropagation(); toggleTaskMutation.mutate({ id: task.id, status: task.status }); }}>
                                     <Circle className="w-5 h-5 text-gray-600" />
