@@ -21,7 +21,8 @@ export default function CB51IOSInstallPrompt() {
     }
   }, []);
 
-  const handleDismiss = () => {
+  const handleDismiss = (e) => {
+    e.stopPropagation();
     localStorage.setItem('cb51-ios-prompt-dismissed', '1');
     setShow(false);
   };
