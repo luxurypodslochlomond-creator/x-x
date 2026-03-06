@@ -224,7 +224,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.emergency_contact_name && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">EMERGENCY CONTACT</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">EMERGENCY CONTACT</p>
                                             <p className="text-white font-mono">{event.emergency_contact_name}</p>
                                             {event.emergency_contact_phone && <p className="text-gray-400 font-mono text-xs">{event.emergency_contact_phone}</p>}
                                         </div>
