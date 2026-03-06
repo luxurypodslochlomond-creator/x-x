@@ -246,7 +246,7 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
             promoter: editing.promoter_name || '',
             promoter_contact: [editing.promoter_email, editing.promoter_phone].filter(Boolean).join(' | '),
             notes: editing.offer_details || '',
-            status: 'pending',
+            status: 'manager_reviewing',
             urgency: 'urgent',
           });
 
