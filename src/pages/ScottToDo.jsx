@@ -108,7 +108,7 @@ export default function ScottToDo() {
                                 >
                                     {task.responsible_name && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">ASSIGNED TO</p>
+                                            <p className="text-red-400 font-mono font-bold text-xs">ASSIGNED TO</p>
                                             <p className="text-white font-mono">{task.responsible_name}</p>
                                         </div>
                                     )}
