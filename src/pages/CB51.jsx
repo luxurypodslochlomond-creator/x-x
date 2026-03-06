@@ -366,37 +366,21 @@ export default function CB51() {
 
                 {/* QUICK NAV */}
                 <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={() => navigate(createPageUrl(`ScottCalendarView`) + (currentArtistId ? `?id=${currentArtistId}` : ''))}
-                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
-                  >
-                    <Calendar className="w-4 h-4 text-cyan-400 mb-1" />
-                    <div className="text-white font-mono text-xs uppercase">Calendar</div>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl('ScottFinanceAdmin') + (currentArtistId ? `?id=${currentArtistId}` : ''))}
-                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
-                  >
-                    <DollarSign className="w-4 h-4 text-cyan-400 mb-1" />
-                    <div className="text-white font-mono text-xs uppercase">Finance</div>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl('ScottToDo') + (currentArtistId ? `?id=${currentArtistId}` : ''))}
-                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
-                  >
-                    <CheckCircle className="w-4 h-4 text-cyan-400 mb-1" />
-                    <div className="text-white font-mono text-xs uppercase">Tasks</div>
-                  </button>
-
-                  <button
-                    onClick={() => navigate(createPageUrl('ScottMessageInbox'))}
-                    className="border border-gray-700 hover:border-cyan-400 px-4 py-3 text-left transition-colors"
-                  >
-                    <Mail className="w-4 h-4 text-cyan-400 mb-1" />
-                    <div className="text-white font-mono text-xs uppercase">Messages</div>
-                  </button>
+                  {[
+                    { icon: Calendar, label: 'Calendar', color: 'text-cyan-400', to: `ScottCalendarView?id=${currentArtistId}` },
+                    { icon: DollarSign, label: 'Finance', color: 'text-green-400', to: `ScottFinanceAdmin?id=${currentArtistId}` },
+                    { icon: CheckCircle, label: 'Tasks', color: 'text-amber-400', to: `ScottToDo?id=${currentArtistId}` },
+                    { icon: Mail, label: 'Messages', color: 'text-pink-400', to: 'ScottMessageInbox' },
+                  ].map(({ icon: Icon, label, color, to }) => (
+                    <button
+                      key={label}
+                      onClick={() => navigate(createPageUrl(to))}
+                      className="border border-gray-800 hover:border-cyan-500/50 bg-gray-900/40 hover:bg-cyan-500/5 rounded-xl px-4 py-4 text-left transition-all"
+                    >
+                      <Icon className={`w-5 h-5 ${color} mb-2`} />
+                      <div className="text-white font-mono text-xs uppercase tracking-wider">{label}</div>
+                    </button>
+                  ))}
                 </div>
               </>
             ) : null}
