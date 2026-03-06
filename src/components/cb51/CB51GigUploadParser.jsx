@@ -134,36 +134,38 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
         setEditing({ ...extracted });
 
       // ONLY auto-detect artist if user hasn't already selected one
-      if (!selectedArtistId) {
-        if (extracted.artist_name && artists.length > 0) {
-          const possibleMatches = artists.filter(a => 
-            a.name.toLowerCase().includes(extracted.artist_name.toLowerCase()) ||
-            extracted.artist_name.toLowerCase().includes(a.name.toLowerCase())
-          );
-
-          if (possibleMatches.length === 1) {
-            // Perfect match - auto-select
-            setSelectedArtistId(possibleMatches[0].id);
-            setError(null);
-          } else if (possibleMatches.length > 1) {
-            // Multiple matches - will show chips below
-            setError(`Found ${possibleMatches.length} possible artists. Pick one below.`);
-          } else if (artists.length === 1) {
-            // Only one artist in system - auto-select
-            setSelectedArtistId(artists[0].id);
-            setError(null);
-          } else {
-            // No match - show all artists to pick
-            setError('Pick your artist below:');
-          }
-        } else if (artists.length === 1) {
-          // No artist name detected, but only 1 artist exists - auto-select
+      const currentArtistId = artistId || selectedArtistId;
+      if (!currentArtistId) {
+        if (artists.length === 1) {
+          // Only one artist in system - always auto-select
           setSelectedArtistId(artists[0].id);
           setError(null);
+        } else if (extracted.artist_name && artists.length > 0) {
+          // Fuzzy match: strip spaces/punctuation/case for comparison
+          const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+          const normalizedExtracted = normalize(extracted.artist_name);
+          
+          const possibleMatches = artists.filter(a => {
+            const normalizedArtist = normalize(a.name);
+            return normalizedArtist.includes(normalizedExtracted) ||
+              normalizedExtracted.includes(normalizedArtist) ||
+              // word overlap check
+              extracted.artist_name.toLowerCase().split(/\s+/).some(word => 
+                word.length > 2 && normalizedArtist.includes(normalize(word))
+              );
+          });
+
+          if (possibleMatches.length >= 1) {
+            setSelectedArtistId(possibleMatches[0].id);
+            setError(null);
+          } else {
+            setError('Pick your artist below:');
+          }
         } else if (artists.length > 1) {
-          // Multiple artists, no detection - ask user
           setError('Pick your artist below:');
         }
+      } else if (!selectedArtistId) {
+        setSelectedArtistId(currentArtistId);
       }
         
         // Check for missing critical fields
