@@ -34,10 +34,6 @@ export default function CB51() {
   const [showMissionBriefing, setShowMissionBriefing] = useState(false);
   const queryClient = useQueryClient();
 
-  // Always call hook at same position - BEFORE any conditionals
-  const currentArtistId = activeArtistId || (artists.length > 0 ? artists[0].id : null);
-  const badges = useCB51NavBadges(currentArtistId);
-
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -64,6 +60,10 @@ export default function CB51() {
     queryFn: () => base44.entities.Artist.filter({ archived: false }),
     enabled: !!user || pinVerified,
   });
+
+  // Always call hook at same position - BEFORE any conditionals
+  const currentArtistId = activeArtistId || (artists.length > 0 ? artists[0].id : null);
+  const badges = useCB51NavBadges(currentArtistId);
 
   if (loading) {
     return (
