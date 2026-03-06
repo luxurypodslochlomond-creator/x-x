@@ -127,7 +127,7 @@ export default function ScottCalendarView() {
                 </div>
             )}
 
-            <button onClick={() => setShowAddEvent(!showAddEvent)} className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded mb-4 flex items-center justify-center gap-2">
+            <button onClick={() => setShowAddEvent(!showAddEvent)} className="w-full bg-amber-400 hover:bg-amber-500 text-black font-black py-3 rounded mb-4 flex items-center justify-center gap-2">
                 <Plus className="w-4 h-4" /> ADD EVENT
             </button>
 
