@@ -165,7 +165,7 @@ export default function ScottCalendarView() {
                                     className="border-t border-gray-800 bg-black/60 p-4 space-y-3 text-sm"
                                 >
                                     <div>
-                                        <p className="text-cyan-400 font-mono font-bold text-xs">DATE</p>
+                                        <p className="text-amber-400 font-mono font-bold text-xs">DATE</p>
                                         <p className="text-white font-mono">{new Date(event.date).toLocaleDateString()}</p>
                                     </div>
                                     {event.location && (
