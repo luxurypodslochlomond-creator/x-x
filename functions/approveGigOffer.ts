@@ -41,7 +41,18 @@ Deno.serve(async (req) => {
       manager_approved: true
     });
 
-    // Create calendar event so it shows up
+    // Check if event already exists for this gig to avoid duplicates
+    const existingEvents = await base44.asServiceRole.entities.Event.filter({
+      artist_id: artistId,
+      title: gig.venue || gig.title || 'Gig'
+    });
+    const alreadyHasEvent = existingEvents.some(e => {
+      const eDate = e.date ? e.date.slice(0, 10) : '';
+      const gigDate = (gig.date || gig.date_start || '').slice(0, 10);
+      return eDate === gigDate;
+    });
+
+    if (!alreadyHasEvent) {
     await base44.asServiceRole.entities.Event.create({
       artist_id: artistId,
       title: gig.venue || gig.title || 'Gig',
