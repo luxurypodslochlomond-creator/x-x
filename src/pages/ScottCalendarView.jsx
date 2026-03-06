@@ -122,7 +122,7 @@ export default function ScottCalendarView() {
                     <Input placeholder="Notes" value={newEvent.notes} onChange={(e) => setNewEvent({...newEvent, notes: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
                     <div className="flex gap-2">
                         <Button onClick={() => setShowAddEvent(false)} className="flex-1 bg-gray-700">CANCEL</Button>
-                        <Button onClick={handleAddEvent} className="flex-1 bg-cyan-500 text-black font-black">SAVE</Button>
+                        <Button onClick={handleAddEvent} className="flex-1 bg-amber-400 hover:bg-amber-500 text-black font-black">SAVE</Button>
                     </div>
                 </div>
             )}
