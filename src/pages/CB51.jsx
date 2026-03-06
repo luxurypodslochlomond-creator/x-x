@@ -367,10 +367,10 @@ export default function CB51() {
                 {/* QUICK NAV */}
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { icon: Calendar, label: 'Calendar', color: 'text-cyan-400', to: `ScottCalendarView?id=${currentArtistId}` },
-                    { icon: DollarSign, label: 'Finance', color: 'text-green-400', to: `ScottFinanceAdmin?id=${currentArtistId}` },
-                    { icon: CheckCircle, label: 'Tasks', color: 'text-amber-400', to: `ScottToDo?id=${currentArtistId}` },
-                    { icon: Mail, label: 'Messages', color: 'text-pink-400', to: 'ScottMessageInbox' },
+                    { icon: Calendar, label: 'Calendar', color: 'text-amber-400', to: `ScottCalendarView?id=${currentArtistId}` },
+                    { icon: DollarSign, label: 'Finance', color: 'text-cyan-400', to: `ScottFinanceAdmin?id=${currentArtistId}` },
+                    { icon: CheckCircle, label: 'Tasks', color: 'text-red-400', to: `ScottToDo?id=${currentArtistId}` },
+                    { icon: Mail, label: 'Messages', color: 'text-green-400', to: 'ScottMessageInbox' },
                   ].map(({ icon: Icon, label, color, to }) => (
                     <button
                       key={label}
