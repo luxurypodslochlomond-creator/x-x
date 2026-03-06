@@ -182,7 +182,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.city && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">CITY</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">CITY</p>
                                             <p className="text-white font-mono">{event.city}{event.country ? `, ${event.country}` : ''}</p>
                                         </div>
                                     )}
