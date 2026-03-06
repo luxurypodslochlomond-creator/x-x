@@ -159,10 +159,15 @@ export default function CB51GigDecisionEngine({ artistId }) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
       queryClient.invalidateQueries({ queryKey: ['votingGigs', artistId] });
+      queryClient.invalidateQueries({ queryKey: ['gigOffers'] });
       setShowRejectReason(false);
       setRejectReason('');
       setShowDetails(false);
       setAiAnalysis(null);
+    },
+    onError: (err) => {
+      console.error('YES failed:', err);
+      alert('Could not approve gig: ' + (err.message || 'Unknown error'));
     }
   });
 
