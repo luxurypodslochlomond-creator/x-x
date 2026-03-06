@@ -190,12 +190,10 @@ export default function CB51GigDecisionEngine({ artistId }) {
 
   if (!currentGig && votingGigs.length === 0) {
     return (
-      <div className="rounded-2xl p-5 text-center" style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(0,0,0,0.8) 100%)', border: '1px solid rgba(16,185,129,0.15)' }}>
-        <div className="w-12 h-12 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-3">
-          <CheckCircle className="w-6 h-6 text-green-400" />
-        </div>
-        <p className="text-green-400 font-bold text-sm">All clear</p>
-        <p className="text-gray-700 text-xs mt-1">No gigs waiting for a decision</p>
+      <div className="bg-green-950/30 border border-green-500/20 rounded-2xl p-5 text-center">
+        <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-2" />
+        <p className="text-green-400 font-bold">All clear</p>
+        <p className="text-gray-600 text-xs mt-1">No gigs waiting for a decision</p>
       </div>
     );
   }
