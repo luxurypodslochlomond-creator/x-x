@@ -18,6 +18,7 @@ import CB51BackgroundSync from '@/components/cb51/CB51BackgroundSync';
 import CB51GigDecisionEngine from '@/components/cb51/CB51GigDecisionEngine';
 import CB51ConfirmedGigDraftEmail from '@/components/cb51/CB51ConfirmedGigDraftEmail';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
+import { useCB51NavBadges, CB51NavBadge } from '@/components/cb51/CB51NavBadge';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CB51() {
