@@ -40,7 +40,7 @@ export default function CB51BandNotificationInbox({ alwaysShow = false }) {
         return allVotingGigs;
       }
     },
-    refetchInterval: 3000 // Poll every 3s
+    refetchInterval: 30000 // Poll every 30s
   });
 
   if (isLoading) {
