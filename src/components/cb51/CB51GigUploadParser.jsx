@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { Upload, CheckCircle, AlertCircle, Loader, Zap, MapPin, DollarSign, User, Calendar } from 'lucide-react';
+import { Upload, CheckCircle, AlertCircle, Loader, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CB51GigUploadParser({ artistId, onGigCreated }) {
