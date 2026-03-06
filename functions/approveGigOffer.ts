@@ -37,8 +37,8 @@ Deno.serve(async (req) => {
 
     // Update: auto-complete if solo, else band_voting
     await base44.asServiceRole.entities.GigOffer.update(gigId, {
-      ...gig,
-      status: isSoloArtist ? 'confirmed' : 'band_voting'
+      status: isSoloArtist ? 'confirmed' : 'band_voting',
+      manager_approved: true
     });
 
     // Create calendar event so it shows up
