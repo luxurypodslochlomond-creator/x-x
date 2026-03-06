@@ -68,7 +68,7 @@ export default function ScottToDo() {
                     <Input type="date" value={newTask.deadline} onChange={(e) => setNewTask({...newTask, deadline: e.target.value})} className="bg-black border-gray-700 text-white font-mono" />
                     <div className="flex gap-2">
                         <Button onClick={() => setShowAddTask(false)} className="flex-1 bg-gray-700">CANCEL</Button>
-                        <Button onClick={handleAddTask} className="flex-1 bg-cyan-500 text-black font-black">SAVE</Button>
+                        <Button onClick={handleAddTask} className="flex-1 bg-red-500 hover:bg-red-600 text-white font-black">SAVE</Button>
                     </div>
                 </div>
             )}
