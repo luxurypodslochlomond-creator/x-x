@@ -9,25 +9,18 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { gigId, reason } = await req.json();
+    const { gigId, reason, gigData } = await req.json();
 
-    if (!gigId || !reason) {
-      return Response.json({ error: 'Missing gigId or reason' }, { status: 400 });
+    if (!gigId) {
+      return Response.json({ error: 'Missing gigId' }, { status: 400 });
     }
 
-    // Get existing gig first
-    const gig = await base44.asServiceRole.entities.GigOffer.get(gigId);
-    
-    // Ensure venue is set (use title if venue is missing)
-    if (!gig.venue) {
-      gig.venue = gig.title;
-    }
-    
-    // Update with full object to satisfy required fields
+    const gig = gigData || {};
+
+    // Only update the fields we need to change
     await base44.asServiceRole.entities.GigOffer.update(gigId, {
-      ...gig,
-      status: 'manager_rejected',
-      manager_rejection_reason: reason
+      status: 'rejected_by_manager',
+      rejection_reason: reason || 'No reason given'
     });
 
     // Notify promoter of rejection
