@@ -95,7 +95,7 @@ export default function ScottCalendarView() {
             <h1 className="text-3xl font-black text-amber-400 font-mono mb-4">CALENDAR</h1>
 
             {showAddEvent && (
-                <div className="bg-black border border-gray-800 rounded p-4 mb-4 space-y-3">
+                <div className="bg-black border border-amber-500/30 rounded p-4 mb-4 space-y-3">
                     <Input placeholder="Event name" value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
                     <div className="flex gap-2">
                         <Input type="date" value={newEvent.date} onChange={(e) => setNewEvent({...newEvent, date: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
