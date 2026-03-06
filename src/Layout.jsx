@@ -469,6 +469,9 @@ const LayoutInner = ({ children, currentPageName }) => {
       
       <div className={`min-h-screen text-white overflow-x-hidden ${isCB51Page ? 'bg-black' : 'bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]'}`}>
         
+        {/* CB51 PAGE TRANSITIONS - Smooth transmitter loader */}
+        {isCB51Page && <CB51TransmitterLoader isActive={pageTransitioning} />}
+
         {isOffline && (
           <div className="fixed top-0 left-0 right-0 z-[70] flex items-center justify-center gap-2 py-1 px-4 bg-black/70 backdrop-blur-sm border-b border-white/10">
             <WifiOff className="w-3 h-3 text-white/40" />
