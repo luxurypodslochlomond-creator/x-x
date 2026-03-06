@@ -37,9 +37,9 @@ You've been invited to **CB51** — AI co-manager for artists.
 • Tasks + deadlines
 
 Ready to join? Click below:
-${getAppUrl()}/CB51Login
+https://uf51.love/CB51
 
-Questions? Hit reply or visit cb51.local for support.
+Questions? Hit reply — we're always here.
 
 — CB51 Team ♾️📻`
         });
@@ -50,11 +50,3 @@ Questions? Hit reply or visit cb51.local for support.
         return Response.json({ error: error.message }, { status: 500 });
     }
 });
-
-function getAppUrl() {
-    const isLocal = Deno.env.get('ENV') === 'development';
-    if (isLocal) return 'http://localhost:3000';
-    
-    // Use request origin for domain detection
-    return typeof window !== 'undefined' ? window.location.origin : 'https://cb51.base44.app';
-}
