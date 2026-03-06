@@ -22,7 +22,7 @@ export function useCB51NavBadges(artistId) {
   // Pending invoices
   const { data: invoices = [] } = useQuery({
     queryKey: ['navBadgeInvoices', artistId],
-    queryFn: () => base44.entities.ScottInvoice?.filter?.({ artist_id: artistId, status: 'pending' }).catch(() => []),
+    queryFn: () => base44.entities.ScottInvoice.filter({ artist_id: artistId, status: 'unpaid' }).catch(() => []),
     enabled: !!artistId,
     refetchInterval: 30000
   });
@@ -30,7 +30,7 @@ export function useCB51NavBadges(artistId) {
   // Incomplete tasks
   const { data: tasks = [] } = useQuery({
     queryKey: ['navBadgeTasks', artistId],
-    queryFn: () => base44.entities.ScottTask?.filter?.({ artist_id: artistId, status: { $ne: 'done' } }).catch(() => []),
+    queryFn: () => base44.entities.ScottTask.filter({ artist_id: artistId, status: { $ne: 'done' } }).catch(() => []),
     enabled: !!artistId,
     refetchInterval: 30000
   });
