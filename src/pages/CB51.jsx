@@ -265,8 +265,8 @@ export default function CB51() {
             )}
           </AnimatePresence>
 
-          {/* MAIN CONTENT - Clean, focused, calm */}
-          <div className="px-6 pb-32 space-y-6">
+          {/* MAIN CONTENT */}
+          <div className="px-4 pb-32 space-y-4 pt-2">
 
             {/* BAND MEMBER VOTES - Always visible at top for anyone with pending votes */}
             <CB51BandNotificationInbox alwaysShow={true} />
