@@ -236,7 +236,7 @@ export default function ScottCalendarView() {
                                                 href={`https://maps.google.com/maps?q=${encodeURIComponent(`${event.location}, ${event.city}${event.country ? ', ' + event.country : ''}`)}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-cyan-400 hover:text-cyan-300 text-xs font-mono underline"
+                                                className="text-amber-400 hover:text-amber-300 text-xs font-mono underline"
                                             >
                                                 Open in Google Maps →
                                             </a>
