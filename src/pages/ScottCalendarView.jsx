@@ -218,7 +218,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.promoter_email && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER EMAIL</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">PROMOTER EMAIL</p>
                                             <p className="text-white font-mono text-xs">{event.promoter_email}</p>
                                         </div>
                                     )}
