@@ -194,7 +194,7 @@ export default function ScottCalendarView() {
                                     )}
                                     {event.promoter && (
                                         <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER</p>
+                                            <p className="text-amber-400 font-mono font-bold text-xs">PROMOTER</p>
                                             <p className="text-white font-mono">{event.promoter}</p>
                                         </div>
                                     )}
