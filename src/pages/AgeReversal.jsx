@@ -249,48 +249,48 @@ export default function AgeReversal() {
               </AnimatePresence>
             </div>
 
-            {/* FREQUENCY STACK */}
-            <div className="space-y-2">
-              <h2 className="text-white font-black text-base flex items-center gap-2 px-1">
+            {/* FREQUENCY STACK — TILES */}
+            <div>
+              <h2 className="text-white font-black text-base flex items-center gap-2 px-1 mb-3">
                 <Activity className="w-4 h-4 text-cyan-400" />
                 The Stack — All 6 Running Simultaneously
               </h2>
-              {FREQUENCY_STACK.map((freq, i) => (
-                <motion.div key={freq.hz} initial={{ opacity: 0, x: 15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i }}
-                  className="rounded-xl overflow-hidden cursor-pointer border"
-                  style={{ borderColor: freq.color + '30', background: 'rgba(0,0,0,0.7)' }}
-                  onClick={() => setExpandedFreq(expandedFreq === i ? null : i)}
-                >
-                  <div className="p-3.5 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-xl flex items-center justify-center font-black text-xs border flex-shrink-0"
-                        style={{ borderColor: freq.color + '60', color: freq.color, background: freq.color + '12' }}>
-                        {freq.hz < 20 ? freq.hz : Math.round(freq.hz)}<br/><span style={{ fontSize: 8 }}>Hz</span>
+              <div className="grid grid-cols-3 gap-2">
+                {FREQUENCY_STACK.map((freq, i) => (
+                  <motion.div key={freq.hz} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.05 * i }}
+                    className="rounded-xl overflow-hidden cursor-pointer border flex flex-col"
+                    style={{ borderColor: expandedFreq === i ? freq.color + '80' : freq.color + '25', background: expandedFreq === i ? freq.color + '10' : 'rgba(0,0,0,0.7)', boxShadow: expandedFreq === i ? `0 0 20px ${freq.color}30` : 'none', transition: 'all 0.3s' }}
+                    onClick={() => setExpandedFreq(expandedFreq === i ? null : i)}
+                  >
+                    <div className="p-3 flex flex-col items-center text-center gap-1.5">
+                      <div className="relative">
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center font-black leading-none border-2 flex-shrink-0"
+                          style={{ borderColor: freq.color + '80', color: freq.color, background: freq.color + '15', fontSize: freq.hz < 20 ? 13 : 11 }}>
+                          <div>
+                            <div style={{ fontSize: freq.hz < 20 ? 14 : 12 }}>{freq.hz < 20 ? freq.hz : Math.round(freq.hz)}</div>
+                            <div style={{ fontSize: 8, opacity: 0.7 }}>Hz</div>
+                          </div>
+                        </div>
+                        {playing && <motion.div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border border-black" style={{ backgroundColor: freq.color }} animate={{ opacity: [1, 0.2, 1], scale: [1, 1.3, 1] }} transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.18 }} />}
                       </div>
                       <div>
-                        <p className="text-white font-black text-sm leading-tight">{freq.name}</p>
-                        <p className="text-xs font-bold" style={{ color: freq.color }}>{freq.role}</p>
+                        <p className="text-white font-black text-[11px] leading-tight">{freq.name}</p>
+                        <p className="font-bold text-[10px] mt-0.5" style={{ color: freq.color }}>{freq.role}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      {playing && <motion.div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: freq.color }} animate={{ opacity: [1, 0.2, 1] }} transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.18 }} />}
-                      {expandedFreq === i ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
-                    </div>
-                  </div>
-                  <AnimatePresence>
-                    {expandedFreq === i && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-                        className="px-4 pb-4 border-t pt-3" style={{ borderColor: freq.color + '20' }}>
-                        <p className="text-gray-300 text-xs leading-relaxed mb-3">{freq.science}</p>
-                        <div className="rounded-lg p-2.5 mb-2" style={{ background: freq.color + '08', border: `1px solid ${freq.color}20` }}>
-                          <p className="text-[10px] text-gray-500 font-mono">📄 {freq.source}</p>
-                        </div>
-                        <p className="text-xs font-bold" style={{ color: freq.color }}>⚡ {freq.effect}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
+                    <AnimatePresence>
+                      {expandedFreq === i && (
+                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                          className="border-t px-3 pb-3 pt-2" style={{ borderColor: freq.color + '25' }}>
+                          <p className="text-gray-300 text-[10px] leading-relaxed mb-2">{freq.science}</p>
+                          <p className="text-[9px] text-gray-600 font-mono mb-2">📄 {freq.source}</p>
+                          <p className="text-[10px] font-bold" style={{ color: freq.color }}>⚡ {freq.effect}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
             {/* CONDITIONS */}
