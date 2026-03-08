@@ -343,6 +343,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
     { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
     { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, highlight: true, description: "Frequency stone dissolution" },
+    { title: "🧬 Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Harvard × MIT × NASA science" },
   ];
 
   // 2. EARN & CREATE (practical actions)
