@@ -724,8 +724,8 @@ export default function AgeReversal() {
           COMPLEMENTARY WELLNESS — NOT A SUBSTITUTE FOR MEDICAL ADVICE
         </p>
       </div>
-      </div> {/* end mobile max-w-xl */}
-      </div> {/* end lg:hidden */}
+      </div>
+      </div>
     </div>
   );
 }
