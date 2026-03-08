@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 
-import { useRef, useEffect } from 'react';
-
 // SACRED GEOMETRY SCIENCE:
 // Metatron's Cube contains ALL 5 Platonic solids - the building blocks of matter
 // Flower of Life = blueprint of creation (found in Egyptian temples, Leonardo da Vinci notebooks)
