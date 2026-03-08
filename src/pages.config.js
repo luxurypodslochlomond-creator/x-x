@@ -125,6 +125,7 @@ import AdminStarlingSetup from './pages/AdminStarlingSetup';
 import AdminStrategicNotes from './pages/AdminStrategicNotes';
 import AdminUKNewCICFunding from './pages/AdminUKNewCICFunding';
 import AdminUnLtdApplication from './pages/AdminUnLtdApplication';
+import AgeReversal from './pages/AgeReversal';
 import AllyBridge from './pages/AllyBridge';
 import AnimalLoveChamber from './pages/AnimalLoveChamber';
 import Artist from './pages/Artist';
@@ -402,7 +403,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import AgeReversal from './pages/AgeReversal';
 import __Layout from './Layout.jsx';
 
 
@@ -485,6 +485,7 @@ export const PAGES = {
     "AdminStrategicNotes": AdminStrategicNotes,
     "AdminUKNewCICFunding": AdminUKNewCICFunding,
     "AdminUnLtdApplication": AdminUnLtdApplication,
+    "AgeReversal": AgeReversal,
     "AllyBridge": AllyBridge,
     "AnimalLoveChamber": AnimalLoveChamber,
     "Artist": Artist,
@@ -762,7 +763,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "AgeReversal": AgeReversal,
 }
 
 export const pagesConfig = {
