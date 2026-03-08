@@ -193,7 +193,7 @@ export default function AgeReversal() {
         </div>
 
         {/* RIGHT COLUMN — Scrollable content */}
-        <div className="w-1/2 overflow-y-auto border-l border-white/5" style={{ background: '#050508' }}>
+        <div className="flex-1 min-w-0 overflow-y-auto border-l border-white/5" style={{ background: '#050508' }}>
           <div className="px-8 py-10 space-y-5">
             {/* Title */}
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
