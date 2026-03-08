@@ -247,6 +247,7 @@ function drawFrequencyRings(ctx, cx, cy, baseR, t) {
 }
 
 function drawNucleus(ctx, cx, cy, t, playing) {
+  if (!cx || !cy) return;
   const pulse = playing ? 1 + Math.sin(t * 4) * 0.15 : 1;
   const r = 14 * pulse;
 
