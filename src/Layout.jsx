@@ -62,7 +62,7 @@ const PUBLIC_PAGES = [
 ];
 
 // OFFLINE-OK PAGES
-const OFFLINE_OK_PAGES = ['NewCleanup', 'Profile', 'Radio', 'FrequencyChamber', 'DecompressionChamber'];
+const OFFLINE_OK_PAGES = ['NewCleanup', 'Profile', 'Radio', 'FrequencyChamber', 'DecompressionChamber', 'AgeReversal'];
 
 // COMPACT MUSIC PLAYER
 const CompactMusicPlayer = () => {
@@ -333,17 +333,17 @@ const LayoutInner = ({ children, currentPageName }) => {
   // === NAVIGATION SECTIONS ===
   // 1. HEAL (most important - immediate value)
   const healNav = [
-    { title: "🕊️ ALL LIFE SIGNAL", url: createPageUrl("LifeSignal"), icon: Globe, highlight: true, description: "One planet. One signal." },
-    { title: "🌍 VISITORS BOOK", url: createPageUrl("VisitorsBook"), icon: Globe, highlight: true, description: "Sign Earth's guestbook" },
+    { title: "🧬 Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
     { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
-    { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, highlight: true, description: "T1D guidance + frequencies" },
-    { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
     { title: "AI51", url: createPageUrl("AI51"), icon: Heart, highlight: true, description: "I know you • I care ♾️❤️" },
+    { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
+    { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, highlight: true, description: "T1D guidance + frequencies" },
+    { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, highlight: true, description: "Frequency stone dissolution" },
     { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
     { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
-    { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, highlight: true, description: "Frequency stone dissolution" },
-    { title: "🧬 Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Harvard × MIT × NASA science" },
+    { title: "🕊️ ALL LIFE SIGNAL", url: createPageUrl("LifeSignal"), icon: Globe, description: "One planet. One signal." },
+    { title: "🌍 VISITORS BOOK", url: createPageUrl("VisitorsBook"), icon: Globe, description: "Sign Earth's guestbook" },
   ];
 
   // 2. EARN & CREATE (practical actions)
