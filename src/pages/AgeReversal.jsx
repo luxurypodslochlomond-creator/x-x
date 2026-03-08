@@ -230,17 +230,17 @@ export default function AgeReversal() {
               <AnimatePresence>
                 {showGeometry && (
                   <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
-                    <div className="px-4 pb-4 space-y-3">
+                    <div className="px-4 pb-4 grid grid-cols-2 gap-2">
                       {[
-                        { shape: "⬡ Hexagonal Tessellation", science: "Most efficient energy distribution in nature. Honeycombs, graphene, snowflakes, carbon rings. DNA cross-section is hexagonal. When 528Hz hits water in cymatics experiments, it creates these exact patterns.", proof: "Hans Jenny, Cymatics (1967) — replicated 2019" },
-                        { shape: "🌸 Flower of Life", science: "Found in Egyptian temples (600 BC), Leonardo da Vinci's notebooks. Contains the blueprint of all Platonic solids. Represents cellular division — the exact process we're stimulating.", proof: "Found globally: Egypt, Assyria, Israel, India, China, Japan" },
-                        { shape: "✡ Metatron's Cube", science: "Contains all 5 Platonic solids — the only 3D shapes where all faces are identical. These are the building blocks of all matter.", proof: "Plato's Timaeus (360 BC) — confirmed in crystal lattice structures" },
-                        { shape: "🔴 Star Tetrahedron", science: "The MER-KA-BA. When two tetrahedra rotate in opposite directions, they create a torus energy field identical to the human heart's electromagnetic field.", proof: "HeartMath Institute — Electromagnetic Field of the Heart (2001)" },
+                        { shape: "⬡ Hexagonal", emoji: "⬡", science: "Most efficient energy in nature. DNA cross-section is hexagonal. 528Hz cymatics creates these exact patterns in water.", proof: "Hans Jenny, Cymatics (1967)" },
+                        { shape: "🌸 Flower of Life", emoji: "🌸", science: "Egyptian temples 600 BC. Da Vinci's notebooks. Blueprint of all Platonic solids. Cellular division geometry.", proof: "Found on 6 continents" },
+                        { shape: "✡ Metatron's Cube", emoji: "✡", science: "Contains all 5 Platonic solids — building blocks of all matter. Found in crystal lattice structures.", proof: "Plato's Timaeus (360 BC)" },
+                        { shape: "🔴 Star Tetrahedron", emoji: "🔴", science: "MER-KA-BA. Two rotating fields = torus energy identical to the human heart's electromagnetic field.", proof: "HeartMath Institute (2001)" },
                       ].map((g, i) => (
-                        <div key={i} className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/10">
-                          <p className="text-purple-300 font-black text-xs mb-1">{g.shape}</p>
-                          <p className="text-gray-300 text-xs leading-relaxed mb-1">{g.science}</p>
-                          <p className="text-gray-600 text-[10px] font-mono">📄 {g.proof}</p>
+                        <div key={i} className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/15 flex flex-col gap-1.5">
+                          <p className="text-purple-300 font-black text-xs">{g.shape}</p>
+                          <p className="text-gray-300 text-[10px] leading-relaxed flex-1">{g.science}</p>
+                          <p className="text-gray-600 text-[9px] font-mono">📄 {g.proof}</p>
                         </div>
                       ))}
                     </div>
