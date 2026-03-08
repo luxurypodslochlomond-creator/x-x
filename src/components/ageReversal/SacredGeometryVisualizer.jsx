@@ -28,6 +28,7 @@ export default function SacredGeometryVisualizer({ playing, activeFreqs = [] }) 
     const draw = () => {
       const W = canvas.offsetWidth;
       const H = canvas.offsetHeight;
+      if (!W || !H) { animRef.current = requestAnimationFrame(draw); return; }
       const cx = W / 2;
       const cy = H / 2;
       const t = timeRef.current;
