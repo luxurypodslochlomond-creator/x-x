@@ -84,7 +84,7 @@
     "@vitest/ui": "^1.0.0",
     "jsdom": "^23.0.0",
     "web-push": "^3.6.7",
-    "@floating-ui/dom": "^1.5.4"
+    "@floating-ui/dom": "^1.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
