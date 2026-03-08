@@ -111,7 +111,7 @@ export default function AgeReversal() {
       <div className="hidden lg:flex min-h-screen overflow-hidden">
 
         {/* LEFT COLUMN — Full-height visualizer + player */}
-        <div className="sticky top-0 flex-shrink-0 w-[45%] h-screen flex flex-col" style={{ background: 'radial-gradient(ellipse at center, #060a1e 0%, #000 100%)' }}>
+        <div className="sticky top-0 flex-shrink-0 w-[52%] h-screen flex flex-col" style={{ background: 'radial-gradient(ellipse at center, #060a1e 0%, #000 100%)' }}>
           {/* Full visualizer */}
           <div className="flex-1 relative">
             <SacredGeometryVisualizer playing={playing} />
