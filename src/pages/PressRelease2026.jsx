@@ -67,6 +67,10 @@ export default function PressRelease2026() {
           </p>
 
           <p>
+            That last point deserves more attention than it typically receives. In an era where AI companies openly acknowledge training on user conversations, harvesting behavioural signals, and building profiles that follow people across the internet, UF51's zero-extraction model is not a feature — it is the architecture. Conversations with AI51 are stored locally on the user's own device. The platform has no financial incentive to monetise attention, because it has no advertising model. Users own their data, full stop. For many people — particularly in communities where digital distrust runs high — this is the difference between a tool they will actually use and one they won't.
+          </p>
+
+          <p>
             "We built the anti-algorithm," says the platform's founder. "Every other AI is designed to keep you on a screen. Ours tells you to go outside."
           </p>
 
