@@ -89,6 +89,28 @@ const SACRED_SITES = [
     lat: 19.6924,
     lng: -98.8439,
     frequency: 639,
+    frequencyName: 'Empathy & Connection Frequency',
+    frequencyScience: 'The geometric layout encodes 639 Hz. Associated with heart coherence and compassion amplification.',
+    unlockThreshold: 100,
+    history: 'Built circa 100-450 CE with urban planning that matches sacred geometry ratios. The Pyramid of the Sun is aligned to Venus.',
+    historicalSource: 'Dr. Linda Manzanilla (National Autonomous University of Mexico), Teotihuacán Research Project',
+    unlockedKnowledge: [
+      {
+        title: 'Geometric Precision',
+        content: 'The city layout encodes 639 Hz — the frequency of connection and unity consciousness. Street ratios match the Flower of Life.',
+        source: 'Sacred Geometry Analysis'
+      },
+      {
+        title: 'Acoustic Amplification',
+        content: 'The pyramids create standing wave patterns. Sound studies show resonance that synchronizes human brainwaves.',
+        source: 'Acoustic Engineering Study'
+      },
+      {
+        title: 'Global Network',
+        content: 'Teotihuacán, Giza, and Stonehenge form a near-perfect equilateral triangle spanning 12,000 miles.'
+      }
+    ],
+    harmonicConnections: ['Giza', 'Stonehenge', 'Machu Picchu'],
     unlocksAt: [100, 500, 1000],
     knowledge: {
       100: { title: 'The Third Eye Frequency', content: 'Pyramid of the Sun aligned to Venus. The site\'s geometry encodes 639 Hz — the frequency associated with empathy and connection.' },
