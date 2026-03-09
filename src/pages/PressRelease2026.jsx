@@ -31,7 +31,7 @@ export default function PressRelease2026() {
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-green-500 flex items-center justify-center text-white font-black text-sm">UF</div>
           <div>
             <p className="font-bold text-gray-900 text-sm">Universal Frequency 51</p>
-            <p className="text-gray-400 text-xs">Glasgow, Scotland · March 2026</p>
+            <p className="text-gray-400 text-xs">Loch Lomond, Scotland · March 2026</p>
           </div>
         </div>
 
