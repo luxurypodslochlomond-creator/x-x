@@ -204,17 +204,18 @@ export default function AgeReversal() {
         </div>
       </div>
 
-      {/* DEEP DIVE PANEL — slides in below the full-screen geometry on desktop */}
+      {/* DEEP DIVE PANEL — fixed bottom slide-up drawer on desktop */}
       <AnimatePresence>
         {showDeepDive && (
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            transition={{ type: 'spring', damping: 24, stiffness: 200 }}
-            className="hidden lg:block relative z-10 bg-black border-t border-white/10"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+            className="hidden lg:block fixed bottom-0 z-50 overflow-y-auto"
+            style={{ left: '320px', right: 0, maxHeight: '70vh', background: 'rgba(4,4,12,0.97)', backdropFilter: 'blur(30px)', borderTop: '1px solid rgba(139,92,246,0.3)' }}
           >
-            <div className="max-w-6xl mx-auto px-8 py-10 space-y-6">
+            <div className="max-w-6xl mx-auto px-8 py-8 space-y-6">
 
               {/* SINCLAIR QUOTE */}
               <div className="relative overflow-hidden rounded-2xl border border-cyan-500/20 p-6" style={{ background: 'rgba(5,5,8,0.9)', backdropFilter: 'blur(20px)' }}>
