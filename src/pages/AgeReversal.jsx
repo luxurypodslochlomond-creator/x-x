@@ -705,8 +705,8 @@ export default function AgeReversal() {
           UF51 AGE REVERSAL PROTOCOL • FREE FOREVER<br/>
           COMPLEMENTARY WELLNESS — NOT A SUBSTITUTE FOR MEDICAL ADVICE
         </p>
-      </div>{/* end content */}
-      </div>{/* end desktop wrapper */}
+      </div>
+      </div>
 
     </div>
   );
