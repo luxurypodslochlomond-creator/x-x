@@ -59,7 +59,7 @@ export default function PressRelease2026() {
           <h2 className="text-2xl font-black text-gray-900 mt-10 mb-4">A different kind of AI — built in Scotland, runs without servers</h2>
 
           <p>
-            Universal Frequency 51 (UF51) is a platform that, on first encounter, sounds almost too good to be true: an AI companion that runs across peer-to-peer mesh networks — requiring no centralised data centre — that pays users in a regenerative currency called GMT (Green Movement Tokens) for real-world environmental action, specifically litter collection and community cleanup.
+            Universal Frequency 51 (UF51) is a platform that, on first encounter, sounds almost too good to be true: an AI companion that runs across peer-to-peer mesh networks — requiring no centralised data centre — that pays users in $P51 (PHOTO51) — a regenerative currency — for real-world environmental action, specifically litter collection and community cleanup.
           </p>
 
           <p>
