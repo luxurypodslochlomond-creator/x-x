@@ -707,7 +707,5 @@ export default function AgeReversal() {
         </p>
       </div>
       </div>
-
-    </div>
   );
 }
