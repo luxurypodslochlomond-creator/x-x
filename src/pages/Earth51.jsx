@@ -460,9 +460,9 @@ export default function Earth51() {
         </div>
 
         <div className="max-w-xl mx-auto space-y-4 pt-20 p-3 pb-24">
-          {/* PHOTO PREVIEW */}
-          <div className="border-4 border-green-500 overflow-hidden" style={{ boxShadow: '4px 4px 0px #000' }}>
-            <img src={photoUrl} alt="Cleanup" className="w-full h-48 object-cover" />
+          {/* PHOTO PREVIEW - CRYSTAL CLEAR */}
+          <div className="border-4 border-green-500 overflow-hidden bg-black" style={{ boxShadow: '4px 4px 0px #000', aspectRatio: '4/3' }}>
+            <img src={photoUrl} alt="Cleanup" className="w-full h-full object-contain" />
           </div>
 
           {/* PRIVACY-FIRST ENGINE - 2026 GOLD STANDARD */}
