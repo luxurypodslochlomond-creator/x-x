@@ -69,36 +69,52 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
         ctx.stroke();
       }
 
-      // Sites with pulsing halos
-      sites.forEach(site => {
+      // Sites with pulsing halos + frequency visualization
+      sites.forEach((site, idx) => {
         const latRad = (site.lat * Math.PI) / 180;
         const lngRad = (site.lng * Math.PI) / 180;
         const x = cx + radius * Math.cos(latRad) * Math.cos(lngRad);
         const y = cy + radius * Math.sin(latRad);
 
-        // Halo
-        const haloSize = 25 + Math.sin(time + site.id.length) * 8;
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, haloSize);
-        gradient.addColorStop(0, 'rgba(34, 211, 238, 0.4)');
-        gradient.addColorStop(0.7, 'rgba(34, 211, 238, 0.1)');
+        // Multi-layer quantum halo
+        const pulse1 = 35 + Math.sin(time * 1.2 + idx) * 12;
+        const pulse2 = 50 + Math.sin(time * 0.8 + idx + 2) * 15;
+        
+        // Outer quantum ring
+        const grad2 = ctx.createRadialGradient(x, y, 0, x, y, pulse2);
+        grad2.addColorStop(0, 'rgba(6, 182, 212, 0.1)');
+        grad2.addColorStop(0.5, 'rgba(16, 185, 129, 0.15)');
+        grad2.addColorStop(1, 'rgba(6, 182, 212, 0)');
+        ctx.fillStyle = grad2;
+        ctx.beginPath();
+        ctx.arc(x, y, pulse2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Inner halo
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, pulse1);
+        gradient.addColorStop(0, 'rgba(34, 211, 238, 0.6)');
+        gradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.3)');
         gradient.addColorStop(1, 'rgba(34, 211, 238, 0)');
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(x, y, haloSize, 0, Math.PI * 2);
+        ctx.arc(x, y, pulse1, 0, Math.PI * 2);
         ctx.fill();
 
-        // Dot
+        // Core dot with frequency glow
+        const freqGlow = 8 + Math.sin(time * 2 + idx) * 2;
+        ctx.shadowColor = `hsl(${site.frequency / 2}, 100%, 50%)`;
+        ctx.shadowBlur = freqGlow;
         ctx.fillStyle = '#22d3ee';
         ctx.beginPath();
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
         ctx.fill();
-
-        // Glow
-        ctx.shadowColor = 'rgba(34, 211, 238, 0.8)';
-        ctx.shadowBlur = 15;
-        ctx.fillStyle = '#22d3ee';
+        
+        // Inner spark
+        ctx.shadowColor = 'rgba(236, 72, 153, 0.8)';
+        ctx.shadowBlur = 8;
+        ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
       });
