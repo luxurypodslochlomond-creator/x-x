@@ -126,15 +126,18 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
         ctx.arc(x, y, pulse1, 0, Math.PI * 2);
         ctx.fill();
 
-        // Core dot with frequency-responsive vibration
-        const freqVibration = Math.sin(time * (site.frequency / 100)) * 1.5;
-        const freqGlow = 8 + Math.sin(time * (site.frequency / 200)) * 3;
-        ctx.shadowColor = `hsl(${(site.frequency / 10) % 360}, 100%, 50%)`;
-        ctx.shadowBlur = freqGlow;
-        ctx.fillStyle = '#22d3ee';
-        ctx.beginPath();
-        ctx.arc(x + freqVibration, y + freqVibration, 6, 0, Math.PI * 2);
-        ctx.fill();
+        // Store position for click detection
+         sitePositionsRef.current[site.id] = { x, y };
+
+         // Core dot with frequency-responsive vibration
+         const freqVibration = Math.sin(time * (site.frequency / 100)) * 1.5;
+         const freqGlow = 8 + Math.sin(time * (site.frequency / 200)) * 3;
+         ctx.shadowColor = `hsl(${(site.frequency / 10) % 360}, 100%, 50%)`;
+         ctx.shadowBlur = freqGlow;
+         ctx.fillStyle = '#22d3ee';
+         ctx.beginPath();
+         ctx.arc(x + freqVibration, y + freqVibration, 6, 0, Math.PI * 2);
+         ctx.fill();
         
         // Inner spark — resonance indicator
         const resonance = Math.sin(time * (site.frequency / 50));
