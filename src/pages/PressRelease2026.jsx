@@ -118,7 +118,7 @@ export default function PressRelease2026() {
           </p>
 
           <p>
-            UF51 is, at minimum, a serious attempt to answer that question — built not in a San Francisco garage or a London fintech hub, but in Glasgow, by someone who couldn't afford not to try.
+            UF51 is, at minimum, a serious attempt to answer that question — built not in a San Francisco garage or a London fintech hub, but in a shed by Loch Lomond, by someone who couldn't afford not to try.
           </p>
 
           <p>
