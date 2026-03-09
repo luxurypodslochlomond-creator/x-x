@@ -181,7 +181,7 @@ export default function AgeReversal() {
             </div>
           </div>
         </div>
-      </div>
+
         {/* DEEP DIVE TRIGGER — bottom centre, always visible */}
         <div className="absolute bottom-8 left-0 right-0 flex justify-center z-20">
           <motion.button
