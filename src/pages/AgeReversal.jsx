@@ -89,6 +89,7 @@ export default function AgeReversal() {
   const [showConditions, setShowConditions] = useState(false);
   const [showEthics, setShowEthics] = useState(false);
   const [showGeometry, setShowGeometry] = useState(false);
+  const [showDeepDive, setShowDeepDive] = useState(false);
   const timerRef = useRef(null);
   const { start, stop } = useFrequencyEngine();
 
