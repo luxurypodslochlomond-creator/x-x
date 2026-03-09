@@ -191,8 +191,8 @@ export default function AgeReversal() {
           </div>
         </div>
 
-        {/* CONTENT — full width, 2-col grid below the hero */}
-        <div className="max-w-6xl mx-auto px-8 py-10 space-y-6" style={{ background: '#050508' }}>
+        {/* CONTENT — geometry visible behind glass cards */}
+        <div className="relative z-10 max-w-6xl mx-auto px-8 py-10 space-y-6">
 
           {/* SINCLAIR QUOTE */}
           <div className="relative overflow-hidden rounded-2xl border border-cyan-500/20 p-6" style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.08), rgba(139,92,246,0.08))' }}>
