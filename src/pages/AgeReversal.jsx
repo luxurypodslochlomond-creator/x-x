@@ -409,7 +409,7 @@ export default function AgeReversal() {
         )}
       </AnimatePresence>
 
-      {/* Spacer so mobile layout doesn't collapse under the fixed desktop block */}
+      {/* Spacer for desktop fixed geometry block */}
       <div className="hidden lg:block" style={{ height: '100vh' }} />
 
       {/* MOBILE: Original single-column layout */}
