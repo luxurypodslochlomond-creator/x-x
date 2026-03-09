@@ -109,6 +109,7 @@ export default function AxiomStoneNetwork() {
   const [unlockedKnowledge, setUnlockedKnowledge] = useState({});
   const [selectedSite, setSelectedSite] = useState(null);
   const [activeTab, setActiveTab] = useState('map');
+  const [showSiteDetail, setShowSiteDetail] = useState(false);
 
   // Fetch active user count for resonance
   useEffect(() => {
