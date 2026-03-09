@@ -208,36 +208,14 @@ export default function AxiomStoneNetwork() {
         <AnimatePresence mode="wait">
 
           {/* MAP TAB */}
-          {activeTab === 'map' && (
-            <motion.div key="map" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-              <AxiomSiteMap sites={SACRED_SITES} onSelectSite={setSelectedSite} />
-              {selectedSite && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-6 p-6 rounded-2xl border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-md"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-1">{selectedSite.name}</h3>
-                      <p className="text-white/60 text-sm mb-4">{selectedSite.location}</p>
-                      <div className="flex items-center gap-2">
-                        <Zap className="w-4 h-4 text-green-400" />
-                        <span className="text-sm text-white/70">Resonance Frequency: <span className="font-bold text-green-400">{selectedSite.frequency} Hz</span></span>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => setActiveTab('knowledge')}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 transition-all"
-                    >
-                      View Knowledge
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </motion.div>
-          )}
+           {activeTab === 'map' && (
+             <motion.div key="map" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+               <AxiomSiteMap sites={SACRED_SITES} onSelectSite={(site) => {
+                 setSelectedSite(site);
+                 setShowSiteDetail(true);
+               }} />
+             </motion.div>
+           )}
 
           {/* KNOWLEDGE TAB */}
           {activeTab === 'knowledge' && (
