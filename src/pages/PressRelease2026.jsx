@@ -63,7 +63,7 @@ export default function PressRelease2026() {
           </p>
 
           <p>
-            The technical architecture alone is worth examination. Where conventional AI products rely on energy-intensive server farms, UF51's AI51 model distributes processing across users' own devices, using idle computing capacity that already exists. It functions offline. It works in areas without internet connectivity. And unlike virtually every other AI product currently on the market, it is designed from the ground up to give users sovereignty over their own data — no extraction, no profiling, no advertising.
+            The technical architecture alone is worth examination. Where conventional AI products rely on energy-intensive server farms, UF51 is built with a roadmap toward distributed, on-device processing — with core features including healing frequencies and local memory already running entirely on the user's own device, requiring no server at all. It functions offline. It works in areas without internet connectivity. And unlike virtually every other AI product currently on the market, it is designed from the ground up to give users sovereignty over their own data — no extraction, no profiling, no advertising.
           </p>
 
           <p>
