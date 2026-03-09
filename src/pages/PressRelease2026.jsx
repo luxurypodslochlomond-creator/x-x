@@ -104,7 +104,7 @@ export default function PressRelease2026() {
           </p>
 
           <p>
-            The platform is currently seeking community investment and grant funding — including applications to Creative Scotland — to sustain development. It has no external investors, no advertising revenue, and no subscription fees.
+            Registered as a Community Interest Company (CIC) in Scotland in November 2025, UF51 is structured by design to prevent the kind of institutional capture that has seen so many "ethical tech" ventures quietly absorbed into the very systems they claimed to challenge. The platform is currently seeking community investment and impact funding to sustain development. It has no external investors, no advertising revenue, and no subscription fees.
           </p>
 
           <h2 className="text-2xl font-black text-gray-900 mt-10 mb-4">The question the industry should be asking</h2>
