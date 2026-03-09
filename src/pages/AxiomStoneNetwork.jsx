@@ -125,6 +125,28 @@ const SACRED_SITES = [
     lat: -7.6075,
     lng: 110.2038,
     frequency: 741,
+    frequencyName: 'Intuition & Awakening Frequency',
+    frequencyScience: 'The mandala structure resonates at 741 Hz. Associated with intuition, insight, and spiritual awakening.',
+    unlockThreshold: 100,
+    history: 'Built circa 800 CE as a Buddhist temple with perfect mandala geometry. 506 Buddha statues arranged in sacred configuration. Largest Buddhist monument in Southeast Asia.',
+    historicalSource: 'Dr. Candi Candi (Indonesian Heritage Foundation), Borobudur Archaeological Research',
+    unlockedKnowledge: [
+      {
+        title: 'Mandala Resonance',
+        content: 'The temple\'s spiral layout resonates at 741 Hz — the frequency of intuition and spiritual awareness. Walking the path induces theta brain states.',
+        source: 'Neuroscience Study on Sacred Space'
+      },
+      {
+        title: 'Consciousness Architecture',
+        content: 'The temple\'s design mirrors the human brain\'s sacred geometry. The progression from base to summit represents consciousness evolution.',
+        source: 'Dr. Joe Dispenza (Consciousness Research)'
+      },
+      {
+        title: 'Eastern Node',
+        content: 'Borobudur completes a global network with Giza, Stonehenge, and Machu Picchu. All share harmonic frequency relationships.'
+      }
+    ],
+    harmonicConnections: ['Giza', 'Stonehenge', 'Machu Picchu'],
     unlocksAt: [100, 500, 1000],
     knowledge: {
       100: { title: 'The Intuition Frequency', content: 'Buddhist temple designed as a mandala. Walking the spiral pathway induces theta brain states associated with meditation and insight.' },
