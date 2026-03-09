@@ -136,7 +136,7 @@ export default function AgeReversal() {
             </motion.div>
 
             {/* Player controls inline */}
-            <div className="flex items-center gap-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-4">
+            <div className="flex items-center gap-6 bg-black/40 backdrop-blur-2xl border border-white/15 rounded-2xl px-8 py-4">
               {/* Mode toggle */}
               <div className="flex border border-white/10 rounded-xl overflow-hidden">
                 <button onClick={() => { if (!playing) setHeadphones(false); }}
