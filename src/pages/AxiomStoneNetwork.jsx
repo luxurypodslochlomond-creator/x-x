@@ -7,6 +7,7 @@ import { base44 } from '@/api/base44Client';
 import AxiomSiteMap from '@/components/axiom/AxiomSiteMap';
 import AxiomResonanceMeter from '@/components/axiom/AxiomResonanceMeter';
 import AxiomKnowledgeCard from '@/components/axiom/AxiomKnowledgeCard';
+import AxiomSiteDetail from '@/components/axiom/AxiomSiteDetail';
 
 const SACRED_SITES = [
   {
