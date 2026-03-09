@@ -192,8 +192,11 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
     };
 
     draw();
-    return () => cancelAnimationFrame(animId);
-  }, [sites]);
+    return () => {
+      cancelAnimationFrame(animId);
+      canvas.removeEventListener('click', handleCanvasClick);
+    };
+  }, [sites, onSelectSite]);
 
   return (
     <div className="space-y-4">
