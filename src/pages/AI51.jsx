@@ -590,15 +590,21 @@ export default function AI51() {
     const lang = detectedLang || navigator.language || 'en-GB';
     const langCode = lang.split('-')[0];
 
-    // AI51's VOICE — warm, calm, slightly slower than a news reader
+    // AI51's VOICE — warm British male. Daniel or Rishi on iOS. Never Australian.
     const getVoice = () => {
       const voices = synthRef.current.getVoices();
       if (!voices.length) return null;
-      const local = voices.find(v => v.localService === true && v.lang.startsWith(langCode));
-      if (local) return local;
-      const anyLocal = voices.find(v => v.localService === true);
-      if (anyLocal) return anyLocal;
-      return voices.find(v => v.lang.startsWith(langCode)) || voices[0] || null;
+      // Prefer named British male voices
+      const preferred = ['Daniel', 'Rishi', 'Arthur'];
+      for (const name of preferred) {
+        const v = voices.find(v => v.name.includes(name));
+        if (v) return v;
+      }
+      // Fallback: en-GB male
+      const enGBMale = voices.find(v => v.lang === 'en-GB');
+      if (enGBMale) return enGBMale;
+      // Last resort: any en
+      return voices.find(v => v.lang.startsWith('en')) || voices[0] || null;
     };
 
     const speakChunks = (chunks) => {
