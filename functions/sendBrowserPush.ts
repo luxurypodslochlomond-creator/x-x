@@ -70,6 +70,7 @@ Deno.serve(async (req) => {
     }
 
     // 2. Build payload
+    const isGigNotification = !!gig_offer_id;
     const payload = JSON.stringify({
       title,
       body: message,
@@ -78,12 +79,17 @@ Deno.serve(async (req) => {
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
-        gig_offer_id,
+        gigOfferId: gig_offer_id,  // camelCase to match SW handler
         timestamp: new Date().toISOString(),
         url: '/CB51'
       },
       requireInteraction: true,
-      vibrate: [200, 100, 200]
+      vibrate: [200, 100, 200],
+      // Include approve/reject actions for gig offer notifications
+      actions: isGigNotification ? [
+        { action: 'approve', title: '✅ Yes' },
+        { action: 'reject', title: '❌ No' }
+      ] : []
     });
 
     // 3. Send to each subscribed device in parallel

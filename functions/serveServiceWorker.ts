@@ -122,7 +122,7 @@ self.addEventListener('notificationclick', (event) => {
   }
 
   // Default click - open URL
-  const urlToOpen = event.notification.data?.url || '/app/CB51';
+  const urlToOpen = event.notification.data?.url || '/CB51';
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
