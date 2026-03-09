@@ -4,6 +4,7 @@ import { MapPin, Zap } from 'lucide-react';
 
 export default function AxiomSiteMap({ sites, onSelectSite }) {
   const canvasRef = useRef(null);
+  const sitePositionsRef = useRef({});
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,6 +18,26 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
     
     // Earth rotation: 360° per 86400 seconds (24h), sped up for visual effect
     const earthRotationSpeed = (360 / 86400) * 100; // 100x speed for vibe
+
+    // Handle canvas clicks
+    const handleCanvasClick = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const clickY = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+      // Check if click is near any site (tolerance: 30px)
+      const tolerance = 30;
+      for (const [siteId, pos] of Object.entries(sitePositionsRef.current)) {
+        const dist = Math.hypot(clickX - pos.x, clickY - pos.y);
+        if (dist < tolerance) {
+          const site = sites.find(s => s.id === siteId);
+          if (site) onSelectSite(site);
+          return;
+        }
+      }
+    };
+
+    canvas.addEventListener('click', handleCanvasClick);
 
     const draw = () => {
       time += 0.01;
