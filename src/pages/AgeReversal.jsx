@@ -189,6 +189,7 @@ export default function AgeReversal() {
               </div>
             </div>
           </div>
+          </div>
         </div>{/* end hero */}
 
         {/* CONTENT — geometry visible behind glass cards */}
