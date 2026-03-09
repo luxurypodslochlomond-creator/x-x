@@ -107,16 +107,19 @@ export default function AgeReversal() {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
-      {/* DESKTOP: Full-width hero + content below */}
-      <div className="hidden lg:block">
+      {/* DESKTOP: Geometry always visible as background, content overlaid */}
+      <div className="hidden lg:block relative min-h-screen">
 
-        {/* HERO — full width visualizer with overlay content */}
-        <div className="relative w-full" style={{ height: 520 }}>
-          <div className="absolute inset-0">
-            <SacredGeometryVisualizer playing={playing} />
-          </div>
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%)' }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
+        {/* GEOMETRY — fixed full-screen background, always visible */}
+        <div className="fixed inset-0 z-0" style={{ left: '320px' }}>
+          <SacredGeometryVisualizer playing={playing} />
+          {/* Very subtle dark veil so text is readable but geometry shines through */}
+          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.45)' }} />
+        </div>
+
+        {/* HERO overlay content */}
+        <div className="relative z-10 w-full" style={{ minHeight: 420 }}>
+          <div className="h-full flex flex-col items-center justify-center gap-6 pt-16 pb-8">
 
           {/* Centered overlay: title + player */}
           <div className="relative z-10 h-full flex flex-col items-center justify-center gap-6">
