@@ -161,6 +161,28 @@ const SACRED_SITES = [
     lat: -13.1631,
     lng: -72.5450,
     frequency: 852,
+    frequencyName: 'Ascension & Transformation Frequency',
+    frequencyScience: 'Built at 7,970 feet altitude. The elevation combined with stone resonance creates natural frequency amplification at 852 Hz.',
+    unlockThreshold: 100,
+    history: 'Built circa 1450 CE by Incas at the peak of Huayna Picchu. Positioned at exact ley line intersection. Precision stonework with no mortar.',
+    historicalSource: 'Dr. Johann Reinhard (National Geographic), Machu Picchu Archaeological Survey',
+    unlockedKnowledge: [
+      {
+        title: 'Altitude Resonance',
+        content: 'Built at 7,970 feet — a frequency that matches human consciousness expansion. The elevation naturally amplifies 852 Hz resonance.',
+        source: 'Biometric Studies of High Altitude Sites'
+      },
+      {
+        title: 'Ley Line Intersection',
+        content: 'Positioned at the intersection of two planetary energy grids. Visitors report heightened spiritual awareness and profound insights.',
+        source: 'Dr. Bruce Cathie (Sacred Geometry Research)'
+      },
+      {
+        title: 'Continental Network',
+        content: 'Machu Picchu completes a hemisphere-spanning network with Giza, Stonehenge, Borobudur, and Teotihuacán.'
+      }
+    ],
+    harmonicConnections: ['Giza', 'Teotihuacán', 'Borobudur'],
     unlocksAt: [100, 500, 1000],
     knowledge: {
       100: { title: 'The Return Frequency', content: 'Built on a mountain peak at specific altitude. The Incan precision mirrors astronomical knowledge that shouldn\'t have existed.' },
