@@ -105,21 +105,23 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
         ctx.arc(x, y, pulse1, 0, Math.PI * 2);
         ctx.fill();
 
-        // Core dot with frequency glow
-        const freqGlow = 8 + Math.sin(time * 2 + idx) * 2;
-        ctx.shadowColor = `hsl(${site.frequency / 2}, 100%, 50%)`;
+        // Core dot with frequency-responsive vibration
+        const freqVibration = Math.sin(time * (site.frequency / 100)) * 1.5;
+        const freqGlow = 8 + Math.sin(time * (site.frequency / 200)) * 3;
+        ctx.shadowColor = `hsl(${(site.frequency / 10) % 360}, 100%, 50%)`;
         ctx.shadowBlur = freqGlow;
         ctx.fillStyle = '#22d3ee';
         ctx.beginPath();
-        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.arc(x + freqVibration, y + freqVibration, 6, 0, Math.PI * 2);
         ctx.fill();
         
-        // Inner spark
-        ctx.shadowColor = 'rgba(236, 72, 153, 0.8)';
-        ctx.shadowBlur = 8;
+        // Inner spark — resonance indicator
+        const resonance = Math.sin(time * (site.frequency / 50));
+        ctx.shadowColor = resonance > 0 ? 'rgba(236, 72, 153, 0.8)' : 'rgba(16, 185, 129, 0.8)';
+        ctx.shadowBlur = Math.abs(resonance) * 12;
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.arc(x, y, 2, 0, Math.PI * 2);
+        ctx.arc(x, y, 2 + Math.abs(resonance) * 1, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
       });
