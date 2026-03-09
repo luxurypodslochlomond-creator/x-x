@@ -132,7 +132,7 @@ export default function PressRelease2026() {
               <p><strong>Platform:</strong> <a href="https://uf51.love" className="text-blue-600 underline">uf51.love</a></p>
               <p><strong>Funder brief:</strong> <a href={`${window.location.origin}/FunderBrief`} className="text-blue-600 underline">uf51.love/FunderBrief</a></p>
               <p><strong>Technical whitepaper:</strong> <a href={`${window.location.origin}/Whitepaper`} className="text-blue-600 underline">uf51.love/Whitepaper</a></p>
-              <p><strong>Contact:</strong> Available on request via the platform</p>
+              <p><strong>Contact:</strong> <a href="mailto:family@uf51.love" className="text-blue-600 underline">family@uf51.love</a></p>
               <p className="mt-4 text-xs text-gray-400">Images, founder interview and technical briefing available on request. This piece is offered for editorial use without restriction.</p>
             </div>
           </div>
