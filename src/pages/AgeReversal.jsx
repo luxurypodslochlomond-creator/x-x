@@ -195,7 +195,7 @@ export default function AgeReversal() {
         <div className="relative z-10 max-w-6xl mx-auto px-8 py-10 space-y-6">
 
           {/* SINCLAIR QUOTE */}
-          <div className="relative overflow-hidden rounded-2xl border border-cyan-500/20 p-6" style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.08), rgba(139,92,246,0.08))' }}>
+          <div className="relative overflow-hidden rounded-2xl border border-cyan-500/20 p-6" style={{ background: 'rgba(5,5,8,0.7)', backdropFilter: 'blur(20px)' }}>
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-purple-500 rounded-l-2xl" />
             <p className="text-cyan-300 text-xs font-black font-mono mb-2 tracking-wider">🔬 DR. DAVID SINCLAIR — HARVARD MEDICAL SCHOOL</p>
             <p className="text-white text-base leading-relaxed">"Aging is a loss of <strong>epigenetic information</strong>. The DNA is like a CD that's been scratched. The information is still there — we just need to <strong>polish the reader</strong>."</p>
