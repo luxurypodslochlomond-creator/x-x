@@ -75,7 +75,9 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
       // Sites with pulsing halos + frequency visualization
       sites.forEach((site, idx) => {
         const latRad = (site.lat * Math.PI) / 180;
-        const lngRad = (site.lng * Math.PI) / 180;
+        // Apply Earth rotation to longitude
+        const rotatedLng = site.lng + (time * earthRotationSpeed);
+        const lngRad = (rotatedLng * Math.PI) / 180;
         const x = cx + radius * Math.cos(latRad) * Math.cos(lngRad);
         const y = cy + radius * Math.sin(latRad);
 
