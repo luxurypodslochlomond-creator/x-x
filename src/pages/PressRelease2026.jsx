@@ -11,7 +11,7 @@ export default function PressRelease2026() {
 
         {/* Press note - only visible to recipient */}
         <div className="mb-10 p-4 border-l-4 border-blue-500 bg-blue-50 text-blue-800 text-sm rounded-r-lg">
-          <strong>Editorial note:</strong> This piece is offered as a contributed article or news feature, free for use. Contact: <a href="mailto:bro51@uf51.love" className="underline">bro51@uf51.love</a>
+          <strong>Editorial note:</strong> This piece is offered as a contributed article or news feature, free for use. Contact: <a href="mailto:family@uf51.love" className="underline">family@uf51.love</a>
         </div>
 
         {/* Category tag */}

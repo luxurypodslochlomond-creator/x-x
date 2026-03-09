@@ -260,6 +260,7 @@ import PetSounds51Enterprise from './pages/PetSounds51Enterprise';
 import PetSounds51StripeSetup from './pages/PetSounds51StripeSetup';
 import PetSounds51Terms from './pages/PetSounds51Terms';
 import Playlists from './pages/Playlists';
+import PressRelease2026 from './pages/PressRelease2026';
 import PrivacyMathematics from './pages/PrivacyMathematics';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ProductionReady from './pages/ProductionReady';
@@ -387,9 +388,9 @@ import UniversalSoulContract from './pages/UniversalSoulContract';
 import UniversalWallet from './pages/UniversalWallet';
 import UnstoppableArchitecture from './pages/UnstoppableArchitecture';
 import UnstoppableProtocol from './pages/UnstoppableProtocol';
-import Volckano from './pages/Volckano';
 import ViralTransmission from './pages/ViralTransmission';
 import VisitorsBook from './pages/VisitorsBook';
+import Volckano from './pages/Volckano';
 import WallOfLove from './pages/WallOfLove';
 import WalletDemo from './pages/WalletDemo';
 import Welcome from './pages/Welcome';
@@ -403,7 +404,6 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import PressRelease2026 from './pages/PressRelease2026';
 import __Layout from './Layout.jsx';
 
 
@@ -621,6 +621,7 @@ export const PAGES = {
     "PetSounds51StripeSetup": PetSounds51StripeSetup,
     "PetSounds51Terms": PetSounds51Terms,
     "Playlists": Playlists,
+    "PressRelease2026": PressRelease2026,
     "PrivacyMathematics": PrivacyMathematics,
     "PrivacyPolicy": PrivacyPolicy,
     "ProductionReady": ProductionReady,
@@ -748,9 +749,9 @@ export const PAGES = {
     "UniversalWallet": UniversalWallet,
     "UnstoppableArchitecture": UnstoppableArchitecture,
     "UnstoppableProtocol": UnstoppableProtocol,
-    "Volckano": Volckano,
     "ViralTransmission": ViralTransmission,
     "VisitorsBook": VisitorsBook,
+    "Volckano": Volckano,
     "WallOfLove": WallOfLove,
     "WalletDemo": WalletDemo,
     "Welcome": Welcome,
@@ -764,7 +765,6 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "PressRelease2026": PressRelease2026,
 }
 
 export const pagesConfig = {
