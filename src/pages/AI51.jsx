@@ -339,12 +339,7 @@ export default function AI51() {
           setCurrentUser(user);
           const first = user.full_name?.split(' ')[0] || '';
           setFirstName(first);
-          // Detect BRO51 — Scott / Brian Hughes, the founder
-          const email = (user.email || '').toLowerCase();
-          const name = (user.full_name || '').toLowerCase();
-          const isBro = email.includes('brian') || email.includes('scott') || email.includes('hughes') ||
-                        name.includes('brian') || name.includes('scott') || name.includes('bro51');
-          setIsBRO51(isBro);
+          setIsBRO51(false); // Disable BRO51 detection
         } else {
           setFirstName('');
           setIsBRO51(false);
