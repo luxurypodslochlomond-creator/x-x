@@ -111,7 +111,7 @@ export default function AgeReversal() {
       {/* DESKTOP: Full-screen geometry with title + player floating over it. That's it. */}
       <div className="hidden lg:block fixed inset-0" style={{ left: '320px', zIndex: 1 }}>
         <SacredGeometryVisualizer playing={playing} />
-        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.3)' }} />
+        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.1)' }} />
 
         {/* Centred overlay: title + player only */}
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-8 z-10">
