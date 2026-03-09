@@ -329,6 +329,13 @@ export default function AxiomStoneNetwork() {
           <p>Your healing makes this real — not through proof, but through presence</p>
         </div>
       </div>
+
+      {/* SITE DETAIL MODAL */}
+      <AxiomSiteDetail
+        site={selectedSite}
+        globalResonance={resonanceLevel}
+        onClose={() => setShowSiteDetail(false)}
+      />
     </div>
   );
 }
