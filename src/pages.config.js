@@ -403,6 +403,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import PressRelease2026 from './pages/PressRelease2026';
 import __Layout from './Layout.jsx';
 
 
@@ -763,6 +764,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "PressRelease2026": PressRelease2026,
 }
 
 export const pagesConfig = {
