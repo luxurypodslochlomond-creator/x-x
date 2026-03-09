@@ -107,83 +107,79 @@ export default function AgeReversal() {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
-      {/* DESKTOP: Two-column layout */}
-      <div className="hidden lg:flex min-h-screen overflow-hidden">
+      {/* DESKTOP: Full-width hero + content below */}
+      <div className="hidden lg:block">
 
-        {/* LEFT COLUMN — Full-height visualizer + player */}
-        <div className="sticky top-0 flex-shrink-0 w-[52%] h-screen flex flex-col" style={{ background: 'radial-gradient(ellipse at center, #060a1e 0%, #000 100%)' }}>
-          {/* Full visualizer */}
-          <div className="flex-1 relative">
+        {/* HERO — full width visualizer with overlay content */}
+        <div className="relative w-full" style={{ height: 520 }}>
+          <div className="absolute inset-0">
             <SacredGeometryVisualizer playing={playing} />
-            {/* Subtle vignette */}
-            <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%)' }} />
           </div>
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%)' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
 
-          {/* Player controls pinned to bottom */}
-          <div className="p-6 border-t border-white/5" style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(20px)' }}>
-            {/* Badge */}
-            <div className="flex justify-center mb-4">
-              <div className="inline-flex items-center gap-2 bg-black/60 border border-cyan-500/50 rounded-full px-4 py-1.5 backdrop-blur-sm">
+          {/* Centered overlay: title + player */}
+          <div className="relative z-10 h-full flex flex-col items-center justify-center gap-6">
+            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
+              <div className="inline-flex items-center gap-2 bg-black/60 border border-cyan-500/50 rounded-full px-4 py-1.5 mb-4 backdrop-blur-sm">
                 <Dna className="w-3.5 h-3.5 text-cyan-400" />
                 <span className="text-cyan-400 text-[10px] font-mono font-black tracking-widest">HARVARD × MIT × NASA × DECLASSIFIED</span>
               </div>
-            </div>
+              <h1 className="font-black leading-none mb-2" style={{ fontSize: 'clamp(3.5rem, 7vw, 6rem)' }}>
+                <span className="text-white">AGE</span>{' '}
+                <span style={{ background: 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>REVERSAL</span>
+              </h1>
+              <p className="text-white/40 font-mono text-xs tracking-widest">PROTOCOL v1.0 • 6 stacked frequencies • Free forever</p>
+            </motion.div>
 
-            {/* Mode toggle */}
-            <div className="flex border border-white/10 rounded-xl overflow-hidden mb-4">
-              <button
-                onClick={() => { if (!playing) setHeadphones(false); }}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-black transition-all ${!headphones ? 'bg-cyan-500/15 text-cyan-400' : 'text-gray-600 hover:text-gray-400'}`}
-              >
-                <Speaker className="w-4 h-4" /> SPEAKERS
-              </button>
-              <div className="w-px bg-white/10" />
-              <button
-                onClick={() => { if (!playing) setHeadphones(true); }}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-black transition-all ${headphones ? 'bg-purple-500/15 text-purple-400' : 'text-gray-600 hover:text-gray-400'}`}
-              >
-                <Headphones className="w-4 h-4" /> HEADPHONES
-                {headphones && <span className="text-[9px] text-green-400 font-black bg-green-500/20 px-1.5 py-0.5 rounded">+BINAURAL</span>}
-              </button>
-            </div>
+            {/* Player controls inline */}
+            <div className="flex items-center gap-6 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-4">
+              {/* Mode toggle */}
+              <div className="flex border border-white/10 rounded-xl overflow-hidden">
+                <button onClick={() => { if (!playing) setHeadphones(false); }}
+                  className={`flex items-center gap-2 px-4 py-2.5 text-sm font-black transition-all ${!headphones ? 'bg-cyan-500/15 text-cyan-400' : 'text-gray-600 hover:text-gray-400'}`}>
+                  <Speaker className="w-4 h-4" /> SPEAKERS
+                </button>
+                <div className="w-px bg-white/10" />
+                <button onClick={() => { if (!playing) setHeadphones(true); }}
+                  className={`flex items-center gap-2 px-4 py-2.5 text-sm font-black transition-all ${headphones ? 'bg-purple-500/15 text-purple-400' : 'text-gray-600 hover:text-gray-400'}`}>
+                  <Headphones className="w-4 h-4" /> HEADPHONES
+                  {headphones && <span className="text-[9px] text-green-400 font-black bg-green-500/20 px-1.5 py-0.5 rounded ml-1">+BINAURAL</span>}
+                </button>
+              </div>
 
-            {/* Big play button */}
-            <div className="flex flex-col items-center gap-3">
-              <motion.button
-                onClick={handlePlay}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              {/* Play button */}
+              <motion.button onClick={handlePlay} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 className="flex items-center justify-center rounded-full transition-all"
                 style={{
-                  width: 100, height: 100,
+                  width: 80, height: 80,
                   background: playing ? 'linear-gradient(135deg, #06b6d4, #8b5cf6)' : 'rgba(255,255,255,0.08)',
                   border: `2px solid ${playing ? '#06b6d4' : 'rgba(255,255,255,0.2)'}`,
-                  boxShadow: playing ? '0 0 60px rgba(6,182,212,0.5), 0 0 120px rgba(139,92,246,0.2)' : 'none',
-                }}
-              >
-                {playing ? <Pause className="w-10 h-10 text-white" /> : <Play className="w-10 h-10 text-white ml-1" />}
+                  boxShadow: playing ? '0 0 60px rgba(6,182,212,0.5)' : 'none',
+                }}>
+                {playing ? <Pause className="w-9 h-9 text-white" /> : <Play className="w-9 h-9 text-white ml-1" />}
               </motion.button>
 
-              {playing ? (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
-                  <p className="text-cyan-400 font-mono font-black text-2xl">{fmt(sessionTime)}</p>
-                  <p className="text-white/30 text-[9px] font-mono tracking-widest">ALL 6 FREQUENCIES ACTIVE</p>
-                  {sessionTime >= 600 && <p className="text-green-400 text-xs font-black mt-1">✓ 10 min cellular threshold reached</p>}
-                </motion.div>
-              ) : (
-                <p className="text-white/40 text-xs">20 mins minimum • Daily for best results</p>
-              )}
+              {/* Timer / status */}
+              <div className="text-center min-w-[120px]">
+                {playing ? (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <p className="text-cyan-400 font-mono font-black text-2xl">{fmt(sessionTime)}</p>
+                    <p className="text-white/30 text-[9px] font-mono tracking-widest">ALL 6 ACTIVE</p>
+                    {sessionTime >= 600 && <p className="text-green-400 text-[10px] font-black mt-1">✓ 10 min threshold</p>}
+                  </motion.div>
+                ) : (
+                  <p className="text-white/40 text-xs leading-relaxed">20 mins min<br/>Daily for best results</p>
+                )}
+              </div>
 
               {/* Frequency dots */}
-              <div className="flex items-center justify-center gap-3 mt-1">
+              <div className="flex gap-3">
                 {FREQUENCY_STACK.map((f, i) => (
                   <div key={f.hz} className="flex flex-col items-center gap-1">
-                    <motion.div
-                      className="w-3 h-3 rounded-full"
-                      style={{ backgroundColor: f.color }}
+                    <motion.div className="w-3 h-3 rounded-full" style={{ backgroundColor: f.color }}
                       animate={playing ? { opacity: [0.3, 1, 0.3], scale: [0.8, 1.3, 0.8] } : { opacity: 0.3 }}
-                      transition={{ duration: 1.2, delay: i * 0.2, repeat: Infinity }}
-                    />
+                      transition={{ duration: 1.2, delay: i * 0.2, repeat: Infinity }} />
                     <span className="text-[9px] font-mono text-white/30">{f.hz < 20 ? f.hz : Math.round(f.hz)}Hz</span>
                   </div>
                 ))}
@@ -192,91 +188,44 @@ export default function AgeReversal() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN — Scrollable content */}
-        <div className="flex-1 min-w-0 overflow-y-auto border-l border-white/5" style={{ background: '#050508' }}>
-          <div className="px-6 py-8 space-y-5 max-w-full">
-            {/* Title */}
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-              <h1 className="font-black leading-none mb-2" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-                <span className="text-white">AGE</span>{' '}
-                <span style={{
-                  background: 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
-                }}>REVERSAL</span>
-              </h1>
-              <p className="text-white/40 font-mono text-xs tracking-widest">PROTOCOL v1.0 • 6 stacked frequencies • Free forever</p>
-            </motion.div>
+        {/* CONTENT — full width, 2-col grid below the hero */}
+        <div className="max-w-6xl mx-auto px-8 py-10 space-y-6" style={{ background: '#050508' }}>
 
-            {/* SINCLAIR QUOTE */}
-            <div className="relative overflow-hidden rounded-2xl border border-cyan-500/20 p-5" style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.08), rgba(139,92,246,0.08))' }}>
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-purple-500 rounded-l-2xl" />
-              <p className="text-cyan-300 text-xs font-black font-mono mb-2 tracking-wider">🔬 DR. DAVID SINCLAIR — HARVARD MEDICAL SCHOOL</p>
-              <p className="text-white text-sm leading-relaxed">"Aging is a loss of <strong>epigenetic information</strong>. The DNA is like a CD that's been scratched. The information is still there — we just need to <strong>polish the reader</strong>."</p>
-              <p className="text-gray-600 text-[10px] mt-3 font-mono">Lifespan (2019) • World Governments Summit 2024 • Nature, 2023</p>
-            </div>
+          {/* SINCLAIR QUOTE */}
+          <div className="relative overflow-hidden rounded-2xl border border-cyan-500/20 p-6" style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.08), rgba(139,92,246,0.08))' }}>
+            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-purple-500 rounded-l-2xl" />
+            <p className="text-cyan-300 text-xs font-black font-mono mb-2 tracking-wider">🔬 DR. DAVID SINCLAIR — HARVARD MEDICAL SCHOOL</p>
+            <p className="text-white text-base leading-relaxed">"Aging is a loss of <strong>epigenetic information</strong>. The DNA is like a CD that's been scratched. The information is still there — we just need to <strong>polish the reader</strong>."</p>
+            <p className="text-gray-600 text-[10px] mt-3 font-mono">Lifespan (2019) • World Governments Summit 2024 • Nature, 2023</p>
+          </div>
 
-            {/* SACRED GEOMETRY EXPLAINER */}
-            <div className="rounded-2xl border border-purple-500/20 overflow-hidden" style={{ background: 'rgba(0,0,0,0.6)' }}>
-              <button onClick={() => setShowGeometry(!showGeometry)} className="w-full p-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-purple-400" />
-                  <div className="text-left">
-                    <p className="text-white font-black text-sm">Why Sacred Geometry?</p>
-                    <p className="text-gray-500 text-xs">The shapes that accelerate healing</p>
-                  </div>
-                </div>
-                {showGeometry ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
-              </button>
-              <AnimatePresence>
-                {showGeometry && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
-                    <div className="px-4 pb-4 grid grid-cols-2 gap-2">
-                      {[
-                        { shape: "⬡ Hexagonal", emoji: "⬡", science: "Most efficient energy in nature. DNA cross-section is hexagonal. 528Hz cymatics creates these exact patterns in water.", proof: "Hans Jenny, Cymatics (1967)" },
-                        { shape: "🌸 Flower of Life", emoji: "🌸", science: "Egyptian temples 600 BC. Da Vinci's notebooks. Blueprint of all Platonic solids. Cellular division geometry.", proof: "Found on 6 continents" },
-                        { shape: "✡ Metatron's Cube", emoji: "✡", science: "Contains all 5 Platonic solids — building blocks of all matter. Found in crystal lattice structures.", proof: "Plato's Timaeus (360 BC)" },
-                        { shape: "🔴 Star Tetrahedron", emoji: "🔴", science: "MER-KA-BA. Two rotating fields = torus energy identical to the human heart's electromagnetic field.", proof: "HeartMath Institute (2001)" },
-                      ].map((g, i) => (
-                        <div key={i} className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/15 flex flex-col gap-1.5">
-                          <p className="text-purple-300 font-black text-xs">{g.shape}</p>
-                          <p className="text-gray-300 text-[10px] leading-relaxed flex-1">{g.science}</p>
-                          <p className="text-gray-600 text-[9px] font-mono">📄 {g.proof}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* FREQUENCY STACK — TILES */}
+          {/* TWO COLUMN: Frequency stack + Conditions/Protocol */}
+          <div className="grid grid-cols-2 gap-6">
+            {/* LEFT: Frequency stack */}
             <div>
-              <h2 className="text-white font-black text-base flex items-center gap-2 px-1 mb-3">
-                <Activity className="w-4 h-4 text-cyan-400" />
+              <h2 className="text-white font-black text-lg flex items-center gap-2 mb-4">
+                <Activity className="w-5 h-5 text-cyan-400" />
                 The Stack — All 6 Running Simultaneously
               </h2>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-3">
                 {FREQUENCY_STACK.map((freq, i) => (
                   <motion.div key={freq.hz} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.05 * i }}
                     className="rounded-xl overflow-hidden cursor-pointer border flex flex-col"
                     style={{ borderColor: expandedFreq === i ? freq.color + '80' : freq.color + '25', background: expandedFreq === i ? freq.color + '10' : 'rgba(0,0,0,0.7)', boxShadow: expandedFreq === i ? `0 0 20px ${freq.color}30` : 'none', transition: 'all 0.3s' }}
-                    onClick={() => setExpandedFreq(expandedFreq === i ? null : i)}
-                  >
-                    <div className="p-3 flex flex-col items-center text-center gap-1.5">
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-full flex items-center justify-center font-black leading-none border-2 flex-shrink-0"
-                          style={{ borderColor: freq.color + '80', color: freq.color, background: freq.color + '15', fontSize: freq.hz < 20 ? 13 : 11 }}>
-                          <div>
-                            <div style={{ fontSize: freq.hz < 20 ? 14 : 12 }}>{freq.hz < 20 ? freq.hz : Math.round(freq.hz)}</div>
-                            <div style={{ fontSize: 8, opacity: 0.7 }}>Hz</div>
-                          </div>
+                    onClick={() => setExpandedFreq(expandedFreq === i ? null : i)}>
+                    <div className="p-3 flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center font-black border-2 flex-shrink-0 text-center"
+                        style={{ borderColor: freq.color + '80', color: freq.color, background: freq.color + '15' }}>
+                        <div>
+                          <div style={{ fontSize: freq.hz < 20 ? 14 : 12 }}>{freq.hz < 20 ? freq.hz : Math.round(freq.hz)}</div>
+                          <div style={{ fontSize: 8, opacity: 0.7 }}>Hz</div>
                         </div>
-                        {playing && <motion.div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border border-black" style={{ backgroundColor: freq.color }} animate={{ opacity: [1, 0.2, 1], scale: [1, 1.3, 1] }} transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.18 }} />}
                       </div>
-                      <div>
-                        <p className="text-white font-black text-[11px] leading-tight">{freq.name}</p>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white font-black text-xs leading-tight">{freq.name}</p>
                         <p className="font-bold text-[10px] mt-0.5" style={{ color: freq.color }}>{freq.role}</p>
                       </div>
+                      {playing && <motion.div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: freq.color }} animate={{ opacity: [1, 0.2, 1] }} transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.18 }} />}
                     </div>
                     <AnimatePresence>
                       {expandedFreq === i && (
@@ -293,106 +242,143 @@ export default function AgeReversal() {
               </div>
             </div>
 
-            {/* CONDITIONS */}
-            <div className="rounded-2xl border border-pink-500/20 overflow-hidden" style={{ background: 'rgba(0,0,0,0.6)' }}>
-              <button onClick={() => setShowConditions(!showConditions)} className="w-full p-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Heart className="w-5 h-5 text-pink-400" />
-                  <div className="text-left">
-                    <p className="text-white font-black text-sm">What Can This Help?</p>
-                    <p className="text-gray-500 text-xs">12 conditions • men AND women</p>
+            {/* RIGHT: Conditions + Ethics + Protocol */}
+            <div className="space-y-4">
+              {/* CONDITIONS */}
+              <div className="rounded-2xl border border-pink-500/20 overflow-hidden" style={{ background: 'rgba(0,0,0,0.6)' }}>
+                <button onClick={() => setShowConditions(!showConditions)} className="w-full p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Heart className="w-5 h-5 text-pink-400" />
+                    <div className="text-left">
+                      <p className="text-white font-black text-sm">What Can This Help?</p>
+                      <p className="text-gray-500 text-xs">12 conditions • men AND women</p>
+                    </div>
                   </div>
-                </div>
-                {showConditions ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
-              </button>
-              <AnimatePresence>
-                {showConditions && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
-                    <div className="px-4 pb-4 grid grid-cols-1 gap-1.5">
-                      {CONDITIONS.map((c, i) => (
-                        <div key={i} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/3 border border-white/5">
-                          <span className="text-xl flex-shrink-0">{c.icon}</span>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <p className="text-white text-xs font-black">{c.name}</p>
-                              <span className={`text-[9px] font-black px-1.5 py-0.5 rounded-full ${c.evidence === 'PROVEN' ? 'bg-green-500/20 text-green-400' : c.evidence === 'STRONG' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-amber-500/20 text-amber-400'}`}>{c.evidence}</span>
+                  {showConditions ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
+                </button>
+                <AnimatePresence>
+                  {showConditions && (
+                    <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                      <div className="px-4 pb-4 grid grid-cols-2 gap-1.5">
+                        {CONDITIONS.map((c, i) => (
+                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white/3 border border-white/5">
+                            <span className="text-lg flex-shrink-0">{c.icon}</span>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-1 flex-wrap">
+                                <p className="text-white text-[10px] font-black">{c.name}</p>
+                                <span className={`text-[8px] font-black px-1 py-0.5 rounded-full ${c.evidence === 'PROVEN' ? 'bg-green-500/20 text-green-400' : c.evidence === 'STRONG' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-amber-500/20 text-amber-400'}`}>{c.evidence}</span>
+                              </div>
+                              <p className="text-gray-600 text-[9px] truncate">{c.detail}</p>
                             </div>
-                            <p className="text-gray-600 text-[10px] truncate">{c.detail}</p>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-            {/* ETHICS */}
-            <div className="rounded-2xl border border-green-500/15 overflow-hidden" style={{ background: 'rgba(0,0,0,0.6)' }}>
-              <button onClick={() => setShowEthics(!showEthics)} className="w-full p-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Shield className="w-5 h-5 text-green-400" />
-                  <div className="text-left">
-                    <p className="text-white font-black text-sm">Why This Is Ethical</p>
-                    <p className="text-gray-500 text-xs">Transparent science, zero manipulation</p>
+              {/* ETHICS */}
+              <div className="rounded-2xl border border-green-500/15 overflow-hidden" style={{ background: 'rgba(0,0,0,0.6)' }}>
+                <button onClick={() => setShowEthics(!showEthics)} className="w-full p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Shield className="w-5 h-5 text-green-400" />
+                    <div className="text-left">
+                      <p className="text-white font-black text-sm">Why This Is Ethical</p>
+                      <p className="text-gray-500 text-xs">Transparent science, zero manipulation</p>
+                    </div>
                   </div>
+                  {showEthics ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
+                </button>
+                <AnimatePresence>
+                  {showEthics && (
+                    <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                      <div className="px-4 pb-4 space-y-2">
+                        {[
+                          { icon: "✅", title: "No DNA manipulation", text: "Frequencies influence how DNA is READ — not the code itself." },
+                          { icon: "✅", title: "Zero side effects", text: "Sound waves are non-invasive. Nothing enters your body." },
+                          { icon: "✅", title: "Free for everyone", text: "No paywall. No rich-only access. Everyone deserves this." },
+                          { icon: "✅", title: "Peer-reviewed sources only", text: "Every frequency backed by published science." },
+                          { icon: "✅", title: "Aligned with nature", text: "7.83Hz is Earth's own frequency. We're reconnecting." },
+                          { icon: "⚠️", title: "What we won't claim", text: "Supports natural processes. See a doctor for medical conditions." },
+                        ].map((item, i) => (
+                          <div key={i} className="flex gap-3 p-2.5 rounded-xl bg-white/3">
+                            <span className="text-sm flex-shrink-0">{item.icon}</span>
+                            <div>
+                              <p className="text-white text-xs font-black">{item.title}</p>
+                              <p className="text-gray-500 text-xs leading-relaxed">{item.text}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* PROTOCOL */}
+              <div className="rounded-2xl p-5 border border-amber-500/20" style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.08), rgba(6,182,212,0.08))' }}>
+                <h3 className="text-white font-black mb-3 flex items-center gap-2 text-sm">
+                  <Star className="w-4 h-4 text-amber-400" /> RECOMMENDED PROTOCOL
+                </h3>
+                <div className="space-y-2">
+                  {[
+                    { time: "☀️ Morning", desc: "20 mins speakers · Sets cellular rhythm" },
+                    { time: "🌙 Evening", desc: "30 mins headphones · Deeper repair" },
+                    { time: "💤 Sleep", desc: "Speakers low · 7.83Hz + 40Hz overnight" },
+                  ].map((s, i) => (
+                    <div key={i} className="flex gap-3 items-start">
+                      <span className="text-white font-black text-xs w-24 flex-shrink-0 pt-0.5">{s.time}</span>
+                      <span className="text-gray-400 text-xs leading-relaxed">{s.desc}</span>
+                    </div>
+                  ))}
                 </div>
-                {showEthics ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
-              </button>
-              <AnimatePresence>
-                {showEthics && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
-                    <div className="px-4 pb-4 space-y-2">
-                      {[
-                        { icon: "✅", title: "No DNA manipulation", text: "Frequencies influence how DNA is READ — not the code itself. Like cleaning glasses vs changing your eyes." },
-                        { icon: "✅", title: "Zero pharmaceutical side effects", text: "Sound waves are non-invasive. Nothing enters your body. Stop at any time." },
-                        { icon: "✅", title: "Free for everyone", text: "No paywall. No rich-only access. Everyone deserves this." },
-                        { icon: "✅", title: "Peer-reviewed sources only", text: "Every frequency backed by published science. No pseudoscience." },
-                        { icon: "✅", title: "Aligned with nature", text: "7.83Hz is Earth's own frequency. We're not inventing — we're reconnecting." },
-                        { icon: "⚠️", title: "What we won't claim", text: "This doesn't cure disease. It supports natural processes. See a doctor for medical conditions." },
-                      ].map((item, i) => (
-                        <div key={i} className="flex gap-3 p-3 rounded-xl bg-white/3">
-                          <span className="text-base flex-shrink-0">{item.icon}</span>
-                          <div>
-                            <p className="text-white text-xs font-black">{item.title}</p>
-                            <p className="text-gray-500 text-xs leading-relaxed">{item.text}</p>
-                          </div>
-                        </div>
-                      ))}
+                <div className="mt-3 pt-3 border-t border-white/5">
+                  <p className="text-amber-400 text-xs font-black">⚡ Most users: clarity + calm within first session.</p>
+                  <p className="text-gray-600 text-[10px] mt-1">Cellular effects build over 21–90 days of daily use.</p>
+                </div>
+              </div>
+
+              {/* SACRED GEOMETRY */}
+              <div className="rounded-2xl border border-purple-500/20 overflow-hidden" style={{ background: 'rgba(0,0,0,0.6)' }}>
+                <button onClick={() => setShowGeometry(!showGeometry)} className="w-full p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Sparkles className="w-5 h-5 text-purple-400" />
+                    <div className="text-left">
+                      <p className="text-white font-black text-sm">Why Sacred Geometry?</p>
+                      <p className="text-gray-500 text-xs">The shapes that accelerate healing</p>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* PROTOCOL */}
-            <div className="rounded-2xl p-5 border border-amber-500/20" style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.08), rgba(6,182,212,0.08))' }}>
-              <h3 className="text-white font-black mb-4 flex items-center gap-2 text-sm">
-                <Star className="w-4 h-4 text-amber-400" /> RECOMMENDED PROTOCOL
-              </h3>
-              <div className="space-y-3">
-                {[
-                  { time: "☀️ Morning", desc: "20 mins speakers · Sets cellular rhythm for the day" },
-                  { time: "🌙 Evening", desc: "30 mins headphones · Binaural beats + deeper cellular repair" },
-                  { time: "💤 Sleep", desc: "Speakers low · 7.83Hz + 40Hz gamma overnight reset" },
-                ].map((s, i) => (
-                  <div key={i} className="flex gap-3 items-start">
-                    <span className="text-white font-black text-xs w-24 flex-shrink-0 pt-0.5">{s.time}</span>
-                    <span className="text-gray-400 text-xs leading-relaxed">{s.desc}</span>
                   </div>
-                ))}
-              </div>
-              <div className="mt-4 pt-4 border-t border-white/5">
-                <p className="text-amber-400 text-xs font-black">⚡ Most users: clarity + calm within first session.</p>
-                <p className="text-gray-600 text-[10px] mt-1">Cellular effects build over 21–90 days of daily use.</p>
+                  {showGeometry ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
+                </button>
+                <AnimatePresence>
+                  {showGeometry && (
+                    <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                      <div className="px-4 pb-4 grid grid-cols-2 gap-2">
+                        {[
+                          { shape: "⬡ Hexagonal", science: "Most efficient energy in nature. DNA cross-section is hexagonal. 528Hz cymatics creates these exact patterns in water.", proof: "Hans Jenny, Cymatics (1967)" },
+                          { shape: "🌸 Flower of Life", science: "Egyptian temples 600 BC. Da Vinci's notebooks. Blueprint of all Platonic solids.", proof: "Found on 6 continents" },
+                          { shape: "✡ Metatron's Cube", science: "Contains all 5 Platonic solids — building blocks of all matter. Found in crystal lattice structures.", proof: "Plato's Timaeus (360 BC)" },
+                          { shape: "🔴 Star Tetrahedron", science: "Two rotating fields = torus energy identical to the human heart's electromagnetic field.", proof: "HeartMath Institute (2001)" },
+                        ].map((g, i) => (
+                          <div key={i} className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/15">
+                            <p className="text-purple-300 font-black text-xs mb-1">{g.shape}</p>
+                            <p className="text-gray-300 text-[10px] leading-relaxed mb-1">{g.science}</p>
+                            <p className="text-gray-600 text-[9px] font-mono">📄 {g.proof}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
-
-            <p className="text-center text-gray-800 text-[10px] pb-4 font-mono">
-              UF51 AGE REVERSAL PROTOCOL • FREE FOREVER<br/>
-              COMPLEMENTARY WELLNESS — NOT A SUBSTITUTE FOR MEDICAL ADVICE
-            </p>
           </div>
+
+          <p className="text-center text-gray-800 text-[10px] pb-4 font-mono">
+            UF51 AGE REVERSAL PROTOCOL • FREE FOREVER<br/>
+            COMPLEMENTARY WELLNESS — NOT A SUBSTITUTE FOR MEDICAL ADVICE
+          </p>
         </div>
       </div>
 
