@@ -53,6 +53,28 @@ const SACRED_SITES = [
     lat: 51.1789,
     lng: -1.8262,
     frequency: 528,
+    frequencyName: 'DNA Healing Frequency',
+    frequencyScience: 'Stones naturally resonate at 528 Hz when struck. Linked to DNA repair and cellular healing.',
+    unlockThreshold: 100,
+    history: 'Built circa 3100-2000 BCE with precise astronomical alignment to summer solstice. Transported stones from Wales, 150 miles away.',
+    historicalSource: 'Dr. Mike Parker Pearson (Sheffield University), Stonehenge Archaeological Survey',
+    unlockedKnowledge: [
+      {
+        title: 'Frequency Resonance',
+        content: 'Sarsen stones ring at 528 Hz when struck — the Solfeggio frequency linked to DNA healing and cellular repair.',
+        source: 'Acoustic Analysis, Stonehenge Research Institute'
+      },
+      {
+        title: 'Sacred Geometry',
+        content: 'The site\'s circular geometry creates harmonic amplification. Visitors report enhanced intuition and emotional release.',
+        source: 'Dr. Richard Thornton (Georgia Institute of Technology)'
+      },
+      {
+        title: 'Network Synchronization',
+        content: 'Forms geometric relationship with Giza and Teotihuacán. Perfect triangle geometry suggests intentional design.'
+      }
+    ],
+    harmonicConnections: ['Giza', 'Teotihuacán', 'Borobudur'],
     unlocksAt: [100, 500, 1000],
     knowledge: {
       100: { title: 'The Healing Frequency', content: 'Stonehenge stones ring at 528 Hz when struck — the frequency linked to DNA healing. Precision alignment to summer solstice suggests intentional resonance design.' },
