@@ -77,7 +77,7 @@ export default function PressRelease2026() {
           </p>
 
           <p>
-            Rather than passive income funded by taxation, UF51's model rewards measurable contribution. Users who collect litter, verified by AI-powered photo analysis, receive tokens that can be converted to fiat currency. Those who share healing frequencies with others, support community members in crisis, or document environmental damage earn additional rewards. The token economy is, in principle, self-sustaining — funded by a small percentage withheld from commercial partnerships and premium tools.
+            Rather than passive income funded by taxation, UF51's model rewards measurable contribution. Users who collect litter, verified by AI-powered photo analysis, earn $P51 (PHOTO51) tokens — a currency designed not for speculation, but for spending on real essentials: groceries, kids' treats, household bills. Those who share healing frequencies with others, support community members in crisis, or document environmental damage earn additional rewards. The token economy is, in principle, self-sustaining — funded by a small percentage withheld from commercial partnerships and premium tools.
           </p>
 
           <p>
