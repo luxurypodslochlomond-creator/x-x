@@ -14,6 +14,9 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
     const H = canvas.height;
     let animId;
     let time = 0;
+    
+    // Earth rotation: 360° per 86400 seconds (24h), sped up for visual effect
+    const earthRotationSpeed = (360 / 86400) * 100; // 100x speed for vibe
 
     const draw = () => {
       time += 0.01;
