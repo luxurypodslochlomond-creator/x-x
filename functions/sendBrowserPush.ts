@@ -98,7 +98,13 @@ Deno.serve(async (req) => {
         console.log(`✓ Push sent to ${recipient_email}`);
         return { success: true, recipient: recipient_email };
       } catch (e) {
-        console.error(`✕ Push to ${sub.user_email} failed: ${e.message}`);
+        // 410 Gone or 404 = subscription expired/revoked — clean it up
+        if (e.statusCode === 410 || e.statusCode === 404) {
+          console.log(`Stale subscription for ${sub.user_email} — deactivating`);
+          await base44.asServiceRole.entities.UserPushSubscription.update(sub.id, { is_active: false });
+        } else {
+          console.error(`✕ Push to ${sub.user_email} failed: ${e.message}`);
+        }
         return { success: false, recipient: sub.user_email, error: e.message };
       }
     });

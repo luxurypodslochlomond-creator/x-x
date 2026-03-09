@@ -147,6 +147,7 @@ console.log('[SW] UF51 Healing Service Worker loaded');
     headers: {
       'Content-Type': 'application/javascript',
       'Cache-Control': 'no-cache',
+      'Service-Worker-Allowed': '/',
     },
   });
 });

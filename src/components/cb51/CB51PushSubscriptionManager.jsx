@@ -35,6 +35,18 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
       if (reg) {
         const sub = await reg.pushManager.getSubscription();
         if (sub) {
+          // Revalidate subscription is still alive (iOS kills them silently)
+          // If endpoint has changed, re-save to DB
+          const stored = await base44.entities.UserPushSubscription.filter({ user_email: userEmail });
+          if (stored.length === 0) {
+            // SW has sub but DB lost it — re-save
+            await base44.entities.UserPushSubscription.create({
+              user_email: userEmail,
+              subscription_data: JSON.stringify(sub),
+              is_active: true,
+              last_active: new Date().toISOString()
+            });
+          }
           setStatus('subscribed');
           return;
         }
@@ -43,7 +55,7 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
       // ignore
     }
 
-    // Permission granted but no subscription yet — auto-subscribe
+    // Permission granted but no subscription yet — iOS may have killed it, auto-resubscribe
     if (Notification.permission === 'granted') {
       await subscribe();
       return;
