@@ -119,10 +119,7 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
         ctx.shadowBlur = 0;
       });
 
-      // Connecting lines between sites
-      ctx.strokeStyle = 'rgba(34, 211, 238, 0.2)';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([5, 5]);
+      // Connecting lines — flowing resonance
       for (let i = 0; i < sites.length; i++) {
         for (let j = i + 1; j < sites.length; j++) {
           const site1 = sites[i];
@@ -137,13 +134,28 @@ export default function AxiomSiteMap({ sites, onSelectSite }) {
           const x2 = cx + radius * Math.cos(lat2) * Math.cos(lng2);
           const y2 = cy + radius * Math.sin(lat2);
 
+          // Background connection
+          ctx.strokeStyle = 'rgba(34, 211, 238, 0.1)';
+          ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(x1, y1);
           ctx.lineTo(x2, y2);
           ctx.stroke();
+
+          // Flowing energy pulse
+          const flowPos = (time * 50) % 100;
+          const px = x1 + ((x2 - x1) * flowPos) / 100;
+          const py = y1 + ((y2 - y1) * flowPos) / 100;
+          
+          ctx.shadowColor = 'rgba(16, 185, 129, 0.6)';
+          ctx.shadowBlur = 8;
+          ctx.fillStyle = 'rgba(16, 185, 129, 0.8)';
+          ctx.beginPath();
+          ctx.arc(px, py, 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
         }
       }
-      ctx.setLineDash([]);
 
       animId = requestAnimationFrame(draw);
     };
