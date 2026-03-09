@@ -110,7 +110,7 @@ export default function PressRelease2026() {
           <h2 className="text-2xl font-black text-gray-900 mt-10 mb-4">The question the industry should be asking</h2>
 
           <p>
-            In his end-of-year column for New Digital Age, Michael Feeley asked whether the industry should be "less passive in wondering where AI might take us and more prescriptive about where exactly it is we want to go."
+            A question now being asked across the industry is whether we should be "less passive in wondering where AI might take us and more prescriptive about where exactly it is we want to go."
           </p>
 
           <p>
