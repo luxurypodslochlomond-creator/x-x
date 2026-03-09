@@ -23,7 +23,7 @@ export default function PressRelease2026() {
         </h1>
 
         <p className="text-xl text-gray-500 leading-relaxed mb-8 font-light">
-          As generative AI accelerates job losses across the UK economy and Big Tech's water-guzzling data centres quietly undermine every sustainability pledge made in the last decade, a Scottish-built platform is quietly doing something nobody in adtech or AI has managed: making regenerative action economically rewarding for ordinary people.
+          As generative AI accelerates job losses across the UK economy and Big Tech's water-guzzling data centres silently undermine every sustainability pledge made in the last decade, a Scottish-built platform is doing something nobody in adtech or AI has managed: making regenerative action economically rewarding for ordinary people.
         </p>
 
         {/* Byline area */}
