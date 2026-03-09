@@ -133,9 +133,9 @@ export default function PressRelease2026() {
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-xs text-gray-400 font-mono uppercase tracking-widest mb-4">— ENDS —</p>
             <div className="space-y-1 text-sm text-gray-500">
-              <p><strong>Platform:</strong> <a href="https://uf51.love" className="text-blue-600 underline">uf51.love</a></p>
-              <p><strong>Funder brief:</strong> <a href={`${window.location.origin}/FunderBrief`} className="text-blue-600 underline">uf51.love/FunderBrief</a></p>
-              <p><strong>Technical whitepaper:</strong> <a href={`${window.location.origin}/Whitepaper`} className="text-blue-600 underline">uf51.love/Whitepaper</a></p>
+              <p><strong>Platform:</strong> <a href="https://uf51.love" className="text-blue-600 underline">https://uf51.love</a></p>
+              <p><strong>Funder brief:</strong> <a href="https://uf51.love/FunderBrief" className="text-blue-600 underline">https://uf51.love/FunderBrief</a></p>
+              <p><strong>Technical whitepaper:</strong> <a href="https://uf51.love/Whitepaper" className="text-blue-600 underline">https://uf51.love/Whitepaper</a></p>
               <p><strong>Contact:</strong> <a href="mailto:family@uf51.love" className="text-blue-600 underline">family@uf51.love</a></p>
               <p className="mt-4 text-xs text-gray-400">Images, founder interview and technical briefing available on request. This piece is offered for editorial use without restriction.</p>
             </div>
