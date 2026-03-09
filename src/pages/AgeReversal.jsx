@@ -105,6 +105,8 @@ export default function AgeReversal() {
   useEffect(() => () => clearInterval(timerRef.current), []);
   const fmt = (s) => `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
 
+  return (
+    <>
       {/* DESKTOP: Two-column layout — geometry LEFT, content RIGHT (matches live site) */}
       <div className="hidden lg:flex min-h-screen">
 
