@@ -187,8 +187,8 @@ export default function PetSounds51() {
              <div key={catKey}>
                <div className="flex items-center gap-2 mb-4">
                  <Icon size={20} className="flex-shrink-0" style={{ color: cat.color }} />
-                <h2 className="text-sm font-black font-mono" style={{ color: cat.color }}>{cat.label}</h2>
-                {catKey === 'sports' && <span className="text-xs text-gray-600 font-normal">— we don't agree with exploitation, but these animals still deserve care</span>}
+                <h2 className="text-sm font-black" style={{ color: cat.color }}>{cat.label}</h2>
+                {catKey === 'sports' && <span className="text-xs text-amber-700 font-normal">— these animals deserve care</span>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {cat.items.map((item) => {
@@ -199,22 +199,22 @@ export default function PetSounds51() {
                     <button
                       key={item.key}
                       onClick={() => handleSelect(item.key)}
-                      className="p-5 border-2 bg-black hover:bg-white/5 transition-all text-left rounded-xl group relative"
-                      style={{ borderColor: item.color + '60' }}
+                      className="p-4 border-3 bg-white/40 hover:bg-white/60 transition-all text-left rounded-2xl group relative shadow-md"
+                      style={{ borderColor: item.color + '80' }}
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
                           {ItemIcon && <ItemIcon size={18} style={{ color: item.color, flexShrink: 0 }} />}
-                          <p className="text-xs font-mono text-gray-500">{item.hz}</p>
-                          {isFree && <span className="text-xs font-black text-green-400 font-mono">FREE</span>}
+                          <p className="text-xs font-bold text-amber-700">{item.hz}</p>
+                          {isFree && <span className="text-xs font-black text-green-700">FREE</span>}
                         </div>
                         {isPremium
-                          ? <Lock className="w-4 h-4 text-gray-600" />
-                          : <Play className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
+                          ? <Lock className="w-4 h-4 text-amber-600" />
+                          : <Play className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
                         }
                       </div>
-                      <p className="font-black text-white mb-1">{item.name}</p>
-                      <p className="text-xs text-gray-500 italic">"{item.tagline}"</p>
+                      <p className="font-black text-amber-900 mb-1 text-sm">{item.name}</p>
+                      <p className="text-xs text-amber-800">"{item.tagline}"</p>
                     </button>
                   );
                 })}
