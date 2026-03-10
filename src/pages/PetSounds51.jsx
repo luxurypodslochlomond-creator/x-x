@@ -165,7 +165,7 @@ export default function PetSounds51() {
 
       {/* WATCH TOGETHER TIP */}
       <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-r from-pink-900/20 to-cyan-900/20 border border-pink-500/30 rounded-xl p-4 flex items-start gap-3">
-        <span className="text-2xl flex-shrink-0">📺</span>
+        <PS51Icons.WatchTogether size={28} className="flex-shrink-0" style={{ color: '#ec4899' }} />
         <div>
           <p className="text-pink-300 font-black text-sm mb-1">WATCH IT TOGETHER</p>
           <p className="text-gray-400 text-xs">When you press play, a live frequency visualizer appears on screen. Put your phone, tablet, or cast it to your TV near your pet — animals are drawn to the moving patterns. <span className="text-white font-bold">Works through any speaker. No headphones needed.</span> Owners report this is calming for them too. You're both healing.</p>
