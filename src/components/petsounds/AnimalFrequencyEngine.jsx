@@ -156,6 +156,7 @@ export default function AnimalFrequencyEngine({ protocol = 'fireworks', species 
       });
 
       nodesRef.current = nodes;
+      isPlayingRef.current = true;
       setIsPlaying(true);
       setTimer(0);
 
