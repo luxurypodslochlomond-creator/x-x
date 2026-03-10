@@ -131,6 +131,15 @@ export default function PetSounds51() {
         )}
       </div>
 
+      {/* WATCH TOGETHER TIP */}
+      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-r from-pink-900/20 to-cyan-900/20 border border-pink-500/30 rounded-xl p-4 flex items-start gap-3">
+        <span className="text-2xl flex-shrink-0">📺</span>
+        <div>
+          <p className="text-pink-300 font-black text-sm mb-1">WATCH IT TOGETHER</p>
+          <p className="text-gray-400 text-xs">When you press play, a live frequency visualizer appears on screen. Put your phone/tablet near your pet — animals are drawn to the moving patterns. <span className="text-white font-bold">Owners report this is calming for them too.</span> You don't have to feel weird about it. You're both healing.</p>
+        </div>
+      </div>
+
       {/* PROTOCOL CATEGORIES */}
       <div className="max-w-4xl mx-auto space-y-8">
         {Object.entries(PROTOCOLS).map(([catKey, cat]) => {
