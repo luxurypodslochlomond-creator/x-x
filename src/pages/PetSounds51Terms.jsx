@@ -148,20 +148,20 @@ export default function PetSounds51Terms() {
         </div>
 
         {/* CONTACT */}
-        <div className="bg-gray-900/60 border border-white/10 rounded-xl p-6 mb-8 text-center">
-          <p className="text-white font-black mb-3">Contact Us</p>
-          <p className="text-gray-400 text-sm mb-1">Everything goes to one place. We actually read it.</p>
-          <a href="mailto:family@uf51.love" className="text-cyan-400 font-black text-lg hover:text-cyan-300 transition-colors">
-            family@uf51.love
+        <div className="bg-yellow-100/60 border-2 border-orange-300 rounded-xl p-6 mb-8 text-center shadow-sm">
+          <p className="text-amber-900 font-black mb-3">Contact Us</p>
+          <p className="text-amber-800 text-sm mb-1">Everything goes to one place. We actually read it.</p>
+          <a href="mailto:petsounds@uf51.love" className="text-orange-700 font-black text-lg hover:text-orange-600 transition-colors">
+            petsounds@uf51.love
           </a>
-          <p className="text-gray-600 text-xs mt-3">Refunds · Legal · Support · Questions · Feedback · Just saying hi</p>
+          <p className="text-amber-700 text-xs mt-3">Refunds · Support · Questions · Feedback · Hi</p>
         </div>
 
         {/* FOOTER */}
-        <div className="text-center border-t border-white/10 pt-8">
-          <Heart className="w-8 h-8 text-pink-400 mx-auto mb-3" />
-          <p className="text-gray-500 text-sm">Built with love. For every animal. ♾️❤️</p>
-          <p className="text-gray-700 text-xs mt-1">Part of Universal Frequency 51 · uf51.love</p>
+        <div className="text-center border-t-2 border-orange-300 pt-8">
+          <Heart className="w-8 h-8 text-orange-600 mx-auto mb-3" />
+          <p className="text-amber-800 text-sm">Built with love. For every animal. ♾️❤️</p>
+          <p className="text-amber-700 text-xs mt-1">PetSounds Healing</p>
         </div>
 
       </div>
