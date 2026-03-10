@@ -94,14 +94,21 @@ export default function PetSounds51Terms() {
             </ul>
           </Section>
 
-          <Section number={5} title="Subscriptions">
+          <Section number={5} title="Subscriptions & Billing">
             <ul className="space-y-2">
-              <li>• Annual billing — £29.99/year, renews automatically</li>
-              <li>• Cancel any time by emailing <a href="mailto:family@uf51.love" className="text-cyan-400 hover:underline">family@uf51.love</a></li>
-              <li>• Cancellation takes effect at end of current annual period</li>
-              <li>• 30-day full refund applies — no questions asked</li>
-              <li>• One price, everywhere. We don't geo-price gouge.</li>
+              <li>• Annual billing — £29.99/year (approx. $38 USD / €35 EUR — charged in your local currency via Stripe)</li>
+              <li>• <strong className="text-white">Auto-renews after 12 months.</strong> You'll receive an email reminder 7 days before renewal.</li>
+              <li>• Cancel any time before renewal by emailing <a href="mailto:family@uf51.love" className="text-cyan-400 hover:underline">family@uf51.love</a> — no hoops, no guilt</li>
+              <li>• Cancellation takes effect at end of your current paid year</li>
+              <li>• 30-day full refund from date of purchase — no questions asked</li>
+              <li>• Payments processed securely by Stripe. We never store your card details.</li>
+              <li>• One honest price. We don't charge more based on your country.</li>
             </ul>
+          </Section>
+
+          <Section number={5.1} title="Free Access">
+            <p className="mb-3">The Separation Anxiety protocol is permanently free. No subscription required. No catch.</p>
+            <p>We believe every pet owner who needs it should be able to access the most important protocol without paying first. Try it. See if it works. Then decide.</p>
           </Section>
 
           <Section number={6} title="Data & Privacy">
