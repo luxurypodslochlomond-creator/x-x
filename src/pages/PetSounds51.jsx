@@ -52,8 +52,6 @@ const PROTOCOLS = {
   }
 };
 
-const FREE_PROTOCOLS = ['separation'];
-
 export default function PetSounds51() {
   const [activeView, setActiveView] = useState('home');
   const [selectedProtocol, setSelectedProtocol] = useState(null);
