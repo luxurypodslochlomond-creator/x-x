@@ -110,12 +110,18 @@ export default function PS51Paywall({ onClose }) {
             color: loading ? '#9ca3af' : '#000',
           }}
         >
-          {loading ? 'Connecting...' : 'Start Healing — £29.99/year'}
+          {loading ? 'Connecting...' : '🐾 Start Healing — £29.99/year'}
         </button>
 
-        <p className="text-center text-xs text-gray-600 mb-2">
-          Apple Pay · Google Pay · Card — via Stripe 🔒
-        </p>
+        {/* Stripe Link = one tap if they've ever paid with Stripe before */}
+        <div className="flex items-center justify-center gap-2 mt-3 mb-1">
+          <span className="text-gray-500 text-xs">Pays in one tap if you've used Stripe before</span>
+        </div>
+        <div className="flex items-center justify-center gap-3 mb-2">
+          {['Apple Pay', 'Google Pay', '🔗 Link', 'Card'].map(m => (
+            <span key={m} className="text-xs font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-md">{m}</span>
+          ))}
+        </div>
 
         <p className="text-center text-xs text-gray-700">
           Not a substitute for vet care. Complements treatment.
