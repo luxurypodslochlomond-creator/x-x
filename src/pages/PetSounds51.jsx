@@ -131,7 +131,7 @@ export default function PetSounds51() {
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm text-gray-400 font-semibold">
           <span className="bg-orange-500/20 border border-orange-500/50 rounded-full px-3 py-1">£29.99/year</span>
           <span className="bg-green-500/20 border border-green-500/50 rounded-full px-3 py-1">10% to rescue</span>
-          <span className="bg-cyan-500/20 border border-cyan-500/50 rounded-full px-3 py-1">No meds</span>
+          <span className="bg-cyan-500/20 border border-cyan-500/50 rounded-full px-3 py-1">Safe & drug-free</span>
         </div>
       </div>
 
