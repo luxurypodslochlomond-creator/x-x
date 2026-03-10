@@ -138,7 +138,10 @@ export default function PetSounds51() {
           onClick={() => setShowScience(!showScience)}
           className="w-full flex items-center justify-between"
         >
-          <p className="text-cyan-400 font-black text-sm">📚 THE SCIENCE BEHIND THE FREQUENCIES (MIT · iCalmDog · Glasgow · Edinburgh · 2019–2026)</p>
+          <div className="flex items-center gap-2">
+          <PS51Icons.Science size={18} className="text-cyan-400" />
+          <p className="text-cyan-400 font-black text-sm">THE SCIENCE BEHIND THE FREQUENCIES (MIT · iCalmDog · Glasgow · Edinburgh · 2019–2026)</p>
+        </div>
           {showScience ? <ChevronUp className="w-4 h-4 text-cyan-400" /> : <ChevronDown className="w-4 h-4 text-cyan-400" />}
         </button>
         {showScience && (
