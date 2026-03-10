@@ -95,9 +95,9 @@ export default function PetSounds51() {
           </div>
         </div>
         <p className="text-gray-400 text-sm mb-2 max-w-lg mx-auto">
-          Evidence-based binaural frequencies for the things that actually keep pet owners up at night.
+          Evidence-based healing frequencies for the things that actually keep pet owners up at night.
         </p>
-        <p className="text-xs text-cyan-400 font-mono">Works offline • No side effects • 10% to animal rescue</p>
+        <p className="text-xs text-cyan-400 font-mono">Works through any speaker or TV • No side effects • 10% to animal rescue</p>
       </div>
 
       {/* SCIENCE BANNER */}
