@@ -149,6 +149,7 @@ export default function PetSounds51() {
               <div className="flex items-center gap-2 mb-4">
                 <IconComp className="w-5 h-5" style={{ color: cat.color }} />
                 <h2 className="text-sm font-black font-mono" style={{ color: cat.color }}>{cat.label}</h2>
+                {catKey === 'sports' && <span className="text-xs text-gray-600 font-normal">— we don't agree with exploitation, but these animals still deserve care</span>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {cat.items.map((item) => (
