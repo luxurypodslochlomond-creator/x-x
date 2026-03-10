@@ -608,8 +608,8 @@ export default function AI51() {
       const rest = chunks.slice(1);
       const utterance = new SpeechSynthesisUtterance(chunk);
       utterance.lang = lang;
-      utterance.rate = 0.75;
-      utterance.pitch = 0.9;
+      utterance.rate = 0.92;
+      utterance.pitch = 1.0;
       utterance.voice = getVoice();
       utterance.onstart = () => setIsSpeaking(true);
       utterance.onend = () => speakChunks(rest);
@@ -792,8 +792,7 @@ Know them. Be real. ♾️❤️`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
-        prompt: systemPrompt + '\n\n' + fullPrompt,
-        add_context_from_internet: true
+        prompt: systemPrompt + '\n\n' + fullPrompt
       });
       
       const aiMessage = response.response || response;
