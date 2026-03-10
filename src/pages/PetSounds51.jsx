@@ -114,27 +114,27 @@ export default function PetSounds51() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900 pt-24 p-3 sm:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white pt-24 p-3 sm:p-4">
       <PS51Header />
       {/* HEADER */}
-      <div className="max-w-4xl mx-auto mb-8 text-center">
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <PetSounds51Icon8Bit size={48} animate={false} />
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-black text-orange-700" style={{letterSpacing: '0.05em'}}>PET SOUNDS</h1>
-            <p className="text-xs text-amber-700 font-bold tracking-widest mt-1">HEALING FREQUENCIES</p>
+      <div className="max-w-4xl mx-auto mb-12 text-center">
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <PetSounds51Icon8Bit size={56} animate={false} />
+          <div className="text-left">
+            <h1 className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600" style={{letterSpacing: '-0.02em'}}>PETSOUNDS51</h1>
+            <p className="text-xs text-orange-300 font-bold tracking-widest mt-2">POWERED BY AI51</p>
           </div>
         </div>
-        <p className="text-amber-900 font-bold text-lg mb-2 max-w-lg mx-auto">
+        <p className="text-white font-bold text-xl mb-3 max-w-lg mx-auto">
           Leave it playing. Your best friend stays calm.
         </p>
-        <p className="text-amber-800 text-sm mb-4 max-w-lg mx-auto leading-relaxed">
-          Science-backed sound therapy for separation anxiety, stress, pain & healing — through any speaker.
+        <p className="text-gray-300 text-sm mb-6 max-w-lg mx-auto leading-relaxed">
+          AI-adaptive sound therapy for separation anxiety, stress, pain & healing — through any speaker.
         </p>
-        <div className="flex items-center justify-center gap-2 flex-wrap text-xs text-amber-700 font-bold">
-          <span>£29.99/year ·</span>
-          <span>10% to rescue ·</span>
-          <span>No medication</span>
+        <div className="flex items-center justify-center gap-3 flex-wrap text-sm text-gray-400 font-semibold">
+          <span className="bg-orange-500/20 border border-orange-500/50 rounded-full px-3 py-1">£29.99/year</span>
+          <span className="bg-green-500/20 border border-green-500/50 rounded-full px-3 py-1">10% to rescue</span>
+          <span className="bg-cyan-500/20 border border-cyan-500/50 rounded-full px-3 py-1">No meds</span>
         </div>
       </div>
 
