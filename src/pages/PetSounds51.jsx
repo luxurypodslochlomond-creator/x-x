@@ -50,12 +50,34 @@ const PROTOCOLS = {
   }
 };
 
+const FREE_PROTOCOLS = ['separation'];
+
 export default function PetSounds51() {
   const [activeView, setActiveView] = useState('home');
   const [selectedProtocol, setSelectedProtocol] = useState(null);
   const [showScience, setShowScience] = useState(false);
+  const [showPaywall, setShowPaywall] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  useEffect(() => {
+    // Check if returned from successful Stripe checkout
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('subscribed') === 'true') {
+      setIsSubscribed(true);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+    // Check localStorage for existing subscription
+    if (localStorage.getItem('ps51_subscribed')) {
+      setIsSubscribed(true);
+    }
+  }, []);
 
   const handleSelect = (protocolKey) => {
+    if (!FREE_PROTOCOLS.includes(protocolKey) && !isSubscribed) {
+      setShowPaywall(true);
+      return;
+    }
+    if (isSubscribed) localStorage.setItem('ps51_subscribed', '1');
     setSelectedProtocol(protocolKey);
     setActiveView('playing');
   };
