@@ -59,8 +59,8 @@ export default function PetSounds51Terms() {
         <div className="space-y-3 mb-10">
 
           <Section number={1} title="What This Service Is">
-            <p className="mb-3">PetSounds51 delivers specific sound frequency protocols — isochronic tones, carrier frequencies, and monaural beats — through your device's speaker. No headphones required. The protocols are based on peer-reviewed research (MIT, iCalmDog RCT, Glasgow, Edinburgh) and designed to support animal behavioural wellness.</p>
-            <p>AI51 analysis provides behavioural pattern observations — not medical diagnoses. Think of it as a very smart, very caring second opinion. Your vet is still the professional.</p>
+            <p className="mb-3">PetSounds delivers specific sound frequency protocols — isochronic tones, carrier frequencies, and monaural beats — through your device's speaker. No headphones required. The protocols are based on peer-reviewed research (MIT, iCalmDog RCT, Glasgow, Edinburgh) and designed to support animal behavioural wellness.</p>
+            <p>Think of this as complementary care — your vet is still the professional.</p>
           </Section>
 
           <Section number={2} title="What We Are Not (Important)">
