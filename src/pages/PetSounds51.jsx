@@ -107,9 +107,12 @@ export default function PetSounds51() {
     );
   }
 
+  if (showPaywall) {
+    return <PS51Paywall onClose={() => setShowPaywall(false)} />;
+  }
+
   return (
-    <div className="min-h-screen bg-black text-white p-3 sm:p-4">
-      {showPaywall && <PS51Paywall onClose={() => setShowPaywall(false)} />}
+    <div className="min-h-screen bg-black text-white p-3 sm:p-4">}
       {/* HEADER */}
       <div className="max-w-4xl mx-auto mb-8 text-center">
         <div className="flex items-center justify-center gap-3 mb-3">
