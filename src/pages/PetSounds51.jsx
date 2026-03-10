@@ -129,7 +129,11 @@ export default function PetSounds51() {
         <p className="text-gray-400 text-sm mb-3 max-w-lg mx-auto">
           Science-backed frequency protocols for separation anxiety, stress, pain & trauma — through any TV or speaker.
         </p>
-        <p className="text-xs text-cyan-400 font-mono">No download · No headphones · No medication · £29.99/year · 10% to animal rescue</p>
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <span className="text-xs text-cyan-400 font-mono">No download · No headphones · No medication · £29.99/year ·</span>
+          <PS51Icons.Rescue size={16} className="text-cyan-400" />
+          <span className="text-xs text-cyan-400 font-mono">10% to animal rescue</span>
+        </div>
       </div>
 
       {/* SCIENCE BANNER */}
