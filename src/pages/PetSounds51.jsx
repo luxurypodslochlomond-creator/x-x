@@ -138,6 +138,19 @@ export default function PetSounds51() {
         </div>
       </div>
 
+      {/* AI INNOVATION BANNER */}
+      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-r from-orange-100 to-yellow-100 border-4 border-orange-500 rounded-2xl p-4 shadow-lg">
+        <div className="flex items-start gap-3">
+          <span className="text-2xl">🤖</span>
+          <div>
+            <p className="text-orange-800 font-black text-sm mb-2">AI-POWERED INNOVATION</p>
+            <p className="text-amber-900 text-xs leading-relaxed">
+              Every protocol is <strong>AI-optimized</strong> for individual animal responses. Real-time frequency adaptation. This is next-generation care — not a static audio file. The future of animal healing, available now.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* SCIENCE BANNER */}
       <div className="max-w-4xl mx-auto mb-6 bg-white/60 border-4 border-orange-300 rounded-2xl p-4 shadow-lg">
         <button
