@@ -10,14 +10,8 @@ export default function PS51Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-orange-50 to-yellow-50 border-b-2 border-orange-300 shadow-md">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* LEFT: Small UF51 Link */}
-        <Link 
-          to={createPageUrl("FrequencyChamber")} 
-          className="flex items-center gap-2 group hover:opacity-80 transition-opacity"
-        >
-          <COOLASFUCKWaves size={24} animate={true} />
-          <span className="text-xs font-black text-orange-700 tracking-wider">UF51 HEAL</span>
-        </Link>
+        {/* LEFT: Spacer */}
+        <div className="w-6" />
 
         {/* RIGHT: Desktop Nav + Menu */}
         <div className="hidden sm:flex items-center gap-3">
@@ -25,24 +19,15 @@ export default function PS51Header() {
             to={createPageUrl("PetSounds51Terms")} 
             className="text-xs font-bold text-amber-700 hover:text-orange-700 transition-colors"
           >
-            Terms
+            Terms & Conditions
           </Link>
           <span className="text-amber-700">•</span>
           <Link 
             to={createPageUrl("PrivacyPolicy")} 
             className="text-xs font-bold text-amber-700 hover:text-orange-700 transition-colors"
           >
-            Privacy
+            Privacy Policy
           </Link>
-          <span className="text-amber-700">•</span>
-          <a 
-            href="https://base44.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-xs font-bold text-amber-700 hover:text-orange-700 transition-colors"
-          >
-            Built on Base44
-          </a>
         </div>
 
         {/* MOBILE MENU BUTTON */}
