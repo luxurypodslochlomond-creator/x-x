@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp, Play, Brain, Zap, Heart, Lock } from 'lucide-re
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PS51Paywall from '@/components/petsounds/PS51Paywall';
 
+// Free tier: separation anxiety only
 const FREE_PROTOCOLS = ['separation'];
 
 const AnimalFrequencyEngine = lazy(() => import('@/components/petsounds/AnimalFrequencyEngine'));
