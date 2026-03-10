@@ -162,7 +162,7 @@ export default function PetSounds51() {
                       <p className="text-xs font-mono text-gray-500">{item.hz}</p>
                       <Play className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
                     </div>
-                    <p className="font-black text-white mb-1">{item.name}</p>
+                    <p className="font-black text-white mb-1">{item.badge ? `${item.badge} ${item.name}` : item.name}</p>
                     <p className="text-xs text-gray-500 italic">"{item.tagline}"</p>
                   </button>
                 ))}
