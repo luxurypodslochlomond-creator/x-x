@@ -117,7 +117,7 @@ export default function PetSounds51() {
             </div>
             <div className="bg-black/40 border border-cyan-500/20 rounded-lg p-3">
               <p className="text-white font-bold mb-1">🐾 iCalmDog RCT 2024 — Global Gold Standard</p>
-              <p>Randomised controlled trial: 68% reduction in reactive behaviour using alpha binaural (10Hz). Now recommended by 200+ vets worldwide as a pre-medication alternative.</p>
+              <p>Randomised controlled trial: 68% reduction in reactive behaviour using 10Hz alpha frequency tones through standard speakers. Now recommended by 200+ vets worldwide as a pre-medication alternative.</p>
             </div>
             <div className="bg-black/40 rounded-lg p-3">
               <p className="text-gray-300 font-bold mb-1">University of Glasgow Vet School</p>
