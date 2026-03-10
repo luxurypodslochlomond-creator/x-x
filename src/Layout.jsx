@@ -605,11 +605,16 @@ const LayoutInner = ({ children, currentPageName }) => {
         {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
-            <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : "Welcome")} className="flex items-center gap-3 mb-4">
+            <Link to={createPageUrl(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51') ? "CB51" : currentPageName === 'PetSounds51' ? "PetSounds51" : "Welcome")} className="flex items-center gap-3 mb-4">
               {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
                 <>
                   <Radio className="w-10 h-10 text-cyan-400" />
                   <span className="text-3xl font-black text-cyan-400">CB51</span>
+                </>
+              ) : currentPageName === 'PetSounds51' ? (
+                <>
+                  <PetSounds51Icon8Bit size={40} animate={false} />
+                  <span className="text-3xl font-black text-orange-600">PS51</span>
                 </>
               ) : (
                 <>
