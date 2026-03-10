@@ -24,7 +24,7 @@ const PROTOCOLS = {
   mental: {
     label: 'MENTAL HEALTH',
     color: '#a855f7',
-    icon: Brain,
+    icon: 'AnimalCare',
     items: [
       { key: 'rescue_trauma', name: 'Rescue Trauma & PTSD', tagline: "They've been through something. You can see it.", hz: '396 Hz theta', color: '#f59e0b' },
       { key: 'grief', name: 'Grief & Depression', tagline: 'They lost their person. Or their friend.', hz: '639 Hz', color: '#ec4899' },
