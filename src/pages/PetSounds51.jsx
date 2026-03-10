@@ -159,33 +159,33 @@ export default function PetSounds51() {
       </div>
 
       {/* SCIENCE BANNER */}
-      <div className="max-w-4xl mx-auto mb-6 bg-white/60 border-4 border-orange-300 rounded-2xl p-4 shadow-lg">
+      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-br from-slate-800/60 to-slate-700/60 border border-orange-500/40 rounded-xl p-5 shadow-lg backdrop-blur-sm">
         <button
           onClick={() => setShowScience(!showScience)}
           className="w-full flex items-center justify-between"
         >
-          <div className="flex items-center gap-2">
-          <PS51Icons.Science size={18} className="text-orange-700" />
-          <p className="text-orange-700 font-black text-sm">THE SCIENCE (MIT · iCalmDog · Glasgow · Edinburgh)</p>
+          <div className="flex items-center gap-3">
+          <PS51Icons.Science size={20} className="text-orange-400" />
+          <p className="text-orange-300 font-black text-sm tracking-wide">THE SCIENCE (MIT · iCalmDog · Glasgow · Edinburgh)</p>
         </div>
-          {showScience ? <ChevronUp className="w-4 h-4 text-orange-700" /> : <ChevronDown className="w-4 h-4 text-orange-700" />}
+          {showScience ? <ChevronUp className="w-4 h-4 text-orange-400" /> : <ChevronDown className="w-4 h-4 text-orange-400" />}
         </button>
         {showScience && (
-          <div className="mt-4 grid sm:grid-cols-2 gap-3 text-xs text-amber-900">
-            <div className="bg-yellow-100/70 border-2 border-orange-300 rounded-lg p-3">
-              <p className="text-orange-800 font-bold mb-1">🧪 MIT — Nature 2019</p>
+          <div className="mt-4 grid sm:grid-cols-2 gap-3 text-xs text-gray-300">
+            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
+              <p className="text-orange-300 font-bold mb-1">🧪 MIT — Nature 2019</p>
               <p>40Hz gamma therapy proven to clear amyloid plaques in mice. Now in active Alzheimer's human trials.</p>
             </div>
-            <div className="bg-yellow-100/70 border-2 border-orange-300 rounded-lg p-3">
-              <p className="text-orange-800 font-bold mb-1">🐾 iCalmDog RCT 2024</p>
+            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
+              <p className="text-orange-300 font-bold mb-1">🐾 iCalmDog RCT 2024</p>
               <p>68% reduction in reactive behaviour using 10Hz alpha tones. Recommended by 200+ vets worldwide.</p>
             </div>
-            <div className="bg-yellow-100/70 border-2 border-orange-300 rounded-lg p-3">
-              <p className="text-orange-800 font-bold mb-1">University of Glasgow</p>
+            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
+              <p className="text-orange-300 font-bold mb-1">University of Glasgow</p>
               <p>Music therapy reduced shelter dog cortisol by 42%. Most-cited animal audio welfare study in Europe.</p>
             </div>
-            <div className="bg-yellow-100/70 border-2 border-orange-300 rounded-lg p-3">
-              <p className="text-orange-800 font-bold mb-1">University of Edinburgh</p>
+            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
+              <p className="text-orange-300 font-bold mb-1">University of Edinburgh</p>
               <p>40Hz gamma slowed canine cognitive decline in 6-week trial. 1 in 3 UK dogs has noise phobia.</p>
             </div>
           </div>
