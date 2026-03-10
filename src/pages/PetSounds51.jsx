@@ -179,21 +179,31 @@ export default function PetSounds51() {
                 {catKey === 'sports' && <span className="text-xs text-gray-600 font-normal">— we don't agree with exploitation, but these animals still deserve care</span>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {cat.items.map((item) => (
-                  <button
-                    key={item.key}
-                    onClick={() => handleSelect(item.key)}
-                    className="p-5 border-2 bg-black hover:bg-white/5 transition-all text-left rounded-xl group"
-                    style={{ borderColor: item.color + '60' }}
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <p className="text-xs font-mono text-gray-500">{item.hz}</p>
-                      <Play className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
-                    </div>
-                    <p className="font-black text-white mb-1">{item.badge ? `${item.badge} ${item.name}` : item.name}</p>
-                    <p className="text-xs text-gray-500 italic">"{item.tagline}"</p>
-                  </button>
-                ))}
+                {cat.items.map((item) => {
+                  const isFree = FREE_PROTOCOLS.includes(item.key);
+                  const isPremium = !isFree && !isSubscribed;
+                  return (
+                    <button
+                      key={item.key}
+                      onClick={() => handleSelect(item.key)}
+                      className="p-5 border-2 bg-black hover:bg-white/5 transition-all text-left rounded-xl group relative"
+                      style={{ borderColor: item.color + '60' }}
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs font-mono text-gray-500">{item.hz}</p>
+                          {isFree && <span className="text-xs font-black text-green-400 font-mono">FREE</span>}
+                        </div>
+                        {isPremium
+                          ? <Lock className="w-4 h-4 text-gray-600" />
+                          : <Play className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
+                        }
+                      </div>
+                      <p className="font-black text-white mb-1">{item.badge ? `${item.badge} ${item.name}` : item.name}</p>
+                      <p className="text-xs text-gray-500 italic">"{item.tagline}"</p>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           );
