@@ -96,10 +96,11 @@ export default function PetSounds51Terms() {
 
           <Section number={5} title="Subscriptions">
             <ul className="space-y-2">
-              <li>• Monthly billing — renews automatically</li>
-              <li>• Cancel any time from account settings</li>
-              <li>• Cancellation takes effect at end of current period</li>
-              <li>• No partial month refunds (but 30-day full refund still applies)</li>
+              <li>• Annual billing — £29.99/year, renews automatically</li>
+              <li>• Cancel any time by emailing <a href="mailto:family@uf51.love" className="text-cyan-400 hover:underline">family@uf51.love</a></li>
+              <li>• Cancellation takes effect at end of current annual period</li>
+              <li>• 30-day full refund applies — no questions asked</li>
+              <li>• One price, everywhere. We don't geo-price gouge.</li>
             </ul>
           </Section>
 
