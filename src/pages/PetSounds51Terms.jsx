@@ -1,161 +1,162 @@
-import React from 'react';
-import { Shield, Heart, AlertTriangle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Shield, Heart, AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
+import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
-/**
- * ANIMAL HEALING TERMS & CONDITIONS
- * Legal protection + clear disclaimers
- */
+const Section = ({ number, title, children }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-white/10 rounded-xl overflow-hidden">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-all text-left">
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-mono text-gray-600">{String(number).padStart(2, '0')}</span>
+          <h2 className="font-black text-white">{title}</h2>
+        </div>
+        {open ? <ChevronUp className="w-4 h-4 text-cyan-400 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-cyan-400 flex-shrink-0" />}
+      </button>
+      {open && (
+        <div className="px-5 pb-5 text-sm text-gray-400 leading-relaxed border-t border-white/5">
+          <div className="pt-4">{children}</div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default function PetSounds51Terms() {
-    return (
-        <div className="min-h-screen bg-black text-white p-6 pb-24">
-            <div className="max-w-4xl mx-auto">
-                
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <Shield className="w-16 h-16 text-cyan-400 mx-auto mb-4" />
-                    <h1 className="text-4xl font-black mb-3">Terms & Conditions</h1>
-                    <p className="text-gray-400">PetSounds51 Animal Healing Service</p>
-                    <p className="text-sm text-gray-600 mt-2">Last Updated: January 7, 2026</p>
-                </div>
+  return (
+    <div className="min-h-screen bg-black text-white p-4 sm:p-6 pb-24">
+      <div className="max-w-3xl mx-auto">
 
-                {/* Critical Disclaimer */}
-                <div className="bg-yellow-900/20 border-2 border-yellow-500/50 rounded-xl p-6 mb-8">
-                    <div className="flex items-start gap-3">
-                        <AlertTriangle className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
-                        <div className="text-yellow-200">
-                            <p className="font-black text-lg mb-2">NOT VETERINARY MEDICAL ADVICE</p>
-                            <p className="text-sm leading-relaxed">
-                                PetSounds51 provides complementary sound therapy for animal wellness. 
-                                This is NOT a substitute for veterinary medical care. Always consult a licensed 
-                                veterinarian for medical diagnosis and treatment. Sound therapy should be used 
-                                alongside, not instead of, professional veterinary care.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Terms Content */}
-                <div className="space-y-8 text-gray-300">
-                    
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">1. Service Description</h2>
-                        <p className="leading-relaxed mb-3">
-                            PetSounds51 provides sound frequency therapy protocols designed to support animal wellness. 
-                            Our service uses specific healing frequencies (Solfeggio and custom frequencies) delivered 
-                            through audio playback.
-                        </p>
-                        <p className="leading-relaxed">
-                            AI51 analysis provides behavioral wellness recommendations based on observed patterns, 
-                            not medical diagnoses.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">2. What We Are NOT</h2>
-                        <ul className="space-y-2">
-                            <li>• NOT veterinary medical professionals</li>
-                            <li>• NOT providing medical diagnosis or treatment</li>
-                            <li>• NOT replacing veterinary care</li>
-                            <li>• NOT making medical claims or guarantees</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">3. User Responsibilities</h2>
-                        <p className="leading-relaxed mb-3">You agree to:</p>
-                        <ul className="space-y-2">
-                            <li>• Consult a licensed veterinarian for any medical concerns</li>
-                            <li>• Use sound therapy as complementary support only</li>
-                            <li>• Monitor your animal's response and stop if distress occurs</li>
-                            <li>• Provide accurate information when using AI51 analysis</li>
-                            <li>• Not hold PetSounds51 liable for medical outcomes</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">4. Refund Policy</h2>
-                        <p className="leading-relaxed mb-3">
-                            We offer a 30-day money-back guarantee for all tiers:
-                        </p>
-                        <ul className="space-y-2">
-                            <li>• Full refund within 30 days if not satisfied</li>
-                            <li>• Email: refunds@uf51.love with proof of purchase</li>
-                            <li>• Processed within 5-7 business days</li>
-                            <li>• No questions asked</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">5. Subscription Terms</h2>
-                        <p className="leading-relaxed mb-3">
-                            For monthly subscriptions:
-                        </p>
-                        <ul className="space-y-2">
-                            <li>• Automatically renews each month</li>
-                            <li>• Cancel anytime through account settings</li>
-                            <li>• Cancellation takes effect at end of billing period</li>
-                            <li>• No refunds for partial months</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">6. Data & Privacy</h2>
-                        <p className="leading-relaxed">
-                            We collect minimal data (email, payment info, usage). See our Privacy Policy for details. 
-                            We never sell your data. AI51 analysis is private and not shared.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">7. Limitation of Liability</h2>
-                        <p className="leading-relaxed">
-                            PetSounds51 and its creators are not liable for any medical outcomes, injuries, or 
-                            complications arising from use of this service. Sound therapy is used at your own risk 
-                            and discretion. Maximum liability is limited to the amount you paid for the service.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">8. Acceptable Use</h2>
-                        <p className="leading-relaxed mb-3">You may NOT:</p>
-                        <ul className="space-y-2">
-                            <li>• Resell or redistribute our frequency protocols</li>
-                            <li>• Claim PetSounds51 replaces veterinary care</li>
-                            <li>• Use for illegal purposes</li>
-                            <li>• Abuse or spam our support systems</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">9. Changes to Terms</h2>
-                        <p className="leading-relaxed">
-                            We may update these terms. Continued use after changes constitutes acceptance. 
-                            Major changes will be emailed to active subscribers.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-black text-cyan-400 mb-4">10. Contact</h2>
-                        <p className="leading-relaxed">
-                            Questions: support@uf51.love<br/>
-                            Refunds: refunds@uf51.love<br/>
-                            Legal: legal@uf51.love
-                        </p>
-                    </section>
-
-                </div>
-
-                {/* Love Footer */}
-                <div className="mt-12 pt-8 border-t border-cyan-500/30 text-center">
-                    <Heart className="w-8 h-8 text-pink-400 mx-auto mb-3" />
-                    <p className="text-gray-400 text-sm">
-                        Built with love for all animals ♾️❤️<br/>
-                        Part of Universal Frequency 51
-                    </p>
-                </div>
-
-            </div>
+        {/* HEADER */}
+        <div className="text-center mb-10 pt-4">
+          <PetSounds51Icon8Bit size={52} animate={false} />
+          <h1 className="text-3xl sm:text-4xl font-black mt-4 mb-2">
+            <span className="text-cyan-400">PETSOUNDS51</span>
+          </h1>
+          <p className="text-gray-500 font-mono text-xs tracking-widest">TERMS & CONDITIONS</p>
+          <p className="text-gray-700 text-xs mt-2">Last Updated: March 2026 · Part of Universal Frequency 51</p>
         </div>
-    );
+
+        {/* THE ONE BIG DISCLAIMER — always visible */}
+        <div className="bg-yellow-900/20 border-2 border-yellow-500/40 rounded-xl p-5 mb-8 flex items-start gap-4">
+          <AlertTriangle className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="font-black text-yellow-300 mb-2">THIS IS NOT VETERINARY ADVICE.</p>
+            <p className="text-yellow-200/70 text-sm leading-relaxed">
+              PetSounds51 is complementary sound therapy. It is not a diagnosis. It is not a treatment. It does not replace your vet.
+              If your animal is unwell, injured, or in distress — <strong className="text-white">call a vet first.</strong> Use this alongside professional care, never instead of it.
+            </p>
+          </div>
+        </div>
+
+        {/* THE HONEST ONE-LINER */}
+        <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-5 mb-8 text-center">
+          <p className="text-cyan-300 font-black text-lg mb-1">What we actually are:</p>
+          <p className="text-gray-400 text-sm">A free, evidence-based sound therapy tool for animals. No side effects. No medication interactions. No weird stuff. Just frequencies that peer-reviewed science says help. Works through any speaker. You can turn it off any time.</p>
+        </div>
+
+        {/* SECTIONS — collapsible */}
+        <div className="space-y-3 mb-10">
+
+          <Section number={1} title="What This Service Is">
+            <p className="mb-3">PetSounds51 delivers specific sound frequency protocols — isochronic tones, carrier frequencies, and monaural beats — through your device's speaker. No headphones required. The protocols are based on peer-reviewed research (MIT, iCalmDog RCT, Glasgow, Edinburgh) and designed to support animal behavioural wellness.</p>
+            <p>AI51 analysis provides behavioural pattern observations — not medical diagnoses. Think of it as a very smart, very caring second opinion. Your vet is still the professional.</p>
+          </Section>
+
+          <Section number={2} title="What We Are Not (Important)">
+            <ul className="space-y-2">
+              <li>❌ Not veterinary medical professionals</li>
+              <li>❌ Not providing diagnosis or treatment</li>
+              <li>❌ Not a substitute for professional vet care</li>
+              <li>❌ Not making medical guarantees</li>
+              <li>✅ A genuine, care-driven complementary wellness tool</li>
+              <li>✅ Built by humans who love animals, not a corporation</li>
+            </ul>
+          </Section>
+
+          <Section number={3} title="Your Responsibilities">
+            <ul className="space-y-2">
+              <li>• See a licensed vet for medical concerns — always</li>
+              <li>• Watch your animal while using the app. If they seem distressed, stop.</li>
+              <li>• Use this as a complement to care, not a replacement</li>
+              <li>• Don't use it as an excuse to avoid professional help</li>
+              <li>• You're an adult (or guardian). You make the call.</li>
+            </ul>
+          </Section>
+
+          <Section number={4} title="Refund Policy — No Nonsense">
+            <p className="mb-3">30-day full refund. No questions. We mean it.</p>
+            <ul className="space-y-2">
+              <li>• Email <a href="mailto:family@uf51.love" className="text-cyan-400 hover:underline">family@uf51.love</a> within 30 days</li>
+              <li>• We'll process it within 5–7 business days</li>
+              <li>• No passive-aggressive delays. No guilt trips.</li>
+              <li>• If something genuinely went wrong, tell us. We want to know.</li>
+            </ul>
+          </Section>
+
+          <Section number={5} title="Subscriptions">
+            <ul className="space-y-2">
+              <li>• Monthly billing — renews automatically</li>
+              <li>• Cancel any time from account settings</li>
+              <li>• Cancellation takes effect at end of current period</li>
+              <li>• No partial month refunds (but 30-day full refund still applies)</li>
+            </ul>
+          </Section>
+
+          <Section number={6} title="Data & Privacy">
+            <p className="mb-3">We collect the minimum we need to run the service: email, payment info, usage patterns. That's it.</p>
+            <ul className="space-y-2">
+              <li>• We never sell your data. Ever.</li>
+              <li>• AI51 conversations are private</li>
+              <li>• Your animal's data is yours</li>
+              <li>• Full privacy policy at <a href="/PrivacyPolicy" className="text-cyan-400 hover:underline">uf51.love/PrivacyPolicy</a></li>
+            </ul>
+          </Section>
+
+          <Section number={7} title="Limitation of Liability">
+            <p className="mb-3">Sound therapy carries no known risks. There are no side effects. It does not interact with medication. However:</p>
+            <p className="mb-3">PetSounds51 and Universal Frequency 51 are not liable for medical outcomes arising from use of this service. Maximum liability is capped at the amount you paid. You use this service at your own discretion.</p>
+            <p>This is standard legal protection — not because we don't care, but because we're not vets and we're being honest about that.</p>
+          </Section>
+
+          <Section number={8} title="Acceptable Use">
+            <p className="mb-2">Please don't:</p>
+            <ul className="space-y-2">
+              <li>• Resell or redistribute our protocols</li>
+              <li>• Claim PetSounds51 replaces veterinary care</li>
+              <li>• Use for any harmful, illegal, or exploitative purpose</li>
+              <li>• Spam or abuse our support</li>
+            </ul>
+          </Section>
+
+          <Section number={9} title="Changes to These Terms">
+            <p>We may update these terms. If we make significant changes, active subscribers get an email. Continued use after changes = acceptance. If something changes you genuinely disagree with, email us before assuming the worst.</p>
+          </Section>
+
+          <Section number={10} title="Governing Law">
+            <p>These terms are governed by the laws of Scotland, United Kingdom. Any disputes will be subject to the jurisdiction of Scottish courts. We are a small, ethical, UK-based operation.</p>
+          </Section>
+
+        </div>
+
+        {/* CONTACT */}
+        <div className="bg-gray-900/60 border border-white/10 rounded-xl p-6 mb-8 text-center">
+          <p className="text-white font-black mb-3">Contact Us</p>
+          <p className="text-gray-400 text-sm mb-1">Everything goes to one place. We actually read it.</p>
+          <a href="mailto:family@uf51.love" className="text-cyan-400 font-black text-lg hover:text-cyan-300 transition-colors">
+            family@uf51.love
+          </a>
+          <p className="text-gray-600 text-xs mt-3">Refunds · Legal · Support · Questions · Feedback · Just saying hi</p>
+        </div>
+
+        {/* FOOTER */}
+        <div className="text-center border-t border-white/10 pt-8">
+          <Heart className="w-8 h-8 text-pink-400 mx-auto mb-3" />
+          <p className="text-gray-500 text-sm">Built with love. For every animal. ♾️❤️</p>
+          <p className="text-gray-700 text-xs mt-1">Part of Universal Frequency 51 · uf51.love</p>
+        </div>
+
+      </div>
+    </div>
+  );
 }
