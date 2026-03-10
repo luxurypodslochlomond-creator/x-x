@@ -115,9 +115,9 @@ export default function PetSounds51Terms() {
             <p className="mb-3">We collect the minimum we need to run the service: email, payment info, usage patterns. That's it.</p>
             <ul className="space-y-2">
               <li>• We never sell your data. Ever.</li>
-              <li>• AI51 conversations are private</li>
+              <li>• Your sessions are private</li>
               <li>• Your animal's data is yours</li>
-              <li>• Full privacy policy at <a href="/PrivacyPolicy" className="text-cyan-400 hover:underline">uf51.love/PrivacyPolicy</a></li>
+              <li>• Full privacy policy at <a href="/PrivacyPolicy" className="text-orange-700 hover:underline font-bold">Privacy Policy</a></li>
             </ul>
           </Section>
 
