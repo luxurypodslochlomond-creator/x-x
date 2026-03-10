@@ -193,11 +193,11 @@ export default function PetSounds51() {
       </div>
 
       {/* WATCH TOGETHER TIP */}
-      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-r from-orange-200 to-yellow-100 border-4 border-orange-400 rounded-2xl p-4 flex items-start gap-3 shadow-md">
-        <PS51Icons.WatchTogether size={28} className="flex-shrink-0" style={{ color: '#b45309' }} />
+      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-br from-slate-800 to-slate-700 border border-cyan-500/40 rounded-xl p-5 flex items-start gap-4 shadow-lg">
+        <PS51Icons.WatchTogether size={32} className="flex-shrink-0" style={{ color: '#06b6d4' }} />
         <div>
-          <p className="text-orange-900 font-black text-sm mb-1">WATCH IT TOGETHER</p>
-          <p className="text-amber-900 text-xs leading-relaxed">When you press play, a live frequency visualizer appears. Put your phone or cast to your TV near your pet — animals love the moving patterns. <span className="font-bold">Works through any speaker. No headphones needed.</span> You're both healing together.</p>
+          <p className="text-cyan-300 font-black text-sm mb-2 tracking-wide">WATCH IT TOGETHER</p>
+          <p className="text-gray-300 text-xs leading-relaxed">When you press play, a live frequency visualizer appears. Put your phone or cast to your TV near your pet — animals love the moving patterns. <span className="font-bold text-white">Works through any speaker. No headphones needed.</span> You're both healing together.</p>
         </div>
       </div>
 
