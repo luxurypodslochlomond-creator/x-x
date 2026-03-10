@@ -120,10 +120,7 @@ export default function PetSounds51() {
       <div className="max-w-4xl mx-auto mb-12 text-center">
         <div className="flex items-center justify-center gap-4 mb-6">
           <PetSounds51Icon8Bit size={56} animate={false} />
-          <div className="text-left">
-            <h1 className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600" style={{letterSpacing: '-0.02em'}}>PETSOUNDS51</h1>
-            <p className="text-xs text-orange-300 font-bold tracking-widest mt-2">POWERED BY AI51</p>
-          </div>
+          <h1 className="text-5xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600" style={{letterSpacing: '-0.02em'}}>PETSOUNDS51</h1>
         </div>
         <p className="text-white font-bold text-xl mb-3 max-w-lg mx-auto">
           Leave it playing. Your best friend stays calm.
