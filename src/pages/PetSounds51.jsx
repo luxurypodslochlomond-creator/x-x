@@ -207,12 +207,12 @@ export default function PetSounds51() {
            const Icon = PS51Icons[cat.icon];
            return (
              <div key={catKey}>
-               <div className="flex items-center gap-2 mb-4">
-                 <Icon size={20} className="flex-shrink-0" style={{ color: cat.color }} />
-                <h2 className="text-sm font-black" style={{ color: cat.color }}>{cat.label}</h2>
-                {catKey === 'sports' && <span className="text-xs text-amber-700 font-normal">— these animals deserve care</span>}
+               <div className="flex items-center gap-3 mb-4">
+                 <Icon size={22} className="flex-shrink-0" style={{ color: cat.color }} />
+                <h2 className="text-sm font-black tracking-wide" style={{ color: cat.color }}>{cat.label}</h2>
+                {catKey === 'sports' && <span className="text-xs text-gray-400 font-normal">— these animals deserve care</span>}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {cat.items.map((item) => {
                   const isFree = FREE_PROTOCOLS.includes(item.key);
                   const isPremium = !isFree && !isSubscribed;
@@ -221,22 +221,21 @@ export default function PetSounds51() {
                     <button
                       key={item.key}
                       onClick={() => handleSelect(item.key)}
-                      className="p-4 border-3 bg-white/40 hover:bg-white/60 transition-all text-left rounded-2xl group relative shadow-md"
-                      style={{ borderColor: item.color + '80' }}
+                      className="p-4 border border-slate-600 bg-slate-800/50 hover:bg-slate-800 transition-all text-left rounded-lg group relative shadow-md hover:shadow-lg hover:border-slate-500"
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
                           {ItemIcon && <ItemIcon size={18} style={{ color: item.color, flexShrink: 0 }} />}
-                          <p className="text-xs font-bold text-amber-700">{item.hz}</p>
-                          {isFree && <span className="text-xs font-black text-green-700">FREE</span>}
+                          <p className="text-xs font-bold text-gray-400">{item.hz}</p>
+                          {isFree && <span className="text-xs font-black text-green-400">FREE</span>}
                         </div>
                         {isPremium
-                          ? <Lock className="w-4 h-4 text-amber-600" />
+                          ? <Lock className="w-4 h-4 text-gray-500" />
                           : <Play className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
                         }
                       </div>
-                      <p className="font-black text-amber-900 mb-1 text-sm">{item.name}</p>
-                      <p className="text-xs text-amber-800">"{item.tagline}"</p>
+                      <p className="font-black text-white mb-1 text-sm">{item.name}</p>
+                      <p className="text-xs text-gray-400">"{item.tagline}"</p>
                     </button>
                   );
                 })}
