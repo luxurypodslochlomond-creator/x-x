@@ -194,6 +194,7 @@ export default function PetSounds51() {
                 {cat.items.map((item) => {
                   const isFree = FREE_PROTOCOLS.includes(item.key);
                   const isPremium = !isFree && !isSubscribed;
+                  const ItemIcon = item.icon ? PS51Icons[item.icon] : null;
                   return (
                     <button
                       key={item.key}
@@ -203,6 +204,7 @@ export default function PetSounds51() {
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
+                          {ItemIcon && <ItemIcon size={18} style={{ color: item.color, flexShrink: 0 }} />}
                           <p className="text-xs font-mono text-gray-500">{item.hz}</p>
                           {isFree && <span className="text-xs font-black text-green-400 font-mono">FREE</span>}
                         </div>
@@ -211,7 +213,7 @@ export default function PetSounds51() {
                           : <Play className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
                         }
                       </div>
-                      <p className="font-black text-white mb-1">{item.badge ? `${item.badge} ${item.name}` : item.name}</p>
+                      <p className="font-black text-white mb-1">{item.name}</p>
                       <p className="text-xs text-gray-500 italic">"{item.tagline}"</p>
                     </button>
                   );
