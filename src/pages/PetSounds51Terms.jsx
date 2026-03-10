@@ -87,7 +87,7 @@ export default function PetSounds51Terms() {
           <Section number={4} title="Refund Policy — No Nonsense">
             <p className="mb-3">30-day full refund. No questions. We mean it.</p>
             <ul className="space-y-2">
-              <li>• Email <a href="mailto:family@uf51.love" className="text-cyan-400 hover:underline">family@uf51.love</a> within 30 days</li>
+              <li>• Email <a href="mailto:petsounds@uf51.love" className="text-orange-700 hover:underline font-bold">petsounds@uf51.love</a> within 30 days</li>
               <li>• We'll process it within 5–7 business days</li>
               <li>• No passive-aggressive delays. No guilt trips.</li>
               <li>• If something genuinely went wrong, tell us. We want to know.</li>
