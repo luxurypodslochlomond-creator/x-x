@@ -32,7 +32,7 @@ export default function PetSounds51() {
                     <PetSounds51Icon8Bit size={48} animate={false} />
                     <h1 className="text-2xl sm:text-3xl font-black text-cyan-400">PETSOUNDS51</h1>
                 </div>
-                <p className="text-gray-400 text-sm sm:text-base mb-4">Healing frequencies for all animals. Free forever. Works offline.</p>
+                <p className="text-gray-400 text-sm sm:text-base mb-4">Healing frequencies for all animals. Works offline. No side effects.</p>
                 <div className="flex flex-wrap items-center justify-center gap-2">
                     <a href="/PetSounds51Terms" className="text-xs text-gray-600 hover:text-cyan-400">Terms</a>
                     <span className="text-gray-800">•</span>
