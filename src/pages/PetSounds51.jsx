@@ -44,7 +44,7 @@ const PROTOCOLS = {
   sports: {
     label: 'SPORTS & ZOO ANIMALS',
     color: '#f59e0b',
-    icon: Zap,
+    icon: 'Paw',
     items: [
       { key: 'pre_race', name: 'Pre-Race Calm', tagline: 'Racehorses & greyhounds. Peak focus without panic.', hz: 'Alpha 10 Hz', color: '#f59e0b', badge: '🏇' },
       { key: 'post_race', name: 'Post-Race Recovery', tagline: 'Muscles, nerves, cortisol. All need to come down.', hz: '174 Hz PEMF', color: '#f97316', badge: '🐕' },
