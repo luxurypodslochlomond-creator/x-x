@@ -1,6 +1,7 @@
-import React, { useState, lazy, Suspense } from 'react';
-import { ChevronDown, ChevronUp, Play, Brain, Zap, Heart } from 'lucide-react';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
+import { ChevronDown, ChevronUp, Play, Brain, Zap, Heart, Lock } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
+import PS51Paywall from '@/components/petsounds/PS51Paywall';
 
 const AnimalFrequencyEngine = lazy(() => import('@/components/petsounds/AnimalFrequencyEngine'));
 
