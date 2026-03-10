@@ -213,7 +213,7 @@ export default function AnimalFrequencyEngine({ protocol = 'fireworks', species 
     let time = 0;
 
     const draw = () => {
-      if (!isPlaying) return;
+      if (!isPlayingRef.current) return;
       requestAnimationFrame(draw);
 
       time += 0.02;
