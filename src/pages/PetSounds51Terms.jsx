@@ -41,18 +41,18 @@ export default function PetSounds51Terms() {
         <div className="bg-orange-100/50 border-2 border-orange-400 rounded-xl p-5 mb-8 flex items-start gap-4">
           <AlertTriangle className="w-6 h-6 text-orange-700 flex-shrink-0 mt-0.5" />
           <div>
-            <p className="font-black text-yellow-300 mb-2">THIS IS NOT VETERINARY ADVICE.</p>
-            <p className="text-yellow-200/70 text-sm leading-relaxed">
-              PetSounds51 is complementary sound therapy. It is not a diagnosis. It is not a treatment. It does not replace your vet.
-              If your animal is unwell, injured, or in distress — <strong className="text-white">call a vet first.</strong> Use this alongside professional care, never instead of it.
+            <p className="font-black text-orange-800 mb-2">THIS IS NOT VETERINARY ADVICE.</p>
+            <p className="text-amber-900 text-sm leading-relaxed">
+              PetSounds is complementary sound therapy. It is not a diagnosis. It is not a treatment. It does not replace your vet.
+              If your animal is unwell, injured, or in distress — <strong className="text-amber-950">call a vet first.</strong> Use this alongside professional care, never instead of it.
             </p>
           </div>
         </div>
 
         {/* THE HONEST ONE-LINER */}
-        <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-5 mb-8 text-center">
-          <p className="text-cyan-300 font-black text-lg mb-1">What we actually are:</p>
-          <p className="text-gray-400 text-sm">A free, evidence-based sound therapy tool for animals. No side effects. No medication interactions. No weird stuff. Just frequencies that peer-reviewed science says help. Works through any speaker. You can turn it off any time.</p>
+        <div className="bg-yellow-100/60 border-2 border-orange-300 rounded-xl p-5 mb-8 text-center">
+          <p className="text-orange-800 font-black text-lg mb-1">What we actually are:</p>
+          <p className="text-amber-900 text-sm">Evidence-based sound therapy for animals. No side effects. No medication interactions. Just frequencies that peer-reviewed science says help. Works through any speaker. You can turn it off anytime.</p>
         </div>
 
         {/* SECTIONS — collapsible */}
