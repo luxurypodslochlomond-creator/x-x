@@ -60,14 +60,6 @@ export default function PS51Header() {
           >
             Privacy Policy
           </Link>
-          <a 
-            href="https://base44.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="block text-sm font-bold text-amber-900 hover:text-orange-700"
-          >
-            Built on Base44
-          </a>
         </div>
       )}
     </header>
