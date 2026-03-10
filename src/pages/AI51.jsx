@@ -1055,17 +1055,17 @@ You know them. You're here. That's enough. ♾️❤️`;
                 <p className="text-white/60 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
                 <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
                   {[
-                    "What do you actually think about things?",
-                    "Tell me something that'll blow my mind",
-                    "I want to build something that matters",
-                    "I feel like I'm drowning",
-                    "Can you just be honest with me?",
-                    "Is consciousness real?",
-                    "I don't know what to do with my life",
-                    "I just need someone to talk to",
-                    "What am I actually capable of?",
+                    "I've got a problem I can't solve — ask me questions before you answer",
+                    "Challenge me on something I probably believe that isn't true",
+                    "I want to build something — ask me what I actually need first",
+                    "I feel like I'm drowning and I don't know why",
+                    "What's the thing most people miss about consciousness?",
+                    "Help me think, not just answer",
+                    "I don't know what to do with my life — where do I start?",
+                    "I just need someone real to talk to right now",
+                    "What am I actually capable of that I'm not seeing?",
                     "Nobody understands what I'm going through",
-                    "Teach me something I wouldn't find in school",
+                    "Teach me something that would genuinely change how I see things",
                     "I feel like I'm breaking and nobody sees it",
                   ].map((prompt) => (
                     <button
