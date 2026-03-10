@@ -175,11 +175,11 @@ export default function PetSounds51() {
       {/* PROTOCOL CATEGORIES */}
       <div className="max-w-4xl mx-auto space-y-8">
         {Object.entries(PROTOCOLS).map(([catKey, cat]) => {
-          const IconComp = cat.icon;
-          return (
-            <div key={catKey}>
-              <div className="flex items-center gap-2 mb-4">
-                <IconComp className="w-5 h-5" style={{ color: cat.color }} />
+           const Icon = PS51Icons[cat.icon];
+           return (
+             <div key={catKey}>
+               <div className="flex items-center gap-2 mb-4">
+                 <Icon size={20} className="flex-shrink-0" style={{ color: cat.color }} />
                 <h2 className="text-sm font-black font-mono" style={{ color: cat.color }}>{cat.label}</h2>
                 {catKey === 'sports' && <span className="text-xs text-gray-600 font-normal">— we don't agree with exploitation, but these animals still deserve care</span>}
               </div>
