@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
-import { Lock, Heart, Zap, Shield } from 'lucide-react';
+import { Heart, Shield, Zap, ArrowLeft, Star } from 'lucide-react';
 import { petSoundsCheckout } from '@/functions/petSoundsCheckout';
+
+const PROTOCOLS = [
+  { emoji: '⛈️', name: 'Thunderstorm & Fireworks', detail: '40Hz gamma · suppresses fear response' },
+  { emoji: '🏥', name: 'Vet & Car Anxiety', detail: '528Hz · parasympathetic activation' },
+  { emoji: '🌙', name: "Night Anxiety / Can't Settle", detail: 'Delta 4Hz · sleep onset' },
+  { emoji: '🐾', name: 'Rescue Trauma & PTSD', detail: '396Hz theta · trauma processing' },
+  { emoji: '💔', name: 'Grief & Depression', detail: '639Hz · oxytocin + bonding' },
+  { emoji: '🧠', name: 'Cognitive Decline / Dementia', detail: '40Hz gamma · MIT protocol' },
+  { emoji: '⚡', name: 'Hyperactivity & Reactivity', detail: 'Alpha 10Hz · calm bridging' },
+  { emoji: '🦴', name: 'Arthritis & Joint Pain', detail: '174Hz PEMF · pain signalling' },
+  { emoji: '🩹', name: 'Post-Surgery Recovery', detail: '528Hz · cellular repair' },
+  { emoji: '🏇', name: 'Sports & Zoo Animals', detail: 'Performance + recovery' },
+];
 
 export default function PS51Paywall({ onClose }) {
   const [loading, setLoading] = useState(false);
 
-  const handleSubscribe = async () => {
-    // Block if in iframe (Base44 preview)
+  const handleStart = async () => {
     if (window.self !== window.top) {
-      alert('Checkout works from the published app only — not in preview mode.');
+      alert('Payment works from the published app — not inside the preview.');
       return;
     }
     setLoading(true);
@@ -19,6 +31,8 @@ export default function PS51Paywall({ onClose }) {
       });
       if (res.data?.url) {
         window.location.href = res.data.url;
+      } else {
+        alert('Could not connect to payment. Please try again.');
       }
     } catch (e) {
       console.error(e);
@@ -29,54 +43,83 @@ export default function PS51Paywall({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-[#0a0f1a] border-2 border-cyan-500/40 rounded-2xl p-8 text-center">
+    <div className="min-h-screen text-white" style={{ background: 'linear-gradient(160deg, #1a0a2e 0%, #0d1f1a 50%, #1a1000 100%)' }}>
+      <div className="max-w-lg mx-auto px-5 py-8 pb-16">
 
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <Lock className="w-5 h-5 text-cyan-400" />
-          <span className="text-cyan-400 font-mono text-sm font-black">PREMIUM PROTOCOL</span>
+        {/* BACK */}
+        <button onClick={onClose} className="flex items-center gap-2 text-amber-400/70 hover:text-amber-300 text-sm mb-8 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Separation Anxiety stays free
+        </button>
+
+        {/* HERO */}
+        <div className="text-center mb-8">
+          <div className="text-5xl mb-4">🐾</div>
+          <h1 className="text-3xl font-black text-white leading-tight mb-3">
+            Every protocol.<br/>
+            <span style={{ color: '#f59e0b' }}>One year of calm.</span>
+          </h1>
+          <p className="text-gray-400 text-base leading-relaxed">
+            Ten science-backed frequencies covering everything from thunderstorm panic to grief, dementia and recovery — just leave it playing.
+          </p>
         </div>
 
-        <h2 className="text-2xl font-black text-white mb-2">Unlock All Protocols</h2>
-        <p className="text-gray-400 text-sm mb-6">
-          Separation Anxiety is free forever. Everything else — thunderstorms, trauma, pain, grief, dementia — requires a subscription.
-        </p>
-
-        {/* PRICE */}
-        <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-5 mb-6">
-          <p className="text-4xl font-black text-white mb-1">£29.99<span className="text-lg text-gray-500 font-normal">/year</span></p>
-          <p className="text-gray-500 text-xs">Approx. $38 USD · €35 EUR · Auto-renews annually · Cancel anytime</p>
+        {/* PRICE CARD */}
+        <div className="rounded-2xl p-6 mb-6 text-center" style={{ background: 'rgba(245,158,11,0.08)', border: '2px solid rgba(245,158,11,0.4)' }}>
+          <p className="text-5xl font-black text-white mb-1">£29.99</p>
+          <p className="text-amber-400 font-bold mb-1">per year</p>
+          <p className="text-gray-500 text-xs">≈ 8p a day · Cancel any time · Full refund if it doesn't help</p>
         </div>
 
-        {/* WHAT YOU GET */}
-        <div className="text-left space-y-2 mb-6">
-          {[
-            { icon: Zap, text: 'All 10 healing frequency protocols' },
-            { icon: Heart, text: 'Thunderstorm, trauma, pain, grief, dementia' },
-            { icon: Shield, text: '30-day full refund — no questions' },
-            { icon: Heart, text: '10% goes to animal rescue' },
-          ].map(({ icon: Icon, text }, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <Icon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-              <span className="text-gray-300 text-sm">{text}</span>
+        {/* PROTOCOLS LIST */}
+        <div className="space-y-2 mb-7">
+          {PROTOCOLS.map((p, i) => (
+            <div key={i} className="flex items-center gap-3 py-2 border-b border-white/5">
+              <span className="text-xl w-7 flex-shrink-0">{p.emoji}</span>
+              <div>
+                <p className="text-sm font-bold text-white leading-tight">{p.name}</p>
+                <p className="text-xs text-gray-600">{p.detail}</p>
+              </div>
             </div>
           ))}
         </div>
 
+        {/* TRUST */}
+        <div className="grid grid-cols-3 gap-3 mb-7">
+          {[
+            { icon: Shield, label: '30-day refund', sub: 'no questions' },
+            { icon: Heart, label: '10% to rescue', sub: 'animal charities' },
+            { icon: Star, label: 'MIT · Glasgow', sub: 'peer-reviewed' },
+          ].map(({ icon: Icon, label, sub }, i) => (
+            <div key={i} className="text-center p-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)' }}>
+              <Icon className="w-5 h-5 mx-auto mb-1 text-amber-400" />
+              <p className="text-xs font-bold text-white leading-tight">{label}</p>
+              <p className="text-xs text-gray-600">{sub}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
         <button
-          onClick={handleSubscribe}
+          onClick={handleStart}
           disabled={loading}
-          className="w-full py-4 rounded-xl font-black text-lg text-black mb-3 transition-all"
-          style={{ background: loading ? '#374151' : 'linear-gradient(135deg, #06b6d4, #22c55e)', boxShadow: loading ? 'none' : '0 0 30px rgba(6,182,212,0.4)' }}
+          className="w-full py-5 rounded-2xl font-black text-xl text-black transition-all active:scale-95 mb-3"
+          style={{
+            background: loading ? '#374151' : 'linear-gradient(135deg, #f59e0b, #f97316)',
+            boxShadow: loading ? 'none' : '0 8px 40px rgba(245,158,11,0.35)',
+            color: loading ? '#9ca3af' : '#000',
+          }}
         >
-          {loading ? 'Loading...' : 'Subscribe · £29.99/year'}
+          {loading ? 'Connecting...' : 'Start Healing — £29.99/year'}
         </button>
 
-        <button onClick={onClose} className="text-gray-600 text-sm hover:text-gray-400 transition-colors">
-          ← Back (Separation Anxiety stays free)
-        </button>
+        <p className="text-center text-xs text-gray-600 mb-2">
+          Apple Pay · Google Pay · Card — via Stripe 🔒
+        </p>
 
-        <p className="text-gray-700 text-xs mt-4">Secured by Stripe · No card stored · Cancel anytime</p>
+        <p className="text-center text-xs text-gray-700">
+          Not a substitute for vet care. Complements treatment.
+        </p>
       </div>
     </div>
   );
