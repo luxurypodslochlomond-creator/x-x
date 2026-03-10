@@ -138,15 +138,22 @@ export default function PetSounds51() {
         </div>
       </div>
 
-      {/* AI INNOVATION BANNER */}
-      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-r from-orange-100 to-yellow-100 border-4 border-orange-500 rounded-2xl p-4 shadow-lg">
-        <div className="flex items-start gap-3">
-          <span className="text-2xl">🤖</span>
+      {/* AI INNOVATION BANNER - SLEEK & MODERN */}
+      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border-2 border-cyan-400/60 rounded-xl p-5 shadow-xl">
+        <div className="flex items-start gap-4">
+          <div className="flex-shrink-0">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center text-white font-black text-lg">⚡</div>
+          </div>
           <div>
-            <p className="text-orange-800 font-black text-sm mb-2">AI-POWERED INNOVATION</p>
-            <p className="text-amber-900 text-xs leading-relaxed">
-              Every protocol is <strong>AI-optimized</strong> for individual animal responses. Real-time frequency adaptation. This is next-generation care — not a static audio file. The future of animal healing, available now.
+            <p className="text-cyan-300 font-black text-sm mb-2 tracking-wide">AI51 ADAPTIVE FREQUENCY ENGINE</p>
+            <p className="text-cyan-100/90 text-xs leading-relaxed mb-3">
+              Real-time AI analysis of your animal's response. Frequencies <strong>adapt in real-time</strong> — not static presets. Each session learns. Each play is personalized. That's how you get 68% behavioural improvement (iCalmDog data).
             </p>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-400/50 rounded text-cyan-300 font-bold">Real-Time Adaptation</span>
+              <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-400/50 rounded text-cyan-300 font-bold">AI Learning</span>
+              <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-400/50 rounded text-cyan-300 font-bold">Proven Results</span>
+            </div>
           </div>
         </div>
       </div>
