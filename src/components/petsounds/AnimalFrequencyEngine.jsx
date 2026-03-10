@@ -65,6 +65,7 @@ export default function AnimalFrequencyEngine({ protocol = 'fireworks', species 
   const timerRef = useRef(null);
   const canvasRef = useRef(null);
   const analyserRef = useRef(null);
+  const isPlayingRef = useRef(false);
 
   const freq = ANIMAL_PROTOCOLS[protocol] || ANIMAL_PROTOCOLS.fireworks;
 
