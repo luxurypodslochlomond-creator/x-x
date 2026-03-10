@@ -23,6 +23,29 @@ export default function PetSounds51() {
     const [activeView, setActiveView] = useState('home'); // home, playing
     const [selectedProtocol, setSelectedProtocol] = useState(null);
 
+    // When playing - show ONLY the player, nothing else
+    if (activeView === 'playing') {
+        return (
+            <div className="min-h-screen bg-black text-white p-3 sm:p-4">
+                <div className="max-w-4xl mx-auto pt-4">
+                    <button
+                        onClick={() => setActiveView('home')}
+                        className="mb-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold"
+                    >
+                        ← back
+                    </button>
+                    <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading...</div>}>
+                        <AnimalFrequencyEngine
+                            protocol={selectedProtocol || 'fireworks'}
+                            species="dog"
+                            onComplete={() => setActiveView('home')}
+                        />
+                    </Suspense>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-black text-white p-3 sm:p-4">
             
