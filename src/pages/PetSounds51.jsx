@@ -13,7 +13,7 @@ const PROTOCOLS = {
   anxiety: {
     label: 'ANXIETY & STRESS',
     color: '#06b6d4',
-    icon: Zap,
+    icon: 'Frequency',
     items: [
       { key: 'separation', name: 'Separation Anxiety', tagline: "You've left. They're spiraling.", hz: '432 Hz', color: '#06b6d4' },
       { key: 'thunderstorm', name: 'Thunderstorm & Fireworks', tagline: 'The sky is attacking them.', hz: '40 Hz gamma', color: '#ec4899' },
