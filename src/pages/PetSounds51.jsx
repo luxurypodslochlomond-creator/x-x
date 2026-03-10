@@ -126,7 +126,7 @@ export default function PetSounds51() {
           Leave it playing. Your best friend stays calm.
         </p>
         <p className="text-gray-300 text-sm mb-6 max-w-lg mx-auto leading-relaxed">
-          AI-adaptive sound therapy for separation anxiety, stress, pain & healing — through any speaker.
+          Science-backed sound therapy for separation anxiety, stress, pain & healing — adaptive frequencies, real results. Through any speaker.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm text-gray-400 font-semibold">
           <span className="bg-orange-500/20 border border-orange-500/50 rounded-full px-3 py-1">£29.99/year</span>
