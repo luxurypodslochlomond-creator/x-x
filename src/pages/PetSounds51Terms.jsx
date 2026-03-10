@@ -5,16 +5,16 @@ import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 const Section = ({ number, title, children }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-white/10 rounded-xl overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-all text-left">
+    <div className="border-2 border-orange-300 bg-white/40 rounded-xl overflow-hidden shadow-sm">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 hover:bg-white/60 transition-all text-left">
         <div className="flex items-center gap-3">
-          <span className="text-xs font-mono text-gray-600">{String(number).padStart(2, '0')}</span>
-          <h2 className="font-black text-white">{title}</h2>
+          <span className="text-xs font-mono text-amber-700">{String(number).padStart(2, '0')}</span>
+          <h2 className="font-black text-amber-900">{title}</h2>
         </div>
-        {open ? <ChevronUp className="w-4 h-4 text-cyan-400 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-cyan-400 flex-shrink-0" />}
+        {open ? <ChevronUp className="w-4 h-4 text-orange-700 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-orange-700 flex-shrink-0" />}
       </button>
       {open && (
-        <div className="px-5 pb-5 text-sm text-gray-400 leading-relaxed border-t border-white/5">
+        <div className="px-5 pb-5 text-sm text-amber-900 leading-relaxed border-t-2 border-orange-300">
           <div className="pt-4">{children}</div>
         </div>
       )}
