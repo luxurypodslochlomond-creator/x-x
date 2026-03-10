@@ -24,22 +24,22 @@ const Section = ({ number, title, children }) => {
 
 export default function PetSounds51Terms() {
   return (
-    <div className="min-h-screen bg-black text-white p-4 sm:p-6 pb-24">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900 p-4 sm:p-6 pb-24 pt-24">
       <div className="max-w-3xl mx-auto">
 
         {/* HEADER */}
         <div className="text-center mb-10 pt-4">
           <PetSounds51Icon8Bit size={52} animate={false} />
           <h1 className="text-3xl sm:text-4xl font-black mt-4 mb-2">
-            <span className="text-cyan-400">PETSOUNDS51</span>
+            <span className="text-orange-700">PET SOUNDS</span>
           </h1>
-          <p className="text-gray-500 font-mono text-xs tracking-widest">TERMS & CONDITIONS</p>
-          <p className="text-gray-700 text-xs mt-2">Last Updated: March 2026 · Part of Universal Frequency 51</p>
+          <p className="text-amber-700 font-mono text-xs tracking-widest">TERMS & CONDITIONS</p>
+          <p className="text-amber-600 text-xs mt-2">Last Updated: March 2026</p>
         </div>
 
         {/* THE ONE BIG DISCLAIMER — always visible */}
-        <div className="bg-yellow-900/20 border-2 border-yellow-500/40 rounded-xl p-5 mb-8 flex items-start gap-4">
-          <AlertTriangle className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
+        <div className="bg-orange-100/50 border-2 border-orange-400 rounded-xl p-5 mb-8 flex items-start gap-4">
+          <AlertTriangle className="w-6 h-6 text-orange-700 flex-shrink-0 mt-0.5" />
           <div>
             <p className="font-black text-yellow-300 mb-2">THIS IS NOT VETERINARY ADVICE.</p>
             <p className="text-yellow-200/70 text-sm leading-relaxed">
