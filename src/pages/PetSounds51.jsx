@@ -87,22 +87,22 @@ export default function PetSounds51() {
   // Full screen player when active
   if (activeView === 'playing') {
     return (
-      <div className="min-h-screen bg-black text-white p-4">
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900 p-4">
         <div className="max-w-2xl mx-auto pt-4">
           <button
             onClick={() => { setActiveView('home'); setSelectedProtocol(null); }}
-            className="mb-6 text-cyan-400 hover:text-cyan-300 text-sm font-bold flex items-center gap-1"
+            className="mb-6 text-orange-700 hover:text-orange-600 text-sm font-bold flex items-center gap-1"
           >
-            ← all protocols
+            ← back
           </button>
-          <Suspense fallback={<div className="text-center text-cyan-400 py-12">loading...</div>}>
+          <Suspense fallback={<div className="text-center text-orange-700 py-12">loading...</div>}>
             <AnimalFrequencyEngine
               protocol={selectedProtocol}
               species="dog"
               onComplete={() => setActiveView('home')}
             />
           </Suspense>
-          <p className="text-center text-xs text-gray-700 mt-6">Not a substitute for vet care. No side effects.</p>
+          <p className="text-center text-xs text-amber-700 mt-6">Not a substitute for vet care. No side effects.</p>
         </div>
       </div>
     );
@@ -113,26 +113,26 @@ export default function PetSounds51() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white p-3 sm:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900 p-3 sm:p-4">
       {/* HEADER */}
       <div className="max-w-4xl mx-auto mb-8 text-center">
         <div className="flex items-center justify-center gap-3 mb-3">
           <PetSounds51Icon8Bit size={48} animate={false} />
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-cyan-400">PETSOUNDS51</h1>
-            <p className="text-xs text-gray-500 font-mono">AI-POWERED ANIMAL HEALING FREQUENCIES</p>
+            <h1 className="text-3xl sm:text-4xl font-black text-orange-700" style={{letterSpacing: '0.05em'}}>PET SOUNDS</h1>
+            <p className="text-xs text-amber-700 font-bold tracking-widest mt-1">HEALING FREQUENCIES</p>
           </div>
         </div>
-        <p className="text-white font-black text-lg mb-1 max-w-lg mx-auto">
-          Leave it playing when you go out. Your pet stays calm.
+        <p className="text-amber-900 font-bold text-lg mb-2 max-w-lg mx-auto">
+          Leave it playing. Your best friend stays calm.
         </p>
-        <p className="text-gray-400 text-sm mb-3 max-w-lg mx-auto">
-          Science-backed frequency protocols for separation anxiety, stress, pain & trauma — through any TV or speaker.
+        <p className="text-amber-800 text-sm mb-4 max-w-lg mx-auto leading-relaxed">
+          Science-backed sound therapy for separation anxiety, stress, pain & healing — through any speaker.
         </p>
-        <div className="flex items-center justify-center gap-2 flex-wrap">
-          <span className="text-xs text-cyan-400 font-mono">No download · No headphones · No medication · £29.99/year ·</span>
-          <PS51Icons.Rescue size={16} className="text-cyan-400" />
-          <span className="text-xs text-cyan-400 font-mono">10% to animal rescue</span>
+        <div className="flex items-center justify-center gap-2 flex-wrap text-xs text-amber-700 font-bold">
+          <span>£29.99/year ·</span>
+          <span>10% to rescue ·</span>
+          <span>No medication</span>
         </div>
       </div>
 
