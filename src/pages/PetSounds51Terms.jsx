@@ -123,7 +123,7 @@ export default function PetSounds51Terms() {
 
           <Section number={7} title="Limitation of Liability">
             <p className="mb-3">Sound therapy carries no known risks. There are no side effects. It does not interact with medication. However:</p>
-            <p className="mb-3">PetSounds51 and Universal Frequency 51 are not liable for medical outcomes arising from use of this service. Maximum liability is capped at the amount you paid. You use this service at your own discretion.</p>
+            <p className="mb-3">PetSounds is not liable for medical outcomes arising from use of this service. Maximum liability is capped at the amount you paid. You use this service at your own discretion.</p>
             <p>This is standard legal protection — not because we don't care, but because we're not vets and we're being honest about that.</p>
           </Section>
 
