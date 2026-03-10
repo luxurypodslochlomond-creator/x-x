@@ -136,8 +136,8 @@ export default function PetSounds51() {
                             <p>We're not vets. Works alongside traditional vet care. No side effects.</p>
                         </div>
                         <div>
-                            <p className="text-white font-bold mb-1">Forever free</p>
-                            <p>10% of any revenue goes to animal rescue. No subscriptions. Ever.</p>
+                            <p className="text-white font-bold mb-1">Ethical pricing</p>
+                            <p>10% of revenue goes to animal rescue. Affordable one-time purchase, no subscription required.</p>
                         </div>
                     </div>
                 )}
