@@ -225,16 +225,16 @@ export default function PetSounds51() {
       </div>
 
       {/* FOOTER */}
-      <div className="max-w-4xl mx-auto mt-10 pt-6 border-t border-white/10 text-center space-y-2">
-        <p className="text-xs text-gray-600">
-          Not a substitute for veterinary care. Works alongside treatment. No medication interactions.
+      <div className="max-w-4xl mx-auto mt-10 pt-6 border-t-2 border-orange-300 text-center space-y-2">
+        <p className="text-xs text-amber-800">
+          Not a substitute for vet care. Works alongside treatment. No side effects.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href="/PetSounds51Terms" className="text-xs text-gray-700 hover:text-cyan-400">Terms</a>
-          <span className="text-gray-800">•</span>
-          <a href="/PrivacyPolicy" className="text-xs text-gray-700 hover:text-cyan-400">Privacy</a>
-          <span className="text-gray-800">•</span>
-          <span className="text-xs text-gray-700">10% to animal rescue</span>
+          <a href="/PetSounds51Terms" className="text-xs text-amber-700 hover:text-orange-700 font-bold">Terms</a>
+          <span className="text-amber-700">•</span>
+          <a href="/PrivacyPolicy" className="text-xs text-amber-700 hover:text-orange-700 font-bold">Privacy</a>
+          <span className="text-amber-700">•</span>
+          <span className="text-xs text-amber-800 font-bold">10% to animal rescue 🐾</span>
         </div>
       </div>
     </div>
