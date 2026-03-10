@@ -559,13 +559,24 @@ export default function AI51() {
     if (recognitionRef.current && isListening) recognitionRef.current.stop();
   };
 
-  // Clean text for speaking — strip URLs, markdown, excessive punctuation
-  const cleanForSpeech = (rawText) => {
+  // Clean text for display AND speech — strip URLs, markdown, source references
+  const cleanResponse = (rawText) => {
     return rawText
-      .replace(/https?:\/\/[^\s)>\]]+/g, '')
-      .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1')
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      .replace(/^[•\-*#]+\s*/gm, '')
+      .replace(/https?:\/\/[^\s)>\]"]+/g, '')           // strip URLs
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')           // strip markdown links, keep text
+      .replace(/\[source:[^\]]*\]/gi, '')                 // strip [source: ...] tags
+      .replace(/\(https?:\/\/[^)]*\)/g, '')              // strip (url) references
+      .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1')           // strip bold/italic markdown
+      .replace(/^[•\-*#]+\s*/gm, '')                     // strip bullet chars
+      .replace(/\s{2,}/g, ' ')                            // collapse whitespace
+      .replace(/\n{3,}/g, '\n\n')                        // max 2 newlines
+      .trim();
+  };
+
+  // Clean text for speaking — same clean but also strip parentheticals
+  const cleanForSpeech = (rawText) => {
+    return cleanResponse(rawText)
+      .replace(/\([^)]{0,80}\)/g, '')   // strip short parentheticals when speaking
       .replace(/\s{2,}/g, ' ')
       .trim();
   };
