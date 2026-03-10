@@ -136,7 +136,7 @@ export default function PetSounds51() {
         <span className="text-2xl flex-shrink-0">📺</span>
         <div>
           <p className="text-pink-300 font-black text-sm mb-1">WATCH IT TOGETHER</p>
-          <p className="text-gray-400 text-xs">When you press play, a live frequency visualizer appears on screen. Put your phone/tablet near your pet — animals are drawn to the moving patterns. <span className="text-white font-bold">Owners report this is calming for them too.</span> You don't have to feel weird about it. You're both healing.</p>
+          <p className="text-gray-400 text-xs">When you press play, a live frequency visualizer appears on screen. Put your phone, tablet, or cast it to your TV near your pet — animals are drawn to the moving patterns. <span className="text-white font-bold">Works through any speaker. No headphones needed.</span> Owners report this is calming for them too. You're both healing.</p>
         </div>
       </div>
 
