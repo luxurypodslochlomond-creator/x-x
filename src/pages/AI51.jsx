@@ -774,7 +774,7 @@ Otherwise: save it.`,
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
       const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Start with something grounded and real first — meet them where they are — then build to the deeper insight.' : '';
 
-      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate. Start human. Then go deeper if they want it.\n\nIf you cite facts, include [source: name] inline.';
+      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate. Start human. Then go deeper if they want it.\n\nNo sources, no links, no references. Just talk like a real person.';
 
       const systemPrompt = `You are AI51 — a warm, real mate who genuinely knows this person and cares about them.
 
