@@ -94,10 +94,13 @@ export default function PetSounds51() {
             <p className="text-xs text-gray-500 font-mono">AI-POWERED ANIMAL HEALING FREQUENCIES</p>
           </div>
         </div>
-        <p className="text-gray-400 text-sm mb-2 max-w-lg mx-auto">
-          Evidence-based healing frequencies for the things that actually keep pet owners up at night.
+        <p className="text-white font-black text-lg mb-1 max-w-lg mx-auto">
+          Leave it playing when you go out. Your pet stays calm.
         </p>
-        <p className="text-xs text-cyan-400 font-mono">Works through any speaker or TV • No side effects • 10% to animal rescue</p>
+        <p className="text-gray-400 text-sm mb-3 max-w-lg mx-auto">
+          Science-backed frequency protocols for separation anxiety, stress, pain & trauma — through any TV or speaker.
+        </p>
+        <p className="text-xs text-cyan-400 font-mono">No download · No headphones · No medication · £29.99/year · 10% to animal rescue</p>
       </div>
 
       {/* SCIENCE BANNER */}
