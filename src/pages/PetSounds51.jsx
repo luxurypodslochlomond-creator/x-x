@@ -132,7 +132,7 @@ export default function PetSounds51() {
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm text-gray-400 font-semibold">
           <span className="bg-orange-500/20 border border-orange-500/50 rounded-full px-3 py-1">£29.99/year</span>
           <span className="bg-green-500/20 border border-green-500/50 rounded-full px-3 py-1">10% to rescue</span>
-          <span className="bg-cyan-500/20 border border-cyan-500/50 rounded-full px-3 py-1">Safe & drug-free</span>
+          <span className="bg-yellow-500/20 border border-yellow-500/50 rounded-full px-3 py-1 text-yellow-300">Safe & drug-free</span>
         </div>
       </div>
 
@@ -141,7 +141,7 @@ export default function PetSounds51() {
         <div className="bg-gradient-to-br from-pink-950/30 via-slate-900 to-slate-900 border border-pink-500/30 rounded-2xl p-6"
           style={{ boxShadow: '0 0 40px rgba(236,72,153,0.08)' }}>
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-white font-black text-sm">AI</div>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-green-500 flex items-center justify-center flex-shrink-0 text-white font-black text-sm">AI</div>
             <div>
               <p className="text-pink-400 font-black text-xs tracking-widest mb-2">POWERED BY AI51</p>
               <p className="text-gray-300 text-sm leading-relaxed">
@@ -190,10 +190,10 @@ export default function PetSounds51() {
       </div>
 
       {/* WATCH TOGETHER TIP */}
-      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-br from-slate-800 to-slate-700 border border-cyan-500/40 rounded-xl p-5 flex items-start gap-4 shadow-lg">
-        <PS51Icons.WatchTogether size={32} className="flex-shrink-0" style={{ color: '#06b6d4' }} />
+      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-br from-slate-800 to-slate-700 border border-green-500/40 rounded-xl p-5 flex items-start gap-4 shadow-lg">
+        <PS51Icons.WatchTogether size={32} className="flex-shrink-0" style={{ color: '#22c55e' }} />
         <div>
-          <p className="text-cyan-300 font-black text-sm mb-2 tracking-wide">WATCH IT TOGETHER</p>
+          <p className="text-green-300 font-black text-sm mb-2 tracking-wide">WATCH IT TOGETHER</p>
           <p className="text-gray-300 text-xs leading-relaxed">When you press play, a live frequency visualizer appears. Put your phone or cast to your TV near your pet — animals love the moving patterns. <span className="font-bold text-white">Works through any speaker. No headphones needed.</span> You're both healing together.</p>
         </div>
       </div>
