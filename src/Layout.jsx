@@ -97,7 +97,7 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
   const colorMap = {
     pink: { border: 'border-pink-500', text: 'text-pink-400', desc: 'text-pink-300', bg: 'bg-pink-500/10' },
     green: { border: 'border-green-500', text: 'text-green-400', desc: 'text-green-300', bg: 'bg-green-500/10' },
-    amber: { border: 'border-amber-500', text: 'text-amber-400', desc: 'text-amber-300', bg: 'bg-amber-500/10' },
+    amber: { border: 'border-amber-600', text: 'text-amber-500', desc: 'text-amber-300', bg: 'bg-amber-600/10' },
     cyan: { border: 'border-cyan-500', text: 'text-cyan-400', desc: 'text-cyan-300', bg: 'bg-cyan-500/10' },
     gray: { border: 'border-gray-500', text: 'text-gray-400', desc: 'text-gray-300', bg: 'bg-gray-500/10' },
   };
