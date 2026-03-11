@@ -155,21 +155,21 @@ export default function PetSounds51() {
       </div>
 
       {/* SCIENCE BANNER */}
-      <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-br from-slate-800/60 to-slate-700/60 border border-orange-500/40 rounded-xl p-5 shadow-lg backdrop-blur-sm">
+      <div className="max-w-4xl mx-auto mb-6 rounded-xl p-5 shadow-lg" style={{ background: 'rgba(26,32,14,0.9)', border: '1px solid rgba(138,171,58,0.4)' }}>
         <button
           onClick={() => setShowScience(!showScience)}
           className="w-full flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
-          <PS51Icons.Science size={20} className="text-orange-400" />
-          <p className="text-orange-300 font-black text-sm tracking-wide">THE SCIENCE (MIT · iCalmDog · Glasgow · Edinburgh)</p>
+          <PS51Icons.Science size={20} style={{ color: '#8aab3a' }} />
+          <p className="font-black text-sm tracking-wide" style={{ color: '#8aab3a' }}>THE SCIENCE (MIT · iCalmDog · Glasgow · Edinburgh)</p>
         </div>
-          {showScience ? <ChevronUp className="w-4 h-4 text-orange-400" /> : <ChevronDown className="w-4 h-4 text-orange-400" />}
+          {showScience ? <ChevronUp className="w-4 h-4" style={{ color: '#8aab3a' }} /> : <ChevronDown className="w-4 h-4" style={{ color: '#8aab3a' }} />}
         </button>
         {showScience && (
-          <div className="mt-4 grid sm:grid-cols-2 gap-3 text-xs text-gray-300">
-            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
-              <p className="text-orange-300 font-bold mb-1">🧪 MIT — Nature 2019</p>
+          <div className="mt-4 grid sm:grid-cols-2 gap-3 text-xs" style={{ color: '#a89870' }}>
+            <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
+              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>🧪 MIT — Nature 2019</p>
               <p>40Hz gamma therapy proven to clear amyloid plaques in mice. Now in active Alzheimer's human trials.</p>
             </div>
             <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
