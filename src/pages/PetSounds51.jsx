@@ -146,7 +146,7 @@ export default function PetSounds51() {
               <p className="text-sm leading-relaxed" style={{ color: '#a89870' }}>
                 Every frequency is selected using AI trained on MIT, Glasgow University, and Edinburgh research — not guesswork. The same technology that helps people with chronic pain and anxiety, adapted for animals. Science doing what science should.
               </p>
-              <Link to={createPageUrl("PetSounds51Story")} className="inline-block mt-3 text-xs font-black text-pink-400 hover:text-pink-300 transition-colors">
+              <Link to={createPageUrl("PetSounds51Story")} className="inline-block mt-3 text-xs font-black transition-colors" style={{ color: '#8aab3a' }}>
                 See the full story →
               </Link>
             </div>
