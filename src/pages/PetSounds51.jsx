@@ -114,7 +114,7 @@ export default function PetSounds51() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white pt-24 p-3 sm:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white p-3 sm:p-4">
       {/* HEADER */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
         <div className="flex items-center justify-center gap-4 mb-6">
