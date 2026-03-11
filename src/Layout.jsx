@@ -167,6 +167,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // Detect CB51 subdomain
   const isCB51Subdomain = window.location.hostname.startsWith('cb51.') || window.location.hostname === 'cb51.io';
   const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain;
+  const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments';
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName);
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
