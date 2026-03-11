@@ -115,7 +115,6 @@ export default function PetSounds51() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white pt-24 p-3 sm:p-4">
-      <PS51Header />
       {/* HEADER */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
         <div className="flex items-center justify-center gap-4 mb-6">
@@ -230,7 +229,7 @@ export default function PetSounds51() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a href="/PetSounds51Terms" className="text-xs text-gray-400 hover:text-orange-400 font-bold transition-colors">Terms</a>
           <span className="text-gray-600">•</span>
-          <a href="/PrivacyPolicy" className="text-xs text-gray-400 hover:text-orange-400 font-bold transition-colors">Privacy</a>
+          <a href="/PetSounds51Privacy" className="text-xs text-gray-400 hover:text-orange-400 font-bold transition-colors">Privacy</a>
           <span className="text-gray-600">•</span>
           <span className="text-xs text-gray-400 font-bold">10% to animal rescue 🐾</span>
         </div>
