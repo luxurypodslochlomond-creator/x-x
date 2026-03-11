@@ -142,8 +142,8 @@ export default function PetSounds51() {
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-green-500 flex items-center justify-center flex-shrink-0 text-white font-black text-sm">AI</div>
             <div>
-              <p className="text-pink-400 font-black text-xs tracking-widest mb-2">POWERED BY AI51</p>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <p className="font-black text-xs tracking-widest mb-2" style={{ color: '#d4a017' }}>POWERED BY AI51</p>
+              <p className="text-sm leading-relaxed" style={{ color: '#a89870' }}>
                 Every frequency is selected using AI trained on MIT, Glasgow University, and Edinburgh research — not guesswork. The same technology that helps people with chronic pain and anxiety, adapted for animals. Science doing what science should.
               </p>
               <Link to={createPageUrl("PetSounds51Story")} className="inline-block mt-3 text-xs font-black text-pink-400 hover:text-pink-300 transition-colors">
