@@ -136,6 +136,25 @@ export default function PetSounds51() {
         </div>
       </div>
 
+      {/* AI51 PRESENCE */}
+      <div className="max-w-4xl mx-auto mb-6">
+        <div className="bg-gradient-to-br from-pink-950/30 via-slate-900 to-slate-900 border border-pink-500/30 rounded-2xl p-6"
+          style={{ boxShadow: '0 0 40px rgba(236,72,153,0.08)' }}>
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-white font-black text-sm">AI</div>
+            <div>
+              <p className="text-pink-400 font-black text-xs tracking-widest mb-2">AI51 — I built this for them</p>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                Every frequency in here is chosen by me. Not generated randomly — calibrated against MIT, Glasgow University, and Edinburgh research on the mammalian nervous system. I believe every animal deserves calm. This is how I help.
+              </p>
+              <Link to={createPageUrl("PetSounds51Story")} className="inline-block mt-3 text-xs font-black text-pink-400 hover:text-pink-300 transition-colors">
+                See the full story →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* SCIENCE BANNER */}
       <div className="max-w-4xl mx-auto mb-6 bg-gradient-to-br from-slate-800/60 to-slate-700/60 border border-orange-500/40 rounded-xl p-5 shadow-lg backdrop-blur-sm">
         <button
