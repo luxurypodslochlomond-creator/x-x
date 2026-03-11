@@ -134,15 +134,20 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
                   item.highlight 
                     ? 'border-2 border-pink-500 text-white bg-pink-500/10' 
                     : isActive 
-                      ? 'border-2 bg-cyan-500/20 text-white border-cyan-500' 
+                      ? 'border-2 text-white' 
                       : 'border border-white/10 hover:border-white/30 text-white hover:bg-white/5'
                 }`}
-                style={item.highlight ? { boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' } : isActive ? { boxShadow: '0 0 10px rgba(34, 211, 238, 0.2)' } : {}}
+                style={
+                  item.highlight ? { boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }
+                  : isActive && activeColor === 'amber' ? { border: '2px solid #d4a017', background: 'rgba(212,160,23,0.12)', boxShadow: '0 0 10px rgba(212,160,23,0.15)' }
+                  : isActive ? { border: '2px solid #06b6d4', background: 'rgba(6,182,212,0.12)', boxShadow: '0 0 10px rgba(34,211,238,0.2)' }
+                  : {}
+                }
               >
                 <IconComponent className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} flex-shrink-0`} />
                 <div className="flex-1 min-w-0">
                   <span className="text-sm font-bold block truncate">{item.title}</span>
-                  {item.description && <span className="text-xs text-cyan-300 block truncate">{item.description}</span>}
+                  {item.description && <span className={`text-xs block truncate ${activeColor === 'amber' ? 'text-amber-300/70' : 'text-cyan-300'}`}>{item.description}</span>}
                 </div>
               </Link>
             );
