@@ -520,9 +520,10 @@ const LayoutInner = ({ children, currentPageName }) => {
               ) : !isCB51Page && canGoBack ? (
                 <button
                   onClick={() => navigate(-1)}
-                  className="p-2 hover:bg-cyan-500/10 rounded-lg transition-colors"
+                  className="p-2 rounded-lg transition-colors"
+                  style={isPS51Page ? { color: '#d4a017' } : {}}
                 >
-                  <ArrowLeft className="w-5 h-5 text-cyan-400" />
+                  <ArrowLeft className={`w-5 h-5 ${isPS51Page ? '' : 'text-cyan-400'}`} style={isPS51Page ? { color: '#d4a017' } : {}} />
                 </button>
               ) : null}
               {!isCB51Page && !isPS51Page && <CompactMusicPlayer />}
