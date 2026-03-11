@@ -257,6 +257,7 @@ import PassItOn from './pages/PassItOn';
 import PatientZero from './pages/PatientZero';
 import PetSounds51 from './pages/PetSounds51';
 import PetSounds51Enterprise from './pages/PetSounds51Enterprise';
+import PetSounds51Privacy from './pages/PetSounds51Privacy';
 import PetSounds51StripeSetup from './pages/PetSounds51StripeSetup';
 import PetSounds51Terms from './pages/PetSounds51Terms';
 import Playlists from './pages/Playlists';
@@ -404,7 +405,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import PetSounds51Privacy from './pages/PetSounds51Privacy';
+import PetSounds51Story from './pages/PetSounds51Story';
 import __Layout from './Layout.jsx';
 
 
@@ -619,6 +620,7 @@ export const PAGES = {
     "PatientZero": PatientZero,
     "PetSounds51": PetSounds51,
     "PetSounds51Enterprise": PetSounds51Enterprise,
+    "PetSounds51Privacy": PetSounds51Privacy,
     "PetSounds51StripeSetup": PetSounds51StripeSetup,
     "PetSounds51Terms": PetSounds51Terms,
     "Playlists": Playlists,
@@ -766,7 +768,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "PetSounds51Privacy": PetSounds51Privacy,
+    "PetSounds51Story": PetSounds51Story,
 }
 
 export const pagesConfig = {

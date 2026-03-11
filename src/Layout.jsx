@@ -578,7 +578,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </>
                           )}
 
-                        {!isCB51Page && scottNav.length > 0 && (
+                        {!isCB51Page && !isPS51Page && scottNav.length > 0 && (
                                     <>
                                         <div className="h-px bg-cyan-500/30 my-3" />
                                         <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} isMobile />
