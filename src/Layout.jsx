@@ -532,7 +532,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   <span className="text-[9px] font-black font-mono text-pink-400 mt-0.5">HEAL</span>
                 </Link>
               )}
-              {!isCB51Page && (
+              {!isCB51Page && !isPS51Page && (
                 <motion.button
                   onClick={() => navigate(createPageUrl("AI51"))}
                   whileHover={{ scale: 1.05 }}
