@@ -499,7 +499,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : isPS51Page ? (
               <Link to={createPageUrl("PetSounds51")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <PetSounds51Icon8Bit size={28} animate={false} />
-                <span className="text-xl font-black text-orange-500">PS51</span>
+                <span className="text-xl font-black" style={{ color: '#d4a017' }}>PetSounds51</span>
               </Link>
             ) : (
               <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
