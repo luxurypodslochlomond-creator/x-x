@@ -404,6 +404,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
+import PetSounds51Privacy from './pages/PetSounds51Privacy';
 import __Layout from './Layout.jsx';
 
 
@@ -765,6 +766,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
+    "PetSounds51Privacy": PetSounds51Privacy,
 }
 
 export const pagesConfig = {

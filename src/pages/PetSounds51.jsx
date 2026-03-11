@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp, Play, Lock } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PS51Paywall from '@/components/petsounds/PS51Paywall';
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
-import PS51Header from '@/components/petsounds/PS51Header';
+
 
 // Free tier: separation anxiety only
 const FREE_PROTOCOLS = ['separation'];
