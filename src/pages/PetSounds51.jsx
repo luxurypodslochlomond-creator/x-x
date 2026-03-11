@@ -138,8 +138,7 @@ export default function PetSounds51() {
 
       {/* AI51 PRESENCE */}
       <div className="max-w-4xl mx-auto mb-6">
-        <div className="bg-gradient-to-br from-pink-950/30 via-slate-900 to-slate-900 border border-pink-500/30 rounded-2xl p-6"
-          style={{ boxShadow: '0 0 40px rgba(236,72,153,0.08)' }}>
+        <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.25)', boxShadow: '0 0 40px rgba(212,160,23,0.06)' }}>
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-green-500 flex items-center justify-center flex-shrink-0 text-white font-black text-sm">AI</div>
             <div>
