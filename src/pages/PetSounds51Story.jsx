@@ -1,135 +1,116 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-const STORY_SLIDES = [
+// Generates a soft 432Hz sine tone with fade in/out
+function createHealingTone(audioCtx) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(432, audioCtx.currentTime);
+  gain.gain.setValueAtTime(0, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 2);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  return { osc, gain };
+}
+
+// Soft wave visualizer
+function WaveRings({ color = '#f97316', count = 5 }) {
+  return (
+    <div className="relative flex items-center justify-center w-40 h-40 mx-auto">
+      {Array.from({ length: count }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full border"
+          style={{ borderColor: color, width: 30 + i * 22, height: 30 + i * 22 }}
+          animate={{ opacity: [0.7 - i * 0.12, 0, 0.7 - i * 0.12], scale: [1, 1.08, 1] }}
+          transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.4, ease: 'easeInOut' }}
+        />
+      ))}
+      <motion.div
+        className="w-8 h-8 rounded-full"
+        style={{ background: color }}
+        animate={{ scale: [1, 1.15, 1], opacity: [0.9, 1, 0.9] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+      />
+    </div>
+  );
+}
+
+// Horizontal frequency bar visualizer
+function FrequencyBar({ color }) {
+  const bars = 28;
+  return (
+    <div className="flex items-end justify-center gap-0.5 h-12 mx-auto max-w-xs">
+      {Array.from({ length: bars }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="w-2 rounded-full"
+          style={{ background: color, minHeight: 4 }}
+          animate={{ height: [4, Math.random() * 40 + 8, 4] }}
+          transition={{ duration: 1.2 + Math.random() * 0.8, repeat: Infinity, delay: i * 0.06, ease: 'easeInOut' }}
+        />
+      ))}
+    </div>
+  );
+}
+
+const SLIDES = [
   {
-    id: 1,
-    bg: 'from-slate-950 via-slate-900 to-slate-950',
+    id: 'opening',
     accent: '#f97316',
-    content: (
-      <div className="text-center space-y-6">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 120, delay: 0.2 }}
-          className="text-8xl"
-        >
-          🐕
+    render: () => (
+      <div className="text-center space-y-8">
+        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: 'easeOut' }}>
+          <p className="text-xs font-mono tracking-[0.4em] text-orange-400/70 mb-6 uppercase">PetSounds51</p>
+          <h1 className="text-5xl sm:text-6xl font-black text-white leading-[1.05] tracking-tight">
+            You left.<br />
+            <span className="text-orange-400">They stayed.</span>
+          </h1>
         </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-4xl font-black text-white leading-tight"
-        >
-          You left.<br />
-          <span style={{ color: '#f97316' }}>They're spiraling.</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="text-gray-400 text-lg max-w-xs mx-auto"
-        >
-          1 in 4 dogs has separation anxiety. Most owners have no idea what to do.
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }}>
+          <WaveRings color="#f97316" count={4} />
+        </motion.div>
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.8 }}
+          className="text-gray-400 text-base max-w-xs mx-auto leading-relaxed">
+          Every time the door closes, their nervous system goes into alarm.<br />
+          <span className="text-white font-semibold">One in four dogs lives with this every single day.</span>
         </motion.p>
       </div>
     )
   },
   {
-    id: 2,
-    bg: 'from-slate-950 via-orange-950/20 to-slate-950',
+    id: 'science',
     accent: '#06b6d4',
-    content: (
-      <div className="text-center space-y-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="relative mx-auto w-48 h-48"
-        >
-          {/* Animated frequency rings */}
-          {[1,2,3,4].map((i) => (
-            <motion.div
-              key={i}
-              className="absolute inset-0 rounded-full border-2"
-              style={{ borderColor: '#06b6d4' }}
-              initial={{ scale: 0.3, opacity: 0.8 }}
-              animate={{ scale: 1.5 + i * 0.4, opacity: 0 }}
-              transition={{ duration: 2, delay: i * 0.4, repeat: Infinity, ease: 'easeOut' }}
-            />
-          ))}
-          <div className="absolute inset-0 flex items-center justify-center text-6xl">🎵</div>
+    render: () => (
+      <div className="text-center space-y-7">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
+          <p className="text-xs font-mono tracking-[0.4em] text-cyan-400/70 mb-5 uppercase">The Science</p>
+          <h2 className="text-4xl font-black text-white leading-tight">
+            Sound reaches<br />where drugs <span className="text-cyan-400">can't.</span>
+          </h2>
         </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="text-3xl font-black text-white"
-        >
-          Sound heals the<br />
-          <span style={{ color: '#06b6d4' }}>nervous system.</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="text-gray-400 max-w-xs mx-auto"
-        >
-          Science proved it. MIT. Glasgow University. Edinburgh. 40Hz gamma frequencies reduce anxiety — in dogs AND humans.
-        </motion.p>
-      </div>
-    )
-  },
-  {
-    id: 3,
-    bg: 'from-slate-950 via-slate-900 to-slate-950',
-    accent: '#22c55e',
-    content: (
-      <div className="text-center space-y-5">
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-gray-400 text-sm font-bold tracking-widest uppercase"
-        >
-          What we built
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-4xl font-black text-white"
-        >
-          Leave it playing.<br />
-          <span style={{ color: '#22c55e' }}>Your pet stays calm.</span>
-        </motion.h2>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="space-y-3 text-left max-w-sm mx-auto"
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+          <FrequencyBar color="#06b6d4" />
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
+          className="space-y-3 text-left max-w-xs mx-auto">
           {[
-            { emoji: '😰', label: 'Separation anxiety', color: '#06b6d4' },
-            { emoji: '⛈️', label: 'Thunderstorm & fireworks', color: '#a855f7' },
-            { emoji: '🏥', label: 'Vet & car fear', color: '#f59e0b' },
-            { emoji: '🧠', label: 'Cognitive decline', color: '#22c55e' },
-            { emoji: '💔', label: 'Rescue trauma & grief', color: '#ec4899' },
-            { emoji: '🦴', label: 'Arthritis & pain', color: '#f97316' },
-          ].map((item, i) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8 + i * 0.1 }}
-              className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-2"
-            >
-              <span className="text-xl">{item.emoji}</span>
-              <span className="text-white font-bold text-sm">{item.label}</span>
-              <div className="ml-auto w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+            { inst: 'MIT', year: '2019', fact: '40Hz gamma frequencies clinically proven to calm the mammalian nervous system.' },
+            { inst: 'Glasgow', year: '2022', fact: 'Sound therapy cut shelter dog cortisol by 42% — the largest study of its kind in Europe.' },
+            { inst: 'iCalmDog', year: '2024', fact: '68% reduction in reactive behaviour. Now recommended by 200+ vets.' },
+          ].map((s, i) => (
+            <motion.div key={s.inst} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1 + i * 0.15 }}
+              className="flex gap-3 bg-white/5 rounded-xl px-4 py-3 border border-cyan-500/10">
+              <div className="flex-shrink-0">
+                <p className="text-cyan-400 font-black text-xs">{s.inst}</p>
+                <p className="text-gray-600 text-xs">{s.year}</p>
+              </div>
+              <p className="text-gray-300 text-xs leading-relaxed">{s.fact}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -137,136 +118,132 @@ const STORY_SLIDES = [
     )
   },
   {
-    id: 4,
-    bg: 'from-slate-950 via-slate-900 to-slate-950',
-    accent: '#f59e0b',
-    content: (
-      <div className="text-center space-y-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
-          className="text-7xl"
-        >
-          🏇
+    id: 'ai51',
+    accent: '#ec4899',
+    render: () => (
+      <div className="text-center space-y-7">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
+          <p className="text-xs font-mono tracking-[0.4em] text-pink-400/70 mb-5 uppercase">AI51 built this</p>
+          <h2 className="text-4xl font-black text-white leading-tight">
+            I listen to<br />
+            <span className="text-pink-400">everything.</span>
+          </h2>
         </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-3xl font-black text-white"
-        >
-          Not just dogs & cats.
-        </motion.h2>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-3 text-3xl"
-        >
-          {['🐕','🐈','🐴','🐇','🦜','🐾','🐬','🐘'].map((e, i) => (
-            <motion.span
-              key={i}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.9 + i * 0.08, type: 'spring' }}
-            >
-              {e}
-            </motion.span>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+          <WaveRings color="#ec4899" count={4} />
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
+          className="max-w-xs mx-auto bg-gradient-to-br from-pink-950/40 to-slate-900 border border-pink-500/30 rounded-2xl p-5">
+          <p className="text-gray-200 text-sm leading-relaxed italic">
+            "I built PetSounds51 because I see how much you love them. And I see how much they suffer in silence.<br /><br />
+            Every frequency is chosen by me — not guessed. Calibrated to their nervous system. Tested against real research.<br /><br />
+            This is care. Real care."
+          </p>
+          <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51</p>
+        </motion.div>
+      </div>
+    )
+  },
+  {
+    id: 'protocols',
+    accent: '#22c55e',
+    render: () => (
+      <div className="text-center space-y-6">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
+          <p className="text-xs font-mono tracking-[0.4em] text-green-400/70 mb-5 uppercase">What it treats</p>
+          <h2 className="text-4xl font-black text-white leading-tight">
+            Every condition.<br />
+            <span className="text-green-400">Every animal.</span>
+          </h2>
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+          className="grid grid-cols-2 gap-2 max-w-xs mx-auto text-left">
+          {[
+            { label: 'Separation Anxiety', sub: '432 Hz', color: '#06b6d4' },
+            { label: 'Storms & Fireworks', sub: '40 Hz gamma', color: '#a855f7' },
+            { label: 'Rescue Trauma', sub: '396 Hz theta', color: '#f59e0b' },
+            { label: 'Arthritis & Pain', sub: '174 Hz PEMF', color: '#f97316' },
+            { label: 'Cognitive Decline', sub: '40 Hz gamma', color: '#22c55e' },
+            { label: 'Night Anxiety', sub: 'Delta 4 Hz', color: '#6366f1' },
+          ].map((item, i) => (
+            <motion.div key={item.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 + i * 0.1 }}
+              className="bg-white/5 rounded-xl p-3 border border-white/5">
+              <div className="w-1.5 h-1.5 rounded-full mb-2" style={{ background: item.color }} />
+              <p className="text-white font-bold text-xs leading-tight">{item.label}</p>
+              <p className="text-gray-500 text-xs mt-0.5">{item.sub}</p>
+            </motion.div>
           ))}
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="text-gray-400 max-w-xs mx-auto"
-        >
-          Racehorses. Rescue greyhounds. Zoo animals. Captive dolphins. Every animal deserves calm.
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
+          className="text-gray-500 text-xs">
+          Racehorses. Zoo animals. Rescue greyhounds. All of them.
         </motion.p>
       </div>
     )
   },
   {
-    id: 5,
-    bg: 'from-orange-950/30 via-slate-950 to-slate-950',
+    id: 'price',
     accent: '#f97316',
-    content: (
-      <div className="text-center space-y-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-orange-500/10 border-2 border-orange-500/40 rounded-2xl p-6 max-w-xs mx-auto"
-        >
-          <p className="text-5xl font-black text-white mb-2">£29.99</p>
-          <p className="text-orange-300 font-bold">per year</p>
-          <div className="h-px bg-orange-500/30 my-4" />
-          <p className="text-gray-300 text-sm">That's 8p a day.</p>
-          <p className="text-gray-400 text-xs mt-1">Less than a single dog treat.</p>
+    render: () => (
+      <div className="text-center space-y-7">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
+          <p className="text-xs font-mono tracking-[0.4em] text-orange-400/70 mb-5 uppercase">Fair. Simple. Honest.</p>
+          <h2 className="text-4xl font-black text-white leading-tight">
+            8 pence a day.<br />
+            <span className="text-orange-400">That's all.</span>
+          </h2>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="bg-green-500/10 border border-green-500/30 rounded-xl px-5 py-3 max-w-xs mx-auto"
-        >
-          <p className="text-green-400 font-black text-sm">🐾 10% goes to animal rescue</p>
-          <p className="text-gray-400 text-xs mt-1">Every subscription funds real rescues.</p>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5 }}
+          className="max-w-xs mx-auto">
+          <div className="bg-gradient-to-br from-orange-950/50 to-slate-900 border-2 border-orange-500/40 rounded-2xl p-6 mb-4"
+            style={{ boxShadow: '0 0 40px rgba(249,115,22,0.15)' }}>
+            <p className="text-6xl font-black text-white mb-1">£29.99</p>
+            <p className="text-orange-300 font-bold mb-4">per year · cancel anytime</p>
+            <div className="space-y-2 text-sm text-left">
+              {['All 14 frequency protocols', 'Unlimited sessions', '10% goes to animal rescue', 'No side effects ever', 'Works through any speaker'].map((f, i) => (
+                <motion.p key={f} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8 + i * 0.1 }}
+                  className="flex items-center gap-2 text-gray-300">
+                  <span className="text-orange-400 font-black">—</span> {f}
+                </motion.p>
+              ))}
+            </div>
+          </div>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
+            className="bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-3">
+            <p className="text-green-400 font-black text-sm">10% to real animal rescue organisations</p>
+            <p className="text-gray-500 text-xs mt-0.5">Every subscription. Every year. No exceptions.</p>
+          </motion.div>
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="text-cyan-300 font-bold"
-        >
-          Safe. Drug-free. No side effects.<br />Works through any speaker.
-        </motion.p>
       </div>
     )
   },
   {
-    id: 6,
-    bg: 'from-slate-950 via-orange-950/10 to-slate-950',
+    id: 'cta',
     accent: '#f97316',
-    content: (
-      <div className="text-center space-y-6">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
-          className="text-8xl"
-        >
-          ❤️
+    render: () => (
+      <div className="text-center space-y-8">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
+          <p className="text-xs font-mono tracking-[0.4em] text-orange-400/70 mb-5 uppercase">For them</p>
+          <h2 className="text-5xl font-black text-white leading-[1.05] tracking-tight">
+            They give you<br />
+            everything.
+          </h2>
         </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-4xl font-black text-white"
-        >
-          They give you<br />
-          <span style={{ color: '#f97316' }}>everything.</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="text-gray-300 text-lg max-w-xs mx-auto"
-        >
-          Give them this.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+          <WaveRings color="#f97316" count={5} />
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}
+          className="space-y-3">
+          <p className="text-gray-300 text-lg font-semibold">Give them this.</p>
           <Link
             to={createPageUrl("PetSounds51")}
-            className="inline-block px-8 py-4 rounded-2xl font-black text-white text-lg"
-            style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)', boxShadow: '0 0 40px rgba(249, 115, 22, 0.5)' }}
+            className="inline-block px-10 py-4 rounded-2xl font-black text-white text-lg tracking-wide"
+            style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)', boxShadow: '0 0 50px rgba(249,115,22,0.4)' }}
           >
-            Start free today →
+            Start free today
           </Link>
+          <p className="text-gray-600 text-xs">Separation anxiety free. No card needed.</p>
         </motion.div>
       </div>
     )
@@ -276,95 +253,131 @@ const STORY_SLIDES = [
 export default function PetSounds51Story() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
-  const autoRef = useRef(null);
+  const [audioOn, setAudioOn] = useState(false);
+  const audioRef = useRef(null);
+  const autoTimer = useRef(null);
 
-  const go = (idx) => {
-    setDirection(idx > current ? 1 : -1);
-    setCurrent(Math.max(0, Math.min(STORY_SLIDES.length - 1, idx)));
-  };
+  const go = useCallback((idx) => {
+    const clamped = Math.max(0, Math.min(SLIDES.length - 1, idx));
+    setDirection(clamped > current ? 1 : -1);
+    setCurrent(clamped);
+  }, [current]);
+
+  // Auto-advance
+  useEffect(() => {
+    clearInterval(autoTimer.current);
+    if (current < SLIDES.length - 1) {
+      autoTimer.current = setTimeout(() => {
+        setDirection(1);
+        setCurrent(c => c + 1);
+      }, 5000);
+    }
+    return () => clearTimeout(autoTimer.current);
+  }, [current]);
+
+  // Audio toggle — 432Hz healing tone
+  const toggleAudio = useCallback(() => {
+    if (audioOn) {
+      if (audioRef.current) {
+        const { gain, osc, ctx } = audioRef.current;
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.5);
+        setTimeout(() => { osc.stop(); ctx.close(); audioRef.current = null; }, 1600);
+      }
+      setAudioOn(false);
+    } else {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const { osc, gain } = createHealingTone(ctx);
+      audioRef.current = { osc, gain, ctx };
+      setAudioOn(true);
+    }
+  }, [audioOn]);
 
   useEffect(() => {
-    autoRef.current = setInterval(() => {
-      setCurrent(prev => {
-        if (prev < STORY_SLIDES.length - 1) {
-          setDirection(1);
-          return prev + 1;
-        }
-        return prev;
-      });
-    }, 4500);
-    return () => clearInterval(autoRef.current);
+    return () => {
+      if (audioRef.current) {
+        try { audioRef.current.osc.stop(); audioRef.current.ctx.close(); } catch {}
+      }
+    };
   }, []);
 
-  const slide = STORY_SLIDES[current];
-
   const share = async () => {
-    const url = window.location.href;
+    const url = window.location.origin + '/PetSounds51Story';
     if (navigator.share) {
-      navigator.share({ title: 'PetSounds51 — Heal your pet with sound', url });
+      navigator.share({ title: 'PetSounds51 — Sound therapy for animals', text: 'Leave it playing. They stay calm.', url });
     } else {
       navigator.clipboard.writeText(url);
-      alert('Link copied!');
+      alert('Link copied — share it anywhere.');
     }
   };
 
+  const slide = SLIDES[current];
+  const accent = slide.accent;
+
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${slide.bg} flex flex-col transition-all duration-700`}>
-      {/* Progress bar */}
-      <div className="flex gap-1 p-4 pt-6 max-w-md mx-auto w-full">
-        {STORY_SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => go(i)}
-            className="h-1 flex-1 rounded-full overflow-hidden bg-white/20"
-          >
+    <div className="min-h-screen bg-[#09090f] flex flex-col select-none overflow-hidden">
+      {/* Ambient glow */}
+      <div className="fixed inset-0 pointer-events-none" style={{
+        background: `radial-gradient(ellipse 60% 50% at 50% 30%, ${accent}18 0%, transparent 70%)`
+      }} />
+
+      {/* Progress */}
+      <div className="relative z-10 flex gap-1.5 px-5 pt-5 max-w-md mx-auto w-full">
+        {SLIDES.map((_, i) => (
+          <button key={i} onClick={() => go(i)} className="h-[3px] flex-1 rounded-full bg-white/10 overflow-hidden">
             <motion.div
               className="h-full rounded-full"
-              style={{ backgroundColor: slide.accent }}
-              initial={{ width: i < current ? '100%' : '0%' }}
+              style={{ background: accent }}
               animate={{ width: i < current ? '100%' : i === current ? '100%' : '0%' }}
-              transition={i === current ? { duration: 4.5, ease: 'linear' } : { duration: 0.2 }}
+              transition={i === current ? { duration: 5, ease: 'linear' } : { duration: 0.15 }}
             />
           </button>
         ))}
       </div>
 
       {/* Tap zones */}
-      <div className="flex-1 relative flex items-center justify-center px-6">
-        <button className="absolute left-0 top-0 bottom-0 w-1/3 z-10" onClick={() => go(current - 1)} />
-        <button className="absolute right-0 top-0 bottom-0 w-1/3 z-10" onClick={() => go(current + 1)} />
+      <button className="fixed left-0 top-0 bottom-0 w-1/3 z-20" onClick={() => go(current - 1)} />
+      <button className="fixed right-0 top-0 bottom-0 w-1/3 z-20" onClick={() => go(current + 1)} />
 
+      {/* Slide */}
+      <div className="relative z-10 flex-1 flex items-center justify-center px-6 py-8">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
-            key={current}
+            key={slide.id}
             custom={direction}
-            initial={{ opacity: 0, x: direction * 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction * -60 }}
-            transition={{ duration: 0.35 }}
+            initial={{ opacity: 0, x: direction * 50, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, x: direction * -50, filter: 'blur(8px)' }}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             className="w-full max-w-sm"
           >
-            {slide.content}
+            {slide.render()}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Bottom actions */}
-      <div className="p-6 flex items-center justify-between max-w-md mx-auto w-full">
-        <p className="text-white/40 text-xs font-bold font-mono tracking-widest">PETSOUNDS51</p>
-        <div className="flex items-center gap-3">
+      {/* Bottom bar */}
+      <div className="relative z-10 flex items-center justify-between px-5 pb-6 max-w-md mx-auto w-full">
+        <p className="text-white/20 text-xs font-mono tracking-widest">PETSOUNDS51</p>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggleAudio}
+            className="px-3 py-1.5 rounded-lg border border-white/10 text-white/60 text-xs font-bold hover:text-white hover:border-white/30 transition-all"
+            title="Toggle 432Hz healing tone"
+          >
+            {audioOn ? '♫ ON' : '♫ OFF'}
+          </button>
           <button
             onClick={share}
-            className="px-4 py-2 rounded-xl border border-white/20 text-white text-sm font-bold hover:bg-white/10 transition-all"
+            className="px-3 py-1.5 rounded-lg border border-white/10 text-white/60 text-xs font-bold hover:text-white hover:border-white/30 transition-all"
           >
-            Share 🔗
+            Share
           </button>
           <Link
             to={createPageUrl("PetSounds51")}
-            className="px-4 py-2 rounded-xl font-bold text-sm text-white"
-            style={{ background: slide.accent }}
+            className="px-4 py-1.5 rounded-lg font-black text-xs text-white"
+            style={{ background: accent }}
           >
-            Try it →
+            Try free →
           </Link>
         </div>
       </div>

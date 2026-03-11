@@ -1,5 +1,7 @@
 import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { ChevronDown, ChevronUp, Play, Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PS51Paywall from '@/components/petsounds/PS51Paywall';
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
