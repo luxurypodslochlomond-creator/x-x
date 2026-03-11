@@ -193,7 +193,7 @@ export default function PetSounds51() {
         <PS51Icons.WatchTogether size={32} className="flex-shrink-0" style={{ color: '#8aab3a' }} />
         <div>
           <p className="font-black text-sm mb-2 tracking-wide" style={{ color: '#8aab3a' }}>WATCH IT TOGETHER</p>
-          <p className="text-xs leading-relaxed" style={{ color: '#a89870' }}>When you press play, a live frequency visualizer appears. Put your phone or cast to your TV near your pet — animals love the moving patterns. <span className="font-bold text-white">Works through any speaker. No headphones needed.</span> You're both healing together.</p>
+          <p className="text-xs leading-relaxed" style={{ color: '#a89870' }}>When you press play, a live frequency visualizer appears. Put your phone or cast to your TV near your pet — animals love the moving patterns. <span className="font-bold" style={{ color: '#e8d5a3' }}>Works through any speaker. No headphones needed.</span> You're both healing together.</p>
         </div>
       </div>
 
@@ -206,7 +206,7 @@ export default function PetSounds51() {
                <div className="flex items-center gap-3 mb-4">
                  <Icon size={22} className="flex-shrink-0" style={{ color: cat.color }} />
                 <h2 className="text-sm font-black tracking-wide" style={{ color: cat.color }}>{cat.label}</h2>
-                {catKey === 'sports' && <span className="text-xs text-gray-400 font-normal">— these animals deserve care</span>}
+                {catKey === 'sports' && <span className="text-xs font-normal" style={{ color: '#a89870' }}>— these animals deserve care</span>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {cat.items.map((item) => {
@@ -217,21 +217,24 @@ export default function PetSounds51() {
                     <button
                       key={item.key}
                       onClick={() => handleSelect(item.key)}
-                      className="p-4 border border-slate-600 bg-slate-800/50 hover:bg-slate-800 transition-all text-left rounded-lg group relative shadow-md hover:shadow-lg hover:border-slate-500"
+                      className="p-4 transition-all text-left rounded-lg group relative shadow-md"
+                      style={{ background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)' }}
+                      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(212,160,23,0.4)'}
+                      onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(138,171,58,0.2)'}
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
                           {ItemIcon && <ItemIcon size={18} style={{ color: item.color, flexShrink: 0 }} />}
-                          <p className="text-xs font-bold text-gray-400">{item.hz}</p>
-                          {isFree && <span className="text-xs font-black text-green-400">FREE</span>}
+                          <p className="text-xs font-bold" style={{ color: '#a89870' }}>{item.hz}</p>
+                          {isFree && <span className="text-xs font-black" style={{ color: '#8aab3a' }}>FREE</span>}
                         </div>
                         {isPremium
-                          ? <Lock className="w-4 h-4 text-gray-500" />
+                          ? <Lock className="w-4 h-4" style={{ color: '#6b5e3a' }} />
                           : <Play className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
                         }
                       </div>
-                      <p className="font-black text-white mb-1 text-sm">{item.name}</p>
-                      <p className="text-xs text-gray-400">"{item.tagline}"</p>
+                      <p className="font-black mb-1 text-sm" style={{ color: '#e8d5a3' }}>{item.name}</p>
+                      <p className="text-xs" style={{ color: '#a89870' }}>"{item.tagline}"</p>
                     </button>
                   );
                 })}
