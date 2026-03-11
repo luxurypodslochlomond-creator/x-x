@@ -501,6 +501,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <PetSounds51Icon8Bit size={28} animate={false} />
                 <span className="text-xl font-black" style={{ color: '#d4a017' }}>PetSounds51</span>
               </Link>
+            
             ) : (
               <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <COOLASFUCKWaves size={28} animate={true} />
