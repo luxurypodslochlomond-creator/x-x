@@ -116,23 +116,23 @@ export default function PetSounds51() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white p-3 sm:p-4">
+    <div className="min-h-screen text-white p-3 sm:p-4" style={{ background: 'linear-gradient(135deg, #1a200e 0%, #2a3018 40%, #1e1a0e 100%)' }}>
       {/* HEADER */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
         <div className="flex flex-col items-center mb-6">
           <PetSounds51Icon8Bit size={120} animate={true} />
-          <h1 className="text-5xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 mt-4" style={{letterSpacing: '-0.02em'}}>PetSounds51</h1>
+          <h1 className="text-5xl sm:text-6xl font-black mt-4" style={{ color: '#d4a017', letterSpacing: '-0.02em', textShadow: '0 0 30px rgba(212,160,23,0.4)' }}>PetSounds51</h1>
         </div>
-        <p className="text-white font-bold text-xl mb-3 max-w-lg mx-auto">
+        <p className="font-bold text-xl mb-3 max-w-lg mx-auto" style={{ color: '#e8d5a3' }}>
           Leave it playing. Your best friend stays calm.
         </p>
-        <p className="text-gray-300 text-sm mb-6 max-w-lg mx-auto leading-relaxed">
+        <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed" style={{ color: '#a89870' }}>
           Science-backed sound therapy for separation anxiety, stress, pain & healing — adaptive frequencies, real results. Through any speaker.
         </p>
-        <div className="flex items-center justify-center gap-3 flex-wrap text-sm text-gray-400 font-semibold">
-          <span className="bg-orange-500/20 border border-orange-500/50 rounded-full px-3 py-1">£29.99/year</span>
-          <span className="bg-green-500/20 border border-green-500/50 rounded-full px-3 py-1">10% to rescue</span>
-          <span className="bg-yellow-500/20 border border-yellow-500/50 rounded-full px-3 py-1 text-yellow-300">Safe & drug-free</span>
+        <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
+          <span className="rounded-full px-3 py-1" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>£29.99/year</span>
+          <span className="rounded-full px-3 py-1" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>10% to rescue</span>
+          <span className="rounded-full px-3 py-1" style={{ background: 'rgba(200,169,110,0.15)', border: '1px solid rgba(200,169,110,0.4)', color: '#c8a96e' }}>Safe & drug-free</span>
         </div>
       </div>
 
