@@ -245,16 +245,16 @@ export default function PetSounds51() {
       </div>
 
       {/* FOOTER */}
-      <div className="max-w-4xl mx-auto mt-12 pt-6 border-t border-slate-700 text-center space-y-3">
-        <p className="text-xs text-gray-400">
+      <div className="max-w-4xl mx-auto mt-12 pt-6 text-center space-y-3" style={{ borderTop: '1px solid rgba(138,171,58,0.2)' }}>
+        <p className="text-xs" style={{ color: '#a89870' }}>
           Not a substitute for vet care. Works alongside treatment. No side effects.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href="/PetSounds51Terms" className="text-xs text-gray-400 hover:text-orange-400 font-bold transition-colors">Terms</a>
-          <span className="text-gray-600">•</span>
-          <a href="/PetSounds51Privacy" className="text-xs text-gray-400 hover:text-orange-400 font-bold transition-colors">Privacy</a>
-          <span className="text-gray-600">•</span>
-          <span className="text-xs text-gray-400 font-bold">10% to animal rescue 🐾</span>
+          <a href="/PetSounds51Terms" className="text-xs font-bold transition-colors" style={{ color: '#a89870' }}>Terms</a>
+          <span style={{ color: '#4a4030' }}>•</span>
+          <a href="/PetSounds51Privacy" className="text-xs font-bold transition-colors" style={{ color: '#a89870' }}>Privacy</a>
+          <span style={{ color: '#4a4030' }}>•</span>
+          <span className="text-xs font-bold" style={{ color: '#8aab3a' }}>10% to animal rescue 🐾</span>
         </div>
       </div>
     </div>
