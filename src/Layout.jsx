@@ -91,7 +91,7 @@ const CompactMusicPlayer = () => {
 };
 
 // NAV SECTION COMPONENT - COLLAPSIBLE CONCERTINA STYLE
-const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false, defaultOpen = false }) => {
+const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false, defaultOpen = false, activeColor = 'cyan' }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   
   const colorMap = {
