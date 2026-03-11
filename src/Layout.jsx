@@ -413,6 +413,13 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
   ];
 
+  // PS51 PET SOUNDS MENU
+  const ps51Nav = [
+    { title: "Home", url: createPageUrl("PetSounds51"), icon: Heart, description: "All protocols" },
+    { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: FileText, description: "Service terms" },
+    { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye, description: "Data protection" },
+  ];
+
   // CB51 ARTIST MANAGEMENT MENU
   const cb51Nav = [
         { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
