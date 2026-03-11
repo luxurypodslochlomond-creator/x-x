@@ -489,7 +489,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* MOBILE HEADER */}
         {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
-        <header className={`lg:hidden fixed ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b border-cyan-500/30`}>
+        <header className={`lg:hidden fixed ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b ${isPS51Page ? 'border-amber-700/40' : 'border-cyan-500/30'}`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
               <Link to={createPageUrl("CB51")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
