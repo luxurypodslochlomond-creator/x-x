@@ -523,8 +523,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                   <ArrowLeft className="w-5 h-5 text-cyan-400" />
                 </button>
               ) : null}
-              {!isCB51Page && <CompactMusicPlayer />}
-              {!isCB51Page && (
+              {!isCB51Page && !isPS51Page && <CompactMusicPlayer />}
+              {!isCB51Page && !isPS51Page && (
                 <Link to={createPageUrl("FrequencyChamber")} className="flex flex-col items-center p-1.5" style={{ animation: 'glow-pulse 2s ease-in-out infinite' }}>
                   <svg width="28" height="28" viewBox="0 0 32 32" fill="none" style={{ overflow: 'visible' }}>
                     <path d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16" stroke="#ec4899" strokeWidth="2.5" strokeLinecap="round" fill="none" style={{ filter: 'drop-shadow(0 0 6px #ec4899)', strokeDasharray: '200', animation: 'heartbeat-line 2s ease-in-out infinite' }} />
