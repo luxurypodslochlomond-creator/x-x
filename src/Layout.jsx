@@ -642,7 +642,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <span className="text-sm font-bold font-mono">BACK</span>
               </button>
             )}
-            {!isCB51Page && (
+            {!isCB51Page && !isPS51Page && (
               <>
                 <div className="mb-4"><CompactMusicPlayer /></div>
                 <Link to={createPageUrl("AI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
