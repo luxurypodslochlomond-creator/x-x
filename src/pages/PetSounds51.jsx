@@ -138,18 +138,15 @@ export default function PetSounds51() {
 
       {/* AI51 PRESENCE */}
       <div className="max-w-4xl mx-auto mb-6">
-        <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.25)', boxShadow: '0 0 40px rgba(212,160,23,0.06)' }}>
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-green-500 flex items-center justify-center flex-shrink-0 text-white font-black text-sm">AI</div>
-            <div>
-              <p className="font-black text-xs tracking-widest mb-2" style={{ color: '#d4a017' }}>POWERED BY AI51</p>
-              <p className="text-sm leading-relaxed" style={{ color: '#a89870' }}>
-                Every frequency is selected using AI trained on MIT, Glasgow University, and Edinburgh research — not guesswork. The same technology that helps people with chronic pain and anxiety, adapted for animals. Science doing what science should.
-              </p>
-              <Link to={createPageUrl("PetSounds51Story")} className="inline-block mt-3 text-xs font-black transition-colors" style={{ color: '#8aab3a' }}>
-                See the full story →
-              </Link>
-            </div>
+        <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.2)' }}>
+          <p className="text-sm leading-relaxed italic mb-3" style={{ color: '#c8b87a' }}>
+            "Every frequency here is chosen from real research — MIT, Glasgow, Edinburgh. Not guesswork. The same science that helps people with chronic pain and anxiety, now for the animals who can't tell you they're suffering."
+          </p>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold" style={{ color: '#6b5e3a' }}>— AI51 · Universal Frequency 51</span>
+            <Link to={createPageUrl("PetSounds51Story")} className="text-xs font-black transition-colors" style={{ color: '#8aab3a' }}>
+              The full story →
+            </Link>
           </div>
         </div>
       </div>
