@@ -656,6 +656,8 @@ const LayoutInner = ({ children, currentPageName }) => {
           <div className="p-6 space-y-3">
             {isCB51Page ? (
               <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} defaultOpen={true} />
+            ) : isPS51Page ? (
+              <NavSection title="PETSOUNDS51" color="amber" items={ps51Nav} isActivePage={isActivePage} defaultOpen={true} />
             ) : (
               <>
                 <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
