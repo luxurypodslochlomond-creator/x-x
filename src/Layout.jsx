@@ -551,8 +551,11 @@ const LayoutInner = ({ children, currentPageName }) => {
                   <Menu className="w-6 h-6 text-cyan-400" />
                 </button>
               ) : (
-                <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">
-                  {isMobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-cyan-400" />}
+                <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg transition-colors">
+                  {isMobileMenuOpen
+                    ? <X className="w-6 h-6" style={isPS51Page ? { color: '#d4a017' } : { color: '#22d3ee' }} />
+                    : <Menu className="w-6 h-6" style={isPS51Page ? { color: '#d4a017' } : { color: '#22d3ee' }} />
+                  }
                 </button>
               )}
             </div>
