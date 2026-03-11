@@ -172,16 +172,16 @@ export default function PetSounds51() {
               <p className="font-bold mb-1" style={{ color: '#d4a017' }}>🧪 MIT — Nature 2019</p>
               <p>40Hz gamma therapy proven to clear amyloid plaques in mice. Now in active Alzheimer's human trials.</p>
             </div>
-            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
-              <p className="text-orange-300 font-bold mb-1">🐾 iCalmDog RCT 2024</p>
+            <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
+              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>🐾 iCalmDog RCT 2024</p>
               <p>68% reduction in reactive behaviour using 10Hz alpha tones. Recommended by 200+ vets worldwide.</p>
             </div>
-            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
-              <p className="text-orange-300 font-bold mb-1">University of Glasgow</p>
+            <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
+              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>University of Glasgow</p>
               <p>Music therapy reduced shelter dog cortisol by 42%. Most-cited animal audio welfare study in Europe.</p>
             </div>
-            <div className="bg-slate-700/50 border border-orange-500/30 rounded-lg p-3">
-              <p className="text-orange-300 font-bold mb-1">University of Edinburgh</p>
+            <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
+              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>University of Edinburgh</p>
               <p>40Hz gamma slowed canine cognitive decline in 6-week trial. 1 in 3 UK dogs has noise phobia.</p>
             </div>
           </div>
