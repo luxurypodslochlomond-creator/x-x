@@ -565,6 +565,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
                             <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                          ) : isPS51Page ? (
+                            <NavSection title="PETSOUNDS51" color="amber" items={ps51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : (
                             <>
                               <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
