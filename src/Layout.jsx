@@ -625,7 +625,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               ) : isPS51Page ? (
                 <>
                   <PetSounds51Icon8Bit size={40} animate={false} />
-                  <span className="text-3xl font-black text-orange-500">PS51</span>
+                  <span className="text-2xl font-black" style={{ color: '#d4a017' }}>PetSounds51</span>
                 </>
               ) : (
                 <>
