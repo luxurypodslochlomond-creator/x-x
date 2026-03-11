@@ -417,7 +417,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const ps51Nav = [
     { title: "Home", url: createPageUrl("PetSounds51"), icon: Heart, description: "All protocols" },
     { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: FileText, description: "Service terms" },
-    { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye, description: "Data protection" },
+    { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye, description: "Data protection" },
   ];
 
   // CB51 ARTIST MANAGEMENT MENU
