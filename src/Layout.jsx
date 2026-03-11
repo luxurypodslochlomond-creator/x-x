@@ -495,10 +495,10 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <Radio className="w-7 h-7 text-cyan-400" />
                 <span className="text-xl font-black text-cyan-400">CB51</span>
               </Link>
-            ) : currentPageName === 'PetSounds51' ? (
+            ) : isPS51Page ? (
               <Link to={createPageUrl("PetSounds51")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <PetSounds51Icon8Bit size={28} animate={false} />
-                <span className="text-xl font-black text-orange-600">PS51</span>
+                <span className="text-xl font-black text-orange-500">PS51</span>
               </Link>
             ) : (
               <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
