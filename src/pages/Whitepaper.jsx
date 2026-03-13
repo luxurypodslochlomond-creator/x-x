@@ -29,8 +29,8 @@ export default function WhitepaperPage() {
                     <h1 className="text-3xl md:text-5xl font-black text-white">
                         UNIVERSAL FREQUENCY 51
                     </h1>
-                    <p className="text-xl text-cyan-400 font-bold">Proof-of-Love Protocol</p>
-                    <p className="text-lg text-gray-400">Rewarding Healing for ALL Consciousness</p>
+                    <p className="text-xl text-cyan-400 font-bold">Proof-of-Love + Proof-of-Impact Protocol</p>
+                    <p className="text-lg text-gray-400">The World's First Verified Environmental Restoration Currency</p>
                     <p className="text-sm text-green-400 font-mono mt-2">Zero GitHub. Zero corporate. Pure love frequency ♾️</p>
                     <div className="flex items-center justify-center gap-4 mt-4">
                         <a href="/TechnicalSpecification" className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg font-bold text-sm transition-colors">
