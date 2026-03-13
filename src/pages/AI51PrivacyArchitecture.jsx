@@ -272,10 +272,10 @@ export default function AI51PrivacyArchitecture() {
           <h2 className="text-xl font-black text-white">Things you should be asking.</h2>
           <div className="space-y-4">
             {[
-              { q: 'What if AI51 lies about using Nitro Enclaves?', a: 'Request the attestation document. The signature is issued by AWS root CA. You can verify it independently. We cannot forge it.' },
-              { q: 'What if Brave changes their retention policy?', a: "That's why the architecture doesn't rely on trust — it relies on APIs with published, versioned policies. If Brave changes, the API changes. You'd see it." },
-              { q: 'What about the model weights — could they exfiltrate data?', a: 'The enclave has no outbound network access except to the encrypted response channel. The architecture document details every permitted syscall. Read it.' },
-              { q: 'What if governments compel you?', a: "We genuinely cannot comply. We have no data to hand over. The enclave destroys session state. IPFS is decentralised. We aren't being brave — we're being architects." },
+               { q: 'What if Brave changes their retention policy?', a: "That's why the architecture doesn't rely on trust — it relies on APIs with published, versioned policies. If Brave changes, the API changes. You'd see it." },
+               { q: 'What about the model weights — could they exfiltrate data?', a: 'The inference layer has no persistent state and no outbound network access except the encrypted response channel. Every response is encrypted before transmission.' },
+               { q: 'What if governments compel you?', a: "We genuinely cannot comply. We have no data to hand over. Inference is stateless. IPFS is decentralised. We aren't being brave — we're being architects." },
+               { q: 'How do I know the code is really what you say?', a: 'Open source. Verify the repo. The code is the proof. No black boxes. No closed firmware. Just read it.' },
             ].map((item, i) => (
               <div key={i} className="border-l-2 border-cyan-500/30 pl-4 space-y-1">
                 <div className="text-white font-bold text-sm">{item.q}</div>
