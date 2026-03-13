@@ -251,13 +251,24 @@ export default function ProfilePage() {
                                 <h3 className="text-xl font-black font-mono text-cyan-400">YOUR BALANCE</h3>
                             </div>
                             
-                            <div className="border-2 border-cyan-500/50 bg-black/60 p-4">
+                            <div className="border-2 border-cyan-500/50 bg-black/60 p-4 space-y-3">
                                 <div className="flex items-baseline gap-2">
                                     <p className="text-4xl md:text-5xl font-black font-mono text-cyan-400">
                                         {(user.p51_balance || 0).toFixed(1)}
                                     </p>
                                     <span className="text-base font-mono text-cyan-400">$P51</span>
                                 </div>
+                                {microLitterCount > 0 && (
+                                    <div className="border-t border-cyan-500/30 pt-3 space-y-1">
+                                        <p className="text-amber-400 font-mono text-sm font-black">🌟 MICRO-LITTER BONUS</p>
+                                        <p className="text-white/80 font-mono text-xs">
+                                            {microLitterCount} cleanups • +{totalBonusTokens.toFixed(1)} $P51 bonus
+                                        </p>
+                                        <p className={`text-xs font-mono ${bonusChainValid.valid ? 'text-green-400' : 'text-red-400'}`}>
+                                            {bonusChainValid.valid ? '✓ Verified unfuckable' : '⚠️ Chain integrity check'}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
 
                             {/* ACTIONS - 8-BIT CLEAN */}
