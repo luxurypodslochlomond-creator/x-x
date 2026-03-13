@@ -13,20 +13,39 @@ Deno.serve(async (req) => {
 
     // Use Base44 InvokeLLM with vision to analyze the cleanup photo
     const analysis = await base44.integrations.Core.InvokeLLM({
-      prompt: `Analyze this cleanup photo for fraud detection and impact assessment. 
-        Location: ${location || 'unknown'}
-        User-reported weight: ${litter_weight || 'not provided'} kg
-        
-        Return ONLY valid JSON (no markdown, no code blocks):
-        {
-          "liveness_score": 0-100,
-          "ai_weight_estimate_min": kg,
-          "ai_weight_estimate_max": kg,
-          "ai_items_detected": "list of items",
-          "fraud_flags": ["flag1", "flag2"] or [],
-          "confidence": "high/medium/low",
-          "summary": "brief analysis"
-        }`,
+      prompt: `You are a global environmental cleanup verifier. Analyze this photo to verify legitimate cleanup action that counts toward planetary healing.
+
+WHAT COUNTS AS VALID CLEANUP (GLOBALLY):
+✅ Street/park/beach litter removal
+✅ Garden/yard cleanup (home residential property)
+✅ Driveway/patio/balcony cleanup
+✅ Waterway/river cleanup
+✅ Emergency disaster response (flood debris, wildfire cleanup, etc)
+✅ Community cleanup events
+❌ Shelf/desk staging with arranged items
+❌ Professional product photography
+❌ Single item with studio lighting
+
+Location reported: ${location || 'unknown'}
+User reported weight: ${litter_weight || 'not provided'} kg
+
+ANALYZE FOR:
+1) **Setting & Authenticity**: Outdoor or outdoor-residential? Natural lighting or studio? Real depth and shadows indicate genuine cleanup.
+2) **Liveness Detection**: Is this a real photo (0-100 score)? Check for natural imperfections, depth, realistic shadows. AI-gen or reused photos score lower.
+3) **Weight Estimation**: Count visible items and estimate volume/weight. Compare to user claim.
+4) **Fraud Flags**: Any red flags? (identical composition to known fakes, impossible physics, professional staging, single arranged item, etc)
+5) **Global Legitimacy**: Is this real environmental action that helps the planet?
+
+Return ONLY valid JSON (no markdown):
+{
+  "liveness_score": 0-100,
+  "ai_weight_estimate_min": kg,
+  "ai_weight_estimate_max": kg,
+  "ai_items_detected": "item1, item2, ...",
+  "fraud_flags": [],
+  "confidence": "high/medium/low",
+  "summary": "brief assessment"
+}`,
       file_urls: [photoUrl],
       response_json_schema: {
         type: 'object',
