@@ -23,7 +23,7 @@ export default function ESGBridge() {
   const [contactOpen, setContactOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-green-950/50 to-black text-white p-6 md:p-12">
+    <div className="min-h-screen bg-gradient-to-b from-black via-emerald-950/40 to-black text-white p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-16">
 
         <header className="text-center space-y-6">
