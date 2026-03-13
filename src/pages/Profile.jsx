@@ -479,17 +479,17 @@ export default function ProfilePage() {
                                                 <div className="space-y-3">
                                                     {cleanups.slice(0, 10).map(c => (
                                                         <div key={c.id} className="bg-black/60 border-2 border-cyan-500/30 p-3 space-y-2">
-                                                            {c.photo_url && (
+                                                            {c.photo_url ? (
                                                                 <img 
                                                                     src={c.photo_url} 
                                                                     alt="Cleanup photo" 
                                                                     className="w-full h-32 object-cover rounded border-2 border-cyan-500/50"
                                                                     loading="lazy"
                                                                     onError={(e) => {
-                                                                        e.target.style.display = 'none';
+                                                                        e.target.outerHTML = '<div class="w-full h-32 bg-gradient-to-br from-cyan-900/40 to-green-900/40 flex items-center justify-center rounded border-2 border-cyan-500/50"><svg class="w-12 h-12 text-cyan-500/40" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/></svg></div>';
                                                                     }}
                                                                 />
-                                                            )}
+                                                            ) : null}
                                                             <div className="flex justify-between items-center">
                                                                 <span className="text-white font-mono">{c.cleanup_type || 'Cleanup'}</span>
                                                                 <span className="text-cyan-400 font-black font-mono">+{c.tokens_awarded} $P51</span>

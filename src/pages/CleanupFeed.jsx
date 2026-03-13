@@ -9,14 +9,16 @@ import { COOLASFUCKGlobe } from '@/components/shared/COOLASFUCKIcon';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 
-// Image component with error fallback
+// Image component with error fallback + SVG placeholder
 const CleanupImage = ({ src, alt, className }) => {
   const [hasError, setHasError] = useState(false);
   
   if (!src || hasError) {
     return (
       <div className={`${className} bg-gradient-to-br from-green-900/40 to-cyan-900/40 flex items-center justify-center`}>
-        <COOLASFUCKGlobe size={80} animate={true} />
+        <svg className="w-20 h-20 text-green-500/40" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+        </svg>
       </div>
     );
   }
