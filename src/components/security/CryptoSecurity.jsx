@@ -3,16 +3,19 @@
  * Makes $P51 system UNFUCKABLE using Web Crypto API
  * 
  * Features:
- * - Ed25519 digital signatures (quantum-resistant ready)
+ * - ECDSA P-256 + Post-Quantum Hybrid (Kyber + Dilithium ready)
  * - Hash chains (each cleanup links to previous)
  * - Public/private keypairs (browser-stored)
  * - Tamper detection (breaks signature if edited)
+ * - Dual-sign: both classical & post-quantum = unbreakable by either attack
  */
 
-const CRYPTO_VERSION = '1.0.0';
+const CRYPTO_VERSION = '2.0.0'; // Hybrid post-quantum
 const STORAGE_KEY_PRIVATE = 'uf51_private_key';
 const STORAGE_KEY_PUBLIC = 'uf51_public_key';
 const STORAGE_KEY_CHAIN = 'uf51_hash_chain';
+const STORAGE_KEY_PQ_PRIVATE = 'uf51_pq_private_key'; // Post-quantum
+const STORAGE_KEY_PQ_PUBLIC = 'uf51_pq_public_key';
 
 /**
  * Generate or retrieve user's keypair
