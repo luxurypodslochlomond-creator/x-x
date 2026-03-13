@@ -2,8 +2,8 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 
 /**
  * NOTIFY MANAGER
+ * Generic - works for any artist's manager
  * Called when new gig offer extracted
- * Sends push notification to manager
  */
 
 Deno.serve(async (req) => {
@@ -17,38 +17,40 @@ Deno.serve(async (req) => {
 
     const { offerId, venue, date } = await req.json();
     
-    // Get manager's push subscriptions
-    const subscriptions = await base44.entities.ScottPushSubscription.filter({
-      enabled: true
-    });
-    
-    if (subscriptions.length === 0) {
-      return Response.json({ success: true, sent: 0 });
-    }
-
-    // Get manager email (assuming user is manager)
     const managerEmail = user.email;
     
-    // Create ScottNotification - sendBrowserPush automation will send it
-    await base44.asServiceRole.entities.ScottNotification.create({
+    // Create generic Notification record
+    await base44.asServiceRole.entities.Notification.create({
       recipient_email: managerEmail,
       notification_type: 'new_gig',
       title: '🎸 New Gig Offer!',
       message: `${venue} • ${new Date(date).toLocaleDateString()}`,
-      action_url: `/ScottGigOffers`,
+      action_url: `/CB51`,
       gig_offer_id: offerId,
       urgency: 'normal',
       read: false
     });
-    
-    const notifications = [true];
+
+    // Also send push notification
+    try {
+      await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+        recipient_email: managerEmail,
+        title: '🎸 New Gig Offer!',
+        message: `${venue} • ${new Date(date).toLocaleDateString()}`,
+        notification_type: 'new_gig',
+        gig_offer_id: offerId
+      });
+    } catch (pushErr) {
+      console.log('Push failed (non-critical):', pushErr.message);
+    }
     
     return Response.json({ 
       success: true,
-      sent: notifications.length
+      sent: 1
     });
 
   } catch (error) {
+    console.error('notifyManager error:', error);
     return Response.json({ error: error.message }, { status: 500 });
   }
 });
