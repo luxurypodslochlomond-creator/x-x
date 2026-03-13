@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Shield, Lock, Leaf, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react';
+import { Shield, Lock, Leaf, ArrowRight, CheckCircle, AlertCircle, Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
