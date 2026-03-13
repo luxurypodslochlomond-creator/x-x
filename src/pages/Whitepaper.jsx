@@ -40,7 +40,7 @@ export default function WhitepaperPage() {
                     </div>
                     <div className="text-gray-500 space-y-1 text-sm">
                         <p>Universal Frequency51 CIC</p>
-                        <p>v2.1 • November 2025</p>
+                        <p>v3.0 • March 2026</p>
                         <p>
                             <a href="https://uf51.love" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">uf51.love</a>
                         </p>
@@ -606,8 +606,7 @@ export default function WhitepaperPage() {
                                 Healing Earth must be economically viable.
                             </p>
                             <p>
-                                Proof-of-Love creates a system where environmental regeneration = immediate reward, 
-                                flowing into an artist-first economy that rewards healing content creation.
+                                Proof-of-Love creates the motivation. Proof-of-Impact creates the verifiable receipt. Together they form the first currency backed by Earth health — a <strong className="text-white">Verified Environmental Restoration</strong> asset that corporations, governments, and ESG funds can actually buy, verify, and trust.
                             </p>
                             <p className="text-cyan-400 font-bold">
                                 This is not speculation. This is working code, processing real cleanups, paying real artists, November 2025.
@@ -652,7 +651,7 @@ export default function WhitepaperPage() {
                     <p className="text-gray-600 text-xs">
                         <a href="https://uf51.love" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">uf51.love</a>
                     </p>
-                    <p className="text-xs text-cyan-600">v2.1 • November 2025</p>
+                    <p className="text-xs text-cyan-600">v3.0 • March 2026</p>
                     <p className="text-xs text-gray-600 mt-2">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
                 </footer>
             </div>
