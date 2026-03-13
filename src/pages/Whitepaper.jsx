@@ -127,7 +127,7 @@ export default function WhitepaperPage() {
                             </div>
 
                             <p className="text-white font-bold text-lg">
-                                We present a system that pays people to heal Earth.
+                                We present the world's first <strong className="text-green-400">Regenerative Economy Engine</strong> — a system that pays people to heal Earth, backed by verified planetary health rather than gold, oil, or government decree.
                             </p>
                             <p>
                                 Every year, 8 million tonnes of plastic enter our oceans. Cleanup is unpaid labor. Extraction is rewarded. Regeneration is not.
@@ -634,8 +634,13 @@ export default function WhitepaperPage() {
                             <p className="text-cyan-400 font-bold">
                                 This is not speculation. This is working code, processing real cleanups, paying real artists, November 2025.
                             </p>
-                            <p className="text-pink-400 font-bold text-lg">
-                                The question: Will you help it spread?
+                            <p className="text-green-400 font-bold text-sm mt-2">
+                                Layer 1: Token economy — environmental credits traded globally.<br/>
+                                Layer 2: Platform — the largest planet repair coordination network on Earth.<br/>
+                                Layer 3: Data — the most comprehensive verified environmental dataset ever built.
+                            </p>
+                            <p className="text-pink-400 font-bold text-lg mt-4">
+                                The question: Will you help it spread? ♾️❤️
                             </p>
                         </div>
                     </CardContent>
