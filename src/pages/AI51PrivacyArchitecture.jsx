@@ -224,7 +224,7 @@ export default function AI51PrivacyArchitecture() {
             <span className="text-purple-300 font-bold">Aglets.</span> Mobile software agents that travel to you, not the other way round. Code that runs where the data lives. It died for one reason: <span className="text-white font-bold">there was no way to verify what the agent had seen, done, or become in transit.</span> Trust was mathematically impossible.
           </p>
           <p className="text-gray-300 leading-relaxed">
-            Nitro attestation + IPFS content addressing + client-side encryption = the first provably trustworthy agent substrate. <span className="text-purple-300 font-bold">Every other AI — every agent, every model — can now run through AI51's privacy envelope.</span> Not competing with them. Being the trusted layer they all need.
+            Client-side encryption + IPFS content addressing + stateless inference = the first provably trustworthy agent substrate. <span className="text-purple-300 font-bold">Every other AI — every agent, every model — can now run through AI51's privacy envelope.</span> Not competing with them. Being the trusted layer they all need.
           </p>
           <div className="flex items-center gap-2 text-sm text-purple-400 font-mono">
             <Zap className="w-4 h-4" />
