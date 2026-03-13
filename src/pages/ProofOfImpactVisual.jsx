@@ -10,13 +10,6 @@ import { Heart, Zap, Shield, Globe, Lock, CheckCircle, ArrowRight } from 'lucide
 
 export default function ProofOfImpactVisual() {
   const [activePhase, setActivePhase] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const phases = [
     {
@@ -77,19 +70,17 @@ export default function ProofOfImpactVisual() {
 
   const VisualPhase = ({ phase, index, isActive }) => {
     const Icon = phase.icon;
-    const opacity = Math.max(0, 1 - Math.abs(scrollY - (index * 400)) / 200);
 
     return (
       <motion.div
-        className="min-h-screen flex items-center justify-center p-6 relative"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true, margin: "-200px" }}
+        className={`p-6 relative ${isActive ? 'block' : 'hidden'}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
+        transition={{ duration: 0.5 }}
       >
-        <div className="max-w-4xl w-full">
-          {/* Main Visual */}
-          <div className={`${phase.bgColor} rounded-3xl p-12 border-2 border-white/10 mb-8 backdrop-blur-xl`}>
+        <div className="max-w-4xl w-full mx-auto">
+           {/* Main Visual */}
+           <div className={`${phase.bgColor} rounded-3xl p-8 md:p-12 border-2 border-white/10 mb-8 backdrop-blur-xl`}>
             <motion.div
               className="flex justify-center mb-8"
               animate={{ y: [0, -10, 0] }}
@@ -99,7 +90,7 @@ export default function ProofOfImpactVisual() {
             </motion.div>
 
             {/* Title & Description */}
-            <h2 className={`text-5xl font-black text-center mb-4 ${phase.color}`}>
+             <h2 className={`text-4xl md:text-5xl font-black text-center mb-4 ${phase.color}`}>
               {phase.title}
             </h2>
             <p className="text-xl text-white/70 text-center mb-8 leading-relaxed max-w-2xl mx-auto">
@@ -122,9 +113,9 @@ export default function ProofOfImpactVisual() {
             </div>
           </div>
 
-          {/* Connection to Next */}
+          {/* Connection to Next - desktop only */}
           {index < phases.length - 1 && (
-            <motion.div className="flex justify-center my-8">
+            <motion.div className="hidden md:flex justify-center my-8">
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -142,7 +133,7 @@ export default function ProofOfImpactVisual() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]">
       {/* Hero */}
       <motion.div
-        className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden"
+        className="py-12 md:py-20 flex flex-col items-center justify-center p-6 relative overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -156,23 +147,37 @@ export default function ProofOfImpactVisual() {
           transition={{ duration: 1 }}
           className="relative z-10 text-center max-w-4xl"
         >
-          <h1 className="text-7xl md:text-8xl font-black mb-6 text-white">
+          <h1 className="text-6xl md:text-7xl font-black mb-6 text-white">
             Proof of Impact
           </h1>
-          <p className="text-2xl text-white/70 mb-8 leading-relaxed">
+          <p className="text-lg md:text-2xl text-white/70 mb-8 leading-relaxed">
             What happens when you clean the Earth and prove it.
             <br />
             Not with words. With mathematics.
           </p>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-white/50 mt-16"
-          >
-            ↓ Scroll to see the flow ↓
-          </motion.div>
         </motion.div>
       </motion.div>
+
+      {/* Tabbed Navigation */}
+      <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-lg border-b border-white/10 py-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 md:justify-center">
+            {phases.map((phase, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActivePhase(idx)}
+                className={`px-3 md:px-4 py-2 rounded-lg font-bold whitespace-nowrap transition-all text-sm md:text-base ${
+                  activePhase === idx
+                    ? `${phase.bgColor} border-2 border-white text-white`
+                    : 'border border-white/20 text-white/60 hover:text-white/80'
+                }`}
+              >
+                {idx + 1}. {phase.title}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Phases */}
       <div className="relative">
