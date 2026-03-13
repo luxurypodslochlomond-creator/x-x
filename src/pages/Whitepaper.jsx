@@ -120,6 +120,74 @@ export default function WhitepaperPage() {
                     </CardContent>
                 </Card>
 
+                {/* Proof of Impact - NEW SECTION */}
+                <Card className="bg-gradient-to-br from-emerald-900/40 to-green-900/40 border-4 border-emerald-400">
+                    <CardContent className="p-6">
+                        <div className="flex items-center gap-3 mb-4">
+                            <Leaf className="w-10 h-10 text-emerald-400" />
+                            <div>
+                                <h2 className="text-3xl font-black text-white">Proof of Impact</h2>
+                                <p className="text-emerald-400 font-bold text-sm">A New Economic Primitive</p>
+                            </div>
+                        </div>
+                        <div className="space-y-4 text-gray-300 text-sm">
+
+                            <div className="bg-black/60 p-4 rounded-xl border-2 border-emerald-500">
+                                <p className="text-white font-black text-lg mb-3">The world has never properly priced planetary repair.</p>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                                    <div className="bg-red-900/40 p-3 rounded-lg border border-red-500/50 text-center">
+                                        <p className="text-red-400 font-black mb-1">Proof of Work</p>
+                                        <p className="text-gray-300">Bitcoin — destroy energy to prove you worked</p>
+                                        <p className="text-red-400 font-bold mt-1">Burns Earth ❌</p>
+                                    </div>
+                                    <div className="bg-yellow-900/40 p-3 rounded-lg border border-yellow-500/50 text-center">
+                                        <p className="text-yellow-400 font-black mb-1">Carbon Credits</p>
+                                        <p className="text-gray-300">Companies self-report — often unverifiable or fake</p>
+                                        <p className="text-yellow-400 font-bold mt-1">Can be gamed ❌</p>
+                                    </div>
+                                    <div className="bg-emerald-900/40 p-3 rounded-lg border-2 border-emerald-400 text-center">
+                                        <p className="text-emerald-400 font-black mb-1">Proof of Impact</p>
+                                        <p className="text-gray-300">GPS + AI + IPFS + crypto signature = unfakeable</p>
+                                        <p className="text-emerald-400 font-bold mt-1">Heals Earth ✅</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-black/60 p-4 rounded-xl border border-cyan-500/30">
+                                <p className="text-cyan-400 font-black mb-3">The New Asset Class: Verified Environmental Restoration</p>
+                                <p className="text-sm text-gray-300 mb-3">Right now markets price oil, gold, carbon credits, data. <strong className="text-white">The world does not yet price planetary repair.</strong> $P51 creates that market.</p>
+                                <div className="space-y-2 text-xs">
+                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Nike, Apple, Coca-Cola must prove sustainability — they can buy verified $P51 impact</span></div>
+                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>$30 trillion ESG funds need measurable environmental data — we provide it</span></div>
+                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Governments spend billions on cleanup — $P51 gives them verified, distributed delivery</span></div>
+                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Carbon market ($900B+) proves the demand exists — $P51 is the verified upgrade</span></div>
+                                </div>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-pink-900/30 to-purple-900/30 p-4 rounded-xl border-2 border-pink-500/50">
+                                <p className="text-pink-400 font-black mb-2">Proof of Love vs Proof of Impact</p>
+                                <div className="grid grid-cols-2 gap-3 text-xs">
+                                    <div className="bg-black/40 p-3 rounded-lg border border-pink-500/30">
+                                        <p className="text-pink-400 font-bold mb-1">Proof of Love ♾️</p>
+                                        <p className="text-gray-300">The internal frequency. The soul. The WHY behind every healing action. Unmeasurable. Personal. Infinite.</p>
+                                    </div>
+                                    <div className="bg-black/40 p-3 rounded-lg border border-emerald-500/30">
+                                        <p className="text-emerald-400 font-bold mb-1">Proof of Impact 🌍</p>
+                                        <p className="text-gray-300">The external proof. The receipt. The language the world can fund. GPS. AI. IPFS. Verifiable.</p>
+                                    </div>
+                                </div>
+                                <p className="text-white font-bold text-xs mt-3 text-center">Proof of Impact is how Proof of Love gets paid. ♾️❤️</p>
+                            </div>
+
+                            <div className="bg-black/60 p-4 rounded-xl border border-green-500/30">
+                                <p className="text-green-400 font-black mb-2">The Self-Healing Economy</p>
+                                <p className="text-xs text-gray-300">Plastic pollution increases → more opportunity to earn $P51 → more people remove plastic → system corrects itself. <strong className="text-white">A self-regulating regenerative economy that mirrors biological immune response.</strong> The more damage, the stronger the healing incentive.</p>
+                            </div>
+
+                        </div>
+                    </CardContent>
+                </Card>
+
                 {/* Problem Statement */}
                 <Card className="bg-black/60 border-2 border-red-500/50">
                     <CardContent className="p-6">
