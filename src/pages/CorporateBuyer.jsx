@@ -18,9 +18,9 @@ export default function CorporateBuyer() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-            We're building something<br/>
-            <span className="text-green-400">genuinely different.</span><br/>
-            <span className="text-2xl md:text-3xl text-gray-300">And we want to be honest about where we are.</span>
+            Fund real people<br/>
+            <span className="text-green-400">removing real litter.</span><br/>
+            <span className="text-2xl md:text-3xl text-gray-300">Verified. Transparent. Community-locked.</span>
           </h1>
         </motion.div>
 
