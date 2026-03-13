@@ -296,15 +296,6 @@ export default function AI51PrivacyArchitecture() {
           <p className="text-gray-600 text-xs">Verify everything above independently. That's the point.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
             <a
-              href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-concepts.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 border border-cyan-500/30 rounded-lg text-cyan-400 text-sm font-mono hover:bg-cyan-500/10 transition-all"
-            >
-              <ExternalLink className="w-3 h-3" />
-              AWS Nitro Docs
-            </a>
-            <a
               href="https://brave.com/search/api/"
               target="_blank"
               rel="noopener noreferrer"
