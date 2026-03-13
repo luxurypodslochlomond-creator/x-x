@@ -28,13 +28,13 @@ export default function ESGBridge() {
 
         <header className="text-center space-y-6">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring' }}>
-            <GitMerge className="w-24 h-24 text-green-300 mx-auto" style={{ filter: 'drop-shadow(0 0 20px #6ee7b7)'}} />
+            <GitMerge className="w-24 h-24 text-emerald-400 mx-auto" style={{ filter: 'drop-shadow(0 0 30px #10b981)' }} />
           </motion.div>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter bg-gradient-to-r from-green-300 via-cyan-300 to-white bg-clip-text text-transparent">
-            The ESG Bridge
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter bg-gradient-to-r from-emerald-300 via-cyan-300 to-pink-300 bg-clip-text text-transparent">
+            Fund Real Healing
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Your direct, verifiable, and frictionless API for real-world Environmental, Social, and Governance impact.
+            Direct funding for on-ground planetary restoration. Verified by GPS + AI. Immutable proof on IPFS. No greenwashing, no promises — just receipt.
           </p>
         </header>
 
