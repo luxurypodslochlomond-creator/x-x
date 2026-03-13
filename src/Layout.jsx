@@ -371,6 +371,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const learnNav = [
     { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
     { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, highlight: true, description: "One-pager for funders" },
+    { title: "💚 For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, highlight: true, description: "Fund real people healing Earth" },
     { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, highlight: true, description: "PROVE connection is real" },
     { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
     { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
