@@ -97,15 +97,15 @@ export default function CorporateBuyer() {
         {/* THE ASK */}
         <div className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 border-2 border-green-500/50 rounded-2xl p-10 text-center"
           style={{ boxShadow: '0 0 60px rgba(74, 222, 128, 0.15)' }}>
-          <Heart className="w-10 h-10 text-pink-400 mx-auto mb-4" />
+          <Building2 className="w-10 h-10 text-green-400 mx-auto mb-4" />
           <h2 className="text-2xl font-black text-white mb-4">
-            We're not asking you to change the world today
+            Early corporate supporters
           </h2>
           <p className="text-gray-300 mb-4 max-w-xl mx-auto leading-relaxed">
-            We're asking you to be an early supporter of something that could. If you fund litter removal now, the people who do that work get paid. Earth gets a little cleaner. And you're part of building the infrastructure that scales this globally.
+            If you fund litter removal now, the people who do that work get paid. The planet gets a little cleaner. You get verified records of exactly what your funding achieved — location, weight, photo evidence, permanent IPFS storage.
           </p>
           <p className="text-green-400 font-bold mb-8">
-            That's it. No grand promises. Just real work, real people, real planet. ❤️
+            Real work. Real people. Verified results. No inflated claims.
           </p>
           <Link to={createPageUrl("ESGBridge")}
             className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-400 text-black font-black text-lg px-8 py-4 rounded-2xl transition-all"
