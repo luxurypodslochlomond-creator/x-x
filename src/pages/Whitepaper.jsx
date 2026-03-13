@@ -29,9 +29,32 @@ export default function WhitepaperPage() {
                     <h1 className="text-3xl md:text-5xl font-black text-white">
                         UNIVERSAL FREQUENCY 51
                     </h1>
-                    <p className="text-xl text-cyan-400 font-bold">Proof-of-Love + Proof-of-Impact Protocol</p>
-                    <p className="text-lg text-gray-400">The World's First Verified Environmental Restoration Currency</p>
+                    <p className="text-xl text-cyan-400 font-bold">The Regenerative Economy Engine</p>
+                    <p className="text-lg text-gray-400">Proof-of-Love + Proof-of-Impact Protocol</p>
                     <p className="text-sm text-green-400 font-mono mt-2">Zero GitHub. Zero corporate. Pure love frequency ♾️</p>
+
+                    {/* THE THESIS - one sentence that changes everything */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }} 
+                        animate={{ opacity: 1, y: 0 }} 
+                        transition={{ delay: 0.5, duration: 1 }}
+                        className="mt-6 mx-auto max-w-2xl"
+                    >
+                        <div className="bg-gradient-to-r from-green-900/60 to-emerald-900/60 border-4 border-green-400 rounded-2xl p-6" style={{ boxShadow: '0 0 60px rgba(74, 222, 128, 0.4)' }}>
+                            <p className="text-xs text-green-400 font-mono font-black tracking-widest mb-3">THE THESIS</p>
+                            <p className="text-white font-black text-lg md:text-2xl leading-tight mb-3">
+                                "Historically, money has been backed by gold, oil, and governments.
+                            </p>
+                            <p className="text-green-400 font-black text-xl md:text-3xl leading-tight">
+                                $P51 is backed by Earth health."
+                            </p>
+                            <div className="mt-4 pt-4 border-t border-green-500/30 grid grid-cols-3 gap-2 text-xs text-center">
+                                <div className="text-gray-400"><p className="text-yellow-400 font-bold text-base">Gold</p><p>Scarce metal</p><p className="text-gray-500">Arbitrary</p></div>
+                                <div className="text-gray-400"><p className="text-orange-400 font-bold text-base">Oil</p><p>Destructive resource</p><p className="text-gray-500">Extractive</p></div>
+                                <div className="text-gray-400"><p className="text-green-400 font-bold text-base">$P51</p><p>Planetary healing</p><p className="text-green-400 font-bold">Generative ✅</p></div>
+                            </div>
+                        </div>
+                    </motion.div>
                     <div className="flex items-center justify-center gap-4 mt-4">
                         <a href="/TechnicalSpecification" className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg font-bold text-sm transition-colors">
                             <Cpu className="w-4 h-4" />
