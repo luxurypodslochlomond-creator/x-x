@@ -243,9 +243,9 @@ export default function AI51PrivacyArchitecture() {
           <h2 className="text-2xl font-black text-white">No single throat to choke.</h2>
           <div className="space-y-3">
             {[
-              { label: 'Brave Search Index', detail: 'Independently crawled. No government can pressure one company to change what AI51 knows. Not Google. Not Bing. Brave.' },
-              { label: 'IPFS Knowledge Library', detail: 'Content-addressed, decentralised. If AI51 the company disappears tomorrow, the knowledge library persists — intact, verifiable by hash, pinned across the network.' },
-              { label: 'Nitro Attestation', detail: "AWS cannot modify what runs in the enclave without breaking the attestation signature. Not even AWS. The math doesn't care about legal pressure." },
+               { label: 'Brave Search Index', detail: 'Independently crawled. No government can pressure one company to change what AI51 knows. Not Google. Not Bing. Brave.' },
+               { label: 'IPFS Knowledge Library', detail: 'Content-addressed, decentralised. If AI51 the company disappears tomorrow, the knowledge library persists — intact, verifiable by hash, pinned across the network.' },
+               { label: 'Client-Side Encryption', detail: "Your data is encrypted before it ever touches our infrastructure. We physically cannot read what you send. The architecture makes this mathematically enforced." },
             ].map((item, i) => (
               <div key={i} className="flex gap-3">
                 <CheckCircle className="w-4 h-4 text-orange-400 flex-shrink-0 mt-1" />
