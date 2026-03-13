@@ -140,11 +140,45 @@ export async function signCleanup(cleanupData) {
 }
 
 /**
- * Verify cleanup signature (backend can use this too)
+ * Verify cleanup signature - HYBRID mode
+ * Both classical AND post-quantum must verify
  */
 export async function verifyCleanupSignature(signature, publicKeyBase64, signedData) {
     try {
-        // Import public key
+        // Handle hybrid signatures
+        if (signature.hybrid) {
+            // Verify CLASSICAL (ECDSA)
+            const publicKeyBuffer = base64ToArrayBuffer(publicKeyBase64);
+            const publicKey = await crypto.subtle.importKey(
+                'spki',
+                publicKeyBuffer,
+                { name: 'ECDSA', namedCurve: 'P-256' },
+                false,
+                ['verify']
+            );
+            
+            const classicalSigBuffer = base64ToArrayBuffer(signature.classical);
+            const dataBuffer = new TextEncoder().encode(signedData);
+            
+            const classicalValid = await crypto.subtle.verify(
+                { name: 'ECDSA', hash: 'SHA-256' },
+                publicKey,
+                classicalSigBuffer,
+                dataBuffer
+            );
+            
+            // Verify POST-QUANTUM
+            const postQuantumValid = await verifyPostQuantumSignature(
+                signature.postQuantum,
+                signedData,
+                publicKeyBase64
+            );
+            
+            // BOTH must be valid
+            return classicalValid && postQuantumValid;
+        }
+        
+        // Legacy single signature (classical only)
         const publicKeyBuffer = base64ToArrayBuffer(publicKeyBase64);
         const publicKey = await crypto.subtle.importKey(
             'spki',
@@ -154,19 +188,15 @@ export async function verifyCleanupSignature(signature, publicKeyBase64, signedD
             ['verify']
         );
         
-        // Convert signature and data
         const signatureBuffer = base64ToArrayBuffer(signature);
         const dataBuffer = new TextEncoder().encode(signedData);
         
-        // Verify
-        const isValid = await crypto.subtle.verify(
+        return await crypto.subtle.verify(
             { name: 'ECDSA', hash: 'SHA-256' },
             publicKey,
             signatureBuffer,
             dataBuffer
         );
-        
-        return isValid;
     } catch (error) {
         console.error('Verification failed:', error);
         return false;
