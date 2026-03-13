@@ -16,11 +16,8 @@ export default function ESGContactModal({ open, onOpenChange }) {
 
     try {
       // Send email via backend
-      const response = await fetch('/api/functions/sendESGInquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      const { sendESGInquiry } = await import('@/functions/sendESGInquiry');
+      const response = await sendESGInquiry(formData);
 
       if (response.ok) {
         setSubmitted(true);
