@@ -92,6 +92,12 @@ export default function ProfilePage() {
         refetchInterval: 10000,
     });
 
+    // MICRO-LITTER BONUS TRACKING
+    const bonuses = getAllBonuses();
+    const totalBonusTokens = bonuses.reduce((sum, b) => sum + (b.bonusTokens || 0), 0);
+    const bonusChainValid = verifyBonusChain();
+    const microLitterCount = bonuses.length;
+
     const combinedActivity = [
         ...transactions.map(t => ({
             ...t,
