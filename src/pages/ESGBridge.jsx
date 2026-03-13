@@ -143,11 +143,11 @@ export default function ESGBridge() {
         <section className="text-center pt-8">
             <h2 className="text-3xl font-bold text-white mb-4">Ready to Build a Better World?</h2>
             <p className="text-lg text-gray-400 mb-8">Connect with our alliance team to explore a partnership.</p>
-            <Link to={createPageUrl('Contact')}>
+            <a href="mailto:family@uf51.love">
                 <QuantumButton className="!bg-gradient-to-r !from-green-500 !to-cyan-500 !text-black !font-bold">
                     Contact Us
                 </QuantumButton>
-            </Link>
+            </a>
         </section>
 
       </div>
