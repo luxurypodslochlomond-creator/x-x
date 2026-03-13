@@ -374,6 +374,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "💚 For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, highlight: true, description: "Fund real people healing Earth" },
     { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, highlight: true, description: "PROVE connection is real" },
     { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
+    { title: "👁️ See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
     { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
     { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield, description: "Protection protocol" },
   ];
