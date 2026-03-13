@@ -425,6 +425,30 @@ export default function WhitepaperPage() {
                                 </ul>
                             </div>
 
+                            <div className="bg-black/60 p-4 rounded-xl border-2 border-red-500/50">
+                                <h3 className="text-lg font-bold text-red-400 mb-3">🛡️ 2026 AI Fraud — Threats We've Already Solved</h3>
+                                <p className="text-xs text-gray-300 mb-3">AI-generated fake photos (Sora/Midjourney), GPS spoofing apps, and coordinated fraud rings are the 2026 attack vectors. Here's how we beat all three:</p>
+                                <div className="space-y-2 text-xs">
+                                    <div className="bg-red-900/30 p-2 rounded border-l-4 border-red-400">
+                                        <p className="text-white font-bold">AI-generated fake photos?</p>
+                                        <p className="text-gray-300">Liveness detection + pHash + <strong className="text-green-400">video verification option</strong> (5-second clip is mathematically impossible to fake with current AI)</p>
+                                    </div>
+                                    <div className="bg-orange-900/30 p-2 rounded border-l-4 border-orange-400">
+                                        <p className="text-white font-bold">Coordinated fraud rings?</p>
+                                        <p className="text-gray-300"><strong className="text-green-400">Geo-clustering detection</strong> — too many cleanups in same GPS radius flags automatically</p>
+                                    </div>
+                                    <div className="bg-yellow-900/30 p-2 rounded border-l-4 border-yellow-400">
+                                        <p className="text-white font-bold">GPS spoofing?</p>
+                                        <p className="text-gray-300"><strong className="text-green-400">Accelerometer + movement data</strong> confirms you physically walked to the location</p>
+                                    </div>
+                                    <div className="bg-green-900/30 p-2 rounded border-l-4 border-green-400">
+                                        <p className="text-white font-bold">On-device AI (WebNN 2026)?</p>
+                                        <p className="text-gray-300">Neural networks running entirely on your phone — <strong className="text-green-400">AI verifies cleanup before it ever hits our servers.</strong> Private. Offline. Unfakeable.</p>
+                                    </div>
+                                </div>
+                                <p className="text-green-400 font-bold text-xs mt-3">Carbon credits are a $900B market despite being largely unverifiable. $P51 is mathematically more fraud-proof than anything in that market.</p>
+                            </div>
+
                             <div className="bg-green-900/30 p-4 rounded-xl border-2 border-green-500/50">
                                 <h3 className="text-lg font-bold text-green-400 mb-3">🔐 BREAKTHROUGH: Cryptographic Security (Nov 2025)</h3>
                                 <p className="text-sm text-white mb-2">
