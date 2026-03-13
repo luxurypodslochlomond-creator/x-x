@@ -14,6 +14,7 @@ import COOLASFUCKIcon from '@/components/shared/COOLASFUCKIcon';
 // QRWallet removed - keeping it simple
 import P2PTransfer from '@/components/shared/P2PTransfer';
 import { BitGlobe, BitHeart, BitGift, BitSend } from '@/components/shared/ActivityIcons';
+import { getAllBonuses, verifyBonusChain } from '@/components/cleanup/MicroLitterBonusTracker';
 
 // 8-BIT BUTTON TAP FREQUENCY - COOLASFUCK
 const playButtonTap = () => {
