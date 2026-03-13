@@ -1,4 +1,4 @@
-// Force rebuild - white screen fix ♾️❤️♾️
+// Force rebuild v2 - white screen fix ♾️❤️♾️ BRO51
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
