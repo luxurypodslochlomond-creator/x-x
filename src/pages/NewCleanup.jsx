@@ -993,7 +993,7 @@ export default function NewCleanupPage() {
 
                                 <div className="flex items-center justify-center gap-2 text-xs text-gray-400 font-mono">
                                     <Shield className="w-4 h-4 text-green-400" />
-                                    <span>OPTIONAL: Works without GPS, but slower verification</span>
+                                    <span>✓ Works without GPS (for rural areas)</span>
                                 </div>
                             </div>
                         </div>
