@@ -170,6 +170,7 @@ import ComplianceTracker from './pages/ComplianceTracker';
 import ConsciousnessPhysics from './pages/ConsciousnessPhysics';
 import ConsciousnessWhitepaper from './pages/ConsciousnessWhitepaper';
 import ContactMessages from './pages/ContactMessages';
+import CorporateBuyer from './pages/CorporateBuyer';
 import CosmicTransmission from './pages/CosmicTransmission';
 import CreateBeauty from './pages/CreateBeauty';
 import CreateMission from './pages/CreateMission';
@@ -258,6 +259,7 @@ import PatientZero from './pages/PatientZero';
 import PetSounds51 from './pages/PetSounds51';
 import PetSounds51Enterprise from './pages/PetSounds51Enterprise';
 import PetSounds51Privacy from './pages/PetSounds51Privacy';
+import PetSounds51Story from './pages/PetSounds51Story';
 import PetSounds51StripeSetup from './pages/PetSounds51StripeSetup';
 import PetSounds51Terms from './pages/PetSounds51Terms';
 import Playlists from './pages/Playlists';
@@ -405,7 +407,7 @@ import YoungWarriors from './pages/YoungWarriors';
 import ZeroEgoProtocol from './pages/ZeroEgoProtocol';
 import ZeroPointEnergy from './pages/ZeroPointEnergy';
 import ZeroServerScaling from './pages/ZeroServerScaling';
-import PetSounds51Story from './pages/PetSounds51Story';
+import ProofOfImpactVisual from './pages/ProofOfImpactVisual';
 import __Layout from './Layout.jsx';
 
 
@@ -533,6 +535,7 @@ export const PAGES = {
     "ConsciousnessPhysics": ConsciousnessPhysics,
     "ConsciousnessWhitepaper": ConsciousnessWhitepaper,
     "ContactMessages": ContactMessages,
+    "CorporateBuyer": CorporateBuyer,
     "CosmicTransmission": CosmicTransmission,
     "CreateBeauty": CreateBeauty,
     "CreateMission": CreateMission,
@@ -621,6 +624,7 @@ export const PAGES = {
     "PetSounds51": PetSounds51,
     "PetSounds51Enterprise": PetSounds51Enterprise,
     "PetSounds51Privacy": PetSounds51Privacy,
+    "PetSounds51Story": PetSounds51Story,
     "PetSounds51StripeSetup": PetSounds51StripeSetup,
     "PetSounds51Terms": PetSounds51Terms,
     "Playlists": Playlists,
@@ -768,7 +772,7 @@ export const PAGES = {
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
-    "PetSounds51Story": PetSounds51Story,
+    "ProofOfImpactVisual": ProofOfImpactVisual,
 }
 
 export const pagesConfig = {
