@@ -146,7 +146,9 @@ export default function ProofOfImpactVisual() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <div className="absolute inset-0 bg-gradient-radial from-pink-500/10 via-transparent to-transparent opacity-30" />
+        <div className="absolute inset-0 opacity-30" style={{
+          background: 'radial-gradient(circle at center, rgba(236,72,153,0.1), transparent)'
+        }} />
         
         <motion.div
           initial={{ opacity: 0, y: -50 }}
