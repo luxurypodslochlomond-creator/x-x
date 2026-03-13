@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import QuantumButton from '@/components/shared/QuantumButton';
+import ESGContactModal from '@/components/ESGContactModal';
 import { Shield, GitMerge, Target, Layers, ArrowRight, CheckCircle, BarChart, Globe } from 'lucide-react';
 
 const StrategyCard = ({ icon: Icon, title, children }) => (
