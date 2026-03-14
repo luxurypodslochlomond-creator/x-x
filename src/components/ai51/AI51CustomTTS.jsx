@@ -92,24 +92,58 @@ export class AI51CustomTTS {
     });
   }
 
+  getBestVoice(lang) {
+    const voices = window.speechSynthesis.getVoices();
+    // Priority order: calm, deep, non-bouncy voices
+    const preferred = [
+      'Daniel',           // macOS/iOS - warm British male
+      'Google UK English Male',
+      'Google UK English Female',
+      'Arthur',           // macOS Monterey+ - deep British
+      'Malcolm',          // macOS - calm Scottish
+      'Moira',            // macOS - Irish female, warm
+      'Fiona',            // macOS Scottish female
+      'Karen',            // macOS Australian - calm
+      'Rishi',            // macOS Indian English - unhurried
+    ];
+    for (const name of preferred) {
+      const v = voices.find(v => v.name === name);
+      if (v) return v;
+    }
+    // Fallback: any en-GB voice
+    return voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang?.startsWith('en')) || null;
+  }
+
   fallbackToNativeAPI(text, lang, onStart, onEnd) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang;
-    utterance.rate = 0.75; // Warm, slower pace
-    utterance.pitch = 0.9;
-    
-    utterance.onstart = () => {
-      this.isPlaying = true;
-      if (onStart) onStart();
-    };
-    
-    utterance.onend = () => {
-      this.isPlaying = false;
-      if (onEnd) onEnd();
+    utterance.rate = 0.82;   // Deliberate. Not slow, not bouncy. Alan Watts pace.
+    utterance.pitch = 0.85;  // Slightly lower. Warmth not perkiness.
+    utterance.volume = 1;
+
+    // Try to get a calm voice - wait for voices to load if needed
+    const setVoiceAndSpeak = () => {
+      const voice = this.getBestVoice(lang);
+      if (voice) utterance.voice = voice;
+      
+      utterance.onstart = () => {
+        this.isPlaying = true;
+        if (onStart) onStart();
+      };
+      utterance.onend = () => {
+        this.isPlaying = false;
+        if (onEnd) onEnd();
+      };
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
     };
 
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
+    // Voices may not be loaded yet on first call
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+    } else {
+      setVoiceAndSpeak();
+    }
   }
 
   stop() {
