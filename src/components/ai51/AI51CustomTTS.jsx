@@ -94,24 +94,51 @@ export class AI51CustomTTS {
 
   getBestVoice(lang) {
     const voices = window.speechSynthesis.getVoices();
-    // Priority order: calm, deep, non-bouncy voices
+
+    // Tiered by platform — calm, warm, never bouncy
     const preferred = [
-      'Daniel',           // macOS/iOS - warm British male
-      'Google UK English Male',
-      'Google UK English Female',
-      'Arthur',           // macOS Monterey+ - deep British
-      'Malcolm',          // macOS - calm Scottish
-      'Moira',            // macOS - Irish female, warm
-      'Fiona',            // macOS Scottish female
-      'Karen',            // macOS Australian - calm
-      'Rishi',            // macOS Indian English - unhurried
+      // macOS / iOS — best in class
+      'Daniel',                        // macOS British male — warm, calm ✓
+      'Arthur',                        // macOS Monterey+ British — deep ✓
+      'Malcolm',                       // macOS Scottish — unhurried ✓
+      'Moira',                         // macOS Irish female — warm ✓
+      'Fiona',                         // macOS Scottish female ✓
+      'Rishi',                         // macOS Indian English — measured ✓
+
+      // Android / Chrome — Google voices
+      'Google UK English Male',        // Android/Chrome — calm ✓
+      'Google UK English Female',      // Android/Chrome — clear ✓
+      'Google हिन्दी',                // skip — wrong lang, won't match en
+
+      // Windows — Microsoft voices
+      'Microsoft George - English (United Kingdom)',   // Win10+ — warm British ✓
+      'Microsoft Hazel - English (United Kingdom)',    // Win10 female ✓
+      'Microsoft Mark - English (United States)',      // deep, calm ✓
+      'Microsoft David - English (United States)',     // slow and clear ✓
+      'Microsoft James - English (United Kingdom)',    // UK male ✓
+
+      // iOS enhanced voices
+      'Karen',                         // iOS Australian — calm ✓
+      'Samantha',                      // iOS — at least not bouncy
     ];
+
     for (const name of preferred) {
       const v = voices.find(v => v.name === name);
-      if (v) return v;
+      if (v) {
+        console.log('[AI51 Voice] Selected:', v.name, '|', v.lang);
+        return v;
+      }
     }
-    // Fallback: any en-GB voice
-    return voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang?.startsWith('en')) || null;
+
+    // Last resort: en-GB > en-US > any English
+    const fallback = 
+      voices.find(v => v.lang === 'en-GB') ||
+      voices.find(v => v.lang === 'en-US') ||
+      voices.find(v => v.lang?.startsWith('en')) ||
+      null;
+
+    console.log('[AI51 Voice] Fallback:', fallback?.name || 'browser default');
+    return fallback;
   }
 
   fallbackToNativeAPI(text, lang, onStart, onEnd) {
