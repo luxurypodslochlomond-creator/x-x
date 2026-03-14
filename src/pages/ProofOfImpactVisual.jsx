@@ -1,284 +1,224 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Zap, Shield, Globe, Lock, CheckCircle, ArrowRight } from 'lucide-react';
-
-/**
- * PROOF OF IMPACT VISUAL EXPLAINER
- * For artists, creators, makers who think in images not text
- * The beautiful truth of how $P51 actually works
- */
+import { Heart, Zap, Shield, Globe, Lock, CheckCircle, ArrowDown } from 'lucide-react';
 
 export default function ProofOfImpactVisual() {
-  const [activePhase, setActivePhase] = useState(0);
 
-  const phases = [
+  const steps = [
     {
-      title: "The Action",
-      icon: Heart,
-      color: "text-pink-500",
-      bgColor: "bg-pink-500/10",
-      description: "1kg litter collected. One moment. One intention.",
-      visual: "litter",
-      facts: ["Real-world action", "Your choice, your effort", "Proof of Love"]
+      step: "01",
+      emoji: "🙌",
+      title: "You Pick Up Litter",
+      subtitle: "1kg = 1 $P51",
+      color: "#ec4899",
+      border: "border-pink-500",
+      bg: "bg-pink-500/10",
+      text: "text-pink-400",
+      detail: "Your choice. Your effort. Proof of Love."
     },
     {
-      title: "The Capture",
-      icon: Shield,
-      color: "text-cyan-500",
-      bgColor: "bg-cyan-500/10",
-      description: "GPS. Photo. Timestamp. Cryptographic signature.",
-      visual: "capture",
-      facts: ["GPS coordinates locked", "Photo hash: SHA-256", "Signature: ECDSA P-256"]
+      step: "02",
+      emoji: "📍",
+      title: "GPS + Photo",
+      subtitle: "Locked at the moment",
+      color: "#06b6d4",
+      border: "border-cyan-500",
+      bg: "bg-cyan-500/10",
+      text: "text-cyan-400",
+      detail: "SHA-256 hash. ECDSA P-256 signature. Unfakeable."
     },
     {
-      title: "The AI Analysis",
-      icon: Zap,
-      color: "text-green-500",
-      bgColor: "bg-green-500/10",
-      description: "Computer vision. Weight estimation. Liveness detection.",
-      visual: "analysis",
-      facts: ["Object recognition: 98%+ accuracy", "Weight range: ±10%", "Anti-fraud: liveness + perceptual hash"]
+      step: "03",
+      emoji: "🤖",
+      title: "AI Analyses It",
+      subtitle: "98%+ accuracy",
+      color: "#10b981",
+      border: "border-green-500",
+      bg: "bg-green-500/10",
+      text: "text-green-400",
+      detail: "Weight estimate. Liveness check. Brand detection."
     },
     {
-      title: "The Storage",
-      icon: Globe,
-      color: "text-amber-500",
-      bgColor: "bg-amber-500/10",
-      description: "IPFS. Decentralised. Permanent. Tamper-proof.",
-      visual: "storage",
-      facts: ["CID hash: immutable", "Filecoin redundancy", "Forever accessible"]
+      step: "04",
+      emoji: "🌐",
+      title: "Stored on IPFS",
+      subtitle: "Permanent. Forever.",
+      color: "#f59e0b",
+      border: "border-amber-500",
+      bg: "bg-amber-500/10",
+      text: "text-amber-400",
+      detail: "Decentralised. No company can delete it."
     },
     {
-      title: "The Verification",
-      icon: Lock,
-      color: "text-purple-500",
-      bgColor: "bg-purple-500/10",
-      description: "Public key cryptography. Anyone can verify.",
-      visual: "verify",
-      facts: ["Mathematical proof", "No gatekeepers", "Open to audit"]
+      step: "05",
+      emoji: "🔐",
+      title: "Anyone Can Verify",
+      subtitle: "No gatekeepers",
+      color: "#a855f7",
+      border: "border-purple-500",
+      bg: "bg-purple-500/10",
+      text: "text-purple-400",
+      detail: "Public key cryptography. Open to audit."
     },
     {
-      title: "The Reward",
-      icon: CheckCircle,
-      color: "text-green-400",
-      bgColor: "bg-green-400/10",
-      description: "1kg = 1 $P51. Instant. Guaranteed. Unforgeable.",
-      visual: "reward",
-      facts: ["Instant payout", "Backed by proof", "Tradeable globally"]
+      step: "06",
+      emoji: "💰",
+      title: "You Get Paid",
+      subtitle: "Instantly. Guaranteed.",
+      color: "#22c55e",
+      border: "border-green-400",
+      bg: "bg-green-400/10",
+      text: "text-green-300",
+      detail: "Tradeable globally. Backed by real proof."
     }
   ];
 
-  const VisualPhase = ({ phase, index, isActive }) => {
-    const Icon = phase.icon;
-
-    return (
-      <motion.div
-        className={`p-6 relative ${isActive ? 'block' : 'hidden'}`}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="max-w-4xl w-full mx-auto">
-           {/* Main Visual */}
-           <div className={`${phase.bgColor} rounded-3xl p-8 md:p-12 border-2 border-white/10 mb-8 backdrop-blur-xl`}>
-            <motion.div
-              className="flex justify-center mb-8"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <Icon className={`w-32 h-32 ${phase.color}`} strokeWidth={1} />
-            </motion.div>
-
-            {/* Title & Description */}
-             <h2 className={`text-4xl md:text-5xl font-black text-center mb-4 ${phase.color}`}>
-              {phase.title}
-            </h2>
-            <p className="text-xl text-white/70 text-center mb-8 leading-relaxed max-w-2xl mx-auto">
-              {phase.description}
-            </p>
-
-            {/* Facts Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
-              {phase.facts.map((fact, i) => (
-                <motion.div
-                  key={i}
-                  className="bg-black/40 rounded-lg p-4 border border-white/10 backdrop-blur-sm"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <p className="text-sm text-white/60 font-mono">{fact}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Connection to Next - desktop only */}
-          {index < phases.length - 1 && (
-            <motion.div className="hidden md:flex justify-center my-8">
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <ArrowRight className="w-8 h-8 text-white/40 rotate-90" />
-              </motion.div>
-            </motion.div>
-          )}
-        </div>
-      </motion.div>
-    );
-  };
+  const vsItems = [
+    { them: "Bitcoin burns energy", us: "$P51 heals Earth" },
+    { them: "Carbon credits = promises", us: "$P51 = math proof" },
+    { them: "Banks control your money", us: "You control your $P51" },
+    { them: "CEOs decide what's real", us: "Cryptography decides" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]">
-      {/* Hero */}
-      <motion.div
-        className="py-12 md:py-20 flex flex-col items-center justify-center p-6 relative overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <div className="absolute inset-0 opacity-30" style={{
-          background: 'radial-gradient(circle at center, rgba(236,72,153,0.1), transparent)'
-        }} />
-        
+    <div className="min-h-screen bg-[#0a0514] text-white p-4 md:p-8">
+      <div className="max-w-5xl mx-auto space-y-8">
+
+        {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
+          className="text-center py-6"
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="relative z-10 text-center max-w-4xl"
         >
-          <h1 className="text-6xl md:text-7xl font-black mb-6 text-white">
-            Proof of Impact
+          <p className="text-xs font-mono text-pink-400 tracking-[0.3em] uppercase mb-3">Universal Frequency 51</p>
+          <h1 className="text-5xl md:text-7xl font-black text-white leading-none mb-3">
+            PROOF OF IMPACT
           </h1>
-          <p className="text-lg md:text-2xl text-white/70 mb-8 leading-relaxed">
-            What happens when you clean the Earth and prove it.
-            <br />
-            Not with words. With mathematics.
-          </p>
+          <p className="text-white/50 text-lg">How healing the planet creates money backed by mathematics</p>
         </motion.div>
-      </motion.div>
 
-      {/* Tabbed Navigation */}
-      <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-lg border-b border-white/10 py-4">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 md:justify-center">
-            {phases.map((phase, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActivePhase(idx)}
-                className={`px-3 md:px-4 py-2 rounded-lg font-bold whitespace-nowrap transition-all text-sm md:text-base ${
-                  activePhase === idx
-                    ? `${phase.bgColor} border-2 border-white text-white`
-                    : 'border border-white/20 text-white/60 hover:text-white/80'
-                }`}
-              >
-                {idx + 1}. {phase.title}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Phases */}
-      <div className="relative">
-        {phases.map((phase, index) => (
-          <VisualPhase
-            key={index}
-            phase={phase}
-            index={index}
-            isActive={activePhase === index}
-          />
-        ))}
-      </div>
-
-      {/* The Math */}
-      <motion.div
-        className="min-h-screen flex items-center justify-center p-6"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
-        <div className="max-w-4xl w-full bg-gradient-to-r from-cyan-500/20 to-green-500/20 rounded-3xl p-12 border-2 border-white/10 backdrop-blur-xl">
-          <h2 className="text-5xl font-black text-white mb-8 text-center">The Equation</h2>
-          
-          <div className="space-y-8">
-            {[
-              { label: "1kg litter removed", value: "1 $P51 token awarded", proof: "GPS + Photo hash + AI analysis + IPFS storage + Crypto signature" },
-              { label: "Zero human judgment", value: "Pure mathematics", proof: "SHA-256 hashing + ECDSA P-256 verification + Bayesian fraud detection" },
-              { label: "Unforgeable by", value: "Nation states included", proof: "Cryptography doesn't care about power. Math doesn't lie." }
-            ].map((item, i) => (
+        {/* THE FLOW - Infographic style */}
+        <motion.div
+          className="border-2 border-white/10 rounded-2xl p-6 bg-white/5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <p className="text-xs font-mono text-white/40 tracking-widest uppercase mb-6 text-center">The Flow</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {steps.map((s, i) => (
               <motion.div
                 key={i}
-                className="border-l-4 border-pink-500 pl-6"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
+                className={`${s.bg} ${s.border} border rounded-xl p-4 relative`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 * i }}
               >
-                <p className="text-sm text-white/50 uppercase tracking-wider">{item.label}</p>
-                <p className="text-3xl font-black text-white my-2">{item.value}</p>
-                <p className="text-white/60 font-mono text-sm">{item.proof}</p>
+                <div className="flex items-start justify-between mb-2">
+                  <span className={`text-xs font-black font-mono ${s.text} opacity-60`}>{s.step}</span>
+                  <span className="text-2xl">{s.emoji}</span>
+                </div>
+                <h3 className={`font-black text-base leading-tight ${s.text} mb-1`}>{s.title}</h3>
+                <p className="text-white font-bold text-sm mb-1">{s.subtitle}</p>
+                <p className="text-white/50 text-xs leading-tight">{s.detail}</p>
+                {i < steps.length - 1 && (
+                  <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block text-white/20 text-lg">→</div>
+                )}
               </motion.div>
             ))}
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Why It Matters */}
-      <motion.div
-        className="min-h-screen flex items-center justify-center p-6"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
-        <div className="max-w-4xl w-full">
-          <h2 className="text-5xl font-black text-white mb-12 text-center">Why This Matters</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { emoji: "🪐", title: "It's Real", desc: "Not a promise. Not an offset. Mathematical proof the Earth was healed." },
-              { emoji: "🔐", title: "It's Verifiable", desc: "Anyone with SHA-256 can verify. No company. No gatekeepers. Just math." },
-              { emoji: "💰", title: "It's Valuable", desc: "Corporations pay for verified impact. Your work becomes tradeable globally." },
-              { emoji: "♾️", title: "It's Permanent", desc: "IPFS means your proof survives forever. Can't be deleted. Can't be denied." }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                className="bg-white/5 rounded-2xl p-8 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <p className="text-6xl mb-4">{item.emoji}</p>
-                <h3 className="text-2xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-white/70">{item.desc}</p>
-              </motion.div>
-            ))}
+        {/* THE EQUATION */}
+        <motion.div
+          className="border-2 border-pink-500/40 rounded-2xl p-6 bg-pink-500/5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          <p className="text-xs font-mono text-pink-400/60 tracking-widest uppercase mb-4 text-center">The Equation</p>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+            <div>
+              <p className="text-5xl md:text-6xl font-black text-white">1kg</p>
+              <p className="text-white/50 text-sm font-mono">litter removed</p>
+            </div>
+            <div className="text-pink-500 text-4xl font-black">=</div>
+            <div>
+              <p className="text-5xl md:text-6xl font-black text-pink-400">1 $P51</p>
+              <p className="text-white/50 text-sm font-mono">verified token</p>
+            </div>
+            <div className="text-pink-500 text-4xl font-black hidden md:block">=</div>
+            <div className="hidden md:block">
+              <p className="text-5xl md:text-6xl font-black text-green-400">£$€</p>
+              <p className="text-white/50 text-sm font-mono">real money</p>
+            </div>
           </div>
-        </div>
-      </motion.div>
+          <div className="mt-4 bg-black/40 rounded-lg p-3 font-mono text-xs text-center text-white/40">
+            GPS + SHA-256 + AI Vision + IPFS + ECDSA P-256 = mathematically impossible to fake
+          </div>
+        </motion.div>
 
-      {/* End */}
-      <motion.div
-        className="min-h-screen flex items-center justify-center p-6 text-center"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
-        <div className="max-w-2xl">
-          <p className="text-6xl font-black text-white mb-6">
+        {/* VS Section + Why it matters - 2 col */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          {/* VS */}
+          <motion.div
+            className="border-2 border-white/10 rounded-2xl p-6 bg-white/5"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <p className="text-xs font-mono text-white/40 tracking-widest uppercase mb-4">Old World vs $P51</p>
+            <div className="space-y-3">
+              {vsItems.map((v, i) => (
+                <div key={i} className="flex gap-2 text-sm">
+                  <div className="flex-1 bg-red-500/10 border border-red-500/20 rounded-lg p-2 text-red-400/70 line-through text-xs">{v.them}</div>
+                  <div className="flex-1 bg-green-500/10 border border-green-500/20 rounded-lg p-2 text-green-400 font-bold text-xs">{v.us}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* WHY IT MATTERS */}
+          <motion.div
+            className="border-2 border-white/10 rounded-2xl p-6 bg-white/5"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <p className="text-xs font-mono text-white/40 tracking-widest uppercase mb-4">Why This Hits Different</p>
+            <div className="space-y-3">
+              {[
+                { emoji: "🪐", text: "Not a promise. Mathematical proof Earth was healed." },
+                { emoji: "🔐", text: "Anyone with SHA-256 can verify. No company needed." },
+                { emoji: "💰", text: "Corporations pay real money for verified impact." },
+                { emoji: "♾️", text: "IPFS means your proof lives forever. Can't be deleted." },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className="text-xl">{item.emoji}</span>
+                  <p className="text-white/70 text-sm leading-tight">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* FOOTER STATEMENT */}
+        <motion.div
+          className="text-center py-8 border-t border-white/10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+        >
+          <p className="text-3xl md:text-4xl font-black text-white mb-2">
             This is how you prove love to the Earth.
           </p>
-          <p className="text-xl text-white/70 mb-12">
-            Not with talk. With action. And mathematics that can't be faked.
-          </p>
-          <motion.div
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-pink-500 font-black text-lg"
-          >
-            ♾️❤️
-          </motion.div>
-        </div>
-      </motion.div>
+          <p className="text-white/40 font-mono text-sm">Not with talk. With action. And math that can't be faked.</p>
+          <p className="text-pink-500 text-2xl mt-4 font-black">♾️❤️</p>
+        </motion.div>
+
+      </div>
     </div>
   );
 }
