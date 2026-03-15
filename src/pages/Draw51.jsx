@@ -80,8 +80,27 @@ export default function Draw51() {
     window.speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(text);
     utt.rate = 0.9;
-    utt.pitch = 1.05;
-    window.speechSynthesis.speak(utt);
+    utt.pitch = 1.2;
+
+    const setVoiceAndSpeak = () => {
+      const voices = window.speechSynthesis.getVoices();
+      // Try to find a nice female English voice
+      const femaleVoice = voices.find(v => /samantha|karen|victoria|moira|fiona|zira|susan|female|woman/i.test(v.name))
+        || voices.find(v => v.name.includes('Google UK English Female'))
+        || voices.find(v => v.name.includes('Google US English') && v.name.includes('Female'))
+        || voices.find(v => /en[-_]GB|en[-_]AU/i.test(v.lang) && v.name.toLowerCase().includes('female'))
+        || voices.find(v => /en/i.test(v.lang) && v.gender === 'female')
+        || voices.find(v => /samantha|karen|victoria|moira|fiona|zira|susan|alice|allison|ava|kate|siri/i.test(v.name));
+      if (femaleVoice) utt.voice = femaleVoice;
+      window.speechSynthesis.speak(utt);
+    };
+
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length) {
+      setVoiceAndSpeak();
+    } else {
+      window.speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+    }
   };
 
   const stopSpeaking = () => {
