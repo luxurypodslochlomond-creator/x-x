@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
-import { Zap, ChevronDown, Star, Send } from 'lucide-react';
+import { Zap, ChevronDown, Star, Send, Menu, X } from 'lucide-react';
 
 // COOLASFUCK custom Cheese & Onion Bake icon
 const CheeseOnionBakeIcon = ({ size = 64 }) => (
@@ -108,6 +108,7 @@ export default function CheeseAndOnionBake() {
   const [form, setForm] = useState({ name: '', email: '', message: '', service: '' });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,7 +123,43 @@ export default function CheeseAndOnionBake() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden" style={{ maxWidth: '100vw' }}>
+      {/* CUSTOM HEADER */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-cyan-500/20">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4">
+          <div className="flex items-center gap-2">
+            <CheeseOnionBakeIcon size={32} />
+            <span className="text-xl sm:text-2xl font-black text-white font-mono">cheese<span className="text-orange-400">&</span>onionbake</span>
+          </div>
+          
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-6">
+            <a href="https://discord.gg/cheeseandonionbake" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 text-sm font-mono">Discord</a>
+            <a href="#contact" className="text-gray-400 hover:text-white text-sm font-mono">Contact</a>
+            <a href="/#Terms" className="text-gray-400 hover:text-white text-sm font-mono">Terms</a>
+            <a href="/#PrivacyPolicy" className="text-gray-400 hover:text-white text-sm font-mono">Privacy</a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2">
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Nav */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-cyan-500/20 bg-black/95 p-4 space-y-3">
+            <a href="https://discord.gg/cheeseandonionbake" target="_blank" rel="noopener noreferrer" className="block text-cyan-400 hover:text-cyan-300 text-sm font-mono py-2">Discord</a>
+            <a href="#contact" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Contact</a>
+            <a href="/#Terms" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Terms</a>
+            <a href="/#PrivacyPolicy" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Privacy</a>
+          </div>
+        )}
+      </header>
+
+      {/* Offset main content for fixed header */}
+      <div className="pt-20">
+    </div>
 
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">
@@ -324,8 +361,15 @@ export default function CheeseAndOnionBake() {
       <footer className="border-t border-white/5 py-6 sm:py-8 text-center text-gray-700 text-[10px] sm:text-xs font-mono">
         <div className="flex justify-center mb-2 sm:mb-3"><CheeseOnionBakeIcon size={28} /></div>
         <p>cheeseandonionbake · Supersonic Legend · Scotland</p>
-        <p className="mt-1">Part of <a href="/" className="text-gray-600 hover:text-orange-400 transition-colors">universalfamily51</a></p>
+        <div className="mt-2 space-x-4">
+          <a href="https://discord.gg/cheeseandonionbake" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-cyan-400 transition-colors">Discord</a>
+          <span>·</span>
+          <a href="/#Terms" className="text-gray-600 hover:text-gray-500 transition-colors">Terms</a>
+          <span>·</span>
+          <a href="/#PrivacyPolicy" className="text-gray-600 hover:text-gray-500 transition-colors">Privacy</a>
+        </div>
       </footer>
+      </div>
     </div>
   );
 }
