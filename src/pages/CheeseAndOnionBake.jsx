@@ -238,10 +238,7 @@ export default function CheeseAndOnionBake() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="px-4 sm:px-6 py-12 sm:py-16 max-w-4xl mx-auto">
-        <div className="absolute left-0 right-0 h-96 -z-10 flex items-center justify-center opacity-10">
-          <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/09e96759b_generated_image.png" alt="arena" className="w-full h-full object-cover" />
-        </div>
+      <section id="services" className="px-4 sm:px-6 py-12 sm:py-16 max-w-4xl mx-auto relative">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-2 sm:mb-3">What I Offer</h2>
           <p className="text-sm sm:text-base text-gray-500">No fluff. No fake promises. Just ranked up players.</p>
