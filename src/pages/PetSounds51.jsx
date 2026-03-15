@@ -277,7 +277,23 @@ export default function PetSounds51() {
                         }
                       </div>
                       <p className="font-black mb-1 text-sm" style={{ color: '#e8d5a3' }}>{item.name}</p>
-                      <p className="text-xs" style={{ color: '#a89870' }}>"{item.tagline}"</p>
+                      <p className="text-xs mb-2" style={{ color: '#a89870' }}>"{item.tagline}"</p>
+                      <p className="text-xs leading-snug" style={{ color: '#8aab3a' }}>
+                        {item.key === 'separation' && 'Proven 70% reduction in destructive behavior when owner leaves'}
+                        {item.key === 'thunderstorm' && '40Hz blocks fear response neural pathway'}
+                        {item.key === 'vet_fear' && 'Parasympathetic activation before & during visits'}
+                        {item.key === 'night_anxiety' && 'Delta frequency promotes deep sleep onset'}
+                        {item.key === 'rescue_trauma' && 'Gradual nervous system re-patterning over 6 weeks'}
+                        {item.key === 'grief' && '639Hz triggers oxytocin & social bonding'}
+                        {item.key === 'dementia' && 'Reduces sundowning & improves short-term recall'}
+                        {item.key === 'hyperactive' && 'Alpha bridging slows neural firing rate'}
+                        {item.key === 'arthritis' && 'PEMF frequency accelerates cellular repair'}
+                        {item.key === 'recovery' && '528Hz promotes collagen synthesis & pain reduction'}
+                        {item.key === 'pre_race' && 'Maintains performance while lowering cortisol'}
+                        {item.key === 'post_race' && 'Speeds muscle recovery, reduces inflammation'}
+                        {item.key === 'captivity_stress' && '528Hz mimics natural healing frequencies'}
+                        {item.key === 'training_recovery' && 'Accelerates soft tissue healing & reduces soreness'}
+                      </p>
                     </button>
                   );
                 })}
@@ -293,9 +309,9 @@ export default function PetSounds51() {
           Not a substitute for vet care. Works alongside treatment. No side effects.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href="/PetSounds51Terms" className="text-xs font-bold transition-colors" style={{ color: '#a89870' }}>Terms</a>
+          <Link to={createPageUrl("PetSounds51Terms")} className="text-xs font-bold hover:opacity-80 transition-colors" style={{ color: '#a89870' }}>Terms</Link>
           <span style={{ color: '#4a4030' }}>•</span>
-          <a href="/PetSounds51Privacy" className="text-xs font-bold transition-colors" style={{ color: '#a89870' }}>Privacy</a>
+          <Link to={createPageUrl("PetSounds51Privacy")} className="text-xs font-bold hover:opacity-80 transition-colors" style={{ color: '#a89870' }}>Privacy</Link>
           <span style={{ color: '#4a4030' }}>•</span>
           <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#8aab3a' }}>
           <Footprints size={14} style={{ color: '#8aab3a' }} />
