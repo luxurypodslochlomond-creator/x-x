@@ -37,11 +37,24 @@ export default function Draw51() {
   const drawing = useRef(false);
   const lastPos = useRef(null);
 
+  const speak = (text) => {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.rate = 0.9;
+    utt.pitch = 1.05;
+    window.speechSynthesis.speak(utt);
+  };
+
+  const stopSpeaking = () => {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  };
+
   const getSteps = async (name) => {
     setLoading(true);
     try {
       const res = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are AI51, a warm, encouraging art teacher for kids and adults. Give me exactly 6 simple step-by-step instructions to sketch a "${name}" from scratch. Each step should be short (1-2 sentences), fun, and encouraging. Use simple language a child can understand. Return JSON with a "steps" array, each item having "title" (short step name, max 4 words) and "instruction" (what to do) and "tip" (a small encouraging tip or fun fact, 1 sentence).`,
+        prompt: `You are AI51, a warm, encouraging art teacher for kids and adults. Give me exactly 6 simple step-by-step instructions to sketch a "${name}" from scratch. Each step should be short (1-2 sentences), fun, and encouraging. Use simple language a child can understand. Return JSON with a "steps" array, each item having "title" (short step name, max 4 words), "instruction" (what to do), "tip" (a small encouraging tip or fun fact, 1 sentence), and "shape" (one of: "oval", "circle", "rectangle", "triangle", "diamond", "curved-line", "zigzag", "spiral", "star", "heart", "none" — the main shape to draw in this step).`,
         response_json_schema: {
           type: 'object',
           properties: {
