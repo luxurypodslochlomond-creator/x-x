@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Heart, Shield, Zap, ArrowLeft, Star } from 'lucide-react';
 import { petSoundsCheckout } from '@/functions/petSoundsCheckout';
+import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
 
 const PROTOCOLS = [
-  { emoji: '⛈️', name: 'Thunderstorm & Fireworks', detail: '40Hz gamma · suppresses fear response' },
-  { emoji: '🏥', name: 'Vet & Car Anxiety', detail: '528Hz · parasympathetic activation' },
-  { emoji: '🌙', name: "Night Anxiety / Can't Settle", detail: 'Delta 4Hz · sleep onset' },
-  { emoji: '🐾', name: 'Rescue Trauma & PTSD', detail: '396Hz theta · trauma processing' },
-  { emoji: '💔', name: 'Grief & Depression', detail: '639Hz · oxytocin + bonding' },
-  { emoji: '🧠', name: 'Cognitive Decline / Dementia', detail: '40Hz gamma · MIT protocol' },
-  { emoji: '⚡', name: 'Hyperactivity & Reactivity', detail: 'Alpha 10Hz · calm bridging' },
-  { emoji: '🦴', name: 'Arthritis & Joint Pain', detail: '174Hz PEMF · pain signalling' },
-  { emoji: '🩹', name: 'Post-Surgery Recovery', detail: '528Hz · cellular repair' },
-  { emoji: '🏇', name: 'Sports & Zoo Animals', detail: 'Performance + recovery' },
+  { icon: 'Science', name: 'Thunderstorm & Fireworks', detail: '40Hz gamma · suppresses fear response' },
+  { icon: 'Trust', name: 'Vet & Car Anxiety', detail: '528Hz · parasympathetic activation' },
+  { icon: 'Frequency', name: "Night Anxiety / Can't Settle", detail: 'Delta 4Hz · sleep onset' },
+  { icon: 'Rescue', name: 'Rescue Trauma & PTSD', detail: '396Hz theta · trauma processing' },
+  { icon: 'Heart', name: 'Grief & Depression', detail: '639Hz · oxytocin + bonding' },
+  { icon: 'Science', name: 'Cognitive Decline / Dementia', detail: '40Hz gamma · MIT protocol' },
+  { icon: 'Frequency', name: 'Hyperactivity & Reactivity', detail: 'Alpha 10Hz · calm bridging' },
+  { icon: 'Paw', name: 'Arthritis & Joint Pain', detail: '174Hz PEMF · pain signalling' },
+  { icon: 'Frequency', name: 'Post-Surgery Recovery', detail: '528Hz · cellular repair' },
+  { icon: 'Paw', name: 'Sports & Zoo Animals', detail: 'Performance + recovery' },
 ];
 
 export default function PS51Paywall({ onClose }) {
@@ -54,7 +55,6 @@ export default function PS51Paywall({ onClose }) {
 
         {/* HERO */}
         <div className="text-center mb-8">
-          <div className="text-5xl mb-4">♾️❤️</div>
           <h1 className="text-3xl font-black text-white leading-tight mb-3">
             Heal your bestie.<br/>
             <span style={{ color: '#f59e0b' }}>Forever frequencies.</span>
@@ -73,15 +73,18 @@ export default function PS51Paywall({ onClose }) {
 
         {/* PROTOCOLS LIST */}
         <div className="space-y-2 mb-7">
-          {PROTOCOLS.map((p, i) => (
+          {PROTOCOLS.map((p, i) => {
+            const IconComponent = PS51Icons[p.icon];
+            return (
             <div key={i} className="flex items-center gap-3 py-2 border-b border-white/5">
-              <span className="text-xl w-7 flex-shrink-0">{p.emoji}</span>
+              {IconComponent && <IconComponent size={20} style={{ color: '#f59e0b', flexShrink: 0 }} />}
               <div>
                 <p className="text-sm font-bold text-white leading-tight">{p.name}</p>
                 <p className="text-xs text-gray-600">{p.detail}</p>
               </div>
             </div>
-          ))}
+          );
+          })}
         </div>
 
         {/* TRUST */}
