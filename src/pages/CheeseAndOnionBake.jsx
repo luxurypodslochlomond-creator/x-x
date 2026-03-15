@@ -151,7 +151,7 @@ export default function CheeseAndOnionBake() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 border border-cyan-500/40 bg-cyan-500/10 text-cyan-300 text-xs font-mono tracking-widest px-4 py-2 rounded-full mb-8">
             <SSLIcon />
-            SUPERSONIC LEGEND · TOP 0.1% · SCOTLAND
+            BEST IN SCOTLAND · TOP 0.1% WORLD
           </div>
 
           <h1 className="text-2xl sm:text-4xl md:text-7xl font-black tracking-tight mb-3 sm:mb-4 leading-tight">
