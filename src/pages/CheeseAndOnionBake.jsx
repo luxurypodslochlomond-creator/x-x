@@ -123,7 +123,11 @@ export default function CheeseAndOnionBake() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden" style={{ maxWidth: '100vw' }}>
+    <div className="min-h-screen bg-black text-white overflow-x-hidden relative" style={{ maxWidth: '100vw' }}>
+      {/* Full-page rocket league background */}
+      <div className="fixed inset-0 -z-20 opacity-15">
+        <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/09e96759b_generated_image.png" alt="arena" className="w-full h-full object-cover" />
+      </div>
       {/* CUSTOM HEADER */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-cyan-500/20">
         <div className="flex items-center justify-between px-4 sm:px-6 py-4">
