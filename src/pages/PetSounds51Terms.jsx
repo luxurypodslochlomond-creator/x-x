@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Heart, AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Shield, AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
 const Section = ({ number, title, children }) => {
@@ -158,11 +158,11 @@ export default function PetSounds51Terms() {
         </div>
 
         {/* FOOTER */}
-        <div className="text-center border-t-2 border-amber-700/40 pt-8">
-          <Heart className="w-8 h-8 mx-auto mb-3" style={{ color: '#d4a017' }} />
-          <p className="text-gray-300 text-sm">Built with love. For every animal. ♾️❤️</p>
-          <p className="text-gray-400 text-xs mt-1">PetSounds Healing</p>
-        </div>
+         <div className="text-center border-t-2 border-amber-700/40 pt-8">
+           <PetSounds51Icon8Bit size={48} animate={false} />
+           <p className="text-gray-300 text-sm mt-3">Built with love. For every animal. ♾️❤️</p>
+           <p className="text-gray-400 text-xs mt-1">PetSounds Healing</p>
+         </div>
 
       </div>
     </div>
