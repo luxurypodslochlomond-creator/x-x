@@ -85,9 +85,19 @@ export const PS51Icons = {
   ),
 
   // Heart for grief & loss — remembering bonds
-  Heart: ({ size = 24, className = '' }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-      <path d="M12 21l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.18L12 21z" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
+  Heart: ({ size = 24, className = '', animate = false }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}
+      style={animate ? { 
+        filter: 'drop-shadow(0 0 8px rgba(236, 72, 153, 0.8))',
+        animation: 'heartbeat-glow 1.5s ease-in-out infinite'
+      } : {}}>
+      <path d="M12 21l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.18L12 21z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" strokeLinejoin="round"/>
+      <style>{`
+        @keyframes heartbeat-glow {
+          0%, 100% { filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.8)); transform: scale(1); }
+          50% { filter: drop-shadow(0 0 16px rgba(236, 72, 153, 1)); transform: scale(1.08); }
+        }
+      `}</style>
     </svg>
   ),
   };
