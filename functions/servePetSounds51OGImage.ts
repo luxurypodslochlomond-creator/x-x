@@ -1,46 +1,48 @@
-import { createCanvas } from 'npm:canvas@2.11.2';
-
 Deno.serve(async (req) => {
   try {
-    const canvas = createCanvas(1200, 630);
-    const ctx = canvas.getContext('2d');
+    const svg = `
+      <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1a200e;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#2a3018;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1e1a0e;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <rect width="1200" height="630" fill="url(#bg)"/>
+        
+        <!-- Title -->
+        <text x="600" y="140" font-size="90" font-weight="bold" text-anchor="middle" fill="#d4a017" font-family="Arial, sans-serif">
+          PetSounds51
+        </text>
+        
+        <!-- Tagline -->
+        <text x="600" y="220" font-size="36" text-anchor="middle" fill="#e8d5a3" font-family="Arial, sans-serif">
+          Science-backed sound therapy for anxious pets
+        </text>
+        
+        <!-- Key messages -->
+        <text x="600" y="330" font-size="28" text-anchor="middle" fill="#8aab3a" font-family="Arial, sans-serif">
+          ✓ Try FREE: Separation Anxiety
+        </text>
+        <text x="600" y="390" font-size="28" text-anchor="middle" fill="#8aab3a" font-family="Arial, sans-serif">
+          ✓ Pain Relief • Stress Reduction • Healing
+        </text>
+        <text x="600" y="450" font-size="28" text-anchor="middle" fill="#8aab3a" font-family="Arial, sans-serif">
+          ✓ £29.99/year for all protocols
+        </text>
+        
+        <!-- Bottom badge -->
+        <text x="600" y="580" font-size="20" font-weight="bold" text-anchor="middle" fill="#6b5e3a" font-family="Arial, sans-serif">
+          Research-backed by MIT, iCalmDog, Glasgow, Edinburgh
+        </text>
+      </svg>
+    `;
 
-    // Background gradient
-    const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
-    gradient.addColorStop(0, '#1a200e');
-    gradient.addColorStop(0.5, '#2a3018');
-    gradient.addColorStop(1, '#1e1a0e');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 1200, 630);
-
-    // Title
-    ctx.font = 'bold 90px Arial, sans-serif';
-    ctx.fillStyle = '#d4a017';
-    ctx.textAlign = 'center';
-    ctx.fillText('PetSounds51', 600, 150);
-
-    // Tagline
-    ctx.font = '36px Arial, sans-serif';
-    ctx.fillStyle = '#e8d5a3';
-    ctx.fillText('Science-backed sound therapy for anxious pets', 600, 220);
-
-    // Key messages
-    ctx.font = '28px Arial, sans-serif';
-    ctx.fillStyle = '#8aab3a';
-    ctx.fillText('✓ Try FREE: Separation Anxiety', 600, 330);
-    ctx.fillText('✓ Pain Relief • Stress Reduction • Healing', 600, 390);
-    ctx.fillText('✓ £29.99/year for all protocols', 600, 450);
-
-    // Bottom badge
-    ctx.font = 'bold 20px Arial, sans-serif';
-    ctx.fillStyle = '#6b5e3a';
-    ctx.fillText('Research-backed by MIT, iCalmDog, Glasgow, Edinburgh', 600, 580);
-
-    const png = canvas.toBuffer('image/png');
-    return new Response(png, {
+    return new Response(svg, {
       status: 200,
       headers: {
-        'Content-Type': 'image/png',
+        'Content-Type': 'image/svg+xml',
         'Cache-Control': 'public, max-age=86400'
       }
     });
