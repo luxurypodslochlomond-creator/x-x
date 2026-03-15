@@ -65,6 +65,8 @@ export default function Draw51() {
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [phase, setPhase] = useState('pick');
+  const [referenceImage, setReferenceImage] = useState(null);
+  const [loadingImage, setLoadingImage] = useState(false);
   const [color, setColor] = useState('#1a1a1a');
   const [brushSize, setBrushSize] = useState(5);
   const [isErasing, setIsErasing] = useState(false);
