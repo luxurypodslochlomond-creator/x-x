@@ -136,13 +136,13 @@ export default function CheeseAndOnionBake() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="relative z-10 max-w-3xl"
         >
           {/* COOLASFUCK Icon */}
           <motion.div
-            animate={{ rotate: [0, -5, 5, -3, 3, 0] }}
-            transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+            animate={{ rotate: [0, -3, 3, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
             className="flex justify-center mb-6"
           >
             <CheeseOnionBakeIcon size={80} />
@@ -175,8 +175,8 @@ export default function CheeseAndOnionBake() {
 
         <motion.button
           onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity }}
           className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 text-gray-600 hover:text-orange-400 transition-colors"
         >
           <ChevronDown className="w-6 h-6" />
@@ -191,7 +191,7 @@ export default function CheeseAndOnionBake() {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.05, duration: 0.3 }}
               className="border border-white/10 bg-white/3 rounded-xl p-6 text-center hover:border-orange-500/40 transition-all"
             >
               <div className="text-xl sm:text-2xl font-black text-orange-400 mb-1">{stat.value}</div>
@@ -220,7 +220,7 @@ export default function CheeseAndOnionBake() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.05, duration: 0.3 }}
                 className={`border ${c.border} ${c.hover} bg-white/3 rounded-xl p-6 transition-all`}
               >
                 <div className={`w-10 h-10 ${c.bg} rounded-lg flex items-center justify-center mb-4`}>
@@ -260,6 +260,7 @@ export default function CheeseAndOnionBake() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
             className="text-center border border-orange-500/40 bg-orange-500/10 rounded-xl sm:rounded-2xl p-6 sm:p-12"
           >
             <div className="flex justify-center mb-3 sm:mb-4"><CheeseOnionBakeIcon size={48} /></div>
