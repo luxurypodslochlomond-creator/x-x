@@ -129,6 +129,9 @@ export default function PetSounds51() {
         <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed" style={{ color: '#a89870' }}>
           Science-backed sound therapy for separation anxiety, stress, pain & healing — adaptive frequencies, real results. Through any speaker.
         </p>
+        <p className="text-xs max-w-lg mx-auto leading-relaxed mb-4" style={{ color: '#8aab3a' }}>
+          Every frequency engineered from peer-reviewed research (MIT, iCalmDog RCT, University of Glasgow & Edinburgh). Not trend-chasing. Built to work.
+        </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
         <span className="rounded-full px-3 py-1" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>💚 £29.99/year</span>
         <span className="rounded-full px-3 py-1" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>🐾 10% to rescue</span>
