@@ -262,7 +262,7 @@ export default function Draw51() {
         {/* Top bar */}
         <div className="flex items-center justify-between mb-4 pt-2">
           <button
-            onClick={() => { setPhase('pick'); setSteps([]); setSubject(''); setCustomSubject(''); }}
+            onClick={() => { setPhase('pick'); setSteps([]); setSubject(''); setCustomSubject(''); setReferenceImage(null); }}
             className="flex items-center gap-2 text-gray-400 hover:text-pink-400 text-sm font-bold transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> Draw something else
