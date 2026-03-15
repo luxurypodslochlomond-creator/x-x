@@ -159,8 +159,6 @@ export default function CheeseAndOnionBake() {
 
       {/* Offset main content for fixed header */}
       <div className="pt-20">
-    </div>
-
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -370,6 +368,7 @@ export default function CheeseAndOnionBake() {
         </div>
       </footer>
       </div>
-    </div>
-  );
-}
+      </div>
+      </div>
+      );
+      }
