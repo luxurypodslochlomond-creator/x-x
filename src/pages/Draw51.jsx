@@ -20,6 +20,42 @@ const SUGGESTIONS = [
 ];
 
 const COLORS = ['#1a1a1a', '#ef4444', '#f97316', '#f59e0b', '#22c55e', '#06b6d4', '#8b5cf6', '#ec4899', '#ffffff'];
+
+function ShapePreview({ shape }) {
+  if (!shape || shape === 'none') return null;
+  const s = shape.toLowerCase();
+  const size = 80;
+  const stroke = '#ec4899';
+  const sw = 3;
+
+  const shapes = {
+    oval: <ellipse cx="50" cy="40" rx="40" ry="25" fill="none" stroke={stroke} strokeWidth={sw} />,
+    circle: <circle cx="50" cy="40" r="30" fill="none" stroke={stroke} strokeWidth={sw} />,
+    rectangle: <rect x="10" y="15" width="80" height="50" fill="none" stroke={stroke} strokeWidth={sw} />,
+    triangle: <polygon points="50,10 90,70 10,70" fill="none" stroke={stroke} strokeWidth={sw} />,
+    diamond: <polygon points="50,10 90,40 50,70 10,40" fill="none" stroke={stroke} strokeWidth={sw} />,
+    'curved-line': <path d="M 10 60 Q 50 10 90 60" fill="none" stroke={stroke} strokeWidth={sw} />,
+    zigzag: <polyline points="10,60 30,20 50,60 70,20 90,60" fill="none" stroke={stroke} strokeWidth={sw} />,
+    spiral: <path d="M50 40 m0,-20 a20,20 0 1,1 -0.1,0 a15,15 0 1,0 0.1,0 a10,10 0 1,1 -0.1,0" fill="none" stroke={stroke} strokeWidth={sw} />,
+    star: <polygon points="50,10 61,35 90,35 67,57 76,82 50,65 24,82 33,57 10,35 39,35" fill="none" stroke={stroke} strokeWidth={sw} />,
+    heart: <path d="M50 70 C20 50 10 30 30 20 C40 15 50 25 50 25 C50 25 60 15 70 20 C90 30 80 50 50 70Z" fill="none" stroke={stroke} strokeWidth={sw} />,
+  };
+
+  const svgShape = shapes[s];
+  if (!svgShape) return null;
+
+  return (
+    <div className="flex items-center gap-3 bg-pink-500/10 border border-pink-500/20 rounded-xl p-3 mt-3">
+      <svg width={size} height={size} viewBox="0 0 100 80" className="flex-shrink-0">
+        {svgShape}
+      </svg>
+      <div>
+        <p className="text-pink-400 font-bold text-xs uppercase tracking-wider mb-1">Start with this shape</p>
+        <p className="text-gray-300 text-xs capitalize">{shape.replace('-', ' ')}</p>
+      </div>
+    </div>
+  );
+}
 const BRUSH_SIZES = [2, 5, 10, 18];
 
 export default function Draw51() {
