@@ -7,8 +7,8 @@ import PS51Paywall from '@/components/petsounds/PS51Paywall';
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
 
 
-// All protocols unlocked during development
-const FREE_PROTOCOLS = ['separation', 'thunderstorm', 'vet_fear', 'night_anxiety', 'rescue_trauma', 'grief', 'dementia', 'hyperactive', 'arthritis', 'recovery', 'pre_race', 'post_race', 'captivity_stress', 'training_fatigue'];
+// Free tier: separation anxiety only
+const FREE_PROTOCOLS = ['separation'];
 
 const AnimalFrequencyEngine = lazy(() => import('@/components/petsounds/AnimalFrequencyEngine'));
 
