@@ -34,6 +34,43 @@ export default function CB51() {
   const [showMissionBriefing, setShowMissionBriefing] = useState(false);
   const queryClient = useQueryClient();
 
+  // Set OG tags for social sharing
+  useEffect(() => {
+    document.title = 'CB51 • AI Co-Manager for Artists • Avoid the Noise';
+    
+    const setMeta = (property, content) => {
+      let el = document.querySelector(`meta[property="${property}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('property', property);
+        document.head.appendChild(el);
+      }
+      el.content = content;
+    };
+
+    const setMetaName = (name, content) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('name', name);
+        document.head.appendChild(el);
+      }
+      el.content = content;
+    };
+
+    setMeta('og:title', 'CB51 • AI Co-Manager for Artists');
+    setMeta('og:description', 'Smart gig booking, band voting, finance tracking, calendar sync & contracts. Professional artist management tools. CitizenBand51: Avoid the Noise.');
+    setMeta('og:image', window.location.origin + '/api/functions/serveCB51OGImage');
+    setMeta('og:url', window.location.href);
+    setMeta('og:type', 'website');
+    
+    setMetaName('description', 'CB51 - AI co-manager for artists. Gig booking, band voting, finance, calendar & contracts.');
+    setMetaName('twitter:card', 'summary_large_image');
+    setMetaName('twitter:title', 'CB51 • AI Co-Manager for Artists');
+    setMetaName('twitter:description', 'Smart gig booking, band voting, finance tracking & calendar sync.');
+    setMetaName('twitter:image', window.location.origin + '/api/functions/serveCB51OGImage');
+  }, []);
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
