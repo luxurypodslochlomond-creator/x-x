@@ -125,8 +125,9 @@ export default function CheeseAndOnionBake() {
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
       {/* HERO */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
+          <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/4a0df39ce_generated_image.png" alt="neon ball" className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 opacity-20 blur-2xl" />
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-orange-500/10 blur-[120px]" />
           <div className="absolute top-1/2 left-1/4 w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[80px]" />
           <div className="absolute top-1/4 right-1/4 w-[200px] h-[200px] rounded-full bg-purple-500/8 blur-[60px]" />
@@ -198,6 +199,9 @@ export default function CheeseAndOnionBake() {
 
       {/* SERVICES */}
       <section id="services" className="px-6 py-16 max-w-4xl mx-auto">
+        <div className="absolute left-0 right-0 h-96 -z-10 flex items-center justify-center opacity-10">
+          <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/09e96759b_generated_image.png" alt="arena" className="w-full h-full object-cover" />
+        </div>
         <div className="text-center mb-12">
           <h2 className="text-4xl font-black text-white mb-3">What I Offer</h2>
           <p className="text-gray-500">No fluff. No fake promises. Just ranked up players.</p>
@@ -227,8 +231,9 @@ export default function CheeseAndOnionBake() {
       </section>
 
       {/* THE VIBE */}
-      <section className="px-6 py-16 max-w-2xl mx-auto text-center">
-        <div className="border border-white/10 rounded-2xl p-10 bg-white/3">
+      <section className="px-6 py-16 max-w-2xl mx-auto text-center relative">
+        <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/9333643ad_generated_image.png" alt="boost" className="absolute top-0 right-0 w-64 h-64 opacity-10 blur-2xl" />
+        <div className="border border-white/10 rounded-2xl p-10 bg-white/3 relative z-10">
           <div className="flex justify-center mb-4">
             <CheeseOnionBakeIcon size={48} />
           </div>
@@ -237,7 +242,7 @@ export default function CheeseAndOnionBake() {
           </blockquote>
           <div className="text-orange-400 font-bold font-mono text-sm">— cheeseandonionbake</div>
         </div>
-      </section>
+        </section>
 
       {/* CONTACT */}
       <section id="contact" className="px-6 py-16 max-w-2xl mx-auto">
