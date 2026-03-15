@@ -334,7 +334,7 @@ export default function Draw51() {
                 </div>
                 <h2 className="text-xl font-black text-white mb-2">{step.title}</h2>
                 <p className="text-gray-300 text-sm leading-relaxed mb-3">{step.instruction}</p>
-                <ShapePreview shape={step.shape} />
+                <ShapePreview shape={step.shape} stepKey={`${subject}-${currentStep}`} />
                 <div className="bg-yellow-500/10 rounded-xl p-3 border border-yellow-500/20 mt-3">
                   <p className="text-xs text-yellow-300 font-medium">💡 {step.tip}</p>
                 </div>
