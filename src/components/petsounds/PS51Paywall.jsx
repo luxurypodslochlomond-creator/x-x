@@ -113,7 +113,6 @@ export default function PS51Paywall({ onClose }) {
             color: loading ? '#9ca3af' : '#000',
           }}
         >
-          <span>♾️</span>
           <PS51Icons.Heart size={22} style={{ color: '#000' }} />
           <span>{loading ? 'Connecting...' : 'Start Now — £29.99/year'}</span>
         </button>
