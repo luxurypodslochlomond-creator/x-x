@@ -5,16 +5,16 @@ import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 const Section = ({ number, title, children }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-2 border-orange-300 bg-white/40 rounded-xl overflow-hidden shadow-sm">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 hover:bg-white/60 transition-all text-left">
+    <div className="border-2 border-amber-700/40 bg-black/40 rounded-xl overflow-hidden shadow-sm hover:border-amber-700/60 transition-colors">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 hover:bg-amber-700/10 transition-all text-left">
         <div className="flex items-center gap-3">
-          <span className="text-xs font-mono text-amber-700">{String(number).padStart(2, '0')}</span>
-          <h2 className="font-black text-amber-900">{title}</h2>
+          <span className="text-xs font-mono" style={{ color: '#d4a017' }}>{String(number).padStart(2, '0')}</span>
+          <h2 className="font-black" style={{ color: '#d4a017' }}>{title}</h2>
         </div>
-        {open ? <ChevronUp className="w-4 h-4 text-orange-700 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-orange-700 flex-shrink-0" />}
+        {open ? <ChevronUp className="w-4 h-4 flex-shrink-0" style={{ color: '#d4a017' }} /> : <ChevronDown className="w-4 h-4 flex-shrink-0" style={{ color: '#d4a017' }} />}
       </button>
       {open && (
-        <div className="px-5 pb-5 text-sm text-amber-900 leading-relaxed border-t-2 border-orange-300">
+        <div className="px-5 pb-5 text-sm text-gray-300 leading-relaxed border-t-2 border-amber-700/40">
           <div className="pt-4">{children}</div>
         </div>
       )}
@@ -24,35 +24,35 @@ const Section = ({ number, title, children }) => {
 
 export default function PetSounds51Terms() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900 p-4 sm:p-6 pb-24 pt-24">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-950 to-gray-900 text-white p-4 sm:p-6 pb-24 pt-24">
       <div className="max-w-3xl mx-auto">
 
         {/* HEADER */}
         <div className="text-center mb-10 pt-4">
           <PetSounds51Icon8Bit size={52} animate={false} />
           <h1 className="text-3xl sm:text-4xl font-black mt-4 mb-2">
-            <span className="text-orange-700">PET SOUNDS</span>
+            <span style={{ color: '#d4a017' }}>PET SOUNDS</span>
           </h1>
-          <p className="text-amber-700 font-mono text-xs tracking-widest">TERMS & CONDITIONS</p>
-          <p className="text-amber-600 text-xs mt-2">Last Updated: March 2026</p>
+          <p className="font-mono text-xs tracking-widest" style={{ color: '#d4a017' }}>TERMS & CONDITIONS</p>
+          <p className="text-gray-400 text-xs mt-2">Last Updated: March 2026</p>
         </div>
 
         {/* THE ONE BIG DISCLAIMER — always visible */}
-        <div className="bg-orange-100/50 border-2 border-orange-400 rounded-xl p-5 mb-8 flex items-start gap-4">
-          <AlertTriangle className="w-6 h-6 text-orange-700 flex-shrink-0 mt-0.5" />
+        <div className="bg-red-950/30 border-2 border-red-700/50 rounded-xl p-5 mb-8 flex items-start gap-4">
+          <AlertTriangle className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: '#d4a017' }} />
           <div>
-            <p className="font-black text-orange-800 mb-2">THIS IS NOT VETERINARY ADVICE.</p>
-            <p className="text-amber-900 text-sm leading-relaxed">
+            <p className="font-black mb-2" style={{ color: '#d4a017' }}>THIS IS NOT VETERINARY ADVICE.</p>
+            <p className="text-gray-300 text-sm leading-relaxed">
               PetSounds is complementary sound therapy. It is not a diagnosis. It is not a treatment. It does not replace your vet.
-              If your animal is unwell, injured, or in distress — <strong className="text-amber-950">call a vet first.</strong> Use this alongside professional care, never instead of it.
+              If your animal is unwell, injured, or in distress — <strong>call a vet first.</strong> Use this alongside professional care, never instead of it.
             </p>
           </div>
         </div>
 
         {/* THE HONEST ONE-LINER */}
-        <div className="bg-yellow-100/60 border-2 border-orange-300 rounded-xl p-5 mb-8 text-center">
-          <p className="text-orange-800 font-black text-lg mb-1">What we actually are:</p>
-          <p className="text-amber-900 text-sm">Evidence-based sound therapy for animals. No side effects. No medication interactions. Just frequencies that peer-reviewed science says help. Works through any speaker. You can turn it off anytime.</p>
+        <div className="bg-green-950/30 border-2 border-green-700/50 rounded-xl p-5 mb-8 text-center">
+          <p className="font-black text-lg mb-1" style={{ color: '#d4a017' }}>What we actually are:</p>
+          <p className="text-gray-300 text-sm">Evidence-based sound therapy for animals. No side effects. No medication interactions. Just frequencies that peer-reviewed science says help. Works through any speaker. You can turn it off anytime.</p>
         </div>
 
         {/* SECTIONS — collapsible */}
@@ -87,7 +87,7 @@ export default function PetSounds51Terms() {
           <Section number={4} title="Refund Policy — No Nonsense">
             <p className="mb-3">30-day full refund. No questions. We mean it.</p>
             <ul className="space-y-2">
-              <li>• Email <a href="mailto:family@uf51.love" className="text-orange-700 hover:underline font-bold">family@uf51.love</a> within 30 days</li>
+              <li>• Email <a href="mailto:family@uf51.love" className="hover:underline font-bold" style={{ color: '#d4a017' }}>family@uf51.love</a> within 30 days</li>
               <li>• We'll process it within 5–7 business days</li>
               <li>• No passive-aggressive delays. No guilt trips.</li>
               <li>• If something genuinely went wrong, tell us. We want to know.</li>
@@ -98,7 +98,7 @@ export default function PetSounds51Terms() {
             <ul className="space-y-2">
               <li>• Annual billing — £29.99/year (charged in your local currency via Stripe)</li>
               <li>• <strong className="text-amber-950">Auto-renews after 12 months.</strong> You'll receive an email reminder 7 days before renewal.</li>
-              <li>• Cancel any time before renewal by emailing <a href="mailto:family@uf51.love" className="text-orange-700 hover:underline font-bold">family@uf51.love</a> — no hoops, no guilt</li>
+              <li>• Cancel any time before renewal by emailing <a href="mailto:family@uf51.love" className="hover:underline font-bold" style={{ color: '#d4a017' }}>family@uf51.love</a> — no hoops, no guilt</li>
               <li>• Cancellation takes effect at end of your current paid year</li>
               <li>• 30-day full refund from date of purchase — no questions asked</li>
               <li>• Payments processed securely by Stripe. We never store your card details.</li>
@@ -117,7 +117,7 @@ export default function PetSounds51Terms() {
               <li>• We never sell your data. Ever.</li>
               <li>• Your sessions are private</li>
               <li>• Your animal's data is yours</li>
-              <li>• Full privacy policy at <a href="/PrivacyPolicy" className="text-orange-700 hover:underline font-bold">Privacy Policy</a></li>
+              <li>• Full privacy policy at <a href="/PrivacyPolicy" className="hover:underline font-bold" style={{ color: '#d4a017' }}>Privacy Policy</a></li>
             </ul>
           </Section>
 
@@ -148,20 +148,20 @@ export default function PetSounds51Terms() {
         </div>
 
         {/* CONTACT */}
-        <div className="bg-yellow-100/60 border-2 border-orange-300 rounded-xl p-6 mb-8 text-center shadow-sm">
-          <p className="text-amber-900 font-black mb-3">Contact Us</p>
-          <p className="text-amber-800 text-sm mb-1">Everything goes to one place. We actually read it.</p>
-          <a href="mailto:family@uf51.love" className="text-orange-700 font-black text-lg hover:text-orange-600 transition-colors">
+        <div className="bg-green-950/30 border-2 border-green-700/50 rounded-xl p-6 mb-8 text-center shadow-sm">
+          <p className="font-black mb-3" style={{ color: '#d4a017' }}>Contact Us</p>
+          <p className="text-gray-300 text-sm mb-1">Everything goes to one place. We actually read it.</p>
+          <a href="mailto:family@uf51.love" className="font-black text-lg transition-colors" style={{ color: '#d4a017' }}>
             family@uf51.love
           </a>
-          <p className="text-amber-700 text-xs mt-3">Refunds · Support · Questions · Feedback · Hi</p>
+          <p className="text-gray-400 text-xs mt-3">Refunds · Support · Questions · Feedback · Hi</p>
         </div>
 
         {/* FOOTER */}
-        <div className="text-center border-t-2 border-orange-300 pt-8">
-          <Heart className="w-8 h-8 text-orange-600 mx-auto mb-3" />
-          <p className="text-amber-800 text-sm">Built with love. For every animal. ♾️❤️</p>
-          <p className="text-amber-700 text-xs mt-1">PetSounds Healing</p>
+        <div className="text-center border-t-2 border-amber-700/40 pt-8">
+          <Heart className="w-8 h-8 mx-auto mb-3" style={{ color: '#d4a017' }} />
+          <p className="text-gray-300 text-sm">Built with love. For every animal. ♾️❤️</p>
+          <p className="text-gray-400 text-xs mt-1">PetSounds Healing</p>
         </div>
 
       </div>
