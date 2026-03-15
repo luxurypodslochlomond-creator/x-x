@@ -154,33 +154,38 @@ export default function CheeseAndOnionBake() {
             SUPERSONIC LEGEND · TOP 0.1% · SCOTLAND
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight mb-3 sm:mb-4">
             <span className="text-white">cheese</span>
             <span className="text-orange-400">&</span>
             <span className="text-white">onionbake</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-400 font-light mb-4 max-w-xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 font-light mb-2 sm:mb-4 max-w-xl mx-auto">
             Rocket League coaching. Scotland's top 0.1%.
           </p>
-          <p className="text-gray-600 text-sm max-w-lg mx-auto mb-10">
+          <p className="text-gray-600 text-xs sm:text-sm max-w-lg mx-auto mb-8 sm:mb-10">
             I don't play the meta. I don't care if you like my style. I care if it works. It does.
           </p>
 
-          <a href="#contact" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 text-black font-black text-lg px-8 py-4 rounded-xl transition-all hover:scale-105">
-            <Zap className="w-5 h-5" />
+          <a href="#contact" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 text-black font-black text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all hover:scale-105">
+            <Zap className="w-4 sm:w-5 h-4 sm:h-5" />
             Get Coaching — from £10
           </a>
         </motion.div>
 
-        <a href="#services" className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-600 hover:text-gray-400 transition-colors">
-          <ChevronDown className="w-6 h-6 animate-bounce" />
-        </a>
+        <motion.button
+          onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 text-gray-600 hover:text-orange-400 transition-colors"
+        >
+          <ChevronDown className="w-6 h-6" />
+        </motion.button>
       </section>
 
       {/* STATS */}
-      <section className="px-6 py-16 max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <section className="px-4 sm:px-6 py-12 sm:py-16 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {STATS.map((stat, i) => (
             <motion.div
               key={i}
@@ -189,25 +194,25 @@ export default function CheeseAndOnionBake() {
               transition={{ delay: i * 0.1 }}
               className="border border-white/10 bg-white/3 rounded-xl p-6 text-center hover:border-orange-500/40 transition-all"
             >
-              <div className="text-2xl font-black text-orange-400 mb-1">{stat.value}</div>
-              <div className="text-xs text-gray-500 font-mono">{stat.label}</div>
-              <div className="text-xs text-gray-600 mt-1">{stat.sub}</div>
+              <div className="text-xl sm:text-2xl font-black text-orange-400 mb-1">{stat.value}</div>
+              <div className="text-[10px] sm:text-xs text-gray-500 font-mono">{stat.label}</div>
+              <div className="text-[10px] sm:text-xs text-gray-600 mt-1">{stat.sub}</div>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="px-6 py-16 max-w-4xl mx-auto">
+      <section id="services" className="px-4 sm:px-6 py-12 sm:py-16 max-w-4xl mx-auto">
         <div className="absolute left-0 right-0 h-96 -z-10 flex items-center justify-center opacity-10">
           <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/09e96759b_generated_image.png" alt="arena" className="w-full h-full object-cover" />
         </div>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-black text-white mb-3">What I Offer</h2>
-          <p className="text-gray-500">No fluff. No fake promises. Just ranked up players.</p>
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-2 sm:mb-3">What I Offer</h2>
+          <p className="text-sm sm:text-base text-gray-500">No fluff. No fake promises. Just ranked up players.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {SERVICES.map((s, i) => {
             const c = colorMap[s.color];
             return (
@@ -221,9 +226,9 @@ export default function CheeseAndOnionBake() {
                 <div className={`w-10 h-10 ${c.bg} rounded-lg flex items-center justify-center mb-4`}>
                   <s.Icon />
                 </div>
-                <div className={`${c.price} font-black text-2xl mb-1`}>{s.price}</div>
-                <h3 className="text-white font-bold text-lg mb-2">{s.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{s.description}</p>
+                <div className={`${c.price} font-black text-xl sm:text-2xl mb-1`}>{s.price}</div>
+                <h3 className="text-white font-bold text-base sm:text-lg mb-2">{s.title}</h3>
+                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">{s.description}</p>
               </motion.div>
             );
           })}
@@ -231,45 +236,45 @@ export default function CheeseAndOnionBake() {
       </section>
 
       {/* THE VIBE */}
-      <section className="px-6 py-16 max-w-2xl mx-auto text-center relative">
-        <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/9333643ad_generated_image.png" alt="boost" className="absolute top-0 right-0 w-64 h-64 opacity-10 blur-2xl" />
-        <div className="border border-white/10 rounded-2xl p-10 bg-white/3 relative z-10">
-          <div className="flex justify-center mb-4">
-            <CheeseOnionBakeIcon size={48} />
+      <section className="px-4 sm:px-6 py-12 sm:py-16 max-w-2xl mx-auto text-center relative">
+        <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/9333643ad_generated_image.png" alt="boost" className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 opacity-10 blur-2xl" />
+        <div className="border border-white/10 rounded-2xl p-6 sm:p-10 bg-white/3 relative z-10">
+          <div className="flex justify-center mb-3 sm:mb-4">
+            <CheeseOnionBakeIcon size={40} />
           </div>
-          <blockquote className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed italic mb-6">
+          <blockquote className="text-base sm:text-xl md:text-2xl text-gray-300 font-light leading-relaxed italic mb-4 sm:mb-6">
             "They all take it seriously. I do my own thing. I'm ranked higher than most of them."
           </blockquote>
-          <div className="text-orange-400 font-bold font-mono text-sm">— cheeseandonionbake</div>
+          <div className="text-orange-400 font-bold font-mono text-xs sm:text-sm">— cheeseandonionbake</div>
         </div>
         </section>
 
       {/* CONTACT */}
-      <section id="contact" className="px-6 py-16 max-w-2xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-4xl font-black text-white mb-3">Get In Touch</h2>
-          <p className="text-gray-500">Tell me where you're stuck. I'll tell you what to fix.</p>
+      <section id="contact" className="px-4 sm:px-6 py-12 sm:py-16 max-w-2xl mx-auto">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-2 sm:mb-3">Get In Touch</h2>
+          <p className="text-sm sm:text-base text-gray-500">Tell me where you're stuck. I'll tell you what to fix.</p>
         </div>
 
         {sent ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center border border-orange-500/40 bg-orange-500/10 rounded-2xl p-12"
+            className="text-center border border-orange-500/40 bg-orange-500/10 rounded-xl sm:rounded-2xl p-6 sm:p-12"
           >
-            <div className="flex justify-center mb-4"><CheeseOnionBakeIcon size={64} /></div>
-            <h3 className="text-2xl font-black text-orange-400 mb-2">Message sent.</h3>
-            <p className="text-gray-400">I'll get back to you on Discord or email. Let's rank you up.</p>
+            <div className="flex justify-center mb-3 sm:mb-4"><CheeseOnionBakeIcon size={48} /></div>
+            <h3 className="text-xl sm:text-2xl font-black text-orange-400 mb-2">Message sent.</h3>
+            <p className="text-sm sm:text-base text-gray-400">I'll get back to you on Discord or email. Let's rank you up.</p>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               <input
                 required
                 placeholder="Your name"
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
-                className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/60 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/60 transition-colors"
               />
               <input
                 required
@@ -277,14 +282,14 @@ export default function CheeseAndOnionBake() {
                 placeholder="Your email"
                 value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })}
-                className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/60 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/60 transition-colors"
               />
             </div>
 
             <select
               value={form.service}
               onChange={e => setForm({ ...form, service: e.target.value })}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500/60 transition-colors"
+              className="w-full bg-white/5 border border-white/10 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:border-orange-500/60 transition-colors"
             >
               <option value="" className="bg-black">What are you after?</option>
               <option value="1-on-1 Coaching" className="bg-black">1-on-1 Coaching — £15</option>
@@ -299,15 +304,15 @@ export default function CheeseAndOnionBake() {
               placeholder="What rank are you? What's your problem? Where are you getting stuck?"
               value={form.message}
               onChange={e => setForm({ ...form, message: e.target.value })}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/60 transition-colors resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white placeholder-gray-600 focus:outline-none focus:border-orange-500/60 transition-colors resize-none"
             />
 
             <button
               type="submit"
               disabled={sending}
-              className="w-full flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-black font-black text-lg py-4 rounded-xl transition-all hover:scale-[1.02]"
+              className="w-full flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-black font-black text-sm sm:text-base py-3 sm:py-4 rounded-lg sm:rounded-xl transition-all hover:scale-[1.02]"
             >
-              <Send className="w-5 h-5" />
+              <Send className="w-4 sm:w-5 h-4 sm:h-5" />
               {sending ? 'Sending...' : 'Send Message'}
             </button>
           </form>
@@ -315,8 +320,8 @@ export default function CheeseAndOnionBake() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/5 py-8 text-center text-gray-700 text-xs font-mono">
-        <div className="flex justify-center mb-3"><CheeseOnionBakeIcon size={32} /></div>
+      <footer className="border-t border-white/5 py-6 sm:py-8 text-center text-gray-700 text-[10px] sm:text-xs font-mono">
+        <div className="flex justify-center mb-2 sm:mb-3"><CheeseOnionBakeIcon size={28} /></div>
         <p>cheeseandonionbake · Supersonic Legend · Scotland</p>
         <p className="mt-1">Part of <a href="/" className="text-gray-600 hover:text-orange-400 transition-colors">universalfamily51</a></p>
       </footer>
