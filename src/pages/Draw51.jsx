@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Paintbrush, RotateCcw, ChevronRight, ChevronLeft, Sparkles, Download, ArrowLeft } from 'lucide-react';
+import { Paintbrush, RotateCcw, ChevronRight, ChevronLeft, Sparkles, Download, ArrowLeft, Volume2, VolumeX } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
