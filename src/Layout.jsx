@@ -41,7 +41,7 @@ import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsColle
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
                                           Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
-                                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock
+                                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush
                                       } from 'lucide-react';
 
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
@@ -360,6 +360,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals 🐕🐈" },
     { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, highlight: true, description: "Gergie7's game 🌋❤️" },
     { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "Upload music, keep 90%" },
+    { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, highlight: true, description: "Step-by-step guided drawing 🎨" },
     { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
     { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
     { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield },
