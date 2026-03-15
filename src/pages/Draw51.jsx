@@ -141,7 +141,19 @@ export default function Draw51() {
 
     try {
       const res = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are AI51, a warm, encouraging art teacher for kids and adults. Give me exactly 6 simple step-by-step instructions to sketch a "${name}" from scratch. Each step should be short (1-2 sentences), fun, and encouraging. Use simple language a child can understand. Return JSON with a "steps" array, each item having "title" (short step name, max 4 words), "instruction" (what to do), "tip" (a small encouraging tip or fun fact, 1 sentence), and "shape" (one of: "oval", "circle", "rectangle", "triangle", "diamond", "curved-line", "zigzag", "spiral", "star", "heart", "none" — the main shape to draw in this step).`,
+        prompt: `You are AI51, a warm, encouraging art teacher. Create 6 step-by-step drawing instructions for a "${name}" that build progressively from simple shapes to the final detailed version.
+
+CRITICAL: Each step must logically flow to the next and ultimately create a beautiful, recognizable "${name}". Start with basic shapes (head/body/outline), then add features progressively.
+
+For EACH STEP:
+1. "title" - Short step name (max 4 words, e.g., "Draw the head", "Add the eyes")
+2. "instruction" - Clear, simple 1-2 sentence directions that a child can follow
+3. "tip" - Encouraging tip or fun fact (1 sentence)
+4. "shape" - Visual hint showing the main shape(s) to use: "oval" (body), "circle" (eyes/head), "rectangle" (blocks), "triangle" (roofs/ears), "diamond" (sparkles), "curved-line" (smile/wings), "zigzag" (texture), "spiral" (hair/spiral), "star" (sparkles), or "heart" (love), or "none" (details)
+
+Make sure steps flow logically so the final result is clearly recognizable as a beautiful "${name}"!
+
+Return JSON: { "steps": [ { "title": "...", "instruction": "...", "tip": "...", "shape": "..." }, ... ] }`,
         response_json_schema: {
           type: 'object',
           properties: {
