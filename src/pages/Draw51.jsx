@@ -134,7 +134,7 @@ export default function Draw51() {
 
     // Generate reference image in parallel
     base44.integrations.Core.GenerateImage({
-      prompt: `A beautiful, simple, clear pencil sketch / illustration of a ${name}, suitable as a drawing reference for children. Clean white background, friendly and charming style, easy to copy.`
+      prompt: `A rough, beginner-friendly pencil sketch of a ${name}. Simple lines, not detailed or polished. Hand-drawn style with visible construction lines and basic shapes. Clean white background. Should match what a beginner can actually draw following simple step-by-step instructions.`
     }).then(res => {
       setReferenceImage(res.url);
     }).catch(() => {}).finally(() => setLoadingImage(false));
