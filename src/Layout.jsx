@@ -305,13 +305,13 @@ const LayoutInner = ({ children, currentPageName }) => {
       document.head.appendChild(faviconLink);
     }
     
-    let faviconUrl = '/favicon-uf51.svg'; // UF51 default (black/red)
+    let faviconType = 'uf51'; // UF51 default (black/red)
     if (isPS51Page) {
-      faviconUrl = '/favicon-ps51.svg'; // PS51 (golden)
+      faviconType = 'ps51'; // PS51 (golden)
     } else if (isCB51Page) {
-      faviconUrl = '/favicon-cb51.svg'; // CB51 (cyan)
+      faviconType = 'cb51'; // CB51 (cyan)
     }
-    faviconLink.href = faviconUrl;
+    faviconLink.href = `/api/functions/serveFavicon?type=${faviconType}`;
 
     // Set manifest (served dynamically by serveManifest function)
     let manifestLink = document.querySelector('link[rel="manifest"]');
