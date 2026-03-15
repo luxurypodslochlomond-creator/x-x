@@ -151,19 +151,19 @@ export default function CheeseAndOnionBake() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 border border-cyan-500/40 bg-cyan-500/10 text-cyan-300 text-xs font-mono tracking-widest px-4 py-2 rounded-full mb-8">
             <SSLIcon />
-            BEST IN SCOTLAND · TOP 0.1% WORLD
+            WORLD'S TOP 0.1% · BEST IN SCOTLAND
           </div>
 
-          <h1 className="text-2xl sm:text-4xl md:text-7xl font-black tracking-tight mb-3 sm:mb-4 leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-7xl font-black tracking-tight mb-3 sm:mb-4 leading-tight font-mono">
             <span className="text-white">cheese</span>
             <span className="text-orange-400">&</span>
             <span className="text-white">onionbake</span>
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 font-light mb-2 sm:mb-4 max-w-xl mx-auto">
-            Rocket League coaching. Scotland's top 0.1%.
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 font-mono mb-2 sm:mb-4 max-w-xl mx-auto tracking-wide">
+            Rocket League coaching. Top 0.1% globally.
           </p>
-          <p className="text-gray-600 text-xs sm:text-sm max-w-lg mx-auto mb-8 sm:mb-10">
+          <p className="text-gray-600 text-xs sm:text-sm max-w-lg mx-auto mb-8 sm:mb-10 font-mono">
             I don't play the meta. I don't care if you like my style. I care if it works. It does.
           </p>
 
