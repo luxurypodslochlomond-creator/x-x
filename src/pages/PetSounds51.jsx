@@ -130,9 +130,9 @@ export default function PetSounds51() {
           Science-backed sound therapy for separation anxiety, stress, pain & healing — adaptive frequencies, real results. Through any speaker.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
-          <span className="rounded-full px-3 py-1" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>£29.99/year</span>
-          <span className="rounded-full px-3 py-1" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>10% to rescue</span>
-          <span className="rounded-full px-3 py-1" style={{ background: 'rgba(200,169,110,0.15)', border: '1px solid rgba(200,169,110,0.4)', color: '#c8a96e' }}>Safe & drug-free</span>
+        <span className="rounded-full px-3 py-1" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>💚 £29.99/year</span>
+        <span className="rounded-full px-3 py-1" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>🐾 10% to rescue</span>
+        <span className="rounded-full px-3 py-1" style={{ background: 'rgba(200,169,110,0.15)', border: '1px solid rgba(200,169,110,0.4)', color: '#c8a96e' }}>✨ Science-backed</span>
         </div>
       </div>
 

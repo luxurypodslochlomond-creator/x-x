@@ -54,13 +54,13 @@ export default function PS51Paywall({ onClose }) {
 
         {/* HERO */}
         <div className="text-center mb-8">
-          <div className="text-5xl mb-4">🐾</div>
+          <div className="text-5xl mb-4">♾️❤️</div>
           <h1 className="text-3xl font-black text-white leading-tight mb-3">
-            Every protocol.<br/>
-            <span style={{ color: '#f59e0b' }}>One year of calm.</span>
+            Heal your bestie.<br/>
+            <span style={{ color: '#f59e0b' }}>Forever frequencies.</span>
           </h1>
           <p className="text-gray-400 text-base leading-relaxed">
-            Ten science-backed frequencies covering everything from thunderstorm panic to grief, dementia and recovery — just leave it playing.
+            MIT-proven sound therapy. Separation anxiety, thunderstorms, pain, grief, dementia — one subscription covers all. Science that works.
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export default function PS51Paywall({ onClose }) {
             color: loading ? '#9ca3af' : '#000',
           }}
         >
-          {loading ? 'Connecting...' : '🐾 Start Healing — £29.99/year'}
+          {loading ? 'Connecting...' : '♾️❤️ Start Now — £29.99/year'}
         </button>
 
         {/* Stripe Link = one tap if they've ever paid with Stripe before */}
