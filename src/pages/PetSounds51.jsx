@@ -306,17 +306,17 @@ export default function PetSounds51() {
       {/* FOOTER TRUST BUTTONS */}
       <div className="max-w-4xl mx-auto mt-12 pt-8 grid grid-cols-3 gap-3 mb-6">
         <Link to={createPageUrl("PetSounds51Terms")} className="p-4 rounded-lg text-center transition-all hover:border-amber-600 hover:bg-amber-600/5" style={{ background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)' }}>
-          <div className="text-xl mb-2">🛡️</div>
+          <PS51Icons.Trust size={28} className="mx-auto mb-2" style={{ color: '#d4a017' }} />
           <p className="font-black text-sm mb-1" style={{ color: '#e8d5a3' }}>30-day refund</p>
           <p className="text-xs" style={{ color: '#a89870' }}>no questions</p>
         </Link>
-        <button onClick={() => setShowScience(!showScience)} className="p-4 rounded-lg text-center transition-all hover:border-amber-600 hover:bg-amber-600/5" style={{ background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)' }}>
-          <div className="text-xl mb-2">❤️</div>
-          <p className="font-black text-sm mb-1" style={{ color: '#e8d5a3' }}>10% to rescue</p>
-          <p className="text-xs" style={{ color: '#a89870' }}>animal charities</p>
-        </button>
         <Link to={createPageUrl("PetSounds51Story")} className="p-4 rounded-lg text-center transition-all hover:border-amber-600 hover:bg-amber-600/5" style={{ background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)' }}>
-          <div className="text-xl mb-2">🔬</div>
+          <PS51Icons.Rescue size={28} className="mx-auto mb-2" style={{ color: '#d4a017' }} />
+          <p className="font-black text-sm mb-1" style={{ color: '#e8d5a3' }}>10% to UF51 CIC</p>
+          <p className="text-xs" style={{ color: '#a89870' }}>animal rescue</p>
+        </Link>
+        <Link to={createPageUrl("PetSounds51Story")} className="p-4 rounded-lg text-center transition-all hover:border-amber-600 hover:bg-amber-600/5" style={{ background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)' }}>
+          <PS51Icons.Science size={28} className="mx-auto mb-2" style={{ color: '#d4a017' }} />
           <p className="font-black text-sm mb-1" style={{ color: '#e8d5a3' }}>MIT · Glasgow</p>
           <p className="text-xs" style={{ color: '#a89870' }}>peer-reviewed</p>
         </Link>
