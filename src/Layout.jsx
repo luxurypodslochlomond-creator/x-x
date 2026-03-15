@@ -131,14 +131,17 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
                 key={item.url} 
                 to={item.url} 
                 className={`flex items-center gap-3 ${isMobile ? 'p-3' : 'p-3'} transition-all w-full rounded ${
-                  item.highlight 
+                  item.highlight && color === 'amber'
+                    ? 'border-2 border-green-500 text-white bg-green-500/10' 
+                    : item.highlight 
                     ? 'border-2 border-pink-500 text-white bg-pink-500/10' 
                     : isActive 
                       ? 'border-2 text-white' 
                       : 'border border-white/10 hover:border-white/30 text-white hover:bg-white/5'
                 }`}
                 style={
-                  item.highlight ? { boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }
+                  item.highlight && color === 'amber' ? { boxShadow: '0 0 15px rgba(34, 197, 94, 0.3)' }
+                  : item.highlight ? { boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }
                   : isActive && activeColor === 'amber' ? { border: '2px solid #d4a017', background: 'rgba(212,160,23,0.12)', boxShadow: '0 0 10px rgba(212,160,23,0.15)' }
                   : isActive ? { border: '2px solid #06b6d4', background: 'rgba(6,182,212,0.12)', boxShadow: '0 0 10px rgba(34,211,238,0.2)' }
                   : {}
