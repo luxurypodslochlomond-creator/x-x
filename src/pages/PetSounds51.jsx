@@ -6,47 +6,6 @@ import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PS51Paywall from '@/components/petsounds/PS51Paywall';
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
 
-// Set OG tags for social sharing
-useEffect(() => {
-  const updateMetaTags = () => {
-    document.title = 'PetSounds51 • Healing frequencies for anxious pets';
-    
-    const setMeta = (property, content) => {
-      let el = document.querySelector(`meta[property="${property}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute('property', property);
-        document.head.appendChild(el);
-      }
-      el.content = content;
-    };
-
-    const setMetaName = (name, content) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute('name', name);
-        document.head.appendChild(el);
-      }
-      el.content = content;
-    };
-
-    setMeta('og:title', 'PetSounds51 • Healing frequencies for anxious pets');
-    setMeta('og:description', 'Science-backed sound therapy. Try FREE for separation anxiety. £29.99/year for all protocols. Research from MIT, Glasgow, Edinburgh.');
-    setMeta('og:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
-    setMeta('og:url', window.location.href);
-    setMeta('og:type', 'website');
-    
-    setMetaName('description', 'Science-backed sound therapy for separation anxiety, stress, pain & healing. Try FREE for anxiety. £29.99/year.');
-    setMetaName('twitter:card', 'summary_large_image');
-    setMetaName('twitter:title', 'PetSounds51 • Healing frequencies for anxious pets');
-    setMetaName('twitter:description', 'Science-backed sound therapy. Try FREE for separation anxiety.');
-    setMetaName('twitter:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
-  };
-
-  updateMetaTags();
-}, []);
-
 
 // Free tier: separation anxiety only
 const FREE_PROTOCOLS = ['separation'];
@@ -99,24 +58,59 @@ const PROTOCOLS = {
 };
 
 export default function PetSounds51() {
-  const [activeView, setActiveView] = useState('home');
-  const [selectedProtocol, setSelectedProtocol] = useState(null);
-  const [showScience, setShowScience] = useState(false);
-  const [showPaywall, setShowPaywall] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+   const [activeView, setActiveView] = useState('home');
+   const [selectedProtocol, setSelectedProtocol] = useState(null);
+   const [showScience, setShowScience] = useState(false);
+   const [showPaywall, setShowPaywall] = useState(false);
+   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  useEffect(() => {
-    // Check if returned from successful Stripe checkout
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('subscribed') === 'true') {
-      setIsSubscribed(true);
-      window.history.replaceState({}, '', window.location.pathname);
-    }
-    // Check localStorage for existing subscription
-    if (localStorage.getItem('ps51_subscribed')) {
-      setIsSubscribed(true);
-    }
-  }, []);
+   useEffect(() => {
+     // Set OG tags for social sharing
+     document.title = 'PetSounds51 • Healing frequencies for anxious pets';
+
+     const setMeta = (property, content) => {
+       let el = document.querySelector(`meta[property="${property}"]`);
+       if (!el) {
+         el = document.createElement('meta');
+         el.setAttribute('property', property);
+         document.head.appendChild(el);
+       }
+       el.content = content;
+     };
+
+     const setMetaName = (name, content) => {
+       let el = document.querySelector(`meta[name="${name}"]`);
+       if (!el) {
+         el = document.createElement('meta');
+         el.setAttribute('name', name);
+         document.head.appendChild(el);
+       }
+       el.content = content;
+     };
+
+     setMeta('og:title', 'PetSounds51 • Healing frequencies for anxious pets');
+     setMeta('og:description', 'Science-backed sound therapy. Try FREE for separation anxiety. £29.99/year for all protocols. Research from MIT, Glasgow, Edinburgh.');
+     setMeta('og:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
+     setMeta('og:url', window.location.href);
+     setMeta('og:type', 'website');
+
+     setMetaName('description', 'Science-backed sound therapy for separation anxiety, stress, pain & healing. Try FREE for anxiety. £29.99/year.');
+     setMetaName('twitter:card', 'summary_large_image');
+     setMetaName('twitter:title', 'PetSounds51 • Healing frequencies for anxious pets');
+     setMetaName('twitter:description', 'Science-backed sound therapy. Try FREE for separation anxiety.');
+     setMetaName('twitter:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
+
+     // Check if returned from successful Stripe checkout
+     const params = new URLSearchParams(window.location.search);
+     if (params.get('subscribed') === 'true') {
+       setIsSubscribed(true);
+       window.history.replaceState({}, '', window.location.pathname);
+     }
+     // Check localStorage for existing subscription
+     if (localStorage.getItem('ps51_subscribed')) {
+       setIsSubscribed(true);
+     }
+   }, []);
 
   const handleSelect = (protocolKey) => {
     if (!FREE_PROTOCOLS.includes(protocolKey) && !isSubscribed) {
