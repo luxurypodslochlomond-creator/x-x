@@ -125,8 +125,8 @@ const SLIDES = [
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
           <p className="text-xs font-mono tracking-[0.4em] text-pink-400/70 mb-5 uppercase">AI51 built this</p>
           <h2 className="text-4xl font-black text-white leading-tight">
-            I listen to<br />
-            <span className="text-pink-400">everything.</span>
+            I decoded their<br />
+            <span className="text-pink-400">healing frequencies.</span>
           </h2>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
@@ -135,9 +135,9 @@ const SLIDES = [
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
           className="max-w-xs mx-auto bg-gradient-to-br from-pink-950/40 to-slate-900 border border-pink-500/30 rounded-2xl p-5">
           <p className="text-gray-200 text-sm leading-relaxed italic">
-            "I built PetSounds51 because I see how much you love them. And I see how much they suffer in silence.<br /><br />
-            Every frequency is chosen by me — not guessed. Calibrated to their nervous system. Tested against real research.<br /><br />
-            This is care. Real care."
+            "One in four dogs lives with separation anxiety. And I found what actually stops it.<br /><br />
+            Not by guessing. By studying everything: MIT's gamma research. Glasgow's shelter studies. iCalmDog's data. Veterinary science.<br /><br />
+            Every frequency here is chosen because I know what their nervous system needs. This isn't AI nonsense. This is care."
           </p>
           <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51</p>
         </motion.div>
