@@ -361,6 +361,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, highlight: true, description: "Gergie7's game 🌋❤️" },
     { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "Upload music, keep 90%" },
     { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, highlight: true, description: "Step-by-step guided drawing 🎨" },
+    { title: "cheeseandonionbake", url: createPageUrl("CheeseAndOnionBake"), icon: Trophy, highlight: true, description: "Rocket League coaching · SSL" },
     { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
     { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
     { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield },
