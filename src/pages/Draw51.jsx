@@ -19,40 +19,62 @@ const SUGGESTIONS = [
 
 const COLORS = ['#1a1a1a', '#ef4444', '#f97316', '#f59e0b', '#22c55e', '#06b6d4', '#8b5cf6', '#ec4899', '#ffffff'];
 
-function ShapePreview({ shape }) {
-  if (!shape || shape === 'none') return null;
-  const s = shape.toLowerCase();
-  const size = 80;
+function AnimatedShape({ shape, animKey }) {
+  const s = (shape || '').toLowerCase();
   const stroke = '#ec4899';
-  const sw = 3;
+  const sw = 3.5;
 
-  const shapes = {
-    oval: <ellipse cx="50" cy="40" rx="40" ry="25" fill="none" stroke={stroke} strokeWidth={sw} />,
-    circle: <circle cx="50" cy="40" r="30" fill="none" stroke={stroke} strokeWidth={sw} />,
-    rectangle: <rect x="10" y="15" width="80" height="50" fill="none" stroke={stroke} strokeWidth={sw} />,
-    triangle: <polygon points="50,10 90,70 10,70" fill="none" stroke={stroke} strokeWidth={sw} />,
-    diamond: <polygon points="50,10 90,40 50,70 10,40" fill="none" stroke={stroke} strokeWidth={sw} />,
-    'curved-line': <path d="M 10 60 Q 50 10 90 60" fill="none" stroke={stroke} strokeWidth={sw} />,
-    zigzag: <polyline points="10,60 30,20 50,60 70,20 90,60" fill="none" stroke={stroke} strokeWidth={sw} />,
-    spiral: <path d="M50 40 m0,-20 a20,20 0 1,1 -0.1,0 a15,15 0 1,0 0.1,0 a10,10 0 1,1 -0.1,0" fill="none" stroke={stroke} strokeWidth={sw} />,
-    star: <polygon points="50,10 61,35 90,35 67,57 76,82 50,65 24,82 33,57 10,35 39,35" fill="none" stroke={stroke} strokeWidth={sw} />,
-    heart: <path d="M50 70 C20 50 10 30 30 20 C40 15 50 25 50 25 C50 25 60 15 70 20 C90 30 80 50 50 70Z" fill="none" stroke={stroke} strokeWidth={sw} />,
+  // Each shape: {el, length} — length is approximate pathLength for dasharray animation
+  const shapeMap = {
+    oval:          { el: <ellipse cx="50" cy="40" rx="40" ry="25" fill="none" stroke={stroke} strokeWidth={sw} />, len: 210 },
+    circle:        { el: <circle cx="50" cy="40" r="30" fill="none" stroke={stroke} strokeWidth={sw} />, len: 190 },
+    rectangle:     { el: <rect x="10" y="15" width="80" height="50" rx="3" fill="none" stroke={stroke} strokeWidth={sw} />, len: 260 },
+    triangle:      { el: <polygon points="50,10 90,70 10,70" fill="none" stroke={stroke} strokeWidth={sw} />, len: 230 },
+    diamond:       { el: <polygon points="50,10 90,40 50,70 10,40" fill="none" stroke={stroke} strokeWidth={sw} />, len: 225 },
+    'curved-line': { el: <path d="M 10 60 Q 50 10 90 60" fill="none" stroke={stroke} strokeWidth={sw} />, len: 120 },
+    zigzag:        { el: <polyline points="10,60 30,20 50,60 70,20 90,60" fill="none" stroke={stroke} strokeWidth={sw} />, len: 180 },
+    spiral:        { el: <path d="M50,40 m0,-18 a18,18 0 1,1 -0.1,0 M50,40 m0,-12 a12,12 0 1,0 0.1,0 M50,40 m0,-6 a6,6 0 1,1 -0.1,0" fill="none" stroke={stroke} strokeWidth={sw} />, len: 220 },
+    star:          { el: <polygon points="50,10 61,35 90,35 67,57 76,82 50,65 24,82 33,57 10,35 39,35" fill="none" stroke={stroke} strokeWidth={sw} />, len: 300 },
+    heart:         { el: <path d="M50,70 C20,50 5,28 25,16 C35,10 50,22 50,22 C50,22 65,10 75,16 C95,28 80,50 50,70Z" fill="none" stroke={stroke} strokeWidth={sw} />, len: 240 },
   };
 
-  const svgShape = shapes[s];
-  if (!svgShape) return null;
+  const cfg = shapeMap[s];
+  if (!cfg) return null;
+
+  const animId = `draw-anim-${animKey}-${s}`;
 
   return (
-    <div className="flex items-center gap-3 bg-pink-500/10 border border-pink-500/20 rounded-xl p-3 mt-3">
-      <svg width={size} height={size} viewBox="0 0 100 80" className="flex-shrink-0">
-        {svgShape}
-      </svg>
-      <div>
-        <p className="text-pink-400 font-bold text-xs uppercase tracking-wider mb-1">Start with this shape</p>
-        <p className="text-gray-300 text-xs capitalize">{shape.replace('-', ' ')}</p>
+    <div className="bg-pink-500/10 border border-pink-500/20 rounded-xl p-4 mt-3">
+      <p className="text-pink-400 font-bold text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5">
+        ✏️ Watch & copy this!
+      </p>
+      <div className="flex items-center justify-center">
+        <svg width="140" height="110" viewBox="0 0 100 80" style={{ overflow: 'visible' }}>
+          <style>{`
+            @keyframes ${animId} {
+              from { stroke-dashoffset: ${cfg.len}; }
+              to   { stroke-dashoffset: 0; }
+            }
+            .shape-${animId} {
+              stroke-dasharray: ${cfg.len};
+              stroke-dashoffset: ${cfg.len};
+              animation: ${animId} 1.8s ease-in-out forwards;
+            }
+          `}</style>
+          {/* Ghost guide (faint full shape) */}
+          {React.cloneElement(cfg.el, { stroke: 'rgba(236,72,153,0.15)', strokeWidth: sw, strokeDasharray: undefined, strokeDashoffset: undefined })}
+          {/* Animated drawing */}
+          {React.cloneElement(cfg.el, { className: `shape-${animId}`, key: animKey })}
+        </svg>
       </div>
+      <p className="text-center text-gray-400 text-xs mt-2 capitalize">Draw a <span className="text-pink-300 font-bold">{shape.replace('-', ' ')}</span> like this ☝️</p>
     </div>
   );
+}
+
+function ShapePreview({ shape, stepKey }) {
+  if (!shape || shape === 'none') return null;
+  return <AnimatedShape shape={shape} animKey={stepKey} />;
 }
 const BRUSH_SIZES = [2, 5, 10, 18];
 
