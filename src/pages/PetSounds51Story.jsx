@@ -303,7 +303,14 @@ export default function PetSounds51Story() {
   const share = async () => {
     const url = window.location.origin + '/PetSounds51Story';
     if (navigator.share) {
-      navigator.share({ title: 'PetSounds51 — Sound therapy for animals', text: 'Leave it playing. They stay calm.', url });
+      try {
+        await navigator.share({ title: 'PetSounds51 — Sound therapy for animals', text: 'Leave it playing. They stay calm.', url });
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          navigator.clipboard.writeText(url);
+          alert('Link copied — share it anywhere.');
+        }
+      }
     } else {
       navigator.clipboard.writeText(url);
       alert('Link copied — share it anywhere.');
