@@ -56,7 +56,7 @@ export default function PetSounds51Privacy() {
             <p className="text-gray-300">Questions about privacy? Email us at <span style={{ color: '#d4a017' }}>family@uf51.love</span></p>
           </section>
 
-          <p className="text-xs text-gray-500 border-t border-amber-700/40 pt-4">PetSounds51 is part of the Universal Frequency 51 family. Safe & drug-free. 🐾</p>
+          <p className="text-xs text-gray-500 border-t border-amber-700/40 pt-4">PetSounds51 is part of the Universal Frequency 51 family. Safe & drug-free.</p>
         </div>
       </div>
     </div>

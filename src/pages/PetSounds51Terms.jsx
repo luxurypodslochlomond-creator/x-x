@@ -160,7 +160,7 @@ export default function PetSounds51Terms() {
         {/* FOOTER */}
          <div className="text-center border-t-2 border-amber-700/40 pt-8">
            <PetSounds51Icon8Bit size={48} animate={false} />
-           <p className="text-gray-300 text-sm mt-3">Built with love. For every animal. ♾️❤️</p>
+           <p className="text-gray-300 text-sm mt-3">Built with love. For every animal.</p>
            <p className="text-gray-400 text-xs mt-1">PetSounds Healing</p>
          </div>
 
