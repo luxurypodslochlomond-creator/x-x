@@ -103,19 +103,19 @@ export default function PS51Paywall({ onClose }) {
         </div>
 
         {/* CTA */}
-        <button
-          onClick={handleStart}
-          disabled={loading}
-          className="w-full py-5 rounded-2xl font-black text-xl text-black transition-all active:scale-95 mb-3 flex items-center justify-center gap-2"
-          style={{
-            background: loading ? '#374151' : 'linear-gradient(135deg, #f59e0b, #f97316)',
-            boxShadow: loading ? 'none' : '0 8px 40px rgba(245,158,11,0.35)',
-            color: loading ? '#9ca3af' : '#000',
-          }}
-        >
-          <PS51Icons.Heart size={22} style={{ color: '#000' }} />
-          <span>{loading ? 'Connecting...' : 'Start Now — £29.99/year'}</span>
-        </button>
+         <button
+           onClick={handleStart}
+           disabled={loading}
+           className="w-full py-5 rounded-2xl font-black text-xl text-black transition-all active:scale-95 mb-3 flex items-center justify-center gap-2"
+           style={{
+             background: loading ? '#374151' : 'linear-gradient(135deg, #f59e0b, #f97316)',
+             boxShadow: loading ? 'none' : '0 8px 40px rgba(245,158,11,0.35)',
+             color: loading ? '#9ca3af' : '#000',
+           }}
+         >
+           <PS51Icons.Heart size={22} style={{ color: '#000' }} animate={true} />
+           <span>{loading ? 'Connecting...' : 'Start Now — £29.99/year'}</span>
+         </button>
 
         {/* Stripe Link = one tap if they've ever paid with Stripe before */}
         <div className="flex items-center justify-center gap-2 mt-3 mb-1">
