@@ -174,9 +174,18 @@ export default function PetSounds51() {
           Every frequency engineered from peer-reviewed research (MIT, iCalmDog RCT, University of Glasgow & Edinburgh). Not trend-chasing. Built to work.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
-        <span className="rounded-full px-3 py-1" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>✨ Try FREE: Separation Anxiety</span>
-        <span className="rounded-full px-3 py-1" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>💚 £29.99/year (rest)</span>
-        <span className="rounded-full px-3 py-1" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>🐾 10% to rescue</span>
+        <span className="rounded-full px-3 py-1 flex items-center gap-2" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>
+          <PS51Icons.Heart size={16} style={{ color: '#8aab3a' }} />
+          Try FREE: Anxiety Relief
+        </span>
+        <span className="rounded-full px-3 py-1 flex items-center gap-2" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>
+          <PS51Icons.Heart size={16} style={{ color: '#d4a017' }} />
+          £29.99/year (rest)
+        </span>
+        <span className="rounded-full px-3 py-1 flex items-center gap-2" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>
+          <PS51Icons.Paw size={16} style={{ color: '#8aab3a' }} />
+          10% to rescue
+        </span>
         </div>
       </div>
 
@@ -210,11 +219,17 @@ export default function PetSounds51() {
         {showScience && (
           <div className="mt-4 grid sm:grid-cols-2 gap-3 text-xs" style={{ color: '#a89870' }}>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>🧪 MIT — Nature 2019</p>
+              <div className="flex items-center gap-2 mb-1">
+                <PS51Icons.Science size={16} style={{ color: '#d4a017' }} />
+                <p className="font-bold" style={{ color: '#d4a017' }}>MIT — Nature 2019</p>
+              </div>
               <p>40Hz gamma therapy proven to clear amyloid plaques in mice. Now in active Alzheimer's human trials.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>🐾 iCalmDog RCT 2024</p>
+              <div className="flex items-center gap-2 mb-1">
+                <PS51Icons.Paw size={16} style={{ color: '#d4a017' }} />
+                <p className="font-bold" style={{ color: '#d4a017' }}>iCalmDog RCT 2024</p>
+              </div>
               <p>68% reduction in reactive behaviour using 10Hz alpha tones. Recommended by 200+ vets worldwide.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
@@ -288,7 +303,10 @@ export default function PetSounds51() {
           <span style={{ color: '#4a4030' }}>•</span>
           <a href="/PetSounds51Privacy" className="text-xs font-bold transition-colors" style={{ color: '#a89870' }}>Privacy</a>
           <span style={{ color: '#4a4030' }}>•</span>
-          <span className="text-xs font-bold" style={{ color: '#8aab3a' }}>10% to animal rescue 🐾</span>
+          <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#8aab3a' }}>
+          <PS51Icons.Paw size={14} style={{ color: '#8aab3a' }} />
+          10% to animal rescue
+        </span>
         </div>
       </div>
     </div>
