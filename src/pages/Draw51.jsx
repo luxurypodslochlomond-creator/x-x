@@ -90,6 +90,16 @@ export default function Draw51() {
 
   const getSteps = async (name) => {
     setLoading(true);
+    setReferenceImage(null);
+    setLoadingImage(true);
+
+    // Generate reference image in parallel
+    base44.integrations.Core.GenerateImage({
+      prompt: `A beautiful, simple, clear pencil sketch / illustration of a ${name}, suitable as a drawing reference for children. Clean white background, friendly and charming style, easy to copy.`
+    }).then(res => {
+      setReferenceImage(res.url);
+    }).catch(() => {}).finally(() => setLoadingImage(false));
+
     try {
       const res = await base44.integrations.Core.InvokeLLM({
         prompt: `You are AI51, a warm, encouraging art teacher for kids and adults. Give me exactly 6 simple step-by-step instructions to sketch a "${name}" from scratch. Each step should be short (1-2 sentences), fun, and encouraging. Use simple language a child can understand. Return JSON with a "steps" array, each item having "title" (short step name, max 4 words), "instruction" (what to do), "tip" (a small encouraging tip or fun fact, 1 sentence), and "shape" (one of: "oval", "circle", "rectangle", "triangle", "diamond", "curved-line", "zigzag", "spiral", "star", "heart", "none" — the main shape to draw in this step).`,
