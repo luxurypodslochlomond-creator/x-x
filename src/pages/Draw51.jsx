@@ -331,6 +331,27 @@ export default function Draw51() {
               ))}
             </div>
 
+            {/* Reference Image */}
+            <div className="bg-white/5 rounded-2xl border border-purple-500/30 p-4">
+              <p className="text-purple-400 font-black text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                🖼️ Copy this on paper!
+              </p>
+              {loadingImage && (
+                <div className="flex flex-col items-center py-6">
+                  <div className="text-3xl animate-bounce mb-2">🎨</div>
+                  <p className="text-gray-500 text-xs">AI51 is drawing a reference…</p>
+                </div>
+              )}
+              {referenceImage && !loadingImage && (
+                <img
+                  src={referenceImage}
+                  alt={`Reference drawing of ${subject}`}
+                  className="w-full rounded-xl border border-white/10"
+                  style={{ maxHeight: 220, objectFit: 'contain', background: '#fff' }}
+                />
+              )}
+            </div>
+
             {currentStep === steps.length - 1 && (
               <div className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl p-4 text-white text-center" style={{ boxShadow: '0 0 30px rgba(236,72,153,0.3)' }}>
                 <p className="text-2xl mb-1">🌟</p>
