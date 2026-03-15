@@ -136,8 +136,8 @@ export default function CheeseAndOnionBake() {
           <div className="hidden md:flex items-center gap-6">
             <a href="https://discord.gg/cheeseandonionbake" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 text-sm font-mono">Discord</a>
             <a href="#contact" className="text-gray-400 hover:text-white text-sm font-mono">Contact</a>
-            <a href="/#Terms" className="text-gray-400 hover:text-white text-sm font-mono">Terms</a>
-            <a href="/#PrivacyPolicy" className="text-gray-400 hover:text-white text-sm font-mono">Privacy</a>
+            <a href="/CB51Terms" className="text-gray-400 hover:text-white text-sm font-mono">Terms</a>
+            <a href="/CB51Privacy" className="text-gray-400 hover:text-white text-sm font-mono">Privacy</a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -151,8 +151,8 @@ export default function CheeseAndOnionBake() {
           <div className="md:hidden border-t border-cyan-500/20 bg-black/95 p-4 space-y-3">
             <a href="https://discord.gg/cheeseandonionbake" target="_blank" rel="noopener noreferrer" className="block text-cyan-400 hover:text-cyan-300 text-sm font-mono py-2">Discord</a>
             <a href="#contact" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Contact</a>
-            <a href="/#Terms" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Terms</a>
-            <a href="/#PrivacyPolicy" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Privacy</a>
+            <a href="/CB51Terms" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Terms</a>
+            <a href="/CB51Privacy" className="block text-gray-400 hover:text-white text-sm font-mono py-2">Privacy</a>
           </div>
         )}
       </header>
@@ -362,9 +362,9 @@ export default function CheeseAndOnionBake() {
         <div className="mt-2 space-x-4">
           <a href="https://discord.gg/cheeseandonionbake" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-cyan-400 transition-colors">Discord</a>
           <span>·</span>
-          <a href="/#Terms" className="text-gray-600 hover:text-gray-500 transition-colors">Terms</a>
+          <a href="/CB51Terms" className="text-gray-600 hover:text-gray-500 transition-colors">Terms</a>
           <span>·</span>
-          <a href="/#PrivacyPolicy" className="text-gray-600 hover:text-gray-500 transition-colors">Privacy</a>
+          <a href="/CB51Privacy" className="text-gray-600 hover:text-gray-500 transition-colors">Privacy</a>
         </div>
       </footer>
       </div>

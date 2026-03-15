@@ -12,6 +12,8 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import CorporateBuyerPage from './pages/CorporateBuyer';
 import Draw51Page from './pages/Draw51';
 import CheeseAndOnionBakePage from './pages/CheeseAndOnionBake';
+import CB51TermsPage from './pages/CB51Terms';
+import CB51PrivacyPage from './pages/CB51Privacy';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -66,6 +68,8 @@ const AuthenticatedApp = () => {
       <Route path="/CorporateBuyer" element={<LayoutWrapper currentPageName="CorporateBuyer"><CorporateBuyerPage /></LayoutWrapper>} />
       <Route path="/Draw51" element={<LayoutWrapper currentPageName="Draw51"><Draw51Page /></LayoutWrapper>} />
       <Route path="/CheeseAndOnionBake" element={<CheeseAndOnionBakePage />} />
+      <Route path="/CB51Terms" element={<LayoutWrapper currentPageName="CB51Terms"><CB51TermsPage /></LayoutWrapper>} />
+      <Route path="/CB51Privacy" element={<LayoutWrapper currentPageName="CB51Privacy"><CB51PrivacyPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
