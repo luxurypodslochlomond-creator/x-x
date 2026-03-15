@@ -51,9 +51,9 @@ const BoostIcon = () => (
 // COOLASFUCK SSL rank icon
 const SSLIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-    <polygon points="10,2 12.5,7 18,8 14,12 15,18 10,15 5,18 6,12 2,8 7.5,7" fill="#a855f7" stroke="#c084fc" strokeWidth="1" />
-    <circle cx="10" cy="10" r="3" fill="#e879f9" />
-    <circle cx="10" cy="10" r="1.5" fill="#fdf4ff" />
+    <polygon points="10,2 12.5,7 18,8 14,12 15,18 10,15 5,18 6,12 2,8 7.5,7" fill="#06b6d4" stroke="#22d3ee" strokeWidth="1" />
+    <circle cx="10" cy="10" r="3" fill="#0891b2" />
+    <circle cx="10" cy="10" r="1.5" fill="#cffafe" />
   </svg>
 );
 
@@ -149,7 +149,7 @@ export default function CheeseAndOnionBake() {
           </motion.div>
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 border border-purple-500/40 bg-purple-500/10 text-purple-300 text-xs font-mono tracking-widest px-4 py-2 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 border border-cyan-500/40 bg-cyan-500/10 text-cyan-300 text-xs font-mono tracking-widest px-4 py-2 rounded-full mb-8">
             <SSLIcon />
             SUPERSONIC LEGEND · TOP 0.1% · SCOTLAND
           </div>
