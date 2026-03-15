@@ -268,13 +268,23 @@ export default function Draw51() {
           <div className="lg:col-span-2 flex flex-col gap-3">
             {step && (
               <div className="bg-white/5 rounded-2xl border border-pink-500/30 p-5" style={{ boxShadow: '0 0 30px rgba(236,72,153,0.1)' }}>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="bg-pink-500 text-white text-xs font-black px-3 py-1 rounded-full">Step {currentStep + 1} / {steps.length}</span>
-                  <Sparkles className="w-4 h-4 text-yellow-400" />
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-pink-500 text-white text-xs font-black px-3 py-1 rounded-full">Step {currentStep + 1} / {steps.length}</span>
+                    <Sparkles className="w-4 h-4 text-yellow-400" />
+                  </div>
+                  <button
+                    onClick={() => speak(`Step ${currentStep + 1}. ${step.title}. ${step.instruction}. Tip: ${step.tip}`)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/30 rounded-xl text-cyan-400 text-xs font-bold transition-all"
+                    title="Listen to this step"
+                  >
+                    <Volume2 className="w-3.5 h-3.5" /> Listen
+                  </button>
                 </div>
                 <h2 className="text-xl font-black text-white mb-2">{step.title}</h2>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">{step.instruction}</p>
-                <div className="bg-yellow-500/10 rounded-xl p-3 border border-yellow-500/20">
+                <p className="text-gray-300 text-sm leading-relaxed mb-3">{step.instruction}</p>
+                <ShapePreview shape={step.shape} />
+                <div className="bg-yellow-500/10 rounded-xl p-3 border border-yellow-500/20 mt-3">
                   <p className="text-xs text-yellow-300 font-medium">💡 {step.tip}</p>
                 </div>
               </div>
