@@ -70,5 +70,6 @@ export default function CB51Privacy() {
         </div>
       </div>
     </div>
+    </div>
   );
 }

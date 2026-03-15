@@ -70,5 +70,6 @@ export default function CB51Terms() {
         </div>
       </div>
     </div>
+    </div>
   );
 }
