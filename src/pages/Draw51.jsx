@@ -65,7 +65,8 @@ export default function Draw51() {
                 properties: {
                   title: { type: 'string' },
                   instruction: { type: 'string' },
-                  tip: { type: 'string' }
+                  tip: { type: 'string' },
+                  shape: { type: 'string' }
                 }
               }
             }
