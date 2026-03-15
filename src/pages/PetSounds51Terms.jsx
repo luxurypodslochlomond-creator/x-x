@@ -87,7 +87,7 @@ export default function PetSounds51Terms() {
           <Section number={4} title="Refund Policy — No Nonsense">
             <p className="mb-3">30-day full refund. No questions. We mean it.</p>
             <ul className="space-y-2">
-              <li>• Email <a href="mailto:petsounds@uf51.love" className="text-orange-700 hover:underline font-bold">petsounds@uf51.love</a> within 30 days</li>
+              <li>• Email <a href="mailto:family@uf51.love" className="text-orange-700 hover:underline font-bold">family@uf51.love</a> within 30 days</li>
               <li>• We'll process it within 5–7 business days</li>
               <li>• No passive-aggressive delays. No guilt trips.</li>
               <li>• If something genuinely went wrong, tell us. We want to know.</li>
@@ -98,7 +98,7 @@ export default function PetSounds51Terms() {
             <ul className="space-y-2">
               <li>• Annual billing — £29.99/year (charged in your local currency via Stripe)</li>
               <li>• <strong className="text-amber-950">Auto-renews after 12 months.</strong> You'll receive an email reminder 7 days before renewal.</li>
-              <li>• Cancel any time before renewal by emailing <a href="mailto:petsounds@uf51.love" className="text-orange-700 hover:underline font-bold">petsounds@uf51.love</a> — no hoops, no guilt</li>
+              <li>• Cancel any time before renewal by emailing <a href="mailto:family@uf51.love" className="text-orange-700 hover:underline font-bold">family@uf51.love</a> — no hoops, no guilt</li>
               <li>• Cancellation takes effect at end of your current paid year</li>
               <li>• 30-day full refund from date of purchase — no questions asked</li>
               <li>• Payments processed securely by Stripe. We never store your card details.</li>
@@ -151,8 +151,8 @@ export default function PetSounds51Terms() {
         <div className="bg-yellow-100/60 border-2 border-orange-300 rounded-xl p-6 mb-8 text-center shadow-sm">
           <p className="text-amber-900 font-black mb-3">Contact Us</p>
           <p className="text-amber-800 text-sm mb-1">Everything goes to one place. We actually read it.</p>
-          <a href="mailto:petsounds@uf51.love" className="text-orange-700 font-black text-lg hover:text-orange-600 transition-colors">
-            petsounds@uf51.love
+          <a href="mailto:family@uf51.love" className="text-orange-700 font-black text-lg hover:text-orange-600 transition-colors">
+            family@uf51.love
           </a>
           <p className="text-amber-700 text-xs mt-3">Refunds · Support · Questions · Feedback · Hi</p>
         </div>

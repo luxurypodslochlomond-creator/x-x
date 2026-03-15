@@ -53,7 +53,7 @@ export default function PetSounds51Privacy() {
 
           <section>
             <h2 className="text-white font-bold text-lg mb-2">Contact</h2>
-            <p>Questions about privacy? Email us at <span className="text-orange-400">hello@petsounds51.com</span></p>
+            <p>Questions about privacy? Email us at <span className="text-orange-400">family@uf51.love</span></p>
           </section>
 
           <p className="text-xs text-gray-500 border-t border-slate-700 pt-4">PetSounds51 is part of the Universal Frequency 51 family. Safe & drug-free. 🐾</p>
