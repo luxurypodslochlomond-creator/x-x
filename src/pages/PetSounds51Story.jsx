@@ -254,6 +254,7 @@ export default function PetSounds51Story() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
   const [audioOn, setAudioOn] = useState(false);
+  const [themeAccent] = useState('#d4a017');
   const audioRef = useRef(null);
   const autoTimer = useRef(null);
 
@@ -321,10 +322,10 @@ export default function PetSounds51Story() {
   const accent = slide.accent;
 
   return (
-    <div className="min-h-screen bg-[#09090f] flex flex-col select-none overflow-hidden">
+    <div className="min-h-screen flex flex-col select-none overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a200e 0%, #2a3018 40%, #1e1a0e 100%)' }}>
       {/* Ambient glow */}
       <div className="fixed inset-0 pointer-events-none" style={{
-        background: `radial-gradient(ellipse 60% 50% at 50% 30%, ${accent}18 0%, transparent 70%)`
+        background: `radial-gradient(ellipse 60% 50% at 50% 30%, #d4a01720 0%, transparent 70%)`
       }} />
 
       {/* Progress */}
@@ -333,7 +334,7 @@ export default function PetSounds51Story() {
           <button key={i} onClick={() => go(i)} className="h-[3px] flex-1 rounded-full bg-white/10 overflow-hidden">
             <motion.div
               className="h-full rounded-full"
-              style={{ background: accent }}
+              style={{ background: themeAccent }}
               animate={{ width: i < current ? '100%' : i === current ? '100%' : '0%' }}
               transition={i === current ? { duration: 5, ease: 'linear' } : { duration: 0.15 }}
             />
@@ -382,7 +383,7 @@ export default function PetSounds51Story() {
           <Link
             to={createPageUrl("PetSounds51")}
             className="px-4 py-1.5 rounded-lg font-black text-xs text-white"
-            style={{ background: accent }}
+            style={{ background: themeAccent }}
           >
             Try free →
           </Link>
