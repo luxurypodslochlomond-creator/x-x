@@ -24,16 +24,16 @@ const Section = ({ number, title, children }) => {
 
 export default function PetSounds51Terms() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-950 to-gray-900 text-white p-4 sm:p-6 pb-24 pt-24">
+    <div className="min-h-screen text-white p-3 sm:p-4 pb-24 pt-24" style={{ background: 'linear-gradient(135deg, #1a200e 0%, #2a3018 40%, #1e1a0e 100%)' }}>
       <div className="max-w-3xl mx-auto">
 
         {/* HEADER */}
         <div className="text-center mb-10 pt-4">
-          <PetSounds51Icon8Bit size={52} animate={false} />
-          <h1 className="text-3xl sm:text-4xl font-black mt-4 mb-2">
-            <span style={{ color: '#d4a017' }}>PET SOUNDS</span>
+          <PetSounds51Icon8Bit size={52} animate={true} />
+          <h1 className="text-4xl sm:text-5xl font-black mt-4 mb-2" style={{ color: '#d4a017', letterSpacing: '-0.02em', textShadow: '0 0 30px rgba(212,160,23,0.4)' }}>
+            PetSounds51
           </h1>
-          <p className="font-mono text-xs tracking-widest" style={{ color: '#d4a017' }}>TERMS & CONDITIONS</p>
+          <p className="font-mono text-xs tracking-widest" style={{ color: '#8aab3a' }}>TERMS & CONDITIONS</p>
           <p className="text-gray-400 text-xs mt-2">Last Updated: March 2026</p>
         </div>
 
