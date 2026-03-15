@@ -8,7 +8,7 @@ const PROTOCOLS = [
   { icon: 'Trust', name: 'Vet & Car Anxiety', detail: '528Hz · parasympathetic activation' },
   { icon: 'Frequency', name: "Night Anxiety / Can't Settle", detail: 'Delta 4Hz · sleep onset' },
   { icon: 'Rescue', name: 'Rescue Trauma & PTSD', detail: '396Hz theta · trauma processing' },
-  { icon: 'Heart', name: 'Grief & Depression', detail: '639Hz · oxytocin + bonding' },
+  { icon: 'Heart', name: 'Grief & Depression', detail: '639Hz · remembering bonds' },
   { icon: 'Science', name: 'Cognitive Decline / Dementia', detail: '40Hz gamma · MIT protocol' },
   { icon: 'Frequency', name: 'Hyperactivity & Reactivity', detail: 'Alpha 10Hz · calm bridging' },
   { icon: 'Paw', name: 'Arthritis & Joint Pain', detail: '174Hz PEMF · pain signalling' },
