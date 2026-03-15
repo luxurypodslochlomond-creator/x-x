@@ -1,5 +1,5 @@
 import React, { useState, lazy, Suspense, useEffect } from 'react';
-import { ChevronDown, ChevronUp, Play, Lock } from 'lucide-react';
+import { ChevronDown, ChevronUp, Play, Lock, Heart, Footprints, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
@@ -183,7 +183,7 @@ export default function PetSounds51() {
           £29.99/year (rest)
         </span>
         <span className="rounded-full px-3 py-1 flex items-center gap-2" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>
-          <Paw size={16} style={{ color: '#8aab3a' }} />
+          <Footprints size={16} style={{ color: '#8aab3a' }} />
           10% to rescue
         </span>
         </div>
@@ -227,7 +227,7 @@ export default function PetSounds51() {
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
               <div className="flex items-center gap-2 mb-1">
-                <Paw size={16} style={{ color: '#d4a017' }} />
+                <Footprints size={16} style={{ color: '#d4a017' }} />
                 <p className="font-bold" style={{ color: '#d4a017' }}>iCalmDog RCT 2024</p>
               </div>
               <p>68% reduction in reactive behaviour using 10Hz alpha tones. Recommended by 200+ vets worldwide.</p>
@@ -304,7 +304,7 @@ export default function PetSounds51() {
           <a href="/PetSounds51Privacy" className="text-xs font-bold transition-colors" style={{ color: '#a89870' }}>Privacy</a>
           <span style={{ color: '#4a4030' }}>•</span>
           <span className="text-xs font-bold flex items-center gap-1" style={{ color: '#8aab3a' }}>
-          <Paw size={14} style={{ color: '#8aab3a' }} />
+          <Footprints size={14} style={{ color: '#8aab3a' }} />
           10% to animal rescue
         </span>
         </div>
