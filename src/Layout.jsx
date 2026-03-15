@@ -268,12 +268,21 @@ const LayoutInner = ({ children, currentPageName }) => {
     metaTheme.content = isCB51 ? '#06b6d4' : '#22c55e';
 
     // Set Open Graph tags for social sharing
+    let ogImageUrl = '/api/functions/serveOGImage';
+    if (isPS51Page) {
+      ogImageUrl = '/api/functions/servePetSounds51OGImage';
+    } else if (isCB51Page) {
+      ogImageUrl = '/api/functions/serveCB51OGImage';
+    }
+    
     const ogTags = {
-      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : 'Universal Frequency 51',
+      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : 'Universal Frequency 51',
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
+        : isPS51Page
+        ? 'Science-backed sound therapy for animal anxiety, pain & wellness.'
         : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, planetary action.',
-      'og:image': window.location.origin + '/api/functions/serveOGImage',
+      'og:image': window.location.origin + ogImageUrl,
       'og:type': 'website'
     };
 
@@ -286,6 +295,23 @@ const LayoutInner = ({ children, currentPageName }) => {
       }
       meta.content = content;
     });
+
+    // Set dynamic favicon based on brand
+    let faviconLink = document.querySelector('link[rel="icon"]');
+    if (!faviconLink) {
+      faviconLink = document.createElement('link');
+      faviconLink.rel = 'icon';
+      faviconLink.type = 'image/svg+xml';
+      document.head.appendChild(faviconLink);
+    }
+    
+    let faviconUrl = '/favicon-uf51.svg'; // UF51 default (black/red)
+    if (isPS51Page) {
+      faviconUrl = '/favicon-ps51.svg'; // PS51 (golden)
+    } else if (isCB51Page) {
+      faviconUrl = '/favicon-cb51.svg'; // CB51 (cyan)
+    }
+    faviconLink.href = faviconUrl;
 
     // Set manifest (served dynamically by serveManifest function)
     let manifestLink = document.querySelector('link[rel="manifest"]');
