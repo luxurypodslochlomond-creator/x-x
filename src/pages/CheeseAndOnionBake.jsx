@@ -154,7 +154,7 @@ export default function CheeseAndOnionBake() {
             SUPERSONIC LEGEND · TOP 0.1% · SCOTLAND
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight mb-3 sm:mb-4">
+          <h1 className="text-2xl sm:text-4xl md:text-7xl font-black tracking-tight mb-3 sm:mb-4 leading-tight">
             <span className="text-white">cheese</span>
             <span className="text-orange-400">&</span>
             <span className="text-white">onionbake</span>
