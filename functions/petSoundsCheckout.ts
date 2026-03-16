@@ -1,4 +1,4 @@
-import Stripe from 'npm:stripe@14.21.0';
+import Stripe from 'npm:stripe@17';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY'));
 const PRICE_ID = 'price_1TBM80LgeWr0ng8pTsaOrF62';

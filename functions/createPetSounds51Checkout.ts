@@ -1,4 +1,4 @@
-import Stripe from 'npm:stripe@14.0.0';
+import Stripe from 'npm:stripe@17';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY'));
 
@@ -10,30 +10,16 @@ Deno.serve(async (req) => {
   try {
     const { email, successUrl, cancelUrl } = await req.json();
 
-    if (!email) {
-      return Response.json({ error: 'Email required' }, { status: 400 });
-    }
-
     if (!successUrl || !cancelUrl) {
       return Response.json({ error: 'Success and cancel URLs required' }, { status: 400 });
     }
 
-    // Check if running in iframe
-    const origin = req.headers.get('origin');
-    if (origin && origin.includes('iframe')) {
-      return Response.json({ 
-        error: 'Iframe detected. Checkout must be accessed from published app.',
-        requiresPublished: true 
-      }, { status: 400 });
-    }
-
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
-
-      customer_email: email,
+      customer_email: email || undefined,
       line_items: [
         {
-          price: 'price_1TBLebLgeWr0ng8pRrxfkItO', // PetSounds51 monthly
+          price: 'price_1TBLebLgeWr0ng8pRrxfkItO',
           quantity: 1,
         },
       ],
@@ -46,13 +32,10 @@ Deno.serve(async (req) => {
       },
     });
 
-    console.log(`[PetSounds51] Checkout session created: ${session.id} for ${email}`);
-
+    console.log(`[PetSounds51] Checkout session created: ${session.id}`);
     return Response.json({ sessionId: session.id, url: session.url });
   } catch (error) {
     console.error('[PetSounds51 Checkout Error]:', error);
-    return Response.json({ 
-      error: error.message || 'Checkout creation failed' 
-    }, { status: 500 });
+    return Response.json({ error: error.message || 'Checkout creation failed' }, { status: 500 });
   }
 });
