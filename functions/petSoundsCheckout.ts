@@ -13,7 +13,7 @@ Deno.serve(async (req) => {
       success_url: successUrl || 'https://uf51.love/PetSounds51?subscribed=true',
       cancel_url: cancelUrl || 'https://uf51.love/PetSounds51',
       allow_promotion_codes: true,
-      // Apple Pay, Google Pay, Stripe Link all auto-enabled by Stripe
+      payment_method_types: ['card'],
       metadata: {
         base44_app_id: Deno.env.get('BASE44_APP_ID'),
         product: 'petsounds51'
