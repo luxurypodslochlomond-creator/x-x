@@ -25,7 +25,6 @@ Deno.serve(async (req) => {
       ],
       success_url: successUrl,
       cancel_url: cancelUrl,
-      automatic_payment_methods: { enabled: true },
       metadata: {
         base44_app_id: Deno.env.get('BASE44_APP_ID'),
         service: 'petsounds51',
