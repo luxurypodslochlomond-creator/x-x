@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
 
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
-      payment_method_types: ['card'],
+
       customer_email: email,
       line_items: [
         {
