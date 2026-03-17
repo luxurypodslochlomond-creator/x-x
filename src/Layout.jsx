@@ -10,9 +10,9 @@ import AutoHealingShield from '@/components/shared/AutoHealingShield';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
-import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
-import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
-import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
+// import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
+// import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
+// import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
 // AI51LiveHealer - Commented out to improve performance
 // import AI51LiveHealer from '@/components/ai51/AI51LiveHealer';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
