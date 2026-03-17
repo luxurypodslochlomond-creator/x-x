@@ -176,10 +176,10 @@ export default function PetSounds51() {
           <Heart size={16} style={{ color: '#d4a017' }} />
           £29.99/year — unlock all
         </button>
-        <span className="rounded-full px-3 py-1 flex items-center gap-2" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>
-          <Footprints size={16} style={{ color: '#8aab3a' }} />
+        <Link to={createPageUrl("PetSounds51Story")} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>
+          <Heart size={16} style={{ color: '#8aab3a' }} />
           10% to rescue
-        </span>
+        </Link>
         </div>
       </div>
 
