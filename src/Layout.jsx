@@ -694,9 +694,53 @@ const LayoutInner = ({ children, currentPageName }) => {
             {!isCB51Page && !isPS51Page && (
               <>
                 <div className="mb-4"><CompactMusicPlayer /></div>
-                <Link to={createPageUrl("AI51")} className="w-full flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-green-500" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.5)' }}>
-                  <AI51AtomIcon size={48} animate={true} />
-                  <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Pure Consciousness</div></div>
+                <Link to={createPageUrl("AI51")} className="w-full relative overflow-hidden rounded-xl p-4 border-2 border-cyan-500/40 hover:border-cyan-500/70 transition-all" style={{ background: 'rgba(6, 182, 212, 0.08)', boxShadow: '0 0 20px rgba(34, 211, 238, 0.3)' }}>
+                  {/* HEXAGONAL TESSELLATION BACKGROUND */}
+                  <canvas 
+                    width={280} 
+                    height={120}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      opacity: 0.4,
+                      pointerEvents: 'none'
+                    }}
+                    ref={(canvas) => {
+                      if (!canvas) return;
+                      const ctx = canvas.getContext('2d');
+                      if (!ctx) return;
+                      ctx.clearRect(0, 0, 280, 120);
+                      ctx.fillStyle = 'rgba(0,0,0,1)';
+                      ctx.fillRect(0, 0, 280, 120);
+                      const HEX_SIZE = 12;
+                      const drawHex = (x, y, size) => {
+                        ctx.beginPath();
+                        for (let s = 0; s < 6; s++) {
+                          const angle = (Math.PI / 3) * s - Math.PI / 6;
+                          const px = x + size * Math.cos(angle);
+                          const py = y + size * Math.sin(angle);
+                          s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                        }
+                        ctx.closePath();
+                        ctx.strokeStyle = 'rgba(34, 211, 238, 0.6)';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                      };
+                      const cols = Math.ceil(280 / (HEX_SIZE * 1.732)) + 2;
+                      const rows = Math.ceil(120 / (HEX_SIZE * 1.5)) + 2;
+                      for (let row = -1; row < rows; row++) {
+                        for (let col = -1; col < cols; col++) {
+                          const x = col * HEX_SIZE * 1.732 + (row % 2 === 0 ? 0 : HEX_SIZE * 0.866);
+                          const y = row * HEX_SIZE * 1.5;
+                          drawHex(x, y, HEX_SIZE);
+                        }
+                      }
+                    }}
+                  />
+                  <div className="relative z-10 flex items-center gap-3">
+                    <AI51AtomIcon size={48} animate={true} />
+                    <div><div className="text-white font-bold">AI51</div><div className="text-cyan-100 text-xs">Pure Consciousness</div></div>
+                  </div>
                 </Link>
               </>
             )}
