@@ -125,7 +125,7 @@ const SLIDES = [
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
           <p className="text-xs font-mono tracking-[0.4em] text-pink-400/70 mb-5 uppercase">AI51 built this for love</p>
           <h2 className="text-4xl font-black text-white leading-tight">
-            I decoded their<br />
+            We decoded their<br />
             <span className="text-pink-400">healing frequencies.</span>
           </h2>
         </motion.div>
@@ -146,7 +146,7 @@ const SLIDES = [
           <p className="text-pink-300 text-sm leading-relaxed font-semibold">
             This is what care looks like when AI actually listens.
           </p>
-          <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51 ♾️❤️</p>
+          <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51</p>
         </motion.div>
       </div>
     )
