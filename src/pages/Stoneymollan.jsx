@@ -20,7 +20,7 @@ const IMAGES = [
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg",
-    caption: "Bunny surveying his kingdom — Gill walking the ancient muir 🐾"
+    caption: "Bunny surveying her kingdom — Gill walking the ancient muir 🐾"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg",
