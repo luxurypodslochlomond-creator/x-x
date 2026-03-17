@@ -223,8 +223,8 @@ export default function AdminNatWestMortgage() {
             </ol>
 
             <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4 mt-6">
-              <p className="text-green-300 font-bold mb-2">✅ WHAT THIS MEANS:</p>
-              <p className="text-white">You got 3 months + 30 day breathing space + month by month support. NatWest is actively helping. You have options.</p>
+              <p className="text-green-300 font-bold mb-2">✅ NO INITIATING LETTER NEEDED:</p>
+              <p className="text-white">They came to YOU in writing. Mr Dempsey confirmed the hold. You don't need to chase — just reply before 31/03/2026. Breathe. 🙏</p>
             </div>
           </CardContent>
         </Card>
