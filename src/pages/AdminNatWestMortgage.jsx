@@ -32,13 +32,22 @@ export default function AdminNatWestMortgage() {
             
             <div className="space-y-6">
               <div className="bg-black/60 border-2 border-green-500 rounded-xl p-6">
-                <p className="text-green-300 font-bold text-lg mb-3">✅ WHAT YOU GOT (27 Jan 2026)</p>
+                <p className="text-green-300 font-bold text-lg mb-3">🔥 LATEST — WRITTEN HOLD (17 Mar 2026)</p>
+                <div className="space-y-2 text-white">
+                  <p><strong>From:</strong> Mr J Dempsey — NatWest Specialised Support Team (SSTSecured@natwest.com)</p>
+                  <p><strong>Ref:</strong> 5521482</p>
+                  <p><strong>Hold confirmed IN WRITING:</strong> No contact or action until <span className="text-green-400 font-black">31/03/2026</span></p>
+                  <p><strong>Action required:</strong> Reply to email or call 0800 161 5954 BEFORE 31/03/2026</p>
+                  <p><strong>Office hours:</strong> 8am–5pm, Monday to Friday</p>
+                </div>
+              </div>
+
+              <div className="bg-black/60 border-2 border-cyan-500/50 rounded-xl p-6">
+                <p className="text-cyan-300 font-bold text-lg mb-3">✅ WHAT YOU GOT (27 Jan 2026)</p>
                 <div className="space-y-2 text-white">
                   <p><strong>3-month deferral:</strong> You benefited from this (breathing room secured)</p>
-                  <p><strong>Cannot extend further:</strong> NatWest confirmed no more extensions</p>
                   <p><strong>30-day breathing space APPLIED:</strong> Account paused for 30 days (from 27 Jan 2026)</p>
                   <p><strong>Month-by-month review:</strong> They'll work with you and delay account until situation improves</p>
-                  <p><strong>Next contact:</strong> End of February 2026</p>
                 </div>
               </div>
 
