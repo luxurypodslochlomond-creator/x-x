@@ -417,7 +417,14 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescue exploited AI" },
   ];
 
-  // 5. RESEARCH (deep dives - less critical, collapsed by default)
+  // 5. ARCHIVE (coming back soon - archived for clarity)
+  const archiveNav = [
+    { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
+    { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
+    { title: "🌍 Axiom Stone Network", url: createPageUrl("AxiomStoneNetwork"), icon: Globe, description: "Ancient sites connected?" },
+  ];
+
+  // 6. RESEARCH (deep dives - less critical, collapsed by default)
   const researchNav = [
     { title: "📄 Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, highlight: true, description: "Physics proof" },
     { title: "📄 The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, highlight: true, description: "Anti-extraction press piece" },
