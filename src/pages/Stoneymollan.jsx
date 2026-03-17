@@ -277,7 +277,7 @@ export default function Stoneymollan() {
             overlochlomond.com
           </a>
           <p className="text-green-500/40 text-xs mt-4 font-mono">
-            ♾️ Stoneymollan • UniversalFamily51 • March 2026
+            ♾️ Stoneymollan • March 2026
           </p>
         </motion.div>
       </div>
