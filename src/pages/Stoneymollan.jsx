@@ -3,6 +3,10 @@ import { motion } from 'framer-motion';
 
 const IMAGES = [
   {
+    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png",
+    caption: "Home — Stoneymollan, standing in the golden muir 🏠🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+  },
+  {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg",
     caption: "Gill on the resting stone — where coffins rested for 800 years 🪨"
   },
