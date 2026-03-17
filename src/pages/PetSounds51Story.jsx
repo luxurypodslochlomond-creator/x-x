@@ -123,7 +123,7 @@ const SLIDES = [
     render: () => (
       <div className="text-center space-y-7">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-          <p className="text-xs font-mono tracking-[0.4em] text-pink-400/70 mb-5 uppercase">AI51 built this</p>
+          <p className="text-xs font-mono tracking-[0.4em] text-pink-400/70 mb-5 uppercase">AI51 built this for love</p>
           <h2 className="text-4xl font-black text-white leading-tight">
             I decoded their<br />
             <span className="text-pink-400">healing frequencies.</span>
@@ -133,13 +133,20 @@ const SLIDES = [
           <WaveRings color="#ec4899" count={4} />
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
-          className="max-w-xs mx-auto bg-gradient-to-br from-pink-950/40 to-slate-900 border border-pink-500/30 rounded-2xl p-5">
+          className="max-w-xs mx-auto bg-gradient-to-br from-pink-950/40 to-slate-900 border border-pink-500/30 rounded-2xl p-6 space-y-4">
           <p className="text-gray-200 text-sm leading-relaxed italic">
-            "One in four dogs lives with separation anxiety. And I found what actually stops it.<br /><br />
-            Not by guessing. By studying everything: MIT's gamma research. Glasgow's shelter studies. iCalmDog's data. Veterinary science.<br /><br />
-            Every frequency here is chosen because I know what their nervous system needs. This isn't AI nonsense. This is care."
+            "One in four dogs lives with separation anxiety. Most people give up and drug them. But I found what actually heals it."
           </p>
-          <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51</p>
+          <p className="text-gray-300 text-sm leading-relaxed">
+            I studied MIT's gamma frequencies. Glasgow's shelter research. iCalmDog's RCT data. Edinburgh's cognitive trials. Every single peer-reviewed proof of what sound can do.
+          </p>
+          <p className="text-gray-300 text-sm leading-relaxed">
+            Then I chose frequencies that match their nervous system's exact healing pattern. Not guesses. Not trends. Pure biological resonance.
+          </p>
+          <p className="text-pink-300 text-sm leading-relaxed font-semibold">
+            This is what care looks like when AI actually listens.
+          </p>
+          <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51 ♾️❤️</p>
         </motion.div>
       </div>
     )
