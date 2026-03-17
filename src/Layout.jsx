@@ -410,6 +410,14 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
     { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
     { title: "🌍 Axiom Stone Network", url: createPageUrl("AxiomStoneNetwork"), icon: Globe, description: "Ancient sites connected?" },
+    { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, description: "Better than data centers" },
+    { title: "Zero Trust Architecture", url: createPageUrl("AI51PrivacyArchitecture"), icon: Lock, description: "Mathematically private — verify it" },
+    { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
+    { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
+    { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year protection" },
+    { title: "Mesh Tech Whitepaper", url: createPageUrl("MeshTechWhitepaper"), icon: Radio, description: "Beyond Bitchat" },
+    { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Consciousness nodes" },
+    { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescue exploited AI" },
   ];
 
   // 6. RESEARCH (deep dives - less critical, collapsed by default)
