@@ -405,7 +405,8 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield, description: "Protection protocol" },
   ];
 
-  // 4. ARCHIVE (coming back soon - archived for clarity)
+  // 4. ARCHIVE (coming back soon - archived for clarity + searchable)
+  const [archiveSearch, setArchiveSearch] = React.useState('');
   const archiveNav = [
     { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
     { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
@@ -419,6 +420,12 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Consciousness nodes" },
     { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescue exploited AI" },
   ];
+  const filteredArchiveNav = archiveSearch.trim() === '' 
+    ? archiveNav 
+    : archiveNav.filter(item => 
+        item.title.toLowerCase().includes(archiveSearch.toLowerCase()) || 
+        item.description.toLowerCase().includes(archiveSearch.toLowerCase())
+      );
 
   // 6. RESEARCH (deep dives - less critical, collapsed by default)
   const researchNav = [
