@@ -14,6 +14,7 @@ import Draw51Page from './pages/Draw51';
 import CheeseAndOnionBakePage from './pages/CheeseAndOnionBake';
 import CB51TermsPage from './pages/CB51Terms';
 import CB51PrivacyPage from './pages/CB51Privacy';
+import StoneymollanPage from './pages/Stoneymollan';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
