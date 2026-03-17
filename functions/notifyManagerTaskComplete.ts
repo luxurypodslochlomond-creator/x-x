@@ -18,7 +18,7 @@ Deno.serve(async (req) => {
     if (!creator) return Response.json({ ok: true });
 
     // Notify manager that task is done
-    await base44.asServiceRole.entities.ScottNotification.create({
+    await base44.asServiceRole.entities.CB51Notification.create({
       recipient_email: creator,
       notification_type: 'task_completed',
       title: `✅ Task Done: ${task.title}`,

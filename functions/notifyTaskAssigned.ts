@@ -12,11 +12,11 @@ Deno.serve(async (req) => {
 
     // Get artist info for context
     const artist = task.artist_id 
-      ? await base44.asServiceRole.entities.ScottArtist.list().then(all => all.find(a => a.id === task.artist_id))
+      ? await base44.asServiceRole.entities.CB51Artist.list().then(all => all.find(a => a.id === task.artist_id))
       : null;
 
     // Create notification record
-    await base44.asServiceRole.entities.ScottNotification.create({
+    await base44.asServiceRole.entities.CB51Notification.create({
       recipient_email: task.responsible_email,
       notification_type: 'task_assigned',
       title: `📋 New Task: ${task.title}`,
