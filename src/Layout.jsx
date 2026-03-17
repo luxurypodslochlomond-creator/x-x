@@ -623,7 +623,16 @@ const LayoutInner = ({ children, currentPageName }) => {
                               <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                               <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
-                              <NavSection title="ARCHIVE" color="gray" items={archiveNav} isActivePage={isActivePage} isMobile />
+                              <div className="space-y-2">
+                                <input
+                                  type="text"
+                                  placeholder="Search archive..."
+                                  value={archiveSearch}
+                                  onChange={(e) => setArchiveSearch(e.target.value)}
+                                  className="w-full px-3 py-2 bg-gray-900/40 border border-gray-700/50 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-600"
+                                />
+                                <NavSection title="ARCHIVE" color="gray" items={filteredArchiveNav} isActivePage={isActivePage} isMobile />
+                              </div>
                               <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
                             </>
