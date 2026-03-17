@@ -19,7 +19,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-amber-400 font-mono">Updated: 27 Jan 2026 (Raj email)</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 17 Mar 2026 — WRITTEN HOLD CONFIRMED until 31/03/2026</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
