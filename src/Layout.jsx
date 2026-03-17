@@ -510,10 +510,10 @@ const LayoutInner = ({ children, currentPageName }) => {
   return (
       <AutoHealingShield>
       <COOLASFUCKErrorMonitor>
-      <DisasterResilienceMode />
+      {/* <DisasterResilienceMode /> */}
       <TruthCheckProtocol />
-      <RealtimeDebugger />
-      <PerformanceMonitor />
+      {/* <RealtimeDebugger /> */}
+      {/* <PerformanceMonitor /> */}
       <GlobalErrorBoundary>
       <style>{`
         @media (display-mode: standalone) { body { -webkit-touch-callout: none; -webkit-user-select: none; } }
