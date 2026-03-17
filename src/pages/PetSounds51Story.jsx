@@ -378,7 +378,13 @@ export default function PetSounds51Story() {
 
       {/* Bottom bar */}
       <div className="relative z-10 flex items-center justify-between px-5 pb-6 max-w-md mx-auto w-full">
-        <p className="text-white/20 text-xs font-mono tracking-widest">PETSOUNDS51</p>
+        <button
+          onClick={() => go(current - 1)}
+          disabled={current === 0}
+          className="px-3 py-1.5 rounded-lg border border-white/10 text-white/60 text-xs font-bold hover:text-white hover:border-white/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        >
+          ← Back
+        </button>
         <div className="flex items-center gap-2">
           <button
             onClick={toggleAudio}
@@ -401,6 +407,13 @@ export default function PetSounds51Story() {
             Try free →
           </Link>
         </div>
+        <button
+          onClick={() => go(current + 1)}
+          disabled={current === SLIDES.length - 1}
+          className="px-3 py-1.5 rounded-lg border border-white/10 text-white/60 text-xs font-bold hover:text-white hover:border-white/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        >
+          Next →
+        </button>
       </div>
     </div>
   );
