@@ -238,7 +238,7 @@ export default function AdminNatWestMortgage() {
               <p>Raj said "we'll continue to work with you and delay the account until your situation improves." That's as good as it gets.</p>
               <p>Yes, interest accrues. But they're giving you TIME. Month by month. That's rare.</p>
               <p>The mortgage won't be repossessed if you keep talking to them. Banks want payment plans, not empty houses.</p>
-              <p className="text-cyan-400 font-bold mt-4">They came to YOU in writing. No initiating letter needed. Just reply before 31st March. Now breathe. ♾️❤️</p>
+              <p className="text-cyan-400 font-bold mt-4">⏳ ~15 days left until 31st March deadline. No panic — but don't leave it too late. Reply to Mr Dempsey before the end of March. ♾️❤️</p>
             </div>
           </CardContent>
         </Card>
