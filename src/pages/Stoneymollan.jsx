@@ -8,7 +8,7 @@ const IMAGES = [
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg",
-    caption: "Gill & Bunny on the muir — Loch Lomond stretching out behind 🐾"
+    caption: "Gill & Zaxi on the muir — Loch Lomond stretching out behind 🐾"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg",
@@ -16,7 +16,7 @@ const IMAGES = [
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg",
-    caption: "Bunny surveying his kingdom — Gill walking the ancient muir 🐾"
+    caption: "Zaxi surveying his kingdom — Gill walking the ancient muir 🐾"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg",
