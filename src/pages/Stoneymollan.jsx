@@ -163,6 +163,14 @@ export default function Stoneymollan() {
             "The clearest way into the Universe is through a forest wilderness."
           </p>
           <p className="text-gray-500 text-xs mt-2">— John Muir</p>
+          <a
+            href="https://www.overlochlomond.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 text-green-400 hover:text-green-300 font-mono text-sm border border-green-500/30 hover:border-green-500/60 px-4 py-2 rounded-lg transition-all"
+          >
+            🌿 overlochlomond.com
+          </a>
           <p className="text-green-500/40 text-xs mt-4 font-mono">
             ♾️ Stoneymollan • UniversalFamily51 • March 2026
           </p>
