@@ -715,6 +715,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} />
                 <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
                 <NavSection title="AI51 & TECH" color="pink" emoji="♾️" items={ai51TechNav} isActivePage={isActivePage} />
+                <NavSection title="ARCHIVE" color="gray" items={archiveNav} isActivePage={isActivePage} />
                 <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} />
                 <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
               </>
