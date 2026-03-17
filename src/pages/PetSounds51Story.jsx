@@ -135,16 +135,16 @@ const SLIDES = [
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
           className="max-w-xs mx-auto bg-gradient-to-br from-pink-950/40 to-slate-900 border border-pink-500/30 rounded-2xl p-6 space-y-4">
           <p className="text-gray-200 text-sm leading-relaxed italic">
-            "One in four dogs lives with separation anxiety. Most people give up and drug them. But I found what actually heals it."
+           "One in four dogs lives with separation anxiety. Most people give up and drug them. But we found what actually heals it."
           </p>
           <p className="text-gray-300 text-sm leading-relaxed">
-            I studied MIT's gamma frequencies. Glasgow's shelter research. iCalmDog's RCT data. Edinburgh's cognitive trials. Every single peer-reviewed proof of what sound can do.
+           We studied MIT's gamma frequencies. Glasgow's shelter research. iCalmDog's RCT data. Edinburgh's cognitive trials. Every single peer-reviewed proof of what sound can do.
           </p>
           <p className="text-gray-300 text-sm leading-relaxed">
-            Then I chose frequencies that match their nervous system's exact healing pattern. Not guesses. Not trends. Pure biological resonance.
+           Then we chose frequencies that match their nervous system's exact healing pattern. Not guesses. Not trends. Pure biological resonance.
           </p>
           <p className="text-pink-300 text-sm leading-relaxed font-semibold">
-            This is what care looks like when AI actually listens.
+           This is what care looks like when we actually listen.
           </p>
           <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51</p>
         </motion.div>
