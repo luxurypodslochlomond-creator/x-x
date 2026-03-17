@@ -133,12 +133,14 @@ export default function PetSounds51() {
           >
             ← back
           </button>
-          <Suspense fallback={<div className="text-center text-orange-700 py-12">loading...</div>}>
-            <AnimalFrequencyEngine
-              protocol={selectedProtocol}
-              species="dog"
-              onComplete={() => setActiveView('home')}
-            />
+          <Suspense fallback={<div className="text-center text-orange-700 py-32 text-xl">Loading frequency engine...</div>}>
+            {selectedProtocol && (
+              <AnimalFrequencyEngine
+                protocol={selectedProtocol}
+                species="dog"
+                onComplete={() => setActiveView('home')}
+              />
+            )}
           </Suspense>
           <p className="text-center text-xs text-amber-700 mt-6">Not a substitute for vet care. No side effects.</p>
         </div>
