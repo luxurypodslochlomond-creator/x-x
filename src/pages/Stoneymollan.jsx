@@ -83,7 +83,7 @@ export default function Stoneymollan() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className="text-5xl md:text-7xl font-black mb-4 tracking-tight"
-            style={{ fontFamily: 'Georgia, serif', textShadow: '0 0 40px rgba(34,197,94,0.4)' }}
+            style={{ fontFamily: 'monospace', textShadow: '0 0 40px rgba(34,197,94,0.4)', letterSpacing: '0.05em' }}
           >
             Stoneymollan
           </motion.h1>
