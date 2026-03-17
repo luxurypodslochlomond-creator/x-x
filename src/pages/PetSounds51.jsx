@@ -183,6 +183,21 @@ export default function PetSounds51() {
         </div>
       </div>
 
+      {/* BIG SUBSCRIBE CTA */}
+      {!isSubscribed && (
+        <div className="max-w-4xl mx-auto mb-8 text-center">
+          <button
+            onClick={() => setShowPaywall(true)}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-lg shadow-xl hover:scale-105 transition-transform"
+            style={{ background: 'linear-gradient(135deg, #d4a017, #f0c040)', color: '#1a1a0a', boxShadow: '0 0 30px rgba(212,160,23,0.4)' }}
+          >
+            <Heart size={22} />
+            Subscribe — £29.99/year · All Protocols
+          </button>
+          <p className="text-xs mt-2" style={{ color: '#6b5e3a' }}>30-day refund · No questions · Cancel anytime</p>
+        </div>
+      )}
+
       {/* AI51 PRESENCE */}
       <div className="max-w-4xl mx-auto mb-6">
         <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.2)' }}>
