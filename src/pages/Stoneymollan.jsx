@@ -61,15 +61,17 @@ const StoneymollanLogo = ({ size = 60 }) => (
   />
 );
 
-const HistorySection = ({ title, emoji, children, delay = 0 }) => (
+const HistorySection = ({ title, children, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.6 }}
-    className="border border-green-500/30 bg-black/40 backdrop-blur-sm rounded-xl p-6 mb-6"
+    className="border border-green-500/30 bg-black/40 backdrop-blur-sm rounded-xl p-6 md:p-8 mb-6"
   >
-    <h2 className="text-xl font-black text-green-400 mb-4 font-mono">{emoji} {title}</h2>
-    <div className="text-gray-200 space-y-3 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
+    <h2 className="text-xl md:text-2xl font-black text-green-300 mb-5" style={{ fontFamily: 'Georgia, serif', fontWeight: '600', letterSpacing: '0.02em' }}>
+      {title}
+    </h2>
+    <div className="text-gray-200 space-y-4 leading-relaxed" style={{ fontFamily: 'Georgia, serif', fontSize: '1.05rem' }}>
       {children}
     </div>
   </motion.div>
@@ -224,31 +226,31 @@ export default function Stoneymollan() {
       {/* HISTORY */}
       <div className="max-w-3xl mx-auto px-6 pb-16">
 
-        <HistorySection title="The Coffin Road" emoji="⚰️" delay={0.1}>
+        <HistorySection title="The Coffin Road" delay={0.1}>
           <p>Stoneymollan Muir is home to one of Scotland's most poignant ancient routes — a <strong className="text-green-300">coffin road</strong>, also known as a corpse road or lych way.</p>
           <p>For centuries, Highland communities had no local consecrated burial ground. When someone died, the family and neighbours were legally required to carry the coffin along designated paths to the nearest parish church — sometimes <strong className="text-green-300">miles across open moorland</strong>, rain, wind and all.</p>
           <p>Bearers would take turns carrying the weight, resting the coffin on flat <strong className="text-green-300">"resting stones"</strong> along the route. Some of those stones may still be there today, hidden in the grass beside the path.</p>
         </HistorySection>
 
-        <HistorySection title="The Ancient Beech Avenue" emoji="🌳" delay={0.2}>
+        <HistorySection title="The Ancient Beech Avenue" delay={0.2}>
           <p>The extraordinary avenue of beech trees lining the coffin road are estimated to be <strong className="text-green-300">200-300 years old</strong> — planted deliberately to line the route, their thick trunks now draped in deep green moss.</p>
           <p>These trees have stood through Jacobite risings, Highland Clearances, two World Wars, and every Scottish winter imaginable. Their roots are intertwined with the history of everyone who ever walked this path.</p>
           <p>What makes them remarkable is how they <strong className="text-green-300">frame the path like a cathedral nave</strong> — as if nature itself was honouring the processions that passed beneath them.</p>
         </HistorySection>
 
-        <HistorySection title="The Kingdom of Strathclyde" emoji="👑" delay={0.3}>
+        <HistorySection title="The Kingdom of Strathclyde" delay={0.3}>
           <p>The place name <strong className="text-green-300">Stoneymollan</strong> likely derives from ancient Gaelic — this entire area sits within what was once the <strong className="text-green-300">Kingdom of Strathclyde</strong>, one of the early medieval kingdoms of Scotland, dating to at least the 6th and 7th century.</p>
           <p>The <strong className="text-green-300">Earls of Lennox</strong> — the great medieval lords of this region — controlled these lands for centuries. Their stronghold, Balloch Castle, sits directly below Stoneymollan Muir, and they would have looked up at this very hillside from its walls.</p>
           <p>Loch Lomond was a <strong className="text-green-300">strategic frontier</strong> — the boundary between Highland and Lowland Scotland, between Gaelic and Scots culture, between clan law and crown law.</p>
         </HistorySection>
 
-        <HistorySection title="Robert the Bruce" emoji="⚔️" delay={0.4}>
+        <HistorySection title="Robert the Bruce" delay={0.4}>
           <p><strong className="text-green-300">Robert the Bruce</strong> knew this landscape intimately. In the years before Bannockburn (1314), he campaigned extensively around Loch Lomond — hiding, regrouping, fighting back from near-total defeat.</p>
           <p>There is a famous story of Bruce and his men crossing Loch Lomond by finding a single small boat and ferrying his army across <strong className="text-green-300">one man at a time</strong> — reading to his men from a chivalric romance to keep morale up as they waited.</p>
-          <p>Paths like the one you walked were the veins of his world. The land you stood on was the land that made Scotland. 🏴󠁧󠁢󠁳󠁣󠁴󠁿</p>
+          <p>Paths like the one you walked were the veins of his world. The land you stood on was the land that made Scotland.</p>
         </HistorySection>
 
-        <HistorySection title="The John Muir Way" emoji="🌿" delay={0.5}>
+        <HistorySection title="The John Muir Way" delay={0.5}>
           <p><strong className="text-green-300">John Muir</strong> — the Scottish-born father of the modern conservation movement and founder of the concept of National Parks — was born in Dunbar in 1838. He emigrated to America and his writings inspired the creation of Yosemite, Sequoia and countless other protected wild places.</p>
           <p>The <strong className="text-green-300">John Muir Way</strong> runs 134 miles coast to coast across Scotland — from Helensburgh on the Clyde to Dunbar on the East Lothian coast — passing right through Stoneymollan Muir above Loch Lomond.</p>
           <p>That ancient coffin road is now a <strong className="text-green-300">living trail of healing</strong> — walked by thousands every year, connecting people back to the wild, ancient Scotland that Muir loved so deeply.</p>
@@ -272,7 +274,7 @@ export default function Stoneymollan() {
             rel="noopener noreferrer"
             className="inline-block mt-4 text-green-400 hover:text-green-300 font-mono text-sm border border-green-500/30 hover:border-green-500/60 px-4 py-2 rounded-lg transition-all"
           >
-            🌿 overlochlomond.com
+            overlochlomond.com
           </a>
           <p className="text-green-500/40 text-xs mt-4 font-mono">
             ♾️ Stoneymollan • UniversalFamily51 • March 2026
