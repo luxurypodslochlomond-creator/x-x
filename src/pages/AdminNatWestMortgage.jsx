@@ -187,7 +187,7 @@ export default function AdminNatWestMortgage() {
         {/* YOUR ACTION PLAN */}
         <Card className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border-2 border-purple-500/50">
           <CardHeader>
-            <CardTitle className="text-purple-300">ACTION PLAN (Before End Feb 2026)</CardTitle>
+            <CardTitle className="text-purple-300">ACTION PLAN — Before 31/03/2026</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <ol className="space-y-3">
