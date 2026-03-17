@@ -17,6 +17,10 @@ import CB51PrivacyPage from './pages/CB51Privacy';
 import StoneymollanPage from './pages/Stoneymollan';
 import PetSounds51ResearchOutreach from './pages/PetSounds51ResearchOutreach';
 import PetSounds51 from './pages/PetSounds51';
+import CB51CalendarView from './pages/CB51CalendarView';
+import CB51MessageInbox from './pages/CB51MessageInbox';
+import CB51FinanceAdmin from './pages/CB51FinanceAdmin';
+import CB51Todo from './pages/CB51Todo';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
