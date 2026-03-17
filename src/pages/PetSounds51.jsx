@@ -173,7 +173,7 @@ export default function PetSounds51() {
           Try FREE: Separation Anxiety
         </button>
         <button onClick={() => setShowPaywall(true)} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>
-          <Heart size={16} style={{ color: '#d4a017' }} />
+          <Zap size={16} style={{ color: '#d4a017' }} />
           £29.99/year — unlock all
         </button>
         <Link to={createPageUrl("PetSounds51Story")} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>
