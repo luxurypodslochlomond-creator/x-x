@@ -380,7 +380,6 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // 2. EARN & CREATE (practical actions)
   const earnCreateNav = [
-    { title: "🌍 Axiom Stone Network", url: createPageUrl("AxiomStoneNetwork"), icon: Globe, highlight: true, description: "Ancient sites connected?" },
     { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "KIDS: AI litter scanner" },
     { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals 🐕🐈" },
     { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, highlight: true, description: "Gergie7's game 🌋❤️" },
