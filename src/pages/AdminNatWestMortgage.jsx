@@ -130,12 +130,20 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 bg-red-900/20 p-4 rounded-lg border-2 border-red-500">
-                <div className="text-red-400 font-bold text-lg min-w-fit">END FEB 2026</div>
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-2 border-green-400">
+                <div className="text-green-300 font-bold text-lg min-w-fit">17/03/2026</div>
                 <div>
-                  <p className="text-white font-bold">⚠️ CONTACT NATWEST WITH UPDATE</p>
-                  <p className="text-gray-300 text-sm">Call/email Raj with your situation update</p>
-                  <p className="text-red-400 font-bold text-sm mt-1">They'll review and work with you month by month</p>
+                  <p className="text-white font-bold">🔥 WRITTEN HOLD RECEIVED — Mr J Dempsey</p>
+                  <p className="text-green-300 text-sm font-bold">Hold confirmed until 31/03/2026. No action or contact until then.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-red-900/20 p-4 rounded-lg border-2 border-red-500">
+                <div className="text-red-400 font-bold text-lg min-w-fit">31/03/2026</div>
+                <div>
+                  <p className="text-white font-bold">⚠️ DEADLINE — CONTACT MR J DEMPSEY</p>
+                  <p className="text-gray-300 text-sm">Email: SSTSecured@natwest.com OR call 0800 161 5954</p>
+                  <p className="text-red-400 font-bold text-sm mt-1">Reply to his email BEFORE this date with situation update</p>
                 </div>
               </div>
             </div>
