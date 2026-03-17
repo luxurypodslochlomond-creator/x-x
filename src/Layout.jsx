@@ -378,9 +378,8 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
     { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
-    { title: "🕊️ ALL LIFE SIGNAL", url: createPageUrl("LifeSignal"), icon: Globe, description: "One planet. One signal." },
-    { title: "🌍 VISITORS BOOK", url: createPageUrl("VisitorsBook"), icon: Globe, description: "Sign Earth's guestbook" },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road • Loch Lomond" },
+    // ARCHIVED: Life Signal, Visitors Book — will restore when ready
   ];
 
   // 2. EARN & CREATE (practical actions)
