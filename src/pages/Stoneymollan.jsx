@@ -3,12 +3,24 @@ import { motion } from 'framer-motion';
 
 const IMAGES = [
   {
+    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg",
+    caption: "Gill on the resting stone — where coffins rested for 800 years 🪨"
+  },
+  {
+    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg",
+    caption: "Gill & Bunny on the muir — Loch Lomond stretching out behind 🐾"
+  },
+  {
+    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg",
+    caption: "The wild moorland view — unchanged for a thousand years 🌿"
+  },
+  {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg",
-    caption: "The ancient coffin road — Gill & Bunny walking where thousands walked before"
+    caption: "The ancient coffin road through the beech avenue"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg",
-    caption: "Ancient beech — moss-covered, 200-300 years old, a silent witness"
+    caption: "Ancient beech — moss-covered, 200-300 years old"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg",
