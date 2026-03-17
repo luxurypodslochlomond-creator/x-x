@@ -264,14 +264,17 @@ export default function PetSounds51Story() {
     setCurrent(clamped);
   }, [current]);
 
-  // Auto-advance
+  // Auto-advance — slower for reading
   useEffect(() => {
     clearInterval(autoTimer.current);
     if (current < SLIDES.length - 1) {
+      // More time per slide: 8-10 seconds depending on content
+      const slideDurations = [8500, 9500, 9000, 9500, 9000, 8000];
+      const duration = slideDurations[current] || 9000;
       autoTimer.current = setTimeout(() => {
         setDirection(1);
         setCurrent(c => c + 1);
-      }, 5000);
+      }, duration);
     }
     return () => clearTimeout(autoTimer.current);
   }, [current]);
