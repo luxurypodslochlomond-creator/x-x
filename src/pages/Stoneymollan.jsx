@@ -15,6 +15,10 @@ const IMAGES = [
     caption: "The wild moorland view — unchanged for a thousand years 🌿"
   },
   {
+    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg",
+    caption: "Bunny surveying his kingdom — Gill walking the ancient muir 🐾"
+  },
+  {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg",
     caption: "The ancient coffin road through the beech avenue"
   },
@@ -48,7 +52,7 @@ const HistorySection = ({ title, emoji, children, delay = 0 }) => (
     className="border border-green-500/30 bg-black/40 backdrop-blur-sm rounded-xl p-6 mb-6"
   >
     <h2 className="text-xl font-black text-green-400 mb-4 font-mono">{emoji} {title}</h2>
-    <div className="text-gray-200 space-y-3 leading-relaxed">
+    <div className="text-gray-200 space-y-3 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
       {children}
     </div>
   </motion.div>
