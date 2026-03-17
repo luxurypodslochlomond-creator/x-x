@@ -491,6 +491,23 @@ const LayoutInner = ({ children, currentPageName }) => {
     return location.pathname === navPath;
   };
 
+  // Handle loading/error states
+  if (authError && !isLoading && !isPublicPage && !isOfflineOkPage) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-red-950 to-black text-white flex items-center justify-center p-6">
+        <div className="max-w-md text-center space-y-6">
+          <AlertTriangle className="w-16 h-16 text-red-400 mx-auto animate-pulse" />
+          <h1 className="text-3xl font-black text-red-300">Connection required</h1>
+          <button onClick={() => window.location.reload()} className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold">Retry</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading && !isPublicPage && !isOfflineOkPage) {
+    return <COOLASFUCK8BitLoading message="LOADING UF51" />;
+  }
+
   return (
       <AutoHealingShield>
       <COOLASFUCKErrorMonitor>
