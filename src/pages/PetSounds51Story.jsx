@@ -17,24 +17,24 @@ function createHealingTone(audioCtx) {
   return { osc, gain };
 }
 
-// Soft wave visualizer
+// Soft wave visualizer — smooth organic motion
 function WaveRings({ color = '#f97316', count = 5 }) {
   return (
     <div className="relative flex items-center justify-center w-40 h-40 mx-auto">
       {Array.from({ length: count }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full border"
+          className="absolute rounded-full border will-change-transform"
           style={{ borderColor: color, width: 30 + i * 22, height: 30 + i * 22 }}
-          animate={{ opacity: [0.7 - i * 0.12, 0, 0.7 - i * 0.12], scale: [1, 1.08, 1] }}
-          transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.4, ease: 'easeInOut' }}
+          animate={{ opacity: [0.7 - i * 0.12, 0.3, 0.7 - i * 0.12], scale: [1, 1.06, 1] }}
+          transition={{ duration: 4 + i * 0.6, repeat: Infinity, delay: i * 0.5, ease: 'easeInOut', repeatType: 'loop' }}
         />
       ))}
       <motion.div
-        className="w-8 h-8 rounded-full"
+        className="w-8 h-8 rounded-full will-change-transform"
         style={{ background: color }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.9, 1, 0.9] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        animate={{ scale: [1, 1.12, 1], opacity: [0.8, 1, 0.8] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', repeatType: 'loop' }}
       />
     </div>
   );
