@@ -231,18 +231,21 @@ const SLIDES = [
     render: () => (
       <div className="text-center space-y-8">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
-          <p className="text-xs font-mono tracking-[0.4em] text-orange-400/70 mb-5 uppercase">For them</p>
+          <p className="text-xs font-mono tracking-[0.4em] text-orange-400/70 mb-5 uppercase">They're not broken. They're hurting.</p>
           <h2 className="text-5xl font-black text-white leading-[1.05] tracking-tight">
             They give you<br />
             everything.
           </h2>
+          <p className="text-gray-400 text-base mt-4 max-w-sm mx-auto leading-relaxed">
+            Unconditional love. Loyalty. A heartbeat that syncs with yours. The least you can do is give them peace.
+          </p>
         </motion.div>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
           <WaveRings color="#f97316" count={5} />
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }}
           className="space-y-3">
-          <p className="text-gray-300 text-lg font-semibold">Give them this.</p>
+          <p className="text-gray-300 text-lg font-semibold">Leave it playing. They stay calm.</p>
           <Link
             to={createPageUrl("PetSounds51")}
             className="inline-block px-10 py-4 rounded-2xl font-black text-white text-lg tracking-wide"
@@ -250,7 +253,7 @@ const SLIDES = [
           >
             Start free today
           </Link>
-          <p className="text-gray-600 text-xs">Separation anxiety free. No card needed.</p>
+          <p className="text-gray-600 text-xs">Separation anxiety. Free forever. No card needed.</p>
         </motion.div>
       </div>
     )
