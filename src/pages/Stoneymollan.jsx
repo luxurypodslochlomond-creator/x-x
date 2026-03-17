@@ -16,32 +16,16 @@ const IMAGES = [
   }
 ];
 
+const LOGO_URL = "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/5c334744c_Logo-Icon-Dark.png";
+
 const StoneymollanLogo = ({ size = 60 }) => (
-  <svg width={size} height={size} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* Hill / Muir silhouette */}
-    <ellipse cx="40" cy="58" rx="35" ry="12" fill="#1a3a1a" opacity="0.6"/>
-    {/* Ancient tree left */}
-    <rect x="14" y="28" width="5" height="28" rx="2" fill="#4a7c59"/>
-    <ellipse cx="16" cy="26" rx="8" ry="10" fill="#2d5a27"/>
-    {/* Ancient tree right */}
-    <rect x="61" y="28" width="5" height="28" rx="2" fill="#4a7c59"/>
-    <ellipse cx="64" cy="26" rx="8" ry="10" fill="#2d5a27"/>
-    {/* Path going into distance */}
-    <path d="M28 68 L36 38 L44 38 L52 68 Z" fill="#8B7355" opacity="0.5"/>
-    {/* Loch Lomond water shimmer */}
-    <ellipse cx="40" cy="70" rx="20" ry="4" fill="#1a4a6e" opacity="0.7"/>
-    {/* Heart / soul center */}
-    <path d="M40 45 C40 45 35 40 35 37 C35 34.5 37 33 38.5 33 C39.3 33 40 33.8 40 33.8 C40 33.8 40.7 33 41.5 33 C43 33 45 34.5 45 37 C45 40 40 45 40 45Z" fill="#ec4899" opacity="0.9"/>
-    {/* Moss dots on trees */}
-    <circle cx="13" cy="35" r="2" fill="#22c55e" opacity="0.7"/>
-    <circle cx="18" cy="40" r="1.5" fill="#22c55e" opacity="0.6"/>
-    <circle cx="63" cy="33" r="2" fill="#22c55e" opacity="0.7"/>
-    <circle cx="60" cy="42" r="1.5" fill="#22c55e" opacity="0.6"/>
-    {/* Stars / light above */}
-    <circle cx="40" cy="10" r="1.5" fill="#ffffff" opacity="0.8"/>
-    <circle cx="28" cy="15" r="1" fill="#ffffff" opacity="0.6"/>
-    <circle cx="52" cy="13" r="1" fill="#ffffff" opacity="0.6"/>
-  </svg>
+  <img
+    src={LOGO_URL}
+    alt="Stoneymollan Logo"
+    width={size}
+    height={size}
+    style={{ objectFit: 'contain', filter: 'invert(1) sepia(1) saturate(3) hue-rotate(80deg) brightness(0.9)' }}
+  />
 );
 
 const HistorySection = ({ title, emoji, children, delay = 0 }) => (
