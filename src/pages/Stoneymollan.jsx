@@ -32,7 +32,7 @@ const IMAGES = [
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg",
-    caption: "Zaxi — ancient forest spirit 🐕🌿"
+    caption: "Bunny — ancient forest spirit 🐕🌿"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg",
