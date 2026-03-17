@@ -224,7 +224,7 @@ export default function AdminNatWestMortgage() {
 
             <div className="bg-green-900/20 border-2 border-green-500 rounded-lg p-4 mt-6">
               <p className="text-green-300 font-bold mb-2">✅ NO INITIATING LETTER NEEDED:</p>
-              <p className="text-white">They came to YOU in writing. Mr Dempsey confirmed the hold. You don't need to chase — just reply before 31/03/2026. Breathe. 🙏</p>
+              <p className="text-white">They came to YOU in writing. Mr Dempsey confirmed the hold. ~15 days left — no panic, but get your income update ready and reply before 31/03/2026. 🙏</p>
             </div>
           </CardContent>
         </Card>
