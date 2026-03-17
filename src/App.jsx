@@ -16,6 +16,7 @@ import CB51TermsPage from './pages/CB51Terms';
 import CB51PrivacyPage from './pages/CB51Privacy';
 import StoneymollanPage from './pages/Stoneymollan';
 import PetSounds51ResearchOutreach from './pages/PetSounds51ResearchOutreach';
+import PetSounds51 from './pages/PetSounds51';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -74,6 +75,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51Privacy" element={<CB51PrivacyPage />} />
       <Route path="/Stoneymollan" element={<LayoutWrapper currentPageName="Stoneymollan"><StoneymollanPage /></LayoutWrapper>} />
       <Route path="/PetSounds51ResearchOutreach" element={<LayoutWrapper currentPageName="PetSounds51ResearchOutreach"><PetSounds51ResearchOutreach /></LayoutWrapper>} />
+      <Route path="/PetSounds51" element={<LayoutWrapper currentPageName="PetSounds51"><PetSounds51 /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
