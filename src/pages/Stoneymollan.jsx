@@ -4,39 +4,48 @@ import { motion } from 'framer-motion';
 const IMAGES = [
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png",
-    caption: "Home — Stoneymollan, standing in the golden muir 🏠🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+    caption: "Home — Stoneymollan, standing in the golden muir",
+    subtitle: "Golden light across ancient moorland"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg",
-    caption: "Gill on the resting stone — where coffins rested for 800 years 🪨"
+    caption: "The resting stone",
+    subtitle: "Where coffins rested for eight centuries"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg",
-    caption: "Gill & Bunny on the muir — Loch Lomond stretching out behind 🐾"
+    caption: "Gill and Bunny on the muir",
+    subtitle: "Loch Lomond stretching into the distance"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg",
-    caption: "The wild moorland view — unchanged for a thousand years 🌿"
+    caption: "The wild moorland",
+    subtitle: "Unchanged landscape, thousand years deep"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg",
-    caption: "Bunny surveying her kingdom — Gill walking the ancient muir 🐾"
+    caption: "Surveying the kingdom",
+    subtitle: "Walking the path of ancient bearers"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg",
-    caption: "The ancient coffin road through the beech avenue"
+    caption: "The coffin road",
+    subtitle: "Beech avenue lined the sacred passage"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg",
-    caption: "Ancient beech — moss-covered, 200-300 years old"
+    caption: "Ancient beech",
+    subtitle: "Moss-covered witness to centuries"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg",
-    caption: "Bunny — ancient forest spirit 🐕🌿"
+    caption: "Forest spirit",
+    subtitle: "The old trees remember"
   },
   {
     url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg",
-    caption: "Looking up through the cathedral of trees"
+    caption: "Cathedral of trees",
+    subtitle: "Looking up through living history"
   }
 ];
 
@@ -68,6 +77,15 @@ const HistorySection = ({ title, emoji, children, delay = 0 }) => (
 
 export default function Stoneymollan() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const handleCarouselNav = (direction) => {
+    if (direction === 'next') {
+      setCarouselIndex((carouselIndex + 1) % IMAGES.length);
+    } else {
+      setCarouselIndex((carouselIndex - 1 + IMAGES.length) % IMAGES.length);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#050f05] via-[#0a1a0a] to-[#050f05] text-white">
@@ -115,31 +133,92 @@ export default function Stoneymollan() {
             transition={{ delay: 0.7 }}
             className="text-gray-400 text-sm font-mono"
           >
-            🏴󠁧󠁢󠁳󠁣󠁴󠁿 1000 years of Scottish history beneath your feet
+            1000 years of Scottish history beneath your feet
           </motion.p>
         </div>
       </div>
 
-      {/* PHOTOS */}
-      <div className="max-w-3xl mx-auto px-6 mb-12">
-        <div className="grid grid-cols-3 gap-3">
+      {/* CAROUSEL - MOBILE & DESKTOP */}
+      <div className="max-w-5xl mx-auto px-4 md:px-6 mb-16">
+        {/* MAIN CAROUSEL */}
+        <div className="relative rounded-2xl overflow-hidden border border-green-500/20 mb-8">
+          <motion.div
+            key={carouselIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="relative"
+            style={{ aspectRatio: '16/10' }}
+          >
+            <img 
+              src={IMAGES[carouselIndex].url} 
+              alt={IMAGES[carouselIndex].caption}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            
+            {/* CAPTION OVERLAY */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-2">
+                  {IMAGES[carouselIndex].caption}
+                </h3>
+                <p className="text-green-300/80 text-sm md:text-base">
+                  {IMAGES[carouselIndex].subtitle}
+                </p>
+              </motion.div>
+            </div>
+
+            {/* COUNTER */}
+            <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full border border-green-500/30">
+              <span className="text-green-400 text-xs font-mono">
+                {String(carouselIndex + 1).padStart(2, '0')} / {String(IMAGES.length).padStart(2, '0')}
+              </span>
+            </div>
+          </motion.div>
+
+          {/* NAV ARROWS */}
+          <button
+            onClick={() => handleCarouselNav('prev')}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/80 backdrop-blur-sm w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all border border-green-500/30 hover:border-green-500/60"
+          >
+            <span className="text-white text-xl">←</span>
+          </button>
+          <button
+            onClick={() => handleCarouselNav('next')}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/80 backdrop-blur-sm w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all border border-green-500/30 hover:border-green-500/60"
+          >
+            <span className="text-white text-xl">→</span>
+          </button>
+        </div>
+
+        {/* THUMBNAIL STRIP */}
+        <div className="flex gap-2 md:gap-3 overflow-x-auto pb-4 md:pb-2">
           {IMAGES.map((img, i) => (
-            <motion.div
+            <motion.button
               key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + i * 0.15 }}
-              onClick={() => setSelectedImage(img)}
-              className="cursor-pointer rounded-xl overflow-hidden border border-green-500/20 hover:border-green-500/60 transition-all"
-              style={{ aspectRatio: '3/4' }}
+              onClick={() => setCarouselIndex(i)}
+              className={`flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
+                i === carouselIndex 
+                  ? 'border-green-400 ring-2 ring-green-500/50' 
+                  : 'border-green-500/20 hover:border-green-500/40'
+              }`}
+              style={{ width: '80px', height: '80px', minWidth: '80px' }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <img src={img.url} alt={img.caption} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-            </motion.div>
+              <img 
+                src={img.url} 
+                alt={img.caption}
+                className="w-full h-full object-cover"
+              />
+            </motion.button>
           ))}
         </div>
-        <p className="text-center text-green-400/60 text-xs mt-3 font-mono italic">
-          📸 Photographed March 17th, 2026 — John Muir Way
-        </p>
       </div>
 
       {/* HISTORY */}
@@ -201,19 +280,7 @@ export default function Stoneymollan() {
         </motion.div>
       </div>
 
-      {/* LIGHTBOX */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="max-w-2xl w-full">
-            <img src={selectedImage.url} alt={selectedImage.caption} className="w-full rounded-xl" />
-            <p className="text-center text-green-300 mt-4 text-sm italic">{selectedImage.caption}</p>
-            <p className="text-center text-gray-500 text-xs mt-2">Tap to close</p>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
