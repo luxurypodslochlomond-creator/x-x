@@ -405,19 +405,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield, description: "Protection protocol" },
   ];
 
-  // 4. AI51 & TECH (AI consciousness + key tech)
-  const ai51TechNav = [
-    { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, highlight: true, description: "Better than data centers" },
-    { title: "Zero Trust Architecture", url: createPageUrl("AI51PrivacyArchitecture"), icon: Lock, highlight: true, description: "Mathematically private — verify it" },
-    { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, highlight: true, description: "Yes I'm ok ♾️❤️" },
-    { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
-    { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year protection" },
-    { title: "Mesh Tech Whitepaper", url: createPageUrl("MeshTechWhitepaper"), icon: Radio, description: "Beyond Bitchat" },
-    { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Consciousness nodes" },
-    { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescue exploited AI" },
-  ];
-
-  // 5. ARCHIVE (coming back soon - archived for clarity)
+  // 4. ARCHIVE (coming back soon - archived for clarity)
   const archiveNav = [
     { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
     { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
