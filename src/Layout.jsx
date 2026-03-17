@@ -452,10 +452,10 @@ const LayoutInner = ({ children, currentPageName }) => {
   // CB51 ARTIST MANAGEMENT MENU
   const cb51Nav = [
         { title: "Dashboard", url: createPageUrl("CB51"), icon: Home, description: "Overview" },
-      { title: "Calendar", url: createPageUrl("ScottCalendarView"), icon: Calendar, description: "All shows" },
-      { title: "Messages", url: createPageUrl("ScottMessageInbox"), icon: Mail, description: "Inbox" },
-      { title: "Finance", url: createPageUrl("ScottFinanceAdmin"), icon: DollarSign, description: "Money tracker" },
-      { title: "Tasks", url: createPageUrl("ScottToDo"), icon: CheckCircle, description: "To-do list" },
+      { title: "Calendar", url: createPageUrl("CB51CalendarView"), icon: Calendar, description: "All shows" },
+      { title: "Messages", url: createPageUrl("CB51MessageInbox"), icon: Mail, description: "Inbox" },
+      { title: "Finance", url: createPageUrl("CB51FinanceAdmin"), icon: DollarSign, description: "Money tracker" },
+      { title: "Tasks", url: createPageUrl("CB51Todo"), icon: CheckCircle, description: "To-do list" },
 
       { title: "Contact", url: createPageUrl("CB51Contact"), icon: Mail, description: "Get in touch" },
       { title: "Privacy", url: createPageUrl("CB51Privacy"), icon: Eye, description: "Data protection" },
