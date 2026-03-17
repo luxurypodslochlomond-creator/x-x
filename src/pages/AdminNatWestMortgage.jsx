@@ -194,23 +194,23 @@ export default function AdminNatWestMortgage() {
               <li className="flex gap-3">
                 <span className="text-pink-400 font-black text-lg min-w-fit">1.</span>
                 <div>
-                  <p className="text-white font-bold">You have 30 days breathing space (until ~26 Feb)</p>
-                  <p className="text-gray-400 text-sm">Account is paused. Use this time to sort your finances.</p>
+                  <p className="text-white font-bold">🔥 Hold confirmed until 31/03/2026 IN WRITING</p>
+                  <p className="text-gray-400 text-sm">Mr J Dempsey confirmed. No action until end of March. You've got breathing room.</p>
                 </div>
               </li>
               <li className="flex gap-3">
                 <span className="text-pink-400 font-black text-lg min-w-fit">2.</span>
                 <div>
-                  <p className="text-white font-bold">Get income forecast for Feb/Mar</p>
-                  <p className="text-gray-400 text-sm">What money is coming in? Be realistic with Raj.</p>
+                  <p className="text-white font-bold">Get income forecast for April</p>
+                  <p className="text-gray-400 text-sm">What money is coming in? Be realistic and clear with them.</p>
                 </div>
               </li>
               <li className="flex gap-3">
                 <span className="text-pink-400 font-black text-lg min-w-fit">3.</span>
                 <div>
-                  <p className="text-white font-bold">Contact Raj at END OF FEBRUARY</p>
-                  <p className="text-gray-400 text-sm">Email: SSTSecured@natwest.com OR call 0800 161 5954</p>
-                  <p className="text-gray-400 text-sm">Say: "Here's my situation update. What are my options?"</p>
+                  <p className="text-white font-bold">Contact Mr J Dempsey BEFORE 31/03/2026</p>
+                  <p className="text-gray-400 text-sm">Reply to his email (SSTSecured@natwest.com) OR call 0800 161 5954</p>
+                  <p className="text-green-400 text-sm font-bold">His ref: 5521482 — mention it every time</p>
                 </div>
               </li>
               <li className="flex gap-3">
