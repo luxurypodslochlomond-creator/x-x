@@ -304,7 +304,6 @@ export default function PetSounds51() {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
                           {ItemIcon && <ItemIcon size={18} style={{ color: item.color, flexShrink: 0 }} />}
-                          <p className="text-xs font-bold" style={{ color: '#a89870' }}>{item.hz}</p>
                           {isFree && <span className="text-xs font-black" style={{ color: '#8aab3a' }}>FREE</span>}
                         </div>
                         {isPremium
