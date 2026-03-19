@@ -108,12 +108,12 @@ export default function PS51Paywall({ onClose }) {
            disabled={loading}
            className="w-full py-5 rounded-2xl font-black text-xl text-black transition-all active:scale-95 mb-3 flex items-center justify-center gap-2"
            style={{
-             background: loading ? '#374151' : 'linear-gradient(135deg, #f59e0b, #f97316)',
-             boxShadow: loading ? 'none' : '0 8px 40px rgba(245,158,11,0.35)',
-             color: loading ? '#9ca3af' : '#000',
+             background: loading ? '#374151' : 'linear-gradient(135deg, #d4a017, #f59e0b)',
+             boxShadow: loading ? 'none' : '0 8px 40px rgba(212,160,23,0.4)',
+             color: loading ? '#9ca3af' : '#fff',
            }}
          >
-           <PS51Icons.Heart size={22} style={{ color: '#000' }} animate={true} />
+           <PS51Icons.Heart size={22} style={{ color: '#fff' }} animate={true} />
            <span>{loading ? 'Connecting...' : 'Start Now — £29.99/year'}</span>
          </button>
 
