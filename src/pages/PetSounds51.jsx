@@ -73,7 +73,7 @@ export default function PetSounds51() {
 
    useEffect(() => {
      // Set OG tags for social sharing
-     document.title = 'PetSounds51 • Healing frequencies for anxious pets';
+     document.title = 'PetSounds51 • Science-backed calm for anxious pets';
 
      const setMeta = (property, content) => {
        let el = document.querySelector(`meta[property="${property}"]`);
