@@ -172,7 +172,7 @@ export default function PetSounds51() {
           Slow-tempo, species-tuned psychoacoustic audio — backed by real peer-reviewed research. Leave it playing. Your pet stays calm.
         </p>
         <p className="text-xs max-w-lg mx-auto leading-relaxed mb-4" style={{ color: '#8aab3a' }}>
-          Queen's University Belfast · Through a Dog's Ear (iCalmPet) · Pet Acoustics (Janet Marlow) · Frontiers in Veterinary Science 2025. No fake numbers. Just what actually works.
+          Built on published, peer-reviewed research into animal acoustics and behaviour. No fake numbers. Just what actually works.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
         <button onClick={() => handleSelect('separation')} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>
