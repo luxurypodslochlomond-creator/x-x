@@ -59,7 +59,7 @@ export default function PetSounds51Terms() {
         <div className="space-y-3 mb-10">
 
           <Section number={1} title="What This Service Is">
-            <p className="mb-3">PetSounds delivers specific sound frequency protocols — isochronic tones, carrier frequencies, and monaural beats — through your device's speaker. No headphones required. The protocols are based on peer-reviewed research (MIT, iCalmDog RCT, Glasgow, Edinburgh) and designed to support animal behavioural wellness.</p>
+            <p className="mb-3">PetSounds delivers specific sound frequency protocols — isochronic tones, carrier frequencies, and monaural beats — through your device's speaker. No headphones required. The protocols are based on peer-reviewed published research into animal acoustics and behavioural wellness.</p>
             <p>Think of this as complementary care — your vet is still the professional.</p>
           </Section>
 
