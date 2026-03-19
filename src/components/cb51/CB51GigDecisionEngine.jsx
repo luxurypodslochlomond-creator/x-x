@@ -26,7 +26,7 @@ async function analyseGigWithAI(gig, artistId) {
     // Parallel: fetch existing confirmed gigs + any calendar events for clash detection
     const [existingGigs, calendarEvents] = await Promise.all([
       base44.entities.GigOffer.filter({ artist_id: artistId, status: 'confirmed' }),
-      base44.entities.Event.filter({ artist_id: artistId }).catch(() => [])
+      base44.entities.CB51Event.filter({ artist_id: artistId }).catch(() => [])
     ]);
 
     // Build date clash context
