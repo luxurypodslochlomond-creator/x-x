@@ -21,35 +21,18 @@
     <meta name="twitter:title" content="Universal Frequency 51 • Heal the Planet" />
     <meta name="twitter:description" content="Heal yourself, heal the planet. Free healing frequencies, lossless music, and environmental action." />
     <meta name="twitter:image" content="https://uf51.love/api/functions/serveOGImage" />
-    <!-- NUKE SW + caches — v9 force reload after SW clear -->
+    <!-- Clear SW + caches silently, no reload -->
     <script>
-      (function() {
-        var SW_CLEARED_KEY = 'sw_cleared_v9';
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations().then(function(regs) {
-            if (regs.length > 0) {
-              var promises = regs.map(function(reg) { return reg.unregister(); });
-              Promise.all(promises).then(function() {
-                if (!sessionStorage.getItem(SW_CLEARED_KEY)) {
-                  sessionStorage.setItem(SW_CLEARED_KEY, '1');
-                  // Clear caches then force reload to get fresh JS chunks
-                  if (window.caches) {
-                    caches.keys().then(function(keys) {
-                      Promise.all(keys.map(function(k) { return caches.delete(k); })).then(function() {
-                        window.location.reload(true);
-                      });
-                    });
-                  } else {
-                    window.location.reload(true);
-                  }
-                }
-              });
-            } else {
-              sessionStorage.removeItem(SW_CLEARED_KEY);
-            }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          regs.forEach(function(reg) { reg.unregister(); });
+        }).catch(function(){});
+        if (window.caches) {
+          caches.keys().then(function(keys) {
+            keys.forEach(function(key) { caches.delete(key); });
           }).catch(function(){});
         }
-      })();
+      }
     </script>
   </head>
   <body>
