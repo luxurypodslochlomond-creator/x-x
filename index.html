@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="manifest" href="/manifest.json" />
     <title>Universal Frequency 51 • Heal the Planet</title>
     <meta name="description" content="Heal yourself, heal the planet. Free healing frequencies, lossless music, and environmental action." />
     <!-- Open Graph / WhatsApp / iMessage -->
@@ -19,22 +18,22 @@
     <meta name="twitter:title" content="Universal Frequency 51 • Heal the Planet" />
     <meta name="twitter:description" content="Heal yourself, heal the planet. Free healing frequencies, lossless music, and environmental action." />
     <meta name="twitter:image" content="https://uf51.love/api/functions/serveOGImage" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- NUCLEAR SW CACHE CLEAR — runs before React, fixes white screen on iOS -->
+    <!-- NUKE SW + caches before anything renders — v5 -->
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(function(regs) {
           regs.forEach(function(reg) { reg.unregister(); });
-        });
-        if (window.caches) {
-          caches.keys().then(function(keys) {
-            keys.forEach(function(key) { caches.delete(key); });
-          });
-        }
+        }).catch(function(){});
+      }
+      if (window.caches) {
+        caches.keys().then(function(keys) {
+          keys.forEach(function(key) { caches.delete(key); });
+        }).catch(function(){});
       }
     </script>
+  </head>
+  <body>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
