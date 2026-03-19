@@ -20,7 +20,7 @@ export default function ScottArtistHome() {
 
     const { data: events = [] } = useQuery({
         queryKey: ['scottCalendarEvents', artistId],
-        queryFn: () => base44.entities.Event.filter({ artist_id: artistId }),
+        queryFn: () => base44.entities.CB51Event.filter({ artist_id: artistId }),
         enabled: !!artistId
     });
 

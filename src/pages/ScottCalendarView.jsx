@@ -37,12 +37,12 @@ export default function ScottCalendarView() {
 
     const { data: events = [] } = useQuery({
         queryKey: ['events', artistId],
-        queryFn: () => artistId ? base44.entities.Event.filter({ artist_id: artistId }) : [],
+        queryFn: () => artistId ? base44.entities.CB51Event.filter({ artist_id: artistId }) : [],
         enabled: !!artistId
     });
 
     const createEventMutation = useMutation({
-        mutationFn: (eventData) => base44.entities.Event.create(eventData),
+        mutationFn: (eventData) => base44.entities.CB51Event.create(eventData),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['events'] });
             setNewEvent({ title: '', date: '', location: '' });
@@ -51,7 +51,7 @@ export default function ScottCalendarView() {
     });
 
     const deleteEventMutation = useMutation({
-        mutationFn: (id) => base44.entities.Event.delete(id),
+        mutationFn: (id) => base44.entities.CB51Event.delete(id),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['events'] })
     });
 
