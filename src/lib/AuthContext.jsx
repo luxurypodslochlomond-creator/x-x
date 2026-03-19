@@ -16,37 +16,23 @@ export const AuthProvider = ({ children }) => {
     checkAppState();
   }, []);
 
-  const checkAppState = async () => {
-    // Public app — skip public settings fetch, just check if user token exists
+  const checkAppState = () => {
+    // Public app — never block rendering. Resolve loading immediately.
     setIsLoadingPublicSettings(false);
-    if (appParams.token) {
-      await checkUserAuth();
-    } else {
-      setIsLoadingAuth(false);
-      setIsAuthenticated(false);
-    }
+    setIsLoadingAuth(false);
+    // Try to get user in the background, non-blocking
+    checkUserAuth();
   };
 
   const checkUserAuth = async () => {
     try {
-      // Now check if the user is authenticated
-      setIsLoadingAuth(true);
       const currentUser = await base44.auth.me();
       setUser(currentUser);
       setIsAuthenticated(true);
-      setIsLoadingAuth(false);
     } catch (error) {
-      console.error('User auth check failed:', error);
-      setIsLoadingAuth(false);
+      // Silently fail — public app, user is just not logged in
+      setUser(null);
       setIsAuthenticated(false);
-      
-      // If user auth fails, it might be an expired token
-      if (error.status === 401 || error.status === 403) {
-        setAuthError({
-          type: 'auth_required',
-          message: 'Authentication required'
-        });
-      }
     }
   };
 
