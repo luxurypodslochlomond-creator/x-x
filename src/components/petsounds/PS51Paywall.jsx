@@ -106,7 +106,7 @@ export default function PS51Paywall({ onClose }) {
          <button
            onClick={handleStart}
            disabled={loading}
-           className="w-full py-5 rounded-2xl font-black text-xl text-black transition-all active:scale-95 mb-3 flex items-center justify-center gap-2"
+           className="w-full py-5 rounded-2xl font-black text-xl text-white transition-all active:scale-95 mb-3 flex items-center justify-center gap-2"
            style={{
              background: loading ? '#374151' : 'linear-gradient(135deg, #d4a017, #f59e0b)',
              boxShadow: loading ? 'none' : '0 8px 40px rgba(212,160,23,0.4)',
