@@ -314,22 +314,7 @@ export default function PetSounds51() {
                       </div>
                       <p className="font-black mb-1 text-sm" style={{ color: '#e8d5a3' }}>{item.name}</p>
                       <p className="text-xs mb-2" style={{ color: '#a89870' }}>"{item.tagline}"</p>
-                      <p className="text-xs leading-snug" style={{ color: '#8aab3a' }}>
-                        {item.key === 'separation' && 'iCalmDog RCT: 73% reduction in destructive behavior. Used by 200+ vets globally.'}
-                        {item.key === 'thunderstorm' && 'MIT research: 40Hz gamma cuts fear neuron activation by 68%. Peer-reviewed Nature 2021.'}
-                        {item.key === 'vet_fear' && 'Glasgow study: 528Hz reduced vet-visit cortisol by 54%. Safe alternative to sedation.'}
-                        {item.key === 'night_anxiety' && 'Edinburgh trial: Delta 4Hz improved sleep onset by 61% in shelter dogs. No drowsiness.'}
-                        {item.key === 'rescue_trauma' && 'Proven in 6-week rescue programs: 81% improvement in social reintegration. PTSD pathway reset.'}
-                        {item.key === 'grief' && 'Oxytocin study: 639Hz increased social bonding hormones by 47%. Grief-processing frequency.'}
-                        {item.key === 'dementia' && '40Hz gamma (MIT protocol): Reversed cognitive markers in 8-week study. Reduces confusion by 52%.'}
-                        {item.key === 'hyperactive' && 'Alpha 10Hz bridging: Neural firing rate drops 45% in first 2 weeks. Sustainable calm.'}
-                        {item.key === 'arthritis' && '174Hz PEMF: Accelerates collagen synthesis. 56% pain reduction in first month.'}
-                        {item.key === 'recovery' && '528Hz clinical data: Wound healing 38% faster. Inflammation markers drop significantly.'}
-                        {item.key === 'pre_race' && 'Racing dogs study: Cortisol stays 49% lower. Performance metrics unchanged or improved.'}
-                        {item.key === 'post_race' && '174Hz + 528Hz combo: Muscle recovery cuts recovery time by 35%. Reduces soreness window.'}
-                        {item.key === 'captivity_stress' && '528Hz + 432Hz: Zoo animals show 67% increase in natural behaviors. Welfare gain documented.'}
-                        {item.key === 'training_recovery' && 'Working dogs: Soft tissue healing 29% faster. Inflammation markers drop by day 3.'}
-                      </p>
+                      <p className="text-xs leading-snug" style={{ color: '#8aab3a' }}>{item.desc}</p>
                     </button>
                   );
                 })}
