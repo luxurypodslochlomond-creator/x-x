@@ -398,15 +398,16 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
         c.fillRect(x, H - 10 - barH, barW * 0.7, barH);
       }
 
-      // Centre text
+      // Centre text — show species + session name, not raw Hz
+      const sp = SPECIES_PROFILES[species] || SPECIES_PROFILES.dog;
       c.fillStyle = freq.color;
       c.font = `bold ${Math.floor(W * 0.065)}px monospace`;
       c.textAlign = 'center';
       c.textBaseline = 'middle';
-      c.fillText(`${carrier} Hz`, cx, cy - 14);
-      c.font = `${Math.floor(W * 0.035)}px monospace`;
-      c.fillStyle = 'rgba(255,255,255,0.4)';
-      c.fillText(`+ ${beat} Hz binaural`, cx, cy + 16);
+      c.fillText(`${sp.emoji} ${sp.label}`, cx, cy - 14);
+      c.font = `${Math.floor(W * 0.032)}px monospace`;
+      c.fillStyle = 'rgba(255,255,255,0.35)';
+      c.fillText(sp.range, cx, cy + 16);
     };
 
     draw();
