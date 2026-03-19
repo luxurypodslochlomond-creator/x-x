@@ -95,8 +95,8 @@ export default function PetSounds51() {
        el.content = content;
      };
 
-     setMeta('og:title', 'PetSounds51 • Healing frequencies for anxious pets');
-     setMeta('og:description', 'Science-backed sound therapy. Try FREE for separation anxiety. £29.99/year for all protocols. Research from MIT, Glasgow, Edinburgh.');
+     setMeta('og:title', 'PetSounds51 • Science-backed calm for anxious pets');
+     setMeta('og:description', 'Slow-tempo, species-tuned audio that genuinely calms anxious pets. Peer-reviewed research. Try FREE. £29.99/year for all protocols.');
      setMeta('og:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
      setMeta('og:url', window.location.href);
      setMeta('og:type', 'website');
