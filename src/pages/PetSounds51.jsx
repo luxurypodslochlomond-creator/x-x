@@ -169,10 +169,10 @@ export default function PetSounds51() {
           Leave it playing. Your best friend stays calm.
         </p>
         <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed" style={{ color: '#a89870' }}>
-          Science-backed sound therapy for separation anxiety, stress, pain & healing — adaptive frequencies, real results. Through any speaker.
+          Slow-tempo, species-tuned psychoacoustic audio — backed by real peer-reviewed research. Leave it playing. Your pet stays calm.
         </p>
         <p className="text-xs max-w-lg mx-auto leading-relaxed mb-4" style={{ color: '#8aab3a' }}>
-          Every frequency engineered from peer-reviewed research (MIT, iCalmDog RCT, University of Glasgow & Edinburgh). Not trend-chasing. Built to work.
+          Queen's University Belfast · Through a Dog's Ear (iCalmPet) · Pet Acoustics (Janet Marlow) · Frontiers in Veterinary Science 2025. No fake numbers. Just what actually works.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
         <button onClick={() => handleSelect('separation')} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>
