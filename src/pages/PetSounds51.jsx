@@ -240,7 +240,7 @@ export default function PetSounds51() {
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
               <p className="font-bold mb-1" style={{ color: '#d4a017' }}>✅ Species hearing matters</p>
-              <p className="leading-relaxed">Dogs hear up to 65,000 Hz. Cats up to 79,000 Hz. Horses up to 33,000 Hz. Pet Acoustics (Janet Marlow, peer-reviewed) showed that removing species-specific agitating frequencies is more effective than generic "relaxing music". We tune each session to your pet's hearing profile.</p>
+              <p className="leading-relaxed">Dogs hear up to 65,000 Hz. Cats up to 79,000 Hz. Horses up to 33,000 Hz. Peer-reviewed research has shown that removing species-specific agitating frequencies is more effective than generic "relaxing music". We tune each session to your pet's hearing profile.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
               <p className="font-bold mb-1" style={{ color: '#8aab3a' }}>ℹ️ What we don't claim</p>
