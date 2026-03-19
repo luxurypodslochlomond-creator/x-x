@@ -9,6 +9,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   // </React.StrictMode>,
 )
 
+// Force unregister any cached service workers that may be serving stale broken builds
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(reg => reg.unregister());
+  });
+  caches.keys().then(keys => {
+    keys.forEach(key => caches.delete(key));
+  });
+}
+
 if (import.meta.hot) {
   import.meta.hot.on('vite:beforeUpdate', () => {
     window.parent?.postMessage({ type: 'sandbox:beforeUpdate' }, '*');
@@ -17,6 +27,3 @@ if (import.meta.hot) {
     window.parent?.postMessage({ type: 'sandbox:afterUpdate' }, '*');
   });
 }
-
-
-
