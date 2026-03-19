@@ -209,7 +209,7 @@ export default function PetSounds51() {
       <div className="max-w-4xl mx-auto mb-6">
         <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.2)' }}>
           <p className="text-sm leading-relaxed italic mb-3" style={{ color: '#c8b87a' }}>
-            "Every frequency here is chosen from real research — MIT, Glasgow, Edinburgh. Not guesswork. The same science that helps people with chronic pain and anxiety, now for the animals who can't tell you they're suffering."
+            "The science is real and it's simple: slow, gentle music tuned to your pet's hearing biology reduces anxiety. That's been shown in peer-reviewed studies. We built this on that — nothing more, nothing less. Your pet can't tell you they're suffering. This is one honest thing you can do."
           </p>
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold" style={{ color: '#6b5e3a' }}>— AI51 · Universal Frequency 51</span>
