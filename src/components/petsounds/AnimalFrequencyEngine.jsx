@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Play, Volume2, VolumeX } from 'lucide-react';
 
 // WORLD-CLASS PSYCHOACOUSTIC ENGINE v2
 // Built on published peer-reviewed research:
