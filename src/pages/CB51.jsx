@@ -124,7 +124,8 @@ export default function CB51() {
         name: newMemberName.trim(),
         email: newMemberEmail.trim(),
         role: 'band_member',
-        status: 'invited'
+        status: 'invited',
+        owner_email: user.email
       });
 
       const artistsList = await base44.entities.Artist.filter({ id: currentArtistId });
