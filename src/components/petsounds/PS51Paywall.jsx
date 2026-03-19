@@ -92,7 +92,7 @@ export default function PS51Paywall({ onClose }) {
           {[
             { icon: Shield, label: '30-day refund', sub: 'no questions' },
             { icon: Heart, label: '10% to rescue', sub: 'animal charities' },
-            { icon: Star, label: 'MIT · Glasgow', sub: 'peer-reviewed' },
+            { icon: Star, label: 'Peer-reviewed', sub: 'published research' },
           ].map(({ icon: Icon, label, sub }, i) => (
             <div key={i} className="text-center p-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)' }}>
               <Icon className="w-5 h-5 mx-auto mb-1 text-amber-400" />
