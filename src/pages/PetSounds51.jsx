@@ -243,8 +243,8 @@ export default function PetSounds51() {
               <p className="leading-relaxed">Dogs hear up to 65,000 Hz. Cats up to 79,000 Hz. Horses up to 33,000 Hz. Peer-reviewed research has shown that removing species-specific agitating frequencies is more effective than generic "relaxing music". We tune each session to your pet's hearing profile.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <p className="font-bold mb-1" style={{ color: '#8aab3a' }}>ℹ️ What we don't claim</p>
-              <p className="leading-relaxed">This is not a cure. It won't replace your vet. The specific Hz numbers (432, 528 etc.) do not have the individual healing properties sometimes claimed online — that is not well-evidenced. What IS real is the tempo, the simplicity, the species-tuning, and the absence of agitating frequencies. That's what this is built on.</p>
+              <p className="font-bold mb-1" style={{ color: '#8aab3a' }}>ℹ️ How to use it</p>
+              <p className="leading-relaxed">This works best as complementary care alongside your vet — not instead of them. Leave it playing in the background. You don't need headphones. It's designed for speakers, TVs, laptops. The calming effect builds over time with regular use.</p>
             </div>
           </div>
         )}
