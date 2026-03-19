@@ -20,6 +20,7 @@ import CB51CalendarView from './pages/CB51CalendarView.jsx';
 import CB51MessageInbox from './pages/CB51MessageInbox.jsx';
 import CB51FinanceAdmin from './pages/CB51FinanceAdmin.jsx';
 import CB51Todo from './pages/CB51Todo.jsx';
+import ScottFinanceAdmin from './pages/ScottFinanceAdmin.jsx';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
