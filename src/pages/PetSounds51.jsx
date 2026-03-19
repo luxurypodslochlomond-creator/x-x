@@ -57,12 +57,19 @@ const PROTOCOLS = {
   }
 };
 
+const SPECIES = [
+  { key: 'dog', emoji: '🐕', label: 'Dog' },
+  { key: 'cat', emoji: '🐈', label: 'Cat' },
+  { key: 'horse', emoji: '🐴', label: 'Horse' },
+];
+
 export default function PetSounds51() {
    const [activeView, setActiveView] = useState('home');
    const [selectedProtocol, setSelectedProtocol] = useState(null);
    const [showScience, setShowScience] = useState(false);
    const [showPaywall, setShowPaywall] = useState(false);
    const [isSubscribed, setIsSubscribed] = useState(false);
+   const [selectedSpecies, setSelectedSpecies] = useState('dog');
 
    useEffect(() => {
      // Set OG tags for social sharing
