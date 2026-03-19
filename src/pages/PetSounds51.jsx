@@ -343,8 +343,8 @@ export default function PetSounds51() {
           <div className="flex justify-center mb-2">
             <PS51Icons.Science size={28} style={{ color: '#d4a017' }} />
           </div>
-          <p className="font-black text-sm mb-1" style={{ color: '#e8d5a3' }}>MIT · Glasgow</p>
-          <p className="text-xs" style={{ color: '#a89870' }}>peer-reviewed</p>
+          <p className="font-black text-sm mb-1" style={{ color: '#e8d5a3' }}>Peer-reviewed</p>
+          <p className="text-xs" style={{ color: '#a89870' }}>published research</p>
         </Link>
       </div>
 
