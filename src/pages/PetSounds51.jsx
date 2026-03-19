@@ -227,37 +227,51 @@ export default function PetSounds51() {
           className="w-full flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
-          <PS51Icons.Science size={20} style={{ color: '#8aab3a' }} />
-          <p className="font-black text-sm tracking-wide" style={{ color: '#8aab3a' }}>THE SCIENCE (MIT · iCalmDog · Glasgow · Edinburgh)</p>
-        </div>
+            <PS51Icons.Science size={20} style={{ color: '#8aab3a' }} />
+            <p className="font-black text-sm tracking-wide" style={{ color: '#8aab3a' }}>THE ACTUAL SCIENCE — what's real, what's not</p>
+          </div>
           {showScience ? <ChevronUp className="w-4 h-4" style={{ color: '#8aab3a' }} /> : <ChevronDown className="w-4 h-4" style={{ color: '#8aab3a' }} />}
         </button>
         {showScience && (
-          <div className="mt-4 grid sm:grid-cols-2 gap-3 text-xs" style={{ color: '#a89870' }}>
+          <div className="mt-4 space-y-3 text-xs" style={{ color: '#a89870' }}>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <div className="flex items-center gap-2 mb-1">
-                <PS51Icons.Science size={16} style={{ color: '#d4a017' }} />
-                <p className="font-bold" style={{ color: '#d4a017' }}>MIT — Nature 2019</p>
-              </div>
-              <p>40Hz gamma therapy proven to clear amyloid plaques in mice. Now in active Alzheimer's human trials.</p>
+              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>✅ What is genuinely proven</p>
+              <p className="leading-relaxed">Slow tempo music (under 60 BPM), simple compositions with no heavy percussion measurably calms dogs. Queen's University Belfast (2022) showed this reduces anxiety in acutely stressful situations. Through a Dog's Ear / iCalmPet RCT: over 70% of shelter dogs and 80% of home dogs showed fewer anxiety behaviours. BBC Future covered this in November 2025.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <div className="flex items-center gap-2 mb-1">
-                <Footprints size={16} style={{ color: '#d4a017' }} />
-                <p className="font-bold" style={{ color: '#d4a017' }}>iCalmDog RCT 2024</p>
-              </div>
-              <p>68% reduction in reactive behaviour using 10Hz alpha tones. Recommended by 200+ vets worldwide.</p>
+              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>✅ Species hearing matters</p>
+              <p className="leading-relaxed">Dogs hear up to 65,000 Hz. Cats up to 79,000 Hz. Horses up to 33,000 Hz. Pet Acoustics (Janet Marlow, peer-reviewed) showed that removing species-specific agitating frequencies is more effective than generic "relaxing music". We tune each session to your pet's hearing profile.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>University of Glasgow</p>
-              <p>Music therapy reduced shelter dog cortisol by 42%. Most-cited animal audio welfare study in Europe.</p>
-            </div>
-            <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <p className="font-bold mb-1" style={{ color: '#d4a017' }}>University of Edinburgh</p>
-              <p>40Hz gamma slowed canine cognitive decline in 6-week trial. 1 in 3 UK dogs has noise phobia.</p>
+              <p className="font-bold mb-1" style={{ color: '#8aab3a' }}>ℹ️ What we don't claim</p>
+              <p className="leading-relaxed">This is not a cure. It won't replace your vet. The specific Hz numbers (432, 528 etc.) do not have the individual healing properties sometimes claimed online — that is not well-evidenced. What IS real is the tempo, the simplicity, the species-tuning, and the absence of agitating frequencies. That's what this is built on.</p>
             </div>
           </div>
         )}
+      </div>
+
+      {/* SPECIES SELECTOR */}
+      <div className="max-w-4xl mx-auto mb-8">
+        <p className="text-xs font-bold mb-3 text-center" style={{ color: '#a89870' }}>WHO IS THIS FOR?</p>
+        <div className="flex gap-3 justify-center">
+          {SPECIES.map(s => (
+            <button
+              key={s.key}
+              onClick={() => setSelectedSpecies(s.key)}
+              className="flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition-all"
+              style={selectedSpecies === s.key
+                ? { background: 'rgba(212,160,23,0.2)', border: '2px solid #d4a017', color: '#d4a017', boxShadow: '0 0 15px rgba(212,160,23,0.2)' }
+                : { background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)', color: '#a89870' }
+              }
+            >
+              <span className="text-xl">{s.emoji}</span>
+              {s.label}
+            </button>
+          ))}
+        </div>
+        <p className="text-xs text-center mt-2" style={{ color: '#6b5e3a' }}>
+          Audio is tuned to {SPECIES.find(s => s.key === selectedSpecies)?.label.toLowerCase()} hearing biology
+        </p>
       </div>
 
 
