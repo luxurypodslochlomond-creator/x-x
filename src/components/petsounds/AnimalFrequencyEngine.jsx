@@ -494,7 +494,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
 
           <div className="flex items-center justify-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: freq.color }} />
-            <p className="text-xs font-mono text-gray-500">live · {freq.displayHz}</p>
+            <p className="text-xs font-mono text-gray-500">live · {freq.name} · {(SPECIES_PROFILES[species] || SPECIES_PROFILES.dog).label}</p>
           </div>
         </div>
       )}
