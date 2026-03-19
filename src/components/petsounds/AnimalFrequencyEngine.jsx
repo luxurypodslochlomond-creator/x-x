@@ -50,20 +50,22 @@ export { ANIMAL_PROTOCOLS, CATEGORIES };
 // 5. Sub-bass warmth (felt more than heard — grounds the nervous system)
 
 function buildBrownNoise(ctx) {
-  // Brown noise: warmer, softer than white — like distant thunder or wind
-  const bufferSize = 4096;
-  const processor = ctx.createScriptProcessor(bufferSize, 1, 1);
+  // Brown noise via AudioBuffer — warm, like distant rain
+  const sampleRate = ctx.sampleRate;
+  const bufferSize = sampleRate * 4; // 4 seconds, loops
+  const buffer = ctx.createBuffer(1, bufferSize, sampleRate);
+  const data = buffer.getChannelData(0);
   let lastOut = 0;
-  processor.onaudioprocess = (e) => {
-    const output = e.outputBuffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      output[i] = (lastOut + 0.02 * white) / 1.02;
-      lastOut = output[i];
-      output[i] *= 3.5;
-    }
-  };
-  return processor;
+  for (let i = 0; i < bufferSize; i++) {
+    const white = Math.random() * 2 - 1;
+    lastOut = (lastOut + 0.02 * white) / 1.02;
+    data[i] = lastOut * 3.5;
+  }
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
+  source.loop = true;
+  source.start();
+  return source;
 }
 
 function buildAudioGraph(ctx, freq, volume, species) {
