@@ -21,12 +21,12 @@ export default function CB51Todo() {
 
     const { data: tasks = [] } = useQuery({
         queryKey: ['cb51Tasks', artistId],
-        queryFn: () => artistId ? base44.entities.ScottTask.filter({ artist_id: artistId }) : [],
+        queryFn: () => artistId ? base44.entities.CB51Task.filter({ artist_id: artistId }) : [],
         enabled: !!artistId
     });
 
     const createTaskMutation = useMutation({
-        mutationFn: (taskData) => base44.entities.ScottTask.create(taskData),
+        mutationFn: (taskData) => base44.entities.CB51Task.create(taskData),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['cb51Tasks'] });
             setNewTask({ title: '', responsible_name: '', deadline: '' });
@@ -35,12 +35,12 @@ export default function CB51Todo() {
     });
 
     const toggleTaskMutation = useMutation({
-        mutationFn: ({ id, status }) => base44.entities.ScottTask.update(id, { status: status === 'done' ? 'pending' : 'done' }),
+        mutationFn: ({ id, status }) => base44.entities.CB51Task.update(id, { status: status === 'done' ? 'pending' : 'done' }),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cb51Tasks'] })
     });
 
     const deleteTaskMutation = useMutation({
-        mutationFn: (id) => base44.entities.ScottTask.delete(id),
+        mutationFn: (id) => base44.entities.CB51Task.delete(id),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cb51Tasks'] })
     });
 
