@@ -18,21 +18,21 @@ const PROTOCOLS = {
     color: '#06b6d4',
     icon: 'Frequency',
     items: [
-      { key: 'separation', name: 'Separation Anxiety', tagline: "You've left. They're spiraling.", hz: '432 Hz', color: '#06b6d4', icon: 'Presence' },
-      { key: 'thunderstorm', name: 'Thunderstorm & Fireworks', tagline: 'The sky is attacking them.', hz: '40 Hz gamma', color: '#ec4899', icon: 'Science' },
-      { key: 'vet_fear', name: 'Vet & Car Anxiety', tagline: 'Even the word "vet" makes them shake.', hz: '528 Hz', color: '#a855f7', icon: 'Trust' },
-      { key: 'night_anxiety', name: "Night Anxiety / Can't Settle", tagline: '3am. Still pacing.', hz: 'Delta 4 Hz', color: '#6366f1', icon: 'Rescue' },
+      { key: 'separation', name: 'Separation Anxiety', tagline: "You've left. They're spiraling.", desc: 'Slow-tempo calming tones · proven to reduce anxious behaviour', color: '#06b6d4', icon: 'Presence' },
+      { key: 'thunderstorm', name: 'Thunderstorm & Fireworks', tagline: 'The sky is attacking them.', desc: 'Soft ambient audio to mask sudden loud sounds', color: '#ec4899', icon: 'Science' },
+      { key: 'vet_fear', name: 'Vet & Car Anxiety', tagline: 'Even the word "vet" makes them shake.', desc: 'Play before you leave — pre-emptive calm works better', color: '#a855f7', icon: 'Trust' },
+      { key: 'night_anxiety', name: "Night Anxiety / Can't Settle", tagline: '3am. Still pacing.', desc: 'Ultra-slow ambient for sleep onset', color: '#6366f1', icon: 'Rescue' },
     ]
   },
   mental: {
-    label: 'MENTAL HEALTH',
+    label: 'EMOTIONAL WELLBEING',
     color: '#ec4899',
     icon: 'AnimalCare',
     items: [
-      { key: 'rescue_trauma', name: 'Rescue Trauma & PTSD', tagline: "They've been through something. You can see it.", hz: '396 Hz theta', color: '#f59e0b', icon: 'Rescue' },
-      { key: 'grief', name: 'Grief & Depression', tagline: 'They lost their person. Or their friend.', hz: '639 Hz', color: '#ec4899', icon: 'Heart' },
-      { key: 'dementia', name: 'Cognitive Decline / Dementia', tagline: "They seem confused. It's heartbreaking.", hz: '40 Hz gamma', color: '#22c55e', icon: 'Science' },
-      { key: 'hyperactive', name: 'Hyperactivity & Reactivity', tagline: 'Will. Not. Calm. Down.', hz: 'Alpha 10 Hz', color: '#10b981', icon: 'Frequency' },
+      { key: 'rescue_trauma', name: 'Rescue Trauma', tagline: "They've been through something. You can see it.", desc: 'Warm, gentle tones for rebuilding trust over time', color: '#f59e0b', icon: 'Rescue' },
+      { key: 'grief', name: 'Grief & Loss', tagline: 'They lost their person. Or their companion.', desc: 'Consistent ambient companionship during adjustment', color: '#ec4899', icon: 'Heart' },
+      { key: 'dementia', name: 'Cognitive Decline', tagline: "They seem confused. It's heartbreaking.", desc: 'Familiar, steady tones — best used daily', color: '#22c55e', icon: 'Science' },
+      { key: 'hyperactive', name: 'Hyperactivity & Reactivity', tagline: 'Will. Not. Calm. Down.', desc: 'Under-60 BPM pacing to anchor an overactive system', color: '#10b981', icon: 'Frequency' },
     ]
   },
   pain: {
@@ -40,19 +40,19 @@ const PROTOCOLS = {
     color: '#f97316',
     icon: 'Trust',
     items: [
-      { key: 'arthritis', name: 'Arthritis & Joint Pain', tagline: 'You can see it in how they move.', hz: '174 Hz PEMF', color: '#f97316', icon: 'Paw' },
-      { key: 'recovery', name: 'Post-Surgery Recovery', tagline: 'Home from the vet. Needs to heal.', hz: '528 Hz', color: '#14b8a6', icon: 'Frequency' },
+      { key: 'arthritis', name: 'Arthritis & Mobility', tagline: 'You can see it in how they move.', desc: 'Reduces environmental stress that amplifies pain perception', color: '#f97316', icon: 'Paw' },
+      { key: 'recovery', name: 'Post-Surgery Rest', tagline: 'Home from the vet. Needs to heal.', desc: 'Calm sonic environment for recovery at home', color: '#14b8a6', icon: 'Frequency' },
     ]
   },
   sports: {
-    label: 'SPORTS & ZOO ANIMALS',
+    label: 'WORKING & ZOO ANIMALS',
     color: '#f59e0b',
     icon: 'Paw',
     items: [
-      { key: 'pre_race', name: 'Pre-Race Calm', tagline: 'Racehorses & greyhounds. Peak focus without panic.', hz: 'Alpha 10 Hz', color: '#f59e0b', icon: 'Presence' },
-      { key: 'post_race', name: 'Post-Race Recovery', tagline: 'Muscles, nerves, cortisol. All need to come down.', hz: '174 Hz PEMF', color: '#f97316', icon: 'Frequency' },
-      { key: 'captivity_stress', name: 'Captivity & Zoo Stress', tagline: "They weren't built for this. Help where we can.", hz: '528 Hz', color: '#22c55e', icon: 'Rescue' },
-      { key: 'training_recovery', name: 'Training Fatigue & Injury', tagline: 'Working animals pushed hard. They deserve care too.', hz: '285 Hz', color: '#14b8a6', icon: 'Paw' },
+      { key: 'pre_race', name: 'Pre-Race Calm', tagline: 'Racehorses & greyhounds. Focus, not panic.', desc: 'Alert-calm balance before high-stress events', color: '#f59e0b', icon: 'Presence' },
+      { key: 'post_race', name: 'Post-Race Recovery', tagline: 'Muscles, nerves, cortisol. All need to come down.', desc: 'Extended slow ambient for parasympathetic recovery', color: '#f97316', icon: 'Frequency' },
+      { key: 'captivity_stress', name: 'Captivity & Zoo Welfare', tagline: "They weren't built for this. Help where we can.", desc: 'Nature-mimicking ambient · used by some zoos already', color: '#22c55e', icon: 'Rescue' },
+      { key: 'training_fatigue', name: 'Working Animal Recovery', tagline: 'Pushed hard. They deserve care too.', desc: 'End-of-day recovery ambient for working animals', color: '#14b8a6', icon: 'Paw' },
     ]
   }
 };
