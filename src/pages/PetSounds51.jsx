@@ -236,7 +236,7 @@ export default function PetSounds51() {
           <div className="mt-4 space-y-3 text-xs" style={{ color: '#a89870' }}>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
               <p className="font-bold mb-1" style={{ color: '#d4a017' }}>✅ What is genuinely proven</p>
-              <p className="leading-relaxed">Slow tempo music (under 60 BPM), simple compositions with no heavy percussion measurably calms dogs. Queen's University Belfast (2022) showed this reduces anxiety in acutely stressful situations. Through a Dog's Ear / iCalmPet RCT: over 70% of shelter dogs and 80% of home dogs showed fewer anxiety behaviours. BBC Future covered this in November 2025.</p>
+              <p className="leading-relaxed">Slow tempo music (under 60 BPM), simple compositions with no heavy percussion measurably calms dogs. Published research has shown this reduces anxiety in acutely stressful situations — with studies finding over 70% of shelter dogs and 80% of home dogs showed fewer anxiety behaviours.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
               <p className="font-bold mb-1" style={{ color: '#d4a017' }}>✅ Species hearing matters</p>
