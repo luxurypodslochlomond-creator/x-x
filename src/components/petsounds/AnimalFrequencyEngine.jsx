@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Play, Volume2, VolumeX } from 'lucide-react';
 
-// WORLD-CLASS PSYCHOACOUSTIC ENGINE v2
+// WORLD-CLASS PSYCHOACOUSTIC ENGINE v3
 // Built on published peer-reviewed research:
 // - Slow tempo (50-60 BPM), simple compositions = measurably calming (QUB 2022)
 // - Species hearing profiles matter: dogs 65kHz, cats 79kHz, horses 33kHz
