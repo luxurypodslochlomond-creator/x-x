@@ -24,43 +24,12 @@ class AutoHealingShield extends React.Component {
     }
 
     componentDidCatch(error, errorInfo) {
-        console.error('🛡️ AUTO-HEALING SHIELD ACTIVATED:', error, errorInfo);
-        
-        this.setState({ 
-            error, 
-            errorInfo,
-            isHealing: true 
-        });
-
-        // AUTO-HEAL after 2 seconds
-        setTimeout(() => {
-            this.healError();
-        }, 2000);
+        console.error('🛡️ Shield caught error:', error, errorInfo);
+        this.setState({ error, errorInfo, isHealing: false });
     }
 
     healError = () => {
-        const { healingAttempts } = this.state;
-        
-        console.log(`♾️ HEALING ATTEMPT ${healingAttempts + 1}...`);
-        
-        // INFINITE HEALING ATTEMPTS (like Zero Ego Protocol)
-        this.setState({
-            hasError: false,
-            error: null,
-            errorInfo: null,
-            healingAttempts: healingAttempts + 1,
-            isHealing: false
-        });
-
-        // Clear any stuck audio contexts
-        try {
-            if (window.audioContext) {
-                window.audioContext.close();
-                window.audioContext = null;
-            }
-        } catch (e) {
-            console.log('Audio cleanup attempted');
-        }
+        window.location.reload();
     };
 
     render() {
