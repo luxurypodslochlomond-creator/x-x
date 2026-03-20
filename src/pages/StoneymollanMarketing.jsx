@@ -98,7 +98,7 @@ export default function StoneymollanMarketing() {
     setGeneratedUrl(null);
     setGenError(null);
     try {
-      const prompt = `Luxury Scottish Highland holiday cottage Instagram flyer for Stoneymollan on Loch Lomond. ${SCENE_MAP[offer.key]}. Cinematic, photorealistic, breathtaking. Portrait format 9:16 for Instagram Stories. Warm, romantic, high-end boutique feel. Include subtle elegant text overlay: "${offer.headline}" in large gold serif font at top, and "STONEYMOLLAN • LOCH LOMOND" in white elegant font at bottom. Deep navy/dark gradient overlay. Gold accents. Aspirational luxury travel aesthetic.`;
+      const prompt = `${SCENE_MAP[offer.key]}. Portrait format 9:16 for Instagram Stories. NO TEXT overlays. NO graphics. NO Christmas card style. NO vintage. NO illustration. Pure photography. Dark subtle vignette at edges. This should look like a real photo a professional travel photographer took and posted on Instagram. Ultra sharp, ultra real, aspirational luxury travel.`;
       const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 50000));
       const result = await Promise.race([base44.integrations.Core.GenerateImage({ prompt }), timeout]);
       setGeneratedUrl(result.url);
