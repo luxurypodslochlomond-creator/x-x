@@ -1,279 +1,237 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Download, Sparkles, RefreshCw, Image, Upload, X, Globe, Copy, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
+import { Copy, Check, Sparkles, RefreshCw, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+
+const OFFERS = [
+  { key: 'half_price', emoji: '🏷️', label: '2nd Night Half Price', headline: '2ND NIGHT HALF PRICE', tagline: 'Stay 2 nights — pay 1½. Limited availability.' },
+  { key: 'three_two', emoji: '🎁', label: '3 Nights for Price of 2', headline: '3 NIGHTS FOR THE PRICE OF 2', tagline: 'Three nights. Two prices. Pure magic.' },
+  { key: 'sauna', emoji: '🔥', label: 'Wood Fired Sauna & Hot Tub', headline: 'WOOD FIRED SAUNA & HOT TUB', tagline: 'Heat your soul. Cool in the loch. Heaven on earth.' },
+  { key: 'spring', emoji: '🌸', label: 'Spring Escape', headline: 'SPRING HIGHLAND ESCAPE', tagline: 'Bluebells, birdsong and Ben Lomond at your door.' },
+  { key: 'summer', emoji: '☀️', label: 'Summer on the Loch', headline: 'SUMMER ON LOCH LOMOND', tagline: 'Scotland at its most breathtaking. Book now.' },
+  { key: 'autumn', emoji: '🍂', label: 'Autumn Colours', headline: 'AUTUMN IN THE HIGHLANDS', tagline: 'Golden light. Still water. Absolute peace.' },
+  { key: 'christmas', emoji: '⛄', label: 'Christmas & New Year', headline: 'CHRISTMAS AT THE LOCH', tagline: 'Snow on the hills. Fire in the hearth. Magic in the air.' },
+  { key: 'lastminute', emoji: '⚡', label: 'Last Minute Deal', headline: 'LAST MINUTE AVAILABILITY', tagline: 'Grab it before it\'s gone. Loch Lomond is calling.' },
+];
 
 const LANGUAGES = [
-  { code: 'en', label: '🇬🇧 English' },
-  { code: 'de', label: '🇩🇪 Deutsch' },
-  { code: 'fr', label: '🇫🇷 Français' },
-  { code: 'nl', label: '🇳🇱 Nederlands' },
-  { code: 'es', label: '🇪🇸 Español' },
-  { code: 'it', label: '🇮🇹 Italiano' },
-  { code: 'sv', label: '🇸🇪 Svenska' },
-  { code: 'no', label: '🇳🇴 Norsk' },
+  { code: 'en', flag: '🇬🇧', name: 'English' },
+  { code: 'de', flag: '🇩🇪', name: 'Deutsch' },
+  { code: 'fr', flag: '🇫🇷', name: 'Français' },
+  { code: 'nl', flag: '🇳🇱', name: 'Nederlands' },
+  { code: 'es', flag: '🇪🇸', name: 'Español' },
+  { code: 'sv', flag: '🇸🇪', name: 'Svenska' },
 ];
 
-const LANG_TEXTS = {
-  en: { headline: "2ND NIGHT HALF PRICE", sub: "Loch Lomond • Scotland", cta: "Book Direct: overlochlomond.com", tagline: "Where the Highlands meet the Loch" },
-  de: { headline: "2. NACHT ZUM HALBEN PREIS", sub: "Loch Lomond • Schottland", cta: "Direkt buchen: overlochlomond.com", tagline: "Wo das Hochland den Loch trifft" },
-  fr: { headline: "2ÈME NUIT À MOITIÉ PRIX", sub: "Loch Lomond • Écosse", cta: "Réservez directement: overlochlomond.com", tagline: "Où les Highlands rencontrent le Loch" },
-  nl: { headline: "2E NACHT HALF PRIJS", sub: "Loch Lomond • Schotland", cta: "Direct boeken: overlochlomond.com", tagline: "Waar de Hooglanden het meer ontmoeten" },
-  es: { headline: "2ª NOCHE A MITAD DE PRECIO", sub: "Loch Lomond • Escocia", cta: "Reserva directa: overlochlomond.com", tagline: "Donde las Highlands encuentran el Loch" },
-  it: { headline: "2ª NOTTE A METÀ PREZZO", sub: "Loch Lomond • Scozia", cta: "Prenota diretto: overlochlomond.com", tagline: "Dove le Highlands incontrano il Loch" },
-  sv: { headline: "2:A NATTEN HALVA PRISET", sub: "Loch Lomond • Skottland", cta: "Boka direkt: overlochlomond.com", tagline: "Där Highlands möter sjön" },
-  no: { headline: "2. NATT TIL HALV PRIS", sub: "Loch Lomond • Skottland", cta: "Book direkte: overlochlomond.com", tagline: "Der Høylandet møter innsjøen" },
+const HASHTAGS = '#LochLomond #Scotland #HighlandCottage #Stoneymollan #HolidayCottage #VisitScotland #LuxuryTravel #ScottishHighlands #CottageLife #ScotlandIsBeautiful';
+
+const SCENE_MAP = {
+  half_price: "golden sunset over Loch Lomond, Ben Lomond reflected in perfectly still water, warm amber and gold light",
+  three_two: "misty magical morning at Loch Lomond, Highland mist rising from the water, ethereal atmosphere",
+  sauna: "wood fired outdoor sauna and hot tub beside Loch Lomond at dusk, steam rising, golden glow, stars appearing",
+  spring: "spring wildflowers and bluebells on the shores of Loch Lomond, fresh greens, soft morning light",
+  summer: "bright Scottish summer day, sparkling blue Loch Lomond, lush green hills, dramatic white clouds",
+  autumn: "autumn colours at Loch Lomond, rich golds and reds, dramatic moody sky, perfect reflections",
+  christmas: "winter snow at Loch Lomond, cosy stone cottage with warm amber lights glowing, frost, stars",
+  lastminute: "dramatic moody sunset over Loch Lomond, intense purple and orange sky, last light on the water",
 };
 
-const PRESETS = [
-  { label: "2nd Night Half Price", key: "half_price" },
-  { label: "3 Nights for Price of 2", key: "three_for_two" },
-  { label: "Spring Weekend Getaway", key: "spring" },
-  { label: "Summer Special", key: "summer" },
-  { label: "Autumn Escape", key: "autumn" },
-  { label: "Christmas & New Year", key: "christmas" },
-];
-
-function buildPrompt({ preset, headline, sub, cta, tagline, lang, uploadedImageUrl }) {
-  const sceneMap = {
-    half_price: "golden sunset over Loch Lomond, Ben Lomond reflected in still water, warm amber light, dramatic clouds",
-    three_for_two: "misty morning Loch Lomond, atmospheric Highland mist rising from the water, magical ethereal light",
-    spring: "spring bluebells and wildflowers on shores of Loch Lomond, fresh greens, soft morning light, snow-capped Ben Lomond",
-    summer: "bright Scottish summer day at Loch Lomond, sparkling deep blue water, lush green hills, dramatic white clouds",
-    autumn: "autumn colours at Loch Lomond, rich golds and reds, dramatic moody Highland sky, reflections in the water",
-    christmas: "Loch Lomond in winter snow, cosy stone cottage lights glowing warm amber, frost on the loch, stars in dark sky",
-  };
-
-  const scene = sceneMap[preset] || sceneMap.half_price;
-
-  const styleNote = uploadedImageUrl
-    ? "Use the provided reference photograph as the main image, enhance with dramatic lighting and luxury feel."
-    : `Photorealistic cinematic scene: ${scene}.`;
-
-  return `Luxury Scottish Highland holiday cottage Instagram flyer. ${styleNote}
-
-CRITICAL TEXT LAYOUT — bold elegant serif fonts (NOT monospace, NOT techy — warm, luxury, aspirational):
-- TOP: Property name "STONEYMOLLAN" in large gold elegant serif font
-- SUBTITLE: "${sub}" in white italic beneath
-- CENTER MAIN: "${headline}" in very large bold white or gold text, eye-catching
-- TAGLINE: "${tagline}" in smaller elegant white italic
-- BOTTOM: "${cta}" in clean white text with subtle gold underline
-
-Color palette: Deep navy/dark slate background gradient, gold accents (#D4AF37), white text. Luxury boutique Scottish holiday let aesthetic. NOT budget, NOT corporate — warm, romantic, breathtaking. Portrait format for Instagram Stories and Feed. Professional enough to print.`;
-}
-
 export default function StoneymollanMarketing() {
+  const [selectedOffer, setSelectedOffer] = useState(0);
+  const [lang, setLang] = useState('en');
+  const [copied, setCopied] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [generatedUrl, setGeneratedUrl] = useState(null);
-  const [selectedPreset, setSelectedPreset] = useState(0);
-  const [lang, setLang] = useState('en');
-  const [useCustom, setUseCustom] = useState(false);
-  const [customPrompt, setCustomPrompt] = useState('');
-  const [error, setError] = useState(null);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
-  const [uploadedPreview, setUploadedPreview] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const fileRef = useRef();
+  const [genError, setGenError] = useState(null);
+  const [showAllOffers, setShowAllOffers] = useState(false);
 
-  // Editable copy
-  const defaultTexts = LANG_TEXTS[lang] || LANG_TEXTS.en;
-  const [headline, setHeadline] = useState('');
-  const [sub, setSub] = useState('');
-  const [cta, setCta] = useState('');
-  const [tagline, setTagline] = useState('');
+  const offer = OFFERS[selectedOffer];
 
-  const getHeadline = () => headline || defaultTexts.headline;
-  const getSub = () => sub || defaultTexts.sub;
-  const getCta = () => cta || defaultTexts.cta;
-  const getTagline = () => tagline || defaultTexts.tagline;
-
-  const handleUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setUploading(true);
-    setUploadedPreview(URL.createObjectURL(file));
+  const buildCaption = async () => {
+    if (lang === 'en') return buildEnCaption();
     try {
-      const result = await base44.integrations.Core.UploadFile({ file });
-      setUploadedImageUrl(result.file_url);
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `Translate this Instagram caption for a luxury Scottish Highland holiday cottage to ${LANGUAGES.find(l => l.code === lang)?.name}. Keep the emojis. Keep the hashtags in English. Keep overlochlomond.com unchanged. Keep it natural and appealing, not robotic.\n\n${buildEnCaption()}`,
+      });
+      return result;
     } catch {
-      setError('Upload failed, try again');
-    } finally {
-      setUploading(false);
+      return buildEnCaption();
     }
   };
 
-  const generate = async () => {
+  const buildEnCaption = () => {
+    return `📍 Stoneymollan, Loch Lomond, Scotland 🏴󠁧󠁢󠁳󠁣󠁴󠁬󠁿\n\n${offer.emoji} ${offer.headline}\n\n${offer.tagline}\n\nAncient coffin road. Wood fired sauna. Cold loch dip. The most restorative place in Scotland.\n\n🔗 Book direct: www.overlochlomond.com\n📩 10-5@overlochlomond.com\n\n${HASHTAGS}`;
+  };
+
+  const [captionText, setCaptionText] = useState('');
+  const [captionLoading, setCaptionLoading] = useState(false);
+
+  const getCaption = async () => {
+    if (lang === 'en') {
+      setCaptionText(buildEnCaption());
+      return;
+    }
+    setCaptionLoading(true);
+    const text = await buildCaption();
+    setCaptionText(text);
+    setCaptionLoading(false);
+  };
+
+  // Auto-update caption when offer/lang changes
+  React.useEffect(() => {
+    setCaptionText(buildEnCaption());
+    setGeneratedUrl(null);
+  }, [selectedOffer]);
+
+  React.useEffect(() => {
+    getCaption();
+    setGeneratedUrl(null);
+  }, [lang, selectedOffer]);
+
+  const copyCaption = () => {
+    navigator.clipboard.writeText(captionText || buildEnCaption());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const generateImage = async () => {
     setGenerating(true);
     setGeneratedUrl(null);
-    setError(null);
+    setGenError(null);
     try {
-      let prompt = useCustom
-        ? customPrompt
-        : buildPrompt({
-            preset: PRESETS[selectedPreset].key,
-            headline: getHeadline(),
-            sub: getSub(),
-            cta: getCta(),
-            tagline: getTagline(),
-            lang,
-            uploadedImageUrl,
-          });
-
-      const opts = { prompt };
-      if (uploadedImageUrl) opts.existing_image_urls = [uploadedImageUrl];
-
-      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 45000));
-      const result = await Promise.race([base44.integrations.Core.GenerateImage(opts), timeoutPromise]);
+      const prompt = `Luxury Scottish Highland holiday cottage Instagram flyer for Stoneymollan on Loch Lomond. ${SCENE_MAP[offer.key]}. Cinematic, photorealistic, breathtaking. Portrait format 9:16 for Instagram Stories. Warm, romantic, high-end boutique feel. Include subtle elegant text overlay: "${offer.headline}" in large gold serif font at top, and "STONEYMOLLAN • LOCH LOMOND" in white elegant font at bottom. Deep navy/dark gradient overlay. Gold accents. Aspirational luxury travel aesthetic.`;
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 50000));
+      const result = await Promise.race([base44.integrations.Core.GenerateImage({ prompt }), timeout]);
       setGeneratedUrl(result.url);
-    } catch (err) {
-      setError(err?.message === 'Timeout' ? 'Took too long — please try again!' : 'Generation failed — try again!');
+    } catch (e) {
+      setGenError(e?.message === 'timeout' ? 'Took too long — please try again' : 'Generation failed — tap to retry');
     } finally {
       setGenerating(false);
     }
   };
 
-  const captionText = `📍 Stoneymollan, Loch Lomond, Scotland 🏴󠁧󠁢󠁳󠁣󠁴󠁬󠁿\n\n${getHeadline()} ✨\n\n${getTagline()}\n\n🔗 Book direct & save: www.overlochlomond.com\n\n#LochLomond #Scotland #HighlandCottage #ScottishHighlands #Stoneymollan #HolidayCottage #Scotland2025 #VisitScotland #LuxuryTravel #CottageLife`;
-
-  const copyCaption = () => {
-    navigator.clipboard.writeText(captionText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const visibleOffers = showAllOffers ? OFFERS : OFFERS.slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0d1a0d] to-[#0a0f1a] text-white p-4 md:p-6">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen text-white" style={{ background: 'linear-gradient(160deg, #0a0f1a 0%, #0d1a14 50%, #0a0f1a 100%)' }}>
+      <div className="max-w-lg mx-auto px-4 py-6">
 
         {/* Header */}
+        <div className="text-center mb-8">
+          <div className="text-4xl mb-2">🏴󠁧󠁢󠁳󠁣󠁴󠁬󠁿</div>
+          <h1 className="text-3xl font-black tracking-tight mb-1" style={{ color: '#D4AF37' }}>Stoneymollan</h1>
+          <p className="text-gray-400 text-sm">Loch Lomond • Ancient Coffin Road • Scotland</p>
+          <a href="https://www.overlochlomond.com" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-green-400 text-xs mt-1 hover:underline">
+            overlochlomond.com <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
+
+        {/* STEP 1 - Pick offer */}
         <div className="mb-6">
-          <div className="flex items-center gap-3 mb-1">
-            <Image className="w-7 h-7 text-green-400" />
-            <h1 className="text-2xl md:text-3xl font-black">Stoneymollan Flyer Generator</h1>
-          </div>
-          <p className="text-gray-400 text-sm">AI-powered Instagram & Facebook flyers • Direct bookings</p>
-          <a href="https://www.overlochlomond.com" target="_blank" rel="noopener noreferrer" className="text-green-400 text-sm hover:underline">overlochlomond.com</a>
-        </div>
-
-        {/* Upload your own photo */}
-        <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 mb-5">
-          <p className="text-cyan-300 font-bold text-sm mb-2">📸 Upload a Stoneymollan photo (recommended!)</p>
-          <p className="text-gray-400 text-xs mb-3">AI will use YOUR real photo + add the promo text overlay. Way more authentic than pure AI.</p>
-          {uploadedPreview ? (
-            <div className="relative inline-block">
-              <img src={uploadedPreview} alt="Uploaded" className="h-24 rounded-lg object-cover" />
-              <button onClick={() => { setUploadedPreview(null); setUploadedImageUrl(null); }} className="absolute -top-2 -right-2 bg-red-500 rounded-full p-0.5">
-                <X className="w-3 h-3" />
+          <p className="text-xs font-black tracking-widest text-gray-500 mb-3">STEP 1 — PICK YOUR OFFER</p>
+          <div className="grid grid-cols-2 gap-2">
+            {visibleOffers.map((o, i) => (
+              <button key={o.key} onClick={() => setSelectedOffer(i)}
+                className="p-3 rounded-xl border-2 text-left transition-all"
+                style={selectedOffer === i
+                  ? { borderColor: '#D4AF37', background: 'rgba(212,175,55,0.12)', boxShadow: '0 0 20px rgba(212,175,55,0.2)' }
+                  : { borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }
+                }>
+                <div className="text-2xl mb-1">{o.emoji}</div>
+                <div className="text-xs font-bold text-white leading-tight">{o.label}</div>
               </button>
-              {uploading && <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center"><RefreshCw className="w-5 h-5 animate-spin text-cyan-400" /></div>}
-            </div>
-          ) : (
-            <button onClick={() => fileRef.current?.click()} className="flex items-center gap-2 px-4 py-2 border border-cyan-500/40 rounded-lg text-cyan-300 text-sm hover:bg-cyan-500/10 transition-all">
-              <Upload className="w-4 h-4" /> Choose Photo
-            </button>
-          )}
-          <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleUpload} />
+            ))}
+          </div>
+          <button onClick={() => setShowAllOffers(!showAllOffers)}
+            className="w-full mt-2 py-2 text-xs text-gray-500 hover:text-gray-300 flex items-center justify-center gap-1 transition-colors">
+            {showAllOffers ? <><ChevronUp className="w-3 h-3" /> Show less</> : <><ChevronDown className="w-3 h-3" /> More offers</>}
+          </button>
         </div>
 
-        {/* Language */}
-        <div className="mb-5">
-          <p className="text-sm font-bold text-gray-300 mb-2 flex items-center gap-2"><Globe className="w-4 h-4" /> Language</p>
+        {/* STEP 2 - Language */}
+        <div className="mb-6">
+          <p className="text-xs font-black tracking-widest text-gray-500 mb-3">STEP 2 — LANGUAGE</p>
           <div className="flex flex-wrap gap-2">
             {LANGUAGES.map(l => (
-              <button key={l.code} onClick={() => { setLang(l.code); setHeadline(''); setSub(''); setCta(''); setTagline(''); }}
-                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all border ${lang === l.code ? 'border-green-500 bg-green-500/10 text-green-300' : 'border-white/10 text-gray-400 hover:border-white/30'}`}>
-                {l.label}
+              <button key={l.code} onClick={() => setLang(l.code)}
+                className="px-3 py-2 rounded-lg text-sm font-bold transition-all border"
+                style={lang === l.code
+                  ? { borderColor: '#D4AF37', background: 'rgba(212,175,55,0.12)', color: '#D4AF37' }
+                  : { borderColor: 'rgba(255,255,255,0.1)', color: '#9ca3af' }
+                }>
+                {l.flag} {l.name}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Preset */}
-        <div className="mb-5">
-          <p className="text-sm font-bold text-gray-300 mb-2">Promotion type</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {PRESETS.map((p, i) => (
-              <button key={i} onClick={() => { setSelectedPreset(i); setUseCustom(false); }}
-                className={`p-2.5 rounded-xl border-2 text-xs font-bold text-left transition-all ${!useCustom && selectedPreset === i ? 'border-green-500 bg-green-500/10 text-green-300' : 'border-white/10 text-gray-400 hover:border-white/30'}`}>
-                {p.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Editable copy */}
-        <div className="mb-5 bg-black/30 border border-white/10 rounded-xl p-4 space-y-3">
-          <p className="text-sm font-bold text-gray-300">✏️ Tweak the copy (leave blank to use default)</p>
-          <div>
-            <p className="text-xs text-gray-500 mb-1">Main headline</p>
-            <Input value={headline} onChange={e => setHeadline(e.target.value)} placeholder={defaultTexts.headline} className="bg-black/40 border-white/10 text-white placeholder-gray-600 text-sm" />
-          </div>
-          <div>
-            <p className="text-xs text-gray-500 mb-1">Tagline</p>
-            <Input value={tagline} onChange={e => setTagline(e.target.value)} placeholder={defaultTexts.tagline} className="bg-black/40 border-white/10 text-white placeholder-gray-600 text-sm" />
-          </div>
-          <div>
-            <p className="text-xs text-gray-500 mb-1">Call to action / booking link</p>
-            <Input value={cta} onChange={e => setCta(e.target.value)} placeholder={defaultTexts.cta} className="bg-black/40 border-white/10 text-white placeholder-gray-600 text-sm" />
-          </div>
-        </div>
-
-        {/* Custom prompt toggle */}
-        <div className="mb-5">
-          <button onClick={() => setUseCustom(!useCustom)}
-            className={`w-full p-3 rounded-xl border-2 text-sm font-bold text-left transition-all ${useCustom ? 'border-cyan-500 bg-cyan-500/10 text-cyan-300' : 'border-white/10 text-gray-400 hover:border-white/30'}`}>
-            🧠 Full custom AI prompt (advanced)
-          </button>
-          {useCustom && (
-            <Textarea value={customPrompt} onChange={e => setCustomPrompt(e.target.value)}
-              placeholder="Describe exactly what you want... e.g. 'Cosy Christmas fireplace, snow outside, Loch Lomond...'"
-              className="mt-2 bg-black/40 border-white/20 text-white placeholder-gray-600 min-h-[80px]" />
-          )}
-        </div>
-
-        {/* Generate */}
-        <Button onClick={generate} disabled={generating || uploading || (useCustom && !customPrompt.trim())}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-black text-lg py-6 mb-4">
-          {generating
-            ? <><RefreshCw className="w-5 h-5 mr-2 animate-spin" /> Generating... (10–15 seconds)</>
-            : <><Sparkles className="w-5 h-5 mr-2" /> Generate Flyer</>}
-        </Button>
-
-        {error && <p className="text-red-400 text-center mb-4 text-sm">{error}</p>}
-
-        {/* Result */}
-        {generatedUrl && (
-          <div className="bg-black/40 border border-green-500/30 rounded-2xl p-4 mb-6">
-            <img src={generatedUrl} alt="Generated flyer" className="w-full rounded-xl mb-4" />
-            <div className="flex gap-3 mb-4">
-              <a href={generatedUrl} download="stoneymollan-flyer.png" target="_blank" rel="noopener noreferrer" className="flex-1">
-                <Button className="w-full bg-green-600 hover:bg-green-700 font-bold">
-                  <Download className="w-4 h-4 mr-2" /> Download
-                </Button>
-              </a>
-              <Button onClick={generate} variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                <RefreshCw className="w-4 h-4 mr-2" /> Redo
-              </Button>
-            </div>
-            <p className="text-gray-500 text-xs text-center">Long press on mobile to save to camera roll</p>
-          </div>
-        )}
-
-        {/* Caption generator */}
-        <div className="bg-black/30 border border-white/10 rounded-xl p-4 mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-bold text-gray-300">📋 Instagram Caption (copy & paste)</p>
-            <button onClick={copyCaption} className="flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300">
+        {/* Caption - always ready */}
+        <div className="mb-6 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(212,175,55,0.3)', background: 'rgba(0,0,0,0.4)' }}>
+          <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
+            <p className="text-sm font-black" style={{ color: '#D4AF37' }}>📋 Instagram Caption</p>
+            <button onClick={copyCaption}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
+              style={copied
+                ? { background: 'rgba(34,197,94,0.2)', color: '#4ade80', border: '1px solid #4ade80' }
+                : { background: 'rgba(212,175,55,0.15)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.4)' }
+              }>
               {copied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
             </button>
           </div>
-          <pre className="text-gray-400 text-xs whitespace-pre-wrap font-sans leading-relaxed">{captionText}</pre>
+          <div className="px-4 py-3">
+            {captionLoading
+              ? <p className="text-gray-500 text-xs">Translating...</p>
+              : <pre className="text-gray-300 text-xs whitespace-pre-wrap leading-relaxed font-sans">{captionText || buildEnCaption()}</pre>
+            }
+          </div>
         </div>
 
-        <div className="text-center text-gray-600 text-xs pb-4">
-          Instagram: <a href="https://www.instagram.com/stoneymollanlochlomond" target="_blank" rel="noopener noreferrer" className="text-cyan-500 hover:underline">@stoneymollanlochlomond</a>
+        {/* STEP 3 - Generate Image */}
+        <div className="mb-6">
+          <p className="text-xs font-black tracking-widest text-gray-500 mb-3">STEP 3 — GENERATE AI FLYER IMAGE</p>
+          <p className="text-gray-500 text-xs mb-3">AI creates a stunning visual for your offer — takes ~20 seconds</p>
+
+          <button onClick={generateImage} disabled={generating}
+            className="w-full py-4 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2"
+            style={generating
+              ? { background: 'rgba(212,175,55,0.1)', border: '2px solid rgba(212,175,55,0.3)', color: 'rgba(212,175,55,0.5)' }
+              : { background: 'linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.1))', border: '2px solid #D4AF37', color: '#D4AF37', boxShadow: '0 0 20px rgba(212,175,55,0.15)' }
+            }>
+            {generating
+              ? <><RefreshCw className="w-5 h-5 animate-spin" /> Generating your flyer...</>
+              : <><Sparkles className="w-5 h-5" /> Generate Flyer Image</>
+            }
+          </button>
+
+          {genError && (
+            <p className="text-red-400 text-xs text-center mt-2">{genError}</p>
+          )}
+        </div>
+
+        {/* Generated image */}
+        {generatedUrl && (
+          <div className="mb-6 rounded-2xl overflow-hidden" style={{ border: '2px solid rgba(212,175,55,0.4)' }}>
+            <img src={generatedUrl} alt="Generated flyer" className="w-full" />
+            <div className="p-3 flex gap-2">
+              <a href={generatedUrl} download="stoneymollan-flyer.png" target="_blank" rel="noopener noreferrer"
+                className="flex-1 py-3 rounded-xl font-black text-sm text-center transition-all"
+                style={{ background: 'linear-gradient(135deg, #D4AF37, #b8962e)', color: '#000' }}>
+                ⬇️ Save to Camera Roll
+              </a>
+              <button onClick={generateImage}
+                className="px-4 py-3 rounded-xl font-bold text-sm border transition-all"
+                style={{ borderColor: 'rgba(212,175,55,0.4)', color: '#D4AF37' }}>
+                <RefreshCw className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="text-gray-600 text-xs text-center pb-3">Long press image to save on iPhone</p>
+          </div>
+        )}
+
+        {/* Footer */}
+        <div className="text-center pt-4 pb-8" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <p className="text-gray-600 text-xs mb-1">Instagram: <a href="https://www.instagram.com/stoneymollanlochlomond" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-300">@stoneymollanlochlomond</a></p>
+          <p className="text-gray-700 text-xs">📩 10-5@overlochlomond.com</p>
         </div>
       </div>
     </div>
