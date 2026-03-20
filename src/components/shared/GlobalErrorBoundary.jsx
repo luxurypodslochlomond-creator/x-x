@@ -14,20 +14,8 @@ class GlobalErrorBoundary extends React.Component {
         this.healingCheckInterval = null;
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // Start auto-reload when error happens
-        if (this.state.hasError && !prevState.hasError && !this.state.isNetworkError) {
-            this.healingCheckInterval = setInterval(() => {
-                console.log('♾️ Auto-healing: checking for fix...');
-                window.location.reload();
-            }, 10000);
-        }
-    }
-
     componentWillUnmount() {
-        if (this.healingCheckInterval) {
-            clearInterval(this.healingCheckInterval);
-        }
+        // nothing to clean up
     }
 
     static getDerivedStateFromError(error) {
