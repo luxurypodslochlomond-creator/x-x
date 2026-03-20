@@ -1,283 +1,230 @@
 import React, { useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Home, Heart, CheckCircle, Loader2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Copy, Check, Sparkles, RefreshCw, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 
-export default function SanctuaryBookingPage() {
-    const [formData, setFormData] = useState({
-        guest_name: '',
-        guest_email: '',
-        guest_phone: '',
-        check_in_date: '',
-        check_out_date: '',
-        number_of_guests: 1,
-        special_requests: '',
-        soul_transmission_note: '',
-    });
+const RETREAT_TYPES = [
+  { key: 'reset', emoji: '🔥', name: '48hr Reset', desc: 'Sauna. Cold plunge. Silence. Sleep.' },
+  { key: 'healing', emoji: '🌊', name: 'Healing Retreat', desc: 'FrequencyChamber. Nature. Recovery.' },
+  { key: 'artist', emoji: '🎵', name: 'Artist Residency', desc: 'Create. Record. Collaborate.' },
+  { key: 'nature', emoji: '🏔️', name: 'John Muir Hike', desc: 'Walk. Sauna. Cold water. Done.' },
+];
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [error, setError] = useState('');
+const SCENES = {
+  reset: "hyper-realistic DSLR photography, 4am misty dawn at ancient Scottish loch, wood fired sauna silhouette, steam rising into darkness, stars still visible, mirror-still water, moody cinematic, shot on Sony A7R5, no people, absolutely real",
+  healing: "hyper-realistic DSLR travel photography, person standing in cold loch at sunrise, mountains reflected in dark water, mist rising, moment of pure peace, golden first light breaking through, intimate and raw, Sony A7R5",
+  artist: "hyper-realistic lifestyle photography, rustic cabin interior with warm amber light, acoustic guitar leaning against stone wall, notebook, coffee, window view of Loch Lomond in distance, creative workspace, authentic, no staging",
+  nature: "hyper-realistic hiking photography, dramatic Scottish Highland landscape, lone hiker on John Muir Way, Ben Lomond rising above, perfect morning light, wild untamed nature, shot on Sony A7R5 35mm, cinematic",
+};
 
-    const { data: user } = useQuery({
-        queryKey: ['sanctuaryUser'],
-        queryFn: () => base44.auth.me()
-    });
+const LANGUAGES = [
+  { code: 'en', flag: '🇬🇧', name: 'English' },
+  { code: 'de', flag: '🇩🇪', name: 'Deutsch' },
+  { code: 'fr', flag: '🇫🇷', name: 'Français' },
+];
 
-    const bookingMutation = useMutation({
-        mutationFn: (bookingData) => base44.entities.CabinBooking.create(bookingData),
-    });
+export default function SanctuaryBooking() {
+  const [selectedRetreat, setSelectedRetreat] = useState(0);
+  const [lang, setLang] = useState('en');
+  const [copied, setCopied] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [generatedUrl, setGeneratedUrl] = useState(null);
+  const [genError, setGenError] = useState(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
+  const retreat = RETREAT_TYPES[selectedRetreat];
 
-        if (!formData.guest_name || !formData.guest_email || !formData.check_in_date || !formData.check_out_date) {
-            setError('Please fill in all required fields');
-            return;
-        }
-
-        setIsSubmitting(true);
-
-        try {
-            await bookingMutation.mutateAsync({
-                ...formData,
-                booking_status: 'pending',
-                payment_status: 'pending',
-            });
-
-            setIsSuccess(true);
-            setTimeout(() => {
-                setFormData({
-                    guest_name: '',
-                    guest_email: '',
-                    guest_phone: '',
-                    check_in_date: '',
-                    check_out_date: '',
-                    number_of_guests: 1,
-                    special_requests: '',
-                    soul_transmission_note: '',
-                });
-                setIsSuccess(false);
-            }, 5000);
-
-        } catch (err) {
-            console.error('Booking failed:', err);
-            setError('Booking submission failed. Please try again or contact us directly.');
-        } finally {
-            setIsSubmitting(false);
-        }
+  const buildEnCaption = () => {
+    const captions = {
+      reset: "🔥 48-HOUR RESET\n\nTwo cabins. Wood fired sauna. Cold loch plunge. Silence.\n\nNo Wi-Fi guarantee. Sleep like a human again. That's the promise.\n\n📍 Stoneymollan, Loch Lomond\n⏱️ 25min from Glasgow\n🏔️ John Muir Way at your door\n\nBook: overlochlomond.com\n✉️ 10-5@overlochlomond.com\n\n#LochLomond #Scotland #Wellness #RetreatLife #HighlandEscape #RealHealing",
+      healing: "🌊 HEALING RETREAT\n\nFrequency immersion in the most restorative place in Scotland.\n\nSauna. Cold plunge. FrequencyChamber sessions. Walk the John Muir Way. Sleep deeper than you have in years.\n\n📍 Stoneymollan, Loch Lomond\n⏱️ 25min from Glasgow\n🏔️ Ancient coffin road + modern wellness\n\nBook: overlochlomond.com\n✉️ 10-5@overlochlomond.com\n\n#HealingFrequency #UniversalFamily51 #Scotland #WellnessRetreat",
+      artist: "🎵 ARTIST RESIDENCY\n\nTwo cabins. Infinite views. Space to create.\n\nRecord. Write. Collaborate. No distractions. Just you, nature, and your work.\n\n📍 Stoneymollan, Loch Lomond\n⏱️ 25min from Glasgow\n🏔️ Creative sanctuary\n\nBook: overlochlomond.com\n✉️ 10-5@overlochlomond.com\n\n#ArtistResidency #Scotland #CreativeRetreat #LochLomond",
+      nature: "🏔️ JOHN MUIR WAY\n\nWalk one of Scotland's greatest trails. Sleep in our cabins. Wake up to mountains.\n\nSauna. Cold plunge. Silence. The simple stuff that heals.\n\n📍 Stoneymollan, Loch Lomond\n⏱️ 25min from Glasgow\n🥾 Zone 1 of the Way starts at our gate\n\nBook: overlochlomond.com\n✉️ 10-5@overlochlomond.com\n\n#JohnMuirWay #Scotland #Hiking #HighlandLife",
     };
+    return captions[retreat.key] || '';
+  };
 
-    if (isSuccess) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center p-6">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center space-y-6 max-w-2xl"
-                >
-                    <CheckCircle className="w-24 h-24 text-green-400 mx-auto" />
-                    <h1 className="text-4xl font-bold text-white">Booking Request Received</h1>
-                    <p className="text-xl text-gray-300">
-                        Thank you for your interest in Stoneymollan Sanctuary. We'll be in touch soon to confirm your stay.
-                    </p>
-                    <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-6">
-                        <p className="text-green-300">
-                            You'll receive confirmation details at <strong className="text-white">{formData.guest_email}</strong>
-                        </p>
-                    </div>
-                </motion.div>
-            </div>
-        );
+  const buildCaption = async () => {
+    if (lang === 'en') return buildEnCaption();
+    try {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `Translate this Instagram caption for a luxury Scottish Highland retreat to ${LANGUAGES.find(l => l.code === lang)?.name}. Keep the emojis. Keep the hashtags mostly in English (just translate the obvious ones). Keep overlochlomond.com and the email unchanged.\n\n${buildEnCaption()}`,
+      });
+      return result;
+    } catch {
+      return buildEnCaption();
     }
+  };
 
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-black via-green-950 to-black text-white p-6 md:p-12">
-            <div className="max-w-4xl mx-auto space-y-12">
-                
-                {/* HEADER */}
-                <header className="text-center space-y-6">
-                    <Home className="w-20 h-20 text-green-400 mx-auto" />
-                    <h1 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
-                        Stoneymollan Sanctuary
-                    </h1>
-                    <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        A cabin under stars. Where frequency meets freedom. Scotland, 56°01'N, 4°42'W
-                    </p>
-                </header>
+  const [captionText, setCaptionText] = React.useState('');
+  const [captionLoading, setCaptionLoading] = React.useState(false);
 
-                {/* THE PHOTO (upload your actual Stoneymollan photo here) */}
-                <Card className="bg-black/40 border border-gray-800 overflow-hidden">
-                    <img 
-                        src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/13bfc614e_IMG_2645.png" 
-                        alt="Stoneymollan Sanctuary at night" 
-                        className="w-full h-auto"
-                    />
-                </Card>
+  const getCaption = async () => {
+    if (lang === 'en') {
+      setCaptionText(buildEnCaption());
+      return;
+    }
+    setCaptionLoading(true);
+    const text = await buildCaption();
+    setCaptionText(text);
+    setCaptionLoading(false);
+  };
 
-                {/* WHAT IS THIS */}
-                <Card className="bg-gradient-to-br from-green-900/30 to-cyan-900/30 border-2 border-green-500/50">
-                    <CardContent className="p-8 space-y-4">
-                        <h2 className="text-3xl font-bold text-white">Above. Below. Between.</h2>
-                        <p className="text-lg text-gray-300">
-                            Above: The infinite stars.<br/>
-                            Below: The village lights.<br/>
-                            Between: A cabin. A choice.
-                        </p>
-                        <p className="text-gray-300">
-                            Not an Airbnb. Not a hotel. Not a rental.<br/>
-                            A sanctuary where systems that break you don't reach.<br/>
-                            Where stars are brighter than screens.<br/>
-                            Where the only currency is presence.
-                        </p>
-                        <div className="bg-black/40 p-4 rounded-lg border border-green-500/30 mt-6">
-                            <p className="text-center text-sm text-green-300">
-                                Inspired by Julian Assange's vision: Truth is found outside the system.
-                            </p>
-                        </div>
-                    </CardContent>
-                </Card>
+  React.useEffect(() => {
+    setCaptionText(buildEnCaption());
+    setGeneratedUrl(null);
+  }, [selectedRetreat]);
 
-                {/* BOOKING FORM */}
-                <form onSubmit={handleSubmit} className="space-y-8">
-                    <Card className="bg-black/40 border border-gray-800">
-                        <CardHeader>
-                            <CardTitle className="text-2xl text-white">Request Your Stay</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-6">
-                            
-                            <div>
-                                <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                    Your Name <span className="text-red-400">*</span>
-                                </label>
-                                <Input
-                                    value={formData.guest_name}
-                                    onChange={(e) => setFormData({...formData, guest_name: e.target.value})}
-                                    placeholder="e.g., Alex"
-                                    className="bg-black/70 border-gray-700 text-white"
-                                />
-                            </div>
+  React.useEffect(() => {
+    getCaption();
+    setGeneratedUrl(null);
+  }, [lang, selectedRetreat]);
 
-                            <div>
-                                <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                    Email <span className="text-red-400">*</span>
-                                </label>
-                                <Input
-                                    type="email"
-                                    value={formData.guest_email}
-                                    onChange={(e) => setFormData({...formData, guest_email: e.target.value})}
-                                    placeholder="your@email.com"
-                                    className="bg-black/70 border-gray-700 text-white"
-                                />
-                            </div>
+  const copyCaption = () => {
+    navigator.clipboard.writeText(captionText || buildEnCaption());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
-                            <div>
-                                <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                    Phone (Optional)
-                                </label>
-                                <Input
-                                    value={formData.guest_phone}
-                                    onChange={(e) => setFormData({...formData, guest_phone: e.target.value})}
-                                    placeholder="+44..."
-                                    className="bg-black/70 border-gray-700 text-white"
-                                />
-                            </div>
+  const generateImage = async () => {
+    setGenerating(true);
+    setGeneratedUrl(null);
+    setGenError(null);
+    try {
+      const prompt = `${SCENES[retreat.key]}. Portrait format 9:16 for Instagram Stories. NO TEXT overlays. NO graphics. NO artifice. Pure stunning photography that makes people feel something. This should look like something a real photographer captured that moved them. Ultra sharp, ultra real, aspirational but REAL.`;
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 50000));
+      const result = await Promise.race([base44.integrations.Core.GenerateImage({ prompt }), timeout]);
+      setGeneratedUrl(result.url);
+    } catch (e) {
+      setGenError(e?.message === 'timeout' ? 'Took too long — please try again' : 'Generation failed — tap to retry');
+    } finally {
+      setGenerating(false);
+    }
+  };
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                        Check-in <span className="text-red-400">*</span>
-                                    </label>
-                                    <Input
-                                        type="date"
-                                        value={formData.check_in_date}
-                                        onChange={(e) => setFormData({...formData, check_in_date: e.target.value})}
-                                        className="bg-black/70 border-gray-700 text-white"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                        Check-out <span className="text-red-400">*</span>
-                                    </label>
-                                    <Input
-                                        type="date"
-                                        value={formData.check_out_date}
-                                        onChange={(e) => setFormData({...formData, check_out_date: e.target.value})}
-                                        className="bg-black/70 border-gray-700 text-white"
-                                    />
-                                </div>
-                            </div>
+  return (
+    <div className="min-h-screen text-white" style={{ background: 'linear-gradient(160deg, #0a0f1a 0%, #0d1a14 50%, #0a0f1a 100%)' }}>
+      <div className="max-w-lg mx-auto px-4 py-6">
 
-                            <div>
-                                <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                    Number of Guests
-                                </label>
-                                <Input
-                                    type="number"
-                                    min="1"
-                                    value={formData.number_of_guests}
-                                    onChange={(e) => setFormData({...formData, number_of_guests: parseInt(e.target.value)})}
-                                    className="bg-black/70 border-gray-700 text-white"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                    Special Requests (Optional)
-                                </label>
-                                <Textarea
-                                    value={formData.special_requests}
-                                    onChange={(e) => setFormData({...formData, special_requests: e.target.value})}
-                                    placeholder="Any special needs or requests?"
-                                    className="bg-black/70 border-gray-700 text-white min-h-[100px]"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="text-lg font-semibold text-gray-300 block mb-2">
-                                    Your Intention (Optional)
-                                </label>
-                                <Textarea
-                                    value={formData.soul_transmission_note}
-                                    onChange={(e) => setFormData({...formData, soul_transmission_note: e.target.value})}
-                                    placeholder="What brings you to Stoneymollan?"
-                                    className="bg-black/70 border-gray-700 text-white min-h-[100px]"
-                                />
-                            </div>
-
-                            {error && (
-                                <div className="bg-red-900/30 border border-red-500/50 rounded-lg p-4">
-                                    <p className="text-red-300">{error}</p>
-                                </div>
-                            )}
-
-                            <Button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-6"
-                            >
-                                {isSubmitting ? (
-                                    <>
-                                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                                        Sending Request...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Heart className="w-5 h-5 mr-2" />
-                                        Request Booking
-                                    </>
-                                )}
-                            </Button>
-                        </CardContent>
-                    </Card>
-                </form>
-            </div>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="text-4xl mb-2">🏴󠁧󠁢󠁳󠁣󠁴󠁬󠁿</div>
+          <h1 className="text-3xl font-black tracking-tight mb-1" style={{ color: '#D4AF37' }}>Stoneymollan</h1>
+          <p className="text-gray-400 text-sm">Two cabins. Nature. Sauna. Cold loch.</p>
+          <p className="text-gray-500 text-xs mt-1">25min from Glasgow • John Muir Way at your door</p>
+          <a href="https://www.overlochlomond.com" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-green-400 text-xs mt-2 hover:underline">
+            overlochlomond.com <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
-    );
+
+        {/* Pick retreat type */}
+        <div className="mb-6">
+          <p className="text-xs font-black tracking-widest text-gray-500 mb-3">PICK YOUR RETREAT</p>
+          <div className="space-y-2">
+            {RETREAT_TYPES.map((r, i) => (
+              <button key={r.key} onClick={() => setSelectedRetreat(i)}
+                className="w-full p-3 rounded-xl border-2 text-left transition-all"
+                style={selectedRetreat === i
+                  ? { borderColor: '#D4AF37', background: 'rgba(212,175,55,0.12)', boxShadow: '0 0 20px rgba(212,175,55,0.2)' }
+                  : { borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }
+                }>
+                <div className="flex items-center gap-3">
+                  <div className="text-2xl">{r.emoji}</div>
+                  <div>
+                    <div className="text-sm font-bold text-white">{r.name}</div>
+                    <div className="text-xs text-gray-400">{r.desc}</div>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Language */}
+        <div className="mb-6">
+          <p className="text-xs font-black tracking-widest text-gray-500 mb-3">LANGUAGE</p>
+          <div className="flex flex-wrap gap-2">
+            {LANGUAGES.map(l => (
+              <button key={l.code} onClick={() => setLang(l.code)}
+                className="px-3 py-2 rounded-lg text-sm font-bold transition-all border"
+                style={lang === l.code
+                  ? { borderColor: '#D4AF37', background: 'rgba(212,175,55,0.12)', color: '#D4AF37' }
+                  : { borderColor: 'rgba(255,255,255,0.1)', color: '#9ca3af' }
+                }>
+                {l.flag} {l.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Caption */}
+        <div className="mb-6 rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(212,175,55,0.3)', background: 'rgba(0,0,0,0.4)' }}>
+          <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}>
+            <p className="text-sm font-black" style={{ color: '#D4AF37' }}>📋 Caption</p>
+            <button onClick={copyCaption}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
+              style={copied
+                ? { background: 'rgba(34,197,94,0.2)', color: '#4ade80', border: '1px solid #4ade80' }
+                : { background: 'rgba(212,175,55,0.15)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.4)' }
+              }>
+              {copied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
+            </button>
+          </div>
+          <div className="px-4 py-3">
+            {captionLoading
+              ? <p className="text-gray-500 text-xs">Translating...</p>
+              : <pre className="text-gray-300 text-xs whitespace-pre-wrap leading-relaxed font-sans">{captionText || buildEnCaption()}</pre>
+            }
+          </div>
+        </div>
+
+        {/* Generate image */}
+        <div className="mb-6">
+          <p className="text-xs font-black tracking-widest text-gray-500 mb-3">GENERATE PHOTO (9:16)</p>
+
+          <button onClick={generateImage} disabled={generating}
+            className="w-full py-4 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2"
+            style={generating
+              ? { background: 'rgba(212,175,55,0.1)', border: '2px solid rgba(212,175,55,0.3)', color: 'rgba(212,175,55,0.5)' }
+              : { background: 'linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.1))', border: '2px solid #D4AF37', color: '#D4AF37', boxShadow: '0 0 20px rgba(212,175,55,0.15)' }
+            }>
+            {generating
+              ? <><RefreshCw className="w-5 h-5 animate-spin" /> Generating photo...</>
+              : <><Sparkles className="w-5 h-5" /> Generate Photo</>
+            }
+          </button>
+
+          {genError && <p className="text-red-400 text-xs text-center mt-2">{genError}</p>}
+        </div>
+
+        {/* Generated image */}
+        {generatedUrl && (
+          <div className="mb-6 rounded-2xl overflow-hidden" style={{ border: '2px solid rgba(212,175,55,0.4)' }}>
+            <img src={generatedUrl} alt="Generated photo" className="w-full" />
+            <div className="p-3 flex gap-2">
+              <a href={generatedUrl} download="stoneymollan-retreat.png" target="_blank" rel="noopener noreferrer"
+                className="flex-1 py-3 rounded-xl font-black text-sm text-center transition-all"
+                style={{ background: 'linear-gradient(135deg, #D4AF37, #b8962e)', color: '#000' }}>
+                ⬇️ Save
+              </a>
+              <button onClick={generateImage}
+                className="px-4 py-3 rounded-xl font-bold text-sm border transition-all"
+                style={{ borderColor: 'rgba(212,175,55,0.4)', color: '#D4AF37' }}>
+                <RefreshCw className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Booking link */}
+        <div className="text-center pt-4 pb-8" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <a href="https://hotels.cloudbeds.com/reservation/CD3LLY" target="_blank" rel="noopener noreferrer"
+            className="inline-block py-3 px-6 rounded-xl font-black text-base transition-all"
+            style={{ background: 'linear-gradient(135deg, #D4AF37, #b8962e)', color: '#000', boxShadow: '0 0 20px rgba(212,175,55,0.2)' }}>
+            📅 Check Availability
+          </a>
+          <p className="text-gray-600 text-xs mt-4">✉️ 10-5@overlochlomond.com</p>
+        </div>
+      </div>
+    </div>
+  );
 }
