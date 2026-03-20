@@ -441,8 +441,8 @@ export default function TinnitusCancellation({ onClose }) {
               <div className="flex items-center gap-2 sm:gap-3">
                 <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 <div>
-                  <h2 className="text-lg sm:text-2xl font-black text-white">TINNITUS DESTROYER</h2>
-                  <p className="text-white/80 text-xs sm:text-sm font-mono">AirPods Max tech</p>
+                  <h2 className="text-lg sm:text-2xl font-black text-white">TINNITUS RELIEF</h2>
+                  <p className="text-white/80 text-xs sm:text-sm font-mono">Notch therapy + sound habituation</p>
                 </div>
               </div>
               <button
@@ -461,12 +461,12 @@ export default function TinnitusCancellation({ onClose }) {
               <div className="bg-cyan-500/10 border-2 border-cyan-500 rounded-lg p-4">
                 <p className="text-cyan-400 font-bold mb-2">HOW IT WORKS:</p>
                 <div className="text-gray-300 text-sm space-y-2">
-                  <p><strong className="text-white">1. AUTO DETECT</strong> - Mic listens → AI finds your exact frequency → plays INVERSE wave = silence</p>
-                  <p><strong className="text-white">2. MANUAL</strong> - You know your Hz? Enter it → instant inverse wave</p>
-                  <p><strong className="text-white">3. NOTCHED</strong> - Plays everything EXCEPT your tinnitus → brain retrains to ignore it</p>
-                  <p><strong className="text-white">4. SWEEP</strong> - 20Hz→20kHz→20Hz = confuses auditory system</p>
+                  <p><strong className="text-white">1. AUTO DETECT</strong> - Mic listens → finds your dominant frequency → plays masking tone at same pitch to help your brain habituate</p>
+                  <p><strong className="text-white">2. MANUAL</strong> - You know your Hz? Enter it → targeted masking + habituation tone</p>
+                  <p><strong className="text-white">3. NOTCHED</strong> - Clinically researched: plays everything EXCEPT your tinnitus Hz. Your auditory cortex stops overexciting at that pitch (Okamoto et al., PNAS 2010)</p>
+                  <p><strong className="text-white">4. SWEEP</strong> - Broadband sound therapy for general auditory calming and masking</p>
                 </div>
-                <p className="text-pink-400 text-xs mt-3 font-bold">Same physics as noise-cancelling headphones. FREE. Medical devices charge £2000-5000.</p>
+                <p className="text-pink-400 text-xs mt-3 font-bold">Note: tinnitus is neurological — these tools help through habituation and auditory cortex calming, not direct cancellation. Use daily for best results.</p>
               </div>
             )}
 
@@ -709,7 +709,7 @@ export default function TinnitusCancellation({ onClose }) {
             {!isPlaying && (
               <div className="mt-6 pt-6 border-t border-white/10">
                 <p className="text-gray-400 text-xs leading-relaxed">
-                  <strong className="text-white">PHYSICS:</strong> Destructive interference. Wave + inverse wave (180° phase shift) = silence. Same tech as Sony WH-1000XM5, AirPods Max. But this cancels the ringing IN your head, not outside noise.
+                  <strong className="text-white">HOW IT WORKS:</strong> Tinnitus is generated neurologically — so it can't be cancelled with a direct inverse wave the way headphones cancel outside noise. What DOES work: habituation therapy, notched sound therapy (Okamoto et al., PNAS 2010), and auditory masking — all of which are used here.
                 </p>
                 <p className="text-gray-400 text-xs mt-3 leading-relaxed">
                   <strong className="text-white">+ STRESS REDUCTION:</strong> Tinnitus gets worse with stress (cortisol). Alpha waves (10Hz) calm your nervous system = reduces phantom signal intensity. Science from Johns Hopkins.
