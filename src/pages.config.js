@@ -296,7 +296,6 @@ const SacredArchives = lazy(() => import('./pages/SacredArchives'));
 const SacredGeometry = lazy(() => import('./pages/SacredGeometry'));
 const SacredMathematics = lazy(() => import('./pages/SacredMathematics'));
 const SafeFusion = lazy(() => import('./pages/SafeFusion'));
-const SanctuaryBooking = lazy(() => import('./pages/SanctuaryBooking'));
 const SanctuaryBroadcast = lazy(() => import('./pages/SanctuaryBroadcast'));
 const ScottAI51 = lazy(() => import('./pages/ScottAI51'));
 const ScottAICoordinatorArchitecture = lazy(() => import('./pages/ScottAICoordinatorArchitecture'));
@@ -660,7 +659,6 @@ export const PAGES = {
     "SacredGeometry": SacredGeometry,
     "SacredMathematics": SacredMathematics,
     "SafeFusion": SafeFusion,
-    "SanctuaryBooking": SanctuaryBooking,
     "SanctuaryBroadcast": SanctuaryBroadcast,
     "ScottAI51": ScottAI51,
     "ScottAICoordinatorArchitecture": ScottAICoordinatorArchitecture,
