@@ -61,13 +61,59 @@ export default function CB51MessageInbox() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['messages'] })
   });
 
-  const handleAddMessage = () => {
+  const handleAnalyseAndSave = async () => {
     if (!newMessage.raw_message.trim()) return;
-    createMsgMutation.mutate({
-      ...newMessage,
-      artist_id: artistId,
-      status: 'pending'
-    });
+    setIsAnalyzing(true);
+    try {
+      const analysis = await base44.integrations.Core.InvokeLLM({
+        prompt: `You are an AI assistant for a music artist manager. Analyse this incoming message and extract key info.
+
+Message:
+"""
+${newMessage.raw_message}
+"""
+
+Return JSON with these fields:
+- from_contact: who sent it (name/email/number if visible, else "Unknown")
+- category: one of "gig_offer", "payment_chase", "info_request", "admin", "noise"
+- urgency: one of "urgent", "normal", "low"
+- summary: one sentence max summarising what they want
+- intent: short phrase (e.g. "Book band for festival", "Chase £500 payment")
+- draft_response: a professional, friendly reply the manager could send. Keep it concise.`,
+        response_json_schema: {
+          type: 'object',
+          properties: {
+            from_contact: { type: 'string' },
+            category: { type: 'string' },
+            urgency: { type: 'string' },
+            summary: { type: 'string' },
+            intent: { type: 'string' },
+            draft_response: { type: 'string' }
+          }
+        }
+      });
+
+      createMsgMutation.mutate({
+        raw_message: newMessage.raw_message,
+        from_contact: newMessage.from_contact || analysis.from_contact || 'Unknown',
+        category: analysis.category || 'info_request',
+        urgency: analysis.urgency || 'normal',
+        summary: analysis.summary || '',
+        intent: analysis.intent || '',
+        draft_response: analysis.draft_response || '',
+        artist_id: artistId,
+        status: 'pending'
+      });
+    } catch (e) {
+      // fallback save without AI
+      createMsgMutation.mutate({
+        ...newMessage,
+        artist_id: artistId,
+        status: 'pending'
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const pending = messages.filter(m => m.status === 'pending');
