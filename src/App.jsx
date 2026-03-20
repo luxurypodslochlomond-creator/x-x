@@ -23,6 +23,7 @@ const CB51MessageInbox = React.lazy(() => import('./pages/CB51MessageInbox'));
 const CB51FinanceAdmin = React.lazy(() => import('./pages/CB51FinanceAdmin'));
 const CB51Todo = React.lazy(() => import('./pages/CB51Todo'));
 const ScottFinanceAdmin = React.lazy(() => import('./pages/ScottFinanceAdmin'));
+const StoneymollanMarketing = React.lazy(() => import('./pages/StoneymollanMarketing'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -73,6 +74,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51FinanceAdmin" element={<LayoutWrapper currentPageName="CB51FinanceAdmin"><CB51FinanceAdmin /></LayoutWrapper>} />
       <Route path="/CB51Todo" element={<LayoutWrapper currentPageName="CB51Todo"><CB51Todo /></LayoutWrapper>} />
       <Route path="/ScottFinanceAdmin" element={<LayoutWrapper currentPageName="ScottFinanceAdmin"><ScottFinanceAdmin /></LayoutWrapper>} />
+      <Route path="/StoneymollanMarketing" element={<LayoutWrapper currentPageName="StoneymollanMarketing"><StoneymollanMarketing /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
