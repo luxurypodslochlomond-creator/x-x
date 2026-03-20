@@ -13,30 +13,16 @@ export default function COOLASFUCKErrorMonitor({ children }) {
     const [isFixing, setIsFixing] = useState(false);
 
     useEffect(() => {
-        // Catch unhandled errors
+        // Catch unhandled errors - just log, don't interrupt the app
         const handleError = (event) => {
             console.error('Error caught:', event.error);
-            setError(event.error?.message || 'Something went wrong');
-            setIsFixing(true);
-
-            // Auto-retry after showing message
-            setTimeout(() => {
-                setIsFixing(false);
-                setError(null);
-                window.location.reload();
-            }, 3000);
+            // Don't show UI or reload - let the error boundaries handle it
         };
 
-        // Catch promise rejections
+        // Catch promise rejections - just log, don't interrupt the app
         const handleRejection = (event) => {
             console.error('Promise rejected:', event.reason);
-            setError(event.reason?.message || 'Connection issue');
-            setIsFixing(true);
-
-            setTimeout(() => {
-                setIsFixing(false);
-                setError(null);
-            }, 3000);
+            // Don't show UI or reload - just log
         };
 
         window.addEventListener('error', handleError);
