@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Plus, Trash2, Check, AlertCircle, CheckCircle2, Circle } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, Check, CheckCircle2, Circle, Loader2, Sparkles, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const categoryColors = {
