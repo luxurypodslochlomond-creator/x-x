@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
