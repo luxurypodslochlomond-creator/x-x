@@ -25,14 +25,14 @@ const LANGUAGES = [
 const HASHTAGS = '#LochLomond #Scotland #HighlandCottage #Stoneymollan #HolidayCottage #VisitScotland #LuxuryTravel #ScottishHighlands #CottageLife #ScotlandIsBeautiful';
 
 const SCENE_MAP = {
-  half_price: "golden sunset over Loch Lomond, Ben Lomond reflected in perfectly still water, warm amber and gold light",
-  three_two: "misty magical morning at Loch Lomond, Highland mist rising from the water, ethereal atmosphere",
-  sauna: "wood fired outdoor sauna and hot tub beside Loch Lomond at dusk, steam rising, golden glow, stars appearing",
-  spring: "spring wildflowers and bluebells on the shores of Loch Lomond, fresh greens, soft morning light",
-  summer: "bright Scottish summer day, sparkling blue Loch Lomond, lush green hills, dramatic white clouds",
-  autumn: "autumn colours at Loch Lomond, rich golds and reds, dramatic moody sky, perfect reflections",
-  christmas: "winter snow at Loch Lomond, cosy stone cottage with warm amber lights glowing, frost, stars",
-  lastminute: "dramatic moody sunset over Loch Lomond, intense purple and orange sky, last light on the water",
+  half_price: "hyper-realistic DSLR travel photography, golden hour at Loch Lomond Scotland, glassy still water perfectly reflecting Ben Lomond mountain, warm cinematic light, shot on Sony A7R5 with 24mm lens, depth of field, no people, moody atmospheric, Conde Nast Traveller quality",
+  three_two: "hyper-realistic DSLR travel photography, misty dawn at Loch Lomond Scotland, low mist rolling across dark mirror-still water, dramatic mountain silhouettes, blue hour light, Sony A7R5, ultra cinematic, no people, National Geographic quality",
+  sauna: "hyper-realistic lifestyle photography, rustic wooden outdoor hot tub on private deck overlooking dark Loch Lomond at night, steam rising dramatically, string lights reflecting on black water, intimate warm glow, stars visible, Sony A7R5, moody luxury editorial",
+  spring: "hyper-realistic DSLR travel photography, wild garlic and bluebells carpeting ancient Scottish woodland beside Loch Lomond, soft green light filtering through bare spring trees, mist on the water, ethereal, shot on Sony A7R5, breathtaking",
+  summer: "hyper-realistic travel photography, impossibly blue Loch Lomond on rare perfect Scottish summer day, dramatic white cumulus clouds, deep green forested hillsides, wild flowers in foreground, Sony A7R5, Conde Nast Traveller cover quality",
+  autumn: "hyper-realistic travel photography, peak autumn colour explosion at Loch Lomond, intense gold orange red reflected perfectly in still dark water, dramatic moody sky, Sony A7R5 35mm, ultra cinematic colour grading, breathtaking",
+  christmas: "hyper-realistic lifestyle photography, cosy stone cottage interior glowing warm amber through windows into blue winter dusk, thin dusting of snow on Scottish Highland landscape, Loch Lomond barely visible in background, no kitsch decorations, understated luxury, Sony A7R5",
+  lastminute: "hyper-realistic DSLR travel photography, dramatic stormy sunset over Loch Lomond Scotland, intense purple orange pink sky, dark water, rays breaking through clouds, Sony A7R5 wide angle, cinematic, urgent beautiful, no people",
 };
 
 export default function StoneymollanMarketing() {
