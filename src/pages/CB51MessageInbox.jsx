@@ -201,7 +201,18 @@ Return JSON with these fields:
                   {msg.intent && <p className="text-gray-400"><span className="text-green-400 font-bold">INTENT:</span> {msg.intent}</p>}
                   <div><span className="text-green-400 font-bold">MESSAGE:</span><p className="text-gray-300 mt-1 whitespace-pre-wrap">{msg.raw_message}</p></div>
                   {msg.draft_response && (
-                    <div><span className="text-cyan-400 font-bold">AI DRAFT:</span><p className="text-gray-300 mt-1 bg-black/40 border border-cyan-500/20 rounded p-2">{msg.draft_response}</p></div>
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-cyan-400 font-bold text-sm">AI DRAFT REPLY:</span>
+                        <button
+                          onClick={() => { navigator.clipboard.writeText(msg.draft_response); }}
+                          className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 border border-cyan-500/30 px-2 py-0.5 rounded"
+                        >
+                          <Copy className="w-3 h-3" /> Copy
+                        </button>
+                      </div>
+                      <p className="text-gray-300 bg-black/40 border border-cyan-500/20 rounded p-2 text-sm whitespace-pre-wrap">{msg.draft_response}</p>
+                    </div>
                   )}
                   <div className="flex gap-2 pt-2">
                     <button
