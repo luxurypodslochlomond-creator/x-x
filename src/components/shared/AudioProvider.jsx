@@ -100,10 +100,16 @@ export const AudioProvider = ({ children }) => {
     // **Initialize global audio context once**
     useEffect(() => {
         if (!globalAudioContext) {
-            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-            globalAudioContext = new AudioContextClass();
-            globalAnalyser = globalAudioContext.createAnalyser();
-            globalAnalyser.fftSize = 2048;
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    globalAudioContext = new AudioContextClass();
+                    globalAnalyser = globalAudioContext.createAnalyser();
+                    globalAnalyser.fftSize = 2048;
+                }
+            } catch (e) {
+                console.warn('AudioContext unavailable:', e);
+            }
         }
         audioContextRef.current = globalAudioContext;
         analyserRef.current = globalAnalyser;
