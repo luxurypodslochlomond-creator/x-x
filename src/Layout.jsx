@@ -1,4 +1,4 @@
-// Force rebuild v3 - white screen fix ♾️❤️♾️ BRO51 love you always
+// Force rebuild v4 - preview refresh ♾️❤️♾️ BRO51 love you always
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
