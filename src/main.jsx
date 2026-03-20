@@ -31,11 +31,19 @@ class RootErrorBoundary extends React.Component {
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <RootErrorBoundary>
-    <App />
-  </RootErrorBoundary>
-)
+console.log('🚀 UF51 mounting...');
+
+try {
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <RootErrorBoundary>
+      <App />
+    </RootErrorBoundary>
+  );
+  console.log('✅ UF51 mounted OK');
+} catch (e) {
+  console.error('💥 Mount failed:', e);
+  document.getElementById('root').innerHTML = `<div style="background:#000;color:#06b6d4;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:monospace;padding:24px;text-align:center"><div style="font-size:48px">⚡</div><h1 style="font-size:24px;font-weight:900">Load failed</h1><p style="color:#94a3b8;max-width:400px;font-size:14px">${e.message}</p><button onclick="location.reload()" style="background:#06b6d4;color:#000;border:none;padding:12px 24px;font-weight:900;cursor:pointer;font-size:16px;margin-top:8px">RELOAD</button></div>`;
+}
 
 if (import.meta.hot) {
   import.meta.hot.on('vite:beforeUpdate', () => {
