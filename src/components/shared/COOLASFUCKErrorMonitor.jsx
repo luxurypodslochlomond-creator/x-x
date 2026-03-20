@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { COOLASFUCKHeart, COOLASFUCKWaves } from './COOLASFUCKIcon';
+import React, { useEffect } from 'react';
 
 /**
  * COOLASFUCK ERROR MONITOR
