@@ -483,7 +483,8 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Admin Notes", url: createPageUrl("AdminStrategicNotes"), icon: FileText },
     { title: "Gill51 Tracker", url: createPageUrl("AdminGill51Tracker"), icon: Heart },
     { title: "🏢 CIC Application", url: createPageUrl("AdminCIC"), icon: Building },
-    { title: "💗 Gill51 Maths Lab", url: createPageUrl("AdminGill51Maths"), icon: Calculator }, 
+    { title: "💗 Gill51 Maths Lab", url: createPageUrl("AdminGill51Maths"), icon: Calculator },
+    { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁬󠁿 Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, highlight: true, description: "Generate Instagram flyers" },
   ] : [];
 
   const isActivePage = (url) => {
