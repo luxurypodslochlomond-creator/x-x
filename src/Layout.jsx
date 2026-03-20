@@ -865,20 +865,22 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     export default function Layout(props) {
       return (
-        <ProfessionalModeProvider>
-          <MeshProvider>
-            <AnonymousAuthProvider>
-              <SyncManagerProvider>
-                <AudioProvider>
-                  <AI51MemoryProvider>
-                    <SubdomainRouter>
-                      <LayoutInner {...props} />
-                    </SubdomainRouter>
-                  </AI51MemoryProvider>
-                </AudioProvider>
-              </SyncManagerProvider>
-            </AnonymousAuthProvider>
-          </MeshProvider>
-        </ProfessionalModeProvider>
+        <AutoHealingShield>
+          <ProfessionalModeProvider>
+            <MeshProvider>
+              <AnonymousAuthProvider>
+                <SyncManagerProvider>
+                  <AudioProvider>
+                    <AI51MemoryProvider>
+                      <SubdomainRouter>
+                        <LayoutInner {...props} />
+                      </SubdomainRouter>
+                    </AI51MemoryProvider>
+                  </AudioProvider>
+                </SyncManagerProvider>
+              </AnonymousAuthProvider>
+            </MeshProvider>
+          </ProfessionalModeProvider>
+        </AutoHealingShield>
       );
     }
