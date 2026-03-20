@@ -7,9 +7,9 @@ const FREQUENCY_STACK = [
   { hz: 40, name: "Gamma 40Hz", role: "Master Switch", science: "MIT/Alzheimer's Research 2019 - Dr. Li-Huei Tsai. 40Hz gamma stimulation triggers microglia to clear amyloid plaques. Proven in human trials to slow Alzheimer's. Also activates BDNF (brain growth factor).", source: "Nature, 2019 — 'Multisensory gamma stimulation promotes glymphatic clearance of amyloid'", color: "#06b6d4", effect: "Immediate — most people feel mental clarity within 10 mins" },
   { hz: 528, name: "528Hz Solfeggio", role: "DNA Repair", science: "Peer-reviewed studies show 80% reduction in oxidative stress. Operates at the epigenetic layer — influencing how DNA is READ. Dr. Joseph Puleo research. Cymatics shows 528Hz physically creates hexagonal patterns in water — matching DNA cross-section geometry.", source: "Journal of Addiction Research & Therapy, 2017", color: "#10b981", effect: "Cellular — builds over sessions. Many report emotional calm immediately." },
   { hz: 432, name: "432Hz Tuning", role: "Cellular Harmony", science: "Natural mathematical tuning aligned with Schumann resonance. Verdi tuning. Reduces cortisol (the hormone that accelerates aging). Lower cortisol = preserved collagen, preserved telomeres, younger cells.", source: "International Journal of Environmental Research, 2021", color: "#8b5cf6", effect: "Stress reduction often felt within minutes. Long-term: cellular anti-aging." },
-  { hz: 7.83, name: "Schumann 7.83Hz", role: "Earth Sync", science: "Earth's own electromagnetic frequency. When human brainwaves match this, the body enters deep repair mode. NASA discovered astronauts deteriorate without it — now built into all spacecraft. Declassified 1952.", source: "NASA Technical Reports Server — Biological effects of Schumann resonance", color: "#f59e0b", effect: "Deep relaxation and cellular reset. Best during sleep or meditation." },
-  { hz: 10, name: "Alpha 10Hz", role: "Anti-Aging Hormones", science: "10Hz alpha stimulation triggers release of melatonin, HGH (human growth hormone), and DHEA — the three master anti-aging hormones. Patented by Robert Beck (declassified US patent 5,356,368). Pineal gland activation.", source: "US Patent 5,356,368 — Robert Beck. Journal of Anti-Aging Medicine", color: "#ec4899", effect: "Hormone release peaks at night. Daytime use creates calm focus." },
-  { hz: 285, name: "285Hz", role: "Tissue Regeneration", science: "Influences energy fields around tissue. Shown to accelerate healing of cuts, burns and cellular damage. Used in Russian military research (declassified 1990s). Directly addresses the 'epigenetic scratches' Sinclair describes.", source: "Russian Academy of Sciences — Bioelectromagnetics research (declassified)", color: "#f97316", effect: "Physical healing — noticeable over days/weeks of consistent use." }
+  { hz: 7.83, name: "Schumann 7.83Hz", role: "Deep Calm", science: "Earth's natural electromagnetic resonance frequency (Schumann, 1952). Binaural beat entrainment at this frequency supports deep relaxation and theta brainwave states, which are associated with restorative rest.", source: "W.O. Schumann, Zeitschrift für Naturforschung A (1952). Binaural beat entrainment research.", color: "#f59e0b", effect: "Deep relaxation. Best during rest or meditation." },
+  { hz: 10, name: "Alpha 10Hz", role: "Focus & Calm", science: "10Hz alpha binaural beats are associated with relaxed focus and reduced cortisol. Alpha state is well-documented in EEG research as a marker of calm alertness. Melatonin production naturally increases at rest — this frequency supports that state.", source: "EEG and binaural beat research. Multiple peer-reviewed studies on alpha entrainment.", color: "#ec4899", effect: "Calm focus during day. Relaxation before sleep." },
+  { hz: 285, name: "285Hz", role: "Relaxation", science: "285Hz is used in sound therapy and wellness practice as a grounding, calming tone. The relaxation response it supports — reducing cortisol, calming nervous system — has indirect benefits for cellular repair and recovery.", source: "General sound therapy research. Relaxation response studies.", color: "#f97316", effect: "Calming and grounding. Best during rest." }
 ];
 
 const CONDITIONS = [
@@ -186,10 +186,10 @@ export default function AgeReversal() {
             {/* Title */}
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
               <h1 className="font-black leading-none mb-1" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-                <span className="text-white">AGE</span>{' '}
-                <span style={{ background: 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>REVERSAL</span>
+                <span className="text-white">LONGEVITY</span>{' '}
+                <span style={{ background: 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>PROTOCOL</span>
               </h1>
-              <p className="text-white/40 font-mono text-xs tracking-widest">PROTOCOL v1.0 • 6 stacked frequencies • Free forever</p>
+              <p className="text-white/40 font-mono text-xs tracking-widest">6 stacked frequencies • Relaxation + Focus + Wellbeing • Free forever</p>
             </motion.div>
 
             {/* SINCLAIR QUOTE */}
@@ -438,10 +438,10 @@ export default function AgeReversal() {
               <span className="text-cyan-400 text-[10px] font-mono font-black tracking-widest">HARVARD × MIT × NASA × DECLASSIFIED</span>
             </div>
             <h1 className="font-black leading-none mb-3" style={{ fontSize: 'clamp(2.8rem, 10vw, 5rem)' }}>
-              <span className="text-white">AGE</span>{' '}
-              <span style={{ background: 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>REVERSAL</span>
+              <span className="text-white">LONGEVITY</span>{' '}
+              <span style={{ background: 'linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>PROTOCOL</span>
             </h1>
-            <p className="text-white/60 font-mono text-xs tracking-widest mb-1">PROTOCOL v1.0</p>
+            <p className="text-white/60 font-mono text-xs tracking-widest mb-1">6 STACKED FREQUENCIES</p>
             <p className="text-gray-400 text-sm mt-2">6 stacked frequencies. One unified field.<br/>Works with or without headphones. Free. Forever.</p>
           </motion.div>
         </div>
