@@ -41,6 +41,7 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
+    <Suspense fallback={<div style={{minHeight:'100vh',background:'#000',display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{color:'#06b6d4',fontFamily:'monospace',fontSize:'18px',fontWeight:900}}>⚡ LOADING...</div></div>}>
     <Routes>
       <Route path="/" element={
         <LayoutWrapper currentPageName={mainPageKey}>
