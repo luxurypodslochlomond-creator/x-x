@@ -127,54 +127,40 @@ Return JSON with these fields:
         <span className="text-sm font-bold font-mono">BACK</span>
       </button>
 
-      <h1 className="text-3xl font-black text-green-400 font-mono mb-4">INBOX</h1>
+      <h1 className="text-3xl font-black text-green-400 font-mono mb-1">INBOX</h1>
+      <p className="text-gray-600 text-xs font-mono mb-4">Paste any WhatsApp, email or text — AI does the rest</p>
 
       {showAddMsg && (
-        <div className="bg-black border border-green-500/30 rounded p-4 mb-4 space-y-3">
+        <div className="bg-black border border-green-500/40 rounded p-4 mb-4 space-y-3">
           <textarea
-            placeholder="Paste message here…"
+            placeholder="Paste the full message here… WhatsApp, email, text, anything"
             value={newMessage.raw_message}
             onChange={(e) => setNewMessage({...newMessage, raw_message: e.target.value})}
-            className="w-full bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm h-24 resize-none"
+            className="w-full bg-gray-950 border border-gray-700 text-white px-3 py-2 font-mono text-sm h-32 resize-none focus:border-green-500 outline-none rounded"
+            autoFocus
           />
           <input
             type="text"
-            placeholder="From (contact name/email)"
+            placeholder="From (optional — AI will detect if blank)"
             value={newMessage.from_contact}
             onChange={(e) => setNewMessage({...newMessage, from_contact: e.target.value})}
-            className="w-full bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm"
+            className="w-full bg-gray-950 border border-gray-700 text-white px-3 py-2 font-mono text-sm focus:border-green-500 outline-none rounded"
           />
           <div className="flex gap-2">
-            <select
-              value={newMessage.category}
-              onChange={(e) => setNewMessage({...newMessage, category: e.target.value})}
-              className="flex-1 bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm"
+            <button onClick={() => { setShowAddMsg(false); setNewMessage({ raw_message: '', from_contact: '', category: 'info_request', urgency: 'normal' }); }} className="flex-1 border border-gray-700 hover:border-gray-500 px-3 py-2 text-gray-400 font-mono text-xs uppercase rounded">Cancel</button>
+            <button
+              onClick={handleAnalyseAndSave}
+              disabled={isAnalyzing || !newMessage.raw_message.trim()}
+              className="flex-1 bg-green-600 hover:bg-green-700 disabled:opacity-50 px-3 py-2 text-white font-mono text-xs uppercase rounded flex items-center justify-center gap-2"
             >
-              <option value="gig_offer">Gig Offer</option>
-              <option value="payment_chase">Payment Chase</option>
-              <option value="info_request">Info Request</option>
-              <option value="admin">Admin</option>
-              <option value="noise">Noise</option>
-            </select>
-            <select
-              value={newMessage.urgency}
-              onChange={(e) => setNewMessage({...newMessage, urgency: e.target.value})}
-              className="flex-1 bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm"
-            >
-              <option value="urgent">Urgent</option>
-              <option value="normal">Normal</option>
-              <option value="low">Low</option>
-            </select>
-          </div>
-          <div className="flex gap-2">
-            <button onClick={() => setShowAddMsg(false)} className="flex-1 border border-gray-700 hover:border-gray-500 px-3 py-2 text-gray-400 font-mono text-xs uppercase">Cancel</button>
-            <button onClick={handleAddMessage} className="flex-1 bg-green-600 hover:bg-green-700 px-3 py-2 text-white font-mono text-xs uppercase">Save</button>
+              {isAnalyzing ? <><Loader2 className="w-3 h-3 animate-spin" /> Analysing…</> : <><Sparkles className="w-3 h-3" /> AI Analyse & Save</>}
+            </button>
           </div>
         </div>
       )}
 
       <button onClick={() => setShowAddMsg(!showAddMsg)} className="w-full bg-green-600 hover:bg-green-700 text-white font-black py-3 rounded mb-4 flex items-center justify-center gap-2">
-        <Plus className="w-4 h-4" /> ADD MESSAGE
+        <Plus className="w-4 h-4" /> PASTE A MESSAGE
       </button>
 
       {/* PENDING */}
