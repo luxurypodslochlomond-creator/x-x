@@ -25,6 +25,7 @@ export default function CB51MessageInbox() {
   const queryClient = useQueryClient();
   const [selectedMsg, setSelectedMsg] = useState(null);
   const [showAddMsg, setShowAddMsg] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [newMessage, setNewMessage] = useState({
     raw_message: '',
     from_contact: '',
