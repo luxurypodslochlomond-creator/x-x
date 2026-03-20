@@ -74,6 +74,7 @@ const AuthenticatedApp = () => {
       <Route path="/ScottFinanceAdmin" element={<LayoutWrapper currentPageName="ScottFinanceAdmin"><ScottFinanceAdmin /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </Suspense>
   );
 };
 
