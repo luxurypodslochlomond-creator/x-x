@@ -206,31 +206,14 @@ const FREQUENCIES = [
     color: '#ef4444',
     color2: '#06b6d4',
     visual: 'shield',
-    description: 'Deep dental nerve pain + jaw inflammation + trigeminal nerve calming',
-    waveform: 'square', // Square wave penetrates deepest — nerve gate theory
-    harmonics: [348, 522, 87, 43.5, 261], // 43.5 ultra-deep sub, 261 mid for jaw muscles
+    description: 'Deep dental nerve pain + jaw tension + trigeminal nerve calming',
+    waveform: 'square',
+    harmonics: [348, 522, 87, 43.5, 261],
     timer: '20 min',
-    stackWith: ['inflammation', 'nerve_pain', 'tooth_infection'],
-    context: 'PAIN GATE THEORY: 174Hz square wave overloads pain signal pathways in the trigeminal nerve (the main jaw/tooth nerve). Your brain literally cannot process the pain signal AND this frequency simultaneously — the pain gate closes. Stack with INFLAMMATION KILLER for full jaw relief. Volume louder = more effective. Place phone speaker near jaw.',
+    stackWith: ['inflammation', 'nerve_pain'],
+    context: 'PAIN GATE THEORY (Melzack & Wall, 1965): Competing sensory input can reduce perceived pain intensity via spinal gate mechanisms — the same principle behind TENS machines used in dental clinics. Place phone speaker near jaw. Stack with INFLAMMATION KILLER for broader relief.',
     device: 'speaker',
-    psychology: 'Trigeminal nerve calming. Jaw tension dissolving. Pain gate closing. You are healing now.'
-  },
-  {
-    id: 'tooth_infection',
-    name: 'TOOTH INFECTION FIGHTER',
-    hz: 304,
-    icon: COOLASFUCKFire,
-    color: '#f59e0b',
-    color2: '#10b981',
-    visual: 'fire',
-    description: 'Anti-bacterial frequency + infection control + swelling reduction',
-    waveform: 'sawtooth',
-    harmonics: [608, 912, 152],
-    timer: '20 min',
-    stackWith: ['root_canal_pain', 'inflammation'],
-    context: 'For tooth infections, abscesses, bacterial growth. Sawtooth disrupts bacterial cell walls (Rife frequency research).',
-    device: 'speaker',
-    psychology: 'Infection clearing. Immune system activating. Healing beginning.'
+    psychology: 'Trigeminal nerve calming. Jaw tension dissolving. You are healing now.'
   },
 
   // === ANIMAL FREQUENCIES (TESLA'S DISCOVERY) ===
@@ -1430,9 +1413,9 @@ export default function FrequencyChamber() {
               </div>
 
               <div className="bg-green-900/20 border-l-4 border-green-500 p-3 rounded">
-                <p className="text-green-400 font-black mb-1">528Hz DNA REPAIR</p>
-                <p className="text-gray-300">Biochemist Dr. Horowitz: 528Hz repairs DNA strands damaged by stress/toxins. Used in genetic research labs.</p>
-                <p className="text-green-300 text-[10px] mt-1">Lab proven DNA repair mechanism. Multiple independent replications 2000-2023.</p>
+                <p className="text-green-400 font-black mb-1">528Hz STRESS REDUCTION</p>
+                <p className="text-gray-300">Small peer-reviewed studies suggest 528Hz exposure reduces oxidative stress markers. Used in relaxation and wellness research contexts. Results are preliminary but promising.</p>
+                <p className="text-green-300 text-[10px] mt-1">Journal of Addiction Research & Therapy, 2017. More research needed for definitive claims.</p>
               </div>
 
               <div className="bg-pink-900/20 border-l-4 border-pink-500 p-3 rounded">
@@ -1460,9 +1443,9 @@ export default function FrequencyChamber() {
               </div>
 
               <div className="bg-blue-900/20 border-l-4 border-blue-500 p-3 rounded">
-                <p className="text-blue-400 font-black mb-1">ROOT CANAL PAIN (174Hz Solfeggio)</p>
-                <p className="text-gray-300">Ancient healing frequency. Modern dentists use vibrational therapy post-surgery. Pain gate + nerve desensitization.</p>
-                <p className="text-blue-300 text-[10px] mt-1">Swiss dental clinics report 60-70% faster recovery with frequency therapy.</p>
+                <p className="text-blue-400 font-black mb-1">DENTAL PAIN RELIEF (Gate Control Theory)</p>
+                <p className="text-gray-300">Melzack & Wall's gate control theory (Science, 1965) explains how competing sensory signals reduce pain perception — the same mechanism TENS machines use in dental and pain clinics globally.</p>
+                <p className="text-blue-300 text-[10px] mt-1">Melzack & Wall, Science 150(3699). Foundation of modern pain medicine.</p>
               </div>
             </div>
 
