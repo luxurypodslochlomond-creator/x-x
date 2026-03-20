@@ -125,10 +125,11 @@ export default function StoneymollanMarketing() {
       const opts = { prompt };
       if (uploadedImageUrl) opts.existing_image_urls = [uploadedImageUrl];
 
-      const result = await base44.integrations.Core.GenerateImage(opts);
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 45000));
+      const result = await Promise.race([base44.integrations.Core.GenerateImage(opts), timeoutPromise]);
       setGeneratedUrl(result.url);
-    } catch {
-      setError('Generation failed — try again bro!');
+    } catch (err) {
+      setError(err?.message === 'Timeout' ? 'Took too long — please try again!' : 'Generation failed — try again!');
     } finally {
       setGenerating(false);
     }
