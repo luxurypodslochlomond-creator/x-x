@@ -444,7 +444,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // PS51 PET SOUNDS MENU
   const ps51Nav = [
     { title: "Home", url: createPageUrl("PetSounds51"), icon: Heart, description: "All protocols" },
-    { title: "Landing Page", url: createPageUrl("PetSounds51Landing"), icon: Sparkles, highlight: true, description: "About & subscribe" },
+    { title: "Why It Works", url: createPageUrl("PetSounds51Landing"), icon: Sparkles, highlight: true, description: "Science · pricing · try free" },
     { title: "Share the Story", url: createPageUrl("PetSounds51Story"), icon: Zap, highlight: true, description: "Shareable story — send to anyone" },
     { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: FileText, description: "Service terms" },
     { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye, description: "Data protection" },
