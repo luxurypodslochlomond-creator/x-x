@@ -141,7 +141,7 @@ export default function PetSounds51Landing() {
 
       {/* FREE TIER — no risk */}
       <div className="max-w-2xl mx-auto px-4 mb-10 rounded-2xl p-6 text-center" style={{ background: 'rgba(26,32,14,0.9)', border: '2px solid rgba(138,171,58,0.4)' }}>
-        <PS51Icons.Presence size={30} className="mx-auto mb-3" style={{ color: '#8aab3a' }} />
+        <PS51Icons.Paw size={30} className="mx-auto mb-3" style={{ color: '#8aab3a' }} />
         <h3 className="font-black text-lg mb-2" style={{ color: '#e8d5a3' }}>Not sure yet? Try it free.</h3>
         <p className="text-sm mb-5 leading-relaxed" style={{ color: '#a89870' }}>
           The Separation Anxiety protocol is completely free. No card. No signup.<br />
