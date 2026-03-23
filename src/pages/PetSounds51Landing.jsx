@@ -8,7 +8,7 @@ import PS51Paywall from '@/components/petsounds/PS51Paywall';
 
 const PROBLEMS = [
   { Icon: PS51Icons.Science,   color: '#ec4899', title: 'Thunderstorms & Fireworks',  desc: "They're terrified. You feel helpless watching them." },
-  { Icon: PS51Icons.Presence,  color: '#06b6d4', title: 'Separation Anxiety',          desc: "You leave for work. They fall apart. Every single day." },
+  { Icon: PS51Icons.Heart,     color: '#06b6d4', title: 'Separation Anxiety',          desc: "You leave for work. They fall apart. Every single day." },
   { Icon: PS51Icons.Trust,     color: '#a855f7', title: 'Vet & Car Trips',             desc: "Even picking up the lead causes a full panic response." },
   { Icon: PS51Icons.Frequency, color: '#6366f1', title: "Can't Settle at Night",       desc: "3am. Still pacing. You haven't slept properly in weeks." },
   { Icon: PS51Icons.Rescue,    color: '#f59e0b', title: 'Rescue Trauma',               desc: "They've been through something. You can see it in their eyes." },
@@ -18,7 +18,7 @@ const PROBLEMS = [
 const WHAT_YOU_GET = [
   { Icon: PS51Icons.Frequency, text: '14 science-backed audio protocols — not generic "relaxing music"' },
   { Icon: PS51Icons.Science,   text: 'Tuned to your pet\'s hearing biology (dogs, cats, horses hear differently)' },
-  { Icon: PS51Icons.Presence,  text: 'Works on any speaker, TV or laptop — no headphones, no effort' },
+  { Icon: PS51Icons.Speaker,   text: 'Works on any speaker, TV or laptop — no headphones, no effort' },
   { Icon: PS51Icons.Trust,     text: 'Leave it playing in the background. That\'s it. That\'s all you do.' },
   { Icon: PS51Icons.Heart,     text: '10% of every subscription goes to animal rescue via UF51 CIC' },
   { Icon: PS51Icons.Safe,      text: '30-day full refund if it doesn\'t help. No questions.' },
