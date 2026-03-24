@@ -166,13 +166,14 @@ export default function PetSounds51() {
           <h1 className="text-5xl sm:text-6xl font-black mt-4" style={{ color: '#d4a017', letterSpacing: '-0.02em', textShadow: '0 0 30px rgba(212,160,23,0.4)' }}>PetSounds51</h1>
         </div>
         <p className="font-bold text-xl mb-3 max-w-lg mx-auto" style={{ color: '#e8d5a3' }}>
-          Leave it playing. Your best friend stays calm.
+          They can't tell you they're struggling. You can see it though.
         </p>
         <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed" style={{ color: '#a89870' }}>
-          Slow-tempo, species-tuned psychoacoustic audio — backed by real peer-reviewed research. Leave it playing. Your pet stays calm.
+          Sound tuned to how your pet actually hears — not generic music, not white noise. 
+          Audio built from real research that genuinely calms anxious animals. Just leave it playing.
         </p>
         <p className="text-xs max-w-lg mx-auto leading-relaxed mb-4" style={{ color: '#8aab3a' }}>
-          Built on published, peer-reviewed research into animal acoustics and behaviour. No fake numbers. Just what actually works.
+          No side effects. Works alongside your vet. Free protocol available right now — no signup needed.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
         <button onPointerDown={(e) => { e.preventDefault(); handleSelect('separation'); }} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer select-none touch-manipulation" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>
