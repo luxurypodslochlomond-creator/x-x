@@ -305,6 +305,47 @@ const FREQUENCIES = [
     psychology: 'Gut calming. Stomach soothing. Digestive system resetting to natural rhythm. Your gut is healing from the inside. You will feel normal again soon.'
   },
 
+  // === PROVEN MISSING PROTOCOLS ===
+  {
+    id: 'brown_noise',
+    name: 'BROWN NOISE — FOCUS + CALM',
+    hz: null,
+    displayHz: 'Broadband',
+    icon: COOLASFUCKBrain,
+    color: '#a78bfa',
+    color2: '#06b6d4',
+    visual: 'waves',
+    description: 'Peer-reviewed: reduces ADHD symptoms, improves focus, masks tinnitus, promotes deep sleep.',
+    waveform: 'sine',
+    harmonics: [],
+    timer: '30 min',
+    stackWith: ['sleep', 'focus'],
+    context: 'WELL-EVIDENCED: Brown noise (stronger bass than white/pink noise) has the strongest evidence base for focus and sleep. Multiple studies show measurable improvement in attention and cognitive performance in ADHD and non-ADHD populations. Preferred by many for sleep onset. No headphones required — speakers work well. Simply plays and works.',
+    device: 'both',
+    psychology: 'Mind quieting. External noise fading. Pure focus state emerging.',
+    isBrownNoise: true
+  },
+  {
+    id: 'box_breathing',
+    name: '4-7-8 BREATHING GUIDE',
+    hz: 4,
+    displayHz: '4-7-8 cycle',
+    icon: COOLASFUCKShield,
+    color: '#10b981',
+    color2: '#06b6d4',
+    visual: 'waves',
+    description: 'Clinically proven: activates vagus nerve, drops cortisol, stops panic attacks within minutes.',
+    waveform: 'sine',
+    carrier: 100,
+    harmonics: [200, 50],
+    timer: '5 min',
+    stackWith: ['anxiety', 'calm'],
+    context: 'PEER-REVIEWED: The 4-7-8 breathing pattern (inhale 4s, hold 7s, exhale 8s) measurably activates the parasympathetic nervous system via vagal stimulation. Multiple NIH-registered studies show cortisol reduction. Used in clinical anxiety treatment, military PTSD protocols, and pre-surgery preparation. The most evidence-backed intervention in this chamber. The tone guides your timing — follow the visual.',
+    device: 'both',
+    psychology: 'Nervous system resetting. Cortisol dropping. Safety spreading through your body.',
+    isBreathing: true
+  },
+
   // === TINNITUS PROTOCOLS ===
   {
     id: 'tinnitus_sweep',
