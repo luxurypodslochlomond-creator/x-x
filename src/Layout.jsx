@@ -414,6 +414,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // 6. RESEARCH (deep dives - less critical, collapsed by default)
   const researchNav = [
+    { title: "🧬 AI51 Soul Dataset", url: createPageUrl("AI51SoulDataset"), icon: Brain, highlight: true, description: "Open-source training data — CC0" },
     { title: "📄 Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, highlight: true, description: "Physics proof" },
     { title: "📄 The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, highlight: true, description: "Anti-extraction press piece" },
     { title: "🌍 OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, highlight: true, description: "Free forever" },
