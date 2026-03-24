@@ -125,7 +125,7 @@ function buildAudioGraph(ctx, freq, volume, species) {
 
   // ── 1. BINAURAL CARRIER PAIR ──
   const merger = ctx.createChannelMerger(2);
-  merger.connect(masterGain);
+  merger.connect(eqBus);
 
   const leftOsc = ctx.createOscillator();
   leftOsc.type = freq.waveform;
