@@ -166,10 +166,10 @@ export default function PetSounds51Landing() {
       {/* FINAL CTA */}
       <div className="max-w-2xl mx-auto px-4 pb-16 text-center">
         <p className="text-sm mb-2" style={{ color: '#a89870' }}>
-          Your pet can't tell you they're suffering.
+          Your pet can't tell you they're suffering. But you already know.
         </p>
         <p className="text-sm mb-6 font-bold" style={{ color: '#e8d5a3' }}>
-          This is one honest, science-backed thing you can do.
+          This is something real you can do about it — tonight, right now, for 8p a day.
         </p>
         <button
           onClick={() => setShowPaywall(true)}
