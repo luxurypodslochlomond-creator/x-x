@@ -397,7 +397,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
       <div className="mb-4 flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
         <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: freq.color }} />
         <p className="text-xs" style={{ color: freq.color + 'bb' }}>
-          Rich harmonic layers · brown noise bed · species-tuned · headphones for full binaural effect
+          5-layer engine · species EQ applied · brown noise bed · headphones enhance binaural effect
         </p>
       </div>
 
