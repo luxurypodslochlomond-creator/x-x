@@ -165,6 +165,9 @@ export default function PetSounds51Landing() {
 
       {/* FINAL CTA */}
       <div className="max-w-2xl mx-auto px-4 pb-16 text-center">
+        <p className="text-xs mb-5 italic" style={{ color: '#6b5e3a' }}>
+          Built by two people who've sat on the floor with a shaking dog at midnight wondering what to do.
+        </p>
         <p className="text-sm mb-2" style={{ color: '#a89870' }}>
           Your pet can't tell you they're suffering. But you already know.
         </p>
