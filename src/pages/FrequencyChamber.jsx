@@ -1524,9 +1524,11 @@ export default function FrequencyChamber() {
                 • Markov, M.S. (2007). "Expanding use of pulsed electromagnetic field therapies." Bioelectromagnetic Medicine. [Clinical success rates]<br/>
                 • Choi et al. (2019). "Multisensory gamma stimulation." Stanford Medicine. [76% cognitive improvement replication]
               </p>
-              <p className="text-green-400 text-xs font-bold mt-3">
-                Every frequency here has peer-reviewed evidence. Zero woo-woo. Pure physics + medicine.
-              </p>
+              <div className="mt-3 space-y-1">
+                <p className="text-green-400 text-xs font-bold"><span className="text-green-400">✓ PEER-REVIEWED</span> — Clinical trials, published science, real mechanisms.</p>
+                <p className="text-cyan-400 text-xs font-bold"><span className="text-cyan-400">🔬 EXPERIMENTAL</span> — Emerging evidence, promising but not yet conclusive.</p>
+                <p className="text-amber-400 text-xs font-bold"><span className="text-amber-400">◈ TRADITIONAL PRACTICE</span> — Long-used, reported benefits, mechanism not fully proven in humans. Honest.</p>
+              </div>
             </div>
             </div>
             )}
