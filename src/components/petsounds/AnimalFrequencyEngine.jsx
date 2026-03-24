@@ -405,8 +405,8 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
         <div className="space-y-3">
           {/* MAIN PLAY BUTTON */}
           <button
-            onClick={() => startAudio()}
-            className="w-full py-5 rounded-xl font-black text-xl flex items-center justify-center gap-3 active:scale-95 transition-transform"
+            onPointerDown={(e) => { e.preventDefault(); startAudio(); }}
+            className="w-full py-5 rounded-xl font-black text-xl flex items-center justify-center gap-3 active:scale-95 transition-transform select-none touch-manipulation"
             style={{ backgroundColor: freq.color, color: '#000', boxShadow: `0 0 40px ${freq.color}50` }}
           >
             <Play className="w-7 h-7 fill-current" />
