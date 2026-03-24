@@ -173,7 +173,7 @@ function buildAudioGraph(ctx, freq, volume, species) {
       // Quieter for higher octaves — pyramid mix
       g.gain.value = (0.06 - oi * 0.015 - ri * 0.008);
       osc.connect(g);
-      g.connect(masterGain);
+      g.connect(eqBus);
       osc.start();
       nodes.push(osc, g);
     });
