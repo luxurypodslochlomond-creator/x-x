@@ -107,6 +107,178 @@ function applySpeciesEQ(ctx, inputNode, species) {
   return { outputNode: peak, nodes: [hp, lp, peak] };
 }
 
+// ── BIO-MIMETIC HEARTBEAT ENGINE (separation anxiety only) ──────────────────
+// Generates a realistic double-thump heartbeat (lub-dub) at 65 BPM
+// This is the sound puppies/kittens hear lying against their mother.
+// Research: recordable calming effect in shelter dogs within minutes.
+function buildHeartbeatGraph(ctx, volume, species) {
+  const nodes = [];
+
+  const masterGain = ctx.createGain();
+  masterGain.gain.setValueAtTime(0, ctx.currentTime);
+  masterGain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 3.0);
+  masterGain.connect(ctx.destination);
+
+  // Species EQ — same as main engine
+  const eqBus = ctx.createGain();
+  eqBus.gain.value = 1.0;
+  const { outputNode: eqOut, nodes: eqNodes } = applySpeciesEQ(ctx, eqBus, species);
+  eqOut.connect(masterGain);
+  nodes.push(eqBus, ...eqNodes);
+
+  const BPM = 65; // calm resting heartbeat
+  const beatInterval = 60 / BPM; // ~0.923 seconds per beat
+
+  // ── 1. HEARTBEAT — lub-dub pattern ──
+  // We schedule recurring thumps using AudioBufferSourceNode + envelope
+  function scheduleHeartbeat(startTime) {
+    // LUB (main beat) — lower, longer
+    const lubOsc = ctx.createOscillator();
+    lubOsc.type = 'sine';
+    lubOsc.frequency.value = 55; // deep thump
+    const lubGain = ctx.createGain();
+    lubGain.gain.setValueAtTime(0, startTime);
+    lubGain.gain.linearRampToValueAtTime(0.45, startTime + 0.01);
+    lubGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.22);
+    lubOsc.connect(lubGain);
+    lubGain.connect(eqBus);
+    lubOsc.start(startTime);
+    lubOsc.stop(startTime + 0.25);
+    nodes.push(lubOsc, lubGain);
+
+    // Body resonance layer for lub
+    const lubBody = ctx.createOscillator();
+    lubBody.type = 'sine';
+    lubBody.frequency.value = 110;
+    const lubBodyGain = ctx.createGain();
+    lubBodyGain.gain.setValueAtTime(0, startTime);
+    lubBodyGain.gain.linearRampToValueAtTime(0.12, startTime + 0.01);
+    lubBodyGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
+    lubBody.connect(lubBodyGain);
+    lubBodyGain.connect(eqBus);
+    lubBody.start(startTime);
+    lubBody.stop(startTime + 0.2);
+    nodes.push(lubBody, lubBodyGain);
+
+    // DUB (secondary beat) — slightly higher, shorter, 0.25s after lub
+    const dubTime = startTime + 0.27;
+    const dubOsc = ctx.createOscillator();
+    dubOsc.type = 'sine';
+    dubOsc.frequency.value = 70;
+    const dubGain = ctx.createGain();
+    dubGain.gain.setValueAtTime(0, dubTime);
+    dubGain.gain.linearRampToValueAtTime(0.28, dubTime + 0.01);
+    dubGain.gain.exponentialRampToValueAtTime(0.001, dubTime + 0.16);
+    dubOsc.connect(dubGain);
+    dubGain.connect(eqBus);
+    dubOsc.start(dubTime);
+    dubOsc.stop(dubTime + 0.18);
+    nodes.push(dubOsc, dubGain);
+  }
+
+  // Schedule heartbeats for 10 minutes — enough for any session
+  const totalBeats = BPM * 10;
+  for (let i = 0; i < totalBeats; i++) {
+    scheduleHeartbeat(ctx.currentTime + 1.5 + i * beatInterval);
+  }
+
+  // ── 2. PURR LAYER — 25Hz + 50Hz (cat comfort + dog calming) ──
+  // Cats purr at 25-50Hz — this is their self-healing AND comfort frequency
+  // Dogs also respond to this low rhythm (reminds them of deep breathing)
+  const purrOsc1 = ctx.createOscillator();
+  purrOsc1.type = 'sine';
+  purrOsc1.frequency.value = 25;
+  const purrGain1 = ctx.createGain();
+  purrGain1.gain.value = 0.08;
+
+  // Gentle AM modulation to make purr feel alive and breathing
+  const purrLFO = ctx.createOscillator();
+  purrLFO.frequency.value = 25; // matches purr rate
+  const purrLFOGain = ctx.createGain();
+  purrLFOGain.gain.value = 0.04;
+  purrLFO.connect(purrLFOGain);
+  purrLFOGain.connect(purrGain1.gain);
+  purrLFO.start();
+  nodes.push(purrLFO, purrLFOGain);
+
+  purrOsc1.connect(purrGain1);
+  purrGain1.connect(eqBus);
+  purrOsc1.start();
+  nodes.push(purrOsc1, purrGain1);
+
+  const purrOsc2 = ctx.createOscillator();
+  purrOsc2.type = 'sine';
+  purrOsc2.frequency.value = 50; // octave harmonic
+  const purrGain2 = ctx.createGain();
+  purrGain2.gain.value = 0.05;
+  purrOsc2.connect(purrGain2);
+  purrGain2.connect(eqBus);
+  purrOsc2.start();
+  nodes.push(purrOsc2, purrGain2);
+
+  // ── 3. WARM BREATH TEXTURE — filtered pink noise shaped like slow breathing ──
+  // Mimics the sound of a calm companion breathing nearby
+  const bufferSize = ctx.sampleRate * 4;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  let lastOut = 0;
+  for (let i = 0; i < bufferSize; i++) {
+    const white = Math.random() * 2 - 1;
+    lastOut = (lastOut + 0.02 * white) / 1.02;
+    data[i] = lastOut * 2.5;
+  }
+  const breathNoise = ctx.createBufferSource();
+  breathNoise.buffer = buffer;
+  breathNoise.loop = true;
+  breathNoise.start();
+
+  const breathFilter = ctx.createBiquadFilter();
+  breathFilter.type = 'bandpass';
+  breathFilter.frequency.value = 300; // warm mid — not hissy
+  breathFilter.Q.value = 0.8;
+
+  // Slow breath envelope — 4 seconds in, 4 seconds out
+  const breathEnv = ctx.createGain();
+  breathEnv.gain.value = 0.012;
+
+  const breathLFO = ctx.createOscillator();
+  breathLFO.frequency.value = 0.125; // ~1 breath every 8 seconds
+  const breathLFOGain = ctx.createGain();
+  breathLFOGain.gain.value = 0.008;
+  breathLFO.connect(breathLFOGain);
+  breathLFOGain.connect(breathEnv.gain);
+  breathLFO.start();
+  nodes.push(breathLFO, breathLFOGain);
+
+  breathNoise.connect(breathFilter);
+  breathFilter.connect(breathEnv);
+  breathEnv.connect(eqBus);
+  nodes.push(breathNoise, breathFilter, breathEnv);
+
+  // ── 4. GENTLE HIGH-MID WARMTH (1-3kHz) — where dogs/cats hear best ──
+  // Very soft, non-threatening tone in their peak sensitivity range
+  const warmOsc = ctx.createOscillator();
+  warmOsc.type = 'sine';
+  warmOsc.frequency.value = species === 'cat' ? 1800 : 1200;
+  const warmGain = ctx.createGain();
+  warmGain.gain.value = 0.018;
+  // Slow swell — not static
+  const warmLFO = ctx.createOscillator();
+  warmLFO.frequency.value = 0.07;
+  const warmLFOGain = ctx.createGain();
+  warmLFOGain.gain.value = 0.01;
+  warmLFO.connect(warmLFOGain);
+  warmLFOGain.connect(warmGain.gain);
+  warmLFO.start();
+  nodes.push(warmLFO, warmLFOGain);
+  warmOsc.connect(warmGain);
+  warmGain.connect(eqBus);
+  warmOsc.start();
+  nodes.push(warmOsc, warmGain);
+
+  return { masterGain, nodes };
+}
+
 function buildAudioGraph(ctx, freq, volume, species) {
   const nodes = [];
 
