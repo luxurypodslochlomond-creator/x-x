@@ -568,12 +568,24 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
         </div>
       </div>
 
-      {/* Audio quality note */}
-      <div className="mb-4 flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
-        <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: freq.color }} />
-        <p className="text-xs" style={{ color: freq.color + 'bb' }}>
-          5-layer engine · species EQ applied · brown noise bed · headphones enhance binaural effect
-        </p>
+      {/* Audio quality note — different for separation (bio-mimetic) vs others */}
+      <div className="mb-4 px-3 py-3 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
+        {protocol === 'separation' ? (
+          <>
+            <p className="text-xs font-black mb-1" style={{ color: freq.color }}>👀 WATCH FOR THESE SIGNS IT'S WORKING</p>
+            <p className="text-xs leading-relaxed" style={{ color: freq.color + 'bb' }}>
+              Moves closer to speaker · lies down · ears relax back · yawning · slower breathing · stops pacing
+            </p>
+            <p className="text-xs mt-1 text-gray-600">Bio-mimetic engine: heartbeat · purr frequency · breath texture</p>
+          </>
+        ) : (
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: freq.color }} />
+            <p className="text-xs" style={{ color: freq.color + 'bb' }}>
+              5-layer engine · species EQ applied · brown noise bed · headphones enhance binaural effect
+            </p>
+          </div>
+        )}
       </div>
 
       {!isPlaying && (
