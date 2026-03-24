@@ -48,7 +48,7 @@ export default function PetSounds51Landing() {
         </h2>
         <p className="text-base mb-2 leading-relaxed" style={{ color: '#a89870' }}>
           Press play. That's it. Sound tuned specifically to how your pet hears — 
-          not a Spotify playlist, not generic white noise. Something that actually works.
+          not a generic playlist, not white noise. Something built for this.
         </p>
         <p className="text-xs mb-6" style={{ color: '#8aab3a' }}>
           80% of dogs showed fewer anxiety behaviours in peer-reviewed studies · No side effects · Works alongside your vet
