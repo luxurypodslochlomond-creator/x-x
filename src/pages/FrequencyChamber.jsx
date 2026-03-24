@@ -1010,10 +1010,17 @@ export default function FrequencyChamber() {
           <h1 className="text-2xl sm:text-3xl font-black text-white">
             Mind · Body · Soul
           </h1>
-          <p className="text-cyan-400 font-bold text-sm sm:text-base font-mono tracking-widest">HEALING FREQUENCIES</p>
+          <p className="text-cyan-400 font-bold text-sm sm:text-base font-mono tracking-widest">AI-DESIGNED AUDIO PROTOCOLS</p>
+          <p className="text-gray-400 text-xs sm:text-sm font-mono">Built on peer-reviewed neuroscience. MIT · Stanford · NHS-aligned.</p>
           
-          {/* ANONYMITY BADGE - warm, human, zero stigma */}
-          <p className="text-white/50 text-xs sm:text-sm mt-1 italic">Just you. We collect nothing. Nobody knows you're here.</p>
+          {/* PRIVACY + HONEST BADGES */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
+            <span className="px-2 py-1 bg-green-500/10 border border-green-500/40 rounded text-[10px] font-bold text-green-400 font-mono">✓ NO ACCOUNT</span>
+            <span className="px-2 py-1 bg-cyan-500/10 border border-cyan-500/40 rounded text-[10px] font-bold text-cyan-400 font-mono">✓ NO TRACKING</span>
+            <span className="px-2 py-1 bg-pink-500/10 border border-pink-500/40 rounded text-[10px] font-bold text-pink-400 font-mono">✓ FREE FOREVER</span>
+            <span className="px-2 py-1 bg-purple-500/10 border border-purple-500/40 rounded text-[10px] font-bold text-purple-400 font-mono">✓ WORKS OFFLINE</span>
+          </div>
+          <p className="text-white/40 text-xs mt-1 italic">Just you. Nobody knows you're here.</p>
 
           {!isOnline && (
             <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
