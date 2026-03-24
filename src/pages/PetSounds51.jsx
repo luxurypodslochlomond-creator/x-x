@@ -175,7 +175,7 @@ export default function PetSounds51() {
           Built on published, peer-reviewed research into animal acoustics and behaviour. No fake numbers. Just what actually works.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
-        <button onClick={() => handleSelect('separation')} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>
+        <button onPointerDown={(e) => { e.preventDefault(); handleSelect('separation'); }} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer select-none touch-manipulation" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>
           <Zap size={16} style={{ color: '#8aab3a' }} />
           Try FREE: Separation Anxiety
         </button>
