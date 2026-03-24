@@ -107,12 +107,17 @@ export default function PetSounds51Landing() {
       <div className="max-w-2xl mx-auto px-4 mb-10 rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.9)', border: '1px solid rgba(212,160,23,0.25)' }}>
         <h3 className="font-black text-xs tracking-widest mb-4 text-center" style={{ color: '#d4a017' }}>WHY IT ACTUALLY WORKS</h3>
         <p className="text-sm leading-relaxed mb-3" style={{ color: '#c8b87a' }}>
-          Published research shows slow-tempo music (under 60 BPM) measurably reduces anxiety in animals.
-          Studies found over <strong style={{ color: '#d4a017' }}>70% of shelter dogs</strong> and <strong style={{ color: '#d4a017' }}>80% of home dogs</strong> showed fewer anxiety behaviours.
+          Real published research — not marketing — shows slow-tempo music under 60 BPM measurably calms anxious animals.
+          Over <strong style={{ color: '#d4a017' }}>70% of shelter dogs</strong> and <strong style={{ color: '#d4a017' }}>80% of home dogs</strong> showed fewer anxiety behaviours in peer-reviewed studies.
         </p>
-        <p className="text-sm leading-relaxed" style={{ color: '#a89870' }}>
-          We go further — each protocol is tuned to your pet's specific hearing biology.
-          Dogs hear up to 65,000 Hz. Cats up to 79,000 Hz. Generic "relaxing music" wasn't built for them. This was.
+        <p className="text-sm leading-relaxed mb-3" style={{ color: '#a89870' }}>
+          But here's what most products miss: your dog hears up to 65,000 Hz. Your cat up to 79,000 Hz. 
+          Generic "relaxing music" was made for humans. It wasn't built for them. This was.
+        </p>
+        <p className="text-sm leading-relaxed" style={{ color: '#8aab3a' }}>
+          Every protocol uses a different audio architecture — the thunderstorm one physically masks sudden bangs. 
+          The night one entrains toward sleep. The pain one uses 40Hz gamma (MIT research, 2016). 
+          They're not all the same thing with different names.
         </p>
       </div>
 
