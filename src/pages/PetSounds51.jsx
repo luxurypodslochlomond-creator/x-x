@@ -350,6 +350,15 @@ export default function PetSounds51() {
         })}
       </div>
 
+      {/* HUMAN MOMENT — the thing that makes you feel cared about */}
+      <div className="max-w-4xl mx-auto mt-10 mb-4 rounded-2xl p-5 text-center" style={{ background: 'rgba(212,160,23,0.06)', border: '1px solid rgba(212,160,23,0.2)' }}>
+        <p className="text-sm leading-relaxed" style={{ color: '#c8b87a' }}>
+          💛 If the free protocol helped your pet — even a little — please share it with someone whose animal is struggling. 
+          It costs nothing. And if you ever want to tell us what you noticed, we genuinely want to hear it.
+        </p>
+        <p className="text-xs mt-2" style={{ color: '#6b5e3a' }}>10% of every subscription goes directly to animal rescue through UF51 CIC. Your pet helping other pets.</p>
+      </div>
+
       {/* FOOTER TRUST BUTTONS */}
       <div className="max-w-4xl mx-auto mt-12 pt-8 grid grid-cols-3 gap-3 mb-6">
         <Link to={createPageUrl("PetSounds51Terms")} className="p-4 rounded-lg text-center transition-all hover:border-amber-600 hover:bg-amber-600/5" style={{ background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)' }}>
