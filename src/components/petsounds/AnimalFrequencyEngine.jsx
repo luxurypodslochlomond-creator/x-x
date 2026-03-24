@@ -189,7 +189,7 @@ function buildAudioGraph(ctx, freq, volume, species) {
   noiseGain.gain.value = 0.018;
   noiseNode.connect(noiseFilter);
   noiseFilter.connect(noiseGain);
-  noiseGain.connect(masterGain);
+  noiseGain.connect(eqBus);
   nodes.push(noiseNode, noiseFilter, noiseGain);
 
   // ── 4. BREATH-PACE AM PULSE at 0.1Hz (prevents adaptation, mimics breathing) ──
