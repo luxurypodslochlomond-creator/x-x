@@ -47,8 +47,8 @@ export default function PetSounds51Landing() {
           It's 11pm. There's a storm.<br />Your dog is shaking and you feel helpless.
         </h2>
         <p className="text-base mb-2 leading-relaxed" style={{ color: '#a89870' }}>
-          Press play. That's it. Sound tuned specifically to how your pet hears — 
-          not a generic playlist, not white noise. Something built for this.
+          Press play. That's it. AI-generated sound tuned specifically to how your pet hears — 
+          not a generic playlist, not white noise. Built by a pet owner, powered by real research.
         </p>
         <p className="text-xs mb-6" style={{ color: '#8aab3a' }}>
           80% of dogs showed fewer anxiety behaviours in peer-reviewed studies · No side effects · Works alongside your vet
