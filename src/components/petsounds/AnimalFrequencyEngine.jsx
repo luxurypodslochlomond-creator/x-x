@@ -68,6 +68,45 @@ function buildBrownNoise(ctx) {
   return source;
 }
 
+// Per-species EQ profiles — based on hearing sensitivity research
+// Dogs: most sensitive 1kHz-8kHz, comfortable 200Hz-8kHz
+// Cats: most sensitive 1kHz-16kHz, very sensitive to high freq, need low-pass warmth
+// Horses: most sensitive 1kHz-16kHz but prefer lower rumble, calmer response to bass
+const SPECIES_EQ = {
+  dog:   { highpassHz: 80,  lowpassHz: 6000, peakHz: 1200, peakGain: 2  },
+  cat:   { highpassHz: 120, lowpassHz: 8000, peakHz: 2000, peakGain: 3  },
+  horse: { highpassHz: 60,  lowpassHz: 4000, peakHz: 800,  peakGain: 1.5 },
+};
+
+function applySpeciesEQ(ctx, inputNode, species) {
+  const eq = SPECIES_EQ[species] || SPECIES_EQ.dog;
+
+  // High-pass: remove rumble below species comfort floor
+  const hp = ctx.createBiquadFilter();
+  hp.type = 'highpass';
+  hp.frequency.value = eq.highpassHz;
+  hp.Q.value = 0.7;
+
+  // Low-pass: remove harsh highs above species comfort ceiling
+  const lp = ctx.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = eq.lowpassHz;
+  lp.Q.value = 0.7;
+
+  // Gentle peak boost in most sensitive range — makes content land where they hear best
+  const peak = ctx.createBiquadFilter();
+  peak.type = 'peaking';
+  peak.frequency.value = eq.peakHz;
+  peak.gain.value = eq.peakGain;
+  peak.Q.value = 1.5;
+
+  inputNode.connect(hp);
+  hp.connect(lp);
+  lp.connect(peak);
+
+  return { outputNode: peak, nodes: [hp, lp, peak] };
+}
+
 function buildAudioGraph(ctx, freq, volume, species) {
   const nodes = [];
 
@@ -76,6 +115,13 @@ function buildAudioGraph(ctx, freq, volume, species) {
   masterGain.gain.setValueAtTime(0, ctx.currentTime);
   masterGain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 2.0);
   masterGain.connect(ctx.destination);
+
+  // Species EQ bus — all audio routes through this before master
+  const eqBus = ctx.createGain();
+  eqBus.gain.value = 1.0;
+  const { outputNode: eqOut, nodes: eqNodes } = applySpeciesEQ(ctx, eqBus, species);
+  eqOut.connect(masterGain);
+  nodes.push(eqBus, ...eqNodes);
 
   // ── 1. BINAURAL CARRIER PAIR ──
   const merger = ctx.createChannelMerger(2);
