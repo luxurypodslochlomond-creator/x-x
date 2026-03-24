@@ -25,6 +25,7 @@ const CB51Todo = React.lazy(() => import('./pages/CB51Todo'));
 const ScottFinanceAdmin = React.lazy(() => import('./pages/ScottFinanceAdmin'));
 const StoneymollanMarketing = React.lazy(() => import('./pages/StoneymollanMarketing'));
 const PetSounds51Landing = React.lazy(() => import('./pages/PetSounds51Landing'));
+const AI51SoulDataset = React.lazy(() => import('./pages/AI51SoulDataset'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
