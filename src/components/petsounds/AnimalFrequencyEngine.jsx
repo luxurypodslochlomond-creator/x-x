@@ -279,59 +279,32 @@ function buildHeartbeatGraph(ctx, volume, species) {
   return { masterGain, nodes };
 }
 
-function buildAudioGraph(ctx, freq, volume, species) {
-  const nodes = [];
+// ── SHARED HELPERS ────────────────────────────────────────────────────────────
 
-  // Master gain with fade-in
+function makeMasterAndEQ(ctx, volume, species, fadeTime = 2.0) {
+  const nodes = [];
   const masterGain = ctx.createGain();
   masterGain.gain.setValueAtTime(0, ctx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 2.0);
+  masterGain.gain.linearRampToValueAtTime(volume, ctx.currentTime + fadeTime);
   masterGain.connect(ctx.destination);
-
-  // Species EQ bus — all audio routes through this before master
   const eqBus = ctx.createGain();
   eqBus.gain.value = 1.0;
   const { outputNode: eqOut, nodes: eqNodes } = applySpeciesEQ(ctx, eqBus, species);
   eqOut.connect(masterGain);
   nodes.push(eqBus, ...eqNodes);
+  return { masterGain, eqBus, nodes };
+}
 
-  // ── 1. BINAURAL CARRIER PAIR ──
-  const merger = ctx.createChannelMerger(2);
-  merger.connect(eqBus);
-
-  const leftOsc = ctx.createOscillator();
-  leftOsc.type = freq.waveform;
-  leftOsc.frequency.value = freq.carrier;
-  const leftGain = ctx.createGain();
-  leftGain.gain.value = 0.3;
-  leftOsc.connect(leftGain);
-  leftGain.connect(merger, 0, 0);
-  leftOsc.start();
-  nodes.push(leftOsc, leftGain);
-
-  const rightOsc = ctx.createOscillator();
-  rightOsc.type = freq.waveform;
-  rightOsc.frequency.value = freq.carrier + freq.binauralBeat;
-  const rightGain = ctx.createGain();
-  rightGain.gain.value = 0.3;
-  rightOsc.connect(rightGain);
-  rightGain.connect(merger, 0, 1);
-  rightOsc.start();
-  nodes.push(rightOsc, rightGain);
-
-  // ── 2. HARMONIC CHORD STACK (just intonation — sounds warm and musical) ──
-  const chordRatios = freq.chord || [1, 5/4, 3/2];
-  const octaves = [-1, 0, 1]; // sub-octave, root, octave above
-
+function addHarmonicStack(ctx, eqBus, carrier, chord, nodes) {
+  const chordRatios = chord || [1, 5/4, 3/2];
+  const octaves = [-1, 0, 1];
   chordRatios.forEach((ratio, ri) => {
     octaves.forEach((oct, oi) => {
-      const f = freq.carrier * ratio * Math.pow(2, oct);
-      if (f < 40 || f > 8000) return; // stay in pleasant range
+      const f = carrier * ratio * Math.pow(2, oct);
+      if (f < 40 || f > 8000) return;
       const osc = ctx.createOscillator();
       osc.type = 'sine';
       osc.frequency.value = f;
-
-      // Very slight frequency drift per note — organic, not robotic
       const drift = ctx.createOscillator();
       drift.frequency.value = 0.04 + ri * 0.013 + oi * 0.007;
       const driftGain = ctx.createGain();
@@ -340,9 +313,7 @@ function buildAudioGraph(ctx, freq, volume, species) {
       driftGain.connect(osc.frequency);
       drift.start();
       nodes.push(drift, driftGain);
-
       const g = ctx.createGain();
-      // Quieter for higher octaves — pyramid mix
       g.gain.value = (0.06 - oi * 0.015 - ri * 0.008);
       osc.connect(g);
       g.connect(eqBus);
@@ -350,43 +321,295 @@ function buildAudioGraph(ctx, freq, volume, species) {
       nodes.push(osc, g);
     });
   });
+}
 
-  // ── 3. FILTERED BROWN NOISE (warm ambient texture — like distant rain) ──
+function addBrownNoiseBed(ctx, eqBus, nodes, gainVal = 0.018, lpHz = 400) {
   const noiseNode = buildBrownNoise(ctx);
   const noiseFilter = ctx.createBiquadFilter();
   noiseFilter.type = 'lowpass';
-  noiseFilter.frequency.value = 400; // soft, warm, not hissy
+  noiseFilter.frequency.value = lpHz;
   noiseFilter.Q.value = 0.7;
   const noiseGain = ctx.createGain();
-  noiseGain.gain.value = 0.018;
+  noiseGain.gain.value = gainVal;
   noiseNode.connect(noiseFilter);
   noiseFilter.connect(noiseGain);
   noiseGain.connect(eqBus);
   nodes.push(noiseNode, noiseFilter, noiseGain);
+}
 
-  // ── 4. BREATH-PACE AM PULSE at 0.1Hz (prevents adaptation, mimics breathing) ──
+function addPurrLayer(ctx, eqBus, nodes) {
+  // Cat purr: 25Hz + 50Hz — comfort signal for cats AND calming for dogs/horses
+  [25, 50].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = i === 0 ? 0.07 : 0.04;
+    osc.connect(g);
+    g.connect(eqBus);
+    osc.start();
+    nodes.push(osc, g);
+  });
+}
+
+// ── THUNDERSTORM / FIREWORKS — Sound masking + heartbeat foundation ──────────
+// Key: a DENSE noise wall that masks sudden bangs + the heartbeat from separation
+// This is the architecture that actually reduces startle response
+function buildThunderstormGraph(ctx, volume, species) {
+  const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume, species, 3.0);
+
+  // Foundation: heartbeat (same as separation — "you're safe, someone is here")
+  const BPM = 62;
+  const beatInterval = 60 / BPM;
+  for (let i = 0; i < BPM * 10; i++) {
+    const t = ctx.currentTime + 2 + i * beatInterval;
+    const lubOsc = ctx.createOscillator();
+    lubOsc.type = 'sine';
+    lubOsc.frequency.value = 52;
+    const lubGain = ctx.createGain();
+    lubGain.gain.setValueAtTime(0, t);
+    lubGain.gain.linearRampToValueAtTime(0.35, t + 0.01);
+    lubGain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+    lubOsc.connect(lubGain); lubGain.connect(eqBus);
+    lubOsc.start(t); lubOsc.stop(t + 0.22);
+    nodes.push(lubOsc, lubGain);
+  }
+
+  // Dense broadband noise wall — masks sudden bangs and thunder cracks
+  // High gain, broad spectrum — this is the clinically effective part
+  const sampleRate = ctx.sampleRate;
+  const bufSize = sampleRate * 4;
+  const buf = ctx.createBuffer(2, bufSize, sampleRate); // STEREO for immersion
+  for (let ch = 0; ch < 2; ch++) {
+    const d = buf.getChannelData(ch);
+    let last = 0;
+    for (let i = 0; i < bufSize; i++) {
+      const w = Math.random() * 2 - 1;
+      last = (last + 0.025 * w) / 1.025;
+      d[i] = last * 4;
+    }
+  }
+  const maskNoise = ctx.createBufferSource();
+  maskNoise.buffer = buf;
+  maskNoise.loop = true;
+  maskNoise.start();
+
+  // Shape it: remove harsh highs but keep the mid-body that masks bangs
+  const maskFilter = ctx.createBiquadFilter();
+  maskFilter.type = 'lowpass';
+  maskFilter.frequency.value = 1800; // wider than normal — needed for masking
+  const maskGain = ctx.createGain();
+  maskGain.gain.value = 0.055; // noticeably louder than separation bed
+  maskNoise.connect(maskFilter);
+  maskFilter.connect(maskGain);
+  maskGain.connect(eqBus);
+  nodes.push(maskNoise, maskFilter, maskGain);
+
+  // Purr layer underneath — comfort signal
+  addPurrLayer(ctx, eqBus, nodes);
+
+  // Gentle warm harmonic tones — gives the brain something to "hold onto"
+  [200, 300, 400].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = 0.025 - i * 0.006;
+    const lfo = ctx.createOscillator();
+    lfo.frequency.value = 0.05 + i * 0.02;
+    const lfoG = ctx.createGain();
+    lfoG.gain.value = 0.012;
+    lfo.connect(lfoG); lfoG.connect(g.gain); lfo.start();
+    osc.connect(g); g.connect(eqBus); osc.start();
+    nodes.push(osc, g, lfo, lfoG);
+  });
+
+  return { masterGain, nodes };
+}
+
+// ── NIGHT ANXIETY / SLEEP ONSET — Ultra-slow drift, near silence ──────────────
+// Goal: brain entrainment toward delta (1-4Hz sleep waves)
+// Sounds almost like nothing — but the slow LFO modulation is doing the work
+function buildNightGraph(ctx, volume, species) {
+  const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume * 0.8, species, 5.0); // quieter, slower fade
+
+  // Purr foundation — the gentlest possible "safe" signal
+  addPurrLayer(ctx, eqBus, nodes);
+
+  // Ultra-slow carrier — delta territory (2Hz binaural beat for sleep onset)
+  const merger = ctx.createChannelMerger(2);
+  merger.connect(eqBus);
+  const carrier = 180;
+  const beatHz = 2; // delta — deep sleep entrainment
+  [carrier, carrier + beatHz].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = 0.12;
+    osc.connect(g);
+    g.connect(merger, 0, i);
+    osc.start();
+    nodes.push(osc, g);
+  });
+
+  // Very quiet brown noise — like rain heard through double glazing
+  addBrownNoiseBed(ctx, eqBus, nodes, 0.012, 300);
+
+  // Master breath LFO — very slow, imperceptibly slowing the overall volume
+  // This is the technique: the sound gradually "breathes" them down to sleep
+  const breathLFO = ctx.createOscillator();
+  breathLFO.frequency.value = 0.06; // one breath every ~16 seconds — deeply slow
+  const breathLFOGain = ctx.createGain();
+  breathLFOGain.gain.value = 0.08;
+  breathLFO.connect(breathLFOGain);
+  breathLFOGain.connect(masterGain.gain);
+  breathLFO.start();
+  nodes.push(breathLFO, breathLFOGain);
+
+  // 3 sparse warm tones — very quiet, just enough to be present
+  [180, 270, 360].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = 0.018 - i * 0.004;
+    osc.connect(g); g.connect(eqBus); osc.start();
+    nodes.push(osc, g);
+  });
+
+  return { masterGain, nodes };
+}
+
+// ── PAIN PROTOCOLS (arthritis, recovery) — 40Hz gamma entrainment ─────────────
+// 40Hz gamma: published research (MIT/Iaccarino 2016, replicated) showing
+// gamma entrainment reduces amyloid plaques, modulates inflammatory pathways.
+// For pain: reduces the cortisol-pain feedback loop.
+function buildPainGraph(ctx, volume, species, carrier = 174) {
+  const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume, species, 2.5);
+
+  // 40Hz gamma binaural beat — the clinically studied frequency
+  const merger = ctx.createChannelMerger(2);
+  merger.connect(eqBus);
+  [carrier, carrier + 40].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = 0.22;
+    osc.connect(g); g.connect(merger, 0, i); osc.start();
+    nodes.push(osc, g);
+  });
+
+  // Warm harmonic support — makes 40Hz beat more pleasant to sit with
+  addHarmonicStack(ctx, eqBus, carrier, [1, 5/4, 3/2], nodes);
+
+  // Brown noise at medium level — keeps environment calm and masks movement pain sounds
+  addBrownNoiseBed(ctx, eqBus, nodes, 0.022, 500);
+
+  // Purr layer — 25/50Hz also sits in bone-conduction range, physically grounding
+  addPurrLayer(ctx, eqBus, nodes);
+
+  // Slow breath modulation — parasympathetic activation reduces pain perception
+  const breathLFO = ctx.createOscillator();
+  breathLFO.frequency.value = 0.09;
+  const breathLFOGain = ctx.createGain();
+  breathLFOGain.gain.value = 0.06;
+  breathLFO.connect(breathLFOGain);
+  breathLFOGain.connect(masterGain.gain);
+  breathLFO.start();
+  nodes.push(breathLFO, breathLFOGain);
+
+  return { masterGain, nodes };
+}
+
+// ── RESCUE TRAUMA / GRIEF — Warm triangle, sparse, non-threatening ────────────
+// Less is more here. Trauma-responsive: no sudden changes, no complexity.
+// Triangle wave is softer than sine — more like a human humming than a tone.
+function buildTraumaGraph(ctx, volume, species) {
+  const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume * 0.75, species, 6.0); // very slow fade in
+
+  // Heartbeat — the most primal safety signal
+  const BPM = 60;
+  const beatInterval = 60 / BPM;
+  for (let i = 0; i < BPM * 10; i++) {
+    const t = ctx.currentTime + 3 + i * beatInterval;
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = 50;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.28, t + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+    osc.connect(g); g.connect(eqBus);
+    osc.start(t); osc.stop(t + 0.28);
+    nodes.push(osc, g);
+  }
+
+  // Purr — softest comfort layer
+  addPurrLayer(ctx, eqBus, nodes);
+
+  // Just 2 triangle wave tones — warm and non-threatening
+  [196, 294].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'triangle'; // softer, warmer than sine
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = 0.022 - i * 0.006;
+    // Very slow swell — no static, but barely moving
+    const lfo = ctx.createOscillator();
+    lfo.frequency.value = 0.03 + i * 0.01;
+    const lfoG = ctx.createGain();
+    lfoG.gain.value = 0.01;
+    lfo.connect(lfoG); lfoG.connect(g.gain); lfo.start();
+    osc.connect(g); g.connect(eqBus); osc.start();
+    nodes.push(osc, g, lfo, lfoG);
+  });
+
+  // Very quiet noise bed — presence without intrusion
+  addBrownNoiseBed(ctx, eqBus, nodes, 0.01, 350);
+
+  return { masterGain, nodes };
+}
+
+// ── STANDARD ENGINE (hyperactive, pre-race, post-race, zoo, fatigue) ──────────
+function buildAudioGraph(ctx, freq, volume, species) {
+  const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume, species, 2.0);
+
+  // Binaural carrier pair
+  const merger = ctx.createChannelMerger(2);
+  merger.connect(eqBus);
+  [freq.carrier, freq.carrier + freq.binauralBeat].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = freq.waveform;
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = 0.3;
+    osc.connect(g); g.connect(merger, 0, i); osc.start();
+    nodes.push(osc, g);
+  });
+
+  addHarmonicStack(ctx, eqBus, freq.carrier, freq.chord, nodes);
+  addBrownNoiseBed(ctx, eqBus, nodes, 0.018, 400);
+
+  // Breath-pace AM pulse
   const lfo = ctx.createOscillator();
-  lfo.frequency.value = 0.085; // ~1 breath per 12 seconds — very slow, calming
+  lfo.frequency.value = 0.085;
   const lfoGain = ctx.createGain();
   lfoGain.gain.value = 0.07;
-  lfo.connect(lfoGain);
-  lfoGain.connect(masterGain.gain);
-  lfo.start();
+  lfo.connect(lfoGain); lfoGain.connect(masterGain.gain); lfo.start();
   nodes.push(lfo, lfoGain);
 
-  // ── 5. SUB-BASS WARMTH (40-80Hz — grounding, felt more than heard) ──
+  // Sub-bass warmth
   const subOsc = ctx.createOscillator();
   subOsc.type = 'sine';
-  subOsc.frequency.value = freq.carrier * 0.25; // two octaves below carrier
+  subOsc.frequency.value = freq.carrier * 0.25;
   const subFilter = ctx.createBiquadFilter();
   subFilter.type = 'lowpass';
   subFilter.frequency.value = 120;
   const subGain = ctx.createGain();
   subGain.gain.value = 0.04;
-  subOsc.connect(subFilter);
-  subFilter.connect(subGain);
-  subGain.connect(eqBus);
-  subOsc.start();
+  subOsc.connect(subFilter); subFilter.connect(subGain); subGain.connect(eqBus); subOsc.start();
   nodes.push(subOsc, subFilter, subGain);
 
   return { masterGain, nodes };
