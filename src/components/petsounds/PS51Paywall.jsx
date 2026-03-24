@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, Shield, Zap, ArrowLeft, Star } from 'lucide-react';
 import { petSoundsCheckout } from '@/functions/petSoundsCheckout';
+import { sendPS51ConfirmationEmail } from '@/functions/sendPS51ConfirmationEmail';
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
 
 const PROTOCOLS = [
@@ -18,16 +19,21 @@ const PROTOCOLS = [
 
 export default function PS51Paywall({ onClose }) {
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
 
   const handleStart = async () => {
     if (window.self !== window.top) {
       alert('Payment works from the published app — not inside the preview.');
       return;
     }
+    if (!email) {
+      alert('Please enter your email.');
+      return;
+    }
     setLoading(true);
     try {
       const res = await petSoundsCheckout({
-        successUrl: window.location.origin + '/PetSounds51?subscribed=true',
+        successUrl: window.location.origin + '/PetSounds51?subscribed=true&email=' + encodeURIComponent(email),
         cancelUrl: window.location.origin + '/PetSounds51',
       });
       if (res.data?.url) {
@@ -102,20 +108,30 @@ export default function PS51Paywall({ onClose }) {
           ))}
         </div>
 
+        {/* EMAIL INPUT */}
+         <input
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500 mb-3 focus:outline-none focus:border-amber-400"
+            disabled={loading}
+          />
+
         {/* CTA */}
          <button
-           onClick={handleStart}
-           disabled={loading}
-           className="w-full py-5 rounded-2xl font-black text-xl text-white transition-all active:scale-95 mb-3 flex items-center justify-center gap-2"
-           style={{
-             background: loading ? '#374151' : 'linear-gradient(135deg, #d4a017, #f59e0b)',
-             boxShadow: loading ? 'none' : '0 8px 40px rgba(212,160,23,0.4)',
-             color: loading ? '#9ca3af' : '#fff',
-           }}
-         >
-           <PS51Icons.Heart size={22} style={{ color: '#fff' }} animate={true} />
-           <span>{loading ? 'Connecting...' : 'Start Now — £29.99/year'}</span>
-         </button>
+            onClick={handleStart}
+            disabled={loading || !email}
+            className="w-full py-5 rounded-2xl font-black text-xl text-white transition-all active:scale-95 mb-3 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              background: loading ? '#374151' : 'linear-gradient(135deg, #d4a017, #f59e0b)',
+              boxShadow: loading ? 'none' : '0 8px 40px rgba(212,160,23,0.4)',
+              color: loading ? '#9ca3af' : '#fff',
+            }}
+          >
+            <PS51Icons.Heart size={22} style={{ color: '#fff' }} animate={true} />
+            <span>{loading ? 'Connecting...' : 'Start Now — £29.99/year'}</span>
+          </button>
 
         {/* Stripe Link = one tap if they've ever paid with Stripe before */}
         <div className="flex items-center justify-center gap-2 mt-3 mb-1">
