@@ -1028,7 +1028,7 @@ export default function FrequencyChamber() {
             </div>
           )}
         </div>
-        <p className="text-gray-400 text-base sm:text-lg mb-4">Free healing frequencies for pain, anxiety, sleep, grief and more. Works offline. Forever free.</p>
+        <p className="text-gray-400 text-base sm:text-lg mb-4">AI-designed audio protocols for pain, anxiety, depression, loneliness, sleep + more. Built on published neuroscience. Free forever. Works offline.</p>
 
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
           <motion.button
