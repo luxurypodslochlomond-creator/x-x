@@ -663,10 +663,15 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
       if (ctx.state === 'suspended') await ctx.resume();
       audioCtxRef.current = ctx;
 
-      // Separation anxiety uses bio-mimetic heartbeat engine — actually triggers pet response
-      const { masterGain, nodes } = protocol === 'separation'
-        ? buildHeartbeatGraph(ctx, volume, species)
-        : buildAudioGraph(ctx, freq, volume, species);
+      // Each protocol uses the right engine for its actual therapeutic goal
+      const { masterGain, nodes } =
+        protocol === 'separation'                        ? buildHeartbeatGraph(ctx, volume, species) :
+        protocol === 'thunderstorm'                      ? buildThunderstormGraph(ctx, volume, species) :
+        protocol === 'night_anxiety'                     ? buildNightGraph(ctx, volume, species) :
+        protocol === 'arthritis'                         ? buildPainGraph(ctx, volume, species, 174) :
+        protocol === 'recovery'                          ? buildPainGraph(ctx, volume, species, 220) :
+        protocol === 'rescue_trauma' || protocol === 'grief' ? buildTraumaGraph(ctx, volume, species) :
+        buildAudioGraph(ctx, freq, volume, species);
       masterGainRef.current = masterGain;
       nodesRef.current = nodes;
 
