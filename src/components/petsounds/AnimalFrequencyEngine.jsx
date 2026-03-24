@@ -440,7 +440,10 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
       if (ctx.state === 'suspended') await ctx.resume();
       audioCtxRef.current = ctx;
 
-      const { masterGain, nodes } = buildAudioGraph(ctx, freq, volume, species);
+      // Separation anxiety uses bio-mimetic heartbeat engine — actually triggers pet response
+      const { masterGain, nodes } = protocol === 'separation'
+        ? buildHeartbeatGraph(ctx, volume, species)
+        : buildAudioGraph(ctx, freq, volume, species);
       masterGainRef.current = masterGain;
       nodesRef.current = nodes;
 
