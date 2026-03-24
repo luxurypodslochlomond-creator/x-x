@@ -30,12 +30,12 @@ const FREQUENCIES = [
     color: '#ec4899', // Primary: Pink for love/heart
     color2: '#10b981', // Harmonic: Green for balance/repair
     visual: 'heart',
-    description: 'DNA repair + chest tension + heart chakra',
+    description: 'Stress reduction + chest tension + deep calm',
     waveform: 'sine',
     harmonics: [1056, 1584, 2112, 264],
     timer: '15 min',
     stackWith: ['nerve_pain', 'inflammation'],
-    context: 'For chest pain, tightness, heart chakra blockages. Repairs cellular damage.',
+    context: 'For chest tension, tightness, and stress. 528Hz has been explored in preliminary studies for oxidative stress reduction. The "DNA repair" claim is widely cited in wellness circles but is not yet clinically proven — we list it honestly as Traditional Practice.',
     device: 'both',
     psychology: 'Your chest is healing. Tension releasing. Heart muscle relaxing. Pain dissolving now.' // Physical focus
     },
