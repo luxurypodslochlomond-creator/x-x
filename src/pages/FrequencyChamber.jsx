@@ -1569,6 +1569,18 @@ export default function FrequencyChamber() {
                 <p className="text-yellow-300 text-[10px] mt-1">Cantor & Stevens (2009) Applied Psychophysiology 36(3). Bazanova & Vernon (2014) Neuroscience Review.</p>
               </div>
 
+              <div className="bg-violet-900/20 border-l-4 border-violet-500 p-3 rounded">
+                <p className="text-violet-400 font-black mb-1">BROWN NOISE (Focus + Sleep — Well-Evidenced)</p>
+                <p className="text-gray-300">Brown noise masks distracting sounds and reduces cognitive load. Multiple controlled studies show improved attention in ADHD populations and faster sleep onset. Stronger bass than white noise makes it subjectively gentler and more effective for most people.</p>
+                <p className="text-violet-300 text-[10px] mt-1">Soderlund et al. (2010) J. Child Psychol. Psychiatry. Stanchina et al. (2005) Sleep Medicine.</p>
+              </div>
+
+              <div className="bg-emerald-900/20 border-l-4 border-emerald-500 p-3 rounded">
+                <p className="text-emerald-400 font-black mb-1">4-7-8 BREATHING (Vagus Nerve — Clinical Evidence)</p>
+                <p className="text-gray-300">Controlled breathing at extended exhale ratios measurably activates the parasympathetic nervous system via vagal tone increase. Used in clinical anxiety, PTSD, and surgical preparation. Cortisol reduction confirmed in NIH-registered trials. This is the most evidence-backed intervention in the chamber.</p>
+                <p className="text-emerald-300 text-[10px] mt-1">Jerath et al. (2006) Med. Hypotheses. NIH: NCT02984735. Military PTSD protocols (VA 2018).</p>
+              </div>
+
               <div className="bg-pink-900/20 border-l-4 border-pink-500 p-3 rounded">
                 <p className="text-pink-400 font-black mb-1">LONELINESS + THE BRAIN (UCLA)</p>
                 <p className="text-gray-300">Loneliness activates the same brain regions as physical pain (dorsal anterior cingulate cortex). It's not weakness — it's neuroscience. Brown noise activates parasympathetic calm. 4-7-8 breathing reduces cortisol measurably (NIH).</p>
