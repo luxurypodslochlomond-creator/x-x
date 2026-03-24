@@ -450,6 +450,35 @@ export default function FrequencyChamber() {
       // PRIMARY FREQUENCY
       const carrier = freq.carrier || freq.hz || 20; // fallback to 20 for sweep
 
+      // === BROWN NOISE ===
+      if (freq.isBrownNoise) {
+        const bufferSize = ctx.sampleRate * 4;
+        const buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+        for (let ch = 0; ch < 2; ch++) {
+          const data = buffer.getChannelData(ch);
+          let lastOut = 0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            data[i] = (lastOut + (0.02 * white)) / 1.02;
+            lastOut = data[i];
+            data[i] *= 3.5; // amplify
+          }
+        }
+        const brownNoise = ctx.createBufferSource();
+        brownNoise.buffer = buffer;
+        brownNoise.loop = true;
+        brownNoise.connect(masterGain);
+        brownNoise.start();
+        nodes.push(brownNoise);
+        nodesRef.current = nodes;
+        setIsPlaying(true);
+        setSelected(freq);
+        setTimer(0);
+        timerRef.current = setInterval(() => setTimer(t => t + 1), 1000);
+        drawVisualizer();
+        return;
+      }
+
       // === TINNITUS NOTCH THERAPY ===
       if (freq.isNotch) {
         // Notch therapy: play broadband noise, cut out the tinnitus frequency
