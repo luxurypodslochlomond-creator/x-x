@@ -112,7 +112,7 @@ export default function PetSounds51Landing() {
         </p>
         <p className="text-sm leading-relaxed mb-3" style={{ color: '#a89870' }}>
           But here's what most products miss: your dog hears up to 65,000 Hz. Your cat up to 79,000 Hz. 
-          Generic "relaxing music" was made for humans. It wasn't built for them. This was.
+          Most streaming music was made for human ears. This was built for theirs.
         </p>
         <p className="text-sm leading-relaxed" style={{ color: '#8aab3a' }}>
           Every protocol uses a different audio architecture — the thunderstorm one physically masks sudden bangs. 
