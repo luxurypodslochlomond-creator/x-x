@@ -796,25 +796,28 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
         </div>
       </div>
 
-      {/* Audio quality note — different for separation (bio-mimetic) vs others */}
-      <div className="mb-4 px-3 py-3 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
-        {protocol === 'separation' ? (
-          <>
-            <p className="text-xs font-black mb-1" style={{ color: freq.color }}>👀 WATCH FOR THESE SIGNS IT'S WORKING</p>
-            <p className="text-xs leading-relaxed" style={{ color: freq.color + 'bb' }}>
-              Moves closer to speaker · lies down · ears relax back · yawning · slower breathing · stops pacing
-            </p>
-            <p className="text-xs mt-1 text-gray-600">Bio-mimetic engine: heartbeat · purr frequency · breath texture</p>
-          </>
-        ) : (
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: freq.color }} />
-            <p className="text-xs" style={{ color: freq.color + 'bb' }}>
-              5-layer engine · species EQ applied · brown noise bed · headphones enhance binaural effect
-            </p>
-          </div>
-        )}
-      </div>
+      {/* Audio quality note — signs to watch for on bio-mimetic protocols */}
+      {['separation','thunderstorm','night_anxiety','rescue_trauma','grief','arthritis','recovery'].includes(protocol) ? (
+        <div className="mb-4 px-3 py-3 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
+          <p className="text-xs font-black mb-1" style={{ color: freq.color }}>👀 SIGNS IT'S WORKING</p>
+          <p className="text-xs leading-relaxed" style={{ color: freq.color + 'bb' }}>
+            {protocol === 'thunderstorm' && 'Less flinching at bangs · moves near speaker · breathing slows · stops shaking'}
+            {protocol === 'night_anxiety' && 'Lies down · yawning · eyes getting heavy · stops pacing · breathing deepens'}
+            {protocol === 'rescue_trauma' && 'Stops scanning the room · body softens · moves closer · eventual yawn or sigh'}
+            {protocol === 'grief' && 'Less restlessness · lies in one place longer · less whimpering · appetite returning'}
+            {protocol === 'arthritis' && 'Less guarding posture · easier lying down · less panting · more relaxed body language'}
+            {protocol === 'recovery' && 'Settling without seeking attention · deeper breathing · less whimpering · restful sleep'}
+            {protocol === 'separation' && 'Moves closer to speaker · lies down · ears relax back · yawning · slower breathing'}
+          </p>
+        </div>
+      ) : (
+        <div className="mb-4 flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
+          <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: freq.color }} />
+          <p className="text-xs" style={{ color: freq.color + 'bb' }}>
+            5-layer engine · species EQ applied · brown noise bed · headphones enhance binaural effect
+          </p>
+        </div>
+      )}
 
       {!isPlaying && (
         <div className="space-y-3">
