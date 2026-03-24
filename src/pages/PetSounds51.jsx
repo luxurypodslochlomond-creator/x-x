@@ -356,7 +356,7 @@ export default function PetSounds51() {
           💛 If the free protocol helped your pet — even a little — please share it with someone whose animal is struggling. 
           It costs nothing. And if you ever want to tell us what you noticed, we genuinely want to hear it.
         </p>
-        <p className="text-xs mt-2" style={{ color: '#6b5e3a' }}>10% of every subscription goes directly to animal rescue through UF51 CIC. Your pet helping other pets.</p>
+        <p className="text-xs mt-2" style={{ color: '#6b5e3a' }}>10% of every subscription goes directly to animal rescue through UF51 CIC.</p>
       </div>
 
       {/* FOOTER TRUST BUTTONS */}
