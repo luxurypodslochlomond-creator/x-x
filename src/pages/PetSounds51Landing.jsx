@@ -44,11 +44,11 @@ export default function PetSounds51Landing() {
         </div>
 
         <h2 className="text-2xl sm:text-3xl font-black mb-3 leading-tight" style={{ color: '#e8d5a3' }}>
-          You can see it in their eyes.<br />You just don't know what to do.
+          It's 11pm. There's a storm.<br />Your dog is shaking and you feel helpless.
         </h2>
         <p className="text-base mb-2 leading-relaxed" style={{ color: '#a89870' }}>
-          We built this because we felt exactly that. Science actually has an answer — 
-          sound tuned to how your pet hears genuinely calms them. We just made it easy to use.
+          Press play. That's it. Sound tuned specifically to how your pet hears — 
+          not a Spotify playlist, not generic white noise. Something that actually works.
         </p>
         <p className="text-xs mb-6" style={{ color: '#8aab3a' }}>
           80% of dogs showed fewer anxiety behaviours in peer-reviewed studies · No side effects · Works alongside your vet
