@@ -1327,19 +1327,13 @@ export default function FrequencyChamber() {
 
             {/* EVIDENCE BADGE */}
             <div className="mb-2">
-              {['anxiety', 'depression', 'loneliness', 'focus', 'sleep', 'tinnitus_sweep', 'tinnitus_notch', 'root_canal_pain', 'cat_healing'].includes(freq.id) && (
-                ['anxiety', 'depression', 'loneliness', 'focus', 'sleep', 'tinnitus_notch', 'root_canal_pain'].includes(freq.id) ? (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/15 border border-green-500/50 rounded text-[10px] font-black text-green-400 font-mono">✓ PEER-REVIEWED</span>
-                ) : freq.id === 'tinnitus_sweep' ? (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-cyan-500/15 border border-cyan-500/50 rounded text-[10px] font-black text-cyan-400 font-mono">🔬 EXPERIMENTAL</span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-500/15 border border-amber-500/50 rounded text-[10px] font-black text-amber-400 font-mono">◈ TRADITIONAL PRACTICE</span>
-                )
+              {['anxiety', 'depression', 'loneliness', 'focus', 'sleep', 'tinnitus_notch', 'root_canal_pain', 'brown_noise', 'box_breathing'].includes(freq.id) && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/15 border border-green-500/50 rounded text-[10px] font-black text-green-400 font-mono">✓ PEER-REVIEWED</span>
               )}
-              {['earth', 'calm', 'muscle_tension'].includes(freq.id) && (
+              {['tinnitus_sweep', 'earth', 'calm', 'muscle_tension'].includes(freq.id) && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-cyan-500/15 border border-cyan-500/50 rounded text-[10px] font-black text-cyan-400 font-mono">🔬 EXPERIMENTAL</span>
               )}
-              {['chest_heart', 'nerve_pain', 'inflammation', 'bro51_heart_boost', 'bro51_full_body', 'bro51_gut_repair'].includes(freq.id) && (
+              {['chest_heart', 'nerve_pain', 'inflammation', 'bro51_heart_boost', 'bro51_full_body', 'bro51_gut_repair', 'cat_healing'].includes(freq.id) && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-500/15 border border-amber-500/50 rounded text-[10px] font-black text-amber-400 font-mono">◈ TRADITIONAL PRACTICE</span>
               )}
             </div>
