@@ -291,29 +291,55 @@ export default function PetSounds51() {
                 {cat.items.map((item) => {
                   const isFree = FREE_PROTOCOLS.includes(item.key);
                   const isPremium = !isFree && !isSubscribed;
+                  const isUnlocked = isFree || isSubscribed;
                   const ItemIcon = item.icon ? PS51Icons[item.icon] : null;
                   return (
                     <button
                       key={item.key}
-                      onClick={() => handleSelect(item.key)}
-                      className="p-4 transition-all text-left rounded-lg group relative shadow-md"
-                      style={{ background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)' }}
-                      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(212,160,23,0.4)'}
-                      onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(138,171,58,0.2)'}
+                      onPointerDown={(e) => {
+                        e.preventDefault();
+                        handleSelect(item.key);
+                      }}
+                      className="p-4 transition-all text-left rounded-xl group relative shadow-md active:scale-95 select-none touch-manipulation"
+                      style={{
+                        background: isUnlocked
+                          ? `linear-gradient(135deg, rgba(42,48,24,0.9), rgba(30,36,16,0.95))`
+                          : 'rgba(22,26,12,0.5)',
+                        border: isUnlocked
+                          ? `1px solid ${item.color}55`
+                          : '1px solid rgba(138,171,58,0.15)',
+                        boxShadow: isUnlocked ? `0 0 20px ${item.color}10` : 'none',
+                        opacity: isPremium ? 0.7 : 1,
+                      }}
                     >
+                      {/* TOP ROW */}
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          {ItemIcon && <ItemIcon size={18} style={{ color: item.color, flexShrink: 0 }} />}
-                          {isFree && <span className="text-xs font-black" style={{ color: '#8aab3a' }}>FREE</span>}
+                          {ItemIcon && <ItemIcon size={20} style={{ color: isUnlocked ? item.color : '#6b5e3a', flexShrink: 0 }} />}
+                          {isFree && (
+                            <span className="text-xs font-black px-2 py-0.5 rounded-full" style={{ background: 'rgba(138,171,58,0.2)', color: '#8aab3a' }}>FREE</span>
+                          )}
+                          {isSubscribed && !isFree && (
+                            <span className="text-xs font-black px-2 py-0.5 rounded-full" style={{ background: `${item.color}20`, color: item.color }}>PREMIUM</span>
+                          )}
                         </div>
                         {isPremium
                           ? <Lock className="w-4 h-4" style={{ color: '#6b5e3a' }} />
-                          : <Play className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: item.color }} />
+                          : <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: `${item.color}25` }}>
+                              <Play className="w-4 h-4" style={{ color: item.color }} />
+                            </div>
                         }
                       </div>
-                      <p className="font-black mb-1 text-sm" style={{ color: '#e8d5a3' }}>{item.name}</p>
-                      <p className="text-xs mb-2" style={{ color: '#a89870' }}>"{item.tagline}"</p>
-                      <p className="text-xs leading-snug" style={{ color: '#8aab3a' }}>{item.desc}</p>
+
+                      {/* CONTENT */}
+                      <p className="font-black mb-1" style={{ color: isUnlocked ? '#e8d5a3' : '#8a7a5a', fontSize: '0.95rem' }}>{item.name}</p>
+                      <p className="text-xs mb-2 italic" style={{ color: isUnlocked ? '#a89870' : '#6b5e3a' }}>"{item.tagline}"</p>
+                      <p className="text-xs leading-snug" style={{ color: isUnlocked ? '#8aab3a' : '#5a6b30' }}>{item.desc}</p>
+
+                      {/* PREMIUM UNLOCK HINT */}
+                      {isPremium && (
+                        <p className="text-xs font-bold mt-3" style={{ color: '#d4a017' }}>Tap to unlock — £29.99/year →</p>
+                      )}
                     </button>
                   );
                 })}
