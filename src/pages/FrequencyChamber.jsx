@@ -261,7 +261,7 @@ const FREQUENCIES = [
     color: '#ec4899',
     color2: '#10b981',
     visual: 'heart',
-    description: 'BOOSTED: 528Hz DNA repair + 285Hz tissue rebuild + chest tension release',
+    description: 'BOOSTED: 528Hz stress relief + 285Hz tissue support + chest tension release',
     waveform: 'sine',
     harmonics: [285, 1056, 174, 432, 264], // 285 = tissue repair, 174 = pain relief, 432 = calm
     timer: '20 min',
