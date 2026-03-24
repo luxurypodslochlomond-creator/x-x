@@ -213,7 +213,7 @@ function buildAudioGraph(ctx, freq, volume, species) {
   subGain.gain.value = 0.04;
   subOsc.connect(subFilter);
   subFilter.connect(subGain);
-  subGain.connect(masterGain);
+  subGain.connect(eqBus);
   subOsc.start();
   nodes.push(subOsc, subFilter, subGain);
 
