@@ -210,7 +210,7 @@ export default function PetSounds51() {
       <div className="max-w-4xl mx-auto mb-6">
         <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.2)' }}>
           <p className="text-sm leading-relaxed italic mb-3" style={{ color: '#c8b87a' }}>
-            "We didn't build this to sell subscriptions. We built it because animals suffer silently and there's real science that helps — and almost nobody had made it accessible. The free protocol exists because your pet's anxiety matters whether you pay or not. If it helps, come back. If it doesn't, we want to know why."
+            "We built this because animals suffer silently and there's real science that helps — and almost nobody had made it accessible. The free protocol exists because your pet's anxiety matters whether you pay or not. The subscription keeps the lights on and funds animal rescue. If it helps, come back. If it doesn't, we want to know why."
           </p>
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold" style={{ color: '#6b5e3a' }}>— PetSounds51 · Universal Frequency 51 CIC</span>
