@@ -5,6 +5,8 @@ import { createPageUrl } from '@/utils';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PS51Paywall from '@/components/petsounds/PS51Paywall';
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
+import { verifyPS51Subscription } from '@/functions/verifyPS51Subscription';
+import { sendPS51ConfirmationEmail } from '@/functions/sendPS51ConfirmationEmail';
 
 
 // Free tier: separation anxiety only
@@ -109,13 +111,35 @@ export default function PetSounds51() {
 
      // Check if returned from successful Stripe checkout
      const params = new URLSearchParams(window.location.search);
-     if (params.get('subscribed') === 'true') {
+     const email = params.get('email');
+     if (params.get('subscribed') === 'true' && email) {
        setIsSubscribed(true);
+       localStorage.setItem('ps51_subscribed', '1');
+       localStorage.setItem('ps51_email', email);
+       // Send confirmation email
+       sendPS51ConfirmationEmail({ email }).catch(err => console.error('Email send failed:', err));
        window.history.replaceState({}, '', window.location.pathname);
      }
+
      // Check localStorage for existing subscription
      if (localStorage.getItem('ps51_subscribed')) {
-       setIsSubscribed(true);
+       const savedEmail = localStorage.getItem('ps51_email');
+       if (savedEmail) {
+         // Verify subscription is still active with backend
+         verifyPS51Subscription({ email: savedEmail })
+           .then(res => {
+             if (res.data?.subscribed) {
+               setIsSubscribed(true);
+             } else {
+               localStorage.removeItem('ps51_subscribed');
+               localStorage.removeItem('ps51_email');
+             }
+           })
+           .catch(err => {
+             // If verification fails (network error), trust localStorage for now
+             setIsSubscribed(true);
+           });
+       }
      }
    }, []);
 
