@@ -210,10 +210,10 @@ export default function PetSounds51() {
       <div className="max-w-4xl mx-auto mb-6">
         <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.2)' }}>
           <p className="text-sm leading-relaxed italic mb-3" style={{ color: '#c8b87a' }}>
-            "The science is real and it's simple: slow, gentle music tuned to your pet's hearing biology reduces anxiety. That's been shown in peer-reviewed studies. We built this on that — nothing more, nothing less. Your pet can't tell you they're suffering. This is one honest thing you can do."
+            "We didn't build this to sell subscriptions. We built it because animals suffer silently and there's real science that helps — and almost nobody had made it accessible. The free protocol exists because your pet's anxiety matters whether you pay or not. If it helps, come back. If it doesn't, we want to know why."
           </p>
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold" style={{ color: '#6b5e3a' }}>— AI51 · Universal Frequency 51</span>
+            <span className="text-xs font-bold" style={{ color: '#6b5e3a' }}>— PetSounds51 · Universal Frequency 51 CIC</span>
             <Link to={createPageUrl("PetSounds51Story")} className="text-xs font-black transition-colors" style={{ color: '#8aab3a' }}>
               The full story →
             </Link>
