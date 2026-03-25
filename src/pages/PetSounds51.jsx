@@ -157,6 +157,26 @@ export default function PetSounds51() {
      }
    }, []);
 
+  const handleRestoreAccess = async () => {
+    if (!restoreEmail.trim()) return;
+    setRestoreLoading(true);
+    setRestoreError('');
+    try {
+      const res = await verifyPS51Subscription({ email: restoreEmail.trim() });
+      if (res.data?.subscribed) {
+        localStorage.setItem('ps51_subscribed', '1');
+        localStorage.setItem('ps51_email', restoreEmail.trim());
+        setIsSubscribed(true);
+        setShowRestoreAccess(false);
+      } else {
+        setRestoreError('No active subscription found for that email.');
+      }
+    } catch {
+      setRestoreError('Could not verify — please try again.');
+    }
+    setRestoreLoading(false);
+  };
+
   const handleSelect = (protocolKey) => {
     if (!FREE_PROTOCOLS.includes(protocolKey) && !isSubscribed) {
       setShowPaywall(true);
