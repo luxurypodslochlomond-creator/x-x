@@ -10,7 +10,6 @@ Deno.serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       line_items: [{ price: PRICE_ID, quantity: 1 }],
-      payment_method_types: ['card', 'apple_pay', 'google_pay'],
       success_url: successUrl || 'https://uf51.love/PetSounds51?subscribed=true',
       cancel_url: cancelUrl || 'https://uf51.love/PetSounds51',
       allow_promotion_codes: true,

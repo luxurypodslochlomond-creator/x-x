@@ -19,21 +19,16 @@ const PROTOCOLS = [
 
 export default function PS51Paywall({ onClose }) {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
 
   const handleStart = async () => {
     if (window.self !== window.top) {
       alert('Payment works from the published app — not inside the preview.');
       return;
     }
-    if (!email) {
-      alert('Please enter your email.');
-      return;
-    }
     setLoading(true);
     try {
       const res = await petSoundsCheckout({
-        successUrl: window.location.origin + '/PetSounds51?subscribed=true&email=' + encodeURIComponent(email),
+        successUrl: window.location.origin + '/PetSounds51?subscribed=true',
         cancelUrl: window.location.origin + '/PetSounds51',
       });
       if (res.data?.url) {
