@@ -103,20 +103,10 @@ export default function PS51Paywall({ onClose }) {
           ))}
         </div>
 
-        {/* EMAIL INPUT */}
-         <input
-            type="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500 mb-3 focus:outline-none focus:border-amber-400"
-            disabled={loading}
-          />
-
         {/* CTA */}
          <button
             onClick={handleStart}
-            disabled={loading || !email}
+            disabled={loading}
             className="w-full py-5 rounded-2xl font-black text-xl text-white transition-all active:scale-95 mb-3 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               background: loading ? '#374151' : 'linear-gradient(135deg, #d4a017, #f59e0b)',
