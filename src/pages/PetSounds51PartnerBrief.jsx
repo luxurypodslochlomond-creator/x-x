@@ -165,8 +165,7 @@ Best,
             </div>
           </div>
           <p className="text-gray-400 text-sm max-w-xl">
-            Everything a partner or influencer needs to understand the market, the product, and the opportunity. 
-            Built for Michael — and anyone else who wants a piece of this. 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+            Everything a partner or influencer needs to understand the market, the product, and the opportunity.
           </p>
         </div>
       </div>
@@ -286,7 +285,7 @@ Best,
 
         {/* KEY STATS CARD */}
         <div className="p-5 rounded-2xl border-2 border-amber-600/40 bg-amber-600/5">
-          <p className="font-black text-amber-500 font-mono text-sm mb-4 tracking-wider">⚡ KEY NUMBERS FOR MICHAEL</p>
+          <p className="font-black text-amber-500 font-mono text-sm mb-4 tracking-wider">⚡ KEY NUMBERS</p>
           <div className="grid grid-cols-2 gap-3">
             {[
               { label: 'Global pet anxiety market', value: '$1.08B' },
