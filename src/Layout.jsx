@@ -447,6 +447,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Home", url: createPageUrl("PetSounds51"), icon: Heart, description: "All protocols" },
     { title: "Why It Works", url: createPageUrl("PetSounds51Landing"), icon: Sparkles, highlight: true, description: "Science · pricing · try free" },
     { title: "Share the Story", url: createPageUrl("PetSounds51Story"), icon: Zap, highlight: true, description: "Shareable story — send to anyone" },
+    { title: "🤝 Partner Brief", url: createPageUrl("PetSounds51PartnerBrief"), icon: DollarSign, highlight: true, description: "Influencer & affiliate brief" },
     { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: FileText, description: "Service terms" },
     { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye, description: "Data protection" },
   ];
