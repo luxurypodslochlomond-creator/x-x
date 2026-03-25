@@ -7,6 +7,7 @@ import PS51Paywall from '@/components/petsounds/PS51Paywall';
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
 import { verifyPS51Subscription } from '@/functions/verifyPS51Subscription';
 import { sendPS51ConfirmationEmail } from '@/functions/sendPS51ConfirmationEmail';
+import { getPS51Session } from '@/functions/getPS51Session';
 
 
 // Free tier: separation anxiety only
