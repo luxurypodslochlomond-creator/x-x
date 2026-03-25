@@ -80,6 +80,7 @@ const AuthenticatedApp = () => {
       <Route path="/StoneymollanMarketing" element={<LayoutWrapper currentPageName="StoneymollanMarketing"><StoneymollanMarketing /></LayoutWrapper>} />
       <Route path="/PetSounds51Landing" element={<LayoutWrapper currentPageName="PetSounds51Landing"><PetSounds51Landing /></LayoutWrapper>} />
       <Route path="/AI51SoulDataset" element={<LayoutWrapper currentPageName="AI51SoulDataset"><AI51SoulDataset /></LayoutWrapper>} />
+      <Route path="/PetSounds51PartnerBrief" element={<LayoutWrapper currentPageName="PetSounds51PartnerBrief"><PetSounds51PartnerBrief /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
