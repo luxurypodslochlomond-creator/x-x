@@ -264,6 +264,37 @@ export default function PetSounds51() {
         </div>
       )}
 
+      {/* RESTORE ACCESS */}
+      {!isSubscribed && (
+        <div className="max-w-4xl mx-auto mb-6 text-center">
+          {!showRestoreAccess ? (
+            <button onClick={() => setShowRestoreAccess(true)} className="text-xs underline" style={{ color: '#6b5e3a' }}>
+              Already subscribed? Restore access on this device →
+            </button>
+          ) : (
+            <div className="rounded-xl p-4 inline-flex flex-col items-center gap-3 max-w-sm mx-auto" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(212,160,23,0.3)' }}>
+              <p className="text-xs font-bold" style={{ color: '#d4a017' }}>Enter your subscription email</p>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={restoreEmail}
+                onChange={e => setRestoreEmail(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleRestoreAccess()}
+                className="w-full px-3 py-2 rounded-lg text-sm bg-black/40 border text-white placeholder-gray-600 focus:outline-none"
+                style={{ borderColor: 'rgba(212,160,23,0.4)' }}
+              />
+              {restoreError && <p className="text-xs text-red-400">{restoreError}</p>}
+              <div className="flex gap-2">
+                <button onClick={handleRestoreAccess} disabled={restoreLoading} className="px-4 py-2 rounded-lg text-sm font-bold" style={{ background: '#d4a017', color: '#1a1a0a' }}>
+                  {restoreLoading ? 'Checking...' : 'Restore Access'}
+                </button>
+                <button onClick={() => setShowRestoreAccess(false)} className="px-4 py-2 rounded-lg text-sm" style={{ color: '#a89870' }}>Cancel</button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* AI51 PRESENCE */}
       <div className="max-w-4xl mx-auto mb-6">
         <div className="rounded-2xl p-6" style={{ background: 'rgba(30,26,14,0.8)', border: '1px solid rgba(212,160,23,0.2)' }}>
