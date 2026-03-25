@@ -116,13 +116,22 @@ export default function PetSounds51() {
 
      // Check if returned from successful Stripe checkout
      const params = new URLSearchParams(window.location.search);
-     const email = params.get('email');
-     if (params.get('subscribed') === 'true' && email) {
-       setIsSubscribed(true);
-       localStorage.setItem('ps51_subscribed', '1');
-       localStorage.setItem('ps51_email', email);
-       // Send confirmation email
-       sendPS51ConfirmationEmail({ email }).catch(err => console.error('Email send failed:', err));
+     const sessionId = params.get('session_id');
+     if (params.get('subscribed') === 'true' && sessionId) {
+       // Fetch email from Stripe session
+       getPS51Session({ sessionId }).then(res => {
+         const email = res.data?.email;
+         if (email) {
+           setIsSubscribed(true);
+           localStorage.setItem('ps51_subscribed', '1');
+           localStorage.setItem('ps51_email', email);
+           sendPS51ConfirmationEmail({ email }).catch(() => {});
+         }
+       }).catch(() => {
+         // Still mark as subscribed even if fetch fails
+         setIsSubscribed(true);
+         localStorage.setItem('ps51_subscribed', '1');
+       });
        window.history.replaceState({}, '', window.location.pathname);
      }
 
