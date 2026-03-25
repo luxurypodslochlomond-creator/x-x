@@ -73,6 +73,10 @@ export default function PetSounds51() {
    const [showPaywall, setShowPaywall] = useState(false);
    const [isSubscribed, setIsSubscribed] = useState(false);
    const [selectedSpecies, setSelectedSpecies] = useState('dog');
+   const [showRestoreAccess, setShowRestoreAccess] = useState(false);
+   const [restoreEmail, setRestoreEmail] = useState('');
+   const [restoreLoading, setRestoreLoading] = useState(false);
+   const [restoreError, setRestoreError] = useState('');
 
    useEffect(() => {
      // Set OG tags for social sharing
