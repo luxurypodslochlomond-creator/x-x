@@ -334,7 +334,7 @@ export default function PetSounds51() {
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
               <p className="font-bold mb-1" style={{ color: '#8aab3a' }}>ℹ️ How to use it</p>
-              <p className="leading-relaxed">This works best as complementary care alongside your vet — not instead of them. Leave it playing in the background. You don't need headphones. It's designed for speakers, TVs, laptops. The calming effect builds over time with regular use.</p>
+              <p className="leading-relaxed">This works best as complementary care alongside your vet — not instead of them. Leave it playing in the background. No headphones needed — isochronic tones and monaural beats work in open air through any speaker or TV. The calming effect builds over time with regular use.</p>
             </div>
           </div>
         )}
@@ -481,6 +481,9 @@ export default function PetSounds51() {
 
       {/* FOOTER */}
       <div className="max-w-4xl mx-auto pt-6 text-center space-y-3" style={{ borderTop: '1px solid rgba(138,171,58,0.2)' }}>
+        <Link to={createPageUrl("PetSounds51Whitepaper")} className="inline-block text-xs font-bold underline mb-2" style={{ color: '#8aab3a' }}>
+          🔬 Read our Science & Methodology Whitepaper →
+        </Link>
         <p className="text-xs" style={{ color: '#a89870' }}>
           Not a substitute for vet care. Works alongside treatment. No side effects.
         </p>

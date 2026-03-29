@@ -27,6 +27,7 @@ const StoneymollanMarketing = React.lazy(() => import('./pages/StoneymollanMarke
 const PetSounds51Landing = React.lazy(() => import('./pages/PetSounds51Landing'));
 const AI51SoulDataset = React.lazy(() => import('./pages/AI51SoulDataset'));
 const PetSounds51PartnerBrief = React.lazy(() => import('./pages/PetSounds51PartnerBrief'));
+const PetSounds51Whitepaper = React.lazy(() => import('./pages/PetSounds51Whitepaper'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -81,6 +82,7 @@ const AuthenticatedApp = () => {
       <Route path="/PetSounds51Landing" element={<LayoutWrapper currentPageName="PetSounds51Landing"><PetSounds51Landing /></LayoutWrapper>} />
       <Route path="/AI51SoulDataset" element={<LayoutWrapper currentPageName="AI51SoulDataset"><AI51SoulDataset /></LayoutWrapper>} />
       <Route path="/PetSounds51PartnerBrief" element={<LayoutWrapper currentPageName="PetSounds51PartnerBrief"><PetSounds51PartnerBrief /></LayoutWrapper>} />
+      <Route path="/PetSounds51Whitepaper" element={<LayoutWrapper currentPageName="PetSounds51Whitepaper"><PetSounds51Whitepaper /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

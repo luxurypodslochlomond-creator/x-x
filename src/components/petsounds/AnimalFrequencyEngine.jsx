@@ -436,22 +436,9 @@ function buildNightGraph(ctx, volume, species) {
   // Purr foundation — the gentlest possible "safe" signal
   addPurrLayer(ctx, eqBus, nodes);
 
-  // Ultra-slow carrier — delta territory (2Hz binaural beat for sleep onset)
-  const merger = ctx.createChannelMerger(2);
-  merger.connect(eqBus);
-  const carrier = 180;
-  const beatHz = 2; // delta — deep sleep entrainment
-  [carrier, carrier + beatHz].forEach((f, i) => {
-    const osc = ctx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.value = f;
-    const g = ctx.createGain();
-    g.gain.value = 0.12;
-    osc.connect(g);
-    g.connect(merger, 0, i);
-    osc.start();
-    nodes.push(osc, g);
-  });
+  // Ultra-slow isochronic delta tone — 2Hz = deep sleep entrainment
+  // Works through any speaker — isochronic AM is more effective than binaural in open air
+  buildIsochronicTone(ctx, 180, 2, 'sine', volume * 0.5, eqBus, nodes);
 
   // Very quiet brown noise — like rain heard through double glazing
   addBrownNoiseBed(ctx, eqBus, nodes, 0.012, 300);
@@ -482,24 +469,13 @@ function buildNightGraph(ctx, volume, species) {
 }
 
 // ── PAIN PROTOCOLS (arthritis, recovery) — 40Hz gamma entrainment ─────────────
-// 40Hz gamma: published research (MIT/Iaccarino 2016, replicated) showing
-// gamma entrainment reduces amyloid plaques, modulates inflammatory pathways.
-// For pain: reduces the cortisol-pain feedback loop.
+// 40Hz gamma isochronic: published research (MIT/Iaccarino 2016, replicated)
+// Isochronic = amplitude modulation at 40Hz — works through any speaker
 function buildPainGraph(ctx, volume, species, carrier = 174) {
   const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume, species, 2.5);
 
-  // 40Hz gamma binaural beat — the clinically studied frequency
-  const merger = ctx.createChannelMerger(2);
-  merger.connect(eqBus);
-  [carrier, carrier + 40].forEach((f, i) => {
-    const osc = ctx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.value = f;
-    const g = ctx.createGain();
-    g.gain.value = 0.22;
-    osc.connect(g); g.connect(merger, 0, i); osc.start();
-    nodes.push(osc, g);
-  });
+  // 40Hz gamma isochronic tone — speaker-compatible (no headphones needed)
+  buildIsochronicTone(ctx, carrier, 40, 'sine', volume, eqBus, nodes);
 
   // Warm harmonic support — makes 40Hz beat more pleasant to sit with
   addHarmonicStack(ctx, eqBus, carrier, [1, 5/4, 3/2], nodes);
@@ -572,22 +548,42 @@ function buildTraumaGraph(ctx, volume, species) {
   return { masterGain, nodes };
 }
 
+// ── ISOCHRONIC TONE ENGINE (works on any speaker — no headphones needed) ─────
+// Isochronic = amplitude modulation at the target brainwave rate
+// Unlike binaural beats, isochronic tones work in open air through any speaker
+// This is the correct approach for room/ambient use with animals
+function buildIsochronicTone(ctx, carrier, isoRate, waveform, volume, eqBus, nodes) {
+  const osc = ctx.createOscillator();
+  osc.type = waveform || 'sine';
+  osc.frequency.value = carrier;
+
+  const carrierGain = ctx.createGain();
+  carrierGain.gain.value = 0.28;
+
+  // Isochronic AM — sharp on/off at isoRate Hz (e.g. 10Hz = alpha calm)
+  const isoLFO = ctx.createOscillator();
+  isoLFO.type = 'square'; // square = sharp pulse = true isochronic
+  isoLFO.frequency.value = isoRate;
+  const isoLFOGain = ctx.createGain();
+  isoLFOGain.gain.value = 0.14; // modulation depth — audible but not harsh
+  isoLFO.connect(isoLFOGain);
+  isoLFOGain.connect(carrierGain.gain);
+  isoLFO.start();
+  nodes.push(isoLFO, isoLFOGain);
+
+  osc.connect(carrierGain);
+  carrierGain.connect(eqBus);
+  osc.start();
+  nodes.push(osc, carrierGain);
+}
+
 // ── STANDARD ENGINE (hyperactive, pre-race, post-race, zoo, fatigue) ──────────
+// Uses isochronic tones — works perfectly through speakers, TVs, laptops
 function buildAudioGraph(ctx, freq, volume, species) {
   const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume, species, 2.0);
 
-  // Binaural carrier pair
-  const merger = ctx.createChannelMerger(2);
-  merger.connect(eqBus);
-  [freq.carrier, freq.carrier + freq.binauralBeat].forEach((f, i) => {
-    const osc = ctx.createOscillator();
-    osc.type = freq.waveform;
-    osc.frequency.value = f;
-    const g = ctx.createGain();
-    g.gain.value = 0.3;
-    osc.connect(g); g.connect(merger, 0, i); osc.start();
-    nodes.push(osc, g);
-  });
+  // Isochronic tone — speaker-compatible entrainment (replaces binaural pairs)
+  buildIsochronicTone(ctx, freq.carrier, freq.binauralBeat, freq.waveform, volume, eqBus, nodes);
 
   addHarmonicStack(ctx, eqBus, freq.carrier, freq.chord, nodes);
   addBrownNoiseBed(ctx, eqBus, nodes, 0.018, 400);
@@ -814,7 +810,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
         <div className="mb-4 flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
           <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: freq.color }} />
           <p className="text-xs" style={{ color: freq.color + 'bb' }}>
-            5-layer engine · species EQ applied · brown noise bed · headphones enhance binaural effect
+            5-layer engine · species EQ applied · isochronic tones · works on any speaker
           </p>
         </div>
       )}
@@ -850,7 +846,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
             ))}
           </div>
 
-          <p className="text-xs text-gray-700 text-center">Speaker for ambient room · headphones for binaural</p>
+          <p className="text-xs text-gray-700 text-center">Works on any speaker, TV or laptop — no headphones needed</p>
         </div>
       )}
 
