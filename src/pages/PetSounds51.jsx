@@ -63,8 +63,8 @@ const PROTOCOLS = {
 
 const SPECIES = [
   { key: 'dog', Icon: PS51Icons.Paw, iconColor: '#d4a017', label: 'Dog' },
-  { key: 'cat', Icon: PS51Icons.Rescue, iconColor: '#ec4899', label: 'Cat' },
-  { key: 'horse', Icon: PS51Icons.Trust, iconColor: '#8aab3a', label: 'Horse' },
+  { key: 'cat', Icon: PS51Icons.Cat, iconColor: '#f472b6', label: 'Cat' },
+  { key: 'horse', Icon: PS51Icons.Horse, iconColor: '#8aab3a', label: 'Horse' },
 ];
 
 export default function PetSounds51() {

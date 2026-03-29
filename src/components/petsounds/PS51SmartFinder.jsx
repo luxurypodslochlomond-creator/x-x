@@ -104,8 +104,8 @@ const QUESTIONS = [
     Icon: PS51Icons.AnimalCare,
     options: [
       { key: 'dog', label: 'Dog', Icon: PS51Icons.Paw, iconColor: '#d4a017', desc: 'All sizes and breeds' },
-      { key: 'cat', label: 'Cat', Icon: PS51Icons.Rescue, iconColor: '#ec4899', desc: 'Domestic and large cats' },
-      { key: 'horse', label: 'Horse', Icon: PS51Icons.Trust, iconColor: '#8aab3a', desc: 'Horses and ponies' },
+      { key: 'cat', label: 'Cat', Icon: PS51Icons.Cat, iconColor: '#f472b6', desc: 'Domestic and large cats' },
+      { key: 'horse', label: 'Horse', Icon: PS51Icons.Horse, iconColor: '#8aab3a', desc: 'Horses and ponies' },
     ]
   },
   {

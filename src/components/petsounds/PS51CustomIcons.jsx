@@ -84,6 +84,38 @@ export const PS51Icons = {
     </svg>
   ),
 
+  // Cat face — feline specific
+  Cat: ({ size = 24, className = '' }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+      {/* Cat ears */}
+      <path d="M4 8L2 3l5 3M20 8l2-3-5 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="currentColor"/>
+      {/* Head */}
+      <circle cx="12" cy="13" r="7" stroke="currentColor" strokeWidth="2" fill="none"/>
+      {/* Eyes */}
+      <ellipse cx="9" cy="12" rx="1.2" ry="1.5" fill="currentColor"/>
+      <ellipse cx="15" cy="12" rx="1.2" ry="1.5" fill="currentColor"/>
+      {/* Nose */}
+      <path d="M11 15h2M12 14v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Whiskers */}
+      <path d="M4 13h4M16 13h4M5 11l3 1M19 11l-3 1" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.7"/>
+    </svg>
+  ),
+
+  // Horseshoe — equine specific
+  Horse: ({ size = 24, className = '' }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+      {/* Horseshoe shape */}
+      <path d="M7 20V10a5 5 0 0 1 10 0v10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+      {/* Open bottom of horseshoe */}
+      <path d="M7 20h2.5M14.5 20H17" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+      {/* Nail holes */}
+      <circle cx="8.5" cy="14" r="1" fill="currentColor"/>
+      <circle cx="15.5" cy="14" r="1" fill="currentColor"/>
+      <circle cx="8" cy="18" r="1" fill="currentColor"/>
+      <circle cx="16" cy="18" r="1" fill="currentColor"/>
+    </svg>
+  ),
+
   // Heart for grief & loss — remembering bonds
   Heart: ({ size = 24, className = '', animate = false }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}
