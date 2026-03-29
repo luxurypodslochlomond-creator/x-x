@@ -52,24 +52,25 @@ Research: family@uf51.love`;
   ];
 
   const downloadMediaKit = async (itemName) => {
-    // Trigger downloads for press materials
-    const downloads = {
-      'Brand Logo': 'https://uf51.love/assets/petsounds51-logo.png',
-      'Science Whitepaper': '/PetSounds51Whitepaper',
-      'Data Sheet': 'mailto:family@uf51.love?subject=PetSounds51%20Data%20Sheet%20Request',
-    };
-    const url = downloads[itemName];
-    if (url) {
-      if (url.startsWith('mailto')) {
-        window.location.href = url;
-      } else if (url.startsWith('/')) {
-        window.open(url, '_blank');
-      } else {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = itemName;
-        a.click();
-      }
+    if (itemName === 'Brand Logo') {
+      // Generate SVG logo for download
+      const svg = `<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" fill="#000"/>
+        <text x="256" y="280" font-size="120" font-weight="bold" fill="#d4a017" text-anchor="middle" font-family="Arial, sans-serif">PetSounds51</text>
+        <circle cx="256" cy="100" r="60" fill="none" stroke="#d4a017" stroke-width="3"/>
+        <path d="M 220 100 Q 256 60, 292 100" stroke="#d4a017" stroke-width="3" fill="none"/>
+      </svg>`;
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'PetSounds51-Logo.svg';
+      a.click();
+      URL.revokeObjectURL(url);
+    } else if (itemName === 'Science Whitepaper') {
+      window.open('/PetSounds51Whitepaper', '_blank');
+    } else if (itemName === 'Data Sheet') {
+      window.location.href = 'mailto:family@uf51.love?subject=PetSounds51%20Data%20Sheet%20Request&body=Hi%20PetSounds51%20team,%0A%0AI%27d%20like%20to%20request%20the%20PetSounds51%20Data%20Sheet.%0A%0AThank%20you!';
     }
   };
 

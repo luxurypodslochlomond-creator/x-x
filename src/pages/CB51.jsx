@@ -461,6 +461,6 @@ export default function CB51() {
               </div>
               </CB51ErrorBoundary>
               </CB51PINGuard>
-              );
-              }
-              }
+    );
+  }
+}
