@@ -62,9 +62,9 @@ const PROTOCOLS = {
 };
 
 const SPECIES = [
-  { key: 'dog', emoji: '🐕', label: 'Dog' },
-  { key: 'cat', emoji: '🐈', label: 'Cat' },
-  { key: 'horse', emoji: '🐴', label: 'Horse' },
+  { key: 'dog', Icon: PS51Icons.Paw, iconColor: '#d4a017', label: 'Dog' },
+  { key: 'cat', Icon: PS51Icons.Rescue, iconColor: '#ec4899', label: 'Cat' },
+  { key: 'horse', Icon: PS51Icons.Presence, iconColor: '#8aab3a', label: 'Horse' },
 ];
 
 export default function PetSounds51() {
@@ -385,7 +385,7 @@ export default function PetSounds51() {
                 : { background: 'rgba(42,48,24,0.6)', border: '1px solid rgba(138,171,58,0.2)', color: '#a89870' }
               }
             >
-              <span className="text-xl">{s.emoji}</span>
+              <s.Icon size={20} style={{ color: selectedSpecies === s.key ? s.iconColor : '#a89870' }} />
               {s.label}
             </button>
           ))}
