@@ -41,7 +41,7 @@ import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsColle
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
                                           Menu, X, Heart, Home, LogOut, Leaf, Sparkles, Music, Map, User, Globe,
-                                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image
+                                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image, Share2, Handshake
                                       } from 'lucide-react';
 
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
@@ -446,10 +446,10 @@ const LayoutInner = ({ children, currentPageName }) => {
   const ps51Nav = [
     { title: "Home", url: createPageUrl("PetSounds51"), icon: Heart, description: "All protocols" },
     { title: "Why It Works", url: createPageUrl("PetSounds51Landing"), icon: Sparkles, highlight: true, description: "Science · pricing · try free" },
-    { title: "Share the Story", url: createPageUrl("PetSounds51Story"), icon: Zap, highlight: true, description: "Shareable story — send to anyone" },
-    { title: "🤝 Partner Brief", url: createPageUrl("PetSounds51PartnerBrief"), icon: DollarSign, highlight: true, description: "Influencer & affiliate brief" },
-    { title: "🔬 Science Whitepaper", url: createPageUrl("PetSounds51Whitepaper"), icon: FileText, highlight: true, description: "Peer-reviewed research base" },
-    { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: FileText, description: "Service terms" },
+    { title: "Share the Story", url: createPageUrl("PetSounds51Story"), icon: Share2, highlight: true, description: "Shareable story — send to anyone" },
+    { title: "Partner Brief", url: createPageUrl("PetSounds51PartnerBrief"), icon: Handshake, highlight: true, description: "Influencer & affiliate brief" },
+    { title: "Science Whitepaper", url: createPageUrl("PetSounds51Whitepaper"), icon: BookOpen, highlight: true, description: "Peer-reviewed research base" },
+    { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: Scale, description: "Service terms" },
     { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye, description: "Data protection" },
   ];
 
