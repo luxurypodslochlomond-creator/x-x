@@ -449,6 +449,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Share the Story", url: createPageUrl("PetSounds51Story"), icon: Share2, highlight: true, description: "Shareable story — send to anyone" },
     { title: "Partner Brief", url: createPageUrl("PetSounds51PartnerBrief"), icon: Handshake, highlight: true, description: "Influencer & affiliate brief" },
     { title: "Science Whitepaper", url: createPageUrl("PetSounds51Whitepaper"), icon: BookOpen, highlight: true, description: "Peer-reviewed research base" },
+    { title: "Press Center", url: createPageUrl("PetSounds51Press"), icon: FileText, highlight: true, description: "For journalists & media" },
     { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: Scale, description: "Service terms" },
     { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye, description: "Data protection" },
   ];
