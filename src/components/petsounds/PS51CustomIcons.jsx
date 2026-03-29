@@ -87,32 +87,33 @@ export const PS51Icons = {
   // Cat face — feline specific
   Cat: ({ size = 24, className = '' }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-      {/* Cat ears */}
-      <path d="M4 8L2 3l5 3M20 8l2-3-5 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="currentColor"/>
-      {/* Head */}
-      <circle cx="12" cy="13" r="7" stroke="currentColor" strokeWidth="2" fill="none"/>
-      {/* Eyes */}
-      <ellipse cx="9" cy="12" rx="1.2" ry="1.5" fill="currentColor"/>
-      <ellipse cx="15" cy="12" rx="1.2" ry="1.5" fill="currentColor"/>
-      {/* Nose */}
-      <path d="M11 15h2M12 14v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Pointed ears */}
+      <path d="M5 11L3 4l5 4M19 11L21 4l-5 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="currentColor"/>
+      {/* Round head */}
+      <circle cx="12" cy="14" r="7" stroke="currentColor" strokeWidth="2" fill="none"/>
+      {/* Slit pupils */}
+      <ellipse cx="9.5" cy="13.5" rx="1" ry="1.8" fill="currentColor"/>
+      <ellipse cx="14.5" cy="13.5" rx="1" ry="1.8" fill="currentColor"/>
+      {/* Small triangle nose */}
+      <path d="M11.5 16l.5-.7.5.7z" fill="currentColor"/>
       {/* Whiskers */}
-      <path d="M4 13h4M16 13h4M5 11l3 1M19 11l-3 1" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.7"/>
+      <path d="M3 14h5M16 14h5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.6"/>
+      <path d="M3.5 12l4.5 1.5M20.5 12l-4.5 1.5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.4"/>
     </svg>
   ),
 
-  // Horseshoe — equine specific
+  // Horseshoe open UP — holds the luck in ✅
   Horse: ({ size = 24, className = '' }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-      {/* Horseshoe shape */}
-      <path d="M7 20V10a5 5 0 0 1 10 0v10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-      {/* Open bottom of horseshoe */}
-      <path d="M7 20h2.5M14.5 20H17" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+      {/* Horseshoe — open at top, arch at bottom */}
+      <path d="M7 4v10a5 5 0 0 0 10 0V4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+      {/* Open top of horseshoe — the two tips */}
+      <path d="M7 4h2M15 4h2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
       {/* Nail holes */}
-      <circle cx="8.5" cy="14" r="1" fill="currentColor"/>
-      <circle cx="15.5" cy="14" r="1" fill="currentColor"/>
-      <circle cx="8" cy="18" r="1" fill="currentColor"/>
-      <circle cx="16" cy="18" r="1" fill="currentColor"/>
+      <circle cx="8.5" cy="7" r="1" fill="currentColor"/>
+      <circle cx="15.5" cy="7" r="1" fill="currentColor"/>
+      <circle cx="8" cy="11" r="1" fill="currentColor"/>
+      <circle cx="16" cy="11" r="1" fill="currentColor"/>
     </svg>
   ),
 
