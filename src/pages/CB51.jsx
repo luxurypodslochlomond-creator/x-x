@@ -320,7 +320,8 @@ export default function CB51() {
           )}
 
           {/* MAIN CONTENT - Clean, focused, calm */}
-          {activeTab === 'home' && <div className="px-6 pb-32 space-y-6">
+          {activeTab === 'home' && (
+          <div className="px-6 pb-32 space-y-6">
 
             {/* BAND MEMBER VOTES - Always visible at top for anyone with pending votes */}
             <CB51BandNotificationInbox alwaysShow={true} />

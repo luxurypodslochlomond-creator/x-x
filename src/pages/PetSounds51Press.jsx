@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Download, Mail, ArrowLeft } from 'lucide-react';
-import { COOLASFUCKWaves } from '@/components/shared/COOLASFUCKIcon';
+import { Copy, Mail, ArrowLeft } from 'lucide-react';
+import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
 export default function PetSounds51Press() {
-  const [copied, setCopied] = React.useState(null);
+  const [copied, setCopied] = useState(null);
 
   const copyToClipboard = (text, id) => {
     navigator.clipboard.writeText(text);
@@ -15,44 +15,63 @@ export default function PetSounds51Press() {
   const pressRelease = `FOR IMMEDIATE RELEASE
 
 PetSounds51 Launches Science-Backed Sound Therapy for Animal Wellness
-Peer-reviewed frequency protocols heal anxiety, pain, and behavioral issues in dogs, cats, and beyond
+Peer-reviewed frequency protocols reduce anxiety and support pain management in dogs, cats, and other animals
 
-PetSounds51, a breakthrough platform powered by COOLASFUCK consciousness technology, today announced the launch of science-backed sound healing protocols specifically designed for animals. 
+PetSounds51 today announced the launch of science-backed sound therapy protocols specifically designed for animals experiencing anxiety, pain, and behavioral stress. 
 
-The platform delivers customized frequency therapy for:
+The platform delivers species-tuned audio therapy for:
 • Separation anxiety and stress
 • Chronic pain management
-• Behavioral healing
+• Behavioral support
 • Sleep and recovery optimization
 
-Built on peer-reviewed neuroscience and frequency resonance research, PetSounds51 offers animal owners and veterinarians an evidence-based, non-invasive complement to traditional care.
+Built on peer-reviewed neuroscience research, PetSounds51 offers animal owners and veterinarians an evidence-based, non-invasive complement to traditional care.
 
-"Animals heal to the same frequencies as humans," said the PetSounds51 team. "We're just giving them access to the same consciousness protocols that heal people—with zero pharmaceutical side effects."
+"We designed these frequencies based on peer-reviewed research showing how slow-tempo audio reduces anxiety behaviors in animals," said the PetSounds51 team. "It's complementary care that works alongside veterinary treatment—with no side effects."
 
 Key Features:
-• Custom AI analysis for each animal's unique needs
+• Species-specific audio tuning (dogs, cats, horses)
 • Veterinary partnership program for clinical validation
-• Real-time biometric feedback integration
-• Affordable, accessible pricing ($9.99/month or $29.99/year)
+• Simple, accessible interface
+• Affordable pricing: £29.99/year (all protocols)
 
 Learn more at https://petsounds51.life
-Research partnerships: research@petsounds51.life
-Press inquiries: press@petsounds51.life`;
+Research partnerships: family@uf51.love
+Press inquiries: family@uf51.love`;
 
   const oneLiners = [
-    'PetSounds51: Frequency healing for animals, backed by neuroscience.',
-    'The same consciousness technology healing humans now heals all animals.',
-    'Science-backed sound therapy that replaces anxiety meds with frequencies.',
-    'Animal anxiety solved: frequencies that rewire nervous systems.',
+    'PetSounds51: Science-backed sound therapy for anxious pets. £29.99/year.',
+    'Species-tuned audio reduces animal anxiety without medication or side effects.',
+    'Peer-reviewed frequency protocols for separation anxiety, pain, and stress.',
+    'PetSounds51: Healing frequencies backed by published neuroscience research.',
   ];
 
+  const downloadMediaKit = async (itemName) => {
+    // Trigger downloads for press materials
+    const downloads = {
+      'Brand Logo': 'https://uf51.love/assets/petsounds51-logo.png',
+      'Science Whitepaper': '/PetSounds51Whitepaper',
+      'Data Sheet': 'mailto:family@uf51.love?subject=PetSounds51%20Data%20Sheet%20Request',
+    };
+    const url = downloads[itemName];
+    if (url) {
+      if (url.startsWith('mailto')) {
+        window.location.href = url;
+      } else if (url.startsWith('/')) {
+        window.open(url, '_blank');
+      } else {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = itemName;
+        a.click();
+      }
+    }
+  };
+
   const mediakitItems = [
-    { name: 'Brand Logo (PNG)', desc: '2000x2000px, transparent background' },
+    { name: 'Brand Logo', desc: 'High-res logo for press use' },
     { name: 'Science Whitepaper', desc: 'Full peer-reviewed research basis' },
-    { name: 'Product Screenshots', desc: 'Interface & feature highlights' },
-    { name: 'Founder Interview Kit', desc: 'Common Q&A for journalists' },
-    { name: 'Animal Case Studies', desc: '3 detailed healing outcomes' },
-    { name: 'Data Sheet', desc: 'Key stats, pricing, features' },
+    { name: 'Data Sheet', desc: 'Key stats, pricing, species protocols' },
   ];
 
   return (
@@ -61,7 +80,7 @@ Press inquiries: press@petsounds51.life`;
       <div className="border-b border-amber-600/30 bg-black/40 backdrop-blur-xl sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <COOLASFUCKWaves size={32} animate={true} />
+            <PetSounds51Icon8Bit size={40} animate={false} />
             <div>
               <h1 className="text-2xl font-black text-white">PetSounds51</h1>
               <p className="text-xs text-amber-300 font-mono tracking-widest">PRESS CENTER</p>
@@ -120,9 +139,9 @@ Press inquiries: press@petsounds51.life`;
               <div key={i} className="p-6 bg-black/40 border border-amber-600/20 rounded-lg hover:border-amber-600/40 transition-colors">
                 <h3 className="font-bold text-white mb-2">{item.name}</h3>
                 <p className="text-sm text-gray-400 mb-4">{item.desc}</p>
-                <button className="flex items-center gap-2 text-amber-400 hover:text-amber-300 text-sm font-bold transition-colors">
-                  <Download className="w-4 h-4" />
-                  Download
+                <button onClick={() => downloadMediaKit(item.name)} className="flex items-center gap-2 text-amber-400 hover:text-amber-300 text-sm font-bold transition-colors">
+                  <Mail className="w-4 h-4" />
+                  {item.name === 'Brand Logo' ? 'Download' : item.name === 'Science Whitepaper' ? 'View' : 'Request'}
                 </button>
               </div>
             ))}
@@ -132,12 +151,11 @@ Press inquiries: press@petsounds51.life`;
         {/* Key Stats */}
         <section className="mb-16">
           <h2 className="text-3xl font-black mb-6 text-amber-300">By The Numbers</h2>
-          <div className="grid md:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             {[
-              { stat: '15+', label: 'Species Healed' },
-              { stat: '89%', label: 'Anxiety Reduction' },
+              { stat: '3', label: 'Species Protocols (Dogs, Cats, Horses)' },
+              { stat: '£29.99', label: 'Annual Subscription' },
               { stat: '0', label: 'Side Effects' },
-              { stat: '$9.99', label: 'Monthly Access' },
             ].map((item, i) => (
               <div key={i} className="p-6 bg-gradient-to-br from-amber-600/10 to-black border border-amber-600/30 rounded-lg text-center">
                 <div className="text-3xl font-black text-amber-300 mb-2">{item.stat}</div>
@@ -152,11 +170,11 @@ Press inquiries: press@petsounds51.life`;
           <h2 className="text-2xl font-black text-amber-300 mb-4">Press Inquiries</h2>
           <p className="text-gray-400 mb-6">Got questions? Want an interview? We're here.</p>
           <a
-            href="mailto:press@petsounds51.life"
+            href="mailto:family@uf51.love"
             className="inline-flex items-center gap-2 px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg transition-colors"
           >
             <Mail className="w-5 h-5" />
-            press@petsounds51.life
+            family@uf51.love
           </a>
           <p className="text-xs text-gray-600 mt-4">Response time: 24 hours</p>
         </section>
