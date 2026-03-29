@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ArrowRight, RotateCcw } from 'lucide-react';
+import { Sparkles, ArrowRight, RotateCcw, Heart, Zap, Home, Shield, Moon, Waves, Activity, Clock } from 'lucide-react';
+import { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
+import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
 // The intelligence layer — maps answers to protocol + reasoning
 const RECOMMENDATION_ENGINE = {
@@ -87,37 +89,45 @@ const RECOMMENDATION_ENGINE = {
   }
 };
 
+// Custom icon renderer — no emojis, pure PS51 style
+const QIcon = ({ icon: Icon, color = '#d4a017', size = 22 }) => (
+  <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+    style={{ background: `${color}18`, border: `1px solid ${color}40` }}>
+    <Icon size={size} style={{ color }} />
+  </div>
+);
+
 const QUESTIONS = [
   {
     id: 'species',
     question: 'Who needs help?',
-    emoji: '🐾',
+    Icon: PS51Icons.AnimalCare,
     options: [
-      { key: 'dog', label: 'Dog', emoji: '🐕', desc: 'All sizes and breeds' },
-      { key: 'cat', label: 'Cat', emoji: '🐈', desc: 'Domestic and large cats' },
-      { key: 'horse', label: 'Horse', emoji: '🐴', desc: 'Horses and ponies' },
+      { key: 'dog', label: 'Dog', Icon: PS51Icons.Paw, iconColor: '#d4a017', desc: 'All sizes and breeds' },
+      { key: 'cat', label: 'Cat', Icon: PS51Icons.Rescue, iconColor: '#ec4899', desc: 'Domestic and large cats' },
+      { key: 'horse', label: 'Horse', Icon: PS51Icons.Presence, iconColor: '#8aab3a', desc: 'Horses and ponies' },
     ]
   },
   {
     id: 'trigger',
     question: "What's going on?",
-    emoji: '💭',
+    Icon: PS51Icons.Frequency,
     options: [
-      { key: 'alone', label: 'Separation / alone', emoji: '🏠', desc: "Anxious when you're not there" },
-      { key: 'loud_sounds', label: 'Thunder / fireworks', emoji: '⚡', desc: 'Panics at sudden loud sounds' },
-      { key: 'pain', label: 'Pain / recovering', emoji: '🩹', desc: 'Arthritis, post-surgery, discomfort' },
-      { key: 'trauma', label: 'Rescue trauma / grief', emoji: '💛', desc: "Carrying something they've been through" },
-      { key: 'wont_settle', label: "Won't settle / reactive", emoji: '🌀', desc: 'High energy, can\'t calm down' },
+      { key: 'alone', label: 'Separation / alone', Icon: Home, iconColor: '#06b6d4', desc: "Anxious when you're not there" },
+      { key: 'loud_sounds', label: 'Thunder / fireworks', Icon: Zap, iconColor: '#f59e0b', desc: 'Panics at sudden loud sounds' },
+      { key: 'pain', label: 'Pain / recovering', Icon: Activity, iconColor: '#f97316', desc: 'Arthritis, post-surgery, discomfort' },
+      { key: 'trauma', label: 'Rescue trauma / grief', Icon: PS51Icons.Heart, iconColor: '#ec4899', desc: "Carrying something they've been through" },
+      { key: 'wont_settle', label: "Won't settle / reactive", Icon: Waves, iconColor: '#a855f7', desc: "High energy, can't calm down" },
     ]
   },
   {
     id: 'age',
     question: 'How old are they?',
-    emoji: '🎂',
+    Icon: PS51Icons.Science,
     options: [
-      { key: 'puppy', label: 'Young', emoji: '🐣', desc: 'Puppy / kitten / foal' },
-      { key: 'adult', label: 'Adult', emoji: '✨', desc: '1–8 years old' },
-      { key: 'senior', label: 'Senior', emoji: '🌿', desc: '8+ years, older animal' },
+      { key: 'puppy', label: 'Young', Icon: PS51Icons.Rescue, iconColor: '#8aab3a', desc: 'Puppy / kitten / foal' },
+      { key: 'adult', label: 'Adult', Icon: PS51Icons.Presence, iconColor: '#d4a017', desc: '1–8 years old' },
+      { key: 'senior', label: 'Senior', Icon: Moon, iconColor: '#6366f1', desc: '8+ years, older animal' },
     ]
   }
 ];
@@ -189,9 +199,10 @@ export default function PS51SmartFinder({ onSelectProtocol, onDismiss }) {
               </div>
 
               {/* QUESTION */}
-              <p className="text-lg font-black mb-1" style={{ color: '#e8d5a3' }}>
-                {currentQuestion.emoji} {currentQuestion.question}
-              </p>
+              <div className="flex items-center gap-2 mb-1">
+                <currentQuestion.Icon size={20} style={{ color: '#d4a017' }} />
+                <p className="text-lg font-black" style={{ color: '#e8d5a3' }}>{currentQuestion.question}</p>
+              </div>
               <p className="text-xs mb-4" style={{ color: '#6b5e3a' }}>
                 Question {step + 1} of {QUESTIONS.length}
               </p>
@@ -207,7 +218,7 @@ export default function PS51SmartFinder({ onSelectProtocol, onDismiss }) {
                     onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(212,160,23,0.5)'; e.currentTarget.style.background = 'rgba(42,48,24,1)'; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(138,171,58,0.2)'; e.currentTarget.style.background = 'rgba(42,48,24,0.8)'; }}
                   >
-                    <span className="text-2xl flex-shrink-0">{option.emoji}</span>
+                    <QIcon icon={option.Icon} color={option.iconColor} />
                     <div className="flex-1">
                       <p className="font-bold text-sm" style={{ color: '#e8d5a3' }}>{option.label}</p>
                       <p className="text-xs" style={{ color: '#6b5e3a' }}>{option.desc}</p>
@@ -228,7 +239,7 @@ export default function PS51SmartFinder({ onSelectProtocol, onDismiss }) {
               <div className="text-center mb-5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black mb-3"
                   style={{ background: 'rgba(138,171,58,0.15)', border: '1px solid rgba(138,171,58,0.4)', color: '#8aab3a' }}>
-                  <Sparkles className="w-3 h-3" /> AI RECOMMENDED
+                  <PS51Icons.Science size={12} style={{ color: '#8aab3a' }} /> PROTOCOL MATCHED
                 </div>
                 <p className="text-xs mb-2" style={{ color: '#6b5e3a' }}>Based on your answers:</p>
               </div>
