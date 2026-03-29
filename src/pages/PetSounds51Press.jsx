@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { Copy, Mail, ArrowLeft } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
@@ -68,7 +69,7 @@ Research: family@uf51.love`;
       a.click();
       URL.revokeObjectURL(url);
     } else if (itemName === 'Science Whitepaper') {
-      window.open('/PetSounds51Whitepaper', '_blank');
+      window.location.href = createPageUrl('PetSounds51Whitepaper');
     } else if (itemName === 'Data Sheet') {
       window.location.href = 'mailto:family@uf51.love?subject=PetSounds51%20Data%20Sheet%20Request&body=Hi%20PetSounds51%20team,%0A%0AI%27d%20like%20to%20request%20the%20PetSounds51%20Data%20Sheet.%0A%0AThank%20you!';
     }
@@ -92,7 +93,7 @@ Research: family@uf51.love`;
               <p className="text-xs text-amber-300 font-mono tracking-widest">PRESS CENTER</p>
             </div>
           </div>
-          <Link to="/PetSounds51" className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors">
+          <Link to={createPageUrl('PetSounds51')} className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors">
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-bold">BACK</span>
           </Link>

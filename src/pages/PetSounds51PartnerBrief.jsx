@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { Heart, Globe, TrendingUp, Users, DollarSign, Star, Zap, ChevronDown, ChevronRight, Copy, Check, ArrowLeft } from 'lucide-react';
 
 // DATA
@@ -153,7 +154,7 @@ Best,
       {/* HEADER */}
       <div className="border-b border-amber-600/30 bg-black/40 px-4 py-6">
         <div className="max-w-3xl mx-auto">
-          <Link to="/PetSounds51" className="flex items-center gap-2 text-amber-500 hover:text-amber-400 mb-4 text-sm font-bold">
+          <Link to={createPageUrl('PetSounds51')} className="flex items-center gap-2 text-amber-500 hover:text-amber-400 mb-4 text-sm font-bold">
             <ArrowLeft className="w-4 h-4" />
             Back to PetSounds51
           </Link>
@@ -306,9 +307,9 @@ Best,
         </div>
 
         {/* BOTTOM CTA */}
-        <div className="text-center py-6">
-          <p className="text-gray-500 text-sm mb-4">Ready to get started?</p>
-          <Link to="/PetSounds51"
+         <div className="text-center py-6">
+           <p className="text-gray-500 text-sm mb-4">Ready to get started?</p>
+           <Link to={createPageUrl('PetSounds51')}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black"
             style={{ background: '#d4a017', color: '#000' }}>
             <Heart className="w-5 h-5" />
