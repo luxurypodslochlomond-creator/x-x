@@ -229,8 +229,8 @@ export default function PetSounds51() {
           They can't tell you they're struggling. You can see it though.
         </p>
         <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed" style={{ color: '#a89870' }}>
-          Sound tuned to how your pet actually hears — not generic music, not white noise. 
-          Audio built from real research that genuinely calms anxious animals. Just leave it playing.
+          Psychoacoustic audio tuned to how your pet actually hears — not generic music, not white noise. 
+          A real audio engine built from peer-reviewed research. Species-specific frequencies. Just leave it playing.
         </p>
         <p className="text-xs max-w-lg mx-auto leading-relaxed mb-4" style={{ color: '#8aab3a' }}>
           No side effects. Works alongside your vet. Free protocol available right now — no signup needed.
@@ -249,6 +249,35 @@ export default function PetSounds51() {
           10% to rescue
         </Link>
         </div>
+      </div>
+
+      {/* AI SMART FINDER — hero position */}
+      <div className="max-w-4xl mx-auto mb-8">
+        {!showSmartFinder ? (
+          <button
+            onClick={() => setShowSmartFinder(true)}
+            className="w-full rounded-2xl p-5 flex items-center justify-between transition-all hover:scale-[1.01] active:scale-[0.99]"
+            style={{ background: 'linear-gradient(135deg, rgba(212,160,23,0.15), rgba(138,171,58,0.08))', border: '2px solid rgba(212,160,23,0.45)', boxShadow: '0 0 30px rgba(212,160,23,0.12)' }}
+          >
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-7 h-7 flex-shrink-0" style={{ color: '#d4a017' }} />
+              <div className="text-left">
+                <p className="font-black" style={{ color: '#d4a017', fontSize: '1.05rem' }}>Not sure which protocol to use?</p>
+                <p className="text-sm mt-0.5" style={{ color: '#8aab3a' }}>Answer 3 quick questions — get a personalised recommendation with the science behind it</p>
+              </div>
+            </div>
+            <span className="text-xs font-black px-3 py-1 rounded-full flex-shrink-0 ml-3" style={{ background: 'rgba(212,160,23,0.2)', color: '#d4a017', border: '1px solid rgba(212,160,23,0.4)' }}>FIND MINE</span>
+          </button>
+        ) : (
+          <PS51SmartFinder
+            onSelectProtocol={(protocol, species) => {
+              if (species) setSelectedSpecies(species);
+              setShowSmartFinder(false);
+              handleSelect(protocol);
+            }}
+            onDismiss={() => setShowSmartFinder(false)}
+          />
+        )}
       </div>
 
       {/* BIG SUBSCRIBE CTA */}
@@ -368,38 +397,9 @@ export default function PetSounds51() {
 
 
 
-      {/* AI SMART FINDER */}
-      <div className="max-w-4xl mx-auto mb-6">
-        {!showSmartFinder ? (
-          <button
-            onClick={() => setShowSmartFinder(true)}
-            className="w-full rounded-2xl p-4 flex items-center justify-between transition-all hover:scale-[1.01] active:scale-[0.99]"
-            style={{ background: 'linear-gradient(135deg, rgba(212,160,23,0.12), rgba(138,171,58,0.08))', border: '2px solid rgba(212,160,23,0.35)', boxShadow: '0 0 20px rgba(212,160,23,0.08)' }}
-          >
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-6 h-6 flex-shrink-0" style={{ color: '#d4a017' }} />
-              <div className="text-left">
-                <p className="font-black text-sm" style={{ color: '#d4a017' }}>Not sure which protocol? Try the AI Finder</p>
-                <p className="text-xs" style={{ color: '#8aab3a' }}>3 questions → personalised recommendation with the science behind it</p>
-              </div>
-            </div>
-            <span className="text-xs font-black px-3 py-1 rounded-full flex-shrink-0" style={{ background: 'rgba(212,160,23,0.2)', color: '#d4a017' }}>NEW ✨</span>
-          </button>
-        ) : (
-          <PS51SmartFinder
-            onSelectProtocol={(protocol, species) => {
-              if (species) setSelectedSpecies(species);
-              setShowSmartFinder(false);
-              handleSelect(protocol);
-            }}
-            onDismiss={() => setShowSmartFinder(false)}
-          />
-        )}
-      </div>
-
       {/* START HERE BANNER — for first timers */}
       <div className="max-w-4xl mx-auto mb-6 rounded-2xl p-5 text-center" style={{ background: 'rgba(6,182,212,0.08)', border: '2px solid rgba(6,182,212,0.3)' }}>
-        <p className="font-black text-lg mb-1" style={{ color: '#e8d5a3' }}>👇 Or browse all protocols below</p>
+        <p className="font-black text-lg mb-1" style={{ color: '#e8d5a3' }}>— or browse all protocols below —</p>
         <p className="text-sm" style={{ color: '#a89870' }}>The <span style={{ color: '#8aab3a', fontWeight: 'bold' }}>FREE</span> one is Separation Anxiety — great if they're home alone. Just press play and leave it on.</p>
       </div>
 
