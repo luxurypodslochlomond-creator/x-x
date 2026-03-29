@@ -14,41 +14,41 @@ export default function PetSounds51Press() {
 
   const pressRelease = `FOR IMMEDIATE RELEASE
 
-PetSounds51: AI-Powered Sound Therapy for Animals
-Adaptive frequency protocols continuously improve through peer-reviewed research and real-world feedback
+PetSounds51: Building the Future of Evidence-Based Animal Wellness
+Species-specific frequency protocols designed to evolve with emerging neuroscience research
 
-PetSounds51 is an evolving platform that applies AI-driven frequency science to animal wellness. Rather than static protocols, the system continuously learns from neuroscience research and user outcomes to refine therapeutic audio.
+PetSounds51 is a research-driven platform focused on applying frequency science to real animal health outcomes. Rather than static tools, these protocols are designed to improve as our understanding of animal neurology advances and we gather clinical feedback.
 
-Current Focus:
-• Species-specific frequency adaptation (dogs, cats, horses)
-• Anxiety and stress response support
-• Pain management complementary care
-• Sleep and recovery optimization
+Current Work:
+• Species-specific frequency tuning (dogs, cats, horses)
+• Complementary support for anxiety, stress, and pain management
+• Evidence-based methodology grounded in peer-reviewed research
+• Active research partnerships with veterinary teams
 
-The platform is built on peer-reviewed neuroscience showing how tailored audio can influence animal nervous systems. Each species receives uniquely tuned frequencies—not generic sounds.
+The foundation: peer-reviewed neuroscience showing that specific audio frequencies influence animal nervous systems. We're building frequency maps for each species based on their unique biology—not repurposed human protocols.
 
-"This isn't a finished product. These protocols evolve as we learn more," said the PetSounds51 team. "We're combining published research with adaptive learning to make better tools for animals and the people who care for them."
+"We're not claiming this is done. This work evolves," the team explains. "What we're doing now is better than what exists. What we'll be doing in two years will be better than now. That's the whole point."
 
-Current Science Foundation:
-• Peer-reviewed research on bioacoustic stress reduction
-• Species-specific frequency mapping
-• Partnership pathways with veterinary research teams
-• Transparent methodology (no black box)
+Active Research Directions:
+• Veterinary partnership studies on anxiety reduction
+• Long-term outcome tracking for pain management
+• Species-specific frequency refinement (ongoing)
+• Open methodology—no proprietary black boxes
 
-Pricing & Access:
+Access:
 • £29.99/year for full protocol library
-• Open to research collaboration
-• Non-invasive, no side effects
+• Open to research collaboration and clinical partnerships
+• Non-invasive, evidence-based, zero side effects
 
-Learn more: https://petsounds51.life
-Research partnerships & inquiries: family@uf51.love`;
+More: https://petsounds51.life
+Research: family@uf51.love`;
 
   const oneLiners = [
-    'PetSounds51: AI-powered frequency protocols that evolve through research.',
-    'Species-tuned audio for animal anxiety and pain—continuously learning.',
-    'Adaptive sound therapy built on peer-reviewed neuroscience.',
-    'PetSounds51: Where animal care meets evolving frequency science.',
-    'Not finished, always learning. Frequencies that adapt with the research.',
+    'PetSounds51: Evidence-based frequency protocols designed to improve as we learn.',
+    'Species-specific audio therapy grounded in peer-reviewed neuroscience.',
+    'Research-driven approach to animal anxiety, stress, and pain support.',
+    'Honest science. Better today than yesterday, better tomorrow than today.',
+    'Veterinary research partnerships building the future of animal wellness.',
   ];
 
   const downloadMediaKit = async (itemName) => {
