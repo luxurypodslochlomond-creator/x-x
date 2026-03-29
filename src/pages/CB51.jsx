@@ -3,7 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
-import { Calendar, CheckCircle, DollarSign, Plus, Mail, Users, Radio } from 'lucide-react';
+import { Calendar, CheckCircle, DollarSign, Plus, Mail, Users, Radio, Brain } from 'lucide-react';
+import CB51BrainTab from '@/components/cb51/CB51BrainTab';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
@@ -32,6 +33,7 @@ export default function CB51() {
   const [newMemberEmail, setNewMemberEmail] = useState('');
   const [addingMember, setAddingMember] = useState(false);
   const [showMissionBriefing, setShowMissionBriefing] = useState(false);
+  const [activeTab, setActiveTab] = useState('home'); // 'home' | 'brain'
   const queryClient = useQueryClient();
 
   // Set OG tags for social sharing
@@ -169,11 +171,31 @@ export default function CB51() {
 
           {/* HEADER */}
           <div className="px-6 pt-8 pb-4 border-b border-cyan-500/20">
-            <div className="flex items-center gap-3 mb-1">
-              <Radio className="w-7 h-7 text-cyan-400" />
-              <span className="text-2xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
+            <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center gap-3">
+                <Radio className="w-7 h-7 text-cyan-400" />
+                <span className="text-2xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
+              </div>
+              {/* TAB SWITCHER */}
+              <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-lg p-1">
+                <button
+                  onClick={() => setActiveTab('home')}
+                  className={`px-3 py-1.5 rounded text-xs font-mono font-bold transition-all ${activeTab === 'home' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  Home
+                </button>
+                <button
+                  onClick={() => setActiveTab('brain')}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-mono font-bold transition-all ${activeTab === 'brain' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  <Brain className="w-3 h-3" />
+                  Brain
+                </button>
+              </div>
             </div>
-            <p className="text-gray-500 text-xs font-mono">Your AI co-manager</p>
+            <p className="text-gray-500 text-xs font-mono">
+              {activeTab === 'brain' ? 'Intelligence layer · reads your world' : 'Your AI co-manager'}
+            </p>
           </div>
 
           {/* ARTIST GRID - 3 COLUMNS */}
@@ -290,8 +312,15 @@ export default function CB51() {
             )}
           </AnimatePresence>
 
+          {/* BRAIN TAB */}
+          {activeTab === 'brain' && currentArtistId && (
+            <div className="px-6 pt-5 pb-32">
+              <CB51BrainTab artistId={currentArtistId} />
+            </div>
+          )}
+
           {/* MAIN CONTENT - Clean, focused, calm */}
-          <div className="px-6 pb-32 space-y-6">
+          {activeTab === 'home' && <div className="px-6 pb-32 space-y-6">
 
             {/* BAND MEMBER VOTES - Always visible at top for anyone with pending votes */}
             <CB51BandNotificationInbox alwaysShow={true} />
@@ -426,7 +455,8 @@ export default function CB51() {
                 </div>
               </>
             ) : null}
-          </div>
+          </div>}
+
         </div>
         </CB51ErrorBoundary>
         </CB51PINGuard>
