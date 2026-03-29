@@ -366,6 +366,12 @@ export default function PetSounds51() {
 
 
 
+      {/* START HERE BANNER — for first timers */}
+      <div className="max-w-4xl mx-auto mb-6 rounded-2xl p-5 text-center" style={{ background: 'rgba(6,182,212,0.08)', border: '2px solid rgba(6,182,212,0.3)' }}>
+        <p className="font-black text-lg mb-1" style={{ color: '#e8d5a3' }}>👇 Pick what your pet is going through</p>
+        <p className="text-sm" style={{ color: '#a89870' }}>The <span style={{ color: '#8aab3a', fontWeight: 'bold' }}>FREE</span> one is Separation Anxiety — great if they're home alone. Just press play and leave it on.</p>
+      </div>
+
       {/* PROTOCOL CATEGORIES */}
       <div className="max-w-4xl mx-auto space-y-8">
         {Object.entries(PROTOCOLS).map(([catKey, cat]) => {
