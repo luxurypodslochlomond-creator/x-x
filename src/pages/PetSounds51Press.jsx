@@ -14,36 +14,41 @@ export default function PetSounds51Press() {
 
   const pressRelease = `FOR IMMEDIATE RELEASE
 
-PetSounds51 Launches Science-Backed Sound Therapy for Animal Wellness
-Peer-reviewed frequency protocols reduce anxiety and support pain management in dogs, cats, and other animals
+PetSounds51: AI-Powered Sound Therapy for Animals
+Adaptive frequency protocols continuously improve through peer-reviewed research and real-world feedback
 
-PetSounds51 today announced the launch of science-backed sound therapy protocols specifically designed for animals experiencing anxiety, pain, and behavioral stress. 
+PetSounds51 is an evolving platform that applies AI-driven frequency science to animal wellness. Rather than static protocols, the system continuously learns from neuroscience research and user outcomes to refine therapeutic audio.
 
-The platform delivers species-tuned audio therapy for:
-• Separation anxiety and stress
-• Chronic pain management
-• Behavioral support
+Current Focus:
+• Species-specific frequency adaptation (dogs, cats, horses)
+• Anxiety and stress response support
+• Pain management complementary care
 • Sleep and recovery optimization
 
-Built on peer-reviewed neuroscience research, PetSounds51 offers animal owners and veterinarians an evidence-based, non-invasive complement to traditional care.
+The platform is built on peer-reviewed neuroscience showing how tailored audio can influence animal nervous systems. Each species receives uniquely tuned frequencies—not generic sounds.
 
-"We designed these frequencies based on peer-reviewed research showing how slow-tempo audio reduces anxiety behaviors in animals," said the PetSounds51 team. "It's complementary care that works alongside veterinary treatment—with no side effects."
+"This isn't a finished product. These protocols evolve as we learn more," said the PetSounds51 team. "We're combining published research with adaptive learning to make better tools for animals and the people who care for them."
 
-Key Features:
-• Species-specific audio tuning (dogs, cats, horses)
-• Veterinary partnership program for clinical validation
-• Simple, accessible interface
-• Affordable pricing: £29.99/year (all protocols)
+Current Science Foundation:
+• Peer-reviewed research on bioacoustic stress reduction
+• Species-specific frequency mapping
+• Partnership pathways with veterinary research teams
+• Transparent methodology (no black box)
 
-Learn more at https://petsounds51.life
-Research partnerships: family@uf51.love
-Press inquiries: family@uf51.love`;
+Pricing & Access:
+• £29.99/year for full protocol library
+• Open to research collaboration
+• Non-invasive, no side effects
+
+Learn more: https://petsounds51.life
+Research partnerships & inquiries: family@uf51.love`;
 
   const oneLiners = [
-    'PetSounds51: Science-backed sound therapy for anxious pets. £29.99/year.',
-    'Species-tuned audio reduces animal anxiety without medication or side effects.',
-    'Peer-reviewed frequency protocols for separation anxiety, pain, and stress.',
-    'PetSounds51: Healing frequencies backed by published neuroscience research.',
+    'PetSounds51: AI-powered frequency protocols that evolve through research.',
+    'Species-tuned audio for animal anxiety and pain—continuously learning.',
+    'Adaptive sound therapy built on peer-reviewed neuroscience.',
+    'PetSounds51: Where animal care meets evolving frequency science.',
+    'Not finished, always learning. Frequencies that adapt with the research.',
   ];
 
   const downloadMediaKit = async (itemName) => {
@@ -167,8 +172,8 @@ Press inquiries: family@uf51.love`;
 
         {/* Contact */}
         <section className="bg-black/60 border border-amber-600/40 rounded-xl p-8 text-center">
-          <h2 className="text-2xl font-black text-amber-300 mb-4">Press Inquiries</h2>
-          <p className="text-gray-400 mb-6">Got questions? Want an interview? We're here.</p>
+          <h2 className="text-2xl font-black text-amber-300 mb-4">Questions & Partnerships</h2>
+          <p className="text-gray-400 mb-6">Research teams, journalists, animal care professionals—reach out.</p>
           <a
             href="mailto:family@uf51.love"
             className="inline-flex items-center gap-2 px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg transition-colors"
@@ -176,7 +181,7 @@ Press inquiries: family@uf51.love`;
             <Mail className="w-5 h-5" />
             family@uf51.love
           </a>
-          <p className="text-xs text-gray-600 mt-4">Response time: 24 hours</p>
+          <p className="text-xs text-gray-600 mt-4">Let's talk about the science.</p>
         </section>
       </div>
     </div>
