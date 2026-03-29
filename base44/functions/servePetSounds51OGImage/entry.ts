@@ -20,41 +20,38 @@ Deno.serve(async (req) => {
       <!-- Gold border -->
       <rect x="20" y="20" width="1160" height="590" fill="none" stroke="#d4a017" stroke-width="4" rx="16"/>
 
-      <!-- Pixel paw print - top left area -->
-      <!-- Main paw pad (golden pixels) -->
-      <rect x="80" y="200" width="28" height="28" fill="#d4a017"/>
-      <rect x="108" y="200" width="28" height="28" fill="#d4a017"/>
-      <rect x="136" y="200" width="28" height="28" fill="#d4a017"/>
-      <rect x="80" y="228" width="28" height="28" fill="#d4a017"/>
-      <rect x="108" y="228" width="28" height="28" fill="#ffd700"/>
-      <rect x="136" y="228" width="28" height="28" fill="#d4a017"/>
-      <rect x="80" y="256" width="28" height="28" fill="#d4a017"/>
-      <rect x="108" y="256" width="28" height="28" fill="#d4a017"/>
-      <rect x="136" y="256" width="28" height="28" fill="#d4a017"/>
-      <!-- Toe beans -->
-      <rect x="80" y="160" width="20" height="20" fill="#d4a017"/>
-      <rect x="108" y="148" width="20" height="20" fill="#ffd700"/>
-      <rect x="136" y="148" width="20" height="20" fill="#ffd700"/>
-      <rect x="164" y="160" width="20" height="20" fill="#d4a017"/>
+      <!-- Custom 8-bit dog icon - centered -->
+      <!-- Dog head -->
+      <!-- Left ear -->
+      <rect x="440" y="80" width="28" height="28" fill="#a0522d"/>
+      <rect x="428" y="108" width="16" height="20" fill="#a0522d"/>
+      <!-- Right ear -->
+      <rect x="732" y="80" width="28" height="28" fill="#a0522d"/>
+      <rect x="756" y="108" width="16" height="20" fill="#a0522d"/>
+      <!-- Head -->
+      <rect x="428" y="108" width="344" height="200" fill="#cd853f"/>
+      <!-- Left eye -->
+      <rect x="480" y="140" width="24" height="24" fill="#000000"/>
+      <rect x="488" y="148" width="8" height="8" fill="#ff69b4"/>
+      <!-- Right eye -->
+      <rect x="696" y="140" width="24" height="24" fill="#000000"/>
+      <rect x="704" y="148" width="8" height="8" fill="#ff69b4"/>
+      <!-- Snout -->
+      <rect x="520" y="240" width="160" height="68" fill="#daa520"/>
+      <!-- Nose -->
+      <rect x="576" y="260" width="48" height="32" fill="#000000"/>
+      <!-- Mouth -->
+      <rect x="520" y="292" width="160" height="16" fill="#8b4513"/>
+      <!-- Body -->
+      <rect x="456" y="308" width="288" height="160" fill="#cd853f"/>
+      <!-- Left paw -->
+      <rect x="484" y="468" width="44" height="80" fill="#a0522d"/>
+      <!-- Right paw -->
+      <rect x="672" y="468" width="44" height="80" fill="#a0522d"/>
 
-      <!-- Pixel paw print - right side -->
-      <rect x="980" y="200" width="28" height="28" fill="#d4a017"/>
-      <rect x="1008" y="200" width="28" height="28" fill="#d4a017"/>
-      <rect x="1036" y="200" width="28" height="28" fill="#d4a017"/>
-      <rect x="980" y="228" width="28" height="28" fill="#d4a017"/>
-      <rect x="1008" y="228" width="28" height="28" fill="#ffd700"/>
-      <rect x="1036" y="228" width="28" height="28" fill="#d4a017"/>
-      <rect x="980" y="256" width="28" height="28" fill="#d4a017"/>
-      <rect x="1008" y="256" width="28" height="28" fill="#d4a017"/>
-      <rect x="1036" y="256" width="28" height="28" fill="#d4a017"/>
-      <rect x="980" y="160" width="20" height="20" fill="#d4a017"/>
-      <rect x="1008" y="148" width="20" height="20" fill="#ffd700"/>
-      <rect x="1036" y="148" width="20" height="20" fill="#ffd700"/>
-      <rect x="1064" y="160" width="20" height="20" fill="#d4a017"/>
-
-      <!-- Title: PetSounds51 -->
-      <text x="600" y="130" font-size="96" font-weight="bold" text-anchor="middle" fill="url(#goldGrad)" font-family="Arial Black, Arial, sans-serif" letter-spacing="-2">
-        PetSounds51
+      <!-- Title: PS51 (below the dog icon) -->
+      <text x="600" y="620" font-size="80" font-weight="bold" text-anchor="middle" fill="url(#goldGrad)" font-family="Arial Black, Arial, sans-serif" letter-spacing="-2">
+        PS51
       </text>
 
       <!-- Tagline -->

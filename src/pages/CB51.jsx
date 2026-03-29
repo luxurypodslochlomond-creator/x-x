@@ -458,9 +458,8 @@ export default function CB51() {
               ) : null}
               </div>
               )}
-              </div>
               </CB51ErrorBoundary>
               </CB51PINGuard>
-    );
-  }
-}
+              );
+              }
+              }
