@@ -105,7 +105,7 @@ const QUESTIONS = [
     options: [
       { key: 'dog', label: 'Dog', Icon: PS51Icons.Paw, iconColor: '#d4a017', desc: 'All sizes and breeds' },
       { key: 'cat', label: 'Cat', Icon: PS51Icons.Rescue, iconColor: '#ec4899', desc: 'Domestic and large cats' },
-      { key: 'horse', label: 'Horse', Icon: PS51Icons.Presence, iconColor: '#8aab3a', desc: 'Horses and ponies' },
+      { key: 'horse', label: 'Horse', Icon: PS51Icons.Trust, iconColor: '#8aab3a', desc: 'Horses and ponies' },
     ]
   },
   {
@@ -126,7 +126,7 @@ const QUESTIONS = [
     Icon: PS51Icons.Science,
     options: [
       { key: 'puppy', label: 'Young', Icon: PS51Icons.Rescue, iconColor: '#8aab3a', desc: 'Puppy / kitten / foal' },
-      { key: 'adult', label: 'Adult', Icon: PS51Icons.Presence, iconColor: '#d4a017', desc: '1–8 years old' },
+      { key: 'adult', label: 'Adult', Icon: PS51Icons.Speaker, iconColor: '#d4a017', desc: '1–8 years old' },
       { key: 'senior', label: 'Senior', Icon: Moon, iconColor: '#6366f1', desc: '8+ years, older animal' },
     ]
   }
