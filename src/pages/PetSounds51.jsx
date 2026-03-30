@@ -448,7 +448,10 @@ export default function PetSounds51() {
                         <div className="flex items-center gap-2">
                           {ItemIcon && <ItemIcon size={20} style={{ color: isUnlocked ? item.color : '#6b5e3a', flexShrink: 0 }} />}
                           {isFree && (
-                            <span className="text-xs font-black px-2 py-0.5 rounded-full" style={{ background: 'rgba(138,171,58,0.2)', color: '#8aab3a' }}>FREE</span>
+                            <div className="flex flex-col gap-0.5">
+                              <span className="text-xs font-black px-2 py-0.5 rounded-full" style={{ background: 'rgba(138,171,58,0.2)', color: '#8aab3a' }}>FREE</span>
+                              <span className="text-xs font-bold px-1" style={{ color: '#6b9a30' }}>free forever — not a trial</span>
+                            </div>
                           )}
                           {isSubscribed && !isFree && (
                             <span className="text-xs font-black px-2 py-0.5 rounded-full" style={{ background: `${item.color}20`, color: item.color }}>PREMIUM</span>
