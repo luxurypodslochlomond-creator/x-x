@@ -41,7 +41,7 @@ Access:
 • Open to research collaboration and clinical partnerships
 • Non-invasive, evidence-based, zero side effects
 
-More: https://petsounds51.life
+More: https://uf51.love/PetSounds51
 Research: family@uf51.love`;
 
   const oneLiners = [
