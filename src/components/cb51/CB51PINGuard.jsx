@@ -20,18 +20,22 @@ export default function CB51PINGuard({ children }) {
       }
 
       // Check base44 login — logged in users always get through
-      try {
-        const user = await base44.auth.me();
-        if (user) {
-          // Set PIN verified so future checks are instant
-          localStorage.setItem('cb51_pin_verified', 'true');
-          document.cookie = 'cb51_pin_verified=true; path=/; max-age=31536000';
-          setIsAuthed(true);
-          setChecking(false);
-          return;
+      // Retry a couple of times in case OAuth token is still settling
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          const user = await base44.auth.me();
+          if (user) {
+            // Set PIN verified so future checks are instant
+            localStorage.setItem('cb51_pin_verified', 'true');
+            document.cookie = 'cb51_pin_verified=true; path=/; max-age=31536000';
+            setIsAuthed(true);
+            setChecking(false);
+            return;
+          }
+        } catch (err) {
+          // not logged in yet, wait a moment and retry
+          if (attempt < 2) await new Promise(r => setTimeout(r, 800));
         }
-      } catch (err) {
-        // not logged in via base44
       }
 
       // No auth at all — send to login
