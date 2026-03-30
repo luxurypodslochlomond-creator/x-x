@@ -11,12 +11,21 @@ export default function CB51Login() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
 
-    // Check auth status ONCE on mount
+    // Check auth status ONCE on mount — if already logged in via Google, go straight to CB51
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                await base44.auth.me();
-                setIsLoggedIn(true);
+                const user = await base44.auth.me();
+                if (user) {
+                    // Logged in — set PIN cookie and go straight to CB51
+                    const expires = new Date();
+                    expires.setFullYear(expires.getFullYear() + 1);
+                    document.cookie = `cb51_pin_verified=true; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+                    localStorage.setItem('cb51_pin_verified', 'true');
+                    navigate(createPageUrl('CB51'), { replace: true });
+                    return;
+                }
+                setIsLoggedIn(false);
             } catch {
                 setIsLoggedIn(false);
             } finally {
