@@ -22,7 +22,7 @@ const PROTOCOLS = {
     color: '#06b6d4',
     icon: 'Frequency',
     items: [
-      { key: 'separation', name: 'Separation Anxiety', tagline: "You've left. They're spiraling.", desc: 'Slow-tempo calming tones · proven to reduce anxious behaviour', color: '#06b6d4', icon: 'Presence' },
+      { key: 'separation', name: 'Separation Anxiety', tagline: "You've left. They're spiraling.", desc: 'Start 10–15 mins before you leave · leave it running on your TV or computer · builds over days', color: '#06b6d4', icon: 'Presence' },
       { key: 'thunderstorm', name: 'Thunderstorm & Fireworks', tagline: 'The sky is attacking them.', desc: 'Soft ambient audio to mask sudden loud sounds', color: '#ec4899', icon: 'Science' },
       { key: 'vet_fear', name: 'Vet & Car Anxiety', tagline: 'Even the word "vet" makes them shake.', desc: 'Play before you leave — pre-emptive calm works better', color: '#a855f7', icon: 'Trust' },
       { key: 'night_anxiety', name: "Night Anxiety / Can't Settle", tagline: '3am. Still pacing.', desc: 'Ultra-slow ambient for sleep onset', color: '#6366f1', icon: 'Rescue' },
@@ -364,8 +364,9 @@ export default function PetSounds51() {
               <p className="leading-relaxed">Dogs hear up to 65,000 Hz. Cats up to 79,000 Hz. Horses up to 33,000 Hz. Peer-reviewed research has shown that removing species-specific agitating frequencies is more effective than generic "relaxing music". We tune each session to your pet's hearing profile.</p>
             </div>
             <div className="rounded-lg p-3" style={{ background: 'rgba(42,48,24,0.8)', border: '1px solid rgba(138,171,58,0.25)' }}>
-              <p className="font-bold mb-1" style={{ color: '#8aab3a' }}>ℹ️ How to use it</p>
-              <p className="leading-relaxed">This works best as complementary care alongside your vet — not instead of them. Leave it playing in the background. No headphones needed — isochronic tones and monaural beats work in open air through any speaker or TV. The calming effect builds over time with regular use.</p>
+              <p className="font-bold mb-1" style={{ color: '#8aab3a' }}>ℹ️ How to use it — especially for separation anxiety</p>
+              <p className="leading-relaxed mb-2">Start it <strong>10–15 minutes before you leave</strong> — not as you're walking out the door. Your pet needs to associate the sound with calm, not with departure. Then leave it running on your <strong>TV, laptop, or any speaker at home</strong> after you go. Most people just leave the browser tab open.</p>
+              <p className="leading-relaxed">It won't override peak panic in the moment — it works best as a <strong>daily routine</strong>, not a crisis fix. A week of consistent use is when you'll start seeing the difference. No headphones needed — isochronic tones work in open air through any speaker.</p>
             </div>
           </div>
         )}
@@ -400,7 +401,7 @@ export default function PetSounds51() {
       {/* START HERE BANNER — for first timers */}
       <div className="max-w-4xl mx-auto mb-6 rounded-2xl p-5 text-center" style={{ background: 'rgba(6,182,212,0.08)', border: '2px solid rgba(6,182,212,0.3)' }}>
         <p className="font-black text-lg mb-1" style={{ color: '#e8d5a3' }}>— or browse all protocols below —</p>
-        <p className="text-sm" style={{ color: '#a89870' }}>The <span style={{ color: '#8aab3a', fontWeight: 'bold' }}>FREE</span> one is Separation Anxiety — great if they're home alone. Just press play and leave it on.</p>
+        <p className="text-sm" style={{ color: '#a89870' }}>The <span style={{ color: '#8aab3a', fontWeight: 'bold' }}>FREE</span> one is Separation Anxiety — start it before you leave, then keep it running on your TV or computer at home.</p>
       </div>
 
       {/* PROTOCOL CATEGORIES */}
