@@ -803,7 +803,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
             {protocol === 'grief' && 'Less restlessness · lies in one place longer · less whimpering · appetite returning'}
             {protocol === 'arthritis' && 'Less guarding posture · easier lying down · less panting · more relaxed body language'}
             {protocol === 'recovery' && 'Settling without seeking attention · deeper breathing · less whimpering · restful sleep'}
-            {protocol === 'separation' && 'Moves closer to speaker · lies down · ears relax back · yawning · slower breathing'}
+            {protocol === 'separation' && <>Moves closer to speaker · lies down · ears relax back · yawning · slower breathing<br /><span style={{ color: '#ffffff55', fontSize: '0.7rem', marginTop: '6px', display: 'block' }}>💡 Already distressed when you pressed play? That's ok — it won't override peak panic in the moment. Start it 10–15 mins <em>before</em> you leave tomorrow. Daily use is where the real change happens.</span></>}
           </p>
         </div>
       ) : (
