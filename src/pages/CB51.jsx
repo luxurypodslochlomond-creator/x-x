@@ -334,7 +334,7 @@ export default function CB51() {
                 To get started, you need a CB51 account so your artists are saved to you.
               </p>
               <button
-                onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
                 className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
               >
                 CREATE FREE ACCOUNT / LOGIN

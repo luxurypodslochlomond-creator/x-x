@@ -10,11 +10,20 @@ export default function CB51PINGuard({ children }) {
 
   useEffect(() => {
     const checkAuth = async () => {
-      // Check base44 login FIRST — logged in users always get through
+      // PIN check first (instant, no network) — covers PIN users AND previously authed base44 users
+      const pinVerified = localStorage.getItem('cb51_pin_verified');
+      const cookieVerified = document.cookie.split(';').some(c => c.trim().startsWith('cb51_pin_verified=true'));
+      if (pinVerified === 'true' || cookieVerified) {
+        setIsAuthed(true);
+        setChecking(false);
+        return;
+      }
+
+      // Check base44 login — logged in users always get through
       try {
         const user = await base44.auth.me();
         if (user) {
-          // Also set PIN verified so future checks are instant
+          // Set PIN verified so future checks are instant
           localStorage.setItem('cb51_pin_verified', 'true');
           document.cookie = 'cb51_pin_verified=true; path=/; max-age=31536000';
           setIsAuthed(true);
@@ -22,17 +31,11 @@ export default function CB51PINGuard({ children }) {
           return;
         }
       } catch (err) {
-        // not logged in via base44, fall through to PIN check
+        // not logged in via base44
       }
 
-      // PIN check - check both localStorage AND cookie (iOS PWA needs cookie)
-      const pinVerified = localStorage.getItem('cb51_pin_verified');
-      const cookieVerified = document.cookie.split(';').some(c => c.trim().startsWith('cb51_pin_verified=true'));
-      if (pinVerified === 'true' || cookieVerified) {
-        setIsAuthed(true);
-      } else {
-        navigate(createPageUrl('CB51Login'), { replace: true });
-      }
+      // No auth at all — send to login
+      navigate(createPageUrl('CB51Login'), { replace: true });
       setChecking(false);
     };
     checkAuth();
