@@ -43,7 +43,7 @@ export default function PetSounds51Privacy() {
 
           <section>
             <h2 className="font-bold text-lg mb-2" style={{ color: '#d4a017' }}>Stripe payments</h2>
-            <p className="text-gray-300">Payments are processed by Stripe. Their privacy policy is at <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: '#d4a017' }}>stripe.com/privacy</a>. We use Stripe in test/sandbox mode and do not store card details.</p>
+            <p className="text-gray-300">Payments are processed by Stripe. Their privacy policy is at <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: '#d4a017' }}>stripe.com/privacy</a>. We do not store card details.</p>
           </section>
 
           <section>

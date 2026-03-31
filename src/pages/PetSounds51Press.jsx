@@ -15,7 +15,7 @@ export default function PetSounds51Press() {
 
   const pressRelease = `FOR IMMEDIATE RELEASE
 
-PetSounds51: The AI Platform Bringing Drug-Free Sound Therapy to Animal Healthcare
+PetSounds51: Drug-Free Sound Therapy for Animal Anxiety, Pain & Wellbeing
 
 A browser-based psychoacoustic platform is quietly solving one of pet care's most overlooked problems — anxiety, pain, and stress in companion animals — without a single pill.
 
