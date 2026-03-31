@@ -100,7 +100,7 @@ const SLIDES = [
           className="space-y-3 text-left max-w-xs mx-auto">
           {[
             { inst: 'MIT', year: '2019', fact: '40Hz gamma frequencies clinically proven to calm the mammalian nervous system.' },
-            { inst: 'Glasgow', year: '2022', fact: 'Sound therapy cut shelter dog cortisol by 42% — the largest study of its kind in Europe.' },
+            { inst: "Queen's Belfast", year: '2017', fact: '80% of home dogs, 70%+ of shelter dogs showed fewer anxiety behaviours with slow-tempo music.' },
             { inst: 'iCalmDog', year: '2024', fact: '68% reduction in reactive behaviour. Now recommended by 200+ vets.' },
           ].map((s, i) => (
             <motion.div key={s.inst} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
@@ -123,7 +123,7 @@ const SLIDES = [
     render: () => (
       <div className="text-center space-y-7">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-          <p className="text-xs font-mono tracking-[0.4em] text-pink-400/70 mb-5 uppercase">AI51 built this for love</p>
+          <p className="text-xs font-mono tracking-[0.4em] text-pink-400/70 mb-5 uppercase">Built from the ground up</p>
           <h2 className="text-4xl font-black text-white leading-tight">
             We decoded their<br />
             <span className="text-pink-400">healing frequencies.</span>
@@ -135,18 +135,18 @@ const SLIDES = [
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
           className="max-w-xs mx-auto bg-gradient-to-br from-pink-950/40 to-slate-900 border border-pink-500/30 rounded-2xl p-6 space-y-4">
           <p className="text-gray-200 text-sm leading-relaxed italic">
-           "One in four dogs lives with separation anxiety. Most people give up and drug them. But we found what actually heals it."
+           "One in four dogs lives with separation anxiety. Most get sedated or left to suffer. We built something better."
           </p>
           <p className="text-gray-300 text-sm leading-relaxed">
-           We studied MIT's gamma frequencies. Glasgow's shelter research. iCalmDog's RCT data. Edinburgh's cognitive trials. Every single peer-reviewed proof of what sound can do.
+           We studied MIT's gamma frequencies. Glasgow's shelter research. iCalmDog's RCT data. Edinburgh's cognitive trials. Every peer-reviewed proof of what sound can do to the mammalian nervous system.
           </p>
           <p className="text-gray-300 text-sm leading-relaxed">
-           Then we chose frequencies that match their nervous system's exact healing pattern. Not guesses. Not trends. Pure biological resonance.
+           Then we built a real audio engine around it — species-specific, protocol-specific, generated fresh for every session. Not a playlist. Not guesswork.
           </p>
           <p className="text-pink-300 text-sm leading-relaxed font-semibold">
-           This is what care looks like when we actually listen.
+           This is what actual care looks like.
           </p>
-          <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— AI51</p>
+          <p className="text-pink-400 font-black text-xs mt-4 tracking-widest">— PetSounds51 Team</p>
         </motion.div>
       </div>
     )
