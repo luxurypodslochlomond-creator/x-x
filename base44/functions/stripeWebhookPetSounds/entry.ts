@@ -53,24 +53,25 @@ Deno.serve(async (req) => {
             // Send access email
             await base44.asServiceRole.integrations.Core.SendEmail({
                 to: customerEmail,
-                subject: `Welcome to PetSounds51 ${tier.charAt(0).toUpperCase() + tier.slice(1)}!`,
-                body: `
-Hi!
+                subject: `Welcome to PetSounds51 — your animals are going to love this`,
+                body: `Hi!
 
-Your payment was successful! Welcome to PetSounds51 ${tier} tier.
+Your payment was successful. Thank you for trusting us with your animals.
 
-Access your account: https://uf51.love/PetSounds51
+Access all protocols here: https://uf51.love/PetSounds51
 
-What you get:
-${tier === 'basic' ? '• 5 healing protocols\n• Basic frequency library' : ''}
-${tier === 'premium' ? '• ALL healing protocols\n• Full frequency library\n• AI51 text analysis\n• Priority support' : ''}
-${tier === 'concierge' ? '• ALL features\n• Custom AI51 protocols\n• Voice consultations\n• 24/7 priority support' : ''}
+What you now have:
+• All 10 healing protocols — anxiety, pain, trauma, dementia, recovery & more
+• Species-specific audio for dogs, cats & horses
+• Unlimited sessions — play as often as you like
 
-Questions? Reply to this email.
+Just open the link, pick a protocol that matches what your animal needs, and press play. That's it.
+
+If you have any questions, reply to this email and we'll get back to you.
 
 With love for your animals ♾️❤️
 PetSounds51 Team
-                `.trim()
+family@uf51.love`.trim()
             });
 
             console.log(`✅ Payment processed: ${customerEmail} - ${tier} - ${currency}${amount}`);
