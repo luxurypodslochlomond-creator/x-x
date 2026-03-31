@@ -115,8 +115,8 @@ export default function PetSounds51Landing() {
           Most streaming music was made for human ears. This was built for theirs.
         </p>
         <p className="text-sm leading-relaxed" style={{ color: '#8aab3a' }}>
-          Every protocol uses a different AI-designed audio architecture — the thunderstorm one physically masks sudden bangs. 
-          The night one entrains toward sleep. The pain one uses 40Hz gamma (MIT research, 2016). 
+          Every protocol is built differently — the thunderstorm one physically masks sudden bangs. 
+          The night one uses slow entrainment toward sleep. The pain one uses 40Hz gamma tones (MIT research, 2016). 
           They're not all the same thing with different names.
         </p>
       </div>
