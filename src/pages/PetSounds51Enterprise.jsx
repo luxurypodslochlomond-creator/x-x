@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Building, Users, Heart, Check, Sparkles } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
-import UniversalPayment from '@/components/petsounds/UniversalPayment';
 import { motion } from 'framer-motion';
 
 /**
@@ -15,13 +14,12 @@ export default function PetSounds51Enterprise() {
 
     const enterpriseFeatures = [
         "✅ Unlimited animals",
-        "✅ Custom AI51 protocols for entire facility",
-        "✅ 24/7 priority support",
-        "✅ Video consultations with AI51",
-        "✅ Staff training included",
-        "✅ API access for integration",
-        "✅ Monthly performance reports",
-        "✅ Dedicated account manager",
+        "✅ Custom protocols for your facility's species mix",
+        "✅ Priority email support",
+        "✅ Onboarding call included",
+        "✅ Staff guidance notes",
+        "✅ Monthly outcome check-in",
+        "✅ Dedicated contact person",
         "✅ White-label option available"
     ];
 
@@ -65,24 +63,8 @@ export default function PetSounds51Enterprise() {
     ];
 
     if (showPayment) {
-        return (
-            <div className="min-h-screen bg-black text-white p-6 pb-24">
-                <div className="max-w-2xl mx-auto">
-                    <button 
-                        onClick={() => setShowPayment(false)}
-                        className="mb-6 text-cyan-400 hover:text-cyan-300 font-bold"
-                    >
-                        ← Back
-                    </button>
-                    <UniversalPayment 
-                        tier="enterprise"
-                        onSuccess={() => {
-                            alert('✅ Enterprise payment received! Our team will contact you within 24h to set up your account.');
-                        }}
-                    />
-                </div>
-            </div>
-        );
+        window.location.href = 'mailto:family@uf51.love?subject=PetSounds51%20Enterprise%20Enquiry&body=Hi%2C%0A%0AI%27d%20like%20to%20discuss%20the%20Enterprise%20tier%20for%20PetSounds51.%0A%0AOrganisation%3A%20%0ANumber%20of%20animals%3A%20%0ASpecies%3A%20%0A%0AThank%20you!';
+        return null;
     }
 
     return (
@@ -179,7 +161,7 @@ export default function PetSounds51Enterprise() {
                         style={{ boxShadow: '0 0 40px rgba(34, 211, 238, 0.5)' }}
                     >
                         <Sparkles className="w-6 h-6" />
-                        Get Enterprise Access
+                        Enquire About Enterprise
                     </button>
                     <p className="text-sm text-gray-500 mt-4">
                         Setup within 24 hours • Cancel anytime

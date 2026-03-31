@@ -5,16 +5,16 @@ import { sendPS51ConfirmationEmail } from '@/functions/sendPS51ConfirmationEmail
 import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
 
 const PROTOCOLS = [
-  { icon: 'Science', name: 'Thunderstorm & Fireworks', detail: '40Hz gamma · suppresses fear response' },
-  { icon: 'Trust', name: 'Vet & Car Anxiety', detail: '528Hz · parasympathetic activation' },
-  { icon: 'Frequency', name: "Night Anxiety / Can't Settle", detail: 'Delta 4Hz · sleep onset' },
-  { icon: 'Rescue', name: 'Rescue Trauma & PTSD', detail: '396Hz theta · trauma processing' },
-  { icon: 'Heart', name: 'Grief & Depression', detail: '639Hz · remembering bonds' },
-  { icon: 'Science', name: 'Cognitive Decline / Dementia', detail: '40Hz gamma · MIT protocol' },
-  { icon: 'Frequency', name: 'Hyperactivity & Reactivity', detail: 'Alpha 10Hz · calm bridging' },
-  { icon: 'Paw', name: 'Arthritis & Joint Pain', detail: '174Hz PEMF · pain signalling' },
-  { icon: 'Frequency', name: 'Post-Surgery Recovery', detail: '528Hz · cellular repair' },
-  { icon: 'Paw', name: 'Sports & Zoo Animals', detail: 'Performance + recovery' },
+  { icon: 'Science', name: 'Thunderstorm & Fireworks', detail: 'Broad-spectrum noise masking · suppresses sudden sound spikes' },
+  { icon: 'Trust', name: 'Vet & Car Anxiety', detail: 'Slow-tempo alpha tones · parasympathetic nervous system' },
+  { icon: 'Frequency', name: "Night Anxiety / Can't Settle", detail: 'Delta entrainment · sleep onset support' },
+  { icon: 'Rescue', name: 'Rescue Trauma & PTSD', detail: 'Slow heartbeat + warm harmonics · safety signal' },
+  { icon: 'Heart', name: 'Grief & Loss', detail: 'Steady ambient companionship · adjustment support' },
+  { icon: 'Science', name: 'Cognitive Decline / Dementia', detail: '40Hz gamma isochronic · MIT-published research' },
+  { icon: 'Frequency', name: 'Hyperactivity & Reactivity', detail: 'Sub-60 BPM pacing · nervous system anchoring' },
+  { icon: 'Paw', name: 'Arthritis & Joint Pain', detail: '40Hz gamma · reduces stress that amplifies pain' },
+  { icon: 'Frequency', name: 'Post-Surgery Recovery', detail: 'Calm sonic environment · supports rest & healing' },
+  { icon: 'Paw', name: 'Sports & Zoo Animals', detail: 'Pre/post-event protocols · performance & recovery' },
 ];
 
 export default function PS51Paywall({ onClose }) {
