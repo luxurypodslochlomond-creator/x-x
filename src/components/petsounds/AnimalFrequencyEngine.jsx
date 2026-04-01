@@ -72,10 +72,15 @@ function buildBrownNoise(ctx) {
 // Dogs: most sensitive 1kHz-8kHz, comfortable 200Hz-8kHz
 // Cats: most sensitive 1kHz-16kHz, very sensitive to high freq, need low-pass warmth
 // Horses: most sensitive 1kHz-16kHz but prefer lower rumble, calmer response to bass
+// EQ tuned to actual species hearing biology:
+// Dogs: 67Hz-45,000Hz — most sensitive 1kHz-8kHz (peak sensitivity 3kHz-12kHz per AKC)
+// Cats: 45Hz-64,000Hz — most sensitive 2kHz-16kHz (significantly above human range)
+// Horses: 55Hz-33,500Hz — most sensitive 1kHz-16kHz, prefer lower rumble
+// Low-pass ceiling raised to let species-relevant high frequencies through
 const SPECIES_EQ = {
-  dog:   { highpassHz: 80,  lowpassHz: 6000, peakHz: 1200, peakGain: 2  },
-  cat:   { highpassHz: 120, lowpassHz: 8000, peakHz: 2000, peakGain: 3  },
-  horse: { highpassHz: 60,  lowpassHz: 4000, peakHz: 800,  peakGain: 1.5 },
+  dog:   { highpassHz: 80,  lowpassHz: 12000, peakHz: 4000, peakGain: 2.5 },
+  cat:   { highpassHz: 120, lowpassHz: 16000, peakHz: 6000, peakGain: 3.5 },
+  horse: { highpassHz: 55,  lowpassHz: 8000,  peakHz: 1200, peakGain: 1.5 },
 };
 
 function applySpeciesEQ(ctx, inputNode, species) {

@@ -33,7 +33,7 @@ WHY THIS IS DIFFERENT
 • Zero side effects — safe to combine with existing veterinary treatment
 • Research-backed: protocols grounded in published veterinary neuroscience
 • Affordable: £29.99/year vs £30-£100+ per vet consultation
-• AI-adaptive: the engine learns which protocols work for each individual animal over time — building a personalised response profile unique to that pet
+• Data-informed: anonymous session data is captured from day one — building the research foundation for adaptive personalisation as the platform grows
 
 THE TECHNOLOGY
 PetSounds51 runs entirely in the browser using the Web Audio API. The frequency synthesis engine generates layered harmonic chords, species-tuned EQ filtering, isochronic tone modulation, and dense noise masking in real time. There is no streaming, no server dependency during sessions — it works offline once loaded. The architecture is lean, scalable, and built to evolve as neuroscience research advances.
@@ -86,8 +86,8 @@ Research & Partnerships: family@uf51.love`;
       body: '$259B pet care market, 70% of dogs anxious, vet costs rising, pharmaceutical options limited. A subscription product at impulse-buy price point hitting an underserved segment with no dominant player.',
     },
     {
-      headline: 'The Human Story',
-      body: 'Built by someone who knows what it means to watch an animal suffer from anxiety and feel helpless. Not a Silicon Valley wellness app. A working platform, built from care, grounded in real science.',
+      headline: 'The Animal Story',
+      body: 'Animals suffer silently. They can\'t tell you they\'re anxious, in pain, or struggling. Sound-based calming has decades of peer-reviewed evidence behind it — but it\'s been locked in academic papers and expensive clinical settings. PetSounds51 is just the thing that makes it accessible to anyone with a phone.',
     },
     {
       headline: 'The Business Story',
@@ -142,12 +142,14 @@ Research & Partnerships: family@uf51.love`;
         <div className="mb-16 text-center">
           <div className="inline-block bg-amber-600/20 border border-amber-600/50 rounded-full px-4 py-1 text-amber-300 text-xs font-mono tracking-widest mb-6">PRESS & MEDIA</div>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-            The platform solving pet anxiety<br />
-            <span style={{ color: '#d4a017' }}>without a single prescription</span>
+            Millions of animals are suffering right now<br />
+            <span style={{ color: '#d4a017' }}>and most of it is preventable</span>
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
-            Real-time psychoacoustic therapy for dogs, cats, and horses. Browser-native. Evidence-based. £29.99/year.
-            In a $259B market with no dominant player in non-pharmaceutical wellness.
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed mb-4">
+            Over 70% of dogs show anxiety-related behaviours. Behavioural medication is overused, expensive, and often the only option offered. Sound-based calming is backed by peer-reviewed research — but it's been inaccessible. Until now.
+          </p>
+          <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
+            PetSounds51 generates species-specific therapeutic audio in real time, in any browser, on any device. Built for animal ears — not repurposed from human wellness apps. Free to try. £29.99/year for full access.
           </p>
         </div>
 
