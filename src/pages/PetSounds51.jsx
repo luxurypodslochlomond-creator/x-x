@@ -106,12 +106,12 @@ export default function PetSounds51() {
      };
 
      setMeta('og:title', 'PetSounds51 • Science-backed calm for anxious pets');
-     setMeta('og:description', 'Slow-tempo, species-tuned audio that genuinely calms anxious pets. Peer-reviewed research. Try FREE. £29.99/year for all protocols.');
+     setMeta('og:description', 'Sound therapy for anxious pets — built on peer-reviewed research. Try the Separation Anxiety protocol free. No signup needed.');
      setMeta('og:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
      setMeta('og:url', window.location.href);
      setMeta('og:type', 'website');
 
-     setMetaName('description', 'Science-backed sound therapy for separation anxiety, stress, pain & healing. Try FREE for anxiety. £29.99/year.');
+     setMetaName('description', 'Sound therapy for anxious pets — built on peer-reviewed research. Try the Separation Anxiety protocol free. No signup needed.');
      setMetaName('twitter:card', 'summary_large_image');
      setMetaName('twitter:title', 'PetSounds51 • Healing frequencies for anxious pets');
      setMetaName('twitter:description', 'Science-backed sound therapy. Try FREE for separation anxiety.');

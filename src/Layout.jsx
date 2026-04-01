@@ -283,7 +283,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
         : isPS51Page
-        ? 'Science-backed sound therapy for animal anxiety, pain & wellness.'
+        ? 'Sound therapy for anxious pets — built on peer-reviewed research. Try the Separation Anxiety protocol free. No signup needed.'
         : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, planetary action.',
       'og:image': window.location.origin + ogImageUrl,
       'og:type': 'website'

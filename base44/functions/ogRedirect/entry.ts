@@ -19,7 +19,7 @@ PetSounds51Whitepaper: {
 },
 PetSounds51: {
     title: 'PetSounds51 • Healing frequencies for anxious pets',
-    description: 'Science-backed sound therapy for separation anxiety, stress, pain & healing. Try FREE for anxiety. £29.99/year. Research from MIT, Glasgow, Edinburgh.',
+    description: 'Sound therapy for anxious pets — built on peer-reviewed research. Try the Separation Anxiety protocol free. No signup needed.',
     image: '/api/functions/servePetSounds51OGImage',
     color: '#d4a017',
   },
