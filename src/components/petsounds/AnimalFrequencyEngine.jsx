@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Play, Volume2, VolumeX } from 'lucide-react';
+import { Play, Volume2, VolumeX, Eye, Activity, Moon, Heart, Zap, Shield, Info } from 'lucide-react';
+import PS51Icon, { PS51Icons } from '@/components/petsounds/PS51CustomIcons';
 
 // WORLD-CLASS PSYCHOACOUSTIC ENGINE v3
 // Built on published peer-reviewed research:
@@ -788,12 +789,18 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
     <div className="bg-[#07080f] text-white rounded-2xl p-5 sm:p-7 border-2 shadow-2xl" style={{ borderColor: freq.color + '55', boxShadow: `0 0 80px ${freq.color}18` }}>
       {/* Header */}
       <div className="mb-6">
-        <p className="text-xs font-mono tracking-widest mb-1 uppercase" style={{ color: freq.color + 'aa' }}>{CATEGORIES[freq.category]?.label}</p>
+        <div className="flex items-center gap-2 mb-1">
+          <PS51Icons.Science size={14} style={{ color: freq.color + 'aa' }} />
+          <p className="text-xs font-mono tracking-widest uppercase" style={{ color: freq.color + 'aa' }}>{CATEGORIES[freq.category]?.label}</p>
+        </div>
         <h2 className="text-2xl sm:text-3xl font-black mb-1" style={{ color: freq.color }}>{freq.name}</h2>
         <p className="text-gray-500 text-sm italic mb-4">"{freq.tagline}"</p>
         <div className="bg-white/5 rounded-xl p-4 border border-white/5">
           <div className="flex items-center gap-2 mb-2">
-            <p className="text-xs font-black" style={{ color: freq.color }}>THE SCIENCE</p>
+            <div className="flex items-center gap-1.5">
+              <PS51Icons.Science size={12} style={{ color: freq.color }} />
+              <p className="text-xs font-black" style={{ color: freq.color }}>THE SCIENCE</p>
+            </div>
             <span className={`text-xs font-black px-2 py-0.5 rounded-full ${
               freq.evidenceLevel === 'strong'   ? 'bg-green-500/20 text-green-400' :
               freq.evidenceLevel === 'good'     ? 'bg-cyan-500/20 text-cyan-400' :
@@ -813,7 +820,10 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
       {/* Audio quality note — signs to watch for on bio-mimetic protocols */}
       {['separation','thunderstorm','night_anxiety','rescue_trauma','grief','arthritis','recovery'].includes(protocol) ? (
         <div className="mb-4 px-3 py-3 rounded-lg" style={{ background: `${freq.color}10`, border: `1px solid ${freq.color}25` }}>
-          <p className="text-xs font-black mb-1" style={{ color: freq.color }}>👀 SIGNS IT'S WORKING</p>
+          <div className="flex items-center gap-2 mb-1">
+            <Eye className="w-3.5 h-3.5 flex-shrink-0" style={{ color: freq.color }} />
+            <p className="text-xs font-black" style={{ color: freq.color }}>SIGNS IT'S WORKING</p>
+          </div>
           <p className="text-xs leading-relaxed" style={{ color: freq.color + 'bb' }}>
             {protocol === 'thunderstorm' && 'Less flinching at bangs · moves near speaker · breathing slows · stops shaking'}
             {protocol === 'night_anxiety' && 'Lies down · yawning · eyes getting heavy · stops pacing · breathing deepens'}
@@ -821,7 +831,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
             {protocol === 'grief' && 'Less restlessness · lies in one place longer · less whimpering · appetite returning'}
             {protocol === 'arthritis' && 'Less guarding posture · easier lying down · less panting · more relaxed body language'}
             {protocol === 'recovery' && 'Settling without seeking attention · deeper breathing · less whimpering · restful sleep'}
-            {protocol === 'separation' && <>Moves closer to speaker · lies down · ears relax back · yawning · slower breathing<br /><span style={{ color: '#ffffff55', fontSize: '0.7rem', marginTop: '6px', display: 'block' }}>💡 Already distressed when you pressed play? That's ok — it won't override peak panic in the moment. Start it 10–15 mins <em>before</em> you leave tomorrow. Daily use is where the real change happens.</span></>}
+            {protocol === 'separation' && <>Moves closer to speaker · lies down · ears relax back · yawning · slower breathing<br /><span className="flex items-start gap-1 mt-2" style={{ color: '#ffffff55', fontSize: '0.7rem', display: 'flex' }}><Info className="w-3 h-3 flex-shrink-0 mt-0.5" />Already distressed when you pressed play? That's ok — it won't override peak panic in the moment. Start it 10–15 mins <em>before</em> you leave tomorrow. Daily use is where the real change happens.</span></>}
           </p>
         </div>
       ) : (
@@ -911,7 +921,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
             </div>
             <button
               onClick={() => {
-                const text = `My ${(SPECIES_PROFILES[species] || SPECIES_PROFILES.dog).label.toLowerCase()} is calming down right now 🐾 Science-backed sound therapy — free to try`;
+                const text = `My ${(SPECIES_PROFILES[species] || SPECIES_PROFILES.dog).label.toLowerCase()} is calming down right now. Science-backed sound therapy — free to try:`;
                 const url = 'https://uf51.love/PetSounds51';
                 if (navigator.share) {
                   navigator.share({ title: 'PetSounds51 — Healing frequencies for anxious pets', text, url });
