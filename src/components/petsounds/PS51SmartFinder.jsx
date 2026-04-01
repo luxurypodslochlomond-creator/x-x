@@ -235,18 +235,20 @@ export default function PS51SmartFinder({ onSelectProtocol, onDismiss }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              {/* RESULT */}
-              <div className="text-center mb-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black mb-3"
-                  style={{ background: 'rgba(138,171,58,0.15)', border: '1px solid rgba(138,171,58,0.4)', color: '#8aab3a' }}>
-                  <PS51Icons.Science size={12} style={{ color: '#8aab3a' }} /> PROTOCOL MATCHED
+              {/* RESULT — AI ACTION LANGUAGE */}
+              <div className="mb-4 rounded-xl p-4" style={{ background: 'rgba(138,171,58,0.08)', border: '1px solid rgba(138,171,58,0.35)' }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 flex-shrink-0" style={{ color: '#8aab3a' }} />
+                  <p className="font-black text-sm" style={{ color: '#8aab3a' }}>AI has matched a protocol</p>
                 </div>
-                <p className="text-xs mb-2" style={{ color: '#6b5e3a' }}>Based on your answers:</p>
+                <p className="text-xs leading-relaxed" style={{ color: '#a89870' }}>
+                  Based on your answers — <span style={{ color: '#d4a017' }}>{answers.species}</span>, <span style={{ color: '#d4a017' }}>{answers.trigger?.replace(/_/g, ' ')}</span>, <span style={{ color: '#d4a017' }}>{answers.age}</span> — this is the protocol with the strongest response profile in our dataset for this pattern.
+                </p>
               </div>
 
               <div className="rounded-xl p-4 mb-4" style={{ background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.3)' }}>
-                <p className="font-black mb-1" style={{ color: '#d4a017', fontSize: '1rem' }}>
-                  Why this protocol
+                <p className="font-black mb-1 text-sm" style={{ color: '#d4a017' }}>
+                  Why the AI chose this
                 </p>
                 <p className="text-sm leading-relaxed" style={{ color: '#c8b87a' }}>
                   {recommendation.reason}
@@ -259,7 +261,7 @@ export default function PS51SmartFinder({ onSelectProtocol, onDismiss }) {
                   className="w-full py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] active:scale-[0.98]"
                   style={{ background: 'linear-gradient(135deg, #d4a017, #f0c040)', color: '#1a1a0a', boxShadow: '0 0 25px rgba(212,160,23,0.3)' }}
                 >
-                  ▶ Start Recommended Protocol
+                  ▶ Start AI-Recommended Protocol Now
                 </button>
                 <button
                   onClick={reset}
