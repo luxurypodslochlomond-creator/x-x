@@ -7,7 +7,7 @@ import { base44 } from '@/api/base44Client';
 const getDeviceType = () => {
   const ua = navigator.userAgent;
   if (/tablet|ipad|playbook|silk/i.test(ua)) return 'tablet';
-  if (/mobile|iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(ua).test) return 'mobile';
+  if (/mobile|iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(ua)) return 'mobile';
   if (window.innerWidth <= 768) return 'mobile';
   if (window.innerWidth <= 1024) return 'tablet';
   return 'desktop';
