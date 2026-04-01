@@ -246,26 +246,31 @@ export default function PetSounds51() {
           Psychoacoustic audio tuned to how your pet actually hears — not generic music, not white noise. 
           A real audio engine built from peer-reviewed research. Species-specific frequencies. Just leave it playing.
         </p>
-        <p className="text-xs max-w-lg mx-auto leading-relaxed mb-4" style={{ color: '#8aab3a' }}>
-          No side effects. Works alongside your vet. Free protocol available right now — no signup needed.
+        <p className="text-xs max-w-lg mx-auto leading-relaxed mb-8" style={{ color: '#8aab3a' }}>
+          No side effects. Works alongside your vet. No signup needed.
         </p>
-        <div className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold">
-        <div className="flex flex-col items-center gap-1">
-          <button onPointerDown={(e) => { e.preventDefault(); handleSelect('separation'); }} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer select-none touch-manipulation" style={{ background: 'rgba(138,171,58,0.2)', border: '1px solid rgba(138,171,58,0.6)', color: '#8aab3a' }}>
-            <Zap size={16} style={{ color: '#8aab3a' }} />
-            Try FREE: Separation Anxiety
+
+        {/* FREE HERO CTA — unmissable */}
+        <div className="max-w-sm mx-auto mb-4">
+          <button
+            onPointerDown={(e) => { e.preventDefault(); handleSelect('separation'); }}
+            className="w-full rounded-2xl px-6 py-5 font-black text-xl flex flex-col items-center gap-1 active:scale-95 transition-transform select-none touch-manipulation shadow-2xl"
+            style={{ background: 'linear-gradient(135deg, #8aab3a, #6b9a30)', color: '#fff', boxShadow: '0 0 40px rgba(138,171,58,0.45)' }}
+          >
+            <span className="flex items-center gap-2"><Play className="w-6 h-6 fill-current" /> Try it FREE right now</span>
+            <span className="text-sm font-bold opacity-80">Separation Anxiety protocol · No card · No signup</span>
           </button>
-          <span className="text-xs font-bold" style={{ color: '#6b9a30' }}>Free forever — not a trial</span>
+          <p className="text-xs text-center mt-2 font-bold" style={{ color: '#6b9a30' }}>Free forever — not a trial. Just leave it playing on your TV or laptop.</p>
         </div>
-        <button onClick={() => setShowPaywall(true)} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>
-          <Zap size={16} style={{ color: '#d4a017' }} />
-          £29.99/year — unlock all
-        </button>
-        <Link to={createPageUrl("PetSounds51Story")} className="rounded-full px-3 py-1 flex items-center gap-2 hover:opacity-80 transition-opacity" style={{ background: 'rgba(90,110,40,0.3)', border: '1px solid rgba(90,110,40,0.6)', color: '#8aab3a' }}>
-          <Heart size={16} style={{ color: '#8aab3a' }} />
-          10% to rescue
-        </Link>
-        </div>
+
+        {!isSubscribed && (
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <button onClick={() => setShowPaywall(true)} className="rounded-full px-4 py-2 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer text-sm font-bold" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>
+              <Lock size={14} />
+              Unlock all 13 protocols — £29.99/year
+            </button>
+          </div>
+        )}
       </div>
 
       {/* AI SMART FINDER — hero position */}
@@ -297,20 +302,7 @@ export default function PetSounds51() {
         )}
       </div>
 
-      {/* BIG SUBSCRIBE CTA */}
-      {!isSubscribed && (
-        <div className="max-w-4xl mx-auto mb-8 text-center">
-          <button
-            onClick={() => setShowPaywall(true)}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-lg shadow-xl hover:scale-105 transition-transform"
-            style={{ background: 'linear-gradient(135deg, #d4a017, #f0c040)', color: '#1a1a0a', boxShadow: '0 0 30px rgba(212,160,23,0.4)' }}
-          >
-            <Heart size={22} />
-            Subscribe — £29.99/year · All Protocols
-          </button>
-          <p className="text-xs mt-2" style={{ color: '#6b5e3a' }}>30-day refund · No questions · Cancel anytime</p>
-        </div>
-      )}
+
 
       {/* RESTORE ACCESS */}
       {!isSubscribed && (
