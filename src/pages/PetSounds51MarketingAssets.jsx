@@ -28,21 +28,21 @@ export default function PetSounds51MarketingAssets() {
       name: 'Instagram Post (Icon)',
       size: '1080x1350px',
       description: 'Icon-focused with gradient',
-      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/98e62bc73_generated_image.png',
+      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/784ebd1fc_generated_image.png',
       format: 'JPG'
     },
     {
       name: 'Instagram Stories (Icon)',
       size: '1080x1920px',
       description: 'Vertical icon format',
-      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/792f2924e_generated_image.png',
+      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/3aadb0c0b_generated_image.png',
       format: 'JPG'
     },
     {
       name: 'Mobile Web Hero (Icon)',
       size: '600x400px',
       description: 'Icon & text minimal design',
-      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/4a1abd30b_generated_image.png',
+      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/006b1590e_generated_image.png',
       format: 'JPG'
     }
   ];
