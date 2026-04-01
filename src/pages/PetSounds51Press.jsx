@@ -69,7 +69,7 @@ Research & Partnerships: family@uf51.love`;
     { stat: '£29.99', label: 'Full annual access — no hardware needed', icon: Zap },
     { stat: '0', label: 'Side effects. Safe alongside vet treatment', icon: Shield },
     { stat: '100%', label: 'Browser-native — works offline once loaded', icon: Globe },
-    { stat: 'AI', label: 'Smart Finder matches pet to protocol in 3 questions', icon: Globe },
+    { stat: '3', label: 'Questions to find your pet\'s protocol — AI-matched', icon: Brain },
   ];
 
   const angles = [
@@ -79,7 +79,7 @@ Research & Partnerships: family@uf51.love`;
     },
     {
       headline: 'The AI Story',
-      body: 'The Smart Finder is an AI-guided recommendation engine that matches pets to the right protocol in 3 questions — cross-referencing species, trigger type, and life stage against the published research base. Over time, the engine builds an anonymous response profile for each animal, learning what actually works. The dataset growing from real sessions is the long-term moat — training data no competitor can replicate.',
+      body: 'The Smart Finder uses AI to match a pet to the right protocol in 3 questions — species, trigger, and life stage — then explains the science behind the recommendation in plain language. We\'re also collecting anonymous session data (duration, protocol, species, return visits) that will power a genuinely useful research dataset over time. Early stage, honest about it — but the infrastructure is already capturing it.',
     },
     {
       headline: 'The Market Story',
