@@ -33,6 +33,7 @@ WHY THIS IS DIFFERENT
 • Zero side effects — safe to combine with existing veterinary treatment
 • Research-backed: protocols grounded in published veterinary neuroscience
 • Affordable: £29.99/year vs £30-£100+ per vet consultation
+• AI-adaptive: the engine learns which protocols work for each individual animal over time — building a personalised response profile unique to that pet
 
 THE TECHNOLOGY
 PetSounds51 runs entirely in the browser using the Web Audio API. The frequency synthesis engine generates layered harmonic chords, species-tuned EQ filtering, isochronic tone modulation, and dense noise masking in real time. There is no streaming, no server dependency during sessions — it works offline once loaded. The architecture is lean, scalable, and built to evolve as neuroscience research advances.
@@ -45,6 +46,9 @@ PetSounds51 price point: £29.99/year — impulse-buy territory for a pet owner 
 
 THE VISION
 A subscription layer for every vet surgery, pet insurer, and animal shelter in the world. B2B licensing, white-label protocols for veterinary brands, and a research data layer built from millions of real-world therapy sessions. The infrastructure exists. The science exists. The market exists.
+
+FOR INVESTORS & PARTNERS
+Lean SaaS infrastructure. Recurring subscription revenue. A defensible niche with no dominant player. The B2C product is live and generating revenue. The B2B licensing pathway — vet surgeries, pet insurers, animal shelters — is clear and ready to execute with the right partner.
 
 Access: https://uf51.love/PetSounds51
 Research & Partnerships: family@uf51.love`;
