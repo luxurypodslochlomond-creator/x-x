@@ -64,16 +64,22 @@ Research & Partnerships: family@uf51.love`;
   const stats = [
     { stat: '$259B', label: 'Global pet care market (2025)', icon: TrendingUp },
     { stat: '70%+', label: 'Dogs show anxiety-related behaviours', icon: Heart },
-    { stat: '3', label: 'Species protocols: dogs, cats, horses', icon: Brain },
+    { stat: '14+', label: 'AI-matched therapeutic protocols', icon: Brain },
+    { stat: '3', label: 'Species: dogs, cats, horses', icon: Activity },
     { stat: '£29.99', label: 'Full annual access — no hardware needed', icon: Zap },
     { stat: '0', label: 'Side effects. Safe alongside vet treatment', icon: Shield },
     { stat: '100%', label: 'Browser-native — works offline once loaded', icon: Globe },
+    { stat: 'AI', label: 'Smart Finder matches pet to protocol in 3 questions', icon: Globe },
   ];
 
   const angles = [
     {
       headline: 'The Tech Story',
-      body: 'A real-time audio synthesis engine running entirely in the browser — no streaming, no server dependency during sessions — delivering species-tuned therapeutic frequencies. The Web Audio API doing something genuinely useful.',
+      body: 'A real-time psychoacoustic synthesis engine running entirely in the browser — no streaming, no server dependency during sessions. The Web Audio API generates layered isochronic tones, species-tuned EQ filtering, and bio-mimetic signals (heartbeat rhythms, white noise spectra) on the fly. Every session is generated, not played back. No pre-recorded files. Zero latency. Works offline. Built lean on purpose — this is not a feature of a bigger app, it is the product.',
+    },
+    {
+      headline: 'The AI Story',
+      body: 'The Smart Finder is an AI-guided recommendation engine that matches pets to the right protocol in 3 questions — cross-referencing species, trigger type, and life stage against the published research base. Over time, the engine builds an anonymous response profile for each animal, learning what actually works. The dataset growing from real sessions is the long-term moat — training data no competitor can replicate.',
     },
     {
       headline: 'The Market Story',
