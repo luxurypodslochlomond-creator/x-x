@@ -7,21 +7,21 @@ export default function PetSounds51MarketingAssets() {
       name: 'Instagram Post',
       size: '1080x1350px',
       description: 'Feed post with Bunny & caption',
-      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f0d6d1a2a_generated_image.png',
+      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/5a4cd6484_generated_image.png',
       format: 'JPG'
     },
     {
       name: 'Instagram Stories',
       size: '1080x1920px',
       description: 'Full vertical stories format',
-      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/8dee5d469_generated_image.png',
+      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/30e898463_generated_image.png',
       format: 'JPG'
     },
     {
       name: 'Mobile Web Hero',
       size: '600x400px',
       description: 'Landing page banner',
-      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/dca8f58f2_generated_image.png',
+      url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/a79e5b13d_generated_image.png',
       format: 'JPG'
     }
   ];
