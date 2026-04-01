@@ -1,0 +1,65 @@
+{
+  "name": "PS51SessionLog",
+  "type": "object",
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "description": "Which protocol was played"
+    },
+    "species": {
+      "type": "string",
+      "enum": [
+        "dog",
+        "cat",
+        "horse"
+      ],
+      "description": "Species selected"
+    },
+    "session_duration_seconds": {
+      "type": "number",
+      "description": "How long the session ran in seconds"
+    },
+    "is_subscribed": {
+      "type": "boolean",
+      "description": "Was this a paid subscriber session"
+    },
+    "is_smart_finder": {
+      "type": "boolean",
+      "description": "Was this session recommended by the Smart Finder AI"
+    },
+    "country_hint": {
+      "type": "string",
+      "description": "Browser language hint for geography (e.g. en-GB)"
+    },
+    "device_type": {
+      "type": "string",
+      "enum": [
+        "mobile",
+        "tablet",
+        "desktop"
+      ],
+      "description": "Device type"
+    },
+    "return_visit": {
+      "type": "boolean",
+      "description": "Has this device used PetSounds51 before"
+    },
+    "session_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of session (no time \u2014 privacy)"
+    }
+  },
+  "required": [
+    "protocol",
+    "species"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {}
+  }
+}

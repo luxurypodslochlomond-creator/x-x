@@ -9,6 +9,7 @@ import { verifyPS51Subscription } from '@/functions/verifyPS51Subscription';
 import { sendPS51ConfirmationEmail } from '@/functions/sendPS51ConfirmationEmail';
 import { getPS51Session } from '@/functions/getPS51Session';
 import PS51SmartFinder from '@/components/petsounds/PS51SmartFinder';
+import { logPS51SessionStart } from '@/components/petsounds/PS51SessionLogger';
 
 
 // Free tier: separation anxiety only
@@ -179,12 +180,21 @@ export default function PetSounds51() {
     setRestoreLoading(false);
   };
 
-  const handleSelect = (protocolKey) => {
+  const handleSelect = (protocolKey, fromSmartFinder = false) => {
     if (!FREE_PROTOCOLS.includes(protocolKey) && !isSubscribed) {
       setShowPaywall(true);
       return;
     }
     if (isSubscribed) localStorage.setItem('ps51_subscribed', '1');
+    // Log session start — returns a stop function
+    const stopLog = logPS51SessionStart({
+      protocol: protocolKey,
+      species: selectedSpecies,
+      isSubscribed,
+      isSmartFinder: fromSmartFinder,
+    });
+    // Store stop function to call on exit
+    window._ps51StopLog = stopLog;
     setSelectedProtocol(protocolKey);
     setActiveView('playing');
   };
@@ -195,7 +205,11 @@ export default function PetSounds51() {
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900 p-4">
         <div className="max-w-2xl mx-auto pt-4">
           <button
-            onClick={() => { setActiveView('home'); setSelectedProtocol(null); }}
+            onClick={() => {
+              if (window._ps51StopLog) { window._ps51StopLog(); window._ps51StopLog = null; }
+              setActiveView('home');
+              setSelectedProtocol(null);
+            }}
             className="mb-6 text-orange-700 hover:text-orange-600 text-sm font-bold flex items-center gap-1"
           >
             ← back
@@ -276,7 +290,7 @@ export default function PetSounds51() {
             onSelectProtocol={(protocol, species) => {
               if (species) setSelectedSpecies(species);
               setShowSmartFinder(false);
-              handleSelect(protocol);
+              handleSelect(protocol, true);
             }}
             onDismiss={() => setShowSmartFinder(false)}
           />

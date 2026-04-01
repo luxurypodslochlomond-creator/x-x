@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Copy, Mail, ArrowLeft, TrendingUp, Zap, Globe, Heart, Shield, Brain } from 'lucide-react';
+import { Copy, Mail, ArrowLeft, TrendingUp, Zap, Globe, Heart, Shield, Brain, Activity } from 'lucide-react';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
 export default function PetSounds51Press() {
@@ -251,9 +251,13 @@ Research & Partnerships: family@uf51.love`;
             <Mail className="w-5 h-5" />
             family@uf51.love
           </a>
-          <div className="mt-6 pt-6 border-t border-amber-600/20">
+          <div className="mt-6 pt-6 border-t border-amber-600/20 flex flex-wrap gap-4 justify-center">
             <Link to={createPageUrl('PetSounds51Whitepaper')} className="text-amber-400 hover:text-amber-300 text-sm font-bold transition-colors">
               Read the Science Whitepaper →
+            </Link>
+            <Link to={createPageUrl('PetSounds51Data')} className="flex items-center gap-1 text-amber-400 hover:text-amber-300 text-sm font-bold transition-colors">
+              <Activity className="w-4 h-4" />
+              View Live Dataset →
             </Link>
           </div>
         </section>
