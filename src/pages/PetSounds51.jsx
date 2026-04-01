@@ -268,13 +268,6 @@ export default function PetSounds51() {
         </div>
       </div>
 
-      {/* LIVE DATA LINK — trust signal for users + investors */}
-      <div className="max-w-4xl mx-auto mb-4 text-center">
-        <Link to={createPageUrl("PetSounds51Data")} className="inline-flex items-center gap-2 text-xs font-bold hover:opacity-80 transition-opacity px-3 py-1.5 rounded-full" style={{ background: 'rgba(138,171,58,0.1)', border: '1px solid rgba(138,171,58,0.3)', color: '#8aab3a' }}>
-          <span>🔬</span> Live session data — see how it's working across all users →
-        </Link>
-      </div>
-
       {/* AI SMART FINDER — hero position */}
       <div className="max-w-4xl mx-auto mb-8">
         {!showSmartFinder ? (

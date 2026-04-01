@@ -5,7 +5,19 @@
  */
 
 const PAGE_META = {
-  PetSounds51: {
+PetSounds51Landing: {
+  title: 'PetSounds51 — Sound Therapy for Animals',
+  description: 'Science-backed psychoacoustic therapy for dogs, cats & horses. Anxiety, pain, sleep & stress — free to try. Built on real research.',
+  image: '/api/functions/servePetSounds51OGImage',
+  color: '#d4a017',
+},
+PetSounds51Whitepaper: {
+  title: 'PetSounds51 — Science Whitepaper',
+  description: 'Peer-reviewed research behind PetSounds51. How psychoacoustic therapy works for dogs, cats and horses.',
+  image: '/api/functions/servePetSounds51OGImage',
+  color: '#d4a017',
+},
+PetSounds51: {
     title: 'PetSounds51 • Healing frequencies for anxious pets',
     description: 'Science-backed sound therapy for separation anxiety, stress, pain & healing. Try FREE for anxiety. £29.99/year. Research from MIT, Glasgow, Edinburgh.',
     image: '/api/functions/servePetSounds51OGImage',
