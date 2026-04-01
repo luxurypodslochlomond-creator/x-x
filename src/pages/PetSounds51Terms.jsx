@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Shield, AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Shield, AlertTriangle, ChevronDown, ChevronUp, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 
 const Section = ({ number, title, children }) => {
@@ -34,7 +36,7 @@ export default function PetSounds51Terms() {
             PetSounds51
           </h1>
           <p className="font-mono text-xs tracking-widest" style={{ color: '#8aab3a' }}>TERMS & CONDITIONS</p>
-          <p className="text-gray-400 text-xs mt-2">Last Updated: March 2026</p>
+          <p className="text-gray-400 text-xs mt-2">Last Updated: April 2026 · Scotland, UK · UK GDPR Compliant</p>
         </div>
 
         {/* THE ONE BIG DISCLAIMER — always visible */}
@@ -111,13 +113,15 @@ export default function PetSounds51Terms() {
             <p>We believe every pet owner who needs it should be able to access the most important protocol without paying first. Try it. See if it works. Then decide.</p>
           </Section>
 
-          <Section number={6} title="Data & Privacy">
-            <p className="mb-3">We collect the minimum we need to run the service: email, payment info, usage patterns. That's it.</p>
+          <Section number={6} title="Data, Privacy & GDPR">
+            <p className="mb-3">We are a UK-based operation subject to UK GDPR and the Data Protection Act 2018. The ICO is our supervisory authority.</p>
             <ul className="space-y-2">
+              <li>• We collect the minimum required to run the service</li>
+              <li>• Anonymous session analytics only — no PII in usage logs</li>
+              <li>• No US-based analytics, no tracking pixels, no ad networks</li>
               <li>• We never sell your data. Ever.</li>
-              <li>• Your sessions are private</li>
-              <li>• Your animal's data is yours</li>
-              <li>• Full privacy policy at <a href="/PrivacyPolicy" className="hover:underline font-bold" style={{ color: '#d4a017' }}>Privacy Policy</a></li>
+              <li>• You have full GDPR rights: access, erasure, portability</li>
+              <li>• Full details: <Link to={createPageUrl('PetSounds51Privacy')} className="hover:underline font-bold" style={{ color: '#d4a017' }}>Privacy Policy</Link></li>
             </ul>
           </Section>
 
@@ -141,8 +145,16 @@ export default function PetSounds51Terms() {
             <p>We may update these terms. If we make significant changes, active subscribers get an email. Continued use after changes = acceptance. If something changes you genuinely disagree with, email us before assuming the worst.</p>
           </Section>
 
-          <Section number={10} title="Governing Law">
-            <p>These terms are governed by the laws of Scotland, United Kingdom. Any disputes will be subject to the jurisdiction of Scottish courts. We are a small, ethical, UK-based operation.</p>
+          <Section number={10} title="Governing Law &amp; Jurisdiction">
+            <p className="mb-3">These terms are governed by the laws of <strong>Scotland, United Kingdom</strong>. Any disputes are subject to the jurisdiction of Scottish courts.</p>
+            <p className="mb-3">We operate exclusively under UK law. We are not subject to US jurisdiction, US data subpoenas, or CLOUD Act requests. This is a deliberate data sovereignty position that protects our users — particularly those in the EU and UK who require GDPR-safe service providers.</p>
+            <p>PetSounds51 is part of the Universal Frequency 51 family — a small, independent, Scottish-registered operation. Not a corporation. Not funded by advertising.</p>
+          </Section>
+
+          <Section number={11} title="Pricing Transparency">
+            <p className="mb-3">£29.99/year. That is the full price. No upsells, no tiers, no "enterprise pricing on request".</p>
+            <p className="mb-3">For context: professional veterinary behavioural consultation typically costs £80–£200 per session. A single CBT session for pet anxiety can cost more than a full year of PetSounds51.</p>
+            <p>Our pricing is designed to be accessible to every pet owner — not a premium service for wealthy clients. This is intentional and permanent.</p>
           </Section>
 
         </div>
