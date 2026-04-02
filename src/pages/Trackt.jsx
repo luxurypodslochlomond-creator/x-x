@@ -1,0 +1,481 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+
+// Animated scan line component
+const ScanLine = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <motion.div
+      className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent"
+      animate={{ top: ['0%', '100%'] }}
+      transition={{ duration: 3.5, repeat: Infinity, ease: 'linear' }}
+    />
+  </div>
+);
+
+// Terminal text animation
+const TerminalLine = ({ text, delay = 0, color = 'text-cyan-400' }) => {
+  const [displayed, setDisplayed] = useState('');
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const startTimer = setTimeout(() => {
+      setStarted(true);
+    }, delay);
+    return () => clearTimeout(startTimer);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, 28);
+    return () => clearInterval(interval);
+  }, [started, text]);
+
+  return (
+    <span className={`font-mono text-sm ${color} block`}>
+      <span className="text-gray-600 mr-2">$</span>{displayed}
+      {displayed.length < text.length && started && (
+        <span className="animate-pulse">_</span>
+      )}
+    </span>
+  );
+};
+
+// Live asset card
+const AssetCard = ({ tag, location, status, lastSeen, delay }) => {
+  const statusColors = {
+    active: 'text-green-400 border-green-400/30 bg-green-400/5',
+    warning: 'text-amber-400 border-amber-400/30 bg-amber-400/5',
+    missing: 'text-red-400 border-red-400/30 bg-red-400/5',
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay, duration: 0.4 }}
+      className="border border-white/10 bg-white/[0.02] p-4 rounded-sm hover:border-cyan-500/30 transition-colors"
+    >
+      <div className="flex items-start justify-between mb-2">
+        <div>
+          <p className="text-white font-mono font-bold text-sm">{tag}</p>
+          <p className="text-gray-500 text-xs font-mono mt-0.5">{location}</p>
+        </div>
+        <span className={`text-xs font-mono font-bold px-2 py-0.5 border rounded-sm ${statusColors[status]}`}>
+          {status.toUpperCase()}
+        </span>
+      </div>
+      <div className="flex items-center gap-2 mt-3">
+        <div className="h-1 flex-1 bg-white/5 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-cyan-500/60 rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: status === 'active' ? '92%' : status === 'warning' ? '45%' : '8%' }}
+            transition={{ delay: delay + 0.3, duration: 0.8 }}
+          />
+        </div>
+        <span className="text-gray-600 text-xs font-mono">{lastSeen}</span>
+      </div>
+    </motion.div>
+  );
+};
+
+// Stat block
+const StatBlock = ({ value, label, sub }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5 }}
+      className="border-l border-cyan-500/30 pl-6"
+    >
+      <p className="text-3xl font-black font-mono text-white tracking-tight">{value}</p>
+      <p className="text-cyan-400 text-sm font-mono mt-1">{label}</p>
+      {sub && <p className="text-gray-600 text-xs font-mono mt-0.5">{sub}</p>}
+    </motion.div>
+  );
+};
+
+// Section header
+const SectionHeader = ({ label, title, sub }) => (
+  <div className="mb-12">
+    <p className="text-cyan-400 font-mono text-xs tracking-[0.3em] uppercase mb-3">{label}</p>
+    <h2 className="text-3xl font-black text-white tracking-tight">{title}</h2>
+    {sub && <p className="text-gray-400 mt-3 max-w-xl leading-relaxed">{sub}</p>}
+  </div>
+);
+
+// Feature row
+const FeatureRow = ({ index, title, description, tag }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 15 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+      className="flex gap-6 py-6 border-b border-white/5 group"
+    >
+      <div className="flex-shrink-0 w-8 text-right">
+        <span className="text-gray-700 font-mono text-sm">{String(index + 1).padStart(2, '0')}</span>
+      </div>
+      <div className="flex-1">
+        <div className="flex items-center gap-3 mb-1.5">
+          <h3 className="text-white font-bold">{title}</h3>
+          {tag && (
+            <span className="text-xs font-mono px-2 py-0.5 border border-cyan-500/20 text-cyan-500 rounded-sm">
+              {tag}
+            </span>
+          )}
+        </div>
+        <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+      </div>
+    </motion.div>
+  );
+};
+
+// AI query demo
+const AIQueryDemo = () => {
+  const queries = [
+    { q: 'Where is infusion pump IP-2047?', a: 'Ward 4B, Bay 3. Last scanned 6 minutes ago. Next scheduled maintenance: 14 Apr.' },
+    { q: 'Which assets are overdue for compliance check?', a: '7 assets flagged. 3 critical — defibrillators DEF-01, DEF-02, DEF-07. Action required before 09:00.' },
+    { q: 'Show me the movement history for WC-112 today', a: 'Pharmacy 07:14 → Stores 08:55 → Ward 6A 11:30 → Current: Corridor B2 since 13:42.' },
+  ];
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => setActive(i => (i + 1) % queries.length), 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="border border-white/10 bg-black rounded-sm overflow-hidden">
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/5 bg-white/[0.02]">
+        <div className="w-2 h-2 rounded-full bg-red-500/60" />
+        <div className="w-2 h-2 rounded-full bg-amber-500/60" />
+        <div className="w-2 h-2 rounded-full bg-green-500/60" />
+        <span className="ml-2 text-gray-600 font-mono text-xs">trackt — ai query interface</span>
+      </div>
+      <div className="p-6 min-h-[180px]">
+        <motion.div key={active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+          <div className="flex items-start gap-3 mb-4">
+            <span className="text-cyan-400 font-mono text-xs mt-0.5 flex-shrink-0">USER</span>
+            <p className="text-white font-mono text-sm">{queries[active].q}</p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="text-green-400 font-mono text-xs mt-0.5 flex-shrink-0">TRACKT</span>
+            <p className="text-gray-300 font-mono text-sm leading-relaxed">{queries[active].a}</p>
+          </div>
+        </motion.div>
+      </div>
+      <div className="flex gap-1.5 px-6 pb-4">
+        {queries.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`h-0.5 flex-1 rounded-full transition-colors ${i === active ? 'bg-cyan-400' : 'bg-white/10'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default function TracktPage() {
+  const heroRef = useRef(null);
+
+  const features = [
+    { title: 'Natural Language Asset Queries', description: 'Ask any question about your assets in plain English. TRACKT queries live RFID data and returns structured, actionable answers in under 200ms.', tag: 'AI LAYER' },
+    { title: 'Anomaly Detection Engine', description: 'Continuously monitors movement patterns, dwell times and compliance windows. Flags exceptions before they become incidents.', tag: 'REAL-TIME' },
+    { title: 'Cross-System Correlation', description: 'Connects RFID data with access control, maintenance schedules, ERP and compliance records. Eliminates the silo problem permanently.', tag: 'INTEGRATION' },
+    { title: 'NFC Tap-to-Insight', description: 'Workers tap any asset tag with their phone. TRACKT returns full context instantly — location history, maintenance status, compliance, ownership.', tag: 'MOBILE' },
+    { title: 'Works on Existing Hardware', description: 'No forklift upgrade required. TRACKT connects to your existing Urovo, Zebra or Honeywell RFID infrastructure via standard APIs.', tag: 'ZERO REWORK' },
+    { title: 'Edge AI Processing', description: 'Critical inference runs on-device. No cloud dependency for core operations. Works in air-gapped environments and low-connectivity warehouses.', tag: 'EDGE' },
+  ];
+
+  const sectors = [
+    { name: 'NHS / Healthcare', desc: 'Medical equipment compliance, bed tracking, theatre asset management. Regulatory audit trails generated automatically.' },
+    { name: 'Logistics / 3PL', desc: 'Warehouse asset intelligence, trailer tracking, cross-dock visibility. Anomaly alerts before SLAs are breached.' },
+    { name: 'Manufacturing', desc: 'Tool tracking, WIP visibility, maintenance compliance. Connects to existing MES and ERP systems.' },
+    { name: 'Facilities Management', desc: 'Equipment audits, preventive maintenance scheduling, contractor compliance. One interface across every site.' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#050810] text-white">
+
+      {/* HERO */}
+      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden border-b border-white/5">
+
+        {/* Grid background */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(6,182,212,1) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        <ScanLine />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 lg:py-0">
+          <div className="grid lg:grid-cols-2 gap-16 items-center min-h-screen">
+
+            {/* Left */}
+            <div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                className="mb-6"
+              >
+                <div className="inline-flex items-center gap-2 border border-cyan-500/20 bg-cyan-500/5 px-3 py-1.5 rounded-sm mb-8">
+                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="text-cyan-400 font-mono text-xs tracking-widest">SYSTEM ONLINE</span>
+                </div>
+
+                <h1 className="text-5xl lg:text-7xl font-black tracking-tight leading-none mb-4">
+                  TRACKT
+                </h1>
+                <div className="h-px w-24 bg-cyan-500/60 mb-8" />
+                <p className="text-xl text-gray-300 leading-relaxed mb-3">
+                  AI intelligence layer for existing RFID infrastructure.
+                </p>
+                <p className="text-gray-500 leading-relaxed max-w-md">
+                  Stop reading raw scan logs. Start getting answers. TRACKT sits on top of your Urovo, Zebra or Honeywell hardware and turns asset data into operational intelligence.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="flex flex-col sm:flex-row gap-3 mt-10"
+              >
+                <a
+                  href="mailto:hello@trackt.io"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-cyan-500 text-black font-bold font-mono text-sm hover:bg-cyan-400 transition-colors"
+                >
+                  REQUEST DEMO
+                </a>
+                <a
+                  href="#how-it-works"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-mono text-sm hover:border-white/40 transition-colors"
+                >
+                  SEE HOW IT WORKS
+                </a>
+              </motion.div>
+
+              {/* Terminal */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="mt-10 border border-white/10 bg-black/60 p-4 rounded-sm"
+              >
+                <TerminalLine text="connecting to rfid_gateway_01..." delay={800} />
+                <TerminalLine text="ingesting asset_stream — 847 tags active" delay={1800} color="text-gray-400" />
+                <TerminalLine text="anomaly_engine initialised — 0 flags" delay={2800} color="text-green-400" />
+                <TerminalLine text="ai_layer ready — awaiting query" delay={3800} color="text-white" />
+              </motion.div>
+            </div>
+
+            {/* Right — live asset feed */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="space-y-3"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-gray-600 font-mono text-xs tracking-widest uppercase">Live Asset Feed</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  <span className="text-green-400 font-mono text-xs">847 active</span>
+                </div>
+              </div>
+              <AssetCard tag="IP-2047" location="Ward 4B, Bay 3" status="active" lastSeen="6m ago" delay={0.6} />
+              <AssetCard tag="DEF-07" location="Unknown — last: Corridor B" status="warning" lastSeen="2h ago" delay={0.75} />
+              <AssetCard tag="WC-112" location="Pharmacy → Ward 6A" status="active" lastSeen="1m ago" delay={0.9} />
+              <AssetCard tag="BED-394" location="Not scanned today" status="missing" lastSeen="18h ago" delay={1.05} />
+              <AssetCard tag="IV-PUMP-088" location="Theatre 3" status="active" lastSeen="just now" delay={1.2} />
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="border-b border-white/5 bg-black/40">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <StatBlock value="< 200ms" label="Query response" sub="On live RFID data" />
+            <StatBlock value="Zero" label="Hardware changes" sub="Works on existing kit" />
+            <StatBlock value="99.2%" label="Asset visibility" sub="NHS pilot target" />
+            <StatBlock value="Day 1" label="Value delivery" sub="No custom dev required" />
+          </div>
+        </div>
+      </section>
+
+      {/* AI DEMO */}
+      <section className="border-b border-white/5">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <SectionHeader
+                label="Intelligence Layer"
+                title="Ask anything. Get answers."
+                sub="TRACKT connects to your RFID data and answers natural language questions in real time. No dashboards to navigate. No reports to run. Just ask."
+              />
+              <div className="space-y-4">
+                {[
+                  'Where is every defibrillator right now?',
+                  'Which assets missed their compliance window today?',
+                  'Show movement history for any asset, any time range.',
+                  'Alert me when high-value equipment leaves a zone.',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                    <p className="text-gray-400 text-sm font-mono">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <AIQueryDemo />
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section id="how-it-works" className="border-b border-white/5">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <SectionHeader
+            label="Capabilities"
+            title="What TRACKT does."
+            sub="Six core capabilities, deployed in days, not months."
+          />
+          <div>
+            {features.map((f, i) => (
+              <FeatureRow key={i} index={i} title={f.title} description={f.description} tag={f.tag} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTORS */}
+      <section className="border-b border-white/5 bg-black/40">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <SectionHeader
+            label="Markets"
+            title="Built for regulated, asset-heavy operations."
+          />
+          <div className="grid sm:grid-cols-2 gap-px bg-white/5">
+            {sectors.map((s, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-[#050810] p-8 hover:bg-white/[0.02] transition-colors"
+              >
+                <h3 className="text-white font-bold mb-2">{s.name}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TECH STACK */}
+      <section className="border-b border-white/5">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <SectionHeader
+            label="Architecture"
+            title="How it connects."
+          />
+          <div className="grid lg:grid-cols-3 gap-px bg-white/5">
+            {[
+              {
+                layer: '01 — Hardware',
+                title: 'Your existing RFID infrastructure',
+                items: ['Urovo DT50P / DT610', 'Zebra FX series', 'Honeywell Xenon', 'Impinj Speedway', 'Any LLRP-compliant reader'],
+                color: 'text-gray-400',
+              },
+              {
+                layer: '02 — Intelligence',
+                title: 'TRACKT AI layer',
+                items: ['Real-time event ingestion', 'Anomaly detection engine', 'Natural language query processor', 'Cross-system correlation', 'Edge inference runtime'],
+                color: 'text-cyan-400',
+              },
+              {
+                layer: '03 — Interface',
+                title: 'Worker and management surfaces',
+                items: ['PWA — any device, no app install', 'NFC tap-to-insight', 'Dashboard and alerts', 'API for existing systems', 'Offline-first architecture'],
+                color: 'text-white',
+              },
+            ].map((col, i) => (
+              <div key={i} className="bg-[#050810] p-8">
+                <p className="text-gray-700 font-mono text-xs mb-2">{col.layer}</p>
+                <h3 className={`font-bold mb-6 ${col.color}`}>{col.title}</h3>
+                <ul className="space-y-2">
+                  {col.items.map((item, j) => (
+                    <li key={j} className="flex items-start gap-2">
+                      <span className="text-cyan-500/40 font-mono text-xs mt-0.5">—</span>
+                      <span className="text-gray-500 text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(6,182,212,1) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+        <div className="relative z-10 max-w-3xl mx-auto px-6 py-32 text-center">
+          <p className="text-cyan-400 font-mono text-xs tracking-[0.3em] uppercase mb-6">Pilot Programme</p>
+          <h2 className="text-4xl lg:text-5xl font-black tracking-tight mb-6">
+            Ready to see your assets.
+          </h2>
+          <p className="text-gray-400 leading-relaxed mb-10 max-w-lg mx-auto">
+            We are running a limited NHS and logistics pilot programme. No hardware changes. No long procurement cycle. Operational in 30 days.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="mailto:hello@trackt.io"
+              className="inline-flex items-center justify-center px-8 py-4 bg-cyan-500 text-black font-bold font-mono text-sm hover:bg-cyan-400 transition-colors"
+            >
+              REQUEST A PILOT
+            </a>
+            <a
+              href="mailto:partners@trackt.io"
+              className="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-white font-mono text-sm hover:border-white/40 transition-colors"
+            >
+              HARDWARE PARTNERSHIPS
+            </a>
+          </div>
+          <p className="text-gray-700 font-mono text-xs mt-8">
+            ISV partner — Urovo RFID platform
+          </p>
+        </div>
+      </section>
+
+    </div>
+  );
+}
