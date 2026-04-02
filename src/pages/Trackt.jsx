@@ -142,7 +142,7 @@ export default function TracktPage() {
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-black tracking-tight leading-none mb-4">
-                    AI RFID Inventory Manager.
+                    AI RFID Asset Management.
                  </h1>
                 <div className="h-px w-24 bg-cyan-500/60 mb-8" />
                 <p className="text-xl text-gray-300 leading-relaxed mb-3">
