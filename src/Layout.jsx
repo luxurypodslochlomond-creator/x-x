@@ -648,6 +648,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                             <>
                               <NavSection title="PETSOUNDS51" color="amber" activeColor="amber" items={ps51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                             </>
+                          ) : isTracktPage ? (
+                            <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : (
                             <>
                               <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
@@ -747,6 +749,8 @@ const LayoutInner = ({ children, currentPageName }) => {
               <>
                 <NavSection title="PETSOUNDS51" color="amber" activeColor="amber" items={ps51Nav} isActivePage={isActivePage} defaultOpen={true} />
               </>
+            ) : isTracktPage ? (
+              <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} defaultOpen={true} />
             ) : (
               <>
                 <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
