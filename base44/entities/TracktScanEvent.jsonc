@@ -1,0 +1,47 @@
+{
+  "name": "TracktScanEvent",
+  "type": "object",
+  "properties": {
+    "tag_id": {
+      "type": "string",
+      "description": "RFID/EPC tag that was scanned"
+    },
+    "reader_id": {
+      "type": "string",
+      "description": "Reader/antenna that detected the tag"
+    },
+    "location": {
+      "type": "string",
+      "description": "Physical location of the reader"
+    },
+    "site": {
+      "type": "string",
+      "description": "Site identifier"
+    },
+    "rssi": {
+      "type": "number",
+      "description": "Signal strength (dBm) \u2014 used for proximity estimation"
+    },
+    "scan_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Exact time of scan"
+    },
+    "asset_name": {
+      "type": "string",
+      "description": "Resolved asset name at time of scan"
+    },
+    "raw_payload": {
+      "type": "object",
+      "description": "Raw JSON from the RFID reader for audit purposes"
+    }
+  },
+  "required": [
+    "tag_id",
+    "scan_timestamp"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

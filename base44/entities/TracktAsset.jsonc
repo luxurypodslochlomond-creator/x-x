@@ -1,0 +1,62 @@
+{
+  "name": "TracktAsset",
+  "type": "object",
+  "properties": {
+    "tag_id": {
+      "type": "string",
+      "description": "RFID/EPC tag identifier"
+    },
+    "asset_name": {
+      "type": "string",
+      "description": "Human-readable asset name (e.g. Wheelchair-07, Infusion Pump 3B)"
+    },
+    "asset_type": {
+      "type": "string",
+      "description": "Category of asset (e.g. medical_equipment, pallet, tool, vehicle)"
+    },
+    "location": {
+      "type": "string",
+      "description": "Last known location (reader name or zone)"
+    },
+    "reader_id": {
+      "type": "string",
+      "description": "ID of the RFID reader that last scanned this tag"
+    },
+    "last_seen": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of most recent scan"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "missing",
+        "overdue",
+        "flagged"
+      ],
+      "default": "active",
+      "description": "Current asset status"
+    },
+    "site": {
+      "type": "string",
+      "description": "Site name (e.g. Ward 4, Warehouse A, Zone 3)"
+    },
+    "scan_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Total number of scans recorded"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional asset metadata (serial number, manufacturer, etc.)"
+    }
+  },
+  "required": [
+    "tag_id"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}
