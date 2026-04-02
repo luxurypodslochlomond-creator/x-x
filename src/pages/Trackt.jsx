@@ -92,12 +92,12 @@ export default function TracktPage() {
   const heroRef = useRef(null); // kept for section ref
 
   const features = [
+    { title: 'Automatic Maintenance Scheduling', description: 'TRACKT learns maintenance patterns and schedules preventive care automatically. Hospitals save 12-16% annually on maintenance costs just by fixing equipment before it breaks.', tag: 'COST SAVINGS' },
     { title: 'Natural Language Asset Queries', description: 'Ask any question about your assets in plain English. TRACKT queries live RFID data and returns structured, actionable answers in under 200ms.', tag: 'AI LAYER' },
     { title: 'Anomaly Detection Engine', description: 'Continuously monitors movement patterns, dwell times and compliance windows. Flags exceptions before they become incidents.', tag: 'REAL-TIME' },
     { title: 'Cross-System Correlation', description: 'Connects RFID data with access control, maintenance schedules, ERP and compliance records. Eliminates the silo problem permanently.', tag: 'INTEGRATION' },
     { title: 'NFC Tap-to-Insight', description: 'Workers tap any asset tag with their phone. TRACKT returns full context instantly — location history, maintenance status, compliance, ownership.', tag: 'MOBILE' },
     { title: 'Works on Existing Hardware', description: 'No forklift upgrade required. TRACKT connects to your existing Urovo, Zebra or Honeywell RFID infrastructure via standard APIs.', tag: 'ZERO REWORK' },
-    { title: 'Edge AI Processing', description: 'Critical inference runs on-device. No cloud dependency for core operations. Works in air-gapped environments and low-connectivity warehouses.', tag: 'EDGE' },
   ];
 
   const sectors = [
@@ -213,9 +213,9 @@ export default function TracktPage() {
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <StatBlock value="£180k+" label="Lost annually per hospital" sub="Equipment nobody can find" />
-            <StatBlock value="30 days" label="To operational" sub="No forklift upgrade required" />
-            <StatBlock value="< 2sec" label="Find any asset" sub="Ask in natural language" />
-            <StatBlock value="$0" label="New hardware cost" sub="Works with what you own" />
+            <StatBlock value="12-16%" label="Maintenance cost reduction" sub="Preventive scheduling works" />
+            <StatBlock value="30 days" label="To operational" sub="No infrastructure change" />
+            <StatBlock value="$0/mo" label="AI layer cost" sub="Included. Forever." />
           </div>
         </div>
       </section>
