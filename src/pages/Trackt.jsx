@@ -1,49 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-// Animated scan line component
+// Static scan line — no continuous animation loop
 const ScanLine = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <motion.div
-      className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent"
-      animate={{ top: ['0%', '100%'] }}
-      transition={{ duration: 3.5, repeat: Infinity, ease: 'linear' }}
-    />
-  </div>
+  <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent pointer-events-none" />
 );
 
-// Terminal text animation
-const TerminalLine = ({ text, delay = 0, color = 'text-cyan-400' }) => {
-  const [displayed, setDisplayed] = useState('');
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const startTimer = setTimeout(() => {
-      setStarted(true);
-    }, delay);
-    return () => clearTimeout(startTimer);
-  }, [delay]);
-
-  useEffect(() => {
-    if (!started) return;
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed(text.slice(0, i + 1));
-      i++;
-      if (i >= text.length) clearInterval(interval);
-    }, 28);
-    return () => clearInterval(interval);
-  }, [started, text]);
-
-  return (
-    <span className={`font-mono text-sm ${color} block`}>
-      <span className="text-gray-600 mr-2">$</span>{displayed}
-      {displayed.length < text.length && started && (
-        <span className="animate-pulse">_</span>
-      )}
-    </span>
-  );
-};
+// Terminal text — static, no interval overhead
+const TerminalLine = ({ text, color = 'text-cyan-400' }) => (
+  <span className={`font-mono text-sm ${color} block`}>
+    <span className="text-gray-600 mr-2">$</span>{text}
+  </span>
+);
 
 // Live asset card
 const AssetCard = ({ tag, location, status, lastSeen, delay }) => {
@@ -53,13 +21,9 @@ const AssetCard = ({ tag, location, status, lastSeen, delay }) => {
     missing: 'text-red-400 border-red-400/30 bg-red-400/5',
   };
 
+  const barWidth = status === 'active' ? '92%' : status === 'warning' ? '45%' : '8%';
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay, duration: 0.4 }}
-      className="border border-white/10 bg-white/[0.02] p-4 rounded-sm hover:border-cyan-500/30 transition-colors"
-    >
+    <div className="border border-white/10 bg-white/[0.02] p-4 rounded-sm hover:border-cyan-500/30 transition-colors">
       <div className="flex items-start justify-between mb-2">
         <div>
           <p className="text-white font-mono font-bold text-sm">{tag}</p>
@@ -71,37 +35,22 @@ const AssetCard = ({ tag, location, status, lastSeen, delay }) => {
       </div>
       <div className="flex items-center gap-2 mt-3">
         <div className="h-1 flex-1 bg-white/5 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-cyan-500/60 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: status === 'active' ? '92%' : status === 'warning' ? '45%' : '8%' }}
-            transition={{ delay: delay + 0.3, duration: 0.8 }}
-          />
+          <div className="h-full bg-cyan-500/60 rounded-full" style={{ width: barWidth }} />
         </div>
         <span className="text-gray-600 text-xs font-mono">{lastSeen}</span>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
-// Stat block
-const StatBlock = ({ value, label, sub }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
-      className="border-l border-cyan-500/30 pl-6"
-    >
-      <p className="text-3xl font-black font-mono text-white tracking-tight">{value}</p>
-      <p className="text-cyan-400 text-sm font-mono mt-1">{label}</p>
-      {sub && <p className="text-gray-600 text-xs font-mono mt-0.5">{sub}</p>}
-    </motion.div>
-  );
-};
+// Stat block — no animation overhead
+const StatBlock = ({ value, label, sub }) => (
+  <div className="border-l border-cyan-500/30 pl-6">
+    <p className="text-3xl font-black font-mono text-white tracking-tight">{value}</p>
+    <p className="text-cyan-400 text-sm font-mono mt-1">{label}</p>
+    {sub && <p className="text-gray-600 text-xs font-mono mt-0.5">{sub}</p>}
+  </div>
+);
 
 // Section header
 const SectionHeader = ({ label, title, sub }) => (
@@ -112,18 +61,10 @@ const SectionHeader = ({ label, title, sub }) => (
   </div>
 );
 
-// Feature row
+// Feature row — static
 const FeatureRow = ({ index, title, description, tag }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 15 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="flex gap-6 py-6 border-b border-white/5 group"
-    >
+    <div className="flex gap-6 py-6 border-b border-white/5 group">
       <div className="flex-shrink-0 w-8 text-right">
         <span className="text-gray-700 font-mono text-sm">{String(index + 1).padStart(2, '0')}</span>
       </div>
@@ -138,7 +79,7 @@ const FeatureRow = ({ index, title, description, tag }) => {
         </div>
         <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -190,7 +131,7 @@ const AIQueryDemo = () => {
 };
 
 export default function TracktPage() {
-  const heroRef = useRef(null);
+  const heroRef = useRef(null); // kept for section ref
 
   const features = [
     { title: 'Natural Language Asset Queries', description: 'Ask any question about your assets in plain English. TRACKT queries live RFID data and returns structured, actionable answers in under 200ms.', tag: 'AI LAYER' },
@@ -378,17 +319,10 @@ export default function TracktPage() {
           />
           <div className="grid sm:grid-cols-2 gap-px bg-white/5">
             {sectors.map((s, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-[#050810] p-8 hover:bg-white/[0.02] transition-colors"
-              >
+              <div key={i} className="bg-[#050810] p-8 hover:bg-white/[0.02] transition-colors">
                 <h3 className="text-white font-bold mb-2">{s.name}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
