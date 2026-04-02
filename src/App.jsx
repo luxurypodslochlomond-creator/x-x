@@ -34,6 +34,8 @@ const PetSounds51MarketingAssets = React.lazy(() => import('./pages/PetSounds51M
 const TracktPage = React.lazy(() => import('./pages/Trackt'));
 const TracktAboutPage = React.lazy(() => import('./pages/TracktAbout'));
 const TracktRoadmapPage = React.lazy(() => import('./pages/TracktRoadmap'));
+const TracktHowItWorksPage = React.lazy(() => import('./pages/TracktHowItWorks'));
+const TracktWhyBuyPage = React.lazy(() => import('./pages/TracktWhyBuy'));
 const TracktPricingPage = React.lazy(() => import('./pages/TracktPricing'));
 const TracktTermsPage = React.lazy(() => import('./pages/TracktTerms'));
 const TracktPrivacyPage = React.lazy(() => import('./pages/TracktPrivacy'));
@@ -98,6 +100,8 @@ const AuthenticatedApp = () => {
       <Route path="/Trackt" element={<LayoutWrapper currentPageName="Trackt"><TracktPage /></LayoutWrapper>} />
       <Route path="/TracktAbout" element={<LayoutWrapper currentPageName="TracktAbout"><TracktAboutPage /></LayoutWrapper>} />
       <Route path="/TracktRoadmap" element={<LayoutWrapper currentPageName="TracktRoadmap"><TracktRoadmapPage /></LayoutWrapper>} />
+      <Route path="/TracktHowItWorks" element={<LayoutWrapper currentPageName="TracktHowItWorks"><TracktHowItWorksPage /></LayoutWrapper>} />
+      <Route path="/TracktWhyBuy" element={<LayoutWrapper currentPageName="TracktWhyBuy"><TracktWhyBuyPage /></LayoutWrapper>} />
       <Route path="/TracktPricing" element={<LayoutWrapper currentPageName="TracktPricing"><TracktPricingPage /></LayoutWrapper>} />
       <Route path="/TracktTerms" element={<LayoutWrapper currentPageName="TracktTerms"><TracktTermsPage /></LayoutWrapper>} />
       <Route path="/TracktPrivacy" element={<LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper>} />
