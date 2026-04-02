@@ -440,6 +440,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const scottNav = [
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Your AI co-manager" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
+      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "RFID AI intelligence layer" },
   ];
 
   // PS51 PET SOUNDS MENU
