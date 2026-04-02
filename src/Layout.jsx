@@ -176,8 +176,9 @@ const LayoutInner = ({ children, currentPageName }) => {
   const isCB51Subdomain = window.location.hostname.startsWith('cb51.') || window.location.hostname === 'cb51.io';
   const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain;
   const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments';
+  const isTracktPage = currentPageName.startsWith('Trackt');
 
-  const isPublicPage = PUBLIC_PAGES.includes(currentPageName);
+  const isPublicPage = PUBLIC_PAGES.includes(currentPageName) || isTracktPage;
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
 
   useEffect(() => {
@@ -224,12 +225,18 @@ const LayoutInner = ({ children, currentPageName }) => {
       window.scrollTo({ top: 0, behavior: 'instant' });
       setCanGoBack(window.history.length > 1);
 
-      const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
+      const isCB51 = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
+      const isTRACKT = currentPageName.startsWith('Trackt');
       const rootEl = document.getElementById('root');
-      if (isCB51Page && rootEl) {
+      if (isCB51 && rootEl) {
         rootEl.setAttribute('data-cb51', 'true');
+        rootEl.removeAttribute('data-trackt');
+      } else if (isTRACKT && rootEl) {
+        rootEl.setAttribute('data-trackt', 'true');
+        rootEl.removeAttribute('data-cb51');
       } else if (rootEl) {
         rootEl.removeAttribute('data-cb51');
+        rootEl.removeAttribute('data-trackt');
       }
 
       const timer = setTimeout(() => setPageTransitioning(false), 100);
@@ -442,13 +449,18 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
   ];
 
-  // TRACKT - AI RFID ASSET MANAGEMENT
-  const tracktNav = [
-      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID Asset Management" },
-      { title: "Roadmap 🚀", url: createPageUrl("TracktRoadmap"), icon: Target, highlight: true, description: "CCTV + Access Control coming" },
+  // TRACKT - AI RFID ASSET MANAGEMENT (main nav section for TRACKT pages)
+  const tracktMainNav = [
+      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "Product" },
+      { title: "Roadmap 🚀", url: createPageUrl("TracktRoadmap"), icon: Target, highlight: true, description: "CCTV + Access Control" },
       { title: "How It Works", url: createPageUrl("TracktAbout"), icon: Brain, description: "Technical overview" },
       { title: "Pricing", url: createPageUrl("TracktPricing"), icon: DollarSign, description: "Plans & licensing" },
+      { title: "Terms", url: createPageUrl("TracktTerms"), icon: Scale, description: "Service terms" },
+      { title: "Privacy", url: createPageUrl("TracktPrivacy"), icon: Eye, description: "Data protection" },
   ];
+
+  // TRACKT - AI RFID ASSET MANAGEMENT (for main menu reference)
+  const tracktNav = tracktMainNav;
 
   // PS51 PET SOUNDS MENU
   const ps51Nav = [
@@ -549,7 +561,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         )}
 
         {/* MOBILE HEADER */}
-        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && !isTracktPage && (
         <header className={`lg:hidden fixed ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b ${isPS51Page ? 'border-amber-700/40' : 'border-cyan-500/30'}`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
@@ -691,7 +703,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   )}
 
         {/* DESKTOP SIDEBAR */}
-        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && !isTracktPage && (
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
             <Link to={createPageUrl(isCB51Page ? "CB51" : isPS51Page ? "PetSounds51" : "Welcome")} className="flex items-center gap-3 mb-4">
@@ -789,7 +801,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
                             )}
 
-        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-0') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && !isTracktPage ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && !isTracktPage ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-0') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -800,7 +812,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               {children}
               </motion.div>
               </AnimatePresence>
-              {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && (
+              {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && !isTracktPage && (
               <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
               <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
