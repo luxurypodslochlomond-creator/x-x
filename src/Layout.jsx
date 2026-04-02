@@ -449,18 +449,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
   ];
 
-  // TRACKT - AI RFID ASSET MANAGEMENT (main nav section for TRACKT pages)
-  const tracktMainNav = [
-      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "Product" },
-      { title: "Roadmap 🚀", url: createPageUrl("TracktRoadmap"), icon: Target, highlight: true, description: "CCTV + Access Control" },
-      { title: "How It Works", url: createPageUrl("TracktAbout"), icon: Brain, description: "Technical overview" },
-      { title: "Pricing", url: createPageUrl("TracktPricing"), icon: DollarSign, description: "Plans & licensing" },
-      { title: "Terms", url: createPageUrl("TracktTerms"), icon: Scale, description: "Service terms" },
-      { title: "Privacy", url: createPageUrl("TracktPrivacy"), icon: Eye, description: "Data protection" },
-  ];
 
-  // TRACKT - AI RFID ASSET MANAGEMENT (for main menu reference)
-  const tracktNav = tracktMainNav;
 
   // PS51 PET SOUNDS MENU
   const ps51Nav = [
@@ -670,11 +659,10 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </>
                           )}
 
-                        {!isCB51Page && !isPS51Page && !isTracktPage && (scottNav.length > 0 || tracktNav.length > 0) && (
+                        {!isCB51Page && !isPS51Page && !isTracktPage && scottNav.length > 0 && (
                                     <>
                                         <div className="h-px bg-cyan-500/30 my-3" />
-                                        {scottNav.length > 0 && <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} isMobile />}
-                                        {tracktNav.length > 0 && <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} isMobile />}
+                                        <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} isMobile />
                                     </>
                                 )}
 
@@ -771,11 +759,10 @@ const LayoutInner = ({ children, currentPageName }) => {
               </>
             )}
 
-            {!isCB51Page && !isPS51Page && !isTracktPage && (scottNav.length > 0 || tracktNav.length > 0) && (
+            {!isCB51Page && !isPS51Page && !isTracktPage && scottNav.length > 0 && (
               <>
                 <div className="h-px bg-cyan-500/30 my-4" />
-                {scottNav.length > 0 && <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} />}
-                {tracktNav.length > 0 && <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} />}
+                <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} />
               </>
             )}
 
