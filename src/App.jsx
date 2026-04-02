@@ -95,12 +95,12 @@ const AuthenticatedApp = () => {
       <Route path="/PetSounds51Press" element={<LayoutWrapper currentPageName="PetSounds51Press"><PetSounds51Press /></LayoutWrapper>} />
       <Route path="/PetSounds51Data" element={<LayoutWrapper currentPageName="PetSounds51Data"><PetSounds51Data /></LayoutWrapper>} />
       <Route path="/PetSounds51MarketingAssets" element={<LayoutWrapper currentPageName="PetSounds51MarketingAssets"><PetSounds51MarketingAssets /></LayoutWrapper>} />
-      <Route path="/Trackt" element={<TracktPage />} />
-      <Route path="/TracktAbout" element={<TracktAboutPage />} />
-      <Route path="/TracktRoadmap" element={<TracktRoadmapPage />} />
-      <Route path="/TracktPricing" element={<TracktPricingPage />} />
-      <Route path="/TracktTerms" element={<TracktTermsPage />} />
-      <Route path="/TracktPrivacy" element={<TracktPrivacyPage />} />
+      <Route path="/Trackt" element={<LayoutWrapper currentPageName="Trackt"><TracktPage /></LayoutWrapper>} />
+      <Route path="/TracktAbout" element={<LayoutWrapper currentPageName="TracktAbout"><TracktAboutPage /></LayoutWrapper>} />
+      <Route path="/TracktRoadmap" element={<LayoutWrapper currentPageName="TracktRoadmap"><TracktRoadmapPage /></LayoutWrapper>} />
+      <Route path="/TracktPricing" element={<LayoutWrapper currentPageName="TracktPricing"><TracktPricingPage /></LayoutWrapper>} />
+      <Route path="/TracktTerms" element={<LayoutWrapper currentPageName="TracktTerms"><TracktTermsPage /></LayoutWrapper>} />
+      <Route path="/TracktPrivacy" element={<LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
