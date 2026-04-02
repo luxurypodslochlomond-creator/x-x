@@ -142,14 +142,14 @@ export default function TracktPage() {
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-black tracking-tight leading-none mb-4">
-                   Live Asset Intelligence. Your RFID Data.
+                   AI Asset Manager.
                 </h1>
                 <div className="h-px w-24 bg-cyan-500/60 mb-8" />
                 <p className="text-xl text-gray-300 leading-relaxed mb-3">
-                  Hospitals waste £180k/year on missing equipment. Warehouses lose pallets. Fleets can't account for tools.
+                   Hospitals waste £180k/year on missing equipment. Warehouses lose pallets. Fleets can't account for tools.
                 </p>
                 <p className="text-gray-500 leading-relaxed max-w-md">
-                  TRACKT finds it in seconds. Works on your existing Urovo, Zebra or Honeywell readers. Operational in 30 days. No software licenses. No consultant timelines.
+                   TRACKT manages it. Works on your existing Urovo, Zebra or Honeywell readers. Operational in 30 days. No software licenses. No consultant timelines.
                 </p>
               </motion.div>
 
