@@ -6,6 +6,8 @@ const NAV_LINKS = [
   { label: 'Product', path: '/Trackt' },
   { label: 'Pricing', path: '/TracktPricing' },
   { label: 'About', path: '/TracktAbout' },
+  { label: 'Terms', path: '/TracktTerms', secondary: true },
+  { label: 'Privacy', path: '/TracktPrivacy', secondary: true },
 ];
 
 const FOOTER_LINKS = [
@@ -42,7 +44,11 @@ export default function TracktLayout({ children }) {
                 key={link.path}
                 to={link.path}
                 className={`px-4 py-1.5 font-mono text-xs tracking-wider transition-colors rounded-sm ${
-                  isActive(link.path)
+                  link.secondary
+                    ? isActive(link.path)
+                      ? 'text-sage-400 bg-sage-500/10 border border-sage-500/20'
+                      : 'text-sage-600 hover:text-sage-400'
+                    : isActive(link.path)
                     ? 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/20'
                     : 'text-gray-500 hover:text-white'
                 }`}
@@ -78,7 +84,9 @@ export default function TracktLayout({ children }) {
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
                 className={`block py-2 font-mono text-sm tracking-wider transition-colors ${
-                  isActive(link.path) ? 'text-cyan-400' : 'text-gray-400 hover:text-white'
+                  link.secondary
+                    ? isActive(link.path) ? 'text-sage-400' : 'text-sage-600 hover:text-sage-400'
+                    : isActive(link.path) ? 'text-cyan-400' : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {link.label.toUpperCase()}
