@@ -142,14 +142,14 @@ export default function TracktPage() {
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-black tracking-tight leading-none mb-4">
-                  TRACKT
+                  Your Equipment is Lost Right Now
                 </h1>
                 <div className="h-px w-24 bg-cyan-500/60 mb-8" />
                 <p className="text-xl text-gray-300 leading-relaxed mb-3">
-                  AI intelligence layer for existing RFID infrastructure.
+                  Hospitals waste £180k/year on missing equipment. Warehouses lose pallets. Fleets can't account for tools.
                 </p>
                 <p className="text-gray-500 leading-relaxed max-w-md">
-                  Stop reading raw scan logs. Start getting answers. TRACKT sits on top of your Urovo, Zebra or Honeywell hardware and turns asset data into operational intelligence.
+                  TRACKT finds it in seconds. Works on your existing Urovo, Zebra or Honeywell readers. Operational in 30 days. No software licenses. No consultant timelines.
                 </p>
               </motion.div>
 
@@ -212,10 +212,10 @@ export default function TracktPage() {
       <section className="border-b border-white/5 bg-black/40">
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <StatBlock value="< 200ms" label="Query response" sub="On live RFID data" />
-            <StatBlock value="Zero" label="Hardware changes" sub="Works on existing kit" />
-            <StatBlock value="99.2%" label="Asset visibility" sub="NHS pilot target" />
-            <StatBlock value="Day 1" label="Value delivery" sub="No custom dev required" />
+            <StatBlock value="£180k+" label="Lost annually per hospital" sub="Equipment nobody can find" />
+            <StatBlock value="30 days" label="To operational" sub="No forklift upgrade required" />
+            <StatBlock value="< 2sec" label="Find any asset" sub="Ask in natural language" />
+            <StatBlock value="$0" label="New hardware cost" sub="Works with what you own" />
           </div>
         </div>
       </section>
@@ -338,12 +338,12 @@ export default function TracktPage() {
           }}
         />
         <div className="relative z-10 max-w-3xl mx-auto px-6 py-32 text-center">
-          <p className="text-cyan-400 font-mono text-xs tracking-[0.3em] uppercase mb-6">Pilot Programme</p>
+          <p className="text-cyan-400 font-mono text-xs tracking-[0.3em] uppercase mb-6">Stop The Bleeding</p>
           <h2 className="text-4xl lg:text-5xl font-black tracking-tight mb-6">
-            Ready to see your assets.
+            Know where your equipment is. Today.
           </h2>
           <p className="text-gray-400 leading-relaxed mb-10 max-w-lg mx-auto">
-            We are running a limited NHS and logistics pilot programme. No hardware changes. No long procurement cycle. Operational in 30 days.
+            Limited pilot spots available for NHS, logistics and healthcare. Start tracking in 30 days. Zero downtime. Zero infrastructure change.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
