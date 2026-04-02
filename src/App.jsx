@@ -32,6 +32,10 @@ const PetSounds51Press = React.lazy(() => import('./pages/PetSounds51Press'));
 const PetSounds51Data = React.lazy(() => import('./pages/PetSounds51Data'));
 const PetSounds51MarketingAssets = React.lazy(() => import('./pages/PetSounds51MarketingAssets'));
 const TracktPage = React.lazy(() => import('./pages/Trackt'));
+const TracktAboutPage = React.lazy(() => import('./pages/TracktAbout'));
+const TracktPricingPage = React.lazy(() => import('./pages/TracktPricing'));
+const TracktTermsPage = React.lazy(() => import('./pages/TracktTerms'));
+const TracktPrivacyPage = React.lazy(() => import('./pages/TracktPrivacy'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -91,6 +95,10 @@ const AuthenticatedApp = () => {
       <Route path="/PetSounds51Data" element={<LayoutWrapper currentPageName="PetSounds51Data"><PetSounds51Data /></LayoutWrapper>} />
       <Route path="/PetSounds51MarketingAssets" element={<LayoutWrapper currentPageName="PetSounds51MarketingAssets"><PetSounds51MarketingAssets /></LayoutWrapper>} />
       <Route path="/Trackt" element={<TracktPage />} />
+      <Route path="/TracktAbout" element={<TracktAboutPage />} />
+      <Route path="/TracktPricing" element={<TracktPricingPage />} />
+      <Route path="/TracktTerms" element={<TracktTermsPage />} />
+      <Route path="/TracktPrivacy" element={<TracktPrivacyPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

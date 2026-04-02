@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import TracktLayout from '@/components/trackt/TracktLayout';
 
 // Static scan line — no continuous animation loop
 const ScanLine = () => (
@@ -150,6 +151,7 @@ export default function TracktPage() {
   ];
 
   return (
+    <TracktLayout>
     <div className="min-h-screen bg-[#050810] text-white">
 
       {/* HERO */}
@@ -411,5 +413,6 @@ export default function TracktPage() {
       </section>
 
     </div>
+    </TracktLayout>
   );
 }
