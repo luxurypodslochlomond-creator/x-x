@@ -283,6 +283,95 @@ export default function TracktPage() {
         </div>
       </section>
 
+      {/* HOW IT WORKS */}
+      <section className="border-b border-white/5 bg-black/40">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <SectionHeader
+            label="The Data Pipeline"
+            title="How it works."
+            sub="Simple. Secure. Yours."
+          />
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              {
+                step: '01',
+                title: 'Readers Scan',
+                desc: 'Your Urovo, Zebra or Honeywell readers scan tags. Send events to TRACKT via API.',
+                color: 'text-blue-400'
+              },
+              {
+                step: '02',
+                title: 'Ingest & Normalize',
+                desc: 'TRACKT receives scan events. Normalizes formats. Creates audit trail in your database.',
+                color: 'text-cyan-400'
+              },
+              {
+                step: '03',
+                title: 'AI Queries',
+                desc: 'Ask questions in plain English. LLM queries your asset data. Structured answers in seconds.',
+                color: 'text-purple-400'
+              },
+              {
+                step: '04',
+                title: 'You Control It All',
+                desc: 'All data stays in your database. No third-party analytics. Full audit trail. Compliance ready.',
+                color: 'text-green-400'
+              },
+            ].map((item, i) => (
+              <div key={i} className="relative">
+                <div className="border border-white/10 bg-white/[0.02] p-6 rounded-sm hover:border-white/20 transition-colors">
+                  <p className={`text-2xl font-black font-mono mb-3 ${item.color}`}>{item.step}</p>
+                  <h3 className="text-white font-bold mb-2">{item.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+                {i < 3 && (
+                  <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-px bg-gray-700 transform -translate-y-1/2" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECURITY & PRIVACY */}
+      <section className="border-b border-white/5">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <SectionHeader
+            label="Data Sovereignty"
+            title="Security. Privacy. Compliance."
+            sub="Built for NHS and regulated environments."
+          />
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'Your Database, Your Rules',
+                points: ['All asset data stored in your environment', 'No cloud sync to third parties', 'You control retention & deletion', 'Full audit trail of every access']
+              },
+              {
+                title: 'Encryption By Default',
+                points: ['Data in transit: TLS 1.3', 'Scan events tagged with timestamps', 'API keys rotated on demand', 'Compliance logging included']
+              },
+              {
+                title: 'Audit & Compliance Ready',
+                points: ['GDPR compliant data handling', 'NHS IG compliance framework', 'Detailed access logs', 'Breach notification ready']
+              },
+            ].map((section, i) => (
+              <div key={i} className="border-l-2 border-cyan-500/30 pl-6">
+                <h3 className="text-white font-bold mb-4">{section.title}</h3>
+                <ul className="space-y-2">
+                  {section.points.map((point, j) => (
+                    <li key={j} className="flex items-start gap-3">
+                      <span className="text-cyan-400 font-mono text-xs mt-1">✓</span>
+                      <span className="text-gray-400 text-sm">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* TECH STACK */}
       <section className="border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-24">
