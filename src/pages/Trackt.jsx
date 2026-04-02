@@ -137,12 +137,12 @@ export default function TracktPage() {
                 className="mb-6"
               >
                 <div className="inline-flex items-center gap-2 border border-cyan-500/20 bg-cyan-500/5 px-3 py-1.5 rounded-sm mb-8">
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                  <span className="text-cyan-400 font-mono text-xs tracking-widest">SYSTEM ONLINE</span>
+                   <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                   <span className="text-cyan-400 font-mono text-xs tracking-widest">AI INTELLIGENCE LAYER</span>
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-black tracking-tight leading-none mb-4">
-                  Your Equipment is Lost Right Now
+                   Real-Time Asset Intelligence. Your RFID Data.
                 </h1>
                 <div className="h-px w-24 bg-cyan-500/60 mb-8" />
                 <p className="text-xl text-gray-300 leading-relaxed mb-3">
