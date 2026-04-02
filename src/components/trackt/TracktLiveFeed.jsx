@@ -32,11 +32,17 @@ export default function TracktLiveFeed() {
   const [loading, setLoading] = useState(true);
 
   const fetchAssets = async () => {
-    const data = await base44.entities.TracktAsset.list('-last_seen', 8);
-    if (data && data.length > 0) {
-      setAssets(data);
-      setIsDemo(false);
-    } else {
+    try {
+      const data = await base44.entities.TracktAsset.list('-last_seen', 8);
+      if (data && data.length > 0) {
+        setAssets(data);
+        setIsDemo(false);
+      } else {
+        setAssets(DEMO_ASSETS);
+        setIsDemo(true);
+      }
+    } catch (e) {
+      console.warn('TracktAsset fetch failed, showing demo:', e.message);
       setAssets(DEMO_ASSETS);
       setIsDemo(true);
     }
@@ -45,9 +51,13 @@ export default function TracktLiveFeed() {
 
   useEffect(() => {
     fetchAssets();
-    // Subscribe to real-time updates
-    const unsub = base44.entities.TracktAsset.subscribe(() => fetchAssets());
-    return unsub;
+    // Subscribe to real-time updates (wrapped safely)
+    try {
+      const unsub = base44.entities.TracktAsset.subscribe?.(() => fetchAssets());
+      return () => unsub?.();
+    } catch (e) {
+      console.warn('TracktAsset subscription unavailable:', e);
+    }
   }, []);
 
   const activeCount = assets.filter(a => a.status === 'active').length;
