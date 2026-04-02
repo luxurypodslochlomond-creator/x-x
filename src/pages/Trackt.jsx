@@ -214,7 +214,7 @@ export default function TracktPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <StatBlock value="£180k+" label="Lost annually per hospital" sub="Equipment nobody can find" />
             <StatBlock value="12-16%" label="Maintenance cost reduction" sub="Preventive scheduling works" />
-            <StatBlock value="< 7 days" label="To live" sub="API integration + data sync only" />
+            <StatBlock value="Live today" label="Real-time activation" sub="Zero setup barriers" />
             <StatBlock value="$0/mo" label="AI layer cost" sub="Included. Forever." />
           </div>
         </div>
