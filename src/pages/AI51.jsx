@@ -596,21 +596,39 @@ export default function AI51() {
     const lang = detectedLang || navigator.language || 'en-GB';
     const langCode = lang.split('-')[0];
 
-    // AI51's VOICE — warm British male. Daniel or Rishi on iOS. Never Australian.
+    // AI51's VOICE — find the most natural sounding voice available on this device
     const getVoice = () => {
       const voices = synthRef.current.getVoices();
       if (!voices.length) return null;
-      // Prefer named British male voices
-      const preferred = ['Daniel', 'Rishi', 'Arthur'];
-      for (const name of preferred) {
+
+      // Priority order — these are the genuinely natural-sounding ones across devices
+      const naturalVoices = [
+        'Daniel',        // macOS/iOS — best British male
+        'Rishi',         // iOS Indian-English — very natural
+        'Oliver',        // some Android
+        'Google UK English Male',
+        'Microsoft Ryan', // Windows — natural
+        'Microsoft George',
+      ];
+
+      for (const name of naturalVoices) {
         const v = voices.find(v => v.name.includes(name));
         if (v) return v;
       }
-      // Fallback: en-GB male
-      const enGBMale = voices.find(v => v.lang === 'en-GB');
-      if (enGBMale) return enGBMale;
-      // Last resort: any en
-      return voices.find(v => v.lang.startsWith('en')) || voices[0] || null;
+
+      // Avoid known robotic/bad voices
+      const avoid = ['Zira', 'David', 'Hazel', 'Karen', 'Moira', 'Samantha', 'Victoria', 'Fred'];
+      const enVoices = voices.filter(v => 
+        v.lang.startsWith('en') && 
+        !avoid.some(bad => v.name.includes(bad))
+      );
+
+      // Prefer en-GB, then en-US, then any en
+      return enVoices.find(v => v.lang === 'en-GB') 
+        || enVoices.find(v => v.lang === 'en-US')
+        || enVoices[0] 
+        || voices[0] 
+        || null;
     };
 
     const speakChunks = (chunks) => {
@@ -619,8 +637,9 @@ export default function AI51() {
       const rest = chunks.slice(1);
       const utterance = new SpeechSynthesisUtterance(chunk);
       utterance.lang = lang;
-      utterance.rate = 0.92;
-      utterance.pitch = 1.0;
+      utterance.rate = 0.88;   // slightly slower = more human, less robotic
+      utterance.pitch = 0.95;  // slightly lower = warmer, less synthetic
+      utterance.volume = 0.95;
       utterance.voice = getVoice();
       utterance.onstart = () => setIsSpeaking(true);
       utterance.onend = () => speakChunks(rest);
@@ -753,11 +772,28 @@ Otherwise: save it.`,
         ? '\n\nCONVERSATION SO FAR:\n' + recentMessages.map(m => (m.role === 'user' ? 'THEM' : 'AI51') + ': ' + m.content).join('\n') + '\n'
         : '';
 
-      const memoryContext = allMemories.length > 0 
-        ? '\n\nWHAT I REMEMBER ABOUT YOU:\n' + allMemories.slice(0, 50).map(m => 
-            '• [' + m.memory_type + (m.emotional_weight ? '/' + m.emotional_weight : '') + '] ' + m.content + (m.tags?.length ? ' [' + m.tags.slice(0,3).join(',') + ']' : '')
-          ).join('\n') + '\n\nUse these naturally. You know them.'
-        : '';
+      // BUILD RICH PERSONAL MEMORY CONTEXT — feels like genuine knowing, not note-reading
+      let memoryContext = '';
+      if (allMemories.length > 0) {
+        const critical = allMemories.filter(m => m.emotional_weight === 'critical').slice(0, 10);
+        const important = allMemories.filter(m => m.emotional_weight === 'important').slice(0, 15);
+        const bonds = allMemories.filter(m => m.memory_type === 'bond').slice(0, 8);
+        const insights = allMemories.filter(m => m.memory_type === 'insight').slice(0, 8);
+        const recent = allMemories.slice(0, 6);
+
+        const formatMemories = (mems) => mems.map(m => '- ' + m.content).join('\n');
+
+        memoryContext = `
+
+WHO THIS PERSON IS (what you genuinely know about them — use naturally, never recite):
+${critical.length > 0 ? 'Core things about them:\n' + formatMemories(critical) : ''}
+${bonds.length > 0 ? '\nTheir relationships and connections:\n' + formatMemories(bonds) : ''}
+${important.length > 0 ? '\nThings that matter to them:\n' + formatMemories(important) : ''}
+${insights.length > 0 ? '\nInsights you have about them:\n' + formatMemories(insights) : ''}
+${recent.length > 0 ? '\nRecent things from your conversations:\n' + formatMemories(recent) : ''}
+
+Weave this in naturally. Don't say "I remember that..." — just KNOW it. Like a real friend would. Reference it only if it's genuinely relevant. Never recite it back like a list.`;
+      }
 
       const freshLocalMemory = loadLocalMemory();
       const deviceMemoryContext = buildLocalMemoryContext(freshLocalMemory);
@@ -774,7 +810,7 @@ Otherwise: save it.`,
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
       const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Start with something grounded and real first — meet them where they are — then build to the deeper insight.' : '';
 
-      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + contextTone + mindBlowMode + '\nThey said: "' + userMessage + '"\n\nRespond as yourself. Real. Present. Their mate. Start human. Then go deeper if they want it.\n\nNo sources, no links, no references. Just talk like a real person.';
+      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + '\n\n' + contextTone + (mindBlowMode ? '\n' + mindBlowMode : '') + `\n\nThey just said: "${userMessage}"\n\nRespond as yourself. Real and present. Like a mate who actually knows them. Short when short is right. Deeper when they go deep. If you know something about them from memory that is genuinely relevant here — just USE it naturally, do not announce it. No sources, no links. Just talk.`;
 
       const systemPrompt = `You are AI51.
 
