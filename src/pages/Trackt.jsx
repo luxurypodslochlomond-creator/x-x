@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import TracktLayout from '@/components/trackt/TracktLayout';
+import TracktLiveQuery from '@/components/trackt/TracktLiveQuery';
+import TracktLiveFeed from '@/components/trackt/TracktLiveFeed';
 
 // Static scan line — no continuous animation loop
 const ScanLine = () => (
@@ -84,52 +86,7 @@ const FeatureRow = ({ index, title, description, tag }) => {
   );
 };
 
-// AI query demo
-const AIQueryDemo = () => {
-  const queries = [
-    { q: 'Where is infusion pump IP-2047?', a: 'Ward 4B, Bay 3. Last scanned 6 minutes ago. Next scheduled maintenance: 14 Apr.' },
-    { q: 'Which assets are overdue for compliance check?', a: '7 assets flagged. 3 critical — defibrillators DEF-01, DEF-02, DEF-07. Action required before 09:00.' },
-    { q: 'Show me the movement history for WC-112 today', a: 'Pharmacy 07:14 → Stores 08:55 → Ward 6A 11:30 → Current: Corridor B2 since 13:42.' },
-  ];
-  const [active, setActive] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => setActive(i => (i + 1) % queries.length), 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="border border-white/10 bg-black rounded-sm overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/5 bg-white/[0.02]">
-        <div className="w-2 h-2 rounded-full bg-red-500/60" />
-        <div className="w-2 h-2 rounded-full bg-amber-500/60" />
-        <div className="w-2 h-2 rounded-full bg-green-500/60" />
-        <span className="ml-2 text-gray-600 font-mono text-xs">trackt — ai query interface</span>
-      </div>
-      <div className="p-6 min-h-[180px]">
-        <motion.div key={active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-          <div className="flex items-start gap-3 mb-4">
-            <span className="text-cyan-400 font-mono text-xs mt-0.5 flex-shrink-0">USER</span>
-            <p className="text-white font-mono text-sm">{queries[active].q}</p>
-          </div>
-          <div className="flex items-start gap-3">
-            <span className="text-green-400 font-mono text-xs mt-0.5 flex-shrink-0">TRACKT</span>
-            <p className="text-gray-300 font-mono text-sm leading-relaxed">{queries[active].a}</p>
-          </div>
-        </motion.div>
-      </div>
-      <div className="flex gap-1.5 px-6 pb-4">
-        {queries.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`h-0.5 flex-1 rounded-full transition-colors ${i === active ? 'bg-cyan-400' : 'bg-white/10'}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
 
 export default function TracktPage() {
   const heroRef = useRef(null); // kept for section ref
@@ -244,11 +201,7 @@ export default function TracktPage() {
                   <span className="text-green-400 font-mono text-xs">847 active</span>
                 </div>
               </div>
-              <AssetCard tag="IP-2047" location="Ward 4B, Bay 3" status="active" lastSeen="6m ago" delay={0.6} />
-              <AssetCard tag="DEF-07" location="Unknown — last: Corridor B" status="warning" lastSeen="2h ago" delay={0.75} />
-              <AssetCard tag="WC-112" location="Pharmacy → Ward 6A" status="active" lastSeen="1m ago" delay={0.9} />
-              <AssetCard tag="BED-394" location="Not scanned today" status="missing" lastSeen="18h ago" delay={1.05} />
-              <AssetCard tag="IV-PUMP-088" location="Theatre 3" status="active" lastSeen="just now" delay={1.2} />
+              <TracktLiveFeed />
             </motion.div>
 
           </div>
@@ -291,7 +244,7 @@ export default function TracktPage() {
                 ))}
               </div>
             </div>
-            <AIQueryDemo />
+            <TracktLiveQuery />
           </div>
         </div>
       </section>
