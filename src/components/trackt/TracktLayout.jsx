@@ -4,8 +4,10 @@ import { Menu, X, Signal } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Product', path: '/Trackt' },
+  { label: 'Roadmap', path: '/TracktRoadmap' },
+  { label: 'How It Works', path: '/TracktAbout' },
+  { label: 'Why Buy', path: '/TracktPricing' },
   { label: 'Pricing', path: '/TracktPricing' },
-  { label: 'About', path: '/TracktAbout' },
   { label: 'Terms', path: '/TracktTerms', secondary: true },
   { label: 'Privacy', path: '/TracktPrivacy', secondary: true },
 ];
@@ -14,7 +16,8 @@ const FOOTER_LINKS = [
   { label: 'Terms', path: '/TracktTerms' },
   { label: 'Privacy', path: '/TracktPrivacy' },
   { label: 'Pricing', path: '/TracktPricing' },
-  { label: 'About', path: '/TracktAbout' },
+  { label: 'Roadmap', path: '/TracktRoadmap' },
+  { label: 'How It Works', path: '/TracktAbout' },
 ];
 
 export default function TracktLayout({ children }) {
