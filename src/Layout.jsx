@@ -445,6 +445,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // TRACKT - AI RFID ASSET MANAGEMENT
   const tracktNav = [
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID Asset Management" },
+      { title: "Roadmap 🚀", url: createPageUrl("TracktRoadmap"), icon: Target, highlight: true, description: "CCTV + Access Control coming" },
       { title: "How It Works", url: createPageUrl("TracktAbout"), icon: Brain, description: "Technical overview" },
       { title: "Pricing", url: createPageUrl("TracktPricing"), icon: DollarSign, description: "Plans & licensing" },
   ];
