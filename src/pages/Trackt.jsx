@@ -94,7 +94,7 @@ export default function TracktPage() {
   const features = [
     { title: 'Automatic Maintenance Scheduling', description: 'TRACKT learns maintenance patterns and schedules preventive care automatically. Hospitals save 12-16% annually on maintenance costs just by fixing equipment before it breaks.', tag: 'COST SAVINGS' },
     { title: 'Natural Language Asset Queries', description: 'Ask any question about your assets in plain English. TRACKT queries live RFID data and returns structured, actionable answers in under 200ms.', tag: 'AI LAYER' },
-    { title: 'Anomaly Detection Engine', description: 'Continuously monitors movement patterns, dwell times and compliance windows. Flags exceptions before they become incidents.', tag: 'REAL-TIME' },
+    { title: 'Anomaly Detection Engine', description: 'Continuously monitors movement patterns, dwell times and compliance windows. Flags exceptions before they become incidents.', tag: 'CONTINUOUS' },
     { title: 'Cross-System Correlation', description: 'Connects RFID data with access control, maintenance schedules, ERP and compliance records. Eliminates the silo problem permanently.', tag: 'INTEGRATION' },
     { title: 'NFC Tap-to-Insight', description: 'Workers tap any asset tag with their phone. TRACKT returns full context instantly — location history, maintenance status, compliance, ownership.', tag: 'MOBILE' },
     { title: 'Works on Existing Hardware', description: 'No forklift upgrade required. TRACKT connects to your existing Urovo, Zebra or Honeywell RFID infrastructure via standard APIs.', tag: 'ZERO REWORK' },
@@ -142,7 +142,7 @@ export default function TracktPage() {
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-black tracking-tight leading-none mb-4">
-                   Real-Time Asset Intelligence. Your RFID Data.
+                   Live Asset Intelligence. Your RFID Data.
                 </h1>
                 <div className="h-px w-24 bg-cyan-500/60 mb-8" />
                 <p className="text-xl text-gray-300 leading-relaxed mb-3">
@@ -214,7 +214,7 @@ export default function TracktPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <StatBlock value="£180k+" label="Lost annually per hospital" sub="Equipment nobody can find" />
             <StatBlock value="12-16%" label="Maintenance cost reduction" sub="Preventive scheduling works" />
-            <StatBlock value="Live today" label="Real-time activation" sub="Zero setup barriers" />
+            <StatBlock value="Live today" label="Continuous monitoring" sub="Zero setup barriers" />
             <StatBlock value="$0/mo" label="AI layer cost" sub="Included. Forever." />
           </div>
         </div>
@@ -301,7 +301,7 @@ export default function TracktPage() {
               {
                 layer: '02 — Intelligence',
                 title: 'TRACKT AI layer',
-                items: ['Real-time event ingestion', 'Anomaly detection engine', 'Natural language query processor', 'Cross-system correlation', 'Edge inference runtime'],
+                items: ['Continuous event ingestion', 'Anomaly detection engine', 'Natural language query processor', 'Cross-system correlation', 'Edge inference runtime'],
                 color: 'text-cyan-400',
               },
               {
