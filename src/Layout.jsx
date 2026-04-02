@@ -442,9 +442,9 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
   ];
 
-  // TRACKT - AI RFID ASSET MANAGER
+  // TRACKT - AI RFID INVENTORY MANAGER
   const tracktNav = [
-      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID Asset Manager" },
+      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID Inventory Manager" },
       { title: "How It Works", url: createPageUrl("TracktAbout"), icon: Brain, description: "Technical overview" },
       { title: "Pricing", url: createPageUrl("TracktPricing"), icon: DollarSign, description: "Plans & licensing" },
   ];
