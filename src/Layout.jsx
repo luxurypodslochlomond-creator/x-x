@@ -176,7 +176,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const isCB51Subdomain = window.location.hostname.startsWith('cb51.') || window.location.hostname === 'cb51.io';
   const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain;
   const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments';
-  const isTracktPage = currentPageName.startsWith('Trackt');
+  const isTracktPage = currentPageName.startsWith('Trackt') || currentPageName === 'TracktDashboard';
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName) || isTracktPage;
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
@@ -452,6 +452,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // TRACKT - STANDALONE PRODUCT
   const tracktNav = [
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
+      { title: "Live Dashboard", url: createPageUrl("TracktDashboard"), icon: Activity, highlight: true, description: "Real-time asset intelligence" },
   ];
 
 
