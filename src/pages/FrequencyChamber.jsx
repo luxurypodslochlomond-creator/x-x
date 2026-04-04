@@ -500,94 +500,83 @@ export default function FrequencyChamber() {
         return;
       }
 
-      // === BUZZSTOP — STRESS BUZZ + CRANIAL PRESSURE + TINNITUS OVERLAP ===
+      // === BUZZSTOP — STRESS BUZZ + CRANIAL PRESSURE ===
       if (freq.isBuzzStop) {
-        // LAYER 1: Pink noise bed — masks phantom buzz signal
-        const bufferSize = ctx.sampleRate * 4;
-        const buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
-        for (let ch = 0; ch < 2; ch++) {
-          const data = buffer.getChannelData(ch);
-          let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
-          for (let i = 0; i < bufferSize; i++) {
-            const white = Math.random() * 2 - 1;
-            b0 = 0.99886*b0 + white*0.0555179;
-            b1 = 0.99332*b1 + white*0.0750759;
-            b2 = 0.96900*b2 + white*0.1538520;
-            b3 = 0.86650*b3 + white*0.3104856;
-            b4 = 0.55000*b4 + white*0.5329522;
-            b5 = -0.7616*b5 - white*0.0168980;
-            data[i] = (b0+b1+b2+b3+b4+b5+b6+white*0.5362) * 0.11;
-            b6 = white*0.115926;
-          }
+        // LAYER 1: Gentle pink noise bed — soft, low volume, masks phantom buzz
+        const bufferSize = ctx.sampleRate * 2;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        let lastOut = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          // Simple pink noise approximation (no clipping)
+          lastOut = (lastOut + (0.02 * white)) / 1.02;
+          data[i] = lastOut * 8;
         }
         const pinkNoise = ctx.createBufferSource();
         pinkNoise.buffer = buffer;
         pinkNoise.loop = true;
         const noiseGain = ctx.createGain();
-        noiseGain.gain.value = 0.25;
+        noiseGain.gain.value = 0.12; // Low — just a soft bed
         pinkNoise.connect(noiseGain);
         noiseGain.connect(masterGain);
         pinkNoise.start();
         nodes.push(pinkNoise, noiseGain);
 
-        // LAYER 2: Isochronic tones at 40Hz gamma — works on speakers, no headphones needed
-        // A carrier tone (300Hz) switched on/off at 40 times per second
-        const isoCarrier = ctx.createOscillator();
-        isoCarrier.frequency.value = 300;
-        isoCarrier.type = 'sine';
+        // LAYER 2: Isochronic tone — 300Hz carrier, amplitude-modulated at 10Hz
+        // Done ENTIRELY with Web Audio scheduling (no setInterval = no glitches)
+        const isoOsc = ctx.createOscillator();
+        isoOsc.frequency.value = 300;
+        isoOsc.type = 'sine';
         const isoGain = ctx.createGain();
         isoGain.gain.value = 0;
-        isoCarrier.connect(isoGain);
+        isoOsc.connect(isoGain);
         isoGain.connect(masterGain);
-        isoCarrier.start();
-        // Pulse the gain on/off at 40Hz = isochronic beat
-        const isoInterval = setInterval(() => {
-          if (!audioCtxRef.current) { clearInterval(isoInterval); return; }
-          const t = audioCtxRef.current.currentTime;
-          isoGain.gain.setValueAtTime(0.3, t);
-          isoGain.gain.setValueAtTime(0, t + 0.0125); // 40Hz = 25ms period, 50% duty
-        }, 25);
-        nodes.push(isoCarrier, isoGain, { stop: () => clearInterval(isoInterval), disconnect: () => {} });
+        isoOsc.start();
+        // Schedule 10Hz pulses for 10 minutes using precise Web Audio timing
+        const pulsePeriod = 0.1; // 10Hz = 100ms period
+        const pulseOn = 0.05;    // 50% duty cycle = 50ms on
+        const totalPulses = 600 * 10; // 10 min worth
+        for (let i = 0; i < totalPulses; i++) {
+          const t = ctx.currentTime + (i * pulsePeriod);
+          isoGain.gain.setValueAtTime(0.2, t);
+          isoGain.gain.setValueAtTime(0, t + pulseOn);
+        }
+        nodes.push(isoOsc, isoGain);
 
-        // LAYER 3: Binaural beats — 200Hz left / 210Hz right = 10Hz alpha (headphones enhance this)
-        const merger = ctx.createChannelMerger(2);
-        const leftOsc = ctx.createOscillator();
-        leftOsc.frequency.value = 200;
-        leftOsc.type = 'sine';
-        const rightOsc = ctx.createOscillator();
-        rightOsc.frequency.value = 210;
-        rightOsc.type = 'sine';
-        const leftGain = ctx.createGain();
-        leftGain.gain.value = 0.2;
-        const rightGain = ctx.createGain();
-        rightGain.gain.value = 0.2;
-        leftOsc.connect(leftGain);
-        rightOsc.connect(rightGain);
-        leftGain.connect(merger, 0, 0);
-        rightGain.connect(merger, 0, 1);
-        merger.connect(masterGain);
-        leftOsc.start();
-        rightOsc.start();
-        nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
+        // LAYER 3: Two gentle sine tones — 200Hz + 210Hz = 10Hz beat between them
+        // Mono-compatible (works on speakers too, just slightly less binaural effect)
+        const oscA = ctx.createOscillator();
+        oscA.frequency.value = 200;
+        oscA.type = 'sine';
+        const oscB = ctx.createOscillator();
+        oscB.frequency.value = 210;
+        oscB.type = 'sine';
+        const abGain = ctx.createGain();
+        abGain.gain.value = 0.12;
+        oscA.connect(abGain);
+        oscB.connect(abGain);
+        abGain.connect(masterGain);
+        oscA.start();
+        oscB.start();
+        nodes.push(oscA, oscB, abGain);
 
-        // LAYER 4: Somatic grounding pulse — ultra-low sub-bass you FEEL not hear
-        // Used in trauma therapy to break dissociation/buzzing feedback loop
+        // LAYER 4: Somatic grounding — very slow, soft low tone with gentle swell
         const groundOsc = ctx.createOscillator();
-        groundOsc.frequency.value = 40; // audible carrier
+        groundOsc.frequency.value = 55; // Low A — warm, grounding
         groundOsc.type = 'sine';
         const groundGain = ctx.createGain();
-        groundGain.gain.value = 0.15;
-        // Slowly pulse the gain at ~0.1Hz = every 10 seconds, deep somatic wave
-        const groundInterval = setInterval(() => {
-          if (!audioCtxRef.current) { clearInterval(groundInterval); return; }
-          const t = audioCtxRef.current.currentTime;
-          groundGain.gain.linearRampToValueAtTime(0.3, t + 5);
-          groundGain.gain.linearRampToValueAtTime(0.05, t + 10);
-        }, 10000);
+        groundGain.gain.value = 0.08;
+        // Slow swell: up over 8s, down over 8s, repeat — all scheduled
+        for (let i = 0; i < 80; i++) {
+          const t = ctx.currentTime + (i * 16);
+          groundGain.gain.linearRampToValueAtTime(0.15, t + 8);
+          groundGain.gain.linearRampToValueAtTime(0.04, t + 16);
+        }
         groundOsc.connect(groundGain);
         groundGain.connect(masterGain);
         groundOsc.start();
-        nodes.push(groundOsc, groundGain, { stop: () => clearInterval(groundInterval), disconnect: () => {} });
+        nodes.push(groundOsc, groundGain);
 
         nodesRef.current = nodes;
         setIsPlaying(true);
