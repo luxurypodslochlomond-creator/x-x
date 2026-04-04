@@ -87,37 +87,25 @@ Be direct. No fluff. Like a smart operations manager.`,
     }
   };
 
-  const statusColors = {
-    healthy:  { border: 'border-green-500/30',  bg: 'bg-green-500/5',  dot: 'bg-green-400',  text: 'text-green-400' },
-    warning:  { border: 'border-yellow-500/30', bg: 'bg-yellow-500/5', dot: 'bg-yellow-400', text: 'text-yellow-400' },
-    critical: { border: 'border-red-500/30',    bg: 'bg-red-500/5',    dot: 'bg-red-400',    text: 'text-red-400' },
-  };
-  const c = statusColors[insights?.status] || statusColors.healthy;
-
   if (assets.length === 0) return null;
 
+  const statusLabel = { healthy: 'ALL GOOD', warning: 'WARNING', critical: 'CRITICAL' };
+
   return (
-    <div className={`border ${insights ? c.border : 'border-cyan-500/20'} ${insights ? c.bg : 'bg-cyan-500/5'} transition-all`}>
+    <div className="border border-white/8 bg-white/[0.02]">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between px-5 py-4"
+        className="w-full flex items-center justify-between px-4 py-3"
       >
         <div className="flex items-center gap-3">
-          <Brain className={`w-5 h-5 ${insights ? c.text : 'text-cyan-400'}`} />
-          <span className="text-white font-bold font-mono text-sm tracking-wider">AI INTELLIGENCE</span>
-          {loading && <Loader className="w-4 h-4 text-cyan-400 animate-spin" />}
+          <Brain className="w-4 h-4 text-cyan-400" />
+          <span className="text-white font-mono text-xs tracking-widest">AI INTELLIGENCE</span>
+          {loading && <Loader className="w-3 h-3 text-gray-600 animate-spin" />}
           {insights && !loading && (
-            <div className="flex items-center gap-2">
-              <div className={`w-1.5 h-1.5 rounded-full ${c.dot}`} />
-              <span className={`font-mono text-xs uppercase ${c.text}`}>{insights.status}</span>
-            </div>
+            <span className="font-mono text-xs text-gray-500 uppercase">{statusLabel[insights.status] || insights.status}</span>
           )}
         </div>
-        {expanded ? (
-          <ChevronUp className="w-4 h-4 text-gray-600" />
-        ) : (
-          <ChevronDown className="w-4 h-4 text-gray-600" />
-        )}
+        {expanded ? <ChevronUp className="w-4 h-4 text-gray-700" /> : <ChevronDown className="w-4 h-4 text-gray-700" />}
       </button>
 
       <AnimatePresence>
@@ -128,29 +116,23 @@ Be direct. No fluff. Like a smart operations manager.`,
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
           >
-            <div className="px-5 pb-5 border-t border-white/5">
+            <div className="px-4 pb-4 border-t border-white/5">
               {loading ? (
-                <div className="py-6 text-center">
-                  <p className="text-gray-500 font-mono text-xs">Analyzing {assets.length} assets...</p>
-                </div>
+                <p className="text-gray-600 font-mono text-xs py-4">Analyzing {assets.length} assets...</p>
               ) : insights ? (
-                <div className="pt-4 space-y-4">
-                  {/* HEADLINE */}
-                  <p className={`text-lg font-bold ${c.text}`}>{insights.headline}</p>
+                <div className="pt-4 space-y-3">
+                  <p className="text-white text-sm font-semibold leading-snug">{insights.headline}</p>
 
-                  {/* PRIORITY ACTION */}
                   {insights.priority_action && (
-                    <div className="flex items-start gap-2 bg-white/5 border border-white/10 px-4 py-3">
-                      <span className="text-white font-mono text-xs font-bold mt-0.5">ACTION:</span>
-                      <p className="text-white text-sm">{insights.priority_action}</p>
+                    <div className="border-l-2 border-cyan-500/40 pl-3">
+                      <p className="text-gray-400 text-xs leading-relaxed">{insights.priority_action}</p>
                     </div>
                   )}
 
-                  {/* INSIGHTS */}
-                  <ul className="space-y-2">
+                  <ul className="space-y-1.5">
                     {insights.insights?.map((insight, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
-                        <span className="text-cyan-500 mt-1 flex-shrink-0">›</span>
+                      <li key={i} className="flex items-start gap-2 text-xs text-gray-500">
+                        <span className="text-gray-700 mt-0.5 flex-shrink-0">—</span>
                         <span>{insight}</span>
                       </li>
                     ))}
@@ -158,15 +140,13 @@ Be direct. No fluff. Like a smart operations manager.`,
 
                   <button
                     onClick={(e) => { e.stopPropagation(); analyzeAssets(); }}
-                    className="text-gray-600 hover:text-cyan-400 font-mono text-xs transition-colors"
+                    className="text-gray-700 hover:text-gray-400 font-mono text-xs transition-colors"
                   >
-                    Re-analyze →
+                    Re-analyze
                   </button>
                 </div>
               ) : (
-                <div className="py-6 text-center">
-                  <p className="text-gray-600 font-mono text-xs">Click to analyze</p>
-                </div>
+                <p className="text-gray-700 font-mono text-xs py-4">No analysis yet</p>
               )}
             </div>
           </motion.div>

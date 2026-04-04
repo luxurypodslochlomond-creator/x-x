@@ -117,20 +117,16 @@ export default function TracktDashboard() {
           {/* STAT BAR */}
           <TracktStatBar stats={stats} filterStatus={filterStatus} setFilterStatus={setFilterStatus} />
 
-          {/* MISSING/FLAGGED ALERT */}
+          {/* MISSING/FLAGGED ALERT — subtle */}
           {(stats.missing > 0 || stats.flagged > 0) && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="border border-red-500/30 bg-red-500/5 p-4 flex items-center gap-3"
-            >
-              <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0" />
-              <p className="text-red-300 text-sm">
-                <span className="font-bold">{stats.missing + stats.flagged} asset{stats.missing + stats.flagged !== 1 ? 's' : ''} need attention</span>
-                {stats.missing > 0 && ` — ${stats.missing} missing`}
-                {stats.flagged > 0 && ` — ${stats.flagged} flagged`}
+            <div className="flex items-center gap-2 px-3 py-2 border border-white/8 bg-white/[0.02]">
+              <AlertTriangle className="w-3.5 h-3.5 text-gray-500 flex-shrink-0" />
+              <p className="text-gray-400 text-xs font-mono">
+                {stats.missing + stats.flagged} asset{stats.missing + stats.flagged !== 1 ? 's' : ''} need attention
+                {stats.missing > 0 && ` · ${stats.missing} missing`}
+                {stats.flagged > 0 && ` · ${stats.flagged} flagged`}
               </p>
-            </motion.div>
+            </div>
           )}
 
           {/* AI INSIGHTS */}
