@@ -449,10 +449,14 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
   ];
 
-  // TRACKT - STANDALONE PRODUCT
+  // TRACKT - STANDALONE PRODUCT (full nav when ON a Trackt page)
   const tracktNav = [
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
       { title: "Live Dashboard", url: createPageUrl("TracktDashboard"), icon: Activity, highlight: true, description: "Real-time asset intelligence" },
+  ];
+  // Shortened version for main UF51 menu
+  const tracktNavShort = [
+      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
   ];
 
 
@@ -669,11 +673,11 @@ const LayoutInner = ({ children, currentPageName }) => {
                                     <>
                                         <div className="h-px bg-cyan-500/30 my-3" />
                                         {scottNav.length > 0 && <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} isMobile />}
-                                        {tracktNav.length > 0 && <NavSection title="PRODUCTS" color="cyan" items={tracktNav} isActivePage={isActivePage} isMobile />}
-                                    </>
-                                )}
+                                        {tracktNavShort.length > 0 && <NavSection title="PRODUCTS" color="cyan" items={tracktNavShort} isActivePage={isActivePage} isMobile />}
+                                                     </>
+                                                 )}
 
-              {user && (
+                                        {user && (
                 <>
                   <div className="h-px bg-white/20 my-3 w-full" />
                     <button onClick={handleSignOut} className="w-full flex items-center gap-3 p-3 border-2 border-red-500/50 hover:border-red-500 bg-black/60 text-red-400">
@@ -770,7 +774,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               <>
                 <div className="h-px bg-cyan-500/30 my-4" />
                 {scottNav.length > 0 && <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} />}
-                {tracktNav.length > 0 && <NavSection title="PRODUCTS" color="cyan" items={tracktNav} isActivePage={isActivePage} />}
+                {tracktNavShort.length > 0 && <NavSection title="PRODUCTS" color="cyan" items={tracktNavShort} isActivePage={isActivePage} />}
               </>
             )}
 

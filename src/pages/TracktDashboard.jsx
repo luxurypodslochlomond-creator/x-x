@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
-import TracktLayout from '@/components/trackt/TracktLayout';
 import TracktAIInsights from '@/components/trackt/TracktAIInsights';
 import TracktAssetTable from '@/components/trackt/TracktAssetTable';
 import TracktStatBar from '@/components/trackt/TracktStatBar';
@@ -72,20 +71,17 @@ export default function TracktDashboard() {
 
   if (loading) {
     return (
-      <TracktLayout>
-        <div className="min-h-screen bg-[#050810] flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-cyan-400 font-mono text-sm tracking-widest">LOADING TRACKT...</p>
-          </div>
+      <div className="min-h-screen bg-[#050810] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-cyan-400 font-mono text-sm tracking-widest">LOADING TRACKT...</p>
         </div>
-      </TracktLayout>
+      </div>
     );
   }
 
   return (
-    <TracktLayout>
-      <div className="min-h-screen bg-[#050810] text-white">
+    <div className="min-h-screen bg-[#050810] text-white">
 
         {/* HEADER */}
         <div className="border-b border-white/5 bg-black/40 backdrop-blur sticky top-0 z-20">
@@ -190,7 +186,6 @@ export default function TracktDashboard() {
           )}
 
         </div>
-      </div>
-    </TracktLayout>
+    </div>
   );
 }

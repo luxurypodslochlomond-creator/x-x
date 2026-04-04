@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Package, CheckCircle, AlertTriangle, Flag, Clock } from 'lucide-react';
 
-const Stat = ({ icon: Icon, label, value, color, active, onClick }) => (
+const Stat = ({ icon: IconComp, label, value, color, active, onClick }) => (
   <motion.button
     whileHover={{ scale: 1.02 }}
     whileTap={{ scale: 0.98 }}
@@ -14,7 +14,7 @@ const Stat = ({ icon: Icon, label, value, color, active, onClick }) => (
     }`}
   >
     <div className="flex items-center gap-2 mb-2">
-      <Icon className={`w-4 h-4 ${color}`} />
+      <IconComp className={`w-4 h-4 ${color}`} />
       <span className="text-gray-500 font-mono text-xs uppercase tracking-wider">{label}</span>
     </div>
     <p className={`text-2xl font-black ${color}`}>{value}</p>
