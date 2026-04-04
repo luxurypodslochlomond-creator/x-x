@@ -4,6 +4,7 @@ import { Menu, X, Signal } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Product', path: '/Trackt' },
+  { label: 'Live Dashboard', path: '/TracktDashboard', highlight: true },
   { label: 'Roadmap', path: '/TracktRoadmap' },
   { label: 'How It Works', path: '/TracktHowItWorks' },
   { label: 'Why Buy', path: '/TracktWhyBuy' },
@@ -58,6 +59,8 @@ export default function TracktLayout({ children }) {
                 className={`block px-4 py-3 rounded-lg transition-all border text-sm uppercase font-bold ${
                   isActive(link.path)
                     ? 'bg-cyan-500/10 border-cyan-500/60 text-cyan-400'
+                    : link.highlight
+                    ? 'border-cyan-400 text-cyan-400 bg-cyan-500/10 hover:bg-cyan-500/20'
                     : link.secondary
                     ? 'border-gray-700/30 text-gray-400 hover:border-gray-600/50'
                     : 'border-cyan-500/20 text-cyan-400 hover:border-cyan-500/40 hover:bg-cyan-500/5'
