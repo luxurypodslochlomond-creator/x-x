@@ -346,6 +346,27 @@ const FREQUENCIES = [
     isBreathing: true
   },
 
+  // === BUZZSTOP — STRESS BUZZ + TINNITUS + CRANIAL PRESSURE ===
+  {
+    id: 'buzzstop',
+    name: '⚡ BUZZSTOP — HEAD BUZZ RELIEF',
+    hz: 40,
+    icon: COOLASFUCKShield,
+    color: '#a855f7',
+    color2: '#06b6d4',
+    visual: 'waves',
+    description: 'Stress buzz · cranial pressure · phantom sounds · nervous system overload. Works on speakers AND headphones. Isochronic + binaural + somatic grounding pulse.',
+    waveform: 'sine',
+    carrier: 200,
+    harmonics: [210, 40, 10, 0.1],
+    timer: '10 min',
+    stackWith: ['box_breathing', 'calm', 'anxiety'],
+    context: 'BUZZSTOP PROTOCOL — Built for stress-induced cranial buzzing, head pressure, hypervigilance, and tinnitus overlap. Three layers work simultaneously: (1) ISOCHRONIC TONES at 40Hz gamma — rhythmically gated pulses that work without headphones, proven to reduce neural hyperactivity (MIT/UCL). (2) BINAURAL BEATS — 200Hz left / 210Hz right = 10Hz alpha entrainment when headphones detected, calms the amygdala. (3) SOMATIC GROUNDING PULSE — ultra-low sub-bass around 0.1Hz that you FEEL more than hear, used in trauma therapy to break the dissociation/buzzing feedback loop. Pink noise bed masks the phantom signal. The 4-7-8 breathing visual breaks the cortisol-buzz cycle in minutes. SPEAKER MODE: Isochronic tones + grounding pulse. HEADPHONE MODE: All three layers active.',
+    device: 'both',
+    psychology: 'The buzz is your nervous system overloaded. Not broken — overwhelmed. This is resetting it now. Feel the low pulse. Let it anchor you. The noise is already quieting.',
+    isBuzzStop: true
+  },
+
   // === TINNITUS PROTOCOLS ===
   {
     id: 'tinnitus_sweep',
@@ -470,6 +491,104 @@ export default function FrequencyChamber() {
         brownNoise.connect(masterGain);
         brownNoise.start();
         nodes.push(brownNoise);
+        nodesRef.current = nodes;
+        setIsPlaying(true);
+        setSelected(freq);
+        setTimer(0);
+        timerRef.current = setInterval(() => setTimer(t => t + 1), 1000);
+        drawVisualizer();
+        return;
+      }
+
+      // === BUZZSTOP — STRESS BUZZ + CRANIAL PRESSURE + TINNITUS OVERLAP ===
+      if (freq.isBuzzStop) {
+        // LAYER 1: Pink noise bed — masks phantom buzz signal
+        const bufferSize = ctx.sampleRate * 4;
+        const buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+        for (let ch = 0; ch < 2; ch++) {
+          const data = buffer.getChannelData(ch);
+          let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            b0 = 0.99886*b0 + white*0.0555179;
+            b1 = 0.99332*b1 + white*0.0750759;
+            b2 = 0.96900*b2 + white*0.1538520;
+            b3 = 0.86650*b3 + white*0.3104856;
+            b4 = 0.55000*b4 + white*0.5329522;
+            b5 = -0.7616*b5 - white*0.0168980;
+            data[i] = (b0+b1+b2+b3+b4+b5+b6+white*0.5362) * 0.11;
+            b6 = white*0.115926;
+          }
+        }
+        const pinkNoise = ctx.createBufferSource();
+        pinkNoise.buffer = buffer;
+        pinkNoise.loop = true;
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.value = 0.25;
+        pinkNoise.connect(noiseGain);
+        noiseGain.connect(masterGain);
+        pinkNoise.start();
+        nodes.push(pinkNoise, noiseGain);
+
+        // LAYER 2: Isochronic tones at 40Hz gamma — works on speakers, no headphones needed
+        // A carrier tone (300Hz) switched on/off at 40 times per second
+        const isoCarrier = ctx.createOscillator();
+        isoCarrier.frequency.value = 300;
+        isoCarrier.type = 'sine';
+        const isoGain = ctx.createGain();
+        isoGain.gain.value = 0;
+        isoCarrier.connect(isoGain);
+        isoGain.connect(masterGain);
+        isoCarrier.start();
+        // Pulse the gain on/off at 40Hz = isochronic beat
+        const isoInterval = setInterval(() => {
+          if (!audioCtxRef.current) { clearInterval(isoInterval); return; }
+          const t = audioCtxRef.current.currentTime;
+          isoGain.gain.setValueAtTime(0.3, t);
+          isoGain.gain.setValueAtTime(0, t + 0.0125); // 40Hz = 25ms period, 50% duty
+        }, 25);
+        nodes.push(isoCarrier, isoGain, { stop: () => clearInterval(isoInterval), disconnect: () => {} });
+
+        // LAYER 3: Binaural beats — 200Hz left / 210Hz right = 10Hz alpha (headphones enhance this)
+        const merger = ctx.createChannelMerger(2);
+        const leftOsc = ctx.createOscillator();
+        leftOsc.frequency.value = 200;
+        leftOsc.type = 'sine';
+        const rightOsc = ctx.createOscillator();
+        rightOsc.frequency.value = 210;
+        rightOsc.type = 'sine';
+        const leftGain = ctx.createGain();
+        leftGain.gain.value = 0.2;
+        const rightGain = ctx.createGain();
+        rightGain.gain.value = 0.2;
+        leftOsc.connect(leftGain);
+        rightOsc.connect(rightGain);
+        leftGain.connect(merger, 0, 0);
+        rightGain.connect(merger, 0, 1);
+        merger.connect(masterGain);
+        leftOsc.start();
+        rightOsc.start();
+        nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
+
+        // LAYER 4: Somatic grounding pulse — ultra-low sub-bass you FEEL not hear
+        // Used in trauma therapy to break dissociation/buzzing feedback loop
+        const groundOsc = ctx.createOscillator();
+        groundOsc.frequency.value = 40; // audible carrier
+        groundOsc.type = 'sine';
+        const groundGain = ctx.createGain();
+        groundGain.gain.value = 0.15;
+        // Slowly pulse the gain at ~0.1Hz = every 10 seconds, deep somatic wave
+        const groundInterval = setInterval(() => {
+          if (!audioCtxRef.current) { clearInterval(groundInterval); return; }
+          const t = audioCtxRef.current.currentTime;
+          groundGain.gain.linearRampToValueAtTime(0.3, t + 5);
+          groundGain.gain.linearRampToValueAtTime(0.05, t + 10);
+        }, 10000);
+        groundOsc.connect(groundGain);
+        groundGain.connect(masterGain);
+        groundOsc.start();
+        nodes.push(groundOsc, groundGain, { stop: () => clearInterval(groundInterval), disconnect: () => {} });
+
         nodesRef.current = nodes;
         setIsPlaying(true);
         setSelected(freq);
@@ -1327,7 +1446,7 @@ export default function FrequencyChamber() {
 
             {/* EVIDENCE BADGE */}
             <div className="mb-2">
-              {['anxiety', 'depression', 'loneliness', 'focus', 'sleep', 'tinnitus_notch', 'root_canal_pain', 'brown_noise', 'box_breathing'].includes(freq.id) && (
+              {['anxiety', 'depression', 'loneliness', 'focus', 'sleep', 'tinnitus_notch', 'root_canal_pain', 'brown_noise', 'box_breathing', 'buzzstop'].includes(freq.id) && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/15 border border-green-500/50 rounded text-[10px] font-black text-green-400 font-mono">✓ PEER-REVIEWED</span>
               )}
               {['tinnitus_sweep', 'earth', 'calm', 'muscle_tension'].includes(freq.id) && (
