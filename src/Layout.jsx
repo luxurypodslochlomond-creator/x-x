@@ -360,6 +360,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   // === NAVIGATION SECTIONS ===
   // 1. HEAL (most important - immediate value)
   const healNav = [
+    { title: "⚡ BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus • AI radar engine" },
     { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
     { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
     { title: "🧬 Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },

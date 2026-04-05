@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKGlobe, COOLASFUCKBrain, COOLASFUCKZap } from '@/components/shared/COOLASFUCKIcon';
-import { ChevronDown, Radio, Zap } from 'lucide-react';
+import { ChevronDown, Radio } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -151,8 +151,38 @@ export default function WelcomePage() {
                      </div>
                 </motion.div>
 
-                {/* FIVE MAIN PATHS - CB51 ADDED */}
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {/* BUZZSTOP HERO — FIRST, BIGGEST, MOST IMPORTANT */}
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
+                    <Link to={createPageUrl('BuzzStop')}>
+                        <motion.div
+                            whileHover={{ scale: 1.02, y: -4 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="bg-black border-4 border-purple-500 hover:border-purple-400 p-8 cursor-pointer transition-all w-full flex flex-col md:flex-row items-center gap-6"
+                            style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.35)' }}
+                        >
+                            <motion.div
+                                animate={{ scale: [1, 1.1, 1] }}
+                                transition={{ repeat: Infinity, duration: 2 }}
+                            >
+                                <COOLASFUCKZap size={72} animate={true} />
+                            </motion.div>
+                            <div className="text-center md:text-left flex-1">
+                                <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
+                                    <h3 className="text-3xl font-black font-mono text-purple-300" style={{ textShadow: '0 0 20px rgba(168,85,247,0.7)' }}>BUZZSTOP</h3>
+                                    <span className="text-[10px] font-mono bg-purple-500/20 border border-purple-500 text-purple-400 px-2 py-0.5">V2 • FREE</span>
+                                </div>
+                                <p className="text-white font-bold text-lg mb-1">Cancel your tinnitus with AI-designed audio</p>
+                                <p className="text-gray-400 text-sm font-mono">750 million people affected • Radar finds your exact Hz • 3-layer neural cancellation engine</p>
+                            </div>
+                            <div className="text-purple-400 font-black font-mono text-sm border-2 border-purple-500 px-5 py-3 whitespace-nowrap hover:bg-purple-500/10 transition-colors">
+                                START NOW →
+                            </div>
+                        </motion.div>
+                    </Link>
+                </motion.div>
+
+                {/* FOUR PATHS */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
                     {/* AI51 */}
                     <Link to={createPageUrl('AI51')}>
@@ -187,15 +217,6 @@ export default function WelcomePage() {
                             <COOLASFUCKWaves size={48} animate={true} />
                             <h3 className="text-lg font-black font-mono text-cyan-400">HEAL</h3>
                             <p className="text-xs text-gray-400 font-mono text-center">432Hz / 528Hz • Free forever</p>
-                        </motion.div>
-                    </Link>
-
-                    {/* BUZZSTOP */}
-                    <Link to={createPageUrl('BuzzStop')}>
-                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-purple-500 hover:border-purple-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.25)' }}>
-                            <Zap className="w-12 h-12 text-purple-400" />
-                            <h3 className="text-lg font-black font-mono text-purple-400">BUZZSTOP</h3>
-                            <p className="text-xs text-gray-400 font-mono text-center">Tinnitus cancel • Find your Hz</p>
                         </motion.div>
                     </Link>
 
