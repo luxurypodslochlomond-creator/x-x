@@ -59,13 +59,13 @@ export default function BuzzStopPage() {
         <div className="flex items-center justify-between px-4 py-3 max-w-2xl mx-auto">
 
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
+          <Link to="/BuzzStop" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
             <BuzzStopMark />
             <div>
               <span className="text-white font-black text-lg tracking-tight">BUZZ</span>
               <span className="font-black text-lg tracking-tight" style={{ color: '#22c55e' }}>STOP</span>
             </div>
-          </div>
+          </Link>
 
           {/* Tagline — hidden on mobile */}
           <p className="hidden sm:block text-gray-600 text-xs font-mono tracking-wider">
