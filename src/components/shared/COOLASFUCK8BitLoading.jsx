@@ -16,6 +16,9 @@ export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
     message.includes('CB51')
   );
 
+  // Auto-detect BuzzStop context
+  const isBuzzStop = typeof window !== 'undefined' && window.location.pathname.includes('/BuzzStop');
+
   const displayMessage = isCB51 ? (message === "LOADING UF51" ? "CB51" : message.replace("UF51", "CB51")) : message;
   
   return (
@@ -24,6 +27,16 @@ export default function COOLASFUCK8BitLoading({ message = "LOADING" }) {
         // CB51 - minimal spinner
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-cyan-500/30 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
+        </div>
+      ) : isBuzzStop ? (
+        // BuzzStop - waveform + stop block
+        <div className="text-center opacity-70">
+          <svg width="56" height="56" viewBox="0 0 32 32" fill="none" className="mx-auto">
+            <path d="M2 16 L5 16 L7 9 L9 23 L11 13 L13 19 L16 4 L19 28 L21 12 L23 20 L25 16 L30 16"
+              stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
+            <rect x="13" y="11" width="10" height="10" rx="2" fill="#000" stroke="#22c55e" strokeWidth="1.5" opacity="0.95"/>
+            <rect x="15" y="13" width="6" height="6" rx="1" fill="#22c55e"/>
+          </svg>
         </div>
       ) : (
         // UF51 - simple heart
