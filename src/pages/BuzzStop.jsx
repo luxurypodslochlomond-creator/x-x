@@ -96,10 +96,6 @@ export default function BuzzStopPage() {
                   <p className="text-xs text-gray-600">Not a medical device. Not medical advice. For wellbeing use only.</p>
                 </div>
 
-                <div className="pt-1 flex justify-center">
-                  <LiveClock />
-                </div>
-
                 <p className="text-center text-gray-800 text-xs font-mono pb-1">© 2026 Universal Frequency 51</p>
               </div>
             </motion.div>
@@ -108,9 +104,18 @@ export default function BuzzStopPage() {
       </header>
 
       {/* Content */}
-      <div className="pt-14">
+      <div className="pt-14 pb-14">
         <BuzzStopEngine />
       </div>
+
+      {/* ── FOOTER ── */}
+      <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2"
+        style={{ background: 'rgba(0,4,0,0.96)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(34,197,94,0.15)' }}>
+        <div className="flex items-center justify-between max-w-2xl mx-auto">
+          <LiveClock />
+          <p className="text-xs font-mono text-gray-700">Not a medical device</p>
+        </div>
+      </footer>
     </div>
   );
 }
