@@ -140,35 +140,45 @@ export default function BuzzStopEngine({ onStop }) {
   };
 
   const warmer = () => {
-    // Narrow to ±40% around current Hz (log-symmetric)
-    const newMin = Math.max(rangeMin, Math.round(currentHz * 0.65));
-    const newMax = Math.min(rangeMax, Math.round(currentHz * 1.55));
-    const nextMid = getMidHz(newMin, newMax);
+    // Narrow symmetrically around current Hz on a log scale
+    // Use log midpoint ±1 octave to keep range meaningful
+    const logHz = Math.log10(Math.max(1, currentHz));
+    const newMin = Math.max(rangeMin, Math.round(Math.pow(10, logHz - 0.6)));
+    const newMax = Math.min(rangeMax, Math.round(Math.pow(10, logHz + 0.6)));
+    const safeMin = Math.max(20, newMin);
+    const safeMax = Math.min(16000, newMax);
+    const nextMid = getMidHz(safeMin, safeMax);
     setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
-    setRangeMin(newMin); setRangeMax(newMax);
+    setRangeMin(safeMin); setRangeMax(safeMax);
     playHz(nextMid);
-    if (newMax - newMin < 60) setPhase('fine');
+    if (safeMax - safeMin < 60) setPhase('fine');
   };
 
   const colder = () => {
-    // Split remaining range, go to the half we haven't tried
-    const mid = currentHz;
-    const lastMid = history.length > 0
-      ? getMidHz(history[history.length - 1].min, history[history.length - 1].max)
-      : null;
+    // True binary split — always cut the range cleanly in half (log scale)
+    // never collapse the range below a usable width
+    const logMin = Math.log10(Math.max(1, rangeMin));
+    const logMax = Math.log10(Math.max(1, rangeMax));
+    const logMid = (logMin + logMax) / 2;
+    const logCurrent = Math.log10(Math.max(1, currentHz));
+
     let newMin, newMax;
-    if (!lastMid || mid >= lastMid) {
-      // Were going up — try lower half
-      newMin = rangeMin; newMax = Math.max(rangeMin + 1, mid - 1);
+    if (logCurrent >= logMid) {
+      // Current tone is in upper half → buzz must be in lower half
+      newMin = rangeMin;
+      newMax = Math.max(rangeMin + 100, Math.round(Math.pow(10, logMid)));
     } else {
-      // Were going down — try upper half
-      newMin = Math.min(rangeMax - 1, mid + 1); newMax = rangeMax;
+      // Current tone is in lower half → buzz must be in upper half
+      newMin = Math.min(rangeMax - 100, Math.round(Math.pow(10, logMid)));
+      newMax = rangeMax;
     }
-    const nextMid = getMidHz(newMin, newMax);
+    const safeMin = Math.max(20, newMin);
+    const safeMax = Math.min(16000, newMax);
+    const nextMid = getMidHz(safeMin, safeMax);
     setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
-    setRangeMin(newMin); setRangeMax(newMax);
+    setRangeMin(safeMin); setRangeMax(safeMax);
     playHz(nextMid);
-    if (newMax - newMin < 60) setPhase('fine');
+    if (safeMax - safeMin < 60) setPhase('fine');
   };
 
   const undoStep = () => {
