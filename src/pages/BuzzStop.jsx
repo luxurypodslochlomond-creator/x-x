@@ -18,6 +18,7 @@ export default function BuzzStopPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [swReady, setSwReady] = useState(false);
+  const [testMode] = useState(() => window.location.search.includes('test=true') || window.self !== window.top);
 
   useEffect(() => {
     // Register service worker for offline support
