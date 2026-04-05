@@ -33,9 +33,10 @@ export default function BuzzStopEngine({ onStop }) {
   const [rangeMax, setRangeMax] = useState(16000);
   const [currentHz, setCurrentHz] = useState(0);
   const [lockedHz, setLockedHz] = useState(null);
-  const [volume, setVolume] = useState(0.25);
+  const [volume, setVolume] = useState(0.3);
   const [history, setHistory] = useState([]);
   const [elapsed, setElapsed] = useState(0);
+  const [hasHeadphones, setHasHeadphones] = useState(null); // null = not asked yet
 
   const ctx = useRef(null);
   const masterGain = useRef(null);
@@ -206,30 +207,36 @@ export default function BuzzStopEngine({ onStop }) {
     invOsc.start();
     nodes.push(invOsc, invGain);
 
-    // 2. Alpha cortex calming (10Hz binaural beat)
-    const aGain = actx.createGain();
-    aGain.gain.value = 0.07;
-    aGain.connect(masterGain.current);
-    [200, 210].forEach(f => {
-      const o = actx.createOscillator();
-      o.type = 'sine';
-      o.frequency.value = f;
-      o.connect(aGain);
-      o.start();
-      nodes.push(o);
-    });
-    nodes.push(aGain);
+    // 2. Alpha cortex calming — binaural beat only works with headphones
+    if (hasHeadphones) {
+      const aGain = actx.createGain();
+      aGain.gain.value = 0.07;
+      aGain.connect(masterGain.current);
+      [200, 210].forEach(f => {
+        const o = actx.createOscillator();
+        o.type = 'sine';
+        o.frequency.value = f;
+        o.connect(aGain);
+        o.start();
+        nodes.push(o);
+      });
+      nodes.push(aGain);
+    }
 
-    // 3. Pattern break (0.08Hz amplitude tremolo)
+    // 3. Pattern break (0.08Hz amplitude tremolo) — connect to a separate gain node
     const modOsc = actx.createOscillator();
     modOsc.type = 'sine';
     modOsc.frequency.value = 0.08;
-    const modGain = actx.createGain();
-    modGain.gain.value = 0.22;
-    modOsc.connect(modGain);
-    modGain.connect(masterGain.current.gain);
+    const modDepth = actx.createGain();
+    modDepth.gain.value = 0.15;
+    // Use a dedicated gain node so modulation doesn't fight the cancel layer
+    const modTarget = actx.createGain();
+    modTarget.gain.value = 1.0;
+    modTarget.connect(masterGain.current);
+    modOsc.connect(modDepth);
+    modDepth.connect(modTarget.gain);
     modOsc.start();
-    nodes.push(modOsc, modGain);
+    nodes.push(modOsc, modDepth, modTarget);
 
     // 4. Cross-frequency de-correlation shimmer
     const shimMaster = actx.createGain();
@@ -312,7 +319,7 @@ export default function BuzzStopEngine({ onStop }) {
           {phase === 'start' && (
             <motion.div key="start"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, y: -10 }}
-              className="text-center space-y-10 pt-6">
+              className="text-center space-y-8 pt-6">
 
               <div>
                 <div className="text-6xl font-black text-white tracking-tighter mb-2">
@@ -321,32 +328,60 @@ export default function BuzzStopEngine({ onStop }) {
                 <p className="text-gray-500 text-sm">Find your tinnitus frequency.<br/>Cancel it with AI.</p>
               </div>
 
-              <div className="space-y-3">
-                {[
-                  { dot: C.primary, text: 'Put on headphones' },
-                  { dot: C.primary, text: 'Press start — a tone plays' },
-                  { dot: C.warm,   text: '🔥 Warmer = that\'s the zone · ❄️ Colder = not that one' },
-                  { dot: C.lock,   text: 'Lock it — 4 AI layers cancel the signal' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
-                    <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.dot }} />
-                    <p className="text-gray-400 text-sm">{item.text}</p>
+              {/* Headphones check */}
+              {hasHeadphones === null ? (
+                <div className="space-y-4">
+                  <p className="text-gray-300 text-sm font-mono tracking-wide">Are you wearing headphones?</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => setHasHeadphones(true)}
+                      className="py-5 rounded-2xl font-black text-base text-white"
+                      style={{ background: C.primaryDim, border: `1.5px solid ${C.primaryBorder}` }}>
+                      🎧 Yes
+                    </motion.button>
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => setHasHeadphones(false)}
+                      className="py-5 rounded-2xl font-black text-base text-gray-300"
+                      style={{ background: 'rgba(255,255,255,0.04)', border: '1.5px solid rgba(255,255,255,0.15)' }}>
+                      🔊 No
+                    </motion.button>
                   </div>
-                ))}
-              </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {!hasHeadphones && (
+                    <div className="px-4 py-3 rounded-xl text-left" style={{ background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)' }}>
+                      <p className="text-orange-400 text-xs font-mono font-bold mb-1">⚠ SPEAKER MODE</p>
+                      <p className="text-orange-300/70 text-xs">Works but binaural beats won't function — for best results use headphones. The destructive interference + shimmer will still help.</p>
+                    </div>
+                  )}
 
-              <motion.button
-                whileTap={{ scale: 0.97 }}
-                onClick={startRadar}
-                className="w-full py-5 rounded-2xl font-black text-xl tracking-wide text-white transition-all"
-                style={{ background: `linear-gradient(135deg, #0891b2, ${C.primary})`, boxShadow: `0 0 40px rgba(6,182,212,0.35)` }}>
-                START
-              </motion.button>
+                  <div className="space-y-2 text-left">
+                    {[
+                      { dot: C.primary, text: 'A tone plays — listen carefully' },
+                      { dot: C.warm,   text: '🔥 Warmer = yes, that\'s the zone — homes in' },
+                      { dot: '#38bdf8', text: '❄️ Colder = no, not that one — jumps away' },
+                      { dot: C.lock,   text: 'Lock it — AI layers cancel the signal' },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-3 px-3 py-2.5 border border-gray-800 rounded-lg">
+                        <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: item.dot }} />
+                        <p className="text-gray-400 text-sm">{item.text}</p>
+                      </div>
+                    ))}
+                  </div>
 
-              <button onClick={async () => { await startPrimary(1000); setCurrentHz(1000); setPhase('fine'); }}
-                className="text-gray-700 text-xs font-mono hover:text-gray-500 transition-colors">
-                I know my frequency already →
-              </button>
+                  <motion.button
+                    whileTap={{ scale: 0.97 }}
+                    onClick={startRadar}
+                    className="w-full py-5 rounded-2xl font-black text-xl tracking-wide text-white transition-all"
+                    style={{ background: `linear-gradient(135deg, #0891b2, ${C.primary})`, boxShadow: `0 0 40px rgba(6,182,212,0.35)` }}>
+                    START
+                  </motion.button>
+
+                  <button onClick={async () => { await startPrimary(8000); setCurrentHz(8000); setPhase('fine'); }}
+                    className="text-gray-700 text-xs font-mono hover:text-gray-500 transition-colors">
+                    I know my frequency already →
+                  </button>
+                </div>
+              )}
             </motion.div>
           )}
 
