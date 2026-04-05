@@ -117,30 +117,6 @@ export default function BuzzStopEngine({ onStop }) {
     setCurrentHz(hz);
   }, [stopAll, startPrimary]);
 
-  const warmer = useCallback(() => {
-    setRangeMin(prev => {
-      setRangeMax(prevMax => {
-        const logMin = Math.log10(Math.max(1, prev));
-        const logMax = Math.log10(Math.max(1, prevMax));
-        const logSpan = logMax - logMin;
-        const hz = currentHz;
-        const logHz = Math.log10(Math.max(1, hz));
-        const nMin = Math.max(logMin, logHz - logSpan * 0.35);
-        const nMax = Math.min(logMax, logHz + logSpan * 0.35);
-        const safeMin = Math.max(20, Math.round(Math.pow(10, nMin)));
-        const safeMax = Math.min(16000, Math.round(Math.pow(10, nMax)));
-        const next = getMid(safeMin, safeMax);
-        setHistory(h => [...h, { min: prev, max: prevMax }]);
-        playHz(next);
-        if (safeMax - safeMin < 60) setTimeout(() => setPhase('fine'), 50);
-        rangeRef.current = { min: safeMin, max: safeMax };
-        return safeMax;
-      });
-      return prev; // outer setter returns same value — inner does the work
-    });
-    // Cleaner approach: just do it inline
-  }, [currentHz, playHz]);
-
   const colder = useCallback(() => {
     const { min, max } = rangeRef.current;
     const logMin = Math.log10(Math.max(1, min));
