@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Menu } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 
 // Custom BuzzStop logo mark
 const BuzzStopMark = () => (
@@ -48,9 +48,21 @@ export default function BuzzStopPage() {
       </header>
 
       {/* Push content below header */}
-      <div className="pt-14">
+      <div className="pt-14 pb-16">
         <BuzzStopEngine />
       </div>
+
+      {/* ── FOOTER ── */}
+      <footer className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-center gap-4 py-2 px-4 text-xs font-mono"
+        style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', borderTop: '1px solid rgba(34,197,94,0.1)' }}>
+        <Link to="/BuzzStopTerms" className="text-gray-600 hover:text-gray-400 transition-colors">Terms</Link>
+        <span className="text-gray-800">·</span>
+        <Link to="/BuzzStopPrivacy" className="text-gray-600 hover:text-gray-400 transition-colors">Privacy</Link>
+        <span className="text-gray-800">·</span>
+        <span className="text-gray-700">Not medical advice</span>
+        <span className="text-gray-800">·</span>
+        <span className="text-gray-700">© 2026 UF51</span>
+      </footer>
     </div>
   );
 }

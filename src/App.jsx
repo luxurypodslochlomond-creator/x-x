@@ -41,6 +41,8 @@ const TracktTermsPage = React.lazy(() => import('./pages/TracktTerms'));
 const TracktPrivacyPage = React.lazy(() => import('./pages/TracktPrivacy'));
 const TracktDashboardPage = React.lazy(() => import('./pages/TracktDashboard'));
 const BuzzStopPage = React.lazy(() => import('./pages/BuzzStop'));
+const BuzzStopTermsPage = React.lazy(() => import('./pages/BuzzStopTerms'));
+const BuzzStopPrivacyPage = React.lazy(() => import('./pages/BuzzStopPrivacy'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -109,6 +111,8 @@ const AuthenticatedApp = () => {
       <Route path="/TracktPrivacy" element={<LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper>} />
       <Route path="/TracktDashboard" element={<LayoutWrapper currentPageName="TracktDashboard"><TracktDashboardPage /></LayoutWrapper>} />
       <Route path="/BuzzStop" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPage /></LayoutWrapper>} />
+      <Route path="/BuzzStopTerms" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopTermsPage /></LayoutWrapper>} />
+      <Route path="/BuzzStopPrivacy" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPrivacyPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
