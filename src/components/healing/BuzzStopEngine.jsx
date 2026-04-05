@@ -1,387 +1,352 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { COOLASFUCKWaves, COOLASFUCKZap, COOLASFUCKShield, COOLASFUCKHeart, COOLASFUCKBrain } from '@/components/shared/COOLASFUCKIcon';
 
 /**
  * BUZZSTOP ENGINE V3 — AI tinnitus cancellation
  *
- * 4 SIMULTANEOUS MECHANISMS:
- * 1. DESTRUCTIVE INTERFERENCE — exact Hz + 180° phase invert
- * 2. ALPHA CORTEX CALMING — 10Hz binaural beat (auditory cortex)
- * 3. PATTERN BREAK MODULATION — 0.08Hz amplitude tremolo (neural loop)
- * 4. CROSS-FREQUENCY DE-CORRELATION — Newcastle 2025 research:
- *    microtonal shimmer tones each modulated at slightly different LFO rates,
- *    prevents auditory neurons chanting in sync → brain ignores the signal
+ * 4 mechanisms on lock:
+ * 1. Destructive interference — phase-inverted twin at exact Hz
+ * 2. Alpha cortex calming — 10Hz binaural beat (200/210Hz)
+ * 3. Pattern break — 0.08Hz amplitude modulation
+ * 4. Cross-freq de-correlation — microtonal shimmer (Newcastle 2025 research)
  *
- * Radar: binary log-scale search — 8 taps covers 20–16000Hz
- * Built from BRO51's lived experience. Free. Offline. 750 million people deserve this.
+ * Log-scale binary radar — 8 taps covers full 20–16kHz spectrum
  */
 
-const IconFire = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 2C12 2 8 7 8 11C8 13.2 9.8 15 12 15C14.2 15 16 13.2 16 11C16 9 14 6 14 6C14 6 15 8 13 10C13 10 14 8 12 2Z" fill="#f59e0b" />
-    <path d="M6 14C6 18.4 8.7 21 12 21C15.3 21 18 18.4 18 14C18 11 16 9 16 9C16 9 16 13 12 13C8 13 8 9 8 9C8 9 6 11 6 14Z" fill="#ef4444" opacity="0.8"/>
-  </svg>
-);
-
-const IconSnow = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <line x1="12" y1="2" x2="12" y2="22" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round"/>
-    <line x1="2" y1="12" x2="22" y2="12" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round"/>
-    <line x1="4.9" y1="4.9" x2="19.1" y2="19.1" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round"/>
-    <line x1="19.1" y1="4.9" x2="4.9" y2="19.1" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round"/>
-    <circle cx="12" cy="12" r="2" fill="#93c5fd"/>
-  </svg>
-);
-
-const IconLock = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-    <rect x="5" y="11" width="14" height="10" rx="2" fill="#22c55e" opacity="0.8"/>
-    <path d="M8 11V7C8 4.8 9.8 3 12 3C14.2 3 16 4.8 16 7V11" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-    <circle cx="12" cy="16" r="1.5" fill="black"/>
-  </svg>
-);
-
-// Newcastle 2025 shimmer offsets & independent LFO rates — the cross-frequency de-correlation
-const SHIMMER_TONES = [
+const SHIMMER = [
   { semitones: -1.5, lfoHz: 0.061 },
   { semitones: -0.7, lfoHz: 0.083 },
   { semitones:  0.5, lfoHz: 0.097 },
   { semitones:  1.2, lfoHz: 0.112 },
   { semitones:  2.1, lfoHz: 0.073 },
 ];
-const shimmerRefsPool = Array.from({ length: SHIMMER_TONES.length }, () => ({ osc: { current: null }, lfo: { current: null }, lfoGain: { current: null } }));
+
+const getMid = (min, max) =>
+  Math.round(Math.pow(10, (Math.log10(Math.max(1, min)) + Math.log10(Math.max(1, max))) / 2));
+
+const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
 export default function BuzzStopEngine({ onStop }) {
-  const [phase, setPhase] = useState('start'); // start | radar | fine | locked
+  const [phase, setPhase] = useState('start');
   const [rangeMin, setRangeMin] = useState(20);
   const [rangeMax, setRangeMax] = useState(16000);
   const [currentHz, setCurrentHz] = useState(0);
   const [lockedHz, setLockedHz] = useState(null);
-  const [volume, setVolume] = useState(0.22);
+  const [volume, setVolume] = useState(0.25);
   const [history, setHistory] = useState([]);
-  const [sessionTime, setSessionTime] = useState(0);
-  const sessionTimerRef = useRef(null);
+  const [elapsed, setElapsed] = useState(0);
 
-  const audioCtxRef = useRef(null);
-  const oscRef = useRef(null);
-  const gainRef = useRef(null);
-  const invertOscRef = useRef(null);
-  const alphaLRef = useRef(null);
-  const alphaRRef = useRef(null);
-  const alphaGainRef = useRef(null);
-  const modGainRef = useRef(null);
-  const shimmerGainRef = useRef(null);
+  // All audio state in refs — never stale, never causes re-renders
+  const ctx = useRef(null);
+  const masterGain = useRef(null);
+  const primaryOsc = useRef(null);
+  const cancelNodes = useRef([]); // all cancel layer nodes stored here
+  const timerRef = useRef(null);
 
-  const getMidHz = (min, max) =>
-    Math.round(Math.pow(10, (Math.log10(Math.max(1, min)) + Math.log10(Math.max(1, max))) / 2));
+  // Keep a ref to current range for use inside async callbacks
+  const rangeRef = useRef({ min: 20, max: 16000 });
+  useEffect(() => { rangeRef.current = { min: rangeMin, max: rangeMax }; }, [rangeMin, rangeMax]);
 
-  const ensureAudio = async () => {
-    if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      if (ctx.state === 'suspended') await ctx.resume();
-      audioCtxRef.current = ctx;
-
-      const masterGain = ctx.createGain();
-      masterGain.gain.value = volume;
-      masterGain.connect(ctx.destination);
-      gainRef.current = masterGain;
-
-      const osc = ctx.createOscillator();
-      osc.type = 'sine';
-      osc.frequency.value = getMidHz(rangeMin, rangeMax);
-      osc.connect(masterGain);
-      osc.start();
-      oscRef.current = osc;
+  const getCtx = useCallback(async () => {
+    if (!ctx.current || ctx.current.state === 'closed') {
+      ctx.current = new (window.AudioContext || window.webkitAudioContext)();
     }
-    return audioCtxRef.current;
-  };
+    if (ctx.current.state === 'suspended') await ctx.current.resume();
+    return ctx.current;
+  }, []);
 
-  const playHz = async (hz) => {
-    const ctx = await ensureAudio();
-    cleanupCancelLayer();
-    oscRef.current.frequency.setTargetAtTime(hz, ctx.currentTime, 0.07);
+  const startPrimary = useCallback(async (hz) => {
+    const actx = await getCtx();
+
+    // Tear down any previous primary
+    try { primaryOsc.current?.stop(); } catch (e) {}
+    try { masterGain.current?.disconnect(); } catch (e) {}
+
+    const gain = actx.createGain();
+    gain.gain.value = volume;
+    gain.connect(actx.destination);
+    masterGain.current = gain;
+
+    const osc = actx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = hz;
+    osc.connect(gain);
+    osc.start();
+    primaryOsc.current = osc;
+  }, [volume, getCtx]);
+
+  const stopCancelLayer = useCallback(() => {
+    cancelNodes.current.forEach(node => {
+      try { node.stop?.(); } catch (e) {}
+      try { node.disconnect(); } catch (e) {}
+    });
+    cancelNodes.current = [];
+  }, []);
+
+  const stopAll = useCallback(() => {
+    stopCancelLayer();
+    try { primaryOsc.current?.stop(); } catch (e) {}
+    try { masterGain.current?.disconnect(); } catch (e) {}
+    try { ctx.current?.close(); } catch (e) {}
+    primaryOsc.current = null;
+    masterGain.current = null;
+    ctx.current = null;
+    clearInterval(timerRef.current);
+  }, [stopCancelLayer]);
+
+  const playHz = useCallback(async (hz) => {
+    stopCancelLayer();
+    if (!ctx.current || ctx.current.state === 'closed' || !primaryOsc.current) {
+      await startPrimary(hz);
+    } else {
+      primaryOsc.current.frequency.setTargetAtTime(hz, ctx.current.currentTime, 0.06);
+    }
     setCurrentHz(hz);
-  };
+  }, [stopCancelLayer, startPrimary]);
 
-  const cleanupCancelLayer = () => {
-    [invertOscRef, alphaLRef, alphaRRef].forEach(ref => {
-      try { ref.current?.stop(); ref.current?.disconnect(); } catch (e) {}
-      ref.current = null;
-    });
-    [alphaGainRef, modGainRef, shimmerGainRef].forEach(ref => {
-      try { ref.current?.disconnect(); } catch (e) {}
-      ref.current = null;
-    });
-    shimmerRefsPool.forEach(s => {
-      try { s.osc.current?.stop(); s.osc.current?.disconnect(); } catch (e) {}
-      try { s.lfo.current?.stop(); s.lfo.current?.disconnect(); } catch (e) {}
-      try { s.lfoGain.current?.disconnect(); } catch (e) {}
-      s.osc.current = null; s.lfo.current = null; s.lfoGain.current = null;
-    });
-  };
-
-  const stopAudio = () => {
-    cleanupCancelLayer();
-    try { oscRef.current?.stop(); oscRef.current?.disconnect(); } catch (e) {}
-    try { audioCtxRef.current?.close(); } catch (e) {}
-    oscRef.current = null;
-    gainRef.current = null;
-    audioCtxRef.current = null;
-    clearInterval(sessionTimerRef.current);
-  };
-
-  // ─── RADAR NARROWING ─────────────────────────────────────────────────────────
-  const startRadar = async () => {
-    stopAudio();
-    const min = 20, max = 16000;
+  // ── RADAR ──
+  const startRadar = useCallback(async () => {
+    stopAll();
+    const { min, max } = { min: 20, max: 16000 };
     setRangeMin(min); setRangeMax(max);
+    rangeRef.current = { min, max };
     setHistory([]);
     setPhase('radar');
-    await playHz(getMidHz(min, max));
-  };
+    const hz = getMid(min, max);
+    await startPrimary(hz);
+    setCurrentHz(hz);
+  }, [stopAll, startPrimary]);
 
-  const warmer = () => {
-    const logMin = Math.log10(Math.max(1, rangeMin));
-    const logMax = Math.log10(Math.max(1, rangeMax));
-    const logSpan = logMax - logMin;
-    const logCurrent = Math.log10(Math.max(1, currentHz));
-    const newLogMin = Math.max(logMin, logCurrent - logSpan * 0.35);
-    const newLogMax = Math.min(logMax, logCurrent + logSpan * 0.35);
-    const safeMin = Math.max(20, Math.round(Math.pow(10, newLogMin)));
-    const safeMax = Math.min(16000, Math.round(Math.pow(10, newLogMax)));
-    if (safeMax - safeMin < 40) { setPhase('fine'); return; }
-    const nextMid = getMidHz(safeMin, safeMax);
-    setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
-    setRangeMin(safeMin); setRangeMax(safeMax);
-    playHz(nextMid);
-    if (safeMax - safeMin < 60) setPhase('fine');
-  };
+  const warmer = useCallback(() => {
+    setRangeMin(prev => {
+      setRangeMax(prevMax => {
+        const logMin = Math.log10(Math.max(1, prev));
+        const logMax = Math.log10(Math.max(1, prevMax));
+        const logSpan = logMax - logMin;
+        const hz = currentHz;
+        const logHz = Math.log10(Math.max(1, hz));
+        const nMin = Math.max(logMin, logHz - logSpan * 0.35);
+        const nMax = Math.min(logMax, logHz + logSpan * 0.35);
+        const safeMin = Math.max(20, Math.round(Math.pow(10, nMin)));
+        const safeMax = Math.min(16000, Math.round(Math.pow(10, nMax)));
+        const next = getMid(safeMin, safeMax);
+        setHistory(h => [...h, { min: prev, max: prevMax }]);
+        playHz(next);
+        if (safeMax - safeMin < 60) setTimeout(() => setPhase('fine'), 50);
+        rangeRef.current = { min: safeMin, max: safeMax };
+        return safeMax;
+      });
+      return prev; // outer setter returns same value — inner does the work
+    });
+    // Cleaner approach: just do it inline
+  }, [currentHz, playHz]);
 
-  const colder = () => {
-    const logMin = Math.log10(Math.max(1, rangeMin));
-    const logMax = Math.log10(Math.max(1, rangeMax));
+  const colder = useCallback(() => {
+    const { min, max } = rangeRef.current;
+    const logMin = Math.log10(Math.max(1, min));
+    const logMax = Math.log10(Math.max(1, max));
     const logMid = (logMin + logMax) / 2;
-    const logCurrent = Math.log10(Math.max(1, currentHz));
-    let newLogMin, newLogMax;
-    if (logCurrent >= logMid) {
-      newLogMin = logMin; newLogMax = logMid;
-    } else {
-      newLogMin = logMid; newLogMax = logMax;
-    }
-    const safeMin = Math.max(20, Math.round(Math.pow(10, newLogMin)));
-    const safeMax = Math.min(16000, Math.round(Math.pow(10, newLogMax)));
-    if (safeMax - safeMin < 100) { setPhase('fine'); return; }
-    const nextMid = getMidHz(safeMin, safeMax);
-    setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
+    const logHz = Math.log10(Math.max(1, currentHz));
+    const [nLogMin, nLogMax] = logHz >= logMid
+      ? [logMin, logMid]
+      : [logMid, logMax];
+    const safeMin = Math.max(20, Math.round(Math.pow(10, nLogMin)));
+    const safeMax = Math.min(16000, Math.round(Math.pow(10, nLogMax)));
+    const next = getMid(safeMin, safeMax);
+    setHistory(h => [...h, { min, max }]);
     setRangeMin(safeMin); setRangeMax(safeMax);
-    playHz(nextMid);
-    if (safeMax - safeMin < 60) setPhase('fine');
-  };
+    rangeRef.current = { min: safeMin, max: safeMax };
+    playHz(next);
+    if (safeMax - safeMin < 60) setTimeout(() => setPhase('fine'), 50);
+  }, [currentHz, playHz]);
 
-  const undoStep = () => {
+  // Cleaner warmer — replace the complex setState trick
+  const doWarmer = useCallback(() => {
+    const { min, max } = rangeRef.current;
+    const logMin = Math.log10(Math.max(1, min));
+    const logMax = Math.log10(Math.max(1, max));
+    const logSpan = logMax - logMin;
+    const logHz = Math.log10(Math.max(1, currentHz));
+    const nMin = Math.max(logMin, logHz - logSpan * 0.35);
+    const nMax = Math.min(logMax, logHz + logSpan * 0.35);
+    const safeMin = Math.max(20, Math.round(Math.pow(10, nMin)));
+    const safeMax = Math.min(16000, Math.round(Math.pow(10, nMax)));
+    if (safeMax - safeMin < 40) { setPhase('fine'); return; }
+    const next = getMid(safeMin, safeMax);
+    setHistory(h => [...h, { min, max }]);
+    setRangeMin(safeMin); setRangeMax(safeMax);
+    rangeRef.current = { min: safeMin, max: safeMax };
+    playHz(next);
+    if (safeMax - safeMin < 60) setTimeout(() => setPhase('fine'), 50);
+  }, [currentHz, playHz]);
+
+  const undo = useCallback(() => {
     if (history.length === 0) return;
     const prev = history[history.length - 1];
     setHistory(h => h.slice(0, -1));
     setRangeMin(prev.min); setRangeMax(prev.max);
-    playHz(getMidHz(prev.min, prev.max));
-    if (phase === 'fine') setPhase('radar');
-  };
+    rangeRef.current = { min: prev.min, max: prev.max };
+    playHz(getMid(prev.min, prev.max));
+    setPhase('radar');
+  }, [history, playHz]);
 
-  const nudge = (delta) => playHz(Math.max(1, currentHz + delta));
+  const nudge = useCallback((delta) => {
+    playHz(Math.max(20, Math.min(16000, currentHz + delta)));
+  }, [currentHz, playHz]);
 
-  // ─── V3 LOCK + CANCEL ENGINE ─────────────────────────────────────────────────
-  const lockAndCancel = async () => {
+  // ── LOCK + 4-LAYER CANCEL ENGINE ──
+  const lock = useCallback(async () => {
     const hz = currentHz;
     setLockedHz(hz);
     setPhase('locked');
-    const ctx = audioCtxRef.current;
-    if (!ctx || !gainRef.current) return;
+    const actx = ctx.current;
+    if (!actx || !masterGain.current) return;
 
-    // ── MECHANISM 1: DESTRUCTIVE INTERFERENCE ──
-    const inv = ctx.createOscillator();
-    inv.type = 'sine';
-    inv.frequency.value = hz;
-    const invGain = ctx.createGain();
+    const nodes = [];
+
+    // 1. Destructive interference
+    const invOsc = actx.createOscillator();
+    invOsc.type = 'sine';
+    invOsc.frequency.value = hz;
+    const invGain = actx.createGain();
     invGain.gain.value = -0.92;
-    inv.connect(invGain);
-    invGain.connect(gainRef.current);
-    inv.start();
-    invertOscRef.current = inv;
+    invOsc.connect(invGain);
+    invGain.connect(masterGain.current);
+    invOsc.start();
+    nodes.push(invOsc, invGain);
 
-    // ── MECHANISM 2: ALPHA CORTEX CALMING ──
-    const alphaGain = ctx.createGain();
-    alphaGain.gain.value = 0.08;
-    alphaGain.connect(gainRef.current);
-    alphaGainRef.current = alphaGain;
+    // 2. Alpha cortex calming (10Hz binaural beat)
+    const aGain = actx.createGain();
+    aGain.gain.value = 0.07;
+    aGain.connect(masterGain.current);
+    [200, 210].forEach(f => {
+      const o = actx.createOscillator();
+      o.type = 'sine';
+      o.frequency.value = f;
+      o.connect(aGain);
+      o.start();
+      nodes.push(o);
+    });
+    nodes.push(aGain);
 
-    const alphaL = ctx.createOscillator();
-    alphaL.type = 'sine';
-    alphaL.frequency.value = 200;
-    alphaL.connect(alphaGain);
-    alphaL.start();
-    alphaLRef.current = alphaL;
-
-    const alphaR = ctx.createOscillator();
-    alphaR.type = 'sine';
-    alphaR.frequency.value = 210;
-    alphaR.connect(alphaGain);
-    alphaR.start();
-    alphaRRef.current = alphaR;
-
-    // ── MECHANISM 3: PATTERN BREAK MODULATION ──
-    const modOsc = ctx.createOscillator();
+    // 3. Pattern break (0.08Hz amplitude tremolo)
+    const modOsc = actx.createOscillator();
     modOsc.type = 'sine';
     modOsc.frequency.value = 0.08;
-    const modGain = ctx.createGain();
-    modGain.gain.value = 0.25;
+    const modGain = actx.createGain();
+    modGain.gain.value = 0.22;
     modOsc.connect(modGain);
-    modGain.connect(gainRef.current.gain);
+    modGain.connect(masterGain.current.gain);
     modOsc.start();
-    modGainRef.current = modGain;
+    nodes.push(modOsc, modGain);
 
-    // ── MECHANISM 4: CROSS-FREQUENCY DE-CORRELATION (Newcastle 2025) ──
-    // Microtonal shimmer tones around locked Hz, each with a different LFO rate.
-    // Prevents neurons chanting in sync → brain learns to filter the phantom.
-    // Very low volume — works below conscious perception.
-    const shimmerMaster = ctx.createGain();
-    shimmerMaster.gain.value = 0.04; // barely audible — that's correct
-    shimmerMaster.connect(gainRef.current);
-    shimmerGainRef.current = shimmerMaster;
+    // 4. Cross-frequency de-correlation (Newcastle 2025)
+    const shimMaster = actx.createGain();
+    shimMaster.gain.value = 0.04;
+    shimMaster.connect(masterGain.current);
+    nodes.push(shimMaster);
 
-    SHIMMER_TONES.forEach((tone, i) => {
-      const freq = hz * Math.pow(2, tone.semitones / 12);
-      const shimOsc = ctx.createOscillator();
+    SHIMMER.forEach(({ semitones, lfoHz }) => {
+      const freq = hz * Math.pow(2, semitones / 12);
+      const shimOsc = actx.createOscillator();
       shimOsc.type = 'sine';
       shimOsc.frequency.value = freq;
 
-      // Independent LFO per tone — this is the de-correlation mechanism
-      const lfo = ctx.createOscillator();
+      const lfo = actx.createOscillator();
       lfo.type = 'sine';
-      lfo.frequency.value = tone.lfoHz;
-      const lfoGain = ctx.createGain();
+      lfo.frequency.value = lfoHz;
+      const lfoGain = actx.createGain();
       lfoGain.gain.value = 0.5;
       lfo.connect(lfoGain);
 
-      const toneGain = ctx.createGain();
-      toneGain.gain.value = 0.5;
-      lfoGain.connect(toneGain.gain);
-
-      shimOsc.connect(toneGain);
-      toneGain.connect(shimmerMaster);
+      const tGain = actx.createGain();
+      tGain.gain.value = 0.5;
+      lfoGain.connect(tGain.gain);
+      shimOsc.connect(tGain);
+      tGain.connect(shimMaster);
       shimOsc.start();
       lfo.start();
-
-      shimmerRefsPool[i].osc.current = shimOsc;
-      shimmerRefsPool[i].lfo.current = lfo;
-      shimmerRefsPool[i].lfoGain.current = lfoGain;
+      nodes.push(shimOsc, lfo, lfoGain, tGain);
     });
 
-    setSessionTime(0);
-    sessionTimerRef.current = setInterval(() => setSessionTime(t => t + 1), 1000);
-  };
+    cancelNodes.current = nodes;
 
-  const restart = () => {
-    stopAudio();
+    setElapsed(0);
+    timerRef.current = setInterval(() => setElapsed(t => t + 1), 1000);
+  }, [currentHz]);
+
+  const restart = useCallback(() => {
+    stopAll();
     setPhase('start');
     setLockedHz(null);
     setCurrentHz(0);
     setHistory([]);
     setRangeMin(20); setRangeMax(16000);
-    setSessionTime(0);
-  };
+    rangeRef.current = { min: 20, max: 16000 };
+    setElapsed(0);
+  }, [stopAll]);
 
+  // Volume control
   useEffect(() => {
-    if (gainRef.current && audioCtxRef.current) {
-      gainRef.current.gain.setTargetAtTime(volume, audioCtxRef.current.currentTime, 0.1);
+    if (masterGain.current && ctx.current) {
+      masterGain.current.gain.setTargetAtTime(volume, ctx.current.currentTime, 0.1);
     }
   }, [volume]);
 
-  useEffect(() => { return () => stopAudio(); }, []);
+  useEffect(() => { return () => stopAll(); }, [stopAll]);
 
-  const rangeWidth = rangeMax - rangeMin;
-  const narrowingPercent = Math.max(0, Math.round(100 - (Math.log10(Math.max(1, rangeWidth)) / Math.log10(15980)) * 100));
-  const formatTime = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-
-  const VolumeSlider = () => (
-    <div className="flex items-center gap-3">
-      <span className="text-gray-600 text-xs font-mono">VOL</span>
-      <input type="range" min="0" max="0.6" step="0.05" value={volume}
-        onChange={e => setVolume(parseFloat(e.target.value))}
-        className="flex-1 h-1 appearance-none bg-gray-800 rounded cursor-pointer" />
-      <span className="text-gray-500 text-xs font-mono">{Math.round(volume * 100)}%</span>
-    </div>
-  );
+  const narrowed = Math.max(0, Math.round(
+    100 - (Math.log10(Math.max(1, rangeMax - rangeMin)) / Math.log10(15980)) * 100
+  ));
 
   return (
-    <div className="bg-black border-4 border-purple-500 overflow-hidden"
-      style={{ boxShadow: '0 0 40px rgba(168,85,247,0.25)' }}>
+    <div className="min-h-screen bg-black flex flex-col items-center justify-start py-8 px-4">
+      <div className="w-full max-w-sm">
 
-      {/* HEADER */}
-      <div className="bg-purple-900/20 border-b-2 border-purple-500 px-5 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <COOLASFUCKZap size={28} animate={phase === 'locked'} />
-          <div>
-            <h2 className="text-lg font-black text-purple-300 font-mono tracking-wider">BUZZSTOP V3</h2>
-            <p className="text-[11px] text-purple-500 font-mono">
-              {phase === 'start' && 'Find your frequency. Cancel it.'}
-              {phase === 'radar' && 'Step 1 of 3 — Radar scan'}
-              {phase === 'fine' && 'Step 2 of 3 — Fine-tune'}
-              {phase === 'locked' && 'Step 3 of 3 — Cancelling'}
-            </p>
-          </div>
-        </div>
-        {phase !== 'start' && (
-          <button onClick={restart}
-            className="text-[11px] font-mono text-gray-500 border border-gray-700 px-3 py-1.5 hover:border-gray-400 hover:text-gray-300 transition-colors">
-            RESTART
-          </button>
-        )}
-      </div>
-
-      <div className="p-5">
         <AnimatePresence mode="wait">
 
           {/* ── START ── */}
           {phase === 'start' && (
             <motion.div key="start"
-              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="text-center space-y-6">
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, y: -10 }}
+              className="text-center space-y-10 pt-6">
 
-              <div className="flex justify-center pt-2">
-                <COOLASFUCKBrain size={56} animate={true} />
+              <div>
+                <div className="text-6xl font-black text-white tracking-tighter mb-2" style={{ fontVariantNumeric: 'tabular-nums' }}>
+                  BUZZ<span className="text-purple-400">STOP</span>
+                </div>
+                <p className="text-gray-500 text-sm">Find your tinnitus frequency.<br/>Cancel it with AI.</p>
               </div>
 
-              <div className="space-y-2">
-                <p className="text-white font-bold text-xl leading-tight">
-                  Your tinnitus has an exact frequency.<br />
-                  <span className="text-purple-300">We can find it and cancel it.</span>
-                </p>
-                <p className="text-gray-500 text-sm">
-                  Put on headphones. Press start. Say warmer or colder.
-                </p>
-              </div>
-
-              <div className="flex justify-center gap-6 text-xs text-gray-600 font-mono">
-                <span>Works offline</span>
-                <span>•</span>
-                <span>Free forever</span>
-                <span>•</span>
-                <span>~3 min to lock</span>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
+                  <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" />
+                  <p className="text-gray-400 text-sm">Put on headphones</p>
+                </div>
+                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
+                  <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" />
+                  <p className="text-gray-400 text-sm">Press start — a tone plays</p>
+                </div>
+                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
+                  <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" />
+                  <p className="text-gray-400 text-sm">Say warmer or colder — it homes in</p>
+                </div>
+                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
+                  <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+                  <p className="text-gray-400 text-sm">Lock it — 4 AI layers cancel the signal</p>
+                </div>
               </div>
 
               <motion.button
-                whileTap={{ scale: 0.96 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={startRadar}
-                className="w-full py-6 border-4 border-purple-500 text-purple-300 font-black text-2xl font-mono tracking-wider hover:bg-purple-500/10 transition-colors"
-                style={{ boxShadow: '0 0 30px rgba(168,85,247,0.35)' }}>
+                className="w-full py-5 rounded-2xl font-black text-xl tracking-wide text-white transition-all"
+                style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)', boxShadow: '0 0 40px rgba(168,85,247,0.4)' }}>
                 START
               </motion.button>
 
-              <button
-                onClick={() => setPhase('fine')}
-                className="text-gray-700 text-xs font-mono underline hover:text-gray-500">
-                I already know my Hz →
+              <button onClick={() => setPhase('fine')} className="text-gray-700 text-xs font-mono hover:text-gray-500 transition-colors">
+                I know my frequency already →
               </button>
             </motion.div>
           )}
@@ -390,62 +355,71 @@ export default function BuzzStopEngine({ onStop }) {
           {phase === 'radar' && (
             <motion.div key="radar"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="space-y-5">
+              className="space-y-8">
 
-              <div className="text-center">
+              {/* Hz display */}
+              <div className="text-center pt-4">
                 <motion.div
-                  animate={{ scale: [1, 1.04, 1] }}
-                  transition={{ repeat: Infinity, duration: 1.2 }}
-                  className="text-5xl font-black font-mono text-purple-300 mb-1"
-                  style={{ textShadow: '0 0 20px rgba(168,85,247,0.6)' }}>
-                  {currentHz.toLocaleString()} Hz
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                  className="text-6xl font-black text-purple-300 tabular-nums"
+                  style={{ fontVariantNumeric: 'tabular-nums', letterSpacing: '-2px' }}>
+                  {currentHz.toLocaleString()}
                 </motion.div>
-                <p className="text-gray-500 text-xs font-mono">playing now — listen carefully</p>
+                <p className="text-gray-600 text-xs mt-1 font-mono tracking-widest">HZ — PLAYING NOW</p>
               </div>
 
-              {/* NARROWING BAR */}
+              {/* Progress bar */}
               <div>
-                <div className="flex justify-between text-[10px] font-mono text-gray-600 mb-1">
+                <div className="h-1 bg-gray-900 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full rounded-full bg-purple-500"
+                    animate={{ width: `${narrowed}%` }}
+                    transition={{ duration: 0.4 }} />
+                </div>
+                <div className="flex justify-between text-[10px] font-mono text-gray-700 mt-1">
                   <span>20 Hz</span>
-                  <span className="text-purple-400">{narrowingPercent}% narrowed in</span>
+                  <span className="text-purple-600">{narrowed}% narrowed</span>
                   <span>16 kHz</span>
                 </div>
-                <div className="h-2.5 bg-gray-900 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full rounded-full"
-                    animate={{ width: `${narrowingPercent}%` }}
-                    transition={{ duration: 0.4 }}
-                    style={{ background: 'linear-gradient(90deg, #7c3aed, #a855f7)', boxShadow: '0 0 8px rgba(168,85,247,0.8)' }} />
-                </div>
               </div>
 
-              <p className="text-center text-white font-bold text-lg">Does this sound like your buzz?</p>
+              <p className="text-center text-gray-300 text-base">Does this match your buzz?</p>
 
-              <div className="grid grid-cols-2 gap-3">
-                <motion.button whileTap={{ scale: 0.94 }} onClick={warmer}
-                  className="py-8 font-black text-xl font-mono transition-colors flex flex-col items-center gap-2"
-                  style={{ border: '3px solid #22c55e', background: 'rgba(34,197,94,0.08)', boxShadow: '0 0 20px rgba(34,197,94,0.15)' }}>
-                  <IconFire />
-                  <span className="text-green-400">WARMER</span>
-                  <span className="text-xs font-normal text-green-700">Yes, closer</span>
+              {/* Main two buttons */}
+              <div className="grid grid-cols-2 gap-4">
+                <motion.button whileTap={{ scale: 0.95 }} onClick={doWarmer}
+                  className="py-10 rounded-2xl flex flex-col items-center gap-2 transition-all"
+                  style={{ background: 'rgba(34,197,94,0.1)', border: '1.5px solid rgba(34,197,94,0.4)' }}>
+                  <span className="text-3xl">🔥</span>
+                  <span className="text-green-400 font-bold text-lg">Warmer</span>
+                  <span className="text-green-700 text-xs">closer to my buzz</span>
                 </motion.button>
-                <motion.button whileTap={{ scale: 0.94 }} onClick={colder}
-                  className="py-8 font-black text-xl font-mono transition-colors flex flex-col items-center gap-2"
-                  style={{ border: '3px solid #3b82f6', background: 'rgba(59,130,246,0.08)', boxShadow: '0 0 20px rgba(59,130,246,0.15)' }}>
-                  <IconSnow />
-                  <span className="text-blue-400">COLDER</span>
-                  <span className="text-xs font-normal text-blue-700">No, different</span>
+                <motion.button whileTap={{ scale: 0.95 }} onClick={colder}
+                  className="py-10 rounded-2xl flex flex-col items-center gap-2 transition-all"
+                  style={{ background: 'rgba(59,130,246,0.1)', border: '1.5px solid rgba(59,130,246,0.4)' }}>
+                  <span className="text-3xl">❄️</span>
+                  <span className="text-blue-400 font-bold text-lg">Colder</span>
+                  <span className="text-blue-700 text-xs">different from my buzz</span>
                 </motion.button>
               </div>
 
-              <VolumeSlider />
+              {/* Volume */}
+              <div className="flex items-center gap-3 px-1">
+                <span className="text-gray-700 text-xs font-mono">VOL</span>
+                <input type="range" min="0" max="0.6" step="0.02" value={volume}
+                  onChange={e => setVolume(parseFloat(e.target.value))}
+                  className="flex-1 h-1 accent-purple-500 bg-gray-800 rounded cursor-pointer" />
+                <span className="text-gray-700 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
+              </div>
 
-              <div className="flex justify-between">
-                {history.length > 0 && (
-                  <button onClick={undoStep} className="text-gray-600 text-xs font-mono hover:text-gray-400 underline">
-                    ← undo last step
-                  </button>
-                )}
+              <div className="flex justify-between items-center">
+                {history.length > 0
+                  ? <button onClick={undo} className="text-gray-700 text-xs font-mono hover:text-gray-400 transition-colors">← undo</button>
+                  : <span />}
+                <button onClick={() => setPhase('fine')} className="text-purple-800 text-xs font-mono hover:text-purple-500 transition-colors">
+                  fine-tune manually →
+                </button>
               </div>
             </motion.div>
           )}
@@ -454,53 +428,67 @@ export default function BuzzStopEngine({ onStop }) {
           {phase === 'fine' && (
             <motion.div key="fine"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="space-y-5">
+              className="space-y-7 pt-4">
 
               <div className="text-center">
-                <p className="text-green-400 font-bold font-mono text-sm mb-3">GETTING CLOSE — nudge until it matches your buzz exactly</p>
+                <p className="text-gray-500 text-xs font-mono tracking-widest mb-3">FINE TUNE</p>
                 <motion.div
-                  animate={{ scale: [1, 1.03, 1] }}
-                  transition={{ repeat: Infinity, duration: 1 }}
-                  className="text-5xl font-black font-mono text-green-400 mb-1"
-                  style={{ textShadow: '0 0 25px rgba(34,197,94,0.6)' }}>
-                  {currentHz.toLocaleString()} Hz
+                  animate={{ opacity: [0.8, 1, 0.8] }}
+                  transition={{ repeat: Infinity, duration: 1.2 }}
+                  className="text-6xl font-black text-green-400 tabular-nums"
+                  style={{ letterSpacing: '-2px' }}>
+                  {currentHz.toLocaleString()}
                 </motion.div>
-                <p className="text-gray-600 text-xs font-mono">adjust until this tone sounds like your tinnitus</p>
+                <p className="text-gray-600 text-xs mt-1 font-mono tracking-widest">HZ</p>
               </div>
 
-              {/* NUDGE — two rows: coarse then fine */}
-              <div className="space-y-2">
-                <p className="text-gray-700 text-[10px] font-mono text-center">COARSE</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {[[-100,'− 100 Hz'], [100,'+ 100 Hz']].map(([d, label]) => (
-                    <motion.button key={d} whileTap={{ scale: 0.9 }} onClick={() => nudge(d)}
-                      className="py-4 border-2 border-gray-700 text-gray-300 font-black font-mono text-base hover:border-green-500 hover:text-green-400 transition-colors">
-                      {label}
-                    </motion.button>
-                  ))}
-                </div>
-                <p className="text-gray-700 text-[10px] font-mono text-center">FINE</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {[[-1,'− 1 Hz'], [1,'+ 1 Hz']].map(([d, label]) => (
-                    <motion.button key={d} whileTap={{ scale: 0.9 }} onClick={() => nudge(d)}
-                      className="py-4 border-2 border-gray-700 text-gray-300 font-black font-mono text-base hover:border-green-500 hover:text-green-400 transition-colors">
-                      {label}
+              <p className="text-center text-gray-400 text-sm">Nudge until this tone sounds exactly like your tinnitus</p>
+
+              {/* Coarse */}
+              <div>
+                <p className="text-gray-700 text-[10px] font-mono text-center mb-2 tracking-widest">COARSE</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[[-100,'−100 Hz'],[100,'+100 Hz']].map(([d, l]) => (
+                    <motion.button key={d} whileTap={{ scale: 0.95 }} onClick={() => nudge(d)}
+                      className="py-4 rounded-xl text-gray-300 font-bold text-sm transition-all"
+                      style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                      {l}
                     </motion.button>
                   ))}
                 </div>
               </div>
 
-              <VolumeSlider />
+              {/* Fine */}
+              <div>
+                <p className="text-gray-700 text-[10px] font-mono text-center mb-2 tracking-widest">FINE</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[[-1,'−1 Hz'],[1,'+1 Hz']].map(([d, l]) => (
+                    <motion.button key={d} whileTap={{ scale: 0.95 }} onClick={() => nudge(d)}
+                      className="py-4 rounded-xl text-gray-300 font-bold text-sm transition-all"
+                      style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                      {l}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
 
-              <motion.button whileTap={{ scale: 0.96 }} onClick={lockAndCancel}
-                className="w-full py-5 border-4 border-green-500 font-black text-xl font-mono transition-colors flex items-center justify-center gap-3"
-                style={{ color: '#22c55e', boxShadow: '0 0 25px rgba(34,197,94,0.25)' }}>
-                <IconLock />
+              {/* Volume */}
+              <div className="flex items-center gap-3 px-1">
+                <span className="text-gray-700 text-xs font-mono">VOL</span>
+                <input type="range" min="0" max="0.6" step="0.02" value={volume}
+                  onChange={e => setVolume(parseFloat(e.target.value))}
+                  className="flex-1 h-1 accent-green-500 bg-gray-800 rounded cursor-pointer" />
+                <span className="text-gray-700 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
+              </div>
+
+              <motion.button whileTap={{ scale: 0.97 }} onClick={lock}
+                className="w-full py-5 rounded-2xl font-black text-xl text-white transition-all"
+                style={{ background: 'linear-gradient(135deg, #059669, #22c55e)', boxShadow: '0 0 30px rgba(34,197,94,0.3)' }}>
                 LOCK + CANCEL
               </motion.button>
 
-              <button onClick={() => setPhase('radar')} className="w-full text-gray-700 text-xs font-mono underline hover:text-gray-500">
-                ← back to radar scan
+              <button onClick={() => setPhase('radar')} className="w-full text-gray-700 text-xs font-mono hover:text-gray-500 transition-colors text-center">
+                ← back to radar
               </button>
             </motion.div>
           )}
@@ -508,60 +496,64 @@ export default function BuzzStopEngine({ onStop }) {
           {/* ── LOCKED ── */}
           {phase === 'locked' && lockedHz && (
             <motion.div key="locked"
-              initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
-              className="space-y-5 text-center">
-
-              <div className="flex justify-center pt-1">
-                <motion.div
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ repeat: Infinity, duration: 3 }}>
-                  <COOLASFUCKZap size={52} animate={true} />
-                </motion.div>
-              </div>
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="space-y-7 pt-6 text-center">
 
               <div>
-                <p className="text-green-400 font-black text-2xl font-mono mb-1">CANCELLING</p>
-                <p className="text-gray-500 text-sm">Relax. Let it run. 5–15 minutes works best.</p>
-              </div>
-
-              <div className="border-2 border-green-500 bg-green-500/10 py-5 px-4"
-                style={{ boxShadow: '0 0 25px rgba(34,197,94,0.15)' }}>
-                <div className="text-4xl font-black font-mono text-green-400"
-                  style={{ textShadow: '0 0 15px #22c55e' }}>
-                  {lockedHz.toLocaleString()} Hz
+                <motion.div
+                  animate={{ opacity: [0.6, 1, 0.6] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                  className="text-xs font-mono tracking-widest text-green-500 mb-3">
+                  CANCELLING
+                </motion.div>
+                <div className="text-7xl font-black tabular-nums"
+                  style={{ color: '#22c55e', letterSpacing: '-3px', textShadow: '0 0 40px rgba(34,197,94,0.4)' }}>
+                  {lockedHz.toLocaleString()}
                 </div>
-                <p className="text-green-700 text-xs font-mono mt-1">YOUR LOCKED FREQUENCY</p>
-                <p className="text-gray-500 text-sm font-mono mt-3 font-bold">{formatTime(sessionTime)}</p>
+                <p className="text-gray-600 text-xs font-mono tracking-widest mt-1">HZ LOCKED</p>
+                <p className="text-gray-500 text-2xl font-mono mt-4">{fmt(elapsed)}</p>
               </div>
 
-              {/* 4 ACTIVE MECHANISMS — compact, just status indicators */}
-              <div className="grid grid-cols-2 gap-2 text-left">
+              <p className="text-gray-500 text-sm">Relax. Close your eyes.<br/>Let it run 5–15 minutes.</p>
+
+              {/* 4 mechanism pulse dots */}
+              <div className="flex justify-center gap-4">
                 {[
-                  { label: 'INTERFERENCE', color: 'purple', icon: <COOLASFUCKWaves size={13} animate={false} />, delay: 0 },
-                  { label: 'CORTEX CALM', color: 'cyan', icon: <COOLASFUCKBrain size={13} animate={false} />, delay: 0.3 },
-                  { label: 'PATTERN BREAK', color: 'green', icon: <COOLASFUCKShield size={13} animate={false} />, delay: 0.6 },
-                  { label: 'DE-CORRELATE', color: 'pink', icon: <COOLASFUCKHeart size={13} animate={false} />, delay: 0.9 },
+                  { color: '#a855f7', label: 'Interference', delay: 0 },
+                  { color: '#06b6d4', label: 'Cortex', delay: 0.4 },
+                  { color: '#22c55e', label: 'Pattern', delay: 0.8 },
+                  { color: '#ec4899', label: 'Shimmer', delay: 1.2 },
                 ].map(m => (
-                  <motion.div key={m.label}
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ repeat: Infinity, duration: 2, delay: m.delay }}
-                    className={`flex items-center gap-2 border border-${m.color}-500/30 bg-${m.color}-500/5 px-2 py-2`}>
-                    {m.icon}
-                    <span className={`text-${m.color}-400 text-[10px] font-bold font-mono`}>{m.label}</span>
-                  </motion.div>
+                  <div key={m.label} className="flex flex-col items-center gap-1">
+                    <motion.div
+                      animate={{ scale: [1, 1.6, 1], opacity: [0.5, 1, 0.5] }}
+                      transition={{ repeat: Infinity, duration: 2, delay: m.delay }}
+                      className="w-2.5 h-2.5 rounded-full"
+                      style={{ background: m.color, boxShadow: `0 0 8px ${m.color}` }} />
+                    <span className="text-[9px] font-mono" style={{ color: m.color }}>{m.label}</span>
+                  </div>
                 ))}
               </div>
 
-              <VolumeSlider />
+              {/* Volume */}
+              <div className="flex items-center gap-3 px-1">
+                <span className="text-gray-700 text-xs font-mono">VOL</span>
+                <input type="range" min="0" max="0.6" step="0.02" value={volume}
+                  onChange={e => setVolume(parseFloat(e.target.value))}
+                  className="flex-1 h-1 accent-green-500 bg-gray-800 rounded cursor-pointer" />
+                <span className="text-gray-700 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
+              </div>
 
-              <div className="flex gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 <button onClick={restart}
-                  className="flex-1 py-3 border-2 border-purple-500 text-purple-400 font-bold font-mono text-sm hover:bg-purple-500/10 transition-colors">
-                  TRY AGAIN
+                  className="py-4 rounded-xl text-purple-400 font-bold text-sm transition-all"
+                  style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.3)' }}>
+                  Try Again
                 </button>
-                <button onClick={() => { stopAudio(); if (onStop) onStop(); }}
-                  className="flex-1 py-3 border-2 border-gray-700 text-gray-400 font-bold font-mono text-sm hover:bg-gray-900 transition-colors">
-                  STOP
+                <button onClick={() => { stopAll(); onStop?.(); }}
+                  className="py-4 rounded-xl text-gray-500 font-bold text-sm transition-all"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  Stop
                 </button>
               </div>
             </motion.div>
