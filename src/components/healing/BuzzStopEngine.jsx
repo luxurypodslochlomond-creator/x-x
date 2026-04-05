@@ -188,6 +188,7 @@ export default function BuzzStopEngine({ onStop }) {
     } else {
       // Hard-set value first to prevent any ramp overshooting bounds
       primaryOsc.current.frequency.cancelScheduledValues(ctx.current.currentTime);
+      primaryOsc.current.frequency.setValueAtTime(safeHz, ctx.current.currentTime);
       primaryOsc.current.frequency.setTargetAtTime(safeHz, ctx.current.currentTime, 0.06);
     }
     setCurrentHz(safeHz);

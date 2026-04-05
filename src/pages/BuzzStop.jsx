@@ -15,10 +15,11 @@ const BuzzStopMark = () => (
 );
 
 export default function BuzzStopPage() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [swReady, setSwReady] = useState(false);
-  const [testMode] = useState(() => window.location.search.includes('test=true') || window.self !== window.top);
+   const [menuOpen, setMenuOpen] = useState(false);
+   const [isOnline, setIsOnline] = useState(navigator.onLine);
+   const [swReady, setSwReady] = useState(false);
+   const [testMode] = useState(() => window.location.search.includes('test=true') || window.self !== window.top);
+   const [showEngine, setShowEngine] = useState(true);
 
   useEffect(() => {
     // Register service worker for offline support
@@ -137,9 +138,9 @@ export default function BuzzStopPage() {
       </header>
 
       {/* Content */}
-      <div className={`${swReady && !isOnline ? 'pt-20' : 'pt-14'} pb-14 transition-all`}>
-        <BuzzStopEngine />
-      </div>
+       <div className={`${swReady && !isOnline ? 'pt-20' : 'pt-14'} pb-14 transition-all`}>
+         {showEngine && <BuzzStopEngine onStop={() => setShowEngine(false)} />}
+       </div>
 
       {/* ── FOOTER ── */}
       <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2"
