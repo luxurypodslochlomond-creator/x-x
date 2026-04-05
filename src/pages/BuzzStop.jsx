@@ -1,27 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ArrowLeft, Menu, X, Scale, Eye, Info } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-
-const BuzzStopClock = () => {
-  const [time, setTime] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
-  const h = time.getHours().toString().padStart(2, '0');
-  const m = time.getMinutes().toString().padStart(2, '0');
-  const s = time.getSeconds().toString().padStart(2, '0');
-  const date = time.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
-  return (
-    <span className="font-mono text-sm font-bold tracking-widest" style={{ color: '#22c55e' }}>
-      {h}<span style={{ color: 'rgba(34,197,94,0.4)' }}>:</span>{m}<span style={{ color: 'rgba(34,197,94,0.4)' }}>:</span>{s}
-      <span className="text-xs font-normal ml-2" style={{ color: 'rgba(34,197,94,0.5)' }}>{date}</span>
-    </span>
-  );
-};
 
 const BuzzStopMark = () => (
   <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
@@ -128,8 +110,7 @@ export default function BuzzStopPage() {
       {/* ── FOOTER ── */}
       <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2"
         style={{ background: 'rgba(0,4,0,0.96)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(34,197,94,0.15)' }}>
-        <div className="flex flex-col items-center gap-0.5 max-w-2xl mx-auto">
-          <BuzzStopClock />
+        <div className="flex items-center justify-center gap-3 max-w-2xl mx-auto">
           <p className="text-xs font-mono" style={{ color: 'rgba(34,197,94,0.35)' }}>Not a medical device · family@uf51.love</p>
         </div>
       </footer>
