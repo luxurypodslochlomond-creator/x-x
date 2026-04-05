@@ -41,6 +41,7 @@ const TracktTermsPage = React.lazy(() => import('./pages/TracktTerms'));
 const TracktPrivacyPage = React.lazy(() => import('./pages/TracktPrivacy'));
 const TracktDashboardPage = React.lazy(() => import('./pages/TracktDashboard'));
 const BuzzStopPage = React.lazy(() => import('./pages/BuzzStop'));
+const BuzzStopAboutPage = React.lazy(() => import('./pages/BuzzStopAbout'));
 const BuzzStopTermsPage = React.lazy(() => import('./pages/BuzzStopTerms'));
 const BuzzStopPrivacyPage = React.lazy(() => import('./pages/BuzzStopPrivacy'));
 
@@ -111,6 +112,7 @@ const AuthenticatedApp = () => {
       <Route path="/TracktPrivacy" element={<LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper>} />
       <Route path="/TracktDashboard" element={<LayoutWrapper currentPageName="TracktDashboard"><TracktDashboardPage /></LayoutWrapper>} />
       <Route path="/BuzzStop" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPage /></LayoutWrapper>} />
+      <Route path="/BuzzStopAbout" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopAboutPage /></LayoutWrapper>} />
       <Route path="/BuzzStopTerms" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopTermsPage /></LayoutWrapper>} />
       <Route path="/BuzzStopPrivacy" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPrivacyPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />

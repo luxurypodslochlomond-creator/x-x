@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Menu, X, Scale, Eye, Info, Wifi, WifiOff } from 'lucide-react';
+import { ArrowLeft, Menu, X, Scale, Eye, Info as InfoIcon, Wifi, WifiOff } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const BuzzStopMark = () => (
@@ -104,13 +104,23 @@ export default function BuzzStopPage() {
             >
               <div className="max-w-2xl mx-auto px-4 py-4 space-y-1">
 
+                <Link to="/BuzzStopAbout" onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all"
+                  style={{ border: '1px solid rgba(34,197,94,0.15)', color: '#22c55e' }}>
+                  <Info className="w-4 h-4 flex-shrink-0" />
+                  <div>
+                    <div className="font-bold text-sm">About</div>
+                    <div className="text-xs text-gray-600">How it works · Relief vs cure · Privacy</div>
+                  </div>
+                </Link>
+
                 <Link to="/BuzzStopTerms" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all"
                   style={{ border: '1px solid rgba(34,197,94,0.15)', color: '#22c55e' }}>
                   <Scale className="w-4 h-4 flex-shrink-0" />
                   <div>
                     <div className="font-bold text-sm">Terms of Use</div>
-                    <div className="text-xs text-gray-600">How BuzzStop works + your rights</div>
+                    <div className="text-xs text-gray-600">Legal terms + safety</div>
                   </div>
                 </Link>
 
@@ -126,7 +136,7 @@ export default function BuzzStopPage() {
 
                 <div className="flex items-center gap-3 px-3 py-3 rounded-xl"
                   style={{ border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <Info className="w-4 h-4 flex-shrink-0 text-gray-600" />
+                  <InfoIcon className="w-4 h-4 flex-shrink-0 text-gray-600" />
                   <p className="text-xs text-gray-600">Not a medical device. Not medical advice. For wellbeing use only.</p>
                 </div>
 
