@@ -4,6 +4,7 @@ import { Play, Pause, Volume2, VolumeX, X, Share2, Mail, Shield, Tv, FlaskConica
 import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
 import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
+import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 
 
 /**
@@ -425,6 +426,7 @@ export default function FrequencyChamber() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showDataControls, setShowDataControls] = useState(false);
   const [currentSweepFreq, setCurrentSweepFreq] = useState(20);
+  const [showBuzzStop, setShowBuzzStop] = useState(false);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -1393,7 +1395,7 @@ export default function FrequencyChamber() {
           .map((freq) => (
           <motion.button
             key={freq.id}
-            onClick={() => play(freq)}
+            onClick={() => freq.isBuzzStop ? setShowBuzzStop(true) : play(freq)}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="p-8 border-4 bg-black hover:bg-white/5 transition-all relative text-left h-full sticky"
@@ -1743,6 +1745,26 @@ export default function FrequencyChamber() {
 
       </div>
       )}
+
+      {/* BUZZSTOP ENGINE MODAL */}
+      <AnimatePresence>
+        {showBuzzStop && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <div className="w-full max-w-md">
+              <div className="flex justify-end mb-2">
+                <button onClick={() => setShowBuzzStop(false)}
+                  className="text-gray-500 hover:text-white font-mono text-xs border border-gray-700 px-3 py-1 hover:border-gray-400 transition-colors">
+                  ✕ CLOSE
+                </button>
+              </div>
+              <BuzzStopEngine onStop={() => setShowBuzzStop(false)} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* P2P SHARE MODAL */}
       <AnimatePresence>
