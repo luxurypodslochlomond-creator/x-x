@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Menu, X, Scale, Eye, Info } from 'lucide-react';
+import { ArrowLeft, Menu, X, Scale, Eye, Info, Wifi, WifiOff } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const BuzzStopMark = () => (
@@ -16,12 +16,45 @@ const BuzzStopMark = () => (
 
 export default function BuzzStopPage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [swReady, setSwReady] = useState(false);
+
+  useEffect(() => {
+    // Register service worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/buzzstop-sw.js')
+        .then((reg) => {
+          console.log('BuzzStop offline cache ready ✓');
+          setSwReady(true);
+        })
+        .catch((err) => console.log('SW registration optional:', err));
+    }
+
+    // Track online/offline status
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white">
 
+      {/* ── OFFLINE/CACHED BADGE ── */}
+      {swReady && !isOnline && (
+        <div className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-center gap-2 py-1.5 px-4"
+          style={{ background: 'rgba(34,197,94,0.15)', borderBottom: '1px solid rgba(34,197,94,0.3)' }}>
+          <WifiOff className="w-3 h-3" style={{ color: '#22c55e' }} />
+          <span className="text-xs font-mono font-bold" style={{ color: '#22c55e' }}>OFFLINE MODE — fully cached, no internet needed</span>
+        </div>
+      )}
+
       {/* ── HEADER ── */}
-      <header className="fixed top-0 left-0 right-0 z-50"
+      <header className={`fixed ${swReady && !isOnline ? 'top-7' : 'top-0'} left-0 right-0 z-50 transition-all`}
         style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(34,197,94,0.15)' }}>
         <div className="flex items-center justify-between px-4 py-3 max-w-2xl mx-auto">
 
@@ -103,7 +136,7 @@ export default function BuzzStopPage() {
       </header>
 
       {/* Content */}
-      <div className="pt-14 pb-14">
+      <div className={`${swReady && !isOnline ? 'pt-20' : 'pt-14'} pb-14 transition-all`}>
         <BuzzStopEngine />
       </div>
 
