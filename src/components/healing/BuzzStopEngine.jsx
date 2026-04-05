@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useBuzzStopMemory } from './BuzzStopSessionMemory';
+import { useBuzzStopAnalytics } from './BuzzStopAnalytics';
+import { triggerSuccessHaptic, triggerSearchHaptic, triggerErrorHaptic } from './BuzzStopHaptics';
 
 // ── CUSTOM SVG ICONS ──────────────────────────────────────────────────────────
 
@@ -103,6 +106,9 @@ const C = {
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
 
 export default function BuzzStopEngine({ onStop }) {
+  const { saveSession, loadSession, recordEffectiveness } = useBuzzStopMemory();
+  const { trackSessionStart, trackSessionEnd, getAnalytics } = useBuzzStopAnalytics();
+
   const [phase, setPhase]           = useState('start');
   const [rangeMin, setRangeMin]     = useState(20);
   const [rangeMax, setRangeMax]     = useState(16000);
@@ -192,6 +198,7 @@ export default function BuzzStopEngine({ onStop }) {
 
   // WARMER = this tone IS the zone → zoom in around it
   const warmer = useCallback(() => {
+    triggerSearchHaptic();
     const { min, max } = rangeRef.current;
     const logMin = Math.log10(Math.max(1, min));
     const logMax = Math.log10(Math.max(1, max));
@@ -251,6 +258,14 @@ export default function BuzzStopEngine({ onStop }) {
     const hz = currentHz;
     setLockedHz(hz);
     setPhase('locked');
+    triggerSuccessHaptic();
+    
+    // Save this session for next visit
+    saveSession({ userFrequency: hz });
+    
+    // Track analytics
+    trackSessionStart(hz);
+    
     const actx = ctx.current;
     if (!actx || !masterGain.current) return;
     const nodes = [];
@@ -328,6 +343,12 @@ export default function BuzzStopEngine({ onStop }) {
   }, [currentHz, hasHeadphones]);
 
   const restart = useCallback(() => {
+    // Track effectiveness before stopping
+    if (elapsed > 0) {
+      recordEffectiveness(elapsed > 300 ? 75 : elapsed > 60 ? 50 : 25);
+      trackSessionEnd(elapsed > 300 ? 75 : elapsed > 60 ? 50 : 25);
+    }
+    
     stopAll();
     setPhase('start');
     setLockedHz(null);
@@ -337,7 +358,7 @@ export default function BuzzStopEngine({ onStop }) {
     rangeRef.current = { min: 20, max: 16000 };
     setElapsed(0);
     setHasHeadphones(null);
-  }, [stopAll]);
+  }, [stopAll, elapsed, recordEffectiveness, trackSessionEnd]);
 
   useEffect(() => {
     if (masterGain.current && ctx.current) {

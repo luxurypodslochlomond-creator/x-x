@@ -1,78 +1,95 @@
-// ── BUZZSTOP SERVICE WORKER ──
-// Zero-tracking, offline-first tinnitus cancellation
-// Cache all assets on first visit — works forever offline
-
+// BuzzStop Service Worker - Offline-First Audio Healing
 const CACHE_NAME = 'buzzstop-v1';
-const ASSETS = [
+const ASSETS_TO_CACHE = [
   '/',
-  '/BuzzStop',
   '/index.html',
-  // Core JS/CSS will be cached automatically on request
+  '/BuzzStop',
 ];
 
-self.addEventListener('install', (e) => {
-  console.log('[BuzzStop SW] Installing...');
-  e.waitUntil(
+// Install: cache essential assets
+self.addEventListener('install', (event) => {
+  event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS).catch(() => {
-        console.log('[BuzzStop SW] Some assets unavailable, continuing anyway');
+      return cache.addAll(ASSETS_TO_CACHE).catch(() => {
+        // Graceful fail - assets will be cached on first load
       });
     })
   );
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (e) => {
-  console.log('[BuzzStop SW] Activating...');
-  e.waitUntil(
-    caches.keys().then((names) => {
+// Activate: clean up old caches
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        names.map((name) => {
-          if (name !== CACHE_NAME) {
-            console.log('[BuzzStop SW] Deleting old cache:', name);
-            return caches.delete(name);
-          }
-        })
+        cacheNames
+          .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
       );
     })
   );
   self.clients.claim();
 });
 
-self.addEventListener('fetch', (e) => {
-  // Skip non-GET requests and external APIs
-  if (e.request.method !== 'GET') return;
-  if (e.request.url.includes('stripe') || e.request.url.includes('analytics') || e.request.url.includes('tracking')) {
-    return; // Don't cache tracking
+// Fetch: serve from cache, fallback to network
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+
+  // Block all tracking/analytics requests
+  if (
+    request.url.includes('analytics') ||
+    request.url.includes('tracking') ||
+    request.url.includes('gtag') ||
+    request.url.includes('facebook.com') ||
+    request.url.includes('google-analytics')
+  ) {
+    event.respondWith(new Response('Blocked', { status: 403 }));
+    return;
   }
 
-  // Cache first, fallback to network
-  e.respondWith(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(e.request).then((response) => {
-        if (response) {
+  // Network-first for HTML (but cache fallback for offline)
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const cache = caches.open(CACHE_NAME);
+            cache.then((c) => c.put(request, response.clone()));
+          }
           return response;
-        }
-        return fetch(e.request)
-          .then((response) => {
-            // Cache successful responses
-            if (response && response.status === 200 && e.request.method === 'GET') {
-              cache.put(e.request, response.clone());
-            }
-            return response;
-          })
-          .catch(() => {
-            // Return cached version if network fails
-            return cache.match(e.request);
-          });
-      });
-    })
-  );
-});
-
-// Message handler for manual cache updates
-self.addEventListener('message', (e) => {
-  if (e.data && e.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
+        })
+        .catch(() => {
+          return caches.match(request);
+        })
+    );
+    return;
   }
+
+  // Cache-first for assets (images, CSS, JS)
+  if (request.destination === 'style' || request.destination === 'script' || request.destination === 'image') {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        return cached || fetch(request).then((response) => {
+          const cache = caches.open(CACHE_NAME);
+          cache.then((c) => c.put(request, response.clone()));
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // Default: network + cache fallback
+  event.respondWith(
+    fetch(request)
+      .then((response) => {
+        if (response.ok && (request.method === 'GET')) {
+          const cache = caches.open(CACHE_NAME);
+          cache.then((c) => c.put(request, response.clone()));
+        }
+        return response;
+      })
+      .catch(() => caches.match(request))
+  );
 });
