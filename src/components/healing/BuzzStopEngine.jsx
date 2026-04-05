@@ -2,15 +2,15 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * BUZZSTOP ENGINE V3 — AI tinnitus cancellation
+ * BUZZSTOP ENGINE V4
  *
- * 4 mechanisms on lock:
- * 1. Destructive interference — phase-inverted twin at exact Hz
- * 2. Alpha cortex calming — 10Hz binaural beat (200/210Hz)
- * 3. Pattern break — 0.08Hz amplitude modulation
- * 4. Cross-freq de-correlation — microtonal shimmer (Newcastle 2025 research)
+ * WARM/COLD logic:
+ * - "Warmer" = the current tone IS close to your tinnitus → ZOOM IN around it
+ * - "Colder" = the current tone is NOT like your tinnitus → ELIMINATE this half, play the other half
  *
- * Log-scale binary radar — 8 taps covers full 20–16kHz spectrum
+ * Binary search: always split the current range in half (log scale).
+ * - Colder: discard the half containing current tone, play midpoint of other half
+ * - Warmer: zoom into the half containing current tone (narrower search window)
  */
 
 const SHIMMER = [
@@ -21,6 +21,7 @@ const SHIMMER = [
   { semitones:  2.1, lfoHz: 0.073 },
 ];
 
+// Geometric midpoint (log scale)
 const getMid = (min, max) =>
   Math.round(Math.pow(10, (Math.log10(Math.max(1, min)) + Math.log10(Math.max(1, max))) / 2));
 
@@ -36,15 +37,13 @@ export default function BuzzStopEngine({ onStop }) {
   const [history, setHistory] = useState([]);
   const [elapsed, setElapsed] = useState(0);
 
-  // All audio state in refs — never stale, never causes re-renders
   const ctx = useRef(null);
   const masterGain = useRef(null);
   const primaryOsc = useRef(null);
-  const cancelNodes = useRef([]); // all cancel layer nodes stored here
+  const cancelNodes = useRef([]);
   const timerRef = useRef(null);
-
-  // Keep a ref to current range for use inside async callbacks
   const rangeRef = useRef({ min: 20, max: 16000 });
+
   useEffect(() => { rangeRef.current = { min: rangeMin, max: rangeMax }; }, [rangeMin, rangeMax]);
 
   const getCtx = useCallback(async () => {
@@ -57,8 +56,6 @@ export default function BuzzStopEngine({ onStop }) {
 
   const startPrimary = useCallback(async (hz) => {
     const actx = await getCtx();
-
-    // Tear down any previous primary
     try { primaryOsc.current?.stop(); } catch (e) {}
     try { masterGain.current?.disconnect(); } catch (e) {}
 
@@ -96,18 +93,18 @@ export default function BuzzStopEngine({ onStop }) {
 
   const playHz = useCallback(async (hz) => {
     stopCancelLayer();
+    const safeHz = Math.max(20, Math.min(16000, Math.round(hz)));
     if (!ctx.current || ctx.current.state === 'closed' || !primaryOsc.current) {
-      await startPrimary(hz);
+      await startPrimary(safeHz);
     } else {
-      primaryOsc.current.frequency.setTargetAtTime(hz, ctx.current.currentTime, 0.06);
+      primaryOsc.current.frequency.setTargetAtTime(safeHz, ctx.current.currentTime, 0.06);
     }
-    setCurrentHz(hz);
+    setCurrentHz(safeHz);
   }, [stopCancelLayer, startPrimary]);
 
-  // ── RADAR ──
   const startRadar = useCallback(async () => {
     stopAll();
-    const { min, max } = { min: 20, max: 16000 };
+    const min = 20, max = 16000;
     setRangeMin(min); setRangeMax(max);
     rangeRef.current = { min, max };
     setHistory([]);
@@ -117,17 +114,24 @@ export default function BuzzStopEngine({ onStop }) {
     setCurrentHz(hz);
   }, [stopAll, startPrimary]);
 
-  const colder = useCallback(() => {
+  // WARMER = this tone IS close → zoom in around the current tone
+  const warmer = useCallback(() => {
     const { min, max } = rangeRef.current;
     const logMin = Math.log10(Math.max(1, min));
     const logMax = Math.log10(Math.max(1, max));
-    const logMid = (logMin + logMax) / 2;
     const logHz = Math.log10(Math.max(1, currentHz));
-    const [nLogMin, nLogMax] = logHz >= logMid
-      ? [logMin, logMid]
-      : [logMid, logMax];
+    const logSpan = logMax - logMin;
+
+    // Zoom in: keep current tone roughly centred, shrink span by ~50%
+    const newHalfSpan = logSpan * 0.25;
+    const nLogMin = Math.max(logMin, logHz - newHalfSpan);
+    const nLogMax = Math.min(logMax, logHz + newHalfSpan);
+
     const safeMin = Math.max(20, Math.round(Math.pow(10, nLogMin)));
     const safeMax = Math.min(16000, Math.round(Math.pow(10, nLogMax)));
+
+    if (safeMax - safeMin < 40) { setPhase('fine'); return; }
+
     const next = getMid(safeMin, safeMax);
     setHistory(h => [...h, { min, max }]);
     setRangeMin(safeMin); setRangeMax(safeMax);
@@ -136,19 +140,31 @@ export default function BuzzStopEngine({ onStop }) {
     if (safeMax - safeMin < 60) setTimeout(() => setPhase('fine'), 50);
   }, [currentHz, playHz]);
 
-  // Cleaner warmer — replace the complex setState trick
-  const doWarmer = useCallback(() => {
+  // COLDER = this tone is NOT it → split range, discard the half with current tone, play other half
+  const colder = useCallback(() => {
     const { min, max } = rangeRef.current;
     const logMin = Math.log10(Math.max(1, min));
     const logMax = Math.log10(Math.max(1, max));
-    const logSpan = logMax - logMin;
+    const logMid = (logMin + logMax) / 2;
     const logHz = Math.log10(Math.max(1, currentHz));
-    const nMin = Math.max(logMin, logHz - logSpan * 0.35);
-    const nMax = Math.min(logMax, logHz + logSpan * 0.35);
-    const safeMin = Math.max(20, Math.round(Math.pow(10, nMin)));
-    const safeMax = Math.min(16000, Math.round(Math.pow(10, nMax)));
-    if (safeMax - safeMin < 40) { setPhase('fine'); return; }
+
+    // Current tone is in the lower half → explore upper half
+    // Current tone is in the upper half → explore lower half
+    let nLogMin, nLogMax;
+    if (logHz <= logMid) {
+      // tone is in lower half → discard lower, go upper
+      nLogMin = logMid;
+      nLogMax = logMax;
+    } else {
+      // tone is in upper half → discard upper, go lower
+      nLogMin = logMin;
+      nLogMax = logMid;
+    }
+
+    const safeMin = Math.max(20, Math.round(Math.pow(10, nLogMin)));
+    const safeMax = Math.min(16000, Math.round(Math.pow(10, nLogMax)));
     const next = getMid(safeMin, safeMax);
+
     setHistory(h => [...h, { min, max }]);
     setRangeMin(safeMin); setRangeMax(safeMax);
     rangeRef.current = { min: safeMin, max: safeMax };
@@ -170,7 +186,6 @@ export default function BuzzStopEngine({ onStop }) {
     playHz(Math.max(20, Math.min(16000, currentHz + delta)));
   }, [currentHz, playHz]);
 
-  // ── LOCK + 4-LAYER CANCEL ENGINE ──
   const lock = useCallback(async () => {
     const hz = currentHz;
     setLockedHz(hz);
@@ -216,7 +231,7 @@ export default function BuzzStopEngine({ onStop }) {
     modOsc.start();
     nodes.push(modOsc, modGain);
 
-    // 4. Cross-frequency de-correlation (Newcastle 2025)
+    // 4. Cross-frequency de-correlation shimmer
     const shimMaster = actx.createGain();
     shimMaster.gain.value = 0.04;
     shimMaster.connect(masterGain.current);
@@ -227,14 +242,12 @@ export default function BuzzStopEngine({ onStop }) {
       const shimOsc = actx.createOscillator();
       shimOsc.type = 'sine';
       shimOsc.frequency.value = freq;
-
       const lfo = actx.createOscillator();
       lfo.type = 'sine';
       lfo.frequency.value = lfoHz;
       const lfoGain = actx.createGain();
       lfoGain.gain.value = 0.5;
       lfo.connect(lfoGain);
-
       const tGain = actx.createGain();
       tGain.gain.value = 0.5;
       lfoGain.connect(tGain.gain);
@@ -246,7 +259,6 @@ export default function BuzzStopEngine({ onStop }) {
     });
 
     cancelNodes.current = nodes;
-
     setElapsed(0);
     timerRef.current = setInterval(() => setElapsed(t => t + 1), 1000);
   }, [currentHz]);
@@ -262,7 +274,6 @@ export default function BuzzStopEngine({ onStop }) {
     setElapsed(0);
   }, [stopAll]);
 
-  // Volume control
   useEffect(() => {
     if (masterGain.current && ctx.current) {
       masterGain.current.gain.setTargetAtTime(volume, ctx.current.currentTime, 0.1);
@@ -274,6 +285,22 @@ export default function BuzzStopEngine({ onStop }) {
   const narrowed = Math.max(0, Math.round(
     100 - (Math.log10(Math.max(1, rangeMax - rangeMin)) / Math.log10(15980)) * 100
   ));
+
+  // ── COLOUR SYSTEM: cyan/teal — precision instrument feel ──
+  const C = {
+    primary: '#06b6d4',       // cyan-500
+    primaryDim: 'rgba(6,182,212,0.15)',
+    primaryBorder: 'rgba(6,182,212,0.4)',
+    warm: '#f97316',          // orange — fire
+    warmDim: 'rgba(249,115,22,0.12)',
+    warmBorder: 'rgba(249,115,22,0.4)',
+    cold: '#38bdf8',          // sky blue — ice
+    coldDim: 'rgba(56,189,248,0.1)',
+    coldBorder: 'rgba(56,189,248,0.35)',
+    lock: '#10b981',          // emerald
+    lockDim: 'rgba(16,185,129,0.15)',
+    lockBorder: 'rgba(16,185,129,0.4)',
+  };
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-start py-8 px-4">
@@ -288,40 +315,36 @@ export default function BuzzStopEngine({ onStop }) {
               className="text-center space-y-10 pt-6">
 
               <div>
-                <div className="text-6xl font-black text-white tracking-tighter mb-2" style={{ fontVariantNumeric: 'tabular-nums' }}>
-                  BUZZ<span className="text-purple-400">STOP</span>
+                <div className="text-6xl font-black text-white tracking-tighter mb-2">
+                  BUZZ<span style={{ color: C.primary }}>STOP</span>
                 </div>
                 <p className="text-gray-500 text-sm">Find your tinnitus frequency.<br/>Cancel it with AI.</p>
               </div>
 
               <div className="space-y-3">
-                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
-                  <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" />
-                  <p className="text-gray-400 text-sm">Put on headphones</p>
-                </div>
-                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
-                  <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" />
-                  <p className="text-gray-400 text-sm">Press start — a tone plays</p>
-                </div>
-                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
-                  <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" />
-                  <p className="text-gray-400 text-sm">Say warmer or colder — it homes in</p>
-                </div>
-                <div className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
-                  <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
-                  <p className="text-gray-400 text-sm">Lock it — 4 AI layers cancel the signal</p>
-                </div>
+                {[
+                  { dot: C.primary, text: 'Put on headphones' },
+                  { dot: C.primary, text: 'Press start — a tone plays' },
+                  { dot: C.warm,   text: '🔥 Warmer = that\'s the zone · ❄️ Colder = not that one' },
+                  { dot: C.lock,   text: 'Lock it — 4 AI layers cancel the signal' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 text-left px-4 py-3 border border-gray-800 rounded-lg">
+                    <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.dot }} />
+                    <p className="text-gray-400 text-sm">{item.text}</p>
+                  </div>
+                ))}
               </div>
 
               <motion.button
                 whileTap={{ scale: 0.97 }}
                 onClick={startRadar}
                 className="w-full py-5 rounded-2xl font-black text-xl tracking-wide text-white transition-all"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)', boxShadow: '0 0 40px rgba(168,85,247,0.4)' }}>
+                style={{ background: `linear-gradient(135deg, #0891b2, ${C.primary})`, boxShadow: `0 0 40px rgba(6,182,212,0.35)` }}>
                 START
               </motion.button>
 
-              <button onClick={() => setPhase('fine')} className="text-gray-700 text-xs font-mono hover:text-gray-500 transition-colors">
+              <button onClick={async () => { await startPrimary(1000); setCurrentHz(1000); setPhase('fine'); }}
+                className="text-gray-700 text-xs font-mono hover:text-gray-500 transition-colors">
                 I know my frequency already →
               </button>
             </motion.div>
@@ -333,13 +356,12 @@ export default function BuzzStopEngine({ onStop }) {
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               className="space-y-8">
 
-              {/* Hz display */}
               <div className="text-center pt-4">
                 <motion.div
                   animate={{ opacity: [0.7, 1, 0.7] }}
                   transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="text-6xl font-black text-purple-300 tabular-nums"
-                  style={{ fontVariantNumeric: 'tabular-nums', letterSpacing: '-2px' }}>
+                  className="text-6xl font-black tabular-nums"
+                  style={{ color: C.primary, fontVariantNumeric: 'tabular-nums', letterSpacing: '-2px' }}>
                   {currentHz.toLocaleString()}
                 </motion.div>
                 <p className="text-gray-600 text-xs mt-1 font-mono tracking-widest">HZ — PLAYING NOW</p>
@@ -349,34 +371,35 @@ export default function BuzzStopEngine({ onStop }) {
               <div>
                 <div className="h-1 bg-gray-900 rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full rounded-full bg-purple-500"
+                    className="h-full rounded-full"
+                    style={{ background: C.primary }}
                     animate={{ width: `${narrowed}%` }}
                     transition={{ duration: 0.4 }} />
                 </div>
                 <div className="flex justify-between text-[10px] font-mono text-gray-700 mt-1">
                   <span>20 Hz</span>
-                  <span className="text-purple-600">{narrowed}% narrowed</span>
+                  <span style={{ color: C.primary }}>{narrowed}% narrowed</span>
                   <span>16 kHz</span>
                 </div>
               </div>
 
-              <p className="text-center text-gray-300 text-base">Does this match your buzz?</p>
+              <p className="text-center text-gray-300 text-base">Does this tone sound like your buzz?</p>
 
-              {/* Main two buttons */}
+              {/* WARM / COLD — big clear buttons */}
               <div className="grid grid-cols-2 gap-4">
-                <motion.button whileTap={{ scale: 0.95 }} onClick={doWarmer}
+                <motion.button whileTap={{ scale: 0.95 }} onClick={warmer}
                   className="py-10 rounded-2xl flex flex-col items-center gap-2 transition-all"
-                  style={{ background: 'rgba(34,197,94,0.1)', border: '1.5px solid rgba(34,197,94,0.4)' }}>
-                  <span className="text-3xl">🔥</span>
-                  <span className="text-green-400 font-bold text-lg">Warmer</span>
-                  <span className="text-green-700 text-xs">closer to my buzz</span>
+                  style={{ background: C.warmDim, border: `1.5px solid ${C.warmBorder}` }}>
+                  <span className="text-4xl">🔥</span>
+                  <span className="font-black text-lg" style={{ color: C.warm }}>WARMER</span>
+                  <span className="text-xs text-center leading-snug" style={{ color: 'rgba(249,115,22,0.6)' }}>yes, that's the zone</span>
                 </motion.button>
                 <motion.button whileTap={{ scale: 0.95 }} onClick={colder}
                   className="py-10 rounded-2xl flex flex-col items-center gap-2 transition-all"
-                  style={{ background: 'rgba(59,130,246,0.1)', border: '1.5px solid rgba(59,130,246,0.4)' }}>
-                  <span className="text-3xl">❄️</span>
-                  <span className="text-blue-400 font-bold text-lg">Colder</span>
-                  <span className="text-blue-700 text-xs">different from my buzz</span>
+                  style={{ background: C.coldDim, border: `1.5px solid ${C.coldBorder}` }}>
+                  <span className="text-4xl">❄️</span>
+                  <span className="font-black text-lg" style={{ color: C.cold }}>COLDER</span>
+                  <span className="text-xs text-center leading-snug" style={{ color: 'rgba(56,189,248,0.6)' }}>no, not that one</span>
                 </motion.button>
               </div>
 
@@ -385,7 +408,8 @@ export default function BuzzStopEngine({ onStop }) {
                 <span className="text-gray-700 text-xs font-mono">VOL</span>
                 <input type="range" min="0" max="0.6" step="0.02" value={volume}
                   onChange={e => setVolume(parseFloat(e.target.value))}
-                  className="flex-1 h-1 accent-purple-500 bg-gray-800 rounded cursor-pointer" />
+                  className="flex-1 h-1 bg-gray-800 rounded cursor-pointer"
+                  style={{ accentColor: C.primary }} />
                 <span className="text-gray-700 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
               </div>
 
@@ -393,7 +417,7 @@ export default function BuzzStopEngine({ onStop }) {
                 {history.length > 0
                   ? <button onClick={undo} className="text-gray-700 text-xs font-mono hover:text-gray-400 transition-colors">← undo</button>
                   : <span />}
-                <button onClick={() => setPhase('fine')} className="text-purple-800 text-xs font-mono hover:text-purple-500 transition-colors">
+                <button onClick={() => setPhase('fine')} className="text-xs font-mono hover:opacity-70 transition-opacity" style={{ color: C.primary }}>
                   fine-tune manually →
                 </button>
               </div>
@@ -411,8 +435,8 @@ export default function BuzzStopEngine({ onStop }) {
                 <motion.div
                   animate={{ opacity: [0.8, 1, 0.8] }}
                   transition={{ repeat: Infinity, duration: 1.2 }}
-                  className="text-6xl font-black text-green-400 tabular-nums"
-                  style={{ letterSpacing: '-2px' }}>
+                  className="text-6xl font-black tabular-nums"
+                  style={{ color: C.lock, letterSpacing: '-2px' }}>
                   {currentHz.toLocaleString()}
                 </motion.div>
                 <p className="text-gray-600 text-xs mt-1 font-mono tracking-widest">HZ</p>
@@ -420,13 +444,12 @@ export default function BuzzStopEngine({ onStop }) {
 
               <p className="text-center text-gray-400 text-sm">Nudge until this tone sounds exactly like your tinnitus</p>
 
-              {/* Coarse */}
               <div>
                 <p className="text-gray-700 text-[10px] font-mono text-center mb-2 tracking-widest">COARSE</p>
-                <div className="grid grid-cols-2 gap-3">
-                  {[[-100,'−100 Hz'],[100,'+100 Hz']].map(([d, l]) => (
+                <div className="grid grid-cols-4 gap-2">
+                  {[[-1000,'−1k'],[-100,'−100'],[100,'+100'],[1000,'+1k']].map(([d, l]) => (
                     <motion.button key={d} whileTap={{ scale: 0.95 }} onClick={() => nudge(d)}
-                      className="py-4 rounded-xl text-gray-300 font-bold text-sm transition-all"
+                      className="py-4 rounded-xl text-gray-300 font-bold text-xs transition-all"
                       style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
                       {l}
                     </motion.button>
@@ -434,7 +457,6 @@ export default function BuzzStopEngine({ onStop }) {
                 </div>
               </div>
 
-              {/* Fine */}
               <div>
                 <p className="text-gray-700 text-[10px] font-mono text-center mb-2 tracking-widest">FINE</p>
                 <div className="grid grid-cols-2 gap-3">
@@ -448,18 +470,18 @@ export default function BuzzStopEngine({ onStop }) {
                 </div>
               </div>
 
-              {/* Volume */}
               <div className="flex items-center gap-3 px-1">
                 <span className="text-gray-700 text-xs font-mono">VOL</span>
                 <input type="range" min="0" max="0.6" step="0.02" value={volume}
                   onChange={e => setVolume(parseFloat(e.target.value))}
-                  className="flex-1 h-1 accent-green-500 bg-gray-800 rounded cursor-pointer" />
+                  className="flex-1 h-1 bg-gray-800 rounded cursor-pointer"
+                  style={{ accentColor: C.lock }} />
                 <span className="text-gray-700 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
               </div>
 
               <motion.button whileTap={{ scale: 0.97 }} onClick={lock}
                 className="w-full py-5 rounded-2xl font-black text-xl text-white transition-all"
-                style={{ background: 'linear-gradient(135deg, #059669, #22c55e)', boxShadow: '0 0 30px rgba(34,197,94,0.3)' }}>
+                style={{ background: 'linear-gradient(135deg, #059669, #10b981)', boxShadow: '0 0 30px rgba(16,185,129,0.3)' }}>
                 LOCK + CANCEL
               </motion.button>
 
@@ -479,11 +501,12 @@ export default function BuzzStopEngine({ onStop }) {
                 <motion.div
                   animate={{ opacity: [0.6, 1, 0.6] }}
                   transition={{ repeat: Infinity, duration: 2 }}
-                  className="text-xs font-mono tracking-widest text-green-500 mb-3">
+                  className="text-xs font-mono tracking-widest mb-3"
+                  style={{ color: C.lock }}>
                   CANCELLING
                 </motion.div>
                 <div className="text-7xl font-black tabular-nums"
-                  style={{ color: '#22c55e', letterSpacing: '-3px', textShadow: '0 0 40px rgba(34,197,94,0.4)' }}>
+                  style={{ color: C.lock, letterSpacing: '-3px', textShadow: `0 0 40px rgba(16,185,129,0.4)` }}>
                   {lockedHz.toLocaleString()}
                 </div>
                 <p className="text-gray-600 text-xs font-mono tracking-widest mt-1">HZ LOCKED</p>
@@ -492,13 +515,12 @@ export default function BuzzStopEngine({ onStop }) {
 
               <p className="text-gray-500 text-sm">Relax. Close your eyes.<br/>Let it run 5–15 minutes.</p>
 
-              {/* 4 mechanism pulse dots */}
               <div className="flex justify-center gap-4">
                 {[
-                  { color: '#a855f7', label: 'Interference', delay: 0 },
-                  { color: '#06b6d4', label: 'Cortex', delay: 0.4 },
-                  { color: '#22c55e', label: 'Pattern', delay: 0.8 },
-                  { color: '#ec4899', label: 'Shimmer', delay: 1.2 },
+                  { color: C.primary, label: 'Interference', delay: 0 },
+                  { color: '#818cf8', label: 'Cortex', delay: 0.4 },
+                  { color: C.lock,   label: 'Pattern', delay: 0.8 },
+                  { color: C.warm,   label: 'Shimmer', delay: 1.2 },
                 ].map(m => (
                   <div key={m.label} className="flex flex-col items-center gap-1">
                     <motion.div
@@ -511,19 +533,19 @@ export default function BuzzStopEngine({ onStop }) {
                 ))}
               </div>
 
-              {/* Volume */}
               <div className="flex items-center gap-3 px-1">
                 <span className="text-gray-700 text-xs font-mono">VOL</span>
                 <input type="range" min="0" max="0.6" step="0.02" value={volume}
                   onChange={e => setVolume(parseFloat(e.target.value))}
-                  className="flex-1 h-1 accent-green-500 bg-gray-800 rounded cursor-pointer" />
+                  className="flex-1 h-1 bg-gray-800 rounded cursor-pointer"
+                  style={{ accentColor: C.lock }} />
                 <span className="text-gray-700 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <button onClick={restart}
-                  className="py-4 rounded-xl text-purple-400 font-bold text-sm transition-all"
-                  style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.3)' }}>
+                  className="py-4 rounded-xl font-bold text-sm transition-all"
+                  style={{ color: C.primary, background: C.primaryDim, border: `1px solid ${C.primaryBorder}` }}>
                   Try Again
                 </button>
                 <button onClick={() => { stopAll(); onStop?.(); }}
