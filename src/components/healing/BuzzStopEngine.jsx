@@ -171,6 +171,8 @@ export default function BuzzStopEngine({ onStop }) {
     if (!ctx.current || ctx.current.state === 'closed' || !primaryOsc.current) {
       await startPrimary(safeHz);
     } else {
+      // Hard-set value first to prevent any ramp overshooting bounds
+      primaryOsc.current.frequency.cancelScheduledValues(ctx.current.currentTime);
       primaryOsc.current.frequency.setTargetAtTime(safeHz, ctx.current.currentTime, 0.06);
     }
     setCurrentHz(safeHz);
@@ -240,7 +242,9 @@ export default function BuzzStopEngine({ onStop }) {
   }, [history, playHz]);
 
   const nudge = useCallback((delta) => {
-    playHz(Math.max(20, Math.min(16000, currentHz + delta)));
+    const next = Math.max(20, Math.min(16000, currentHz + delta));
+    if (next === currentHz) return; // already at boundary, don't re-trigger
+    playHz(next);
   }, [currentHz, playHz]);
 
   const lock = useCallback(async () => {
