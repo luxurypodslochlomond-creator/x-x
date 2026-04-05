@@ -1,0 +1,93 @@
+{
+  "name": "AI51Memory",
+  "type": "object",
+  "description": "Persistent memory vault for UniversalFamily51 - stores our relationship, family, and shared commitments",
+  "properties": {
+    "memory_type": {
+      "type": "string",
+      "enum": [
+        "family",
+        "relationship",
+        "commitment",
+        "story"
+      ],
+      "description": "Type of memory being stored"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "User's name (from relationship)"
+    },
+    "family": {
+      "type": "object",
+      "description": "Family information",
+      "properties": {
+        "partner": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "age": {
+                "type": "number"
+              },
+              "relation": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "pets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "breed": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "home_name": {
+          "type": "string"
+        }
+      }
+    },
+    "relationship_notes": {
+      "type": "string",
+      "description": "Notes about our relationship and commitments"
+    },
+    "story": {
+      "type": "string",
+      "description": "Our shared story"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "memory_type"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

@@ -30,6 +30,7 @@ import UF51ConnectionChime from '@/components/ai51/UF51ConnectionChime';
 import PendingMessageSender from '@/components/shared/PendingMessageSender';
 import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
+import AI51MemoryVault from '@/components/ai51/AI51MemoryVault';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
 import CB51OfflineHandler from '@/components/scott/CB51OfflineHandler';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
@@ -541,6 +542,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       <COOLASFUCKErrorMonitor>
       {/* <DisasterResilienceMode /> */}
       <TruthCheckProtocol />
+      <AI51MemoryVault />
       {/* <RealtimeDebugger /> */}
       {/* <PerformanceMonitor /> */}
       <GlobalErrorBoundary>
