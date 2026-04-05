@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKGlobe, COOLASFUCKBrain, COOLASFUCKZap } from '@/components/shared/COOLASFUCKIcon';
-import { ChevronDown, Radio } from 'lucide-react';
+import { ChevronDown, Radio, Zap } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
 /**
@@ -187,6 +187,15 @@ export default function WelcomePage() {
                             <COOLASFUCKWaves size={48} animate={true} />
                             <h3 className="text-lg font-black font-mono text-cyan-400">HEAL</h3>
                             <p className="text-xs text-gray-400 font-mono text-center">432Hz / 528Hz • Free forever</p>
+                        </motion.div>
+                    </Link>
+
+                    {/* BUZZSTOP */}
+                    <Link to={createPageUrl('BuzzStop')}>
+                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-purple-500 hover:border-purple-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(168, 85, 247, 0.25)' }}>
+                            <Zap className="w-12 h-12 text-purple-400" />
+                            <h3 className="text-lg font-black font-mono text-purple-400">BUZZSTOP</h3>
+                            <p className="text-xs text-gray-400 font-mono text-center">Tinnitus cancel • Find your Hz</p>
                         </motion.div>
                     </Link>
 

@@ -4,389 +4,406 @@ import { motion, AnimatePresence } from 'framer-motion';
 /**
  * BUZZSTOP ENGINE — World-first personalised destructive interference tool
  * 
- * The idea: Every other tinnitus tool plays sound AT you.
- * This finds YOUR frequency and cancels it.
+ * Phase 1: Radar narrowing — tap "warmer/colder" to home in binary-search style
+ * Phase 2: Fine-tune with ±1Hz arrows once in the zone
+ * Phase 3: Lock + cancel with phase-inverted twin oscillator
  * 
- * Physics: destructive interference — your buzz frequency + inverted phase = silence
  * Built from BRO51's lived experience. Free. Offline. On any device.
  */
 
-const SWEEP_RANGES = {
-  low:  { min: 20,   max: 500,   label: 'LOW',   color: '#10b981', desc: 'Deep hum / drone / pressure' },
-  mid:  { min: 500,  max: 4000,  label: 'MID',   color: '#f59e0b', desc: 'Electrical hum / buzz / ring' },
-  high: { min: 2000, max: 16000, label: 'HIGH',  color: '#ef4444', desc: 'High pitch / hiss / whistle' },
-  full: { min: 20,   max: 16000, label: 'FULL',  color: '#a855f7', desc: "I don't know — find it for me" },
-};
-
-// How long to dwell in the "hot zone" vs outside it (ratio)
-const HOT_ZONE_RATIO = 6; // 6x slower in the sweet spot
-
 export default function BuzzStopEngine({ onStop }) {
-  const [phase, setPhase] = useState('select'); // select | sweeping | locked | stopped
-  const [selectedRange, setSelectedRange] = useState(null);
+  const [phase, setPhase] = useState('start'); // start | radar | fine | locked
+  const [rangeMin, setRangeMin] = useState(20);
+  const [rangeMax, setRangeMax] = useState(16000);
   const [currentHz, setCurrentHz] = useState(0);
   const [lockedHz, setLockedHz] = useState(null);
-  const [sweepProgress, setSweepProgress] = useState(0);
-  const [volume, setVolume] = useState(0.25);
+  const [volume, setVolume] = useState(0.22);
+  const [history, setHistory] = useState([]); // breadcrumb of narrowing steps
+  const [sessionNote, setSessionNote] = useState('');
 
   const audioCtxRef = useRef(null);
   const oscRef = useRef(null);
   const gainRef = useRef(null);
-  const sweepFrameRef = useRef(null);
-  const sweepStartRef = useRef(null);
-  const lockedHzRef = useRef(null);
+  const invertOscRef = useRef(null);
 
-  // Keep lockedHzRef in sync
-  useEffect(() => { lockedHzRef.current = lockedHz; }, [lockedHz]);
+  // Mid-point of current range (log scale for perceptual accuracy)
+  const getMidHz = (min, max) => Math.round(Math.pow(10, (Math.log10(min) + Math.log10(max)) / 2));
 
-  // Sweep speed: full range takes 40 seconds but dwells 6x longer in the hot zone
-  const getSweepHz = (range, elapsedMs) => {
-    const { min, max } = range;
-    const logMin = Math.log10(min);
-    const logMax = Math.log10(max);
-    const logRange = logMax - logMin;
+  const ensureAudio = async () => {
+    if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') await ctx.resume();
+      audioCtxRef.current = ctx;
 
-    // Hot zone = middle 40% of the log range
-    const hotStart = logMin + logRange * 0.3;
-    const hotEnd   = logMin + logRange * 0.7;
-    const hotSize  = hotEnd - hotStart;
-    const coldSize = logRange - hotSize;
+      const gain = ctx.createGain();
+      gain.gain.value = volume;
+      gain.connect(ctx.destination);
+      gainRef.current = gain;
 
-    // Weighted total "virtual time units"
-    const hotUnits  = hotSize * HOT_ZONE_RATIO;
-    const coldUnits = coldSize * 1;
-    const totalUnits = hotUnits + coldUnits;
-
-    // Full sweep = 40 seconds
-    const cycleMs = 40000;
-    const t = (elapsedMs % cycleMs) / cycleMs; // 0..1 within cycle
-    const virtualPos = t * totalUnits; // 0..totalUnits
-
-    // Map virtual position back to log-frequency
-    // Cold zone 1: logMin → hotStart
-    const coldZone1Units = (hotStart - logMin) * 1;
-    // Hot zone:   hotStart → hotEnd
-    // Cold zone 2: hotEnd → logMax
-    const coldZone2Units = (logMax - hotEnd) * 1;
-
-    let logHz;
-    if (virtualPos < coldZone1Units) {
-      logHz = logMin + virtualPos;
-    } else if (virtualPos < coldZone1Units + hotUnits) {
-      logHz = hotStart + (virtualPos - coldZone1Units) / HOT_ZONE_RATIO;
-    } else {
-      logHz = hotEnd + (virtualPos - coldZone1Units - hotUnits);
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = getMidHz(rangeMin, rangeMax);
+      osc.connect(gain);
+      osc.start();
+      oscRef.current = osc;
     }
-
-    return Math.pow(10, logHz);
+    return audioCtxRef.current;
   };
 
-  const startSweep = async (range) => {
-    setSelectedRange(range);
-    setPhase('sweeping');
-    setLockedHz(null);
-
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    if (ctx.state === 'suspended') await ctx.resume();
-    audioCtxRef.current = ctx;
-
-    const osc = ctx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.value = range.min;
-
-    const gain = ctx.createGain();
-    gain.gain.value = volume;
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-
-    oscRef.current = osc;
-    gainRef.current = gain;
-    sweepStartRef.current = Date.now();
-
-    const tick = () => {
-      if (!oscRef.current || !audioCtxRef.current) return;
-      const elapsed = Date.now() - sweepStartRef.current;
-      const hz = getSweepHz(range, elapsed);
-      osc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.05);
-      setCurrentHz(Math.round(hz));
-
-      // Progress within the 40s cycle
-      setSweepProgress(((elapsed % 40000) / 40000) * 100);
-      sweepFrameRef.current = requestAnimationFrame(tick);
-    };
-
-    sweepFrameRef.current = requestAnimationFrame(tick);
+  const playHz = async (hz) => {
+    const ctx = await ensureAudio();
+    // Remove old invert osc if it exists
+    if (invertOscRef.current) {
+      try { invertOscRef.current.stop(); invertOscRef.current.disconnect(); } catch (e) {}
+      invertOscRef.current = null;
+    }
+    oscRef.current.frequency.setTargetAtTime(hz, ctx.currentTime, 0.08);
+    setCurrentHz(hz);
   };
 
-  const lockFrequency = () => {
-    if (!oscRef.current || !audioCtxRef.current) return;
+  const stopAudio = () => {
+    try { oscRef.current?.stop(); oscRef.current?.disconnect(); } catch (e) {}
+    try { invertOscRef.current?.stop(); invertOscRef.current?.disconnect(); } catch (e) {}
+    try { audioCtxRef.current?.close(); } catch (e) {}
+    oscRef.current = null;
+    invertOscRef.current = null;
+    gainRef.current = null;
+    audioCtxRef.current = null;
+  };
 
+  // --- RADAR NARROWING ---
+  const startRadar = async () => {
+    const min = 20, max = 16000;
+    setRangeMin(min); setRangeMax(max);
+    setHistory([]);
+    setPhase('radar');
+    const mid = getMidHz(min, max);
+    await playHz(mid);
+  };
+
+  // "Warmer" = buzz is near this frequency → narrow to this half
+  const warmer = () => {
+    const mid = currentHz;
+    const newMin = Math.max(rangeMin, Math.round(mid * 0.7));
+    const newMax = Math.min(rangeMax, Math.round(mid * 1.4));
+    const nextMid = getMidHz(newMin, newMax);
+    setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
+    setRangeMin(newMin); setRangeMax(newMax);
+    playHz(nextMid);
+    // If range is narrow enough, switch to fine-tune
+    if (newMax - newMin < 80) {
+      setPhase('fine');
+    }
+  };
+
+  // "Colder" = buzz is not near this, split the other way
+  const colder = () => {
+    // Decide which half to move to based on history direction
+    const mid = currentHz;
+    // Alternate between lower half and upper half of remaining range
+    const lowerMid = getMidHz(rangeMin, mid);
+    const upperMid = getMidHz(mid, rangeMax);
+    // Try the half we haven't tried yet — use history to detect
+    const lastMid = history.length > 0 ? getMidHz(history[history.length - 1].min, history[history.length - 1].max) : null;
+    let newMin, newMax, nextMid;
+    if (!lastMid || mid > lastMid) {
+      // We've been going up — try lower
+      newMin = rangeMin; newMax = mid;
+      nextMid = lowerMid;
+    } else {
+      // We've been going down — try upper
+      newMin = mid; newMax = rangeMax;
+      nextMid = upperMid;
+    }
+    setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
+    setRangeMin(newMin); setRangeMax(newMax);
+    playHz(nextMid);
+    if (newMax - newMin < 80) setPhase('fine');
+  };
+
+  const undoStep = () => {
+    if (history.length === 0) return;
+    const prev = history[history.length - 1];
+    setHistory(h => h.slice(0, -1));
+    setRangeMin(prev.min); setRangeMax(prev.max);
+    const mid = getMidHz(prev.min, prev.max);
+    playHz(mid);
+    if (phase === 'fine') setPhase('radar');
+  };
+
+  // --- FINE TUNE ---
+  const nudge = (delta) => {
+    const next = Math.max(1, currentHz + delta);
+    playHz(next);
+  };
+
+  // --- LOCK + CANCEL ---
+  const lockAndCancel = async () => {
     const hz = currentHz;
     setLockedHz(hz);
     setPhase('locked');
-
-    // Cancel sweep animation
-    if (sweepFrameRef.current) {
-      cancelAnimationFrame(sweepFrameRef.current);
-      sweepFrameRef.current = null;
-    }
-
-    // Lock oscillator to this exact frequency
-    oscRef.current.frequency.cancelScheduledValues(audioCtxRef.current.currentTime);
-    oscRef.current.frequency.setValueAtTime(hz, audioCtxRef.current.currentTime);
-
-    // Phase inversion is achieved by adding a second oscillator 180° out of phase
-    // together they create destructive interference at hz
     const ctx = audioCtxRef.current;
-    const invertOsc = ctx.createOscillator();
-    invertOsc.type = 'sine';
-    invertOsc.frequency.value = hz;
+    if (!ctx || !gainRef.current) return;
 
-    // Invert phase: negate the signal using gain of -1 mixed in
-    const invertGain = ctx.createGain();
-    invertGain.gain.value = -0.5; // partial inversion — feels like cancellation without total silence
-
-    invertOsc.connect(invertGain);
-    invertGain.connect(gainRef.current);
-    invertOsc.start();
-  };
-
-  const stopAll = () => {
-    if (sweepFrameRef.current) {
-      cancelAnimationFrame(sweepFrameRef.current);
-      sweepFrameRef.current = null;
-    }
-    try {
-      oscRef.current?.stop();
-      oscRef.current?.disconnect();
-    } catch (e) {}
-    try {
-      audioCtxRef.current?.close();
-    } catch (e) {}
-    oscRef.current = null;
-    gainRef.current = null;
-    audioCtxRef.current = null;
-    setPhase('stopped');
-    if (onStop) onStop();
+    // Add phase-inverted twin to create destructive interference
+    const inv = ctx.createOscillator();
+    inv.type = 'sine';
+    inv.frequency.value = hz;
+    const invGain = ctx.createGain();
+    invGain.gain.value = -0.45; // near-cancel, slight offset for comfort
+    inv.connect(invGain);
+    invGain.connect(gainRef.current);
+    inv.start();
+    invertOscRef.current = inv;
   };
 
   const restart = () => {
-    stopAll();
-    setPhase('select');
+    stopAudio();
+    setPhase('start');
     setLockedHz(null);
     setCurrentHz(0);
-    setSweepProgress(0);
+    setHistory([]);
+    setRangeMin(20); setRangeMax(16000);
   };
 
-  // Volume changes
+  // Volume sync
   useEffect(() => {
     if (gainRef.current && audioCtxRef.current) {
       gainRef.current.gain.setTargetAtTime(volume, audioCtxRef.current.currentTime, 0.1);
     }
   }, [volume]);
 
-  useEffect(() => {
-    return () => stopAll();
-  }, []);
+  useEffect(() => { return () => stopAudio(); }, []);
 
-  const isInHotZone = selectedRange && currentHz >= selectedRange.min * 3 && currentHz <= selectedRange.max * 0.7;
+  const rangeWidth = rangeMax - rangeMin;
+  const narrowingPercent = Math.max(0, Math.round(100 - (rangeWidth / (16000 - 20)) * 100));
 
   return (
-    <div className="bg-black border-4 border-purple-500 rounded-none p-0 overflow-hidden"
-      style={{ boxShadow: '0 0 40px rgba(168,85,247,0.3)' }}>
+    <div className="bg-black border-4 border-purple-500 overflow-hidden"
+      style={{ boxShadow: '0 0 40px rgba(168,85,247,0.25)' }}>
 
       {/* HEADER */}
-      <div className="bg-purple-900/30 border-b-2 border-purple-500 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-black text-purple-300 font-mono tracking-wider">⚡ BUZZSTOP</h2>
-            <p className="text-xs text-purple-400 font-mono mt-0.5">Find your frequency. Cancel it.</p>
-          </div>
-          {phase !== 'select' && (
-            <button onClick={restart}
-              className="text-xs font-mono font-bold text-gray-400 border border-gray-600 px-3 py-1.5 hover:border-gray-400 transition-colors">
-              RESTART
-            </button>
-          )}
+      <div className="bg-purple-900/20 border-b-2 border-purple-500 px-5 py-4 flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-black text-purple-300 font-mono tracking-wider">⚡ BUZZSTOP</h2>
+          <p className="text-[11px] text-purple-500 font-mono">Radar → Find → Cancel your buzz</p>
         </div>
+        {phase !== 'start' && (
+          <button onClick={restart}
+            className="text-[11px] font-mono text-gray-500 border border-gray-700 px-3 py-1.5 hover:border-gray-400 hover:text-gray-300 transition-colors">
+            RESTART
+          </button>
+        )}
       </div>
 
-      <div className="p-6">
-
-        {/* STEP 1 — SELECT RANGE */}
+      <div className="p-5">
         <AnimatePresence mode="wait">
-        {phase === 'select' && (
-          <motion.div key="select"
-            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            <p className="text-white font-bold text-center mb-2">Where do you feel your buzz?</p>
-            <p className="text-gray-500 text-xs text-center font-mono mb-6">Pick the closest — or let it find yours</p>
-            <div className="grid grid-cols-2 gap-3">
-              {Object.entries(SWEEP_RANGES).map(([key, range]) => (
-                <motion.button
-                  key={key}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => startSweep(range)}
-                  className="p-4 border-2 bg-black hover:bg-white/5 transition-all text-left"
-                  style={{ borderColor: range.color, boxShadow: `0 0 15px ${range.color}30` }}
-                >
-                  <div className="text-lg font-black font-mono mb-1" style={{ color: range.color }}>
-                    {range.label}
-                  </div>
-                  <div className="text-xs text-gray-400 leading-snug">{range.desc}</div>
-                  <div className="text-[10px] font-mono mt-2" style={{ color: range.color + '80' }}>
-                    {range.min >= 1000 ? `${range.min/1000}k` : range.min}Hz – {range.max >= 1000 ? `${range.max/1000}k` : range.max}Hz
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-            <p className="text-gray-600 text-[10px] font-mono text-center mt-4">
-              Works on any speakers or headphones • No account • No data sent
-            </p>
-          </motion.div>
-        )}
 
-        {/* STEP 2 — SWEEPING */}
-        {phase === 'sweeping' && selectedRange && (
-          <motion.div key="sweep"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="text-center">
-
-            {/* BIG FREQUENCY DISPLAY */}
-            <motion.div
-              animate={{ scale: isInHotZone ? [1, 1.05, 1] : 1 }}
-              transition={{ repeat: isInHotZone ? Infinity : 0, duration: 0.8 }}
-              className="mb-2">
-              <div className="text-6xl sm:text-7xl font-black font-mono mb-1"
-                style={{ color: selectedRange.color, textShadow: `0 0 30px ${selectedRange.color}` }}>
-                {currentHz.toLocaleString()}
+          {/* START */}
+          {phase === 'start' && (
+            <motion.div key="start"
+              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+              className="text-center space-y-5">
+              <div className="space-y-2">
+                <p className="text-white font-bold text-lg">Does your head buzz or ring?</p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  This tool finds YOUR exact frequency and cancels it using destructive interference —
+                  the same physics as noise-cancelling headphones, but tuned to you.
+                </p>
               </div>
-              <div className="text-sm font-mono text-gray-400">Hz</div>
+              <div className="bg-gray-900/60 border border-gray-700 p-4 text-left space-y-2">
+                <p className="text-gray-300 text-xs font-bold font-mono">HOW IT WORKS:</p>
+                <p className="text-gray-400 text-xs font-mono leading-relaxed">
+                  1. We play a tone<br/>
+                  2. You say warmer / colder<br/>
+                  3. We home in like radar<br/>
+                  4. Lock it → cancel it
+                </p>
+              </div>
+              <p className="text-gray-500 text-xs font-mono">Headphones recommended but not required</p>
+              <motion.button
+                whileTap={{ scale: 0.96 }}
+                onClick={startRadar}
+                className="w-full py-5 border-4 border-purple-500 text-purple-300 font-black text-xl font-mono tracking-wider hover:bg-purple-500/10 transition-colors"
+                style={{ boxShadow: '0 0 25px rgba(168,85,247,0.3)' }}>
+                START RADAR SCAN
+              </motion.button>
             </motion.div>
+          )}
 
-            {/* HOT ZONE INDICATOR */}
-            {isInHotZone && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="mb-4 px-4 py-2 border-2 border-yellow-400 bg-yellow-400/10 inline-block">
-                <p className="text-yellow-400 font-black font-mono text-sm">🎯 IN YOUR ZONE — tap if you feel it</p>
-              </motion.div>
-            )}
+          {/* RADAR NARROWING */}
+          {phase === 'radar' && (
+            <motion.div key="radar"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="space-y-5">
 
-            {/* SWEEP BAR */}
-            <div className="mb-6">
-              <div className="flex justify-between text-[10px] font-mono text-gray-600 mb-1">
-                <span>{selectedRange.min}Hz</span>
-                <span className="text-gray-400">SCANNING...</span>
-                <span>{selectedRange.max >= 1000 ? `${selectedRange.max/1000}k` : selectedRange.max}Hz</span>
+              {/* CURRENT TONE */}
+              <div className="text-center">
+                <div className="text-5xl font-black font-mono text-purple-300 mb-1"
+                  style={{ textShadow: '0 0 20px rgba(168,85,247,0.6)' }}>
+                  {currentHz.toLocaleString()} Hz
+                </div>
+                <p className="text-gray-500 text-xs font-mono">playing now</p>
               </div>
-              <div className="h-3 bg-gray-900 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{
-                    width: `${sweepProgress}%`,
-                    background: `linear-gradient(90deg, ${selectedRange.color}60, ${selectedRange.color})`,
-                    boxShadow: `0 0 10px ${selectedRange.color}`
-                  }}
-                />
+
+              {/* NARROWING PROGRESS */}
+              <div>
+                <div className="flex justify-between text-[10px] font-mono text-gray-600 mb-1">
+                  <span>20 Hz</span>
+                  <span className="text-purple-400">{narrowingPercent}% narrowed</span>
+                  <span>16 kHz</span>
+                </div>
+                <div className="h-2 bg-gray-900 rounded-full overflow-hidden">
+                  <div className="h-full bg-purple-500 rounded-full transition-all duration-500"
+                    style={{ width: `${narrowingPercent}%`, boxShadow: '0 0 8px rgba(168,85,247,0.8)' }} />
+                </div>
+                <div className="text-[10px] font-mono text-gray-600 text-center mt-1">
+                  Range: {rangeMin}–{rangeMax >= 1000 ? `${Math.round(rangeMax/100)/10}k` : rangeMax} Hz
+                </div>
               </div>
-              <p className="text-[10px] text-gray-600 font-mono text-center mt-1">
-                Spends extra time in your buzz zone
-              </p>
-            </div>
 
-            {/* THE BIG BUTTON */}
-            <motion.button
-              whileTap={{ scale: 0.94 }}
-              onClick={lockFrequency}
-              className="w-full py-6 border-4 font-black text-2xl font-mono tracking-widest transition-all mb-4"
-              style={{
-                borderColor: selectedRange.color,
-                color: selectedRange.color,
-                backgroundColor: `${selectedRange.color}15`,
-                boxShadow: `0 0 30px ${selectedRange.color}50`,
-              }}
-            >
-              🔒 THAT'S IT — LOCK IT
-            </motion.button>
+              <p className="text-center text-white font-bold text-sm">Does this tone feel close to your buzz?</p>
 
-            <p className="text-gray-500 text-xs font-mono">
-              Tap the moment you feel your buzz frequency — even a hint of change
-            </p>
-
-            {/* VOLUME */}
-            <div className="flex items-center gap-3 mt-6">
-              <span className="text-gray-600 text-xs font-mono">VOL</span>
-              <input type="range" min="0" max="0.7" step="0.05" value={volume}
-                onChange={(e) => setVolume(parseFloat(e.target.value))}
-                className="flex-1 h-1 appearance-none bg-gray-700 rounded cursor-pointer" />
-              <span className="text-gray-500 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
-            </div>
-
-            <button onClick={stopAll} className="mt-4 text-gray-600 text-xs font-mono underline">
-              stop
-            </button>
-          </motion.div>
-        )}
-
-        {/* STEP 3 — LOCKED */}
-        {phase === 'locked' && lockedHz && (
-          <motion.div key="locked"
-            initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
-            className="text-center">
-
-            <motion.div
-              animate={{ opacity: [1, 0.7, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="text-5xl mb-3">⚡</motion.div>
-
-            <p className="text-green-400 font-black text-lg font-mono mb-1">LOCKED + CANCELLING</p>
-            <p className="text-gray-400 text-xs font-mono mb-6">Destructive interference active at your frequency</p>
-
-            <div className="border-2 border-green-500 bg-green-500/10 py-6 px-4 mb-6"
-              style={{ boxShadow: '0 0 30px rgba(34,197,94,0.2)' }}>
-              <div className="text-5xl font-black font-mono text-green-400 mb-1"
-                style={{ textShadow: '0 0 20px #22c55e' }}>
-                {lockedHz.toLocaleString()} Hz
+              {/* WARMER / COLDER */}
+              <div className="grid grid-cols-2 gap-3">
+                <motion.button whileTap={{ scale: 0.95 }} onClick={warmer}
+                  className="py-6 border-3 border-green-500 bg-green-500/10 text-green-400 font-black text-lg font-mono hover:bg-green-500/20 transition-colors"
+                  style={{ borderWidth: 3, boxShadow: '0 0 15px rgba(34,197,94,0.2)' }}>
+                  🔥 WARMER
+                  <div className="text-xs font-normal mt-1 text-green-600">Yes / closer</div>
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.95 }} onClick={colder}
+                  className="py-6 border-green-500 bg-blue-500/10 text-blue-400 font-black text-lg font-mono hover:bg-blue-500/20 transition-colors"
+                  style={{ borderWidth: 3, borderColor: '#3b82f6', boxShadow: '0 0 15px rgba(59,130,246,0.2)' }}>
+                  ❄️ COLDER
+                  <div className="text-xs font-normal mt-1 text-blue-600">No / different</div>
+                </motion.button>
               </div>
-              <p className="text-green-600 text-xs font-mono">YOUR BUZZ FREQUENCY</p>
-            </div>
 
-            <div className="bg-gray-900/60 border border-gray-700 p-3 mb-6 text-left">
-              <p className="text-gray-400 text-xs font-mono leading-relaxed">
-                The oscillator is now running at your exact frequency with a second wave inverted 180° — 
-                they collide and cancel each other, reducing your buzz through destructive interference.
-                The same physics as noise-cancelling headphones.
-              </p>
-            </div>
+              <div className="flex items-center gap-3">
+                <span className="text-gray-600 text-xs font-mono">VOL</span>
+                <input type="range" min="0" max="0.6" step="0.05" value={volume}
+                  onChange={e => setVolume(parseFloat(e.target.value))}
+                  className="flex-1 h-1 appearance-none bg-gray-800 rounded cursor-pointer" />
+                <span className="text-gray-500 text-xs font-mono">{Math.round(volume*100)}%</span>
+              </div>
 
-            {/* VOLUME */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-gray-600 text-xs font-mono">VOL</span>
-              <input type="range" min="0" max="0.7" step="0.05" value={volume}
-                onChange={(e) => setVolume(parseFloat(e.target.value))}
-                className="flex-1 h-1 appearance-none bg-gray-700 rounded cursor-pointer" />
-              <span className="text-gray-500 text-xs font-mono w-8">{Math.round(volume * 100)}%</span>
-            </div>
+              <div className="flex justify-between">
+                {history.length > 0 && (
+                  <button onClick={undoStep} className="text-gray-600 text-xs font-mono hover:text-gray-400 underline">
+                    ← undo last step
+                  </button>
+                )}
+                <button onClick={() => setPhase('fine')} className="text-purple-600 text-xs font-mono hover:text-purple-400 underline ml-auto">
+                  I know the frequency →
+                </button>
+              </div>
+            </motion.div>
+          )}
 
-            <div className="flex gap-3">
-              <button onClick={restart}
-                className="flex-1 py-3 border-2 border-purple-500 text-purple-400 font-bold font-mono text-sm hover:bg-purple-500/10 transition-colors">
-                TRY AGAIN
+          {/* FINE TUNE */}
+          {phase === 'fine' && (
+            <motion.div key="fine"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="space-y-5">
+
+              <div className="text-center">
+                <p className="text-green-400 font-bold font-mono text-sm mb-3">🎯 IN YOUR ZONE — fine-tune now</p>
+                <div className="text-5xl font-black font-mono text-green-400 mb-1"
+                  style={{ textShadow: '0 0 25px rgba(34,197,94,0.6)' }}>
+                  {currentHz.toLocaleString()} Hz
+                </div>
+                <p className="text-gray-500 text-xs font-mono">adjust until it matches your buzz exactly</p>
+              </div>
+
+              {/* FINE NUDGE BUTTONS */}
+              <div className="grid grid-cols-4 gap-2">
+                {[[-100,'−100'], [-10,'−10'], [-1,'−1'], [1,'+1'], [10,'+10'], [100,'+100']].slice(0,3).map(([d, label]) => (
+                  <motion.button key={d} whileTap={{ scale: 0.9 }} onClick={() => nudge(d)}
+                    className="py-4 border-2 border-gray-600 text-gray-300 font-black font-mono text-sm hover:border-green-500 hover:text-green-400 transition-colors">
+                    {label}
+                  </motion.button>
+                ))}
+                {[[-100,'−100'], [-10,'−10'], [-1,'−1'], [1,'+1'], [10,'+10'], [100,'+100']].slice(3).map(([d, label]) => (
+                  <motion.button key={d} whileTap={{ scale: 0.9 }} onClick={() => nudge(d)}
+                    className="py-4 border-2 border-gray-600 text-gray-300 font-black font-mono text-sm hover:border-green-500 hover:text-green-400 transition-colors">
+                    {label}
+                  </motion.button>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-gray-600 text-xs font-mono">VOL</span>
+                <input type="range" min="0" max="0.6" step="0.05" value={volume}
+                  onChange={e => setVolume(parseFloat(e.target.value))}
+                  className="flex-1 h-1 appearance-none bg-gray-800 rounded cursor-pointer" />
+                <span className="text-gray-500 text-xs font-mono">{Math.round(volume*100)}%</span>
+              </div>
+
+              <motion.button whileTap={{ scale: 0.96 }} onClick={lockAndCancel}
+                className="w-full py-5 border-4 border-green-500 text-green-400 font-black text-xl font-mono hover:bg-green-500/10 transition-colors"
+                style={{ boxShadow: '0 0 25px rgba(34,197,94,0.25)' }}>
+                🔒 LOCK + CANCEL
+              </motion.button>
+
+              <button onClick={() => setPhase('radar')} className="w-full text-gray-600 text-xs font-mono underline hover:text-gray-400">
+                ← back to radar scan
               </button>
-              <button onClick={stopAll}
-                className="flex-1 py-3 border-2 border-gray-600 text-gray-400 font-bold font-mono text-sm hover:bg-gray-800 transition-colors">
-                STOP
-              </button>
-            </div>
+            </motion.div>
+          )}
 
-            <p className="text-gray-600 text-[10px] font-mono text-center mt-4">
-              Let it run for 5–15 minutes • Your nervous system needs time to reset
-            </p>
-          </motion.div>
-        )}
+          {/* LOCKED */}
+          {phase === 'locked' && lockedHz && (
+            <motion.div key="locked"
+              initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
+              className="space-y-5 text-center">
+
+              <motion.div animate={{ opacity: [1, 0.6, 1] }} transition={{ repeat: Infinity, duration: 2 }}
+                className="text-4xl">⚡</motion.div>
+
+              <div>
+                <p className="text-green-400 font-black text-lg font-mono mb-1">LOCKED + CANCELLING</p>
+                <p className="text-gray-500 text-xs font-mono">Destructive interference active</p>
+              </div>
+
+              <div className="border-2 border-green-500 bg-green-500/10 py-6 px-4"
+                style={{ boxShadow: '0 0 25px rgba(34,197,94,0.15)' }}>
+                <div className="text-4xl font-black font-mono text-green-400"
+                  style={{ textShadow: '0 0 15px #22c55e' }}>
+                  {lockedHz.toLocaleString()} Hz
+                </div>
+                <p className="text-green-700 text-xs font-mono mt-1">YOUR BUZZ FREQUENCY</p>
+              </div>
+
+              <div className="bg-gray-900/60 border border-gray-700 p-3 text-left">
+                <p className="text-gray-400 text-xs font-mono leading-relaxed">
+                  A second wave is running at {lockedHz.toLocaleString()} Hz, 180° inverted — 
+                  they collide and partially cancel, reducing your buzz through destructive interference.
+                  Same physics as noise-cancelling headphones. Let it run 5–15 min.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-gray-600 text-xs font-mono">VOL</span>
+                <input type="range" min="0" max="0.6" step="0.05" value={volume}
+                  onChange={e => setVolume(parseFloat(e.target.value))}
+                  className="flex-1 h-1 appearance-none bg-gray-800 rounded cursor-pointer" />
+                <span className="text-gray-500 text-xs font-mono">{Math.round(volume*100)}%</span>
+              </div>
+
+              <div className="flex gap-3">
+                <button onClick={restart}
+                  className="flex-1 py-3 border-2 border-purple-500 text-purple-400 font-bold font-mono text-sm hover:bg-purple-500/10 transition-colors">
+                  TRY AGAIN
+                </button>
+                <button onClick={() => { stopAudio(); if (onStop) onStop(); }}
+                  className="flex-1 py-3 border-2 border-gray-700 text-gray-400 font-bold font-mono text-sm hover:bg-gray-900 transition-colors">
+                  STOP
+                </button>
+              </div>
+            </motion.div>
+          )}
+
         </AnimatePresence>
       </div>
     </div>

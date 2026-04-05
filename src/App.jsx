@@ -40,6 +40,7 @@ const TracktPricingPage = React.lazy(() => import('./pages/TracktPricing'));
 const TracktTermsPage = React.lazy(() => import('./pages/TracktTerms'));
 const TracktPrivacyPage = React.lazy(() => import('./pages/TracktPrivacy'));
 const TracktDashboardPage = React.lazy(() => import('./pages/TracktDashboard'));
+const BuzzStopPage = React.lazy(() => import('./pages/BuzzStop'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -107,6 +108,7 @@ const AuthenticatedApp = () => {
       <Route path="/TracktTerms" element={<LayoutWrapper currentPageName="TracktTerms"><TracktTermsPage /></LayoutWrapper>} />
       <Route path="/TracktPrivacy" element={<LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper>} />
       <Route path="/TracktDashboard" element={<LayoutWrapper currentPageName="TracktDashboard"><TracktDashboardPage /></LayoutWrapper>} />
+      <Route path="/BuzzStop" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
