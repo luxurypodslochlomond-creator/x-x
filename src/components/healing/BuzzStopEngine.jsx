@@ -140,13 +140,19 @@ export default function BuzzStopEngine({ onStop }) {
   };
 
   const warmer = () => {
-    // Narrow symmetrically around current Hz on a log scale
-    // Use log midpoint ±1 octave to keep range meaningful
-    const logHz = Math.log10(Math.max(1, currentHz));
-    const newMin = Math.max(rangeMin, Math.round(Math.pow(10, logHz - 0.6)));
-    const newMax = Math.min(rangeMax, Math.round(Math.pow(10, logHz + 0.6)));
-    const safeMin = Math.max(20, newMin);
-    const safeMax = Math.min(16000, newMax);
+    // Pure log-scale binary split — WARMER means buzz is NEAR current tone
+    // Narrow to the inner 50% of current range centred on currentHz (log scale)
+    const logMin = Math.log10(Math.max(1, rangeMin));
+    const logMax = Math.log10(Math.max(1, rangeMax));
+    const logSpan = logMax - logMin;
+    const logCurrent = Math.log10(Math.max(1, currentHz));
+    // Keep a quarter-span either side of current, clamped to existing range
+    const newLogMin = Math.max(logMin, logCurrent - logSpan * 0.35);
+    const newLogMax = Math.min(logMax, logCurrent + logSpan * 0.35);
+    const safeMin = Math.max(20, Math.round(Math.pow(10, newLogMin)));
+    const safeMax = Math.min(16000, Math.round(Math.pow(10, newLogMax)));
+    // Guard: never collapse below 40Hz span
+    if (safeMax - safeMin < 40) { setPhase('fine'); return; }
     const nextMid = getMidHz(safeMin, safeMax);
     setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
     setRangeMin(safeMin); setRangeMax(safeMax);
@@ -155,25 +161,27 @@ export default function BuzzStopEngine({ onStop }) {
   };
 
   const colder = () => {
-    // True binary split — always cut the range cleanly in half (log scale)
-    // never collapse the range below a usable width
+    // COLDER means buzz is NOT near current tone → explore the opposite half
+    // Always split from the FULL current range into the half that EXCLUDES currentHz
     const logMin = Math.log10(Math.max(1, rangeMin));
     const logMax = Math.log10(Math.max(1, rangeMax));
     const logMid = (logMin + logMax) / 2;
     const logCurrent = Math.log10(Math.max(1, currentHz));
 
-    let newMin, newMax;
+    let newLogMin, newLogMax;
     if (logCurrent >= logMid) {
-      // Current tone is in upper half → buzz must be in lower half
-      newMin = rangeMin;
-      newMax = Math.max(rangeMin + 100, Math.round(Math.pow(10, logMid)));
+      // Current tone is in upper half → explore lower half
+      newLogMin = logMin;
+      newLogMax = logMid;
     } else {
-      // Current tone is in lower half → buzz must be in upper half
-      newMin = Math.min(rangeMax - 100, Math.round(Math.pow(10, logMid)));
-      newMax = rangeMax;
+      // Current tone is in lower half → explore upper half
+      newLogMin = logMid;
+      newLogMax = logMax;
     }
-    const safeMin = Math.max(20, newMin);
-    const safeMax = Math.min(16000, newMax);
+    const safeMin = Math.max(20, Math.round(Math.pow(10, newLogMin)));
+    const safeMax = Math.min(16000, Math.round(Math.pow(10, newLogMax)));
+    // Guard: never collapse below 100Hz span — keeps scanning viable
+    if (safeMax - safeMin < 100) { setPhase('fine'); return; }
     const nextMid = getMidHz(safeMin, safeMax);
     setHistory(h => [...h, { min: rangeMin, max: rangeMax }]);
     setRangeMin(safeMin); setRangeMax(safeMax);

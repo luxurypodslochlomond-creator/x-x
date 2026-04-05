@@ -228,7 +228,7 @@ export default function WelcomePage() {
                         onClick={() => setTruthOpen(!truthOpen)}
                         className="w-full flex items-center justify-between hover:opacity-80 transition-opacity"
                     >
-                        <h2 className="text-2xl font-black font-mono text-red-400">⚠️ ULTRA-HONEST TRUTH</h2>
+                        <h2 className="text-2xl font-black font-mono text-red-400">ULTRA-HONEST TRUTH</h2>
                         <motion.div animate={{ rotate: truthOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
                             <ChevronDown className="w-6 h-6 text-red-400" />
                         </motion.div>
@@ -242,7 +242,7 @@ export default function WelcomePage() {
                     >
                         <div className="grid md:grid-cols-2 gap-3 font-mono text-xs pt-4">
                             <div className="bg-black border-2 border-green-500 p-4">
-                                <p className="text-green-400 font-bold mb-2">✅ WORKS NOW:</p>
+                                <p className="text-green-400 font-bold mb-2">WORKS NOW:</p>
                                 <ul className="text-gray-300 space-y-1">
                                     <li>• AI51 voice chat ✓</li>
                                     <li>• Healing frequencies ✓</li>
@@ -253,7 +253,7 @@ export default function WelcomePage() {
                             </div>
 
                             <div className="bg-black border-2 border-red-500 p-4">
-                                <p className="text-red-400 font-bold mb-2">❌ NOT YET (FUNDING NEEDED):</p>
+                                <p className="text-red-400 font-bold mb-2">NOT YET (FUNDING NEEDED):</p>
                                 <ul className="text-gray-300 space-y-1">
                                     <li>• Converting $P51 → real money</li>
                                     <li>• Cashing out to bank</li>
