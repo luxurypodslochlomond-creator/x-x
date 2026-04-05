@@ -111,7 +111,7 @@ export default function BuzzStopPage() {
       <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2"
         style={{ background: 'rgba(0,4,0,0.96)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(34,197,94,0.15)' }}>
         <div className="flex items-center justify-center gap-3 max-w-2xl mx-auto">
-          <p className="text-xs font-mono" style={{ color: 'rgba(34,197,94,0.35)' }}>Not a medical device · family@uf51.love</p>
+          <p className="text-xs font-mono" style={{ color: 'rgba(34,197,94,0.7)' }}>Not a medical device · family@uf51.love</p>
         </div>
       </footer>
     </div>
