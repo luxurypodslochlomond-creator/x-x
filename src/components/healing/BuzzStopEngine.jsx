@@ -118,6 +118,7 @@ export default function BuzzStopEngine({ onStop }) {
   const [history, setHistory]       = useState([]);
   const [elapsed, setElapsed]       = useState(0);
   const [hasHeadphones, setHasHeadphones] = useState(null);
+  const [lastFrequency, setLastFrequency] = useState(null);
 
   const ctx         = useRef(null);
   const masterGain  = useRef(null);
@@ -127,6 +128,14 @@ export default function BuzzStopEngine({ onStop }) {
   const rangeRef    = useRef({ min: 20, max: 16000 });
 
   useEffect(() => { rangeRef.current = { min: rangeMin, max: rangeMax }; }, [rangeMin, rangeMax]);
+
+  // Load last found frequency on mount
+  useEffect(() => {
+    const session = loadSession();
+    if (session?.userFrequency) {
+      setLastFrequency(session.userFrequency);
+    }
+  }, [loadSession]);
 
   const getCtx = useCallback(async () => {
     if (!ctx.current || ctx.current.state === 'closed') {
@@ -394,6 +403,13 @@ export default function BuzzStopEngine({ onStop }) {
 
               {hasHeadphones === null ? (
                 <div className="space-y-5">
+                  {lastFrequency && (
+                    <div className="px-4 py-3 rounded-xl text-center"
+                      style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)' }}>
+                      <p className="text-xs font-mono text-gray-600 mb-1">LAST FOUND</p>
+                      <p className="text-2xl font-black" style={{ color: C.green }}>{lastFrequency.toLocaleString()} Hz</p>
+                    </div>
+                  )}
                   <p className="text-gray-400 text-sm font-mono tracking-widest">ARE YOU WEARING HEADPHONES?</p>
                   <div className="grid grid-cols-2 gap-3">
                     <motion.button whileTap={{ scale: 0.95 }} onClick={() => setHasHeadphones(true)}
