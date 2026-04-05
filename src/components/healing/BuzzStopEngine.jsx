@@ -391,6 +391,31 @@ export default function BuzzStopEngine({ onStop }) {
                 </div>
               ) : (
                 <div className="space-y-4">
+
+                  {/* ── SCIENCE STRIP ── */}
+                  <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(34,197,94,0.2)', background: 'rgba(34,197,94,0.04)' }}>
+                    <div className="grid grid-cols-3 divide-x divide-green-900/40">
+                      {[
+                        { stat: '750M', label: 'people affected globally' },
+                        { stat: '1 in 7', label: 'adults have tinnitus' },
+                        { stat: '14%', label: 'severely impacted' },
+                      ].map(({ stat, label }) => (
+                        <div key={stat} className="py-3 px-2 text-center">
+                          <div className="font-black text-lg leading-none" style={{ color: C.green }}>{stat}</div>
+                          <div className="text-[10px] mt-1 leading-tight" style={{ color: 'rgba(34,197,94,0.5)' }}>{label}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="px-4 py-3 border-t border-green-900/30">
+                      <p className="text-xs text-center leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                        BuzzStop uses <span style={{ color: C.green, fontWeight: 700 }}>destructive interference</span> — the same physics as noise-cancelling headphones — to identify and cancel your exact tinnitus frequency with AI precision.
+                      </p>
+                    </div>
+                    <div className="px-4 pb-3 text-center">
+                      <span className="text-xs font-black tracking-widest" style={{ color: C.green }}>100% FREE · ALWAYS</span>
+                    </div>
+                  </div>
+
                   {!hasHeadphones && (
                     <div className="px-4 py-3 rounded-xl text-left"
                       style={{ background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.25)' }}>
