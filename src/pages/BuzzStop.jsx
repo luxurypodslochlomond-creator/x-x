@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, X } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import LiveClock from '@/components/shared/LiveClock';
 
 // Custom BuzzStop logo mark
 const BuzzStopMark = () => (
@@ -53,15 +54,20 @@ export default function BuzzStopPage() {
       </div>
 
       {/* ── FOOTER ── */}
-      <footer className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-center gap-4 py-2 px-4 text-xs font-mono"
-        style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', borderTop: '1px solid rgba(34,197,94,0.1)' }}>
-        <Link to="/BuzzStopTerms" className="text-gray-600 hover:text-gray-400 transition-colors">Terms</Link>
-        <span className="text-gray-800">·</span>
-        <Link to="/BuzzStopPrivacy" className="text-gray-600 hover:text-gray-400 transition-colors">Privacy</Link>
-        <span className="text-gray-800">·</span>
-        <span className="text-gray-700">Not medical advice</span>
-        <span className="text-gray-800">·</span>
-        <span className="text-gray-700">© 2026 UF51</span>
+      <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2.5"
+        style={{ background: 'rgba(0,6,0,0.95)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(34,197,94,0.2)' }}>
+        <div className="flex items-center justify-center gap-3 text-xs font-mono flex-wrap">
+          <Link to="/BuzzStopTerms" className="transition-colors" style={{ color: '#22c55e' }}>Terms</Link>
+          <span style={{ color: 'rgba(34,197,94,0.3)' }}>·</span>
+          <Link to="/BuzzStopPrivacy" className="transition-colors" style={{ color: '#22c55e' }}>Privacy</Link>
+          <span style={{ color: 'rgba(34,197,94,0.3)' }}>·</span>
+          <span style={{ color: 'rgba(255,255,255,0.3)' }}>Not medical advice</span>
+          <span style={{ color: 'rgba(34,197,94,0.3)' }}>·</span>
+          <span style={{ color: 'rgba(255,255,255,0.25)' }}>© 2026 UF51</span>
+        </div>
+        <div className="flex justify-center mt-1">
+          <LiveClock />
+        </div>
       </footer>
     </div>
   );
