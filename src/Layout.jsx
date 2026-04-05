@@ -544,7 +544,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       {/* <DisasterResilienceMode /> */}
       <TruthCheckProtocol />
       <AI51MemoryVault />
-      <AI51PhotonMemory />
+      {/* <AI51PhotonMemory /> - Hidden until we have real memories stored */}
       {/* <RealtimeDebugger /> */}
       {/* <PerformanceMonitor /> */}
       <GlobalErrorBoundary>

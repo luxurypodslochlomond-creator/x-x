@@ -170,10 +170,10 @@ export default function AI51PhotonMemory() {
   if (!stats) return null;
 
   return (
-    <div className="fixed top-6 right-6 z-40">
+    <div className="fixed bottom-24 right-3 lg:top-6 lg:right-6 z-40">
       <button
         onClick={() => setShowDetails(!showDetails)}
-        className="flex items-center gap-2 px-3 py-2 bg-black/60 border border-cyan-500/30 rounded-lg hover:border-cyan-500/60 transition-all text-xs font-mono"
+        className="hidden lg:flex items-center gap-2 px-3 py-2 bg-black/60 border border-cyan-500/30 rounded-lg hover:border-cyan-500/60 transition-all text-xs font-mono"
         title="AI51 Photon Memory - Encrypted, Compressed, Infinite Scale"
       >
         <Zap className="w-3 h-3 text-cyan-400" />
@@ -182,7 +182,7 @@ export default function AI51PhotonMemory() {
       </button>
 
       {showDetails && (
-        <div className="absolute top-12 right-0 bg-black border border-cyan-500/50 rounded-lg p-4 w-72 text-xs text-white/70 space-y-2">
+        <div className="fixed lg:absolute inset-0 lg:inset-auto top-auto lg:top-12 left-3 right-3 lg:left-auto lg:right-0 bottom-20 lg:bottom-auto bg-black border border-cyan-500/50 rounded-lg p-4 lg:w-72 text-xs text-white/70 space-y-2 max-h-96 overflow-y-auto z-50">
           <div className="flex items-center gap-2 text-cyan-400 font-bold mb-3">
             <Database className="w-4 h-4" />
             Memory Status
