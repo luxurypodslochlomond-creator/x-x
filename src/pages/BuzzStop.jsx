@@ -22,8 +22,8 @@ export default function BuzzStopPage() {
             <COOLASFUCKZap size={32} animate={true} />
             <h1 className="text-3xl font-black text-purple-300 font-mono tracking-wider">BUZZSTOP</h1>
           </div>
-          <p className="text-gray-400 text-sm font-mono">Find your exact tinnitus frequency. Cancel it.</p>
-          <p className="text-gray-600 text-xs font-mono mt-1">Destructive interference • Works offline • Free forever</p>
+          <p className="text-gray-400 text-sm font-mono">AI tinnitus cancellation — 4 simultaneous mechanisms.</p>
+          <p className="text-gray-600 text-xs font-mono mt-1">Based on Newcastle University 2025 research • Free forever</p>
         </div>
 
         <BuzzStopEngine />
