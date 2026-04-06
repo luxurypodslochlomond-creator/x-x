@@ -74,7 +74,7 @@ export default function PetSounds51() {
    const [selectedProtocol, setSelectedProtocol] = useState(null);
    const [showScience, setShowScience] = useState(false);
    const [showPaywall, setShowPaywall] = useState(false);
-   const [isSubscribed, setIsSubscribed] = useState(false);
+   const [isSubscribed, setIsSubscribed] = useState(true); // TEMP: unlocked for testing — change back to false to re-enable paywall
    const [selectedSpecies, setSelectedSpecies] = useState('dog');
    const [showRestoreAccess, setShowRestoreAccess] = useState(false);
    const [restoreEmail, setRestoreEmail] = useState('');
