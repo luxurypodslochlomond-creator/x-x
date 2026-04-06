@@ -331,16 +331,22 @@ function addHarmonicStack(ctx, eqBus, carrier, chord, nodes) {
 
 function addBrownNoiseBed(ctx, eqBus, nodes, gainVal = 0.018, lpHz = 400) {
   const noiseNode = buildBrownNoise(ctx);
-  const noiseFilter = ctx.createBiquadFilter();
-  noiseFilter.type = 'lowpass';
-  noiseFilter.frequency.value = lpHz;
-  noiseFilter.Q.value = 0.7;
+  // Double-filter: two lowpass stages = much steeper rolloff = warmer, less hiss
+  const noiseFilter1 = ctx.createBiquadFilter();
+  noiseFilter1.type = 'lowpass';
+  noiseFilter1.frequency.value = lpHz;
+  noiseFilter1.Q.value = 0.5;
+  const noiseFilter2 = ctx.createBiquadFilter();
+  noiseFilter2.type = 'lowpass';
+  noiseFilter2.frequency.value = lpHz * 0.6; // second stage rolls off harder
+  noiseFilter2.Q.value = 0.5;
   const noiseGain = ctx.createGain();
-  noiseGain.gain.value = gainVal;
-  noiseNode.connect(noiseFilter);
-  noiseFilter.connect(noiseGain);
+  noiseGain.gain.value = gainVal * 0.75; // slightly quieter — warmth not hiss
+  noiseNode.connect(noiseFilter1);
+  noiseFilter1.connect(noiseFilter2);
+  noiseFilter2.connect(noiseGain);
   noiseGain.connect(eqBus);
-  nodes.push(noiseNode, noiseFilter, noiseGain);
+  nodes.push(noiseNode, noiseFilter1, noiseFilter2, noiseGain);
 }
 
 function addPurrLayer(ctx, eqBus, nodes) {
@@ -405,7 +411,7 @@ function buildThunderstormGraph(ctx, volume, species) {
   maskFilter.type = 'lowpass';
   maskFilter.frequency.value = 1800; // wider than normal — needed for masking
   const maskGain = ctx.createGain();
-  maskGain.gain.value = 0.055; // noticeably louder than separation bed
+  maskGain.gain.value = 0.042; // effective masking without harshness on cheap speakers
   maskNoise.connect(maskFilter);
   maskFilter.connect(maskGain);
   maskGain.connect(eqBus);
@@ -566,12 +572,13 @@ function buildIsochronicTone(ctx, carrier, isoRate, waveform, volume, eqBus, nod
   const carrierGain = ctx.createGain();
   carrierGain.gain.value = 0.28;
 
-  // Isochronic AM — sharp on/off at isoRate Hz (e.g. 10Hz = alpha calm)
+  // Isochronic AM — sine-shaped pulse at isoRate Hz (gentler than square, still effective)
+  // Sine isochronic is easier on animal hearing while still producing entrainment
   const isoLFO = ctx.createOscillator();
-  isoLFO.type = 'square'; // square = sharp pulse = true isochronic
+  isoLFO.type = 'sine'; // softer edges — less harsh than square for animal use
   isoLFO.frequency.value = isoRate;
   const isoLFOGain = ctx.createGain();
-  isoLFOGain.gain.value = 0.14; // modulation depth — audible but not harsh
+  isoLFOGain.gain.value = 0.11; // slightly reduced depth — gentler modulation
   isoLFO.connect(isoLFOGain);
   isoLFOGain.connect(carrierGain.gain);
   isoLFO.start();
