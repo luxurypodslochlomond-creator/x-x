@@ -93,54 +93,86 @@ export default function BuzzStopPage() {
           </div>
         </div>
 
-        {/* ── SLIDE-DOWN MENU ── */}
+        {/* ── FULL SCREEN MENU OVERLAY ── */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              style={{ borderTop: '1px solid rgba(34,197,94,0.12)', overflow: 'hidden', background: 'rgba(0,4,0,0.98)' }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[100] flex flex-col"
+              style={{ background: '#000', top: 0 }}
             >
-              <div className="max-w-2xl mx-auto px-4 py-4 space-y-1">
+              {/* Menu Header */}
+              <div className="flex items-center justify-between px-6 py-5"
+                style={{ borderBottom: '1px solid rgba(34,197,94,0.2)' }}>
+                <div className="flex items-center gap-2.5">
+                  <BuzzStopMark />
+                  <div>
+                    <span className="text-white font-black text-xl tracking-tight">BUZZ</span>
+                    <span className="font-black text-xl tracking-tight" style={{ color: '#22c55e' }}>STOP</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-all"
+                  style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', color: '#22c55e' }}>
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Menu Items */}
+              <div className="flex-1 flex flex-col justify-center px-6 space-y-3 max-w-sm mx-auto w-full">
 
                 <Link to="/BuzzStopAbout" onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all"
-                  style={{ border: '1px solid rgba(34,197,94,0.15)', color: '#22c55e' }}>
-                  <InfoIcon className="w-4 h-4 flex-shrink-0" />
+                  className="flex items-center gap-4 px-5 py-5 rounded-2xl transition-all"
+                  style={{ background: 'rgba(34,197,94,0.07)', border: '1.5px solid rgba(34,197,94,0.25)' }}>
+                  <InfoIcon className="w-6 h-6 flex-shrink-0" style={{ color: '#22c55e' }} />
                   <div>
-                    <div className="font-bold text-sm">About</div>
-                    <div className="text-xs text-gray-600">How it works · Free forever · vs every paid app</div>
+                    <div className="font-black text-lg text-white">About BuzzStop</div>
+                    <div className="text-sm mt-0.5" style={{ color: 'rgba(34,197,94,0.6)' }}>How it works · Free forever</div>
                   </div>
                 </Link>
 
                 <Link to="/BuzzStopTerms" onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all"
-                  style={{ border: '1px solid rgba(34,197,94,0.15)', color: '#22c55e' }}>
-                  <Scale className="w-4 h-4 flex-shrink-0" />
+                  className="flex items-center gap-4 px-5 py-5 rounded-2xl transition-all"
+                  style={{ background: 'rgba(34,197,94,0.07)', border: '1.5px solid rgba(34,197,94,0.25)' }}>
+                  <Scale className="w-6 h-6 flex-shrink-0" style={{ color: '#22c55e' }} />
                   <div>
-                    <div className="font-bold text-sm">Terms of Use</div>
-                    <div className="text-xs text-gray-600">Legal terms + safety</div>
+                    <div className="font-black text-lg text-white">Terms of Use</div>
+                    <div className="text-sm mt-0.5" style={{ color: 'rgba(34,197,94,0.6)' }}>Legal terms + safety info</div>
                   </div>
                 </Link>
 
                 <Link to="/BuzzStopPrivacy" onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all"
-                  style={{ border: '1px solid rgba(34,197,94,0.15)', color: '#22c55e' }}>
-                  <Eye className="w-4 h-4 flex-shrink-0" />
+                  className="flex items-center gap-4 px-5 py-5 rounded-2xl transition-all"
+                  style={{ background: 'rgba(34,197,94,0.07)', border: '1.5px solid rgba(34,197,94,0.25)' }}>
+                  <Eye className="w-6 h-6 flex-shrink-0" style={{ color: '#22c55e' }} />
                   <div>
-                    <div className="font-bold text-sm">Privacy Policy</div>
-                    <div className="text-xs text-gray-600">Zero data stored. All local.</div>
+                    <div className="font-black text-lg text-white">Privacy Policy</div>
+                    <div className="text-sm mt-0.5" style={{ color: 'rgba(34,197,94,0.6)' }}>Zero data stored · All local</div>
                   </div>
                 </Link>
 
-                <div className="flex items-center gap-3 px-3 py-3 rounded-xl"
-                  style={{ border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <InfoIcon className="w-4 h-4 flex-shrink-0 text-gray-600" />
-                  <p className="text-xs text-gray-600">Not a medical device. Not medical advice. For wellbeing use only.</p>
-                </div>
+                <Link to={createPageUrl('Welcome')} onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-4 px-5 py-5 rounded-2xl transition-all"
+                  style={{ background: 'rgba(255,255,255,0.03)', border: '1.5px solid rgba(255,255,255,0.1)' }}>
+                  <ArrowLeft className="w-6 h-6 flex-shrink-0 text-gray-500" />
+                  <div>
+                    <div className="font-black text-lg text-gray-400">Back to UF51</div>
+                    <div className="text-sm mt-0.5 text-gray-700">Universal Frequency 51</div>
+                  </div>
+                </Link>
+              </div>
 
-                <p className="text-center text-gray-800 text-xs font-mono pb-1">© 2026 Universal Frequency 51</p>
+              {/* Footer */}
+              <div className="px-6 py-6 text-center space-y-2"
+                style={{ borderTop: '1px solid rgba(34,197,94,0.1)' }}>
+                <p className="font-black text-xs tracking-widest" style={{ color: '#22c55e' }}>
+                  100% FREE · ALWAYS · NO ACCOUNTS
+                </p>
+                <p className="text-gray-800 text-xs">Not a medical device · © 2026 Universal Frequency 51</p>
               </div>
             </motion.div>
           )}
