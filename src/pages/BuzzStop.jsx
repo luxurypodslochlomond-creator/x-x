@@ -107,10 +107,10 @@ export default function BuzzStopPage() {
                 <Link to="/BuzzStopAbout" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all"
                   style={{ border: '1px solid rgba(34,197,94,0.15)', color: '#22c55e' }}>
-                  <Info className="w-4 h-4 flex-shrink-0" />
+                  <InfoIcon className="w-4 h-4 flex-shrink-0" />
                   <div>
                     <div className="font-bold text-sm">About</div>
-                    <div className="text-xs text-gray-600">How it works · Relief vs cure · Privacy</div>
+                    <div className="text-xs text-gray-600">How it works · Free forever · vs every paid app</div>
                   </div>
                 </Link>
 
