@@ -130,6 +130,45 @@ export default function BuzzStopAbout() {
           <p className="mt-3">We're not promising a cure. We're offering relief. And we're building it the right way — with your privacy, your control, and your dignity in mind.</p>
         </section>
 
+        {/* === THE HONEST MARKET REALITY === */}
+        <section className="border-2 border-green-500/40 rounded-xl p-5" style={{ background: 'rgba(34,197,94,0.05)' }}>
+          <h2 className="text-green-400 font-black font-mono text-xs tracking-widest mb-4">⚡ THE HONEST MARKET REALITY — APRIL 2026</h2>
+          
+          <p className="text-gray-300 mb-4">We looked at every tinnitus app available right now. Here's what we found:</p>
+
+          <div className="space-y-3 mb-5">
+            {[
+              { name: 'Oto', model: 'Subscription — £x/month', note: 'Great CBT app. Costs money.' },
+              { name: 'ReSound Relief', model: 'Freemium — premium features locked', note: 'Sound therapy. Data goes to GN Audio.' },
+              { name: 'MindEar', model: 'Subscription', note: 'AI + CBT. Paid.' },
+              { name: 'BetterSleep', model: 'Subscription', note: 'Sleep focus. Subscription required.' },
+              { name: 'Tinnitus Relief App', model: '€49.99/year', note: 'Privacy-first, offline. Costs €50/year.' },
+            ].map(({ name, model, note }) => (
+              <div key={name} className="flex items-start gap-3 pl-3 border-l border-red-500/30">
+                <div className="flex-1">
+                  <span className="text-white font-bold text-sm">{name}</span>
+                  <span className="text-red-400 text-xs ml-2 font-mono">{model}</span>
+                  <p className="text-gray-600 text-xs mt-0.5">{note}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-green-500/30 pt-4">
+            <div className="flex items-start gap-3 pl-3 border-l-2 border-green-500">
+              <div className="flex-1">
+                <span className="text-green-400 font-black text-sm">BuzzStop</span>
+                <span className="text-green-300 text-xs ml-2 font-mono font-black">FREE. FOREVER.</span>
+                <p className="text-gray-400 text-xs mt-1">No account. No subscription. No data collected. No ads. Works offline. Built on physics. Part of a mission — not a business model.</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-gray-500 text-xs mt-4 leading-relaxed">
+            There are good apps out there. Some are genuinely helpful. We're not slagging anyone off. We just believe that relief from pain should not require a monthly payment or your personal data. So we built it free. And we're keeping it that way.
+          </p>
+        </section>
+
       </div>
 
       {/* Footer nav */}
