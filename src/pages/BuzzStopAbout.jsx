@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Zap, Brain, Waves, Shield } from 'lucide-react';
+import { ArrowLeft, Zap, Brain, Waves, Shield, CheckCircle, XCircle, HelpCircle, AlertTriangle } from 'lucide-react';
 
 export default function BuzzStopAbout() {
   return (
@@ -35,7 +35,7 @@ export default function BuzzStopAbout() {
                 <div className="w-3 h-3 rounded-full" style={{ background: '#22c55e' }} />
                 <h3 className="font-bold text-white">Phase Layer (Destructive Interference)</h3>
               </div>
-              <p>We generate an inverted copy of your tinnitus frequency and play it alongside. Two identical waves 180° out of phase = cancellation. This is real physics — the same principle Bose uses in noise-cancelling headphones.</p>
+              <p>We generate an inverted copy of your tinnitus frequency and play it alongside. Two identical waves 180° out of phase = cancellation. This is real physics — the same principle used in professional noise-cancelling headphones.</p>
             </div>
 
             {/* Cortex */}
@@ -72,15 +72,15 @@ export default function BuzzStopAbout() {
           <h2 className="text-green-500 font-black font-mono text-xs tracking-widest mb-3">RELIEF VS CURE: BE HONEST</h2>
           <div className="space-y-3">
             <div>
-              <h3 className="font-bold text-white mb-1">✓ What BuzzStop Can Do</h3>
+              <h3 className="font-bold text-white mb-1 flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> What BuzzStop Can Do</h3>
               <p>Provide immediate relief during a session (5–15 minutes). Help you relax. Give you a tool you control. No side effects. No prescription needed.</p>
             </div>
             <div>
-              <h3 className="font-bold text-white mb-1">✗ What BuzzStop Cannot Do (Yet)</h3>
+              <h3 className="font-bold text-white mb-1 flex items-center gap-2"><XCircle className="w-4 h-4 text-red-400" /> What BuzzStop Cannot Do (Yet)</h3>
               <p>Permanently cure tinnitus. Fix the underlying cause (hearing damage, nerve issues, etc.). Work equally well for everyone — tinnitus is complex and individual.</p>
             </div>
             <div>
-              <h3 className="font-bold text-white mb-1">? The Research</h3>
+              <h3 className="font-bold text-white mb-1 flex items-center gap-2"><HelpCircle className="w-4 h-4 text-blue-400" /> The Research</h3>
               <p>Destructive interference works in physics. Binaural beats are peer-reviewed. Pattern interruption is neuropsychology. But human tinnitus is complicated — multiple causes, multiple mechanisms. We're applying proven tools intelligently.</p>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function BuzzStopAbout() {
 
         {/* === WHEN TO SEE A DOCTOR === */}
         <section className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-          <h2 className="text-green-500 font-black font-mono text-xs tracking-widest mb-3">⚠ WHEN TO SEE A DOCTOR</h2>
+          <h2 className="text-green-500 font-black font-mono text-xs tracking-widest mb-3 flex items-center gap-2"><AlertTriangle className="w-4 h-4" /> WHEN TO SEE A DOCTOR</h2>
           <ul className="space-y-2 text-gray-300 text-sm">
             <li>• Your tinnitus appeared suddenly</li>
             <li>• It's accompanied by hearing loss, dizziness, or ear pain</li>
@@ -132,22 +132,20 @@ export default function BuzzStopAbout() {
 
         {/* === THE HONEST MARKET REALITY === */}
         <section className="border-2 border-green-500/40 rounded-xl p-5" style={{ background: 'rgba(34,197,94,0.05)' }}>
-          <h2 className="text-green-400 font-black font-mono text-xs tracking-widest mb-4">⚡ THE HONEST MARKET REALITY — APRIL 2026</h2>
+          <h2 className="text-green-400 font-black font-mono text-xs tracking-widest mb-4 flex items-center gap-2"><Zap className="w-4 h-4" /> THE HONEST MARKET REALITY</h2>
           
-          <p className="text-gray-300 mb-4">We looked at every tinnitus app available right now. Here's what we found:</p>
+          <p className="text-gray-300 mb-4">Most tinnitus tools available right now fall into one of these categories:</p>
 
           <div className="space-y-3 mb-5">
             {[
-              { name: 'Oto', model: 'Subscription — £x/month', note: 'Great CBT app. Costs money.' },
-              { name: 'ReSound Relief', model: 'Freemium — premium features locked', note: 'Sound therapy. Data goes to GN Audio.' },
-              { name: 'MindEar', model: 'Subscription', note: 'AI + CBT. Paid.' },
-              { name: 'BetterSleep', model: 'Subscription', note: 'Sleep focus. Subscription required.' },
-              { name: 'Tinnitus Relief App', model: '€49.99/year', note: 'Privacy-first, offline. Costs €50/year.' },
-            ].map(({ name, model, note }) => (
-              <div key={name} className="flex items-start gap-3 pl-3 border-l border-red-500/30">
+              { model: 'Monthly subscription', note: 'Access locked behind recurring payment.' },
+              { model: 'Freemium — core features paywalled', note: 'Free tier exists but real tools cost.' },
+              { model: 'One-time purchase (€40–€60)', note: 'Privacy-first but still costs money.' },
+              { model: 'Free with ads + data collection', note: 'You pay with your information instead.' },
+            ].map(({ model, note }) => (
+              <div key={model} className="flex items-start gap-3 pl-3 border-l border-red-500/30">
                 <div className="flex-1">
-                  <span className="text-white font-bold text-sm">{name}</span>
-                  <span className="text-red-400 text-xs ml-2 font-mono">{model}</span>
+                  <span className="text-red-400 text-xs font-mono font-bold">{model}</span>
                   <p className="text-gray-600 text-xs mt-0.5">{note}</p>
                 </div>
               </div>
@@ -165,7 +163,7 @@ export default function BuzzStopAbout() {
           </div>
 
           <p className="text-gray-500 text-xs mt-4 leading-relaxed">
-            There are good apps out there. Some are genuinely helpful. We're not slagging anyone off. We just believe that relief from pain should not require a monthly payment or your personal data. So we built it free. And we're keeping it that way.
+            There are good tools out there. Some are genuinely helpful. We just believe that relief from pain should not require a monthly payment or your personal data. So we built it free. And we're keeping it that way.
           </p>
         </section>
 
