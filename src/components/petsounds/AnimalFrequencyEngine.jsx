@@ -590,6 +590,117 @@ function buildIsochronicTone(ctx, carrier, isoRate, waveform, volume, eqBus, nod
   nodes.push(osc, carrierGain);
 }
 
+// ── CAT-SPECIFIC BUILDERS — Higher carriers, faster beats ─────────────────────
+// Cats: 79kHz peak hearing, prefer higher tones, need faster rhythmic engagement
+function buildCatAnxietyGraph(ctx, volume, protocol) {
+  const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume, 'cat', 2.5);
+
+  // Cat heartbeat: faster (80 BPM vs 65) — cats are jittery, need quicker reassurance
+  const BPM = 80;
+  const beatInterval = 60 / BPM;
+  for (let i = 0; i < BPM * 10; i++) {
+    const t = ctx.currentTime + 1.5 + i * beatInterval;
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = 65; // slightly higher than dog
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.35, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+    osc.connect(g); g.connect(eqBus);
+    osc.start(t); osc.stop(t + 0.2);
+    nodes.push(osc, g);
+  }
+
+  // Cat purr: primary frequency they use (25Hz) — more prominent for cats
+  [25, 50].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = i === 0 ? 0.12 : 0.08; // louder purr for cats
+    osc.connect(g); g.connect(eqBus); osc.start();
+    nodes.push(osc, g);
+  });
+
+  // Cat-optimized harmonic stack: higher ratios (they hear higher)
+  const catCarrier = 280; // higher than dog
+  addHarmonicStack(ctx, eqBus, catCarrier, [1, 6/5, 9/8], nodes);
+
+  // Filtered brown noise — warmer midrange for cats
+  addBrownNoiseBed(ctx, eqBus, nodes, 0.015, 500);
+
+  // Breath LFO
+  const lfo = ctx.createOscillator();
+  lfo.frequency.value = 0.1;
+  const lfoGain = ctx.createGain();
+  lfoGain.gain.value = 0.06;
+  lfo.connect(lfoGain); lfoGain.connect(masterGain.gain); lfo.start();
+  nodes.push(lfo, lfoGain);
+
+  return { masterGain, nodes };
+}
+
+// ── HORSE-SPECIFIC BUILDERS — Lower carriers, prey-animal calm ─────────────────
+// Horses: 33.5kHz peak, prefer lower rumble, need slow deep calm (herd safety signal)
+function buildHorseAnxietyGraph(ctx, volume, protocol) {
+  const { masterGain, eqBus, nodes } = makeMasterAndEQ(ctx, volume, 'horse', 2.5);
+
+  // Horse heartbeat: much slower (45 BPM) — prey animal, needs deep slow signal
+  const BPM = 45;
+  const beatInterval = 60 / BPM;
+  for (let i = 0; i < BPM * 10; i++) {
+    const t = ctx.currentTime + 1.5 + i * beatInterval;
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = 40; // deep, grounding
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.4, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+    osc.connect(g); g.connect(eqBus);
+    osc.start(t); osc.stop(t + 0.33);
+    nodes.push(osc, g);
+  }
+
+  // Horse purr layer: 25Hz is still calming but add lower 15Hz (sub-sensory)
+  [15, 25].forEach((f, i) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = f;
+    const g = ctx.createGain();
+    g.gain.value = i === 0 ? 0.1 : 0.06;
+    osc.connect(g); g.connect(eqBus); osc.start();
+    nodes.push(osc, g);
+  });
+
+  // Horse-optimized harmonic: lower, grounding carriers (they prefer rumble)
+  const horseCarrier = 165; // lower than dog
+  addHarmonicStack(ctx, eqBus, horseCarrier, [1, 5/4, 3/2], nodes);
+
+  // Deep brown noise — horses feel low frequencies through ground
+  addBrownNoiseBed(ctx, eqBus, nodes, 0.022, 350);
+
+  // Very slow breath — horses are calm herd animals
+  const lfo = ctx.createOscillator();
+  lfo.frequency.value = 0.06;
+  const lfoGain = ctx.createGain();
+  lfoGain.gain.value = 0.08;
+  lfo.connect(lfoGain); lfoGain.connect(masterGain.gain); lfo.start();
+  nodes.push(lfo, lfoGain);
+
+  // Sub-bass for horses: IMPORTANT — they feel bass through feet
+  const subOsc = ctx.createOscillator();
+  subOsc.type = 'sine';
+  subOsc.frequency.value = 30; // very low rumble
+  const subGain = ctx.createGain();
+  subGain.gain.value = 0.06;
+  subOsc.connect(subGain); subGain.connect(eqBus); subOsc.start();
+  nodes.push(subOsc, subGain);
+
+  return { masterGain, nodes };
+}
+
 // ── STANDARD ENGINE (hyperactive, pre-race, post-race, zoo, fatigue) ──────────
 // Uses isochronic tones — works perfectly through speakers, TVs, laptops
 function buildAudioGraph(ctx, freq, volume, species) {
@@ -674,6 +785,8 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
 
       // Each protocol uses the right engine for its actual therapeutic goal
       const { masterGain, nodes } =
+        protocol === 'separation' && species === 'cat'    ? buildCatAnxietyGraph(ctx, volume, protocol) :
+        protocol === 'separation' && species === 'horse'  ? buildHorseAnxietyGraph(ctx, volume, protocol) :
         protocol === 'separation'                        ? buildHeartbeatGraph(ctx, volume, species) :
         protocol === 'thunderstorm'                      ? buildThunderstormGraph(ctx, volume, species) :
         protocol === 'night_anxiety'                     ? buildNightGraph(ctx, volume, species) :
