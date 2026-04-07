@@ -915,6 +915,36 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
         </div>
         <h2 className="text-2xl sm:text-3xl font-black mb-1" style={{ color: freq.color }}>{freq.name}</h2>
         <p className="text-gray-500 text-sm italic mb-4">"{freq.tagline}"</p>
+
+        {/* Species tuning specs — show what's different */}
+        {protocol === 'separation' && (
+          <div className="bg-black/40 border rounded-lg p-3 mb-4" style={{ borderColor: freq.color + '30' }}>
+            <p className="text-xs font-mono text-gray-400 mb-2">Species tuning for {SPECIES_PROFILES[species]?.label}:</p>
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              {species === 'dog' && (
+                <>
+                  <div><span className="text-gray-600">Heartbeat:</span> <span className="text-cyan-300">65 BPM</span></div>
+                  <div><span className="text-gray-600">Carrier:</span> <span className="text-cyan-300">220 Hz</span></div>
+                  <div><span className="text-gray-600">Range:</span> <span className="text-cyan-300">Balanced</span></div>
+                </>
+              )}
+              {species === 'cat' && (
+                <>
+                  <div><span className="text-gray-600">Heartbeat:</span> <span className="text-amber-300">80 BPM</span></div>
+                  <div><span className="text-gray-600">Carrier:</span> <span className="text-amber-300">280 Hz</span></div>
+                  <div><span className="text-gray-600">Tuning:</span> <span className="text-amber-300">Higher harmonics</span></div>
+                </>
+              )}
+              {species === 'horse' && (
+                <>
+                  <div><span className="text-gray-600">Heartbeat:</span> <span className="text-green-300">45 BPM</span></div>
+                  <div><span className="text-gray-600">Carrier:</span> <span className="text-green-300">165 Hz</span></div>
+                  <div><span className="text-gray-600">Tuning:</span> <span className="text-green-300">Deep rumble + bass</span></div>
+                </>
+              )}
+            </div>
+          </div>
+        )}
         <div className="bg-white/5 rounded-xl p-4 border border-white/5">
           <div className="flex items-center gap-2 mb-2">
             <div className="flex items-center gap-1.5">
