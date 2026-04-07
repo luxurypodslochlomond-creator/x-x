@@ -24,7 +24,7 @@ export default function BuzzStopPage() {
   useEffect(() => {
     // Register service worker for offline support
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/buzzstop-sw.js')
+      navigator.serviceWorker.register('/api/functions/buzzstopServiceWorker')
         .then((reg) => {
           console.log('BuzzStop offline cache ready ✓');
           setSwReady(true);
