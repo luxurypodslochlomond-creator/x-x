@@ -20,7 +20,7 @@ export default function BuzzStopTerms() {
 
         <section>
           <h2 className="text-green-500 font-black font-mono text-xs tracking-widest mb-2">1. WHAT BUZZSTOP IS</h2>
-          <p>BuzzStop is a free audio tool that uses sound frequencies to help people find and attempt to mask tinnitus (ringing in the ears). It's built on real acoustic physics — destructive interference is a real thing. We're not bullshitting you.</p>
+          <p>BuzzStop is a free audio tool that uses sound frequencies to help people find and attempt to mask tinnitus (ringing in the ears). It's built on real acoustic physics — destructive interference is a real thing. No gimmicks, no false promises.</p>
         </section>
 
         <section>
