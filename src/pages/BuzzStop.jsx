@@ -19,7 +19,7 @@ export default function BuzzStopPage() {
    const [isOnline, setIsOnline] = useState(navigator.onLine);
    const [swReady, setSwReady] = useState(false);
    const [testMode] = useState(() => window.location.search.includes('test=true') || window.self !== window.top);
-   const [showEngine, setShowEngine] = useState(true);
+   const [showEngine, setShowEngine] = useState(0);
 
   useEffect(() => {
     // Register service worker for offline support
@@ -181,7 +181,7 @@ export default function BuzzStopPage() {
 
       {/* Content */}
        <div className={`${swReady && !isOnline ? 'pt-20' : 'pt-14'} pb-14 transition-all`}>
-         {showEngine && <BuzzStopEngine onStop={() => setShowEngine(false)} />}
+         <BuzzStopEngine key={showEngine} onStop={() => setShowEngine(n => n + 1)} />
        </div>
 
       {/* ── FOOTER ── */}
