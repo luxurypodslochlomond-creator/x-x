@@ -399,7 +399,7 @@ export default function BuzzStopEngine({ onStop }) {
                 <div className="text-6xl font-black text-white tracking-tighter mb-2">
                   BUZZ<span style={{ color: C.green }}>STOP</span>
                 </div>
-                <p className="text-gray-500 text-sm">Find your tinnitus frequency.<br/>Cancel it with AI.</p>
+                <p className="text-gray-500 text-sm">On-device AI audio engine.<br/>Finds your frequency. Cancels it.</p>
               </div>
 
               {hasHeadphones === null ? (
@@ -425,6 +425,27 @@ export default function BuzzStopEngine({ onStop }) {
                       <SpeakerIcon size={32} color="#94a3b8" />
                       <span className="font-black text-base text-gray-400">NO</span>
                     </motion.button>
+                  </div>
+
+                  {/* ── STATS STRIP ── */}
+                  <div className="rounded-2xl overflow-hidden mt-2" style={{ border: '1px solid rgba(34,197,94,0.15)', background: 'rgba(34,197,94,0.04)' }}>
+                    <div className="grid grid-cols-3 divide-x divide-green-900/30">
+                      {[
+                        { stat: '750M', label: 'people suffer tinnitus' },
+                        { stat: '1 in 7', label: 'adults affected' },
+                        { stat: 'FREE', label: 'always · no accounts' },
+                      ].map(({ stat, label }) => (
+                        <div key={stat} className="py-3 px-2 text-center">
+                          <div className="font-black text-base leading-none" style={{ color: '#22c55e' }}>{stat}</div>
+                          <div className="text-[9px] mt-1 leading-tight" style={{ color: 'rgba(34,197,94,0.5)' }}>{label}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="px-4 py-2.5 border-t border-green-900/20 text-center">
+                      <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                        Uses <span style={{ color: '#22c55e', fontWeight: 700 }}>destructive interference</span> — same physics as noise-cancelling headphones. 100% on-device, zero data stored.
+                      </p>
+                    </div>
                   </div>
                 </div>
               ) : (
