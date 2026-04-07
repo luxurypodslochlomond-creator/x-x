@@ -140,7 +140,7 @@ export default function BuzzStopAbout() {
             {[
               { model: 'Monthly subscription', note: 'Access locked behind recurring payment.' },
               { model: 'Freemium — core features paywalled', note: 'Free tier exists but real tools cost.' },
-              { model: 'One-time purchase (€40–€60)', note: 'Privacy-first but still costs money.' },
+              { model: 'One-time purchase ($40–$60)', note: 'Upfront cost just to try it.' },
               { model: 'Free with ads + data collection', note: 'You pay with your information instead.' },
             ].map(({ model, note }) => (
               <div key={model} className="flex items-start gap-3 pl-3 border-l border-red-500/30">
@@ -163,7 +163,7 @@ export default function BuzzStopAbout() {
           </div>
 
           <p className="text-gray-500 text-xs mt-4 leading-relaxed">
-            There are good tools out there. Some are genuinely helpful. We just believe that relief from pain should not require a monthly payment or your personal data. So we built it free. And we're keeping it that way.
+            We believe relief from pain should not require a monthly payment or your personal data. So we built it free. And we're keeping it that way.
           </p>
         </section>
 
