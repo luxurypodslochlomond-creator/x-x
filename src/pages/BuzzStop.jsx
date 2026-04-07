@@ -101,8 +101,8 @@ export default function BuzzStopPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[100] flex flex-col"
-              style={{ background: '#000', top: 0 }}
+              className="fixed inset-0 z-[200] flex flex-col"
+              style={{ background: '#000000', top: 0, left: 0, right: 0, bottom: 0, width: '100vw', height: '100vh', overflow: 'hidden' }}
             >
               {/* Menu Header */}
               <div className="flex items-center justify-between px-6 py-5"
