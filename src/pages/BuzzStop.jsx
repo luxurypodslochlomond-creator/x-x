@@ -155,15 +155,15 @@ export default function BuzzStopPage() {
                   </div>
                 </Link>
 
-                <Link to={createPageUrl('Welcome')} onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-4 px-5 py-5 rounded-2xl transition-all"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1.5px solid rgba(255,255,255,0.1)' }}>
-                  <ArrowLeft className="w-6 h-6 flex-shrink-0 text-gray-500" />
+                <button onClick={() => setMenuOpen(false)}
+                  className="w-full flex items-center gap-4 px-5 py-5 rounded-2xl transition-all text-left"
+                  style={{ background: 'rgba(34,197,94,0.07)', border: '1.5px solid rgba(34,197,94,0.25)' }}>
+                  <ArrowLeft className="w-6 h-6 flex-shrink-0" style={{ color: '#22c55e' }} />
                   <div>
-                    <div className="font-black text-lg text-gray-400">Back to UF51</div>
-                    <div className="text-sm mt-0.5 text-gray-700">Universal Frequency 51</div>
+                    <div className="font-black text-lg text-white">Back to BuzzStop</div>
+                    <div className="text-sm mt-0.5" style={{ color: 'rgba(34,197,94,0.6)' }}>Close menu · Return to app</div>
                   </div>
-                </Link>
+                </button>
               </div>
 
               {/* Footer */}
