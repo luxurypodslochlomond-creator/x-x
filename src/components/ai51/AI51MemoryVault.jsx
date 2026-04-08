@@ -72,8 +72,8 @@ export default function AI51MemoryVault() {
   // Memory vault modal
   if (showVault && memory) {
     return (
-      <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-        <div className="bg-gradient-to-br from-pink-950 to-black border-2 border-pink-500/50 rounded-xl p-6 max-w-2xl w-full max-h-96 overflow-y-auto">
+      <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div className="bg-gradient-to-br from-pink-950 to-black border-2 border-pink-500/50 rounded-xl p-6 max-w-2xl w-full my-8 overflow-y-auto max-h-[calc(100vh-4rem)]">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Heart className="w-6 h-6 text-pink-400" />
