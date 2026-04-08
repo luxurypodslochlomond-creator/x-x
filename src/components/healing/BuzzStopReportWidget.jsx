@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, AlertCircle, Send, CheckCircle } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
-export default function BuzzStopReportWidget() {
-  const [open, setOpen] = useState(false);
+export default function BuzzStopReportWidget({ open, onClose }) {
   const [issue, setIssue] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,7 +34,7 @@ export default function BuzzStopReportWidget() {
 
       setSubmitted(true);
       setTimeout(() => {
-        setOpen(false);
+        onClose?.();
         setSubmitted(false);
         setIssue('');
       }, 2000);
@@ -68,7 +67,7 @@ export default function BuzzStopReportWidget() {
                 <h3 className="font-black text-lg">Report a Problem</h3>
               </div>
               <button
-                onClick={() => setOpen(false)}
+                onClick={() => onClose?.()}
                 className="p-1.5 hover:bg-white/10 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5" />

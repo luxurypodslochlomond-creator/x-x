@@ -17,6 +17,7 @@ const BuzzStopMark = () => (
 
 export default function BuzzStopPage() {
    const [menuOpen, setMenuOpen] = useState(false);
+   const [reportOpen, setReportOpen] = useState(false);
    const [isOnline, setIsOnline] = useState(navigator.onLine);
    const [swReady, setSwReady] = useState(false);
    const [testMode] = useState(() => window.location.search.includes('test=true') || window.self !== window.top);
@@ -189,16 +190,14 @@ export default function BuzzStopPage() {
       <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-3"
         style={{ background: 'rgba(0,4,0,0.96)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(34,197,94,0.15)' }}>
         <div className="flex flex-col items-center justify-center gap-3 max-w-2xl mx-auto text-center">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono" style={{ color: 'rgba(34,197,94,0.7)' }}>
-            <span>Not a medical device</span>
-            <span>·</span>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono" style={{ color: 'rgba(34,197,94,0.7)' }}>
             <Link to="/BuzzStopAbout" className="hover:text-green-500 transition-colors">About</Link>
             <span>·</span>
             <Link to="/BuzzStopTerms" className="hover:text-green-500 transition-colors">Terms</Link>
             <span>·</span>
             <Link to="/BuzzStopPrivacy" className="hover:text-green-500 transition-colors">Privacy</Link>
             <span>·</span>
-            <button onClick={() => setMenuOpen(true)} className="hover:text-green-500 transition-colors flex items-center gap-1">
+            <button onClick={() => setReportOpen(true)} className="hover:text-green-500 transition-colors flex items-center gap-1">
               <AlertCircle className="w-3 h-3" />
               Report
             </button>
@@ -208,7 +207,7 @@ export default function BuzzStopPage() {
       </footer>
 
       {/* ── PROBLEM REPORTER ── */}
-      <BuzzStopReportWidget />
+      <BuzzStopReportWidget open={reportOpen} onClose={() => setReportOpen(false)} />
     </div>
   );
 }
