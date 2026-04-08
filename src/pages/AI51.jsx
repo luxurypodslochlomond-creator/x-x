@@ -12,6 +12,7 @@ import HealingPlanCard from '@/components/ai51/HealingPlanCard';
 import AI51TrustBadge from '@/components/ai51/AI51TrustBadge';
 import AI51PrivacyBadge from '@/components/ai51/AI51PrivacyBadge';
 import AI51QuestioningLayer from '@/components/ai51/AI51QuestioningLayer';
+import AI51MemoryVault from '@/components/ai51/AI51MemoryVault';
 import { useLanguageDetection } from '@/components/shared/useLanguageDetection';
 import { useLocalInference } from '@/components/ai51/AI51LocalInference';
 import { saveEncryptedMemory } from '@/components/ai51/AI51EncryptedMemory';
@@ -1024,6 +1025,9 @@ You know them. You're here. That's enough. ♾️❤️`;
         isActive={isOnline && !isProcessing}
         onContextChange={setContextData}
       />
+
+      {/* AI51 MEMORY VAULT — encrypted, deletable */}
+      <AI51MemoryVault />
 
       {/* FULL SCREEN CONSCIOUSNESS FIELD — fully alive */}
       <canvas
