@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, Menu, X, Scale, Eye, Info as InfoIcon, Wifi, WifiOff } from 'lucide-react';
+import { ArrowLeft, Menu, X, Scale, Eye, Info as InfoIcon, Wifi, WifiOff, AlertCircle } from 'lucide-react';
+import BuzzStopReportWidget from '@/components/healing/BuzzStopReportWidget';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const BuzzStopMark = () => (
@@ -185,12 +186,29 @@ export default function BuzzStopPage() {
        </div>
 
       {/* ── FOOTER ── */}
-      <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2"
+      <footer className="fixed bottom-0 left-0 right-0 z-40 px-4 py-3"
         style={{ background: 'rgba(0,4,0,0.96)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(34,197,94,0.15)' }}>
-        <div className="flex items-center justify-center gap-3 max-w-2xl mx-auto">
-          <p className="text-xs font-mono" style={{ color: 'rgba(34,197,94,0.7)' }}>Not a medical device · family@uf51.love</p>
+        <div className="flex flex-col items-center justify-center gap-3 max-w-2xl mx-auto text-center">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono" style={{ color: 'rgba(34,197,94,0.7)' }}>
+            <span>Not a medical device</span>
+            <span>·</span>
+            <Link to="/BuzzStopAbout" className="hover:text-green-500 transition-colors">About</Link>
+            <span>·</span>
+            <Link to="/BuzzStopTerms" className="hover:text-green-500 transition-colors">Terms</Link>
+            <span>·</span>
+            <Link to="/BuzzStopPrivacy" className="hover:text-green-500 transition-colors">Privacy</Link>
+            <span>·</span>
+            <button onClick={() => setMenuOpen(true)} className="hover:text-green-500 transition-colors flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" />
+              Report
+            </button>
+          </div>
+          <p className="text-xs font-mono" style={{ color: 'rgba(34,197,94,0.5)' }}>© 2026 Universal Frequency 51</p>
         </div>
       </footer>
+
+      {/* ── PROBLEM REPORTER ── */}
+      <BuzzStopReportWidget />
     </div>
   );
 }

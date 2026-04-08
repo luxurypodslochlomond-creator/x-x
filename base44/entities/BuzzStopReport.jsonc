@@ -1,0 +1,41 @@
+{
+  "name": "BuzzStopReport",
+  "type": "object",
+  "description": "User-submitted problem reports for BuzzStop tinnitus relief tool",
+  "properties": {
+    "user_issue": {
+      "type": "string",
+      "description": "The issue reported by the user"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "submitted",
+        "reviewed",
+        "resolved"
+      ],
+      "default": "submitted",
+      "description": "Current status of the report"
+    },
+    "ai_response": {
+      "type": "string",
+      "description": "AI51's troubleshooting suggestion or response"
+    },
+    "reported_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the issue was reported"
+    }
+  },
+  "required": [
+    "user_issue"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {}
+  }
+}
