@@ -711,29 +711,26 @@ export default function BuzzStopEngine({ onStop }) {
               </div>
 
               {/* Share button */}
-              <motion.button
-                whileTap={{ scale: 0.96 }}
+              <button
                 onClick={async () => {
-                  const shareData = {
-                    title: 'BUZZSTOP — Free Tinnitus Relief',
-                    text: `I just found my tinnitus frequency (${lockedHz.toLocaleString()} Hz) and it's being cancelled right now. Free tool, no account, works on your device. Try it 👇`,
-                    url: 'https://universalfrequency51.base44.app/BuzzStop',
-                  };
+                  const url = 'https://universalfrequency51.base44.app/BuzzStop';
+                  const text = `Found my tinnitus frequency (${lockedHz.toLocaleString()} Hz) using BuzzStop — free tool, no account needed. Try it:`;
                   if (navigator.share) {
-                    try { await navigator.share(shareData); } catch (e) {}
+                    try { await navigator.share({ title: 'BuzzStop', text, url }); } catch (e) {}
                   } else {
-                    await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
-                    alert('Copied to clipboard — send it to someone who needs this.');
+                    await navigator.clipboard.writeText(`${text} ${url}`);
                   }
                 }}
-                className="w-full py-4 rounded-xl font-black text-sm tracking-widest transition-all flex items-center justify-center gap-2"
-                style={{ background: 'rgba(34,197,94,0.15)', border: `2px solid ${C.green}`, color: C.green }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                className="flex items-center justify-center gap-2 text-xs font-mono transition-colors mx-auto"
+                style={{ color: 'rgba(34,197,94,0.5)' }}
+                onMouseEnter={e => e.currentTarget.style.color = '#22c55e'}
+                onMouseLeave={e => e.currentTarget.style.color = 'rgba(34,197,94,0.5)'}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
                   <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
                 </svg>
-                SEND TO SOMEONE WHO NEEDS THIS
-              </motion.button>
+                share with someone who needs this
+              </button>
 
               <div className="grid grid-cols-2 gap-3">
                 <button onClick={restart}
