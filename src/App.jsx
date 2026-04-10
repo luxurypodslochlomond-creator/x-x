@@ -44,6 +44,7 @@ const BuzzStopPage = React.lazy(() => import('./pages/BuzzStop'));
 const BuzzStopAboutPage = React.lazy(() => import('./pages/BuzzStopAbout'));
 const BuzzStopTermsPage = React.lazy(() => import('./pages/BuzzStopTerms'));
 const BuzzStopPrivacyPage = React.lazy(() => import('./pages/BuzzStopPrivacy'));
+const FreqLift51WhitepaperPage = React.lazy(() => import('./pages/FreqLift51Whitepaper'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -115,6 +116,7 @@ const AuthenticatedApp = () => {
       <Route path="/BuzzStopAbout" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopAboutPage /></LayoutWrapper>} />
       <Route path="/BuzzStopTerms" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopTermsPage /></LayoutWrapper>} />
       <Route path="/BuzzStopPrivacy" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPrivacyPage /></LayoutWrapper>} />
+      <Route path="/FreqLift51Whitepaper" element={<LayoutWrapper currentPageName="FreqLift51Whitepaper"><FreqLift51WhitepaperPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
