@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronRight, ExternalLink, Atom, Waves, Heart, Globe, Users, Zap } from 'lucide-react';
 
 const LOGO_URL = 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d819319ec_generated_image.png';
@@ -290,9 +291,15 @@ export default function FreqLift51Whitepaper() {
             Physicists, engineers, researchers — if you want to help validate this experimentally, we want to hear from you. No NDAs. No patents. Just science for humanity.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              to="/FreqLift51Lab"
+              className="bg-white text-black font-black px-8 py-3 rounded-lg hover:bg-white/90 transition-colors text-sm tracking-widest"
+            >
+              OPEN THE LAB — RUN THE EXPERIMENT
+            </Link>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="bg-white text-black font-black px-8 py-3 rounded-lg hover:bg-white/90 transition-colors text-sm"
+              className="border border-white/20 text-white/70 hover:border-white/40 hover:text-white font-bold px-8 py-3 rounded-lg transition-colors text-sm flex items-center gap-2 justify-center"
             >
               Collaborate — {CONTACT_EMAIL}
             </a>
