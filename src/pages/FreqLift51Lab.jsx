@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // ============================================================
 
 const SESSION_PARAM = 'session';
-const DEFAULT_FREQ = 18000; // 18kHz — high frequency, audible range upper limit, max speaker efficiency
+const DEFAULT_FREQ = 19500; // 19.5kHz — near-ultrasonic, inaudible to most adults, max phone speaker output
 
 // ---- UTILS ----
 function getSessionId() {
@@ -226,7 +226,7 @@ function MasterMode({ sessionId, freq, setFreq }) {
           style={{ accentColor: '#fff' }}
         />
         <div className="grid grid-cols-4 gap-2">
-          {[440, 432, 18000, 40000].map(f => (
+          {[432, 8000, 19500, 20000].map(f => (
             <button
               key={f}
               onClick={() => { setFreq(f); if (oscillatorRef.current) oscillatorRef.current.frequency.value = f; }}
@@ -242,7 +242,7 @@ function MasterMode({ sessionId, freq, setFreq }) {
           ))}
         </div>
         <p className="font-mono text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
-          {freq > 20000 ? 'ULTRASONIC — inaudible, max radiation pressure' : freq > 15000 ? 'HIGH FREQ — near ultrasonic, high force' : freq === 432 ? '432Hz — healing frequency mode' : `${freq}Hz — audible range`}
+          {freq >= 19000 ? 'NEAR-ULTRASONIC — inaudible to most adults, max phone speaker output' : freq > 15000 ? 'HIGH FREQ — partially audible, strong radiation force' : freq === 432 ? '432Hz — healing frequency' : `${freq}Hz — audible range`}
         </p>
       </div>
 
