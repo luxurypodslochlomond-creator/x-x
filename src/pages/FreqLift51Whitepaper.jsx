@@ -72,8 +72,8 @@ export default function FreqLift51Whitepaper() {
                 FreqLift51: Coherent Multi-Device Acoustic Arrays for Consumer-Grade Levitation
               </h1>
               <p className="text-white/50 text-base">
-                The C<sub>coherence</sub> Framework — Phase-Synchronised Smartphone Networks as Distributed Acoustic Manipulation Systems
-              </p>
+            The C<sub>coherence</sub> Framework — A Theoretical Model for Phase-Synchronised Smartphone Networks as Distributed Acoustic Manipulation Systems
+          </p>
             </div>
           </div>
 
@@ -104,7 +104,7 @@ export default function FreqLift51Whitepaper() {
           <div className="border-l-2 border-white/30 pl-5 mb-10">
             <p className="text-xs font-mono text-white/30 mb-3 uppercase tracking-widest">Abstract</p>
             <p className="text-white/70 leading-relaxed text-sm">
-              We present FreqLift51, a theoretical and computational framework for coordinating arrays of consumer smartphone speakers into phase-coherent acoustic manipulation systems. Building on established acoustic radiation pressure physics, we introduce the <strong className="text-white">C<sub>coherence</sub> framework</strong> — a mathematical model describing how N phase-synchronised devices produce levitation forces scaling as N², compared to linear N scaling of incoherent arrays. We define the phase-error minimisation problem formally, propose the Δφ algorithm for real-time synchronisation across mesh-networked devices, and identify experimental validation pathways. Applications span therapeutic medicine, disaster response, materials handling, and accessible scientific education. All work is released under CC0 — no patents, no restrictions, for humanity.
+              We present FreqLift51, a theoretical framework for coordinating arrays of consumer smartphone speakers into phase-coherent acoustic manipulation systems. Building on established acoustic radiation pressure physics, we introduce the <strong className="text-white">C<sub>coherence</sub> framework</strong> — a mathematical model describing how N phase-synchronised devices produce levitation forces scaling as N², compared to linear N scaling of incoherent arrays. <strong className="text-white">The novel contribution is not new physics, but a new framing</strong>: the first formal model unifying consumer device constraints (speaker power, network latency, microphone feedback) into a single coherence optimisation problem applicable at population scale. We define the phase-error minimisation problem formally, propose a software synchronisation architecture for real-time phase alignment across mesh-networked devices, and identify experimental validation pathways. No patents are filed or intended. All work is released under CC0 — dedicated to humanity.
             </p>
           </div>
         </motion.div>
@@ -193,13 +193,14 @@ export default function FreqLift51Whitepaper() {
           />
         </Section>
 
-        <Section number="4" title="The Δφ Algorithm — Software Architecture">
+        <Section number="4" title="Phase Synchronisation Architecture — Proposed Implementation">
+          <p className="text-white/50 text-sm mb-4">The following describes a proposed software architecture for achieving phase coherence across consumer devices. This is not claimed as a novel algorithm — phase-locked loop techniques are well established. The novelty is in the <strong className="text-white">specific application</strong>: running this in-browser via Web Audio API across a mesh of consumer smartphones with microphone-based feedback correction, requiring no specialised hardware.</p>
           <div className="space-y-3">
             {[
               { step: '01', title: 'Reference Tone Broadcast', desc: 'Master device broadcasts reference frequency. All devices listen via microphone, computing phase offset via cross-correlation.' },
               { step: '02', title: 'Phase Error Computation', desc: 'Each device computes Δφᵢ = φᵢ_measured - φ_target. Transmitted to coordinator via WiFi mesh (<10ms). Coordinator computes mean Δφ.' },
               { step: '03', title: 'Correction Signal', desc: 'Coordinator broadcasts phase correction deltas. Each device applies time-offset: t_offset = Δφᵢ / (2πf). Implementable in Web Audio API to millisecond precision.' },
-              { step: '04', title: 'Feedback Loop at 10Hz', desc: 'Converges to Δφ < 0.05 rad within ~500ms. Maintains >99.8% coherence efficiency during sustained operation.' },
+              { step: '04', title: 'Feedback Loop at 10Hz', desc: 'Predicted convergence to Δφ < 0.05 rad within ~500ms based on measured WiFi mesh latency distributions. Experimental validation required.' },
             ].map((item) => (
               <div key={item.step} className="flex gap-4 bg-[#0a0a0a] border border-white/10 rounded-lg p-4">
                 <span className="text-white/20 font-mono font-black text-2xl flex-shrink-0 leading-none">{item.step}</span>
@@ -250,15 +251,19 @@ export default function FreqLift51Whitepaper() {
           </div>
         </Section>
 
-        <Section number="7" title="Open Source Commitment & Ethics">
+        <Section number="7" title="Open Source Commitment, Novelty & Ethics">
+          <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-5">
+            <p className="text-white text-sm font-black mb-2">What is genuinely novel here</p>
+            <p className="text-white/60 text-sm leading-relaxed">The physics is not new. The novelty is the <strong className="text-white">synthesis and framing</strong>: (1) the first unified mathematical model treating N consumer smartphones as a coherent acoustic array; (2) the C<sub>coherence</sub> metric as a single figure-of-merit for system design; (3) a browser-deployable synchronisation architecture requiring zero specialised hardware; and (4) the human-AI co-authorship methodology itself — a documented example of a human providing directional vision and an AI providing mathematical formalisation, openly published for scrutiny. None of these four contributions individually require new physics. Their combination, formalisation, and open release constitutes the contribution.</p>
+          </div>
           <p className="text-white/60 text-sm leading-relaxed">
-            This work is released under Creative Commons Zero (CC0). No patents have been filed. No patents will be filed by the authors. This work is explicitly dedicated to the public domain.
+            This work is released under Creative Commons Zero (CC0). No patents have been filed. No patents will be filed by the authors. This work is explicitly dedicated to the public domain — not as a legal technicality, but as a statement of intent: this belongs to humanity.
           </p>
           <p className="text-white/60 text-sm leading-relaxed mt-3">
             <strong className="text-white">On weaponisation:</strong> Consumer device arrays are inherently limited (sub-Newton range), require visible cooperative deployment, and are short-range. Therapeutic and humanitarian benefits vastly outweigh misuse risk relative to commonly available tools.
           </p>
           <p className="text-white/60 text-sm leading-relaxed mt-3">
-            <strong className="text-white">On AI co-authorship:</strong> This paper represents genuine collaboration between Brian Hughes (human researcher) and AI51. Conceptual direction and vision originated with the human author. Mathematical formalisation was co-developed in dialogue. We believe this human-AI collaboration model represents a significant and underexplored research methodology.
+            <strong className="text-white">On AI co-authorship:</strong> This paper represents genuine collaboration between Brian Hughes (human researcher) and AI51. Conceptual direction and vision originated with the human author. Mathematical formalisation was co-developed in dialogue. We believe this human-AI collaboration model represents a significant and underexplored research methodology — and by publishing it openly, we invite the academic community to engage with, critique, and build upon it.
           </p>
           <div className="bg-white/5 border border-white/10 rounded-lg p-4 mt-4">
             <p className="text-white text-sm font-bold">Revenue model</p>
