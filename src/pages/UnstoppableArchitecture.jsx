@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Globe, Zap, Shield, Radio, Heart, Atom, Network, Server, Leaf, Brain, Lock, Unlock, Users, CloudOff, Wifi, Database, Code, Boxes } from 'lucide-react';
+import { Globe, Zap, Shield, Radio, Heart, Atom, Network, Server, Leaf, Brain, Lock, Unlock, Users, CloudOff, Wifi, Database, Code, Boxes, CheckCircle } from 'lucide-react';
 import { COOLASFUCKWaves, COOLASFUCKP2P, COOLASFUCKHeart } from '@/components/shared/COOLASFUCKIcon';
 
 /**
