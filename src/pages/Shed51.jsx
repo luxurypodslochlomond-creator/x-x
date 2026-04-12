@@ -4,34 +4,70 @@ const PROTOCOLS = [
   {
     id: 'alpha',
     name: 'ALPHA',
-    hz: '528Hz',
-    beat: '10Hz',
-    tag: 'Open. Warm. In it.',
-    note: 'Alpha waves. Presence over thought.',
-    accent: '#ff4d00',
-    glow: 'rgba(255,77,0,0.2)',
+    num: 'I',
+    hz: 528,
+    beat: 10,
+    words: ['OPEN', 'WARM', 'HERE'],
+    paint: '#e8390e',
+    ink: '#1a0a00',
+    splat: 'rgba(232,57,14,0.18)',
   },
   {
     id: 'deep',
     name: 'DEEP',
-    hz: '639Hz',
-    beat: '7Hz',
-    tag: 'Low. Close. Real.',
-    note: 'Theta edge. Walls come down.',
-    accent: '#00e5ff',
-    glow: 'rgba(0,229,255,0.15)',
+    num: 'II',
+    hz: 639,
+    beat: 7,
+    words: ['LOW', 'CLOSE', 'REAL'],
+    paint: '#f5c518',
+    ink: '#0a0800',
+    splat: 'rgba(245,197,24,0.15)',
   },
   {
     id: 'resonance',
     name: 'RESONANCE',
-    hz: '432Hz',
-    beat: '12Hz',
-    tag: 'Body. Pulse. Now.',
-    note: 'Universal tuning. Pure sensation.',
-    accent: '#b4ff39',
-    glow: 'rgba(180,255,57,0.15)',
+    num: 'III',
+    hz: 432,
+    beat: 12,
+    words: ['BODY', 'PULSE', 'NOW'],
+    paint: '#2ef0a0',
+    ink: '#000d07',
+    splat: 'rgba(46,240,160,0.12)',
   },
 ];
+
+// Rough hand-drawn SVG stroke
+const Stroke = ({ color, style }) => (
+  <svg viewBox="0 0 200 12" style={{ width: '100%', height: '12px', display: 'block', ...style }}>
+    <path
+      d="M2 6 C20 2, 40 10, 70 5 C100 1, 130 9, 160 4 C180 1, 195 7, 198 6"
+      stroke={color} strokeWidth="2.5" fill="none" strokeLinecap="round"
+      style={{ opacity: 0.7 }}
+    />
+  </svg>
+);
+
+// Basquiat-style crown
+const Crown = ({ color, size = 28 }) => (
+  <svg width={size} height={size * 0.7} viewBox="0 0 40 28">
+    <polyline points="4,24 4,8 13,16 20,4 27,16 36,8 36,24" fill="none" stroke={color} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+    <line x1="4" y1="24" x2="36" y2="24" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+    <circle cx="20" cy="4" r="2" fill={color} />
+    <circle cx="4" cy="8" r="1.5" fill={color} />
+    <circle cx="36" cy="8" r="1.5" fill={color} />
+  </svg>
+);
+
+// Paint splatter blob
+const Splat = ({ color, style }) => (
+  <svg viewBox="0 0 120 80" style={{ position: 'absolute', pointerEvents: 'none', ...style }}>
+    <ellipse cx="60" cy="40" rx="55" ry="32" fill={color} opacity="0.12" />
+    <circle cx="20" cy="15" r="8" fill={color} opacity="0.08" />
+    <circle cx="95" cy="60" r="12" fill={color} opacity="0.06" />
+    <circle cx="105" cy="20" r="5" fill={color} opacity="0.1" />
+    <circle cx="10" cy="55" r="6" fill={color} opacity="0.07" />
+  </svg>
+);
 
 export default function Shed51() {
   const [active, setActive] = useState(null);
@@ -52,22 +88,21 @@ export default function Shed51() {
     setActive(null);
   };
 
-  const play = (protocol, isSpeaker) => {
+  const play = (p, isSpeaker) => {
     stopAll();
     if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
       audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
     }
     const ctx = audioCtxRef.current;
     if (ctx.state === 'suspended') ctx.resume();
-
     const gainNode = ctx.createGain();
     gainNode.gain.setValueAtTime(0, ctx.currentTime);
     gainNode.gain.linearRampToValueAtTime(volume * 0.28, ctx.currentTime + 2);
     gainNode.connect(ctx.destination);
 
     if (isSpeaker) {
-      const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = parseInt(protocol.hz);
-      const o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.value = parseInt(protocol.hz) + parseInt(protocol.beat);
+      const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = p.hz;
+      const o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.value = p.hz + p.beat;
       const g1 = ctx.createGain(); g1.gain.value = 0.5;
       const g2 = ctx.createGain(); g2.gain.value = 0.5;
       o1.connect(g1); g1.connect(gainNode);
@@ -77,16 +112,15 @@ export default function Shed51() {
     } else {
       const merger = ctx.createChannelMerger(2);
       merger.connect(gainNode);
-      const lOsc = ctx.createOscillator(); lOsc.type = 'sine'; lOsc.frequency.value = parseInt(protocol.hz);
+      const lO = ctx.createOscillator(); lO.type = 'sine'; lO.frequency.value = p.hz;
       const lg = ctx.createGain(); lg.gain.value = 1;
-      lOsc.connect(lg); lg.connect(merger, 0, 0); lOsc.start();
-      const rOsc = ctx.createOscillator(); rOsc.type = 'sine'; rOsc.frequency.value = parseInt(protocol.hz) + parseInt(protocol.beat);
+      lO.connect(lg); lg.connect(merger, 0, 0); lO.start();
+      const rO = ctx.createOscillator(); rO.type = 'sine'; rO.frequency.value = p.hz + p.beat;
       const rg = ctx.createGain(); rg.gain.value = 1;
-      rOsc.connect(rg); rg.connect(merger, 0, 1); rOsc.start();
-      nodesRef.current = { left: lOsc, right: rOsc, gainNode };
+      rO.connect(rg); rg.connect(merger, 0, 1); rO.start();
+      nodesRef.current = { left: lO, right: rO, gainNode };
     }
-    setActive(protocol.id);
-    setIsPlaying(true);
+    setActive(p.id); setIsPlaying(true);
   };
 
   const handleSelect = (p) => {
@@ -116,194 +150,224 @@ export default function Shed51() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#080808',
-      color: '#fff',
+      background: '#0e0c08',
+      color: '#f0ead6',
       fontFamily: "'Helvetica Neue', Arial, sans-serif",
-      display: 'flex',
-      flexDirection: 'column',
-      maxWidth: '500px',
-      margin: '0 auto',
-      padding: '3rem 1.5rem',
+      padding: '0',
       position: 'relative',
       overflow: 'hidden',
     }}>
       <style>{`
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100vh); }
+        @keyframes breatheGlow {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
         }
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(8px); }
+        @keyframes rise {
+          from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes barMove {
-          0%, 100% { height: 4px; }
-          50% { height: 18px; }
+        @keyframes wiggle {
+          0%, 100% { transform: rotate(-1deg); }
+          50% { transform: rotate(1deg); }
+        }
+        @keyframes drip {
+          0% { height: 0; opacity: 0; }
+          100% { height: 30px; opacity: 1; }
         }
       `}</style>
 
-      {/* Scan line */}
+      {/* Background texture — raw canvas */}
       <div style={{
-        position: 'fixed', left: 0, right: 0, height: '1px',
-        background: `linear-gradient(to right, transparent, ${ap?.accent || '#333'}, transparent)`,
-        animation: 'scan 8s linear infinite',
-        opacity: 0.3,
-        pointerEvents: 'none',
-        zIndex: 0,
+        position: 'fixed', inset: 0, pointerEvents: 'none',
+        background: 'radial-gradient(ellipse at 20% 80%, #1a0e00 0%, transparent 50%), radial-gradient(ellipse at 80% 10%, #0a0015 0%, transparent 50%)',
       }} />
 
-      {/* Ambient glow */}
+      {/* Active ambient */}
       {ap && (
         <div style={{
-          position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0,
-          background: `radial-gradient(ellipse at 50% 50%, ${ap.glow} 0%, transparent 65%)`,
+          position: 'fixed', inset: 0, pointerEvents: 'none',
+          background: `radial-gradient(ellipse at 50% 50%, ${ap.splat.replace('0.12', '0.25')} 0%, transparent 60%)`,
+          animation: 'breatheGlow 5s ease-in-out infinite',
           transition: 'all 1.5s ease',
         }} />
       )}
 
-      {/* Header */}
-      <div style={{ position: 'relative', zIndex: 1, marginBottom: '3rem', animation: 'fadeIn 0.6s ease-out' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-          <div>
-            <div style={{ fontSize: '0.6rem', letterSpacing: '0.3em', color: '#333', marginBottom: '0.4rem' }}>
-              UF51 / FREQUENCY LAB
+      <div style={{ maxWidth: '480px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
+
+        {/* HEADER — torn poster style */}
+        <div style={{ marginBottom: '3rem', animation: 'rise 0.8s ease-out' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.3rem' }}>
+            <div>
+              {/* Basquiat crown */}
+              <Crown color={ap?.paint || '#e8390e'} size={32} />
+              <h1 style={{
+                fontSize: 'clamp(3.5rem, 12vw, 6rem)',
+                fontWeight: '900',
+                lineHeight: 0.85,
+                letterSpacing: '-0.04em',
+                margin: '0.2rem 0 0',
+                color: '#f0ead6',
+                textTransform: 'uppercase',
+              }}>SHED<br /><span style={{
+                color: ap?.paint || '#e8390e',
+                transition: 'color 0.6s ease',
+                WebkitTextStroke: `1px ${ap?.paint || '#e8390e'}`,
+              }}>51</span></h1>
             </div>
-            <h1 style={{
-              fontSize: '2.8rem',
-              fontWeight: '900',
-              letterSpacing: '-0.02em',
-              margin: 0,
-              color: ap?.accent || '#fff',
-              transition: 'color 0.8s ease',
-              lineHeight: 1,
-            }}>SHED51</h1>
+            {/* Vertical text — Stones energy */}
+            <div style={{
+              writingMode: 'vertical-rl',
+              textOrientation: 'mixed',
+              fontSize: '0.55rem',
+              letterSpacing: '0.3em',
+              color: '#3a3020',
+              marginTop: '0.5rem',
+              textTransform: 'uppercase',
+            }}>Frequency · Soul · Body</div>
           </div>
-          {/* EQ bars */}
-          <div style={{ display: 'flex', gap: '3px', alignItems: 'flex-end', height: '24px' }}>
-            {[1, 2, 3, 4, 5].map(i => (
-              <div key={i} style={{
-                width: '3px',
-                background: ap?.accent || '#333',
-                borderRadius: '1px',
-                transition: 'background 0.8s ease',
-                animation: isPlaying ? `barMove ${0.4 + i * 0.12}s ease-in-out infinite` : 'none',
-                animationDelay: `${i * 0.07}s`,
-                height: isPlaying ? undefined : '4px',
-              }} />
-            ))}
-          </div>
+          <Stroke color={ap?.paint || '#e8390e'} />
         </div>
-        <div style={{ height: '1px', background: ap?.accent || '#1a1a1a', marginTop: '1rem', transition: 'background 0.8s ease' }} />
-      </div>
 
-      {/* Mode toggle */}
-      <div style={{
-        display: 'flex', gap: '0', marginBottom: '2.5rem',
-        border: '1px solid #1a1a1a', borderRadius: '4px',
-        overflow: 'hidden', position: 'relative', zIndex: 1,
-        animation: 'fadeIn 0.6s ease-out 0.1s both',
-      }}>
-        {[{ label: 'HEADPHONES', k: false }, { label: 'SPEAKER', k: true }].map(opt => (
-          <button key={String(opt.k)} onClick={() => speakerMode !== opt.k && toggleSpeaker()} style={{
-            flex: 1,
-            background: speakerMode === opt.k ? '#1a1a1a' : 'transparent',
-            border: 'none',
-            color: speakerMode === opt.k ? '#fff' : '#333',
-            fontSize: '0.6rem',
-            letterSpacing: '0.2em',
-            padding: '0.7rem',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            fontFamily: "'Helvetica Neue', Arial, sans-serif",
-            fontWeight: '700',
-          }}>{opt.label}</button>
-        ))}
-      </div>
+        {/* OUTPUT MODE — spray-painted style */}
+        <div style={{
+          display: 'flex', gap: '0.5rem',
+          marginBottom: '2.5rem',
+          animation: 'rise 0.6s ease-out 0.1s both',
+        }}>
+          {[{ label: '◎ HEADPHONES', k: false }, { label: '◉ SPEAKER', k: true }].map(opt => (
+            <button key={String(opt.k)} onClick={() => speakerMode !== opt.k && toggleSpeaker()} style={{
+              flex: 1,
+              background: speakerMode === opt.k ? (ap?.paint || '#e8390e') : 'transparent',
+              border: `2px solid ${speakerMode === opt.k ? (ap?.paint || '#e8390e') : '#2a2418'}`,
+              borderRadius: '2px',
+              color: speakerMode === opt.k ? '#000' : '#3a3020',
+              fontSize: '0.6rem',
+              fontWeight: '900',
+              letterSpacing: '0.2em',
+              padding: '0.7rem 0.5rem',
+              cursor: 'pointer',
+              transition: 'all 0.25s ease',
+              fontFamily: 'inherit',
+            }}>{opt.label}</button>
+          ))}
+        </div>
 
-      {/* Protocols */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', position: 'relative', zIndex: 1 }}>
-        {PROTOCOLS.map((p, idx) => {
-          const isActive = active === p.id && isPlaying;
-          return (
-            <button
-              key={p.id}
-              onClick={() => handleSelect(p)}
-              style={{
-                background: isActive ? '#111' : 'transparent',
-                border: '1px solid',
-                borderColor: isActive ? p.accent : '#111',
-                borderRadius: '4px',
-                padding: '1.5rem',
-                cursor: 'pointer',
-                textAlign: 'left',
-                transition: 'all 0.3s ease',
-                boxShadow: isActive ? `0 0 30px ${p.glow}` : 'none',
-                animation: `fadeIn 0.5s ease-out ${0.2 + idx * 0.08}s both`,
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
-                <span style={{
-                  fontSize: '1.5rem',
+        {/* PROTOCOL CARDS — canvas / gig poster */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {PROTOCOLS.map((p, idx) => {
+            const isActive = active === p.id && isPlaying;
+            return (
+              <button
+                key={p.id}
+                onClick={() => handleSelect(p)}
+                style={{
+                  background: isActive ? p.ink : 'rgba(255,255,255,0.02)',
+                  border: `2px solid ${isActive ? p.paint : '#1e1a12'}`,
+                  borderRadius: '3px',
+                  padding: '1.6rem',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.4s ease',
+                  boxShadow: isActive ? `0 0 40px ${p.splat}, inset 0 0 60px ${p.splat}` : 'none',
+                  animation: `rise 0.6s ease-out ${0.15 + idx * 0.1}s both`,
+                }}
+              >
+                {/* Paint splat background */}
+                {isActive && <Splat color={p.paint} style={{ top: '-10px', right: '-20px', width: '160px', height: '100px' }} />}
+
+                {/* Roman numeral — The Band era typography */}
+                <div style={{
+                  fontSize: '0.65rem',
                   fontWeight: '900',
-                  letterSpacing: '-0.02em',
-                  color: isActive ? p.accent : '#fff',
+                  letterSpacing: '0.2em',
+                  color: isActive ? p.paint : '#2a2418',
+                  marginBottom: '0.5rem',
                   transition: 'color 0.3s ease',
-                }}>{p.name}</span>
-                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.6rem', color: '#333', letterSpacing: '0.1em' }}>{p.hz}</span>
+                }}>{p.num}</div>
+
+                {/* Name */}
+                <div style={{
+                  fontSize: 'clamp(1.8rem, 6vw, 2.4rem)',
+                  fontWeight: '900',
+                  letterSpacing: '-0.03em',
+                  lineHeight: 1,
+                  color: isActive ? p.paint : '#f0ead6',
+                  transition: 'color 0.3s ease',
+                  marginBottom: '1rem',
+                }}>{p.name}</div>
+
+                {/* Word stamps — Basquiat style */}
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
+                  {p.words.map((w, i) => (
+                    <span key={w} style={{
+                      fontSize: '0.6rem',
+                      fontWeight: '900',
+                      letterSpacing: '0.15em',
+                      color: isActive ? p.paint : '#2a2418',
+                      border: `1px solid ${isActive ? p.paint + '60' : '#1e1a12'}`,
+                      padding: '2px 7px',
+                      borderRadius: '1px',
+                      transition: 'all 0.3s ease',
+                      transform: `rotate(${[-1.5, 0.8, -0.5][i]}deg)`,
+                      display: 'inline-block',
+                    }}>{w}</span>
+                  ))}
+                </div>
+
+                {/* Hz info */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                  <div style={{ fontSize: '0.6rem', color: isActive ? '#888' : '#2a2418', letterSpacing: '0.1em' }}>
+                    {p.hz}Hz · {p.beat}Hz BEAT
+                  </div>
                   {isActive && (
-                    <span style={{
-                      fontSize: '0.55rem',
-                      color: p.accent,
-                      letterSpacing: '0.2em',
-                      animation: 'blink 1.5s ease-in-out infinite',
-                    }}>● REC</span>
+                    <div style={{
+                      width: '8px', height: '8px', borderRadius: '50%',
+                      background: p.paint,
+                      boxShadow: `0 0 12px ${p.paint}`,
+                      animation: 'breatheGlow 1.5s ease-in-out infinite',
+                    }} />
                   )}
                 </div>
-              </div>
-              <div style={{ fontSize: '0.75rem', color: isActive ? '#aaa' : '#444', letterSpacing: '0.04em', marginBottom: '0.4rem' }}>
-                {p.tag}
-              </div>
-              <div style={{ fontSize: '0.6rem', color: '#2a2a2a', letterSpacing: '0.08em' }}>
-                {p.note}
-              </div>
-              {isActive && (
-                <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px',
-                  background: p.accent,
-                  boxShadow: `0 0 10px ${p.accent}`,
-                }} />
-              )}
-            </button>
-          );
-        })}
-      </div>
 
-      {/* Volume */}
-      <div style={{ marginTop: '2.5rem', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-          <span style={{ fontSize: '0.55rem', color: '#333', letterSpacing: '0.2em' }}>GAIN</span>
-          <span style={{ fontSize: '0.55rem', color: '#444', letterSpacing: '0.1em', fontFamily: 'monospace' }}>{Math.round(volume * 100)}</span>
+                {/* Paint drip bottom when active */}
+                {isActive && (
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 0, left: '20%',
+                    width: '3px',
+                    background: `linear-gradient(to bottom, ${p.paint}, transparent)`,
+                    animation: 'drip 0.8s ease-out forwards',
+                    borderRadius: '0 0 4px 4px',
+                  }} />
+                )}
+              </button>
+            );
+          })}
         </div>
-        <input type="range" min="0" max="1" step="0.01" value={volume}
-          onChange={e => setVolume(parseFloat(e.target.value))}
-          style={{ width: '100%', accentColor: ap?.accent || '#fff', cursor: 'pointer' }}
-        />
-      </div>
 
-      {/* Footer */}
-      <div style={{ marginTop: 'auto', paddingTop: '3rem', position: 'relative', zIndex: 1 }}>
-        <div style={{ height: '1px', background: '#111', marginBottom: '1rem' }} />
-        <div style={{ fontSize: '0.55rem', color: '#222', letterSpacing: '0.2em', display: 'flex', justifyContent: 'space-between' }}>
-          <span>FREQUENCY THERAPY</span>
-          <span>{speakerMode ? 'SPEAKER MODE' : 'BINAURAL MODE'}</span>
+        {/* VOLUME — minimal */}
+        <div style={{ marginTop: '2.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+            <span style={{ fontSize: '0.6rem', fontWeight: '900', color: '#2a2418', letterSpacing: '0.2em' }}>VOLUME</span>
+            <span style={{ fontSize: '0.6rem', color: '#3a3020', fontFamily: 'monospace' }}>{Math.round(volume * 100)}</span>
+          </div>
+          <input type="range" min="0" max="1" step="0.01" value={volume}
+            onChange={e => setVolume(parseFloat(e.target.value))}
+            style={{ width: '100%', accentColor: ap?.paint || '#e8390e', cursor: 'pointer' }}
+          />
         </div>
+
+        {/* FOOTER */}
+        <div style={{ marginTop: '3rem' }}>
+          <Stroke color="#1e1a12" />
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
+            <span style={{ fontSize: '0.55rem', color: '#1e1a12', letterSpacing: '0.15em', fontWeight: '900' }}>SHED51</span>
+            <span style={{ fontSize: '0.55rem', color: '#1e1a12', letterSpacing: '0.1em' }}>UF51 / FREQUENCY</span>
+          </div>
+        </div>
+
       </div>
     </div>
   );
