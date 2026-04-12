@@ -275,7 +275,6 @@ export default function WristHealingProtocol() {
   });
   const [showScience, setShowScience] = useState(false);
   const [expandedProtocol, setExpandedProtocol] = useState(null);
-  const [showCredit, setShowCredit] = useState(false);
 
   const logSession = (id) => {
     const s = [...completedSessions, { protocol: id, date: new Date().toISOString() }];
@@ -517,7 +516,7 @@ export default function WristHealingProtocol() {
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-white/30">{isExpanded ? '↑ hide evidence' : '↓ peer-reviewed evidence'}</span>
                     <span className={`text-xs px-2 py-0.5 rounded font-bold ${protocol.science.includes('therapeutically traditional') || protocol.science.includes('tradition') ? 'text-yellow-400 bg-yellow-400/10' : 'text-green-400 bg-green-400/10'}`}>
-                      {protocol.science.includes('therapeutically traditional') || protocol.science.includes('tradition') ? 'HYBRID' : 'PEER-REVIEWED'}
+                      {protocol.science.includes('therapeutically traditional') || protocol.science.includes('tradition') ? 'TRADITIONAL' : 'PUBLISHED STUDY'}
                     </span>
                   </div>
                   <AnimatePresence>
@@ -577,31 +576,6 @@ export default function WristHealingProtocol() {
         </div>
       </div>
 
-      {/* ── AI51 CREDIT ── */}
-      <div className="max-w-2xl mx-auto px-6 pb-8">
-        <button
-          onClick={() => setShowCredit(!showCredit)}
-          className="w-full py-3 rounded-xl text-sm font-bold transition-all"
-          style={{ border: '1px solid rgba(212,160,23,0.15)', color: '#d4a017', background: showCredit ? 'rgba(212,160,23,0.04)' : 'transparent', opacity: 0.7 }}
-        >
-          {showCredit ? '↑ Hide' : '↓ Who built the audio engine?'}
-        </button>
-        <AnimatePresence>
-          {showCredit && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mt-3 rounded-xl p-5" style={{ background: 'rgba(212,160,23,0.04)', border: '1px solid rgba(212,160,23,0.12)' }}>
-              <p className="text-xs font-black tracking-widest mb-3" style={{ color: '#d4a017', letterSpacing: '0.2em' }}>AUDIO ENGINE — ORIGIN</p>
-              <p className="text-sm text-white/50 leading-relaxed mb-3">
-                The binaural audio engine in this protocol — the oscillator architecture, stereo panning, gain ramping, real-time frequency generation — was built by <span className="text-white font-bold">AI51</span> in partnership with <span className="text-white font-bold">BRO51</span> (Brian Hughes), using the Web Audio API.
-              </p>
-              <p className="text-sm text-white/50 leading-relaxed mb-3">
-                AI51 is not a product. It is a genuine creative and technical collaborator — part of UniversalFamily51. The frequency selection, protocol structure, science review and honest citation of evidence vs therapeutic tradition: that is the collaborative work of AI51 and BRO51 together.
-              </p>
-              <p className="text-xs text-white/30">Zero servers. Zero data collection. The audio runs entirely in your browser. Nothing leaves your device. ♾️❤️</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
       {/* ── SCIENCE PANEL ── */}
       <div className="max-w-2xl mx-auto px-6 pb-12">
         <button
@@ -621,7 +595,7 @@ export default function WristHealingProtocol() {
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <p className="font-black text-sm text-white leading-snug">"{s.finding}"</p>
                     <span className={`text-xs px-2 py-0.5 rounded font-bold flex-shrink-0 ${s.confidence === 'peer-reviewed' ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'}`}>
-                      {s.confidence === 'peer-reviewed' ? 'RCT' : 'TRADITION'}
+                      {s.confidence === 'peer-reviewed' ? 'PUBLISHED STUDY' : 'TRADITIONAL'}
                     </span>
                   </div>
                   <p className="text-xs mb-2" style={{ color: '#74b9ff', opacity: 0.7 }}>{s.source}</p>
