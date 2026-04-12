@@ -47,14 +47,28 @@ const Stroke = ({ color, style }) => (
   </svg>
 );
 
-// Basquiat-style crown
-const Crown = ({ color, size = 28 }) => (
-  <svg width={size} height={size * 0.7} viewBox="0 0 40 28">
-    <polyline points="4,24 4,8 13,16 20,4 27,16 36,8 36,24" fill="none" stroke={color} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-    <line x1="4" y1="24" x2="36" y2="24" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-    <circle cx="20" cy="4" r="2" fill={color} />
-    <circle cx="4" cy="8" r="1.5" fill={color} />
-    <circle cx="36" cy="8" r="1.5" fill={color} />
+// Basquiat winners crown — bold, raw, proper royalty
+const Crown = ({ color, size = 36 }) => (
+  <svg width={size * 1.6} height={size} viewBox="0 0 80 50">
+    {/* Base band */}
+    <rect x="4" y="32" width="72" height="12" rx="1" fill="none" stroke={color} strokeWidth="2.8" strokeLinejoin="round" />
+    {/* Crown points — jagged winners */}
+    <polyline points="4,32 4,10 20,22 40,4 60,22 76,10 76,32" fill="none" stroke={color} strokeWidth="2.8" strokeLinejoin="round" strokeLinecap="round" />
+    {/* Jewels on band */}
+    <rect x="14" y="34" width="7" height="7" rx="1" fill={color} opacity="0.9" />
+    <rect x="36" y="34" width="7" height="7" rx="1" fill={color} opacity="0.9" />
+    <rect x="58" y="34" width="7" height="7" rx="1" fill={color} opacity="0.9" />
+    {/* Top gems */}
+    <circle cx="40" cy="4" r="3.5" fill={color} />
+    <circle cx="4" cy="10" r="2.5" fill={color} opacity="0.8" />
+    <circle cx="76" cy="10" r="2.5" fill={color} opacity="0.8" />
+    <circle cx="20" cy="22" r="2" fill={color} opacity="0.6" />
+    <circle cx="60" cy="22" r="2" fill={color} opacity="0.6" />
+    {/* Cross-hatch scratches — Basquiat texture */}
+    <line x1="28" y1="14" x2="32" y2="20" stroke={color} strokeWidth="1" opacity="0.4" />
+    <line x1="32" y1="14" x2="28" y2="20" stroke={color} strokeWidth="1" opacity="0.4" />
+    <line x1="48" y1="14" x2="52" y2="20" stroke={color} strokeWidth="1" opacity="0.4" />
+    <line x1="52" y1="14" x2="48" y2="20" stroke={color} strokeWidth="1" opacity="0.4" />
   </svg>
 );
 
