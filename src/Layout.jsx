@@ -61,7 +61,7 @@ const PUBLIC_PAGES = [
   'HealingDashboard', 'ThePhysics', 'Terms', 'PrivacyPolicy',
   'ScottManager', 'CB51', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
   'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
-  'ScottAbout', 'Prof51', 'CB51Pitch', 'FunderBrief', 'PetSounds51Data'
+  'ScottAbout', 'Prof51', 'CB51Pitch', 'FunderBrief', 'PetSounds51Data', 'WristHealingProtocol'
 ];
 
 // OFFLINE-OK PAGES
@@ -370,6 +370,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
     { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road • Loch Lomond" },
+    { title: "🎷 Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: Waves, highlight: true, description: "Bone & musician recovery frequencies" },
   ];
 
   // 2. EARN & CREATE (practical actions)
