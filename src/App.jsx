@@ -50,6 +50,7 @@ const WristHealingProtocolPage = React.lazy(() => import('./pages/WristHealingPr
 const WristHealingAboutPage = React.lazy(() => import('./pages/WristHealingAbout'));
 const WristHealingTermsPage = React.lazy(() => import('./pages/WristHealingTerms'));
 const WristHealingPrivacyPage = React.lazy(() => import('./pages/WristHealingPrivacy'));
+const Shed51Page = React.lazy(() => import('./pages/Shed51'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -127,6 +128,7 @@ const AuthenticatedApp = () => {
       <Route path="/WristHealingAbout" element={<WristHealingAboutPage />} />
       <Route path="/WristHealingTerms" element={<WristHealingTermsPage />} />
       <Route path="/WristHealingPrivacy" element={<WristHealingPrivacyPage />} />
+      <Route path="/Shed51" element={<Shed51Page />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
