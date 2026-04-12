@@ -252,9 +252,9 @@ export default function Shed51() {
             <button key={String(opt.k)} onClick={() => speakerMode !== opt.k && toggleSpeaker()} style={{
               flex: 1,
               background: speakerMode === opt.k ? (ap?.paint || '#e8390e') : 'transparent',
-              border: `2px solid ${speakerMode === opt.k ? (ap?.paint || '#e8390e') : '#2a2418'}`,
+              border: `2px solid ${speakerMode === opt.k ? (ap?.paint || '#e8390e') : '#444'}`,
               borderRadius: '2px',
-              color: speakerMode === opt.k ? '#000' : '#3a3020',
+              color: speakerMode === opt.k ? '#000' : '#888',
               fontSize: '0.6rem',
               fontWeight: '900',
               letterSpacing: '0.2em',
@@ -296,7 +296,7 @@ export default function Shed51() {
                   fontSize: '0.65rem',
                   fontWeight: '900',
                   letterSpacing: '0.2em',
-                  color: isActive ? p.paint : '#2a2418',
+                  color: isActive ? p.paint : '#666',
                   marginBottom: '0.5rem',
                   transition: 'color 0.3s ease',
                 }}>{p.num}</div>
@@ -319,8 +319,8 @@ export default function Shed51() {
                       fontSize: '0.6rem',
                       fontWeight: '900',
                       letterSpacing: '0.15em',
-                      color: isActive ? p.paint : '#2a2418',
-                      border: `1px solid ${isActive ? p.paint + '60' : '#1e1a12'}`,
+                      color: isActive ? p.paint : '#888',
+                      border: `1px solid ${isActive ? p.paint + '60' : '#333'}`,
                       padding: '2px 7px',
                       borderRadius: '1px',
                       transition: 'all 0.3s ease',
@@ -332,7 +332,7 @@ export default function Shed51() {
 
                 {/* Hz info */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                  <div style={{ fontSize: '0.6rem', color: isActive ? '#888' : '#2a2418', letterSpacing: '0.1em' }}>
+                  <div style={{ fontSize: '0.6rem', color: isActive ? '#aaa' : '#666', letterSpacing: '0.1em' }}>
                     {p.hz}Hz · {p.beat}Hz BEAT
                   </div>
                   {isActive && (
@@ -377,8 +377,9 @@ export default function Shed51() {
         <div style={{ marginTop: '3rem' }}>
           <Stroke color="#1e1a12" />
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
-            <span style={{ fontSize: '0.55rem', color: '#1e1a12', letterSpacing: '0.15em', fontWeight: '900' }}>SHED51</span>
-            <span style={{ fontSize: '0.55rem', color: '#1e1a12', letterSpacing: '0.1em' }}>UF51 / FREQUENCY</span>
+            <span style={{ fontSize: '0.55rem', color: '#555', letterSpacing: '0.15em', fontWeight: '900' }}>SHED51</span>
+            <span style={{ fontSize: '0.55rem', color: '#444',
+              letterSpacing: '0.1em' }}>UF51 / FREQUENCY</span>
           </div>
         </div>
 
