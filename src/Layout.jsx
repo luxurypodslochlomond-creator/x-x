@@ -47,6 +47,7 @@ import {
                                       } from 'lucide-react';
 
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
+import CustomSaxIcon from '@/components/shared/CustomSaxIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
 import { SyncManagerProvider, SyncStatusIndicator } from '@/components/shared/SyncManager';
@@ -366,25 +367,25 @@ const LayoutInner = ({ children, currentPageName }) => {
   // === NAVIGATION SECTIONS ===
   // 1. HEAL (most important - immediate value)
   const healNav = [
-    { title: "⚡ BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus • AI radar engine" },
+    { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus • AI radar engine" },
     { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
     { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
-    { title: "🧬 Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
+    { title: "Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
     { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
     { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
     { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
-    { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road • Loch Lomond" },
-    { title: "🎷 Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: Waves, highlight: true, description: "Bone & musician recovery frequencies" },
-    { title: "🌿 Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies · for two" },
+    { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road • Loch Lomond" },
+    { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery frequencies" },
+    { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies · for two" },
   ];
 
   // 2. EARN & CREATE (practical actions)
   const earnCreateNav = [
     { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "KIDS: AI litter scanner" },
-    { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals 🐕🐈" },
-    { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, highlight: true, description: "Gergie7's game 🌋❤️" },
+    { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals" },
+    { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, highlight: true, description: "Gergie7's game" },
     { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "Upload music, keep 90%" },
-    { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, highlight: true, description: "Step-by-step guided drawing 🎨" },
+    { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, highlight: true, description: "Step-by-step guided drawing" },
     { title: "cheeseandonionbake", url: createPageUrl("CheeseAndOnionBake"), icon: Trophy, highlight: true, description: "Rocket League coaching · SSL" },
     { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
     { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
@@ -410,8 +411,8 @@ const LayoutInner = ({ children, currentPageName }) => {
   const [archiveSearch, setArchiveSearch] = React.useState('');
   const archiveNav = [
     { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
-    { title: "💎 Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
-    { title: "🌍 Axiom Stone Network", url: createPageUrl("AxiomStoneNetwork"), icon: Globe, description: "Ancient sites connected?" },
+    { title: "Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
+    { title: "Axiom Stone Network", url: createPageUrl("AxiomStoneNetwork"), icon: Globe, description: "Ancient sites connected?" },
     { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, description: "Better than data centers" },
     { title: "Zero Trust Architecture", url: createPageUrl("AI51PrivacyArchitecture"), icon: Lock, description: "Mathematically private — verify it" },
     { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
@@ -430,13 +431,13 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // 6. RESEARCH (deep dives - less critical, collapsed by default)
   const researchNav = [
-    { title: "🧬 AI51 Soul Dataset", url: createPageUrl("AI51SoulDataset"), icon: Brain, highlight: true, description: "Open-source training data — CC0" },
-    { title: "🚀 FreqLift51 Whitepaper", url: createPageUrl('FreqLift51Whitepaper'), icon: Atom, highlight: true, description: "Acoustic levitation via phones" },
-    { title: "📄 Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, highlight: true, description: "Physics proof" },
-    { title: "📄 The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, highlight: true, description: "Anti-extraction press piece" },
-    { title: "🌍 OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, highlight: true, description: "Free forever" },
-    { title: "💰 Why Open = More $", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, highlight: true, description: "Red Hat $34B proof" },
-    { title: "✅ PRODUCTION READY", url: createPageUrl("ProductionReady"), icon: CheckCircle, highlight: true, description: "Ship now" },
+    { title: "AI51 Soul Dataset", url: createPageUrl("AI51SoulDataset"), icon: Brain, highlight: true, description: "Open-source training data — CC0" },
+    { title: "FreqLift51 Whitepaper", url: createPageUrl('FreqLift51Whitepaper'), icon: Atom, highlight: true, description: "Acoustic levitation via phones" },
+    { title: "Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, highlight: true, description: "Physics proof" },
+    { title: "The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, highlight: true, description: "Anti-extraction press piece" },
+    { title: "OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, highlight: true, description: "Free forever" },
+    { title: "Why Open = More $", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, highlight: true, description: "Red Hat $34B proof" },
+    { title: "PRODUCTION READY", url: createPageUrl("ProductionReady"), icon: CheckCircle, highlight: true, description: "Ship now" },
     { title: "🎵 Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: Waves, description: "Every frequency" },
     { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
     { title: "Deploy Anywhere", url: createPageUrl("DeployUF51Anywhere"), icon: Globe, description: "5-min global scale" },
@@ -479,7 +480,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Partner Brief", url: createPageUrl("PetSounds51PartnerBrief"), icon: Handshake, highlight: true, description: "Influencer & affiliate brief" },
     { title: "Science Whitepaper", url: createPageUrl("PetSounds51Whitepaper"), icon: BookOpen, highlight: true, description: "Peer-reviewed research base" },
     { title: "Press Center", url: createPageUrl("PetSounds51Press"), icon: FileText, highlight: true, description: "For journalists & media" },
-    { title: "🎨 Marketing Assets", url: createPageUrl("PetSounds51MarketingAssets"), icon: Image, highlight: true, description: "Download Bunny graphics" },
+    { title: "Marketing Assets", url: createPageUrl("PetSounds51MarketingAssets"), icon: Image, highlight: true, description: "Download Bunny graphics" },
     { title: "Live Dataset", url: createPageUrl("PetSounds51Data"), icon: Activity, highlight: true, description: "Psychoacoustic response data" },
     { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: Scale, description: "Service terms" },
     { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye, description: "Data protection" },
@@ -509,7 +510,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Tech Stack", url: createPageUrl("TechStack"), icon: Zap },
     { title: "One-Pager PDF", url: createPageUrl("AdminOnePager"), icon: FileText },
     { title: "National Lottery App", url: createPageUrl("AdminNationalLotteryApp"), icon: Heart },
-    { title: "National Lottery (SUBMITTED)", url: createPageUrl("AdminCreativeScotlandNationalLottery"), icon: CheckCircle },
+    { title: "National Lottery - SUBMITTED", url: createPageUrl("AdminCreativeScotlandNationalLottery"), icon: CheckCircle },
     { title: "Budget Document", url: createPageUrl("AdminBudgetDocument"), icon: FileText },
     { title: "Equal Opps Policy", url: createPageUrl("AdminEqualOpportunitiesPolicy"), icon: Users },
     { title: "Creative Scotland Tracker", url: createPageUrl("AdminCreativeScotlandTracker"), icon: FileText },
@@ -520,7 +521,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Gill51 Tracker", url: createPageUrl("AdminGill51Tracker"), icon: Heart },
     { title: "CIC Application", url: createPageUrl("AdminCIC"), icon: Building },
     { title: "Gill51 Maths Lab", url: createPageUrl("AdminGill51Maths"), icon: Calculator },
-    { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, highlight: true, description: "Generate Instagram flyers" },
+    { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, highlight: true, description: "Generate Instagram flyers" }
   ] : [];
 
   const isActivePage = (url) => {
