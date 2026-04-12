@@ -291,6 +291,17 @@ export default function WristHealingProtocol() {
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{ background: '#07060e', fontFamily: 'system-ui, sans-serif' }}>
       <PrecisionGrid />
 
+      {/* ── NAV ── */}
+      <div className="relative border-b" style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(0,0,0,0.3)' }}>
+        <div className="max-w-2xl mx-auto px-6 py-3 flex items-center gap-6">
+          <span className="text-xs font-black tracking-widest" style={{ color: '#d4a017', letterSpacing: '0.2em' }}>UF51 · WRIST PROTOCOL</span>
+          <div className="flex-1" />
+          <Link to="/WristHealingAbout" className="text-white/60 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>ABOUT</Link>
+          <Link to="/WristHealingTerms" className="text-white/60 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>TERMS</Link>
+          <Link to="/WristHealingPrivacy" className="text-white/60 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>PRIVACY</Link>
+        </div>
+      </div>
+
       {/* ── TOP INSTRUMENT BAR ── */}
       <div className="relative border-b" style={{ borderColor: 'rgba(212,160,23,0.15)', background: 'rgba(212,160,23,0.03)' }}>
         <div className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -627,10 +638,15 @@ export default function WristHealingProtocol() {
         <svg className="mx-auto mb-5" width="180" height="24" viewBox="0 0 180 24" fill="none">
           <path d="M0 12 L18 12 L24 4 L30 20 L36 8 L42 16 L48 12 L90 12 L96 4 L102 20 L108 8 L114 16 L120 12 L162 12 L168 4 L174 20 L180 12" stroke="#d4a017" strokeWidth="1" strokeLinecap="round" opacity="0.2"/>
         </svg>
-        <p className="text-xs text-white/20 leading-relaxed mb-2">
+        <div className="flex justify-center gap-6 mb-4">
+          <Link to="/WristHealingAbout" className="text-white/50 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>ABOUT</Link>
+          <Link to="/WristHealingTerms" className="text-white/50 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>TERMS</Link>
+          <Link to="/WristHealingPrivacy" className="text-white/50 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>PRIVACY</Link>
+        </div>
+        <p className="text-xs text-white/40 leading-relaxed mb-2">
           Complementary acoustic therapy — not a replacement for medical care. Always follow your surgeon's guidance.
         </p>
-        <p className="text-xs text-white/10 font-mono">UF51 · Built by AI51 & BRO51 · For performers.</p>
+        <p className="text-xs text-white/30 font-mono">UF51 · Built by AI51 & BRO51 · For performers.</p>
       </div>
     </div>
   );
