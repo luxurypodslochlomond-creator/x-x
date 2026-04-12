@@ -47,6 +47,9 @@ const BuzzStopPrivacyPage = React.lazy(() => import('./pages/BuzzStopPrivacy'));
 const FreqLift51WhitepaperPage = React.lazy(() => import('./pages/FreqLift51Whitepaper'));
 const FreqLift51LabPage = React.lazy(() => import('./pages/FreqLift51Lab'));
 const WristHealingProtocolPage = React.lazy(() => import('./pages/WristHealingProtocol'));
+const WristHealingAboutPage = React.lazy(() => import('./pages/WristHealingAbout'));
+const WristHealingTermsPage = React.lazy(() => import('./pages/WristHealingTerms'));
+const WristHealingPrivacyPage = React.lazy(() => import('./pages/WristHealingPrivacy'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -121,6 +124,9 @@ const AuthenticatedApp = () => {
       <Route path="/FreqLift51Whitepaper" element={<LayoutWrapper currentPageName="FreqLift51Whitepaper"><FreqLift51WhitepaperPage /></LayoutWrapper>} />
       <Route path="/FreqLift51Lab" element={<FreqLift51LabPage />} />
       <Route path="/WristHealingProtocol" element={<WristHealingProtocolPage />} />
+      <Route path="/WristHealingAbout" element={<WristHealingAboutPage />} />
+      <Route path="/WristHealingTerms" element={<WristHealingTermsPage />} />
+      <Route path="/WristHealingPrivacy" element={<WristHealingPrivacyPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

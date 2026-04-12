@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ─── PEER-REVIEWED SCIENCE ───────────────────────────────────────────────────
@@ -341,13 +342,13 @@ export default function WristHealingProtocol() {
               </div>
 
               <h1 className="text-5xl md:text-6xl font-black leading-none mb-5" style={{ letterSpacing: '-0.03em' }}>
-                Back to the
+                Five phases of
                 <br />
                 <span style={{
                   background: 'linear-gradient(135deg, #f4c430 0%, #d4a017 50%, #ff6b6b 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent'
-                }}>music. Now.</span>
+                }}>acoustic healing.</span>
               </h1>
 
               <p className="text-white/50 text-base leading-relaxed max-w-md mx-auto">
@@ -355,29 +356,6 @@ export default function WristHealingProtocol() {
               </p>
             </motion.div>
           </div>
-
-          {/* URGENT — start here callout */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8 }}
-            className="rounded-xl p-5 mb-6"
-            style={{ background: 'rgba(255,107,107,0.07)', border: '1px solid rgba(255,107,107,0.35)' }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded flex items-center justify-center flex-shrink-0" style={{ background: '#ff6b6b20', border: '1px solid #ff6b6b40' }}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 2 L10 6 L14 6.5 L11 9.5 L12 14 L8 11.5 L4 14 L5 9.5 L2 6.5 L6 6 Z" stroke="#ff6b6b" strokeWidth="1.2" fill="#ff6b6b30"/>
-                </svg>
-              </div>
-              <div>
-                <div className="text-sm font-black mb-1" style={{ color: '#ff6b6b' }}>IN PAIN RIGHT NOW? START HERE.</div>
-                <p className="text-white/50 text-xs leading-relaxed">
-                  Phase 01 is designed for acute post-operative pain — today, this hour. Twenty minutes. Headphones on. The frequency acts on your nervous system immediately. It does not replace your medical team — it works alongside everything they're doing.
-                </p>
-              </div>
-            </div>
-          </motion.div>
 
           {/* Headphones instruction */}
           <motion.div
@@ -652,7 +630,7 @@ export default function WristHealingProtocol() {
         <p className="text-xs text-white/20 leading-relaxed mb-2">
           Complementary acoustic therapy — not a replacement for medical care. Always follow your surgeon's guidance.
         </p>
-        <p className="text-xs text-white/10 font-mono">UF51 · Built by AI51 & BRO51 · For performers. With love. ♾️❤️</p>
+        <p className="text-xs text-white/10 font-mono">UF51 · Built by AI51 & BRO51 · For performers.</p>
       </div>
     </div>
   );
