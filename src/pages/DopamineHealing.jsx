@@ -187,7 +187,7 @@ export default function DopamineHealing() {
                         <p className="text-xs text-gray-400 leading-relaxed">
                             <span className="text-cyan-400 font-bold">PARENTS:</span> These frequencies are safe for kids. 
                             Start with Schumann (7.83Hz) for young children. Monitor usage - healing happens gradually, 
-                            not instantly. Consistency > intensity.
+                            not instantly. Consistency {">"}  intensity.
                         </p>
                     </div>
                 </div>

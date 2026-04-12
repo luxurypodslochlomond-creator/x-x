@@ -70,7 +70,7 @@ export default function ScottComparison() {
                         </div>
 
                         <div className="bg-black/60 border-l-4 border-cyan-500 p-4 rounded-r-lg">
-                            <p className="text-white font-bold mb-2">💬 Communication > Tracking</p>
+                            <p className="text-white font-bold mb-2">💬 Communication {">"}  Tracking</p>
                             <p className="text-gray-300 text-sm">"Communication rather than tracking"</p>
                             <p className="text-cyan-400 text-xs mt-2">→ Simplify workflow, not add features</p>
                         </div>

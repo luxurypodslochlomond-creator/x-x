@@ -18,7 +18,8 @@ export default function ScottVoiceCommand({ onCommandComplete }) {
             return;
         }
 
-        const recognition = new webkitSpeechRecognition();
+        const SpeechRec = window.webkitSpeechRecognition || window.SpeechRecognition;
+        const recognition = new SpeechRec();
         recognition.continuous = false;
         recognition.interimResults = false;
 

@@ -296,7 +296,7 @@ export default function ResonanceLabPage() {
                     ))}
                   </div>
                   <p className="text-xs text-gray-500 mt-3">
-                    These words appeared most when your resonance score was high (>7.0)
+                    These words appeared most when your resonance score was high ({">"}7.0)
                   </p>
                 </div>
               )}

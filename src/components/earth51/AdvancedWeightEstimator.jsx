@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Scale, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Scale, Sparkles, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 /**

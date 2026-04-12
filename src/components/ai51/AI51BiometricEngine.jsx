@@ -22,6 +22,7 @@ export default function AI51BiometricEngine({ isActive, onAnalysis }) {
     const midFreq = frequencyData.slice(80, 150).reduce((a, b) => a + b) / 70;
     
     // Tremor: frequency variance = nervous system activation
+    let tremor = 0;
     let variance = 0;
     for (let i = 0; i < frequencyData.length - 1; i++) {
       variance += Math.abs(frequencyData[i] - frequencyData[i + 1]);

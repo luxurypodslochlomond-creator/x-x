@@ -43,7 +43,7 @@ export const Life51OfflineProvider = ({ children }) => {
         setUserId(storedUserId);
 
         const handleOnline = () => setIsOnline(true);
-        const handleOffline = () => setIsOffline(false);
+        const handleOffline = () => setIsOnline(false);
         
         window.addEventListener('online', handleOnline);
         window.addEventListener('offline', handleOffline);

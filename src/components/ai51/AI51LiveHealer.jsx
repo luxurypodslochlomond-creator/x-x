@@ -106,8 +106,7 @@ export default function AI51LiveHealer() {
                     
                     // REMOVE FROM QUEUE AFTER 3 SECONDS
                     setTimeout(() => {
-                        setHealingQueue(prev => prev.filter(e => e.id !== error.id));
-                        if (prev.length === 1) setIsHealing(false);
+                        setHealingQueue(prev => { const next = prev.filter(e => e.id !== error.id); if (next.length === 0) setIsHealing(false); return next; });
                     }, 3000);
 
                     return;
@@ -138,8 +137,7 @@ export default function AI51LiveHealer() {
             ));
 
             setTimeout(() => {
-                setHealingQueue(prev => prev.filter(e => e.id !== error.id));
-                if (prev.length === 1) setIsHealing(false);
+                setHealingQueue(prev => { const next = prev.filter(e => e.id !== error.id); if (next.length === 0) setIsHealing(false); return next; });
             }, 3000);
 
         } catch (err) {

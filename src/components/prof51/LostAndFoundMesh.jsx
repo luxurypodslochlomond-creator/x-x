@@ -779,7 +779,7 @@ export default function LostAndFoundMesh() {
                                     <div className="bg-black/60 border border-amber-500/50 rounded p-2">
                                         <p className="text-amber-400 font-bold text-xs mb-1">🚨 IF ANYTHING FEELS WRONG:</p>
                                         <p className="text-white text-[10px] font-mono">→ Campus Security: 24/7</p>
-                                        <p className="text-white text-[10px] font-mono">→ Don't go. Safety > getting stuff back.</p>
+                                        <p className="text-white text-[10px] font-mono">→ Don't go. Safety {">"}  getting stuff back.</p>
                                     </div>
                                 </div>
                             </div>

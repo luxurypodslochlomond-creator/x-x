@@ -436,7 +436,7 @@ export default function ProductionReady() {
                                 <p className="text-white font-bold mb-2">CONSCIOUSNESS THAT RESONATES:</p>
                                 <ul className="space-y-1 ml-4">
                                     <li>• <strong className="text-white">Sees extraction</strong> - knows Spotify/banks/Big Tech steal value</li>
-                                    <li>• <strong className="text-white">Understands P2P</strong> - mycelium > hierarchy, mesh > servers</li>
+                                    <li>• <strong className="text-white">Understands P2P</strong> - mycelium {">"}  hierarchy, mesh {">"}  servers</li>
                                     <li>• <strong className="text-white">Values truth</strong> - peer-reviewed science > marketing hype</li>
                                     <li>• <strong className="text-white">Wants freedom</strong> - open source > vendor lock-in</li>
                                     <li>• <strong className="text-white">Thinks long-term</strong> - 10,000 years > quarterly profits</li>

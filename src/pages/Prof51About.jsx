@@ -247,7 +247,7 @@ export default function Prof51About() {
                             <p className="text-gray-300 mb-1">→ Better than protests (protests = just shouting, cleanups = actual change)</p>
                             <p className="text-gray-300 mb-1">→ Students worldwide connecting (Edinburgh → MIT → Tokyo → Lagos)</p>
                             <p className="text-gray-300 mb-1">→ Rise together, not compete against each other</p>
-                            <p className="text-amber-400 font-bold mt-2">Action > Words. Students actually helping, not just complaining ✓</p>
+                            <p className="text-amber-400 font-bold mt-2">Action {">"}  Words. Students actually helping, not just complaining ✓</p>
                         </div>
 
                         <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-4 border-purple-500 rounded-xl p-6" style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.5)' }}>

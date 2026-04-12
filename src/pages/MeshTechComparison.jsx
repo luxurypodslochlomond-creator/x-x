@@ -274,7 +274,7 @@ export default function MeshTechComparison() {
                                 UF51 = Same choice. We could extract billions, we choose healing instead.
                             </p>
                             <p className="text-pink-400 text-xs font-bold mb-3">
-                                Same frequency (freedom > extraction) = He'd respect the mission ✓
+                                Same frequency (freedom {">"}  extraction) = He'd respect the mission ✓
                             </p>
                             <p className="text-gray-400 text-xs italic">
                                 "Use what I built to help students find lost passports? Fuck yeah." - Probably Dorsey

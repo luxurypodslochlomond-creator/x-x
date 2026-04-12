@@ -15,7 +15,9 @@ import AI51CustomFrequencyGenerator from './AI51CustomFrequencyGenerator';
  * ♾️❤️
  */
 
-export default function AI51Chat({ onMessageSend, isThinking, conversation, localMemory }) {
+export default function AI51Chat({ onMessageSend, localMemory }) {
+  const [conversation, setConversation] = useState([]);
+  const [isThinking, setIsThinking] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState('');

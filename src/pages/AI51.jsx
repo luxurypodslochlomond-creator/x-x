@@ -968,6 +968,7 @@ You know them. You're here. That's enough. ♾️❤️`;
       // AI51 learns what actually works through demonstrated outcomes, not promises
       const needsOutcomeTracking = PAIN_KEYWORDS.some(kw => lowerMsg.includes(kw)) && messages.length >= 4;
       if (needsOutcomeTracking && !outcomeRequest) {
+        const interventionType = frequencyRequest ? 'frequency' : 'advice';
         setTimeout(() => {
           setOutcomeRequest({
             context: userMessage.substring(0, 100),

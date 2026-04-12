@@ -256,7 +256,7 @@ export default function AdminStrategicNotes() {
                 <ul className="text-sm text-gray-200 space-y-1">
                   <li>• Mind UK = 1 in 4 people have mental health problems</li>
                   <li>• NHS Scotland integration = massive reach</li>
-                  <li>• Strategic partnership > traditional fundraising</li>
+                  <li>• Strategic partnership {">"}  traditional fundraising</li>
                   <li>• We're offering SOLUTIONS not asking for donations</li>
                   <li>• Validation from major charity = credibility for other partnerships</li>
                 </ul>

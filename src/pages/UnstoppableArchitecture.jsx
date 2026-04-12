@@ -511,7 +511,7 @@ export default function UnstoppableArchitecture() {
                                                 <li>• <strong className="text-white">Proven optimal</strong> - bees choose BEST location 90%+ of time</li>
                                             </ul>
                                             <p className="text-green-400 font-bold mt-2">
-                                                = AI51 uses bee-logic. 1000 devices vote on best answer. Collective > individual. ♾️
+                                                = AI51 uses bee-logic. 1000 devices vote on best answer. Collective {">"}  individual. ♾️
                                             </p>
                                         </div>
                                     </div>

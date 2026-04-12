@@ -255,7 +255,7 @@ export default function WhyHelpUF51() {
                             <p className="text-gray-300">→ We're your best case study for "what's possible"</p>
                             <p className="text-gray-300">→ Zero server scaling + offline mesh = perfect Base44 showcase</p>
                             <p className="text-gray-300">→ If we grow, you grow (we're all-in on your platform)</p>
-                            <p className="text-gray-300">→ Partnership > just another customer</p>
+                            <p className="text-gray-300">→ Partnership {">"}  just another customer</p>
                         </div>
 
                         <div className="bg-black border-2 border-green-500 p-4 space-y-3">
