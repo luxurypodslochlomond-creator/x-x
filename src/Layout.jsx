@@ -397,11 +397,11 @@ const LayoutInner = ({ children, currentPageName }) => {
   const learnNav = [
     { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
     { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, highlight: true, description: "One-pager for funders" },
-    { title: "💚 For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, highlight: true, description: "Fund real people healing Earth" },
-    { title: "🔬 Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, highlight: true, description: "Contact academic teams" },
+    { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, highlight: true, description: "Fund real people healing Earth" },
+    { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, highlight: true, description: "Contact academic teams" },
     { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, highlight: true, description: "PROVE connection is real" },
     { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
-    { title: "👁️ See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
+    { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
     { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
     { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield, description: "Protection protocol" },
   ];
