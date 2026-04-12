@@ -375,6 +375,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
     { title: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road • Loch Lomond" },
     { title: "🎷 Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: Waves, highlight: true, description: "Bone & musician recovery frequencies" },
+    { title: "🌿 Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies · for two" },
   ];
 
   // 2. EARN & CREATE (practical actions)
