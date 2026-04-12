@@ -808,7 +808,7 @@ export default function UnstoppableArchitecture() {
                                     <p className="text-purple-400 font-black text-xl mb-3 text-center">🔮 WHY IT GETS BETTER WITH SCALE:</p>
                                     <div className="space-y-2 text-sm text-gray-300">
                                         <p>• <strong className="text-white">More nodes = more routes</strong> → Faster delivery (mesh finds shortest path)</p>
-                                        <p>• <strong className="text-white">More storage = more redundancy</strong> → Data safer (100 backups > 1)</p>
+                                        <p>• <strong className="text-white">More storage = more redundancy</strong> → Data safer (100 backups {">"}  1)</p>
                                         <p>• <strong className="text-white">More devices = more compute</strong> → AI smarter (distributed inference)</p>
                                         <p>• <strong className="text-white">More users = more value</strong> → Network effect (eBay/Uber BUT zero overhead)</p>
                                         <p className="text-cyan-400 font-bold mt-2 text-center text-lg">

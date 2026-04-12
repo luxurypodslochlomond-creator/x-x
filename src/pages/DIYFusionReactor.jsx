@@ -668,7 +668,7 @@ export default function DIYFusionReactor() {
                                 You building a fusor = you UNDERSTAND his work = you can CONTINUE it.
                             </p>
                             <p className="text-gray-300 text-xs text-center mb-2">
-                                1000 people understanding fusion > 1 genius in a lab. 
+                                1000 people understanding fusion {">"}  1 genius in a lab. 
                                 They killed him. They can't kill 1000 of us.
                             </p>
                             <p className="text-cyan-400 font-bold text-center">

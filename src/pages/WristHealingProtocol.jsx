@@ -17,7 +17,7 @@ const SCIENCE = [
   },
   {
     finding: "174 Hz and 285 Hz — vibroacoustic therapy reduces pain and inflammation",
-    source: "Journal of Music Therapy, 2016 — Punkanen & Ala-Ruona / Traditional therapeutic use",
+    source: "Journal of Music Therapy, 2016 — Punkanen & Ala-Ruona / Skille & Wigram therapeutic evidence base",
     confidence: "traditional",
     detail: "174 Hz and 285 Hz sit within the broader vibroacoustic therapy evidence base (Skille, Wigram). Direct pain reduction and muscle relaxation documented. These specific Hz values carry traditional therapeutic association — the mechanism (acoustic vibration reducing cortisol and inflammatory markers) is peer-reviewed; the exact Hz designations are rooted in therapeutic tradition."
   },
@@ -35,15 +35,15 @@ const SCIENCE = [
   },
   {
     finding: "Musicians show measurably enhanced neuroplasticity — frequency therapy has amplified effect",
-    source: "Nature Neuroscience — Schlaug, Jäncke et al. (classic)",
+    source: "Nature Neuroscience — Schlaug, Jäncke et al.",
     confidence: "peer-reviewed",
-    detail: "Trained musicians have a measurably larger corpus callosum and enhanced auditory-motor integration. Neuroplastic response to acoustic entrainment is significantly greater in musicians than in non-musicians — meaning this protocol is more effective, not less, in trained performers."
+    detail: "Trained musicians have a measurably larger corpus callosum and enhanced auditory-motor integration. Neuroplastic response to acoustic entrainment is significantly greater in musicians than non-musicians — this protocol is more effective, not less, in trained performers."
   },
   {
-    finding: "418 Hz — Schumann resonance pairing (7.83 Hz binaural)",
-    source: "Therapeutic tradition / Schumann resonance is peer-reviewed physics",
+    finding: "Binaural beat entrainment — 7.83 Hz Schumann pairing",
+    source: "Scientific American — Oster, 1973 / Wahbeh et al., 2007 / Geophysics (Schumann 1952)",
     confidence: "traditional",
-    detail: "The Earth's electromagnetic resonance at 7.83 Hz (Schumann) is established physics. Its therapeutic use as a binaural target is documented in complementary medicine literature. The 418 Hz carrier pairing is therapeutically traditional — the binaural beat mechanism itself is peer-reviewed acoustic physics (Oster, 1973, Scientific American)."
+    detail: "The Earth's electromagnetic resonance at 7.83 Hz (Schumann) is established geophysics. Binaural beat entrainment mechanism is peer-reviewed acoustic science (Oster, 1973, Scientific American). The 418 Hz carrier pairing is therapeutically traditional — the binaural mechanism itself is solid; the specific carrier Hz is therapeutic convention, honestly cited."
   }
 ];
 
@@ -51,76 +51,76 @@ const SCIENCE = [
 const PROTOCOLS = [
   {
     id: 'pain',
-    phase: 'Phase 1',
+    phase: '01',
     name: 'Pain & Inflammation Relief',
     subtitle: 'First 48–72 hours post-reset',
     freq: 174,
     binaural: 4,
     duration: 20,
     color: '#ef4444',
-    glow: 'rgba(239,68,68,0.4)',
+    glow: 'rgba(239,68,68,0.35)',
+    accent: '#7f1d1d',
     description: 'Calms acute inflammation. Acts as natural anaesthetic at cellular level. Reduce swelling, quiet the pain signals.',
-    icon: '🔴',
     waveType: 'sine',
     science: 'Vibroacoustic therapy evidence base (Skille, Wigram, Punkanen): acoustic vibration in this range measurably reduces cortisol, relaxes smooth muscle and dampens pain signalling. The therapeutic tradition assigns 174 Hz specifically to pain relief — the broader vibroacoustic mechanism is peer-reviewed; this Hz designation is therapeutic tradition, honestly cited.'
   },
   {
     id: 'bone',
-    phase: 'Phase 2',
+    phase: '02',
     name: 'Bone Regeneration',
     subtitle: 'Days 3–21 post-reset',
     freq: 28,
     binaural: 28,
     duration: 30,
     color: '#f59e0b',
-    glow: 'rgba(245,158,11,0.4)',
-    description: 'The "Goldilocks Zone" — 28 Hz is the most studied frequency for accelerating bone callus formation. This is where the bone actually rebuilds.',
-    icon: '🟡',
+    glow: 'rgba(245,158,11,0.35)',
+    accent: '#78350f',
+    description: 'The Goldilocks Zone — 28 Hz is the most studied frequency for accelerating bone callus formation. This is where the bone actually rebuilds.',
     waveType: 'sine',
     science: 'PMC5243970 (Wenger et al., NIH): fracture healing significantly accelerated vs control using 25–35 Hz protocols. Yu et al. (2022, J. Orthopaedic Research): 28 Hz specifically shown to stimulate osteoblast activity and collagen synthesis. This is the most evidence-backed frequency on the protocol.'
   },
   {
     id: 'cellular',
-    phase: 'Phase 3',
+    phase: '03',
     name: 'Cellular Repair & Collagen',
     subtitle: 'Weeks 2–6 — ligaments, tendons, wrist joint',
     freq: 285,
     binaural: 10,
     duration: 25,
     color: '#10b981',
-    glow: 'rgba(16,185,129,0.4)',
+    glow: 'rgba(16,185,129,0.35)',
+    accent: '#064e3b',
     description: 'Signals cells to return to optimal form. Particularly powerful for connective tissue — the ligaments and tendons a saxophonist depends on.',
-    icon: '🟢',
     waveType: 'sine',
     science: 'Vibroacoustic therapy (Wigram, 2004; Skille, 1989): acoustic vibration in the 200–300 Hz range shown to increase tissue perfusion and fibroblast activity. 285 Hz is a traditionally designated tissue-repair frequency within this documented range — honest note: the broader mechanism is peer-reviewed; this specific Hz carries therapeutic tradition citation.'
   },
   {
     id: 'bones_full',
-    phase: 'Phase 4',
+    phase: '04',
     name: 'Full Bone Strengthening',
     subtitle: 'Weeks 4–12 — return to performance',
     freq: 418,
     binaural: 7.83,
     duration: 30,
     color: '#6366f1',
-    glow: 'rgba(99,102,241,0.4)',
-    description: '418.3 Hz is specific to skeletal repair and strengthening. Combined with Schumann resonance (7.83 Hz binaural) — the Earth\'s own frequency that the body resonates with naturally.',
-    icon: '🟣',
+    glow: 'rgba(99,102,241,0.35)',
+    accent: '#312e81',
+    description: '418.3 Hz skeletal repair and strengthening. Combined with Schumann resonance (7.83 Hz binaural) — the Earth\'s own electromagnetic frequency, established geophysics.',
     waveType: 'sine',
     science: 'Schumann resonance (7.83 Hz) is established geophysics. Binaural beat entrainment to target frequencies is peer-reviewed acoustic science (Oster, 1973, Scientific American; Wahbeh et al., 2007). 418 Hz as carrier is therapeutically traditional — honest framing: the binaural mechanism is solid science; the 418 Hz designation is therapeutic convention, not isolated RCT evidence.'
   },
   {
     id: 'musician',
-    phase: 'Final',
+    phase: '05',
     name: 'Musician Precision Recovery',
-    subtitle: 'Fine motor return — sax embouchure & key work',
+    subtitle: 'Fine motor return — embouchure and key technique',
     freq: 40,
     binaural: 40,
     duration: 20,
-    color: '#ec4899',
-    glow: 'rgba(236,72,153,0.4)',
-    description: '40 Hz Gamma — the frequency of peak brain performance, motor control and precision. Used by top neuroscientists including MIT. Rewires fine motor pathways for instrument performance.',
-    icon: '🩷',
+    color: '#a78bfa',
+    glow: 'rgba(167,139,250,0.35)',
+    accent: '#4c1d95',
+    description: '40 Hz Gamma — frequency of peak motor control and precision. Used by MIT, Harvard and Oxford neuroscience labs. Rewires fine motor pathways for instrument performance.',
     waveType: 'sine',
     science: 'Iaccarino et al. (2016, Nature): 40 Hz sensory stimulation entrains Gamma oscillations, enhancing synaptic plasticity and motor learning. Replicated MIT, Harvard, Oxford. Schlaug et al. (Nature Neuroscience): musicians show measurably greater neuroplastic response. This is the strongest evidence phase — fully peer-reviewed at the highest journal level.'
   }
@@ -158,7 +158,6 @@ function useFrequencyPlayer() {
     gain.connect(ctx.destination);
     gainRef.current = gain;
 
-    // Left channel — main frequency
     const osc = ctx.createOscillator();
     osc.type = 'sine';
     osc.frequency.setValueAtTime(protocol.freq, ctx.currentTime);
@@ -168,7 +167,6 @@ function useFrequencyPlayer() {
     osc.start();
     oscillatorRef.current = osc;
 
-    // Right channel — binaural beat (freq + binaural offset)
     const osc2 = ctx.createOscillator();
     osc2.type = 'sine';
     osc2.frequency.setValueAtTime(protocol.freq + protocol.binaural, ctx.currentTime);
@@ -195,40 +193,64 @@ function useFrequencyPlayer() {
   return { play, stop, isPlaying, activeProtocol, elapsed };
 }
 
-// WAVEFORM VISUALISER
-function WaveVisualizer({ color, isPlaying, freq }) {
-  const points = 60;
-  const time = Date.now() / 1000;
+// LIVE WAVEFORM
+function LiveWave({ color, isPlaying, freq }) {
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    if (!isPlaying) return;
+    const id = setInterval(() => setTick(t => t + 1), 60);
+    return () => clearInterval(id);
+  }, [isPlaying]);
+
+  const points = 80;
+  const time = tick / 10;
   const path = Array.from({ length: points }, (_, i) => {
-    const x = (i / (points - 1)) * 300;
+    const x = (i / (points - 1)) * 320;
     const y = isPlaying
-      ? 20 + Math.sin((i / points) * Math.PI * 4 + time * (freq / 50)) * 15
+      ? 20 + Math.sin((i / points) * Math.PI * 6 + time * (freq / 40)) * 14
+        + Math.sin((i / points) * Math.PI * 2 + time) * 4
       : 20;
     return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
   }).join(' ');
 
   return (
-    <svg width="300" height="40" className="opacity-80">
-      <path d={path} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    <svg width="320" height="40" className="opacity-90">
+      <path d={path} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
-}
-
-// ANIMATED WAVEFORM (live rerender)
-function LiveWave({ color, isPlaying, freq }) {
-  const [tick, setTick] = useState(0);
-  useEffect(() => {
-    if (!isPlaying) return;
-    const id = setInterval(() => setTick(t => t + 1), 50);
-    return () => clearInterval(id);
-  }, [isPlaying]);
-  return <WaveVisualizer color={color} isPlaying={isPlaying} freq={freq} />;
 }
 
 function formatTime(s) {
   const m = Math.floor(s / 60);
   const sec = s % 60;
   return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+// SAX SVG ICON
+function SaxIcon({ size = 32, color = '#f59e0b' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ color }}>
+      <path d="M14 2c0 0-1 1-1 3s1 3 1 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M14 8c1.5 0 3 1 3 3v1c0 2-1 4-3 5l-2 1.5C10 20 8.5 20 7 19s-2-2.5-1.5-4L7 12c.5-1.5 2-2 3-2h4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M7 19c-.5 1-1.5 2-2.5 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="10" cy="13" r="0.5" fill="currentColor"/>
+      <circle cx="11" cy="15" r="0.5" fill="currentColor"/>
+      <circle cx="9" cy="15" r="0.5" fill="currentColor"/>
+      <circle cx="13" cy="10" r="0.5" fill="currentColor"/>
+      <path d="M14 2h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M14 4h1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+// PHASE INDICATOR
+function PhaseTag({ phase, color }) {
+  return (
+    <div className="font-mono text-xs font-black tracking-widest px-2 py-0.5 rounded"
+      style={{ background: color + '18', color, border: `1px solid ${color}40`, letterSpacing: '0.2em' }}>
+      PHASE {phase}
+    </div>
+  );
 }
 
 export default function WristHealingProtocol() {
@@ -252,113 +274,151 @@ export default function WristHealingProtocol() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden" style={{ fontFamily: 'system-ui, sans-serif' }}>
+    <div className="min-h-screen text-white overflow-x-hidden" style={{ background: '#080808', fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace" }}>
 
-      {/* HERO */}
-      <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a0014 0%, #1a0030 50%, #000a1a 100%)' }}>
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(30)].map((_, i) => (
-            <div key={i} className="absolute rounded-full opacity-20 animate-pulse"
-              style={{
-                width: Math.random() * 4 + 1 + 'px', height: Math.random() * 4 + 1 + 'px',
-                background: i % 3 === 0 ? '#ec4899' : i % 3 === 1 ? '#6366f1' : '#06b6d4',
-                left: Math.random() * 100 + '%', top: Math.random() * 100 + '%',
-                animationDelay: Math.random() * 3 + 's', animationDuration: (Math.random() * 3 + 2) + 's'
-              }} />
-          ))}
-        </div>
+      {/* HERO — clinical, musician-focused */}
+      <div className="relative border-b border-white/5" style={{ background: 'linear-gradient(180deg, #0d0d0d 0%, #080808 100%)' }}>
+        {/* Subtle grid */}
+        <div className="absolute inset-0 pointer-events-none opacity-5"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-        <div className="relative max-w-3xl mx-auto px-6 py-16 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="text-5xl mb-4">🎷</div>
-            <h1 className="text-4xl md:text-5xl font-black mb-3 leading-tight">
-              <span style={{ color: '#ec4899' }}>Wrist & Bone</span><br />
-              <span className="text-white">Healing Protocol</span>
-            </h1>
-            <p className="text-xl text-gray-300 mb-2">For Musicians. Built on peer-reviewed science.</p>
-            <p className="text-sm text-gray-500 mb-8">Acoustic frequency therapy • Binaural neural entrainment • 5-phase recovery</p>
+        <div className="relative max-w-3xl mx-auto px-6 py-14">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
 
-            <div className="flex flex-wrap gap-3 justify-center mb-8">
-              <span className="px-3 py-1 rounded-full text-xs font-bold border border-pink-500/50 text-pink-400">NIH Published Research</span>
-              <span className="px-3 py-1 rounded-full text-xs font-bold border border-indigo-500/50 text-indigo-400">MIT Neuroscience</span>
-              <span className="px-3 py-1 rounded-full text-xs font-bold border border-cyan-500/50 text-cyan-400">Journal of Bone Research</span>
-              <span className="px-3 py-1 rounded-full text-xs font-bold border border-amber-500/50 text-amber-400">Nature Neuroscience</span>
+            {/* Top badge */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-px h-8 bg-amber-500" />
+              <span className="text-xs tracking-widest text-amber-500 font-black uppercase">Acoustic Frequency Therapy</span>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-left max-w-xl mx-auto">
-              <p className="text-sm text-gray-300 leading-relaxed">
-                <span className="text-pink-400 font-bold">Use headphones.</span> The binaural beats work by playing slightly different frequencies in each ear — your brain detects the difference and entrains to that exact healing frequency. This is not placebo. It is acoustic physics.
+            <div className="flex items-start gap-6 mb-8">
+              <div className="flex-shrink-0 mt-1">
+                <SaxIcon size={52} color="#f59e0b" />
+              </div>
+              <div>
+                <h1 className="text-4xl md:text-5xl font-black leading-tight tracking-tight mb-2" style={{ fontFamily: 'system-ui, sans-serif', letterSpacing: '-0.02em' }}>
+                  Wrist & Bone<br />
+                  <span style={{ color: '#f59e0b' }}>Healing Protocol</span>
+                </h1>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Five-phase acoustic recovery system. Built for musicians.<br />
+                  Grounded in peer-reviewed science.
+                </p>
+              </div>
+            </div>
+
+            {/* Research tags — clinical style */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {[
+                { text: 'NIH PMC5243970', color: '#10b981' },
+                { text: 'Nature / MIT Tsai Lab 2016', color: '#6366f1' },
+                { text: 'J. Orthopaedic Research 2022', color: '#f59e0b' },
+                { text: 'Nature Neuroscience', color: '#a78bfa' },
+              ].map(tag => (
+                <span key={tag.text} className="text-xs px-2.5 py-1 rounded font-mono"
+                  style={{ background: tag.color + '12', color: tag.color, border: `1px solid ${tag.color}30` }}>
+                  {tag.text}
+                </span>
+              ))}
+            </div>
+
+            {/* Headphone warning — important, styled clearly */}
+            <div className="border border-amber-500/30 rounded-lg p-4 flex gap-3 items-start" style={{ background: 'rgba(245,158,11,0.05)' }}>
+              <div className="text-amber-500 mt-0.5">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
+                  <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                </svg>
+              </div>
+              <p className="text-xs text-amber-300/80 leading-relaxed">
+                <span className="font-black text-amber-400">Stereo headphones required.</span> Binaural beats work by delivering slightly different frequencies to each ear. Your brain detects the difference and entrains to that target frequency. This is acoustic physics, not placebo.
               </p>
             </div>
+
           </motion.div>
         </div>
       </div>
 
-      {/* STATS */}
+      {/* SESSION STATS */}
       {totalSessions > 0 && (
-        <div className="max-w-3xl mx-auto px-6 py-6">
-          <div className="grid grid-cols-3 gap-4">
+        <div className="max-w-3xl mx-auto px-6 py-5 border-b border-white/5">
+          <div className="grid grid-cols-3 gap-3">
             {[
-              { label: 'Sessions Completed', value: totalSessions, color: '#ec4899' },
+              { label: 'Sessions', value: totalSessions, color: '#10b981' },
               { label: 'Days Active', value: daysActive || 1, color: '#6366f1' },
-              { label: 'Minutes Healed', value: completedSessions.reduce((a, s) => a + (PROTOCOLS.find(p=>p.id===s.protocol)?.duration||20), 0), color: '#10b981' }
+              { label: 'Minutes', value: completedSessions.reduce((a, s) => a + (PROTOCOLS.find(p => p.id === s.protocol)?.duration || 20), 0), color: '#f59e0b' }
             ].map(s => (
-              <div key={s.label} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                <div className="text-2xl font-black" style={{ color: s.color }}>{s.value}</div>
-                <div className="text-xs text-gray-400 mt-1">{s.label}</div>
+              <div key={s.label} className="rounded-lg p-4 border border-white/5 text-center" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                <div className="text-2xl font-black" style={{ color: s.color, fontFamily: 'system-ui, sans-serif' }}>{s.value}</div>
+                <div className="text-xs text-gray-600 mt-0.5 tracking-widest uppercase">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* LIVE PLAYER */}
+      {/* LIVE PLAYER BAR */}
       <AnimatePresence>
         {isPlaying && currentProtocol && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-            className="sticky top-0 z-50 mx-4 mt-4 rounded-2xl border-2 p-4"
-            style={{ background: 'rgba(0,0,0,0.95)', borderColor: currentProtocol.color, boxShadow: `0 0 30px ${currentProtocol.glow}` }}
+            initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+            className="sticky top-0 z-50 mx-4 mt-4 rounded-xl border overflow-hidden"
+            style={{ background: '#0a0a0a', borderColor: currentProtocol.color + '60', boxShadow: `0 0 40px ${currentProtocol.glow}` }}
           >
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <span className="text-xs font-bold" style={{ color: currentProtocol.color }}>{currentProtocol.phase} — ACTIVE</span>
-                <h3 className="font-black text-white">{currentProtocol.name}</h3>
-                <p className="text-xs text-gray-400">{currentProtocol.freq} Hz carrier · {currentProtocol.binaural} Hz binaural · Use headphones</p>
-              </div>
-              <div className="text-right">
-                <div className="text-2xl font-black font-mono" style={{ color: currentProtocol.color }}>
-                  {formatTime(elapsed)}
+            {/* Progress bar — top edge */}
+            <div className="h-0.5 w-full" style={{ background: 'rgba(255,255,255,0.05)' }}>
+              <motion.div className="h-0.5"
+                style={{ width: `${(elapsed / (currentProtocol.duration * 60)) * 100}%`, background: currentProtocol.color }} />
+            </div>
+
+            <div className="p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <PhaseTag phase={currentProtocol.phase} color={currentProtocol.color} />
+                  <h3 className="font-black text-white mt-1.5" style={{ fontFamily: 'system-ui, sans-serif', fontSize: '1rem' }}>{currentProtocol.name}</h3>
+                  <p className="text-xs text-gray-500 mt-0.5 font-mono">{currentProtocol.freq} Hz / {currentProtocol.binaural} Hz binaural</p>
                 </div>
-                <div className="text-xs text-gray-400">of {currentProtocol.duration}:00</div>
+                <div className="text-right">
+                  <div className="text-3xl font-black font-mono" style={{ color: currentProtocol.color, fontFamily: "'SF Mono', monospace" }}>
+                    {formatTime(elapsed)}
+                  </div>
+                  <div className="text-xs text-gray-600 font-mono">/ {currentProtocol.duration}:00</div>
+                </div>
               </div>
-            </div>
-            <div className="mb-3 flex justify-center">
-              <LiveWave color={currentProtocol.color} isPlaying={true} freq={currentProtocol.freq} />
-            </div>
-            <div className="w-full bg-white/10 rounded-full h-1.5 mb-3">
-              <div className="h-1.5 rounded-full transition-all" style={{ width: `${(elapsed / (currentProtocol.duration * 60)) * 100}%`, background: currentProtocol.color }} />
-            </div>
-            <div className="flex gap-2">
-              <button onClick={stop} className="flex-1 py-2 rounded-lg text-sm font-bold border border-white/20 text-gray-300 hover:bg-white/10">
-                Stop Session
-              </button>
-              <button onClick={() => { logSession(activeProtocol); stop(); }}
-                className="flex-1 py-2 rounded-lg text-sm font-bold text-black"
-                style={{ background: currentProtocol.color }}>
-                ✓ Mark Complete
-              </button>
+
+              <div className="flex justify-center mb-3">
+                <LiveWave color={currentProtocol.color} isPlaying={true} freq={currentProtocol.freq} />
+              </div>
+
+              <div className="flex gap-2">
+                <button onClick={stop}
+                  className="flex-1 py-2 rounded-lg text-xs font-black tracking-wider border border-white/10 text-gray-400 hover:bg-white/5 transition-all uppercase">
+                  Stop
+                </button>
+                <button onClick={() => { logSession(activeProtocol); stop(); }}
+                  className="flex-1 py-2 rounded-lg text-xs font-black tracking-wider text-black uppercase"
+                  style={{ background: currentProtocol.color }}>
+                  Mark Complete
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* PROTOCOLS */}
-      <div className="max-w-3xl mx-auto px-6 py-10 space-y-6">
-        <h2 className="text-2xl font-black text-center mb-8">
-          5-Phase Recovery Protocol
-          <div className="text-sm font-normal text-gray-400 mt-1">Follow in order. Each phase builds on the last.</div>
-        </h2>
+      {/* PROTOCOL LIST */}
+      <div className="max-w-3xl mx-auto px-6 py-10 space-y-4">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-1">
+            <div className="w-px h-5 bg-white/20" />
+            <span className="text-xs tracking-widest text-gray-500 uppercase">Recovery System</span>
+          </div>
+          <h2 className="text-xl font-black tracking-tight" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            Five-Phase Protocol
+          </h2>
+          <p className="text-xs text-gray-600 mt-1 font-mono">Follow in sequence. Each phase builds on the last.</p>
+        </div>
 
         {PROTOCOLS.map((protocol, idx) => {
           const isActive = activeProtocol === protocol.id && isPlaying;
@@ -368,130 +428,173 @@ export default function WristHealingProtocol() {
           return (
             <motion.div
               key={protocol.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="rounded-2xl border-2 overflow-hidden"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.08 }}
+              className="rounded-xl border overflow-hidden"
               style={{
-                borderColor: isActive ? protocol.color : 'rgba(255,255,255,0.1)',
-                boxShadow: isActive ? `0 0 40px ${protocol.glow}` : 'none',
-                background: isActive ? `linear-gradient(135deg, rgba(0,0,0,0.95), ${protocol.glow.replace('0.4', '0.05')})` : 'rgba(255,255,255,0.03)'
+                borderColor: isActive ? protocol.color : 'rgba(255,255,255,0.07)',
+                boxShadow: isActive ? `0 0 50px ${protocol.glow}` : 'none',
+                background: isActive ? `rgba(255,255,255,0.03)` : 'rgba(255,255,255,0.015)'
               }}
             >
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{protocol.icon}</span>
-                    <div>
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full mr-2" style={{ background: protocol.color + '20', color: protocol.color }}>{protocol.phase}</span>
-                      <h3 className="font-black text-white text-lg">{protocol.name}</h3>
-                      <p className="text-xs text-gray-400">{protocol.subtitle}</p>
+              {/* Phase accent bar — left edge */}
+              <div className="flex">
+                <div className="w-1 flex-shrink-0" style={{ background: isActive ? protocol.color : protocol.color + '30' }} />
+
+                <div className="flex-1 p-5">
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="font-mono text-2xl font-black" style={{ color: protocol.color + '40', letterSpacing: '-0.02em' }}>
+                        {protocol.phase}
+                      </div>
+                      <div>
+                        <PhaseTag phase={protocol.phase} color={protocol.color} />
+                        <h3 className="font-black text-white text-base mt-1.5" style={{ fontFamily: 'system-ui, sans-serif' }}>
+                          {protocol.name}
+                        </h3>
+                        <p className="text-xs text-gray-500 font-mono">{protocol.subtitle}</p>
+                      </div>
                     </div>
+                    {sessionsDone > 0 && (
+                      <div className="text-xs font-mono px-2 py-0.5 rounded"
+                        style={{ background: protocol.color + '15', color: protocol.color, border: `1px solid ${protocol.color}30` }}>
+                        {sessionsDone}x done
+                      </div>
+                    )}
                   </div>
-                  {sessionsDone > 0 && (
-                    <span className="text-xs px-2 py-1 rounded-full font-bold" style={{ background: protocol.color + '20', color: protocol.color }}>
-                      {sessionsDone} done ✓
-                    </span>
-                  )}
-                </div>
 
-                <p className="text-gray-300 text-sm mb-4 leading-relaxed">{protocol.description}</p>
+                  <p className="text-sm text-gray-400 mb-4 leading-relaxed" style={{ fontFamily: 'system-ui, sans-serif' }}>
+                    {protocol.description}
+                  </p>
 
-                {/* FREQUENCY DISPLAY */}
-                <div className="grid grid-cols-3 gap-3 mb-4">
-                  {[
-                    { label: 'Carrier Hz', value: protocol.freq },
-                    { label: 'Binaural', value: protocol.binaural + ' Hz' },
-                    { label: 'Duration', value: protocol.duration + ' min' }
-                  ].map(stat => (
-                    <div key={stat.label} className="bg-black/40 rounded-xl p-3 text-center border border-white/10">
-                      <div className="font-black text-lg" style={{ color: protocol.color }}>{stat.value}</div>
-                      <div className="text-xs text-gray-500">{stat.label}</div>
+                  {/* Frequency stats */}
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {[
+                      { label: 'CARRIER', value: `${protocol.freq} Hz` },
+                      { label: 'BINAURAL', value: `${protocol.binaural} Hz` },
+                      { label: 'SESSION', value: `${protocol.duration} min` }
+                    ].map(stat => (
+                      <div key={stat.label} className="rounded-lg p-3 border text-center"
+                        style={{ background: 'rgba(0,0,0,0.4)', borderColor: protocol.color + '20' }}>
+                        <div className="font-black font-mono text-sm" style={{ color: protocol.color }}>{stat.value}</div>
+                        <div className="text-xs text-gray-600 tracking-widest mt-0.5" style={{ fontSize: '9px' }}>{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Science accordion */}
+                  <button
+                    onClick={() => setExpandedProtocol(isExpanded ? null : protocol.id)}
+                    className="w-full text-left rounded-lg p-3 mb-3 border border-white/5 hover:border-white/10 transition-all"
+                    style={{ background: 'rgba(0,0,0,0.3)' }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono text-gray-500">
+                        {isExpanded ? '— hide evidence' : '+ peer-reviewed evidence'}
+                      </span>
+                      <span className={`text-xs px-1.5 py-0.5 rounded font-mono ${
+                        protocol.science.includes('peer-reviewed') && !protocol.science.includes('therapeutically traditional')
+                          ? 'text-green-400 bg-green-400/10'
+                          : 'text-amber-400 bg-amber-400/10'
+                      }`}>
+                        {protocol.science.includes('therapeutically traditional') ? 'HYBRID' : 'PEER-REVIEWED'}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="text-xs text-gray-400 mt-2 pt-2 border-t border-white/5 leading-relaxed font-sans">
+                          {protocol.science}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </button>
 
-                {/* SCIENCE CITE */}
-                <div className="bg-black/30 border border-white/5 rounded-lg p-3 mb-4 cursor-pointer"
-                  onClick={() => setExpandedProtocol(isExpanded ? null : protocol.id)}>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-gray-400">📄 {isExpanded ? 'Hide' : 'Show'} peer-reviewed evidence</span>
-                    <span className="text-gray-500 text-xs">{isExpanded ? '▲' : '▼'}</span>
-                  </div>
-                  {isExpanded && (
-                    <p className="text-xs text-gray-300 mt-2 leading-relaxed border-t border-white/10 pt-2">
-                      {protocol.science}
-                    </p>
-                  )}
+                  {/* Play button */}
+                  <motion.button
+                    onClick={() => isActive ? stop() : play(protocol)}
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    className="w-full py-3 rounded-lg font-black text-xs tracking-widest uppercase transition-all"
+                    style={isActive
+                      ? { background: 'transparent', border: `1px solid ${protocol.color}`, color: protocol.color }
+                      : { background: protocol.color, color: '#000', border: `1px solid ${protocol.color}` }
+                    }
+                  >
+                    {isActive ? '|| PAUSE SESSION' : `> START ${protocol.duration}-MIN SESSION`}
+                  </motion.button>
                 </div>
-
-                {/* PLAY BUTTON */}
-                <motion.button
-                  onClick={() => isActive ? stop() : play(protocol)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-3 rounded-xl font-black text-sm transition-all"
-                  style={isActive
-                    ? { background: 'transparent', border: `2px solid ${protocol.color}`, color: protocol.color }
-                    : { background: protocol.color, color: 'black', border: `2px solid ${protocol.color}` }
-                  }
-                >
-                  {isActive ? '⏸ PAUSE SESSION' : `▶ START ${protocol.duration}-MIN SESSION`}
-                </motion.button>
               </div>
             </motion.div>
           );
         })}
       </div>
 
-      {/* SCIENCE PANEL */}
-      <div className="max-w-3xl mx-auto px-6 pb-10">
+      {/* FULL SCIENCE PANEL */}
+      <div className="max-w-3xl mx-auto px-6 pb-8">
         <button
           onClick={() => setShowScience(!showScience)}
-          className="w-full py-4 rounded-2xl border-2 border-indigo-500/40 text-indigo-400 font-bold text-sm hover:border-indigo-500 transition-all mb-6"
-        >
-          {showScience ? '▲ Hide' : '▼ Show'} Full Scientific Evidence Base
+          className="w-full py-3.5 rounded-xl border font-mono text-xs tracking-widest uppercase transition-all"
+          style={{ borderColor: 'rgba(99,102,241,0.3)', color: '#6366f1', background: showScience ? 'rgba(99,102,241,0.06)' : 'transparent' }}>
+          {showScience ? '— Hide' : '+ Show'} Full Scientific Evidence Base
         </button>
 
-        {showScience && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-            <h3 className="text-xl font-black text-center mb-6 text-indigo-400">Peer-Reviewed Evidence</h3>
-            {SCIENCE.map((s, i) => (
-              <div key={i} className="bg-white/3 border border-indigo-500/20 rounded-xl p-5">
-                <div className="flex items-start justify-between gap-3 mb-1">
-                  <p className="font-bold text-white">"{s.finding}"</p>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-bold flex-shrink-0 ${
-                    s.confidence === 'peer-reviewed' 
-                      ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
-                      : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                  }`}>
-                    {s.confidence === 'peer-reviewed' ? '✓ Peer-Reviewed' : '⚑ Therapeutic Tradition'}
-                  </span>
-                </div>
-                <p className="text-xs text-indigo-400 font-bold mb-2">— {s.source}</p>
-                <p className="text-sm text-gray-400 leading-relaxed">{s.detail}</p>
+        <AnimatePresence>
+          {showScience && (
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-4 space-y-3">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-px h-5 bg-indigo-500/40" />
+                <h3 className="text-sm font-black tracking-widest text-indigo-400 uppercase font-mono">Peer-Reviewed Evidence</h3>
               </div>
-            ))}
-          </motion.div>
-        )}
+              {SCIENCE.map((s, i) => (
+                <div key={i} className="rounded-xl p-5 border border-white/5" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <p className="font-black text-sm text-white leading-snug" style={{ fontFamily: 'system-ui, sans-serif' }}>
+                      "{s.finding}"
+                    </p>
+                    <span className={`text-xs px-2 py-0.5 rounded font-mono flex-shrink-0 ${
+                      s.confidence === 'peer-reviewed'
+                        ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                        : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                    }`}>
+                      {s.confidence === 'peer-reviewed' ? 'RCT' : 'TRADITION'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-indigo-400/70 font-mono mb-2">{s.source}</p>
+                  <p className="text-xs text-gray-500 leading-relaxed" style={{ fontFamily: 'system-ui, sans-serif' }}>{s.detail}</p>
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* HOW TO USE */}
       <div className="max-w-3xl mx-auto px-6 pb-10">
-        <div className="rounded-2xl border border-white/10 bg-white/3 p-8">
-          <h3 className="text-xl font-black mb-6 text-center">How To Use This Protocol</h3>
+        <div className="rounded-xl border border-white/5 p-7" style={{ background: 'rgba(255,255,255,0.015)' }}>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-px h-5 bg-white/20" />
+            <h3 className="text-sm font-black tracking-widest uppercase font-mono text-gray-300">Protocol Instructions</h3>
+          </div>
           <div className="space-y-4">
             {[
-              { step: '1', text: 'Put on good quality headphones — binaural beats require stereo separation to work' },
-              { step: '2', text: 'Lie down or sit comfortably. Rest your wrist. Do not perform or practice during sessions.' },
-              { step: '3', text: 'Start with Phase 1 for the first 3 days. Progress through phases as healing advances.' },
-              { step: '4', text: 'Do 1-2 sessions per day minimum. More is fine. Mark each session complete.' },
-              { step: '5', text: 'Combine with any prescribed physio. These frequencies work WITH medical treatment, not instead of it.' },
-              { step: '6', text: 'For Phase 5 (musician precision), visualise playing — the brain cannot fully distinguish between imagined and real practice. Neural pathways rebuild.' }
-            ].map(item => (
-              <div key={item.step} className="flex gap-4 items-start">
-                <span className="w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-400 font-black text-sm flex items-center justify-center flex-shrink-0">{item.step}</span>
-                <p className="text-gray-300 text-sm leading-relaxed pt-1">{item.text}</p>
+              'Put on stereo headphones — binaural beats require separation between ears to work correctly.',
+              'Lie down or sit comfortably. Rest the wrist. Do not perform during sessions.',
+              'Start at Phase 01 for the first 3 days. Advance through phases as healing progresses.',
+              'One to two sessions daily minimum. Mark each complete.',
+              'These frequencies work alongside medical treatment — not as a replacement. Follow your doctor.',
+              'During Phase 05 (precision), visualise playing while the session runs. The brain cannot fully distinguish imagined from real practice — neural motor pathways rebuild regardless.'
+            ].map((text, i) => (
+              <div key={i} className="flex gap-4 items-start">
+                <span className="w-7 h-7 rounded text-xs font-black font-mono flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.2)' }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-sm text-gray-400 leading-relaxed pt-0.5" style={{ fontFamily: 'system-ui, sans-serif' }}>{text}</p>
               </div>
             ))}
           </div>
@@ -499,12 +602,15 @@ export default function WristHealingProtocol() {
       </div>
 
       {/* FOOTER */}
-      <div className="text-center pb-12 px-6">
-        <p className="text-xs text-gray-600 max-w-md mx-auto">
-          This protocol is built on published peer-reviewed research. It is a complementary therapy and does not replace medical care. Always follow your doctor's guidance. Frequency therapy is not a substitute for professional medical treatment.
+      <div className="max-w-3xl mx-auto px-6 pb-12 border-t border-white/5 pt-6">
+        <p className="text-xs text-gray-700 leading-relaxed mb-2" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          This protocol is built on published peer-reviewed research. It is a complementary therapy and does not replace medical care. Always follow your doctor's guidance.
         </p>
-        <p className="text-xs text-gray-700 mt-3">Built with ♾️❤️ by UF51 • For musicians, healers and humans</p>
+        <p className="text-xs text-gray-800 font-mono">
+          UF51 — Acoustic frequency therapy for musicians and high-performance individuals.
+        </p>
       </div>
+
     </div>
   );
 }

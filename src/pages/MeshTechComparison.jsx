@@ -454,14 +454,14 @@ export default function MeshTechComparison() {
                 {/* BACK BUTTON */}
                 <div className="flex gap-4">
                     <Link to={createPageUrl('MeshTechWhitepaper')} className="flex-1">
-                        <Button className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4">
+                        <button className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg">
                             READ OUR MESH TECH WHITEPAPER →
-                        </Button>
+                        </button>
                     </Link>
                     <Link to={createPageUrl('Prof51')} className="flex-1">
-                        <Button variant="outline" className="w-full border-cyan-500 text-cyan-400 font-bold py-4">
+                        <button className="w-full border-2 border-cyan-500 text-cyan-400 font-bold py-4 rounded-lg bg-transparent hover:bg-cyan-500/10">
                             ← BACK TO PROF51
-                        </Button>
+                        </button>
                     </Link>
                 </div>
             </div>
