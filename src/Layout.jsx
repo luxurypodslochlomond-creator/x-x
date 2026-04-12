@@ -287,12 +287,16 @@ const LayoutInner = ({ children, currentPageName }) => {
       ogImageUrl = '/api/functions/serveCB51OGImage';
     }
     
+    const isWristPage = currentPageName.startsWith('WristHealing');
+
     const ogTags = {
-      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : 'Universal Frequency 51',
+      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : 'Universal Frequency 51',
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
         : isPS51Page
         ? 'Sound therapy for anxious pets — built on peer-reviewed research. Try the Separation Anxiety protocol free. No signup needed.'
+        : isWristPage
+        ? 'Five-phase acoustic frequency therapy for post-operative wrist recovery. Built for professional performers. Free. No signup. Start Phase 01 today.'
         : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, planetary action.',
       'og:image': window.location.origin + ogImageUrl,
       'og:type': 'website'
