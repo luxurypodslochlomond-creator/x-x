@@ -161,7 +161,7 @@ export default function Family51Page() {
                 icon={<DocIcon color="#f97316" />}
                 label="DECODE A LETTER"
                 sub="Paste it. Understand it in seconds."
-                tag={isLocked ? '🔒' : remaining <= 1 ? `${remaining} LEFT` : 'FREE'}
+                tag={isLocked ? '🔒 LOCKED' : 'YOUR 1 FREE'}
               />
 
               <BigButton
@@ -171,7 +171,7 @@ export default function Family51Page() {
                 icon={<ReplyIcon color="#06b6d4" />}
                 label="WRITE MY REPLY"
                 sub="We write it for you. Copy and send."
-                tag={isLocked ? '🔒' : remaining <= 1 ? `${remaining} LEFT` : 'FREE'}
+                tag={isLocked ? '🔒 LOCKED' : 'YOUR 1 FREE'}
               />
 
               <BigButton
@@ -181,7 +181,7 @@ export default function Family51Page() {
                 icon={<ConflictIcon color="#ef4444" />}
                 label="DISPUTE HELP"
                 sub="Neighbour. Employer. Landlord. We fight back."
-                tag={isLocked ? '🔒' : remaining <= 1 ? `${remaining} LEFT` : 'FREE'}
+                tag={isLocked ? '🔒 LOCKED' : 'YOUR 1 FREE'}
               />
 
             </div>
