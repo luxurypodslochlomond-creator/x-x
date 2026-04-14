@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
 
 export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const ChevronIcon = () => (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  );
 
   const geoOptions = [
     { country: 'United Kingdom', jurisdiction: 'UK law', code: 'GB' },
@@ -47,7 +52,9 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
         <span style={{ maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {geo.country}
         </span>
-        <ChevronDown size={12} style={{ transform: isOpen ? 'rotate(180deg)' : '', transition: 'transform 0.2s' }} />
+        <span style={{ display: 'flex', alignItems: 'center', transform: isOpen ? 'rotate(180deg)' : '', transition: 'transform 0.2s' }}>
+          <ChevronIcon />
+        </span>
       </button>
 
       {isOpen && (
