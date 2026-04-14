@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
+import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -120,16 +121,7 @@ export default function Family51Page() {
               <TrustPill text="Nothing stored" />
             </motion.div>
 
-            {/* PAYWALL TEASER */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.45 }}
-              style={{ marginTop: 28, textAlign: 'center', padding: '16px 20px', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, background: 'rgba(249,115,22,0.04)' }}
-            >
-              <p style={{ fontSize: 12, fontWeight: 800, color: '#f97316', letterSpacing: '0.1em', margin: '0 0 4px' }}>SORTED FOR LIFE — COMING SOON</p>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Full case memory. See your issue through to the end. Never repeat yourself to the AI again.</p>
-            </motion.div>
+            <SortedForLifeCard />
 
           </motion.div>
         )}
