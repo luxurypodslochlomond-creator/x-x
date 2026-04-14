@@ -304,7 +304,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         ? 'Five-phase acoustic frequency therapy for post-operative wrist recovery. Built for professional performers. Free. No signup. Start Phase 01 today.'
         : isSortedPage
         ? 'Got a scary letter? Stuck in a dispute? SORTED decodes it in seconds — plain English, any language, nothing stored.'
-        : 'Heal yourself, heal the planet. Free healing frequencies. Data sovereignty. Open source. Join the revolution.',
+        : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',
       'og:image': window.location.origin + ogImageUrl,
       'og:type': 'website',
       'og:url': window.location.href,
