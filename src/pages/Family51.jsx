@@ -63,7 +63,7 @@ export default function Family51Page() {
       <AnimatePresence mode="wait">
 
         {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
-        {!activeTool && (
+        {!activeTool && !isLocked && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
             {/* HEADLINE — SHORT AND SHARP */}
@@ -149,17 +149,23 @@ export default function Family51Page() {
           </motion.div>
         )}
 
-        {/* ── PAYWALL — shown on home when locked ───────────── */}
+        {/* ── PAYWALL — shown when locked ───────────── */}
         {!activeTool && isLocked && (
           <motion.div
             key="paywall"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            style={{ maxWidth: 520, margin: '0 auto', padding: '0 20px 60px' }}
+            style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}
           >
-            <div style={{ textAlign: 'center', marginBottom: 20, padding: '16px 20px', border: '1px solid rgba(249,115,22,0.25)', borderRadius: 12, background: 'rgba(249,115,22,0.06)' }}>
-              <p style={{ fontSize: 15, fontWeight: 900, color: '#f97316', margin: '0 0 6px' }}>You've used your 3 free sessions</p>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: 0 }}>Subscribe to keep going — we're not done helping you.</p>
+            <div style={{ textAlign: 'center', marginBottom: 24 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>YOU'RE NOT DONE YET</div>
+              <h1 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 14px' }}>
+                <span style={{ color: '#fff' }}>3 free sessions</span>{' '}
+                <span style={{ color: '#f97316' }}>used.</span>
+              </h1>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>
+                Subscribe to keep going — we're right here with you.
+              </p>
             </div>
             <SortedForLifeCard compact />
           </motion.div>
