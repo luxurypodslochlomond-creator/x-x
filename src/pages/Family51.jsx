@@ -41,7 +41,7 @@ export default function Family51Page() {
             {[
               { id: 'letter',   label: 'DECODE',   color: '#f97316' },
               { id: 'reply',    label: 'REPLY',    color: '#06b6d4' },
-              { id: 'conflict', label: 'CONFLICT', color: '#a855f7' },
+              { id: 'conflict', label: 'DISPUTE',  color: '#ef4444' },
             ].map(t => (
               <motion.button key={t.id} onClick={() => setActiveTool(t.id)} whileTap={{ scale: 0.93 }}
                 style={{ padding: '6px 13px', borderRadius: 20, fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', border: `1px solid ${t.color}40`, background: `${t.color}10`, color: t.color, cursor: 'pointer' }}>
@@ -61,15 +61,15 @@ export default function Family51Page() {
             {/* HEADLINE — SHORT AND SHARP */}
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 14 }}>WHAT DO YOU NEED?</div>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>WHAT DO YOU NEED?</div>
                 <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
-                  <span style={{ color: '#fff' }}>Got a scary</span>{' '}
-                  <span style={{ color: '#f97316' }}>letter?</span><br />
-                  <span style={{ color: '#fff' }}>Need a</span>{' '}
-                  <span style={{ color: '#06b6d4' }}>reply?</span><br />
-                  <span style={{ color: '#fff' }}>Stuck in a</span>{' '}
-                  <span style={{ color: '#a855f7' }}>dispute?</span>
-                </h1>
+                    <span style={{ color: '#fff' }}>Got a scary</span>{' '}
+                    <span style={{ color: '#f97316' }}>letter?</span><br />
+                    <span style={{ color: '#fff' }}>Need a</span>{' '}
+                    <span style={{ color: '#06b6d4' }}>reply?</span><br />
+                    <span style={{ color: '#fff' }}>Stuck in a</span>{' '}
+                    <span style={{ color: '#ef4444' }}>dispute?</span>
+                  </h1>
               </motion.div>
             </div>
 
@@ -98,11 +98,11 @@ export default function Family51Page() {
 
               <BigButton
                 delay={0.15}
-                color="#a855f7"
+                color="#ef4444"
                 onClick={() => setActiveTool('conflict')}
-                icon={<ConflictIcon color="#a855f7" />}
-                label="CONFLICT HELP"
-                sub="Neighbour. Employer. Landlord. Sorted."
+                icon={<ConflictIcon color="#ef4444" />}
+                label="DISPUTE HELP"
+                sub="Neighbour. Employer. Landlord. We fight back."
                 tag="FREE"
               />
 
@@ -115,9 +115,9 @@ export default function Family51Page() {
               transition={{ delay: 0.35 }}
               style={{ marginTop: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}
             >
-              <TrustPill icon="shield" text="Data stays on your device" />
-              <TrustPill icon="clock" text="Works at 3am" />
-              <TrustPill icon="lock" text="Nothing stored" />
+              <TrustPill text="Data stays on your device" />
+              <TrustPill text="Works at 3am" />
+              <TrustPill text="Nothing stored" />
             </motion.div>
 
             {/* PAYWALL TEASER */}
@@ -128,7 +128,7 @@ export default function Family51Page() {
               style={{ marginTop: 28, textAlign: 'center', padding: '16px 20px', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, background: 'rgba(249,115,22,0.04)' }}
             >
               <p style={{ fontSize: 12, fontWeight: 800, color: '#f97316', letterSpacing: '0.1em', margin: '0 0 4px' }}>FAMILY51 PRO — COMING SOON</p>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: 0 }}>Document history. Priority AI. Legal letter templates. Dispute case tracker.</p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Full case memory. See your issue through to the end. Never repeat yourself to the AI again.</p>
             </motion.div>
 
           </motion.div>
@@ -146,7 +146,7 @@ export default function Family51Page() {
           >
             {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" />}
             {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" />}
-            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#a855f7" />}
+            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" />}
           </motion.div>
         )}
 
@@ -181,7 +181,7 @@ function BigButton({ color, onClick, icon, label, sub, tag, delay }) {
           <span style={{ fontSize: 15, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>{label}</span>
           <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color, border: `1px solid ${color}50`, borderRadius: 4, padding: '2px 6px' }}>{tag}</span>
         </div>
-        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: 0, lineHeight: 1.4 }}>{sub}</p>
+        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.4 }}>{sub}</p>
       </div>
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, opacity: hovered ? 1 : 0.3, transition: 'opacity 0.15s' }}>
         <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -195,7 +195,7 @@ function TrustPill({ text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
       <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#22c55e' }} />
-      <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em' }}>{text}</span>
+      <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em' }}>{text}</span>
     </div>
   );
 }
