@@ -377,7 +377,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road • Loch Lomond" },
     { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery frequencies" },
     { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies · for two" },
-    { title: "Family51", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Scary letter? Dispute? We've got you." },
+    { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Scary letter? Dispute? We've got you." },
   ];
 
   // 2. EARN & CREATE (practical actions)

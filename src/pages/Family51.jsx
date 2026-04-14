@@ -12,7 +12,7 @@ export default function Family51Page() {
   const [activeTool, setActiveTool] = useState(null);
 
   useEffect(() => {
-    document.title = 'Family51 — On Your Side';
+    document.title = 'SORTED — We\'ve Got You';
   }, []);
 
   return (
@@ -23,8 +23,8 @@ export default function Family51Page() {
         <motion.button onClick={() => setActiveTool(null)} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           <F51Mark />
           <div style={{ lineHeight: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>FAMILY51</div>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>ON YOUR SIDE</div>
+            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
           </div>
         </motion.button>
 
@@ -127,7 +127,7 @@ export default function Family51Page() {
               transition={{ delay: 0.45 }}
               style={{ marginTop: 28, textAlign: 'center', padding: '16px 20px', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, background: 'rgba(249,115,22,0.04)' }}
             >
-              <p style={{ fontSize: 12, fontWeight: 800, color: '#f97316', letterSpacing: '0.1em', margin: '0 0 4px' }}>FAMILY51 PRO — COMING SOON</p>
+              <p style={{ fontSize: 12, fontWeight: 800, color: '#f97316', letterSpacing: '0.1em', margin: '0 0 4px' }}>SORTED CHAMPION — COMING SOON</p>
               <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Full case memory. See your issue through to the end. Never repeat yourself to the AI again.</p>
             </motion.div>
 
