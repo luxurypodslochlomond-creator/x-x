@@ -100,12 +100,12 @@ export default function WelcomePage() {
                           >
                               <p className="text-white text-2xl md:text-3xl font-bold leading-snug">
                                   Real healing. Real tools. <br />
-                                  <span className="text-cyan-400">One ecosystem. Zero extraction.</span>
+                                  <span className="text-cyan-400">Your data. Your terms.</span>
                               </p>
                               <p className="text-gray-400 text-base leading-relaxed">
-                                  Whether you need to heal your body, manage your creative work, 
-                                  decode a scary letter, or just contribute something real to the planet — 
-                                  we have tools built for that. All connected. All yours.
+                                  Frequencies that work. Music you can trust. Letters decoded. Planet cleaned. 
+                                  <br />
+                                  <span className="text-cyan-300 font-semibold">100% open source. Works offline. Nothing stored.</span>
                               </p>
                           </motion.div>
 
@@ -117,9 +117,9 @@ export default function WelcomePage() {
                              className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
                          >
                              {[
-                                 { Icon: COOLASFUCKWaves, title: 'HEAL', desc: 'Frequencies that work. Tinnitus relief. Pain management. Free forever.', url: 'FrequencyChamber', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
-                                 { Icon: COOLASFUCKBrain, title: 'CREATE', desc: 'Artists upload lossless. Keep 90%. Your work. Your terms. Real money.', url: 'ForMusicians', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
-                                 { Icon: COOLASFUCKGlobe, title: 'IMPACT', desc: 'Pick up litter. Earn tokens. AI verifies. Planet thanks you.', url: 'NewCleanup', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
+                                 { Icon: COOLASFUCKWaves, title: 'HEAL', desc: 'Tinnitus. Pain. Anti-aging. Wrist recovery. Free + premium protocols.', url: 'FrequencyChamber', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
+                                 { Icon: COOLASFUCKBrain, title: 'CREATE', desc: 'Upload music. Keep 90%. Artist-first. No middleman. Real payouts.', url: 'ForMusicians', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
+                                 { Icon: COOLASFUCKGlobe, title: 'IMPACT', desc: 'Clean Earth. Earn P51 tokens. AI-verified proof. Real change.', url: 'NewCleanup', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
                              ].map(item => (
                                  <Link key={item.title} to={createPageUrl(item.url)}>
                                      <motion.div
@@ -286,20 +286,22 @@ export default function WelcomePage() {
                             <div className="bg-black border-2 border-cyan-500/50 p-4">
                                 <p className="text-cyan-300 font-bold mb-2">WORKS NOW:</p>
                                 <ul className="text-gray-300 space-y-1">
-                                    <li>• AI51 voice chat ✓</li>
-                                    <li>• Healing frequencies ✓</li>
-                                    <li>• Clean planet → $P51 ✓</li>
-                                    <li>• Lossless music (90% to artists) ✓</li>
-                                    <li>• 100% OPEN SOURCE ✓</li>
+                                    <li>• Specific healing protocols ✓</li>
+                                    <li>• Artist music platform ✓</li>
+                                    <li>• Planetary action tracking ✓</li>
+                                    <li>• 100% open source ✓</li>
+                                    <li>• Works offline ✓</li>
+                                    <li>• Your data stays yours ✓</li>
                                 </ul>
                             </div>
 
                             <div className="bg-black border-2 border-cyan-500/50 p-4">
-                                <p className="text-cyan-300 font-bold mb-2">NOT YET (FUNDING NEEDED):</p>
+                                <p className="text-cyan-300 font-bold mb-2">REAL TALK:</p>
                                 <ul className="text-gray-300 space-y-1">
-                                    <li>• Converting $P51 → real money</li>
-                                    <li>• Cashing out to bank</li>
-                                    <li>• But you're building value NOW</li>
+                                    <li>• Some features need funding</li>
+                                    <li>• But core tools are live</li>
+                                    <li>• No corporate capture here</li>
+                                    <li>• You own your contribution</li>
                                 </ul>
                             </div>
                         </div>
