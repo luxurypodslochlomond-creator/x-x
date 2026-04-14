@@ -286,6 +286,8 @@ const LayoutInner = ({ children, currentPageName }) => {
       ogImageUrl = '/api/functions/servePetSounds51OGImage';
     } else if (isCB51Page) {
       ogImageUrl = '/api/functions/serveCB51OGImage';
+    } else if (isSortedPage) {
+      ogImageUrl = '/api/functions/serveOGImage?brand=sorted';
     }
     
     const isWristPage = currentPageName.startsWith('WristHealing');
@@ -303,7 +305,8 @@ const LayoutInner = ({ children, currentPageName }) => {
         ? 'Got a scary letter? Stuck in a dispute? SORTED decodes it in seconds — plain English, any language, nothing stored.'
         : 'Heal yourself, heal the planet. Free healing frequencies, lossless music, planetary action.',
       'og:image': window.location.origin + ogImageUrl,
-      'og:type': 'website'
+      'og:type': 'website',
+      'og:url': window.location.href
     };
 
     Object.entries(ogTags).forEach(([property, content]) => {
