@@ -74,7 +74,7 @@ export default function Family51Page() {
                  Privacy Policy
                </a>
                <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none' }}>
-                 <span>✉</span>
+                 <EmailIcon />
                  family@uf51.love
                </a>
              </div>
@@ -100,9 +100,18 @@ export default function Family51Page() {
               <ProblemCard icon="🏠" title="Landlords" desc="Eviction warnings. Deposit disputes. Rent increases." />
               <ProblemCard icon="⚖️" title="Courts" desc="Summons. Judgments. Legal jargon you don't understand." />
             </div>
-            <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
+            <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, padding: 20, textAlign: 'center', marginBottom: 40 }}>
               <p style={{ fontSize: 14, color: '#fff', margin: 0, lineHeight: 1.6 }}>
                 <strong>You freeze.</strong> Read it 10 times. Still don't understand. Panic.
+              </p>
+            </div>
+            <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#ef4444', marginBottom: 8 }}>REAL TALK</div>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>
+                Some people <strong>bury their head in the sand.</strong> Don't open the letter. Hope it goes away. It doesn't.
+              </p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '12px 0 0', lineHeight: 1.5 }}>
+                That's when deadlines pass. Legal action follows. Things get worse.
               </p>
             </div>
             <div style={{ marginTop: 40, textAlign: 'center' }}>
@@ -324,6 +333,15 @@ function WhyIcon() {
       <circle cx="8" cy="3" r="1" fill="currentColor" />
       <path d="M8 5v4M5 14h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
       <rect x="2" y="7" width="12" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.2" fill="none" />
+    </svg>
+  );
+}
+
+function EmailIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <rect x="1.5" y="3" width="13" height="10" rx="1" stroke="currentColor" strokeWidth="1.2" fill="none" />
+      <path d="M2 3.5L8 7.5L14 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
 }
