@@ -4,6 +4,7 @@ import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
+import { useSortedUsage } from '@/components/family51/useSortedUsage';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -11,6 +12,12 @@ import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 
 export default function Family51Page() {
   const [activeTool, setActiveTool] = useState(null);
+  const { isLocked, remaining, recordUse } = useSortedUsage();
+
+  const handleToolOpen = (toolId) => {
+    if (isLocked) return; // blocked — paywall shown below
+    setActiveTool(toolId);
+  };
 
   useEffect(() => {
     document.title = 'SORTED — We\'ve Got You';
@@ -80,31 +87,31 @@ export default function Family51Page() {
               <BigButton
                 delay={0.05}
                 color="#f97316"
-                onClick={() => setActiveTool('letter')}
+                onClick={() => handleToolOpen('letter')}
                 icon={<DocIcon color="#f97316" />}
                 label="DECODE A LETTER"
                 sub="Paste it. Understand it in seconds."
-                tag="FREE"
+                tag={isLocked ? '🔒' : remaining <= 1 ? `${remaining} LEFT` : 'FREE'}
               />
 
               <BigButton
                 delay={0.1}
                 color="#06b6d4"
-                onClick={() => setActiveTool('reply')}
+                onClick={() => handleToolOpen('reply')}
                 icon={<ReplyIcon color="#06b6d4" />}
                 label="WRITE MY REPLY"
                 sub="We write it for you. Copy and send."
-                tag="FREE"
+                tag={isLocked ? '🔒' : remaining <= 1 ? `${remaining} LEFT` : 'FREE'}
               />
 
               <BigButton
                 delay={0.15}
                 color="#ef4444"
-                onClick={() => setActiveTool('conflict')}
+                onClick={() => handleToolOpen('conflict')}
                 icon={<ConflictIcon color="#ef4444" />}
                 label="DISPUTE HELP"
                 sub="Neighbour. Employer. Landlord. We fight back."
-                tag="FREE"
+                tag={isLocked ? '🔒' : remaining <= 1 ? `${remaining} LEFT` : 'FREE'}
               />
 
             </div>
@@ -136,9 +143,25 @@ export default function Family51Page() {
             transition={{ duration: 0.2 }}
             style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
           >
-            {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" />}
-            {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" />}
-            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" />}
+            {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" onResult={recordUse} />}
+            {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" onResult={recordUse} />}
+            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" onResult={recordUse} />}
+          </motion.div>
+        )}
+
+        {/* ── PAYWALL — shown on home when locked ───────────── */}
+        {!activeTool && isLocked && (
+          <motion.div
+            key="paywall"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{ maxWidth: 520, margin: '0 auto', padding: '0 20px 60px' }}
+          >
+            <div style={{ textAlign: 'center', marginBottom: 20, padding: '16px 20px', border: '1px solid rgba(249,115,22,0.25)', borderRadius: 12, background: 'rgba(249,115,22,0.06)' }}>
+              <p style={{ fontSize: 15, fontWeight: 900, color: '#f97316', margin: '0 0 6px' }}>You've used your 3 free sessions</p>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: 0 }}>Subscribe to keep going — we're not done helping you.</p>
+            </div>
+            <SortedForLifeCard compact />
           </motion.div>
         )}
 

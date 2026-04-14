@@ -32,6 +32,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4' }) {
     const t = TONES.find(x => x.id === tone);
 
     const response = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
       prompt: `You are an expert at writing effective letters for ordinary people dealing with difficult UK situations.
 
 SITUATION: ${situation || 'Not specified'}

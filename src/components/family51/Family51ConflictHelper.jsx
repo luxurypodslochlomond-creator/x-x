@@ -35,6 +35,7 @@ export default function Family51ConflictHelper({ accentColor = '#a855f7' }) {
     const gt = GOALS.find(g => g.id === goal);
 
     const response = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
       prompt: `You are a calm, experienced UK conflict resolution advisor.
 
 CONFLICT TYPE: ${ct?.label || 'Not specified'}
