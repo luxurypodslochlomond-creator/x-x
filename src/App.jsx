@@ -52,6 +52,8 @@ const WristHealingTermsPage = React.lazy(() => import('./pages/WristHealingTerms
 const WristHealingPrivacyPage = React.lazy(() => import('./pages/WristHealingPrivacy'));
 const Shed51Page = React.lazy(() => import('./pages/Shed51'));
 const Family51Page = React.lazy(() => import('./pages/Family51'));
+const Family51TermsPage = React.lazy(() => import('./pages/Family51Terms'));
+const Family51PrivacyPage = React.lazy(() => import('./pages/Family51Privacy'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -131,6 +133,8 @@ const AuthenticatedApp = () => {
       <Route path="/WristHealingPrivacy" element={<WristHealingPrivacyPage />} />
       <Route path="/Shed51" element={<Shed51Page />} />
       <Route path="/Family51" element={<Family51Page />} />
+      <Route path="/Family51Terms" element={<LayoutWrapper currentPageName="Family51Terms"><Family51TermsPage /></LayoutWrapper>} />
+      <Route path="/Family51Privacy" element={<LayoutWrapper currentPageName="Family51Privacy"><Family51PrivacyPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

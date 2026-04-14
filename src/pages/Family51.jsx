@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Eye, Scale } from 'lucide-react';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
@@ -13,11 +14,13 @@ import SortedAbout from '@/components/family51/SortedAbout';
 
 export default function Family51Page() {
   const [activeTool, setActiveTool] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
 
   const handleToolOpen = (toolId) => {
     if (isLocked) return; // blocked — paywall shown below
     setActiveTool(toolId);
+    setMenuOpen(false);
   };
 
   useEffect(() => {
@@ -28,43 +31,56 @@ export default function Family51Page() {
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <motion.button onClick={() => setActiveTool(null)} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-          <F51Mark />
-          <div style={{ lineHeight: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
-          </div>
-        </motion.button>
+       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+         <motion.button onClick={() => setActiveTool(null)} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+           <F51Mark />
+           <div style={{ lineHeight: 1 }}>
+             <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
+             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
+           </div>
+         </motion.button>
 
-        {activeTool ? (
-          <motion.button
-            onClick={() => setActiveTool(null)}
-            whileTap={{ scale: 0.95 }}
-            style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            BACK
-          </motion.button>
-        ) : (
-          <div style={{ display: 'flex', gap: 6 }}>
-            {[
-              { id: 'letter',   label: 'DECODE',   color: '#f97316' },
-              { id: 'reply',    label: 'REPLY',    color: '#06b6d4' },
-              { id: 'conflict', label: 'DISPUTE',  color: '#ef4444' },
-            ].map(t => (
-              <motion.button key={t.id} onClick={() => setActiveTool(t.id)} whileTap={{ scale: 0.93 }}
-                style={{ padding: '6px 13px', borderRadius: 20, fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', border: `1px solid ${t.color}40`, background: `${t.color}10`, color: t.color, cursor: 'pointer' }}>
-                {t.label}
-              </motion.button>
-            ))}
-          </div>
-        )}
-      </header>
+         {activeTool ? (
+           <motion.button
+             onClick={() => setActiveTool(null)}
+             whileTap={{ scale: 0.95 }}
+             style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
+           >
+             BACK
+           </motion.button>
+         ) : (
+           <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.95 }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#f97316' }}>
+             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+           </motion.button>
+         )}
+       </header>
+
+       {/* ── HAMBURGER MENU ──────────────────────────────────── */}
+       <AnimatePresence>
+         {menuOpen && !activeTool && (
+           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(8,10,15,0.98)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 20px' }}>
+             <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
+               <a href="/Family51Terms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                 <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
+                 Terms of Service
+               </a>
+               <a href="/Family51Privacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                 <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
+                 Privacy Policy
+               </a>
+               <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none' }}>
+                 <span>✉</span>
+                 family@uf51.love
+               </a>
+             </div>
+           </motion.div>
+         )}
+       </AnimatePresence>
 
       <AnimatePresence mode="wait">
 
-        {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
-        {!activeTool && !isLocked && (
+         {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
+         {!activeTool && !isLocked && !menuOpen && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
             {/* HEADLINE — SHORT AND SHARP */}
