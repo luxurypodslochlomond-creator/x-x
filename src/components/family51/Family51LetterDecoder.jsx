@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
@@ -19,27 +19,40 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const [letterText, setLetterText] = useState('');
   const [letterType, setLetterType] = useState('');
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setUploadedFileUrl(file_url);
+    setLetterText('[Photo/file uploaded — AI will read it directly]');
+    setUploading(false);
+  };
 
   const decode = async () => {
-    if (!letterText.trim() || loading) return;
+    if ((!letterText.trim() && !uploadedFileUrl) || loading) return;
     setLoading(true);
     setResult(null);
 
+    const promptText = uploadedFileUrl
+      ? `You are a compassionate UK citizens advice expert. A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`
+      : `You are a compassionate UK citizens advice expert. A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
+
     const response = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are a compassionate UK citizens advice expert. A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.
-
-LETTER:
-${letterText}
-
-Return:
+      prompt: promptText + `\n\nReturn:
 - what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating
 - action_steps: Array of exactly 3 clear numbered actions to take
 - key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
 - dont_panic: One honest, reassuring sentence`,
+      ...(uploadedFileUrl ? { file_urls: [uploadedFileUrl] } : {}),
       response_json_schema: {
         type: 'object',
         properties: {
@@ -56,6 +69,8 @@ Return:
     setResult(response);
     setLoading(false);
   };
+
+  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); };
 
   const copyAll = () => {
     if (!result) return;
@@ -82,9 +97,37 @@ Return:
         </div>
       </div>
 
+      {/* UPLOAD OR PASTE */}
+      <div style={{ display: 'flex', gap: 10, marginBottom: 4 }}>
+        <input ref={fileInputRef} type="file" accept="image/*,application/pdf,.pdf" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
+        <motion.button
+          whileTap={{ scale: 0.96 }}
+          onClick={() => fileInputRef.current?.click()}
+          style={{
+            flex: 1, padding: '14px 0', borderRadius: 12, fontSize: 12, fontWeight: 800,
+            letterSpacing: '0.1em', cursor: 'pointer',
+            border: `1px solid ${uploadedFileUrl ? '#22c55e60' : accentColor + '40'}`,
+            background: uploadedFileUrl ? 'rgba(34,197,94,0.08)' : `${accentColor}10`,
+            color: uploadedFileUrl ? '#22c55e' : accentColor,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          }}
+        >
+          {uploading ? <Spinner color={accentColor} text="READING..." /> : uploadedFileUrl ? '✓ PHOTO UPLOADED' : (
+            <>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+              TAKE PHOTO / UPLOAD
+            </>
+          )}
+        </motion.button>
+      </div>
+      <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em', marginBottom: 8, textAlign: 'center' }}>— or type / paste below —</p>
+
       {/* PASTE AREA */}
       <div className="space-y-2">
-        <Label>PASTE YOUR LETTER</Label>
+        <Label>OR PASTE YOUR LETTER</Label>
         <textarea
           value={letterText}
           onChange={e => setLetterText(e.target.value)}
@@ -105,14 +148,15 @@ Return:
       {/* DECODE BUTTON */}
       <motion.button
         onClick={decode}
-        disabled={!letterText.trim() || loading}
-        whileTap={!loading && letterText.trim() ? { scale: 0.97 } : {}}
+        disabled={(!letterText.trim() && !uploadedFileUrl) || loading}
+        whileTap={!loading && (letterText.trim() || uploadedFileUrl) ? { scale: 0.97 } : {}}
         style={{
           width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
-          fontWeight: 800, letterSpacing: '0.12em', cursor: letterText.trim() && !loading ? 'pointer' : 'not-allowed',
-          border: `1px solid ${letterText.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-          background: letterText.trim() ? `${accentColor}15` : 'transparent',
-          color: letterText.trim() ? accentColor : 'rgba(255,255,255,0.2)',
+          fontWeight: 800, letterSpacing: '0.12em',
+          cursor: (letterText.trim() || uploadedFileUrl) && !loading ? 'pointer' : 'not-allowed',
+          border: `1px solid ${(letterText.trim() || uploadedFileUrl) ? accentColor : 'rgba(255,255,255,0.1)'}`,
+          background: (letterText.trim() || uploadedFileUrl) ? `${accentColor}15` : 'transparent',
+          color: (letterText.trim() || uploadedFileUrl) ? accentColor : 'rgba(255,255,255,0.2)',
           transition: 'all 0.2s',
         }}
       >
@@ -163,7 +207,7 @@ Return:
               <motion.button onClick={copyAll} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
                 {copied ? 'COPIED' : 'COPY BREAKDOWN'}
               </motion.button>
-              <motion.button onClick={() => { setResult(null); setLetterText(''); setLetterType(''); }} whileTap={{ scale: 0.95 }} style={{ ...secondaryBtn, color: accentColor, borderColor: accentColor + '40' }}>
+              <motion.button onClick={reset} whileTap={{ scale: 0.95 }} style={{ ...secondaryBtn, color: accentColor, borderColor: accentColor + '40' }}>
                 DECODE ANOTHER
               </motion.button>
             </div>
