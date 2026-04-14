@@ -183,7 +183,7 @@ export default function WelcomePage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {[
                             { Icon: COOLASFUCKWaves, title: 'HEAL', desc: 'Frequencies for tinnitus, pain, aging, wrist recovery. Some free. Some paid.' },
-                            { Icon: COOLASFUCKBrain, title: 'CREATE', desc: 'Upload music. Keep 90%. No middleman exploiting your work.' },
+                            { Icon: COOLASFUCKBrain, title: 'MANAGE', desc: 'CB51 handles your gigs, contracts, and money. AI co-manager for artists.' },
                             { Icon: COOLASFUCKGlobe, title: 'IMPACT', desc: 'Pick up litter. Earn tokens. Real change, AI-verified.' },
                         ].map(item => (
                             <motion.div
@@ -329,9 +329,9 @@ export default function WelcomePage() {
                     </Link>
 
                     <div className="flex flex-col items-center gap-3 pt-4">
-                         <Link to={createPageUrl('About')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
+                         <a href="#" className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline opacity-50 cursor-not-allowed">
                              How it works
-                         </Link>
+                         </a>
                          <Link to={createPageUrl('Whitepaper')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
                              Technical Whitepaper
                          </Link>
