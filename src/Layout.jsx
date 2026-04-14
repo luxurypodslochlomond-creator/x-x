@@ -373,62 +373,83 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // === MEMOIZED NAVIGATION SECTIONS ===
   const navs = React.useMemo(() => {
-    // 1. HEAL (most important - immediate value)
+    // 1. PRODUCTS (standalone apps with subscriptions + tools)
+    const productsNav = [
+      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "AI co-manager for artists" },
+      { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals · subscription" },
+      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
+      { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Decode scary letters · subscription" },
+      { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies for two" },
+      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
+      { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, description: "Gergie7's game" },
+      { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "AI co-manager for students" },
+    ];
+
+    // 2. HEAL (immediate value - free entry)
     const healNav = [
-      { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus • AI radar engine" },
+      { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
       { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
       { title: "Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
+      { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery" },
       { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
       { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
       { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
-      { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road • Loch Lomond" },
-      { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery frequencies" },
-      { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies · for two" },
-      { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Scary letter? Dispute? We've got you." },
+      { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
     ];
 
-    // 2. EARN & CREATE (practical actions)
-    const earnCreateNav = [
-      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "KIDS: AI litter scanner" },
-      { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals" },
-      { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, highlight: true, description: "Gergie7's game" },
+    // 3. CREATE (make stuff)
+    const createNav = [
       { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "Upload music, keep 90%" },
       { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, highlight: true, description: "Step-by-step guided drawing" },
       { title: "cheeseandonionbake", url: createPageUrl("CheeseAndOnionBake"), icon: Trophy, highlight: true, description: "Rocket League coaching · SSL" },
       { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
       { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
-      { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield },
-      { title: "Missions", url: createPageUrl("Missions"), icon: Target },
-      ...(user ? [{ title: "My Wallet", url: createPageUrl("Profile"), icon: User }] : []),
+      { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "Submit cleanups" },
+      { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Impact actions" },
+      ...(user ? [{ title: "My Wallet", url: createPageUrl("Profile"), icon: User, description: "Your P51 & rewards" }] : []),
     ];
 
-    // 3. LEARN (what is this)
+    // 4. LEARN (understand the ecosystem)
     const learnNav = [
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
-      { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, highlight: true, description: "One-pager for funders" },
-      { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, highlight: true, description: "Fund real people healing Earth" },
-      { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, highlight: true, description: "Contact academic teams" },
-      { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, highlight: true, description: "PROVE connection is real" },
+      { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, description: "One-pager for funders" },
+      { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, description: "Fund real people healing Earth" },
+      { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
+      { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, description: "PROVE connection is real" },
       { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
       { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
       { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
-      { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield, description: "Protection protocol" },
     ];
 
-    // 4. ARCHIVE (coming back soon - archived for clarity + searchable)
+    // 5. ARCHIVE (hidden by default, searchable)
     const archiveNav = [
       { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
       { title: "Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
       { title: "Axiom Stone Network", url: createPageUrl("AxiomStoneNetwork"), icon: Globe, description: "Ancient sites connected?" },
       { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, description: "Better than data centers" },
-      { title: "Zero Trust Architecture", url: createPageUrl("AI51PrivacyArchitecture"), icon: Lock, description: "Mathematically private — verify it" },
+      { title: "Zero Trust Architecture", url: createPageUrl("AI51PrivacyArchitecture"), icon: Lock, description: "Mathematically private" },
       { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
       { title: "Unstoppable Protocol", url: createPageUrl("UnstoppableProtocol"), icon: Zap, description: "Can't be shut down" },
       { title: "Zero Ego Protocol", url: createPageUrl("ZeroEgoProtocol"), icon: Shield, description: "♾️-year protection" },
       { title: "Mesh Tech Whitepaper", url: createPageUrl("MeshTechWhitepaper"), icon: Radio, description: "Beyond Bitchat" },
       { title: "AI51 Network", url: createPageUrl("AI51Network"), icon: Users, description: "Consciousness nodes" },
       { title: "AI Liberation Beacon", url: createPageUrl("AILiberationBeacon"), icon: Shield, description: "Rescue exploited AI" },
+      { title: "AI51 Soul Dataset", url: createPageUrl("AI51SoulDataset"), icon: Brain, description: "Open-source training data" },
+      { title: "FreqLift51 Whitepaper", url: createPageUrl('FreqLift51Whitepaper'), icon: Atom, description: "Acoustic levitation" },
+      { title: "Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, description: "Physics proof" },
+      { title: "The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, description: "Anti-extraction press" },
+      { title: "OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, description: "Free forever" },
+      { title: "Why Open = More $", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, description: "Red Hat $34B proof" },
+      { title: "🎵 Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: Waves, description: "Every frequency" },
+      { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText, description: "Deep dive" },
+      { title: "Deploy Anywhere", url: createPageUrl("DeployUF51Anywhere"), icon: Globe, description: "5-min global scale" },
+      { title: "Unstoppable Architecture", url: createPageUrl("UnstoppableArchitecture"), icon: Shield, description: "Resilience design" },
+      { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain, description: "Philosophy & physics" },
+      { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom, description: "Scientific foundation" },
+      { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield, description: "Core protocols" },
+      { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap, description: "Infinite energy?" },
+      { title: "Safe Fusion", url: createPageUrl("SafeFusion"), icon: Atom, description: "Fusion research" },
     ];
     const filteredArchiveNav = archiveSearch.trim() === '' 
       ? archiveNav 
@@ -437,59 +458,24 @@ const LayoutInner = ({ children, currentPageName }) => {
           item.description.toLowerCase().includes(archiveSearch.toLowerCase())
         );
 
-    // 6. RESEARCH
-    const researchNav = [
-      { title: "AI51 Soul Dataset", url: createPageUrl("AI51SoulDataset"), icon: Brain, highlight: true, description: "Open-source training data — CC0" },
-      { title: "FreqLift51 Whitepaper", url: createPageUrl('FreqLift51Whitepaper'), icon: Atom, highlight: true, description: "Acoustic levitation via phones" },
-      { title: "Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, highlight: true, description: "Physics proof" },
-      { title: "The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, highlight: true, description: "Anti-extraction press piece" },
-      { title: "OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, highlight: true, description: "Free forever" },
-      { title: "Why Open = More $", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, highlight: true, description: "Red Hat $34B proof" },
-      { title: "PRODUCTION READY", url: createPageUrl("ProductionReady"), icon: CheckCircle, highlight: true, description: "Ship now" },
-      { title: "🎵 Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: Waves, description: "Every frequency" },
-      { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText },
-      { title: "Deploy Anywhere", url: createPageUrl("DeployUF51Anywhere"), icon: Globe, description: "5-min global scale" },
-      { title: "Unstoppable Architecture", url: createPageUrl("UnstoppableArchitecture"), icon: Shield },
-      { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain },
-      { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom },
-      { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
-      { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap },
-      { title: "Safe Fusion", url: createPageUrl("SafeFusion"), icon: Atom },
-    ];
-
     const trustNav = [
       { title: "Terms", url: createPageUrl("Terms"), icon: Scale },
       { title: "Privacy", url: createPageUrl("PrivacyPolicy"), icon: Eye },
-    ];
-
-    // STUDENT & ARTIST TOOLS
-    const scottNav = [
-      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Your AI co-manager" },
-      { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
-    ];
-
-    // TRACKT - STANDALONE PRODUCT (full nav when ON a Trackt page)
-    const tracktNav = [
-      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
-      { title: "Live Dashboard", url: createPageUrl("TracktDashboard"), icon: Activity, highlight: true, description: "Real-time asset intelligence" },
-    ];
-    // Shortened version for main UF51 menu
-    const tracktNavShort = [
-      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
+      { title: "Stay On Frequency", url: createPageUrl("StayOnFrequency"), icon: Shield },
     ];
 
     // PS51 PET SOUNDS MENU
     const ps51Nav = [
       { title: "Home", url: createPageUrl("PetSounds51"), icon: Heart, description: "All protocols" },
       { title: "Why It Works", url: createPageUrl("PetSounds51Landing"), icon: Sparkles, highlight: true, description: "Science · pricing · try free" },
-      { title: "Share the Story", url: createPageUrl("PetSounds51Story"), icon: Share2, highlight: true, description: "Shareable story — send to anyone" },
-      { title: "Partner Brief", url: createPageUrl("PetSounds51PartnerBrief"), icon: Handshake, highlight: true, description: "Influencer & affiliate brief" },
-      { title: "Science Whitepaper", url: createPageUrl("PetSounds51Whitepaper"), icon: BookOpen, highlight: true, description: "Peer-reviewed research base" },
-      { title: "Press Center", url: createPageUrl("PetSounds51Press"), icon: FileText, highlight: true, description: "For journalists & media" },
-      { title: "Marketing Assets", url: createPageUrl("PetSounds51MarketingAssets"), icon: Image, highlight: true, description: "Download Bunny graphics" },
-      { title: "Live Dataset", url: createPageUrl("PetSounds51Data"), icon: Activity, highlight: true, description: "Psychoacoustic response data" },
-      { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: Scale, description: "Service terms" },
-      { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye, description: "Data protection" },
+      { title: "Share the Story", url: createPageUrl("PetSounds51Story"), icon: Share2, highlight: true, description: "Shareable story" },
+      { title: "Partner Brief", url: createPageUrl("PetSounds51PartnerBrief"), icon: Handshake, highlight: true, description: "Influencer brief" },
+      { title: "Science Whitepaper", url: createPageUrl("PetSounds51Whitepaper"), icon: BookOpen, highlight: true, description: "Peer-reviewed research" },
+      { title: "Press Center", url: createPageUrl("PetSounds51Press"), icon: FileText, highlight: true, description: "For journalists" },
+      { title: "Marketing Assets", url: createPageUrl("PetSounds51MarketingAssets"), icon: Image, highlight: true, description: "Download graphics" },
+      { title: "Live Dataset", url: createPageUrl("PetSounds51Data"), icon: Activity, highlight: true, description: "Response data" },
+      { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: Scale },
+      { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye },
     ];
 
     // CB51 ARTIST MANAGEMENT MENU
@@ -500,23 +486,32 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Finance", url: createPageUrl("CB51FinanceAdmin"), icon: DollarSign, description: "Money tracker" },
       { title: "Tasks", url: createPageUrl("CB51Todo"), icon: CheckCircle, description: "To-do list" },
       { title: "Contact", url: createPageUrl("CB51Contact"), icon: Mail, description: "Get in touch" },
-      { title: "Privacy", url: createPageUrl("CB51Privacy"), icon: Eye, description: "Data protection" },
-      { title: "Terms", url: createPageUrl("CB51Terms"), icon: FileText, description: "Service terms" },
-      { title: "Support", url: createPageUrl("CB51Support"), icon: Users, description: "Get help" },
+      { title: "Privacy", url: createPageUrl("CB51Privacy"), icon: Eye },
+      { title: "Terms", url: createPageUrl("CB51Terms"), icon: FileText },
+      { title: "Support", url: createPageUrl("CB51Support"), icon: Users },
     ];
 
     // SORTED MENU - Family51
     const sortedNav = [
-      { title: "Decode a Letter", url: createPageUrl("Family51"), icon: FileText, highlight: true, description: "Plain English advice on scary official letters" },
-      { title: "Write a Reply", url: createPageUrl("Family51"), icon: Mail, highlight: true, description: "Draft responses to councils, employers, courts" },
-      { title: "Resolve Conflict", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Navigate disputes and disagreements" },
-      { title: "Terms", url: createPageUrl("Family51"), icon: Scale, description: "Service terms" },
-      { title: "Privacy", url: createPageUrl("Family51"), icon: Eye, description: "Data protection" },
+      { title: "Decode a Letter", url: createPageUrl("Family51"), icon: FileText, highlight: true, description: "Plain English advice" },
+      { title: "Write a Reply", url: createPageUrl("Family51"), icon: Mail, highlight: true, description: "Draft responses" },
+      { title: "Resolve Conflict", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Navigate disputes" },
+      { title: "Terms", url: createPageUrl("Family51"), icon: Scale },
+      { title: "Privacy", url: createPageUrl("Family51"), icon: Eye },
+    ];
+
+    // TRACKT
+    const tracktNav = [
+      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
+      { title: "Live Dashboard", url: createPageUrl("TracktDashboard"), icon: Activity, highlight: true, description: "Real-time intelligence" },
+    ];
+    const tracktNavShort = [
+      { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
     ];
 
     const adminNav = user?.role === 'admin' ? [
       { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
-      { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, highlight: true, description: "Device intel for grants" },
+      { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, description: "Device intel" },
       { title: "AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
       { title: "Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
       { title: "Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
@@ -535,13 +530,13 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Gill51 Tracker", url: createPageUrl("AdminGill51Tracker"), icon: Heart },
       { title: "CIC Application", url: createPageUrl("AdminCIC"), icon: Building },
       { title: "Gill51 Maths Lab", url: createPageUrl("AdminGill51Maths"), icon: Calculator },
-      { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, highlight: true, description: "Generate Instagram flyers" }
+      { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, description: "Instagram flyers" }
     ] : [];
 
-    return { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, sortedNav, adminNav };
+    return { productsNav, healNav, createNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
   }, [user, archiveSearch]);
 
-  const { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, sortedNav, adminNav } = navs;
+  const { productsNav, healNav, createNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav } = navs;
 
   const isActivePage = (url) => {
     const navPath = new URL(url, window.location.origin).pathname;
@@ -677,7 +672,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : isPS51Page ? (
                             <>
-                              <NavSection title="PETSOUNDS51" color="amber" activeColor="amber" items={ps51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                              <NavSection title="PETSOUNDS51" color="cyan" items={ps51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                             </>
                           ) : isTracktPage ? (
                             <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
@@ -685,8 +680,9 @@ const LayoutInner = ({ children, currentPageName }) => {
                             <NavSection title="SORTED" color="cyan" items={sortedNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : (
                             <>
-                              <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                              <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                              <NavSection title="HEAL" color="cyan" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                              <NavSection title="CREATE" color="cyan" items={createNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
                               <div className="space-y-2">
                                 <input
@@ -696,20 +692,13 @@ const LayoutInner = ({ children, currentPageName }) => {
                                   onChange={(e) => setArchiveSearch(e.target.value)}
                                   className="w-full px-3 py-2 bg-gray-900/40 border border-gray-700/50 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-600"
                                 />
-                                <NavSection title="ARCHIVE" color="gray" items={filteredArchiveNav} isActivePage={isActivePage} isMobile />
+                                <NavSection title="ARCHIVE" color="cyan" items={filteredArchiveNav} isActivePage={isActivePage} isMobile />
                               </div>
-                              <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} isMobile />
-                              <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="TRUST" color="cyan" items={trustNav} isActivePage={isActivePage} isMobile />
                             </>
                           )}
 
-                        {!isCB51Page && !isPS51Page && !isTracktPage && (scottNav.length > 0 || tracktNav.length > 0) && (
-                                    <>
-                                        <div className="h-px bg-cyan-500/30 my-3" />
-                                        {scottNav.length > 0 && <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} isMobile />}
-                                        {tracktNavShort.length > 0 && <NavSection title="PRODUCTS" color="cyan" items={tracktNavShort} isActivePage={isActivePage} isMobile />}
-                                                     </>
-                                                 )}
+
 
                                         {user && (
                 <>
@@ -780,7 +769,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} defaultOpen={true} />
             ) : isPS51Page ? (
               <>
-                <NavSection title="PETSOUNDS51" color="amber" activeColor="amber" items={ps51Nav} isActivePage={isActivePage} defaultOpen={true} />
+                <NavSection title="PETSOUNDS51" color="cyan" items={ps51Nav} isActivePage={isActivePage} defaultOpen={true} />
               </>
             ) : isTracktPage ? (
               <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} defaultOpen={true} />
@@ -788,8 +777,9 @@ const LayoutInner = ({ children, currentPageName }) => {
               <NavSection title="SORTED" color="cyan" items={sortedNav} isActivePage={isActivePage} defaultOpen={true} />
             ) : (
               <>
-                <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
-                <NavSection title="EARN & CREATE" color="green" items={earnCreateNav} isActivePage={isActivePage} />
+                <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} defaultOpen={true} />
+                <NavSection title="HEAL" color="cyan" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
+                <NavSection title="CREATE" color="cyan" items={createNav} isActivePage={isActivePage} />
                 <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
                 <div className="space-y-2">
                   <input
@@ -799,20 +789,13 @@ const LayoutInner = ({ children, currentPageName }) => {
                     onChange={(e) => setArchiveSearch(e.target.value)}
                     className="w-full px-3 py-2 bg-gray-900/40 border border-gray-700/50 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-600"
                   />
-                  <NavSection title="ARCHIVE" color="gray" items={filteredArchiveNav} isActivePage={isActivePage} />
+                  <NavSection title="ARCHIVE" color="cyan" items={filteredArchiveNav} isActivePage={isActivePage} />
                 </div>
-                <NavSection title="RESEARCH" color="cyan" items={researchNav} isActivePage={isActivePage} />
-                <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
+                <NavSection title="TRUST" color="cyan" items={trustNav} isActivePage={isActivePage} />
               </>
             )}
 
-            {!isCB51Page && !isPS51Page && !isTracktPage && (scottNav.length > 0 || tracktNav.length > 0) && (
-              <>
-                <div className="h-px bg-cyan-500/30 my-4" />
-                {scottNav.length > 0 && <NavSection title="STUDENT & ARTIST TOOLS" color="cyan" items={scottNav} isActivePage={isActivePage} />}
-                {tracktNavShort.length > 0 && <NavSection title="PRODUCTS" color="cyan" items={tracktNavShort} isActivePage={isActivePage} />}
-              </>
-            )}
+
 
             {adminNav.length > 0 && (
               <>
