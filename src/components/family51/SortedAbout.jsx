@@ -63,7 +63,7 @@ export default function SortedAbout() {
               <div>
                 <SectionLabel text="THE PROBLEM" color="#ef4444" />
                 <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, margin: '10px 0 16px' }}>
-                  Millions of people receive official letters every day — from HMRC, bailiffs, courts, landlords, 
+                  Millions of people receive official letters every day — from tax authorities, bailiffs, courts, landlords, 
                   employers — and have absolutely no idea what they mean or what to do. Legal advice costs 
                   £200–£500/hour. Citizens Advice has a 3-week wait. So people freeze. They ignore the letter. 
                   The problem gets worse.

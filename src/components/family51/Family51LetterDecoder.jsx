@@ -5,7 +5,7 @@ import { base44 } from '@/api/base44Client';
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
   'NHS / medical', 'School / college', 'Employer / HR', 'Parking fine',
-  'Benefits / DWP', 'Court / legal', 'Immigration', 'Other',
+  'Benefits / DWP', 'Court / legal', 'Tax / government', 'Immigration', 'Other',
 ];
 
 const SEVERITY_CONFIG = {
@@ -23,6 +23,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
+  const [linkUrl, setLinkUrl] = useState('');
   const fileInputRef = useRef(null);
 
   const handleFileUpload = async (e) => {
@@ -36,13 +37,22 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   };
 
   const decode = async () => {
-    if ((!letterText.trim() && !uploadedFileUrl) || loading) return;
+    const hasInput = letterText.trim() || uploadedFileUrl || linkUrl.trim();
+    if (!hasInput || loading) return;
     setLoading(true);
     setResult(null);
 
-    const promptText = uploadedFileUrl
-      ? `You are a compassionate UK citizens advice expert. A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`
-      : `You are a compassionate UK citizens advice expert. A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
+    let promptText;
+    let fileUrls = [];
+
+    if (uploadedFileUrl) {
+      promptText = `You are a compassionate plain-English advice expert. A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
+      fileUrls = [uploadedFileUrl];
+    } else if (linkUrl.trim()) {
+      promptText = `You are a compassionate plain-English advice expert. A person has shared a link to an official document or letter: ${linkUrl.trim()}${letterType ? ` (type: ${letterType})` : ''}. Fetch and read the content at that URL and help them understand it in plain English.`;
+    } else {
+      promptText = `You are a compassionate plain-English advice expert. A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
+    }
 
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
@@ -53,7 +63,8 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 - action_steps: Array of exactly 3 clear numbered actions to take
 - key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
 - dont_panic: One honest, reassuring sentence`,
-      ...(uploadedFileUrl ? { file_urls: [uploadedFileUrl] } : {}),
+      ...(fileUrls.length > 0 ? { file_urls: fileUrls } : {}),
+      add_context_from_internet: !!linkUrl.trim(),
       response_json_schema: {
         type: 'object',
         properties: {
@@ -71,7 +82,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     setLoading(false);
   };
 
-  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); };
+  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setLinkUrl(''); };
 
   const copyAll = () => {
     if (!result) return;
@@ -124,6 +135,25 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
           )}
         </motion.button>
       </div>
+      {/* LINK URL */}
+      <div className="space-y-2">
+        <Label>OR PASTE A LINK (GOV.UK, Google Drive, online letter, etc.)</Label>
+        <input
+          type="url"
+          value={linkUrl}
+          onChange={e => setLinkUrl(e.target.value)}
+          placeholder="https://..."
+          style={{
+            width: '100%', background: 'rgba(255,255,255,0.03)',
+            border: `1px solid ${linkUrl ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+            borderRadius: 12, color: '#fff', fontSize: 13, padding: '12px 16px',
+            outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', transition: 'border-color 0.2s',
+          }}
+          onFocus={e => e.target.style.borderColor = accentColor + '80'}
+          onBlur={e => e.target.style.borderColor = linkUrl ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
+        />
+      </div>
+
       <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em', marginBottom: 8, textAlign: 'center' }}>— or type / paste below —</p>
 
       {/* PASTE AREA */}
@@ -149,15 +179,15 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       {/* DECODE BUTTON */}
       <motion.button
         onClick={decode}
-        disabled={(!letterText.trim() && !uploadedFileUrl) || loading}
-        whileTap={!loading && (letterText.trim() || uploadedFileUrl) ? { scale: 0.97 } : {}}
+        disabled={(!letterText.trim() && !uploadedFileUrl && !linkUrl.trim()) || loading}
+        whileTap={!loading && (letterText.trim() || uploadedFileUrl || linkUrl.trim()) ? { scale: 0.97 } : {}}
         style={{
           width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
           fontWeight: 800, letterSpacing: '0.12em',
-          cursor: (letterText.trim() || uploadedFileUrl) && !loading ? 'pointer' : 'not-allowed',
-          border: `1px solid ${(letterText.trim() || uploadedFileUrl) ? accentColor : 'rgba(255,255,255,0.1)'}`,
-          background: (letterText.trim() || uploadedFileUrl) ? `${accentColor}15` : 'transparent',
-          color: (letterText.trim() || uploadedFileUrl) ? accentColor : 'rgba(255,255,255,0.2)',
+          cursor: (letterText.trim() || uploadedFileUrl || linkUrl.trim()) && !loading ? 'pointer' : 'not-allowed',
+          border: `1px solid ${(letterText.trim() || uploadedFileUrl || linkUrl.trim()) ? accentColor : 'rgba(255,255,255,0.1)'}`,
+          background: (letterText.trim() || uploadedFileUrl || linkUrl.trim()) ? `${accentColor}15` : 'transparent',
+          color: (letterText.trim() || uploadedFileUrl || linkUrl.trim()) ? accentColor : 'rgba(255,255,255,0.2)',
           transition: 'all 0.2s',
         }}
       >
