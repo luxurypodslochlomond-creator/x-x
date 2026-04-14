@@ -213,11 +213,25 @@ export default function WelcomePage() {
 
                     {/* HEAL */}
                     <Link to={createPageUrl('FrequencyChamber')}>
-                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.2)' }}>
-                            <COOLASFUCKWaves size={48} animate={true} />
-                            <h3 className="text-lg font-black font-mono text-cyan-400">HEAL</h3>
-                            <p className="text-xs text-gray-400 font-mono text-center">432Hz / 528Hz • Free forever</p>
-                        </motion.div>
+                       <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.2)' }}>
+                           <COOLASFUCKWaves size={48} animate={true} />
+                           <h3 className="text-lg font-black font-mono text-cyan-400">HEAL</h3>
+                           <p className="text-xs text-gray-400 font-mono text-center">432Hz / 528Hz • Free forever</p>
+                       </motion.div>
+                    </Link>
+
+                    {/* FAMILY51 */}
+                    <Link to={createPageUrl('Family51')} className="col-span-2 md:col-span-4">
+                       <motion.div whileHover={{ scale: 1.01, y: -2 }} whileTap={{ scale: 0.99 }} className="bg-black border-4 border-orange-500 hover:border-orange-400 p-6 cursor-pointer transition-all flex items-center gap-6" style={{ boxShadow: '0 0 30px rgba(249, 115, 22, 0.2)' }}>
+                           <div className="flex-shrink-0">
+                               <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4L6 20V44H18V32H30V44H42V20L24 4Z" stroke="#f97316" strokeWidth="2" fill="none"/><path d="M13 28L16 28L18 24L20 32L22 26L24 30L26 28H35" stroke="#ec4899" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
+                           </div>
+                           <div className="flex-1 text-left">
+                               <h3 className="text-lg font-black font-mono text-orange-400">FAMILY51</h3>
+                               <p className="text-xs text-gray-400 font-mono">Scary letter? Neighbour dispute? Bill you can't understand? — <span className="text-white">We decode it. We write your reply. Free.</span></p>
+                           </div>
+                           <div className="text-orange-400 font-mono font-black text-sm border border-orange-500 px-4 py-2 flex-shrink-0">GET HELP →</div>
+                       </motion.div>
                     </Link>
 
                 </motion.div>
