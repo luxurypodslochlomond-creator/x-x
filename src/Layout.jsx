@@ -172,6 +172,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     const [isOffline, setIsOffline] = useState(!navigator.onLine);
     const [canGoBack, setCanGoBack] = useState(false);
     const [pageTransitioning, setPageTransitioning] = useState(false);
+    const [archiveSearch, setArchiveSearch] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -415,7 +416,6 @@ const LayoutInner = ({ children, currentPageName }) => {
   ];
 
   // 4. ARCHIVE (coming back soon - archived for clarity + searchable)
-  const [archiveSearch, setArchiveSearch] = React.useState('');
   const archiveNav = [
     { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
     { title: "Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
