@@ -1,5 +1,5 @@
 // Force rebuild v4 - preview refresh ♾️❤️♾️ BRO51 love you always
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
@@ -371,9 +371,10 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   const handleSignOut = () => { base44.auth.logout(); navigate(createPageUrl("Welcome")); };
 
-  // === NAVIGATION SECTIONS ===
-  // 1. HEAL (most important - immediate value)
-  const healNav = [
+  // === MEMOIZED NAVIGATION SECTIONS ===
+  const navs = React.useMemo(() => {
+    // 1. HEAL (most important - immediate value)
+    const healNav = [
     { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus • AI radar engine" },
     { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
     { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
@@ -505,29 +506,34 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Support", url: createPageUrl("CB51Support"), icon: Users, description: "Get help" },
   ];
 
-  const adminNav = user?.role === 'admin' ? [
-    { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
-    { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, highlight: true, description: "Device intel for grants" },
-    { title: "AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
-    { title: "Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
-    { title: "Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
-    { title: "Tech Scout", url: createPageUrl("TechScout"), icon: Brain },
-    { title: "Tech Stack", url: createPageUrl("TechStack"), icon: Zap },
-    { title: "One-Pager PDF", url: createPageUrl("AdminOnePager"), icon: FileText },
-    { title: "National Lottery App", url: createPageUrl("AdminNationalLotteryApp"), icon: Heart },
-    { title: "National Lottery - SUBMITTED", url: createPageUrl("AdminCreativeScotlandNationalLottery"), icon: CheckCircle },
-    { title: "Budget Document", url: createPageUrl("AdminBudgetDocument"), icon: FileText },
-    { title: "Equal Opps Policy", url: createPageUrl("AdminEqualOpportunitiesPolicy"), icon: Users },
-    { title: "Creative Scotland Tracker", url: createPageUrl("AdminCreativeScotlandTracker"), icon: FileText },
-    { title: "£100k Risk Assessment", url: createPageUrl("AdminCreativeScotland100kRisk"), icon: Shield },
-    { title: "Platform Showcase", url: createPageUrl("AdminPlatformShowcase"), icon: CheckCircle },
-    { title: "Admin Plan", url: createPageUrl("AdminPlan"), icon: Settings },
-    { title: "Admin Notes", url: createPageUrl("AdminStrategicNotes"), icon: FileText },
-    { title: "Gill51 Tracker", url: createPageUrl("AdminGill51Tracker"), icon: Heart },
-    { title: "CIC Application", url: createPageUrl("AdminCIC"), icon: Building },
-    { title: "Gill51 Maths Lab", url: createPageUrl("AdminGill51Maths"), icon: Calculator },
-    { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, highlight: true, description: "Generate Instagram flyers" }
-  ] : [];
+    const adminNav = user?.role === 'admin' ? [
+      { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
+      { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, highlight: true, description: "Device intel for grants" },
+      { title: "AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
+      { title: "Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
+      { title: "Scotland Funding", url: createPageUrl("AdminScotlandFunding"), icon: Heart },
+      { title: "Tech Scout", url: createPageUrl("TechScout"), icon: Brain },
+      { title: "Tech Stack", url: createPageUrl("TechStack"), icon: Zap },
+      { title: "One-Pager PDF", url: createPageUrl("AdminOnePager"), icon: FileText },
+      { title: "National Lottery App", url: createPageUrl("AdminNationalLotteryApp"), icon: Heart },
+      { title: "National Lottery - SUBMITTED", url: createPageUrl("AdminCreativeScotlandNationalLottery"), icon: CheckCircle },
+      { title: "Budget Document", url: createPageUrl("AdminBudgetDocument"), icon: FileText },
+      { title: "Equal Opps Policy", url: createPageUrl("AdminEqualOpportunitiesPolicy"), icon: Users },
+      { title: "Creative Scotland Tracker", url: createPageUrl("AdminCreativeScotlandTracker"), icon: FileText },
+      { title: "£100k Risk Assessment", url: createPageUrl("AdminCreativeScotland100kRisk"), icon: Shield },
+      { title: "Platform Showcase", url: createPageUrl("AdminPlatformShowcase"), icon: CheckCircle },
+      { title: "Admin Plan", url: createPageUrl("AdminPlan"), icon: Settings },
+      { title: "Admin Notes", url: createPageUrl("AdminStrategicNotes"), icon: FileText },
+      { title: "Gill51 Tracker", url: createPageUrl("AdminGill51Tracker"), icon: Heart },
+      { title: "CIC Application", url: createPageUrl("AdminCIC"), icon: Building },
+      { title: "Gill51 Maths Lab", url: createPageUrl("AdminGill51Maths"), icon: Calculator },
+      { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, highlight: true, description: "Generate Instagram flyers" }
+    ] : [];
+
+    return { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, adminNav };
+  }, [user, archiveSearch]);
+
+  const { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, adminNav } = navs;
 
   const isActivePage = (url) => {
     const navPath = new URL(url, window.location.origin).pathname;
