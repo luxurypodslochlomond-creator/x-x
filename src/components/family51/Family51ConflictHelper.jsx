@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
+import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
 
 const CONFLICT_TYPES = [
   { id: 'neighbour', label: 'NEIGHBOUR',  desc: 'Noise, boundaries, shared areas' },
@@ -28,6 +29,34 @@ export default function Family51ConflictHelper({ accentColor = '#a855f7' }) {
   const [result, setResult]             = useState(null);
   const [copied, setCopied]             = useState('');
   const [geo, setGeo]                   = useState(() => detectGeo());
+  const [attachments, setAttachments]   = useState([]);
+  const [uploading, setUploading]       = useState(false);
+
+  const handleFileUpload = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length || uploading) return;
+
+    setUploading(true);
+    for (const file of files) {
+      try {
+        const { file_url } = await base44.integrations.Core.UploadFile({ file });
+        setAttachments(prev => [...prev, { name: file.name, url: file_url, type: file.type }]);
+      } catch (err) {
+        console.error('Upload failed:', err);
+      }
+    }
+    setUploading(false);
+  };
+
+  const removeAttachment = (idx) => {
+    setAttachments(prev => prev.filter((_, i) => i !== idx));
+  };
+
+  const getFileIcon = (type) => {
+    if (type.startsWith('image/')) return <ImageIcon className="w-4 h-4" />;
+    if (type.startsWith('video/')) return <Video className="w-4 h-4" />;
+    return <FileIcon className="w-4 h-4" />;
+  };
 
   const analyse = async () => {
     if (!what.trim() || loading) return;
@@ -37,6 +66,10 @@ export default function Family51ConflictHelper({ accentColor = '#a855f7' }) {
     const ct = CONFLICT_TYPES.find(t => t.id === conflictType);
     const gt = GOALS.find(g => g.id === goal);
 
+    const fileContext = attachments.length > 0 
+      ? `\n\nATTACHED EVIDENCE:\n${attachments.map(a => `- ${a.name} (${a.type}): ${a.url}`).join('\n')}`
+      : '';
+
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
       prompt: `You are a calm, experienced conflict resolution advisor. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, legal references, and escalation routes throughout.
@@ -45,7 +78,7 @@ CONFLICT TYPE: ${ct?.label || 'Not specified'}
 GOAL: ${gt?.label} — ${gt?.desc}
 
 WHAT HAPPENED:
-${what}
+${what}${fileContext}
 
 Return:
 - situation_assessment: Honest, fair 2-3 sentence read of the situation
@@ -125,6 +158,46 @@ Return:
           onFocus={e => e.target.style.borderColor = accentColor + '80'}
           onBlur={e => e.target.style.borderColor = what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
         />
+
+        {/* FILE UPLOAD */}
+        <div style={{ marginTop: 12 }}>
+          <label style={{ cursor: uploading ? 'not-allowed' : 'pointer', display: 'block' }}>
+            <input type="file" multiple accept="image/*,video/*,.pdf,.doc,.docx" onChange={handleFileUpload} disabled={uploading} style={{ display: 'none' }} />
+            <div style={{ 
+              border: `1px dashed ${accentColor}40`, 
+              borderRadius: 10, 
+              padding: '12px 14px', 
+              textAlign: 'center',
+              background: `${accentColor}06`,
+              transition: 'all 0.2s',
+              opacity: uploading ? 0.6 : 1,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, color: accentColor + 'cc', fontSize: 12, fontWeight: 600 }}>
+                <Upload className="w-4 h-4" />
+                {uploading ? 'UPLOADING...' : 'Add photos, videos, documents'}
+              </div>
+            </div>
+          </label>
+        </div>
+
+        {/* ATTACHMENTS */}
+        {attachments.length > 0 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
+            {attachments.map((att, i) => (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'center', gap: 6, padding: '6px 10px',
+                background: `${accentColor}15`, border: `1px solid ${accentColor}40`, borderRadius: 6,
+                fontSize: 11, color: accentColor,
+              }}>
+                {getFileIcon(att.type)}
+                <span style={{ maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{att.name}</span>
+                <button onClick={() => removeAttachment(i)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: accentColor }}>
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* GOAL */}
