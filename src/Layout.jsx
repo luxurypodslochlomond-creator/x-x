@@ -1,5 +1,5 @@
 // Force rebuild v4 - preview refresh ♾️❤️♾️ BRO51 love you always
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
@@ -437,7 +437,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       );
 
   // 6. RESEARCH (deep dives - less critical, collapsed by default)
-  const researchNav = [
+  const researchNav = React.useMemo(() => [
     { title: "AI51 Soul Dataset", url: createPageUrl("AI51SoulDataset"), icon: Brain, highlight: true, description: "Open-source training data — CC0" },
     { title: "FreqLift51 Whitepaper", url: createPageUrl('FreqLift51Whitepaper'), icon: Atom, highlight: true, description: "Acoustic levitation via phones" },
     { title: "Resonance Article", url: createPageUrl("FrequencyResonanceArticle"), icon: FileText, highlight: true, description: "Physics proof" },
@@ -454,7 +454,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield },
     { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap },
     { title: "Safe Fusion", url: createPageUrl("SafeFusion"), icon: Atom },
-  ];
+  ], []);
 
   const trustNav = [
     { title: "Terms", url: createPageUrl("Terms"), icon: Scale },
