@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { detectGeo } from '@/hooks/useSortedGeo';
+import GeoSelector from './GeoSelector';
 
 const CONFLICT_TYPES = [
   { id: 'neighbour', label: 'NEIGHBOUR',  desc: 'Noise, boundaries, shared areas' },
@@ -25,6 +27,7 @@ export default function Family51ConflictHelper({ accentColor = '#a855f7' }) {
   const [loading, setLoading]           = useState(false);
   const [result, setResult]             = useState(null);
   const [copied, setCopied]             = useState('');
+  const [geo, setGeo]                   = useState(() => detectGeo());
 
   const analyse = async () => {
     if (!what.trim() || loading) return;
@@ -36,7 +39,7 @@ export default function Family51ConflictHelper({ accentColor = '#a855f7' }) {
 
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You are a calm, experienced UK conflict resolution advisor.
+      prompt: `You are a calm, experienced conflict resolution advisor. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, legal references, and escalation routes throughout.
 
 CONFLICT TYPE: ${ct?.label || 'Not specified'}
 GOAL: ${gt?.label} — ${gt?.desc}
@@ -46,11 +49,11 @@ ${what}
 
 Return:
 - situation_assessment: Honest, fair 2-3 sentence read of the situation
-- legal_position: Their UK legal rights/protections (accurate, acknowledge you're not a solicitor)
-- recommended_steps: Array of 3 specific steps matching their goal
+- legal_position: Their legal rights/protections under ${geo.jurisdiction} (accurate, acknowledge you're not a solicitor)
+- recommended_steps: Array of 3 specific steps matching their goal, relevant to ${geo.country}
 - what_to_say: Exact script or message they can use right now
 - what_not_to_do: Array of 2-3 things that could make it worse
-- if_it_escalates: What their next step would be if unresolved`,
+- if_it_escalates: What their next step would be if unresolved (local bodies, courts, ombudsman etc. for ${geo.country})`,
       response_json_schema: {
         type: 'object',
         properties: {
@@ -76,6 +79,12 @@ Return:
 
   return (
     <div className="space-y-5">
+
+      {/* GEO SELECTOR */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
+        <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+      </div>
 
       {/* CONFLICT TYPE */}
       <div className="space-y-2">

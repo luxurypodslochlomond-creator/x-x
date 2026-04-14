@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { detectGeo } from '@/hooks/useSortedGeo';
+import GeoSelector from './GeoSelector';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -24,6 +26,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const [copied, setCopied] = useState(false);
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState('');
+  const [geo, setGeo] = useState(() => detectGeo());
   const fileInputRef = useRef(null);
 
   const handleFileUpload = async (e) => {
@@ -44,14 +47,15 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 
     let promptText;
     let fileUrls = [];
+    const geoContext = `The person is in: ${geo.country}. Apply ${geo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
 
     if (uploadedFileUrl) {
-      promptText = `You are a compassionate plain-English advice expert. A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
+      promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
       fileUrls = [uploadedFileUrl];
     } else if (linkUrl.trim()) {
-      promptText = `You are a compassionate plain-English advice expert. A person has shared a link to an official document or letter: ${linkUrl.trim()}${letterType ? ` (type: ${letterType})` : ''}. Fetch and read the content at that URL and help them understand it in plain English.`;
+      promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has shared a link to an official document or letter: ${linkUrl.trim()}${letterType ? ` (type: ${letterType})` : ''}. Fetch and read the content at that URL and help them understand it in plain English.`;
     } else {
-      promptText = `You are a compassionate plain-English advice expert. A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
+      promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
     }
 
     const response = await base44.integrations.Core.InvokeLLM({
@@ -96,6 +100,12 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 
   return (
     <div className="space-y-5">
+
+      {/* GEO SELECTOR */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
+        <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+      </div>
 
       {/* TYPE CHIPS */}
       <div className="space-y-2">

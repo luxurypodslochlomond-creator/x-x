@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { detectGeo } from '@/hooks/useSortedGeo';
+import GeoSelector from './GeoSelector';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
@@ -23,6 +25,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4' }) {
   const [loading, setLoading]     = useState(false);
   const [result, setResult]       = useState(null);
   const [copied, setCopied]       = useState(false);
+  const [geo, setGeo]             = useState(() => detectGeo());
 
   const write = async () => {
     if (!context.trim() || loading) return;
@@ -33,7 +36,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4' }) {
 
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You are an expert at writing effective letters for ordinary people dealing with difficult UK situations.
+      prompt: `You are an expert at writing effective letters for ordinary people. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and terminology throughout.
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}
@@ -46,7 +49,7 @@ Write a complete, ready-to-send letter. Must be:
 - Structured with clear greeting and sign-off
 - ${t?.id === 'formal' ? 'Formally' : 'Professionally'} worded
 - Protecting their legal position without false claims
-- Referencing UK rights/protections where genuinely relevant
+- Referencing rights/protections relevant to ${geo.jurisdiction} where genuinely applicable
 - Ready to copy and paste immediately
 
 Return subject line, full letter body, 2-3 key points it makes, and one important tip.`,
@@ -74,6 +77,12 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
   return (
     <div className="space-y-5">
+
+      {/* GEO SELECTOR */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
+        <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+      </div>
 
       {/* SITUATION CHIPS */}
       <div className="space-y-2">
