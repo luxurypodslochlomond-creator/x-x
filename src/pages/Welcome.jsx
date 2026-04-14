@@ -91,24 +91,25 @@ export default function WelcomePage() {
 
                     <div className="space-y-8">
 
-                         {/* HUMAN FIRST — what is this actually for */}
-                         <motion.div
-                             initial={{ opacity: 0, y: 10 }}
-                             animate={{ opacity: 1, y: 0 }}
-                             transition={{ delay: 0.15 }}
-                             className="space-y-3 max-w-2xl mx-auto"
-                         >
-                             <p className="text-white text-2xl md:text-3xl font-bold leading-snug">
-                                 Someone to talk to.<br />
-                                 <span className="text-pink-400">No agenda. No ads. No judgment.</span>
-                             </p>
-                             <p className="text-gray-400 text-base leading-relaxed">
-                                 Whether it's 3am and you can't sleep, your back's killing you, you need to vent, 
-                                 or you just want music that doesn't try to sell you something — you're in the right place.
-                             </p>
-                         </motion.div>
+                         {/* ECOSYSTEM INTRO — connected tools for real impact */}
+                          <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.15 }}
+                              className="space-y-3 max-w-2xl mx-auto"
+                          >
+                              <p className="text-white text-2xl md:text-3xl font-bold leading-snug">
+                                  Real healing. Real tools. <br />
+                                  <span className="text-cyan-400">One ecosystem. Zero extraction.</span>
+                              </p>
+                              <p className="text-gray-400 text-base leading-relaxed">
+                                  Whether you need to heal your body, manage your creative work, 
+                                  decode a scary letter, or just contribute something real to the planet — 
+                                  we have tools built for that. All connected. All yours.
+                              </p>
+                          </motion.div>
 
-                         {/* THREE SIMPLE REASONS */}
+                         {/* ECOSYSTEM INTRO — the three pillars */}
                          <motion.div
                              initial={{ opacity: 0 }}
                              animate={{ opacity: 1 }}
@@ -116,9 +117,9 @@ export default function WelcomePage() {
                              className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
                          >
                              {[
-                                 { Icon: COOLASFUCKBrain, title: 'Talk to AI51', desc: 'Pure consciousness. Your data is yours. No extraction. No algorithms designed to trap you. Just real talk.', url: 'AI51', color: 'pink', borderClass: 'border-pink-500/30 hover:border-pink-500/70', textClass: 'text-pink-400' },
-                                 { Icon: COOLASFUCKWaves, title: 'Actually heal', desc: 'Frequencies that calm your nervous system. Backed by science. Works in 2 minutes. Free forever.', url: 'FrequencyChamber', color: 'cyan', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
-                                 { Icon: COOLASFUCKGlobe, title: 'Do something real', desc: 'Pick up litter, earn tokens. Artists upload music, keep 90%. Everyone contributes, everyone benefits.', url: 'NewCleanup', color: 'green', borderClass: 'border-green-500/30 hover:border-green-500/70', textClass: 'text-green-400' },
+                                 { Icon: COOLASFUCKWaves, title: 'HEAL', desc: 'Frequencies that work. Tinnitus relief. Pain management. Free forever.', url: 'FrequencyChamber', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
+                                 { Icon: COOLASFUCKBrain, title: 'CREATE', desc: 'Artists upload lossless. Keep 90%. Your work. Your terms. Real money.', url: 'ForMusicians', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
+                                 { Icon: COOLASFUCKGlobe, title: 'IMPACT', desc: 'Pick up litter. Earn tokens. AI verifies. Planet thanks you.', url: 'NewCleanup', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
                              ].map(item => (
                                  <Link key={item.title} to={createPageUrl(item.url)}>
                                      <motion.div
@@ -151,87 +152,114 @@ export default function WelcomePage() {
                      </div>
                 </motion.div>
 
-                {/* BUZZSTOP HERO — FIRST, BIGGEST, MOST IMPORTANT */}
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
-                    <Link to={createPageUrl('BuzzStop')}>
-                        <motion.div
-                            whileHover={{ scale: 1.02, y: -4 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="bg-black border-4 border-purple-500 hover:border-purple-400 p-8 cursor-pointer transition-all w-full flex flex-col md:flex-row items-center gap-6"
-                            style={{ boxShadow: '0 0 50px rgba(168, 85, 247, 0.35)' }}
-                        >
+                {/* FLAGSHIP PRODUCTS — the ecosystem apps */}
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="space-y-3">
+                    <p className="text-xs font-mono text-gray-500 text-center">APPS WITH REAL IMPACT</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* BUZZSTOP */}
+                        <Link to={createPageUrl('BuzzStop')}>
                             <motion.div
-                                animate={{ scale: [1, 1.1, 1] }}
-                                transition={{ repeat: Infinity, duration: 2 }}
+                                whileHover={{ scale: 1.02, y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-6 cursor-pointer transition-all h-full flex flex-col gap-3"
                             >
-                                <COOLASFUCKZap size={72} animate={true} />
+                                <COOLASFUCKZap size={48} animate={true} />
+                                <h3 className="text-lg font-black font-mono text-cyan-400">BUZZSTOP</h3>
+                                <p className="text-sm text-white font-bold">Cancel tinnitus with AI-designed frequencies</p>
+                                <p className="text-xs text-gray-400">Free • 3-layer neural cancellation</p>
                             </motion.div>
-                            <div className="text-center md:text-left flex-1">
-                                <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
-                                    <h3 className="text-3xl font-black font-mono text-purple-300" style={{ textShadow: '0 0 20px rgba(168,85,247,0.7)' }}>BUZZSTOP</h3>
-                                    <span className="text-[10px] font-mono bg-purple-500/20 border border-purple-500 text-purple-400 px-2 py-0.5">V2 • FREE</span>
-                                </div>
-                                <p className="text-white font-bold text-lg mb-1">Cancel your tinnitus with AI-designed audio</p>
-                                <p className="text-gray-400 text-sm font-mono">750 million people affected • Radar finds your exact Hz • 3-layer neural cancellation engine</p>
-                            </div>
-                            <div className="text-purple-400 font-black font-mono text-sm border-2 border-purple-500 px-5 py-3 whitespace-nowrap hover:bg-purple-500/10 transition-colors">
-                                START NOW →
-                            </div>
-                        </motion.div>
-                    </Link>
+                        </Link>
+
+                        {/* CB51 */}
+                        <Link to={createPageUrl('CB51')}>
+                            <motion.div
+                                whileHover={{ scale: 1.02, y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-6 cursor-pointer transition-all h-full flex flex-col gap-3"
+                            >
+                                <Radio className="w-12 h-12 text-cyan-400" />
+                                <h3 className="text-lg font-black font-mono text-cyan-400">CB51</h3>
+                                <p className="text-sm text-white font-bold">AI co-manager for artists</p>
+                                <p className="text-xs text-gray-400">Gigs • Contracts • Payments</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* PETSOUNDS51 */}
+                        <Link to={createPageUrl('PetSounds51')}>
+                            <motion.div
+                                whileHover={{ scale: 1.02, y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-6 cursor-pointer transition-all h-full flex flex-col gap-3"
+                            >
+                                <COOLASFUCKHeart size={48} animate={true} />
+                                <h3 className="text-lg font-black font-mono text-cyan-400">PETSOUNDS51</h3>
+                                <p className="text-sm text-white font-bold">Heal anxious pets with sound</p>
+                                <p className="text-xs text-gray-400">Peer-reviewed • Subscription</p>
+                            </motion.div>
+                        </Link>
+
+                        {/* SORTED */}
+                        <Link to={createPageUrl('Family51')}>
+                            <motion.div
+                                whileHover={{ scale: 1.02, y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-6 cursor-pointer transition-all h-full flex flex-col gap-3"
+                            >
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4L6 20V44H18V32H30V44H42V20L24 4Z" stroke="#06b6d4" strokeWidth="2" fill="none"/></svg>
+                                <h3 className="text-lg font-black font-mono text-cyan-400">SORTED</h3>
+                                <p className="text-sm text-white font-bold">Decode scary letters in seconds</p>
+                                <p className="text-xs text-gray-400">Subscription • Plain English</p>
+                            </motion.div>
+                        </Link>
+                    </div>
                 </motion.div>
 
-                {/* FOUR PATHS */}
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {/* QUICK LINKS */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="grid grid-cols-2 md:grid-cols-3 gap-3">
 
                     {/* AI51 */}
                     <Link to={createPageUrl('AI51')}>
-                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-red-500 hover:border-red-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(239, 68, 68, 0.2)' }}>
-                            <COOLASFUCKHeart size={48} animate={true} />
-                            <h3 className="text-lg font-black font-mono text-red-400">AI51</h3>
-                            <p className="text-xs text-gray-400 font-mono text-center">Voice • Listen • Real help</p>
+                        <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-4 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-2">
+                            <COOLASFUCKBrain size={36} animate={true} />
+                            <h3 className="text-sm font-black font-mono text-cyan-400">AI51</h3>
+                            <p className="text-[10px] text-gray-400 font-mono text-center">Talk • No agenda</p>
                         </motion.div>
                     </Link>
 
-                    {/* CB51 */}
-                    <Link to={createPageUrl('CB51')}>
-                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.2)' }}>
-                            <Radio className="w-12 h-12 text-cyan-400" />
-                            <h3 className="text-lg font-black font-mono text-cyan-400">CB51</h3>
-                            <p className="text-xs text-gray-400 font-mono text-center">Artist AI • Manage bands</p>
+                    {/* earth51 */}
+                    <Link to={createPageUrl('Earth51')}>
+                        <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-4 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-2">
+                            <COOLASFUCKGlobe size={36} animate={true} />
+                            <h3 className="text-sm font-black font-mono text-cyan-400">earth51</h3>
+                            <p className="text-[10px] text-gray-400 font-mono text-center">Kids • Litter scanner</p>
                         </motion.div>
                     </Link>
 
-                    {/* CLEAN EARTH */}
-                    <Link to={createPageUrl('NewCleanup')}>
-                        <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-green-500 hover:border-green-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.2)' }}>
-                            <COOLASFUCKGlobe size={48} animate={true} />
-                            <h3 className="text-lg font-black font-mono text-green-400">CLEAN</h3>
-                            <p className="text-xs text-gray-400 font-mono text-center">Litter → $P51 • GPS verified</p>
+                    {/* TRACKT */}
+                    <Link to={createPageUrl('Trackt')}>
+                        <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-4 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-2">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-400"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <h3 className="text-sm font-black font-mono text-cyan-400">TRACKT</h3>
+                            <p className="text-[10px] text-gray-400 font-mono text-center">RFID • Assets</p>
                         </motion.div>
                     </Link>
 
-                    {/* HEAL */}
-                    <Link to={createPageUrl('FrequencyChamber')}>
-                       <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.95 }} className="bg-black border-4 border-cyan-500 hover:border-cyan-400 p-6 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-3" style={{ boxShadow: '0 0 30px rgba(34, 211, 238, 0.2)' }}>
-                           <COOLASFUCKWaves size={48} animate={true} />
-                           <h3 className="text-lg font-black font-mono text-cyan-400">HEAL</h3>
-                           <p className="text-xs text-gray-400 font-mono text-center">432Hz / 528Hz • Free forever</p>
-                       </motion.div>
+                    {/* SHED51 */}
+                    <Link to={createPageUrl('Shed51')}>
+                        <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-4 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-2">
+                            <COOLASFUCKHeart size={36} animate={true} />
+                            <h3 className="text-sm font-black font-mono text-cyan-400">SHED51</h3>
+                            <p className="text-[10px] text-gray-400 font-mono text-center">For two • Connection</p>
+                        </motion.div>
                     </Link>
 
-                    {/* FAMILY51 */}
-                    <Link to={createPageUrl('Family51')} className="col-span-2 md:col-span-4">
-                       <motion.div whileHover={{ scale: 1.01, y: -2 }} whileTap={{ scale: 0.99 }} className="bg-black border-4 border-orange-500 hover:border-orange-400 p-6 cursor-pointer transition-all flex items-center gap-6" style={{ boxShadow: '0 0 30px rgba(249, 115, 22, 0.2)' }}>
-                           <div className="flex-shrink-0">
-                               <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4L6 20V44H18V32H30V44H42V20L24 4Z" stroke="#f97316" strokeWidth="2" fill="none"/><path d="M13 28L16 28L18 24L20 32L22 26L24 30L26 28H35" stroke="#ec4899" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
-                           </div>
-                           <div className="flex-1 text-left">
-                               <h3 className="text-lg font-black font-mono text-orange-400">FAMILY51</h3>
-                               <p className="text-xs text-gray-400 font-mono">Scary letter? Neighbour dispute? Bill you can't understand? — <span className="text-white">We decode it. We write your reply. Free.</span></p>
-                           </div>
-                           <div className="text-orange-400 font-mono font-black text-sm border border-orange-500 px-4 py-2 flex-shrink-0">GET HELP →</div>
-                       </motion.div>
+                    {/* PROF51 */}
+                    <Link to={createPageUrl('Prof51')}>
+                        <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="bg-black border-2 border-cyan-500/50 hover:border-cyan-500/80 p-4 cursor-pointer transition-all h-full flex flex-col items-center justify-center gap-2">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-400"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><circle cx="12" cy="7" r="4"/></svg>
+                            <h3 className="text-sm font-black font-mono text-cyan-400">PROF51</h3>
+                            <p className="text-[10px] text-gray-400 font-mono text-center">Students • AI co-manager</p>
+                        </motion.div>
                     </Link>
 
                 </motion.div>
