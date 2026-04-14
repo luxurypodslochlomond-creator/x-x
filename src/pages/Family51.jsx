@@ -15,6 +15,7 @@ import SortedAbout from '@/components/family51/SortedAbout';
 export default function Family51Page() {
   const [activeTool, setActiveTool] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showWhy, setShowWhy] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
 
   const handleToolOpen = (toolId) => {
@@ -32,7 +33,7 @@ export default function Family51Page() {
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
        <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-         <motion.button onClick={() => setActiveTool(null)} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+         <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
            <F51Mark />
            <div style={{ lineHeight: 1 }}>
              <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
@@ -40,9 +41,9 @@ export default function Family51Page() {
            </div>
          </motion.button>
 
-         {activeTool ? (
+         {activeTool || showWhy ? (
            <motion.button
-             onClick={() => setActiveTool(null)}
+             onClick={() => { setActiveTool(null); setShowWhy(false); }}
              whileTap={{ scale: 0.95 }}
              style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
            >
@@ -57,9 +58,13 @@ export default function Family51Page() {
 
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
-         {menuOpen && !activeTool && (
+         {menuOpen && !activeTool && !showWhy && (
            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(8,10,15,0.98)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 20px' }}>
              <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
+               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.08)', width: '100%', textAlign: 'left' }}>
+                 <WhyIcon />
+                 Why SORTED?
+               </button>
                <a href="/Family51Terms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                  <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
                  Terms of Service
@@ -79,8 +84,38 @@ export default function Family51Page() {
 
       <AnimatePresence mode="wait">
 
+         {/* ── WHY SECTION ────────────────────────────────────── */}
+         {showWhy && !activeTool && (
+          <motion.div key="why" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE PROBLEM</div>
+              <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
+                <span style={{ color: '#fff' }}>Official letters</span>{' '}
+                <span style={{ color: '#f97316' }}>terrify people.</span>
+              </h2>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
+              <ProblemCard icon="🏛️" title="Councils" desc="Planning refusals. Enforcement notices. Tax demands." />
+              <ProblemCard icon="💼" title="Employers" desc="Redundancy letters. Disciplinary notices. Contract changes." />
+              <ProblemCard icon="🏠" title="Landlords" desc="Eviction warnings. Deposit disputes. Rent increases." />
+              <ProblemCard icon="⚖️" title="Courts" desc="Summons. Judgments. Legal jargon you don't understand." />
+            </div>
+            <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
+              <p style={{ fontSize: 14, color: '#fff', margin: 0, lineHeight: 1.6 }}>
+                <strong>You freeze.</strong> Read it 10 times. Still don't understand. Panic.
+              </p>
+            </div>
+            <div style={{ marginTop: 40, textAlign: 'center' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE SOLUTION</div>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>
+                SORTED decodes it in <strong>plain English</strong>. Shows you what it means. Lists what to do next. You're not alone anymore.
+              </p>
+            </div>
+          </motion.div>
+         )}
+
          {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
-         {!activeTool && !isLocked && !menuOpen && (
+         {!activeTool && !isLocked && !menuOpen && !showWhy && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
             {/* HEADLINE — SHORT AND SHARP */}
@@ -280,5 +315,25 @@ function ConflictIcon({ color }) {
       <circle cx="23" cy="23" r="7" stroke={color} strokeWidth="1.5" fill="none" opacity="0.5" />
       <path d="M18 8v4M18 24v4M8 18h4M24 18h4" stroke={color} strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
     </svg>
+  );
+}
+
+function WhyIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="3" r="1" fill="currentColor" />
+      <path d="M8 5v4M5 14h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="2" y="7" width="12" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.2" fill="none" />
+    </svg>
+  );
+}
+
+function ProblemCard({ icon, title, desc }) {
+  return (
+    <div style={{ paddingLeft: 16, borderLeft: '2px solid rgba(249,115,22,0.3)' }}>
+      <div style={{ fontSize: 20, marginBottom: 6 }}>{icon}</div>
+      <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{title}</div>
+      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{desc}</p>
+    </div>
   );
 }
