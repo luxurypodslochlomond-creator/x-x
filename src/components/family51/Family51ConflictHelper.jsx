@@ -114,32 +114,54 @@ Return:
     <div className="space-y-5">
 
       {/* GEO SELECTOR */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
-        <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-      </div>
+       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+         <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
+         <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+       </div>
 
-      {/* CONFLICT TYPE */}
-      <div className="space-y-2">
-        <Label>TYPE OF CONFLICT</Label>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-          {CONFLICT_TYPES.map(t => (
-            <button
-              key={t.id}
-              onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
-              style={{
-                padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
-                background: conflictType === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
-                transition: 'all 0.15s',
-              }}
-            >
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
-              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
-            </button>
-          ))}
-        </div>
-      </div>
+       {/* GOAL - MOVED TO TOP */}
+       <div className="space-y-2">
+         <Label>WHAT DO YOU WANT TO ACHIEVE?</Label>
+         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+           {GOALS.map(g => (
+             <button
+               key={g.id}
+               onClick={() => setGoal(g.id)}
+               style={{
+                 padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+                 border: `1px solid ${goal === g.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
+                 background: goal === g.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                 transition: 'all 0.15s',
+               }}
+             >
+               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: goal === g.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{g.label}</p>
+               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{g.desc}</p>
+             </button>
+           ))}
+         </div>
+       </div>
+
+       {/* CONFLICT TYPE */}
+       <div className="space-y-2">
+         <Label>TYPE OF CONFLICT</Label>
+         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+           {CONFLICT_TYPES.map(t => (
+             <button
+               key={t.id}
+               onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
+               style={{
+                 padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+                 border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
+                 background: conflictType === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                 transition: 'all 0.15s',
+               }}
+             >
+               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
+               <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
+             </button>
+           ))}
+         </div>
+       </div>
 
       {/* WHAT HAPPENED */}
       <div className="space-y-2">
@@ -198,28 +220,6 @@ Return:
             ))}
           </div>
         )}
-      </div>
-
-      {/* GOAL */}
-      <div className="space-y-2">
-        <Label>WHAT DO YOU WANT TO ACHIEVE?</Label>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          {GOALS.map(g => (
-            <button
-              key={g.id}
-              onClick={() => setGoal(g.id)}
-              style={{
-                padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                border: `1px solid ${goal === g.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
-                background: goal === g.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
-                transition: 'all 0.15s',
-              }}
-            >
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: goal === g.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{g.label}</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{g.desc}</p>
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* ANALYSE */}
