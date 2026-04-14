@@ -2,59 +2,60 @@ export default function Family51PrivacyPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", padding: '40px 20px' }}>
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
-        <h1 style={{ fontSize: 32, fontWeight: 900, marginBottom: 30 }}>Privacy Policy</h1>
+        {/* Header */}
+        <div style={{ marginBottom: 40 }}>
+          <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 8, color: '#f97316' }}>SORTED</h1>
+          <p style={{ fontSize: 13, letterSpacing: '0.08em', color: 'rgba(255,255,255,0.5)' }}>WE'VE GOT YOU</p>
+        </div>
 
-        <section style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#f97316' }}>1. Data Collection</h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-            SORTED collects only the information you provide during use — letters, descriptions, and replies. We do not track your identity, location, or device data.
+        <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)', marginBottom: 32 }}>
+          Your privacy is real. We don't store your data. We don't sell it. We don't track you. That's not zero ego — that's just respect.
+        </p>
+
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>What We See</h2>
+          <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
+            You paste in a letter. We see it. Our AI reads it. That's all. We don't see who you are, where you live, or what device you're using. No tracking. No cookies. No ads.
           </p>
         </section>
 
-        <section style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#f97316' }}>2. How We Use Your Data</h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-            Your input is sent to our AI service to generate responses. We do not store your data beyond the current session. Nothing is logged, archived, or used for training.
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>What We Keep</h2>
+          <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
+            Nothing. Your letter gets processed and forgotten. We don't log it. We don't use it to train AI. It's gone the moment you leave the page.
           </p>
         </section>
 
-        <section style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#f97316' }}>3. Data Security</h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-            Data is transmitted using industry-standard encryption (HTTPS). We take reasonable steps to protect your information, but we cannot guarantee absolute security.
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>How We Talk to Our AI</h2>
+          <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
+            We send your letter to an AI service to decode it. That service sees it once. We don't sell your data to anyone. We don't rent it out. You're not a product.
           </p>
         </section>
 
-        <section style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#f97316' }}>4. Cookies & Local Storage</h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-            We use local browser storage only to track your free session count. No third-party tracking or advertising cookies are used.
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>Keeping It Safe</h2>
+          <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
+            We use encryption (HTTPS) to move your data. It's standard web security. Not bulletproof, but solid. If something goes wrong, we own it.
           </p>
         </section>
 
-        <section style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#f97316' }}>5. Third Parties</h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-            Your input is shared with our AI provider to generate responses. We do not sell, rent, or share your data with advertisers or other third parties.
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>Your Rights</h2>
+          <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
+            We don't keep anything, so there's nothing to delete. Your privacy is by design, not by policy.
           </p>
         </section>
 
-        <section style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#f97316' }}>6. Your Rights</h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-            Since we don't retain data after sessions, there is nothing to access, modify, or delete. Your privacy is by design.
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>If We Change This</h2>
+          <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
+            We'll update this policy and tell you. If you keep using SORTED, you agree to the new version.
           </p>
         </section>
 
-        <section style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: '#f97316' }}>7. Changes to This Policy</h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.8)' }}>
-            We may update this policy. Continued use of SORTED means you accept any changes.
-          </p>
-        </section>
-
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          Questions? Contact: <a href="mailto:family@uf51.love" style={{ color: '#f97316', textDecoration: 'none' }}>family@uf51.love</a>
+        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 50, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          Questions? <a href="mailto:family@uf51.love" style={{ color: '#f97316', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
         </p>
       </div>
     </div>
