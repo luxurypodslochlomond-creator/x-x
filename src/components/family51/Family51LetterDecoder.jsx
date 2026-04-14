@@ -45,7 +45,6 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       : `You are a compassionate UK citizens advice expert. A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
 
     const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
       prompt: promptText + `\n\nReturn:
 - what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
