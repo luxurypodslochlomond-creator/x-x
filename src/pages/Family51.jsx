@@ -55,8 +55,8 @@ export default function Family51Page() {
             </div>
             {selectedLocation && (
               <GeoSelector 
-                selectedLocation={selectedLocation} 
-                onLocationChange={setSelectedLocation}
+                geo={selectedLocation} 
+                onChange={setSelectedLocation}
                 accentColor="#f97316"
               />
             )}
@@ -237,9 +237,9 @@ export default function Family51Page() {
             transition={{ duration: 0.2 }}
             style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
           >
-            {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" onResult={recordUse} location={selectedLocation} />}
-            {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" onResult={recordUse} location={selectedLocation} />}
-            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" onResult={recordUse} location={selectedLocation} />}
+            {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" onResult={recordUse} />}
+            {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" onResult={recordUse} />}
+            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" onResult={recordUse} />}
           </motion.div>
         )}
 
