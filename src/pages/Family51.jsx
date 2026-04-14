@@ -5,6 +5,7 @@ import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
+import SortedAbout from '@/components/family51/SortedAbout';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -123,10 +124,12 @@ export default function Family51Page() {
               transition={{ delay: 0.35 }}
               style={{ marginTop: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}
             >
-              <TrustPill text="Data stays on your device" />
-              <TrustPill text="Works at 3am" />
+              <TrustPill text="Any language" />
+              <TrustPill text="All currencies" />
               <TrustPill text="Nothing stored" />
             </motion.div>
+
+            <SortedAbout />
 
             <SortedForLifeCard />
 
