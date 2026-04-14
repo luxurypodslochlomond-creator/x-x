@@ -282,6 +282,9 @@ const LayoutInner = ({ children, currentPageName }) => {
     metaTheme.content = isCB51 ? '#06b6d4' : '#22c55e';
 
     // Set Open Graph tags for social sharing
+    const isWristPage = currentPageName.startsWith('WristHealing');
+    const isSortedPage = currentPageName === 'Family51';
+    
     let ogImageUrl = '/api/functions/serveOGImage';
     if (isPS51Page) {
       ogImageUrl = '/api/functions/servePetSounds51OGImage';
@@ -290,9 +293,6 @@ const LayoutInner = ({ children, currentPageName }) => {
     } else if (isSortedPage) {
       ogImageUrl = '/api/functions/serveOGImage?brand=sorted';
     }
-    
-    const isWristPage = currentPageName.startsWith('WristHealing');
-    const isSortedPage = currentPageName === 'Family51';
 
     const ogTags = {
       'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : 'Universal Frequency 51',
