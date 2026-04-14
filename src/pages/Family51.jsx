@@ -94,11 +94,20 @@ export default function Family51Page() {
                 <span style={{ color: '#f97316' }}>terrify people.</span>
               </h2>
             </div>
+
+            {/* STATS CARDS */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 40 }}>
+              <StatCard number="7M+" label="UK adults in severe financial stress right now" />
+              <StatCard number="73%" label="of people who get bailiff visits have mental health problems" />
+              <StatCard number="£0" label="most people can afford for a solicitor to read a letter" />
+              <StatCard number="1in3" label="UK adults have ignored an official letter out of fear" color="#06b6d4" />
+            </div>
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
-              <ProblemCard icon="🏛️" title="Councils" desc="Planning refusals. Enforcement notices. Tax demands." />
-              <ProblemCard icon="💼" title="Employers" desc="Redundancy letters. Disciplinary notices. Contract changes." />
-              <ProblemCard icon="🏠" title="Landlords" desc="Eviction warnings. Deposit disputes. Rent increases." />
-              <ProblemCard icon="⚖️" title="Courts" desc="Summons. Judgments. Legal jargon you don't understand." />
+              <ProblemCard icon={<CouncilIcon />} title="Councils" desc="Planning refusals. Enforcement notices. Tax demands." />
+              <ProblemCard icon={<EmployerIcon />} title="Employers" desc="Redundancy letters. Disciplinary notices. Contract changes." />
+              <ProblemCard icon={<LandlordIcon />} title="Landlords" desc="Eviction warnings. Deposit disputes. Rent increases." />
+              <ProblemCard icon={<CourtIcon />} title="Courts" desc="Summons. Judgments. Legal jargon you don't understand." />
             </div>
             <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, padding: 20, textAlign: 'center', marginBottom: 40 }}>
               <p style={{ fontSize: 14, color: '#fff', margin: 0, lineHeight: 1.6 }}>
@@ -346,12 +355,64 @@ function EmailIcon() {
   );
 }
 
+function StatCard({ number, label, color = '#f97316' }) {
+  return (
+    <div style={{ background: 'rgba(249,115,22,0.08)', border: `1px solid ${color}30`, borderRadius: 12, padding: 16, textAlign: 'center' }}>
+      <div style={{ fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 900, color, marginBottom: 6 }}>{number}</div>
+      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.4 }}>{label}</p>
+    </div>
+  );
+}
+
 function ProblemCard({ icon, title, desc }) {
   return (
     <div style={{ paddingLeft: 16, borderLeft: '2px solid rgba(249,115,22,0.3)' }}>
-      <div style={{ fontSize: 20, marginBottom: 6 }}>{icon}</div>
+      <div style={{ fontSize: 24, marginBottom: 6 }}>{icon}</div>
       <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{title}</div>
       <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{desc}</p>
     </div>
+  );
+}
+
+// Custom problem icons
+function CouncilIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="4" y="6" width="16" height="12" rx="1" stroke="#f97316" strokeWidth="1.5" fill="none" />
+      <rect x="6" y="10" width="3" height="4" fill="#f97316" opacity="0.6" />
+      <rect x="10.5" y="9" width="3" height="5" fill="#f97316" opacity="0.6" />
+      <rect x="15" y="10" width="3" height="4" fill="#f97316" opacity="0.6" />
+      <path d="M8 6L8 4M12 6L12 4M16 6L16 4" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+    </svg>
+  );
+}
+
+function EmployerIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="8" width="18" height="11" rx="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
+      <circle cx="8" cy="6.5" r="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
+      <circle cx="12" cy="6.5" r="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
+      <circle cx="16" cy="6.5" r="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
+      <path d="M7 13v2M12 13v2M17 13v2" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
+    </svg>
+  );
+}
+
+function LandlordIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M4 20h16M7 20V9M17 20V9M10 20V11M14 20V11M12 5L5 9H19L12 5Z" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="14" r="1.5" fill="#f97316" opacity="0.6" />
+    </svg>
+  );
+}
+
+function CourtIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M6 4v4M12 4v4M18 4v4M4 9h16M5 9v9a2 2 0 002 2h10a2 2 0 002-2V9M9 13h6" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 17l2 2 4-4" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+    </svg>
   );
 }
