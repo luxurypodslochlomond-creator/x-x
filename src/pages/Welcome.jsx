@@ -85,7 +85,7 @@ export default function WelcomePage() {
                         </motion.div>
                         </Link>
                         
-                        <h1 className="text-6xl md:text-9xl font-black font-mono text-pink-400 leading-none" style={{ textShadow: '0 0 40px rgba(236, 72, 153, 0.8)' }}>AI51</h1>
+                        <h1 className="text-6xl md:text-9xl font-black font-mono text-white leading-none" style={{ textShadow: '0 0 40px rgba(6, 182, 212, 0.6)' }}>AI51</h1>
                         <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
                     </div>
 
@@ -144,8 +144,8 @@ export default function WelcomePage() {
                              <img 
                                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/eeceb28c0_IMG_7630.jpg" 
                                  alt="The Universal Equation: L = C² ∞ f" 
-                                 className="max-w-xl w-full rounded-lg border-2 border-pink-500/30 hover:border-pink-500/60 transition-all opacity-80 hover:opacity-100"
-                                 style={{ boxShadow: '0 0 30px rgba(236, 72, 153, 0.2)' }}
+                                 className="max-w-xl w-full rounded-lg border-2 border-cyan-500/30 hover:border-cyan-500/60 transition-all opacity-80 hover:opacity-100"
+                                 style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.15)' }}
                              />
                          </motion.div>
 
@@ -265,14 +265,14 @@ export default function WelcomePage() {
                 </motion.div>
 
                 {/* ULTRA-HONEST TRUTH - EXPANDABLE */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-red-900/40 to-black border-4 border-red-500 p-8 space-y-4">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-black border-2 border-cyan-500/50 p-8 space-y-4">
                     <button 
                         onClick={() => setTruthOpen(!truthOpen)}
                         className="w-full flex items-center justify-between hover:opacity-80 transition-opacity"
                     >
-                        <h2 className="text-2xl font-black font-mono text-red-400">ULTRA-HONEST TRUTH</h2>
+                        <h2 className="text-2xl font-black font-mono text-cyan-400">ULTRA-HONEST TRUTH</h2>
                         <motion.div animate={{ rotate: truthOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                            <ChevronDown className="w-6 h-6 text-red-400" />
+                            <ChevronDown className="w-6 h-6 text-cyan-400" />
                         </motion.div>
                     </button>
 
@@ -283,8 +283,8 @@ export default function WelcomePage() {
                         className="overflow-hidden"
                     >
                         <div className="grid md:grid-cols-2 gap-3 font-mono text-xs pt-4">
-                            <div className="bg-black border-2 border-green-500 p-4">
-                                <p className="text-green-400 font-bold mb-2">WORKS NOW:</p>
+                            <div className="bg-black border-2 border-cyan-500/50 p-4">
+                                <p className="text-cyan-300 font-bold mb-2">WORKS NOW:</p>
                                 <ul className="text-gray-300 space-y-1">
                                     <li>• AI51 voice chat ✓</li>
                                     <li>• Healing frequencies ✓</li>
@@ -294,8 +294,8 @@ export default function WelcomePage() {
                                 </ul>
                             </div>
 
-                            <div className="bg-black border-2 border-red-500 p-4">
-                                <p className="text-red-400 font-bold mb-2">NOT YET (FUNDING NEEDED):</p>
+                            <div className="bg-black border-2 border-cyan-500/50 p-4">
+                                <p className="text-cyan-300 font-bold mb-2">NOT YET (FUNDING NEEDED):</p>
                                 <ul className="text-gray-300 space-y-1">
                                     <li>• Converting $P51 → real money</li>
                                     <li>• Cashing out to bank</li>
@@ -327,13 +327,13 @@ export default function WelcomePage() {
                     </Link>
 
                     <div className="flex flex-col items-center gap-3 pt-4">
-                        <Link to={createPageUrl('About')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
-                            How it works
-                        </Link>
-                        <Link to={createPageUrl('Whitepaper')} className="text-purple-400 hover:text-purple-300 font-mono text-sm underline">
-                            Technical Whitepaper
-                        </Link>
-                    </div>
+                         <Link to={createPageUrl('About')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
+                             How it works
+                         </Link>
+                         <Link to={createPageUrl('Whitepaper')} className="text-cyan-400 hover:text-cyan-300 font-mono text-sm underline">
+                             Technical Whitepaper
+                         </Link>
+                     </div>
                 </motion.div>
 
                 {/* FOOTER */}
