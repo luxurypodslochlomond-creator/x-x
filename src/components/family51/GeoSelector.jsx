@@ -3,55 +3,78 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const geoOptions = [
-    { country: 'United Kingdom', jurisdiction: 'UK law', code: 'GB', flag: '🇬🇧' },
-    { country: 'USA (Eastern)', jurisdiction: 'US federal & state law', code: 'US-NY', flag: '🇺🇸' },
-    { country: 'USA (Pacific)', jurisdiction: 'US federal & state law', code: 'US-CA', flag: '🇺🇸' },
-    { country: 'Australia', jurisdiction: 'Australian law', code: 'AU', flag: '🇦🇺' },
-    { country: 'Canada', jurisdiction: 'Canadian law', code: 'CA', flag: '🇨🇦' },
-    { country: 'Ireland', jurisdiction: 'Irish law', code: 'IE', flag: '🇮🇪' },
-    { country: 'France', jurisdiction: 'French law', code: 'FR', flag: '🇫🇷' },
-    { country: 'Germany', jurisdiction: 'German law', code: 'DE', flag: '🇩🇪' },
-    { country: 'Netherlands', jurisdiction: 'Dutch law', code: 'NL', flag: '🇳🇱' },
-    { country: 'Spain', jurisdiction: 'Spanish law', code: 'ES', flag: '🇪🇸' },
-    { country: 'Italy', jurisdiction: 'Italian law', code: 'IT', flag: '🇮🇹' },
-    { country: 'Switzerland', jurisdiction: 'Swiss law', code: 'CH', flag: '🇨🇭' },
-    { country: 'New Zealand', jurisdiction: 'New Zealand law', code: 'NZ', flag: '🇳🇿' },
-    { country: 'Singapore', jurisdiction: 'Singapore law', code: 'SG', flag: '🇸🇬' },
-    { country: 'India', jurisdiction: 'Indian law', code: 'IN', flag: '🇮🇳' },
-    { country: 'International', jurisdiction: 'International law', code: 'INT', flag: '🌍' },
+    { country: 'United Kingdom', jurisdiction: 'UK law', code: 'GB' },
+    { country: 'USA (Eastern)', jurisdiction: 'US federal & state law', code: 'US-NY' },
+    { country: 'USA (Pacific)', jurisdiction: 'US federal & state law', code: 'US-CA' },
+    { country: 'Australia', jurisdiction: 'Australian law', code: 'AU' },
+    { country: 'Canada', jurisdiction: 'Canadian law', code: 'CA' },
+    { country: 'Ireland', jurisdiction: 'Irish law', code: 'IE' },
+    { country: 'France', jurisdiction: 'French law', code: 'FR' },
+    { country: 'Germany', jurisdiction: 'German law', code: 'DE' },
+    { country: 'Netherlands', jurisdiction: 'Dutch law', code: 'NL' },
+    { country: 'Spain', jurisdiction: 'Spanish law', code: 'ES' },
+    { country: 'Italy', jurisdiction: 'Italian law', code: 'IT' },
+    { country: 'Switzerland', jurisdiction: 'Swiss law', code: 'CH' },
+    { country: 'New Zealand', jurisdiction: 'New Zealand law', code: 'NZ' },
+    { country: 'Singapore', jurisdiction: 'Singapore law', code: 'SG' },
+    { country: 'India', jurisdiction: 'Indian law', code: 'IN' },
+    { country: 'International', jurisdiction: 'International law', code: 'INT' },
   ];
+
+  const filteredOptions = geoOptions.filter(o =>
+    o.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    o.code.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const currentGeo = geoOptions.find(o => o.code === geo.code) || geoOptions[0];
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          setSearchTerm('');
+        }}
         whileTap={{ scale: 0.96 }}
         style={{
           background: isOpen ? `${accentColor}15` : 'rgba(255,255,255,0.06)',
           border: `1px solid ${isOpen ? accentColor + '60' : accentColor + '25'}`,
           color: '#fff',
-          padding: '8px 12px',
+          padding: '8px 14px',
           fontSize: 12,
           fontWeight: 700,
           borderRadius: 8,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 10,
           transition: 'all 0.2s',
           letterSpacing: '0.03em',
           boxShadow: isOpen ? `0 0 20px ${accentColor}25` : 'none'
         }}
       >
-        <span style={{ fontSize: 16 }}>{currentGeo.flag}</span>
+        <span style={{
+          width: 20,
+          height: 20,
+          borderRadius: '50%',
+          background: accentColor + '30',
+          border: `1.5px solid ${accentColor}60`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 8,
+          fontWeight: 900,
+          color: accentColor
+        }}>
+          {currentGeo.code}
+        </span>
         <span style={{ maxWidth: 100, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {geo.country}
         </span>
-        <motion.span style={{ display: 'flex', alignItems: 'center', fontSize: 10 }} animate={{ rotate: isOpen ? 180 : 0 }}>
+        <motion.span style={{ display: 'flex', alignItems: 'center', fontSize: 10, opacity: 0.6 }} animate={{ rotate: isOpen ? 180 : 0 }}>
           ▼
         </motion.span>
       </motion.button>
@@ -71,31 +94,58 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
               background: 'rgba(10, 15, 26, 0.98)',
               border: `1px solid ${accentColor}40`,
               borderRadius: 12,
-              padding: 6,
-              maxHeight: 320,
+              padding: 10,
+              maxHeight: 340,
               overflowY: 'auto',
               zIndex: 50,
-              minWidth: 220,
+              minWidth: 260,
               boxShadow: `0 16px 40px rgba(0,0,0,0.6)`,
               backdropFilter: 'blur(12px)'
             }}
           >
-            {geoOptions.map((option) => (
+            {/* SEARCH BOX */}
+            <div style={{ marginBottom: 10, paddingBottom: 10, borderBottom: `1px solid ${accentColor}20` }}>
+              <input
+                type="text"
+                placeholder="Search location..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                autoFocus
+                style={{
+                  width: '100%',
+                  padding: '8px 10px',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${accentColor}25`,
+                  borderRadius: 6,
+                  color: '#fff',
+                  fontSize: 12,
+                  outline: 'none',
+                  fontFamily: 'inherit',
+                  transition: 'all 0.15s'
+                }}
+                onFocus={(e) => e.target.style.borderColor = accentColor + '50'}
+                onBlur={(e) => e.target.style.borderColor = accentColor + '25'}
+              />
+            </div>
+
+            {/* OPTIONS */}
+            {filteredOptions.length > 0 ? filteredOptions.map((option) => (
               <motion.button
                 key={option.code}
                 onClick={() => {
                   onChange(option);
                   setIsOpen(false);
+                  setSearchTerm('');
                 }}
-                whileHover={{ background: `${accentColor}15` }}
+                whileHover={{ background: `${accentColor}12` }}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 10,
+                  gap: 12,
                   width: '100%',
-                  padding: '10px 12px',
+                  padding: '10px 10px',
                   textAlign: 'left',
-                  background: geo.code === option.code ? `${accentColor}20` : 'transparent',
+                  background: geo.code === option.code ? `${accentColor}18` : 'transparent',
                   border: 'none',
                   color: geo.code === option.code ? accentColor : '#ccc',
                   cursor: 'pointer',
@@ -103,19 +153,38 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
                   fontWeight: geo.code === option.code ? 700 : 500,
                   borderRadius: 8,
                   transition: 'all 0.15s',
-                  marginBottom: 2
+                  marginBottom: 4
                 }}
               >
-                <span style={{ fontSize: 18, minWidth: 24 }}>{option.flag}</span>
+                <div style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: '50%',
+                  background: geo.code === option.code ? accentColor + '30' : 'rgba(255,255,255,0.06)',
+                  border: `1.5px solid ${geo.code === option.code ? accentColor + '60' : accentColor + '20'}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 9,
+                  fontWeight: 900,
+                  color: geo.code === option.code ? accentColor : 'rgba(255,255,255,0.4)',
+                  transition: 'all 0.15s'
+                }}>
+                  {option.code}
+                </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>{option.country}</div>
-                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', marginTop: 1 }}>{option.jurisdiction}</div>
+                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', marginTop: 2 }}>{option.jurisdiction}</div>
                 </div>
                 {geo.code === option.code && (
-                  <span style={{ fontSize: 11, color: accentColor, fontWeight: 700 }}>✓</span>
+                  <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} style={{ fontSize: 12, color: accentColor, fontWeight: 700 }}>✓</motion.span>
                 )}
               </motion.button>
-            ))}
+            )) : (
+              <div style={{ padding: '16px 10px', textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
+                No locations found
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
