@@ -7,6 +7,7 @@ import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import SortedAbout from '@/components/family51/SortedAbout';
+import GeoSelector from '@/components/family51/GeoSelector';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -16,6 +17,7 @@ export default function Family51Page() {
   const [activeTool, setActiveTool] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const { isLocked, remaining, recordUse } = useSortedUsage();
 
   const handleToolOpen = (toolId) => {
@@ -26,20 +28,40 @@ export default function Family51Page() {
 
   useEffect(() => {
     document.title = 'SORTED — We\'ve Got You';
+    
+    // Auto-detect location from timezone/language
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const lang = navigator.language;
+    
+    // Default to UK (most common for SORTED)
+    if (tz?.includes('London') || lang.startsWith('en-GB')) {
+      setSelectedLocation({ country: 'United Kingdom', code: 'GB', jurisdiction: 'English law' });
+    } else {
+      setSelectedLocation({ country: 'United Kingdom', code: 'GB', jurisdiction: 'English law' });
+    }
   }, []);
 
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
-       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-         <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-           <F51Mark />
-           <div style={{ lineHeight: 1 }}>
-             <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
-             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
-           </div>
-         </motion.button>
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+          <F51Mark />
+          <div style={{ lineHeight: 1, display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div>
+              <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
+              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
+            </div>
+            {selectedLocation && (
+              <GeoSelector 
+                selectedLocation={selectedLocation} 
+                onLocationChange={setSelectedLocation}
+                accentColor="#f97316"
+              />
+            )}
+          </div>
+        </motion.button>
 
          {activeTool || showWhy ? (
            <motion.button
@@ -215,9 +237,9 @@ export default function Family51Page() {
             transition={{ duration: 0.2 }}
             style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
           >
-            {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" onResult={recordUse} />}
-            {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" onResult={recordUse} />}
-            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" onResult={recordUse} />}
+            {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" onResult={recordUse} location={selectedLocation} />}
+            {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" onResult={recordUse} location={selectedLocation} />}
+            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" onResult={recordUse} location={selectedLocation} />}
           </motion.div>
         )}
 
