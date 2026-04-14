@@ -505,6 +505,15 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Support", url: createPageUrl("CB51Support"), icon: Users, description: "Get help" },
     ];
 
+    // SORTED MENU - Family51
+    const sortedNav = [
+      { title: "Decode a Letter", url: createPageUrl("Family51"), icon: FileText, highlight: true, description: "Plain English advice on scary official letters" },
+      { title: "Write a Reply", url: createPageUrl("Family51"), icon: Mail, highlight: true, description: "Draft responses to councils, employers, courts" },
+      { title: "Resolve Conflict", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Navigate disputes and disagreements" },
+      { title: "Terms", url: createPageUrl("Family51"), icon: Scale, description: "Service terms" },
+      { title: "Privacy", url: createPageUrl("Family51"), icon: Eye, description: "Data protection" },
+    ];
+
     const adminNav = user?.role === 'admin' ? [
       { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
       { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, highlight: true, description: "Device intel for grants" },
@@ -529,10 +538,10 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, highlight: true, description: "Generate Instagram flyers" }
     ] : [];
 
-    return { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, adminNav };
+    return { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, sortedNav, adminNav };
   }, [user, archiveSearch]);
 
-  const { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, adminNav } = navs;
+  const { healNav, earnCreateNav, learnNav, archiveNav, filteredArchiveNav, researchNav, trustNav, scottNav, tracktNav, tracktNavShort, ps51Nav, cb51Nav, sortedNav, adminNav } = navs;
 
   const isActivePage = (url) => {
     const navPath = new URL(url, window.location.origin).pathname;
@@ -672,6 +681,8 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </>
                           ) : isTracktPage ? (
                             <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                          ) : currentPageName === 'Family51' ? (
+                            <NavSection title="SORTED" color="cyan" items={sortedNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : (
                             <>
                               <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
@@ -773,6 +784,8 @@ const LayoutInner = ({ children, currentPageName }) => {
               </>
             ) : isTracktPage ? (
               <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} defaultOpen={true} />
+            ) : currentPageName === 'Family51' ? (
+              <NavSection title="SORTED" color="cyan" items={sortedNav} isActivePage={isActivePage} defaultOpen={true} />
             ) : (
               <>
                 <NavSection title="HEAL" color="pink" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
