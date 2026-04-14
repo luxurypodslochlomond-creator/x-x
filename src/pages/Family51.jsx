@@ -127,7 +127,7 @@ export default function Family51Page() {
               transition={{ delay: 0.45 }}
               style={{ marginTop: 28, textAlign: 'center', padding: '16px 20px', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, background: 'rgba(249,115,22,0.04)' }}
             >
-              <p style={{ fontSize: 12, fontWeight: 800, color: '#f97316', letterSpacing: '0.1em', margin: '0 0 4px' }}>SORTED CHAMPION — COMING SOON</p>
+              <p style={{ fontSize: 12, fontWeight: 800, color: '#f97316', letterSpacing: '0.1em', margin: '0 0 4px' }}>SORTED FOR LIFE — COMING SOON</p>
               <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Full case memory. See your issue through to the end. Never repeat yourself to the AI again.</p>
             </motion.div>
 
