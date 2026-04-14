@@ -91,70 +91,28 @@ export default function WelcomePage() {
 
                     <div className="space-y-8">
 
-                         {/* ECOSYSTEM INTRO — connected tools for real impact */}
+                         {/* HERO COPY — minimal, direct */}
                           <motion.div
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.15 }}
-                              className="space-y-3 max-w-2xl mx-auto"
+                              className="space-y-3 max-w-2xl mx-auto text-center"
                           >
                               <p className="text-white text-2xl md:text-3xl font-bold leading-snug">
-                                  Real healing. Real tools. <br />
-                                  <span className="text-cyan-400">Your data. Your terms.</span>
-                              </p>
-                              <p className="text-gray-400 text-base leading-relaxed">
-                                  Frequencies that work. Music you can trust. Letters decoded. Planet cleaned. 
-                                  <br />
-                                  <span className="text-cyan-300 font-semibold">100% open source. Works offline. Nothing stored.</span>
-                              </p>
-                          </motion.div>
+                                   Real healing. Real tools. <br />
+                                   <span className="text-cyan-400">Your data. Your terms.</span>
+                               </p>
+                               <p className="text-gray-400 text-base leading-relaxed">
+                                   100% open source. Works offline. Nothing stored.
+                               </p>
+                           </motion.div>
 
-                         {/* ECOSYSTEM INTRO — the three pillars */}
-                         <motion.div
-                             initial={{ opacity: 0 }}
-                             animate={{ opacity: 1 }}
-                             transition={{ delay: 0.25 }}
-                             className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
-                         >
-                             {[
-                                 { Icon: COOLASFUCKWaves, title: 'HEAL', desc: 'Tinnitus. Pain. Anti-aging. Wrist recovery. Free + premium protocols.', url: 'FrequencyChamber', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
-                                 { Icon: COOLASFUCKBrain, title: 'CREATE', desc: 'Upload music. Keep 90%. Artist-first. No middleman. Real payouts.', url: 'ForMusicians', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
-                                 { Icon: COOLASFUCKGlobe, title: 'IMPACT', desc: 'Clean Earth. Earn P51 tokens. AI-verified proof. Real change.', url: 'NewCleanup', borderClass: 'border-cyan-500/30 hover:border-cyan-500/70', textClass: 'text-cyan-400' },
-                             ].map(item => (
-                                 <Link key={item.title} to={createPageUrl(item.url)}>
-                                     <motion.div
-                                         whileHover={{ y: -3 }}
-                                         className={`p-5 rounded-xl bg-black/50 border ${item.borderClass} transition-all h-full space-y-3`}
-                                     >
-                                         <item.Icon size={40} animate={true} />
-                                         <p className={`${item.textClass} font-bold text-base`}>{item.title}</p>
-                                         <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                                     </motion.div>
-                                 </Link>
-                             ))}
-                         </motion.div>
-
-                         {/* THE EQUATION — for those who want to go deeper */}
-                         <motion.div 
-                             initial={{ opacity: 0, scale: 0.95 }}
-                             animate={{ opacity: 1, scale: 1 }}
-                             transition={{ delay: 0.35 }}
-                             className="flex justify-center"
-                         >
-                             <img 
-                                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/eeceb28c0_IMG_7630.jpg" 
-                                 alt="The Universal Equation: L = C² ∞ f" 
-                                 className="max-w-xl w-full rounded-lg border-2 border-cyan-500/30 hover:border-cyan-500/60 transition-all opacity-80 hover:opacity-100"
-                                 style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.15)' }}
-                             />
-                         </motion.div>
-
-                     </div>
+                      </div>
                 </motion.div>
 
                 {/* FLAGSHIP PRODUCTS — the ecosystem apps */}
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="space-y-3">
-                    <p className="text-xs font-mono text-gray-500 text-center">APPS WITH REAL IMPACT</p>
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="space-y-3">
+                    <p className="text-xs font-mono text-gray-500 text-center">TOOLS YOU CAN USE NOW</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* BUZZSTOP */}
                         <Link to={createPageUrl('BuzzStop')}>
@@ -212,6 +170,48 @@ export default function WelcomePage() {
                             </motion.div>
                         </Link>
                     </div>
+                </motion.div>
+
+                {/* THE THREE PILLARS — why this matters */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 }}
+                    className="space-y-3"
+                >
+                    <p className="text-xs font-mono text-gray-500 text-center">THE MISSION</p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {[
+                            { Icon: COOLASFUCKWaves, title: 'HEAL', desc: 'Frequencies for tinnitus, pain, aging, wrist recovery. Some free. Some paid.' },
+                            { Icon: COOLASFUCKBrain, title: 'CREATE', desc: 'Upload music. Keep 90%. No middleman exploiting your work.' },
+                            { Icon: COOLASFUCKGlobe, title: 'IMPACT', desc: 'Pick up litter. Earn tokens. Real change, AI-verified.' },
+                        ].map(item => (
+                            <motion.div
+                                key={item.title}
+                                whileHover={{ y: -3 }}
+                                className="p-5 rounded-xl bg-black/50 border border-cyan-500/30 hover:border-cyan-500/70 transition-all h-full space-y-3"
+                            >
+                                <item.Icon size={40} animate={true} />
+                                <p className="text-cyan-400 font-bold text-base">{item.title}</p>
+                                <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* THE EQUATION — for those who want to go deeper */}
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.45 }}
+                    className="flex justify-center"
+                >
+                    <img 
+                        src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6889f31e76713b9cd47e043c/eeceb28c0_IMG_7630.jpg" 
+                        alt="The Universal Equation: L = C² ∞ f" 
+                        className="max-w-xl w-full rounded-lg border-2 border-cyan-500/30 hover:border-cyan-500/60 transition-all opacity-80 hover:opacity-100"
+                        style={{ boxShadow: '0 0 30px rgba(6, 182, 212, 0.15)' }}
+                    />
                 </motion.div>
 
                 {/* QUICK LINKS */}
