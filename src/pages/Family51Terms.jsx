@@ -1,6 +1,6 @@
 export default function Family51TermsPage() {
   return (
-    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", padding: '40px 20px' }}>
+    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", padding: '40px 20px', fontSize: '16px', lineHeight: 1.6 }}>
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
         {/* Header */}
         <div style={{ marginBottom: 40 }}>

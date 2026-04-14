@@ -244,9 +244,10 @@ function TrustPill({ text }) {
 function F51Mark() {
   return (
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-      <rect x="1" y="1" width="28" height="28" rx="7" stroke="#f97316" strokeWidth="1.5" fill="none" />
-      <path d="M6 19L9 19L10 16L12 22L13.5 17L15 20L16.5 19H24" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <path d="M8 9h14M8 13h9" stroke="rgba(249,115,22,0.3)" strokeWidth="1.5" strokeLinecap="round" />
+      <rect x="2" y="4" width="26" height="22" rx="4" stroke="#f97316" strokeWidth="1.5" fill="none" />
+      <path d="M6 11h18M6 16h18" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+      <path d="M10 20h10" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="24" cy="8" r="4" fill="#f97316" />
     </svg>
   );
 }
