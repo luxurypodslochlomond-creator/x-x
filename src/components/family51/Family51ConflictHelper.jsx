@@ -3,66 +3,62 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
 const CONFLICT_TYPES = [
-  { id: 'neighbour', label: 'NEIGHBOUR DISPUTE', desc: 'Noise, boundaries, shared areas' },
-  { id: 'workplace', label: 'WORKPLACE ISSUE', desc: 'Colleague or management conflict' },
-  { id: 'landlord', label: 'LANDLORD / TENANT', desc: 'Deposit, repairs, eviction threat' },
-  { id: 'family_legal', label: 'FAMILY / LEGAL', desc: 'Custody, inheritance, family dispute' },
-  { id: 'consumer', label: 'CONSUMER COMPLAINT', desc: 'Bad service, goods, refund refused' },
-  { id: 'other', label: 'OTHER CONFLICT', desc: 'Something else' },
+  { id: 'neighbour', label: 'NEIGHBOUR',  desc: 'Noise, boundaries, shared areas' },
+  { id: 'workplace', label: 'WORKPLACE',  desc: 'Colleague or management' },
+  { id: 'landlord',  label: 'LANDLORD',   desc: 'Deposit, repairs, eviction' },
+  { id: 'family',    label: 'FAMILY',     desc: 'Custody, inheritance, dispute' },
+  { id: 'consumer',  label: 'CONSUMER',   desc: 'Bad service, refund refused' },
+  { id: 'other',     label: 'OTHER',      desc: 'Something else' },
 ];
 
 const GOALS = [
-  { id: 'deescalate', label: 'De-escalate it', desc: 'Keep it calm and civil' },
-  { id: 'stand_firm', label: 'Stand my ground', desc: 'Assert my rights firmly' },
-  { id: 'document', label: 'Document & protect myself', desc: 'Create a paper trail' },
-  { id: 'resolve', label: 'Resolve it fairly', desc: 'Find a workable solution' },
+  { id: 'deescalate', label: 'DE-ESCALATE',    desc: 'Keep it calm and civil' },
+  { id: 'stand_firm', label: 'STAND MY GROUND', desc: 'Assert my rights firmly' },
+  { id: 'document',   label: 'DOCUMENT IT',     desc: 'Create a paper trail' },
+  { id: 'resolve',    label: 'RESOLVE IT',      desc: 'Find a fair solution' },
 ];
 
-export default function Family51ConflictHelper() {
+export default function Family51ConflictHelper({ accentColor = '#a855f7' }) {
   const [conflictType, setConflictType] = useState('');
-  const [whatHappened, setWhatHappened] = useState('');
-  const [goal, setGoal] = useState('deescalate');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [copied, setCopied] = useState('');
+  const [what, setWhat]                 = useState('');
+  const [goal, setGoal]                 = useState('deescalate');
+  const [loading, setLoading]           = useState(false);
+  const [result, setResult]             = useState(null);
+  const [copied, setCopied]             = useState('');
 
   const analyse = async () => {
-    if (!whatHappened.trim()) return;
+    if (!what.trim() || loading) return;
     setLoading(true);
     setResult(null);
 
-    const selectedConflict = CONFLICT_TYPES.find(t => t.id === conflictType);
-    const selectedGoal = GOALS.find(g => g.id === goal);
-
-    const prompt = `You are a calm, experienced conflict resolution advisor in the UK. Someone has come to you with a difficult situation and needs practical guidance.
-
-CONFLICT TYPE: ${selectedConflict?.label || 'Not specified'}
-THEIR GOAL: ${selectedGoal?.label} — ${selectedGoal?.desc}
-
-WHAT HAPPENED:
-${whatHappened}
-
-Please provide:
-1. SITUATION ASSESSMENT - What's really going on here (2-3 sentences, honest and fair to all sides)
-2. YOUR LEGAL POSITION - What rights or protections they have (UK context, be accurate but note you're not a solicitor)
-3. RECOMMENDED RESPONSE APPROACH - How to handle this (3 specific steps matching their goal)
-4. WHAT TO SAY - An exact script or message they can use right now (adapt to their goal)
-5. WHAT NOT TO DO - 2-3 things that could make it worse
-6. IF IT ESCALATES - What their next step would be if this doesn't resolve it
-
-Be warm but realistic. Don't take sides unfairly but do protect their position.`;
+    const ct = CONFLICT_TYPES.find(t => t.id === conflictType);
+    const gt = GOALS.find(g => g.id === goal);
 
     const response = await base44.integrations.Core.InvokeLLM({
-      prompt,
+      prompt: `You are a calm, experienced UK conflict resolution advisor.
+
+CONFLICT TYPE: ${ct?.label || 'Not specified'}
+GOAL: ${gt?.label} — ${gt?.desc}
+
+WHAT HAPPENED:
+${what}
+
+Return:
+- situation_assessment: Honest, fair 2-3 sentence read of the situation
+- legal_position: Their UK legal rights/protections (accurate, acknowledge you're not a solicitor)
+- recommended_steps: Array of 3 specific steps matching their goal
+- what_to_say: Exact script or message they can use right now
+- what_not_to_do: Array of 2-3 things that could make it worse
+- if_it_escalates: What their next step would be if unresolved`,
       response_json_schema: {
         type: 'object',
         properties: {
           situation_assessment: { type: 'string' },
-          legal_position: { type: 'string' },
-          recommended_steps: { type: 'array', items: { type: 'string' } },
-          what_to_say: { type: 'string' },
-          what_not_to_do: { type: 'array', items: { type: 'string' } },
-          if_it_escalates: { type: 'string' },
+          legal_position:       { type: 'string' },
+          recommended_steps:    { type: 'array', items: { type: 'string' } },
+          what_to_say:          { type: 'string' },
+          what_not_to_do:       { type: 'array', items: { type: 'string' } },
+          if_it_escalates:      { type: 'string' },
         },
       },
     });
@@ -74,28 +70,29 @@ Be warm but realistic. Don't take sides unfairly but do protect their position.`
   const copy = (text, key) => {
     navigator.clipboard.writeText(text);
     setCopied(key);
-    setTimeout(() => setCopied(''), 2000);
+    setTimeout(() => setCopied(''), 2200);
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
 
       {/* CONFLICT TYPE */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">WHAT KIND OF CONFLICT?</label>
-        <div className="grid grid-cols-2 gap-2">
+        <Label>TYPE OF CONFLICT</Label>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
           {CONFLICT_TYPES.map(t => (
             <button
               key={t.id}
               onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
-              className={`p-3 border text-left transition-all ${
-                conflictType === t.id
-                  ? 'border-purple-500 bg-purple-500/10'
-                  : 'border-white/10 hover:border-white/30'
-              }`}
+              style={{
+                padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+                border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
+                background: conflictType === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                transition: 'all 0.15s',
+              }}
             >
-              <p className={`font-mono text-xs font-bold ${conflictType === t.id ? 'text-purple-400' : 'text-gray-400'}`}>{t.label}</p>
-              <p className="text-gray-600 text-xs">{t.desc}</p>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
+              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
             </button>
           ))}
         </div>
@@ -103,129 +100,118 @@ Be warm but realistic. Don't take sides unfairly but do protect their position.`
 
       {/* WHAT HAPPENED */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">WHAT HAPPENED? TELL US EVERYTHING.</label>
+        <Label>WHAT HAPPENED — TELL US EVERYTHING</Label>
         <textarea
-          value={whatHappened}
-          onChange={e => setWhatHappened(e.target.value)}
-          placeholder="Just tell us the whole story in your own words. Don't worry about how you say it. Include what they did, what you did, any history, what's been said. The more detail, the better help we can give you."
-          className="w-full h-44 bg-black border-2 border-white/20 focus:border-purple-500 text-white text-sm p-4 resize-none outline-none font-mono placeholder-gray-700 transition-colors"
+          value={what}
+          onChange={e => setWhat(e.target.value)}
+          placeholder="Just tell us the whole story. Who are the people involved? What happened? What's been said or done? Any history? Don't filter it — the more detail you give us, the better help we can give you."
+          style={{
+            width: '100%', height: 160, background: 'rgba(255,255,255,0.03)',
+            border: `1px solid ${what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+            borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
+            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+            transition: 'border-color 0.2s', boxSizing: 'border-box',
+          }}
+          onFocus={e => e.target.style.borderColor = accentColor + '80'}
+          onBlur={e => e.target.style.borderColor = what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
         />
       </div>
 
       {/* GOAL */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">WHAT DO YOU WANT TO ACHIEVE?</label>
-        <div className="grid grid-cols-2 gap-2">
+        <Label>WHAT DO YOU WANT TO ACHIEVE?</Label>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {GOALS.map(g => (
             <button
               key={g.id}
               onClick={() => setGoal(g.id)}
-              className={`p-3 border text-left transition-all ${
-                goal === g.id
-                  ? 'border-purple-500 bg-purple-500/10'
-                  : 'border-white/10 hover:border-white/30'
-              }`}
+              style={{
+                padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+                border: `1px solid ${goal === g.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
+                background: goal === g.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                transition: 'all 0.15s',
+              }}
             >
-              <p className={`font-mono text-xs font-bold ${goal === g.id ? 'text-purple-400' : 'text-gray-400'}`}>{g.label}</p>
-              <p className="text-gray-600 text-xs">{g.desc}</p>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: goal === g.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{g.label}</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{g.desc}</p>
             </button>
           ))}
         </div>
       </div>
 
-      {/* ANALYSE BUTTON */}
+      {/* ANALYSE */}
       <motion.button
         onClick={analyse}
-        disabled={!whatHappened.trim() || loading}
-        whileHover={!loading && whatHappened.trim() ? { scale: 1.02 } : {}}
-        whileTap={!loading && whatHappened.trim() ? { scale: 0.98 } : {}}
-        className={`w-full py-4 font-black font-mono text-lg tracking-widest border-2 transition-all ${
-          whatHappened.trim() && !loading
-            ? 'border-purple-500 text-purple-400 hover:bg-purple-500/10 cursor-pointer'
-            : 'border-white/10 text-gray-700 cursor-not-allowed'
-        }`}
+        disabled={!what.trim() || loading}
+        whileTap={!loading && what.trim() ? { scale: 0.97 } : {}}
+        style={{
+          width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
+          fontWeight: 800, letterSpacing: '0.12em', cursor: what.trim() && !loading ? 'pointer' : 'not-allowed',
+          border: `1px solid ${what.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+          background: what.trim() ? `${accentColor}15` : 'transparent',
+          color: what.trim() ? accentColor : 'rgba(255,255,255,0.2)',
+          transition: 'all 0.2s',
+        }}
       >
-        {loading ? (
-          <div className="flex items-center justify-center gap-3">
-            <motion.div className="w-2 h-2 rounded-full bg-purple-400" animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 0.8, repeat: Infinity }} />
-            <span>ANALYSING YOUR SITUATION...</span>
-          </div>
-        ) : 'GET MY CONFLICT PLAN →'}
+        {loading ? <Spinner color={accentColor} text="ANALYSING YOUR SITUATION" /> : 'GET MY CONFLICT PLAN'}
       </motion.button>
 
       {/* RESULT */}
       <AnimatePresence>
         {result && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
-          >
-            {/* SITUATION ASSESSMENT */}
-            <Block label="SITUATION ASSESSMENT" color="purple">
-              <p className="text-white text-sm leading-relaxed">{result.situation_assessment}</p>
-            </Block>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
-            {/* LEGAL POSITION */}
-            <Block label="YOUR LEGAL POSITION" color="cyan">
-              <p className="text-white text-sm leading-relaxed">{result.legal_position}</p>
-              <p className="text-gray-600 text-xs mt-2 italic">This is general guidance, not legal advice. For complex cases, seek a solicitor.</p>
-            </Block>
+            <Card label="SITUATION ASSESSMENT" color={accentColor}>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
+            </Card>
 
-            {/* RECOMMENDED STEPS */}
-            <Block label="WHAT TO DO" color="green">
-              <ol className="space-y-2">
+            <Card label="YOUR LEGAL POSITION" color="#06b6d4">
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', marginTop: 8, fontStyle: 'italic' }}>General guidance only — not legal advice. For complex matters, seek a solicitor.</p>
+            </Card>
+
+            <Card label="WHAT TO DO" color="#22c55e">
+              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {result.recommended_steps?.map((step, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="text-green-400 font-black font-mono text-sm flex-shrink-0 mt-0.5">{i + 1}.</span>
-                    <p className="text-white text-sm leading-relaxed">{step}</p>
+                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55 }}>{step}</span>
                   </li>
                 ))}
               </ol>
-            </Block>
+            </Card>
 
-            {/* WHAT TO SAY */}
             {result.what_to_say && (
-              <Block label="WHAT TO SAY / SEND" color="purple">
-                <pre className="text-gray-300 text-sm whitespace-pre-wrap font-sans leading-relaxed">{result.what_to_say}</pre>
-                <motion.button
-                  onClick={() => copy(result.what_to_say, 'say')}
-                  whileTap={{ scale: 0.95 }}
-                  className="mt-3 px-4 py-2 border border-purple-500/40 text-purple-400 font-mono text-xs hover:bg-purple-500/10 transition-all"
-                >
-                  {copied === 'say' ? '✓ COPIED' : 'COPY THIS →'}
+              <Card label="WHAT TO SAY / SEND" color={accentColor}>
+                <pre style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: '0 0 12px' }}>{result.what_to_say}</pre>
+                <motion.button onClick={() => copy(result.what_to_say, 'say')} whileTap={{ scale: 0.95 }} style={{ padding: '8px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
+                  {copied === 'say' ? 'COPIED' : 'COPY THIS'}
                 </motion.button>
-              </Block>
+              </Card>
             )}
 
-            {/* WHAT NOT TO DO */}
-            <Block label="WHAT NOT TO DO" color="red">
-              {result.what_not_to_do?.map((item, i) => (
-                <div key={i} className="flex items-start gap-2">
-                  <span className="text-red-400 text-xs mt-0.5">✕</span>
-                  <p className="text-gray-300 text-sm">{item}</p>
-                </div>
-              ))}
-            </Block>
+            <Card label="WHAT NOT TO DO" color="#ef4444">
+              <div className="space-y-2">
+                {result.what_not_to_do?.map((item, i) => (
+                  <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <span style={{ color: '#ef4444', fontSize: 10, paddingTop: 3 }}>X</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
 
-            {/* IF IT ESCALATES */}
             {result.if_it_escalates && (
-              <Block label="IF IT ESCALATES" color="yellow">
-                <p className="text-white text-sm leading-relaxed">{result.if_it_escalates}</p>
-              </Block>
+              <Card label="IF IT ESCALATES" color="#eab308">
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_it_escalates}</p>
+              </Card>
             )}
 
-            <div className="flex gap-3 pt-2">
-              <motion.button
-                onClick={() => { setResult(null); setWhatHappened(''); setConflictType(''); }}
-                whileTap={{ scale: 0.95 }}
-                className="flex-1 py-3 border-2 border-white/20 hover:border-white/40 text-gray-500 hover:text-white font-mono text-xs tracking-widest transition-all"
-              >
-                NEW SITUATION
-              </motion.button>
-            </div>
+            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.35)' }}>
+              NEW SITUATION
+            </motion.button>
 
-            <p className="text-gray-700 font-mono text-xs text-center">Nothing stored. Nothing seen. Yours alone. ♾️</p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', letterSpacing: '0.05em' }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -233,19 +219,25 @@ Be warm but realistic. Don't take sides unfairly but do protect their position.`
   );
 }
 
-function Block({ label, color, children }) {
-  const colors = {
-    purple: 'border-purple-500/40 text-purple-400',
-    cyan: 'border-cyan-500/40 text-cyan-400',
-    green: 'border-green-500/40 text-green-400',
-    red: 'border-red-500/40 text-red-400',
-    yellow: 'border-yellow-500/40 text-yellow-400',
-  };
-  const c = colors[color] || colors.purple;
+function Label({ children }) {
+  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: 0 }}>{children}</p>;
+}
+
+function Card({ label, color, children }) {
   return (
-    <div className={`border ${c} p-5 space-y-3`}>
-      <p className={`font-mono text-xs tracking-widest ${c.split(' ')[1]}`}>{label}</p>
+    <div style={{ border: `1px solid ${color}25`, borderRadius: 12, padding: '14px 18px', background: `${color}06` }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: color + 'cc', marginBottom: 10 }}>{label}</p>
       {children}
     </div>
+  );
+}
+
+function Spinner({ color, text }) {
+  return (
+    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+      <motion.span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: color }}
+        animate={{ scale: [1, 1.6, 1] }} transition={{ duration: 0.7, repeat: Infinity }} />
+      {text}
+    </span>
   );
 }

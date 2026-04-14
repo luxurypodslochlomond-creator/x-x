@@ -2,70 +2,60 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
-const TONES = [
-  { id: 'firm', label: 'FIRM & CLEAR', desc: 'Professional. No pushover.' },
-  { id: 'calm', label: 'CALM & FACTUAL', desc: 'De-escalate. Keep it neutral.' },
-  { id: 'urgent', label: 'URGENT & ASSERTIVE', desc: 'Make clear this needs action.' },
-  { id: 'formal', label: 'FORMAL & LEGAL', desc: 'Official language. Maximum weight.' },
-];
-
 const SITUATIONS = [
-  'Disputing a bill or charge',
-  'Responding to a landlord',
-  'Replying to a debt collector',
-  'Challenging a council decision',
-  'Responding to an employer/HR',
-  'Writing to a neighbour about dispute',
-  'Appealing a fine or penalty',
-  'Requesting information or rights',
-  'Other',
+  'Disputing a bill', 'Replying to landlord', 'Debt collector',
+  'Council decision', 'Employer / HR', 'Neighbour dispute',
+  'Appeal a fine', 'Request my rights', 'Other',
 ];
 
-export default function Family51ReplyWriter() {
+const TONES = [
+  { id: 'firm',   label: 'FIRM',    desc: 'Professional. No pushover.' },
+  { id: 'calm',   label: 'CALM',    desc: 'Neutral. De-escalate.' },
+  { id: 'urgent', label: 'URGENT',  desc: 'Assert. Make them act.' },
+  { id: 'formal', label: 'FORMAL',  desc: 'Legal weight.' },
+];
+
+export default function Family51ReplyWriter({ accentColor = '#06b6d4' }) {
   const [situation, setSituation] = useState('');
-  const [context, setContext] = useState('');
-  const [tone, setTone] = useState('firm');
-  const [yourName, setYourName] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [copied, setCopied] = useState(false);
+  const [context, setContext]     = useState('');
+  const [tone, setTone]           = useState('firm');
+  const [name, setName]           = useState('');
+  const [loading, setLoading]     = useState(false);
+  const [result, setResult]       = useState(null);
+  const [copied, setCopied]       = useState(false);
 
   const write = async () => {
-    if (!context.trim()) return;
+    if (!context.trim() || loading) return;
     setLoading(true);
     setResult(null);
 
-    const selectedTone = TONES.find(t => t.id === tone);
-
-    const prompt = `You are an expert at writing clear, effective letters and responses for ordinary people dealing with difficult situations in the UK.
-
-SITUATION TYPE: ${situation || 'Not specified'}
-TONE REQUESTED: ${selectedTone?.label} — ${selectedTone?.desc}
-THEIR NAME: ${yourName || '[Your Name]'}
-
-WHAT THEY NEED TO RESPOND TO / CONTEXT:
-${context}
-
-Write a complete, ready-to-send letter/response. It should:
-- Be ${selectedTone?.id === 'formal' ? 'formally' : 'professionally'} structured
-- Be firm, clear and protect their position
-- Avoid emotional language that could be used against them
-- Include appropriate greetings and sign-off
-- Be ready to copy and paste immediately
-- Be realistic and not make false claims
-- Reference any rights or protections where relevant (UK law where applicable)
-
-Return a subject line and the full letter body.`;
+    const t = TONES.find(x => x.id === tone);
 
     const response = await base44.integrations.Core.InvokeLLM({
-      prompt,
+      prompt: `You are an expert at writing effective letters for ordinary people dealing with difficult UK situations.
+
+SITUATION: ${situation || 'Not specified'}
+TONE: ${t?.label} — ${t?.desc}
+NAME: ${name || '[Your Name]'}
+
+CONTEXT:
+${context}
+
+Write a complete, ready-to-send letter. Must be:
+- Structured with clear greeting and sign-off
+- ${t?.id === 'formal' ? 'Formally' : 'Professionally'} worded
+- Protecting their legal position without false claims
+- Referencing UK rights/protections where genuinely relevant
+- Ready to copy and paste immediately
+
+Return subject line, full letter body, 2-3 key points it makes, and one important tip.`,
       response_json_schema: {
         type: 'object',
         properties: {
           subject_line: { type: 'string' },
-          letter_body: { type: 'string' },
-          key_points: { type: 'array', items: { type: 'string' } },
-          tip: { type: 'string' },
+          letter_body:  { type: 'string' },
+          key_points:   { type: 'array', items: { type: 'string' } },
+          tip:          { type: 'string' },
         },
       },
     });
@@ -78,73 +68,79 @@ Return a subject line and the full letter body.`;
     if (!result) return;
     navigator.clipboard.writeText(`Subject: ${result.subject_line}\n\n${result.letter_body}`);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 2200);
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
 
-      {/* SITUATION */}
+      {/* SITUATION CHIPS */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">WHAT SITUATION IS THIS? (optional)</label>
+        <Label>SITUATION TYPE (optional)</Label>
         <div className="flex flex-wrap gap-2">
           {SITUATIONS.map(s => (
-            <button
-              key={s}
-              onClick={() => setSituation(situation === s ? '' : s)}
-              className={`text-xs font-mono px-3 py-1.5 border transition-all ${
-                situation === s
-                  ? 'border-cyan-500 text-cyan-400 bg-cyan-500/10'
-                  : 'border-white/10 text-gray-500 hover:border-white/30 hover:text-gray-300'
-              }`}
-            >
+            <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
               {s}
-            </button>
+            </Chip>
           ))}
         </div>
       </div>
 
       {/* CONTEXT */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">TELL US THE SITUATION — WHAT HAPPENED?</label>
+        <Label>TELL US THE SITUATION</Label>
         <textarea
           value={context}
           onChange={e => setContext(e.target.value)}
-          placeholder="Just tell us in your own words what's going on. Who sent you the letter? What are they claiming? What's your side of it? Don't worry about how you write it — we'll sort the rest."
-          className="w-full h-40 bg-black border-2 border-white/20 focus:border-cyan-500 text-white text-sm p-4 resize-none outline-none font-mono placeholder-gray-700 transition-colors"
+          placeholder="Just tell us in your own words what's happened. Who are you writing to? What's the dispute? What do you want to achieve? Don't worry about how you write it — we'll handle that."
+          style={{
+            width: '100%', height: 160, background: 'rgba(255,255,255,0.03)',
+            border: `1px solid ${context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+            borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
+            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+            transition: 'border-color 0.2s', boxSizing: 'border-box',
+          }}
+          onFocus={e => e.target.style.borderColor = accentColor + '80'}
+          onBlur={e => e.target.style.borderColor = context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
         />
       </div>
 
       {/* TONE */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">WHAT TONE?</label>
-        <div className="grid grid-cols-2 gap-2">
+        <Label>TONE</Label>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {TONES.map(t => (
             <button
               key={t.id}
               onClick={() => setTone(t.id)}
-              className={`p-3 border text-left transition-all ${
-                tone === t.id
-                  ? 'border-cyan-500 bg-cyan-500/10'
-                  : 'border-white/10 hover:border-white/30'
-              }`}
+              style={{
+                padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+                border: `1px solid ${tone === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
+                background: tone === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                transition: 'all 0.15s',
+              }}
             >
-              <p className={`font-mono text-xs font-bold ${tone === t.id ? 'text-cyan-400' : 'text-gray-400'}`}>{t.label}</p>
-              <p className="text-gray-600 text-xs">{t.desc}</p>
+              <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: tone === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{t.desc}</p>
             </button>
           ))}
         </div>
       </div>
 
-      {/* YOUR NAME */}
+      {/* NAME */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">YOUR NAME (optional — for sign-off)</label>
+        <Label>YOUR NAME (optional — for sign-off)</Label>
         <input
           type="text"
-          value={yourName}
-          onChange={e => setYourName(e.target.value)}
+          value={name}
+          onChange={e => setName(e.target.value)}
           placeholder="e.g. Brian Hughes"
-          className="w-full bg-black border-2 border-white/20 focus:border-cyan-500 text-white text-sm p-3 outline-none font-mono placeholder-gray-700 transition-colors"
+          style={{
+            width: '100%', background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10,
+            color: '#fff', fontSize: 13, padding: '11px 14px',
+            outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
+          }}
         />
       </div>
 
@@ -152,84 +148,111 @@ Return a subject line and the full letter body.`;
       <motion.button
         onClick={write}
         disabled={!context.trim() || loading}
-        whileHover={!loading && context.trim() ? { scale: 1.02 } : {}}
-        whileTap={!loading && context.trim() ? { scale: 0.98 } : {}}
-        className={`w-full py-4 font-black font-mono text-lg tracking-widest border-2 transition-all ${
-          context.trim() && !loading
-            ? 'border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 cursor-pointer'
-            : 'border-white/10 text-gray-700 cursor-not-allowed'
-        }`}
+        whileTap={!loading && context.trim() ? { scale: 0.97 } : {}}
+        style={{
+          width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
+          fontWeight: 800, letterSpacing: '0.12em', cursor: context.trim() && !loading ? 'pointer' : 'not-allowed',
+          border: `1px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+          background: context.trim() ? `${accentColor}15` : 'transparent',
+          color: context.trim() ? accentColor : 'rgba(255,255,255,0.2)',
+          transition: 'all 0.2s',
+        }}
       >
-        {loading ? (
-          <div className="flex items-center justify-center gap-3">
-            <motion.div className="w-2 h-2 rounded-full bg-cyan-400" animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 0.8, repeat: Infinity }} />
-            <span>WRITING YOUR REPLY...</span>
-          </div>
-        ) : 'WRITE MY REPLY →'}
+        {loading ? <Spinner color={accentColor} text="WRITING YOUR REPLY" /> : 'WRITE MY REPLY'}
       </motion.button>
 
       {/* RESULT */}
       <AnimatePresence>
         {result && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
-          >
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+
             {/* KEY POINTS */}
             {result.key_points?.length > 0 && (
-              <div className="border border-cyan-500/30 p-4 space-y-2">
-                <p className="text-cyan-400 font-mono text-xs tracking-widest">KEY POINTS IN THIS REPLY</p>
-                {result.key_points.map((point, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-cyan-400 text-xs mt-0.5">→</span>
-                    <p className="text-gray-300 text-xs">{point}</p>
-                  </div>
-                ))}
+              <div style={{ border: `1px solid ${accentColor}25`, borderRadius: 12, padding: '14px 18px', background: `${accentColor}06` }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'cc', marginBottom: 10 }}>KEY POINTS</p>
+                <div className="space-y-1.5">
+                  {result.key_points.map((p, i) => (
+                    <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                      <span style={{ color: accentColor, fontSize: 10, paddingTop: 3 }}>—</span>
+                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>{p}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
-            {/* THE LETTER */}
-            <div className="border-2 border-white/20 p-5 space-y-3 bg-black/60">
+            {/* LETTER */}
+            <div style={{ border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '18px 20px', background: 'rgba(255,255,255,0.02)' }}>
               {result.subject_line && (
-                <div className="border-b border-white/10 pb-3">
-                  <p className="text-gray-500 font-mono text-xs">SUBJECT</p>
-                  <p className="text-white font-bold text-sm">{result.subject_line}</p>
+                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: 12, marginBottom: 16 }}>
+                  <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 4px' }}>SUBJECT</p>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: '#fff', margin: 0 }}>{result.subject_line}</p>
                 </div>
               )}
-              <pre className="text-gray-300 text-sm whitespace-pre-wrap font-sans leading-relaxed">{result.letter_body}</pre>
+              <pre style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.7, margin: 0 }}>{result.letter_body}</pre>
             </div>
 
             {/* TIP */}
             {result.tip && (
-              <div className="border border-yellow-500/30 p-4">
-                <p className="text-yellow-400 font-mono text-xs tracking-widest mb-1">IMPORTANT TIP</p>
-                <p className="text-gray-300 text-xs">{result.tip}</p>
+              <div style={{ border: '1px solid rgba(234,179,8,0.25)', borderRadius: 10, padding: '12px 16px', background: 'rgba(234,179,8,0.06)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: '#eab308', marginBottom: 6 }}>IMPORTANT TIP</p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', margin: 0 }}>{result.tip}</p>
               </div>
             )}
 
             {/* ACTIONS */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <motion.button
-                onClick={copyLetter}
-                whileTap={{ scale: 0.95 }}
-                className="flex-1 py-4 border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-mono text-sm font-black tracking-widest transition-all"
-              >
-                {copied ? '✓ COPIED — READY TO SEND' : 'COPY LETTER'}
+            <div style={{ display: 'flex', gap: 10 }}>
+              <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: accentColor, color: accentColor, background: `${accentColor}15` }}>
+                {copied ? 'COPIED — READY TO SEND' : 'COPY LETTER'}
               </motion.button>
-              <motion.button
-                onClick={() => { setResult(null); setContext(''); setSituation(''); }}
-                whileTap={{ scale: 0.95 }}
-                className="flex-1 py-4 border-2 border-white/20 hover:border-white/40 text-gray-500 hover:text-white font-mono text-xs tracking-widest transition-all"
-              >
+              <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
                 WRITE ANOTHER
               </motion.button>
             </div>
 
-            <p className="text-gray-700 font-mono text-xs text-center">Nothing stored. Nothing seen. Yours alone. ♾️</p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', letterSpacing: '0.05em' }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   );
 }
+
+function Label({ children }) {
+  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: 0 }}>{children}</p>;
+}
+
+function Chip({ active, color, onClick, children }) {
+  return (
+    <button onClick={onClick} style={{
+      padding: '5px 11px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+      border: `1px solid ${active ? color : 'rgba(255,255,255,0.12)'}`,
+      background: active ? `${color}15` : 'transparent',
+      color: active ? color : 'rgba(255,255,255,0.4)',
+      transition: 'all 0.15s',
+    }}>
+      {children}
+    </button>
+  );
+}
+
+function Spinner({ color, text }) {
+  return (
+    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+      <motion.span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: color }}
+        animate={{ scale: [1, 1.6, 1] }} transition={{ duration: 0.7, repeat: Infinity }} />
+      {text}
+    </span>
+  );
+}
+
+const primaryBtn = {
+  flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+  letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid', transition: 'all 0.15s',
+};
+
+const secondaryBtn = {
+  flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+  letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)',
+  background: 'transparent', color: 'rgba(255,255,255,0.4)', transition: 'all 0.15s',
+};

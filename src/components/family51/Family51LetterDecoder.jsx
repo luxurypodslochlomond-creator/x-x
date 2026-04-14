@@ -3,21 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
 const LETTER_TYPES = [
-  'Council tax / rates',
-  'Energy / utilities bill',
-  'Rent / landlord notice',
-  'Debt / debt collector',
-  'NHS / medical letter',
-  'School / college letter',
-  'Employer / HR letter',
-  'Parking / motoring fine',
-  'Benefits / DWP letter',
-  'Legal / court letter',
-  'Immigration letter',
-  'Other official letter',
+  'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
+  'NHS / medical', 'School / college', 'Employer / HR', 'Parking fine',
+  'Benefits / DWP', 'Court / legal', 'Immigration', 'Other',
 ];
 
-export default function Family51LetterDecoder() {
+const SEVERITY_CONFIG = {
+  'NOT URGENT':    { color: '#22c55e', bg: 'rgba(34,197,94,0.08)',   border: 'rgba(34,197,94,0.3)' },
+  'NEEDS ATTENTION': { color: '#eab308', bg: 'rgba(234,179,8,0.08)', border: 'rgba(234,179,8,0.3)' },
+  'URGENT':        { color: '#f97316', bg: 'rgba(249,115,22,0.08)', border: 'rgba(249,115,22,0.3)' },
+  'VERY URGENT':   { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)' },
+};
+
+export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const [letterText, setLetterText] = useState('');
   const [letterType, setLetterType] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,35 +23,32 @@ export default function Family51LetterDecoder() {
   const [copied, setCopied] = useState(false);
 
   const decode = async () => {
-    if (!letterText.trim()) return;
+    if (!letterText.trim() || loading) return;
     setLoading(true);
     setResult(null);
 
-    const prompt = `You are a compassionate but clear UK citizens advice expert. A person has received the following official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.
+    const response = await base44.integrations.Core.InvokeLLM({
+      prompt: `You are a compassionate UK citizens advice expert. A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.
 
-LETTER CONTENT:
+LETTER:
 ${letterText}
 
-Please provide:
-1. WHAT THIS MEANS - Plain English explanation (2-3 sentences max, no jargon)
-2. HOW SERIOUS IS THIS - Rate it: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
-3. WHAT YOU SHOULD DO - Exactly 3 clear action steps numbered 1, 2, 3
-4. KEY DEADLINE - Any dates or deadlines mentioned (say "No deadline mentioned" if none)
-5. DON'T PANIC BECAUSE - One reassuring but honest sentence
-
-Format clearly with these exact headers. Be warm but direct. This person may be scared.`;
-
-    const response = await base44.integrations.Core.InvokeLLM({
-      prompt,
+Return:
+- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
+- severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
+- severity_explanation: One sentence on why that rating
+- action_steps: Array of exactly 3 clear numbered actions to take
+- key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
+- dont_panic: One honest, reassuring sentence`,
       response_json_schema: {
         type: 'object',
         properties: {
-          what_this_means: { type: 'string' },
-          severity: { type: 'string', enum: ['NOT URGENT', 'NEEDS ATTENTION', 'URGENT', 'VERY URGENT'] },
+          what_this_means:    { type: 'string' },
+          severity:           { type: 'string' },
           severity_explanation: { type: 'string' },
-          action_steps: { type: 'array', items: { type: 'string' } },
-          key_deadline: { type: 'string' },
-          dont_panic: { type: 'string' },
+          action_steps:       { type: 'array', items: { type: 'string' } },
+          key_deadline:       { type: 'string' },
+          dont_panic:         { type: 'string' },
         },
       },
     });
@@ -62,143 +57,115 @@ Format clearly with these exact headers. Be warm but direct. This person may be 
     setLoading(false);
   };
 
-  const severityColor = {
-    'NOT URGENT': 'text-green-400 border-green-500',
-    'NEEDS ATTENTION': 'text-yellow-400 border-yellow-500',
-    'URGENT': 'text-orange-400 border-orange-500',
-    'VERY URGENT': 'text-red-400 border-red-500',
-  };
-
   const copyAll = () => {
     if (!result) return;
-    const text = `LETTER DECODED BY FAMILY51\n\nWHAT THIS MEANS:\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\nACTION STEPS:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nKEY DEADLINE:\n${result.key_deadline}\n\nDON'T PANIC:\n${result.dont_panic}`;
+    const text = `DECODED BY FAMILY51\n\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\nACTIONS:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nDEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 2200);
   };
 
-  return (
-    <div className="space-y-6">
+  const sev = result?.severity ? (SEVERITY_CONFIG[result.severity] || SEVERITY_CONFIG['NEEDS ATTENTION']) : null;
 
-      {/* LETTER TYPE */}
+  return (
+    <div className="space-y-5">
+
+      {/* TYPE CHIPS */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">WHAT TYPE OF LETTER IS THIS? (optional)</label>
+        <Label>TYPE OF LETTER (optional)</Label>
         <div className="flex flex-wrap gap-2">
           {LETTER_TYPES.map(type => (
-            <button
-              key={type}
-              onClick={() => setLetterType(letterType === type ? '' : type)}
-              className={`text-xs font-mono px-3 py-1.5 border transition-all ${
-                letterType === type
-                  ? 'border-orange-500 text-orange-400 bg-orange-500/10'
-                  : 'border-white/10 text-gray-500 hover:border-white/30 hover:text-gray-300'
-              }`}
-            >
+            <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
               {type}
-            </button>
+            </Chip>
           ))}
         </div>
       </div>
 
       {/* PASTE AREA */}
       <div className="space-y-2">
-        <label className="text-gray-400 font-mono text-xs tracking-widest">PASTE YOUR LETTER HERE</label>
+        <Label>PASTE YOUR LETTER</Label>
         <textarea
           value={letterText}
           onChange={e => setLetterText(e.target.value)}
-          placeholder="Paste the full text of your letter here... Don't worry about formatting. Just paste everything."
-          className="w-full h-48 bg-black border-2 border-white/20 focus:border-orange-500 text-white text-sm p-4 resize-none outline-none font-mono placeholder-gray-700 transition-colors"
+          placeholder="Paste the full letter here. Don't worry about formatting — just get it all in. The more you paste, the better we can help."
+          style={{
+            width: '100%', height: 180, background: 'rgba(255,255,255,0.03)',
+            border: `1px solid ${letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+            borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
+            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+            transition: 'border-color 0.2s', boxSizing: 'border-box',
+          }}
+          onFocus={e => e.target.style.borderColor = accentColor + '80'}
+          onBlur={e => e.target.style.borderColor = letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
         />
-        <p className="text-gray-700 font-mono text-xs">Your text never leaves your device or gets stored anywhere. ♾️</p>
+        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.05em' }}>Nothing stored. Nothing sent anywhere. Processed and gone.</p>
       </div>
 
       {/* DECODE BUTTON */}
       <motion.button
         onClick={decode}
         disabled={!letterText.trim() || loading}
-        whileHover={!loading && letterText.trim() ? { scale: 1.02 } : {}}
-        whileTap={!loading && letterText.trim() ? { scale: 0.98 } : {}}
-        className={`w-full py-4 font-black font-mono text-lg tracking-widest border-2 transition-all ${
-          letterText.trim() && !loading
-            ? 'border-orange-500 text-orange-400 hover:bg-orange-500/10 cursor-pointer'
-            : 'border-white/10 text-gray-700 cursor-not-allowed'
-        }`}
+        whileTap={!loading && letterText.trim() ? { scale: 0.97 } : {}}
+        style={{
+          width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
+          fontWeight: 800, letterSpacing: '0.12em', cursor: letterText.trim() && !loading ? 'pointer' : 'not-allowed',
+          border: `1px solid ${letterText.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+          background: letterText.trim() ? `${accentColor}15` : 'transparent',
+          color: letterText.trim() ? accentColor : 'rgba(255,255,255,0.2)',
+          transition: 'all 0.2s',
+        }}
       >
-        {loading ? <LoadingPulse color="orange" text="DECODING YOUR LETTER..." /> : 'DECODE THIS LETTER →'}
+        {loading ? <Spinner color={accentColor} text="DECODING YOUR LETTER" /> : 'DECODE THIS LETTER'}
       </motion.button>
 
       {/* RESULT */}
       <AnimatePresence>
         {result && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
-          >
-            {/* SEVERITY BADGE */}
-            <div className={`border-2 ${severityColor[result.severity] || 'text-gray-400 border-gray-500'} p-4 flex items-center justify-between`}>
-              <div>
-                <p className="font-mono text-xs tracking-widest opacity-60">SEVERITY</p>
-                <p className={`font-black font-mono text-xl ${(severityColor[result.severity] || '').split(' ')[0]}`}>{result.severity}</p>
-                {result.severity_explanation && <p className="text-gray-400 text-xs mt-1">{result.severity_explanation}</p>}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+
+            {/* SEVERITY */}
+            {sev && (
+              <div style={{ background: sev.bg, border: `1px solid ${sev.border}`, borderRadius: 12, padding: '14px 18px' }}>
+                <div className="flex items-center justify-between mb-1">
+                  <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: sev.color }}>SEVERITY</span>
+                  <span style={{ fontSize: 13, fontWeight: 900, color: sev.color, letterSpacing: '0.05em' }}>{result.severity}</span>
+                </div>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', margin: 0 }}>{result.severity_explanation}</p>
               </div>
-            </div>
+            )}
 
-            {/* WHAT THIS MEANS */}
-            <ResultBlock label="WHAT THIS MEANS" color="orange">
-              <p className="text-white text-sm leading-relaxed">{result.what_this_means}</p>
-            </ResultBlock>
+            <ResultCard label="WHAT THIS MEANS" color={accentColor}>
+              <p style={{ fontSize: 14, color: '#fff', lineHeight: 1.65, margin: 0 }}>{result.what_this_means}</p>
+            </ResultCard>
 
-            {/* ACTION STEPS */}
-            <ResultBlock label="WHAT YOU SHOULD DO" color="cyan">
-              <ol className="space-y-2">
+            <ResultCard label="WHAT TO DO" color="#06b6d4">
+              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {result.action_steps?.map((step, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="text-cyan-400 font-black font-mono text-sm flex-shrink-0 mt-0.5">{i + 1}.</span>
-                    <p className="text-white text-sm leading-relaxed">{step}</p>
+                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55 }}>{step}</span>
                   </li>
                 ))}
               </ol>
-            </ResultBlock>
+            </ResultCard>
 
-            {/* DEADLINE */}
-            <ResultBlock label="KEY DEADLINE" color="yellow">
-              <p className="text-white text-sm">{result.key_deadline}</p>
-            </ResultBlock>
+            <ResultCard label="KEY DEADLINE" color="#eab308">
+              <p style={{ fontSize: 13, color: '#fff', margin: 0 }}>{result.key_deadline}</p>
+            </ResultCard>
 
-            {/* DON'T PANIC */}
-            <ResultBlock label="DON'T PANIC BECAUSE..." color="green">
-              <p className="text-white text-sm leading-relaxed">{result.dont_panic}</p>
-            </ResultBlock>
+            <ResultCard label="DON'T PANIC" color="#22c55e">
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0 }}>{result.dont_panic}</p>
+            </ResultCard>
 
-            {/* COPY & ACTIONS */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <motion.button
-                onClick={copyAll}
-                whileTap={{ scale: 0.95 }}
-                className="flex-1 py-3 border-2 border-white/20 hover:border-white/40 text-gray-400 hover:text-white font-mono text-xs tracking-widest transition-all"
-              >
-                {copied ? '✓ COPIED' : 'COPY FULL BREAKDOWN'}
+            {/* ACTIONS */}
+            <div style={{ display: 'flex', gap: 10, paddingTop: 4 }}>
+              <motion.button onClick={copyAll} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
+                {copied ? 'COPIED' : 'COPY BREAKDOWN'}
               </motion.button>
-              <motion.button
-                onClick={() => { setResult(null); setLetterText(''); setLetterType(''); }}
-                whileTap={{ scale: 0.95 }}
-                className="flex-1 py-3 border-2 border-orange-500/40 hover:border-orange-500 text-orange-500 hover:text-orange-400 font-mono text-xs tracking-widest transition-all"
-              >
-                DECODE ANOTHER LETTER
+              <motion.button onClick={() => { setResult(null); setLetterText(''); setLetterType(''); }} whileTap={{ scale: 0.95 }} style={{ ...secondaryBtn, color: accentColor, borderColor: accentColor + '40' }}>
+                DECODE ANOTHER
               </motion.button>
-            </div>
-
-            {/* WRITE REPLY CTA */}
-            <div className="border border-cyan-500/30 p-5 text-center space-y-2 bg-cyan-500/5">
-              <p className="text-cyan-400 font-mono text-xs tracking-widest">NEED TO RESPOND TO THIS LETTER?</p>
-              <p className="text-gray-400 text-sm">We'll write the reply for you — clear, firm, and ready to send.</p>
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent('family51-switch-tool', { detail: 'reply' }))}
-                className="text-cyan-400 font-black font-mono text-sm hover:text-cyan-300 transition-colors underline"
-              >
-                WRITE MY REPLY →
-              </button>
             </div>
 
           </motion.div>
@@ -208,31 +175,47 @@ Format clearly with these exact headers. Be warm but direct. This person may be 
   );
 }
 
-function ResultBlock({ label, color, children }) {
-  const colors = {
-    orange: 'border-orange-500/40 text-orange-400',
-    cyan: 'border-cyan-500/40 text-cyan-400',
-    yellow: 'border-yellow-500/40 text-yellow-400',
-    green: 'border-green-500/40 text-green-400',
-    purple: 'border-purple-500/40 text-purple-400',
-  };
+// ─── SHARED PRIMITIVES ────────────────────────────────────────────────────────
+
+function Label({ children }) {
+  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', marginBottom: 0 }}>{children}</p>;
+}
+
+function Chip({ active, color, onClick, children }) {
   return (
-    <div className={`border ${colors[color] || colors.orange} p-5 space-y-3`}>
-      <p className={`font-mono text-xs tracking-widest ${colors[color]?.split(' ')[1] || 'text-orange-400'}`}>{label}</p>
+    <button onClick={onClick} style={{
+      padding: '5px 11px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+      border: `1px solid ${active ? color : 'rgba(255,255,255,0.12)'}`,
+      background: active ? `${color}15` : 'transparent',
+      color: active ? color : 'rgba(255,255,255,0.4)',
+      transition: 'all 0.15s',
+    }}>
+      {children}
+    </button>
+  );
+}
+
+function ResultCard({ label, color, children }) {
+  return (
+    <div style={{ border: `1px solid ${color}25`, borderRadius: 12, padding: '14px 18px', background: `${color}06` }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: color + 'cc', marginBottom: 10 }}>{label}</p>
       {children}
     </div>
   );
 }
 
-function LoadingPulse({ color = 'orange', text }) {
+function Spinner({ color, text }) {
   return (
-    <div className="flex items-center justify-center gap-3">
-      <motion.div
-        className={`w-2 h-2 rounded-full bg-${color}-400`}
-        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 0.8, repeat: Infinity }}
-      />
-      <span>{text}</span>
-    </div>
+    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+      <motion.span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: color }}
+        animate={{ scale: [1, 1.6, 1] }} transition={{ duration: 0.7, repeat: Infinity }} />
+      {text}
+    </span>
   );
 }
+
+const secondaryBtn = {
+  flex: 1, padding: '11px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+  letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)',
+  background: 'transparent', color: 'rgba(255,255,255,0.4)', transition: 'all 0.15s',
+};

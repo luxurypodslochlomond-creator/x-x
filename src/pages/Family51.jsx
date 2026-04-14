@@ -1,258 +1,332 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
-import Family51Icon from '@/components/family51/Family51Icon';
+
+// ─── FAMILY51 STANDALONE APP ────────────────────────────────────────────────
+// No UF51 nav. No emoji. Full custom native feel. COOLASFUCK.
+// ────────────────────────────────────────────────────────────────────────────
 
 const TOOLS = [
   {
     id: 'letter',
-    name: 'DECODE A LETTER',
-    tagline: 'Scary letter? Paste it. Understand it in seconds.',
-    detail: 'Council tax. Energy bills. NHS letters. Landlord notices. Parking fines. School exclusions. We translate bureaucratic fear into plain English — and tell you exactly what to do next.',
-    color: '#f97316',
-    glow: 'rgba(249, 115, 22, 0.4)',
-    border: 'border-orange-500',
-    text: 'text-orange-400',
-    bg: 'bg-orange-500/10',
-    free: true,
-    freeLabel: 'ALWAYS FREE',
+    name: 'DECODE',
+    fullName: 'DECODE A LETTER',
+    tagline: 'Scary letter? Plain English in seconds.',
+    detail: 'Council tax. Energy bills. NHS. Landlord. Debt collector. Parking fine. We translate bureaucratic fear into exactly what it means and what you do next.',
+    accentColor: '#f97316',
+    dimColor: 'rgba(249,115,22,0.12)',
+    glowColor: 'rgba(249,115,22,0.35)',
+    icon: <LetterIcon />,
+    badge: 'FREE',
   },
   {
     id: 'reply',
-    name: 'WRITE MY REPLY',
-    tagline: 'Don\'t know what to say? We write it for you.',
-    detail: 'You tell us the situation. We write a clear, firm, legally-aware response ready to copy and send. Debt collectors. Landlords. Employers. Councils. No more staring at a blank page.',
-    color: '#06b6d4',
-    glow: 'rgba(6, 182, 212, 0.4)',
-    border: 'border-cyan-500',
-    text: 'text-cyan-400',
-    bg: 'bg-cyan-500/10',
-    free: true,
-    freeLabel: 'ALWAYS FREE',
+    name: 'REPLY',
+    fullName: 'WRITE MY REPLY',
+    tagline: "Don't know what to say? We write it.",
+    detail: 'Tell us the situation. We write a clear, firm, legally-aware response ready to copy and send. No blank page. No stress.',
+    accentColor: '#06b6d4',
+    dimColor: 'rgba(6,182,212,0.12)',
+    glowColor: 'rgba(6,182,212,0.35)',
+    icon: <ReplyIcon />,
+    badge: 'FREE',
   },
   {
     id: 'conflict',
-    name: 'CONFLICT HELPER',
-    tagline: 'Neighbour dispute? Workplace issue? We help you respond calmly.',
-    detail: 'When emotions are high, words go wrong. Tell us what happened — we help you respond in a way that protects you legally, de-escalates the situation, and keeps your dignity intact.',
-    color: '#a855f7',
-    glow: 'rgba(168, 85, 247, 0.4)',
-    border: 'border-purple-500',
-    text: 'text-purple-400',
-    bg: 'bg-purple-500/10',
-    free: true,
-    freeLabel: 'ALWAYS FREE',
+    name: 'CONFLICT',
+    fullName: 'CONFLICT HELPER',
+    tagline: 'Neighbour. Workplace. Landlord. We help.',
+    detail: 'When emotions are high, words go wrong. We analyse your situation and give you the exact response that protects you and de-escalates it.',
+    accentColor: '#a855f7',
+    dimColor: 'rgba(168,85,247,0.12)',
+    glowColor: 'rgba(168,85,247,0.35)',
+    icon: <ConflictIcon />,
+    badge: 'FREE',
   },
 ];
 
 export default function Family51Page() {
   const [activeTool, setActiveTool] = useState(null);
+  const [heroReady, setHeroReady] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Family51 — On Your Side';
+    const timer = setTimeout(() => setHeroReady(true), 80);
+    return () => clearTimeout(timer);
+  }, []);
 
   const tool = TOOLS.find(t => t.id === activeTool);
 
   return (
-    <div className="min-h-screen bg-[#06080f] text-white">
+    <div className="min-h-screen text-white" style={{ background: '#080a0f', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
 
-      {/* HEADER */}
-      <div className="border-b border-white/10 px-6 py-5 flex items-center gap-4">
-        <Link to={createPageUrl('Welcome')} className="text-gray-500 hover:text-white font-mono text-xs tracking-widest transition-colors">← UF51</Link>
-        <div className="flex items-center gap-3 flex-1 justify-center">
-          <Family51Icon size={36} />
-          <span className="text-2xl font-black font-mono text-white tracking-tight">FAMILY51</span>
+      {/* ── STANDALONE HEADER ─────────────────────────────── */}
+      <header style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', backdropFilter: 'blur(20px)', background: 'rgba(8,10,15,0.92)', position: 'sticky', top: 0, zIndex: 50 }}>
+        <div className="max-w-2xl mx-auto px-5 py-4 flex items-center justify-between">
+          {/* LOGO */}
+          <motion.button
+            onClick={() => setActiveTool(null)}
+            className="flex items-center gap-2.5"
+            whileTap={{ scale: 0.96 }}
+          >
+            <F51LogoMark />
+            <div className="flex flex-col leading-none">
+              <span style={{ fontSize: 15, fontWeight: 900, letterSpacing: '-0.02em', color: '#fff' }}>FAMILY51</span>
+              <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: '0.15em', color: '#f97316', textTransform: 'uppercase' }}>On Your Side</span>
+            </div>
+          </motion.button>
+
+          {/* NAV PILLS */}
+          <div className="flex items-center gap-1">
+            {TOOLS.map(t => (
+              <motion.button
+                key={t.id}
+                onClick={() => setActiveTool(t.id)}
+                whileTap={{ scale: 0.93 }}
+                style={{
+                  padding: '5px 12px',
+                  borderRadius: 20,
+                  fontSize: 11,
+                  fontWeight: 800,
+                  letterSpacing: '0.05em',
+                  border: activeTool === t.id ? `1px solid ${t.accentColor}` : '1px solid rgba(255,255,255,0.1)',
+                  background: activeTool === t.id ? t.dimColor : 'transparent',
+                  color: activeTool === t.id ? t.accentColor : 'rgba(255,255,255,0.4)',
+                  transition: 'all 0.15s',
+                  cursor: 'pointer',
+                }}
+              >
+                {t.name}
+              </motion.button>
+            ))}
+          </div>
         </div>
-        <div className="w-16" />
-      </div>
+      </header>
 
       <AnimatePresence mode="wait">
-        {!activeTool ? (
-          <motion.div
-            key="home"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="max-w-3xl mx-auto px-6 py-16 space-y-16"
-          >
+
+        {/* ── HOME ───────────────────────────────────────────── */}
+        {!activeTool && (
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }}>
+
             {/* HERO */}
-            <div className="text-center space-y-6">
+            <div className="max-w-2xl mx-auto px-5 pt-16 pb-12 text-center">
               <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: heroReady ? 1 : 0, y: heroReady ? 0 : 24 }}
                 transition={{ duration: 0.5 }}
-                className="flex justify-center"
+                className="space-y-5"
               >
-                <Family51Icon size={80} animate />
-              </motion.div>
+                {/* EYEBROW */}
+                <div className="flex items-center justify-center gap-2">
+                  <PulseBar color="#f97316" />
+                  <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase' }}>Life Admin — Sorted</span>
+                  <PulseBar color="#f97316" reverse />
+                </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-4xl md:text-6xl font-black font-mono leading-none"
-              >
-                <span className="text-white">YOUR FAMILY.</span><br />
-                <span className="text-orange-400">ON YOUR SIDE.</span>
-              </motion.h1>
+                {/* HEADLINE */}
+                <h1 style={{ fontSize: 'clamp(36px, 8vw, 64px)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-0.03em', margin: 0 }}>
+                  <span style={{ color: '#fff' }}>The system</span><br />
+                  <span style={{ color: '#f97316' }}>works against you.</span><br />
+                  <span style={{ color: '#fff' }}>We don't.</span>
+                </h1>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="text-gray-400 text-lg max-w-xl mx-auto leading-relaxed"
-              >
-                Scary letter at midnight? Neighbour from hell? 
-                Bill you can't understand? <span className="text-white font-bold">We decode it, explain it, and help you respond.</span>
-              </motion.p>
+                <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, maxWidth: 440, margin: '0 auto' }}>
+                  Scary letter at midnight. Nightmare neighbour. Bill you can't understand.
+                  <span style={{ color: '#fff', fontWeight: 600 }}> We decode it, explain it, and write your reply. Free. Private. Instant.</span>
+                </p>
 
-              {/* DATA PROMISE */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="inline-flex items-center gap-3 bg-black border border-green-500/40 px-5 py-3"
-              >
-                <PrivacyShieldIcon />
-                <div className="text-left">
-                  <p className="text-green-400 font-black font-mono text-xs tracking-widest">YOUR DATA. YOUR DEVICE. FULL STOP.</p>
-                  <p className="text-gray-500 text-xs font-mono">Nothing stored. Nothing sold. Nothing shared. Ever.</p>
+                {/* PRIVACY PILL */}
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 24, padding: '8px 16px' }}>
+                  <ShieldCheckIcon />
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e', letterSpacing: '0.08em' }}>YOUR DATA NEVER LEAVES YOUR DEVICE</span>
                 </div>
               </motion.div>
             </div>
 
             {/* TOOLS */}
-            <div className="space-y-4">
-              <p className="text-gray-600 font-mono text-xs tracking-widest text-center">CHOOSE YOUR TOOL — ALL FREE</p>
+            <div className="max-w-2xl mx-auto px-5 pb-8 space-y-3">
               {TOOLS.map((t, i) => (
                 <motion.button
                   key={t.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 * i }}
-                  whileHover={{ x: 6 }}
-                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.12 + i * 0.07 }}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.985 }}
                   onClick={() => setActiveTool(t.id)}
-                  className={`w-full text-left bg-black border-2 ${t.border} p-6 transition-all group`}
-                  style={{ boxShadow: `0 0 30px ${t.glow}` }}
+                  className="w-full text-left"
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    border: `1px solid rgba(255,255,255,0.08)`,
+                    borderRadius: 16,
+                    padding: '20px 22px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    boxShadow: `0 0 0 0 ${t.glowColor}`,
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = t.accentColor + '60';
+                    e.currentTarget.style.boxShadow = `0 0 40px ${t.glowColor}`;
+                    e.currentTarget.style.background = t.dimColor;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                    e.currentTarget.style.boxShadow = '0 0 0 0 transparent';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                  }}
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-2 flex-1">
+                  {/* Accent line */}
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${t.accentColor}, transparent)`, opacity: 0.6 }} />
+
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-1 flex-1">
                       <div className="flex items-center gap-3">
-                        <span className={`font-black font-mono text-lg ${t.text}`}>{t.name}</span>
-                        <span className={`text-[9px] font-mono border px-2 py-0.5 ${t.border} ${t.text}`}>{t.freeLabel}</span>
+                        <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.15em', color: t.accentColor, textTransform: 'uppercase' }}>{t.fullName}</span>
+                        <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: t.accentColor, border: `1px solid ${t.accentColor}40`, borderRadius: 4, padding: '2px 6px' }}>{t.badge}</span>
                       </div>
-                      <p className="text-white font-bold text-sm">{t.tagline}</p>
-                      <p className="text-gray-500 text-xs leading-relaxed">{t.detail}</p>
+                      <p style={{ fontSize: 15, fontWeight: 700, color: '#fff', margin: 0 }}>{t.tagline}</p>
+                      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', margin: 0, lineHeight: 1.5 }}>{t.detail}</p>
                     </div>
-                    <motion.div
-                      className={`${t.text} font-mono text-xl font-black mt-1 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity`}
-                    >→</motion.div>
+                    <div style={{ marginLeft: 16, flexShrink: 0, color: t.accentColor }}>
+                      <ArrowRight color={t.accentColor} />
+                    </div>
                   </div>
                 </motion.button>
               ))}
             </div>
 
-            {/* WHO THIS IS FOR */}
-            <div className="border border-white/10 p-6 space-y-4">
-              <p className="text-gray-500 font-mono text-xs tracking-widest">WHO THIS IS FOR</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {[
-                  'Single mum with a council eviction notice at midnight',
-                  'Elderly person scared by a pension letter',
-                  'Family with a nightmare neighbour and no money for a solicitor',
-                  'Teenager with a college disciplinary letter',
-                  'Anyone with a debt collector threatening action',
-                  'Anyone too anxious to write that important email',
-                ].map((who, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-orange-400 font-mono text-xs mt-0.5">→</span>
-                    <p className="text-gray-300 text-sm">{who}</p>
-                  </div>
-                ))}
+            {/* VS COMPARISON */}
+            <div className="max-w-2xl mx-auto px-5 pb-8">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.15)', borderRadius: 12, padding: '16px 18px' }}>
+                  <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(239,68,68,0.7)', marginBottom: 10 }}>WITHOUT FAMILY51</p>
+                  {['Weeks waiting for Citizens Advice', "Solicitor you can't afford", 'Google rabbit holes', 'Ignore it and hope', 'Sleepless nights'].map((x, i) => (
+                    <div key={i} className="flex items-start gap-2 mb-1.5">
+                      <span style={{ color: 'rgba(239,68,68,0.5)', fontSize: 10, marginTop: 2, flexShrink: 0 }}>X</span>
+                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{x}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 12, padding: '16px 18px' }}>
+                  <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(34,197,94,0.8)', marginBottom: 10 }}>FAMILY51</p>
+                  {['Instant — works at 3am', 'Always free', 'Plain English, no jargon', 'Reply written for you', 'Data stays on your device'].map((x, i) => (
+                    <div key={i} className="flex items-start gap-2 mb-1.5">
+                      <span style={{ color: '#22c55e', fontSize: 10, marginTop: 2, flexShrink: 0 }}>✓</span>
+                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>{x}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* CITIZENS ADVICE COMPARISON */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="border border-red-500/30 p-5 space-y-3">
-                <p className="text-red-400 font-mono text-xs font-bold tracking-widest">OLD WAY</p>
-                {['Wait weeks for Citizens Advice', 'Find a solicitor you can\'t afford', 'Google for hours, get more confused', 'Ask a friend who doesn\'t know either', 'Just ignore it and hope it goes away'].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-red-500 text-xs mt-0.5">✕</span>
-                    <p className="text-gray-500 text-xs">{item}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="border border-green-500/30 p-5 space-y-3">
-                <p className="text-green-400 font-mono text-xs font-bold tracking-widest">FAMILY51</p>
-                {['Instant — works at 3am', 'Free — always', 'Plain English — no jargon', 'Response written for you', 'Data never leaves your device'].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-green-400 text-xs mt-0.5">✓</span>
-                    <p className="text-gray-300 text-xs">{item}</p>
-                  </div>
-                ))}
+            {/* WHO IT'S FOR */}
+            <div className="max-w-2xl mx-auto px-5 pb-16">
+              <div style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, padding: '20px 22px' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', marginBottom: 14 }}>WHO THIS IS FOR</p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                  {[
+                    'Single mum with council eviction notice at midnight',
+                    'Elderly person scared by a pension letter',
+                    'Family with a nightmare neighbour — no solicitor money',
+                    'Teenager with a college disciplinary letter',
+                    'Anyone with a debt collector threatening action',
+                    'Anyone too anxious to write that important email',
+                  ].map((who, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span style={{ color: '#f97316', fontSize: 10, marginTop: 3, flexShrink: 0 }}>—</span>
+                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{who}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* FOOTER */}
-            <div className="text-center space-y-2 pt-4 border-t border-white/5">
-              <p className="text-gray-600 font-mono text-xs">Part of the UniversalFamily51 ecosystem</p>
-              <p className="text-gray-700 font-mono text-xs">No accounts. No tracking. No bullshit. ♾️❤️</p>
-            </div>
-
-          </motion.div>
-        ) : (
-          <motion.div
-            key={activeTool}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            className="max-w-3xl mx-auto px-6 py-8"
-          >
-            {/* BACK */}
-            <button
-              onClick={() => setActiveTool(null)}
-              className="flex items-center gap-2 text-gray-500 hover:text-white font-mono text-xs tracking-widest transition-colors mb-8"
-            >
-              ← BACK TO FAMILY51
-            </button>
-
-            {/* TOOL HEADER */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-2">
-                <span className={`font-black font-mono text-2xl ${tool.text}`}>{tool.name}</span>
-                <span className={`text-[9px] font-mono border px-2 py-0.5 ${tool.border} ${tool.text}`}>{tool.freeLabel}</span>
-              </div>
-              <p className="text-gray-400 text-sm">{tool.tagline}</p>
-            </div>
-
-            {/* TOOL CONTENT */}
-            {activeTool === 'letter' && <Family51LetterDecoder />}
-            {activeTool === 'reply' && <Family51ReplyWriter />}
-            {activeTool === 'conflict' && <Family51ConflictHelper />}
 
           </motion.div>
         )}
+
+        {/* ── TOOL VIEW ──────────────────────────────────────── */}
+        {activeTool && tool && (
+          <motion.div
+            key={activeTool}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+            className="max-w-2xl mx-auto px-5 py-8"
+          >
+            {/* TOOL HERO */}
+            <div className="mb-8 space-y-2">
+              <div className="flex items-center gap-3">
+                <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: tool.accentColor }}>{tool.fullName}</span>
+                <span style={{ fontSize: 9, fontWeight: 800, color: tool.accentColor, border: `1px solid ${tool.accentColor}50`, borderRadius: 4, padding: '2px 7px', letterSpacing: '0.1em' }}>FREE</span>
+              </div>
+              <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', lineHeight: 1.2, letterSpacing: '-0.01em' }}>{tool.tagline}</p>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', lineHeight: 1.6 }}>{tool.detail}</p>
+            </div>
+
+            {/* DIVIDER */}
+            <div style={{ height: 1, background: `linear-gradient(90deg, ${tool.accentColor}30, transparent)`, marginBottom: 28 }} />
+
+            {activeTool === 'letter' && <Family51LetterDecoder accentColor={tool.accentColor} />}
+            {activeTool === 'reply' && <Family51ReplyWriter accentColor={tool.accentColor} />}
+            {activeTool === 'conflict' && <Family51ConflictHelper accentColor={tool.accentColor} />}
+
+          </motion.div>
+        )}
+
       </AnimatePresence>
     </div>
   );
 }
 
-// Custom privacy shield icon
-function PrivacyShieldIcon() {
+// ─── LOCAL ICON COMPONENTS ───────────────────────────────────────────────────
+
+function F51LogoMark() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <motion.path
-        d="M12 2L4 6V12C4 16.4 7.4 20.5 12 22C16.6 20.5 20 16.4 20 12V6L12 2Z"
-        stroke="#22c55e"
-        strokeWidth="1.5"
-        fill="none"
-        animate={{ opacity: [0.6, 1, 0.6] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      />
-      <path d="M9 12L11 14L15 10" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <motion.rect x="1" y="1" width="30" height="30" rx="8" stroke="#f97316" strokeWidth="1.5" fill="none"
+        animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 2.5, repeat: Infinity }} />
+      <motion.path d="M7 20L10 20L11 17L13 23L14.5 18L16 21L17.5 20H25"
+        stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" fill="none"
+        animate={{ strokeDashoffset: [100, 0] }} transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
+        style={{ strokeDasharray: 100 }} />
+      <path d="M10 10h12M10 14h8" stroke="rgba(249,115,22,0.35)" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
+
+function ShieldCheckIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M7 1L2 3.5V7C2 9.8 4.2 12.3 7 13C9.8 12.3 12 9.8 12 7V3.5L7 1Z" stroke="#22c55e" strokeWidth="1.2" fill="none" />
+      <path d="M5 7L6.3 8.3L9 5.5" stroke="#22c55e" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ArrowRight({ color = '#fff' }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function PulseBar({ color, reverse }) {
+  return (
+    <motion.div
+      style={{ width: 24, height: 2, background: color, borderRadius: 2, transformOrigin: reverse ? 'right' : 'left' }}
+      animate={{ scaleX: [0.3, 1, 0.3] }}
+      transition={{ duration: 2, repeat: Infinity, delay: reverse ? 0.5 : 0 }}
+    />
+  );
+}
+
+function LetterIcon() { return null; }
+function ReplyIcon() { return null; }
+function ConflictIcon() { return null; }
