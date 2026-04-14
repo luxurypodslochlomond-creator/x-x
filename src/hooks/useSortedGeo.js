@@ -42,7 +42,7 @@ export function detectGeo() {
     return tzMap[timezone] || {
       country: locale.includes('en-GB') ? 'United Kingdom' : 'International',
       jurisdiction: locale.includes('en-GB') ? 'UK law' : 'International law',
-      code: locale.split('-')[1] || 'INT'
+      code: (locale.split('-')[1] || 'INT').toUpperCase()
     };
   } catch (error) {
     return { country: 'International', jurisdiction: 'International law', code: 'INT' };

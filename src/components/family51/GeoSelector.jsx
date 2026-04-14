@@ -3,12 +3,6 @@ import { useState } from 'react';
 export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const ChevronIcon = () => (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="6 9 12 15 18 9"></polyline>
-    </svg>
-  );
-
   const geoOptions = [
     { country: 'United Kingdom', jurisdiction: 'UK law', code: 'GB' },
     { country: 'USA (Eastern)', jurisdiction: 'US federal & state law', code: 'US-NY' },
@@ -46,14 +40,12 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
           gap: 6,
           transition: 'all 0.2s'
         }}
-        onMouseEnter={(e) => e.target.style.borderColor = accentColor + '77'}
-        onMouseLeave={(e) => e.target.style.borderColor = accentColor + '33'}
       >
         <span style={{ maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {geo.country}
         </span>
-        <span style={{ display: 'flex', alignItems: 'center', transform: isOpen ? 'rotate(180deg)' : '', transition: 'transform 0.2s' }}>
-          <ChevronIcon />
+        <span style={{ display: 'flex', alignItems: 'center', transform: isOpen ? 'rotate(180deg)' : '', transition: 'transform 0.2s', fontSize: 10 }}>
+          ▼
         </span>
       </button>
 
