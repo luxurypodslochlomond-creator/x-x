@@ -986,6 +986,23 @@ export default function AdminStrategicNotes() {
                     <li><strong className="text-yellow-300">Felling incident is SEPARATE from your title deed:</strong> It's an issue with David Smollett's actions on unregistered land, NOT a restriction in your deed</li>
                     <li><strong className="text-green-300">This strengthens your position:</strong> The felling proves David claims ownership of that land = confirms barn is contested/unregistered territory</li>
                   </ul>
+
+                  <p className="text-orange-300 font-bold mt-4">🔥 CRITICAL INSIGHT — FELLING AS INTERFERENCE TACTIC:</p>
+                  <p className="text-gray-300 mt-2">David's felling + road attempt = NOT random. He was trying to:</p>
+                  <ul className="text-gray-400 ml-6 mt-2 space-y-1 text-sm">
+                    <li>✗ Create his own access route behind cabins</li>
+                    <li>✗ Block or contest YOUR established access to barn</li>
+                    <li>✗ Demonstrate "possession" by tree clearance</li>
+                    <li>✗ Establish boundary/control before you filed prescriptive claim</li>
+                  </ul>
+                  <p className="text-green-300 font-bold mt-3">WHY THIS DESTROYS HIS DEFENSE:</p>
+                  <ul className="text-gray-300 ml-6 mt-2 space-y-1 text-sm">
+                    <li>✓ You had UNDISPUTED access/use BEFORE felling</li>
+                    <li>✓ His felling is EVIDENCE OF CONTEST (you were established, he interfered)</li>
+                    <li>✓ Shows he recognized your claim = admits barn is YOUR domain</li>
+                    <li>✓ Proves you had 28+ years PEACEFULLY before he tried blocking it</li>
+                    <li>✓ His interference = admission you owned it before he did anything</li>
+                  </ul>
                   </div>
 
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
