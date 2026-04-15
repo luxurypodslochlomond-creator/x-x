@@ -133,6 +133,7 @@ const AuthenticatedApp = () => {
       <Route path="/WristHealingPrivacy" element={<WristHealingPrivacyPage />} />
       <Route path="/Shed51" element={<Shed51Page />} />
       <Route path="/Family51" element={<Family51Page />} />
+      <Route path="/Sorted" element={<Family51Page />} />
       <Route path="/Family51Terms" element={<Family51TermsPage />} />
       <Route path="/Family51Privacy" element={<Family51PrivacyPage />} />
       <Route path="*" element={<PageNotFound />} />
