@@ -639,6 +639,56 @@ export default function AdminStrategicNotes() {
         </Card>
         )}
 
+        {/* STONEYMOLLAN - STRATEGIC PAUSE */}
+        {(!searchQuery || "stoneymollan eddie henderson felling quiet pause".includes(searchQuery)) && (
+        <Card className="bg-gradient-to-r from-amber-900/40 to-orange-900/40 border-2 border-amber-500/50">
+          <CardContent className="p-8 space-y-4">
+            <div className="flex items-center gap-3 mb-4">
+              <Shield className="w-8 h-8 text-amber-400" />
+              <h3 className="text-2xl text-amber-300 font-black">STONEYMOLLAN — STRATEGIC PAUSE</h3>
+            </div>
+            <div className="space-y-4 text-white">
+              <div className="bg-green-900/40 border-2 border-green-500 rounded-xl p-6">
+                <p className="text-green-300 font-bold text-xl mb-3">✅ SITUATION: QUIET (GOOD SIGN)</p>
+                <p className="text-white text-base">
+                  Felling not happening for time being. Eddie Henderson's legal letter worked — they're now considering using their own estate land for extraction routes instead of our road.
+                </p>
+              </div>
+
+              <div className="bg-amber-900/40 border-2 border-amber-500 rounded-xl p-6">
+                <p className="text-amber-300 font-bold text-xl mb-3">💰 EDDIE HENDERSON STATUS:</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>• Laid off from MIND (that's why we're skint)</li>
+                  <li>• Now independent Chartered Surveyor (Hendersons, East Netherton, Milnathort)</li>
+                  <li>• Legal letter cost was WORTH IT — stopped them using our road</li>
+                  <li>• Outstanding invoice from last year — needs settling</li>
+                  <li>• Ready to escalate again if needed (but would incur more costs)</li>
+                </ul>
+              </div>
+
+              <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
+                <p className="text-cyan-300 font-bold text-xl mb-3">🎯 STRATEGY NOW:</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>✅ Leave the situation QUIET for now</li>
+                  <li>✅ Settle Eddie's outstanding invoice (shows goodwill)</li>
+                  <li>✅ Keep Eddie on speed dial if they restart</li>
+                  <li>✅ Document water issues + livestock problems separately</li>
+                  <li>✅ Barn prescriptive possession — pursue independently when ready</li>
+                  <li>✅ Don't contact David Smollett directly yet (avoid alarm bells)</li>
+                </ul>
+              </div>
+
+              <div className="p-4 bg-purple-900/50 border-l-4 border-purple-500 rounded-md">
+                <p className="font-bold text-purple-300">NEXT ESCALATION:</p>
+                <p className="text-white text-sm mt-2">
+                  If they restart felling on the road → Call Eddie immediately. If they push water/livestock issues → Use water servitude letter. If they ignore → Consider barn prescriptive possession + water servitude enforcement together.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        )}
+
         {/* WHAT HAPPENS NEXT */}
         {(!searchQuery || "next week month share button p2p stoneymollan scottish enterprise".includes(searchQuery)) && (
         <Card className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border-2 border-cyan-500/50">
