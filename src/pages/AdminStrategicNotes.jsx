@@ -844,8 +844,14 @@ export default function AdminStrategicNotes() {
                 </p>
                 <ul className="text-white text-base space-y-3">
                   <li>
-                    <strong className="text-orange-300">Prescriptive possession = THE BARN ONLY</strong><br/>
-                    <span className="text-gray-300">Not automatically the fir acres, access roads, or surrounding field</span>
+                    <strong className="text-orange-300">WHY YOU OWN THE BARN (EVEN THOUGH IT'S ON HIS LAND):</strong><br/>
+                    <span className="text-gray-300">Scottish law says: 28 years of uninterrupted, peaceful, exclusive use = legal ownership of that structure</span><br/>
+                    <span className="text-gray-300">It doesn't matter whose land it sits on. Your use creates ownership.</span><br/>
+                    <span className="text-green-300">Think of it: he owns the dirt underneath, you own the barn + the right to use it forever</span>
+                  </li>
+                  <li>
+                    <strong className="text-orange-300">Prescriptive possession = THE BARN BUILDING ITSELF</strong><br/>
+                    <span className="text-gray-300">Not automatically the fir acres, access roads, or surrounding field (unless you've used those too for 28 years)</span>
                   </li>
                   <li>
                     <strong className="text-orange-300">You CAN access from your property directly = good</strong><br/>
