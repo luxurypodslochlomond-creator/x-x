@@ -331,10 +331,14 @@ function TrustPill({ text }) {
 function F51Mark() {
   return (
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-      <rect x="2" y="4" width="26" height="22" rx="4" stroke="#f97316" strokeWidth="1.5" fill="none" />
-      <path d="M6 11h18M6 16h18" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-      <path d="M10 20h10" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="24" cy="8" r="4" fill="#f97316" />
+      {/* Briefcase body */}
+      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="1.8" fill="none" />
+      {/* Briefcase handle */}
+      <path d="M11 11V8a4 4 0 018 0v3" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      {/* Centre clasp */}
+      <rect x="12" y="17" width="6" height="4" rx="1" stroke="#f97316" strokeWidth="1.4" fill="rgba(249,115,22,0.2)" />
+      {/* Horizontal divider line */}
+      <path d="M3 19h9M18 19h9" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" opacity="0.4" />
     </svg>
   );
 }

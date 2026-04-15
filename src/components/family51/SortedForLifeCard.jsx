@@ -37,7 +37,7 @@ const IconCancel = () => (
 const PERKS = [
   { Icon: IconUnlimited, text: 'Unlimited decodes, replies & dispute plans' },
   { Icon: IconAI,        text: 'Best AI model — elite advice every time' },
-  { Icon: IconShield,    text: 'Full case history — every doc, every result, saved forever' },
+  { Icon: IconShield,    text: 'Case history saved forever — subscribers only privilege' },
   { Icon: IconGuide,     text: 'Step-by-step escalation guide for every situation' },
   { Icon: IconCancel,    text: 'Cancel anytime — no contract, no catch' },
 ];
