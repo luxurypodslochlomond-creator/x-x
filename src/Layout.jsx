@@ -402,7 +402,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 3. CREATE (make stuff)
     const createNav = [
-      { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "Upload music, keep 90%" },
+      { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "AI co-manager for your music career" },
       { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, highlight: true, description: "Step-by-step guided drawing" },
       { title: "cheeseandonionbake", url: createPageUrl("CheeseAndOnionBake"), icon: Trophy, highlight: true, description: "Rocket League coaching · SSL" },
       { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
