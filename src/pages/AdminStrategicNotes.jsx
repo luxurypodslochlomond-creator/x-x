@@ -689,29 +689,51 @@ export default function AdminStrategicNotes() {
               </div>
 
               <div className="bg-red-900/40 border-2 border-red-500 rounded-xl p-6">
-                <p className="text-red-300 font-bold text-xl mb-3">⚠️ ESTATE'S LIKELY COUNTER-ARGUMENTS (& HOW TO BEAT THEM):</p>
+                <p className="text-red-300 font-bold text-xl mb-3">⚠️ DAVID SMOLLETT & CAMERON HOME FARM — THEIR LIKELY LEGAL GROUNDS TO FIGHT:</p>
                 <ul className="text-white text-base space-y-3">
                   <li>
-                    <strong className="text-red-300">1. "You had PERMISSION — not possession"</strong><br/>
-                    <span className="text-gray-300">↳ COUNTER: Permission can become possession if uninterrupted 28+ years. John will confirm he never asked permission — just used it. We also never asked permission.</span>
+                    <strong className="text-red-300">1. "You had PERMISSION — not adverse possession"</strong><br/>
+                    <span className="text-gray-300">↳ THEIR ANGLE: "They used it with our knowledge/implied permission as occupants of the land."</span><br/>
+                    <span className="text-green-300">↳ WE WIN IF: John Gilbert confirms he used barn without permission/consent, never asked. We also never sought permission in 4 years.</span>
                   </li>
                   <li>
-                    <strong className="text-red-300">2. "The barn is on OUR land — you trespassed"</strong><br/>
-                    <span className="text-gray-300">↳ COUNTER: Doesn't matter whose land it's ON. Prescriptive possession is about YOUR 28-year use. Land Registry can recognize possession separately from title.</span>
+                    <strong className="text-red-300">2. "Possession was INTERRUPTED"</strong><br/>
+                    <span className="text-gray-300">↳ THEIR ANGLE: Point to ANY gap in use (months away, repairs, tenant changes, etc.)</span><br/>
+                    <span className="text-green-300">↳ WE WIN IF: Evidence shows continuous control even if physically absent. John's use + our 4 years = unbroken chain. One trip away ≠ interruption if we retained control/locked it.</span>
                   </li>
                   <li>
-                    <strong className="text-red-300">3. "You maintained it, so you're a tenant, not owner"</strong><br/>
-                    <span className="text-gray-300">↳ COUNTER: Maintenance proves occupation & control (key elements). Tenants have landlords — you never paid rent, never had a lease, never asked permission.</span>
+                    <strong className="text-red-300">3. "Not 28 years—YOU only have 4 years"</strong><br/>
+                    <span className="text-gray-300">↳ THEIR ANGLE: Argue John's 24 years don't count because they sold to you (break in chain).</span><br/>
+                    <span className="text-green-300">↳ WE WIN IF: Scottish law allows "succession of possession" — if John used it & transferred peaceful possession to us, chain continues unbroken. Conveyance doesn't interrupt.</span>
                   </li>
                   <li>
-                    <strong className="text-red-300">4. "You're family — it was a casual arrangement"</strong><br/>
-                    <span className="text-gray-300">↳ COUNTER: 28 years is NOT casual. Consistency over time = legal possession, regardless of relationship.</span>
+                    <strong className="text-red-300">4. "You acknowledged OUR ownership in writing"</strong><br/>
+                    <span className="text-gray-300">↳ THEIR ANGLE: Produce any letter/email where you refer to it as "your barn" or admit it's on estate land.</span><br/>
+                    <span className="text-green-300">↳ WE WIN IF: No such document exists. They have burden of proof. Even if you said "your land," using barn for 28 years overrides that.</span>
                   </li>
                   <li>
-                    <strong className="text-red-300">5. "We never agreed to prescriptive possession"</strong><br/>
-                    <span className="text-gray-300">↳ COUNTER: They DON'T need to agree. That's the whole point of prescriptive possession — it's automatic after 28 years of uninterrupted use.</span>
+                    <strong className="text-red-300">5. "You paid rent / had a lease"</strong><br/>
+                    <span className="text-gray-300">↳ THEIR ANGLE: Try to produce hidden rent receipts or claim implied tenancy.</span><br/>
+                    <span className="text-green-300">↳ WE WIN IF: No payments made, no lease signed. That's the whole point — 28 years free, uncontested use = possession, not tenancy.</span>
+                  </li>
+                  <li>
+                    <strong className="text-red-300">6. "Possession wasn't OPEN/NOTORIOUS — you kept it hidden"</strong><br/>
+                    <span className="text-gray-300">↳ THEIR ANGLE: "They sneakily used it; no one knew they claimed ownership."</span><br/>
+                    <span className="text-green-300">↳ WE WIN IF: Evidence of visible use (vehicles, tools, maintenance work, local knowledge). 28 years can't stay hidden from neighbors/community.</span>
+                  </li>
+                  <li>
+                    <strong className="text-red-300">7. "You benefited from an IMPLIED LICENSE (not possession)"</strong><br/>
+                    <span className="text-gray-300">↳ THEIR ANGLE: "We tolerated use but never abandoned our ownership."</span><br/>
+                    <span className="text-green-300">↳ WE WIN IF: Tolerance ≠ license. License can be revoked; 28 years of uninterrupted possession cannot. Their silence = acquiescence to our ownership.</span>
                   </li>
                 </ul>
+              </div>
+
+              <div className="bg-yellow-900/40 border-2 border-yellow-600 rounded-xl p-6">
+                <p className="text-yellow-300 font-bold text-xl mb-3">🎯 THEIR WEAKEST POSITION:</p>
+                <p className="text-white text-base">
+                  <strong>They've never challenged you in 4 years. Estate manager says it's "technically" not yours. No written permission, no lease, no rent paid, no exclusion of you.</strong> All of this = you're winning. The longer the quiet continues, the stronger your claim gets. 28 years is a fortress.
+                </p>
               </div>
 
               <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
