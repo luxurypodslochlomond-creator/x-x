@@ -379,7 +379,6 @@ const LayoutInner = ({ children, currentPageName }) => {
     const productsNav = [
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals · subscription" },
-      { title: "ST51", url: createPageUrl("ST51"), icon: Waves, highlight: true, description: "Acoustic levitation · open-source physics" },
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Decode scary letters · subscription" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
@@ -411,6 +410,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     // 3. LEARN (understand the ecosystem)
     const learnNav = [
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
+      { title: "ST51 Whitepaper", url: createPageUrl("ST51"), icon: Waves, highlight: true, description: "Acoustic levitation · open-source physics" },
       { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, description: "One-pager for funders" },
       { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, description: "Fund real people healing Earth" },
       { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, description: "CB51 — artist management platform" },
