@@ -885,8 +885,40 @@ export default function AdminStrategicNotes() {
                     <strong className="text-blue-300">The process itself is transparent</strong><br/>
                     <span className="text-gray-300">Nothing hidden. Nothing shady. It's how the system works.</span>
                   </li>
-                </ul>
-                </div>
+                  </ul>
+                  </div>
+
+                  <div className="bg-purple-900/40 border-2 border-purple-500 rounded-xl p-6 mt-6">
+                  <p className="text-purple-300 font-bold text-xl mb-3">🔍 CAN YOU SEARCH WHO OWNS THE BARN NOW?</p>
+                  <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong className="text-purple-300">Land Registry search = YES, you can search</strong><br/>
+                    <span className="text-gray-300">Go to: <span className="font-mono text-sm">search.ros.gov.uk</span> (Register of Scotland)</span><br/>
+                    <span className="text-gray-300">Search by postcode or property address</span><br/>
+                    <span className="text-gray-300">Result shows: Current title holder + any legal rights</span>
+                  </li>
+                  <li>
+                    <strong className="text-purple-300">If there's a DEED:</strong><br/>
+                    <span className="text-gray-300">→ David Smollett is registered as owner</span><br/>
+                    <span className="text-gray-300">→ You can see exact boundaries, charges, servitudes</span>
+                  </li>
+                  <li>
+                    <strong className="text-purple-300">If there's NO DEED (unregistered land):</strong><br/>
+                    <span className="text-gray-300">→ Barn won't show up in Land Registry at all</span><br/>
+                    <span className="text-gray-300">→ This is ACTUALLY GOOD FOR YOU</span><br/>
+                    <span className="text-gray-300">→ Why? Because David has no legal proof either</span><br/>
+                    <span className="text-green-300">→ Prescriptive possession is your claim to ownership</span><br/>
+                    <span className="text-green-300">→ You're saying: "I've owned this 28 years unopposed. Register it in my name."</span>
+                  </li>
+                  <li>
+                    <strong className="text-purple-300">Next step: DO A SEARCH TODAY</strong><br/>
+                    <span className="text-gray-300">→ See if barn is registered</span><br/>
+                    <span className="text-gray-300">→ See what David's title actually says</span><br/>
+                    <span className="text-gray-300">→ Use this info to strengthen your prescriptive claim</span>
+                  </li>
+                  </ul>
+                  <p className="text-yellow-300 font-bold mt-4">No deed = no legal barrier. Just your 28 years of use vs his silence.</p>
+                  </div>
 
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
                 <p className="text-orange-300 font-bold text-xl mb-3">⚠️ CRITICAL CATCH — THE LAND AROUND THE BARN:</p>
