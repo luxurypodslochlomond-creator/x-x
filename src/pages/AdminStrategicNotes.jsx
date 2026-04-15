@@ -730,10 +730,57 @@ export default function AdminStrategicNotes() {
               </div>
 
               <div className="bg-yellow-900/40 border-2 border-yellow-600 rounded-xl p-6">
-                <p className="text-yellow-300 font-bold text-xl mb-3">🎯 THEIR WEAKEST POSITION:</p>
+                <p className="text-yellow-300 font-bold text-xl mb-3">🎯 WHEN WE FILE WITH LAND REGISTRY SCOTLAND:</p>
                 <p className="text-white text-base">
-                  <strong>They've never challenged you in 4 years. Estate manager says it's "technically" not yours. No written permission, no lease, no rent paid, no exclusion of you.</strong> All of this = you're winning. The longer the quiet continues, the stronger your claim gets. 28 years is a fortress.
+                  <strong>Land Registry will examine:</strong> Continuous occupation, control, maintenance, exclusion of true owner, and peaceful possession for 28 years. Their main defense options collapse because:
                 </p>
+                <ul className="text-white text-base space-y-2 mt-4">
+                  <li>✅ <strong>No written evidence of permission</strong> → You win</li>
+                  <li>✅ <strong>No lease or rent payments</strong> → You win</li>
+                  <li>✅ <strong>Chain of possession (John→You) unbroken</strong> → You win</li>
+                  <li>✅ <strong>Maintenance records prove control</strong> → You win</li>
+                  <li>✅ <strong>4 years quiet = no challenge from them</strong> → You win</li>
+                </ul>
+                <p className="text-green-300 font-bold mt-4">Registration is almost automatic if evidence is solid.</p>
+              </div>
+
+              <div className="bg-purple-900/40 border-2 border-purple-500 rounded-xl p-6 mt-6">
+                <p className="text-purple-300 font-bold text-xl mb-3">💡 WHY DAVID SMOLLETT SHOULD SELL YOU THE FIELD (STRATEGIC ANGLE):</p>
+                <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong className="text-purple-300">1. You have REGISTERED WATER SERVITUDE (1988)</strong><br/>
+                    <span className="text-gray-300">↳ David KNOWS this is on the deeds. He can't ignore it.</span>
+                  </li>
+                  <li>
+                    <strong className="text-purple-300">2. Livestock on the field = BREACH OF YOUR WATER RIGHTS</strong><br/>
+                    <span className="text-gray-300">↳ Cattle grazing = potential contamination = violates his legal obligation to keep your water pure.</span>
+                  </li>
+                  <li>
+                    <strong className="text-purple-300">3. You're about to win the barn (28-year prescriptive claim)</strong><br/>
+                    <span className="text-gray-300">↳ Once registered, you own barn + water rights → his leverage shrinks.</span>
+                  </li>
+                  <li>
+                    <strong className="text-purple-300">4. Future legal costs are expensive</strong><br/>
+                    <span className="text-gray-300">↳ If you sue on water servitude + barn prescriptive possession, he pays solicitor fees for BOTH fights.</span>
+                  </li>
+                  <li>
+                    <strong className="text-purple-300">5. You're "friendly" = perfect negotiating position</strong><br/>
+                    <span className="text-gray-300">↳ You can say: "Let's sell field to you. You get livestock off contaminated water, we get peace, barn is settled."</span><br/>
+                    <span className="text-green-300">↳ Much cheaper for him than litigation.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-green-900/40 border-2 border-green-500 rounded-xl p-6 mt-6">
+                <p className="text-green-300 font-bold text-xl mb-3">🎯 YOUR HIDDEN LEVERAGE (DON'T MENTION YET):</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>✅ Barn prescriptive possession claim = filed with Land Registry (automatic after 28 years)</li>
+                  <li>✅ Water servitude = registered 1988 (he can't deny it legally)</li>
+                  <li>✅ Livestock contamination = measurable breach (could escalate to environmental authorities)</li>
+                  <li>✅ Estate manager's "technically not yours" = admission you've had 28 years of possession</li>
+                  <li>✅ Felling already paused = you already won once, he knows you'll fight again</li>
+                </ul>
+                <p className="text-gray-300 mt-4 italic">When you approach David (friendly, not aggressive), he sees someone who HAS leverage but isn't using it maliciously. That's when he sells.</p>
               </div>
 
               <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
