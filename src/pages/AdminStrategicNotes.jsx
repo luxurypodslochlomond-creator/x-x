@@ -977,6 +977,17 @@ export default function AdminStrategicNotes() {
                   <p className="text-yellow-300 font-bold mt-6">🎯 NEXT MOVE: Find out who owns the land the barn sits on. Check Register of Scotland for any OTHER title that includes the barn. If nothing = prescriptive possession claim is your ONLY path.</p>
                   </div>
 
+                  <div className="bg-blue-900/40 border-2 border-blue-500 rounded-xl p-6 mt-6">
+                  <p className="text-blue-300 font-bold text-xl mb-3">✅ DEED RECONFIRMED (15 APRIL 2026):</p>
+                  <ul className="text-gray-300 ml-6 mt-3 space-y-2 text-base">
+                    <li><strong className="text-blue-300">Same document verified twice:</strong> DMB27637 confirms cottage only, not barn</li>
+                    <li><strong className="text-blue-300">Access route confirmed:</strong> Stoneymollan Road from public road to point "Y"</li>
+                    <li><strong className="text-red-400">IMPORTANT CLARIFICATION:</strong> No mention of felling operation in the legal deed itself</li>
+                    <li><strong className="text-yellow-300">Felling incident is SEPARATE from your title deed:</strong> It's an issue with David Smollett's actions on unregistered land, NOT a restriction in your deed</li>
+                    <li><strong className="text-green-300">This strengthens your position:</strong> The felling proves David claims ownership of that land = confirms barn is contested/unregistered territory</li>
+                  </ul>
+                  </div>
+
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
                 <p className="text-orange-300 font-bold text-xl mb-3">⚠️ CRITICAL CATCH — THE LAND AROUND THE BARN:</p>
                 <p className="text-white text-base mb-4">
