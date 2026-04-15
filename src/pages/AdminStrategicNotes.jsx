@@ -678,11 +678,48 @@ export default function AdminStrategicNotes() {
               </div>
 
               <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
+                <p className="text-cyan-300 font-bold text-xl mb-3">🎯 BARN PRESCRIPTIVE POSSESSION — HOW TO WIN:</p>
+                <ul className="text-white text-base space-y-2">
+                  <li>✅ <strong>GET JOHN GILBERT EMAIL:</strong> Confirm 24 years continuous use before selling to us</li>
+                  <li>✅ <strong>OUR EVIDENCE:</strong> 4 years continuous use (maintenance, photos, receipts, utilities)</li>
+                  <li>✅ <strong>POSSESSION CHAIN:</strong> 28 years total uninterrupted = STRONG claim under Scottish law</li>
+                  <li>✅ <strong>WHAT COUNTS:</strong> Occupation, control, maintenance, exclusion of others, treating as owner</li>
+                  <li>✅ <strong>FILE WITH:</strong> Eddie coordinates with solicitor → Land Registry Scotland prescriptive possession application</li>
+                </ul>
+              </div>
+
+              <div className="bg-red-900/40 border-2 border-red-500 rounded-xl p-6">
+                <p className="text-red-300 font-bold text-xl mb-3">⚠️ ESTATE'S LIKELY COUNTER-ARGUMENTS (& HOW TO BEAT THEM):</p>
+                <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong className="text-red-300">1. "You had PERMISSION — not possession"</strong><br/>
+                    <span className="text-gray-300">↳ COUNTER: Permission can become possession if uninterrupted 28+ years. John will confirm he never asked permission — just used it. We also never asked permission.</span>
+                  </li>
+                  <li>
+                    <strong className="text-red-300">2. "The barn is on OUR land — you trespassed"</strong><br/>
+                    <span className="text-gray-300">↳ COUNTER: Doesn't matter whose land it's ON. Prescriptive possession is about YOUR 28-year use. Land Registry can recognize possession separately from title.</span>
+                  </li>
+                  <li>
+                    <strong className="text-red-300">3. "You maintained it, so you're a tenant, not owner"</strong><br/>
+                    <span className="text-gray-300">↳ COUNTER: Maintenance proves occupation & control (key elements). Tenants have landlords — you never paid rent, never had a lease, never asked permission.</span>
+                  </li>
+                  <li>
+                    <strong className="text-red-300">4. "You're family — it was a casual arrangement"</strong><br/>
+                    <span className="text-gray-300">↳ COUNTER: 28 years is NOT casual. Consistency over time = legal possession, regardless of relationship.</span>
+                  </li>
+                  <li>
+                    <strong className="text-red-300">5. "We never agreed to prescriptive possession"</strong><br/>
+                    <span className="text-gray-300">↳ COUNTER: They DON'T need to agree. That's the whole point of prescriptive possession — it's automatic after 28 years of uninterrupted use.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
                 <p className="text-cyan-300 font-bold text-xl mb-3">🎯 STRATEGY NOW:</p>
                 <ul className="text-white text-base space-y-2">
-                  <li>✅ Leave the situation QUIET for now</li>
+                  <li>✅ Leave the FELLING situation QUIET (you've already won)</li>
                   <li>✅ Settle Eddie's outstanding invoice (shows goodwill)</li>
-                  <li>✅ Keep Eddie on speed dial if they restart</li>
+                  <li>✅ Keep Eddie on speed dial if they restart felling</li>
                   <li>✅ Document water issues + livestock problems separately</li>
                   <li>✅ Barn prescriptive possession — pursue independently when ready</li>
                   <li>✅ Don't contact David Smollett directly yet (avoid alarm bells)</li>
