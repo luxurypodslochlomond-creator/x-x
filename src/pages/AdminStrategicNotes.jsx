@@ -953,6 +953,17 @@ export default function AdminStrategicNotes() {
                     </li>
                   </ul>
                   <p className="text-yellow-300 font-bold mt-4">Barn is a ghost on the register. Your 28 years of peaceful use is now your legal foundation.</p>
+
+                  <p className="text-green-400 font-bold mt-6 text-lg">🔥 CRITICAL CORRECTION:</p>
+                  <p className="text-white mt-2">YOU & GILL OWN THE COTTAGE (DMB27637) — purchased 1 Feb 2022 for £625,000.</p>
+                  <p className="text-yellow-300 mt-2">David Smollett is NOT the registered owner. Who is he then? That's the question.</p>
+                  <p className="text-cyan-300 mt-2">Next step: Check your cottage deed (DMB27637) to see:</p>
+                  <ul className="text-gray-300 ml-6 mt-2 space-y-1">
+                    <li>→ Is the barn mentioned in YOUR title boundaries?</li>
+                    <li>→ What rights/servitudes came with YOUR purchase?</li>
+                    <li>→ Do you have legal access rights to the barn area?</li>
+                    <li>→ Who does the deed say owns adjacent land?</li>
+                  </ul>
                   </div>
 
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
