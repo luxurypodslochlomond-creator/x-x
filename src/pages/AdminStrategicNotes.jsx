@@ -835,7 +835,58 @@ export default function AdminStrategicNotes() {
                   </li>
                 </ul>
                 <p className="text-yellow-300 font-bold mt-4">He WILL be pissed. But he can't stop it if evidence is there.</p>
-              </div>
+                </div>
+
+                <div className="bg-green-900/40 border-2 border-green-500 rounded-xl p-6 mt-6">
+                <p className="text-green-300 font-bold text-xl mb-3">✅ IS THIS A DICK HEAD MOVE?</p>
+                <p className="text-white text-base mb-4">
+                  <strong>No, bro. It's literally the law.</strong>
+                </p>
+                <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong className="text-green-300">You've been using it openly for 28 years</strong><br/>
+                    <span className="text-gray-300">John for 24, you for 4. That's not hidden — he knew, you knew.</span>
+                  </li>
+                  <li>
+                    <strong className="text-green-300">Scottish law says: that use = ownership</strong><br/>
+                    <span className="text-gray-300">It's not a trick. It's how property law works.</span>
+                  </li>
+                  <li>
+                    <strong className="text-green-300">You're not being sneaky — you're using the official legal process</strong><br/>
+                    <span className="text-gray-300">Filing with Land Registry is transparent, open, and legit.</span>
+                  </li>
+                  <li>
+                    <strong className="text-green-300">He had 28 years to challenge it</strong><br/>
+                    <span className="text-gray-300">He didn't. So now you claim what's legally yours.</span>
+                  </li>
+                </ul>
+                <p className="text-green-300 font-bold mt-4">This is business, not betrayal. You earned this.</p>
+                </div>
+
+                <div className="bg-blue-900/40 border-2 border-blue-500 rounded-xl p-6 mt-6">
+                <p className="text-blue-300 font-bold text-xl mb-3">📋 IS THE APPLICATION PUBLIC/ONLINE?</p>
+                <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong className="text-blue-300">During process: NOT public yet</strong><br/>
+                    <span className="text-gray-300">Your application to Land Registry isn't posted online</span><br/>
+                    <span className="text-gray-300">BUT David gets formal notice directly from Land Registry</span>
+                  </li>
+                  <li>
+                    <strong className="text-blue-300">He finds out through official channels, not Google</strong><br/>
+                    <span className="text-gray-300">Land Registry letter = his only heads-up</span>
+                  </li>
+                  <li>
+                    <strong className="text-blue-300">After registration: PUBLICLY SEARCHABLE</strong><br/>
+                    <span className="text-gray-300">Once approved, Land Registry HAS the barn in your name</span><br/>
+                    <span className="text-gray-300">Anyone can search online and see you own it</span><br/>
+                    <span className="text-gray-300">→ But by then it's done. He can't stop it.</span>
+                  </li>
+                  <li>
+                    <strong className="text-blue-300">The process itself is transparent</strong><br/>
+                    <span className="text-gray-300">Nothing hidden. Nothing shady. It's how the system works.</span>
+                  </li>
+                </ul>
+                </div>
 
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
                 <p className="text-orange-300 font-bold text-xl mb-3">⚠️ CRITICAL CATCH — THE LAND AROUND THE BARN:</p>
