@@ -920,6 +920,41 @@ export default function AdminStrategicNotes() {
                   <p className="text-yellow-300 font-bold mt-4">No deed = no legal barrier. Just your 28 years of use vs his silence.</p>
                   </div>
 
+                  <div className="bg-green-900/40 border-2 border-green-500 rounded-xl p-6 mt-6">
+                  <p className="text-green-300 font-bold text-xl mb-3">✅ REGISTER SEARCH RESULTS (15 APRIL 2026):</p>
+                  <ul className="text-white text-base space-y-3">
+                    <li>
+                      <strong className="text-green-300">Upper Stoneymollan Cottage Found:</strong><br/>
+                      <span className="text-gray-300">Title number: DMB27637</span><br/>
+                      <span className="text-gray-300">Registered: YES</span><br/>
+                      <span className="text-gray-300">Last purchase: 1 February 2022 for £625,000</span><br/>
+                      <span className="text-gray-300">Original purchase: 15 May 1998 for £145,500</span>
+                    </li>
+                    <li>
+                      <strong className="text-green-300">THE BARN: NOT IN RESULTS</strong><br/>
+                      <span className="text-green-300">✓ No separate entry for barn</span><br/>
+                      <span className="text-green-300">✓ No other property showing the barn</span><br/>
+                      <span className="text-green-300">✓ Barn appears to be UNREGISTERED</span><br/>
+                      <span className="text-yellow-300">= PERFECT FOR YOUR CLAIM</span>
+                    </li>
+                    <li>
+                      <strong className="text-green-300">What this means:</strong><br/>
+                      <span className="text-gray-300">David Smollett owns the cottage legally (DMB27637)</span><br/>
+                      <span className="text-gray-300">But the barn sits in legal limbo — no registered owner</span><br/>
+                      <span className="text-gray-300">Your 28 years of exclusive use = your strongest claim to ownership</span>
+                    </li>
+                    <li>
+                      <strong className="text-green-300">Next: Check cottage title deed (DMB27637)</strong><br/>
+                      <span className="text-gray-300">Click on DMB27637 and get the FULL deed details:</span><br/>
+                      <span className="text-gray-300">→ What land boundaries are included?</span><br/>
+                      <span className="text-gray-300">→ Does barn appear in the description at all?</span><br/>
+                      <span className="text-gray-300">→ What servitudes/rights are mentioned?</span><br/>
+                      <span className="text-gray-300">→ Water access, access rights, drainage?</span>
+                    </li>
+                  </ul>
+                  <p className="text-yellow-300 font-bold mt-4">Barn is a ghost on the register. Your 28 years of peaceful use is now your legal foundation.</p>
+                  </div>
+
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
                 <p className="text-orange-300 font-bold text-xl mb-3">⚠️ CRITICAL CATCH — THE LAND AROUND THE BARN:</p>
                 <p className="text-white text-base mb-4">
