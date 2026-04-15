@@ -987,8 +987,8 @@ export default function AdminStrategicNotes() {
                     <li><strong className="text-green-300">This strengthens your position:</strong> The felling proves David claims ownership of that land = confirms barn is contested/unregistered territory</li>
                   </ul>
 
-                  <p className="text-orange-300 font-bold mt-4">🔥 CRITICAL INSIGHT — FELLING AS INTERFERENCE TACTIC:</p>
-                  <p className="text-gray-300 mt-2">David's felling + road attempt = NOT random. He was trying to:</p>
+                  <p className="text-orange-300 font-bold mt-4">🔥 CRITICAL INSIGHT — DAVID SMOLLETT (ESTATE OWNER) + FELLING:</p>
+                  <p className="text-gray-300 mt-2"><strong className="text-red-300">David owns the whole estate.</strong> His felling + road attempt = NOT random interference. He was trying to:</p>
                   <ul className="text-gray-400 ml-6 mt-2 space-y-1 text-sm">
                     <li>✗ Create his own access route behind cabins</li>
                     <li>✗ Block or contest YOUR established access to barn</li>
