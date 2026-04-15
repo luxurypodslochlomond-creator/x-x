@@ -489,13 +489,13 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Support", url: createPageUrl("CB51Support"), icon: Users },
     ];
 
-    // SORTED MENU - Family51
+    // SORTED MENU
     const sortedNav = [
       { title: "Decode a Letter", url: createPageUrl("Family51"), icon: FileText, highlight: true, description: "Plain English advice" },
       { title: "Write a Reply", url: createPageUrl("Family51"), icon: Mail, highlight: true, description: "Draft responses" },
       { title: "Resolve Conflict", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Navigate disputes" },
-      { title: "Terms", url: createPageUrl("Family51"), icon: Scale },
-      { title: "Privacy", url: createPageUrl("Family51"), icon: Eye },
+      { title: "Terms", url: "/SortedTerms", icon: Scale },
+      { title: "Privacy", url: "/SortedPrivacy", icon: Eye },
     ];
 
     // TRACKT

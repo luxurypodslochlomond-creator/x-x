@@ -1,0 +1,54 @@
+{
+  "name": "SortedCase",
+  "type": "object",
+  "description": "Saved case history for SORTED subscribers",
+  "properties": {
+    "tool": {
+      "type": "string",
+      "enum": [
+        "letter",
+        "reply",
+        "conflict"
+      ],
+      "description": "Which tool was used"
+    },
+    "input_text": {
+      "type": "string",
+      "description": "The original text/document the user submitted"
+    },
+    "ai_result": {
+      "type": "string",
+      "description": "The full AI analysis/result"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Short AI-generated summary (1 sentence)"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "urgent",
+        "important",
+        "routine",
+        "unknown"
+      ],
+      "default": "unknown"
+    },
+    "stripe_session_id": {
+      "type": "string",
+      "description": "Stripe session ID to verify subscription"
+    }
+  },
+  "required": [
+    "tool",
+    "ai_result"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

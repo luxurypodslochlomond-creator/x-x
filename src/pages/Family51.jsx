@@ -7,6 +7,7 @@ import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import SortedAbout from '@/components/family51/SortedAbout';
+import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -16,6 +17,7 @@ export default function Family51Page() {
   const [activeTool, setActiveTool] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const { isLocked, remaining, recordUse } = useSortedUsage();
 
@@ -23,6 +25,7 @@ export default function Family51Page() {
     if (isLocked) return; // blocked — paywall shown below
     setActiveTool(toolId);
     setMenuOpen(false);
+    setShowHistory(false);
   };
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export default function Family51Page() {
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+        <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           <F51Mark />
           <div style={{ lineHeight: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
@@ -53,18 +56,27 @@ export default function Family51Page() {
           </div>
         </motion.button>
 
-         {activeTool || showWhy ? (
+         {activeTool || showWhy || showHistory ? (
            <motion.button
-             onClick={() => { setActiveTool(null); setShowWhy(false); }}
+             onClick={() => { setActiveTool(null); setShowWhy(false); setShowHistory(false); }}
              whileTap={{ scale: 0.95 }}
              style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
            >
              BACK
            </motion.button>
          ) : (
-           <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.95 }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#f97316' }}>
-             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-           </motion.button>
+           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+             <motion.button
+               onClick={() => { setShowHistory(true); setMenuOpen(false); }}
+               whileTap={{ scale: 0.95 }}
+               style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#f97316', background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 6, padding: '5px 10px', cursor: 'pointer' }}
+             >
+               MY CASES
+             </motion.button>
+             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.95 }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#f97316' }}>
+               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+             </motion.button>
+           </div>
          )}
        </header>
 
@@ -77,18 +89,18 @@ export default function Family51Page() {
                  <WhyIcon />
                  Why SORTED?
                </button>
-               <a href="/Family51Terms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                 <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
-                 Terms of Service
-               </a>
-               <a href="/Family51Privacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                 <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
-                 Privacy Policy
-               </a>
-               <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none' }}>
-                 <EmailIcon />
-                 family@uf51.love
-               </a>
+               <a href="/SortedTerms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                  <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
+                  Terms of Service
+                </a>
+                <a href="/SortedPrivacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                  <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
+                  Privacy Policy
+                </a>
+                <a href="mailto:sorted@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none' }}>
+                  <EmailIcon />
+                  sorted@uf51.love
+                </a>
              </div>
            </motion.div>
          )}
@@ -217,6 +229,13 @@ export default function Family51Page() {
           </motion.div>
         )}
 
+        {/* ── CASE HISTORY ──────────────────────────────────── */}
+        {showHistory && !activeTool && (
+          <motion.div key="history" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+            <SortedCaseHistory />
+          </motion.div>
+        )}
+
         {/* ── TOOL VIEW ─────────────────────────────────────── */}
         {activeTool && (
           <motion.div
@@ -252,7 +271,7 @@ export default function Family51Page() {
               </p>
             </div>
             <div style={{ marginBottom: 20 }}>
-              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#06b6d4', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(6,182,212,0.3)', background: 'rgba(6,182,212,0.05)', marginBottom: 16, transition: 'all 0.15s' }} onMouseEnter={(e) => { e.target.style.background = 'rgba(6,182,212,0.12)'; e.target.style.borderColor = 'rgba(6,182,212,0.6)'; }} onMouseLeave={(e) => { e.target.style.background = 'rgba(6,182,212,0.05)'; e.target.style.borderColor = 'rgba(6,182,212,0.3)'; }}>💙 Can't afford it? We can help.</a>
+              <a href="mailto:sorted@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#06b6d4', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(6,182,212,0.3)', background: 'rgba(6,182,212,0.05)', marginBottom: 16, transition: 'all 0.15s' }} onMouseEnter={(e) => { e.target.style.background = 'rgba(6,182,212,0.12)'; e.target.style.borderColor = 'rgba(6,182,212,0.6)'; }} onMouseLeave={(e) => { e.target.style.background = 'rgba(6,182,212,0.05)'; e.target.style.borderColor = 'rgba(6,182,212,0.3)'; }}>💙 Can't afford it? We can help.</a>
             </div>
             <SortedForLifeCard compact />
           </motion.div>
