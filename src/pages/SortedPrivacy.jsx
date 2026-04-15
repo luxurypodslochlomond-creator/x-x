@@ -54,7 +54,7 @@ export default function SortedPrivacyPage() {
         </section>
 
         <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 50, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          Questions? <a href="mailto:sorted@uf51.love" style={{ color: '#f97316', textDecoration: 'none', fontWeight: 600 }}>sorted@uf51.love</a>
+          Questions? <a href="mailto:family@uf51.love" style={{ color: '#f97316', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
         </p>
       </div>
     </div>
