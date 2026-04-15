@@ -7,7 +7,6 @@ import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import SortedAbout from '@/components/family51/SortedAbout';
-import GeoSelector from '@/components/family51/GeoSelector';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -48,18 +47,9 @@ export default function Family51Page() {
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           <F51Mark />
-          <div style={{ lineHeight: 1, display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
-              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
-            </div>
-            {selectedLocation && (
-              <GeoSelector 
-                geo={selectedLocation} 
-                onChange={setSelectedLocation}
-                accentColor="#f97316"
-              />
-            )}
+          <div style={{ lineHeight: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
           </div>
         </motion.button>
 
