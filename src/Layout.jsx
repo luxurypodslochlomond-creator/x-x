@@ -375,48 +375,44 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // === MEMOIZED NAVIGATION SECTIONS ===
   const navs = React.useMemo(() => {
-    // 1. PRODUCTS (standalone apps with subscriptions + tools)
+    // 1. PRODUCTS (apps with subscriptions / paid tools)
     const productsNav = [
-      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "AI co-manager for artists" },
+      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Artist management · for managers" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals · subscription" },
-      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
+      { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Decode scary letters · subscription" },
-      { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies for two" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
-      { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, description: "Gergie7's game" },
+      { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies for two" },
+      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "AI co-manager for students" },
+      { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, description: "Step-by-step guided drawing" },
+      { title: "cheeseandonionbake", url: createPageUrl("CheeseAndOnionBake"), icon: Trophy, description: "Rocket League coaching · SSL" },
+      { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, description: "Gergie7's game" },
     ];
 
-    // 2. HEAL (immediate value - free entry)
+    // 2. HEAL FREE (free tools, immediate value — no signup needed)
     const healNav = [
-      { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
-      { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain - back, neck, etc" },
+      { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain — back, neck, joints" },
       { title: "Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
       { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery" },
       { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
       { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
       { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
-      { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
-    ];
-
-    // 3. CREATE (make stuff)
-    const createNav = [
-      { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, highlight: true, description: "AI co-manager for your music career" },
-      { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, highlight: true, description: "Step-by-step guided drawing" },
-      { title: "cheeseandonionbake", url: createPageUrl("CheeseAndOnionBake"), icon: Trophy, highlight: true, description: "Rocket League coaching · SSL" },
       { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
       { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
       { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "Submit cleanups" },
       { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Impact actions" },
+      { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
       ...(user ? [{ title: "My Wallet", url: createPageUrl("Profile"), icon: User, description: "Your P51 & rewards" }] : []),
     ];
 
-    // 4. LEARN (understand the ecosystem)
+    // 3. LEARN (understand the ecosystem)
     const learnNav = [
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
       { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, description: "One-pager for funders" },
       { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, description: "Fund real people healing Earth" },
+      { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, description: "CB51 — artist management platform" },
       { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
       { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, description: "PROVE connection is real" },
       { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
@@ -535,10 +531,10 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, description: "Instagram flyers" }
     ] : [];
 
-    return { productsNav, healNav, createNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
+    return { productsNav, healNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
   }, [user, archiveSearch]);
 
-  const { productsNav, healNav, createNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav } = navs;
+  const { productsNav, healNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav } = navs;
 
   const isActivePage = (url) => {
     const navPath = new URL(url, window.location.origin).pathname;
@@ -683,8 +679,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                           ) : (
                             <>
                               <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                              <NavSection title="HEAL" color="cyan" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                              <NavSection title="CREATE" color="cyan" items={createNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="HEAL FREE" color="cyan" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                               <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
                               <div className="space-y-2">
                                 <input
@@ -780,8 +775,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : (
               <>
                 <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} defaultOpen={true} />
-                <NavSection title="HEAL" color="cyan" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
-                <NavSection title="CREATE" color="cyan" items={createNav} isActivePage={isActivePage} />
+                <NavSection title="HEAL FREE" color="cyan" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
                 <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
                 <div className="space-y-2">
                   <input
