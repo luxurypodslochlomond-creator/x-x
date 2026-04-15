@@ -377,7 +377,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const navs = React.useMemo(() => {
     // 1. PRODUCTS (apps with subscriptions / paid tools)
     const productsNav = [
-      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Artist management · for managers" },
+      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals · subscription" },
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Decode scary letters · subscription" },
