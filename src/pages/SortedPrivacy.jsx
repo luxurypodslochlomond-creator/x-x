@@ -1,6 +1,6 @@
 export default function SortedPrivacyPage() {
   return (
-    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", padding: '40px 20px', fontSize: '16px', lineHeight: 1.6 }}>
+    <div style={{ minHeight: '100dvh', background: '#080a0f', color: '#fff', fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", padding: '40px 20px', fontSize: '16px', lineHeight: 1.6, display: 'flex', flexDirection: 'column' }}>
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
         <div style={{ marginBottom: 40 }}>
           <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 8, color: '#f97316' }}>SORTED</h1>
