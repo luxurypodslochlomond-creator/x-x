@@ -656,14 +656,25 @@ export default function AdminStrategicNotes() {
               </div>
 
               <div className="bg-amber-900/40 border-2 border-amber-500 rounded-xl p-6">
-                <p className="text-amber-300 font-bold text-xl mb-3">💰 EDDIE HENDERSON STATUS:</p>
-                <ul className="text-white text-base space-y-2">
-                  <li>• Laid off from MIND (that's why we're skint)</li>
-                  <li>• Now independent Chartered Surveyor (Hendersons, East Netherton, Milnathort)</li>
-                  <li>• Legal letter cost was WORTH IT — stopped them using our road</li>
-                  <li>• Outstanding invoice from last year — needs settling</li>
-                  <li>• Ready to escalate again if needed (but would incur more costs)</li>
-                </ul>
+              <p className="text-amber-300 font-bold text-xl mb-3">💰 BARN PRESCRIPTIVE POSSESSION CLAIM:</p>
+              <ul className="text-white text-base space-y-2">
+                <li>• <strong>John Gilbert (previous owner):</strong> 24 years continuous use</li>
+                <li>• <strong>Our use:</strong> 4 years continuous (since buying Stoneymollan)</li>
+                <li>• <strong>TOTAL CHAIN:</strong> 28 years uninterrupted use = STRONG claim</li>
+                <li>• <strong>ACTION:</strong> Get email from John confirming his 24 years of use</li>
+                <li>• <strong>Next step:</strong> Eddie helps file prescriptive possession claim with Land Registry Scotland</li>
+              </ul>
+              </div>
+
+              <div className="bg-amber-900/40 border-2 border-amber-500 rounded-xl p-6">
+              <p className="text-amber-300 font-bold text-xl mb-3">💰 EDDIE HENDERSON STATUS:</p>
+              <ul className="text-white text-base space-y-2">
+                <li>• Laid off from MIND (that's why we're skint)</li>
+                <li>• Now independent Chartered Surveyor (Hendersons, East Netherton, Milnathort)</li>
+                <li>• Legal letter cost was WORTH IT — stopped them using our road</li>
+                <li>• Outstanding invoice from last year — needs settling</li>
+                <li>• Ready to help coordinate barn prescriptive possession filing (could save legal fees)</li>
+              </ul>
               </div>
 
               <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
