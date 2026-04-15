@@ -814,6 +814,60 @@ export default function AdminStrategicNotes() {
                 </ol>
               </div>
 
+              <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6 mt-6">
+                <p className="text-cyan-300 font-bold text-xl mb-3">📬 HOW DOES DAVID GET INFORMED?</p>
+                <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong className="text-cyan-300">Land Registry notifies him officially</strong><br/>
+                    <span className="text-gray-300">When you file prescriptive possession claim, Land Registry sends formal notice to current title holder (David Smollett)</span>
+                  </li>
+                  <li>
+                    <strong className="text-cyan-300">He gets 2 months to object</strong><br/>
+                    <span className="text-gray-300">He can submit objection, but if evidence is solid (28 years + John's statement), objection fails</span>
+                  </li>
+                  <li>
+                    <strong className="text-cyan-300">Land Registry examines both sides</strong><br/>
+                    <span className="text-gray-300">They review your evidence vs his objection. 28 years unbroken = you win automatically.</span>
+                  </li>
+                  <li>
+                    <strong className="text-cyan-300">Then he gets final notification</strong><br/>
+                    <span className="text-gray-300">Barn is registered in your name. It's official. No take-backs.</span>
+                  </li>
+                </ul>
+                <p className="text-yellow-300 font-bold mt-4">He WILL be pissed. But he can't stop it if evidence is there.</p>
+              </div>
+
+              <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
+                <p className="text-orange-300 font-bold text-xl mb-3">⚠️ CRITICAL CATCH — THE LAND AROUND THE BARN:</p>
+                <p className="text-white text-base mb-4">
+                  <strong>You own the barn, but do you own the RIGHT to use the land around it?</strong>
+                </p>
+                <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong className="text-orange-300">Prescriptive possession = THE BARN ONLY</strong><br/>
+                    <span className="text-gray-300">Not automatically the fir acres, access roads, or surrounding field</span>
+                  </li>
+                  <li>
+                    <strong className="text-orange-300">You CAN access from your property directly = good</strong><br/>
+                    <span className="text-gray-300">But you might need legal rights for:</span><br/>
+                    <span className="text-gray-300">→ Maintenance work on barn exterior</span><br/>
+                    <span className="text-gray-300">→ Water/drainage runoff from barn</span><br/>
+                    <span className="text-gray-300">→ Moving equipment/supplies to barn</span><br/>
+                    <span className="text-gray-300">→ Trees/fencing on surrounding land</span>
+                  </li>
+                  <li>
+                    <strong className="text-orange-300">Solution: Claim PRESCRIPTIVE ACCESS RIGHTS too</strong><br/>
+                    <span className="text-gray-300">If you've been maintaining access &amp; using surrounding land for 28 years (John + you), file that in same claim</span><br/>
+                    <span className="text-green-300">→ "I've had uninterrupted access/use of surrounding land for 28 years for barn maintenance"</span>
+                  </li>
+                  <li>
+                    <strong className="text-orange-300">OR negotiate with David</strong><br/>
+                    <span className="text-gray-300">Once barn is registered, ask him for formal access/maintenance rights on surrounding land as part of field sale</span>
+                  </li>
+                </ul>
+                <p className="text-yellow-300 font-bold mt-4">Don't just claim the barn. Claim the legal bundle of rights you need to USE it.</p>
+              </div>
+
               <div className="bg-red-900/40 border-2 border-red-500 rounded-xl p-6 mt-6">
                 <p className="text-red-300 font-bold text-xl mb-3">⚡ HONEST TRUTH — WILL HE FIGHT?</p>
                 <p className="text-white text-base mb-4">
