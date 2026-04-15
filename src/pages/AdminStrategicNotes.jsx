@@ -783,6 +783,67 @@ export default function AdminStrategicNotes() {
                 <p className="text-gray-300 mt-4 italic">When you approach David (friendly, not aggressive), he sees someone who HAS leverage but isn't using it maliciously. That's when he sells.</p>
               </div>
 
+              <div className="bg-blue-900/40 border-2 border-blue-500 rounded-xl p-6 mt-6">
+                <p className="text-blue-300 font-bold text-xl mb-3">📋 ACTION PLAN — PRESCRIPTIVE POSSESSION ROUTE (CHEAPEST, FASTEST):</p>
+                <ol className="text-white text-base space-y-3 list-decimal list-inside">
+                  <li>
+                    <strong>Get John Gilbert's written statement</strong><br/>
+                    <span className="text-gray-300">→ "I used barn 24 years, never asked permission, never paid rent, just used it peacefully"</span><br/>
+                    <span className="text-green-300">→ Email is fine. This is your golden evidence.</span>
+                  </li>
+                  <li>
+                    <strong>Gather control evidence</strong><br/>
+                    <span className="text-gray-300">→ Photos, maintenance records, tools, keys, lock changes, invoices, receipts</span><br/>
+                    <span className="text-green-300">→ Anything proving continuous occupation &amp; control</span>
+                  </li>
+                  <li>
+                    <strong>File prescriptive possession claim with Land Registry Scotland</strong><br/>
+                    <span className="text-gray-300">→ Cost: £500-1000 (paralegal) or DIY cheaper</span><br/>
+                    <span className="text-green-300">→ NOT litigation — administrative registration. They examine, register if solid.</span>
+                  </li>
+                  <li>
+                    <strong>Wait 2-3 months for registration</strong><br/>
+                    <span className="text-gray-300">→ You're now legal owner on Land Registry</span><br/>
+                    <span className="text-green-300">→ Gives you negotiating power</span>
+                  </li>
+                  <li>
+                    <strong>Approach David as new owner</strong><br/>
+                    <span className="text-gray-300">→ "Barn's registered. We've got water rights on field. Let's solve cleanly — sell us field."</span><br/>
+                    <span className="text-green-300">→ He does math: fighting = £10k legal fees. Selling = selling price. He sells.</span>
+                  </li>
+                </ol>
+              </div>
+
+              <div className="bg-red-900/40 border-2 border-red-500 rounded-xl p-6 mt-6">
+                <p className="text-red-300 font-bold text-xl mb-3">⚡ HONEST TRUTH — WILL HE FIGHT?</p>
+                <p className="text-white text-base mb-4">
+                  <strong>No. He'll accept the barn is gone.</strong>
+                </p>
+                <ul className="text-white text-base space-y-3">
+                  <li>
+                    <strong>He already paused felling</strong> = he knows you have legal footing<br/>
+                    <span className="text-gray-300">Estate manager said "technically not yours" = admission of your possession</span>
+                  </li>
+                  <li>
+                    <strong>Land Registry wins = automatic</strong> = no court, no wiggle room<br/>
+                    <span className="text-gray-300">Once registered, it's DONE. He can't reverse it.</span>
+                  </li>
+                  <li>
+                    <strong>He's a businessman</strong> = fighting costs £10k+ in legal fees for a barn he doesn't actively use<br/>
+                    <span className="text-gray-300">Zero ROI on fighting. He'll just accept the loss.</span>
+                  </li>
+                  <li>
+                    <strong>You're friendly, not aggressive</strong> = he's not feeling cornered<br/>
+                    <span className="text-gray-300">When cornered, people fight. When treated fairly, they accept reality.</span>
+                  </li>
+                  <li>
+                    <strong>He's already moved on</strong> = he's not emotionally attached to the barn<br/>
+                    <span className="text-gray-300">His focus = keeping the estate intact. Barn is a loss he can live with.</span>
+                  </li>
+                </ul>
+                <p className="text-green-300 font-bold mt-4">He won't fight. He'll be annoyed, then accept it. That's when you negotiate the field.</p>
+              </div>
+
               <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded-xl p-6">
                 <p className="text-cyan-300 font-bold text-xl mb-3">🎯 STRATEGY NOW:</p>
                 <ul className="text-white text-base space-y-2">
