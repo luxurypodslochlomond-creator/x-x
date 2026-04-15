@@ -56,6 +56,7 @@ const Family51TermsPage = React.lazy(() => import('./pages/Family51Terms'));
 const Family51PrivacyPage = React.lazy(() => import('./pages/Family51Privacy'));
 const SortedTermsPage = React.lazy(() => import('./pages/SortedTerms'));
 const SortedPrivacyPage = React.lazy(() => import('./pages/SortedPrivacy'));
+const ST51Page = React.lazy(() => import('./pages/ST51'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -140,6 +141,7 @@ const AuthenticatedApp = () => {
       <Route path="/Family51Privacy" element={<Family51PrivacyPage />} />
       <Route path="/SortedTerms" element={<SortedTermsPage />} />
       <Route path="/SortedPrivacy" element={<SortedPrivacyPage />} />
+      <Route path="/ST51" element={<LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
