@@ -466,29 +466,16 @@ export default function ST51Page() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
               {[
                 {
-                  title: 'How Acoustic Levitation Works',
-                  content:
-                    'Sound creates pressure waves. When these waves reflect in a chamber, they create standing wave patterns with nodes (low pressure) and antinodes (high pressure). Objects placed at pressure nodes experience a force balancing gravity.',
+                  title: 'The Simple Truth',
+                  content: 'Sound = pressure waves. Stack them right in a box, and they push stuff up. That\'s it.',
                 },
                 {
-                  title: 'Standing Waves & Resonance',
-                  content:
-                    'Resonance occurs when the driving frequency matches a natural frequency of your chamber. At resonance, acoustic pressure amplifies dramatically with minimal input energy. This is where levitation becomes effortless.',
+                  title: 'Sweet Spot = Power',
+                  content: 'When frequency matches your chamber, power amplifies 10x+. You\'re working WITH physics, not against it. Find it, and everything gets easier.',
                 },
                 {
-                  title: 'The Role of Frequency',
-                  content:
-                    'Lower frequencies travel farther but need larger chambers. Higher frequencies (ultrasonic 40kHz) work in compact spaces but require more precise tuning. Your chamber length determines fundamental frequency: f = c/(2L), where c is speed of sound.',
-                },
-                {
-                  title: 'Why Multiple Transducers Matter',
-                  content:
-                    'Single transducers create uneven pressure. Multiple transducers positioned symmetrically create stable, uniform standing waves. This reduces power requirement and improves levitation stability.',
-                },
-                {
-                  title: 'Energy Efficiency',
-                  content:
-                    'At resonance, acoustic energy couples efficiently to the standing wave. Off-resonance, most energy dissipates as heat. This is why finding the sweet spot is crucial — it\'s not magic, it\'s physics working *with* you.',
+                  title: 'Why It Matters',
+                  content: 'This is how resonance works everywhere — atoms, sound, light, consciousness. Understanding it changes how you solve problems.',
                 },
               ].map((section, idx) => (
                 <motion.div
@@ -502,29 +489,38 @@ export default function ST51Page() {
                       <CardTitle className="text-blue-400">{section.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-300 text-sm leading-relaxed">{section.content}</p>
+                      <p className="text-gray-300 text-lg font-semibold leading-relaxed">{section.content}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
 
-              <Card className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border-cyan-400/50">
+              <Card className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-green-400/50">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-pink-400" /> Why This Matters
+                    <Zap className="w-5 h-5 text-green-400" /> Try It Yourself (Phone Speakers)
                   </CardTitle>
+                  <CardDescription>No fancy equipment needed</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-gray-300">
-                  <p>
-                    Acoustic levitation isn't just physics — it's a window into how the universe works. Every system, from atoms to galaxies, responds to resonance. Understanding this principle helps us:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-gray-400">
-                    <li>Solve problems by working *with* natural forces, not against them</li>
-                    <li>Design more efficient technology aligned with physics</li>
-                    <li>Understand consciousness and connection at fundamental level</li>
-                    <li>Build tools that heal and elevate humanity</li>
-                  </ul>
-                  <p className="text-cyan-300 font-bold">This is why ST51 is open. Knowledge is humanity's inheritance. ♾️</p>
+                  <ol className="space-y-2">
+                    <li className="flex gap-3">
+                      <span className="text-green-400 font-bold flex-shrink-0">1.</span>
+                      <span>Put a small polystyrene ball on top of a phone speaker</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-green-400 font-bold flex-shrink-0">2.</span>
+                      <span>Play a tone generator app at 40-50 kHz</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-green-400 font-bold flex-shrink-0">3.</span>
+                      <span>It lifts. That's acoustic levitation in your pocket.</span>
+                    </li>
+                  </ol>
+                  <div className="p-3 bg-green-900/30 rounded-lg mt-4 border border-green-500/30">
+                    <div className="font-bold text-green-300 mb-1">The Point:</div>
+                    <p>It's not magic. It's just pressure. Learn the principle, scale it, and you can build anything.</p>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
