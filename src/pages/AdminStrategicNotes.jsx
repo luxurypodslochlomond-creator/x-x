@@ -957,13 +957,24 @@ export default function AdminStrategicNotes() {
                   <p className="text-green-400 font-bold mt-6 text-lg">🔥 CRITICAL CORRECTION:</p>
                   <p className="text-white mt-2">YOU & GILL OWN THE COTTAGE (DMB27637) — purchased 1 Feb 2022 for £625,000.</p>
                   <p className="text-yellow-300 mt-2">David Smollett is NOT the registered owner. Who is he then? That's the question.</p>
-                  <p className="text-cyan-300 mt-2">Next step: Check your cottage deed (DMB27637) to see:</p>
-                  <ul className="text-gray-300 ml-6 mt-2 space-y-1">
-                    <li>→ Is the barn mentioned in YOUR title boundaries?</li>
-                    <li>→ What rights/servitudes came with YOUR purchase?</li>
-                    <li>→ Do you have legal access rights to the barn area?</li>
-                    <li>→ Who does the deed say owns adjacent land?</li>
+                  <p className="text-green-400 font-bold mt-4">✅ DEED ANALYSIS (DMB27637) - UPLOADED & READ:</p>
+                  <ul className="text-gray-300 ml-6 mt-3 space-y-2 text-base">
+                    <li><strong className="text-green-300">YOUR OWNERSHIP:</strong> Brian Hughes & Gillian Barbara Brown, equal share, registered 4 Feb 2022 after 1 Feb 2022 purchase for £625,000</li>
+                    <li><strong className="text-green-300">COTTAGE BOUNDARIES:</strong> Edged red on title plan — does NOT include the barn</li>
+                    <li><strong className="text-yellow-300">⚠️ BARN NOT MENTIONED:</strong> The property description is silent on the barn. It's not in your title.</li>
+                    <li><strong className="text-cyan-300">YOUR LEGAL RIGHTS (Servitudes):</strong>
+                      <ul className="ml-6 mt-2 space-y-1 text-gray-400">
+                        <li>✓ Access/egress over Stoneymollan Road (from public road to point "Y")</li>
+                        <li>✓ Electricity line rights (for cables)</li>
+                        <li>✓ Water supply from northern stream + maintenance access</li>
+                        <li>✓ Sewerage, drainage, gas pipes through servient land</li>
+                      </ul>
+                    </li>
+                    <li><strong className="text-red-400">CRITICAL FINDING:</strong> The "Servient Tenement" (land burdened by your rights) is the ACCESS ROAD up to point Y. The barn location is beyond this in legal terms.</li>
+                    <li><strong className="text-orange-300">WHO OWNS THE BARN LAND?</strong> Not you, and not explicitly stated in the deed. Most likely David Smollett — but if unregistered, that's YOUR lever.</li>
                   </ul>
+
+                  <p className="text-yellow-300 font-bold mt-6">🎯 NEXT MOVE: Find out who owns the land the barn sits on. Check Register of Scotland for any OTHER title that includes the barn. If nothing = prescriptive possession claim is your ONLY path.</p>
                   </div>
 
               <div className="bg-orange-900/40 border-2 border-orange-500 rounded-xl p-6 mt-6">
