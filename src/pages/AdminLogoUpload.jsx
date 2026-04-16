@@ -58,13 +58,13 @@ export default function AdminLogoUpload() {
   };
 
   const generatedLogos = [
-    // Sub Club Energy (Bold Blue, Stark, Simple)
-    { name: 'Blue Bracket', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e22443d7b_generated_image.png', category: 'Sub Club' },
-    { name: 'Bold 51', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/4091ac533_generated_image.png', category: 'Sub Club' },
-    { name: 'Ascending Wave', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b1c2de26d_generated_image.png', category: 'Sub Club' },
-    { name: 'Geometric Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/ab9e04d97_generated_image.png', category: 'Sub Club' },
-    { name: 'UF51 Stark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/16bbc5d74_generated_image.png', category: 'Sub Club' },
-    { name: 'Connected Dots', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/0b9115d41_generated_image.png', category: 'Sub Club' },
+    // Bauhaus / Swiss Modernism (Black + Magenta)
+    { name: 'Concentric Arcs', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/34999b936_generated_image.png', category: 'Bauhaus' },
+    { name: 'Circles + Rectangles', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/310e9138a_generated_image.png', category: 'Bauhaus' },
+    { name: 'Abstract Geometry', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/66037900f_generated_image.png', category: 'Bauhaus' },
+    { name: 'Intersecting Forms', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d95f88bcb_generated_image.png', category: 'Bauhaus' },
+    { name: 'Minimalist Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/4283b9485_generated_image.png', category: 'Bauhaus' },
+    { name: 'Geometric Layers', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b343908f3_generated_image.png', category: 'Bauhaus' },
   ];
 
   const downloadGeneratedLogo = (url, name) => {
@@ -85,9 +85,9 @@ export default function AdminLogoUpload() {
         {/* Generated Options */}
         <div className="mb-12">
           <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
-            <span className="text-cyan-400">♾️</span> Bold & Simple
+            <span className="text-cyan-400">♾️</span> Bauhaus Modernism
           </h2>
-          <p className="text-gray-400 mb-6">Electric blue. Stark. No noise. Sub Club energy. Pick one.</p>
+          <p className="text-gray-400 mb-6">Black + magenta. Geometric. Timeless. Swiss design DNA. Pick one.</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
             {generatedLogos.map((logo) => (
