@@ -58,13 +58,13 @@ export default function AdminLogoUpload() {
   };
 
   const generatedLogos = [
-    // Minimalist Core (No Scroll Needed)
-    { name: '51 + Heart Dot', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d3e155230_generated_image.png', category: 'Minimalist' },
-    { name: 'Human + AI Pixel Merge', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/aabba62fe_generated_image.png', category: 'Minimalist' },
-    { name: 'Wave Through Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/1de210dae_generated_image.png', category: 'Minimalist' },
-    { name: 'Frequency Rings + Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6b82f4248_generated_image.png', category: 'Minimalist' },
-    { name: 'U Wave Monogram', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/ea46dd6b5_generated_image.png', category: 'Minimalist' },
-    { name: 'Venn Circles + Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/badfb0a88_generated_image.png', category: 'Minimalist' },
+    // Data Sovereignty Core (Shield + Lock + Open Source)
+    { name: 'Shield + Unlocked Padlock', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/71c9b8058_generated_image.png', category: 'Sovereignty' },
+    { name: 'Open-Source Symbol + Shield', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/aa9a3840d_generated_image.png', category: 'Sovereignty' },
+    { name: 'Shield + Heart + Lock', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/adfc5d224_generated_image.png', category: 'Sovereignty' },
+    { name: 'Fork Symbol + Shield', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/8b4c60f1c_generated_image.png', category: 'Sovereignty' },
+    { name: 'Transparent Shield', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/98278a8bc_generated_image.png', category: 'Sovereignty' },
+    { name: 'Shield + Open Hand', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/ff66f1b44_generated_image.png', category: 'Sovereignty' },
   ];
 
   const downloadGeneratedLogo = (url, name) => {
@@ -85,9 +85,9 @@ export default function AdminLogoUpload() {
         {/* Generated Options */}
         <div className="mb-12">
           <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
-            <span className="text-cyan-400">✨</span> Minimal Core Designs
+            <span className="text-cyan-400">🛡️</span> Data Sovereignty Suite
           </h2>
-          <p className="text-gray-400 mb-6">6 simple options. All fit on one screen. Pick your vibe.</p>
+          <p className="text-gray-400 mb-6">Shield + Lock + Open Source. Privacy. Freedom. Transparency. Pick one.</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
             {generatedLogos.map((logo) => (
