@@ -115,31 +115,28 @@ const ProductTile = ({ product, index }) => {
   return (
     <Link to={createPageUrl(url)}>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.05 * index }}
-        whileHover={{ y: -4, scale: 1.01 }}
-        whileTap={{ scale: 0.98 }}
-        className={`group bg-black border-2 ${border} p-6 cursor-pointer transition-all h-full flex flex-col gap-3 relative overflow-hidden`}
-        style={{ boxShadow: `0 0 0 rgba(0,0,0,0)` }}
-        onMouseEnter={e => e.currentTarget.style.boxShadow = `0 8px 40px ${glow}`}
-        onMouseLeave={e => e.currentTarget.style.boxShadow = `0 0 0 rgba(0,0,0,0)`}
+        transition={{ delay: 0.04 * index }}
+        whileHover={{ y: -3 }}
+        whileTap={{ scale: 0.97 }}
+        className={`group bg-black border-2 ${border} p-4 cursor-pointer transition-all h-full flex flex-col gap-2`}
+        onMouseEnter={e => e.currentTarget.style.boxShadow = `0 6px 30px ${glow}`}
+        onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
       >
-        <div className="flex items-start justify-between">
+        <div className="flex items-center justify-between">
           {iconClass
-            ? <Icon className={`w-10 h-10 ${iconClass} flex-shrink-0`} />
-            : <Icon size={40} animate={false} />
+            ? <Icon className={`w-7 h-7 ${iconClass} flex-shrink-0`} />
+            : <Icon size={28} animate={false} />
           }
-          <span className={`text-[10px] font-mono font-bold border px-2 py-0.5 rounded-full ${badgeColor}`}>{badge}</span>
+          <span className={`text-[9px] font-mono font-bold border px-1.5 py-0.5 rounded-full ${badgeColor}`}>{badge}</span>
         </div>
-        <div>
-          <p className="text-gray-400 text-xs font-mono mb-1">{tag}</p>
-          <h3 className="text-white font-black font-mono text-lg leading-tight">{name}</h3>
-        </div>
-        <p className="text-gray-400 text-sm leading-relaxed flex-1">{desc}</p>
-        <div className="flex items-center gap-1 text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors mt-auto pt-2">
-          <span>EXPLORE</span>
-          <ArrowRight className="w-3 h-3" />
+        <h3 className="text-white font-black font-mono text-sm leading-tight">{name}</h3>
+        <p className="text-gray-500 text-[11px] font-mono leading-tight">{tag}</p>
+        <p className="text-gray-400 text-xs leading-relaxed flex-1">{desc}</p>
+        <div className="flex items-center gap-1 text-[10px] font-mono text-gray-600 group-hover:text-gray-300 transition-colors pt-1">
+          <span>OPEN</span>
+          <ArrowRight className="w-2.5 h-2.5" />
         </div>
       </motion.div>
     </Link>
@@ -182,13 +179,14 @@ export default function WelcomePage() {
           <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
 
           <p className="text-xl md:text-2xl text-white font-bold leading-snug pt-2">
-            A suite of AI tools built to do good.<br />
-            <span className="text-cyan-400">No hype. No agenda. Just useful.</span>
+            We made stuff that actually helps.<br />
+            <span className="text-cyan-400">Pick what you need. Ignore the rest.</span>
           </p>
 
           <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-            Technology is moving fast. We think it should be used honestly — to solve real problems for real people, 
-            not to extract data or generate noise. These tools do something specific. They work. You can judge for yourself.
+            Not a startup. Not a movement. Just a small team using AI to fix specific problems — 
+            a scary letter, a stressed dog, tinnitus, a gig offer you don't understand. 
+            Each thing below does one job and does it properly. Free where we can. Honest about when it isn't.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
@@ -216,7 +214,7 @@ export default function WelcomePage() {
             <p className="text-xs font-mono text-gray-500 tracking-widest">THE TOOLS</p>
             <div className="h-px bg-cyan-500/20 flex-1" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {PRODUCTS.map((product, i) => (
               <ProductTile key={product.id} product={product} index={i} />
             ))}
@@ -244,17 +242,21 @@ export default function WelcomePage() {
           >
             <div className="pt-6 space-y-4 text-sm text-gray-400 leading-relaxed">
               <p>
-                We're not going to tell you frequencies cure cancer. They don't. What they do — 
-                masking tinnitus, aiding relaxation, matching patterns from peer-reviewed studies — that's real and we link the research.
+                We're not going to claim frequencies cure anything. What the research shows — 
+                masking tinnitus, supporting relaxation, matching known psychoacoustic patterns — we link every source. You decide.
               </p>
               <p>
-                AI51 is a good conversationalist. It's not a therapist. It won't pretend to be.
+                AI51 is not a therapist. Not a doctor. Not a life coach. It's just genuinely good to talk to and it won't bullshit you or try to keep you hooked.
               </p>
               <p>
-                Some of this runs on subscriptions. We tell you what's free and what isn't before you click anything.
+                ChatGPT, Claude, Gemini — great. We use AI too. The difference is we're not trying to make you dependent on it. 
+                Most of what's here works without an account, without your data, and offline.
+              </p>
+              <p>
+                Some things cost money. We say so upfront. Nothing is hidden behind a signup wall just to get your email.
               </p>
               <p className="text-white font-bold font-mono">
-                Real tools. Real limits. Zero bullshit.
+                Small team. Real problems. Zero bullshit.
               </p>
               <div className="flex gap-3 pt-2 flex-wrap">
                 <Link to={createPageUrl('Whitepaper')} className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline">Technical Whitepaper</Link>
