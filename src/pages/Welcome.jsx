@@ -184,7 +184,7 @@ export default function WelcomePage() {
           </p>
 
           <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-            Not a startup. Not a movement. Just a small team using AI to fix specific problems — 
+            Just a small team using AI to fix specific problems — 
             decoding scary letters, calming stressed dogs, masking tinnitus, building what musicians actually need. 
             Each thing below does one job and does it properly. Free where we can. Honest about when it isn't.
           </p>
