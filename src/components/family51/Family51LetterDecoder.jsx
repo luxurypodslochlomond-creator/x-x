@@ -59,7 +59,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     }
 
     const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
+      model: 'claude_opus_4_6',
       prompt: promptText + `\n\nReturn:
 - what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
