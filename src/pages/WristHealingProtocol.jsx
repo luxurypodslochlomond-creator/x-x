@@ -637,8 +637,116 @@ export default function WristHealingProtocol() {
         })}
       </div>
 
+      {/* ── PHYSIO PROGRESSION ── */}
+       <div className="max-w-2xl mx-auto px-6 pb-10">
+         <div className="rounded-xl p-7 mb-8" style={{ background: 'rgba(162,155,254,0.03)', border: '1px solid rgba(162,155,254,0.12)' }}>
+           <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>PHYSIO PROGRESSION</div>
+           <div className="space-y-5">
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Week 1–2: Passive Range + Gentle Activation</h3>
+               <p className="text-xs text-white/50 mb-2">Play PHYSIO phase during these. Your goal: movement without pain.</p>
+               <ul className="text-xs text-white/40 space-y-1 list-disc list-inside">
+                 <li>Gentle wrist circles (no resistance, just movement)</li>
+                 <li>Pendulum swings — let gravity do the work, arm relaxed</li>
+                 <li>Contrast therapy: 2min warm water, 1min cool water (3–4 cycles)</li>
+                 <li>Soft fist squeezes (no grip strength yet, just activation)</li>
+               </ul>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Week 3–4: Active Movement + Grip Intro</h3>
+               <p className="text-xs text-white/50 mb-2">Add resistance only if pain is <5/10. Slow, controlled.</p>
+               <ul className="text-xs text-white/40 space-y-1 list-disc list-inside">
+                 <li>Active wrist flexion/extension (palm up, slowly bend down, then up)</li>
+                 <li>Putty squeezes — soft putty, 10 reps, rest 1min between sets</li>
+                 <li>Thumb opposition — touch thumb to each fingertip slowly</li>
+                 <li>Pronation/supination — forearm on table, rotate palm up/down</li>
+               </ul>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Week 5+: Instrument-Specific Return</h3>
+               <p className="text-xs text-white/50 mb-2">Start Phase 05 (40 Hz) here. Mental performance + slow physical practice.</p>
+               <ul className="text-xs text-white/40 space-y-1 list-disc list-inside">
+                 <li>Air fingering — slow fingering patterns without the sax, building muscle memory</li>
+                 <li>Finger speed drills — tapping table in rhythm patterns, low pressure</li>
+                 <li>Sax reed practice ONLY when cleared by physio — start 5min/day max</li>
+                 <li>Play mentally while 40 Hz runs — brain pathway rebuilding alongside physical recovery</li>
+               </ul>
+             </div>
+             <div className="text-xs text-white/30 pt-3 border-t border-white/10">
+               <strong>Critical:</strong> Pain should NOT increase during physio. If it does, go back one phase. Your physio is a guide — your pain is the truth. Listen to it.
+             </div>
+           </div>
+         </div>
+       </div>
+
+       {/* ── NUTRITION FOR RECOVERY ── */}
+       <div className="max-w-2xl mx-auto px-6 pb-10">
+         <div className="rounded-xl p-7 mb-8" style={{ background: 'rgba(46,213,115,0.03)', border: '1px solid rgba(46,213,115,0.12)' }}>
+           <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>NUTRITION FOR BONE + SOFT TISSUE HEALING</div>
+           <div className="space-y-4">
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Protein (rebuild tissue)</h3>
+               <p className="text-xs text-white/50">Your body needs 25–30g protein per meal to rebuild the wrist. Bone and tendon are made of collagen — collagen is made from amino acids.</p>
+               <p className="text-xs text-white/40 mt-1">Salmon, eggs, Greek yogurt, chicken, lentils, bone broth.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Vitamin C (collagen synthesis)</h3>
+               <p className="text-xs text-white/50">Without Vitamin C, your body cannot build new collagen. 100–200mg daily minimum.</p>
+               <p className="text-xs text-white/40 mt-1">Citrus, berries, bell peppers, broccoli. Or: 1 supplement per day.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Magnesium (reduce inflammation + muscle tension)</h3>
+               <p className="text-xs text-white/50">Magnesium is the relaxation mineral. 300–400mg daily helps reduce pain and inflammation.</p>
+               <p className="text-xs text-white/40 mt-1">Spinach, pumpkin seeds, dark chocolate (70%+), almonds. Or: supplement before bed.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Omega-3 (anti-inflammatory)</h3>
+               <p className="text-xs text-white/50">Reduces cortisol and inflammatory markers directly.</p>
+               <p className="text-xs text-white/40 mt-1">Wild salmon, sardines, walnuts, flax seeds. 2–3g EPA/DHA daily.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Calcium + Vitamin D (bone density)</h3>
+               <p className="text-xs text-white/50">Bone healing requires calcium. Vitamin D allows calcium absorption. No Vitamin D = calcium doesn't work.</p>
+               <p className="text-xs text-white/40 mt-1">Dairy, leafy greens, fortified plant milks. Vitamin D: 20–30min sun daily, or 1000–2000 IU supplement.</p>
+             </div>
+             <div className="text-xs text-white/30 pt-3 border-t border-white/10">
+               <strong>Rule:</strong> Avoid high-dose NSAIDs (ibuprofen) long-term — they slow bone healing. Use sparingly. Ice + elevation work better.
+             </div>
+           </div>
+         </div>
+       </div>
+
+       {/* ── WORLD-CLASS RESOURCES ── */}
+       <div className="max-w-2xl mx-auto px-6 pb-10">
+         <div className="rounded-xl p-7" style={{ background: 'rgba(212,160,23,0.03)', border: '1px solid rgba(212,160,23,0.12)' }}>
+           <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>FOR WORLD-CLASS PERFORMERS</div>
+           <div className="space-y-4 text-xs text-white/50">
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Hand-Specific Instruments</h3>
+               <p>If this is your primary (dominant) hand, the recovery is psychological as well as physical. Your identity is tied to it. <strong>This is normal.</strong> Work with a sports psychologist if available — they specialize in returning athletes/performers to peak capability.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Mental Practice is Real Training</h3>
+               <p>During Phase 05 (40 Hz), spend 10–15min daily doing detailed mental performance. Close eyes. Play the piece perfectly in your mind. The motor cortex lights up identically to physical performance. Neuroplasticity works both ways. You are rebuilding pathways.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Return-to-Play Timeline: Realistic</h3>
+               <p>Post-operative wrist (surgery): 8–12 weeks before light playing, 16–20 weeks before full capability. Severe soft tissue injury: 6–10 weeks. Your body follows biology, not ambition. Rushing adds 6–8 weeks to recovery.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">Find a Hand Specialist Physio</h3>
+               <p>Not all physios are equal. If you can access a specialist in musician's hand recovery or hand therapy (CHT — Certified Hand Therapist), do it. They understand the precision your instrument demands.</p>
+             </div>
+             <div>
+               <h3 className="text-sm font-black mb-2 text-white">The Hard Truth</h3>
+               <p>This recovery is boring and it's slow. You will have days where you feel worse. You will want to push through. Don't. The musicians who return strongest are the ones who trusted the process and didn't rush it. The frequencies help. Physio helps. Nutrition helps. But patience is the real protocol.</p>
+             </div>
+           </div>
+         </div>
+       </div>
+
       {/* ── HOW TO USE ── */}
-      <div className="max-w-2xl mx-auto px-6 pb-10">
+       <div className="max-w-2xl mx-auto px-6 pb-10">
         <div className="rounded-xl p-7" style={{ background: 'rgba(212,160,23,0.03)', border: '1px solid rgba(212,160,23,0.12)' }}>
           <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>OPERATING INSTRUCTIONS</div>
           <div className="space-y-4">
