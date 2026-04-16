@@ -654,7 +654,7 @@ export default function WristHealingProtocol() {
              </div>
              <div>
                <h3 className="text-sm font-black mb-2 text-white">Week 3–4: Active Movement + Grip Intro</h3>
-               <p className="text-xs text-white/50 mb-2">Add resistance only if pain is <5/10. Slow, controlled.</p>
+               <p className="text-xs text-white/50 mb-2">Add resistance only if pain is &lt;5/10. Slow, controlled.</p>
                <ul className="text-xs text-white/40 space-y-1 list-disc list-inside">
                  <li>Active wrist flexion/extension (palm up, slowly bend down, then up)</li>
                  <li>Putty squeezes — soft putty, 10 reps, rest 1min between sets</li>
