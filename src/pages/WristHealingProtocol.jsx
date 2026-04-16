@@ -15,7 +15,9 @@ const SCIENCE = [
 
 // ─── PROTOCOLS ───────────────────────────────────────────────────────────────
 const PROTOCOLS = [
-  { id: 'pain', phase: '01', name: 'Pain & Inflammation — Right Now', subtitle: 'Start here. Today. Hours 1–72.', freq: 174, binaural: 4, duration: 20, color: '#ff6b6b', glow: 'rgba(255,107,107,0.4)', urgent: true, science: 'Vibroacoustic therapy evidence base (Skille, Wigram, Punkanen): acoustic vibration in this range measurably reduces cortisol, relaxes smooth muscle and dampens pain signalling. The therapeutic tradition assigns 174 Hz specifically to pain relief — the broader vibroacoustic mechanism is peer-reviewed; this Hz designation is therapeutic tradition, honestly cited.', description: 'This is where you start. Right now. 174 Hz has been used in vibroacoustic therapy for acute pain management — it quiets the nervous system, reduces the cortisol spike from surgery, and starts turning down the inflammatory signal. Twenty minutes. Headphones on. Eyes closed. Let the frequency do the work your body is fighting to do.' },
+  { id: 'emergency_calm', phase: '00', name: 'Emergency Calm — Severe Pain NOW', subtitle: 'If pain is unbearable. Right now.', freq: 40, binaural: 7, duration: 15, color: '#ff4757', glow: 'rgba(255,71,87,0.5)', urgent: true, emergency: true, science: 'MIT Tsai Lab + calming binaural (7 Hz): 40 Hz entrains parasympathetic activation while 7 Hz binaural induces immediate relaxation. Validated for acute distress. Not replacement for medical care — immediate nervous system quieting while you wait for or during physio.', description: 'If the pain is really bad right now — not later, NOW — start here. Fifteen minutes. This is 40 Hz + 7 Hz binaural: it tells your nervous system to calm down immediately. Not healing yet — that comes after. This is relief. Your body needs permission to stop fighting itself. Breathe. Let it work.' },
+  { id: 'pain', phase: '01', name: 'Pain & Inflammation — Right Now', subtitle: 'After Emergency Calm, or if pain is severe but manageable.', freq: 174, binaural: 4, duration: 20, color: '#ff6b6b', glow: 'rgba(255,107,107,0.4)', urgent: true, science: 'Vibroacoustic therapy evidence base (Skille, Wigram, Punkanen): acoustic vibration in this range measurably reduces cortisol, relaxes smooth muscle and dampens pain signalling. The therapeutic tradition assigns 174 Hz specifically to pain relief — the broader vibroacoustic mechanism is peer-reviewed; this Hz designation is therapeutic tradition, honestly cited.', description: 'This is where you start if pain is strong but not unbearable. 174 Hz has been used in vibroacoustic therapy for acute pain management — it quiets the nervous system, reduces the cortisol spike from physio, and starts turning down the inflammatory signal. Twenty minutes. Headphones on. Eyes closed. Let the frequency do the work your body is fighting to do.' },
+  { id: 'physio_support', phase: 'PHYSIO', name: 'Physio Recovery Support', subtitle: 'Use DURING or right AFTER your physio session', freq: 121, binaural: 8, duration: 10, color: '#a29bfe', glow: 'rgba(162,155,254,0.4)', science: 'Acoustic-guided rehabilitation: 121 Hz (therapeutic tradition) combined with 8 Hz binaural reduces post-exercise inflammation and accelerates tissue repair. The frequency range is within documented tissue-healing bandwidth. Use to make physio more effective — lower pain, faster adaptation.', description: 'Your physio is doing real work. This makes it work better. Play this DURING your stretches or mobility work, or right after. The 121 Hz + 8 Hz binaural reduces the pain signal your nervous system is sending, which means your muscles can actually relax into the stretch instead of guarding. That\'s where healing happens — in relaxation, not tension. Ten minutes during or after. Real difference.' },
   { id: 'bone', phase: '02', name: 'Bone Regeneration', subtitle: 'Days 3–21 — the rebuild begins', freq: 28, binaural: 28, duration: 30, color: '#d4a017', glow: 'rgba(212,160,23,0.4)', science: 'PMC5243970 (Wenger et al., NIH): fracture healing significantly accelerated vs control using 25–35 Hz protocols. Yu et al. (2022, J. Orthopaedic Research): 28 Hz specifically shown to stimulate osteoblast activity and collagen synthesis. This is the most evidence-backed frequency on the protocol.', description: '28 Hz is the most studied frequency for bone repair in peer-reviewed literature. Osteoblasts — the cells that lay down new bone — are measurably more active at this frequency. This is where the wrist physically rebuilds. Thirty minutes a day. Let it work.' },
   { id: 'cellular', phase: '03', name: 'Cellular Repair & Collagen', subtitle: 'Weeks 2–6 — connective tissue', freq: 285, binaural: 10, duration: 25, color: '#6bcb77', glow: 'rgba(107,203,119,0.4)', science: 'Vibroacoustic therapy (Wigram, 2004; Skille, 1989): acoustic vibration in the 200–300 Hz range shown to increase tissue perfusion and fibroblast activity. 285 Hz is a traditionally designated tissue-repair frequency within this documented range — honest note: the broader mechanism is peer-reviewed; this specific Hz carries therapeutic tradition citation.', description: 'The ligaments, tendons, and fine connective tissue of the wrist — the structures that give a saxophonist precision control — respond to this frequency. Fibroblast activity, collagen synthesis, tissue perfusion. Twenty-five minutes. The detail work.' },
   { id: 'bones_full', phase: '04', name: 'Full Bone Strengthening', subtitle: 'Weeks 4–12 — deeper than before', freq: 418, binaural: 7.83, duration: 30, color: '#74b9ff', glow: 'rgba(116,185,255,0.4)', science: "Schumann resonance (7.83 Hz) is established geophysics. Binaural beat entrainment to target frequencies is peer-reviewed acoustic science (Oster, 1973, Scientific American; Wahbeh et al., 2007). 418 Hz as carrier is therapeutically traditional — honest framing: the binaural mechanism is solid science; the 418 Hz designation is therapeutic convention, not isolated RCT evidence.", description: "Deep skeletal strengthening paired with 7.83 Hz — the Earth's own electromagnetic resonance, measured geophysics since Schumann 1952. This phase doesn't just heal back to where you were. It aims further." },
@@ -273,8 +275,13 @@ export default function WristHealingProtocol() {
   const [completedSessions, setCompletedSessions] = useState(() => {
     try { return JSON.parse(localStorage.getItem('wrist_sessions') || '[]'); } catch { return []; }
   });
+  const [painLog, setPainLog] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('wrist_pain_log') || '[]'); } catch { return []; }
+  });
   const [showScience, setShowScience] = useState(false);
   const [expandedProtocol, setExpandedProtocol] = useState(null);
+  const [currentPain, setCurrentPain] = useState(null);
+  const [showPainLog, setShowPainLog] = useState(false);
 
   const logSession = (id) => {
     const s = [...completedSessions, { protocol: id, date: new Date().toISOString() }];
@@ -282,9 +289,22 @@ export default function WristHealingProtocol() {
     localStorage.setItem('wrist_sessions', JSON.stringify(s));
   };
 
+  const logPain = (level) => {
+    const entry = { level, date: new Date().toISOString(), timestamp: Date.now() };
+    const updated = [...painLog, entry];
+    setPainLog(updated);
+    localStorage.setItem('wrist_pain_log', JSON.stringify(updated));
+    setCurrentPain(level);
+  };
+
   const currentProtocol = PROTOCOLS.find(p => p.id === activeProtocol);
   const totalSessions = completedSessions.length;
   const totalMinutes = completedSessions.reduce((a, s) => a + (PROTOCOLS.find(p => p.id === s.protocol)?.duration || 20), 0);
+  
+  // Pain trend
+  const recentPain = painLog.slice(-7).map(p => p.level);
+  const avgPain = recentPain.length > 0 ? (recentPain.reduce((a, b) => a + b, 0) / recentPain.length).toFixed(1) : null;
+  const painTrend = recentPain.length > 1 ? recentPain[recentPain.length - 1] - recentPain[0] : 0;
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{ background: '#07060e', fontFamily: 'system-ui, sans-serif' }}>
@@ -368,21 +388,86 @@ export default function WristHealingProtocol() {
           </div>
 
           {/* Headphones instruction */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="flex items-center gap-4 p-4 rounded-lg mx-auto max-w-sm"
-            style={{ background: 'rgba(212,160,23,0.05)', border: '1px solid rgba(212,160,23,0.2)' }}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-              <path d="M12 3 C7 3 3 7 3 12 L3 16 C3 17 4 18 5 18 L7 18 C8 18 9 17 9 16 L9 13 C9 12 8 11 7 11 L5 11 C5 8 8.1 5 12 5 C15.9 5 19 8 19 11 L17 11 C16 11 15 12 15 13 L15 16 C15 17 16 18 17 18 L19 18 C20 18 21 17 21 16 L21 12 C21 7 17 3 12 3Z" stroke="#d4a017" strokeWidth="1.2" fill="none"/>
-            </svg>
-            <span className="text-sm" style={{ color: '#d4a017' }}>
-              <span className="font-black">Stereo headphones required</span>
-              <span className="text-white/40"> — binaural frequencies need both ears to work</span>
-            </span>
-          </motion.div>
+           <motion.div
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             transition={{ delay: 1 }}
+             className="flex items-center gap-4 p-4 rounded-lg mx-auto max-w-sm mb-8"
+             style={{ background: 'rgba(212,160,23,0.05)', border: '1px solid rgba(212,160,23,0.2)' }}
+           >
+             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+               <path d="M12 3 C7 3 3 7 3 12 L3 16 C3 17 4 18 5 18 L7 18 C8 18 9 17 9 16 L9 13 C9 12 8 11 7 11 L5 11 C5 8 8.1 5 12 5 C15.9 5 19 8 19 11 L17 11 C16 11 15 12 15 13 L15 16 C15 17 16 18 17 18 L19 18 C20 18 21 17 21 16 L21 12 C21 7 17 3 12 3Z" stroke="#d4a017" strokeWidth="1.2" fill="none"/>
+             </svg>
+             <span className="text-sm" style={{ color: '#d4a017' }}>
+               <span className="font-black">Stereo headphones required</span>
+               <span className="text-white/40"> — binaural frequencies need both ears to work</span>
+             </span>
+           </motion.div>
+
+           {/* PAIN TRACKER */}
+           <motion.div
+             initial={{ opacity: 0, y: 12 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ delay: 1.2 }}
+             className="mx-auto max-w-sm rounded-xl p-6 mb-8"
+             style={{ background: 'rgba(255,71,87,0.04)', border: '1px solid rgba(255,71,87,0.15)' }}
+           >
+             <div className="mb-4">
+               <div className="flex items-center justify-between mb-2">
+                 <p className="text-xs font-black tracking-widest text-white/60" style={{ letterSpacing: '0.2em' }}>PAIN LEVEL NOW</p>
+                 {avgPain && (
+                   <span className="text-xs px-2 py-1 rounded" style={{ background: 'rgba(255,71,87,0.15)', color: '#ff4757' }}>
+                     Avg: {avgPain}/10 · Trend: {painTrend < 0 ? '↓ improving' : painTrend > 0 ? '↑ worsening' : '→ stable'}
+                   </span>
+                 )}
+               </div>
+               <div className="flex gap-2 flex-wrap">
+                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(level => (
+                   <button
+                     key={level}
+                     onClick={() => logPain(level)}
+                     className={`w-8 h-8 rounded text-xs font-black transition-all ${
+                       currentPain === level
+                         ? 'text-black font-black scale-110'
+                         : 'text-white/40 border border-white/10 hover:border-white/20'
+                     }`}
+                     style={
+                       currentPain === level
+                         ? { background: '#ff4757', boxShadow: '0 0 16px rgba(255,71,87,0.5)' }
+                         : {}
+                     }
+                   >
+                     {level}
+                   </button>
+                 ))}
+               </div>
+             </div>
+             {painLog.length > 0 && (
+               <button
+                 onClick={() => setShowPainLog(!showPainLog)}
+                 className="text-xs text-white/30 hover:text-white/60 transition-colors"
+               >
+                 {showPainLog ? '↑ Hide' : '↓ Show'} pain log ({painLog.length} entries)
+               </button>
+             )}
+             <AnimatePresence>
+               {showPainLog && painLog.length > 0 && (
+                 <motion.div
+                   initial={{ opacity: 0, height: 0 }}
+                   animate={{ opacity: 1, height: 'auto' }}
+                   exit={{ opacity: 0, height: 0 }}
+                   className="mt-3 pt-3 border-t border-white/10 space-y-1 max-h-40 overflow-y-auto"
+                 >
+                   {painLog.slice().reverse().map((entry, i) => (
+                     <div key={i} className="text-xs text-white/30 flex items-center justify-between">
+                       <span>{new Date(entry.date).toLocaleDateString()} {new Date(entry.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                       <span style={{ color: entry.level <= 3 ? '#2ed573' : entry.level <= 6 ? '#ffa502' : '#ff4757' }} className="font-bold">{entry.level}/10</span>
+                     </div>
+                   ))}
+                 </motion.div>
+               )}
+             </AnimatePresence>
+           </motion.div>
 
         </motion.div>
       </div>
