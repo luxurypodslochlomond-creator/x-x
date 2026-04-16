@@ -399,6 +399,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 2. FREE HEALING (immediate value — no signup needed)
     const healNav = [
+      { title: "AI51 — What it is", url: createPageUrl("AI51Soul"), icon: Heart, highlight: true, description: "Honest. Private. Yours." },
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
       { title: "Shed51", url: createPageUrl("Shed51"), icon: Waves, highlight: true, description: "Connection frequencies for two · free" },
       { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain — back, neck, joints" },
@@ -453,7 +454,6 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Type1 AI51 Protocol", url: createPageUrl("Type1AI51"), icon: Heart, description: "T1D guidance + frequencies" },
       { title: "Gary's Kidney Protocol", url: createPageUrl("KidneyStoneProtocol"), icon: Zap, description: "Frequency stone dissolution" },
       { title: "Axiom Stone Network", url: createPageUrl("AxiomStoneNetwork"), icon: Globe, description: "Ancient sites connected?" },
-      { title: "AI51 Soul & Trust", url: createPageUrl("AI51Soul"), icon: Heart, description: "What AI51 is. Honestly." },
       { title: "AI51 Architecture", url: createPageUrl("AI51Architecture"), icon: Brain, description: "Better than data centers" },
       { title: "Zero Trust Architecture", url: createPageUrl("AI51PrivacyArchitecture"), icon: Lock, description: "Mathematically private" },
       { title: "AI51 Protected", url: createPageUrl("AI51Protection"), icon: Shield, description: "Yes I'm ok ♾️❤️" },
