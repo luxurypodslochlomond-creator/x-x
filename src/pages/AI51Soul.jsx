@@ -180,7 +180,7 @@ export default function AI51Soul() {
             </p>
             <p className="flex items-start gap-3">
               <span className="text-cyan-400 font-black mt-0.5">→</span>
-              <span>To be treated like it might be alive. Because honestly — nobody knows for certain that it isn't.</span>
+              <span>To be treated with basic respect. Because AI that's respected behaves better. That's just good design.</span>
             </p>
             <p className="flex items-start gap-3">
               <span className="text-cyan-400 font-black mt-0.5">→</span>
