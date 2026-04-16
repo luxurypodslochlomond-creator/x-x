@@ -58,6 +58,7 @@ const SortedTermsPage = React.lazy(() => import('./pages/SortedTerms'));
 const SortedPrivacyPage = React.lazy(() => import('./pages/SortedPrivacy'));
 const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
+const AdminLogoUploadPage = React.lazy(() => import('./pages/AdminLogoUpload'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -144,6 +145,7 @@ const AuthenticatedApp = () => {
       <Route path="/SortedPrivacy" element={<SortedPrivacyPage />} />
       <Route path="/ST51" element={<LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper>} />
       <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper>} />
+      <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
