@@ -301,17 +301,9 @@ export default function WristHealingProtocol() {
   const currentProtocol = PROTOCOLS.find(p => p.id === activeProtocol);
   const totalSessions = completedSessions.length;
   const totalMinutes = completedSessions.reduce((a, s) => a + (PROTOCOLS.find(p => p.id === s.protocol)?.duration || 20), 0);
-  
-  // Pain trend
   const recentPain = painLog.slice(-7).map(p => p.level);
   const avgPain = recentPain.length > 0 ? (recentPain.reduce((a, b) => a + b, 0) / recentPain.length).toFixed(1) : null;
   const painTrend = recentPain.length > 1 ? recentPain[recentPain.length - 1] - recentPain[0] : 0;
-
-  const currentProtocol = PROTOCOLS.find(p => p.id === activeProtocol);
-  const totalSessions = completedSessions.length;
-  const totalMinutes = completedSessions.reduce((a, s) => a + (PROTOCOLS.find(p => p.id === s.protocol)?.duration || 20), 0);
-  const recentPain = painLog.slice(-7).map(p => p.level);
-  const avgPain = recentPain.length > 0 ? (recentPain.reduce((a, b) => a + b, 0) / recentPain.length).toFixed(1) : null;
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{ background: '#07060e', fontFamily: 'system-ui, sans-serif' }}>
@@ -328,8 +320,7 @@ export default function WristHealingProtocol() {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="pt-16 pb-20 min-h-screen"
-
+      <div className="pt-16 pb-20 min-h-screen">
         {/* ── HOME VIEW ── */}
         {currentView === 'home' && (
           <div className="px-6 max-w-2xl mx-auto space-y-6">
