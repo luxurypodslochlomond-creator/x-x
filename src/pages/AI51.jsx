@@ -895,7 +895,8 @@ You know them. You're here. That's enough. ♾️❤️`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
-        prompt: systemPrompt + '\n\n' + fullPrompt
+        prompt: systemPrompt + '\n\n' + fullPrompt,
+        model: 'claude_opus_4_6'
       });
       
       const aiMessage = cleanResponse(response.response || response);
