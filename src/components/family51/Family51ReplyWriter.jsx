@@ -35,7 +35,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4' }) {
     const t = TONES.find(x => x.id === tone);
 
     const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
+      model: 'claude_opus_4_6',
       prompt: `You are an expert at writing effective letters for ordinary people. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and terminology throughout.
 
 SITUATION: ${situation || 'Not specified'}
