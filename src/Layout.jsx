@@ -47,7 +47,7 @@ import {
   BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image, Share2, Handshake
 } from 'lucide-react';
 
-import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
+import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51, COOLASFUCKSorted, COOLASFUCKPaw } from '@/components/shared/COOLASFUCKIcon';
 import CustomSaxIcon from '@/components/shared/CustomSaxIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
@@ -389,8 +389,8 @@ const LayoutInner = ({ children, currentPageName }) => {
   const navs = React.useMemo(() => {
     // 1. PRODUCTS (paid / subscription tools)
     const productsNav = [
-      { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Decode scary letters · subscription" },
-      { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Sound therapy for animals · subscription" },
+      { title: "SORTED", url: createPageUrl("Family51"), icon: COOLASFUCKSorted, highlight: true, description: "Decode scary letters · subscription" },
+      { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: COOLASFUCKPaw, highlight: true, description: "Sound therapy for animals · subscription" },
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },

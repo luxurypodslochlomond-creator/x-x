@@ -892,4 +892,60 @@ export const COOLASFUCKFire = ({ className = "", size = 24, animate = true }) =>
     );
 };
 
+// 8-bit SORTED icon — letter with green tick (we've got you)
+export const COOLASFUCKSorted = ({ className = "", size = 24, animate = false }) => {
+    const Component = animate ? motion.svg : 'svg';
+    return (
+        <Component width={size} height={size} viewBox="0 0 24 24" className={className}
+            animate={animate ? { scale: [1, 1.05, 1] } : {}}
+            transition={animate ? { duration: 2, repeat: Infinity, ease: "easeInOut" } : {}}
+        >
+            {/* Envelope body */}
+            <rect x="2" y="5" width="20" height="14" fill="#1e293b"/>
+            <rect x="3" y="6" width="18" height="12" fill="#0f172a"/>
+            {/* Envelope flap lines */}
+            <rect x="3" y="6" width="8" height="2" fill="#22d3ee"/>
+            <rect x="13" y="6" width="8" height="2" fill="#22d3ee"/>
+            <rect x="11" y="8" width="2" height="2" fill="#06b6d4"/>
+            {/* Green tick / checkmark */}
+            <rect x="7" y="13" width="2" height="2" fill="#22c55e"/>
+            <rect x="9" y="15" width="2" height="2" fill="#22c55e"/>
+            <rect x="11" y="13" width="2" height="2" fill="#22c55e"/>
+            <rect x="13" y="11" width="2" height="2" fill="#4ade80"/>
+            <rect x="15" y="9" width="2" height="2" fill="#4ade80"/>
+            {/* Glow dot */}
+            <rect x="10" y="16" width="1" height="1" fill="#86efac" opacity="0.8"/>
+        </Component>
+    );
+};
+
+// 8-bit PAW icon — for PetSounds51
+export const COOLASFUCKPaw = ({ className = "", size = 24, animate = false }) => {
+    const Component = animate ? motion.svg : 'svg';
+    return (
+        <Component width={size} height={size} viewBox="0 0 24 24" className={className}
+            animate={animate ? { scale: [1, 1.08, 1] } : {}}
+            transition={animate ? { duration: 2, repeat: Infinity, ease: "easeInOut" } : {}}
+        >
+            {/* Main paw pad */}
+            <rect x="8" y="12" width="8" height="6" fill="#d4a017"/>
+            <rect x="7" y="13" width="10" height="4" fill="#f59e0b"/>
+            <rect x="9" y="11" width="6" height="2" fill="#d4a017"/>
+            {/* Bottom rounded edge */}
+            <rect x="8" y="18" width="2" height="2" fill="#d4a017"/>
+            <rect x="14" y="18" width="2" height="2" fill="#d4a017"/>
+            {/* 4 toe beans */}
+            <rect x="5" y="8" width="3" height="3" fill="#fbbf24"/>
+            <rect x="9" y="7" width="3" height="3" fill="#fbbf24"/>
+            <rect x="13" y="7" width="3" height="3" fill="#fbbf24"/>
+            <rect x="17" y="8" width="3" height="3" fill="#fbbf24"/>
+            {/* Highlight dots on beans */}
+            <rect x="6" y="9" width="1" height="1" fill="#fde68a"/>
+            <rect x="10" y="8" width="1" height="1" fill="#fde68a"/>
+            <rect x="14" y="8" width="1" height="1" fill="#fde68a"/>
+            <rect x="18" y="9" width="1" height="1" fill="#fde68a"/>
+        </Component>
+    );
+};
+
 export default COOLASFUCKSparkle;
