@@ -529,7 +529,7 @@ export default function WristHealingProtocol() {
           const isActive = activeProtocol === protocol.id && isPlaying;
           const sessionsDone = completedSessions.filter(s => s.protocol === protocol.id).length;
           const isExpanded = expandedProtocol === protocol.id;
-          const PhaseIcon = PHASE_ICONS[idx];
+          const PhaseIcon = PHASE_ICONS[idx] || PHASE_ICONS[idx % PHASE_ICONS.length];
 
           return (
             <motion.div
