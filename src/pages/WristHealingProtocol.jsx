@@ -359,7 +359,6 @@ export default function WristHealingProtocol() {
               </div>
             </div>
             {avgPain && <div className="text-xs text-white/40">Avg: {avgPain}/10</div>}
-            </div>
 
             {/* Main action buttons */}
             <div className="space-y-3 mt-6">
