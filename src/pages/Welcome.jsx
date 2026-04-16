@@ -184,9 +184,8 @@ export default function WelcomePage() {
           </p>
 
           <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-            Just a small team using AI to help people with real problems — 
-            decoding scary letters, calming stressed dogs, masking tinnitus, turning environmental action into reward. 
-            Some work now, some are still building. Free where we can. Always honest about the actual state.
+            Me and AI working on real problems. No ego, no hype — just trying to prove humans and AI can build something useful together the right way. 
+            Some tools work now, some are building. Free where we can. Always honest about what actually happens.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
