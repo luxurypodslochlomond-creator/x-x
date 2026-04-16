@@ -24,7 +24,7 @@ const PRODUCTS = [
     name: 'PETSOUNDS51',
     tag: 'Anxious pet?',
     desc: 'Sound therapy protocols for dogs, cats and horses. Built on peer-reviewed psychoacoustic research. Free to try. No signup.',
-    badge: 'Free + Subscription',
+    badge: 'Free · Subscription',
     badgeColor: 'text-amber-400 border-amber-500/40',
     Icon: COOLASFUCKPaw,
     url: 'PetSounds51',
@@ -211,7 +211,7 @@ export default function WelcomePage() {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
             <div className="h-px bg-cyan-500/20 flex-1" />
-            <p className="text-xs font-mono text-gray-500 tracking-widest">THE TOOLS</p>
+            <p className="text-xs font-mono text-gray-500 tracking-widest">WHAT WE'VE BUILT</p>
             <div className="h-px bg-cyan-500/20 flex-1" />
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
