@@ -48,6 +48,23 @@ export default function AdminStoneymollanLegal() {
     communications: [
       {
         date: '2026-04-16',
+        from: 'Gillian & Brian',
+        to: 'Lynn Pacitti',
+        type: 'email',
+        subject: 'Prescriptive Possession Application / Barn at Upper Stoneymollan',
+        status: 'inbox',
+        summary: 'Request for legal advice on prescriptive possession claim for barn. Asking: Can you assist? What\'s the cost? What\'s the strength of our position?',
+        key_quote: 'The barn has been in continuous use by the occupiers of Upper Stoneymollan for approximately 28 years — the previous owner used it for around 24 years, and we have been using it for the past 4 years.',
+        details: [
+          '✓ Barn NOT in registered title boundary (Scots Land Register)',
+          '✓ Cameron Estate owns adjacent field but NO specific deed for barn',
+          '✓ 28 years continuous use (exceeds 10-year Scots law threshold)',
+          '✓ Felling application went quiet (water rights/access leverage)',
+          '✓ Full water servitude + only road access to barn'
+        ]
+      },
+      {
+        date: '2026-04-16',
         from: 'Lynn Pacitti',
         type: 'email',
         subject: 'RE: Prescriptive Possession Application / Barn at Upper Stoneymollan',
@@ -217,7 +234,7 @@ export default function AdminStoneymollanLegal() {
                   <div className="flex items-start justify-between">
                     <div>
                       <CardTitle className="text-white text-base">{comm.subject}</CardTitle>
-                      <p className="text-white/50 text-xs mt-1">{comm.from} • {comm.date}</p>
+                      <p className="text-white/50 text-xs mt-1">{comm.from} {comm.to ? `→ ${comm.to}` : ''} • {comm.date}</p>
                     </div>
                     {getStatusIcon(comm.status)}
                   </div>
@@ -227,6 +244,13 @@ export default function AdminStoneymollanLegal() {
                   <div className="bg-black/40 border border-white/10 p-3 rounded">
                     <p className="text-white/70 text-xs italic">"{comm.key_quote}"</p>
                   </div>
+                  {comm.details && (
+                    <div className="bg-green-900/20 border-l-4 border-green-500 p-3 rounded text-white/80 text-xs space-y-1">
+                      {comm.details.map((detail, i) => (
+                        <p key={i}>{detail}</p>
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
