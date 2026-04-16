@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { FileText, AlertCircle, CheckCircle, Clock, Users, Link2, MapPin } from 'lucide-react';
+import { FileText, AlertCircle, CheckCircle, Clock, Users, Link2, MapPin, Briefcase } from 'lucide-react';
+import { base44 } from '@/api/base44Client';
+import { useQuery } from '@tanstack/react-query';
 
 export default function AdminStoneymollanLegal() {
+  const { data: legalDocs = [], isLoading } = useQuery({
+    queryKey: ['stoneymollanLegal'],
+    queryFn: () => base44.entities.GlasgowGarageLegal.filter({ title: { $regex: 'Stoneymollan' } })
+  });
+
   const [caseStatus, setCaseStatus] = useState({
     property: 'Barn at Upper Stoneymollan, Loch Lomond',
     claimType: 'Prescriptive Possession',
@@ -257,11 +264,51 @@ export default function AdminStoneymollanLegal() {
           </div>
         </motion.div>
 
-        {/* REFERENCES */}
+        {/* LEGAL RESEARCH (from GlasgowGarageLegal entity) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
+        >
+          <h2 className="text-xl font-black text-white mb-4 flex items-center gap-2">
+            <Briefcase className="w-5 h-5 text-amber-400" />
+            Research & Evidence
+          </h2>
+          {isLoading ? (
+            <p className="text-white/60">Loading research...</p>
+          ) : legalDocs.length > 0 ? (
+            <div className="space-y-3">
+              {legalDocs.map((doc, idx) => (
+                <Card key={idx} className="bg-black/60 border-amber-500/20">
+                  <CardHeader>
+                    <CardTitle className="text-amber-400 text-base">{doc.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div>
+                      <p className="text-white/60 text-xs font-bold mb-1">KEY POINTS:</p>
+                      <p className="text-white/80 text-sm">{doc.key_legal_points}</p>
+                    </div>
+                    <div>
+                      <p className="text-white/60 text-xs font-bold mb-1">DETAILS:</p>
+                      <p className="text-white/80 text-sm">{doc.detailed_notes}</p>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-white/50 pt-2 border-t border-white/10">
+                      <span>Parties: {doc.parties_involved}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <p className="text-white/60">No research documents found.</p>
+          )}
+        </motion.div>
+
+        {/* REFERENCES */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
         >
           <h2 className="text-xl font-black text-white mb-4 flex items-center gap-2">
             <Link2 className="w-5 h-5 text-blue-400" />
