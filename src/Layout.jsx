@@ -399,33 +399,52 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "AI co-manager for students" },
     ];
 
-    // 2. FREE TOOLS (immediate value — no signup needed)
+    // 2. FREE HEALING (immediate value — no signup needed)
     const healNav = [
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
       { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain — back, neck, joints" },
       { title: "Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
       { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery" },
       { title: "Universal51", url: createPageUrl("Universal51"), icon: Waves, description: "HEAR invisible frequencies" },
-      { title: "Radio51", url: createPageUrl("Radio"), icon: Music, description: "Lossless music library" },
       { title: "Healing Dashboard", url: createPageUrl("HealingDashboard"), icon: Brain, description: "Your progress" },
-      { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
-      { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
-      { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "Submit cleanups" },
-      { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Impact actions" },
-      { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
       ...(user ? [{ title: "My Wallet", url: createPageUrl("Profile"), icon: User, description: "Your P51 & rewards" }] : []),
     ];
 
-    // 3. LEARN (understand the ecosystem)
+    // 3. LITTER PICKS
+    const litterNav = [
+      { title: "Submit a Litter Pick", url: createPageUrl("NewCleanup"), icon: Globe, highlight: true, description: "Take action · earn tokens" },
+      { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "See all cleanups" },
+      { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Community impact actions" },
+      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, description: "AI litter scanner for kids" },
+      { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from doing good" },
+      { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
+    ];
+
+    // 4. MUSIC & RESEARCH
+    const musicNav = [
+      { title: "Radio51", url: createPageUrl("Radio"), icon: Music, highlight: true, description: "Lossless music library" },
+      { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
+      { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
+      { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, description: "PROVE connection is real" },
+      { title: "ST51 Whitepaper", url: createPageUrl("ST51"), icon: Waves, description: "Acoustic levitation · open-source physics" },
+      { title: "FreqLift51 Whitepaper", url: createPageUrl('FreqLift51Whitepaper'), icon: Atom, description: "Acoustic levitation" },
+    ];
+
+    // 5. LEARN BETTER (for kids who learn differently)
+    const kidsNav = [
+      { title: "Georgie's Maths", url: createPageUrl("GeorgieMaths"), icon: Brain, highlight: true, description: "Maths for kids who learn differently" },
+      { title: "Lennox's Maths", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Maths made fun" },
+      { title: "Reading Support", url: createPageUrl("ReadingSupport"), icon: BookOpen, highlight: true, description: "Help with reading & dyslexia" },
+      { title: "Young Warriors", url: createPageUrl("YoungWarriors"), icon: Heart, description: "Kids making a difference" },
+    ];
+
+    // 6. LEARN (understand the ecosystem)
     const learnNav = [
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
-      { title: "ST51 Whitepaper", url: createPageUrl("ST51"), icon: Waves, highlight: true, description: "Acoustic levitation · open-source physics" },
       { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, description: "One-pager for funders" },
       { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, description: "Fund real people healing Earth" },
       { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, description: "CB51 — artist management platform" },
       { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
-      { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, description: "PROVE connection is real" },
-      { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from healing" },
       { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
       { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
     ];
@@ -542,10 +561,10 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "🚨 HMRC Tracker", url: createPageUrl("AdminHMRCTracker"), icon: Shield, description: "Gill's HMRC case · appeal deadline 27 Apr" }
     ] : [];
 
-    return { productsNav, healNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
+    return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
   }, [user, archiveSearch]);
 
-  const { productsNav, healNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav } = navs;
+  const { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav } = navs;
 
   const isActivePage = (url) => {
     const navPath = new URL(url, window.location.origin).pathname;
@@ -690,8 +709,11 @@ const LayoutInner = ({ children, currentPageName }) => {
                           ) : (
                             <>
                               <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                              <NavSection title="FREE TOOLS" color="cyan" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                              <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="LITTER PICKS" color="green" items={litterNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="LEARN BETTER" color="cyan" items={kidsNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="LEARN" color="gray" items={learnNav} isActivePage={isActivePage} isMobile />
                                 <button
                                   onClick={() => { setSearchOpen(true); setMobileMenuOpen(false); }}
                                   className="w-full flex items-center gap-3 px-4 py-3 border border-white/10 hover:border-cyan-500/40 rounded text-left transition-all"
@@ -700,7 +722,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                                   <span className="text-gray-400 text-sm flex-1">Search all pages…</span>
                                   <span className="text-xs text-gray-600 font-mono">⌘K</span>
                                 </button>
-                                <NavSection title="TRUST" color="cyan" items={trustNav} isActivePage={isActivePage} isMobile />
+                                <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} isMobile />
                             </>
                           )}
 
@@ -784,8 +806,11 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : (
               <>
                 <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} defaultOpen={true} />
-                <NavSection title="FREE TOOLS" color="cyan" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
-                <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
+                <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} />
+                <NavSection title="LITTER PICKS" color="green" items={litterNav} isActivePage={isActivePage} />
+                <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} />
+                <NavSection title="LEARN BETTER" color="cyan" items={kidsNav} isActivePage={isActivePage} />
+                <NavSection title="LEARN" color="gray" items={learnNav} isActivePage={isActivePage} />
                 <button
                   onClick={() => setSearchOpen(true)}
                   className="w-full flex items-center gap-3 px-4 py-3 border border-white/10 hover:border-cyan-500/40 rounded text-left transition-all"
@@ -794,7 +819,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   <span className="text-gray-400 text-sm flex-1">Search all pages…</span>
                   <span className="text-xs text-gray-600 font-mono">⌘K</span>
                 </button>
-                <NavSection title="TRUST" color="cyan" items={trustNav} isActivePage={isActivePage} />
+                <NavSection title="TRUST" color="gray" items={trustNav} isActivePage={isActivePage} />
               </>
             )}
 
