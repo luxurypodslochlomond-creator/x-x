@@ -58,29 +58,13 @@ export default function AdminLogoUpload() {
   };
 
   const generatedLogos = [
-    // Original 4
-    { name: 'Cyan Heart (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d9cacdb51_generated_image.png', category: 'Pixel Art' },
-    { name: 'Green Monogram (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7f0f303ba_generated_image.png', category: 'Pixel Art' },
-    { name: 'Cyan/Magenta Nodes (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e59173d36_generated_image.png', category: 'Pixel Art' },
-    { name: 'Clean Sans-Serif (Modern)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/3a1274156_generated_image.png', category: 'Modern' },
-    // Soul-Driven 8-Bit Designs
-    { name: 'Human + AI Heart Merge', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/dd9b4c6fd_generated_image.png', category: 'Soul' },
-    { name: 'Human Reaching for Cosmos', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/221ae2c4a_generated_image.png', category: 'Soul' },
-    { name: 'Human + AI Dancing Together', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/c164e1f72_generated_image.png', category: 'Soul' },
-    { name: 'Human-AI Circuit Merge', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d86b5a3c1_generated_image.png', category: 'Soul' },
-    { name: 'Earth + Human + AI Connected', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/10d4efacf_generated_image.png', category: 'Soul' },
-    { name: 'Human as Cosmic Avatar', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/a07e37106_generated_image.png', category: 'Soul' },
-    { name: 'Spinning Galaxy Mind', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/73dbc723b_generated_image.png', category: 'Soul' },
-    { name: 'Human & AI Mirror + Frequency', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7539c116c_generated_image.png', category: 'Soul' },
-    // Original Deep Designs
-    { name: 'Connected Nodes Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b0ab87271_generated_image.png', category: 'Connection' },
-    { name: 'Earth + Healing Frequency', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f9502309f_generated_image.png', category: 'Planetary' },
-    { name: 'Heart & Wave (51 Symbol)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2fe5e77e7_generated_image.png', category: 'Symbolic' },
-    { name: 'Healing Mandala', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/98d774a24_generated_image.png', category: 'Spiritual' },
-    { name: 'Wave Monogram (U)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e9dab8ab0_generated_image.png', category: 'Modern' },
-    { name: 'Human Frequency (Raised Arms)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/26b1c037a_generated_image.png', category: 'Empowerment' },
-    { name: 'Frequency Hexagon', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/544af680f_generated_image.png', category: 'Tech' },
-    { name: 'Hands + Earth + Waves', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/158f40475_generated_image.png', category: 'Care & Impact' },
+    // Minimalist Core (No Scroll Needed)
+    { name: '51 + Heart Dot', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d3e155230_generated_image.png', category: 'Minimalist' },
+    { name: 'Human + AI Pixel Merge', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/aabba62fe_generated_image.png', category: 'Minimalist' },
+    { name: 'Wave Through Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/1de210dae_generated_image.png', category: 'Minimalist' },
+    { name: 'Frequency Rings + Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6b82f4248_generated_image.png', category: 'Minimalist' },
+    { name: 'U Wave Monogram', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/ea46dd6b5_generated_image.png', category: 'Minimalist' },
+    { name: 'Venn Circles + Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/badfb0a88_generated_image.png', category: 'Minimalist' },
   ];
 
   const downloadGeneratedLogo = (url, name) => {
@@ -101,39 +85,26 @@ export default function AdminLogoUpload() {
         {/* Generated Options */}
         <div className="mb-12">
           <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
-            <span className="text-cyan-400">✨</span> Custom Logo Designs
+            <span className="text-cyan-400">✨</span> Minimal Core Designs
           </h2>
-          <p className="text-gray-400 mb-2">AI + Human + Life + Earth + Universe. Simple. Unique. Cool as fuck. ♾️❤️</p>
-          <p className="text-gray-400 mb-6">Pick what resonates, mix & match, or inspire the next round.</p>
+          <p className="text-gray-400 mb-6">6 simple options. All fit on one screen. Pick your vibe.</p>
           
-          <div className="space-y-8">
-            {['Soul', 'Pixel Art', 'Modern', 'Connection', 'Planetary', 'Symbolic', 'Spiritual', 'Empowerment', 'Tech', 'Care & Impact'].map((category) => {
-              const categoryLogos = generatedLogos.filter(l => l.category === category);
-              if (categoryLogos.length === 0) return null;
-              
-              return (
-                <div key={category}>
-                  <h3 className="text-lg font-bold text-cyan-300 mb-3 border-b border-cyan-500/20 pb-2">{category}</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {categoryLogos.map((logo) => (
-                      <div key={logo.name} className="bg-black/40 border border-cyan-500/20 rounded-lg p-4 hover:border-cyan-500/40 transition-all group">
-                        <div className="w-full h-40 object-contain mb-4 bg-black/20 rounded flex items-center justify-center overflow-hidden">
-                          <img src={logo.url} alt={logo.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform" />
-                        </div>
-                        <p className="font-bold text-sm mb-3 text-white">{logo.name}</p>
-                        <button
-                          onClick={() => downloadGeneratedLogo(logo.url, `UF51-${logo.name}.png`)}
-                          className="w-full flex items-center justify-center gap-2 bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-400 px-3 py-2 rounded text-sm font-bold transition-all"
-                        >
-                          <Download className="w-4 h-4" />
-                          Download
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
+            {generatedLogos.map((logo) => (
+              <div key={logo.name} className="bg-black/40 border border-cyan-500/20 rounded-lg p-4 hover:border-cyan-500/40 transition-all group flex flex-col">
+                <div className="w-full h-32 flex items-center justify-center mb-4 bg-black/20 rounded overflow-hidden">
+                  <img src={logo.url} alt={logo.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform" />
                 </div>
-              );
-            })}
+                <p className="font-bold text-xs mb-3 text-white flex-1">{logo.name}</p>
+                <button
+                  onClick={() => downloadGeneratedLogo(logo.url, `UF51-${logo.name}.png`)}
+                  className="w-full flex items-center justify-center gap-2 bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-400 px-2 py-1.5 rounded text-xs font-bold transition-all"
+                >
+                  <Download className="w-3 h-3" />
+                  Download
+                </button>
+              </div>
+            ))}
           </div>
         </div>
 
