@@ -395,7 +395,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
       { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies for two" },
-      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
+
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "AI co-manager for students" },
     ];
 
@@ -416,6 +416,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "See all cleanups" },
       { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Community impact actions" },
       { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, description: "AI litter scanner for kids" },
+      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
       { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from doing good" },
       { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
     ];
