@@ -58,13 +58,13 @@ export default function AdminLogoUpload() {
   };
 
   const generatedLogos = [
-    // Bauhaus / Swiss Modernism (Black + Magenta)
-    { name: 'Concentric Arcs', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/34999b936_generated_image.png', category: 'Bauhaus' },
-    { name: 'Circles + Rectangles', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/310e9138a_generated_image.png', category: 'Bauhaus' },
-    { name: 'Abstract Geometry', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/66037900f_generated_image.png', category: 'Bauhaus' },
-    { name: 'Intersecting Forms', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d95f88bcb_generated_image.png', category: 'Bauhaus' },
-    { name: 'Minimalist Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/4283b9485_generated_image.png', category: 'Bauhaus' },
-    { name: 'Geometric Layers', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b343908f3_generated_image.png', category: 'Bauhaus' },
+    // Sub Club Glasgow DNA (Rounded Brackets, Electric Blue)
+    { name: 'Rounded Bracket', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/87c112ca4_generated_image.png', category: 'Sub Club' },
+    { name: 'Facing Brackets', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/034f59811_generated_image.png', category: 'Sub Club' },
+    { name: 'Curved Chevron', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd4874207_generated_image.png', category: 'Sub Club' },
+    { name: 'Bracket Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/c6d0f6fc7_generated_image.png', category: 'Sub Club' },
+    { name: 'Bold Shape', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/5353d1c2b_generated_image.png', category: 'Sub Club' },
+    { name: 'Underground Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/30756add0_generated_image.png', category: 'Sub Club' },
   ];
 
   const downloadGeneratedLogo = (url, name) => {
@@ -85,9 +85,9 @@ export default function AdminLogoUpload() {
         {/* Generated Options */}
         <div className="mb-12">
           <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
-            <span className="text-cyan-400">♾️</span> Bauhaus Modernism
+            <span className="text-cyan-400">♾️</span> Sub Club Glasgow
           </h2>
-          <p className="text-gray-400 mb-6">Black + magenta. Geometric. Timeless. Swiss design DNA. Pick one.</p>
+          <p className="text-gray-400 mb-6">Rounded brackets. Electric blue. Bold, simple, iconic. Underground DNA.</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
             {generatedLogos.map((logo) => (
