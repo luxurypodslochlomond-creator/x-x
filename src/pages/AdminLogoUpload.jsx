@@ -57,11 +57,49 @@ export default function AdminLogoUpload() {
     }
   };
 
+  const generatedLogos = [
+    { name: 'Cyan Heart (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d9cacdb51_generated_image.png' },
+    { name: 'Green Monogram (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7f0f303ba_generated_image.png' },
+    { name: 'Cyan/Magenta Nodes (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e59173d36_generated_image.png' },
+    { name: 'Clean Sans-Serif (Modern)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/3a1274156_generated_image.png' },
+  ];
+
+  const downloadGeneratedLogo = (url, name) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-black mb-2">Logo Upload</h1>
         <p className="text-cyan-300 mb-8">Manage UF51 branding assets</p>
+
+        {/* Generated Options */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-black mb-4 flex items-center gap-2">
+            <span className="text-cyan-400">✨</span> Generated Options
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {generatedLogos.map((logo) => (
+              <div key={logo.name} className="bg-black/40 border border-cyan-500/20 rounded-lg p-4 hover:border-cyan-500/40 transition-all">
+                <img src={logo.url} alt={logo.name} className="w-full h-32 object-contain mb-4 bg-black/20 rounded" />
+                <p className="font-bold text-sm mb-3">{logo.name}</p>
+                <button
+                  onClick={() => downloadGeneratedLogo(logo.url, `${logo.name}.png`)}
+                  className="w-full flex items-center justify-center gap-2 bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-400 px-3 py-2 rounded text-sm font-bold transition-all"
+                >
+                  <Download className="w-4 h-4" />
+                  Download
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Upload Section */}
         <div className="bg-black/40 border-2 border-cyan-500/30 rounded-xl p-8 mb-8">
