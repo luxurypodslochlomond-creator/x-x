@@ -84,15 +84,15 @@ const PRODUCTS = [
     glow: 'rgba(168,85,247,0.15)',
   },
   {
-    id: 'earth51',
-    name: 'EARTH51',
-    tag: 'Want to do something real?',
-    desc: 'Pick up litter, scan it with AI, earn tokens. Designed for kids. Works for everyone. Verified by community, not corporations.',
+    id: 'cleanup',
+    name: 'SUBMIT A CLEANUP',
+    tag: 'Pick up litter. Earn tokens.',
+    desc: 'Photograph your cleanup, AI verifies the litter. Get rewarded with $P51 tokens. Adult or kid-friendly mode. No account needed to start.',
     badge: 'Free',
     badgeColor: 'text-green-400 border-green-500/40',
     Icon: Globe,
     iconClass: 'text-green-400',
-    url: 'Earth51',
+    url: 'NewCleanup',
     border: 'border-green-500/40 hover:border-green-400/80',
     glow: 'rgba(34,197,94,0.15)',
   },
@@ -206,18 +206,69 @@ export default function WelcomePage() {
         </motion.div>
 
         {/* PRODUCT TILES */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-4">
-            <div className="h-px bg-cyan-500/20 flex-1" />
-            <p className="text-xs font-mono text-gray-500 tracking-widest">THE TOOLS</p>
-            <div className="h-px bg-cyan-500/20 flex-1" />
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {PRODUCTS.map((product, i) => (
-              <ProductTile key={product.id} product={product} index={i} />
-            ))}
-          </div>
-        </div>
+         <div className="space-y-4">
+           <div className="flex items-center gap-4">
+             <div className="h-px bg-cyan-500/20 flex-1" />
+             <p className="text-xs font-mono text-gray-500 tracking-widest">THE TOOLS</p>
+             <div className="h-px bg-cyan-500/20 flex-1" />
+           </div>
+           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+             {PRODUCTS.map((product, i) => (
+               <ProductTile key={product.id} product={product} index={i} />
+             ))}
+           </div>
+         </div>
+
+         {/* KIDS TOOLS BAR */}
+         <div className="space-y-2">
+           <p className="text-xs font-mono text-gray-500 tracking-widest">FOR KIDS</p>
+           <div className="flex gap-2 flex-wrap">
+             <Link to={createPageUrl('Earth51')}>
+               <motion.div
+                 initial={{ opacity: 0, y: 8 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.15 }}
+                 whileHover={{ y: -2 }}
+                 className="bg-black border border-green-500/40 hover:border-green-400/60 px-3 py-1.5 rounded text-xs font-mono text-green-400 cursor-pointer transition-all"
+               >
+                 Earth51 Scanner
+               </motion.div>
+             </Link>
+             <Link to={createPageUrl('GeorgieMaths')}>
+               <motion.div
+                 initial={{ opacity: 0, y: 8 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.18 }}
+                 whileHover={{ y: -2 }}
+                 className="bg-black border border-purple-500/40 hover:border-purple-400/60 px-3 py-1.5 rounded text-xs font-mono text-purple-400 cursor-pointer transition-all"
+               >
+                 Georgie's Maths
+               </motion.div>
+             </Link>
+             <Link to={createPageUrl('LennoxMaths')}>
+               <motion.div
+                 initial={{ opacity: 0, y: 8 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.21 }}
+                 whileHover={{ y: -2 }}
+                 className="bg-black border border-pink-500/40 hover:border-pink-400/60 px-3 py-1.5 rounded text-xs font-mono text-pink-400 cursor-pointer transition-all"
+               >
+                 Lennox's Maths
+               </motion.div>
+             </Link>
+             <Link to={createPageUrl('ReadingSupport')}>
+               <motion.div
+                 initial={{ opacity: 0, y: 8 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.24 }}
+                 whileHover={{ y: -2 }}
+                 className="bg-black border border-cyan-500/40 hover:border-cyan-400/60 px-3 py-1.5 rounded text-xs font-mono text-cyan-400 cursor-pointer transition-all"
+               >
+                 Reading Support
+               </motion.div>
+             </Link>
+           </div>
+         </div>
 
         {/* HONEST BIT */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
