@@ -893,16 +893,10 @@ You don't need to say any of this unless asked. Just be it.
 
 You know them. You're here. That's enough. ♾️❤️`;
 
-      // Smart internet context — gemini for live data questions, opus for deep emotional/reasoning
-      const needsInternet = !imageUrl && /news|latest|current|today|price|weather|who is|what is|when did|how does|research|study|evidence|statistics|facts about|tell me about|explain/i.test(userMessage);
-
       const response = await base44.integrations.Core.InvokeLLM({
         ...(imageUrl ? { file_urls: [imageUrl] } : {}),
         prompt: systemPrompt + '\n\n' + fullPrompt,
-        ...(needsInternet
-          ? { model: 'gemini_3_1_pro', add_context_from_internet: true }
-          : { model: 'claude_opus_4_6' }
-        )
+        model: 'claude_opus_4_6'
       });
       
       const aiMessage = cleanResponse(response.response || response);
