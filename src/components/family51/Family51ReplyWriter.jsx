@@ -25,6 +25,9 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4' }) {
   const [loading, setLoading]     = useState(false);
   const [result, setResult]       = useState(null);
   const [copied, setCopied]       = useState(false);
+  const [emailAddr, setEmailAddr] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailing, setEmailing]   = useState(false);
   const [geo, setGeo]             = useState(() => detectGeo());
 
   const write = async () => {
@@ -66,6 +69,15 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
     setResult(response);
     setLoading(false);
+  };
+
+  const sendEmail = async () => {
+    if (!emailAddr.trim() || !result || emailing) return;
+    setEmailing(true);
+    const body = `SORTED wrote your reply.\n\n─────────────────────\nSUBJECT: ${result.subject_line}\n─────────────────────\n\n${result.letter_body}\n\n─────────────────────\nKEY POINTS\n─────────────────────\n${result.key_points?.map(p => `— ${p}`).join('\n')}\n\nTIP: ${result.tip}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
+    await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED reply — ${result.subject_line || 'Ready to send'}`, body });
+    setEmailSent(true);
+    setEmailing(false);
   };
 
   const copyLetter = () => {
@@ -215,15 +227,49 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
               <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: accentColor, color: accentColor, background: `${accentColor}15` }}>
                 {copied ? 'COPIED — READY TO SEND' : 'COPY LETTER'}
               </motion.button>
-              <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
+              <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
                 WRITE ANOTHER
               </motion.button>
             </div>
+
+            {/* EMAIL TO SELF */}
+            <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
 
             <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', letterSpacing: '0.05em' }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  );
+}
+
+function EmailToSelf({ emailAddr, setEmailAddr, onSend, sent, sending, accentColor }) {
+  if (sent) return (
+    <div style={{ border: '1px solid rgba(34,197,94,0.3)', borderRadius: 10, padding: '12px 16px', background: 'rgba(34,197,94,0.06)', textAlign: 'center' }}>
+      <p style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, margin: 0 }}>✓ Sent — check your inbox</p>
+    </div>
+  );
+  return (
+    <div style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', background: 'rgba(255,255,255,0.02)' }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>EMAIL THIS TO YOURSELF</p>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <input
+          type="email"
+          value={emailAddr}
+          onChange={e => setEmailAddr(e.target.value)}
+          placeholder="your@email.com"
+          style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff', fontSize: 12, padding: '9px 12px', outline: 'none', fontFamily: 'inherit' }}
+        />
+        <motion.button
+          onClick={onSend}
+          disabled={!emailAddr.trim() || sending}
+          whileTap={{ scale: 0.95 }}
+          style={{ padding: '9px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: emailAddr.trim() && !sending ? 'pointer' : 'not-allowed', border: `1px solid ${accentColor}50`, background: `${accentColor}15`, color: accentColor, whiteSpace: 'nowrap' }}
+        >
+          {sending ? '...' : 'SEND'}
+        </motion.button>
+      </div>
+      <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', margin: '6px 0 0', letterSpacing: '0.04em' }}>One-time send. Never stored or reused.</p>
     </div>
   );
 }

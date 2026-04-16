@@ -27,6 +27,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
   const [linkUrl, setLinkUrl] = useState('');
   const [geo, setGeo] = useState(() => detectGeo());
+  const [emailAddr, setEmailAddr] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailing, setEmailing] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleFileUpload = async (e) => {
@@ -86,7 +89,16 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     setLoading(false);
   };
 
-  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setLinkUrl(''); };
+  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setLinkUrl(''); setEmailSent(false); setEmailAddr(''); };
+
+  const sendEmail = async () => {
+    if (!emailAddr.trim() || !result || emailing) return;
+    setEmailing(true);
+    const body = `SORTED decoded your letter.\n\n─────────────────────\nWHAT THIS MEANS\n─────────────────────\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\n─────────────────────\nWHAT TO DO\n─────────────────────\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nKEY DEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
+    await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED breakdown — ${result.severity}`, body });
+    setEmailSent(true);
+    setEmailing(false);
+  };
 
   const copyAll = () => {
     if (!result) return;
@@ -253,6 +265,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
               </motion.button>
             </div>
 
+            {/* EMAIL TO SELF */}
+            <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
+
           </motion.div>
         )}
       </AnimatePresence>
@@ -261,6 +276,37 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 }
 
 // ─── SHARED PRIMITIVES ────────────────────────────────────────────────────────
+
+function EmailToSelf({ emailAddr, setEmailAddr, onSend, sent, sending, accentColor }) {
+  if (sent) return (
+    <div style={{ border: '1px solid rgba(34,197,94,0.3)', borderRadius: 10, padding: '12px 16px', background: 'rgba(34,197,94,0.06)', textAlign: 'center' }}>
+      <p style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, margin: 0 }}>✓ Sent — check your inbox</p>
+    </div>
+  );
+  return (
+    <div style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', background: 'rgba(255,255,255,0.02)' }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>EMAIL THIS TO YOURSELF</p>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <input
+          type="email"
+          value={emailAddr}
+          onChange={e => setEmailAddr(e.target.value)}
+          placeholder="your@email.com"
+          style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff', fontSize: 12, padding: '9px 12px', outline: 'none', fontFamily: 'inherit' }}
+        />
+        <motion.button
+          onClick={onSend}
+          disabled={!emailAddr.trim() || sending}
+          whileTap={{ scale: 0.95 }}
+          style={{ padding: '9px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: emailAddr.trim() && !sending ? 'pointer' : 'not-allowed', border: `1px solid ${accentColor}50`, background: `${accentColor}15`, color: accentColor, whiteSpace: 'nowrap' }}
+        >
+          {sending ? '...' : 'SEND'}
+        </motion.button>
+      </div>
+      <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', margin: '6px 0 0', letterSpacing: '0.04em' }}>One-time send. Never stored or reused.</p>
+    </div>
+  );
+}
 
 function Label({ children }) {
   return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', marginBottom: 0 }}>{children}</p>;
