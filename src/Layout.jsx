@@ -537,6 +537,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     const adminNav = user?.role === 'admin' ? [
       { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
+      { title: "Logo Upload", url: createPageUrl("AdminLogoUpload"), icon: Image, description: "Update UF51 branding" },
       { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, description: "Device intel" },
       { title: "AI51 Security", url: createPageUrl("AI51SecurityDashboard"), icon: Shield },
       { title: "Funding Tracker", url: createPageUrl("AdminFundingTracker"), icon: Shield },
