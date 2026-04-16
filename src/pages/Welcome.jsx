@@ -219,52 +219,68 @@ export default function WelcomePage() {
            </div>
          </div>
 
-         {/* KIDS TOOLS BAR */}
-         <div className="space-y-2">
-           <p className="text-xs font-mono text-gray-500 tracking-widest">FOR KIDS</p>
-           <div className="flex gap-2 flex-wrap">
+         {/* KIDS LEARNING & ACTION */}
+         <div className="space-y-4">
+           <div className="flex items-center gap-4">
+             <div className="h-px bg-purple-500/20 flex-1" />
+             <p className="text-xs font-mono text-gray-500 tracking-widest">FOR KIDS · PARENTS · TEACHERS</p>
+             <div className="h-px bg-purple-500/20 flex-1" />
+           </div>
+           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
              <Link to={createPageUrl('Earth51')}>
                <motion.div
-                 initial={{ opacity: 0, y: 8 }}
+                 initial={{ opacity: 0, y: 12 }}
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ delay: 0.15 }}
-                 whileHover={{ y: -2 }}
-                 className="bg-black border border-green-500/40 hover:border-green-400/60 px-3 py-1.5 rounded text-xs font-mono text-green-400 cursor-pointer transition-all"
+                 whileHover={{ y: -3 }}
+                 className="bg-black border-2 border-green-500/40 hover:border-green-400/80 p-4 cursor-pointer transition-all h-full flex flex-col gap-2"
+                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 6px 30px rgba(34,197,94,0.15)'}
+                 onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                >
-                 Earth51 Scanner
+                 <p className="text-green-400 font-black font-mono text-sm">EARTH51 SCANNER</p>
+                 <p className="text-gray-400 text-xs leading-relaxed flex-1">Pick up litter, scan it, earn tokens. AI verified.</p>
                </motion.div>
              </Link>
              <Link to={createPageUrl('GeorgieMaths')}>
                <motion.div
-                 initial={{ opacity: 0, y: 8 }}
+                 initial={{ opacity: 0, y: 12 }}
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ delay: 0.18 }}
-                 whileHover={{ y: -2 }}
-                 className="bg-black border border-purple-500/40 hover:border-purple-400/60 px-3 py-1.5 rounded text-xs font-mono text-purple-400 cursor-pointer transition-all"
+                 whileHover={{ y: -3 }}
+                 className="bg-black border-2 border-purple-500/40 hover:border-purple-400/80 p-4 cursor-pointer transition-all h-full flex flex-col gap-2"
+                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 6px 30px rgba(168,85,247,0.15)'}
+                 onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                >
-                 Georgie's Maths
-               </motion.div>
-             </Link>
-             <Link to={createPageUrl('LennoxMaths')}>
-               <motion.div
-                 initial={{ opacity: 0, y: 8 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ delay: 0.21 }}
-                 whileHover={{ y: -2 }}
-                 className="bg-black border border-pink-500/40 hover:border-pink-400/60 px-3 py-1.5 rounded text-xs font-mono text-pink-400 cursor-pointer transition-all"
-               >
-                 Lennox's Maths
+                 <p className="text-purple-400 font-black font-mono text-sm">MATHS</p>
+                 <p className="text-gray-400 text-xs leading-relaxed flex-1">For kids who learn differently. No pressure.</p>
                </motion.div>
              </Link>
              <Link to={createPageUrl('ReadingSupport')}>
                <motion.div
-                 initial={{ opacity: 0, y: 8 }}
+                 initial={{ opacity: 0, y: 12 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.21 }}
+                 whileHover={{ y: -3 }}
+                 className="bg-black border-2 border-cyan-500/40 hover:border-cyan-400/80 p-4 cursor-pointer transition-all h-full flex flex-col gap-2"
+                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 6px 30px rgba(6,182,212,0.15)'}
+                 onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+               >
+                 <p className="text-cyan-400 font-black font-mono text-sm">READING SUPPORT</p>
+                 <p className="text-gray-400 text-xs leading-relaxed flex-1">Dyslexia friendly. Built by teachers.</p>
+               </motion.div>
+             </Link>
+             <Link to={createPageUrl('YoungWarriors')}>
+               <motion.div
+                 initial={{ opacity: 0, y: 12 }}
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ delay: 0.24 }}
-                 whileHover={{ y: -2 }}
-                 className="bg-black border border-cyan-500/40 hover:border-cyan-400/60 px-3 py-1.5 rounded text-xs font-mono text-cyan-400 cursor-pointer transition-all"
+                 whileHover={{ y: -3 }}
+                 className="bg-black border-2 border-pink-500/40 hover:border-pink-400/80 p-4 cursor-pointer transition-all h-full flex flex-col gap-2"
+                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 6px 30px rgba(236,72,153,0.15)'}
+                 onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                >
-                 Reading Support
+                 <p className="text-pink-400 font-black font-mono text-sm">YOUNG WARRIORS</p>
+                 <p className="text-gray-400 text-xs leading-relaxed flex-1">Kids making a real difference.</p>
                </motion.div>
              </Link>
            </div>
