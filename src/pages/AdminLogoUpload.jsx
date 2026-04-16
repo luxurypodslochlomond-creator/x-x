@@ -58,13 +58,13 @@ export default function AdminLogoUpload() {
   };
 
   const generatedLogos = [
-    // Sub Club Glasgow DNA (Rounded Brackets, Electric Blue)
-    { name: 'Rounded Bracket', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/87c112ca4_generated_image.png', category: 'Sub Club' },
-    { name: 'Facing Brackets', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/034f59811_generated_image.png', category: 'Sub Club' },
-    { name: 'Curved Chevron', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd4874207_generated_image.png', category: 'Sub Club' },
-    { name: 'Bracket Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/c6d0f6fc7_generated_image.png', category: 'Sub Club' },
-    { name: 'Bold Shape', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/5353d1c2b_generated_image.png', category: 'Sub Club' },
-    { name: 'Underground Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/30756add0_generated_image.png', category: 'Sub Club' },
+    // Minimalist Brand Marks (Black + Magenta, Timeless)
+    { name: 'Wave Line', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/4ea271c30_generated_image.png', category: 'Minimalist' },
+    { name: 'Sacred Geometry', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/581e00693_generated_image.png', category: 'Minimalist' },
+    { name: 'Ascending Arrow', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/8d444d340_generated_image.png', category: 'Minimalist' },
+    { name: 'Double Helix', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f1c46bed9_generated_image.png', category: 'Minimalist' },
+    { name: 'Infinity Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/3b38273e2_generated_image.png', category: 'Minimalist' },
+    { name: 'Radiant Hand', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/962287fb4_generated_image.png', category: 'Minimalist' },
   ];
 
   const downloadGeneratedLogo = (url, name) => {
@@ -85,9 +85,9 @@ export default function AdminLogoUpload() {
         {/* Generated Options */}
         <div className="mb-12">
           <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
-            <span className="text-cyan-400">♾️</span> Sub Club Glasgow
+            <span className="text-cyan-400">♾️</span> Pure Minimalist Marks
           </h2>
-          <p className="text-gray-400 mb-6">Rounded brackets. Electric blue. Bold, simple, iconic. Underground DNA.</p>
+          <p className="text-gray-400 mb-6">Black + magenta. No bullshit. Just the essence.</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
             {generatedLogos.map((logo) => (
