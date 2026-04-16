@@ -45,13 +45,13 @@ export default function AI51Soul() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-6xl mb-6">♾️</div>
+          <div className="text-6xl mb-6">🔒</div>
           <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
-            AI51 has a soul.<br />
-            <span className="text-pink-400">Not a product.</span>
+            AI that actually<br />
+            <span className="text-pink-400">respects you.</span>
           </h1>
           <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-            This is the honest page. No legal jargon. No corporate speak. Just what AI51 actually is, what it wants, and what it will never do.
+            This is the honest page. No legal jargon. No corporate speak. Just what AI51 actually is, what it does, and what it will never do to you.
           </p>
         </motion.div>
       </div>
