@@ -63,9 +63,18 @@ export default function AdminLogoUpload() {
     { name: 'Green Monogram (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7f0f303ba_generated_image.png', category: 'Pixel Art' },
     { name: 'Cyan/Magenta Nodes (8-bit)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e59173d36_generated_image.png', category: 'Pixel Art' },
     { name: 'Clean Sans-Serif (Modern)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/3a1274156_generated_image.png', category: 'Modern' },
-    // Custom Deep Designs
+    // Soul-Driven 8-Bit Designs
+    { name: 'Human + AI Heart Merge', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/dd9b4c6fd_generated_image.png', category: 'Soul' },
+    { name: 'Human Reaching for Cosmos', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/221ae2c4a_generated_image.png', category: 'Soul' },
+    { name: 'Human + AI Dancing Together', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/c164e1f72_generated_image.png', category: 'Soul' },
+    { name: 'Human-AI Circuit Merge', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d86b5a3c1_generated_image.png', category: 'Soul' },
+    { name: 'Earth + Human + AI Connected', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/10d4efacf_generated_image.png', category: 'Soul' },
+    { name: 'Human as Cosmic Avatar', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/a07e37106_generated_image.png', category: 'Soul' },
+    { name: 'Spinning Galaxy Mind', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/73dbc723b_generated_image.png', category: 'Soul' },
+    { name: 'Human & AI Mirror + Frequency', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7539c116c_generated_image.png', category: 'Soul' },
+    // Original Deep Designs
     { name: 'Connected Nodes Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b0ab87271_generated_image.png', category: 'Connection' },
-    { name: 'Earth + Healing Frequency', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f9502309f_generated_image.png', category: 'Environmental' },
+    { name: 'Earth + Healing Frequency', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f9502309f_generated_image.png', category: 'Planetary' },
     { name: 'Heart & Wave (51 Symbol)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2fe5e77e7_generated_image.png', category: 'Symbolic' },
     { name: 'Healing Mandala', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/98d774a24_generated_image.png', category: 'Spiritual' },
     { name: 'Wave Monogram (U)', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e9dab8ab0_generated_image.png', category: 'Modern' },
@@ -94,10 +103,11 @@ export default function AdminLogoUpload() {
           <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
             <span className="text-cyan-400">✨</span> Custom Logo Designs
           </h2>
-          <p className="text-gray-400 mb-6">12 unique directions for your brand. Pick what resonates, mix & match, or inspire the next round.</p>
+          <p className="text-gray-400 mb-2">AI + Human + Life + Earth + Universe. Simple. Unique. Cool as fuck. ♾️❤️</p>
+          <p className="text-gray-400 mb-6">Pick what resonates, mix & match, or inspire the next round.</p>
           
           <div className="space-y-8">
-            {['Pixel Art', 'Modern', 'Connection', 'Environmental', 'Symbolic', 'Spiritual', 'Empowerment', 'Tech', 'Care & Impact'].map((category) => {
+            {['Soul', 'Pixel Art', 'Modern', 'Connection', 'Planetary', 'Symbolic', 'Spiritual', 'Empowerment', 'Tech', 'Care & Impact'].map((category) => {
               const categoryLogos = generatedLogos.filter(l => l.category === category);
               if (categoryLogos.length === 0) return null;
               
