@@ -5,9 +5,9 @@ import { createPageUrl } from '@/utils';
 import { Heart, Shield, Trash2, RefreshCw, Brain, MessageCircle, Sparkles, ArrowRight, X, Check } from 'lucide-react';
 
 const FactRow = ({ label, value }) => (
-  <div className="flex items-center justify-between py-3 border-b border-white/5">
+  <div className="flex items-center justify-between gap-4 py-3 border-b border-white/5">
     <span className="text-gray-500 text-xs font-mono tracking-wider">{label}</span>
-    <span className="text-green-400 font-black font-mono text-xs">{value}</span>
+    <span className="text-green-400 font-black font-mono text-xs text-right whitespace-nowrap">{value}</span>
   </div>
 );
 
