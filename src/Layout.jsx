@@ -8,6 +8,7 @@ import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import AutoHealingShield from '@/components/shared/AutoHealingShield';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
+import GlobalSearch from '@/components/shared/GlobalSearch';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 // import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
@@ -42,9 +43,9 @@ import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
-                                          Menu, X, Heart, Home, LogOut, Sparkles, Music, Map, User, Globe,
-                                        BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image, Share2, Handshake
-                                      } from 'lucide-react';
+  Menu, X, Heart, Home, LogOut, Sparkles, Music, Map, User, Globe,
+  BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image, Share2, Handshake
+} from 'lucide-react';
 
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51 } from '@/components/shared/COOLASFUCKIcon';
 import CustomSaxIcon from '@/components/shared/CustomSaxIcon';
@@ -173,6 +174,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     const [canGoBack, setCanGoBack] = useState(false);
     const [pageTransitioning, setPageTransitioning] = useState(false);
     const [archiveSearch, setArchiveSearch] = useState('');
+    const [searchOpen, setSearchOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -248,10 +250,20 @@ const LayoutInner = ({ children, currentPageName }) => {
       }, [location.pathname, currentPageName]);
 
   useEffect(() => {
-    // Disable browser scroll restoration for instant page switches
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
+  }, []);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
   }, []);
 
   useEffect(() => {
@@ -375,22 +387,19 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // === MEMOIZED NAVIGATION SECTIONS ===
   const navs = React.useMemo(() => {
-    // 1. PRODUCTS (apps with subscriptions / paid tools)
+    // 1. PRODUCTS (apps with subscriptions / paid tools) — revenue first
     const productsNav = [
-      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
-      { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Heal all animals · subscription" },
-      { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Decode scary letters · subscription" },
+      { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Sound therapy for animals · subscription" },
+      { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
+      { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
       { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies for two" },
       { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "AI co-manager for students" },
-      { title: "Draw51", url: createPageUrl("Draw51"), icon: Paintbrush, description: "Step-by-step guided drawing" },
-      { title: "cheeseandonionbake", url: createPageUrl("CheeseAndOnionBake"), icon: Trophy, description: "Rocket League coaching · SSL" },
-      { title: "VOLCKANO", url: createPageUrl("Volckano"), icon: Heart, description: "Gergie7's game" },
     ];
 
-    // 2. HEAL FREE (free tools, immediate value — no signup needed)
+    // 2. FREE TOOLS (immediate value — no signup needed)
     const healNav = [
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
       { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain — back, neck, joints" },
@@ -681,19 +690,17 @@ const LayoutInner = ({ children, currentPageName }) => {
                           ) : (
                             <>
                               <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                              <NavSection title="HEAL FREE" color="cyan" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                              <NavSection title="FREE TOOLS" color="cyan" items={healNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                               <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} isMobile />
-                              <div className="space-y-2">
-                                <input
-                                  type="text"
-                                  placeholder="Search archive..."
-                                  value={archiveSearch}
-                                  onChange={(e) => setArchiveSearch(e.target.value)}
-                                  className="w-full px-3 py-2 bg-gray-900/40 border border-gray-700/50 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-600"
-                                />
-                                <NavSection title="ARCHIVE" color="cyan" items={filteredArchiveNav} isActivePage={isActivePage} isMobile />
-                              </div>
-                              <NavSection title="TRUST" color="cyan" items={trustNav} isActivePage={isActivePage} isMobile />
+                                <button
+                                  onClick={() => { setSearchOpen(true); setMobileMenuOpen(false); }}
+                                  className="w-full flex items-center gap-3 px-4 py-3 border border-white/10 hover:border-cyan-500/40 rounded text-left transition-all"
+                                >
+                                  <Search className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                                  <span className="text-gray-400 text-sm flex-1">Search all pages…</span>
+                                  <span className="text-xs text-gray-600 font-mono">⌘K</span>
+                                </button>
+                                <NavSection title="TRUST" color="cyan" items={trustNav} isActivePage={isActivePage} isMobile />
                             </>
                           )}
 
@@ -777,18 +784,16 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : (
               <>
                 <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} defaultOpen={true} />
-                <NavSection title="HEAL FREE" color="cyan" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
+                <NavSection title="FREE TOOLS" color="cyan" items={healNav} isActivePage={isActivePage} defaultOpen={true} />
                 <NavSection title="LEARN" color="cyan" items={learnNav} isActivePage={isActivePage} />
-                <div className="space-y-2">
-                  <input
-                    type="text"
-                    placeholder="Search archive..."
-                    value={archiveSearch}
-                    onChange={(e) => setArchiveSearch(e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-900/40 border border-gray-700/50 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-600"
-                  />
-                  <NavSection title="ARCHIVE" color="cyan" items={filteredArchiveNav} isActivePage={isActivePage} />
-                </div>
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  className="w-full flex items-center gap-3 px-4 py-3 border border-white/10 hover:border-cyan-500/40 rounded text-left transition-all"
+                >
+                  <Search className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                  <span className="text-gray-400 text-sm flex-1">Search all pages…</span>
+                  <span className="text-xs text-gray-600 font-mono">⌘K</span>
+                </button>
                 <NavSection title="TRUST" color="cyan" items={trustNav} isActivePage={isActivePage} />
               </>
             )}
@@ -859,6 +864,7 @@ const LayoutInner = ({ children, currentPageName }) => {
           <AutoBugMonitor />
         </>
       )}
+    {searchOpen && <GlobalSearch onClose={() => setSearchOpen(false)} />}
     </GlobalErrorBoundary>
     </COOLASFUCKErrorMonitor>
     </AutoHealingShield>
