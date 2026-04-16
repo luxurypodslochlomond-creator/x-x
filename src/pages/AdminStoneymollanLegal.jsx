@@ -110,6 +110,43 @@ export default function AdminStoneymollanLegal() {
       }
     ],
 
+    // Key people
+    keyPeople: [
+      {
+        name: 'E C Henderson',
+        org: 'Hendersons Chartered Surveyors',
+        address: 'East Netherton, Milnathort',
+        role: 'YOUR Chartered Surveyor — Hero of the Felling Battle',
+        notes: 'Eddie Henderson filed objections/representations to Forest and Land Scotland on Brian\'s behalf when Cameron Estate / Scottish Woodlands tried to run felling extraction routes past the house & cabins. The application went QUIET after Henderson\'s intervention. PAID IN FULL: £786 on 28 March 2026.',
+        status: 'PAID ✅',
+        color: 'green'
+      },
+      {
+        name: 'Scottish Woodlands',
+        org: 'Acting for Cameron Estate',
+        role: 'Opposing Party — Felling Application',
+        notes: 'Applied to Forest and Land Scotland to fell trees at Cameron Home Farm Wood. Proposed extraction routes would have crossed Brian & Gill\'s access. Application has gone quiet — Henderson\'s objection appears to have worked.',
+        status: 'QUIET — WATCHING',
+        color: 'amber'
+      },
+      {
+        name: 'Cameron Estate / Cameron Home Farm',
+        org: 'Adjacent landowner',
+        role: 'Field owner — NO deed for barn',
+        notes: 'Own the adjacent field. Do NOT hold a specific registered deed for the barn itself. This is the critical gap that supports the prescriptive possession claim.',
+        status: 'NO BARN DEED',
+        color: 'red'
+      },
+      {
+        name: 'Lynn Pacitti',
+        org: 'Solicitor',
+        role: 'First solicitor approached re: prescriptive possession',
+        notes: 'Confirmed the prescriptive possession route is valid but said she is too overcommitted to take it on. Recommended finding another solicitor. NOT negative about the claim itself.',
+        status: 'DECLINED — FIND ANOTHER',
+        color: 'amber'
+      }
+    ],
+
     // References
     references: [
       {
@@ -156,6 +193,25 @@ export default function AdminStoneymollanLegal() {
         >
           <h1 className="text-3xl font-black font-mono text-cyan-400 mb-2">STONEYMOLLAN LEGAL</h1>
           <p className="text-white/60 font-mono text-sm">Barn at Upper Stoneymollan — Prescriptive Possession Case</p>
+        </motion.div>
+
+        {/* WHAT'S SAVED BANNER */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="border-2 border-green-500/50 bg-green-900/10 p-4 rounded-lg"
+        >
+          <h3 className="font-black text-green-400 mb-2 text-sm font-mono">✅ SAVED & SAFE IN THIS HUB</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-white/70">
+            <span>✓ Scots Land Register title boundary (purchased 15 May 1998 — £145,500)</span>
+            <span>✓ Barn sits outside/at edge of registered red line boundary</span>
+            <span>✓ 28 years combined use — former owner 24yrs + Brian/Gill 4yrs</span>
+            <span>✓ Cameron Estate — NO deed for barn specifically</span>
+            <span>✓ Eddie Henderson (Hendersons Surveyors, Milnathort) — PAID £786</span>
+            <span>✓ Felling application (Scottish Woodlands) — went quiet after Henderson</span>
+            <span>✓ Water servitude rights + sole road access to barn</span>
+            <span>✓ Email to Lynn Pacitti + her response on file</span>
+          </div>
         </motion.div>
 
         {/* PROPERTY + STATUS */}
@@ -254,6 +310,37 @@ export default function AdminStoneymollanLegal() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </motion.div>
+
+        {/* KEY PEOPLE */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+        >
+          <h2 className="text-xl font-black text-white mb-4 flex items-center gap-2">
+            <Users className="w-5 h-5 text-cyan-400" />
+            Key People & Parties
+          </h2>
+          <div className="space-y-3">
+            {caseStatus.keyPeople.map((person, idx) => {
+              const borderColor = person.color === 'green' ? 'border-green-500/50 bg-green-900/10' : person.color === 'red' ? 'border-red-500/50 bg-red-900/10' : 'border-amber-500/50 bg-amber-900/10';
+              const badgeColor = person.color === 'green' ? 'text-green-400 bg-green-900/30' : person.color === 'red' ? 'text-red-400 bg-red-900/30' : 'text-amber-400 bg-amber-900/30';
+              return (
+                <div key={idx} className={`border-2 p-4 rounded-lg ${borderColor}`}>
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h3 className="font-black text-white">{person.name}</h3>
+                      <p className="text-white/50 text-xs">{person.org}{person.address ? ` — ${person.address}` : ''}</p>
+                      <p className="text-white/60 text-xs italic mt-0.5">{person.role}</p>
+                    </div>
+                    <span className={`text-xs font-bold px-2 py-1 rounded font-mono ${badgeColor}`}>{person.status}</span>
+                  </div>
+                  <p className="text-white/80 text-sm mt-2">{person.notes}</p>
+                </div>
+              );
+            })}
           </div>
         </motion.div>
 
