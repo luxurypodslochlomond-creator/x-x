@@ -54,11 +54,11 @@ export default function AdminStoneymollanLegal() {
         subject: 'Prescriptive Possession Application / Barn at Upper Stoneymollan',
         status: 'inbox',
         summary: 'Request for legal advice on prescriptive possession claim for barn. Asking: Can you assist? What\'s the cost? What\'s the strength of our position?',
-        key_quote: 'The barn has been in continuous use by the occupiers of Upper Stoneymollan for approximately 26+ years — the previous owner used it for around 24 years, and we have been using it since February 2022.',
+        key_quote: 'The barn has been in continuous use by the occupiers of Upper Stoneymollan for approximately 28+ years — the previous owner used it for around 24 years, and we have been using it since February 2022.',
         details: [
           '✓ Barn NOT in registered title boundary (Scots Land Register)',
           '✓ Cameron Estate owns adjacent field but NO specific deed for barn',
-          '✓ 26+ years continuous use (exceeds 10-year Scots law threshold) — previous owner 24yrs + Brian/Gill from Feb 2022',
+          '✓ 28+ years continuous use (exceeds 10-year Scots law threshold) — previous owner 24yrs + Brian/Gill from Feb 2022',
           '✓ Felling application went quiet (water rights/access leverage)',
           '✓ Full water servitude + only road access to barn'
         ]
@@ -205,7 +205,7 @@ export default function AdminStoneymollanLegal() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-white/70">
             <span>✓ Scots Land Register title boundary (purchased 15 May 1998 — £145,500)</span>
             <span>✓ Barn sits outside/at edge of registered red line boundary</span>
-            <span>✓ 26+ years combined use — former owner 24yrs + Brian/Gill from Feb 2022</span>
+            <span>✓ 28+ years combined use — former owner 24yrs + Brian/Gill from Feb 2022</span>
             <span>✓ Cameron Estate — NO deed for barn specifically</span>
             <span>✓ Eddie Henderson (Hendersons Surveyors, Milnathort) — PAID £786</span>
             <span>✓ Felling application (Scottish Woodlands) — went quiet after Henderson</span>
@@ -504,7 +504,7 @@ export default function AdminStoneymollanLegal() {
             "The barn is technically not ours"
           </blockquote>
           <p className="text-white/70 text-sm">— Cameron Estate Manager, spoken directly to Brian Hughes</p>
-          <p className="text-red-300 text-sm mt-3 font-bold">This is a verbal admission that Cameron Estate do not assert clear ownership of the barn. Combined with 26+ years of use (former owner 24yrs + Brian/Gill from Feb 2022), maintenance investment, and sole road access — this case is extremely strong.</p>
+          <p className="text-red-300 text-sm mt-3 font-bold">This is a verbal admission that Cameron Estate do not assert clear ownership of the barn. Combined with 28+ years of use (former owner 24yrs + Brian/Gill from Feb 2022), maintenance investment, and sole road access — this case is extremely strong.</p>
         </motion.div>
 
         {/* NOTES */}
