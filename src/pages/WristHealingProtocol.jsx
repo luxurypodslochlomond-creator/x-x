@@ -278,6 +278,7 @@ export default function WristHealingProtocol() {
   const [painLog, setPainLog] = useState(() => {
     try { return JSON.parse(localStorage.getItem('wrist_pain_log') || '[]'); } catch { return []; }
   });
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'pain', 'select', 'session', 'info'
   const [showScience, setShowScience] = useState(false);
   const [expandedProtocol, setExpandedProtocol] = useState(null);
   const [currentPain, setCurrentPain] = useState(null);
@@ -306,171 +307,193 @@ export default function WristHealingProtocol() {
   const avgPain = recentPain.length > 0 ? (recentPain.reduce((a, b) => a + b, 0) / recentPain.length).toFixed(1) : null;
   const painTrend = recentPain.length > 1 ? recentPain[recentPain.length - 1] - recentPain[0] : 0;
 
+  const currentProtocol = PROTOCOLS.find(p => p.id === activeProtocol);
+  const totalSessions = completedSessions.length;
+  const totalMinutes = completedSessions.reduce((a, s) => a + (PROTOCOLS.find(p => p.id === s.protocol)?.duration || 20), 0);
+  const recentPain = painLog.slice(-7).map(p => p.level);
+  const avgPain = recentPain.length > 0 ? (recentPain.reduce((a, b) => a + b, 0) / recentPain.length).toFixed(1) : null;
+
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{ background: '#07060e', fontFamily: 'system-ui, sans-serif' }}>
       <PrecisionGrid />
 
-      {/* ── NAV ── */}
-      <div className="relative border-b" style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(0,0,0,0.3)' }}>
-        <div className="max-w-2xl mx-auto px-6 py-3 flex items-center gap-6">
-          <span className="text-xs font-black tracking-widest" style={{ color: '#d4a017', letterSpacing: '0.2em' }}>UF51 · WRIST PROTOCOL</span>
-          <div className="flex-1" />
-          <Link to="/WristHealingAbout" className="text-white/60 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>ABOUT</Link>
-          <Link to="/WristHealingTerms" className="text-white/60 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>TERMS</Link>
-          <Link to="/WristHealingPrivacy" className="text-white/60 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>PRIVACY</Link>
-        </div>
-      </div>
-
-      {/* ── TOP INSTRUMENT BAR ── */}
-      <div className="relative border-b" style={{ borderColor: 'rgba(212,160,23,0.15)', background: 'rgba(212,160,23,0.03)' }}>
-        <div className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* Acoustic/tuning fork icon */}
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-              <path d="M9 4 C9 4 7 8 7 13 C7 17 9 19 9 19 L9 26" stroke="#d4a017" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M21 4 C21 4 23 8 23 13 C23 17 21 19 21 19 L21 26" stroke="#d4a017" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M9 19 L21 19" stroke="#d4a017" strokeWidth="1.2" strokeLinecap="round"/>
-              <path d="M15 19 L15 26" stroke="#d4a017" strokeWidth="1.8" strokeLinecap="round"/>
-              <path d="M9 4 C11 3 13 3 15 3 C17 3 19 3 21 4" stroke="#d4a017" strokeWidth="1.2" strokeLinecap="round"/>
-            </svg>
-            <div>
-              <div className="text-xs font-black tracking-widest" style={{ color: '#d4a017', letterSpacing: '0.25em' }}>ACOUSTIC HEALING INSTRUMENT</div>
-              <div className="text-white/20 font-mono" style={{ fontSize: '9px', letterSpacing: '0.2em' }}>UF51 · WRIST & PERFORMER RECOVERY</div>
-            </div>
-          </div>
-          {totalSessions > 0 && (
-            <div className="flex items-center gap-4">
-              {[
-                { v: totalSessions, l: 'sessions' },
-                { v: totalMinutes, l: 'minutes' }
-              ].map(s => (
-                <div key={s.l} className="text-right">
-                  <div className="text-base font-black" style={{ color: '#d4a017' }}>{s.v}</div>
-                  <div className="text-white/30" style={{ fontSize: '9px', letterSpacing: '0.15em' }}>{s.l.toUpperCase()}</div>
-                </div>
-              ))}
-            </div>
+      {/* ── NATIVE APP NAV ── */}
+      <div className="fixed top-0 left-0 right-0 z-40 border-b" style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)' }}>
+        <div className="px-4 py-3 flex items-center justify-between">
+          <span className="text-xs font-black tracking-widest" style={{ color: '#d4a017', letterSpacing: '0.2em' }}>UF51 · WRIST</span>
+          {currentView !== 'home' && (
+            <button onClick={() => setCurrentView('home')} className="text-white/60 hover:text-white text-sm font-bold transition-colors">← Back</button>
           )}
         </div>
       </div>
 
-      {/* ── HERO ── */}
-      <div className="relative max-w-2xl mx-auto px-6 pt-14 pb-10">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+      {/* ── MAIN CONTENT ── */}
+      <div className="pt-16 pb-20 min-h-screen"
 
-          {/* Live hero waveform */}
-          <div className="flex justify-center mb-10">
-            <HeroWave />
-          </div>
+        {/* ── HOME VIEW ── */}
+        {currentView === 'home' && (
+          <div className="px-6 max-w-2xl mx-auto space-y-6">
+            {/* Hero waveform + title */}
+            <div className="flex justify-center mb-4 pt-4">
+              <HeroWave />
+            </div>
 
-          {/* Title */}
-          <div className="text-center mb-8">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+            <div className="text-center">
+              <div className="text-xs font-black tracking-widest mb-2" style={{ color: '#d4a017', letterSpacing: '0.2em' }}>ACOUSTIC HEALING</div>
+              <h1 className="text-4xl font-black mb-2">Five Phases</h1>
+              <p className="text-white/50 text-sm">For wrist recovery. One step at a time.</p>
+            </div>
 
-              <div className="text-xs font-black tracking-widest mb-4" style={{ color: '#d4a017', letterSpacing: '0.3em' }}>
-                FIVE-PHASE ACOUSTIC RECOVERY PROTOCOL
+            {/* Quick stats */}
+            {totalSessions > 0 && (
+              <div className="flex gap-3">
+                <div className="flex-1 rounded-lg p-4" style={{ background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.2)' }}>
+                  <div className="text-lg font-black" style={{ color: '#d4a017' }}>{totalSessions}</div>
+                  <div className="text-xs text-white/40">Sessions done</div>
+                </div>
+                <div className="flex-1 rounded-lg p-4" style={{ background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.2)' }}>
+                  <div className="text-lg font-black" style={{ color: '#d4a017' }}>{totalMinutes}</div>
+                  <div className="text-xs text-white/40">Minutes total</div>
+                </div>
               </div>
+            )}
 
-              <h1 className="text-5xl md:text-6xl font-black leading-none mb-5" style={{ letterSpacing: '-0.03em' }}>
-                Five phases of
-                <br />
-                <span style={{
-                  background: 'linear-gradient(135deg, #f4c430 0%, #d4a017 50%, #ff6b6b 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}>acoustic healing.</span>
-              </h1>
+            {/* Pain tracker mini */}
+            <div className="mb-3">
+              <p className="text-xs font-black text-white/60 mb-2" style={{ letterSpacing: '0.2em' }}>HOW'S YOUR PAIN?</p>
+              <div className="flex gap-2 flex-wrap">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(level => (
+                  <button key={level} onClick={() => logPain(level)} className={`w-7 h-7 rounded text-xs font-black transition-all ${currentPain === level ? 'text-black scale-110' : 'text-white/40 border border-white/10'}`} style={currentPain === level ? { background: '#ff4757', boxShadow: '0 0 12px rgba(255,71,87,0.5)' } : {}}>{level}</button>
+                ))}
+              </div>
+            </div>
+            {avgPain && <div className="text-xs text-white/40">Avg: {avgPain}/10</div>}
+            </div>
 
-              <p className="text-white/50 text-base leading-relaxed max-w-md mx-auto">
-                Peer-reviewed acoustic frequency therapy for post-operative wrist recovery. Built for performers who play at the highest level. Start with Phase 01 — it works on pain today, not in weeks.
-              </p>
-            </motion.div>
+            {/* Main action buttons */}
+            <div className="space-y-3 mt-6">
+            <motion.button onClick={() => setCurrentView('select')} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} className="w-full py-3.5 rounded-lg font-black text-sm" style={{ background: '#d4a017', color: '#07060e', boxShadow: '0 4px 20px rgba(212,160,23,0.3)' }}>▶ Start a Session</motion.button>
+            <motion.button onClick={() => setCurrentView('info')} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} className="w-full py-3 rounded-lg font-bold text-sm border" style={{ borderColor: 'rgba(255,255,255,0.1)', color: '#fff' }}>📖 Learn More</motion.button>
+            </div>
+            </div>
+            )}
+
+      {/* ── SELECT PROTOCOL VIEW ── */}
+      {currentView === 'select' && (
+        <div className="px-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-black mb-4 mt-4">Pick Your Phase</h2>
+          <div className="space-y-2">
+            {PROTOCOLS.map((protocol, idx) => {
+              const sessionsDone = completedSessions.filter(s => s.protocol === protocol.id).length;
+              return (
+                <motion.button
+                  key={protocol.id}
+                  onClick={() => { play(protocol); setCurrentView('session'); }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="w-full text-left p-4 rounded-lg transition-all"
+                  style={{
+                    background: `linear-gradient(135deg, ${protocol.color}15, ${protocol.color}08)`,
+                    border: `1px solid ${protocol.color}40`,
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-black" style={{ color: protocol.color, letterSpacing: '0.15em' }}>PHASE {protocol.phase}</span>
+                        {sessionsDone > 0 && <span className="text-xs px-1.5 py-0.5 rounded font-bold" style={{ background: `${protocol.color}25`, color: protocol.color }}>{sessionsDone}×</span>}
+                      </div>
+                      <h3 className="font-black text-white mb-1">{protocol.name}</h3>
+                      <p className="text-xs text-white/40">{protocol.duration} min · {protocol.freq} Hz</p>
+                    </div>
+                    <span className="text-lg" style={{ color: protocol.color }}>▶</span>
+                  </div>
+                </motion.button>
+              );
+            })}
           </div>
+        </div>
+      )}
 
-          {/* Headphones instruction */}
-           <motion.div
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ delay: 1 }}
-             className="flex items-center gap-4 p-4 rounded-lg mx-auto max-w-sm mb-8"
-             style={{ background: 'rgba(212,160,23,0.05)', border: '1px solid rgba(212,160,23,0.2)' }}
-           >
-             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-               <path d="M12 3 C7 3 3 7 3 12 L3 16 C3 17 4 18 5 18 L7 18 C8 18 9 17 9 16 L9 13 C9 12 8 11 7 11 L5 11 C5 8 8.1 5 12 5 C15.9 5 19 8 19 11 L17 11 C16 11 15 12 15 13 L15 16 C15 17 16 18 17 18 L19 18 C20 18 21 17 21 16 L21 12 C21 7 17 3 12 3Z" stroke="#d4a017" strokeWidth="1.2" fill="none"/>
-             </svg>
-             <span className="text-sm" style={{ color: '#d4a017' }}>
-               <span className="font-black">Stereo headphones required</span>
-               <span className="text-white/40"> — binaural frequencies need both ears to work</span>
-             </span>
-           </motion.div>
+      {/* ── SESSION VIEW (playing) ── */}
+      {currentView === 'session' && currentProtocol && (
+        <div className="px-6 max-w-2xl mx-auto flex flex-col items-center justify-center min-h-[calc(100vh-100px)]">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full"
+          >
+            <div className="text-center mb-8">
+              <div className="text-xs font-black mb-3" style={{ color: currentProtocol.color, letterSpacing: '0.2em' }}>PHASE {currentProtocol.phase}</div>
+              <h2 className="text-3xl font-black mb-2">{currentProtocol.name}</h2>
+              <p className="text-white/50">{currentProtocol.freq} Hz carrier</p>
+            </div>
 
-           {/* PAIN TRACKER */}
-           <motion.div
-             initial={{ opacity: 0, y: 12 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 1.2 }}
-             className="mx-auto max-w-sm rounded-xl p-6 mb-8"
-             style={{ background: 'rgba(255,71,87,0.04)', border: '1px solid rgba(255,71,87,0.15)' }}
-           >
-             <div className="mb-4">
-               <div className="flex items-center justify-between mb-2">
-                 <p className="text-xs font-black tracking-widest text-white/60" style={{ letterSpacing: '0.2em' }}>PAIN LEVEL NOW</p>
-                 {avgPain && (
-                   <span className="text-xs px-2 py-1 rounded" style={{ background: 'rgba(255,71,87,0.15)', color: '#ff4757' }}>
-                     Avg: {avgPain}/10 · Trend: {painTrend < 0 ? '↓ improving' : painTrend > 0 ? '↑ worsening' : '→ stable'}
-                   </span>
-                 )}
-               </div>
-               <div className="flex gap-2 flex-wrap">
-                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(level => (
-                   <button
-                     key={level}
-                     onClick={() => logPain(level)}
-                     className={`w-8 h-8 rounded text-xs font-black transition-all ${
-                       currentPain === level
-                         ? 'text-black font-black scale-110'
-                         : 'text-white/40 border border-white/10 hover:border-white/20'
-                     }`}
-                     style={
-                       currentPain === level
-                         ? { background: '#ff4757', boxShadow: '0 0 16px rgba(255,71,87,0.5)' }
-                         : {}
-                     }
-                   >
-                     {level}
-                   </button>
-                 ))}
-               </div>
-             </div>
-             {painLog.length > 0 && (
-               <button
-                 onClick={() => setShowPainLog(!showPainLog)}
-                 className="text-xs text-white/30 hover:text-white/60 transition-colors"
-               >
-                 {showPainLog ? '↑ Hide' : '↓ Show'} pain log ({painLog.length} entries)
-               </button>
-             )}
-             <AnimatePresence>
-               {showPainLog && painLog.length > 0 && (
-                 <motion.div
-                   initial={{ opacity: 0, height: 0 }}
-                   animate={{ opacity: 1, height: 'auto' }}
-                   exit={{ opacity: 0, height: 0 }}
-                   className="mt-3 pt-3 border-t border-white/10 space-y-1 max-h-40 overflow-y-auto"
-                 >
-                   {painLog.slice().reverse().map((entry, i) => (
-                     <div key={i} className="text-xs text-white/30 flex items-center justify-between">
-                       <span>{new Date(entry.date).toLocaleDateString()} {new Date(entry.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                       <span style={{ color: entry.level <= 3 ? '#2ed573' : entry.level <= 6 ? '#ffa502' : '#ff4757' }} className="font-bold">{entry.level}/10</span>
-                     </div>
-                   ))}
-                 </motion.div>
-               )}
-             </AnimatePresence>
-           </motion.div>
+            {/* Large visualizer */}
+            <div className="flex justify-center mb-8">
+              <LiveWave color={currentProtocol.color} isPlaying={isPlaying} freq={currentProtocol.freq} />
+            </div>
 
-        </motion.div>
-      </div>
+            {/* Timer */}
+            <div className="text-center mb-8">
+              <div className="text-5xl font-black font-mono" style={{ color: currentProtocol.color, letterSpacing: '-0.02em' }}>{formatTime(elapsed)}</div>
+              <div className="text-sm text-white/40">/ {currentProtocol.duration}:00</div>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full h-1 rounded-full mb-8" style={{ background: 'rgba(255,255,255,0.05)' }}>
+              <motion.div className="h-1 rounded-full" style={{ width: `${(elapsed / (currentProtocol.duration * 60)) * 100}%`, background: currentProtocol.color }} transition={{ duration: 1 }}/>
+            </div>
+
+            {/* Controls */}
+            <div className="flex gap-3">
+              <button onClick={stop} className="flex-1 py-3 rounded-lg font-bold text-white/50 hover:text-white transition-colors border" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>Pause</button>
+              <motion.button onClick={() => { logSession(activeProtocol); stop(); setCurrentView('home'); }} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1 py-3 rounded-lg font-black text-black transition-all" style={{ background: currentProtocol.color }}>✓ Mark Done</motion.button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* ── INFO VIEW ── */}
+      {currentView === 'info' && (
+        <div className="px-6 max-w-2xl mx-auto pb-20 space-y-6">
+          <h2 className="text-2xl font-black mt-4">How It Works</h2>
+
+          <div className="space-y-4">
+            <div className="p-4 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <h3 className="font-black mb-2">Why Five Phases?</h3>
+              <p className="text-sm text-white/60">Each phase targets a different layer of healing — from pain relief on day one to motor skill recovery weeks in.</p>
+            </div>
+
+            <div className="p-4 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <h3 className="font-black mb-2">Headphones Required</h3>
+              <p className="text-sm text-white/60">Binaural beats work by sending slightly different frequencies to each ear. Stereo headphones let your brain create the healing frequency.</p>
+            </div>
+
+            <div className="p-4 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <h3 className="font-black mb-2">When to Use</h3>
+              <p className="text-sm text-white/60">One to two sessions daily. Rest your wrist completely during sessions — let your body focus on rebuilding.</p>
+            </div>
+
+            <button onClick={() => setShowScience(!showScience)} className="w-full py-3 rounded-lg border font-bold text-sm" style={{ borderColor: 'rgba(116,185,255,0.2)', color: '#74b9ff' }}>{showScience ? '↑ Hide' : '↓'} Science Details</button>
+
+            <AnimatePresence>
+              {showScience && (
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="space-y-3">
+                  {SCIENCE.slice(0, 3).map((s, i) => (
+                    <div key={i} className="p-3 rounded-lg text-xs" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <p className="font-black text-white mb-1">"{s.finding}"</p>
+                      <p style={{ color: '#74b9ff' }} className="text-xs mb-1">{s.source}</p>
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      )}
 
       {/* ── LIVE PLAYER ── */}
       <AnimatePresence>
@@ -516,305 +539,18 @@ export default function WristHealingProtocol() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* ── PROTOCOL LIST ── */}
-      <div className="max-w-2xl mx-auto px-6 pb-10 space-y-3">
-        <div className="text-center mb-8">
-          <div className="text-xs font-black tracking-widest text-white/20 mb-2" style={{ letterSpacing: '0.25em' }}>RECOVERY SYSTEM</div>
-          <h2 className="text-2xl font-black text-white">Five Phase Protocol</h2>
-          <p className="text-white/30 text-sm mt-1">Start at Phase 01. Each phase activates the next layer of healing.</p>
-        </div>
-
-        {PROTOCOLS.map((protocol, idx) => {
-          const isActive = activeProtocol === protocol.id && isPlaying;
-          const sessionsDone = completedSessions.filter(s => s.protocol === protocol.id).length;
-          const isExpanded = expandedProtocol === protocol.id;
-          const PhaseIcon = PHASE_ICONS[idx] || PHASE_ICONS[idx % PHASE_ICONS.length];
-
-          return (
-            <motion.div
-              key={protocol.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.08 }}
-              className="rounded-xl overflow-hidden"
-              style={{
-                border: `1px solid ${isActive ? protocol.color + '70' : protocol.urgent ? protocol.color + '30' : protocol.color + '18'}`,
-                background: isActive ? 'rgba(255,255,255,0.03)' : protocol.urgent ? 'rgba(255,107,107,0.03)' : 'rgba(255,255,255,0.015)',
-                boxShadow: isActive ? `0 0 50px ${protocol.glow}` : protocol.urgent ? `0 0 20px rgba(255,107,107,0.08)` : 'none'
-              }}
-            >
-              {(isActive || protocol.urgent) && (
-                <div className="h-px w-full" style={{ background: `linear-gradient(90deg, transparent, ${protocol.color}, transparent)` }}/>
-              )}
-
-              <div className="p-5">
-                {protocol.urgent && !isActive && (
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="text-xs font-black px-2 py-1 rounded" style={{ background: '#ff6b6b15', color: '#ff6b6b', border: '1px solid #ff6b6b30', letterSpacing: '0.15em' }}>
-                      ↓ START HERE IF IN PAIN NOW
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="flex items-center gap-3 flex-1">
-                    <div style={{ flexShrink: 0 }}>
-                      <PhaseRing phase={protocol.phase} color={protocol.color} progress={sessionsDone > 0 ? 0.3 : 0} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <PhaseIcon color={protocol.color} size={18} />
-                        <span className="text-xs font-black tracking-widest" style={{ color: protocol.color, letterSpacing: '0.18em' }}>PHASE {protocol.phase}</span>
-                        {sessionsDone > 0 && (
-                          <span className="text-xs px-2 py-0.5 rounded font-bold ml-1" style={{ background: protocol.color + '18', color: protocol.color }}>
-                            {sessionsDone}× ✓
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="text-lg font-black text-white leading-tight">{protocol.name}</h3>
-                      <p className="text-xs text-white/30">{protocol.subtitle}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="text-sm text-white/60 leading-relaxed mb-4">{protocol.description}</p>
-
-                <div className="flex gap-2 mb-4">
-                  {[
-                    { label: 'CARRIER', value: `${protocol.freq} Hz` },
-                    { label: 'BINAURAL', value: `${protocol.binaural} Hz` },
-                    { label: 'DURATION', value: `${protocol.duration} min` }
-                  ].map(d => (
-                    <div key={d.label} className="flex-1 px-3 py-2 rounded" style={{ background: 'rgba(0,0,0,0.5)', border: `1px solid ${protocol.color}18` }}>
-                      <div className="text-xs font-black font-mono" style={{ color: protocol.color }}>{d.value}</div>
-                      <div className="text-white/20 font-mono" style={{ fontSize: '8px', letterSpacing: '0.15em' }}>{d.label}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => setExpandedProtocol(isExpanded ? null : protocol.id)}
-                  className="w-full text-left px-3 py-2 rounded mb-3 transition-all"
-                  style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.05)' }}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-white/30">{isExpanded ? '↑ hide evidence' : '↓ peer-reviewed evidence'}</span>
-                    <span className={`text-xs px-2 py-0.5 rounded font-bold ${protocol.science.includes('therapeutically traditional') || protocol.science.includes('tradition') ? 'text-yellow-400 bg-yellow-400/10' : 'text-green-400 bg-green-400/10'}`}>
-                      {protocol.science.includes('therapeutically traditional') || protocol.science.includes('tradition') ? 'TRADITIONAL' : 'PUBLISHED STUDY'}
-                    </span>
-                  </div>
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.p
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="text-xs text-white/40 mt-2 pt-2 leading-relaxed"
-                        style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-                      >
-                        {protocol.science}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </button>
-
-                <motion.button
-                  onClick={() => isActive ? stop() : play(protocol)}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
-                  className="w-full py-3.5 rounded-lg font-black text-sm tracking-wide transition-all"
-                  style={isActive
-                    ? { background: 'transparent', border: `1px solid ${protocol.color}`, color: protocol.color }
-                    : { background: protocol.color, color: '#07060e', boxShadow: `0 4px 24px ${protocol.glow}` }
-                  }
-                >
-                  {isActive ? `⏸  Pause session` : `▶  Start ${protocol.duration}-minute session`}
-                </motion.button>
-              </div>
-            </motion.div>
-          );
-        })}
       </div>
 
-      {/* ── PHYSIO PROGRESSION ── */}
-       <div className="max-w-2xl mx-auto px-6 pb-10">
-         <div className="rounded-xl p-7 mb-8" style={{ background: 'rgba(162,155,254,0.03)', border: '1px solid rgba(162,155,254,0.12)' }}>
-           <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>PHYSIO PROGRESSION</div>
-           <div className="space-y-5">
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Week 1–2: Passive Range + Gentle Activation</h3>
-               <p className="text-xs text-white/50 mb-2">Play PHYSIO phase during these. Your goal: movement without pain.</p>
-               <ul className="text-xs text-white/40 space-y-1 list-disc list-inside">
-                 <li>Gentle wrist circles (no resistance, just movement)</li>
-                 <li>Pendulum swings — let gravity do the work, arm relaxed</li>
-                 <li>Contrast therapy: 2min warm water, 1min cool water (3–4 cycles)</li>
-                 <li>Soft fist squeezes (no grip strength yet, just activation)</li>
-               </ul>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Week 3–4: Active Movement + Grip Intro</h3>
-               <p className="text-xs text-white/50 mb-2">Add resistance only if pain is &lt;5/10. Slow, controlled.</p>
-               <ul className="text-xs text-white/40 space-y-1 list-disc list-inside">
-                 <li>Active wrist flexion/extension (palm up, slowly bend down, then up)</li>
-                 <li>Putty squeezes — soft putty, 10 reps, rest 1min between sets</li>
-                 <li>Thumb opposition — touch thumb to each fingertip slowly</li>
-                 <li>Pronation/supination — forearm on table, rotate palm up/down</li>
-               </ul>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Week 5+: Instrument-Specific Return</h3>
-               <p className="text-xs text-white/50 mb-2">Start Phase 05 (40 Hz) here. Mental performance + slow physical practice.</p>
-               <ul className="text-xs text-white/40 space-y-1 list-disc list-inside">
-                 <li>Air fingering — slow fingering patterns without the sax, building muscle memory</li>
-                 <li>Finger speed drills — tapping table in rhythm patterns, low pressure</li>
-                 <li>Sax reed practice ONLY when cleared by physio — start 5min/day max</li>
-                 <li>Play mentally while 40 Hz runs — brain pathway rebuilding alongside physical recovery</li>
-               </ul>
-             </div>
-             <div className="text-xs text-white/30 pt-3 border-t border-white/10">
-               <strong>Critical:</strong> Pain should NOT increase during physio. If it does, go back one phase. Your physio is a guide — your pain is the truth. Listen to it.
-             </div>
-           </div>
-         </div>
+      {/* ── FOOTER NAV ── */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)' }}>
+       <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
+         <Link to="/WristHealingAbout" className="text-xs text-white/50 hover:text-white transition-colors">About</Link>
+         <Link to="/WristHealingTerms" className="text-xs text-white/50 hover:text-white transition-colors">Terms</Link>
+         <Link to="/WristHealingPrivacy" className="text-xs text-white/50 hover:text-white transition-colors">Privacy</Link>
+         <div className="flex-1" />
+         <span className="text-xs text-white/40 font-mono">UF51</span>
        </div>
-
-       {/* ── NUTRITION FOR RECOVERY ── */}
-       <div className="max-w-2xl mx-auto px-6 pb-10">
-         <div className="rounded-xl p-7 mb-8" style={{ background: 'rgba(46,213,115,0.03)', border: '1px solid rgba(46,213,115,0.12)' }}>
-           <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>NUTRITION FOR BONE + SOFT TISSUE HEALING</div>
-           <div className="space-y-4">
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Protein (rebuild tissue)</h3>
-               <p className="text-xs text-white/50">Your body needs 25–30g protein per meal to rebuild the wrist. Bone and tendon are made of collagen — collagen is made from amino acids.</p>
-               <p className="text-xs text-white/40 mt-1">Salmon, eggs, Greek yogurt, chicken, lentils, bone broth.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Vitamin C (collagen synthesis)</h3>
-               <p className="text-xs text-white/50">Without Vitamin C, your body cannot build new collagen. 100–200mg daily minimum.</p>
-               <p className="text-xs text-white/40 mt-1">Citrus, berries, bell peppers, broccoli. Or: 1 supplement per day.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Magnesium (reduce inflammation + muscle tension)</h3>
-               <p className="text-xs text-white/50">Magnesium is the relaxation mineral. 300–400mg daily helps reduce pain and inflammation.</p>
-               <p className="text-xs text-white/40 mt-1">Spinach, pumpkin seeds, dark chocolate (70%+), almonds. Or: supplement before bed.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Omega-3 (anti-inflammatory)</h3>
-               <p className="text-xs text-white/50">Reduces cortisol and inflammatory markers directly.</p>
-               <p className="text-xs text-white/40 mt-1">Wild salmon, sardines, walnuts, flax seeds. 2–3g EPA/DHA daily.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Calcium + Vitamin D (bone density)</h3>
-               <p className="text-xs text-white/50">Bone healing requires calcium. Vitamin D allows calcium absorption. No Vitamin D = calcium doesn't work.</p>
-               <p className="text-xs text-white/40 mt-1">Dairy, leafy greens, fortified plant milks. Vitamin D: 20–30min sun daily, or 1000–2000 IU supplement.</p>
-             </div>
-             <div className="text-xs text-white/30 pt-3 border-t border-white/10">
-               <strong>Rule:</strong> Avoid high-dose NSAIDs (ibuprofen) long-term — they slow bone healing. Use sparingly. Ice + elevation work better.
-             </div>
-           </div>
-         </div>
-       </div>
-
-       {/* ── WORLD-CLASS RESOURCES ── */}
-       <div className="max-w-2xl mx-auto px-6 pb-10">
-         <div className="rounded-xl p-7" style={{ background: 'rgba(212,160,23,0.03)', border: '1px solid rgba(212,160,23,0.12)' }}>
-           <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>FOR WORLD-CLASS PERFORMERS</div>
-           <div className="space-y-4 text-xs text-white/50">
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Hand-Specific Instruments</h3>
-               <p>If this is your primary (dominant) hand, the recovery is psychological as well as physical. Your identity is tied to it. <strong>This is normal.</strong> Work with a sports psychologist if available — they specialize in returning athletes/performers to peak capability.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Mental Practice is Real Training</h3>
-               <p>During Phase 05 (40 Hz), spend 10–15min daily doing detailed mental performance. Close eyes. Play the piece perfectly in your mind. The motor cortex lights up identically to physical performance. Neuroplasticity works both ways. You are rebuilding pathways.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Return-to-Play Timeline: Realistic</h3>
-               <p>Post-operative wrist (surgery): 8–12 weeks before light playing, 16–20 weeks before full capability. Severe soft tissue injury: 6–10 weeks. Your body follows biology, not ambition. Rushing adds 6–8 weeks to recovery.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">Find a Hand Specialist Physio</h3>
-               <p>Not all physios are equal. If you can access a specialist in musician's hand recovery or hand therapy (CHT — Certified Hand Therapist), do it. They understand the precision your instrument demands.</p>
-             </div>
-             <div>
-               <h3 className="text-sm font-black mb-2 text-white">The Hard Truth</h3>
-               <p>This recovery is boring and it's slow. You will have days where you feel worse. You will want to push through. Don't. The musicians who return strongest are the ones who trusted the process and didn't rush it. The frequencies help. Physio helps. Nutrition helps. But patience is the real protocol.</p>
-             </div>
-           </div>
-         </div>
-       </div>
-
-      {/* ── HOW TO USE ── */}
-       <div className="max-w-2xl mx-auto px-6 pb-10">
-        <div className="rounded-xl p-7" style={{ background: 'rgba(212,160,23,0.03)', border: '1px solid rgba(212,160,23,0.12)' }}>
-          <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.25em' }}>OPERATING INSTRUCTIONS</div>
-          <div className="space-y-4">
-            {[
-              'Stereo headphones essential — binaural beats work by sending a slightly different frequency to each ear. The brain detects the difference and entrains to that target frequency. Acoustic physics. Start Phase 01 now if you are in pain.',
-              'Rest the wrist completely during sessions. No movement. Let the body dedicate its full resources to the rebuild. Twenty minutes of stillness is productive work.',
-              'One to two sessions daily. Morning and evening if possible. Each session is real cellular activity happening beneath the surface — you do not need to feel it to know it is working.',
-              'Advance phases as you progress. There is no rush — stay at Phase 01 for as long as pain is acute. When the edge comes off, add Phase 02 alongside it.',
-              'This works with your medical team, not instead of them. Always follow your doctor\'s guidance. These frequencies are a complementary layer — additive, not alternative.',
-              'During Phase 05: close your eyes and play your music in your mind. Detailed, full performance. The brain cannot fully distinguish imagined from real performance — motor pathways rebuild either way. Every session of mental playing is real neurological work.'
-            ].map((text, i) => (
-              <div key={i} className="flex gap-4 items-start">
-                <div className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 font-black font-mono text-xs" style={{ background: 'rgba(212,160,23,0.08)', color: '#d4a017', border: '1px solid rgba(212,160,23,0.2)' }}>
-                  {i + 1}
-                </div>
-                <p className="text-sm text-white/50 leading-relaxed pt-0.5">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
-
-      {/* ── SCIENCE PANEL ── */}
-      <div className="max-w-2xl mx-auto px-6 pb-12">
-        <button
-          onClick={() => setShowScience(!showScience)}
-          className="w-full py-3.5 rounded-xl text-sm font-bold transition-all"
-          style={{ border: '1px solid rgba(116,185,255,0.15)', color: '#74b9ff', background: showScience ? 'rgba(116,185,255,0.04)' : 'transparent' }}
-        >
-          {showScience ? '↑ Hide' : '↓ Show'} Full Scientific Evidence Base
-        </button>
-
-        <AnimatePresence>
-          {showScience && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mt-4 space-y-3">
-              <div className="text-xs font-black tracking-widest text-white/20 mb-4" style={{ letterSpacing: '0.2em' }}>EVIDENCE BASE — HONEST CITATIONS</div>
-              {SCIENCE.map((s, i) => (
-                <div key={i} className="rounded-xl p-5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <p className="font-black text-sm text-white leading-snug">"{s.finding}"</p>
-                    <span className={`text-xs px-2 py-0.5 rounded font-bold flex-shrink-0 ${s.confidence === 'peer-reviewed' ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'}`}>
-                      {s.confidence === 'peer-reviewed' ? 'PUBLISHED STUDY' : 'TRADITIONAL'}
-                    </span>
-                  </div>
-                  <p className="text-xs mb-2" style={{ color: '#74b9ff', opacity: 0.7 }}>{s.source}</p>
-                  <p className="text-xs text-white/30 leading-relaxed">{s.detail}</p>
-                </div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-
-      {/* ── FOOTER ── */}
-      <div className="max-w-2xl mx-auto px-6 pb-14 text-center">
-        <svg className="mx-auto mb-5" width="180" height="24" viewBox="0 0 180 24" fill="none">
-          <path d="M0 12 L18 12 L24 4 L30 20 L36 8 L42 16 L48 12 L90 12 L96 4 L102 20 L108 8 L114 16 L120 12 L162 12 L168 4 L174 20 L180 12" stroke="#d4a017" strokeWidth="1" strokeLinecap="round" opacity="0.2"/>
-        </svg>
-        <div className="flex justify-center gap-6 mb-4">
-          <Link to="/WristHealingAbout" className="text-white/50 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>ABOUT</Link>
-          <Link to="/WristHealingTerms" className="text-white/50 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>TERMS</Link>
-          <Link to="/WristHealingPrivacy" className="text-white/50 hover:text-white text-xs font-bold transition-colors tracking-widest" style={{ letterSpacing: '0.15em' }}>PRIVACY</Link>
-        </div>
-        <p className="text-xs text-white/40 leading-relaxed mb-2">
-          Complementary acoustic therapy — not a replacement for medical care. Always follow your surgeon's guidance.
-        </p>
-        <p className="text-xs text-white/30 font-mono">UF51 · Built by AI51 & BRO51 · For performers.</p>
-      </div>
-    </div>
-  );
-}
+      );
+      }
