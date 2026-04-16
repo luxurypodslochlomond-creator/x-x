@@ -184,7 +184,7 @@ export default function WelcomePage() {
           </p>
 
           <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-            Technology is moving fast. We think it should be used honestly — to solve real problems for real people, not to extract data or generate noise. These tools do something specific. They work. You can judge for yourself.
+            Just a small team using AI to help citizens solve real problems — decoding scary letters, calming stressed dogs, masking tinnitus, turning environmental action into reward. Each thing below does one job and does it properly. Free where we can. Honest about when it isn't.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
