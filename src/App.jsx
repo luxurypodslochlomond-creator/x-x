@@ -60,6 +60,7 @@ const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
 const AdminLogoUploadPage = React.lazy(() => import('./pages/AdminLogoUpload'));
 const AdminStoneymollanLegalPage = React.lazy(() => import('./pages/AdminStoneymollanLegal'));
+const AI51SoulPage = React.lazy(() => import('./pages/AI51Soul'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -148,6 +149,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper>} />
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper>} />
       <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminStoneymollanLegalPage /></LayoutWrapper>} />
+      <Route path="/AI51Soul" element={<LayoutWrapper currentPageName="AI51Soul"><AI51SoulPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
