@@ -58,13 +58,13 @@ export default function AdminLogoUpload() {
   };
 
   const generatedLogos = [
-    // Record Label Aesthetic (8-bit + Connection)
-    { name: 'Human in Square', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/de28826ba_generated_image.png', category: 'Label' },
-    { name: 'Frequency + Heart Badge', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2f764a67b_generated_image.png', category: 'Label' },
-    { name: 'Human with Headphones', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/948f3828e_generated_image.png', category: 'Label' },
-    { name: 'Diamond Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/93cfe5336_generated_image.png', category: 'Label' },
-    { name: 'Concentric Connection', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/235bf9722_generated_image.png', category: 'Label' },
-    { name: 'Constellation Heart', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e04592977_generated_image.png', category: 'Label' },
+    // Sub Club Energy (Bold Blue, Stark, Simple)
+    { name: 'Blue Bracket', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/e22443d7b_generated_image.png', category: 'Sub Club' },
+    { name: 'Bold 51', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/4091ac533_generated_image.png', category: 'Sub Club' },
+    { name: 'Ascending Wave', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b1c2de26d_generated_image.png', category: 'Sub Club' },
+    { name: 'Geometric Mark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/ab9e04d97_generated_image.png', category: 'Sub Club' },
+    { name: 'UF51 Stark', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/16bbc5d74_generated_image.png', category: 'Sub Club' },
+    { name: 'Connected Dots', url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/0b9115d41_generated_image.png', category: 'Sub Club' },
   ];
 
   const downloadGeneratedLogo = (url, name) => {
@@ -85,9 +85,9 @@ export default function AdminLogoUpload() {
         {/* Generated Options */}
         <div className="mb-12">
           <h2 className="text-2xl font-black mb-2 flex items-center gap-2">
-            <span className="text-cyan-400">♾️</span> Record Label Vibes
+            <span className="text-cyan-400">♾️</span> Bold & Simple
           </h2>
-          <p className="text-gray-400 mb-6">8-bit warmth. Bold geometry. Built for connection, not fear. Pick one.</p>
+          <p className="text-gray-400 mb-6">Electric blue. Stark. No noise. Sub Club energy. Pick one.</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
             {generatedLogos.map((logo) => (
