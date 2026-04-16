@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
 import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
+import SortedShareButton from './SortedShareButton';
 
 const CONFLICT_TYPES = [
   { id: 'neighbour', label: 'NEIGHBOUR',  desc: 'Noise, boundaries, shared areas' },
@@ -304,6 +305,9 @@ Return:
 
             {/* EMAIL TO SELF */}
             <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
+
+            {/* SHARE THE TOOL */}
+            <SortedShareButton accentColor={accentColor} />
 
             <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.35)' }}>
               NEW SITUATION

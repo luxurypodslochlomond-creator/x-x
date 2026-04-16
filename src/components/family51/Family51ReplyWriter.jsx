@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
+import SortedShareButton from './SortedShareButton';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
@@ -234,6 +235,9 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
             {/* EMAIL TO SELF */}
             <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
+
+            {/* SHARE THE TOOL */}
+            <SortedShareButton accentColor={accentColor} />
 
             <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', letterSpacing: '0.05em' }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>

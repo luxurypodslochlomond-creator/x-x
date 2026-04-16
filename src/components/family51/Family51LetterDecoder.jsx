@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
+import SortedShareButton from './SortedShareButton';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -267,6 +268,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 
             {/* EMAIL TO SELF */}
             <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
+
+            {/* SHARE THE TOOL */}
+            <SortedShareButton accentColor={accentColor} />
 
           </motion.div>
         )}

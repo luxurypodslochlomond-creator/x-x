@@ -8,6 +8,7 @@ import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import SortedAbout from '@/components/family51/SortedAbout';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
+import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -221,6 +222,8 @@ export default function Family51Page() {
               <TrustPill text="All currencies" />
               <TrustPill text="Nothing stored" />
             </motion.div>
+
+            <SortedLiveCounter />
 
             <SortedAbout />
 
