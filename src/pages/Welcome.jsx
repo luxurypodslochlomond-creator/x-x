@@ -211,7 +211,7 @@ export default function WelcomePage() {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
             <div className="h-px bg-cyan-500/20 flex-1" />
-            <p className="text-xs font-mono text-gray-500 tracking-widest">WHAT WE'VE BUILT</p>
+            <p className="text-xs font-mono text-gray-500 tracking-widest">THE TOOLS</p>
             <div className="h-px bg-cyan-500/20 flex-1" />
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
