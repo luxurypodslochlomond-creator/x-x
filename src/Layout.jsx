@@ -529,7 +529,8 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Gill51 Tracker", url: createPageUrl("AdminGill51Tracker"), icon: Heart },
       { title: "CIC Application", url: createPageUrl("AdminCIC"), icon: Building },
       { title: "Gill51 Maths Lab", url: createPageUrl("AdminGill51Maths"), icon: Calculator },
-      { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, description: "Instagram flyers" }
+      { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, description: "Instagram flyers" },
+      { title: "🚨 HMRC Tracker", url: createPageUrl("AdminHMRCTracker"), icon: Shield, description: "Gill's HMRC case · appeal deadline 27 Apr" }
     ] : [];
 
     return { productsNav, healNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
