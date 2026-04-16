@@ -387,21 +387,20 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   // === MEMOIZED NAVIGATION SECTIONS ===
   const navs = React.useMemo(() => {
-    // 1. PRODUCTS (apps with subscriptions / paid tools) — revenue first
+    // 1. PRODUCTS (paid / subscription tools)
     const productsNav = [
       { title: "SORTED", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Decode scary letters · subscription" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: Heart, highlight: true, description: "Sound therapy for animals · subscription" },
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
-      { title: "Shed51", url: createPageUrl("Shed51"), icon: Heart, highlight: true, description: "Connection frequencies for two" },
-
-      { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, description: "AI co-manager for students" },
+      { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
     ];
 
     // 2. FREE HEALING (immediate value — no signup needed)
     const healNav = [
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
+      { title: "Shed51", url: createPageUrl("Shed51"), icon: Waves, highlight: true, description: "Connection frequencies for two · free" },
       { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain — back, neck, joints" },
       { title: "Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
       { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery" },
@@ -413,10 +412,9 @@ const LayoutInner = ({ children, currentPageName }) => {
     // 3. LITTER PICKS
     const litterNav = [
       { title: "Submit a Litter Pick", url: createPageUrl("NewCleanup"), icon: Globe, highlight: true, description: "Take action · earn tokens" },
+      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
       { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "See all cleanups" },
       { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Community impact actions" },
-      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, description: "AI litter scanner for kids" },
-      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
       { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from doing good" },
       { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
     ];
