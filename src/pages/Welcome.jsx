@@ -184,8 +184,7 @@ export default function WelcomePage() {
           </p>
 
           <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-            Me and AI working on real problems. No ego, no hype — just trying to prove humans and AI can build something useful together the right way. 
-            Some tools work now, some are building. Free where we can. Always honest about what actually happens.
+            Technology is moving fast. We think it should be used honestly — to solve real problems for real people, not to extract data or generate noise. These tools do something specific. They work. You can judge for yourself.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
