@@ -76,9 +76,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
         let timeoutId = null;
         try {
             setIsLoading(true);
-            const swPath = import.meta.env.VITE_API_URL 
-              ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
-              : '/api/serveServiceWorker';
+            const swPath = '/api/functions/serveServiceWorker';
 
             // Timeout after 2 seconds - aggressive for mobile
             const timeoutPromise = new Promise((_, reject) => {
@@ -124,15 +122,13 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
 
       // Step 2: Register service worker if not already
       if (!navigator.serviceWorker.controller) {
-        const swPath = import.meta.env.VITE_API_URL 
-          ? `${import.meta.env.VITE_API_URL}/serveServiceWorker`
-          : '/api/serveServiceWorker';
-        await navigator.serviceWorker.register(swPath, { scope: '/' });
+        await navigator.serviceWorker.register('/api/functions/serveServiceWorker', { scope: '/' });
       }
 
-      // Step 3: Get VAPID keys
-      const keysResponse = await base44.functions.invoke('generateVapidKeys', {});
-      const vapidPublicKey = keysResponse.data.publicKey;
+      // Step 3: Get VAPID key
+      const vapidRes = await fetch('/api/functions/getVapidPublicKey');
+      const vapidData = await vapidRes.json();
+      const vapidPublicKey = vapidData.vapidPublicKey;
 
       // Step 4: Service worker ready + subscribe
       const registration = await navigator.serviceWorker.ready;
@@ -141,12 +137,23 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
         applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
       });
 
-      // Step 5: Save to database
+      // Step 5: Save to database — single source of truth: UserPushSubscription
       const user = await base44.auth.me();
-      await base44.entities.ScottPushSubscription.create({
-        user_email: user.email,
-        subscription_data: JSON.stringify(subscription.toJSON())
-      });
+      const existing = await base44.entities.UserPushSubscription.filter({ user_email: user.email });
+      if (existing.length > 0) {
+        await base44.entities.UserPushSubscription.update(existing[0].id, {
+          subscription_data: JSON.stringify(subscription.toJSON()),
+          is_active: true,
+          last_active: new Date().toISOString()
+        });
+      } else {
+        await base44.entities.UserPushSubscription.create({
+          user_email: user.email,
+          subscription_data: JSON.stringify(subscription.toJSON()),
+          is_active: true,
+          last_active: new Date().toISOString()
+        });
+      }
 
       setIsSubscribed(true);
       onSubscriptionChange?.(subscription);
@@ -172,13 +179,13 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       const user = await base44.auth.me();
       const registration = await navigator.serviceWorker.ready;
       const subscription = await registration.pushManager.getSubscription();
-      
+
       if (subscription) {
-        // Remove from database
-        const subs = await base44.entities.ScottPushSubscription.filter({ user_email: user.email });
-        for (const sub of subs) {
-          await base44.entities.ScottPushSubscription.delete(sub.id);
-        }
+      // Remove from database
+      const subs = await base44.entities.UserPushSubscription.filter({ user_email: user.email });
+      for (const sub of subs) {
+        await base44.entities.UserPushSubscription.update(sub.id, { is_active: false });
+      }
         
         await subscription.unsubscribe();
         setIsSubscribed(false);
