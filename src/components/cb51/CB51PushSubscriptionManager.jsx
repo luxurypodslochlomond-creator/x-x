@@ -35,16 +35,6 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
       if (reg) {
         const sub = await reg.pushManager.getSubscription();
         if (sub) {
-          // CB51 REBRAND: force resubscribe once so iOS picks up CB51 icon
-          const rebrandDone = localStorage.getItem('cb51-rebrand-resub-v1');
-          if (!rebrandDone) {
-            localStorage.setItem('cb51-rebrand-resub-v1', '1');
-            // Unsubscribe silently then resubscribe with CB51 icon
-            await sub.unsubscribe();
-            await subscribe();
-            return;
-          }
-
           // Revalidate subscription is still alive (iOS kills them silently)
           const stored = await base44.entities.UserPushSubscription.filter({ user_email: userEmail });
           if (stored.length === 0) {
