@@ -162,6 +162,12 @@ export default function CB51() {
 
           {/* PUSH NOTIFICATIONS - Setup */}
           {user && <CB51PushSubscriptionManager userEmail={user.email} />}
+          {/* TEST NOTIFICATION - End to end check */}
+          {user && (
+            <div className="mx-6 mt-2">
+              <CB51TestNotification />
+            </div>
+          )}
 
           {/* BADGE MANAGER - Show unread count on app icon */}
           {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
