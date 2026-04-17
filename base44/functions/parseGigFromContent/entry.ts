@@ -1,4 +1,4 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
 Deno.serve(async (req) => {
   try {
@@ -15,8 +15,9 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'No content to parse' }, { status: 400 });
     }
 
-    // PLANET-CLASS GIG EXTRACTION - handles emails, WhatsApp, PDFs, contracts
+    // PLANET-CLASS GIG EXTRACTION — claude_sonnet_4_6 for maximum accuracy
     const parseRes = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
       prompt: `You are the world's best gig extraction AI. Your job: find EVERY detail about gigs, events, sessions, or anything work-related.
 
 INPUT: Raw text from email, WhatsApp, PDF, contract, or forward

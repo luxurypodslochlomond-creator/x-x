@@ -43,8 +43,9 @@ async function analyseGigWithAI(gig, artistId) {
       : null;
     const feeRatio = avgFee && gig.fee ? (gig.fee / avgFee) : null;
 
-    // Ask AI for a read on the offer
+    // Ask AI for a read on the offer — claude_sonnet_4_6 for sharpest judgement
     const aiRead = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
       prompt: `You are CB51, an AI music manager. Analyse this gig offer for an artist manager.
 
 GIG OFFER:
