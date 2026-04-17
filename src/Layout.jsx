@@ -369,6 +369,15 @@ const LayoutInner = ({ children, currentPageName }) => {
     }
     appleMeta.content = isCB51 ? 'CB51' : 'UF51';
 
+    // Set apple-touch-icon so iOS home screen + notifications use the right icon
+    let appleIconLink = document.querySelector('link[rel="apple-touch-icon"]');
+    if (!appleIconLink) {
+      appleIconLink = document.createElement('link');
+      appleIconLink.rel = 'apple-touch-icon';
+      document.head.appendChild(appleIconLink);
+    }
+    appleIconLink.href = isCB51 ? '/api/functions/serveCB51Icon' : '/icon-192x192.png';
+
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     if (isStandalone) {
       document.documentElement.setAttribute('data-standalone', 'true');

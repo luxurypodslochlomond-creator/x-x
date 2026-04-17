@@ -16,10 +16,8 @@ Deno.serve(async (req) => {
       background_color: "#000000",
       theme_color: "#06b6d4",
       icons: [
-        { src: "/icon-192x192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-        { src: "/icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" },
-        { src: "/icon-maskable-192x192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
-        { src: "/icon-maskable-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }
+        { src: "/api/functions/serveCB51Icon?size=192", sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+        { src: "/api/functions/serveCB51Icon?size=512", sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
       ],
       categories: ["productivity", "business"],
       shortcuts: [
@@ -28,21 +26,21 @@ Deno.serve(async (req) => {
           short_name: "Upload",
           description: "Scan a new gig offer",
           url: "/CB51?action=upload",
-          icons: [{ src: "/icon-192x192.png", sizes: "192x192" }]
+          icons: [{ src: "/api/functions/serveCB51Icon?size=192", sizes: "192x192" }]
         },
         {
           name: "Calendar",
           short_name: "Calendar",
           description: "View all shows",
-          url: "/ScottCalendarView",
-          icons: [{ src: "/icon-192x192.png", sizes: "192x192" }]
+          url: "/CB51CalendarView",
+          icons: [{ src: "/api/functions/serveCB51Icon?size=192", sizes: "192x192" }]
         },
         {
           name: "Messages",
           short_name: "Messages",
           description: "Check inbox",
-          url: "/ScottMessageInbox",
-          icons: [{ src: "/icon-192x192.png", sizes: "192x192" }]
+          url: "/CB51MessageInbox",
+          icons: [{ src: "/api/functions/serveCB51Icon?size=192", sizes: "192x192" }]
         }
       ],
       share_target: {
