@@ -1,4 +1,4 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
 Deno.serve(async (req) => {
   try {
@@ -42,7 +42,7 @@ Deno.serve(async (req) => {
     });
 
     // CREATE EVENT (Calendar)
-    const existingEvents = await base44.asServiceRole.entities.Event.filter({
+    const existingEvents = await base44.asServiceRole.entities.CB51Event.filter({
       artist_id: artistId,
       title: gig.venue || gig.title || 'Gig'
     });
@@ -53,7 +53,7 @@ Deno.serve(async (req) => {
     });
 
     if (!alreadyHasEvent) {
-      await base44.asServiceRole.entities.Event.create({
+      await base44.asServiceRole.entities.CB51Event.create({
         artist_id: artistId,
         title: gig.venue || gig.title || 'Gig',
         date: gig.date || gig.date_start || '',
@@ -71,7 +71,7 @@ Deno.serve(async (req) => {
     // CREATE INVOICE (Finance) - if fee exists
     if (gig.fee && gig.fee > 0) {
       try {
-        await base44.asServiceRole.entities.ScottInvoice.create({
+        await base44.asServiceRole.entities.CB51Invoice.create({
           artist_id: artistId,
           amount: gig.fee,
           currency: gig.currency || 'GBP',
@@ -91,7 +91,7 @@ Deno.serve(async (req) => {
         const gigDate = new Date(gig.date_start || gig.date);
         const followUpDate = new Date(gigDate.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days after gig
         
-        await base44.asServiceRole.entities.ScottTask.create({
+        await base44.asServiceRole.entities.CB51Task.create({
           artist_id: artistId,
           title: `Follow-up: ${gig.venue || 'Gig'} ${gig.date_start || gig.date}`,
           deadline: followUpDate.toISOString().split('T')[0],
