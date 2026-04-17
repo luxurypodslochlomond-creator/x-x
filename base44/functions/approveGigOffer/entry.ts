@@ -41,63 +41,76 @@ Deno.serve(async (req) => {
       manager_approved: true
     });
 
-    // CREATE EVENT (Calendar)
-    const existingEvents = await base44.asServiceRole.entities.CB51Event.filter({
-      artist_id: artistId,
-      title: gig.venue || gig.title || 'Gig'
-    });
-    const alreadyHasEvent = existingEvents.some(e => {
-      const eDate = e.date ? e.date.slice(0, 10) : '';
-      const gigDate = (gig.date || gig.date_start || '').slice(0, 10);
-      return eDate === gigDate;
-    });
+    // CREATE EVENT (Calendar) - dedup by artist_id + date
+    const gigDateNorm = (gig.date || gig.date_start || '').slice(0, 10);
+    let alreadyHasEvent = false;
+    if (gigDateNorm) {
+      const existingEvents = await base44.asServiceRole.entities.CB51Event.filter({ artist_id: artistId });
+      alreadyHasEvent = existingEvents.some(e => (e.date || '').slice(0, 10) === gigDateNorm);
+    }
 
     if (!alreadyHasEvent) {
       await base44.asServiceRole.entities.CB51Event.create({
         artist_id: artistId,
+        owner_email: user.email,
         title: gig.venue || gig.title || 'Gig',
-        date: gig.date || gig.date_start || '',
+        date: gigDateNorm,
         time: gig.time || gig.time_start || '',
         venue: gig.venue || '',
         location: gig.location || gig.city || '',
         promoter: gig.promoter_name || gig.promoter || '',
-        promoter_phone: gig.promoter_phone || '',
+        promoter_phone: gig.promoter_phone || gig.promoter_contact || '',
         promoter_email: gig.promoter_email || '',
         fee: gig.fee || null,
-        notes: gig.offer_details || gig.notes || ''
+        notes: gig.offer_details || gig.notes || '',
+        status: 'confirmed'
       });
     }
 
     // CREATE INVOICE (Finance) - if fee exists
     if (gig.fee && gig.fee > 0) {
       try {
+        const gigDate = gigDateNorm || new Date().toISOString().split('T')[0];
         await base44.asServiceRole.entities.CB51Invoice.create({
           artist_id: artistId,
+          owner_email: user.email,
           amount: gig.fee,
-          currency: gig.currency || 'GBP',
-          description: `Gig: ${gig.venue || gig.title || 'Gig'} on ${gig.date_start || gig.date || 'TBD'}`,
-          date: gig.date_start || gig.date || new Date().toISOString().split('T')[0],
+          currency: gig.currency || 'EUR',
+          description: `Gig: ${gig.venue || gig.title || 'Gig'} on ${gigDate}`,
+          date: gigDate,
           status: 'unpaid',
-          accountant_notes: `Promoter: ${gig.promoter_name || gig.promoter || 'Unknown'}`
+          accountant_notes: `Promoter: ${gig.promoter_name || gig.promoter || 'Unknown'} | Contact: ${gig.promoter_contact || gig.promoter_email || ''}`
         });
       } catch (err) {
         console.log('Invoice creation (non-critical):', err.message);
       }
     }
 
+    // AUTO-COMPLETE the "Review & approve gig" pre-approval task
+    try {
+      const reviewTasks = await base44.asServiceRole.entities.CB51Task.filter({ artist_id: artistId, status: 'pending' });
+      const preApprovalTask = reviewTasks.find(t => t.title?.includes(gig.venue || gig.title || ''));
+      if (preApprovalTask) {
+        await base44.asServiceRole.entities.CB51Task.update(preApprovalTask.id, { status: 'done' });
+      }
+    } catch (err) {
+      console.log('Task auto-complete (non-critical):', err.message);
+    }
+
     // CREATE TASK (Tasks) - post-show follow-up
-    if (gig.date_start || gig.date) {
+    if (gigDateNorm) {
       try {
-        const gigDate = new Date(gig.date_start || gig.date);
+        const gigDate = new Date(gigDateNorm);
         const followUpDate = new Date(gigDate.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days after gig
         
         await base44.asServiceRole.entities.CB51Task.create({
           artist_id: artistId,
-          title: `Follow-up: ${gig.venue || 'Gig'} ${gig.date_start || gig.date}`,
+          owner_email: user.email,
+          title: `Follow-up: ${gig.venue || 'Gig'} — chase payment & send thanks`,
           deadline: followUpDate.toISOString().split('T')[0],
           priority: 'normal',
           status: 'pending',
-          notes: `Send thank you to ${gig.promoter_name || gig.promoter || 'promoter'}. Confirm payment of £${gig.fee || 0} received.`
+          notes: `Send thank you to ${gig.promoter_name || gig.promoter || 'promoter'}. Confirm €${gig.fee || 0} received. Contact: ${gig.promoter_contact || gig.promoter_email || 'N/A'}`
         });
       } catch (err) {
         console.log('Task creation (non-critical):', err.message);
