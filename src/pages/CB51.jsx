@@ -327,13 +327,13 @@ export default function CB51() {
 
           {/* MAIN CONTENT - Clean, focused, calm */}
           {activeTab === 'home' && (
-          <div className="px-6 pb-32 space-y-6">
+          <div className="px-6 pb-32 space-y-5">
 
             {/* BAND MEMBER VOTES - Always visible at top for anyone with pending votes */}
             <CB51BandNotificationInbox alwaysShow={true} />
 
             {!currentArtistId && !loading && (
-            <div className="px-6 py-8 text-center space-y-4">
+            <div className="py-8 text-center space-y-4">
               <Radio className="w-12 h-12 text-cyan-400 mx-auto" />
               <h2 className="text-white font-black font-mono text-xl">Welcome to CB51</h2>
               <p className="text-gray-400 font-mono text-sm leading-relaxed">

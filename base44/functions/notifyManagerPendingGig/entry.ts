@@ -1,4 +1,4 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
 Deno.serve(async (req) => {
   try {
@@ -9,15 +9,24 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'gigId required' }, { status: 400 });
     }
 
-    // Get artist to find manager email
-    const artist = await base44.asServiceRole.entities.Artist.get(artistId);
-    if (!artist || !artist.primary_manager_email) {
-      return Response.json({ error: 'Manager email not found' }, { status: 404 });
+    // Get artist to find manager email - non-fatal if not found
+    let managerEmail = null;
+    if (artistId) {
+      try {
+        const artist = await base44.asServiceRole.entities.Artist.get(artistId);
+        managerEmail = artist?.primary_manager_email || null;
+      } catch (e) {
+        console.log('Artist lookup failed (non-critical):', e.message);
+      }
+    }
+
+    if (!managerEmail) {
+      return Response.json({ status: 'No manager email found, skipping push', gigId });
     }
 
     // Send push notification to manager's phone
     await base44.asServiceRole.functions.invoke('sendBrowserPush', {
-      recipient_email: artist.primary_manager_email,
+      recipient_email: managerEmail,
       title: '🎤 New Gig Offer',
       message: `${venueName || 'New venue'} - ${promoterName || 'Promoter'}`,
       notification_type: 'new_gig_offer',
@@ -27,7 +36,7 @@ Deno.serve(async (req) => {
     return Response.json({ 
       status: 'Manager notified',
       gigId,
-      managerEmail: artist.primary_manager_email
+      managerEmail
     });
   } catch (error) {
     console.error('notifyManagerPendingGig error:', error);

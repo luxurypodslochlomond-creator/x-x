@@ -128,7 +128,8 @@ Return JSON with these fields:
       </button>
 
       <h1 className="text-3xl font-black text-green-400 font-mono mb-1">INBOX</h1>
-      <p className="text-gray-600 text-xs font-mono mb-4">Paste any WhatsApp, email or text — AI does the rest</p>
+      <p className="text-gray-500 text-xs font-mono mb-1">Paste WhatsApp, emails, texts — AI reads &amp; drafts replies</p>
+      <p className="text-gray-700 text-[10px] font-mono mb-4">⚠️ Gig offers go to the <span className="text-cyan-400">Decision Engine</span> on the main dashboard — not here</p>
 
       {showAddMsg && (
         <div className="bg-black border border-green-500/40 rounded p-4 mb-4 space-y-3">
@@ -251,7 +252,16 @@ Return JSON with these fields:
       )}
 
       {messages.length === 0 && (
-        <div className="text-center py-12 text-gray-600 font-mono">No messages yet</div>
+        <div className="text-center py-12 space-y-3">
+          <p className="text-gray-600 font-mono text-sm">No messages yet</p>
+          <p className="text-gray-700 text-xs font-mono">Uploaded a gig offer? Find it on the<br/>main dashboard → <span className="text-cyan-400">Decision Engine</span></p>
+          <button
+            onClick={() => navigate(createPageUrl('CB51'))}
+            className="text-cyan-400 border border-cyan-500/30 px-4 py-2 rounded text-xs font-bold font-mono hover:bg-cyan-500/10 transition-colors"
+          >
+            ← BACK TO DASHBOARD
+          </button>
+        </div>
       )}
     </div>
   );
