@@ -140,7 +140,7 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 
-console.log('[SW] UF51 Healing Service Worker loaded');
+console.log('[SW] CB51 Service Worker loaded');
 `;
 
   return new Response(swCode, {
