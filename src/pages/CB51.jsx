@@ -444,9 +444,9 @@ export default function CB51() {
                 {/* QUICK NAV */}
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { icon: Calendar, label: 'Calendar', color: 'text-amber-400', badgeColor: 'amber', badgeCount: badges.calendar, to: `ScottCalendarView?id=${currentArtistId}` },
-                    { icon: DollarSign, label: 'Finance', color: 'text-cyan-400', badgeColor: 'cyan', badgeCount: badges.finance, to: `ScottFinanceAdmin?id=${currentArtistId}` },
-                    { icon: CheckCircle, label: 'Tasks', color: 'text-red-400', badgeColor: 'red', badgeCount: badges.tasks, to: `ScottToDo?id=${currentArtistId}` },
+                    { icon: Calendar, label: 'Calendar', color: 'text-amber-400', badgeColor: 'amber', badgeCount: badges.calendar, to: `CB51CalendarView?id=${currentArtistId}` },
+                    { icon: DollarSign, label: 'Finance', color: 'text-cyan-400', badgeColor: 'cyan', badgeCount: badges.finance, to: `CB51FinanceAdmin?id=${currentArtistId}` },
+                    { icon: CheckCircle, label: 'Tasks', color: 'text-red-400', badgeColor: 'red', badgeCount: badges.tasks, to: `CB51Todo?id=${currentArtistId}` },
                     { icon: Mail, label: 'Messages', color: 'text-green-400', badgeColor: 'green', badgeCount: badges.messages, to: `CB51MessageInbox?id=${currentArtistId}` },
                   ].map(({ icon: Icon, label, color, badgeColor, badgeCount, to }) => (
                     <button

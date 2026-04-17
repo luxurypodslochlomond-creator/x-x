@@ -21,6 +21,8 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   }, [artistId]);
   const [file, setFile] = useState(null);
   const [parsing, setParsing] = useState(false);
+  const [parseProgress, setParseProgress] = useState(0);
+  const [parsePhase, setParsePhase] = useState('');
   const [extracted, setExtracted] = useState(null);
   const [editing, setEditing] = useState(null);
   const [error, setError] = useState(null);
@@ -28,6 +30,21 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
   const [savedGig, setSavedGig] = useState(null);
   const [debugLog, setDebugLog] = useState([]);
   const [manualMode, setManualMode] = useState(false);
+
+  // Countdown/progress simulation during AI parse
+  useEffect(() => {
+    if (!parsing) { setParseProgress(0); setParsePhase(''); return; }
+    const phases = [
+      { at: 0, label: 'Uploading document…', target: 15 },
+      { at: 3000, label: 'AI reading offer…', target: 45 },
+      { at: 8000, label: 'Extracting gig details…', target: 72 },
+      { at: 15000, label: 'Almost done…', target: 90 },
+    ];
+    phases.forEach(({ at, label, target }) => {
+      const t = setTimeout(() => { setParsePhase(label); setParseProgress(target); }, at);
+      return () => clearTimeout(t);
+    });
+  }, [parsing]);
 
   const { data: artists = [] } = useQuery({
     queryKey: ['cb51Artists'],
@@ -112,6 +129,8 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       });
 
       clearTimeout(timeoutId);
+      setParseProgress(100);
+      setParsePhase('Done! ✓');
       console.log('✅ AI response:', JSON.stringify(parseRes, null, 2));
       setDebugLog(prev => [...prev, '✅ AI responded!', `Venue: ${parseRes?.venue_name || 'MISSING'}`, `Date: ${parseRes?.date_start || 'MISSING'}`, `Promoter: ${parseRes?.promoter_name || 'MISSING'}`]);
 
@@ -331,9 +350,17 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
           }`}>
             {parsing ? (
               <>
-                <Loader className="w-8 h-8 text-cyan-400 mx-auto animate-spin mb-2" />
-                <p className="text-cyan-400 font-bold text-sm">READING GIG OFFER...</p>
-                <p className="text-gray-500 text-xs mt-1">Takes ~20 seconds on mobile</p>
+                <div className="w-full bg-gray-900 rounded-full h-2 mb-3 overflow-hidden">
+                  <motion.div
+                    className="h-full bg-cyan-500 rounded-full"
+                    animate={{ width: `${parseProgress}%` }}
+                    transition={{ duration: 1.2, ease: 'easeOut' }}
+                  />
+                </div>
+                <p className="text-cyan-400 font-bold text-sm">{parsePhase || 'Starting…'}</p>
+                <p className="text-gray-600 text-xs mt-1 font-mono">
+                  {parseProgress < 90 ? `${parseProgress}% complete` : 'Finalising…'}
+                </p>
               </>
             ) : (
               <>
