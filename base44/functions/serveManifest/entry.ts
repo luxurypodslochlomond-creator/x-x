@@ -2,7 +2,8 @@ Deno.serve(async (req) => {
   try {
     const url = new URL(req.url);
     const hostname = req.headers.get('host') || '';
-    const isCB51 = hostname.includes('cb51.');
+    const referer = req.headers.get('referer') || '';
+    const isCB51 = hostname.includes('cb51.') || referer.includes('/CB51') || referer.includes('/Scott') || url.searchParams.get('brand') === 'cb51';
 
     const manifest = isCB51 ? {
       name: "CB51 : CitizenBand51 : Avoid the Noise",

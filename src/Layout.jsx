@@ -358,7 +358,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       manifestLink.rel = 'manifest';
       document.head.appendChild(manifestLink);
     }
-    manifestLink.href = '/api/functions/serveManifest';
+    manifestLink.href = isCB51 ? '/api/functions/serveManifest?brand=cb51' : '/api/functions/serveManifest';
 
     // Set apple-mobile-web-app-title
     let appleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
