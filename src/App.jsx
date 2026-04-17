@@ -61,6 +61,7 @@ const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker')
 const AdminLogoUploadPage = React.lazy(() => import('./pages/AdminLogoUpload'));
 const AdminStoneymollanLegalPage = React.lazy(() => import('./pages/AdminStoneymollanLegal'));
 const AI51SoulPage = React.lazy(() => import('./pages/AI51Soul'));
+const AdminPWAPushGuidePage = React.lazy(() => import('./pages/AdminPWAPushGuide'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -150,6 +151,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper>} />
       <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminStoneymollanLegalPage /></LayoutWrapper>} />
       <Route path="/AI51Soul" element={<LayoutWrapper currentPageName="AI51Soul"><AI51SoulPage /></LayoutWrapper>} />
+      <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminPWAPushGuidePage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
