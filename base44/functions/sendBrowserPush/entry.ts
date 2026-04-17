@@ -74,8 +74,8 @@ Deno.serve(async (req) => {
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: '/icon-192x192.png',
-      badge: '/icon-192x192.png',
+      icon: '/api/functions/serveCB51Icon',
+      badge: '/api/functions/serveCB51Icon',
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
