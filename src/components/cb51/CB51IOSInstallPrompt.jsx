@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Share, Plus } from 'lucide-react';
+import { X, Share, Plus, Download } from 'lucide-react';
 
 /**
  * Shows iOS users how to install CB51 to home screen
@@ -9,19 +9,18 @@ export default function CB51IOSInstallPrompt() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    // Only show on iOS Safari, not already installed
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
     const isStandalone = window.navigator.standalone === true;
     const dismissed = localStorage.getItem('cb51-ios-prompt-dismissed');
 
     if (isIOS && !isStandalone && !dismissed) {
-      // Small delay so it doesn't jump in instantly
-      const t = setTimeout(() => setShow(true), 2000);
+      const t = setTimeout(() => setShow(true), 3000);
       return () => clearTimeout(t);
     }
   }, []);
 
   const handleDismiss = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     localStorage.setItem('cb51-ios-prompt-dismissed', '1');
     setShow(false);
@@ -30,16 +29,25 @@ export default function CB51IOSInstallPrompt() {
   if (!show) return null;
 
   return (
-    <div className="fixed top-[72px] left-0 right-0 z-[55] border-b border-cyan-500/40 bg-black/95 backdrop-blur-sm px-4 py-2.5">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="text-cyan-400 text-xs font-mono whitespace-nowrap">📲 Install CB51:</span>
-          <span className="text-gray-300 text-xs truncate">
-            Safari <Share className="w-3 h-3 inline mx-0.5 text-cyan-400" /> Share → <Plus className="w-3 h-3 inline mx-0.5 text-cyan-400" /> Add to Home Screen → get push notifications
-          </span>
+    <div
+      className="fixed left-3 right-3 z-[45] rounded-xl border border-cyan-500/50 bg-black/95 backdrop-blur-sm px-4 py-3 shadow-lg shadow-cyan-500/10"
+      style={{ bottom: '80px' }}
+    >
+      <div className="flex items-start gap-3">
+        <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center">
+          <Download className="w-4 h-4 text-cyan-400" />
         </div>
-        <button onClick={handleDismiss} className="text-gray-600 hover:text-white flex-shrink-0">
-          <X className="w-4 h-4" />
+        <div className="flex-1 min-w-0">
+          <p className="text-white text-xs font-bold font-mono mb-0.5">Install CB51</p>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Tap <Share className="w-3 h-3 inline mx-0.5 text-cyan-400" /> Share → Add to Home Screen for push notifications
+          </p>
+        </div>
+        <button
+          onPointerDown={handleDismiss}
+          className="flex-shrink-0 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center active:bg-white/20"
+        >
+          <X className="w-4 h-4 text-white" />
         </button>
       </div>
     </div>
