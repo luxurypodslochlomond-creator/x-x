@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, RotateCcw, Star, Heart, Brain, Globe, Zap } from 'lucide-react';
+import CreativeReward from '@/components/learn51/CreativeReward';
 
 // ============================================================
 // LEARN51 AI — World-first adaptive AI education
@@ -97,6 +98,8 @@ export default function Learn51AIPage() {
   const [assessment, setAssessment] = useState(null);
   const [showHint, setShowHint] = useState(false);
   const [history, setHistory] = useState([]);
+  const [showReward, setShowReward] = useState(false);
+  const [streak, setStreak] = useState(0);
 
   const inputRef = useRef(null);
 
@@ -172,11 +175,16 @@ export default function Learn51AIPage() {
     setHistory(h => [...h, lessonData.question]);
 
     if (result.correct) {
+      const newStreak = streak + 1;
+      setStreak(newStreak);
       setStars(s => s + 1);
+      setShowReward(true);
       // Level up every 3 correct answers
       if (newScore > 0 && newScore % 3 === 0) {
         setLevel(l => Math.min(l + 1, 5));
       }
+    } else {
+      setStreak(0);
     }
   };
 
@@ -429,17 +437,40 @@ export default function Learn51AIPage() {
                     <p className="text-gray-800 font-medium">{lessonData.fun_fact}</p>
                   </div>
 
-                  <button
-                    onClick={nextQuestion}
-                    className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-lg transition-all flex items-center justify-center gap-2"
-                  >
-                    Next question <ArrowRight className="w-5 h-5" />
-                  </button>
+                  {!assessment.correct && (
+                    <button
+                      onClick={nextQuestion}
+                      className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      Try another question <ArrowRight className="w-5 h-5" />
+                    </button>
+                  )}
+                  {assessment.correct && (
+                    <button
+                      onClick={() => setShowReward(true)}
+                      className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-black text-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      🎁 Claim your reward!
+                    </button>
+                  )}
                 </motion.div>
               )}
             </motion.div>
           )}
           </AnimatePresence>
+
+          {/* CREATIVE REWARD MODAL */}
+          {showReward && lessonData && (
+            <CreativeReward
+              interest={interest}
+              topic={TOPICS.find(t => t.id === topic)?.label}
+              childAge={age}
+              correctAnswer={answer}
+              questionAsked={lessonData.question}
+              streakCount={streak}
+              onClose={() => { setShowReward(false); nextQuestion(); }}
+            />
+          )}
 
           {/* CHANGE TOPIC */}
           {!loading && (
@@ -465,4 +496,12 @@ export default function Learn51AIPage() {
   }
 
   return null;
+}
+
+// Re-export with reward modal wired in — patch the learning stage
+// The reward modal is rendered at the top level of the learning stage
+// We add it just before the closing div of the learning stage
+
+function Learn51AIWithReward() {
+  return <Learn51AIPage />;
 }
