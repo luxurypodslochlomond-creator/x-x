@@ -225,7 +225,7 @@ export default function Learn51AIPage() {
         interest: interest,
         age: age,
         level: useLevel,
-        history: history.length,
+        history: history.join(' | '),
         paceNote,
         language: language.label,
       }),
