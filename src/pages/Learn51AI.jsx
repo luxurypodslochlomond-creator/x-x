@@ -2,8 +2,10 @@ import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight, RotateCcw, Star, Volume2, VolumeX } from 'lucide-react';
+import { Sparkles, ArrowRight, RotateCcw, Star, Volume2, VolumeX, Share2 } from 'lucide-react';
 import CreativeReward from '@/components/learn51/CreativeReward';
+import ShareYourWin from '@/components/learn51/ShareYourWin';
+import LanguagePicker, { LANGUAGES } from '@/components/learn51/LanguagePicker';
 
 // Web Speech API — free, built-in, no API key needed
 const speak = (text) => {
@@ -50,8 +52,10 @@ const TOPICS = [
   { id: 'money', emoji: '💰', label: 'Real Life Skills', color: 'from-green-500 to-emerald-600', border: 'border-green-400', desc: 'Money, cooking, staying safe' },
 ];
 
-const PROMPT_TEMPLATE = ({ topic, interest, age, level, history, paceNote }) => `
+const PROMPT_TEMPLATE = ({ topic, interest, age, level, history, paceNote, language }) => `
 You are Learn51 AI — the world's most caring, brilliant teacher. You genuinely love children and want every single one on Earth to learn and thrive.
+
+CRITICAL: Respond ENTIRELY in ${language || 'English'}. Every word of your JSON values must be in ${language || 'English'}.
 
 CHILD INFO:
 - Topic they want to learn: ${topic}
@@ -155,6 +159,11 @@ export default function Learn51AIPage() {
   const [streak, setStreak] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
+  // ── Language ──
+  const [language, setLanguage] = useState(LANGUAGES[0]);
+  const [showShare, setShowShare] = useState(false);
+  const [hasWon, setHasWon] = useState(false); // show share button after first win
+
   // ── Adaptive pace tracking ──
   const [wrongStreak, setWrongStreak] = useState(0);
   const [hintUsedCount, setHintUsedCount] = useState(0);
@@ -173,11 +182,21 @@ export default function Learn51AIPage() {
   const readLesson = useCallback((data) => {
     if (!data) return;
     setIsSpeaking(true);
-    const text = `${data.wow_fact}. ${data.lesson}. Here's your question: ${data.question}`;
-    speak(text);
-    // Estimate reading time to reset speaking state
-    setTimeout(() => setIsSpeaking(false), text.length * 55);
-  }, []);
+    const text = `${data.wow_fact}. ${data.lesson}. ${data.question}`;
+    // Use selected language voice
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.rate = 0.85;
+      utt.pitch = 1.05;
+      const voices = window.speechSynthesis.getVoices();
+      const preferred = voices.find(v => v.lang.startsWith(language.speechLang.split('-')[0]));
+      if (preferred) utt.voice = preferred;
+      utt.onend = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(utt);
+    }
+    setTimeout(() => setIsSpeaking(false), text.length * 60);
+  }, [language]);
 
   const loadLesson = async (topicOverride, levelOverride) => {
     setLoading(true);
@@ -200,6 +219,7 @@ export default function Learn51AIPage() {
         level: useLevel,
         history: history.length,
         paceNote,
+        language: language.label,
       }),
       model: 'claude_sonnet_4_6',
       response_json_schema: {
@@ -269,6 +289,7 @@ export default function Learn51AIPage() {
       setStars(newStars);
       setWrongStreak(0); // reset wrong streak on correct
       setShowReward(true);
+      setHasWon(true); // unlock share button after first win
       if (newLevel !== level) setLevel(newLevel);
       persistProgress({ stars: newStars, level: newLevel, interest, age });
     } else {
@@ -308,12 +329,15 @@ export default function Learn51AIPage() {
   // ── INTRO STAGE ──
   if (stage === 'intro') {
     return (
-      <div className="min-h-screen bg-[#faf9f6] text-gray-900 p-4 md:p-8 pb-20">
+      <div className="min-h-screen bg-[#faf9f6] text-gray-900 p-4 md:p-8 pb-20" dir={language.rtl ? 'rtl' : 'ltr'}>
         <div className="max-w-2xl mx-auto space-y-8">
 
-          <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-800 text-base">
-            ← Back to Learn51
-          </Link>
+          <div className="flex items-center justify-between">
+            <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-800 text-base">
+              ← Back to Learn51
+            </Link>
+            <LanguagePicker selectedLang={language.code} onChange={setLanguage} />
+          </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3">
             <div className="text-6xl">🤖✨</div>
@@ -437,19 +461,30 @@ export default function Learn51AIPage() {
   if (stage === 'learning') {
     const topicData = TOPICS.find(t => t.id === topic);
     return (
-      <div className="min-h-screen bg-[#faf9f6] text-gray-900 p-4 md:p-8 pb-20">
+      <div className="min-h-screen bg-[#faf9f6] text-gray-900 p-4 md:p-8 pb-20" dir={language.rtl ? 'rtl' : 'ltr'}>
         <div className="max-w-2xl mx-auto space-y-5">
 
           {/* HEADER BAR */}
           <div className="flex items-center justify-between">
-            <button onClick={reset} className="text-gray-400 hover:text-gray-600 font-bold text-sm flex items-center gap-1">
-              <RotateCcw className="w-4 h-4" /> Start over
-            </button>
+            <div className="flex items-center gap-2">
+              <button onClick={reset} className="text-gray-400 hover:text-gray-600 font-bold text-sm flex items-center gap-1">
+                <RotateCcw className="w-4 h-4" /> Start over
+              </button>
+              <LanguagePicker selectedLang={language.code} onChange={(lang) => { setLanguage(lang); }} />
+            </div>
             <div className="flex items-center gap-3">
               {wrongStreak >= 2 && (
                 <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-blue-600 font-bold text-xs bg-blue-50 border border-blue-200 px-2 py-1 rounded-full">
                   🤖 adapting for you
                 </motion.span>
+              )}
+              {hasWon && (
+                <button
+                  onClick={() => setShowShare(true)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border-2 border-purple-300 bg-purple-50 text-purple-700 hover:border-purple-400 transition-all"
+                >
+                  <Share2 className="w-3 h-3" /> Share
+                </button>
               )}
               {streak >= 2 && wrongStreak === 0 && (
                 <motion.span
@@ -597,6 +632,17 @@ export default function Learn51AIPage() {
             </motion.div>
           )}
           </AnimatePresence>
+
+          {/* SHARE WIN MODAL */}
+          {showShare && (
+            <ShareYourWin
+              interest={interest}
+              topic={TOPICS.find(t => t.id === topic)?.label}
+              stars={stars}
+              streak={streak}
+              onClose={() => setShowShare(false)}
+            />
+          )}
 
           {/* CREATIVE REWARD MODAL */}
           {showReward && lessonData && (
