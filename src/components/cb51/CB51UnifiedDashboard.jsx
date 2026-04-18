@@ -20,6 +20,8 @@ import CB51GigUploadParser from './CB51GigUploadParser';
 export default function CB51UnifiedDashboard({ artistId }) {
   const [activeTab, setActiveTab] = useState('gigs');
   const [scrollY, setScrollY] = useState(0);
+  const [reviewingGig, setReviewingGig] = useState(null);
+  const [confirmingGig, setConfirmingGig] = useState(false);
   const scrollContainerRef = useRef(null);
   const queryClient = useQueryClient();
 
@@ -48,9 +50,41 @@ export default function CB51UnifiedDashboard({ artistId }) {
     enabled: !!artistId
   });
 
+  const { data: artist = {} } = useQuery({
+    queryKey: ['artist', artistId],
+    queryFn: () => base44.entities.Artist?.get?.(artistId).catch(() => ({})),
+    enabled: !!artistId
+  });
+
   // Handle scroll for sticky header effect
   const handleScroll = (e) => {
     setScrollY(e.target.scrollLeft);
+  };
+
+  const handleConfirmGig = async (gig) => {
+    setConfirmingGig(true);
+    try {
+      // Update gig status to confirmed
+      await base44.entities.GigOffer.update(gig.id, { status: 'confirmed', manager_approved: true });
+      
+      // Send push notification to artist
+      await base44.functions.invoke('sendGigConfirmationPush', {
+        artistId: artistId,
+        gigId: gig.id,
+        gigVenue: gig.venue,
+        gigDate: gig.date_start,
+        gigFee: gig.fee
+      });
+
+      // Invalidate queries to refresh
+      queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
+      queryClient.invalidateQueries({ queryKey: ['confirmedGigs', artistId] });
+      setReviewingGig(null);
+    } catch (error) {
+      console.error('Error confirming gig:', error);
+    } finally {
+      setConfirmingGig(false);
+    }
   };
 
   // Tab config with colour system
@@ -128,7 +162,41 @@ export default function CB51UnifiedDashboard({ artistId }) {
                   <CB51GigUploadParser artistId={artistId} onSuccess={() => queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] })} />
                 </div>
 
-                {/* PENDING OFFERS */}
+                {/* PENDING OFFERS FOR REVIEW */}
+                {pendingGigs.length > 0 && (
+                  <div className="border-t border-cyan-500/10 pt-8">
+                    <div className="space-y-2 mb-6">
+                      <h2 className="text-cyan-400 font-black text-xl">Awaiting Your Approval</h2>
+                      <p className="text-gray-500 text-sm">Review and confirm to notify artist</p>
+                    </div>
+                    <div className="space-y-2">
+                      {pendingGigs.slice(0, 5).map(gig => (
+                        <motion.div
+                          key={gig.id}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="bg-gray-900 border border-cyan-500/20 rounded-lg p-4"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white font-bold">{gig.venue}</p>
+                              <p className="text-gray-400 text-sm">{gig.date_start}</p>
+                              <p className="text-cyan-400 font-bold text-sm mt-1">£{gig.fee?.toLocaleString()}</p>
+                            </div>
+                            <button
+                              onClick={() => setReviewingGig(gig)}
+                              className="px-3 py-1.5 bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 text-xs font-bold rounded transition-colors flex-shrink-0"
+                            >
+                              Review
+                            </button>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* DECISION ENGINE */}
                 <div className="border-t border-cyan-500/10 pt-8">
                   <div className="space-y-2 mb-6">
                     <h2 className="text-cyan-400 font-black text-xl">Pending Offers</h2>
@@ -356,6 +424,57 @@ export default function CB51UnifiedDashboard({ artistId }) {
         <div className="h-6" />
       </div>
 
+      {/* REVIEW GIG MODAL */}
+      <AnimatePresence>
+        {reviewingGig && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-50 flex items-end"
+            onClick={() => !confirmingGig && setReviewingGig(null)}
+          >
+            <motion.div
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              exit={{ y: 100 }}
+              className="w-full bg-gray-900 border-t border-cyan-500/30 rounded-t-2xl p-6 space-y-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-cyan-400 font-black text-xl">Review & Confirm</h3>
+              <div className="space-y-2 bg-gray-800 rounded-lg p-4">
+                <p className="text-white font-bold">{reviewingGig.venue}</p>
+                <p className="text-gray-400 text-sm">{reviewingGig.date_start}</p>
+                <p className="text-gray-400 text-sm">{reviewingGig.location}</p>
+                <p className="text-cyan-400 font-bold mt-2">£{reviewingGig.fee?.toLocaleString()}</p>
+                {reviewingGig.promoter_name && (
+                  <p className="text-gray-400 text-sm mt-2">Promoter: {reviewingGig.promoter_name}</p>
+                )}
+                {reviewingGig.promoter_contact && (
+                  <p className="text-gray-400 text-sm">{reviewingGig.promoter_contact}</p>
+                )}
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setReviewingGig(null)}
+                  disabled={confirmingGig}
+                  className="flex-1 px-4 py-2 bg-gray-800 text-white rounded-lg font-bold hover:bg-gray-700 transition-colors disabled:opacity-50"
+                >
+                  Reject
+                </button>
+                <button
+                  onClick={() => handleConfirmGig(reviewingGig)}
+                  disabled={confirmingGig}
+                  className="flex-1 px-4 py-2 bg-cyan-600 text-white rounded-lg font-bold hover:bg-cyan-700 transition-colors disabled:opacity-50"
+                >
+                  {confirmingGig ? 'Confirming...' : 'Confirm & Notify Artist'}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* SCROLL TO TOP BUTTON */}
       {scrollY > 100 && (
         <motion.button
@@ -369,6 +488,6 @@ export default function CB51UnifiedDashboard({ artistId }) {
           <ArrowUp className="w-5 h-5" />
         </motion.button>
       )}
-    </div>
-  );
-}
+      </div>
+      );
+      }
