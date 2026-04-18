@@ -64,6 +64,7 @@ const AI51SoulPage = React.lazy(() => import('./pages/AI51Soul'));
 const AdminPWAPushGuidePage = React.lazy(() => import('./pages/AdminPWAPushGuide'));
 const Literacy51Page = React.lazy(() => import('./pages/Literacy51'));
 const Learn51Page = React.lazy(() => import('./pages/Learn51'));
+const Learn51AIPage = React.lazy(() => import('./pages/Learn51AI'));
 const LifeSkills51Page = React.lazy(() => import('./pages/LifeSkills51'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -157,6 +158,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminPWAPushGuidePage /></LayoutWrapper>} />
       <Route path="/Literacy51" element={<LayoutWrapper currentPageName="Literacy51"><Literacy51Page /></LayoutWrapper>} />
       <Route path="/Learn51" element={<LayoutWrapper currentPageName="Learn51"><Learn51Page /></LayoutWrapper>} />
+      <Route path="/Learn51AI" element={<LayoutWrapper currentPageName="Learn51AI"><Learn51AIPage /></LayoutWrapper>} />
       <Route path="/LifeSkills51" element={<LayoutWrapper currentPageName="LifeSkills51"><LifeSkills51Page /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

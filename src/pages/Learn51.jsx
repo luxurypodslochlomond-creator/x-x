@@ -139,6 +139,40 @@ export default function Learn51Page() {
         </div>
       </div>
 
+      {/* AI TUTOR HERO CARD */}
+      <div className="max-w-4xl mx-auto px-4 pb-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <Link to="/Learn51AI">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="rounded-3xl bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-700 p-6 md:p-8 text-white shadow-2xl shadow-indigo-500/30 border border-indigo-400/30 cursor-pointer"
+            >
+              <div className="flex items-start gap-4">
+                <div className="text-5xl flex-shrink-0">🤖</div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="bg-white/20 text-white text-xs font-black px-2 py-0.5 rounded-full uppercase tracking-widest">NEW</span>
+                    <span className="text-white/70 text-xs font-bold">World-first</span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-black mb-2">Learn51 AI Tutor ✨</h2>
+                  <p className="text-indigo-200 text-base leading-relaxed mb-3">
+                    Tell us what you love — football, gaming, animals, anything — and our AI connects every lesson to YOUR world. Maths, science, health, kindness. Personalised for you. Free forever.
+                  </p>
+                  <div className="flex items-center gap-2 text-white font-black text-base">
+                    Start learning your way <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </Link>
+        </motion.div>
+      </div>
+
       {/* THE 3 MODULES */}
       <div className="max-w-4xl mx-auto px-4 pb-8 space-y-5">
         <motion.h2
