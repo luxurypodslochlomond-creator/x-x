@@ -7,6 +7,7 @@ import {
   Zap, AlertCircle, ArrowUp
 } from 'lucide-react';
 import CB51GigDecisionEngine from './CB51GigDecisionEngine';
+import CB51ConfirmedGigDraftEmail from './CB51ConfirmedGigDraftEmail';
 
 /**
  * CB51 UNIFIED DASHBOARD
@@ -37,6 +38,12 @@ export default function CB51UnifiedDashboard({ artistId }) {
   const { data: confirmedGigs = [] } = useQuery({
     queryKey: ['confirmedGigs', artistId],
     queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'confirmed' }).catch(() => []),
+    enabled: !!artistId
+  });
+
+  const { data: pendingGigs = [] } = useQuery({
+    queryKey: ['pendingGigs', artistId],
+    queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'manager_reviewing' }).catch(() => []),
     enabled: !!artistId
   });
 
@@ -97,13 +104,25 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-4 space-y-4"
+                className="p-4 space-y-6"
               >
-                <div className="space-y-2">
-                  <h2 className="text-white font-black text-lg">Pending Offers</h2>
-                  <p className="text-gray-500 text-sm">Tap YES/NO to decide · AI reads offers instantly</p>
+                {/* PENDING OFFERS */}
+                <div>
+                  <div className="space-y-2 mb-4">
+                    <h2 className="text-white font-black text-lg">Pending Offers</h2>
+                    <p className="text-gray-500 text-sm">YES/NO to decide · AI reads offers instantly</p>
+                  </div>
+                  <CB51GigDecisionEngine artistId={artistId} />
                 </div>
-                <CB51GigDecisionEngine artistId={artistId} />
+
+                {/* CONFIRMED GIGS - Ready to send to promoter */}
+                <div className="border-t border-white/10 pt-6">
+                  <div className="space-y-2 mb-4">
+                    <h2 className="text-white font-black text-lg">Confirmed Gigs</h2>
+                    <p className="text-gray-500 text-sm">Draft email ready · tap to send to promoter</p>
+                  </div>
+                  <CB51ConfirmedGigDraftEmail artistId={artistId} />
+                </div>
               </motion.div>
             )}
 
