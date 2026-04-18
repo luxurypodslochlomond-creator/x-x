@@ -53,14 +53,14 @@ const SUBJECTS = {
     { id: 'planet2', title: 'Climate Action', desc: 'Real missions, real change', Icon: Globe, link: '/Missions', stars: 10, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
     { id: 'build', title: 'Build Things', desc: 'Create music, logos & more with AI', Icon: Rocket, link: '/LearnGuitar', stars: 25, color: 'bg-indigo-100 border-indigo-500', iconColor: 'text-indigo-700' },
   ],
-  // Real life skills — available to all age groups via the dedicated section below
+  // Real world skills for kids — planet, kindness, nature, action
   life: [
-    { id: 'money', title: 'Money & Budgeting', desc: 'How money actually works, budgets, debt & saving', Icon: Zap, link: '/LifeSkills51', stars: 0, color: 'bg-yellow-100 border-yellow-500', iconColor: 'text-yellow-700' },
-    { id: 'cooking', title: 'Cooking & Food', desc: 'Simple healthy meals, nutrition & not wasting food', Icon: Heart, link: '/LifeSkills51', stars: 0, color: 'bg-orange-100 border-orange-500', iconColor: 'text-orange-700' },
-    { id: 'mental', title: 'Mental Health', desc: 'Emotions, anxiety, breathing & being kind to yourself', Icon: Brain, link: '/LifeSkills51', stars: 0, color: 'bg-pink-100 border-pink-500', iconColor: 'text-pink-700' },
-    { id: 'relationships', title: 'Relationships', desc: 'Friendships, family, boundaries & respect', Icon: Heart, link: '/LifeSkills51', stars: 0, color: 'bg-red-100 border-red-500', iconColor: 'text-red-700' },
-    { id: 'work', title: 'Work & Purpose', desc: 'Finding what you love, CVs, interviews & rights at work', Icon: Trophy, link: '/LifeSkills51', stars: 0, color: 'bg-indigo-100 border-indigo-500', iconColor: 'text-indigo-700' },
-    { id: 'rights', title: 'Your Rights', desc: 'Know your legal rights, housing, benefits & contracts', Icon: Shield, link: '/LifeSkills51', stars: 0, color: 'bg-teal-100 border-teal-500', iconColor: 'text-teal-700' },
+    { id: 'planet', title: 'Look After Our Planet', desc: 'Why litter matters, climate, oceans & what you can do today', Icon: Globe, link: '/YoungWarriors', stars: 0, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
+    { id: 'animals', title: 'Animals & Nature', desc: 'How animals feel, habitats, endangered species & being kind', Icon: Heart, link: '/YoungWarriors', stars: 0, color: 'bg-orange-100 border-orange-500', iconColor: 'text-orange-700' },
+    { id: 'kindness', title: 'Kindness & Feelings', desc: 'Understanding emotions, being kind, making friends & looking after yourself', Icon: Sparkles, link: '/YoungWarriors', stars: 0, color: 'bg-pink-100 border-pink-500', iconColor: 'text-pink-700' },
+    { id: 'food', title: 'Growing & Cooking Food', desc: 'Where food comes from, how to grow things & simple healthy meals', Icon: Zap, link: '/YoungWarriors', stars: 0, color: 'bg-yellow-100 border-yellow-500', iconColor: 'text-yellow-700' },
+    { id: 'community', title: 'Helping Your Community', desc: 'How to volunteer, help neighbours & make your area a better place', Icon: Trophy, link: '/NewCleanup', stars: 0, color: 'bg-indigo-100 border-indigo-500', iconColor: 'text-indigo-700' },
+    { id: 'science', title: 'How Things Work', desc: 'Electricity, water, sound & simple science everyone should know', Icon: Brain, link: '/ThePhysics', stars: 0, color: 'bg-teal-100 border-teal-500', iconColor: 'text-teal-700' },
   ],
 };
 
@@ -299,8 +299,8 @@ export default function Learn51Page() {
         <div>
           <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl p-5 mb-4 text-center">
             <Sparkles className="w-10 h-10 mx-auto mb-2 text-yellow-100" />
-            <h2 className="text-2xl font-black mb-1">Real Life Skills</h2>
-            <p className="text-amber-100 text-base">The stuff school often forgets to teach — but you actually need</p>
+            <h2 className="text-2xl font-black mb-1">Real World Skills</h2>
+            <p className="text-amber-100 text-base">The real stuff — our planet, animals, kindness & how to make a difference</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {SUBJECTS.life.map(subject => (
