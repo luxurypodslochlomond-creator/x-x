@@ -17,6 +17,7 @@ import CB51BandNotificationInbox from '@/components/cb51/CB51BandNotificationInb
 import CB51BadgeManager from '@/components/cb51/CB51BadgeManager';
 import CB51BackgroundSync from '@/components/cb51/CB51BackgroundSync';
 import CB51GigDecisionEngine from '@/components/cb51/CB51GigDecisionEngine';
+import CB51UnifiedDashboard from '@/components/cb51/CB51UnifiedDashboard';
 import CB51ConfirmedGigDraftEmail from '@/components/cb51/CB51ConfirmedGigDraftEmail';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
 import { useCB51NavBadges, CB51NavBadge } from '@/components/cb51/CB51NavBadge';
@@ -325,143 +326,31 @@ export default function CB51() {
             </div>
           )}
 
-          {/* MAIN CONTENT - Clean, focused, calm */}
+          {/* MAIN CONTENT - Unified dashboard */}
           {activeTab === 'home' && (
-          <div className="px-6 pb-32 space-y-5">
-
-            {/* BAND MEMBER VOTES - Always visible at top for anyone with pending votes */}
-            <CB51BandNotificationInbox alwaysShow={true} />
-
-            {!currentArtistId && !loading && (
-            <div className="py-8 text-center space-y-4">
-              <Radio className="w-12 h-12 text-cyan-400 mx-auto" />
-              <h2 className="text-white font-black font-mono text-xl">Welcome to CB51</h2>
-              <p className="text-gray-400 font-mono text-sm leading-relaxed">
-                To get started, you need a CB51 account so your artists are saved to you.
-              </p>
-              <button
-                onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
-                className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
-              >
-                CREATE FREE ACCOUNT / LOGIN
-              </button>
-              <p className="text-gray-600 font-mono text-xs">
-                Takes 30 seconds. Your artists, gigs and finances will be saved permanently.
-              </p>
-            </div>
+            currentArtistId ? (
+              <CB51UnifiedDashboard artistId={currentArtistId} />
+            ) : (
+              <div className="flex items-center justify-center min-h-[600px] px-6">
+                <div className="text-center space-y-4">
+                  <Radio className="w-12 h-12 text-cyan-400 mx-auto" />
+                  <h2 className="text-white font-black font-mono text-xl">Welcome to CB51</h2>
+                  <p className="text-gray-400 font-mono text-sm leading-relaxed">
+                    To get started, you need a CB51 account so your artists are saved to you.
+                  </p>
+                  <button
+                    onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
+                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
+                  >
+                    CREATE FREE ACCOUNT / LOGIN
+                  </button>
+                  <p className="text-gray-600 font-mono text-xs">
+                    Takes 30 seconds. Your artists, gigs and finances will be saved permanently.
+                  </p>
+                </div>
+              </div>
+            )
           )}
-
-          {currentArtistId ? (
-              <>
-                {/* THE DECISION ENGINE - Zero effort YES/NO */}
-                <CB51GigDecisionEngine artistId={currentArtistId} />
-
-                {/* CONFIRMED GIGS - Draft email ready to send to promoter */}
-                <CB51ConfirmedGigDraftEmail artistId={currentArtistId} />
-
-                {/* SCAN GIG OFFER */}
-                <div className="border border-cyan-500/20 rounded-xl p-5 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Radio className="w-5 h-5 text-cyan-400" />
-                    <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">New Gig Offer</h2>
-                    <span className="text-gray-600 text-xs font-mono">paste · upload · scan</span>
-                  </div>
-                  <CB51GigUploadParser 
-                    artistId={currentArtistId}
-                    onGigCreated={() => {}}
-                  />
-                </div>
-
-                {/* BAND MEMBERS */}
-                <div className="border border-gray-800 rounded-xl p-5">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <Users className="w-5 h-5 text-cyan-400" />
-                      <div>
-                        <h2 className="text-cyan-400 font-mono font-bold text-sm uppercase tracking-wider">Team</h2>
-                        <p className="text-gray-500 text-[10px] font-mono mt-0.5">
-                          {artists.find(a => a.id === currentArtistId)?.name || 'Unknown'}
-                        </p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => navigate(createPageUrl(`CB51TeamManagement?id=${currentArtistId}`))}
-                      className="bg-cyan-600 hover:bg-cyan-700 text-white px-3 py-1.5 rounded text-xs font-bold transition-colors"
-                    >
-                      Manage
-                    </button>
-                  </div>
-                  
-                  <AnimatePresence>
-                    {showAddMemberSheet && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-3 space-y-3">
-                          <input
-                            type="text"
-                            placeholder="Name"
-                            value={newMemberName}
-                            onChange={(e) => setNewMemberName(e.target.value)}
-                            className="w-full bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm"
-                          />
-                          <input
-                            type="email"
-                            placeholder="Email"
-                            value={newMemberEmail}
-                            onChange={(e) => setNewMemberEmail(e.target.value)}
-                            className="w-full bg-black border border-gray-700 text-white px-3 py-2 font-mono text-sm"
-                          />
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() => {
-                                setShowAddMemberSheet(false);
-                                setNewMemberName('');
-                                setNewMemberEmail('');
-                              }}
-                              className="flex-1 border border-gray-700 hover:border-gray-500 px-3 py-2 text-gray-400 font-mono text-xs uppercase transition-colors"
-                            >
-                              Cancel
-                            </button>
-                            <button
-                              onClick={handleAddMember}
-                              disabled={!newMemberName.trim() || !newMemberEmail.trim() || addingMember}
-                              className="flex-1 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50 px-3 py-2 text-white font-mono text-xs uppercase transition-colors"
-                            >
-                              {addingMember ? '...' : 'Add'}
-                            </button>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                {/* QUICK NAV */}
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: Calendar, label: 'Calendar', color: 'text-amber-400', badgeColor: 'amber', badgeCount: badges.calendar, to: `CB51CalendarView?id=${currentArtistId}` },
-                    { icon: DollarSign, label: 'Finance', color: 'text-cyan-400', badgeColor: 'cyan', badgeCount: badges.finance, to: `CB51FinanceAdmin?id=${currentArtistId}` },
-                    { icon: CheckCircle, label: 'Tasks', color: 'text-red-400', badgeColor: 'red', badgeCount: badges.tasks, to: `CB51Todo?id=${currentArtistId}` },
-                    { icon: Mail, label: 'Messages', color: 'text-green-400', badgeColor: 'green', badgeCount: badges.messages, to: `CB51MessageInbox?id=${currentArtistId}` },
-                  ].map(({ icon: Icon, label, color, badgeColor, badgeCount, to }) => (
-                    <button
-                      key={label}
-                      onClick={() => navigate(createPageUrl(to))}
-                      className="relative border border-gray-800 hover:border-cyan-500/50 bg-gray-900/40 hover:bg-cyan-500/5 rounded-xl px-4 py-4 text-left transition-all"
-                    >
-                      <Icon className={`w-5 h-5 ${color} mb-2`} />
-                      <div className="text-white font-mono text-xs uppercase tracking-wider">{label}</div>
-                      <CB51NavBadge count={badgeCount} color={badgeColor} />
-                    </button>
-                  ))}
-                </div>
-              </>
-              ) : null}
               </div>
               )}
               </div>
