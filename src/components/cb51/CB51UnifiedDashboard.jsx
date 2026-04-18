@@ -59,7 +59,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
     { id: 'inbox', label: 'Inbox', icon: Mail, badge: messages.length, color: 'cyan' },
     { id: 'tasks', label: 'TO-DO', icon: CheckCircle, badge: tasks.filter(t => t.status !== 'done').length, color: 'green' },
     { id: 'finance', label: 'Finance', icon: DollarSign, badge: 0, color: 'red' },
-    { id: 'calendar', label: 'Calendar', icon: Calendar, badge: confirmedGigs.length, color: 'cyan' }
+    { id: 'calendar', label: 'Calendar', icon: Calendar, badge: confirmedGigs.length, color: 'amber' }
   ];
 
   return (
@@ -73,9 +73,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
            const isActive = activeTab === tab.id;
            const colorMap = {
              cyan: { active: 'border-cyan-400 text-cyan-400', inactive: 'border-transparent text-gray-500' },
-             orange: { active: 'border-amber-500 text-amber-400', inactive: 'border-transparent text-gray-500' },
+             orange: { active: 'border-orange-500 text-orange-400', inactive: 'border-transparent text-gray-500' },
              green: { active: 'border-green-500 text-green-400', inactive: 'border-transparent text-gray-500' },
-             red: { active: 'border-red-500 text-red-400', inactive: 'border-transparent text-gray-500' }
+             red: { active: 'border-red-500 text-red-400', inactive: 'border-transparent text-gray-500' },
+             amber: { active: 'border-amber-400 text-amber-400', inactive: 'border-transparent text-gray-500' }
            };
            const colors = colorMap[tab.color] || colorMap.cyan;
            return (
@@ -91,9 +92,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 {tab.badge > 0 && (
                   <span className={`ml-1 px-2 py-0.5 text-white text-xs font-black rounded-full ${
                     tab.color === 'cyan' ? 'bg-cyan-500' :
-                    tab.color === 'orange' ? 'bg-amber-500' :
+                    tab.color === 'orange' ? 'bg-orange-500' :
                     tab.color === 'green' ? 'bg-green-500' :
-                    'bg-red-500'
+                    tab.color === 'red' ? 'bg-red-500' :
+                    'bg-amber-500'
                   }`}>
                     {tab.badge}
                   </span>
@@ -329,14 +331,14 @@ export default function CB51UnifiedDashboard({ artistId }) {
                         className="bg-gray-900 border border-white/10 rounded-lg p-4 hover:border-white/20 transition-colors"
                       >
                         <div className="flex items-start gap-3">
-                          <div className="bg-cyan-500/20 border border-cyan-500/40 rounded-lg px-3 py-2 text-center">
-                             <p className="text-cyan-400 font-black text-sm">{new Date(gig.date_start).getDate()}</p>
-                             <p className="text-cyan-600 text-xs">{new Date(gig.date_start).toLocaleDateString('en', { month: 'short' })}</p>
-                           </div>
-                           <div className="flex-1 min-w-0">
-                             <p className="text-white font-bold">{gig.venue || gig.title}</p>
-                             <p className="text-gray-400 text-sm">{gig.location}</p>
-                             <p className="text-orange-400 font-bold text-sm mt-1">🎵 {gig.fee && `£${gig.fee}`}</p>
+                          <div className="bg-amber-500/20 border border-amber-500/40 rounded-lg px-3 py-2 text-center">
+                                <p className="text-amber-400 font-black text-sm">{new Date(gig.date_start).getDate()}</p>
+                                <p className="text-amber-600 text-xs">{new Date(gig.date_start).toLocaleDateString('en', { month: 'short' })}</p>
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-white font-bold">{gig.venue || gig.title}</p>
+                                <p className="text-gray-400 text-sm">{gig.location}</p>
+                                <p className="text-red-400 font-bold text-sm mt-1">💰 {gig.fee && `£${gig.fee}`}</p>
                            </div>
                           <ChevronRight className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
                         </div>
