@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import CB51GigDecisionEngine from './CB51GigDecisionEngine';
 import CB51ConfirmedGigDraftEmail from './CB51ConfirmedGigDraftEmail';
+import CB51GigUploadParser from './CB51GigUploadParser';
 
 /**
  * CB51 UNIFIED DASHBOARD
@@ -106,8 +107,17 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 exit={{ opacity: 0, y: -20 }}
                 className="p-4 space-y-6"
               >
-                {/* PENDING OFFERS */}
+                {/* UPLOAD NEW OFFER */}
                 <div>
+                  <div className="space-y-2 mb-4">
+                    <h2 className="text-white font-black text-lg">Add Gig Offer</h2>
+                    <p className="text-gray-500 text-sm">Paste email, upload screenshot, or drag file</p>
+                  </div>
+                  <CB51GigUploadParser artistId={artistId} onSuccess={() => queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] })} />
+                </div>
+
+                {/* PENDING OFFERS */}
+                <div className="border-t border-white/10 pt-6">
                   <div className="space-y-2 mb-4">
                     <h2 className="text-white font-black text-lg">Pending Offers</h2>
                     <p className="text-gray-500 text-sm">YES/NO to decide · AI reads offers instantly</p>
