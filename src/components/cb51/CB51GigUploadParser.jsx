@@ -249,9 +249,20 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       }
 
       const managerId = currentUser?.id || '';
-      
-      // Use date_start or fallback to today
       const gigDate = editing.date_start?.trim() || new Date().toISOString().split('T')[0];
+
+      // Check for duplicate: same artist, venue, date
+      const existingGigs = await base44.entities.GigOffer.filter({
+        artist_id: selectedArtistId,
+        venue: editing.venue_name.trim(),
+        date: gigDate,
+        status: 'manager_reviewing'
+      });
+
+      if (existingGigs && existingGigs.length > 0) {
+        setSaveError('⚠️ This gig already exists for this date');
+        throw new Error('Duplicate gig detected');
+      }
 
       const gig = await base44.entities.GigOffer.create({
             manager_id: managerId,
