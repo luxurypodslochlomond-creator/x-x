@@ -215,13 +215,21 @@ export default function CB51UnifiedDashboard({ artistId }) {
                               </p>
                             )}
                           </div>
-                          <span className={`text-xs font-bold px-2 py-1 rounded ${
-                            task.priority === 'urgent' ? 'bg-red-500/20 text-red-400' :
-                            task.priority === 'high' ? 'bg-amber-500/20 text-amber-400' :
-                            'bg-gray-500/20 text-gray-400'
-                          }`}>
-                            {task.priority}
-                          </span>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <span className={`text-xs font-bold px-2 py-1 rounded ${
+                              task.priority === 'urgent' ? 'bg-red-500/20 text-red-400' :
+                              task.priority === 'high' ? 'bg-amber-500/20 text-amber-400' :
+                              'bg-gray-500/20 text-gray-400'
+                            }`}>
+                              {task.priority}
+                            </span>
+                            <button
+                              onClick={() => base44.entities.CB51Task.update(task.id, { status: 'done' }).then(() => queryClient.invalidateQueries({ queryKey: ['cb51Tasks', artistId] }))}
+                              className="px-2 py-1 bg-green-500/20 text-green-400 hover:bg-green-500/40 text-xs font-bold rounded transition-colors"
+                            >
+                              Done
+                            </button>
+                          </div>
                         </div>
                       </motion.div>
                     ))}
