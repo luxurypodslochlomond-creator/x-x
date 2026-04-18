@@ -108,8 +108,8 @@ export default function ScottArtistHome() {
     const sections = [
         { title: 'LIVE', icon: Mic2, link: createPageUrl(`ScottLive?id=${artistId}`), color: 'cyan' },
         { title: 'SESSIONS', icon: Music, link: createPageUrl(`ScottSessions?id=${artistId}`), color: 'orange' },
-        { title: 'TO-DO', icon: ClipboardList, link: createPageUrl(`ScottToDo?id=${artistId}`), color: 'cyan' },
-        { title: 'FINANCE', icon: DollarSign, link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`), color: 'orange' },
+        { title: 'TO-DO', icon: ClipboardList, link: createPageUrl(`ScottToDo?id=${artistId}`), color: 'green' },
+        { title: 'FINANCE', icon: DollarSign, link: createPageUrl(`ScottFinanceAdmin?id=${artistId}`), color: 'red' },
     ];
 
     return (
@@ -132,35 +132,35 @@ export default function ScottArtistHome() {
             </div>
 
             {/* PENDING VOTES - Only gigs manager already approved */}
-            {pendingVotes.length > 0 && (
-                <div className="bg-gradient-to-br from-pink-900/40 to-purple-900/40 border-2 border-pink-500 rounded-lg p-3 mb-6">
-                    <div className="flex items-center gap-2 mb-3">
-                        <motion.div
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="w-2 h-2 bg-pink-400 rounded-full"
-                        />
-                        <h2 className="text-pink-400 font-black text-sm font-mono">YOUR VOTE NEEDED ({pendingVotes.length})</h2>
-                    </div>
+             {pendingVotes.length > 0 && (
+                 <div className="bg-gradient-to-br from-cyan-900/40 to-cyan-950/40 border-2 border-cyan-500 rounded-lg p-3 mb-6">
+                     <div className="flex items-center gap-2 mb-3">
+                         <motion.div
+                             animate={{ scale: [1, 1.2, 1] }}
+                             transition={{ duration: 2, repeat: Infinity }}
+                             className="w-2 h-2 bg-cyan-400 rounded-full"
+                         />
+                         <h2 className="text-cyan-400 font-black text-sm font-mono">YOUR VOTE NEEDED ({pendingVotes.length})</h2>
+                     </div>
                     <div className="space-y-2">
                         {pendingVotes.map(offer => (
                             <Link key={offer.id} to={createPageUrl(`ScottBandVote?id=${offer.id}`)}>
                                 <motion.div
-                                    whileTap={{ scale: 0.98 }}
-                                    className="bg-black/60 border border-pink-500/50 rounded p-3 hover:border-pink-500 transition-all"
-                                >
-                                    <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
-                                    <div className="flex items-center gap-2 text-xs mt-1">
-                                        <span className="text-pink-400 font-mono">{offer.date || 'TBD'}</span>
+                                                 whileTap={{ scale: 0.98 }}
+                                                 className="bg-black/60 border border-cyan-500/50 rounded p-3 hover:border-cyan-500 transition-all"
+                                             >
+                                                 <p className="text-white font-bold text-sm">{offer.venue || 'Gig Offer'}</p>
+                                                 <div className="flex items-center gap-2 text-xs mt-1">
+                                                     <span className="text-cyan-400 font-mono">{offer.date || 'TBD'}</span>
                                         {offer.fee && (
                                             <>
                                                 <span className="text-gray-600">•</span>
-                                                <span className="text-green-400 font-bold">{offer.currency || 'GBP'}{offer.fee}</span>
+                                                <span className="text-red-400 font-bold">{offer.currency || 'GBP'}{offer.fee}</span>
                                             </>
-                                        )}
-                                    </div>
-                                    {offer.city && <p className="text-gray-500 text-[10px] mt-1">📍 {offer.city}</p>}
-                                    <p className="text-pink-400 text-[10px] font-bold mt-2">TAP TO VOTE →</p>
+                                            )}
+                                            </div>
+                                            {offer.city && <p className="text-gray-500 text-[10px] mt-1">📍 {offer.city}</p>}
+                                            <p className="text-cyan-400 text-[10px] font-bold mt-2">TAP TO VOTE →</p>
                                 </motion.div>
                             </Link>
                         ))}
@@ -173,7 +173,9 @@ export default function ScottArtistHome() {
                     const Icon = section.icon;
                     const colorMap = {
                         cyan: { border: 'border-cyan-500', bg: 'bg-cyan-500' },
-                        orange: { border: 'border-orange-500', bg: 'bg-orange-500' }
+                        orange: { border: 'border-orange-500', bg: 'bg-orange-500' },
+                        green: { border: 'border-green-500', bg: 'bg-green-500' },
+                        red: { border: 'border-red-500', bg: 'bg-red-500' }
                     };
                     const color = colorMap[section.color] || colorMap.cyan;
 
@@ -209,7 +211,7 @@ export default function ScottArtistHome() {
                                         {event.fee && (
                                             <>
                                                 <span className="text-gray-600">•</span>
-                                                <span className="text-green-400 font-bold">{event.currency || 'GBP'}{event.fee}</span>
+                                                <span className="text-red-400 font-bold">{event.currency || 'GBP'}{event.fee}</span>
                                             </>
                                         )}
                                     </div>
