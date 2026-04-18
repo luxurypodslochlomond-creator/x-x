@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ThumbsUp, ThumbsDown, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CB51BandVote from './CB51BandVotingWidget';
+import CB51GigVotingStatus from './CB51GigVotingStatus';
 
 export default function CB51GigOfferCard({ gig, userRole = 'manager' }) {
   const queryClient = useQueryClient();
@@ -57,34 +58,9 @@ export default function CB51GigOfferCard({ gig, userRole = 'manager' }) {
         {gig.fee && <p className="text-green-400 font-bold">${gig.fee}</p>}
       </div>
 
-      {/* BAND VOTE SUMMARY */}
+      {/* BAND VOTE STATUS - Clean visual */}
       {bandVotes.length > 0 && (
-        <button
-          onClick={() => setShowVotes(!showVotes)}
-          className="w-full mb-3 flex items-center justify-between bg-black/40 border border-gray-500/30 rounded p-2 hover:border-gray-400/50 transition-all"
-        >
-          <div className="flex items-center gap-2 text-gray-300 text-sm">
-            <Users className="w-4 h-4" />
-            <span>{votesFor}✓ {votesAgainst}✗ ({bandVotes.length} votes)</span>
-          </div>
-          <span className={`text-xs font-bold ${allVotesIn ? 'text-green-400' : 'text-yellow-400'}`}>
-            {allVotesIn ? '✓ All in' : '⏳ Pending'}
-          </span>
-        </button>
-      )}
-
-      {/* SHOW BAND VOTES */}
-      {showVotes && (
-        <div className="bg-black/60 border-l-2 border-cyan-500/30 pl-3 mb-3 space-y-1">
-          {bandVotes.map((vote, i) => (
-            <p key={i} className="text-xs text-gray-400">
-              <span className={vote.decision === 'approved' ? 'text-green-400' : 'text-red-400'}>
-                {vote.decision === 'approved' ? '✓' : '✗'}
-              </span>
-              {' '}{vote.member_name}
-            </p>
-          ))}
-        </div>
+        <CB51GigVotingStatus gig={gig} />
       )}
 
       {/* MANAGER DECISION BUTTONS */}
