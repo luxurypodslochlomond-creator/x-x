@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// Note: this file has no currency symbols by design — globally accessible
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
@@ -303,12 +304,12 @@ If someone says "you don't have rights, you're self-employed" — check. Many pe
         body: `When you earn money, some of it goes to the government as tax. This funds schools, hospitals, roads, etc.
 
 In the UK:
-- The first ~£12,570/year is tax free (Personal Allowance)
-- Above that, you pay 20% basic rate
+- The first chunk of your earnings each year is tax free (called a Personal Allowance — check gov.uk for current amount)
+- Above that, you pay a basic rate (around 20%)
 - Much higher earnings = higher rates
 
 PAYE: if you're employed, tax is deducted automatically. You don't have to do anything.
-Self-employed: you pay your own tax via Self Assessment. You MUST register with HMRC if you earn over £1,000 from self-employment. Don't ignore this.`,
+Self-employed: you pay your own tax via Self Assessment. You MUST register with HMRC if you earn over a certain threshold from self-employment. Don't ignore this — check gov.uk for current figures.`,
       },
       {
         title: 'Finding what actually drives you',
