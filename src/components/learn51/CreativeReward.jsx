@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { Download, Share2, Star, Sparkles } from 'lucide-react';
+import { Share2, Sparkles, MessageCircle } from 'lucide-react';
 
 // ============================================================
 // CREATIVE REWARD — AI-generated unique art + story for each child
@@ -29,14 +29,15 @@ CHILD INFO:
 CREATE a personalised creative reward. Make it feel MAGICAL and completely unique to them.
 
 Rules:
-- Reference their interest (${interest}) with REAL depth — use actual names, stats, moments
-  - "Football & Ronaldo": reference CR7's free kick technique, his son Cristiano Jr, his 900 goals, his SIUUU celebration — connect it to the maths/topic
-  - "Messi & Argentina": reference the 2022 World Cup, Thiago and Mateo, his dribbles, his left foot — connect to the topic
+- Reference their interest (${interest}) with REAL depth — use actual player moments, stats, iconic plays
+  - "Football & Ronaldo": CR7's 900+ goals, his free kick spin technique, his SIUUU celebration, his record-breaking career — connect the MATHS/TOPIC to his actual game
+  - "Messi & Argentina": Leo's 2022 World Cup final, his dribble stats, his left foot wizardry, his tiki-taka — connect the TOPIC to his actual genius
+  - NEVER reference their children or personal family life — only their professional legendary moments
   - Make it feel like it was written BY someone who loves that thing as much as they do
-- Connect it directly to what they just learned (${topic}) — the link should be surprising and brilliant
-- Age-appropriate warmth — not babyish, not adult. Cool, warm, real.
-- Short but POWERFUL — they should want to screenshot and show their friends
-- If streakCount >= 3, make it extra special and legendary — reference them becoming a legend themselves
+- Connect it directly to what they just learned (${topic}) — the link should feel surprising and brilliant ("Ronaldo's free kick travels at exactly the angle you just calculated")
+- Age-appropriate warmth — not babyish, not adult. Cool. Like a smart friend.
+- Short but POWERFUL — something they'd actually want to send to their mates on WhatsApp
+- If streakCount >= 3, make it LEGENDARY — about THEM becoming a legend, connecting to the player's own rise
 
 Return EXACTLY this JSON:
 {
@@ -87,9 +88,12 @@ export default function CreativeReward({ interest, topic, childAge, correctAnswe
     legendary: { bg: 'from-amber-400 via-orange-500 to-rose-500', badge: 'bg-amber-100 text-amber-700', label: '👑 LEGENDARY!', glow: 'shadow-amber-300' },
   };
 
+  const getShareText = () =>
+    `🌟 ${reward.title}\n\n${reward.content}\n\n${reward.dedication}\n\n🏆 I just unlocked: ${reward.achievement_name}\n\nMade for me by Learn51 — free for every kid on Earth 🌍♾️`;
+
   const handleShare = async () => {
     if (!reward) return;
-    const text = `🌟 ${reward.title}\n\n${reward.content}\n\n${reward.dedication}\n\n🏆 Achievement: ${reward.achievement_name}\n\nCreated by Learn51 AI — free education for every child on Earth ♾️`;
+    const text = getShareText();
     if (navigator.share) {
       navigator.share({ title: reward.title, text });
     } else {
@@ -97,6 +101,12 @@ export default function CreativeReward({ interest, topic, childAge, correctAnswe
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
+  };
+
+  const handleWhatsApp = () => {
+    if (!reward) return;
+    const text = encodeURIComponent(getShareText());
+    window.open(`https://wa.me/?text=${text}`, '_blank');
   };
 
   const config = reward ? (rarityConfig[reward.rarity] || rarityConfig.common) : rarityConfig.common;
@@ -204,24 +214,32 @@ export default function CreativeReward({ interest, topic, childAge, correctAnswe
                 </motion.p>
 
                 {/* ACTION BUTTONS */}
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <button
-                    onClick={handleShare}
-                    className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl border-2 border-indigo-300 bg-indigo-50 text-indigo-700 font-black text-sm hover:bg-indigo-100 transition-all"
+                    onClick={handleWhatsApp}
+                    className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-black text-sm transition-all"
                   >
-                    <Share2 className="w-4 h-4" />
-                    {copied ? 'Copied! ✓' : 'Share / Save'}
+                    <MessageCircle className="w-4 h-4" />
+                    Send to mates 💬
                   </button>
                   <button
-                    onClick={onClose}
-                    className="flex-1 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm transition-all"
+                    onClick={handleShare}
+                    className="flex items-center justify-center gap-1 px-4 py-3 rounded-2xl border-2 border-indigo-300 bg-indigo-50 text-indigo-700 font-black text-sm hover:bg-indigo-100 transition-all"
                   >
-                    Keep learning →
+                    <Share2 className="w-4 h-4" />
+                    {copied ? '✓' : 'Copy'}
                   </button>
                 </div>
 
+                <button
+                  onClick={onClose}
+                  className="w-full py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm transition-all"
+                >
+                  Keep learning →
+                </button>
+
                 <p className="text-center text-gray-400 text-xs">
-                  This was made only for you — nobody else will ever get this exact reward 🌟
+                  Only you will ever get this exact reward 🌟 No data stored. Just yours.
                 </p>
               </>
             )}
