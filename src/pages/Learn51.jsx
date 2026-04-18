@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Brain, BookOpen, Globe, Sparkles, ArrowRight, Trophy, Rocket, Heart, Zap, CheckCircle, Shield, Lock } from 'lucide-react';
+import { Star, Brain, BookOpen, Globe, ArrowRight, Heart, CheckCircle, Shield } from 'lucide-react';
 
 // Stars — gain only, never go down, no account needed
 const STORAGE_KEY = 'learn51_stars';
@@ -56,6 +56,23 @@ const MODULES = [
     links: [
       { label: 'Young Warriors', sub: 'Real kids making a real difference', url: '/YoungWarriors', tag: 'EXPLORE' },
       { label: 'Sound & Frequencies', sub: 'Invisible waves that change everything', url: '/FrequencyChamber', tag: 'MIND-BLOWN' },
+    ],
+    stars: 0,
+  },
+  {
+    id: 'lifeskills',
+    emoji: '🌟',
+    title: 'Life Skills 51',
+    tagline: 'The stuff school doesn\'t always teach you',
+    desc: 'Money, food, mental health, your rights, relationships, work — real skills for real life.',
+    color: 'from-rose-500 to-pink-600',
+    border: 'border-rose-400',
+    glow: 'shadow-rose-500/40',
+    bg: 'bg-rose-950/60',
+    Icon: Heart,
+    links: [
+      { label: 'Life Skills 51', sub: 'Money · food · mental health · rights · work', url: '/LifeSkills51', tag: 'GO' },
+      { label: 'Reading Support', sub: 'Dyslexia help & reading strategies', url: '/ReadingSupport', tag: 'HELP' },
     ],
     stars: 0,
   },

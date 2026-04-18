@@ -1,9 +1,24 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight, RotateCcw, Star, Heart, Brain, Globe, Zap } from 'lucide-react';
+import { Sparkles, ArrowRight, RotateCcw, Star, Volume2, VolumeX } from 'lucide-react';
 import CreativeReward from '@/components/learn51/CreativeReward';
+
+// Web Speech API — free, built-in, no API key needed
+const speak = (text) => {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.rate = 0.85;
+  utt.pitch = 1.05;
+  // prefer a natural English voice if available
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = voices.find(v => v.lang.startsWith('en') && v.localService);
+  if (preferred) utt.voice = preferred;
+  window.speechSynthesis.speak(utt);
+};
+const stopSpeaking = () => { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); };
 
 // ============================================================
 // LEARN51 AI — World-first adaptive AI education
@@ -105,8 +120,18 @@ export default function Learn51AIPage() {
   const [history, setHistory] = useState([]);
   const [showReward, setShowReward] = useState(false);
   const [streak, setStreak] = useState(0);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   const inputRef = useRef(null);
+
+  const readLesson = useCallback((data) => {
+    if (!data) return;
+    setIsSpeaking(true);
+    const text = `${data.wow_fact}. ${data.lesson}. Here's your question: ${data.question}`;
+    speak(text);
+    // Estimate reading time to reset speaking state
+    setTimeout(() => setIsSpeaking(false), text.length * 55);
+  }, []);
 
   const loadLesson = async (topicOverride, levelOverride) => {
     setLoading(true);
@@ -337,12 +362,21 @@ export default function Learn51AIPage() {
             <button onClick={reset} className="text-gray-400 hover:text-gray-600 font-bold text-sm flex items-center gap-1">
               <RotateCcw className="w-4 h-4" /> Start over
             </button>
-            <div className="flex items-center gap-4">
-              <span className="text-amber-600 font-black text-lg">{'⭐'.repeat(Math.min(stars, 5))}</span>
+            <div className="flex items-center gap-3">
+              {streak >= 2 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 1.5 }}
+                  className="text-orange-500 font-black text-sm bg-orange-50 border border-orange-200 px-2 py-1 rounded-full"
+                >
+                  🔥 {streak} streak
+                </motion.span>
+              )}
+              <span className="text-amber-600 font-black text-sm">{'⭐'.repeat(Math.min(stars, 5))}</span>
               <span className="bg-indigo-100 text-indigo-700 font-black px-3 py-1 rounded-full text-sm">
-                Level {level}
+                Lvl {level}
               </span>
-              <span className="text-gray-500 text-sm font-bold">Q{questionCount + 1}</span>
             </div>
           </div>
 
@@ -363,7 +397,19 @@ export default function Learn51AIPage() {
 
               {/* LESSON */}
               <div className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-                <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-3">📚 Let's explore</p>
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-xs font-black uppercase tracking-widest text-gray-400">📚 Let's explore</p>
+                  <button
+                    onClick={() => { isSpeaking ? (stopSpeaking(), setIsSpeaking(false)) : readLesson(lessonData); }}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all border-2 ${
+                      isSpeaking
+                        ? 'border-rose-300 bg-rose-50 text-rose-600'
+                        : 'border-indigo-200 bg-indigo-50 text-indigo-600 hover:border-indigo-400'
+                    }`}
+                  >
+                    {isSpeaking ? <><VolumeX className="w-3 h-3" /> Stop</> : <><Volume2 className="w-3 h-3" /> Read to me 🔊</>}
+                  </button>
+                </div>
                 <p className="text-gray-900 text-lg leading-relaxed font-medium">{lessonData.lesson}</p>
               </div>
 
