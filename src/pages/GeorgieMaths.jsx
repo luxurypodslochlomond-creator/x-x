@@ -117,10 +117,10 @@ export default function GeorgieMathsPage() {
                 >
                     <Star className="w-16 h-16 text-orange-600 mx-auto animate-pulse" />
                     <h1 className="text-4xl md:text-5xl font-black text-gray-900">
-                        Georgie's Magic Maths
+                        Magic Maths ✨
                     </h1>
                     <p className="text-2xl text-teal-700 font-bold">
-                        Doubling & 3D Shapes 💖
+                        Doubling & 3D Shapes — for every learner 💖
                     </p>
                     <div className="text-3xl font-black text-orange-700">
                         ⭐ Score: {score}
@@ -428,7 +428,7 @@ export default function GeorgieMathsPage() {
                 </Card>
 
                 <div className="text-center space-y-3">
-                    <p className="text-xl font-bold text-gray-900">Keep going Georgie! You're brilliant! 💖</p>
+                    <p className="text-xl font-bold text-gray-900">Keep going — you're brilliant! 💖</p>
                     <p className="text-lg text-gray-600">From AI51 with love ♾️❤️♾️</p>
                 </div>
             </div>

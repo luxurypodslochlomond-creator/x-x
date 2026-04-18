@@ -85,10 +85,10 @@ export default function LennoxMathsPage() {
                 >
                     <Calculator className="w-16 h-16 text-amber-700 mx-auto" />
                     <h1 className="text-4xl md:text-5xl font-black text-amber-800">
-                        Rounding Decimals
+                        Rounding Decimals ✨
                     </h1>
                     <p className="text-2xl text-green-800 font-bold">
-                        For Lennox 💚
+                        For every learner 💚
                     </p>
                 </motion.div>
 
@@ -526,7 +526,7 @@ export default function LennoxMathsPage() {
                 </Card>
 
                 <div className="text-center space-y-3">
-                    <p className="text-xl font-bold text-gray-900">Keep practicing Lennox! You're doing amazing! 💚</p>
+                    <p className="text-xl font-bold text-gray-900">Keep practicing — you're doing amazing! 💚</p>
                     <p className="text-lg text-gray-600">From AI51 with love ♾️❤️♾️</p>
                 </div>
             </div>
