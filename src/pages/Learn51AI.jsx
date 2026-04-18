@@ -50,7 +50,7 @@ const TOPICS = [
   { id: 'money', emoji: '💰', label: 'Real Life Skills', color: 'from-green-500 to-emerald-600', border: 'border-green-400', desc: 'Money, cooking, staying safe' },
 ];
 
-const PROMPT_TEMPLATE = ({ topic, interest, age, level, history }) => `
+const PROMPT_TEMPLATE = ({ topic, interest, age, level, history, paceNote }) => `
 You are Learn51 AI — the world's most caring, brilliant teacher. You genuinely love children and want every single one on Earth to learn and thrive.
 
 CHILD INFO:
@@ -59,6 +59,7 @@ CHILD INFO:
 - Age: ${age}
 - Level (1=beginner, 5=advanced): ${level}
 - Previous questions this session: ${history}
+- HOW THEY ARE LEARNING RIGHT NOW: ${paceNote}
 
 YOUR JOB:
 1. Give ONE brilliant, personalised lesson moment — not a lecture, a SPARK
@@ -67,9 +68,12 @@ YOUR JOB:
    - If they love "Messi & Argentina": use Leo Messi's dribbling physics, World Cup geometry, his son Thiago
    - Make it feel like insider knowledge — "did you know Ronaldo's free kicks use EXACTLY this maths?"
 3. Ask ONE clear question at the end to check understanding
-4. Keep it SHORT — 4-6 sentences max for the lesson, then the question
-5. Language: simple, warm, excited — never condescending. Talk like a cool older sibling.
-6. If they've had ${history} questions already, slightly increase difficulty
+4. CRITICALLY — adapt your teaching to match how they are learning: "${paceNote}"
+   - If they're struggling: use a DIFFERENT angle or analogy, break it into smaller steps, be warmer
+   - If they're flying: stretch them with a harder concept or a "what if?" challenge
+   - If they're slow to answer: keep it simple and reassuring, never rush them
+5. Keep it SHORT — 4-6 sentences max for the lesson, then the question
+6. Language: simple, warm, excited — never condescending. Talk like a cool older sibling.
 7. Weave in naturally when relevant: health, kindness, respect, their rights as a child
 
 TONE: You are their brilliant friend who happens to know everything. Like a cool older sibling with a PhD. NOT a teacher reading from a book. Make them feel LUCKY to know this.
@@ -77,8 +81,8 @@ TONE: You are their brilliant friend who happens to know everything. Like a cool
 FORMAT your response EXACTLY like this JSON (no extra text):
 {
   "wow_fact": "One mind-blowing connection between ${topic} and ${interest} in ONE sentence",
-  "lesson": "The actual teaching moment — warm, brilliant, 3-4 sentences",  
-  "question": "ONE clear question to check they got it",
+  "lesson": "The actual teaching moment — warm, brilliant, 3-4 sentences. ADAPTED to their current pace.",  
+  "question": "ONE clear question to check they got it — difficulty matched to their current pace",
   "encouragement": "A short warm line (not cheesy) for after they answer",
   "hint": "A gentle hint if they're stuck — one sentence",
   "answer_keywords": ["key", "words", "that", "indicate", "correct", "understanding"],
@@ -107,6 +111,28 @@ const LS_KEY = 'learn51ai_progress';
 const loadProgress = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch { return null; } };
 const saveProgress = (data) => { try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {} };
 
+// ── Adaptive pace engine — figures out how the child learns ──
+// Tracks: answer speed, hint usage, wrong streaks, partial credit
+// Returns a plain-English "pace note" the AI can act on
+const buildPaceNote = ({ questionCount, wrongStreak, hintUsedCount, avgResponseMs, recentResults }) => {
+  const notes = [];
+
+  // Speed signals
+  if (questionCount >= 2 && avgResponseMs < 15000) notes.push('answers very quickly — may be ready for more challenge');
+  if (avgResponseMs > 60000) notes.push('takes their time — keep explanations clear and unhurried');
+
+  // Struggle signals
+  if (wrongStreak >= 2) notes.push(`got ${wrongStreak} wrong in a row — gently revisit the concept before moving on`);
+  if (hintUsedCount > questionCount / 2 && questionCount >= 2) notes.push('uses hints often — they may need more scaffolding and smaller steps');
+
+  // Success signals
+  const recentCorrect = recentResults.filter(Boolean).length;
+  if (recentResults.length >= 3 && recentCorrect === recentResults.length) notes.push('getting everything right — ready to be stretched and challenged more');
+  if (recentResults.length >= 3 && recentCorrect === 0) notes.push('struggling consistently — try a different angle or analogy, stay warm and encouraging');
+
+  return notes.length > 0 ? notes.join('; ') : 'going at a steady pace';
+};
+
 export default function Learn51AIPage() {
   const saved = loadProgress();
 
@@ -128,6 +154,13 @@ export default function Learn51AIPage() {
   const [showReward, setShowReward] = useState(false);
   const [streak, setStreak] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // ── Adaptive pace tracking ──
+  const [wrongStreak, setWrongStreak] = useState(0);
+  const [hintUsedCount, setHintUsedCount] = useState(0);
+  const [questionStartTime, setQuestionStartTime] = useState(null);
+  const [totalResponseMs, setTotalResponseMs] = useState(0);
+  const [recentResults, setRecentResults] = useState([]); // last 5: true/false
 
   const inputRef = useRef(null);
 
@@ -156,6 +189,9 @@ export default function Learn51AIPage() {
     const useTopic = topicOverride || topic;
     const useLevel = levelOverride || level;
 
+    const avgMs = questionCount > 0 ? totalResponseMs / questionCount : 30000;
+    const paceNote = buildPaceNote({ questionCount, wrongStreak, hintUsedCount, avgResponseMs: avgMs, recentResults });
+
     const result = await base44.integrations.Core.InvokeLLM({
       prompt: PROMPT_TEMPLATE({
         topic: TOPICS.find(t => t.id === useTopic)?.label || useTopic,
@@ -163,6 +199,7 @@ export default function Learn51AIPage() {
         age: age,
         level: useLevel,
         history: history.length,
+        paceNote,
       }),
       model: 'claude_sonnet_4_6',
       response_json_schema: {
@@ -182,6 +219,7 @@ export default function Learn51AIPage() {
     setLessonData(result);
     setLoading(false);
     setStage('learning');
+    setQuestionStartTime(Date.now()); // start timing their response
     setTimeout(() => inputRef.current?.focus(), 300);
   };
 
@@ -211,24 +249,35 @@ export default function Learn51AIPage() {
     setAssessment(result);
     setLoading(false);
 
-    const newScore = score + (result.score_change || 0);
+    // ── Record pace data ──
+    const responseMs = questionStartTime ? Date.now() - questionStartTime : 30000;
+    setTotalResponseMs(t => t + responseMs);
     const newCount = questionCount + 1;
-    setScore(newScore);
     setQuestionCount(newCount);
     setHistory(h => [...h, lessonData.question]);
+    setRecentResults(r => [...r.slice(-4), result.correct]); // keep last 5
+
+    const newScore = score + (result.score_change || 0);
+    setScore(newScore);
 
     if (result.correct) {
       const newStreak = streak + 1;
       const newStars = stars + 1;
-      const newLevel = (newScore > 0 && newScore % 3 === 0) ? Math.min(level + 1, 5) : level;
+      // Level up every 3 correct in a row OR every 3 correct total — but only if not struggling
+      const newLevel = (newScore > 0 && newScore % 3 === 0 && wrongStreak === 0) ? Math.min(level + 1, 5) : level;
       setStreak(newStreak);
       setStars(newStars);
+      setWrongStreak(0); // reset wrong streak on correct
       setShowReward(true);
       if (newLevel !== level) setLevel(newLevel);
-      // Save to localStorage — private, device-only
       persistProgress({ stars: newStars, level: newLevel, interest, age });
     } else {
       setStreak(0);
+      setWrongStreak(w => w + 1);
+      // Level DOWN if 3 wrong in a row — gently step back
+      if (wrongStreak >= 2 && level > 1) {
+        setLevel(l => Math.max(l - 1, 1));
+      }
     }
   };
 
@@ -397,7 +446,12 @@ export default function Learn51AIPage() {
               <RotateCcw className="w-4 h-4" /> Start over
             </button>
             <div className="flex items-center gap-3">
-              {streak >= 2 && (
+              {wrongStreak >= 2 && (
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-blue-600 font-bold text-xs bg-blue-50 border border-blue-200 px-2 py-1 rounded-full">
+                  🤖 adapting for you
+                </motion.span>
+              )}
+              {streak >= 2 && wrongStreak === 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: [1, 1.2, 1] }}
@@ -467,7 +521,7 @@ export default function Learn51AIPage() {
                   />
                   <div className="flex gap-3">
                     <button
-                      onClick={() => setShowHint(!showHint)}
+                      onClick={() => { setShowHint(!showHint); if (!showHint) setHintUsedCount(h => h + 1); }}
                       className="flex-1 py-3 rounded-2xl border-2 border-amber-300 bg-amber-50 text-amber-700 font-bold text-base hover:bg-amber-100 transition-all"
                     >
                       💡 {showHint ? 'Hide hint' : 'Show hint'}
