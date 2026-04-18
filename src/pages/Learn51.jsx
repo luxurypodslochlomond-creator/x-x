@@ -278,9 +278,23 @@ export default function Learn51Page() {
           <h2 className="text-2xl font-black mb-2">273 million children out of school.</h2>
           <p className="text-blue-100 text-lg leading-relaxed">
             We're building for every single one of them. No child left behind.<br/>
-            Every language. Every ability. Every corner of Earth. Free.
+            Every language. Every ability. Every corner of Earth. Free. Always.
           </p>
-          <p className="text-blue-200 text-sm mt-4">Built with love by UF51 ❤️</p>
+          <p className="text-blue-200 text-sm mt-4">
+            Works offline. No data collected. No account needed.<br/>
+            Built with love by UF51 ❤️
+          </p>
+        </div>
+
+        {/* HOME EDUCATION NOTE */}
+        <div className="bg-white border-2 border-green-400 rounded-2xl p-6 text-center">
+          <div className="text-3xl mb-2">🏡</div>
+          <h3 className="text-xl font-black text-green-900 mb-2">Built for home education too</h3>
+          <p className="text-gray-600 text-base leading-relaxed">
+            Learn51 is designed so any family, anywhere in the world, can use it as a complete free learning companion —
+            whether that's after school, instead of school, or in places where no school exists.
+            Every subject, every age, no login, no cost.
+          </p>
         </div>
 
       </div>

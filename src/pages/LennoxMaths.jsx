@@ -3,22 +3,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
-import { Calculator, Check, X, ArrowRight, HelpCircle, Eye, Sparkles, Infinity, Waves, Zap, Circle } from 'lucide-react';
+import { Calculator, Check, X, ArrowRight, HelpCircle, Eye, Sparkles, Infinity, Waves, Zap, Circle, GraduationCap } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import StarAward, { awardStars } from '@/components/learn51/StarAward';
 
 export default function LennoxMathsPage() {
-    // NOINDEX - Keep private from search engines
-    useEffect(() => {
-        const meta = document.createElement('meta');
-        meta.name = 'robots';
-        meta.content = 'noindex, nofollow';
-        document.head.appendChild(meta);
-        return () => { document.head.removeChild(meta); };
-    }, []);
     const [userAnswer, setUserAnswer] = useState('');
     const [currentQuestion, setCurrentQuestion] = useState(null);
     const [showResult, setShowResult] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const [score, setScore] = useState(0);
+    const [starAward, setStarAward] = useState(null);
 
     const generateQuestion = () => {
         const num = (Math.random() * 100).toFixed(4);
@@ -38,7 +33,7 @@ export default function LennoxMathsPage() {
         const correct = parseFloat(userAnswer) === parseFloat(currentQuestion.answer);
         setIsCorrect(correct);
         setShowResult(true);
-        if (correct) setScore(score + 1);
+        if (correct) { setScore(score + 1); setStarAward({ n: 1, label: 'Decimal master! 🔢' }); }
     };
 
     const roundingExamples = [
@@ -71,11 +66,12 @@ export default function LennoxMathsPage() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 via-slate-50 to-gray-50 text-gray-900 p-4 md:p-8 pb-32">
             <div className="max-w-4xl mx-auto space-y-8">
-                
-                {/* ADMIN INDICATOR */}
-                <div className="bg-amber-900/30 border-2 border-amber-500 rounded-lg p-3">
-                    <p className="text-amber-400 font-bold text-center">⚠️ ADMIN VIEW - ACTION NEEDED</p>
-                </div>
+
+                {/* BACK TO HUB */}
+                <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-700 font-bold hover:text-indigo-900 transition-colors">
+                    <GraduationCap className="w-5 h-5" />
+                    ← Back to Learn51 Hub
+                </Link>
 
                 {/* HEADER */}
                 <motion.div
@@ -156,9 +152,9 @@ export default function LennoxMathsPage() {
                                     Why Do We Round?
                                 </h3>
                                 <div className="space-y-3 text-gray-900 text-base leading-relaxed">
-                                    <p>💰 <strong className="text-lg">Money:</strong> £3.14159 doesn't make sense! We round to £3.14</p>
+                                    <p>💰 <strong className="text-lg">Money:</strong> 3.14159 in any currency doesn't make sense! We round to 3.14</p>
                                     <p>📏 <strong className="text-lg">Measurements:</strong> "1.456789 metres" is too exact. "1.46 metres" is easier!</p>
-                                    <p>🧮 <strong className="text-lg">Math:</strong> 2 decimal places is usually enough!</p>
+                                    <p>🧮 <strong className="text-lg">Maths:</strong> 2 decimal places is usually enough!</p>
                                 </div>
                             </div>
                         </div>
@@ -528,7 +524,14 @@ export default function LennoxMathsPage() {
                 <div className="text-center space-y-3">
                     <p className="text-xl font-bold text-gray-900">Keep practicing — you're doing amazing! 💚</p>
                     <p className="text-lg text-gray-600">From AI51 with love ♾️❤️♾️</p>
+                    <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-700 font-bold hover:text-indigo-900 mt-2">
+                        <GraduationCap className="w-5 h-5" /> Back to Learn51 Hub
+                    </Link>
                 </div>
+
+                {starAward && (
+                    <StarAward stars={starAward.n} label={starAward.label} onDone={() => setStarAward(null)} />
+                )}
             </div>
         </div>
     );

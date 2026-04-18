@@ -3,22 +3,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, Check, X, ArrowRight, Heart, Sparkles, Star, Zap, Box } from 'lucide-react';
+import { Calculator, Check, X, ArrowRight, Heart, Sparkles, Star, Zap, Box, GraduationCap } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import StarAward, { awardStars } from '@/components/learn51/StarAward';
 
 export default function GeorgieMathsPage() {
-    // NOINDEX - Keep private from search engines
-    useEffect(() => {
-        const meta = document.createElement('meta');
-        meta.name = 'robots';
-        meta.content = 'noindex, nofollow';
-        document.head.appendChild(meta);
-        return () => { document.head.removeChild(meta); };
-    }, []);
     const [doublingAnswer, setDoublingAnswer] = useState('');
     const [currentDoublingNum, setCurrentDoublingNum] = useState(null);
     const [showDoublingResult, setShowDoublingResult] = useState(false);
     const [isDoublingCorrect, setIsDoublingCorrect] = useState(false);
     const [score, setScore] = useState(0);
+    const [starAward, setStarAward] = useState(null);
 
     const [shapeQuizAnswer, setShapeQuizAnswer] = useState('');
     const [currentShape, setCurrentShape] = useState(null);
@@ -83,14 +78,14 @@ export default function GeorgieMathsPage() {
         const correct = parseInt(doublingAnswer) === currentDoublingNum * 2;
         setIsDoublingCorrect(correct);
         setShowDoublingResult(true);
-        if (correct) setScore(score + 1);
+        if (correct) { setScore(score + 1); setStarAward({ n: 1, label: 'Doubling master! ✨' }); }
     };
 
     const checkShapeAnswer = () => {
         const correct = parseInt(shapeQuizAnswer) === currentShape.vertices;
         setIsShapeCorrect(correct);
         setShowShapeResult(true);
-        if (correct) setScore(score + 1);
+        if (correct) { setScore(score + 1); setStarAward({ n: 1, label: 'Shape explorer! 📦' }); }
     };
 
     const doublingExamples = [
@@ -103,12 +98,13 @@ export default function GeorgieMathsPage() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 via-blue-50 to-gray-50 text-gray-900 p-4 md:p-8 pb-32">
             <div className="max-w-4xl mx-auto space-y-8">
-                
-                {/* ADMIN INDICATOR */}
-                <div className="bg-amber-900/30 border-2 border-amber-500 rounded-lg p-3">
-                    <p className="text-amber-400 font-bold text-center">⚠️ ADMIN VIEW - ACTION NEEDED</p>
-                </div>
-                
+
+                {/* BACK TO HUB */}
+                <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-700 font-bold hover:text-indigo-900 transition-colors">
+                    <GraduationCap className="w-5 h-5" />
+                    ← Back to Learn51 Hub
+                </Link>
+
                 {/* HEADER */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -430,7 +426,14 @@ export default function GeorgieMathsPage() {
                 <div className="text-center space-y-3">
                     <p className="text-xl font-bold text-gray-900">Keep going — you're brilliant! 💖</p>
                     <p className="text-lg text-gray-600">From AI51 with love ♾️❤️♾️</p>
+                    <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-700 font-bold hover:text-indigo-900 mt-2">
+                        <GraduationCap className="w-5 h-5" /> Back to Learn51 Hub
+                    </Link>
                 </div>
+
+                {starAward && (
+                    <StarAward stars={starAward.n} label={starAward.label} onDone={() => setStarAward(null)} />
+                )}
             </div>
         </div>
     );

@@ -439,13 +439,13 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "FreqLift51 Whitepaper", url: createPageUrl('FreqLift51Whitepaper'), icon: Atom, description: "Acoustic levitation" },
     ];
 
-    // 5. LEARN BETTER (for kids who learn differently)
+    // 5. LEARN BETTER — Learn51 Hub (own section, every child on Earth)
     const kidsNav = [
-      { title: "Learn51 Hub 🌍", url: createPageUrl("Learn51"), icon: GraduationCap, highlight: true, description: "Free learning for every child on Earth" },
-      { title: "Magic Maths ⭐", url: createPageUrl("GeorgieMaths"), icon: Brain, highlight: true, description: "Maths for every kind of mind" },
-      { title: "Rounding & Decimals 🔢", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Maths adventures for ages 10-13" },
-      { title: "Literacy 51", url: createPageUrl("Literacy51"), icon: BookOpen, highlight: true, description: "Phonics · spelling · sentences" },
-      { title: "Reading Support", url: createPageUrl("ReadingSupport"), icon: BookOpen, highlight: true, description: "Help with reading & dyslexia" },
+      { title: "🌍 Learn51 Hub", url: createPageUrl("Learn51"), icon: GraduationCap, highlight: true, description: "Free · no login · every child on Earth" },
+      { title: "Magic Maths ⭐", url: createPageUrl("GeorgieMaths"), icon: Brain, highlight: true, description: "Numbers, doubling & 3D shapes" },
+      { title: "Rounding & Decimals 🔢", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Decimals, circles & maths in music" },
+      { title: "Literacy 51 📖", url: createPageUrl("Literacy51"), icon: BookOpen, highlight: true, description: "Phonics · spelling · sentences" },
+      { title: "Reading Support", url: createPageUrl("ReadingSupport"), icon: BookOpen, description: "Help with reading & dyslexia" },
       { title: "Young Warriors", url: createPageUrl("YoungWarriors"), icon: Heart, description: "Kids making a difference" },
     ];
 
@@ -726,7 +726,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                               <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="LITTER PICKS" color="green" items={litterNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} isMobile />
-                              <NavSection title="LEARN BETTER" color="cyan" items={kidsNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="🌍 LEARN51 — FREE FOR EVERY CHILD" color="cyan" items={kidsNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="LEARN" color="gray" items={learnNav} isActivePage={isActivePage} isMobile />
                                 <button
                                   onClick={() => { setSearchOpen(true); setMobileMenuOpen(false); }}
@@ -823,7 +823,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} />
                 <NavSection title="LITTER PICKS" color="green" items={litterNav} isActivePage={isActivePage} />
                 <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} />
-                <NavSection title="LEARN BETTER" color="cyan" items={kidsNav} isActivePage={isActivePage} />
+                <NavSection title="🌍 LEARN51 — FREE FOR EVERY CHILD" color="cyan" items={kidsNav} isActivePage={isActivePage} />
                 <NavSection title="LEARN" color="gray" items={learnNav} isActivePage={isActivePage} />
                 <button
                   onClick={() => setSearchOpen(true)}
