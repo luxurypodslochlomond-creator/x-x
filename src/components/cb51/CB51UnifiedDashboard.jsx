@@ -322,30 +322,31 @@ export default function CB51UnifiedDashboard({ artistId }) {
                     <p className="text-gray-400 font-bold">No shows scheduled</p>
                   </div>
                 ) : (
-                  <div className="space-y-2">
-                    {confirmedGigs.sort((a, b) => new Date(a.date_start) - new Date(b.date_start)).map(gig => (
-                      <motion.div
-                        key={gig.id}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="bg-gray-900 border border-amber-500/20 rounded-lg p-4 hover:border-amber-500/40 transition-colors"
-                      >
-                        <div className="flex items-start gap-4">
-                          <div className="bg-amber-500/20 border border-amber-500/40 rounded-lg px-4 py-3 text-center flex-shrink-0">
-                                <p className="text-amber-400 font-black text-lg">{new Date(gig.date_start).getDate()}</p>
-                                <p className="text-amber-600 text-xs font-bold">{new Date(gig.date_start).toLocaleDateString('en', { month: 'short' })}</p>
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-white font-bold text-base">{gig.venue || gig.title}</p>
-                                <p className="text-gray-400 text-sm mt-1">{gig.location}</p>
-                                <p className="text-red-400 font-bold text-sm mt-2">£{gig.fee?.toLocaleString()}</p>
-                           </div>
-                          <ChevronRight className="w-5 h-5 text-amber-600/50 flex-shrink-0 mt-1" />
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
+                   <div className="space-y-2">
+                     {confirmedGigs.sort((a, b) => new Date(a.date_start) - new Date(b.date_start)).map(gig => (
+                       <motion.button
+                         key={gig.id}
+                         initial={{ opacity: 0, x: -20 }}
+                         animate={{ opacity: 1, x: 0 }}
+                         onClick={() => window.location.href = `/ScottLive?gig=${gig.id}`}
+                         className="w-full text-left bg-gray-900 border border-amber-500/20 rounded-lg p-4 hover:border-amber-500/60 hover:bg-gray-800/80 transition-all active:scale-95"
+                       >
+                         <div className="flex items-start gap-4">
+                           <div className="bg-amber-500/20 border border-amber-500/40 rounded-lg px-4 py-3 text-center flex-shrink-0">
+                                 <p className="text-amber-400 font-black text-lg">{new Date(gig.date_start).getDate()}</p>
+                                 <p className="text-amber-600 text-xs font-bold">{new Date(gig.date_start).toLocaleDateString('en', { month: 'short' })}</p>
+                               </div>
+                               <div className="flex-1 min-w-0">
+                                 <p className="text-white font-bold text-base">{gig.venue || gig.title}</p>
+                                 <p className="text-gray-400 text-sm mt-1">{gig.location}</p>
+                                 <p className="text-red-400 font-bold text-sm mt-2">£{gig.fee?.toLocaleString()}</p>
+                            </div>
+                           <ChevronRight className="w-5 h-5 text-amber-600/50 flex-shrink-0 mt-1" />
+                         </div>
+                       </motion.button>
+                     ))}
+                   </div>
+                 )}
               </motion.div>
             )}
           </AnimatePresence>
