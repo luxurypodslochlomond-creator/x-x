@@ -300,13 +300,14 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
           return gig;
     },
     onSuccess: (gig) => {
-      queryClient.invalidateQueries({ queryKey: ['pendingGigs'] });
+      queryClient.invalidateQueries({ queryKey: ['pendingGigs', selectedArtistId] });
       queryClient.invalidateQueries({ queryKey: ['gigOffers'] });
       setSavedGig(gig);
       setExtracted(null);
       setEditing(null);
       setFile(null);
       setSaveError(null);
+      setTimeout(() => setSavedGig(null), 2000);
     },
     onError: (err) => {
       setSaveError(err.message);
