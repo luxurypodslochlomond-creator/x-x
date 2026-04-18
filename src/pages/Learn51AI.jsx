@@ -260,11 +260,15 @@ export default function Learn51AIPage() {
     if (!answer.trim() || !lessonData) return;
     setLoading(true);
 
+    const topicLabels = selectedTopics.length > 0 
+      ? selectedTopics.map(id => TOPICS.find(t => t.id === id)?.label).filter(Boolean).join(' + ')
+      : TOPICS.find(t => t.id === topic)?.label;
+
     const result = await base44.integrations.Core.InvokeLLM({
       prompt: ASSESS_PROMPT({
         question: lessonData.question,
         answer,
-        topic: TOPICS.find(t => t.id === topic)?.label,
+        topic: topicLabels,
         interest,
       }),
       model: 'claude_sonnet_4_6',
