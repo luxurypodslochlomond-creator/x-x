@@ -6,6 +6,9 @@ import {
   CheckCircle, XCircle, MapPin, Calendar, DollarSign,
   Users, Loader, ChevronDown, Brain, AlertTriangle, Zap, TrendingUp
 } from 'lucide-react';
+import CB51DraftResponseEmail from './CB51DraftResponseEmail';
+import CB51BandResponseTimer from './CB51BandResponseTimer';
+import CB51GigFinanceTracker from './CB51GigFinanceTracker';
 
 /**
  * CB51 GIG DECISION ENGINE
@@ -353,6 +356,21 @@ export default function CB51GigDecisionEngine({ artistId }) {
                 </motion.div>
               )}
             </AnimatePresence>
+          </div>
+
+          {/* FINANCE + BAND TIMER + DRAFT EMAIL — Production ready */}
+          <div className="px-5 py-4 border-t border-white/5 space-y-3 bg-black/40">
+            <CB51GigFinanceTracker artistId={currentGig.artist_id} />
+            {currentGig.band_votes?.length > 0 && (
+              <CB51BandResponseTimer votes={currentGig.band_votes} totalMembers={currentGig.band_votes?.length || 0} />
+            )}
+            {currentGig.band_votes?.some(v => v.decision) && (
+              <CB51DraftResponseEmail 
+                gig={currentGig} 
+                votes={currentGig.band_votes || []}
+                artistName={currentGig.artist_name || 'Artist'}
+              />
+            )}
           </div>
 
           {/* ── YES / NO ── */}
