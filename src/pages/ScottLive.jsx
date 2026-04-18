@@ -12,7 +12,8 @@ import { motion } from 'framer-motion';
 export default function ScottLive() {
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
-    const artistId = urlParams.get('id');
+    const gigId = urlParams.get('gig');
+    const artistId = urlParams.get('id') || gigId;
 
     const sections = [
         {
