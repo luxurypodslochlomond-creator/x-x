@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Brain, BookOpen, Globe, Zap, Heart, Trophy, Sparkles, ArrowRight, Lock, CheckCircle } from 'lucide-react';
+import { Star, Brain, BookOpen, Globe, Zap, Heart, Trophy, Sparkles, ArrowRight, Lock, CheckCircle, Shield, Wifi, Radio, Ban, Infinity, HardDrive, GraduationCap, Home, Rocket } from 'lucide-react';
 
 // Gain-only star system — stars ONLY ever go up, stored locally, no account needed
 const STORAGE_KEY = 'learn51_stars';
@@ -21,56 +21,56 @@ const addStars = (n) => {
 };
 
 const AGE_GROUPS = [
-  { id: 'little', label: '⭐ Little Learners', ages: 'Ages 5 – 7', color: 'from-yellow-400 to-orange-400', border: 'border-orange-400', text: 'text-orange-900', bg: 'bg-orange-50', emoji: '🐣' },
-  { id: 'growing', label: '🚀 Growing Minds', ages: 'Ages 8 – 10', color: 'from-green-400 to-teal-500', border: 'border-teal-500', text: 'text-teal-900', bg: 'bg-teal-50', emoji: '🌱' },
-  { id: 'explorer', label: '🔭 Explorers', ages: 'Ages 11 – 13', color: 'from-blue-500 to-indigo-600', border: 'border-indigo-500', text: 'text-indigo-900', bg: 'bg-indigo-50', emoji: '🌍' },
-  { id: 'creator', label: '⚡ Creators', ages: 'Ages 14+', color: 'from-purple-500 to-pink-600', border: 'border-purple-500', text: 'text-purple-900', bg: 'bg-purple-50', emoji: '🎨' },
+  { id: 'little', label: 'Little Learners', ages: 'Ages 5 – 7', color: 'from-yellow-400 to-orange-400', border: 'border-orange-400', text: 'text-orange-900', bg: 'bg-orange-50', Icon: Star },
+  { id: 'growing', label: 'Growing Minds', ages: 'Ages 8 – 10', color: 'from-green-400 to-teal-500', border: 'border-teal-500', text: 'text-teal-900', bg: 'bg-teal-50', Icon: Sparkles },
+  { id: 'explorer', label: 'Explorers', ages: 'Ages 11 – 13', color: 'from-blue-500 to-indigo-600', border: 'border-indigo-500', text: 'text-indigo-900', bg: 'bg-indigo-50', Icon: Globe },
+  { id: 'creator', label: 'Creators', ages: 'Ages 14+', color: 'from-purple-500 to-pink-600', border: 'border-purple-500', text: 'text-purple-900', bg: 'bg-purple-50', Icon: Zap },
 ];
 
 // Subjects per age group — unlocks as stars grow
 const SUBJECTS = {
   little: [
-    { id: 'phonics', title: 'Magic Letters', desc: 'Learn sounds & letters through play', icon: '🔤', link: '/Literacy51', stars: 0, color: 'bg-yellow-100 border-yellow-500' },
-    { id: 'counting', title: 'Magic Maths', desc: 'Numbers, shapes & patterns', icon: '🔢', link: '/GeorgieMaths', stars: 0, color: 'bg-orange-100 border-orange-500' },
-    { id: 'nature', title: 'Nature Explorers', desc: 'Animals, plants & our planet', icon: '🌿', link: '/YoungWarriors', stars: 5, color: 'bg-green-100 border-green-500' },
-    { id: 'drawing', title: 'Create & Draw', desc: 'Colours, shapes & stories', icon: '🎨', link: '/GenerateLogo', stars: 10, color: 'bg-pink-100 border-pink-500' },
+    { id: 'phonics', title: 'Magic Letters', desc: 'Learn sounds & letters through play', Icon: BookOpen, link: '/Literacy51', stars: 0, color: 'bg-yellow-100 border-yellow-500', iconColor: 'text-yellow-700' },
+    { id: 'counting', title: 'Magic Maths', desc: 'Numbers, shapes & patterns', Icon: Brain, link: '/GeorgieMaths', stars: 0, color: 'bg-orange-100 border-orange-500', iconColor: 'text-orange-700' },
+    { id: 'nature', title: 'Nature Explorers', desc: 'Animals, plants & our planet', Icon: Globe, link: '/YoungWarriors', stars: 5, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
+    { id: 'drawing', title: 'Create & Draw', desc: 'Colours, shapes & stories', Icon: Sparkles, link: '/GenerateLogo', stars: 10, color: 'bg-pink-100 border-pink-500', iconColor: 'text-pink-700' },
   ],
   growing: [
-    { id: 'literacy', title: 'Word Power', desc: 'Phonics, spelling & sentences', icon: '📖', link: '/Literacy51', stars: 0, color: 'bg-teal-100 border-teal-500' },
-    { id: 'maths', title: 'Maths Adventures', desc: 'Rounding, decimals & more', icon: '🧮', link: '/LennoxMaths', stars: 0, color: 'bg-green-100 border-green-500' },
-    { id: 'planet', title: 'Planet Protectors', desc: 'Ecosystems, litter & climate', icon: '🌍', link: '/YoungWarriors', stars: 5, color: 'bg-blue-100 border-blue-500' },
-    { id: 'science', title: 'Sound Science', desc: 'Frequencies, vibrations & healing', icon: '🎵', link: '/FrequencyChamber', stars: 15, color: 'bg-purple-100 border-purple-500' },
+    { id: 'literacy', title: 'Word Power', desc: 'Phonics, spelling & sentences', Icon: BookOpen, link: '/Literacy51', stars: 0, color: 'bg-teal-100 border-teal-500', iconColor: 'text-teal-700' },
+    { id: 'maths', title: 'Maths Adventures', desc: 'Rounding, decimals & more', Icon: Brain, link: '/LennoxMaths', stars: 0, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
+    { id: 'planet', title: 'Planet Protectors', desc: 'Ecosystems, litter & climate', Icon: Globe, link: '/YoungWarriors', stars: 5, color: 'bg-blue-100 border-blue-500', iconColor: 'text-blue-700' },
+    { id: 'science', title: 'Sound Science', desc: 'Frequencies, vibrations & healing', Icon: Radio, link: '/FrequencyChamber', stars: 15, color: 'bg-purple-100 border-purple-500', iconColor: 'text-purple-700' },
   ],
   explorer: [
-    { id: 'literacy2', title: 'Creative Writing', desc: 'Stories, essays & self-expression', icon: '✍️', link: '/Literacy51', stars: 0, color: 'bg-indigo-100 border-indigo-500' },
-    { id: 'deepmaths', title: 'Deep Maths', desc: 'Algebra, geometry & decimals', icon: '📐', link: '/LennoxMaths', stars: 0, color: 'bg-blue-100 border-blue-500' },
-    { id: 'earth', title: 'Earth Science', desc: 'Physics of our planet', icon: '⚡', link: '/ThePhysics', stars: 10, color: 'bg-green-100 border-green-500' },
-    { id: 'impact', title: 'Real Impact', desc: 'Submit a litter pick, earn tokens', icon: '🏆', link: '/NewCleanup', stars: 20, color: 'bg-amber-100 border-amber-500' },
+    { id: 'literacy2', title: 'Creative Writing', desc: 'Stories, essays & self-expression', Icon: BookOpen, link: '/Literacy51', stars: 0, color: 'bg-indigo-100 border-indigo-500', iconColor: 'text-indigo-700' },
+    { id: 'deepmaths', title: 'Deep Maths', desc: 'Algebra, geometry & decimals', Icon: Brain, link: '/LennoxMaths', stars: 0, color: 'bg-blue-100 border-blue-500', iconColor: 'text-blue-700' },
+    { id: 'earth', title: 'Earth Science', desc: 'Physics of our planet', Icon: Zap, link: '/ThePhysics', stars: 10, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
+    { id: 'impact', title: 'Real Impact', desc: 'Submit a litter pick, earn tokens', Icon: Trophy, link: '/NewCleanup', stars: 20, color: 'bg-amber-100 border-amber-500', iconColor: 'text-amber-700' },
   ],
   creator: [
-    { id: 'writing', title: 'Writer\'s Studio', desc: 'Advanced writing & storytelling', icon: '📝', link: '/Literacy51', stars: 0, color: 'bg-purple-100 border-purple-500' },
-    { id: 'physics', title: 'Physics & Frequencies', desc: 'Sound, healing & science', icon: '🔬', link: '/ThePhysics', stars: 0, color: 'bg-pink-100 border-pink-500' },
-    { id: 'planet2', title: 'Climate Action', desc: 'Real missions, real change', icon: '🌱', link: '/Missions', stars: 10, color: 'bg-green-100 border-green-500' },
-    { id: 'build', title: 'Build Things', desc: 'Create music, logos & more with AI', icon: '🚀', link: '/LearnGuitar', stars: 25, color: 'bg-indigo-100 border-indigo-500' },
+    { id: 'writing', title: 'Writer\'s Studio', desc: 'Advanced writing & storytelling', Icon: BookOpen, link: '/Literacy51', stars: 0, color: 'bg-purple-100 border-purple-500', iconColor: 'text-purple-700' },
+    { id: 'physics', title: 'Physics & Frequencies', desc: 'Sound, healing & science', Icon: Radio, link: '/ThePhysics', stars: 0, color: 'bg-pink-100 border-pink-500', iconColor: 'text-pink-700' },
+    { id: 'planet2', title: 'Climate Action', desc: 'Real missions, real change', Icon: Globe, link: '/Missions', stars: 10, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
+    { id: 'build', title: 'Build Things', desc: 'Create music, logos & more with AI', Icon: Rocket, link: '/LearnGuitar', stars: 25, color: 'bg-indigo-100 border-indigo-500', iconColor: 'text-indigo-700' },
   ],
   // Real life skills — available to all age groups via the dedicated section below
   life: [
-    { id: 'money', title: 'Money & Budgeting', desc: 'How money actually works, budgets, debt & saving', icon: '💰', link: '/LifeSkills51', stars: 0, color: 'bg-yellow-100 border-yellow-500' },
-    { id: 'cooking', title: 'Cooking & Food', desc: 'Simple healthy meals, nutrition & not wasting food', icon: '🍳', link: '/LifeSkills51', stars: 0, color: 'bg-orange-100 border-orange-500' },
-    { id: 'mental', title: 'Mental Health', desc: 'Emotions, anxiety, breathing & being kind to yourself', icon: '🧠', link: '/LifeSkills51', stars: 0, color: 'bg-pink-100 border-pink-500' },
-    { id: 'relationships', title: 'Relationships', desc: 'Friendships, family, boundaries & respect', icon: '❤️', link: '/LifeSkills51', stars: 0, color: 'bg-red-100 border-red-500' },
-    { id: 'work', title: 'Work & Purpose', desc: 'Finding what you love, CVs, interviews & rights at work', icon: '🎯', link: '/LifeSkills51', stars: 0, color: 'bg-indigo-100 border-indigo-500' },
-    { id: 'rights', title: 'Your Rights', desc: 'Know your legal rights, housing, benefits & contracts', icon: '⚖️', link: '/LifeSkills51', stars: 0, color: 'bg-teal-100 border-teal-500' },
+    { id: 'money', title: 'Money & Budgeting', desc: 'How money actually works, budgets, debt & saving', Icon: Zap, link: '/LifeSkills51', stars: 0, color: 'bg-yellow-100 border-yellow-500', iconColor: 'text-yellow-700' },
+    { id: 'cooking', title: 'Cooking & Food', desc: 'Simple healthy meals, nutrition & not wasting food', Icon: Heart, link: '/LifeSkills51', stars: 0, color: 'bg-orange-100 border-orange-500', iconColor: 'text-orange-700' },
+    { id: 'mental', title: 'Mental Health', desc: 'Emotions, anxiety, breathing & being kind to yourself', Icon: Brain, link: '/LifeSkills51', stars: 0, color: 'bg-pink-100 border-pink-500', iconColor: 'text-pink-700' },
+    { id: 'relationships', title: 'Relationships', desc: 'Friendships, family, boundaries & respect', Icon: Heart, link: '/LifeSkills51', stars: 0, color: 'bg-red-100 border-red-500', iconColor: 'text-red-700' },
+    { id: 'work', title: 'Work & Purpose', desc: 'Finding what you love, CVs, interviews & rights at work', Icon: Trophy, link: '/LifeSkills51', stars: 0, color: 'bg-indigo-100 border-indigo-500', iconColor: 'text-indigo-700' },
+    { id: 'rights', title: 'Your Rights', desc: 'Know your legal rights, housing, benefits & contracts', Icon: Shield, link: '/LifeSkills51', stars: 0, color: 'bg-teal-100 border-teal-500', iconColor: 'text-teal-700' },
   ],
 };
 
 // Unlockable creative rewards — stars only go up, never down
 const UNLOCKS = [
-  { stars: 5, title: 'Star Collector 🌟', desc: 'You\'re on your way!', emoji: '🌟' },
-  { stars: 15, title: 'Planet Guardian 🌍', desc: 'You\'re making a difference', emoji: '🌍' },
-  { stars: 30, title: 'Frequency Explorer 🎵', desc: 'You understand how things connect', emoji: '🎵' },
-  { stars: 50, title: 'Earth Champion 🏆', desc: 'The planet knows your name', emoji: '🏆' },
-  { stars: 100, title: 'Universal Learner ♾️', desc: 'You belong to the whole world', emoji: '♾️' },
+  { stars: 5, title: 'Star Collector', desc: 'You\'re on your way!', Icon: Star },
+  { stars: 15, title: 'Planet Guardian', desc: 'You\'re making a difference', Icon: Globe },
+  { stars: 30, title: 'Frequency Explorer', desc: 'You understand how things connect', Icon: Radio },
+  { stars: 50, title: 'Earth Champion', desc: 'The planet knows your name', Icon: Trophy },
+  { stars: 100, title: 'Universal Learner', desc: 'You belong to the whole world', Icon: Infinity },
 ];
 
 export default function Learn51Page() {
@@ -128,7 +128,7 @@ export default function Learn51Page() {
               className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl"
               onClick={e => e.stopPropagation()}
             >
-              <div className="text-7xl mb-4">{justUnlocked.emoji}</div>
+              <Trophy className="w-16 h-16 mx-auto mb-4 text-yellow-400" />
               <h2 className="text-3xl font-black text-indigo-900 mb-2">You unlocked it! 🎉</h2>
               <p className="text-2xl font-bold text-indigo-700 mb-1">{justUnlocked.title}</p>
               <p className="text-gray-600 mb-6">{justUnlocked.desc}</p>
@@ -146,7 +146,7 @@ export default function Learn51Page() {
       {/* HEADER */}
       <div className="bg-gradient-to-r from-indigo-700 via-blue-700 to-purple-700 text-white px-4 py-10 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <div className="text-6xl mb-3">🌍</div>
+          <GraduationCap className="w-16 h-16 mx-auto mb-3 text-yellow-300" />
           <h1 className="text-4xl md:text-6xl font-black mb-2">Learn51</h1>
           <p className="text-xl md:text-2xl text-blue-100 font-bold mb-2">Free learning for every child on Earth</p>
           <p className="text-blue-200 text-base">No login. No data. No cost. Ever.</p>
@@ -190,8 +190,8 @@ export default function Learn51Page() {
                     : `bg-white ${group.border} text-gray-800 hover:shadow-md`
                 }`}
               >
-                <div className="text-3xl mb-1">{group.emoji}</div>
-                <div className="font-black text-sm leading-tight">{group.label.replace(/^[^ ]+ /, '')}</div>
+                <group.Icon className={`w-8 h-8 mx-auto mb-1 ${ageGroup === group.id ? 'text-white' : 'text-gray-600'}`} />
+                <div className="font-black text-sm leading-tight">{group.label}</div>
                 <div className={`text-xs mt-1 ${ageGroup === group.id ? 'text-white/80' : 'text-gray-500'}`}>{group.ages}</div>
               </motion.button>
             ))}
@@ -213,7 +213,7 @@ export default function Learn51Page() {
                     {locked ? (
                       <div className={`rounded-2xl border-2 p-5 ${subject.color} opacity-60 relative`}>
                         <div className="flex items-start gap-4">
-                          <div className="text-4xl">{subject.icon}</div>
+                          <subject.Icon className={`w-9 h-9 flex-shrink-0 mt-1 opacity-50 ${subject.iconColor}`} />
                           <div className="flex-1">
                             <h3 className="text-xl font-black text-gray-700">{subject.title}</h3>
                             <p className="text-gray-500 text-sm mt-1">{subject.desc}</p>
@@ -228,7 +228,7 @@ export default function Learn51Page() {
                       <Link to={subject.link}>
                         <div className={`rounded-2xl border-2 p-5 ${subject.color} hover:shadow-lg transition-all`}>
                           <div className="flex items-start gap-4">
-                            <div className="text-4xl">{subject.icon}</div>
+                            <subject.Icon className={`w-9 h-9 flex-shrink-0 mt-1 ${subject.iconColor}`} />
                             <div className="flex-1">
                               <h3 className="text-xl font-black text-gray-800">{subject.title}</h3>
                               <p className="text-gray-600 text-sm mt-1">{subject.desc}</p>
@@ -252,11 +252,11 @@ export default function Learn51Page() {
         {/* EARNED BADGES */}
         {earnedUnlocks.length > 0 && (
           <div>
-            <h2 className="text-2xl font-black text-gray-800 mb-4">🏆 Your Achievements</h2>
+            <h2 className="text-2xl font-black text-gray-800 mb-4 flex items-center gap-2"><Trophy className="w-6 h-6 text-yellow-500" /> Your Achievements</h2>
             <div className="flex flex-wrap gap-3">
               {earnedUnlocks.map(u => (
                 <div key={u.stars} className="flex items-center gap-2 bg-white border-2 border-indigo-400 rounded-xl px-4 py-2 shadow-sm">
-                  <span className="text-2xl">{u.emoji}</span>
+                  <u.Icon className="w-6 h-6 text-indigo-500" />
                   <div>
                     <p className="font-black text-indigo-900 text-sm">{u.title}</p>
                     <p className="text-gray-500 text-xs">{u.desc}</p>
@@ -270,7 +270,7 @@ export default function Learn51Page() {
         {/* HOW STARS WORK */}
         <div className="bg-white border-2 border-indigo-300 rounded-2xl p-6">
           <h2 className="text-xl font-black text-indigo-900 mb-3 flex items-center gap-2">
-            <Sparkles className="w-6 h-6 text-yellow-500" /> How Stars Work
+            <Star className="w-6 h-6 text-yellow-500 fill-yellow-400" /> How Stars Work
           </h2>
           <ul className="space-y-2 text-gray-700">
             <li className="flex gap-2 items-start"><CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" /><span><strong>Stars only ever go UP.</strong> You can never lose them.</span></li>
@@ -283,7 +283,7 @@ export default function Learn51Page() {
 
         {/* THE MISSION */}
         <div className="bg-gradient-to-r from-indigo-700 to-purple-700 text-white rounded-2xl p-6 text-center">
-          <div className="text-4xl mb-3">♾️</div>
+          <Globe className="w-12 h-12 mx-auto mb-3 text-blue-200" />
           <h2 className="text-2xl font-black mb-2">273 million children out of school.</h2>
           <p className="text-blue-100 text-lg leading-relaxed">
             We're building for every single one of them. No child left behind.<br/>
@@ -298,7 +298,7 @@ export default function Learn51Page() {
         {/* REAL LIFE SKILLS SECTION */}
         <div>
           <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl p-5 mb-4 text-center">
-            <div className="text-4xl mb-2">🌟</div>
+            <Sparkles className="w-10 h-10 mx-auto mb-2 text-yellow-100" />
             <h2 className="text-2xl font-black mb-1">Real Life Skills</h2>
             <p className="text-amber-100 text-base">The stuff school often forgets to teach — but you actually need</p>
           </div>
@@ -308,7 +308,7 @@ export default function Learn51Page() {
                 <Link to={subject.link}>
                   <div className={`rounded-2xl border-2 p-5 ${subject.color} hover:shadow-lg transition-all`}>
                     <div className="flex items-start gap-4">
-                      <div className="text-4xl">{subject.icon}</div>
+                      <subject.Icon className={`w-9 h-9 flex-shrink-0 mt-1 ${subject.iconColor}`} />
                       <div className="flex-1">
                         <h3 className="text-xl font-black text-gray-800">{subject.title}</h3>
                         <p className="text-gray-600 text-sm mt-1">{subject.desc}</p>
@@ -327,7 +327,7 @@ export default function Learn51Page() {
 
         {/* HOME EDUCATION NOTE */}
         <div className="bg-white border-2 border-green-400 rounded-2xl p-6 text-center">
-          <div className="text-3xl mb-2">🏡</div>
+          <Home className="w-10 h-10 mx-auto mb-2 text-green-600" />
           <h3 className="text-xl font-black text-green-900 mb-2">Built for home education too</h3>
           <p className="text-gray-600 text-base leading-relaxed">
             Learn51 is designed so any family, anywhere in the world, can use it as a complete free learning companion —
@@ -339,21 +339,21 @@ export default function Learn51Page() {
         {/* WHY LEARN51 — TRUST & VISION */}
         <div className="bg-gray-900 text-white rounded-2xl p-6 space-y-5">
           <div className="text-center">
-            <div className="text-4xl mb-2">🔒</div>
+            <Shield className="w-10 h-10 mx-auto mb-2 text-cyan-400" />
             <h2 className="text-2xl font-black mb-1">Why Learn51 is different</h2>
             <p className="text-gray-400 text-sm">This is our promise. Not marketing. Actual commitments.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
-              { icon: '🔒', title: 'Your data stays on your device', body: 'No servers store what your child learns, how long they spend, or what they struggle with. Stars and progress live on the device only. We cannot see it. Nobody can.' },
-              { icon: '🌍', title: 'Any device. Anywhere on Earth.', body: 'Works on a 5-year-old phone, a slow connection, a TV browser, an old laptop. We test on low-end hardware deliberately. No child gets left out because of their device.' },
-              { icon: '🧠', title: 'AI that teaches, not tracks', body: 'We use advanced AI to make learning better — clearer explanations, adapted to how you learn. Not to build a profile, sell your attention, or make you dependent.' },
-              { icon: '📵', title: 'No dark patterns. Ever.', body: 'No push notifications. No streaks that punish you for missing a day. No leaderboards making you feel behind. No FOMO. Just learning, at your pace, on your terms.' },
-              { icon: '♾️', title: 'Free. Genuinely free.', body: 'Not free-then-paid. Not free-unless-you-want-the-good-bit. The education tools are free permanently. We fund this through other products in the ecosystem, not through children.' },
-              { icon: '🏗️', title: 'Built to last without us', body: 'Learn51 is being built so that if UF51 disappeared tomorrow, the tools could run offline indefinitely. No single point of failure. No dependency on our servers being up.' },
-            ].map(({ icon, title, body }) => (
+              { Icon: Lock, color: 'text-cyan-400', title: 'Your data stays on your device', body: 'No servers store what your child learns, how long they spend, or what they struggle with. Stars and progress live on the device only. We cannot see it. Nobody can.' },
+              { Icon: Globe, color: 'text-blue-400', title: 'Any device. Anywhere on Earth.', body: 'Works on a 5-year-old phone, a slow connection, a TV browser, an old laptop. We test on low-end hardware deliberately. No child gets left out because of their device.' },
+              { Icon: Brain, color: 'text-pink-400', title: 'AI that teaches, not tracks', body: 'We use advanced AI to make learning better — clearer explanations, adapted to how you learn. Not to build a profile, sell your attention, or make you dependent.' },
+              { Icon: Ban, color: 'text-red-400', title: 'No dark patterns. Ever.', body: 'No push notifications. No streaks that punish you for missing a day. No leaderboards making you feel behind. No FOMO. Just learning, at your pace, on your terms.' },
+              { Icon: Heart, color: 'text-green-400', title: 'Free. Genuinely free.', body: 'Not free-then-paid. Not free-unless-you-want-the-good-bit. The education tools are free permanently. We fund this through other products in the ecosystem, not through children.' },
+              { Icon: HardDrive, color: 'text-amber-400', title: 'Built to last without us', body: 'Learn51 is being built so that if UF51 disappeared tomorrow, the tools could run offline indefinitely. No single point of failure. No dependency on our servers being up.' },
+            ].map(({ Icon, color, title, body }) => (
               <div key={title} className="bg-white/5 border border-white/10 rounded-xl p-4">
-                <div className="text-2xl mb-2">{icon}</div>
+                <Icon className={`w-7 h-7 mb-2 ${color}`} />
                 <h3 className="font-black text-white text-base mb-1">{title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{body}</p>
               </div>
@@ -363,7 +363,7 @@ export default function Learn51Page() {
 
         {/* VISION — THE BIG ONE */}
         <div className="bg-gradient-to-br from-indigo-900 to-purple-900 text-white rounded-2xl p-8 text-center space-y-4">
-          <div className="text-5xl">🚀</div>
+          <Rocket className="w-14 h-14 mx-auto text-indigo-300" />
           <h2 className="text-3xl font-black">Education is a right. Not a product.</h2>
           <p className="text-indigo-200 text-lg leading-relaxed max-w-2xl mx-auto">
             The best education in the world has always been locked behind money. Private tutors. Elite schools. Expensive platforms.
