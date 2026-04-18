@@ -336,6 +336,49 @@ export default function Learn51Page() {
           </p>
         </div>
 
+        {/* WHY LEARN51 — TRUST & VISION */}
+        <div className="bg-gray-900 text-white rounded-2xl p-6 space-y-5">
+          <div className="text-center">
+            <div className="text-4xl mb-2">🔒</div>
+            <h2 className="text-2xl font-black mb-1">Why Learn51 is different</h2>
+            <p className="text-gray-400 text-sm">This is our promise. Not marketing. Actual commitments.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { icon: '🔒', title: 'Your data stays on your device', body: 'No servers store what your child learns, how long they spend, or what they struggle with. Stars and progress live on the device only. We cannot see it. Nobody can.' },
+              { icon: '🌍', title: 'Any device. Anywhere on Earth.', body: 'Works on a 5-year-old phone, a slow connection, a TV browser, an old laptop. We test on low-end hardware deliberately. No child gets left out because of their device.' },
+              { icon: '🧠', title: 'AI that teaches, not tracks', body: 'We use advanced AI to make learning better — clearer explanations, adapted to how you learn. Not to build a profile, sell your attention, or make you dependent.' },
+              { icon: '📵', title: 'No dark patterns. Ever.', body: 'No push notifications. No streaks that punish you for missing a day. No leaderboards making you feel behind. No FOMO. Just learning, at your pace, on your terms.' },
+              { icon: '♾️', title: 'Free. Genuinely free.', body: 'Not free-then-paid. Not free-unless-you-want-the-good-bit. The education tools are free permanently. We fund this through other products in the ecosystem, not through children.' },
+              { icon: '🏗️', title: 'Built to last without us', body: 'Learn51 is being built so that if UF51 disappeared tomorrow, the tools could run offline indefinitely. No single point of failure. No dependency on our servers being up.' },
+            ].map(({ icon, title, body }) => (
+              <div key={title} className="bg-white/5 border border-white/10 rounded-xl p-4">
+                <div className="text-2xl mb-2">{icon}</div>
+                <h3 className="font-black text-white text-base mb-1">{title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* VISION — THE BIG ONE */}
+        <div className="bg-gradient-to-br from-indigo-900 to-purple-900 text-white rounded-2xl p-8 text-center space-y-4">
+          <div className="text-5xl">🚀</div>
+          <h2 className="text-3xl font-black">Education is a right. Not a product.</h2>
+          <p className="text-indigo-200 text-lg leading-relaxed max-w-2xl mx-auto">
+            The best education in the world has always been locked behind money. Private tutors. Elite schools. Expensive platforms.
+          </p>
+          <p className="text-indigo-100 text-lg leading-relaxed max-w-2xl mx-auto font-bold">
+            AI changes that. For the first time in history, we can deliver genuinely world-class, personalised education to every child on Earth — for free, in any language, on any device, with full privacy.
+          </p>
+          <p className="text-indigo-200 text-base leading-relaxed max-w-2xl mx-auto">
+            That's what we're building. Not a school. Not an app. A right — made real.
+          </p>
+          <div className="pt-2">
+            <p className="text-indigo-300 text-sm">273 million children out of school. We're building for every single one. ♾️❤️</p>
+          </div>
+        </div>
+
       </div>
     </div>
   );
