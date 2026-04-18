@@ -102,15 +102,22 @@ Respond ONLY with this JSON:
 }
 `;
 
+// ── localStorage helpers — no login, no server, 100% private ──
+const LS_KEY = 'learn51ai_progress';
+const loadProgress = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch { return null; } };
+const saveProgress = (data) => { try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {} };
+
 export default function Learn51AIPage() {
-  const [stage, setStage] = useState('intro'); // intro | topic | learning | result
-  const [interest, setInterest] = useState(null);
-  const [age, setAge] = useState(null);
+  const saved = loadProgress();
+
+  const [stage, setStage] = useState('intro');
+  const [interest, setInterest] = useState(saved?.interest || null);
+  const [age, setAge] = useState(saved?.age || null);
   const [topic, setTopic] = useState(null);
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(saved?.level || 1);
   const [questionCount, setQuestionCount] = useState(0);
   const [score, setScore] = useState(0);
-  const [stars, setStars] = useState(0);
+  const [stars, setStars] = useState(saved?.stars || 0);
 
   const [lessonData, setLessonData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -123,6 +130,12 @@ export default function Learn51AIPage() {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const inputRef = useRef(null);
+
+  // Persist progress to localStorage whenever key values change
+  const persistProgress = useCallback((updates) => {
+    const current = loadProgress() || {};
+    saveProgress({ ...current, ...updates });
+  }, []);
 
   const readLesson = useCallback((data) => {
     if (!data) return;
@@ -206,13 +219,14 @@ export default function Learn51AIPage() {
 
     if (result.correct) {
       const newStreak = streak + 1;
+      const newStars = stars + 1;
+      const newLevel = (newScore > 0 && newScore % 3 === 0) ? Math.min(level + 1, 5) : level;
       setStreak(newStreak);
-      setStars(s => s + 1);
+      setStars(newStars);
       setShowReward(true);
-      // Level up every 3 correct answers
-      if (newScore > 0 && newScore % 3 === 0) {
-        setLevel(l => Math.min(l + 1, 5));
-      }
+      if (newLevel !== level) setLevel(newLevel);
+      // Save to localStorage — private, device-only
+      persistProgress({ stars: newStars, level: newLevel, interest, age });
     } else {
       setStreak(0);
     }
@@ -234,6 +248,12 @@ export default function Learn51AIPage() {
     setHistory([]);
     setLessonData(null);
     setAssessment(null);
+    // Keep stars/level in localStorage but clear session
+  };
+
+  const fullReset = () => {
+    reset();
+    try { localStorage.removeItem(LS_KEY); } catch {}
   };
 
   // ── INTRO STAGE ──
@@ -252,6 +272,20 @@ export default function Learn51AIPage() {
             <p className="text-xl text-indigo-700 font-bold">Learning made just for YOU</p>
             <p className="text-gray-500 text-base">No login · No data · Free forever · Powered by AI</p>
           </motion.div>
+
+          {/* WELCOME BACK BANNER */}
+          {saved && saved.stars > 0 && (
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">🌟</span>
+                <div>
+                  <p className="font-black text-amber-800">Welcome back! You have {saved.stars} ⭐ stars</p>
+                  <p className="text-amber-600 text-sm">Level {saved.level} · Your progress is saved on this device</p>
+                </div>
+              </div>
+              <button onClick={fullReset} className="text-xs text-gray-400 hover:text-gray-600 font-bold underline flex-shrink-0">Start fresh</button>
+            </motion.div>
+          )}
 
           {/* STEP 1: What do you love? */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
@@ -547,12 +581,4 @@ export default function Learn51AIPage() {
   }
 
   return null;
-}
-
-// Re-export with reward modal wired in — patch the learning stage
-// The reward modal is rendered at the top level of the learning stage
-// We add it just before the closing div of the learning stage
-
-function Learn51AIWithReward() {
-  return <Learn51AIPage />;
 }
