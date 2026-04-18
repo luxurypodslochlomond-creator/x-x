@@ -125,15 +125,26 @@ export default function Literacy51Page() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 via-indigo-50 to-blue-50 text-gray-900 p-4 md:p-8 pb-32">
+        <div className="min-h-screen bg-[#05080f] text-white p-4 md:p-8 pb-32">
             <div className="max-w-3xl mx-auto space-y-6">
 
                 {/* HEADER */}
+                {/* BACK */}
+                <a href="/Learn51" className="inline-flex items-center gap-2 text-emerald-400 font-bold hover:text-emerald-300 transition-colors text-lg">
+                    📚 ← Back to Learn51 Hub
+                </a>
+
+                {/* DYSLEXIA/ADHD NOTICE */}
+                <div className="bg-emerald-900/30 border border-emerald-500/40 rounded-2xl px-5 py-3 flex items-center gap-3">
+                    <span className="text-2xl">🧠</span>
+                    <p className="text-emerald-300 text-sm font-bold">Big text · clear colours · no time pressure · take your time · you are brilliant</p>
+                </div>
+
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3">
-                    <BookOpen className="w-14 h-14 text-indigo-700 mx-auto" />
-                    <h1 className="text-4xl md:text-5xl font-black text-indigo-900">Literacy 51 ✨</h1>
-                    <p className="text-xl text-indigo-700 font-bold">Phonics · Spelling · Sentences — for every learner 💙</p>
-                    <div className="text-2xl font-black text-amber-700">⭐ Score: {score}</div>
+                    <BookOpen className="w-14 h-14 text-emerald-400 mx-auto" />
+                    <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">📖 Literacy 51</h1>
+                    <p className="text-xl text-emerald-300 font-bold">Phonics · Spelling · Sentences — for every learner 💙</p>
+                    <div className="text-2xl font-black text-yellow-400">⭐ Score: {score}</div>
                 </motion.div>
 
                 {/* TABS */}
@@ -144,8 +155,8 @@ export default function Literacy51Page() {
                             onClick={() => setActiveTab(tab.id)}
                             className={`px-5 py-3 rounded-xl font-black text-base transition-all border-2 ${
                                 activeTab === tab.id
-                                    ? 'bg-indigo-700 text-white border-indigo-700'
-                                    : 'bg-white text-indigo-700 border-indigo-300 hover:border-indigo-600'
+                                    ? 'bg-emerald-600 text-white border-emerald-500'
+                                    : 'bg-white/5 text-emerald-300 border-emerald-700/50 hover:border-emerald-500'
                             }`}
                         >
                             {tab.label}
@@ -159,28 +170,28 @@ export default function Literacy51Page() {
                 {activeTab === 'phonics' && (
                     <motion.div key="phonics" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
 
-                        <Card className="bg-white border-2 border-indigo-400">
+                        <Card className="bg-indigo-950/50 border-2 border-indigo-400">
                             <CardContent className="p-6 space-y-6">
-                                <h2 className="text-2xl font-black text-indigo-800 flex items-center gap-2">
+                                <h2 className="text-2xl font-black text-indigo-300 flex items-center gap-2">
                                     <Mic className="w-7 h-7" /> Spot the Sound Pattern
                                 </h2>
 
-                                <div className="bg-indigo-50 border-2 border-indigo-300 rounded-xl p-6 text-center">
+                                <div className="bg-indigo-900/40 border-2 border-indigo-400 rounded-xl p-6 text-center">
                                     <p className="text-7xl mb-3">{currentWord.emoji}</p>
-                                    <p className="text-5xl font-black text-indigo-900 tracking-widest">{currentWord.word}</p>
-                                    <p className="text-gray-600 mt-2 text-base">What two or three letters make the special sound?</p>
+                                    <p className="text-5xl font-black text-white tracking-widest">{currentWord.word}</p>
+                                    <p className="text-gray-400 mt-2 text-base">What two or three letters make the special sound?</p>
                                 </div>
 
                                 {!showPhonics ? (
                                     <button
                                         onClick={() => setShowPhonics(true)}
-                                        className="w-full py-3 rounded-xl border-2 border-amber-500 bg-amber-50 text-amber-800 font-bold text-base hover:bg-amber-100 transition-all"
+                                        className="w-full py-3 rounded-xl border-2 border-amber-500 bg-amber-900/30 text-amber-300 font-bold text-base hover:bg-amber-900/50 transition-all"
                                     >
                                         💡 Show me a hint
                                     </button>
                                 ) : (
-                                    <div className="bg-amber-50 border-2 border-amber-400 rounded-xl p-4">
-                                        <p className="text-amber-800 font-bold">{currentWord.hint}</p>
+                                    <div className="bg-amber-900/40 border-2 border-amber-500 rounded-xl p-4">
+                                        <p className="text-amber-200 font-bold text-lg">{currentWord.hint}</p>
                                     </div>
                                 )}
 
@@ -193,12 +204,12 @@ export default function Literacy51Page() {
                                             onKeyDown={e => e.key === 'Enter' && phonicsInput && checkPhonics()}
                                             placeholder="Type the sound pattern..."
                                             maxLength={4}
-                                            className="w-full bg-white border-2 border-indigo-400 text-gray-900 text-2xl h-14 text-center font-black rounded-xl outline-none focus:border-indigo-700 transition-all"
+                                            className="w-full bg-white/10 border-2 border-indigo-400 text-white text-2xl h-14 text-center font-black rounded-xl outline-none focus:border-indigo-300 transition-all"
                                         />
                                         <Button
                                             onClick={checkPhonics}
                                             disabled={!phonicsInput}
-                                            className="w-full bg-indigo-700 hover:bg-indigo-800 text-white text-xl h-12 font-black"
+                                            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xl h-12 font-black"
                                         >
                                             Check ✓
                                         </Button>
@@ -207,15 +218,15 @@ export default function Literacy51Page() {
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        className={`p-5 rounded-xl border-2 ${phonicsResult ? 'bg-green-50 border-green-700' : 'bg-red-50 border-red-600'}`}
+                                        className={`p-5 rounded-xl border-2 ${phonicsResult ? 'bg-green-900/40 border-green-500' : 'bg-red-900/40 border-red-500'}`}
                                     >
                                         <div className="flex items-center gap-3 mb-3">
                                             {phonicsResult
-                                                ? <><Check className="w-10 h-10 text-green-700" /><p className="text-2xl font-black text-gray-900">Yes! 🎉 The pattern is <span className="text-green-700">"{currentWord.phoneme}"</span></p></>
-                                                : <><X className="w-10 h-10 text-red-700" /><p className="text-2xl font-black text-gray-900">The pattern is <span className="text-green-700">"{currentWord.phoneme}"</span></p></>
+                                                ? <><Check className="w-10 h-10 text-green-400" /><p className="text-2xl font-black text-white">Yes! 🎉 The pattern is <span className="text-green-300">"{currentWord.phoneme}"</span></p></>
+                                                : <><X className="w-10 h-10 text-red-400" /><p className="text-2xl font-black text-white">The pattern is <span className="text-green-300">"{currentWord.phoneme}"</span></p></>
                                             }
                                         </div>
-                                        <Button onClick={nextPhonicsWord} className="bg-indigo-700 hover:bg-indigo-800 text-white w-full text-lg font-black">
+                                        <Button onClick={nextPhonicsWord} className="bg-indigo-600 hover:bg-indigo-700 text-white w-full text-lg font-black">
                                             Next Word <ArrowRight className="w-5 h-5 ml-2" />
                                         </Button>
                                     </motion.div>
@@ -224,12 +235,12 @@ export default function Literacy51Page() {
                         </Card>
 
                         {/* ALL PATTERNS REFERENCE */}
-                        <Card className="bg-white border-2 border-gray-300">
+                        <Card className="bg-white/5 border-2 border-white/10">
                             <CardContent className="p-5">
-                                <h3 className="text-lg font-black text-gray-700 mb-3">📚 Common Patterns to Know</h3>
+                                <h3 className="text-lg font-black text-gray-300 mb-3">📚 Common Patterns to Know</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {["igh = long I", "ou = OW", "ea = EE", "ph = F", "ch = CH", "sh = SH", "th = TH", "oo = OO"].map(p => (
-                                        <span key={p} className="px-3 py-1 bg-indigo-100 border border-indigo-400 rounded-lg text-indigo-800 font-bold text-sm">{p}</span>
+                                        <span key={p} className="px-3 py-1 bg-indigo-900/60 border border-indigo-400 rounded-lg text-indigo-300 font-bold text-sm">{p}</span>
                                     ))}
                                 </div>
                             </CardContent>
@@ -240,31 +251,31 @@ export default function Literacy51Page() {
                 {/* ── SPELLING TAB ── */}
                 {activeTab === 'spelling' && (
                     <motion.div key="spelling" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
-                        <Card className="bg-white border-2 border-amber-500">
+                        <Card className="bg-amber-950/40 border-2 border-amber-500">
                             <CardContent className="p-6 space-y-5">
-                                <h2 className="text-2xl font-black text-amber-800 flex items-center gap-2">
+                                <h2 className="text-2xl font-black text-amber-300 flex items-center gap-2">
                                     <Zap className="w-7 h-7" /> Spelling Rule {ruleIdx + 1} of {SPELLING_RULES.length}
                                 </h2>
 
-                                <div className="bg-amber-50 border-2 border-amber-400 rounded-xl p-5">
-                                    <p className="text-2xl font-black text-amber-900 mb-1">{currentRule.emoji} {currentRule.rule}</p>
-                                    <p className="text-amber-700 text-base">{currentRule.tip}</p>
+                                <div className="bg-amber-900/40 border-2 border-amber-500 rounded-xl p-5">
+                                    <p className="text-2xl font-black text-amber-200 mb-1">{currentRule.emoji} {currentRule.rule}</p>
+                                    <p className="text-amber-300 text-base">{currentRule.tip}</p>
                                 </div>
 
                                 <div>
-                                    <p className="font-black text-gray-800 mb-2 text-lg">Examples:</p>
+                                    <p className="font-black text-gray-300 mb-2 text-lg">Examples:</p>
                                     <div className="flex flex-wrap gap-2">
                                         {currentRule.examples.map((ex, i) => (
-                                            <span key={i} className="px-4 py-2 bg-green-100 border-2 border-green-600 rounded-lg text-green-800 font-bold">{ex}</span>
+                                            <span key={i} className="px-4 py-2 bg-green-900/60 border-2 border-green-500 rounded-lg text-green-300 font-bold">{ex}</span>
                                         ))}
                                     </div>
                                 </div>
 
                                 <div className="space-y-3">
-                                    <p className="font-black text-gray-800 text-lg">Now you try — add <span className="text-amber-700">-ing</span>{ruleIdx === 2 ? ' → -ies' : ''}:</p>
+                                    <p className="font-black text-gray-200 text-lg">Now you try — add <span className="text-amber-300">-ing</span>{ruleIdx === 2 ? ' → -ies' : ''}:</p>
                                     {currentRule.tryIt.map((word, i) => (
                                         <div key={i} className="flex items-center gap-3">
-                                            <span className="text-xl font-black text-gray-800 w-20 flex-shrink-0">{word} →</span>
+                                            <span className="text-xl font-black text-white w-20 flex-shrink-0">{word} →</span>
                                             <input
                                                 type="text"
                                                 value={spellingAnswers[i]}
@@ -278,15 +289,15 @@ export default function Literacy51Page() {
                                                 className={`flex-1 border-2 rounded-xl px-4 py-2 text-xl font-black text-center outline-none transition-all ${
                                                     spellingChecked
                                                         ? spellingResults[i]
-                                                            ? 'bg-green-50 border-green-700 text-green-800'
-                                                            : 'bg-red-50 border-red-600 text-red-800'
-                                                        : 'bg-white border-indigo-400 focus:border-indigo-700 text-gray-900'
+                                                            ? 'bg-green-900/40 border-green-500 text-green-300'
+                                                            : 'bg-red-900/40 border-red-500 text-red-300'
+                                                        : 'bg-white/10 border-indigo-400 focus:border-indigo-300 text-white'
                                                 }`}
                                             />
                                             {spellingChecked && (
                                                 spellingResults[i]
-                                                    ? <Check className="w-7 h-7 text-green-700 flex-shrink-0" />
-                                                    : <div className="flex-shrink-0 text-right"><X className="w-7 h-7 text-red-700" /><p className="text-sm font-bold text-green-700">{currentRule.answers[i]}</p></div>
+                                                    ? <Check className="w-7 h-7 text-green-400 flex-shrink-0" />
+                                                    : <div className="flex-shrink-0 text-right"><X className="w-7 h-7 text-red-400" /><p className="text-sm font-bold text-green-400">{currentRule.answers[i]}</p></div>
                                             )}
                                         </div>
                                     ))}
@@ -301,7 +312,7 @@ export default function Literacy51Page() {
                                         Check Spelling ✓
                                     </Button>
                                 ) : (
-                                    <Button onClick={nextRule} className="w-full bg-indigo-700 hover:bg-indigo-800 text-white text-xl h-12 font-black">
+                                    <Button onClick={nextRule} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xl h-12 font-black">
                                         Next Rule <ArrowRight className="w-5 h-5 ml-2" />
                                     </Button>
                                 )}
@@ -313,34 +324,34 @@ export default function Literacy51Page() {
                 {/* ── SENTENCES TAB ── */}
                 {activeTab === 'sentences' && (
                     <motion.div key="sentences" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
-                        <Card className="bg-white border-2 border-teal-600">
+                        <Card className="bg-teal-950/40 border-2 border-teal-500">
                             <CardContent className="p-6 space-y-5">
-                                <h2 className="text-2xl font-black text-teal-800 flex items-center gap-2">
+                                <h2 className="text-2xl font-black text-teal-300 flex items-center gap-2">
                                     <BookOpen className="w-7 h-7" /> Sentence Builder
                                 </h2>
 
-                                <div className="bg-teal-50 border-2 border-teal-400 rounded-xl p-5">
-                                    <p className="text-sm font-bold text-teal-700 mb-2 uppercase tracking-wide">Your sentence starts with:</p>
-                                    <p className="text-2xl md:text-3xl font-black text-teal-900">"{currentStarter.starter}"</p>
-                                    <p className="text-teal-600 mt-2 text-base">{currentStarter.prompt}</p>
+                                <div className="bg-teal-900/40 border-2 border-teal-500 rounded-xl p-5">
+                                    <p className="text-sm font-bold text-teal-400 mb-2 uppercase tracking-wide">Your sentence starts with:</p>
+                                    <p className="text-2xl md:text-3xl font-black text-white">"{currentStarter.starter}"</p>
+                                    <p className="text-teal-300 mt-2 text-base">{currentStarter.prompt}</p>
                                 </div>
 
                                 <div>
-                                    <p className="font-black text-gray-800 mb-2">📝 Write your sentence here:</p>
+                                    <p className="font-black text-gray-300 mb-2">📝 Write your sentence here:</p>
                                     <textarea
                                         value={sentence}
                                         onChange={e => setSentence(e.target.value)}
                                         placeholder={`${currentStarter.starter}...`}
                                         rows={4}
-                                        className="w-full bg-white border-2 border-teal-400 focus:border-teal-700 rounded-xl p-4 text-gray-900 text-lg font-medium outline-none transition-all resize-none leading-relaxed"
+                                        className="w-full bg-white/10 border-2 border-teal-400 focus:border-teal-300 rounded-xl p-4 text-white text-lg font-medium outline-none transition-all resize-none leading-relaxed"
                                     />
                                 </div>
 
                                 <div className="flex gap-2 flex-wrap">
                                     {sentence.length > 10 && (
-                                        <div className="w-full bg-green-50 border-2 border-green-600 rounded-xl p-4">
-                                            <p className="font-black text-green-800 mb-1">✅ Word count: {sentence.split(' ').filter(w => w).length} words</p>
-                                            <p className="text-green-700 text-sm">
+                                        <div className="w-full bg-green-900/40 border-2 border-green-500 rounded-xl p-4">
+                                            <p className="font-black text-green-300 mb-1">✅ Word count: {sentence.split(' ').filter(w => w).length} words</p>
+                                            <p className="text-green-400 text-sm">
                                                 {sentence.charAt(0) === sentence.charAt(0).toUpperCase() ? '✓ Capital letter at start' : '⚠️ Start with a capital letter'}
                                                 {' · '}
                                                 {['.', '!', '?'].includes(sentence.slice(-1)) ? '✓ Punctuation at end' : '⚠️ End with . ! or ?'}
@@ -353,7 +364,7 @@ export default function Literacy51Page() {
                                     <Button
                                         onClick={() => setShowExample(!showExample)}
                                         variant="outline"
-                                        className="border-2 border-teal-500 text-teal-700 font-bold flex-1"
+                                        className="border-2 border-teal-500 text-teal-300 font-bold flex-1 bg-transparent hover:bg-teal-900/30"
                                     >
                                         {showExample ? 'Hide' : '💡 See an example'}
                                     </Button>
@@ -363,32 +374,32 @@ export default function Literacy51Page() {
                                             setSentence('');
                                             setShowExample(false);
                                         }}
-                                        className="bg-teal-700 hover:bg-teal-800 text-white font-black flex-1"
+                                        className="bg-teal-600 hover:bg-teal-700 text-white font-black flex-1"
                                     >
                                         Next Starter <ArrowRight className="w-5 h-5 ml-1" />
                                     </Button>
                                 </div>
 
                                 {showExample && (
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-indigo-50 border-2 border-indigo-400 rounded-xl p-4">
-                                        <p className="text-sm font-bold text-indigo-600 mb-1 uppercase tracking-wide">Example:</p>
-                                        <p className="text-indigo-900 text-lg leading-relaxed">"{currentStarter.example}"</p>
-                                        <p className="text-indigo-500 text-sm mt-2">Your sentence can be totally different — this is just one idea! ✨</p>
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-indigo-900/40 border-2 border-indigo-500 rounded-xl p-4">
+                                        <p className="text-sm font-bold text-indigo-400 mb-1 uppercase tracking-wide">Example:</p>
+                                        <p className="text-indigo-200 text-lg leading-relaxed">"{currentStarter.example}"</p>
+                                        <p className="text-indigo-400 text-sm mt-2">Your sentence can be totally different — this is just one idea! ✨</p>
                                     </motion.div>
                                 )}
                             </CardContent>
                         </Card>
 
                         {/* WRITING TIPS */}
-                        <Card className="bg-white border-2 border-gray-300">
+                        <Card className="bg-white/5 border-2 border-white/10">
                             <CardContent className="p-5">
-                                <h3 className="text-lg font-black text-gray-800 mb-3">💡 Good Sentence Tips</h3>
-                                <ul className="space-y-2 text-base text-gray-700">
-                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" /><span><strong>Capital letter</strong> at the start</span></li>
-                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" /><span><strong>Full stop, ! or ?</strong> at the end</span></li>
-                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" /><span>Use <strong>powerful adjectives</strong> — big → enormous, nice → wonderful</span></li>
-                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" /><span>Add <strong>where and when</strong> — "in the dark forest, at midnight"</span></li>
-                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" /><span>Read it out loud — if it sounds good, it is good!</span></li>
+                                <h3 className="text-lg font-black text-gray-200 mb-3">💡 Good Sentence Tips</h3>
+                                <ul className="space-y-3 text-base text-gray-300">
+                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" /><span><strong>Capital letter</strong> at the start</span></li>
+                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" /><span><strong>Full stop, ! or ?</strong> at the end</span></li>
+                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" /><span>Use <strong>powerful adjectives</strong> — big → enormous, nice → wonderful</span></li>
+                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" /><span>Add <strong>where and when</strong> — "in the dark forest, at midnight"</span></li>
+                                    <li className="flex gap-2"><Star className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" /><span>Read it out loud — if it sounds good, it is good!</span></li>
                                 </ul>
                             </CardContent>
                         </Card>
@@ -398,8 +409,11 @@ export default function Literacy51Page() {
                 </AnimatePresence>
 
                 <div className="text-center space-y-2 pt-4">
-                    <p className="text-lg font-bold text-gray-900">Keep going — every word makes you stronger! 💙</p>
-                    <p className="text-gray-500 text-base">From AI51 with love ♾️❤️♾️</p>
+                    <p className="text-lg font-bold text-white">Keep going — every word makes you stronger! 💙</p>
+                    <p className="text-gray-400 text-base">From AI51 with love ♾️❤️♾️</p>
+                    <a href="/Learn51" className="inline-flex items-center gap-2 text-emerald-400 font-bold hover:text-emerald-300 text-lg">
+                        📚 Back to Learn51 Hub
+                    </a>
                 </div>
 
                 {starAward && (

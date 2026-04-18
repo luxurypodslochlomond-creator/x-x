@@ -96,14 +96,20 @@ export default function GeorgieMathsPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 via-blue-50 to-gray-50 text-gray-900 p-4 md:p-8 pb-32">
+        <div className="min-h-screen bg-[#05080f] text-white p-4 md:p-8 pb-32">
             <div className="max-w-4xl mx-auto space-y-8">
 
                 {/* BACK TO HUB */}
-                <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-700 font-bold hover:text-indigo-900 transition-colors">
+                <Link to="/Learn51" className="inline-flex items-center gap-2 text-violet-400 font-bold hover:text-violet-300 transition-colors text-lg">
                     <GraduationCap className="w-5 h-5" />
                     ← Back to Learn51 Hub
                 </Link>
+
+                {/* DYSLEXIA/ADHD NOTICE */}
+                <div className="bg-violet-900/30 border border-violet-500/40 rounded-2xl px-5 py-3 flex items-center gap-3">
+                    <span className="text-2xl">🧠</span>
+                    <p className="text-violet-300 text-sm font-bold">Big text · clear colours · no time pressure · take your time · you are brilliant</p>
+                </div>
 
                 {/* HEADER */}
                 <motion.div
@@ -111,33 +117,33 @@ export default function GeorgieMathsPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center space-y-4"
                 >
-                    <Star className="w-16 h-16 text-orange-600 mx-auto animate-pulse" />
-                    <h1 className="text-4xl md:text-5xl font-black text-gray-900">
-                        Magic Maths ✨
+                    <Star className="w-16 h-16 text-orange-400 mx-auto animate-pulse" />
+                    <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+                        🧮 Magic Maths
                     </h1>
-                    <p className="text-2xl text-teal-700 font-bold">
+                    <p className="text-2xl text-violet-300 font-bold">
                         Doubling & 3D Shapes — for every learner 💖
                     </p>
-                    <div className="text-3xl font-black text-orange-700">
+                    <div className="text-3xl font-black text-yellow-400">
                         ⭐ Score: {score}
                     </div>
                 </motion.div>
 
                 {/* DOUBLING SECTION */}
-                <Card className="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-600">
+                <Card className="bg-orange-950/40 border-2 border-orange-500">
                     <CardContent className="p-6">
-                        <h2 className="text-3xl font-black text-orange-700 mb-4 flex items-center gap-2">
+                        <h2 className="text-3xl font-black text-orange-300 mb-4 flex items-center gap-2">
                             <Heart className="w-8 h-8" />
                             Doubling Numbers
                         </h2>
                         
                         <div className="space-y-6">
-                            <div className="bg-white rounded-xl p-6 border border-gray-300">
-                                <p className="text-xl text-gray-900 mb-4 font-bold">What is doubling?</p>
-                                <p className="text-lg text-gray-800 mb-4">
-                                    Doubling means <strong className="text-teal-700">adding a number to itself!</strong>
+                            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                                <p className="text-xl text-white mb-4 font-bold">What is doubling?</p>
+                                <p className="text-lg text-gray-300 mb-4">
+                                    Doubling means <strong className="text-teal-300">adding a number to itself!</strong>
                                 </p>
-                                <div className="text-2xl text-teal-700 font-bold">
+                                <div className="text-2xl text-teal-300 font-bold">
                                     Double 3 = 3 + 3 = 6 ✨
                                 </div>
                             </div>
@@ -150,26 +156,26 @@ export default function GeorgieMathsPage() {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="bg-teal-50 rounded-lg p-4 border-2 border-teal-600"
+                                        className="bg-teal-900/40 rounded-lg p-4 border-2 border-teal-500"
                                     >
                                         <div className="text-center space-y-2">
-                                            <p className="text-2xl font-black text-gray-900">
+                                            <p className="text-2xl font-black text-white">
                                                 Double {example.num} = {example.double}
                                             </p>
-                                            <p className="text-lg text-teal-700">{example.visual}</p>
+                                            <p className="text-lg text-teal-300">{example.visual}</p>
                                         </div>
                                     </motion.div>
                                 ))}
                             </div>
 
                             {/* THE DOUBLING TRICK */}
-                            <div className="bg-green-50 rounded-lg p-6 border-2 border-green-700">
-                                <h3 className="text-2xl font-black text-green-800 mb-3 flex items-center gap-2">
+                            <div className="bg-green-900/40 rounded-lg p-6 border-2 border-green-500">
+                                <h3 className="text-2xl font-black text-green-300 mb-3 flex items-center gap-2">
                                     <Sparkles className="w-6 h-6" />
                                     The Easy Trick!
                                 </h3>
-                                <ul className="space-y-2 text-lg text-gray-900">
-                                    <li>• To double ANY number, just <strong className="text-green-700">add it to itself</strong></li>
+                                <ul className="space-y-3 text-lg text-gray-200">
+                                    <li>• To double ANY number, just <strong className="text-green-300">add it to itself</strong></li>
                                     <li>• Double 4? → 4 + 4 = 8</li>
                                     <li>• Double 15? → 15 + 15 = 30</li>
                                     <li>• Double 25? → 25 + 25 = 50</li>
@@ -180,20 +186,20 @@ export default function GeorgieMathsPage() {
                 </Card>
 
                 {/* DOUBLING PRACTICE */}
-                <Card className="bg-purple-50 border-2 border-purple-600">
+                <Card className="bg-violet-950/50 border-2 border-violet-500">
                     <CardContent className="p-6">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-3xl font-black text-purple-800">Practice Doubling!</h2>
+                            <h2 className="text-3xl font-black text-violet-300">Practice Doubling!</h2>
                         </div>
 
                         {currentDoublingNum && (
                             <div className="space-y-6">
                                 <div>
-                                    <p className="text-lg text-gray-900 mb-3 font-bold">What is double this number?</p>
+                                    <p className="text-xl text-gray-200 mb-3 font-bold">What is double this number?</p>
                                     <motion.p
                                         animate={{ scale: [1, 1.1, 1] }}
                                         transition={{ duration: 1, repeat: Infinity }}
-                                        className="text-6xl font-black text-orange-600 mb-4"
+                                        className="text-6xl font-black text-orange-400 mb-4"
                                     >
                                         {currentDoublingNum}
                                     </motion.p>
@@ -205,14 +211,14 @@ export default function GeorgieMathsPage() {
                                         value={doublingAnswer}
                                         onChange={(e) => setDoublingAnswer(e.target.value)}
                                         placeholder="Your answer..."
-                                        className="flex-1 bg-white border-2 border-purple-600 text-gray-900 text-2xl h-14 text-center font-black"
+                                        className="flex-1 bg-white/10 border-2 border-violet-400 text-white text-2xl h-14 text-center font-black"
                                         disabled={showDoublingResult}
                                     />
                                     {!showDoublingResult && (
                                         <Button
                                             onClick={checkDoublingAnswer}
                                             disabled={!doublingAnswer}
-                                            className="bg-purple-700 hover:bg-purple-800 h-14 px-8 text-xl font-black text-white"
+                                            className="bg-violet-600 hover:bg-violet-700 h-14 px-8 text-xl font-black text-white"
                                         >
                                             Check
                                         </Button>
@@ -225,33 +231,33 @@ export default function GeorgieMathsPage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         className={`p-6 rounded-xl border-2 ${
                                             isDoublingCorrect 
-                                                ? 'bg-green-50 border-green-700' 
-                                                : 'bg-red-50 border-red-600'
+                                                ? 'bg-green-900/40 border-green-500' 
+                                                : 'bg-red-900/40 border-red-500'
                                         }`}
                                     >
                                         <div className="flex items-center gap-3 mb-4">
                                             {isDoublingCorrect ? (
                                                 <>
-                                                    <Check className="w-12 h-12 text-green-700" />
-                                                    <p className="text-3xl font-black text-gray-900">
+                                                    <Check className="w-12 h-12 text-green-400" />
+                                                    <p className="text-3xl font-black text-white">
                                                         Amazing! 🎉
                                                     </p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <X className="w-12 h-12 text-red-700" />
-                                                    <p className="text-3xl font-black text-gray-900">
-                                                        Not quite...
+                                                    <X className="w-12 h-12 text-red-400" />
+                                                    <p className="text-3xl font-black text-white">
+                                                        Not quite — here's how:
                                                     </p>
                                                 </>
                                             )}
                                         </div>
                                         
                                         {!isDoublingCorrect && (
-                                            <div className="mb-4">
-                                                <p className="text-gray-900 text-lg mb-2 font-bold">The correct answer is:</p>
-                                                <p className="text-4xl font-black text-green-700">{currentDoublingNum * 2}</p>
-                                                <p className="text-lg text-gray-800 mt-2">
+                                            <div className="mb-4 bg-white/5 rounded-xl p-4">
+                                                <p className="text-gray-300 text-lg mb-2 font-bold">The answer is:</p>
+                                                <p className="text-4xl font-black text-green-400">{currentDoublingNum * 2}</p>
+                                                <p className="text-lg text-gray-300 mt-2">
                                                     Because {currentDoublingNum} + {currentDoublingNum} = {currentDoublingNum * 2}
                                                 </p>
                                             </div>
@@ -259,7 +265,7 @@ export default function GeorgieMathsPage() {
 
                                         <Button
                                             onClick={generateDoublingQuestion}
-                                            className="bg-blue-700 hover:bg-blue-800 w-full text-xl h-12 font-black text-white"
+                                            className="bg-cyan-600 hover:bg-cyan-700 w-full text-xl h-12 font-black text-white"
                                         >
                                             Next Question 🌟
                                         </Button>
@@ -271,20 +277,20 @@ export default function GeorgieMathsPage() {
                 </Card>
 
                 {/* 3D SHAPES SECTION */}
-                <Card className="bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-700">
+                <Card className="bg-cyan-950/40 border-2 border-cyan-500">
                     <CardContent className="p-6">
-                        <h2 className="text-3xl font-black text-cyan-800 mb-4 flex items-center gap-2">
+                        <h2 className="text-3xl font-black text-cyan-300 mb-4 flex items-center gap-2">
                             <Box className="w-8 h-8" />
                             3D Shapes
                         </h2>
                         
                         <div className="space-y-6">
-                            <div className="bg-white rounded-xl p-6 border border-gray-300">
-                                <p className="text-xl text-gray-900 mb-4 font-bold">What are vertices?</p>
-                                <p className="text-lg text-gray-800 mb-4">
-                                    <strong className="text-cyan-800">Vertices</strong> are the <strong className="text-orange-700">corners or points</strong> where edges meet!
+                            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                                <p className="text-xl text-white mb-4 font-bold">What are vertices?</p>
+                                <p className="text-lg text-gray-300 mb-4">
+                                    <strong className="text-cyan-300">Vertices</strong> are the <strong className="text-orange-300">corners or points</strong> where edges meet!
                                 </p>
-                                <div className="text-2xl text-orange-700 font-bold">
+                                <div className="text-2xl text-orange-300 font-bold">
                                     📦 A cube has 8 vertices (8 corners) ✨
                                 </div>
                             </div>
@@ -297,23 +303,23 @@ export default function GeorgieMathsPage() {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="bg-blue-50 rounded-lg p-4 border-2 border-blue-700"
+                                        className="bg-blue-900/40 rounded-lg p-4 border-2 border-blue-500"
                                     >
                                         <div className="text-center space-y-3">
                                             <p className="text-5xl mb-2">{shape.emoji}</p>
-                                            <p className="text-2xl font-black text-gray-900">{shape.name}</p>
+                                            <p className="text-2xl font-black text-white">{shape.name}</p>
                                             <div className="space-y-1 text-left text-base">
-                                                <p className="text-cyan-800">
+                                                <p className="text-cyan-300">
                                                     <strong>Vertices:</strong> {shape.vertices} (corners)
                                                 </p>
-                                                <p className="text-green-800">
+                                                <p className="text-green-300">
                                                     <strong>Edges:</strong> {shape.edges} (lines)
                                                 </p>
-                                                <p className="text-orange-800">
+                                                <p className="text-orange-300">
                                                     <strong>Faces:</strong> {shape.faces} (flat sides)
                                                 </p>
                                             </div>
-                                            <p className="text-sm text-gray-700 italic">
+                                            <p className="text-sm text-gray-400 italic">
                                                 Like: {shape.realExample}
                                             </p>
                                         </div>
@@ -322,15 +328,15 @@ export default function GeorgieMathsPage() {
                             </div>
 
                             {/* HELPER TIP */}
-                            <div className="bg-yellow-50 rounded-lg p-6 border-2 border-yellow-700">
-                                <h3 className="text-2xl font-black text-yellow-800 mb-3 flex items-center gap-2">
+                            <div className="bg-yellow-900/40 rounded-lg p-6 border-2 border-yellow-500">
+                                <h3 className="text-2xl font-black text-yellow-300 mb-3 flex items-center gap-2">
                                     <Zap className="w-6 h-6" />
                                     Remember This!
                                 </h3>
-                                <ul className="space-y-2 text-lg text-gray-900">
-                                    <li>• <strong className="text-cyan-800">Vertices</strong> = Corners (pointy bits)</li>
-                                    <li>• <strong className="text-green-800">Edges</strong> = Lines where faces meet</li>
-                                    <li>• <strong className="text-orange-800">Faces</strong> = Flat surfaces</li>
+                                <ul className="space-y-3 text-lg text-gray-200">
+                                    <li>• <strong className="text-cyan-300">Vertices</strong> = Corners (pointy bits)</li>
+                                    <li>• <strong className="text-green-300">Edges</strong> = Lines where faces meet</li>
+                                    <li>• <strong className="text-orange-300">Faces</strong> = Flat surfaces</li>
                                 </ul>
                             </div>
                         </div>
@@ -338,16 +344,16 @@ export default function GeorgieMathsPage() {
                 </Card>
 
                 {/* 3D SHAPES QUIZ */}
-                <Card className="bg-cyan-50 border-2 border-cyan-700">
+                <Card className="bg-cyan-950/50 border-2 border-cyan-500">
                     <CardContent className="p-6">
-                        <h2 className="text-3xl font-black text-cyan-800 mb-6">Shape Quiz!</h2>
+                        <h2 className="text-3xl font-black text-cyan-300 mb-6">Shape Quiz!</h2>
 
                         {currentShape && (
                             <div className="space-y-6">
-                                <div className="bg-white rounded-xl p-6 text-center border border-gray-300">
+                                <div className="bg-white/5 rounded-xl p-6 text-center border border-white/10">
                                     <p className="text-8xl mb-4">{currentShape.emoji}</p>
-                                    <p className="text-3xl font-black text-gray-900 mb-4">{currentShape.name}</p>
-                                    <p className="text-lg text-gray-900 font-bold">
+                                    <p className="text-3xl font-black text-white mb-4">{currentShape.name}</p>
+                                    <p className="text-lg text-gray-300 font-bold">
                                         How many vertices (corners) does this shape have?
                                     </p>
                                 </div>
@@ -358,14 +364,14 @@ export default function GeorgieMathsPage() {
                                         value={shapeQuizAnswer}
                                         onChange={(e) => setShapeQuizAnswer(e.target.value)}
                                         placeholder="Your answer..."
-                                        className="flex-1 bg-white border-2 border-cyan-700 text-gray-900 text-2xl h-14 text-center font-black"
+                                        className="flex-1 bg-white/10 border-2 border-cyan-400 text-white text-2xl h-14 text-center font-black"
                                         disabled={showShapeResult}
                                     />
                                     {!showShapeResult && (
                                         <Button
                                             onClick={checkShapeAnswer}
                                             disabled={!shapeQuizAnswer}
-                                            className="bg-cyan-700 hover:bg-cyan-800 h-14 px-8 text-xl font-black text-white"
+                                            className="bg-cyan-600 hover:bg-cyan-700 h-14 px-8 text-xl font-black text-white"
                                         >
                                             Check
                                         </Button>
@@ -378,33 +384,33 @@ export default function GeorgieMathsPage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         className={`p-6 rounded-xl border-2 ${
                                             isShapeCorrect 
-                                                ? 'bg-green-50 border-green-700' 
-                                                : 'bg-red-50 border-red-600'
+                                                ? 'bg-green-900/40 border-green-500' 
+                                                : 'bg-red-900/40 border-red-500'
                                         }`}
                                     >
                                         <div className="flex items-center gap-3 mb-4">
                                             {isShapeCorrect ? (
                                                 <>
-                                                    <Check className="w-12 h-12 text-green-700" />
-                                                    <p className="text-3xl font-black text-gray-900">
+                                                    <Check className="w-12 h-12 text-green-400" />
+                                                    <p className="text-3xl font-black text-white">
                                                         Perfect! 🌟
                                                     </p>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <X className="w-12 h-12 text-red-700" />
-                                                    <p className="text-3xl font-black text-gray-900">
-                                                        Not this time...
+                                                    <X className="w-12 h-12 text-red-400" />
+                                                    <p className="text-3xl font-black text-white">
+                                                        Not this time — here's the answer:
                                                     </p>
                                                 </>
                                             )}
                                         </div>
                                         
                                         {!isShapeCorrect && (
-                                            <div className="mb-4">
-                                                <p className="text-gray-900 text-lg mb-2 font-bold">The correct answer is:</p>
-                                                <p className="text-4xl font-black text-green-700">{currentShape.vertices} vertices</p>
-                                                <p className="text-base text-gray-800 mt-2">
+                                            <div className="mb-4 bg-white/5 rounded-xl p-4">
+                                                <p className="text-gray-300 text-lg mb-2 font-bold">The answer is:</p>
+                                                <p className="text-4xl font-black text-green-400">{currentShape.vertices} vertices</p>
+                                                <p className="text-base text-gray-300 mt-2">
                                                     A {currentShape.name} has {currentShape.vertices} corners!
                                                 </p>
                                             </div>
@@ -412,7 +418,7 @@ export default function GeorgieMathsPage() {
 
                                         <Button
                                             onClick={generateShapeQuestion}
-                                            className="bg-blue-700 hover:bg-blue-800 w-full text-xl h-12 font-black text-white"
+                                            className="bg-cyan-600 hover:bg-cyan-700 w-full text-xl h-12 font-black text-white"
                                         >
                                             Next Shape 🎯
                                         </Button>
@@ -424,9 +430,9 @@ export default function GeorgieMathsPage() {
                 </Card>
 
                 <div className="text-center space-y-3">
-                    <p className="text-xl font-bold text-gray-900">Keep going — you're brilliant! 💖</p>
-                    <p className="text-lg text-gray-600">From AI51 with love ♾️❤️♾️</p>
-                    <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-700 font-bold hover:text-indigo-900 mt-2">
+                    <p className="text-xl font-bold text-white">Keep going — you're brilliant! 💖</p>
+                    <p className="text-lg text-gray-400">From AI51 with love ♾️❤️♾️</p>
+                    <Link to="/Learn51" className="inline-flex items-center gap-2 text-violet-400 font-bold hover:text-violet-300 mt-2 text-lg">
                         <GraduationCap className="w-5 h-5" /> Back to Learn51 Hub
                     </Link>
                 </div>
