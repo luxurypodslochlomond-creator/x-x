@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, BookOpen, Mic, Zap, Star, ArrowRight, RotateCcw } from 'lucide-react';
+import StarAward, { awardStars } from '@/components/learn51/StarAward';
 
 // NOINDEX - private learning tool
 const PHONICS_WORDS = [
@@ -64,6 +65,7 @@ export default function Literacy51Page() {
 
     const [activeTab, setActiveTab] = useState('phonics');
     const [score, setScore] = useState(0);
+    const [starAward, setStarAward] = useState(null);
 
     // PHONICS STATE
     const [currentWordIdx, setCurrentWordIdx] = useState(0);
@@ -89,7 +91,7 @@ export default function Literacy51Page() {
     const checkPhonics = () => {
         const correct = phonicsInput.toLowerCase().trim() === currentWord.phoneme.toLowerCase();
         setPhonicsResult(correct);
-        if (correct) setScore(s => s + 1);
+        if (correct) { setScore(s => s + 1); setStarAward({ n: 1, label: 'Phonics master! 🔤' }); }
     };
 
     const nextPhonicsWord = () => {
@@ -105,7 +107,8 @@ export default function Literacy51Page() {
         );
         setSpellingResults(results);
         setSpellingChecked(true);
-        results.forEach(r => { if (r) setScore(s => s + 1); });
+        const correct = results.filter(Boolean).length;
+        if (correct > 0) { setScore(s => s + correct); setStarAward({ n: correct, label: `${correct} spelling${correct > 1 ? 's' : ''} nailed! ✏️` }); }
     };
 
     const nextRule = () => {
@@ -398,6 +401,14 @@ export default function Literacy51Page() {
                     <p className="text-lg font-bold text-gray-900">Keep going — every word makes you stronger! 💙</p>
                     <p className="text-gray-500 text-base">From AI51 with love ♾️❤️♾️</p>
                 </div>
+
+                {starAward && (
+                    <StarAward
+                        stars={starAward.n}
+                        label={starAward.label}
+                        onDone={() => setStarAward(null)}
+                    />
+                )}
             </div>
         </div>
     );

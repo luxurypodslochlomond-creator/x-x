@@ -441,8 +441,9 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 5. LEARN BETTER (for kids who learn differently)
     const kidsNav = [
-      { title: "Georgie's Maths", url: createPageUrl("GeorgieMaths"), icon: Brain, highlight: true, description: "Maths for kids who learn differently" },
-      { title: "Lennox's Maths", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Maths made fun" },
+      { title: "Learn51 Hub 🌍", url: createPageUrl("Learn51"), icon: GraduationCap, highlight: true, description: "Free learning for every child on Earth" },
+      { title: "Magic Maths ⭐", url: createPageUrl("GeorgieMaths"), icon: Brain, highlight: true, description: "Maths for every kind of mind" },
+      { title: "Rounding & Decimals 🔢", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Maths adventures for ages 10-13" },
       { title: "Literacy 51", url: createPageUrl("Literacy51"), icon: BookOpen, highlight: true, description: "Phonics · spelling · sentences" },
       { title: "Reading Support", url: createPageUrl("ReadingSupport"), icon: BookOpen, highlight: true, description: "Help with reading & dyslexia" },
       { title: "Young Warriors", url: createPageUrl("YoungWarriors"), icon: Heart, description: "Kids making a difference" },
