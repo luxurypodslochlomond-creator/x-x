@@ -53,13 +53,13 @@ export default function CB51UnifiedDashboard({ artistId }) {
     setScrollY(e.target.scrollLeft);
   };
 
-  // Tab config
+  // Tab config with colour system
   const tabs = [
-    { id: 'gigs', label: 'Gigs', icon: Zap, badge: 0 },
-    { id: 'inbox', label: 'Inbox', icon: Mail, badge: messages.length },
-    { id: 'tasks', label: 'Tasks', icon: CheckCircle, badge: tasks.filter(t => t.status !== 'done').length },
-    { id: 'finance', label: 'Finance', icon: DollarSign, badge: 0 },
-    { id: 'calendar', label: 'Calendar', icon: Calendar, badge: confirmedGigs.length }
+    { id: 'gigs', label: 'Gigs', icon: Zap, badge: 0, color: 'cyan' },
+    { id: 'inbox', label: 'Inbox', icon: Mail, badge: messages.length, color: 'cyan' },
+    { id: 'tasks', label: 'Tasks', icon: CheckCircle, badge: tasks.filter(t => t.status !== 'done').length, color: 'green' },
+    { id: 'finance', label: 'Finance', icon: DollarSign, badge: 0, color: 'red' },
+    { id: 'calendar', label: 'Calendar', icon: Calendar, badge: confirmedGigs.length, color: 'cyan' }
   ];
 
   return (
@@ -69,22 +69,32 @@ export default function CB51UnifiedDashboard({ artistId }) {
         {/* SCROLL TABS */}
         <div className="flex overflow-x-auto scrollbar-hide" onScroll={handleScroll}>
           {tabs.map(tab => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-3 font-bold text-sm whitespace-nowrap transition-all border-b-2 ${
-                  isActive
-                    ? 'border-cyan-400 text-cyan-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-300'
-                }`}
-              >
+           const Icon = tab.icon;
+           const isActive = activeTab === tab.id;
+           const colorMap = {
+             cyan: { active: 'border-cyan-400 text-cyan-400', inactive: 'border-transparent text-gray-500' },
+             orange: { active: 'border-amber-500 text-amber-400', inactive: 'border-transparent text-gray-500' },
+             green: { active: 'border-green-500 text-green-400', inactive: 'border-transparent text-gray-500' },
+             red: { active: 'border-red-500 text-red-400', inactive: 'border-transparent text-gray-500' }
+           };
+           const colors = colorMap[tab.color] || colorMap.cyan;
+           return (
+             <button
+               key={tab.id}
+               onClick={() => setActiveTab(tab.id)}
+               className={`flex items-center gap-2 px-4 py-3 font-bold text-sm whitespace-nowrap transition-all border-b-2 ${
+                 isActive ? colors.active : colors.inactive
+               }`}
+             >
                 <Icon className="w-4 h-4" />
                 <span>{tab.label}</span>
                 {tab.badge > 0 && (
-                  <span className="ml-1 px-2 py-0.5 bg-red-500 text-white text-xs font-black rounded-full">
+                  <span className={`ml-1 px-2 py-0.5 text-white text-xs font-black rounded-full ${
+                    tab.color === 'cyan' ? 'bg-cyan-500' :
+                    tab.color === 'orange' ? 'bg-amber-500' :
+                    tab.color === 'green' ? 'bg-green-500' :
+                    'bg-red-500'
+                  }`}>
                     {tab.badge}
                   </span>
                 )}
@@ -151,9 +161,9 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 </div>
 
                 {messages.length === 0 ? (
-                  <div className="bg-green-950/20 border border-green-500/20 rounded-xl p-6 text-center">
-                    <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                    <p className="text-green-400 font-bold">All caught up</p>
+                  <div className="bg-cyan-950/20 border border-cyan-500/20 rounded-xl p-6 text-center">
+                    <CheckCircle className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
+                    <p className="text-cyan-400 font-bold">All caught up</p>
                   </div>
                 ) : (
                   <div className="space-y-2">
@@ -218,14 +228,14 @@ export default function CB51UnifiedDashboard({ artistId }) {
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <span className={`text-xs font-bold px-2 py-1 rounded ${
                               task.priority === 'urgent' ? 'bg-red-500/20 text-red-400' :
-                              task.priority === 'high' ? 'bg-amber-500/20 text-amber-400' :
+                              task.priority === 'high' ? 'bg-orange-500/20 text-orange-400' :
                               'bg-gray-500/20 text-gray-400'
                             }`}>
                               {task.priority}
                             </span>
                             <button
                               onClick={() => base44.entities.CB51Task.update(task.id, { status: 'done' }).then(() => queryClient.invalidateQueries({ queryKey: ['cb51Tasks', artistId] }))}
-                              className="px-2 py-1 bg-green-500/20 text-green-400 hover:bg-green-500/40 text-xs font-bold rounded transition-colors"
+                              className="px-2 py-1 bg-green-500/20 text-green-400 hover:bg-green-500/30 text-xs font-bold rounded transition-colors"
                             >
                               Done
                             </button>
@@ -259,13 +269,13 @@ export default function CB51UnifiedDashboard({ artistId }) {
                   </div>
                 ) : (
                   <>
-                    <div className="bg-cyan-950/30 border border-cyan-500/30 rounded-xl p-4">
-                      <p className="text-gray-400 text-xs mb-1">Total Earned (Confirmed)</p>
-                      <p className="text-green-400 font-black text-3xl">
-                        £{confirmedGigs.reduce((sum, g) => sum + (g.fee || 0), 0).toLocaleString()}
-                      </p>
-                      <p className="text-gray-500 text-xs mt-2">From {confirmedGigs.length} gigs</p>
-                    </div>
+                    <div className="bg-red-950/30 border border-red-500/30 rounded-xl p-4">
+                       <p className="text-gray-400 text-xs mb-1">Total Earned (Confirmed)</p>
+                       <p className="text-red-400 font-black text-3xl">
+                         £{confirmedGigs.reduce((sum, g) => sum + (g.fee || 0), 0).toLocaleString()}
+                       </p>
+                       <p className="text-gray-500 text-xs mt-2">From {confirmedGigs.length} gigs</p>
+                     </div>
 
                     <div className="space-y-2">
                       {confirmedGigs.map(gig => (
@@ -280,7 +290,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
                               <p className="text-white font-bold text-sm">{gig.venue || gig.title}</p>
                               <p className="text-gray-400 text-xs">{gig.date_start}</p>
                             </div>
-                            <p className="text-green-400 font-black">£{gig.fee}</p>
+                            <p className="text-red-400 font-black">£{gig.fee}</p>
                           </div>
                         </motion.div>
                       ))}
@@ -320,14 +330,14 @@ export default function CB51UnifiedDashboard({ artistId }) {
                       >
                         <div className="flex items-start gap-3">
                           <div className="bg-cyan-500/20 border border-cyan-500/40 rounded-lg px-3 py-2 text-center">
-                            <p className="text-cyan-400 font-black text-sm">{new Date(gig.date_start).getDate()}</p>
-                            <p className="text-cyan-600 text-xs">{new Date(gig.date_start).toLocaleDateString('en', { month: 'short' })}</p>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-white font-bold">{gig.venue || gig.title}</p>
-                            <p className="text-gray-400 text-sm">{gig.location}</p>
-                            <p className="text-green-400 font-bold text-sm mt-1">£{gig.fee}</p>
-                          </div>
+                             <p className="text-cyan-400 font-black text-sm">{new Date(gig.date_start).getDate()}</p>
+                             <p className="text-cyan-600 text-xs">{new Date(gig.date_start).toLocaleDateString('en', { month: 'short' })}</p>
+                           </div>
+                           <div className="flex-1 min-w-0">
+                             <p className="text-white font-bold">{gig.venue || gig.title}</p>
+                             <p className="text-gray-400 text-sm">{gig.location}</p>
+                             <p className="text-orange-400 font-bold text-sm mt-1">🎵 {gig.fee && `£${gig.fee}`}</p>
+                           </div>
                           <ChevronRight className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
                         </div>
                       </motion.div>
@@ -351,6 +361,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
           exit={{ opacity: 0, scale: 0.8 }}
           onClick={() => scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-6 right-6 z-30 bg-cyan-600 hover:bg-cyan-700 text-white p-3 rounded-full shadow-lg transition-colors"
+          style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.4)' }}
         >
           <ArrowUp className="w-5 h-5" />
         </motion.button>
