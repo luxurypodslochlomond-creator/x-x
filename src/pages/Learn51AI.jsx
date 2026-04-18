@@ -188,9 +188,9 @@ export default function Learn51AIPage() {
   }, []);
 
   const readLesson = useCallback((data) => {
-    if (!data) return;
+    if (!data || !data.lesson) return;
     setIsSpeaking(true);
-    const text = `${data.wow_fact}. ${data.lesson}. ${data.question}`;
+    const text = `${data.wow_fact || ''} ${data.lesson || ''} ${data.question || ''}`.trim();
     // Use selected language voice
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
