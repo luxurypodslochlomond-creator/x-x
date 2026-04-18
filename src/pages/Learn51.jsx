@@ -50,7 +50,7 @@ const SUBJECTS = {
   creator: [
     { id: 'writing', title: 'Writer\'s Studio', desc: 'Advanced writing & storytelling', Icon: BookOpen, link: '/Literacy51', stars: 0, color: 'bg-purple-100 border-purple-500', iconColor: 'text-purple-700' },
     { id: 'physics', title: 'Physics & Frequencies', desc: 'Sound, healing & science', Icon: Radio, link: '/ThePhysics', stars: 0, color: 'bg-pink-100 border-pink-500', iconColor: 'text-pink-700' },
-    { id: 'planet2', title: 'Climate Action', desc: 'Real missions, real change', Icon: Globe, link: '/Missions', stars: 10, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
+    { id: 'planet2', title: 'How Earth Actually Works', desc: 'Weather, ecosystems, oceans & the incredible systems keeping our planet alive', Icon: Globe, link: '/Missions', stars: 10, color: 'bg-green-100 border-green-500', iconColor: 'text-green-700' },
     { id: 'build', title: 'Build Things', desc: 'Create music, logos & more with AI', Icon: Rocket, link: '/LearnGuitar', stars: 25, color: 'bg-indigo-100 border-indigo-500', iconColor: 'text-indigo-700' },
   ],
   // Real world curiosity for kids — wonder-first, hopeful, never scary
@@ -163,7 +163,7 @@ export default function Learn51Page() {
           <div className="text-left">
             <div className="text-3xl font-black text-yellow-200">{stars} Stars</div>
             {nextUnlock && (
-              <div className="text-sm text-blue-200">{nextUnlock.stars - stars} more to unlock: {nextUnlock.emoji} {nextUnlock.title}</div>
+              <div className="text-sm text-blue-200">{nextUnlock.stars - stars} more stars to unlock: {nextUnlock.title}</div>
             )}
             {!nextUnlock && <div className="text-sm text-yellow-200">Universal Learner achieved! ♾️</div>}
           </div>
@@ -175,7 +175,7 @@ export default function Learn51Page() {
         {/* AGE GROUP PICKER */}
         <div>
           <h2 className="text-2xl font-black text-gray-800 mb-4 text-center">
-            {ageGroup ? '👋 Welcome back! Change your group?' : '👋 Who\'s learning today?'}
+            {ageGroup ? 'Welcome back! Change your group?' : 'Who\'s learning today?'}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {AGE_GROUPS.map(group => (
@@ -203,7 +203,7 @@ export default function Learn51Page() {
         {ageGroup && (
           <motion.div key={ageGroup} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
             <h2 className="text-2xl font-black text-gray-800 mb-4">
-              {currentGroup?.emoji} {currentGroup?.label} — Choose a subject
+              {currentGroup?.label} — Choose a subject
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {subjects.map(subject => {
@@ -322,6 +322,35 @@ export default function Learn51Page() {
                 </Link>
               </motion.div>
             ))}
+          </div>
+        </div>
+
+        {/* FOR PARENTS & TEACHERS */}
+        <div className="bg-white border-2 border-blue-300 rounded-2xl p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <Shield className="w-8 h-8 text-blue-600 flex-shrink-0" />
+            <div>
+              <h3 className="text-xl font-black text-blue-900">For Parents & Teachers</h3>
+              <p className="text-gray-500 text-sm">What you need to know before sharing this with children</p>
+            </div>
+          </div>
+          <div className="space-y-3">
+            {[
+              { Icon: CheckCircle, color: 'text-green-600', text: 'No data collected from children. Ever. Zero. Nothing stored on our servers.' },
+              { Icon: CheckCircle, color: 'text-green-600', text: 'No account, no sign-up, no email address required from the child or parent.' },
+              { Icon: CheckCircle, color: 'text-green-600', text: 'No adverts. No sponsored content. No third-party tracking of any kind.' },
+              { Icon: CheckCircle, color: 'text-green-600', text: 'No social features — children cannot message anyone or share personal information.' },
+              { Icon: CheckCircle, color: 'text-green-600', text: 'All progress (stars) stored locally on the device only. We cannot access it.' },
+              { Icon: CheckCircle, color: 'text-green-600', text: 'Works offline — safe to use without any internet connection once loaded.' },
+            ].map(({ Icon, color, text }) => (
+              <div key={text} className="flex gap-3 items-start">
+                <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${color}`} />
+                <span className="text-gray-700 text-sm leading-relaxed">{text}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 pt-4 border-t border-gray-100 text-center">
+            <p className="text-xs text-gray-400">COPPA & GDPR-K compliant by design · Built for classroom and home use · No safeguarding concerns</p>
           </div>
         </div>
 
