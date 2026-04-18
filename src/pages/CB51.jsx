@@ -177,32 +177,21 @@ export default function CB51() {
           <CB51BackgroundSync />
 
           {/* HEADER */}
-          <div className="px-6 pt-8 pb-4 border-b border-cyan-500/20">
-            <div className="flex items-center justify-between mb-1">
-              <div className="flex items-center gap-3">
-                <Radio className="w-7 h-7 text-cyan-400" />
-                <span className="text-2xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
-              </div>
-              {/* TAB SWITCHER */}
-              <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-lg p-1">
-                <button
-                  onClick={() => setActiveTab('home')}
-                  className={`px-3 py-1.5 rounded text-xs font-mono font-bold transition-all ${activeTab === 'home' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  Home
-                </button>
-                <button
-                  onClick={() => setActiveTab('brain')}
-                  className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-mono font-bold transition-all ${activeTab === 'brain' ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  <Brain className="w-3 h-3" />
-                  Brain
-                </button>
+          <div className="px-6 pt-8 pb-4 border-b border-cyan-500/20 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Radio className="w-7 h-7 text-cyan-400" />
+              <div>
+                <span className="text-2xl font-black text-cyan-400 tracking-widest font-mono block">CB51</span>
+                <p className="text-gray-500 text-xs font-mono">Your AI co-manager</p>
               </div>
             </div>
-            <p className="text-gray-500 text-xs font-mono">
-              {activeTab === 'brain' ? 'Intelligence layer · reads your world' : 'Your AI co-manager'}
-            </p>
+            <button
+              onClick={() => setActiveTab(activeTab === 'brain' ? 'home' : 'brain')}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-mono font-bold transition-all border ${activeTab === 'brain' ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/40' : 'border-gray-800 text-gray-500 hover:text-gray-300'}`}
+            >
+              <Brain className="w-3 h-3" />
+              Brain
+            </button>
           </div>
 
           {/* ARTIST GRID - 3 COLUMNS */}
@@ -320,36 +309,31 @@ export default function CB51() {
           </AnimatePresence>
 
           {/* BRAIN TAB */}
-          {activeTab === 'brain' && currentArtistId && (
+          {activeTab === 'brain' && currentArtistId ? (
             <div className="px-6 pt-5 pb-32">
               <CB51BrainTab artistId={currentArtistId} />
             </div>
-          )}
-
-          {/* MAIN CONTENT - Unified dashboard */}
-          {activeTab === 'home' && (
-            currentArtistId ? (
-              <CB51UnifiedDashboard artistId={currentArtistId} />
-            ) : (
-              <div className="flex items-center justify-center min-h-[600px] px-6">
-                <div className="text-center space-y-4">
-                  <Radio className="w-12 h-12 text-cyan-400 mx-auto" />
-                  <h2 className="text-white font-black font-mono text-xl">Welcome to CB51</h2>
-                  <p className="text-gray-400 font-mono text-sm leading-relaxed">
-                    To get started, you need a CB51 account so your artists are saved to you.
-                  </p>
-                  <button
-                    onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
-                  >
-                    CREATE FREE ACCOUNT / LOGIN
-                  </button>
-                  <p className="text-gray-600 font-mono text-xs">
-                    Takes 30 seconds. Your artists, gigs and finances will be saved permanently.
-                  </p>
-                </div>
+          ) : activeTab === 'home' && currentArtistId ? (
+            <CB51UnifiedDashboard artistId={currentArtistId} />
+          ) : (
+            <div className="flex items-center justify-center min-h-[600px] px-6">
+              <div className="text-center space-y-4">
+                <Radio className="w-12 h-12 text-cyan-400 mx-auto" />
+                <h2 className="text-white font-black font-mono text-xl">Welcome to CB51</h2>
+                <p className="text-gray-400 font-mono text-sm leading-relaxed">
+                  To get started, you need a CB51 account so your artists are saved to you.
+                </p>
+                <button
+                  onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-4 rounded-lg text-lg font-mono"
+                >
+                  CREATE FREE ACCOUNT / LOGIN
+                </button>
+                <p className="text-gray-600 font-mono text-xs">
+                  Takes 30 seconds. Your artists, gigs and finances will be saved permanently.
+                </p>
               </div>
-            )
+            </div>
           )}
           </div>
           </CB51ErrorBoundary>
