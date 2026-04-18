@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
@@ -18,6 +19,7 @@ import CB51GigUploadParser from './CB51GigUploadParser';
  */
 
 export default function CB51UnifiedDashboard({ artistId }) {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('gigs');
   const [scrollY, setScrollY] = useState(0);
   const [reviewingGig, setReviewingGig] = useState(null);
@@ -40,7 +42,16 @@ export default function CB51UnifiedDashboard({ artistId }) {
 
   const { data: confirmedGigs = [] } = useQuery({
     queryKey: ['confirmedGigs', artistId],
-    queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'confirmed' }).catch(() => []),
+    queryFn: async () => {
+      const gigs = await base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'confirmed' }).catch(() => []);
+      // Deduplicate by ID
+      const seen = new Set();
+      return gigs.filter(g => {
+        if (seen.has(g.id)) return false;
+        seen.add(g.id);
+        return true;
+      });
+    },
     enabled: !!artistId
   });
 
@@ -446,8 +457,8 @@ export default function CB51UnifiedDashboard({ artistId }) {
                          key={gig.id}
                          initial={{ opacity: 0, x: -20 }}
                          animate={{ opacity: 1, x: 0 }}
-                         onClick={() => window.location.href = `/ScottLive?gig=${gig.id}`}
-                         className="w-full text-left bg-gray-900 border border-amber-500/20 rounded-lg p-4 hover:border-amber-500/60 hover:bg-gray-800/80 transition-all active:scale-95"
+                         onClick={() => navigate(`/ScottLive?gig=${gig.id}`)}
+                         className="w-full text-left bg-gray-900 border border-amber-500/20 rounded-lg p-4 hover:border-amber-500/60 hover:bg-gray-800/80 transition-all active:scale-95 cursor-pointer"
                        >
                          <div className="flex items-start gap-4">
                            <div className="bg-amber-500/20 border border-amber-500/40 rounded-lg px-4 py-3 text-center flex-shrink-0">
