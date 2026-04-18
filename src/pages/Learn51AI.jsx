@@ -482,8 +482,11 @@ export default function Learn51AIPage() {
               </div>
               {selectedTopics.length > 0 && (
                 <button
-                  onClick={() => loadLesson(selectedTopics[0], 1)}
-                  className="w-full mt-4 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-black rounded-2xl transition-all"
+                  onClick={() => {
+                    setTopic(selectedTopics[0]); 
+                    loadLesson(selectedTopics[0], 1);
+                  }}
+                  className="w-full mt-4 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-black rounded-2xl transition-all active:scale-95"
                 >
                   Let's go! 🚀
                 </button>
