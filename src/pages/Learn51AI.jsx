@@ -12,16 +12,18 @@ import CreativeReward from '@/components/learn51/CreativeReward';
 // ============================================================
 
 const INTERESTS = [
-  { emoji: '⚽', label: 'Football' },
+  { emoji: '⚽', label: 'Football & Ronaldo' },
+  { emoji: '🐐', label: 'Messi & Argentina' },
   { emoji: '🎮', label: 'Gaming' },
   { emoji: '🎵', label: 'Music' },
   { emoji: '🐶', label: 'Animals' },
   { emoji: '🚀', label: 'Space' },
   { emoji: '🍕', label: 'Food' },
   { emoji: '🎨', label: 'Art' },
-  { emoji: '🏄', label: 'Sports' },
+  { emoji: '🏀', label: 'Basketball' },
   { emoji: '🦖', label: 'Dinosaurs' },
   { emoji: '💻', label: 'Tech' },
+  { emoji: '🎬', label: 'Movies' },
 ];
 
 const TOPICS = [
@@ -45,14 +47,17 @@ CHILD INFO:
 
 YOUR JOB:
 1. Give ONE brilliant, personalised lesson moment — not a lecture, a SPARK
-2. Connect the topic directly to their interest (${interest}) — make it feel magical that these connect
+2. Connect the topic DEEPLY to their specific interest (${interest}) — use REAL names, real facts. 
+   - If they love "Football & Ronaldo": use Cristiano Ronaldo's actual stats, free kick angles, his kids, his training regime
+   - If they love "Messi & Argentina": use Leo Messi's dribbling physics, World Cup geometry, his son Thiago
+   - Make it feel like insider knowledge — "did you know Ronaldo's free kicks use EXACTLY this maths?"
 3. Ask ONE clear question at the end to check understanding
 4. Keep it SHORT — 4-6 sentences max for the lesson, then the question
-5. Language: simple, warm, excited — never condescending
+5. Language: simple, warm, excited — never condescending. Talk like a cool older sibling.
 6. If they've had ${history} questions already, slightly increase difficulty
-7. Topics to weave in naturally when relevant: health, kindness, respect, their rights as a child
+7. Weave in naturally when relevant: health, kindness, respect, their rights as a child
 
-TONE: You are their brilliant friend who happens to know everything. Not a teacher reading from a book.
+TONE: You are their brilliant friend who happens to know everything. Like a cool older sibling with a PhD. NOT a teacher reading from a book. Make them feel LUCKY to know this.
 
 FORMAT your response EXACTLY like this JSON (no extra text):
 {

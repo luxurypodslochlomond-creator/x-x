@@ -29,11 +29,14 @@ CHILD INFO:
 CREATE a personalised creative reward. Make it feel MAGICAL and completely unique to them.
 
 Rules:
-- Reference their interest (${interest}) prominently — make it feel made specifically for them
-- Connect it to what they just learned (${topic})
-- Age-appropriate warmth — not babyish, not adult
-- Short but POWERFUL — they should screenshot this
-- If streakCount >= 3, make it extra special and legendary
+- Reference their interest (${interest}) with REAL depth — use actual names, stats, moments
+  - "Football & Ronaldo": reference CR7's free kick technique, his son Cristiano Jr, his 900 goals, his SIUUU celebration — connect it to the maths/topic
+  - "Messi & Argentina": reference the 2022 World Cup, Thiago and Mateo, his dribbles, his left foot — connect to the topic
+  - Make it feel like it was written BY someone who loves that thing as much as they do
+- Connect it directly to what they just learned (${topic}) — the link should be surprising and brilliant
+- Age-appropriate warmth — not babyish, not adult. Cool, warm, real.
+- Short but POWERFUL — they should want to screenshot and show their friends
+- If streakCount >= 3, make it extra special and legendary — reference them becoming a legend themselves
 
 Return EXACTLY this JSON:
 {
