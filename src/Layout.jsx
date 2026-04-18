@@ -443,6 +443,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     const kidsNav = [
       { title: "Georgie's Maths", url: createPageUrl("GeorgieMaths"), icon: Brain, highlight: true, description: "Maths for kids who learn differently" },
       { title: "Lennox's Maths", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Maths made fun" },
+      { title: "Literacy 51", url: createPageUrl("Literacy51"), icon: BookOpen, highlight: true, description: "Phonics · spelling · sentences" },
       { title: "Reading Support", url: createPageUrl("ReadingSupport"), icon: BookOpen, highlight: true, description: "Help with reading & dyslexia" },
       { title: "Young Warriors", url: createPageUrl("YoungWarriors"), icon: Heart, description: "Kids making a difference" },
     ];
