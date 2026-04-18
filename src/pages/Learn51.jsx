@@ -53,6 +53,15 @@ const SUBJECTS = {
     { id: 'planet2', title: 'Climate Action', desc: 'Real missions, real change', icon: '🌱', link: '/Missions', stars: 10, color: 'bg-green-100 border-green-500' },
     { id: 'build', title: 'Build Things', desc: 'Create music, logos & more with AI', icon: '🚀', link: '/LearnGuitar', stars: 25, color: 'bg-indigo-100 border-indigo-500' },
   ],
+  // Real life skills — available to all age groups via the dedicated section below
+  life: [
+    { id: 'money', title: 'Money & Budgeting', desc: 'How money actually works, budgets, debt & saving', icon: '💰', link: '/LifeSkills51', stars: 0, color: 'bg-yellow-100 border-yellow-500' },
+    { id: 'cooking', title: 'Cooking & Food', desc: 'Simple healthy meals, nutrition & not wasting food', icon: '🍳', link: '/LifeSkills51', stars: 0, color: 'bg-orange-100 border-orange-500' },
+    { id: 'mental', title: 'Mental Health', desc: 'Emotions, anxiety, breathing & being kind to yourself', icon: '🧠', link: '/LifeSkills51', stars: 0, color: 'bg-pink-100 border-pink-500' },
+    { id: 'relationships', title: 'Relationships', desc: 'Friendships, family, boundaries & respect', icon: '❤️', link: '/LifeSkills51', stars: 0, color: 'bg-red-100 border-red-500' },
+    { id: 'work', title: 'Work & Purpose', desc: 'Finding what you love, CVs, interviews & rights at work', icon: '🎯', link: '/LifeSkills51', stars: 0, color: 'bg-indigo-100 border-indigo-500' },
+    { id: 'rights', title: 'Your Rights', desc: 'Know your legal rights, housing, benefits & contracts', icon: '⚖️', link: '/LifeSkills51', stars: 0, color: 'bg-teal-100 border-teal-500' },
+  ],
 };
 
 // Unlockable creative rewards — stars only go up, never down
@@ -284,6 +293,36 @@ export default function Learn51Page() {
             Works offline. No data collected. No account needed.<br/>
             Built with love by UF51 ❤️
           </p>
+        </div>
+
+        {/* REAL LIFE SKILLS SECTION */}
+        <div>
+          <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl p-5 mb-4 text-center">
+            <div className="text-4xl mb-2">🌟</div>
+            <h2 className="text-2xl font-black mb-1">Real Life Skills</h2>
+            <p className="text-amber-100 text-base">The stuff school often forgets to teach — but you actually need</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {SUBJECTS.life.map(subject => (
+              <motion.div key={subject.id} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Link to={subject.link}>
+                  <div className={`rounded-2xl border-2 p-5 ${subject.color} hover:shadow-lg transition-all`}>
+                    <div className="flex items-start gap-4">
+                      <div className="text-4xl">{subject.icon}</div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-black text-gray-800">{subject.title}</h3>
+                        <p className="text-gray-600 text-sm mt-1">{subject.desc}</p>
+                        <div className="flex items-center gap-1 mt-3 text-amber-700 font-bold text-sm">
+                          <span>Start learning</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* HOME EDUCATION NOTE */}

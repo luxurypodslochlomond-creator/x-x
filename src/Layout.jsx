@@ -446,6 +446,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Rounding & Decimals 🔢", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Decimals, circles & maths in music" },
       { title: "Literacy 51 📖", url: createPageUrl("Literacy51"), icon: BookOpen, highlight: true, description: "Phonics · spelling · sentences" },
       { title: "Reading Support", url: createPageUrl("ReadingSupport"), icon: BookOpen, description: "Help with reading & dyslexia" },
+      { title: "Life Skills 51 🌟", url: createPageUrl("LifeSkills51"), icon: Heart, highlight: true, description: "Money · food · mental health · rights · work" },
       { title: "Young Warriors", url: createPageUrl("YoungWarriors"), icon: Heart, description: "Kids making a difference" },
     ];
 
