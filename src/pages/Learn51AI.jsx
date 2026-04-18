@@ -114,6 +114,8 @@ Respond ONLY with this JSON:
 const LS_KEY = 'learn51ai_progress';
 const loadProgress = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch { return null; } };
 const saveProgress = (data) => { try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch {} };
+const loadLanguage = () => { try { return localStorage.getItem('learn51ai_lang') || null; } catch { return null; } };
+const saveLanguage = (code) => { try { localStorage.setItem('learn51ai_lang', code); } catch {} };
 
 // ── Adaptive pace engine — figures out how the child learns ──
 // Tracks: answer speed, hint usage, wrong streaks, partial credit
@@ -159,8 +161,14 @@ export default function Learn51AIPage() {
   const [streak, setStreak] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  // ── Language ──
-  const [language, setLanguage] = useState(LANGUAGES[0]);
+  // ── Language — remembered across visits ──
+  const savedLangCode = loadLanguage();
+  const [language, setLanguage] = useState(LANGUAGES.find(l => l.code === savedLangCode) || LANGUAGES[0]);
+
+  const handleLanguageChange = useCallback((lang) => {
+    setLanguage(lang);
+    saveLanguage(lang.code);
+  }, []);
   const [showShare, setShowShare] = useState(false);
   const [hasWon, setHasWon] = useState(false); // show share button after first win
 
@@ -307,18 +315,22 @@ export default function Learn51AIPage() {
   };
 
   const reset = () => {
+    // Keep stars + level — only reset the session, not their achievements
+    const saved2 = loadProgress();
     setStage('intro');
-    setInterest(null);
-    setAge(null);
+    setInterest(saved2?.interest || null); // remember their interest
+    setAge(saved2?.age || null);           // remember their age
     setTopic(null);
-    setLevel(1);
+    setLevel(saved2?.level || 1);          // keep their level
     setQuestionCount(0);
     setScore(0);
-    setStars(0);
+    setStars(saved2?.stars || 0);          // keep their stars
     setHistory([]);
     setLessonData(null);
     setAssessment(null);
-    // Keep stars/level in localStorage but clear session
+    setHasWon(false);
+    setWrongStreak(0);
+    setRecentResults([]);
   };
 
   const fullReset = () => {
@@ -336,7 +348,7 @@ export default function Learn51AIPage() {
             <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-800 text-base">
               ← Back to Learn51
             </Link>
-            <LanguagePicker selectedLang={language.code} onChange={setLanguage} />
+            <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3">
@@ -348,15 +360,31 @@ export default function Learn51AIPage() {
 
           {/* WELCOME BACK BANNER */}
           {saved && saved.stars > 0 && (
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🌟</span>
-                <div>
-                  <p className="font-black text-amber-800">Welcome back! You have {saved.stars} ⭐ stars</p>
-                  <p className="text-amber-600 text-sm">Level {saved.level} · Your progress is saved on this device</p>
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">🌟</span>
+                  <div>
+                    <p className="font-black text-amber-800">Welcome back! {saved.stars} ⭐ {saved.stars === 1 ? 'star' : 'stars'} earned</p>
+                    <p className="text-amber-600 text-sm">Level {saved.level}{saved.interest ? ` · loves ${saved.interest}` : ''} · saved on this device only</p>
+                  </div>
                 </div>
+                <button onClick={fullReset} className="text-xs text-gray-400 hover:text-gray-600 font-bold underline flex-shrink-0">Start fresh</button>
               </div>
-              <button onClick={fullReset} className="text-xs text-gray-400 hover:text-gray-600 font-bold underline flex-shrink-0">Start fresh</button>
+              {saved.interest && saved.age && (
+                <div className="flex flex-wrap gap-2">
+                  <p className="text-amber-700 text-sm font-bold w-full">Jump back in — pick a topic:</p>
+                  {TOPICS.map(t => (
+                    <button
+                      key={t.id}
+                      onClick={() => { setTopic(t.id); loadLesson(t.id, saved.level || 1); }}
+                      className="px-3 py-1.5 rounded-xl border-2 border-amber-300 bg-white text-amber-800 text-sm font-black hover:border-amber-500 transition-all"
+                    >
+                      {t.emoji} {t.label}
+                    </button>
+                  ))}
+                </div>
+              )}
             </motion.div>
           )}
 
@@ -470,7 +498,7 @@ export default function Learn51AIPage() {
               <button onClick={reset} className="text-gray-400 hover:text-gray-600 font-bold text-sm flex items-center gap-1">
                 <RotateCcw className="w-4 h-4" /> Start over
               </button>
-              <LanguagePicker selectedLang={language.code} onChange={(lang) => { setLanguage(lang); }} />
+              <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
             </div>
             <div className="flex items-center gap-3">
               {wrongStreak >= 2 && (
