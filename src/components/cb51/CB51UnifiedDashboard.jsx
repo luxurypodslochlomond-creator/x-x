@@ -65,46 +65,46 @@ export default function CB51UnifiedDashboard({ artistId }) {
   return (
     <div className="h-screen bg-gray-950 flex flex-col overflow-hidden">
       {/* ── STICKY TAB BAR ── */}
-      <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-white/5">
+      <div className="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-white/10">
         {/* SCROLL TABS */}
-        <div className="flex overflow-x-auto scrollbar-hide whitespace-nowrap" onScroll={handleScroll}>
+        <div className="flex overflow-x-auto scrollbar-hide whitespace-nowrap gap-2 px-4 py-4" onScroll={handleScroll}>
           {tabs.map(tab => {
            const Icon = tab.icon;
            const isActive = activeTab === tab.id;
            const colorMap = {
-             cyan: { active: 'border-cyan-400 text-cyan-400', inactive: 'border-transparent text-gray-500' },
-             orange: { active: 'border-orange-500 text-orange-400', inactive: 'border-transparent text-gray-500' },
-             green: { active: 'border-green-500 text-green-400', inactive: 'border-transparent text-gray-500' },
-             red: { active: 'border-red-500 text-red-400', inactive: 'border-transparent text-gray-500' },
-             amber: { active: 'border-amber-400 text-amber-400', inactive: 'border-transparent text-gray-500' }
-           };
-           const colors = colorMap[tab.color] || colorMap.cyan;
-           return (
-             <button
-               key={tab.id}
-               onClick={() => setActiveTab(tab.id)}
-               className={`flex items-center gap-2 px-3 py-3 font-bold text-sm whitespace-nowrap transition-all border-b-2 flex-shrink-0 ${
-                 isActive ? colors.active : colors.inactive
-               }`}
-             >
-                <Icon className="w-4 h-4" />
-                <span>{tab.label}</span>
-                {tab.badge > 0 && (
-                  <span className={`ml-1 px-2 py-0.5 text-white text-xs font-black rounded-full ${
-                    tab.color === 'cyan' ? 'bg-cyan-500' :
-                    tab.color === 'orange' ? 'bg-orange-500' :
-                    tab.color === 'green' ? 'bg-green-500' :
-                    tab.color === 'red' ? 'bg-red-500' :
-                    'bg-amber-500'
-                  }`}>
-                    {tab.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+              cyan: { active: 'border-cyan-400 text-cyan-400 bg-cyan-500/10', inactive: 'border-transparent text-gray-500 hover:text-gray-300' },
+              orange: { active: 'border-orange-500 text-orange-400 bg-orange-500/10', inactive: 'border-transparent text-gray-500 hover:text-gray-300' },
+              green: { active: 'border-green-500 text-green-400 bg-green-500/10', inactive: 'border-transparent text-gray-500 hover:text-gray-300' },
+              red: { active: 'border-red-500 text-red-400 bg-red-500/10', inactive: 'border-transparent text-gray-500 hover:text-gray-300' },
+              amber: { active: 'border-amber-400 text-amber-400 bg-amber-500/10', inactive: 'border-transparent text-gray-500 hover:text-gray-300' }
+            };
+            const colors = colorMap[tab.color] || colorMap.cyan;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex flex-col items-center gap-1.5 px-4 py-3 font-black text-xs whitespace-nowrap transition-all border-b-2 flex-shrink-0 rounded-lg ${
+                  isActive ? colors.active : colors.inactive
+                }`}
+              >
+                 <Icon className="w-6 h-6" />
+                 <span>{tab.label}</span>
+                 {tab.badge > 0 && (
+                   <span className={`px-2 py-0.5 text-white text-xs font-black rounded-full ${
+                     tab.color === 'cyan' ? 'bg-cyan-500' :
+                     tab.color === 'orange' ? 'bg-orange-500' :
+                     tab.color === 'green' ? 'bg-green-500' :
+                     tab.color === 'red' ? 'bg-red-500' :
+                     'bg-amber-500'
+                   }`}>
+                     {tab.badge}
+                   </span>
+                 )}
+               </button>
+             );
+           })}
+         </div>
+       </div>
 
       {/* ── SCROLLABLE CONTENT ── */}
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto scrollbar-hide">
