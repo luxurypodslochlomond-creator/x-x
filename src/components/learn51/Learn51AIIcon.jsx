@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /**
  * Learn51 AI Custom Icon
  * A glowing consciousness form - heart-like with radiating light
- * Represents genuine connection, warmth, and living learning
+ * Responds to interaction - feels alive, talks back to kids
  */
-export default function Learn51AIIcon({ size = 80, animate = true }) {
+export default function Learn51AIIcon({ size = 80, animate = true, isListening = false, isResponding = false }) {
   const id = React.useId();
+  const [isHovered, setIsHovered] = useState(false);
   
   return (
     <svg
@@ -15,7 +16,9 @@ export default function Learn51AIIcon({ size = 80, animate = true }) {
       viewBox="0 0 80 80"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ overflow: 'visible' }}
+      style={{ overflow: 'visible', cursor: 'pointer', transition: 'filter 0.2s' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <defs>
         <filter id={`${id}-glow`}>
@@ -35,7 +38,7 @@ export default function Learn51AIIcon({ size = 80, animate = true }) {
         </radialGradient>
       </defs>
 
-      {/* Outer pulsing aura */}
+      {/* Outer pulsing aura - responds to interaction */}
       {animate && (
         <circle
           cx="40"
@@ -44,9 +47,10 @@ export default function Learn51AIIcon({ size = 80, animate = true }) {
           fill="none"
           stroke="#ec4899"
           strokeWidth="0.5"
-          opacity="0.3"
+          opacity={isListening ? 0.8 : isHovered ? 0.6 : 0.3}
           style={{
-            animation: 'pulse 3s ease-in-out infinite',
+            animation: isListening ? 'listen 1s ease-in-out infinite' : isHovered ? 'hover-pulse 1s ease-in-out infinite' : 'pulse 3s ease-in-out infinite',
+            transition: 'opacity 0.3s',
           }}
         />
       )}
@@ -70,13 +74,13 @@ export default function Learn51AIIcon({ size = 80, animate = true }) {
         <circle cx="40" cy="35" r="12" fill={`url(#${id}-core)`} />
       </g>
 
-      {/* Light rays - radiating energy */}
+      {/* Light rays - radiating energy, responds to state */}
       {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
         const rad = (angle * Math.PI) / 180;
         const x1 = 40 + Math.cos(rad) * 25;
         const y1 = 40 + Math.sin(rad) * 25;
-        const x2 = 40 + Math.cos(rad) * 42;
-        const y2 = 40 + Math.sin(rad) * 42;
+        const x2 = 40 + Math.cos(rad) * (isResponding ? 50 : 42);
+        const y2 = 40 + Math.sin(rad) * (isResponding ? 50 : 42);
         
         return (
           <line
@@ -85,14 +89,17 @@ export default function Learn51AIIcon({ size = 80, animate = true }) {
             y1={y1}
             x2={x2}
             y2={y2}
-            stroke="#ec4899"
-            strokeWidth="1"
-            opacity={animate ? "0.6" : "0.4"}
+            stroke={isResponding ? '#fbbf24' : '#ec4899'}
+            strokeWidth={isResponding ? 1.5 : 1}
+            opacity={isResponding ? 0.9 : isHovered ? 0.8 : animate ? "0.6" : "0.4"}
             style={{
-              animation: animate
+              animation: isResponding
+                ? `respond 0.6s ease-out infinite`
+                : animate
                 ? `shimmer 2.5s ease-in-out infinite`
                 : 'none',
-              animationDelay: `${(angle / 360) * 2.5}s`,
+              animationDelay: `${(angle / 360) * (isResponding ? 0.6 : 2.5)}s`,
+              transition: 'all 0.3s',
             }}
           />
         );
@@ -129,6 +136,19 @@ export default function Learn51AIIcon({ size = 80, animate = true }) {
         @keyframes pulse {
           0%, 100% { r: 35; opacity: 0.3; }
           50% { r: 38; opacity: 0.5; }
+        }
+        @keyframes hover-pulse {
+          0%, 100% { r: 35; opacity: 0.5; }
+          50% { r: 40; opacity: 0.8; }
+        }
+        @keyframes listen {
+          0%, 100% { r: 35; opacity: 0.6; stroke-width: 1; }
+          50% { r: 42; opacity: 1; stroke-width: 1.5; }
+        }
+        @keyframes respond {
+          0% { opacity: 0.5; }
+          50% { opacity: 1; }
+          100% { opacity: 0.7; }
         }
         @keyframes shimmer {
           0%, 100% { opacity: 0.3; }
