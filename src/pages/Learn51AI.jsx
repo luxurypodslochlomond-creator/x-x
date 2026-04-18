@@ -162,6 +162,7 @@ export default function Learn51AIPage() {
   const [streak, setStreak] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedTopics, setSelectedTopics] = useState([]);
+  const [iconState, setIconState] = useState('idle'); // 'idle' | 'thinking' | 'responding' | 'celebrating'
 
   // ── Language — remembered across visits ──
   const savedLangCode = loadLanguage();
@@ -209,11 +210,12 @@ export default function Learn51AIPage() {
   }, [language]);
 
   const loadLesson = async (topicOverride, levelOverride) => {
-    setLoading(true);
-    setAnswer('');
-    setAssessment(null);
-    setShowHint(false);
-    setLessonData(null);
+   setLoading(true);
+   setAnswer('');
+   setAssessment(null);
+   setShowHint(false);
+   setLessonData(null);
+   setIconState('thinking');
 
     const useTopic = topicOverride || topic;
     const useLevel = levelOverride || level;
@@ -252,9 +254,10 @@ export default function Learn51AIPage() {
 
     setLessonData(result);
     setLoading(false);
+    setIconState('responding');
     setStage('learning');
     setQuestionStartTime(Date.now()); // start timing their response
-    setTimeout(() => inputRef.current?.focus(), 300);
+    setTimeout(() => { setIconState('idle'); inputRef.current?.focus(); }, 800);
   };
 
   const submitAnswer = async () => {
@@ -286,6 +289,7 @@ export default function Learn51AIPage() {
 
     setAssessment(result);
     setLoading(false);
+    setIconState(result.correct ? 'celebrating' : 'responding');
 
     // ── Record pace data ──
     const responseMs = questionStartTime ? Date.now() - questionStartTime : 30000;
@@ -560,12 +564,22 @@ export default function Learn51AIPage() {
           {loading ? (
             <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-16 space-y-4">
                 <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1, repeat: Infinity }} className="flex justify-center">
-                  <Learn51AIIcon size={80} animate={true} />
+                  <Learn51AIIcon size={80} animate={true} isListening={true} />
                 </motion.div>
               <p className="text-indigo-700 font-black text-lg">Thinking of the perfect question...</p>
             </motion.div>
           ) : lessonData && (
             <motion.div key="lesson" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+
+              {/* AI ICON STATE */}
+              <div className="flex justify-center py-2">
+                <Learn51AIIcon 
+                  size={80} 
+                  animate={true} 
+                  isListening={iconState === 'thinking'}
+                  isResponding={iconState === 'responding'}
+                />
+              </div>
 
               {/* WOW FACT */}
               <div className={`bg-gradient-to-r ${topicData?.color} rounded-3xl p-5 text-white`}>
@@ -646,6 +660,14 @@ export default function Learn51AIPage() {
                       : 'bg-blue-50 border-blue-300'
                   }`}
                 >
+                  {/* AI CELEBRATES OR ENCOURAGES */}
+                  <div className="flex justify-center py-2">
+                    <Learn51AIIcon 
+                      size={70} 
+                      animate={true} 
+                      isResponding={assessment.correct}
+                    />
+                  </div>
                   <div className="flex items-center gap-3">
                     <span className="text-4xl">
                       {assessment.correct ? '🌟' : assessment.how_close === 'nearly' ? '🔥' : '💙'}
