@@ -6,6 +6,7 @@ import { Sparkles, ArrowRight, RotateCcw, Star, Volume2, VolumeX, Share2 } from 
 import CreativeReward from '@/components/learn51/CreativeReward';
 import ShareYourWin from '@/components/learn51/ShareYourWin';
 import LanguagePicker, { LANGUAGES } from '@/components/learn51/LanguagePicker';
+import Learn51AIIcon from '@/components/learn51/Learn51AIIcon';
 
 // Web Speech API — free, built-in, no API key needed
 const speak = (text) => {
@@ -361,7 +362,9 @@ export default function Learn51AIPage() {
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3">
-            <div className="text-6xl">🤖✨</div>
+            <div className="flex justify-center">
+              <Learn51AIIcon size={100} animate={true} />
+            </div>
             <h1 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">Learn51 AI</h1>
             <p className="text-xl text-indigo-700 font-bold">Learning made just for YOU</p>
             <p className="text-gray-500 text-base">No login · No data · Free forever · Powered by AI</p>
@@ -497,7 +500,9 @@ export default function Learn51AIPage() {
           transition={{ duration: 1.2, repeat: Infinity }}
           className="text-center space-y-4"
         >
-          <div className="text-6xl">🤖</div>
+          <div className="flex justify-center">
+            <Learn51AIIcon size={100} animate={true} />
+          </div>
           <p className="text-xl font-black text-indigo-700">Finding the perfect lesson for you...</p>
           <p className="text-gray-500">Connecting {TOPICS.find(t => t.id === topic)?.label} to {interest}...</p>
         </motion.div>
@@ -554,7 +559,9 @@ export default function Learn51AIPage() {
           <AnimatePresence mode="wait">
           {loading ? (
             <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-16 space-y-4">
-              <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1, repeat: Infinity }} className="text-5xl">🤖</motion.div>
+                <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1, repeat: Infinity }} className="flex justify-center">
+                  <Learn51AIIcon size={80} animate={true} />
+                </motion.div>
               <p className="text-indigo-700 font-black text-lg">Thinking of the perfect question...</p>
             </motion.div>
           ) : lessonData && (
