@@ -108,7 +108,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
 
       {/* ── SCROLLABLE CONTENT ── */}
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto scrollbar-hide">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-6">
           <AnimatePresence mode="wait">
             {/* GIGS TAB */}
             {activeTab === 'gigs' && (
@@ -117,8 +117,8 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-4 space-y-6"
-              >
+                className="py-6 space-y-8"
+                >
                 {/* UPLOAD NEW OFFER */}
                 <div>
                   <div className="space-y-2 mb-4">
@@ -129,18 +129,18 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 </div>
 
                 {/* PENDING OFFERS */}
-                <div className="border-t border-white/10 pt-6">
-                  <div className="space-y-2 mb-4">
-                    <h2 className="text-white font-black text-lg">Pending Offers</h2>
+                <div className="border-t border-cyan-500/10 pt-8">
+                  <div className="space-y-2 mb-6">
+                    <h2 className="text-cyan-400 font-black text-xl">Pending Offers</h2>
                     <p className="text-gray-500 text-sm">YES/NO to decide · AI reads offers instantly</p>
                   </div>
                   <CB51GigDecisionEngine artistId={artistId} />
                 </div>
 
                 {/* CONFIRMED GIGS - Ready to send to promoter */}
-                <div className="border-t border-white/10 pt-6">
-                  <div className="space-y-2 mb-4">
-                    <h2 className="text-white font-black text-lg">Confirmed Gigs</h2>
+                <div className="border-t border-cyan-500/10 pt-8">
+                  <div className="space-y-2 mb-6">
+                    <h2 className="text-cyan-400 font-black text-xl">Confirmed Gigs</h2>
                     <p className="text-gray-500 text-sm">Draft email ready · tap to send to promoter</p>
                   </div>
                   <CB51ConfirmedGigDraftEmail artistId={artistId} />
@@ -155,10 +155,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-4 space-y-3"
-              >
-                <div className="space-y-2 mb-4">
-                  <h2 className="text-white font-black text-lg">Messages</h2>
+                className="py-6 space-y-4"
+                >
+                <div className="space-y-2 mb-6">
+                  <h2 className="text-white font-black text-xl">Messages</h2>
                   <p className="text-gray-500 text-sm">{messages.length} unread</p>
                 </div>
 
@@ -195,10 +195,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-4 space-y-3"
-              >
-                <div className="space-y-2 mb-4">
-                   <h2 className="text-white font-black text-lg">TO-DO</h2>
+                className="py-6 space-y-4"
+                >
+                <div className="space-y-2 mb-6">
+                   <h2 className="text-green-400 font-black text-xl">TO-DO</h2>
                    <p className="text-gray-500 text-sm">
                      {tasks.filter(t => t.status !== 'done').length} active, {tasks.filter(t => t.status === 'done').length} done
                    </p>
@@ -257,10 +257,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-4 space-y-4"
-              >
-                <div className="space-y-2 mb-4">
-                  <h2 className="text-white font-black text-lg">Finance</h2>
+                className="py-6 space-y-6"
+                >
+                <div className="space-y-2 mb-6">
+                  <h2 className="text-red-400 font-black text-xl">Finance</h2>
                   <p className="text-gray-500 text-sm">Gig earnings summary</p>
                 </div>
 
@@ -309,10 +309,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-4 space-y-4"
-              >
-                <div className="space-y-2 mb-4">
-                  <h2 className="text-white font-black text-lg">Calendar</h2>
+                className="py-6 space-y-6"
+                >
+                <div className="space-y-2 mb-6">
+                  <h2 className="text-amber-400 font-black text-xl">Calendar</h2>
                   <p className="text-gray-500 text-sm">{confirmedGigs.length} confirmed shows</p>
                 </div>
 
