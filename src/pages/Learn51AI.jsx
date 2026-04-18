@@ -160,6 +160,7 @@ export default function Learn51AIPage() {
   const [showReward, setShowReward] = useState(false);
   const [streak, setStreak] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [selectedTopics, setSelectedTopics] = useState([]);
 
   // ── Language — remembered across visits ──
   const savedLangCode = loadLanguage();
@@ -219,9 +220,13 @@ export default function Learn51AIPage() {
     const avgMs = questionCount > 0 ? totalResponseMs / questionCount : 30000;
     const paceNote = buildPaceNote({ questionCount, wrongStreak, hintUsedCount, avgResponseMs: avgMs, recentResults });
 
+    const topicLabels = selectedTopics.length > 0 
+      ? selectedTopics.map(id => TOPICS.find(t => t.id === id)?.label).filter(Boolean).join(' + ')
+      : TOPICS.find(t => t.id === useTopic)?.label || useTopic;
+    
     const result = await base44.integrations.Core.InvokeLLM({
       prompt: PROMPT_TEMPLATE({
-        topic: TOPICS.find(t => t.id === useTopic)?.label || useTopic,
+        topic: topicLabels,
         interest: interest,
         age: age,
         level: useLevel,
@@ -433,34 +438,45 @@ export default function Learn51AIPage() {
             </motion.div>
           )}
 
-          {/* STEP 3: Topic */}
+          {/* STEP 3: Topics (Multi-select) */}
           {interest && age && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-              <p className="text-xl font-black text-gray-900 mb-1">Step 3 — What shall we explore? 🌍</p>
-              <p className="text-gray-500 text-sm mb-4">I'll connect it to {interest} — I promise it'll surprise you</p>
+              <p className="text-xl font-black text-gray-900 mb-1">Step 3 — What sounds fun? 🌍</p>
+              <p className="text-gray-500 text-sm mb-4">Pick one or mix & match! I'll blend them with {interest}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {TOPICS.map(t => (
                   <button
                     key={t.id}
                     onClick={() => {
-                      setTopic(t.id);
-                      loadLesson(t.id, 1);
+                      const updated = selectedTopics.includes(t.id)
+                        ? selectedTopics.filter(id => id !== t.id)
+                        : [...selectedTopics, t.id];
+                      setSelectedTopics(updated);
+                      if (updated.length > 0) setTopic(updated[0]); // set first as primary
                     }}
                     className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left transition-all font-bold ${
-                      topic === t.id
+                      selectedTopics.includes(t.id)
                         ? `${t.border} bg-gray-50`
                         : 'border-gray-200 hover:border-gray-400'
                     }`}
                   >
                     <span className="text-3xl">{t.emoji}</span>
-                    <div>
+                    <div className="flex-1">
                       <p className="text-gray-900 font-black">{t.label}</p>
                       <p className="text-gray-500 text-sm font-normal">{t.desc}</p>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 ml-auto" />
+                    {selectedTopics.includes(t.id) && <span className="text-indigo-600 font-black">✓</span>}
                   </button>
                 ))}
               </div>
+              {selectedTopics.length > 0 && (
+                <button
+                  onClick={() => loadLesson(selectedTopics[0], 1)}
+                  className="w-full mt-4 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-black rounded-2xl transition-all"
+                >
+                  Let's go! 🚀
+                </button>
+              )}
             </motion.div>
           )}
         </div>
@@ -685,15 +701,20 @@ export default function Learn51AIPage() {
             />
           )}
 
-          {/* CHANGE TOPIC */}
+          {/* QUICK TOPIC SWITCH */}
           {!loading && (
             <div className="flex gap-2 justify-center flex-wrap pt-2">
               {TOPICS.map(t => (
                 <button
                   key={t.id}
-                  onClick={() => { setTopic(t.id); setHistory([]); loadLesson(t.id, level); }}
+                  onClick={() => { 
+                    setSelectedTopics([t.id]);
+                    setTopic(t.id); 
+                    setHistory([]); 
+                    loadLesson(t.id, level); 
+                  }}
                   className={`text-sm px-3 py-1.5 rounded-full border font-bold transition-all ${
-                    topic === t.id
+                    topic === t.id || selectedTopics.includes(t.id)
                       ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                       : 'border-gray-200 text-gray-500 hover:border-gray-400'
                   }`}
