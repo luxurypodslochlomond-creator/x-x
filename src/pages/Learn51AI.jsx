@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
@@ -141,16 +141,22 @@ const buildPaceNote = ({ questionCount, wrongStreak, hintUsedCount, avgResponseM
 };
 
 export default function Learn51AIPage() {
-  const saved = loadProgress();
+   const saved = loadProgress();
 
-  const [stage, setStage] = useState('intro');
-  const [interest, setInterest] = useState(saved?.interest || null);
-  const [age, setAge] = useState(saved?.age || null);
-  const [topic, setTopic] = useState(null);
-  const [level, setLevel] = useState(saved?.level || 1);
-  const [questionCount, setQuestionCount] = useState(0);
-  const [score, setScore] = useState(0);
-  const [stars, setStars] = useState(saved?.stars || 0);
+   const [stage, setStage] = useState('intro');
+   const [interest, setInterest] = useState(saved?.interest || null);
+   const [age, setAge] = useState(saved?.age || null);
+   const [topic, setTopic] = useState(null);
+   const [level, setLevel] = useState(saved?.level || 1);
+   const [questionCount, setQuestionCount] = useState(0);
+   const [score, setScore] = useState(0);
+   const [stars, setStars] = useState(saved?.stars || 0);
+
+   // Save progress on every state change for critical fields
+   useEffect(() => {
+     const progressToSave = { stars, level, interest, age };
+     persistProgress(progressToSave);
+   }, [stars, level, interest, age]);
 
   const [lessonData, setLessonData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -187,7 +193,8 @@ export default function Learn51AIPage() {
   // Persist progress to localStorage whenever key values change
   const persistProgress = useCallback((updates) => {
     const current = loadProgress() || {};
-    saveProgress({ ...current, ...updates });
+    const merged = { ...current, ...updates, lastSaved: Date.now() };
+    saveProgress(merged);
   }, []);
 
   const readLesson = useCallback((data) => {
