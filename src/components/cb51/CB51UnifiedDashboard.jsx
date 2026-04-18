@@ -67,7 +67,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
       {/* ── STICKY TAB BAR ── */}
       <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-white/5">
         {/* SCROLL TABS */}
-        <div className="flex overflow-x-auto scrollbar-hide" onScroll={handleScroll}>
+        <div className="flex overflow-x-auto scrollbar-hide whitespace-nowrap" onScroll={handleScroll}>
           {tabs.map(tab => {
            const Icon = tab.icon;
            const isActive = activeTab === tab.id;
@@ -83,7 +83,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
              <button
                key={tab.id}
                onClick={() => setActiveTab(tab.id)}
-               className={`flex items-center gap-2 px-4 py-3 font-bold text-sm whitespace-nowrap transition-all border-b-2 ${
+               className={`flex items-center gap-2 px-3 py-3 font-bold text-sm whitespace-nowrap transition-all border-b-2 flex-shrink-0 ${
                  isActive ? colors.active : colors.inactive
                }`}
              >
