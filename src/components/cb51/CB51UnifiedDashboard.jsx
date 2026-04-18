@@ -57,7 +57,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
   const tabs = [
     { id: 'gigs', label: 'Gigs', icon: Zap, badge: 0, color: 'cyan' },
     { id: 'inbox', label: 'Inbox', icon: Mail, badge: messages.length, color: 'cyan' },
-    { id: 'tasks', label: 'Tasks', icon: CheckCircle, badge: tasks.filter(t => t.status !== 'done').length, color: 'green' },
+    { id: 'tasks', label: 'TO-DO', icon: CheckCircle, badge: tasks.filter(t => t.status !== 'done').length, color: 'green' },
     { id: 'finance', label: 'Finance', icon: DollarSign, badge: 0, color: 'red' },
     { id: 'calendar', label: 'Calendar', icon: Calendar, badge: confirmedGigs.length, color: 'cyan' }
   ];
@@ -196,16 +196,16 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 className="p-4 space-y-3"
               >
                 <div className="space-y-2 mb-4">
-                  <h2 className="text-white font-black text-lg">Tasks</h2>
-                  <p className="text-gray-500 text-sm">
-                    {tasks.filter(t => t.status !== 'done').length} active, {tasks.filter(t => t.status === 'done').length} done
-                  </p>
-                </div>
+                   <h2 className="text-white font-black text-lg">TO-DO</h2>
+                   <p className="text-gray-500 text-sm">
+                     {tasks.filter(t => t.status !== 'done').length} active, {tasks.filter(t => t.status === 'done').length} done
+                   </p>
+                 </div>
 
-                {tasks.length === 0 ? (
-                  <div className="bg-cyan-950/20 border border-cyan-500/20 rounded-xl p-6 text-center">
-                    <CheckCircle className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-                    <p className="text-cyan-400 font-bold">No tasks</p>
+                 {tasks.length === 0 ? (
+                   <div className="bg-green-950/20 border border-green-500/20 rounded-xl p-6 text-center">
+                     <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                     <p className="text-green-400 font-bold">No tasks</p>
                   </div>
                 ) : (
                   <div className="space-y-2">
