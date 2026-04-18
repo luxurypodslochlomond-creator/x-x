@@ -87,6 +87,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
     }
   };
 
+  const toggleReviewGig = (gig) => {
+    setReviewingGig(reviewingGig?.id === gig.id ? null : gig);
+  };
+
   // Tab config with colour system
   const tabs = [
     { id: 'gigs', label: 'Gigs', icon: Zap, badge: 0, color: 'cyan' },
@@ -162,7 +166,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
                   <CB51GigUploadParser artistId={artistId} onSuccess={() => queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] })} />
                 </div>
 
-                {/* PENDING OFFERS FOR REVIEW */}
+                {/* PENDING OFFERS FOR REVIEW - INLINE DROPDOWN */}
                 {pendingGigs.length > 0 && (
                   <div className="border-t border-cyan-500/10 pt-8">
                     <div className="space-y-2 mb-6">
@@ -171,25 +175,71 @@ export default function CB51UnifiedDashboard({ artistId }) {
                     </div>
                     <div className="space-y-2">
                       {pendingGigs.slice(0, 5).map(gig => (
-                        <motion.div
-                          key={gig.id}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="bg-gray-900 border border-cyan-500/20 rounded-lg p-4"
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-white font-bold">{gig.venue}</p>
-                              <p className="text-gray-400 text-sm">{gig.date_start}</p>
-                              <p className="text-cyan-400 font-bold text-sm mt-1">£{gig.fee?.toLocaleString()}</p>
+                        <motion.div key={gig.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+                          <button
+                            onClick={() => toggleReviewGig(gig)}
+                            className="w-full text-left bg-gray-900 border border-cyan-500/20 hover:border-cyan-500/40 rounded-lg p-4 transition-colors"
+                          >
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="flex-1 min-w-0">
+                                <p className="text-white font-bold">{gig.venue}</p>
+                                <p className="text-gray-400 text-sm">{gig.date_start}</p>
+                                <p className="text-cyan-400 font-bold text-sm mt-1">£{gig.fee?.toLocaleString()}</p>
+                              </div>
+                              <motion.div
+                                animate={{ rotate: reviewingGig?.id === gig.id ? 180 : 0 }}
+                                className="text-cyan-400 flex-shrink-0"
+                              >
+                                ▼
+                              </motion.div>
                             </div>
-                            <button
-                              onClick={() => setReviewingGig(gig)}
-                              className="px-3 py-1.5 bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 text-xs font-bold rounded transition-colors flex-shrink-0"
-                            >
-                              Review
-                            </button>
-                          </div>
+                          </button>
+
+                          {/* INLINE REVIEW DROPDOWN */}
+                          <AnimatePresence>
+                            {reviewingGig?.id === gig.id && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="bg-gray-800/50 border border-t-0 border-cyan-500/20 rounded-b-lg p-4 space-y-3">
+                                  {gig.location && (
+                                    <div>
+                                      <p className="text-gray-500 text-xs mb-1">LOCATION</p>
+                                      <p className="text-gray-300 text-sm">{gig.location}</p>
+                                    </div>
+                                  )}
+                                  {gig.promoter_name && (
+                                    <div>
+                                      <p className="text-gray-500 text-xs mb-1">PROMOTER</p>
+                                      <p className="text-gray-300 font-bold text-sm">{gig.promoter_name}</p>
+                                      {gig.promoter_contact && (
+                                        <p className="text-gray-400 text-xs mt-1">{gig.promoter_contact}</p>
+                                      )}
+                                    </div>
+                                  )}
+                                  <div className="flex gap-2 pt-2 border-t border-gray-700">
+                                    <button
+                                      onClick={() => setReviewingGig(null)}
+                                      disabled={confirmingGig}
+                                      className="flex-1 px-3 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded font-bold text-sm transition-colors disabled:opacity-50"
+                                    >
+                                      Reject
+                                    </button>
+                                    <button
+                                      onClick={() => handleConfirmGig(gig)}
+                                      disabled={confirmingGig}
+                                      className="flex-1 px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded font-bold text-sm transition-colors disabled:opacity-50"
+                                    >
+                                      {confirmingGig ? 'Confirming...' : 'Confirm'}
+                                    </button>
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </motion.div>
                       ))}
                     </div>
@@ -424,86 +474,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
         <div className="h-6" />
       </div>
 
-      {/* REVIEW GIG MODAL */}
-      <AnimatePresence>
-        {reviewingGig && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 z-50 flex flex-col lg:items-center lg:justify-center p-4"
-            onClick={() => !confirmingGig && setReviewingGig(null)}
-          >
-            <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 100, opacity: 0 }}
-              className="w-full lg:max-w-md bg-gray-900 border border-cyan-500/30 rounded-2xl p-6 lg:p-8 space-y-6 max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div>
-                <h3 className="text-cyan-400 font-black text-2xl lg:text-xl mb-2">Review & Confirm</h3>
-                <p className="text-gray-500 text-sm">Confirm to notify artist of gig</p>
-              </div>
 
-              <div className="space-y-3 bg-gray-800/50 border border-gray-700 rounded-xl p-5">
-                <div>
-                  <p className="text-gray-500 text-xs mb-1">VENUE</p>
-                  <p className="text-white font-black text-lg">{reviewingGig.venue}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500 text-xs mb-1">DATE</p>
-                  <p className="text-cyan-400 font-bold">{reviewingGig.date_start}</p>
-                </div>
-                {reviewingGig.location && (
-                  <div>
-                    <p className="text-gray-500 text-xs mb-1">LOCATION</p>
-                    <p className="text-gray-300 text-sm">{reviewingGig.location}</p>
-                  </div>
-                )}
-                <div className="border-t border-gray-700 pt-3 mt-3">
-                  <p className="text-gray-500 text-xs mb-1">FEE</p>
-                  <p className="text-cyan-400 font-black text-xl">£{reviewingGig.fee?.toLocaleString()}</p>
-                </div>
-                {reviewingGig.promoter_name && (
-                  <div className="border-t border-gray-700 pt-3 mt-3">
-                    <p className="text-gray-500 text-xs mb-1">PROMOTER</p>
-                    <p className="text-gray-300 font-bold text-sm">{reviewingGig.promoter_name}</p>
-                    {reviewingGig.promoter_contact && (
-                      <p className="text-gray-400 text-xs mt-1">{reviewingGig.promoter_contact}</p>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              <div className="flex flex-col-reverse lg:flex-row gap-3">
-                <button
-                  onClick={() => setReviewingGig(null)}
-                  disabled={confirmingGig}
-                  className="flex-1 px-4 py-3 lg:py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-bold text-base lg:text-sm transition-colors disabled:opacity-50"
-                >
-                  Reject
-                </button>
-                <button
-                  onClick={() => handleConfirmGig(reviewingGig)}
-                  disabled={confirmingGig}
-                  className="flex-1 px-4 py-3 lg:py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-bold text-base lg:text-sm transition-colors disabled:opacity-50"
-                >
-                  {confirmingGig ? 'Confirming...' : 'Confirm & Notify'}
-                </button>
-              </div>
-
-              <button
-                onClick={() => setReviewingGig(null)}
-                disabled={confirmingGig}
-                className="w-full px-4 py-2 text-gray-500 hover:text-gray-400 text-sm font-bold transition-colors disabled:opacity-50 lg:hidden"
-              >
-                Close
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* SCROLL TO TOP BUTTON */}
       {scrollY > 100 && (
