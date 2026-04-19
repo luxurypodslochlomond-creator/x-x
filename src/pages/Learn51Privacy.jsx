@@ -62,7 +62,7 @@ export default function Learn51Privacy() {
 
           <section className="bg-indigo-500/10 border border-indigo-500/30 rounded-2xl p-5 space-y-2">
             <h2 className="text-indigo-300 font-black text-lg">Contact</h2>
-            <p className="text-white/60">Privacy questions? <span className="text-indigo-300">hello@uf51.com</span> or via the <Link to="/Learn51About" className="text-indigo-400 hover:text-white underline">About page</Link>.</p>
+            <p className="text-white/60">Privacy questions? <span className="text-indigo-300">family@uf51.love</span> or via the <Link to="/Learn51About" className="text-indigo-400 hover:text-white underline">About page</Link>.</p>
           </section>
 
         </motion.div>
