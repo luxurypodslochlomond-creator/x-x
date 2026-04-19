@@ -5,55 +5,62 @@ import { motion } from 'framer-motion';
 export default function Learn51Terms() {
   return (
     <div className="min-h-screen bg-[#05080f] text-white px-5 py-10">
-      <div className="max-w-2xl mx-auto space-y-8">
+      <div className="max-w-2xl mx-auto space-y-6">
+
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <Link to="/Learn51" className="text-indigo-400 font-bold text-sm hover:text-white transition-colors">← Back to Learn51</Link>
-          <h1 className="text-4xl font-black mt-4 mb-2 bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Terms of Use</h1>
-          <p className="text-white/40 text-sm">Effective: April 2026</p>
+          <h1 className="text-4xl font-black mt-4 mb-1 bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Terms of Use</h1>
+          <p className="text-white/40 text-sm">April 2026</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="space-y-6 text-white/80 leading-relaxed">
+        {/* BIG SIMPLE STATEMENT */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
+          className="bg-cyan-500/10 border-2 border-cyan-500/40 rounded-2xl p-6 text-center">
+          <div className="text-5xl mb-3">🌍</div>
+          <p className="text-cyan-300 font-black text-2xl mb-2">This is free. Forever. For everyone.</p>
+          <p className="text-white/70 text-lg">No sign-up. No payment. No catch. Just open it and learn.</p>
+        </motion.div>
 
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">What is Learn51?</h2>
-            <p>Learn51 is a free educational platform for children, built by Universal Frequency 51 (UF51). It provides AI-powered learning tools, literacy exercises, life skills content and maths games — all free, forever, with no account needed.</p>
-          </section>
+        {/* PLAIN LANGUAGE CARDS */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className="space-y-4">
 
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">Who can use it?</h2>
-            <p>Learn51 is designed for children of all ages, anywhere in the world. Parents, teachers and carers are welcome to use it alongside children. No age verification is required because we collect no personal data whatsoever.</p>
-          </section>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">✅</p>
+            <p className="text-white font-black text-lg mb-1">Who is this for?</p>
+            <p className="text-white/60">Any child, anywhere in the world. Any age. Any language. Parents and teachers too. Everyone is welcome. No permission needed.</p>
+          </div>
 
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">What we expect from you</h2>
-            <ul className="list-disc list-inside space-y-1 text-white/70">
-              <li>Use Learn51 for learning — not to harm, harass or abuse others.</li>
-              <li>Don't try to break, reverse engineer or exploit the platform.</li>
-              <li>Be kind. This is a safe space for every child on Earth.</li>
-            </ul>
-          </section>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">💚</p>
+            <p className="text-white font-black text-lg mb-1">What we ask of you</p>
+            <p className="text-white/60">Just one thing — be kind. This is a safe space built for every child on Earth, including kids who have nothing else. Use it to learn. Don't try to break it or use it to hurt anyone.</p>
+          </div>
 
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">AI content</h2>
-            <p>Learn51 AI generates personalised lessons using large language models. While we design prompts carefully, AI can make mistakes. Parents and teachers should use their own judgment alongside any AI-generated content.</p>
-          </section>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">🤖</p>
+            <p className="text-white font-black text-lg mb-1">The AI can make mistakes</p>
+            <p className="text-white/60">The AI tutor is smart but not perfect. If something it says seems wrong, trust your instincts. AI is a tool — your brain is still the boss. Parents and teachers, use your judgment alongside it.</p>
+          </div>
 
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">No warranties</h2>
-            <p>Learn51 is provided free of charge, as-is, without warranty of any kind. We aim for 100% uptime but cannot guarantee it. We are not liable for any loss arising from use of the platform.</p>
-          </section>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">⚡</p>
+            <p className="text-white font-black text-lg mb-1">Sometimes it might go down</p>
+            <p className="text-white/60">We try our best to keep Learn51 running all the time. Occasionally things break. We're a small team doing this for free, for the right reasons. We'll always fix it as fast as we can.</p>
+          </div>
 
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">Changes to these terms</h2>
-            <p>We may update these terms from time to time. The date at the top of this page shows when they were last updated. Continued use of Learn51 means you accept any changes.</p>
-          </section>
-
-          <section className="bg-indigo-500/10 border border-indigo-500/30 rounded-2xl p-5 space-y-2">
-            <h2 className="text-indigo-300 font-black text-lg">Contact</h2>
-            <p className="text-white/60">Questions? Get in touch via the <Link to="/Learn51About" className="text-indigo-400 hover:text-white underline">About page</Link> or email <span className="text-indigo-300">family@uf51.love</span></p>
-          </section>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">🔓</p>
+            <p className="text-white font-black text-lg mb-1">Going open source</p>
+            <p className="text-white/60">One day the whole code will be open source — free for anyone in the world to improve, translate, and build on. That's the plan. Community-powered, no corporate capture, forever.</p>
+          </div>
 
         </motion.div>
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+          className="bg-indigo-500/10 border border-indigo-500/30 rounded-2xl p-5 text-center">
+          <p className="text-white/60 text-sm">Questions? We're real people. <a href="mailto:family@uf51.love" className="text-indigo-300 font-black hover:text-white transition-colors">family@uf51.love</a></p>
+        </motion.div>
+
       </div>
     </div>
   );

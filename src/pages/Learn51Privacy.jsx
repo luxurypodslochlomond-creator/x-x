@@ -2,70 +2,59 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const FACTS = [
-  { emoji: '🚫', label: 'No accounts', desc: 'No sign-up, no login, no email required — ever.' },
-  { emoji: '📦', label: 'No server data', desc: 'Your progress lives only in your browser. Nothing is sent to our servers.' },
-  { emoji: '🍪', label: 'No tracking cookies', desc: 'We do not use advertising cookies or tracking pixels.' },
-  { emoji: '🤖', label: 'AI prompts', desc: 'When you use the AI Tutor, anonymous prompts are sent to the AI — no name, no location, no identity.' },
-  { emoji: '👨‍👩‍👧', label: 'COPPA & GDPR safe', desc: "Because we collect zero personal data, we're safe for children in every jurisdiction." },
-  { emoji: '🌍', label: 'Open forever', desc: 'This policy will never change to allow advertising or data selling. It\'s part of our mission.' },
-];
-
 export default function Learn51Privacy() {
   return (
     <div className="min-h-screen bg-[#05080f] text-white px-5 py-10">
-      <div className="max-w-2xl mx-auto space-y-8">
+      <div className="max-w-2xl mx-auto space-y-6">
+
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <Link to="/Learn51" className="text-indigo-400 font-bold text-sm hover:text-white transition-colors">← Back to Learn51</Link>
-          <h1 className="text-4xl font-black mt-4 mb-2 bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Privacy Policy</h1>
-          <p className="text-white/40 text-sm">Effective: April 2026 · Last updated: April 2026</p>
+          <h1 className="text-4xl font-black mt-4 mb-1 bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Privacy</h1>
+          <p className="text-white/40 text-sm">April 2026</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-          <div className="bg-emerald-500/10 border border-emerald-500/40 rounded-2xl p-5 mb-6">
-            <p className="text-emerald-300 font-black text-lg">🔒 The short version</p>
-            <p className="text-white/70 mt-1">We collect <strong className="text-white">zero personal data</strong> from children or anyone else. Full stop.</p>
+        {/* BIG SIMPLE STATEMENT */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
+          className="bg-emerald-500/10 border-2 border-emerald-500/40 rounded-2xl p-6 text-center">
+          <div className="text-5xl mb-3">🔒</div>
+          <p className="text-emerald-300 font-black text-2xl mb-2">We know nothing about you.</p>
+          <p className="text-white/70 text-lg">No name. No age. No location. No email. Nothing. We literally cannot see who you are.</p>
+        </motion.div>
+
+        {/* PLAIN LANGUAGE CARDS */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className="space-y-4">
+
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">📱</p>
+            <p className="text-white font-black text-lg mb-1">Your stars and progress stay on your phone or computer</p>
+            <p className="text-white/60">When you earn stars or finish a lesson, that information is saved on your own device — not on our servers. If you clear your browser, it resets. We never see it.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {FACTS.map(f => (
-              <div key={f.label} className="bg-white/5 border border-white/10 rounded-2xl p-4 space-y-1">
-                <p className="text-2xl">{f.emoji}</p>
-                <p className="text-white font-black text-sm">{f.label}</p>
-                <p className="text-white/50 text-sm">{f.desc}</p>
-              </div>
-            ))}
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">🤖</p>
+            <p className="text-white font-black text-lg mb-1">When the AI teaches you, it doesn't know who you are</p>
+            <p className="text-white/60">The AI only gets told the topic you're learning and roughly how old you said you are. No name. No account. It's like asking a teacher a question without telling them your name.</p>
           </div>
-        </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="space-y-5 text-white/80 leading-relaxed">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">🚫</p>
+            <p className="text-white font-black text-lg mb-1">No one is watching you learn</p>
+            <p className="text-white/60">No adverts. No companies buying your data. No profiles being built on you. No one tracking which pages you visit. We built it this way on purpose — it's not just a rule, it's how the code works.</p>
+          </div>
 
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">Local storage</h2>
-            <p>Learn51 uses your browser's <code className="text-indigo-300 text-sm bg-indigo-500/10 px-1 rounded">localStorage</code> to remember your stars, level, language preference and favourite interest. This data never leaves your device. Clearing your browser data removes it entirely.</p>
-          </section>
-
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">AI Tutor prompts</h2>
-            <p>When the AI Tutor generates a lesson, an anonymous prompt is sent to our AI provider (containing topic, age bracket and interest — never your name or identity). Our AI provider does not store or train on these prompts.</p>
-          </section>
-
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">Third parties</h2>
-            <p>We do not share any data with advertisers, data brokers or any third party. We will never sell data. We will never build profiles on children.</p>
-          </section>
-
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
-            <h2 className="text-white font-black text-lg">Children's rights</h2>
-            <p>Learn51 is designed with children's digital rights at its core. We follow the principles of COPPA (US), GDPR-K (EU), and the UK Children's Code. If you have any concerns, please contact us.</p>
-          </section>
-
-          <section className="bg-indigo-500/10 border border-indigo-500/30 rounded-2xl p-5 space-y-2">
-            <h2 className="text-indigo-300 font-black text-lg">Contact</h2>
-            <p className="text-white/60">Privacy questions? <span className="text-indigo-300">family@uf51.love</span> or via the <Link to="/Learn51About" className="text-indigo-400 hover:text-white underline">About page</Link>.</p>
-          </section>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p className="text-2xl mb-2">♾️</p>
+            <p className="text-white font-black text-lg mb-1">This will never change</p>
+            <p className="text-white/60">We will never add ads. We will never sell data. We will never ask you to sign up. That's not a promise — it's built into what Learn51 is. It's going open source one day so the whole world can make sure of it.</p>
+          </div>
 
         </motion.div>
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+          className="bg-indigo-500/10 border border-indigo-500/30 rounded-2xl p-5 text-center">
+          <p className="text-white/60 text-sm">Any questions? We're real people. <a href="mailto:family@uf51.love" className="text-indigo-300 font-black hover:text-white transition-colors">family@uf51.love</a></p>
+        </motion.div>
+
       </div>
     </div>
   );
