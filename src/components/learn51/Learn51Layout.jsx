@@ -84,7 +84,7 @@ function MobileMenu({ onClose }) {
                   onClick={() => handleNav(item.url)}
                   className={`w-full flex items-center gap-3 p-3 rounded-2xl border transition-all text-left ${
                     item.donate
-                      ? 'border-violet-400/70 bg-gradient-to-r from-violet-500/20 to-indigo-500/20 hover:from-violet-500/30 hover:to-indigo-500/30'
+                      ? 'border-emerald-400/50 bg-emerald-500/10 hover:bg-emerald-500/20'
                       : item.highlight
                       ? 'border-violet-400/50 bg-violet-500/15 hover:bg-violet-500/25'
                       : 'border-white/5 bg-white/5 hover:bg-white/10'
@@ -92,7 +92,7 @@ function MobileMenu({ onClose }) {
                 >
                   <span className="text-2xl flex-shrink-0">{item.emoji}</span>
                   <div className="flex-1 min-w-0">
-                    <p className={`font-black text-sm ${item.donate ? 'text-violet-300' : item.highlight ? 'text-violet-200' : 'text-white'}`}>{item.label}</p>
+                    <p className={`font-black text-sm ${item.donate ? 'text-emerald-300' : item.highlight ? 'text-violet-200' : 'text-white'}`}>{item.label}</p>
                     <p className="text-white/40 text-xs">{item.sub}</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-white/20 flex-shrink-0" />
@@ -104,8 +104,8 @@ function MobileMenu({ onClose }) {
 
         {/* CIC Mission footer */}
         <div className="mt-6 pt-6 border-t border-white/10 text-center space-y-2">
-          <div className="inline-flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-full px-4 py-2">
-            <span className="text-violet-400 text-xs font-black">CIC</span>
+          <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-4 py-2">
+            <span className="text-emerald-400 text-xs font-black">CIC</span>
             <span className="text-white/50 text-xs">Universal Frequency 51</span>
           </div>
           <p className="text-white/30 text-xs">Free for every child on Earth · No login · No data</p>
@@ -152,7 +152,7 @@ export default function Learn51Layout() {
           {/* Donate button */}
           <Link
             to="/SupportLearn51"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl border border-violet-500/50 bg-violet-500/10 hover:bg-violet-500/20 text-violet-300 hover:text-violet-200 transition-all text-sm font-black"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 hover:text-emerald-200 transition-all text-sm font-black"
           >
             💜 Donate
           </Link>

@@ -32,8 +32,8 @@ Deno.serve(async (req) => {
       }],
       // Allow any billing country — global donations
       billing_address_collection: 'auto',
-      success_url: `${req.headers.get('origin')}/Learn51?donated=true`,
-      cancel_url: `${req.headers.get('origin')}/SupportLearn51`,
+      success_url: `${req.headers.get('origin') || 'https://uf51.love'}/Learn51?donated=true`,
+      cancel_url: `${req.headers.get('origin') || 'https://uf51.love'}/SupportLearn51`,
       metadata: {
         base44_app_id: Deno.env.get('BASE44_APP_ID'),
         type: 'donation',

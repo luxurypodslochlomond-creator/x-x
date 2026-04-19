@@ -82,14 +82,14 @@ export default function SupportLearn51() {
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-4">
           <div className="text-6xl">🌍</div>
-          <h1 className="text-4xl font-black">Keep Learn51 Free</h1>
+          <h1 className="text-4xl font-black">Help Keep Learn51 Free</h1>
           <p className="text-white/60 text-lg leading-relaxed">
             No ads. No logins. No tracking.<br />
-            Every child on Earth can use it, right now, today.
+            Every child on Earth — right now, today.
           </p>
           <p className="text-white/40 text-sm">
-            AI credits and servers cost real money.<br />
-            If it's helped someone you love, anything helps. ♾️
+            We're a CIC. AI credits and servers have real costs.<br />
+            If it helped — even £1 keeps it going. ♾️
           </p>
         </motion.div>
 
@@ -102,7 +102,7 @@ export default function SupportLearn51() {
             { icon: BookOpen, label: 'New Subjects', desc: 'More every month' },
           ].map(({ icon: Icon, label, desc }) => (
             <div key={label} className="bg-white/5 rounded-2xl p-4 text-center border border-white/10">
-              <Icon className="w-6 h-6 text-violet-400 mx-auto mb-2" />
+              <Icon className="w-6 h-6 text-emerald-400 mx-auto mb-2" />
               <p className="text-white font-black text-sm">{label}</p>
               <p className="text-white/40 text-xs">{desc}</p>
             </div>
@@ -119,7 +119,7 @@ export default function SupportLearn51() {
             <div className="relative">
               <button
                 onClick={() => setShowCurrencyPicker(!showCurrencyPicker)}
-                className="w-full flex items-center justify-between bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white hover:border-violet-400 transition-all"
+                className="w-full flex items-center justify-between bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white hover:border-emerald-400 transition-all"
               >
                 <span className="font-bold">{currencyData?.symbol} {currencyData?.label}</span>
                 <ChevronDown className={`w-4 h-4 text-white/40 transition-transform ${showCurrencyPicker ? 'rotate-180' : ''}`} />
@@ -130,7 +130,7 @@ export default function SupportLearn51() {
                     <button
                       key={c.code}
                       onClick={() => { setCurrency(c.code); setSelected(getPresets(c.code)[2]?.value || 500); setCustom(''); setShowCurrencyPicker(false); }}
-                      className={`w-full text-left px-4 py-3 hover:bg-violet-500/20 transition-all text-sm ${currency === c.code ? 'text-violet-300 font-bold' : 'text-white/70'}`}
+                      className={`w-full text-left px-4 py-3 hover:bg-emerald-500/20 transition-all text-sm ${currency === c.code ? 'text-emerald-300 font-bold' : 'text-white/70'}`}
                     >
                       {c.symbol} {c.label}
                     </button>
@@ -150,8 +150,8 @@ export default function SupportLearn51() {
                   onClick={() => { setSelected(a.value); setCustom(''); }}
                   className={`py-3 rounded-xl border-2 font-black text-sm transition-all ${
                     selected === a.value && !custom
-                      ? 'border-violet-400 bg-violet-500/20 text-white'
-                      : 'border-white/10 hover:border-white/30 text-white/70'
+                      ? 'border-emerald-400 bg-emerald-500/20 text-white'
+                      : 'border-white/10 hover:border-emerald-400/40 text-white/70'
                   }`}
                 >
                   {a.label}
@@ -168,7 +168,7 @@ export default function SupportLearn51() {
               placeholder="Other amount"
               value={custom}
               onChange={e => { setCustom(e.target.value); setSelected(null); }}
-              className="flex-1 bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-violet-400 transition-all"
+              className="flex-1 bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-emerald-400 transition-all"
             />
           </div>
 
@@ -177,26 +177,26 @@ export default function SupportLearn51() {
             whileTap={{ scale: 0.97 }}
             onClick={handleDonate}
             disabled={loading || !finalAmount || finalAmount < minAmount}
-            className="w-full py-5 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 hover:from-indigo-600 hover:via-violet-600 hover:to-purple-700 disabled:opacity-40 text-white font-black text-xl rounded-2xl transition-all shadow-2xl shadow-violet-500/30 flex items-center justify-center gap-3"
+            className="w-full py-5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-700 disabled:opacity-40 text-white font-black text-xl rounded-2xl transition-all shadow-2xl shadow-emerald-500/20 flex items-center justify-center gap-3"
           >
             <Heart className="w-6 h-6" />
-            {loading ? 'One sec...' : `Donate ${currencyData?.symbol}${custom || (selected ? (noDecimal ? selected : (selected/100).toFixed(2)) : '')}`}
+            {loading ? 'One sec...' : `Contribute ${currencyData?.symbol}${custom || (selected ? (noDecimal ? selected : (selected/100).toFixed(2)) : '')}`}
           </motion.button>
 
           {/* Payment methods note */}
           <div className="text-center space-y-1">
-            <p className="text-white/30 text-xs">💳 Card &nbsp;·&nbsp;  Apple Pay &nbsp;·&nbsp; Google Pay &nbsp;·&nbsp; Link</p>
+            <p className="text-white/30 text-xs">💳 Card &nbsp;·&nbsp; Apple Pay &nbsp;·&nbsp; Google Pay &nbsp;·&nbsp; Link</p>
             <p className="text-white/20 text-xs">Secure checkout via Stripe · No account needed</p>
           </div>
         </motion.div>
 
         {/* Honest note */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-          className="bg-violet-500/10 border border-violet-500/30 rounded-2xl p-5 text-center space-y-2">
-          <Coffee className="w-6 h-6 text-violet-400 mx-auto" />
+          className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5 text-center space-y-2">
+          <Coffee className="w-6 h-6 text-emerald-400 mx-auto" />
           <p className="text-white/80 text-sm leading-relaxed">
-            Built by one person who believes every child deserves a great education.<br />
-            <span className="text-violet-300 font-bold">No VC funding. No corporate owners. Just love and code.</span>
+            Universal Frequency 51 CIC — community interest company.<br />
+            <span className="text-emerald-300 font-bold">No VC funding. Asset-locked. Built for people, not profit.</span>
           </p>
           <p className="text-white/40 text-xs">Even the smallest amount keeps a child learning. Thank you. ♾️❤️</p>
         </motion.div>
