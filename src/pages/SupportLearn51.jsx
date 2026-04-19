@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Globe, ArrowLeft, Coffee, ChevronDown, ShieldCheck, Zap, Copy, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Heart, Globe, ArrowLeft, Coffee, ChevronDown, ShieldCheck, Zap } from 'lucide-react';
 import { createDonationCheckout } from '@/functions/createDonationCheckout';
 
 const CURRENCIES = [
@@ -32,47 +32,12 @@ const getPresets = (code) => PRESETS[code] || PRESETS['gbp'].map(p => ({
   ...p, label: `${CURRENCIES.find(c => c.code === code)?.symbol || ''}${p.value / 100}`
 }));
 
-const CRYPTO = [
-  {
-    name: 'Ethereum',
-    symbol: 'ETH',
-    address: '0x742d35Cc6634C0532925a3b8D4C9b9bB4B7e8cF2',
-    color: 'text-purple-400',
-    border: 'border-purple-500/30',
-    bg: 'bg-purple-500/5',
-    icon: '⟠',
-  },
-  {
-    name: 'Bitcoin',
-    symbol: 'BTC',
-    address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
-    color: 'text-amber-400',
-    border: 'border-amber-500/30',
-    bg: 'bg-amber-500/5',
-    icon: '₿',
-  },
-];
-
-function CryptoAddress({ coin }) {
-  const [copied, setCopied] = useState(false);
-  const copy = () => {
-    navigator.clipboard.writeText(coin.address);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  return (
-    <div className={`rounded-2xl border ${coin.border} ${coin.bg} p-4 space-y-2`}>
-      <div className="flex items-center justify-between">
-        <span className={`font-black text-sm ${coin.color}`}>{coin.icon} {coin.name} ({coin.symbol})</span>
-        <button onClick={copy} className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border ${coin.border} ${coin.color} hover:opacity-80 transition-all`}>
-          {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-          {copied ? 'Copied!' : 'Copy'}
-        </button>
-      </div>
-      <p className="text-white/40 text-xs font-mono break-all leading-relaxed">{coin.address}</p>
-    </div>
-  );
-}
+const getImpact = (amount, symbol, noDecimal) => {
+  const val = noDecimal ? amount : amount / 100;
+  const lessons = Math.round(val * 12);
+  if (lessons <= 0) return null;
+  return `${symbol}${noDecimal ? val : val.toFixed(2)} funds ~${lessons} lessons for kids who have nothing else`;
+};
 
 export default function SupportLearn51() {
   const [currency, setCurrency] = useState('gbp');
@@ -80,7 +45,6 @@ export default function SupportLearn51() {
   const [custom, setCustom] = useState('');
   const [loading, setLoading] = useState(false);
   const [showCurrencyPicker, setShowCurrencyPicker] = useState(false);
-  const [tab, setTab] = useState('fiat'); // 'fiat' | 'crypto'
 
   const currencyData = CURRENCIES.find(c => c.code === currency);
   const presets = getPresets(currency);
@@ -158,112 +122,89 @@ export default function SupportLearn51() {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
           className="rounded-3xl border border-white/10 overflow-hidden">
 
-          {/* Tab switcher */}
-          <div className="grid grid-cols-2 border-b border-white/10">
-            <button
-              onClick={() => setTab('fiat')}
-              className={`py-4 text-sm font-black transition-all ${tab === 'fiat' ? 'bg-emerald-500/15 text-emerald-300 border-b-2 border-emerald-400' : 'text-white/30 hover:text-white/60 bg-white/2'}`}
-            >
-              💳 Card / Bank
-            </button>
-            <button
-              onClick={() => setTab('crypto')}
-              className={`py-4 text-sm font-black transition-all ${tab === 'crypto' ? 'bg-purple-500/15 text-purple-300 border-b-2 border-purple-400' : 'text-white/30 hover:text-white/60 bg-white/2'}`}
-            >
-              ⟠ Crypto
-            </button>
-          </div>
-
           <div className="p-6 space-y-5 bg-white/2">
             <div className="text-center space-y-1">
               <p className="text-white font-black text-lg">Keep it free for every child</p>
               <p className="text-white/30 text-sm">AI credits cost real money. Even £1 funds dozens of lessons.</p>
             </div>
 
-            <AnimatePresence mode="wait">
-              {tab === 'fiat' ? (
-                <motion.div key="fiat" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
-                  {/* Currency picker */}
-                  <div className="relative">
+            {/* Currency picker */}
+            <div className="relative">
+              <button
+                onClick={() => setShowCurrencyPicker(!showCurrencyPicker)}
+                className="w-full flex items-center justify-between bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white hover:border-emerald-400/50 transition-all"
+              >
+                <span className="font-bold text-sm">{currencyData?.symbol} — {currencyData?.label}</span>
+                <ChevronDown className={`w-4 h-4 text-white/40 transition-transform ${showCurrencyPicker ? 'rotate-180' : ''}`} />
+              </button>
+              {showCurrencyPicker && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-[#130d24] border border-white/15 rounded-xl overflow-auto max-h-44 z-10 shadow-2xl">
+                  {CURRENCIES.map(c => (
                     <button
-                      onClick={() => setShowCurrencyPicker(!showCurrencyPicker)}
-                      className="w-full flex items-center justify-between bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white hover:border-emerald-400/50 transition-all"
+                      key={c.code}
+                      onClick={() => { setCurrency(c.code); setSelected(getPresets(c.code)[2]?.value || 500); setCustom(''); setShowCurrencyPicker(false); }}
+                      className={`w-full text-left px-4 py-3 hover:bg-emerald-500/10 transition-all text-sm ${currency === c.code ? 'text-emerald-300 font-bold' : 'text-white/60'}`}
                     >
-                      <span className="font-bold text-sm">{currencyData?.symbol} — {currencyData?.label}</span>
-                      <ChevronDown className={`w-4 h-4 text-white/40 transition-transform ${showCurrencyPicker ? 'rotate-180' : ''}`} />
+                      {c.symbol} {c.label}
                     </button>
-                    {showCurrencyPicker && (
-                      <div className="absolute top-full left-0 right-0 mt-2 bg-[#130d24] border border-white/15 rounded-xl overflow-auto max-h-44 z-10 shadow-2xl">
-                        {CURRENCIES.map(c => (
-                          <button
-                            key={c.code}
-                            onClick={() => { setCurrency(c.code); setSelected(getPresets(c.code)[2]?.value || 500); setCustom(''); setShowCurrencyPicker(false); }}
-                            className={`w-full text-left px-4 py-3 hover:bg-emerald-500/10 transition-all text-sm ${currency === c.code ? 'text-emerald-300 font-bold' : 'text-white/60'}`}
-                          >
-                            {c.symbol} {c.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Presets */}
-                  <div className="grid grid-cols-3 gap-2">
-                    {presets.map(a => (
-                      <button
-                        key={a.value}
-                        onClick={() => { setSelected(a.value); setCustom(''); }}
-                        className={`py-3 rounded-xl border-2 font-black text-sm transition-all ${
-                          selected === a.value && !custom
-                            ? 'border-emerald-400 bg-emerald-500/15 text-white'
-                            : 'border-white/8 hover:border-emerald-400/30 text-white/50'
-                        }`}
-                      >
-                        {a.label}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Custom */}
-                  <div className="flex items-center gap-3">
-                    <span className="text-white/50 font-bold">{currencyData?.symbol}</span>
-                    <input
-                      type="number"
-                      placeholder="Your own amount"
-                      value={custom}
-                      onChange={e => { setCustom(e.target.value); setSelected(null); }}
-                      className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-emerald-400 transition-all text-sm"
-                    />
-                  </div>
-
-                  {/* Pay button */}
-                  <motion.button
-                    whileTap={{ scale: 0.97 }}
-                    onClick={handleDonate}
-                    disabled={loading || !finalAmount || finalAmount < 100}
-                    className="w-full py-5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 hover:opacity-90 disabled:opacity-30 text-white font-black text-lg rounded-2xl transition-all shadow-2xl shadow-emerald-500/20 flex items-center justify-center gap-3"
-                  >
-                    <Heart className="w-5 h-5" />
-                    {loading ? 'One sec...' : `Contribute ${currencyData?.symbol}${custom || (selected ? (noDecimal ? selected : (selected / 100).toFixed(2)) : '')}`}
-                  </motion.button>
-
-                  <div className="text-center">
-                    <p className="text-white/20 text-xs">💳 Card · Apple Pay · Google Pay · Link &nbsp;·&nbsp; Stripe · No account needed</p>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div key="crypto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
-                  <p className="text-white/40 text-xs text-center leading-relaxed">
-                    Send any amount directly to these wallets.<br />
-                    No middleman. No fees. Pure signal.
-                  </p>
-                  {CRYPTO.map(coin => <CryptoAddress key={coin.symbol} coin={coin} />)}
-                  <p className="text-white/20 text-xs text-center">
-                    After sending, email <a href="mailto:family@uf51.love" className="text-purple-400 hover:underline">family@uf51.love</a> and we'll acknowledge it. No pressure.
-                  </p>
-                </motion.div>
+                  ))}
+                </div>
               )}
-            </AnimatePresence>
+            </div>
+
+            {/* Presets */}
+            <div className="grid grid-cols-3 gap-2">
+              {presets.map(a => (
+                <button
+                  key={a.value}
+                  onClick={() => { setSelected(a.value); setCustom(''); }}
+                  className={`py-3 rounded-xl border-2 font-black text-sm transition-all ${
+                    selected === a.value && !custom
+                      ? 'border-emerald-400 bg-emerald-500/15 text-white'
+                      : 'border-white/8 hover:border-emerald-400/30 text-white/50'
+                  }`}
+                >
+                  {a.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Custom */}
+            <div className="flex items-center gap-3">
+              <span className="text-white/50 font-bold">{currencyData?.symbol}</span>
+              <input
+                type="number"
+                placeholder="Your own amount"
+                value={custom}
+                onChange={e => { setCustom(e.target.value); setSelected(null); }}
+                className="flex-1 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-emerald-400 transition-all text-sm"
+              />
+            </div>
+
+            {/* Impact line */}
+            {finalAmount >= 100 && (
+              <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
+                className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 text-center">
+                <p className="text-emerald-300 text-sm font-bold">
+                  🎓 {getImpact(finalAmount, currencyData?.symbol, noDecimal)}
+                </p>
+              </motion.div>
+            )}
+
+            {/* Pay button */}
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              onClick={handleDonate}
+              disabled={loading || !finalAmount || finalAmount < 100}
+              className="w-full py-5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 hover:opacity-90 disabled:opacity-30 text-white font-black text-lg rounded-2xl transition-all shadow-2xl shadow-emerald-500/20 flex items-center justify-center gap-3"
+            >
+              <Heart className="w-5 h-5" />
+              {loading ? 'One sec...' : `Contribute ${currencyData?.symbol}${custom || (selected ? (noDecimal ? selected : (selected / 100).toFixed(2)) : '')}`}
+            </motion.button>
+
+            <div className="text-center">
+              <p className="text-white/20 text-xs">💳 Card · Apple Pay · Google Pay · Link &nbsp;·&nbsp; Secure via Stripe · No account needed</p>
+            </div>
           </div>
         </motion.div>
 
