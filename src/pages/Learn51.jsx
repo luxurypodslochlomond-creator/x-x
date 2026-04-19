@@ -96,16 +96,6 @@ export default function Learn51Page() {
   const activeProfile = profiles.find(p => p.id === activeProfileId) || null;
   const stars = activeProfileId ? getProfileStars(activeProfileId) : 0;
 
-  // Check if we should show picker on first load (no profiles yet OR no active)
-  const [checkedProfiles, setCheckedProfiles] = useState(false);
-  useEffect(() => {
-    const existing = getProfiles();
-    if (existing.length === 0) {
-      setShowProfilePicker(true);
-    }
-    setCheckedProfiles(true);
-  }, []);
-
   const handleProfileSelected = (profile) => {
     setActiveProfileId(profile.id);
     setProfiles(getProfiles());
@@ -135,8 +125,6 @@ export default function Learn51Page() {
     }, 4000);
     return () => clearInterval(timer);
   }, []);
-
-  if (!checkedProfiles) return null;
 
   // Show profile picker full screen
   if (showProfilePicker) {
@@ -192,9 +180,9 @@ export default function Learn51Page() {
             {!activeProfile && (
               <button
                 onClick={handleSwitchProfile}
-                className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-2xl px-4 py-2 mb-4 text-white/50 hover:text-white text-sm transition-colors"
+                className="inline-flex items-center gap-2 bg-white/5 border border-dashed border-white/20 rounded-2xl px-4 py-2 mb-4 text-white/40 hover:text-white/70 text-sm transition-colors"
               >
-                <UserCircle className="w-4 h-4" /> Pick your name
+                <UserCircle className="w-4 h-4" /> Save your stars? Add your name ✨
               </button>
             )}
 
