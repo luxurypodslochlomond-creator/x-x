@@ -6,6 +6,7 @@ import { Globe, Check } from 'lucide-react';
 // Uses browser speech synthesis lang codes where available
 
 export const LANGUAGES = [
+  // Most spoken + most needed — every child on Earth
   { code: 'en', label: 'English', flag: '🇬🇧', speechLang: 'en-GB' },
   { code: 'es', label: 'Español', flag: '🇪🇸', speechLang: 'es-ES' },
   { code: 'fr', label: 'Français', flag: '🇫🇷', speechLang: 'fr-FR' },
@@ -13,11 +14,32 @@ export const LANGUAGES = [
   { code: 'pt', label: 'Português', flag: '🇧🇷', speechLang: 'pt-BR' },
   { code: 'hi', label: 'हिन्दी', flag: '🇮🇳', speechLang: 'hi-IN' },
   { code: 'zh', label: '中文', flag: '🇨🇳', speechLang: 'zh-CN' },
-  { code: 'sw', label: 'Kiswahili', flag: '🌍', speechLang: 'sw' },
+  { code: 'sw', label: 'Kiswahili', flag: '🌍', speechLang: 'sw' },        // 200M+ East Africa
   { code: 'ur', label: 'اردو', flag: '🇵🇰', speechLang: 'ur', rtl: true },
   { code: 'de', label: 'Deutsch', flag: '🇩🇪', speechLang: 'de-DE' },
-  { code: 'bn', label: 'বাংলা', flag: '🇧🇩', speechLang: 'bn-BD' },
+  { code: 'bn', label: 'বাংলা', flag: '🇧🇩', speechLang: 'bn-BD' },        // 230M Bangladesh
   { code: 'tr', label: 'Türkçe', flag: '🇹🇷', speechLang: 'tr-TR' },
+  { code: 'ha', label: 'Hausa', flag: '🇳🇬', speechLang: 'ha' },           // 100M+ West Africa
+  { code: 'yo', label: 'Yorùbá', flag: '🇳🇬', speechLang: 'yo' },          // 45M+ Nigeria
+  { code: 'ig', label: 'Igbo', flag: '🇳🇬', speechLang: 'ig' },            // 30M+ Nigeria
+  { code: 'am', label: 'አማርኛ', flag: '🇪🇹', speechLang: 'am' },           // 60M+ Ethiopia
+  { code: 'so', label: 'Soomaali', flag: '🇸🇴', speechLang: 'so' },        // Somalia + diaspora
+  { code: 'tl', label: 'Filipino', flag: '🇵🇭', speechLang: 'tl-PH' },     // 100M Philippines
+  { code: 'vi', label: 'Tiếng Việt', flag: '🇻🇳', speechLang: 'vi-VN' },   // 95M Vietnam
+  { code: 'th', label: 'ภาษาไทย', flag: '🇹🇭', speechLang: 'th-TH' },     // 70M Thailand
+  { code: 'my', label: 'မြန်မာဘာသာ', flag: '🇲🇲', speechLang: 'my' },     // 55M Myanmar
+  { code: 'km', label: 'ភាសាខ្មែរ', flag: '🇰🇭', speechLang: 'km' },      // Cambodia
+  { code: 'ne', label: 'नेपाली', flag: '🇳🇵', speechLang: 'ne-NP' },       // Nepal
+  { code: 'si', label: 'සිංහල', flag: '🇱🇰', speechLang: 'si-LK' },       // Sri Lanka
+  { code: 'ps', label: 'پښتو', flag: '🇦🇫', speechLang: 'ps', rtl: true }, // Afghanistan/Pakistan
+  { code: 'fa', label: 'فارسی', flag: '🇮🇷', speechLang: 'fa-IR', rtl: true }, // Iran/Afghanistan
+  { code: 'ku', label: 'Kurdî', flag: '🏴', speechLang: 'ku' },            // Kurdistan — stateless, needs us
+  { code: 'uk', label: 'Українська', flag: '🇺🇦', speechLang: 'uk-UA' },   // Ukraine — kids in war zones
+  { code: 'ru', label: 'Русский', flag: '🇷🇺', speechLang: 'ru-RU' },
+  { code: 'ro', label: 'Română', flag: '🇷🇴', speechLang: 'ro-RO' },
+  { code: 'it', label: 'Italiano', flag: '🇮🇹', speechLang: 'it-IT' },
+  { code: 'nl', label: 'Nederlands', flag: '🇳🇱', speechLang: 'nl-NL' },
+  { code: 'pl', label: 'Polski', flag: '🇵🇱', speechLang: 'pl-PL' },
 ];
 
 // Auto-detect language from browser locale — every child on Earth gets their language first
