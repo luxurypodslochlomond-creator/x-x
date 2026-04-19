@@ -69,7 +69,7 @@ export default function LanguagePicker({ selectedLang, onChange }) {
             initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
-            className="absolute top-full mt-2 right-0 bg-white rounded-2xl border-2 border-gray-200 shadow-xl z-50 overflow-hidden w-52"
+            className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-white rounded-2xl border-2 border-gray-200 shadow-xl z-50 overflow-y-auto w-52 max-h-72"
           >
             {LANGUAGES.map(lang => (
               <button

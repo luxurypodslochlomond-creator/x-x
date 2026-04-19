@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Brain, BookOpen, Globe, ArrowRight, Heart, CheckCircle, Shield } from 'lucide-react';
+import { Star, Brain, BookOpen, Globe, ArrowRight, Heart, CheckCircle, Shield, Info } from 'lucide-react';
 import LanguagePicker, { detectBrowserLanguage, LANGUAGES } from '@/components/learn51/LanguagePicker';
 
 const LANG_KEY = 'learn51_language';
@@ -119,6 +119,21 @@ export default function Learn51Page() {
 
   return (
     <div className="min-h-screen bg-[#05080f] text-white overflow-x-hidden">
+
+      {/* LEARN51 NAV */}
+      <div className="sticky top-0 z-40 bg-[#05080f]/95 backdrop-blur-xl border-b border-white/10 px-4 py-3">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <Link to="/Learn51" className="text-xl font-black bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+            🚀 Learn51
+          </Link>
+          <div className="flex items-center gap-3">
+            <Link to="/Learn51AI" className="text-sm font-bold text-indigo-300 hover:text-white transition-colors">AI Tutor</Link>
+            <Link to="/Learn51About" className="flex items-center gap-1 text-sm font-bold text-gray-400 hover:text-cyan-400 transition-colors">
+              <Info className="w-4 h-4" /> About
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* HERO */}
       <div className="relative overflow-hidden">
