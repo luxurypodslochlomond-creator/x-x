@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Brain, BookOpen, Globe, ArrowRight, Heart, CheckCircle, Shield } from 'lucide-react';
+import LanguagePicker, { detectBrowserLanguage, LANGUAGES } from '@/components/learn51/LanguagePicker';
+
+const LANG_KEY = 'learn51_language';
 
 // Stars — gain only, never go down, no account needed
 const STORAGE_KEY = 'learn51_stars';
@@ -94,6 +97,19 @@ export default function Learn51Page() {
   const [factIndex, setFactIndex] = useState(0);
   const [hoveredModule, setHoveredModule] = useState(null);
 
+  // Auto-detect language on first visit, persist it for Learn51AI
+  const [language, setLanguage] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LANG_KEY);
+      return saved ? (LANGUAGES.find(l => l.code === saved) || detectBrowserLanguage()) : detectBrowserLanguage();
+    } catch { return detectBrowserLanguage(); }
+  });
+
+  const handleLangChange = (lang) => {
+    setLanguage(lang);
+    try { localStorage.setItem(LANG_KEY, lang.code); } catch {}
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setFactIndex(i => (i + 1) % FACTS.length);
@@ -124,7 +140,17 @@ export default function Learn51Page() {
             <p className="text-xl md:text-2xl text-gray-300 font-bold mb-2">
               Free learning for every child on Earth
             </p>
-            <p className="text-gray-500 text-base mb-8">No login. No data. No cost. Ever. ♾️</p>
+            <p className="text-gray-500 text-base mb-4">No login. No data. No cost. Ever. ♾️</p>
+
+            {/* Language auto-detect — saves to localStorage so Learn51AI picks it up */}
+            <div className="flex justify-center mb-6">
+              <LanguagePicker selectedLang={language.code} onChange={handleLangChange} />
+            </div>
+            {language.code !== 'en' && (
+              <p className="text-indigo-300 text-sm font-bold mb-4">
+                🌍 Learn51 AI will teach in <strong>{language.label}</strong> — you can change it any time
+              </p>
+            )}
 
             {/* Stars display */}
             {stars > 0 && (
