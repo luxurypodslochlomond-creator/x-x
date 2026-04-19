@@ -206,6 +206,64 @@ export default function Learn51About() {
         </motion.div>
       </div>
 
+      {/* ACCESSIBILITY ROADMAP */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-gradient-to-br from-rose-950/50 to-pink-950/30 border-2 border-rose-500/40 rounded-2xl p-8 md:p-12"
+        >
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-full px-4 py-2 mb-4">
+              <Heart className="w-4 h-4 text-rose-400" />
+              <span className="text-rose-400 text-sm font-black tracking-wider">ACCESSIBILITY · COMING NEXT</span>
+            </div>
+            <h2 className="text-3xl font-black text-white mb-3">Every child means every child.</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              273 million children are out of school — and disabled children are the most excluded of all.
+              We are building full accessibility support as a core part of Learn51, not an afterthought.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            {[
+              { emoji: '👁️', title: 'Visual Impairment & Blindness', desc: 'Full screen reader support, high-contrast mode, and audio-first learning paths where every lesson works without seeing the screen at all.', status: 'IN DEVELOPMENT' },
+              { emoji: '👂', title: 'Deaf & Hard of Hearing', desc: 'Visual learning modes, captions on all audio content, sign language video support, and lessons that never rely on sound alone.', status: 'IN DEVELOPMENT' },
+              { emoji: '🧠', title: 'Dyslexia & Learning Differences', desc: 'Dyslexia-friendly fonts, adjustable text spacing, colour overlays, and AI that detects reading patterns and adapts in real time.', status: 'PARTIAL — EXPANDING' },
+              { emoji: '🤲', title: 'Motor & Physical Disabilities', desc: 'Full keyboard navigation, switch access support, and large-target touch interfaces for children with limited motor control.', status: 'IN DEVELOPMENT' },
+              { emoji: '💬', title: 'Non-verbal & AAC Users', desc: 'Symbol-based learning modes and picture-supported navigation for children who communicate through augmentative systems.', status: 'PLANNED' },
+              { emoji: '⚡', title: 'Autism & Sensory Needs', desc: 'Reduced motion mode, sensory-safe colour palettes, predictable layouts, and calming audio options for children sensitive to stimulation.', status: 'PLANNED' },
+            ].map(item => (
+              <div key={item.title} className="bg-black/30 border border-rose-500/20 rounded-xl p-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl flex-shrink-0">{item.emoji}</span>
+                  <div>
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className="text-white font-black text-sm">{item.title}</span>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${item.status === 'PARTIAL — EXPANDING' ? 'bg-amber-500/20 text-amber-400' : item.status === 'PLANNED' ? 'bg-gray-500/20 text-gray-400' : 'bg-rose-500/20 text-rose-400'}`}>
+                        {item.status}
+                      </span>
+                    </div>
+                    <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-black/40 border border-white/10 rounded-xl p-5 text-center">
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <span className="text-white font-black">If you are a disability specialist, SEND educator, or accessibility researcher</span> — we want to build this with you, not for you.
+              The best accessibility tools are co-designed with disabled people and their families.
+              <br /><br />
+              <a href="mailto:family@uf51.love" className="text-rose-400 font-black hover:text-rose-300 transition-colors">family@uf51.love</a>
+              <span className="text-gray-500"> — come build this with us ❤️</span>
+            </p>
+          </div>
+        </motion.div>
+      </div>
+
       {/* THE HONEST BIT */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="bg-gradient-to-br from-green-950/40 to-black border border-green-500/30 rounded-2xl p-8 md:p-12 text-center">
