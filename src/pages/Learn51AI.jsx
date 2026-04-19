@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, RotateCcw, Star, Volume2, VolumeX, Share2 } from 'lucide-react';
 import CreativeReward from '@/components/learn51/CreativeReward';
 import ShareYourWin from '@/components/learn51/ShareYourWin';
-import LanguagePicker, { LANGUAGES } from '@/components/learn51/LanguagePicker';
+import LanguagePicker, { LANGUAGES, detectBrowserLanguage } from '@/components/learn51/LanguagePicker';
 import Learn51AIIcon from '@/components/learn51/Learn51AIIcon';
 
 // Web Speech API — free, built-in, no API key needed
@@ -153,9 +153,10 @@ export default function Learn51AIPage() {
    const [stars, setStars] = useState(saved?.stars || 0);
 
    // Save progress on every state change for critical fields
+   // Note: persistProgress defined below, but useEffect runs after render so it's fine
    useEffect(() => {
-     const progressToSave = { stars, level, interest, age };
-     persistProgress(progressToSave);
+     const current = loadProgress() || {};
+     saveProgress({ ...current, stars, level, interest, age, lastSaved: Date.now() });
    }, [stars, level, interest, age]);
 
   const [lessonData, setLessonData] = useState(null);
@@ -170,9 +171,13 @@ export default function Learn51AIPage() {
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [iconState, setIconState] = useState('idle'); // 'idle' | 'thinking' | 'responding' | 'celebrating'
 
-  // ── Language — remembered across visits ──
+  // ── Language — remembered across visits, auto-detected on first visit ──
   const savedLangCode = loadLanguage();
-  const [language, setLanguage] = useState(LANGUAGES.find(l => l.code === savedLangCode) || LANGUAGES[0]);
+  const [language, setLanguage] = useState(
+    savedLangCode 
+      ? (LANGUAGES.find(l => l.code === savedLangCode) || LANGUAGES[0])
+      : detectBrowserLanguage()
+  );
 
   const handleLanguageChange = useCallback((lang) => {
     setLanguage(lang);
@@ -217,12 +222,13 @@ export default function Learn51AIPage() {
   }, [language]);
 
   const loadLesson = async (topicOverride, levelOverride) => {
-   setLoading(true);
-   setAnswer('');
-   setAssessment(null);
-   setShowHint(false);
-   setLessonData(null);
-   setIconState('thinking');
+    setLoading(true);
+    setAnswer('');
+    setAssessment(null);
+    setShowHint(false);
+    setLessonData(null);
+    setIconState('thinking');
+    setStage('learning'); // move to learning stage immediately so loading shows
 
     const useTopic = topicOverride || topic;
     const useLevel = levelOverride || level;
@@ -233,7 +239,7 @@ export default function Learn51AIPage() {
     const topicLabels = selectedTopics.length > 0 
       ? selectedTopics.map(id => TOPICS.find(t => t.id === id)?.label).filter(Boolean).join(' + ')
       : TOPICS.find(t => t.id === useTopic)?.label || useTopic;
-    
+
     const result = await base44.integrations.Core.InvokeLLM({
       prompt: PROMPT_TEMPLATE({
         topic: topicLabels,
@@ -262,8 +268,7 @@ export default function Learn51AIPage() {
     setLessonData(result);
     setLoading(false);
     setIconState('responding');
-    setStage('learning');
-    setQuestionStartTime(Date.now()); // start timing their response
+    setQuestionStartTime(Date.now());
     setTimeout(() => { setIconState('idle'); inputRef.current?.focus(); }, 800);
   };
 

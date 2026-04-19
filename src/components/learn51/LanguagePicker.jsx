@@ -20,6 +20,13 @@ export const LANGUAGES = [
   { code: 'tr', label: 'Türkçe', flag: '🇹🇷', speechLang: 'tr-TR' },
 ];
 
+// Auto-detect language from browser locale — every child on Earth gets their language first
+export const detectBrowserLanguage = () => {
+  const browserLang = navigator.language || navigator.languages?.[0] || 'en';
+  const code = browserLang.split('-')[0].toLowerCase();
+  return LANGUAGES.find(l => l.code === code) || LANGUAGES[0];
+};
+
 export default function LanguagePicker({ selectedLang, onChange }) {
   const [open, setOpen] = useState(false);
   const current = LANGUAGES.find(l => l.code === selectedLang) || LANGUAGES[0];
