@@ -148,6 +148,12 @@ export default function Learn51Layout() {
 
       {/* Page content */}
       <Outlet />
+      {/* Dignified support link */}
+      <div className="text-center py-6 border-t border-white/5">
+        <Link to="/SupportLearn51" className="text-white/20 hover:text-violet-400 text-xs transition-colors">
+          ♾️ Keep Learn51 free — donate
+        </Link>
+      </div>
 
       {/* Mobile menu overlay */}
       <AnimatePresence>
