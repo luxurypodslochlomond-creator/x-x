@@ -66,6 +66,7 @@ const Literacy51Page = React.lazy(() => import('./pages/Literacy51'));
 const Learn51Page = React.lazy(() => import('./pages/Learn51'));
 const Learn51AIPage = React.lazy(() => import('./pages/Learn51AI'));
 const LifeSkills51Page = React.lazy(() => import('./pages/LifeSkills51'));
+const Learn51AboutPage = React.lazy(() => import('./pages/Learn51About'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -160,6 +161,7 @@ const AuthenticatedApp = () => {
       <Route path="/Learn51" element={<LayoutWrapper currentPageName="Learn51"><Learn51Page /></LayoutWrapper>} />
       <Route path="/Learn51AI" element={<LayoutWrapper currentPageName="Learn51AI"><Learn51AIPage /></LayoutWrapper>} />
       <Route path="/LifeSkills51" element={<LayoutWrapper currentPageName="LifeSkills51"><LifeSkills51Page /></LayoutWrapper>} />
+      <Route path="/Learn51About" element={<LayoutWrapper currentPageName="Learn51About"><Learn51AboutPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
