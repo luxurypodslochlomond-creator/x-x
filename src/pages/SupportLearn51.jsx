@@ -82,10 +82,13 @@ export default function SupportLearn51() {
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-4">
           <div className="text-6xl">🧒</div>
-          <h1 className="text-4xl font-black leading-tight">Your kid deserves a brilliant tutor.<br /><span className="text-emerald-400">Every kid does.</span></h1>
+          <h1 className="text-4xl font-black leading-tight">The best AI learning tech<br /><span className="text-emerald-400">should be free for every child.</span></h1>
           <p className="text-white/70 text-lg leading-relaxed">
-            Learn51 is a free AI tutor — no login, no ads, no tracking.<br />
-            Open it, pick a subject, start learning. That's it.
+            Not just the ones whose parents can afford it.<br />
+            Every child. Every country. Right now. Free forever.
+          </p>
+          <p className="text-white/50 text-sm">
+            Open it. Pick a subject. Start learning.<br/>No login. No cost. No catch.
           </p>
         </motion.div>
 
@@ -200,6 +203,18 @@ export default function SupportLearn51() {
             <p className="text-white/30 text-xs">💳 Card &nbsp;·&nbsp; Apple Pay &nbsp;·&nbsp; Google Pay &nbsp;·&nbsp; Link</p>
             <p className="text-white/20 text-xs">Secure checkout via Stripe · No account needed</p>
           </div>
+        </motion.div>
+
+        {/* For organisations */}
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }}
+          className="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-5 space-y-3">
+          <p className="text-amber-300 font-black text-sm">🏢 Are you a business or organisation?</p>
+          <p className="text-white/60 text-sm leading-relaxed">
+            Schools, charities, and companies support Learn51 too. As a registered CIC, your contribution may qualify as a <span className="text-white font-bold">tax-deductible donation</span> — many UK businesses offset this against corporation tax. We can provide a receipt and full CIC documentation.
+          </p>
+          <a href="mailto:family@uf51.love" className="inline-block text-amber-400 text-xs font-bold hover:underline">
+            📧 family@uf51.love — let's talk
+          </a>
         </motion.div>
 
         {/* Trust / honest note */}
