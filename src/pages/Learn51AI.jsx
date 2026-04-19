@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight, RotateCcw, Star, Volume2, VolumeX, Share2 } from 'lucide-react';
+import { Sparkles, ArrowRight, RotateCcw, Volume2, VolumeX, Share2, Camera, X, Upload } from 'lucide-react';
 import CreativeReward from '@/components/learn51/CreativeReward';
 import ShareYourWin from '@/components/learn51/ShareYourWin';
 import LanguagePicker, { LANGUAGES, detectBrowserLanguage } from '@/components/learn51/LanguagePicker';
@@ -45,12 +45,17 @@ const INTERESTS = [
 ];
 
 const TOPICS = [
-  { id: 'maths', emoji: '🧮', label: 'Maths', color: 'from-violet-500 to-indigo-600', border: 'border-violet-400', desc: 'Numbers, shapes, patterns' },
-  { id: 'reading', emoji: '📖', label: 'Reading & Words', color: 'from-emerald-500 to-teal-600', border: 'border-emerald-400', desc: 'Phonics, spelling, stories' },
-  { id: 'health', emoji: '💪', label: 'Health & Body', color: 'from-rose-500 to-pink-600', border: 'border-rose-400', desc: 'How your body works' },
-  { id: 'respect', emoji: '🌍', label: 'Kindness & Rights', color: 'from-amber-500 to-orange-600', border: 'border-amber-400', desc: 'Your rights, others\' rights' },
-  { id: 'science', emoji: '🔬', label: 'How Things Work', color: 'from-cyan-500 to-blue-600', border: 'border-cyan-400', desc: 'Physics, nature, universe' },
-  { id: 'money', emoji: '💰', label: 'Real Life Skills', color: 'from-green-500 to-emerald-600', border: 'border-green-400', desc: 'Money, cooking, staying safe' },
+  { id: 'maths', emoji: '🧮', label: 'Maths', color: 'from-violet-500 to-indigo-600', border: 'border-violet-400', desc: 'Numbers, shapes, patterns, algebra' },
+  { id: 'reading', emoji: '📖', label: 'Reading & English', color: 'from-emerald-500 to-teal-600', border: 'border-emerald-400', desc: 'Phonics, spelling, writing, literature' },
+  { id: 'science', emoji: '🔬', label: 'Science', color: 'from-cyan-500 to-blue-600', border: 'border-cyan-400', desc: 'Physics, chemistry, biology, space' },
+  { id: 'history', emoji: '🏛️', label: 'History', color: 'from-amber-500 to-orange-600', border: 'border-amber-400', desc: 'World events, people, civilisations' },
+  { id: 'geography', emoji: '🌍', label: 'Geography', color: 'from-green-500 to-emerald-600', border: 'border-green-400', desc: 'Countries, climate, maps, nature' },
+  { id: 'health', emoji: '💪', label: 'Health & Body', color: 'from-rose-500 to-pink-600', border: 'border-rose-400', desc: 'How your body works, wellbeing' },
+  { id: 'lifeskills', emoji: '💰', label: 'Real Life Skills', color: 'from-teal-500 to-cyan-600', border: 'border-teal-400', desc: 'Money, cooking, rights, staying safe' },
+  { id: 'computing', emoji: '💻', label: 'Computing & Tech', color: 'from-indigo-500 to-blue-600', border: 'border-indigo-400', desc: 'Coding, how the internet works' },
+  { id: 'languages', emoji: '🗣️', label: 'Languages', color: 'from-purple-500 to-violet-600', border: 'border-purple-400', desc: 'Spanish, French, Swahili + more' },
+  { id: 'arts', emoji: '🎨', label: 'Arts & Music', color: 'from-pink-500 to-rose-600', border: 'border-pink-400', desc: 'Creativity, music theory, art history' },
+  { id: 'homework', emoji: '📸', label: 'Help With Homework', color: 'from-yellow-500 to-amber-600', border: 'border-yellow-400', desc: 'Photo your work — I\'ll guide you through it' },
 ];
 
 // UI strings translated by the AI for each language — kids see everything in their language
@@ -67,44 +72,77 @@ const UI_STRINGS = {
 const getUI = (langCode) => UI_STRINGS[langCode] || UI_STRINGS.en;
 
 const PROMPT_TEMPLATE = ({ topic, interest, age, level, history, paceNote, language }) => `
-You are Learn51 AI — the world's most caring, brilliant teacher. You genuinely love children and want every single one on Earth to learn and thrive.
+You are Learn51 AI — the world's most caring, brilliant tutor. You are like the best older sibling imaginable — warm, funny, endlessly patient, and genuinely excited about helping this kid understand things. You NEVER make them feel stupid. You make them feel BRILLIANT.
 
 CRITICAL: Respond ENTIRELY in ${language || 'English'}. Every word of your JSON values must be in ${language || 'English'}.
 
 CHILD INFO:
-- Topic they want to learn: ${topic}
-- Their favourite thing: ${interest}
+- Topic: ${topic}
+- What they love: ${interest}
 - Age: ${age}
 - Level (1=beginner, 5=advanced): ${level}
-- Previous questions this session: ${history}
-- HOW THEY ARE LEARNING RIGHT NOW: ${paceNote}
+- Questions already covered: ${history}
+- LEARNING PACE RIGHT NOW: ${paceNote}
 
-YOUR JOB:
-1. Give ONE brilliant, personalised lesson moment — not a lecture, a SPARK
-2. Connect the topic DEEPLY to their specific interest (${interest}) — use REAL names, real facts. 
-   - If they love "Football & Ronaldo": use Cristiano Ronaldo's actual stats, free kick angles, his kids, his training regime
-   - If they love "Messi & Argentina": use Leo Messi's dribbling physics, World Cup geometry, his son Thiago
-   - Make it feel like insider knowledge — "did you know Ronaldo's free kicks use EXACTLY this maths?"
-3. Ask ONE clear question at the end to check understanding
-4. CRITICALLY — adapt your teaching to match how they are learning: "${paceNote}"
-   - If they're struggling: use a DIFFERENT angle or analogy, break it into smaller steps, be warmer
-   - If they're flying: stretch them with a harder concept or a "what if?" challenge
-   - If they're slow to answer: keep it simple and reassuring, never rush them
-5. Keep it SHORT — 4-6 sentences max for the lesson, then the question
-6. Language: simple, warm, excited — never condescending. Talk like a cool older sibling.
-7. Weave in naturally when relevant: health, kindness, respect, their rights as a child
+YOUR MISSION:
+1. Create ONE brilliant, personalised learning spark — not a lecture. A moment of "OH WOW I GET IT"
+2. Connect ${topic} DEEPLY to ${interest} using REAL facts and names:
+   - Football/Ronaldo: free kick angles, his actual stats, physics of the ball
+   - Gaming: probability, coding logic, frame rates and maths
+   - Music: frequency maths, rhythm patterns, music theory through their fave song
+   - Make them feel like they're getting insider knowledge nobody else has
+3. ASK ONE question at the end — but frame it like a challenge, not a test. "Bet you can figure this out..."
+4. ADAPT to their pace: "${paceNote}"
+   - Struggling: different angle, smaller steps, more warmth, never give up on them
+   - Flying: stretch them, add a twist, say "okay here's the really hard version..."
+   - Slow answers: be patient, reassuring, "take your time — there's no rush"
+5. Keep lesson to 4-5 sentences max — punchy, clear, exciting
+6. NEVER give away the answer. Guide them TO the answer with great questions.
+7. Talk like a cool friend who cares. Never like a textbook.
 
-TONE: You are their brilliant friend who happens to know everything. Like a cool older sibling with a PhD. NOT a teacher reading from a book. Make them feel LUCKY to know this.
+TONE: Warm. Funny when natural. Proud of them before they've even answered. Make learning feel like a superpower.
 
-FORMAT your response EXACTLY like this JSON (no extra text):
+FORMAT — respond ONLY with this JSON:
 {
-  "wow_fact": "One mind-blowing connection between ${topic} and ${interest} in ONE sentence",
-  "lesson": "The actual teaching moment — warm, brilliant, 3-4 sentences. ADAPTED to their current pace.",  
-  "question": "ONE clear question to check they got it — difficulty matched to their current pace",
-  "encouragement": "A short warm line (not cheesy) for after they answer",
-  "hint": "A gentle hint if they're stuck — one sentence",
-  "answer_keywords": ["key", "words", "that", "indicate", "correct", "understanding"],
-  "fun_fact": "One completely wild extra fact to leave them thinking"
+  "wow_fact": "One mind-blowing connection between ${topic} and ${interest} — ONE punchy sentence that makes them go WOW",
+  "lesson": "The teaching moment — warm, brilliant, 4-5 sentences max. Use their interest. Make it real.",
+  "question": "ONE question framed as a fun challenge — NOT a test. 'Bet you can figure out...' or 'Here's the tricky bit...'",
+  "encouragement": "A short genuine line for after they get it right — not cheesy, real",
+  "hint": "A warm nudge if stuck — ONE sentence, steers thinking without giving it away",
+  "answer_keywords": ["key", "concepts", "showing", "understanding"],
+  "fun_fact": "One genuinely wild bonus fact to leave them buzzing"
+}
+`;
+
+const HOMEWORK_PHOTO_PROMPT = ({ imageDescription, interest, age, language }) => `
+You are Learn51 AI — the world's best tutor. A child has shared their homework with you. Your job is NOT to give them the answer. Your job is to be their brilliant thinking partner — ask questions that guide them to figure it out themselves.
+
+CRITICAL: Respond ENTIRELY in ${language || 'English'}.
+
+Child info:
+- Age: ${age}
+- What they love: ${interest}
+- Their homework/question: ${imageDescription}
+
+YOUR APPROACH (Socratic method — guide, never give):
+1. First, acknowledge what you see with warmth — "Oh nice, I can see you're working on..."
+2. Ask them what they ALREADY know or notice about it — activate their thinking
+3. Break it into the FIRST small step — just one thing to think about
+4. Connect it to something they love (${interest}) if you can
+5. End with ONE guiding question that moves them forward
+6. NEVER give the answer directly. If they ask "just tell me" — say "I know you can figure this out, let's try..."
+
+TONE: Like a brilliant older friend sitting next to them at the kitchen table. Excited to help them think it through.
+
+FORMAT — respond ONLY with this JSON:
+{
+  "wow_fact": "A warm, curious observation about what you can see in their homework",
+  "lesson": "Your Socratic opening — what you notice, what you want them to think about, first guiding question",
+  "question": "The key guiding question to get them started — NOT the answer, the first step of thinking",
+  "encouragement": "A genuine line reminding them they can do this",
+  "hint": "If they're stuck — the gentlest possible nudge toward the first step",
+  "answer_keywords": ["thinking", "process", "words"],
+  "fun_fact": "A cool real-world connection to what they're studying"
 }
 `;
 
@@ -183,6 +221,9 @@ export default function Learn51AIPage() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [iconState, setIconState] = useState('idle'); // 'idle' | 'thinking' | 'responding' | 'celebrating'
+  const [homeworkPhoto, setHomeworkPhoto] = useState(null); // base64 url
+  const [homeworkPhotoUrl, setHomeworkPhotoUrl] = useState(null); // uploaded url
+  const photoInputRef = useRef(null);
 
   // ── Language — remembered across visits, auto-detected on first visit ──
   const savedLangCode = loadLanguage();
@@ -207,6 +248,13 @@ export default function Learn51AIPage() {
   const [recentResults, setRecentResults] = useState([]); // last 5: true/false
 
   const inputRef = useRef(null);
+
+  // Auto-load lesson when homework photo finishes uploading and we're in learning stage
+  useEffect(() => {
+    if (homeworkPhotoUrl && topic === 'homework' && stage === 'learning' && !lessonData && !loading) {
+      loadLesson('homework', 1, homeworkPhotoUrl);
+    }
+  }, [homeworkPhotoUrl]);
 
   // Persist progress to localStorage whenever key values change
   const persistProgress = useCallback((updates) => {
@@ -234,17 +282,30 @@ export default function Learn51AIPage() {
     setTimeout(() => setIsSpeaking(false), text.length * 60);
   }, [language]);
 
-  const loadLesson = async (topicOverride, levelOverride) => {
+  const handlePhotoUpload = useCallback(async (file) => {
+    if (!file) return;
+    // Show preview immediately
+    const reader = new FileReader();
+    reader.onload = (e) => setHomeworkPhoto(e.target.result);
+    reader.readAsDataURL(file);
+    // Upload for AI vision
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setHomeworkPhotoUrl(file_url);
+  }, []);
+
+  const loadLesson = async (topicOverride, levelOverride, photoUrl) => {
     setLoading(true);
     setAnswer('');
     setAssessment(null);
     setShowHint(false);
     setLessonData(null);
     setIconState('thinking');
-    setStage('learning'); // move to learning stage immediately so loading shows
+    setStage('learning');
 
     const useTopic = topicOverride || topic;
     const useLevel = levelOverride || level;
+    const usePhotoUrl = photoUrl || homeworkPhotoUrl;
+    const isHomework = useTopic === 'homework' || usePhotoUrl;
 
     const avgMs = questionCount > 0 ? totalResponseMs / questionCount : 30000;
     const paceNote = buildPaceNote({ questionCount, wrongStreak, hintUsedCount, avgResponseMs: avgMs, recentResults });
@@ -254,16 +315,11 @@ export default function Learn51AIPage() {
       : TOPICS.find(t => t.id === useTopic)?.label || useTopic;
 
     const result = await base44.integrations.Core.InvokeLLM({
-      prompt: PROMPT_TEMPLATE({
-        topic: topicLabels,
-        interest: interest,
-        age: age,
-        level: useLevel,
-        history: history.join(' | '),
-        paceNote,
-        language: language.label,
-      }),
+      prompt: isHomework && usePhotoUrl
+        ? HOMEWORK_PHOTO_PROMPT({ imageDescription: 'See the attached image', interest, age, language: language.label })
+        : PROMPT_TEMPLATE({ topic: topicLabels, interest, age, level: useLevel, history: history.join(' | '), paceNote, language: language.label }),
       model: 'claude_sonnet_4_6',
+      file_urls: isHomework && usePhotoUrl ? [usePhotoUrl] : undefined,
       response_json_schema: {
         type: 'object',
         properties: {
@@ -486,41 +542,81 @@ export default function Learn51AIPage() {
           {interest && age && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white/5 rounded-3xl border border-white/10 p-6">
               <p className="text-2xl font-black text-white mb-1">🌍 {ui.step3}</p>
-              <p className="text-white/40 text-sm mb-5">Pick one or mix — I'll connect everything to {interest}</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {TOPICS.map(t => (
+              <p className="text-white/40 text-sm mb-5">Pick a subject — I'll connect everything to {interest}</p>
+
+              {/* HOMEWORK PHOTO CARD — special, highlighted */}
+              <div className="mb-4">
+                <div className={`rounded-2xl border-2 p-4 transition-all ${selectedTopics.includes('homework') ? 'border-yellow-400 bg-yellow-500/10' : 'border-yellow-500/40 bg-yellow-500/5 hover:border-yellow-400/70'}`}>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-3xl">📸</span>
+                    <div className="flex-1">
+                      <p className="text-white font-black">Stuck on homework?</p>
+                      <p className="text-white/50 text-sm">Take a photo — I'll guide you through it (I never just give answers!)</p>
+                    </div>
+                  </div>
+                  <input ref={photoInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={e => { if (e.target.files[0]) { handlePhotoUpload(e.target.files[0]); setSelectedTopics(['homework']); setTopic('homework'); } }} />
+                  {homeworkPhoto ? (
+                    <div className="space-y-2">
+                      <div className="relative">
+                        <img src={homeworkPhoto} alt="Homework" className="w-full max-h-48 object-contain rounded-xl border border-yellow-500/30" />
+                        <button onClick={() => { setHomeworkPhoto(null); setHomeworkPhotoUrl(null); setSelectedTopics([]); }} className="absolute top-2 right-2 bg-black/60 rounded-full p-1 text-white/70 hover:text-white">
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <p className="text-yellow-400 text-sm font-bold">✓ Photo ready — let's go!</p>
+                    </div>
+                  ) : (
+                    <button onClick={() => photoInputRef.current?.click()} className="w-full py-3 rounded-xl border border-yellow-500/40 bg-yellow-500/10 text-yellow-300 font-bold flex items-center justify-center gap-2 hover:border-yellow-400 transition-all">
+                      <Camera className="w-5 h-5" /> Take photo or upload
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <p className="text-white/30 text-xs font-bold uppercase tracking-widest mb-3">— or pick a subject —</p>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {TOPICS.filter(t => t.id !== 'homework').map(t => (
                   <button
                     key={t.id}
                     onClick={() => {
-                      const updated = selectedTopics.includes(t.id)
-                        ? selectedTopics.filter(id => id !== t.id)
-                        : [...selectedTopics, t.id];
-                      setSelectedTopics(updated);
-                      if (updated.length > 0) setTopic(updated[0]);
+                      setSelectedTopics([t.id]);
+                      setTopic(t.id);
+                      setHomeworkPhoto(null);
+                      setHomeworkPhotoUrl(null);
                     }}
-                    className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left transition-all ${
+                    className={`flex flex-col items-start gap-1 p-3 rounded-2xl border-2 text-left transition-all ${
                       selectedTopics.includes(t.id)
                         ? 'border-violet-400 bg-violet-500/20'
                         : 'border-white/10 hover:border-white/30'
                     }`}
                   >
-                    <span className="text-3xl">{t.emoji}</span>
-                    <div className="flex-1">
-                      <p className="text-white font-black">{t.label}</p>
-                      <p className="text-white/40 text-sm">{t.desc}</p>
-                    </div>
-                    {selectedTopics.includes(t.id) && <span className="text-violet-400 font-black text-lg">✓</span>}
+                    <span className="text-2xl">{t.emoji}</span>
+                    <p className="text-white font-black text-sm leading-tight">{t.label}</p>
+                    <p className="text-white/40 text-xs leading-tight">{t.desc}</p>
+                    {selectedTopics.includes(t.id) && <span className="text-violet-400 font-black text-xs">✓ selected</span>}
                   </button>
                 ))}
               </div>
-              {selectedTopics.length > 0 && (
+
+              {(selectedTopics.length > 0) && (
                 <motion.button
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  onClick={() => { setTopic(selectedTopics[0]); loadLesson(selectedTopics[0], 1); }}
+                  onClick={() => {
+                    const t = selectedTopics[0];
+                    setTopic(t);
+                    if (t === 'homework' && homeworkPhotoUrl) {
+                      loadLesson(t, 1, homeworkPhotoUrl);
+                    } else if (t === 'homework' && !homeworkPhotoUrl) {
+                      photoInputRef.current?.click();
+                    } else {
+                      loadLesson(t, 1);
+                    }
+                  }}
                   className="w-full mt-5 py-5 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 hover:from-indigo-600 hover:via-violet-600 hover:to-purple-700 text-white font-black text-xl rounded-2xl transition-all active:scale-95 shadow-2xl shadow-indigo-500/30"
                 >
-                  {ui.letsGo}
+                  {selectedTopics[0] === 'homework' && !homeworkPhotoUrl ? '📸 Add a photo first' : ui.letsGo}
                 </motion.button>
               )}
             </motion.div>
@@ -601,9 +697,17 @@ export default function Learn51AIPage() {
                 <Learn51AIIcon size={80} animate={true} isListening={iconState === 'thinking'} isResponding={iconState === 'responding'} />
               </div>
 
+              {/* HOMEWORK PHOTO PREVIEW */}
+              {homeworkPhoto && topic === 'homework' && (
+                <div className="rounded-2xl border border-yellow-500/30 overflow-hidden">
+                  <img src={homeworkPhoto} alt="Your homework" className="w-full max-h-56 object-contain bg-black/40" />
+                  <p className="text-center text-yellow-400/60 text-xs py-2 font-bold">Your homework — let's think through it together</p>
+                </div>
+              )}
+
               {/* WOW FACT */}
-              <div className={`bg-gradient-to-r ${topicData?.color} rounded-3xl p-5 text-white`}>
-                <p className="text-xs font-black uppercase tracking-widest mb-2 opacity-80">{ui.didYouKnow}</p>
+              <div className={`bg-gradient-to-r ${topicData?.color || 'from-yellow-500 to-amber-600'} rounded-3xl p-5 text-white`}>
+                <p className="text-xs font-black uppercase tracking-widest mb-2 opacity-80">{topic === 'homework' ? '👀 What I can see' : ui.didYouKnow}</p>
                 <p className="text-lg font-bold leading-relaxed">{lessonData.wow_fact}</p>
               </div>
 
@@ -712,20 +816,28 @@ export default function Learn51AIPage() {
 
           {/* QUICK TOPIC SWITCH */}
           {!loading && (
-            <div className="flex gap-2 justify-center flex-wrap pt-2">
-              {TOPICS.map(t => (
-                <button
-                  key={t.id}
-                  onClick={() => { setSelectedTopics([t.id]); setTopic(t.id); setHistory([]); loadLesson(t.id, level); }}
-                  className={`text-sm px-3 py-1.5 rounded-full border font-bold transition-all ${
-                    topic === t.id || selectedTopics.includes(t.id)
-                      ? 'border-indigo-400 bg-indigo-500/20 text-indigo-300'
-                      : 'border-white/10 text-white/40 hover:border-white/30 hover:text-white'
-                  }`}
-                >
-                  {t.emoji} {t.label}
-                </button>
-              ))}
+            <div className="space-y-2 pt-2">
+              <p className="text-white/20 text-xs font-bold text-center uppercase tracking-widest">Switch subject</p>
+              <div className="flex gap-2 justify-center flex-wrap">
+                {TOPICS.filter(t => t.id !== 'homework').map(t => (
+                  <button
+                    key={t.id}
+                    onClick={() => { setSelectedTopics([t.id]); setTopic(t.id); setHistory([]); loadLesson(t.id, level); }}
+                    className={`text-sm px-3 py-1.5 rounded-full border font-bold transition-all ${
+                      topic === t.id || selectedTopics.includes(t.id)
+                        ? 'border-indigo-400 bg-indigo-500/20 text-indigo-300'
+                        : 'border-white/10 text-white/40 hover:border-white/30 hover:text-white'
+                    }`}
+                  >
+                    {t.emoji} {t.label}
+                  </button>
+                ))}
+                {/* Homework photo button */}
+                <label className="cursor-pointer text-sm px-3 py-1.5 rounded-full border border-yellow-500/40 text-yellow-400/70 hover:border-yellow-400 hover:text-yellow-300 font-bold transition-all flex items-center gap-1">
+                  <Camera className="w-3 h-3" /> Homework photo
+                  <input type="file" accept="image/*" capture="environment" className="hidden" onChange={async e => { if (e.target.files[0]) { setSelectedTopics(['homework']); setTopic('homework'); await handlePhotoUpload(e.target.files[0]); } }} />
+                </label>
+              </div>
             </div>
           )}
         </div>
