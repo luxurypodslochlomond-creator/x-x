@@ -30,6 +30,11 @@ Deno.serve(async (req) => {
         },
         quantity: 1,
       }],
+      // Custom statement descriptor so it shows as LEARN51 not PetSounds51
+      payment_intent_data: {
+        statement_descriptor: 'LEARN51 DONATION',
+        description: 'Learn51 — Free Education for Every Child',
+      },
       // Allow any billing country — global donations
       billing_address_collection: 'auto',
       success_url: `${req.headers.get('origin') || 'https://uf51.love'}/Learn51?donated=true`,
