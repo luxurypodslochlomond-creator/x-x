@@ -67,6 +67,8 @@ const Learn51Page = React.lazy(() => import('./pages/Learn51'));
 const Learn51AIPage = React.lazy(() => import('./pages/Learn51AI'));
 const LifeSkills51Page = React.lazy(() => import('./pages/LifeSkills51'));
 const Learn51AboutPage = React.lazy(() => import('./pages/Learn51About'));
+const Learn51TermsPage = React.lazy(() => import('./pages/Learn51Terms'));
+const Learn51PrivacyPage = React.lazy(() => import('./pages/Learn51Privacy'));
 const Learn51Layout = React.lazy(() => import('./components/learn51/Learn51Layout'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -165,6 +167,8 @@ const AuthenticatedApp = () => {
         <Route path="/Learn51About" element={<Learn51AboutPage />} />
         <Route path="/Literacy51" element={<Literacy51Page />} />
         <Route path="/LifeSkills51" element={<LifeSkills51Page />} />
+        <Route path="/Learn51Terms" element={<Learn51TermsPage />} />
+        <Route path="/Learn51Privacy" element={<Learn51PrivacyPage />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

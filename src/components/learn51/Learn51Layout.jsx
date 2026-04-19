@@ -30,7 +30,13 @@ const NAV_ITEMS = [
     section: '🌟 Life & World',
     items: [
       { label: 'Life Skills 51', sub: 'Money · food · mental health', url: '/LifeSkills51', emoji: '🌟' },
-      { label: 'Young Warriors', sub: 'Kids making a difference', url: '/YoungWarriors', emoji: '🦸' },
+    ]
+  },
+  {
+    section: '📋 Legal',
+    items: [
+      { label: 'Terms of Use', sub: 'How Learn51 works', url: '/Learn51Terms', emoji: '📋' },
+      { label: 'Privacy Policy', sub: 'No data. Honest.', url: '/Learn51Privacy', emoji: '🔒' },
     ]
   },
 ];
