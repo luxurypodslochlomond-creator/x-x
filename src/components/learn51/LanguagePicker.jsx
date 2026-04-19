@@ -57,10 +57,10 @@ export default function LanguagePicker({ selectedLang, onChange }) {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-3 py-2 rounded-xl border-2 border-gray-200 hover:border-indigo-400 bg-white font-bold text-sm text-gray-700 transition-all"
+        className="flex items-center gap-2 px-3 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 font-bold text-sm text-white transition-all"
       >
-        <Globe className="w-4 h-4 text-indigo-500" />
-        <span>{current.flag} {current.label}</span>
+        <Globe className="w-4 h-4 text-indigo-300" />
+        <span className="text-white/90">{current.label}</span>
       </button>
 
       <AnimatePresence>
@@ -69,19 +69,18 @@ export default function LanguagePicker({ selectedLang, onChange }) {
             initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
-            className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-white rounded-2xl border-2 border-gray-200 shadow-xl z-50 overflow-y-auto w-52 max-h-72"
+            className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-[#0f1520] rounded-2xl border border-white/10 shadow-2xl z-50 overflow-y-auto w-48 max-h-72"
           >
             {LANGUAGES.map(lang => (
               <button
                 key={lang.code}
                 onClick={() => { onChange(lang); setOpen(false); }}
-                className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-indigo-50 transition-colors text-left ${
-                  lang.code === selectedLang ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700'
+                className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left ${
+                  lang.code === selectedLang ? 'bg-indigo-500/20 text-indigo-300' : 'text-white/70'
                 }`}
               >
-                <span className="text-xl">{lang.flag}</span>
                 <span className="font-bold text-sm flex-1">{lang.label}</span>
-                {lang.code === selectedLang && <Check className="w-4 h-4 text-indigo-500" />}
+                {lang.code === selectedLang && <Check className="w-4 h-4 text-indigo-400" />}
               </button>
             ))}
           </motion.div>

@@ -382,46 +382,52 @@ export default function Learn51AIPage() {
   // ── INTRO STAGE ──
   if (stage === 'intro') {
     return (
-      <div className="min-h-screen bg-[#faf9f6] text-gray-900 p-4 md:p-8 pb-20" dir={language.rtl ? 'rtl' : 'ltr'}>
-        <div className="max-w-2xl mx-auto space-y-8">
+      <div className="min-h-screen bg-[#05080f] text-white p-4 md:p-8 pb-20" dir={language.rtl ? 'rtl' : 'ltr'}>
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[400px] bg-indigo-700/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-violet-700/10 rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-2xl mx-auto space-y-6">
 
           <div className="flex items-center justify-between">
-            <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-800 text-base">
+            <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-400 font-bold hover:text-white text-sm transition-colors">
               {ui.back}
             </Link>
             <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3 py-4">
             <div className="flex justify-center">
-              <Learn51AIIcon size={100} animate={true} />
+              <Learn51AIIcon size={110} animate={true} />
             </div>
-            <h1 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">Learn51 AI</h1>
-            <p className="text-xl text-indigo-700 font-bold">Learning made just for YOU</p>
-            <p className="text-gray-500 text-base">No login · No data · Free forever · Powered by AI</p>
+            <h1 className="text-5xl md:text-6xl font-black tracking-tight bg-gradient-to-r from-violet-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+              Learn51 AI
+            </h1>
+            <p className="text-xl text-indigo-300 font-bold">Learning made just for YOU</p>
+            <p className="text-white/30 text-sm">No login · No data · Free forever</p>
           </motion.div>
 
           {/* WELCOME BACK BANNER */}
           {saved && saved.stars > 0 && (
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 space-y-3">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-4 space-y-3">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <span className="text-3xl">🌟</span>
                   <div>
-                    <p className="font-black text-amber-800">{ui.welcomeBack} {saved.stars} ⭐ {saved.stars === 1 ? 'star' : 'stars'} earned</p>
-                    <p className="text-amber-600 text-sm">Level {saved.level}{saved.interest ? ` · loves ${saved.interest}` : ''} · saved on this device only</p>
+                    <p className="font-black text-amber-300">{ui.welcomeBack} {saved.stars} ⭐ earned</p>
+                    <p className="text-amber-400/70 text-sm">Level {saved.level}{saved.interest ? ` · loves ${saved.interest}` : ''}</p>
                   </div>
                 </div>
-                <button onClick={fullReset} className="text-xs text-gray-400 hover:text-gray-600 font-bold underline flex-shrink-0">{ui.startFresh}</button>
+                <button onClick={fullReset} className="text-xs text-white/30 hover:text-white/60 font-bold underline flex-shrink-0">{ui.startFresh}</button>
               </div>
               {saved.interest && saved.age && (
                 <div className="flex flex-wrap gap-2">
-                  <p className="text-amber-700 text-sm font-bold w-full">{ui.jumpBack}</p>
+                  <p className="text-amber-400/80 text-sm font-bold w-full">{ui.jumpBack}</p>
                   {TOPICS.map(t => (
                     <button
                       key={t.id}
                       onClick={() => { setTopic(t.id); loadLesson(t.id, saved.level || 1); }}
-                      className="px-3 py-1.5 rounded-xl border-2 border-amber-300 bg-white text-amber-800 text-sm font-black hover:border-amber-500 transition-all"
+                      className="px-3 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-300 text-sm font-black hover:border-amber-400 transition-all"
                     >
                       {t.emoji} {t.label}
                     </button>
@@ -432,22 +438,22 @@ export default function Learn51AIPage() {
           )}
 
           {/* STEP 1: What do you love? */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-            <p className="text-xl font-black text-gray-900 mb-1">{ui.step1}</p>
-            <p className="text-gray-500 text-sm mb-4">We'll use this to make everything click for you</p>
-            <div className="grid grid-cols-5 gap-2">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className="bg-white/5 rounded-3xl border border-white/10 p-6">
+            <p className="text-2xl font-black text-white mb-1">🚀 {ui.step1}</p>
+            <p className="text-white/40 text-sm mb-5">Everything you learn will connect to this</p>
+            <div className="grid grid-cols-4 gap-3">
               {INTERESTS.map(i => (
                 <button
                   key={i.label}
                   onClick={() => setInterest(i.label)}
-                  className={`flex flex-col items-center gap-1 p-2 rounded-2xl border-2 transition-all font-bold text-xs ${
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-2xl border-2 transition-all font-bold text-xs ${
                     interest === i.label
-                      ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                      : 'border-gray-200 hover:border-gray-400 text-gray-700'
+                      ? 'border-indigo-400 bg-indigo-500/20 text-white scale-105'
+                      : 'border-white/10 hover:border-white/30 text-white/60 hover:text-white'
                   }`}
                 >
-                  <span className="text-2xl">{i.emoji}</span>
-                  <span>{i.label}</span>
+                  <span className="text-3xl">{i.emoji}</span>
+                  <span className="text-center leading-tight">{i.label}</span>
                 </button>
               ))}
             </div>
@@ -455,18 +461,18 @@ export default function Learn51AIPage() {
 
           {/* STEP 2: Age */}
           {interest && (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-              <p className="text-xl font-black text-gray-900 mb-1">{ui.step2}</p>
-              <p className="text-gray-500 text-sm mb-4">This helps me get the level right — no pressure either way</p>
-              <div className="flex gap-2 flex-wrap">
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white/5 rounded-3xl border border-white/10 p-6">
+              <p className="text-2xl font-black text-white mb-1">🎂 {ui.step2}</p>
+              <p className="text-white/40 text-sm mb-5">So I get the level right for you</p>
+              <div className="flex gap-3 flex-wrap">
                 {['5-6', '7-8', '9-10', '11-12', '13-14', '15+'].map(a => (
                   <button
                     key={a}
                     onClick={() => setAge(a)}
-                    className={`px-5 py-3 rounded-2xl border-2 font-black text-base transition-all ${
+                    className={`px-6 py-3 rounded-2xl border-2 font-black text-lg transition-all ${
                       age === a
-                        ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
-                        : 'border-gray-200 hover:border-gray-400 text-gray-700'
+                        ? 'border-emerald-400 bg-emerald-500/20 text-emerald-300 scale-105'
+                        : 'border-white/10 hover:border-white/30 text-white/60 hover:text-white'
                     }`}
                   >
                     {a}
@@ -476,11 +482,11 @@ export default function Learn51AIPage() {
             </motion.div>
           )}
 
-          {/* STEP 3: Topics (Multi-select) */}
+          {/* STEP 3: Topics */}
           {interest && age && (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-              <p className="text-xl font-black text-gray-900 mb-1">{ui.step3}</p>
-              <p className="text-gray-500 text-sm mb-4">Pick one or mix & match! I'll blend them with {interest}</p>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white/5 rounded-3xl border border-white/10 p-6">
+              <p className="text-2xl font-black text-white mb-1">🌍 {ui.step3}</p>
+              <p className="text-white/40 text-sm mb-5">Pick one or mix — I'll connect everything to {interest}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {TOPICS.map(t => (
                   <button
@@ -490,33 +496,32 @@ export default function Learn51AIPage() {
                         ? selectedTopics.filter(id => id !== t.id)
                         : [...selectedTopics, t.id];
                       setSelectedTopics(updated);
-                      if (updated.length > 0) setTopic(updated[0]); // set first as primary
+                      if (updated.length > 0) setTopic(updated[0]);
                     }}
-                    className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left transition-all font-bold ${
+                    className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left transition-all ${
                       selectedTopics.includes(t.id)
-                        ? `${t.border} bg-gray-50`
-                        : 'border-gray-200 hover:border-gray-400'
+                        ? 'border-violet-400 bg-violet-500/20'
+                        : 'border-white/10 hover:border-white/30'
                     }`}
                   >
                     <span className="text-3xl">{t.emoji}</span>
                     <div className="flex-1">
-                      <p className="text-gray-900 font-black">{t.label}</p>
-                      <p className="text-gray-500 text-sm font-normal">{t.desc}</p>
+                      <p className="text-white font-black">{t.label}</p>
+                      <p className="text-white/40 text-sm">{t.desc}</p>
                     </div>
-                    {selectedTopics.includes(t.id) && <span className="text-indigo-600 font-black">✓</span>}
+                    {selectedTopics.includes(t.id) && <span className="text-violet-400 font-black text-lg">✓</span>}
                   </button>
                 ))}
               </div>
               {selectedTopics.length > 0 && (
-                <button
-                  onClick={() => {
-                    setTopic(selectedTopics[0]); 
-                    loadLesson(selectedTopics[0], 1);
-                  }}
-                  className="w-full mt-4 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-black rounded-2xl transition-all active:scale-95"
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  onClick={() => { setTopic(selectedTopics[0]); loadLesson(selectedTopics[0], 1); }}
+                  className="w-full mt-5 py-5 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-600 hover:from-indigo-600 hover:via-violet-600 hover:to-purple-700 text-white font-black text-xl rounded-2xl transition-all active:scale-95 shadow-2xl shadow-indigo-500/30"
                 >
                   {ui.letsGo}
-                </button>
+                </motion.button>
               )}
             </motion.div>
           )}
@@ -528,17 +533,13 @@ export default function Learn51AIPage() {
   // ── LOADING ──
   if (loading && stage !== 'learning') {
     return (
-      <div className="min-h-screen bg-[#faf9f6] flex items-center justify-center">
-        <motion.div
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 1.2, repeat: Infinity }}
-          className="text-center space-y-4"
-        >
+      <div className="min-h-screen bg-[#05080f] flex items-center justify-center">
+        <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1.2, repeat: Infinity }} className="text-center space-y-4">
           <div className="flex justify-center">
             <Learn51AIIcon size={100} animate={true} />
           </div>
-          <p className="text-xl font-black text-indigo-700">Finding the perfect lesson for you...</p>
-          <p className="text-gray-500">Connecting {TOPICS.find(t => t.id === topic)?.label} to {interest}...</p>
+          <p className="text-xl font-black text-indigo-300">{ui.connecting}</p>
+          <p className="text-white/40">{TOPICS.find(t => t.id === topic)?.label} × {interest}...</p>
         </motion.div>
       </div>
     );
@@ -548,43 +549,38 @@ export default function Learn51AIPage() {
   if (stage === 'learning') {
     const topicData = TOPICS.find(t => t.id === topic);
     return (
-      <div className="min-h-screen bg-[#faf9f6] text-gray-900 p-4 md:p-8 pb-20" dir={language.rtl ? 'rtl' : 'ltr'}>
-        <div className="max-w-2xl mx-auto space-y-5">
+      <div className="min-h-screen bg-[#05080f] text-white p-4 md:p-8 pb-20" dir={language.rtl ? 'rtl' : 'ltr'}>
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[300px] bg-indigo-700/15 rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-2xl mx-auto space-y-5">
 
           {/* HEADER BAR */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <button onClick={reset} className="text-gray-400 hover:text-gray-600 font-bold text-sm flex items-center gap-1">
+              <button onClick={reset} className="text-white/40 hover:text-white font-bold text-sm flex items-center gap-1 transition-colors">
                 <RotateCcw className="w-4 h-4" /> {ui.startOver}
               </button>
               <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
             </div>
             <div className="flex items-center gap-3">
               {wrongStreak >= 2 && (
-                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-blue-600 font-bold text-xs bg-blue-50 border border-blue-200 px-2 py-1 rounded-full">
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-cyan-400 font-bold text-xs bg-cyan-500/10 border border-cyan-500/30 px-2 py-1 rounded-full">
                   {ui.adapting}
                 </motion.span>
               )}
               {hasWon && (
-                <button
-                  onClick={() => setShowShare(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border-2 border-purple-300 bg-purple-50 text-purple-700 hover:border-purple-400 transition-all"
-                >
+                <button onClick={() => setShowShare(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border border-purple-500/40 bg-purple-500/10 text-purple-300 hover:border-purple-400 transition-all">
                   <Share2 className="w-3 h-3" /> Share
                 </button>
               )}
               {streak >= 2 && wrongStreak === 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 1.5 }}
-                  className="text-orange-500 font-black text-sm bg-orange-50 border border-orange-200 px-2 py-1 rounded-full"
-                >
+                <motion.span initial={{ scale: 0 }} animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 1.5 }} className="text-orange-400 font-black text-sm bg-orange-500/10 border border-orange-500/30 px-2 py-1 rounded-full">
                   🔥 {streak} streak
                 </motion.span>
               )}
-              <span className="text-amber-600 font-black text-sm">{'⭐'.repeat(Math.min(stars, 5))}</span>
-              <span className="bg-indigo-100 text-indigo-700 font-black px-3 py-1 rounded-full text-sm">
+              <span className="text-amber-400 font-black text-sm">{'⭐'.repeat(Math.min(stars, 5))}</span>
+              <span className="bg-indigo-500/20 text-indigo-300 font-black px-3 py-1 rounded-full text-sm border border-indigo-500/30">
                 Lvl {level}
               </span>
             </div>
@@ -593,22 +589,16 @@ export default function Learn51AIPage() {
           <AnimatePresence mode="wait">
           {loading ? (
             <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-16 space-y-4">
-                <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1, repeat: Infinity }} className="flex justify-center">
-                  <Learn51AIIcon size={80} animate={true} isListening={true} />
-                </motion.div>
-              <p className="text-indigo-700 font-black text-lg">{ui.thinking}</p>
+              <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1, repeat: Infinity }} className="flex justify-center">
+                <Learn51AIIcon size={80} animate={true} isListening={true} />
+              </motion.div>
+              <p className="text-indigo-300 font-black text-lg">{ui.thinking}</p>
             </motion.div>
           ) : lessonData && (
             <motion.div key="lesson" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
 
-              {/* AI ICON STATE */}
               <div className="flex justify-center py-2">
-                <Learn51AIIcon 
-                  size={80} 
-                  animate={true} 
-                  isListening={iconState === 'thinking'}
-                  isResponding={iconState === 'responding'}
-                />
+                <Learn51AIIcon size={80} animate={true} isListening={iconState === 'thinking'} isResponding={iconState === 'responding'} />
               </div>
 
               {/* WOW FACT */}
@@ -618,27 +608,25 @@ export default function Learn51AIPage() {
               </div>
 
               {/* LESSON */}
-              <div className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
+              <div className="bg-white/5 rounded-3xl border border-white/10 p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-xs font-black uppercase tracking-widest text-gray-400">{ui.letsExplore}</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-white/30">{ui.letsExplore}</p>
                   <button
                     onClick={() => { isSpeaking ? (stopSpeaking(), setIsSpeaking(false)) : readLesson(lessonData); }}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all border-2 ${
-                      isSpeaking
-                        ? 'border-rose-300 bg-rose-50 text-rose-600'
-                        : 'border-indigo-200 bg-indigo-50 text-indigo-600 hover:border-indigo-400'
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all border ${
+                      isSpeaking ? 'border-rose-500/40 bg-rose-500/10 text-rose-400' : 'border-indigo-500/30 bg-indigo-500/10 text-indigo-300 hover:border-indigo-400'
                     }`}
                   >
                     {isSpeaking ? <><VolumeX className="w-3 h-3" /> {ui.stop}</> : <><Volume2 className="w-3 h-3" /> {ui.readToMe}</>}
                   </button>
                 </div>
-                <p className="text-gray-900 text-lg leading-relaxed font-medium">{lessonData.lesson}</p>
+                <p className="text-white text-lg leading-relaxed font-medium">{lessonData.lesson}</p>
               </div>
 
               {/* QUESTION */}
-              <div className="bg-indigo-50 rounded-3xl border-2 border-indigo-200 p-6">
-                <p className="text-xs font-black uppercase tracking-widest text-indigo-400 mb-3">{ui.yourTurn}</p>
-                <p className="text-gray-900 text-xl font-black leading-relaxed">{lessonData.question}</p>
+              <div className="bg-indigo-500/10 rounded-3xl border border-indigo-500/30 p-6">
+                <p className="text-xs font-black uppercase tracking-widest text-indigo-400/70 mb-3">{ui.yourTurn}</p>
+                <p className="text-white text-xl font-black leading-relaxed">{lessonData.question}</p>
               </div>
 
               {/* ANSWER INPUT */}
@@ -651,27 +639,26 @@ export default function Learn51AIPage() {
                     onKeyDown={e => e.key === 'Enter' && !e.shiftKey && answer.trim() && submitAnswer()}
                     placeholder={ui.typeAnswer}
                     rows={3}
-                    className="w-full bg-white border-2 border-gray-300 focus:border-indigo-400 rounded-2xl p-4 text-gray-900 text-lg font-medium outline-none transition-all resize-none leading-relaxed"
+                    className="w-full bg-white/5 border border-white/10 focus:border-indigo-400 rounded-2xl p-4 text-white text-lg font-medium outline-none transition-all resize-none leading-relaxed placeholder:text-white/20"
                   />
                   <div className="flex gap-3">
                     <button
                       onClick={() => { setShowHint(!showHint); if (!showHint) setHintUsedCount(h => h + 1); }}
-                      className="flex-1 py-3 rounded-2xl border-2 border-amber-300 bg-amber-50 text-amber-700 font-bold text-base hover:bg-amber-100 transition-all"
+                      className="flex-1 py-3 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-300 font-bold text-base hover:border-amber-400 transition-all"
                     >
                       💡 {showHint ? ui.hideHint : ui.showHint}
                     </button>
                     <button
                       onClick={submitAnswer}
                       disabled={!answer.trim()}
-                      className="flex-2 flex-grow-[2] py-3 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-black text-lg transition-all"
+                      className="flex-grow-[2] py-3 px-6 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-lg transition-all"
                     >
                       {ui.checkAnswer}
                     </button>
                   </div>
-
                   {showHint && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4">
-                      <p className="text-amber-800 font-bold">💡 {lessonData.hint}</p>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4">
+                      <p className="text-amber-300 font-bold">💡 {lessonData.hint}</p>
                     </motion.div>
                   )}
                 </div>
@@ -682,55 +669,35 @@ export default function Learn51AIPage() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className={`rounded-3xl border-2 p-6 space-y-4 ${
+                  className={`rounded-3xl border p-6 space-y-4 ${
                     assessment.correct
-                      ? 'bg-green-50 border-green-300'
+                      ? 'bg-green-500/10 border-green-500/40'
                       : assessment.how_close === 'nearly'
-                      ? 'bg-amber-50 border-amber-300'
-                      : 'bg-blue-50 border-blue-300'
+                      ? 'bg-amber-500/10 border-amber-500/40'
+                      : 'bg-blue-500/10 border-blue-500/40'
                   }`}
                 >
-                  {/* AI CELEBRATES OR ENCOURAGES */}
                   <div className="flex justify-center py-2">
-                    <Learn51AIIcon 
-                      size={70} 
-                      animate={true} 
-                      isResponding={assessment.correct}
-                    />
+                    <Learn51AIIcon size={70} animate={true} isResponding={assessment.correct} />
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-4xl">
-                      {assessment.correct ? '🌟' : assessment.how_close === 'nearly' ? '🔥' : '💙'}
-                    </span>
-                    <p className="text-xl font-black text-gray-900">
-                      {assessment.correct
-                        ? 'Yes! ' + lessonData.encouragement
-                        : assessment.how_close === 'nearly'
-                        ? 'Really close!'
-                        : 'Good thinking — let\'s look at it together'}
+                    <span className="text-4xl">{assessment.correct ? '🌟' : assessment.how_close === 'nearly' ? '🔥' : '💙'}</span>
+                    <p className="text-xl font-black text-white">
+                      {assessment.correct ? 'Yes! ' + lessonData.encouragement : assessment.how_close === 'nearly' ? 'Really close!' : "Good thinking — let's look at it together"}
                     </p>
                   </div>
-                  <p className="text-gray-700 text-lg leading-relaxed">{assessment.response}</p>
-
-                  {/* FUN FACT */}
-                  <div className="bg-white/60 rounded-2xl p-4 border border-gray-200">
-                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{ui.bonusFact}</p>
-                    <p className="text-gray-800 font-medium">{lessonData.fun_fact}</p>
+                  <p className="text-white/80 text-lg leading-relaxed">{assessment.response}</p>
+                  <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <p className="text-xs font-black text-white/30 uppercase tracking-widest mb-1">{ui.bonusFact}</p>
+                    <p className="text-white/70 font-medium">{lessonData.fun_fact}</p>
                   </div>
-
                   {!assessment.correct && (
-                    <button
-                      onClick={nextQuestion}
-                      className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-lg transition-all flex items-center justify-center gap-2"
-                    >
+                    <button onClick={nextQuestion} className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-black text-lg transition-all flex items-center justify-center gap-2">
                       {ui.tryAnother} <ArrowRight className="w-5 h-5" />
                     </button>
                   )}
                   {assessment.correct && (
-                    <button
-                      onClick={() => setShowReward(true)}
-                      className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-black text-lg transition-all flex items-center justify-center gap-2"
-                    >
+                    <button onClick={() => setShowReward(true)} className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-black text-lg transition-all flex items-center justify-center gap-2">
                       {ui.claimReward}
                     </button>
                   )}
@@ -740,29 +707,8 @@ export default function Learn51AIPage() {
           )}
           </AnimatePresence>
 
-          {/* SHARE WIN MODAL */}
-          {showShare && (
-            <ShareYourWin
-              interest={interest}
-              topic={TOPICS.find(t => t.id === topic)?.label}
-              stars={stars}
-              streak={streak}
-              onClose={() => setShowShare(false)}
-            />
-          )}
-
-          {/* CREATIVE REWARD MODAL */}
-          {showReward && lessonData && (
-            <CreativeReward
-              interest={interest}
-              topic={TOPICS.find(t => t.id === topic)?.label}
-              childAge={age}
-              correctAnswer={answer}
-              questionAsked={lessonData.question}
-              streakCount={streak}
-              onClose={() => { setShowReward(false); nextQuestion(); }}
-            />
-          )}
+          {showShare && <ShareYourWin interest={interest} topic={TOPICS.find(t => t.id === topic)?.label} stars={stars} streak={streak} onClose={() => setShowShare(false)} />}
+          {showReward && lessonData && <CreativeReward interest={interest} topic={TOPICS.find(t => t.id === topic)?.label} childAge={age} correctAnswer={answer} questionAsked={lessonData.question} streakCount={streak} onClose={() => { setShowReward(false); nextQuestion(); }} />}
 
           {/* QUICK TOPIC SWITCH */}
           {!loading && (
@@ -770,16 +716,11 @@ export default function Learn51AIPage() {
               {TOPICS.map(t => (
                 <button
                   key={t.id}
-                  onClick={() => { 
-                    setSelectedTopics([t.id]);
-                    setTopic(t.id); 
-                    setHistory([]); 
-                    loadLesson(t.id, level); 
-                  }}
+                  onClick={() => { setSelectedTopics([t.id]); setTopic(t.id); setHistory([]); loadLesson(t.id, level); }}
                   className={`text-sm px-3 py-1.5 rounded-full border font-bold transition-all ${
                     topic === t.id || selectedTopics.includes(t.id)
-                      ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                      : 'border-gray-200 text-gray-500 hover:border-gray-400'
+                      ? 'border-indigo-400 bg-indigo-500/20 text-indigo-300'
+                      : 'border-white/10 text-white/40 hover:border-white/30 hover:text-white'
                   }`}
                 >
                   {t.emoji} {t.label}
