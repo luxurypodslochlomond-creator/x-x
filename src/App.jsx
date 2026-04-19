@@ -70,6 +70,10 @@ const Learn51AboutPage = React.lazy(() => import('./pages/Learn51About'));
 const Learn51TermsPage = React.lazy(() => import('./pages/Learn51Terms'));
 const Learn51PrivacyPage = React.lazy(() => import('./pages/Learn51Privacy'));
 const Learn51Layout = React.lazy(() => import('./components/learn51/Learn51Layout'));
+const GeorgieMathsPage = React.lazy(() => import('./pages/GeorgieMaths'));
+const LennoxMathsPage = React.lazy(() => import('./pages/LennoxMaths'));
+const ReadingSupportPage = React.lazy(() => import('./pages/ReadingSupport'));
+const YoungWarriorsPage = React.lazy(() => import('./pages/YoungWarriors'));
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -169,6 +173,10 @@ const AuthenticatedApp = () => {
         <Route path="/LifeSkills51" element={<LifeSkills51Page />} />
         <Route path="/Learn51Terms" element={<Learn51TermsPage />} />
         <Route path="/Learn51Privacy" element={<Learn51PrivacyPage />} />
+        <Route path="/GeorgieMaths" element={<GeorgieMathsPage />} />
+        <Route path="/LennoxMaths" element={<LennoxMathsPage />} />
+        <Route path="/ReadingSupport" element={<ReadingSupportPage />} />
+        <Route path="/YoungWarriors" element={<YoungWarriorsPage />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
