@@ -38,28 +38,36 @@ export const LANGUAGES = [
   { code: 'pl', label: 'Polski', speechLang: 'pl-PL' },
 ];
 
+// Smart detection: checks browser language AND all navigator.languages for best match
 export const detectBrowserLanguage = () => {
-  const browserLang = navigator.language || navigator.languages?.[0] || 'en';
-  const code = browserLang.split('-')[0].toLowerCase();
-  return LANGUAGES.find(l => l.code === code) || LANGUAGES[0];
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language || 'en'];
+  for (const lang of langs) {
+    const code = lang.split('-')[0].toLowerCase();
+    const match = LANGUAGES.find(l => l.code === code);
+    if (match) return match;
+  }
+  return LANGUAGES[0]; // fallback English
 };
 
+// Small inline badge — shows detected language, tap to change
 export default function LanguagePicker({ selectedLang, onChange }) {
   const [open, setOpen] = useState(false);
   const current = LANGUAGES.find(l => l.code === selectedLang) || LANGUAGES[0];
 
   return (
     <>
-      {/* Trigger button */}
+      {/* Subtle auto-detected badge — no dropdown, just tap to change */}
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 font-bold text-sm text-white transition-all"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 transition-all group"
+        title="Change language"
       >
-        <Globe className="w-4 h-4 text-indigo-300 flex-shrink-0" />
-        <span className="text-white/90">{current.label}</span>
+        <Globe className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0" />
+        <span className="text-white/70 text-xs font-bold group-hover:text-white/90 transition-colors">{current.label}</span>
+        <span className="text-white/30 text-xs">· change</span>
       </button>
 
-      {/* Full-screen modal — no overflow issues */}
+      {/* Full-screen language picker modal */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -69,10 +77,8 @@ export default function LanguagePicker({ selectedLang, onChange }) {
             className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4"
             onClick={() => setOpen(false)}
           >
-            {/* Backdrop */}
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
-            {/* Sheet */}
             <motion.div
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -81,7 +87,6 @@ export default function LanguagePicker({ selectedLang, onChange }) {
               onClick={e => e.stopPropagation()}
               className="relative w-full max-w-sm bg-[#0f1520] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
             >
-              {/* Header */}
               <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
                 <div className="flex items-center gap-2">
                   <Globe className="w-5 h-5 text-indigo-400" />
@@ -92,7 +97,6 @@ export default function LanguagePicker({ selectedLang, onChange }) {
                 </button>
               </div>
 
-              {/* Language list — scrollable */}
               <div className="overflow-y-auto max-h-[60vh] p-3 grid grid-cols-2 gap-2">
                 {LANGUAGES.map(lang => (
                   <button

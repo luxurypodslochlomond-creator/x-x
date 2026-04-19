@@ -142,15 +142,15 @@ export default function Learn51Page() {
             </p>
             <p className="text-gray-500 text-base mb-4">No login. No data. No cost. Ever. ♾️</p>
 
-            {/* Language auto-detect — saves to localStorage so Learn51AI picks it up */}
-            <div className="flex justify-center mb-6">
+            {/* Language auto-detected silently — tiny badge to change if needed */}
+            <div className="flex flex-col items-center gap-1 mb-6">
               <LanguagePicker selectedLang={language.code} onChange={handleLangChange} />
-            </div>
-            {language.code !== 'en' && (
-              <p className="text-indigo-300 text-sm font-bold mb-4">
-                🌍 Learn51 AI will teach in <strong>{language.label}</strong> — you can change it any time
+              <p className="text-gray-600 text-xs">
+                {language.code !== 'en'
+                  ? `🌍 Auto-detected: AI tutor will teach in ${language.label}`
+                  : '🌍 Language auto-detected · tap to change'}
               </p>
-            )}
+            </div>
 
             {/* Stars display */}
             {stars > 0 && (
