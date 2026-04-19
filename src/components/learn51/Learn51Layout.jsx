@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, GraduationCap, Brain, BookOpen, Heart, Globe, Star, Sparkles, Info, ChevronRight, Rocket } from 'lucide-react';
 
@@ -42,6 +42,13 @@ const NAV_ITEMS = [
 ];
 
 function MobileMenu({ onClose }) {
+  const navigate = useNavigate();
+
+  const handleNav = (url) => {
+    onClose();
+    setTimeout(() => navigate(url), 50);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, x: '100%' }}
@@ -66,11 +73,10 @@ function MobileMenu({ onClose }) {
             <p className="text-xs font-black text-white/30 uppercase tracking-widest mb-3">{group.section}</p>
             <div className="space-y-2">
               {group.items.map(item => (
-                <Link
+                <button
                   key={item.url}
-                  to={item.url}
-                  onClick={onClose}
-                  className={`flex items-center gap-3 p-3 rounded-2xl border transition-all ${
+                  onClick={() => handleNav(item.url)}
+                  className={`w-full flex items-center gap-3 p-3 rounded-2xl border transition-all text-left ${
                     item.highlight
                       ? 'border-violet-400/50 bg-violet-500/15 hover:bg-violet-500/25'
                       : 'border-white/5 bg-white/5 hover:bg-white/10'
@@ -82,7 +88,7 @@ function MobileMenu({ onClose }) {
                     <p className="text-white/40 text-xs">{item.sub}</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-white/20 flex-shrink-0" />
-                </Link>
+                </button>
               ))}
             </div>
           </div>
