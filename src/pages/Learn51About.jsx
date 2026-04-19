@@ -254,17 +254,19 @@ export default function Learn51About() {
 
           <div className="bg-black/40 border border-white/10 rounded-xl p-5 text-center">
             <p className="text-gray-300 text-sm leading-relaxed">
-              <span className="text-white font-black">If you are a disability specialist, SEND educator, or accessibility researcher</span> — we want to build this with you, not for you.
-              The best accessibility tools are co-designed with disabled people and their families.
+              <span className="text-white font-black">Are you a disability specialist, SEND educator, sign language interpreter, or accessibility developer?</span>
+              <br /><br />
+              When Learn51 goes open source, this is exactly where the community comes in. The best accessibility tools are built <em>with</em> disabled people — not for them, not about them.
+              Until then, reach out and help shape what we build.
               <br /><br />
               <a href="mailto:family@uf51.love" className="text-rose-400 font-black hover:text-rose-300 transition-colors">family@uf51.love</a>
-              <span className="text-gray-500"> — come build this with us ❤️</span>
+              <span className="text-gray-500"> ❤️</span>
             </p>
           </div>
         </motion.div>
       </div>
 
-      {/* THE HONEST BIT */}
+      {/* THE HONEST BIT — OPEN SOURCE VISION */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="bg-gradient-to-br from-green-950/40 to-black border border-green-500/30 rounded-2xl p-8 md:p-12 text-center">
           <Heart className="w-12 h-12 text-green-400 mx-auto mb-6" />
@@ -277,6 +279,39 @@ export default function Learn51About() {
             That's not a business model. That's a belief.
           </p>
         </div>
+      </div>
+
+      {/* OPEN SOURCE FUTURE */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-br from-cyan-950/40 to-purple-950/40 border-2 border-cyan-500/30 rounded-2xl p-8 md:p-12 text-center"
+        >
+          <div className="text-5xl mb-4">⚡</div>
+          <h2 className="text-3xl font-black text-white mb-4">The goal is open source. Full stop.</h2>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed mb-6">
+            We're not looking for funding partners. We're not looking for corporate sponsors.
+            We're not selling equity in a children's education platform.
+            <br /><br />
+            The plan is to open source Learn51's AI engine completely — so that developers, teachers, linguists, and communities all over the world can improve it, translate it, and make it more powerful for the right reasons.
+            <br /><br />
+            <span className="text-cyan-400 font-black">Not because someone paid for it. Because it's the right thing to do.</span>
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+            {[
+              { emoji: '🌍', title: 'Community-powered', desc: 'Teachers in Kenya adding content. Developers in Brazil fixing bugs. Linguists in Iraq adding Kurdish dialects. Everyone welcome.' },
+              { emoji: '🔓', title: 'No corporate capture', desc: 'Once it\'s open source, no company can lock it down, monetise it, or remove it from the children who need it.' },
+              { emoji: '♾️', title: 'Gets better forever', desc: 'Open source means it outlives us. It grows after we\'re gone. It belongs to every child on Earth, permanently.' },
+            ].map(item => (
+              <div key={item.title} className="bg-black/30 border border-white/10 rounded-xl p-4">
+                <div className="text-2xl mb-2">{item.emoji}</div>
+                <div className="text-white font-black text-sm mb-1">{item.title}</div>
+                <div className="text-gray-500 text-xs leading-relaxed">{item.desc}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* CTA */}
