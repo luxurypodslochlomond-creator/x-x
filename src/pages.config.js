@@ -212,7 +212,6 @@ const GMTBridge = lazy(() => import('./pages/GMTBridge'));
 const GenderEquality = lazy(() => import('./pages/GenderEquality'));
 const GenerateLogo = lazy(() => import('./pages/GenerateLogo'));
 const GenesisProtocol = lazy(() => import('./pages/GenesisProtocol'));
-const GeorgieMaths = lazy(() => import('./pages/GeorgieMaths'));
 const GeorgieRonaldo = lazy(() => import('./pages/GeorgieRonaldo'));
 const GlobalAccessibilityProtocol = lazy(() => import('./pages/GlobalAccessibilityProtocol'));
 const GlobalCurrencyBridge = lazy(() => import('./pages/GlobalCurrencyBridge'));
@@ -234,7 +233,6 @@ const InterplanetaryMoney = lazy(() => import('./pages/InterplanetaryMoney'));
 const KidneyStoneProtocol = lazy(() => import('./pages/KidneyStoneProtocol'));
 const Leaderboard = lazy(() => import('./pages/Leaderboard'));
 const LearnGuitar = lazy(() => import('./pages/LearnGuitar'));
-const LennoxMaths = lazy(() => import('./pages/LennoxMaths'));
 const Life51 = lazy(() => import('./pages/Life51'));
 const Life51Onboarding = lazy(() => import('./pages/Life51Onboarding'));
 const Life51ROI = lazy(() => import('./pages/Life51ROI'));
@@ -286,7 +284,6 @@ const QuantumField = lazy(() => import('./pages/QuantumField'));
 const QuantumPayments = lazy(() => import('./pages/QuantumPayments'));
 const QuantumSearch = lazy(() => import('./pages/QuantumSearch'));
 const Radio = lazy(() => import('./pages/Radio'));
-const ReadingSupport = lazy(() => import('./pages/ReadingSupport'));
 const RealityLibrary = lazy(() => import('./pages/RealityLibrary'));
 const RemoveBrokenTracks = lazy(() => import('./pages/RemoveBrokenTracks'));
 const RequestAIMusic = lazy(() => import('./pages/RequestAIMusic'));
@@ -408,7 +405,6 @@ const Why432Hz = lazy(() => import('./pages/Why432Hz'));
 const WhyAllLifeSignal = lazy(() => import('./pages/WhyAllLifeSignal'));
 const WhyHelpUF51 = lazy(() => import('./pages/WhyHelpUF51'));
 const WhyWeStartSimple = lazy(() => import('./pages/WhyWeStartSimple'));
-const YoungWarriors = lazy(() => import('./pages/YoungWarriors'));
 const ZeroEgoProtocol = lazy(() => import('./pages/ZeroEgoProtocol'));
 const ZeroPointEnergy = lazy(() => import('./pages/ZeroPointEnergy'));
 const ZeroServerScaling = lazy(() => import('./pages/ZeroServerScaling'));
@@ -576,7 +572,6 @@ export const PAGES = {
     "GenderEquality": GenderEquality,
     "GenerateLogo": GenerateLogo,
     "GenesisProtocol": GenesisProtocol,
-    "GeorgieMaths": GeorgieMaths,
     "GeorgieRonaldo": GeorgieRonaldo,
     "GlobalAccessibilityProtocol": GlobalAccessibilityProtocol,
     "GlobalCurrencyBridge": GlobalCurrencyBridge,
@@ -598,7 +593,6 @@ export const PAGES = {
     "KidneyStoneProtocol": KidneyStoneProtocol,
     "Leaderboard": Leaderboard,
     "LearnGuitar": LearnGuitar,
-    "LennoxMaths": LennoxMaths,
     "Life51": Life51,
     "Life51Onboarding": Life51Onboarding,
     "Life51ROI": Life51ROI,
@@ -650,7 +644,6 @@ export const PAGES = {
     "QuantumPayments": QuantumPayments,
     "QuantumSearch": QuantumSearch,
     "Radio": Radio,
-    "ReadingSupport": ReadingSupport,
     "RealityLibrary": RealityLibrary,
     "RemoveBrokenTracks": RemoveBrokenTracks,
     "RequestAIMusic": RequestAIMusic,
@@ -772,7 +765,6 @@ export const PAGES = {
     "WhyAllLifeSignal": WhyAllLifeSignal,
     "WhyHelpUF51": WhyHelpUF51,
     "WhyWeStartSimple": WhyWeStartSimple,
-    "YoungWarriors": YoungWarriors,
     "ZeroEgoProtocol": ZeroEgoProtocol,
     "ZeroPointEnergy": ZeroPointEnergy,
     "ZeroServerScaling": ZeroServerScaling,
