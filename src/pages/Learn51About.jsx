@@ -181,7 +181,7 @@ export default function Learn51About() {
             {[
               { icon: Shield, color: 'text-indigo-400', border: 'border-indigo-500/30', bg: 'bg-indigo-950/40', title: 'Zero Server Storage', desc: 'We store nothing about your child. No name, no age, no location, no learning history. It cannot be hacked because it does not exist.' },
               { icon: Lock, color: 'text-cyan-400', border: 'border-cyan-500/30', bg: 'bg-cyan-950/40', title: 'Device-Only Learning', desc: 'Stars, progress, and language preferences live only on the child\'s device. We cannot see them. Governments cannot request them. Advertisers cannot buy them.' },
-              { icon: Wifi, color: 'text-purple-400', border: 'border-purple-500/30', bg: 'bg-purple-950/40', title: 'Data Sovereignty', desc: 'A child in Pakistan, Sudan, or Myanmar has the same data rights as a child in Germany. Their learning data is theirs — not a product to be monetised.' },
+              { icon: Globe, color: 'text-purple-400', border: 'border-purple-500/30', bg: 'bg-purple-950/40', title: 'Data Sovereignty', desc: 'A child in Pakistan, Sudan, or Myanmar has the same data rights as a child in Germany. Their learning data is theirs — not a product to be monetised.' },
             ].map((item, i) => {
               const Icon = item.icon;
               return (
