@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { GraduationCap, Heart, Globe, Zap, Users, Brain, ArrowRight, Quote } from 'lucide-react';
+import { GraduationCap, Heart, Globe, Zap, Users, Brain, ArrowRight, Quote, Lock, Shield, CheckCircle, Wifi } from 'lucide-react';
 
 const STATS = [
   { number: "273M", label: "children currently out of school", source: "UNESCO GEM Report, April 2026", color: "text-red-400", border: "border-red-500/40" },
@@ -118,6 +118,92 @@ export default function Learn51About() {
             );
           })}
         </div>
+      </div>
+
+      {/* ZERO BARRIERS SECTION */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-gradient-to-br from-green-950/50 to-emerald-950/30 border-2 border-green-500/40 rounded-2xl p-8 md:p-12"
+        >
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-4">
+              <Zap className="w-4 h-4 text-green-400" />
+              <span className="text-green-400 text-sm font-black tracking-wider">ZERO BARRIERS</span>
+            </div>
+            <h2 className="text-3xl font-black text-white mb-3">If you can open a browser, you can learn.</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">No barrier has been left standing. Every single one has been deliberately removed.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              { label: 'No account required', sub: 'Not even an email address. Just open and go.' },
+              { label: 'No payment ever', sub: 'Free now, free in 10 years, free forever. Non-negotiable.' },
+              { label: 'No English required', sub: '32 languages including Hausa, Pashto, Amharic & Kurdish.' },
+              { label: 'No fast internet needed', sub: 'Works on 2G. Once loaded, works completely offline.' },
+              { label: 'No modern device needed', sub: 'Designed to run on the oldest, cheapest phones on Earth.' },
+              { label: 'No teacher required', sub: 'Self-directed. AI adapts. A child can learn entirely alone.' },
+            ].map(item => (
+              <div key={item.label} className="flex gap-3 bg-black/30 rounded-xl p-4 border border-green-500/20">
+                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <div className="text-white font-black text-sm">{item.label}</div>
+                  <div className="text-gray-500 text-xs mt-0.5">{item.sub}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* PRIVACY & DATA SOVEREIGNTY */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-gradient-to-br from-indigo-950/50 to-cyan-950/30 border-2 border-indigo-500/40 rounded-2xl p-8 md:p-12"
+        >
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full px-4 py-2 mb-4">
+              <Lock className="w-4 h-4 text-indigo-400" />
+              <span className="text-indigo-400 text-sm font-black tracking-wider">PRIVACY · DATA SOVEREIGNTY · ZERO HARVEST</span>
+            </div>
+            <h2 className="text-3xl font-black text-white mb-3">Your child's learning belongs to your child.</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Every edtech platform in the world harvests children's data. We built the opposite.
+              We designed from day one so there is <span className="text-white font-bold">nothing to harvest</span>.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {[
+              { icon: Shield, color: 'text-indigo-400', border: 'border-indigo-500/30', bg: 'bg-indigo-950/40', title: 'Zero Server Storage', desc: 'We store nothing about your child. No name, no age, no location, no learning history. It cannot be hacked because it does not exist.' },
+              { icon: Lock, color: 'text-cyan-400', border: 'border-cyan-500/30', bg: 'bg-cyan-950/40', title: 'Device-Only Learning', desc: 'Stars, progress, and language preferences live only on the child\'s device. We cannot see them. Governments cannot request them. Advertisers cannot buy them.' },
+              { icon: Wifi, color: 'text-purple-400', border: 'border-purple-500/30', bg: 'bg-purple-950/40', title: 'Data Sovereignty', desc: 'A child in Pakistan, Sudan, or Myanmar has the same data rights as a child in Germany. Their learning data is theirs — not a product to be monetised.' },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <div key={i} className={`border ${item.border} ${item.bg} rounded-xl p-5`}>
+                  <Icon className={`w-7 h-7 ${item.color} mb-3`} />
+                  <h3 className="text-white font-black mb-2">{item.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="bg-black/40 border border-white/10 rounded-xl p-5">
+            <p className="text-gray-300 text-sm leading-relaxed text-center">
+              <span className="text-white font-black">Why does data sovereignty matter?</span> Because the next billion learners are in countries where governments, corporations, and surveillance systems are actively hostile to children's privacy. We don't collect data because we refuse to become a risk to the very children we're trying to help.
+              <br /><br />
+              <span className="text-cyan-400 font-bold">This isn't a privacy policy. It's an architecture decision. We built it so we physically cannot harvest data even if we wanted to.</span>
+            </p>
+          </div>
+
+          <p className="text-center text-gray-600 text-xs mt-4">COPPA compliant · GDPR-K compliant · UNCRC Article 16 aligned · No third-party analytics · No advertising SDKs</p>
+        </motion.div>
       </div>
 
       {/* THE HONEST BIT */}
