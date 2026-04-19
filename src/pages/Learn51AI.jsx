@@ -53,6 +53,19 @@ const TOPICS = [
   { id: 'money', emoji: '💰', label: 'Real Life Skills', color: 'from-green-500 to-emerald-600', border: 'border-green-400', desc: 'Money, cooking, staying safe' },
 ];
 
+// UI strings translated by the AI for each language — kids see everything in their language
+const UI_STRINGS = {
+  en: { back: '← Back to Learn51', step1: 'Step 1 — What do you love? 💛', step2: 'Step 2 — How old are you? 🎂', step3: "Step 3 — What sounds fun? 🌍", letsGo: "Let's go! 🚀", checkAnswer: 'Check my answer ✓', showHint: 'Show hint', hideHint: 'Hide hint', typeAnswer: "Type your answer here... there's no wrong way to think about it", readToMe: 'Read to me 🔊', stop: 'Stop', startOver: 'Start over', claimReward: '🎁 Claim your reward!', tryAnother: 'Try another question', welcomeBack: 'Welcome back!', startFresh: 'Start fresh', jumpBack: 'Jump back in — pick a topic:', didYouKnow: '✨ Did you know?', letsExplore: '📚 Let\'s explore', yourTurn: '💭 Your turn', bonusFact: '🤯 Bonus mind-blower', adapting: '🤖 adapting for you', thinking: 'Thinking of the perfect question...', connecting: 'Finding the perfect lesson for you...' },
+  es: { back: '← Volver a Learn51', step1: 'Paso 1 — ¿Qué te encanta? 💛', step2: 'Paso 2 — ¿Cuántos años tienes? 🎂', step3: '¿Qué te parece divertido? 🌍', letsGo: '¡Vamos! 🚀', checkAnswer: 'Comprobar mi respuesta ✓', showHint: 'Mostrar pista', hideHint: 'Ocultar pista', typeAnswer: 'Escribe tu respuesta aquí...', readToMe: 'Léeme 🔊', stop: 'Parar', startOver: 'Empezar de nuevo', claimReward: '🎁 ¡Reclamar recompensa!', tryAnother: 'Otra pregunta', welcomeBack: '¡Bienvenido de vuelta!', startFresh: 'Empezar desde cero', jumpBack: 'Continuar — elige un tema:', didYouKnow: '✨ ¿Sabías que?', letsExplore: '📚 Exploremos', yourTurn: '💭 Tu turno', bonusFact: '🤯 Dato extra', adapting: '🤖 adaptándome a ti', thinking: 'Pensando en la pregunta perfecta...', connecting: 'Encontrando la lección perfecta...' },
+  fr: { back: '← Retour à Learn51', step1: 'Étape 1 — Qu\'est-ce que tu aimes? 💛', step2: 'Étape 2 — Quel âge as-tu? 🎂', step3: 'Qu\'est-ce qui te semble amusant? 🌍', letsGo: 'C\'est parti! 🚀', checkAnswer: 'Vérifier ma réponse ✓', showHint: 'Voir l\'indice', hideHint: 'Cacher l\'indice', typeAnswer: 'Écris ta réponse ici...', readToMe: 'Lire pour moi 🔊', stop: 'Stop', startOver: 'Recommencer', claimReward: '🎁 Réclamer la récompense!', tryAnother: 'Autre question', welcomeBack: 'Bon retour!', startFresh: 'Tout recommencer', jumpBack: 'Reprendre — choisis un sujet:', didYouKnow: '✨ Le savais-tu?', letsExplore: '📚 Explorons', yourTurn: '💭 À toi', bonusFact: '🤯 Fait bonus', adapting: '🤖 je m\'adapte', thinking: 'Je cherche la question parfaite...', connecting: 'Je trouve la leçon parfaite...' },
+  ar: { back: '← العودة إلى Learn51', step1: 'الخطوة 1 — ماذا تحب؟ 💛', step2: 'الخطوة 2 — كم عمرك؟ 🎂', step3: 'ما الذي يبدو ممتعاً؟ 🌍', letsGo: 'هيا بنا! 🚀', checkAnswer: 'تحقق من إجابتي ✓', showHint: 'أظهر التلميح', hideHint: 'أخفِ التلميح', typeAnswer: 'اكتب إجابتك هنا...', readToMe: 'اقرأ لي 🔊', stop: 'توقف', startOver: 'ابدأ من جديد', claimReward: '🎁 احصل على مكافأتك!', tryAnother: 'سؤال آخر', welcomeBack: 'أهلاً بعودتك!', startFresh: 'ابدأ من الصفر', jumpBack: 'تابع — اختر موضوعاً:', didYouKnow: '✨ هل تعلم؟', letsExplore: '📚 لنستكشف', yourTurn: '💭 دورك', bonusFact: '🤯 حقيقة إضافية', adapting: '🤖 أتكيف معك', thinking: 'أفكر في السؤال المثالي...', connecting: 'أجد الدرس المثالي...' },
+  hi: { back: '← Learn51 पर वापस', step1: 'चरण 1 — आपको क्या पसंद है? 💛', step2: 'चरण 2 — आपकी उम्र कितनी है? 🎂', step3: 'क्या मज़ेदार लगता है? 🌍', letsGo: 'चलो! 🚀', checkAnswer: 'मेरा जवाब जांचें ✓', showHint: 'संकेत दिखाएं', hideHint: 'संकेत छुपाएं', typeAnswer: 'यहाँ अपना जवाब लिखें...', readToMe: 'मुझे पढ़ो 🔊', stop: 'रुको', startOver: 'फिर से शुरू', claimReward: '🎁 इनाम लो!', tryAnother: 'दूसरा सवाल', welcomeBack: 'वापसी पर स्वागत!', startFresh: 'नए सिरे से शुरू', jumpBack: 'जारी रखें — विषय चुनें:', didYouKnow: '✨ क्या आप जानते हैं?', letsExplore: '📚 चलो जानते हैं', yourTurn: '💭 आपकी बारी', bonusFact: '🤯 बोनस तथ्य', adapting: '🤖 आपके लिए बदल रहा हूँ', thinking: 'सही सवाल ढूंढ रहा हूँ...', connecting: 'सही पाठ ढूंढ रहा हूँ...' },
+  sw: { back: '← Rudi Learn51', step1: 'Hatua 1 — Unachopenda ni nini? 💛', step2: 'Hatua 2 — Una umri gani? 🎂', step3: 'Nini kinaonekana cha kufurahisha? 🌍', letsGo: 'Twende! 🚀', checkAnswer: 'Angalia jibu langu ✓', showHint: 'Onyesha kidokezo', hideHint: 'Ficha kidokezo', typeAnswer: 'Andika jibu lako hapa...', readToMe: 'Nisomee 🔊', stop: 'Simama', startOver: 'Anza upya', claimReward: '🎁 Chukua tuzo!', tryAnother: 'Swali lingine', welcomeBack: 'Karibu tena!', startFresh: 'Anza kutoka mwanzo', jumpBack: 'Endelea — chagua mada:', didYouKnow: '✨ Je, ulijua?', letsExplore: '📚 Tuchunguze', yourTurn: '💭 Zamu yako', bonusFact: '🤯 Ukweli wa ziada', adapting: '🤖 inabadilika kwako', thinking: 'Inatafuta swali kamili...', connecting: 'Inatafuta somo kamili...' },
+  uk: { back: '← Назад до Learn51', step1: 'Крок 1 — Що ти любиш? 💛', step2: 'Крок 2 — Скільки тобі років? 🎂', step3: 'Що здається цікавим? 🌍', letsGo: 'Поїхали! 🚀', checkAnswer: 'Перевірити відповідь ✓', showHint: 'Показати підказку', hideHint: 'Сховати підказку', typeAnswer: 'Напиши свою відповідь тут...', readToMe: 'Прочитай мені 🔊', stop: 'Стоп', startOver: 'Почати знову', claimReward: '🎁 Забрати нагороду!', tryAnother: 'Інше питання', welcomeBack: 'З поверненням!', startFresh: 'Почати спочатку', jumpBack: 'Продовжити — обери тему:', didYouKnow: '✨ Чи знав ти?', letsExplore: '📚 Досліджуємо', yourTurn: '💭 Твоя черга', bonusFact: '🤯 Бонусний факт', adapting: '🤖 адаптуюсь для тебе', thinking: 'Шукаю ідеальне питання...', connecting: 'Шукаю ідеальний урок...' },
+};
+// For languages not in the map — fall back to English (AI handles the content translation)
+const getUI = (langCode) => UI_STRINGS[langCode] || UI_STRINGS.en;
+
 const PROMPT_TEMPLATE = ({ topic, interest, age, level, history, paceNote, language }) => `
 You are Learn51 AI — the world's most caring, brilliant teacher. You genuinely love children and want every single one on Earth to learn and thrive.
 
@@ -364,6 +377,8 @@ export default function Learn51AIPage() {
     try { localStorage.removeItem(LS_KEY); } catch {}
   };
 
+  const ui = getUI(language.code);
+
   // ── INTRO STAGE ──
   if (stage === 'intro') {
     return (
@@ -372,7 +387,7 @@ export default function Learn51AIPage() {
 
           <div className="flex items-center justify-between">
             <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:text-indigo-800 text-base">
-              ← Back to Learn51
+              {ui.back}
             </Link>
             <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
           </div>
@@ -393,15 +408,15 @@ export default function Learn51AIPage() {
                 <div className="flex items-center gap-3">
                   <span className="text-3xl">🌟</span>
                   <div>
-                    <p className="font-black text-amber-800">Welcome back! {saved.stars} ⭐ {saved.stars === 1 ? 'star' : 'stars'} earned</p>
+                    <p className="font-black text-amber-800">{ui.welcomeBack} {saved.stars} ⭐ {saved.stars === 1 ? 'star' : 'stars'} earned</p>
                     <p className="text-amber-600 text-sm">Level {saved.level}{saved.interest ? ` · loves ${saved.interest}` : ''} · saved on this device only</p>
                   </div>
                 </div>
-                <button onClick={fullReset} className="text-xs text-gray-400 hover:text-gray-600 font-bold underline flex-shrink-0">Start fresh</button>
+                <button onClick={fullReset} className="text-xs text-gray-400 hover:text-gray-600 font-bold underline flex-shrink-0">{ui.startFresh}</button>
               </div>
               {saved.interest && saved.age && (
                 <div className="flex flex-wrap gap-2">
-                  <p className="text-amber-700 text-sm font-bold w-full">Jump back in — pick a topic:</p>
+                  <p className="text-amber-700 text-sm font-bold w-full">{ui.jumpBack}</p>
                   {TOPICS.map(t => (
                     <button
                       key={t.id}
@@ -418,7 +433,7 @@ export default function Learn51AIPage() {
 
           {/* STEP 1: What do you love? */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-            <p className="text-xl font-black text-gray-900 mb-1">Step 1 — What do you love? 💛</p>
+            <p className="text-xl font-black text-gray-900 mb-1">{ui.step1}</p>
             <p className="text-gray-500 text-sm mb-4">We'll use this to make everything click for you</p>
             <div className="grid grid-cols-5 gap-2">
               {INTERESTS.map(i => (
@@ -441,7 +456,7 @@ export default function Learn51AIPage() {
           {/* STEP 2: Age */}
           {interest && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-              <p className="text-xl font-black text-gray-900 mb-1">Step 2 — How old are you? 🎂</p>
+              <p className="text-xl font-black text-gray-900 mb-1">{ui.step2}</p>
               <p className="text-gray-500 text-sm mb-4">This helps me get the level right — no pressure either way</p>
               <div className="flex gap-2 flex-wrap">
                 {['5-6', '7-8', '9-10', '11-12', '13-14', '15+'].map(a => (
@@ -464,7 +479,7 @@ export default function Learn51AIPage() {
           {/* STEP 3: Topics (Multi-select) */}
           {interest && age && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
-              <p className="text-xl font-black text-gray-900 mb-1">Step 3 — What sounds fun? 🌍</p>
+              <p className="text-xl font-black text-gray-900 mb-1">{ui.step3}</p>
               <p className="text-gray-500 text-sm mb-4">Pick one or mix & match! I'll blend them with {interest}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {TOPICS.map(t => (
@@ -500,7 +515,7 @@ export default function Learn51AIPage() {
                   }}
                   className="w-full mt-4 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-black rounded-2xl transition-all active:scale-95"
                 >
-                  Let's go! 🚀
+                  {ui.letsGo}
                 </button>
               )}
             </motion.div>
@@ -540,14 +555,14 @@ export default function Learn51AIPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <button onClick={reset} className="text-gray-400 hover:text-gray-600 font-bold text-sm flex items-center gap-1">
-                <RotateCcw className="w-4 h-4" /> Start over
+                <RotateCcw className="w-4 h-4" /> {ui.startOver}
               </button>
               <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
             </div>
             <div className="flex items-center gap-3">
               {wrongStreak >= 2 && (
                 <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-blue-600 font-bold text-xs bg-blue-50 border border-blue-200 px-2 py-1 rounded-full">
-                  🤖 adapting for you
+                  {ui.adapting}
                 </motion.span>
               )}
               {hasWon && (
@@ -581,7 +596,7 @@ export default function Learn51AIPage() {
                 <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 1, repeat: Infinity }} className="flex justify-center">
                   <Learn51AIIcon size={80} animate={true} isListening={true} />
                 </motion.div>
-              <p className="text-indigo-700 font-black text-lg">Thinking of the perfect question...</p>
+              <p className="text-indigo-700 font-black text-lg">{ui.thinking}</p>
             </motion.div>
           ) : lessonData && (
             <motion.div key="lesson" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
@@ -598,14 +613,14 @@ export default function Learn51AIPage() {
 
               {/* WOW FACT */}
               <div className={`bg-gradient-to-r ${topicData?.color} rounded-3xl p-5 text-white`}>
-                <p className="text-xs font-black uppercase tracking-widest mb-2 opacity-80">✨ Did you know?</p>
+                <p className="text-xs font-black uppercase tracking-widest mb-2 opacity-80">{ui.didYouKnow}</p>
                 <p className="text-lg font-bold leading-relaxed">{lessonData.wow_fact}</p>
               </div>
 
               {/* LESSON */}
               <div className="bg-white rounded-3xl border-2 border-gray-200 p-6 shadow-sm">
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-xs font-black uppercase tracking-widest text-gray-400">📚 Let's explore</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-gray-400">{ui.letsExplore}</p>
                   <button
                     onClick={() => { isSpeaking ? (stopSpeaking(), setIsSpeaking(false)) : readLesson(lessonData); }}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all border-2 ${
@@ -614,7 +629,7 @@ export default function Learn51AIPage() {
                         : 'border-indigo-200 bg-indigo-50 text-indigo-600 hover:border-indigo-400'
                     }`}
                   >
-                    {isSpeaking ? <><VolumeX className="w-3 h-3" /> Stop</> : <><Volume2 className="w-3 h-3" /> Read to me 🔊</>}
+                    {isSpeaking ? <><VolumeX className="w-3 h-3" /> {ui.stop}</> : <><Volume2 className="w-3 h-3" /> {ui.readToMe}</>}
                   </button>
                 </div>
                 <p className="text-gray-900 text-lg leading-relaxed font-medium">{lessonData.lesson}</p>
@@ -622,7 +637,7 @@ export default function Learn51AIPage() {
 
               {/* QUESTION */}
               <div className="bg-indigo-50 rounded-3xl border-2 border-indigo-200 p-6">
-                <p className="text-xs font-black uppercase tracking-widest text-indigo-400 mb-3">💭 Your turn</p>
+                <p className="text-xs font-black uppercase tracking-widest text-indigo-400 mb-3">{ui.yourTurn}</p>
                 <p className="text-gray-900 text-xl font-black leading-relaxed">{lessonData.question}</p>
               </div>
 
@@ -634,7 +649,7 @@ export default function Learn51AIPage() {
                     value={answer}
                     onChange={e => setAnswer(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && !e.shiftKey && answer.trim() && submitAnswer()}
-                    placeholder="Type your answer here... there's no wrong way to think about it"
+                    placeholder={ui.typeAnswer}
                     rows={3}
                     className="w-full bg-white border-2 border-gray-300 focus:border-indigo-400 rounded-2xl p-4 text-gray-900 text-lg font-medium outline-none transition-all resize-none leading-relaxed"
                   />
@@ -643,14 +658,14 @@ export default function Learn51AIPage() {
                       onClick={() => { setShowHint(!showHint); if (!showHint) setHintUsedCount(h => h + 1); }}
                       className="flex-1 py-3 rounded-2xl border-2 border-amber-300 bg-amber-50 text-amber-700 font-bold text-base hover:bg-amber-100 transition-all"
                     >
-                      💡 {showHint ? 'Hide hint' : 'Show hint'}
+                      💡 {showHint ? ui.hideHint : ui.showHint}
                     </button>
                     <button
                       onClick={submitAnswer}
                       disabled={!answer.trim()}
                       className="flex-2 flex-grow-[2] py-3 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-black text-lg transition-all"
                     >
-                      Check my answer ✓
+                      {ui.checkAnswer}
                     </button>
                   </div>
 
@@ -699,7 +714,7 @@ export default function Learn51AIPage() {
 
                   {/* FUN FACT */}
                   <div className="bg-white/60 rounded-2xl p-4 border border-gray-200">
-                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">🤯 Bonus mind-blower</p>
+                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{ui.bonusFact}</p>
                     <p className="text-gray-800 font-medium">{lessonData.fun_fact}</p>
                   </div>
 
@@ -708,7 +723,7 @@ export default function Learn51AIPage() {
                       onClick={nextQuestion}
                       className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-lg transition-all flex items-center justify-center gap-2"
                     >
-                      Try another question <ArrowRight className="w-5 h-5" />
+                      {ui.tryAnother} <ArrowRight className="w-5 h-5" />
                     </button>
                   )}
                   {assessment.correct && (
@@ -716,7 +731,7 @@ export default function Learn51AIPage() {
                       onClick={() => setShowReward(true)}
                       className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-black text-lg transition-all flex items-center justify-center gap-2"
                     >
-                      🎁 Claim your reward!
+                      {ui.claimReward}
                     </button>
                   )}
                 </motion.div>
