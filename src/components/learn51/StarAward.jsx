@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star } from 'lucide-react';
+import { getActiveProfile, addProfileStars, getProfileStars } from './LearnProfile';
 
-// Call this component from any learning page to award stars
-// Usage: <StarAward stars={3} label="Well done!" onDone={() => {}} />
-
-const STORAGE_KEY = 'learn51_stars';
+// Backwards-compatible helpers — use active profile if set, else legacy key
+const LEGACY_KEY = 'learn51_stars';
 
 export const awardStars = (n) => {
   try {
-    const current = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+    const profileId = getActiveProfile();
+    if (profileId) {
+      addProfileStars(profileId, n);
+      return getProfileStars(profileId);
+    }
+    // legacy fallback
+    const current = parseInt(localStorage.getItem(LEGACY_KEY) || '0', 10);
     const next = current + n;
-    localStorage.setItem(STORAGE_KEY, String(next));
+    localStorage.setItem(LEGACY_KEY, String(next));
     return next;
   } catch { return 0; }
 };
 
 export const getLearnStars = () => {
-  try { return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10); }
-  catch { return 0; }
+  try {
+    const profileId = getActiveProfile();
+    if (profileId) return getProfileStars(profileId);
+    return parseInt(localStorage.getItem(LEGACY_KEY) || '0', 10);
+  } catch { return 0; }
 };
 
 export default function StarAward({ stars = 1, label = 'Great work!', onDone }) {

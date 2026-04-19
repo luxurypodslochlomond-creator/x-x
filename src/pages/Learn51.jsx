@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Brain, BookOpen, Globe, ArrowRight, Heart, CheckCircle, Shield } from 'lucide-react';
+import { Star, Brain, BookOpen, Globe, ArrowRight, Heart, CheckCircle, Shield, UserCircle } from 'lucide-react';
 import LanguagePicker, { detectBrowserLanguage, LANGUAGES } from '@/components/learn51/LanguagePicker';
+import LearnProfile, { getProfiles, getActiveProfile, setActiveProfile, getProfileStars } from '@/components/learn51/LearnProfile';
 
 const LANG_KEY = 'learn51_language';
-
-// Stars — gain only, never go down, no account needed
-const STORAGE_KEY = 'learn51_stars';
-const getStars = () => { try { return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10); } catch { return 0; } };
 
 const MODULES = [
   {
@@ -26,7 +23,6 @@ const MODULES = [
       { label: 'Ages 5–9 · Magic Maths', sub: 'Numbers, doubling & 3D shapes', url: '/GeorgieMaths', tag: 'START HERE' },
       { label: 'Ages 10+ · Rounding & Decimals', sub: 'Decimals, circles & maths in music', url: '/LennoxMaths', tag: 'LEVEL UP' },
     ],
-    stars: 0,
   },
   {
     id: 'literacy',
@@ -43,7 +39,6 @@ const MODULES = [
       { label: 'Literacy 51', sub: 'Phonics · spelling · sentences · stories', url: '/Literacy51', tag: 'GO' },
       { label: 'Reading Support', sub: 'Help with reading & dyslexia', url: '/ReadingSupport', tag: 'HELP' },
     ],
-    stars: 0,
   },
   {
     id: 'world',
@@ -60,7 +55,6 @@ const MODULES = [
       { label: 'Young Warriors', sub: 'Real kids making a real difference', url: '/YoungWarriors', tag: 'EXPLORE' },
       { label: 'Sound & Frequencies', sub: 'Invisible waves that change everything', url: '/FrequencyChamber', tag: 'MIND-BLOWN' },
     ],
-    stars: 0,
   },
   {
     id: 'lifeskills',
@@ -77,7 +71,6 @@ const MODULES = [
       { label: 'Life Skills 51', sub: 'Money · food · mental health · rights · work', url: '/LifeSkills51', tag: 'GO' },
       { label: 'Reading Support', sub: 'Dyslexia help & reading strategies', url: '/ReadingSupport', tag: 'HELP' },
     ],
-    stars: 0,
   },
 ];
 
@@ -93,11 +86,37 @@ const FACTS = [
 ];
 
 export default function Learn51Page() {
-  const [stars] = useState(getStars());
   const [factIndex, setFactIndex] = useState(0);
   const [hoveredModule, setHoveredModule] = useState(null);
+  const [showProfilePicker, setShowProfilePicker] = useState(false);
 
-  // Auto-detect language on first visit, persist it for Learn51AI
+  // Profile state
+  const [activeProfileId, setActiveProfileId] = useState(getActiveProfile);
+  const [profiles, setProfiles] = useState(getProfiles);
+  const activeProfile = profiles.find(p => p.id === activeProfileId) || null;
+  const stars = activeProfileId ? getProfileStars(activeProfileId) : 0;
+
+  // Check if we should show picker on first load (no profiles yet OR no active)
+  const [checkedProfiles, setCheckedProfiles] = useState(false);
+  useEffect(() => {
+    const existing = getProfiles();
+    if (existing.length === 0) {
+      setShowProfilePicker(true);
+    }
+    setCheckedProfiles(true);
+  }, []);
+
+  const handleProfileSelected = (profile) => {
+    setActiveProfileId(profile.id);
+    setProfiles(getProfiles());
+    setShowProfilePicker(false);
+  };
+
+  const handleSwitchProfile = () => {
+    setShowProfilePicker(true);
+  };
+
+  // Language
   const [language, setLanguage] = useState(() => {
     try {
       const saved = localStorage.getItem(LANG_KEY);
@@ -117,12 +136,18 @@ export default function Learn51Page() {
     return () => clearInterval(timer);
   }, []);
 
+  if (!checkedProfiles) return null;
+
+  // Show profile picker full screen
+  if (showProfilePicker) {
+    return <LearnProfile onSelect={handleProfileSelected} />;
+  }
+
   return (
     <div className="min-h-screen bg-[#05080f] text-white overflow-x-hidden">
 
       {/* HERO */}
       <div className="relative overflow-hidden">
-        {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-indigo-600/20 rounded-full blur-3xl" />
           <div className="absolute top-[100px] left-[10%] w-[300px] h-[300px] bg-violet-600/10 rounded-full blur-3xl" />
@@ -142,7 +167,38 @@ export default function Learn51Page() {
             </p>
             <p className="text-gray-500 text-base mb-4">No login. No data. No cost. Ever. ♾️</p>
 
-            {/* Language auto-detected silently — tiny badge to change if needed */}
+            {/* PROFILE BADGE */}
+            {activeProfile && (
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex flex-col items-center gap-2 mb-4">
+                <div className={`inline-flex items-center gap-3 bg-gradient-to-r ${activeProfile.color} bg-opacity-20 border border-white/20 rounded-2xl px-5 py-3`}>
+                  <span className="text-3xl">{activeProfile.avatar}</span>
+                  <div className="text-left">
+                    <p className="text-white font-black text-lg leading-none">{activeProfile.name}</p>
+                    <div className="flex items-center gap-1 mt-0.5">
+                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                      <span className="text-yellow-300 font-bold text-sm">{stars} stars</span>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={handleSwitchProfile}
+                  className="flex items-center gap-1.5 text-white/30 hover:text-white/60 text-xs transition-colors"
+                >
+                  <UserCircle className="w-3.5 h-3.5" /> Switch learner
+                </button>
+              </motion.div>
+            )}
+
+            {!activeProfile && (
+              <button
+                onClick={handleSwitchProfile}
+                className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-2xl px-4 py-2 mb-4 text-white/50 hover:text-white text-sm transition-colors"
+              >
+                <UserCircle className="w-4 h-4" /> Pick your name
+              </button>
+            )}
+
+            {/* Language */}
             <div className="flex flex-col items-center gap-1 mb-6">
               <LanguagePicker selectedLang={language.code} onChange={handleLangChange} />
               <p className="text-gray-600 text-xs">
@@ -151,18 +207,6 @@ export default function Learn51Page() {
                   : '🌍 Language auto-detected · tap to change'}
               </p>
             </div>
-
-            {/* Stars display */}
-            {stars > 0 && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/40 rounded-2xl px-5 py-2 mb-6"
-              >
-                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                <span className="text-yellow-300 font-black">{stars} stars earned</span>
-              </motion.div>
-            )}
           </motion.div>
 
           {/* Rotating wow fact */}
@@ -184,11 +228,7 @@ export default function Learn51Page() {
 
       {/* AI TUTOR HERO CARD */}
       <div className="max-w-4xl mx-auto px-4 pb-2">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <Link to="/Learn51AI">
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -204,7 +244,7 @@ export default function Learn51Page() {
                   </div>
                   <h2 className="text-2xl md:text-3xl font-black mb-2">Learn51 AI Tutor ✨</h2>
                   <p className="text-indigo-200 text-base leading-relaxed mb-3">
-                    Tell us what you love — football, gaming, animals, anything — and our AI connects every lesson to YOUR world. Maths, science, health, kindness. Personalised for you. Free forever.
+                    Tell us what you love — football, gaming, animals, anything — and our AI connects every lesson to YOUR world. Free forever.
                   </p>
                   <div className="flex items-center gap-2 text-white font-black text-base">
                     Start learning your way <ArrowRight className="w-5 h-5" />
@@ -216,16 +256,9 @@ export default function Learn51Page() {
         </motion.div>
       </div>
 
-      {/* THE 3 MODULES */}
-      <div className="max-w-4xl mx-auto px-4 pb-8 space-y-5">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-2xl font-black text-center text-gray-400 tracking-widest uppercase text-sm mb-6"
-        >
-          Choose your adventure
-        </motion.h2>
+      {/* MODULES */}
+      <div className="max-w-4xl mx-auto px-4 pb-8 space-y-5 mt-6">
+        <p className="text-center text-gray-500 text-xs uppercase tracking-widest font-black">Choose your adventure</p>
 
         {MODULES.map((mod, i) => (
           <motion.div
@@ -239,7 +272,6 @@ export default function Learn51Page() {
               hoveredModule === mod.id ? `shadow-2xl ${mod.glow}` : 'shadow-lg'
             }`}
           >
-            {/* Module header */}
             <div className="flex items-start gap-4 mb-5">
               <div className="text-5xl flex-shrink-0">{mod.emoji}</div>
               <div className="flex-1">
@@ -250,8 +282,6 @@ export default function Learn51Page() {
                 <p className="text-gray-500 text-sm mt-1">{mod.desc}</p>
               </div>
             </div>
-
-            {/* Links */}
             <div className="space-y-3">
               {mod.links.map(link => (
                 <Link key={link.url} to={link.url}>
@@ -298,7 +328,7 @@ export default function Learn51Page() {
               'No adverts, no tracking, no third parties',
               'No social features — children cannot message anyone',
               'Stars saved locally on device only — we cannot see them',
-              'Works offline once loaded — fully safe without internet',
+              'Multiple children can use one device with separate profiles',
             ].map(text => (
               <div key={text} className="flex gap-2 items-start">
                 <CheckCircle className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
