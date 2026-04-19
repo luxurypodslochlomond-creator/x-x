@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Heart, Globe, Zap, BookOpen, ArrowLeft, Coffee, ChevronDown } from 'lucide-react';
+import { Heart, Globe, Zap, BookOpen, ArrowLeft, Coffee, ChevronDown, ShieldCheck, Users, Star } from 'lucide-react';
 import { createDonationCheckout } from '@/functions/createDonationCheckout';
 
 const CURRENCIES = [
@@ -81,30 +81,38 @@ export default function SupportLearn51() {
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-4">
-          <div className="text-6xl">🌍</div>
-          <h1 className="text-4xl font-black">Help Keep Learn51 Free</h1>
-          <p className="text-white/60 text-lg leading-relaxed">
-            No ads. No logins. No tracking.<br />
-            Every child on Earth — right now, today.
-          </p>
-          <p className="text-white/40 text-sm">
-            We're a CIC. AI credits and servers have real costs.<br />
-            If it helped — even £1 keeps it going. ♾️
+          <div className="text-6xl">🧒</div>
+          <h1 className="text-4xl font-black leading-tight">Your kid deserves a brilliant tutor.<br /><span className="text-emerald-400">Every kid does.</span></h1>
+          <p className="text-white/70 text-lg leading-relaxed">
+            Learn51 is a free AI tutor — no login, no ads, no tracking.<br />
+            Open it, pick a subject, start learning. That's it.
           </p>
         </motion.div>
 
-        {/* What it pays for */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="grid grid-cols-3 gap-3">
+        {/* Real story / emotional hook */}
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
+          className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+          <p className="text-white/80 text-sm leading-relaxed">
+            💬 <span className="italic">"My daughter was embarrassed to ask her teacher the same question again. She used Learn51 at 10pm. She got it. She went to school the next day and answered first in class."</span>
+          </p>
+          <p className="text-white/40 text-xs">— A mum in Glasgow</p>
+        </motion.div>
+
+        {/* Why it exists */}
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}
+          className="space-y-3">
           {[
-            { icon: Zap, label: 'AI Credits', desc: 'Powers every lesson' },
-            { icon: Globe, label: 'Free Access', desc: 'No paywall, ever' },
-            { icon: BookOpen, label: 'New Subjects', desc: 'More every month' },
-          ].map(({ icon: Icon, label, desc }) => (
-            <div key={label} className="bg-white/5 rounded-2xl p-4 text-center border border-white/10">
-              <Icon className="w-6 h-6 text-emerald-400 mx-auto mb-2" />
-              <p className="text-white font-black text-sm">{label}</p>
-              <p className="text-white/40 text-xs">{desc}</p>
+            { icon: ShieldCheck, label: 'Zero data collected', desc: 'No accounts. No profiles. Your child stays invisible to the internet.', color: 'text-cyan-400' },
+            { icon: Globe, label: 'Works anywhere on Earth', desc: 'A kid in rural Scotland or rural Kenya gets the same AI tutor. No cost. No barrier.', color: 'text-emerald-400' },
+            { icon: Users, label: 'Built by parents, for parents', desc: "We're a CIC — a community company. Every penny goes back into the platform.", color: 'text-amber-400' },
+            { icon: Star, label: 'No hidden agenda', desc: "We don't sell data. We don't upsell. We just want kids to learn.", color: 'text-pink-400' },
+          ].map(({ icon: Icon, label, desc, color }) => (
+            <div key={label} className="flex items-start gap-4 bg-white/5 rounded-2xl p-4 border border-white/10">
+              <Icon className={`w-5 h-5 ${color} flex-shrink-0 mt-0.5`} />
+              <div>
+                <p className="text-white font-black text-sm">{label}</p>
+                <p className="text-white/50 text-xs mt-0.5 leading-relaxed">{desc}</p>
+              </div>
             </div>
           ))}
         </motion.div>
@@ -112,6 +120,10 @@ export default function SupportLearn51() {
         {/* Donation form */}
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
           className="bg-white/5 rounded-3xl border border-white/10 p-6 space-y-5">
+          <div className="text-center space-y-1">
+            <p className="text-white font-black text-lg">Keep it free for every child</p>
+            <p className="text-white/40 text-sm">AI credits cost real money. Even £1 funds dozens of lessons.</p>
+          </div>
 
           {/* Currency picker */}
           <div>
@@ -190,15 +202,25 @@ export default function SupportLearn51() {
           </div>
         </motion.div>
 
-        {/* Honest note */}
+        {/* Trust / honest note */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-          className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5 text-center space-y-2">
+          className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5 text-center space-y-3">
           <Coffee className="w-6 h-6 text-emerald-400 mx-auto" />
           <p className="text-white/80 text-sm leading-relaxed">
-            Universal Frequency 51 CIC — community interest company.<br />
-            <span className="text-emerald-300 font-bold">No VC funding. Asset-locked. Built for people, not profit.</span>
+            <span className="text-emerald-300 font-bold">Universal Frequency 51 CIC</span><br />
+            We're a registered Community Interest Company — not a startup, not a charity looking for a handout. We built this because kids we love needed it.
           </p>
-          <p className="text-white/40 text-xs">Even the smallest amount keeps a child learning. Thank you. ♾️❤️</p>
+          <p className="text-white/50 text-xs leading-relaxed">
+            No VC money. Asset-locked. Every contribution is protected by law to be used for community benefit only.
+          </p>
+          <p className="text-white/30 text-xs">Questions? <a href="mailto:family@uf51.love" className="text-emerald-400 hover:underline">family@uf51.love</a></p>
+        </motion.div>
+
+        {/* What you're NOT getting */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
+          className="text-center space-y-1 pb-6">
+          <p className="text-white/20 text-xs">No newsletter. No follow-up emails. No guilt trips.</p>
+          <p className="text-white/20 text-xs">Just a kid somewhere learning something. ♾️❤️</p>
         </motion.div>
 
       </div>
