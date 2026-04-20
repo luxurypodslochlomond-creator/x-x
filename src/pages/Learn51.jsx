@@ -1,288 +1,256 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { Star, Heart } from 'lucide-react';
 import LearnProfile, { getProfiles, getActiveProfile, getProfileStars } from '@/components/learn51/LearnProfile';
 
-// ── STAR FIELD ────────────────────────────────────────────────────────────────
-function StarField() {
-  const stars = useRef(
-    Array.from({ length: 120 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2.5 + 0.5,
-      opacity: Math.random() * 0.7 + 0.1,
-      duration: Math.random() * 3 + 2,
-      delay: Math.random() * 4,
+// ── SUBJECTS — each owns a full vibe ─────────────────────────────────────────
+const SUBJECTS = [
+  {
+    id: 'ai',
+    title: 'AI Tutor',
+    hook: 'Learns what YOU love.\nTeaches everything through it.',
+    cta: 'Start talking →',
+    url: '/Learn51AI',
+    bg: ['#0d0628', '#3b0764', '#6d28d9'],
+    accent: '#a78bfa',
+    glyph: '◈',
+    glyphColor: '#c4b5fd',
+    particles: ['✦', '◆', '⬟', '✧'],
+    featured: true,
+  },
+  {
+    id: 'maths',
+    title: 'Magic Maths',
+    hook: 'Numbers that\nactually click.',
+    cta: 'Explore numbers →',
+    url: '/GeorgieMaths',
+    bg: ['#05051a', '#1e1b4b', '#312e81'],
+    accent: '#818cf8',
+    glyph: '∑',
+    glyphColor: '#a5b4fc',
+    particles: ['∞', '÷', '×', '='],
+  },
+  {
+    id: 'literacy',
+    title: 'Reading & Words',
+    hook: 'Stories that pull\nyou in.',
+    cta: 'Open a story →',
+    url: '/Literacy51',
+    bg: ['#001a0d', '#022c22', '#064e3b'],
+    accent: '#34d399',
+    glyph: '⌘',
+    glyphColor: '#6ee7b7',
+    particles: ['A', 'z', '?', '!'],
+  },
+  {
+    id: 'world',
+    title: 'Real World',
+    hook: 'Nature. Space.\nScience. All of it.',
+    cta: 'Go explore →',
+    url: '/YoungWarriors',
+    bg: ['#0a0f1a', '#1e3a5f', '#1d4ed8'],
+    accent: '#60a5fa',
+    glyph: '◎',
+    glyphColor: '#93c5fd',
+    particles: ['🌊', '⚡', '🔥', '❄️'],
+  },
+  {
+    id: 'life',
+    title: 'Life Skills',
+    hook: 'Money. Health.\nYour rights. Real talk.',
+    cta: 'Level up →',
+    url: '/LifeSkills51',
+    bg: ['#1a0010', '#4a044e', '#7e22ce'],
+    accent: '#e879f9',
+    glyph: '◉',
+    glyphColor: '#f0abfc',
+    particles: ['£', '%', '✓', '→'],
+  },
+];
+
+// ── FLOATING GLYPH PARTICLES ──────────────────────────────────────────────────
+function FloatingParticles({ chars, accent }) {
+  const items = useRef(
+    chars.map((c, i) => ({
+      char: c,
+      x: 10 + Math.random() * 80,
+      y: 10 + Math.random() * 80,
+      size: 14 + Math.random() * 18,
+      dur: 3 + Math.random() * 4,
+      delay: i * 0.7,
     }))
   ).current;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {stars.map(s => (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {items.map((p, i) => (
         <motion.div
-          key={s.id}
-          className="absolute rounded-full bg-white"
-          style={{
-            left: `${s.x}%`,
-            top: `${s.y}%`,
-            width: s.size,
-            height: s.size,
-          }}
-          animate={{ opacity: [s.opacity, s.opacity * 0.2, s.opacity] }}
-          transition={{ duration: s.duration, repeat: Infinity, delay: s.delay, ease: 'easeInOut' }}
-        />
+          key={i}
+          className="absolute font-black select-none"
+          style={{ left: `${p.x}%`, top: `${p.y}%`, fontSize: p.size, color: accent, opacity: 0 }}
+          animate={{ opacity: [0, 0.25, 0], y: [0, -30, -60] }}
+          transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: 'easeOut' }}
+        >
+          {p.char}
+        </motion.div>
       ))}
-      {/* Nebula clouds */}
-      <div className="absolute top-0 left-0 w-full h-full" style={{
-        background: `
-          radial-gradient(ellipse 60% 30% at 20% 15%, rgba(139,92,246,0.12) 0%, transparent 70%),
-          radial-gradient(ellipse 40% 20% at 80% 70%, rgba(6,182,212,0.08) 0%, transparent 70%),
-          radial-gradient(ellipse 50% 25% at 60% 30%, rgba(236,72,153,0.06) 0%, transparent 70%)
-        `
-      }} />
     </div>
   );
 }
 
-// ── CSS PLANET ────────────────────────────────────────────────────────────────
-function Planet({ config, onClick, isSelected }) {
-  const {
-    size, color, glowColor, ringColor, hasRing, hasMoon,
-    craters, atmosphere, label, sublabel, url, orbitX, orbitY, animDelay
-  } = config;
+// ── SINGLE SUBJECT CARD — full screen ────────────────────────────────────────
+function SubjectCard({ subject, isActive, direction }) {
+  const variants = {
+    enter: (d) => ({ x: d > 0 ? '100%' : '-100%', opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (d) => ({ x: d < 0 ? '100%' : '-100%', opacity: 0 }),
+  };
 
   return (
-    <Link to={url}>
-      <motion.div
-        className="absolute cursor-pointer"
-        style={{ left: `${orbitX}%`, top: `${orbitY}%`, transform: 'translate(-50%, -50%)' }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: animDelay, duration: 0.6, type: 'spring', stiffness: 160, damping: 14 }}
-        whileTap={{ scale: 0.88 }}
-      >
-        {/* Orbit glow ring when selected */}
-        {isSelected && (
-          <motion.div
-            className="absolute rounded-full"
-            style={{
-              width: size + 40,
-              height: size + 40,
-              top: -(20),
-              left: -(20),
-              border: `2px solid ${glowColor}60`,
-              boxShadow: `0 0 30px ${glowColor}40`,
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-          />
-        )}
+    <motion.div
+      className="absolute inset-0 flex flex-col"
+      custom={direction}
+      variants={variants}
+      initial="enter"
+      animate="center"
+      exit="exit"
+      transition={{ duration: 0.38, ease: [0.32, 0.72, 0, 1] }}
+      style={{
+        background: `linear-gradient(160deg, ${subject.bg[0]} 0%, ${subject.bg[1]} 50%, ${subject.bg[2]} 100%)`,
+      }}
+    >
+      <FloatingParticles chars={subject.particles} accent={subject.accent} />
 
-        {/* Atmosphere glow */}
-        {atmosphere && (
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: size + 24,
-              height: size + 24,
-              top: -12,
-              left: -12,
-              background: `radial-gradient(circle, transparent 40%, ${glowColor}25 70%, ${glowColor}08 100%)`,
-              filter: `blur(4px)`,
-            }}
-          />
-        )}
-
-        {/* Saturn-style ring — behind planet */}
-        {hasRing && (
-          <div
-            className="absolute pointer-events-none"
-            style={{
-              width: size * 1.9,
-              height: size * 0.4,
-              top: size * 0.3,
-              left: -(size * 0.45),
-              border: `4px solid ${ringColor}`,
-              borderRadius: '50%',
-              transform: 'rotateX(70deg)',
-              boxShadow: `0 0 12px ${ringColor}60`,
-              zIndex: 0,
-            }}
-          />
-        )}
-
-        {/* Planet body */}
+      {/* Giant glyph — fills the space */}
+      <div className="flex-1 flex items-center justify-center relative">
         <motion.div
-          className="relative rounded-full flex items-center justify-center"
-          style={{
-            width: size,
-            height: size,
-            background: color,
-            boxShadow: `0 0 ${size * 0.5}px ${glowColor}50, inset -${size * 0.15}px -${size * 0.1}px ${size * 0.2}px rgba(0,0,0,0.4), inset ${size * 0.05}px ${size * 0.05}px ${size * 0.15}px rgba(255,255,255,0.15)`,
-            zIndex: 1,
-          }}
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 4 + animDelay, repeat: Infinity, ease: 'easeInOut', delay: animDelay * 0.5 }}
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.1, duration: 0.5, type: 'spring', stiffness: 120 }}
+          className="text-center"
         >
-          {/* Surface bands */}
-          {config.bands && config.bands.map((band, i) => (
-            <div
-              key={i}
-              className="absolute w-full"
-              style={{
-                height: `${band.h}%`,
-                top: `${band.top}%`,
-                background: band.color,
-                borderRadius: '50%',
-                opacity: 0.4,
-              }}
-            />
-          ))}
-
-          {/* Craters */}
-          {craters && craters.map((c, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                width: c.size,
-                height: c.size,
-                top: `${c.y}%`,
-                left: `${c.x}%`,
-                background: 'rgba(0,0,0,0.2)',
-                boxShadow: 'inset 1px 1px 3px rgba(0,0,0,0.3)',
-              }}
-            />
-          ))}
-        </motion.div>
-
-        {/* Moon */}
-        {hasMoon && (
-          <motion.div
-            className="absolute rounded-full"
+          {/* Glow blob */}
+          <div
+            className="absolute rounded-full blur-3xl pointer-events-none"
             style={{
-              width: size * 0.22,
-              height: size * 0.22,
-              background: 'radial-gradient(circle at 35% 35%, #d4d4d8, #71717a)',
-              boxShadow: '0 0 8px rgba(255,255,255,0.3)',
-              transformOrigin: `${size * -0.7}px 0px`,
+              width: 280,
+              height: 280,
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%,-50%)',
+              background: subject.accent,
+              opacity: 0.08,
             }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
           />
-        )}
+          <motion.div
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            className="relative z-10 font-black select-none"
+            style={{
+              fontSize: 160,
+              color: subject.glyphColor,
+              fontFamily: '"Courier New", monospace',
+              lineHeight: 1,
+              textShadow: `0 0 60px ${subject.accent}60, 0 0 120px ${subject.accent}20`,
+              letterSpacing: '-8px',
+            }}
+          >
+            {subject.glyph}
+          </motion.div>
+        </motion.div>
+      </div>
 
-        {/* Label */}
-        <div
-          className="absolute text-center pointer-events-none"
-          style={{ top: size + 10, left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}
+      {/* Bottom content */}
+      <motion.div
+        className="relative z-10 px-8 pb-10"
+        initial={{ y: 40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.15, duration: 0.45 }}
+      >
+        {/* Title */}
+        <h2
+          className="font-black leading-none mb-4"
+          style={{
+            fontSize: 42,
+            color: 'rgba(255,255,255,0.95)',
+            letterSpacing: '-1.5px',
+            textShadow: `0 0 30px ${subject.accent}40`,
+          }}
         >
-          <p className="font-black text-white leading-none" style={{ fontSize: size * 0.22, textShadow: `0 0 12px ${glowColor}` }}>
-            {label}
-          </p>
-          <p className="font-medium mt-1" style={{ fontSize: size * 0.15, color: 'rgba(255,255,255,0.4)' }}>
-            {sublabel}
-          </p>
-        </div>
+          {subject.title}
+        </h2>
+
+        {/* Hook text */}
+        <p
+          className="font-bold leading-relaxed mb-8 whitespace-pre-line"
+          style={{ fontSize: 17, color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}
+        >
+          {subject.hook}
+        </p>
+
+        {/* CTA */}
+        <Link to={subject.url}>
+          <motion.div
+            whileTap={{ scale: 0.96 }}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-black"
+            style={{
+              background: subject.accent,
+              color: '#000',
+              fontSize: 16,
+              letterSpacing: '-0.3px',
+              boxShadow: `0 0 40px ${subject.accent}50`,
+            }}
+          >
+            {subject.cta}
+          </motion.div>
+        </Link>
       </motion.div>
-    </Link>
+    </motion.div>
   );
 }
 
-// ── PLANET CONFIG ─────────────────────────────────────────────────────────────
-const PLANETS = [
-  {
-    id: 'sun',
-    label: 'AI Tutor',
-    sublabel: 'Your guide',
-    url: '/Learn51AI',
-    size: 100,
-    color: 'radial-gradient(circle at 35% 30%, #fde68a, #f59e0b, #d97706, #92400e)',
-    glowColor: '#fbbf24',
-    atmosphere: true,
-    orbitX: 50,
-    orbitY: 22,
-    animDelay: 0.1,
-    bands: [
-      { h: 15, top: 30, color: 'rgba(251,191,36,0.5)' },
-      { h: 12, top: 55, color: 'rgba(217,119,6,0.4)' },
-    ],
-  },
-  {
-    id: 'maths',
-    label: 'Maths',
-    sublabel: 'Numbers & logic',
-    url: '/GeorgieMaths',
-    size: 72,
-    color: 'radial-gradient(circle at 30% 30%, #a78bfa, #7c3aed, #4c1d95)',
-    glowColor: '#8b5cf6',
-    hasRing: true,
-    ringColor: '#c4b5fd80',
-    orbitX: 16,
-    orbitY: 48,
-    animDelay: 0.25,
-    craters: [
-      { size: 10, x: 20, y: 25 },
-      { size: 6, x: 55, y: 60 },
-    ],
-  },
-  {
-    id: 'literacy',
-    label: 'Reading',
-    sublabel: 'Words & stories',
-    url: '/Literacy51',
-    size: 68,
-    color: 'radial-gradient(circle at 35% 25%, #6ee7b7, #10b981, #065f46)',
-    glowColor: '#34d399',
-    hasMoon: true,
-    atmosphere: true,
-    orbitX: 82,
-    orbitY: 46,
-    animDelay: 0.4,
-    bands: [
-      { h: 20, top: 25, color: 'rgba(110,231,183,0.5)' },
-    ],
-  },
-  {
-    id: 'world',
-    label: 'Real World',
-    sublabel: 'Science & nature',
-    url: '/YoungWarriors',
-    size: 64,
-    color: 'radial-gradient(circle at 30% 30%, #93c5fd, #3b82f6, #1e3a8a)',
-    glowColor: '#60a5fa',
-    atmosphere: true,
-    orbitX: 25,
-    orbitY: 74,
-    animDelay: 0.55,
-    bands: [
-      { h: 25, top: 35, color: 'rgba(147,197,253,0.5)' },
-    ],
-    craters: [
-      { size: 14, x: 30, y: 20 },
-    ],
-  },
-  {
-    id: 'life',
-    label: 'Life Skills',
-    sublabel: 'How the world works',
-    url: '/LifeSkills51',
-    size: 60,
-    color: 'radial-gradient(circle at 35% 30%, #fca5a5, #ef4444, #7f1d1d)',
-    glowColor: '#f87171',
-    hasRing: true,
-    ringColor: '#fca5a580',
-    orbitX: 74,
-    orbitY: 75,
-    animDelay: 0.7,
-    craters: [
-      { size: 8, x: 40, y: 50 },
-      { size: 5, x: 65, y: 25 },
-    ],
-  },
-];
+// ── DOT NAV ───────────────────────────────────────────────────────────────────
+function DotNav({ count, active, accent, onDotTap }) {
+  return (
+    <div className="flex items-center gap-2">
+      {Array.from({ length: count }).map((_, i) => (
+        <button key={i} onClick={() => onDotTap(i)}>
+          <motion.div
+            animate={{ width: i === active ? 24 : 6, opacity: i === active ? 1 : 0.3 }}
+            transition={{ duration: 0.3 }}
+            className="rounded-full h-1.5"
+            style={{ background: i === active ? accent : 'white' }}
+          />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// ── QUICK ACCESS STRIP ────────────────────────────────────────────────────────
+function QuickStrip({ subjects, activeIdx, onSelect }) {
+  return (
+    <div className="flex gap-2 overflow-x-auto scrollbar-hide px-5 py-3" style={{ scrollbarWidth: 'none' }}>
+      {subjects.map((s, i) => (
+        <button
+          key={s.id}
+          onClick={() => onSelect(i)}
+          className="flex-shrink-0 rounded-xl px-3 py-2 font-black transition-all"
+          style={{
+            fontSize: 11,
+            background: i === activeIdx ? s.accent : 'rgba(255,255,255,0.06)',
+            color: i === activeIdx ? '#000' : 'rgba(255,255,255,0.4)',
+            border: i === activeIdx ? 'none' : '1px solid rgba(255,255,255,0.08)',
+            letterSpacing: '0.03em',
+          }}
+        >
+          {s.title}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 const getAITileMemory = () => {
   try {
@@ -294,19 +262,34 @@ const getAITileMemory = () => {
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 export default function Learn51Page() {
+  const [[activeIdx, direction], setPage] = useState([0, 0]);
   const [showProfilePicker, setShowProfilePicker] = useState(false);
   const [activeProfileId, setActiveProfileId] = useState(getActiveProfile);
   const [profiles, setProfiles] = useState(getProfiles);
-  const [showIntro, setShowIntro] = useState(true);
+  const dragStartX = useRef(null);
   const aiMemory = getAITileMemory();
 
   const activeProfile = profiles.find(p => p.id === activeProfileId) || null;
   const stars = activeProfileId ? getProfileStars(activeProfileId) : 0;
+  const subject = SUBJECTS[activeIdx];
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowIntro(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  const paginate = (newDir) => {
+    const next = (activeIdx + newDir + SUBJECTS.length) % SUBJECTS.length;
+    setPage([next, newDir]);
+  };
+
+  const goTo = (idx) => {
+    const dir = idx > activeIdx ? 1 : -1;
+    setPage([idx, dir]);
+  };
+
+  const handleTouchStart = (e) => { dragStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e) => {
+    if (dragStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - dragStartX.current;
+    if (Math.abs(delta) > 50) paginate(delta < 0 ? 1 : -1);
+    dragStartX.current = null;
+  };
 
   const handleProfileSelected = (profile) => {
     setActiveProfileId(profile.id);
@@ -320,207 +303,140 @@ export default function Learn51Page() {
 
   return (
     <div
-      className="min-h-screen text-white relative overflow-hidden select-none"
-      style={{
-        background: 'radial-gradient(ellipse at 50% 0%, #0d0628 0%, #020408 60%, #000000 100%)',
-        minHeight: '100svh',
-      }}
+      className="fixed inset-0 flex flex-col overflow-hidden"
+      style={{ background: '#000', touchAction: 'pan-y' }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
-      <StarField />
-
-      {/* ── INTRO SPLASH ─────────────────────────────── */}
-      {showIntro && (
-        <motion.div
-          className="absolute inset-0 z-50 flex flex-col items-center justify-center"
-          style={{ background: '#000' }}
-          animate={{ opacity: [1, 1, 0] }}
-          transition={{ duration: 1.8, times: [0, 0.6, 1] }}
-        >
-          <motion.div
-            animate={{ scale: [0.8, 1.2, 1], opacity: [0, 1, 1] }}
-            transition={{ duration: 1.2 }}
-            className="text-center"
-          >
-            <div style={{ fontSize: 72 }}>🌌</div>
-            <p className="font-black text-white mt-3 tracking-widest" style={{ fontSize: 13, letterSpacing: '0.3em', opacity: 0.5 }}>
-              LEARN51
-            </p>
-          </motion.div>
-        </motion.div>
-      )}
-
-      {/* ── HUD TOP ──────────────────────────────────── */}
-      <div className="relative z-20 flex items-center justify-between px-5 pt-8 pb-2">
+      {/* ── TOP HUD ──────────────────────────────────── */}
+      <div
+        className="relative z-30 flex items-center justify-between px-5 pt-6 pb-2"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%)' }}
+      >
         {/* Wordmark */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.8, duration: 0.5 }}
-        >
-          <p
-            className="font-black tracking-[0.25em] uppercase"
+        <div>
+          <span
+            className="font-black tracking-widest uppercase"
             style={{
               fontSize: 13,
-              background: 'linear-gradient(90deg, #a78bfa, #38bdf8)',
+              background: `linear-gradient(90deg, ${subject.accent}, white)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              letterSpacing: '0.2em',
             }}
           >
             LEARN51
-          </p>
-          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.15em', fontWeight: 700 }}>
-            FREE · EVERY CHILD · EARTH
-          </p>
-        </motion.div>
+          </span>
+        </div>
 
-        {/* Profile HUD */}
-        <motion.button
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.9, duration: 0.5 }}
-          whileTap={{ scale: 0.9 }}
+        {/* Profile pill */}
+        <button
           onClick={() => setShowProfilePicker(true)}
-          className="flex items-center gap-2 rounded-full px-3 py-2"
+          className="flex items-center gap-2 rounded-full px-3 py-1.5"
           style={{
-            background: 'rgba(255,255,255,0.06)',
+            background: 'rgba(255,255,255,0.08)',
             border: '1px solid rgba(255,255,255,0.12)',
             backdropFilter: 'blur(10px)',
           }}
         >
-          <span style={{ fontSize: 18 }}>{activeProfile?.avatar || '👾'}</span>
+          <span style={{ fontSize: 16 }}>{activeProfile?.avatar || '👾'}</span>
           {activeProfile && stars > 0 && (
-            <span className="font-black text-yellow-400" style={{ fontSize: 11 }}>
-              {stars}★
-            </span>
+            <span className="font-black" style={{ fontSize: 11, color: '#fbbf24' }}>{stars}★</span>
           )}
           {!activeProfile && (
-            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', fontWeight: 700, letterSpacing: '0.1em' }}>
-              WHO?
-            </span>
+            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', fontWeight: 800, letterSpacing: '0.1em' }}>YOU?</span>
           )}
-        </motion.button>
+        </button>
       </div>
 
-      {/* ── MISSION TEXT ─────────────────────────────── */}
-      <motion.div
-        className="relative z-20 text-center px-6 mt-2 mb-2"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.0, duration: 0.6 }}
+      {/* ── SWIPEABLE STAGE ──────────────────────────── */}
+      <div className="relative flex-1 overflow-hidden">
+        <AnimatePresence initial={false} custom={direction}>
+          <SubjectCard
+            key={activeIdx}
+            subject={subject}
+            isActive={true}
+            direction={direction}
+          />
+        </AnimatePresence>
+
+        {/* Swipe hint arrows — subtle */}
+        <button
+          onClick={() => paginate(-1)}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 rounded-full p-3"
+          style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)', fontSize: 18 }}
+        >
+          ‹
+        </button>
+        <button
+          onClick={() => paginate(1)}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 rounded-full p-3"
+          style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)', fontSize: 18 }}
+        >
+          ›
+        </button>
+      </div>
+
+      {/* ── BOTTOM DOCK ──────────────────────────────── */}
+      <div
+        className="relative z-30"
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)' }}
       >
-        {activeProfile ? (
-          <p className="font-black text-white" style={{ fontSize: 22 }}>
-            Welcome back, {activeProfile.name} {activeProfile.avatar}
-          </p>
-        ) : (
-          <p className="font-black" style={{ fontSize: 20, color: 'rgba(255,255,255,0.9)' }}>
-            Choose your planet 🚀
-          </p>
-        )}
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', marginTop: 4, fontWeight: 600, letterSpacing: '0.05em' }}>
-          Tap a planet to begin exploring
-        </p>
-      </motion.div>
-
-      {/* ── PLANET FIELD ─────────────────────────────── */}
-      <motion.div
-        className="relative z-10"
-        style={{ height: '58vh', minHeight: 360 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
-      >
-        {PLANETS.map(planet => (
-          <Planet key={planet.id} config={planet} />
-        ))}
-
-        {/* Orbit paths — subtle rings suggesting solar system */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ opacity: 0.04 }}
-        >
-          <ellipse cx="50%" cy="22%" rx="18%" ry="5%" fill="none" stroke="white" strokeWidth="1" />
-          <ellipse cx="50%" cy="48%" rx="40%" ry="12%" fill="none" stroke="white" strokeWidth="1" />
-          <ellipse cx="50%" cy="74%" rx="52%" ry="15%" fill="none" stroke="white" strokeWidth="1" />
-        </svg>
-      </motion.div>
-
-      {/* ── CONTINUE BANNER if returning ─────────────── */}
-      {aiMemory && (
-        <motion.div
-          className="relative z-20 mx-4 mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.2 }}
-        >
-          <Link to="/Learn51AI">
-            <div
-              className="flex items-center gap-3 px-4 py-3 rounded-2xl"
-              style={{
-                background: 'linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.08))',
-                border: '1px solid rgba(251,191,36,0.25)',
-                backdropFilter: 'blur(10px)',
-              }}
-            >
-              <span style={{ fontSize: 24 }}>⭐</span>
-              <div className="flex-1 min-w-0">
-                <p className="font-black text-white" style={{ fontSize: 13 }}>Continue your journey</p>
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>
-                  {aiMemory.stars} stars · {aiMemory.interest} · AI Tutor
-                </p>
-              </div>
-              <span style={{ fontSize: 18, opacity: 0.5 }}>→</span>
-            </div>
-          </Link>
-        </motion.div>
-      )}
-
-      {/* ── NO PROFILE NUDGE ─────────────────────────── */}
-      {!activeProfile && (
-        <motion.div
-          className="relative z-20 mx-4 mb-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.3 }}
-        >
-          <button
-            onClick={() => setShowProfilePicker(true)}
-            className="w-full py-3 rounded-2xl font-black text-sm tracking-widest uppercase"
-            style={{
-              background: 'linear-gradient(135deg, rgba(139,92,246,0.3), rgba(6,182,212,0.2))',
-              border: '1px solid rgba(139,92,246,0.4)',
-              color: 'rgba(255,255,255,0.7)',
-              letterSpacing: '0.15em',
-              backdropFilter: 'blur(10px)',
-            }}
+        {/* Continue banner */}
+        {aiMemory && activeIdx === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-5 mb-2"
           >
-            Create your explorer profile →
-          </button>
-        </motion.div>
-      )}
+            <Link to="/Learn51AI">
+              <div
+                className="flex items-center gap-3 px-4 py-2.5 rounded-xl"
+                style={{
+                  background: 'rgba(167,139,250,0.15)',
+                  border: '1px solid rgba(167,139,250,0.25)',
+                }}
+              >
+                <span style={{ fontSize: 16 }}>⚡</span>
+                <div className="flex-1 min-w-0">
+                  <span className="font-black text-white" style={{ fontSize: 12 }}>
+                    Continue · {aiMemory.stars}★ · {aiMemory.interest}
+                  </span>
+                </div>
+                <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.3)' }}>→</span>
+              </div>
+            </Link>
+          </motion.div>
+        )}
 
-      {/* ── BOTTOM HUD ───────────────────────────────── */}
-      <motion.div
-        className="relative z-20 flex items-center justify-between px-5 pb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.4 }}
-      >
-        <div className="flex items-center gap-3 flex-wrap">
-          {['🔒 Private', '✈️ Offline', '💛 Free'].map(item => (
-            <span key={item} style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', fontWeight: 700, letterSpacing: '0.08em' }}>
-              {item}
-            </span>
-          ))}
+        {/* Quick access strip */}
+        <QuickStrip subjects={SUBJECTS} activeIdx={activeIdx} onSelect={goTo} />
+
+        {/* Dot nav + profile nudge */}
+        <div className="flex items-center justify-between px-5 pb-6 pt-1">
+          <DotNav count={SUBJECTS.length} active={activeIdx} accent={subject.accent} onDotTap={goTo} />
+
+          <div className="flex items-center gap-4">
+            {!activeProfile && (
+              <button
+                onClick={() => setShowProfilePicker(true)}
+                className="font-black rounded-lg px-3 py-1.5"
+                style={{
+                  fontSize: 10,
+                  background: subject.accent,
+                  color: '#000',
+                  letterSpacing: '0.08em',
+                }}
+              >
+                SET UP PROFILE
+              </button>
+            )}
+            <Link to="/SupportLearn51">
+              <Heart className="w-3.5 h-3.5 fill-pink-500 text-pink-500 opacity-30" />
+            </Link>
+          </div>
         </div>
-        <Link to="/SupportLearn51">
-          <span className="flex items-center gap-1" style={{ fontSize: 10, color: 'rgba(255,255,255,0.15)', fontWeight: 700 }}>
-            <Heart className="w-3 h-3 fill-pink-500 text-pink-500" />
-            Donate
-          </span>
-        </Link>
-      </motion.div>
-
+      </div>
     </div>
   );
 }
