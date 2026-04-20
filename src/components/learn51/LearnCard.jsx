@@ -156,9 +156,36 @@ export function CardDisplay({ card, size = 'full', onClick, isNew = false }) {
   );
 }
 
+// ── Share a card — WhatsApp + native share ──
+export function shareCard(card) {
+  const rarity = RARITY_CONFIG[card.rarity] || RARITY_CONFIG.common;
+  const url = 'https://universalfrequency51.com/Learn51AI';
+  const msg =
+`${rarity.label === 'LEGENDARY' ? '👑' : rarity.label === 'EPIC' ? '🔥' : rarity.label === 'RARE' ? '💎' : '⭐'} I just earned a ${rarity.label} Learn Card!
+
+${card.emoji_art} *${card.card_name}*
+⚡ Move: ${card.battle_move}
+📊 Stat: ${card.power_stat}
+
+🧠 Mind-blower: ${card.knowledge_fact}
+
+"${card.flavour_text}"
+
+I earned this by learning — for FREE, no login, no ads.
+Can you beat my ${rarity.label} card? 👇
+${url}`;
+
+  if (navigator.share) {
+    navigator.share({ title: card.card_name, text: msg, url });
+  } else {
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+}
+
 // ── Card reveal animation — the "pack opening" moment ──
 export function CardReveal({ card, onClose }) {
   const [phase, setPhase] = useState('flash'); // flash → spin → reveal → done
+  const [shared, setShared] = useState(false);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase('spin'), 400);
@@ -169,13 +196,14 @@ export function CardReveal({ card, onClose }) {
 
   const rarity = RARITY_CONFIG[card.rarity] || RARITY_CONFIG.common;
 
+  const handleShare = () => { shareCard(card); setShared(true); };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex flex-col items-center justify-center p-6"
-      onClick={phase === 'done' ? onClose : undefined}
+      className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex flex-col items-center justify-center p-6 overflow-y-auto"
     >
       {/* Flash burst */}
       <AnimatePresence>
@@ -196,7 +224,7 @@ export function CardReveal({ card, onClose }) {
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`font-black text-2xl mb-6 tracking-widest`}
+          className="font-black text-2xl mb-4 tracking-widest text-center"
           style={{ color: rarity.border, textShadow: `0 0 20px ${rarity.glow}` }}
         >
           {rarity.label} CARD UNLOCKED!
@@ -224,16 +252,42 @@ export function CardReveal({ card, onClose }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-6 max-w-sm bg-white/5 border border-white/20 rounded-2xl p-4 text-center"
+          className="mt-4 max-w-sm w-full bg-white/5 border border-white/20 rounded-2xl p-4 text-center"
         >
           <p className="text-white/40 text-xs font-black uppercase tracking-widest mb-1">🧠 What you just learned</p>
           <p className="text-white font-bold text-sm leading-relaxed">{card.knowledge_fact}</p>
         </motion.div>
       )}
 
+      {/* ACTION BUTTONS — show when done */}
       {phase === 'done' && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="mt-6 space-y-3 w-full max-w-sm">
-          <p className="text-white/40 text-sm text-center">Tap anywhere to continue</p>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mt-4 w-full max-w-sm space-y-3"
+        >
+          {/* DARE YOUR MATE — the viral loop */}
+          <button
+            onClick={handleShare}
+            className="w-full py-4 rounded-2xl font-black text-base flex items-center justify-center gap-2 transition-all active:scale-95"
+            style={{
+              background: `linear-gradient(135deg, ${rarity.border}, ${rarity.glow.replace('rgba', 'rgb').replace(/,[\d.]+\)/, ')')})`,
+              color: '#000',
+              boxShadow: `0 0 20px ${rarity.glow}`,
+            }}
+          >
+            {shared ? '✓ Shared! Keep learning →' : `🃏 Dare your mates to beat this!`}
+          </button>
+
+          <button
+            onClick={onClose}
+            className="w-full py-3 rounded-2xl bg-white/5 border border-white/10 text-white/60 font-bold text-sm hover:bg-white/10 transition-all"
+          >
+            Keep learning →
+          </button>
+
+          <p className="text-white/20 text-xs text-center">Free. No login. Every kid on Earth. 🌍</p>
         </motion.div>
       )}
     </motion.div>
@@ -257,13 +311,34 @@ export function CardCollection({ onClose }) {
     >
       <div className="p-4 max-w-2xl mx-auto pb-20">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6 pt-4">
+        <div className="flex items-center justify-between mb-4 pt-4">
           <div>
             <h1 className="text-2xl font-black text-white">My Cards 🃏</h1>
-            <p className="text-white/40 text-sm">{cards.length} card{cards.length !== 1 ? 's' : ''} collected</p>
+            <p className="text-white/40 text-sm">{cards.length} card{cards.length !== 1 ? 's' : ''} collected — earned by learning</p>
           </div>
-          <button onClick={onClose} className="text-white/40 hover:text-white font-black text-lg px-4 py-2 border border-white/10 rounded-xl">✕ Close</button>
+          <button onClick={onClose} className="text-white/40 hover:text-white font-black text-lg px-4 py-2 border border-white/10 rounded-xl">✕</button>
         </div>
+
+        {/* CHALLENGE BANNER */}
+        {cards.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 rounded-2xl p-4 flex items-center justify-between gap-3"
+            style={{ background: 'linear-gradient(135deg, #7c3aed22, #4f46e522)', border: '1px solid #7c3aed44' }}
+          >
+            <div>
+              <p className="text-white font-black text-sm">Dare your mates 🎯</p>
+              <p className="text-white/40 text-xs">Share any card — they can only earn cards by learning too</p>
+            </div>
+            <button
+              onClick={() => shareCard(cards[0])}
+              className="flex-shrink-0 px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-black text-sm transition-all active:scale-95"
+            >
+              Share best card
+            </button>
+          </motion.div>
+        )}
 
         {/* Rarity summary */}
         <div className="grid grid-cols-4 gap-2 mb-6">
@@ -305,14 +380,22 @@ export function CardCollection({ onClose }) {
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-10 flex items-center justify-center p-6"
             onClick={() => setSelectedCard(null)}
           >
-            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="w-72 space-y-4" onClick={e => e.stopPropagation()}>
+            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="w-72 space-y-3" onClick={e => e.stopPropagation()}>
               <CardDisplay card={selectedCard} />
               <div className="bg-white/5 rounded-2xl border border-white/10 p-4">
-                <p className="text-white/40 text-xs uppercase tracking-widest font-black mb-1">Knowledge</p>
+                <p className="text-white/40 text-xs uppercase tracking-widest font-black mb-1">🧠 Knowledge</p>
                 <p className="text-white text-sm leading-relaxed">{selectedCard.knowledge_fact}</p>
               </div>
               <p className="text-white/20 text-xs text-center">Earned {new Date(selectedCard.earned_at).toLocaleDateString()}</p>
-              <button onClick={() => setSelectedCard(null)} className="w-full py-3 rounded-xl bg-white/10 text-white font-bold">Close</button>
+              {/* SHARE FROM COLLECTION */}
+              <button
+                onClick={() => shareCard(selectedCard)}
+                className="w-full py-3 rounded-xl font-black text-sm flex items-center justify-center gap-2 transition-all active:scale-95"
+                style={{ background: RARITY_CONFIG[selectedCard.rarity]?.border || '#94a3b8', color: '#000' }}
+              >
+                🃏 Dare your mates to beat this!
+              </button>
+              <button onClick={() => setSelectedCard(null)} className="w-full py-3 rounded-xl bg-white/10 text-white/60 font-bold text-sm">Close</button>
             </motion.div>
           </motion.div>
         )}
