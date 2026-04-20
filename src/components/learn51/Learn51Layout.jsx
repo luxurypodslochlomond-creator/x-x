@@ -124,47 +124,83 @@ export default function Learn51Layout() {
 
   return (
     <div className="min-h-screen bg-[#05080f] text-white">
-      {/* TOP NAV — Learn51 only */}
-      <div className="sticky top-0 z-40 bg-[#05080f]/95 backdrop-blur-xl border-b border-white/10 px-4 py-3">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/Learn51" className="text-xl font-black bg-gradient-to-r from-violet-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent flex items-center gap-2">
-            <Rocket className="w-5 h-5 text-violet-400" />
+      {/* TOP NAV — Learn51 only — universal design: breathable, high contrast, generous targets */}
+      <div
+        className="sticky top-0 z-40 backdrop-blur-xl px-4 py-3"
+        style={{
+          background: 'rgba(5,8,15,0.96)',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+        }}
+      >
+        <div className="max-w-2xl mx-auto flex items-center justify-between">
+          {/* Wordmark — gradient, large, clear */}
+          <Link
+            to="/Learn51"
+            className="font-black tracking-tight leading-none"
+            style={{
+              fontSize: '20px',
+              background: 'linear-gradient(135deg, #a78bfa 0%, #38bdf8 60%, #34d399 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
             Learn51
           </Link>
 
-          {/* Desktop quick links */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link to="/Learn51AI" className={`text-sm font-bold transition-colors flex items-center gap-1 ${location.pathname === '/Learn51AI' ? 'text-violet-300' : 'text-white/50 hover:text-white'}`}>
-              🤖 AI Tutor
-            </Link>
-            <Link to="/Literacy51" className={`text-sm font-bold transition-colors ${location.pathname === '/Literacy51' ? 'text-emerald-300' : 'text-white/50 hover:text-white'}`}>
-              📖 Literacy
-            </Link>
-            <Link to="/LifeSkills51" className={`text-sm font-bold transition-colors ${location.pathname === '/LifeSkills51' ? 'text-rose-300' : 'text-white/50 hover:text-white'}`}>
-              🌟 Life Skills
-            </Link>
-            <Link to="/Learn51About" className={`text-sm font-bold transition-colors ${location.pathname === '/Learn51About' ? 'text-cyan-300' : 'text-white/50 hover:text-white'}`}>
-              <Info className="w-4 h-4 inline" />
-            </Link>
+          {/* Desktop quick links — generous spacing */}
+          <div className="hidden md:flex items-center gap-5">
+            {[
+              { to: '/Learn51AI', label: '◈ AI Tutor', active: '#a78bfa' },
+              { to: '/Literacy51', label: '⌘ Literacy', active: '#34d399' },
+              { to: '/LifeSkills51', label: '◉ Life Skills', active: '#f472b6' },
+              { to: '/YoungWarriors', label: '◎ Real World', active: '#f59e0b' },
+            ].map(link => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="font-bold transition-colors"
+                style={{
+                  fontSize: '13px',
+                  color: location.pathname === link.to ? link.active : 'rgba(255,255,255,0.38)',
+                  fontFamily: '"Courier New", monospace',
+                }}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Donate button */}
-          <Link
-            to="/SupportLearn51"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 hover:text-emerald-200 transition-all text-sm font-black"
-          >
-            💜 Donate
-          </Link>
-
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white transition-all"
-          >
-            <Menu className="w-5 h-5" />
-            <span className="text-xs font-bold text-white/60 hidden sm:block">Menu</span>
-          </button>
+          {/* Right: donate + menu — large tap targets */}
+          <div className="flex items-center gap-2">
+            <Link
+              to="/SupportLearn51"
+              className="hidden sm:flex items-center gap-1.5 font-black transition-all active:scale-95"
+              style={{
+                fontSize: '12px',
+                color: '#34d399',
+                background: 'rgba(16,185,129,0.10)',
+                border: '1px solid rgba(16,185,129,0.25)',
+                borderRadius: '12px',
+                padding: '6px 12px',
+              }}
+            >
+              ♾️ Donate
+            </Link>
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="flex items-center justify-center transition-all active:scale-95"
+              style={{
+                width: '40px',
+                height: '40px',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.10)',
+                borderRadius: '12px',
+                color: 'rgba(255,255,255,0.7)',
+              }}
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
 

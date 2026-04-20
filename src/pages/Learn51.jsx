@@ -1,87 +1,147 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, UserCircle, CheckCircle, Heart } from 'lucide-react';
+import { Star, UserCircle, Heart } from 'lucide-react';
 import LearnProfile, { getProfiles, getActiveProfile, getProfileStars } from '@/components/learn51/LearnProfile';
+
+// ─── UNIVERSAL DESIGN PRINCIPLES ─────────────────────────────────────────────
+// 1. One thing at a time. No competing elements.
+// 2. Text breathes. Generous line-height, never cramped.
+// 3. Tap targets huge. No anxiety about missing.
+// 4. Motion purposeful. Never decorative or distracting.
+// 5. Colour carries meaning. Not decoration.
+// 6. High contrast. Warm, not harsh.
+// 7. Zero clutter. If it's on screen, it matters.
+// This works for ADHD, dyslexia, anxiety, every brain — by default. No labels.
+// ─────────────────────────────────────────────────────────────────────────────
 
 const TILES = [
   {
     id: 'ai',
-    emoji: '🤖',
+    symbol: '◈',
     title: 'AI Tutor',
-    sub: 'Ask anything',
+    sub: 'Ask anything. Learn your way.',
     url: '/Learn51AI',
-    color: '#818cf8',
-    size: 'large', // spans 2 cols
+    c1: '#7c3aed',
+    c2: '#4f46e5',
+    glow: '#7c3aed',
+    span: 2,
   },
   {
     id: 'maths',
-    emoji: '🔢',
+    symbol: '∑',
     title: 'Magic Maths',
-    sub: 'Ages 5+',
+    sub: 'Numbers that click',
     url: '/GeorgieMaths',
-    color: '#a78bfa',
-    size: 'small',
+    c1: '#7e22ce',
+    c2: '#6d28d9',
+    glow: '#a855f7',
+    span: 1,
   },
   {
     id: 'literacy',
-    emoji: '📖',
+    symbol: '⌘',
     title: 'Literacy',
-    sub: 'Reading & writing',
+    sub: 'Words & stories',
     url: '/Literacy51',
-    color: '#34d399',
-    size: 'small',
+    c1: '#065f46',
+    c2: '#047857',
+    glow: '#10b981',
+    span: 1,
   },
   {
     id: 'world',
-    emoji: '🌍',
+    symbol: '◎',
     title: 'Real World',
-    sub: 'Animals · Space · Physics',
+    sub: 'Nature · space · science',
     url: '/YoungWarriors',
-    color: '#fb923c',
-    size: 'small',
+    c1: '#92400e',
+    c2: '#b45309',
+    glow: '#f59e0b',
+    span: 1,
   },
   {
     id: 'life',
-    emoji: '🌟',
+    symbol: '◉',
     title: 'Life Skills',
-    sub: 'Money · Health · Rights',
+    sub: 'Money · health · rights',
     url: '/LifeSkills51',
-    color: '#f472b6',
-    size: 'small',
+    c1: '#831843',
+    c2: '#9d174d',
+    glow: '#f472b6',
+    span: 1,
   },
 ];
 
+// Pixel-style symbol rendered large — universally readable, no letter confusion
+function PixelSymbol({ char, color, size = 56 }) {
+  return (
+    <div
+      className="font-black select-none leading-none"
+      style={{
+        fontSize: size,
+        color,
+        fontFamily: '"Courier New", monospace',
+        textShadow: `0 0 20px ${color}80, 0 0 40px ${color}40`,
+        letterSpacing: '-2px',
+      }}
+    >
+      {char}
+    </div>
+  );
+}
+
 function Tile({ tile, delay }) {
-  const isLarge = tile.size === 'large';
+  const isWide = tile.span === 2;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.94 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration: 0.35, ease: 'easeOut' }}
-      className={isLarge ? 'col-span-2' : 'col-span-1'}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className={isWide ? 'col-span-2' : 'col-span-1'}
     >
       <Link to={tile.url}>
         <div
-          className="relative flex flex-col justify-between rounded-3xl p-5 active:scale-95 transition-transform cursor-pointer overflow-hidden"
+          className="relative overflow-hidden rounded-[28px] p-6 flex flex-col justify-between active:scale-[0.97] transition-transform"
           style={{
-            background: `linear-gradient(135deg, ${tile.color}22, ${tile.color}0a)`,
-            border: `1.5px solid ${tile.color}35`,
-            minHeight: isLarge ? '140px' : '130px',
+            background: `linear-gradient(145deg, ${tile.c1}dd, ${tile.c2}aa)`,
+            border: `1px solid ${tile.glow}30`,
+            minHeight: isWide ? '160px' : '148px',
+            boxShadow: `0 4px 32px ${tile.glow}18, inset 0 1px 0 rgba(255,255,255,0.08)`,
           }}
         >
-          {/* Glow blob */}
+          {/* Ambient glow — bottom right */}
           <div
-            className="absolute -top-6 -right-6 w-24 h-24 rounded-full blur-2xl opacity-30"
-            style={{ background: tile.color }}
+            className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full blur-3xl pointer-events-none"
+            style={{ background: tile.glow, opacity: 0.18 }}
           />
 
-          <span className="text-4xl mb-2 relative z-10">{tile.emoji}</span>
+          {/* Top: symbol */}
+          <PixelSymbol char={tile.symbol} color={tile.glow} size={isWide ? 48 : 42} />
 
-          <div className="relative z-10">
-            <p className="text-white font-black text-lg leading-tight">{tile.title}</p>
-            <p className="text-sm mt-0.5" style={{ color: tile.color + 'cc' }}>{tile.sub}</p>
+          {/* Bottom: text — large, spaced, breathable */}
+          <div className="relative z-10 mt-3">
+            <p
+              className="font-black leading-tight"
+              style={{
+                fontSize: isWide ? '22px' : '18px',
+                color: 'rgba(255,255,255,0.95)',
+                letterSpacing: '-0.3px',
+              }}
+            >
+              {tile.title}
+            </p>
+            <p
+              className="mt-1 leading-relaxed"
+              style={{
+                fontSize: '13px',
+                color: 'rgba(255,255,255,0.45)',
+                fontWeight: 500,
+              }}
+            >
+              {tile.sub}
+            </p>
           </div>
         </div>
       </Link>
@@ -108,88 +168,138 @@ export default function Learn51Page() {
   }
 
   return (
-    <div className="min-h-screen bg-[#05080f] text-white">
-      <div className="max-w-md mx-auto px-4 pt-10 pb-16">
+    <div
+      className="min-h-screen text-white"
+      style={{ background: 'radial-gradient(ellipse at 30% 0%, #1a0a2e 0%, #05080f 60%)' }}
+    >
+      <div className="max-w-md mx-auto px-4 pt-8 pb-20">
 
-        {/* HEADER */}
+        {/* ── HEADER ─────────────────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-7"
+          transition={{ duration: 0.5 }}
+          className="flex items-start justify-between mb-8"
         >
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-black text-white tracking-tight">Learn51</h1>
-              <p className="text-white/30 text-sm mt-0.5">Free for every child on Earth ♾️</p>
-            </div>
-
-            {/* PROFILE BUTTON */}
-            <button
-              onClick={() => setShowProfilePicker(true)}
-              className="flex items-center gap-2 rounded-2xl px-3 py-2 border border-white/10 bg-white/5 active:scale-95 transition-transform"
+          {/* Wordmark */}
+          <div>
+            <h1
+              className="font-black leading-none tracking-tight"
+              style={{
+                fontSize: '32px',
+                background: 'linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
             >
-              {activeProfile ? (
-                <>
-                  <span className="text-xl">{activeProfile.avatar}</span>
-                  <div className="text-left">
-                    <p className="text-white text-xs font-bold leading-none">{activeProfile.name}</p>
-                    <div className="flex items-center gap-1 mt-0.5">
-                      <Star className="w-2.5 h-2.5 text-yellow-400 fill-yellow-400" />
-                      <span className="text-yellow-400 text-xs font-bold">{stars}</span>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <UserCircle className="w-5 h-5 text-white/30" />
-                  <span className="text-white/30 text-xs font-bold">Who's learning?</span>
-                </>
-              )}
-            </button>
+              Learn51
+            </h1>
+            <p
+              className="mt-1.5 leading-relaxed"
+              style={{ fontSize: '13px', color: 'rgba(255,255,255,0.28)', fontWeight: 500 }}
+            >
+              Free for every child on Earth
+            </p>
           </div>
+
+          {/* Profile — large tap target, always visible */}
+          <button
+            onClick={() => setShowProfilePicker(true)}
+            className="flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 border transition-all active:scale-95"
+            style={{
+              border: '1px solid rgba(255,255,255,0.10)',
+              background: 'rgba(255,255,255,0.05)',
+              minWidth: '80px',
+            }}
+          >
+            {activeProfile ? (
+              <>
+                <span className="text-2xl leading-none">{activeProfile.avatar}</span>
+                <div className="text-left">
+                  <p className="text-white font-black text-xs leading-none">{activeProfile.name}</p>
+                  <div className="flex items-center gap-1 mt-1">
+                    <Star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
+                    <span className="text-yellow-400 text-xs font-black">{stars}</span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center gap-1.5">
+                <UserCircle className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.25)' }} />
+                <span className="text-xs font-bold" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                  You
+                </span>
+              </div>
+            )}
+          </button>
         </motion.div>
 
-        {/* TILE GRID */}
-        <div className="grid grid-cols-2 gap-3 mb-8">
+        {/* ── TILE GRID ──────────────────────────────────────── */}
+        {/* 
+          Grid is 2 columns. Wide tile spans both = hero action.
+          Each tile is big enough to tap without looking.
+          Spacing between tiles is generous — no crowding.
+        */}
+        <div className="grid grid-cols-2 gap-3 mb-10">
           {TILES.map((tile, i) => (
-            <Tile key={tile.id} tile={tile} delay={i * 0.07} />
+            <Tile key={tile.id} tile={tile} delay={i * 0.06 + 0.1} />
           ))}
         </div>
 
-        {/* TRUST — tiny, for parents */}
+        {/* ── TRUST — ultra minimal, not patronising ─────────── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="rounded-2xl border border-white/6 px-4 py-4 mb-6"
+          transition={{ delay: 0.55 }}
+          className="mb-8"
+          style={{
+            border: '1px solid rgba(255,255,255,0.06)',
+            borderRadius: '20px',
+            padding: '16px 20px',
+          }}
         >
-          <p className="text-white/20 text-xs font-black uppercase tracking-widest mb-3">For parents & teachers</p>
-          <div className="grid grid-cols-2 gap-y-2 gap-x-3">
+          <p
+            className="font-black uppercase tracking-widest mb-3"
+            style={{ fontSize: '10px', color: 'rgba(255,255,255,0.18)' }}
+          >
+            For parents & teachers
+          </p>
+          <div className="grid grid-cols-2 gap-2">
             {[
-              ['✓', 'No data collected'],
-              ['✓', 'No login needed'],
-              ['✓', 'No adverts ever'],
-              ['✓', 'Works offline'],
-            ].map(([tick, text]) => (
-              <div key={text} className="flex gap-1.5 items-center">
-                <span className="text-emerald-500 text-xs font-black">{tick}</span>
-                <span className="text-white/25 text-xs">{text}</span>
+              'No data collected',
+              'No login needed',
+              'No adverts. Ever.',
+              'Works offline',
+            ].map(text => (
+              <div key={text} className="flex items-center gap-2">
+                <span style={{ color: '#10b981', fontSize: '11px', fontWeight: 900 }}>✓</span>
+                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.28)', fontWeight: 500 }}>
+                  {text}
+                </span>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* FOOTER */}
-        <div className="text-center space-y-2">
+        {/* ── FOOTER ─────────────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.65 }}
+          className="text-center space-y-2"
+        >
           <Link
             to="/SupportLearn51"
-            className="flex items-center justify-center gap-1.5 text-white/20 hover:text-pink-400 text-xs transition-colors"
+            className="inline-flex items-center gap-2 transition-all active:scale-95"
+            style={{ color: 'rgba(255,255,255,0.18)', fontSize: '12px', fontWeight: 700 }}
           >
-            <Heart className="w-3 h-3" />
+            <Heart className="w-3 h-3" style={{ color: '#f472b6' }} />
             Keep it free — donate
           </Link>
-          <p className="text-white/10 text-xs">Built with love · Free forever</p>
-        </div>
+          <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.08)' }}>
+            Built with love · Free forever · UF51
+          </p>
+        </motion.div>
 
       </div>
     </div>
