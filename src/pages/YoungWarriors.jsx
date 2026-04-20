@@ -9,12 +9,18 @@ const CATEGORIES = [
     title: 'Animals',
     color: '#fb923c',
     facts: [
-      { q: 'How do dogs actually see?', a: 'Dogs see in blue and yellow — not black and white like people think. They also smell about 100,000 times better than us. A dog\'s nose print is unique, exactly like a human fingerprint.' },
-      { q: 'Can fish drown?', a: 'Yes. Fish need oxygen dissolved in water. If the water has too little oxygen — from pollution or heat — fish suffocate. They breathe water, but they still need it to contain oxygen.' },
-      { q: 'How long can a crocodile hold its breath?', a: 'Up to 2 hours. Their hearts slow to just 2–3 beats per minute. They\'ve barely changed in 200 million years — they survived whatever wiped out the dinosaurs.' },
-      { q: 'Do elephants really never forget?', a: 'Pretty much true. Elephants have the largest brain of any land animal. They remember individual humans and water sources from decades ago. They also mourn their dead.' },
-      { q: 'What makes an octopus so strange?', a: 'Three hearts. Blue blood. Nine brains — one central and one in each arm. Each arm can taste and make decisions independently. They change colour in milliseconds but are colourblind.' },
-      { q: 'How fast is a peregrine falcon?', a: '240 mph in a dive — the fastest animal on Earth. Faster than a Formula 1 car. A special membrane lets them see perfectly at full speed.' },
+      { q: 'How does a bee colony make decisions?', a: 'When a hive needs a new home, scout bees fly off to find options then come back and dance. The dance shows direction and distance. Other bees watch, visit the spots themselves, then dance too. The swarm moves when enough bees agree — a vote made of dancing.' },
+      { q: 'How many bees are in a hive?', a: 'Up to 80,000 — and almost all of them are female. The queen can lay up to 2,000 eggs a day. A single bee in its whole lifetime produces just 1/12 of a teaspoon of honey. It takes about 60,000 bees to fill one jar.' },
+      { q: 'How does an octopus think?', a: 'An octopus has 9 brains — one main brain and one in each of its 8 arms. Each arm can act on its own, even if cut off. They can open jars, recognise individual human faces, and solve puzzles. They live only 1–2 years, yet are among the smartest animals on Earth.' },
+      { q: 'How do dolphins sleep without drowning?', a: 'Only half their brain sleeps at a time. The other half stays awake to breathe and watch for danger. You can see this — a resting dolphin swims slowly in circles, one eye open, one eye closed.' },
+      { q: 'How strong is an ant?', a: 'An ant can carry 50 times its own body weight — the equivalent of a human carrying a car. A leafcutter ant colony of 8 million ants cuts more vegetation than a cow grazes. They grow fungus underground using the leaves as compost — farming predates humans by 50 million years.' },
+      { q: 'What do elephants actually remember?', a: 'Elephants remember individual humans — including people who were kind or cruel to them — decades later. They navigate back to water sources they\'ve visited once, years before. They gather around dying family members and return to the bones of dead relatives long after.' },
+      { q: 'How do whales communicate?', a: 'A blue whale\'s call is louder than a jet engine — up to 188 decibels — and can travel thousands of miles through the ocean. Humpback whales sing songs that evolve over time, spreading across oceans like music trends. Every whale in an area gradually adopts the newest version.' },
+      { q: 'Can fish drown?', a: 'Yes. Fish need oxygen dissolved in water. If the water has too little oxygen — from pollution, algae blooms, or heat — fish suffocate. They breathe water, but the water still needs to contain oxygen.' },
+      { q: 'How fast is a peregrine falcon?', a: '240 mph in a dive — the fastest animal on Earth, faster than a Formula 1 car. A special membrane covers their eyes so they can see perfectly at full speed. Their chest muscles take up a third of their body weight.' },
+      { q: 'What makes a crocodile so ancient?', a: 'Crocodiles have barely changed in 200 million years. They survived whatever wiped out the dinosaurs. Their hearts can slow to 2–3 beats per minute underwater, letting them hold their breath for up to 2 hours. A crocodile can go months without eating.' },
+      { q: 'How do dogs see the world?', a: 'Dogs see in blue and yellow — not black and white like most people think. But their real superpower is smell: 100,000 times more sensitive than ours. A dog can smell a teaspoon of sugar dissolved in a million gallons of water. Their nose print is unique, like a human fingerprint.' },
+      { q: 'What is the strongest animal on Earth?', a: 'The dung beetle can pull 1,141 times its own body weight — by far the strongest animal relative to size. It can also navigate by the Milky Way, making it the only known insect to use stars for direction.' },
     ]
   },
   {
@@ -67,6 +73,22 @@ const CATEGORIES = [
       { q: 'Does time actually slow down?', a: 'Yes. Einstein proved it. Time moves faster at the top of a mountain than at sea level because gravity is weaker there. GPS satellites constantly correct for this or navigation would drift within minutes.' },
       { q: 'What is the coldest possible temperature?', a: 'Absolute zero: −273.15°C. At this point atoms stop moving entirely. Scientists have gotten within billionths of a degree of it in labs. Nothing in nature is known to reach it exactly.' },
       { q: 'How fast is the Earth moving right now?', a: 'You\'re spinning at up to 1,000 mph, orbiting the sun at 67,000 mph, and the solar system orbits the galaxy at 514,000 mph. You feel nothing because everything around you moves with you.' },
+    ]
+  },
+  {
+    id: 'tech',
+    emoji: '💡',
+    title: 'Technology',
+    color: '#22d3ee',
+    facts: [
+      { q: 'How does the internet actually work?', a: 'Most of the internet travels through cables on the ocean floor — 1.3 million km of fibre-optic cable connecting every continent. When you send a message to someone in Japan, it likely travels down a wire under the Atlantic or Pacific Ocean and back in under a second.' },
+      { q: 'What is inside a computer chip?', a: 'A modern computer chip contains up to 100 billion transistors — tiny switches that are on or off. They\'re so small that 1,000 of them side by side are thinner than a human hair. Every calculation your phone makes is billions of these switches flipping, millions of times per second.' },
+      { q: 'How does GPS know where you are?', a: 'Your phone listens to signals from at least 4 satellites orbiting 20,000 km above Earth. By measuring how long each signal takes to arrive — to within a billionth of a second — it can calculate your position to within a few metres. Without Einstein\'s theory of relativity, GPS would drift by 11 km every day.' },
+      { q: 'What is the internet made of?', a: 'About 5.5 billion people use the internet. All the world\'s websites and data are stored on physical computers called servers. The electricity used to run all the world\'s data centres is roughly equal to the entire electricity consumption of the UK.' },
+      { q: 'How does a camera freeze a moment?', a: 'A phone camera takes in light through a lens and hits millions of tiny sensors called pixels — up to 200 million on modern phones. Each pixel measures how much red, green and blue light it received. Your phone then combines all those measurements into one image in milliseconds.' },
+      { q: 'How does Wi-Fi travel through walls?', a: 'Wi-Fi is radio waves — the same type of waves as light, just a different frequency. They pass through most solid materials (walls, floors, people) but slow down. Metal reflects them. Your router and phone are constantly sending and receiving billions of these waves per second, invisibly, in every direction.' },
+      { q: 'What is AI actually doing?', a: 'AI learns patterns from enormous amounts of examples — millions of photos, sentences, or sounds. It adjusts billions of tiny numbers called weights until it gets good at recognising patterns. It doesn\'t understand or think — it finds the most statistically likely answer based on what it\'s seen before.' },
+      { q: 'How did we land on the moon with 1960s technology?', a: 'The Apollo computer had 4KB of memory — less than a modern digital greeting card. The engineers wrote the software by hand and tested every line. The mission succeeded not because of powerful computers but because of extraordinary precision, teamwork, and thousands of hours of human problem-solving.' },
     ]
   },
   {
