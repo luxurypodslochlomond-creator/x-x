@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import DareMeGenerator from '@/components/learn51/DareMeGenerator';
 import VoiceAnswerButton from '@/components/learn51/VoiceAnswerButton';
-import FlameStreak from '@/components/learn51/FlameStreak';
 
 // ── WHO ARE YOU? — kids pick their vibe first ────────────────────────────────
 const VIBES = [
@@ -301,19 +299,11 @@ function SubjectCard({ s, dir, vibe }) {
           {s.title}
         </h2>
 
-        <p className="font-bold mb-6 leading-relaxed" style={{
+        <p className="font-bold mb-8 leading-relaxed" style={{
           fontSize: 16, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6,
         }}>
           {desc}
         </p>
-
-        {/* DOPAMINE HIT BUTTONS */}
-        {s.id === 'ai' && (
-          <div className="mb-6 space-y-3">
-            <DareMeGenerator vibe={vibe} />
-            <VoiceAnswerButton onTranscription={(text) => console.log('Transcribed:', text)} />
-          </div>
-        )}
 
         <Link to={s.url}>
           <motion.div
@@ -374,7 +364,7 @@ export default function Magic51Page() {
     >
       {/* ── TOP BAR ── */}
       <div className="relative z-30 flex items-center justify-between flex-shrink-0" style={{ padding: '18px 20px 8px' }}>
-        <div className="flex-1">
+        <div>
           <motion.span key={s.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             className="block font-black"
             style={{
@@ -389,11 +379,6 @@ export default function Magic51Page() {
             Free · No login · Always
           </span>
         </div>
-        
-        {/* Flame streak */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mr-4">
-          <FlameStreak />
-        </motion.div>
 
         {/* Vibe switcher + links */}
         <div className="flex items-center gap-2">
