@@ -310,9 +310,7 @@ function SubjectCard({ s, dir, vibe }) {
 
         {/* INLINE FEATURES — Ask Me Anything + Voice + Transparency */}
         {s.showInline && (
-          <div className="mb-8 space-y-5">
-            <AskMeAnything vibe={vibe} />
-            <VoiceAnswerButton onTranscription={(text) => console.log('Voice input:', text)} />
+          <div className="mb-8 space-y-4">
             <TransparencyBadge />
           </div>
         )}
