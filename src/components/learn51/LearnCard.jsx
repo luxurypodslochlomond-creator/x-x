@@ -161,18 +161,15 @@ export function shareCard(card) {
   const rarity = RARITY_CONFIG[card.rarity] || RARITY_CONFIG.common;
   const url = 'https://universalfrequency51.com/Learn51AI';
   const msg =
-`${rarity.label === 'LEGENDARY' ? '👑' : rarity.label === 'EPIC' ? '🔥' : rarity.label === 'RARE' ? '💎' : '⭐'} I just earned a ${rarity.label} Learn Card!
+`${card.emoji_art} I just learned something amazing!
 
-${card.emoji_art} *${card.card_name}*
-⚡ Move: ${card.battle_move}
-📊 Stat: ${card.power_stat}
+*${card.card_name}*
 
-🧠 Mind-blower: ${card.knowledge_fact}
+🧠 Did you know: ${card.knowledge_fact}
 
 "${card.flavour_text}"
 
-I earned this by learning — for FREE, no login, no ads.
-Can you beat my ${rarity.label} card? 👇
+I got this on Learn51 — it's totally free, no login, no ads. You'd love it 💙
 ${url}`;
 
   if (navigator.share) {
@@ -277,7 +274,7 @@ export function CardReveal({ card, onClose }) {
               boxShadow: `0 0 20px ${rarity.glow}`,
             }}
           >
-            {shared ? '✓ Shared! Keep learning →' : `🃏 Dare your mates to beat this!`}
+            {shared ? '✓ Shared! Keep going 🌍' : `💙 Share this with a friend`}
           </button>
 
           <button
@@ -328,14 +325,14 @@ export function CardCollection({ onClose }) {
             style={{ background: 'linear-gradient(135deg, #7c3aed22, #4f46e522)', border: '1px solid #7c3aed44' }}
           >
             <div>
-              <p className="text-white font-black text-sm">Dare your mates 🎯</p>
-              <p className="text-white/40 text-xs">Share any card — they can only earn cards by learning too</p>
+              <p className="text-white font-black text-sm">Share the wonder 💙</p>
+              <p className="text-white/40 text-xs">Send a friend something amazing you learned today</p>
             </div>
             <button
               onClick={() => shareCard(cards[0])}
               className="flex-shrink-0 px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-black text-sm transition-all active:scale-95"
             >
-              Share best card
+              Share
             </button>
           </motion.div>
         )}
@@ -393,7 +390,7 @@ export function CardCollection({ onClose }) {
                 className="w-full py-3 rounded-xl font-black text-sm flex items-center justify-center gap-2 transition-all active:scale-95"
                 style={{ background: RARITY_CONFIG[selectedCard.rarity]?.border || '#94a3b8', color: '#000' }}
               >
-                🃏 Dare your mates to beat this!
+                💙 Share this with a friend
               </button>
               <button onClick={() => setSelectedCard(null)} className="w-full py-3 rounded-xl bg-white/10 text-white/60 font-bold text-sm">Close</button>
             </motion.div>
