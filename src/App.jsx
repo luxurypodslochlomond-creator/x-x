@@ -64,6 +64,7 @@ const AI51SoulPage = React.lazy(() => import('./pages/AI51Soul'));
 const AdminPWAPushGuidePage = React.lazy(() => import('./pages/AdminPWAPushGuide'));
 const Literacy51Page = React.lazy(() => import('./pages/Literacy51'));
 const Learn51Page = React.lazy(() => import('./pages/Learn51'));
+const Magic51Page = React.lazy(() => import('./pages/Magic51'));
 const Learn51AIPage = React.lazy(() => import('./pages/Learn51AI'));
 const LifeSkills51Page = React.lazy(() => import('./pages/LifeSkills51'));
 const Learn51AboutPage = React.lazy(() => import('./pages/Learn51About'));
@@ -167,7 +168,8 @@ const AuthenticatedApp = () => {
       <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminPWAPushGuidePage /></LayoutWrapper>} />
       {/* ── LEARN51 — own layout, no UF51 nav ── */}
       <Route element={<Learn51Layout />}>
-        <Route path="/Learn51" element={<Learn51Page />} />
+        <Route path="/Learn51" element={<Magic51Page />} />
+        <Route path="/Magic51" element={<Magic51Page />} />
         <Route path="/Learn51AI" element={<Learn51AIPage />} />
         <Route path="/Learn51About" element={<Learn51AboutPage />} />
         <Route path="/Literacy51" element={<Literacy51Page />} />
