@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import VoiceAnswerButton from '@/components/learn51/VoiceAnswerButton';
+import AskMeAnything from '@/components/learn51/AskMeAnything';
+import TransparencyBadge from '@/components/learn51/TransparencyBadge';
 
 // ── WHO ARE YOU? — kids pick their vibe first ────────────────────────────────
 const VIBES = [
@@ -23,20 +25,21 @@ const SUBJECTS = [
     title: 'Your Brain Buddy',
     getDesc: (vibe) => {
       const map = {
-        football: "I'll teach you maths through Ronaldo's free kick angles & Messi's dribble stats",
-        gaming: "I'll teach you maths through game mechanics, frame rates & probability",
-        music: "I'll teach you everything through your favourite songs and artists",
-        animals: "I'll teach you science through the wildest animals on earth",
-        space: "I'll teach you physics through black holes, rockets and alien worlds",
-        art: "I'll teach you everything through colour, patterns and creativity",
-        dinos: "I'll teach you science through the most epic creatures that ever lived",
-        tech: "I'll teach you coding, maths and logic through the tech you actually use",
+        football: "Ask me literally anything. I'll teach you through what YOU love. Works offline.",
+        gaming: "Ask me literally anything. I'll teach you through game logic and what fascinates you.",
+        music: "Ask me literally anything about music, science, history — through YOUR interests.",
+        animals: "Ask me literally anything about the natural world through animal obsession.",
+        space: "Ask me literally anything about the cosmos through space nerd curiosity.",
+        art: "Ask me literally anything and I'll connect it to colour, patterns, creativity.",
+        dinos: "Ask me literally anything. I'll answer through dinosaur facts and wonder.",
+        tech: "Ask me literally anything about how tech, coding, the internet actually works.",
       };
-      return map[vibe?.id] || "I teach everything through what YOU love. No boring lessons. Ever.";
+      return map[vibe?.id] || "Ask me literally anything. I'll teach you through what YOU love. No servers watching.";
     },
-    btn: "Let's go 🚀",
+    btn: "Ask me 💬",
     url: '/Learn51AI',
     colors: { bg1: '#0a0020', bg2: '#1e0050', bg3: '#4f20a0', spot: '#c084fc', text: '#e9d5ff' },
+    showInline: true, // render Ask & Voice inline
   },
   {
     id: 'maths',
@@ -304,6 +307,15 @@ function SubjectCard({ s, dir, vibe }) {
         }}>
           {desc}
         </p>
+
+        {/* INLINE FEATURES — Ask Me Anything + Voice + Transparency */}
+        {s.showInline && (
+          <div className="mb-8 space-y-5">
+            <AskMeAnything vibe={vibe} />
+            <VoiceAnswerButton onTranscription={(text) => console.log('Voice input:', text)} />
+            <TransparencyBadge />
+          </div>
+        )}
 
         <Link to={s.url}>
           <motion.div
