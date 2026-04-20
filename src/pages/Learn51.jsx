@@ -1,155 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Star, UserCircle, Heart } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Star, Heart, Zap } from 'lucide-react';
 import LearnProfile, { getProfiles, getActiveProfile, getProfileStars } from '@/components/learn51/LearnProfile';
 
-// ─── UNIVERSAL DESIGN PRINCIPLES ─────────────────────────────────────────────
-// 1. One thing at a time. No competing elements.
-// 2. Text breathes. Generous line-height, never cramped.
-// 3. Tap targets huge. No anxiety about missing.
-// 4. Motion purposeful. Never decorative or distracting.
-// 5. Colour carries meaning. Not decoration.
-// 6. High contrast. Warm, not harsh.
-// 7. Zero clutter. If it's on screen, it matters.
-// This works for ADHD, dyslexia, anxiety, every brain — by default. No labels.
-// ─────────────────────────────────────────────────────────────────────────────
-
-const TILES = [
-  {
-    id: 'ai',
-    symbol: '◈',
-    title: 'AI Tutor',
-    sub: 'Learns what you love. Teaches everything through it.',
-    url: '/Learn51AI',
-    c1: '#7c3aed',
-    c2: '#4f46e5',
-    glow: '#7c3aed',
-    span: 2,
-  },
-  {
-    id: 'maths',
-    symbol: '∑',
-    title: 'Magic Maths',
-    sub: 'Numbers that click',
-    url: '/GeorgieMaths',
-    c1: '#7e22ce',
-    c2: '#6d28d9',
-    glow: '#a855f7',
-    span: 1,
-  },
-  {
-    id: 'literacy',
-    symbol: '⌘',
-    title: 'Literacy',
-    sub: 'Words & stories',
-    url: '/Literacy51',
-    c1: '#065f46',
-    c2: '#047857',
-    glow: '#10b981',
-    span: 1,
-  },
-  {
-    id: 'world',
-    symbol: '◎',
-    title: 'Real World',
-    sub: 'Nature · space · science',
-    url: '/YoungWarriors',
-    c1: '#92400e',
-    c2: '#b45309',
-    glow: '#f59e0b',
-    span: 1,
-  },
-  {
-    id: 'life',
-    symbol: '◉',
-    title: 'Life Skills',
-    sub: 'Money · health · rights',
-    url: '/LifeSkills51',
-    c1: '#831843',
-    c2: '#9d174d',
-    glow: '#f472b6',
-    span: 1,
-  },
-];
-
-// Pixel-style symbol rendered large — universally readable, no letter confusion
-function PixelSymbol({ char, color, size = 56 }) {
-  return (
-    <div
-      className="font-black select-none leading-none"
-      style={{
-        fontSize: size,
-        color,
-        fontFamily: '"Courier New", monospace',
-        textShadow: `0 0 20px ${color}80, 0 0 40px ${color}40`,
-        letterSpacing: '-2px',
-      }}
-    >
-      {char}
-    </div>
-  );
-}
-
-function Tile({ tile, delay }) {
-  const isWide = tile.span === 2;
-
+// Floating particle — pure vibe
+function Particle({ emoji, x, y, delay }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className={isWide ? 'col-span-2' : 'col-span-1'}
+      className="absolute pointer-events-none select-none text-2xl"
+      style={{ left: `${x}%`, top: `${y}%` }}
+      initial={{ opacity: 0, scale: 0, rotate: -20 }}
+      animate={{
+        opacity: [0, 0.6, 0],
+        scale: [0, 1.2, 0.8],
+        y: [0, -40],
+        rotate: [0, 15],
+      }}
+      transition={{ delay, duration: 3, repeat: Infinity, repeatDelay: Math.random() * 4 + 2 }}
     >
-      <Link to={tile.url}>
-        <div
-          className="relative overflow-hidden rounded-[28px] p-6 flex flex-col justify-between active:scale-[0.97] transition-transform"
-          style={{
-            background: `linear-gradient(145deg, ${tile.c1}dd, ${tile.c2}aa)`,
-            border: `1px solid ${tile.glow}30`,
-            minHeight: isWide ? '160px' : '148px',
-            boxShadow: `0 4px 32px ${tile.glow}18, inset 0 1px 0 rgba(255,255,255,0.08)`,
-          }}
-        >
-          {/* Ambient glow — bottom right */}
-          <div
-            className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full blur-3xl pointer-events-none"
-            style={{ background: tile.glow, opacity: 0.18 }}
-          />
-
-          {/* Top: symbol */}
-          <PixelSymbol char={tile.symbol} color={tile.glow} size={isWide ? 48 : 42} />
-
-          {/* Bottom: text — large, spaced, breathable */}
-          <div className="relative z-10 mt-3">
-            <p
-              className="font-black leading-tight"
-              style={{
-                fontSize: isWide ? '22px' : '18px',
-                color: 'rgba(255,255,255,0.95)',
-                letterSpacing: '-0.3px',
-              }}
-            >
-              {tile.title}
-            </p>
-            <p
-              className="mt-1 leading-relaxed"
-              style={{
-                fontSize: '13px',
-                color: 'rgba(255,255,255,0.45)',
-                fontWeight: 500,
-              }}
-            >
-              {tile.sub}
-            </p>
-          </div>
-        </div>
-      </Link>
+      {emoji}
     </motion.div>
   );
 }
 
-// Check if kid has used AI tutor before — personalise the tile
+const WORLD_TILES = [
+  {
+    id: 'ai',
+    emoji: '🧠',
+    title: 'Talk to your\nAI Tutor',
+    glow: '#a855f7',
+    bg: 'linear-gradient(145deg, #3b0764, #6d28d9)',
+    url: '/Learn51AI',
+    big: true,
+    pulse: true,
+  },
+  {
+    id: 'maths',
+    emoji: '🔢',
+    title: 'Magic\nMaths',
+    glow: '#818cf8',
+    bg: 'linear-gradient(145deg, #1e1b4b, #3730a3)',
+    url: '/GeorgieMaths',
+  },
+  {
+    id: 'literacy',
+    emoji: '📖',
+    title: 'Reading\n& Words',
+    glow: '#34d399',
+    bg: 'linear-gradient(145deg, #022c22, #065f46)',
+    url: '/Literacy51',
+  },
+  {
+    id: 'world',
+    emoji: '🌍',
+    title: 'Real\nWorld',
+    glow: '#fbbf24',
+    bg: 'linear-gradient(145deg, #451a03, #92400e)',
+    url: '/YoungWarriors',
+  },
+  {
+    id: 'life',
+    emoji: '⚡',
+    title: 'Life\nSkills',
+    glow: '#f472b6',
+    bg: 'linear-gradient(145deg, #4a044e, #86198f)',
+    url: '/LifeSkills51',
+  },
+];
+
+const PARTICLES = [
+  { emoji: '⭐', x: 10, y: 15, delay: 0 },
+  { emoji: '🚀', x: 85, y: 10, delay: 1.2 },
+  { emoji: '💡', x: 75, y: 60, delay: 0.6 },
+  { emoji: '🌟', x: 5, y: 70, delay: 2 },
+  { emoji: '✨', x: 50, y: 5, delay: 1.8 },
+  { emoji: '🎯', x: 90, y: 80, delay: 0.4 },
+];
+
 const getAITileMemory = () => {
   try {
     const saved = JSON.parse(localStorage.getItem('learn51ai_progress') || 'null');
@@ -158,14 +86,105 @@ const getAITileMemory = () => {
   } catch { return null; }
 };
 
+// Big bouncy card
+function WorldTile({ tile, delay, index }) {
+  const [tapped, setTapped] = useState(false);
+
+  const handleTap = () => {
+    setTapped(true);
+    setTimeout(() => setTapped(false), 400);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.7, rotate: index % 2 === 0 ? -3 : 3 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+      transition={{ delay, duration: 0.5, type: 'spring', stiffness: 200, damping: 15 }}
+      className={tile.big ? 'col-span-2' : 'col-span-1'}
+    >
+      <Link to={tile.url} onClick={handleTap}>
+        <motion.div
+          animate={tile.pulse && !tapped ? {
+            boxShadow: [
+              `0 0 20px ${tile.glow}40`,
+              `0 0 50px ${tile.glow}80`,
+              `0 0 20px ${tile.glow}40`,
+            ]
+          } : {}}
+          transition={{ duration: 2, repeat: Infinity }}
+          whileTap={{ scale: 0.92, rotate: index % 2 === 0 ? -2 : 2 }}
+          className="relative overflow-hidden flex flex-col items-center justify-center text-center active:scale-95"
+          style={{
+            background: tile.bg,
+            borderRadius: tile.big ? '32px' : '28px',
+            minHeight: tile.big ? '160px' : '140px',
+            border: `2px solid ${tile.glow}50`,
+            boxShadow: `0 8px 32px ${tile.glow}25`,
+          }}
+        >
+          {/* Glow blob behind emoji */}
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            style={{
+              background: `radial-gradient(circle at 50% 40%, ${tile.glow}20 0%, transparent 70%)`,
+            }}
+          />
+
+          {/* Emoji — HUGE */}
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: delay * 0.5 }}
+            style={{ fontSize: tile.big ? '56px' : '44px', lineHeight: 1 }}
+          >
+            {tile.emoji}
+          </motion.div>
+
+          {/* Title */}
+          <p
+            className="font-black mt-3 leading-tight relative z-10 whitespace-pre-line px-2"
+            style={{
+              fontSize: tile.big ? '20px' : '16px',
+              color: 'rgba(255,255,255,0.95)',
+              textShadow: `0 0 20px ${tile.glow}80`,
+            }}
+          >
+            {tile.title}
+          </p>
+
+          {/* Tap ripple */}
+          <AnimatePresence>
+            {tapped && (
+              <motion.div
+                className="absolute inset-0 rounded-[32px]"
+                initial={{ opacity: 0.5 }}
+                animate={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                style={{ background: 'rgba(255,255,255,0.15)' }}
+              />
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </Link>
+    </motion.div>
+  );
+}
+
 export default function Learn51Page() {
   const [showProfilePicker, setShowProfilePicker] = useState(false);
   const [activeProfileId, setActiveProfileId] = useState(getActiveProfile);
   const [profiles, setProfiles] = useState(getProfiles);
+  const [greeting, setGreeting] = useState('');
   const aiMemory = getAITileMemory();
 
   const activeProfile = profiles.find(p => p.id === activeProfileId) || null;
   const stars = activeProfileId ? getProfileStars(activeProfileId) : 0;
+
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) setGreeting('Good morning');
+    else if (hour < 17) setGreeting('Hey');
+    else setGreeting('Evening');
+  }, []);
 
   const handleProfileSelected = (profile) => {
     setActiveProfileId(profile.id);
@@ -179,135 +198,171 @@ export default function Learn51Page() {
 
   return (
     <div
-      className="min-h-screen text-white"
-      style={{ background: 'radial-gradient(ellipse at 30% 0%, #1a0a2e 0%, #05080f 60%)' }}
+      className="min-h-screen text-white relative overflow-hidden"
+      style={{ background: 'radial-gradient(ellipse at 20% 0%, #1a0a2e 0%, #050810 70%)' }}
     >
-      <div className="max-w-md mx-auto px-4 pt-8 pb-20">
+      {/* Floating particles — ambient magic */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {PARTICLES.map((p, i) => (
+          <Particle key={i} {...p} />
+        ))}
+      </div>
 
-        {/* ── HEADER ─────────────────────────────────────────── */}
+      <div className="max-w-md mx-auto px-4 pt-10 pb-24 relative z-10">
+
+        {/* ── HEADER ──────────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-start justify-between mb-8"
+          transition={{ duration: 0.5, type: 'spring' }}
+          className="flex items-center justify-between mb-8"
         >
-          {/* Wordmark */}
+          {/* Greeting */}
           <div>
-            <h1
-              className="font-black leading-none tracking-tight"
-              style={{
-                fontSize: '32px',
-                background: 'linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Learn51
-            </h1>
-            <p
-              className="mt-1.5 leading-relaxed"
-              style={{ fontSize: '13px', color: 'rgba(255,255,255,0.28)', fontWeight: 500 }}
-            >
-              Free for every child on Earth
-            </p>
-          </div>
-
-          {/* Profile — large tap target, always visible */}
-          <button
-            onClick={() => setShowProfilePicker(true)}
-            className="flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 border transition-all active:scale-95"
-            style={{
-              border: '1px solid rgba(255,255,255,0.10)',
-              background: 'rgba(255,255,255,0.05)',
-              minWidth: '80px',
-            }}
-          >
             {activeProfile ? (
               <>
-                <span className="text-2xl leading-none">{activeProfile.avatar}</span>
-                <div className="text-left">
-                  <p className="text-white font-black text-xs leading-none">{activeProfile.name}</p>
+                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', fontWeight: 600 }}>
+                  {greeting} 👋
+                </p>
+                <h1
+                  className="font-black leading-tight"
+                  style={{ fontSize: '28px', color: 'white' }}
+                >
+                  {activeProfile.avatar} {activeProfile.name}
+                </h1>
+                {stars > 0 && (
                   <div className="flex items-center gap-1 mt-1">
-                    <Star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
-                    <span className="text-yellow-400 text-xs font-black">{stars}</span>
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span className="text-yellow-400 font-black text-sm">{stars} stars earned!</span>
                   </div>
-                </div>
+                )}
               </>
             ) : (
-              <div className="flex items-center gap-1.5">
-                <UserCircle className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.25)' }} />
-                <span className="text-xs font-bold" style={{ color: 'rgba(255,255,255,0.25)' }}>
-                  You
-                </span>
-              </div>
+              <>
+                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', fontWeight: 600 }}>
+                  Welcome to
+                </p>
+                <h1
+                  className="font-black leading-tight"
+                  style={{
+                    fontSize: '34px',
+                    background: 'linear-gradient(135deg, #a78bfa, #38bdf8, #34d399)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  Learn51 🚀
+                </h1>
+              </>
             )}
-          </button>
+          </div>
+
+          {/* Profile button */}
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setShowProfilePicker(true)}
+            className="flex flex-col items-center justify-center rounded-2xl p-3"
+            style={{
+              border: '2px solid rgba(255,255,255,0.12)',
+              background: 'rgba(255,255,255,0.06)',
+              minWidth: '60px',
+            }}
+          >
+            <span className="text-2xl">{activeProfile?.avatar || '👤'}</span>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 700, marginTop: 2 }}>
+              {activeProfile ? 'switch' : 'who?'}
+            </span>
+          </motion.button>
         </motion.div>
 
-        {/* ── TILE GRID ──────────────────────────────────────── */}
-        <div className="grid grid-cols-2 gap-3 mb-10">
-          {TILES.map((tile, i) => {
-            // Personalise AI tile if we know their interest
-            const personalised = tile.id === 'ai' && aiMemory
-              ? { ...tile, sub: `${aiMemory.stars}⭐ earned · loves ${aiMemory.interest} · pick up where you left off` }
-              : tile;
-            return <Tile key={tile.id} tile={personalised} delay={i * 0.06 + 0.1} />;
-          })}
+        {/* ── NUDGE if no profile ──────────────────────── */}
+        {!activeProfile && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => setShowProfilePicker(true)}
+            className="w-full mb-6 py-4 rounded-2xl flex items-center justify-center gap-3 font-black text-lg"
+            style={{
+              background: 'linear-gradient(135deg, #7c3aed, #0ea5e9)',
+              boxShadow: '0 8px 30px rgba(124,58,237,0.4)',
+              color: 'white',
+            }}
+          >
+            <Zap className="w-5 h-5" />
+            Tap here to start! ✨
+          </motion.button>
+        )}
+
+        {/* ── AI TUTOR CALL OUT if they have memory ─── */}
+        {aiMemory && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mb-5"
+          >
+            <Link to="/Learn51AI">
+              <div
+                className="flex items-center gap-3 p-4 rounded-2xl"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.2))',
+                  border: '2px solid rgba(124,58,237,0.4)',
+                }}
+              >
+                <span className="text-3xl">🧠</span>
+                <div>
+                  <p className="font-black text-white text-sm">Continue learning!</p>
+                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
+                    {aiMemory.stars}⭐ · loves {aiMemory.interest} · pick up where you left off →
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        )}
+
+        {/* ── WORLD TILES ─────────────────────────────── */}
+        <div className="grid grid-cols-2 gap-4 mb-10">
+          {WORLD_TILES.map((tile, i) => (
+            <WorldTile key={tile.id} tile={tile} delay={i * 0.08 + 0.15} index={i} />
+          ))}
         </div>
 
-        {/* ── TRUST — ultra minimal, not patronising ─────────── */}
+        {/* ── TRUST strip — tiny, not school-ish ──────── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.55 }}
-          className="mb-8"
-          style={{
-            border: '1px solid rgba(255,255,255,0.06)',
-            borderRadius: '20px',
-            padding: '16px 20px',
-          }}
+          transition={{ delay: 0.7 }}
+          className="flex items-center justify-center gap-4 mb-6 flex-wrap"
         >
-          <p
-            className="font-black uppercase tracking-widest mb-3"
-            style={{ fontSize: '10px', color: 'rgba(255,255,255,0.18)' }}
-          >
-            For parents & teachers
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {[
-              'No data collected',
-              'No login needed',
-              'No adverts. Ever.',
-              'Works offline',
-            ].map(text => (
-              <div key={text} className="flex items-center gap-2">
-                <span style={{ color: '#10b981', fontSize: '11px', fontWeight: 900 }}>✓</span>
-                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.28)', fontWeight: 500 }}>
-                  {text}
-                </span>
-              </div>
-            ))}
-          </div>
+          {['🔒 No data', '🚫 No ads', '✈️ Works offline', '💛 Always free'].map(item => (
+            <span
+              key={item}
+              className="font-bold"
+              style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)' }}
+            >
+              {item}
+            </span>
+          ))}
         </motion.div>
 
-        {/* ── FOOTER ─────────────────────────────────────────── */}
+        {/* ── FOOTER ──────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.65 }}
-          className="text-center space-y-2"
+          transition={{ delay: 0.8 }}
+          className="text-center"
         >
           <Link
             to="/SupportLearn51"
-            className="inline-flex items-center gap-2 transition-all active:scale-95"
-            style={{ color: 'rgba(255,255,255,0.18)', fontSize: '12px', fontWeight: 700 }}
+            className="inline-flex items-center gap-2"
+            style={{ color: 'rgba(255,255,255,0.15)', fontSize: '12px', fontWeight: 700 }}
           >
-            <Heart className="w-3 h-3" style={{ color: '#f472b6' }} />
+            <Heart className="w-3 h-3 fill-pink-400 text-pink-400" />
             Keep it free — donate
           </Link>
-          <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.08)' }}>
-            Built with love · Free forever · UF51
-          </p>
         </motion.div>
 
       </div>
