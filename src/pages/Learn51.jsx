@@ -1,208 +1,215 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
-import { Star, Heart } from 'lucide-react';
-import LearnProfile, { getProfiles, getActiveProfile, getProfileStars } from '@/components/learn51/LearnProfile';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// ── SUBJECTS — each owns a full vibe ─────────────────────────────────────────
-const SUBJECTS = [
+// ── THE WORLDS — designed for actual kids, not pitch decks ───────────────────
+const WORLDS = [
   {
-    id: 'ai',
-    title: 'AI Tutor',
-    hook: 'Learns what YOU love.\nTeaches everything through it.',
-    cta: 'Start talking →',
+    id: 'brain',
+    emoji: '🧠',
+    name: 'Your Brain Buddy',
+    vibe: 'Tell it ANYTHING.\nIt teaches you through your stuff.',
+    action: 'Let\'s go 🚀',
     url: '/Learn51AI',
-    bg: ['#0d0628', '#3b0764', '#6d28d9'],
-    accent: '#a78bfa',
-    glyph: '◈',
-    glyphColor: '#c4b5fd',
-    particles: ['✦', '◆', '⬟', '✧'],
-    featured: true,
+    bg: 'linear-gradient(160deg, #0d0628 0%, #2e1065 50%, #4c1d95 100%)',
+    spotColor: '#a855f7',
+    tag: '⚡ talks back',
   },
   {
     id: 'maths',
-    title: 'Magic Maths',
-    hook: 'Numbers that\nactually click.',
-    cta: 'Explore numbers →',
+    emoji: '💥',
+    name: 'Smash Maths',
+    vibe: 'Numbers, shapes & secrets\nthey never tell you at school.',
+    action: 'Smash it 💥',
     url: '/GeorgieMaths',
-    bg: ['#05051a', '#1e1b4b', '#312e81'],
-    accent: '#818cf8',
-    glyph: '∑',
-    glyphColor: '#a5b4fc',
-    particles: ['∞', '÷', '×', '='],
+    bg: 'linear-gradient(160deg, #0f172a 0%, #1e3a5f 50%, #1d4ed8 100%)',
+    spotColor: '#38bdf8',
+    tag: '🔢 makes sense now',
   },
   {
-    id: 'literacy',
-    title: 'Reading & Words',
-    hook: 'Stories that pull\nyou in.',
-    cta: 'Open a story →',
+    id: 'words',
+    emoji: '📖',
+    name: 'Words & Stories',
+    vibe: 'Spelling, reading & writing\nthat doesn\'t make you want to sleep.',
+    action: 'Read something →',
     url: '/Literacy51',
-    bg: ['#001a0d', '#022c22', '#064e3b'],
-    accent: '#34d399',
-    glyph: '⌘',
-    glyphColor: '#6ee7b7',
-    particles: ['A', 'z', '?', '!'],
+    bg: 'linear-gradient(160deg, #052e16 0%, #064e3b 50%, #065f46 100%)',
+    spotColor: '#34d399',
+    tag: '🌟 actually fun',
   },
   {
     id: 'world',
-    title: 'Real World',
-    hook: 'Nature. Space.\nScience. All of it.',
-    cta: 'Go explore →',
+    emoji: '🌍',
+    name: 'The Real World',
+    vibe: 'Animals. Space. Science.\nWhy things explode.',
+    action: 'Explore →',
     url: '/YoungWarriors',
-    bg: ['#0a0f1a', '#1e3a5f', '#1d4ed8'],
-    accent: '#60a5fa',
-    glyph: '◎',
-    glyphColor: '#93c5fd',
-    particles: ['🌊', '⚡', '🔥', '❄️'],
+    bg: 'linear-gradient(160deg, #0c1445 0%, #1e3a8a 50%, #1d4ed8 100%)',
+    spotColor: '#60a5fa',
+    tag: '🔥 wild facts',
   },
   {
     id: 'life',
-    title: 'Life Skills',
-    hook: 'Money. Health.\nYour rights. Real talk.',
-    cta: 'Level up →',
+    emoji: '💸',
+    name: 'Real Life Stuff',
+    vibe: 'Money. Your rights. Food.\nThings adults forget to teach.',
+    action: 'Find out →',
     url: '/LifeSkills51',
-    bg: ['#1a0010', '#4a044e', '#7e22ce'],
-    accent: '#e879f9',
-    glyph: '◉',
-    glyphColor: '#f0abfc',
-    particles: ['£', '%', '✓', '→'],
+    bg: 'linear-gradient(160deg, #1a0020 0%, #4a044e 50%, #6b21a8 100%)',
+    spotColor: '#e879f9',
+    tag: '💡 nobody tells you this',
+  },
+  {
+    id: 'lennox',
+    emoji: '🔢',
+    name: 'Rounding & Decimals',
+    vibe: 'Decimals, circles & why\nmaths is hiding in music.',
+    action: 'Try it →',
+    url: '/LennoxMaths',
+    bg: 'linear-gradient(160deg, #0a0f1a 0%, #1c1917 50%, #292524 100%)',
+    spotColor: '#fb923c',
+    tag: '🎵 maths in music',
   },
 ];
 
-// ── FLOATING GLYPH PARTICLES ──────────────────────────────────────────────────
-function FloatingParticles({ chars, accent }) {
+// ── EMOJI BURST on mount ──────────────────────────────────────────────────────
+function EmojiBurst({ emoji, color }) {
   const items = useRef(
-    chars.map((c, i) => ({
-      char: c,
-      x: 10 + Math.random() * 80,
-      y: 10 + Math.random() * 80,
-      size: 14 + Math.random() * 18,
-      dur: 3 + Math.random() * 4,
-      delay: i * 0.7,
+    Array.from({ length: 8 }, (_, i) => ({
+      angle: (i / 8) * 360,
+      dist: 60 + Math.random() * 80,
+      size: 14 + Math.random() * 14,
+      dur: 0.6 + Math.random() * 0.5,
     }))
   ).current;
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {items.map((p, i) => (
-        <motion.div
-          key={i}
-          className="absolute font-black select-none"
-          style={{ left: `${p.x}%`, top: `${p.y}%`, fontSize: p.size, color: accent, opacity: 0 }}
-          animate={{ opacity: [0, 0.25, 0], y: [0, -30, -60] }}
-          transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: 'easeOut' }}
-        >
-          {p.char}
-        </motion.div>
-      ))}
+    <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+      {items.map((p, i) => {
+        const rad = (p.angle * Math.PI) / 180;
+        const tx = Math.cos(rad) * p.dist;
+        const ty = Math.sin(rad) * p.dist;
+        return (
+          <motion.div
+            key={i}
+            className="absolute"
+            initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+            animate={{ x: tx, y: ty, opacity: 0, scale: 0.3 }}
+            transition={{ duration: p.dur, ease: 'easeOut' }}
+            style={{ fontSize: p.size }}
+          >
+            {emoji}
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
 
-// ── SINGLE SUBJECT CARD — full screen ────────────────────────────────────────
-function SubjectCard({ subject, isActive, direction }) {
-  const variants = {
-    enter: (d) => ({ x: d > 0 ? '100%' : '-100%', opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (d) => ({ x: d < 0 ? '100%' : '-100%', opacity: 0 }),
+// ── SINGLE WORLD CARD ─────────────────────────────────────────────────────────
+function WorldCard({ world, direction, onBurst }) {
+  const [bursting, setBursting] = useState(false);
+
+  const handleTap = () => {
+    setBursting(true);
+    setTimeout(() => setBursting(false), 800);
   };
 
   return (
     <motion.div
       className="absolute inset-0 flex flex-col"
-      custom={direction}
-      variants={variants}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      transition={{ duration: 0.38, ease: [0.32, 0.72, 0, 1] }}
-      style={{
-        background: `linear-gradient(160deg, ${subject.bg[0]} 0%, ${subject.bg[1]} 50%, ${subject.bg[2]} 100%)`,
-      }}
+      key={world.id}
+      initial={{ x: direction > 0 ? '100%' : '-100%' }}
+      animate={{ x: 0 }}
+      exit={{ x: direction < 0 ? '100%' : '-100%' }}
+      transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+      style={{ background: world.bg }}
     >
-      <FloatingParticles chars={subject.particles} accent={subject.accent} />
+      {/* Spot glow */}
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: 400,
+          height: 400,
+          top: '15%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: world.spotColor,
+          opacity: 0.07,
+          filter: 'blur(80px)',
+        }}
+      />
 
-      {/* Giant glyph — fills the space */}
-      <div className="flex-1 flex items-center justify-center relative">
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.5, type: 'spring', stiffness: 120 }}
-          className="text-center"
-        >
-          {/* Glow blob */}
-          <div
-            className="absolute rounded-full blur-3xl pointer-events-none"
-            style={{
-              width: 280,
-              height: 280,
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%,-50%)',
-              background: subject.accent,
-              opacity: 0.08,
-            }}
-          />
-          <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative z-10 font-black select-none"
-            style={{
-              fontSize: 160,
-              color: subject.glyphColor,
-              fontFamily: '"Courier New", monospace',
-              lineHeight: 1,
-              textShadow: `0 0 60px ${subject.accent}60, 0 0 120px ${subject.accent}20`,
-              letterSpacing: '-8px',
-            }}
-          >
-            {subject.glyph}
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Bottom content */}
-      <motion.div
-        className="relative z-10 px-8 pb-10"
-        initial={{ y: 40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.45 }}
-      >
-        {/* Title */}
-        <h2
-          className="font-black leading-none mb-4"
+      {/* Tag pill */}
+      <div className="absolute top-6 right-6 z-10">
+        <div
+          className="px-3 py-1.5 rounded-full font-black"
           style={{
-            fontSize: 42,
-            color: 'rgba(255,255,255,0.95)',
-            letterSpacing: '-1.5px',
-            textShadow: `0 0 30px ${subject.accent}40`,
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            fontSize: 11,
+            color: 'rgba(255,255,255,0.5)',
+            letterSpacing: '0.05em',
           }}
         >
-          {subject.title}
-        </h2>
+          {world.tag}
+        </div>
+      </div>
 
-        {/* Hook text */}
-        <p
-          className="font-bold leading-relaxed mb-8 whitespace-pre-line"
-          style={{ fontSize: 17, color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}
-        >
-          {subject.hook}
-        </p>
-
-        {/* CTA */}
-        <Link to={subject.url}>
+      {/* Centre — the big emoji */}
+      <div className="flex-1 flex items-center justify-center relative">
+        <div className="relative" onClick={handleTap}>
+          {bursting && <EmojiBurst emoji={world.emoji} color={world.spotColor} />}
           <motion.div
-            whileTap={{ scale: 0.96 }}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-black"
+            animate={{ 
+              y: [0, -16, 0],
+              rotate: [0, -3, 3, 0],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ fontSize: 110, cursor: 'pointer', userSelect: 'none', display: 'block', lineHeight: 1 }}
+          >
+            {world.emoji}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom — name, vibe, CTA */}
+      <motion.div
+        className="relative z-10 px-7 pb-8"
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.12, duration: 0.4 }}
+      >
+        <h2
+          className="font-black leading-none mb-3"
+          style={{
+            fontSize: 38,
+            color: '#fff',
+            letterSpacing: '-1.5px',
+            textShadow: `0 0 40px ${world.spotColor}50`,
+          }}
+        >
+          {world.name}
+        </h2>
+        <p
+          className="font-bold mb-7 whitespace-pre-line"
+          style={{ fontSize: 16, color: 'rgba(255,255,255,0.4)', lineHeight: 1.55 }}
+        >
+          {world.vibe}
+        </p>
+        <Link to={world.url}>
+          <motion.div
+            whileTap={{ scale: 0.94 }}
+            className="inline-flex items-center gap-2 rounded-2xl font-black px-7 py-4"
             style={{
-              background: subject.accent,
+              background: world.spotColor,
               color: '#000',
               fontSize: 16,
-              letterSpacing: '-0.3px',
-              boxShadow: `0 0 40px ${subject.accent}50`,
+              boxShadow: `0 0 40px ${world.spotColor}55`,
+              letterSpacing: '-0.2px',
             }}
           >
-            {subject.cta}
+            {world.action}
           </motion.div>
         </Link>
       </motion.div>
@@ -210,231 +217,157 @@ function SubjectCard({ subject, isActive, direction }) {
   );
 }
 
-// ── DOT NAV ───────────────────────────────────────────────────────────────────
-function DotNav({ count, active, accent, onDotTap }) {
+// ── SWIPE DOT ─────────────────────────────────────────────────────────────────
+function Pip({ active, color, onClick }) {
   return (
-    <div className="flex items-center gap-2">
-      {Array.from({ length: count }).map((_, i) => (
-        <button key={i} onClick={() => onDotTap(i)}>
-          <motion.div
-            animate={{ width: i === active ? 24 : 6, opacity: i === active ? 1 : 0.3 }}
-            transition={{ duration: 0.3 }}
-            className="rounded-full h-1.5"
-            style={{ background: i === active ? accent : 'white' }}
-          />
-        </button>
-      ))}
-    </div>
+    <motion.button
+      onClick={onClick}
+      animate={{ width: active ? 20 : 5, opacity: active ? 1 : 0.25 }}
+      transition={{ duration: 0.25 }}
+      className="rounded-full h-1.5 block"
+      style={{ background: active ? color : 'white' }}
+    />
   );
 }
 
-// ── QUICK ACCESS STRIP ────────────────────────────────────────────────────────
-function QuickStrip({ subjects, activeIdx, onSelect }) {
+// ── QUICK ROW ─────────────────────────────────────────────────────────────────
+function QuickRow({ worlds, active, onPick }) {
   return (
-    <div className="flex gap-2 overflow-x-auto scrollbar-hide px-5 py-3" style={{ scrollbarWidth: 'none' }}>
-      {subjects.map((s, i) => (
+    <div
+      className="flex gap-2 px-5 py-2.5 overflow-x-auto"
+      style={{ scrollbarWidth: 'none' }}
+    >
+      {worlds.map((w, i) => (
         <button
-          key={s.id}
-          onClick={() => onSelect(i)}
-          className="flex-shrink-0 rounded-xl px-3 py-2 font-black transition-all"
+          key={w.id}
+          onClick={() => onPick(i)}
+          className="flex-shrink-0 flex items-center gap-1.5 rounded-xl px-3 py-2 font-black transition-all"
           style={{
-            fontSize: 11,
-            background: i === activeIdx ? s.accent : 'rgba(255,255,255,0.06)',
-            color: i === activeIdx ? '#000' : 'rgba(255,255,255,0.4)',
-            border: i === activeIdx ? 'none' : '1px solid rgba(255,255,255,0.08)',
-            letterSpacing: '0.03em',
+            fontSize: 12,
+            background: i === active ? w.spotColor : 'rgba(255,255,255,0.07)',
+            color: i === active ? '#000' : 'rgba(255,255,255,0.35)',
+            border: i === active ? 'none' : '1px solid rgba(255,255,255,0.07)',
           }}
         >
-          {s.title}
+          <span style={{ fontSize: 14 }}>{w.emoji}</span>
+          <span style={{ fontSize: 10 }}>{w.name}</span>
         </button>
       ))}
     </div>
   );
 }
 
-const getAITileMemory = () => {
-  try {
-    const saved = JSON.parse(localStorage.getItem('learn51ai_progress') || 'null');
-    if (saved?.interest && saved?.stars > 0) return saved;
-    return null;
-  } catch { return null; }
-};
-
-// ── MAIN ──────────────────────────────────────────────────────────────────────
+// ── PAGE ──────────────────────────────────────────────────────────────────────
 export default function Learn51Page() {
-  const [[activeIdx, direction], setPage] = useState([0, 0]);
-  const [showProfilePicker, setShowProfilePicker] = useState(false);
-  const [activeProfileId, setActiveProfileId] = useState(getActiveProfile);
-  const [profiles, setProfiles] = useState(getProfiles);
-  const dragStartX = useRef(null);
-  const aiMemory = getAITileMemory();
+  const [[idx, dir], setPage] = useState([0, 0]);
+  const touchStart = useRef(null);
+  const world = WORLDS[idx];
 
-  const activeProfile = profiles.find(p => p.id === activeProfileId) || null;
-  const stars = activeProfileId ? getProfileStars(activeProfileId) : 0;
-  const subject = SUBJECTS[activeIdx];
-
-  const paginate = (newDir) => {
-    const next = (activeIdx + newDir + SUBJECTS.length) % SUBJECTS.length;
+  const go = (newDir) => {
+    const next = (idx + newDir + WORLDS.length) % WORLDS.length;
     setPage([next, newDir]);
   };
 
-  const goTo = (idx) => {
-    const dir = idx > activeIdx ? 1 : -1;
-    setPage([idx, dir]);
-  };
+  const goTo = (i) => setPage([i, i > idx ? 1 : -1]);
 
-  const handleTouchStart = (e) => { dragStartX.current = e.touches[0].clientX; };
-  const handleTouchEnd = (e) => {
-    if (dragStartX.current === null) return;
-    const delta = e.changedTouches[0].clientX - dragStartX.current;
-    if (Math.abs(delta) > 50) paginate(delta < 0 ? 1 : -1);
-    dragStartX.current = null;
+  const onTouchStart = (e) => { touchStart.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStart.current === null) return;
+    const d = e.changedTouches[0].clientX - touchStart.current;
+    if (Math.abs(d) > 45) go(d < 0 ? 1 : -1);
+    touchStart.current = null;
   };
-
-  const handleProfileSelected = (profile) => {
-    setActiveProfileId(profile.id);
-    setProfiles(getProfiles());
-    setShowProfilePicker(false);
-  };
-
-  if (showProfilePicker) {
-    return <LearnProfile onSelect={handleProfileSelected} />;
-  }
 
   return (
     <div
-      className="fixed inset-0 flex flex-col overflow-hidden"
+      className="fixed inset-0 flex flex-col select-none overflow-hidden"
       style={{ background: '#000', touchAction: 'pan-y' }}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
-      {/* ── TOP HUD ──────────────────────────────────── */}
-      <div
-        className="relative z-30 flex items-center justify-between px-5 pt-6 pb-2"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%)' }}
-      >
-        {/* Wordmark */}
-        <div>
-          <span
-            className="font-black tracking-widest uppercase"
-            style={{
-              fontSize: 13,
-              background: `linear-gradient(90deg, ${subject.accent}, white)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              letterSpacing: '0.2em',
-            }}
-          >
-            LEARN51
-          </span>
-        </div>
 
-        {/* Profile pill */}
-        <button
-          onClick={() => setShowProfilePicker(true)}
-          className="flex items-center gap-2 rounded-full px-3 py-1.5"
+      {/* ── TOP BAR ─────────────────────────────────── */}
+      <div
+        className="relative z-30 flex items-center justify-between px-5 pt-5 pb-2"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)' }}
+      >
+        <motion.div
+          key={world.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="font-black tracking-widest uppercase"
           style={{
-            background: 'rgba(255,255,255,0.08)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            backdropFilter: 'blur(10px)',
+            fontSize: 12,
+            background: `linear-gradient(90deg, ${world.spotColor}, #fff)`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            letterSpacing: '0.25em',
           }}
         >
-          <span style={{ fontSize: 16 }}>{activeProfile?.avatar || '👾'}</span>
-          {activeProfile && stars > 0 && (
-            <span className="font-black" style={{ fontSize: 11, color: '#fbbf24' }}>{stars}★</span>
-          )}
-          {!activeProfile && (
-            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', fontWeight: 800, letterSpacing: '0.1em' }}>YOU?</span>
-          )}
-        </button>
+          LEARN51
+        </motion.div>
+
+        <Link
+          to="/Learn51About"
+          className="font-black rounded-full px-3 py-1"
+          style={{
+            fontSize: 10,
+            background: 'rgba(255,255,255,0.07)',
+            color: 'rgba(255,255,255,0.3)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            letterSpacing: '0.1em',
+          }}
+        >
+          FREE · ALWAYS
+        </Link>
       </div>
 
-      {/* ── SWIPEABLE STAGE ──────────────────────────── */}
+      {/* ── STAGE ───────────────────────────────────── */}
       <div className="relative flex-1 overflow-hidden">
-        <AnimatePresence initial={false} custom={direction}>
-          <SubjectCard
-            key={activeIdx}
-            subject={subject}
-            isActive={true}
-            direction={direction}
-          />
+        <AnimatePresence initial={false} custom={dir} mode="sync">
+          <WorldCard key={world.id} world={world} direction={dir} />
         </AnimatePresence>
 
-        {/* Swipe hint arrows — subtle */}
+        {/* Tap-edge arrows */}
         <button
-          onClick={() => paginate(-1)}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 rounded-full p-3"
-          style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)', fontSize: 18 }}
+          onClick={() => go(-1)}
+          className="absolute left-0 top-0 bottom-0 z-20 w-12 flex items-center justify-center"
+          style={{ background: 'transparent', color: 'rgba(255,255,255,0.15)', fontSize: 22, fontWeight: 900 }}
         >
           ‹
         </button>
         <button
-          onClick={() => paginate(1)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 rounded-full p-3"
-          style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)', fontSize: 18 }}
+          onClick={() => go(1)}
+          className="absolute right-0 top-0 bottom-0 z-20 w-12 flex items-center justify-center"
+          style={{ background: 'transparent', color: 'rgba(255,255,255,0.15)', fontSize: 22, fontWeight: 900 }}
         >
           ›
         </button>
       </div>
 
-      {/* ── BOTTOM DOCK ──────────────────────────────── */}
+      {/* ── BOTTOM DOCK ─────────────────────────────── */}
       <div
         className="relative z-30"
-        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)' }}
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 100%)' }}
       >
-        {/* Continue banner */}
-        {aiMemory && activeIdx === 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mx-5 mb-2"
-          >
-            <Link to="/Learn51AI">
-              <div
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl"
-                style={{
-                  background: 'rgba(167,139,250,0.15)',
-                  border: '1px solid rgba(167,139,250,0.25)',
-                }}
-              >
-                <span style={{ fontSize: 16 }}>⚡</span>
-                <div className="flex-1 min-w-0">
-                  <span className="font-black text-white" style={{ fontSize: 12 }}>
-                    Continue · {aiMemory.stars}★ · {aiMemory.interest}
-                  </span>
-                </div>
-                <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.3)' }}>→</span>
-              </div>
-            </Link>
-          </motion.div>
-        )}
+        <QuickRow worlds={WORLDS} active={idx} onPick={goTo} />
 
-        {/* Quick access strip */}
-        <QuickStrip subjects={SUBJECTS} activeIdx={activeIdx} onSelect={goTo} />
-
-        {/* Dot nav + profile nudge */}
-        <div className="flex items-center justify-between px-5 pb-6 pt-1">
-          <DotNav count={SUBJECTS.length} active={activeIdx} accent={subject.accent} onDotTap={goTo} />
-
-          <div className="flex items-center gap-4">
-            {!activeProfile && (
-              <button
-                onClick={() => setShowProfilePicker(true)}
-                className="font-black rounded-lg px-3 py-1.5"
-                style={{
-                  fontSize: 10,
-                  background: subject.accent,
-                  color: '#000',
-                  letterSpacing: '0.08em',
-                }}
-              >
-                SET UP PROFILE
-              </button>
-            )}
-            <Link to="/SupportLearn51">
-              <Heart className="w-3.5 h-3.5 fill-pink-500 text-pink-500 opacity-30" />
-            </Link>
+        <div className="flex items-center justify-between px-6 pb-7 pt-1">
+          {/* Pips */}
+          <div className="flex items-center gap-2">
+            {WORLDS.map((w, i) => (
+              <Pip key={w.id} active={i === idx} color={w.spotColor} onClick={() => goTo(i)} />
+            ))}
           </div>
+
+          {/* Swipe hint */}
+          <motion.div
+            animate={{ x: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', fontWeight: 800, letterSpacing: '0.1em' }}
+          >
+            SWIPE →
+          </motion.div>
         </div>
       </div>
     </div>
