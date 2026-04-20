@@ -44,11 +44,11 @@ const MODULES = [
   {
     id: 'world',
     emoji: '🌍',
-    title: 'Young Warriors',
-    desc: 'Real kids making a real difference right now.',
+    title: 'Real World',
+    desc: 'Water, animals, science, kindness — wonder-first learning about the world you actually live in.',
     url: '/YoungWarriors',
     accent: '#fb923c',
-    tag: 'INSPIRE',
+    tag: 'EXPLORE',
   },
 ];
 
