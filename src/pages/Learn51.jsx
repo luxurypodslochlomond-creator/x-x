@@ -1,2 +1,2 @@
-// Learn51 uses the same magical entry experience as Magic51
+// Learn51 = Magic51. One experience, one codebase.
 export { default } from './Magic51';
