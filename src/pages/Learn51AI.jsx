@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, RotateCcw, Volume2, VolumeX, Share2, Camera, X, Upload } from 'lucide-react';
-import CreativeReward from '@/components/learn51/CreativeReward';
 import ShareYourWin from '@/components/learn51/ShareYourWin';
+import useLearnCard, { CardReveal, CardCollection, getCards } from '@/components/learn51/LearnCard';
 import LanguagePicker, { LANGUAGES, detectBrowserLanguage } from '@/components/learn51/LanguagePicker';
 import Learn51AIIcon from '@/components/learn51/Learn51AIIcon';
 
@@ -217,7 +217,11 @@ export default function Learn51AIPage() {
   const [showHint, setShowHint] = useState(false);
   const [history, setHistory] = useState([]);
   const [showReward, setShowReward] = useState(false);
+  const [newCard, setNewCard] = useState(null); // card being revealed
+  const [showCollection, setShowCollection] = useState(false);
+  const [cardCount, setCardCount] = useState(() => getCards().length);
   const [streak, setStreak] = useState(0);
+  const { generateCard } = useLearnCard();
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [iconState, setIconState] = useState('idle'); // 'idle' | 'thinking' | 'responding' | 'celebrating'
@@ -386,15 +390,20 @@ export default function Learn51AIPage() {
     if (result.correct) {
       const newStreak = streak + 1;
       const newStars = stars + 1;
-      // Level up every 3 correct in a row OR every 3 correct total — but only if not struggling
       const newLevel = (newScore > 0 && newScore % 3 === 0 && wrongStreak === 0) ? Math.min(level + 1, 5) : level;
       setStreak(newStreak);
       setStars(newStars);
-      setWrongStreak(0); // reset wrong streak on correct
+      setWrongStreak(0);
       setShowReward(true);
-      setHasWon(true); // unlock share button after first win
+      setHasWon(true);
       if (newLevel !== level) setLevel(newLevel);
       persistProgress({ stars: newStars, level: newLevel, interest, age });
+      // Generate a Learn Card in the background
+      const topicLabel = selectedTopics.length > 0
+        ? selectedTopics.map(id => TOPICS.find(t => t.id === id)?.label).filter(Boolean).join(' + ')
+        : TOPICS.find(t => t.id === topic)?.label || topic;
+      generateCard({ interest, topic: topicLabel, question: lessonData.question, answer, streak: newStreak, questionCount: newCount })
+        .then(card => { if (card) { setNewCard(card); setCardCount(c => c + 1); } });
     } else {
       setStreak(0);
       setWrongStreak(w => w + 1);
@@ -449,8 +458,20 @@ export default function Learn51AIPage() {
             <Link to="/Learn51" className="inline-flex items-center gap-2 text-indigo-400 font-bold hover:text-white text-sm transition-colors">
               {ui.back}
             </Link>
-            <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
+            <div className="flex items-center gap-2">
+              {cardCount > 0 && (
+                <button onClick={() => setShowCollection(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:border-amber-400 transition-all">
+                  🃏 {cardCount} cards
+                </button>
+              )}
+              <LanguagePicker selectedLang={language.code} onChange={handleLanguageChange} />
+            </div>
           </div>
+
+          <AnimatePresence>
+            {newCard && <CardReveal card={newCard} onClose={() => setNewCard(null)} />}
+            {showCollection && <CardCollection onClose={() => setShowCollection(false)} />}
+          </AnimatePresence>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3 py-4">
             <div className="flex justify-center">
@@ -665,6 +686,9 @@ export default function Learn51AIPage() {
                   {ui.adapting}
                 </motion.span>
               )}
+              <button onClick={() => setShowCollection(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:border-amber-400 transition-all">
+                🃏 {cardCount} {cardCount === 1 ? 'card' : 'cards'}
+              </button>
               {hasWon && (
                 <button onClick={() => setShowShare(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border border-purple-500/40 bg-purple-500/10 text-purple-300 hover:border-purple-400 transition-all">
                   <Share2 className="w-3 h-3" /> Share
@@ -812,7 +836,18 @@ export default function Learn51AIPage() {
           </AnimatePresence>
 
           {showShare && <ShareYourWin interest={interest} topic={TOPICS.find(t => t.id === topic)?.label} stars={stars} streak={streak} onClose={() => setShowShare(false)} />}
-          {showReward && lessonData && <CreativeReward interest={interest} topic={TOPICS.find(t => t.id === topic)?.label} childAge={age} correctAnswer={answer} questionAsked={lessonData.question} streakCount={streak} onClose={() => { setShowReward(false); nextQuestion(); }} />}
+          {showReward && lessonData && (
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-none">
+              <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="bg-amber-500/20 border border-amber-400/60 rounded-2xl px-5 py-3 text-amber-300 font-black text-sm pointer-events-auto"
+                onClick={() => { setShowReward(false); nextQuestion(); }}>
+                🃏 Card incoming... keep going! →
+              </motion.div>
+            </div>
+          )}
+          <AnimatePresence>
+            {newCard && <CardReveal card={newCard} onClose={() => setNewCard(null)} />}
+            {showCollection && <CardCollection onClose={() => setShowCollection(false)} />}
+          </AnimatePresence>
 
           {/* QUICK TOPIC SWITCH */}
           {!loading && (
