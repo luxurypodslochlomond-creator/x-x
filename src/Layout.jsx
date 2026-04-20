@@ -441,7 +441,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 5. LEARN BETTER — Learn51 Hub (own section, every child on Earth)
     const kidsNav = [
-      { title: "🌍 Learn51 Hub", url: createPageUrl("Learn51"), icon: GraduationCap, highlight: true, description: "Free · no login · every child on Earth" },
+      { title: "✨ Magic51", url: createPageUrl("Magic51"), icon: GraduationCap, highlight: true, description: "Free · no login · every child on Earth" },
       { title: "Magic Maths ⭐", url: createPageUrl("GeorgieMaths"), icon: Brain, highlight: true, description: "Numbers, doubling & 3D shapes" },
       { title: "Rounding & Decimals 🔢", url: createPageUrl("LennoxMaths"), icon: Brain, highlight: true, description: "Decimals, circles & maths in music" },
       { title: "Literacy 51 📖", url: createPageUrl("Literacy51"), icon: BookOpen, highlight: true, description: "Phonics · spelling · sentences" },
