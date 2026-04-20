@@ -166,10 +166,12 @@ const AuthenticatedApp = () => {
       <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminStoneymollanLegalPage /></LayoutWrapper>} />
       <Route path="/AI51Soul" element={<LayoutWrapper currentPageName="AI51Soul"><AI51SoulPage /></LayoutWrapper>} />
       <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminPWAPushGuidePage /></LayoutWrapper>} />
+      {/* ── MAGIC51 — truly full screen, no layout ── */}
+      <Route path="/Learn51" element={<Magic51Page />} />
+      <Route path="/Magic51" element={<Magic51Page />} />
+
       {/* ── LEARN51 — own layout, no UF51 nav ── */}
       <Route element={<Learn51Layout />}>
-        <Route path="/Learn51" element={<Magic51Page />} />
-        <Route path="/Magic51" element={<Magic51Page />} />
         <Route path="/Learn51AI" element={<Learn51AIPage />} />
         <Route path="/Learn51About" element={<Learn51AboutPage />} />
         <Route path="/Literacy51" element={<Literacy51Page />} />
