@@ -20,7 +20,7 @@ const TILES = [
     id: 'ai',
     symbol: '◈',
     title: 'AI Tutor',
-    sub: 'Ask anything. Learn your way.',
+    sub: 'Learns what you love. Teaches everything through it.',
     url: '/Learn51AI',
     c1: '#7c3aed',
     c2: '#4f46e5',
@@ -149,10 +149,20 @@ function Tile({ tile, delay }) {
   );
 }
 
+// Check if kid has used AI tutor before — personalise the tile
+const getAITileMemory = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem('learn51ai_progress') || 'null');
+    if (saved?.interest && saved?.stars > 0) return saved;
+    return null;
+  } catch { return null; }
+};
+
 export default function Learn51Page() {
   const [showProfilePicker, setShowProfilePicker] = useState(false);
   const [activeProfileId, setActiveProfileId] = useState(getActiveProfile);
   const [profiles, setProfiles] = useState(getProfiles);
+  const aiMemory = getAITileMemory();
 
   const activeProfile = profiles.find(p => p.id === activeProfileId) || null;
   const stars = activeProfileId ? getProfileStars(activeProfileId) : 0;
@@ -235,15 +245,14 @@ export default function Learn51Page() {
         </motion.div>
 
         {/* ── TILE GRID ──────────────────────────────────────── */}
-        {/* 
-          Grid is 2 columns. Wide tile spans both = hero action.
-          Each tile is big enough to tap without looking.
-          Spacing between tiles is generous — no crowding.
-        */}
         <div className="grid grid-cols-2 gap-3 mb-10">
-          {TILES.map((tile, i) => (
-            <Tile key={tile.id} tile={tile} delay={i * 0.06 + 0.1} />
-          ))}
+          {TILES.map((tile, i) => {
+            // Personalise AI tile if we know their interest
+            const personalised = tile.id === 'ai' && aiMemory
+              ? { ...tile, sub: `${aiMemory.stars}⭐ earned · loves ${aiMemory.interest} · pick up where you left off` }
+              : tile;
+            return <Tile key={tile.id} tile={personalised} delay={i * 0.06 + 0.1} />;
+          })}
         </div>
 
         {/* ── TRUST — ultra minimal, not patronising ─────────── */}
