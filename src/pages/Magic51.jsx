@@ -37,7 +37,7 @@ const SUBJECTS = [
       return map[vibe?.id] || "Ask me literally anything. I'll teach you through what YOU love. No servers watching.";
     },
     btn: "Ask me 💬",
-    url: '/Learn51AI',
+    url: '/AskMeAnything',
     colors: { bg1: '#0a0020', bg2: '#1e0050', bg3: '#4f20a0', spot: '#c084fc', text: '#e9d5ff' },
     showInline: true, // render Ask & Voice inline
   },
