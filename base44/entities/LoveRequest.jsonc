@@ -1,0 +1,103 @@
+{
+  "name": "LoveRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the basic need or humanitarian cause."
+    },
+    "description": {
+      "type": "string",
+      "description": "A heartfelt description of the need."
+    },
+    "price_gmt": {
+      "type": "number",
+      "description": "The amount needed in Love (\u2764\ufe0f)."
+    },
+    "item_type": {
+      "type": "string",
+      "enum": [
+        "Food & Groceries",
+        "Housing & Utilities",
+        "Healthcare & Medicine",
+        "Transport & Travel",
+        "Education & Learning",
+        "Clothing & Essentials",
+        "Technology & Communication",
+        "Dreams & Projects",
+        "Humanitarian Aid",
+        "Emergency Support",
+        "Gift Vouchers"
+      ],
+      "description": "The type of basic human need or gift."
+    },
+    "location_type": {
+      "type": "string",
+      "enum": [
+        "global",
+        "country",
+        "city",
+        "local"
+      ],
+      "description": "Geographic scope"
+    },
+    "target_location": {
+      "type": "string",
+      "description": "Specific location if applicable"
+    },
+    "urgency_level": {
+      "type": "string",
+      "enum": [
+        "immediate",
+        "daily",
+        "weekly",
+        "long_term"
+      ],
+      "description": "How urgent this need is"
+    },
+    "funded_gmt": {
+      "type": "number",
+      "description": "Amount of Love already sent for this need.",
+      "default": 0
+    },
+    "is_recurring": {
+      "type": "boolean",
+      "description": "Can this need receive love multiple times?",
+      "default": true
+    },
+    "local_currency_equivalent": {
+      "type": "string",
+      "description": "What this costs in local currency (e.g., '$5 USD', '\u00a33.50 GBP')"
+    },
+    "age_appropriate": {
+      "type": "string",
+      "enum": [
+        "all_ages",
+        "children",
+        "teens",
+        "adults",
+        "seniors"
+      ],
+      "default": "all_ages",
+      "description": "Target demographic for the love."
+    },
+    "image_url": {
+      "type": "string",
+      "description": "A representative, non-exploitative image of the need or location."
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "price_gmt",
+    "item_type"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

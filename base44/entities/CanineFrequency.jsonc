@@ -1,0 +1,37 @@
+{
+  "name": "CanineFrequency",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the healing frequency for canines."
+    },
+    "description": {
+      "type": "string",
+      "description": "What this frequency is designed to heal or nurture in a dog's soul."
+    },
+    "freq": {
+      "type": "number",
+      "description": "The frequency in Hz."
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "Heart",
+        "Shield",
+        "Home",
+        "Waves",
+        "Sun"
+      ],
+      "default": "Heart"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "freq"
+  ],
+  "rls": {
+    "read": {}
+  }
+}

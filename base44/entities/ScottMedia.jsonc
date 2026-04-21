@@ -1,0 +1,94 @@
+{
+  "name": "ScottMedia",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "media_type": {
+      "type": "string",
+      "enum": [
+        "photo",
+        "video",
+        "reel",
+        "story",
+        "tiktok",
+        "press_kit",
+        "album_art"
+      ],
+      "description": "Type of media"
+    },
+    "title": {
+      "type": "string",
+      "description": "What is it"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL to media file"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "Thumbnail preview"
+    },
+    "posted_where": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Instagram, TikTok, press release, etc"
+    },
+    "posted_when": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When it went live"
+    },
+    "rights_owner": {
+      "type": "string",
+      "description": "Who owns this (artist, photographer, label)"
+    },
+    "can_repost": {
+      "type": "boolean",
+      "default": true,
+      "description": "Can we reuse this?"
+    },
+    "vibe": {
+      "type": "string",
+      "enum": [
+        "fire",
+        "chill",
+        "professional",
+        "backstage",
+        "fans",
+        "promo"
+      ],
+      "description": "What's the vibe"
+    },
+    "ai_caption": {
+      "type": "string",
+      "description": "AI-generated caption idea"
+    },
+    "engagement": {
+      "type": "string",
+      "description": "Quick note on how it performed (not metrics, just 'went off' or 'quiet')"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Context, photographer credit, etc"
+    }
+  },
+  "required": [
+    "artist_id",
+    "media_type",
+    "title",
+    "file_url"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

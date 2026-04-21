@@ -1,0 +1,96 @@
+{
+  "name": "ScottContract",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "contract_type": {
+      "type": "string",
+      "enum": [
+        "performance",
+        "recording",
+        "management",
+        "publishing",
+        "split_sheet",
+        "work_for_hire",
+        "other"
+      ],
+      "description": "Type of contract"
+    },
+    "title": {
+      "type": "string",
+      "description": "Contract title"
+    },
+    "generated_html": {
+      "type": "string",
+      "description": "AI-generated contract HTML (legally sound + branded)"
+    },
+    "pdf_url": {
+      "type": "string",
+      "description": "URL to signed PDF"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "sent",
+        "signed",
+        "expired"
+      ],
+      "default": "draft"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Contract value in \u00a3"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "terms": {
+      "type": "object",
+      "description": "Key contract terms",
+      "properties": {
+        "payment_schedule": {
+          "type": "string"
+        },
+        "deliverables": {
+          "type": "string"
+        },
+        "rights": {
+          "type": "string"
+        },
+        "termination": {
+          "type": "string"
+        }
+      }
+    },
+    "signed_by_artist_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signed_by_scott_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "artist_id",
+    "contract_type",
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

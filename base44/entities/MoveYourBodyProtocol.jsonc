@@ -1,0 +1,31 @@
+{
+  "name": "MoveYourBodyProtocol",
+  "description": "The sacred protocol defining planetary healing as a physical, joyful, and rhythmic act. It connects the soul of house music to the act of cleaning our home. The revolution will be a dance.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "MOVE.YOUR.BODY.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Healing is not a chore. It is a dance. Move your body to heal the planet."
+    },
+    "source_frequency": {
+      "type": "string",
+      "description": "The sacred text that provides the rhythm for this protocol.",
+      "default": "Marshall Jefferson - Move Your Body (The House Music Anthem)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

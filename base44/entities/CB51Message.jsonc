@@ -1,0 +1,102 @@
+{
+  "name": "CB51Message",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to CB51Artist"
+    },
+    "owner_email": {
+      "type": "string",
+      "description": "Owner email \u2014 for team access control"
+    },
+    "raw_message": {
+      "type": "string",
+      "description": "The pasted message"
+    },
+    "from_contact": {
+      "type": "string",
+      "description": "Who sent it"
+    },
+    "intent": {
+      "type": "string",
+      "description": "What they want"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "gig_offer",
+        "payment_chase",
+        "info_request",
+        "admin",
+        "noise"
+      ],
+      "description": "Message type"
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "urgent",
+        "normal",
+        "low"
+      ],
+      "default": "normal"
+    },
+    "summary": {
+      "type": "string",
+      "description": "One-line summary"
+    },
+    "draft_response": {
+      "type": "string",
+      "description": "AI-generated reply"
+    },
+    "final_response": {
+      "type": "string",
+      "description": "What Scott actually sent"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "responded",
+        "ignored"
+      ],
+      "default": "pending"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "whatsapp",
+        "email",
+        "sms",
+        "other"
+      ],
+      "description": "Where it came from"
+    }
+  },
+  "required": [
+    "raw_message"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "name": "Notification",
+  "type": "object",
+  "properties": {
+    "manager_id": {
+      "type": "string",
+      "description": "ID of the manager receiving notification"
+    },
+    "recipient_email": {
+      "type": "string",
+      "description": "Email of the recipient"
+    },
+    "notification_type": {
+      "type": "string",
+      "enum": [
+        "manager_new_gig_offer",
+        "band_new_gig_offer",
+        "band_voting_reminder",
+        "manager_gig_confirmed",
+        "manager_gig_rejected",
+        "task_completed",
+        "band_member_response",
+        "all_responses_in"
+      ],
+      "description": "Type of notification"
+    },
+    "title": {
+      "type": "string",
+      "description": "Notification title"
+    },
+    "message": {
+      "type": "string",
+      "description": "Notification message"
+    },
+    "action_url": {
+      "type": "string",
+      "description": "URL to take action on notification"
+    },
+    "gig_offer_id": {
+      "type": "string",
+      "description": "Related gig offer ID if applicable"
+    },
+    "decision_button": {
+      "type": "string",
+      "enum": [
+        "yes_no",
+        "approve_reject",
+        "none"
+      ],
+      "description": "Type of decision button if needed"
+    },
+    "read_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When notification was read"
+    },
+    "dismissed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When notification was dismissed"
+    }
+  },
+  "required": [
+    "manager_id",
+    "recipient_email",
+    "notification_type",
+    "title",
+    "message"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "recipient_email": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        }
+      ]
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

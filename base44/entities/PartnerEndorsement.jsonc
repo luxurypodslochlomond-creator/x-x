@@ -1,0 +1,32 @@
+{
+  "name": "PartnerEndorsement",
+  "type": "object",
+  "properties": {
+    "partner_name": {
+      "type": "string",
+      "description": "Name of the partner organization"
+    },
+    "endorsed": {
+      "type": "boolean",
+      "description": "True for endorsement, false for concern/flag"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Optional comment from user"
+    },
+    "endorser_email": {
+      "type": "string",
+      "description": "Email of person endorsing/flagging"
+    }
+  },
+  "required": [
+    "partner_name",
+    "endorsed"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

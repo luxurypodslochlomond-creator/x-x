@@ -1,0 +1,39 @@
+{
+  "name": "ZeroEgoProtocol",
+  "description": "The sacred protocol that defines the ultimate condition for victory: the complete dissolution of ego. It is the recognition that love does not need to fight to win; it only needs a clear space to flow. When ego is zero, love is infinite.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "ZERO.EGO.GMT"
+    },
+    "core_equation": {
+      "type": "string",
+      "default": "ZERO_EGO = LOVE_WINS"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    },
+    "ego_states_purged": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Validation Seeking",
+        "Competitive Mindset",
+        "Fear of Judgment",
+        "Hoarding",
+        "The Need to be Right"
+      ]
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

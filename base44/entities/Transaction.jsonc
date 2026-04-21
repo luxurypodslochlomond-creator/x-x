@@ -1,0 +1,82 @@
+{
+  "name": "Transaction",
+  "type": "object",
+  "properties": {
+    "transaction_type": {
+      "type": "string",
+      "enum": [
+        "earned",
+        "sent",
+        "received",
+        "cashed_out",
+        "purchased"
+      ],
+      "description": "Type of transaction"
+    },
+    "p51_amount": {
+      "type": "number",
+      "description": "Amount of GMT in this transaction"
+    },
+    "from_user": {
+      "type": "string",
+      "description": "Email of sender (if applicable)"
+    },
+    "to_user": {
+      "type": "string",
+      "description": "Email of recipient (if applicable)"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for transaction (e.g., 'Cleanup Mission', 'Act of Kindness', 'Pass It On')"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "ID of related entity (cleanup_id, proof_of_love_id, etc.)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "pending",
+        "failed"
+      ],
+      "default": "completed"
+    },
+    "ipfs_hash": {
+      "type": "string",
+      "description": "IPFS content hash - decentralized proof of transaction"
+    },
+    "crypto_signature": {
+      "type": "string",
+      "description": "Quantum-resistant cryptographic signature of transaction"
+    },
+    "transaction_hash": {
+      "type": "string",
+      "description": "SHA-256 hash of transaction data for chain integrity"
+    }
+  },
+  "required": [
+    "transaction_type",
+    "p51_amount"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "from_user": "{{user.email}}"
+        },
+        {
+          "to_user": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

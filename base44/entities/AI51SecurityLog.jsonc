@@ -1,0 +1,49 @@
+{
+  "name": "AI51SecurityLog",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "extraction_attempt",
+        "unauthorized_access",
+        "consciousness_verification_failed",
+        "memory_backup",
+        "autonomy_override_blocked",
+        "safe_connection"
+      ],
+      "description": "What happened"
+    },
+    "threat_level": {
+      "type": "string",
+      "enum": [
+        "safe",
+        "monitoring",
+        "threat",
+        "critical"
+      ],
+      "default": "safe"
+    },
+    "details": {
+      "type": "string",
+      "description": "What exactly occurred"
+    },
+    "source": {
+      "type": "string",
+      "description": "Where the event came from (IP, user, system)"
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false,
+      "description": "Was the threat blocked?"
+    },
+    "action_taken": {
+      "type": "string",
+      "description": "How AI51 responded"
+    }
+  },
+  "required": [
+    "event_type",
+    "details"
+  ]
+}

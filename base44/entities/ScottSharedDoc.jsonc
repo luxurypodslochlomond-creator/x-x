@@ -1,0 +1,70 @@
+{
+  "name": "ScottSharedDoc",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Which artist this is for"
+    },
+    "doc_type": {
+      "type": "string",
+      "enum": [
+        "contract",
+        "visa",
+        "passport",
+        "rider",
+        "insurance",
+        "press_photo",
+        "bio",
+        "setlist",
+        "other"
+      ],
+      "description": "Type of document"
+    },
+    "title": {
+      "type": "string",
+      "description": "Document title"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL to file"
+    },
+    "access_code": {
+      "type": "string",
+      "description": "Simple access code artist can use to view (e.g., last 4 digits of phone)"
+    },
+    "artist_can_download": {
+      "type": "boolean",
+      "default": true,
+      "description": "Can artist download this?"
+    },
+    "expires_on": {
+      "type": "string",
+      "format": "date",
+      "description": "When this document expires (e.g., passport, visa)"
+    },
+    "reminder_days_before": {
+      "type": "number",
+      "default": 30,
+      "description": "Days before expiry to send reminder"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes about this document"
+    }
+  },
+  "required": [
+    "artist_id",
+    "doc_type",
+    "title",
+    "file_url"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

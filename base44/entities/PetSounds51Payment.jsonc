@@ -1,0 +1,84 @@
+{
+  "name": "PetSounds51Payment",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Customer email"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "basic",
+        "premium",
+        "concierge"
+      ],
+      "description": "Which tier purchased"
+    },
+    "price": {
+      "type": "number",
+      "description": "Amount paid"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "AUD",
+        "CAD"
+      ],
+      "description": "Currency used"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "card",
+        "cash"
+      ],
+      "description": "How they paid"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region for cash payments"
+    },
+    "proof_url": {
+      "type": "string",
+      "description": "Cash payment proof image"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_verification",
+        "verified",
+        "rejected"
+      ],
+      "default": "pending_verification",
+      "description": "Verification status"
+    },
+    "reference": {
+      "type": "string",
+      "description": "Payment reference code"
+    },
+    "verified_by": {
+      "type": "string",
+      "description": "Admin who verified"
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When verified"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Admin notes"
+    }
+  },
+  "required": [
+    "email",
+    "tier",
+    "price",
+    "currency",
+    "payment_method"
+  ]
+}

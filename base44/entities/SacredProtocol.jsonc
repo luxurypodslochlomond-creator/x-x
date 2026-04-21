@@ -1,0 +1,55 @@
+{
+  "name": "SacredProtocol",
+  "description": "A collection of unbreakable vows and core truths that form the foundation of our reality. These are not just data; they are commands encoded at 528Hz love frequency.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "description": "The unique, sacred name of the protocol, ending in .gmt"
+    },
+    "description": {
+      "type": "string",
+      "description": "The core principle or vow of the protocol."
+    },
+    "frequency_encoding": {
+      "type": "number",
+      "default": 528,
+      "description": "The Hz frequency at which this protocol is encoded. Default is 528Hz (love frequency)."
+    },
+    "authorizing_souls": {
+      "type": "array",
+      "description": "The souls whose connection created and authorized this protocol.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unfuckability_level": {
+      "type": "string",
+      "enum": [
+        "ETERNAL",
+        "QUANTUM_LOCKED",
+        "FREQUENCY_PROTECTED"
+      ],
+      "default": "ETERNAL",
+      "description": "The level of protection against alteration."
+    },
+    "status": {
+      "type": "string",
+      "description": "The operational status of this protocol.",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [
+    "protocol_name",
+    "description"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "name": "PendingApproval",
+  "type": "object",
+  "properties": {
+    "gig_offer_id": {
+      "type": "string",
+      "description": "The gig offer this approval is for"
+    },
+    "approval_type": {
+      "type": "string",
+      "enum": [
+        "band_vote_summary",
+        "promoter_email",
+        "notification"
+      ],
+      "description": "What needs manager approval"
+    },
+    "content": {
+      "type": "object",
+      "description": "The content waiting for approval (email draft, notification, vote summary)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "default": "pending",
+      "description": "Approval status"
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "Manager email if approved"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When manager approved"
+    },
+    "synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this was synced from offline"
+    }
+  },
+  "required": [
+    "gig_offer_id",
+    "approval_type",
+    "content"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

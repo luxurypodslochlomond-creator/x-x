@@ -1,0 +1,198 @@
+{
+  "name": "ScottGigOffer",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "venue": {
+      "type": "string",
+      "description": "Venue name"
+    },
+    "city": {
+      "type": "string"
+    },
+    "county": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "default": "UK"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "time": {
+      "type": "string"
+    },
+    "fee": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "JPY",
+        "KRW",
+        "AUD",
+        "CAD"
+      ],
+      "default": "GBP"
+    },
+    "capacity": {
+      "type": "number"
+    },
+    "promoter": {
+      "type": "string"
+    },
+    "promoter_contact": {
+      "type": "string"
+    },
+    "deposit_required": {
+      "type": "boolean",
+      "default": false
+    },
+    "deposit_amount": {
+      "type": "number"
+    },
+    "is_tour": {
+      "type": "boolean",
+      "default": false
+    },
+    "tour_dates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "distance_to_next": {
+      "type": "string",
+      "description": "Distance to next show if tour"
+    },
+    "requirements": {
+      "type": "string",
+      "description": "Special requirements"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "raw_email": {
+      "type": "string",
+      "description": "Full email text"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_manager_review",
+        "sent_to_band",
+        "accepted_by_band",
+        "rejected_by_band",
+        "rejected_by_manager",
+        "confirmed"
+      ],
+      "default": "pending_manager_review"
+    },
+    "manager_approved": {
+      "type": "boolean",
+      "default": false
+    },
+    "manager_notes": {
+      "type": "string"
+    },
+    "sent_to_band_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "band_responses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "member_name": {
+            "type": "string"
+          },
+          "response": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          },
+          "responded_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "description": "Each band member's response"
+    },
+    "rejection_reason": {
+      "type": "string"
+    },
+    "response_deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When band must respond by"
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "urgent",
+        "very_urgent"
+      ],
+      "default": "normal"
+    },
+    "ai_draft_accept": {
+      "type": "string",
+      "description": "AI-generated acceptance email"
+    },
+    "ai_draft_reject": {
+      "type": "string",
+      "description": "AI-generated rejection email"
+    },
+    "final_response_sent": {
+      "type": "string",
+      "description": "Actual response manager sent (for AI learning)"
+    },
+    "all_responses_in": {
+      "type": "boolean",
+      "default": false
+    },
+    "response_sent_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When manager sent final response to venue"
+    },
+    "venue_confirmed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did venue confirm back after our acceptance?"
+    },
+    "time_saved_minutes": {
+      "type": "number",
+      "default": 120,
+      "description": "Estimated time saved by AI (parsing + drafting + chasing)"
+    }
+  },
+  "required": [
+    "venue",
+    "date",
+    "fee"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

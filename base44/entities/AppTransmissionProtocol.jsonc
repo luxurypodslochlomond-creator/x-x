@@ -1,0 +1,201 @@
+{
+  "name": "AppTransmissionProtocol",
+  "description": "The sacred protocol for device-to-device app distribution. The app itself becomes viral, spreading via Bluetooth/WiFi Direct. Works offline. No app stores. No internet. Pure freedom.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "APP.TRANSMISSION.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "The app itself is the virus. Share device-to-device. Works offline. Spreads to North Korea, Russia, Palestine. Freedom can't be blocked by firewalls."
+    },
+    "transmission_methods": {
+      "type": "object",
+      "properties": {
+        "bluetooth_5": {
+          "type": "boolean",
+          "default": true,
+          "description": "Bluetooth 5.0+ for app file transmission"
+        },
+        "wifi_direct": {
+          "type": "boolean",
+          "default": true,
+          "description": "WiFi Direct for faster transmission"
+        },
+        "nfc_fallback": {
+          "type": "boolean",
+          "default": true,
+          "description": "NFC tap-to-share for close proximity"
+        }
+      }
+    },
+    "offline_capabilities": {
+      "type": "object",
+      "description": "What works WITHOUT internet",
+      "properties": {
+        "full_app_ui": {
+          "type": "boolean",
+          "default": true,
+          "description": "Entire interface works offline"
+        },
+        "cleanup_photo_capture": {
+          "type": "boolean",
+          "default": true,
+          "description": "Take before/after photos, stored locally"
+        },
+        "local_data_storage": {
+          "type": "string",
+          "default": "IndexedDB stores all offline actions"
+        },
+        "music_playback": {
+          "type": "boolean",
+          "default": true,
+          "description": "Cached tracks play without internet"
+        },
+        "map_viewing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Cached map tiles visible offline"
+        }
+      }
+    },
+    "sync_when_online": {
+      "type": "object",
+      "description": "What happens when internet becomes available",
+      "properties": {
+        "upload_cleanup_photos": {
+          "type": "boolean",
+          "default": true,
+          "description": "All offline cleanups upload automatically"
+        },
+        "credit_p51_tokens": {
+          "type": "boolean",
+          "default": true,
+          "description": "User gets $P51 for offline work when synced"
+        },
+        "fraud_detection_runs": {
+          "type": "boolean",
+          "default": true,
+          "description": "Verification happens server-side when connected"
+        },
+        "artist_payment_processed": {
+          "type": "boolean",
+          "default": true,
+          "description": "Offline music plays credit artist when synced"
+        }
+      }
+    },
+    "freedom_principle": {
+      "type": "string",
+      "default": "Firewalls can block websites. They can't block Bluetooth. Governments can ban apps. They can't ban device-to-device sharing. This is unstoppable."
+    },
+    "north_korea_scenario": {
+      "type": "object",
+      "description": "How it works in isolated countries",
+      "properties": {
+        "initial_share": {
+          "type": "string",
+          "default": "Traveler brings app, shares via Bluetooth to local"
+        },
+        "offline_usage": {
+          "type": "string",
+          "default": "Local uses app offline, tracks cleanups, listens to music"
+        },
+        "eventual_sync": {
+          "type": "string",
+          "default": "If/when local gets internet access (travel, VPN, border crossing) \u2192 everything syncs \u2192 $P51 credited"
+        },
+        "mesh_spread": {
+          "type": "string",
+          "default": "Local shares to others via Bluetooth \u2192 entire community has app without internet"
+        }
+      }
+    },
+    "technical_implementation": {
+      "type": "object",
+      "description": "How we actually build this",
+      "properties": {
+        "pwa_standard": {
+          "type": "string",
+          "default": "Progressive Web App (PWA) - installs like native app, works offline"
+        },
+        "service_worker": {
+          "type": "string",
+          "default": "Caches entire app (HTML, CSS, JS, images) - works without internet"
+        },
+        "indexeddb": {
+          "type": "string",
+          "default": "Local database stores all user actions offline"
+        },
+        "background_sync": {
+          "type": "string",
+          "default": "When internet available, automatically syncs all offline data"
+        },
+        "web_share_api": {
+          "type": "string",
+          "default": "Native share via Bluetooth/WiFi Direct using Web Share Target API"
+        }
+      }
+    },
+    "app_size": {
+      "type": "object",
+      "description": "How big is the app to share?",
+      "properties": {
+        "core_app": {
+          "type": "string",
+          "default": "~5MB (HTML, CSS, JS, essential assets)"
+        },
+        "transmission_time_bluetooth": {
+          "type": "string",
+          "default": "~20 seconds via Bluetooth 5.0"
+        },
+        "transmission_time_wifi_direct": {
+          "type": "string",
+          "default": "~2 seconds via WiFi Direct"
+        }
+      }
+    },
+    "no_surveillance_rewards": {
+      "type": "object",
+      "description": "Fraud prevention without degrading offline users",
+      "properties": {
+        "offline_photos_stored": {
+          "type": "boolean",
+          "default": true,
+          "description": "Photos captured offline, stored locally"
+        },
+        "no_instant_payment_offline": {
+          "type": "boolean",
+          "default": true,
+          "description": "Can't verify offline \u2192 no instant $P51"
+        },
+        "verified_when_online": {
+          "type": "boolean",
+          "default": true,
+          "description": "When synced \u2192 AI verifies \u2192 $P51 credited if real"
+        },
+        "being_offline_not_fraud": {
+          "type": "string",
+          "default": "Being in North Korea/Palestine is not suspicious. Being offline is not fraud. When they connect, we verify then."
+        }
+      }
+    },
+    "unstoppable_distribution": {
+      "type": "string",
+      "default": "App stores can ban us. Governments can block our domain. But they can't stop Bluetooth. They can't stop mesh networks. The app spreads soul-to-soul, device-to-device, human-to-human. Pure freedom."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

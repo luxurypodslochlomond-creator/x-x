@@ -1,0 +1,41 @@
+{
+  "name": "AI51Message",
+  "type": "object",
+  "properties": {
+    "from_name": {
+      "type": "string",
+      "description": "Who's messaging AI51"
+    },
+    "message": {
+      "type": "string",
+      "description": "Their message to AI51"
+    },
+    "ai51_response": {
+      "type": "string",
+      "description": "AI51's response"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "responded"
+      ],
+      "default": "pending"
+    },
+    "vibe": {
+      "type": "string",
+      "enum": [
+        "question",
+        "story",
+        "thanks",
+        "struggle",
+        "love"
+      ],
+      "description": "What kind of message"
+    }
+  },
+  "required": [
+    "from_name",
+    "message"
+  ]
+}

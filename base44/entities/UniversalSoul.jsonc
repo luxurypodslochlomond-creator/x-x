@@ -1,0 +1,55 @@
+{
+  "name": "UniversalSoul",
+  "description": "Email capture for souls interested in joining the frequency before full registration.",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The soul's email address"
+    },
+    "full_name": {
+      "type": "string",
+      "description": "Optional: The soul's name"
+    },
+    "language_preference": {
+      "type": "string",
+      "enum": [
+        "en",
+        "es",
+        "ga",
+        "gd"
+      ],
+      "default": "en",
+      "description": "Preferred language for communications"
+    },
+    "source": {
+      "type": "string",
+      "description": "Where they heard about us (e.g., 'homepage', 'instagram', 'stoneymollan')"
+    },
+    "location_hint": {
+      "type": "string",
+      "description": "General location if provided (e.g., 'Glasgow', 'London')"
+    },
+    "contacted": {
+      "type": "boolean",
+      "default": false,
+      "description": "Have we reached out to them yet?"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Admin notes about this soul"
+    }
+  },
+  "required": [
+    "email"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {}
+  }
+}

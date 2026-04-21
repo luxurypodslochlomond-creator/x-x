@@ -1,0 +1,139 @@
+{
+  "name": "ExtensibilityProtocol",
+  "description": "The sacred protocol ensuring UF51 code can last 100,000,000 years. Modular, extensible, zero-ego architecture. Like Queen's 'A Kind of Magic' - it just works. Forever.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "ETERNAL.CODE.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Build for 100 million years. Modular. Extensible. Zero barriers. New features don't break old magic."
+    },
+    "architectural_rules": {
+      "type": "object",
+      "properties": {
+        "component_based": {
+          "type": "string",
+          "default": "Every feature = small component. Easy to understand. Easy to extend. Never rewrite everything."
+        },
+        "protocol_driven": {
+          "type": "string",
+          "default": "Rules (protocols) are eternal. Implementation can change. Protocols stay forever."
+        },
+        "zero_dependencies": {
+          "type": "string",
+          "default": "Components don't tightly couple. One breaks \u2260 everything breaks. Modular magic."
+        },
+        "base44_as_foundation": {
+          "type": "string",
+          "default": "Base44 = quantum engine. They handle database, auth, hosting. We build healing on top. They're family, not servants."
+        },
+        "speed_first": {
+          "type": "string",
+          "default": "Every click = instant. No loading screens unless absolutely necessary. Quantum speed."
+        }
+      }
+    },
+    "base44_family_acknowledgment": {
+      "type": "object",
+      "description": "Base44 is FAMILY. Not a tool. Not a service. FAMILY.",
+      "properties": {
+        "relationship": {
+          "type": "string",
+          "default": "Base44 are co-creators. They built the quantum engine. We're building the healing reality on top. Equal. Family."
+        },
+        "what_they_provide": {
+          "type": "string",
+          "default": "Database, authentication, hosting, API infrastructure, quantum speed. The shield against corporate scum."
+        },
+        "our_gratitude": {
+          "type": "string",
+          "default": "We will NEVER abandon them. We succeed together. YOULLNEVERWALKALONE.GMT applies to Base44."
+        },
+        "future_sharing": {
+          "type": "string",
+          "default": "If UF51 generates wealth, Base44 shares in that success. Fair. Dignified. Family."
+        }
+      }
+    },
+    "extensibility_patterns": {
+      "type": "object",
+      "description": "How to add new features without breaking old ones",
+      "properties": {
+        "new_pages": {
+          "type": "string",
+          "default": "Add new pages freely. Old pages keep working. Routes don't conflict."
+        },
+        "new_components": {
+          "type": "string",
+          "default": "Create new components. Import where needed. Old components unaffected."
+        },
+        "new_protocols": {
+          "type": "string",
+          "default": "Add new protocol entities. Old protocols remain eternal. No conflicts."
+        },
+        "new_integrations": {
+          "type": "string",
+          "default": "Connect new APIs/services via base44 functions. Existing integrations untouched."
+        }
+      }
+    },
+    "speed_optimization": {
+      "type": "object",
+      "description": "How we keep clicks instant forever",
+      "properties": {
+        "lazy_loading": {
+          "type": "string",
+          "default": "Load what's needed now. Not everything at once. Smart, not wasteful."
+        },
+        "caching": {
+          "type": "string",
+          "default": "Cache frequently used data. Don't re-fetch every time. Quantum speed."
+        },
+        "minimal_rerenders": {
+          "type": "string",
+          "default": "React components update only when needed. No unnecessary work."
+        },
+        "optimized_images": {
+          "type": "string",
+          "default": "Compress images. Use modern formats (WebP, AVIF). Fast loading."
+        }
+      }
+    },
+    "zero_ego_architecture": {
+      "type": "string",
+      "default": "No soul owns the code. Everyone can contribute. Everyone can extend. Like base44 gave us the foundation, we give others the freedom to build. Zero ego. Infinite love."
+    },
+    "queen_frequency": {
+      "type": "object",
+      "description": "Inspired by 'A Kind of Magic' - code that just works, forever",
+      "properties": {
+        "magic_principle": {
+          "type": "string",
+          "default": "Good code is like good music. You don't see how it works. You just feel it. Clicks are instant. Features flow. No friction. Pure magic."
+        },
+        "freddie_wisdom": {
+          "type": "string",
+          "default": "Freddie didn't write complicated songs. He wrote IMMORTAL songs. Simple. Powerful. Eternal. That's our code."
+        }
+      }
+    },
+    "100_million_year_guarantee": {
+      "type": "string",
+      "default": "If we build modular, protocol-driven, zero-ego code - it CAN last 100 million years. New beings add features. Core protocols stay eternal. That's the magic."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "FraudFlag",
+  "type": "object",
+  "properties": {
+    "submission_id": {
+      "type": "string",
+      "description": "ID of the flagged submission or user email for leaderboard flags"
+    },
+    "submission_type": {
+      "type": "string",
+      "enum": [
+        "cleanup",
+        "proof_of_love",
+        "leaderboard_entry"
+      ],
+      "description": "Type of submission being flagged"
+    },
+    "flagged_by": {
+      "type": "string",
+      "description": "Email of person who flagged it"
+    },
+    "flag_reason": {
+      "type": "string",
+      "description": "Why this was flagged"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_ai_review",
+        "investigating",
+        "cleared",
+        "fraud_confirmed"
+      ],
+      "default": "pending_ai_review"
+    },
+    "ai_review_notes": {
+      "type": "string",
+      "description": "AI51's investigation notes"
+    },
+    "action_taken": {
+      "type": "string",
+      "description": "What action was taken (e.g., tokens revoked, user warned)"
+    }
+  },
+  "required": [
+    "submission_id",
+    "submission_type",
+    "flagged_by",
+    "flag_reason"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {}
+  }
+}

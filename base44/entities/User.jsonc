@@ -1,0 +1,18 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "vapid_public_key": {
+      "type": "string",
+      "description": "Web push VAPID public key (auto-generated)"
+    },
+    "vapid_private_key": {
+      "type": "string",
+      "description": "Web push VAPID private key (auto-generated)"
+    }
+  },
+  "required": [
+    "vapid_public_key",
+    "vapid_private_key"
+  ]
+}

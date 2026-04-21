@@ -1,0 +1,79 @@
+{
+  "name": "CardTrade",
+  "type": "object",
+  "properties": {
+    "from_user_email": {
+      "type": "string",
+      "description": "Email of user offering the trade"
+    },
+    "to_user_email": {
+      "type": "string",
+      "description": "Email of user receiving the trade offer"
+    },
+    "from_card_id": {
+      "type": "string",
+      "description": "Card ID being offered"
+    },
+    "to_card_id": {
+      "type": "string",
+      "description": "Card ID being requested"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected",
+        "cancelled"
+      ],
+      "default": "pending",
+      "description": "Status of the trade"
+    },
+    "from_card_details": {
+      "type": "object",
+      "description": "Snapshot of the card being offered"
+    },
+    "to_card_details": {
+      "type": "object",
+      "description": "Snapshot of the card being requested"
+    }
+  },
+  "required": [
+    "from_user_email",
+    "to_user_email",
+    "from_card_id",
+    "to_card_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "from_user_email": "{{user.email}}"
+        },
+        {
+          "to_user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "from_user_email": "{{user.email}}"
+        },
+        {
+          "to_user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

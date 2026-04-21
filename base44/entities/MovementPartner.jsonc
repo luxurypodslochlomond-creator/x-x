@@ -1,0 +1,43 @@
+{
+  "name": "MovementPartner",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the allied green movement organization."
+    },
+    "description": {
+      "type": "string",
+      "description": "A brief on their mission."
+    },
+    "website_url": {
+      "type": "string",
+      "description": "Their official website."
+    },
+    "gmt_wallet_address": {
+      "type": "string",
+      "description": "The wallet address where they can receive Love Currency."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending Alignment",
+        "Active Partner",
+        "Past Partner"
+      ],
+      "default": "Pending Alignment"
+    }
+  },
+  "required": [
+    "name",
+    "website_url"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

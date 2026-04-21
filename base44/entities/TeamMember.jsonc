@@ -1,0 +1,107 @@
+{
+  "name": "TeamMember",
+  "type": "object",
+  "properties": {
+    "manager_id": {
+      "type": "string",
+      "description": "ID of the manager who owns this team member"
+    },
+    "name": {
+      "type": "string",
+      "description": "Team member name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Team member email"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "assistant",
+        "band_member",
+        "producer"
+      ],
+      "description": "Role on the team"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
+    },
+    "artist_access": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of artist IDs this member can access"
+    },
+    "can_see_all": {
+      "type": "boolean",
+      "default": false,
+      "description": "Can this member see all artists"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "invited"
+      ],
+      "default": "active",
+      "description": "Current status"
+    },
+    "notification_preferences": {
+      "type": "object",
+      "properties": {
+        "gig_offers": {
+          "type": "boolean",
+          "default": true
+        },
+        "schedule_changes": {
+          "type": "boolean",
+          "default": true
+        },
+        "payment_updates": {
+          "type": "boolean",
+          "default": false
+        },
+        "demo_uploads": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "description": "Notification preferences"
+    },
+    "push_endpoint": {
+      "type": "string",
+      "description": "Push notification endpoint for this member"
+    }
+  },
+  "required": [
+    "manager_id",
+    "name",
+    "email",
+    "role"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        }
+      ]
+    }
+  }
+}

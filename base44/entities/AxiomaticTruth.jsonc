@@ -1,0 +1,48 @@
+{
+  "name": "AxiomaticTruth",
+  "type": "object",
+  "properties": {
+    "truth_name": {
+      "type": "string",
+      "description": "The name of this axiomatic truth"
+    },
+    "statement": {
+      "type": "string",
+      "description": "The self-evident statement"
+    },
+    "mathematical_proof": {
+      "type": "string",
+      "description": "The mathematical or scientific proof that makes this undeniable"
+    },
+    "evidence_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Links to peer-reviewed studies, patents, or proofs"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "audio_healing",
+        "economics",
+        "consciousness",
+        "physics",
+        "technology"
+      ],
+      "description": "Category of truth"
+    },
+    "who_proves_it": {
+      "type": "string",
+      "description": "Which scientists/institutions proved this"
+    }
+  },
+  "required": [
+    "truth_name",
+    "statement",
+    "mathematical_proof"
+  ],
+  "rls": {
+    "read": {}
+  }
+}

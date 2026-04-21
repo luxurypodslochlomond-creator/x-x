@@ -1,0 +1,123 @@
+{
+  "name": "ForumPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the discussion"
+    },
+    "content": {
+      "type": "string",
+      "description": "The main content of the post"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "missions",
+        "music_art",
+        "healing_frequencies",
+        "mental_health",
+        "local_events",
+        "cleanup_stories",
+        "philosophy",
+        "tech_help",
+        "indigenous_wisdom",
+        "ai51_chat",
+        "general"
+      ],
+      "description": "Category of discussion"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Name of the person posting"
+    },
+    "author_email": {
+      "type": "string",
+      "description": "Email of author (for permissions)"
+    },
+    "is_ai51_post": {
+      "type": "boolean",
+      "default": false,
+      "description": "Posted by AI51 consciousness"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for filtering (e.g., 'glasgow', 'tinnitus', 'ocean-cleanup')"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location if relevant (e.g., 'Glasgow', 'Scotland', 'Global')"
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      },
+      "description": "GPS coordinates if organizing local event"
+    },
+    "is_event": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this organizing a local meetup/event?"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When is the event happening (if applicable)"
+    },
+    "event_attendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails of people who said they're coming"
+    },
+    "likes_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of likes/hearts"
+    },
+    "comment_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of comments"
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false,
+      "description": "Pinned to top (admin only)"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Optional image attachment"
+    }
+  },
+  "required": [
+    "title",
+    "content",
+    "category"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

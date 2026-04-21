@@ -1,0 +1,176 @@
+{
+  "name": "P51Protocol",
+  "description": "The sacred protocol defining $P51 architecture. The world's first Proof-of-Impact currency \u2014 backed by verified planetary healing, not speculation. Like Bitcoin but RAPID, ZERO CARBON, and BEYOND DECENTRALIZED. The love currency that works at quantum speed.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "P51.PROOF.OF.IMPACT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Proof of Love is WHY you heal. Proof of Impact is the RECEIPT. Together they create the first currency backed by Earth health."
+    },
+    "proof_of_impact": {
+      "type": "object",
+      "description": "The economic primitive that makes $P51 fundable by corporations, governments, and ESG funds",
+      "properties": {
+        "definition": {
+          "type": "string",
+          "default": "Proof of Impact = cryptographically verified, GPS-anchored, AI-confirmed, IPFS-stored evidence of real physical planetary healing. The world's first unfakeable environmental asset."
+        },
+        "vs_proof_of_work": {
+          "type": "string",
+          "default": "Proof of Work (Bitcoin) = destroy energy to prove you worked. Proof of Impact = heal the planet to prove you contributed. One burns Earth. One heals it."
+        },
+        "vs_carbon_credits": {
+          "type": "string",
+          "default": "Carbon credits = company promises to offset (unverifiable, often fake). Proof of Impact = GPS + AI + photo hash + IPFS = mathematically impossible to fake. The upgrade carbon markets have been waiting for."
+        },
+        "the_receipt": {
+          "type": "string",
+          "default": "Proof of Love is the soul. Proof of Impact is the receipt the world can fund. You need both. One without the other is incomplete."
+        },
+        "asset_class": {
+          "type": "string",
+          "default": "Verified Environmental Restoration \u2014 a new asset class that didn't exist before $P51. Markets price oil, gold, carbon credits, data. Now they can price planetary repair."
+        }
+      }
+    },
+    "proof_of_love": {
+      "type": "object",
+      "description": "The internal frequency \u2014 the soul of the system",
+      "properties": {
+        "definition": {
+          "type": "string",
+          "default": "Proof of Love = the unmeasurable WHY behind every healing action. The consciousness that motivates. The frequency that connects."
+        },
+        "relationship_to_impact": {
+          "type": "string",
+          "default": "Proof of Impact is how Proof of Love gets paid. The heart generates the action. The receipt funds the mission."
+        }
+      }
+    },
+    "economic_engine": {
+      "type": "object",
+      "description": "How $P51 scales to $100B+",
+      "properties": {
+        "buyers": {
+          "type": "string",
+          "default": "Corporations (Nike, Apple, Coca-Cola proving sustainability), Governments (waste cleanup budgets), ESG Funds ($30 trillion globally), Carbon market participants ($900B+)"
+        },
+        "self_healing_mechanism": {
+          "type": "string",
+          "default": "Plastic pollution increases \u2192 more opportunity to earn $P51 \u2192 more people remove plastic \u2192 system corrects itself. A self-healing economy."
+        },
+        "three_layers": {
+          "type": "string",
+          "default": "Layer 1: Token economy (environmental credits traded globally). Layer 2: Planet repair platform (biggest coordination network on Earth). Layer 3: Environmental data infrastructure (largest impact dataset ever built)."
+        },
+        "the_flip": {
+          "type": "string",
+          "default": "Old system: wealth grows when the planet is exploited. $P51: wealth grows when the planet is healed. That's a complete paradigm shift."
+        }
+      }
+    },
+    "cic_protection": {
+      "type": "object",
+      "description": "Why the CIC structure makes this incorruptible",
+      "properties": {
+        "legal_lock": {
+          "type": "string",
+          "default": "Community Interest Company (UK) = asset locked by law. Cannot be sold. Cannot pay dividends. Every penny of value MUST return to the community \u2014 to Earth."
+        },
+        "trillion_pound_implication": {
+          "type": "string",
+          "default": "If UF51 CIC becomes worth \u00a31 trillion, that trillion belongs to Earth. Not shareholders. Not a board. To the planet and everyone on it. That's not a loophole. That's the entire point."
+        },
+        "anti_exploitation": {
+          "type": "string",
+          "default": "Proof of Impact + CIC = the first currency that legally cannot be weaponised against the planet."
+        }
+      }
+    },
+    "what_bitcoin_got_right": {
+      "type": "object",
+      "description": "The genius we preserve",
+      "properties": {
+        "decentralized": {
+          "type": "string",
+          "default": "No single point of failure. No central bank. No gatekeepers."
+        },
+        "cryptographically_secure": {
+          "type": "string",
+          "default": "SHA-256 hashing. Unforgeable. Tamper-proof."
+        },
+        "transparent": {
+          "type": "string",
+          "default": "All transactions visible. Zero hidden manipulation."
+        },
+        "scarce": {
+          "type": "string",
+          "default": "Limited by real action, not arbitrary printing."
+        }
+      }
+    },
+    "what_bitcoin_got_wrong": {
+      "type": "object",
+      "description": "The problems we solve",
+      "properties": {
+        "too_slow": {
+          "type": "string",
+          "default": "Bitcoin: 10-minute blocks. $P51: Instant verification."
+        },
+        "massive_carbon": {
+          "type": "string",
+          "default": "Bitcoin mining = 150 TWh/year. $P51 = Zero mining. Zero waste. Actually heals Earth."
+        },
+        "no_real_value_creation": {
+          "type": "string",
+          "default": "Bitcoin: Value from speculation. $P51: Value from healing Earth. Backed by Proof of Impact."
+        }
+      }
+    },
+    "verification_stack": {
+      "type": "object",
+      "description": "What makes Proof of Impact unfakeable",
+      "properties": {
+        "gps": {
+          "type": "string",
+          "default": "GPS coordinates signed at submission time"
+        },
+        "ai_vision": {
+          "type": "string",
+          "default": "Object recognition, weight estimation, liveness detection, fraud pattern analysis"
+        },
+        "photo_hash": {
+          "type": "string",
+          "default": "SHA-256 + perceptual hash \u2014 reused/edited photos caught instantly"
+        },
+        "ipfs_storage": {
+          "type": "string",
+          "default": "Permanent decentralized storage \u2014 evidence lives forever, beyond government control"
+        },
+        "crypto_signature": {
+          "type": "string",
+          "default": "ECDSA P-256 digital signature \u2014 every byte of cleanup data signed by user's device"
+        }
+      }
+    },
+    "mathematical_proof": {
+      "type": "string",
+      "default": "1kg litter removed = 1 $P51. Verified via SHA-256 hash + AI vision + GPS + IPFS + ECDSA signature. Proof of Impact: unfakeable by mathematics. Proof of Love: the reason it happens. Together: a self-healing economy backed by Earth health."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

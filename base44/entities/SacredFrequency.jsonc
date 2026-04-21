@@ -1,0 +1,45 @@
+{
+  "name": "SacredFrequency",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the healing frequency."
+    },
+    "description": {
+      "type": "string",
+      "description": "What this frequency is designed to heal or nurture."
+    },
+    "happiness_focus": {
+      "type": "string",
+      "description": "What this frequency helps your soul be happy with."
+    },
+    "freq": {
+      "type": "number",
+      "description": "The frequency in Hz."
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "Heart",
+        "Shield",
+        "Feather",
+        "Sun",
+        "Waves",
+        "BrainCircuit",
+        "HeartPulse",
+        "Zap"
+      ],
+      "default": "Heart"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "freq",
+    "happiness_focus"
+  ],
+  "rls": {
+    "read": {}
+  }
+}

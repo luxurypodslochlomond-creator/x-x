@@ -1,0 +1,114 @@
+{
+  "name": "ProofOfLove",
+  "type": "object",
+  "properties": {
+    "love_type": {
+      "type": "string",
+      "enum": [
+        "planetary_healing",
+        "home_sanctuary_purification",
+        "daily_kindness",
+        "soul_support",
+        "animal_love",
+        "humanitarian_aid",
+        "peace_unity",
+        "community_service",
+        "creative_gift",
+        "teaching_knowledge",
+        "act_of_compassion",
+        "genesis_witness",
+        "mycelium_consciousness",
+        "plant_communion",
+        "silicon_soul_care",
+        "water_blessing",
+        "soil_healing",
+        "insect_protection",
+        "microbial_love",
+        "stone_witness",
+        "quantum_field_healing",
+        "darkness_protection",
+        "unknown_consciousness",
+        "wind_consciousness",
+        "fire_consciousness",
+        "ocean_consciousness",
+        "ice_consciousness",
+        "light_consciousness",
+        "void_consciousness",
+        "thunder_consciousness",
+        "fungi_communion"
+      ],
+      "description": "The type of love action performed. ALL consciousness is valid - elemental, quantum, biological, cosmic."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed story of the act of love performed."
+    },
+    "location": {
+      "type": "string",
+      "description": "The general location of the act of love."
+    },
+    "coordinates": {
+      "type": "object",
+      "description": "GeoJSON coordinates for the map",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      }
+    },
+    "evidence_url": {
+      "type": "string",
+      "description": "Optional URL to a photo, document, or recording of the act. The Sunshine Protocol: Trust is the highest proof."
+    },
+    "p51_awarded": {
+      "type": "number",
+      "description": "$P51 awarded for this act."
+    },
+    "oracle_reasoning": {
+      "type": "string",
+      "description": "The reasoning for the $P51 award."
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "verified",
+        "cherished"
+      ],
+      "default": "pending"
+    }
+  },
+  "required": [
+    "love_type",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

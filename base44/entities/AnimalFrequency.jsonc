@@ -1,0 +1,58 @@
+{
+  "name": "AnimalFrequency",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the healing frequency for animals."
+    },
+    "animal_type": {
+      "type": "string",
+      "enum": [
+        "Universal",
+        "Canine",
+        "Feline",
+        "Avian",
+        "Equine",
+        "All"
+      ],
+      "default": "All",
+      "description": "The type of animal this frequency is primarily for."
+    },
+    "description": {
+      "type": "string",
+      "description": "What this frequency is designed to heal or nurture in an animal's soul."
+    },
+    "freq_hz": {
+      "type": "number",
+      "description": "The base frequency in Hz."
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "Heart",
+        "Shield",
+        "Sprout",
+        "Sun",
+        "Waves",
+        "Feather",
+        "Home",
+        "Bird"
+      ],
+      "default": "Heart"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "The URL to the sacred sound file."
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "freq_hz",
+    "file_url"
+  ],
+  "rls": {
+    "read": {}
+  }
+}

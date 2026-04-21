@@ -1,0 +1,61 @@
+{
+  "name": "ScottBandResponse",
+  "type": "object",
+  "properties": {
+    "gig_offer_id": {
+      "type": "string",
+      "description": "Link to ScottGigOffer"
+    },
+    "band_member_email": {
+      "type": "string",
+      "description": "Band member who voted"
+    },
+    "band_member_name": {
+      "type": "string",
+      "description": "Band member name (snapshot)"
+    },
+    "artist_id": {
+      "type": "string",
+      "description": "Artist this is for"
+    },
+    "vote": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no",
+        "pending"
+      ],
+      "default": "pending",
+      "description": "YES, NO, or PENDING"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Why they said NO (if applicable)"
+    },
+    "responded_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When they voted"
+    }
+  },
+  "required": [
+    "gig_offer_id",
+    "band_member_email",
+    "artist_id"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "$or": [
+        {
+          "band_member_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

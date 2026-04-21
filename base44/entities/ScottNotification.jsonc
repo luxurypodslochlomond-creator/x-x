@@ -1,0 +1,61 @@
+{
+  "name": "ScottNotification",
+  "type": "object",
+  "properties": {
+    "recipient_email": {
+      "type": "string",
+      "description": "Email of who gets the notification"
+    },
+    "notification_type": {
+      "type": "string",
+      "enum": [
+        "band_gig_offer",
+        "manager_votes_in",
+        "band_confirmed",
+        "manager_confirmed"
+      ],
+      "description": "Type of notification"
+    },
+    "gig_offer_id": {
+      "type": "string",
+      "description": "Related gig offer ID"
+    },
+    "title": {
+      "type": "string",
+      "description": "Notification title"
+    },
+    "message": {
+      "type": "string",
+      "description": "Notification message"
+    },
+    "decision_button": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no",
+        null
+      ],
+      "description": "If yes/no button should appear"
+    },
+    "action_url": {
+      "type": "string",
+      "description": "URL to open when tapped"
+    },
+    "read_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When user read the notification"
+    },
+    "dismissed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When user dismissed the notification"
+    }
+  },
+  "required": [
+    "recipient_email",
+    "notification_type",
+    "title",
+    "message"
+  ]
+}

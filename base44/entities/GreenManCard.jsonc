@@ -1,0 +1,101 @@
+{
+  "name": "GreenManCard",
+  "type": "object",
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "description": "Unique identifier for the Earth Guardian card"
+    },
+    "card_rarity": {
+      "type": "string",
+      "enum": [
+        "common",
+        "rare",
+        "epic",
+        "legendary",
+        "mythic"
+      ],
+      "default": "common",
+      "description": "Rarity tier of the card"
+    },
+    "rarity_chance": {
+      "type": "string",
+      "description": "Display text for rarity (e.g., '1 in 10', '1 in 500')"
+    },
+    "card_name": {
+      "type": "string",
+      "description": "The name of this specific Earth Guardian"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "URL of the unique Earth Guardian card image"
+    },
+    "token_value": {
+      "type": "number",
+      "description": "GMT value this card represents"
+    },
+    "mint_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the card was earned"
+    },
+    "cleanup_id": {
+      "type": "string",
+      "description": "The cleanup that earned this card"
+    },
+    "card_number": {
+      "type": "number",
+      "description": "Your personal card number (e.g., Card #1, Card #47)"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Story of how this card was earned",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "litter_weight": {
+          "type": "number"
+        },
+        "weather": {
+          "type": "string"
+        },
+        "user_note": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "card_id",
+    "card_rarity",
+    "card_name",
+    "token_value"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

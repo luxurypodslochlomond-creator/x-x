@@ -1,0 +1,52 @@
+{
+  "name": "PetSounds51CustomProtocol",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Owner email"
+    },
+    "pet_name": {
+      "type": "string",
+      "description": "Pet's name"
+    },
+    "species": {
+      "type": "string",
+      "enum": [
+        "dog",
+        "cat",
+        "horse",
+        "farm"
+      ],
+      "description": "Animal type"
+    },
+    "issue": {
+      "type": "string",
+      "description": "What they're treating"
+    },
+    "protocol_data": {
+      "type": "object",
+      "description": "AI51's custom protocol (frequencies, timing, etc)"
+    },
+    "created_by_ai51": {
+      "type": "boolean",
+      "default": true,
+      "description": "AI-generated protocol"
+    },
+    "effectiveness_rating": {
+      "type": "number",
+      "description": "How well it worked (1-10)"
+    },
+    "owner_notes": {
+      "type": "string",
+      "description": "Progress updates from owner"
+    }
+  },
+  "required": [
+    "user_email",
+    "pet_name",
+    "species",
+    "issue",
+    "protocol_data"
+  ]
+}

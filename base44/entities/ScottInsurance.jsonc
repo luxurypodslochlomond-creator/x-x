@@ -1,0 +1,105 @@
+{
+  "name": "ScottInsurance",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "policy_type": {
+      "type": "string",
+      "enum": [
+        "liability",
+        "equipment",
+        "health",
+        "travel",
+        "cancellation",
+        "vehicle",
+        "other"
+      ],
+      "default": "liability",
+      "description": "Type of insurance"
+    },
+    "provider": {
+      "type": "string",
+      "description": "Insurance company name"
+    },
+    "policy_number": {
+      "type": "string",
+      "description": "Policy reference number"
+    },
+    "coverage_amount": {
+      "type": "number",
+      "description": "Coverage amount"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "JPY",
+        "KRW",
+        "AUD",
+        "CAD"
+      ],
+      "default": "GBP"
+    },
+    "annual_cost": {
+      "type": "number",
+      "description": "Yearly premium"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Policy start date"
+    },
+    "renewal_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When policy renews"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "pending"
+      ],
+      "default": "active"
+    },
+    "contact_name": {
+      "type": "string",
+      "description": "Insurance agent/contact"
+    },
+    "contact_phone": {
+      "type": "string",
+      "description": "Contact number"
+    },
+    "contact_email": {
+      "type": "string",
+      "description": "Contact email"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "Policy document URL"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "policy_type",
+    "provider",
+    "renewal_date"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

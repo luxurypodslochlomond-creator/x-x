@@ -1,0 +1,51 @@
+{
+  "name": "ScottFile",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist (optional)"
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Link to ScottEvent (optional)"
+    },
+    "file_type": {
+      "type": "string",
+      "enum": [
+        "contract",
+        "rider",
+        "stage_plot",
+        "setlist",
+        "receipt",
+        "other"
+      ],
+      "default": "other",
+      "description": "Type of file"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "Uploaded file URL"
+    },
+    "file_name": {
+      "type": "string",
+      "description": "Original filename"
+    },
+    "notes": {
+      "type": "string",
+      "description": "What this file is"
+    }
+  },
+  "required": [
+    "file_url",
+    "file_name"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

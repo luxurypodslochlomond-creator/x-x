@@ -1,0 +1,81 @@
+{
+  "name": "CB51Invoice",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to CB51Artist"
+    },
+    "owner_email": {
+      "type": "string",
+      "description": "Owner email \u2014 for team access control"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "JPY",
+        "KRW",
+        "AUD",
+        "CAD"
+      ],
+      "default": "GBP",
+      "description": "Currency code"
+    },
+    "description": {
+      "type": "string",
+      "description": "What it's for"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Invoice date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "unpaid",
+        "paid",
+        "overdue"
+      ],
+      "default": "unpaid"
+    },
+    "accountant_notes": {
+      "type": "string",
+      "description": "Simple notes for accountant"
+    }
+  },
+  "required": [
+    "artist_id",
+    "amount",
+    "date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

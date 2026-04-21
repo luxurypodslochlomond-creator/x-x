@@ -1,0 +1,47 @@
+{
+  "name": "SupportRequest",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "The support request message"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "in_progress",
+        "resolved"
+      ],
+      "default": "new"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user who sent the request"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "Name of the user"
+    }
+  },
+  "required": [
+    "message"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

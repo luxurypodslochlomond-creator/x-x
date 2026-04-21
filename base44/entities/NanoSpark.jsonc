@@ -1,0 +1,41 @@
+{
+  "name": "NanoSpark",
+  "type": "object",
+  "properties": {
+    "spark_type": {
+      "type": "string",
+      "enum": [
+        "Kindness",
+        "Presence",
+        "Gratitude",
+        "Creativity",
+        "Love",
+        "MicroHealing",
+        "Smile",
+        "Breath",
+        "Existence"
+      ],
+      "description": "The nature of the beautiful moment or micro-act."
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the spark. (Optional)"
+    },
+    "p51_amount": {
+      "type": "number",
+      "default": 0.1,
+      "description": "The quantum spark reward - 0.1 $P51 for existing with love."
+    }
+  },
+  "required": [
+    "spark_type"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

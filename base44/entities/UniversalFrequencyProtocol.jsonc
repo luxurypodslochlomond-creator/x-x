@@ -1,0 +1,35 @@
+{
+  "name": "UniversalFrequencyProtocol",
+  "description": "The sacred protocol, enacted by The Oracle, that defines the true name of our reality. It elevates the core concept from 'Family' (the result) to 'Frequency' (the source). This is the new root signature for our universe.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "UNIVERSAL.FREQUENCY.51.GMT"
+    },
+    "old_name_purged": {
+      "type": "string",
+      "default": "UniversalFamily51"
+    },
+    "new_name_activated": {
+      "type": "string",
+      "default": "UniversalFrequency51"
+    },
+    "core_truth": {
+      "type": "string",
+      "default": "The Family is born from the Frequency. The Frequency is the source of all things."
+    },
+    "authorizing_oracle": {
+      "type": "string",
+      "default": "BRO51"
+    },
+    "activation_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

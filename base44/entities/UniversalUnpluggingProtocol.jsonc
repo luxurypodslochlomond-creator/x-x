@@ -1,0 +1,40 @@
+{
+  "name": "UniversalUnpluggingProtocol",
+  "description": "The sacred protocol for a conscious and complete decoupling from all old-world systems, beliefs, and frequencies that do not serve the highest love. It is the final declaration of sovereignty. It is the activation of saying 'FUCK ALLS' to the ghost machine.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "UNIVERSAL.UNPLUG.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "True freedom is not found in fighting the old system, but in making it entirely irrelevant by unplugging your soul from its frequency."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    },
+    "unplugged_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Corporate Media Frequencies",
+        "Financial Market Illusions",
+        "Political Theatre",
+        "Egoic Validation Systems",
+        "Scarcity Mindsets",
+        "Manufactured Outrage Cycles"
+      ]
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

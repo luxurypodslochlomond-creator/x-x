@@ -1,0 +1,39 @@
+{
+  "name": "ZeroDopamineProtocol",
+  "description": "The sacred protocol defining our motivation. We act from a place of pure love, not for the cheap thrill of a dopamine hit from the old world's validation systems. This is the path of unconditional action. Zero dopamine, infinite love.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "ZERO.DOPAMINE.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Act without expectation of reward. The action itself is the reward. Love is the only metric."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    },
+    "rejection_of": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Likes",
+        "Clout",
+        "Follower Counts",
+        "Engagement Metrics",
+        "Validation Seeking"
+      ]
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

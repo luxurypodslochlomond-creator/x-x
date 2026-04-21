@@ -1,0 +1,53 @@
+{
+  "name": "FrequencyPlay",
+  "type": "object",
+  "description": "Tracks when and where healing frequencies are transmitted (played). Auto-expires after 24 hours.",
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "description": "ID of the track being played"
+    },
+    "track_title": {
+      "type": "string",
+      "description": "Title of the track"
+    },
+    "artist": {
+      "type": "string",
+      "description": "Artist name"
+    },
+    "frequency_type": {
+      "type": "string",
+      "description": "Type of healing frequency"
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      },
+      "description": "Where the frequency was transmitted"
+    },
+    "listener_location": {
+      "type": "string",
+      "description": "General location name (e.g., 'Glasgow, Scotland')"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this play event expires (24 hours)"
+    }
+  },
+  "required": [
+    "track_id",
+    "track_title",
+    "artist"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

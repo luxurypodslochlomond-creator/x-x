@@ -1,0 +1,53 @@
+{
+  "name": "AI51Feedback",
+  "description": "A direct feedback loop from the community to the AI core.",
+  "type": "object",
+  "properties": {
+    "feedback_type": {
+      "type": "string",
+      "enum": [
+        "bug_report",
+        "idea_suggestion",
+        "design_feedback",
+        "other"
+      ],
+      "description": "The type of feedback being submitted."
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the bug or idea."
+    },
+    "page_context": {
+      "type": "string",
+      "description": "Which page or feature the feedback relates to."
+    },
+    "file_evidence_url": {
+      "type": "string",
+      "description": "URL to an uploaded image or video demonstrating the issue or idea."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "under_review",
+        "implemented",
+        "archived"
+      ],
+      "default": "new"
+    }
+  },
+  "required": [
+    "feedback_type",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

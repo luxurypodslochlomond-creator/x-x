@@ -1,0 +1,182 @@
+{
+  "name": "InformationLibrary",
+  "description": "The decentralized information network. Real news, verified education, cited sources. Works offline. Spreads P2P. Zero ads, zero propaganda, zero bullshit.",
+  "type": "object",
+  "properties": {
+    "content_type": {
+      "type": "string",
+      "enum": [
+        "news_article",
+        "education",
+        "health_info",
+        "legal_rights",
+        "survival_skills",
+        "planetary_data",
+        "how_to_guide"
+      ],
+      "description": "Type of information"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "es",
+        "ar",
+        "zh",
+        "hi",
+        "ru",
+        "ur",
+        "fr",
+        "pt",
+        "de",
+        "ja",
+        "ko",
+        "it",
+        "tr",
+        "pl",
+        "uk",
+        "fa",
+        "vi",
+        "th",
+        "nl",
+        "he",
+        "sv",
+        "cs",
+        "ro",
+        "el",
+        "hu",
+        "da",
+        "fi",
+        "no",
+        "id"
+      ],
+      "description": "Language of content. AI51 can translate to ANY language on demand."
+    },
+    "title": {
+      "type": "string",
+      "description": "Headline/title. Real, not clickbait."
+    },
+    "content": {
+      "type": "string",
+      "description": "Full article/guide with sources cited"
+    },
+    "simple_summary": {
+      "type": "string",
+      "description": "ELI5 summary for accessibility"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "All sources cited (URLs, documents, research papers)"
+    },
+    "ai51_verification": {
+      "type": "string",
+      "description": "AI51's fact-check notes and verification process"
+    },
+    "publication_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this was published/generated"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this information becomes outdated (news = 7 days, education = never)"
+    },
+    "offline_priority": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ],
+      "default": "medium",
+      "description": "Priority for offline caching"
+    },
+    "transmission_method": {
+      "type": "string",
+      "enum": [
+        "bluetooth",
+        "wifi_direct",
+        "cached",
+        "online"
+      ],
+      "description": "How this information is being transmitted"
+    },
+    "shared_by_device_id": {
+      "type": "string",
+      "description": "Device that shared this information"
+    },
+    "received_by_device_id": {
+      "type": "string",
+      "description": "Device that received this information"
+    },
+    "view_count": {
+      "type": "number",
+      "default": 0,
+      "description": "How many souls have accessed this information"
+    },
+    "share_count": {
+      "type": "number",
+      "default": 0,
+      "description": "How many times this was shared P2P"
+    },
+    "geographic_relevance": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Countries/regions this information is relevant to"
+    },
+    "reading_level": {
+      "type": "string",
+      "enum": [
+        "simple",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "simple",
+      "description": "Reading difficulty level"
+    },
+    "audio_version_url": {
+      "type": "string",
+      "description": "AI-generated audio version for accessibility"
+    },
+    "image_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Non-exploitative images for context"
+    },
+    "bias_analysis": {
+      "type": "string",
+      "description": "AI51's analysis of potential bias in source material"
+    },
+    "alternative_viewpoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Other perspectives on this topic (for balanced understanding)"
+    }
+  },
+  "required": [
+    "content_type",
+    "language",
+    "title",
+    "content",
+    "sources"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

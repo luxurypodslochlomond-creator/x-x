@@ -1,0 +1,61 @@
+{
+  "name": "IPFSUpload",
+  "type": "object",
+  "properties": {
+    "ipfs_hash": {
+      "type": "string",
+      "description": "Content identifier (CID) on IPFS network"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User who uploaded the file"
+    },
+    "file_name": {
+      "type": "string",
+      "description": "Original filename"
+    },
+    "file_size": {
+      "type": "number",
+      "description": "File size in bytes"
+    },
+    "file_type": {
+      "type": "string",
+      "description": "MIME type"
+    },
+    "gateways": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of IPFS gateway URLs for redundancy"
+    },
+    "pinned_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When file was pinned to IPFS"
+    }
+  },
+  "required": [
+    "ipfs_hash",
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

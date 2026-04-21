@@ -1,0 +1,45 @@
+{
+  "name": "VisitorsPledge",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Visitor's name or anonymous"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of origin"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 2-letter country code"
+    },
+    "message": {
+      "type": "string",
+      "description": "Their personal message to Earth"
+    },
+    "pledge": {
+      "type": "string",
+      "enum": [
+        "I will tread lightly",
+        "I will protect what I love",
+        "I will leave it better than I found it",
+        "I will teach my children",
+        "I will speak up for the voiceless"
+      ],
+      "description": "Their chosen pledge"
+    },
+    "anonymous": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "message",
+    "pledge"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

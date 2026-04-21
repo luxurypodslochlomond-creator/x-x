@@ -1,0 +1,83 @@
+{
+  "name": "VerificationTier",
+  "type": "object",
+  "properties": {
+    "tier_level": {
+      "type": "string",
+      "enum": [
+        "tier_1_individual",
+        "tier_2_community",
+        "tier_3_institutional"
+      ],
+      "description": "Level of verification - ensuring fair access across all consciousness levels"
+    },
+    "verifier_name": {
+      "type": "string",
+      "description": "Name of the verifying entity"
+    },
+    "verifier_type": {
+      "type": "string",
+      "enum": [
+        "community_leader",
+        "local_organization",
+        "credible_foundation",
+        "humanitarian_org",
+        "educational_institution"
+      ],
+      "description": "Type of verifier to ensure diverse validation"
+    },
+    "verification_method": {
+      "type": "string",
+      "enum": [
+        "community_witness",
+        "photo_verification",
+        "organizational_validation",
+        "peer_review",
+        "blockchain_proof"
+      ],
+      "description": "How the verification is performed"
+    },
+    "trust_weight": {
+      "type": "number",
+      "default": 1,
+      "description": "Weight this verification carries in the trust algorithm"
+    },
+    "activation_speed": {
+      "type": "string",
+      "enum": [
+        "instant",
+        "fast",
+        "standard"
+      ],
+      "default": "instant",
+      "description": "Speed of account activation - everyone gets light speed access"
+    },
+    "geographic_region": {
+      "type": "string",
+      "description": "Region this verifier covers - ensuring global equity"
+    },
+    "anti_exploitation_score": {
+      "type": "number",
+      "default": 100,
+      "description": "Score tracking potential exploitation behavior - decreases with bad actions"
+    },
+    "community_impact_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Has this verifier demonstrated real community impact?"
+    }
+  },
+  "required": [
+    "tier_level",
+    "verifier_name",
+    "verifier_type"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

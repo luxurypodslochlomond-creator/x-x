@@ -1,0 +1,146 @@
+{
+  "name": "Artist",
+  "type": "object",
+  "properties": {
+    "manager_id": {
+      "type": "string",
+      "description": "ID of the manager who manages this artist"
+    },
+    "name": {
+      "type": "string",
+      "description": "Artist/band name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Artist email"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Artist phone number"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Artist biography"
+    },
+    "genres": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Music genres"
+    },
+    "profile_pic_url": {
+      "type": "string",
+      "description": "URL to artist profile picture"
+    },
+    "relationship": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "friend",
+        "colleague",
+        "client"
+      ],
+      "default": "unknown",
+      "description": "Relationship type"
+    },
+    "availability_status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "unavailable",
+        "on_tour"
+      ],
+      "default": "available",
+      "description": "Current availability"
+    },
+    "contract_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "negotiating",
+        "active",
+        "archived"
+      ],
+      "default": "none",
+      "description": "Contract status"
+    },
+    "rate": {
+      "type": "string",
+      "description": "Standard rate for gigs"
+    },
+    "payment_terms": {
+      "type": "string",
+      "description": "Payment terms"
+    },
+    "gear": {
+      "type": "string",
+      "description": "Equipment/gear notes"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Band member names or IDs"
+    },
+    "social_links": {
+      "type": "object",
+      "properties": {
+        "spotify": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        },
+        "youtube": {
+          "type": "string"
+        },
+        "soundcloud": {
+          "type": "string"
+        }
+      },
+      "description": "Social media links"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "last_contact": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last contact date"
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this artist archived"
+    }
+  },
+  "required": [
+    "manager_id",
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        }
+      ]
+    }
+  }
+}

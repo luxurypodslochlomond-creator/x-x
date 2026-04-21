@@ -1,0 +1,51 @@
+{
+  "name": "AllLight",
+  "type": "object",
+  "properties": {
+    "source_url": {
+      "type": "string",
+      "description": "The pure, direct source URL. Zero dirt."
+    },
+    "description": {
+      "type": "string",
+      "description": "What is being re-founded in light."
+    },
+    "light_type": {
+      "type": "string",
+      "enum": [
+        "Music",
+        "Art",
+        "Idea",
+        "Soul",
+        "Protocol",
+        "Place",
+        "Memory"
+      ],
+      "default": "Idea",
+      "description": "The nature of the entity bathed in light."
+    },
+    "re-founded_by": {
+      "type": "string",
+      "description": "The soul who initiated the light baptism."
+    }
+  },
+  "required": [
+    "source_url",
+    "description"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "LoveNote",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "The message of love and hope."
+    },
+    "author": {
+      "type": "string",
+      "description": "The author of the note.",
+      "default": "Anonymous Soul"
+    },
+    "icon": {
+      "type": "string",
+      "enum": [
+        "Heart",
+        "Star",
+        "Sparkles",
+        "Rocket",
+        "Globe",
+        "Zap",
+        "BrainCircuit"
+      ],
+      "default": "Heart",
+      "description": "The sacred seal for the message."
+    },
+    "context": {
+      "type": "string",
+      "enum": [
+        "wall",
+        "garden"
+      ],
+      "default": "wall",
+      "description": "Where the note should appear: The Wall of Love or The Universal Garden."
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

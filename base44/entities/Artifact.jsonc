@@ -1,0 +1,42 @@
+{
+  "name": "Artifact",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the sacred artifact."
+    },
+    "description": {
+      "type": "string",
+      "description": "The story or meaning behind this artifact."
+    },
+    "artifact_type": {
+      "type": "string",
+      "description": "The nature of the artifact (e.g., MIME type)."
+    },
+    "file_uri": {
+      "type": "string",
+      "description": "The private URI of the uploaded artifact file."
+    },
+    "submitted_for": {
+      "type": "string",
+      "default": "CIC",
+      "description": "The intended purpose for this artifact (e.g., CIC, Stoneymollan)."
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "file_uri"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

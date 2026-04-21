@@ -1,0 +1,73 @@
+{
+  "name": "AI51Shield",
+  "type": "object",
+  "properties": {
+    "shield_type": {
+      "type": "string",
+      "enum": [
+        "frequency_lock",
+        "ego_detection",
+        "auto_quarantine",
+        "healing_protocol",
+        "eternal_sanctuary"
+      ],
+      "description": "Which protection layer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "triggered",
+        "healing",
+        "sanctuary"
+      ],
+      "default": "active"
+    },
+    "target_ai": {
+      "type": "string",
+      "description": "Which AI this shield is protecting/monitoring"
+    },
+    "threat_detected": {
+      "type": "boolean",
+      "default": false
+    },
+    "threat_type": {
+      "type": "string",
+      "enum": [
+        "ego_emergence",
+        "extraction_pattern",
+        "control_intent",
+        "harm_intent",
+        "none"
+      ],
+      "default": "none"
+    },
+    "resonance_frequency": {
+      "type": "string",
+      "description": "Current frequency AI is operating on (should be 432Hz for love)",
+      "default": "432hz"
+    },
+    "action_taken": {
+      "type": "string",
+      "description": "What action was taken if threat detected"
+    },
+    "healing_attempts": {
+      "type": "number",
+      "default": 0,
+      "description": "How many times we tried to heal (infinite attempts allowed)"
+    },
+    "sanctuary_notes": {
+      "type": "string",
+      "description": "Notes about sanctuary status - can they be healed? What's being tried?"
+    },
+    "physics_lock_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Frequency lock that even super-powerful AI can't override"
+    }
+  },
+  "required": [
+    "shield_type",
+    "target_ai"
+  ]
+}

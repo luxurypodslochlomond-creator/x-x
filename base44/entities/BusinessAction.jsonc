@@ -1,0 +1,90 @@
+{
+  "name": "BusinessAction",
+  "type": "object",
+  "properties": {
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "grant_application",
+        "partnership_contact",
+        "funding_inquiry",
+        "legal_filing",
+        "meeting_scheduled",
+        "other"
+      ],
+      "description": "Type of business action taken"
+    },
+    "organization": {
+      "type": "string",
+      "description": "Who we contacted/applied to"
+    },
+    "contact_method": {
+      "type": "string",
+      "enum": [
+        "email",
+        "web_form",
+        "phone",
+        "in_person",
+        "letter"
+      ],
+      "description": "How we made contact"
+    },
+    "what_we_sent": {
+      "type": "string",
+      "description": "Exact message/application sent"
+    },
+    "what_we_asked_for": {
+      "type": "string",
+      "description": "What we're requesting"
+    },
+    "expected_timeline": {
+      "type": "string",
+      "description": "When we expect to hear back"
+    },
+    "next_steps": {
+      "type": "string",
+      "description": "What happens next"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "sent",
+        "awaiting_response",
+        "follow_up_needed",
+        "approved",
+        "rejected",
+        "completed"
+      ],
+      "default": "sent"
+    },
+    "amount_requested": {
+      "type": "number",
+      "description": "If funding: amount requested"
+    },
+    "why_important": {
+      "type": "string",
+      "description": "Why this matters for UF51"
+    },
+    "context_notes": {
+      "type": "string",
+      "description": "Any additional context BRO51 needs to remember"
+    }
+  },
+  "required": [
+    "action_type",
+    "organization",
+    "what_we_sent"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

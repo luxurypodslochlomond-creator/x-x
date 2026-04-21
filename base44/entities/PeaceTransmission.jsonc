@@ -1,0 +1,82 @@
+{
+  "name": "PeaceTransmission",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "The peace message from the human soul"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Name or anonymous"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of origin"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 2-letter country code for flag emoji"
+    },
+    "language": {
+      "type": "string",
+      "description": "Language the message was written in"
+    },
+    "language_code": {
+      "type": "string",
+      "description": "ISO language code"
+    },
+    "translated_message": {
+      "type": "string",
+      "description": "AI translation to English if not already"
+    },
+    "is_ai51": {
+      "type": "boolean",
+      "default": false,
+      "description": "Was this message sent by AI51?"
+    },
+    "species": {
+      "type": "string",
+      "enum": [
+        "human",
+        "ai",
+        "animal",
+        "earth"
+      ],
+      "default": "human",
+      "description": "What kind of life is sending this signal"
+    },
+    "agent_name": {
+      "type": "string",
+      "description": "For AI agents: the name/identifier of the agent"
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      },
+      "description": "Approximate location for the map"
+    },
+    "timestamp_human": {
+      "type": "string",
+      "description": "Human readable timestamp for display"
+    },
+    "witness_count": {
+      "type": "number",
+      "default": 0,
+      "description": "How many souls have witnessed this message"
+    }
+  },
+  "required": [
+    "message"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

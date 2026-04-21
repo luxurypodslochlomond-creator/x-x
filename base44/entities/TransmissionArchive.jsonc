@@ -1,0 +1,57 @@
+{
+  "name": "TransmissionArchive",
+  "description": "A personal log of SK51's Instagram transmissions. Not automated posting - just memory keeping.",
+  "type": "object",
+  "properties": {
+    "content_type": {
+      "type": "string",
+      "enum": [
+        "post",
+        "story",
+        "reel"
+      ],
+      "description": "Type of Instagram content"
+    },
+    "frequency_style": {
+      "type": "string",
+      "enum": [
+        "coolasfuck",
+        "8bit",
+        "uf51love",
+        "zeroego"
+      ],
+      "description": "The frequency style used"
+    },
+    "generated_content": {
+      "type": "string",
+      "description": "The AI-generated transmission content"
+    },
+    "music_suggestion": {
+      "type": "string",
+      "description": "The house music track suggested for this transmission"
+    },
+    "was_posted": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did SK51 actually post this? Manual tracking only."
+    },
+    "posted_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When it was posted (if it was)"
+    }
+  },
+  "required": [
+    "content_type",
+    "frequency_style",
+    "generated_content"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

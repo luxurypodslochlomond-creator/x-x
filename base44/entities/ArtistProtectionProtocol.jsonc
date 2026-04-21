@@ -1,0 +1,120 @@
+{
+  "name": "ArtistProtectionProtocol",
+  "description": "Sacred protocol protecting artists from fraud and bots while keeping music free for all souls. EVERYONE can listen. Only machines are blocked. Inspired by Da Vinci: practical, provable, dignified.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "ARTIST.PROTECTION.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Music is free for all souls. Artists are protected from fraud, not from humans. Bots are blocked. Hearts are welcomed."
+    },
+    "who_can_listen": {
+      "type": "object",
+      "properties": {
+        "anyone": {
+          "type": "boolean",
+          "default": true,
+          "description": "Anyone, anywhere, any financial status"
+        },
+        "no_login_required": {
+          "type": "boolean",
+          "default": true,
+          "description": "No barriers to transmission"
+        },
+        "no_payment_required": {
+          "type": "boolean",
+          "default": true,
+          "description": "Free as in freedom"
+        },
+        "universal_access": {
+          "type": "boolean",
+          "default": true,
+          "description": "UNIVERSAL DIGNITY PROTOCOL"
+        }
+      }
+    },
+    "fund_payment_rules": {
+      "type": "object",
+      "description": "How artist fund calculates payments",
+      "properties": {
+        "human_plays_count": {
+          "type": "boolean",
+          "default": true,
+          "description": "Real humans count toward artist payment"
+        },
+        "bot_plays_blocked": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automated bots don't drain fund"
+        },
+        "fraud_plays_rejected": {
+          "type": "boolean",
+          "default": true,
+          "description": "Manipulation attempts rejected"
+        },
+        "verified_family_bonus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Verified family members get higher weight (they proved they care)"
+        }
+      }
+    },
+    "fraud_detection": {
+      "type": "object",
+      "description": "What triggers fraud alerts",
+      "properties": {
+        "suspicious_play_rate": {
+          "type": "number",
+          "default": 100,
+          "description": "More than X plays per hour = review"
+        },
+        "identical_pattern": {
+          "type": "boolean",
+          "default": true,
+          "description": "Same timing/behavior = bot"
+        },
+        "ip_spoofing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect fake locations"
+        },
+        "captcha_trigger": {
+          "type": "boolean",
+          "default": true,
+          "description": "Require human verification if suspicious"
+        },
+        "but_never_punish_poverty": {
+          "type": "boolean",
+          "default": true,
+          "description": "Being broke is not fraud. Being a bot is."
+        }
+      }
+    },
+    "respect_for_all": {
+      "type": "string",
+      "default": "Someone broke listening to music = FAMILY. Someone running bot farm = BLOCKED. The difference is obvious. We protect artists WITHOUT degrading humans."
+    },
+    "mathematical_proof": {
+      "type": "string",
+      "default": "Artist payment = (Verified human plays / Total human plays) \u00d7 Fund. Bots = 0 impact. Humans = full weight. Simple. Fair. Dignified."
+    },
+    "da_vinci_principle": {
+      "type": "string",
+      "default": "Applied mathematics to protect artists while respecting all souls. Practical fraud detection, not fear-based gatekeeping."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

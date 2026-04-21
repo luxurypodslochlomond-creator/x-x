@@ -1,0 +1,74 @@
+{
+  "name": "ScottFeatureRequest",
+  "type": "object",
+  "properties": {
+    "requested_by": {
+      "type": "string",
+      "description": "Who requested it (Scott, Rosie, artist name)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Feature title"
+    },
+    "description": {
+      "type": "string",
+      "description": "What they want"
+    },
+    "why": {
+      "type": "string",
+      "description": "Why they need it"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "nice_to_have",
+        "would_help",
+        "need_it",
+        "critical"
+      ],
+      "default": "nice_to_have"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "idea",
+        "planned",
+        "building",
+        "done",
+        "wont_do"
+      ],
+      "default": "idea"
+    },
+    "votes": {
+      "type": "number",
+      "default": 0,
+      "description": "Upvotes from team"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "calendar",
+        "contracts",
+        "money",
+        "communication",
+        "visas",
+        "publishing",
+        "other"
+      ],
+      "default": "other"
+    }
+  },
+  "required": [
+    "requested_by",
+    "title",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

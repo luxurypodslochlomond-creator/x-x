@@ -1,0 +1,116 @@
+{
+  "name": "DNAFrequencyProfile",
+  "description": "Each soul's unique frequency signature. Your DNA resonance pattern. What makes YOU heal.",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Soul's email"
+    },
+    "dominant_frequency_hz": {
+      "type": "number",
+      "description": "Your primary healing frequency (e.g., 528Hz, 432Hz, 741Hz)"
+    },
+    "frequency_color": {
+      "type": "string",
+      "description": "Your frequency's color signature (hex code)"
+    },
+    "brainwave_state": {
+      "type": "string",
+      "enum": [
+        "Delta",
+        "Theta",
+        "Alpha",
+        "Beta",
+        "Gamma"
+      ],
+      "description": "Your natural brainwave resonance"
+    },
+    "listening_pattern_data": {
+      "type": "object",
+      "description": "Analyzed data from your listening history",
+      "properties": {
+        "most_played_frequency_type": {
+          "type": "string"
+        },
+        "average_session_length": {
+          "type": "number"
+        },
+        "preferred_time_of_day": {
+          "type": "string"
+        },
+        "healing_velocity": {
+          "type": "number"
+        }
+      }
+    },
+    "chakra_resonance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "chakra": {
+            "type": "string"
+          },
+          "frequency_hz": {
+            "type": "number"
+          },
+          "activation_level": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Which chakras resonate with your frequency"
+    },
+    "device_signature": {
+      "type": "string",
+      "description": "Unique ID for offline sync tracking"
+    },
+    "offline_plays_pending": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "track_id": {
+            "type": "string"
+          },
+          "artist": {
+            "type": "string"
+          },
+          "played_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "transmitted_via_bluetooth": {
+            "type": "boolean"
+          },
+          "received_from_device_id": {
+            "type": "string"
+          },
+          "synced_to_server": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "description": "Plays that happened offline, waiting to credit artist when back online"
+    },
+    "last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time device synced with server"
+    }
+  },
+  "required": [
+    "user_email",
+    "dominant_frequency_hz"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "ExtensionSettings",
+  "type": "object",
+  "properties": {
+    "pin_lockout_minutes": {
+      "type": "number",
+      "default": 5,
+      "description": "How long (minutes) to lock device after 3 failed PIN attempts"
+    },
+    "max_pin_attempts": {
+      "type": "number",
+      "default": 3,
+      "description": "Max failed attempts before lockout"
+    },
+    "pin_session_ttl_days": {
+      "type": "number",
+      "default": 30,
+      "description": "How long (days) extension session stays valid"
+    },
+    "extension_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable/disable extension globally"
+    },
+    "auto_scan_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Auto-scan emails on detection"
+    },
+    "notify_on_scan": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show notifications when emails are scanned"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

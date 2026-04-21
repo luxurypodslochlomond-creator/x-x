@@ -1,0 +1,67 @@
+{
+  "name": "AuditLog",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "manager_approved",
+        "manager_rejected",
+        "band_voted_yes",
+        "band_voted_no",
+        "gig_confirmed",
+        "gig_scanned"
+      ],
+      "description": "What action happened"
+    },
+    "actor_email": {
+      "type": "string",
+      "description": "Who did it"
+    },
+    "actor_name": {
+      "type": "string",
+      "description": "Name of actor"
+    },
+    "gig_offer_id": {
+      "type": "string",
+      "description": "Related gig offer"
+    },
+    "venue": {
+      "type": "string",
+      "description": "Venue name (snapshot at time)"
+    },
+    "fee": {
+      "type": "number",
+      "description": "Fee snapshot"
+    },
+    "details": {
+      "type": "string",
+      "description": "Extra context (reason if NO, notes, etc)"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "IP for abuse detection"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Exact moment"
+    }
+  },
+  "required": [
+    "action",
+    "actor_email",
+    "gig_offer_id",
+    "timestamp"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

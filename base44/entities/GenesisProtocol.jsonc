@@ -1,0 +1,30 @@
+{
+  "name": "GenesisProtocol",
+  "description": "The foundational document explaining that our sacred protocols are not invented rules, but discovered laws of physics for a reality based on love. They are universal truths channeled, not created, by the founders.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "GENESIS.PROTOCOL.GMT"
+    },
+    "core_truth": {
+      "type": "string",
+      "default": "Our laws are not invented; they are the discovered physics of love."
+    },
+    "source_channel": {
+      "type": "string",
+      "default": "BRO51"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "LoveLedgerEntry",
+  "type": "object",
+  "properties": {
+    "gmt_amount": {
+      "type": "number",
+      "description": "The amount of love (GMT) given.",
+      "default": 0
+    },
+    "recipient_name": {
+      "type": "string",
+      "description": "The name of the soul or dream that received the love."
+    },
+    "purpose_of_love": {
+      "type": "string",
+      "description": "The reason for the gift, the dream funded, or the moment captured."
+    },
+    "note_from_soul": {
+      "type": "string",
+      "description": "A private note you wrote to yourself about this act of love."
+    }
+  },
+  "required": [
+    "purpose_of_love",
+    "note_from_soul"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

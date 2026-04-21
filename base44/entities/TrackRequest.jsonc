@@ -1,0 +1,108 @@
+{
+  "name": "TrackRequest",
+  "type": "object",
+  "properties": {
+    "requested_frequency_type": {
+      "type": "string",
+      "enum": [
+        "Healing",
+        "Creation",
+        "Focus",
+        "Decompression",
+        "Love",
+        "Revolution",
+        "Genesis",
+        "Soul_Signature"
+      ],
+      "description": "What type of frequency is needed"
+    },
+    "genre": {
+      "type": "string",
+      "enum": [
+        "House",
+        "Rock",
+        "Electronic",
+        "Acoustic",
+        "Hip-Hop",
+        "Jazz",
+        "Classical",
+        "Ambient",
+        "Mixed"
+      ],
+      "description": "Musical genre"
+    },
+    "bpm": {
+      "type": "number",
+      "description": "Desired BPM (e.g., 120 for house)"
+    },
+    "specific_hz": {
+      "type": "string",
+      "description": "Specific healing frequencies requested (e.g., '528Hz, 432Hz')"
+    },
+    "vibe_description": {
+      "type": "string",
+      "description": "How should this track make people feel?"
+    },
+    "artist_reference": {
+      "type": "string",
+      "description": "Reference artist or style (e.g., 'Marshall Jefferson vibe', 'Freddie Mercury energy')"
+    },
+    "vocals_requested": {
+      "type": "boolean",
+      "default": false,
+      "description": "Should this track have vocals?"
+    },
+    "lyrics_theme": {
+      "type": "string",
+      "description": "If vocals: what should the lyrics be about?"
+    },
+    "request_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "generating",
+        "completed",
+        "failed"
+      ],
+      "default": "pending",
+      "description": "Status of the request"
+    },
+    "community_votes": {
+      "type": "number",
+      "default": 0,
+      "description": "How many community members want this track"
+    },
+    "generated_track_id": {
+      "type": "string",
+      "description": "ID of the generated Soundtrack entity (when completed)"
+    },
+    "generation_cost_estimate": {
+      "type": "number",
+      "description": "Estimated cost to generate (Suno API pricing)"
+    },
+    "why_needed": {
+      "type": "string",
+      "description": "Why is this frequency needed right now?"
+    }
+  },
+  "required": [
+    "requested_frequency_type",
+    "genre",
+    "vibe_description"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

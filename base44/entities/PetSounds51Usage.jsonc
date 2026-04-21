@@ -1,0 +1,69 @@
+{
+  "name": "PetSounds51Usage",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Who used it (or 'anonymous' for free tier)"
+    },
+    "protocol": {
+      "type": "string",
+      "enum": [
+        "fireworks",
+        "separation",
+        "arthritis",
+        "travel",
+        "surgery",
+        "herd"
+      ],
+      "description": "Which protocol played"
+    },
+    "species": {
+      "type": "string",
+      "enum": [
+        "dog",
+        "cat",
+        "horse",
+        "farm"
+      ],
+      "description": "Animal type"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "free",
+        "basic",
+        "premium",
+        "concierge"
+      ],
+      "description": "Payment tier"
+    },
+    "session_completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did they finish the full session?"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "description": "How long they actually listened"
+    },
+    "effectiveness_rating": {
+      "type": "number",
+      "description": "1-10 how well it worked (user feedback)"
+    },
+    "device_fingerprint": {
+      "type": "string",
+      "description": "Browser fingerprint for fraud detection"
+    },
+    "free_tier_count": {
+      "type": "number",
+      "default": 1,
+      "description": "How many times this device used free tier"
+    }
+  },
+  "required": [
+    "protocol",
+    "species",
+    "tier"
+  ]
+}

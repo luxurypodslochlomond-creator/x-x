@@ -1,0 +1,85 @@
+{
+  "name": "CB51Task",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "What needs done"
+    },
+    "artist_id": {
+      "type": "string",
+      "description": "Link to CB51Artist - task is for this artist"
+    },
+    "owner_email": {
+      "type": "string",
+      "description": "Owner email \u2014 for team access control"
+    },
+    "responsible_email": {
+      "type": "string",
+      "description": "Email of team member responsible for this task"
+    },
+    "responsible_name": {
+      "type": "string",
+      "description": "Name of person responsible"
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date",
+      "description": "When it's due"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "urgent"
+      ],
+      "default": "normal"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "done"
+      ],
+      "default": "pending"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Task details"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "responsible_email": "{{user.email}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "responsible_email": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

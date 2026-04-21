@@ -1,0 +1,40 @@
+{
+  "name": "FreedomCode",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "The unique, one-time use code for claiming Love Currency."
+    },
+    "amount": {
+      "type": "number",
+      "description": "The amount of Love Currency this code is worth."
+    },
+    "is_claimed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this code has been claimed."
+    },
+    "claimed_by": {
+      "type": "string",
+      "description": "The ID of the user who claimed the code."
+    },
+    "claimed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the code was claimed."
+    }
+  },
+  "required": [
+    "code",
+    "amount"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

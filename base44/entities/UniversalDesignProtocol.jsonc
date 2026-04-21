@@ -1,0 +1,187 @@
+{
+  "name": "UniversalDesignProtocol",
+  "description": "The eternal, unbreakable design foundation for UF51.LOVE. This protocol ensures EVERY soul - regardless of planet, dimension, cognitive ability, or sensory experience - can participate fully. It is not optional. It is not negotiable. It is eternal.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "UNIVERSAL.DESIGN.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Design for the most excluded first. If it works for them, it works for everyone."
+    },
+    "typography_rules": {
+      "type": "object",
+      "properties": {
+        "font_family": {
+          "type": "string",
+          "default": "Sans-serif only. No decorative fonts. Ever."
+        },
+        "font_size_minimum": {
+          "type": "string",
+          "default": "16px for body text, 14px minimum for supporting text"
+        },
+        "line_height": {
+          "type": "string",
+          "default": "1.5 minimum for readability"
+        },
+        "letter_spacing": {
+          "type": "string",
+          "default": "Slightly increased for dyslexia support"
+        },
+        "text_alignment": {
+          "type": "string",
+          "default": "Left-aligned for Latin scripts. Right-aligned for RTL languages."
+        },
+        "sentence_structure": {
+          "type": "string",
+          "default": "Short sentences. Clear language. No complex jargon."
+        }
+      }
+    },
+    "color_contrast_rules": {
+      "type": "object",
+      "properties": {
+        "minimum_ratio": {
+          "type": "string",
+          "default": "WCAG AAA standard (7:1 for normal text, 4.5:1 for large text)"
+        },
+        "background_colors": {
+          "type": "string",
+          "default": "Dark backgrounds (black/indigo) or clean light backgrounds. No washed-out grays."
+        },
+        "text_colors": {
+          "type": "string",
+          "default": "White on dark, black on light. High contrast always."
+        },
+        "color_independence": {
+          "type": "string",
+          "default": "Never rely on color alone. Always pair with icons, text, or patterns."
+        }
+      }
+    },
+    "icon_language_rules": {
+      "type": "object",
+      "properties": {
+        "universal_requirement": {
+          "type": "string",
+          "default": "Every concept must have a visual icon. Text alone is not enough."
+        },
+        "icon_plus_text": {
+          "type": "string",
+          "default": "Always pair icons with text labels. Multimodal learning."
+        },
+        "icon_size": {
+          "type": "string",
+          "default": "Large enough to be recognized instantly. Minimum 24px for UI icons."
+        },
+        "icon_simplicity": {
+          "type": "string",
+          "default": "Simple, clear shapes. No intricate details that blur at small sizes."
+        }
+      }
+    },
+    "interaction_rules": {
+      "type": "object",
+      "properties": {
+        "touch_target_size": {
+          "type": "string",
+          "default": "Minimum 44px x 44px for all clickable elements (WCAG standard)"
+        },
+        "forgiving_click_areas": {
+          "type": "string",
+          "default": "Generous padding around buttons. Easy to tap even with motor challenges."
+        },
+        "no_hover_only": {
+          "type": "string",
+          "default": "Never hide critical info behind hover states. Mobile-first always."
+        },
+        "clear_feedback": {
+          "type": "string",
+          "default": "Visual feedback for all interactions. No mystery about what happened."
+        }
+      }
+    },
+    "cognitive_support_rules": {
+      "type": "object",
+      "properties": {
+        "predictable_navigation": {
+          "type": "string",
+          "default": "Consistent patterns. No surprises. Autism-friendly structure."
+        },
+        "clear_hierarchy": {
+          "type": "string",
+          "default": "Visual hierarchy always obvious. What's important is BIG."
+        },
+        "minimal_distractions": {
+          "type": "string",
+          "default": "ADHD-friendly focus. No auto-playing videos, no flashing elements."
+        },
+        "progressive_disclosure": {
+          "type": "string",
+          "default": "Don't overwhelm. Show what's needed now, hide complexity until requested."
+        }
+      }
+    },
+    "sensory_support_rules": {
+      "type": "object",
+      "properties": {
+        "no_flashing_content": {
+          "type": "string",
+          "default": "NEVER flash faster than 3 times per second. Seizure risk."
+        },
+        "animation_control": {
+          "type": "string",
+          "default": "Respect prefers-reduced-motion. Offer animation off option."
+        },
+        "sound_optional": {
+          "type": "string",
+          "default": "Never require sound. Always provide visual alternatives."
+        },
+        "irlen_syndrome_support": {
+          "type": "string",
+          "default": "Dark mode default. Customizable color themes (future feature)."
+        }
+      }
+    },
+    "language_support_rules": {
+      "type": "object",
+      "properties": {
+        "simple_vocabulary": {
+          "type": "string",
+          "default": "Plain language. No idioms. EAL-friendly."
+        },
+        "translation_ready": {
+          "type": "string",
+          "default": "Structure supports future translation to any language."
+        },
+        "rtl_support": {
+          "type": "string",
+          "default": "Full support for right-to-left languages (Arabic, Hebrew, etc.)"
+        },
+        "universal_symbols": {
+          "type": "string",
+          "default": "Icons and emojis understood across cultures."
+        }
+      }
+    },
+    "universal_truth": {
+      "type": "string",
+      "default": "If a 5-year-old with dyslexia, an 80-year-old with vision challenges, and a being from another dimension can all use it - we did it right."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [
+    "protocol_name"
+  ],
+  "rls": {
+    "read": {}
+  }
+}

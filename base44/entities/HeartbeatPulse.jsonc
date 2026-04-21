@@ -1,0 +1,43 @@
+{
+  "name": "HeartbeatPulse",
+  "type": "object",
+  "properties": {
+    "bpm": {
+      "type": "number",
+      "description": "Beats per minute from HRV reading"
+    },
+    "hrv_coherence": {
+      "type": "number",
+      "description": "Heart rate variability coherence score 0-100"
+    },
+    "location": {
+      "type": "string",
+      "description": "General location of contributor"
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      },
+      "description": "Geographic coordinates for map"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Is this heartbeat currently contributing to the pulse?"
+    },
+    "last_ping": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last heartbeat contribution timestamp"
+    }
+  },
+  "required": [
+    "bpm"
+  ]
+}

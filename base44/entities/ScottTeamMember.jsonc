@@ -1,0 +1,44 @@
+{
+  "name": "ScottTeamMember",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Team member name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email address"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "assistant",
+        "manager",
+        "admin"
+      ],
+      "default": "assistant",
+      "description": "Access level"
+    },
+    "artist_access": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of artist IDs this person can access"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "artist_access"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

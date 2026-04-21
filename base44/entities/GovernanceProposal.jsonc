@@ -1,0 +1,66 @@
+{
+  "name": "GovernanceProposal",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the proposal"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the proposal"
+    },
+    "proposer": {
+      "type": "string",
+      "description": "Name or email of the user proposing"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "passed",
+        "rejected",
+        "voting"
+      ],
+      "default": "active"
+    },
+    "votes_for": {
+      "type": "number",
+      "default": 0
+    },
+    "votes_against": {
+      "type": "number",
+      "default": 0
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "protocol",
+        "funding",
+        "community",
+        "other"
+      ],
+      "default": "community"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "proposer"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

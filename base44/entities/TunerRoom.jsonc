@@ -1,0 +1,46 @@
+{
+  "name": "TunerRoom",
+  "type": "object",
+  "properties": {
+    "room_code": {
+      "type": "string",
+      "description": "Simple 4-letter room code"
+    },
+    "target_note": {
+      "type": "string",
+      "description": "Current target note (e.g., A, E, G)"
+    },
+    "target_freq": {
+      "type": "number",
+      "description": "Target frequency in Hz"
+    },
+    "tone_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When tone was last triggered - all souls play it"
+    },
+    "host_email": {
+      "type": "string",
+      "description": "Email of room host"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "souls_count": {
+      "type": "number",
+      "default": 1,
+      "description": "Number of souls currently tuning"
+    },
+    "souls_in_tune": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of souls currently in tune"
+    }
+  },
+  "required": [
+    "room_code",
+    "target_note",
+    "target_freq"
+  ]
+}

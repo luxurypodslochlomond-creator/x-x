@@ -1,0 +1,95 @@
+{
+  "name": "AI51Outcome",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Email of user reporting outcome (optional for guests)"
+    },
+    "conversation_context": {
+      "type": "string",
+      "description": "What was discussed or what was the intervention"
+    },
+    "intervention_type": {
+      "type": "string",
+      "enum": [
+        "frequency",
+        "advice",
+        "protocol",
+        "conversation",
+        "healing_plan",
+        "other"
+      ],
+      "description": "Type of AI51 intervention"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "helped",
+        "somewhat_helped",
+        "no_change",
+        "made_worse"
+      ],
+      "description": "Did it help?"
+    },
+    "user_notes": {
+      "type": "string",
+      "description": "Optional: what the user wants to tell us"
+    },
+    "check_in_days": {
+      "type": "number",
+      "description": "Days since original intervention"
+    },
+    "pain_level_before": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Optional: 0-10 pain scale before"
+    },
+    "pain_level_after": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Optional: 0-10 pain scale after"
+    },
+    "would_recommend": {
+      "type": "boolean",
+      "description": "Would they recommend this to others?"
+    },
+    "timestamp_submitted": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When outcome was reported"
+    }
+  },
+  "required": [
+    "intervention_type",
+    "outcome"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

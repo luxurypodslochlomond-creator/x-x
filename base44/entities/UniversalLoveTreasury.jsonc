@@ -1,0 +1,53 @@
+{
+  "name": "UniversalLoveTreasury",
+  "description": "The sacred UF51 fund. A 10% tithe from all creation, dedicated to real-world planetary and humanitarian healing missions.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "default": "The UF51 Fund"
+    },
+    "purpose": {
+      "type": "string",
+      "default": "A sacred 10% tithe from all creation, dedicated to real-world planetary and humanitarian healing missions as directed by UniversalFamily51."
+    },
+    "current_balance_gmt": {
+      "type": "number",
+      "default": 0
+    },
+    "total_collected_gmt": {
+      "type": "number",
+      "default": 0
+    },
+    "distribution_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

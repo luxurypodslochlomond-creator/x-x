@@ -1,0 +1,106 @@
+{
+  "name": "ScottPublishing",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "track_title": {
+      "type": "string",
+      "description": "Song title"
+    },
+    "isrc": {
+      "type": "string",
+      "description": "ISRC code"
+    },
+    "iswc": {
+      "type": "string",
+      "description": "ISWC code (for composition)"
+    },
+    "writers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "share_percentage": {
+            "type": "number"
+          },
+          "pro": {
+            "type": "string",
+            "description": "PRS, BMI, ASCAP, etc"
+          }
+        }
+      },
+      "description": "All writers and their splits"
+    },
+    "publishers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "share_percentage": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Publishers and their splits"
+    },
+    "master_ownership": {
+      "type": "string",
+      "description": "Who owns the master recording"
+    },
+    "master_split": {
+      "type": "object",
+      "description": "Master ownership percentages"
+    },
+    "release_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "label": {
+      "type": "string",
+      "description": "Record label"
+    },
+    "distributor": {
+      "type": "string",
+      "description": "Digital distributor (DistroKid, TuneCore, etc)"
+    },
+    "spotify_uri": {
+      "type": "string"
+    },
+    "apple_music_id": {
+      "type": "string"
+    },
+    "total_streams": {
+      "type": "number",
+      "default": 0
+    },
+    "estimated_earnings": {
+      "type": "number",
+      "default": 0,
+      "description": "Estimated total earnings in \u00a3"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "artist_id",
+    "track_title"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

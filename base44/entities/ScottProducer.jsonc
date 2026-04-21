@@ -1,0 +1,92 @@
+{
+  "name": "ScottProducer",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Producer/collaborator name"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "producer",
+        "co-producer",
+        "engineer",
+        "mixer",
+        "featured_artist",
+        "session_musician",
+        "songwriter"
+      ],
+      "description": "What they do"
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "standard_rate": {
+      "type": "number",
+      "description": "Their usual fee"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "JPY",
+        "KRW",
+        "AUD",
+        "CAD"
+      ],
+      "default": "GBP"
+    },
+    "standard_points": {
+      "type": "number",
+      "description": "Their usual % of master (producer points)"
+    },
+    "credits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "track_id": {
+            "type": "string"
+          },
+          "track_name": {
+            "type": "string"
+          },
+          "artist_name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "fee_paid": {
+            "type": "number"
+          },
+          "points_agreed": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "What they've worked on"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "role"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

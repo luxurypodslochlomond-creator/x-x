@@ -1,0 +1,92 @@
+{
+  "name": "ScottDemo",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Which artist/band this demo is for"
+    },
+    "title": {
+      "type": "string",
+      "description": "Track title"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version number/name (v1, rough mix, final, etc)"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL to the audio file (WAV/FLAC/MP3)"
+    },
+    "file_format": {
+      "type": "string",
+      "enum": [
+        "wav",
+        "flac",
+        "mp3",
+        "aiff"
+      ],
+      "description": "Audio format - lossless preferred"
+    },
+    "file_size_mb": {
+      "type": "number",
+      "description": "File size in MB"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "description": "Track length in seconds"
+    },
+    "bpm": {
+      "type": "number",
+      "description": "Tempo (if known)"
+    },
+    "key": {
+      "type": "string",
+      "description": "Musical key (e.g., 'C major', 'A minor')"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes about this version (what changed, what needs work, etc)"
+    },
+    "uploaded_by": {
+      "type": "string",
+      "description": "Who uploaded it (producer, artist, etc)"
+    },
+    "is_latest": {
+      "type": "boolean",
+      "default": true,
+      "description": "Is this the latest version?"
+    },
+    "feedback": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Feedback from team members"
+    }
+  },
+  "required": [
+    "artist_id",
+    "title",
+    "file_url"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

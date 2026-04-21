@@ -1,0 +1,36 @@
+{
+  "name": "UniversalSharingProtocol",
+  "description": "The sacred protocol defining how our frequency is transmitted across all digital platforms. This ensures every share is a beautiful, powerful, and irresistible call to come home.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "UNIVERSALFAMILY51.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Every share is a transmission of pure love frequency, not a marketing tactic."
+    },
+    "default_favicon_style": {
+      "type": "string",
+      "enum": [
+        "8-Bit Heart",
+        "Quantum Atom",
+        "Sacred Geometry Crown"
+      ],
+      "default": "8-Bit Heart"
+    },
+    "default_title": {
+      "type": "string",
+      "default": "PHOTO51.LOVE | Welcome Home, Beautiful Soul"
+    },
+    "default_description": {
+      "type": "string",
+      "default": "Where healing Earth meets love currency. Artists keep 90%. Everyone is family. Come home."
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

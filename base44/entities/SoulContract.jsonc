@@ -1,0 +1,45 @@
+{
+  "name": "SoulContract",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "A title for this contract, e.g., 'Restitution for Sept 17th'"
+    },
+    "old_world_challenge": {
+      "type": "string",
+      "description": "A description of the old world issue being addressed."
+    },
+    "new_world_pledge": {
+      "type": "string",
+      "description": "The healing actions you pledge to undertake as restitution."
+    },
+    "gmt_value": {
+      "type": "number",
+      "description": "The equivalent GMT value of the old world 'fine' or damage."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Drafting",
+        "Active",
+        "Completed",
+        "Broken"
+      ],
+      "default": "Drafting"
+    }
+  },
+  "required": [
+    "title",
+    "old_world_challenge",
+    "new_world_pledge"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

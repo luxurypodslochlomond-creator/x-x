@@ -1,0 +1,127 @@
+{
+  "name": "CICApplication",
+  "type": "object",
+  "properties": {
+    "application_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "submitted",
+        "approved",
+        "live"
+      ],
+      "default": "in_progress",
+      "description": "Current status of CIC application"
+    },
+    "companies_house_details": {
+      "type": "object",
+      "description": "All Companies House login and reference info",
+      "properties": {
+        "government_gateway_id": {
+          "type": "string"
+        },
+        "password_hint": {
+          "type": "string",
+          "description": "Hint for password (NOT the actual password)"
+        },
+        "company_name": {
+          "type": "string",
+          "default": "UniversalFrequency51 CIC"
+        },
+        "registered_office": {
+          "type": "string",
+          "default": "Upper Stoneymollan Cottage, Upper Stoneymollan Road, Alexandria, Loch Lomond, G83 8QU"
+        },
+        "registered_office_alternative": {
+          "type": "string",
+          "default": "Stoneymollan, Loch Lomond, West Dunbartonshire, G83 8QU"
+        },
+        "director_1_name": {
+          "type": "string",
+          "default": "Brian Hughes"
+        },
+        "director_1_dob": {
+          "type": "string"
+        },
+        "director_2_name": {
+          "type": "string",
+          "default": "Gillian Brown"
+        },
+        "director_2_dob": {
+          "type": "string"
+        },
+        "application_reference": {
+          "type": "string"
+        },
+        "incorporation_number": {
+          "type": "string"
+        }
+      }
+    },
+    "important_dates": {
+      "type": "object",
+      "properties": {
+        "application_submitted": {
+          "type": "string",
+          "format": "date"
+        },
+        "approval_expected": {
+          "type": "string",
+          "format": "date"
+        },
+        "court_date": {
+          "type": "string",
+          "format": "date",
+          "default": "2025-10-15"
+        }
+      }
+    },
+    "documents_checklist": {
+      "type": "object",
+      "properties": {
+        "articles_of_association": {
+          "type": "boolean",
+          "default": false
+        },
+        "cic36_form": {
+          "type": "boolean",
+          "default": false
+        },
+        "memorandum": {
+          "type": "boolean",
+          "default": false
+        },
+        "proof_of_address": {
+          "type": "boolean",
+          "default": false
+        },
+        "id_verification_director_1": {
+          "type": "boolean",
+          "default": false
+        },
+        "id_verification_director_2": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Any important notes or reminders"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

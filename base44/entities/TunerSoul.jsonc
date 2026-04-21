@@ -1,0 +1,31 @@
+{
+  "name": "TunerSoul",
+  "type": "object",
+  "properties": {
+    "room_code": {
+      "type": "string",
+      "description": "Room they're tuning in"
+    },
+    "soul_name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "current_freq": {
+      "type": "number",
+      "description": "Their current detected frequency"
+    },
+    "in_tune": {
+      "type": "boolean",
+      "default": false
+    },
+    "last_ping": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last activity timestamp"
+    }
+  },
+  "required": [
+    "room_code",
+    "soul_name"
+  ]
+}

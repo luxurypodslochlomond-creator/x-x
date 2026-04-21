@@ -1,0 +1,205 @@
+{
+  "name": "Soundtrack",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The name of the track."
+    },
+    "artist": {
+      "type": "string",
+      "description": "The artist or soul name."
+    },
+    "featured_artist": {
+      "type": "string",
+      "description": "Any featured artists on the track."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the track's healing purpose or story."
+    },
+    "artist_story": {
+      "type": "string",
+      "description": "The soul behind the music. The story of its creation."
+    },
+    "file_url": {
+      "type": "string",
+      "description": "The secure URL of the uploaded audio file."
+    },
+    "frequency_type": {
+      "type": "string",
+      "enum": [
+        "Healing",
+        "House",
+        "Creation",
+        "Focus",
+        "Decompression",
+        "Love",
+        "Genesis",
+        "Revolution",
+        "Cosmic",
+        "Soul_Signature",
+        "Calm_Presence",
+        "Joyful_Energy",
+        "Deep_Meditation",
+        "Gentle_Movement",
+        "Powerful_Drive"
+      ],
+      "default": "Creation",
+      "description": "The vibrational pattern of this frequency. House = rhythmic calm. Healing = restoration. Creation = flow state."
+    },
+    "cover_art_url": {
+      "type": "string",
+      "description": "URL for the track's cover art."
+    },
+    "sequence": {
+      "type": "number",
+      "description": "The sacred sequence in the Universal Catalog."
+    },
+    "soul_frequency_hz": {
+      "type": "number",
+      "description": "The artist's personal soul frequency signature in Hz."
+    },
+    "cosmic_alignment": {
+      "type": "string",
+      "description": "Astronomical conditions when the frequency was created or captured."
+    },
+    "frequency_source": {
+      "type": "string",
+      "enum": [
+        "uploaded_audio",
+        "soul_signature",
+        "cosmic_tuning"
+      ],
+      "default": "uploaded_audio",
+      "description": "How this frequency was contributed to the catalog."
+    },
+    "pay_what_you_want": {
+      "type": "boolean",
+      "default": false,
+      "description": "Can people pay what they want for this?"
+    },
+    "suggested_price_p51": {
+      "type": "number",
+      "default": 0,
+      "description": "Suggested or fixed price in $P51"
+    },
+    "total_earned_p51": {
+      "type": "number",
+      "default": 0,
+      "description": "$P51 earned from this track"
+    },
+    "play_count": {
+      "type": "number",
+      "default": 0,
+      "description": "How many times this frequency has been transmitted."
+    },
+    "audio_quality_format": {
+      "type": "string",
+      "description": "The audio format (FLAC, WAV, MP3, AAC, etc.)"
+    },
+    "audio_quality_description": {
+      "type": "string",
+      "description": "Human-readable quality description (e.g., 'Lossless', 'High Quality 320kbps')"
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      },
+      "description": "Location where this frequency was created or uploaded from"
+    },
+    "lyrics": {
+      "type": "string",
+      "description": "Song lyrics (if artist provides them)"
+    },
+    "tablature": {
+      "type": "string",
+      "description": "Chords/tabs (if artist provides them)"
+    },
+    "key_signature": {
+      "type": "string",
+      "description": "Musical key (e.g., 'D Major')"
+    },
+    "bpm": {
+      "type": "number",
+      "description": "Beats per minute"
+    },
+    "rotational_pattern": {
+      "type": "string",
+      "enum": [
+        "steady_pulse",
+        "building_crescendo",
+        "gentle_waves",
+        "explosive_release",
+        "calm_meditation",
+        "rhythmic_dance"
+      ],
+      "description": "How the frequency moves through time. Reflects the true nature of the music."
+    },
+    "frequency_fingerprint": {
+      "type": "object",
+      "description": "The Frequency Fingerprint (Jan 2025 innovation) - auto-analyzed harmonic data",
+      "properties": {
+        "harmonic_analysis": {
+          "type": "object"
+        },
+        "brainwave_state": {
+          "type": "object"
+        },
+        "sacred_frequencies": {
+          "type": "object"
+        },
+        "quantum_coherence": {
+          "type": "object"
+        },
+        "emotional_resonance": {
+          "type": "object"
+        },
+        "simple_summary": {
+          "type": "string"
+        }
+      }
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Can new listeners discover this track? Artist can withdraw from public catalog. People who already have it keep it (like physical CDs)."
+    },
+    "withdrawn_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When artist withdrew this from public catalog (if applicable)"
+    },
+    "withdrawal_reason": {
+      "type": "string",
+      "description": "Artist's reason for withdrawal (optional, for their records)"
+    }
+  },
+  "required": [
+    "title",
+    "artist",
+    "file_url",
+    "sequence"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

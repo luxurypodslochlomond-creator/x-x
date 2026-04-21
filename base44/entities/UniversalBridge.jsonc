@@ -1,0 +1,113 @@
+{
+  "name": "UniversalBridge",
+  "type": "object",
+  "properties": {
+    "bridge_type": {
+      "type": "string",
+      "enum": [
+        "p51_to_fiat",
+        "p51_to_crypto",
+        "fiat_to_p51",
+        "crypto_to_p51"
+      ],
+      "description": "Type of bridge between love currency and other systems"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User requesting the bridge transaction"
+    },
+    "user_type": {
+      "type": "string",
+      "enum": [
+        "healer",
+        "ally"
+      ],
+      "default": "healer",
+      "description": "Whether this is a Healer (earns through action) or Ally (provides capital)"
+    },
+    "p51_amount": {
+      "type": "number",
+      "description": "Amount of $P51 being bridged"
+    },
+    "target_currency": {
+      "type": "string",
+      "description": "Target currency or system (e.g., GBP, USD, BTC, ETH, SOL)"
+    },
+    "fiat_amount": {
+      "type": "number",
+      "description": "The fiat amount being sent/received"
+    },
+    "bank_details": {
+      "type": "object",
+      "description": "Encrypted bank details or crypto wallet addresses",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "processing_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "failed"
+      ],
+      "default": "pending",
+      "description": "Status of bridge transaction"
+    },
+    "reference_code": {
+      "type": "string",
+      "description": "Unique reference code for tracking the transaction"
+    },
+    "transaction_id": {
+      "type": "string",
+      "description": "External transaction ID (from Revolut/blockchain)"
+    },
+    "sender_details": {
+      "type": "object",
+      "description": "Details about who sent the payment"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the transaction was completed"
+    }
+  },
+  "required": [
+    "bridge_type",
+    "user_id",
+    "p51_amount",
+    "target_currency"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

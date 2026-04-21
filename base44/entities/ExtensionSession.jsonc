@@ -1,0 +1,75 @@
+{
+  "name": "ExtensionSession",
+  "type": "object",
+  "properties": {
+    "device_id": {
+      "type": "string",
+      "description": "Chrome extension ID (device fingerprint)"
+    },
+    "device_name": {
+      "type": "string",
+      "description": "User-friendly device name (e.g., 'Scott's Laptop')"
+    },
+    "region": {
+      "type": "string",
+      "description": "Detected region/country"
+    },
+    "artist_id": {
+      "type": "string",
+      "description": "Artist this device is logged into"
+    },
+    "manager_id": {
+      "type": "string",
+      "description": "Manager email who controls this artist"
+    },
+    "last_active": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time extension was used"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When device was first connected"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether device is still authorized"
+    }
+  },
+  "required": [
+    "device_id",
+    "artist_id",
+    "manager_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "manager_id": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

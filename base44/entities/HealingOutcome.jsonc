@@ -1,0 +1,22 @@
+{
+  "name": "HealingOutcome",
+  "type": "object",
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "description": "Which protocol was used (e.g. kidney_stone)"
+    },
+    "helped": {
+      "type": "boolean",
+      "description": "Did it help?"
+    }
+  },
+  "required": [
+    "protocol",
+    "helped"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

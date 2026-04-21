@@ -1,0 +1,59 @@
+{
+  "name": "PrivacyAnalytics",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "page_view",
+        "feature_used",
+        "error",
+        "healing_session",
+        "cleanup_logged",
+        "music_played"
+      ],
+      "description": "What happened (aggregate only)"
+    },
+    "page_name": {
+      "type": "string",
+      "description": "Which page (if relevant)"
+    },
+    "feature_name": {
+      "type": "string",
+      "description": "Which feature (if relevant)"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Error details (no user info)"
+    },
+    "healing_protocol": {
+      "type": "string",
+      "description": "Which protocol (if healing session)"
+    },
+    "session_duration_seconds": {
+      "type": "number",
+      "description": "How long (aggregate data)"
+    },
+    "device_type": {
+      "type": "string",
+      "enum": [
+        "mobile",
+        "desktop",
+        "unknown"
+      ],
+      "description": "Device category (not specific device)"
+    },
+    "is_offline": {
+      "type": "boolean",
+      "default": false,
+      "description": "Was user offline when this happened?"
+    },
+    "timestamp_hour": {
+      "type": "number",
+      "description": "Hour of day (0-23) for usage patterns"
+    }
+  },
+  "required": [
+    "event_type"
+  ]
+}

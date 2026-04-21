@@ -1,0 +1,74 @@
+{
+  "name": "EarlySupporter",
+  "description": "Private tracking of early supporters who helped UF51 survive. Fair repayment, no hierarchy.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Supporter's name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Supporter's email for contact"
+    },
+    "amount_gbp": {
+      "type": "number",
+      "description": "Amount they supported in GBP"
+    },
+    "date_supported": {
+      "type": "string",
+      "format": "date",
+      "description": "Approximate date they helped (can be retrospective)"
+    },
+    "choice": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "fiat",
+        "p51"
+      ],
+      "default": "pending",
+      "description": "Their choice: pending (not decided), fiat (want money back), p51 (want $P51 conversion)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "recorded",
+        "choice_made",
+        "completed"
+      ],
+      "default": "recorded",
+      "description": "Status of repayment/conversion"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Context about how they helped, when, why"
+    },
+    "p51_equivalent": {
+      "type": "number",
+      "description": "If they chose $P51: equivalent amount at fair conversion rate"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When repayment/conversion was completed"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "amount_gbp"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

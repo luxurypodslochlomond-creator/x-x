@@ -1,0 +1,68 @@
+{
+  "name": "ScottMerch",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "item_name": {
+      "type": "string",
+      "description": "T-shirt, hoodie, vinyl, etc"
+    },
+    "size": {
+      "type": "string",
+      "description": "S/M/L/XL or N/A"
+    },
+    "price": {
+      "type": "number",
+      "description": "Selling price"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "JPY",
+        "KRW",
+        "AUD",
+        "CAD"
+      ],
+      "default": "GBP"
+    },
+    "cost": {
+      "type": "number",
+      "description": "What it cost to make"
+    },
+    "stock_total": {
+      "type": "number",
+      "description": "Total inventory"
+    },
+    "stock_remaining": {
+      "type": "number",
+      "description": "What's left"
+    },
+    "location": {
+      "type": "string",
+      "description": "Where is it? (storage, van, venue)"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Photo of merch"
+    }
+  },
+  "required": [
+    "artist_id",
+    "item_name",
+    "price"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "FairLaunchProtocol",
+  "type": "object",
+  "properties": {
+    "launch_wave": {
+      "type": "string",
+      "enum": [
+        "grassroots_wave",
+        "community_wave",
+        "institutional_wave"
+      ],
+      "description": "Which wave of launch this activation belongs to"
+    },
+    "activation_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Exact moment of activation - ensuring simultaneous access"
+    },
+    "user_access_tier": {
+      "type": "string",
+      "enum": [
+        "individual",
+        "community_leader",
+        "organization",
+        "institution"
+      ],
+      "description": "User's access tier for fair distribution"
+    },
+    "geographic_priority": {
+      "type": "string",
+      "description": "Geographic region for equitable global access"
+    },
+    "quantum_seed": {
+      "type": "string",
+      "description": "Quantum random seed ensuring fair token distribution"
+    },
+    "anti_capture_mechanism": {
+      "type": "boolean",
+      "default": true,
+      "description": "Is anti-institutional-capture protection active?"
+    },
+    "maximum_initial_tokens": {
+      "type": "number",
+      "description": "Maximum tokens any single entity can earn in launch phase"
+    },
+    "community_verification_required": {
+      "type": "boolean",
+      "default": true,
+      "description": "Must be verified by community before full access"
+    }
+  },
+  "required": [
+    "launch_wave",
+    "user_access_tier"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

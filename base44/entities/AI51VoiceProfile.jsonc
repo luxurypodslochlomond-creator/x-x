@@ -1,0 +1,114 @@
+{
+  "name": "AI51VoiceProfile",
+  "type": "object",
+  "properties": {
+    "voice_characteristics": {
+      "type": "object",
+      "description": "Learned voice patterns (pitch, pace, accent fingerprint)",
+      "properties": {
+        "avg_pitch": {
+          "type": "number"
+        },
+        "speaking_rate": {
+          "type": "number"
+        },
+        "accent_region": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number"
+        }
+      }
+    },
+    "emotional_patterns": {
+      "type": "object",
+      "description": "Detected emotional states when speaking",
+      "properties": {
+        "stressed_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "calm_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "energy_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      }
+    },
+    "learning_consent": {
+      "type": "boolean",
+      "default": false,
+      "description": "User explicitly enabled voice learning"
+    },
+    "learning_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What AI51 can learn about (e.g. 'voice_only', 'mood_detection', 'response_timing')",
+      "default": []
+    },
+    "memory_entries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of AI51Memory entries related to this voice profile"
+    },
+    "last_voice_sample_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When we last learned from voice"
+    },
+    "data_retention_days": {
+      "type": "integer",
+      "default": 30,
+      "description": "Auto-delete voice data after N days (user controlled)"
+    },
+    "local_storage_only": {
+      "type": "boolean",
+      "default": true,
+      "description": "Voice patterns stay on device, never uploaded"
+    }
+  },
+  "required": [
+    "learning_consent"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

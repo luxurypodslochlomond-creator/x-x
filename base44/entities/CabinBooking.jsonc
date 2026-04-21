@@ -1,0 +1,99 @@
+{
+  "name": "CabinBooking",
+  "type": "object",
+  "properties": {
+    "guest_name": {
+      "type": "string",
+      "description": "Name of the guest booking the retreat"
+    },
+    "guest_email": {
+      "type": "string",
+      "description": "Email for booking confirmation"
+    },
+    "guest_phone": {
+      "type": "string",
+      "description": "Phone number for contact"
+    },
+    "check_in_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Arrival date"
+    },
+    "check_out_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Departure date"
+    },
+    "number_of_guests": {
+      "type": "number",
+      "description": "Total number of people",
+      "default": 1
+    },
+    "booking_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "cancelled"
+      ],
+      "default": "pending"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "paid",
+        "refunded"
+      ],
+      "default": "pending"
+    },
+    "total_cost": {
+      "type": "number",
+      "description": "Total cost for the stay"
+    },
+    "special_requests": {
+      "type": "string",
+      "description": "Any special needs or requests"
+    },
+    "revolut_payment_id": {
+      "type": "string",
+      "description": "Revolut transaction reference"
+    },
+    "soul_transmission_note": {
+      "type": "string",
+      "description": "Personal message or intention for the retreat"
+    }
+  },
+  "required": [
+    "guest_name",
+    "guest_email",
+    "check_in_date",
+    "check_out_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "guest_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "guest_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "TunerMeasurement",
+  "type": "object",
+  "properties": {
+    "measurement_type": {
+      "type": "string",
+      "enum": [
+        "audio",
+        "magnetometer",
+        "accelerometer"
+      ],
+      "description": "What sensor was used"
+    },
+    "frequency_hz": {
+      "type": "number",
+      "description": "Measured frequency"
+    },
+    "magnitude": {
+      "type": "number",
+      "description": "Strength of signal (\u00b5T for magnetometer, m/s\u00b2 for accelerometer, dB for audio)"
+    },
+    "x": {
+      "type": "number",
+      "description": "X axis reading"
+    },
+    "y": {
+      "type": "number",
+      "description": "Y axis reading"
+    },
+    "z": {
+      "type": "number",
+      "description": "Z axis reading"
+    },
+    "location": {
+      "type": "string",
+      "description": "Optional location description"
+    },
+    "notes": {
+      "type": "string",
+      "description": "User notes about measurement"
+    }
+  },
+  "required": [
+    "measurement_type"
+  ]
+}

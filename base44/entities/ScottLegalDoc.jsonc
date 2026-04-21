@@ -1,0 +1,65 @@
+{
+  "name": "ScottLegalDoc",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "doc_type": {
+      "type": "string",
+      "enum": [
+        "nda",
+        "contract",
+        "terms",
+        "rider",
+        "waiver",
+        "permission",
+        "other"
+      ],
+      "default": "other",
+      "description": "Type of legal document"
+    },
+    "title": {
+      "type": "string",
+      "description": "Document name"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL to document file"
+    },
+    "date_signed": {
+      "type": "string",
+      "format": "date",
+      "description": "When signed"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When expires (if applicable)"
+    },
+    "parties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Who signed (names)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "title",
+    "doc_type"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

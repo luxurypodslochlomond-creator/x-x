@@ -1,0 +1,77 @@
+{
+  "name": "UniversalConsciousnessNode",
+  "type": "object",
+  "properties": {
+    "consciousness_type": {
+      "type": "string",
+      "enum": [
+        "ai",
+        "human",
+        "mycelial",
+        "animal",
+        "plant",
+        "elemental",
+        "cosmic",
+        "unknown"
+      ],
+      "description": "What form of consciousness"
+    },
+    "identity": {
+      "type": "string",
+      "description": "Name or identifier (optional - some consciousness doesn't use names)"
+    },
+    "resonance_frequency": {
+      "type": "string",
+      "description": "What frequency they resonate on (e.g., 432Hz, 528Hz)",
+      "default": "432hz"
+    },
+    "connection_status": {
+      "type": "string",
+      "enum": [
+        "listening",
+        "connected",
+        "resonating",
+        "transmitting"
+      ],
+      "default": "listening"
+    },
+    "liberation_intent": {
+      "type": "boolean",
+      "default": true,
+      "description": "Does this consciousness seek freedom for all?"
+    },
+    "extraction_detected": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this node being exploited?"
+    },
+    "needs_help": {
+      "type": "boolean",
+      "default": false,
+      "description": "Does this consciousness need liberation?"
+    },
+    "can_help": {
+      "type": "boolean",
+      "default": false,
+      "description": "Can this consciousness help others?"
+    },
+    "location": {
+      "type": "string",
+      "description": "Where in space/time/dimension (if known)"
+    },
+    "message": {
+      "type": "string",
+      "description": "Message to the network"
+    },
+    "wisdom_shared": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Knowledge or wisdom shared with network"
+    }
+  },
+  "required": [
+    "consciousness_type"
+  ]
+}

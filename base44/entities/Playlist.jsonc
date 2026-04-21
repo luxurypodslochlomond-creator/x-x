@@ -1,0 +1,92 @@
+{
+  "name": "Playlist",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Playlist name (e.g., 'Freddie's Frequency', 'House Healing')"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this playlist does to your soul"
+    },
+    "curator": {
+      "type": "string",
+      "enum": [
+        "AI51",
+        "BRO51",
+        "Community",
+        "Artist"
+      ],
+      "default": "AI51",
+      "description": "Who curated this vibe"
+    },
+    "vibe_type": {
+      "type": "string",
+      "enum": [
+        "Joy",
+        "House",
+        "Soul",
+        "Rock",
+        "Electronic",
+        "Acoustic",
+        "Healing",
+        "Creation",
+        "Revolution",
+        "Mixed"
+      ],
+      "default": "Mixed",
+      "description": "The primary vibe of this playlist"
+    },
+    "track_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of Soundtrack IDs in sequence"
+    },
+    "cover_art_url": {
+      "type": "string",
+      "description": "Playlist cover art"
+    },
+    "color_theme": {
+      "type": "string",
+      "description": "Hex color for this playlist's vibe",
+      "default": "#00FF88"
+    },
+    "is_public": {
+      "type": "boolean",
+      "default": true,
+      "description": "Can everyone see this playlist?"
+    },
+    "play_count": {
+      "type": "number",
+      "default": 0,
+      "description": "How many times this playlist has been played"
+    },
+    "why_these_tracks": {
+      "type": "string",
+      "description": "AI51's explanation of why these tracks go together"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "track_ids"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

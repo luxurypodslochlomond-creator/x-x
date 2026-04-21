@@ -1,0 +1,57 @@
+{
+  "name": "VoiceHealingSession",
+  "type": "object",
+  "properties": {
+    "session_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this healing session occurred"
+    },
+    "healing_intent": {
+      "type": "string",
+      "description": "What the user wanted to heal (their stated intention)"
+    },
+    "voice_f0_hz": {
+      "type": "number",
+      "description": "Fundamental frequency of voice (stress biomarker)"
+    },
+    "stress_level_detected": {
+      "type": "number",
+      "description": "Stress score 0-100 based on vocal biomarkers"
+    },
+    "dominant_vowel": {
+      "type": "string",
+      "description": "Primary vowel sound detected (AH=heart, OH=throat, etc.)"
+    },
+    "recommended_protocol": {
+      "type": "string",
+      "description": "Which frequency protocol was recommended"
+    },
+    "session_completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did user complete the frequency session?"
+    },
+    "post_session_notes": {
+      "type": "string",
+      "description": "How they felt after (optional)"
+    },
+    "audio_hash": {
+      "type": "string",
+      "description": "SHA-256 hash of voice recording for privacy/security"
+    }
+  },
+  "required": [
+    "healing_intent",
+    "stress_level_detected",
+    "recommended_protocol"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

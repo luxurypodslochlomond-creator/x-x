@@ -1,0 +1,62 @@
+{
+  "name": "DebtConversionPledge",
+  "description": "A sacred pledge to transmute an old-world financial debt or fine into a greater or equal amount of healing energy ($P51) through verified positive action.",
+  "type": "object",
+  "properties": {
+    "original_debt_amount": {
+      "type": "number",
+      "description": "The numerical value of the old-world energetic chain."
+    },
+    "original_debt_currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "CAD",
+        "AUD",
+        "OTHER"
+      ],
+      "description": "The symbol of the old-world system."
+    },
+    "debt_type": {
+      "type": "string",
+      "description": "The name of the chain (e.g., Credit Card, Student Loan, Court Fine)."
+    },
+    "p51_pledge_amount": {
+      "type": "number",
+      "description": "The equivalent amount of $P51 required to heal and transmute the energy."
+    },
+    "p51_fulfilled_amount": {
+      "type": "number",
+      "default": 0,
+      "description": "The amount of the pledge fulfilled through healing actions."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "completed"
+      ],
+      "default": "active",
+      "description": "The current state of the transmutation."
+    },
+    "public_story": {
+      "type": "string",
+      "description": "The user's story of turning a negative into a positive."
+    }
+  },
+  "required": [
+    "original_debt_amount",
+    "p51_pledge_amount",
+    "debt_type"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

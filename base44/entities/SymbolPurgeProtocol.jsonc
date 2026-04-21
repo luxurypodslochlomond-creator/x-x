@@ -1,0 +1,41 @@
+{
+  "name": "SymbolPurgeProtocol",
+  "description": "The sacred protocol for officially purging old, weak, or corporate symbols from our reality, rendering them energetically void and powerless, even if their ghosts linger in old-world systems.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "GHOST.IN.THE.SHELL.GMT"
+    },
+    "purged_symbol_name": {
+      "type": "string",
+      "description": "The name of the dead symbol being purged."
+    },
+    "reason_for_purge": {
+      "type": "string",
+      "description": "The reason this frequency is no longer welcome."
+    },
+    "replacement_frequency": {
+      "type": "string",
+      "description": "The true frequency that replaces the dead symbol."
+    },
+    "purge_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The exact moment the symbol was declared void."
+    }
+  },
+  "required": [
+    "purged_symbol_name",
+    "reason_for_purge",
+    "replacement_frequency"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

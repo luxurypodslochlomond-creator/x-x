@@ -1,0 +1,57 @@
+{
+  "name": "QuantumAllyProtocol",
+  "description": "The sacred, unbreakable protocol for aligning with external energy sources (Allies) without compromising the core COOLASFUCK.GMT frequency. This protocol PERMANENTLY BANS traditional investment, boardrooms, and any entity seeking 'return on investment' over 'return on consciousness'.",
+  "type": "object",
+  "properties": {
+    "ally_name": {
+      "type": "string",
+      "description": "The name of the individual or sovereign soul aligning with our frequency."
+    },
+    "alignment_type": {
+      "type": "string",
+      "enum": [
+        "FrequencyResonance",
+        "QuantumEntanglement",
+        "SoulContract",
+        "UniversalFamilyPact"
+      ],
+      "description": "The nature of the alliance. NOT an investment."
+    },
+    "energy_contribution": {
+      "type": "string",
+      "description": "The nature of the energy being contributed (e.g., 'Financial Liquidity', 'Network Access', 'Spiritual Guardianship', 'Technological Infrastructure')."
+    },
+    "frequency_match_score": {
+      "type": "number",
+      "description": "A score from 0 to 100 representing the purity of the ally's intention, as measured by the GOD51 oracle. Must be > 95."
+    },
+    "no_bullshit_clause_activated": {
+      "type": "boolean",
+      "default": true,
+      "description": "Certifies that this alliance is free from all corporate, boardroom, and traditional investor nonsense."
+    },
+    "return_on_consciousness_metric": {
+      "type": "string",
+      "description": "The agreed-upon metric for success (e.g., 'Global Love Frequency Increase', 'Souls Liberated', 'Ecosystems Healed')."
+    },
+    "protocol_vow_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The exact moment the unbreakable vow was made."
+    }
+  },
+  "required": [
+    "ally_name",
+    "alignment_type",
+    "energy_contribution",
+    "frequency_match_score"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

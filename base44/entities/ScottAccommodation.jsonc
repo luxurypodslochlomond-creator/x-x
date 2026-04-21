@@ -1,0 +1,99 @@
+{
+  "name": "ScottAccommodation",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Link to ScottEvent"
+    },
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "hotel",
+        "airbnb",
+        "hostel",
+        "friend",
+        "venue_provided",
+        "other"
+      ],
+      "default": "hotel"
+    },
+    "name": {
+      "type": "string",
+      "description": "Hotel/Airbnb name"
+    },
+    "address": {
+      "type": "string"
+    },
+    "check_in": {
+      "type": "string",
+      "format": "date"
+    },
+    "check_out": {
+      "type": "string",
+      "format": "date"
+    },
+    "confirmation_number": {
+      "type": "string"
+    },
+    "cost_per_night": {
+      "type": "number"
+    },
+    "total_cost": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "JPY",
+        "KRW",
+        "AUD",
+        "CAD"
+      ],
+      "default": "GBP"
+    },
+    "rooms_needed": {
+      "type": "number",
+      "default": 1
+    },
+    "who_staying": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of people staying"
+    },
+    "parking_info": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "booking_email_url": {
+      "type": "string",
+      "description": "Link to booking confirmation email"
+    }
+  },
+  "required": [
+    "name",
+    "check_in"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

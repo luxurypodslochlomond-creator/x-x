@@ -1,0 +1,51 @@
+{
+  "name": "CollectiveSyncMoment",
+  "type": "object",
+  "properties": {
+    "room_code": {
+      "type": "string",
+      "description": "The TunerTogether room code"
+    },
+    "target_freq": {
+      "type": "number",
+      "description": "The frequency all souls synced to (Hz)"
+    },
+    "target_note": {
+      "type": "string",
+      "description": "The musical note (e.g., A, D, G)"
+    },
+    "souls_count": {
+      "type": "number",
+      "description": "Number of souls in perfect sync"
+    },
+    "sync_duration_seconds": {
+      "type": "number",
+      "description": "How long they stayed in sync",
+      "default": 0
+    },
+    "soul_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of souls who synced together"
+    },
+    "frequency_color": {
+      "type": "string",
+      "description": "The chakra/color associated with this frequency"
+    },
+    "morphic_power": {
+      "type": "number",
+      "description": "Collective resonance power (souls * duration)",
+      "default": 0
+    }
+  },
+  "required": [
+    "room_code",
+    "target_freq",
+    "souls_count"
+  ],
+  "rls": {
+    "read": {}
+  }
+}

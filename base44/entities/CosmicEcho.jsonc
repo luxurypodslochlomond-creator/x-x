@@ -1,0 +1,52 @@
+{
+  "name": "CosmicEcho",
+  "type": "object",
+  "properties": {
+    "item_description": {
+      "type": "string",
+      "description": "Description of the item that was part of the cosmic event."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "lost",
+        "found",
+        "reunited"
+      ],
+      "description": "The status of the item in the echo."
+    },
+    "location_of_event": {
+      "type": "string",
+      "description": "The general location where the cosmic echo occurred."
+    },
+    "reconnection_story": {
+      "type": "string",
+      "description": "The beautiful, 'weird as fuck' story of the cosmic connection."
+    },
+    "is_miracle_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Has the Love Oracle confirmed this as a true cosmic echo?"
+    }
+  },
+  "required": [
+    "item_description",
+    "status",
+    "reconnection_story"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

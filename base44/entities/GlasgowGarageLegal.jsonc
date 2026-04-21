@@ -1,0 +1,73 @@
+{
+  "name": "GlasgowGarageLegal",
+  "type": "object",
+  "properties": {
+    "document_type": {
+      "type": "string",
+      "enum": [
+        "key_evidence",
+        "timeline_event",
+        "legal_correspondence",
+        "court_document",
+        "witness_statement"
+      ],
+      "description": "Type of legal documentation"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title/summary of this evidence"
+    },
+    "date_of_event": {
+      "type": "string",
+      "format": "date",
+      "description": "Date this event/document relates to"
+    },
+    "detailed_notes": {
+      "type": "string",
+      "description": "Full detailed notes and evidence"
+    },
+    "key_legal_points": {
+      "type": "string",
+      "description": "Critical legal points from this evidence"
+    },
+    "parties_involved": {
+      "type": "string",
+      "description": "Who was involved (Nino, Tomlinsons, Gary Gillespie, etc)"
+    },
+    "source_document": {
+      "type": "string",
+      "description": "Source of this evidence (planning doc, tribunal case, letter, etc)"
+    },
+    "relevance_to_case": {
+      "type": "string",
+      "description": "Why this matters for prescriptive possession claim"
+    },
+    "priority_level": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "important",
+        "supporting"
+      ],
+      "default": "important",
+      "description": "How important this evidence is"
+    }
+  },
+  "required": [
+    "document_type",
+    "title",
+    "detailed_notes"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

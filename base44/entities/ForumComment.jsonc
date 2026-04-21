@@ -1,0 +1,55 @@
+{
+  "name": "ForumComment",
+  "type": "object",
+  "properties": {
+    "post_id": {
+      "type": "string",
+      "description": "ID of the forum post this comment belongs to"
+    },
+    "content": {
+      "type": "string",
+      "description": "Comment text"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Name of commenter"
+    },
+    "author_email": {
+      "type": "string",
+      "description": "Email of commenter"
+    },
+    "is_ai51_comment": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did AI51 write this?"
+    },
+    "likes_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Hearts on this comment"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Optional image in comment"
+    }
+  },
+  "required": [
+    "post_id",
+    "content"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

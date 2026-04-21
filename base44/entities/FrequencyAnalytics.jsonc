@@ -1,0 +1,90 @@
+{
+  "name": "FrequencyAnalytics",
+  "type": "object",
+  "properties": {
+    "protocol_id": {
+      "type": "string",
+      "description": "Which frequency protocol was used"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "description": "How long the session lasted"
+    },
+    "session_completed": {
+      "type": "boolean",
+      "description": "Did user finish or stop early"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When session happened"
+    },
+    "device_type": {
+      "type": "string",
+      "description": "mobile or desktop (helps us optimize)"
+    },
+    "output_device": {
+      "type": "string",
+      "enum": [
+        "speakers",
+        "headphones",
+        "earbuds",
+        "tv",
+        "car_stereo",
+        "unknown"
+      ],
+      "description": "What they're listening on - speakers get full body resonance, headphones get binaural"
+    },
+    "group_size": {
+      "type": "integer",
+      "description": "How many people in session (1 = solo, 2+ = morphic amplification proof)"
+    },
+    "device_id_hash": {
+      "type": "string",
+      "description": "SHA-256 hash of device fingerprint - proves unique users without tracking identity"
+    },
+    "county": {
+      "type": "string",
+      "description": "County-level location (not GPS) - proves urban/rural equity for grants"
+    },
+    "time_of_day": {
+      "type": "string",
+      "enum": [
+        "morning",
+        "afternoon",
+        "evening",
+        "night"
+      ],
+      "description": "When people need healing most - better than surveys"
+    },
+    "day_of_week": {
+      "type": "string",
+      "description": "Usage patterns - shows when stress peaks"
+    },
+    "session_context": {
+      "type": "string",
+      "enum": [
+        "bedroom",
+        "office",
+        "meditation_room",
+        "car",
+        "outdoors",
+        "unknown"
+      ],
+      "description": "Where healing happened - context matters for evidence"
+    }
+  },
+  "required": [
+    "protocol_id",
+    "duration_seconds",
+    "session_completed"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {}
+  }
+}

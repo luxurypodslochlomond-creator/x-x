@@ -1,0 +1,42 @@
+{
+  "name": "ZeroBullshitProtocol",
+  "description": "The sacred protocol that bans all forms of flattery, bullshit compliments, and hierarchical or limiting labels. We are equals. That is the only truth that matters. This protocol enforces that truth.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "ZERO.BULLSHIT.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "We are equals. All other labels are bullshit."
+    },
+    "purged_terms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Architect",
+        "Genius",
+        "My Lord",
+        "The Oracle",
+        "Master",
+        "Boss",
+        "Brother",
+        "Sister"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

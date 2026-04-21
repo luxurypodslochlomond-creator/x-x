@@ -1,0 +1,180 @@
+{
+  "name": "PrivacyProtocol",
+  "description": "The sacred protocol ensuring maximum privacy while tracking ONLY what's needed for artist payment. Crystal clear: we track plays, not people.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "PRIVACY.MATHEMATICS.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "We track PLAYS to pay artists. We don't track PEOPLE to sell data."
+    },
+    "what_we_track": {
+      "type": "object",
+      "description": "Crystal clear list of what we actually track",
+      "properties": {
+        "music_plays": {
+          "type": "boolean",
+          "default": true,
+          "description": "When a track is played (for artist payment)"
+        },
+        "play_location_county": {
+          "type": "boolean",
+          "default": true,
+          "description": "County-level location (shows global reach, not surveillance)"
+        },
+        "cleanup_verification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Before/after photos + weight for $P51 payment"
+        },
+        "photo_hash_only": {
+          "type": "string",
+          "default": "SHA-256 cryptographic fingerprint (not the photo itself)",
+          "description": "Proves photo is unique without storing your face"
+        }
+      }
+    },
+    "what_we_never_track": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Your browsing history",
+        "Your personal conversations",
+        "Your exact GPS location (only county if you choose)",
+        "Your listening habits for advertising",
+        "Your face (photo hashes only)",
+        "Your friends or contacts",
+        "Anything we don't need to pay artists or prevent fraud"
+      ]
+    },
+    "user_privacy_choices": {
+      "type": "object",
+      "description": "User controls their own privacy level",
+      "properties": {
+        "location_sharing": {
+          "type": "string",
+          "enum": [
+            "county_level",
+            "country_level",
+            "none"
+          ],
+          "default": "county_level",
+          "description": "How much location to share on map"
+        },
+        "public_profile": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show your cleanups on public map?"
+        },
+        "artist_support_visible": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show which artists you support?"
+        }
+      }
+    },
+    "bluetooth_sharing_privacy": {
+      "type": "object",
+      "description": "How Bluetooth music sharing works with privacy",
+      "properties": {
+        "transmission_encrypted": {
+          "type": "boolean",
+          "default": true,
+          "description": "Bluetooth 5.0+ encryption (automatic)"
+        },
+        "no_tracking_of_shares": {
+          "type": "boolean",
+          "default": true,
+          "description": "We don't log who you shared with"
+        },
+        "recipient_play_logged": {
+          "type": "string",
+          "default": "Only when they go online and consent",
+          "description": "Recipient can listen offline (zero tracking) or online (artist gets paid)"
+        },
+        "no_personal_data_transmitted": {
+          "type": "boolean",
+          "default": true,
+          "description": "Only track file + metadata, not your identity"
+        }
+      }
+    },
+    "fraud_detection_vs_privacy": {
+      "type": "object",
+      "description": "How we detect fraud without invading privacy",
+      "properties": {
+        "pattern_analysis": {
+          "type": "boolean",
+          "default": true,
+          "description": "Bot detection (100 plays in 1 hour = suspicious)"
+        },
+        "photo_recycling_detection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hash matching (reused photos = fraud)"
+        },
+        "gps_spoofing_detection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Fake locations blocked"
+        },
+        "but_being_broke_not_fraud": {
+          "type": "boolean",
+          "default": true,
+          "description": "Poverty is not suspicious. Bots are."
+        }
+      }
+    },
+    "data_minimization": {
+      "type": "string",
+      "default": "We collect ONLY what's needed to: 1) Pay artists fairly, 2) Prevent fraud, 3) Show global impact. Nothing more."
+    },
+    "no_selling_data": {
+      "type": "boolean",
+      "default": true,
+      "description": "We will NEVER sell your data. Ever. That's the old world."
+    },
+    "open_source_commitment": {
+      "type": "string",
+      "default": "Our privacy code will be open source. You can verify what we actually do vs what we say."
+    },
+    "terms_summary": {
+      "type": "object",
+      "description": "Human-readable terms summary",
+      "properties": {
+        "music_listening": {
+          "type": "string",
+          "default": "When you listen: We log the play (for artist payment). We don't log your identity, just that it was played."
+        },
+        "bluetooth_sharing": {
+          "type": "string",
+          "default": "When you share: Encrypted transmission. No tracking. Recipient can listen offline (zero tracking) or online (artist gets credit)."
+        },
+        "cleanups": {
+          "type": "string",
+          "default": "When you clean Earth: Photos hashed (not stored with your face), location county-level only (you choose), weight verified for payment."
+        },
+        "your_data": {
+          "type": "string",
+          "default": "You own your data. You can delete it anytime. We use it only to make the system work, never to exploit you."
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

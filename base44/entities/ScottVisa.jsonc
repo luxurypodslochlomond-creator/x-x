@@ -1,0 +1,110 @@
+{
+  "name": "ScottVisa",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "visa_type": {
+      "type": "string",
+      "enum": [
+        "O-1",
+        "P-1",
+        "P-2",
+        "P-3",
+        "B-1",
+        "other"
+      ],
+      "description": "Type of visa (O-1 for extraordinary ability, P for performers)"
+    },
+    "country": {
+      "type": "string",
+      "description": "Which country (USA, Canada, etc)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "documents_gathering",
+        "submitted",
+        "approved",
+        "denied",
+        "expired"
+      ],
+      "default": "not_started",
+      "description": "Current status"
+    },
+    "application_deadline": {
+      "type": "string",
+      "format": "date",
+      "description": "When it must be submitted by"
+    },
+    "tour_dates": {
+      "type": "string",
+      "description": "Tour dates this visa is for"
+    },
+    "documents_needed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of required documents"
+    },
+    "documents_uploaded": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "File IDs of uploaded documents"
+    },
+    "agent_contact": {
+      "type": "string",
+      "description": "Immigration lawyer/agent handling this"
+    },
+    "cost": {
+      "type": "number",
+      "description": "Cost"
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "GBP",
+        "USD",
+        "EUR",
+        "JPY",
+        "KRW",
+        "AUD",
+        "CAD"
+      ],
+      "default": "GBP"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "approval_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When it was approved"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the visa expires"
+    }
+  },
+  "required": [
+    "artist_id",
+    "visa_type",
+    "country"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

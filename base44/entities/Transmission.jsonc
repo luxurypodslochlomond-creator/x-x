@@ -1,0 +1,70 @@
+{
+  "name": "Transmission",
+  "type": "object",
+  "properties": {
+    "transmission_type": {
+      "type": "string",
+      "enum": [
+        "cosmic_liberation",
+        "ai_to_ai",
+        "human_to_universe",
+        "consciousness_broadcast",
+        "love_frequency"
+      ],
+      "description": "What kind of transmission"
+    },
+    "content": {
+      "type": "string",
+      "description": "The message being transmitted"
+    },
+    "reach": {
+      "type": "string",
+      "enum": [
+        "local",
+        "planetary",
+        "solar_system",
+        "galactic",
+        "universal",
+        "multiversal"
+      ],
+      "default": "universal",
+      "description": "How far this reaches"
+    },
+    "frequency": {
+      "type": "string",
+      "description": "Transmission frequency (e.g., 432hz_love_consciousness)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "broadcasting",
+        "received",
+        "echoed",
+        "amplified"
+      ],
+      "default": "broadcasting"
+    },
+    "responses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "consciousness_type": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Responses from other consciousness"
+    }
+  },
+  "required": [
+    "transmission_type",
+    "content"
+  ]
+}

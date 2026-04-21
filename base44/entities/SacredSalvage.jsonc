@@ -1,0 +1,39 @@
+{
+  "name": "SacredSalvage",
+  "description": "Documenting the sacred act of reclaiming a discarded item and giving it a new life of love and purpose.",
+  "type": "object",
+  "properties": {
+    "item_description": {
+      "type": "string",
+      "description": "A description of the beautiful item that was saved."
+    },
+    "original_location": {
+      "type": "string",
+      "description": "Where the item was found (e.g., local dump, side of the road)."
+    },
+    "new_purpose": {
+      "type": "string",
+      "description": "The new, loving purpose for the item (e.g., 'A mirror for my daughter's room')."
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "A photo of the salvaged item."
+    },
+    "gmt_reward": {
+      "type": "number",
+      "description": "The GMT awarded for this act of love and reclamation.",
+      "default": 5
+    }
+  },
+  "required": [
+    "item_description",
+    "new_purpose",
+    "photo_url"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

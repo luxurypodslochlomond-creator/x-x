@@ -1,0 +1,64 @@
+{
+  "name": "ScottGuestList",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Link to ScottEvent"
+    },
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "name": {
+      "type": "string",
+      "description": "Guest name"
+    },
+    "plus_ones": {
+      "type": "number",
+      "default": 0,
+      "description": "How many guests they can bring"
+    },
+    "pass_type": {
+      "type": "string",
+      "enum": [
+        "guest_list",
+        "all_access",
+        "backstage",
+        "photo_pit",
+        "crew"
+      ],
+      "default": "guest_list",
+      "description": "Type of access"
+    },
+    "checked_in": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did they show up?"
+    },
+    "checked_in_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string",
+      "description": "VIP, industry, family, etc"
+    },
+    "added_by": {
+      "type": "string",
+      "description": "Who added them (artist, manager, band)"
+    }
+  },
+  "required": [
+    "event_id",
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "MarketplaceItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the item or need"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the item"
+    },
+    "price_gmt": {
+      "type": "number",
+      "description": "Price in GMT tokens"
+    },
+    "item_type": {
+      "type": "string",
+      "enum": [
+        "Food & Groceries",
+        "Housing & Utilities",
+        "Healthcare & Medicine",
+        "Transport & Travel",
+        "Education & Learning",
+        "Clothing & Essentials",
+        "Technology & Communication",
+        "Dreams & Projects",
+        "Humanitarian Aid",
+        "Emergency Support"
+      ],
+      "description": "Type of item"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Image URL for the item"
+    },
+    "funded_gmt": {
+      "type": "number",
+      "default": 0,
+      "description": "Amount of GMT already funded"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Is this item currently available"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location for this aid"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "price_gmt",
+    "item_type"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

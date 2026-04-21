@@ -1,0 +1,69 @@
+{
+  "name": "CleanupUnlock",
+  "type": "object",
+  "properties": {
+    "unlock_id": {
+      "type": "string",
+      "description": "Unique unlock identifier (e.g., 'volckano_skin_fire')"
+    },
+    "unlock_name": {
+      "type": "string",
+      "description": "Display name (e.g., 'Fire Dragon Skin')"
+    },
+    "unlock_type": {
+      "type": "string",
+      "enum": [
+        "cosmetic",
+        "feature",
+        "content",
+        "tool",
+        "healing",
+        "game"
+      ],
+      "description": "Type of unlock"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this unlock is/does"
+    },
+    "required_cleanup_count": {
+      "type": "number",
+      "description": "Total cleanups needed to unlock (e.g., 5 cleanups = unlock)"
+    },
+    "required_p51_total": {
+      "type": "number",
+      "description": "Alternative: unlock by $P51 earned instead"
+    },
+    "unlock_emoji": {
+      "type": "string",
+      "description": "Visual emoji (\ud83d\udd13\ud83c\udf1f\u2b50)"
+    },
+    "rarity": {
+      "type": "string",
+      "enum": [
+        "common",
+        "rare",
+        "epic",
+        "legendary"
+      ],
+      "default": "common"
+    },
+    "reward_value": {
+      "type": "number",
+      "description": "Bonus $P51 or discount % if applicable"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "unlock_id",
+    "unlock_name",
+    "unlock_type",
+    "required_cleanup_count"
+  ],
+  "rls": {
+    "read": {}
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "ScottPushSubscription",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string",
+      "description": "Band member or manager email"
+    },
+    "subscription_data": {
+      "type": "string",
+      "description": "JSON stringified push subscription object (endpoint, keys, etc)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Is this subscription still active?"
+    },
+    "device_type": {
+      "type": "string",
+      "enum": [
+        "mobile",
+        "desktop",
+        "tablet"
+      ],
+      "description": "Type of device subscribed"
+    },
+    "last_active": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time this device was active"
+    },
+    "notification_count": {
+      "type": "number",
+      "default": 0,
+      "description": "How many notifications sent to this device"
+    }
+  },
+  "required": [
+    "user_email",
+    "subscription_data"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

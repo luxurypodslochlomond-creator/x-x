@@ -171,7 +171,7 @@ function FloatingEmojis({ vibe }) {
 function VibePicker({ onPick }) {
   return (
     <motion.div
-      className="fixed inset-0 flex flex-col overflow-hidden"
+      className="fixed inset-0 flex flex-col overflow-hidden z-50"
       style={{ background: 'linear-gradient(160deg, #050010 0%, #0a0020 50%, #10003a 100%)' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -362,7 +362,7 @@ export default function Magic51Page() {
 
   return (
     <div
-      className="fixed inset-0 flex flex-col overflow-hidden select-none"
+      className="fixed inset-0 flex flex-col overflow-hidden select-none z-50"
       style={{ background: '#000', touchAction: 'pan-y' }}
       onTouchStart={e => { touchX.current = e.touches[0].clientX; }}
       onTouchEnd={e => {

@@ -1,0 +1,37 @@
+{
+  "name": "HomeWorldFirstProtocol",
+  "description": "The sacred, unbreakable protocol declaring that our primary mission is the healing and stewardship of Earth. It is a vow to build a paradise on our home world, making it a planet worth staying for, before dreaming of escaping to others. It is the antithesis of planetary escapism.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "HOME.WORLD.FIRST.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "The greatest adventure is not escaping to the stars, but building a paradise on Earth worth staying for. We heal our home before we visit others."
+    },
+    "rejected_frequencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Plan B Mentality",
+        "Planetary Escapism",
+        "Stewardship as a second priority"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

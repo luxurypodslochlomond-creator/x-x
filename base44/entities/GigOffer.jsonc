@@ -1,0 +1,225 @@
+{
+  "name": "GigOffer",
+  "type": "object",
+  "properties": {
+    "manager_id": {
+      "type": "string",
+      "description": "ID of the manager who owns this gig offer"
+    },
+    "artist_id": {
+      "type": "string",
+      "description": "ID of the artist this gig is for"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the gig"
+    },
+    "time": {
+      "type": "string",
+      "description": "Start time of the gig"
+    },
+    "venue": {
+      "type": "string",
+      "description": "Venue name"
+    },
+    "city": {
+      "type": "string",
+      "description": "City where the gig is"
+    },
+    "county": {
+      "type": "string",
+      "description": "County where the gig is"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country where the gig is"
+    },
+    "location": {
+      "type": "string",
+      "description": "Full location / address"
+    },
+    "promoter": {
+      "type": "string",
+      "description": "Promoter name"
+    },
+    "promoter_name": {
+      "type": "string",
+      "description": "Promoter name (parsed)"
+    },
+    "promoter_contact": {
+      "type": "string",
+      "description": "Promoter contact info"
+    },
+    "promoter_email": {
+      "type": "string",
+      "description": "Promoter email"
+    },
+    "promoter_phone": {
+      "type": "string",
+      "description": "Promoter phone"
+    },
+    "fee": {
+      "type": "number",
+      "description": "Fee offered"
+    },
+    "currency": {
+      "type": "string",
+      "default": "GBP",
+      "description": "Currency of fee"
+    },
+    "deposit_required": {
+      "type": "boolean",
+      "default": false
+    },
+    "deposit_amount": {
+      "type": "number"
+    },
+    "capacity": {
+      "type": "number"
+    },
+    "is_tour": {
+      "type": "boolean",
+      "default": false
+    },
+    "tour_dates": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "urgent",
+        "normal",
+        "flexible"
+      ],
+      "default": "normal"
+    },
+    "response_deadline": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sent_to_band_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "response_sent_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "final_response_sent": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "manager_reviewing",
+        "band_voting",
+        "confirmed",
+        "rejected_by_manager",
+        "rejected_by_band"
+      ],
+      "default": "manager_reviewing",
+      "description": "Current status of the offer"
+    },
+    "manager_approved": {
+      "type": "boolean"
+    },
+    "all_responses_in": {
+      "type": "boolean",
+      "default": false
+    },
+    "band_responses": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "ai_draft_accept": {
+      "type": "string"
+    },
+    "ai_draft_reject": {
+      "type": "string"
+    },
+    "manager_notes": {
+      "type": "string"
+    },
+    "rejection_reason": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "string"
+    },
+    "offer_details": {
+      "type": "string",
+      "description": "Full offer details from AI parse"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "raw_email": {
+      "type": "string"
+    },
+    "distance_to_next": {
+      "type": "number"
+    },
+    "time_saved_minutes": {
+      "type": "number"
+    },
+    "venue_confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "date_start": {
+      "type": "string",
+      "description": "Date parsed by AI (YYYY-MM-DD)"
+    },
+    "time_start": {
+      "type": "string",
+      "description": "Time parsed by AI"
+    },
+    "title": {
+      "type": "string",
+      "description": "Event title if different from venue"
+    }
+  },
+  "required": [
+    "artist_id",
+    "venue"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

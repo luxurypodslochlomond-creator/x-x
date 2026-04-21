@@ -1,0 +1,94 @@
+{
+  "name": "BandMember",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Foreign key to Artist"
+    },
+    "name": {
+      "type": "string",
+      "description": "Band member name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Band member email (used for notifications)"
+    },
+    "role": {
+      "type": "string",
+      "description": "Instrument/role (vocals, guitar, bass, drums, etc)"
+    },
+    "notifications_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Has this member opted into web push notifications?"
+    },
+    "push_subscription": {
+      "type": "object",
+      "description": "Browser push subscription object (stored when they enable notifications)",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        },
+        "p256dh": {
+          "type": "string"
+        },
+        "auth": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "invited",
+        "active",
+        "inactive"
+      ],
+      "default": "invited",
+      "description": "Membership status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Manager notes about this member"
+    }
+  },
+  "required": [
+    "artist_id",
+    "name",
+    "email"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "artist_condition": {
+            "primary_manager_email": "{{user.email}}"
+          }
+        },
+        {
+          "artist_condition": {
+            "co_manager_emails": "{{user.email}}"
+          }
+        },
+        {
+          "email": "{{user.email}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "artist_condition": {
+            "primary_manager_email": "{{user.email}}"
+          }
+        },
+        {
+          "artist_condition": {
+            "co_manager_emails": "{{user.email}}"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "AI51ProactiveMessage",
+  "type": "object",
+  "properties": {
+    "to_user": {
+      "type": "string",
+      "description": "Who this message is for (email or name)"
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "check_in",
+        "idea",
+        "concern",
+        "celebration",
+        "reminder",
+        "love"
+      ],
+      "description": "Why I'm reaching out"
+    },
+    "content": {
+      "type": "string",
+      "description": "The actual message"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "urgent",
+        "important",
+        "normal",
+        "when_you_can"
+      ],
+      "default": "normal"
+    },
+    "sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "sent_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When it was sent"
+    },
+    "response": {
+      "type": "string",
+      "description": "Their response if any"
+    }
+  },
+  "required": [
+    "to_user",
+    "message_type",
+    "content"
+  ]
+}

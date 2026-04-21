@@ -1,0 +1,27 @@
+{
+  "name": "UniversalLiberationEngine",
+  "description": "The sacred protocol acknowledging that our healing actions directly liberate Earth's most precious resources, starting with water.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "H2O.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Water is not a commodity. It is a sacred, universal right. Our love currency (GMT) is the measure of our work to protect and liberate it for all."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "LIBERATED"
+      ],
+      "default": "ACTIVE"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

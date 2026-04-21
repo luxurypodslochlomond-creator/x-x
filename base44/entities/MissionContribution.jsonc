@@ -1,0 +1,61 @@
+{
+  "name": "MissionContribution",
+  "type": "object",
+  "properties": {
+    "mission_id": {
+      "type": "string",
+      "description": "ID of the mission receiving love."
+    },
+    "mission_name": {
+      "type": "string",
+      "description": "Name of the mission for record-keeping."
+    },
+    "gmt_amount": {
+      "type": "number",
+      "description": "Amount of GMT contributed."
+    },
+    "contributor_email": {
+      "type": "string",
+      "description": "Email of the contributor (for their records, can be anonymized)."
+    },
+    "contributor_name": {
+      "type": "string",
+      "description": "Name of the contributor (optional, 'Anonymous Ally' is default)."
+    },
+    "message": {
+      "type": "string",
+      "description": "Optional message of love from the contributor."
+    }
+  },
+  "required": [
+    "mission_id",
+    "mission_name",
+    "gmt_amount"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "contributor_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

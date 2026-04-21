@@ -1,0 +1,226 @@
+{
+  "name": "Cleanup",
+  "type": "object",
+  "properties": {
+    "location": {
+      "type": "string",
+      "description": "GPS coordinates or address of cleanup"
+    },
+    "county": {
+      "type": "string",
+      "description": "County where cleanup occurred"
+    },
+    "coordinates": {
+      "type": "object",
+      "description": "GeoJSON coordinates for the map",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      }
+    },
+    "litter_weight": {
+      "type": "number",
+      "description": "Weight of litter collected in kg"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Photo evidence of litter collection"
+    },
+    "tokens_awarded": {
+      "type": "number",
+      "description": "Tokens awarded for this cleanup"
+    },
+    "tokens_instant": {
+      "type": "number",
+      "description": "Tokens paid instantly upon submission"
+    },
+    "tokens_pending": {
+      "type": "number",
+      "description": "Tokens pending community verification"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "instant_paid",
+        "pending_verification",
+        "fully_verified",
+        "rejected"
+      ],
+      "default": "instant_paid",
+      "description": "Status of cleanup verification"
+    },
+    "instant_payout_percentage": {
+      "type": "number",
+      "description": "Percentage paid instantly based on user trust level"
+    },
+    "cleanup_type": {
+      "type": "string",
+      "enum": [
+        "street",
+        "park",
+        "beach",
+        "forest",
+        "waterway",
+        "home_sanctuary",
+        "emergency_response",
+        "joyful_movement_and_dance",
+        "other"
+      ],
+      "description": "Type of area cleaned"
+    },
+    "weather_conditions": {
+      "type": "string",
+      "description": "Weather during cleanup"
+    },
+    "notes": {
+      "type": "string",
+      "description": "User's notes or feelings about the cleanup"
+    },
+    "emergency_cleanup": {
+      "type": "boolean",
+      "default": false,
+      "description": "Flagged as emergency disaster response"
+    },
+    "community_verification_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of community verifications received"
+    },
+    "verification_deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Deadline for community verification"
+    },
+    "quantum_processing_speed": {
+      "type": "string",
+      "enum": [
+        "light_speed",
+        "fast",
+        "standard",
+        "careful_review"
+      ],
+      "default": "light_speed",
+      "description": "Processing speed based on trust algorithms"
+    },
+    "photo_hash": {
+      "type": "string",
+      "description": "SHA-256 hash of photo for crypto verification"
+    },
+    "perceptual_hash": {
+      "type": "string",
+      "description": "Perceptual hash (pHash) - detects similar images even if cropped/resized (2025 tech)"
+    },
+    "liveness_score": {
+      "type": "number",
+      "description": "AI liveness detection score (0-100) - detects stock photos/deepfakes (2025)"
+    },
+    "fraud_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Any fraud red flags detected by 2025 AI systems"
+    },
+    "ai_weight_confidence": {
+      "type": "string",
+      "description": "AI weight estimate confidence (high/medium/low) - 2025 CNN analysis"
+    },
+    "ai_weight_range_min": {
+      "type": "number",
+      "description": "Minimum weight estimate (kg) from AI vision"
+    },
+    "ai_weight_range_max": {
+      "type": "number",
+      "description": "Maximum weight estimate (kg) from AI vision"
+    },
+    "ai_items_detected": {
+      "type": "string",
+      "description": "Items detected by AI (e.g., '2x bottles, 5x wrappers')"
+    },
+    "ai_brands_detected": {
+      "type": "string",
+      "description": "Corporate brands detected in litter"
+    },
+    "ai_corporate_accountability": {
+      "type": "string",
+      "description": "Corporate responsibility notes"
+    },
+    "ai_verification_summary": {
+      "type": "string",
+      "description": "AI analysis summary"
+    },
+    "crypto_signature": {
+      "type": "string",
+      "description": "ECDSA P-256 signature of cleanup data"
+    },
+    "crypto_public_key": {
+      "type": "string",
+      "description": "User's public key for verification"
+    },
+    "crypto_signed_data": {
+      "type": "string",
+      "description": "Data that was signed"
+    },
+    "crypto_hash": {
+      "type": "string",
+      "description": "Hash of this cleanup in the chain"
+    },
+    "crypto_previous_hash": {
+      "type": "string",
+      "description": "Previous cleanup hash (blockchain-style chain)"
+    },
+    "crypto_version": {
+      "type": "string",
+      "description": "Crypto protocol version"
+    },
+    "ipfs_hash": {
+      "type": "string",
+      "description": "IPFS content hash (CID) - permanent decentralized storage via web3.storage/Filecoin"
+    },
+    "ipfs_gateways": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Multiple IPFS gateway URLs for redundancy"
+    },
+    "gps_verified": {
+      "type": "boolean",
+      "description": "GPS location verified at submission time"
+    },
+    "submission_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Exact timestamp of submission"
+    },
+    "ai_notes": {
+      "type": "string",
+      "description": "AI analysis notes"
+    }
+  },
+  "required": [
+    "location",
+    "county",
+    "litter_weight",
+    "photo_url"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

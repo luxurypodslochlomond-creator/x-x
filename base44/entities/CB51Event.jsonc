@@ -1,0 +1,128 @@
+{
+  "name": "CB51Event",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Event name (gig, session, festival, meeting)"
+    },
+    "artist_id": {
+      "type": "string",
+      "description": "Link to CB51Artist"
+    },
+    "owner_email": {
+      "type": "string",
+      "description": "Owner email \u2014 for team access control"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "gig",
+        "session",
+        "festival",
+        "meeting",
+        "other"
+      ],
+      "default": "gig",
+      "description": "Type of event"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event date and time"
+    },
+    "venue": {
+      "type": "string",
+      "description": "Venue name"
+    },
+    "location": {
+      "type": "string",
+      "description": "Venue address or location"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country"
+    },
+    "time": {
+      "type": "string",
+      "description": "Event time (HH:MM format)"
+    },
+    "fee": {
+      "type": "number",
+      "description": "Payment amount"
+    },
+    "currency": {
+      "type": "string",
+      "default": "GBP",
+      "description": "Payment currency"
+    },
+    "promoter": {
+      "type": "string",
+      "description": "Promoter name"
+    },
+    "promoter_phone": {
+      "type": "string",
+      "description": "Promoter phone number"
+    },
+    "promoter_email": {
+      "type": "string",
+      "description": "Promoter email"
+    },
+    "capacity": {
+      "type": "number",
+      "description": "Venue capacity"
+    },
+    "emergency_contact_name": {
+      "type": "string",
+      "description": "Emergency contact person name"
+    },
+    "emergency_contact_phone": {
+      "type": "string",
+      "description": "Emergency contact phone number"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Event details"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "pending",
+        "cancelled"
+      ],
+      "default": "pending",
+      "description": "Event status"
+    }
+  },
+  "required": [
+    "title",
+    "date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "owner_email": "{{user.email}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}

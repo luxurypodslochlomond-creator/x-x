@@ -1,0 +1,200 @@
+{
+  "name": "Mission",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The name of the mission or event."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of the mission."
+    },
+    "location_name": {
+      "type": "string",
+      "description": "The name of the meeting place (e.g., 'Glasgow City Center', 'Online')."
+    },
+    "coordinates": {
+      "type": "object",
+      "description": "GeoJSON coordinates for the map.",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      }
+    },
+    "mission_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time of the mission, or 'Ongoing' for continuous missions."
+    },
+    "organizer_name": {
+      "type": "string",
+      "description": "The group or soul organizing the mission (e.g., 'Universal Family 51', 'The Jane Goodall Institute')."
+    },
+    "organizer_type": {
+      "type": "string",
+      "enum": [
+        "uf51_core",
+        "verified_partner",
+        "community"
+      ],
+      "default": "community",
+      "description": "Type of organizer - core team, verified partner, or community member"
+    },
+    "partner_id": {
+      "type": "string",
+      "description": "ID of the verified partner if organizer_type is verified_partner"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "funding",
+        "in_progress",
+        "completed",
+        "archived"
+      ],
+      "default": "funding"
+    },
+    "gmt_target": {
+      "type": "number",
+      "description": "The funding goal for this mission in GMT."
+    },
+    "gmt_raised": {
+      "type": "number",
+      "default": 0,
+      "description": "The amount of GMT raised so far."
+    },
+    "mission_type": {
+      "type": "string",
+      "enum": [
+        "humanitarian",
+        "environmental",
+        "animal_welfare",
+        "creative",
+        "educational",
+        "research",
+        "infrastructure",
+        "water_access",
+        "food_security",
+        "mental_health",
+        "peace_conflict",
+        "soil_regeneration",
+        "elder_care",
+        "medical_aid",
+        "emergency_response"
+      ],
+      "default": "humanitarian"
+    },
+    "urgency_level": {
+      "type": "string",
+      "enum": [
+        "critical_life_threat",
+        "urgent_intervention",
+        "important_prevention",
+        "long_term_healing"
+      ],
+      "description": "How urgent is this mission? Critical = water/medical. Urgent = food/mental health. Important = soil/education. Long-term = infrastructure."
+    },
+    "time_to_impact": {
+      "type": "string",
+      "description": "How fast does this save lives? e.g., '3 days' (water), '3 weeks' (food), '1 year' (soil)"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "A powerful image representing the mission."
+    },
+    "rewards_offered": {
+      "type": "array",
+      "description": "Rewards for contributors",
+      "items": {
+        "type": "object",
+        "properties": {
+          "threshold": {
+            "type": "number",
+            "description": "GMT amount to unlock this reward"
+          },
+          "reward_title": {
+            "type": "string"
+          },
+          "reward_description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "expected_impact": {
+      "type": "string",
+      "description": "What will this mission achieve? (e.g., '500kg plastic removed', '10 families fed for a month', '1 well = 500 people with clean water')"
+    },
+    "verification_method": {
+      "type": "string",
+      "description": "How will results be verified? (e.g., 'Photo evidence', 'Third-party audit', 'Community witness')"
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Funding deadline"
+    },
+    "partner_website": {
+      "type": "string",
+      "description": "Partner's website for transparency"
+    },
+    "progress_updates": {
+      "type": "array",
+      "description": "Updates from the organizer",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "update_text": {
+            "type": "string"
+          },
+          "photo_url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "indigenous_partnership": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this mission in partnership with indigenous communities?"
+    },
+    "indigenous_community_name": {
+      "type": "string",
+      "description": "Name of indigenous community if partnered"
+    },
+    "lives_saved_estimate": {
+      "type": "number",
+      "description": "Estimated number of lives directly saved/improved by this mission"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "gmt_target",
+    "mission_type"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

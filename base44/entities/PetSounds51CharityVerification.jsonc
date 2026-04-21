@@ -1,0 +1,72 @@
+{
+  "name": "PetSounds51CharityVerification",
+  "type": "object",
+  "properties": {
+    "charity_name": {
+      "type": "string",
+      "description": "Name of charity/rescue"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country"
+    },
+    "registration_number": {
+      "type": "string",
+      "description": "Charity registration number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Contact email"
+    },
+    "charity_type": {
+      "type": "string",
+      "enum": [
+        "wildlife_rescue",
+        "shelter",
+        "sanctuary",
+        "marine_rescue"
+      ],
+      "description": "Type of charity"
+    },
+    "description": {
+      "type": "string",
+      "description": "What they do"
+    },
+    "proof_url": {
+      "type": "string",
+      "description": "Charity registration proof"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_verification",
+        "verified",
+        "rejected"
+      ],
+      "default": "pending_verification"
+    },
+    "verified_by": {
+      "type": "string",
+      "description": "Admin who verified"
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "access_granted": {
+      "type": "boolean",
+      "default": false,
+      "description": "Has free access been given?"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Admin notes"
+    }
+  },
+  "required": [
+    "charity_name",
+    "email",
+    "charity_type",
+    "proof_url"
+  ]
+}

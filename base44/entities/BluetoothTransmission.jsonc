@@ -1,0 +1,64 @@
+{
+  "name": "BluetoothTransmission",
+  "description": "Logs Bluetooth device-to-device music sharing. Offline mesh network. Artist still gets paid when recipient connects.",
+  "type": "object",
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "description": "Track that was transmitted"
+    },
+    "track_title": {
+      "type": "string"
+    },
+    "artist": {
+      "type": "string"
+    },
+    "sender_device_id": {
+      "type": "string",
+      "description": "Device that sent the frequency"
+    },
+    "receiver_device_id": {
+      "type": "string",
+      "description": "Device that received the frequency"
+    },
+    "transmission_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the Bluetooth share happened"
+    },
+    "receiver_played_offline": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did receiver listen without internet?"
+    },
+    "receiver_synced_online": {
+      "type": "boolean",
+      "default": false,
+      "description": "Did receiver connect and credit artist?"
+    },
+    "artist_credited": {
+      "type": "boolean",
+      "default": false,
+      "description": "Has artist been paid for this transmission?"
+    },
+    "transmission_chain": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Chain of devices: original \u2192 device1 \u2192 device2 \u2192 stadium"
+    },
+    "healing_radius_meters": {
+      "type": "number",
+      "description": "Bluetooth range this transmission covered"
+    }
+  },
+  "required": [
+    "track_id",
+    "sender_device_id"
+  ],
+  "rls": {
+    "read": {},
+    "write": {}
+  }
+}

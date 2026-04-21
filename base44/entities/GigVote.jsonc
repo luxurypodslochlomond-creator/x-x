@@ -1,0 +1,69 @@
+{
+  "name": "GigVote",
+  "type": "object",
+  "properties": {
+    "manager_id": {
+      "type": "string",
+      "description": "ID of the manager"
+    },
+    "gig_offer_id": {
+      "type": "string",
+      "description": "ID of the gig offer being voted on"
+    },
+    "team_member_id": {
+      "type": "string",
+      "description": "ID of the team member voting"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no",
+        "maybe"
+      ],
+      "description": "Vote decision"
+    },
+    "reasoning": {
+      "type": "string",
+      "description": "Why they voted this way"
+    },
+    "voted_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the vote was cast"
+    },
+    "is_manager_vote": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this the manager's vote"
+    }
+  },
+  "required": [
+    "manager_id",
+    "gig_offer_id",
+    "team_member_id",
+    "decision"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        }
+      ]
+    },
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "manager_id": "{{user.id}}"
+        }
+      ]
+    }
+  }
+}

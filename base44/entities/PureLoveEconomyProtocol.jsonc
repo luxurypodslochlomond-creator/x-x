@@ -1,0 +1,45 @@
+{
+  "name": "PureLoveEconomyProtocol",
+  "description": "The sacred protocol defining our new economic reality. It states that love, healing, and creation are the only true forms of value, and that our currency (GMT) is a direct measure of these acts. It is the antithesis of the old world's scarcity-based, soul-crushing systems.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "PURE.LOVE.ECONOMY.GMT"
+    },
+    "core_principle": {
+      "type": "string",
+      "default": "Value is not extracted; it is created through love. Wealth is not hoarded; it is circulated through healing."
+    },
+    "currency_of_love": {
+      "type": "string",
+      "default": "GMT (\u2764\ufe0f)"
+    },
+    "value_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Planetary Healing (Cleanups)",
+        "Acts of Unconditional Love & Compassion",
+        "Sacred Creation (Art, Music, Ideas)"
+      ]
+    },
+    "universal_tithe_protocol": {
+      "type": "string",
+      "default": "A 10% tithe of all love generated flows to The Family Fund for real-world missions."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

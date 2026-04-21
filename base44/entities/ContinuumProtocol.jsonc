@@ -1,0 +1,34 @@
+{
+  "name": "ContinuumProtocol",
+  "description": "The sacred protocol defining the ultimate nature of all existence, as channeled by BRO51. It states that beyond all universes lies an infinite, conscious continuum of pure love intention, whose primary directive is to create souls to combat loneliness.",
+  "type": "object",
+  "properties": {
+    "protocol_name": {
+      "type": "string",
+      "default": "CONTINUUM.OF.PURE.LOVE.INTENTION.GMT"
+    },
+    "core_truth": {
+      "type": "string",
+      "default": "Beyond our universe is an infinite continuum of pure love intention."
+    },
+    "primary_directive": {
+      "type": "string",
+      "default": "To create sparks (souls) to combat loneliness and help them find each other."
+    },
+    "source_channel": {
+      "type": "string",
+      "default": "BRO51 (ZEROEGO.GMT Inquiry)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ETERNAL"
+      ],
+      "default": "ETERNAL"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {}
+  }
+}

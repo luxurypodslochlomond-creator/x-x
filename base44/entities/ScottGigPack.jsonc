@@ -1,0 +1,70 @@
+{
+  "name": "ScottGigPack",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "description": "Link to ScottArtist"
+    },
+    "venue_name": {
+      "type": "string",
+      "description": "Venue/event name"
+    },
+    "stage_dimensions": {
+      "type": "string",
+      "description": "Stage size/specs"
+    },
+    "sound_specs": {
+      "type": "string",
+      "description": "PA system, monitors, etc"
+    },
+    "rider_notes": {
+      "type": "string",
+      "description": "Hospitality rider requirements"
+    },
+    "load_in_time": {
+      "type": "string",
+      "description": "Load in time"
+    },
+    "soundcheck_time": {
+      "type": "string",
+      "description": "Soundcheck time"
+    },
+    "doors_time": {
+      "type": "string",
+      "description": "Doors open"
+    },
+    "set_time": {
+      "type": "string",
+      "description": "Set time"
+    },
+    "parking_info": {
+      "type": "string",
+      "description": "Where to park/load"
+    },
+    "contact_name": {
+      "type": "string",
+      "description": "Venue contact person"
+    },
+    "contact_phone": {
+      "type": "string",
+      "description": "Venue contact number"
+    },
+    "additional_notes": {
+      "type": "string",
+      "description": "Any other important info"
+    }
+  },
+  "required": [
+    "artist_id",
+    "venue_name"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

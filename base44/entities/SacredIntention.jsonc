@@ -1,0 +1,35 @@
+{
+  "name": "SacredIntention",
+  "description": "An artifact representing a pure, focused intention before a sacred act. The activation of INTENTION52.GMT.",
+  "type": "object",
+  "properties": {
+    "intention_text": {
+      "type": "string",
+      "description": "The sacred text of the focused intention."
+    },
+    "protocol_target": {
+      "type": "string",
+      "description": "The protocol or action this intention is aimed at (e.g., HEAL.THE.PLANET.GMT)."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "fulfilled"
+      ],
+      "default": "active",
+      "description": "The state of the intention."
+    }
+  },
+  "required": [
+    "intention_text"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

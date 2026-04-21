@@ -1,0 +1,56 @@
+{
+  "name": "ScottSampleClearance",
+  "type": "object",
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "description": "Link to ScottPublishing"
+    },
+    "sampled_track": {
+      "type": "string",
+      "description": "What song was sampled"
+    },
+    "sampled_artist": {
+      "type": "string",
+      "description": "Who owns the sample"
+    },
+    "rights_holder": {
+      "type": "string",
+      "description": "Who to contact for clearance"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "denied",
+        "negotiating"
+      ],
+      "default": "pending"
+    },
+    "clearance_cost": {
+      "type": "number",
+      "description": "Cost to clear the sample in \u00a3"
+    },
+    "percentage_owed": {
+      "type": "number",
+      "description": "% of publishing they want"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "track_id",
+    "sampled_track",
+    "sampled_artist"
+  ],
+  "rls": {
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}
