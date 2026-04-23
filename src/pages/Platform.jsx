@@ -481,8 +481,8 @@ export default function Platform() {
         <div className="mb-24">
           <div className="border border-purple-500/20 rounded-2xl p-10 bg-purple-500/5">
             <div className="max-w-2xl mx-auto text-center">
-              <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">NO TIERS. NO HIERARCHY. JUST LOVE.</p>
-              <h2 className="text-3xl font-black mb-4">Give what you can.</h2>
+              <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">NO ACCOUNT. NO PRESSURE. JUST YOU.</p>
+              <h2 className="text-3xl font-black mb-4">Become a supporter.</h2>
               {supported ? (
                 <div className="py-6 mb-6">
                   <CheckCircle className="w-12 h-12 text-green-400 mx-auto mb-3" />
@@ -571,7 +571,7 @@ export default function Platform() {
                 </div>
               </div>
 
-              <p className="text-gray-600 text-xs">Any amount. Any currency. Anonymous. No commitment. 💜</p>
+              <p className="text-gray-600 text-xs">Any amount. Any currency. No account needed. 💜</p>
 
               <p className="text-gray-600 text-xs mt-6">Powered by Stripe. Card, Apple Pay, Google Pay accepted.</p>
             </div>
