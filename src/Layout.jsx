@@ -405,7 +405,6 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
-      { title: "Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Build on UF51 · open infrastructure" },
     ];
 
     // 2. FREE HEALING (immediate value — no signup needed)
@@ -454,6 +453,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 6. LEARN (understand the ecosystem)
     const learnNav = [
+      { title: "🔓 Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Open source · build on UF51 · free" },
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
       { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, description: "One-pager for funders" },
       { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, description: "Fund real people healing Earth" },
