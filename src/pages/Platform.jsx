@@ -264,7 +264,7 @@ export default function Platform() {
               <div>
                 <p className="text-xs text-gray-500 font-mono mb-3">EXAMPLE REQUEST</p>
                 <CodeBlock code={OPEN_APIS[activeApi].example} />
-                <p className="text-xs text-gray-600 mt-3">Need an API key? Email family@uf51.love with what you're building.</p>
+                <p className="text-xs text-gray-600 mt-3">Endpoints are in closed beta — the live URL ships with your key. Email us first.</p>
               </div>
             </div>
           </motion.div>
@@ -275,7 +275,7 @@ export default function Platform() {
           <h2 className="text-3xl font-black mb-2">Who this is for.</h2>
           <p className="text-gray-500 mb-10">If you're building something that helps people — this is for you.</p>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-4">
             {WHO_ITS_FOR.map((item, i) => {
               const Icon = item.icon;
               return (
@@ -284,11 +284,13 @@ export default function Platform() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="border border-white/10 rounded-xl p-6 hover:border-cyan-500/30 transition-all"
+                  className="flex gap-4 border border-white/10 rounded-xl p-5 hover:border-cyan-500/30 transition-all"
                 >
-                  <Icon className="w-6 h-6 text-cyan-400 mb-3" />
-                  <h3 className="font-black text-lg mb-2">{item.who}</h3>
-                  <p className="text-gray-400 text-sm">{item.what}</p>
+                  <Icon className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-black mb-1">{item.who}</h3>
+                    <p className="text-gray-400 text-sm">{item.what}</p>
+                  </div>
                 </motion.div>
               );
             })}
@@ -340,8 +342,8 @@ export default function Platform() {
               },
               {
                 layer: "05",
-                title: "Legally locked — the CIC structure",
-                body: "We're a UK Community Interest Company. The mission is written into law, not just a README. A future owner, acquirer, or board change cannot flip this to extraction mode. The asset lock is legally enforceable and registered at Companies House.",
+                title: "Legally locked — mission written into law",
+                body: "The mission isn't just a README. It's encoded in our legal structure — a Community Interest Company with a statutory asset lock registered at Companies House. No future owner, acquirer, or board change can flip this to extraction mode. The law prevents it. That's not a promise — it's a legal constraint.",
                 icon: Building,
                 color: "#f59e0b"
               },
@@ -390,15 +392,10 @@ export default function Platform() {
               <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">FOR FOUNDERS & BELIEVERS</p>
               <h2 className="text-3xl font-black mb-6">Keep it free.</h2>
               <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                The open APIs cost real money to run — AI calls, servers, bandwidth. 
-                We run lean by design. Every pound goes into the infrastructure, not into shareholders.
+                The open APIs cost real money to run. We run lean by design — every pound goes into the infrastructure, not shareholders.
               </p>
-              <p className="text-gray-400 mb-4">
-                If you build something on UF51 that works — that earns, that helps, that scales — 
-                and you want the infrastructure to stay free for everyone else who can't afford it?
-              </p>
-              <p className="text-white font-bold text-xl mb-8">
-                Become a founding supporter.
+              <p className="text-gray-400 mb-8">
+                If you build something on UF51 that works and you want to keep it free for everyone who can't afford it — become a founding supporter.
               </p>
               <div className="grid md:grid-cols-3 gap-4 mb-10">
                 {[
