@@ -36,10 +36,10 @@ self.addEventListener('push', (event) => {
   }
 
   const title = data.title || 'CB51';
-  const options = {
-    body: data.body || 'You have a new update',
-    icon: data.icon || '/api/functions/serveCB51Icon',
-    badge: '/api/functions/serveCB51Icon',
+   const options = {
+     body: data.body || 'You have a new update',
+     icon: data.icon || '/icon-192x192.png',
+     badge: data.badge || '/icon-192x192.png',
     tag: data.tag || 'cb51-notification',
     data: {
       url: data.url || '/',
@@ -107,7 +107,8 @@ self.addEventListener('notificationclick', (event) => {
           vote === 'yes' ? '✅ Vote recorded' : 'Please add reason',
           {
           body: vote === 'yes' ? 'Manager has been notified' : 'Opening app...',
-          icon: '/api/functions/serveCB51Icon',
+          icon: data.icon || '/api/functions/serveCB51Icon',
+          badge: data.badge || '/api/functions/serveCB51Icon',
           tag: 'vote-result'
           }
         );
