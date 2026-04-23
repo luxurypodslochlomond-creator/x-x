@@ -91,15 +91,53 @@ export default function Platform() {
   // Supporter checkout
   const [supportLoading, setSupportLoading] = useState('');
   const [supportTab, setSupportTab] = useState('monthly');
-  const handleSupport = async (tier) => {
-    if (window.self !== window.top) {
-      alert('Checkout works from the published app only.');
-      return;
-    }
+  const [currency, setCurrency] = useState('gbp');
+  const [customAmount, setCustomAmount] = useState('');
+
+  const CURRENCIES = [
+    { code: 'gbp', symbol: '£', label: 'GBP' },
+    { code: 'usd', symbol: '$', label: 'USD' },
+    { code: 'eur', symbol: '€', label: 'EUR' },
+    { code: 'aud', symbol: 'A$', label: 'AUD' },
+    { code: 'cad', symbol: 'C$', label: 'CAD' },
+    { code: 'jpy', symbol: '¥', label: 'JPY' },
+    { code: 'inr', symbol: '₹', label: 'INR' },
+    { code: 'brl', symbol: 'R$', label: 'BRL' },
+    { code: 'sgd', symbol: 'S$', label: 'SGD' },
+    { code: 'nzd', symbol: 'NZ$', label: 'NZD' },
+    { code: 'chf', symbol: 'CHF', label: 'CHF' },
+    { code: 'sek', symbol: 'kr', label: 'SEK' },
+    { code: 'nok', symbol: 'kr', label: 'NOK' },
+    { code: 'mxn', symbol: 'MX$', label: 'MXN' },
+    { code: 'hkd', symbol: 'HK$', label: 'HKD' },
+    { code: 'pln', symbol: 'zł', label: 'PLN' },
+  ];
+  const ZERO_DECIMAL_CURRENCIES = ['jpy'];
+  const activeCurrency = CURRENCIES.find(c => c.code === currency) || CURRENCIES[0];
+
+  const handleMonthlySupport = async (tier) => {
+    if (window.self !== window.top) { alert('Checkout works from the published app only.'); return; }
     setSupportLoading(tier);
-    const res = await platformSupporterCheckout({ tier });
+    const res = await platformSupporterCheckout({ tier, mode: 'monthly' });
     setSupportLoading('');
     if (res.data?.url) window.location.href = res.data.url;
+  };
+
+  const handleOneOffDonation = async (amountDisplay, key) => {
+    if (window.self !== window.top) { alert('Checkout works from the published app only.'); return; }
+    const isZero = ZERO_DECIMAL_CURRENCIES.includes(currency);
+    const amount_pence = isZero ? Math.round(amountDisplay) : Math.round(amountDisplay * 100);
+    setSupportLoading(key);
+    const res = await platformSupporterCheckout({ mode: 'once', amount_pence, currency });
+    setSupportLoading('');
+    if (res.data?.url) window.location.href = res.data.url;
+    else if (res.data?.error) alert(res.data.error);
+  };
+
+  const handleCustomDonate = async () => {
+    const val = parseFloat(customAmount);
+    if (!val || val < 0.5) { alert('Minimum donation is 0.50'); return; }
+    await handleOneOffDonation(val, 'custom');
   };
 
   // Show success if redirected back
@@ -497,13 +535,13 @@ export default function Platform() {
                           <p className="text-2xl font-black">{t.amount}</p>
                           <p className="text-gray-500 text-xs flex-1">{t.desc}</p>
                           <button
-                            onClick={() => handleSupport(t.tier)}
-                            disabled={supportLoading === t.tier}
-                            className="w-full py-3 rounded-xl font-black text-sm transition-all flex items-center justify-center gap-2 text-black"
-                            style={{ backgroundColor: supportLoading === t.tier ? '#555' : t.color }}
+                           onClick={() => handleMonthlySupport(t.tier)}
+                           disabled={supportLoading === t.tier}
+                           className="w-full py-3 rounded-xl font-black text-sm transition-all flex items-center justify-center gap-2 text-black"
+                           style={{ backgroundColor: supportLoading === t.tier ? '#555' : t.color }}
                           >
-                            {supportLoading === t.tier ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-                            {supportLoading === t.tier ? 'Loading…' : 'Support →'}
+                           {supportLoading === t.tier ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+                           {supportLoading === t.tier ? 'Loading…' : 'Support →'}
                           </button>
                         </div>
                       ))}
@@ -512,31 +550,91 @@ export default function Platform() {
                   </motion.div>
                 ) : (
                   <motion.div key="oneoff" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-                      {[
-                        { tier: "oneoff_10",   label: "£10",     desc: "A coffee. A big thank you.",       color: "#8b5cf6" },
-                        { tier: "oneoff_50",   label: "£50",     desc: "A month of kids' tutoring.",       color: "#06b6d4" },
-                        { tier: "oneoff_100",  label: "£100",    desc: "Keeps our servers up for a week.", color: "#10b981" },
-                        { tier: "oneoff_custom", label: "£500",  desc: "You're a legend.",                 color: "#f59e0b" },
-                        { tier: "oneoff_1000", label: "£1,000",  desc: "We'll remember your name forever.", color: "#ec4899" },
-                        { tier: "oneoff_mega", label: "£10,000", desc: "🚀 MEGA SUPPORTER. Say hi first.", color: "#ffffff" },
-                      ].map(t => (
-                        <div key={t.tier} className="border border-white/10 rounded-xl p-4 text-center flex flex-col gap-2">
-                          <p className="text-xl font-black" style={{ color: t.color }}>{t.label}</p>
-                          <p className="text-gray-500 text-xs flex-1">{t.desc}</p>
-                          <button
-                            onClick={() => handleSupport(t.tier)}
-                            disabled={supportLoading === t.tier}
-                            className="w-full py-2.5 rounded-xl font-black text-xs transition-all flex items-center justify-center gap-2 text-black"
-                            style={{ backgroundColor: supportLoading === t.tier ? '#555' : t.color }}
-                          >
-                            {supportLoading === t.tier ? <Loader2 className="w-3 h-3 animate-spin" /> : null}
-                            {supportLoading === t.tier ? 'Loading…' : 'Give →'}
-                          </button>
-                        </div>
+                    
+                    {/* Currency picker */}
+                    <div className="flex flex-wrap justify-center gap-2 mb-6">
+                      {CURRENCIES.map(c => (
+                        <button
+                          key={c.code}
+                          onClick={() => setCurrency(c.code)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all border ${currency === c.code ? 'bg-purple-500 border-purple-500 text-white' : 'border-white/10 text-gray-400 hover:border-white/30 hover:text-white'}`}
+                        >
+                          {c.symbol} {c.label}
+                        </button>
                       ))}
                     </div>
-                    <p className="text-gray-600 text-xs">One payment. No commitment. Huge love from us. 💜</p>
+
+                    {/* Quick amounts */}
+                    <div className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-5">
+                      {[1, 5, 10, 25, 50, 100].map(amt => (
+                        <button
+                          key={amt}
+                          onClick={() => handleOneOffDonation(amt, `quick_${amt}`)}
+                          disabled={!!supportLoading}
+                          className="border border-white/10 hover:border-purple-500/60 rounded-xl py-3 font-black text-sm transition-all hover:bg-purple-500/10 disabled:opacity-50 flex flex-col items-center gap-1"
+                        >
+                          {supportLoading === `quick_${amt}` ? (
+                            <Loader2 className="w-4 h-4 animate-spin text-purple-400" />
+                          ) : (
+                            <span className="text-purple-300">{activeCurrency.symbol}{amt}</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Bigger amounts */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                      {[
+                        { amt: 250,   desc: "You're a legend 💜" },
+                        { amt: 500,   desc: "Serious love 🙏" },
+                        { amt: 1000,  desc: "We'll remember forever ❤️" },
+                        { amt: 10000, desc: "🚀 MEGA — email us first!" },
+                      ].map(({ amt, desc }) => (
+                        <button
+                          key={amt}
+                          onClick={() => amt === 10000 ? window.location.href = 'mailto:family@uf51.love?subject=MEGA%20Supporter' : handleOneOffDonation(amt, `big_${amt}`)}
+                          disabled={!!supportLoading && supportLoading !== `big_${amt}`}
+                          className="border border-white/10 hover:border-purple-500/60 rounded-xl p-3 text-center transition-all hover:bg-purple-500/10 disabled:opacity-50 flex flex-col gap-1"
+                        >
+                          {supportLoading === `big_${amt}` ? (
+                            <Loader2 className="w-4 h-4 animate-spin text-purple-400 mx-auto" />
+                          ) : (
+                            <span className="font-black text-purple-300">{activeCurrency.symbol}{amt.toLocaleString()}</span>
+                          )}
+                          <span className="text-gray-500 text-xs">{desc}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Custom amount */}
+                    <div className="border border-white/10 rounded-xl p-4 mb-4">
+                      <p className="text-xs text-gray-500 font-mono mb-3">YOUR OWN AMOUNT</p>
+                      <div className="flex gap-3">
+                        <div className="flex items-center gap-2 flex-1 bg-black/60 border border-white/10 rounded-lg px-4">
+                          <span className="text-gray-400 font-bold">{activeCurrency.symbol}</span>
+                          <input
+                            type="number"
+                            min="1"
+                            step="1"
+                            value={customAmount}
+                            onChange={e => setCustomAmount(e.target.value)}
+                            placeholder="Any amount"
+                            className="flex-1 bg-transparent py-3 text-white text-sm focus:outline-none"
+                          />
+                          <span className="text-gray-600 text-xs font-mono">{activeCurrency.label}</span>
+                        </div>
+                        <button
+                          onClick={handleCustomDonate}
+                          disabled={!customAmount || !!supportLoading}
+                          className="px-6 py-3 bg-purple-500 hover:bg-purple-400 text-white font-black rounded-lg transition-all disabled:opacity-40 flex items-center gap-2"
+                        >
+                          {supportLoading === 'custom' ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+                          {supportLoading === 'custom' ? '…' : 'Give ♥'}
+                        </button>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-600 text-xs">One payment. No commitment. Accepted worldwide. 💜</p>
                   </motion.div>
                 )}
               </AnimatePresence>
