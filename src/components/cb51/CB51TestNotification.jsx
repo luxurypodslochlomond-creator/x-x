@@ -23,11 +23,11 @@ export default function CB51TestNotification() {
       // Send test push notification (NO service role needed from frontend)
       await base44.functions.invoke('sendBrowserPush', {
         recipient_email: user.email,
-        title: 'CB51 TEST',
-        message: 'Notifications working! You will get real gig alerts like this.',
+        title: 'Test Notification',
+        message: 'Gig alerts will look like this.',
         notification_type: 'test',
-        icon: 'https://cb51.io/cb51-logo-192x192.png',
-        badge: 'https://cb51.io/cb51-badge-72x72.png'
+        icon: '/api/functions/serveCB51Icon',
+        badge: '/api/functions/serveCB51Icon'
       });
       
       // Haptic feedback on success

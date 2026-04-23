@@ -39,12 +39,12 @@ Deno.serve(async (req) => {
     // Call sendBrowserPush with CB51 branding
     await base44.asServiceRole.functions.invoke('sendBrowserPush', {
       recipient_email: managerEmail,
-      title: `${memberName} voted ${voteText}`,
+      title: `${memberName}: ${voteText}`,
       message: `${gigVenue}\n${statusText}`,
       notification_type: 'vote_update',
       gig_offer_id: gigId,
-      icon: 'https://cb51.io/cb51-logo-192x192.png',
-      badge: 'https://cb51.io/cb51-badge-72x72.png'
+      icon: '/api/functions/serveCB51Icon',
+      badge: '/api/functions/serveCB51Icon'
     }).catch(e => console.log('Push failed:', e.message));
 
     return Response.json({ success: true, yesCount, noCount, pending });
