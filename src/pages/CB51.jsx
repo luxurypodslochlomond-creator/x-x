@@ -4,24 +4,21 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Calendar, CheckCircle, DollarSign, Plus, Mail, Users, Radio, Brain } from 'lucide-react';
-import CB51BrainTab from '@/components/cb51/CB51BrainTab';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
-import CB51ActionDashboard from '@/components/cb51/CB51ActionDashboard';
-import CB51NotificationFeed from '@/components/cb51/CB51NotificationFeed';
-import CB51GigUploadParser from '@/components/cb51/CB51GigUploadParser';
-import CB51PushSubscriptionManager from '@/components/cb51/CB51PushSubscriptionManager';
-import CB51TestNotification from '@/components/cb51/CB51TestNotification';
-import CB51BandNotificationInbox from '@/components/cb51/CB51BandNotificationInbox';
-import CB51BadgeManager from '@/components/cb51/CB51BadgeManager';
-import CB51BackgroundSync from '@/components/cb51/CB51BackgroundSync';
-import CB51GigDecisionEngine from '@/components/cb51/CB51GigDecisionEngine';
 import CB51UnifiedDashboard from '@/components/cb51/CB51UnifiedDashboard';
-import CB51ConfirmedGigDraftEmail from '@/components/cb51/CB51ConfirmedGigDraftEmail';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
-import { useCB51NavBadges, CB51NavBadge } from '@/components/cb51/CB51NavBadge';
+import { useCB51NavBadges } from '@/components/cb51/CB51NavBadge';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Suspense } from 'react';
+
+// Lazy load non-critical components
+const CB51BrainTab = React.lazy(() => import('@/components/cb51/CB51BrainTab'));
+const CB51BadgeManager = React.lazy(() => import('@/components/cb51/CB51BadgeManager'));
+const CB51BackgroundSync = React.lazy(() => import('@/components/cb51/CB51BackgroundSync'));
+const CB51PushSubscriptionManager = React.lazy(() => import('@/components/cb51/CB51PushSubscriptionManager'));
+const CB51TestNotification = React.lazy(() => import('@/components/cb51/CB51TestNotification'));
 
 export default function CB51() {
   const navigate = useNavigate();
@@ -99,6 +96,8 @@ export default function CB51() {
     queryKey: ['cb51Artists'],
     queryFn: () => base44.entities.Artist.filter({ archived: false }),
     enabled: !!user || pinVerified,
+    staleTime: 60000, // Cache for 1 min
+    gcTime: 300000, // Keep in cache for 5 min
   });
 
   // Always call hook at same position - BEFORE any conditionals
@@ -161,20 +160,13 @@ export default function CB51() {
           {/* iOS INSTALL PROMPT */}
           <CB51IOSInstallPrompt />
 
-          {/* PUSH NOTIFICATIONS - Setup */}
-          {user && <CB51PushSubscriptionManager userEmail={user.email} />}
-          {/* TEST NOTIFICATION - End to end check */}
-          {user && (
-            <div className="mx-6 mt-2">
-              <CB51TestNotification />
-            </div>
-          )}
-
-          {/* BADGE MANAGER - Show unread count on app icon */}
-          {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
-          
-          {/* BACKGROUND SYNC - Queue actions when offline */}
-          <CB51BackgroundSync />
+          {/* LAZY-LOADED BACKGROUND SERVICES */}
+          <Suspense fallback={null}>
+            {user && <CB51PushSubscriptionManager userEmail={user.email} />}
+            {user && <CB51TestNotification />}
+            {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
+            <CB51BackgroundSync />
+          </Suspense>
 
           {/* HEADER */}
           <div className="px-6 pt-8 pb-4 border-b border-cyan-500/20 flex items-center justify-between">
@@ -311,7 +303,9 @@ export default function CB51() {
           {/* BRAIN TAB */}
           {activeTab === 'brain' && currentArtistId ? (
             <div className="px-6 pt-5 pb-32">
-              <CB51BrainTab artistId={currentArtistId} />
+              <Suspense fallback={<div className="py-20 text-center text-gray-500">Loading brain...</div>}>
+                <CB51BrainTab artistId={currentArtistId} />
+              </Suspense>
             </div>
           ) : activeTab === 'home' && currentArtistId ? (
             <CB51UnifiedDashboard artistId={currentArtistId} />
