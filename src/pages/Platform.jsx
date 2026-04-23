@@ -90,13 +90,14 @@ export default function Platform() {
 
   // Supporter checkout
   const [supportLoading, setSupportLoading] = useState('');
+  const [supportMode, setSupportMode] = useState('monthly'); // 'monthly' | 'once'
   const handleSupport = async (tier) => {
     if (window.self !== window.top) {
       alert('Checkout works from the published app only.');
       return;
     }
     setSupportLoading(tier);
-    const res = await platformSupporterCheckout({ tier });
+    const res = await platformSupporterCheckout({ tier, mode: supportMode });
     setSupportLoading('');
     if (res.data?.url) window.location.href = res.data.url;
   };
@@ -460,18 +461,35 @@ export default function Platform() {
                   <p className="text-gray-400 mt-2">You're keeping the open layer alive for everyone who can't afford it.</p>
                 </div>
               ) : null}
-              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 The open APIs cost real money to run. We run lean by design — every pound goes into the infrastructure, not shareholders. If you use this and want to keep it free for everyone else — here's how.
               </p>
+
+              {/* Monthly / One-off toggle */}
+              <div className="flex items-center justify-center gap-1 mb-8 bg-white/5 rounded-xl p-1 w-fit mx-auto">
+                <button
+                  onClick={() => setSupportMode('monthly')}
+                  className={`px-5 py-2 rounded-lg font-black text-sm transition-all ${supportMode === 'monthly' ? 'bg-purple-500 text-white' : 'text-gray-400 hover:text-white'}`}
+                >
+                  Monthly
+                </button>
+                <button
+                  onClick={() => setSupportMode('once')}
+                  className={`px-5 py-2 rounded-lg font-black text-sm transition-all ${supportMode === 'once' ? 'bg-purple-500 text-white' : 'text-gray-400 hover:text-white'}`}
+                >
+                  One-off
+                </button>
+              </div>
+
               <div className="grid md:grid-cols-3 gap-4 mb-8">
                 {[
-                  { tier: "friend",  label: "Friend",  amount: "£10/mo", desc: "Keeps one child's AI tutor running for a month", color: "#8b5cf6" },
-                  { tier: "builder", label: "Builder", amount: "£50/mo", desc: "Funds API calls for a developer on our stack", color: "#06b6d4" },
-                  { tier: "founder", label: "Founder", amount: "£200/mo", desc: "Keeps the whole open layer alive. Your name in the foundation.", color: "#ec4899" },
+                  { tier: "friend",  label: "Friend",  monthly: "£10/mo", once: "£10", desc: "Keeps one child's AI tutor running for a month", color: "#8b5cf6" },
+                  { tier: "builder", label: "Builder", monthly: "£50/mo", once: "£50", desc: "Funds API calls for a developer on our stack", color: "#06b6d4" },
+                  { tier: "founder", label: "Founder", monthly: "£200/mo", once: "£200", desc: "Keeps the whole open layer alive. Your name in the foundation.", color: "#ec4899" },
                 ].map(t => (
                   <div key={t.tier} className="border border-white/10 rounded-xl p-5 text-center flex flex-col gap-3">
                     <p className="font-mono text-xs" style={{ color: t.color }}>{t.label.toUpperCase()}</p>
-                    <p className="text-2xl font-black">{t.amount}</p>
+                    <p className="text-2xl font-black">{supportMode === 'monthly' ? t.monthly : t.once}</p>
                     <p className="text-gray-500 text-xs flex-1">{t.desc}</p>
                     <button
                       onClick={() => handleSupport(t.tier)}
@@ -480,12 +498,12 @@ export default function Platform() {
                       style={{ backgroundColor: supportLoading === t.tier ? '#555' : t.color }}
                     >
                       {supportLoading === t.tier ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-                      {supportLoading === t.tier ? 'Loading…' : 'Support →'}
+                      {supportLoading === t.tier ? 'Loading…' : supportMode === 'once' ? 'Give once →' : 'Support →'}
                     </button>
                   </div>
                 ))}
               </div>
-              <p className="text-gray-600 text-xs">Powered by Stripe. Card, Apple Pay, Google Pay accepted. Cancel anytime.</p>
+              <p className="text-gray-600 text-xs">Powered by Stripe. Card, Apple Pay, Google Pay accepted.{supportMode === 'monthly' ? ' Cancel anytime.' : ' One charge, no recurring.'}</p>
             </div>
           </div>
         </div>
