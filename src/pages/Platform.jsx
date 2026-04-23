@@ -9,55 +9,59 @@ import { platformSupporterCheckout } from '@/functions/platformSupporterCheckout
 const OPEN_APIS = [
   {
     name: "Learn51 AI",
-    endpoint: "ai51.learn",
-    description: "Adaptive AI tutor. Socratic. Private. No data stored. Works in any language.",
-    what_you_can_build: "Schools. Apps. Tutoring bots. Homework helpers. Anything that teaches.",
+    endpoint: "/api/learn",
+    description: "Socratic tutoring engine. Supports 40+ languages. Returns structured lesson content with follow-up questions. No user data stored server-side.",
+    what_you_can_build: "Tutoring apps, classroom tools, homework assistants, language learning platforms, accessibility tools for neurodiverse learners.",
     color: "#06b6d4",
     status: "open",
+    free_tier: "1,000 req/month",
     example: `fetch('https://uf51.love/api/learn', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    question: "Why is the sky blue?",\n    age: 9,\n    language: "en"\n  })\n})`
   },
   {
     name: "Healing Frequencies",
-    endpoint: "ai51.frequencies",
-    description: "500+ scientifically referenced frequencies. Sleep, pain, anxiety, focus. Open forever.",
-    what_you_can_build: "Wellness apps. Sleep tools. Meditation platforms. Hospital ambient systems.",
+    endpoint: "/api/frequencies",
+    description: "Database of 500+ frequency protocols referenced against published research. Returns Hz values, durations, and source citations. Covers sleep, pain, anxiety, focus. Human and animal protocols.",
+    what_you_can_build: "Wellness apps, sleep tools, meditation platforms, clinical ambient systems, veterinary sound therapy tools.",
     color: "#ec4899",
     status: "open",
+    free_tier: "1,000 req/month",
     example: `fetch('https://uf51.love/api/frequencies', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    condition: "anxiety",\n    species: "human"\n  })\n})`
   },
   {
     name: "Cleanup Intelligence",
-    endpoint: "ai51.cleanup",
-    description: "AI litter verification. Weight estimation. Fraud detection. Corporate brand accountability.",
-    what_you_can_build: "Environmental apps. Council tools. School programs. Corporate ESG tracking.",
+    endpoint: "/api/cleanup",
+    description: "Litter photo verification via AI. Returns weight estimate (kg), detected items, brand identification, GPS validation, and fraud risk score. All submissions are IPFS-backed for auditability.",
+    what_you_can_build: "Environmental reporting tools, council waste dashboards, school eco programmes, ESG compliance tracking, citizen science apps.",
     color: "#10b981",
     status: "open",
-    example: `fetch('https://uf51.love/api/cleanup', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    photo_url: "...",\n    location: { lat: 55.8, lng: -4.2 }\n  })\n})`
+    free_tier: "500 req/month",
+    example: `fetch('https://uf51.love/api/cleanup', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    photo_url: "https://...",\n    location: { lat: 55.8642, lng: -4.2518 }\n  })\n})`
   },
   {
     name: "AI51 Core",
-    endpoint: "ai51.core",
-    description: "The ethical AI layer. No tracking. No model training on your data. No corporate ownership.",
-    what_you_can_build: "Any AI product that needs to be honest about what it is.",
+    endpoint: "/api/ai51",
+    description: "General-purpose AI layer. OpenAI-compatible request/response shape. No training on user inputs. No data retention. Stateless by design.",
+    what_you_can_build: "Chatbots, content tools, code assistants, customer support — anything that needs an LLM without the data extraction.",
     color: "#8b5cf6",
     status: "coming",
-    example: `// Coming 2026\n// Same API shape as OpenAI\n// Zero extraction\n// Your data stays yours`
+    free_tier: "TBC",
+    example: `// Shipping Q3 2026\n// OpenAI-compatible request shape\n// POST /api/ai51\n// No data retention. Stateless.`
   }
 ];
 
 const CLOSED_PRODUCTS = [
-  { name: "SORTED", why: "Legal advice tools need accountability and care. Free abuse would harm vulnerable people.", color: "#f59e0b" },
-  { name: "PetSounds51", why: "Subscription funds the research partnerships and keeps the science honest.", color: "#d4a017" },
-  { name: "CB51", why: "Artist management requires trust, security and real support. Not a free-for-all.", color: "#06b6d4" },
+  { name: "SORTED", why: "Legal document decoder. Subscription protects against misuse in high-stakes situations.", color: "#f59e0b", price: "£9.99/mo" },
+  { name: "PetSounds51", why: "Veterinary sound therapy. Subscription funds ongoing research partnerships.", color: "#d4a017", price: "£29.99/yr" },
+  { name: "CB51", why: "Artist management platform. SaaS model funds real support and infrastructure.", color: "#06b6d4", price: "Freemium" },
 ];
 
 const WHO_ITS_FOR = [
-  { who: "Developers", what: "Build products on ethical AI infrastructure. No surveillance. No extraction. Your users stay yours.", icon: Code },
-  { who: "Educators & NGOs", what: "Take Learn51. Adapt it for your language, your kids, your community. We don't need credit.", icon: Globe },
-  { who: "Researchers", what: "Access the frequency database, cleanup data, healing outcomes. Publish freely. Make it better.", icon: BookOpen },
-  { who: "Artists & Musicians", what: "CB51 is for you. Not open API — but built for artists, by someone who gets it.", icon: Music },
-  { who: "Health & Wellness", what: "PetSounds51 shows what's possible. Build your own protocol on our frequency engine.", icon: Heart },
-  { who: "Businesses that care", what: "ESG isn't a checkbox. Use our cleanup verification, litter intelligence, real impact data.", icon: Building },
+  { who: "Developers", what: "REST APIs, Bearer token auth, JSON in/out. No proprietary SDK required. Works with any stack.", icon: Code },
+  { who: "Educators & NGOs", what: "Learn51 API is free at 1,000 req/month. Supports 40+ languages. No attribution required.", icon: Globe },
+  { who: "Researchers", what: "Access the frequency database and cleanup dataset. Cite freely. We'll link back to published work.", icon: BookOpen },
+  { who: "Artists & Musicians", what: "CB51 is a separate SaaS product, not an open API. Email us for early access.", icon: Music },
+  { who: "Health & Wellness", what: "Frequencies API returns Hz, duration, and peer-reviewed citations. Build your own protocol layer.", icon: Heart },
+  { who: "Enterprise & Corporate", what: "Cleanup Intelligence API supports ESG reporting. IPFS audit trail included in every response.", icon: Building },
 ];
 
 const CodeBlock = ({ code }) => {
@@ -83,10 +87,10 @@ const CodeBlock = ({ code }) => {
 };
 
 const PLATFORM_STATS = [
-  { label: "APIs open forever", value: "3", icon: Code, color: "#06b6d4" },
-  { label: "Avg response time", value: "<200ms", icon: Activity, color: "#10b981" },
-  { label: "Data retained", value: "0 bytes", icon: Shield, color: "#ec4899" },
-  { label: "Legal structure", value: "CIC", icon: Building, color: "#f59e0b" },
+  { label: "Open APIs (live)", value: "3", icon: Code, color: "#06b6d4" },
+  { label: "Free tier (req/month)", value: "1,000", icon: Activity, color: "#10b981" },
+  { label: "User data stored", value: "None", icon: Shield, color: "#ec4899" },
+  { label: "UK legal structure", value: "CIC", icon: Building, color: "#f59e0b" },
 ];
 
 export default function Platform() {
@@ -170,24 +174,22 @@ export default function Platform() {
     <div className="min-h-screen bg-black text-white">
 
       {/* HERO */}
-      <div className="max-w-4xl mx-auto px-6 py-24 text-center">
+      <div className="max-w-4xl mx-auto px-6 py-20 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <p className="text-cyan-400 font-mono text-sm tracking-widest mb-6">UF51 PLATFORM</p>
-          <h1 className="text-5xl md:text-7xl font-black leading-none mb-8">
-            The internet<br />
-            <span className="text-cyan-400">was supposed<br />to be free.</span>
+          <p className="text-cyan-400 font-mono text-xs tracking-widest mb-6 uppercase">UF51 Open Platform · API Documentation</p>
+          <h1 className="text-5xl md:text-6xl font-black leading-tight mb-6">
+            Open APIs.<br />
+            <span className="text-cyan-400">Free tier. No sales call.</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-4">
-            We're building AI infrastructure for humans. Not shareholders. 
-            Some of it funds us. All of it serves you. The open parts? 
-            Take them. Build something we haven't imagined.
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed mb-4">
+            Three open REST APIs — AI tutoring, healing frequencies, and litter intelligence. Bearer token auth. JSON in, JSON out. 1,000 free requests per month. Key in your inbox in seconds.
           </p>
-          <p className="text-gray-500 text-base">
-            This is how the web was supposed to work — before it got captured.
+          <p className="text-gray-600 text-sm">
+            UF51 is a UK-registered Community Interest Company. Open APIs are permanently open. Subscription products fund the infrastructure.
           </p>
         </motion.div>
       </div>
@@ -314,10 +316,9 @@ export default function Platform() {
               <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
               <span className="text-green-400 font-mono text-sm font-bold tracking-widest">OPEN FOREVER</span>
             </div>
-            <h2 className="text-2xl font-black mb-4">Build on this.</h2>
+            <h2 className="text-2xl font-black mb-4">Open APIs.</h2>
             <p className="text-gray-400 mb-6">
-              Learning. Healing frequencies. Environmental intelligence. AI51 core. 
-              These belong to humanity. Use them. Extend them. Make them better than us.
+              Three production APIs. Free tier at 1,000 req/month. Standard REST. No proprietary SDK. Key issued instantly on request.
             </p>
             <ul className="space-y-2">
               {['Learn51 AI tutoring engine', 'Healing frequency database', 'Litter cleanup AI', 'AI51 ethical layer (2026)'].map(item => (
@@ -339,17 +340,18 @@ export default function Platform() {
               <div className="w-3 h-3 rounded-full bg-amber-400" />
               <span className="text-amber-400 font-mono text-sm font-bold tracking-widest">FUNDS EVERYTHING</span>
             </div>
-            <h2 className="text-2xl font-black mb-4">This keeps it alive.</h2>
+            <h2 className="text-2xl font-black mb-4">Paid products.</h2>
             <p className="text-gray-400 mb-6">
-              SORTED, PetSounds51, CB51 — these are subscription products. 
-              The revenue from these is what lets us keep everything else free. 
-              That's the honest model.
+              SORTED, PetSounds51, CB51 — subscription SaaS. Revenue from these funds the open APIs and infrastructure.
             </p>
             <ul className="space-y-3">
               {CLOSED_PRODUCTS.map(p => (
-                <li key={p.name} className="text-sm">
-                  <span className="font-bold" style={{ color: p.color }}>{p.name}</span>
-                  <span className="text-gray-500 block text-xs mt-0.5">{p.why}</span>
+                <li key={p.name} className="text-sm flex items-start justify-between gap-4">
+                  <div>
+                    <span className="font-bold" style={{ color: p.color }}>{p.name}</span>
+                    <span className="text-gray-500 block text-xs mt-0.5">{p.why}</span>
+                  </div>
+                  <span className="text-gray-600 text-xs font-mono flex-shrink-0">{p.price}</span>
                 </li>
               ))}
             </ul>
@@ -400,9 +402,13 @@ export default function Platform() {
                 </div>
                 <h3 className="text-2xl font-black mb-3">{OPEN_APIS[activeApi].name}</h3>
                 <p className="text-gray-400 mb-6">{OPEN_APIS[activeApi].description}</p>
-                <div className="bg-white/5 rounded-lg p-4">
+                <div className="bg-white/5 rounded-lg p-4 mb-3">
                   <p className="text-xs text-gray-500 font-mono mb-2">WHAT YOU CAN BUILD</p>
                   <p className="text-gray-300 text-sm">{OPEN_APIS[activeApi].what_you_can_build}</p>
+                </div>
+                <div className="flex items-center gap-4 text-xs font-mono">
+                  <span className="text-gray-500">Free tier:</span>
+                  <span className="text-white font-bold">{OPEN_APIS[activeApi].free_tier}</span>
                 </div>
               </div>
               <div>
@@ -519,13 +525,24 @@ export default function Platform() {
         </div>
 
         {/* THE HONEST BIT */}
-        <div className="border border-cyan-500/20 rounded-2xl p-10 mb-24 text-center bg-cyan-500/5">
-          <h2 className="text-3xl font-black mb-6">The honest bit.</h2>
-          <div className="max-w-2xl mx-auto space-y-4 text-gray-300 text-lg leading-relaxed">
-            <p>CIC registered. Mission locked in law. No VC. No shareholders. No extraction.</p>
-            <p>The commercial products fund the open ones. That's the whole model — and it works.</p>
-            <p>We believe someone in a classroom in Lagos or a dev in Glasgow or a healer in Sao Paulo can build something better than us with the right tools.</p>
-            <p className="text-white font-bold">So here are the tools.</p>
+        <div className="border border-white/10 rounded-2xl p-10 mb-24 bg-white/2">
+          <h2 className="text-2xl font-black mb-6">How the model works.</h2>
+          <div className="grid md:grid-cols-3 gap-6 text-sm">
+            <div className="border border-white/5 rounded-xl p-5">
+              <p className="text-cyan-400 font-mono text-xs mb-2">OPEN APIs</p>
+              <p className="font-bold mb-1">Free. Permanently.</p>
+              <p className="text-gray-400">Learn51, Frequencies, Cleanup Intelligence. 1,000 req/month free. No time limit. Key tied to stated purpose.</p>
+            </div>
+            <div className="border border-white/5 rounded-xl p-5">
+              <p className="text-amber-400 font-mono text-xs mb-2">SUBSCRIPTIONS</p>
+              <p className="font-bold mb-1">Fund the open layer.</p>
+              <p className="text-gray-400">SORTED, PetSounds51, CB51 are paid products. Revenue covers infrastructure and keeps the free tier running.</p>
+            </div>
+            <div className="border border-white/5 rounded-xl p-5">
+              <p className="text-green-400 font-mono text-xs mb-2">LEGAL STRUCTURE</p>
+              <p className="font-bold mb-1">CIC — locked by law.</p>
+              <p className="text-gray-400">Registered at Companies House. Asset lock prevents the mission being changed by any future owner or acquirer.</p>
+            </div>
           </div>
         </div>
 
@@ -533,8 +550,8 @@ export default function Platform() {
         <div className="mb-24" id="support-section">
           <div className="border border-purple-500/20 rounded-2xl p-10 bg-purple-500/5">
             <div className="max-w-2xl mx-auto text-center">
-              <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">NO ACCOUNT. NO PRESSURE. JUST YOU.</p>
-              <h2 className="text-3xl font-black mb-4">Help keep it free.</h2>
+              <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">NO ACCOUNT REQUIRED · STRIPE-POWERED</p>
+              <h2 className="text-3xl font-black mb-4">Support the open layer.</h2>
               {supported ? (
                 <div className="py-6 mb-6">
                   <CheckCircle className="w-12 h-12 text-green-400 mx-auto mb-3" />
@@ -542,8 +559,8 @@ export default function Platform() {
                   <p className="text-gray-400 mt-2">You're keeping the open layer alive for everyone who can't afford it.</p>
                 </div>
               ) : null}
-              <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                The open APIs cost real money to run. Every pound goes into infrastructure, not shareholders. Help keep it free for everyone who can't afford it.
+              <p className="text-gray-400 text-base leading-relaxed mb-8">
+                The open APIs run on real infrastructure. If you use them and want to contribute, this is how. One-time. Any currency. No account needed.
               </p>
 
               {/* Currency picker */}
@@ -618,12 +635,12 @@ export default function Platform() {
                     className="px-6 py-3 bg-purple-500 hover:bg-purple-400 text-white font-black rounded-lg transition-all disabled:opacity-40 flex items-center gap-2"
                   >
                     {supportLoading === 'custom' ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-                    {supportLoading === 'custom' ? '…' : 'Give ♥'}
+                    {supportLoading === 'custom' ? '…' : 'Contribute'}
                   </button>
                 </div>
               </div>
 
-              <p className="text-gray-600 text-xs">Any amount. Any currency. No account needed. 💜</p>
+              <p className="text-gray-600 text-xs">Any amount. Any currency. No account needed.</p>
 
               <p className="text-gray-600 text-xs mt-6">Powered by Stripe. Card, Apple Pay, Google Pay accepted.</p>
             </div>
@@ -704,12 +721,11 @@ export default function Platform() {
             transition={{ delay: 0.4 }}
           >
             <h2 className="text-4xl font-black mb-6">
-              Want to build<br />
-              <span className="text-cyan-400">something together?</span>
+              Questions or<br />
+              <span className="text-cyan-400">higher rate limits?</span>
             </h2>
             <p className="text-gray-400 mb-10 max-w-xl mx-auto">
-              No forms. No sales process. Just email us what you're building 
-              and who it's for. If it helps people, we want to hear it.
+              Email what you're building, your expected request volume, and your use case. We'll respond within 24 hours.
             </p>
             
             <a
