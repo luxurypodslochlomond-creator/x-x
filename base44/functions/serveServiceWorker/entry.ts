@@ -37,17 +37,17 @@ self.addEventListener('push', (event) => {
 
   const title = data.title || 'CB51';
    const options = {
-     body: data.body || 'You have a new update',
-     icon: data.icon || '/icon-192x192.png',
-     badge: data.badge || '/icon-192x192.png',
-    tag: data.tag || 'cb51-notification',
-    data: {
-      url: data.url || '/',
-    },
-    requireInteraction: true,
-    vibrate: [200, 100, 200],
-    actions: data.actions || [],
-  };
+      body: data.body || 'You have a new update',
+      icon: data.icon || '/api/functions/serveCB51PNGIcon?size=192',
+      badge: data.badge || '/api/functions/serveCB51PNGMaskableIcon?size=192',
+     tag: data.tag || 'cb51-notification',
+     data: {
+       url: data.url || '/',
+     },
+     requireInteraction: true,
+     vibrate: [200, 100, 200],
+     actions: data.actions || [],
+   };
 
   event.waitUntil(
     self.registration.showNotification(title, options)
@@ -107,8 +107,8 @@ self.addEventListener('notificationclick', (event) => {
           vote === 'yes' ? '✅ Vote recorded' : 'Please add reason',
           {
           body: vote === 'yes' ? 'Manager has been notified' : 'Opening app...',
-          icon: data.icon || '/api/functions/serveCB51Icon',
-          badge: data.badge || '/api/functions/serveCB51Icon',
+          icon: '/api/functions/serveCB51PNGIcon?size=192',
+          badge: '/api/functions/serveCB51PNGMaskableIcon?size=192',
           tag: 'vote-result'
           }
         );
