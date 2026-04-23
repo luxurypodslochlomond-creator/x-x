@@ -36,15 +36,16 @@ Deno.serve(async (req) => {
       statusText = `${yesCount}✅ ${noCount}❌ (${pending} pending)`;
     }
 
-    // Call sendBrowserPush with CB51 branding
+    // Call sendBrowserPush with CB51 branding — use absolute URL for icon
+    const iconUrl = `${Deno.env.get('APP_URL') || 'https://cb51.io'}/api/functions/serveCB51Icon`;
     await base44.asServiceRole.functions.invoke('sendBrowserPush', {
       recipient_email: managerEmail,
       title: `${memberName}: ${voteText}`,
       message: `${gigVenue}\n${statusText}`,
       notification_type: 'vote_update',
       gig_offer_id: gigId,
-      icon: '/api/functions/serveCB51Icon',
-      badge: '/api/functions/serveCB51Icon'
+      icon: iconUrl,
+      badge: iconUrl
     }).catch(e => console.log('Push failed:', e.message));
 
     return Response.json({ success: true, yesCount, noCount, pending });

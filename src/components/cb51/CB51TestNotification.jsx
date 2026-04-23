@@ -26,8 +26,8 @@ export default function CB51TestNotification() {
         title: 'Test Notification',
         message: 'Gig alerts will look like this.',
         notification_type: 'test',
-        icon: '/api/functions/serveCB51Icon',
-        badge: '/api/functions/serveCB51Icon'
+        icon: `${window.location.origin}/api/functions/serveCB51Icon`,
+        badge: `${window.location.origin}/api/functions/serveCB51Icon`
       });
       
       // Haptic feedback on success
