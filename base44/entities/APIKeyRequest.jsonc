@@ -1,0 +1,65 @@
+{
+  "name": "APIKeyRequest",
+  "type": "object",
+  "description": "Auto-issued API keys for UF51 platform builders",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Requester's name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Requester's email"
+    },
+    "what_building": {
+      "type": "string",
+      "description": "What they're building"
+    },
+    "which_api": {
+      "type": "string",
+      "enum": [
+        "learn51",
+        "frequencies",
+        "cleanup",
+        "all"
+      ],
+      "description": "Which API they need"
+    },
+    "api_key": {
+      "type": "string",
+      "description": "Auto-generated API key"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "revoked",
+        "suspended"
+      ],
+      "default": "active"
+    },
+    "request_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Total API calls made"
+    },
+    "key_issued_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "what_building",
+    "which_api"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {}
+  }
+}

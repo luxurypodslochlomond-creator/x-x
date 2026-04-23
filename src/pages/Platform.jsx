@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Code, Zap, Globe, BookOpen, Leaf, Music, Heart, Building, Shield, Lock, Eye, Users, CheckCircle, Mail } from 'lucide-react';
+import { Code, Zap, Globe, BookOpen, Music, Heart, Building, Shield, Lock, Eye, CheckCircle, Loader2, Send, Key } from 'lucide-react';
+import { issueAPIKey } from '@/functions/issueAPIKey';
+import { platformSupporterCheckout } from '@/functions/platformSupporterCheckout';
 
 const OPEN_APIS = [
   {
@@ -67,6 +69,41 @@ const CodeBlock = ({ code }) => (
 export default function Platform() {
   const [activeApi, setActiveApi] = useState(0);
 
+  // API key form state
+  const [keyForm, setKeyForm] = useState({ name: '', email: '', what_building: '', which_api: 'learn51' });
+  const [keyLoading, setKeyLoading] = useState(false);
+  const [keyDone, setKeyDone] = useState(false);
+  const [keyError, setKeyError] = useState('');
+
+  const handleKeyRequest = async (e) => {
+    e.preventDefault();
+    setKeyLoading(true);
+    setKeyError('');
+    const res = await issueAPIKey(keyForm);
+    setKeyLoading(false);
+    if (res.data?.success) {
+      setKeyDone(true);
+    } else {
+      setKeyError('Something went wrong — email family@uf51.love directly.');
+    }
+  };
+
+  // Supporter checkout
+  const [supportLoading, setSupportLoading] = useState('');
+  const handleSupport = async (tier) => {
+    if (window.self !== window.top) {
+      alert('Checkout works from the published app only.');
+      return;
+    }
+    setSupportLoading(tier);
+    const res = await platformSupporterCheckout({ tier });
+    setSupportLoading('');
+    if (res.data?.url) window.location.href = res.data.url;
+  };
+
+  // Show success if redirected back
+  const supported = new URLSearchParams(window.location.search).get('supported');
+
   return (
     <div className="min-h-screen bg-black text-white">
 
@@ -95,64 +132,89 @@ export default function Platform() {
 
       <div className="max-w-5xl mx-auto px-6 pb-20">
 
-        {/* HOW TO ACTUALLY USE IT — step by step */}
+        {/* GET YOUR API KEY — instant */}
         <div className="mb-24">
-          <h2 className="text-3xl font-black mb-2">How to use it.</h2>
-          <p className="text-gray-500 mb-10">Three steps. No sales call. No enterprise nonsense.</p>
+          <h2 className="text-3xl font-black mb-2">Get your API key.</h2>
+          <p className="text-gray-500 mb-8">Fill this in. Key hits your inbox instantly. No waiting. No sales call.</p>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            {[
-              {
-                step: "01",
-                title: "Email us what you're building",
-                body: "Tell us: what it is, who it's for, which API you need. That's it. No form, no signup wall.",
-                action: "family@uf51.love — subject: API Access",
-                color: "#06b6d4"
-              },
-              {
-                step: "02",
-                title: "We send you an API key",
-                body: "Keys are tied to your stated purpose. If your use case aligns with our values, you'll have a key within 48 hours. Free. No credit card.",
-                action: null,
-                color: "#10b981"
-              },
-              {
-                step: "03",
-                title: "Build and ship",
-                body: "Add the Authorization header to your requests. That's the whole integration. See the code examples below for each API.",
-                action: null,
-                color: "#8b5cf6"
-              },
-            ].map((s, i) => (
-              <motion.div
-                key={s.step}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="border border-white/10 rounded-xl p-6"
-              >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center font-black font-mono text-sm mb-4" style={{ backgroundColor: s.color + '20', color: s.color }}>
-                  {s.step}
-                </div>
-                <h3 className="font-black text-lg mb-3">{s.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-3">{s.body}</p>
-                {s.action && (
-                  <a href="mailto:family@uf51.love?subject=API Access" className="text-cyan-400 text-xs font-mono font-bold hover:text-cyan-300 transition-colors">
-                    {s.action}
-                  </a>
-                )}
-              </motion.div>
-            ))}
+          <div className="border border-cyan-500/30 rounded-2xl p-8 bg-cyan-500/5">
+            <AnimatePresence mode="wait">
+              {keyDone ? (
+                <motion.div key="done" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center py-8">
+                  <Key className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
+                  <h3 className="text-2xl font-black mb-2">Key sent.</h3>
+                  <p className="text-gray-400">Check your inbox — your API key is there now. Reply with any questions.</p>
+                </motion.div>
+              ) : (
+                <motion.form key="form" onSubmit={handleKeyRequest} className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs text-gray-500 font-mono block mb-1">YOUR NAME</label>
+                      <input
+                        required
+                        value={keyForm.name}
+                        onChange={e => setKeyForm(f => ({ ...f, name: e.target.value }))}
+                        placeholder="Your name"
+                        className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-500 font-mono block mb-1">YOUR EMAIL</label>
+                      <input
+                        required
+                        type="email"
+                        value={keyForm.email}
+                        onChange={e => setKeyForm(f => ({ ...f, email: e.target.value }))}
+                        placeholder="you@yourproject.com"
+                        className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-500 font-mono block mb-1">WHICH API</label>
+                    <select
+                      value={keyForm.which_api}
+                      onChange={e => setKeyForm(f => ({ ...f, which_api: e.target.value }))}
+                      className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none"
+                    >
+                      <option value="learn51">Learn51 AI — tutoring engine</option>
+                      <option value="frequencies">Healing Frequencies — 500+ protocols</option>
+                      <option value="cleanup">Cleanup Intelligence — litter AI</option>
+                      <option value="all">All APIs</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-500 font-mono block mb-1">WHAT ARE YOU BUILDING?</label>
+                    <textarea
+                      required
+                      value={keyForm.what_building}
+                      onChange={e => setKeyForm(f => ({ ...f, what_building: e.target.value }))}
+                      placeholder="One sentence is fine. Who's it for, what does it do."
+                      rows={3}
+                      className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none resize-none"
+                    />
+                  </div>
+                  {keyError && <p className="text-red-400 text-sm">{keyError}</p>}
+                  <div className="flex items-center justify-between">
+                    <p className="text-gray-600 text-xs">Free. 1,000 req/month. Key tied to stated purpose.</p>
+                    <button
+                      type="submit"
+                      disabled={keyLoading}
+                      className="flex items-center gap-2 px-6 py-3 bg-cyan-500 text-black font-black rounded-xl hover:bg-cyan-400 transition-all disabled:opacity-50"
+                    >
+                      {keyLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                      {keyLoading ? 'Sending…' : 'Get my key'}
+                    </button>
+                  </div>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* Rate limits / what to expect */}
-          <div className="border border-white/5 rounded-xl p-6 bg-white/2">
-            <p className="text-gray-500 text-sm font-mono mb-3">WHAT TO EXPECT</p>
-            <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-400">
-              <div><span className="text-white font-bold block">Free tier</span>1,000 requests/month. No cost. No catch.</div>
-              <div><span className="text-white font-bold block">Response time</span>We aim for sub-2s on all endpoints. Real infrastructure.</div>
-              <div><span className="text-white font-bold block">Rate limit hit?</span>Email us. If you're building something good, we'll sort it.</div>
-            </div>
+          <div className="grid md:grid-cols-3 gap-4 mt-6 text-sm text-gray-400">
+            <div className="border border-white/5 rounded-xl p-4"><span className="text-white font-bold block">Free tier</span>1,000 requests/month. No cost. No catch.</div>
+            <div className="border border-white/5 rounded-xl p-4"><span className="text-white font-bold block">Instant</span>Key in your inbox before you close this tab.</div>
+            <div className="border border-white/5 rounded-xl p-4"><span className="text-white font-bold block">Rate limit hit?</span>Email us. If it's good, we'll sort it.</div>
           </div>
         </div>
 
@@ -385,38 +447,45 @@ export default function Platform() {
           </div>
         </div>
 
-        {/* FOUNDERS */}
+        {/* FOUNDERS — Stripe powered */}
         <div className="mb-24">
           <div className="border border-purple-500/20 rounded-2xl p-10 bg-purple-500/5">
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">FOR FOUNDERS & BELIEVERS</p>
-              <h2 className="text-3xl font-black mb-6">Keep it free.</h2>
-              <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                The open APIs cost real money to run. We run lean by design — every pound goes into the infrastructure, not shareholders.
+              <h2 className="text-3xl font-black mb-4">Keep it free.</h2>
+              {supported ? (
+                <div className="py-6 mb-6">
+                  <CheckCircle className="w-12 h-12 text-green-400 mx-auto mb-3" />
+                  <p className="text-green-400 font-black text-xl">Thank you. Seriously.</p>
+                  <p className="text-gray-400 mt-2">You're keeping the open layer alive for everyone who can't afford it.</p>
+                </div>
+              ) : null}
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                The open APIs cost real money to run. We run lean by design — every pound goes into the infrastructure, not shareholders. If you use this and want to keep it free for everyone else — here's how.
               </p>
-              <p className="text-gray-400 mb-8">
-                If you build something on UF51 that works and you want to keep it free for everyone who can't afford it — become a founding supporter.
-              </p>
-              <div className="grid md:grid-cols-3 gap-4 mb-10">
+              <div className="grid md:grid-cols-3 gap-4 mb-8">
                 {[
-                  { tier: "Friend", amount: "10/mo", desc: "Keeps one child's AI tutor running for a month" },
-                  { tier: "Builder", amount: "50/mo", desc: "Funds API calls for a small developer using our stack" },
-                  { tier: "Founder", amount: "200/mo", desc: "Keeps the whole open layer alive. Your name in the foundation." },
+                  { tier: "friend",  label: "Friend",  amount: "£10/mo", desc: "Keeps one child's AI tutor running for a month", color: "#8b5cf6" },
+                  { tier: "builder", label: "Builder", amount: "£50/mo", desc: "Funds API calls for a developer on our stack", color: "#06b6d4" },
+                  { tier: "founder", label: "Founder", amount: "£200/mo", desc: "Keeps the whole open layer alive. Your name in the foundation.", color: "#ec4899" },
                 ].map(t => (
-                  <div key={t.tier} className="border border-purple-500/20 rounded-xl p-5 text-center">
-                    <p className="text-purple-400 font-mono text-xs mb-2">{t.tier.toUpperCase()}</p>
-                    <p className="text-2xl font-black mb-1">£{t.amount}</p>
-                    <p className="text-gray-500 text-xs">{t.desc}</p>
+                  <div key={t.tier} className="border border-white/10 rounded-xl p-5 text-center flex flex-col gap-3">
+                    <p className="font-mono text-xs" style={{ color: t.color }}>{t.label.toUpperCase()}</p>
+                    <p className="text-2xl font-black">{t.amount}</p>
+                    <p className="text-gray-500 text-xs flex-1">{t.desc}</p>
+                    <button
+                      onClick={() => handleSupport(t.tier)}
+                      disabled={supportLoading === t.tier}
+                      className="w-full py-3 rounded-xl font-black text-sm transition-all flex items-center justify-center gap-2 text-black"
+                      style={{ backgroundColor: supportLoading === t.tier ? '#555' : t.color }}
+                    >
+                      {supportLoading === t.tier ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+                      {supportLoading === t.tier ? 'Loading…' : 'Support →'}
+                    </button>
                   </div>
                 ))}
               </div>
-              <a
-                href="mailto:family@uf51.love?subject=Founding Supporter"
-                className="inline-block px-8 py-4 border-2 border-purple-500 text-purple-300 font-black rounded-xl hover:bg-purple-500/10 transition-all"
-              >
-                family@uf51.love — subject: Founding Supporter
-              </a>
-              <p className="text-gray-600 text-xs mt-4">No platform. No payment processor taking a cut. Just an email and a conversation.</p>
+              <p className="text-gray-600 text-xs">Powered by Stripe. Card, Apple Pay, Google Pay accepted. Cancel anytime.</p>
             </div>
           </div>
         </div>
