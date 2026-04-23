@@ -353,13 +353,15 @@ const LayoutInner = ({ children, currentPageName }) => {
     faviconLink.href = `/api/functions/serveFavicon?type=${faviconType}`;
 
     // Set manifest (served dynamically by serveManifest function)
+    // Include timestamp to force iOS to re-fetch and update badge icon
     let manifestLink = document.querySelector('link[rel="manifest"]');
     if (!manifestLink) {
       manifestLink = document.createElement('link');
       manifestLink.rel = 'manifest';
       document.head.appendChild(manifestLink);
     }
-    manifestLink.href = isCB51 ? '/api/functions/serveManifest?brand=cb51' : '/api/functions/serveManifest';
+    const now = Date.now();
+    manifestLink.href = isCB51 ? `/api/functions/serveManifest?brand=cb51&v=${now}` : `/api/functions/serveManifest?v=${now}`;
 
     // Set apple-mobile-web-app-title
     let appleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
