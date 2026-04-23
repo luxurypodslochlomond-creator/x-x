@@ -27,9 +27,11 @@ Deno.serve(async (req) => {
       try {
         await base44.integrations.Core.SendPushNotification({
           user_email: email,
-          title: '🎸 Gig Vote: ' + (gigData.venue || 'New Show'),
-          body: `${gigDate} at ${gigData.venue} - Can you make it?`,
+          title: 'Gig Vote: ' + (gigData.venue || 'New Show'),
+          body: `${gigDate} • ${gigData.city || 'TBA'} • Can you make it?`,
           tag: `gig_vote_${gigId}`,
+          icon: 'https://cb51.io/cb51-logo-192x192.png',
+          badge: 'https://cb51.io/cb51-badge-72x72.png',
           data: {
             type: 'gig_vote',
             gigId,

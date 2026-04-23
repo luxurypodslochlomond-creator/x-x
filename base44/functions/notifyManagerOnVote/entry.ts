@@ -23,11 +23,14 @@ Deno.serve(async (req) => {
     const gigVenue = gigData?.venue || 'Unknown';
 
     // Notify manager
+    const statusText = noCount === 0 ? '✓ All in' : `${yesCount}/${yesCount + noCount}`;
     await base44.integrations.Core.SendPushNotification({
       user_email: managerEmail,
-      title: `${voteEmoji} ${memberName}: ${voteText}`,
-      body: `${gigVenue} • ${yesCount} yes, ${noCount} no`,
+      title: `${memberName}: ${voteText}`,
+      body: `${gigVenue} • ${statusText}`,
       tag: `gig_vote_tally_${gigId}`,
+      icon: 'https://cb51.io/cb51-logo-192x192.png',
+      badge: 'https://cb51.io/cb51-badge-72x72.png',
       data: {
         type: 'vote_update',
         gigId,
