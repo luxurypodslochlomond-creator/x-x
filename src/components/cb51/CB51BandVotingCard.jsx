@@ -13,6 +13,16 @@ export default function CB51BandVotingCard({ gigId, artistId, memberName, member
   const voteMutation = useMutation({
     mutationFn: async (voteData) => {
       const response = await base44.entities.GigVote.create(voteData);
+      
+      // Notify manager of this vote (no wait, fire & forget)
+      base44.functions.invoke('notifyManagerOnVote', {
+        gigId,
+        artistId,
+        memberName,
+        vote: voteData.vote,
+        managerEmail: localStorage.getItem('cb51_manager_email') || ''
+      }).catch(e => console.log('Notify failed:', e));
+
       return response;
     },
     onSuccess: () => {

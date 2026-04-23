@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, XCircle, AlertCircle, ChevronDown } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
@@ -7,11 +7,23 @@ import { useQuery } from '@tanstack/react-query';
 export default function CB51GigVoteTally({ gigId, artistId, gigDetails }) {
   const [expandedMember, setExpandedMember] = useState(null);
 
-  const { data: votes = [], isLoading } = useQuery({
+  const { data: votes = [], isLoading, refetch } = useQuery({
     queryKey: ['gigVotes', gigId],
     queryFn: () => base44.entities.GigVote.filter({ gig_id: gigId }),
-    enabled: !!gigId
+    enabled: !!gigId,
+    refetchInterval: 3000 // Poll every 3s for live updates
   });
+
+  // Subscribe to real-time vote changes
+  useEffect(() => {
+    if (!gigId) return;
+    const unsub = base44.entities.GigVote.subscribe((event) => {
+      if (event.data?.gig_id === gigId) {
+        refetch();
+      }
+    });
+    return unsub;
+  }, [gigId, refetch]);
 
   const { data: bandMembers = [] } = useQuery({
     queryKey: ['bandMembers', artistId],
