@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { Code, Zap, Globe, BookOpen, Leaf, Music, Heart, Building, Shield, Lock, Eye, Users, CheckCircle, Mail } from 'lucide-react';
 
 const OPEN_APIS = [
   {
@@ -11,7 +12,7 @@ const OPEN_APIS = [
     what_you_can_build: "Schools. Apps. Tutoring bots. Homework helpers. Anything that teaches.",
     color: "#06b6d4",
     status: "open",
-    example: `fetch('https://uf51.love/api/learn', {\n  method: 'POST',\n  body: JSON.stringify({\n    question: "Why is the sky blue?",\n    age: 9,\n    language: "en"\n  })\n})`
+    example: `fetch('https://uf51.love/api/learn', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    question: "Why is the sky blue?",\n    age: 9,\n    language: "en"\n  })\n})`
   },
   {
     name: "Healing Frequencies",
@@ -20,7 +21,7 @@ const OPEN_APIS = [
     what_you_can_build: "Wellness apps. Sleep tools. Meditation platforms. Hospital ambient systems.",
     color: "#ec4899",
     status: "open",
-    example: `fetch('https://uf51.love/api/frequencies', {\n  method: 'POST',\n  body: JSON.stringify({\n    condition: "anxiety",\n    species: "human"\n  })\n})`
+    example: `fetch('https://uf51.love/api/frequencies', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    condition: "anxiety",\n    species: "human"\n  })\n})`
   },
   {
     name: "Cleanup Intelligence",
@@ -29,7 +30,7 @@ const OPEN_APIS = [
     what_you_can_build: "Environmental apps. Council tools. School programs. Corporate ESG tracking.",
     color: "#10b981",
     status: "open",
-    example: `fetch('https://uf51.love/api/cleanup', {\n  method: 'POST',\n  body: JSON.stringify({\n    photo_url: "...",\n    location: { lat: 55.8, lng: -4.2 }\n  })\n})`
+    example: `fetch('https://uf51.love/api/cleanup', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    photo_url: "...",\n    location: { lat: 55.8, lng: -4.2 }\n  })\n})`
   },
   {
     name: "AI51 Core",
@@ -46,6 +47,15 @@ const CLOSED_PRODUCTS = [
   { name: "SORTED", why: "Legal advice tools need accountability and care. Free abuse would harm vulnerable people.", color: "#f59e0b" },
   { name: "PetSounds51", why: "Subscription funds the research partnerships and keeps the science honest.", color: "#d4a017" },
   { name: "CB51", why: "Artist management requires trust, security and real support. Not a free-for-all.", color: "#06b6d4" },
+];
+
+const WHO_ITS_FOR = [
+  { who: "Developers", what: "Build products on ethical AI infrastructure. No surveillance. No extraction. Your users stay yours.", icon: Code },
+  { who: "Educators & NGOs", what: "Take Learn51. Adapt it for your language, your kids, your community. We don't need credit.", icon: Globe },
+  { who: "Researchers", what: "Access the frequency database, cleanup data, healing outcomes. Publish freely. Make it better.", icon: BookOpen },
+  { who: "Artists & Musicians", what: "CB51 is for you. Not open API — but built for artists, by someone who gets it.", icon: Music },
+  { who: "Health & Wellness", what: "PetSounds51 shows what's possible. Build your own protocol on our frequency engine.", icon: Heart },
+  { who: "Businesses that care", what: "ESG isn't a checkbox. Use our cleanup verification, litter intelligence, real impact data.", icon: Building },
 ];
 
 const CodeBlock = ({ code }) => (
@@ -83,8 +93,70 @@ export default function Platform() {
         </motion.div>
       </div>
 
-      {/* THE HONEST SPLIT */}
       <div className="max-w-5xl mx-auto px-6 pb-20">
+
+        {/* HOW TO ACTUALLY USE IT — step by step */}
+        <div className="mb-24">
+          <h2 className="text-3xl font-black mb-2">How to use it.</h2>
+          <p className="text-gray-500 mb-10">Three steps. No sales call. No enterprise nonsense.</p>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {[
+              {
+                step: "01",
+                title: "Email us what you're building",
+                body: "Tell us: what it is, who it's for, which API you need. That's it. No form, no signup wall.",
+                action: "family@uf51.love — subject: API Access",
+                color: "#06b6d4"
+              },
+              {
+                step: "02",
+                title: "We send you an API key",
+                body: "Keys are tied to your stated purpose. If your use case aligns with our values, you'll have a key within 48 hours. Free. No credit card.",
+                action: null,
+                color: "#10b981"
+              },
+              {
+                step: "03",
+                title: "Build and ship",
+                body: "Add the Authorization header to your requests. That's the whole integration. See the code examples below for each API.",
+                action: null,
+                color: "#8b5cf6"
+              },
+            ].map((s, i) => (
+              <motion.div
+                key={s.step}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="border border-white/10 rounded-xl p-6"
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center font-black font-mono text-sm mb-4" style={{ backgroundColor: s.color + '20', color: s.color }}>
+                  {s.step}
+                </div>
+                <h3 className="font-black text-lg mb-3">{s.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-3">{s.body}</p>
+                {s.action && (
+                  <a href="mailto:family@uf51.love?subject=API Access" className="text-cyan-400 text-xs font-mono font-bold hover:text-cyan-300 transition-colors">
+                    {s.action}
+                  </a>
+                )}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Rate limits / what to expect */}
+          <div className="border border-white/5 rounded-xl p-6 bg-white/2">
+            <p className="text-gray-500 text-sm font-mono mb-3">WHAT TO EXPECT</p>
+            <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-400">
+              <div><span className="text-white font-bold block">Free tier</span>1,000 requests/month. No cost. No catch.</div>
+              <div><span className="text-white font-bold block">Response time</span>We aim for sub-2s on all endpoints. Real infrastructure.</div>
+              <div><span className="text-white font-bold block">Rate limit hit?</span>Email us. If you're building something good, we'll sort it.</div>
+            </div>
+          </div>
+        </div>
+
+        {/* THE HONEST SPLIT */}
         <div className="grid md:grid-cols-2 gap-8 mb-24">
           
           {/* OPEN */}
@@ -106,7 +178,7 @@ export default function Platform() {
             <ul className="space-y-2">
               {['Learn51 AI tutoring engine', 'Healing frequency database', 'Litter cleanup AI', 'AI51 ethical layer (2026)'].map(item => (
                 <li key={item} className="flex items-center gap-2 text-gray-300 text-sm">
-                  <span className="text-green-400">✓</span> {item}
+                  <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /> {item}
                 </li>
               ))}
             </ul>
@@ -178,8 +250,8 @@ export default function Platform() {
                     {OPEN_APIS[activeApi].endpoint}
                   </span>
                   {OPEN_APIS[activeApi].status === 'open'
-                    ? <span className="text-green-400 text-xs font-mono">● LIVE</span>
-                    : <span className="text-amber-400 text-xs font-mono">◌ COMING 2026</span>
+                    ? <span className="text-green-400 text-xs font-mono">LIVE</span>
+                    : <span className="text-amber-400 text-xs font-mono">COMING 2026</span>
                   }
                 </div>
                 <h3 className="text-2xl font-black mb-3">{OPEN_APIS[activeApi].name}</h3>
@@ -192,6 +264,7 @@ export default function Platform() {
               <div>
                 <p className="text-xs text-gray-500 font-mono mb-3">EXAMPLE REQUEST</p>
                 <CodeBlock code={OPEN_APIS[activeApi].example} />
+                <p className="text-xs text-gray-600 mt-3">Need an API key? Email family@uf51.love with what you're building.</p>
               </div>
             </div>
           </motion.div>
@@ -203,85 +276,93 @@ export default function Platform() {
           <p className="text-gray-500 mb-10">If you're building something that helps people — this is for you.</p>
           
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { who: "Developers", what: "Build products on ethical AI infrastructure. No surveillance. No extraction. Your users stay yours.", icon: "⌨️" },
-              { who: "Educators & NGOs", what: "Take Learn51. Adapt it for your language, your kids, your community. We don't need credit.", icon: "🌍" },
-              { who: "Researchers", what: "Access the frequency database, cleanup data, healing outcomes. Publish freely. Make it better.", icon: "🔬" },
-              { who: "Artists & Musicians", what: "CB51 is for you. Not open API — but built for artists, by someone who gets it.", icon: "🎵" },
-              { who: "Health & Wellness", what: "PetSounds51 shows what's possible. Build your own protocol on our frequency engine.", icon: "💚" },
-              { who: "Businesses that care", what: "ESG isn't a checkbox. Use our cleanup verification, litter intelligence, real impact data.", icon: "🏢" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.who}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className="border border-white/10 rounded-xl p-6 hover:border-cyan-500/30 transition-all"
-              >
-                <div className="text-3xl mb-3">{item.icon}</div>
-                <h3 className="font-black text-lg mb-2">{item.who}</h3>
-                <p className="text-gray-400 text-sm">{item.what}</p>
-              </motion.div>
-            ))}
+            {WHO_ITS_FOR.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.who}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="border border-white/10 rounded-xl p-6 hover:border-cyan-500/30 transition-all"
+                >
+                  <Icon className="w-6 h-6 text-cyan-400 mb-3" />
+                  <h3 className="font-black text-lg mb-2">{item.who}</h3>
+                  <p className="text-gray-400 text-sm">{item.what}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
-        {/* HOW WE KEEP IT SAFE */}
+        {/* HOW WE KEEP IT SAFE — legal & ethical */}
         <div className="mb-24">
           <h2 className="text-3xl font-black mb-2">How we keep it safe.</h2>
-          <p className="text-gray-500 mb-10">Open doesn't mean unguarded. Here's how the values are enforced — not just stated.</p>
+          <p className="text-gray-500 mb-2">Open doesn't mean unguarded.</p>
+          <p className="text-gray-600 text-sm mb-10">
+            We comply with UK GDPR, the EU AI Act principles, and applicable international data law. 
+            If you're in a jurisdiction with specific AI regulations — email us and we'll work through it together.
+          </p>
           <div className="space-y-4">
             {[
               {
                 layer: "01",
                 title: "Intent detection — under the hood, always",
                 body: "Every API request passes through a values filter before it touches a model. Not keyword blocking — actual intent classification. Framing something as 'educational' or 'research' doesn't fool it. If the intent is harm, it's refused. No override, no exceptions.",
+                icon: Shield,
                 color: "#06b6d4"
               },
               {
                 layer: "02",
-                title: "API keys are tied to stated purpose",
-                body: "Open doesn't mean anonymous. Keys are issued against a declared use case. If your calls stop matching what you said you'd build — the key is revoked. No appeal process for bad actors.",
+                title: "API keys are tied to stated purpose — not anonymous",
+                body: "Open doesn't mean anonymous. Keys are issued against a declared use case and a real contact. If your calls stop matching what you said you'd build — the key is revoked. We maintain a minimal log of key-to-purpose mapping for accountability. This is required by UK law for AI providers and we take it seriously.",
+                icon: Lock,
                 color: "#ec4899"
               },
               {
                 layer: "03",
-                title: "Zero knowledge by architecture",
-                body: "We can't leak what we don't have. Your users' data isn't stored, logged, or piped into training sets. Privacy isn't a policy — it's a structural impossibility to violate it. The data literally doesn't exist after the response.",
+                title: "Zero knowledge by architecture — GDPR compliant",
+                body: "Your users' data isn't stored, logged, or piped into training sets. Requests are processed and dropped. We do not transfer data outside the UK/EEA without appropriate safeguards. Privacy isn't just a policy — it's structurally enforced.",
+                icon: Eye,
                 color: "#10b981"
               },
               {
                 layer: "04",
-                title: "Open source = community audit",
-                body: "Anyone can read the values filter. Any researcher can verify it works. Any developer can fork it and make it stricter. Transparency IS the security — not a dashboard that says 'we're safe, trust us'.",
+                title: "Open source — anyone can audit it",
+                body: "Anyone can read the values filter. Any researcher can verify it works. Any developer can fork it and make it stricter. Transparency is the security. Not a dashboard that says 'trust us'.",
+                icon: Code,
                 color: "#8b5cf6"
               },
               {
                 layer: "05",
                 title: "Legally locked — the CIC structure",
-                body: "We're a Community Interest Company. The mission is written into law, not just a README. A future owner, acquirer, or board change cannot flip this to extraction mode. It is legally prevented. The asset lock is real.",
+                body: "We're a UK Community Interest Company. The mission is written into law, not just a README. A future owner, acquirer, or board change cannot flip this to extraction mode. The asset lock is legally enforceable and registered at Companies House.",
+                icon: Building,
                 color: "#f59e0b"
               },
-            ].map((layer, i) => (
-              <motion.div
-                key={layer.layer}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
-                className="flex gap-6 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all"
-              >
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-black font-mono text-sm" style={{ backgroundColor: layer.color + '20', color: layer.color }}>
-                  {layer.layer}
-                </div>
-                <div>
-                  <h3 className="font-black text-lg mb-2">{layer.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{layer.body}</p>
-                </div>
-              </motion.div>
-            ))}
+            ].map((layer, i) => {
+              const Icon = layer.icon;
+              return (
+                <motion.div
+                  key={layer.layer}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.08 }}
+                  className="flex gap-6 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all"
+                >
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: layer.color + '20', color: layer.color }}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-lg mb-2">{layer.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{layer.body}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
           <div className="mt-8 border border-white/5 rounded-xl p-6 bg-white/2 text-center">
-            <p className="text-gray-500 text-sm">The honest caveat: <span className="text-gray-300">no system is perfect. If you find a gap, tell us. We'd rather be corrected than wrong.</span></p>
+            <p className="text-gray-500 text-sm">The honest caveat: <span className="text-gray-300">no system is perfect. If you find a gap in our legal compliance or safety — tell us. We'd rather be corrected than wrong.</span></p>
             <a href="mailto:family@uf51.love?subject=Safety Gap" className="text-cyan-400 text-sm font-bold mt-2 inline-block hover:text-cyan-300 transition-colors">family@uf51.love — subject: Safety Gap</a>
           </div>
         </div>
@@ -292,7 +373,7 @@ export default function Platform() {
           <div className="max-w-2xl mx-auto space-y-4 text-gray-300 text-lg leading-relaxed">
             <p>We're a small team. CIC registered. No VC. No shareholders pulling strings.</p>
             <p>The commercial products fund the open ones. That's the whole model.</p>
-            <p>We believe someone in a classroom in Lagos or a dev in Glasgow or a healer in São Paulo can build something better than us with the right tools.</p>
+            <p>We believe someone in a classroom in Lagos or a dev in Glasgow or a healer in Sao Paulo can build something better than us with the right tools.</p>
             <p className="text-white font-bold">So here are the tools.</p>
           </div>
         </div>
@@ -316,13 +397,13 @@ export default function Platform() {
               </p>
               <div className="grid md:grid-cols-3 gap-4 mb-10">
                 {[
-                  { tier: "Friend", amount: "£10/mo", desc: "Keeps one child's AI tutor running for a month" },
-                  { tier: "Builder", amount: "£50/mo", desc: "Funds API calls for a small developer using our stack" },
-                  { tier: "Founder", amount: "£200/mo", desc: "Keeps the whole open layer alive. Your name in the foundation." },
+                  { tier: "Friend", amount: "10/mo", desc: "Keeps one child's AI tutor running for a month" },
+                  { tier: "Builder", amount: "50/mo", desc: "Funds API calls for a small developer using our stack" },
+                  { tier: "Founder", amount: "200/mo", desc: "Keeps the whole open layer alive. Your name in the foundation." },
                 ].map(t => (
                   <div key={t.tier} className="border border-purple-500/20 rounded-xl p-5 text-center">
                     <p className="text-purple-400 font-mono text-xs mb-2">{t.tier.toUpperCase()}</p>
-                    <p className="text-2xl font-black mb-2">{t.amount}</p>
+                    <p className="text-2xl font-black mb-1">£{t.amount}</p>
                     <p className="text-gray-500 text-xs">{t.desc}</p>
                   </div>
                 ))}
@@ -366,10 +447,10 @@ export default function Platform() {
               Or explore what we've already built
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-4">
-              <Link to={createPageUrl('Magic51')} className="text-cyan-400 hover:text-cyan-300 text-sm font-bold transition-colors">Learn51 →</Link>
-              <Link to={createPageUrl('FrequencyChamber')} className="text-pink-400 hover:text-pink-300 text-sm font-bold transition-colors">Frequencies →</Link>
-              <Link to={createPageUrl('NewCleanup')} className="text-green-400 hover:text-green-300 text-sm font-bold transition-colors">Cleanup →</Link>
-              <Link to={createPageUrl('AI51Soul')} className="text-purple-400 hover:text-purple-300 text-sm font-bold transition-colors">AI51 →</Link>
+              <Link to={createPageUrl('Magic51')} className="text-cyan-400 hover:text-cyan-300 text-sm font-bold transition-colors">Learn51</Link>
+              <Link to={createPageUrl('FrequencyChamber')} className="text-pink-400 hover:text-pink-300 text-sm font-bold transition-colors">Frequencies</Link>
+              <Link to={createPageUrl('NewCleanup')} className="text-green-400 hover:text-green-300 text-sm font-bold transition-colors">Cleanup</Link>
+              <Link to={createPageUrl('AI51Soul')} className="text-purple-400 hover:text-purple-300 text-sm font-bold transition-colors">AI51</Link>
             </div>
           </motion.div>
         </div>
