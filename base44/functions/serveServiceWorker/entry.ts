@@ -4,9 +4,9 @@
  */
 
 Deno.serve((req) => {
-  const swCode = `
+   const swCode = `
 // CB51 Service Worker - Push Notifications + Offline
-const CACHE_NAME = 'cb51-v4'; // bumped to nuke broken cached build
+const CACHE_NAME = 'cb51-v5'; // bumped to fix notification icons
 
 self.addEventListener('install', (event) => {
   console.log('[SW] CB51 installing...');

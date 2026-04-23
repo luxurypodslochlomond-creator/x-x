@@ -84,7 +84,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
             });
 
             const registration = await Promise.race([
-              navigator.serviceWorker.register(swPath, { scope: '/' }),
+              navigator.serviceWorker.register(`${swPath}?v=${Date.now()}`, { scope: '/' }),
               timeoutPromise
             ]);
 
@@ -122,7 +122,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
 
       // Step 2: Register service worker if not already
       if (!navigator.serviceWorker.controller) {
-        await navigator.serviceWorker.register('/api/functions/serveServiceWorker', { scope: '/' });
+        await navigator.serviceWorker.register(`/api/functions/serveServiceWorker?v=${Date.now()}`, { scope: '/' });
       }
 
       // Step 3: Get VAPID key
