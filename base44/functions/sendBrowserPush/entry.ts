@@ -73,11 +73,17 @@ Deno.serve(async (req) => {
 
     // 2. Build payload
     const isGigNotification = !!gig_offer_id;
+    const referer = req.headers.get('referer') || '';
+    const hostname = req.headers.get('host') || '';
+    const isCB51 = hostname.includes('cb51.') || referer.includes('/CB51') || referer.includes('/Scott');
+    
+    const defaultIcon = isCB51 ? '/api/functions/serveCB51Icon?size=192' : '/icon-192x192.png';
+    
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: icon || '/icon-192x192.png',
-      badge: badge || '/icon-192x192.png',
+      icon: icon || defaultIcon,
+      badge: badge || defaultIcon,
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
