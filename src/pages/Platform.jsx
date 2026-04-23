@@ -299,10 +299,15 @@ export default function Platform() {
         <div className="mb-24">
           <h2 className="text-3xl font-black mb-2">How we keep it safe.</h2>
           <p className="text-gray-500 mb-2">Open doesn't mean unguarded.</p>
-          <p className="text-gray-600 text-sm mb-10">
-            We comply with UK GDPR, the EU AI Act principles, and applicable international data law. 
-            If you're in a jurisdiction with specific AI regulations — email us and we'll work through it together.
-          </p>
+          <div className="border border-white/5 rounded-xl p-5 bg-white/2 mb-10">
+            <p className="text-gray-500 text-xs font-mono mb-3">LEGAL COMPLIANCE</p>
+            <div className="grid md:grid-cols-2 gap-3 text-xs text-gray-400">
+              <div><span className="text-white font-bold block mb-1">UK & EU</span>UK GDPR compliant. EU AI Act aligned. Data processed under UK adequacy decisions. No EEA transfer without safeguards.</div>
+              <div><span className="text-white font-bold block mb-1">USA</span>CCPA compliant for California users. No sale of personal data. No user profiling. COPPA compliant — no data collected from under-13s.</div>
+              <div><span className="text-white font-bold block mb-1">Global</span>We do not collect, store, or process biometric data. No cross-border data transfer without legal basis. API keys tied to a named responsible party in every jurisdiction.</div>
+              <div><span className="text-white font-bold block mb-1">Questions?</span>If your jurisdiction has specific AI or data law requirements, email us before integrating. We'll work through it. <a href="mailto:family@uf51.love?subject=Legal Compliance" className="text-cyan-400 hover:text-cyan-300">family@uf51.love</a></div>
+            </div>
+          </div>
           <div className="space-y-4">
             {[
               {
@@ -371,8 +376,8 @@ export default function Platform() {
         <div className="border border-cyan-500/20 rounded-2xl p-10 mb-24 text-center bg-cyan-500/5">
           <h2 className="text-3xl font-black mb-6">The honest bit.</h2>
           <div className="max-w-2xl mx-auto space-y-4 text-gray-300 text-lg leading-relaxed">
-            <p>We're a small team. CIC registered. No VC. No shareholders pulling strings.</p>
-            <p>The commercial products fund the open ones. That's the whole model.</p>
+            <p>CIC registered. Mission locked in law. No VC. No shareholders. No extraction.</p>
+            <p>The commercial products fund the open ones. That's the whole model — and it works.</p>
             <p>We believe someone in a classroom in Lagos or a dev in Glasgow or a healer in Sao Paulo can build something better than us with the right tools.</p>
             <p className="text-white font-bold">So here are the tools.</p>
           </div>
@@ -385,8 +390,8 @@ export default function Platform() {
               <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">FOR FOUNDERS & BELIEVERS</p>
               <h2 className="text-3xl font-black mb-6">Keep it free.</h2>
               <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                The honest truth? We're a tiny CIC with no VC, no salary, no safety net. 
-                The open APIs cost real money to run — AI calls, servers, bandwidth.
+                The open APIs cost real money to run — AI calls, servers, bandwidth. 
+                We run lean by design. Every pound goes into the infrastructure, not into shareholders.
               </p>
               <p className="text-gray-400 mb-4">
                 If you build something on UF51 that works — that earns, that helps, that scales — 
