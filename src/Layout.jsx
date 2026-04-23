@@ -673,9 +673,9 @@ const LayoutInner = ({ children, currentPageName }) => {
               ) : null}
               {!isCB51Page && !isPS51Page && <CompactMusicPlayer />}
               {!isCB51Page && !isPS51Page && (
-                <Link to={createPageUrl("Platform") + "?scroll=support"} className="flex flex-col items-center p-1.5" title="Help keep it free">
-                  <span className="text-purple-400 text-lg leading-none">♥</span>
-                  <span className="text-[9px] font-black font-mono text-purple-400 mt-0.5">FREE</span>
+                <Link to={createPageUrl("Platform")} className="flex flex-col items-center p-1.5" title="Open APIs">
+                  <span className="text-green-400 font-black font-mono text-[11px] leading-none border border-green-400/60 rounded px-1 py-0.5">&lt;/&gt;</span>
+                  <span className="text-[9px] font-black font-mono text-green-400 mt-0.5">API</span>
                 </Link>
               )}
             {!isCB51Page && !isPS51Page && (
@@ -813,10 +813,10 @@ const LayoutInner = ({ children, currentPageName }) => {
               <>
                 <div className="mb-4"><CompactMusicPlayer /></div>
                 <Link
-                  to={createPageUrl("Platform") + "?scroll=support"}
-                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-2 text-sm font-black"
+                  to={createPageUrl("Platform")}
+                  className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors mb-2 text-sm font-black font-mono"
                 >
-                  <span className="text-base">♥</span> Help keep it free
+                  <span className="text-xs border border-green-400/60 rounded px-1">&lt;/&gt;</span> Open APIs
                 </Link>
               </>
             )}
