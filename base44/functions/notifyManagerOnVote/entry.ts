@@ -9,37 +9,45 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Missing params' }, { status: 400 });
     }
 
-    const voteEmoji = vote === 'yes' ? '✓' : '✗';
-    const voteText = vote === 'yes' ? 'YES' : 'NO';
+    const voteText = vote === 'yes' ? '✅ YES' : '❌ NO';
 
     // Get vote tally
     const allVotes = await base44.asServiceRole.entities.GigVote.filter({ gig_id: gigId });
     const yesCount = allVotes.filter(v => v.vote === 'yes').length;
     const noCount = allVotes.filter(v => v.vote === 'no').length;
+    const totalBandSize = allVotes.length;
 
     // Get gig details
     const gig = await base44.asServiceRole.entities.GigOffer.filter({ id: gigId });
     const gigData = gig?.[0];
     const gigVenue = gigData?.venue || 'Unknown';
 
-    // Notify manager
-    const statusText = noCount === 0 ? '✓ All in' : `${yesCount}/${yesCount + noCount}`;
-    await base44.integrations.Core.SendPushNotification({
-      user_email: managerEmail,
-      title: `${memberName}: ${voteText}`,
-      body: `${gigVenue} • ${statusText}`,
-      tag: `gig_vote_tally_${gigId}`,
+    // Smart notification body — shows live tally
+    const allVotedIn = noCount === 0 && yesCount > 0;
+    const allRejected = yesCount === 0 && noCount > 0;
+    const pending = totalBandSize - (yesCount + noCount);
+    
+    let statusText = '';
+    if (allVotedIn) {
+      statusText = `✓ All ${yesCount} in!`;
+    } else if (allRejected) {
+      statusText = `✗ All ${noCount} rejected`;
+    } else {
+      statusText = `${yesCount}✅ ${noCount}❌ (${pending} pending)`;
+    }
+
+    // Call sendBrowserPush with CB51 branding
+    await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+      recipient_email: managerEmail,
+      title: `${memberName} voted ${voteText}`,
+      message: `${gigVenue}\n${statusText}`,
+      notification_type: 'vote_update',
+      gig_offer_id: gigId,
       icon: 'https://cb51.io/cb51-logo-192x192.png',
-      badge: 'https://cb51.io/cb51-badge-72x72.png',
-      data: {
-        type: 'vote_update',
-        gigId,
-        artistId,
-        action_url: `/CB51?view=gigDetail&id=${gigId}`
-      }
+      badge: 'https://cb51.io/cb51-badge-72x72.png'
     }).catch(e => console.log('Push failed:', e.message));
 
-    return Response.json({ success: true, yesCount, noCount });
+    return Response.json({ success: true, yesCount, noCount, pending });
   } catch (error) {
     console.error('notifyManagerOnVote error:', error);
     return Response.json({ error: error.message }, { status: 500 });
