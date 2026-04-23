@@ -232,12 +232,12 @@ export default function CB51GigDecisionEngine({ artistId }) {
           <div className="p-5 pb-4 space-y-3">
             <div className="flex items-start justify-between gap-2">
               <div className="flex-1 min-w-0">
-                <p className="text-white/30 text-[10px] font-mono uppercase tracking-widest mb-1">Gig Offer</p>
+                <p className="text-white/30 text-[10px] font-mono uppercase tracking-widest mb-1">Gig Offer {pendingGigs.length > 0 && `(${pendingGigs.findIndex(g => g.id === currentGig.id) + 1}/${pendingGigs.length})`}</p>
                 <h2 className="text-white font-black text-xl leading-tight">{currentGig.venue || currentGig.title}</h2>
               </div>
               {remainingCount > 0 && (
-                <span className="bg-red-500/20 border border-red-500/40 text-red-400 text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0">
-                  +{remainingCount} more
+                <span className="bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0">
+                  {remainingCount} more
                 </span>
               )}
             </div>

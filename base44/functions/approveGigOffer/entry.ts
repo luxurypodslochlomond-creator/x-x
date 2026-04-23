@@ -117,25 +117,23 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Notify band members (skip if solo artist)
+    // Notify band members (skip if solo artist) — non-blocking
     if (!isSoloArtist) {
-      try {
-        await base44.asServiceRole.functions.invoke('notifyBandOnGigOffer', {
-          gigOfferId: gigId,
-          artistId: artistId,
-          venue: gig.venue,
-          date: gig.date_start,
-          promoterName: gig.promoter_name,
-          fee: gig.fee
-        });
-      } catch (err) {
+      base44.asServiceRole.functions.invoke('notifyBandOnGigOffer', {
+        gigOfferId: gigId,
+        artistId: artistId,
+        venue: gig.venue,
+        date: gig.date_start,
+        promoterName: gig.promoter_name,
+        fee: gig.fee
+      }).catch(err => {
         console.log('Band notification (non-critical):', err.message);
-      }
+      });
     }
 
     return Response.json({
       status: 'success',
-      message: isSoloArtist ? 'Gig confirmed (solo artist)' : 'Gig approved and band notified'
+      message: isSoloArtist ? 'Gig confirmed (solo artist)' : 'Gig approved'
     });
   } catch (error) {
     console.error('Approve gig error:', error);
