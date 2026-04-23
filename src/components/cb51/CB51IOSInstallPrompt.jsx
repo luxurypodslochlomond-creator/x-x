@@ -44,8 +44,8 @@ export default function CB51IOSInstallPrompt() {
           </p>
         </div>
         <button
-          onPointerDown={handleDismiss}
-          className="flex-shrink-0 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center active:bg-white/20"
+          onClick={handleDismiss}
+          className="flex-shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center cursor-pointer transition-colors"
         >
           <X className="w-4 h-4 text-white" />
         </button>
