@@ -17,12 +17,8 @@ export default function CB51TestNotification() {
     setSuccess(false);
     
     try {
-      // Get current user email
-      const user = await base44.auth.me();
-      
-      // Send test push notification
+      // Send test push notification (backend gets user context)
       await base44.functions.invoke('sendBrowserPush', {
-        recipient_email: user.email,
         title: 'Test Notification',
         message: 'Gig alerts will look like this.',
         notification_type: 'test',
@@ -36,7 +32,7 @@ export default function CB51TestNotification() {
       
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
-      console.log('✓ Test notification sent to:', user.email);
+      console.log('✓ Test notification sent');
     } catch (error) {
       console.error('Test notification failed:', error);
       alert(`Test failed: ${error.message}\n\nCheck if notifications are enabled in your phone settings.`);

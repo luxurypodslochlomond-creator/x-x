@@ -11,8 +11,15 @@ Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
     
+    // Get authenticated user — no email needed from frontend
+    const user = await base44.auth.me();
+    if (!user) {
+      return Response.json({ 
+        error: 'Unauthorized' 
+      }, { status: 401 });
+    }
+    
     const { 
-      recipient_email, 
       title, 
       message, 
       notification_type,
@@ -24,8 +31,9 @@ Deno.serve(async (req) => {
     
     // Auto-detect brand if not provided (for gig notifications)
     const detectedBrand = brand || (gig_offer_id ? 'cb51' : null);
+    const recipient_email = user.email;
 
-    if (!recipient_email || !title || !message) {
+    if (!title || !message) {
       return Response.json({ 
         error: 'Missing required fields' 
       }, { status: 400 });
