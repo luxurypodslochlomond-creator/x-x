@@ -405,6 +405,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
+      { title: "Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Build on UF51 · open infrastructure" },
     ];
 
     // 2. FREE HEALING (immediate value — no signup needed)
@@ -460,7 +461,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
       { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
       { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
-      { title: "Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Build on UF51 · open infrastructure" },
+
     ];
 
     // 5. ARCHIVE (hidden by default, searchable)
