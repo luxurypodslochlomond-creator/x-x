@@ -83,15 +83,14 @@ Deno.serve(async (req) => {
       });
     }
 
-    // 2. Build payload
+    // 2. Build payload - ALWAYS use CB51 PNG endpoints for icon rendering
     const isGigNotification = !!gig_offer_id;
-    const defaultIcon = detectedBrand === 'cb51' ? '/api/functions/serveCB51Icon?size=192' : '/icon-192x192.png';
     
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: icon || defaultIcon,
-      badge: badge || defaultIcon,
+      icon: icon || '/api/functions/serveCB51PNGIcon?size=192',
+      badge: badge || '/api/functions/serveCB51PNGMaskableIcon?size=192',
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
