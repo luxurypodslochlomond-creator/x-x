@@ -20,12 +20,14 @@ export default function CB51TestNotification() {
       // Get current user email
       const user = await base44.auth.me();
       
-      // Send test push notification (no icon — browsers block data URIs in push)
+      // Send test push notification with CB51 icon
       await base44.functions.invoke('sendBrowserPush', {
         recipient_email: user.email,
         title: 'Test Notification',
         message: 'Gig alerts will look like this.',
-        notification_type: 'test'
+        notification_type: 'test',
+        icon: '/api/functions/serveCB51Icon?size=192',
+        badge: '/api/functions/serveCB51Icon?size=192'
       });
       
       // Haptic feedback on success
