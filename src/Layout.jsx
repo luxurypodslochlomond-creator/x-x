@@ -459,6 +459,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
       { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
       { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
+      { title: "Platform & Open APIs", url: createPageUrl("Platform"), icon: Globe, highlight: true, description: "Build on UF51 · open infrastructure" },
     ];
 
     // 5. ARCHIVE (hidden by default, searchable)
