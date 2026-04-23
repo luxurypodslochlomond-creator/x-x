@@ -226,6 +226,66 @@ export default function Platform() {
           </div>
         </div>
 
+        {/* HOW WE KEEP IT SAFE */}
+        <div className="mb-24">
+          <h2 className="text-3xl font-black mb-2">How we keep it safe.</h2>
+          <p className="text-gray-500 mb-10">Open doesn't mean unguarded. Here's how the values are enforced — not just stated.</p>
+          <div className="space-y-4">
+            {[
+              {
+                layer: "01",
+                title: "Intent detection — under the hood, always",
+                body: "Every API request passes through a values filter before it touches a model. Not keyword blocking — actual intent classification. Framing something as 'educational' or 'research' doesn't fool it. If the intent is harm, it's refused. No override, no exceptions.",
+                color: "#06b6d4"
+              },
+              {
+                layer: "02",
+                title: "API keys are tied to stated purpose",
+                body: "Open doesn't mean anonymous. Keys are issued against a declared use case. If your calls stop matching what you said you'd build — the key is revoked. No appeal process for bad actors.",
+                color: "#ec4899"
+              },
+              {
+                layer: "03",
+                title: "Zero knowledge by architecture",
+                body: "We can't leak what we don't have. Your users' data isn't stored, logged, or piped into training sets. Privacy isn't a policy — it's a structural impossibility to violate it. The data literally doesn't exist after the response.",
+                color: "#10b981"
+              },
+              {
+                layer: "04",
+                title: "Open source = community audit",
+                body: "Anyone can read the values filter. Any researcher can verify it works. Any developer can fork it and make it stricter. Transparency IS the security — not a dashboard that says 'we're safe, trust us'.",
+                color: "#8b5cf6"
+              },
+              {
+                layer: "05",
+                title: "Legally locked — the CIC structure",
+                body: "We're a Community Interest Company. The mission is written into law, not just a README. A future owner, acquirer, or board change cannot flip this to extraction mode. It is legally prevented. The asset lock is real.",
+                color: "#f59e0b"
+              },
+            ].map((layer, i) => (
+              <motion.div
+                key={layer.layer}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.08 }}
+                className="flex gap-6 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all"
+              >
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-black font-mono text-sm" style={{ backgroundColor: layer.color + '20', color: layer.color }}>
+                  {layer.layer}
+                </div>
+                <div>
+                  <h3 className="font-black text-lg mb-2">{layer.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{layer.body}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <div className="mt-8 border border-white/5 rounded-xl p-6 bg-white/2 text-center">
+            <p className="text-gray-500 text-sm">The honest caveat: <span className="text-gray-300">no system is perfect. If you find a gap, tell us. We'd rather be corrected than wrong.</span></p>
+            <a href="mailto:family@uf51.love?subject=Safety Gap" className="text-cyan-400 text-sm font-bold mt-2 inline-block hover:text-cyan-300 transition-colors">family@uf51.love — subject: Safety Gap</a>
+          </div>
+        </div>
+
         {/* THE HONEST BIT */}
         <div className="border border-cyan-500/20 rounded-2xl p-10 mb-24 text-center bg-cyan-500/5">
           <h2 className="text-3xl font-black mb-6">The honest bit.</h2>

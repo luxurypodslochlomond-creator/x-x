@@ -11,6 +11,7 @@ import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import GlobalSearch from '@/components/shared/GlobalSearch';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
+import PlatformIcon from '@/components/shared/PlatformIcon';
 // import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 // import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
 // import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
@@ -459,7 +460,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
       { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
       { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
-      { title: "Platform & Open APIs", url: createPageUrl("Platform"), icon: Globe, highlight: true, description: "Build on UF51 · open infrastructure" },
+      { title: "Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Build on UF51 · open infrastructure" },
     ];
 
     // 5. ARCHIVE (hidden by default, searchable)
