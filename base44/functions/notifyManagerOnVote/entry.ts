@@ -36,16 +36,13 @@ Deno.serve(async (req) => {
       statusText = `${yesCount}✅ ${noCount}❌ (${pending} pending)`;
     }
 
-    // Call sendBrowserPush with CB51 branding — cyan radio icon
-    const cb51Icon = 'data:image/svg+xml,<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="192" height="192" fill="%23000"/><circle cx="96" cy="96" r="80" fill="%2306b6d4"/><circle cx="96" cy="96" r="72" fill="%23000"/><circle cx="96" cy="96" r="16" fill="%2306b6d4"/></svg>';
+    // Call sendBrowserPush — no icon (browsers block data URIs in push payloads)
     await base44.asServiceRole.functions.invoke('sendBrowserPush', {
       recipient_email: managerEmail,
       title: `${memberName}: ${voteText}`,
       message: `${gigVenue}\n${statusText}`,
       notification_type: 'vote_update',
-      gig_offer_id: gigId,
-      icon: cb51Icon,
-      badge: cb51Icon
+      gig_offer_id: gigId
     }).catch(e => console.log('Push failed:', e.message));
 
     return Response.json({ success: true, yesCount, noCount, pending });
