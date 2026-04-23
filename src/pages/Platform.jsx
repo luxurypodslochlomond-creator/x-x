@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Code, Zap, Globe, BookOpen, Music, Heart, Building, Shield, Lock, Eye, CheckCircle, Loader2, Send, Key } from 'lucide-react';
+import { Code, Zap, Globe, BookOpen, Music, Heart, Building, Shield, Lock, Eye, CheckCircle, Loader2, Send, Key, Copy, Check, Terminal, Cpu, Activity, GitBranch, Clock, Star } from 'lucide-react';
 import { issueAPIKey } from '@/functions/issueAPIKey';
 import { platformSupporterCheckout } from '@/functions/platformSupporterCheckout';
 
@@ -60,11 +60,34 @@ const WHO_ITS_FOR = [
   { who: "Businesses that care", what: "ESG isn't a checkbox. Use our cleanup verification, litter intelligence, real impact data.", icon: Building },
 ];
 
-const CodeBlock = ({ code }) => (
-  <pre className="bg-black/80 border border-white/10 rounded-lg p-4 text-xs text-green-400 font-mono overflow-x-auto whitespace-pre">
-    {code}
-  </pre>
-);
+const CodeBlock = ({ code }) => {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <div className="relative group">
+      <pre className="bg-black/80 border border-white/10 rounded-lg p-4 text-xs text-green-400 font-mono overflow-x-auto whitespace-pre">
+        {code}
+      </pre>
+      <button
+        onClick={handleCopy}
+        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 bg-white/10 hover:bg-white/20 rounded text-gray-400 hover:text-white"
+      >
+        {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
+      </button>
+    </div>
+  );
+};
+
+const PLATFORM_STATS = [
+  { label: "APIs open forever", value: "3", icon: Code, color: "#06b6d4" },
+  { label: "Avg response time", value: "<200ms", icon: Activity, color: "#10b981" },
+  { label: "Data retained", value: "0 bytes", icon: Shield, color: "#ec4899" },
+  { label: "Legal structure", value: "CIC", icon: Building, color: "#f59e0b" },
+];
 
 export default function Platform() {
   const [activeApi, setActiveApi] = useState(0);
@@ -169,7 +192,27 @@ export default function Platform() {
         </motion.div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 pb-20">
+      {/* LIVE STATS BAR */}
+      <div className="border-y border-white/5 bg-white/2 py-6 mb-0">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {PLATFORM_STATS.map(stat => {
+            const Icon = stat.icon;
+            return (
+              <div key={stat.label} className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: stat.color + '20' }}>
+                  <Icon className="w-4 h-4" style={{ color: stat.color }} />
+                </div>
+                <div>
+                  <p className="text-white font-black text-lg leading-none">{stat.value}</p>
+                  <p className="text-gray-500 text-xs mt-0.5">{stat.label}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto px-6 pb-20 pt-16">
 
         {/* GET YOUR API KEY — instant */}
         <div className="mb-24">
@@ -584,6 +627,72 @@ export default function Platform() {
 
               <p className="text-gray-600 text-xs mt-6">Powered by Stripe. Card, Apple Pay, Google Pay accepted.</p>
             </div>
+          </div>
+        </div>
+
+        {/* SDK / QUICK START */}
+        <div className="mb-24">
+          <h2 className="text-3xl font-black mb-2">Quick start.</h2>
+          <p className="text-gray-500 mb-8">Three lines. That's all it takes to get your first response.</p>
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            {[
+              { step: "01", title: "Get your key", desc: "Fill the form above. Key in your inbox in seconds.", icon: Key, color: "#06b6d4" },
+              { step: "02", title: "Make a request", desc: "Standard REST. Bearer token. JSON in, JSON out. No SDK needed.", icon: Terminal, color: "#10b981" },
+              { step: "03", title: "Ship it", desc: "Rate limits are generous. Hit them? Email us. We'll sort it.", icon: Zap, color: "#f59e0b" },
+            ].map(s => {
+              const Icon = s.icon;
+              return (
+                <div key={s.step} className="border border-white/10 rounded-xl p-5 hover:border-white/20 transition-all">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs font-mono text-gray-600">{s.step}</span>
+                    <Icon className="w-4 h-4" style={{ color: s.color }} />
+                  </div>
+                  <h3 className="font-black mb-1">{s.title}</h3>
+                  <p className="text-gray-400 text-sm">{s.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+          <CodeBlock code={`// Example: healing frequency lookup\nconst res = await fetch('https://uf51.love/api/frequencies', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer uf51_your_key_here',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ condition: 'sleep', species: 'human' })\n});\n\nconst { frequencies, protocols } = await res.json();\n// → [{hz: 432, name: "Deep Sleep", duration_mins: 20}, ...]`} />
+        </div>
+
+        {/* CHANGELOG */}
+        <div className="mb-24">
+          <div className="flex items-center gap-3 mb-2">
+            <GitBranch className="w-5 h-5 text-cyan-400" />
+            <h2 className="text-3xl font-black">Changelog.</h2>
+          </div>
+          <p className="text-gray-500 mb-8">What's shipped. What's coming. No hype — just what's real.</p>
+          <div className="space-y-3">
+            {[
+              { date: "Apr 2026", tag: "LIVE", tagColor: "#10b981", title: "Learn51 AI — tutoring engine open", desc: "Socratic method. Multi-language. No data stored. Free tier: 1,000 req/month." },
+              { date: "Apr 2026", tag: "LIVE", tagColor: "#10b981", title: "Healing Frequencies API open", desc: "500+ scientifically referenced protocols. Sleep, pain, anxiety, focus. Human and animal." },
+              { date: "Apr 2026", tag: "LIVE", tagColor: "#10b981", title: "Cleanup Intelligence API open", desc: "AI litter verification, weight estimation, corporate brand accountability. IPFS-backed." },
+              { date: "Apr 2026", tag: "LIVE", tagColor: "#10b981", title: "API key auto-issuance", desc: "Fill the form. Key in your inbox instantly. No waiting. No sales call." },
+              { date: "Q3 2026", tag: "COMING", tagColor: "#f59e0b", title: "AI51 Core — ethical AI layer", desc: "Same API shape as OpenAI. Zero extraction. Your users' data never leaves." },
+              { date: "Q3 2026", tag: "COMING", tagColor: "#f59e0b", title: "OpenAPI / Swagger spec", desc: "Full machine-readable spec. Postman collection. TypeScript types. All generated." },
+              { date: "Q4 2026", tag: "COMING", tagColor: "#8b5cf6", title: "Developer dashboard", desc: "Usage metrics, rate limit tracking, key rotation — all in one place. No login friction." },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.04 }}
+                className="flex gap-4 border border-white/5 rounded-xl p-4 hover:border-white/10 transition-all"
+              >
+                <div className="flex-shrink-0 w-20 text-right">
+                  <p className="text-gray-600 text-xs font-mono">{item.date}</p>
+                </div>
+                <div className="w-px bg-white/10 flex-shrink-0" />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xs font-mono font-black px-2 py-0.5 rounded" style={{ color: item.tagColor, backgroundColor: item.tagColor + '15' }}>{item.tag}</span>
+                    <h3 className="font-bold text-sm">{item.title}</h3>
+                  </div>
+                  <p className="text-gray-500 text-xs">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
