@@ -18,8 +18,12 @@ Deno.serve(async (req) => {
       notification_type,
       gig_offer_id,
       icon,
-      badge
+      badge,
+      brand
     } = await req.json();
+    
+    // Auto-detect brand if not provided (for gig notifications)
+    const detectedBrand = brand || (gig_offer_id ? 'cb51' : null);
 
     if (!recipient_email || !title || !message) {
       return Response.json({ 
@@ -73,11 +77,13 @@ Deno.serve(async (req) => {
 
     // 2. Build payload
     const isGigNotification = !!gig_offer_id;
+    const defaultIcon = detectedBrand === 'cb51' ? '/api/functions/serveCB51Icon?size=192' : '/icon-192x192.png';
+    
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: icon || '/icon-192x192.png',
-      badge: badge || '/icon-192x192.png',
+      icon: icon || defaultIcon,
+      badge: badge || defaultIcon,
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
