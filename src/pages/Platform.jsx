@@ -237,6 +237,47 @@ export default function Platform() {
           </div>
         </div>
 
+        {/* FOUNDERS */}
+        <div className="mb-24">
+          <div className="border border-purple-500/20 rounded-2xl p-10 bg-purple-500/5">
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">FOR FOUNDERS & BELIEVERS</p>
+              <h2 className="text-3xl font-black mb-6">Keep it free.</h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-4">
+                The honest truth? We're a tiny CIC with no VC, no salary, no safety net. 
+                The open APIs cost real money to run — AI calls, servers, bandwidth.
+              </p>
+              <p className="text-gray-400 mb-4">
+                If you build something on UF51 that works — that earns, that helps, that scales — 
+                and you want the infrastructure to stay free for everyone else who can't afford it?
+              </p>
+              <p className="text-white font-bold text-xl mb-8">
+                Become a founding supporter.
+              </p>
+              <div className="grid md:grid-cols-3 gap-4 mb-10">
+                {[
+                  { tier: "Friend", amount: "£10/mo", desc: "Keeps one child's AI tutor running for a month" },
+                  { tier: "Builder", amount: "£50/mo", desc: "Funds API calls for a small developer using our stack" },
+                  { tier: "Founder", amount: "£200/mo", desc: "Keeps the whole open layer alive. Your name in the foundation." },
+                ].map(t => (
+                  <div key={t.tier} className="border border-purple-500/20 rounded-xl p-5 text-center">
+                    <p className="text-purple-400 font-mono text-xs mb-2">{t.tier.toUpperCase()}</p>
+                    <p className="text-2xl font-black mb-2">{t.amount}</p>
+                    <p className="text-gray-500 text-xs">{t.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <a
+                href="mailto:family@uf51.love?subject=Founding Supporter"
+                className="inline-block px-8 py-4 border-2 border-purple-500 text-purple-300 font-black rounded-xl hover:bg-purple-500/10 transition-all"
+              >
+                family@uf51.love — subject: Founding Supporter
+              </a>
+              <p className="text-gray-600 text-xs mt-4">No platform. No payment processor taking a cut. Just an email and a conversation.</p>
+            </div>
+          </div>
+        </div>
+
         {/* CTA */}
         <div className="text-center">
           <motion.div
