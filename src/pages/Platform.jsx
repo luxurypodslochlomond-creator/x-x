@@ -134,6 +134,15 @@ export default function Platform() {
   // Show success if redirected back
   const supported = new URLSearchParams(window.location.search).get('supported');
 
+  // Scroll to support section if ?scroll=support
+  React.useEffect(() => { // eslint-disable-line
+    if (new URLSearchParams(window.location.search).get('scroll') === 'support') {
+      setTimeout(() => {
+        document.getElementById('support-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 400);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white">
 
@@ -478,7 +487,7 @@ export default function Platform() {
         </div>
 
         {/* FOUNDERS — Stripe powered */}
-        <div className="mb-24">
+        <div className="mb-24" id="support-section">
           <div className="border border-purple-500/20 rounded-2xl p-10 bg-purple-500/5">
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">NO ACCOUNT. NO PRESSURE. JUST YOU.</p>
