@@ -16,7 +16,9 @@ Deno.serve(async (req) => {
       title, 
       message, 
       notification_type,
-      gig_offer_id 
+      gig_offer_id,
+      icon,
+      badge
     } = await req.json();
 
     if (!recipient_email || !title || !message) {
@@ -74,8 +76,8 @@ Deno.serve(async (req) => {
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: '/api/functions/serveCB51Icon',
-      badge: '/api/functions/serveCB51Badge',
+      icon: icon || '/icon-192x192.png',
+      badge: badge || '/icon-192x192.png',
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
