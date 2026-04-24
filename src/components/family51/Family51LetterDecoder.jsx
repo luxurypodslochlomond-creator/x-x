@@ -44,54 +44,63 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     setUploading(false);
   };
 
+  const [decodeError, setDecodeError] = useState(null);
+
   const decode = async () => {
     const hasInput = letterText.trim() || uploadedFileUrl || linkUrl.trim();
     if (!hasInput || loading) return;
     setLoading(true);
     setResult(null);
+    setDecodeError(null);
 
-    let promptText;
-    let fileUrls = [];
-    const geoContext = `The person is in: ${geo.country}. Apply ${geo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
+    try {
+      let promptText;
+      let fileUrls = [];
+      const geoContext = `The person is in: ${geo.country}. Apply ${geo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
 
-    if (uploadedFileUrl) {
-      promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
-      fileUrls = [uploadedFileUrl];
-    } else if (linkUrl.trim()) {
-      promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has shared a link to an official document or letter: ${linkUrl.trim()}${letterType ? ` (type: ${letterType})` : ''}. Fetch and read the content at that URL and help them understand it in plain English.`;
-    } else {
-      promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
-    }
+      if (uploadedFileUrl) {
+        promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
+        fileUrls = [uploadedFileUrl];
+      } else if (linkUrl.trim()) {
+        promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has shared a link to an official document or letter: ${linkUrl.trim()}${letterType ? ` (type: ${letterType})` : ''}. Fetch and read the content at that URL and help them understand it in plain English.`;
+      } else {
+        promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
+      }
 
-    const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_opus_4_6',
-      prompt: promptText + `\n\nReturn:
+      const response = await base44.integrations.Core.InvokeLLM({
+        model: 'claude_sonnet_4_6',
+        prompt: promptText + `\n\nReturn:
 - what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating
 - action_steps: Array of exactly 3 clear numbered actions to take
 - key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
 - dont_panic: One honest, reassuring sentence`,
-      ...(fileUrls.length > 0 ? { file_urls: fileUrls } : {}),
-      add_context_from_internet: !!linkUrl.trim(),
-      response_json_schema: {
-        type: 'object',
-        properties: {
-          what_this_means:    { type: 'string' },
-          severity:           { type: 'string' },
-          severity_explanation: { type: 'string' },
-          action_steps:       { type: 'array', items: { type: 'string' } },
-          key_deadline:       { type: 'string' },
-          dont_panic:         { type: 'string' },
+        ...(fileUrls.length > 0 ? { file_urls: fileUrls } : {}),
+        add_context_from_internet: false,
+        response_json_schema: {
+          type: 'object',
+          properties: {
+            what_this_means:      { type: 'string' },
+            severity:             { type: 'string' },
+            severity_explanation: { type: 'string' },
+            action_steps:         { type: 'array', items: { type: 'string' } },
+            key_deadline:         { type: 'string' },
+            dont_panic:           { type: 'string' },
+          },
         },
-      },
-    });
+      });
 
-    setResult(response);
-    setLoading(false);
+      setResult(response);
+    } catch (err) {
+      console.error('SORTED decode error:', err);
+      setDecodeError('Something went wrong decoding your letter. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setLinkUrl(''); setEmailSent(false); setEmailAddr(''); };
+  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setLinkUrl(''); setEmailSent(false); setEmailAddr(''); setDecodeError(null); };
 
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
@@ -245,8 +254,15 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
           transition: 'all 0.2s',
         }}
       >
-        {loading ? <Spinner color={accentColor} text="DECODING YOUR LETTER" /> : 'DECODE THIS LETTER'}
+        {loading ? <Spinner color={accentColor} text="DECODING YOUR LETTER — this takes 15-30 seconds" /> : 'DECODE THIS LETTER'}
       </motion.button>
+
+      {/* ERROR */}
+      {decodeError && (
+        <div style={{ padding: '12px 16px', borderRadius: 10, border: '1px solid rgba(239,68,68,0.3)', background: 'rgba(239,68,68,0.06)', textAlign: 'center' }}>
+          <p style={{ fontSize: 12, color: '#ef4444', margin: 0, fontWeight: 700 }}>{decodeError}</p>
+        </div>
+      )}
 
       {/* RESULT */}
       <AnimatePresence>
