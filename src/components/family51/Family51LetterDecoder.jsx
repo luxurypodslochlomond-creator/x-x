@@ -32,6 +32,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const [emailSent, setEmailSent] = useState(false);
   const [emailing, setEmailing] = useState(false);
   const fileInputRef = useRef(null);
+  const cameraInputRef = useRef(null);
 
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -132,31 +133,61 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
         </div>
       </div>
 
-      {/* UPLOAD OR PASTE */}
-      <div style={{ display: 'flex', gap: 10, marginBottom: 4 }}>
-        <input ref={fileInputRef} type="file" accept="image/*,application/pdf,.pdf" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
-        <motion.button
-          whileTap={{ scale: 0.96 }}
-          onClick={() => fileInputRef.current?.click()}
-          style={{
-            flex: 1, padding: '14px 0', borderRadius: 12, fontSize: 12, fontWeight: 800,
-            letterSpacing: '0.1em', cursor: 'pointer',
-            border: `1px solid ${uploadedFileUrl ? '#22c55e60' : accentColor + '40'}`,
-            background: uploadedFileUrl ? 'rgba(34,197,94,0.08)' : `${accentColor}10`,
-            color: uploadedFileUrl ? '#22c55e' : accentColor,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          }}
-        >
-          {uploading ? <Spinner color={accentColor} text="READING..." /> : uploadedFileUrl ? '✓ PHOTO UPLOADED' : (
-            <>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* UPLOAD OR PASTE — two separate buttons */}
+      <div>
+        {/* Hidden inputs */}
+        <input ref={fileInputRef} type="file" accept="image/*,application/pdf,.doc,.docx" onChange={handleFileUpload} style={{ display: 'none' }} />
+        <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
+
+        {uploadedFileUrl ? (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', borderRadius: 12, border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.08)' }}>
+            <span style={{ fontSize: 12, fontWeight: 800, color: '#22c55e', letterSpacing: '0.1em' }}>✓ FILE UPLOADED — READY TO DECODE</span>
+            <button onClick={() => { setUploadedFileUrl(null); setLetterText(''); }} style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>REMOVE</button>
+          </div>
+        ) : uploading ? (
+          <div style={{ padding: '14px 0', textAlign: 'center' }}>
+            <Spinner color={accentColor} text="READING YOUR FILE..." />
+          </div>
+        ) : (
+          <div style={{ display: 'flex', gap: 10 }}>
+            <motion.button
+              whileTap={{ scale: 0.96 }}
+              onClick={() => cameraInputRef.current?.click()}
+              style={{
+                flex: 1, padding: '14px 0', borderRadius: 12, fontSize: 11, fontWeight: 800,
+                letterSpacing: '0.08em', cursor: 'pointer',
+                border: `1px solid ${accentColor}40`,
+                background: `${accentColor}10`, color: accentColor,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+              }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                 <circle cx="12" cy="13" r="4"/>
               </svg>
-              TAKE PHOTO / UPLOAD
-            </>
-          )}
-        </motion.button>
+              TAKE PHOTO
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.96 }}
+              onClick={() => fileInputRef.current?.click()}
+              style={{
+                flex: 1, padding: '14px 0', borderRadius: 12, fontSize: 11, fontWeight: 800,
+                letterSpacing: '0.08em', cursor: 'pointer',
+                border: `1px solid ${accentColor}40`,
+                background: `${accentColor}10`, color: accentColor,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+              }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              UPLOAD FILE
+            </motion.button>
+          </div>
+        )}
+        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.04em', marginTop: 6, textAlign: 'center' }}>Photo, PDF, Word doc — we read it all</p>
       </div>
       {/* LINK URL */}
       <div className="space-y-2">

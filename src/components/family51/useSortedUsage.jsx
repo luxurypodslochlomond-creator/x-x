@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 const KEY = 'sorted_uses';
-const FREE_LIMIT = 1;
+const FREE_LIMIT = 2;
 
 export function useSortedUsage() {
   const [uses, setUses] = useState(() => {

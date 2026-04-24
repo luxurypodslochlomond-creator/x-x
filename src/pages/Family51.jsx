@@ -176,6 +176,26 @@ export default function Family51Page() {
               </motion.div>
             </div>
 
+            {/* WHY SORTED > FREE AI — INLINE VALUE PROP */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              style={{ marginBottom: 28, background: 'rgba(249,115,22,0.06)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 14, padding: '16px 18px' }}
+            >
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>WHY NOT JUST USE CHATGPT?</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <WhyRow icon="⚡" text="SORTED is trained specifically on UK rights, deadlines & escalation paths — ChatGPT guesses" />
+                <WhyRow icon="🎯" text="We give you the exact 3 actions to take — not a wall of text to read" />
+                <WhyRow icon="📍" text="Knows your location, jurisdiction & relevant bodies automatically" />
+                <WhyRow icon="🔒" text="Nothing stored, nothing sent to anyone — your letter stays private" />
+                <WhyRow icon="📧" text="Email the breakdown to yourself, to a family member, to a solicitor" />
+              </div>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
+                2 free decodes. Then £9.99/month — less than one cup of coffee. Cheaper than 2 minutes of a solicitor's time.
+              </p>
+            </motion.div>
+
             {/* THREE GIANT BUTTONS */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
 
@@ -266,8 +286,8 @@ export default function Family51Page() {
             <div style={{ textAlign: 'center', marginBottom: 24 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>YOU'RE NOT DONE YET</div>
               <h1 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 14px' }}>
-                <span style={{ color: '#fff' }}>1 free decode</span>{' '}
-                <span style={{ color: '#f97316' }}>used.</span>
+                <span style={{ color: '#fff' }}>Free decodes</span>{' '}
+                  <span style={{ color: '#f97316' }}>used up.</span>
               </h1>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>
                 Subscribe to keep going — we're right here with you.
@@ -281,6 +301,16 @@ export default function Family51Page() {
         )}
 
       </AnimatePresence>
+    </div>
+  );
+}
+
+// ─── WHY ROW ─────────────────────────────────────────────────────────────────
+function WhyRow({ icon, text }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+      <span style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{icon}</span>
+      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.45 }}>{text}</span>
     </div>
   );
 }
