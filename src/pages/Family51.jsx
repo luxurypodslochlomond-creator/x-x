@@ -161,40 +161,39 @@ export default function Family51Page() {
          {!activeTool && !isLocked && !menuOpen && !showWhy && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
-            {/* HEADLINE */}
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            {/* HEADLINE — SHORT AND SHARP */}
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#f97316', marginBottom: 14, opacity: 0.7 }}>WE'VE GOT YOU</div>
-                <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 16px' }}>
-                    <span style={{ color: '#fff' }}>Got a letter</span>{' '}
-                    <span style={{ color: '#f97316' }}>that worried you?</span>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>WHAT DO YOU NEED?</div>
+                <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
+                    <span style={{ color: '#fff' }}>Got a scary</span>{' '}
+                    <span style={{ color: '#f97316' }}>letter?</span><br />
+                    <span style={{ color: '#fff' }}>Need a</span>{' '}
+                    <span style={{ color: '#06b6d4' }}>reply?</span><br />
+                    <span style={{ color: '#fff' }}>Stuck in a</span>{' '}
+                    <span style={{ color: '#ef4444' }}>dispute?</span>
                   </h1>
-                <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.6 }}>
-                  Paste it in. We'll tell you exactly what it means,<br />what you need to do, and by when. Plain English. Free.
-                </p>
               </motion.div>
             </div>
 
-            {/* REAL STORY */}
+            {/* WHY SORTED — INLINE VALUE PROP */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              style={{ marginBottom: 28, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '18px 20px' }}
+              style={{ marginBottom: 28, background: 'rgba(249,115,22,0.06)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 14, padding: '16px 18px' }}
             >
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)', margin: '0 0 12px' }}>WHAT SORTED DOES</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <WhyRow icon="📄" text="You paste the letter — or take a photo of it" />
-                <WhyRow icon="🧠" text="We decode it into plain English — what it actually means" />
-                <WhyRow icon="✅" text="We give you the exact steps to take, and by when" />
-                <WhyRow icon="📧" text="Email the breakdown to yourself or someone who can help" />
-                <WhyRow icon="🔒" text="Nothing is stored. Nothing is shared. Ever." />
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>WHAT SORTED DOES</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <WhyRow icon="⚡" text="Paste your letter — we decode it into plain English instantly" />
+                <WhyRow icon="🎯" text="Exact steps to take, and by when — no walls of text" />
+                <WhyRow icon="📍" text="Knows your location, jurisdiction & relevant bodies automatically" />
+                <WhyRow icon="🔒" text="Nothing stored, nothing sent to anyone — your letter stays private" />
+                <WhyRow icon="📧" text="Email the breakdown to yourself, a family member, or a solicitor" />
               </div>
-              <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.6 }}>
-                  2 free decodes · then £9.99/month · cancel any time
-                </p>
-              </div>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
+                2 free decodes. Then £9.99/month — less than one cup of coffee.
+              </p>
             </motion.div>
 
             {/* THREE GIANT BUTTONS */}
