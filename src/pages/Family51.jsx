@@ -185,11 +185,11 @@ export default function Family51Page() {
             >
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>WHAT SORTED DOES</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <WhyRow icon="⚡" text="Paste your letter — we decode it into plain English instantly" />
-                <WhyRow icon="🎯" text="Exact steps to take, and by when — no walls of text" />
-                <WhyRow icon="📍" text="Knows your location, jurisdiction & relevant bodies automatically" />
-                <WhyRow icon="🔒" text="Nothing stored, nothing sent to anyone — your letter stays private" />
-                <WhyRow icon="📧" text="Email the breakdown to yourself, a family member, or a solicitor" />
+                <WhyRow icon={<WRBolt />} text="Paste your letter — we decode it into plain English instantly" />
+                <WhyRow icon={<WRTarget />} text="Exact steps to take, and by when — no walls of text" />
+                <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & relevant bodies automatically" />
+                <WhyRow icon={<WRLock />} text="Nothing stored, nothing sent to anyone — your letter stays private" />
+                <WhyRow icon={<WRMail />} text="Email the breakdown to yourself, a family member, or a solicitor" />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
                 2 free decodes. Then £9.99/month — less than one cup of coffee.
@@ -312,9 +312,52 @@ export default function Family51Page() {
 function WhyRow({ icon, text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-      <span style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{icon}</span>
+      <span style={{ flexShrink: 0, marginTop: 1, display: 'flex', alignItems: 'center' }}>{icon}</span>
       <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.45 }}>{text}</span>
     </div>
+  );
+}
+
+// ─── WHY ROW ICONS (custom SVG, no emoji) ────────────────────────────────────
+function WRBolt() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M8.5 1.5L3 7.5h4L4.5 12.5L11 6H7L8.5 1.5Z" stroke="#f97316" strokeWidth="1.3" strokeLinejoin="round" fill="rgba(249,115,22,0.15)" />
+    </svg>
+  );
+}
+function WRTarget() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <circle cx="7" cy="7" r="5.5" stroke="#f97316" strokeWidth="1.2" />
+      <circle cx="7" cy="7" r="3" stroke="#f97316" strokeWidth="1.2" opacity="0.6" />
+      <circle cx="7" cy="7" r="1" fill="#f97316" />
+    </svg>
+  );
+}
+function WRPin() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M7 1.5C5.07 1.5 3.5 3.07 3.5 5c0 2.625 3.5 7 3.5 7S10.5 7.625 10.5 5c0-1.93-1.57-3.5-3.5-3.5Z" stroke="#f97316" strokeWidth="1.2" fill="rgba(249,115,22,0.15)" />
+      <circle cx="7" cy="5" r="1.2" fill="#f97316" />
+    </svg>
+  );
+}
+function WRLock() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <rect x="2.5" y="6.5" width="9" height="6" rx="1.2" stroke="#f97316" strokeWidth="1.2" fill="rgba(249,115,22,0.1)" />
+      <path d="M4.5 6.5V4.5a2.5 2.5 0 015 0v2" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+      <circle cx="7" cy="9.5" r="1" fill="#f97316" />
+    </svg>
+  );
+}
+function WRMail() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <rect x="1.5" y="3" width="11" height="8" rx="1.2" stroke="#f97316" strokeWidth="1.2" fill="rgba(249,115,22,0.1)" />
+      <path d="M2 3.5L7 7.5L12 3.5" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
   );
 }
 
