@@ -202,12 +202,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   useEffect(() => {
     const loadUser = async () => {
       if (isOffline && isOfflineOkPage) { setIsLoading(false); return; }
-      if (isPublicPage) {
-        try { setIsLoading(true); const currentUser = await base44.auth.me(); setUser(currentUser); } 
-        catch { setUser(null); } 
-        finally { setIsLoading(false); }
-        return;
-      }
+      if (isPublicPage) { setIsLoading(false); setUser(null); return; }
       try {
         setIsLoading(true); setAuthError(false);
         const currentUser = await base44.auth.me();
