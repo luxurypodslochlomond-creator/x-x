@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Share2, ArrowLeft, Home } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Download, Share2 } from 'lucide-react';
+import SortedLayout from '@/components/family51/SortedLayout';
 
 export default function SortedPartnerKit() {
-  const navigate = useNavigate();
   const [showCopied, setShowCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -51,33 +50,8 @@ export default function SortedPartnerKit() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '20px', color: '#fff' }}>
-      {/* STICKY HEADER — Match Family51 style */}
-      <div style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '12px 20px', marginBottom: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <button onClick={() => navigate('/Family51')} style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="4" y="12" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="2" fill="rgba(249,115,22,0.08)" />
-            <path d="M10 12V8a4 4 0 018 0v4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" fill="none" />
-            <circle cx="16" cy="20" r="1.5" fill="#f97316" />
-          </svg>
-          <div style={{ lineHeight: 1.1 }}>
-            <div style={{ fontSize: 13, fontWeight: 900, color: '#fff', letterSpacing: '-0.01em' }}>SORTED</div>
-            <div style={{ fontSize: 8, fontWeight: 700, color: '#f97316', letterSpacing: '0.12em' }}>WE'VE GOT YOU</div>
-          </div>
-        </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button onClick={() => navigate('/Family51')} style={{ padding: '8px 14px', background: 'rgba(249,115,22,0.12)', border: '1px solid rgba(249,115,22,0.4)', borderRadius: 6, color: '#f97316', fontWeight: 700, fontSize: 11, letterSpacing: '0.08em', cursor: 'pointer', transition: 'all 0.2s' }} onMouseOver={(e) => { e.target.style.background = 'rgba(249,115,22,0.2)'; }} onMouseOut={(e) => { e.target.style.background = 'rgba(249,115,22,0.12)'; }}>
-            MY CASES
-          </button>
-          <button onClick={() => navigate(-1)} style={{ padding: '8px 12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 6, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onMouseOver={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.4)'; }} onMouseOut={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.2)'; }}>
-            ?
-          </button>
-          <button onClick={() => {}} style={{ padding: '8px 12px', background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', fontSize: 18 }}>
-            ☰
-          </button>
-        </div>
-      </div>
-      
+    <SortedLayout currentPage="SortedPartnerKit">
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '20px', color: '#fff' }}>
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         {/* HEADER */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: 40, paddingTop: 0 }}>
@@ -266,7 +240,8 @@ export default function SortedPartnerKit() {
         </div>
       </div>
 
-    </div>
+      </div>
+    </SortedLayout>
   );
 }
 
