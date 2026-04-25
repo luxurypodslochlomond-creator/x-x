@@ -21,8 +21,10 @@ export default function SortedLayout({ children, currentPage }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleNavClick = (path) => {
+    setIsTransitioning(true);
     setMenuOpen(false);
     navigate(path);
+    setTimeout(() => setIsTransitioning(false), 300);
   };
 
 
@@ -165,7 +167,7 @@ export default function SortedLayout({ children, currentPage }) {
       </AnimatePresence>
 
       {/* Content */}
-      <main style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+      <main style={{ maxWidth: '100vw', overflowX: 'hidden', position: 'relative' }}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -173,6 +175,30 @@ export default function SortedLayout({ children, currentPage }) {
         >
           {children}
         </motion.div>
+        
+        {/* Loading Overlay */}
+        <AnimatePresence>
+          {isTransitioning && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'rgba(8,10,15,0.8)',
+                backdropFilter: 'blur(4px)',
+                zIndex: 100,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                pointerEvents: 'none'
+              }}
+            >
+              <SortedLoader />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
     </div>
   );
