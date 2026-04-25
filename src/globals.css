@@ -109,6 +109,25 @@ css
   to { opacity: 1; }
 }
 
+/* CB51 NATIVE-SMOOTH TRANSITIONS */
+[data-cb51="true"]::view-transition-old(root) {
+  animation: cb51-exit 0.3s cubic-bezier(0.4, 0, 0.8, 1);
+}
+
+[data-cb51="true"]::view-transition-new(root) {
+  animation: cb51-enter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cb51-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0.95; transform: translateY(-8px); }
+}
+
+@keyframes cb51-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* CB51 INSTANT LOADING - Radio icon cyan loader */
 #root[data-cb51]:empty::before {
   content: '';
