@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Eye, Scale, Mail, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedLoader from './SortedLoader';
@@ -16,18 +16,25 @@ function F51Mark() {
 }
 
 export default function SortedLayout({ children, currentPage }) {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [currentPage]);
 
   const handleNavClick = (path) => {
     setIsTransitioning(true);
     setTimeout(() => {
-      window.location.href = path;
-    }, 300);
+      navigate(path);
+      setIsTransitioning(false);
+    }, 250);
   };
 
   const menuItems = [
-    { label: 'SORTED Home', path: '/Family51' },
+    { label: 'SORTED Home', path: '/Family51', icon: null },
     { label: 'Terms', path: '/SortedTerms', icon: <Scale className="w-4 h-4" /> },
     { label: 'Privacy', path: '/SortedPrivacy', icon: <Eye className="w-4 h-4" /> },
     { label: 'Contact', path: 'mailto:family@uf51.love', icon: <Mail className="w-4 h-4" />, isEmail: true },
@@ -35,7 +42,7 @@ export default function SortedLayout({ children, currentPage }) {
 
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff' }}>
-      {isTransitioning && <SortedLoader />}
+      {(isTransitioning || isLoading) && <SortedLoader />}
 
       {/* Header */}
       <header style={{
@@ -50,7 +57,7 @@ export default function SortedLayout({ children, currentPage }) {
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        <Link to="/Family51" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'none' }}>
+        <Link to="/Family51" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'none', color: 'inherit' }}>
           <F51Mark />
           <div style={{ lineHeight: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
@@ -108,10 +115,9 @@ export default function SortedLayout({ children, currentPage }) {
                     {item.label}
                   </a>
                 ) : (
-                  <Link
+                  <button
                     key={idx}
-                    to={item.path}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => handleNavClick(item.path)}
                     style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -122,12 +128,17 @@ export default function SortedLayout({ children, currentPage }) {
                       color: 'rgba(255,255,255,0.85)',
                       textDecoration: 'none',
                       borderBottom: '1px solid rgba(255,255,255,0.07)',
-                      letterSpacing: '0.01em'
+                      letterSpacing: '0.01em',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      width: '100%',
+                      textAlign: 'left'
                     }}
                   >
                     {item.icon && <span style={{ color: 'rgba(255,255,255,0.4)' }}>{item.icon}</span>}
                     {item.label}
-                  </Link>
+                  </button>
                 )
               ))}
               <button
