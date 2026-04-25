@@ -123,7 +123,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51Privacy" element={<CB51PrivacyPage />} />
       <Route path="/Stoneymollan" element={<LayoutWrapper currentPageName="Stoneymollan"><StoneymollanPage /></LayoutWrapper>} />
       <Route path="/PetSounds51ResearchOutreach" element={<LayoutWrapper currentPageName="PetSounds51ResearchOutreach"><PetSounds51ResearchOutreach /></LayoutWrapper>} />
-      <Route path="/PetSounds51" element={<LayoutWrapper currentPageName="PetSounds51"><PetSounds51 /></LayoutWrapper>} />
+      <Route path="/PetSounds51" element={<LayoutWrapper currentPageName="PetSounds51"><Suspense fallback={<COOLASFUCK8BitLoading message="LOADING PETSOUNDS51" />}><PetSounds51 /></Suspense></LayoutWrapper>} />
       <Route path="/CB51CalendarView" element={<LayoutWrapper currentPageName="CB51CalendarView"><CB51CalendarView /></LayoutWrapper>} />
       <Route path="/CB51MessageInbox" element={<LayoutWrapper currentPageName="CB51MessageInbox"><CB51MessageInbox /></LayoutWrapper>} />
       <Route path="/CB51FinanceAdmin" element={<LayoutWrapper currentPageName="CB51FinanceAdmin"><CB51FinanceAdmin /></LayoutWrapper>} />
