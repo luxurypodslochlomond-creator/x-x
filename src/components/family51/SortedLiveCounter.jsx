@@ -78,12 +78,8 @@ export default function SortedLiveCounter() {
         </p>
       </div>
 
-      {/* Mini flag icons */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 3, flexShrink: 0, opacity: 0.5 }}>
-        <span style={{ fontSize: 14 }}>🇬🇧</span>
-        <span style={{ fontSize: 14 }}>🇮🇪</span>
-        <span style={{ fontSize: 14 }}>🌍</span>
-      </div>
+      {/* Global — no flags, no exclusion */}
+      <span style={{ fontSize: 20, opacity: 0.4 }}>🌍</span>
     </motion.div>
   );
 }
