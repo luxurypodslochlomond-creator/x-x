@@ -2,19 +2,40 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const STATS = [
-  { number: '7M+', label: 'UK adults in severe financial stress right now', color: '#f97316' },
-  { number: '73%', label: 'of people who get bailiff visits have mental health problems', color: '#ef4444' },
-  { number: '£0', label: 'most people can afford for a solicitor to read a letter', color: '#eab308' },
-  { number: '1 in 3', label: 'UK adults have ignored an official letter out of fear', color: '#06b6d4' },
+  { number: '7M+', label: 'UK adults in severe financial distress right now', color: '#f97316', source: 'Joseph Rowntree Foundation, 2024' },
+  { number: '73%', label: 'of people referred to bailiffs have a diagnosed mental health condition', color: '#ef4444', source: 'Money & Mental Health Policy Institute, 2024' },
+  { number: '92%', label: 'of serious civil legal problems in the USA receive no legal help at all', color: '#eab308', source: 'Legal Services Corporation Justice Gap Report, 2022' },
+  { number: '5.1B', label: 'people worldwide have unmet justice needs — two thirds of all humanity', color: '#06b6d4', source: 'World Justice Project, 2019' },
 ];
 
 const GLOBAL_STATS = [
-  { country: 'UK', stat: '7M+ in severe financial distress. Legal aid cut by 40% since 2012. Citizens Advice has a 3-week wait.' },
-  { country: 'Europe', stat: '83M Europeans live below the poverty line. Legal aid thresholds exclude most working people.' },
-  { country: 'USA', stat: '80% of low-income Americans receive no legal help. Debt collectors send 70M letters a year.' },
-  { country: 'Asia', stat: '60% of people with legal problems take no action. 400M in India face legal issues with zero access to counsel.' },
-  { country: 'Australia', stat: '3.6M legal problems a year — 66% get no professional help. Rural areas wait months.' },
-  { country: 'Global', stat: '5.1 billion people — two thirds of humanity — have inadequate access to justice.' },
+  {
+    country: 'UK',
+    stat: '4.5 million children living in poverty (2024 record high). 7M+ adults in severe financial distress. Legal aid cut by 40% since 2012. 73% of bailiff referrals involve people with mental health conditions.',
+    source: 'BBC / JRF / Money & Mental Health Policy Institute'
+  },
+  {
+    country: 'EUROPE',
+    stat: '19.5 million children in the EU at risk of poverty or social exclusion. 240+ children fall into poverty every day across Europe. Legal aid thresholds exclude most working families.',
+    source: 'Eurostat 2024 / Save the Children 2024'
+  },
+  {
+    country: 'USA',
+    stat: '92% of serious civil legal problems faced by low-income Americans receive no or insufficient legal help. Eviction is the #1 case type — 288,000 cases in 2024 alone.',
+    source: 'Legal Services Corporation (LSC) Justice Gap Report 2022 / 2024 LAIR Report'
+  },
+  {
+    country: 'GLOBAL',
+    stat: '5.1 billion people — two-thirds of the world\'s population — have at least one unmet justice need. This includes housing, debt, family, employment, and government disputes.',
+    source: 'World Justice Project, Task Force on Justice, 2019 (pre-COVID — situation has worsened)'
+  },
+];
+
+const CHILDREN_STATS = [
+  { number: '4.5M', label: 'children in poverty in the UK — a 2024 record high', color: '#f97316' },
+  { number: '500K', label: 'children in families in debt to the DWP right now', color: '#ef4444' },
+  { number: '19.5M', label: 'children across the EU at risk of poverty or social exclusion', color: '#eab308' },
+  { number: '240+', label: 'children pushed into poverty every single day in Europe', color: '#22c55e' },
 ];
 
 const LANGUAGES = [
@@ -85,9 +106,33 @@ export default function SortedAbout() {
                     >
                       <div style={{ fontSize: 22, fontWeight: 900, color: s.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{s.number}</div>
                       <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.45 }}>{s.label}</div>
+                      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 6, lineHeight: 1.3 }}>Source: {s.source}</div>
                     </motion.div>
                   ))}
                 </div>
+              </div>
+
+              {/* CHILDREN */}
+              <div>
+                <SectionLabel text="THE CHILDREN — THIS IS WHO WE'RE FIGHTING FOR" color="#f97316" />
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', margin: '8px 0 12px', lineHeight: 1.6 }}>
+                  Every family that freezes when a letter arrives — every parent too scared to open the envelope — has children watching. This isn't abstract. This is 4.5 million kids in the UK alone.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                  {CHILDREN_STATS.map((s, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.07 }}
+                      style={{ border: `1px solid ${s.color}25`, borderRadius: 10, padding: '12px 14px', background: `${s.color}08` }}
+                    >
+                      <div style={{ fontSize: 20, fontWeight: 900, color: s.color, marginBottom: 4 }}>{s.number}</div>
+                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>{s.label}</div>
+                    </motion.div>
+                  ))}
+                </div>
+                <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 8 }}>Sources: JRF 2024 · HRW 2024 · Eurostat 2024 · Save the Children · BBC / DWP data</div>
               </div>
 
               {/* GLOBAL REACH */}
@@ -98,6 +143,7 @@ export default function SortedAbout() {
                     <div key={i} style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
                       <div style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', letterSpacing: '0.08em', marginBottom: 4 }}>{g.country}</div>
                       <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>{g.stat}</div>
+                      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 6 }}>Source: {g.source}</div>
                     </div>
                   ))}
                 </div>
