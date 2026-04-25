@@ -226,7 +226,7 @@ export default function Family51Page() {
                     <span style={{ color: '#ef4444' }}>dispute?</span>
                   </h1>
                   <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', margin: '14px 0 0', lineHeight: 1.5 }}>
-                    Paste your letter. Understand it in <strong style={{ color: '#fff' }}>30 seconds.</strong> No jargon. No judgement.
+                    Take a photo or paste it. Understand it in <strong style={{ color: '#fff' }}>30 seconds.</strong> No jargon. No judgement.
                   </p>
               </motion.div>
             </div>
@@ -240,7 +240,7 @@ export default function Family51Page() {
             >
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>WHAT SORTED DOES</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <WhyRow icon={<WRBolt />} text="Take a photo, upload, or paste your letter — decoded into plain English in seconds" />
+                <WhyRow icon={<WRBolt />} text="Snap a photo with your phone or paste the text — decoded in seconds" />
                 <WhyRow icon={<WRTarget />} text="Exact steps to take, and by when — no walls of text" />
                 <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & relevant bodies automatically" />
                 <WhyRow icon={<WRLock />} text="Your letter is processed by AI and immediately discarded — never stored, never sold, never used to train anything" />
