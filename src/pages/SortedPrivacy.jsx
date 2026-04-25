@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Lock, Eye, Trash2, Heart, CheckCircle, AlertTriangle } from 'lucide-react';
-import SortedLayout from '@/components/family51/SortedLayout';
 
 const Section = ({ icon, title, children }) => (
   <div style={{ marginBottom: 40, borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: 40 }}>
@@ -35,126 +34,132 @@ const Warn = ({ children }) => (
 );
 
 export default function SortedPrivacy() {
+  useEffect(() => {
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        document.documentElement.style.viewTransitionName = 'page-transition';
+      });
+    }
+  }, []);
+
   return (
-    <SortedLayout currentPage="Privacy">
-      <div style={{ padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif' }}>
-        <div style={{ maxWidth: 680, margin: '0 auto' }}>
+    <div style={{ padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif' }}>
+      <div style={{ maxWidth: 680, margin: '0 auto' }}>
 
-        {/* Header */}
-        <div style={{ marginBottom: 48 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-            <Shield size={32} style={{ color: '#f97316' }} />
-            <h1 style={{ margin: 0, fontSize: 'clamp(28px, 6vw, 40px)', fontWeight: 900, letterSpacing: '-0.02em' }}>
-              SORTED — Data Sovereignty Pledge
-            </h1>
-          </div>
-          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>
-            Your data is yours. Full stop. Here's exactly what happens — honest, plain English, no corporate waffle.
-          </p>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, marginTop: 12 }}>Last updated: April 2026</p>
+      {/* Header */}
+      <div style={{ marginBottom: 48 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+          <Shield size={32} style={{ color: '#f97316' }} />
+          <h1 style={{ margin: 0, fontSize: 'clamp(28px, 6vw, 40px)', fontWeight: 900, letterSpacing: '-0.02em' }}>
+            SORTED — Data Sovereignty Pledge
+          </h1>
         </div>
-
-        {/* THE PLEDGE */}
-        <div style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.04))', border: '2px solid rgba(249,115,22,0.4)', borderRadius: 16, padding: '28px 24px', marginBottom: 48 }}>
-          <p style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#fff', lineHeight: 1.7, fontStyle: 'italic' }}>
-            "Your letter is yours. Your crisis is yours. Your data is yours. We will never treat it as anything else — not now, not ever, not for any price."
-          </p>
-          <p style={{ margin: '16px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>— The SORTED Pledge</p>
-        </div>
-
-        {/* WHAT HAPPENS TO YOUR LETTER */}
-        <Section icon={<Eye size={22} />} title="What actually happens to your letter">
-          <p style={{ marginTop: 0 }}>When you paste or upload a letter, here's the exact journey — nothing hidden:</p>
-          <div style={{ margin: '20px 0' }}>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
-              <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>1</span>
-              <span>Your letter text is sent over HTTPS (encrypted in transit, like online banking) to an AI model for analysis.</span>
-            </div>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
-              <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>2</span>
-              <span>The AI reads it, generates your breakdown, and sends the result back.</span>
-            </div>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
-              <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>3</span>
-              <span>Your letter content is immediately discarded. We never log it, store it, or look at it.</span>
-            </div>
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-              <span style={{ background: '#22c55e', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>✓</span>
-              <span>The result lives in your browser only. Nothing is saved anywhere unless you choose to email it to yourself.</span>
-            </div>
-          </div>
-        </Section>
-
-        {/* HONEST DISCLOSURE */}
-        <Section icon={<AlertTriangle size={22} />} title="The honest bit — what we can't fully control">
-          <p style={{ marginTop: 0 }}>We'll never hide anything from you. Here's the part most apps don't tell you:</p>
-          <Honest label="AI Provider:">
-            Your letter is processed by an AI model (via our infrastructure partner). Their API terms state they do not train on API data — but we cannot independently audit that. We're honest about this gap.
-          </Honest>
-          <Honest label="HTTPS only:">
-            Your letter is encrypted in transit — but it is not end-to-end encrypted in a way that prevents the AI from reading it. That's unavoidable if you want AI to understand it. We disclose this clearly rather than hiding it.
-          </Honest>
-          <Honest label="Our roadmap:">
-            We are committed to moving toward on-device AI processing as the technology matures — meaning your letter would never leave your device at all. We'll get there. We promise.
-          </Honest>
-        </Section>
-
-        {/* WHAT WE DO AND DON'T DO */}
-        <Section icon={<Lock size={22} />} title="What we do — and what we never do">
-          <div style={{ marginBottom: 24 }}>
-            <p style={{ fontWeight: 700, color: '#22c55e', marginBottom: 12, fontSize: 14, letterSpacing: '0.05em' }}>WE DO:</p>
-            <Check>Encrypt all data in transit (HTTPS)</Check>
-            <Check>Discard your letter content immediately after analysis</Check>
-            <Check>Let you clear all local data at any time — one button, instant, total</Check>
-            <Check>Work without requiring any account or login</Check>
-            <Check>Store zero cookies or trackers on your device</Check>
-            <Check>Tell you exactly what happens — like this page</Check>
-          </div>
-          <div>
-            <p style={{ fontWeight: 700, color: '#ef4444', marginBottom: 12, fontSize: 14, letterSpacing: '0.05em' }}>WE NEVER:</p>
-            <Warn>Store your letter content anywhere</Warn>
-            <Warn>Sell your data — to anyone, ever, for any reason</Warn>
-            <Warn>Use your documents to train AI models</Warn>
-            <Warn>Share your information with third parties for marketing</Warn>
-            <Warn>Link your usage to your identity</Warn>
-            <Warn>Use dark patterns to hide what we're doing</Warn>
-          </div>
-        </Section>
-
-        {/* DATA SOVEREIGNTY */}
-        <Section icon={<Heart size={22} />} title="Data sovereignty is a fundamental right">
-          <p style={{ marginTop: 0 }}>
-            We believe your data is an extension of yourself — as personal as your body, your thoughts, your home. The idea that corporations can harvest, sell, and weaponise your private moments without consent is one of the defining injustices of our time.
-          </p>
-          <p>
-            SORTED exists for people in crisis. Someone terrified by a court letter. Someone who can't afford a solicitor. Someone who just needs to understand what's happening to them. The last thing they need is their moment of vulnerability becoming a data point in someone's ad engine.
-          </p>
-          <p style={{ margin: 0 }}>
-            We will always put you first. We will always be honest when we fall short. And we will never stop improving until your data is so protected it can't be touched by anyone — including us.
-          </p>
-        </Section>
-
-        {/* YOUR CONTROL */}
-        <Section icon={<Trash2 size={22} />} title="Your control — right now">
-          <p style={{ marginTop: 0 }}>You don't need to wait for us to protect your privacy. You have full control today:</p>
-          <Check>Close the tab — everything is gone. No account, no trace.</Check>
-          <Check>Use the "Clear all my data" button in the menu to wipe any local usage data instantly.</Check>
-          <Check>Never create an account — SORTED works completely without one.</Check>
-          <Check>Use a private/incognito browser window for maximum isolation.</Check>
-        </Section>
-
-        {/* CONTACT */}
-        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '24px 20px', textAlign: 'center' }}>
-          <p style={{ margin: '0 0 8px', fontSize: 15, fontWeight: 700, color: '#fff' }}>Questions? Challenge us.</p>
-          <p style={{ margin: '0 0 16px', color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>If you think we're falling short of this pledge, tell us. We mean it.</p>
-          <a href="mailto:family@uf51.love" style={{ color: '#f97316', fontWeight: 700, fontSize: 15 }}>family@uf51.love</a>
-        </div>
-
-        <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: 12, marginTop: 40 }}>
-          SORTED is part of Universal Frequency 51 — built to help people, not harvest them.
+        <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+          Your data is yours. Full stop. Here's exactly what happens — honest, plain English, no corporate waffle.
         </p>
+        <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, marginTop: 12 }}>Last updated: April 2026</p>
       </div>
+
+      {/* THE PLEDGE */}
+      <div style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.04))', border: '2px solid rgba(249,115,22,0.4)', borderRadius: 16, padding: '28px 24px', marginBottom: 48 }}>
+        <p style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#fff', lineHeight: 1.7, fontStyle: 'italic' }}>
+          "Your letter is yours. Your crisis is yours. Your data is yours. We will never treat it as anything else — not now, not ever, not for any price."
+        </p>
+        <p style={{ margin: '16px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>— The SORTED Pledge</p>
       </div>
-    </SortedLayout>
+
+      {/* WHAT HAPPENS TO YOUR LETTER */}
+      <Section icon={<Eye size={22} />} title="What actually happens to your letter">
+        <p style={{ marginTop: 0 }}>When you paste or upload a letter, here's the exact journey — nothing hidden:</p>
+        <div style={{ margin: '20px 0' }}>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
+            <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>1</span>
+            <span>Your letter text is sent over HTTPS (encrypted in transit, like online banking) to an AI model for analysis.</span>
+          </div>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
+            <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>2</span>
+            <span>The AI reads it, generates your breakdown, and sends the result back.</span>
+          </div>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
+            <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>3</span>
+            <span>Your letter content is immediately discarded. We never log it, store it, or look at it.</span>
+          </div>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <span style={{ background: '#22c55e', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>✓</span>
+            <span>The result lives in your browser only. Nothing is saved anywhere unless you choose to email it to yourself.</span>
+          </div>
+        </div>
+      </Section>
+
+      {/* HONEST DISCLOSURE */}
+      <Section icon={<AlertTriangle size={22} />} title="The honest bit — what we can't fully control">
+        <p style={{ marginTop: 0 }}>We'll never hide anything from you. Here's the part most apps don't tell you:</p>
+        <Honest label="AI Provider:">
+          Your letter is processed by an AI model (via our infrastructure partner). Their API terms state they do not train on API data — but we cannot independently audit that. We're honest about this gap.
+        </Honest>
+        <Honest label="HTTPS only:">
+          Your letter is encrypted in transit — but it is not end-to-end encrypted in a way that prevents the AI from reading it. That's unavoidable if you want AI to understand it. We disclose this clearly rather than hiding it.
+        </Honest>
+        <Honest label="Our roadmap:">
+          We are committed to moving toward on-device AI processing as the technology matures — meaning your letter would never leave your device at all. We'll get there. We promise.
+        </Honest>
+      </Section>
+
+      {/* WHAT WE DO AND DON'T DO */}
+      <Section icon={<Lock size={22} />} title="What we do — and what we never do">
+        <div style={{ marginBottom: 24 }}>
+          <p style={{ fontWeight: 700, color: '#22c55e', marginBottom: 12, fontSize: 14, letterSpacing: '0.05em' }}>WE DO:</p>
+          <Check>Encrypt all data in transit (HTTPS)</Check>
+          <Check>Discard your letter content immediately after analysis</Check>
+          <Check>Let you clear all local data at any time — one button, instant, total</Check>
+          <Check>Work without requiring any account or login</Check>
+          <Check>Store zero cookies or trackers on your device</Check>
+          <Check>Tell you exactly what happens — like this page</Check>
+        </div>
+        <div>
+          <p style={{ fontWeight: 700, color: '#ef4444', marginBottom: 12, fontSize: 14, letterSpacing: '0.05em' }}>WE NEVER:</p>
+          <Warn>Store your letter content anywhere</Warn>
+          <Warn>Sell your data — to anyone, ever, for any reason</Warn>
+          <Warn>Use your documents to train AI models</Warn>
+          <Warn>Share your information with third parties for marketing</Warn>
+          <Warn>Link your usage to your identity</Warn>
+          <Warn>Use dark patterns to hide what we're doing</Warn>
+        </div>
+      </Section>
+
+      {/* DATA SOVEREIGNTY */}
+      <Section icon={<Heart size={22} />} title="Data sovereignty is a fundamental right">
+        <p style={{ marginTop: 0 }}>
+          We believe your data is an extension of yourself — as personal as your body, your thoughts, your home. The idea that corporations can harvest, sell, and weaponise your private moments without consent is one of the defining injustices of our time.
+        </p>
+        <p>
+          SORTED exists for people in crisis. Someone terrified by a court letter. Someone who can't afford a solicitor. Someone who just needs to understand what's happening to them. The last thing they need is their moment of vulnerability becoming a data point in someone's ad engine.
+        </p>
+        <p style={{ margin: 0 }}>
+          We will always put you first. We will always be honest when we fall short. And we will never stop improving until your data is so protected it can't be touched by anyone — including us.
+        </p>
+      </Section>
+
+      {/* YOUR CONTROL */}
+      <Section icon={<Trash2 size={22} />} title="Your control — right now">
+        <p style={{ marginTop: 0 }}>You don't need to wait for us to protect your privacy. You have full control today:</p>
+        <Check>Close the tab — everything is gone. No account, no trace.</Check>
+        <Check>Use the "Clear all my data" button in the menu to wipe any local usage data instantly.</Check>
+        <Check>Never create an account — SORTED works completely without one.</Check>
+        <Check>Use a private/incognito browser window for maximum isolation.</Check>
+      </Section>
+
+      {/* CONTACT */}
+      <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '24px 20px', textAlign: 'center' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 15, fontWeight: 700, color: '#fff' }}>Questions? Challenge us.</p>
+        <p style={{ margin: '0 0 16px', color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>If you think we're falling short of this pledge, tell us. We mean it.</p>
+        <a href="mailto:family@uf51.love" style={{ color: '#f97316', fontWeight: 700, fontSize: 15 }}>family@uf51.love</a>
+      </div>
+
+      <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: 12, marginTop: 40 }}>
+        SORTED is part of Universal Frequency 51 — built to help people, not harvest them.
+      </p>
+    </div>
+    </div>
   );
 }

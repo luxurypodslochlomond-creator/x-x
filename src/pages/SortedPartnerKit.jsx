@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Share2 } from 'lucide-react';
-import SortedLayout from '@/components/family51/SortedLayout';
 
 export default function SortedPartnerKit() {
   const [showCopied, setShowCopied] = useState(false);
@@ -12,6 +11,13 @@ export default function SortedPartnerKit() {
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
       script.async = true;
       document.head.appendChild(script);
+    }
+    
+    // Trigger View Transitions for smooth native nav
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        document.documentElement.style.viewTransitionName = 'page-transition';
+      });
     }
   }, []);
 
@@ -49,8 +55,7 @@ export default function SortedPartnerKit() {
   };
 
   return (
-    <SortedLayout currentPage="SortedPartnerKit">
-      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '20px', color: '#fff' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '20px', color: '#fff' }}>
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         {/* HEADER */}
          <div style={{ textAlign: 'center', marginBottom: 40, paddingTop: 0 }}>
@@ -235,11 +240,9 @@ export default function SortedPartnerKit() {
           <p>SORTED — Decode scary letters. Help people. Make money. Build the future together.</p>
           <p>© 2026 Universal Frequency 51 | Data Sovereign • Open Source • No Corporate Capture</p>
         </div>
-      </div>
-      </div>
-
-      </div>
-      </SortedLayout>
+        </div>
+        </div>
+    </div>
   );
 }
 
