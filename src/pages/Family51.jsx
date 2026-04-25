@@ -9,6 +9,7 @@ import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import SortedAbout from '@/components/family51/SortedAbout';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
+import SortedLoader from '@/components/family51/SortedLoader';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -19,14 +20,19 @@ export default function Family51Page() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const { isLocked, remaining, recordUse } = useSortedUsage();
 
   const handleToolOpen = (toolId) => {
-    if (isLocked) return; // blocked — paywall shown below
-    setActiveTool(toolId);
-    setMenuOpen(false);
-    setShowHistory(false);
+    if (isLocked) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveTool(toolId);
+      setMenuOpen(false);
+      setShowHistory(false);
+      setIsTransitioning(false);
+    }, 300);
   };
 
   useEffect(() => {
@@ -65,6 +71,7 @@ export default function Family51Page() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+      {isTransitioning && <SortedLoader />}
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
