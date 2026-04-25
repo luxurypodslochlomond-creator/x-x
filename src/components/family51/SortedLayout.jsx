@@ -22,15 +22,10 @@ export default function SortedLayout({ children, currentPage }) {
 
   const handleNavClick = (path) => {
     setMenuOpen(false);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      navigate(path);
-    }, 200);
+    navigate(path);
   };
 
-  useEffect(() => {
-    setIsTransitioning(false);
-  }, [currentPage]);
+
 
   const menuItems = [
     { label: 'SORTED Home', path: '/Family51', icon: null },
@@ -41,7 +36,6 @@ export default function SortedLayout({ children, currentPage }) {
 
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff' }}>
-      {isTransitioning && <SortedLoader />}
 
       {/* Header */}
       <header style={{

@@ -50,9 +50,25 @@ export default function SortedPartnerKit() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '20px', color: '#fff' }}>
+      {/* STICKY HEADER */}
+      <div style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', marginBottom: 20, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="3" y="11" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="1.8" fill="rgba(249,115,22,0.06)" />
+            <path d="M11 11V8a4 4 0 018 0v3" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+            <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f97316" strokeWidth="1.4" fill="rgba(249,115,22,0.25)" />
+            <circle cx="15" cy="19" r="0.8" fill="#f97316" />
+          </svg>
+          <div style={{ lineHeight: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>PARTNER KIT</div>
+          </div>
+        </div>
+      </div>
+      
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         {/* HEADER */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: 40, paddingTop: 20 }}>
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: 40, paddingTop: 0 }}>
           <h1 style={{ fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 900, margin: '0 0 12px', letterSpacing: '-0.02em' }}>
             <span style={{ color: '#f97316' }}>SORTED</span> — Partner Kit
           </h1>
