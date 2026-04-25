@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Lock, Eye, Trash2, Heart, ArrowLeft, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Shield, Lock, Eye, Trash2, Heart, CheckCircle, AlertTriangle } from 'lucide-react';
+import SortedLayout from '@/components/family51/SortedLayout';
 
 const Section = ({ icon, title, children }) => (
   <div style={{ marginBottom: 40, borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: 40 }}>
@@ -35,13 +36,9 @@ const Warn = ({ children }) => (
 
 export default function SortedPrivacy() {
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a', color: '#fff', fontFamily: 'system-ui, sans-serif' }}>
-      <div style={{ maxWidth: 680, margin: '0 auto', padding: '40px 20px 80px' }}>
-
-        {/* Back */}
-        <Link to="/Family51" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: '#f97316', textDecoration: 'none', fontSize: 14, fontWeight: 700, marginBottom: 40 }}>
-          <ArrowLeft size={16} /> Back to SORTED
-        </Link>
+    <SortedLayout currentPage="Privacy">
+      <div style={{ padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif' }}>
+        <div style={{ maxWidth: 680, margin: '0 auto' }}>
 
         {/* Header */}
         <div style={{ marginBottom: 48 }}>
@@ -157,6 +154,6 @@ export default function SortedPrivacy() {
           SORTED is part of Universal Frequency 51 — built to help people, not harvest them.
         </p>
       </div>
-    </div>
+    </SortedLayout>
   );
 }

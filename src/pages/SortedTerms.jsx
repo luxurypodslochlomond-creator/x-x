@@ -1,7 +1,10 @@
+import SortedLayout from '@/components/family51/SortedLayout';
+
 export default function SortedTermsPage() {
   return (
-    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", padding: '40px 20px', fontSize: '16px', lineHeight: 1.6 }}>
-      <div style={{ maxWidth: 600, margin: '0 auto' }}>
+    <SortedLayout currentPage="Terms">
+      <div style={{ padding: '40px 20px', fontSize: '16px', lineHeight: 1.6, fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+        <div style={{ maxWidth: 600, margin: '0 auto' }}>
         <div style={{ marginBottom: 40 }}>
           <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 8, color: '#f97316' }}>SORTED</h1>
           <p style={{ fontSize: 13, letterSpacing: '0.08em', color: 'rgba(255,255,255,0.5)' }}>TERMS OF SERVICE</p>
@@ -50,6 +53,7 @@ export default function SortedTermsPage() {
           Questions? <a href="mailto:family@uf51.love" style={{ color: '#f97316', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
         </p>
       </div>
-    </div>
+      </div>
+    </SortedLayout>
   );
 }
