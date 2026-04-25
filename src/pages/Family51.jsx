@@ -185,7 +185,7 @@ export default function Family51Page() {
             >
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>WHAT SORTED DOES</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <WhyRow icon={<WRBolt />} text="Paste, photo, or upload your letter — we decode it into plain English instantly" />
+                <WhyRow icon={<WRBolt />} text="Take a photo, upload, or paste your letter — decoded into plain English in seconds" />
                 <WhyRow icon={<WRTarget />} text="Exact steps to take, and by when — no walls of text" />
                 <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & relevant bodies automatically" />
                 <WhyRow icon={<WRLock />} text="Nothing stored, nothing sent to anyone — your letter stays private" />
