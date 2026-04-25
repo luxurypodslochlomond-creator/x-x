@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Share2 } from 'lucide-react';
+import { Download, Share2, ArrowLeft, Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function SortedPartnerKit() {
+  const navigate = useNavigate();
   const [showCopied, setShowCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -63,6 +65,14 @@ export default function SortedPartnerKit() {
             <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>PARTNER KIT</div>
           </div>
+        </div>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 12px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 6, color: '#fff', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.2s' }} onMouseOver={(e) => { e.target.style.background = 'rgba(255,255,255,0.12)'; }} onMouseOut={(e) => { e.target.style.background = 'rgba(255,255,255,0.08)'; }}>
+            <ArrowLeft size={14} /> Back
+          </button>
+          <button onClick={() => navigate('/Family51')} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 12px', background: 'rgba(249,115,22,0.15)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 6, color: '#f97316', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.2s' }} onMouseOver={(e) => { e.target.style.background = 'rgba(249,115,22,0.25)'; }} onMouseOut={(e) => { e.target.style.background = 'rgba(249,115,22,0.15)'; }}>
+            <Home size={14} /> SORTED
+          </button>
         </div>
       </div>
       
