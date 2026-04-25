@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const STATS = [
-  { number: '7M+', label: 'UK adults in severe financial distress right now', color: '#f97316', source: 'Joseph Rowntree Foundation, 2024' },
-  { number: '73%', label: 'of people referred to bailiffs have a diagnosed mental health condition', color: '#ef4444', source: 'Money & Mental Health Policy Institute, 2024' },
-  { number: '92%', label: 'of serious civil legal problems in the USA receive no legal help at all', color: '#eab308', source: 'Legal Services Corporation Justice Gap Report, 2022' },
-  { number: '5.1B', label: 'people worldwide have unmet justice needs — two thirds of all humanity', color: '#06b6d4', source: 'World Justice Project, 2019' },
+  { number: '7M+', label: 'UK adults in severe financial distress right now', color: '#f97316', source: 'Joseph Rowntree Foundation, 2024–25' },
+  { number: '73%', label: 'of people referred to bailiffs have a diagnosed mental health condition', color: '#ef4444', source: 'Money & Mental Health Policy Institute' },
+  { number: '92%', label: 'of serious civil legal problems in the USA receive no legal help at all', color: '#eab308', source: 'Legal Services Corporation Justice Gap Report' },
+  { number: '5.1B', label: 'people worldwide have unmet justice needs — two thirds of all humanity', color: '#06b6d4', source: 'World Justice Project (situation has worsened since measurement)' },
 ];
 
 const GLOBAL_STATS = [
@@ -27,7 +27,7 @@ const GLOBAL_STATS = [
   {
     country: 'GLOBAL',
     stat: '5.1 billion people — two-thirds of the world\'s population — have at least one unmet justice need. This includes housing, debt, family, employment, and government disputes.',
-    source: 'World Justice Project, Task Force on Justice, 2019 (pre-COVID — situation has worsened)'
+    source: 'World Justice Project / Task Force on Justice — situation has significantly worsened since 2019'
   },
 ];
 
@@ -132,7 +132,7 @@ export default function SortedAbout() {
                     </motion.div>
                   ))}
                 </div>
-                <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 8 }}>Sources: JRF 2024 · HRW 2024 · Eurostat 2024 · Save the Children · BBC / DWP data</div>
+                <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 8 }}>Sources: JRF · HRW · Eurostat · Save the Children · BBC / DWP data — figures current as of 2025/26</div>
               </div>
 
               {/* GLOBAL REACH */}
