@@ -24,7 +24,7 @@ export default function SortedLayout({ children, currentPage }) {
     setIsTransitioning(true);
     setMenuOpen(false);
     navigate(path);
-    setTimeout(() => setIsTransitioning(false), 300);
+    setTimeout(() => setIsTransitioning(false), 150);
   };
 
 
@@ -171,7 +171,8 @@ export default function SortedLayout({ children, currentPage }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.05 }}
+          key={currentPage}
         >
           {children}
         </motion.div>
