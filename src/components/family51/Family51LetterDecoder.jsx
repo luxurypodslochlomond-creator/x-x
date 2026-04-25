@@ -41,6 +41,46 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     setUploadedFileUrl(file_url);
     setLetterText('[Photo/file uploaded — AI will read it directly]');
     setUploading(false);
+    
+    // Auto-decode immediately after upload
+    setLoading(true);
+    setResult(null);
+    setDecodeError(null);
+    
+    try {
+      const geoContext = `The person is in: ${geo.country}. Apply ${geo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
+      const promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
+      
+      const response = await base44.integrations.Core.InvokeLLM({
+        model: 'gemini_3_flash',
+        prompt: promptText + `\n\nReturn:
+- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
+- severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
+- severity_explanation: One sentence on why that rating
+- action_steps: Array of exactly 3 clear numbered actions to take
+- key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
+- dont_panic: One honest, reassuring sentence`,
+        file_urls: [file_url],
+        response_json_schema: {
+          type: 'object',
+          properties: {
+            what_this_means:      { type: 'string' },
+            severity:             { type: 'string' },
+            severity_explanation: { type: 'string' },
+            action_steps:         { type: 'array', items: { type: 'string' } },
+            key_deadline:         { type: 'string' },
+            dont_panic:           { type: 'string' },
+          },
+        },
+      });
+      
+      setResult(response);
+    } catch (err) {
+      console.error('SORTED auto-decode error:', err);
+      setDecodeError('Something went wrong decoding your letter. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const [decodeError, setDecodeError] = useState(null);
