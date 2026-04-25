@@ -210,9 +210,13 @@ export default function Family51Page() {
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
             {/* HEADLINE — SHORT AND SHARP */}
-            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>WHAT DO YOU NEED?</div>
+                {/* FREE BADGE — lead with this */}
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
+                  <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>TRY FREE — NO CARD NEEDED</span>
+                </div>
                 <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
                     <span style={{ color: '#fff' }}>Got a scary</span>{' '}
                     <span style={{ color: '#f97316' }}>letter?</span><br />
@@ -221,6 +225,9 @@ export default function Family51Page() {
                     <span style={{ color: '#fff' }}>Stuck in a</span>{' '}
                     <span style={{ color: '#ef4444' }}>dispute?</span>
                   </h1>
+                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', margin: '14px 0 0', lineHeight: 1.5 }}>
+                    Paste your letter. Understand it in <strong style={{ color: '#fff' }}>30 seconds.</strong> No jargon. No judgement.
+                  </p>
               </motion.div>
             </div>
 
@@ -240,7 +247,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRMail />} text="Email the breakdown to yourself, a family member, or a solicitor" />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                3 free decodes — one per tool. Then £9.99/month — less than one cup of coffee.
+                3 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>£9.99/month</strong> if you want unlimited. Cancel anytime.
               </p>
             </motion.div>
 
