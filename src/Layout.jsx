@@ -222,10 +222,24 @@ const LayoutInner = ({ children, currentPageName }) => {
   }, [location.pathname, isPublicPage, isOffline, isOfflineOkPage]);
 
   useEffect(() => { 
-      setPageTransitioning(true);
-      setMobileMenuOpen(false); 
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      setCanGoBack(window.history.length > 1);
+      // Trigger View Transitions API for smooth page swaps
+      const doTransition = async () => {
+        if (document.startViewTransition) {
+          await document.startViewTransition(() => {
+            setPageTransitioning(true);
+            setMobileMenuOpen(false); 
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            setCanGoBack(window.history.length > 1);
+          }).finished;
+        } else {
+          setPageTransitioning(true);
+          setMobileMenuOpen(false); 
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          setCanGoBack(window.history.length > 1);
+        }
+      };
+
+      doTransition();
 
       const isCB51 = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
       const isTRACKT = currentPageName.startsWith('Trackt');
