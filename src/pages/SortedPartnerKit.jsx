@@ -230,17 +230,16 @@ export default function SortedPartnerKit() {
             </div>
             </div>
 
-            </div>
-
         {/* FOOTER STATS */}
         <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 12, lineHeight: 1.8 }}>
           <p>SORTED — Decode scary letters. Help people. Make money. Build the future together.</p>
           <p>© 2026 Universal Frequency 51 | Data Sovereign • Open Source • No Corporate Capture</p>
         </div>
       </div>
+      </div>
 
       </div>
-    </SortedLayout>
+      </SortedLayout>
   );
 }
 
