@@ -34,49 +34,28 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
       <motion.button
-        onClick={() => {
-          setIsOpen(!isOpen);
-          setSearchTerm('');
-        }}
+        onClick={() => { setIsOpen(!isOpen); setSearchTerm(''); }}
         whileTap={{ scale: 0.96 }}
         style={{
-          background: isOpen ? `${accentColor}15` : 'rgba(255,255,255,0.06)',
-          border: `1px solid ${isOpen ? accentColor + '60' : accentColor + '25'}`,
-          color: '#fff',
-          padding: '8px 14px',
-          fontSize: 12,
+          background: 'transparent',
+          border: 'none',
+          color: accentColor,
+          padding: '2px 0',
+          fontSize: 11,
           fontWeight: 700,
-          borderRadius: 8,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: 10,
-          transition: 'all 0.2s',
+          gap: 4,
           letterSpacing: '0.03em',
-          boxShadow: isOpen ? `0 0 20px ${accentColor}25` : 'none'
+          textDecoration: 'underline',
+          textDecorationStyle: 'dotted',
+          textUnderlineOffset: 3,
+          opacity: 0.8,
         }}
       >
-        <span style={{
-          width: 20,
-          height: 20,
-          borderRadius: '50%',
-          background: accentColor + '30',
-          border: `1.5px solid ${accentColor}60`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 8,
-          fontWeight: 900,
-          color: accentColor
-        }}>
-          {currentGeo.code}
-        </span>
-        <span style={{ maxWidth: 100, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {geo.country}
-        </span>
-        <motion.span style={{ display: 'flex', alignItems: 'center', fontSize: 10, opacity: 0.6 }} animate={{ rotate: isOpen ? 180 : 0 }}>
-          ▼
-        </motion.span>
+        {geo.country}
+        <motion.span style={{ fontSize: 9, opacity: 0.6 }} animate={{ rotate: isOpen ? 180 : 0 }}>▼</motion.span>
       </motion.button>
 
       <AnimatePresence>

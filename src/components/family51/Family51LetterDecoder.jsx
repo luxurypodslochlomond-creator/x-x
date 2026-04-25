@@ -120,9 +120,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   return (
     <div className="space-y-5">
 
-      {/* GEO SELECTOR */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
+      {/* GEO — auto detected, tap to change */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>📍 Auto-detected:</span>
         <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
       </div>
 
