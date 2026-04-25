@@ -93,6 +93,14 @@ export default function Family51Page() {
              >
                MY CASES
              </motion.button>
+             <motion.button
+               onClick={() => { setShowWhy(true); setMenuOpen(false); }}
+               whileTap={{ scale: 0.95 }}
+               title="Why SORTED?"
+               style={{ width: 30, height: 30, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 900, fontStyle: 'italic' }}
+             >
+               ?
+             </motion.button>
              <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.95 }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#f97316' }}>
                {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
              </motion.button>
@@ -191,6 +199,9 @@ export default function Family51Page() {
                 SORTED decodes it in <strong>plain English</strong>. Shows you what it means. Lists what to do next. You're not alone anymore.
               </p>
             </div>
+
+            <SortedAbout />
+
           </motion.div>
          )}
 
@@ -297,8 +308,6 @@ export default function Family51Page() {
             </motion.div>
 
             <SortedLiveCounter />
-
-            <SortedAbout />
 
             <SortedForLifeCard />
 
