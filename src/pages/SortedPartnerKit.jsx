@@ -52,26 +52,28 @@ export default function SortedPartnerKit() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '20px', color: '#fff' }}>
-      {/* STICKY HEADER */}
-      <div style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', marginBottom: 20, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <rect x="3" y="11" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="1.8" fill="rgba(249,115,22,0.06)" />
-            <path d="M11 11V8a4 4 0 018 0v3" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-            <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f97316" strokeWidth="1.4" fill="rgba(249,115,22,0.25)" />
-            <circle cx="15" cy="19" r="0.8" fill="#f97316" />
+      {/* STICKY HEADER — Match Family51 style */}
+      <div style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '12px 20px', marginBottom: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <button onClick={() => navigate('/Family51')} style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="12" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="2" fill="rgba(249,115,22,0.08)" />
+            <path d="M10 12V8a4 4 0 018 0v4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" fill="none" />
+            <circle cx="16" cy="20" r="1.5" fill="#f97316" />
           </svg>
-          <div style={{ lineHeight: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>PARTNER KIT</div>
+          <div style={{ lineHeight: 1.1 }}>
+            <div style={{ fontSize: 13, fontWeight: 900, color: '#fff', letterSpacing: '-0.01em' }}>SORTED</div>
+            <div style={{ fontSize: 8, fontWeight: 700, color: '#f97316', letterSpacing: '0.12em' }}>WE'VE GOT YOU</div>
           </div>
-        </div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={() => navigate(-1)} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 12px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 6, color: '#fff', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.2s' }} onMouseOver={(e) => { e.target.style.background = 'rgba(255,255,255,0.12)'; }} onMouseOut={(e) => { e.target.style.background = 'rgba(255,255,255,0.08)'; }}>
-            <ArrowLeft size={14} /> Back
+        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button onClick={() => navigate('/Family51')} style={{ padding: '8px 14px', background: 'rgba(249,115,22,0.12)', border: '1px solid rgba(249,115,22,0.4)', borderRadius: 6, color: '#f97316', fontWeight: 700, fontSize: 11, letterSpacing: '0.08em', cursor: 'pointer', transition: 'all 0.2s' }} onMouseOver={(e) => { e.target.style.background = 'rgba(249,115,22,0.2)'; }} onMouseOut={(e) => { e.target.style.background = 'rgba(249,115,22,0.12)'; }}>
+            MY CASES
           </button>
-          <button onClick={() => navigate('/Family51')} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 12px', background: 'rgba(249,115,22,0.15)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 6, color: '#f97316', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.2s' }} onMouseOver={(e) => { e.target.style.background = 'rgba(249,115,22,0.25)'; }} onMouseOut={(e) => { e.target.style.background = 'rgba(249,115,22,0.15)'; }}>
-            <Home size={14} /> SORTED
+          <button onClick={() => navigate(-1)} style={{ padding: '8px 12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 6, color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onMouseOver={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.4)'; }} onMouseOut={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.2)'; }}>
+            ?
+          </button>
+          <button onClick={() => {}} style={{ padding: '8px 12px', background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', fontSize: 18 }}>
+            ☰
           </button>
         </div>
       </div>
