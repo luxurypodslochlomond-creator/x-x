@@ -364,6 +364,7 @@ function GetStartedBox({ title, action, contact, subtext }) {
       <h3 style={{ fontSize: 14, fontWeight: 900, margin: '0 0 8px', color: '#fff' }}>{title}</h3>
       <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 12px' }}>{action}</p>
       <button
+        type="button"
         onClick={handleEmailClick}
         style={{ 
           display: 'inline-block', 
