@@ -125,7 +125,7 @@ export default function Family51Page() {
                  Why SORTED?
                </button>
                <a href="/SortedPartnerKit" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
-                  <span style={{ color: '#f97316', fontWeight: 700 }}>🤝</span>
+                  <PartnerIcon />
                   Partner Kit
                 </a>
                <a href="/SortedTerms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
@@ -611,6 +611,17 @@ function CourtIcon() {
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M6 4v4M12 4v4M18 4v4M4 9h16M5 9v9a2 2 0 002 2h10a2 2 0 002-2V9M9 13h6" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M10 17l2 2 4-4" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+    </svg>
+  );
+}
+
+function PartnerIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <circle cx="5" cy="4" r="1.5" stroke="#f97316" strokeWidth="1.2" />
+      <circle cx="11" cy="4" r="1.5" stroke="#f97316" strokeWidth="1.2" />
+      <path d="M5 5.5v3a1 1 0 001 1h4a1 1 0 001-1v-3" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M4 11.5h8M5 13h6" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
 }
