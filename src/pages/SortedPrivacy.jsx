@@ -150,7 +150,7 @@ export default function SortedPrivacy() {
         <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '24px 20px', textAlign: 'center' }}>
           <p style={{ margin: '0 0 8px', fontSize: 15, fontWeight: 700, color: '#fff' }}>Questions? Challenge us.</p>
           <p style={{ margin: '0 0 16px', color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>If you think we're falling short of this pledge, tell us. We mean it.</p>
-          <a href="mailto:privacy@uf51.love" style={{ color: '#f97316', fontWeight: 700, fontSize: 15 }}>privacy@uf51.love</a>
+          <a href="mailto:family@uf51.love" style={{ color: '#f97316', fontWeight: 700, fontSize: 15 }}>family@uf51.love</a>
         </div>
 
         <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: 12, marginTop: 40 }}>
