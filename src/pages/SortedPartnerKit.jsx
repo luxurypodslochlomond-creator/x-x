@@ -1,23 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Share2 } from 'lucide-react';
 
 export default function SortedPartnerKit() {
   const [showCopied, setShowCopied] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleExportPDF = () => {
-    const element = document.getElementById('press-kit-content');
-    const opt = {
-      margin: 10,
-      filename: 'SORTED-Partner-Kit-2026.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-    };
+  useEffect(() => {
+    // Load html2pdf from CDN
+    if (!window.html2pdf) {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      document.head.appendChild(script);
+    }
+  }, []);
 
-    const html2pdf = window.html2pdf || (() => alert('PDF export requires reload'));
-    if (window.html2pdf) {
-      html2pdf().set(opt).from(element).save();
+  const handleExportPDF = async () => {
+    try {
+      setIsDownloading(true);
+      if (!window.html2pdf) {
+        alert('PDF library loading. Please try again in a moment.');
+        setIsDownloading(false);
+        return;
+      }
+      
+      const element = document.getElementById('press-kit-content');
+      const opt = {
+        margin: 10,
+        filename: 'SORTED-Partner-Kit-2026.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+      
+      await window.html2pdf().set(opt).from(element).save();
+      setIsDownloading(false);
+    } catch (error) {
+      console.error('PDF export error:', error);
+      setIsDownloading(false);
     }
   };
 
@@ -42,13 +63,15 @@ export default function SortedPartnerKit() {
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 40, flexWrap: 'wrap' }}>
           <button
             onClick={handleExportPDF}
+            disabled={isDownloading}
             style={{
               display: 'flex', alignItems: 'center', gap: 8,
               padding: '12px 20px', background: 'rgba(249,115,22,0.2)', border: '1px solid rgba(249,115,22,0.4)',
-              borderRadius: 8, color: '#f97316', fontWeight: 600, cursor: 'pointer', fontSize: 14
+              borderRadius: 8, color: '#f97316', fontWeight: 600, cursor: isDownloading ? 'not-allowed' : 'pointer', fontSize: 14,
+              opacity: isDownloading ? 0.6 : 1
             }}
           >
-            <Download size={16} /> Download PDF
+            <Download size={16} /> {isDownloading ? 'Downloading...' : 'Download PDF'}
           </button>
           <button
             onClick={() => copyToClipboard(window.location.href)}
@@ -215,8 +238,6 @@ export default function SortedPartnerKit() {
         </div>
       </div>
 
-      {/* Include html2pdf library */}
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     </div>
   );
 }
@@ -233,12 +254,58 @@ function StatBox({ number, label }) {
 
 // ─── FEATURE BOX ──────────────────────────────────────────────────────────
 function FeatureBox({ icon, title, desc }) {
+  const iconMap = {
+    '⚡': <LightningIcon />,
+    '🎯': <TargetIcon />,
+    '🔒': <LockIcon />,
+    '📧': <EnvelopeIcon />
+  };
+  
   return (
     <div style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)', borderRadius: 8, padding: 16 }}>
-      <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
+      <div style={{ marginBottom: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32 }}>
+        {iconMap[icon] || icon}
+      </div>
       <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4, color: '#fff' }}>{title}</div>
       <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.4 }}>{desc}</p>
     </div>
+  );
+}
+
+function LightningIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M14 2l5 9h6l-8 6 3 9-8-6-8 6 3-9-8-6h6l5-9z" fill="#06b6d4" />
+    </svg>
+  );
+}
+
+function TargetIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="14" r="12" stroke="#06b6d4" strokeWidth="1.5" />
+      <circle cx="14" cy="14" r="8" stroke="#06b6d4" strokeWidth="1.5" />
+      <circle cx="14" cy="14" r="4" fill="#06b6d4" />
+    </svg>
+  );
+}
+
+function LockIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="6" y="12" width="16" height="10" rx="2" stroke="#06b6d4" strokeWidth="1.5" />
+      <path d="M8 12V9c0-3 2-5 6-5s6 2 6 5v3" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="14" cy="17" r="1.5" fill="#06b6d4" />
+    </svg>
+  );
+}
+
+function EnvelopeIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="4" y="6" width="20" height="14" rx="2" stroke="#06b6d4" strokeWidth="1.5" />
+      <path d="M4 6l10 7 10-7" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 
