@@ -21,6 +21,10 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
     { country: 'New Zealand', jurisdiction: 'New Zealand law', code: 'NZ' },
     { country: 'Singapore', jurisdiction: 'Singapore law', code: 'SG' },
     { country: 'India', jurisdiction: 'Indian law', code: 'IN' },
+    { country: 'Russia', jurisdiction: 'Russian law', code: 'RU' },
+    { country: 'South Africa', jurisdiction: 'South African law', code: 'ZA' },
+    { country: 'Japan', jurisdiction: 'Japanese law', code: 'JP' },
+    { country: 'UAE', jurisdiction: 'UAE law', code: 'AE' },
     { country: 'International', jurisdiction: 'International law', code: 'INT' },
   ];
 

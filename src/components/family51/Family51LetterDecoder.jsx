@@ -8,7 +8,7 @@ import SortedShareButton from './SortedShareButton';
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
   'NHS / medical', 'School / college', 'Employer / HR', 'Parking fine',
-  'Benefits / DWP', 'Court / legal', 'Tax / government', 'Immigration', 'Other',
+  'Driving / traffic', 'Benefits / DWP', 'Court / legal', 'Tax / government', 'Immigration', 'Other',
 ];
 
 const SEVERITY_CONFIG = {
