@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Eye, Scale, Mail, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedLoader from './SortedLoader';
@@ -16,16 +16,9 @@ function F51Mark() {
 }
 
 export default function SortedLayout({ children, currentPage }) {
-  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const handleNavClick = (path) => {
-    setIsTransitioning(true);
-    setMenuOpen(false);
-    navigate(path);
-    setTimeout(() => setIsTransitioning(false), 150);
-  };
+  const closeMenu = () => setMenuOpen(false);
 
 
 
@@ -110,31 +103,27 @@ export default function SortedLayout({ children, currentPage }) {
                     {item.label}
                   </a>
                 ) : (
-                  <button
-                    key={idx}
-                    onClick={() => handleNavClick(item.path)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 10,
-                      padding: '12px 0',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: 'rgba(255,255,255,0.85)',
-                      textDecoration: 'none',
-                      borderBottom: '1px solid rgba(255,255,255,0.07)',
-                      letterSpacing: '0.01em',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      width: '100%',
-                      textAlign: 'left'
-                    }}
-                  >
-                    {item.icon && <span style={{ color: 'rgba(255,255,255,0.4)' }}>{item.icon}</span>}
-                    {item.label}
-                  </button>
-                )
+                   <Link
+                     key={idx}
+                     to={item.path}
+                     onClick={closeMenu}
+                     style={{
+                       display: 'flex',
+                       alignItems: 'center',
+                       gap: 10,
+                       padding: '12px 0',
+                       fontSize: 13,
+                       fontWeight: 600,
+                       color: 'rgba(255,255,255,0.85)',
+                       textDecoration: 'none',
+                       borderBottom: '1px solid rgba(255,255,255,0.07)',
+                       letterSpacing: '0.01em'
+                     }}
+                   >
+                     {item.icon && <span style={{ color: 'rgba(255,255,255,0.4)' }}>{item.icon}</span>}
+                     {item.label}
+                   </Link>
+                 )
               ))}
               <button
                 onClick={() => {
@@ -167,40 +156,16 @@ export default function SortedLayout({ children, currentPage }) {
       </AnimatePresence>
 
       {/* Content */}
-      <main style={{ maxWidth: '100vw', overflowX: 'hidden', position: 'relative' }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.05 }}
-          key={currentPage}
-        >
-          {children}
-        </motion.div>
-        
-        {/* Loading Overlay */}
-        <AnimatePresence>
-          {isTransitioning && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{
-                position: 'fixed',
-                inset: 0,
-                background: 'rgba(8,10,15,0.8)',
-                backdropFilter: 'blur(4px)',
-                zIndex: 100,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                pointerEvents: 'none'
-              }}
-            >
-              <SortedLoader />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
+       <main style={{ maxWidth: '100vw', overflowX: 'hidden', position: 'relative' }}>
+         <motion.div
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           transition={{ duration: 0.05 }}
+           key={currentPage}
+         >
+           {children}
+         </motion.div>
+       </main>
     </div>
   );
 }
