@@ -352,16 +352,41 @@ function EarningsBox({ title, size, potential, desc }) {
 
 // ─── GET STARTED BOX ─────────────────────────────────────────────────────
 function GetStartedBox({ title, action, contact, subtext }) {
+  const handleEmailClick = () => {
+    window.location.href = `mailto:${contact}?subject=${encodeURIComponent(subtext)}`;
+  };
+
   return (
     <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 8, padding: 20, textAlign: 'center' }}>
       <h3 style={{ fontSize: 14, fontWeight: 900, margin: '0 0 8px', color: '#fff' }}>{title}</h3>
       <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 12px' }}>{action}</p>
-      <a 
-        href={`mailto:${contact}?subject=${encodeURIComponent(subtext)}`}
-        style={{ display: 'inline-block', padding: '8px 16px', background: '#22c55e', color: '#000', fontWeight: 700, borderRadius: 6, textDecoration: 'none', fontSize: 12 }}
+      <button
+        onClick={handleEmailClick}
+        style={{ 
+          display: 'inline-block', 
+          padding: '10px 20px', 
+          background: '#22c55e', 
+          color: '#000', 
+          fontWeight: 700, 
+          borderRadius: 6, 
+          border: 'none',
+          textDecoration: 'none', 
+          fontSize: 12,
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          boxShadow: '0 0 10px rgba(34,197,94,0.3)'
+        }}
+        onMouseOver={(e) => {
+          e.target.style.background = '#16a34a';
+          e.target.style.boxShadow = '0 0 15px rgba(34,197,94,0.6)';
+        }}
+        onMouseOut={(e) => {
+          e.target.style.background = '#22c55e';
+          e.target.style.boxShadow = '0 0 10px rgba(34,197,94,0.3)';
+        }}
       >
         Email us
-      </a>
+      </button>
       <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', margin: '8px 0 0', lineHeight: 1.4 }}>{subtext}</p>
     </div>
   );
