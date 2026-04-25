@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Eye, Scale } from 'lucide-react';
+import { Menu, X, Eye, Scale, Trash2 } from 'lucide-react';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
@@ -98,14 +98,32 @@ export default function Family51Page() {
                   <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
                   Privacy Policy
                 </a>
-                <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none' }}>
+                <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                   <EmailIcon />
                   family@uf51.love
                 </a>
-             </div>
-           </motion.div>
-         )}
-       </AnimatePresence>
+                {/* PRIVACY NOTE */}
+                <div style={{ padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.55 }}>
+                    🔒 <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Your privacy:</strong> Your letter is processed by AI to generate your breakdown, then immediately discarded. We never store, log, or sell your document content. Nothing leaves your session except what you choose to email yourself.
+                  </p>
+                </div>
+                {/* NUCLEAR CLEAR */}
+                <button
+                  onClick={() => {
+                    try { localStorage.clear(); } catch {}
+                    setMenuOpen(false);
+                    window.location.reload();
+                  }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 700, color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left' }}
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Clear all my data &amp; reset
+                </button>
+                </div>
+                </motion.div>
+                )}
+                </AnimatePresence>
 
       <AnimatePresence mode="wait">
 
@@ -188,11 +206,11 @@ export default function Family51Page() {
                 <WhyRow icon={<WRBolt />} text="Take a photo, upload, or paste your letter — decoded into plain English in seconds" />
                 <WhyRow icon={<WRTarget />} text="Exact steps to take, and by when — no walls of text" />
                 <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & relevant bodies automatically" />
-                <WhyRow icon={<WRLock />} text="Nothing stored, nothing sent to anyone — your letter stays private" />
+                <WhyRow icon={<WRLock />} text="Your letter is processed by AI and immediately discarded — never stored, never sold, never used to train anything" />
                 <WhyRow icon={<WRMail />} text="Email the breakdown to yourself, a family member, or a solicitor" />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                2 free decodes. Then £9.99/month — less than one cup of coffee.
+                3 free decodes — one per tool. Then £9.99/month — less than one cup of coffee.
               </p>
             </motion.div>
 
@@ -287,7 +305,7 @@ export default function Family51Page() {
               <div style={{ fontSize: 32, marginBottom: 16 }}>💙</div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 14px' }}>
                 <span style={{ color: '#fff' }}>You've used your</span>{' '}
-                <span style={{ color: '#f97316' }}>2 free decodes.</span>
+                <span style={{ color: '#f97316' }}>3 free decodes.</span>
               </h1>
               <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6 }}>
                 We know how stressful this stuff is. That's exactly why we built SORTED — so you don't have to face it alone.
