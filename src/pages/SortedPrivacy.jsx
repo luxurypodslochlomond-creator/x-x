@@ -154,6 +154,7 @@ export default function SortedPrivacy() {
           SORTED is part of Universal Frequency 51 — built to help people, not harvest them.
         </p>
       </div>
+      </div>
     </SortedLayout>
   );
 }
