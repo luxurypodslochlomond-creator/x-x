@@ -164,7 +164,7 @@ const AuthenticatedApp = () => {
       <Route path="/SortedTerms" element={<SortedTermsPage />} />
       <Route path="/SortedPrivacy" element={<SortedPrivacyPage />} />
       <Route path="/SortedPressRelease" element={<SortedPressReleasePage />} />
-      <Route path="/SortedPartnerKit" element={<SortedPartnerKitPage />} />
+      <Route path="/SortedPartnerKit" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING PARTNER KIT" />}><SortedPartnerKitPage /></Suspense>} />
       <Route path="/ST51" element={<LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper>} />
       <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper>} />
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper>} />
