@@ -112,27 +112,27 @@ export default function Family51Page() {
        <AnimatePresence>
          {menuOpen && !activeTool && !showWhy && (
            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(8,10,15,0.98)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 20px' }}>
-             <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
-               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.08)', width: '100%', textAlign: 'left' }}>
+             <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
+               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
                  <WhyIcon />
                  Why SORTED?
                </button>
-               <a href="/SortedTerms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                  <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
+               <a href="/SortedTerms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                  <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
                   Terms of Service
                 </a>
-                <a href="/SortedPrivacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#22c55e', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                  <Eye className="w-4 h-4" style={{ color: '#22c55e' }} />
-                  Data Sovereignty Pledge 🔒
+                <a href="/SortedPrivacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                  <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
+                  Data Sovereignty Pledge
                 </a>
-                <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <EmailIcon />
                   family@uf51.love
                 </a>
                 {/* PRIVACY NOTE */}
-                <div style={{ padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.55 }}>
-                    🔒 <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Your privacy:</strong> Your letter is processed by AI to generate your breakdown, then immediately discarded. We never store, log, or sell your document content. Nothing leaves your session except what you choose to email yourself.
+                <div style={{ padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.6 }}>
+                    Your letter is processed by AI then immediately discarded. Nothing is stored, logged, or sold. Nothing leaves your session except what you choose to email yourself.
                   </p>
                 </div>
                 {/* NUCLEAR CLEAR */}
@@ -142,7 +142,7 @@ export default function Family51Page() {
                     setMenuOpen(false);
                     window.location.reload();
                   }}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 700, color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.4)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}
                 >
                   <Trash2 className="w-4 h-4" />
                   Clear all my data &amp; reset
@@ -167,10 +167,10 @@ export default function Family51Page() {
 
             {/* STATS CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 40 }}>
-              <StatCard number="7M+" label="UK adults in severe financial stress right now" />
-              <StatCard number="73%" label="of people who get bailiff visits have mental health problems" />
-              <StatCard number="£0" label="most people can afford for a solicitor to read a letter" />
-              <StatCard number="1in3" label="UK adults have ignored an official letter out of fear" color="#06b6d4" />
+              <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project" />
+              <StatCard number="92%" label="of serious legal problems in the USA receive no legal help at all" source="Legal Services Corp." />
+              <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health" />
+              <StatCard number="4.5M" label="children in poverty in the UK — a 2024/25 record high" source="Joseph Rowntree Foundation" color="#ef4444" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
@@ -534,11 +534,12 @@ function EmailIcon() {
   );
 }
 
-function StatCard({ number, label, color = '#f97316' }) {
+function StatCard({ number, label, color = '#f97316', source }) {
   return (
-    <div style={{ background: 'rgba(249,115,22,0.08)', border: `1px solid ${color}30`, borderRadius: 12, padding: 16, textAlign: 'center' }}>
-      <div style={{ fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 900, color, marginBottom: 6 }}>{number}</div>
+    <div style={{ background: `${color}08`, border: `1px solid ${color}30`, borderRadius: 12, padding: 16, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <div style={{ fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 900, color }}>{number}</div>
       <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.4 }}>{label}</p>
+      {source && <p style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', margin: 0, marginTop: 4 }}>{source}</p>}
     </div>
   );
 }
