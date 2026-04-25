@@ -9,12 +9,12 @@ const STATS = [
 ];
 
 const GLOBAL_STATS = [
-  { flag: '🇬🇧', country: 'UK', stat: '7M+ in severe financial distress. Legal aid cut by 40% since 2012. Citizens Advice has a 3-week wait.' },
-  { flag: '🇪🇺', country: 'Europe', stat: '83M Europeans live below the poverty line. In France, Germany & Spain — legal aid thresholds exclude most working people.' },
-  { flag: '🇺🇸', country: 'USA', stat: '80% of low-income Americans receive no legal help. 57M people qualify for free aid — only 1 in 5 gets it. Debt collectors send 70M letters a year.' },
-  { flag: '🌏', country: 'Asia', stat: 'In Japan, 60% of people with legal problems take no action. India: 400M face legal issues with zero access to counsel.' },
-  { flag: '🇦🇺', country: 'Australia', stat: '3.6M Australians have a legal problem every year — 66% get no professional help. Rural areas wait months for any legal advice.' },
-  { flag: '🌍', country: 'Global', stat: '5.1 billion people — two thirds of the world\'s population — have inadequate access to justice.' },
+  { country: 'UK', stat: '7M+ in severe financial distress. Legal aid cut by 40% since 2012. Citizens Advice has a 3-week wait.' },
+  { country: 'Europe', stat: '83M Europeans live below the poverty line. Legal aid thresholds exclude most working people.' },
+  { country: 'USA', stat: '80% of low-income Americans receive no legal help. Debt collectors send 70M letters a year.' },
+  { country: 'Asia', stat: '60% of people with legal problems take no action. 400M in India face legal issues with zero access to counsel.' },
+  { country: 'Australia', stat: '3.6M legal problems a year — 66% get no professional help. Rural areas wait months.' },
+  { country: 'Global', stat: '5.1 billion people — two thirds of humanity — have inadequate access to justice.' },
 ];
 
 const LANGUAGES = [
@@ -95,12 +95,9 @@ export default function SortedAbout() {
                 <SectionLabel text="THIS ISN'T JUST A UK PROBLEM" color="#06b6d4" />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
                   {GLOBAL_STATS.map((g, i) => (
-                    <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '10px 14px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
-                      <span style={{ fontSize: 20 }}>{g.flag}</span>
-                      <div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', letterSpacing: '0.08em', marginBottom: 2 }}>{g.country}</div>
-                        <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>{g.stat}</div>
-                      </div>
+                    <div key={i} style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
+                      <div style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', letterSpacing: '0.08em', marginBottom: 4 }}>{g.country}</div>
+                      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>{g.stat}</div>
                     </div>
                   ))}
                 </div>

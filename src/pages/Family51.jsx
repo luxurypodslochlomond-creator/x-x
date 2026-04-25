@@ -275,7 +275,7 @@ export default function Family51Page() {
               transition={{ delay: 0.35 }}
               style={{ marginTop: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}
             >
-              {selectedLocation && <TrustPill text={`${selectedLocation.flag} ${selectedLocation.country}`} />}
+              {selectedLocation && <TrustPill text={selectedLocation.country} />}
               <TrustPill text="Any language" />
               <TrustPill text="Nothing stored" />
             </motion.div>
