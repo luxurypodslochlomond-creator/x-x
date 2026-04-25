@@ -33,15 +33,34 @@ export default function Family51Page() {
     document.title = 'SORTED — We\'ve Got You';
     
     // Auto-detect location from timezone/language
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const lang = navigator.language;
-    
-    // Default to UK (most common for SORTED)
-    if (tz?.includes('London') || lang.startsWith('en-GB')) {
-      setSelectedLocation({ country: 'United Kingdom', code: 'GB', jurisdiction: 'English law' });
-    } else {
-      setSelectedLocation({ country: 'United Kingdom', code: 'GB', jurisdiction: 'English law' });
-    }
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    const lang = navigator.language || '';
+
+    const geoMap = {
+      'Europe/London': { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'English law' },
+      'Europe/Dublin': { country: 'Ireland', flag: '🇮🇪', code: 'IE', jurisdiction: 'Irish law' },
+      'America/New_York': { country: 'United States', flag: '🇺🇸', code: 'US', jurisdiction: 'US law' },
+      'America/Chicago': { country: 'United States', flag: '🇺🇸', code: 'US', jurisdiction: 'US law' },
+      'America/Denver': { country: 'United States', flag: '🇺🇸', code: 'US', jurisdiction: 'US law' },
+      'America/Los_Angeles': { country: 'United States', flag: '🇺🇸', code: 'US', jurisdiction: 'US law' },
+      'America/Toronto': { country: 'Canada', flag: '🇨🇦', code: 'CA', jurisdiction: 'Canadian law' },
+      'America/Vancouver': { country: 'Canada', flag: '🇨🇦', code: 'CA', jurisdiction: 'Canadian law' },
+      'Australia/Sydney': { country: 'Australia', flag: '🇦🇺', code: 'AU', jurisdiction: 'Australian law' },
+      'Australia/Melbourne': { country: 'Australia', flag: '🇦🇺', code: 'AU', jurisdiction: 'Australian law' },
+      'Pacific/Auckland': { country: 'New Zealand', flag: '🇳🇿', code: 'NZ', jurisdiction: 'NZ law' },
+      'Europe/Paris': { country: 'France', flag: '🇫🇷', code: 'FR', jurisdiction: 'French law' },
+      'Europe/Berlin': { country: 'Germany', flag: '🇩🇪', code: 'DE', jurisdiction: 'German law' },
+      'Europe/Madrid': { country: 'Spain', flag: '🇪🇸', code: 'ES', jurisdiction: 'Spanish law' },
+      'Europe/Rome': { country: 'Italy', flag: '🇮🇹', code: 'IT', jurisdiction: 'Italian law' },
+      'Europe/Amsterdam': { country: 'Netherlands', flag: '🇳🇱', code: 'NL', jurisdiction: 'Dutch law' },
+      'Asia/Dubai': { country: 'UAE', flag: '🇦🇪', code: 'AE', jurisdiction: 'UAE law' },
+      'Asia/Kolkata': { country: 'India', flag: '🇮🇳', code: 'IN', jurisdiction: 'Indian law' },
+      'Asia/Singapore': { country: 'Singapore', flag: '🇸🇬', code: 'SG', jurisdiction: 'Singapore law' },
+      'Africa/Johannesburg': { country: 'South Africa', flag: '🇿🇦', code: 'ZA', jurisdiction: 'SA law' },
+    };
+
+    const detected = geoMap[tz] || { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'English law' };
+    setSelectedLocation(detected);
   }, []);
 
   return (
@@ -94,9 +113,9 @@ export default function Family51Page() {
                   <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
                   Terms of Service
                 </a>
-                <a href="/SortedPrivacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                  <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.5)' }} />
-                  Privacy Policy
+                <a href="/SortedPrivacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#22c55e', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                  <Eye className="w-4 h-4" style={{ color: '#22c55e' }} />
+                  Data Sovereignty Pledge 🔒
                 </a>
                 <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', fontSize: 13, fontWeight: 600, color: '#f97316', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                   <EmailIcon />
@@ -254,11 +273,27 @@ export default function Family51Page() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
-              style={{ marginTop: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}
+              style={{ marginTop: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}
             >
+              {selectedLocation && <TrustPill text={`${selectedLocation.flag} ${selectedLocation.country}`} />}
               <TrustPill text="Any language" />
-              <TrustPill text="All currencies" />
               <TrustPill text="Nothing stored" />
+            </motion.div>
+
+            {/* CLEAR DATA — always visible, in design */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              style={{ marginTop: 20, textAlign: 'center' }}
+            >
+              <button
+                onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }}
+                style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.2)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 6 }}
+              >
+                <Trash2 size={11} />
+                CLEAR ALL MY DATA
+              </button>
             </motion.div>
 
             <SortedLiveCounter />
