@@ -19,19 +19,18 @@ export default function SortedLayout({ children, currentPage }) {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [currentPage]);
 
   const handleNavClick = (path) => {
+    setMenuOpen(false);
     setIsTransitioning(true);
     setTimeout(() => {
       navigate(path);
-      setIsTransitioning(false);
-    }, 250);
+    }, 200);
   };
+
+  useEffect(() => {
+    setIsTransitioning(false);
+  }, [currentPage]);
 
   const menuItems = [
     { label: 'SORTED Home', path: '/Family51', icon: null },
@@ -42,7 +41,7 @@ export default function SortedLayout({ children, currentPage }) {
 
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff' }}>
-      {(isTransitioning || isLoading) && <SortedLoader />}
+      {isTransitioning && <SortedLoader />}
 
       {/* Header */}
       <header style={{
