@@ -9,10 +9,12 @@ const STATS = [
 ];
 
 const GLOBAL_STATS = [
-  { flag: '🇬🇧', country: 'UK', stat: '7M+ in financial distress. Legal aid virtually eliminated.' },
-  { flag: '🇺🇸', country: 'USA', stat: '80% of low-income people get no legal help they need.' },
-  { flag: '🇮🇳', country: 'India', stat: '400M people face legal issues with zero access to counsel.' },
-  { flag: '🌍', country: 'Global', stat: '5.1 billion people have inadequate access to justice.' },
+  { flag: '🇬🇧', country: 'UK', stat: '7M+ in severe financial distress. Legal aid cut by 40% since 2012. Citizens Advice has a 3-week wait.' },
+  { flag: '🇪🇺', country: 'Europe', stat: '83M Europeans live below the poverty line. In France, Germany & Spain — legal aid thresholds exclude most working people.' },
+  { flag: '🇺🇸', country: 'USA', stat: '80% of low-income Americans receive no legal help. 57M people qualify for free aid — only 1 in 5 gets it. Debt collectors send 70M letters a year.' },
+  { flag: '🌏', country: 'Asia', stat: 'In Japan, 60% of people with legal problems take no action. India: 400M face legal issues with zero access to counsel.' },
+  { flag: '🇦🇺', country: 'Australia', stat: '3.6M Australians have a legal problem every year — 66% get no professional help. Rural areas wait months for any legal advice.' },
+  { flag: '🌍', country: 'Global', stat: '5.1 billion people — two thirds of the world\'s population — have inadequate access to justice.' },
 ];
 
 const LANGUAGES = [
