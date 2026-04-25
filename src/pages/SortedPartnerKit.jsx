@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { Download, Share2 } from 'lucide-react';
 import SortedLayout from '@/components/family51/SortedLayout';
 
@@ -8,10 +7,10 @@ export default function SortedPartnerKit() {
   const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
-    // Load html2pdf from CDN
     if (!window.html2pdf) {
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      script.async = true;
       document.head.appendChild(script);
     }
   }, []);
@@ -54,12 +53,12 @@ export default function SortedPartnerKit() {
       <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '20px', color: '#fff' }}>
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         {/* HEADER */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: 40, paddingTop: 0 }}>
+         <div style={{ textAlign: 'center', marginBottom: 40, paddingTop: 0 }}>
           <h1 style={{ fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 900, margin: '0 0 12px', letterSpacing: '-0.02em' }}>
             <span style={{ color: '#f97316' }}>SORTED</span> — Partner Kit
           </h1>
           <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)', margin: 0 }}>Help us decode scary letters. Earn real money. Build equity.</p>
-        </motion.div>
+          </div>
 
         {/* ACTION BUTTONS */}
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 40, flexWrap: 'wrap' }}>
@@ -91,7 +90,7 @@ export default function SortedPartnerKit() {
         <div id="press-kit-content" style={{ background: 'rgba(8,10,15,0.8)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 16, padding: 40, marginBottom: 60 }}>
           
           {/* SECTION 1: THE PROBLEM */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} style={{ marginBottom: 48 }}>
+           <div style={{ marginBottom: 48 }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#f97316', marginBottom: 12 }}>THE PROBLEM</div>
             <h2 style={{ fontSize: 32, fontWeight: 900, margin: '0 0 20px', lineHeight: 1.2 }}>5.1B people worldwide have unmet legal needs.</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
@@ -100,10 +99,10 @@ export default function SortedPartnerKit() {
               <StatBox number="4.5M" label="UK children in poverty (2024/25 record)" />
               <StatBox number="£100k" label="average household legal debt (unreported)" />
             </div>
-          </motion.div>
+            </div>
 
-          {/* SECTION 2: THE SOLUTION */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
+            {/* SECTION 2: THE SOLUTION */}
+            <div style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#06b6d4', marginBottom: 12 }}>WHAT WE'VE BUILT</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 20px', lineHeight: 1.2 }}>AI that decodes scary letters in 30 seconds.</h2>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, margin: '0 0 20px' }}>
@@ -115,10 +114,10 @@ export default function SortedPartnerKit() {
               <FeatureBox icon="🔒" title="Privacy-first" desc="AI process, instant delete, never stored" />
               <FeatureBox icon="📧" title="Shareable" desc="Email breakdown to solicitor or family" />
             </div>
-          </motion.div>
+            </div>
 
-          {/* SECTION 3: THE OPPORTUNITY */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
+            {/* SECTION 3: THE OPPORTUNITY */}
+            <div style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#ef4444', marginBottom: 12 }}>THE MARKET</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 20px', lineHeight: 1.2 }}>Multi-billion pound opportunity.</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
@@ -127,10 +126,10 @@ export default function SortedPartnerKit() {
               <OpportunityBox title="Social anxiety therapy" value="£5B+ yearly" />
               <OpportunityBox title="AI adoption rate" value="65%+ in 2026" />
             </div>
-          </motion.div>
+            </div>
 
-          {/* SECTION 4: HOW TO PARTNER */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
+            {/* SECTION 4: HOW TO PARTNER */}
+            <div style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#22c55e', marginBottom: 12 }}>HOW YOU HELP</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 24px', lineHeight: 1.2 }}>3 ways to partner with SORTED.</h2>
             
@@ -157,10 +156,10 @@ export default function SortedPartnerKit() {
                 items={['Co-develop features', 'Strategic investment', 'Board seat / advisor role', 'Exit upside']}
               />
             </div>
-          </motion.div>
+            </div>
 
-          {/* SECTION 5: EARNINGS */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
+            {/* SECTION 5: EARNINGS */}
+            <div style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#a855f7', marginBottom: 12 }}>REAL NUMBERS</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 24px', lineHeight: 1.2 }}>What you can actually earn.</h2>
             
@@ -190,10 +189,10 @@ export default function SortedPartnerKit() {
                 desc="Donation + affiliate model"
               />
             </div>
-          </motion.div>
+            </div>
 
-          {/* SECTION 6: EQUITY PATH */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)', background: 'rgba(249,115,22,0.05)', padding: '32px', borderRadius: 12 }}>
+            {/* SECTION 6: EQUITY PATH */}
+            <div style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)', background: 'rgba(249,115,22,0.05)', padding: '32px', borderRadius: 12 }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#f97316', marginBottom: 12 }}>LONG-TERM</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 20px', lineHeight: 1.2 }}>Build equity with us.</h2>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, margin: '0 0 20px' }}>
@@ -204,10 +203,10 @@ export default function SortedPartnerKit() {
                 <strong>Equity conversation starts with:</strong> Committed partnership, meaningful user acquisition, or strategic assets. We're bootstrapped, lean, and serious about real partners only — not ego.
               </p>
             </div>
-          </motion.div>
+            </div>
 
-          {/* SECTION 7: GET STARTED */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} style={{ paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
+            {/* SECTION 7: GET STARTED */}
+            <div style={{ paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
             <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 20px', lineHeight: 1.2 }}>Ready to partner?</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
               <GetStartedBox 
@@ -229,9 +228,9 @@ export default function SortedPartnerKit() {
                 subtext="Subject: 'Strategic Investment'"
               />
             </div>
-          </motion.div>
+            </div>
 
-        </div>
+            </div>
 
         {/* FOOTER STATS */}
         <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 12, lineHeight: 1.8 }}>
