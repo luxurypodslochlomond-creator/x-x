@@ -578,7 +578,8 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, description: "Instagram flyers" },
       { title: "🚨 HMRC Tracker", url: createPageUrl("AdminHMRCTracker"), icon: Shield, description: "Gill's HMRC case · appeal deadline 27 Apr" },
       { title: "📋 Stoneymollan Legal", url: createPageUrl("AdminStoneymollanLegal"), icon: FileText, description: "Prescriptive possession case" },
-      { title: "🔔 PWA Push Guide", url: createPageUrl("AdminPWAPushGuide"), icon: Bell, description: "How we cracked iOS push notifications" }
+      { title: "🔔 PWA Push Guide", url: createPageUrl("AdminPWAPushGuide"), icon: Bell, description: "How we cracked iOS push notifications" },
+      { title: "📰 SORTED Press Release", url: "/SortedPressRelease", icon: FileText, description: "Launch PR — 25 April 2026 · download PDF" }
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
