@@ -90,37 +90,23 @@ css
   50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.8; }
 }
 
-/* VIEW TRANSITIONS API - Smooth page transitions */
+/* VIEW TRANSITIONS API - Tight fade cross */
 ::view-transition-old(root) {
-  animation: none;
+  animation: vt-exit 0.25s cubic-bezier(0.4, 0, 1, 1);
 }
 
 ::view-transition-new(root) {
-  animation: vt-fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: vt-enter 0.25s cubic-bezier(0, 0, 0.2, 1);
 }
 
-@keyframes vt-fade-in {
+@keyframes vt-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes vt-enter {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-/* CB51 CUSTOM TRANSITIONS */
-[data-cb51="true"]::view-transition-old(root) {
-  animation: vt-cb51-exit 0.3s ease-in;
-}
-
-[data-cb51="true"]::view-transition-new(root) {
-  animation: vt-cb51-enter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes vt-cb51-exit {
-  from { opacity: 1; transform: translateX(0); }
-  to { opacity: 0.7; transform: translateX(-20px); }
-}
-
-@keyframes vt-cb51-enter {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
 }
 
 /* CB51 INSTANT LOADING - Radio icon cyan loader */
