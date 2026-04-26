@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -30,8 +30,52 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const [emailAddr, setEmailAddr] = useState('');
   const [emailSent, setEmailSent] = useState(false);
   const [emailing, setEmailing] = useState(false);
+  const [decodeError, setDecodeError] = useState(null);
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
+  const geoRef = useRef(geo);
+  const letterTypeRef = useRef(letterType);
+
+  // Keep refs in sync so handleFileUpload always has fresh values
+  useEffect(() => { geoRef.current = geo; }, [geo]);
+  useEffect(() => { letterTypeRef.current = letterType; }, [letterType]);
+
+  const runDecode = async (fileUrl, text) => {
+    setLoading(true);
+    setResult(null);
+    setDecodeError(null);
+    const currentGeo = geoRef.current;
+    const currentType = letterTypeRef.current;
+    const geoContext = `The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
+    const promptText = fileUrl
+      ? `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${currentType ? ` (type: ${currentType})` : ''}. Read it carefully and help them understand it.`
+      : `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${text}`;
+
+    const response = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
+      prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return:
+- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
+- severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
+- severity_explanation: One sentence on why that rating
+- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
+- key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
+- dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
+      ...(fileUrl ? { file_urls: [fileUrl] } : {}),
+      response_json_schema: {
+        type: 'object',
+        properties: {
+          what_this_means:      { type: 'string' },
+          severity:             { type: 'string' },
+          severity_explanation: { type: 'string' },
+          action_steps:         { type: 'array', items: { type: 'string' } },
+          key_deadline:         { type: 'string' },
+          dont_panic:           { type: 'string' },
+        },
+      },
+    });
+    setResult(response);
+    setLoading(false);
+  };
 
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -41,99 +85,13 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     setUploadedFileUrl(file_url);
     setLetterText('[Photo/file uploaded — AI will read it directly]');
     setUploading(false);
-    
-    // Auto-decode immediately after upload
-    setLoading(true);
-    setResult(null);
-    setDecodeError(null);
-    
-    try {
-      const geoContext = `The person is in: ${geo.country}. Apply ${geo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
-      const promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
-      
-      const response = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
-        prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return:
-- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
-- severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
-- severity_explanation: One sentence on why that rating
-- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
-- key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
-- dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
-        file_urls: [file_url],
-        response_json_schema: {
-          type: 'object',
-          properties: {
-            what_this_means:      { type: 'string' },
-            severity:             { type: 'string' },
-            severity_explanation: { type: 'string' },
-            action_steps:         { type: 'array', items: { type: 'string' } },
-            key_deadline:         { type: 'string' },
-            dont_panic:           { type: 'string' },
-          },
-        },
-      });
-      
-      setResult(response);
-    } catch (err) {
-      console.error('SORTED auto-decode error:', err);
-      setDecodeError('Something went wrong decoding your letter. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    await runDecode(file_url, null);
   };
-
-  const [decodeError, setDecodeError] = useState(null);
 
   const decode = async () => {
     const hasInput = letterText.trim() || uploadedFileUrl;
     if (!hasInput || loading) return;
-    setLoading(true);
-    setResult(null);
-    setDecodeError(null);
-
-    try {
-      let promptText;
-      let fileUrls = [];
-      const geoContext = `The person is in: ${geo.country}. Apply ${geo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
-
-      if (uploadedFileUrl) {
-        promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
-        fileUrls = [uploadedFileUrl];
-      } else {
-        promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has received this official letter${letterType ? ` (type: ${letterType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterText}`;
-      }
-
-      const response = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
-        prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return:
-- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
-- severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
-- severity_explanation: One sentence on why that rating
-- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
-- key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
-- dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
-        ...(fileUrls.length > 0 ? { file_urls: fileUrls } : {}),
-        response_json_schema: {
-          type: 'object',
-          properties: {
-            what_this_means:      { type: 'string' },
-            severity:             { type: 'string' },
-            severity_explanation: { type: 'string' },
-            action_steps:         { type: 'array', items: { type: 'string' } },
-            key_deadline:         { type: 'string' },
-            dont_panic:           { type: 'string' },
-          },
-        },
-      });
-
-      setResult(response);
-    } catch (err) {
-      console.error('SORTED decode error:', err);
-      setDecodeError('Something went wrong decoding your letter. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    await runDecode(uploadedFileUrl || null, letterText);
   };
 
   const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setEmailSent(false); setEmailAddr(''); setDecodeError(null); };
@@ -301,22 +259,22 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
               <p style={{ fontSize: 14, color: '#fff', lineHeight: 1.65, margin: 0 }}>{result.what_this_means}</p>
             </ResultCard>
 
-            <ResultCard label="WHAT TO DO" color="#06b6d4">
+            <ResultCard label="WHAT TO DO" color={accentColor}>
               <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {result.action_steps?.map((step, i) => (
                   <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
+                    <span style={{ fontSize: 11, fontWeight: 800, color: accentColor, minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
                     <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55 }}>{step}</span>
                   </li>
                 ))}
               </ol>
             </ResultCard>
 
-            <ResultCard label="KEY DEADLINE" color="#eab308">
+            <ResultCard label="KEY DEADLINE" color={accentColor}>
               <p style={{ fontSize: 13, color: '#fff', margin: 0 }}>{result.key_deadline}</p>
             </ResultCard>
 
-            <ResultCard label="DON'T PANIC" color="#22c55e">
+            <ResultCard label="DON'T PANIC" color={accentColor}>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0 }}>{result.dont_panic}</p>
             </ResultCard>
 
