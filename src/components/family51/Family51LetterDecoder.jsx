@@ -42,6 +42,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 
   const runDecode = async (fileUrl, text) => {
     setLoading(true);
+    setUploading(false); // ensure uploading clears when loading takes over
     setResult(null);
     setDecodeError(null);
     try {
@@ -98,7 +99,6 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
       setUploadedFileUrl(file_url);
       setLetterText('[Photo/file uploaded — AI will read it directly]');
-      setUploading(false);
       await runDecode(file_url, null);
     } catch (err) {
       console.error('SORTED upload error:', err);
@@ -416,6 +416,7 @@ function Spinner({ color, text }) {
           strokeLinecap="round"
           fill="none"
           style={{ filter: `drop-shadow(0 0 4px ${color})` }}
+          initial={{ pathLength: 0 }}
           animate={{ pathLength: [0, 1, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -447,6 +448,7 @@ function SortedLoader({ color, text }) {
           strokeLinecap="round"
           fill="none"
           style={{ filter: `drop-shadow(0 0 10px ${color})` }}
+          initial={{ pathLength: 0 }}
           animate={{ pathLength: [0, 1, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         />
