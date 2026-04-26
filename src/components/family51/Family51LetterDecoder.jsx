@@ -118,6 +118,13 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   return (
     <div className="space-y-5">
 
+      {/* FULL SCREEN LOADER */}
+      <AnimatePresence>
+        {(loading || uploading) && (
+          <SortedLoader color={accentColor} text={uploading ? 'READING YOUR FILE…' : 'DECODING YOUR LETTER…'} />
+        )}
+      </AnimatePresence>
+
       {/* GEO — auto detected, tap to change */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>📍 Auto-detected:</span>
@@ -192,45 +199,49 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
         )}
         <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.04em', marginTop: 6, textAlign: 'center' }}>Photo, PDF, Word doc — we read it all</p>
       </div>
-      <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em', marginBottom: 8, textAlign: 'center' }}>— or type / paste below —</p>
 
-      {/* PASTE AREA */}
-      <div className="space-y-2">
-        <Label>OR PASTE YOUR LETTER</Label>
-        <textarea
-          value={letterText}
-          onChange={e => setLetterText(e.target.value)}
-          placeholder="Paste the full letter here. Don't worry about formatting — just get it all in. The more you paste, the better we can help."
-          style={{
-            width: '100%', height: 180, background: 'rgba(255,255,255,0.03)',
-            border: `1px solid ${letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
-            borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
-            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
-            transition: 'border-color 0.2s', boxSizing: 'border-box',
-          }}
-          onFocus={e => e.target.style.borderColor = accentColor + '80'}
-          onBlur={e => e.target.style.borderColor = letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
-        />
-        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.05em' }}>Nothing stored. Nothing sent anywhere. Processed and gone.</p>
-      </div>
+      {/* PASTE AREA — only show if no file uploaded */}
+      {!uploadedFileUrl && (
+        <>
+          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em', marginBottom: 8, textAlign: 'center' }}>— or type / paste below —</p>
+          <div className="space-y-2">
+            <Label>OR PASTE YOUR LETTER</Label>
+            <textarea
+              value={letterText}
+              onChange={e => setLetterText(e.target.value)}
+              placeholder="Paste the full letter here. Don't worry about formatting — just get it all in. The more you paste, the better we can help."
+              style={{
+                width: '100%', height: 180, background: 'rgba(255,255,255,0.03)',
+                border: `1px solid ${letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+                borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
+                resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+                transition: 'border-color 0.2s', boxSizing: 'border-box',
+              }}
+              onFocus={e => e.target.style.borderColor = accentColor + '80'}
+              onBlur={e => e.target.style.borderColor = letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
+            />
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.05em' }}>Nothing stored. Nothing sent anywhere. Processed and gone.</p>
+          </div>
 
-      {/* DECODE BUTTON */}
-      <motion.button
-        onClick={decode}
-        disabled={(!letterText.trim() && !uploadedFileUrl) || loading}
-        whileTap={!loading && (letterText.trim() || uploadedFileUrl) ? { scale: 0.97 } : {}}
-        style={{
-          width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
-          fontWeight: 800, letterSpacing: '0.12em',
-          cursor: (letterText.trim() || uploadedFileUrl) && !loading ? 'pointer' : 'not-allowed',
-          border: `1px solid ${(letterText.trim() || uploadedFileUrl) ? accentColor : 'rgba(255,255,255,0.1)'}`,
-          background: (letterText.trim() || uploadedFileUrl) ? `${accentColor}15` : 'transparent',
-          color: (letterText.trim() || uploadedFileUrl) ? accentColor : 'rgba(255,255,255,0.2)',
-          transition: 'all 0.2s',
-        }}
-      >
-        {loading ? <Spinner color={accentColor} text="DECODING YOUR LETTER — this takes 15-30 seconds" /> : 'DECODE THIS LETTER'}
-      </motion.button>
+          {/* DECODE BUTTON — only for text input */}
+          <motion.button
+            onClick={decode}
+            disabled={!letterText.trim() || loading}
+            whileTap={!loading && letterText.trim() ? { scale: 0.97 } : {}}
+            style={{
+              width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
+              fontWeight: 800, letterSpacing: '0.12em',
+              cursor: letterText.trim() && !loading ? 'pointer' : 'not-allowed',
+              border: `1px solid ${letterText.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+              background: letterText.trim() ? `${accentColor}15` : 'transparent',
+              color: letterText.trim() ? accentColor : 'rgba(255,255,255,0.2)',
+              transition: 'all 0.2s',
+            }}
+          >
+            DECODE THIS LETTER
+          </motion.button>
+        </>
+      )}
 
       {/* ERROR */}
       {decodeError && (
@@ -363,11 +374,69 @@ function ResultCard({ label, color, children }) {
 
 function Spinner({ color, text }) {
   return (
-    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-      <motion.span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: color }}
-        animate={{ scale: [1, 1.6, 1] }} transition={{ duration: 0.7, repeat: Infinity }} />
-      {text}
+    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ flexShrink: 0 }}>
+        <motion.path
+          d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16"
+          stroke={color}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          fill="none"
+          style={{ filter: `drop-shadow(0 0 4px ${color})` }}
+          animate={{ pathLength: [0, 1, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </svg>
+      <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em' }}>{text}</span>
     </span>
+  );
+}
+
+function SortedLoader({ color, text }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: 'rgba(0,0,0,0.92)',
+        backdropFilter: 'blur(12px)',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center', gap: 28,
+      }}
+    >
+      <svg width="80" height="80" viewBox="0 0 32 32" fill="none">
+        <motion.path
+          d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16"
+          stroke={color}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          fill="none"
+          style={{ filter: `drop-shadow(0 0 10px ${color})` }}
+          animate={{ pathLength: [0, 1, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </svg>
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.15em', color, margin: '0 0 8px' }}>
+          {text}
+        </p>
+        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.08em', margin: 0 }}>
+          Reading your letter with AI — 15–30 seconds
+        </p>
+      </div>
+      <div style={{ display: 'flex', gap: 6 }}>
+        {[0, 1, 2].map(i => (
+          <motion.span
+            key={i}
+            style={{ width: 6, height: 6, borderRadius: '50%', background: color, display: 'block', opacity: 0.4 }}
+            animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.4, 1] }}
+            transition={{ duration: 1, repeat: Infinity, delay: i * 0.25 }}
+          />
+        ))}
+      </div>
+    </motion.div>
   );
 }
 
