@@ -40,7 +40,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult 
 
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You are better than any top lawyer but with zero ego — you write with precision, warmth, and power for ordinary people. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
+      prompt: `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}

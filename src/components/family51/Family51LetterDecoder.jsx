@@ -52,8 +52,8 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       const promptText = `You are a compassionate plain-English advice expert specialising in ${geo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${letterType ? ` (type: ${letterType})` : ''}. Read it carefully and help them understand it.`;
       
       const response = await base44.integrations.Core.InvokeLLM({
-        model: 'gemini_3_flash',
-        prompt: promptText + `\n\nYou are better than any top lawyer but with zero ego — compassionate, plain, precise. Return:
+        model: 'claude_sonnet_4_6',
+        prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return:
 - what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating
@@ -105,8 +105,8 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       }
 
       const response = await base44.integrations.Core.InvokeLLM({
-        model: fileUrls.length > 0 ? 'gemini_3_flash' : 'claude_sonnet_4_6',
-        prompt: promptText + `\n\nYou are better than any top lawyer but with zero ego — compassionate, plain, precise. Return:
+        model: 'claude_sonnet_4_6',
+        prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return:
 - what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating

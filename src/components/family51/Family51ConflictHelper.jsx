@@ -76,7 +76,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
 
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You are better than any top lawyer and seasoned mediator combined — with zero ego. Calm, precise, and completely on their side. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes.
+      prompt: `You are sharp, calm, and completely on their side — a conflict resolution expert with no agenda. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes.
 
 CONFLICT TYPE: ${ct?.label || 'Not specified'}
 GOAL: ${gt?.label} — ${gt?.desc}
