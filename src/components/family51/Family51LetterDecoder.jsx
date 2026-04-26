@@ -44,48 +44,69 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     setLoading(true);
     setResult(null);
     setDecodeError(null);
-    const currentGeo = geoRef.current;
-    const currentType = letterTypeRef.current;
-    const geoContext = `The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
-    const promptText = fileUrl
-      ? `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${currentType ? ` (type: ${currentType})` : ''}. Read it carefully and help them understand it.`
-      : `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${text}`;
+    try {
+      const currentGeo = geoRef.current;
+      const currentType = letterTypeRef.current;
+      const geoContext = `The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
+      const promptText = fileUrl
+        ? `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${currentType ? ` (type: ${currentType})` : ''}. Read it carefully and help them understand it.`
+        : `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${text}`;
 
-    const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
-      prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return:
+      const response = await base44.integrations.Core.InvokeLLM({
+        model: 'claude_sonnet_4_6',
+        prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return a JSON object with these exact fields:
 - what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating
 - action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
 - key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
 - dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
-      ...(fileUrl ? { file_urls: [fileUrl] } : {}),
-      response_json_schema: {
-        type: 'object',
-        properties: {
-          what_this_means:      { type: 'string' },
-          severity:             { type: 'string' },
-          severity_explanation: { type: 'string' },
-          action_steps:         { type: 'array', items: { type: 'string' } },
-          key_deadline:         { type: 'string' },
-          dont_panic:           { type: 'string' },
+        ...(fileUrl ? { file_urls: [fileUrl] } : {}),
+        response_json_schema: {
+          type: 'object',
+          properties: {
+            what_this_means:      { type: 'string' },
+            severity:             { type: 'string' },
+            severity_explanation: { type: 'string' },
+            action_steps:         { type: 'array', items: { type: 'string' } },
+            key_deadline:         { type: 'string' },
+            dont_panic:           { type: 'string' },
+          },
         },
-      },
-    });
-    setResult(response);
-    setLoading(false);
+      });
+
+      // Validate we actually got content back
+      if (!response || !response.what_this_means) {
+        setDecodeError('Something went wrong reading the response. Please try again.');
+      } else {
+        setResult(response);
+      }
+    } catch (err) {
+      console.error('SORTED decode error:', err);
+      setDecodeError(`Decode failed: ${err?.message || 'Unknown error'}. Please try again.`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setUploadedFileUrl(file_url);
-    setLetterText('[Photo/file uploaded — AI will read it directly]');
-    setUploading(false);
-    await runDecode(file_url, null);
+    setDecodeError(null);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setUploadedFileUrl(file_url);
+      setLetterText('[Photo/file uploaded — AI will read it directly]');
+      setUploading(false);
+      await runDecode(file_url, null);
+    } catch (err) {
+      console.error('SORTED upload error:', err);
+      setDecodeError(`Upload failed: ${err?.message || 'Could not upload file'}. Please try again.`);
+      setUploading(false);
+    }
+    // Reset file input so the same file can be re-selected if needed
+    e.target.value = '';
   };
 
   const decode = async () => {
@@ -244,11 +265,23 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       )}
 
       {/* ERROR */}
-      {decodeError && (
-        <div style={{ padding: '12px 16px', borderRadius: 10, border: '1px solid rgba(239,68,68,0.3)', background: 'rgba(239,68,68,0.06)', textAlign: 'center' }}>
-          <p style={{ fontSize: 12, color: '#ef4444', margin: 0, fontWeight: 700 }}>{decodeError}</p>
-        </div>
-      )}
+      <AnimatePresence>
+        {decodeError && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+            style={{ padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(239,68,68,0.5)', background: 'rgba(239,68,68,0.1)', textAlign: 'center' }}
+          >
+            <p style={{ fontSize: 13, color: '#ef4444', margin: '0 0 6px', fontWeight: 800, letterSpacing: '0.08em' }}>⚠ SOMETHING WENT WRONG</p>
+            <p style={{ fontSize: 12, color: 'rgba(239,68,68,0.8)', margin: '0 0 10px', lineHeight: 1.5 }}>{decodeError}</p>
+            <button
+              onClick={() => setDecodeError(null)}
+              style={{ fontSize: 11, fontWeight: 800, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.4)', borderRadius: 8, padding: '6px 14px', cursor: 'pointer', letterSpacing: '0.08em' }}
+            >
+              DISMISS
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* RESULT */}
       <AnimatePresence>
