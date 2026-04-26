@@ -133,6 +133,26 @@ export default function SortedPartnerKit() {
             </div>
             </div>
 
+            {/* SECTION 3.5: MEDIA AGENCY / CORPORATE PARTNERSHIP — PHD-level */}
+            <div style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)', background: 'rgba(6,182,212,0.04)', borderRadius: 12, padding: '32px' }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#06b6d4', marginBottom: 12 }}>FOR MEDIA AGENCIES & CORPORATES</div>
+            <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 16px', lineHeight: 1.2 }}>Your clients need a purpose story. We have one.</h2>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, margin: '0 0 24px' }}>
+              SORTED is the rare product that delivers <strong style={{ color: '#fff' }}>genuine ESG impact</strong> and <strong style={{ color: '#fff' }}>measurable reach</strong> simultaneously. Banks, insurers, and financial services companies have millions of customers in debt distress — and no trusted, frictionless way to help them. SORTED is that tool.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginBottom: 24 }}>
+              <AgencyBox icon="🏦" title="White-label for financial services" desc="HSBC, Barclays, Lloyds — put SORTED inside your mortgage distress journey. Branded as yours." />
+              <AgencyBox icon="📊" title="CSR campaign vehicle" desc="Fund SORTED access for vulnerable customers. Fully measurable. Real impact. Audit trail." />
+              <AgencyBox icon="🤝" title="Media partnership" desc="Put SORTED in front of millions through your client base. Revenue share on subscriptions generated." />
+              <AgencyBox icon="🎯" title="Proprietary data insight" desc="Anonymised trend data on the UK's most pressing legal anxieties. Unique consumer intelligence." />
+            </div>
+            <div style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 8, padding: 20 }}>
+              <p style={{ margin: 0, fontSize: 14, color: '#fff', lineHeight: 1.7 }}>
+                <strong style={{ color: '#06b6d4' }}>The pitch to your clients:</strong> "We've partnered with SORTED to give your customers free legal letter decoding. Every use is tracked, branded, and reported back to you as social impact data."
+              </p>
+            </div>
+            </div>
+
             {/* SECTION 4: HOW TO PARTNER */}
             <div style={{ marginBottom: 48, paddingTop: 40, borderTop: '1px solid rgba(249,115,22,0.2)' }}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#22c55e', marginBottom: 12 }}>HOW YOU HELP</div>
@@ -231,6 +251,12 @@ export default function SortedPartnerKit() {
                 action="Schedule a call"
                 contact="family@uf51.love"
                 subtext="Subject: 'Strategic Investment'"
+              />
+              <GetStartedBox 
+                title="Media Agencies & Corporates"
+                action="Let's talk client campaigns"
+                contact="family@uf51.love"
+                subtext="Subject: 'Media Agency Partnership'"
               />
             </div>
             </div>
@@ -350,6 +376,17 @@ function EarningsBox({ title, size, potential, desc }) {
       <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, marginBottom: 8 }}>{size}</p>
       <div style={{ fontSize: 18, fontWeight: 900, color: '#a855f7', marginBottom: 6 }}>{potential}</div>
       <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>{desc}</p>
+    </div>
+  );
+}
+
+// ─── AGENCY BOX ──────────────────────────────────────────────────────────
+function AgencyBox({ icon, title, desc }) {
+  return (
+    <div style={{ background: 'rgba(6,182,212,0.06)', border: '1px solid rgba(6,182,212,0.2)', borderRadius: 8, padding: 16 }}>
+      <div style={{ fontSize: 24, marginBottom: 8 }}>{icon}</div>
+      <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 6 }}>{title}</div>
+      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>{desc}</p>
     </div>
   );
 }
