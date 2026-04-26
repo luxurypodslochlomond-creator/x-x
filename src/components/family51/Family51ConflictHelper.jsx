@@ -22,7 +22,7 @@ const GOALS = [
   { id: 'resolve',    label: 'RESOLVE IT',      desc: 'Find a fair solution' },
 ];
 
-export default function Family51ConflictHelper({ accentColor = '#a855f7' }) {
+export default function Family51ConflictHelper({ accentColor = '#ef4444', onResult }) {
   const [conflictType, setConflictType] = useState('');
   const [what, setWhat]                 = useState('');
   const [goal, setGoal]                 = useState('deescalate');
@@ -106,6 +106,7 @@ Return:
 
     setResult(response);
     setLoading(false);
+    onResult?.();
   };
 
   const sendEmail = async () => {

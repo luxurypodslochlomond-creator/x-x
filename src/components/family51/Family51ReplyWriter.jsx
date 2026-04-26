@@ -18,7 +18,7 @@ const TONES = [
   { id: 'formal', label: 'FORMAL',  desc: 'Legal weight.' },
 ];
 
-export default function Family51ReplyWriter({ accentColor = '#06b6d4' }) {
+export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult }) {
   const [situation, setSituation] = useState('');
   const [context, setContext]     = useState('');
   const [tone, setTone]           = useState('firm');
@@ -70,6 +70,7 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
     setResult(response);
     setLoading(false);
+    onResult?.();
   };
 
   const sendEmail = async () => {
