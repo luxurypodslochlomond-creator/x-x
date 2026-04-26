@@ -75,7 +75,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
       : '';
 
     const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_opus_4_6',
+      model: 'claude_sonnet_4_6',
       prompt: `You are a calm, experienced conflict resolution advisor. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, legal references, and escalation routes throughout.
 
 CONFLICT TYPE: ${ct?.label || 'Not specified'}
