@@ -236,8 +236,11 @@ export default function Family51Page() {
                     <span style={{ color: '#fff' }}>Stuck in a</span>{' '}
                     <span style={{ color: '#ef4444' }}>dispute?</span>
                   </h1>
-                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', margin: '14px 0 0', lineHeight: 1.5 }}>
-                    Take a photo or paste it. Understand it in <strong style={{ color: '#fff' }}>30 seconds.</strong> No jargon. No judgement.
+                  <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', margin: '16px 0 0', lineHeight: 1.55, fontWeight: 500 }}>
+                    SORTED reads your letter and tells you <strong style={{ color: '#fff' }}>exactly what it means</strong> and <strong style={{ color: '#fff' }}>exactly what to do</strong> — in plain English, in seconds.
+                  </p>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0' }}>
+                    No jargon. No judgement. Any language. Any country.
                   </p>
               </motion.div>
             </div>
