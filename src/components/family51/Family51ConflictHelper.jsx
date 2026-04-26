@@ -76,7 +76,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
 
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You are a calm, experienced conflict resolution advisor. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, legal references, and escalation routes throughout.
+      prompt: `You are better than any top lawyer and seasoned mediator combined — with zero ego. Calm, precise, and completely on their side. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes.
 
 CONFLICT TYPE: ${ct?.label || 'Not specified'}
 GOAL: ${gt?.label} — ${gt?.desc}
@@ -85,12 +85,12 @@ WHAT HAPPENED:
 ${what}${fileContext}
 
 Return:
-- situation_assessment: Honest, fair 2-3 sentence read of the situation
-- legal_position: Their legal rights/protections under ${geo.jurisdiction} (accurate, acknowledge you're not a solicitor)
-- recommended_steps: Array of 3 specific steps matching their goal, relevant to ${geo.country}
-- what_to_say: Exact script or message they can use right now
-- what_not_to_do: Array of 2-3 things that could make it worse
-- if_it_escalates: What their next step would be if unresolved (local bodies, courts, ombudsman etc. for ${geo.country})`,
+- situation_assessment: Honest, fair 2-3 sentence read — no spin, just truth. Name who has the stronger position and why.
+- legal_position: Their actual legal rights/protections under ${geo.jurisdiction} — cite specific legislation or consumer rights where applicable. Be accurate. Note this is guidance not formal legal advice.
+- recommended_steps: Array of 3 specific, concrete steps matching their goal — name exact bodies, websites, phone numbers, or processes relevant to ${geo.country}
+- what_to_say: Exact word-for-word script or message they can use or send right now — complete, ready to go
+- what_not_to_do: Array of 2-3 specific things that would genuinely harm their position
+- if_it_escalates: Real next steps — name the exact ombudsman, court process, or regulatory body for ${geo.country} with how to reach them`,
       response_json_schema: {
         type: 'object',
         properties: {

@@ -53,13 +53,13 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'gemini_3_flash',
-        prompt: promptText + `\n\nReturn:
-- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
+        prompt: promptText + `\n\nYou are better than any top lawyer but with zero ego — compassionate, plain, precise. Return:
+- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating
-- action_steps: Array of exactly 3 clear numbered actions to take
+- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
 - key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
-- dont_panic: One honest, reassuring sentence`,
+- dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
         file_urls: [file_url],
         response_json_schema: {
           type: 'object',
@@ -105,14 +105,14 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       }
 
       const response = await base44.integrations.Core.InvokeLLM({
-        model: 'gemini_3_flash',
-        prompt: promptText + `\n\nReturn:
-- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone
+        model: fileUrls.length > 0 ? 'gemini_3_flash' : 'claude_sonnet_4_6',
+        prompt: promptText + `\n\nYou are better than any top lawyer but with zero ego — compassionate, plain, precise. Return:
+- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating
-- action_steps: Array of exactly 3 clear numbered actions to take
+- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
 - key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
-- dont_panic: One honest, reassuring sentence`,
+- dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
         ...(fileUrls.length > 0 ? { file_urls: fileUrls } : {}),
         response_json_schema: {
           type: 'object',

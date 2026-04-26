@@ -40,7 +40,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult 
 
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You are an expert at writing effective letters for ordinary people. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and terminology throughout.
+      prompt: `You are better than any top lawyer but with zero ego — you write with precision, warmth, and power for ordinary people. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}
@@ -50,13 +50,13 @@ CONTEXT:
 ${context}
 
 Write a complete, ready-to-send letter. Must be:
-- Structured with clear greeting and sign-off
-- ${t?.id === 'formal' ? 'Formally' : 'Professionally'} worded
-- Protecting their legal position without false claims
-- Referencing rights/protections relevant to ${geo.jurisdiction} where genuinely applicable
-- Ready to copy and paste immediately
+- Structured with proper greeting, body paragraphs, and sign-off
+- ${t?.id === 'formal' ? 'Formally' : 'Professionally'} worded — no fluff, no waffle
+- Protecting their legal position with accuracy — cite actual rights, actual bodies, actual legislation where relevant to ${geo.jurisdiction}
+- Specific — name the issue, name the deadline, name what you want
+- Ready to copy and paste immediately with zero edits needed
 
-Return subject line, full letter body, 2-3 key points it makes, and one important tip.`,
+Return subject line, full letter body, 2-3 key points it makes, and one important tip the person must know before sending.`,
       response_json_schema: {
         type: 'object',
         properties: {
