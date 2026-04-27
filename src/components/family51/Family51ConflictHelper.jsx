@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -28,6 +28,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
   const [goal, setGoal]                 = useState('deescalate');
   const [loading, setLoading]           = useState(false);
   const [result, setResult]             = useState(null);
+  const [resultGoal, setResultGoal]     = useState(null);
   const [copied, setCopied]             = useState('');
   const [emailAddr, setEmailAddr]       = useState('');
   const [emailSent, setEmailSent]       = useState(false);
@@ -105,6 +106,7 @@ Return:
     });
 
     setResult(response);
+    setResultGoal(goal);
     setLoading(false);
     onResult?.();
   };
@@ -123,6 +125,13 @@ Return:
     setCopied(key);
     setTimeout(() => setCopied(''), 2200);
   };
+
+  // Auto-regenerate if goal changes after generating
+  useEffect(() => {
+    if (result && resultGoal && goal !== resultGoal && !loading && what.trim()) {
+      analyse();
+    }
+  }, [goal, result, resultGoal, loading, what]);
 
   return (
     <div className="space-y-5">

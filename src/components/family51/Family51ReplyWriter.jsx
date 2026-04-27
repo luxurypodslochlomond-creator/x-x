@@ -35,6 +35,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [emailing, setEmailing]   = useState(false);
   const [geo, setGeo]             = useState(() => detectGeo());
   const [alternatives, setAlternatives] = useState([]);
+  const [emailPreviewOpen, setEmailPreviewOpen] = useState(false);
 
   const generateLetter = async (selectedTone) => {
     const t = TONES.find(x => x.id === selectedTone);
@@ -110,6 +111,7 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
     await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED reply — ${result.subject_line || 'Ready to send'}`, body });
     setEmailSent(true);
     setEmailing(false);
+    setEmailPreviewOpen(false);
   };
 
   const copyLetter = () => {
@@ -323,7 +325,48 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
             )}
 
             {/* EMAIL TO SELF */}
-            <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
+            <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSendClick={() => setEmailPreviewOpen(true)} sent={emailSent} accentColor={accentColor} />
+
+            {/* EMAIL PREVIEW SHEET */}
+            <AnimatePresence>
+              {emailPreviewOpen && (
+                <>
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setEmailPreviewOpen(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 100 }} />
+                  <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 30 }} style={{ position: 'fixed', bottom: 0, left: 0, right: 0, maxHeight: '90vh', background: 'rgba(10,15,26,0.98)', backdropFilter: 'blur(10px)', borderTopLeftRadius: 20, borderTopRightRadius: 20, overflow: 'auto', zIndex: 101 }}>
+                    <div style={{ padding: '20px 18px 30px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.15em', color: accentColor, margin: 0 }}>PREVIEW EMAIL</p>
+                        <button onClick={() => setEmailPreviewOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.4)', fontSize: 20, padding: 0 }}>×</button>
+                      </div>
+                    </div>
+                    <div style={{ padding: '16px 18px', space: 'y-3' }}>
+                      <div style={{ marginBottom: 16 }}>
+                        <p style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.3)', margin: '0 0 6px' }}>TO</p>
+                        <p style={{ fontSize: 13, color: '#fff', margin: 0, wordBreak: 'break-all' }}>{emailAddr}</p>
+                      </div>
+                      <div style={{ marginBottom: 16 }}>
+                        <p style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.3)', margin: '0 0 6px' }}>SUBJECT</p>
+                        <p style={{ fontSize: 13, color: '#fff', margin: 0 }}>{`Your SORTED reply — ${result.subject_line || 'Ready to send'}`}</p>
+                      </div>
+                      <div>
+                        <p style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.3)', margin: '0 0 6px' }}>MESSAGE</p>
+                        <pre style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.5, margin: 0, background: 'rgba(255,255,255,0.02)', padding: 12, borderRadius: 8, border: '1px solid rgba(255,255,255,0.05)', maxHeight: 300, overflow: 'auto' }}>
+                          {`SORTED wrote your reply.\n\n─────────────────────\nSUBJECT: ${result.subject_line}\n─────────────────────\n\n${result.letter_body}\n\n─────────────────────\nKEY POINTS\n─────────────────────\n${result.key_points?.map(p => `— ${p}`).join('\n')}\n\nTIP: ${result.tip}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`}
+                        </pre>
+                      </div>
+                      <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
+                        <motion.button onClick={() => setEmailPreviewOpen(false)} whileTap={{ scale: 0.95 }} style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.4)', cursor: 'pointer' }}>
+                          CANCEL
+                        </motion.button>
+                        <motion.button onClick={sendEmail} disabled={emailing} whileTap={!emailing ? { scale: 0.95 } : {}} style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', border: `1px solid ${accentColor}50`, background: `${accentColor}15`, color: accentColor, cursor: !emailing ? 'pointer' : 'not-allowed', opacity: emailing ? 0.6 : 1 }}>
+                          {emailing ? '...' : 'SEND'}
+                        </motion.button>
+                      </div>
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
 
             {/* ALTERNATIVES CAROUSEL */}
             {alternatives.length > 0 && (
@@ -361,7 +404,7 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
   );
 }
 
-function EmailToSelf({ emailAddr, setEmailAddr, onSend, sent, sending, accentColor }) {
+function EmailToSelf({ emailAddr, setEmailAddr, onSendClick, sent, accentColor }) {
   if (sent) return (
     <div style={{ border: '1px solid rgba(34,197,94,0.3)', borderRadius: 10, padding: '12px 16px', background: 'rgba(34,197,94,0.06)', textAlign: 'center' }}>
       <p style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, margin: 0 }}>✓ Sent — check your inbox</p>
@@ -379,15 +422,15 @@ function EmailToSelf({ emailAddr, setEmailAddr, onSend, sent, sending, accentCol
           style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff', fontSize: 12, padding: '9px 12px', outline: 'none', fontFamily: 'inherit' }}
         />
         <motion.button
-          onClick={onSend}
-          disabled={!emailAddr.trim() || sending}
+          onClick={onSendClick}
+          disabled={!emailAddr.trim()}
           whileTap={{ scale: 0.95 }}
-          style={{ padding: '9px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: emailAddr.trim() && !sending ? 'pointer' : 'not-allowed', border: `1px solid ${accentColor}50`, background: `${accentColor}15`, color: accentColor, whiteSpace: 'nowrap' }}
+          style={{ padding: '9px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: emailAddr.trim() ? 'pointer' : 'not-allowed', border: `1px solid ${accentColor}50`, background: `${accentColor}15`, color: accentColor, whiteSpace: 'nowrap' }}
         >
-          {sending ? '...' : 'SEND'}
+          SEND
         </motion.button>
       </div>
-      <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', margin: '6px 0 0', letterSpacing: '0.04em' }}>One-time send. Never stored or reused.</p>
+      <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', margin: '6px 0 0', letterSpacing: '0.04em' }}>Preview before sending.</p>
     </div>
   );
 }
