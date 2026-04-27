@@ -131,10 +131,10 @@ export default function SortedPartnerKit() {
               SORTED uses AI to decode council letters, eviction warnings, redundancy notices, court summons — anything that terrifies people. Plain English. Instant. No signup needed. 3 free uses, then £9.99/month.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
-              <FeatureBox icon="⚡" title="30 seconds" desc="Letters decoded to plain English" />
-              <FeatureBox icon="🎯" title="Jurisdiction-aware" desc="Knows your location & legal system" />
-              <FeatureBox icon="🔒" title="Privacy-first" desc="AI process, instant delete, never stored" />
-              <FeatureBox icon="📧" title="Shareable" desc="Email breakdown to solicitor or family" />
+              <FeatureBox icon="lightning" title="30 seconds" desc="Letters decoded to plain English" />
+               <FeatureBox icon="target" title="Jurisdiction-aware" desc="Knows your location & legal system" />
+               <FeatureBox icon="lock" title="Privacy-first" desc="AI process, instant delete, never stored" />
+               <FeatureBox icon="envelope" title="Shareable" desc="Email breakdown to solicitor or family" />
             </div>
             </div>
 
@@ -158,10 +158,10 @@ export default function SortedPartnerKit() {
               SORTED is the rare product that delivers <strong style={{ color: '#fff' }}>genuine ESG impact</strong> and <strong style={{ color: '#fff' }}>measurable reach</strong> simultaneously. Banks, insurers, and financial services companies have millions of customers in debt distress — and no trusted, frictionless way to help them. SORTED is that tool.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginBottom: 24 }}>
-              <AgencyBox icon="🏦" title="White-label for financial services" desc="HSBC, Barclays, Lloyds — put SORTED inside your mortgage distress journey. Branded as yours." />
-              <AgencyBox icon="📊" title="CSR campaign vehicle" desc="Fund SORTED access for vulnerable customers. Fully measurable. Real impact. Audit trail." />
-              <AgencyBox icon="🤝" title="Media partnership" desc="Put SORTED in front of millions through your client base. Revenue share on subscriptions generated." />
-              <AgencyBox icon="🎯" title="Proprietary data insight" desc="Anonymised trend data on the UK's most pressing legal anxieties. Unique consumer intelligence." />
+              <AgencyBox icon="bank" title="White-label for financial services" desc="HSBC, Barclays, Lloyds — put SORTED inside your mortgage distress journey. Branded as yours." />
+               <AgencyBox icon="chart" title="CSR campaign vehicle" desc="Fund SORTED access for vulnerable customers. Fully measurable. Real impact. Audit trail." />
+               <AgencyBox icon="handshake" title="Media partnership" desc="Put SORTED in front of millions through your client base. Revenue share on subscriptions generated." />
+               <AgencyBox icon="target" title="Proprietary data insight" desc="Anonymised trend data on the UK's most pressing legal anxieties. Unique consumer intelligence." />
             </div>
             <div style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 8, padding: 20 }}>
               <p style={{ margin: 0, fontSize: 14, color: '#fff', lineHeight: 1.7 }}>
@@ -356,6 +356,37 @@ function EnvelopeIcon() {
   );
 }
 
+function BankIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M4 10h20M6 10v12c0 1 1 2 2 2h12c1 0 2-1 2-2V10" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="10" y1="10" x2="10" y2="22" stroke="#06b6d4" strokeWidth="1.5" />
+      <line x1="18" y1="10" x2="18" y2="22" stroke="#06b6d4" strokeWidth="1.5" />
+      <path d="M2 10l12-6 12 6" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ChartIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="4" y="18" width="3" height="6" stroke="#06b6d4" strokeWidth="1.5" />
+      <rect x="10" y="12" width="3" height="12" stroke="#06b6d4" strokeWidth="1.5" />
+      <rect x="16" y="6" width="3" height="18" stroke="#06b6d4" strokeWidth="1.5" />
+      <line x1="4" y1="24" x2="21" y2="24" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function HandshakeIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M4 16c2 2 4 3 6 3s4-1 5-2l2-2 2 2c1 1 3 2 5 2s4-1 6-3" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M6 12v2M22 12v2M10 8v4M18 8v4" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 // ─── OPPORTUNITY BOX ──────────────────────────────────────────────────────
 function OpportunityBox({ title, value }) {
   return (
@@ -399,9 +430,16 @@ function EarningsBox({ title, size, potential, desc }) {
 
 // ─── AGENCY BOX ──────────────────────────────────────────────────────────
 function AgencyBox({ icon, title, desc }) {
+  const iconMap = {
+    'bank': <BankIcon />,
+    'chart': <ChartIcon />,
+    'handshake': <HandshakeIcon />,
+    'target': <TargetIcon />
+  };
+  
   return (
     <div style={{ background: 'rgba(6,182,212,0.06)', border: '1px solid rgba(6,182,212,0.2)', borderRadius: 8, padding: 16 }}>
-      <div style={{ fontSize: 24, marginBottom: 8 }}>{icon}</div>
+      <div style={{ marginBottom: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32 }}>{iconMap[icon] || icon}</div>
       <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 6 }}>{title}</div>
       <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>{desc}</p>
     </div>
