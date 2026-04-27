@@ -98,11 +98,11 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
   // Auto-regenerate if tone changes after generating
   useEffect(() => {
-    if (result && resultTone && tone !== resultTone && !loading) {
+    if (result && resultTone && tone !== resultTone && !loading && context.trim()) {
       regenerateWithDifferentTone(tone);
       setResultTone(tone);
     }
-  }, [tone, result, resultTone, loading]);
+  }, [tone, result, resultTone, loading, context]);
 
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
