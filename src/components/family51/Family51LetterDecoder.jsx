@@ -48,7 +48,8 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     try {
       const currentGeo = geoRef.current;
       const currentType = letterTypeRef.current;
-      const geoContext = `The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response.`;
+      const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      const geoContext = `Today's date is ${today}. The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response. When calculating how urgent a deadline is, use today's date as your reference.`;
       const promptText = fileUrl
         ? `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${currentType ? ` (type: ${currentType})` : ''}. Read it carefully and help them understand it.`
         : `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${text}`;
