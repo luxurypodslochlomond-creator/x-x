@@ -369,56 +369,65 @@ Return a JSON object with these EXACT fields:
         {result && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
 
-            {/* TOP — severity + summary */}
+            {/* TOP — calm summary header */}
             {sev && (
-              <div style={{ background: sev.bg, border: `2px solid ${sev.border}`, borderRadius: 12, padding: '16px 18px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <span style={{ fontSize: 11, fontWeight: 900, color: sev.color, letterSpacing: '0.1em', padding: '3px 10px', borderRadius: 20, border: `1px solid ${sev.color}40`, background: `${sev.color}12` }}>{result.severity}</span>
+              <div style={{ borderRadius: 14, padding: '20px 18px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                {/* Severity dot + label — subtle, not alarming */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: sev.color, flexShrink: 0, boxShadow: `0 0 6px ${sev.color}80` }} />
+                  <span style={{ fontSize: 10, fontWeight: 800, color: sev.color, letterSpacing: '0.14em' }}>{result.severity}</span>
                   {result.sender && result.sender !== 'Unknown' && (
-                    <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em' }}>{result.sender}</span>
+                    <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', marginLeft: 'auto', letterSpacing: '0.04em' }}>{result.sender}</span>
                   )}
                 </div>
-                <p style={{ fontSize: 17, fontWeight: 900, color: '#fff', margin: '0 0 6px', lineHeight: 1.2 }}>{result.letter_summary || 'Official letter'}</p>
+                <p style={{ fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 10px', lineHeight: 1.25 }}>{result.letter_summary || 'Official letter'}</p>
+                {/* Reassurance line — always calm */}
+                {result.dont_panic && (
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: '0 0 10px', lineHeight: 1.55, fontStyle: 'italic' }}>{result.dont_panic}</p>
+                )}
                 {result.key_deadline && result.key_deadline !== 'No deadline mentioned' && (
-                  <p style={{ fontSize: 12, color: sev.color, margin: 0, fontWeight: 700, letterSpacing: '0.04em' }}>Deadline: {result.key_deadline}</p>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 10px', borderRadius: 8, background: `${sev.color}12`, border: `1px solid ${sev.color}30` }}>
+                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: sev.color }} />
+                    <span style={{ fontSize: 11, fontWeight: 700, color: sev.color }}>Respond by: {result.key_deadline}</span>
+                  </div>
                 )}
               </div>
             )}
 
             {/* PLAIN ENGLISH */}
-            <div style={{ padding: '14px 16px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT THIS MEANS</p>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.9)', lineHeight: 1.65, margin: 0 }}>{result.what_this_means}</p>
+            <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', margin: '0 0 10px' }}>WHAT THIS MEANS</p>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', lineHeight: 1.75, margin: 0 }}>{result.what_this_means}</p>
             </div>
 
-            {/* WHAT TO DO */}
-            <div style={{ padding: '14px 16px', borderRadius: 10, background: `${accentColor}08`, border: `1px solid ${accentColor}20` }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'aa', margin: '0 0 10px' }}>WHAT TO DO</p>
-              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {/* WHAT TO DO — calm numbered list */}
+            <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', margin: '0 0 12px' }}>WHAT TO DO</p>
+              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {result.action_steps?.map((step, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 10, fontWeight: 900, color: '#000', minWidth: 20, height: 20, background: accentColor, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>{i + 1}</span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>{step}</span>
+                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: 10, fontWeight: 900, color: accentColor, minWidth: 18, paddingTop: 3, flexShrink: 0, letterSpacing: '0.05em' }}>{i + 1}.</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7 }}>{step}</span>
                   </li>
                 ))}
               </ol>
             </div>
 
-            {/* MONEY / CONSEQUENCES — only if relevant */}
+            {/* MONEY — only if real, kept calm */}
             {(result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.') && (
-              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.15)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(239,68,68,0.5)', margin: '0 0 4px' }}>MONEY AT STAKE</p>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{result.financial_impact}</p>
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', margin: '0 0 6px' }}>AMOUNT INVOLVED</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, margin: 0 }}>{result.financial_impact}</p>
               </div>
             )}
 
-            {/* FREE HELP */}
+            {/* FREE HELP — warm green, calm */}
             {result.free_help?.length > 0 && (
-              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.15)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(34,197,94,0.6)', margin: '0 0 8px' }}>FREE HELP</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.12)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(34,197,94,0.5)', margin: '0 0 10px' }}>FREE HELP AVAILABLE</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {result.free_help.map((help, i) => (
-                    <p key={i} style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.55, margin: 0, paddingLeft: 10, borderLeft: `2px solid rgba(34,197,94,0.25)` }}>{help}</p>
+                    <p key={i} style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, margin: 0, paddingLeft: 12, borderLeft: '1px solid rgba(34,197,94,0.2)' }}>{help}</p>
                   ))}
                 </div>
               </div>
