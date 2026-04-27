@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 // The growth loop. Every helped person becomes a referral.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const SHARE_URL = 'https://uf51.love/Sorted';
-const SHARE_TEXT = "This thing decoded a scary letter for me in seconds — plain English, free, nothing stored. If someone you know is stressed about an official letter, send them this 👇";
+const SHARE_URL = 'https://app.base44.com/Sorted';
+const SHARE_TEXT = "Got a scary letter? SORTED decodes it in seconds — plain English, free, nothing stored.";
 
 export default function SortedShareButton({ accentColor = '#f97316' }) {
   const [shared, setShared] = useState(false);
@@ -68,10 +68,10 @@ export default function SortedShareButton({ accentColor = '#f97316' }) {
         <ShareIconSVG color={accentColor} />
         <div style={{ flex: 1, textAlign: 'left' }}>
           <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.04em', color: '#fff' }}>
-            Know someone who needs this?
+            Someone else needs this?
           </div>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 2 }}>
-            Share SORTED — free, private, no signup
+            Got a scary letter? SORTED decodes it free.
           </div>
         </div>
         <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: accentColor, border: `1px solid ${accentColor}40`, borderRadius: 4, padding: '3px 7px' }}>
