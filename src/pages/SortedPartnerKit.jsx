@@ -302,15 +302,15 @@ function StatBox({ number, label }) {
 // ─── FEATURE BOX ──────────────────────────────────────────────────────────
 function FeatureBox({ icon, title, desc }) {
   const iconMap = {
-    '⚡': <LightningIcon />,
-    '🎯': <TargetIcon />,
-    '🔒': <LockIcon />,
-    '📧': <EnvelopeIcon />
+    'lightning': <LightningIcon />,
+    'target': <TargetIcon />,
+    'lock': <LockIcon />,
+    'envelope': <EnvelopeIcon />
   };
   
   return (
     <div style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)', borderRadius: 8, padding: 16 }}>
-      <div style={{ marginBottom: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32 }}>
+      <div style={{ marginBottom: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40 }}>
         {iconMap[icon] || icon}
       </div>
       <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4, color: '#fff' }}>{title}</div>
@@ -419,10 +419,10 @@ function PartnerCard({ num, title, desc, earn, items }) {
 // ─── EARNINGS BOX ────────────────────────────────────────────────────────
 function EarningsBox({ title, size, potential, desc }) {
   return (
-    <div style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.2)', borderRadius: 8, padding: 16 }}>
+    <div style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)', borderRadius: 8, padding: 16 }}>
       <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.5)', margin: 0, marginBottom: 4, letterSpacing: '0.05em' }}>{title}</p>
       <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, marginBottom: 8 }}>{size}</p>
-      <div style={{ fontSize: 18, fontWeight: 900, color: '#a855f7', marginBottom: 6 }}>{potential}</div>
+      <div style={{ fontSize: 18, fontWeight: 900, color: '#06b6d4', marginBottom: 6 }}>{potential}</div>
       <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>{desc}</p>
     </div>
   );
