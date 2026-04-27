@@ -97,7 +97,7 @@ export default function SortedPartnerKit() {
             <Download size={16} /> {isDownloading ? 'Downloading...' : 'Download PDF'}
           </button>
           <button
-            onClick={() => copyToClipboard('https://uf51.love/api/functions/serveMetaTags?page=SortedPartnerKit')}
+            onClick={() => copyToClipboard(window.location.href)}
             style={{
               display: 'flex', alignItems: 'center', gap: 8,
               padding: '12px 20px', background: 'rgba(6,182,212,0.2)', border: '1px solid rgba(6,182,212,0.4)',
@@ -118,7 +118,6 @@ export default function SortedPartnerKit() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
               <StatBox number="92%" label="of serious US legal problems get zero help" />
               <StatBox number="73%" label="of people at bailiffs have mental health issues" />
-              <StatBox number="4.5M" label="UK children in poverty (2024/25 record)" />
               <StatBox number="£100k" label="average household legal debt (unreported)" />
             </div>
             </div>
@@ -383,6 +382,14 @@ function HandshakeIcon() {
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
       <path d="M4 18c2.5 2.5 5 3.5 7.5 3.5s5-1.5 6.5-3l2.5-2.5 2.5 2.5c1.5 1.5 4 3 6.5 3s5-1 7.5-3.5" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
       <path d="M6 14v2.5M26 14v2.5M11 9v5M21 9v5" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M16 2L20.5 12h10.5l-8.5 6.5 3.25 10-9.25-7-9.25 7 3.25-10-8.5-6.5h10.5L16 2z" fill="#06b6d4" stroke="#06b6d4" strokeWidth="0.5" strokeLinejoin="round" />
     </svg>
   );
 }
