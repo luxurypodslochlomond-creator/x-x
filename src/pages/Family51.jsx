@@ -209,7 +209,7 @@ export default function Family51Page() {
               <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project" />
               <StatCard number="92%" label="of serious legal problems in the USA receive no legal help at all" source="Legal Services Corp." />
               <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health" />
-              <StatCard number="4.5M" label="children in poverty in the UK — a 2024/25 record high" source="Joseph Rowntree Foundation" color="#ef4444" />
+              <StatCard number="£100B+" label="annual UK legal aid spending gap — unmet demand" source="Law Society Intelligence" color="#ef4444" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
