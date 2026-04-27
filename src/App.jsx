@@ -182,18 +182,18 @@ const AuthenticatedApp = () => {
       <Route path="/Learn" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Magic51Page /></Suspense>} />
 
       {/* ── LEARN51 — own layout, no UF51 nav ── */}
-      <Route element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Learn51Layout /></Suspense>}>
-        <Route path="/AskMeAnything" element={<AskMeAnythingPage />} />
-        <Route path="/Learn51About" element={<Learn51AboutPage />} />
-        <Route path="/Literacy51" element={<Literacy51Page />} />
-        <Route path="/LifeSkills51" element={<LifeSkills51Page />} />
-        <Route path="/Learn51Terms" element={<Learn51TermsPage />} />
-        <Route path="/Learn51Privacy" element={<Learn51PrivacyPage />} />
-        <Route path="/GeorgieMaths" element={<GeorgieMathsPage />} />
-        <Route path="/LennoxMaths" element={<LennoxMathsPage />} />
-        <Route path="/ReadingSupport" element={<ReadingSupportPage />} />
-        <Route path="/YoungWarriors" element={<YoungWarriorsPage />} />
-        <Route path="/SupportLearn51" element={<SupportLearn51Page />} />
+      <Route element={<Learn51Layout />}>
+        <Route path="/AskMeAnything" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><AskMeAnythingPage /></Suspense>} />
+        <Route path="/Learn51About" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Learn51AboutPage /></Suspense>} />
+        <Route path="/Literacy51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Literacy51Page /></Suspense>} />
+        <Route path="/LifeSkills51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LifeSkills51Page /></Suspense>} />
+        <Route path="/Learn51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Learn51TermsPage /></Suspense>} />
+        <Route path="/Learn51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Learn51PrivacyPage /></Suspense>} />
+        <Route path="/GeorgieMaths" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><GeorgieMathsPage /></Suspense>} />
+        <Route path="/LennoxMaths" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LennoxMathsPage /></Suspense>} />
+        <Route path="/ReadingSupport" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><ReadingSupportPage /></Suspense>} />
+        <Route path="/YoungWarriors" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><YoungWarriorsPage /></Suspense>} />
+        <Route path="/SupportLearn51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SupportLearn51Page /></Suspense>} />
       </Route>
       <Route path="/Platform" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="Platform"><PlatformPage /></LayoutWrapper></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
