@@ -22,9 +22,20 @@ export default function Family51Page() {
   const [showHistory, setShowHistory] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [slideDir, setSlideDir] = useState(1); // 1 = slide in from right, -1 = from left
-  const [prefillContext, setPrefillContext] = useState(null); // cross-tool handoff
+  const [slideDir, setSlideDir] = useState(1);
+  const [prefillContext, setPrefillContext] = useState(null);
+  const [showPaySuccess, setShowPaySuccess] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
+
+  // Detect Stripe success redirect
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sorted') === 'success') {
+      setShowPaySuccess(true);
+      // Clean the URL without reload
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
 
   const handleToolOpen = (toolId, handoffData = null) => {
     if (isLocked) return;
@@ -236,6 +247,19 @@ export default function Family51Page() {
          {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
          {!activeTool && !isLocked && !menuOpen && !showWhy && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+
+            {/* STRIPE SUCCESS BANNER */}
+            {showPaySuccess && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                style={{ marginBottom: 24, padding: '16px 20px', borderRadius: 14, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.4)', textAlign: 'center' }}
+              >
+                <p style={{ fontSize: 14, fontWeight: 800, color: '#22c55e', margin: '0 0 4px', letterSpacing: '0.04em' }}>You're SORTED — welcome aboard.</p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Unlimited access is now unlocked. Go decode something.</p>
+                <button onClick={() => setShowPaySuccess(false)} style={{ marginTop: 10, fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.08em' }}>DISMISS</button>
+              </motion.div>
+            )}
 
             {/* HEADLINE — SHORT AND SHARP */}
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
