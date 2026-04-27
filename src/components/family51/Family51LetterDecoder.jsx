@@ -165,10 +165,54 @@ Return a JSON object with these EXACT fields:
   return (
     <div className="space-y-5">
 
-      {/* FULL SCREEN LOADER */}
+      {/* INLINE LOADER — no full screen takeover */}
       <AnimatePresence>
         {(loading || uploading) && (
-          <SortedLoader color={accentColor} text={uploading ? 'UPLOADING YOUR FILE…' : 'DECODING YOUR LETTER…'} subtitle={uploading ? 'Sending securely — just a moment' : 'Reading every word with AI — 15–30 seconds'} />
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            style={{
+              padding: '28px 20px',
+              borderRadius: 16,
+              background: 'rgba(0,0,0,0.4)',
+              border: `1px solid ${accentColor}30`,
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16,
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <svg width="52" height="52" viewBox="0 0 32 32" fill="none">
+              <motion.path
+                d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16"
+                stroke={accentColor}
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                fill="none"
+                style={{ filter: `drop-shadow(0 0 8px ${accentColor})` }}
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: [0, 1, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </svg>
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.15em', color: accentColor, margin: '0 0 6px' }}>
+                {uploading ? 'UPLOADING YOUR FILE…' : 'DECODING YOUR LETTER…'}
+              </p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em', margin: 0 }}>
+                {uploading ? 'Sending securely — just a moment' : 'Reading every word with AI — 15–30 seconds'}
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[0, 1, 2].map(i => (
+                <motion.span
+                  key={i}
+                  style={{ width: 5, height: 5, borderRadius: '50%', background: accentColor, display: 'block', opacity: 0.4 }}
+                  animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.3, 1] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: i * 0.25 }}
+                />
+              ))}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -200,10 +244,6 @@ Return a JSON object with these EXACT fields:
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', borderRadius: 12, border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.08)' }}>
             <span style={{ fontSize: 12, fontWeight: 800, color: '#22c55e', letterSpacing: '0.1em' }}>✓ FILE UPLOADED — READY TO DECODE</span>
             <button onClick={() => { setUploadedFileUrl(null); setLetterText(''); }} style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>REMOVE</button>
-          </div>
-        ) : uploading ? (
-          <div style={{ padding: '14px 0', textAlign: 'center' }}>
-            <Spinner color={accentColor} text="READING YOUR FILE..." />
           </div>
         ) : (
           <div style={{ display: 'flex', gap: 10 }}>
@@ -516,75 +556,7 @@ function ResultCard({ label, color, children }) {
   );
 }
 
-function Spinner({ color, text }) {
-  return (
-    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-      <svg width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ flexShrink: 0 }}>
-        <motion.path
-          d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16"
-          stroke={color}
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          fill="none"
-          style={{ filter: `drop-shadow(0 0 4px ${color})` }}
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0, 1, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </svg>
-      <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em' }}>{text}</span>
-    </span>
-  );
-}
 
-function SortedLoader({ color, text, subtitle }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      style={{
-        position: 'fixed', inset: 0, zIndex: 9999,
-        background: 'rgba(0,0,0,0.92)',
-        backdropFilter: 'blur(12px)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center', gap: 28,
-      }}
-    >
-      <svg width="80" height="80" viewBox="0 0 32 32" fill="none">
-        <motion.path
-          d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16"
-          stroke={color}
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          fill="none"
-          style={{ filter: `drop-shadow(0 0 10px ${color})` }}
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: [0, 1, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </svg>
-      <div style={{ textAlign: 'center' }}>
-        <p style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.15em', color, margin: '0 0 8px' }}>
-          {text}
-        </p>
-        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.08em', margin: 0 }}>
-          {subtitle || 'Reading your letter with AI — 15–30 seconds'}
-        </p>
-      </div>
-      <div style={{ display: 'flex', gap: 6 }}>
-        {[0, 1, 2].map(i => (
-          <motion.span
-            key={i}
-            style={{ width: 6, height: 6, borderRadius: '50%', background: color, display: 'block', opacity: 0.4 }}
-            animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.4, 1] }}
-            transition={{ duration: 1, repeat: Infinity, delay: i * 0.25 }}
-          />
-        ))}
-      </div>
-    </motion.div>
-  );
-}
 
 const secondaryBtn = {
   flex: 1, padding: '11px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
