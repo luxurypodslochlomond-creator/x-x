@@ -185,14 +185,14 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
       {/* WRITE BUTTON */}
       <motion.button
         onClick={write}
-        disabled={!context.trim() || loading}
-        whileTap={!loading && context.trim() ? { scale: 0.97 } : {}}
+        disabled={loading}
+        whileTap={!loading ? { scale: 0.97 } : {}}
         style={{
           width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
-          fontWeight: 800, letterSpacing: '0.12em', cursor: context.trim() && !loading ? 'pointer' : 'not-allowed',
-          border: `1px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-          background: context.trim() ? `${accentColor}15` : 'transparent',
-          color: context.trim() ? accentColor : 'rgba(255,255,255,0.2)',
+          fontWeight: 800, letterSpacing: '0.12em', cursor: !loading ? 'pointer' : 'not-allowed',
+          border: `1px solid ${accentColor}50`,
+          background: `${accentColor}15`,
+          color: accentColor,
           transition: 'all 0.2s',
         }}
       >
