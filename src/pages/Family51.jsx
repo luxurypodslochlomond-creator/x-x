@@ -164,9 +164,9 @@ export default function Family51Page() {
                   <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
                   Data Sovereignty Pledge
                 </a>
-                <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                <a href="mailto:sorted@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <EmailIcon />
-                  family@uf51.love
+                  sorted@uf51.love
                 </a>
                 {/* PRIVACY NOTE */}
                 <div style={{ padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
@@ -470,7 +470,7 @@ export default function Family51Page() {
               </p>
             </div>
             <div style={{ marginBottom: 20 }}>
-              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#06b6d4', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(6,182,212,0.3)', background: 'rgba(6,182,212,0.05)', marginBottom: 16, transition: 'all 0.15s' }} onMouseEnter={(e) => { e.target.style.background = 'rgba(6,182,212,0.12)'; e.target.style.borderColor = 'rgba(6,182,212,0.6)'; }} onMouseLeave={(e) => { e.target.style.background = 'rgba(6,182,212,0.05)'; e.target.style.borderColor = 'rgba(6,182,212,0.3)'; }}>💙 Can't afford it? We can help.</a>
+              <a href="mailto:sorted@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#06b6d4', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(6,182,212,0.3)', background: 'rgba(6,182,212,0.05)', marginBottom: 16, transition: 'all 0.15s' }} onMouseEnter={(e) => { e.target.style.background = 'rgba(6,182,212,0.12)'; e.target.style.borderColor = 'rgba(6,182,212,0.6)'; }} onMouseLeave={(e) => { e.target.style.background = 'rgba(6,182,212,0.05)'; e.target.style.borderColor = 'rgba(6,182,212,0.3)'; }}>💙 Can't afford it? We can help.</a>
             </div>
             <SortedForLifeCard compact />
           </motion.div>
