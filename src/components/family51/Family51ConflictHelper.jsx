@@ -68,14 +68,15 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
     setLoading(true);
     setResult(null);
 
-    const ct = CONFLICT_TYPES.find(t => t.id === conflictType);
-    const gt = GOALS.find(g => g.id === goal);
+    try {
+      const ct = CONFLICT_TYPES.find(t => t.id === conflictType);
+      const gt = GOALS.find(g => g.id === goal);
 
-    const fileContext = attachments.length > 0 
-      ? `\n\nATTACHED EVIDENCE:\n${attachments.map(a => `- ${a.name} (${a.type}): ${a.url}`).join('\n')}`
-      : '';
+      const fileContext = attachments.length > 0 
+        ? `\n\nATTACHED EVIDENCE:\n${attachments.map(a => `- ${a.name} (${a.type}): ${a.url}`).join('\n')}`
+        : '';
 
-    const response = await base44.integrations.Core.InvokeLLM({
+      const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
       prompt: `You are sharp, calm, and completely on their side — a conflict resolution expert with no agenda. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes.
 
@@ -105,19 +106,29 @@ Return:
       },
     });
 
-    setResult(response);
-    setResultGoal(goal);
-    setLoading(false);
+      setResult(response);
+      setResultGoal(goal);
+    } catch (err) {
+      console.error('SORTED conflict analysis error:', err);
+      setResult({ _error: err?.message || 'Analysis failed. Please try again.' });
+    } finally {
+      setLoading(false);
+    }
     onResult?.();
   };
 
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
     setEmailing(true);
-    const body = `SORTED analysed your conflict.\n\n─────────────────────\nSITUATION ASSESSMENT\n─────────────────────\n${result.situation_assessment}\n\n─────────────────────\nYOUR LEGAL POSITION\n─────────────────────\n${result.legal_position}\n\n─────────────────────\nWHAT TO DO\n─────────────────────\n${result.recommended_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n─────────────────────\nWHAT TO SAY\n─────────────────────\n${result.what_to_say}\n\nWHAT NOT TO DO:\n${result.what_not_to_do?.map(x => `X ${x}`).join('\n')}\n\nIF IT ESCALATES: ${result.if_it_escalates}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
-    await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: 'Your SORTED conflict plan', body });
-    setEmailSent(true);
-    setEmailing(false);
+    try {
+      const body = `SORTED analysed your conflict.\n\n─────────────────────\nSITUATION ASSESSMENT\n─────────────────────\n${result.situation_assessment}\n\n─────────────────────\nYOUR LEGAL POSITION\n─────────────────────\n${result.legal_position}\n\n─────────────────────\nWHAT TO DO\n─────────────────────\n${result.recommended_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n─────────────────────\nWHAT TO SAY\n─────────────────────\n${result.what_to_say}\n\nWHAT NOT TO DO:\n${result.what_not_to_do?.map(x => `X ${x}`).join('\n')}\n\nIF IT ESCALATES: ${result.if_it_escalates}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
+      await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: 'Your SORTED conflict plan', body });
+      setEmailSent(true);
+    } catch (err) {
+      setResult(prev => ({ ...prev, _error: `Email failed: ${err?.message || 'Could not send'}. Try again.` }));
+    } finally {
+      setEmailing(false);
+    }
   };
 
   const copy = (text, key) => {
@@ -262,9 +273,19 @@ Return:
         {loading ? <Spinner color={accentColor} text="ANALYSING YOUR SITUATION" /> : 'GET MY CONFLICT PLAN'}
       </motion.button>
 
+      {/* ERROR FROM RESULT */}
+      <AnimatePresence>
+        {result?._error && (
+          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '14px 16px', borderRadius: 10, border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.08)' }}>
+            <p style={{ fontSize: 12, color: '#ef4444', margin: '0 0 8px', fontWeight: 800 }}>⚠ {result._error}</p>
+            <button onClick={() => setResult(null)} style={{ fontSize: 10, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontWeight: 700 }}>Dismiss</button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* RESULT */}
       <AnimatePresence>
-        {result && (
+        {result && !result._error && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
             <Card label="SITUATION ASSESSMENT" color={accentColor}>

@@ -36,12 +36,14 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [geo, setGeo]             = useState(() => detectGeo());
   const [alternatives, setAlternatives] = useState([]);
   const [emailPreviewOpen, setEmailPreviewOpen] = useState(false);
+  const [error, setError] = useState(null);
 
   const generateLetter = async (selectedTone) => {
     const t = TONES.find(x => x.id === selectedTone);
     const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     
-    const response = await base44.integrations.Core.InvokeLLM({
+    try {
+      const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
       prompt: `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
 
@@ -70,8 +72,11 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
         },
       },
     });
-    
-    return response;
+      return response;
+    } catch (err) {
+      console.error('SORTED letter generation error:', err);
+      throw new Error(err?.message || 'Failed to generate letter. Please try again.');
+    }
   };
 
   const write = async () => {
@@ -79,12 +84,18 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
     setLoading(true);
     setResult(null);
     setAlternatives([]);
+    setError(null);
 
-    const response = await generateLetter(tone);
-    setResult(response);
-    setResultTone(tone);
-    setLoading(false);
-    onResult?.();
+    try {
+      const response = await generateLetter(tone);
+      setResult(response);
+      setResultTone(tone);
+      onResult?.();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const regenerateWithDifferentTone = async (newTone) => {
@@ -107,11 +118,16 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
     setEmailing(true);
-    const body = `SORTED wrote your reply.\n\n─────────────────────\nSUBJECT: ${result.subject_line}\n─────────────────────\n\n${result.letter_body}\n\n─────────────────────\nKEY POINTS\n─────────────────────\n${result.key_points?.map(p => `— ${p}`).join('\n')}\n\nTIP: ${result.tip}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
-    await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED reply — ${result.subject_line || 'Ready to send'}`, body });
-    setEmailSent(true);
-    setEmailing(false);
-    setEmailPreviewOpen(false);
+    try {
+      const body = `SORTED wrote your reply.\n\n─────────────────────\nSUBJECT: ${result.subject_line}\n─────────────────────\n\n${result.letter_body}\n\n─────────────────────\nKEY POINTS\n─────────────────────\n${result.key_points?.map(p => `— ${p}`).join('\n')}\n\nTIP: ${result.tip}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
+      await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED reply — ${result.subject_line || 'Ready to send'}`, body });
+      setEmailSent(true);
+      setEmailPreviewOpen(false);
+    } catch (err) {
+      setError(`Email failed: ${err?.message || 'Could not send'}. Try again.`);
+    } finally {
+      setEmailing(false);
+    }
   };
 
   const copyLetter = () => {
@@ -123,6 +139,16 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
   return (
     <div className="space-y-5">
+
+      {/* ERROR */}
+      <AnimatePresence>
+        {error && (
+          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '14px 16px', borderRadius: 10, border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.08)' }}>
+            <p style={{ fontSize: 12, color: '#ef4444', margin: '0 0 8px', fontWeight: 800 }}>⚠ {error}</p>
+            <button onClick={() => setError(null)} style={{ fontSize: 10, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontWeight: 700 }}>Dismiss</button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* PREFILL BANNER — shown when handed off from decoder */}
       {prefillContext && (

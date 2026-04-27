@@ -156,10 +156,15 @@ Return a JSON object with these EXACT fields:
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
     setEmailing(true);
-    const body = `SORTED decoded your letter.\n\n${result.we_hear_you ? result.we_hear_you + '\n\n' : ''}─────────────────────\nWHAT THIS MEANS\n─────────────────────\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\n${result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' ? `─────────────────────\nMONEY AT STAKE\n─────────────────────\n${result.financial_impact}\n\n` : ''}${result.if_you_ignore_this ? `─────────────────────\nIF YOU IGNORE THIS\n─────────────────────\n${result.if_you_ignore_this}\n\n` : ''}─────────────────────\nWHAT TO DO\n─────────────────────\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n${result.free_help?.length > 0 ? `─────────────────────\nFREE HELP AVAILABLE\n─────────────────────\n${result.free_help.join('\n\n')}\n\n` : ''}KEY DEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
-    await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED breakdown — ${result.severity}`, body });
-    setEmailSent(true);
-    setEmailing(false);
+    try {
+      const body = `SORTED decoded your letter.\n\n${result.we_hear_you ? result.we_hear_you + '\n\n' : ''}─────────────────────\nWHAT THIS MEANS\n─────────────────────\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\n${result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' ? `─────────────────────\nMONEY AT STAKE\n─────────────────────\n${result.financial_impact}\n\n` : ''}${result.if_you_ignore_this ? `─────────────────────\nIF YOU IGNORE THIS\n─────────────────────\n${result.if_you_ignore_this}\n\n` : ''}─────────────────────\nWHAT TO DO\n─────────────────────\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n${result.free_help?.length > 0 ? `─────────────────────\nFREE HELP AVAILABLE\n─────────────────────\n${result.free_help.join('\n\n')}\n\n` : ''}KEY DEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
+      await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED breakdown — ${result.severity}`, body });
+      setEmailSent(true);
+    } catch (err) {
+      setDecodeError(`Email failed: ${err?.message || 'Could not send'}. Try again.`);
+    } finally {
+      setEmailing(false);
+    }
   };
 
   const copyAll = () => {
