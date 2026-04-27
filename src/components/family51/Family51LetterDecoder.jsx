@@ -57,6 +57,14 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
         model: 'claude_sonnet_4_6',
         prompt: promptText + `\n\nThis person may be stressed, scared, or overwhelmed. Your job is to be their brilliant, straight-talking friend who happens to know the law — not a robot, not a disclaimer machine. Be specific. Be human. Give REAL information that actually helps.
 
+CRITICAL ANTI-HALLUCINATION RULES:
+- NEVER invent phone numbers — only use numbers you are highly confident exist for this organisation
+- NEVER invent legislation references — only cite laws you are certain apply
+- If you cannot read part of a photo clearly, say so honestly rather than guessing
+- If a deadline is unclear, say "Check letter for exact date" not a guess
+- If you are uncertain about any specific fact, flag it with "(verify this)" at the end of that sentence
+- It is better to say "I'm not certain of the exact number — search [Organisation] contact on Google" than to give a wrong number
+
 Return a JSON object with these EXACT fields:
 - letter_summary: Max 6 words. What IS this letter. E.g. "Council tax debt demand" or "HMRC self-assessment penalty notice". Be blunt and specific.
 - sender: Organisation name, e.g. "HMRC", "Barclays", "Hackney Council". Or "Unknown".
@@ -332,6 +340,14 @@ Return a JSON object with these EXACT fields:
                 <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>{result.severity_explanation}</p>
               </div>
             )}
+
+            {/* HONESTY BADGE — anti-hallucination trust signal */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 8, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <span style={{ fontSize: 13 }}>🛡️</span>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.4 }}>
+                SORTED flags anything it's unsure about. If you see <span style={{ color: 'rgba(255,165,0,0.7)', fontWeight: 700 }}>(verify this)</span> — double-check that specific detail before acting on it.
+              </p>
+            </div>
 
             {/* 1. REASSURANCE FIRST — for the scared person */}
             {result.we_hear_you && (
