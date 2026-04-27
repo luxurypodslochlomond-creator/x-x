@@ -18,7 +18,7 @@ const SEVERITY_CONFIG = {
   'VERY URGENT':   { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)' },
 };
 
-export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
+export default function Family51LetterDecoder({ accentColor = '#f97316', onResult, onHandoff }) {
   const [letterText, setLetterText] = useState('');
   const [letterType, setLetterType] = useState('');
   const [loading, setLoading] = useState(false);
@@ -413,6 +413,25 @@ Return a JSON object with these EXACT fields:
             <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', textAlign: 'center' }}>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, margin: 0 }}>✓ {result.dont_panic}</p>
             </div>
+
+            {/* HANDOFF — write a reply to this letter */}
+            {onHandoff && (
+              <motion.button
+                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means })}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
+                  fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer',
+                  border: '1px solid rgba(6,182,212,0.5)',
+                  background: 'rgba(6,182,212,0.1)', color: '#06b6d4',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                  transition: 'all 0.15s',
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                WRITE A REPLY TO THIS LETTER
+              </motion.button>
+            )}
 
             {/* ACTIONS */}
             <div style={{ display: 'flex', gap: 10, paddingTop: 4 }}>

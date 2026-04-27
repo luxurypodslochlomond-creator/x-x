@@ -22,17 +22,33 @@ export default function Family51Page() {
   const [showHistory, setShowHistory] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [slideDir, setSlideDir] = useState(1); // 1 = slide in from right, -1 = from left
+  const [prefillContext, setPrefillContext] = useState(null); // cross-tool handoff
   const { isLocked, remaining, recordUse } = useSortedUsage();
 
-  const handleToolOpen = (toolId) => {
+  const handleToolOpen = (toolId, handoffData = null) => {
     if (isLocked) return;
+    setSlideDir(1);
     setIsTransitioning(true);
     setTimeout(() => {
       setActiveTool(toolId);
+      setPrefillContext(handoffData);
       setMenuOpen(false);
       setShowHistory(false);
       setIsTransitioning(false);
-    }, 300);
+    }, 180);
+  };
+
+  const handleBack = () => {
+    setSlideDir(-1);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveTool(null);
+      setShowWhy(false);
+      setShowHistory(false);
+      setPrefillContext(null);
+      setIsTransitioning(false);
+    }, 180);
   };
 
   useEffect(() => {
@@ -85,10 +101,11 @@ export default function Family51Page() {
 
          {activeTool || showWhy || showHistory ? (
            <motion.button
-             onClick={() => { setActiveTool(null); setShowWhy(false); setShowHistory(false); }}
+             onClick={handleBack}
              whileTap={{ scale: 0.95 }}
-             style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
+             style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
            >
+             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
              BACK
            </motion.button>
          ) : (
@@ -346,15 +363,64 @@ export default function Family51Page() {
         {activeTool && (
           <motion.div
             key={activeTool}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, x: slideDir * 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: slideDir * -40 }}
+            transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
           >
-            {activeTool === 'letter'   && <Family51LetterDecoder   accentColor="#f97316" onResult={recordUse} />}
-            {activeTool === 'reply'    && <Family51ReplyWriter     accentColor="#06b6d4" onResult={recordUse} />}
-            {activeTool === 'conflict' && <Family51ConflictHelper  accentColor="#ef4444" onResult={recordUse} />}
+            {/* TOOL TITLE BAR */}
+            <div style={{ marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
+                {activeTool === 'letter' ? '📄 DECODE A LETTER' : activeTool === 'reply' ? '✉️ WRITE MY REPLY' : '⚡ DISPUTE HELP'}
+              </p>
+            </div>
+
+            {activeTool === 'letter' && (
+              <Family51LetterDecoder
+                accentColor="#f97316"
+                onResult={recordUse}
+                onHandoff={(data) => handleToolOpen('reply', data)}
+              />
+            )}
+            {activeTool === 'reply' && (
+              <Family51ReplyWriter
+                accentColor="#06b6d4"
+                onResult={recordUse}
+                prefillContext={prefillContext}
+                onHandoff={() => handleToolOpen('conflict')}
+              />
+            )}
+            {activeTool === 'conflict' && (
+              <Family51ConflictHelper
+                accentColor="#ef4444"
+                onResult={recordUse}
+                prefillContext={prefillContext}
+              />
+            )}
+
+            {/* BOTTOM NAV — switch tools without going back */}
+            <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
+              {[
+                { id: 'letter',   label: 'DECODE', color: '#f97316' },
+                { id: 'reply',    label: 'REPLY',  color: '#06b6d4' },
+                { id: 'conflict', label: 'DISPUTE', color: '#ef4444' },
+              ].map(t => (
+                <button
+                  key={t.id}
+                  onClick={() => handleToolOpen(t.id)}
+                  style={{
+                    flex: 1, padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
+                    letterSpacing: '0.1em', cursor: 'pointer', transition: 'all 0.15s',
+                    border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(255,255,255,0.08)'}`,
+                    background: activeTool === t.id ? `${t.color}15` : 'transparent',
+                    color: activeTool === t.id ? t.color : 'rgba(255,255,255,0.3)',
+                  }}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
           </motion.div>
         )}
 

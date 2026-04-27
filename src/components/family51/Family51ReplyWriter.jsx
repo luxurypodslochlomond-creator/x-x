@@ -18,9 +18,12 @@ const TONES = [
   { id: 'formal', label: 'FORMAL',  desc: 'Legal weight.' },
 ];
 
-export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult }) {
+export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff }) {
   const [situation, setSituation] = useState('');
-  const [context, setContext]     = useState('');
+  const [context, setContext]     = useState(() => {
+    if (!prefillContext) return '';
+    return `Replying to: ${prefillContext.sender || 'unknown sender'}\nLetter summary: ${prefillContext.summary || ''}\n${prefillContext.deadline && prefillContext.deadline !== 'No deadline mentioned' ? `Key deadline: ${prefillContext.deadline}\n` : ''}${prefillContext.what_this_means ? `\nBackground: ${prefillContext.what_this_means}` : ''}`;
+  });
   const [tone, setTone]           = useState('firm');
   const [name, setName]           = useState('');
   const [loading, setLoading]     = useState(false);
@@ -38,9 +41,10 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult 
 
     const t = TONES.find(x => x.id === tone);
 
+    const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
+      prompt: `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}
@@ -91,6 +95,16 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
   return (
     <div className="space-y-5">
+
+      {/* PREFILL BANNER — shown when handed off from decoder */}
+      {prefillContext && (
+        <div style={{ padding: '10px 14px', borderRadius: 10, background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.25)', display: 'flex', gap: 10, alignItems: 'center' }}>
+          <span style={{ fontSize: 14 }}>✓</span>
+          <p style={{ fontSize: 11, color: 'rgba(6,182,212,0.9)', margin: 0, fontWeight: 700, letterSpacing: '0.05em' }}>
+            Pre-loaded from your decoded letter — edit if needed, then write.
+          </p>
+        </div>
+      )}
 
       {/* GEO SELECTOR */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
@@ -233,6 +247,25 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
                 WRITE ANOTHER
               </motion.button>
             </div>
+
+            {/* HANDOFF — escalate to dispute help */}
+            {onHandoff && (
+              <motion.button
+                onClick={onHandoff}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  width: '100%', padding: '14px 0', borderRadius: 12, fontSize: 12,
+                  fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer',
+                  border: '1px solid rgba(239,68,68,0.4)',
+                  background: 'rgba(239,68,68,0.08)', color: '#ef4444',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                  transition: 'all 0.15s',
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                THEY IGNORED ME — GET DISPUTE HELP
+              </motion.button>
+            )}
 
             {/* EMAIL TO SELF */}
             <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
