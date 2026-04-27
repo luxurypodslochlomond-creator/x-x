@@ -333,68 +333,69 @@ Return a JSON object with these EXACT fields:
               </div>
             )}
 
-            {/* WE HEAR YOU */}
+            {/* 1. REASSURANCE FIRST — for the scared person */}
             {result.we_hear_you && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                <span style={{ fontSize: 18, flexShrink: 0 }}>💙</span>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, margin: 0, fontStyle: 'italic' }}>{result.we_hear_you}</p>
+              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                <span style={{ fontSize: 20, flexShrink: 0 }}>💙</span>
+                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0, fontStyle: 'italic' }}>{result.we_hear_you}</p>
               </div>
             )}
 
+            {/* 2. PLAIN ENGLISH — what is this thing */}
             <ResultCard label="WHAT THIS MEANS" color={accentColor}>
-              <p style={{ fontSize: 14, color: '#fff', lineHeight: 1.65, margin: 0 }}>{result.what_this_means}</p>
+              <p style={{ fontSize: 15, color: '#fff', lineHeight: 1.7, margin: 0 }}>{result.what_this_means}</p>
             </ResultCard>
 
-            {/* FINANCIAL IMPACT — only show if there's real info */}
-            {result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                <span style={{ fontSize: 18, flexShrink: 0 }}>💰</span>
-                <div>
-                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(239,68,68,0.6)', margin: '0 0 6px' }}>MONEY AT STAKE</p>
-                  <p style={{ fontSize: 13, color: '#fff', lineHeight: 1.55, margin: 0 }}>{result.financial_impact}</p>
-                </div>
-              </div>
-            )}
-
-            {/* IF YOU IGNORE THIS */}
-            {result.if_you_ignore_this && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(249,115,22,0.06)', border: '1px solid rgba(249,115,22,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                <span style={{ fontSize: 18, flexShrink: 0 }}>⚠️</span>
-                <div>
-                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(249,115,22,0.7)', margin: '0 0 6px' }}>IF YOU IGNORE THIS</p>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55, margin: 0 }}>{result.if_you_ignore_this}</p>
-                </div>
-              </div>
-            )}
-
+            {/* 3. WHAT TO DO — the most important thing after understanding */}
             <ResultCard label="WHAT TO DO — STEP BY STEP" color={accentColor}>
-              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {result.action_steps?.map((step, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', paddingBottom: i < (result.action_steps.length - 1) ? 12 : 0, borderBottom: i < (result.action_steps.length - 1) ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-                    <span style={{ fontSize: 12, fontWeight: 900, color: accentColor, minWidth: 22, paddingTop: 1, background: `${accentColor}15`, borderRadius: 6, padding: '2px 6px', textAlign: 'center', flexShrink: 0 }}>{i + 1}</span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>{step}</span>
+                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', paddingBottom: i < (result.action_steps.length - 1) ? 14 : 0, borderBottom: i < (result.action_steps.length - 1) ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                    <span style={{ fontSize: 11, fontWeight: 900, color: '#000', minWidth: 22, height: 22, background: accentColor, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>{i + 1}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 1.65 }}>{step}</span>
                   </li>
                 ))}
               </ol>
             </ResultCard>
 
-            {/* FREE HELP */}
+            {/* 4. FREE HELP — right after steps, people need to know help exists */}
             {result.free_help?.length > 0 && (
-              <ResultCard label="FREE HELP AVAILABLE" color="#22c55e">
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.2)' }}>
+                <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(34,197,94,0.7)', margin: '0 0 10px' }}>🆓 FREE HELP NEAR YOU</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {result.free_help.map((help, i) => (
-                    <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span style={{ fontSize: 14, flexShrink: 0 }}>🆓</span>
-                      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{help}</p>
-                    </div>
+                    <p key={i} style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0, paddingLeft: 4, borderLeft: '2px solid rgba(34,197,94,0.3)' }}>{help}</p>
                   ))}
                 </div>
-              </ResultCard>
+              </div>
             )}
 
-            <ResultCard label="DON'T PANIC" color={accentColor}>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0 }}>{result.dont_panic}</p>
-            </ResultCard>
+            {/* 5. CONSEQUENCES — collapse into a lower section so it informs without scaring upfront */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' && (
+                <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.2)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: 16, flexShrink: 0 }}>💰</span>
+                  <div>
+                    <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(239,68,68,0.5)', margin: '0 0 4px' }}>MONEY AT STAKE</p>
+                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{result.financial_impact}</p>
+                  </div>
+                </div>
+              )}
+              {result.if_you_ignore_this && (
+                <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(249,115,22,0.05)', border: '1px solid rgba(249,115,22,0.2)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: 16, flexShrink: 0 }}>⚠️</span>
+                  <div>
+                    <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(249,115,22,0.6)', margin: '0 0 4px' }}>IF YOU IGNORE THIS</p>
+                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{result.if_you_ignore_this}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* 6. CLOSING REASSURANCE */}
+            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', textAlign: 'center' }}>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, margin: 0 }}>✓ {result.dont_panic}</p>
+            </div>
 
             {/* ACTIONS */}
             <div style={{ display: 'flex', gap: 10, paddingTop: 4 }}>
