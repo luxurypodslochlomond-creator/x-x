@@ -43,7 +43,7 @@ export default function SortedPrivacy() {
   }, []);
 
   return (
-    <div style={{ padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif', color: '#fff' }}>
       <div style={{ maxWidth: 680, margin: '0 auto' }}>
 
       {/* Header */}

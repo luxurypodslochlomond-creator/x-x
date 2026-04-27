@@ -10,7 +10,7 @@ export default function SortedTermsPage() {
   }, []);
 
   return (
-    <div style={{ padding: '40px 20px', fontSize: '16px', lineHeight: 1.6, fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '40px 20px', fontSize: '16px', lineHeight: 1.6, fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#fff' }}>
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
       <div style={{ marginBottom: 40 }}>
         <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 8, color: '#f97316' }}>SORTED</h1>
