@@ -42,7 +42,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
   const runDecode = async (fileUrl, text) => {
     setLoading(true);
-    setUploading(false); // ensure uploading clears when loading takes over
+    setUploading(false);
     setResult(null);
     setDecodeError(null);
     try {
@@ -50,14 +50,22 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const currentType = letterTypeRef.current;
       const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const geoContext = `Today's date is ${today}. The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response. When calculating how urgent a deadline is, use today's date as your reference.`;
-      const promptText = fileUrl
-        ? `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${currentType ? ` (type: ${currentType})` : ''}. Read it carefully and help them understand it.`
-        : `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${text}`;
 
-      // Use gemini for image files (supports vision + JSON schema), claude for text
-      const modelToUse = fileUrl ? 'gemini_3_1_pro' : 'claude_sonnet_4_6';
+      // If file uploaded: extract text first, then decode as plain text — no file_urls needed
+      let letterContent = text;
+      if (fileUrl) {
+        const extracted = await base44.integrations.Core.ExtractDataFromUploadedFile({
+          file_url: fileUrl,
+          json_schema: { type: 'object', properties: { full_text: { type: 'string' } } },
+        });
+        letterContent = extracted?.output?.full_text || extracted?.output || text || '';
+        if (!letterContent) throw new Error('Could not read the file. Please try a clearer photo or paste the text instead.');
+      }
+
+      const promptText = `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterContent}`;
+
       const response = await base44.integrations.Core.InvokeLLM({
-        model: modelToUse,
+        model: 'claude_sonnet_4_6',
         prompt: promptText + `\n\nThis person may be stressed, scared, or overwhelmed. Your job is to be their brilliant, straight-talking friend who happens to know the law — not a robot, not a disclaimer machine. Be specific. Be human. Give REAL information that actually helps.
 
 CRITICAL ANTI-HALLUCINATION RULES:
@@ -81,7 +89,6 @@ Return a JSON object with these EXACT fields:
 - action_steps: Array of exactly 5 specific steps. Real actions, real phone numbers, real websites relevant to their jurisdiction. E.g. not "contact your local council" but "Call Hackney Council's debt team on 020 8356 3000 — open Mon-Fri 9am-5pm. Ask to set up a payment plan." Include one free advice service by name and contact details.
 - free_help: Array of exactly 2-3 FREE services that can help with THIS specific type of letter in their jurisdiction. Each entry: the service name, what they do, and how to reach them. E.g. "Citizens Advice — free legal guidance on debt and council tax — visit citizensadvice.org.uk or call 0800 144 8848". Be specific to their country/region.
 - dont_panic: One honest, direct reassuring sentence. Acknowledge the situation is real but that it's manageable. Don't be fake or corporate.`,
-        ...(fileUrl ? { file_urls: [fileUrl] } : {}),
         response_json_schema: {
           type: 'object',
           properties: {
