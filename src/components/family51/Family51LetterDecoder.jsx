@@ -65,7 +65,6 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const promptText = `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterContent}`;
 
       const response = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
         prompt: promptText + `\n\nThis person may be stressed, scared, or overwhelmed. Your job is to be their brilliant, straight-talking friend who happens to know the law — not a robot, not a disclaimer machine. Be specific. Be human. Give REAL information that actually helps.
 
 CRITICAL ANTI-HALLUCINATION RULES:
@@ -186,33 +185,42 @@ Return a JSON object with these EXACT fields:
               display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20,
             }}
           >
-            {/* SORTED lock icon animated */}
+            {/* Lock icon pulsing */}
             <motion.div
-              animate={{ scale: [1, 1.08, 1] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
                 <rect x="3" y="11" width="18" height="11" rx="2" stroke={accentColor} strokeWidth="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke={accentColor} strokeWidth="2" strokeLinecap="round"/>
-                <circle cx="12" cy="16" r="1.5" fill={accentColor}/>
+                <motion.circle
+                  cx="12" cy="16" r="1.5" fill={accentColor}
+                  animate={{ r: [1.5, 2.5, 1.5] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                />
               </svg>
             </motion.div>
+
+            {/* Scanning document lines */}
+            <div style={{ width: '100%', maxWidth: 220, display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {[0.9, 0.7, 1, 0.5, 0.8].map((w, i) => (
+                <div key={i} style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.06)', overflow: 'hidden', width: `${w * 100}%` }}>
+                  <motion.div
+                    style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`, borderRadius: 3 }}
+                    animate={{ x: ['-100%', '200%'] }}
+                    transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.18, ease: 'easeInOut' }}
+                  />
+                </div>
+              ))}
+            </div>
+
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.15em', color: '#fff', margin: '0 0 6px' }}>
+              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.15em', color: '#fff', margin: '0 0 4px' }}>
                 {uploading ? 'READING YOUR FILE' : 'DECODING'}
               </p>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.04em', margin: 0 }}>
-                {uploading ? 'Uploading securely' : 'AI is reading every word — 15–30 seconds'}
+                {uploading ? 'Uploading securely' : 'AI reading every word — 15–30 sec'}
               </p>
-            </div>
-            {/* progress bar */}
-            <div style={{ width: '100%', maxWidth: 200, height: 2, background: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden' }}>
-              <motion.div
-                style={{ height: '100%', background: accentColor, borderRadius: 2 }}
-                animate={{ x: ['-100%', '100%'] }}
-                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-              />
             </div>
           </motion.div>
         )}
