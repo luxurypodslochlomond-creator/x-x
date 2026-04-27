@@ -527,6 +527,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Press Center", url: createPageUrl("PetSounds51Press"), icon: FileText, highlight: true, description: "For journalists" },
       { title: "Marketing Assets", url: createPageUrl("PetSounds51MarketingAssets"), icon: Image, highlight: true, description: "Download graphics" },
       { title: "Live Dataset", url: createPageUrl("PetSounds51Data"), icon: Activity, highlight: true, description: "Response data" },
+      { title: "📄 Investor Brief", url: createPageUrl("PetSounds51InvestorPress"), icon: FileText, highlight: true, description: "ESG · B2B · vet partnerships" },
       { title: "Terms", url: createPageUrl("PetSounds51Terms"), icon: Scale },
       { title: "Privacy", url: createPageUrl("PetSounds51Privacy"), icon: Eye },
     ];
@@ -549,6 +550,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Decode a Letter", url: createPageUrl("Family51"), icon: FileText, highlight: true, description: "Plain English advice" },
       { title: "Write a Reply", url: createPageUrl("Family51"), icon: Mail, highlight: true, description: "Draft responses" },
       { title: "Resolve Conflict", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Navigate disputes" },
+      { title: "📄 Investor Brief", url: createPageUrl("SortedInvestorPress"), icon: FileText, highlight: true, description: "ESG · B2B · financial services" },
       { title: "Terms", url: "/SortedTerms", icon: Scale },
       { title: "Privacy", url: "/SortedPrivacy", icon: Eye },
     ];

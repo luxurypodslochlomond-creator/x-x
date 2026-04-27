@@ -57,6 +57,8 @@ const Family51PrivacyPage = React.lazy(() => import('./pages/Family51Privacy'));
 const SortedTermsPage = React.lazy(() => import('./pages/SortedTerms'));
 const SortedPrivacyPage = React.lazy(() => import('./pages/SortedPrivacy'));
 const SortedPressReleasePage = React.lazy(() => import('./pages/SortedPressRelease.jsx'));
+const SortedInvestorPressPage = React.lazy(() => import('./pages/SortedInvestorPress'));
+const PetSounds51InvestorPressPage = React.lazy(() => import('./pages/PetSounds51InvestorPress'));
 const SortedPartnerKitPage = React.lazy(() => import('./pages/SortedPartnerKit'));
 const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
@@ -164,6 +166,8 @@ const AuthenticatedApp = () => {
       <Route path="/SortedTerms" element={<SortedTermsPage />} />
       <Route path="/SortedPrivacy" element={<SortedPrivacyPage />} />
       <Route path="/SortedPressRelease" element={<SortedPressReleasePage />} />
+      <Route path="/SortedInvestorPress" element={<SortedInvestorPressPage />} />
+      <Route path="/PetSounds51InvestorPress" element={<PetSounds51InvestorPressPage />} />
       <Route path="/SortedPartnerKit" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING PARTNER KIT" />}><SortedPartnerKitPage /></Suspense>} />
       <Route path="/ST51" element={<LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper>} />
       <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper>} />
