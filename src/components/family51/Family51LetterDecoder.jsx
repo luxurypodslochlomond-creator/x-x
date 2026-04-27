@@ -56,21 +56,25 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
         prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return a JSON object with these exact fields:
-- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
+- letter_summary: Max 6 words describing what this letter is about. E.g. "Council tax debt demand" or "NHS appointment confirmation". Be specific.
+- sender: Who sent this letter (organisation name, or "Unknown" if unclear)
 - severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence on why that rating
-- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
 - key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
+- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
+- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
 - dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
         ...(fileUrl ? { file_urls: [fileUrl] } : {}),
         response_json_schema: {
           type: 'object',
           properties: {
-            what_this_means:      { type: 'string' },
+            letter_summary:       { type: 'string' },
+            sender:               { type: 'string' },
             severity:             { type: 'string' },
             severity_explanation: { type: 'string' },
-            action_steps:         { type: 'array', items: { type: 'string' } },
             key_deadline:         { type: 'string' },
+            what_this_means:      { type: 'string' },
+            action_steps:         { type: 'array', items: { type: 'string' } },
             dont_panic:           { type: 'string' },
           },
         },
@@ -288,14 +292,31 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
         {result && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
-            {/* SEVERITY */}
+            {/* AT A GLANCE — top summary card */}
             {sev && (
-              <div style={{ background: sev.bg, border: `1px solid ${sev.border}`, borderRadius: 12, padding: '14px 18px' }}>
-                <div className="flex items-center justify-between mb-1">
-                  <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: sev.color }}>SEVERITY</span>
-                  <span style={{ fontSize: 13, fontWeight: 900, color: sev.color, letterSpacing: '0.05em' }}>{result.severity}</span>
+              <div style={{ background: sev.bg, border: `2px solid ${sev.border}`, borderRadius: 14, padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {/* Header row */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>AT A GLANCE</span>
+                  <span style={{ fontSize: 11, fontWeight: 900, color: sev.color, letterSpacing: '0.1em', padding: '3px 10px', borderRadius: 20, border: `1px solid ${sev.color}50`, background: `${sev.color}15` }}>{result.severity}</span>
                 </div>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', margin: 0 }}>{result.severity_explanation}</p>
+                {/* What is it */}
+                <div>
+                  <p style={{ fontSize: 18, fontWeight: 900, color: '#fff', margin: 0, lineHeight: 1.2, letterSpacing: '-0.01em' }}>{result.letter_summary || 'Official letter'}</p>
+                  {result.sender && result.sender !== 'Unknown' && (
+                    <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: '4px 0 0', letterSpacing: '0.04em' }}>From: {result.sender}</p>
+                  )}
+                </div>
+                {/* Deadline row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', borderRadius: 10, background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <span style={{ fontSize: 15 }}>📅</span>
+                  <div>
+                    <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', display: 'block' }}>KEY DATE</span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: result.key_deadline === 'No deadline mentioned' ? 'rgba(255,255,255,0.4)' : '#fff' }}>{result.key_deadline}</span>
+                  </div>
+                </div>
+                {/* Why urgent */}
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>{result.severity_explanation}</p>
               </div>
             )}
 
