@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -28,6 +28,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [name, setName]           = useState('');
   const [loading, setLoading]     = useState(false);
   const [result, setResult]       = useState(null);
+  const [resultTone, setResultTone] = useState(null);
   const [copied, setCopied]       = useState(false);
   const [emailAddr, setEmailAddr] = useState('');
   const [emailSent, setEmailSent] = useState(false);
@@ -80,6 +81,7 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
     const response = await generateLetter(tone);
     setResult(response);
+    setResultTone(tone);
     setLoading(false);
     onResult?.();
   };
@@ -92,6 +94,14 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
     setAlternatives([...alternatives, response]);
     setLoading(false);
   };
+
+  // Auto-regenerate if tone changes after generating
+  useEffect(() => {
+    if (result && resultTone && tone !== resultTone && !loading) {
+      regenerateWithDifferentTone(tone);
+      setResultTone(tone);
+    }
+  }, [tone, result, resultTone, loading]);
 
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
