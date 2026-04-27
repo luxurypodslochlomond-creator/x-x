@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import SortedLoader from './components/family51/SortedLoader';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -163,12 +164,12 @@ const AuthenticatedApp = () => {
       <Route path="/Sorted" element={<Family51Page />} />
       <Route path="/Family51Terms" element={<Family51TermsPage />} />
       <Route path="/Family51Privacy" element={<Family51PrivacyPage />} />
-      <Route path="/SortedTerms" element={<SortedTermsPage />} />
-      <Route path="/SortedPrivacy" element={<SortedPrivacyPage />} />
-      <Route path="/SortedPressRelease" element={<SortedPressReleasePage />} />
-      <Route path="/SortedInvestorPress" element={<SortedInvestorPressPage />} />
-      <Route path="/PetSounds51InvestorPress" element={<PetSounds51InvestorPressPage />} />
-      <Route path="/SortedPartnerKit" element={<LayoutWrapper currentPageName="SortedPartnerKit"><SortedPartnerKitPage /></LayoutWrapper>} />
+      <Route path="/SortedTerms" element={<Suspense fallback={<SortedLoader />}><SortedTermsPage /></Suspense>} />
+      <Route path="/SortedPrivacy" element={<Suspense fallback={<SortedLoader />}><SortedPrivacyPage /></Suspense>} />
+      <Route path="/SortedPressRelease" element={<Suspense fallback={<SortedLoader />}><SortedPressReleasePage /></Suspense>} />
+      <Route path="/SortedInvestorPress" element={<Suspense fallback={<SortedLoader />}><SortedInvestorPressPage /></Suspense>} />
+      <Route path="/PetSounds51InvestorPress" element={<Suspense fallback={<SortedLoader />}><PetSounds51InvestorPressPage /></Suspense>} />
+      <Route path="/SortedPartnerKit" element={<Suspense fallback={<SortedLoader />}><LayoutWrapper currentPageName="SortedPartnerKit"><SortedPartnerKitPage /></LayoutWrapper></Suspense>} />
       <Route path="/ST51" element={<LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper>} />
       <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper>} />
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper>} />
