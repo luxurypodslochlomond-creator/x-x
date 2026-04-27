@@ -275,7 +275,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRTarget />} text="Exact steps to take, and by when — no walls of text" />
                 <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & relevant bodies automatically" />
                 <WhyRow icon={<WRLock />} text="Your letter is processed by AI and immediately discarded — never stored, never sold, never used to train anything" />
-                <WhyRow icon={<WRMail />} text="Email the breakdown to yourself, a family member, or a solicitor" />
+                <WhyRow icon={<WRMail />} text="Email the plain-English breakdown to yourself — then forward it to a family member, solicitor, or advice worker. We never email third parties on your behalf (that would risk your privacy)." />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
                 3 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>£9.99/month</strong> if you want unlimited. Cancel anytime.
