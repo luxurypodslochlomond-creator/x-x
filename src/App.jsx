@@ -119,70 +119,70 @@ const AuthenticatedApp = () => {
           }
         />
       ))}
-      <Route path="/CorporateBuyer" element={<LayoutWrapper currentPageName="CorporateBuyer"><CorporateBuyerPage /></LayoutWrapper>} />
-      <Route path="/Draw51" element={<LayoutWrapper currentPageName="Draw51"><Draw51Page /></LayoutWrapper>} />
-      <Route path="/CheeseAndOnionBake" element={<CheeseAndOnionBakePage />} />
-      <Route path="/CB51Terms" element={<CB51TermsPage />} />
-      <Route path="/CB51Privacy" element={<CB51PrivacyPage />} />
-      <Route path="/Stoneymollan" element={<LayoutWrapper currentPageName="Stoneymollan"><StoneymollanPage /></LayoutWrapper>} />
-      <Route path="/PetSounds51ResearchOutreach" element={<LayoutWrapper currentPageName="PetSounds51ResearchOutreach"><PetSounds51ResearchOutreach /></LayoutWrapper>} />
-      <Route path="/PetSounds51" element={<LayoutWrapper currentPageName="PetSounds51"><Suspense fallback={<COOLASFUCK8BitLoading message="LOADING PETSOUNDS51" />}><PetSounds51 /></Suspense></LayoutWrapper>} />
-      <Route path="/CB51CalendarView" element={<LayoutWrapper currentPageName="CB51CalendarView"><CB51CalendarView /></LayoutWrapper>} />
-      <Route path="/CB51MessageInbox" element={<LayoutWrapper currentPageName="CB51MessageInbox"><CB51MessageInbox /></LayoutWrapper>} />
-      <Route path="/CB51FinanceAdmin" element={<LayoutWrapper currentPageName="CB51FinanceAdmin"><CB51FinanceAdmin /></LayoutWrapper>} />
-      <Route path="/CB51Todo" element={<LayoutWrapper currentPageName="CB51Todo"><CB51Todo /></LayoutWrapper>} />
-      <Route path="/ScottFinanceAdmin" element={<LayoutWrapper currentPageName="ScottFinanceAdmin"><ScottFinanceAdmin /></LayoutWrapper>} />
-      <Route path="/StoneymollanMarketing" element={<LayoutWrapper currentPageName="StoneymollanMarketing"><StoneymollanMarketing /></LayoutWrapper>} />
-      <Route path="/PetSounds51Landing" element={<LayoutWrapper currentPageName="PetSounds51Landing"><PetSounds51Landing /></LayoutWrapper>} />
-      <Route path="/AI51SoulDataset" element={<LayoutWrapper currentPageName="AI51SoulDataset"><AI51SoulDataset /></LayoutWrapper>} />
-      <Route path="/PetSounds51PartnerBrief" element={<LayoutWrapper currentPageName="PetSounds51PartnerBrief"><PetSounds51PartnerBrief /></LayoutWrapper>} />
-      <Route path="/PetSounds51Whitepaper" element={<LayoutWrapper currentPageName="PetSounds51Whitepaper"><PetSounds51Whitepaper /></LayoutWrapper>} />
-      <Route path="/PetSounds51Press" element={<LayoutWrapper currentPageName="PetSounds51Press"><PetSounds51Press /></LayoutWrapper>} />
-      <Route path="/PetSounds51Data" element={<LayoutWrapper currentPageName="PetSounds51Data"><PetSounds51Data /></LayoutWrapper>} />
-      <Route path="/PetSounds51MarketingAssets" element={<LayoutWrapper currentPageName="PetSounds51MarketingAssets"><PetSounds51MarketingAssets /></LayoutWrapper>} />
-      <Route path="/Trackt" element={<LayoutWrapper currentPageName="Trackt"><TracktPage /></LayoutWrapper>} />
-      <Route path="/TracktAbout" element={<LayoutWrapper currentPageName="TracktAbout"><TracktAboutPage /></LayoutWrapper>} />
-      <Route path="/TracktRoadmap" element={<LayoutWrapper currentPageName="TracktRoadmap"><TracktRoadmapPage /></LayoutWrapper>} />
-      <Route path="/TracktHowItWorks" element={<LayoutWrapper currentPageName="TracktHowItWorks"><TracktHowItWorksPage /></LayoutWrapper>} />
-      <Route path="/TracktWhyBuy" element={<LayoutWrapper currentPageName="TracktWhyBuy"><TracktWhyBuyPage /></LayoutWrapper>} />
-      <Route path="/TracktPricing" element={<LayoutWrapper currentPageName="TracktPricing"><TracktPricingPage /></LayoutWrapper>} />
-      <Route path="/TracktTerms" element={<LayoutWrapper currentPageName="TracktTerms"><TracktTermsPage /></LayoutWrapper>} />
-      <Route path="/TracktPrivacy" element={<LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper>} />
-      <Route path="/TracktDashboard" element={<LayoutWrapper currentPageName="TracktDashboard"><TracktDashboardPage /></LayoutWrapper>} />
-      <Route path="/BuzzStop" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPage /></LayoutWrapper>} />
-      <Route path="/BuzzStopAbout" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopAboutPage /></LayoutWrapper>} />
-      <Route path="/BuzzStopTerms" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopTermsPage /></LayoutWrapper>} />
-      <Route path="/BuzzStopPrivacy" element={<LayoutWrapper currentPageName="BuzzStop"><BuzzStopPrivacyPage /></LayoutWrapper>} />
-      <Route path="/FreqLift51Whitepaper" element={<LayoutWrapper currentPageName="FreqLift51Whitepaper"><FreqLift51WhitepaperPage /></LayoutWrapper>} />
-      <Route path="/FreqLift51Lab" element={<FreqLift51LabPage />} />
-      <Route path="/WristHealingProtocol" element={<WristHealingProtocolPage />} />
-      <Route path="/WristHealingAbout" element={<WristHealingAboutPage />} />
-      <Route path="/WristHealingTerms" element={<WristHealingTermsPage />} />
-      <Route path="/WristHealingPrivacy" element={<WristHealingPrivacyPage />} />
-      <Route path="/Shed51" element={<Shed51Page />} />
-      <Route path="/Family51" element={<Family51Page />} />
-      <Route path="/Sorted" element={<Family51Page />} />
-      <Route path="/Family51Terms" element={<Family51TermsPage />} />
-      <Route path="/Family51Privacy" element={<Family51PrivacyPage />} />
+      <Route path="/CorporateBuyer" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CorporateBuyer"><CorporateBuyerPage /></LayoutWrapper></Suspense>} />
+      <Route path="/Draw51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="Draw51"><Draw51Page /></LayoutWrapper></Suspense>} />
+      <Route path="/CheeseAndOnionBake" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><CheeseAndOnionBakePage /></Suspense>} />
+      <Route path="/CB51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><CB51TermsPage /></Suspense>} />
+      <Route path="/CB51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><CB51PrivacyPage /></Suspense>} />
+      <Route path="/Stoneymollan" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="Stoneymollan"><StoneymollanPage /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51ResearchOutreach" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="PetSounds51ResearchOutreach"><PetSounds51ResearchOutreach /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING PETSOUNDS51" />}><LayoutWrapper currentPageName="PetSounds51"><PetSounds51 /></LayoutWrapper></Suspense>} />
+      <Route path="/CB51CalendarView" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CB51CalendarView"><CB51CalendarView /></LayoutWrapper></Suspense>} />
+      <Route path="/CB51MessageInbox" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CB51MessageInbox"><CB51MessageInbox /></LayoutWrapper></Suspense>} />
+      <Route path="/CB51FinanceAdmin" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CB51FinanceAdmin"><CB51FinanceAdmin /></LayoutWrapper></Suspense>} />
+      <Route path="/CB51Todo" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CB51Todo"><CB51Todo /></LayoutWrapper></Suspense>} />
+      <Route path="/ScottFinanceAdmin" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="ScottFinanceAdmin"><ScottFinanceAdmin /></LayoutWrapper></Suspense>} />
+      <Route path="/StoneymollanMarketing" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="StoneymollanMarketing"><StoneymollanMarketing /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51Landing" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="PetSounds51Landing"><PetSounds51Landing /></LayoutWrapper></Suspense>} />
+      <Route path="/AI51SoulDataset" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AI51SoulDataset"><AI51SoulDataset /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51PartnerBrief" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="PetSounds51PartnerBrief"><PetSounds51PartnerBrief /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51Whitepaper" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="PetSounds51Whitepaper"><PetSounds51Whitepaper /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51Press" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="PetSounds51Press"><PetSounds51Press /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51Data" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="PetSounds51Data"><PetSounds51Data /></LayoutWrapper></Suspense>} />
+      <Route path="/PetSounds51MarketingAssets" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="PetSounds51MarketingAssets"><PetSounds51MarketingAssets /></LayoutWrapper></Suspense>} />
+      <Route path="/Trackt" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="Trackt"><TracktPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktAbout" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktAbout"><TracktAboutPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktRoadmap" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktRoadmap"><TracktRoadmapPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktHowItWorks" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktHowItWorks"><TracktHowItWorksPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktWhyBuy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktWhyBuy"><TracktWhyBuyPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktPricing" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktPricing"><TracktPricingPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktTerms"><TracktTermsPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper></Suspense>} />
+      <Route path="/TracktDashboard" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktDashboard"><TracktDashboardPage /></LayoutWrapper></Suspense>} />
+      <Route path="/BuzzStop" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopPage /></LayoutWrapper></Suspense>} />
+      <Route path="/BuzzStopAbout" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopAboutPage /></LayoutWrapper></Suspense>} />
+      <Route path="/BuzzStopTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopTermsPage /></LayoutWrapper></Suspense>} />
+      <Route path="/BuzzStopPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopPrivacyPage /></LayoutWrapper></Suspense>} />
+      <Route path="/FreqLift51Whitepaper" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="FreqLift51Whitepaper"><FreqLift51WhitepaperPage /></LayoutWrapper></Suspense>} />
+      <Route path="/FreqLift51Lab" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><FreqLift51LabPage /></Suspense>} />
+      <Route path="/WristHealingProtocol" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><WristHealingProtocolPage /></Suspense>} />
+      <Route path="/WristHealingAbout" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><WristHealingAboutPage /></Suspense>} />
+      <Route path="/WristHealingTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><WristHealingTermsPage /></Suspense>} />
+      <Route path="/WristHealingPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><WristHealingPrivacyPage /></Suspense>} />
+      <Route path="/Shed51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Shed51Page /></Suspense>} />
+      <Route path="/Family51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51Page /></Suspense>} />
+      <Route path="/Sorted" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51Page /></Suspense>} />
+      <Route path="/Family51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51TermsPage /></Suspense>} />
+      <Route path="/Family51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51PrivacyPage /></Suspense>} />
       <Route path="/SortedTerms" element={<Suspense fallback={<SortedLoader />}><SortedTermsPage /></Suspense>} />
       <Route path="/SortedPrivacy" element={<Suspense fallback={<SortedLoader />}><SortedPrivacyPage /></Suspense>} />
       <Route path="/SortedPressRelease" element={<Suspense fallback={<SortedLoader />}><SortedPressReleasePage /></Suspense>} />
       <Route path="/SortedInvestorPress" element={<Suspense fallback={<SortedLoader />}><SortedInvestorPressPage /></Suspense>} />
       <Route path="/PetSounds51InvestorPress" element={<Suspense fallback={<SortedLoader />}><PetSounds51InvestorPressPage /></Suspense>} />
       <Route path="/SortedPartnerKit" element={<Suspense fallback={<SortedLoader />}><LayoutWrapper currentPageName="SortedPartnerKit"><SortedPartnerKitPage /></LayoutWrapper></Suspense>} />
-      <Route path="/ST51" element={<LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper>} />
-      <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper>} />
-      <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper>} />
-      <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminStoneymollanLegalPage /></LayoutWrapper>} />
-      <Route path="/AI51Soul" element={<LayoutWrapper currentPageName="AI51Soul"><AI51SoulPage /></LayoutWrapper>} />
-      <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminPWAPushGuidePage /></LayoutWrapper>} />
+      <Route path="/ST51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper></Suspense>} />
+      <Route path="/AdminHMRCTracker" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper></Suspense>} />
+      <Route path="/AdminLogoUpload" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper></Suspense>} />
+      <Route path="/AdminStoneymollanLegal" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminStoneymollanLegalPage /></LayoutWrapper></Suspense>} />
+      <Route path="/AI51Soul" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AI51Soul"><AI51SoulPage /></LayoutWrapper></Suspense>} />
+      <Route path="/AdminPWAPushGuide" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminPWAPushGuidePage /></LayoutWrapper></Suspense>} />
       {/* ── MAGIC51/LEARN51 — same page, no layout ── */}
-      <Route path="/Learn51" element={<Magic51Page />} />
-      <Route path="/Magic51" element={<Magic51Page />} />
-      <Route path="/Learn" element={<Magic51Page />} />
+      <Route path="/Learn51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Magic51Page /></Suspense>} />
+      <Route path="/Magic51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Magic51Page /></Suspense>} />
+      <Route path="/Learn" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Magic51Page /></Suspense>} />
 
       {/* ── LEARN51 — own layout, no UF51 nav ── */}
-      <Route element={<Learn51Layout />}>
+      <Route element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Learn51Layout /></Suspense>}>
         <Route path="/AskMeAnything" element={<AskMeAnythingPage />} />
         <Route path="/Learn51About" element={<Learn51AboutPage />} />
         <Route path="/Literacy51" element={<Literacy51Page />} />
@@ -195,7 +195,7 @@ const AuthenticatedApp = () => {
         <Route path="/YoungWarriors" element={<YoungWarriorsPage />} />
         <Route path="/SupportLearn51" element={<SupportLearn51Page />} />
       </Route>
-      <Route path="/Platform" element={<LayoutWrapper currentPageName="Platform"><PlatformPage /></LayoutWrapper>} />
+      <Route path="/Platform" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="Platform"><PlatformPage /></LayoutWrapper></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
