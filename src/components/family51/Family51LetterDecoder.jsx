@@ -98,18 +98,21 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
+    setLoading(true); // set both immediately so there's no gap in the loader
     setDecodeError(null);
+    setResult(null);
     try {
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
       setUploadedFileUrl(file_url);
       setLetterText('[Photo/file uploaded — AI will read it directly]');
+      setUploading(false); // file uploaded, now just decoding
       await runDecode(file_url, null);
     } catch (err) {
       console.error('SORTED upload error:', err);
       setDecodeError(`Upload failed: ${err?.message || 'Could not upload file'}. Please try again.`);
       setUploading(false);
+      setLoading(false);
     }
-    // Reset file input so the same file can be re-selected if needed
     e.target.value = '';
   };
 
@@ -146,7 +149,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
       {/* FULL SCREEN LOADER */}
       <AnimatePresence>
         {(loading || uploading) && (
-          <SortedLoader color={accentColor} text={uploading ? 'READING YOUR FILE…' : 'DECODING YOUR LETTER…'} />
+          <SortedLoader color={accentColor} text={uploading ? 'UPLOADING YOUR FILE…' : 'DECODING YOUR LETTER…'} subtitle={uploading ? 'Sending securely — just a moment' : 'Reading every word with AI — 15–30 seconds'} />
         )}
       </AnimatePresence>
 
@@ -447,7 +450,7 @@ function Spinner({ color, text }) {
   );
 }
 
-function SortedLoader({ color, text }) {
+function SortedLoader({ color, text, subtitle }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -479,7 +482,7 @@ function SortedLoader({ color, text }) {
           {text}
         </p>
         <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.08em', margin: 0 }}>
-          Reading your letter with AI — 15–30 seconds
+          {subtitle || 'Reading your letter with AI — 15–30 seconds'}
         </p>
       </div>
       <div style={{ display: 'flex', gap: 6 }}>
