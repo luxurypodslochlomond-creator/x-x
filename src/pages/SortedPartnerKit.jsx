@@ -1,51 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Download, Share2 } from 'lucide-react';
+import { jsPDF } from 'jspdf';
 
 export default function SortedPartnerKit() {
   const [showCopied, setShowCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
 
-  useEffect(() => {
-    if (!window.html2pdf) {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
-    
-    // Trigger View Transitions for smooth native nav
-    if (document.startViewTransition) {
-      document.startViewTransition(() => {
-        document.documentElement.style.viewTransitionName = 'page-transition';
-      });
-    }
-  }, []);
+  const handleExportPDF = () => {
+    setIsDownloading(true);
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const margin = 18;
+    const pageWidth = 210;
+    const usable = pageWidth - margin * 2;
+    let y = margin;
 
-  const handleExportPDF = async () => {
-    try {
-      setIsDownloading(true);
-      if (!window.html2pdf) {
-        alert('PDF library loading. Please try again in a moment.');
-        setIsDownloading(false);
-        return;
-      }
-      
-      const element = document.getElementById('press-kit-content');
-      const opt = {
-        margin: 10,
-        filename: 'SORTED-Partner-Kit-2026.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
-      
-      await window.html2pdf().set(opt).from(element).save();
-      setIsDownloading(false);
-    } catch (error) {
-      console.error('PDF export error:', error);
-      setIsDownloading(false);
-    }
+    const addText = (text, size, bold, color, gap = 5) => {
+      doc.setFontSize(size);
+      doc.setFont('helvetica', bold ? 'bold' : 'normal');
+      doc.setTextColor(...color);
+      const lines = doc.splitTextToSize(String(text), usable);
+      lines.forEach(line => {
+        if (y > 275) { doc.addPage(); y = margin; }
+        doc.text(line, margin, y);
+        y += size * 0.4;
+      });
+      y += gap;
+    };
+
+    const divider = () => {
+      doc.setDrawColor(60, 60, 60);
+      doc.line(margin, y, pageWidth - margin, y);
+      y += 6;
+    };
+
+    addText('SORTED — PARTNER KIT 2026', 18, true, [249, 115, 22], 4);
+    addText('Universal Frequency 51 | family@uf51.love | uf51.love/Sorted', 9, false, [150, 150, 150], 8);
+    divider();
+
+    addText('THE PROBLEM', 9, true, [249, 115, 22], 3);
+    addText('5.1B people worldwide have unmet legal needs. 92% of serious US legal problems get zero help. 4.5M UK children in poverty. 73% of people at bailiffs have mental health issues.', 10, false, [200, 200, 200], 8);
+
+    addText('WHAT WE\'VE BUILT', 9, true, [6, 182, 212], 3);
+    addText('SORTED uses AI to decode council letters, eviction warnings, court summons — anything that terrifies people. Plain English. 30 seconds. No signup needed. 3 free uses, then £9.99/month.', 10, false, [200, 200, 200], 8);
+
+    addText('FOR MEDIA AGENCIES & FINANCIAL SERVICES', 9, true, [6, 182, 212], 3);
+    addText('White-label for banks (HSBC, Barclays, Lloyds) — put SORTED inside your mortgage distress journey. CSR campaign vehicle with full audit trail. Revenue share on subscriptions. Unique consumer legal anxiety intelligence.', 10, false, [200, 200, 200], 8);
+
+    addText('3 WAYS TO PARTNER', 9, true, [34, 197, 94], 3);
+    addText('01. Creator/Influencer — 25% affiliate commission on all subscriptions generated', 10, false, [200, 200, 200], 3);
+    addText('02. Organisation/Service — Revenue share (20-30%) + white-label option', 10, false, [200, 200, 200], 3);
+    addText('03. Strategic Partner — Equity + revenue share + board/advisor role', 10, false, [200, 200, 200], 8);
+
+    addText('EARNINGS POTENTIAL', 9, true, [168, 85, 247], 3);
+    addText('10k followers: £200-500/month | 100k followers: £2,000-8,000/month | Legal firm (100 clients): £3,000-15,000/month', 10, false, [200, 200, 200], 8);
+
+    addText('ESG & MARKET', 9, true, [249, 115, 22], 3);
+    addText('Legal tech market: $80B+. Addresses UN SDG 1, 10, 16. Data sovereign — nothing stored. Subscription-funded, not surveillance-funded.', 10, false, [200, 200, 200], 8);
+
+    divider();
+    addText('CONTACT: family@uf51.love | uf51.love/SortedPartnerKit', 10, false, [249, 115, 22], 4);
+    addText('© 2026 Universal Frequency 51 — Data Sovereign. Open Source. No Corporate Capture.', 9, false, [100, 100, 100], 0);
+
+    doc.save('SORTED-Partner-Kit-2026.pdf');
+    setIsDownloading(false);
   };
 
   const copyToClipboard = (text) => {
