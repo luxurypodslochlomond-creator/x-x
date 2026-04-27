@@ -54,8 +54,10 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         ? `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has uploaded a photo or scan of an official letter${currentType ? ` (type: ${currentType})` : ''}. Read it carefully and help them understand it.`
         : `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${text}`;
 
+      // Use gemini for image files (supports vision + JSON schema), claude for text
+      const modelToUse = fileUrl ? 'gemini_3_1_pro' : 'claude_sonnet_4_6';
       const response = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
+        model: modelToUse,
         prompt: promptText + `\n\nThis person may be stressed, scared, or overwhelmed. Your job is to be their brilliant, straight-talking friend who happens to know the law — not a robot, not a disclaimer machine. Be specific. Be human. Give REAL information that actually helps.
 
 CRITICAL ANTI-HALLUCINATION RULES:
@@ -216,6 +218,9 @@ Return a JSON object with these EXACT fields:
         )}
       </AnimatePresence>
 
+      {/* FORM — hidden while loading */}
+      {!loading && !uploading && (<>
+
       {/* GEO — auto detected, tap to change */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>📍 Auto-detected:</span>
@@ -329,6 +334,8 @@ Return a JSON object with these EXACT fields:
           </motion.button>
         </>
       )}
+
+      </>)} {/* end !loading form */}
 
       {/* ERROR */}
       <AnimatePresence>
