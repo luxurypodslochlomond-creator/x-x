@@ -174,52 +174,45 @@ Return a JSON object with these EXACT fields:
   return (
     <div className="space-y-5">
 
-      {/* INLINE LOADER — no full screen takeover */}
+      {/* LOADER */}
       <AnimatePresence>
         {(loading || uploading) && (
           <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             style={{
-              padding: '28px 20px',
-              borderRadius: 16,
-              background: 'rgba(0,0,0,0.4)',
-              border: `1px solid ${accentColor}30`,
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16,
-              backdropFilter: 'blur(8px)',
+              padding: '40px 20px',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20,
             }}
           >
-            <svg width="52" height="52" viewBox="0 0 32 32" fill="none">
-              <motion.path
-                d="M2 16 L6 16 L8 8 L10 24 L12 12 L14 20 L16 6 L18 26 L20 10 L22 22 L24 14 L26 18 L30 16"
-                stroke={accentColor}
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                fill="none"
-                style={{ filter: `drop-shadow(0 0 8px ${accentColor})` }}
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: [0, 1, 0] }}
-                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              />
-            </svg>
+            {/* SORTED lock icon animated */}
+            <motion.div
+              animate={{ scale: [1, 1.08, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="11" width="18" height="11" rx="2" stroke={accentColor} strokeWidth="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke={accentColor} strokeWidth="2" strokeLinecap="round"/>
+                <circle cx="12" cy="16" r="1.5" fill={accentColor}/>
+              </svg>
+            </motion.div>
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.15em', color: accentColor, margin: '0 0 6px' }}>
-                {uploading ? 'UPLOADING YOUR FILE…' : 'DECODING YOUR LETTER…'}
+              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.15em', color: '#fff', margin: '0 0 6px' }}>
+                {uploading ? 'READING YOUR FILE' : 'DECODING'}
               </p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em', margin: 0 }}>
-                {uploading ? 'Sending securely — just a moment' : 'Reading every word with AI — 15–30 seconds'}
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.04em', margin: 0 }}>
+                {uploading ? 'Uploading securely' : 'AI is reading every word — 15–30 seconds'}
               </p>
             </div>
-            <div style={{ display: 'flex', gap: 6 }}>
-              {[0, 1, 2].map(i => (
-                <motion.span
-                  key={i}
-                  style={{ width: 5, height: 5, borderRadius: '50%', background: accentColor, display: 'block', opacity: 0.4 }}
-                  animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.3, 1] }}
-                  transition={{ duration: 1, repeat: Infinity, delay: i * 0.25 }}
-                />
-              ))}
+            {/* progress bar */}
+            <div style={{ width: '100%', maxWidth: 200, height: 2, background: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden' }}>
+              <motion.div
+                style={{ height: '100%', background: accentColor, borderRadius: 2 }}
+                animate={{ x: ['-100%', '100%'] }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+              />
             </div>
           </motion.div>
         )}
@@ -366,133 +359,88 @@ Return a JSON object with these EXACT fields:
       {/* RESULT */}
       <AnimatePresence>
         {result && (
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
 
-            {/* AT A GLANCE — top summary card */}
+            {/* TOP — severity + summary */}
             {sev && (
-              <div style={{ background: sev.bg, border: `2px solid ${sev.border}`, borderRadius: 14, padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {/* Header row */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>AT A GLANCE</span>
-                  <span style={{ fontSize: 11, fontWeight: 900, color: sev.color, letterSpacing: '0.1em', padding: '3px 10px', borderRadius: 20, border: `1px solid ${sev.color}50`, background: `${sev.color}15` }}>{result.severity}</span>
-                </div>
-                {/* What is it */}
-                <div>
-                  <p style={{ fontSize: 18, fontWeight: 900, color: '#fff', margin: 0, lineHeight: 1.2, letterSpacing: '-0.01em' }}>{result.letter_summary || 'Official letter'}</p>
+              <div style={{ background: sev.bg, border: `2px solid ${sev.border}`, borderRadius: 12, padding: '16px 18px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                  <span style={{ fontSize: 11, fontWeight: 900, color: sev.color, letterSpacing: '0.1em', padding: '3px 10px', borderRadius: 20, border: `1px solid ${sev.color}40`, background: `${sev.color}12` }}>{result.severity}</span>
                   {result.sender && result.sender !== 'Unknown' && (
-                    <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: '4px 0 0', letterSpacing: '0.04em' }}>From: {result.sender}</p>
+                    <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em' }}>{result.sender}</span>
                   )}
                 </div>
-                {/* Deadline row */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', borderRadius: 10, background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <span style={{ fontSize: 15 }}>📅</span>
-                  <div>
-                    <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', display: 'block' }}>KEY DATE</span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: result.key_deadline === 'No deadline mentioned' ? 'rgba(255,255,255,0.4)' : '#fff' }}>{result.key_deadline}</span>
-                  </div>
-                </div>
-                {/* Why urgent */}
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>{result.severity_explanation}</p>
+                <p style={{ fontSize: 17, fontWeight: 900, color: '#fff', margin: '0 0 6px', lineHeight: 1.2 }}>{result.letter_summary || 'Official letter'}</p>
+                {result.key_deadline && result.key_deadline !== 'No deadline mentioned' && (
+                  <p style={{ fontSize: 12, color: sev.color, margin: 0, fontWeight: 700, letterSpacing: '0.04em' }}>Deadline: {result.key_deadline}</p>
+                )}
               </div>
             )}
 
-            {/* HONESTY BADGE — anti-hallucination trust signal */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 8, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <span style={{ fontSize: 13 }}>🛡️</span>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.4 }}>
-                SORTED flags anything it's unsure about. If you see <span style={{ color: 'rgba(255,165,0,0.7)', fontWeight: 700 }}>(verify this)</span> — double-check that specific detail before acting on it.
-              </p>
+            {/* PLAIN ENGLISH */}
+            <div style={{ padding: '14px 16px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT THIS MEANS</p>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.9)', lineHeight: 1.65, margin: 0 }}>{result.what_this_means}</p>
             </div>
 
-            {/* 1. REASSURANCE FIRST — for the scared person */}
-            {result.we_hear_you && (
-              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                <span style={{ fontSize: 20, flexShrink: 0 }}>💙</span>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0, fontStyle: 'italic' }}>{result.we_hear_you}</p>
-              </div>
-            )}
-
-            {/* 2. PLAIN ENGLISH — what is this thing */}
-            <ResultCard label="WHAT THIS MEANS" color={accentColor}>
-              <p style={{ fontSize: 15, color: '#fff', lineHeight: 1.7, margin: 0 }}>{result.what_this_means}</p>
-            </ResultCard>
-
-            {/* 3. WHAT TO DO — the most important thing after understanding */}
-            <ResultCard label="WHAT TO DO — STEP BY STEP" color={accentColor}>
-              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {/* WHAT TO DO */}
+            <div style={{ padding: '14px 16px', borderRadius: 10, background: `${accentColor}08`, border: `1px solid ${accentColor}20` }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'aa', margin: '0 0 10px' }}>WHAT TO DO</p>
+              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {result.action_steps?.map((step, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', paddingBottom: i < (result.action_steps.length - 1) ? 14 : 0, borderBottom: i < (result.action_steps.length - 1) ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-                    <span style={{ fontSize: 11, fontWeight: 900, color: '#000', minWidth: 22, height: 22, background: accentColor, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>{i + 1}</span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 1.65 }}>{step}</span>
+                  <li key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: 10, fontWeight: 900, color: '#000', minWidth: 20, height: 20, background: accentColor, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>{i + 1}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>{step}</span>
                   </li>
                 ))}
               </ol>
-            </ResultCard>
+            </div>
 
-            {/* 4. FREE HELP — right after steps, people need to know help exists */}
+            {/* MONEY / CONSEQUENCES — only if relevant */}
+            {(result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.') && (
+              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.15)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(239,68,68,0.5)', margin: '0 0 4px' }}>MONEY AT STAKE</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{result.financial_impact}</p>
+              </div>
+            )}
+
+            {/* FREE HELP */}
             {result.free_help?.length > 0 && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.2)' }}>
-                <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(34,197,94,0.7)', margin: '0 0 10px' }}>🆓 FREE HELP NEAR YOU</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.15)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(34,197,94,0.6)', margin: '0 0 8px' }}>FREE HELP</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {result.free_help.map((help, i) => (
-                    <p key={i} style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0, paddingLeft: 4, borderLeft: '2px solid rgba(34,197,94,0.3)' }}>{help}</p>
+                    <p key={i} style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.55, margin: 0, paddingLeft: 10, borderLeft: `2px solid rgba(34,197,94,0.25)` }}>{help}</p>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* 5. CONSEQUENCES — collapse into a lower section so it informs without scaring upfront */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' && (
-                <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.2)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: 16, flexShrink: 0 }}>💰</span>
-                  <div>
-                    <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(239,68,68,0.5)', margin: '0 0 4px' }}>MONEY AT STAKE</p>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{result.financial_impact}</p>
-                  </div>
-                </div>
-              )}
-              {result.if_you_ignore_this && (
-                <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(249,115,22,0.05)', border: '1px solid rgba(249,115,22,0.2)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: 16, flexShrink: 0 }}>⚠️</span>
-                  <div>
-                    <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(249,115,22,0.6)', margin: '0 0 4px' }}>IF YOU IGNORE THIS</p>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{result.if_you_ignore_this}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 6. CLOSING REASSURANCE */}
-            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', textAlign: 'center' }}>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, margin: 0 }}>✓ {result.dont_panic}</p>
-            </div>
-
-            {/* HANDOFF — write a reply to this letter */}
+            {/* HANDOFF — dominant CTA */}
             {onHandoff && (
               <motion.button
                 onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means })}
                 whileTap={{ scale: 0.97 }}
                 style={{
-                  width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
-                  fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer',
-                  border: '1px solid rgba(6,182,212,0.5)',
-                  background: 'rgba(6,182,212,0.1)', color: '#06b6d4',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                  transition: 'all 0.15s',
+                  width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 13,
+                  fontWeight: 900, letterSpacing: '0.12em', cursor: 'pointer',
+                  border: `2px solid ${accentColor}`,
+                  background: accentColor, color: '#000',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  marginTop: 4,
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                WRITE A REPLY TO THIS LETTER
+                WRITE A REPLY
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </motion.button>
             )}
 
-            {/* ACTIONS */}
-            <div style={{ display: 'flex', gap: 10, paddingTop: 4 }}>
+            {/* SECONDARY ACTIONS */}
+            <div style={{ display: 'flex', gap: 8 }}>
               <motion.button onClick={copyAll} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
-                {copied ? 'COPIED' : 'COPY BREAKDOWN'}
+                {copied ? 'COPIED' : 'COPY'}
               </motion.button>
-              <motion.button onClick={reset} whileTap={{ scale: 0.95 }} style={{ ...secondaryBtn, color: accentColor, borderColor: accentColor + '40' }}>
+              <motion.button onClick={reset} whileTap={{ scale: 0.95 }} style={{ ...secondaryBtn, color: 'rgba(255,255,255,0.5)', borderColor: 'rgba(255,255,255,0.15)' }}>
                 DECODE ANOTHER
               </motion.button>
             </div>
@@ -500,7 +448,6 @@ Return a JSON object with these EXACT fields:
             {/* EMAIL TO SELF */}
             <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
 
-            {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
 
           </motion.div>
