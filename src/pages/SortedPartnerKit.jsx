@@ -321,68 +321,68 @@ function FeatureBox({ icon, title, desc }) {
 
 function LightningIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <path d="M14 2l5 9h6l-8 6 3 9-8-6-8 6 3-9-8-6h6l5-9z" fill="#06b6d4" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style={{ overflow: 'visible' }}>
+      <path d="M16 2L22 14h8L18 22l4 10-10-8-10 8 4-10-12-8h8l6-14z" fill="#06b6d4" stroke="#06b6d4" strokeWidth="0.5" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function TargetIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <circle cx="14" cy="14" r="12" stroke="#06b6d4" strokeWidth="1.5" />
-      <circle cx="14" cy="14" r="8" stroke="#06b6d4" strokeWidth="1.5" />
-      <circle cx="14" cy="14" r="4" fill="#06b6d4" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="14" stroke="#06b6d4" strokeWidth="2" />
+      <circle cx="16" cy="16" r="9" stroke="#06b6d4" strokeWidth="2" />
+      <circle cx="16" cy="16" r="4.5" fill="#06b6d4" />
     </svg>
   );
 }
 
 function LockIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <rect x="6" y="12" width="16" height="10" rx="2" stroke="#06b6d4" strokeWidth="1.5" />
-      <path d="M8 12V9c0-3 2-5 6-5s6 2 6 5v3" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="14" cy="17" r="1.5" fill="#06b6d4" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <rect x="7" y="14" width="18" height="12" rx="2" stroke="#06b6d4" strokeWidth="2" />
+      <path d="M9 14V11c0-3.5 2.5-6 7-6s7 2.5 7 6v3" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="16" cy="20" r="1.5" fill="#06b6d4" />
     </svg>
   );
 }
 
 function EnvelopeIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <rect x="4" y="6" width="20" height="14" rx="2" stroke="#06b6d4" strokeWidth="1.5" />
-      <path d="M4 6l10 7 10-7" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <rect x="5" y="8" width="22" height="16" rx="2" stroke="#06b6d4" strokeWidth="2" />
+      <path d="M5 8l11 8 11-8" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function BankIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <path d="M4 10h20M6 10v12c0 1 1 2 2 2h12c1 0 2-1 2-2V10" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="10" y1="10" x2="10" y2="22" stroke="#06b6d4" strokeWidth="1.5" />
-      <line x1="18" y1="10" x2="18" y2="22" stroke="#06b6d4" strokeWidth="1.5" />
-      <path d="M2 10l12-6 12 6" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M4 12h24M7 12v14c0 1.5 1 2.5 2.5 2.5h18c1.5 0 2.5-1 2.5-2.5V12" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+      <line x1="12" y1="12" x2="12" y2="26" stroke="#06b6d4" strokeWidth="2" />
+      <line x1="20" y1="12" x2="20" y2="26" stroke="#06b6d4" strokeWidth="2" />
+      <path d="M2 12l14-7 14 7" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function ChartIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <rect x="4" y="18" width="3" height="6" stroke="#06b6d4" strokeWidth="1.5" />
-      <rect x="10" y="12" width="3" height="12" stroke="#06b6d4" strokeWidth="1.5" />
-      <rect x="16" y="6" width="3" height="18" stroke="#06b6d4" strokeWidth="1.5" />
-      <line x1="4" y1="24" x2="21" y2="24" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <rect x="5" y="20" width="4" height="8" stroke="#06b6d4" strokeWidth="2" />
+      <rect x="12" y="13" width="4" height="15" stroke="#06b6d4" strokeWidth="2" />
+      <rect x="19" y="6" width="4" height="22" stroke="#06b6d4" strokeWidth="2" />
+      <line x1="5" y1="28" x2="26" y2="28" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
 
 function HandshakeIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <path d="M4 16c2 2 4 3 6 3s4-1 5-2l2-2 2 2c1 1 3 2 5 2s4-1 6-3" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M6 12v2M22 12v2M10 8v4M18 8v4" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M4 18c2.5 2.5 5 3.5 7.5 3.5s5-1.5 6.5-3l2.5-2.5 2.5 2.5c1.5 1.5 4 3 6.5 3s5-1 7.5-3.5" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+      <path d="M6 14v2.5M26 14v2.5M11 9v5M21 9v5" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
