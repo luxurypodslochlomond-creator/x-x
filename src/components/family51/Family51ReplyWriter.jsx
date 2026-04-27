@@ -18,13 +18,13 @@ const TONES = [
   { id: 'formal', label: 'FORMAL',  desc: 'Legal weight.' },
 ];
 
-export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff }) {
+export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff, suggestedTone }) {
   const [situation, setSituation] = useState('');
   const [context, setContext]     = useState(() => {
     if (!prefillContext) return '';
     return `Replying to: ${prefillContext.sender || 'unknown sender'}\nLetter summary: ${prefillContext.summary || ''}\n${prefillContext.deadline && prefillContext.deadline !== 'No deadline mentioned' ? `Key deadline: ${prefillContext.deadline}\n` : ''}${prefillContext.what_this_means ? `\nBackground: ${prefillContext.what_this_means}` : ''}`;
   });
-  const [tone, setTone]           = useState('firm');
+  const [tone, setTone]           = useState(() => suggestedTone || 'firm');
   const [name, setName]           = useState('');
   const [loading, setLoading]     = useState(false);
   const [result, setResult]       = useState(null);
@@ -33,15 +33,12 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [emailSent, setEmailSent] = useState(false);
   const [emailing, setEmailing]   = useState(false);
   const [geo, setGeo]             = useState(() => detectGeo());
+  const [alternatives, setAlternatives] = useState([]);
 
-  const write = async () => {
-    if (!context.trim() || loading) return;
-    setLoading(true);
-    setResult(null);
-
-    const t = TONES.find(x => x.id === tone);
-
+  const generateLetter = async (selectedTone) => {
+    const t = TONES.find(x => x.id === selectedTone);
     const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    
     const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
       prompt: `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
@@ -71,10 +68,29 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
         },
       },
     });
+    
+    return response;
+  };
 
+  const write = async () => {
+    if (!context.trim() || loading) return;
+    setLoading(true);
+    setResult(null);
+    setAlternatives([]);
+
+    const response = await generateLetter(tone);
     setResult(response);
     setLoading(false);
     onResult?.();
+  };
+
+  const regenerateWithDifferentTone = async (newTone) => {
+    if (!context.trim() || loading) return;
+    setLoading(true);
+
+    const response = await generateLetter(newTone);
+    setAlternatives([...alternatives, response]);
+    setLoading(false);
   };
 
   const sendEmail = async () => {
@@ -145,7 +161,9 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
       {/* TONE */}
       <div className="space-y-2">
-        <Label>TONE</Label>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Label>TONE {suggestedTone && '(AI suggested)'}</Label>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {TONES.map(t => (
             <button
@@ -156,8 +174,12 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
                 border: `1px solid ${tone === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
                 background: tone === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
                 transition: 'all 0.15s',
+                position: 'relative',
               }}
             >
+              {suggestedTone === t.id && (
+                <span style={{ position: 'absolute', top: 6, right: 8, fontSize: 10, color: accentColor }}>★</span>
+              )}
               <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: tone === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{t.desc}</p>
             </button>
@@ -243,9 +265,32 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
               <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: accentColor, color: accentColor, background: `${accentColor}15` }}>
                 {copied ? 'COPIED — READY TO SEND' : 'COPY LETTER'}
               </motion.button>
-              <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
+              <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setEmailSent(false); setEmailAddr(''); setAlternatives([]); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
                 WRITE ANOTHER
               </motion.button>
+            </div>
+
+            {/* REGENERATE WITH DIFFERENT TONE */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 14 }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 10px' }}>SWAP TONE (GET ALTERNATIVE VERSION)</p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                {TONES.filter(t => t.id !== tone).map(t => (
+                  <motion.button
+                    key={t.id}
+                    onClick={() => regenerateWithDifferentTone(t.id)}
+                    disabled={loading}
+                    whileTap={!loading ? { scale: 0.95 } : {}}
+                    style={{
+                      padding: '10px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700,
+                      border: `1px solid rgba(255,255,255,0.12)`, background: 'rgba(255,255,255,0.02)',
+                      color: 'rgba(255,255,255,0.4)', cursor: !loading ? 'pointer' : 'not-allowed',
+                      transition: 'all 0.15s', opacity: loading ? 0.5 : 1,
+                    }}
+                  >
+                    {loading ? '...' : `Try ${t.label}`}
+                  </motion.button>
+                ))}
+              </div>
             </div>
 
             {/* HANDOFF — escalate to dispute help */}
@@ -269,6 +314,31 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
 
             {/* EMAIL TO SELF */}
             <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
+
+            {/* ALTERNATIVES CAROUSEL */}
+            {alternatives.length > 0 && (
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 14 }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 12px' }}>ALTERNATIVES ({alternatives.length})</p>
+                <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 8 }}>
+                  {alternatives.map((alt, idx) => (
+                    <motion.button
+                      key={idx}
+                      onClick={() => setResult(alt)}
+                      whileTap={{ scale: 0.95 }}
+                      style={{
+                        minWidth: 110, padding: '10px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700,
+                        border: `1px solid ${result === alt ? accentColor + '70' : 'rgba(255,255,255,0.12)'}`,
+                        background: result === alt ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                        color: result === alt ? accentColor : 'rgba(255,255,255,0.4)',
+                        cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center',
+                      }}
+                    >
+                      Alt {idx + 1}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />

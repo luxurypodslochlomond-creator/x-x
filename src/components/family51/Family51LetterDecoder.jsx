@@ -87,7 +87,8 @@ Return a JSON object with these EXACT fields:
 - financial_impact: If there's a specific amount at risk (debt, fine, arrears, benefit cut), state it clearly. E.g. "£847 owed — this could increase to £1,100+ with added court costs if unpaid." If no financial amount, say "No specific financial amount mentioned."
 - action_steps: Array of exactly 5 specific steps. Real actions, real phone numbers, real websites relevant to their jurisdiction. E.g. not "contact your local council" but "Call Hackney Council's debt team on 020 8356 3000 — open Mon-Fri 9am-5pm. Ask to set up a payment plan." Include one free advice service by name and contact details.
 - free_help: Array of exactly 2-3 FREE services that can help with THIS specific type of letter in their jurisdiction. Each entry: the service name, what they do, and how to reach them. E.g. "Citizens Advice — free legal guidance on debt and council tax — visit citizensadvice.org.uk or call 0800 144 8848". Be specific to their country/region.
-- dont_panic: One honest, direct reassuring sentence. Acknowledge the situation is real but that it's manageable. Don't be fake or corporate.`,
+- dont_panic: One honest, direct reassuring sentence. Acknowledge the situation is real but that it's manageable. Don't be fake or corporate.
+- suggested_tone: Based on the letter type & severity, suggest which reply tone would work best: FIRM (for authoritative demands), CALM (for de-escalation), URGENT (for time-critical), or FORMAL (for legal weight). Return the tone ID: firm, calm, urgent, or formal.`,
         response_json_schema: {
           type: 'object',
           properties: {
@@ -103,6 +104,7 @@ Return a JSON object with these EXACT fields:
             action_steps:         { type: 'array', items: { type: 'string' } },
             free_help:            { type: 'array', items: { type: 'string' } },
             dont_panic:           { type: 'string' },
+            suggested_tone:       { type: 'string' },
           },
         },
       });
@@ -436,7 +438,7 @@ Return a JSON object with these EXACT fields:
             {/* HANDOFF — dominant CTA */}
             {onHandoff && (
               <motion.button
-                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means })}
+                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggestedTone: result.suggested_tone })}
                 whileTap={{ scale: 0.97 }}
                 style={{
                   width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 13,
