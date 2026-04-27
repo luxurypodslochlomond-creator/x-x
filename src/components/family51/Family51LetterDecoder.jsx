@@ -55,15 +55,21 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
-        prompt: promptText + `\n\nYou are sharp, compassionate, and precise — giving real answers that actually help. Return a JSON object with these exact fields:
-- letter_summary: Max 6 words describing what this letter is about. E.g. "Council tax debt demand" or "NHS appointment confirmation". Be specific.
-- sender: Who sent this letter (organisation name, or "Unknown" if unclear)
-- severity: One of exactly: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
-- severity_explanation: One sentence on why that rating
-- key_deadline: Any date/deadline mentioned, or "No deadline mentioned"
-- what_this_means: Plain English, 2-3 sentences, zero jargon, warm tone. Explain exactly what this letter IS and what it MEANS for this person.
-- action_steps: Array of exactly 3 specific, actionable steps — no vague advice, real things to do with real bodies/numbers/websites relevant to their jurisdiction
-- dont_panic: One honest, reassuring sentence that acknowledges their situation without dismissing it`,
+        prompt: promptText + `\n\nThis person may be stressed, scared, or overwhelmed. Your job is to be their brilliant, straight-talking friend who happens to know the law — not a robot, not a disclaimer machine. Be specific. Be human. Give REAL information that actually helps.
+
+Return a JSON object with these EXACT fields:
+- letter_summary: Max 6 words. What IS this letter. E.g. "Council tax debt demand" or "HMRC self-assessment penalty notice". Be blunt and specific.
+- sender: Organisation name, e.g. "HMRC", "Barclays", "Hackney Council". Or "Unknown".
+- severity: EXACTLY one of: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
+- severity_explanation: One sentence. Why did you pick that rating? What is at stake?
+- key_deadline: The exact date from the letter, or "No deadline mentioned". If there are multiple dates, give the soonest.
+- we_hear_you: ONE warm, human sentence that acknowledges how stressful this kind of letter is. Not dismissive. Not corporate. Like a friend who gets it.
+- what_this_means: 3-4 sentences. Zero jargon. Plain English. Explain exactly what this letter IS, what triggered it, and what it actually means for this person day-to-day. Include any amounts of money involved.
+- if_you_ignore_this: 2-3 sentences. What ACTUALLY happens if they do nothing? Be honest but not scaremongering. E.g. "They can apply for a county court judgment (CCJ) which affects your credit score for 6 years and could lead to bailiffs." This is the most important field — it's what gets people to act.
+- financial_impact: If there's a specific amount at risk (debt, fine, arrears, benefit cut), state it clearly. E.g. "£847 owed — this could increase to £1,100+ with added court costs if unpaid." If no financial amount, say "No specific financial amount mentioned."
+- action_steps: Array of exactly 5 specific steps. Real actions, real phone numbers, real websites relevant to their jurisdiction. E.g. not "contact your local council" but "Call Hackney Council's debt team on 020 8356 3000 — open Mon-Fri 9am-5pm. Ask to set up a payment plan." Include one free advice service by name and contact details.
+- free_help: Array of exactly 2-3 FREE services that can help with THIS specific type of letter in their jurisdiction. Each entry: the service name, what they do, and how to reach them. E.g. "Citizens Advice — free legal guidance on debt and council tax — visit citizensadvice.org.uk or call 0800 144 8848". Be specific to their country/region.
+- dont_panic: One honest, direct reassuring sentence. Acknowledge the situation is real but that it's manageable. Don't be fake or corporate.`,
         ...(fileUrl ? { file_urls: [fileUrl] } : {}),
         response_json_schema: {
           type: 'object',
@@ -73,8 +79,12 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
             severity:             { type: 'string' },
             severity_explanation: { type: 'string' },
             key_deadline:         { type: 'string' },
+            we_hear_you:          { type: 'string' },
             what_this_means:      { type: 'string' },
+            if_you_ignore_this:   { type: 'string' },
+            financial_impact:     { type: 'string' },
             action_steps:         { type: 'array', items: { type: 'string' } },
+            free_help:            { type: 'array', items: { type: 'string' } },
             dont_panic:           { type: 'string' },
           },
         },
@@ -127,7 +137,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
     setEmailing(true);
-    const body = `SORTED decoded your letter.\n\n─────────────────────\nWHAT THIS MEANS\n─────────────────────\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\n─────────────────────\nWHAT TO DO\n─────────────────────\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nKEY DEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
+    const body = `SORTED decoded your letter.\n\n${result.we_hear_you ? result.we_hear_you + '\n\n' : ''}─────────────────────\nWHAT THIS MEANS\n─────────────────────\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\n${result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' ? `─────────────────────\nMONEY AT STAKE\n─────────────────────\n${result.financial_impact}\n\n` : ''}${result.if_you_ignore_this ? `─────────────────────\nIF YOU IGNORE THIS\n─────────────────────\n${result.if_you_ignore_this}\n\n` : ''}─────────────────────\nWHAT TO DO\n─────────────────────\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n${result.free_help?.length > 0 ? `─────────────────────\nFREE HELP AVAILABLE\n─────────────────────\n${result.free_help.join('\n\n')}\n\n` : ''}KEY DEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
     await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: `Your SORTED breakdown — ${result.severity}`, body });
     setEmailSent(true);
     setEmailing(false);
@@ -135,7 +145,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
 
   const copyAll = () => {
     if (!result) return;
-    const text = `DECODED BY FAMILY51\n\n${result.what_this_means}\n\nSEVERITY: ${result.severity}\n${result.severity_explanation}\n\nACTIONS:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nDEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}`;
+    const text = `DECODED BY SORTED\n\n${result.we_hear_you ? result.we_hear_you + '\n\n' : ''}WHAT THIS MEANS:\n${result.what_this_means}\n\nSEVERITY: ${result.severity} — ${result.severity_explanation}\n\n${result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' ? `MONEY AT STAKE: ${result.financial_impact}\n\n` : ''}${result.if_you_ignore_this ? `IF YOU IGNORE THIS: ${result.if_you_ignore_this}\n\n` : ''}WHAT TO DO:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n${result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : ''}DEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2200);
@@ -323,24 +333,64 @@ export default function Family51LetterDecoder({ accentColor = '#f97316' }) {
               </div>
             )}
 
+            {/* WE HEAR YOU */}
+            {result.we_hear_you && (
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                <span style={{ fontSize: 18, flexShrink: 0 }}>💙</span>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, margin: 0, fontStyle: 'italic' }}>{result.we_hear_you}</p>
+              </div>
+            )}
+
             <ResultCard label="WHAT THIS MEANS" color={accentColor}>
               <p style={{ fontSize: 14, color: '#fff', lineHeight: 1.65, margin: 0 }}>{result.what_this_means}</p>
             </ResultCard>
 
-            <ResultCard label="WHAT TO DO" color={accentColor}>
-              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {/* FINANCIAL IMPACT — only show if there's real info */}
+            {result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' && (
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                <span style={{ fontSize: 18, flexShrink: 0 }}>💰</span>
+                <div>
+                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(239,68,68,0.6)', margin: '0 0 6px' }}>MONEY AT STAKE</p>
+                  <p style={{ fontSize: 13, color: '#fff', lineHeight: 1.55, margin: 0 }}>{result.financial_impact}</p>
+                </div>
+              </div>
+            )}
+
+            {/* IF YOU IGNORE THIS */}
+            {result.if_you_ignore_this && (
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(249,115,22,0.06)', border: '1px solid rgba(249,115,22,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                <span style={{ fontSize: 18, flexShrink: 0 }}>⚠️</span>
+                <div>
+                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(249,115,22,0.7)', margin: '0 0 6px' }}>IF YOU IGNORE THIS</p>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55, margin: 0 }}>{result.if_you_ignore_this}</p>
+                </div>
+              </div>
+            )}
+
+            <ResultCard label="WHAT TO DO — STEP BY STEP" color={accentColor}>
+              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {result.action_steps?.map((step, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 11, fontWeight: 800, color: accentColor, minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55 }}>{step}</span>
+                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', paddingBottom: i < (result.action_steps.length - 1) ? 12 : 0, borderBottom: i < (result.action_steps.length - 1) ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                    <span style={{ fontSize: 12, fontWeight: 900, color: accentColor, minWidth: 22, paddingTop: 1, background: `${accentColor}15`, borderRadius: 6, padding: '2px 6px', textAlign: 'center', flexShrink: 0 }}>{i + 1}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>{step}</span>
                   </li>
                 ))}
               </ol>
             </ResultCard>
 
-            <ResultCard label="KEY DEADLINE" color={accentColor}>
-              <p style={{ fontSize: 13, color: '#fff', margin: 0 }}>{result.key_deadline}</p>
-            </ResultCard>
+            {/* FREE HELP */}
+            {result.free_help?.length > 0 && (
+              <ResultCard label="FREE HELP AVAILABLE" color="#22c55e">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {result.free_help.map((help, i) => (
+                    <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                      <span style={{ fontSize: 14, flexShrink: 0 }}>🆓</span>
+                      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55, margin: 0 }}>{help}</p>
+                    </div>
+                  ))}
+                </div>
+              </ResultCard>
+            )}
 
             <ResultCard label="DON'T PANIC" color={accentColor}>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0 }}>{result.dont_panic}</p>
