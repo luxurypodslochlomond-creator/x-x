@@ -164,12 +164,12 @@ const AuthenticatedApp = () => {
       <Route path="/Sorted" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51Page /></Suspense>} />
       <Route path="/Family51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51TermsPage /></Suspense>} />
       <Route path="/Family51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51PrivacyPage /></Suspense>} />
-      <Route path="/SortedTerms" element={<Suspense fallback={<SortedLoader />}><SortedTermsPage /></Suspense>} />
-      <Route path="/SortedPrivacy" element={<Suspense fallback={<SortedLoader />}><SortedPrivacyPage /></Suspense>} />
-      <Route path="/SortedPressRelease" element={<Suspense fallback={<SortedLoader />}><SortedPressReleasePage /></Suspense>} />
-      <Route path="/SortedInvestorPress" element={<Suspense fallback={<SortedLoader />}><SortedInvestorPressPage /></Suspense>} />
-      <Route path="/PetSounds51InvestorPress" element={<Suspense fallback={<SortedLoader />}><PetSounds51InvestorPressPage /></Suspense>} />
-      <Route path="/SortedPartnerKit" element={<Suspense fallback={<SortedLoader />}><SortedPartnerKitPage /></Suspense>} />
+      <Route path="/SortedTerms" element={<SortedTermsPage />} />
+      <Route path="/SortedPrivacy" element={<SortedPrivacyPage />} />
+      <Route path="/SortedPressRelease" element={<SortedPressReleasePage />} />
+      <Route path="/SortedInvestorPress" element={<SortedInvestorPressPage />} />
+      <Route path="/PetSounds51InvestorPress" element={<PetSounds51InvestorPressPage />} />
+      <Route path="/SortedPartnerKit" element={<SortedPartnerKitPage />} />
       <Route path="/ST51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper></Suspense>} />
       <Route path="/AdminHMRCTracker" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper></Suspense>} />
       <Route path="/AdminLogoUpload" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper></Suspense>} />
