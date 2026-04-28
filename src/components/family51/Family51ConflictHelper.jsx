@@ -108,13 +108,26 @@ Return:
 
       setResult(response);
       setResultGoal(goal);
+      // Save to case history if logged in
+      try {
+        const me = await base44.auth.me();
+        if (me) {
+          await base44.entities.SortedCase.create({
+            tool: 'conflict',
+            input_text: what.slice(0, 2000),
+            ai_result: JSON.stringify(response),
+            summary: response.situation_assessment?.slice(0, 80) || 'Dispute plan',
+            severity: 'unknown',
+          });
+        }
+      } catch {} // silent
     } catch (err) {
       console.error('SORTED conflict analysis error:', err);
       setResult({ _error: err?.message || 'Analysis failed. Please try again.' });
     } finally {
       setLoading(false);
+      onResult?.();
     }
-    onResult?.();
   };
 
   const sendEmail = async () => {

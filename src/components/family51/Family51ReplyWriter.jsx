@@ -91,6 +91,19 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
       setResult(response);
       setResultTone(tone);
       onResult?.();
+      // Save to case history if logged in
+      try {
+        const me = await base44.auth.me();
+        if (me) {
+          await base44.entities.SortedCase.create({
+            tool: 'reply',
+            input_text: context.slice(0, 2000),
+            ai_result: JSON.stringify(response),
+            summary: response.subject_line || 'Written reply',
+            severity: 'unknown',
+          });
+        }
+      } catch {}
     } catch (err) {
       setError(err.message);
     } finally {

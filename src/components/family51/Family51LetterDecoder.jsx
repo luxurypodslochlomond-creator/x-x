@@ -114,6 +114,20 @@ Return a JSON object with these EXACT fields:
         setDecodeError('Something went wrong reading the response. Please try again.');
       } else {
         setResult(response);
+        // Save to case history if user is logged in
+        try {
+          const me = await base44.auth.me();
+          if (me) {
+            const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
+            await base44.entities.SortedCase.create({
+              tool: 'letter',
+              input_text: (text || '').slice(0, 2000),
+              ai_result: JSON.stringify(response),
+              summary: response.letter_summary || 'Decoded letter',
+              severity: severityMap[response.severity] || 'unknown',
+            });
+          }
+        } catch {} // silent — don't block user if save fails
       }
     } catch (err) {
       console.error('SORTED decode error:', err);
