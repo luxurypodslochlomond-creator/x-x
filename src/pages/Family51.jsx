@@ -409,7 +409,7 @@ export default function Family51Page() {
             {/* TOOL TITLE BAR */}
             <div style={{ marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
-                {activeTool === 'letter' ? '📄 DECODE A LETTER' : activeTool === 'reply' ? '✉️ WRITE MY REPLY' : '⚡ DISPUTE HELP'}
+                {activeTool === 'letter' ? 'DECODE A LETTER' : activeTool === 'reply' ? 'WRITE MY REPLY' : 'DISPUTE HELP'}
               </p>
             </div>
 
@@ -471,7 +471,7 @@ export default function Family51Page() {
             style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}
           >
             <div style={{ textAlign: 'center', marginBottom: 24 }}>
-              <div style={{ fontSize: 32, marginBottom: 16 }}>💙</div>
+              <div style={{ marginBottom: 16 }}></div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 14px' }}>
                 <span style={{ color: '#fff' }}>You've used your</span>{' '}
                 <span style={{ color: '#f97316' }}>3 free decodes.</span>
