@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
@@ -91,19 +92,14 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
       setResult(response);
       setResultTone(tone);
       onResult?.();
-      // Save to case history if logged in
-      try {
-        const me = await base44.auth.me();
-        if (me) {
-          await base44.entities.SortedCase.create({
-            tool: 'reply',
-            input_text: context.slice(0, 2000),
-            ai_result: JSON.stringify(response),
-            summary: response.subject_line || 'Written reply',
-            severity: 'unknown',
-          });
-        }
-      } catch {}
+      // Save to local case history — no login needed
+      saveCaseToHistory({
+        tool: 'reply',
+        input_text: context,
+        ai_result: JSON.stringify(response),
+        summary: response.subject_line || 'Written reply',
+        severity: 'unknown',
+      });
     } catch (err) {
       setError(err.message);
     } finally {

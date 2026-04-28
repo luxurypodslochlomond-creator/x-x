@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
 import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
@@ -108,19 +109,14 @@ Return:
 
       setResult(response);
       setResultGoal(goal);
-      // Save to case history if logged in
-      try {
-        const me = await base44.auth.me();
-        if (me) {
-          await base44.entities.SortedCase.create({
-            tool: 'conflict',
-            input_text: what.slice(0, 2000),
-            ai_result: JSON.stringify(response),
-            summary: response.situation_assessment?.slice(0, 80) || 'Dispute plan',
-            severity: 'unknown',
-          });
-        }
-      } catch {} // silent
+      // Save to local case history — no login needed
+      saveCaseToHistory({
+        tool: 'conflict',
+        input_text: what,
+        ai_result: JSON.stringify(response),
+        summary: response.situation_assessment?.slice(0, 80) || 'Dispute plan',
+        severity: 'unknown',
+      });
     } catch (err) {
       console.error('SORTED conflict analysis error:', err);
       setResult({ _error: err?.message || 'Analysis failed. Please try again.' });
