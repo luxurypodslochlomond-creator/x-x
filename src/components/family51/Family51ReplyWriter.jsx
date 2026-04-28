@@ -21,10 +21,21 @@ const TONES = [
 
 export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff, suggestedTone, relatedCaseId }) {
   const [situation, setSituation] = useState('');
-  const [context, setContext]     = useState(() => {
-    if (!prefillContext) return '';
-    return `Replying to: ${prefillContext.sender || 'unknown sender'}\nLetter summary: ${prefillContext.summary || ''}\n${prefillContext.deadline && prefillContext.deadline !== 'No deadline mentioned' ? `Key deadline: ${prefillContext.deadline}\n` : ''}${prefillContext.what_this_means ? `\nBackground: ${prefillContext.what_this_means}` : ''}`;
-  });
+  const buildContext = (pc) => {
+    if (!pc) return '';
+    return `Replying to: ${pc.sender || 'unknown sender'}\nLetter summary: ${pc.summary || ''}\n${pc.deadline && pc.deadline !== 'No deadline mentioned' ? `Key deadline: ${pc.deadline}\n` : ''}${pc.what_this_means ? `\nBackground: ${pc.what_this_means}` : ''}`;
+  };
+
+  const [context, setContext] = useState(() => buildContext(prefillContext));
+
+  // Sync context if prefillContext changes after mount (e.g. new decode handoff)
+  useEffect(() => {
+    if (prefillContext) {
+      setContext(buildContext(prefillContext));
+      setResult(null);
+      setError(null);
+    }
+  }, [prefillContext]);
   const [tone, setTone]           = useState(() => suggestedTone || 'firm');
   const [name, setName]           = useState('');
   const [loading, setLoading]     = useState(false);
@@ -43,10 +54,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
     const t = TONES.find(x => x.id === selectedTone);
     const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     
-    try {
-      const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
-      prompt: `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
+    const prompt = `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}
@@ -62,34 +70,55 @@ Write a complete, ready-to-send letter. Must be:
 - Specific — name the issue, name the deadline, name what you want
 - Ready to copy and paste immediately with zero edits needed
 
-Return subject line, full letter body, 2-3 key points it makes, and one important tip the person must know before sending.`,
-      response_json_schema: {
-        type: 'object',
-        properties: {
-          subject_line: { type: 'string' },
-          letter_body:  { type: 'string' },
-          key_points:   { type: 'array', items: { type: 'string' } },
-          tip:          { type: 'string' },
-        },
+Return subject line, full letter body, 2-3 key points it makes, and one important tip the person must know before sending.`;
+
+    const schema = {
+      type: 'object',
+      properties: {
+        subject_line: { type: 'string' },
+        letter_body:  { type: 'string' },
+        key_points:   { type: 'array', items: { type: 'string' } },
+        tip:          { type: 'string' },
       },
-    });
+    };
+
+    try {
+      const response = await base44.integrations.Core.InvokeLLM({
+        model: 'claude_sonnet_4_6',
+        prompt,
+        response_json_schema: schema,
+      });
       return response;
     } catch (err) {
-      console.error('SORTED letter generation error:', err);
-      throw new Error(err?.message || 'Failed to generate letter. Please try again.');
+      console.warn('SORTED: claude_sonnet failed, falling back to default model', err?.message);
+      try {
+        const response = await base44.integrations.Core.InvokeLLM({
+          prompt,
+          response_json_schema: schema,
+        });
+        return response;
+      } catch (err2) {
+        console.error('SORTED letter generation error:', err2);
+        throw new Error(err2?.message || 'Failed to generate letter. Please try again.');
+      }
     }
   };
 
   const write = async () => {
     if (loading) return;
-    if (!context.trim()) { setError('Please tell us the situation first.'); return; }
+    if (!context.trim()) { setError('Please describe the situation first.'); return; }
     setLoading(true);
     setResult(null);
     setAlternatives([]);
     setError(null);
+    console.log('[ReplyWriter] Writing reply, tone:', tone, 'context length:', context.length);
 
     try {
       const response = await generateLetter(tone);
+      console.log('[ReplyWriter] Got response:', !!response);
+      if (!response || !response.letter_body) {
+        throw new Error('No letter was generated. Please try again.');
+      }
       setResult(response);
       setResultTone(tone);
       onResult?.();
