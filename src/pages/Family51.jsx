@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Eye, Scale, Trash2 } from 'lucide-react';
+import { base44 } from '@/api/base44Client';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
@@ -27,7 +28,22 @@ export default function Family51Page() {
   const [slideDir, setSlideDir] = useState(1);
   const [prefillContext, setPrefillContext] = useState(null);
   const [showPaySuccess, setShowPaySuccess] = useState(false);
+  const [caseCount, setCaseCount] = useState(0);
   const { isLocked, remaining, recordUse } = useSortedUsage();
+
+  // Load case count for badge
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const me = await base44.auth.me();
+        if (me) {
+          const results = await base44.entities.SortedCase.list('-created_date', 50);
+          setCaseCount(results?.length || 0);
+        }
+      } catch {}
+    };
+    load();
+  }, []);
 
   // Detect Stripe success redirect
   useEffect(() => {
@@ -128,9 +144,14 @@ export default function Family51Page() {
                onClick={() => { setShowHistory(true); setShowFAQ(false); setShowWhy(false); setMenuOpen(false); }}
                whileTap={{ scale: 0.95 }}
                title="My Cases"
-               style={{ width: 30, height: 30, borderRadius: '50%', border: '1px solid rgba(249,115,22,0.3)', background: 'rgba(249,115,22,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+               style={{ position: 'relative', width: 30, height: 30, borderRadius: '50%', border: '1px solid rgba(249,115,22,0.3)', background: 'rgba(249,115,22,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
              >
                <CasesIcon />
+               {caseCount > 0 && (
+                 <div style={{ position: 'absolute', top: -4, right: -4, minWidth: 14, height: 14, borderRadius: 7, background: '#f97316', border: '1.5px solid #080a0f', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3px' }}>
+                   <span style={{ fontSize: 8, fontWeight: 900, color: '#000', lineHeight: 1 }}>{caseCount > 9 ? '9+' : caseCount}</span>
+                 </div>
+               )}
              </motion.button>
              <motion.button
                onClick={() => { setShowWhy(true); setMenuOpen(false); }}
@@ -259,7 +280,7 @@ export default function Family51Page() {
          )}
 
          {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
-         {!activeTool && !isLocked && !menuOpen && !showWhy && !showFAQ && (
+         {!activeTool && !isLocked && !menuOpen && !showWhy && !showFAQ && !showHistory && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
             {/* STRIPE SUCCESS BANNER */}
