@@ -10,6 +10,7 @@ import SortedAbout from '@/components/family51/SortedAbout';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedLoader from '@/components/family51/SortedLoader';
+import SortedFAQ from '@/components/family51/SortedFAQ';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -20,6 +21,7 @@ export default function Family51Page() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [showFAQ, setShowFAQ] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [slideDir, setSlideDir] = useState(1);
@@ -57,6 +59,7 @@ export default function Family51Page() {
       setActiveTool(null);
       setShowWhy(false);
       setShowHistory(false);
+      setShowFAQ(false);
       setPrefillContext(null);
       setIsTransitioning(false);
     }, 180);
@@ -110,7 +113,7 @@ export default function Family51Page() {
           </div>
         </motion.button>
 
-         {activeTool || showWhy || showHistory ? (
+         {activeTool || showWhy || showHistory || showFAQ ? (
            <motion.button
              onClick={handleBack}
              whileTap={{ scale: 0.95 }}
@@ -121,6 +124,13 @@ export default function Family51Page() {
            </motion.button>
          ) : (
            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+             <motion.button
+               onClick={() => { setShowFAQ(true); setMenuOpen(false); }}
+               whileTap={{ scale: 0.95 }}
+               style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#f97316', background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 6, padding: '5px 10px', cursor: 'pointer' }}
+             >
+               FAQ
+             </motion.button>
              <motion.button
                onClick={() => { setShowHistory(true); setMenuOpen(false); }}
                whileTap={{ scale: 0.95 }}
@@ -145,12 +155,16 @@ export default function Family51Page() {
 
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
-         {menuOpen && !activeTool && !showWhy && (
+         {menuOpen && !activeTool && !showWhy && !showFAQ && (
            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(8,10,15,0.98)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 20px' }}>
              <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
                <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
                  <WhyIcon />
                  Why SORTED?
+               </button>
+               <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
+                 <FAQIcon />
+                 FAQ &amp; How It Works
                </button>
                <a href="/SortedPartnerKit" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <PartnerIcon />
@@ -194,8 +208,14 @@ export default function Family51Page() {
       <AnimatePresence mode="wait">
 
          {/* ── WHY SECTION ────────────────────────────────────── */}
+         {showFAQ && !activeTool && (
+           <motion.div key="faq" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+             <SortedFAQ accentColor="#f97316" />
+           </motion.div>
+         )}
+
          {showWhy && !activeTool && (
-          <motion.div key="why" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+           <motion.div key="why" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
@@ -245,7 +265,7 @@ export default function Family51Page() {
          )}
 
          {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
-         {!activeTool && !isLocked && !menuOpen && !showWhy && (
+         {!activeTool && !isLocked && !menuOpen && !showWhy && !showFAQ && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
             {/* STRIPE SUCCESS BANNER */}
@@ -716,6 +736,16 @@ function PartnerIcon() {
       <circle cx="11" cy="4" r="1.5" stroke="#f97316" strokeWidth="1.2" />
       <path d="M5 5.5v3a1 1 0 001 1h4a1 1 0 001-1v-3" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
       <path d="M4 11.5h8M5 13h6" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function FAQIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="8" r="6.5" stroke="#f97316" strokeWidth="1.2" fill="none" />
+      <path d="M8 5v1M8 8v3" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+      <circle cx="8" cy="5" r="0.5" fill="#f97316" opacity="0.8" />
     </svg>
   );
 }
