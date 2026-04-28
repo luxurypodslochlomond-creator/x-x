@@ -234,17 +234,17 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
 
       {/* HARDSHIP CARD */}
       <div style={{ marginTop: 24, borderRadius: 18, overflow: 'hidden', position: 'relative' }}>
-        <div style={{ background: 'linear-gradient(135deg, rgba(163,230,53,0.09) 0%, rgba(180,160,60,0.05) 100%)', border: '1px solid rgba(163,230,53,0.3)', borderRadius: 18, padding: '28px 24px' }}>
+        <div style={{ background: 'linear-gradient(135deg, rgba(234,179,8,0.09) 0%, rgba(180,160,60,0.05) 100%)', border: '1px solid rgba(234,179,8,0.3)', borderRadius: 18, padding: '28px 24px' }}>
           
           {/* Top badge */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#a3e635', flexShrink: 0 }} />
-            <span style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.2em', color: '#a3e635' }}>HARDSHIP ACCESS</span>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#eab308', flexShrink: 0 }} />
+            <span style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.2em', color: '#eab308' }}>HARDSHIP ACCESS</span>
           </div>
 
           <h3 style={{ fontSize: 20, fontWeight: 900, color: '#fff', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
             Can't afford it right now?<br />
-            <span style={{ color: '#a3e635' }}>We've still got you.</span>
+            <span style={{ color: '#eab308' }}>We've still got you.</span>
           </h3>
 
           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: '0 0 20px', lineHeight: 1.65 }}>
@@ -256,15 +256,15 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
               padding: '14px 20px', borderRadius: 12,
-              background: 'rgba(163,230,53,0.08)',
-              border: '1px solid rgba(163,230,53,0.35)',
-              color: '#a3e635', fontWeight: 800, fontSize: 14, textDecoration: 'none',
+              background: 'rgba(234,179,8,0.08)',
+              border: '1px solid rgba(234,179,8,0.35)',
+              color: '#eab308', fontWeight: 800, fontSize: 14, textDecoration: 'none',
               letterSpacing: '0.02em', transition: 'all 0.15s'
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <rect x="1.5" y="3" width="13" height="10" rx="1.2" stroke="#a3e635" strokeWidth="1.3" fill="none" />
-              <path d="M2 4L8 8.5L14 4" stroke="#a3e635" strokeWidth="1.3" strokeLinecap="round" />
+              <rect x="1.5" y="3" width="13" height="10" rx="1.2" stroke="#eab308" strokeWidth="1.3" fill="none" />
+              <path d="M2 4L8 8.5L14 4" stroke="#eab308" strokeWidth="1.3" strokeLinecap="round" />
             </svg>
             family@uf51.love
           </a>

@@ -535,7 +535,7 @@ export default function Family51Page() {
               </p>
             </div>
             <div style={{ marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#a3e635', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(163,230,53,0.3)', background: 'rgba(163,230,53,0.06)', transition: 'all 0.15s', letterSpacing: '0.02em' }}>Can't afford it? Email us — we'll sort it.</a>
+              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#eab308', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(234,179,8,0.3)', background: 'rgba(234,179,8,0.06)', transition: 'all 0.15s', letterSpacing: '0.02em' }}>Can't afford it? Email us — we'll sort it.</a>
               <button
                 onClick={() => setShowMauro(true)}
                 style={{ display: 'block', width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', transition: 'all 0.15s', letterSpacing: '0.02em' }}
