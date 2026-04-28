@@ -12,6 +12,7 @@ import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedLoader from '@/components/family51/SortedLoader';
 import SortedFAQ from '@/components/family51/SortedFAQ';
+import MauroChat from '@/components/family51/MauroChat';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -29,20 +30,15 @@ export default function Family51Page() {
   const [prefillContext, setPrefillContext] = useState(null);
   const [showPaySuccess, setShowPaySuccess] = useState(false);
   const [caseCount, setCaseCount] = useState(0);
+  const [showMauro, setShowMauro] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
 
-  // Load case count for badge
+  // Load case count from localStorage for badge
   useEffect(() => {
-    const load = async () => {
-      try {
-        const me = await base44.auth.me();
-        if (me) {
-          const results = await base44.entities.SortedCase.list('-created_date', 50);
-          setCaseCount(results?.length || 0);
-        }
-      } catch {}
-    };
-    load();
+    try {
+      const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
+      setCaseCount(cases.length);
+    } catch {}
   }, []);
 
   // Detect Stripe success redirect
@@ -484,6 +480,39 @@ export default function Family51Page() {
           </motion.div>
         )}
 
+        {/* ── MAURO AI HELPDESK MODAL ─────────────── */}
+        <AnimatePresence>
+          {showMauro && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: '0 0 0 0' }}
+              onClick={() => setShowMauro(false)}
+            >
+              <motion.div
+                initial={{ y: 60, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 60, opacity: 0 }}
+                transition={{ duration: 0.22 }}
+                onClick={e => e.stopPropagation()}
+                style={{ width: '100%', maxWidth: 520, background: '#0d1117', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px 20px 0 0', padding: '28px 24px 40px' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+                  <div>
+                    <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>AI HELPDESK</div>
+                    <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>Talk to Mauro</div>
+                  </div>
+                  <button onClick={() => setShowMauro(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.3)', fontSize: 20, lineHeight: 1 }}>
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <MauroChat />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* ── PAYWALL — shown when locked ───────────── */}
         {!activeTool && isLocked && (
           <motion.div
@@ -505,8 +534,14 @@ export default function Family51Page() {
                 £9.99/month · cancel any time · no small print
               </p>
             </div>
-            <div style={{ marginBottom: 20 }}>
-              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#06b6d4', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(6,182,212,0.3)', background: 'rgba(6,182,212,0.05)', marginBottom: 16, transition: 'all 0.15s' }} onMouseEnter={(e) => { e.target.style.background = 'rgba(6,182,212,0.12)'; e.target.style.borderColor = 'rgba(6,182,212,0.6)'; }} onMouseLeave={(e) => { e.target.style.background = 'rgba(6,182,212,0.05)'; e.target.style.borderColor = 'rgba(6,182,212,0.3)'; }}>💙 Can't afford it? We can help.</a>
+            <div style={{ marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#22c55e', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(34,197,94,0.35)', background: 'rgba(34,197,94,0.07)', transition: 'all 0.15s', letterSpacing: '0.02em' }}>Can't afford it? Email us — we'll sort it.</a>
+              <button
+                onClick={() => setShowMauro(true)}
+                style={{ display: 'block', width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', transition: 'all 0.15s', letterSpacing: '0.02em' }}
+              >
+                Talk to Mauro — AI helpdesk
+              </button>
             </div>
             <SortedForLifeCard compact />
           </motion.div>
