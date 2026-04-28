@@ -125,11 +125,12 @@ export default function Family51Page() {
                FAQ
              </motion.button>
              <motion.button
-               onClick={() => { setShowHistory(true); setMenuOpen(false); }}
+               onClick={() => { setShowHistory(true); setShowFAQ(false); setShowWhy(false); setMenuOpen(false); }}
                whileTap={{ scale: 0.95 }}
-               style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#f97316', background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 6, padding: '5px 10px', cursor: 'pointer' }}
+               title="My Cases"
+               style={{ width: 30, height: 30, borderRadius: '50%', border: '1px solid rgba(249,115,22,0.3)', background: 'rgba(249,115,22,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
              >
-               MY CASES
+               <CasesIcon />
              </motion.button>
              <motion.button
                onClick={() => { setShowWhy(true); setMenuOpen(false); }}
@@ -732,6 +733,16 @@ function PartnerIcon() {
       <circle cx="11" cy="4" r="1.5" stroke="#f97316" strokeWidth="1.2" />
       <path d="M5 5.5v3a1 1 0 001 1h4a1 1 0 001-1v-3" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
       <path d="M4 11.5h8M5 13h6" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CasesIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+      <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#f97316" strokeWidth="1.2" fill="none" />
+      <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      <path d="M4.5 8h6M4.5 10.5h4" stroke="#f97316" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
     </svg>
   );
 }
