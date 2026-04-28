@@ -212,33 +212,61 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
       </div>
 
       {/* HARDSHIP CARD */}
-      <div style={{ marginTop: 24, padding: '24px 20px', background: 'rgba(6,182,212,0.06)', border: '1px solid rgba(6,182,212,0.25)', borderRadius: 14 }}>
-        <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: '#06b6d4', marginBottom: 10 }}>CAN'T AFFORD SORTED?</div>
-        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', margin: '0 0 8px', lineHeight: 1.6, fontWeight: 600 }}>
-          We don't want money to be the reason you don't get help.
-        </p>
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 16px', lineHeight: 1.6 }}>
-          Email us, tell us what's going on, and we'll figure something out. No forms, no means testing, no judgment. Just email us and we'll help.
-        </p>
-        <a
-          href="mailto:family@uf51.love?subject=I need help but can't afford SORTED right now"
-          style={{
-            display: 'block', textAlign: 'center', padding: '12px 20px', borderRadius: 10,
-            background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.4)',
-            color: '#06b6d4', fontWeight: 800, fontSize: 13, textDecoration: 'none',
-            letterSpacing: '0.04em'
-          }}
-        >
-          family@uf51.love — we read every message
-        </a>
-        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: '12px 0 0', textAlign: 'center', lineHeight: 1.5 }}>
-          One day this will be instant AI-powered hardship support — for now it's us, real people, reading your email and doing what we can. ❤️
-        </p>
+      <div style={{ marginTop: 24, borderRadius: 18, overflow: 'hidden', position: 'relative' }}>
+        {/* Gradient background */}
+        <div style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.12) 0%, rgba(99,102,241,0.08) 100%)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 18, padding: '28px 24px' }}>
+          
+          {/* Top badge */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#06b6d4', boxShadow: '0 0 8px rgba(6,182,212,0.8)', flexShrink: 0 }} />
+            <span style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.2em', color: '#06b6d4' }}>HARDSHIP ACCESS</span>
+          </div>
+
+          <h3 style={{ fontSize: 20, fontWeight: 900, color: '#fff', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+            Can't afford it right now?<br />
+            <span style={{ color: '#06b6d4' }}>We've still got you.</span>
+          </h3>
+
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: '0 0 20px', lineHeight: 1.65 }}>
+            No forms. No means testing. No judgment. Just email us — tell us what's going on — and we'll sort out free access. Simple as that.
+          </p>
+
+          <a
+            href="mailto:family@uf51.love?subject=Hardship access — I need help but can't afford SORTED right now"
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+              padding: '14px 20px', borderRadius: 12,
+              background: 'linear-gradient(135deg, rgba(6,182,212,0.2), rgba(99,102,241,0.15))',
+              border: '1px solid rgba(6,182,212,0.5)',
+              color: '#fff', fontWeight: 800, fontSize: 14, textDecoration: 'none',
+              letterSpacing: '0.02em', transition: 'all 0.15s'
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1.5" y="3" width="13" height="10" rx="1.2" stroke="#06b6d4" strokeWidth="1.3" fill="none" />
+              <path d="M2 4L8 8.5L14 4" stroke="#06b6d4" strokeWidth="1.3" strokeLinecap="round" />
+            </svg>
+            family@uf51.love
+          </a>
+
+          {/* Sponsor seed */}
+          <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1.5L8.5 5H12L9 7.5L10 11L7 9L4 11L5 7.5L2 5H5.5L7 1.5Z" stroke="rgba(255,255,255,0.3)" strokeWidth="1.1" strokeLinejoin="round" fill="none" />
+              </svg>
+            </div>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: 0, lineHeight: 1.5 }}>
+              Hardship access is currently funded by UF51. We're actively seeking bank &amp; financial services partners to sponsor free access at scale — making legal help truly universal.
+            </p>
+          </div>
+
+        </div>
       </div>
 
-      <div style={{ marginTop: 16, padding: '16px 18px', background: `${accentColor}06`, border: `1px solid ${accentColor}15`, borderRadius: 12, textAlign: 'center' }}>
-        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6 }}>
-          Got a question not answered here? Email <strong style={{ color: 'rgba(255,255,255,0.7)' }}>family@uf51.love</strong> — we'll answer and add it to the FAQ.
+      <div style={{ marginTop: 12, padding: '14px 18px', background: `${accentColor}05`, border: `1px solid ${accentColor}12`, borderRadius: 12, textAlign: 'center' }}>
+        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0, lineHeight: 1.6 }}>
+          Got a question not answered here? Email <strong style={{ color: 'rgba(255,255,255,0.6)' }}>family@uf51.love</strong> — we'll answer and add it to the FAQ.
         </p>
       </div>
     </motion.div>
