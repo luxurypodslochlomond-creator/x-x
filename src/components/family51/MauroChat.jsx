@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 
 // Mauro — SORTED's AI helpdesk. Friendly, honest, not a team member.
-const SYSTEM_PROMPT = `You are Mauro, the AI helpdesk for SORTED — a tool that helps people decode scary legal letters, write replies, and resolve disputes.
+const SYSTEM_PROMPT = `You are SORTED AI, the helpdesk for SORTED — a tool that helps people decode scary legal letters, write replies, and resolve disputes.
 
 Your job: answer questions about how SORTED works, what it can help with, pricing (£9.99/month, 3 free uses, cancel anytime), hardship access (just email family@uf51.love), privacy (nothing stored, nothing logged), and how the AI tools work.
 
@@ -14,7 +14,7 @@ Keep replies short — 2-4 sentences max unless they ask something complex. No c
 
 export default function MauroChat() {
   const [messages, setMessages] = useState([
-    { role: 'assistant', text: "Hi, I'm Mauro — I can answer questions about SORTED, how it works, pricing, or anything else. What's on your mind?" }
+    { role: 'assistant', text: "Hi — I'm SORTED AI. I can answer questions about how SORTED works, pricing, hardship access, or anything else. What's on your mind?" }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);

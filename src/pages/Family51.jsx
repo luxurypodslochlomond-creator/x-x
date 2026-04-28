@@ -501,7 +501,7 @@ export default function Family51Page() {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>AI HELPDESK</div>
-                    <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>Talk to Mauro</div>
+                    <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>SORTED AI</div>
                   </div>
                   <button onClick={() => setShowMauro(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.3)', fontSize: 20, lineHeight: 1 }}>
                     <X className="w-5 h-5" />
@@ -540,7 +540,7 @@ export default function Family51Page() {
                 onClick={() => setShowMauro(true)}
                 style={{ display: 'block', width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', transition: 'all 0.15s', letterSpacing: '0.02em' }}
               >
-                Talk to Mauro — AI helpdesk
+                Talk to SORTED AI — got questions?
               </button>
             </div>
             <SortedForLifeCard compact />
