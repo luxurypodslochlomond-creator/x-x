@@ -268,7 +268,7 @@ export default function Family51Page() {
             <div style={{ marginTop: 40, textAlign: 'center' }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE SOLUTION</div>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>
-                SORTED decodes it in <strong>plain English</strong>. Shows you what it means. Lists what to do next. You're not alone anymore.
+                SORTED decodes it in <strong>your language</strong>. Shows you what it means. Lists what to do next. You're not alone anymore.
               </p>
             </div>
 
@@ -311,7 +311,7 @@ export default function Family51Page() {
                     <span style={{ color: '#ef4444' }}>dispute?</span>
                   </h1>
                   <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', margin: '16px 0 0', lineHeight: 1.55, fontWeight: 500 }}>
-                    SORTED reads your letter and tells you <strong style={{ color: '#fff' }}>exactly what it means</strong> and <strong style={{ color: '#fff' }}>exactly what to do</strong> — in plain English, in seconds.
+                    SORTED reads your letter and tells you <strong style={{ color: '#fff' }}>exactly what it means</strong> and <strong style={{ color: '#fff' }}>exactly what to do</strong> — in your language, in seconds.
                   </p>
                   <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0' }}>
                     No jargon. No judgement. Any language. Any country.
@@ -332,7 +332,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRTarget />} text="Exact steps to take, and by when — no walls of text" />
                 <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & relevant bodies automatically" />
                 <WhyRow icon={<WRLock />} text="Your letter is processed by AI and immediately discarded — never stored, never sold, never used to train anything" />
-                <WhyRow icon={<WRMail />} text="Email the plain-English breakdown to yourself — then forward it to a family member, solicitor, or advice worker. We never email third parties on your behalf (that would risk your privacy)." />
+                <WhyRow icon={<WRMail />} text="Email the breakdown to yourself — then forward it to a family member, solicitor, or advice worker. We never email third parties on your behalf (that would risk your privacy)." />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
                 3 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>{geoPrice.inline}</strong> if you want unlimited. Cancel anytime.
