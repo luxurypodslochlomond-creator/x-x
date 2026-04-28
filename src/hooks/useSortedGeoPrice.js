@@ -17,6 +17,10 @@ const GEO_PRICES = {
   AE: { symbol: '$', amount: '9.99', currency: 'USD', label: '$9.99/month', cta: 'GET SORTED — $9.99/MONTH', sub: '/ month · cancel anytime', inline: '$9.99/month' },
   IN: { symbol: '₹', amount: '849', currency: 'INR', label: '₹849/month', cta: 'GET SORTED — ₹849/MONTH', sub: '/ month · cancel anytime', inline: '₹849/month' },
   SG: { symbol: '$', amount: '13.99', currency: 'SGD', label: 'SG$13.99/month', cta: 'GET SORTED — SG$13.99/MONTH', sub: '/ month · cancel anytime', inline: 'SG$13.99/month' },
+  PH: { symbol: '₱', amount: '579', currency: 'PHP', label: '₱579/month', cta: 'GET SORTED — ₱579/MONTH', sub: '/ month · cancel anytime', inline: '₱579/month' },
+  MY: { symbol: 'RM', amount: '44.99', currency: 'MYR', label: 'RM44.99/month', cta: 'GET SORTED — RM44.99/MONTH', sub: '/ month · cancel anytime', inline: 'RM44.99/month' },
+  TH: { symbol: '฿', amount: '349', currency: 'THB', label: '฿349/month', cta: 'GET SORTED — ฿349/MONTH', sub: '/ month · cancel anytime', inline: '฿349/month' },
+  ID: { symbol: 'Rp', amount: '159000', currency: 'IDR', label: 'Rp159,000/month', cta: 'GET SORTED — Rp159,000/MONTH', sub: '/ month · cancel anytime', inline: 'Rp159,000/month' },
 };
 
 const DEFAULT = GEO_PRICES.GB;
@@ -54,6 +58,12 @@ function detectCountryCode() {
       'Asia/Dubai': 'AE',
       'Asia/Kolkata': 'IN',
       'Asia/Singapore': 'SG',
+      'Asia/Manila': 'PH',
+      'Asia/Kuala_Lumpur': 'MY',
+      'Asia/Bangkok': 'TH',
+      'Asia/Jakarta': 'ID',
+      'Asia/Makassar': 'ID',
+      'Asia/Jayapura': 'ID',
       'Africa/Johannesburg': 'ZA',
     };
     return tzMap[tz] || 'GB';
