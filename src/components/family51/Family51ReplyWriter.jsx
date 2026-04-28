@@ -81,7 +81,8 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
   };
 
   const write = async () => {
-    if (!context.trim() || loading) return;
+    if (loading) return;
+    if (!context.trim()) { setError('Please tell us the situation first.'); return; }
     setLoading(true);
     setResult(null);
     setAlternatives([]);
@@ -117,13 +118,12 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
     setLoading(false);
   };
 
-  // Auto-regenerate if tone changes after generating
+  // Auto-regenerate if tone changes AFTER a result is already shown
   useEffect(() => {
-    if (result && resultTone && tone !== resultTone && !loading && context.trim()) {
-      regenerateWithDifferentTone(tone);
-      setResultTone(tone);
-    }
-  }, [tone, result, resultTone, loading, context]);
+    if (!result || !resultTone || tone === resultTone || loading || !context.trim()) return;
+    regenerateWithDifferentTone(tone);
+    setResultTone(tone);
+  }, [tone]); // only watch tone changes — not result/context which would cause loops
 
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
