@@ -112,18 +112,16 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
   const regenerateWithDifferentTone = async (newTone) => {
     if (!context.trim() || loading) return;
     setLoading(true);
-
-    const response = await generateLetter(newTone);
-    setAlternatives([...alternatives, response]);
-    setLoading(false);
+    setError(null);
+    try {
+      const response = await generateLetter(newTone);
+      setAlternatives(prev => [...prev, response]);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  // Auto-regenerate if tone changes AFTER a result is already shown
-  useEffect(() => {
-    if (!result || !resultTone || tone === resultTone || loading || !context.trim()) return;
-    regenerateWithDifferentTone(tone);
-    setResultTone(tone);
-  }, [tone]); // only watch tone changes — not result/context which would cause loops
 
   const sendEmail = async () => {
     if (!emailAddr.trim() || !result || emailing) return;
@@ -163,55 +161,36 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
       {/* PREFILL BANNER — shown when handed off from decoder */}
       {prefillContext && (
         <div style={{ padding: '10px 14px', borderRadius: 10, background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.25)', display: 'flex', gap: 10, alignItems: 'center' }}>
-          <span style={{ fontSize: 14 }}>✓</span>
-          <p style={{ fontSize: 11, color: 'rgba(6,182,212,0.9)', margin: 0, fontWeight: 700, letterSpacing: '0.05em' }}>
-            Pre-loaded from your decoded letter — edit if needed, then write.
+          <span style={{ fontSize: 16 }}>✓</span>
+          <p style={{ fontSize: 12, color: 'rgba(6,182,212,0.9)', margin: 0, fontWeight: 700 }}>
+            Letter loaded — pick a tone, add your name, hit write.
           </p>
         </div>
       )}
 
       {/* GEO SELECTOR */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
         <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
       </div>
 
-      {/* SITUATION CHIPS */}
-      <div className="space-y-2">
-        <Label>SITUATION TYPE (optional)</Label>
-        <div className="flex flex-wrap gap-2">
-          {SITUATIONS.map(s => (
-            <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
-              {s}
-            </Chip>
-          ))}
+      {/* SITUATION CHIPS — only show if no prefill */}
+      {!prefillContext && (
+        <div className="space-y-2">
+          <Label>SITUATION TYPE (optional)</Label>
+          <div className="flex flex-wrap gap-2">
+            {SITUATIONS.map(s => (
+              <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
+                {s}
+              </Chip>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* CONTEXT */}
+      {/* TONE — moved above context so user picks vibe first */}
       <div className="space-y-2">
-        <Label>TELL US THE SITUATION</Label>
-        <textarea
-          value={context}
-          onChange={e => setContext(e.target.value)}
-          placeholder="Just tell us in your own words what's happened. Who are you writing to? What's the dispute? What do you want to achieve? Don't worry about how you write it — we'll handle that."
-          style={{
-            width: '100%', height: 160, background: 'rgba(255,255,255,0.03)',
-            border: `1px solid ${context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
-            borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
-            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
-            transition: 'border-color 0.2s', boxSizing: 'border-box',
-          }}
-          onFocus={e => e.target.style.borderColor = accentColor + '80'}
-          onBlur={e => e.target.style.borderColor = context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
-        />
-      </div>
-
-      {/* TONE */}
-      <div className="space-y-2">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Label>TONE {suggestedTone && '(AI suggested)'}</Label>
-        </div>
+        <Label>TONE {suggestedTone && <span style={{ color: accentColor, marginLeft: 4 }}>★ AI suggested</span>}</Label>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {TONES.map(t => (
             <button
@@ -233,6 +212,25 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
             </button>
           ))}
         </div>
+      </div>
+
+      {/* CONTEXT */}
+      <div className="space-y-2">
+        <Label>TELL US THE SITUATION</Label>
+        <textarea
+          value={context}
+          onChange={e => setContext(e.target.value)}
+          placeholder="Who are you writing to? What happened? What do you want? Don't filter it — we'll handle the writing."
+          style={{
+            width: '100%', height: prefillContext ? 100 : 140, background: 'rgba(255,255,255,0.03)',
+            border: `1px solid ${context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+            borderRadius: 12, color: '#fff', fontSize: 13, padding: '12px 14px',
+            resize: 'vertical', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+            transition: 'border-color 0.2s', boxSizing: 'border-box',
+          }}
+          onFocus={e => e.target.style.borderColor = accentColor + '80'}
+          onBlur={e => e.target.style.borderColor = context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
+        />
       </div>
 
       {/* NAME */}
