@@ -42,27 +42,21 @@ export default function Family51Page() {
   const handleToolOpen = (toolId, handoffData = null) => {
     if (isLocked) return;
     setSlideDir(1);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setActiveTool(toolId);
-      setPrefillContext(handoffData);
-      setMenuOpen(false);
-      setShowHistory(false);
-      setIsTransitioning(false);
-    }, 180);
+    setActiveTool(toolId);
+    setPrefillContext(handoffData);
+    setMenuOpen(false);
+    setShowHistory(false);
+    setShowWhy(false);
+    setShowFAQ(false);
   };
 
   const handleBack = () => {
     setSlideDir(-1);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setActiveTool(null);
-      setShowWhy(false);
-      setShowHistory(false);
-      setShowFAQ(false);
-      setPrefillContext(null);
-      setIsTransitioning(false);
-    }, 180);
+    setActiveTool(null);
+    setShowWhy(false);
+    setShowHistory(false);
+    setShowFAQ(false);
+    setPrefillContext(null);
   };
 
   useEffect(() => {
@@ -101,7 +95,6 @@ export default function Family51Page() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
-      {isTransitioning && <SortedLoader />}
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -146,7 +139,7 @@ export default function Family51Page() {
              >
                ?
              </motion.button>
-             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.95 }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#f97316' }}>
+             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.9 }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: '#f97316', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}>
                {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
              </motion.button>
            </div>
@@ -156,7 +149,7 @@ export default function Family51Page() {
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
          {menuOpen && !activeTool && !showWhy && !showFAQ && (
-           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(8,10,15,0.98)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 20px' }}>
+           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(8,10,15,0.98)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 20px' }}>
              <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
                <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
                  <WhyIcon />
@@ -209,13 +202,13 @@ export default function Family51Page() {
 
          {/* ── WHY SECTION ────────────────────────────────────── */}
          {showFAQ && !activeTool && (
-           <motion.div key="faq" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+           <motion.div key="faq" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
              <SortedFAQ accentColor="#f97316" />
            </motion.div>
          )}
 
          {showWhy && !activeTool && (
-           <motion.div key="why" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+           <motion.div key="why" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
@@ -266,7 +259,7 @@ export default function Family51Page() {
 
          {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
          {!activeTool && !isLocked && !menuOpen && !showWhy && !showFAQ && (
-          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
 
             {/* STRIPE SUCCESS BANNER */}
             {showPaySuccess && (
@@ -398,7 +391,7 @@ export default function Family51Page() {
 
         {/* ── CASE HISTORY ──────────────────────────────────── */}
         {showHistory && !activeTool && (
-          <motion.div key="history" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+          <motion.div key="history" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
             <SortedCaseHistory />
           </motion.div>
         )}
@@ -407,10 +400,10 @@ export default function Family51Page() {
         {activeTool && (
           <motion.div
             key={activeTool}
-            initial={{ opacity: 0, x: slideDir * 40 }}
+            initial={{ opacity: 0, x: slideDir * 30 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: slideDir * -40 }}
-            transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+            exit={{ opacity: 0, x: slideDir * -30 }}
+            transition={{ duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
           >
             {/* TOOL TITLE BAR */}
@@ -563,7 +556,8 @@ function BigButton({ color, onClick, icon, label, sub, tag, delay }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      whileTap={{ scale: 0.97 }}
+      whileTap={{ scale: 0.96 }}
+      whileHover={{ scale: 1.01 }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -571,8 +565,10 @@ function BigButton({ color, onClick, icon, label, sub, tag, delay }) {
         width: '100%', textAlign: 'left', cursor: 'pointer', padding: '22px 22px',
         borderRadius: 16, border: `1px solid ${hovered ? color + '80' : color + '30'}`,
         background: hovered ? `${color}12` : `${color}07`,
-        transition: 'all 0.15s', display: 'flex', alignItems: 'center', gap: 18,
-        boxShadow: hovered ? `0 0 30px ${color}25` : 'none',
+        transition: 'border 0.12s, background 0.12s, box-shadow 0.12s', display: 'flex', alignItems: 'center', gap: 18,
+        boxShadow: hovered ? `0 0 30px ${color}20` : 'none',
+        WebkitTapHighlightColor: 'transparent',
+        touchAction: 'manipulation',
       }}
     >
       <div style={{ flexShrink: 0 }}>{icon}</div>
