@@ -4,6 +4,7 @@ import { Trash2 } from 'lucide-react';
 
 // Case history is stored in localStorage — no login ever needed
 const STORAGE_KEY = 'sorted_case_history_v1';
+const FREE_CASE_LIMIT = 3;
 
 const TOOL_CONFIG = {
   letter:   { label: 'DECODED LETTER', color: '#f97316' },
@@ -31,8 +32,8 @@ export function saveCaseToHistory({ tool, input_text, ai_result, summary, severi
       severity: severity || 'unknown',
       created_date: new Date().toISOString(),
     };
-    // Prepend, keep max 50
-    const updated = [newCase, ...existing].slice(0, 50);
+    // Prepend, keep max FREE_CASE_LIMIT (free users get 3 saved)
+    const updated = [newCase, ...existing].slice(0, FREE_CASE_LIMIT);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   } catch {}
 }
@@ -270,11 +271,16 @@ export default function SortedCaseHistory() {
         <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>ON THIS DEVICE</div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
           <div style={{ fontSize: 22, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>MY CASES</div>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{cases.length} saved</div>
+          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{cases.length} / {FREE_CASE_LIMIT} saved</div>
         </div>
         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: '6px 0 0', lineHeight: 1.5 }}>
-          Saved locally on this device only. Nothing leaves your phone.
+          Saved locally on this device. Nothing leaves your phone.
         </p>
+        {cases.length >= FREE_CASE_LIMIT && (
+          <div style={{ marginTop: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>
+            <span style={{ color: '#f97316', fontWeight: 800 }}>3 cases saved</span> — newest replaces oldest. Subscribe for unlimited storage.
+          </div>
+        )}
       </div>
 
       {/* FILTER TABS */}
@@ -306,7 +312,12 @@ export default function SortedCaseHistory() {
       {/* CASES */}
       {filtered.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '48px 20px', border: '1px dashed rgba(249,115,22,0.15)', borderRadius: 14 }}>
-          <div style={{ fontSize: 28, marginBottom: 12 }}>📂</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect x="5" y="4" width="22" height="24" rx="3" stroke="rgba(249,115,22,0.4)" strokeWidth="1.5" fill="none"/>
+              <path d="M10 11h12M10 15h12M10 19h8" stroke="rgba(249,115,22,0.3)" strokeWidth="1.3" strokeLinecap="round"/>
+            </svg>
+          </div>
           <p style={{ fontSize: 14, fontWeight: 700, color: 'rgba(255,255,255,0.5)', margin: '0 0 6px' }}>
             {cases.length === 0 ? 'No cases yet' : 'No cases of this type'}
           </p>

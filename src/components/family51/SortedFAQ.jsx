@@ -96,6 +96,27 @@ const FAQ_ITEMS = [
     ]
   },
   {
+    category: 'AI, Accuracy & Hallucinations',
+    items: [
+      {
+        q: 'Can AI make things up? What about hallucinations?',
+        a: 'Yes — AI can hallucinate. It can invent phone numbers, misquote legislation, or be confidently wrong. SORTED takes this seriously. We\'ve built in explicit anti-hallucination rules: if the AI isn\'t certain of a phone number or law, it flags it with "(verify this)" and tells you to search rather than give a wrong number. We\'d rather say "check this" than mislead you on something legal.'
+      },
+      {
+        q: 'How accurate is SORTED\'s legal information?',
+        a: 'Very good for understanding what a letter means and what your options are. Less reliable for exact statute numbers or specific case law. Think of SORTED like a brilliant, well-read friend who knows the system — not a qualified solicitor. For anything court-critical, use our output to brief a real lawyer. You\'ll save hours of billable time.'
+      },
+      {
+        q: 'What if SORTED gives me wrong advice?',
+        a: 'We\'re clear: we\'re not lawyers and this isn\'t legal advice. SORTED helps you understand and act — but on anything high-stakes (eviction proceedings, court defence, fraud allegations), cross-check with Citizens Advice, a solicitor, or a legal aid charity. We\'ll tell you who to call in the result itself.'
+      },
+      {
+        q: 'Why should I trust SORTED over a Google search?',
+        a: 'Google gives you general information. SORTED reads YOUR actual letter, identifies YOUR specific situation, jurisdiction, and deadlines, then gives you a personalised action plan. It\'s the difference between a textbook and a conversation with someone who\'s read your exact problem.'
+      }
+    ]
+  },
+  {
     category: 'Privacy & Security',
     items: [
       {
@@ -107,8 +128,8 @@ const FAQ_ITEMS = [
         a: 'We don\'t have copies to give them. Your letter is never stored. Only you and your AI session have it.'
       },
       {
-        q: 'What if I want to delete my account?',
-        a: 'Hit "Clear all my data" in the menu. All your case history is deleted from our servers. You stay anonymous.'
+        q: 'What if I want to delete my data?',
+        a: 'Hit "Clear all my data" in the menu. Your case history is wiped from this device instantly. You stay completely anonymous — we have nothing stored on our servers to delete.'
       }
     ]
   }
@@ -213,8 +234,7 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
 
       {/* HARDSHIP CARD */}
       <div style={{ marginTop: 24, borderRadius: 18, overflow: 'hidden', position: 'relative' }}>
-        {/* Gradient background */}
-        <div style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.12) 0%, rgba(99,102,241,0.08) 100%)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 18, padding: '28px 24px' }}>
+        <div style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.14) 0%, rgba(6,182,212,0.06) 100%)', border: '1px solid rgba(6,182,212,0.5)', borderRadius: 18, padding: '28px 24px', boxShadow: '0 0 32px rgba(6,182,212,0.12), inset 0 0 24px rgba(6,182,212,0.04)' }}>
           
           {/* Top badge */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
@@ -236,10 +256,11 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
               padding: '14px 20px', borderRadius: 12,
-              background: 'linear-gradient(135deg, rgba(6,182,212,0.2), rgba(99,102,241,0.15))',
-              border: '1px solid rgba(6,182,212,0.5)',
-              color: '#fff', fontWeight: 800, fontSize: 14, textDecoration: 'none',
-              letterSpacing: '0.02em', transition: 'all 0.15s'
+              background: 'rgba(6,182,212,0.15)',
+              border: '1px solid rgba(6,182,212,0.6)',
+              color: '#06b6d4', fontWeight: 800, fontSize: 14, textDecoration: 'none',
+              letterSpacing: '0.02em', transition: 'all 0.15s',
+              boxShadow: '0 0 20px rgba(6,182,212,0.2)'
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
