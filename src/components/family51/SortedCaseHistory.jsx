@@ -19,12 +19,23 @@ const SEVERITY_COLORS = {
   unknown:   'rgba(255,255,255,0.25)',
 };
 
+// Session ID — stays the same for the whole browser session so related cases are linked
+function getSessionId() {
+  let sid = sessionStorage.getItem('sorted_session_id');
+  if (!sid) { sid = Date.now().toString(36); sessionStorage.setItem('sorted_session_id', sid); }
+  return sid;
+}
+
 // Public API — call this from the tool components after a result
-export function saveCaseToHistory({ tool, input_text, ai_result, summary, severity }) {
+// Pass related_case_id when handing off between tools so cases are linked
+export function saveCaseToHistory({ tool, input_text, ai_result, summary, severity, related_case_id }) {
   try {
     const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const id = Date.now().toString();
     const newCase = {
-      id: Date.now().toString(),
+      id,
+      session_id: getSessionId(),
+      related_case_id: related_case_id || null,
       tool,
       input_text: (input_text || '').slice(0, 2000),
       ai_result,
@@ -35,7 +46,8 @@ export function saveCaseToHistory({ tool, input_text, ai_result, summary, severi
     // Prepend, keep max FREE_CASE_LIMIT (free users get 3 saved)
     const updated = [newCase, ...existing].slice(0, FREE_CASE_LIMIT);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  } catch {}
+    return id; // return so callers can pass it forward as related_case_id
+  } catch { return null; }
 }
 
 function parseResult(ai_result) {
@@ -192,6 +204,9 @@ function CaseCard({ caseItem, onDelete }) {
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4, flexWrap: 'wrap' }}>
             <span style={{ fontSize: 9, fontWeight: 900, letterSpacing: '0.14em', color: tool.color, border: `1px solid ${tool.color}40`, borderRadius: 4, padding: '2px 7px' }}>{tool.label}</span>
+            {caseItem.related_case_id && (
+              <span style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.08em' }}>↩ LINKED CASE</span>
+            )}
             <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 'auto' }}>{formatDate(caseItem.created_date)}</span>
           </div>
           <p style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.35, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

@@ -32,6 +32,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const [emailSent, setEmailSent] = useState(false);
   const [emailing, setEmailing] = useState(false);
   const [decodeError, setDecodeError] = useState(null);
+  const [caseId, setCaseId] = useState(null);
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
   const geoRef = useRef(geo);
@@ -117,13 +118,15 @@ Return a JSON object with these EXACT fields:
         setResult(response);
         // Save to local case history — no login needed
         const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
-        saveCaseToHistory({
+        const caseId = saveCaseToHistory({
           tool: 'letter',
           input_text: text || '',
           ai_result: JSON.stringify(response),
           summary: response.letter_summary || 'Decoded letter',
           severity: severityMap[response.severity] || 'unknown',
         });
+        // Store case ID so handoff to reply can link cases
+        setCaseId(caseId);
       }
     } catch (err) {
       console.error('SORTED decode error:', err);
@@ -453,7 +456,7 @@ Return a JSON object with these EXACT fields:
             {/* HANDOFF — dominant CTA */}
             {onHandoff && (
               <motion.button
-                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggestedTone: result.suggested_tone })}
+                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggestedTone: result.suggested_tone, related_case_id: caseId })}
                 whileTap={{ scale: 0.97 }}
                 style={{
                   width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 13,

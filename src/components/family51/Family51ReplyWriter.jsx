@@ -19,7 +19,7 @@ const TONES = [
   { id: 'formal', label: 'FORMAL',  desc: 'Legal weight.' },
 ];
 
-export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff, suggestedTone }) {
+export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff, suggestedTone, relatedCaseId }) {
   const [situation, setSituation] = useState('');
   const [context, setContext]     = useState(() => {
     if (!prefillContext) return '';
@@ -99,6 +99,7 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
         ai_result: JSON.stringify(response),
         summary: response.subject_line || 'Written reply',
         severity: 'unknown',
+        related_case_id: relatedCaseId || null,
       });
     } catch (err) {
       setError(err.message);

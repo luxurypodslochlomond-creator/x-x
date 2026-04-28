@@ -54,7 +54,7 @@ export default function Family51Page() {
   }, []);
 
   const handleToolOpen = (toolId, handoffData = null) => {
-    if (isLocked) return;
+    // Allow handoff between tools even if locked — locking only blocks starting new work from home
     setSlideDir(1);
     setActiveTool(toolId);
     setPrefillContext(handoffData);
@@ -446,7 +446,8 @@ export default function Family51Page() {
                 onResult={recordUse}
                 prefillContext={prefillContext}
                 suggestedTone={prefillContext?.suggestedTone}
-                onHandoff={() => handleToolOpen('conflict')}
+                relatedCaseId={prefillContext?.related_case_id}
+                onHandoff={() => handleToolOpen('conflict', { related_case_id: prefillContext?.related_case_id })}
               />
             )}
             {activeTool === 'conflict' && (

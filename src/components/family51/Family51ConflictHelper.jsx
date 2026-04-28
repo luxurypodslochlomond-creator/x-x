@@ -23,7 +23,7 @@ const GOALS = [
   { id: 'resolve',    label: 'RESOLVE IT',      desc: 'Find a fair solution' },
 ];
 
-export default function Family51ConflictHelper({ accentColor = '#ef4444', onResult }) {
+export default function Family51ConflictHelper({ accentColor = '#ef4444', onResult, prefillContext }) {
   const [conflictType, setConflictType] = useState('');
   const [what, setWhat]                 = useState('');
   const [goal, setGoal]                 = useState('deescalate');
@@ -116,6 +116,7 @@ Return:
         ai_result: JSON.stringify(response),
         summary: response.situation_assessment?.slice(0, 80) || 'Dispute plan',
         severity: 'unknown',
+        related_case_id: prefillContext?.related_case_id || null,
       });
     } catch (err) {
       console.error('SORTED conflict analysis error:', err);
