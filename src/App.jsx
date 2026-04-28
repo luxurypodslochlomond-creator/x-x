@@ -83,7 +83,7 @@ const ReadingSupportPage = React.lazy(() => import('./pages/ReadingSupport'));
 const YoungWarriorsPage = React.lazy(() => import('./pages/YoungWarriors'));
 const SupportLearn51Page = React.lazy(() => import('./pages/SupportLearn51'));
 const PlatformPage = React.lazy(() => import('./pages/Platform'));
-const AdminInvoiceGeneratorPage = React.lazy(() => import('./pages/AdminInvoiceGenerator'));
+
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -198,7 +198,6 @@ const AuthenticatedApp = () => {
         <Route path="/SupportLearn51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SupportLearn51Page /></Suspense>} />
       </Route>
       <Route path="/Platform" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="Platform"><PlatformPage /></LayoutWrapper></Suspense>} />
-      <Route path="/AdminInvoiceGenerator" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminInvoiceGenerator"><AdminInvoiceGeneratorPage /></LayoutWrapper></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
