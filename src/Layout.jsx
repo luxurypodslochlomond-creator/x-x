@@ -569,7 +569,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
     ];
 
-    const adminNav = user ? [
+    const adminNav = user?.role === 'admin' ? [
       { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
       { title: "Logo Upload", url: createPageUrl("AdminLogoUpload"), icon: Image, description: "Update UF51 branding" },
       { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, description: "Device intel" },
