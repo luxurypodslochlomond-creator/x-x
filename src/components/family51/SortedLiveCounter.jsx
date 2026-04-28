@@ -78,8 +78,12 @@ export default function SortedLiveCounter() {
         </p>
       </div>
 
-      {/* Global — no flags, no exclusion */}
-      <span style={{ fontSize: 20, opacity: 0.4 }}>🌍</span>
+      {/* Global — custom SVG globe, no emoji */}
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style={{ opacity: 0.4, flexShrink: 0 }}>
+        <circle cx="11" cy="11" r="9.5" stroke="#f97316" strokeWidth="1.2" />
+        <ellipse cx="11" cy="11" rx="4" ry="9.5" stroke="#f97316" strokeWidth="1.2" />
+        <path d="M1.5 11h19M3 6.5h16M3 15.5h16" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
     </motion.div>
   );
 }
