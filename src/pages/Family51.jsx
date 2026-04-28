@@ -284,9 +284,9 @@ export default function Family51Page() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                style={{ marginBottom: 24, padding: '16px 20px', borderRadius: 14, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.4)', textAlign: 'center' }}
+                style={{ marginBottom: 24, padding: '16px 20px', borderRadius: 14, background: 'rgba(234,179,8,0.1)', border: '1px solid rgba(234,179,8,0.4)', textAlign: 'center' }}
               >
-                <p style={{ fontSize: 14, fontWeight: 800, color: '#22c55e', margin: '0 0 4px', letterSpacing: '0.04em' }}>You're SORTED — welcome aboard.</p>
+                <p style={{ fontSize: 14, fontWeight: 800, color: '#eab308', margin: '0 0 4px', letterSpacing: '0.04em' }}>You're SORTED — welcome aboard.</p>
                 <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Unlimited access is now unlocked. Go decode something.</p>
                 <button onClick={() => setShowPaySuccess(false)} style={{ marginTop: 10, fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.08em' }}>DISMISS</button>
               </motion.div>
@@ -296,9 +296,9 @@ export default function Family51Page() {
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                 {/* FREE BADGE — lead with this */}
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
-                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
-                  <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>TRY FREE — NO CARD NEEDED</span>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(234,179,8,0.12)', border: '1px solid rgba(234,179,8,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#eab308', flexShrink: 0 }} />
+                  <span style={{ fontSize: 11, fontWeight: 800, color: '#eab308', letterSpacing: '0.12em' }}>TRY FREE — NO CARD NEEDED</span>
                 </div>
                 <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
                     <span style={{ color: '#fff' }}>Got a scary</span>{' '}
@@ -647,7 +647,7 @@ function BigButton({ color, onClick, icon, label, sub, tag, delay }) {
 function TrustPill({ text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-      <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#22c55e' }} />
+      <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#eab308' }} />
       <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em' }}>{text}</span>
     </div>
   );
