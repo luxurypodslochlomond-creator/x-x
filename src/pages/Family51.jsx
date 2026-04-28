@@ -445,7 +445,7 @@ export default function Family51Page() {
                 accentColor="#06b6d4"
                 onResult={recordUse}
                 prefillContext={prefillContext}
-                suggestedTone={prefillContext?.suggestedTone}
+                suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
                 relatedCaseId={prefillContext?.related_case_id}
                 onHandoff={() => handleToolOpen('conflict', { related_case_id: prefillContext?.related_case_id })}
               />
