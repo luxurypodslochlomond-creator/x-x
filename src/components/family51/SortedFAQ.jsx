@@ -211,9 +211,34 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
         ))}
       </div>
 
-      <div style={{ marginTop: 40, padding: '20px 18px', background: `${accentColor}08`, border: `1px solid ${accentColor}20`, borderRadius: 12, textAlign: 'center' }}>
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.6 }}>
-          Still have questions? Email <strong style={{ color: '#fff' }}>family@uf51.love</strong> — we read every message.
+      {/* HARDSHIP CARD */}
+      <div style={{ marginTop: 24, padding: '24px 20px', background: 'rgba(6,182,212,0.06)', border: '1px solid rgba(6,182,212,0.25)', borderRadius: 14 }}>
+        <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: '#06b6d4', marginBottom: 10 }}>CAN'T AFFORD SORTED?</div>
+        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', margin: '0 0 8px', lineHeight: 1.6, fontWeight: 600 }}>
+          We don't want money to be the reason you don't get help.
+        </p>
+        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 16px', lineHeight: 1.6 }}>
+          Email us, tell us what's going on, and we'll figure something out. No forms, no means testing, no judgment. Just email us and we'll help.
+        </p>
+        <a
+          href="mailto:family@uf51.love?subject=I need help but can't afford SORTED right now"
+          style={{
+            display: 'block', textAlign: 'center', padding: '12px 20px', borderRadius: 10,
+            background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.4)',
+            color: '#06b6d4', fontWeight: 800, fontSize: 13, textDecoration: 'none',
+            letterSpacing: '0.04em'
+          }}
+        >
+          family@uf51.love — we read every message
+        </a>
+        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: '12px 0 0', textAlign: 'center', lineHeight: 1.5 }}>
+          One day this will be instant AI-powered hardship support — for now it's us, real people, reading your email and doing what we can. ❤️
+        </p>
+      </div>
+
+      <div style={{ marginTop: 16, padding: '16px 18px', background: `${accentColor}06`, border: `1px solid ${accentColor}15`, borderRadius: 12, textAlign: 'center' }}>
+        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6 }}>
+          Got a question not answered here? Email <strong style={{ color: 'rgba(255,255,255,0.7)' }}>family@uf51.love</strong> — we'll answer and add it to the FAQ.
         </p>
       </div>
     </motion.div>
