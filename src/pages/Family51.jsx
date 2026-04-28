@@ -7,6 +7,7 @@ import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
+import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 import SortedAbout from '@/components/family51/SortedAbout';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
@@ -32,6 +33,7 @@ export default function Family51Page() {
   const [caseCount, setCaseCount] = useState(0);
   const [showMauro, setShowMauro] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
+  const geoPrice = useSortedGeoPrice();
 
   // Load case count from localStorage for badge
   useEffect(() => {
@@ -333,7 +335,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRMail />} text="Email the plain-English breakdown to yourself — then forward it to a family member, solicitor, or advice worker. We never email third parties on your behalf (that would risk your privacy)." />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                3 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>£9.99/month</strong> if you want unlimited. Cancel anytime.
+                3 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>{geoPrice.inline}</strong> if you want unlimited. Cancel anytime.
               </p>
             </motion.div>
 
@@ -531,7 +533,7 @@ export default function Family51Page() {
                 We know how stressful this stuff is. That's exactly why we built SORTED — so you don't have to face it alone.
               </p>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                £9.99/month · cancel any time · no small print
+                {geoPrice.inline} · cancel any time · no small print
               </p>
             </div>
             <div style={{ marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { sortedCheckout } from '@/functions/sortedCheckout';
+import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 
 // Custom SVG icons — no emoji
 const IconUnlimited = () => (
@@ -45,6 +46,7 @@ const PERKS = [
 export default function SortedForLifeCard({ compact = false }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const geo = useSortedGeoPrice();
 
   const handleCheckout = async () => {
     if (window.self !== window.top) {
@@ -91,8 +93,8 @@ export default function SortedForLifeCard({ compact = false }) {
           <p style={{ fontSize: 19, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', margin: 0, lineHeight: 1 }}>SORTED FOR LIFE</p>
         </div>
         <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: 12 }}>
-          <p style={{ fontSize: 26, fontWeight: 900, color: '#f97316', margin: 0, letterSpacing: '-0.03em', lineHeight: 1 }}>£9.99</p>
-          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', margin: '3px 0 0', letterSpacing: '0.04em' }}>/ month · cancel anytime</p>
+          <p style={{ fontSize: 26, fontWeight: 900, color: '#f97316', margin: 0, letterSpacing: '-0.03em', lineHeight: 1 }}>{geo.label.replace('/month', '')}</p>
+          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', margin: '3px 0 0', letterSpacing: '0.04em' }}>{geo.sub}</p>
         </div>
       </div>
 
@@ -121,7 +123,7 @@ export default function SortedForLifeCard({ compact = false }) {
           transition: 'all 0.2s',
         }}
       >
-        {loading ? 'REDIRECTING TO STRIPE...' : 'GET SORTED — £9.99/MONTH'}
+        {loading ? 'REDIRECTING TO STRIPE...' : geo.cta}
       </motion.button>
 
       {error && (
