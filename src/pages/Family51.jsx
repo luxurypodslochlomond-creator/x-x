@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Eye, Scale, Trash2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, Eye, Scale, Trash2, Mail } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
@@ -179,21 +180,29 @@ export default function Family51Page() {
                  <FAQIcon />
                  FAQ &amp; How It Works
                </button>
-               <a href="/SortedPartnerKit" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+               <Link to="/SortedPartnerKit" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <PartnerIcon />
                   Partner Kit
-                </a>
-               <a href="/SortedTerms" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                </Link>
+               <Link to="/SortedPressRelease" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                  <FAQIcon />
+                  📰 Press Release
+                </Link>
+               <Link to="/SortedInvestorPress" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                  <FAQIcon />
+                  📄 Investor Brief
+                </Link>
+               <Link to="/SortedTerms" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                  Terms of Service
-                </a>
-                <a href="/SortedPrivacy" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                  Terms
+                </Link>
+                <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                  Data Sovereignty Pledge
-                </a>
+                  Privacy
+                </Link>
                 <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
-                  <EmailIcon />
-                  family@uf51.love
+                  <Mail className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
+                  Contact
                 </a>
                 {/* PRIVACY NOTE */}
                 <div style={{ padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>

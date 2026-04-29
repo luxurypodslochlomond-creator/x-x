@@ -24,6 +24,7 @@ export default function SortedLayout({ children, currentPage }) {
 
   const menuItems = [
     { label: 'SORTED Home', path: '/Family51', icon: null },
+    { label: 'Partner Kit', path: '/SortedPartnerKit', icon: null },
     { label: '📰 Press Release', path: '/SortedPressRelease', icon: null },
     { label: '📄 Investor Brief', path: '/SortedInvestorPress', icon: null },
     { label: 'Terms', path: '/SortedTerms', icon: <Scale className="w-4 h-4" /> },
