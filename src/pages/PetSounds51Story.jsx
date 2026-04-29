@@ -315,7 +315,7 @@ export default function PetSounds51Story() {
   }, []);
 
   const share = async () => {
-    const url = window.location.origin + '/PetSounds51Story';
+    const url = 'https://uf51.love/api/functions/ogRedirect?page=PetSounds51Story';
     if (navigator.share) {
       try {
         await navigator.share({ title: 'PetSounds51 — Sound therapy for animals', text: 'Leave it playing. They stay calm.', url });
