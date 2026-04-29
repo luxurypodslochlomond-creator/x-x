@@ -8,8 +8,8 @@ import SortedShareButton from './SortedShareButton';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
-  'Council decision', 'Employer / HR', 'Neighbour dispute',
-  'Appeal a fine', 'Request my rights', 'Other',
+  'Council decision', 'Employer / HR', 'Employment contract', 'Neighbour dispute',
+  'Appeal a fine', 'Request my rights', 'Unfair dismissal', 'Other',
 ];
 
 const TONES = [
@@ -54,7 +54,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
     const t = TONES.find(x => x.id === selectedTone);
     const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     
-    const prompt = `You write with precision, warmth, and power for ordinary people — no jargon, no fluff, just letters that work. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, legal references, regulatory bodies, and exact terminology.
+    const prompt = `You are SORTED — a sharp, straight-talking advisor who writes letters for real people dealing with real problems. You speak like a smart friend who actually knows the law, not a solicitor billing by the hour. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} law — cite real rights, real regulatory bodies (e.g. ACAS, ICO, Ofgem, Citizens Advice, Employment Tribunal, etc.), and exact legislation where it matters.
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}
@@ -63,15 +63,16 @@ NAME: ${name || '[Your Name]'}
 CONTEXT:
 ${context}
 
-Write a complete, ready-to-send letter. Must be:
-- Structured with proper greeting, body paragraphs, and sign-off
-- ${t?.id === 'formal' ? 'Formally' : 'Professionally'} worded — no fluff, no waffle
-- Protecting their legal position with accuracy — cite actual rights, actual bodies, actual legislation where relevant to ${geo.jurisdiction}
-- Specific — name the issue, name the deadline, name what you want
-- Ready to copy and paste immediately with zero edits needed
-- MAXIMUM 400 words for the letter body — concise, punchy, effective. Nobody reads essays.
+Write a complete, ready-to-send letter. Rules:
+- Sound like a sharp, informed human — not a corporate robot. Direct, clear, confident.
+- No waffle, no padding, no "I hope this letter finds you well" nonsense.
+- State the issue fast. State what you want. State consequences if ignored.
+- Cite specific rights / legislation / bodies relevant to ${geo.jurisdiction} where it strengthens the case.
+- MAXIMUM 350 words for the letter body — tight, punchy, effective. Shorter is stronger.
+- Proper greeting and sign-off, but no fluff in between.
+- Ready to copy and paste with zero edits needed.
 
-Return subject line, full letter body (MAX 400 words), 2-3 key points it makes, and one important tip the person must know before sending.`;
+Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes, and one critical tip before sending.`;
 
     const schema = {
       type: 'object',
