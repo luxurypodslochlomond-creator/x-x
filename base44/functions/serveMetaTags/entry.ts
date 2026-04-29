@@ -54,6 +54,43 @@ Deno.serve(async (req) => {
       image: 'https://uf51.love/api/functions/servePetSounds51OGImage',
       url: 'https://uf51.love/PetSounds51InvestorPress',
     },
+    // CB51 pages
+    'CB51': {
+      title: 'CB51 — AI Co-Manager for Artists',
+      description: 'Avoid the noise. CB51 handles gig offers, band voting, finance and contracts so artists can focus on music.',
+      image: 'https://uf51.love/api/functions/serveOGImage?brand=cb51',
+      url: 'https://uf51.love/CB51',
+    },
+    'CB51CalendarView': {
+      title: 'CB51 — Gig Calendar',
+      description: 'All your shows, sessions and tours in one place. CB51 keeps your calendar clean.',
+      image: 'https://uf51.love/api/functions/serveOGImage?brand=cb51',
+      url: 'https://uf51.love/CB51CalendarView',
+    },
+    'CB51MessageInbox': {
+      title: 'CB51 — Message Inbox',
+      description: 'AI-powered inbox for artists. Gig offers, contracts and promoter messages — parsed and prioritised.',
+      image: 'https://uf51.love/api/functions/serveOGImage?brand=cb51',
+      url: 'https://uf51.love/CB51MessageInbox',
+    },
+    'CB51FinanceAdmin': {
+      title: 'CB51 — Finance Tracker',
+      description: 'Track gig fees, invoices and payments. Know exactly where your money is.',
+      image: 'https://uf51.love/api/functions/serveOGImage?brand=cb51',
+      url: 'https://uf51.love/CB51FinanceAdmin',
+    },
+    'CB51Todo': {
+      title: 'CB51 — Task Manager',
+      description: 'Keep your team on track. Tasks, deadlines and priorities — all in one place.',
+      image: 'https://uf51.love/api/functions/serveOGImage?brand=cb51',
+      url: 'https://uf51.love/CB51Todo',
+    },
+    'CB51About': {
+      title: 'CB51 — About CitizenBand51',
+      description: 'Built for artists who are done with the noise. CB51 is your AI co-manager.',
+      image: 'https://uf51.love/api/functions/serveOGImage?brand=cb51',
+      url: 'https://uf51.love/CB51About',
+    },
   };
 
   const meta = pages[page] || {
