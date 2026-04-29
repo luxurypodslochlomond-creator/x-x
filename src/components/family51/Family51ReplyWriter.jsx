@@ -212,19 +212,19 @@ Return subject line, full letter body (MAX 400 words), 2-3 key points it makes, 
       {/* ERROR */}
       <AnimatePresence>
         {error && (
-          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '14px 16px', borderRadius: 10, border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.08)' }}>
-            <p style={{ fontSize: 12, color: '#ef4444', margin: '0 0 8px', fontWeight: 800 }}>⚠ {error}</p>
-            <button onClick={() => setError(null)} style={{ fontSize: 10, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontWeight: 700 }}>Dismiss</button>
+          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '14px 16px', borderRadius: 8, border: '1px solid rgba(239,68,68,0.35)', background: 'rgba(239,68,68,0.07)' }}>
+            <p style={{ fontSize: 11, color: '#ef4444', margin: '0 0 8px', fontWeight: 800, letterSpacing: '0.05em' }}>{error}</p>
+            <button onClick={() => setError(null)} style={{ fontSize: 10, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>DISMISS</button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* PREFILL BANNER — shown when handed off from decoder */}
+      {/* PREFILL BANNER */}
       {prefillContext && (
-        <div style={{ padding: '10px 14px', borderRadius: 10, background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.25)', display: 'flex', gap: 10, alignItems: 'center' }}>
-          <span style={{ fontSize: 16 }}>✓</span>
-          <p style={{ fontSize: 12, color: 'rgba(6,182,212,0.9)', margin: 0, fontWeight: 700 }}>
-            Letter loaded — pick a tone, add your name, hit write.
+        <div style={{ padding: '12px 16px', borderRadius: 8, background: 'rgba(6,182,212,0.07)', border: '1px solid rgba(6,182,212,0.2)', display: 'flex', gap: 12, alignItems: 'center' }}>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0 }} />
+          <p style={{ fontSize: 11, color: 'rgba(6,182,212,0.85)', margin: 0, fontWeight: 700, letterSpacing: '0.06em' }}>
+            LETTER LOADED — PICK A TONE, ADD YOUR NAME, HIT WRITE
           </p>
         </div>
       )}
@@ -335,13 +335,13 @@ Return subject line, full letter body (MAX 400 words), 2-3 key points it makes, 
 
             {/* KEY POINTS */}
             {result.key_points?.length > 0 && (
-              <div style={{ border: `1px solid ${accentColor}25`, borderRadius: 12, padding: '14px 18px', background: `${accentColor}06` }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'cc', marginBottom: 10 }}>KEY POINTS</p>
-                <div className="space-y-1.5">
+              <div style={{ border: `1px solid ${accentColor}20`, borderRadius: 8, padding: '14px 18px', background: `${accentColor}05` }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'aa', marginBottom: 10 }}>THIS LETTER MAKES THESE POINTS</p>
+                <div className="space-y-2">
                   {result.key_points.map((p, i) => (
-                    <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span style={{ color: accentColor, fontSize: 10, paddingTop: 3 }}>—</span>
-                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)' }}>{p}</span>
+                    <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                      <span style={{ color: accentColor, fontSize: 9, paddingTop: 4, fontWeight: 800 }}>{String(i+1).padStart(2,'0')}</span>
+                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{p}</span>
                     </div>
                   ))}
                 </div>
@@ -349,34 +349,37 @@ Return subject line, full letter body (MAX 400 words), 2-3 key points it makes, 
             )}
 
             {/* LETTER */}
-            <div style={{ border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '18px 20px', background: 'rgba(255,255,255,0.02)' }}>
+            <div style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, padding: '20px 22px', background: 'rgba(255,255,255,0.015)' }}>
               {result.subject_line && (
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: 12, marginBottom: 16 }}>
-                  <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 4px' }}>SUBJECT</p>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: '#fff', margin: 0 }}>{result.subject_line}</p>
+                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: 14, marginBottom: 18 }}>
+                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)', margin: '0 0 5px' }}>SUBJECT LINE</p>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.4 }}>{result.subject_line}</p>
                 </div>
               )}
-              <pre style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.7, margin: 0 }}>{result.letter_body}</pre>
+              <pre style={{ fontSize: 13, color: 'rgba(255,255,255,0.72)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.75, margin: 0 }}>{result.letter_body}</pre>
             </div>
 
             {/* TIP */}
             {result.tip && (
-              <div style={{ border: '1px solid rgba(234,179,8,0.25)', borderRadius: 10, padding: '12px 16px', background: 'rgba(234,179,8,0.06)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: '#eab308', marginBottom: 6 }}>IMPORTANT TIP</p>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', margin: 0 }}>{result.tip}</p>
+              <div style={{ border: '1px solid rgba(234,179,8,0.2)', borderRadius: 8, padding: '12px 16px', background: 'rgba(234,179,8,0.04)', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                <div style={{ width: 3, borderRadius: 2, background: '#eab308', alignSelf: 'stretch', flexShrink: 0 }} />
+                <div>
+                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: '#eab308', marginBottom: 5 }}>BEFORE YOU SEND</p>
+                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
+                </div>
               </div>
             )}
 
             {/* ACTIONS */}
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: accentColor, color: accentColor, background: `${accentColor}15` }}>
-                {copied ? '✓ COPIED' : 'COPY LETTER'}
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: copied ? 'rgba(34,197,94,0.6)' : accentColor + '60', color: copied ? '#22c55e' : accentColor, background: copied ? 'rgba(34,197,94,0.08)' : `${accentColor}10` }}>
+                {copied ? 'COPIED' : 'COPY LETTER'}
               </motion.button>
-              <motion.button onClick={saveAsPdf} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: 'rgba(168,85,247,0.5)', color: '#a855f7', background: 'rgba(168,85,247,0.1)' }}>
-                💾 SAVE AS FILE
+              <motion.button onClick={saveAsPdf} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: 'rgba(168,85,247,0.4)', color: '#a855f7', background: 'rgba(168,85,247,0.08)' }}>
+                SAVE AS FILE
               </motion.button>
               <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setEmailSent(false); setEmailAddr(''); setAlternatives([]); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
-                WRITE ANOTHER
+                START AGAIN
               </motion.button>
             </div>
 
@@ -384,8 +387,8 @@ Return subject line, full letter body (MAX 400 words), 2-3 key points it makes, 
             <SendInEmailApp result={result} accentColor={accentColor} />
 
             {/* REGENERATE WITH DIFFERENT TONE */}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 14 }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 10px' }}>SWAP TONE (GET ALTERNATIVE VERSION)</p>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
+              <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)', margin: '0 0 10px' }}>TRY A DIFFERENT TONE</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 {TONES.filter(t => t.id !== tone).map(t => (
                   <motion.button
@@ -471,8 +474,8 @@ Return subject line, full letter body (MAX 400 words), 2-3 key points it makes, 
 
             {/* ALTERNATIVES CAROUSEL */}
             {alternatives.length > 0 && (
-              <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 14 }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 12px' }}>ALTERNATIVES ({alternatives.length})</p>
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
+                <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)', margin: '0 0 12px' }}>ALTERNATIVE VERSIONS — {alternatives.length}</p>
                 <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 8 }}>
                   {alternatives.map((alt, idx) => (
                     <motion.button
@@ -497,7 +500,7 @@ Return subject line, full letter body (MAX 400 words), 2-3 key points it makes, 
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
 
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', letterSpacing: '0.05em' }}>Nothing stored. Nothing seen. Yours alone.</p>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)', textAlign: 'center', letterSpacing: '0.1em', fontWeight: 700 }}>NOTHING STORED. NOTHING SEEN. YOURS ALONE.</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -519,14 +522,14 @@ function SendInEmailApp({ result, accentColor }) {
   };
 
   return (
-    <div style={{ border: `1px solid rgba(34,197,94,0.25)`, borderRadius: 12, padding: '14px 16px', background: 'rgba(34,197,94,0.05)' }}>
-      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: '#22c55e', margin: '0 0 4px' }}>📨 SEND FROM YOUR EMAIL APP</p>
-      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>Opens your email app (Proton Mail etc) with the reply pre-filled — you send it, not us.</p>
+    <div style={{ border: `1px solid rgba(34,197,94,0.2)`, borderRadius: 8, padding: '14px 16px', background: 'rgba(34,197,94,0.04)' }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: '#22c55e', margin: '0 0 3px' }}>SEND FROM YOUR EMAIL APP</p>
+      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '0 0 10px', lineHeight: 1.5 }}>Opens Proton Mail, Gmail or whatever you use — pre-filled. You send it, not us.</p>
       {!open ? (
         <motion.button
           onClick={() => setOpen(true)}
-          whileTap={{ scale: 0.95 }}
-          style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.1)', color: '#22c55e' }}
+          whileTap={{ scale: 0.97 }}
+          style={{ width: '100%', padding: '11px 0', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(34,197,94,0.35)', background: 'rgba(34,197,94,0.08)', color: '#22c55e' }}
         >
           OPEN IN MY EMAIL APP
         </motion.button>
@@ -536,24 +539,24 @@ function SendInEmailApp({ result, accentColor }) {
             type="email"
             value={recipientEmail}
             onChange={e => setRecipientEmail(e.target.value)}
-            placeholder="Their email address (who you're sending TO)"
+            placeholder="Their email address — who you're sending TO"
             autoFocus
-            style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 8, color: '#fff', fontSize: 12, padding: '10px 12px', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+            style={{ width: '100%', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 7, color: '#fff', fontSize: 12, padding: '10px 12px', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
           />
           <div style={{ display: 'flex', gap: 8 }}>
             <motion.button
               onClick={handleOpen}
               disabled={!recipientEmail.trim()}
               whileTap={recipientEmail.trim() ? { scale: 0.95 } : {}}
-              style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', cursor: recipientEmail.trim() ? 'pointer' : 'not-allowed', border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.1)', color: '#22c55e', opacity: recipientEmail.trim() ? 1 : 0.5 }}
+              style={{ flex: 1, padding: '11px 0', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: recipientEmail.trim() ? 'pointer' : 'not-allowed', border: '1px solid rgba(34,197,94,0.35)', background: 'rgba(34,197,94,0.08)', color: '#22c55e', opacity: recipientEmail.trim() ? 1 : 0.45 }}
             >
-              OPEN EMAIL APP →
+              OPEN EMAIL APP
             </motion.button>
-            <motion.button onClick={() => { setOpen(false); setRecipientEmail(''); }} whileTap={{ scale: 0.95 }} style={{ padding: '12px 16px', borderRadius: 10, fontSize: 11, fontWeight: 700, cursor: 'pointer', border: '1px solid rgba(255,255,255,0.1)', background: 'transparent', color: 'rgba(255,255,255,0.3)' }}>
+            <motion.button onClick={() => { setOpen(false); setRecipientEmail(''); }} whileTap={{ scale: 0.95 }} style={{ padding: '11px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer', border: '1px solid rgba(255,255,255,0.08)', background: 'transparent', color: 'rgba(255,255,255,0.25)' }}>
               ✕
             </motion.button>
           </div>
-          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', margin: 0 }}>Leave blank to open with no recipient — you can fill it in before you hit send.</p>
+          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', margin: 0 }}>Leave blank — fill in the address in your email app.</p>
         </div>
       )}
     </div>
@@ -562,13 +565,13 @@ function SendInEmailApp({ result, accentColor }) {
 
 function EmailToSelf({ emailAddr, setEmailAddr, onSendClick, sent, accentColor }) {
   if (sent) return (
-    <div style={{ border: '1px solid rgba(34,197,94,0.3)', borderRadius: 10, padding: '12px 16px', background: 'rgba(34,197,94,0.06)', textAlign: 'center' }}>
-      <p style={{ fontSize: 12, color: '#22c55e', fontWeight: 700, margin: 0 }}>✓ Sent — check your inbox</p>
+    <div style={{ border: '1px solid rgba(34,197,94,0.25)', borderRadius: 8, padding: '12px 16px', background: 'rgba(34,197,94,0.05)', textAlign: 'center' }}>
+      <p style={{ fontSize: 11, color: '#22c55e', fontWeight: 800, margin: 0, letterSpacing: '0.08em' }}>SENT — CHECK YOUR INBOX</p>
     </div>
   );
   return (
-    <div style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', background: 'rgba(255,255,255,0.02)' }}>
-      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>EMAIL THIS TO YOURSELF</p>
+    <div style={{ border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8, padding: '12px 14px', background: 'rgba(255,255,255,0.02)' }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.25)', margin: '0 0 8px' }}>EMAIL THIS TO YOURSELF</p>
       <div style={{ display: 'flex', gap: 8 }}>
         <input
           type="email"
