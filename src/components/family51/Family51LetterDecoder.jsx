@@ -97,7 +97,7 @@ Return a JSON object with these EXACT fields:
 - key_deadline: The exact date from the letter, or "No deadline mentioned". If there are multiple dates, give the soonest.
 - we_hear_you: ONE grounded, human sentence — acknowledge the situation without overdoing it. Calm and real, like a friend who's seen this before. No melodrama, no hollow reassurance.
 - what_this_means: 3-4 sentences. Zero jargon. Plain English. Explain exactly what this letter IS, what triggered it, and what it actually means for this person day-to-day. Include any amounts of money involved.
-- if_you_ignore_this: 2-3 sentences. What ACTUALLY happens if they do nothing? Be honest but not scaremongering. E.g. "They can apply for a county court judgment (CCJ) which affects your credit score for 6 years and could lead to bailiffs." This is the most important field — it's what gets people to act.
+- if_you_ignore_this: 2-3 sentences. Helpful context about timing — what usually happens next if they don't respond, and why acting sooner is better. Calm and informative, never alarming. E.g. "If no response is received by the deadline, the next step is usually a follow-up letter or referral to a debt collection agency. It's worth responding quickly even if you can't pay in full — most organisations will work with you if you reach out first."
 - financial_impact: If there's a specific amount at risk (debt, fine, arrears, benefit cut), state it clearly. E.g. "£847 owed — this could increase to £1,100+ with added court costs if unpaid." If no financial amount, say "No specific financial amount mentioned."
 - action_steps: Array of exactly 5 specific steps. Real actions, real phone numbers, real websites relevant to their jurisdiction. E.g. not "contact your local council" but "Call Hackney Council's debt team on 020 8356 3000 — open Mon-Fri 9am-5pm. Ask to set up a payment plan." Include one free advice service by name and contact details.
 - free_help: Array of exactly 2-3 FREE services that can help with THIS specific type of letter in their jurisdiction. Each entry: the service name, what they do, and how to reach them. E.g. "Citizens Advice — free legal guidance on debt and council tax — visit citizensadvice.org.uk or call 0800 144 8848". Be specific to their country/region.
@@ -461,10 +461,10 @@ Return a JSON object with these EXACT fields:
               </div>
             )}
 
-            {/* IF YOU IGNORE THIS */}
+            {/* GOOD TO KNOW — calm, not scary */}
             {result.if_you_ignore_this && (
-              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(239,68,68,0.5)', margin: '0 0 8px' }}>IF YOU IGNORE THIS</p>
+              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(234,179,8,0.04)', border: '1px solid rgba(234,179,8,0.12)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(234,179,8,0.5)', margin: '0 0 8px' }}>GOOD TO KNOW</p>
                 <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
               </div>
             )}
