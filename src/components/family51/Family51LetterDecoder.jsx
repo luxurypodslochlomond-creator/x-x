@@ -66,12 +66,14 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
 
       const isContract = currentType?.toLowerCase().includes('contract');
-      const contractExtra = isContract ? `\n\nIMPORTANT — This is a CONTRACT. As well as the standard breakdown, you MUST identify:
-- Any clauses that are unusual, unfair, or one-sided
-- What's MISSING that should be in there (e.g. notice period, IP ownership, payment terms, termination rights)
+      const contractExtra = isContract ? `\n\nIMPORTANT — This is a CONTRACT. Apply ${currentGeo.jurisdiction} contract law specifically. As well as the standard breakdown, you MUST identify:
+- Any clauses that are unusual, unfair, or one-sided under ${currentGeo.jurisdiction} law
+- What's MISSING that should be in there (e.g. notice period, IP/copyright ownership, payment terms, termination rights, royalty splits for music contracts)
 - Specific things the person could reasonably ask to negotiate or push back on — phrased as calm, professional requests, not confrontational demands
-- Any red flags that suggest they should get proper legal advice before signing
-Include this contract-specific guidance inside the action_steps field, and flag it clearly.` : '';
+- Any red flags or clauses that may not be enforceable under ${currentGeo.jurisdiction} law
+- Whether they should get proper legal advice before signing (be honest — some contracts really do need a solicitor/lawyer)
+- For music/artist contracts specifically: check for 360 deals, perpetual rights grabs, unfair royalty rates, sync licensing terms, recording commitment clauses
+Include all this contract-specific guidance inside the action_steps field, flagged clearly.` : '';
 
       const promptText = `You are SORTED — a sharp, plain-English advisor who helps real people understand documents and letters. You speak like a brilliant friend who knows the law — not a robot, not a corporate disclaimer machine. ${geoContext} A person has ${isContract ? 'received this contract to review' : `received this official letter${currentType ? ` (type: ${currentType})` : ''}`} and needs help understanding it.${contractExtra}\n\nDOCUMENT:\n${letterContent}`;
 
