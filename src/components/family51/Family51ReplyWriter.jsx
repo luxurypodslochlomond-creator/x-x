@@ -82,26 +82,45 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
       },
     };
 
+    const attemptGenerate = async (useModel) => {
+      const opts = { prompt, response_json_schema: schema };
+      if (useModel) opts.model = useModel;
+      const response = await base44.integrations.Core.InvokeLLM(opts);
+      console.log('[ReplyWriter] Raw LLM response:', JSON.stringify(response)?.slice(0, 300));
+      // Normalise — some models nest under different keys
+      if (response && typeof response === 'object') {
+        const body = response.letter_body || response.body || response.letter || response.text || response.content;
+        if (body) {
+          return {
+            subject_line: response.subject_line || response.subject || 'Your reply',
+            letter_body: body,
+            key_points: response.key_points || response.keyPoints || [],
+            tip: response.tip || response.important_tip || '',
+          };
+        }
+      }
+      return null;
+    };
+
+    // Try claude first, then fall back to default
+    let result = null;
     try {
-      const response = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
-        prompt,
-        response_json_schema: schema,
-      });
-      return response;
+      result = await attemptGenerate('claude_sonnet_4_6');
     } catch (err) {
-      console.warn('SORTED: claude_sonnet failed, falling back to default model', err?.message);
+      console.warn('SORTED: claude_sonnet_4_6 failed:', err?.message);
+    }
+    if (!result) {
       try {
-        const response = await base44.integrations.Core.InvokeLLM({
-          prompt,
-          response_json_schema: schema,
-        });
-        return response;
+        result = await attemptGenerate(null);
       } catch (err2) {
-        console.error('SORTED letter generation error:', err2);
-        throw new Error(err2?.message || 'Failed to generate letter. Please try again.');
+        console.error('SORTED: fallback also failed:', err2?.message);
+        throw new Error('Could not generate your letter. Please check your connection and try again.');
       }
     }
+    if (!result) {
+      throw new Error('The AI returned an empty response. Please try again.');
+    }
+    return result;
   };
 
   const write = async () => {
