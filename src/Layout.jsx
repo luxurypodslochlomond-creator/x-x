@@ -569,7 +569,9 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
     ];
 
-    const adminNav = user?.role === 'admin' ? [
+    // Show BUILD section if logged in as admin OR if inside the Base44 builder iframe
+    const isInBuilder = window.self !== window.top && window.location.hostname.includes('base44');
+    const adminNav = (user?.role === 'admin' || isInBuilder) ? [
       { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
       { title: "Logo Upload", url: createPageUrl("AdminLogoUpload"), icon: Image, description: "Update UF51 branding" },
       { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, description: "Device intel" },
