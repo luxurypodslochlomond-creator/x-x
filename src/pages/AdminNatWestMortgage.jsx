@@ -19,7 +19,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 17 Mar 2026 — WRITTEN HOLD CONFIRMED until 31/03/2026</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 31 Mar 2026 — REPLIED TO SUKHI KAUR — April/May payment committed</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -138,12 +138,30 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 bg-red-900/20 p-4 rounded-lg border-2 border-red-500">
-                <div className="text-red-400 font-bold text-lg min-w-fit">31/03/2026</div>
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-2 border-green-400">
+                <div className="text-green-300 font-bold text-lg min-w-fit">30/03/2026</div>
                 <div>
-                  <p className="text-white font-bold">⚠️ DEADLINE — CONTACT MR J DEMPSEY</p>
-                  <p className="text-gray-300 text-sm">Email: SSTSecured@natwest.com OR call 0800 161 5954</p>
-                  <p className="text-red-400 font-bold text-sm mt-1">Reply to his email BEFORE this date with situation update</p>
+                  <p className="text-white font-bold">✅ SUKHI KAUR REPLIED — SST Secured</p>
+                  <p className="text-gray-300 text-sm">Account updated. Said sorry for your loss. Asked: "When are you looking to make a payment?"</p>
+                  <p className="text-gray-400 text-xs mt-1">Contact: sukhdip.kaur@natwest.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-green-900/20 p-4 rounded-lg border-2 border-green-500">
+                <div className="text-green-400 font-bold text-lg min-w-fit">31/03/2026</div>
+                <div>
+                  <p className="text-white font-bold">✅ BRIAN REPLIED TO SUKHI</p>
+                  <p className="text-gray-300 text-sm">"Actively working on improving income. Expect to be in position to make a contribution in April/May. Will be in touch as soon as I have a confirmed amount."</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ Contact maintained before deadline — account noted</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-amber-900/20 p-4 rounded-lg border-2 border-amber-500">
+                <div className="text-amber-400 font-bold text-lg min-w-fit">NOW ⚠️</div>
+                <div>
+                  <p className="text-white font-bold">NEXT: Contact Sukhi — April/May payment update</p>
+                  <p className="text-gray-300 text-sm">You committed to April/May. Now is the time to follow up with whatever you can offer — even a small amount shows good faith.</p>
+                  <p className="text-amber-400 font-bold text-sm mt-1">Email: sukhdip.kaur@natwest.com | Ref: 5521482</p>
                 </div>
               </div>
             </div>
