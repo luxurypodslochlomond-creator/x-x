@@ -268,14 +268,22 @@ Return a JSON object with these EXACT fields:
 
       {/* TYPE CHIPS */}
       <div className="space-y-2">
-        <Label>TYPE OF LETTER (optional)</Label>
+        <Label>WHAT ARE YOU UPLOADING? (optional — helps us give better advice)</Label>
         <div className="flex flex-wrap gap-2">
-          {LETTER_TYPES.map(type => (
-            <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
-              {type}
-            </Chip>
-          ))}
+          {LETTER_TYPES.map(type => {
+            const isContract = type.toLowerCase().includes('contract');
+            return (
+              <Chip key={type} active={letterType === type} color={isContract ? '#a855f7' : accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
+                {isContract ? `★ ${type}` : type}
+              </Chip>
+            );
+          })}
         </div>
+        {(letterType?.toLowerCase().includes('contract')) && (
+          <p style={{ fontSize: 11, color: '#a855f7', fontWeight: 700, letterSpacing: '0.04em', marginTop: 4 }}>
+            Contract mode — we'll flag red flags, missing protections, and what to push back on.
+          </p>
+        )}
       </div>
 
       {/* UPLOAD OR PASTE — two separate buttons */}
