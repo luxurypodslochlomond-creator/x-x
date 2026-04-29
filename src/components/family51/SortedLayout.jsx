@@ -23,7 +23,7 @@ export default function SortedLayout({ children, currentPage }) {
 
 
   const menuItems = [
-    { label: 'SORTED Home', path: '/Family51', icon: null },
+    { label: 'SORTED Home', path: '/Sorted', icon: null },
     { label: 'For Organisations', path: '/SortedForOrgs', icon: null },
     { label: 'Partner Kit', path: '/SortedPartnerKit', icon: null },
     { label: 'Press Release', path: '/SortedPressRelease', icon: null },

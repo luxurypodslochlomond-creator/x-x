@@ -416,7 +416,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const navs = React.useMemo(() => {
     // 1. PRODUCTS (paid / subscription tools)
     const productsNav = [
-      { title: "SORTED", url: createPageUrl("Family51"), icon: COOLASFUCKSorted, highlight: true, description: "Decode scary letters · subscription" },
+      { title: "SORTED", url: createPageUrl("Sorted"), icon: COOLASFUCKSorted, highlight: true, description: "Decode scary letters · subscription" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: COOLASFUCKPaw, highlight: true, description: "Sound therapy for animals · subscription" },
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
@@ -553,9 +553,9 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // SORTED MENU
     const sortedNav = [
-      { title: "Decode a Letter", url: createPageUrl("Family51"), icon: FileText, highlight: true, description: "Plain English advice" },
-      { title: "Write a Reply", url: createPageUrl("Family51"), icon: Mail, highlight: true, description: "Draft responses" },
-      { title: "Resolve Conflict", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Navigate disputes" },
+      { title: "Decode a Letter", url: createPageUrl("Sorted"), icon: FileText, highlight: true, description: "Plain English advice" },
+      { title: "Write a Reply", url: createPageUrl("Sorted"), icon: Mail, highlight: true, description: "Draft responses" },
+      { title: "Resolve Conflict", url: createPageUrl("Sorted"), icon: Shield, highlight: true, description: "Navigate disputes" },
       { title: "📰 Press Release", url: "/SortedPressRelease", icon: FileText, highlight: true, description: "Launch PR — save as PDF" },
       { title: "📄 Investor Brief", url: createPageUrl("SortedInvestorPress"), icon: FileText, highlight: true, description: "ESG · B2B · financial services" },
       { title: "Terms", url: "/SortedTerms", icon: Scale },
@@ -751,7 +751,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </>
                           ) : isTracktPage ? (
                             <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
-                          ) : currentPageName === 'Family51' ? (
+                          ) : (currentPageName === 'Family51' || currentPageName === 'Sorted') ? (
                             <NavSection title="SORTED" color="cyan" items={sortedNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : (
                             <>
@@ -862,7 +862,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               </>
             ) : isTracktPage ? (
               <NavSection title="TRACKT" color="cyan" items={tracktNav} isActivePage={isActivePage} defaultOpen={true} />
-            ) : currentPageName === 'Family51' ? (
+            ) : (currentPageName === 'Family51' || currentPageName === 'Sorted') ? (
               <NavSection title="SORTED" color="cyan" items={sortedNav} isActivePage={isActivePage} defaultOpen={true} />
             ) : (
               <>
