@@ -229,6 +229,58 @@ export default function AdminNatWestMortgage() {
           </CardContent>
         </Card>
 
+        {/* OCTOPUS ENERGY */}
+        <Card className="bg-gradient-to-r from-orange-900/40 to-yellow-900/40 border-4 border-orange-500">
+          <CardHeader>
+            <CardTitle className="text-orange-300 flex items-center gap-2">
+              🐙 OCTOPUS ENERGY — Account A-37F41968
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+
+            <div className="bg-green-900/30 border-2 border-green-500 rounded-lg p-4">
+              <p className="text-green-400 font-black mb-2">✅ CURRENT STATUS — 29 Apr 2026</p>
+              <ul className="text-white text-sm space-y-1">
+                <li>• <strong>Payment plan agreed:</strong> £10/month for 6 months (review after)</li>
+                <li>• <strong>Direct Debit:</strong> 23rd of each month — requested move from Oct 2026 → May 2026</li>
+                <li>• <strong>Contact:</strong> Ella (Affordability Specialist) — hello@octopus.energy</li>
+                <li>• <strong>Our email:</strong> GLA101@proton.me</li>
+              </ul>
+            </div>
+
+            <div className="bg-amber-900/30 border-2 border-amber-500 rounded-lg p-4">
+              <p className="text-amber-400 font-black mb-2">⏳ AWAITING RESPONSE FROM ELLA</p>
+              <ul className="text-sm text-gray-200 space-y-1">
+                <li>• Asked Ella to move DD start to <strong>May 23rd</strong> ✅</li>
+                <li>• Asked for <strong>assistance completing the Paylink form</strong> (vulnerability/bereavement)</li>
+                <li>• Mentioned bereavement + mental health — unlocks <strong>Octo Fund hardship support</strong></li>
+                <li>• Paylink form = could lead to debt reduction or write-off via Octo Fund</li>
+              </ul>
+            </div>
+
+            <div className="bg-purple-900/30 border-2 border-purple-500 rounded-lg p-4">
+              <p className="text-purple-400 font-black mb-2">🎯 NEXT STEPS</p>
+              <ul className="text-sm text-gray-200 space-y-1">
+                <li>1. Wait for Ella to respond (usually 1-3 days)</li>
+                <li>2. Complete Paylink form WITH Ella's assistance</li>
+                <li>3. Ask specifically about <strong>Octo Fund</strong> — hardship fund for bereavement/MH</li>
+                <li>4. Keep paying £10/month — shows good faith</li>
+              </ul>
+            </div>
+
+            <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+              <p className="text-cyan-300 text-sm font-bold">💡 KEY FACTS:</p>
+              <ul className="text-xs text-gray-300 space-y-1 mt-1">
+                <li>• They will NOT cut you off while payment plan is active</li>
+                <li>• Ella is an affordability specialist — she's on your side</li>
+                <li>• Octo Fund = Octopus's hardship fund — can clear debt for vulnerable customers</li>
+                <li>• Always reference Account: <strong>A-37F41968</strong></li>
+              </ul>
+            </div>
+
+          </CardContent>
+        </Card>
+
         {/* THE REAL TALK */}
         <Card className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border-2 border-cyan-500/50">
           <CardContent className="p-8">
