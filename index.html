@@ -4,16 +4,105 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/api/functions/serveFavicon?type=uf51" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UF51 • Tools That Actually Help</title>
-    <meta name="description" content="SORTED decodes scary letters. PetSounds51 calms anxious pets. BuzzStop masks tinnitus. Each does one job properly. Free where we can." />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="UF51 • Tools That Actually Help" />
-    <meta property="og:description" content="SORTED decodes scary letters. PetSounds51 calms anxious pets. BuzzStop masks tinnitus. Each does one job properly. Free where we can." />
-    <meta property="og:image" content="https://uf51.love/api/functions/serveOGImage" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="UF51 • Tools That Actually Help" />
-    <meta name="twitter:description" content="SORTED decodes scary letters. PetSounds51 calms anxious pets. BuzzStop masks tinnitus. Each does one job properly. Free where we can." />
-    <meta name="twitter:image" content="https://uf51.love/api/functions/serveOGImage" />
+
+    <!-- PATH-AWARE OG TAGS — set before React mounts so social scrapers see the right info -->
+    <script>
+      (function() {
+        var path = window.location.pathname.replace(/\/$/, '').replace(/^\//, '').toLowerCase();
+        var meta = {
+          title: 'UF51 \u2022 Tools That Actually Help',
+          desc: 'SORTED decodes scary letters. PetSounds51 calms anxious pets. BuzzStop masks tinnitus.',
+          image: 'https://uf51.love/api/functions/serveOGImage',
+          url: 'https://uf51.love'
+        };
+
+        if (path === 'family51' || path === 'sorted') {
+          meta = {
+            title: 'SORTED \u2014 Decode Scary Letters in 30 Seconds',
+            desc: 'Got a scary letter? SORTED reads it for you \u2014 plain English, any language, nothing stored. Free to try.',
+            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            url: 'https://uf51.love/Family51'
+          };
+        } else if (path === 'sortedpressrelease') {
+          meta = {
+            title: 'SORTED \u2014 Press Release 2026',
+            desc: 'AI that decodes scary letters for anyone, anywhere. Launching 2026.',
+            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            url: 'https://uf51.love/SortedPressRelease'
+          };
+        } else if (path === 'sortedinvestorpress') {
+          meta = {
+            title: 'SORTED \u2014 Investor Brief 2026',
+            desc: 'AI access to justice. \u00a39.99/month. ESG-aligned. B2B white-label for financial services.',
+            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            url: 'https://uf51.love/SortedInvestorPress'
+          };
+        } else if (path === 'sortedpartnerkit') {
+          meta = {
+            title: 'SORTED Partner Kit \u2014 Build With Us',
+            desc: '25% affiliate commission. White-label for financial services. ESG impact data.',
+            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            url: 'https://uf51.love/SortedPartnerKit'
+          };
+        } else if (path === 'sortedforors') {
+          meta = {
+            title: 'SORTED for Organisations \u2014 Pilot Partnership',
+            desc: 'Reach people at the moment of fear. Partner with SORTED to deliver plain-English letter help at scale.',
+            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            url: 'https://uf51.love/SortedForOrgs'
+          };
+        } else if (path.startsWith('petsounds51')) {
+          meta = {
+            title: 'PetSounds51 \u2014 Sound Therapy for Anxious Pets',
+            desc: 'Psychoacoustic protocols for dogs, cats and horses. Built on peer-reviewed research. Try free.',
+            image: 'https://uf51.love/api/functions/servePetSounds51OGImage',
+            url: 'https://uf51.love/PetSounds51'
+          };
+        } else if (path === 'cb51' || path.startsWith('cb51')) {
+          meta = {
+            title: 'CB51 \u2014 AI Co-Manager for Artists',
+            desc: 'Avoid the noise. CB51 handles gig offers, band voting, finance and contracts.',
+            image: 'https://uf51.love/api/functions/serveOGImage?brand=cb51',
+            url: 'https://uf51.love/CB51'
+          };
+        } else if (path === 'buzzstop') {
+          meta = {
+            title: 'BuzzStop \u2014 Tinnitus Cancellation Engine',
+            desc: 'AI-powered tinnitus relief. Radar-based frequency engine. Free. No signup.',
+            image: 'https://uf51.love/api/functions/serveOGImage',
+            url: 'https://uf51.love/BuzzStop'
+          };
+        }
+
+        // Write OG tags into <head> immediately
+        var tags = [
+          ['title', null, meta.title],
+          ['meta', {name:'description', content: meta.desc}],
+          ['meta', {'property':'og:title', content: meta.title}],
+          ['meta', {'property':'og:description', content: meta.desc}],
+          ['meta', {'property':'og:image', content: meta.image}],
+          ['meta', {'property':'og:image:width', content:'1200'}],
+          ['meta', {'property':'og:image:height', content:'630'}],
+          ['meta', {'property':'og:type', content:'website'}],
+          ['meta', {'property':'og:url', content: meta.url}],
+          ['meta', {name:'twitter:card', content:'summary_large_image'}],
+          ['meta', {name:'twitter:title', content: meta.title}],
+          ['meta', {name:'twitter:description', content: meta.desc}],
+          ['meta', {name:'twitter:image', content: meta.image}],
+        ];
+
+        tags.forEach(function(t) {
+          if (t[0] === 'title') {
+            document.title = t[2];
+            return;
+          }
+          var el = document.createElement(t[0]);
+          var attrs = t[1];
+          Object.keys(attrs).forEach(function(k) { el.setAttribute(k, attrs[k]); });
+          document.head.appendChild(el);
+        });
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
