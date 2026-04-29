@@ -161,7 +161,7 @@ export default function AdminNatWestMortgage() {
                 <div>
                   <p className="text-white font-bold">NEXT: Contact Sukhi — April/May payment update</p>
                   <p className="text-gray-300 text-sm">You committed to April/May. Now is the time to follow up with whatever you can offer — even a small amount shows good faith.</p>
-                  <p className="text-amber-400 font-bold text-sm mt-1">Email: sukhdip.kaur@natwest.com | Ref: 5521482</p>
+                  <p className="text-amber-400 font-bold text-sm mt-1">Email: sukhdip.kaur@natwest.com | Ref: 5521482 | 📅 Send NOW — late April, committed to May</p>
                 </div>
               </div>
             </div>
