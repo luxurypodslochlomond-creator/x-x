@@ -19,7 +19,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 31 Mar 2026 — REPLIED TO SUKHI KAUR — April/May payment committed</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 29 Apr 2026 — FOLLOW-UP SENT TO SUKHI — May payment signalled ⏳ Awaiting reply</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -156,12 +156,21 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 bg-amber-900/20 p-4 rounded-lg border-2 border-amber-500">
-                <div className="text-amber-400 font-bold text-lg min-w-fit">NOW ⚠️</div>
+              <div className="flex items-start gap-4 bg-green-900/20 p-4 rounded-lg border-2 border-green-500">
+                <div className="text-green-400 font-bold text-lg min-w-fit">29/04/2026</div>
                 <div>
-                  <p className="text-white font-bold">NEXT: Contact Sukhi — April/May payment update</p>
-                  <p className="text-gray-300 text-sm">You committed to April/May. Now is the time to follow up with whatever you can offer — even a small amount shows good faith.</p>
-                  <p className="text-amber-400 font-bold text-sm mt-1">Email: sukhdip.kaur@natwest.com | Ref: 5521482 | 📅 Send NOW — late April, committed to May</p>
+                  <p className="text-white font-bold">✅ FOLLOW-UP EMAIL SENT TO SUKHI</p>
+                  <p className="text-gray-300 text-sm">"Working towards a payment. Hoping to confirm a specific amount in May. Will be in touch as soon as in a position to do so."</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ Communication maintained — May payment signalled</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-amber-900/20 p-4 rounded-lg border-2 border-amber-500">
+                <div className="text-amber-400 font-bold text-lg min-w-fit">⏳ WAITING</div>
+                <div>
+                  <p className="text-white font-bold">Awaiting reply from Sukhi Kaur</p>
+                  <p className="text-gray-300 text-sm">Email sent 29/04/2026 — update here when she responds.</p>
+                  <p className="text-amber-400 font-bold text-sm mt-1">sukhdip.kaur@natwest.com | Ref: 5521482</p>
                 </div>
               </div>
             </div>
