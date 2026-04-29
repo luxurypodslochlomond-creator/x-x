@@ -784,7 +784,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               ) : (
                 <>
                   <div className="h-px bg-white/20 my-3 w-full" />
-                  <button onClick={() => base44.auth.redirectToLogin()} className="w-full flex items-center gap-3 p-3 border-2 border-green-500/50 hover:border-green-500 bg-black/60 text-green-400">
+                  <button onClick={() => base44.auth.redirectToLogin(window.location.href)} className="w-full flex items-center gap-3 p-3 border-2 border-green-500/50 hover:border-green-500 bg-black/60 text-green-400">
                     <LogOut className="w-5 h-5" style={{ transform: 'scaleX(-1)' }} />
                     <span className="font-bold">Sign In</span>
                   </button>
@@ -902,7 +902,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : (
               <>
                 <div className="h-px bg-white/20 my-6" />
-                <button onClick={() => base44.auth.redirectToLogin()} className="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-green-900/20 text-green-400">
+                <button onClick={() => base44.auth.redirectToLogin(window.location.href)} className="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-green-900/20 text-green-400">
                   <LogOut className="w-6 h-6" style={{ transform: 'scaleX(-1)' }} />
                   <span className="text-lg font-bold">Sign In</span>
                 </button>
