@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // The growth loop. Every helped person becomes a referral.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const SHARE_URL = 'https://uf51.love/api/functions/serveMetaTags?page=Sorted';
+const SHARE_URL = 'https://uf51.love/api/functions/ogRedirect?page=Family51';
 const SHARE_TEXT = "Got a scary letter? SORTED decodes it in seconds — plain English, free, nothing stored.";
 
 export default function SortedShareButton({ accentColor = '#f97316' }) {
