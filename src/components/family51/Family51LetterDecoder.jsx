@@ -8,7 +8,8 @@ import SortedShareButton from './SortedShareButton';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
-  'NHS / medical', 'School / college', 'Employer / HR', 'Parking fine',
+  'NHS / medical', 'School / college', 'Employer / HR', 'Employment contract',
+  'Artist / music contract', 'Parking fine',
   'Driving / traffic', 'Benefits / DWP', 'Court / legal', 'Tax / government', 'Immigration', 'Other',
 ];
 
@@ -64,7 +65,15 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         if (!letterContent) throw new Error('Could not read the file. Please try a clearer photo or paste the text instead.');
       }
 
-      const promptText = `You are a compassionate plain-English advice expert specialising in ${currentGeo.jurisdiction}. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nLETTER:\n${letterContent}`;
+      const isContract = currentType?.toLowerCase().includes('contract');
+      const contractExtra = isContract ? `\n\nIMPORTANT — This is a CONTRACT. As well as the standard breakdown, you MUST identify:
+- Any clauses that are unusual, unfair, or one-sided
+- What's MISSING that should be in there (e.g. notice period, IP ownership, payment terms, termination rights)
+- Specific things the person could reasonably ask to negotiate or push back on — phrased as calm, professional requests, not confrontational demands
+- Any red flags that suggest they should get proper legal advice before signing
+Include this contract-specific guidance inside the action_steps field, and flag it clearly.` : '';
+
+      const promptText = `You are SORTED — a sharp, plain-English advisor who helps real people understand documents and letters. You speak like a brilliant friend who knows the law — not a robot, not a corporate disclaimer machine. ${geoContext} A person has ${isContract ? 'received this contract to review' : `received this official letter${currentType ? ` (type: ${currentType})` : ''}`} and needs help understanding it.${contractExtra}\n\nDOCUMENT:\n${letterContent}`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         prompt: promptText + `\n\nThis person may be stressed, scared, or overwhelmed. Your job is to be their brilliant, straight-talking friend who happens to know the law — not a robot, not a disclaimer machine. Be specific. Be human. Give REAL information that actually helps.
