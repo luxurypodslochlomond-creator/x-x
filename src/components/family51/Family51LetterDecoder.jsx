@@ -78,6 +78,7 @@ Include all this contract-specific guidance inside the action_steps field, flagg
       const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has ${isContract ? 'received this contract to review' : `received this official letter${currentType ? ` (type: ${currentType})` : ''}`} and needs help understanding it.${contractExtra}\n\nDOCUMENT:\n${letterContent}`;
 
       const response = await base44.integrations.Core.InvokeLLM({
+        model: 'claude_sonnet_4_6',
         prompt: promptText + `\n\nBe specific. Be human. Give REAL information that actually helps. Don't over-reassure or be preachy. Don't be cold either. Just tell them what's going on and what to do — like someone who's seen this before and knows it's manageable.
 
 CRITICAL ANTI-HALLUCINATION RULES:
@@ -457,6 +458,14 @@ Return a JSON object with these EXACT fields:
               <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
                 <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', margin: '0 0 6px' }}>AMOUNT INVOLVED</p>
                 <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, margin: 0 }}>{result.financial_impact}</p>
+              </div>
+            )}
+
+            {/* IF YOU IGNORE THIS */}
+            {result.if_you_ignore_this && (
+              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(239,68,68,0.04)', border: '1px solid rgba(239,68,68,0.12)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(239,68,68,0.5)', margin: '0 0 8px' }}>IF YOU IGNORE THIS</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
               </div>
             )}
 

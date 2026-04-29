@@ -8,8 +8,9 @@ import SortedShareButton from './SortedShareButton';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
-  'Council decision', 'Employer / HR', 'Employment contract', 'Neighbour dispute',
-  'Appeal a fine', 'Request my rights', 'Unfair dismissal', 'Other',
+  'Council decision', 'Employer / HR', 'Employment contract',
+  'Artist / music contract', 'Unfair dismissal', 'Neighbour dispute',
+  'Appeal a fine', 'Request my rights', 'Immigration / visa', 'Other',
 ];
 
 const TONES = [

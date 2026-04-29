@@ -8,12 +8,14 @@ import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
 import SortedShareButton from './SortedShareButton';
 
 const CONFLICT_TYPES = [
-  { id: 'neighbour', label: 'NEIGHBOUR',  desc: 'Noise, boundaries, shared areas' },
-  { id: 'workplace', label: 'WORKPLACE',  desc: 'Colleague or management' },
-  { id: 'landlord',  label: 'LANDLORD',   desc: 'Deposit, repairs, eviction' },
-  { id: 'family',    label: 'FAMILY',     desc: 'Custody, inheritance, dispute' },
-  { id: 'consumer',  label: 'CONSUMER',   desc: 'Bad service, refund refused' },
-  { id: 'other',     label: 'OTHER',      desc: 'Something else' },
+  { id: 'neighbour',  label: 'NEIGHBOUR',   desc: 'Noise, boundaries, shared areas' },
+  { id: 'workplace',  label: 'WORKPLACE',   desc: 'Colleague or management' },
+  { id: 'landlord',   label: 'LANDLORD',    desc: 'Deposit, repairs, eviction' },
+  { id: 'contract',   label: 'CONTRACT',    desc: 'Unfair terms, rights grabs, bad deal' },
+  { id: 'dismissal',  label: 'DISMISSAL',   desc: 'Unfair or wrongful termination' },
+  { id: 'family',     label: 'FAMILY',      desc: 'Custody, inheritance, dispute' },
+  { id: 'consumer',   label: 'CONSUMER',    desc: 'Bad service, refund refused' },
+  { id: 'other',      label: 'OTHER',       desc: 'Something else' },
 ];
 
 const GOALS = [
@@ -79,7 +81,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
 
       const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
-      prompt: `You are sharp, calm, and completely on their side — a conflict resolution expert with no agenda. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes.
+      prompt: `You are sharp, calm, and on their side — a conflict and legal expert. Clear, direct, confident. Not preachy. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes. For CONTRACT or DISMISSAL conflicts: flag unfair/unenforceable clauses, what they can push back on, and whether a solicitor or employment tribunal is needed.
 
 CONFLICT TYPE: ${ct?.label || 'Not specified'}
 GOAL: ${gt?.label} — ${gt?.desc}
@@ -188,7 +190,7 @@ Return:
        {/* CONFLICT TYPE */}
        <div className="space-y-2">
          <Label>TYPE OF CONFLICT</Label>
-         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
            {CONFLICT_TYPES.map(t => (
              <button
                key={t.id}
