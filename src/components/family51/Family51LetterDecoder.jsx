@@ -95,6 +95,7 @@ Return a JSON object with these EXACT fields:
 - severity: EXACTLY one of: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - severity_explanation: One sentence. Why did you pick that rating? What is at stake?
 - key_deadline: The exact date from the letter, or "No deadline mentioned". If there are multiple dates, give the soonest.
+- quick_reassurance: 2-3 short bullet points (use • character). Lead with calm. E.g. "• This is a standard reminder — nothing has gone wrong yet\n• You have time to respond — no immediate action needed today\n• There are free services that can help with this". Keep it warm, grounded, honest. This is the FIRST thing the user reads — make them feel steady, not scared.
 - we_hear_you: ONE grounded, human sentence — acknowledge the situation without overdoing it. Calm and real, like a friend who's seen this before. No melodrama, no hollow reassurance.
 - what_this_means: 3-4 sentences. Zero jargon. Plain English. Explain exactly what this letter IS, what triggered it, and what it actually means for this person day-to-day. Include any amounts of money involved.
 - if_you_ignore_this: 2-3 sentences. Helpful context about timing — what usually happens next if they don't respond, and why acting sooner is better. Calm and informative, never alarming. E.g. "If no response is received by the deadline, the next step is usually a follow-up letter or referral to a debt collection agency. It's worth responding quickly even if you can't pay in full — most organisations will work with you if you reach out first."
@@ -111,6 +112,7 @@ Return a JSON object with these EXACT fields:
             severity:             { type: 'string' },
             severity_explanation: { type: 'string' },
             key_deadline:         { type: 'string' },
+            quick_reassurance:    { type: 'string' },
             we_hear_you:          { type: 'string' },
             what_this_means:      { type: 'string' },
             if_you_ignore_this:   { type: 'string' },
@@ -408,6 +410,16 @@ Return a JSON object with these EXACT fields:
       <AnimatePresence>
         {result && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+
+            {/* QUICK REASSURANCE — first thing they see */}
+            {result.quick_reassurance && (
+              <div style={{ padding: '18px 20px', borderRadius: 14, background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(34,197,94,0.6)', margin: '0 0 10px' }}>AT A GLANCE</p>
+                {result.quick_reassurance.split('\n').filter(Boolean).map((line, i) => (
+                  <p key={i} style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, margin: i === 0 ? 0 : '6px 0 0', fontWeight: 500 }}>{line}</p>
+                ))}
+              </div>
+            )}
 
             {/* TOP — calm summary header */}
             {sev && (
