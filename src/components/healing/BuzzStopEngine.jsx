@@ -713,7 +713,7 @@ export default function BuzzStopEngine({ onStop }) {
               {/* Share button */}
               <button
                 onClick={async () => {
-                  const url = 'https://uf51.love/BuzzStop';
+                  const url = 'https://uf51.love/api/functions/ogRedirect?page=BuzzStop';
                   const text = `Found my tinnitus frequency (${lockedHz.toLocaleString()} Hz) using BuzzStop — free tool, no account needed. Try it:`;
                   if (navigator.share) {
                     try { await navigator.share({ title: 'BuzzStop', text, url }); } catch (e) {}
