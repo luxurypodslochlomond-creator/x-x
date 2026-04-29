@@ -364,6 +364,9 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
               </motion.button>
             </div>
 
+            {/* SEND IN YOUR EMAIL APP */}
+            <SendInEmailApp result={result} accentColor={accentColor} />
+
             {/* REGENERATE WITH DIFFERENT TONE */}
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 14 }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 10px' }}>SWAP TONE (GET ALTERNATIVE VERSION)</p>
@@ -482,6 +485,61 @@ Return subject line, full letter body, 2-3 key points it makes, and one importan
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  );
+}
+
+function SendInEmailApp({ result, accentColor }) {
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [open, setOpen] = useState(false);
+
+  if (!result) return null;
+
+  const handleOpen = () => {
+    const subject = encodeURIComponent(result.subject_line || 'Your reply');
+    const body = encodeURIComponent(result.letter_body || '');
+    const to = encodeURIComponent(recipientEmail.trim());
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+  };
+
+  return (
+    <div style={{ border: `1px solid rgba(34,197,94,0.25)`, borderRadius: 12, padding: '14px 16px', background: 'rgba(34,197,94,0.05)' }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: '#22c55e', margin: '0 0 4px' }}>📨 SEND FROM YOUR EMAIL APP</p>
+      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>Opens your email app (Proton Mail etc) with the reply pre-filled — you send it, not us.</p>
+      {!open ? (
+        <motion.button
+          onClick={() => setOpen(true)}
+          whileTap={{ scale: 0.95 }}
+          style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.1)', color: '#22c55e' }}
+        >
+          OPEN IN MY EMAIL APP
+        </motion.button>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <input
+            type="email"
+            value={recipientEmail}
+            onChange={e => setRecipientEmail(e.target.value)}
+            placeholder="Their email address (who you're sending TO)"
+            autoFocus
+            style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 8, color: '#fff', fontSize: 12, padding: '10px 12px', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+          />
+          <div style={{ display: 'flex', gap: 8 }}>
+            <motion.button
+              onClick={handleOpen}
+              disabled={!recipientEmail.trim()}
+              whileTap={recipientEmail.trim() ? { scale: 0.95 } : {}}
+              style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', cursor: recipientEmail.trim() ? 'pointer' : 'not-allowed', border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.1)', color: '#22c55e', opacity: recipientEmail.trim() ? 1 : 0.5 }}
+            >
+              OPEN EMAIL APP →
+            </motion.button>
+            <motion.button onClick={() => { setOpen(false); setRecipientEmail(''); }} whileTap={{ scale: 0.95 }} style={{ padding: '12px 16px', borderRadius: 10, fontSize: 11, fontWeight: 700, cursor: 'pointer', border: '1px solid rgba(255,255,255,0.1)', background: 'transparent', color: 'rgba(255,255,255,0.3)' }}>
+              ✕
+            </motion.button>
+          </div>
+          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', margin: 0 }}>Leave blank to open with no recipient — you can fill it in before you hit send.</p>
+        </div>
+      )}
     </div>
   );
 }
