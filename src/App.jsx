@@ -61,6 +61,7 @@ const SortedPressReleasePage = React.lazy(() => import('./pages/SortedPressRelea
 const SortedInvestorPressPage = React.lazy(() => import('./pages/SortedInvestorPress'));
 const PetSounds51InvestorPressPage = React.lazy(() => import('./pages/PetSounds51InvestorPress'));
 const SortedPartnerKitPage = React.lazy(() => import('./pages/SortedPartnerKit'));
+const SortedForOrgsPage = React.lazy(() => import('./pages/SortedForOrgs'));
 const SortedLayout = React.lazy(() => import('./components/family51/SortedLayout'));
 const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
@@ -172,6 +173,7 @@ const AuthenticatedApp = () => {
       <Route path="/SortedInvestorPress" element={<SortedLayout currentPage="SortedInvestorPress"><SortedInvestorPressPage /></SortedLayout>} />
       <Route path="/PetSounds51InvestorPress" element={<SortedLayout currentPage="PetSounds51InvestorPress"><PetSounds51InvestorPressPage /></SortedLayout>} />
       <Route path="/SortedPartnerKit" element={<SortedLayout currentPage="SortedPartnerKit"><SortedPartnerKitPage /></SortedLayout>} />
+      <Route path="/SortedForOrgs" element={<SortedLayout currentPage="SortedForOrgs"><SortedForOrgsPage /></SortedLayout>} />
       <Route path="/ST51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper></Suspense>} />
       <Route path="/AdminHMRCTracker" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper></Suspense>} />
       <Route path="/AdminLogoUpload" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper></Suspense>} />

@@ -180,17 +180,21 @@ export default function Family51Page() {
                  <FAQIcon />
                  FAQ &amp; How It Works
                </button>
+               <Link to="/SortedForOrgs" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                  <PartnerIcon />
+                  For Organisations
+                </Link>
                <Link to="/SortedPartnerKit" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <PartnerIcon />
                   Partner Kit
                 </Link>
                <Link to="/SortedPressRelease" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <FAQIcon />
-                  📰 Press Release
+                  Press Release
                 </Link>
                <Link to="/SortedInvestorPress" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <FAQIcon />
-                  📄 Investor Brief
+                  Investor Brief
                 </Link>
                <Link to="/SortedTerms" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
                   <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />

@@ -24,9 +24,10 @@ export default function SortedLayout({ children, currentPage }) {
 
   const menuItems = [
     { label: 'SORTED Home', path: '/Family51', icon: null },
+    { label: 'For Organisations', path: '/SortedForOrgs', icon: null },
     { label: 'Partner Kit', path: '/SortedPartnerKit', icon: null },
-    { label: '📰 Press Release', path: '/SortedPressRelease', icon: null },
-    { label: '📄 Investor Brief', path: '/SortedInvestorPress', icon: null },
+    { label: 'Press Release', path: '/SortedPressRelease', icon: null },
+    { label: 'Investor Brief', path: '/SortedInvestorPress', icon: null },
     { label: 'Terms', path: '/SortedTerms', icon: <Scale className="w-4 h-4" /> },
     { label: 'Privacy', path: '/SortedPrivacy', icon: <Eye className="w-4 h-4" /> },
     { label: 'Contact', path: 'mailto:family@uf51.love', icon: <Mail className="w-4 h-4" />, isEmail: true },
