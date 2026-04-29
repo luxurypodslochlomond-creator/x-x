@@ -555,6 +555,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Decode a Letter", url: createPageUrl("Family51"), icon: FileText, highlight: true, description: "Plain English advice" },
       { title: "Write a Reply", url: createPageUrl("Family51"), icon: Mail, highlight: true, description: "Draft responses" },
       { title: "Resolve Conflict", url: createPageUrl("Family51"), icon: Shield, highlight: true, description: "Navigate disputes" },
+      { title: "📰 Press Release", url: "/SortedPressRelease", icon: FileText, highlight: true, description: "Launch PR — save as PDF" },
       { title: "📄 Investor Brief", url: createPageUrl("SortedInvestorPress"), icon: FileText, highlight: true, description: "ESG · B2B · financial services" },
       { title: "Terms", url: "/SortedTerms", icon: Scale },
       { title: "Privacy", url: "/SortedPrivacy", icon: Eye },
