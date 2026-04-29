@@ -1,7 +1,32 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Phone, Calendar, AlertCircle, CheckCircle, ClipboardList, Heart } from 'lucide-react';
+import { Phone, Calendar, AlertCircle, CheckCircle, ClipboardList, Heart, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const EmailLauncher = ({ to, subject, body, label, color = 'cyan' }) => {
+  const handleOpen = () => {
+    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  };
+  const colorMap = {
+    cyan: 'border-cyan-500 text-cyan-400 hover:bg-cyan-500/10',
+    green: 'border-green-500 text-green-400 hover:bg-green-500/10',
+    amber: 'border-amber-500 text-amber-400 hover:bg-amber-500/10',
+  };
+  return (
+    <button
+      onClick={handleOpen}
+      className={`w-full flex items-center gap-3 border-2 ${colorMap[color]} bg-black/40 rounded-lg px-5 py-4 font-bold text-left transition-all`}
+    >
+      <Mail className="w-5 h-5 flex-shrink-0" />
+      <div>
+        <p className="font-black">{label}</p>
+        <p className="text-xs text-gray-400 font-mono mt-0.5">To: {to}</p>
+        <p className="text-xs text-gray-400 font-mono">Subject: {subject}</p>
+      </div>
+    </button>
+  );
+};
 
 export default function AdminNatWestMortgage() {
   return (
@@ -253,6 +278,43 @@ export default function AdminNatWestMortgage() {
               <p className="text-green-300 font-bold mb-2">✅ NO INITIATING LETTER NEEDED:</p>
               <p className="text-white">They came to YOU in writing. Mr Dempsey confirmed the hold. ~15 days left — no panic, but get your income update ready and reply before 31/03/2026. 🙏</p>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* QUICK EMAIL LAUNCHERS */}
+        <Card className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border-2 border-cyan-500">
+          <CardHeader>
+            <CardTitle className="text-cyan-300 flex items-center gap-2">
+              <Mail className="w-6 h-6" />
+              QUICK EMAIL LAUNCHERS — Opens in YOUR email app
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-gray-400 text-sm">Tap to open a pre-filled draft in your own email client (Proton Mail etc). You review, edit if needed, then send. Nothing sent automatically. ✅</p>
+
+            <EmailLauncher
+              to="sukhdip.kaur@natwest.com"
+              subject="Ref: 5521482 — Payment Update"
+              body={`Good afternoon Sukhi,\n\nI'm writing to follow up on ref 5521482. I'm still working towards making a payment and am hoping to confirm a specific amount in May. I'll be in touch as soon as I'm in a position to do so.\n\nThank you for your continued patience.\n\nKind regards,\nBrian Hughes\nRef: 5521482`}
+              label="✉️ Follow-up to Sukhi Kaur — NatWest"
+              color="cyan"
+            />
+
+            <EmailLauncher
+              to="SSTSecured@natwest.com"
+              subject="Ref: 5521482 — Payment Contribution"
+              body={`Good afternoon,\n\nI'm writing regarding ref 5521482. I'm pleased to confirm I'm now in a position to make a payment contribution. Please could you advise on the best way to proceed?\n\nKind regards,\nBrian Hughes\nRef: 5521482`}
+              label="✉️ Payment Contribution — SST NatWest General"
+              color="green"
+            />
+
+            <EmailLauncher
+              to="hello@octopus.energy"
+              subject="Account A-37F41968 — Payment Plan & Paylink Assistance"
+              body={`Good afternoon,\n\nI'm writing regarding my account A-37F41968. I wanted to follow up on my payment plan (£10/month) and ask for assistance completing the Paylink hardship assessment form. I am going through bereavement and have been struggling with my mental health, and I understand this may make me eligible for additional support via the Octo Fund.\n\nPlease could you advise on next steps?\n\nKind regards,\nBrian Hughes\nAccount: A-37F41968\nEmail: GLA101@proton.me`}
+              label="🐙 Follow-up to Ella — Octopus Energy"
+              color="amber"
+            />
           </CardContent>
         </Card>
 
