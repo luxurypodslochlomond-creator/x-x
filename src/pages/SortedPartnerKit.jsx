@@ -97,7 +97,7 @@ export default function SortedPartnerKit() {
             <Download size={16} /> {isDownloading ? 'Downloading...' : 'Download PDF'}
           </button>
           <button
-            onClick={() => copyToClipboard(window.location.href)}
+            onClick={() => copyToClipboard('https://uf51.love/api/functions/ogRedirect?page=SortedPartnerKit')}
             style={{
               display: 'flex', alignItems: 'center', gap: 8,
               padding: '12px 20px', background: 'rgba(6,182,212,0.2)', border: '1px solid rgba(6,182,212,0.4)',
