@@ -63,7 +63,7 @@ export default function SortedPrivacy() {
       {/* THE PLEDGE */}
       <div style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.04))', border: '2px solid rgba(249,115,22,0.4)', borderRadius: 16, padding: '28px 24px', marginBottom: 48 }}>
         <p style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#fff', lineHeight: 1.7, fontStyle: 'italic' }}>
-          "Your letter is yours. Your crisis is yours. Your data is yours. We will never treat it as anything else — not now, not ever, not for any price."
+          "Whatever you're going through — we're on your side. Your letter, your situation, your data — all of it stays yours. We will never share it, sell it, or use it for anything other than helping you. Not now, not ever, not for any price."
         </p>
         <p style={{ margin: '16px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>— The SORTED Pledge</p>
       </div>
