@@ -123,8 +123,12 @@ Return a JSON object with these EXACT fields:
       });
 
       // Validate we actually got content back
-      if (!response || !response.what_this_means) {
-        setDecodeError('Something went wrong reading the response. Please try again.');
+      if (!response) {
+        console.error('No response from API');
+        setDecodeError('No response received. Please try again.');
+      } else if (!response.letter_summary) {
+        console.error('Invalid response structure:', response);
+        setDecodeError('Response parsing failed. Please try again.');
       } else {
         setResult(response);
         // Save to local case history — no login needed
@@ -141,6 +145,7 @@ Return a JSON object with these EXACT fields:
       }
     } catch (err) {
       console.error('SORTED decode error:', err);
+      console.error('Error details:', { message: err?.message, status: err?.status, response: err?.response });
       setDecodeError(`Decode failed: ${err?.message || 'Unknown error'}. Please try again.`);
     } finally {
       setLoading(false);
