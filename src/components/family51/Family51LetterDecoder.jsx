@@ -411,7 +411,27 @@ Return a JSON object with these EXACT fields:
         {result && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
 
-            {/* QUICK REASSURANCE — first thing they see */}
+            {/* WHAT NOW — primary CTA immediately at top */}
+            {onHandoff && (
+              <motion.button
+                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggestedTone: result.suggested_tone, related_case_id: caseId })}
+                whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                style={{
+                  width: '100%', padding: '18px 0', borderRadius: 14, fontSize: 14,
+                  fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
+                  border: `2px solid ${accentColor}`,
+                  background: accentColor, color: '#000',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                }}
+              >
+                WRITE MY REPLY NOW
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </motion.button>
+            )}
+
+            {/* QUICK REASSURANCE */}
             {result.quick_reassurance && (
               <div style={{ padding: '18px 20px', borderRadius: 14, background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)' }}>
                 <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(34,197,94,0.6)', margin: '0 0 10px' }}>AT A GLANCE</p>
@@ -493,29 +513,10 @@ Return a JSON object with these EXACT fields:
               </div>
             )}
 
-            {/* HANDOFF — dominant CTA */}
-            {onHandoff && (
-              <motion.button
-                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggestedTone: result.suggested_tone, related_case_id: caseId })}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 13,
-                  fontWeight: 900, letterSpacing: '0.12em', cursor: 'pointer',
-                  border: `2px solid ${accentColor}`,
-                  background: accentColor, color: '#000',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                  marginTop: 4,
-                }}
-              >
-                WRITE A REPLY
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </motion.button>
-            )}
-
             {/* SECONDARY ACTIONS */}
-            <div style={{ display: 'flex', gap: 8 }}>
+            <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
               <motion.button onClick={copyAll} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
-                {copied ? 'COPIED' : 'COPY'}
+                {copied ? '✓ COPIED' : 'COPY ALL'}
               </motion.button>
               <motion.button onClick={reset} whileTap={{ scale: 0.95 }} style={{ ...secondaryBtn, color: 'rgba(255,255,255,0.5)', borderColor: 'rgba(255,255,255,0.15)' }}>
                 DECODE ANOTHER
