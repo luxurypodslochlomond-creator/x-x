@@ -324,10 +324,10 @@ export default function Family51Page() {
                     <span style={{ color: '#ef4444' }}>dispute?</span>
                   </h1>
                   <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', margin: '16px 0 0', lineHeight: 1.55, fontWeight: 500 }}>
-                    SORTED reads your letter and tells you <strong style={{ color: '#fff' }}>exactly what it means</strong> and <strong style={{ color: '#fff' }}>exactly what to do</strong> — in your language, in seconds.
+                    SORTED reads your letter and tells you <strong style={{ color: '#fff' }}>exactly what it means</strong> and <strong style={{ color: '#fff' }}>what to do next</strong> — calmly, clearly, in your language.
                   </p>
                   <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0' }}>
-                    No jargon. No judgement. Any language. Any country.
+                    No jargon. No judgement. Any language. Any country. You're not alone.
                   </p>
               </motion.div>
             </div>
@@ -381,7 +381,7 @@ export default function Family51Page() {
                 onClick={() => handleToolOpen('conflict')}
                 icon={<ConflictIcon color="#ef4444" />}
                 label="DISPUTE HELP"
-                sub="Neighbour. Employer. Landlord. We fight back."
+                sub="Neighbour. Employer. Landlord. We'll help you stand your ground."
                 tag={isLocked ? '🔒 LOCKED' : 'FREE'}
               />
 
