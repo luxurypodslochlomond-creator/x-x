@@ -112,6 +112,8 @@ Return a JSON object with these EXACT fields:
       });
 
       // Validate we actually got content back
+      console.log('Raw response from API:', response, 'Type:', typeof response);
+      
       if (!response) {
         console.error('No response from API');
         setDecodeError('No response received. Please try again.');
@@ -119,14 +121,15 @@ Return a JSON object with these EXACT fields:
         // Claude sometimes returns a string instead of parsed JSON
         try {
           const parsed = JSON.parse(response);
-          if (parsed.letter_summary) {
+          console.log('Parsed string response:', parsed);
+          if (parsed.letter_summary || Object.keys(parsed).length > 0) {
             setResult(parsed);
             const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
             const caseId = saveCaseToHistory({
               tool: 'letter',
               input_text: text || '',
               ai_result: JSON.stringify(parsed),
-              summary: parsed.letter_summary || 'Decoded letter',
+              summary: parsed.letter_summary || parsed.summary || 'Decoded letter',
               severity: severityMap[parsed.severity] || 'unknown',
             });
             setCaseId(caseId);
@@ -137,18 +140,18 @@ Return a JSON object with these EXACT fields:
           setDecodeError('Could not understand response. Please try again.');
           return;
         }
-      } else if (response.letter_summary) {
+      } else if (response && typeof response === 'object' && Object.keys(response).length > 0) {
+        // Accept any object with content, be more forgiving with field names
+        console.log('Object response accepted:', response);
         setResult(response);
-        // Save to local case history — no login needed
         const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
         const caseId = saveCaseToHistory({
           tool: 'letter',
           input_text: text || '',
           ai_result: JSON.stringify(response),
-          summary: response.letter_summary || 'Decoded letter',
+          summary: response.letter_summary || response.summary || Object.values(response)[0] || 'Decoded letter',
           severity: severityMap[response.severity] || 'unknown',
         });
-        // Store case ID so handoff to reply can link cases
         setCaseId(caseId);
       } else {
         console.error('Invalid response structure. Got:', response);
