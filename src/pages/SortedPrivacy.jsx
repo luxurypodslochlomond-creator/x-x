@@ -105,12 +105,37 @@ export default function SortedPrivacy() {
         </Honest>
       </Section>
 
+      {/* PATTERN LEARNING — ANONYMIZED ONLY */}
+      <Section icon={<Heart size={22} />} title="We learn from patterns — anonymously">
+        <p style={{ marginTop: 0 }}>We do something most legal apps won't tell you: we use anonymized case patterns to get smarter.</p>
+        <p>Here's how it works — completely transparent:</p>
+        <div style={{ margin: '20px 0', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 10, padding: '16px' }}>
+          <p style={{ fontSize: 13, fontWeight: 600, color: '#22c55e', margin: '0 0 10px' }}>The Anonymization:</p>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', margin: '0 0 10px', lineHeight: 1.65 }}>
+            After we analyze your letter, we create an <strong>anonymized summary</strong>. We strip out: names, emails, amounts, dates, addresses. What's left? The pattern — the type of problem, the severity, what advice worked.
+          </p>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: 1.65 }}>
+            Think of it like case law. "Smith v. Jones" becomes "Claimant v. Defendant" — the legal reasoning stays valuable forever.
+          </p>
+        </div>
+        <p style={{ marginTop: 16, marginBottom: 12 }}>Why? Because it makes us smarter. After 1,000 cases, we spot patterns that help the next person:</p>
+        <ul style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.75, paddingLeft: 20, margin: 0 }}>
+          <li>"Last 50 council tax letters like this — these 3 clauses always backfire"</li>
+          <li>"Employment contracts with this language? People get better outcomes if they push back on X"</li>
+          <li>"Debt letters from this organization — here's what actually works"</li>
+        </ul>
+        <div style={{ marginTop: 16, padding: '14px 16px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 8 }}>
+          <p style={{ fontSize: 12, color: 'rgba(34,197,94,0.9)', margin: 0, fontWeight: 600 }}>✓ You benefit twice: once when SORTED helps you, again when your anonymized pattern helps the next person.</p>
+        </div>
+      </Section>
+
       {/* WHAT WE DO AND DON'T DO */}
       <Section icon={<Lock size={22} />} title="What we do — and what we never do">
         <div style={{ marginBottom: 24 }}>
           <p style={{ fontWeight: 700, color: '#22c55e', marginBottom: 12, fontSize: 14, letterSpacing: '0.05em' }}>WE DO:</p>
           <Check>Encrypt all data in transit (HTTPS)</Check>
           <Check>Discard your letter content immediately after analysis</Check>
+          <Check>Create anonymized patterns to improve future advice — no PII included</Check>
           <Check>Let you clear all local data at any time — one button, instant, total</Check>
           <Check>Work without requiring any account or login</Check>
           <Check>Store zero cookies or trackers on your device</Check>

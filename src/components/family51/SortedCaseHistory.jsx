@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
+import { anonymizeCase } from '@/utils/anonymizeCase';
 
 // Case history is stored in localStorage — no login ever needed
 const STORAGE_KEY = 'sorted_case_history_v1';
@@ -32,6 +33,8 @@ export function saveCaseToHistory({ tool, input_text, ai_result, summary, severi
   try {
     const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const id = Date.now().toString();
+    // Anonymize for pattern learning
+    const anonymized = anonymizeCase(ai_result, tool);
     const newCase = {
       id,
       session_id: getSessionId(),
@@ -41,6 +44,7 @@ export function saveCaseToHistory({ tool, input_text, ai_result, summary, severi
       ai_result,
       summary,
       severity: severity || 'unknown',
+      anonymized_version: anonymized,
       created_date: new Date().toISOString(),
     };
     // Prepend, keep max FREE_CASE_LIMIT (free users get 3 saved)

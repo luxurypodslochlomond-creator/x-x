@@ -37,6 +37,10 @@
     "stripe_session_id": {
       "type": "string",
       "description": "Stripe session ID to verify subscription"
+    },
+    "anonymized_version": {
+      "type": "string",
+      "description": "Anonymized summary for pattern learning \u2014 no names, emails, amounts, dates"
     }
   },
   "required": [

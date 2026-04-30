@@ -121,7 +121,15 @@ const FAQ_ITEMS = [
     items: [
       {
         q: 'Is my data actually private?',
-        a: 'Yes. Your letter is encrypted in transit, processed by AI, then permanently deleted. We don\'t store it, log it, or use it to train models. Check our Data Sovereignty Pledge for technical details.'
+        a: 'Yes. Your letter is encrypted in transit, processed by AI, then permanently deleted. We don\'t store it, log it, or use it to train models. We do create anonymized case patterns (no names, emails, amounts) to improve advice for future users — but you\'re never identified. Check our Data Sovereignty Pledge for full details.'
+      },
+      {
+        q: 'What do you mean by "anonymized patterns"?',
+        a: 'After we decode your letter, we extract the pattern (letter type, severity, what advice worked) and strip out all personally identifiable info (your name, email, amounts, dates, addresses). What\'s left is the legal reasoning — like published case law. This helps us get smarter without compromising your privacy.'
+      },
+      {
+        q: 'Can I opt out of pattern learning?',
+        a: 'Currently no — but the anonymization is strict, and you\'re never identified. If you\'re uncomfortable even with anonymized learning, hit "Clear all my data" and we delete everything. We\'re open to adding a toggle in future.'
       },
       {
         q: 'Can the government or police access my letters?',
