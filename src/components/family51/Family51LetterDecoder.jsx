@@ -115,10 +115,29 @@ Return a JSON object with these EXACT fields:
       if (!response) {
         console.error('No response from API');
         setDecodeError('No response received. Please try again.');
-      } else if (!response.letter_summary) {
-        console.error('Invalid response structure:', response);
-        setDecodeError('Response parsing failed. Please try again.');
-      } else {
+      } else if (typeof response === 'string') {
+        // Claude sometimes returns a string instead of parsed JSON
+        try {
+          const parsed = JSON.parse(response);
+          if (parsed.letter_summary) {
+            setResult(parsed);
+            const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
+            const caseId = saveCaseToHistory({
+              tool: 'letter',
+              input_text: text || '',
+              ai_result: JSON.stringify(parsed),
+              summary: parsed.letter_summary || 'Decoded letter',
+              severity: severityMap[parsed.severity] || 'unknown',
+            });
+            setCaseId(caseId);
+            return;
+          }
+        } catch (e) {
+          console.error('Failed to parse response as JSON:', response);
+          setDecodeError('Could not understand response. Please try again.');
+          return;
+        }
+      } else if (response.letter_summary) {
         setResult(response);
         // Save to local case history — no login needed
         const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
@@ -131,6 +150,9 @@ Return a JSON object with these EXACT fields:
         });
         // Store case ID so handoff to reply can link cases
         setCaseId(caseId);
+      } else {
+        console.error('Invalid response structure. Got:', response);
+        setDecodeError('Could not decode this letter. Try uploading a clearer photo or paste the text instead.');
       }
     } catch (err) {
       console.error('SORTED decode error:', err);
