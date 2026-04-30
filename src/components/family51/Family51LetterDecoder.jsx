@@ -8,8 +8,7 @@ import SortedShareButton from './SortedShareButton';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
-  'NHS / medical', 'School / college', 'Employer / HR', 'Employment contract',
-  'Artist / music contract', 'Parking fine',
+  'NHS / medical', 'School / college', 'Employer / HR', 'Parking fine',
   'Driving / traffic', 'Benefits / DWP', 'Court / legal', 'Tax / government', 'Immigration', 'Other',
 ];
 
@@ -62,17 +61,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         if (!letterContent) throw new Error('Could not read the file. Please try a clearer photo or paste the text instead.');
       }
 
-      const isContract = currentType?.toLowerCase().includes('contract');
-      const contractExtra = isContract ? `\n\nIMPORTANT — This is a CONTRACT. Apply ${currentGeo.jurisdiction} contract law specifically. As well as the standard breakdown, you MUST identify:
-- Any clauses that are unusual, unfair, or one-sided under ${currentGeo.jurisdiction} law
-- What's MISSING that should be in there (e.g. notice period, IP/copyright ownership, payment terms, termination rights, royalty splits for music contracts)
-- Specific things the person could reasonably ask to negotiate or push back on — phrased as calm, professional requests, not confrontational demands
-- Any red flags or clauses that may not be enforceable under ${currentGeo.jurisdiction} law
-- Whether they should get proper legal advice before signing (be honest — some contracts really do need a solicitor/lawyer)
-- For music/artist contracts specifically: check for 360 deals, perpetual rights grabs, unfair royalty rates, sync licensing terms, recording commitment clauses
-Include all this contract-specific guidance inside the action_steps field, flagged clearly.` : '';
-
-      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has ${isContract ? 'received this contract to review' : `received this official letter${currentType ? ` (type: ${currentType})` : ''}`} and needs help understanding it.${contractExtra}\n\nDOCUMENT:\n${letterContent}`;
+      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nDOCUMENT:\n${letterContent}`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
@@ -261,20 +250,12 @@ Return a JSON object with these EXACT fields:
       <div className="space-y-2">
         <Label>WHAT ARE YOU UPLOADING? (optional — helps us give better advice)</Label>
         <div className="flex flex-wrap gap-2">
-          {LETTER_TYPES.map(type => {
-            const isContract = type.toLowerCase().includes('contract');
-            return (
-              <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
-                {isContract ? `★ ${type}` : type}
-              </Chip>
-            );
-          })}
-        </div>
-        {(letterType?.toLowerCase().includes('contract')) && (
-          <p style={{ fontSize: 11, color: accentColor, fontWeight: 700, letterSpacing: '0.04em', marginTop: 4 }}>
-            Contract mode — we'll flag red flags, missing protections, and what to push back on.
-          </p>
-        )}
+           {LETTER_TYPES.map(type => (
+             <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
+               {type}
+             </Chip>
+           ))}
+         </div>
       </div>
 
       {/* UPLOAD OR PASTE — two separate buttons */}
