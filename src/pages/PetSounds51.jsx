@@ -202,18 +202,18 @@ export default function PetSounds51() {
   // Full screen player when active
   if (activeView === 'playing') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900 p-4">
-        <div className="max-w-2xl mx-auto pt-4">
-          <button
-            onClick={() => {
-              if (window._ps51StopLog) { window._ps51StopLog(); window._ps51StopLog = null; }
-              setActiveView('home');
-              setSelectedProtocol(null);
-            }}
-            className="mb-6 text-orange-700 hover:text-orange-600 text-sm font-bold flex items-center gap-1"
-          >
-            ← back
-          </button>
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50 text-amber-900">
+        <button
+          onClick={() => {
+            if (window._ps51StopLog) { window._ps51StopLog(); window._ps51StopLog = null; }
+            setActiveView('home');
+            setSelectedProtocol(null);
+          }}
+          className="fixed top-4 left-4 z-50 text-orange-700 hover:text-orange-600 text-sm font-bold flex items-center gap-1 bg-white/80 backdrop-blur-sm px-3 py-2 rounded-lg hover:bg-white/90 transition-all"
+        >
+          ← back
+        </button>
+        <div className="max-w-2xl mx-auto pt-4 p-4">
           <Suspense fallback={<div className="text-center text-orange-700 py-12">Loading...</div>}>
             <AnimalFrequencyEngine
               protocol={selectedProtocol}
