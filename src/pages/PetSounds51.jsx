@@ -252,9 +252,9 @@ export default function PetSounds51() {
 
         {/* FREE HERO CTA — unmissable */}
         <div className="max-w-sm mx-auto mb-4">
-          <button
-            onPointerDown={(e) => { e.preventDefault(); handleSelect('separation'); }}
-            className="w-full rounded-2xl px-6 py-5 font-black text-xl flex flex-col items-center gap-1 active:scale-95 transition-transform select-none touch-manipulation shadow-2xl"
+           <button
+             onClick={() => handleSelect('separation')}
+             className="w-full rounded-2xl px-6 py-5 font-black text-xl flex flex-col items-center gap-1 active:scale-95 transition-transform shadow-2xl"
             style={{ background: 'linear-gradient(135deg, #8aab3a, #6b9a30)', color: '#fff', boxShadow: '0 0 40px rgba(138,171,58,0.45)' }}
           >
             <span className="flex items-center gap-2"><Play className="w-6 h-6 fill-current" /> Try it FREE right now</span>
@@ -432,12 +432,9 @@ export default function PetSounds51() {
                   const ItemIcon = item.icon ? PS51Icons[item.icon] : null;
                   return (
                     <button
-                      key={item.key}
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        handleSelect(item.key);
-                      }}
-                      className="p-4 transition-all text-left rounded-xl group relative shadow-md active:scale-95 select-none touch-manipulation"
+                       key={item.key}
+                       onClick={() => handleSelect(item.key)}
+                       className="p-4 transition-all text-left rounded-xl group relative shadow-md active:scale-95 select-none"
                       style={{
                         background: isUnlocked
                           ? `linear-gradient(135deg, rgba(42,48,24,0.9), rgba(30,36,16,0.95))`
