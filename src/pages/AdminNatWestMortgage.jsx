@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 29 Apr 2026 — FOLLOW-UP SENT TO SUKHI — May payment signalled ⏳ Awaiting reply</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 1 May 2026 — NATWEST REPLIED (N Ahmad) — "We await contact" • OCTOPUS ELLA REPLIED — DD sorted 23 May ✅ Call booked for Paylink form</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -190,12 +190,21 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 bg-amber-900/20 p-4 rounded-lg border-2 border-amber-500">
-                <div className="text-amber-400 font-bold text-lg min-w-fit">⏳ WAITING</div>
+              <div className="flex items-start gap-4 bg-green-900/20 p-4 rounded-lg border-2 border-green-500">
+                <div className="text-green-400 font-bold text-lg min-w-fit">30/04/2026</div>
                 <div>
-                  <p className="text-white font-bold">Awaiting reply from Sukhi Kaur</p>
-                  <p className="text-gray-300 text-sm">Email sent 29/04/2026 — update here when she responds.</p>
-                  <p className="text-amber-400 font-bold text-sm mt-1">sukhdip.kaur@natwest.com | Ref: 5521482</p>
+                  <p className="text-white font-bold">✅ NATWEST REPLIED — N Ahmad (SST Secured)</p>
+                  <p className="text-gray-300 text-sm">"Thank you for your email. We await contact." — Ball is in your court. They are NOT chasing or threatening. Waiting for you to call when ready to discuss a payment amount.</p>
+                  <p className="text-amber-400 font-bold text-sm mt-1">📞 Call when ready: 0800 161 5954 (Mon-Fri 8am-5pm) | Ref: 5521482</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-amber-900/20 p-4 rounded-lg border-2 border-amber-500">
+                <div className="text-amber-400 font-bold text-lg min-w-fit">⏳ ACTION</div>
+                <div>
+                  <p className="text-white font-bold">Call NatWest when you have a payment amount — even £100 shows willing</p>
+                  <p className="text-gray-300 text-sm">They're not chasing. They're waiting. A partial payment + communication is always better than silence. Interest is accruing but account is held.</p>
+                  <p className="text-amber-400 font-bold text-sm mt-1">0800 161 5954 | Ref: 5521482 | sukhdip.kaur@natwest.com</p>
                 </div>
               </div>
             </div>
@@ -328,22 +337,33 @@ export default function AdminNatWestMortgage() {
           <CardContent className="space-y-4">
 
             <div className="bg-green-900/30 border-2 border-green-500 rounded-lg p-4">
-              <p className="text-green-400 font-black mb-2">✅ CURRENT STATUS — 29 Apr 2026</p>
+              <p className="text-green-400 font-black mb-2">✅ CURRENT STATUS — 1 May 2026</p>
               <ul className="text-white text-sm space-y-1">
                 <li>• <strong>Payment plan agreed:</strong> £10/month for 6 months (review after)</li>
-                <li>• <strong>Direct Debit:</strong> 23rd of each month — requested move from Oct 2026 → May 2026</li>
+                <li>• <strong>Direct Debit:</strong> ✅ CONFIRMED moved to <strong>23rd May 2026</strong> — Ella sorted it</li>
+                <li>• <strong>Paylink form:</strong> Ella offered to do it WITH you on a call (Mon-Fri after 4pm)</li>
                 <li>• <strong>Contact:</strong> Ella (Affordability Specialist) — hello@octopus.energy</li>
                 <li>• <strong>Our email:</strong> GLA101@proton.me</li>
               </ul>
             </div>
 
-            <div className="bg-amber-900/30 border-2 border-amber-500 rounded-lg p-4">
-              <p className="text-amber-400 font-black mb-2">⏳ AWAITING RESPONSE FROM ELLA</p>
+            <div className="bg-green-900/30 border-2 border-green-500 rounded-lg p-4">
+              <p className="text-green-400 font-black mb-2">✅ ELLA REPLIED (29 Apr) — SHE'S ON YOUR SIDE</p>
               <ul className="text-sm text-gray-200 space-y-1">
-                <li>• Asked Ella to move DD start to <strong>May 23rd</strong> ✅</li>
-                <li>• Asked for <strong>assistance completing the Paylink form</strong> (vulnerability/bereavement)</li>
-                <li>• Mentioned bereavement + mental health — unlocks <strong>Octo Fund hardship support</strong></li>
-                <li>• Paylink form = could lead to debt reduction or write-off via Octo Fund</li>
+                <li>• DD moved to <strong>23rd May ✅</strong> — confirmed</li>
+                <li>• Said: <em>"Please make sure your mental health is at the top of your list of priorities"</em> 💚</li>
+                <li>• Offered to call you and fill in Paylink form FOR you — just have income/expenditure ready</li>
+                <li>• Paylink form = path to <strong>Octo Fund hardship write-off</strong></li>
+              </ul>
+            </div>
+
+            <div className="bg-amber-900/30 border-2 border-amber-500 rounded-lg p-4">
+              <p className="text-amber-400 font-black mb-2">⏳ ACTION — REPLY TO ELLA & BOOK THE CALL</p>
+              <ul className="text-sm text-gray-200 space-y-1">
+                <li>• Reply saying any day next week after 4pm works</li>
+                <li>• Prepare: monthly income + monthly outgoings (rough is fine)</li>
+                <li>• She'll fill the Paylink form FOR you on the call</li>
+                <li>• This could lead to <strong>debt reduction or write-off via Octo Fund</strong></li>
               </ul>
             </div>
 
