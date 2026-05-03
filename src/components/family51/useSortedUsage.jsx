@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const KEY = 'sorted_uses';
 const PAID_KEY = 'sorted_paid';
-const FREE_LIMIT = 3;
+const FREE_LIMIT = 5;
 
 export function useSortedUsage() {
   const [uses, setUses] = useState(() => {

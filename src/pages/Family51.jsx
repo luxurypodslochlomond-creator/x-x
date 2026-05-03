@@ -312,8 +312,10 @@ export default function Family51Page() {
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                 {/* FREE BADGE — lead with this */}
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
-                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
-                  <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>TRY FREE — NO CARD NEEDED</span>
+                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0, animation: 'pulse 2s infinite' }} />
+                  <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>
+                    {remaining < 5 ? `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT` : '5 FREE USES — NO CARD NEEDED'}
+                  </span>
                 </div>
                 <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
                     <span style={{ color: '#fff' }}>Got a scary</span>{' '}
@@ -348,7 +350,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRMail />} text="Email the breakdown to yourself — then forward it to a family member, solicitor, or advice worker. We never email third parties on your behalf (that would risk your privacy)." />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                3 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>{geoPrice.inline}</strong> if you want unlimited. Cancel anytime.
+                5 free uses — no card, no signup. Decode, reply, dispute — each counts as one use. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
               </p>
             </motion.div>
 
@@ -562,7 +564,7 @@ export default function Family51Page() {
               <div style={{ marginBottom: 16 }}></div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 14px' }}>
                 <span style={{ color: '#fff' }}>You've used your</span>{' '}
-                <span style={{ color: '#f97316' }}>3 free decodes.</span>
+                <span style={{ color: '#f97316' }}>5 free uses.</span>
               </h1>
               <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6 }}>
                 We know how stressful this stuff is. That's exactly why we built SORTED — so you don't have to face it alone.

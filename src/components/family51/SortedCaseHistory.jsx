@@ -5,7 +5,7 @@ import { anonymizeCase } from '@/utils/anonymizeCase';
 
 // Case history is stored in localStorage — no login ever needed
 const STORAGE_KEY = 'sorted_case_history_v1';
-const FREE_CASE_LIMIT = 3;
+const FREE_CASE_LIMIT = 5;
 
 const TOOL_CONFIG = {
   letter:   { label: 'DECODED LETTER', color: '#f97316' },
