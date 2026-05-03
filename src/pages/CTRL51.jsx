@@ -69,19 +69,16 @@ export default function CTRL51Page() {
               num: '01',
               title: 'Upload Your Data',
               desc: 'Drop your procurement CSV. That\'s it. No setup needed.',
-              icon: '📊',
             },
             {
               num: '02',
               title: 'Instant Analysis',
               desc: 'AI spots fragmentation, price anomalies, unapproved suppliers in seconds.',
-              icon: '⚡',
             },
             {
               num: '03',
               title: 'Control & Act',
               desc: 'See what\'s happening. Make decisions. Track everything. Save money.',
-              icon: '🎯',
             },
           ].map((feature, i) => (
             <motion.div
@@ -91,8 +88,9 @@ export default function CTRL51Page() {
               className="p-6 rounded-xl border border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/10 transition cursor-pointer"
               whileHover={{ y: -4 }}
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <p className="text-cyan-400 font-bold text-sm mb-2">STEP {feature.num}</p>
+              <div className="w-12 h-12 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center mb-4 text-lg font-black text-cyan-400">
+                {feature.num}
+              </div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
               <p className="text-gray-300 text-sm">{feature.desc}</p>
             </motion.div>
@@ -106,24 +104,21 @@ export default function CTRL51Page() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {[
-            { icon: AlertCircle, title: 'Price Above Benchmark', desc: '30% markup instantly flagged' },
-            { icon: TrendingUp, title: 'Supplier Fragmentation', desc: 'Same products, different prices across sites' },
-            { icon: Check, title: 'Unapproved Vendors', desc: 'Buying from non-approved suppliers' },
-            { icon: AlertCircle, title: 'Savings Opportunities', desc: 'Consolidation paths identified' },
-          ].map((alert, i) => {
-            const Icon = alert.icon;
-            return (
-              <div key={i} className="p-4 rounded-lg border border-red-500/20 bg-red-500/5">
-                <div className="flex gap-3">
-                  <Icon className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-bold text-sm">{alert.title}</p>
-                    <p className="text-xs text-gray-400 mt-1">{alert.desc}</p>
-                  </div>
+            { title: 'Price Above Benchmark', desc: '30% markup instantly flagged' },
+            { title: 'Supplier Fragmentation', desc: 'Same products, different prices across sites' },
+            { title: 'Unapproved Vendors', desc: 'Buying from non-approved suppliers' },
+            { title: 'Savings Opportunities', desc: 'Consolidation paths identified' },
+          ].map((alert, i) => (
+            <div key={i} className="p-4 rounded-lg border border-red-500/20 bg-red-500/5">
+              <div className="flex gap-3">
+                <div className="w-1 bg-red-400 flex-shrink-0 rounded" />
+                <div>
+                  <p className="font-bold text-sm">{alert.title}</p>
+                  <p className="text-xs text-gray-400 mt-1">{alert.desc}</p>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </section>
 
