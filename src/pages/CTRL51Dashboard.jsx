@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, AlertCircle, TrendingUp, CheckCircle } from 'lucide-react';
+import { Upload, AlertCircle, TrendingUp, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import CTRL51Icon from '@/components/ctrl51/CTRL51Icon';
 
@@ -9,6 +10,10 @@ export default function CTRL51Dashboard() {
   const [loading, setLoading] = useState(false);
   const [analysis, setAnalysis] = useState(null);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    document.title = 'CTRL51 Dashboard';
+  }, []);
 
   const handleFileUpload = async (e) => {
     const selectedFile = e.target.files?.[0];
@@ -119,38 +124,68 @@ Return detailed JSON with realistic numbers based on this actual data.`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#0a0f1a] to-black text-white p-6 lg:p-12">
-      <div className="max-w-4xl mx-auto">
-        {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <div className="flex justify-center mb-4">
-            <CTRL51Icon size={60} animate={true} />
-          </div>
-          <h1 className="text-4xl font-black mb-2">CTRL51 Dashboard</h1>
-          <p className="text-gray-300">Upload your CSV. Get instant insights.</p>
-        </motion.div>
+    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+      {/* STICKY HEADER */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(249,115,22,0.15)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Link to="/CTRL51" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#f97316', background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em' }}>
+          <ArrowLeft className="w-4 h-4" />
+          BACK
+        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <CTRL51Icon size={28} animate={false} />
+          <span style={{ fontSize: 14, fontWeight: 900, color: '#fff' }}>CTRL51</span>
+        </div>
+        <div style={{ width: 60 }} />
+      </header>
+
+      <div style={{ maxWidth: '520px', margin: '0 auto', padding: 'clamp(40px, 12vw, 60px) 20px 60px' }}>
+        {/* HEADLINE */}
+        {!analysis && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{ textAlign: 'center', marginBottom: 32 }}
+          >
+            <h1 style={{ fontSize: 'clamp(28px, 7vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 12px', color: '#fff' }}>
+              <span style={{ color: '#fff' }}>Upload your</span>{' '}
+              <span style={{ color: '#f97316' }}>CSV</span>
+            </h1>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.6 }}>
+              Instant procurement intelligence. Fragmentation, savings, anomalies.
+            </p>
+          </motion.div>
+        )}
 
         {/* UPLOAD AREA */}
         {!analysis && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
+            style={{ marginBottom: 32 }}
           >
-            <label className="block p-12 border-2 border-dashed border-cyan-500/40 rounded-xl text-center cursor-pointer hover:border-cyan-500 transition bg-cyan-500/5">
-              <Upload className="w-12 h-12 mx-auto mb-4 text-cyan-400" />
-              <p className="text-lg font-bold mb-2">Drop your procurement CSV</p>
-              <p className="text-sm text-gray-400">Supports: Site, Product, Supplier, Quantity, Price</p>
+            <label style={{
+              display: 'block',
+              padding: '32px 24px',
+              border: '2px dashed rgba(249,115,22,0.3)',
+              borderRadius: 16,
+              textAlign: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.15s',
+              background: 'rgba(249,115,22,0.06)',
+              position: 'relative'
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(249,115,22,0.6)'; e.currentTarget.style.background = 'rgba(249,115,22,0.1)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(249,115,22,0.3)'; e.currentTarget.style.background = 'rgba(249,115,22,0.06)'; }}
+            >
+              <Upload style={{ width: 40, height: 40, margin: '0 auto 16px', color: '#f97316' }} />
+              <p style={{ fontSize: 16, fontWeight: 700, margin: '0 0 8px', color: '#fff' }}>Drop your CSV</p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Site, Product, Supplier, Quantity, Price</p>
               <input
                 type="file"
                 accept=".csv"
                 onChange={handleFileUpload}
                 disabled={loading}
-                className="hidden"
+                style={{ display: 'none' }}
               />
             </label>
           </motion.div>
@@ -163,12 +198,13 @@ Return detailed JSON with realistic numbers based on this actual data.`;
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-center py-12"
+              style={{ textAlign: 'center', padding: '40px 0' }}
             >
-              <div className="inline-block">
-                <div className="w-12 h-12 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin mx-auto mb-4" />
-                <p className="text-gray-300">Analyzing procurement data...</p>
+              <div style={{ display: 'inline-block' }}>
+                <div style={{ width: 48, height: 48, border: '3px solid rgba(249,115,22,0.2)', borderTopColor: '#f97316', borderRadius: '50%', animation: 'spin 1s linear infinite', margin: '0 auto 16px' }} />
+                <p style={{ color: 'rgba(255,255,255,0.7)', margin: 0, fontSize: 14 }}>Analyzing...</p>
               </div>
+              <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </motion.div>
           )}
         </AnimatePresence>
@@ -180,7 +216,7 @@ Return detailed JSON with realistic numbers based on this actual data.`;
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="p-6 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 mb-8"
+              style={{ padding: '16px 20px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 12, color: '#ef4444', marginBottom: 16, fontSize: 13 }}
             >
               {error}
             </motion.div>
@@ -196,18 +232,18 @@ Return detailed JSON with realistic numbers based on this actual data.`;
               className="space-y-6"
             >
               {/* Summary Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
-                  <p className="text-sm text-cyan-400 mb-2">Requests Analyzed</p>
-                  <p className="text-3xl font-black">{analysis.total_requests || 'N/A'}</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 20 }}>
+                <div style={{ padding: 16, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 12 }}>
+                  <p style={{ fontSize: 11, color: '#f97316', marginBottom: 8, fontWeight: 700, letterSpacing: '0.05em' }}>ANALYZED</p>
+                  <p style={{ fontSize: 'clamp(20px, 5vw, 28px)', fontWeight: 900, margin: 0, color: '#fff' }}>{analysis.total_requests || 'N/A'}</p>
                 </div>
-                <div className="p-6 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-                  <p className="text-sm text-amber-400 mb-2">Unique Suppliers</p>
-                  <p className="text-3xl font-black">{analysis.supplier_count || 'N/A'}</p>
+                <div style={{ padding: 16, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 12 }}>
+                  <p style={{ fontSize: 11, color: '#f97316', marginBottom: 8, fontWeight: 700, letterSpacing: '0.05em' }}>SUPPLIERS</p>
+                  <p style={{ fontSize: 'clamp(20px, 5vw, 28px)', fontWeight: 900, margin: 0, color: '#fff' }}>{analysis.supplier_count || 'N/A'}</p>
                 </div>
-                <div className="p-6 bg-green-500/10 border border-green-500/30 rounded-lg">
-                  <p className="text-sm text-green-400 mb-2">Monthly Savings Potential</p>
-                  <p className="text-3xl font-black">£{(analysis.potential_savings || 0).toLocaleString()}</p>
+                <div style={{ padding: 16, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12 }}>
+                  <p style={{ fontSize: 11, color: '#22c55e', marginBottom: 8, fontWeight: 700, letterSpacing: '0.05em' }}>SAVINGS</p>
+                  <p style={{ fontSize: 'clamp(20px, 5vw, 28px)', fontWeight: 900, margin: 0, color: '#22c55e' }}>£{(analysis.potential_savings || 0).toLocaleString()}</p>
                 </div>
               </div>
 
@@ -273,17 +309,22 @@ Return detailed JSON with realistic numbers based on this actual data.`;
               )}
 
               {/* Actions */}
-              <div className="flex gap-4 pt-6">
+              <div style={{ display: 'flex', gap: 12, marginTop: 28, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                 <button
                   onClick={() => {
                     setAnalysis(null);
                     setFile(null);
                   }}
-                  className="flex-1 px-6 py-3 border border-cyan-500/40 text-cyan-400 font-bold rounded-lg hover:border-cyan-500 transition"
+                  style={{ flex: 1, padding: '12px 20px', border: '1px solid rgba(249,115,22,0.3)', color: '#f97316', fontWeight: 700, borderRadius: 10, background: 'rgba(249,115,22,0.08)', cursor: 'pointer', transition: 'all 0.15s', fontSize: 13, letterSpacing: '-0.01em' }}
+                  onMouseEnter={(e) => { e.target.style.borderColor = 'rgba(249,115,22,0.6)'; e.target.style.background = 'rgba(249,115,22,0.12)'; }}
+                  onMouseLeave={(e) => { e.target.style.borderColor = 'rgba(249,115,22,0.3)'; e.target.style.background = 'rgba(249,115,22,0.08)'; }}
                 >
                   Upload New File
                 </button>
-                <button className="flex-1 px-6 py-3 bg-cyan-500 text-black font-bold rounded-lg hover:bg-cyan-400 transition">
+                <button style={{ flex: 1, padding: '12px 20px', background: '#f97316', color: '#000', fontWeight: 700, borderRadius: 10, border: 'none', cursor: 'pointer', transition: 'all 0.15s', fontSize: 13, letterSpacing: '-0.01em' }}
+                  onMouseEnter={(e) => e.target.style.background = '#ea580c'}
+                  onMouseLeave={(e) => e.target.style.background = '#f97316'}
+                >
                   Export Report
                 </button>
               </div>

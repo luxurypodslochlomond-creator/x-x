@@ -66,7 +66,7 @@ export default function CTRL51Page() {
         >
           <h1 style={{ fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, marginBottom: 16 }}>
             <span style={{ color: '#fff' }}>Control your</span>{' '}
-            <span style={{ color: '#06b6d4' }}>procurement spend.</span>
+            <span style={{ color: '#f97316' }}>procurement spend.</span>
           </h1>
           <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.6, marginBottom: 10 }}>
             Real-time intelligence. Spot fragmentation, price anomalies, and savings — before money leaves.
@@ -86,7 +86,7 @@ export default function CTRL51Page() {
             to="/CTRL51Dashboard"
             style={{
               padding: '14px 24px',
-              background: '#06b6d4',
+              background: '#f97316',
               color: '#000',
               fontWeight: 700,
               borderRadius: 10,
@@ -99,10 +99,11 @@ export default function CTRL51Page() {
               gap: 8,
               transition: 'all 0.15s',
               fontSize: 14,
-              letterSpacing: '-0.01em'
+              letterSpacing: '-0.01em',
+              boxShadow: '0 0 30px rgba(249, 115, 22, 0.3)'
             }}
-            onMouseEnter={(e) => e.target.style.background = '#0891b2'}
-            onMouseLeave={(e) => e.target.style.background = '#06b6d4'}
+            onMouseEnter={(e) => { e.target.style.background = '#ea580c'; e.target.style.boxShadow = '0 0 40px rgba(249, 115, 22, 0.5)'; }}
+            onMouseLeave={(e) => { e.target.style.background = '#f97316'; e.target.style.boxShadow = '0 0 30px rgba(249, 115, 22, 0.3)'; }}
           >
             Start Demo <ArrowRight className="w-4 h-4" />
           </Link>
@@ -110,11 +111,11 @@ export default function CTRL51Page() {
             to="/CTRL51Pricing"
             style={{
               padding: '14px 24px',
-              background: 'rgba(6,182,212,0.08)',
-              color: '#06b6d4',
+              background: 'rgba(249,115,22,0.08)',
+              color: '#f97316',
               fontWeight: 700,
               borderRadius: 10,
-              border: '1px solid rgba(6,182,212,0.3)',
+              border: '1px solid rgba(249,115,22,0.3)',
               cursor: 'pointer',
               textDecoration: 'none',
               display: 'flex',
@@ -125,8 +126,8 @@ export default function CTRL51Page() {
               fontSize: 14,
               letterSpacing: '-0.01em'
             }}
-            onMouseEnter={(e) => { e.target.style.borderColor = 'rgba(6,182,212,0.6)'; e.target.style.background = 'rgba(6,182,212,0.12)'; }}
-            onMouseLeave={(e) => { e.target.style.borderColor = 'rgba(6,182,212,0.3)'; e.target.style.background = 'rgba(6,182,212,0.08)'; }}
+            onMouseEnter={(e) => { e.target.style.borderColor = 'rgba(249,115,22,0.6)'; e.target.style.background = 'rgba(249,115,22,0.12)'; }}
+            onMouseLeave={(e) => { e.target.style.borderColor = 'rgba(249,115,22,0.3)'; e.target.style.background = 'rgba(249,115,22,0.08)'; }}
           >
             View Pricing
           </Link>
