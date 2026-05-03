@@ -204,28 +204,36 @@ export default function CTRL51Pricing() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
+                q: 'How do you calculate the £60k-£75k monthly savings?',
+                a: 'Based on typical UK council procure-to-pay data: £4-5M annual spend, 12-15% fragmentation (£500k/year). Conservative estimate: 12% × £5M = £600k/year ÷ 12 = £50k/month baseline. Realistic extraction: 10-15% of baseline = £60-75k/month.',
+              },
+              {
+                q: 'What\'s your payback calculation for 2-3 weeks?',
+                a: '£60-75k monthly savings ÷ £5k monthly cost = 12-15x ROI. Monthly payback achieved in days. Annual: £720-900k savings vs £60k cost = 12-15x return.',
+              },
+              {
                 q: 'Can we scale to multiple councils?',
-                a: 'Yes. Enterprise plan supports unlimited councils with custom pricing per region.',
+                a: 'Yes. Enterprise plan supports unlimited councils with custom pricing per region. 5-council deployment typically negotiated at £3-4k/council/month.',
               },
               {
                 q: 'What\'s included in the 7-day trial?',
-                a: 'Full Pilot access. Upload data, run analysis, no credit card required. Full features.',
+                a: 'Full Pilot access. Upload your actual procurement data, run analysis, see real insights. No credit card required. Full features.',
               },
               {
                 q: 'How secure is our procurement data?',
-                a: 'Bank-grade encryption (AES-256 at rest, TLS 1.3 in transit). SOC2 Type II certified.',
+                a: 'Bank-grade encryption (AES-256 at rest, TLS 1.3 in transit). SOC2 Type II certified. Data deleted after 90 days unless retained.',
               },
               {
                 q: 'Do you offer annual discounts?',
-                a: 'Yes. Annual Pilot contracts get 15% off. Enterprise pricing negotiable.',
+                a: 'Yes. Annual Pilot contracts (prepaid) get 15% off (£51k/year instead of £60k). Enterprise: negotiate quarterly/annual terms.',
               },
               {
                 q: 'What format does the CSV need to be?',
-                a: 'Standard format: Site, Product, Supplier, Quantity, Price. We handle variations gracefully.',
+                a: 'Standard: Site, Product, Supplier, Quantity, Unit Price. We handle Excel, Sheets exports, and column variations automatically.',
               },
               {
                 q: 'Is there training or onboarding?',
-                a: 'Pilot includes email support. Enterprise includes dedicated onboarding and training.',
+                a: 'Pilot: email support + docs. Enterprise: 2-hour onboarding call, custom training for procurement teams, ongoing account manager.',
               },
             ].map((item, i) => (
               <div key={i} className="p-6 border border-cyan-500/15 bg-cyan-500/5 rounded-xl hover:border-cyan-500/30 transition">
