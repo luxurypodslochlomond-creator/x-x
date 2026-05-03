@@ -5,6 +5,7 @@ import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
+import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
@@ -133,6 +134,13 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
     setResult(null);
     setAlternatives([]);
     setError(null);
+    // Server-side rate limit check
+    const limitCheck = await recordSortedUse();
+    if (!limitCheck.allowed) {
+      setError('You\'ve used your 5 free uses. Subscribe for unlimited access.');
+      setLoading(false);
+      return;
+    }
     console.log('[ReplyWriter] Writing reply, tone:', tone, 'context length:', context.length);
 
     try {

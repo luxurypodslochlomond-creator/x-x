@@ -6,6 +6,7 @@ import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
 import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
 import SortedShareButton from './SortedShareButton';
+import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 
 const CONFLICT_TYPES = [
   { id: 'neighbour',  label: 'NEIGHBOUR',   desc: 'Noise, boundaries, shared areas' },
@@ -72,6 +73,13 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
     setResult(null);
 
     try {
+      // Server-side rate limit check
+      const limitCheck = await recordSortedUse();
+      if (!limitCheck.allowed) {
+        setResult({ _error: 'You\'ve used your 5 free uses. Subscribe for unlimited access.' });
+        setLoading(false);
+        return;
+      }
       const ct = CONFLICT_TYPES.find(t => t.id === conflictType);
       const gt = GOALS.find(g => g.id === goal);
 

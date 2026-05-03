@@ -5,6 +5,7 @@ import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
+import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -45,6 +46,13 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
     setResult(null);
     setDecodeError(null);
     try {
+      // Server-side rate limit check — not bypassable via browser storage
+      const limitCheck = await recordSortedUse();
+      if (!limitCheck.allowed) {
+        setDecodeError('You\'ve used your 5 free decodes. Subscribe for unlimited access.');
+        setLoading(false);
+        return;
+      }
       const currentGeo = geoRef.current;
       const currentType = letterTypeRef.current;
       const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
