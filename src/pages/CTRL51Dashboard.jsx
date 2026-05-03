@@ -163,7 +163,7 @@ Return detailed JSON with realistic numbers based on this actual data.`;
             animate={{ opacity: 1, y: 0 }}
             style={{ marginBottom: 32 }}
           >
-            <label style={{
+            <label htmlFor="csv-upload" style={{
               display: 'block',
               padding: '32px 24px',
               border: '2px dashed rgba(249,115,22,0.3)',
@@ -177,10 +177,11 @@ Return detailed JSON with realistic numbers based on this actual data.`;
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(249,115,22,0.6)'; e.currentTarget.style.background = 'rgba(249,115,22,0.1)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(249,115,22,0.3)'; e.currentTarget.style.background = 'rgba(249,115,22,0.06)'; }}
             >
-              <Upload style={{ width: 40, height: 40, margin: '0 auto 16px', color: '#f97316' }} />
-              <p style={{ fontSize: 16, fontWeight: 700, margin: '0 0 8px', color: '#fff' }}>Drop your CSV</p>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Site, Product, Supplier, Quantity, Price</p>
+              <Upload style={{ width: 40, height: 40, margin: '0 auto 16px', color: '#f97316', pointerEvents: 'none' }} />
+              <p style={{ fontSize: 16, fontWeight: 700, margin: '0 0 8px', color: '#fff', pointerEvents: 'none' }}>Drop your CSV</p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, pointerEvents: 'none' }}>Site, Product, Supplier, Quantity, Price</p>
               <input
+                id="csv-upload"
                 type="file"
                 accept=".csv"
                 onChange={handleFileUpload}
