@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, AlertCircle, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -8,57 +8,129 @@ import CTRL51Header from '@/components/ctrl51/CTRL51Header';
 export default function CTRL51Page() {
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
+  // Set custom PWA metadata for CTRL51
+  React.useEffect(() => {
+    document.title = 'CTRL51 — Procurement Control';
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = 'Real-time procurement intelligence. Control spend before money leaves.';
+
+    let manifest = document.querySelector('link[rel="manifest"]');
+    if (!manifest) {
+      manifest = document.createElement('link');
+      manifest.rel = 'manifest';
+      document.head.appendChild(manifest);
+    }
+    manifest.href = `/api/functions/serveManifest?brand=ctrl51&v=${Date.now()}`;
+
+    let theme = document.querySelector('meta[name="theme-color"]');
+    if (!theme) {
+      theme = document.createElement('meta');
+      theme.name = 'theme-color';
+      document.head.appendChild(theme);
+    }
+    theme.content = '#06b6d4';
+
+    let appleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+    if (!appleMeta) {
+      appleMeta = document.createElement('meta');
+      appleMeta.name = 'apple-mobile-web-app-title';
+      document.head.appendChild(appleMeta);
+    }
+    appleMeta.content = 'CTRL51';
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#0a0f1a] to-black text-white">
+    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
       <CTRL51Header />
       {/* HERO */}
-      <section className="relative px-6 py-24 lg:py-32 max-w-6xl mx-auto">
-        <div className="text-center space-y-8">
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <CTRL51Icon size={80} animate={true} />
-          </motion.div>
+      <section style={{ position: 'relative', padding: 'clamp(40px, 12vw, 80px) 20px', maxWidth: '520px', margin: '0 auto', textAlign: 'center' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          style={{ marginBottom: 28 }}
+        >
+          <CTRL51Icon size={56} animate={true} />
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-4"
-          >
-            <h1 className="text-5xl lg:text-6xl font-black tracking-tight">
-              CTRL51
-            </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Procurement intelligence that works <em>with</em> you, not instead of you.
-            </p>
-            <p className="text-sm text-gray-400">
-              See fragmentation. Spot savings. Control spend. Before money leaves.
-            </p>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          style={{ marginBottom: 32 }}
+        >
+          <h1 style={{ fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, marginBottom: 16 }}>
+            <span style={{ color: '#fff' }}>Control your</span>{' '}
+            <span style={{ color: '#06b6d4' }}>procurement spend.</span>
+          </h1>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.6, marginBottom: 10 }}>
+            Real-time intelligence. Spot fragmentation, price anomalies, and savings — before money leaves.
+          </p>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
+            Upload CSV. Get insights. Take action.
+          </p>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex gap-4 justify-center flex-wrap"
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+        >
+          <Link
+            to="/CTRL51Dashboard"
+            style={{
+              padding: '14px 24px',
+              background: '#06b6d4',
+              color: '#000',
+              fontWeight: 700,
+              borderRadius: 10,
+              border: 'none',
+              cursor: 'pointer',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              transition: 'all 0.15s',
+              fontSize: 14,
+              letterSpacing: '-0.01em'
+            }}
+            onMouseEnter={(e) => e.target.style.background = '#0891b2'}
+            onMouseLeave={(e) => e.target.style.background = '#06b6d4'}
           >
-            <Link
-              to="/CTRL51Dashboard"
-              className="px-8 py-4 bg-cyan-500 text-black font-bold rounded-lg hover:bg-cyan-400 transition flex items-center gap-2"
-            >
-              Start Demo <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/CTRL51Pricing"
-              className="px-8 py-4 border border-cyan-500/40 text-cyan-400 font-bold rounded-lg hover:border-cyan-500 transition"
-            >
-              View Pricing
-            </Link>
-          </motion.div>
-        </div>
+            Start Demo <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            to="/CTRL51Pricing"
+            style={{
+              padding: '14px 24px',
+              background: 'rgba(6,182,212,0.08)',
+              color: '#06b6d4',
+              fontWeight: 700,
+              borderRadius: 10,
+              border: '1px solid rgba(6,182,212,0.3)',
+              cursor: 'pointer',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              transition: 'all 0.15s',
+              fontSize: 14,
+              letterSpacing: '-0.01em'
+            }}
+            onMouseEnter={(e) => { e.target.style.borderColor = 'rgba(6,182,212,0.6)'; e.target.style.background = 'rgba(6,182,212,0.12)'; }}
+            onMouseLeave={(e) => { e.target.style.borderColor = 'rgba(6,182,212,0.3)'; e.target.style.background = 'rgba(6,182,212,0.08)'; }}
+          >
+            View Pricing
+          </Link>
+        </motion.div>
       </section>
 
       {/* FEATURES */}
