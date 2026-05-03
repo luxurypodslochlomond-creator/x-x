@@ -21,7 +21,7 @@ const SEVERITY_CONFIG = {
 };
 
 const LOADING_STEPS = [
-  'Reading your letter…',
+  'Decoding your letter…',
   'Identifying key details…',
   'Checking deadlines…',
   'Finding what matters…',
@@ -302,7 +302,7 @@ Return a JSON object with these EXACT fields:
 
             <div style={{ textAlign: 'center' }}>
               <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.15em', color: '#fff', margin: '0 0 6px' }}>
-                SORTED IS ON IT
+                DECODING YOUR LETTER
               </p>
               <AnimatePresence mode="wait">
                 <motion.p
