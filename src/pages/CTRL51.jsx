@@ -3,12 +3,14 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Check, AlertCircle, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CTRL51Icon from '@/components/ctrl51/CTRL51Icon';
+import CTRL51Header from '@/components/ctrl51/CTRL51Header';
 
 export default function CTRL51Page() {
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#0a0f1a] to-black text-white">
+      <CTRL51Header />
       {/* HERO */}
       <section className="relative px-6 py-24 lg:py-32 max-w-6xl mx-auto">
         <div className="text-center space-y-8">

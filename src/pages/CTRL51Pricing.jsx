@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import CTRL51Icon from '@/components/ctrl51/CTRL51Icon';
+import CTRL51Header from '@/components/ctrl51/CTRL51Header';
 import { base44 } from '@/api/base44Client';
 
 export default function CTRL51Pricing() {
@@ -39,19 +40,18 @@ export default function CTRL51Pricing() {
     }
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#0a0f1a] to-black text-white p-6 lg:p-12">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#0a0f1a] to-black text-white">
+      <CTRL51Header showBack={true} />
+      
+      <div className="max-w-5xl mx-auto p-6 lg:p-12">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <div className="flex justify-center mb-6">
-            <CTRL51Icon size={60} animate={true} />
-          </div>
-          <h1 className="text-5xl font-black mb-4">CTRL51 Pricing</h1>
-          <p className="text-lg text-gray-400">Transparent pricing. No surprises. Start controlling spend today.</p>
+          <h1 className="text-5xl font-black mb-4">Transparent Pricing</h1>
+          <p className="text-lg text-gray-400">No surprises. Start controlling spend today.</p>
         </motion.div>
 
         {/* VALUE PROPOSITION */}
@@ -59,7 +59,7 @@ export default function CTRL51Pricing() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.05 }}
-          className="mb-16 p-8 bg-gradient-to-r from-cyan-500/10 to-green-500/10 border border-cyan-500/30 rounded-2xl"
+          className="mb-16 p-8 bg-gradient-to-r from-cyan-500/10 to-cyan-500/5 border border-cyan-500/40 rounded-xl"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -84,7 +84,7 @@ export default function CTRL51Pricing() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="p-8 rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 hover:border-cyan-500/50 transition"
+            className="p-8 rounded-xl border border-cyan-500/40 bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 hover:border-cyan-500/60 transition"
           >
             <div className="mb-8">
               <h2 className="text-3xl font-black mb-6">Pilot Plan</h2>
@@ -136,7 +136,7 @@ export default function CTRL51Pricing() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-8 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-amber-500/5 hover:border-amber-500/50 transition relative"
+            className="p-8 rounded-xl border border-amber-500/40 bg-gradient-to-br from-amber-500/10 to-amber-500/5 hover:border-amber-500/60 transition relative"
           >
             <div className="absolute -top-3 left-6">
               <span className="px-4 py-1 bg-amber-500/20 border border-amber-500/40 rounded-full text-xs font-bold text-amber-400">Most Popular</span>
