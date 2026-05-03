@@ -151,64 +151,34 @@ Return a JSON object with these EXACT fields:
         },
       });
 
-      // Validate we actually got content back
-      console.log('Raw response from API:', response, 'Type:', typeof response);
-      
-      if (!response) {
-        console.error('No response from API');
-        setDecodeError('No response received. Please try again.');
-      } else if (typeof response === 'string') {
-        // Claude sometimes returns a string instead of parsed JSON
-        try {
-          const parsed = JSON.parse(response);
-          console.log('Parsed string response:', parsed);
-          if (parsed.letter_summary || Object.keys(parsed).length > 0) {
-            const stringFields = ['letter_summary','sender','severity','severity_explanation','key_deadline','quick_reassurance','we_hear_you','what_this_means','if_you_ignore_this','financial_impact','dont_panic','suggested_tone'];
-            stringFields.forEach(k => { if (parsed[k] && typeof parsed[k] === 'object') parsed[k] = JSON.stringify(parsed[k]); });
-            if (parsed.action_steps && !Array.isArray(parsed.action_steps)) parsed.action_steps = [String(parsed.action_steps)];
-            if (parsed.free_help && !Array.isArray(parsed.free_help)) parsed.free_help = [String(parsed.free_help)];
-            setResult(parsed);
-            const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
-            const caseId = saveCaseToHistory({
-              tool: 'letter',
-              input_text: text || '',
-              ai_result: JSON.stringify(parsed),
-              summary: parsed.letter_summary || parsed.summary || 'Decoded letter',
-              severity: severityMap[parsed.severity] || 'unknown',
-            });
-            setCaseId(caseId);
-            return;
-          }
-        } catch (e) {
-          console.error('Failed to parse response as JSON:', response);
-          setDecodeError('Could not understand response. Please try again.');
-          return;
-        }
-      } else if (response && typeof response === 'object' && Object.keys(response).length > 0) {
-        // Accept any object with content, be more forgiving with field names
-        console.log('Object response accepted:', response);
-        // Unwrap nested response object if needed (e.g. { response: {...} })
-        const unwrapped = (response.response && typeof response.response === 'object') ? response.response : response;
-        // Sanitize: ensure all string fields are strings (not nested objects)
-        const sanitized = { ...unwrapped };
-        const stringFields = ['letter_summary','sender','severity','severity_explanation','key_deadline','quick_reassurance','we_hear_you','what_this_means','if_you_ignore_this','financial_impact','dont_panic','suggested_tone'];
-        stringFields.forEach(k => { if (sanitized[k] && typeof sanitized[k] === 'object') sanitized[k] = JSON.stringify(sanitized[k]); });
-        if (sanitized.action_steps && !Array.isArray(sanitized.action_steps)) sanitized.action_steps = [String(sanitized.action_steps)];
-        if (sanitized.free_help && !Array.isArray(sanitized.free_help)) sanitized.free_help = [String(sanitized.free_help)];
-        setResult(sanitized);
-        const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
-        const savedCaseId = saveCaseToHistory({
-          tool: 'letter',
-          input_text: text || '',
-          ai_result: JSON.stringify(sanitized),
-          summary: sanitized.letter_summary || sanitized.summary || 'Decoded letter',
-          severity: severityMap[sanitized.severity] || 'unknown',
-        });
-        setCaseId(savedCaseId);
-      } else {
-        console.error('Invalid response structure. Got:', response);
-        setDecodeError('Could not decode this letter. Try uploading a clearer photo or paste the text instead.');
+      // Parse + unwrap response regardless of whether it's a string or object
+      let raw = response;
+      if (typeof raw === 'string') {
+        try { raw = JSON.parse(raw); } catch { raw = null; }
       }
+      // Unwrap nested { response: {...} } envelope
+      if (raw?.response && typeof raw.response === 'object') raw = raw.response;
+
+      if (!raw || typeof raw !== 'object' || Object.keys(raw).length === 0) {
+        setDecodeError('Could not decode this letter. Try uploading a clearer photo or paste the text instead.');
+        return;
+      }
+
+      // Sanitize: coerce any accidental nested objects to strings
+      const STRING_FIELDS = ['letter_summary','sender','severity','severity_explanation','key_deadline','quick_reassurance','we_hear_you','what_this_means','if_you_ignore_this','financial_impact','dont_panic','suggested_tone'];
+      STRING_FIELDS.forEach(k => { if (raw[k] && typeof raw[k] === 'object') raw[k] = JSON.stringify(raw[k]); });
+      if (raw.action_steps && !Array.isArray(raw.action_steps)) raw.action_steps = [String(raw.action_steps)];
+      if (raw.free_help && !Array.isArray(raw.free_help)) raw.free_help = [String(raw.free_help)];
+
+      setResult(raw);
+      const SEVERITY_MAP = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
+      setCaseId(saveCaseToHistory({
+        tool: 'letter',
+        input_text: text || '',
+        ai_result: JSON.stringify(raw),
+        summary: raw.letter_summary || raw.summary || 'Decoded letter',
+        severity: SEVERITY_MAP[raw.severity] || 'unknown',
+      }));
     } catch (err) {
       console.error('SORTED decode error:', err);
       console.error('Error details:', { message: err?.message, status: err?.status, response: err?.response });
