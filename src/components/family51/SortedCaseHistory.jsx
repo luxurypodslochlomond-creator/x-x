@@ -98,6 +98,13 @@ function CopyButton({ text, color }) {
   );
 }
 
+function safeStr(val) {
+  if (!val) return val;
+  if (typeof val === 'string') return val;
+  if (typeof val === 'object') return JSON.stringify(val);
+  return String(val);
+}
+
 function renderContent(caseItem) {
   const parsed = parseResult(caseItem.ai_result);
   const tool = TOOL_CONFIG[caseItem.tool] || TOOL_CONFIG.letter;
@@ -112,16 +119,16 @@ function renderContent(caseItem) {
 
   if (caseItem.tool === 'letter') return (
     <>
-      {parsed.we_hear_you && <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontStyle: 'italic', margin: '0 0 10px', lineHeight: 1.5 }}>{parsed.we_hear_you}</p>}
-      {parsed.what_this_means && <Section label="WHAT IT MEANS" color={tool.color}><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.65, margin: 0 }}>{parsed.what_this_means}</p></Section>}
-      {parsed.if_you_ignore_this && <Section label="IF YOU IGNORE THIS" color="#ef4444"><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{parsed.if_you_ignore_this}</p></Section>}
+      {parsed.we_hear_you && <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontStyle: 'italic', margin: '0 0 10px', lineHeight: 1.5 }}>{safeStr(parsed.we_hear_you)}</p>}
+      {parsed.what_this_means && <Section label="WHAT IT MEANS" color={tool.color}><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.65, margin: 0 }}>{safeStr(parsed.what_this_means)}</p></Section>}
+      {parsed.if_you_ignore_this && <Section label="IF YOU IGNORE THIS" color="#ef4444"><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{safeStr(parsed.if_you_ignore_this)}</p></Section>}
       {parsed.action_steps?.length > 0 && (
         <Section label="WHAT TO DO" color="#22c55e">
           <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
             {parsed.action_steps.map((s, i) => (
               <li key={i} style={{ display: 'flex', gap: 10 }}>
                 <span style={{ fontSize: 10, fontWeight: 900, color: '#22c55e', minWidth: 16, paddingTop: 3 }}>{i + 1}.</span>
-                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>{s}</span>
+                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>{safeStr(s)}</span>
               </li>
             ))}
           </ol>
@@ -130,7 +137,7 @@ function renderContent(caseItem) {
       {parsed.key_deadline && parsed.key_deadline !== 'No deadline mentioned' && (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)' }}>
           <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#f97316' }} />
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#f97316' }}>Deadline: {parsed.key_deadline}</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: '#f97316' }}>Deadline: {safeStr(parsed.key_deadline)}</span>
         </div>
       )}
     </>
@@ -142,25 +149,25 @@ function renderContent(caseItem) {
       : (parsed.letter_body || '');
     return (
       <>
-        {parsed.subject_line && <Section label="SUBJECT" color={tool.color}><p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0 }}>{parsed.subject_line}</p></Section>}
+        {parsed.subject_line && <Section label="SUBJECT" color={tool.color}><p style={{ fontSize: 13, fontWeight: 700, color: '#fff', margin: 0 }}>{safeStr(parsed.subject_line)}</p></Section>}
         {parsed.letter_body && (
           <Section label="LETTER" color={tool.color}>
-            <pre style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: 0, maxHeight: 200, overflowY: 'auto' }}>{parsed.letter_body}</pre>
+            <pre style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: 0, maxHeight: 200, overflowY: 'auto' }}>{safeStr(parsed.letter_body)}</pre>
             <CopyButton text={fullLetter} color={tool.color} />
           </Section>
         )}
-        {parsed.tip && <Section label="TIP" color="#eab308"><p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{parsed.tip}</p></Section>}
+        {parsed.tip && <Section label="TIP" color="#eab308"><p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{safeStr(parsed.tip)}</p></Section>}
       </>
     );
   }
 
   if (caseItem.tool === 'conflict') return (
     <>
-      {parsed.situation_assessment && <Section label="ASSESSMENT" color={tool.color}><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.65, margin: 0 }}>{parsed.situation_assessment}</p></Section>}
-      {parsed.legal_position && <Section label="YOUR LEGAL POSITION" color="#06b6d4"><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{parsed.legal_position}</p></Section>}
+      {parsed.situation_assessment && <Section label="ASSESSMENT" color={tool.color}><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.65, margin: 0 }}>{safeStr(parsed.situation_assessment)}</p></Section>}
+      {parsed.legal_position && <Section label="YOUR LEGAL POSITION" color="#06b6d4"><p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{safeStr(parsed.legal_position)}</p></Section>}
       {parsed.what_to_say && (
         <Section label="WHAT TO SAY" color="#22c55e">
-          <pre style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.6, margin: 0 }}>{parsed.what_to_say}</pre>
+          <pre style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.6, margin: 0 }}>{safeStr(parsed.what_to_say)}</pre>
           <CopyButton text={parsed.what_to_say} color="#22c55e" />
         </Section>
       )}
@@ -170,7 +177,7 @@ function renderContent(caseItem) {
             {parsed.recommended_steps.map((s, i) => (
               <li key={i} style={{ display: 'flex', gap: 10 }}>
                 <span style={{ fontSize: 10, fontWeight: 900, color: '#22c55e', minWidth: 16, paddingTop: 3 }}>{i + 1}.</span>
-                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>{s}</span>
+                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>{safeStr(s)}</span>
               </li>
             ))}
           </ol>
