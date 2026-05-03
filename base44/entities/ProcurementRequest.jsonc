@@ -1,0 +1,74 @@
+{
+  "name": "ProcurementRequest",
+  "type": "object",
+  "description": "Individual procurement requests for CTRL51 analysis",
+  "properties": {
+    "site": {
+      "type": "string",
+      "description": "Site/location name"
+    },
+    "product_name": {
+      "type": "string",
+      "description": "Product being purchased"
+    },
+    "supplier_name": {
+      "type": "string",
+      "description": "Supplier name"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Quantity ordered"
+    },
+    "unit_price": {
+      "type": "number",
+      "description": "Price per unit"
+    },
+    "total_price": {
+      "type": "number",
+      "description": "Total purchase price"
+    },
+    "benchmark_price": {
+      "type": "number",
+      "description": "Benchmark price for comparison"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "flagged",
+        "approved"
+      ],
+      "default": "pending",
+      "description": "Request status"
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Any alerts/flags raised"
+    },
+    "council_id": {
+      "type": "string",
+      "description": "Council this request belongs to"
+    },
+    "upload_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When CSV was uploaded"
+    }
+  },
+  "required": [
+    "site",
+    "product_name",
+    "total_price"
+  ],
+  "rls": {
+    "read": {
+      "council_id": "{{user.id}}"
+    },
+    "write": {
+      "council_id": "{{user.id}}"
+    }
+  }
+}

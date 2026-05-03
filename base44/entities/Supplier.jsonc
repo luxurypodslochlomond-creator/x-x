@@ -1,0 +1,35 @@
+{
+  "name": "Supplier",
+  "type": "object",
+  "description": "Supplier registry for CTRL51",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Supplier name"
+    },
+    "approved": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this supplier approved for procurement"
+    },
+    "council_id": {
+      "type": "string",
+      "description": "Council this supplier belongs to"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Approval notes"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "council_id": "{{user.id}}"
+    },
+    "write": {
+      "council_id": "{{user.id}}"
+    }
+  }
+}

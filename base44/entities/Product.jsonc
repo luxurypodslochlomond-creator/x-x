@@ -1,0 +1,35 @@
+{
+  "name": "Product",
+  "type": "object",
+  "description": "Product benchmarks for CTRL51 procurement analysis",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "category": {
+      "type": "string",
+      "description": "Product category"
+    },
+    "benchmark_price": {
+      "type": "number",
+      "description": "Baseline price for comparison"
+    },
+    "council_id": {
+      "type": "string",
+      "description": "Council this product belongs to"
+    }
+  },
+  "required": [
+    "name",
+    "benchmark_price"
+  ],
+  "rls": {
+    "read": {
+      "council_id": "{{user.id}}"
+    },
+    "write": {
+      "council_id": "{{user.id}}"
+    }
+  }
+}
