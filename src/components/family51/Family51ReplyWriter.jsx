@@ -221,113 +221,110 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
         )}
       </AnimatePresence>
 
-      {/* PREFILL BANNER */}
+      {/* CONNECTED CASE BANNER — shows if this came from a decoded letter */}
       {prefillContext && (
-        <div style={{ padding: '12px 16px', borderRadius: 8, background: 'rgba(6,182,212,0.07)', border: '1px solid rgba(6,182,212,0.2)', display: 'flex', gap: 12, alignItems: 'center' }}>
-          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0 }} />
-          <p style={{ fontSize: 11, color: 'rgba(6,182,212,0.85)', margin: 0, fontWeight: 700, letterSpacing: '0.06em' }}>
-            LETTER LOADED — PICK A TONE, ADD YOUR NAME, HIT WRITE
-          </p>
-        </div>
-      )}
-
-      {/* GEO SELECTOR */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
-        <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-      </div>
-
-      {/* SITUATION CHIPS — only show if no prefill */}
-      {!prefillContext && (
-        <div className="space-y-2">
-          <Label>SITUATION TYPE (optional)</Label>
-          <div className="flex flex-wrap gap-2">
-            {SITUATIONS.map(s => (
-              <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
-                {s}
-              </Chip>
-            ))}
+        <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(6,182,212,0.07)', border: '1px solid rgba(6,182,212,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, marginTop: 4 }} />
+          <div>
+            <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#06b6d4', margin: '0 0 3px' }}>CONNECTED TO YOUR DECODED LETTER</p>
+            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>
+              {prefillContext.sender && prefillContext.sender !== 'Unknown' ? `From: ${prefillContext.sender}` : ''}{prefillContext.summary ? ` — ${prefillContext.summary}` : ''}
+            </p>
           </div>
         </div>
       )}
 
-      {/* TONE — moved above context so user picks vibe first */}
-      <div className="space-y-2">
-        <Label>TONE {suggestedTone && <span style={{ color: accentColor, marginLeft: 4 }}>★ AI suggested</span>}</Label>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          {TONES.map(t => (
-            <button
-              key={t.id}
-              onClick={() => setTone(t.id)}
-              style={{
-                padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                border: `1px solid ${tone === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
-                background: tone === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
-                transition: 'all 0.15s',
-                position: 'relative',
-              }}
-            >
-              {suggestedTone === t.id && (
-                <span style={{ position: 'absolute', top: 6, right: 8, fontSize: 10, color: accentColor }}>★</span>
-              )}
-              <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: tone === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{t.desc}</p>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* CONTEXT */}
-      <div className="space-y-2">
-        <Label>TELL US THE SITUATION</Label>
+      {/* MAIN CONTEXT — first thing, no barriers */}
+      <div>
         <textarea
           value={context}
           onChange={e => setContext(e.target.value)}
-          placeholder="Who are you writing to? What happened? What do you want? Don't filter it — we'll handle the writing."
+          autoFocus={!prefillContext}
+          placeholder="Who are you writing to? What happened? What do you want?&#10;&#10;Don't filter it — we'll handle the writing."
           style={{
-            width: '100%', height: prefillContext ? 100 : 140, background: 'rgba(255,255,255,0.03)',
-            border: `1px solid ${context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
-            borderRadius: 12, color: '#fff', fontSize: 13, padding: '12px 14px',
-            resize: 'vertical', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+            width: '100%', height: prefillContext ? 100 : 160, background: 'rgba(255,255,255,0.03)',
+            border: `1px solid ${context ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
+            borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
+            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
             transition: 'border-color 0.2s', boxSizing: 'border-box',
           }}
           onFocus={e => e.target.style.borderColor = accentColor + '80'}
-          onBlur={e => e.target.style.borderColor = context ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
+          onBlur={e => e.target.style.borderColor = context ? accentColor + '60' : 'rgba(255,255,255,0.12)'}
         />
       </div>
 
-      {/* NAME */}
-      <div className="space-y-2">
-        <Label>YOUR NAME (optional — for sign-off)</Label>
-        <input
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          placeholder="e.g. Brian Hughes"
-          style={{
-            width: '100%', background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10,
-            color: '#fff', fontSize: 13, padding: '11px 14px',
-            outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
-          }}
-        />
+      {/* TONE — simple, always visible */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        {TONES.map(t => (
+          <button
+            key={t.id}
+            onClick={() => setTone(t.id)}
+            style={{
+              padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+              border: `1px solid ${tone === t.id ? accentColor : 'rgba(255,255,255,0.08)'}`,
+              background: tone === t.id ? accentColor : 'rgba(255,255,255,0.02)',
+              transition: 'all 0.15s', position: 'relative',
+            }}
+          >
+            {suggestedTone === t.id && tone !== t.id && (
+              <span style={{ position: 'absolute', top: 5, right: 8, fontSize: 9, color: accentColor }}>★ suggested</span>
+            )}
+            <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: tone === t.id ? '#000' : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
+            <p style={{ fontSize: 11, color: tone === t.id ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{t.desc}</p>
+          </button>
+        ))}
       </div>
 
-      {/* WRITE BUTTON */}
+      {/* OPTIONAL EXTRAS — name + geo collapsed */}
+      <details style={{ cursor: 'pointer' }}>
+        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+          + OPTIONAL: your name &amp; location
+        </summary>
+        <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <input
+            type="text"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            placeholder="Your name (for sign-off)"
+            style={{
+              width: '100%', background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10,
+              color: '#fff', fontSize: 13, padding: '11px 14px',
+              outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
+            }}
+          />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
+            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+          </div>
+          {!prefillContext && (
+            <div className="flex flex-wrap gap-2">
+              {SITUATIONS.map(s => (
+                <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
+                  {s}
+                </Chip>
+              ))}
+            </div>
+          )}
+        </div>
+      </details>
+
+      {/* WRITE BUTTON — solid, confident */}
       <motion.button
         onClick={write}
-        disabled={loading}
-        whileTap={!loading ? { scale: 0.97 } : {}}
+        disabled={loading || !context.trim()}
+        whileTap={!loading && context.trim() ? { scale: 0.97 } : {}}
         style={{
-          width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
-          fontWeight: 800, letterSpacing: '0.12em', cursor: !loading ? 'pointer' : 'not-allowed',
-          border: `1px solid ${accentColor}50`,
-          background: `${accentColor}15`,
-          color: accentColor,
+          width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+          fontWeight: 900, letterSpacing: '0.1em',
+          cursor: !loading && context.trim() ? 'pointer' : 'not-allowed',
+          border: `2px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+          background: context.trim() ? accentColor : 'transparent',
+          color: context.trim() ? '#000' : 'rgba(255,255,255,0.2)',
           transition: 'all 0.2s',
         }}
       >
-        {loading ? <Spinner color={accentColor} text="WRITING YOUR REPLY" /> : 'WRITE MY REPLY'}
+        {loading ? <Spinner color={context.trim() ? '#000' : accentColor} text="WRITING YOUR REPLY" /> : 'WRITE MY REPLY →'}
       </motion.button>
 
       {/* RESULT */}

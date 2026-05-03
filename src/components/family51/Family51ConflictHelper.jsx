@@ -159,130 +159,121 @@ Return:
   return (
     <div className="space-y-5">
 
-      {/* GEO SELECTOR */}
-       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-         <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)' }}>YOUR LOCATION</span>
-         <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-       </div>
+      {/* CONNECTED CASE BANNER */}
+      {prefillContext?.related_case_id && (
+        <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.25)', display: 'flex', gap: 10, alignItems: 'center' }}>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor, flexShrink: 0 }} />
+          <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: 0 }}>CONNECTED TO YOUR CASE — continuing your thread</p>
+        </div>
+      )}
 
-       {/* GOAL - MOVED TO TOP */}
-       <div className="space-y-2">
-         <Label>WHAT DO YOU WANT TO ACHIEVE?</Label>
-         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-           {GOALS.map(g => (
-             <button
-               key={g.id}
-               onClick={() => setGoal(g.id)}
-               style={{
-                 padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                 border: `1px solid ${goal === g.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
-                 background: goal === g.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
-                 transition: 'all 0.15s',
-               }}
-             >
-               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: goal === g.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{g.label}</p>
-               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{g.desc}</p>
-             </button>
-           ))}
-         </div>
-       </div>
+      {/* WHAT HAPPENED — first, no barriers */}
+      <textarea
+        value={what}
+        onChange={e => setWhat(e.target.value)}
+        autoFocus
+        placeholder="Tell us the whole story — who's involved, what happened, what's been said.&#10;&#10;Don't filter it. The more detail, the better the help."
+        style={{
+          width: '100%', height: 180, background: 'rgba(255,255,255,0.03)',
+          border: `1px solid ${what ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
+          borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
+          resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
+          transition: 'border-color 0.2s', boxSizing: 'border-box',
+        }}
+        onFocus={e => e.target.style.borderColor = accentColor + '80'}
+        onBlur={e => e.target.style.borderColor = what ? accentColor + '60' : 'rgba(255,255,255,0.12)'}
+      />
 
-       {/* CONFLICT TYPE */}
-       <div className="space-y-2">
-         <Label>TYPE OF CONFLICT</Label>
-         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-           {CONFLICT_TYPES.map(t => (
-             <button
-               key={t.id}
-               onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
-               style={{
-                 padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                 border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
-                 background: conflictType === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
-                 transition: 'all 0.15s',
-               }}
-             >
-               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
-               <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
-             </button>
-           ))}
-         </div>
-       </div>
+      {/* GOAL — always visible, compact */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        {GOALS.map(g => (
+          <button
+            key={g.id}
+            onClick={() => setGoal(g.id)}
+            style={{
+              padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+              border: `1px solid ${goal === g.id ? accentColor : 'rgba(255,255,255,0.08)'}`,
+              background: goal === g.id ? accentColor : 'rgba(255,255,255,0.02)',
+              transition: 'all 0.15s',
+            }}
+          >
+            <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: goal === g.id ? '#000' : 'rgba(255,255,255,0.5)', margin: 0 }}>{g.label}</p>
+            <p style={{ fontSize: 11, color: goal === g.id ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{g.desc}</p>
+          </button>
+        ))}
+      </div>
 
-      {/* WHAT HAPPENED */}
-      <div className="space-y-2">
-        <Label>WHAT HAPPENED — TELL US EVERYTHING</Label>
-        <textarea
-          value={what}
-          onChange={e => setWhat(e.target.value)}
-          placeholder="Just tell us the whole story. Who are the people involved? What happened? What's been said or done? Any history? Don't filter it — the more detail you give us, the better help we can give you."
-          style={{
-            width: '100%', height: 160, background: 'rgba(255,255,255,0.03)',
-            border: `1px solid ${what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
-            borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
-            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
-            transition: 'border-color 0.2s', boxSizing: 'border-box',
-          }}
-          onFocus={e => e.target.style.borderColor = accentColor + '80'}
-          onBlur={e => e.target.style.borderColor = what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
-        />
-
-        {/* FILE UPLOAD */}
-        <div style={{ marginTop: 12 }}>
+      {/* OPTIONAL — conflict type, evidence, location */}
+      <details style={{ cursor: 'pointer' }}>
+        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+          + OPTIONAL: conflict type, evidence &amp; location
+        </summary>
+        <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {/* Conflict type grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            {CONFLICT_TYPES.map(t => (
+              <button
+                key={t.id}
+                onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
+                style={{
+                  padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
+                  border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
+                  background: conflictType === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                  transition: 'all 0.15s',
+                }}
+              >
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
+              </button>
+            ))}
+          </div>
+          {/* File upload */}
           <label style={{ cursor: uploading ? 'not-allowed' : 'pointer', display: 'block' }}>
             <input type="file" multiple accept="image/*,video/*,.pdf,.doc,.docx" onChange={handleFileUpload} disabled={uploading} style={{ display: 'none' }} />
-            <div style={{ 
-              border: `1px dashed ${accentColor}40`, 
-              borderRadius: 10, 
-              padding: '12px 14px', 
-              textAlign: 'center',
-              background: `${accentColor}06`,
-              transition: 'all 0.2s',
-              opacity: uploading ? 0.6 : 1,
-            }}>
+            <div style={{ border: `1px dashed ${accentColor}40`, borderRadius: 10, padding: '12px 14px', textAlign: 'center', background: `${accentColor}06`, opacity: uploading ? 0.6 : 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, color: accentColor + 'cc', fontSize: 12, fontWeight: 600 }}>
                 <Upload className="w-4 h-4" />
                 {uploading ? 'UPLOADING...' : 'Add photos, videos, documents'}
               </div>
             </div>
           </label>
-        </div>
-
-        {/* ATTACHMENTS */}
-        {attachments.length > 0 && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
-            {attachments.map((att, i) => (
-              <div key={i} style={{
-                display: 'flex', alignItems: 'center', gap: 6, padding: '6px 10px',
-                background: `${accentColor}15`, border: `1px solid ${accentColor}40`, borderRadius: 6,
-                fontSize: 11, color: accentColor,
-              }}>
-                {getFileIcon(att.type)}
-                <span style={{ maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{att.name}</span>
-                <button onClick={() => removeAttachment(i)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: accentColor }}>
-                  <X className="w-3 h-3" />
-                </button>
-              </div>
-            ))}
+          {attachments.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {attachments.map((att, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 10px', background: `${accentColor}15`, border: `1px solid ${accentColor}40`, borderRadius: 6, fontSize: 11, color: accentColor }}>
+                  {getFileIcon(att.type)}
+                  <span style={{ maxWidth: 120, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{att.name}</span>
+                  <button onClick={() => removeAttachment(i)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: accentColor }}>
+                    <X className="w-3 h-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          {/* Geo */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
+            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
-        )}
-      </div>
+        </div>
+      </details>
 
-      {/* ANALYSE */}
+      {/* ANALYSE — solid, confident */}
       <motion.button
         onClick={analyse}
         disabled={!what.trim() || loading}
         whileTap={!loading && what.trim() ? { scale: 0.97 } : {}}
         style={{
-          width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
-          fontWeight: 800, letterSpacing: '0.12em', cursor: what.trim() && !loading ? 'pointer' : 'not-allowed',
-          border: `1px solid ${what.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-          background: what.trim() ? `${accentColor}15` : 'transparent',
-          color: what.trim() ? accentColor : 'rgba(255,255,255,0.2)',
+          width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+          fontWeight: 900, letterSpacing: '0.1em',
+          cursor: what.trim() && !loading ? 'pointer' : 'not-allowed',
+          border: `2px solid ${what.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+          background: what.trim() ? accentColor : 'transparent',
+          color: what.trim() ? '#000' : 'rgba(255,255,255,0.2)',
           transition: 'all 0.2s',
         }}
       >
-        {loading ? <Spinner color={accentColor} text="ANALYSING YOUR SITUATION" /> : 'GET MY CONFLICT PLAN'}
+        {loading ? <Spinner color={what.trim() ? '#000' : accentColor} text="ANALYSING YOUR SITUATION" /> : 'GET MY CONFLICT PLAN →'}
       </motion.button>
 
       {/* ERROR FROM RESULT */}
