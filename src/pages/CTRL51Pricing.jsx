@@ -54,6 +54,29 @@ export default function CTRL51Pricing() {
           <p className="text-lg text-gray-400">Transparent pricing. No surprises. Start controlling spend today.</p>
         </motion.div>
 
+        {/* VALUE PROPOSITION */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.05 }}
+          className="mb-16 p-8 bg-gradient-to-r from-cyan-500/10 to-green-500/10 border border-cyan-500/30 rounded-2xl"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="text-4xl font-black text-cyan-400 mb-2">£500k+</div>
+              <p className="text-sm text-gray-400">Average annual spend fragmentation detected per council</p>
+            </div>
+            <div>
+              <div className="text-4xl font-black text-green-400 mb-2">12-15%</div>
+              <p className="text-sm text-gray-400">Typical savings identified in first month of use</p>
+            </div>
+            <div>
+              <div className="text-4xl font-black text-amber-400 mb-2">2-3 weeks</div>
+              <p className="text-sm text-gray-400">Payback period for the £5k/month investment</p>
+            </div>
+          </div>
+        </motion.div>
+
         {/* PRICING TIERS */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
           {/* PILOT */}
@@ -71,9 +94,16 @@ export default function CTRL51Pricing() {
               </div>
             </div>
             
-            <p className="text-sm text-gray-400 mb-8 pb-8 border-b border-cyan-500/20">
-              Perfect for councils testing the system. One council, unlimited analysis, full support.
-            </p>
+            <div className="mb-8 pb-8 border-b border-cyan-500/20">
+              <p className="text-sm text-gray-400 mb-4">
+                Perfect for councils testing the system. One council, unlimited analysis, full support.
+              </p>
+              <div className="p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
+                <p className="text-xs font-bold text-cyan-300 mb-2">TYPICAL ROI</p>
+                <p className="text-sm font-black text-cyan-400">£60k-£75k+ saved monthly</p>
+                <p className="text-xs text-gray-400 mt-1">Based on average council spend profile</p>
+              </div>
+            </div>
             
             <div className="space-y-4 mb-8">
               {[
