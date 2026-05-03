@@ -83,12 +83,35 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
       const ct = CONFLICT_TYPES.find(t => t.id === conflictType);
       const gt = GOALS.find(g => g.id === goal);
 
-      const fileContext = attachments.length > 0 
-        ? `\n\nATTACHED EVIDENCE:\n${attachments.map(a => `- ${a.name} (${a.type}): ${a.url}`).join('\n')}`
-        : '';
+      // Extract text from doc/pdf attachments; pass image URLs directly to vision
+      let fileContext = '';
+      const imageUrls = [];
+      if (attachments.length > 0) {
+        const parts = [];
+        for (const a of attachments) {
+          const isImage = a.type.startsWith('image/');
+          if (isImage) {
+            imageUrls.push(a.url);
+            parts.push(`- ${a.name} (image — analysed visually)`);
+          } else {
+            try {
+              const extracted = await base44.integrations.Core.ExtractDataFromUploadedFile({
+                file_url: a.url,
+                json_schema: { type: 'object', properties: { full_text: { type: 'string' } } },
+              });
+              const text = extracted?.output?.full_text || (typeof extracted?.output === 'string' ? extracted.output : '');
+              if (text) parts.push(`- ${a.name}:\n${text}`);
+            } catch (e) {
+              parts.push(`- ${a.name} (could not read)`);
+            }
+          }
+        }
+        if (parts.length > 0) fileContext = `\n\nATTACHED EVIDENCE:\n${parts.join('\n')}`;
+      }
 
       const response = await base44.integrations.Core.InvokeLLM({
       model: 'claude_sonnet_4_6',
+      ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
       prompt: `You are sharp, calm, and on their side — a conflict and legal expert. Clear, direct, confident. Not preachy. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes. For CONTRACT or DISMISSAL conflicts: flag unfair/unenforceable clauses, what they can push back on, and whether a solicitor or employment tribunal is needed.
 
 CONFLICT TYPE: ${ct?.label || 'Not specified'}
