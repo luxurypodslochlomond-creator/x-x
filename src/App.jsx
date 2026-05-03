@@ -91,6 +91,7 @@ const CTRL51DashboardPage = React.lazy(() => import('./pages/CTRL51Dashboard'));
 const CTRL51PricingPage = React.lazy(() => import('./pages/CTRL51Pricing'));
 const CTRL51TermsPage = React.lazy(() => import('./pages/CTRL51Terms'));
 const CTRL51PrivacyPage = React.lazy(() => import('./pages/CTRL51Privacy'));
+const CTRL51CheckoutSuccessPage = React.lazy(() => import('./pages/CTRL51CheckoutSuccess'));
 
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -212,6 +213,7 @@ const AuthenticatedApp = () => {
       <Route path="/CTRL51Pricing" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CTRL51Pricing"><CTRL51PricingPage /></LayoutWrapper></Suspense>} />
       <Route path="/CTRL51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><CTRL51TermsPage /></Suspense>} />
       <Route path="/CTRL51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><CTRL51PrivacyPage /></Suspense>} />
+      <Route path="/CTRL51CheckoutSuccess" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CTRL51CheckoutSuccess"><CTRL51CheckoutSuccessPage /></LayoutWrapper></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

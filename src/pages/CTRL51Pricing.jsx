@@ -1,9 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import CTRL51Icon from '@/components/ctrl51/CTRL51Icon';
+import { base44 } from '@/api/base44Client';
 
 export default function CTRL51Pricing() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleCheckout = async (plan) => {
+    setLoading(true);
+    setError(null);
+
+    // Check if in iframe (builder preview)
+    if (window.self !== window.top) {
+      alert('Checkout only works on the published app. This is the builder preview.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await base44.functions.invoke('createCTRL51Checkout', {
+        plan,
+        success_url: `${window.location.origin}/CTRL51CheckoutSuccess?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${window.location.origin}/CTRL51Pricing`,
+      });
+
+      if (response.data?.checkout_url) {
+        window.location.href = response.data.checkout_url;
+      } else {
+        setError('Failed to create checkout session');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setError(err?.message || 'Checkout failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#0a0f1a] to-black text-white p-6 lg:p-12">
       <div className="max-w-5xl mx-auto">
@@ -58,8 +92,12 @@ export default function CTRL51Pricing() {
               ))}
             </div>
 
-            <button className="w-full py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-black font-bold rounded-lg hover:from-cyan-400 hover:to-cyan-500 transition">
-              Start Free Trial
+            <button
+              onClick={() => handleCheckout('pilot')}
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-black font-bold rounded-lg hover:from-cyan-400 hover:to-cyan-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Processing...' : 'Start 7-Day Pilot'}
             </button>
           </motion.div>
 
@@ -104,11 +142,25 @@ export default function CTRL51Pricing() {
               ))}
             </div>
 
-            <button className="w-full py-4 border-2 border-amber-500/40 text-amber-400 font-bold rounded-lg hover:border-amber-500/60 hover:bg-amber-500/10 transition">
+            <a
+              href="mailto:hello@ctrl51.uk?subject=CTRL51 Enterprise Demo"
+              className="inline-block w-full py-4 border-2 border-amber-500/40 text-amber-400 font-bold rounded-lg hover:border-amber-500/60 hover:bg-amber-500/10 transition text-center"
+            >
               Request Demo
-            </button>
+            </a>
           </motion.div>
         </div>
+
+        {/* ERROR MESSAGE */}
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm"
+          >
+            {error}
+          </motion.div>
+        )}
 
         {/* FAQ */}
         <motion.div
