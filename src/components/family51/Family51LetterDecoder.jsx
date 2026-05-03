@@ -265,118 +265,124 @@ Return a JSON object with these EXACT fields:
       {/* FORM — hidden while loading */}
       {!loading && !uploading && (<>
 
-      {/* GEO — auto detected, tap to change */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>📍 Auto-detected:</span>
-        <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-      </div>
+      {/* Hidden inputs */}
+      <input ref={fileInputRef} type="file" accept="image/*,application/pdf,.doc,.docx" onChange={handleFileUpload} style={{ display: 'none' }} />
+      <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
 
-      {/* TYPE CHIPS */}
-      <div className="space-y-2">
-        <Label>WHAT ARE YOU UPLOADING? (optional — helps us give better advice)</Label>
-        <div className="flex flex-wrap gap-2">
-           {LETTER_TYPES.map(type => (
-             <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
-               {type}
-             </Chip>
-           ))}
-         </div>
-      </div>
+      {/* STEP 1: MAIN INPUT — paste or snap, nothing else */}
+      {!uploadedFileUrl && !result && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
 
-      {/* UPLOAD OR PASTE — two separate buttons */}
-      <div>
-        {/* Hidden inputs */}
-        <input ref={fileInputRef} type="file" accept="image/*,application/pdf,.doc,.docx" onChange={handleFileUpload} style={{ display: 'none' }} />
-        <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
+          {/* BIG PASTE AREA — first thing they see */}
+          <textarea
+            value={letterText}
+            onChange={e => setLetterText(e.target.value)}
+            autoFocus
+            placeholder="Paste your letter here — or take a photo below.
 
-        {uploadedFileUrl ? (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', borderRadius: 12, border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.08)' }}>
-            <span style={{ fontSize: 12, fontWeight: 800, color: '#22c55e', letterSpacing: '0.1em' }}>✓ FILE UPLOADED — READY TO DECODE</span>
-            <button onClick={() => { setUploadedFileUrl(null); setLetterText(''); }} style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>REMOVE</button>
-          </div>
-        ) : (
-          <div style={{ display: 'flex', gap: 10 }}>
-            <motion.button
-              whileTap={{ scale: 0.96 }}
-              onClick={() => cameraInputRef.current?.click()}
-              style={{
-                flex: 1, padding: '14px 0', borderRadius: 12, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.08em', cursor: 'pointer',
-                border: `1px solid ${accentColor}40`,
-                background: `${accentColor}10`, color: accentColor,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-              }}
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                <circle cx="12" cy="13" r="4"/>
-              </svg>
-              TAKE PHOTO
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.96 }}
-              onClick={() => fileInputRef.current?.click()}
-              style={{
-                flex: 1, padding: '14px 0', borderRadius: 12, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.08em', cursor: 'pointer',
-                border: `1px solid ${accentColor}40`,
-                background: `${accentColor}10`, color: accentColor,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-              }}
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="17 8 12 3 7 8"/>
-                <line x1="12" y1="3" x2="12" y2="15"/>
-              </svg>
-              UPLOAD FILE
-            </motion.button>
-          </div>
-        )}
-        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.04em', marginTop: 6, textAlign: 'center' }}>Photo, PDF, Word doc — we read it all</p>
-      </div>
-
-      {/* PASTE AREA — only show if no file uploaded */}
-      {!uploadedFileUrl && (
-        <>
-          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em', marginBottom: 8, textAlign: 'center' }}>— or type / paste below —</p>
-          <div className="space-y-2">
-            <Label>OR PASTE YOUR LETTER</Label>
-            <textarea
-              value={letterText}
-              onChange={e => setLetterText(e.target.value)}
-              placeholder="Paste the full letter here. Don't worry about formatting — just get it all in. The more you paste, the better we can help."
-              style={{
-                width: '100%', height: 180, background: 'rgba(255,255,255,0.03)',
-                border: `1px solid ${letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
-                borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
-                resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
-                transition: 'border-color 0.2s', boxSizing: 'border-box',
-              }}
-              onFocus={e => e.target.style.borderColor = accentColor + '80'}
-              onBlur={e => e.target.style.borderColor = letterText ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
-            />
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.05em' }}>Nothing stored. Nothing sent anywhere. Processed and gone.</p>
-          </div>
-
-          {/* DECODE BUTTON — only for text input */}
-          <motion.button
-            onClick={decode}
-            disabled={!letterText.trim() || loading}
-            whileTap={!loading && letterText.trim() ? { scale: 0.97 } : {}}
+Don't worry about formatting. Just get it all in."
             style={{
-              width: '100%', padding: '15px 0', borderRadius: 12, fontSize: 13,
-              fontWeight: 800, letterSpacing: '0.12em',
-              cursor: letterText.trim() && !loading ? 'pointer' : 'not-allowed',
-              border: `1px solid ${letterText.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-              background: letterText.trim() ? `${accentColor}15` : 'transparent',
-              color: letterText.trim() ? accentColor : 'rgba(255,255,255,0.2)',
-              transition: 'all 0.2s',
+              width: '100%', height: 200, background: 'rgba(255,255,255,0.03)',
+              border: `1px solid ${letterText ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
+              borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
+              resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
+              transition: 'border-color 0.2s', boxSizing: 'border-box',
             }}
-          >
-            DECODE THIS LETTER
-          </motion.button>
-        </>
+            onFocus={e => e.target.style.borderColor = accentColor + '80'}
+            onBlur={e => e.target.style.borderColor = letterText ? accentColor + '60' : 'rgba(255,255,255,0.12)'}
+          />
+
+          {/* PRIMARY ACTION — decode if text, else two photo buttons */}
+          {letterText.trim() ? (
+            <motion.button
+              onClick={decode}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+                fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
+                border: `2px solid ${accentColor}`,
+                background: accentColor, color: '#000',
+              }}
+            >
+              DECODE THIS LETTER →
+            </motion.button>
+          ) : (
+            <div style={{ display: 'flex', gap: 10 }}>
+              <motion.button
+                whileTap={{ scale: 0.96 }}
+                onClick={() => cameraInputRef.current?.click()}
+                style={{
+                  flex: 2, padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
+                  letterSpacing: '0.06em', cursor: 'pointer',
+                  border: `2px solid ${accentColor}`,
+                  background: accentColor, color: '#000',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                SNAP A PHOTO
+              </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.96 }}
+                onClick={() => fileInputRef.current?.click()}
+                style={{
+                  flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
+                  letterSpacing: '0.06em', cursor: 'pointer',
+                  border: `1px solid rgba(255,255,255,0.15)`,
+                  background: 'transparent', color: 'rgba(255,255,255,0.5)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                UPLOAD
+              </motion.button>
+            </div>
+          )}
+
+          {/* SUBTLE TRUST LINE */}
+          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', margin: 0, letterSpacing: '0.03em' }}>
+            Nothing stored. Processed and gone.
+          </p>
+        </div>
+      )}
+
+      {/* FILE UPLOADED STATE */}
+      {uploadedFileUrl && !result && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', borderRadius: 12, border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.08)' }}>
+          <span style={{ fontSize: 12, fontWeight: 800, color: '#22c55e', letterSpacing: '0.1em' }}>✓ FILE READY — DECODING NOW</span>
+          <button onClick={() => { setUploadedFileUrl(null); setLetterText(''); }} style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>REMOVE</button>
+        </div>
+      )}
+
+      {/* OPTIONAL EXTRAS — only shown after result or when they've started typing */}
+      {letterText.trim() && !result && (
+        <div style={{ paddingTop: 4 }}>
+          {/* GEO — small, subtle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
+            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+          </div>
+          {/* TYPE CHIPS — collapsible optional hint */}
+          <details style={{ cursor: 'pointer' }}>
+            <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+              + OPTIONAL: what type of letter? (helps accuracy)
+            </summary>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
+              {LETTER_TYPES.map(type => (
+                <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
+                  {type}
+                </Chip>
+              ))}
+            </div>
+          </details>
+        </div>
       )}
 
       </>)} {/* end !loading form */}
