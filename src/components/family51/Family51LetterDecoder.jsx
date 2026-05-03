@@ -77,15 +77,34 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const geoContext = `Today's date is ${today}. The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response. When calculating how urgent a deadline is, use today's date as your reference.`;
 
-      // For images: pass file_url directly to vision model — faster and more accurate than extract-then-decode
+      // Route by file type: images → vision model directly; docs/PDFs → extract text first
       let letterContent = text;
-      const isImageFile = fileUrl && (fileUrl.match(/\.(jpg|jpeg|png|gif|webp|heic|heif)/i) || fileUrl.includes('image'));
-      
-      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.${!isImageFile && letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}`;
+      let visionFileUrl = null;
+
+      if (fileUrl) {
+        const lowerUrl = fileUrl.toLowerCase();
+        const isImage = lowerUrl.match(/\.(jpg|jpeg|png|gif|webp|heic|heif)/) || lowerUrl.includes('image/');
+        if (isImage) {
+          // Images: pass directly to vision model — no extraction needed
+          visionFileUrl = fileUrl;
+        } else {
+          // PDFs, Word docs, etc: extract text first
+          const extracted = await base44.integrations.Core.ExtractDataFromUploadedFile({
+            file_url: fileUrl,
+            json_schema: { type: 'object', properties: { full_text: { type: 'string' } } },
+          });
+          letterContent = extracted?.output?.full_text || (typeof extracted?.output === 'string' ? extracted.output : null) || text || '';
+          if (!letterContent || letterContent.trim().length < 10) {
+            throw new Error('Could not read the document. Please try a clearer photo or paste the text instead.');
+          }
+        }
+      }
+
+      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
-        ...(fileUrl ? { file_urls: [fileUrl] } : {}),
+        ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
         prompt: promptText + `\n\nBe specific. Be human. Give REAL information that actually helps. Don't over-reassure or be preachy. Don't be cold either. Just tell them what's going on and what to do — like someone who's seen this before and knows it's manageable.
 
 CRITICAL ANTI-HALLUCINATION RULES:
