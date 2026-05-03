@@ -182,7 +182,7 @@ function renderContent(caseItem) {
   return null;
 }
 
-function CaseCard({ caseItem, onDelete }) {
+function CaseCard({ caseItem, onDelete, onContinue }) {
   const [expanded, setExpanded] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const tool = TOOL_CONFIG[caseItem.tool] || TOOL_CONFIG.letter;
@@ -236,14 +236,30 @@ function CaseCard({ caseItem, onDelete }) {
               <div style={{ marginTop: 16 }}>
                 {renderContent(caseItem)}
               </div>
-              {/* DELETE */}
-              <div style={{ marginTop: 12, display: 'flex', justifyContent: 'flex-end' }}>
+              {/* CONTINUE + DELETE */}
+              <div style={{ marginTop: 16, display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
+                {onContinue && (
+                  <motion.button
+                    onClick={() => onContinue(caseItem)}
+                    whileTap={{ scale: 0.96 }}
+                    style={{
+                      flex: 1, padding: '11px 0', borderRadius: 10,
+                      fontSize: 12, fontWeight: 900, letterSpacing: '0.08em', cursor: 'pointer',
+                      border: `2px solid ${tool.color}`,
+                      background: tool.color,
+                      color: '#000',
+                      transition: 'all 0.15s',
+                    }}
+                  >
+                    {caseItem.tool === 'letter' ? 'CONTINUE → WRITE REPLY' : caseItem.tool === 'reply' ? 'CONTINUE → DISPUTE HELP' : 'OPEN THIS CASE'}
+                  </motion.button>
+                )}
                 <motion.button
                   onClick={handleDelete}
                   whileTap={{ scale: 0.95 }}
                   onBlur={() => setConfirmDelete(false)}
                   style={{
-                    display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', borderRadius: 8,
+                    display: 'flex', alignItems: 'center', gap: 6, padding: '11px 14px', borderRadius: 10,
                     fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer',
                     border: confirmDelete ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(255,255,255,0.1)',
                     background: confirmDelete ? 'rgba(239,68,68,0.12)' : 'transparent',
@@ -252,7 +268,7 @@ function CaseCard({ caseItem, onDelete }) {
                   }}
                 >
                   <Trash2 size={11} />
-                  {confirmDelete ? 'CONFIRM DELETE' : 'DELETE'}
+                  {confirmDelete ? 'CONFIRM' : ''}
                 </motion.button>
               </div>
             </div>
@@ -263,7 +279,7 @@ function CaseCard({ caseItem, onDelete }) {
   );
 }
 
-export default function SortedCaseHistory() {
+export default function SortedCaseHistory({ onContinue }) {
   const [cases, setCases] = useState([]);
   const [filter, setFilter] = useState('all');
 
@@ -347,7 +363,7 @@ export default function SortedCaseHistory() {
       ) : (
         <AnimatePresence mode="popLayout">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {filtered.map(c => <CaseCard key={c.id} caseItem={c} onDelete={handleDelete} />)}
+            {filtered.map(c => <CaseCard key={c.id} caseItem={c} onDelete={handleDelete} onContinue={onContinue} />)}
           </div>
         </AnimatePresence>
       )}

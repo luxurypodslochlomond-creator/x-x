@@ -425,7 +425,28 @@ export default function Family51Page() {
         {/* ── CASE HISTORY ──────────────────────────────────── */}
         {showHistory && !activeTool && (
           <motion.div key="history" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
-            <SortedCaseHistory />
+            <SortedCaseHistory
+              onContinue={(caseItem) => {
+                const parsed = (() => { try { return JSON.parse(caseItem.ai_result); } catch { return null; } })();
+                if (caseItem.tool === 'letter') {
+                  // Continue a decoded letter → open Reply with it pre-filled
+                  handleToolOpen('reply', {
+                    sender: parsed?.sender,
+                    summary: parsed?.plain_summary || caseItem.summary,
+                    deadline: parsed?.key_deadline,
+                    what_this_means: parsed?.what_this_means,
+                    suggestedTone: parsed?.suggested_tone,
+                    related_case_id: caseItem.id,
+                  });
+                } else if (caseItem.tool === 'reply') {
+                  // Continue a reply → open Conflict with it pre-filled
+                  handleToolOpen('conflict', { related_case_id: caseItem.id });
+                } else {
+                  // Open the conflict tool for review
+                  handleToolOpen('conflict', { related_case_id: caseItem.id });
+                }
+              }}
+            />
           </motion.div>
         )}
 
