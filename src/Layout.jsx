@@ -12,6 +12,7 @@ import GlobalSearch from '@/components/shared/GlobalSearch';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PlatformIcon from '@/components/shared/PlatformIcon';
+import CTRL51Icon from '@/components/ctrl51/CTRL51Icon';
 // import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 // import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
 // import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
@@ -416,6 +417,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const navs = React.useMemo(() => {
     // 1. PRODUCTS (paid / subscription tools)
     const productsNav = [
+      { title: "CTRL51", url: createPageUrl("CTRL51"), icon: CTRL51Icon, highlight: true, description: "Procurement control · £5k/month" },
       { title: "SORTED", url: createPageUrl("Sorted"), icon: COOLASFUCKSorted, highlight: true, description: "Decode scary letters · subscription" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: COOLASFUCKPaw, highlight: true, description: "Sound therapy for animals · subscription" },
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
