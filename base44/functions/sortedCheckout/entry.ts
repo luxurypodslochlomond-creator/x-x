@@ -12,8 +12,8 @@ Deno.serve(async (req) => {
         price: 'price_1TM6omLgeWr0ng8p0puGXadx', // £9.99/month
         quantity: 1,
       }],
-      success_url: success_url || 'https://uf51.love/Family51?sorted=success',
-      cancel_url:  cancel_url  || 'https://uf51.love/Family51',
+      success_url: success_url || 'https://uf51.love/Sorted?sorted=success',
+      cancel_url:  cancel_url  || 'https://uf51.love/Sorted',
       payment_method_types: ['card'],
       billing_address_collection: 'auto',
       metadata: {

@@ -149,12 +149,12 @@ Return:
     setTimeout(() => setCopied(''), 2200);
   };
 
-  // Auto-regenerate if goal changes after generating
+  // Auto-regenerate if goal changes after generating (only when result exists and goal changes)
   useEffect(() => {
-    if (result && resultGoal && goal !== resultGoal && !loading && what.trim()) {
+    if (result && !result._error && resultGoal && goal !== resultGoal && !loading && what.trim()) {
       analyse();
     }
-  }, [goal, result, resultGoal, loading, what]);
+  }, [goal]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-5">

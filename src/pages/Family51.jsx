@@ -314,7 +314,7 @@ export default function Family51Page() {
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
                   <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0, animation: 'pulse 2s infinite' }} />
                   <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>
-                    {remaining < 5 ? `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT` : '5 FREE USES — NO CARD NEEDED'}
+                    {remaining === Infinity || remaining >= 5 ? '5 FREE USES — NO CARD NEEDED' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
                   </span>
                 </div>
                 <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>

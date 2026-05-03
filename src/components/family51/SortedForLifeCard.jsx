@@ -57,8 +57,8 @@ export default function SortedForLifeCard({ compact = false }) {
     setError('');
     try {
       const res = await sortedCheckout({
-        success_url: window.location.origin + '/Family51?sorted=success',
-        cancel_url:  window.location.origin + '/Family51',
+        success_url: window.location.origin + '/Sorted?sorted=success',
+        cancel_url:  window.location.origin + '/Sorted',
       });
       if (res.data?.url) {
         window.location.href = res.data.url;
