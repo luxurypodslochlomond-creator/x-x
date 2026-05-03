@@ -20,11 +20,20 @@ const SEVERITY_CONFIG = {
   'VERY URGENT':   { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.3)' },
 };
 
+const LOADING_STEPS = [
+  'Reading your letter…',
+  'Identifying key details…',
+  'Checking deadlines…',
+  'Finding what matters…',
+  'Almost there…',
+];
+
 export default function Family51LetterDecoder({ accentColor = '#f97316', onResult, onHandoff }) {
   const [letterText, setLetterText] = useState('');
   const [letterType, setLetterType] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
@@ -40,8 +49,18 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   useEffect(() => { geoRef.current = geo; }, [geo]);
   useEffect(() => { letterTypeRef.current = letterType; }, [letterType]);
 
+  // Progress through loading steps while waiting
+  useEffect(() => {
+    if (!loading) { setLoadingStep(0); return; }
+    const interval = setInterval(() => {
+      setLoadingStep(s => (s < LOADING_STEPS.length - 1 ? s + 1 : s));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [loading]);
+
   const runDecode = async (fileUrl, text) => {
     setLoading(true);
+    setLoadingStep(0);
     setUploading(false);
     setResult(null);
     setDecodeError(null);
@@ -58,21 +77,15 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const geoContext = `Today's date is ${today}. The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response. When calculating how urgent a deadline is, use today's date as your reference.`;
 
-      // If file uploaded: extract text first, then decode as plain text — no file_urls needed
+      // For images: pass file_url directly to vision model — faster and more accurate than extract-then-decode
       let letterContent = text;
-      if (fileUrl) {
-        const extracted = await base44.integrations.Core.ExtractDataFromUploadedFile({
-          file_url: fileUrl,
-          json_schema: { type: 'object', properties: { full_text: { type: 'string' } } },
-        });
-        letterContent = extracted?.output?.full_text || extracted?.output || text || '';
-        if (!letterContent) throw new Error('Could not read the file. Please try a clearer photo or paste the text instead.');
-      }
-
-      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.\n\nDOCUMENT:\n${letterContent}`;
+      const isImageFile = fileUrl && (fileUrl.match(/\.(jpg|jpeg|png|gif|webp|heic|heif)/i) || fileUrl.includes('image'));
+      
+      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.${!isImageFile && letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
+        ...(fileUrl ? { file_urls: [fileUrl] } : {}),
         prompt: promptText + `\n\nBe specific. Be human. Give REAL information that actually helps. Don't over-reassure or be preachy. Don't be cold either. Just tell them what's going on and what to do — like someone who's seen this before and knows it's manageable.
 
 CRITICAL ANTI-HALLUCINATION RULES:
@@ -259,12 +272,21 @@ Return a JSON object with these EXACT fields:
             </div>
 
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.15em', color: '#fff', margin: '0 0 4px' }}>
-                {uploading ? 'READING YOUR FILE' : 'DECODING'}
+              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.15em', color: '#fff', margin: '0 0 6px' }}>
+                SORTED IS ON IT
               </p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.04em', margin: 0 }}>
-                {uploading ? 'Uploading securely' : 'AI reading every word — 15–30 sec'}
-              </p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={loadingStep}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.04em', margin: 0 }}
+                >
+                  {LOADING_STEPS[loadingStep]}
+                </motion.p>
+              </AnimatePresence>
             </div>
           </motion.div>
         )}
