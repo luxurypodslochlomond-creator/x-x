@@ -163,6 +163,10 @@ Return a JSON object with these EXACT fields:
           const parsed = JSON.parse(response);
           console.log('Parsed string response:', parsed);
           if (parsed.letter_summary || Object.keys(parsed).length > 0) {
+            const stringFields = ['letter_summary','sender','severity','severity_explanation','key_deadline','quick_reassurance','we_hear_you','what_this_means','if_you_ignore_this','financial_impact','dont_panic','suggested_tone'];
+            stringFields.forEach(k => { if (parsed[k] && typeof parsed[k] === 'object') parsed[k] = JSON.stringify(parsed[k]); });
+            if (parsed.action_steps && !Array.isArray(parsed.action_steps)) parsed.action_steps = [String(parsed.action_steps)];
+            if (parsed.free_help && !Array.isArray(parsed.free_help)) parsed.free_help = [String(parsed.free_help)];
             setResult(parsed);
             const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
             const caseId = saveCaseToHistory({
@@ -183,7 +187,13 @@ Return a JSON object with these EXACT fields:
       } else if (response && typeof response === 'object' && Object.keys(response).length > 0) {
         // Accept any object with content, be more forgiving with field names
         console.log('Object response accepted:', response);
-        setResult(response);
+        // Sanitize: ensure all string fields are strings (not nested objects)
+        const sanitized = { ...response };
+        const stringFields = ['letter_summary','sender','severity','severity_explanation','key_deadline','quick_reassurance','we_hear_you','what_this_means','if_you_ignore_this','financial_impact','dont_panic','suggested_tone'];
+        stringFields.forEach(k => { if (sanitized[k] && typeof sanitized[k] === 'object') sanitized[k] = JSON.stringify(sanitized[k]); });
+        if (sanitized.action_steps && !Array.isArray(sanitized.action_steps)) sanitized.action_steps = [String(sanitized.action_steps)];
+        if (sanitized.free_help && !Array.isArray(sanitized.free_help)) sanitized.free_help = [String(sanitized.free_help)];
+        setResult(sanitized);
         const severityMap = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
         const caseId = saveCaseToHistory({
           tool: 'letter',
