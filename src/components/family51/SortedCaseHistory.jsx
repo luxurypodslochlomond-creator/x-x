@@ -182,11 +182,18 @@ function renderContent(caseItem) {
   return null;
 }
 
-function CaseCard({ caseItem, onDelete, onContinue }) {
+function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
   const [expanded, setExpanded] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editValue, setEditValue] = useState(caseItem.summary || '');
   const tool = TOOL_CONFIG[caseItem.tool] || TOOL_CONFIG.letter;
   const sevColor = SEVERITY_COLORS[caseItem.severity] || SEVERITY_COLORS.unknown;
+
+  const handleSaveEdit = () => {
+    onEdit(caseItem.id, editValue.trim());
+    setEditing(false);
+  };
 
   const handleDelete = (e) => {
     e.stopPropagation();
@@ -213,9 +220,30 @@ function CaseCard({ caseItem, onDelete, onContinue }) {
             )}
             <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 'auto' }}>{formatDate(caseItem.created_date)}</span>
           </div>
-          <p style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.35, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-            {caseItem.summary || 'Tap to view analysis'}
-          </p>
+          {editing ? (
+            <div onClick={e => e.stopPropagation()} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+              <input
+                autoFocus
+                value={editValue}
+                onChange={e => setEditValue(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') handleSaveEdit(); if (e.key === 'Escape') setEditing(false); }}
+                style={{ flex: 1, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 6, padding: '5px 9px', fontSize: 13, color: '#fff', outline: 'none', fontFamily: 'inherit' }}
+              />
+              <button onClick={handleSaveEdit} style={{ fontSize: 10, fontWeight: 900, color: '#22c55e', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 5, padding: '4px 9px', cursor: 'pointer' }}>SAVE</button>
+              <button onClick={() => setEditing(false)} style={{ fontSize: 10, fontWeight: 800, color: 'rgba(255,255,255,0.3)', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 5, padding: '4px 8px', cursor: 'pointer' }}>✕</button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <p style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.35, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                {caseItem.summary || 'Tap to view analysis'}
+              </p>
+              <button
+                onClick={e => { e.stopPropagation(); setEditing(true); setEditValue(caseItem.summary || ''); }}
+                style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', padding: '2px 4px', color: 'rgba(255,255,255,0.2)', fontSize: 10 }}
+                title="Edit note"
+              >✎</button>
+            </div>
+          )}
         </div>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ transition: 'transform 0.2s', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0 }}>
           <path d="M3 5l4 4 4-4" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -296,6 +324,12 @@ export default function SortedCaseHistory({ onContinue }) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch {}
   };
 
+  const handleEdit = (id, newSummary) => {
+    const updated = cases.map(c => c.id === id ? { ...c, summary: newSummary } : c);
+    setCases(updated);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch {}
+  };
+
   const filtered = filter === 'all' ? cases : cases.filter(c => c.tool === filter);
 
   return (
@@ -363,7 +397,7 @@ export default function SortedCaseHistory({ onContinue }) {
       ) : (
         <AnimatePresence mode="popLayout">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {filtered.map(c => <CaseCard key={c.id} caseItem={c} onDelete={handleDelete} onContinue={onContinue} />)}
+            {filtered.map(c => <CaseCard key={c.id} caseItem={c} onDelete={handleDelete} onContinue={onContinue} onEdit={handleEdit} />)}
           </div>
         </AnimatePresence>
       )}
