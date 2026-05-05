@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Download, MapPin, Globe, ExternalLink } from 'lucide-react';
 
 // Clean, human, confident. No ego. No pitch deck energy.
@@ -30,6 +30,10 @@ const Role = ({ title, org, period, location, paras }) => (
 );
 
 export default function BrianHughesCV() {
+  useEffect(() => {
+    document.title = 'Brian Hughes CV';
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
 
@@ -62,7 +66,6 @@ export default function BrianHughesCV() {
         {/* NAME & ROLE */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-1">Brian Hughes</h1>
-          <p className="text-gray-500 text-base mb-5">Founder</p>
 
           <div className="flex flex-wrap gap-5 text-sm text-gray-500">
             <a href="https://uf51.love" target="_blank" rel="noopener noreferrer"
