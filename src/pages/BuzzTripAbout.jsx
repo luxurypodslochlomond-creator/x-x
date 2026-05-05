@@ -2,15 +2,9 @@ import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 
 const BuzzTripLoader = () => (
-  <div style={{ background: '#000', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
-    <div style={{ fontSize: '48px', animation: 'infinity-pulse 1.5s ease-in-out infinite' }}>♾️❤️</div>
-    <div style={{ fontSize: '14px', color: '#10b981', fontFamily: 'monospace', letterSpacing: '2px' }}>LOADING</div>
-    <style>{`
-      @keyframes infinity-pulse {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.6; transform: scale(1.15); }
-      }
-    `}</style>
+  <div style={{ background: '#000', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ width: '40px', height: '40px', border: '2px solid #06b6d4', borderTop: '2px solid transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
   </div>
 );
 
