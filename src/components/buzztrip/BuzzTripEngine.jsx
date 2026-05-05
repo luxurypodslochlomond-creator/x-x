@@ -193,11 +193,12 @@ export default function BuzzTripEngine() {
       hpFilter.frequency.setValueAtTime(40, ctx.currentTime); // remove sub-rumble that gets lost
       hpFilter.Q.setValueAtTime(0.7, ctx.currentTime);
 
-      // Presence boost: gentle peaking EQ around 150-300Hz where low tones shine on mobile
+      // Presence boost: peaking EQ — adapt frequency based on protocol (craving needs more bass boost)
       const peakFilter = ctx.createBiquadFilter();
       peakFilter.type = 'peaking';
-      peakFilter.frequency.setValueAtTime(150, ctx.currentTime);
-      peakFilter.gain.setValueAtTime(3.5, ctx.currentTime); // +3.5dB boost
+      const isPainOrCraving = proto.toneFreq <= 100;
+      peakFilter.frequency.setValueAtTime(isPainOrCraving ? 110 : 150, ctx.currentTime);
+      peakFilter.gain.setValueAtTime(isPainOrCraving ? 4.5 : 3.5, ctx.currentTime); // +4.5dB for withdrawal
       peakFilter.Q.setValueAtTime(1.2, ctx.currentTime);
 
       // Fade in gently over 2 seconds to avoid jarring start
