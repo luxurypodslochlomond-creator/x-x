@@ -139,6 +139,7 @@ export default function BuzzTripEngine() {
   const [breathPhase, setBreathPhase] = useState('in');
   const [timeLeft, setTimeLeft] = useState(0);
   const [circleScale, setCircleScale] = useState(1);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const audioCtxRef = useRef(null);
   const oscillatorRef = useRef(null);
@@ -353,8 +354,30 @@ export default function BuzzTripEngine() {
   // SELECTION SCREEN
   return (
     <div className="min-h-screen bg-black text-white flex flex-col" style={{ background: 'radial-gradient(ellipse at top, #001a0a 0%, #000 60%)' }}>
+
+      {/* Top nav bar */}
+      <div className="flex items-center justify-between px-5 pt-5 pb-2">
+        <div className="w-8" />
+        <p className="text-green-500 font-mono text-xs tracking-widest">BUZZTRIP</p>
+        <button onClick={() => setMenuOpen(!menuOpen)} className="w-8 h-8 flex flex-col justify-center items-center gap-1.5">
+          <span className="block w-5 h-0.5 bg-green-500 rounded" />
+          <span className="block w-5 h-0.5 bg-green-500 rounded" />
+          <span className="block w-5 h-0.5 bg-green-500 rounded" />
+        </button>
+      </div>
+
+      {/* Dropdown menu */}
+      {menuOpen && (
+        <div className="absolute top-14 right-4 z-50 bg-[#0a0f0a] border border-green-900/50 rounded-xl shadow-2xl overflow-hidden min-w-[160px]">
+          <a href="/BuzzTripAbout" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">About</a>
+          <a href="/BuzzTripTerms" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Terms</a>
+          <a href="/BuzzTripPrivacy" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Privacy</a>
+          <a href="mailto:family@uf51.love" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Contact</a>
+        </div>
+      )}
+
       {/* Header */}
-      <div className="px-6 pt-12 pb-8 text-center">
+      <div className="px-6 pt-6 pb-8 text-center">
         <div className="flex items-center justify-center gap-3 mb-3">
           <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
             <circle cx="16" cy="16" r="14" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="4 2" opacity="0.5" />
@@ -417,21 +440,9 @@ export default function BuzzTripEngine() {
           How does this work? →
         </a>
 
-        {/* Simple footer nav */}
-        <div className="mt-8 pt-6 border-t border-white/5">
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-4">
-            <a href="/BuzzTripAbout" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">About</a>
-            <a href="/BuzzTripTerms" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">Terms</a>
-            <a href="/BuzzTripPrivacy" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">Privacy</a>
-            <a href="mailto:family@uf51.love" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">Contact</a>
-          </div>
-          <p className="text-gray-700 text-xs text-center leading-relaxed px-4">
-            BuzzTrip is a breathing and audio tool, not a medical device. It does not diagnose, treat or cure any condition. If you are in crisis, please contact a medical professional.
-          </p>
-          <p className="text-gray-800 text-xs text-center mt-3">
-            A <span className="text-green-900">UF51</span> project · Free forever · No data stored
-          </p>
-        </div>
+        <p className="text-gray-800 text-xs text-center mt-6">
+          Not a medical device · Free forever · No data stored
+        </p>
       </div>
     </div>
   );
