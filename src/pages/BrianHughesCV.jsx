@@ -86,16 +86,16 @@ export default function BrianHughesCV() {
         {/* ABOUT - the most important part. Human, honest, direct. */}
         <div className="mb-10">
           <p className="text-gray-700 text-[15px] leading-relaxed mb-3">
-            I'm a product person who builds things. For the last few years that's meant shipping 15+ live products 
-            on my own — not prototypes, not demos, but tools with real users and paying customers. Before that I 
-            spent nine years co-founding and running KILTR, Scotland's largest social network, which we took from 
-            nothing to 100,000 users before closing it down in 2018.
+            I'm a product person. I spent nine years building KILTR, Scotland's largest social network, which I 
+            co-founded and grew to 100,000 users. I also built and shipped SwipeWiFi, a licensed SaaS product 
+            operating across multiple territories. Since then I've been exploring what's actually worth building — 
+            products that solve real problems for people who usually can't afford the professional version.
           </p>
           <p className="text-gray-700 text-[15px] leading-relaxed mb-3">
-            What I've learned doing both: the best product work happens when you stay genuinely curious about the 
-            person using it. Not the persona. The actual person. I'm most useful in the space between a real problem 
-            and a thing that solves it — talking to users, finding the honest version of what they need, and helping 
-            a team move toward it without losing momentum.
+            What I've learned: the best product work happens when you stay genuinely curious about who's actually 
+            using it. Not personas. Real people. I'm most useful in the space between a real problem and a thing 
+            that solves it — talking to users, finding what they actually need, and helping a team move toward it 
+            without losing focus. I've built teams from scratch before, and I know how to think about what matters.
           </p>
           <p className="text-gray-700 text-[15px] leading-relaxed">
             I'm looking to join a team and focus. Solo building teaches you a lot but it's not the same as working 
@@ -212,7 +212,7 @@ export default function BrianHughesCV() {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-400">
-          <span>Glasgow, Scotland · Available immediately · Right to work in UK</span>
+          <span>Stoneymollan, Loch Lomond, Scotland G83 8QU · Available immediately · Right to work in UK</span>
           <span className="no-print">uf51.love · en.wikipedia.org/wiki/KILTR</span>
         </div>
 
