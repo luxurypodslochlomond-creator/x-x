@@ -91,7 +91,8 @@ export default function BrianHughesCV() {
             What I've learned: the best product work happens when you stay genuinely curious about who's actually 
             using it. Not personas. Real people. I'm most useful in the space between a real problem and a thing 
             that solves it — talking to users, finding what they actually need, and helping a team move toward it 
-            without losing focus. I've built teams from scratch before, and I know how to think about what matters.
+            without losing focus. I've built teams from scratch before, managed complex multi-stakeholder relationships 
+            (including investors and legal teams through compliance processes), and I know how to think about what matters.
           </p>
           <p className="text-gray-700 text-[15px] leading-relaxed">
             I'm looking to join a team and focus. Solo building teaches you a lot but it's not the same as working 
