@@ -1,8 +1,9 @@
-import React, { Suspense } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { Suspense, useState, useEffect } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 const RedirectToSorted = () => <Navigate to="/Sorted" replace />;
 import SortedLoader from './components/family51/SortedLoader';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
+import SortedPageTransition from '@/components/shared/SortedPageTransition';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -109,6 +110,14 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, isAuthenticated, navigateToLogin } = useAuth();
+  const location = useLocation();
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    setIsTransitioning(true);
+    const timer = setTimeout(() => setIsTransitioning(false), 300);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   // Handle authentication errors (only hard block for registered-user-required scenarios)
   if (authError?.type === 'user_not_registered') {
@@ -117,7 +126,9 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
-    <Suspense fallback={<COOLASFUCK8BitLoading message="LOADING UF51" />}>
+    <>
+      <SortedPageTransition isTransitioning={isTransitioning} />
+      <Suspense fallback={<COOLASFUCK8BitLoading message="LOADING UF51" />}>
     <Routes>
       <Route path="/" element={
         <LayoutWrapper currentPageName={mainPageKey}>
@@ -227,6 +238,7 @@ const AuthenticatedApp = () => {
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
+    </>
   );
 };
 
