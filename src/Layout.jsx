@@ -589,6 +589,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "📋 Stoneymollan Legal", url: createPageUrl("AdminStoneymollanLegal"), icon: FileText, description: "Prescriptive possession case" },
       { title: "🔔 PWA Push Guide", url: createPageUrl("AdminPWAPushGuide"), icon: Bell, description: "How we cracked iOS push notifications" },
       { title: "📰 SORTED Press Release", url: "/SortedPressRelease", icon: FileText, description: "Launch PR — 25 April 2026 · download PDF" },
+      { title: "📄 Brian Hughes CV", url: createPageUrl("BrianHughesCV"), icon: User, description: "One-pager CV · download PDF" },
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
