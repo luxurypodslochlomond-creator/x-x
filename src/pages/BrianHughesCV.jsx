@@ -1,294 +1,207 @@
-import React, { useRef } from 'react';
-import { Globe, Mail, ExternalLink, Download, MapPin, Zap, Brain, Radio, Shield, Sparkles, Code } from 'lucide-react';
+import React from 'react';
+import { Download, MapPin, Globe, ExternalLink } from 'lucide-react';
 
-const Section = ({ title, color = 'cyan', children }) => {
-  const colors = {
-    cyan: 'border-cyan-500 text-cyan-400',
-    pink: 'border-pink-500 text-pink-400',
-    green: 'border-green-500 text-green-400',
-    amber: 'border-amber-500 text-amber-400',
-  };
-  return (
-    <div className="mb-8">
-      <div className={`border-l-4 ${colors[color].split(' ')[0]} pl-4 mb-4`}>
-        <h2 className={`text-xs font-black font-mono tracking-[0.3em] uppercase ${colors[color].split(' ')[1]}`}>{title}</h2>
-      </div>
-      {children}
-    </div>
-  );
-};
+// Clean, human, confident. No ego. No pitch deck energy.
+// Reads like a great first conversation, not a press release.
 
-const Role = ({ title, company, period, bullets }) => (
-  <div className="mb-6">
-    <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+const Divider = () => <div className="border-t border-gray-200 my-8" />;
+
+const SectionLabel = ({ children }) => (
+  <p className="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-4">{children}</p>
+);
+
+const Role = ({ title, org, period, location, paras }) => (
+  <div className="mb-8">
+    <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
       <div>
-        <h3 className="text-white font-black text-base">{title}</h3>
-        <p className="text-cyan-400 font-bold text-sm font-mono">{company}</p>
+        <span className="font-bold text-gray-900 text-[15px]">{title}</span>
+        <span className="text-gray-500 mx-2">·</span>
+        <span className="text-gray-600 text-[15px]">{org}</span>
       </div>
-      <span className="text-gray-500 text-xs font-mono bg-white/5 px-2 py-1 rounded whitespace-nowrap">{period}</span>
+      <span className="text-gray-400 text-sm whitespace-nowrap">{period}</span>
     </div>
-    <ul className="space-y-1.5">
-      {bullets.map((b, i) => (
-        <li key={i} className="flex items-start gap-2 text-gray-300 text-sm leading-relaxed">
-          <span className="text-cyan-500 mt-1.5 flex-shrink-0 text-xs">▸</span>
-          <span>{b}</span>
-        </li>
+    {location && <p className="text-gray-400 text-xs mb-3">{location}</p>}
+    <div className="space-y-2">
+      {paras.map((p, i) => (
+        <p key={i} className="text-gray-600 text-sm leading-relaxed">{p}</p>
       ))}
-    </ul>
+    </div>
   </div>
 );
 
-const Chip = ({ text, color = 'cyan' }) => {
-  const colors = {
-    cyan: 'border-cyan-500/40 text-cyan-300 bg-cyan-500/5',
-    pink: 'border-pink-500/40 text-pink-300 bg-pink-500/5',
-    green: 'border-green-500/40 text-green-300 bg-green-500/5',
-    amber: 'border-amber-500/40 text-amber-300 bg-amber-500/5',
-  };
-  return (
-    <span className={`border text-xs font-bold font-mono px-2 py-1 rounded ${colors[color]}`}>{text}</span>
-  );
-};
-
 export default function BrianHughesCV() {
-  const cvRef = useRef(null);
-
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-gray-900">
 
-      {/* PRINT STYLES */}
       <style>{`
         @media print {
-          body { background: white !important; color: black !important; }
           .no-print { display: none !important; }
-          .cv-container { max-width: 100% !important; padding: 20px !important; background: white !important; color: black !important; }
-          .cv-container * { color: black !important; border-color: #ccc !important; background: transparent !important; }
-          .print-header { border-bottom: 2px solid black !important; }
+          body { background: white !important; }
+          .cv-page { padding: 32px !important; max-width: 100% !important; box-shadow: none !important; }
         }
         @media screen {
-          .cv-container { max-width: 860px; }
+          .cv-page { max-width: 720px; }
         }
       `}</style>
 
-      {/* DOWNLOAD BAR */}
-      <div className="no-print sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-cyan-500/30 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span className="text-cyan-400 font-black font-mono text-sm tracking-widest">CV · BRIAN HUGHES</span>
-        </div>
+      {/* TOP BAR - screen only */}
+      <div className="no-print bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
+        <span className="text-sm text-gray-400 font-medium">Brian Hughes · CV</span>
         <button
-          onClick={handlePrint}
-          className="flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black font-black text-sm px-4 py-2 rounded-lg transition-all"
+          onClick={() => window.print()}
+          className="flex items-center gap-2 bg-gray-900 hover:bg-gray-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all"
         >
-          <Download className="w-4 h-4" />
-          Download / Print PDF
+          <Download className="w-3.5 h-3.5" />
+          Save as PDF
         </button>
       </div>
 
-      {/* CV CONTENT */}
-      <div ref={cvRef} className="cv-container mx-auto px-6 py-10">
+      {/* CV */}
+      <div className="cv-page mx-auto px-8 py-12">
 
-        {/* HEADER */}
-        <div className="print-header border-b border-cyan-500/30 pb-8 mb-10">
-          <div className="flex flex-wrap items-start justify-between gap-6">
-            <div>
-              {/* COOLASFUCK WAVEFORM MARK */}
-              <div className="flex items-center gap-3 mb-4">
-                <svg width="40" height="24" viewBox="0 0 40 24" fill="none" className="no-print">
-                  <path d="M2 12 L6 12 L8 4 L10 20 L12 8 L14 16 L16 2 L18 22 L20 6 L22 18 L24 10 L26 14 L28 8 L30 16 L32 12 L36 12 L38 12"
-                    stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" fill="none"
-                    style={{ filter: 'drop-shadow(0 0 4px #06b6d4)' }} />
-                </svg>
-                <span className="text-xs font-black font-mono text-cyan-500/60 tracking-[0.4em] uppercase">UF51 · VERIFIED</span>
-              </div>
+        {/* NAME & ROLE */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-1">Brian Hughes</h1>
+          <p className="text-gray-500 text-base mb-5">Product Leader · Glasgow, Scotland</p>
 
-              <h1 className="text-4xl font-black text-white tracking-tight leading-none mb-1">Brian Hughes</h1>
-              <p className="text-cyan-400 font-black font-mono text-lg tracking-widest mb-4">HEAD OF PRODUCT</p>
-
-              <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-cyan-500" />
-                  Glasgow, Scotland · UK
-                </span>
-                <a href="https://uf51.love" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 transition-colors">
-                  <Globe className="w-3.5 h-3.5" />
-                  uf51.love
-                </a>
-                <a href="https://en.wikipedia.org/wiki/KILTR" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 transition-colors">
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Wikipedia · KILTR
-                </a>
-                <a href="https://www.bbc.co.uk/news/uk-scotland-scotland-business-44380413" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 transition-colors">
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  BBC · Press
-                </a>
-              </div>
-            </div>
-
-            {/* STATS BLOCK */}
-            <div className="flex gap-4 flex-wrap">
-              {[
-                { val: '£6.25M', label: 'Raised' },
-                { val: '100K', label: 'Users' },
-                { val: '15+', label: 'AI Products' },
-                { val: '20+', label: 'Yrs Experience' },
-              ].map(({ val, label }) => (
-                <div key={label} className="text-center border border-cyan-500/20 rounded-lg px-4 py-3 bg-cyan-500/5">
-                  <div className="text-2xl font-black text-cyan-400 leading-none">{val}</div>
-                  <div className="text-xs text-gray-500 font-mono mt-1">{label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* SUMMARY */}
-          <div className="mt-8 p-5 border border-cyan-500/20 rounded-xl bg-cyan-500/5">
-            <p className="text-gray-200 text-sm leading-relaxed">
-              Serial founder, product strategist and AI practitioner with 20+ years building technology platforms from zero to scale.
-              Co-founded and led <strong className="text-white">KILTR</strong> — Scotland's largest social network — for 9 years, raising £6.25M and reaching 100,000 users.
-              Featured on <strong className="text-white">BBC Radio 4</strong> alongside Foursquare and Path. Currently shipping a 15-product AI ecosystem solo under <strong className="text-white">UF51</strong>.
-              I've done every part of the product journey — from napkin sketch to live paying customers — and I bring that full-stack founder perspective to every team I work with.
-            </p>
+          <div className="flex flex-wrap gap-5 text-sm text-gray-500">
+            <a href="https://uf51.love" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-gray-800 transition-colors">
+              <Globe className="w-3.5 h-3.5" />
+              uf51.love
+            </a>
+            <a href="https://en.wikipedia.org/wiki/KILTR" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-gray-800 transition-colors">
+              <ExternalLink className="w-3.5 h-3.5" />
+              Wikipedia · KILTR
+            </a>
           </div>
         </div>
 
-        {/* EXPERIENCE */}
-        <Section title="Experience" color="cyan">
+        {/* ABOUT - the most important part. Human, honest, direct. */}
+        <div className="mb-10">
+          <p className="text-gray-700 text-[15px] leading-relaxed mb-3">
+            I'm a product person who builds things. For the last few years that's meant shipping 15+ live products 
+            on my own — not prototypes, not demos, but tools with real users and paying customers. Before that I 
+            spent nine years co-founding and running KILTR, Scotland's largest social network, which we took from 
+            nothing to 100,000 users before closing it down in 2018.
+          </p>
+          <p className="text-gray-700 text-[15px] leading-relaxed mb-3">
+            What I've learned doing both: the best product work happens when you stay genuinely curious about the 
+            person using it. Not the persona. The actual person. I'm most useful in the space between a real problem 
+            and a thing that solves it — talking to users, finding the honest version of what they need, and helping 
+            a team move toward it without losing momentum.
+          </p>
+          <p className="text-gray-700 text-[15px] leading-relaxed">
+            I'm looking to join a team and focus. Solo building teaches you a lot but it's not the same as working 
+            with people who challenge your thinking. That's what I want next.
+          </p>
+        </div>
+
+        <Divider />
+
+        {/* WHAT I'M DOING NOW */}
+        <div className="mb-10">
+          <SectionLabel>Currently</SectionLabel>
+
           <Role
-            title="Founder & Head of Product"
-            company="UF51 — Universal Frequency 51"
-            period="2022 — Present"
-            bullets={[
-              "Sole product architect across 15+ live AI tools: PetSounds51 (animal sound therapy SaaS), SORTED (AI legal document decoder), CB51 (artist management platform), CTRL51 (procurement spend intelligence at £5k/month), BuzzStop (AI tinnitus cancellation engine), TRACKT (RFID asset management)",
-              "Full product lifecycle ownership: discovery, strategy, roadmap, build, launch, monetisation — zero external dev team",
-              "Practical AI embedded throughout every product: LLM workflows, real-time audio generation, psychoacoustic protocols, automated pipelines, push notifications",
-              "Live paying customers across multiple product lines; open API platform with external developers building on UF51 infrastructure",
-              "Built on modern full-stack: React, Deno, Stripe, PWA, Web Audio API, real-time subscriptions"
+            title="Founder"
+            org="UF51"
+            period="2022 — present"
+            paras={[
+              "Building an ecosystem of AI-powered tools across health, music, legal and environmental sectors. Each product is live, independently usable and built around a specific underserved need — from helping people decode scary legal letters in plain English, to sound therapy for anxious pets, to procurement spend intelligence for councils.",
+              "I own everything: product strategy, UX, build, launch, customer conversations, pricing, support. I use AI tooling heavily but I think about every product the same way I always have — start with the user's actual problem, remove the friction, make it work.",
+              "The products I'm most proud of aren't the technically clever ones. They're the ones where someone messages to say it helped."
             ]}
           />
+        </div>
+
+        <Divider />
+
+        {/* EXPERIENCE */}
+        <div className="mb-10">
+          <SectionLabel>Experience</SectionLabel>
 
           <Role
             title="Co-Founder & CEO"
-            company="KILTR · CollectivWorks"
+            org="KILTR · CollectivWorks"
             period="2009 — 2018"
-            bullets={[
-              "Co-founded KILTR — Scotland's leading social and professional network for Scottish culture, business and diaspora — from concept to 100,000 registered users",
-              "Raised £6.25M across multiple investment rounds from Par Equity, Scottish Investment Bank (Scottish Enterprise), Barwell and international investors",
-              "Featured on BBC Radio 4's 'The Secret History of Social Networking' alongside Foursquare and Path; covered by BBC, The Scotsman, The Herald, Scottish Business Insider and The Drum",
-              "Led full product vision, UX strategy, roadmap, team management, board governance and commercial partnerships across B2B and B2C",
-              "Pivoted business to CollectivWorks — a WiFi marketing platform helping hospitality and retail brands communicate with customers without passwords or email capture",
-              "CollectivWorks live in 65+ Scottish venues; secured new Singapore-based major investor for international expansion"
+            paras={[
+              "KILTR was Scotland's professional and cultural social network — we built it from scratch in Glasgow and grew it to 100,000 users over nine years. I led product vision, roadmap and user experience throughout, and managed the company through multiple investment rounds, a major strategic pivot, and eventually closure.",
+              "The most useful thing I learned there wasn't about technology. It was about what happens when you stop listening to users and start listening to investors instead. We did both well at different times, and the product was always better when users came first.",
+              "In 2016 we pivoted to CollectivWorks — a WiFi marketing platform for hospitality venues — which reached 65+ locations across Scotland and secured new investment for international expansion."
             ]}
           />
 
           <Role
             title="Co-Publisher"
-            company="Hi-Tech Scotland Magazine"
+            org="Hi-Tech Scotland"
             period="2005 — 2009"
-            bullets={[
-              "Co-published Scotland's leading business technology magazine, securing advertising from global players including Microsoft and Oracle",
-              "Built deep relationships across Scotland's tech ecosystem, investors, enterprise clients and government bodies",
-              "Network built through Hi-Tech Scotland directly led to KILTR's seed investment from Par Equity"
+            paras={[
+              "Scotland's leading business technology magazine. Running it gave me a deep network across the Scottish tech and investment community, and a working understanding of how businesses make decisions about technology — which turned out to be directly useful when we started KILTR."
             ]}
           />
-        </Section>
+        </div>
 
-        {/* EDUCATION */}
-        <Section title="Education" color="pink">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { degree: 'MSc Enterprise & Business Growth', school: 'Glasgow University Business School' },
-              { degree: 'BA (Hons) Marketing Communications', school: 'Glasgow' },
-              { degree: 'Physics & Chemistry', school: 'Glasgow Caledonian University' },
-            ].map(({ degree, school }) => (
-              <div key={degree} className="border border-white/10 rounded-lg p-4 bg-white/2">
-                <p className="text-white font-bold text-sm leading-snug mb-1">{degree}</p>
-                <p className="text-gray-500 text-xs font-mono">{school}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
+        <Divider />
 
-        {/* SKILLS */}
-        <Section title="Skills & Capabilities" color="green">
-          <div className="space-y-4">
+        {/* HOW I WORK */}
+        <div className="mb-10">
+          <SectionLabel>How I work</SectionLabel>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5">
             {[
               {
-                label: 'Product Leadership',
-                color: 'cyan',
-                chips: ['Vision & Strategy', 'Roadmap', 'User Discovery', 'OKRs', 'B2B SaaS', 'B2C', 'Experimentation', 'Monetisation']
+                label: "Talking to users",
+                text: "Not as a process step. As the actual job. I think the most important product work happens in conversations, not documents."
               },
               {
-                label: 'AI — Practical Daily Use',
-                color: 'pink',
-                chips: ['LLM Integration', 'Prompt Engineering', 'Automated Workflows', 'AI Audio', 'Psychoacoustics', 'Real-time AI']
+                label: "Making decisions with incomplete information",
+                text: "I've spent years doing this. I'm comfortable with ambiguity and I know the difference between needing more data and just being afraid to commit."
               },
               {
-                label: 'Commercial & Leadership',
-                color: 'green',
-                chips: ['Fundraising £6.25M', 'Investor Relations', 'Board Governance', 'Team Building', 'Partnerships', 'B2B Sales']
+                label: "Keeping things simple",
+                text: "I have a strong bias toward removing things. Features, words, steps. The fewer decisions a user has to make, the better the product."
               },
               {
-                label: 'Technical',
-                color: 'amber',
-                chips: ['React', 'APIs', 'Stripe', 'PWA', 'Web Audio API', 'Deno', 'Realtime Systems', 'No-code / AI-code']
+                label: "Working across the whole stack",
+                text: "I can sit in a technical conversation and understand what's being traded off. I can also write the copy, draw the flow and talk to the customer. Not because I have to — because it makes the work better."
               },
-            ].map(({ label, color, chips }) => (
+            ].map(({ label, text }) => (
               <div key={label}>
-                <p className="text-gray-500 text-xs font-mono mb-2">{label}</p>
-                <div className="flex flex-wrap gap-2">
-                  {chips.map(c => <Chip key={c} text={c} color={color} />)}
-                </div>
+                <p className="font-semibold text-gray-900 text-sm mb-1">{label}</p>
+                <p className="text-gray-500 text-sm leading-relaxed">{text}</p>
               </div>
             ))}
-          </div>
-        </Section>
-
-        {/* PRESS & RECOGNITION */}
-        <Section title="Press & Recognition" color="amber">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {[
-              { outlet: 'BBC Radio 4', note: 'Featured in "The Secret History of Social Networking" alongside Foursquare & Path' },
-              { outlet: 'BBC News Scotland', note: 'KILTR covered at launch and closure — national business story' },
-              { outlet: 'The Scotsman', note: 'Multiple features on KILTR and Brian Hughes across the platform\'s lifetime' },
-              { outlet: 'Wikipedia', note: 'KILTR has its own Wikipedia article — en.wikipedia.org/wiki/KILTR' },
-              { outlet: 'Scottish Business Insider', note: 'In-depth coverage of KILTR and CollectivWorks pivot' },
-              { outlet: 'The Herald', note: 'Interview and profile on founding story and Scottish tech ecosystem' },
-            ].map(({ outlet, note }) => (
-              <div key={outlet} className="flex items-start gap-3 border border-white/5 rounded-lg p-3 bg-white/2">
-                <span className="text-amber-400 font-black text-xs font-mono mt-0.5 whitespace-nowrap">{outlet}</span>
-                <span className="text-gray-400 text-xs leading-relaxed">{note}</span>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* FOOTER */}
-        <div className="border-t border-white/10 pt-6 mt-8 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <svg width="24" height="14" viewBox="0 0 40 24" fill="none" className="no-print">
-              <path d="M2 12 L6 12 L8 4 L10 20 L12 8 L14 16 L16 2 L18 22 L20 6 L22 18 L24 10 L26 14 L28 8 L30 16 L32 12 L36 12"
-                stroke="#06b6d4" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-            </svg>
-            <span className="text-gray-600 text-xs font-mono">Brian Hughes · brianhughes@[your email] · uf51.love</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-gray-600 text-xs font-mono">Available immediately · UK-based · Eligible to work in UK</span>
           </div>
         </div>
 
-        {/* NO-PRINT NOTE */}
-        <div className="no-print mt-6 text-center">
-          <p className="text-gray-600 text-xs">
-            Click <strong className="text-cyan-400">Download / Print PDF</strong> above → Save as PDF in print dialog
-          </p>
+        <Divider />
+
+        {/* EDUCATION */}
+        <div className="mb-10">
+          <SectionLabel>Education</SectionLabel>
+          <div className="space-y-2 text-sm text-gray-600">
+            <div className="flex justify-between">
+              <span>MSc Enterprise & Business Growth</span>
+              <span className="text-gray-400">Glasgow University Business School</span>
+            </div>
+            <div className="flex justify-between">
+              <span>BA Marketing & Communications</span>
+              <span className="text-gray-400">Glasgow</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Physics & Chemistry</span>
+              <span className="text-gray-400">Glasgow Caledonian University</span>
+            </div>
+          </div>
+        </div>
+
+        <Divider />
+
+        {/* FOOTER */}
+        <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-400">
+          <span>Glasgow, Scotland · Available immediately · Right to work in UK</span>
+          <span className="no-print">uf51.love · en.wikipedia.org/wiki/KILTR</span>
         </div>
 
       </div>
