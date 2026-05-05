@@ -187,11 +187,27 @@ export default function BuzzTripEngine() {
       lfo.connect(lfoGain);
       lfoGain.connect(masterGain.gain);
 
+      // Speaker compensation: high-pass filter to boost low freqs on cheap speakers
+      const hpFilter = ctx.createBiquadFilter();
+      hpFilter.type = 'highpass';
+      hpFilter.frequency.setValueAtTime(40, ctx.currentTime); // remove sub-rumble that gets lost
+      hpFilter.Q.setValueAtTime(0.7, ctx.currentTime);
+
+      // Presence boost: gentle peaking EQ around 150-300Hz where low tones shine on mobile
+      const peakFilter = ctx.createBiquadFilter();
+      peakFilter.type = 'peaking';
+      peakFilter.frequency.setValueAtTime(150, ctx.currentTime);
+      peakFilter.gain.setValueAtTime(3.5, ctx.currentTime); // +3.5dB boost
+      peakFilter.Q.setValueAtTime(1.2, ctx.currentTime);
+
       // Fade in gently over 2 seconds to avoid jarring start
       masterGain.gain.setValueAtTime(0, ctx.currentTime);
       masterGain.gain.linearRampToValueAtTime(proto.baseGain, ctx.currentTime + 2);
 
-      osc.connect(masterGain);
+      // Route: osc -> hp filter -> peak filter -> masterGain -> destination
+      osc.connect(hpFilter);
+      hpFilter.connect(peakFilter);
+      peakFilter.connect(masterGain);
       masterGain.connect(ctx.destination);
 
       lfo.start();
