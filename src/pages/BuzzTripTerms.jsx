@@ -1,70 +1,72 @@
-import React, { Suspense } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 
 const BuzzTripLoader = () => (
   <div style={{ background: '#000', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ width: '40px', height: '40px', border: '2px solid #06b6d4', borderTop: '2px solid transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    <div style={{ animation: 'pulse 1.5s ease-in-out infinite', fontSize: '24px', fontWeight: 'bold', color: '#ec4899' }}>
+      ♾️ BuzzTrip loading...
+    </div>
+    <style>{`
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    `}</style>
   </div>
 );
 
-function BuzzTripTermsContent() {
+export default function BuzzTripTerms() {
+  useEffect(() => {
+    document.title = 'Terms of Use — BuzzTrip';
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black text-white px-6 py-12 max-w-xl mx-auto">
-      <Link to="/BuzzTrip" className="text-green-500 text-sm font-mono hover:text-green-400 block mb-8">← Back to BuzzTrip</Link>
-      <h1 className="text-3xl font-black mb-2">Terms of Use</h1>
-      <p className="text-gray-500 text-sm mb-10 font-mono">BuzzTrip · Last updated May 2026</p>
-
-      <div className="space-y-8 text-gray-400 text-sm leading-relaxed">
-        <section>
-          <h2 className="text-white font-black text-lg mb-3">1. What BuzzTrip is</h2>
-          <p>BuzzTrip is a free breathing pacer and audio tool designed to support relaxation, stress relief, and sleep. It uses scientifically supported breathing ratios and audio frequencies to encourage parasympathetic nervous system activation.</p>
-        </section>
-
-        <section>
-          <h2 className="text-white font-black text-lg mb-3">2. What BuzzTrip is not</h2>
-          <p>BuzzTrip is <strong className="text-white">not a medical device</strong>. It does not diagnose, treat, cure or prevent any medical condition. It is not a substitute for professional medical advice, therapy, or emergency services.</p>
-        </section>
-
-        <section>
-          <h2 className="text-white font-black text-lg mb-3">3. Your responsibility</h2>
-          <p>By using BuzzTrip you confirm you are using it voluntarily and at your own discretion. If you have a diagnosed condition (cardiac, respiratory, psychiatric or otherwise), please consult your doctor before use.</p>
-        </section>
-
-        <section>
-          <h2 className="text-white font-black text-lg mb-3">4. In a crisis</h2>
-          <p>If you are in immediate danger or crisis, please contact emergency services (999 in the UK, 911 in the US) or a crisis line such as <a href="https://www.samaritans.org" className="text-green-500 hover:text-green-400" target="_blank" rel="noopener noreferrer">Samaritans (116 123)</a>.</p>
-        </section>
-
-        <section>
-          <h2 className="text-white font-black text-lg mb-3">5. No data collection</h2>
-          <p>BuzzTrip stores no personal data. No account required. No tracking. Audio runs entirely in your browser.</p>
-        </section>
-
-        <section>
-          <h2 className="text-white font-black text-lg mb-3">6. Free forever</h2>
-          <p>BuzzTrip is a free public tool built by Universal Frequency 51 (UF51), a Community Interest Company. It will remain free forever.</p>
-        </section>
-
-        <section>
-          <h2 className="text-white font-black text-lg mb-3">7. Contact</h2>
-          <p>Questions? <a href="mailto:family@uf51.love" className="text-green-500 hover:text-green-400">family@uf51.love</a></p>
-        </section>
+    <div className="min-h-screen bg-black text-white flex flex-col" style={{ background: 'radial-gradient(ellipse at top, #001a0a 0%, #000 60%)' }}>
+      <div className="flex items-center px-5 pt-5 pb-2">
+        <Link to="/BuzzTrip" className="text-green-400 text-sm hover:text-green-300 transition-colors">← Back to BuzzTrip</Link>
       </div>
 
-      <div className="mt-12 pt-6 border-t border-white/5 flex gap-6 justify-center">
-        <Link to="/BuzzTripPrivacy" className="text-gray-600 text-xs hover:text-gray-400">Privacy</Link>
-        <Link to="/BuzzTripAbout" className="text-gray-600 text-xs hover:text-gray-400">About</Link>
-        <Link to="/BuzzTrip" className="text-gray-600 text-xs hover:text-gray-400">App</Link>
+      <div className="flex-1 px-6 py-8 max-w-2xl mx-auto w-full space-y-6">
+        <h1 className="text-4xl font-black text-white">Terms of Use</h1>
+        <p className="text-green-400 font-mono text-sm tracking-widest">VAGAL RESET ENGINE</p>
+
+        <div className="space-y-4 text-gray-400 text-sm leading-relaxed">
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">Service Description</h2>
+            <p>BuzzTrip is a free, web-based tool designed to support nervous system reset through guided breathing and audio frequencies. It is not a medical device and does not diagnose, treat, cure, or prevent any disease.</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">Medical Disclaimer</h2>
+            <p>BuzzTrip is provided for educational and wellness purposes only. If you have a medical condition, are pregnant, or take medications, consult a healthcare provider before use. In a crisis, contact emergency services or a crisis helpline immediately.</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">User Responsibility</h2>
+            <p>You use BuzzTrip at your own risk. Users must be in a safe environment and able to stop at any time. Do not use while driving or operating machinery. Stop immediately if you experience discomfort.</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">Data & Privacy</h2>
+            <p>BuzzTrip does not store, track, or collect personal data. No user accounts are required. Your experience is private and stays on your device. See our Privacy Policy for details.</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">Limitation of Liability</h2>
+            <p>BuzzTrip and its creators are not liable for any direct, indirect, or consequential damages arising from use of this tool. Use it responsibly and at your own discretion.</p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">Free Forever</h2>
+            <p>BuzzTrip is free and will remain free. No paywalls, no ads, no data selling. Built on peer-reviewed science and open-source principles.</p>
+          </section>
+
+          <div className="pt-4 mt-6 border-t border-white/10">
+            <p className="text-xs text-gray-600">Not a medical device · Free forever · No data stored</p>
+            <p className="text-xs text-gray-600 mt-2">Questions? Email <a href="mailto:family@uf51.love" className="text-green-400 hover:text-green-300">family@uf51.love</a></p>
+          </div>
+        </div>
       </div>
     </div>
-  );
-}
-
-export default function BuzzTripTerms() {
-  return (
-    <Suspense fallback={<BuzzTripLoader />}>
-      <BuzzTripTermsContent />
-    </Suspense>
   );
 }
