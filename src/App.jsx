@@ -165,10 +165,10 @@ const AuthenticatedApp = () => {
       <Route path="/TracktPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper></Suspense>} />
       <Route path="/TracktDashboard" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktDashboard"><TracktDashboardPage /></LayoutWrapper></Suspense>} />
       <Route path="/BuzzStop" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopPage /></LayoutWrapper></Suspense>} />
-      <Route path="/BuzzTrip" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BuzzTripPage /></Suspense>} />
-      <Route path="/BuzzTripAbout" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BuzzTripAboutPage /></Suspense>} />
-      <Route path="/BuzzTripTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BuzzTripTermsPage /></Suspense>} />
-      <Route path="/BuzzTripPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BuzzTripPrivacyPage /></Suspense>} />
+      <Route path="/BuzzTrip" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><BuzzTripPage /></Suspense>} />
+      <Route path="/BuzzTripAbout" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><BuzzTripAboutPage /></Suspense>} />
+      <Route path="/BuzzTripTerms" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><BuzzTripTermsPage /></Suspense>} />
+      <Route path="/BuzzTripPrivacy" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><BuzzTripPrivacyPage /></Suspense>} />
       <Route path="/BuzzStopAbout" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopAboutPage /></LayoutWrapper></Suspense>} />
       <Route path="/BuzzStopTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopTermsPage /></LayoutWrapper></Suspense>} />
       <Route path="/BuzzStopPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopPrivacyPage /></LayoutWrapper></Suspense>} />
