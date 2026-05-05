@@ -447,6 +447,7 @@ export default function Family51Page() {
         {showHistory && !activeTool && (
           <motion.div key="history" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
             <SortedCaseHistory
+              isPremium={!isLocked}
               onContinue={(caseItem) => {
                 const parsed = (() => { try { return JSON.parse(caseItem.ai_result); } catch { return null; } })();
                 if (caseItem.tool === 'letter') {

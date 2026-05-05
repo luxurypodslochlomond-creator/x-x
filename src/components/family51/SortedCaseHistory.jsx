@@ -314,9 +314,10 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
   );
 }
 
-export default function SortedCaseHistory({ onContinue }) {
+export default function SortedCaseHistory({ onContinue, isPremium = false }) {
   const [cases, setCases] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [confirmWipe, setConfirmWipe] = useState(false);
 
   useEffect(() => {
     try {
@@ -337,7 +338,36 @@ export default function SortedCaseHistory({ onContinue }) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch {}
   };
 
+  const handleWipeAll = () => {
+    if (!confirmWipe) { setConfirmWipe(true); return; }
+    setCases([]);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify([])); } catch {}
+    setConfirmWipe(false);
+  };
+
   const filtered = filter === 'all' ? cases : cases.filter(c => c.tool === filter);
+
+  // Free tier: show paywall
+  if (!isPremium && cases.length === 0) {
+    return (
+      <div style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px', textAlign: 'center' }}>
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 12 }}>SAVE YOUR CASES</div>
+          <h2 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 900, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.02em' }}>Upgrade to save forever</h2>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6 }}>
+            Right now, your cases disappear when you close the browser. Premium saves them forever — decrypt anytime, delete whenever.
+          </p>
+        </div>
+        <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', marginBottom: 20 }}>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.5 }}>
+            <strong style={{ color: '#f97316' }}>$9.99/month</strong> — unlimited cases, your vault, delete whenever. Cancel anytime.
+          </p>
+        </div>
+        <button onClick={() => window.scrollTo(0, 0)} style={{ width: '100%', padding: '14px 0', borderRadius: 12, background: '#f97316', border: '1px solid #f97316', color: '#000', fontSize: 13, fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer', marginBottom: 12 }}>UPGRADE NOW</button>
+        <button onClick={() => window.history.back()} style={{ width: '100%', padding: '12px 0', borderRadius: 12, background: 'transparent', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>BACK</button>
+      </div>
+    );
+  }
 
   return (
     <div style={{ maxWidth: 520, margin: '0 auto', padding: '28px 20px 60px' }}>
@@ -347,15 +377,26 @@ export default function SortedCaseHistory({ onContinue }) {
         <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>ON THIS DEVICE</div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
           <div style={{ fontSize: 22, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>MY CASES</div>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{cases.length} / {FREE_CASE_LIMIT} saved</div>
+          {!isPremium && <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{cases.length} / {FREE_CASE_LIMIT} saved</div>}
+          {isPremium && <div style={{ fontSize: 10, fontWeight: 800, color: '#22c55e', border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.1)', borderRadius: 4, padding: '2px 8px' }}>PREMIUM</div>}
         </div>
         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: '6px 0 0', lineHeight: 1.5 }}>
-          Saved locally on this device. Nothing leaves your phone.
+          {isPremium ? 'Saved to your vault. Yours to keep forever.' : 'Saved locally on this device. Nothing leaves your phone.'}
         </p>
-        {cases.length >= FREE_CASE_LIMIT && (
+        {!isPremium && cases.length >= FREE_CASE_LIMIT && (
           <div style={{ marginTop: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>
             <span style={{ color: '#f97316', fontWeight: 800 }}>3 cases saved</span> — newest replaces oldest. Subscribe for unlimited storage.
           </div>
+        )}
+        {isPremium && cases.length > 0 && (
+          <motion.button
+            onClick={handleWipeAll}
+            whileTap={{ scale: 0.95 }}
+            style={{ marginTop: 12, padding: '8px 14px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer', border: confirmWipe ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(255,255,255,0.1)', background: confirmWipe ? 'rgba(239,68,68,0.12)' : 'transparent', color: confirmWipe ? '#ef4444' : 'rgba(255,255,255,0.25)', transition: 'all 0.15s', display: 'inline-flex', alignItems: 'center', gap: 6 }}
+          >
+            <Trash2 size={11} />
+            {confirmWipe ? 'CONFIRM DELETE FOREVER' : 'WIPE ALL CASES'}
+          </motion.button>
         )}
       </div>
 
