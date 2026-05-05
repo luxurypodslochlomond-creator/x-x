@@ -141,6 +141,7 @@ export default function BuzzTripEngine() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [circleScale, setCircleScale] = useState(1);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dndEnabled, setDndEnabled] = useState(false);
 
   const audioCtxRef = useRef(null);
   const oscillatorRef = useRef(null);
@@ -148,6 +149,7 @@ export default function BuzzTripEngine() {
   const gainRef = useRef(null);
   const timerRef = useRef(null);
   const breathTimerRef = useRef(null);
+  const wakeLockRef = useRef(null);
 
   const protocol = selected ? PROTOCOLS.find(p => p.id === selected) : null;
 
@@ -250,24 +252,39 @@ export default function BuzzTripEngine() {
     startAudio(proto);
     runBreathCycle(proto);
 
+    // Screen wake lock if DND enabled
+    if (dndEnabled && 'wakeLock' in navigator) {
+      navigator.wakeLock.request('screen').then(lock => {
+        wakeLockRef.current = lock;
+      }).catch(e => console.log('Wake lock failed:', e));
+    }
+
     timerRef.current = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
           clearInterval(timerRef.current);
           clearTimeout(breathTimerRef.current);
           stopAudio();
+          if (wakeLockRef.current) {
+            wakeLockRef.current.release();
+            wakeLockRef.current = null;
+          }
           setPhase('done');
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
-  }, [startAudio, runBreathCycle, stopAudio]);
+  }, [startAudio, runBreathCycle, stopAudio, dndEnabled]);
 
   const stopSession = useCallback(() => {
     clearInterval(timerRef.current);
     clearTimeout(breathTimerRef.current);
     stopAudio();
+    if (wakeLockRef.current) {
+      wakeLockRef.current.release();
+      wakeLockRef.current = null;
+    }
     setPhase('idle');
     setSelected(null);
     setCircleScale(1);
@@ -375,7 +392,12 @@ export default function BuzzTripEngine() {
 
       {/* Top nav bar */}
       <div className="flex items-center justify-between px-5 pt-5 pb-2">
-        <div className="w-8" />
+        <button onClick={() => setDndEnabled(!dndEnabled)} title="Do Not Disturb" className={`w-8 h-8 flex items-center justify-center rounded transition-all ${dndEnabled ? 'bg-green-500/20 text-green-400' : 'text-gray-600 hover:text-gray-400'}`}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M7 12H17" stroke="black" strokeWidth="2"/>
+          </svg>
+        </button>
         <p className="text-green-500 font-mono text-xs tracking-widest">BUZZTRIP</p>
         <button onClick={() => setMenuOpen(!menuOpen)} className="w-8 h-8 flex flex-col justify-center items-center gap-1.5">
           <span className="block w-5 h-0.5 bg-green-500 rounded" />
