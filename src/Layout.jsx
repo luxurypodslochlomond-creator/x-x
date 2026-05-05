@@ -10,6 +10,7 @@ import AutoHealingShield from '@/components/shared/AutoHealingShield';
 import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import GlobalSearch from '@/components/shared/GlobalSearch';
 import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
+import BuzzTripIcon from '@/components/buzztrip/BuzzTripIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PlatformIcon from '@/components/shared/PlatformIcon';
 import CTRL51Icon from '@/components/ctrl51/CTRL51Icon';
@@ -70,7 +71,8 @@ const PUBLIC_PAGES = [
   'Family51', 'PetSounds51', 'PetSounds51Landing', 'PetSounds51Whitepaper', 'PetSounds51Press',
   'PetSounds51InvestorPress', 'PetSounds51PartnerBrief', 'PetSounds51MarketingAssets',
   'PetSounds51Terms', 'PetSounds51Privacy', 'CB51Terms', 'CB51Privacy', 'BuzzStop',
-  'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy'
+  'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy',
+  'BuzzTrip', 'BuzzTripAbout'
 ];
 
 // OFFLINE-OK PAGES
@@ -423,6 +425,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: COOLASFUCKPaw, highlight: true, description: "Sound therapy for animals · subscription" },
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
       { title: "BuzzStop", url: createPageUrl("BuzzStop"), icon: Zap, highlight: true, description: "Cancel tinnitus · AI radar engine" },
+      { title: "BuzzTrip", url: createPageUrl("BuzzTrip"), icon: BuzzTripIcon, highlight: true, description: "Vagal reset · anxiety · withdrawal · sleep" },
       { title: "TRACKT", url: createPageUrl("Trackt"), icon: Signal, highlight: true, description: "AI RFID asset management" },
       { title: "Prof51", url: createPageUrl("Prof51"), icon: GraduationCap, highlight: true, description: "AI co-manager for students" },
     ];

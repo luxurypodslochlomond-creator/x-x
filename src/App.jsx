@@ -44,6 +44,8 @@ const TracktTermsPage = React.lazy(() => import('./pages/TracktTerms'));
 const TracktPrivacyPage = React.lazy(() => import('./pages/TracktPrivacy'));
 const TracktDashboardPage = React.lazy(() => import('./pages/TracktDashboard'));
 const BuzzStopPage = React.lazy(() => import('./pages/BuzzStop'));
+const BuzzTripPage = React.lazy(() => import('./pages/BuzzTrip'));
+const BuzzTripAboutPage = React.lazy(() => import('./pages/BuzzTripAbout'));
 const BuzzStopAboutPage = React.lazy(() => import('./pages/BuzzStopAbout'));
 const BuzzStopTermsPage = React.lazy(() => import('./pages/BuzzStopTerms'));
 const BuzzStopPrivacyPage = React.lazy(() => import('./pages/BuzzStopPrivacy'));
@@ -161,6 +163,8 @@ const AuthenticatedApp = () => {
       <Route path="/TracktPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktPrivacy"><TracktPrivacyPage /></LayoutWrapper></Suspense>} />
       <Route path="/TracktDashboard" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="TracktDashboard"><TracktDashboardPage /></LayoutWrapper></Suspense>} />
       <Route path="/BuzzStop" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopPage /></LayoutWrapper></Suspense>} />
+      <Route path="/BuzzTrip" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BuzzTripPage /></Suspense>} />
+      <Route path="/BuzzTripAbout" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BuzzTripAboutPage /></Suspense>} />
       <Route path="/BuzzStopAbout" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopAboutPage /></LayoutWrapper></Suspense>} />
       <Route path="/BuzzStopTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopTermsPage /></LayoutWrapper></Suspense>} />
       <Route path="/BuzzStopPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="BuzzStop"><BuzzStopPrivacyPage /></LayoutWrapper></Suspense>} />
