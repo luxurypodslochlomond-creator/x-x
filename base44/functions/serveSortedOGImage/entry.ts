@@ -3,37 +3,56 @@ Deno.serve(async (req) => {
     // SVG-based OG image for SORTED sharing
     const svg = `
       <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-        <!-- Background gradient -->
         <defs>
           <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#0a0f1a;stop-opacity:1" />
+            <stop offset="0%" style="stop-color:#0a0514;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#1a0f2a;stop-opacity:1" />
           </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
+        
         <rect width="1200" height="630" fill="url(#bgGrad)"/>
         
-        <!-- Accent line -->
-        <line x1="0" y1="100" x2="1200" y2="100" stroke="#06b6d4" stroke-width="3"/>
+        <!-- Top accent bar -->
+        <rect x="0" y="0" width="1200" height="6" fill="#06b6d4"/>
         
-        <!-- Main text -->
-        <text x="60" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="900" fill="#ffffff" letter-spacing="-2">
+        <!-- Left accent panel -->
+        <rect x="0" y="0" width="8" height="630" fill="#06b6d4"/>
+        
+        <!-- Main headline -->
+        <text x="100" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="88" font-weight="900" fill="#ffffff" letter-spacing="-3">
           SORTED
         </text>
         
-        <!-- Tagline -->
-        <text x="60" y="350" font-family="system-ui, -apple-system, sans-serif" font-size="32" fill="#06b6d4" font-weight="600">
+        <!-- Subtitle -->
+        <text x="100" y="200" font-family="system-ui, -apple-system, sans-serif" font-size="36" fill="#06b6d4" font-weight="700">
           Decode scary letters in seconds
         </text>
         
-        <!-- Description -->
-        <text x="60" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#cbd5e1" line-height="1.6">
-          Plain English advice. Any language. Nothing stored. Free for everyone.
+        <!-- Description lines -->
+        <text x="100" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#cbd5e1">
+          • AI decodes legal letters • Plain English advice
+        </text>
+        <text x="100" y="330" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#cbd5e1">
+          • Any language • Nothing stored • Free for everyone
         </text>
         
-        <!-- Accent dots -->
-        <circle cx="1100" cy="500" r="8" fill="#06b6d4" opacity="0.6"/>
-        <circle cx="1050" cy="550" r="6" fill="#06b6d4" opacity="0.4"/>
-        <circle cx="120" cy="580" r="5" fill="#06b6d4" opacity="0.3"/>
+        <!-- Bottom CTA text -->
+        <text x="100" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#22c55e" font-weight="700">
+          sorted.so
+        </text>
+        <text x="100" y="570" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#94a3b8">
+          Got a scary letter? We'll decode it for you ♾️❤️
+        </text>
+        
+        <!-- Corner accent -->
+        <circle cx="1150" cy="80" r="40" fill="#06b6d4" opacity="0.1" filter="url(#glow)"/>
       </svg>
     `;
 
