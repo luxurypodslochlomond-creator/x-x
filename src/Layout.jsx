@@ -306,7 +306,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     } else if (isCB51Page) {
       ogImageUrl = '/api/functions/serveCB51OGImage';
     } else if (isSortedPage) {
-      ogImageUrl = '/api/functions/serveOGImage?brand=sorted';
+      ogImageUrl = '/api/functions/serveSortedOGImage';
     }
 
     const ogTags = {
