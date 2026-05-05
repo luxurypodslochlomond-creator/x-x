@@ -45,15 +45,20 @@ export default function BrianHughesCV() {
       `}</style>
 
       {/* TOP BAR - screen only */}
-      <div className="no-print bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
+      <div className="no-print bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between sticky top-0 z-10 gap-4">
         <span className="text-sm text-gray-400 font-medium">Brian Hughes · CV</span>
-        <button
-          onClick={() => window.print()}
-          className="flex items-center gap-2 bg-gray-900 hover:bg-gray-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all"
-        >
-          <Download className="w-3.5 h-3.5" />
-          Save as PDF
-        </button>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-gray-400 hidden sm:block">
+            📱 iPhone: tap Print → share ↑ → Save to Files
+          </span>
+          <button
+            onClick={() => window.print()}
+            className="flex items-center gap-2 bg-gray-900 hover:bg-gray-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all whitespace-nowrap"
+          >
+            <Download className="w-3.5 h-3.5" />
+            Print / Save PDF
+          </button>
+        </div>
       </div>
 
       {/* CV */}
@@ -199,6 +204,13 @@ export default function BrianHughesCV() {
         <Divider />
 
         {/* FOOTER */}
+        {/* iOS SAVE TIP */}
+        <div className="no-print mb-6 p-3 bg-gray-50 rounded-lg border border-gray-100 text-center">
+          <p className="text-xs text-gray-500">
+            📱 <strong>iPhone:</strong> tap "Print / Save PDF" → in the print screen tap the <strong>share ↑ icon</strong> (top right) → <strong>"Save to Files"</strong> — saves as PDF to your device
+          </p>
+        </div>
+
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-400">
           <span>Glasgow, Scotland · Available immediately · Right to work in UK</span>
           <span className="no-print">uf51.love · en.wikipedia.org/wiki/KILTR</span>
