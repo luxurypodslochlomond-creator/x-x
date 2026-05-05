@@ -67,7 +67,7 @@ export default function BrianHughesCV() {
         {/* NAME & ROLE */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-1">Brian Hughes</h1>
-          <p className="text-gray-500 text-base mb-5">Product Leader · Glasgow, Scotland</p>
+          <p className="text-gray-500 text-base mb-5">Founder · Glasgow, Scotland</p>
 
           <div className="flex flex-wrap gap-5 text-sm text-gray-500">
             <a href="https://uf51.love" target="_blank" rel="noopener noreferrer"
@@ -112,11 +112,11 @@ export default function BrianHughesCV() {
           <Role
             title="Founder"
             org="UF51"
-            period="2022 — present"
+            period="Nov 2024 — present"
             paras={[
-              "Building an ecosystem of AI-powered tools across health, music, legal and environmental sectors. Each product is live, independently usable and built around a specific underserved need — from helping people decode scary legal letters in plain English, to sound therapy for anxious pets, to procurement spend intelligence for councils.",
-              "I own everything: product strategy, UX, build, launch, customer conversations, pricing, support. I use AI tooling heavily but I think about every product the same way I always have — start with the user's actual problem, remove the friction, make it work.",
-              "The products I'm most proud of aren't the technically clever ones. They're the ones where someone messages to say it helped."
+              "After KILTR I spent a few years trying to work out what was actually worth building. That led to UF51 — a community interest company focused on tools that solve real problems for people who usually can't afford the professional version: legal letter decoders, sound therapy for anxious pets, procurement intelligence for councils, artist management for independent musicians.",
+              "Everything is live. Most of it I built alone with AI tooling. It's taught me a lot about what it takes to ship something real — and also confirmed that I work better as part of a team than on my own.",
+              "The products I'm most proud of aren't the technically ambitious ones. They're the ones where someone messages to say it helped."
             ]}
           />
         </div>
