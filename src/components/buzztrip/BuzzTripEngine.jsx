@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 // SVG icons — no emojis
 const IconLightning = ({ color }) => (
@@ -386,10 +387,10 @@ export default function BuzzTripEngine() {
       {/* Dropdown menu */}
       {menuOpen && (
         <div className="absolute top-14 right-4 z-50 bg-[#0a0f0a] border border-green-900/50 rounded-xl shadow-2xl overflow-hidden min-w-[160px]">
-          <a href="/BuzzTripAbout" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">About</a>
-          <a href="/BuzzTripTerms" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Terms</a>
-          <a href="/BuzzTripPrivacy" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Privacy</a>
-          <a href="mailto:family@uf51.love" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Contact</a>
+          <Link to="/BuzzTripAbout" onClick={() => setMenuOpen(false)} className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">About</Link>
+          <Link to="/BuzzTripTerms" onClick={() => setMenuOpen(false)} className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Terms</Link>
+          <Link to="/BuzzTripPrivacy" onClick={() => setMenuOpen(false)} className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Privacy</Link>
+          <a href="mailto:family@uf51.love" onClick={() => setMenuOpen(false)} className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Contact</a>
         </div>
       )}
 
@@ -453,9 +454,9 @@ export default function BuzzTripEngine() {
           </p>
         </div>
 
-        <a href="/BuzzTripAbout" className="text-center text-gray-700 text-xs hover:text-gray-500 transition-colors mt-2 block">
+        <Link to="/BuzzTripAbout" className="text-center text-gray-700 text-xs hover:text-gray-500 transition-colors mt-2 block">
           How does this work? →
-        </a>
+        </Link>
 
         <p className="text-gray-800 text-xs text-center mt-6">
           Not a medical device · Free forever · No data stored
