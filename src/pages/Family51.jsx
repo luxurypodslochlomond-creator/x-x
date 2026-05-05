@@ -307,16 +307,35 @@ export default function Family51Page() {
               </motion.div>
             )}
 
+            {/* PRIVACY TRUST BANNER — Kill the fear first */}
+             <motion.div
+               initial={{ opacity: 0, y: -10 }}
+               animate={{ opacity: 1, y: 0 }}
+               style={{ marginBottom: 28, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12, padding: '14px 16px', textAlign: 'center' }}
+             >
+               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 8 }}>
+                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                   <rect x="2.5" y="7" width="11" height="7" rx="1.2" stroke="#22c55e" strokeWidth="1.2" fill="rgba(34,197,94,0.1)" />
+                   <path d="M5.5 7V4.5a2.5 2.5 0 015 0v2.5" stroke="#22c55e" strokeWidth="1.2" strokeLinecap="round" />
+                   <circle cx="8" cy="10.5" r="1" fill="#22c55e" />
+                 </svg>
+                 <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.08em' }}>YOUR LETTER NEVER LEAVES YOUR BROWSER</span>
+               </div>
+               <p style={{ fontSize: 11, color: 'rgba(34,197,94,0.8)', margin: 0, lineHeight: 1.4 }}>
+                 Processed by AI. Immediately discarded. Never stored, sold, or trained on. Just clarity.
+               </p>
+             </motion.div>
+
             {/* HEADLINE — SHORT AND SHARP */}
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                {/* FREE BADGE — lead with this */}
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
-                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0, animation: 'pulse 2s infinite' }} />
-                  <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>
-                    {remaining === Infinity || remaining >= 5 ? '5 FREE USES — NO CARD NEEDED' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
-                  </span>
-                </div>
+             <div style={{ textAlign: 'center', marginBottom: 32 }}>
+               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+                 {/* FREE BADGE — lead with this */}
+                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
+                   <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0, animation: 'pulse 2s infinite' }} />
+                   <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>
+                     {remaining === Infinity || remaining >= 5 ? '5 FREE USES — NO CARD NEEDED' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
+                   </span>
+                 </div>
                 <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
                     <span style={{ color: '#fff' }}>Got a scary</span>{' '}
                     <span style={{ color: '#f97316' }}>letter?</span><br />
