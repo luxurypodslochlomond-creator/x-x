@@ -32,6 +32,31 @@ const Role = ({ title, org, period, location, paras }) => (
 export default function BrianHughesCV() {
   useEffect(() => {
     document.title = 'Brian Hughes CV';
+    
+    // Force the share/print title
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = 'Brian Hughes CV';
+    
+    // Override OG tags for sharing
+    const ogTags = {
+      'og:title': 'Brian Hughes CV',
+      'og:description': 'CV · Product & Leadership'
+    };
+    
+    Object.entries(ogTags).forEach(([property, content]) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    });
   }, []);
 
   return (
