@@ -392,11 +392,8 @@ export default function BuzzTripEngine() {
 
       {/* Top nav bar */}
       <div className="flex items-center justify-between px-5 pt-5 pb-2">
-        <button onClick={() => setDndEnabled(!dndEnabled)} title="Do Not Disturb" className={`w-8 h-8 flex items-center justify-center rounded transition-all ${dndEnabled ? 'bg-green-500/20 text-green-400' : 'text-gray-600 hover:text-gray-400'}`}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M7 12H17" stroke="black" strokeWidth="2"/>
-          </svg>
+        <button onClick={() => setDndEnabled(!dndEnabled)} title={dndEnabled ? 'DND ON' : 'DND OFF'} className={`w-10 h-10 rounded-lg transition-all flex items-center justify-center font-black text-xs ${dndEnabled ? 'bg-green-500 text-black' : 'bg-gray-800 text-gray-400 hover:text-gray-300'}`}>
+          DND
         </button>
         <p className="text-green-500 font-mono text-xs tracking-widest">BUZZTRIP</p>
         <button onClick={() => setMenuOpen(!menuOpen)} className="w-8 h-8 flex flex-col justify-center items-center gap-1.5">
