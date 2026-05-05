@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function BuzzTripTerms() {
+const BuzzTripLoader = () => (
+  <div style={{ background: '#000', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+    <div style={{ fontSize: '48px', animation: 'infinity-pulse 1.5s ease-in-out infinite' }}>♾️❤️</div>
+    <div style={{ fontSize: '14px', color: '#10b981', fontFamily: 'monospace', letterSpacing: '2px' }}>LOADING</div>
+    <style>{`
+      @keyframes infinity-pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.15); }
+      }
+    `}</style>
+  </div>
+);
+
+function BuzzTripTermsContent() {
   return (
     <div className="min-h-screen bg-black text-white px-6 py-12 max-w-xl mx-auto">
       <Link to="/BuzzTrip" className="text-green-500 text-sm font-mono hover:text-green-400 block mb-8">← Back to BuzzTrip</Link>
@@ -51,5 +64,13 @@ export default function BuzzTripTerms() {
         <Link to="/BuzzTrip" className="text-gray-600 text-xs hover:text-gray-400">App</Link>
       </div>
     </div>
+  );
+}
+
+export default function BuzzTripTerms() {
+  return (
+    <Suspense fallback={<BuzzTripLoader />}>
+      <BuzzTripTermsContent />
+    </Suspense>
   );
 }
