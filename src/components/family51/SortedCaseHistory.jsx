@@ -443,11 +443,11 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
           </p>
         </div>
       ) : (
-        <AnimatePresence mode="popLayout">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <AnimatePresence mode="popLayout">
             {filtered.map(c => <CaseCard key={c.id} caseItem={c} onDelete={handleDelete} onContinue={onContinue} onEdit={handleEdit} />)}
-          </div>
-        </AnimatePresence>
+          </AnimatePresence>
+        </div>
       )}
     </div>
   );
