@@ -416,6 +416,22 @@ export default function BuzzTripEngine() {
         <a href="/BuzzTripAbout" className="text-center text-gray-700 text-xs hover:text-gray-500 transition-colors mt-2 block">
           How does this work? →
         </a>
+
+        {/* Simple footer nav */}
+        <div className="mt-8 pt-6 border-t border-white/5">
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-4">
+            <a href="/BuzzTripAbout" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">About</a>
+            <a href="/BuzzTripTerms" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">Terms</a>
+            <a href="/BuzzTripPrivacy" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">Privacy</a>
+            <a href="mailto:family@uf51.love" className="text-gray-600 text-xs hover:text-gray-400 transition-colors">Contact</a>
+          </div>
+          <p className="text-gray-700 text-xs text-center leading-relaxed px-4">
+            BuzzTrip is a breathing and audio tool, not a medical device. It does not diagnose, treat or cure any condition. If you are in crisis, please contact a medical professional.
+          </p>
+          <p className="text-gray-800 text-xs text-center mt-3">
+            A <span className="text-green-900">UF51</span> project · Free forever · No data stored
+          </p>
+        </div>
       </div>
     </div>
   );
