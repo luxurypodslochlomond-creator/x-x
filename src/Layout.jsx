@@ -181,7 +181,6 @@ const LayoutInner = ({ children, currentPageName }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isOffline, setIsOffline] = useState(!navigator.onLine);
     const [canGoBack, setCanGoBack] = useState(false);
-    const [pageTransitioning, setPageTransitioning] = useState(false);
     const [archiveSearch, setArchiveSearch] = useState('');
     const [searchOpen, setSearchOpen] = useState(false);
     const location = useLocation();
@@ -232,24 +231,9 @@ const LayoutInner = ({ children, currentPageName }) => {
   }, [location.pathname, isPublicPage, isOffline, isOfflineOkPage]);
 
   useEffect(() => { 
-      // Trigger View Transitions API for smooth page swaps
-      const doTransition = async () => {
-        if (document.startViewTransition) {
-          await document.startViewTransition(() => {
-            setPageTransitioning(true);
-            setMobileMenuOpen(false); 
-            window.scrollTo({ top: 0, behavior: 'instant' });
-            setCanGoBack(window.history.length > 1);
-          }).finished;
-        } else {
-          setPageTransitioning(true);
-          setMobileMenuOpen(false); 
-          window.scrollTo({ top: 0, behavior: 'instant' });
-          setCanGoBack(window.history.length > 1);
-        }
-      };
-
-      doTransition();
+      setMobileMenuOpen(false); 
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      setCanGoBack(window.history.length > 1);
 
       const isCB51 = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
       const isTRACKT = currentPageName.startsWith('Trackt');
@@ -265,8 +249,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         rootEl.removeAttribute('data-trackt');
       }
 
-      const timer = setTimeout(() => setPageTransitioning(false), 100);
-      return () => clearTimeout(timer);
+
       }, [location.pathname, currentPageName]);
 
   useEffect(() => {
@@ -613,10 +596,12 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   const { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav } = navs;
 
-  const isActivePage = (url) => {
-    const navPath = new URL(url, window.location.origin).pathname;
-    return location.pathname === navPath;
-  };
+  const isActivePage = React.useCallback((url) => {
+    try {
+      const navPath = new URL(url, window.location.origin).pathname;
+      return location.pathname === navPath;
+    } catch { return false; }
+  }, [location.pathname]);
 
   // Handle loading/error states
   if (authError && !isLoading && !isPublicPage && !isOfflineOkPage) {
@@ -747,7 +732,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* MOBILE MENU */}
                   {isMobileMenuOpen && (
-                    <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#0a0f1a]/95 backdrop-blur-xl z-[50] overflow-y-auto pb-6`}>
+                    <div className={`lg:hidden fixed inset-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#0a0f1a]/98 z-[50] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
                             <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
@@ -927,16 +912,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             )}
 
         <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && !isTracktPage && !isSortedSubPage && !isCTRL51Page ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && !isTracktPage && !isSortedSubPage && !isCTRL51Page ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-0') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.1 }}
-            >
-              {children}
-              </motion.div>
-              </AnimatePresence>
+          {children}
               {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && (
               <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
