@@ -390,7 +390,7 @@ export default function BuzzTripEngine() {
           <Link to="/BuzzTripAbout" onClick={() => setMenuOpen(false)} className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">About</Link>
           <Link to="/BuzzTripTerms" onClick={() => setMenuOpen(false)} className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Terms</Link>
           <Link to="/BuzzTripPrivacy" onClick={() => setMenuOpen(false)} className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-b border-white/5">Privacy</Link>
-          <a href="mailto:family@uf51.love" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Contact</a>
+          <a href="mailto:family@uf51.love?subject=BuzzTrip%20Support&body=Hi%20BuzzTrip%20team%2C%0A%0A%0A--%0ABuzzTrip%0AVagal%20Reset%20Engine" className="block px-5 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Contact</a>
         </div>
       )}
 
