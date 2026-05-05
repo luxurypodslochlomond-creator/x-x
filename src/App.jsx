@@ -114,8 +114,12 @@ const AuthenticatedApp = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
+    // Use View Transitions API for instant, native browser transitions
+    if (document.startViewTransition) {
+      document.startViewTransition();
+    }
     setIsTransitioning(true);
-    const timer = setTimeout(() => setIsTransitioning(false), 300);
+    const timer = setTimeout(() => setIsTransitioning(false), 60);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 

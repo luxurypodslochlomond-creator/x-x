@@ -9,7 +9,7 @@ export default function SortedPageTransition({ isTransitioning }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.1 }}
+          transition={{ duration: 0.06 }}
           style={{
             position: 'fixed',
             top: 0,
