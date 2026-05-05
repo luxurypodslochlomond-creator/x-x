@@ -48,11 +48,10 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [emailSent, setEmailSent] = useState(false);
   const [emailing, setEmailing]   = useState(false);
   const [geo, setGeo]             = useState(() => detectGeo());
-  const [alternatives, setAlternatives] = useState([]);
   const [emailPreviewOpen, setEmailPreviewOpen] = useState(false);
   const [error, setError] = useState(null);
 
-  const generateLetter = async (selectedTone) => {
+  const generateLetter = async (selectedTone = tone) => {
     const t = TONES.find(x => x.id === selectedTone);
     const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     
@@ -132,7 +131,6 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
     if (!context.trim()) { setError('Please describe the situation first.'); return; }
     setLoading(true);
     setResult(null);
-    setAlternatives([]);
     setError(null);
     // Server-side rate limit check
     const limitCheck = await recordSortedUse();
@@ -161,20 +159,6 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
         severity: 'unknown',
         related_case_id: relatedCaseId || null,
       });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const regenerateWithDifferentTone = async (newTone) => {
-    if (!context.trim() || loading) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await generateLetter(newTone);
-      setAlternatives(prev => [...prev, response]);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -216,129 +200,181 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
     URL.revokeObjectURL(url);
   };
 
+  const handleToneChange = async (newTone) => {
+    setTone(newTone);
+    // If we already have a result, regenerate instantly with the new tone
+    if (result && context.trim()) {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await generateLetter(newTone);
+        setResult(response);
+        setResultTone(newTone);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  if (!result) {
+    // STEP 1 & 2: TONE PICKER + CONTEXT FORM
+    return (
+      <div className="space-y-5">
+        {/* ERROR */}
+        <AnimatePresence>
+          {error && (
+            <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '14px 16px', borderRadius: 8, border: '1px solid rgba(239,68,68,0.35)', background: 'rgba(239,68,68,0.07)' }}>
+              <p style={{ fontSize: 11, color: '#ef4444', margin: '0 0 8px', fontWeight: 800, letterSpacing: '0.05em' }}>{error}</p>
+              <button onClick={() => setError(null)} style={{ fontSize: 10, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>DISMISS</button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* CONNECTED CASE BANNER */}
+        {prefillContext && (
+          <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(6,182,212,0.07)', border: '1px solid rgba(6,182,212,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, marginTop: 4 }} />
+            <div>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#06b6d4', margin: '0 0 3px' }}>CONNECTED TO YOUR DECODED LETTER</p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>
+                {prefillContext.sender && prefillContext.sender !== 'Unknown' ? `From: ${prefillContext.sender}` : ''}{prefillContext.summary ? ` — ${prefillContext.summary}` : ''}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* TONE GRID — LEAD WITH THIS */}
+        <div>
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 10px' }}>WHAT TONE DO YOU NEED?</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            {TONES.map(t => (
+              <motion.button
+                key={t.id}
+                onClick={() => setTone(t.id)}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  padding: '14px 12px', borderRadius: 12, textAlign: 'center', cursor: 'pointer',
+                  border: `2px solid ${tone === t.id ? accentColor : 'rgba(255,255,255,0.12)'}`,
+                  background: tone === t.id ? accentColor + '15' : 'rgba(255,255,255,0.02)',
+                  transition: 'all 0.15s',
+                }}
+              >
+                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.1em', color: tone === t.id ? accentColor : 'rgba(255,255,255,0.6)', margin: '0 0 4px' }}>{t.label}</p>
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0 }}>{t.desc}</p>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+
+        {/* CONTEXT — minimal, clear */}
+        <div>
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
+          <textarea
+            value={context}
+            onChange={e => setContext(e.target.value)}
+            autoFocus={!prefillContext}
+            placeholder="Who are you writing to? What happened? What do you want?"
+            style={{
+              width: '100%', height: prefillContext ? 80 : 120, background: 'rgba(255,255,255,0.03)',
+              border: `1px solid ${context ? accentColor + '40' : 'rgba(255,255,255,0.12)'}`,
+              borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
+              resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+              transition: 'border-color 0.2s', boxSizing: 'border-box',
+            }}
+            onFocus={e => e.target.style.borderColor = accentColor + '60'}
+            onBlur={e => e.target.style.borderColor = context ? accentColor + '40' : 'rgba(255,255,255,0.12)'}
+          />
+        </div>
+
+        {/* OPTIONAL EXTRAS — collapsed */}
+        <details style={{ cursor: 'pointer' }}>
+          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+            ⚙️ YOUR NAME & LOCATION
+          </summary>
+          <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <input
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              placeholder="Your name (for sign-off)"
+              style={{
+                width: '100%', background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10,
+                color: '#fff', fontSize: 13, padding: '11px 14px',
+                outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
+              }}
+            />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
+              <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+            </div>
+            {!prefillContext && (
+              <div className="flex flex-wrap gap-2">
+                {SITUATIONS.map(s => (
+                  <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
+                    {s}
+                  </Chip>
+                ))}
+              </div>
+            )}
+          </div>
+        </details>
+
+        {/* WRITE BUTTON */}
+        <motion.button
+          onClick={write}
+          disabled={loading || !context.trim()}
+          whileTap={!loading && context.trim() ? { scale: 0.97 } : {}}
+          style={{
+            width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+            fontWeight: 900, letterSpacing: '0.1em',
+            cursor: !loading && context.trim() ? 'pointer' : 'not-allowed',
+            border: `2px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+            background: context.trim() ? accentColor : 'transparent',
+            color: context.trim() ? '#000' : 'rgba(255,255,255,0.2)',
+            transition: 'all 0.2s',
+          }}
+        >
+          {loading ? <Spinner color={context.trim() ? '#000' : accentColor} text="WRITING YOUR REPLY" /> : 'WRITE MY REPLY →'}
+        </motion.button>
+      </div>
+    );
+  }
+
+  // STEP 3: RESULT VIEW — CLEAN, REAL-TIME TONE SWITCHING
   return (
     <div className="space-y-5">
-
-      {/* ERROR */}
-      <AnimatePresence>
-        {error && (
-          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '14px 16px', borderRadius: 8, border: '1px solid rgba(239,68,68,0.35)', background: 'rgba(239,68,68,0.07)' }}>
-            <p style={{ fontSize: 11, color: '#ef4444', margin: '0 0 8px', fontWeight: 800, letterSpacing: '0.05em' }}>{error}</p>
-            <button onClick={() => setError(null)} style={{ fontSize: 10, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>DISMISS</button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* CONNECTED CASE BANNER — shows if this came from a decoded letter */}
-      {prefillContext && (
-        <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(6,182,212,0.07)', border: '1px solid rgba(6,182,212,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, marginTop: 4 }} />
-          <div>
-            <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#06b6d4', margin: '0 0 3px' }}>CONNECTED TO YOUR DECODED LETTER</p>
-            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>
-              {prefillContext.sender && prefillContext.sender !== 'Unknown' ? `From: ${prefillContext.sender}` : ''}{prefillContext.summary ? ` — ${prefillContext.summary}` : ''}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* MAIN CONTEXT — first thing, no barriers */}
-      <div>
-        <textarea
-          value={context}
-          onChange={e => setContext(e.target.value)}
-          autoFocus={!prefillContext}
-          placeholder="Who are you writing to? What happened? What do you want?&#10;&#10;Don't filter it — we'll handle the writing."
-          style={{
-            width: '100%', height: prefillContext ? 100 : 160, background: 'rgba(255,255,255,0.03)',
-            border: `1px solid ${context ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
-            borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
-            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
-            transition: 'border-color 0.2s', boxSizing: 'border-box',
-          }}
-          onFocus={e => e.target.style.borderColor = accentColor + '80'}
-          onBlur={e => e.target.style.borderColor = context ? accentColor + '60' : 'rgba(255,255,255,0.12)'}
-        />
-      </div>
-
-      {/* TONE — simple, always visible */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        {TONES.map(t => (
-          <button
-            key={t.id}
-            onClick={() => setTone(t.id)}
-            style={{
-              padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-              border: `1px solid ${tone === t.id ? accentColor : 'rgba(255,255,255,0.08)'}`,
-              background: tone === t.id ? accentColor : 'rgba(255,255,255,0.02)',
-              transition: 'all 0.15s', position: 'relative',
-            }}
-          >
-            {suggestedTone === t.id && tone !== t.id && (
-              <span style={{ position: 'absolute', top: 5, right: 8, fontSize: 9, color: accentColor }}>★ suggested</span>
-            )}
-            <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: tone === t.id ? '#000' : 'rgba(255,255,255,0.5)', margin: 0 }}>{t.label}</p>
-            <p style={{ fontSize: 11, color: tone === t.id ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{t.desc}</p>
-          </button>
-        ))}
-      </div>
-
-      {/* OPTIONAL EXTRAS — name + geo collapsed */}
-      <details style={{ cursor: 'pointer' }}>
-        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-          + OPTIONAL: your name &amp; location
-        </summary>
-        <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <input
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            placeholder="Your name (for sign-off)"
-            style={{
-              width: '100%', background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10,
-              color: '#fff', fontSize: 13, padding: '11px 14px',
-              outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
-            }}
-          />
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
-            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-          </div>
-          {!prefillContext && (
-            <div className="flex flex-wrap gap-2">
-              {SITUATIONS.map(s => (
-                <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
-                  {s}
-                </Chip>
-              ))}
-            </div>
-          )}
-        </div>
-      </details>
-
-      {/* WRITE BUTTON — solid, confident */}
-      <motion.button
-        onClick={write}
-        disabled={loading || !context.trim()}
-        whileTap={!loading && context.trim() ? { scale: 0.97 } : {}}
-        style={{
-          width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
-          fontWeight: 900, letterSpacing: '0.1em',
-          cursor: !loading && context.trim() ? 'pointer' : 'not-allowed',
-          border: `2px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-          background: context.trim() ? accentColor : 'transparent',
-          color: context.trim() ? '#000' : 'rgba(255,255,255,0.2)',
-          transition: 'all 0.2s',
-        }}
-      >
-        {loading ? <Spinner color={context.trim() ? '#000' : accentColor} text="WRITING YOUR REPLY" /> : 'WRITE MY REPLY →'}
-      </motion.button>
-
-      {/* RESULT */}
       <AnimatePresence>
         {result && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+
+            {/* TONE SWITCHER — visible, real-time */}
+            <div style={{ background: accentColor + '08', border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '14px 16px' }}>
+              <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 10px' }}>TRY DIFFERENT TONE</p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                {TONES.map(t => (
+                  <motion.button
+                    key={t.id}
+                    onClick={() => handleToneChange(t.id)}
+                    disabled={loading}
+                    whileTap={!loading ? { scale: 0.95 } : {}}
+                    style={{
+                      padding: '10px 12px', borderRadius: 8, textAlign: 'center', fontSize: 11, fontWeight: 800,
+                      border: `2px solid ${resultTone === t.id ? accentColor : 'rgba(255,255,255,0.12)'}`,
+                      background: resultTone === t.id ? accentColor + '15' : 'rgba(255,255,255,0.02)',
+                      color: resultTone === t.id ? accentColor : 'rgba(255,255,255,0.4)',
+                      cursor: !loading ? 'pointer' : 'not-allowed',
+                      transition: 'all 0.15s', opacity: loading ? 0.5 : 1,
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    {loading ? '...' : t.label}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
 
             {/* KEY POINTS */}
             {result.key_points?.length > 0 && (
@@ -385,36 +421,13 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               <motion.button onClick={saveAsPdf} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: 'rgba(168,85,247,0.4)', color: '#a855f7', background: 'rgba(168,85,247,0.08)' }}>
                 SAVE AS FILE
               </motion.button>
-              <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setEmailSent(false); setEmailAddr(''); setAlternatives([]); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
+              <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
                 START AGAIN
               </motion.button>
             </div>
 
             {/* SEND IN YOUR EMAIL APP */}
             <SendInEmailApp result={result} accentColor={accentColor} />
-
-            {/* REGENERATE WITH DIFFERENT TONE */}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
-              <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)', margin: '0 0 10px' }}>TRY A DIFFERENT TONE</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                {TONES.filter(t => t.id !== tone).map(t => (
-                  <motion.button
-                    key={t.id}
-                    onClick={() => regenerateWithDifferentTone(t.id)}
-                    disabled={loading}
-                    whileTap={!loading ? { scale: 0.95 } : {}}
-                    style={{
-                      padding: '10px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700,
-                      border: `1px solid rgba(255,255,255,0.12)`, background: 'rgba(255,255,255,0.02)',
-                      color: 'rgba(255,255,255,0.4)', cursor: !loading ? 'pointer' : 'not-allowed',
-                      transition: 'all 0.15s', opacity: loading ? 0.5 : 1,
-                    }}
-                  >
-                    {loading ? '...' : `Try ${t.label}`}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
 
             {/* HANDOFF — escalate to dispute help */}
             {onHandoff && (
@@ -478,31 +491,6 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 </>
               )}
             </AnimatePresence>
-
-            {/* ALTERNATIVES CAROUSEL */}
-            {alternatives.length > 0 && (
-              <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
-                <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)', margin: '0 0 12px' }}>ALTERNATIVE VERSIONS — {alternatives.length}</p>
-                <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 8 }}>
-                  {alternatives.map((alt, idx) => (
-                    <motion.button
-                      key={idx}
-                      onClick={() => setResult(alt)}
-                      whileTap={{ scale: 0.95 }}
-                      style={{
-                        minWidth: 110, padding: '10px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700,
-                        border: `1px solid ${result === alt ? accentColor + '70' : 'rgba(255,255,255,0.12)'}`,
-                        background: result === alt ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
-                        color: result === alt ? accentColor : 'rgba(255,255,255,0.4)',
-                        cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center',
-                      }}
-                    >
-                      Alt {idx + 1}
-                    </motion.button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
