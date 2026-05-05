@@ -62,7 +62,7 @@ export default function BrianHughesCV() {
         {/* NAME & ROLE */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-1">Brian Hughes</h1>
-          <p className="text-gray-500 text-base mb-5">Founder · Glasgow, Scotland</p>
+          <p className="text-gray-500 text-base mb-5">Founder</p>
 
           <div className="flex flex-wrap gap-5 text-sm text-gray-500">
             <a href="https://uf51.love" target="_blank" rel="noopener noreferrer"
