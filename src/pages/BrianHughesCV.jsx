@@ -137,7 +137,7 @@ export default function BrianHughesCV() {
           <Role
             title="Founder"
             org="UF51"
-            period="Nov 2024 — present"
+            period="Nov 2025 — present"
             paras={[
               "After KILTR I spent a few years trying to work out what was actually worth building. That led to UF51 — a community interest company focused on tools that solve real problems for people who usually can't afford the professional version: legal letter decoders, sound therapy for anxious pets, procurement intelligence for councils, artist management for independent musicians.",
               "Everything is live. Most of it I built alone with AI tooling. It's taught me a lot about what it takes to ship something real — and also confirmed that I work better as part of a team than on my own.",
