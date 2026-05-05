@@ -92,7 +92,7 @@ export default function BrianHughesCV() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-1">Brian Hughes</h1>
 
-          <div className="flex flex-wrap gap-5 text-sm text-gray-500">
+          <div className="flex flex-wrap gap-5 text-sm text-gray-500 no-print">
             <a href="https://uf51.love" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-gray-800 transition-colors">
               <Globe className="w-3.5 h-3.5" />
