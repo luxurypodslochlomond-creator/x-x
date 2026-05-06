@@ -437,6 +437,7 @@ export default function FrequencyChamber() {
   const breathingPhaseRef = useRef('inhale'); // inhale, hold, exhale, pause
   const sweepIntervalRef = useRef(null);
   const wakeLockRef = useRef(null);
+  const timerTargetRef = useRef(null);
 
   // === PLAY FREQUENCY ===
   const play = async (freq) => {
@@ -793,12 +794,11 @@ export default function FrequencyChamber() {
       setSelected(freq);
       setTimer(0);
 
-      // TIMER - with auto-stop at target
+      // TIMER - with auto-stop at target (use ref to avoid stale closure)
       timerRef.current = setInterval(() => {
         setTimer(t => {
           const newTime = t + 1;
-          // Auto-stop when timer hits target
-          if (timerTarget && newTime >= timerTarget) {
+          if (timerTargetRef.current && newTime >= timerTargetRef.current) {
             stop();
             return newTime;
           }
@@ -944,8 +944,10 @@ export default function FrequencyChamber() {
 
     analyserRef.current = null;
     breathingPhaseRef.current = 'inhale';
+    timerTargetRef.current = null;
     setIsPlaying(false);
     setTimer(0);
+    setTimerTarget(null);
     setCurrentSweepFreq(20);
     };
 
@@ -1282,14 +1284,15 @@ export default function FrequencyChamber() {
               {/* STOP BUTTON */}
               <button
                 onClick={stop}
-                className="px-6 py-3 rounded-lg font-black font-mono text-sm bg-black/60 backdrop-blur-sm border-2 hover:bg-black/80 transition-all"
+                className="px-8 py-4 rounded-xl font-black font-mono text-base bg-black border-2 active:scale-95 transition-all"
                 style={{
                   borderColor: selected.color,
                   color: selected.color,
-                  textShadow: `0 0 10px ${selected.color}`
+                  boxShadow: `0 0 20px ${selected.color}60`,
+                  minWidth: '100px'
                 }}
               >
-                STOP
+                ■ STOP
               </button>
             </div>
 
@@ -1352,7 +1355,7 @@ export default function FrequencyChamber() {
                 {[5, 10, 15, 20].map(mins => (
                   <button
                     key={mins}
-                    onClick={() => setTimerTarget(mins * 60)}
+                    onClick={() => { setTimerTarget(mins * 60); timerTargetRef.current = mins * 60; }}
                     className={`flex-1 py-2 rounded-lg font-black font-mono text-xs border transition-all ${
                       timerTarget === mins * 60
                         ? 'bg-white text-black border-white'
