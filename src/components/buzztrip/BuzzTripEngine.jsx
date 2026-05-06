@@ -155,17 +155,47 @@ export default function BuzzTripEngine() {
 
   const stopAudio = useCallback(() => {
     try {
+      if (silentOscRef.current) { silentOscRef.current.stop(); silentOscRef.current = null; }
       if (lfoRef.current) { lfoRef.current.stop(); lfoRef.current = null; }
       if (oscillatorRef.current) { oscillatorRef.current.stop(); oscillatorRef.current = null; }
       if (audioCtxRef.current) { audioCtxRef.current.close(); audioCtxRef.current = null; }
       gainRef.current = null;
+      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
     } catch {}
   }, []);
+
+  // iOS keep-alive: silent oscillator tricks iOS into keeping AudioContext alive when screen locks
+  const startIOSKeepAlive = useCallback((ctx) => {
+    try {
+      const silentOsc = ctx.createOscillator();
+      const silentGain = ctx.createGain();
+      silentGain.gain.setValueAtTime(0.001, ctx.currentTime); // near-silent but not zero
+      silentOsc.connect(silentGain);
+      silentGain.connect(ctx.destination);
+      silentOsc.start();
+      return silentOsc;
+    } catch {}
+  }, []);
+
+  const silentOscRef = useRef(null);
 
   const startAudio = useCallback((proto) => {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       audioCtxRef.current = ctx;
+
+      // iOS: register as media player so lock screen respects audio
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: `BuzzTrip — ${proto.label}`,
+          artist: 'UF51 Healing',
+          album: 'Vagal Reset Engine',
+        });
+        navigator.mediaSession.playbackState = 'playing';
+      }
+
+      // iOS: silent oscillator keeps AudioContext alive through screen lock
+      silentOscRef.current = startIOSKeepAlive(ctx);
 
       // Main tone oscillator
       const osc = ctx.createOscillator();
@@ -295,6 +325,17 @@ export default function BuzzTripEngine() {
     clearTimeout(breathTimerRef.current);
     stopAudio();
   }, [stopAudio]);
+
+  // iOS: auto-resume AudioContext when user returns from screen lock
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && audioCtxRef.current?.state === 'suspended') {
+        audioCtxRef.current.resume();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
 
   const breathLabel = {
     'in': 'Breathe In',
