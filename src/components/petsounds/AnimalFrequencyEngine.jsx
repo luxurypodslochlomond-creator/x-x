@@ -751,6 +751,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
   const canvasRef      = useRef(null);
   const isPlayingRef   = useRef(false);
   const animFrameRef   = useRef(null);
+  const wakeLockRef    = useRef(null);
 
   const freq = ANIMAL_PROTOCOLS[protocol] || ANIMAL_PROTOCOLS.separation;
 
@@ -767,6 +768,7 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
     nodesRef.current = [];
     masterGainRef.current = null;
     if (audioCtxRef.current) { audioCtxRef.current.close(); audioCtxRef.current = null; }
+    if (wakeLockRef.current) { wakeLockRef.current.release(); wakeLockRef.current = null; }
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
     if (animFrameRef.current) { cancelAnimationFrame(animFrameRef.current); animFrameRef.current = null; }
     isPlayingRef.current = false;
@@ -796,6 +798,13 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
         buildAudioGraph(ctx, freq, volume, species);
       masterGainRef.current = masterGain;
       nodesRef.current = nodes;
+
+      // Keep screen on during session
+      if ('wakeLock' in navigator) {
+        navigator.wakeLock.request('screen').then(lock => {
+          wakeLockRef.current = lock;
+        }).catch(() => {});
+      }
 
       isPlayingRef.current = true;
       setIsPlaying(true);

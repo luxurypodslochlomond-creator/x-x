@@ -126,6 +126,7 @@ export default function BuzzStopEngine({ onStop }) {
   const cancelNodes = useRef([]);
   const timerRef    = useRef(null);
   const rangeRef    = useRef({ min: 20, max: 16000 });
+  const wakeLockRef = useRef(null);
 
   useEffect(() => { rangeRef.current = { min: rangeMin, max: rangeMax }; }, [rangeMin, rangeMax]);
 
@@ -178,6 +179,7 @@ export default function BuzzStopEngine({ onStop }) {
     masterGain.current = null;
     ctx.current = null;
     clearInterval(timerRef.current);
+    if (wakeLockRef.current) { wakeLockRef.current.release(); wakeLockRef.current = null; }
   }, [stopCancelLayer]);
 
   const playHz = useCallback(async (hz) => {
@@ -270,6 +272,13 @@ export default function BuzzStopEngine({ onStop }) {
     setPhase('locked');
     triggerSuccessHaptic();
     
+    // Keep screen on while cancellation runs
+    if ('wakeLock' in navigator) {
+      navigator.wakeLock.request('screen').then(lock => {
+        wakeLockRef.current = lock;
+      }).catch(() => {});
+    }
+
     // Save this session for next visit
     saveSession({ userFrequency: hz });
     
