@@ -155,25 +155,16 @@ export default function BuzzTripEngine() {
 
   const stopAudio = useCallback(() => {
     try {
-      if (silentOscRef.current) { silentOscRef.current.stop(); silentOscRef.current = null; }
       if (lfoRef.current) { lfoRef.current.stop(); lfoRef.current = null; }
       if (oscillatorRef.current) { oscillatorRef.current.stop(); oscillatorRef.current = null; }
       if (audioCtxRef.current) { audioCtxRef.current.close(); audioCtxRef.current = null; }
       gainRef.current = null;
-      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
-    } catch {}
-  }, []);
-
-  // iOS keep-alive: silent oscillator tricks iOS into keeping AudioContext alive when screen locks
-  const startIOSKeepAlive = useCallback((ctx) => {
-    try {
-      const silentOsc = ctx.createOscillator();
-      const silentGain = ctx.createGain();
-      silentGain.gain.setValueAtTime(0.001, ctx.currentTime); // near-silent but not zero
-      silentOsc.connect(silentGain);
-      silentGain.connect(ctx.destination);
-      silentOsc.start();
-      return silentOsc;
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'none';
+        navigator.mediaSession.setActionHandler('pause', null);
+        navigator.mediaSession.setActionHandler('play', null);
+        navigator.mediaSession.setActionHandler('stop', null);
+      }
     } catch {}
   }, []);
 
@@ -184,18 +175,22 @@ export default function BuzzTripEngine() {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       audioCtxRef.current = ctx;
 
-      // iOS: register as media player so lock screen respects audio
+      // iOS CRITICAL: resume must be called synchronously in the user gesture
+      ctx.resume();
+
+      // iOS: register MediaSession so the lock screen shows controls + keeps audio alive
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: `BuzzTrip — ${proto.label}`,
-          artist: 'UF51 Healing',
-          album: 'Vagal Reset Engine',
+          artist: 'UF51 • Vagal Reset',
+          album: 'BuzzTrip',
         });
         navigator.mediaSession.playbackState = 'playing';
+        // These handlers prevent iOS from pausing our audio when controls are shown
+        navigator.mediaSession.setActionHandler('play', () => { ctx.resume(); });
+        navigator.mediaSession.setActionHandler('pause', () => { /* ignore — don't let iOS pause us */ });
+        navigator.mediaSession.setActionHandler('stop', () => { /* ignore */ });
       }
-
-      // iOS: silent oscillator keeps AudioContext alive through screen lock
-      silentOscRef.current = startIOSKeepAlive(ctx);
 
       // Main tone oscillator
       const osc = ctx.createOscillator();
@@ -326,15 +321,27 @@ export default function BuzzTripEngine() {
     stopAudio();
   }, [stopAudio]);
 
-  // iOS: auto-resume AudioContext when user returns from screen lock
+  // iOS: auto-resume AudioContext when user unlocks screen / returns to app
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible' && audioCtxRef.current?.state === 'suspended') {
-        audioCtxRef.current.resume();
+      if (document.visibilityState === 'visible') {
+        const ctx = audioCtxRef.current;
+        if (ctx && ctx.state === 'suspended') {
+          ctx.resume();
+        }
+        // Re-assert playing state in MediaSession so iOS doesn't mark us as paused
+        if ('mediaSession' in navigator && ctx) {
+          navigator.mediaSession.playbackState = 'playing';
+        }
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+    // Also handle page focus (covers some edge cases on older iOS)
+    window.addEventListener('focus', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleVisibilityChange);
+    };
   }, []);
 
   const breathLabel = {
