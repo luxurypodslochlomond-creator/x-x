@@ -141,7 +141,6 @@ export default function BuzzTripEngine() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [circleScale, setCircleScale] = useState(1);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dndEnabled, setDndEnabled] = useState(false);
 
   const audioCtxRef = useRef(null);
   const oscillatorRef = useRef(null);
@@ -277,11 +276,11 @@ export default function BuzzTripEngine() {
     startAudio(proto);
     runBreathCycle(proto);
 
-    // Screen wake lock if DND enabled
-    if (dndEnabled && 'wakeLock' in navigator) {
+    // Always keep screen on during session
+    if ('wakeLock' in navigator) {
       navigator.wakeLock.request('screen').then(lock => {
         wakeLockRef.current = lock;
-      }).catch(e => console.log('Wake lock failed:', e));
+      }).catch(() => {});
     }
 
     timerRef.current = setInterval(() => {
@@ -300,7 +299,7 @@ export default function BuzzTripEngine() {
         return prev - 1;
       });
     }, 1000);
-  }, [startAudio, runBreathCycle, stopAudio, dndEnabled]);
+  }, [startAudio, runBreathCycle, stopAudio]);
 
   const stopSession = useCallback(() => {
     clearInterval(timerRef.current);
@@ -440,9 +439,7 @@ export default function BuzzTripEngine() {
 
       {/* Top nav bar */}
       <div className="flex items-center justify-between px-5 pt-5 pb-2">
-        <button onClick={() => setDndEnabled(!dndEnabled)} title={dndEnabled ? 'DND ON' : 'DND OFF'} className={`w-10 h-10 rounded-lg transition-all flex items-center justify-center font-black text-xs ${dndEnabled ? 'bg-green-500 text-black' : 'bg-gray-800 text-gray-400 hover:text-gray-300'}`}>
-          DND
-        </button>
+        <div className="w-10 h-10" />
         <p className="text-green-500 font-mono text-xs tracking-widest">BUZZTRIP</p>
         <button onClick={() => setMenuOpen(!menuOpen)} className="w-8 h-8 flex flex-col justify-center items-center gap-1.5">
           <span className="block w-5 h-0.5 bg-green-500 rounded" />
