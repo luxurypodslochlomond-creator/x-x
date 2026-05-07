@@ -353,22 +353,66 @@ export default function Family51Page() {
                   {remaining === Infinity || remaining >= 5 ? '5 FREE — NO CARD' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
                 </span>
               </div>
-              <h1 style={{ fontSize: 'clamp(32px, 9vw, 52px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 10px' }}>
-                <span style={{ color: '#fff' }}>Something stressing</span><br />
-                <span style={{ color: '#fff' }}>you out?</span><br />
+              <h1 style={{ fontSize: 'clamp(28px, 8vw, 44px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 8px' }}>
+                <span style={{ color: '#fff' }}>Scary letter?</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.55, maxWidth: 360 }}>
-                Paste a letter, take a photo, or just tell us what's going on. Plain English. <strong style={{ color: 'rgba(255,255,255,0.75)' }}>Any language. Any country.</strong>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5, maxWidth: 340 }}>
+                Paste it, photo it, or just tell us what's wrong. Plain English. <strong style={{ color: 'rgba(255,255,255,0.7)' }}>Any language. Any country.</strong>
               </p>
             </motion.div>
 
-            {/* FOUR TOOLS — the whole product in 4 taps */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
-              <BigButton delay={0} color="#22c55e" onClick={() => handleToolOpen('conflict')} icon={<TalkIcon color="#22c55e" />} label="JUST TELL ME WHAT'S WRONG" sub="Type it, say it — we'll figure out what to do." tag="FREE" />
-              <BigButton delay={0.05} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="I HAVE A LETTER" sub="Paste it or take a photo — decoded in seconds." tag="FREE" />
-              <BigButton delay={0.1} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="HELP ME WRITE BACK" sub="Tell us the situation — we draft it, you send it." tag="FREE" />
-              <BigButton delay={0.15} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="KNOW MY RIGHTS" sub="They can't do that, can they?" tag="FREE" />
+            {/* PRIMARY — the one big action */}
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => handleToolOpen('letter')}
+              style={{
+                width: '100%', textAlign: 'left', cursor: 'pointer',
+                padding: '24px 22px', borderRadius: 16, marginBottom: 10,
+                border: '1px solid rgba(249,115,22,0.5)',
+                background: 'rgba(249,115,22,0.1)',
+                boxShadow: '0 0 30px rgba(249,115,22,0.12)',
+                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                display: 'flex', alignItems: 'center', gap: 16,
+              }}
+            >
+              <DocIcon color="#f97316" />
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 17, fontWeight: 900, color: '#fff', letterSpacing: '-0.01em', marginBottom: 3 }}>
+                  Got a letter or document?
+                </div>
+                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>
+                  Paste it, photo it — decoded in plain English in seconds.
+                </div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="#f97316" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.button>
+
+            {/* SECONDARY — two smaller options */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 24 }}>
+              <motion.button
+                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => handleToolOpen('conflict')}
+                style={{ padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(239,68,68,0.3)', background: 'rgba(239,68,68,0.07)', cursor: 'pointer', textAlign: 'left', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+              >
+                <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 4, lineHeight: 1.2 }}>Just tell me what's wrong</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.35 }}>No letter — just a situation</div>
+              </motion.button>
+              <motion.button
+                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => handleToolOpen('reply')}
+                style={{ padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.3)', background: 'rgba(6,182,212,0.07)', cursor: 'pointer', textAlign: 'left', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+              >
+                <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 4, lineHeight: 1.2 }}>Help me write back</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.35 }}>Draft a reply for me</div>
+              </motion.button>
             </div>
 
             {/* TRUST STRIP */}
