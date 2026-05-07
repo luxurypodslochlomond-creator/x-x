@@ -124,14 +124,23 @@ export default function Family51Page() {
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(249,115,22,0.12)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           <F51Mark />
-          <div style={{ lineHeight: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>SORTED</div>
-            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', color: '#f97316' }}>WE'VE GOT YOU</div>
+          <div style={{ lineHeight: 1.1 }}>
+            <div style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff' }}>SORTED</div>
+            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.22em', color: '#f97316' }}>WE'VE GOT YOU</div>
           </div>
         </motion.button>
+
+        {/* Shannon bit stream — centre */}
+        {!activeTool && !showWhy && !showHistory && !showFAQ && (
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ fontFamily: 'monospace', fontSize: 8, letterSpacing: '0.1em', color: 'rgba(249,115,22,0.18)', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 160, userSelect: 'none' }}>
+              01001000 01010101 01000111 01001000
+            </div>
+          </div>
+        )}
 
          {activeTool || showWhy || showHistory || showFAQ ? (
            <motion.button
@@ -172,8 +181,8 @@ export default function Family51Page() {
              >
                ?
              </motion.button>
-             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.9 }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: '#f97316', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}>
-               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.9 }} style={{ background: menuOpen ? 'rgba(249,115,22,0.1)' : 'none', border: `1px solid ${menuOpen ? 'rgba(249,115,22,0.4)' : 'rgba(255,255,255,0.1)'}`, borderRadius: 8, cursor: 'pointer', padding: '5px 7px', color: '#f97316', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', display: 'flex', alignItems: 'center', gap: 5, transition: 'all 0.15s' }}>
+               {menuOpen ? <X className="w-4 h-4" /> : <><Menu className="w-4 h-4" /><span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', fontFamily: 'monospace' }}>MENU</span></>}
              </motion.button>
            </div>
          )}
@@ -182,8 +191,12 @@ export default function Family51Page() {
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
          {menuOpen && !activeTool && !showWhy && !showFAQ && (
-           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(8,10,15,0.98)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 20px' }}>
-             <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
+           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(6,8,12,0.99)', backdropFilter: 'blur(24px)', borderBottom: '1px solid rgba(249,115,22,0.15)', padding: '0 20px' }}>
+                 <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
+                 {/* Shannon header */}
+                 <div style={{ padding: '10px 0 8px', borderBottom: '1px solid rgba(249,115,22,0.1)', fontFamily: 'monospace', fontSize: 9, letterSpacing: '0.18em', color: 'rgba(249,115,22,0.35)' }}>
+                   C.E. SHANNON — ZERO LOSS — 1948
+                 </div>
                <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
                  <WhyIcon />
                  Why SORTED?
@@ -471,6 +484,13 @@ export default function Family51Page() {
               ))}
             </div>
           </motion.div>
+        )}
+
+        {/* ── SHANNON FOOTER ──────────────────────── */}
+        {!activeTool && !showWhy && !showHistory && !showFAQ && !isLocked && (
+          <div style={{ padding: '16px 20px', borderTop: '1px solid rgba(249,115,22,0.06)', display: 'flex', justifyContent: 'center', fontFamily: 'monospace', fontSize: 8, color: 'rgba(249,115,22,0.15)', letterSpacing: '0.15em', textAlign: 'center' }}>
+            H = −Σ p(x) log p(x) — SHANNON ENTROPY — ZERO LOSS TRANSMISSION
+          </div>
         )}
 
         {/* ── MAURO AI HELPDESK MODAL ─────────────── */}
