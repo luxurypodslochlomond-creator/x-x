@@ -193,10 +193,6 @@ export default function Family51Page() {
          {menuOpen && !activeTool && !showWhy && !showFAQ && (
            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(6,8,12,0.99)', backdropFilter: 'blur(24px)', borderBottom: '1px solid rgba(249,115,22,0.15)', padding: '0 20px' }}>
                  <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
-                 {/* Shannon header */}
-                 <div style={{ padding: '10px 0 8px', borderBottom: '1px solid rgba(249,115,22,0.1)', fontFamily: 'monospace', fontSize: 9, letterSpacing: '0.18em', color: 'rgba(249,115,22,0.35)' }}>
-                   C.E. SHANNON — ZERO LOSS — 1948
-                 </div>
                <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
                  <WhyIcon />
                  Why SORTED?
@@ -486,12 +482,7 @@ export default function Family51Page() {
           </motion.div>
         )}
 
-        {/* ── SHANNON FOOTER ──────────────────────── */}
-        {!activeTool && !showWhy && !showHistory && !showFAQ && !isLocked && (
-          <div style={{ padding: '16px 20px', borderTop: '1px solid rgba(249,115,22,0.06)', display: 'flex', justifyContent: 'center', fontFamily: 'monospace', fontSize: 8, color: 'rgba(249,115,22,0.15)', letterSpacing: '0.15em', textAlign: 'center' }}>
-            H = −Σ p(x) log p(x) — SHANNON ENTROPY — ZERO LOSS TRANSMISSION
-          </div>
-        )}
+
 
         {/* ── MAURO AI HELPDESK MODAL ─────────────── */}
         <AnimatePresence>
