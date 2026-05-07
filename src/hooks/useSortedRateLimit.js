@@ -5,7 +5,9 @@ import { sortedRateLimit } from '@/functions/sortedRateLimit';
 export async function checkSortedRateLimit() {
   try {
     const res = await sortedRateLimit({ action: 'check' });
-    return res.data || { allowed: true, remaining: 5 };
+    // SDK may return data directly or wrapped in .data
+    const data = res?.data ?? res;
+    return (data && typeof data.allowed !== 'undefined') ? data : { allowed: true, remaining: 5 };
   } catch {
     // On network error — allow through, don't block real users
     return { allowed: true, remaining: 5 };
@@ -15,7 +17,8 @@ export async function checkSortedRateLimit() {
 export async function recordSortedUse() {
   try {
     const res = await sortedRateLimit({ action: 'record' });
-    return res.data || { allowed: true, remaining: 4 };
+    const data = res?.data ?? res;
+    return (data && typeof data.allowed !== 'undefined') ? data : { allowed: true, remaining: 4 };
   } catch {
     return { allowed: true, remaining: 4 };
   }

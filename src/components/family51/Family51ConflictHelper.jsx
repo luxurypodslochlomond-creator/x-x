@@ -110,23 +110,22 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
       }
 
       const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
       ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
-      prompt: `You are sharp, calm, and on their side — a conflict and legal expert. Clear, direct, confident. Not preachy. The person is in: ${geo.country}. Apply ${geo.jurisdiction} — use locally correct rights, regulatory bodies, exact legal references, and real escalation routes. For CONTRACT or DISMISSAL conflicts: flag unfair/unenforceable clauses, what they can push back on, and whether a solicitor or employment tribunal is needed.
+      prompt: `You are a sharp, calm conflict and legal expert. You are on their side. Be direct and confident, not preachy. The person is in ${geo.country} — apply ${geo.jurisdiction} law with real references and escalation routes.
 
-CONFLICT TYPE: ${ct?.label || 'Not specified'}
+CONFLICT TYPE: ${ct?.label || 'General'}
 GOAL: ${gt?.label} — ${gt?.desc}
+SITUATION: ${what}${fileContext}
 
-WHAT HAPPENED:
-${what}${fileContext}
+You MUST return a JSON object with ALL of these fields populated with real, substantive content:
+- situation_assessment: 2-3 sentences on who has the stronger position and why (be honest, no spin)
+- legal_position: Their actual rights under ${geo.jurisdiction} law — cite specific legislation. Note this is guidance not formal legal advice.
+- recommended_steps: Array of exactly 3 specific actionable steps with real names/websites/numbers
+- what_to_say: Full word-for-word message or script they can send RIGHT NOW
+- what_not_to_do: Array of exactly 2 things that would hurt their position
+- if_it_escalates: Exact ombudsman, court, or body for ${geo.country} and how to reach them
 
-Return:
-- situation_assessment: Honest, fair 2-3 sentence read — no spin, just truth. Name who has the stronger position and why.
-- legal_position: Their actual legal rights/protections under ${geo.jurisdiction} — cite specific legislation or consumer rights where applicable. Be accurate. Note this is guidance not formal legal advice.
-- recommended_steps: Array of 3 specific, concrete steps matching their goal — name exact bodies, websites, phone numbers, or processes relevant to ${geo.country}
-- what_to_say: Exact word-for-word script or message they can use or send right now — complete, ready to go
-- what_not_to_do: Array of 2-3 specific things that would genuinely harm their position
-- if_it_escalates: Real next steps — name the exact ombudsman, court process, or regulatory body for ${geo.country} with how to reach them`,
+Do not leave any field empty. Every field must have real, useful content.`,
       response_json_schema: {
         type: 'object',
         properties: {
@@ -140,6 +139,12 @@ Return:
       },
     });
 
+      // Validate we got actual content back
+      if (!response?.situation_assessment && !response?.legal_position && !response?.recommended_steps?.length) {
+        setResult({ _error: 'Sorry — the analysis came back empty. Please try again.' });
+        setLoading(false);
+        return;
+      }
       setResult(response);
       setResultGoal(goal);
       // Save to local case history — no login needed
