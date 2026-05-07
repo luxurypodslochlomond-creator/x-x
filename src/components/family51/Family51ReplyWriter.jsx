@@ -288,10 +288,19 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
           />
         </div>
 
+        {/* LOCATION — always visible */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+          <span style={{ fontSize: 13 }}>📍</span>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
+            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+          </div>
+        </div>
+
         {/* OPTIONAL EXTRAS — collapsed */}
         <details style={{ cursor: 'pointer' }}>
           <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-            ⚙️ YOUR NAME & LOCATION
+            ⚙️ YOUR NAME &amp; SITUATION TYPE (optional)
           </summary>
           <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
             <input
@@ -306,10 +315,6 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
               }}
             />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
-              <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-            </div>
             {!prefillContext && (
               <div className="flex flex-wrap gap-2">
                 {SITUATIONS.map(s => (
@@ -323,22 +328,40 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
         </details>
 
         {/* WRITE BUTTON */}
-        <motion.button
-          onClick={write}
-          disabled={loading || !context.trim()}
-          whileTap={!loading && context.trim() ? { scale: 0.97 } : {}}
-          style={{
-            width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
-            fontWeight: 900, letterSpacing: '0.1em',
-            cursor: !loading && context.trim() ? 'pointer' : 'not-allowed',
-            border: `2px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-            background: context.trim() ? accentColor : 'transparent',
-            color: context.trim() ? '#000' : 'rgba(255,255,255,0.2)',
-            transition: 'all 0.2s',
-          }}
-        >
-          {loading ? <Spinner color={context.trim() ? '#000' : accentColor} text="WRITING YOUR REPLY" /> : 'WRITE MY REPLY →'}
-        </motion.button>
+        <AnimatePresence mode="wait">
+          {loading ? (
+            <motion.div key="loading" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '28px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, borderRadius: 14, border: `1px solid ${accentColor}30`, background: `${accentColor}06` }}>
+              <motion.div style={{ display: 'flex', gap: 6 }}>
+                {[0,1,2].map(i => (
+                  <motion.div key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: accentColor }}
+                    animate={{ y: [0, -10, 0] }} transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }} />
+                ))}
+              </motion.div>
+              <div style={{ textAlign: 'center' }}>
+                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#fff', margin: '0 0 6px' }}>WRITING YOUR REPLY</p>
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>Composing a {tone} letter in {geo.country} legal context…</p>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.button
+              key="btn"
+              onClick={write}
+              disabled={!context.trim()}
+              whileTap={context.trim() ? { scale: 0.97 } : {}}
+              style={{
+                width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+                fontWeight: 900, letterSpacing: '0.1em',
+                cursor: context.trim() ? 'pointer' : 'not-allowed',
+                border: `2px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+                background: context.trim() ? accentColor : 'transparent',
+                color: context.trim() ? '#000' : 'rgba(255,255,255,0.2)',
+                transition: 'all 0.2s',
+              }}
+            >
+              WRITE MY REPLY →
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
     );
   }

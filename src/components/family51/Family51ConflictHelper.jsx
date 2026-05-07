@@ -126,6 +126,7 @@ Real contact: DTI Hotline 1-384 | DOLE Hotline 1349 | PNP Hotline 117 | PAO (Pub
         : `Apply ${geo.jurisdiction} with precision — cite specific legislation, regulatory bodies, exact ombudsman names, realistic timelines, and real contact details for ${geo.country}.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
       ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
       prompt: `You are a sharp, calm conflict and legal expert. You are entirely on their side. Direct, confident, real — not preachy, not corporate. You sound like the smartest friend they have.
 
@@ -318,22 +319,40 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
       </details>
 
       {/* ANALYSE — solid, confident */}
-      <motion.button
-        onClick={analyse}
-        disabled={!what.trim() || loading}
-        whileTap={!loading && what.trim() ? { scale: 0.97 } : {}}
-        style={{
-          width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
-          fontWeight: 900, letterSpacing: '0.1em',
-          cursor: what.trim() && !loading ? 'pointer' : 'not-allowed',
-          border: `2px solid ${what.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-          background: what.trim() ? accentColor : 'transparent',
-          color: what.trim() ? '#000' : 'rgba(255,255,255,0.2)',
-          transition: 'all 0.2s',
-        }}
-      >
-        {loading ? <Spinner color={what.trim() ? '#000' : accentColor} text="ANALYSING YOUR SITUATION" /> : 'GET MY CONFLICT PLAN →'}
-      </motion.button>
+      <AnimatePresence mode="wait">
+        {loading ? (
+          <motion.div key="loading" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '28px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, borderRadius: 14, border: `1px solid ${accentColor}30`, background: `${accentColor}06` }}>
+            <motion.div style={{ display: 'flex', gap: 6 }}>
+              {[0,1,2].map(i => (
+                <motion.div key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: accentColor }}
+                  animate={{ y: [0, -10, 0] }} transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }} />
+              ))}
+            </motion.div>
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#fff', margin: '0 0 6px' }}>BUILDING YOUR PLAN</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>AI is analysing your situation against {geo.country} law…</p>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.button
+            key="btn"
+            onClick={analyse}
+            disabled={!what.trim()}
+            whileTap={what.trim() ? { scale: 0.97 } : {}}
+            style={{
+              width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+              fontWeight: 900, letterSpacing: '0.1em',
+              cursor: what.trim() ? 'pointer' : 'not-allowed',
+              border: `2px solid ${what.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
+              background: what.trim() ? accentColor : 'transparent',
+              color: what.trim() ? '#000' : 'rgba(255,255,255,0.2)',
+              transition: 'all 0.2s',
+            }}
+          >
+            GET MY CONFLICT PLAN →
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* ERROR FROM RESULT */}
       <AnimatePresence>

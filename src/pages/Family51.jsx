@@ -101,7 +101,19 @@ export default function Family51Page() {
       'Asia/Dubai': { country: 'UAE', flag: '🇦🇪', code: 'AE', jurisdiction: 'UAE law' },
       'Asia/Kolkata': { country: 'India', flag: '🇮🇳', code: 'IN', jurisdiction: 'Indian law' },
       'Asia/Singapore': { country: 'Singapore', flag: '🇸🇬', code: 'SG', jurisdiction: 'Singapore law' },
+      'Asia/Manila': { country: 'Philippines', flag: '🇵🇭', code: 'PH', jurisdiction: 'Philippine law' },
+      'Asia/Jakarta': { country: 'Indonesia', flag: '🇮🇩', code: 'ID', jurisdiction: 'Indonesian law' },
+      'Asia/Kuala_Lumpur': { country: 'Malaysia', flag: '🇲🇾', code: 'MY', jurisdiction: 'Malaysian law' },
+      'Asia/Bangkok': { country: 'Thailand', flag: '🇹🇭', code: 'TH', jurisdiction: 'Thai law' },
+      'Asia/Ho_Chi_Minh': { country: 'Vietnam', flag: '🇻🇳', code: 'VN', jurisdiction: 'Vietnamese law' },
+      'Asia/Seoul': { country: 'South Korea', flag: '🇰🇷', code: 'KR', jurisdiction: 'South Korean law' },
+      'Asia/Tokyo': { country: 'Japan', flag: '🇯🇵', code: 'JP', jurisdiction: 'Japanese law' },
+      'America/Sao_Paulo': { country: 'Brazil', flag: '🇧🇷', code: 'BR', jurisdiction: 'Brazilian law' },
+      'America/Mexico_City': { country: 'Mexico', flag: '🇲🇽', code: 'MX', jurisdiction: 'Mexican law' },
+      'Africa/Lagos': { country: 'Nigeria', flag: '🇳🇬', code: 'NG', jurisdiction: 'Nigerian law' },
+      'Africa/Nairobi': { country: 'Kenya', flag: '🇰🇪', code: 'KE', jurisdiction: 'Kenyan law' },
       'Africa/Johannesburg': { country: 'South Africa', flag: '🇿🇦', code: 'ZA', jurisdiction: 'SA law' },
+      'Europe/Istanbul': { country: 'Turkey', flag: '🇹🇷', code: 'TR', jurisdiction: 'Turkish law' },
     };
 
     const detected = geoMap[tz] || { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'English law' };
@@ -290,155 +302,76 @@ export default function Family51Page() {
           </motion.div>
          )}
 
-         {/* ── HOME: 3 BIG BUTTONS, NOTHING ELSE ─────────────── */}
+         {/* ── HOME: PREMIUM, FAST, CONFIDENT ─────────────────── */}
          {!activeTool && !isLocked && !menuOpen && !showWhy && !showFAQ && !showHistory && (
-          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '32px 20px 60px' }}>
 
             {/* STRIPE SUCCESS BANNER */}
             {showPaySuccess && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                style={{ marginBottom: 24, padding: '16px 20px', borderRadius: 14, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.4)', textAlign: 'center' }}
-              >
-                <p style={{ fontSize: 14, fontWeight: 800, color: '#22c55e', margin: '0 0 4px', letterSpacing: '0.04em' }}>You're SORTED — welcome aboard.</p>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Unlimited access is now unlocked. Go decode something.</p>
-                <button onClick={() => setShowPaySuccess(false)} style={{ marginTop: 10, fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.08em' }}>DISMISS</button>
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 20, padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.4)', textAlign: 'center' }}>
+                <p style={{ fontSize: 14, fontWeight: 800, color: '#22c55e', margin: '0 0 4px' }}>You're SORTED. Welcome aboard.</p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Unlimited access unlocked.</p>
+                <button onClick={() => setShowPaySuccess(false)} style={{ marginTop: 8, fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.08em' }}>DISMISS</button>
               </motion.div>
             )}
 
-            {/* PRIVACY TRUST BANNER — Kill the fear first */}
-             <motion.div
-               initial={{ opacity: 0, y: -10 }}
-               animate={{ opacity: 1, y: 0 }}
-               style={{ marginBottom: 28, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12, padding: '14px 16px', textAlign: 'center' }}
-             >
-               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 8 }}>
-                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                   <rect x="2.5" y="7" width="11" height="7" rx="1.2" stroke="#22c55e" strokeWidth="1.2" fill="rgba(34,197,94,0.1)" />
-                   <path d="M5.5 7V4.5a2.5 2.5 0 015 0v2.5" stroke="#22c55e" strokeWidth="1.2" strokeLinecap="round" />
-                   <circle cx="8" cy="10.5" r="1" fill="#22c55e" />
-                 </svg>
-                 <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.08em' }}>YOUR LETTER NEVER LEAVES YOUR BROWSER</span>
-               </div>
-               <p style={{ fontSize: 11, color: 'rgba(34,197,94,0.8)', margin: 0, lineHeight: 1.4 }}>
-                 Processed by AI. Immediately discarded. Never stored, sold, or trained on. Just clarity.
-               </p>
-             </motion.div>
-
-            {/* HEADLINE — SHORT AND SHARP */}
-             <div style={{ textAlign: 'center', marginBottom: 32 }}>
-               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                 {/* FREE BADGE — lead with this */}
-                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.35)', borderRadius: 20, padding: '5px 14px', marginBottom: 18 }}>
-                   <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0, animation: 'pulse 2s infinite' }} />
-                   <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>
-                     {remaining === Infinity || remaining >= 5 ? '5 FREE USES — NO CARD NEEDED' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
-                   </span>
-                 </div>
-                <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
-                    <span style={{ color: '#fff' }}>Got a scary</span>{' '}
-                    <span style={{ color: '#f97316' }}>letter?</span><br />
-                    <span style={{ color: '#fff' }}>Need a</span>{' '}
-                    <span style={{ color: '#06b6d4' }}>reply?</span><br />
-                    <span style={{ color: '#fff' }}>Stuck in a</span>{' '}
-                    <span style={{ color: '#ef4444' }}>dispute?</span>
-                  </h1>
-                  <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', margin: '16px 0 0', lineHeight: 1.55, fontWeight: 500 }}>
-                    SORTED reads your letter and tells you <strong style={{ color: '#fff' }}>exactly what it means</strong> and <strong style={{ color: '#fff' }}>what to do next</strong> — calmly, clearly, in your language.
-                  </p>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', margin: '8px 0 0' }}>
-                    No jargon. No judgement. Any language. Any country. You're not alone.
-                  </p>
-              </motion.div>
-            </div>
-
-            {/* WHY SORTED — INLINE VALUE PROP */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              style={{ marginBottom: 28, background: 'rgba(249,115,22,0.06)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 14, padding: '16px 18px' }}
-            >
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>WHAT SORTED DOES</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <WhyRow icon={<WRBolt />} text="Snap a photo with your phone or paste the text — decoded in seconds" />
-                <WhyRow icon={<WRTarget />} text="Exact steps to take, and by when — no walls of text" />
-                <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & relevant bodies automatically" />
-                <WhyRow icon={<WRLock />} text="Your letter is processed by AI and immediately discarded — never stored, never sold, never used to train anything" />
-                <WhyRow icon={<WRMail />} text="Email the breakdown to yourself — then forward it to a family member, solicitor, or advice worker. We never email third parties on your behalf (that would risk your privacy)." />
+            {/* HERO — tight, confident, no fluff */}
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 32 }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 20, padding: '4px 12px', marginBottom: 16 }}>
+                <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', animation: 'pulse 2s infinite' }} />
+                <span style={{ fontSize: 10, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>
+                  {remaining === Infinity || remaining >= 5 ? '5 FREE — NO CARD' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
+                </span>
               </div>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                5 free uses — no card, no signup. Decode, reply, dispute — each counts as one use. Then <strong style={{ color: 'rgba(255,255,255,0.5)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
+              <h1 style={{ fontSize: 'clamp(30px, 8vw, 46px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 14px' }}>
+                <span style={{ color: '#fff' }}>Scary letter?</span><br />
+                <span style={{ color: '#f97316' }}>We've got you.</span>
+              </h1>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>
+                Decode any letter. Write the reply. Get a dispute plan. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored.
               </p>
             </motion.div>
 
-            {/* THREE GIANT BUTTONS */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-
-              <BigButton
-                delay={0.05}
-                color="#f97316"
-                onClick={() => handleToolOpen('letter')}
-                icon={<DocIcon color="#f97316" />}
-                label="DECODE A LETTER"
-                sub="Paste it. Understand it in seconds."
-                tag={isLocked ? '🔒 LOCKED' : 'FREE'}
-              />
-
-              <BigButton
-                delay={0.1}
-                color="#06b6d4"
-                onClick={() => handleToolOpen('reply')}
-                icon={<ReplyIcon color="#06b6d4" />}
-                label="WRITE MY REPLY"
-                sub="We write it for you. Copy and send."
-                tag={isLocked ? '🔒 LOCKED' : 'FREE'}
-              />
-
-              <BigButton
-                delay={0.15}
-                color="#ef4444"
-                onClick={() => handleToolOpen('conflict')}
-                icon={<ConflictIcon color="#ef4444" />}
-                label="DISPUTE HELP"
-                sub="Neighbour. Employer. Landlord. We'll help you stand your ground."
-                tag={isLocked ? '🔒 LOCKED' : 'FREE'}
-              />
-
+            {/* THREE TOOLS — the whole product in 3 taps */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
+              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE A LETTER" sub="Snap a photo or paste it. Understood in seconds." tag="FREE" />
+              <BigButton delay={0.05} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="WRITE MY REPLY" sub="We write it for you. Copy. Send. Done." tag="FREE" />
+              <BigButton delay={0.1} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="DISPUTE HELP" sub="Neighbour. Employer. Landlord. Stand your ground." tag="FREE" />
             </div>
 
-            {/* INSTANT TRUST — tiny, below the fold */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.35 }}
-              style={{ marginTop: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}
-            >
-              {selectedLocation && <TrustPill text={selectedLocation.country} />}
-              <TrustPill text="Any language" />
-              <TrustPill text="Nothing stored" />
+            {/* TRUST STRIP */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 28 }}>
+              {selectedLocation && <TrustPill text={`📍 ${selectedLocation.country}`} />}
+              <TrustPill text="🌍 Any language" />
+              <TrustPill text="🔒 Nothing stored" />
+              <TrustPill text={`${remaining === Infinity || remaining >= 5 ? '5' : remaining} free uses`} />
             </motion.div>
 
-            {/* CLEAR DATA — always visible, in design */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              style={{ marginTop: 20, textAlign: 'center' }}
-            >
-              <button
-                onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }}
-                style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.2)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 6 }}
-              >
-                <Trash2 size={11} />
-                CLEAR ALL MY DATA
-              </button>
-            </motion.div>
+            {/* HOW IT WORKS — collapsed, clean */}
+            <details style={{ marginBottom: 20, cursor: 'pointer' }}>
+              <summary style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span>HOW IT WORKS</span>
+                <span style={{ opacity: 0.5 }}>↓</span>
+              </summary>
+              <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <WhyRow icon={<WRBolt />} text="Snap a photo or paste your letter — decoded in under 10 seconds" />
+                <WhyRow icon={<WRTarget />} text="Exact steps, deadlines, and who to contact — no walls of text" />
+                <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & local bodies automatically" />
+                <WhyRow icon={<WRLock />} text="Processed by AI then immediately discarded — never stored, never sold, never used to train anything" />
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', margin: '4px 0 0', lineHeight: 1.5 }}>
+                  5 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.4)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
+                </p>
+              </div>
+            </details>
 
             <SortedLiveCounter />
-
             <SortedForLifeCard />
+
+            <div style={{ marginTop: 16, textAlign: 'center' }}>
+              <button onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }} style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.15)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                <Trash2 size={10} /> CLEAR ALL MY DATA
+              </button>
+            </div>
 
           </motion.div>
         )}
