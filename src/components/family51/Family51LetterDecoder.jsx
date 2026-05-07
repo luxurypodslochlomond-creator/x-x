@@ -75,7 +75,12 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const currentGeo = geoRef.current;
       const currentType = letterTypeRef.current;
       const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      const geoContext = `Today's date is ${today}. The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} and locally relevant rights, bodies, and deadlines throughout your response. When calculating how urgent a deadline is, use today's date as your reference.`;
+      
+      const countrySpecific = currentGeo.code === 'PH'
+        ? `For Philippines: reference relevant laws (Civil Code RA 386, Labor Code PD 442, Consumer Act RA 7394, RA 9285 ADR). Name real bodies: DTI (1-384), DOLE (1349), NLRC, SEC, BSP, NBI, PAO (free legal aid 02-8928-9019). Small Claims Court handles up to PHP 400,000 without a lawyer. Barangay conciliation is required first for neighbour disputes.`
+        : `Reference specific legislation, named regulatory bodies, and real contact details for ${currentGeo.country}.`;
+      
+      const geoContext = `Today's date is ${today}. The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} precisely. ${countrySpecific} When calculating urgency, use today's date.`;
 
       // Route by file type: images → vision model directly; docs/PDFs → extract text first
       let letterContent = text;
@@ -395,9 +400,10 @@ Don't worry about formatting. Just get it all in."
       {/* OPTIONAL EXTRAS — only shown after result or when they've started typing */}
       {letterText.trim() && !result && (
         <div style={{ paddingTop: 4 }}>
-          {/* GEO — small, subtle */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
-            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
+          {/* GEO — always visible when typing */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+            <span style={{ fontSize: 12 }}>📍</span>
+            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.25)' }}>LOCATION:</span>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
           {/* TYPE CHIPS — collapsible optional hint */}

@@ -44,12 +44,37 @@ export function detectGeo() {
       'Africa/Johannesburg': { country: 'South Africa', jurisdiction: 'South African law', code: 'ZA' },
       'Asia/Kolkata': { country: 'India', jurisdiction: 'Indian law', code: 'IN' },
       'Asia/Bangkok': { country: 'Thailand', jurisdiction: 'Thai law', code: 'TH' },
+      'Asia/Manila': { country: 'Philippines', jurisdiction: 'Philippine law', code: 'PH' },
+      'Asia/Makassar': { country: 'Indonesia', jurisdiction: 'Indonesian law', code: 'ID' },
+      'Asia/Jakarta': { country: 'Indonesia', jurisdiction: 'Indonesian law', code: 'ID' },
+      'Asia/Kuala_Lumpur': { country: 'Malaysia', jurisdiction: 'Malaysian law', code: 'MY' },
+      'Asia/Ho_Chi_Minh': { country: 'Vietnam', jurisdiction: 'Vietnamese law', code: 'VN' },
+      'Asia/Seoul': { country: 'South Korea', jurisdiction: 'South Korean law', code: 'KR' },
+      'Asia/Shanghai': { country: 'China', jurisdiction: 'Chinese law', code: 'CN' },
+      'America/Sao_Paulo': { country: 'Brazil', jurisdiction: 'Brazilian law', code: 'BR' },
+      'America/Mexico_City': { country: 'Mexico', jurisdiction: 'Mexican law', code: 'MX' },
+      'America/Buenos_Aires': { country: 'Argentina', jurisdiction: 'Argentine law', code: 'AR' },
+      'America/Bogota': { country: 'Colombia', jurisdiction: 'Colombian law', code: 'CO' },
+      'Europe/Istanbul': { country: 'Turkey', jurisdiction: 'Turkish law', code: 'TR' },
+      'Africa/Lagos': { country: 'Nigeria', jurisdiction: 'Nigerian law', code: 'NG' },
+      'Africa/Nairobi': { country: 'Kenya', jurisdiction: 'Kenyan law', code: 'KE' },
     };
 
-    return tzMap[timezone] || {
-      country: locale.includes('en-GB') ? 'United Kingdom' : 'International',
-      jurisdiction: locale.includes('en-GB') ? 'UK law' : 'International law',
-      code: (locale.split('-')[1] || 'INT').toUpperCase()
+    // Also try locale-based detection as fallback
+    const localeFallbacks = {
+      'en-PH': { country: 'Philippines', jurisdiction: 'Philippine law', code: 'PH' },
+      'en-GB': { country: 'United Kingdom', jurisdiction: 'UK law', code: 'GB' },
+      'en-AU': { country: 'Australia', jurisdiction: 'Australian law', code: 'AU' },
+      'en-CA': { country: 'Canada', jurisdiction: 'Canadian law', code: 'CA' },
+      'en-NZ': { country: 'New Zealand', jurisdiction: 'New Zealand law', code: 'NZ' },
+      'en-IN': { country: 'India', jurisdiction: 'Indian law', code: 'IN' },
+      'en-SG': { country: 'Singapore', jurisdiction: 'Singapore law', code: 'SG' },
+    };
+
+    return tzMap[timezone] || localeFallbacks[locale] || {
+      country: 'International',
+      jurisdiction: 'General international principles',
+      code: 'INT'
     };
   } catch (error) {
     return { country: 'International', jurisdiction: 'International law', code: 'INT' };

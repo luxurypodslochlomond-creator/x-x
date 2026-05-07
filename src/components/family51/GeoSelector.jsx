@@ -25,7 +25,18 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
     { country: 'South Africa', jurisdiction: 'South African law', code: 'ZA' },
     { country: 'Japan', jurisdiction: 'Japanese law', code: 'JP' },
     { country: 'UAE', jurisdiction: 'UAE law', code: 'AE' },
-    { country: 'International', jurisdiction: 'International law', code: 'INT' },
+    { country: 'Philippines', jurisdiction: 'Philippine law', code: 'PH' },
+    { country: 'Indonesia', jurisdiction: 'Indonesian law', code: 'ID' },
+    { country: 'Malaysia', jurisdiction: 'Malaysian law', code: 'MY' },
+    { country: 'Thailand', jurisdiction: 'Thai law', code: 'TH' },
+    { country: 'Vietnam', jurisdiction: 'Vietnamese law', code: 'VN' },
+    { country: 'South Korea', jurisdiction: 'South Korean law', code: 'KR' },
+    { country: 'Brazil', jurisdiction: 'Brazilian law', code: 'BR' },
+    { country: 'Mexico', jurisdiction: 'Mexican law', code: 'MX' },
+    { country: 'Nigeria', jurisdiction: 'Nigerian law', code: 'NG' },
+    { country: 'Kenya', jurisdiction: 'Kenyan law', code: 'KE' },
+    { country: 'Turkey', jurisdiction: 'Turkish law', code: 'TR' },
+    { country: 'International', jurisdiction: 'General international principles', code: 'INT' },
   ];
 
   const filteredOptions = geoOptions.filter(o =>

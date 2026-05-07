@@ -109,23 +109,42 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
         if (parts.length > 0) fileContext = `\n\nATTACHED EVIDENCE:\n${parts.join('\n')}`;
       }
 
+      const countryContext = geo.code === 'PH' 
+        ? `PHILIPPINES-SPECIFIC LEGAL CONTEXT: Apply Philippine law precisely. Key laws and bodies to reference where relevant:
+- Civil Code of the Philippines (Republic Act 386) — property, contracts, obligations
+- Labor Code (PD 442) — employment disputes, illegal dismissal, NLRC jurisdiction
+- RA 9285 (Alternative Dispute Resolution Act) — mandatory mediation before court
+- RA 7160 (Local Government Code) — barangay conciliation (Katarungang Pambarangay) — this is often REQUIRED before court for neighbour/land disputes
+- HLURB / DHSUD — housing & real estate disputes (condo, subdivision)
+- DTI — consumer complaints (30-day resolution mandate)
+- DOLE — labour complaints (SENA mediation first)
+- PNP and NBI — for criminal harassment or threats
+- Small Claims Court (Rule of Procedure for Small Claims Cases) — up to PHP 400,000 without a lawyer
+- For land boundary disputes: DENR, Registry of Deeds, or DARAB (agrarian)
+- Barangay Hall is usually the FIRST and mandatory step for neighbour disputes in the Philippines
+Real contact: DTI Hotline 1-384 | DOLE Hotline 1349 | PNP Hotline 117 | PAO (Public Attorney's Office) — free legal aid, call (02) 8928-9019`
+        : `Apply ${geo.jurisdiction} with precision — cite specific legislation, regulatory bodies, exact ombudsman names, realistic timelines, and real contact details for ${geo.country}.`;
+
       const response = await base44.integrations.Core.InvokeLLM({
       ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
-      prompt: `You are a sharp, calm conflict and legal expert. You are on their side. Be direct and confident, not preachy. The person is in ${geo.country} — apply ${geo.jurisdiction} law with real references and escalation routes.
+      prompt: `You are a sharp, calm conflict and legal expert. You are entirely on their side. Direct, confident, real — not preachy, not corporate. You sound like the smartest friend they have.
+
+${countryContext}
 
 CONFLICT TYPE: ${ct?.label || 'General'}
 GOAL: ${gt?.label} — ${gt?.desc}
-SITUATION: ${what}${fileContext}
+THEIR SITUATION: ${what}${fileContext}
 
-You MUST return a JSON object with ALL of these fields populated with real, substantive content:
-- situation_assessment: 2-3 sentences on who has the stronger position and why (be honest, no spin)
-- legal_position: Their actual rights under ${geo.jurisdiction} law — cite specific legislation. Note this is guidance not formal legal advice.
-- recommended_steps: Array of exactly 3 specific actionable steps with real names/websites/numbers
-- what_to_say: Full word-for-word message or script they can send RIGHT NOW
-- what_not_to_do: Array of exactly 2 things that would hurt their position
-- if_it_escalates: Exact ombudsman, court, or body for ${geo.country} and how to reach them
+Give them a plan that actually works in ${geo.country}. Use real law. Real bodies. Real steps. Real contact details.
 
-Do not leave any field empty. Every field must have real, useful content.`,
+You MUST populate ALL fields with substantive, country-specific content. Empty fields are useless. Be the expert friend they can't afford to hire.
+
+- situation_assessment: 2-3 honest sentences. Who has the stronger position and why. Name names. Be real.
+- legal_position: Their actual rights under ${geo.jurisdiction} — cite specific legislation by name and number. Flag if they need a lawyer. Note: guidance only, not formal legal advice.
+- recommended_steps: Array of exactly 3 steps — each one specific, actionable, named (not "contact authorities" but "File a complaint with DTI Hotline 1-384" or "Go to your Barangay Hall and request conciliation under RA 7160"). Include timing.
+- what_to_say: Complete, word-for-word message or script they can use RIGHT NOW — ready to send, copy, or say. Make it firm but professional.
+- what_not_to_do: Array of exactly 2-3 specific things that would genuinely harm their position in ${geo.country}.
+- if_it_escalates: The EXACT next body (named), the process, realistic cost, and how to reach them in ${geo.country}.`,
       response_json_schema: {
         type: 'object',
         properties: {
@@ -220,6 +239,15 @@ Do not leave any field empty. Every field must have real, useful content.`,
         onBlur={e => e.target.style.borderColor = what ? accentColor + '60' : 'rgba(255,255,255,0.12)'}
       />
 
+      {/* LOCATION — always visible, prominent. Critical for accurate legal advice */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+        <span style={{ fontSize: 14 }}>📍</span>
+        <div style={{ flex: 1 }}>
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 2px' }}>YOUR LOCATION — used for accurate legal advice</p>
+          <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+        </div>
+      </div>
+
       {/* GOAL — always visible, compact */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
         {GOALS.map(g => (
@@ -239,10 +267,10 @@ Do not leave any field empty. Every field must have real, useful content.`,
         ))}
       </div>
 
-      {/* OPTIONAL — conflict type, evidence, location */}
+      {/* OPTIONAL — conflict type & evidence */}
       <details style={{ cursor: 'pointer' }}>
         <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-          + OPTIONAL: conflict type, evidence &amp; location
+          + OPTIONAL: conflict type &amp; evidence
         </summary>
         <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* Conflict type grid */}
@@ -286,11 +314,6 @@ Do not leave any field empty. Every field must have real, useful content.`,
               ))}
             </div>
           )}
-          {/* Geo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.06em' }}>📍</span>
-            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-          </div>
         </div>
       </details>
 
