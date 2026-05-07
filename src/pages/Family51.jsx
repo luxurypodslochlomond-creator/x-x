@@ -359,7 +359,7 @@ export default function Family51Page() {
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
               <div style={{ fontFamily: 'monospace', fontSize: 9, fontWeight: 800, letterSpacing: '0.22em', color: 'rgba(249,115,22,0.5)', marginBottom: 14 }}>
-                ZERO FRICTION · ZERO LOSS
+                NO SIGNUP · NO CARD · NOTHING STORED
               </div>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>
                 Got a letter you don't understand? A demand that's stressing you out? Paste it — we'll tell you exactly what it means, what to do, and help you reply. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored. Not legal advice.
