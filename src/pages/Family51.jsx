@@ -121,7 +121,7 @@ export default function Family51Page() {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(249,115,22,0.12)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -133,14 +133,7 @@ export default function Family51Page() {
           </div>
         </motion.button>
 
-        {/* Shannon bit stream — centre */}
-        {!activeTool && !showWhy && !showHistory && !showFAQ && (
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-            <div style={{ fontFamily: 'monospace', fontSize: 8, letterSpacing: '0.1em', color: 'rgba(249,115,22,0.18)', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 160, userSelect: 'none' }}>
-              01001000 01010101 01000111 01001000
-            </div>
-          </div>
-        )}
+        <div style={{ flex: 1 }} />
 
          {activeTool || showWhy || showHistory || showFAQ ? (
            <motion.button
@@ -332,11 +325,14 @@ export default function Family51Page() {
                   {remaining === Infinity || remaining >= 5 ? '5 FREE — NO CARD' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
                 </span>
               </div>
-              <h1 style={{ fontSize: 'clamp(30px, 8vw, 46px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 14px' }}>
+              <h1 style={{ fontSize: 'clamp(30px, 8vw, 46px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 10px' }}>
                 <span style={{ color: '#fff' }}>Got a scary letter</span><br />
                 <span style={{ color: '#fff' }}>or a dispute?</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
+              <div style={{ fontFamily: 'monospace', fontSize: 9, fontWeight: 800, letterSpacing: '0.22em', color: 'rgba(249,115,22,0.5)', marginBottom: 14 }}>
+                ZERO FRICTION · ZERO LOSS
+              </div>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>
                 Paste any letter, notice or official document. We explain what it means in plain English, draft your reply, and tell you exactly what to do next. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored. Not legal advice.
               </p>
