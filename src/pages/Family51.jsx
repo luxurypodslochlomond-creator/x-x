@@ -49,9 +49,10 @@ export default function Family51Page() {
       const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
       setCaseCount(cases.length);
     } catch {}
-    // Show onboarding only on first ever visit
+    // Show onboarding only on first ever visit — skip in builder iframe
+    const inIframe = window.self !== window.top;
     const seen = localStorage.getItem('sorted_onboarding_done');
-    if (!seen) setShowOnboarding(true);
+    if (!seen && !inIframe) setShowOnboarding(true);
   }, []);
 
   // Detect Stripe success redirect
