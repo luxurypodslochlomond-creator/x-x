@@ -196,6 +196,12 @@ Return a JSON object with these EXACT fields:
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    // Warn on large files — PDFs over 5MB likely won't read well
+    if (file.size > 5 * 1024 * 1024) {
+      setDecodeError('That file is too large. For best results, snap a photo of the relevant page instead of uploading a full document.');
+      e.target.value = '';
+      return;
+    }
     setUploading(true);
     setLoading(true); // set both immediately so there's no gap in the loader
     setDecodeError(null);
@@ -384,7 +390,7 @@ Don't worry about formatting. Just get it all in."
 
           {/* SUBTLE TRUST LINE */}
           <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', margin: 0, letterSpacing: '0.03em' }}>
-            Nothing stored. Processed and gone.
+            Nothing stored. Processed and gone. For long documents, snap just the key page.
           </p>
         </div>
       )}
