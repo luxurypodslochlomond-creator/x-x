@@ -346,31 +346,27 @@ export default function Family51Page() {
             </AnimatePresence>
 
             {/* HERO — tight, confident, no fluff */}
-            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 32 }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 20, padding: '4px 12px', marginBottom: 16 }}>
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 28 }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 20, padding: '4px 12px', marginBottom: 14 }}>
                 <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', animation: 'pulse 2s infinite' }} />
                 <span style={{ fontSize: 10, fontWeight: 800, color: '#22c55e', letterSpacing: '0.12em' }}>
                   {remaining === Infinity || remaining >= 5 ? '5 FREE — NO CARD' : `${remaining} FREE USE${remaining !== 1 ? 'S' : ''} LEFT`}
                 </span>
               </div>
-              <h1 style={{ fontSize: 'clamp(30px, 8vw, 46px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 10px' }}>
-                <span style={{ color: '#fff' }}>Got a scary letter</span><br />
-                <span style={{ color: '#fff' }}>or a dispute?</span><br />
+              <h1 style={{ fontSize: 'clamp(32px, 9vw, 52px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 10px' }}>
+                <span style={{ color: '#fff' }}>Scary letter?</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
-              <div style={{ fontFamily: 'monospace', fontSize: 9, fontWeight: 800, letterSpacing: '0.22em', color: 'rgba(249,115,22,0.5)', marginBottom: 14 }}>
-                NO SIGNUP · NO CARD · NOTHING STORED
-              </div>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>
-                Got a letter you don't understand? A demand that's stressing you out? Paste it — we'll tell you exactly what it means, what to do, and help you reply. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored. Not legal advice.
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.55, maxWidth: 360 }}>
+                Paste it. We decode it in plain English, tell you what to do, and write your reply. <strong style={{ color: 'rgba(255,255,255,0.75)' }}>Any language. Any country.</strong>
               </p>
             </motion.div>
 
             {/* THREE TOOLS — the whole product in 3 taps */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE A DOCUMENT" sub="Letter, notice, fine, eviction — paste it. Plain English in seconds." tag="FREE" />
-              <BigButton delay={0.05} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="WRITE MY REPLY" sub="Tell us the situation. We draft the letter. You copy and send." tag="FREE" />
-              <BigButton delay={0.1} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="DISPUTE PLAN" sub="Neighbour, employer, landlord, contract. Your rights + exactly what to do." tag="FREE" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE MY LETTER" sub="What does this actually mean?" tag="FREE" />
+              <BigButton delay={0.05} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="WRITE MY REPLY" sub="Draft it for me — I'll copy and send." tag="FREE" />
+              <BigButton delay={0.1} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="KNOW MY RIGHTS" sub="They can't do that, can they?" tag="FREE" />
             </div>
 
             {/* TRUST STRIP */}
