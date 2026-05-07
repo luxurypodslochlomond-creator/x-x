@@ -324,18 +324,18 @@ export default function Family51Page() {
                 </span>
               </div>
               <h1 style={{ fontSize: 'clamp(30px, 8vw, 46px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 14px' }}>
-                <span style={{ color: '#fff' }}>Official letters.</span><br />
-                <span style={{ color: '#fff' }}>Disputes. Contracts.</span><br />
+                <span style={{ color: '#fff' }}>Got a scary letter</span><br />
+                <span style={{ color: '#fff' }}>or a dispute?</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>
-                Paste any document, letter or legal situation. Get plain-English analysis, a ready-to-send reply, or a full dispute plan — in seconds. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored.
+                Paste any letter, notice or official document. We explain what it means in plain English, draft your reply, and tell you exactly what to do next. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored. Not legal advice.
               </p>
             </motion.div>
 
             {/* THREE TOOLS — the whole product in 3 taps */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE A DOCUMENT" sub="Letter, notice, contract, fine — paste it or snap it. Plain English in seconds." tag="FREE" />
+              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE A DOCUMENT" sub="Letter, notice, fine, eviction — paste it. Plain English in seconds." tag="FREE" />
               <BigButton delay={0.05} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="WRITE MY REPLY" sub="Tell us the situation. We draft the letter. You copy and send." tag="FREE" />
               <BigButton delay={0.1} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="DISPUTE PLAN" sub="Neighbour, employer, landlord, contract. Your rights + exactly what to do." tag="FREE" />
             </div>
