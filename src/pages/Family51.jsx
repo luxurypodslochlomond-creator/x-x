@@ -15,6 +15,10 @@ import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedLoader from '@/components/family51/SortedLoader';
 import SortedFAQ from '@/components/family51/SortedFAQ';
 import MauroChat from '@/components/family51/MauroChat';
+import SortedOnboarding from '@/components/family51/SortedOnboarding';
+import SortedJourneyBar from '@/components/family51/SortedJourneyBar';
+import SortedShareMoment from '@/components/family51/SortedShareMoment';
+import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first.
@@ -33,15 +37,21 @@ export default function Family51Page() {
   const [showPaySuccess, setShowPaySuccess] = useState(false);
   const [caseCount, setCaseCount] = useState(0);
   const [showMauro, setShowMauro] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [completedTools, setCompletedTools] = useState([]);
+  const [showShare, setShowShare] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
 
-  // Load case count from localStorage for badge
+  // Load case count from localStorage for badge + first visit onboarding
   useEffect(() => {
     try {
       const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
       setCaseCount(cases.length);
     } catch {}
+    // Show onboarding only on first ever visit
+    const seen = localStorage.getItem('sorted_onboarding_done');
+    if (!seen) setShowOnboarding(true);
   }, []);
 
   // Detect Stripe success redirect
@@ -55,7 +65,6 @@ export default function Family51Page() {
   }, []);
 
   const handleToolOpen = (toolId, handoffData = null) => {
-    // Allow handoff between tools even if locked — locking only blocks starting new work from home
     setSlideDir(1);
     setActiveTool(toolId);
     setPrefillContext(handoffData);
@@ -63,6 +72,16 @@ export default function Family51Page() {
     setShowHistory(false);
     setShowWhy(false);
     setShowFAQ(false);
+    setShowShare(false);
+  };
+
+  const handleToolComplete = (toolId) => {
+    recordUse();
+    setCompletedTools(prev => prev.includes(toolId) ? prev : [...prev, toolId]);
+    // Show share moment after first decode
+    if (toolId === 'letter' && !completedTools.includes('letter')) {
+      setTimeout(() => setShowShare(true), 1200);
+    }
   };
 
   const handleBack = () => {
@@ -122,6 +141,16 @@ export default function Family51Page() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
+
+      {/* ONBOARDING — first visit only */}
+      <AnimatePresence>
+        {showOnboarding && (
+          <SortedOnboarding onDone={() => {
+            localStorage.setItem('sorted_onboarding_done', '1');
+            setShowOnboarding(false);
+          }} />
+        )}
+      </AnimatePresence>
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(249,115,22,0.12)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -308,14 +337,12 @@ export default function Family51Page() {
          {!activeTool && !isLocked && !menuOpen && !showWhy && !showFAQ && !showHistory && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '32px 20px 60px' }}>
 
-            {/* STRIPE SUCCESS BANNER */}
-            {showPaySuccess && (
-              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 20, padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.4)', textAlign: 'center' }}>
-                <p style={{ fontSize: 14, fontWeight: 800, color: '#22c55e', margin: '0 0 4px' }}>You're SORTED. Welcome aboard.</p>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0 }}>Unlimited access unlocked.</p>
-                <button onClick={() => setShowPaySuccess(false)} style={{ marginTop: 8, fontSize: 10, color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.08em' }}>DISMISS</button>
-              </motion.div>
-            )}
+            {/* STRIPE SUCCESS — premium celebration */}
+            <AnimatePresence>
+              {showPaySuccess && (
+                <SortedPremiumSuccess onDismiss={() => setShowPaySuccess(false)} />
+              )}
+            </AnimatePresence>
 
             {/* HERO — tight, confident, no fluff */}
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 32 }}>
@@ -421,24 +448,24 @@ export default function Family51Page() {
             transition={{ duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
           >
-            {/* TOOL TITLE BAR */}
-            <div style={{ marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
-                {activeTool === 'letter' ? 'DECODE A DOCUMENT' : activeTool === 'reply' ? 'WRITE MY REPLY' : 'DISPUTE PLAN'}
-              </p>
-            </div>
+            {/* JOURNEY BAR */}
+            <SortedJourneyBar
+              completedTools={completedTools}
+              currentTool={activeTool}
+              onNavigate={handleToolOpen}
+            />
 
             {activeTool === 'letter' && (
               <Family51LetterDecoder
                 accentColor="#f97316"
-                onResult={recordUse}
+                onResult={() => handleToolComplete('letter')}
                 onHandoff={(data) => handleToolOpen('reply', data)}
               />
             )}
             {activeTool === 'reply' && (
               <Family51ReplyWriter
                 accentColor="#06b6d4"
-                onResult={recordUse}
+                onResult={() => handleToolComplete('reply')}
                 prefillContext={prefillContext}
                 suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
                 relatedCaseId={prefillContext?.related_case_id}
@@ -448,10 +475,17 @@ export default function Family51Page() {
             {activeTool === 'conflict' && (
               <Family51ConflictHelper
                 accentColor="#ef4444"
-                onResult={recordUse}
+                onResult={() => handleToolComplete('conflict')}
                 prefillContext={prefillContext}
               />
             )}
+
+            {/* SHARE MOMENT — after first decode */}
+            <AnimatePresence>
+              {showShare && activeTool === 'letter' && (
+                <SortedShareMoment onDismiss={() => setShowShare(false)} />
+              )}
+            </AnimatePresence>
 
             {/* BOTTOM NAV — switch tools without going back */}
             <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
@@ -513,7 +547,7 @@ export default function Family51Page() {
           )}
         </AnimatePresence>
 
-        {/* ── PAYWALL — shown when locked ───────────── */}
+        {/* ── PAYWALL — earned, not punishing ───────────── */}
         {!activeTool && isLocked && (
           <motion.div
             key="paywall"
@@ -521,29 +555,45 @@ export default function Family51Page() {
             animate={{ opacity: 1, y: 0 }}
             style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}
           >
-            <div style={{ textAlign: 'center', marginBottom: 24 }}>
-              <div style={{ marginBottom: 16 }}></div>
-              <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 14px' }}>
-                <span style={{ color: '#fff' }}>You've used your</span>{' '}
+            {/* What you've already done */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 28, flexWrap: 'wrap' }}>
+              {completedTools.map(t => (
+                <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 20, padding: '5px 12px' }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e', letterSpacing: '0.08em' }}>
+                    {t === 'letter' ? 'LETTER DECODED' : t === 'reply' ? 'REPLY DRAFTED' : 'RIGHTS KNOWN'}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ textAlign: 'center', marginBottom: 28 }}>
+              <div style={{ fontSize: 40, marginBottom: 12 }}>🔓</div>
+              <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 12px' }}>
+                <span style={{ color: '#fff' }}>You've nailed your</span>{' '}
                 <span style={{ color: '#f97316' }}>5 free uses.</span>
               </h1>
-              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6 }}>
-                We know how stressful this stuff is. That's exactly why we built SORTED — so you don't have to face it alone.
+              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', margin: '0 0 8px', lineHeight: 1.6 }}>
+                Keep going — unlimited, for less than a coffee.
               </p>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                {geoPrice.inline} · cancel any time · no small print
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.5 }}>
+                {geoPrice.inline} · cancel any time · no small print · not legal advice
               </p>
             </div>
-            <div style={{ marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#eab308', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(234,179,8,0.3)', background: 'rgba(234,179,8,0.06)', transition: 'all 0.15s', letterSpacing: '0.02em' }}>Can't afford it? Email us — we'll sort it.</a>
+
+            <SortedForLifeCard compact />
+
+            <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#eab308', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(234,179,8,0.3)', background: 'rgba(234,179,8,0.06)', letterSpacing: '0.02em' }}>
+                Can't afford it? Email us — we'll sort it.
+              </a>
               <button
                 onClick={() => setShowMauro(true)}
-                style={{ display: 'block', width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', transition: 'all 0.15s', letterSpacing: '0.02em' }}
+                style={{ width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: 'none', cursor: 'pointer', letterSpacing: '0.02em' }}
               >
-                Talk to SORTED AI — got questions?
+                Got questions? Talk to SORTED AI
               </button>
             </div>
-            <SortedForLifeCard compact />
           </motion.div>
         )}
 
