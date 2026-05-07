@@ -15,10 +15,10 @@ const SITUATIONS = [
 ];
 
 const TONES = [
+  { id: 'calm',   label: 'CALM',    desc: 'De-escalate. Resolve.' },
   { id: 'firm',   label: 'FIRM',    desc: 'Professional. No pushover.' },
-  { id: 'calm',   label: 'CALM',    desc: 'Neutral. De-escalate.' },
-  { id: 'urgent', label: 'URGENT',  desc: 'Assert. Make them act.' },
   { id: 'formal', label: 'FORMAL',  desc: 'Legal weight.' },
+  { id: 'urgent', label: 'URGENT',  desc: 'Assert. Make them act.' },
 ];
 
 export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff, suggestedTone, relatedCaseId }) {
@@ -38,7 +38,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
       setError(null);
     }
   }, [prefillContext]);
-  const [tone, setTone]           = useState(() => suggestedTone || 'firm');
+  const [tone, setTone]           = useState(() => suggestedTone || 'calm');
   const [name, setName]           = useState('');
   const [loading, setLoading]     = useState(false);
   const [result, setResult]       = useState(null);
@@ -245,29 +245,6 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
           </div>
         )}
 
-        {/* TONE GRID — LEAD WITH THIS */}
-        <div>
-          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 10px' }}>WHAT TONE DO YOU NEED?</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-            {TONES.map(t => (
-              <motion.button
-                key={t.id}
-                onClick={() => setTone(t.id)}
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  padding: '14px 12px', borderRadius: 12, textAlign: 'center', cursor: 'pointer',
-                  border: `2px solid ${tone === t.id ? accentColor : 'rgba(255,255,255,0.12)'}`,
-                  background: tone === t.id ? accentColor + '15' : 'rgba(255,255,255,0.02)',
-                  transition: 'all 0.15s',
-                }}
-              >
-                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.1em', color: tone === t.id ? accentColor : 'rgba(255,255,255,0.6)', margin: '0 0 4px' }}>{t.label}</p>
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0 }}>{t.desc}</p>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-
         {/* CONTEXT — minimal, clear */}
         <div>
           <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
@@ -408,7 +385,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 
             {/* TONE SWITCHER — visible, real-time */}
             <div style={{ background: accentColor + '08', border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '14px 16px' }}>
-              <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 10px' }}>TRY DIFFERENT TONE</p>
+              <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 4px' }}>NEED A DIFFERENT TONE?</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 {TONES.map(t => (
                   <motion.button
