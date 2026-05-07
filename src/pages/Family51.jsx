@@ -354,19 +354,21 @@ export default function Family51Page() {
                 </span>
               </div>
               <h1 style={{ fontSize: 'clamp(32px, 9vw, 52px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 10px' }}>
-                <span style={{ color: '#fff' }}>Scary letter?</span><br />
+                <span style={{ color: '#fff' }}>Something stressing</span><br />
+                <span style={{ color: '#fff' }}>you out?</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.55, maxWidth: 360 }}>
-                Paste it. We decode it in plain English, tell you what to do, and write your reply. <strong style={{ color: 'rgba(255,255,255,0.75)' }}>Any language. Any country.</strong>
+                Paste a letter, take a photo, or just tell us what's going on. Plain English. <strong style={{ color: 'rgba(255,255,255,0.75)' }}>Any language. Any country.</strong>
               </p>
             </motion.div>
 
-            {/* THREE TOOLS — the whole product in 3 taps */}
+            {/* FOUR TOOLS — the whole product in 4 taps */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
-              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE MY LETTER" sub="What does this actually mean?" tag="FREE" />
-              <BigButton delay={0.05} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="WRITE MY REPLY" sub="Draft it for me — I'll copy and send." tag="FREE" />
-              <BigButton delay={0.1} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="KNOW MY RIGHTS" sub="They can't do that, can they?" tag="FREE" />
+              <BigButton delay={0} color="#22c55e" onClick={() => handleToolOpen('conflict')} icon={<TalkIcon color="#22c55e" />} label="JUST TELL ME WHAT'S WRONG" sub="Type it, say it — we'll figure out what to do." tag="FREE" />
+              <BigButton delay={0.05} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="I HAVE A LETTER" sub="Paste it or take a photo — decoded in seconds." tag="FREE" />
+              <BigButton delay={0.1} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="HELP ME WRITE BACK" sub="Tell us the situation — we draft it, you send it." tag="FREE" />
+              <BigButton delay={0.15} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="KNOW MY RIGHTS" sub="They can't do that, can they?" tag="FREE" />
             </div>
 
             {/* TRUST STRIP */}
@@ -712,6 +714,16 @@ function F51Mark() {
       <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f97316" strokeWidth="1.4" fill="rgba(249,115,22,0.25)" />
       {/* Clasp lock dot */}
       <circle cx="15" cy="19" r="0.8" fill="#f97316" />
+    </svg>
+  );
+}
+
+function TalkIcon({ color }) {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path d="M6 8h24a2 2 0 012 2v12a2 2 0 01-2 2H20l-6 4v-4H6a2 2 0 01-2-2V10a2 2 0 012-2z" stroke={color} strokeWidth="1.5" fill={`${color}12`} />
+      <path d="M11 16h14M11 20h8" stroke={color} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+      <circle cx="26" cy="14" r="1" fill={color} opacity="0.8" />
     </svg>
   );
 }
