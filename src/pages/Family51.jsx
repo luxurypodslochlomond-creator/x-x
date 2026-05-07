@@ -345,58 +345,101 @@ export default function Family51Page() {
               )}
             </AnimatePresence>
 
-            {/* HERO — all about their problem, not us */}
-            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 32 }}>
-              <h1 style={{ fontSize: 'clamp(30px, 9vw, 48px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 12px' }}>
-                <span style={{ color: '#fff' }}>Got a letter that's</span><br />
-                <span style={{ color: '#f97316' }}>stressing you out?</span>
+            {/* HERO — short & powerful */}
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 28 }}>
+              <h1 style={{ fontSize: 'clamp(32px, 9vw, 48px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 8px' }}>
+                <span style={{ color: '#fff' }}>Something stressing</span><br />
+                <span style={{ color: '#fff' }}>you out?</span><br />
+                <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: 0, lineHeight: 1.55 }}>
-                Paste it or take a photo. Plain English in seconds.<br />
-                <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 11 }}>Free · no card · nothing stored · any language</span>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>
+                Paste a letter, take a photo, or just tell us what's going on. Plain English. <strong style={{ color: 'rgba(255,255,255,0.7)' }}>Any language. Any country.</strong>
               </p>
             </motion.div>
 
-            {/* ONE BIG ACTION */}
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => handleToolOpen('letter')}
-              style={{
-                width: '100%', cursor: 'pointer',
-                padding: '20px 24px', borderRadius: 16, marginBottom: 10,
-                background: '#f97316',
-                boxShadow: '0 0 40px rgba(249,115,22,0.3)',
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                border: 'none',
-              }}
-            >
-              <span style={{ fontSize: 17, fontWeight: 900, color: '#000', letterSpacing: '-0.01em' }}>Start — it's free</span>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </motion.button>
-
-            {/* SECONDARY — two quiet options */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 28 }}>
+            {/* CARD STACK — equal paths, icon-first */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
               <motion.button
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.18 }}
-                whileTap={{ scale: 0.96 }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => handleToolOpen('conflict')}
-                style={{ padding: '14px 12px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)', cursor: 'pointer', textAlign: 'left', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+                style={{
+                  width: '100%', textAlign: 'left', cursor: 'pointer',
+                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(34,197,94,0.25)',
+                  background: 'rgba(34,197,94,0.08)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                  display: 'flex', alignItems: 'flex-start', gap: 14,
+                }}
               >
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.7)', lineHeight: 1.3 }}>No letter — just a situation</div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 4, letterSpacing: '-0.01em' }}>JUST TELL ME WHAT'S WRONG</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>Type it, say it — we'll figure out what to do.</div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: 2, opacity: 0.5 }}>
+                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
               </motion.button>
+
               <motion.button
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.22 }}
-                whileTap={{ scale: 0.96 }}
-                onClick={() => handleToolOpen('reply')}
-                style={{ padding: '14px 12px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)', cursor: 'pointer', textAlign: 'left', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleToolOpen('letter')}
+                style={{
+                  width: '100%', textAlign: 'left', cursor: 'pointer',
+                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
+                  background: 'rgba(249,115,22,0.08)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                  display: 'flex', alignItems: 'flex-start', gap: 14,
+                }}
               >
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.7)', lineHeight: 1.3 }}>Help me write a reply</div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M14 2v6h6M9 15h6" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 4, letterSpacing: '-0.01em' }}>I HAVE A LETTER</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>Paste it or take a photo — decoded in seconds.</div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: 2, opacity: 0.5 }}>
+                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </motion.button>
+
+              <motion.button
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleToolOpen('reply')}
+                style={{
+                  width: '100%', textAlign: 'left', cursor: 'pointer',
+                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',
+                  background: 'rgba(6,182,212,0.08)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                  display: 'flex', alignItems: 'flex-start', gap: 14,
+                }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 4, letterSpacing: '-0.01em' }}>HELP ME WRITE BACK</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>Tell us the situation — we draft a reply for you.</div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: 2, opacity: 0.5 }}>
+                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
               </motion.button>
             </div>
 
