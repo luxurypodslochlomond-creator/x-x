@@ -324,26 +324,27 @@ export default function Family51Page() {
                 </span>
               </div>
               <h1 style={{ fontSize: 'clamp(30px, 8vw, 46px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 14px' }}>
-                <span style={{ color: '#fff' }}>Scary letter?</span><br />
+                <span style={{ color: '#fff' }}>Official letters.</span><br />
+                <span style={{ color: '#fff' }}>Disputes. Contracts.</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>
-                Decode any letter. Write the reply. Get a dispute plan. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored.
+                Paste any document, letter or legal situation. Get plain-English analysis, a ready-to-send reply, or a full dispute plan — in seconds. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored.
               </p>
             </motion.div>
 
             {/* THREE TOOLS — the whole product in 3 taps */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE A LETTER" sub="Snap a photo or paste it. Understood in seconds." tag="FREE" />
-              <BigButton delay={0.05} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="WRITE MY REPLY" sub="We write it for you. Copy. Send. Done." tag="FREE" />
-              <BigButton delay={0.1} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="DISPUTE HELP" sub="Neighbour. Employer. Landlord. Stand your ground." tag="FREE" />
+              <BigButton delay={0} color="#f97316" onClick={() => handleToolOpen('letter')} icon={<DocIcon color="#f97316" />} label="DECODE A DOCUMENT" sub="Letter, notice, contract, fine — paste it or snap it. Plain English in seconds." tag="FREE" />
+              <BigButton delay={0.05} color="#06b6d4" onClick={() => handleToolOpen('reply')} icon={<ReplyIcon color="#06b6d4" />} label="WRITE MY REPLY" sub="Tell us the situation. We draft the letter. You copy and send." tag="FREE" />
+              <BigButton delay={0.1} color="#ef4444" onClick={() => handleToolOpen('conflict')} icon={<ConflictIcon color="#ef4444" />} label="DISPUTE PLAN" sub="Neighbour, employer, landlord, contract. Your rights + exactly what to do." tag="FREE" />
             </div>
 
             {/* TRUST STRIP */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 28 }}>
-              {selectedLocation && <TrustPill text={`📍 ${selectedLocation.country}`} />}
-              <TrustPill text="🌍 Any language" />
-              <TrustPill text="🔒 Nothing stored" />
+              {selectedLocation && <TrustPill text={selectedLocation.country} />}
+              <TrustPill text="Any language" />
+              <TrustPill text="Nothing stored" />
               <TrustPill text={`${remaining === Infinity || remaining >= 5 ? '5' : remaining} free uses`} />
             </motion.div>
 
@@ -418,7 +419,7 @@ export default function Family51Page() {
             {/* TOOL TITLE BAR */}
             <div style={{ marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
-                {activeTool === 'letter' ? 'DECODE A LETTER' : activeTool === 'reply' ? 'WRITE MY REPLY' : 'DISPUTE HELP'}
+                {activeTool === 'letter' ? 'DECODE A DOCUMENT' : activeTool === 'reply' ? 'WRITE MY REPLY' : 'DISPUTE PLAN'}
               </p>
             </div>
 
