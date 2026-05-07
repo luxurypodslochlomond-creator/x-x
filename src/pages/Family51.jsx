@@ -361,7 +361,7 @@ export default function Family51Page() {
                 ZERO FRICTION · ZERO LOSS
               </div>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>
-                Paste any letter, notice or official document. We explain what it means in plain English, draft your reply, and tell you exactly what to do next. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored. Not legal advice.
+                Got a letter you don't understand? A demand that's stressing you out? Paste it — we'll tell you exactly what it means, what to do, and help you reply. <strong style={{ color: 'rgba(255,255,255,0.85)' }}>Any language. Any country.</strong> Nothing stored. Not legal advice.
               </p>
             </motion.div>
 
