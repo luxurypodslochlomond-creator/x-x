@@ -223,49 +223,50 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
         </div>
       )}
 
-      {/* WHAT HAPPENED — first, no barriers */}
+      {/* WHAT HAPPENED */}
       <textarea
         value={what}
         onChange={e => setWhat(e.target.value)}
         autoFocus
-        placeholder="Tell us the whole story — who's involved, what happened, what's been said.&#10;&#10;Don't filter it. The more detail, the better the help."
+        placeholder="Just tell us what's going on. Who's involved, what happened, what's been said. Don't filter it."
         style={{
-          width: '100%', height: 180, background: 'rgba(255,255,255,0.03)',
-          border: `1px solid ${what ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
-          borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
-          resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
+          width: '100%', height: 130, background: 'rgba(255,255,255,0.03)',
+          border: `1px solid ${what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+          borderRadius: 12, color: '#fff', fontSize: 14, padding: '14px 16px',
+          resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
           transition: 'border-color 0.2s', boxSizing: 'border-box',
         }}
-        onFocus={e => e.target.style.borderColor = accentColor + '80'}
-        onBlur={e => e.target.style.borderColor = what ? accentColor + '60' : 'rgba(255,255,255,0.12)'}
+        onFocus={e => e.target.style.borderColor = accentColor + '70'}
+        onBlur={e => e.target.style.borderColor = what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
       />
 
-      {/* LOCATION — always visible, prominent. Critical for accurate legal advice */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-        <span style={{ fontSize: 14 }}>📍</span>
-        <div style={{ flex: 1 }}>
-          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 2px' }}>YOUR LOCATION — used for accurate legal advice</p>
-          <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-        </div>
+      {/* LOCATION — inline, compact */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
+        <span style={{ fontSize: 12, opacity: 0.6 }}>📍</span>
+        <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
       </div>
 
-      {/* GOAL — always visible, compact */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        {GOALS.map(g => (
-          <button
-            key={g.id}
-            onClick={() => setGoal(g.id)}
-            style={{
-              padding: '10px 14px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-              border: `1px solid ${goal === g.id ? accentColor : 'rgba(255,255,255,0.08)'}`,
-              background: goal === g.id ? accentColor : 'rgba(255,255,255,0.02)',
-              transition: 'all 0.15s',
-            }}
-          >
-            <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: goal === g.id ? '#000' : 'rgba(255,255,255,0.5)', margin: 0 }}>{g.label}</p>
-            <p style={{ fontSize: 11, color: goal === g.id ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{g.desc}</p>
-          </button>
-        ))}
+      {/* GOAL — pill chips, light */}
+      <div>
+        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT DO YOU WANT?</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          {GOALS.map(g => (
+            <button
+              key={g.id}
+              onClick={() => setGoal(g.id)}
+              style={{
+                padding: '7px 14px', borderRadius: 20, cursor: 'pointer',
+                border: `1px solid ${goal === g.id ? accentColor + '80' : 'rgba(255,255,255,0.1)'}`,
+                background: goal === g.id ? accentColor + '18' : 'transparent',
+                color: goal === g.id ? '#fff' : 'rgba(255,255,255,0.45)',
+                fontSize: 11, fontWeight: 700, letterSpacing: '0.06em',
+                transition: 'all 0.12s',
+              }}
+            >
+              {g.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* OPTIONAL — conflict type & evidence */}
@@ -340,16 +341,16 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
             disabled={!what.trim()}
             whileTap={what.trim() ? { scale: 0.97 } : {}}
             style={{
-              width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
-              fontWeight: 900, letterSpacing: '0.1em',
+              width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 14,
+              fontWeight: 800, letterSpacing: '0.06em',
               cursor: what.trim() ? 'pointer' : 'not-allowed',
-              border: `2px solid ${what.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-              background: what.trim() ? accentColor : 'transparent',
-              color: what.trim() ? '#000' : 'rgba(255,255,255,0.2)',
+              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(255,255,255,0.08)'}`,
+              background: what.trim() ? accentColor + '18' : 'transparent',
+              color: what.trim() ? '#fff' : 'rgba(255,255,255,0.2)',
               transition: 'all 0.2s',
             }}
           >
-            GET MY CONFLICT PLAN →
+            GET MY PLAN →
           </motion.button>
         )}
       </AnimatePresence>
