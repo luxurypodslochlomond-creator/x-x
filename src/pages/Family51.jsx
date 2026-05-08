@@ -345,16 +345,27 @@ export default function Family51Page() {
               )}
             </AnimatePresence>
 
-            {/* HERO — short & powerful */}
-            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 28 }}>
-              <h1 style={{ fontSize: 'clamp(32px, 9vw, 48px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 8px' }}>
-                <span style={{ color: '#fff' }}>Something stressing</span><br />
-                <span style={{ color: '#fff' }}>you out?</span><br />
+            {/* HERO — tight & powerful */}
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 16 }}>
+              <h1 style={{ fontSize: 'clamp(26px, 7vw, 38px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 6px' }}>
+                <span style={{ color: '#fff' }}>Something stressing you out?</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>
-                Paste a letter, take a photo, or just tell us what's going on. Plain English. <strong style={{ color: 'rgba(255,255,255,0.7)' }}>Any language. Any country.</strong>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>
+                Any letter, any situation. <strong style={{ color: 'rgba(255,255,255,0.8)' }}>Plain English. Any language. Any country.</strong>
               </p>
+            </motion.div>
+
+            {/* PRIVACY TRUST — visible above fold, before they paste anything */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 16, padding: '10px 14px', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.15)', borderRadius: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#22c55e" strokeWidth="1.1" /><path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#22c55e" strokeWidth="1.1" strokeLinecap="round" /></svg>
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e', letterSpacing: '0.04em' }}>Nothing stored</span>
+              </div>
+              <div style={{ width: 1, height: 12, background: 'rgba(255,255,255,0.1)' }} />
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.03em' }}>Processed by AI · immediately discarded</span>
+              <div style={{ width: 1, height: 12, background: 'rgba(255,255,255,0.1)' }} />
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)' }}>5 free uses · no signup</span>
             </motion.div>
 
             {/* CARD STACK — hero top, 2x2 bottom row */}
@@ -388,7 +399,7 @@ export default function Family51Page() {
                 </svg>
               </motion.button>
 
-              {/* BOTTOM ROW — 2 side by side */}
+              {/* BOTTOM ROW — 2 side by side, equal height */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
 
                 <motion.button
@@ -399,21 +410,18 @@ export default function Family51Page() {
                   onClick={() => handleToolOpen('letter')}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
-                    padding: '18px 14px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
+                    padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
                     background: 'rgba(249,115,22,0.08)',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 10,
+                    display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-start',
                   }}
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M14 2v6h6M9 15h6" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.2 }}>I HAVE A LETTER</div>
-                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Paste, photo or upload — decoded in seconds</div>
-                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>I HAVE A LETTER</div>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.35 }}>Paste, photo or upload</div>
                 </motion.button>
 
                 <motion.button
@@ -424,32 +432,27 @@ export default function Family51Page() {
                   onClick={() => handleToolOpen('reply')}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
-                    padding: '18px 14px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',
+                    padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',
                     background: 'rgba(6,182,212,0.08)',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 10,
+                    display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-start',
                   }}
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.2 }}>HELP ME WRITE BACK</div>
-                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Tell us the situation — we draft a reply</div>
-                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>WRITE A REPLY</div>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.35 }}>We draft it for you</div>
                 </motion.button>
 
               </div>
             </div>
 
-            {/* TRUST STRIP */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 28 }}>
-              {selectedLocation && <TrustPill text={selectedLocation.country} />}
-              <TrustPill text="Any language" />
-              <TrustPill text="Nothing stored" />
-              <TrustPill text={`${remaining === Infinity || remaining >= 5 ? '5' : remaining} free uses`} />
+            {/* TRUST STRIP — location pill only, privacy moved above fold */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
+              {selectedLocation && <TrustPill text={`${selectedLocation.flag} ${selectedLocation.country}`} />}
+              <TrustPill text={selectedLocation?.jurisdiction || 'Local law'} />
             </motion.div>
 
             {/* HOW IT WORKS — collapsed, clean */}
