@@ -345,27 +345,27 @@ export default function Family51Page() {
               )}
             </AnimatePresence>
 
-            {/* HERO — tight & powerful */}
-            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 16 }}>
-              <h1 style={{ fontSize: 'clamp(26px, 7vw, 38px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 6px' }}>
-                <span style={{ color: '#fff' }}>Something stressing you out?</span><br />
+            {/* HERO — punchy, one breath */}
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 18 }}>
+              <h1 style={{ fontSize: 'clamp(28px, 8vw, 42px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 8px' }}>
+                <span style={{ color: '#fff' }}>Stressed about</span><br />
+                <span style={{ color: '#fff' }}>something?</span><br />
                 <span style={{ color: '#f97316' }}>We've got you.</span>
               </h1>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>
-                Any letter, any situation. <strong style={{ color: 'rgba(255,255,255,0.8)' }}>Plain English. Any language. Any country.</strong>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.5 }}>
+                Plain English. Any language. Any country.
               </p>
             </motion.div>
 
-            {/* PRIVACY TRUST — visible above fold, before they paste anything */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 16, padding: '10px 14px', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.15)', borderRadius: 10 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#22c55e" strokeWidth="1.1" /><path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#22c55e" strokeWidth="1.1" strokeLinecap="round" /></svg>
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e', letterSpacing: '0.04em' }}>Nothing stored</span>
-              </div>
-              <div style={{ width: 1, height: 12, background: 'rgba(255,255,255,0.1)' }} />
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.03em' }}>Processed by AI · immediately discarded</span>
-              <div style={{ width: 1, height: 12, background: 'rgba(255,255,255,0.1)' }} />
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)' }}>5 free uses · no signup</span>
+            {/* PRIVACY TRUST — single confident statement */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, padding: '9px 14px', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)', borderRadius: 10 }}>
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+                <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#22c55e" strokeWidth="1.1" />
+                <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#22c55e" strokeWidth="1.1" strokeLinecap="round" />
+              </svg>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e' }}>Private by design</span>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>·</span>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>AI processes then immediately discards — nothing stored, nothing sold</span>
             </motion.div>
 
             {/* CARD STACK — hero top, 2x2 bottom row */}
@@ -392,7 +392,7 @@ export default function Family51Page() {
                 </svg>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em' }}>JUST TELL ME WHAT'S WRONG</div>
-                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Type it or say it — we'll figure out what to do</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Type or say it — we'll work out what to do</div>
                 </div>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, opacity: 0.4 }}>
                   <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" />
@@ -451,8 +451,9 @@ export default function Family51Page() {
 
             {/* TRUST STRIP — location pill only, privacy moved above fold */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
-              {selectedLocation && <TrustPill text={`${selectedLocation.flag} ${selectedLocation.country}`} />}
+              {selectedLocation && <TrustPill text={selectedLocation.country} />}
               <TrustPill text={selectedLocation?.jurisdiction || 'Local law'} />
+              <TrustPill text="5 free uses" />
             </motion.div>
 
             {/* HOW IT WORKS — collapsed, clean */}
