@@ -571,6 +571,11 @@ Don't worry about formatting. Just get it all in."
 
             <SortedShareButton accentColor={accentColor} />
 
+            {/* DISCLAIMER */}
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0', padding: '0 8px' }}>
+              This is guidance to help you understand your situation — not legal advice. For serious matters, always verify with <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline' }}>Citizens Advice</a> or a solicitor.
+            </p>
+
           </motion.div>
         )}
       </AnimatePresence>
