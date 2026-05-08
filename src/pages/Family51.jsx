@@ -357,8 +357,10 @@ export default function Family51Page() {
               </p>
             </motion.div>
 
-            {/* CARD STACK — equal paths, icon-first */}
+            {/* CARD STACK — hero top, 2x2 bottom row */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
+
+              {/* TOP — full width hero action */}
               <motion.button
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -367,80 +369,79 @@ export default function Family51Page() {
                 onClick={() => handleToolOpen('conflict')}
                 style={{
                   width: '100%', textAlign: 'left', cursor: 'pointer',
-                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(34,197,94,0.25)',
-                  background: 'rgba(34,197,94,0.08)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(34,197,94,0.3)',
+                  background: 'rgba(34,197,94,0.1)',
+                  boxShadow: '0 2px 12px rgba(34,197,94,0.08)',
                   WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                  display: 'flex', alignItems: 'flex-start', gap: 14,
+                  display: 'flex', alignItems: 'center', gap: 14,
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 4, letterSpacing: '-0.01em' }}>JUST TELL ME WHAT'S WRONG</div>
-                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>Type it, say it — we'll figure out what to do.</div>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em' }}>JUST TELL ME WHAT'S WRONG</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Type it or say it — we'll figure out what to do</div>
                 </div>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: 2, opacity: 0.5 }}>
-                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, opacity: 0.4 }}>
+                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </motion.button>
 
-              <motion.button
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleToolOpen('letter')}
-                style={{
-                  width: '100%', textAlign: 'left', cursor: 'pointer',
-                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
-                  background: 'rgba(249,115,22,0.08)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                  display: 'flex', alignItems: 'flex-start', gap: 14,
-                }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M14 2v6h6M9 15h6" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 4, letterSpacing: '-0.01em' }}>I HAVE A LETTER</div>
-                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>Paste it or take a photo — decoded in seconds.</div>
-                </div>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: 2, opacity: 0.5 }}>
-                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              </motion.button>
+              {/* BOTTOM ROW — 2 side by side */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
 
-              <motion.button
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleToolOpen('reply')}
-                style={{
-                  width: '100%', textAlign: 'left', cursor: 'pointer',
-                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',
-                  background: 'rgba(6,182,212,0.08)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                  display: 'flex', alignItems: 'flex-start', gap: 14,
-                }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 4, letterSpacing: '-0.01em' }}>HELP ME WRITE BACK</div>
-                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>Tell us the situation — we draft a reply for you.</div>
-                </div>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: 2, opacity: 0.5 }}>
-                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              </motion.button>
+                <motion.button
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => handleToolOpen('letter')}
+                  style={{
+                    textAlign: 'left', cursor: 'pointer',
+                    padding: '18px 14px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
+                    background: 'rgba(249,115,22,0.08)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                    WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                    display: 'flex', flexDirection: 'column', gap: 10,
+                  }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M14 2v6h6M9 15h6" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.2 }}>I HAVE A LETTER</div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Paste, photo or upload — decoded in seconds</div>
+                  </div>
+                </motion.button>
+
+                <motion.button
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => handleToolOpen('reply')}
+                  style={{
+                    textAlign: 'left', cursor: 'pointer',
+                    padding: '18px 14px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',
+                    background: 'rgba(6,182,212,0.08)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                    WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                    display: 'flex', flexDirection: 'column', gap: 10,
+                  }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.2 }}>HELP ME WRITE BACK</div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Tell us the situation — we draft a reply</div>
+                  </div>
+                </motion.button>
+
+              </div>
             </div>
 
             {/* TRUST STRIP */}
