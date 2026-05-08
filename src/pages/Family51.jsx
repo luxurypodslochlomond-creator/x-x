@@ -358,14 +358,19 @@ export default function Family51Page() {
             </motion.div>
 
             {/* PRIVACY TRUST — single confident statement */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, padding: '9px 14px', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)', borderRadius: 10 }}>
-              <svg width="13" height="13" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
-                <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#22c55e" strokeWidth="1.1" />
-                <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#22c55e" strokeWidth="1.1" strokeLinecap="round" />
-              </svg>
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e' }}>Private by design</span>
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>·</span>
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>AI processes then immediately discards — nothing stored, nothing sold</span>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} style={{ marginBottom: 16, padding: '10px 14px', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)', borderRadius: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <svg width="13" height="13" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+                  <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#22c55e" strokeWidth="1.1" />
+                  <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#22c55e" strokeWidth="1.1" strokeLinecap="round" />
+                </svg>
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e' }}>Nothing leaves your device</span>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>·</span>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>No account. No storage. No tracking. Ever.</span>
+              </div>
+              <div style={{ marginTop: 6, fontSize: 10, color: 'rgba(255,255,255,0.25)', lineHeight: 1.5 }}>
+                Your letter is processed by AI then immediately discarded — not stored, not logged, not used to train anything, not sold. Unlike every other service.
+              </div>
             </motion.div>
 
             {/* CARD STACK — hero top, 2x2 bottom row */}
