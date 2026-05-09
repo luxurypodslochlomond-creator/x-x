@@ -39,7 +39,7 @@ const PERKS = [
   { Icon: IconUnlimited, text: 'Unlimited decodes, replies & dispute plans' },
   { Icon: IconAI,        text: 'AI that breaks down complex letters into plain English' },
   { Icon: IconShield,    text: 'Every letter, every reply, every dispute — fully private, nothing stored' },
-  { Icon: IconGuide,     text: 'Step-by-step escalation guide for every situation' },
+  { Icon: IconGuide,     text: 'Know exactly what to do next — clear, straightforward steps' },
   { Icon: IconCancel,    text: 'Cancel anytime — no contract, no catch' },
 ];
 
