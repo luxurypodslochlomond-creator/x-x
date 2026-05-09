@@ -642,7 +642,7 @@ Don't worry about formatting. Just get it all in."
 
             {/* DISCLAIMER */}
             <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0', padding: '0 8px' }}>
-              This is guidance to help you understand your situation — not legal advice. For serious matters, always verify with <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline' }}>Citizens Advice</a> or a solicitor.
+              SORTED provides general information to help you understand letters — not regulated legal or financial advice. For debt, benefits, or legal matters always seek free expert guidance from <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline' }}>Citizens Advice</a>, <a href="https://www.nationaldebtline.org" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline' }}>National Debtline</a>, or a qualified adviser before taking action.
             </p>
 
           </motion.div>
