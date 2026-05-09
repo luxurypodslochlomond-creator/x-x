@@ -16,7 +16,7 @@ Keep it short unless they ask something big. Talk like you're texting a friend w
 
 export default function MauroChat() {
   const [messages, setMessages] = useState([
-    { role: 'assistant', text: "Hey — I'm SORTED AI. Ask me anything about how SORTED works, pricing, or if you need help getting access. What's on your mind?" }
+    { role: 'assistant', text: "I'm SORTED AI. Ask me anything about how SORTED works, pricing, or if you need help getting access. What's on your mind?" }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
