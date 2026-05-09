@@ -3,9 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Menu, X, Eye, Scale, Trash2, Mail } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
-import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
-import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
-import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
+import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
@@ -493,107 +491,23 @@ export default function Family51Page() {
         )}
 
         {/* ── CASE HISTORY ──────────────────────────────────── */}
-        {showHistory && !activeTool && (
+        {showHistory && (
           <motion.div key="history" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
             <SortedCaseHistory
               isPremium={!isLocked}
-              onContinue={(caseItem) => {
-                const parsed = (() => { try { return JSON.parse(caseItem.ai_result); } catch { return null; } })();
-                if (caseItem.tool === 'letter') {
-                  // Continue a decoded letter → open Reply with it pre-filled
-                  handleToolOpen('reply', {
-                    sender: parsed?.sender,
-                    summary: parsed?.plain_summary || caseItem.summary,
-                    deadline: parsed?.key_deadline,
-                    what_this_means: parsed?.what_this_means,
-                    suggestedTone: parsed?.suggested_tone,
-                    related_case_id: caseItem.id,
-                  });
-                } else if (caseItem.tool === 'reply') {
-                  // Continue a reply → open Conflict with it pre-filled
-                  handleToolOpen('conflict', { related_case_id: caseItem.id });
-                } else {
-                  // Open the conflict tool for review
-                  handleToolOpen('conflict', { related_case_id: caseItem.id });
-                }
+              onContinue={() => {
+                setShowHistory(false);
               }}
             />
           </motion.div>
         )}
 
-        {/* ── TOOL VIEW ─────────────────────────────────────── */}
-        {activeTool && (
-          <motion.div
-            key={activeTool}
-            initial={{ opacity: 0, x: slideDir * 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: slideDir * -30 }}
-            transition={{ duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
-            style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
-          >
-            {/* JOURNEY BAR */}
-            <SortedJourneyBar
-              completedTools={completedTools}
-              currentTool={activeTool}
-              onNavigate={handleToolOpen}
-            />
-
-            {activeTool === 'letter' && (
-              <Family51LetterDecoder
-                accentColor="#f97316"
-                onResult={() => handleToolComplete('letter')}
-                onHandoff={(data) => handleToolOpen('reply', data)}
-              />
-            )}
-            {activeTool === 'reply' && (
-              <Family51ReplyWriter
-                accentColor="#06b6d4"
-                onResult={() => handleToolComplete('reply')}
-                prefillContext={prefillContext}
-                suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
-                relatedCaseId={prefillContext?.related_case_id}
-                onHandoff={() => handleToolOpen('conflict', { related_case_id: prefillContext?.related_case_id })}
-              />
-            )}
-            {activeTool === 'conflict' && (
-              <Family51ConflictHelper
-                accentColor="#ef4444"
-                onResult={() => handleToolComplete('conflict')}
-                prefillContext={prefillContext}
-              />
-            )}
-
-            {/* SHARE MOMENT — after first decode */}
-            <AnimatePresence>
-              {showShare && activeTool === 'letter' && (
-                <SortedShareMoment onDismiss={() => setShowShare(false)} />
-              )}
-            </AnimatePresence>
-
-            {/* BOTTOM NAV — switch tools without going back */}
-            <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
-              {[
-                { id: 'letter',   label: 'DECODE', color: '#f97316' },
-                { id: 'reply',    label: 'REPLY',  color: '#06b6d4' },
-                { id: 'conflict', label: 'DISPUTE', color: '#ef4444' },
-              ].map(t => (
-                <button
-                  key={t.id}
-                  onClick={() => handleToolOpen(t.id)}
-                  style={{
-                    flex: 1, padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
-                    letterSpacing: '0.1em', cursor: 'pointer', transition: 'all 0.15s',
-                    border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(255,255,255,0.08)'}`,
-                    background: activeTool === t.id ? `${t.color}15` : 'transparent',
-                    color: activeTool === t.id ? t.color : 'rgba(255,255,255,0.3)',
-                  }}
-                >
-                  {t.label}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        {/* ── TOOL VIEW: UNIFIED ENGINE ──────────────────────────── */}
+        <SortedUnifiedEngine
+          geoPrice={geoPrice}
+          recordUse={recordUse}
+          onClose={() => setShowHistory(false)}
+        />
 
 
 
