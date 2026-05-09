@@ -214,6 +214,7 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
 
   return (
     <div className="space-y-5">
+      <style>{`textarea::placeholder { color: rgba(255,255,255,0.45) !important; }`}</style>
 
       {/* CONNECTED CASE BANNER */}
       {prefillContext?.related_case_id && (
@@ -230,11 +231,12 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
         autoFocus
         placeholder="Just tell us what's going on. Who's involved, what happened, what's been said. Don't filter it."
         style={{
-          width: '100%', height: 130, background: 'rgba(255,255,255,0.03)',
-          border: `1px solid ${what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}`,
+          width: '100%', height: 130, background: 'rgba(255,255,255,0.05)',
+          border: `1px solid ${what ? accentColor + '50' : 'rgba(255,255,255,0.2)'}`,
           borderRadius: 12, color: '#fff', fontSize: 14, padding: '14px 16px',
           resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
           transition: 'border-color 0.2s', boxSizing: 'border-box',
+          caretColor: accentColor,
         }}
         onFocus={e => e.target.style.borderColor = accentColor + '70'}
         onBlur={e => e.target.style.borderColor = what ? accentColor + '50' : 'rgba(255,255,255,0.1)'}
@@ -344,9 +346,9 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
               width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 14,
               fontWeight: 800, letterSpacing: '0.06em',
               cursor: what.trim() ? 'pointer' : 'not-allowed',
-              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(255,255,255,0.08)'}`,
-              background: what.trim() ? accentColor + '18' : 'transparent',
-              color: what.trim() ? '#fff' : 'rgba(255,255,255,0.2)',
+              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(255,255,255,0.15)'}`,
+              background: what.trim() ? accentColor + '18' : 'rgba(255,255,255,0.03)',
+              color: what.trim() ? '#fff' : 'rgba(255,255,255,0.35)',
               transition: 'all 0.2s',
             }}
           >
