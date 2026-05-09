@@ -40,7 +40,7 @@ export default function Family51Page() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [completedTools, setCompletedTools] = useState([]);
   const [showShare, setShowShare] = useState(false);
-  const { isLocked, remaining, recordUse } = useSortedUsage();
+  const { isLocked, remaining, recordUse, grantHardshipAccess, isHardship } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
 
   // Load case count from localStorage for badge + first visit onboarding
@@ -479,7 +479,7 @@ export default function Family51Page() {
             </details>
 
             {/* HARDSHIP — first-class, not an afterthought */}
-            <HardshipCard />
+            {!isHardship && <HardshipCard onGrant={grantHardshipAccess} />}
 
             <SortedLiveCounter />
             <SortedForLifeCard />
@@ -675,7 +675,7 @@ export default function Family51Page() {
             <SortedForLifeCard compact />
 
             <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <HardshipCard />
+              <HardshipCard onGrant={grantHardshipAccess} />
               <button
                 onClick={() => setShowMauro(true)}
                 style={{ width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: 'none', cursor: 'pointer', letterSpacing: '0.02em' }}
@@ -692,7 +692,15 @@ export default function Family51Page() {
 }
 
 // ─── HARDSHIP CARD ───────────────────────────────────────────────────────────
-function HardshipCard() {
+function HardshipCard({ onGrant }) {
+  const [emailSent, setEmailSent] = useState(false);
+
+  const handleEmailClick = () => {
+    setEmailSent(true);
+    // Give them 10 hardship uses on this device
+    if (onGrant) onGrant();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -714,26 +722,45 @@ function HardshipCard() {
 
       {/* BODY */}
       <div style={{ padding: '16px 18px 18px' }}>
-        <p style={{ fontSize: 15, fontWeight: 800, color: '#fff', margin: '0 0 6px', lineHeight: 1.3 }}>
-          Can't afford it right now?<br />
-          <span style={{ color: '#eab308' }}>That's completely okay.</span>
-        </p>
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 14px', lineHeight: 1.6 }}>
-          We built SORTED for people in exactly your situation. Email us — no questions asked, no judgment, no awkwardness. We'll give you full unlimited access, free.
-        </p>
-        <a
-          href="mailto:family@uf51.love?subject=I%20need%20help%20but%20can%27t%20afford%20SORTED%20right%20now&body=Hi%2C%0A%0AI%27m%20dealing%20with%20a%20difficult%20situation%20and%20could%20really%20use%20SORTED%20but%20can%27t%20afford%20it%20right%20now.%0A%0AThank%20you."
-          style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            width: '100%', padding: '13px 0', borderRadius: 10, textDecoration: 'none',
-            background: 'rgba(234,179,8,0.15)', border: '1px solid rgba(234,179,8,0.4)',
-            fontSize: 13, fontWeight: 800, color: '#eab308', letterSpacing: '0.06em',
-            boxSizing: 'border-box',
-          }}
-        >
-          <MailSVG />
-          EMAIL family@uf51.love
-        </a>
+        {emailSent ? (
+          <div style={{ textAlign: 'center', padding: '8px 0' }}>
+            <div style={{ fontSize: 22, marginBottom: 8 }}>
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={{ margin: '0 auto', display: 'block' }}>
+                <circle cx="14" cy="14" r="13" stroke="#22c55e" strokeWidth="1.5" fill="rgba(34,197,94,0.08)" />
+                <path d="M8 14l4 4 8-8" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <p style={{ fontSize: 14, fontWeight: 800, color: '#22c55e', margin: '0 0 4px' }}>You've got 10 uses unlocked.</p>
+            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>We look forward to hearing from you at family@uf51.love — no rush, no pressure. ♾️</p>
+          </div>
+        ) : (
+          <>
+            <p style={{ fontSize: 15, fontWeight: 800, color: '#fff', margin: '0 0 6px', lineHeight: 1.3 }}>
+              Can't afford it right now?<br />
+              <span style={{ color: '#eab308' }}>That's completely okay.</span>
+            </p>
+            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 4px', lineHeight: 1.6 }}>
+              Email us and we'll unlock <strong style={{ color: 'rgba(255,255,255,0.85)' }}>10 uses</strong> so you can sort your immediate situation — no questions, no judgment.
+            </p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: '0 0 14px', lineHeight: 1.5 }}>
+              Tapping opens your email app. When you send it, your 10 uses unlock instantly on this device.
+            </p>
+            <a
+              href="mailto:family@uf51.love?subject=I%20need%20help%20but%20can%27t%20afford%20SORTED%20right%20now&body=Hi%2C%0A%0AI%27m%20dealing%20with%20a%20difficult%20situation%20and%20could%20really%20use%20SORTED%20but%20can%27t%20afford%20it%20right%20now.%0A%0AThank%20you."
+              onClick={handleEmailClick}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                width: '100%', padding: '13px 0', borderRadius: 10, textDecoration: 'none',
+                background: 'rgba(234,179,8,0.15)', border: '1px solid rgba(234,179,8,0.4)',
+                fontSize: 13, fontWeight: 800, color: '#eab308', letterSpacing: '0.06em',
+                boxSizing: 'border-box',
+              }}
+            >
+              <MailSVG />
+              EMAIL family@uf51.love → unlock 10 uses
+            </a>
+          </>
+        )}
       </div>
     </motion.div>
   );
