@@ -458,7 +458,7 @@ export default function Family51Page() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
               {selectedLocation && <TrustPill text={selectedLocation.country} />}
               <TrustPill text={selectedLocation?.jurisdiction || 'Local law'} />
-              <TrustPill text="5 free uses" />
+              <TrustPill text="10 free uses" />
             </motion.div>
 
             {/* HOW IT WORKS — collapsed, clean */}
@@ -473,7 +473,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & local bodies automatically" />
                 <WhyRow icon={<WRLock />} text="Processed by AI then immediately discarded — never stored, never sold, never used to train anything" />
                 <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', margin: '4px 0 0', lineHeight: 1.5 }}>
-                  5 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.4)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
+                  10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.4)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
                 </p>
               </div>
             </details>
@@ -661,7 +661,7 @@ export default function Family51Page() {
               </div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 12px' }}>
                 <span style={{ color: '#fff' }}>You've nailed your</span>{' '}
-                <span style={{ color: '#f97316' }}>5 free uses.</span>
+                <span style={{ color: '#f97316' }}>10 free uses.</span>
               </h1>
               <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', margin: '0 0 8px', lineHeight: 1.6 }}>
                 Keep going — unlimited, for less than a coffee.
