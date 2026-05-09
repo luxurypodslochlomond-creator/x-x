@@ -5,6 +5,7 @@ import { Menu, X, Eye, Scale, Trash2, Mail } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
+import { useRef } from 'react';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 import SortedAbout from '@/components/family51/SortedAbout';
@@ -23,23 +24,18 @@ import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 // ────────────────────────────────────────────────────────────────────────────
 
 export default function Family51Page() {
-  const [activeTool, setActiveTool] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [slideDir, setSlideDir] = useState(1);
-  const [prefillContext, setPrefillContext] = useState(null);
   const [showPaySuccess, setShowPaySuccess] = useState(false);
   const [caseCount, setCaseCount] = useState(0);
   const [showMauro, setShowMauro] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const [completedTools, setCompletedTools] = useState([]);
-  const [showShare, setShowShare] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
+  const engineRef = useRef(null);
 
   // Load case count from localStorage for badge + first visit onboarding
   useEffect(() => {
@@ -63,33 +59,10 @@ export default function Family51Page() {
     }
   }, []);
 
-  const handleToolOpen = (toolId, handoffData = null) => {
-    setSlideDir(1);
-    setActiveTool(toolId);
-    setPrefillContext(handoffData);
-    setMenuOpen(false);
-    setShowHistory(false);
-    setShowWhy(false);
-    setShowFAQ(false);
-    setShowShare(false);
-  };
-
-  const handleToolComplete = (toolId) => {
-    recordUse();
-    setCompletedTools(prev => prev.includes(toolId) ? prev : [...prev, toolId]);
-    // Show share moment after first decode
-    if (toolId === 'letter' && !completedTools.includes('letter')) {
-      setTimeout(() => setShowShare(true), 1200);
-    }
-  };
-
   const handleBack = () => {
-    setSlideDir(-1);
-    setActiveTool(null);
     setShowWhy(false);
     setShowHistory(false);
     setShowFAQ(false);
-    setPrefillContext(null);
   };
 
   useEffect(() => {
@@ -153,7 +126,7 @@ export default function Family51Page() {
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(249,115,22,0.12)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <motion.button onClick={() => { setActiveTool(null); setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+        <motion.button onClick={() => { setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           <F51Mark />
           <div style={{ lineHeight: 1.1 }}>
             <div style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff' }}>SORTED</div>
@@ -163,7 +136,7 @@ export default function Family51Page() {
 
         <div style={{ flex: 1 }} />
 
-         {activeTool || showWhy || showHistory || showFAQ ? (
+         {showWhy || showHistory || showFAQ ? (
            <motion.button
              onClick={handleBack}
              whileTap={{ scale: 0.95 }}
@@ -211,7 +184,7 @@ export default function Family51Page() {
 
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
-         {menuOpen && !activeTool && !showWhy && !showFAQ && (
+         {menuOpen && !showWhy && !showFAQ && (
            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(6,8,12,0.99)', backdropFilter: 'blur(24px)', borderBottom: '1px solid rgba(249,115,22,0.15)', padding: '0 20px' }}>
                  <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
                <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
@@ -276,13 +249,13 @@ export default function Family51Page() {
       <AnimatePresence mode="wait">
 
          {/* ── WHY SECTION ────────────────────────────────────── */}
-         {showFAQ && !activeTool && (
+         {showFAQ && (
            <motion.div key="faq" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
              <SortedFAQ accentColor="#f97316" />
            </motion.div>
          )}
 
-         {showWhy && !activeTool && (
+         {showWhy && (
            <motion.div key="why" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE PROBLEM</div>
@@ -333,7 +306,7 @@ export default function Family51Page() {
          )}
 
          {/* ── HOME: PREMIUM, FAST, CONFIDENT ─────────────────── */}
-         {!activeTool && !isLocked && !menuOpen && !showWhy && !showFAQ && !showHistory && (
+         {!isLocked && !menuOpen && !showWhy && !showFAQ && !showHistory && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '32px 20px 60px' }}>
 
             {/* STRIPE SUCCESS — premium celebration */}
@@ -380,7 +353,7 @@ export default function Family51Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => handleToolOpen('conflict')}
+                onClick={() => engineRef.current && engineRef.current.open('conflict')}
                 style={{
                   width: '100%', textAlign: 'left', cursor: 'pointer',
                   padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(34,197,94,0.3)',
@@ -410,7 +383,7 @@ export default function Family51Page() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => handleToolOpen('letter')}
+                  onClick={() => engineRef.current && engineRef.current.open('letter')}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
@@ -432,7 +405,7 @@ export default function Family51Page() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => handleToolOpen('reply')}
+                  onClick={() => engineRef.current && engineRef.current.open('reply')}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',
@@ -504,9 +477,9 @@ export default function Family51Page() {
 
         {/* ── TOOL VIEW: UNIFIED ENGINE ──────────────────────────── */}
         <SortedUnifiedEngine
+          ref={engineRef}
           geoPrice={geoPrice}
           recordUse={recordUse}
-          onClose={() => setShowHistory(false)}
         />
 
 
@@ -545,24 +518,17 @@ export default function Family51Page() {
         </AnimatePresence>
 
         {/* ── PAYWALL — earned, not punishing ───────────── */}
-        {!activeTool && isLocked && (
+        {isLocked && (
           <motion.div
             key="paywall"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}
           >
-            {/* What you've already done */}
+            {/* Paywall content - just show upgrade prompt */}
             <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 28, flexWrap: 'wrap' }}>
-              {completedTools.map(t => (
-                <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 20, padding: '5px 12px' }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e', letterSpacing: '0.08em' }}>
-                    {t === 'letter' ? 'LETTER DECODED' : t === 'reply' ? 'REPLY DRAFTED' : 'RIGHTS KNOWN'}
-                  </span>
-                </div>
-              ))}
-            </div>
+              {/* No completed tools tracking needed in paywall — SortedUnifiedEngine handles it */}
+              </div>
 
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
               <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
