@@ -329,31 +329,7 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
       {/* ANALYSE — solid, confident */}
       <AnimatePresence mode="wait">
         {loading ? (
-          <motion.div key="loading" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '40px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-            <motion.div
-              animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L4 6v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V6l-8-4z" stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill={`${accentColor}15`} />
-              </svg>
-            </motion.div>
-            <div style={{ width: '100%', maxWidth: 220, display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {[0.9, 0.7, 1, 0.5, 0.8].map((w, i) => (
-                <div key={i} style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.06)', overflow: 'hidden', width: `${w * 100}%` }}>
-                  <motion.div
-                    style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`, borderRadius: 3 }}
-                    animate={{ x: ['-100%', '200%'] }}
-                    transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.18, ease: 'easeInOut' }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#fff', margin: '0 0 6px' }}>BUILDING YOUR PLAN</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>AI is analysing your situation against {geo.country} law…</p>
-            </div>
-          </motion.div>
+          <ConflictThinkingLoader accentColor={accentColor} country={geo.country} />
         ) : (
           <motion.button
             key="btn"
@@ -451,6 +427,66 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+const THINKING_STEPS = [
+  "Reading your situation…",
+  "Checking relevant UK legislation…",
+  "Identifying your rights…",
+  "Assessing enforcement powers…",
+  "Calculating your leverage…",
+  "Drafting your action plan…",
+  "Writing your script…",
+  "Finalising your plan…",
+];
+
+function ConflictThinkingLoader({ accentColor, country }) {
+  const [stepIndex, setStepIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setStepIndex(i => Math.min(i + 1, THINKING_STEPS.length - 1));
+    }, 1800);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div key="loading" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+      style={{ padding: '40px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+      <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L4 6v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V6l-8-4z" stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill={`${accentColor}15`} />
+        </svg>
+      </motion.div>
+      <div style={{ width: '100%', maxWidth: 220, display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {[0.9, 0.7, 1, 0.5, 0.8].map((w, i) => (
+          <div key={i} style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.06)', overflow: 'hidden', width: `${w * 100}%` }}>
+            <motion.div
+              style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`, borderRadius: 3 }}
+              animate={{ x: ['-100%', '200%'] }}
+              transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.18, ease: 'easeInOut' }}
+            />
+          </div>
+        ))}
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#fff', margin: '0 0 10px' }}>BUILDING YOUR PLAN</p>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={stepIndex}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.35 }}
+            style={{ fontSize: 12, color: accentColor, margin: '0 0 4px', fontWeight: 700, letterSpacing: '0.04em' }}
+          >
+            ▸ {THINKING_STEPS[stepIndex]}
+          </motion.p>
+        </AnimatePresence>
+        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Analysing against {country} law…</p>
+      </div>
+    </motion.div>
   );
 }
 
