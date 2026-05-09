@@ -478,17 +478,8 @@ export default function Family51Page() {
               </div>
             </details>
 
-            {/* HARDSHIP BYPASS — prominent, always visible */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ marginBottom: 16, padding: '14px 18px', background: 'rgba(234,179,8,0.06)', border: '1px solid rgba(234,179,8,0.25)', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
-              <span style={{ fontSize: 20, flexShrink: 0 }}>🤝</span>
-              <div style={{ flex: 1 }}>
-                <p style={{ fontSize: 13, fontWeight: 700, color: '#eab308', margin: '0 0 2px' }}>Can't afford it? That's okay.</p>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>Just email us — no questions, no judgment. We'll give you full access.</p>
-              </div>
-              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ flexShrink: 0, fontSize: 11, fontWeight: 800, color: '#eab308', background: 'rgba(234,179,8,0.1)', border: '1px solid rgba(234,179,8,0.3)', borderRadius: 8, padding: '8px 12px', textDecoration: 'none', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
-                EMAIL US
-              </a>
-            </motion.div>
+            {/* HARDSHIP — first-class, not an afterthought */}
+            <HardshipCard />
 
             <SortedLiveCounter />
             <SortedForLifeCard />
@@ -684,9 +675,7 @@ export default function Family51Page() {
             <SortedForLifeCard compact />
 
             <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ display: 'block', textAlign: 'center', fontSize: 13, color: '#eab308', textDecoration: 'none', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(234,179,8,0.3)', background: 'rgba(234,179,8,0.06)', letterSpacing: '0.02em' }}>
-                Can't afford it? Email us — we'll sort it.
-              </a>
+              <HardshipCard />
               <button
                 onClick={() => setShowMauro(true)}
                 style={{ width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: 'none', cursor: 'pointer', letterSpacing: '0.02em' }}
@@ -699,6 +688,73 @@ export default function Family51Page() {
 
       </AnimatePresence>
     </div>
+  );
+}
+
+// ─── HARDSHIP CARD ───────────────────────────────────────────────────────────
+function HardshipCard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3 }}
+      style={{
+        marginBottom: 16,
+        borderRadius: 16,
+        overflow: 'hidden',
+        border: '1px solid rgba(234,179,8,0.3)',
+        background: 'linear-gradient(135deg, rgba(234,179,8,0.08) 0%, rgba(249,115,22,0.06) 100%)',
+      }}
+    >
+      {/* TOP BAND */}
+      <div style={{ background: 'rgba(234,179,8,0.12)', borderBottom: '1px solid rgba(234,179,8,0.18)', padding: '10px 18px', display: 'flex', alignItems: 'center', gap: 10 }}>
+        <HandshakeSVG />
+        <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#eab308' }}>NO ONE GETS LEFT BEHIND</span>
+      </div>
+
+      {/* BODY */}
+      <div style={{ padding: '16px 18px 18px' }}>
+        <p style={{ fontSize: 15, fontWeight: 800, color: '#fff', margin: '0 0 6px', lineHeight: 1.3 }}>
+          Can't afford it right now?<br />
+          <span style={{ color: '#eab308' }}>That's completely okay.</span>
+        </p>
+        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 14px', lineHeight: 1.6 }}>
+          We built SORTED for people in exactly your situation. Email us — no questions asked, no judgment, no awkwardness. We'll give you full unlimited access, free.
+        </p>
+        <a
+          href="mailto:family@uf51.love?subject=I%20need%20help%20but%20can%27t%20afford%20SORTED%20right%20now&body=Hi%2C%0A%0AI%27m%20dealing%20with%20a%20difficult%20situation%20and%20could%20really%20use%20SORTED%20but%20can%27t%20afford%20it%20right%20now.%0A%0AThank%20you."
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            width: '100%', padding: '13px 0', borderRadius: 10, textDecoration: 'none',
+            background: 'rgba(234,179,8,0.15)', border: '1px solid rgba(234,179,8,0.4)',
+            fontSize: 13, fontWeight: 800, color: '#eab308', letterSpacing: '0.06em',
+            boxSizing: 'border-box',
+          }}
+        >
+          <MailSVG />
+          EMAIL family@uf51.love
+        </a>
+      </div>
+    </motion.div>
+  );
+}
+
+function HandshakeSVG() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M1 10l3-3 2.5 2.5L9 7l2.5 2.5L14 7l3 3" stroke="#eab308" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3 12.5c1 1.2 2.5 2 4 2s3-.8 4-2" stroke="#eab308" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+      <circle cx="9" cy="4" r="2" stroke="#eab308" strokeWidth="1.3" fill="none" />
+    </svg>
+  );
+}
+
+function MailSVG() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+      <rect x="1" y="3" width="13" height="9" rx="1.5" stroke="#eab308" strokeWidth="1.2" fill="none" />
+      <path d="M1.5 3.5L7.5 8.5L13.5 3.5" stroke="#eab308" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
   );
 }
 
