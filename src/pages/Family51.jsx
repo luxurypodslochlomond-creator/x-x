@@ -661,7 +661,14 @@ export default function Family51Page() {
             </div>
 
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
-              <div style={{ fontSize: 40, marginBottom: 12 }}>🔓</div>
+              <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <rect x="6" y="18" width="28" height="18" rx="4" stroke="#f97316" strokeWidth="2" fill="rgba(249,115,22,0.08)" />
+                  <path d="M13 18V13a7 7 0 0114 0" stroke="#f97316" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.35" strokeDasharray="4 3" />
+                  <circle cx="20" cy="27" r="3" fill="#f97316" opacity="0.9" />
+                  <path d="M20 30v2" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 12px' }}>
                 <span style={{ color: '#fff' }}>You've nailed your</span>{' '}
                 <span style={{ color: '#f97316' }}>5 free uses.</span>
