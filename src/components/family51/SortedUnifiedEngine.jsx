@@ -1,4 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
@@ -39,7 +40,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
 
   if (!activeTool) return null;
 
-  return (
+  const portal = (
     <AnimatePresence mode="wait">
       <motion.div
         key={activeTool}
@@ -138,6 +139,8 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
       </motion.div>
     </AnimatePresence>
   );
+
+  return createPortal(portal, document.body);
 });
 
 export default SortedUnifiedEngine;
