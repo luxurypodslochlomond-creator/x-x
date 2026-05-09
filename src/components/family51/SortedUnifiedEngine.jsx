@@ -43,12 +43,28 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
     <AnimatePresence mode="wait">
       <motion.div
         key={activeTool}
-        initial={{ opacity: 0, x: slideDir * 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: slideDir * -30 }}
-        transition={{ duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
-        style={{ maxWidth: 560, margin: '0 auto', padding: '28px 20px 60px' }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'linear-gradient(to br, #0a0514 0%, #1a0f2a 50%, #0a0514 100%)',
+          zIndex: 9999,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
       >
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '28px 20px 60px' }}>
         {/* BACK BUTTON */}
         <button
           onClick={handleBack}
@@ -117,6 +133,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
               {t.label}
             </button>
           ))}
+        </div>
         </div>
       </motion.div>
     </AnimatePresence>
