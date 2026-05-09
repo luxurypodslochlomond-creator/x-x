@@ -159,20 +159,25 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
       },
     });
 
+      // Unwrap nested response if needed
+      let raw = response;
+      if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch { raw = null; } }
+      if (raw?.response && typeof raw.response === 'object') raw = raw.response;
+
       // Validate we got actual content back
-      if (!response?.situation_assessment && !response?.legal_position && !response?.recommended_steps?.length) {
+      if (!raw || typeof raw !== 'object' || Object.keys(raw).length === 0) {
         setResult({ _error: 'Sorry — the analysis came back empty. Please try again.' });
         setLoading(false);
         return;
       }
-      setResult(response);
+      setResult(raw);
       setResultGoal(goal);
       // Save to local case history — no login needed
       saveCaseToHistory({
         tool: 'conflict',
         input_text: what,
         ai_result: JSON.stringify(response),
-        summary: response.situation_assessment?.slice(0, 80) || 'Dispute plan',
+        summary: raw.situation_assessment?.slice(0, 80) || 'Dispute plan',
         severity: 'unknown',
         related_case_id: prefillContext?.related_case_id || null,
       });
