@@ -40,7 +40,7 @@ export default function Family51Page() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [completedTools, setCompletedTools] = useState([]);
   const [showShare, setShowShare] = useState(false);
-  const { isLocked, remaining, recordUse, grantHardshipAccess, hasUsedHardship } = useSortedUsage();
+  const { isLocked, remaining, recordUse } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
 
   // Load case count from localStorage for badge + first visit onboarding
@@ -478,8 +478,7 @@ export default function Family51Page() {
               </div>
             </details>
 
-            {/* HARDSHIP — first-class, not an afterthought */}
-            {!hasUsedHardship && <HardshipCard onGrant={grantHardshipAccess} />}
+
 
             <SortedLiveCounter />
             <SortedForLifeCard />
@@ -675,7 +674,6 @@ export default function Family51Page() {
             <SortedForLifeCard compact />
 
             <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <HardshipCard onGrant={grantHardshipAccess} />
               <button
                 onClick={() => setShowMauro(true)}
                 style={{ width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: 'none', cursor: 'pointer', letterSpacing: '0.02em' }}
@@ -691,102 +689,7 @@ export default function Family51Page() {
   );
 }
 
-// ─── HARDSHIP CARD ───────────────────────────────────────────────────────────
-function HardshipCard({ onGrant }) {
-  const [emailSent, setEmailSent] = useState(false);
 
-  const handleEmailClick = () => {
-    setEmailSent(true);
-    // Give them 10 hardship uses on this device
-    if (onGrant) onGrant();
-    // After 1s, reset page so they can use the tools
-    setTimeout(() => {
-      window.location.reload();
-    }, 1200);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3 }}
-      style={{
-        marginBottom: 16,
-        borderRadius: 16,
-        overflow: 'hidden',
-        border: '1px solid rgba(234,179,8,0.3)',
-        background: 'linear-gradient(135deg, rgba(234,179,8,0.08) 0%, rgba(249,115,22,0.06) 100%)',
-      }}
-    >
-      {/* TOP BAND */}
-      <div style={{ background: 'rgba(234,179,8,0.12)', borderBottom: '1px solid rgba(234,179,8,0.18)', padding: '10px 18px', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <HandshakeSVG />
-        <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#eab308' }}>NO ONE GETS LEFT BEHIND</span>
-      </div>
-
-      {/* BODY */}
-      <div style={{ padding: '16px 18px 18px' }}>
-        {emailSent ? (
-          <div style={{ textAlign: 'center', padding: '8px 0' }}>
-            <div style={{ fontSize: 22, marginBottom: 8 }}>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={{ margin: '0 auto', display: 'block' }}>
-                <circle cx="14" cy="14" r="13" stroke="#22c55e" strokeWidth="1.5" fill="rgba(34,197,94,0.08)" />
-                <path d="M8 14l4 4 8-8" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <p style={{ fontSize: 14, fontWeight: 800, color: '#22c55e', margin: '0 0 4px' }}>You've got 10 uses unlocked.</p>
-            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>No email needed. No catch. Just come back and sort your stuff. ♾️</p>
-          </div>
-        ) : (
-           <>
-             <p style={{ fontSize: 15, fontWeight: 800, color: '#fff', margin: '0 0 6px', lineHeight: 1.3 }}>
-               Tight on cash?<br />
-               <span style={{ color: '#eab308' }}>We get it. No judgment.</span>
-             </p>
-            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '0 0 4px', lineHeight: 1.6 }}>
-              You get <strong style={{ color: 'rgba(255,255,255,0.85)' }}>10 free uses</strong> right now. Sort your immediate crisis. No questions asked.
-            </p>
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: '0 0 14px', lineHeight: 1.5 }}>
-              One tap. Instant unlock. We trust you.
-            </p>
-            <button
-              onClick={handleEmailClick}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                width: '100%', padding: '13px 0', borderRadius: 10,
-                background: 'rgba(234,179,8,0.15)', border: '1px solid rgba(234,179,8,0.4)',
-                fontSize: 13, fontWeight: 800, color: '#eab308', letterSpacing: '0.06em',
-                boxSizing: 'border-box', cursor: 'pointer',
-              }}
-            >
-              <HandshakeSVG />
-              UNLOCK 10 USES → NO EMAIL NEEDED
-            </button>
-          </>
-        )}
-      </div>
-    </motion.div>
-  );
-}
-
-function HandshakeSVG() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-      <path d="M1 10l3-3 2.5 2.5L9 7l2.5 2.5L14 7l3 3" stroke="#eab308" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M3 12.5c1 1.2 2.5 2 4 2s3-.8 4-2" stroke="#eab308" strokeWidth="1.4" strokeLinecap="round" fill="none" />
-      <circle cx="9" cy="4" r="2" stroke="#eab308" strokeWidth="1.3" fill="none" />
-    </svg>
-  );
-}
-
-function MailSVG() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-      <rect x="1" y="3" width="13" height="9" rx="1.5" stroke="#eab308" strokeWidth="1.2" fill="none" />
-      <path d="M1.5 3.5L7.5 8.5L13.5 3.5" stroke="#eab308" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 // ─── WHY ROW ─────────────────────────────────────────────────────────────────
 function WhyRow({ icon, text }) {
