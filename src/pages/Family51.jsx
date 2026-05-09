@@ -478,6 +478,18 @@ export default function Family51Page() {
               </div>
             </details>
 
+            {/* HARDSHIP BYPASS — prominent, always visible */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} style={{ marginBottom: 16, padding: '14px 18px', background: 'rgba(234,179,8,0.06)', border: '1px solid rgba(234,179,8,0.25)', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ fontSize: 20, flexShrink: 0 }}>🤝</span>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#eab308', margin: '0 0 2px' }}>Can't afford it? That's okay.</p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>Just email us — no questions, no judgment. We'll give you full access.</p>
+              </div>
+              <a href="mailto:family@uf51.love?subject=Can't afford SORTED right now" style={{ flexShrink: 0, fontSize: 11, fontWeight: 800, color: '#eab308', background: 'rgba(234,179,8,0.1)', border: '1px solid rgba(234,179,8,0.3)', borderRadius: 8, padding: '8px 12px', textDecoration: 'none', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
+                EMAIL US
+              </a>
+            </motion.div>
+
             <SortedLiveCounter />
             <SortedForLifeCard />
 

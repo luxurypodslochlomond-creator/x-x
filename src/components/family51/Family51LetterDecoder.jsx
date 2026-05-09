@@ -105,7 +105,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         }
       }
 
-      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}`;
+      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Not trying too hard to be relatable. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}
+
+CRITICAL TONE INSTRUCTION: Focus on what is LIKELY TO ACTUALLY HAPPEN in practice — not just what the law says. People don't need a lecture on their legal rights. They need to know: will a bailiff actually come? Will I actually go to prison? What really happens if I ignore this? Be realistic and practical. A 20-year debt adviser would say "in reality, at this stage, they almost never..." — that's the voice. Calm, experienced, honest about real-world probabilities.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
