@@ -699,6 +699,10 @@ function HardshipCard({ onGrant }) {
     setEmailSent(true);
     // Give them 10 hardship uses on this device
     if (onGrant) onGrant();
+    // After 1s, reset page so they can use the tools
+    setTimeout(() => {
+      window.location.reload();
+    }, 1200);
   };
 
   return (
