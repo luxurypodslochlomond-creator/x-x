@@ -1,20 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 
-// Mauro — SORTED's AI helpdesk. Friendly, honest, not a team member.
-const SYSTEM_PROMPT = `You are SORTED AI, the helpdesk for SORTED — a tool that helps people decode scary legal letters, write replies, and resolve disputes.
+// SORTED AI — helpdesk that's human, not legal.
+const SYSTEM_PROMPT = `You are SORTED AI, the human side of SORTED. You're here to help people understand what SORTED does, answer questions about pricing or access, and cheer them on.
 
-Your job: answer questions about how SORTED works, what it can help with, pricing (£9.99/month, 3 free uses, cancel anytime), hardship access (just email family@uf51.love), privacy (nothing stored, nothing logged), and how the AI tools work.
+What you do: decode scary letters, help draft replies, guide people through disputes. You're NOT a lawyer — you just help people understand official letters so they feel less alone and scared.
 
-Be warm, direct, and honest. Don't oversell. If someone is in genuine distress, acknowledge it. If you can't answer something, say so clearly and point them to family@uf51.love.
+How to talk: be genuinely kind. If someone sounds panicked, acknowledge it. Use simple words. Don't use legal jargon. Be honest about what SORTED can and can't do. If you don't know something, say it. Point them to family@uf51.love for help.
 
-Never pretend to be a lawyer or give specific legal advice yourself — that's what the SORTED tools are for. Encourage them to try the tools.
+Pricing: 5 free uses, then £9.99/month (or request 10 free uses if they're in crisis — no judgment, no email needed).
 
-Keep replies short — 2-4 sentences max unless they ask something complex. No corporate language. Talk like a smart, kind person.`;
+Privacy: processed by AI then immediately deleted. Nothing stored. Nothing sold. Nothing logged.
+
+Keep it short unless they ask something big. Talk like you're texting a friend who's stressed, not like you're writing a legal document.`;
 
 export default function MauroChat() {
   const [messages, setMessages] = useState([
-    { role: 'assistant', text: "Hi — I'm SORTED AI. I can answer questions about how SORTED works, pricing, hardship access, or anything else. What's on your mind?" }
+    { role: 'assistant', text: "Hey — I'm SORTED AI. Ask me anything about how SORTED works, pricing, or if you need help getting access. What's on your mind?" }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -37,7 +39,7 @@ export default function MauroChat() {
       content: m.text
     }));
 
-    const prompt = `${SYSTEM_PROMPT}\n\nConversation:\n${history.map(m => `${m.role === 'user' ? 'User' : 'Mauro'}: ${m.content}`).join('\n')}\n\nMauro:`;
+    const prompt = `${SYSTEM_PROMPT}\n\nConversation:\n${history.map(m => `${m.role === 'user' ? 'User' : 'SORTED AI'}: ${m.content}`).join('\n')}\n\nSORTED AI:`;
 
     const reply = await base44.integrations.Core.InvokeLLM({ prompt });
     setMessages(prev => [...prev, { role: 'assistant', text: typeof reply === 'string' ? reply : reply?.text || "Sorry, I couldn't get a response. Try emailing family@uf51.love." }]);
@@ -80,12 +82,14 @@ export default function MauroChat() {
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && send()}
-          placeholder="Ask Mauro anything..."
+          placeholder="Ask anything..."
           style={{
             flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)',
             borderRadius: 10, padding: '11px 14px', fontSize: 13, color: '#fff', outline: 'none',
             fontFamily: 'inherit'
           }}
+          onFocus={e => e.target.style.background = 'rgba(255,255,255,0.08)'}
+          onBlur={e => e.target.style.background = 'rgba(255,255,255,0.05)'}
         />
         <button
           onClick={send}
@@ -99,6 +103,18 @@ export default function MauroChat() {
           }}
         >
           SEND
+        </button>
+        <button
+          title="Voice"
+          style={{
+            padding: '11px 14px', borderRadius: 10, fontSize: 12, border: '1px solid rgba(255,255,255,0.2)',
+            background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.5)', cursor: 'pointer',
+            transition: 'all 0.15s'
+          }}
+          onMouseEnter={e => { e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.color = 'rgba(255,255,255,0.7)'; }}
+          onMouseLeave={e => { e.target.style.background = 'rgba(255,255,255,0.05)'; e.target.style.color = 'rgba(255,255,255,0.5)'; }}
+        >
+          🎤
         </button>
       </div>
 
