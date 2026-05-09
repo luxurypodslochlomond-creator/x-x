@@ -39,5 +39,17 @@ export function useSortedUsage() {
 
   const remaining = isPaid ? Infinity : Math.max(0, FREE_LIMIT - uses);
 
-  return { uses, isPaid, isLocked, remaining, recordUse };
+  const grantHardshipAccess = () => {
+    try {
+      localStorage.setItem('sorted_hardship_used', 'true');
+      localStorage.setItem(KEY, '0');
+    } catch {}
+    setUses(0);
+  };
+
+  const hasUsedHardship = (() => {
+    try { return localStorage.getItem('sorted_hardship_used') === 'true'; } catch { return false; }
+  })();
+
+  return { uses, isPaid, isLocked, remaining, recordUse, grantHardshipAccess, hasUsedHardship };
 }
