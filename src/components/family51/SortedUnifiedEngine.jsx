@@ -121,8 +121,6 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
       </motion.div>
     </AnimatePresence>
   );
-}
-
 });
 
 export default SortedUnifiedEngine;
