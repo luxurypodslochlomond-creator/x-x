@@ -573,6 +573,25 @@ Don't worry about formatting. Just get it all in."
 
             <SortedShareButton accentColor={accentColor} />
 
+            {/* GET MORE HELP — Sara's ask */}
+            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(6,182,212,0.04)', border: '1px solid rgba(6,182,212,0.15)' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(6,182,212,0.6)', margin: '0 0 10px' }}>WANT TO TALK TO A REAL PERSON?</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
+                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>Citizens Advice</strong> — free, confidential advice on debt, benefits & legal issues · citizensadvice.org.uk</span>
+                </a>
+                <a href="https://www.stepchange.org" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
+                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>StepChange</strong> — free debt advice & repayment plans · stepchange.org · 0800 138 1111</span>
+                </a>
+                <a href="https://debtcamel.co.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
+                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>Debt Camel</strong> — plain English debt guides by Sara Williams · debtcamel.co.uk</span>
+                </a>
+              </div>
+            </div>
+
             {/* DISCLAIMER */}
             <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0', padding: '0 8px' }}>
               This is guidance to help you understand your situation — not legal advice. For serious matters, always verify with <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline' }}>Citizens Advice</a> or a solicitor.
