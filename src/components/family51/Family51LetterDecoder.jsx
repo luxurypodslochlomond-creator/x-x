@@ -6,6 +6,7 @@ import { detectGeo } from '@/hooks/useSortedGeo';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
+import SortedStreamingResult from './SortedStreamingResult';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -21,11 +22,11 @@ const SEVERITY_CONFIG = {
 };
 
 const LOADING_STEPS = [
-  'Decoding your letter…',
-  'Identifying key details…',
-  'Checking deadlines…',
-  'Finding what matters…',
-  'Almost there…',
+  { text: 'Reading your letter…',        sub: 'This stays private — nothing is stored' },
+  { text: 'Identifying what this is…',   sub: 'Matching to known letter types' },
+  { text: 'Checking any deadlines…',     sub: 'Dates matter — we\'re looking' },
+  { text: 'Finding your options…',       sub: 'What you can actually do' },
+  { text: 'Almost there…',               sub: 'Plain English coming up' },
 ];
 
 export default function Family51LetterDecoder({ accentColor = '#f97316', onResult, onHandoff }) {
@@ -35,7 +36,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const [uploading, setUploading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const [result, setResult] = useState(null);
-  const [copied, setCopied] = useState(false);
+
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
   const [geo, setGeo] = useState(() => detectGeo());
   const [decodeError, setDecodeError] = useState(null);
@@ -279,15 +280,9 @@ Return a JSON object with these EXACT fields:
 
   const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setDecodeError(null); };
 
-  const copyAll = () => {
-    if (!result) return;
-    const text = `DECODED BY SORTED\n\n${result.we_hear_you ? result.we_hear_you + '\n\n' : ''}WHAT THIS MEANS:\n${result.what_this_means}\n\nSEVERITY: ${result.severity} — ${result.severity_explanation}\n\n${result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' ? `MONEY AT STAKE: ${result.financial_impact}\n\n` : ''}${result.if_you_ignore_this ? `IF YOU IGNORE THIS: ${result.if_you_ignore_this}\n\n` : ''}WHAT TO DO:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n${result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : ''}DEADLINE: ${result.key_deadline}\n\nDON'T PANIC: ${result.dont_panic}`;
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
-  };
 
-  const sev = result?.severity ? (SEVERITY_CONFIG[result.severity] || SEVERITY_CONFIG['NEEDS ATTENTION']) : null;
+
+  // sev used only by old inline result — now handled by SortedStreamingResult
 
   return (
     <div className="space-y-5">
@@ -299,56 +294,70 @@ Return a JSON object with these EXACT fields:
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{
-              padding: '40px 20px',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20,
-            }}
+            style={{ padding: '48px 20px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}
           >
-            {/* Lock icon pulsing */}
-            <motion.div
-              animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            {/* Breathing circle */}
+            <div style={{ position: 'relative', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <motion.div
+                animate={{ scale: [1, 1.25, 1], opacity: [0.15, 0.3, 0.15] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }}
+              />
+              <motion.div
+                animate={{ scale: [1, 1.12, 1], opacity: [0.25, 0.5, 0.25] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+                style={{ position: 'absolute', inset: 8, borderRadius: '50%', background: accentColor }}
+              />
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', zIndex: 1 }}>
                 <rect x="3" y="11" width="18" height="11" rx="2" stroke={accentColor} strokeWidth="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke={accentColor} strokeWidth="2" strokeLinecap="round"/>
-                <motion.circle
-                  cx="12" cy="16" r="1.5" fill={accentColor}
-                  animate={{ r: [1.5, 2.5, 1.5] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
+                <circle cx="12" cy="16" r="1.5" fill={accentColor} />
               </svg>
-            </motion.div>
+            </div>
 
-            {/* Scanning document lines */}
-            <div style={{ width: '100%', maxWidth: 220, display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {[0.9, 0.7, 1, 0.5, 0.8].map((w, i) => (
-                <div key={i} style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.06)', overflow: 'hidden', width: `${w * 100}%` }}>
-                  <motion.div
-                    style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`, borderRadius: 3 }}
-                    animate={{ x: ['-100%', '200%'] }}
-                    transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.18, ease: 'easeInOut' }}
-                  />
-                </div>
+            {/* Step text */}
+            <div style={{ textAlign: 'center', minHeight: 52 }}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={loadingStep}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff', margin: '0 0 6px', lineHeight: 1.2 }}>
+                    {LOADING_STEPS[loadingStep].text}
+                  </p>
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '0.04em' }}>
+                    {LOADING_STEPS[loadingStep].sub}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Progress dots */}
+            <div style={{ display: 'flex', gap: 6 }}>
+              {LOADING_STEPS.map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ opacity: i === loadingStep ? 1 : 0.2, scale: i === loadingStep ? 1.3 : 1 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor }}
+                />
               ))}
             </div>
 
-            <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.15em', color: '#fff', margin: '0 0 6px' }}>
-                DECODING YOUR LETTER
-              </p>
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={loadingStep}
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.04em', margin: 0 }}
-                >
-                  {LOADING_STEPS[loadingStep]}
-                </motion.p>
-              </AnimatePresence>
+            {/* Scanning lines */}
+            <div style={{ width: '100%', maxWidth: 200, display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {[1, 0.7, 0.9, 0.5, 0.8].map((w, i) => (
+                <div key={i} style={{ position: 'relative', height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.05)', overflow: 'hidden', width: `${w * 100}%` }}>
+                  <motion.div
+                    style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, transparent, ${accentColor}80, transparent)`, borderRadius: 2 }}
+                    animate={{ x: ['-100%', '250%'] }}
+                    transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.22, ease: 'easeInOut' }}
+                  />
+                </div>
+              ))}
             </div>
           </motion.div>
         )}
@@ -499,152 +508,17 @@ Don't worry about formatting. Just get it all in."
         )}
       </AnimatePresence>
 
-      {/* RESULT */}
+      {/* RESULT — streaming reveal */}
       <AnimatePresence>
         {result && (
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-
-            {/* WHAT NOW — primary CTA immediately at top */}
-            {onHandoff && (
-              <motion.button
-                onClick={() => onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggestedTone: result.suggested_tone, related_case_id: caseId })}
-                whileTap={{ scale: 0.97 }}
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                style={{
-                  width: '100%', padding: '18px 0', borderRadius: 14, fontSize: 14,
-                  fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
-                  border: `2px solid ${accentColor}`,
-                  background: accentColor, color: '#000',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                }}
-              >
-                WRITE MY REPLY NOW
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </motion.button>
-            )}
-
-            {/* QUICK REASSURANCE */}
-            {result.quick_reassurance && (
-              <div style={{ padding: '18px 20px', borderRadius: 14, background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(34,197,94,0.6)', margin: '0 0 10px' }}>AT A GLANCE</p>
-                {result.quick_reassurance.split('\n').filter(Boolean).map((line, i) => (
-                  <p key={i} style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, margin: i === 0 ? 0 : '6px 0 0', fontWeight: 500 }}>{line}</p>
-                ))}
-              </div>
-            )}
-
-            {/* TOP — calm summary header */}
-            {sev && (
-              <div style={{ borderRadius: 14, padding: '20px 18px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                {/* Severity dot + label — subtle, not alarming */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: sev.color, flexShrink: 0, boxShadow: `0 0 6px ${sev.color}80` }} />
-                  <span style={{ fontSize: 10, fontWeight: 800, color: sev.color, letterSpacing: '0.14em' }}>{result.severity}</span>
-                  {result.sender && result.sender !== 'Unknown' && (
-                    <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', marginLeft: 'auto', letterSpacing: '0.04em' }}>{result.sender}</span>
-                  )}
-                </div>
-                <p style={{ fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 10px', lineHeight: 1.25 }}>{result.letter_summary || 'Official letter'}</p>
-                {/* Reassurance line — always calm */}
-                {result.dont_panic && (
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: '0 0 10px', lineHeight: 1.55, fontStyle: 'italic' }}>{result.dont_panic}</p>
-                )}
-                {result.key_deadline && result.key_deadline !== 'No deadline mentioned' && (
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 10px', borderRadius: 8, background: `${sev.color}12`, border: `1px solid ${sev.color}30` }}>
-                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: sev.color }} />
-                    <span style={{ fontSize: 11, fontWeight: 700, color: sev.color }}>Respond by: {result.key_deadline}</span>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* PLAIN ENGLISH */}
-            <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', margin: '0 0 10px' }}>WHAT THIS MEANS</p>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', lineHeight: 1.75, margin: 0 }}>{result.what_this_means}</p>
-            </div>
-
-            {/* WHAT TO DO — calm numbered list */}
-            <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', margin: '0 0 12px' }}>WHAT TO DO</p>
-              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {result.action_steps?.map((step, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 10, fontWeight: 900, color: accentColor, minWidth: 18, paddingTop: 3, flexShrink: 0, letterSpacing: '0.05em' }}>{i + 1}.</span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7 }}>{step}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            {/* MONEY — only if real, kept calm */}
-            {(result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.') && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.25)', margin: '0 0 6px' }}>AMOUNT INVOLVED</p>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, margin: 0 }}>{result.financial_impact}</p>
-              </div>
-            )}
-
-            {/* GOOD TO KNOW — calm, not scary */}
-            {result.if_you_ignore_this && (
-              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(234,179,8,0.04)', border: '1px solid rgba(234,179,8,0.12)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(234,179,8,0.5)', margin: '0 0 8px' }}>GOOD TO KNOW</p>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
-              </div>
-            )}
-
-            {/* FREE HELP — warm green, calm */}
-            {result.free_help?.length > 0 && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.12)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(34,197,94,0.5)', margin: '0 0 10px' }}>FREE HELP AVAILABLE</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {result.free_help.map((help, i) => (
-                    <p key={i} style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, margin: 0, paddingLeft: 12, borderLeft: '1px solid rgba(34,197,94,0.2)' }}>{help}</p>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* SECONDARY ACTIONS */}
-            <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
-              <motion.button onClick={copyAll} whileTap={{ scale: 0.95 }} style={secondaryBtn}>
-                {copied ? '✓ COPIED' : 'COPY ALL'}
-              </motion.button>
-              <motion.button onClick={reset} whileTap={{ scale: 0.95 }} style={{ ...secondaryBtn, color: 'rgba(255,255,255,0.5)', borderColor: 'rgba(255,255,255,0.15)' }}>
-                DECODE ANOTHER
-              </motion.button>
-            </div>
-
-            {/* OPEN IN EMAIL APP — pre-fills their mail app with the full breakdown */}
-            <SendBreakdownByEmail result={result} accentColor={accentColor} />
-
-            <SortedShareButton accentColor={accentColor} />
-
-            {/* GET MORE HELP — Sara's ask */}
-            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(6,182,212,0.04)', border: '1px solid rgba(6,182,212,0.15)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(6,182,212,0.6)', margin: '0 0 10px' }}>WANT TO TALK TO A REAL PERSON?</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>Citizens Advice</strong> — free, confidential advice on debt, benefits & legal issues · citizensadvice.org.uk</span>
-                </a>
-                <a href="https://www.stepchange.org" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>StepChange</strong> — free debt advice & repayment plans · stepchange.org · 0800 138 1111</span>
-                </a>
-                <a href="https://debtcamel.co.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>Debt Camel</strong> — plain English debt guides by Sara Williams · debtcamel.co.uk</span>
-                </a>
-              </div>
-            </div>
-
-            {/* DISCLAIMER */}
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0', padding: '0 8px' }}>
-              SORTED provides general information to help you understand letters — not regulated legal or financial advice. For debt, benefits, or legal matters always seek free expert guidance from <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline' }}>Citizens Advice</a>, <a href="https://www.nationaldebtline.org" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline' }}>National Debtline</a>, or a qualified adviser before taking action.
-            </p>
-
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+            <SortedStreamingResult
+              result={result}
+              accentColor={accentColor}
+              onHandoff={onHandoff}
+              onReset={reset}
+              caseId={caseId}
+            />
           </motion.div>
         )}
       </AnimatePresence>
