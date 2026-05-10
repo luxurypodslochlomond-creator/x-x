@@ -349,86 +349,57 @@ export default function Family51Page() {
               </div>
             </motion.div>
 
-            {/* CARD STACK — hero top, 2x2 bottom row */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-
-              {/* TOP — full width hero action */}
+            {/* SINGLE HERO CTA — one door, maximum clarity */}
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 12 }}>
               <motion.button
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('conflict'); }}
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('letter'); }}
                 className="sorted-tap-btn"
+                whileTap={{ scale: 0.97 }}
                 style={{
                   width: '100%', textAlign: 'left', cursor: 'pointer',
-                  padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(34,197,94,0.3)',
-                  background: 'rgba(34,197,94,0.1)',
-                  boxShadow: '0 2px 12px rgba(34,197,94,0.08)',
+                  padding: '22px 22px', borderRadius: 16,
+                  border: '2px solid rgba(249,115,22,0.5)',
+                  background: 'linear-gradient(135deg, rgba(249,115,22,0.15) 0%, rgba(249,115,22,0.06) 100%)',
+                  boxShadow: '0 4px 24px rgba(249,115,22,0.12)',
                   WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                  display: 'flex', alignItems: 'center', gap: 14,
+                  display: 'flex', alignItems: 'center', gap: 16,
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em' }}>WHAT'S BOTHERING YOU?</div>
-                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>Type or paste — we got this</div>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(249,115,22,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, opacity: 0.4 }}>
-                  <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 17, fontWeight: 900, color: '#fff', marginBottom: 4, letterSpacing: '-0.02em' }}>Decode my letter now</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Paste it, photo it, or type what happened — decoded in seconds</div>
+                </div>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                  <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </motion.button>
+            </motion.div>
 
-              {/* BOTTOM ROW — 2 side by side, equal height */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-
-                <motion.button
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('letter'); }}
-                  className="sorted-tap-btn"
-                  style={{
-                    textAlign: 'left', cursor: 'pointer',
-                    padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
-                    background: 'rgba(249,115,22,0.08)',
-                    WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-start',
-                  }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M14 2v6h6M9 15h6" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div style={{ fontSize: 12, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>I HAVE A LETTER</div>
-                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.35 }}>Paste, photo or upload</div>
-                </motion.button>
-
-                <motion.button
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('reply'); }}
-                  className="sorted-tap-btn"
-                  style={{
-                    textAlign: 'left', cursor: 'pointer',
-                    padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',
-                    background: 'rgba(6,182,212,0.08)',
-                    WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-start',
-                  }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div style={{ fontSize: 12, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>WRITE A REPLY</div>
-                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.35 }}>We draft it for you</div>
-                </motion.button>
-
-              </div>
-            </div>
+            {/* SECONDARY OPTIONS — smaller, quieter */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.18 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 28 }}>
+              <button
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('reply'); }}
+                className="sorted-tap-btn"
+                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(6,182,212,0.2)', background: 'rgba(6,182,212,0.06)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+              >
+                <div style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', marginBottom: 3, letterSpacing: '0.03em' }}>WRITE A REPLY</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>We draft it for you</div>
+              </button>
+              <button
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('conflict'); }}
+                className="sorted-tap-btn"
+                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(168,85,247,0.2)', background: 'rgba(168,85,247,0.06)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+              >
+                <div style={{ fontSize: 11, fontWeight: 800, color: '#a855f7', marginBottom: 3, letterSpacing: '0.03em' }}>IN A DISPUTE?</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>We'll get you sorted</div>
+              </button>
+            </motion.div>
 
             {/* TRUST STRIP — location pill only, privacy moved above fold */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
@@ -457,7 +428,6 @@ export default function Family51Page() {
 
 
             <SortedLiveCounter />
-            <SortedForLifeCard />
 
             <div style={{ marginTop: 16, textAlign: 'center' }}>
               <button onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }} style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.15)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
