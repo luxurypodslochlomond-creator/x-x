@@ -1,23 +1,79 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
 import SortedJourneyBar from '@/components/family51/SortedJourneyBar';
 import SortedShareMoment from '@/components/family51/SortedShareMoment';
 
+/*
+  COOLASFUCK PWA DESIGN PRINCIPLE:
+  - No spring physics — springs overshoot, feel "webby", hard to tune
+  - CSS transitions: hardware-accelerated translate3d, cubic-bezier(0.4, 0, 0.2, 1)
+  - Press feedback: opacity dim (native iOS pattern), NOT scale
+  - Sheet slide: 280ms ease-out up, 220ms ease-in down — matches iOS sheet exactly
+  - Touch: touchAction manipulation eliminates 300ms delay, WebkitTapHighlightColor gone
+  - Haptic: navigator.vibrate(8) — 8ms is imperceptible as sound but felt as click
+*/
+
+// Native-feel tap button — opacity flash, no scale weirdness
+function NativeButton({ onClick, children, style, className }) {
+  const ref = useRef(null);
+
+  const handlePress = () => {
+    if (navigator.vibrate) navigator.vibrate(8);
+    if (ref.current) {
+      ref.current.style.opacity = '0.45';
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          if (ref.current) ref.current.style.opacity = '1';
+        }, 100);
+      });
+    }
+    onClick && onClick();
+  };
+
+  return (
+    <button
+      ref={ref}
+      onPointerDown={handlePress}
+      style={{
+        WebkitTapHighlightColor: 'transparent',
+        touchAction: 'manipulation',
+        userSelect: 'none',
+        cursor: 'pointer',
+        transition: 'opacity 0.1s',
+        ...style,
+      }}
+      className={className}
+    >
+      {children}
+    </button>
+  );
+}
+
 const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, recordUse }, ref) {
   const [activeTool, setActiveTool] = useState(null);
+  const [visible, setVisible] = useState(false); // drives the CSS transition
   const [prefillContext, setPrefillContext] = useState(null);
   const [completedTools, setCompletedTools] = useState([]);
   const [showShare, setShowShare] = useState(false);
-  const [slideDir, setSlideDir] = useState(1);
 
+  // Open: set tool → next frame trigger CSS transition in
   const handleToolOpen = (toolId, handoffData = null) => {
-    setSlideDir(1);
+    if (activeTool && activeTool !== toolId) {
+      // Already open — just swap tool (no slide, just fade content)
+      setActiveTool(toolId);
+      setPrefillContext(handoffData || null);
+      setShowShare(false);
+      return;
+    }
     setActiveTool(toolId);
     setPrefillContext(handoffData || null);
     setShowShare(false);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setVisible(true));
+    });
   };
 
   const handleToolComplete = (toolId) => {
@@ -29,8 +85,13 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   };
 
   const handleBack = () => {
-    setActiveTool(null);
-    setPrefillContext(null);
+    if (navigator.vibrate) navigator.vibrate(8);
+    setVisible(false);
+    // Wait for slide-out then clear
+    setTimeout(() => {
+      setActiveTool(null);
+      setPrefillContext(null);
+    }, 220);
   };
 
   useImperativeHandle(ref, () => ({
@@ -40,38 +101,42 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   if (!activeTool) return null;
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={activeTool}
-        initial={{ opacity: 0, y: '100%' }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: '100%' }}
-        transition={{ type: 'spring', stiffness: 400, damping: 40, mass: 0.8 }}
-        style={{
-          position: 'fixed',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          background: '#080a0f',
-          zIndex: 9999,
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          WebkitOverflowScrolling: 'touch',
-        }}
-      >
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '28px 20px 60px' }}>
-        {/* BACK BUTTON */}
-        <motion.button
-          onClick={() => { if (navigator.vibrate) navigator.vibrate(8); handleBack(); }}
-          whileTap={{ scale: 0.9, opacity: 0.6 }}
-          transition={{ type: 'spring', stiffness: 600, damping: 30 }}
-          style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16, WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', userSelect: 'none' }}
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        // Hardware-accelerated sheet slide — iOS sheet curve
+        transform: visible ? 'translate3d(0, 0, 0)' : 'translate3d(0, 100%, 0)',
+        transition: visible
+          ? 'transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)' // ease-out up
+          : 'transform 0.22s cubic-bezier(0.4, 0, 1, 1)',    // ease-in down
+        willChange: 'transform',
+        background: '#080a0f',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        WebkitOverflowScrolling: 'touch',
+      }}
+    >
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '28px 20px 60px' }}>
+
+        {/* BACK — opacity press, no scale */}
+        <NativeButton
+          onClick={handleBack}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)',
+            letterSpacing: '0.08em', background: 'none', border: 'none',
+            marginBottom: 16,
+          }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
           BACK
-        </motion.button>
+        </NativeButton>
 
         {/* JOURNEY BAR */}
         <SortedJourneyBar
@@ -111,36 +176,30 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           )}
         </AnimatePresence>
 
-        {/* BOTTOM NAV */}
+        {/* BOTTOM NAV — pure CSS, no Framer on these */}
         <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
           {[
             { id: 'letter',   label: 'DECODE',  color: '#f97316' },
             { id: 'reply',    label: 'REPLY',   color: '#06b6d4' },
             { id: 'conflict', label: 'DISPUTE', color: '#ef4444' },
           ].map(t => (
-            <motion.button
+            <NativeButton
               key={t.id}
-              whileTap={{ scale: 0.93 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-              onClick={() => { if (navigator.vibrate) navigator.vibrate(8); handleToolOpen(t.id); }}
+              onClick={() => handleToolOpen(t.id)}
               style={{
                 flex: 1, padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
-                letterSpacing: '0.1em', cursor: 'pointer',
+                letterSpacing: '0.1em',
                 border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(255,255,255,0.08)'}`,
                 background: activeTool === t.id ? `${t.color}15` : 'transparent',
                 color: activeTool === t.id ? t.color : 'rgba(255,255,255,0.3)',
-                WebkitTapHighlightColor: 'transparent',
-                touchAction: 'manipulation',
-                userSelect: 'none',
               }}
             >
               {t.label}
-            </motion.button>
+            </NativeButton>
           ))}
         </div>
-        </div>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+    </div>
   );
 });
 
