@@ -352,8 +352,9 @@ export default function Family51Page() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => engineRef.current && engineRef.current.open('conflict')}
+                whileTap={{ scale: 0.96 }}
+                whileHover={{ scale: 1.01 }}
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('conflict'); }}
                 style={{
                   width: '100%', textAlign: 'left', cursor: 'pointer',
                   padding: '20px 18px', borderRadius: 14, border: '1px solid rgba(34,197,94,0.3)',
@@ -382,8 +383,8 @@ export default function Family51Page() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={() => engineRef.current && engineRef.current.open('letter')}
+                  whileTap={{ scale: 0.94 }}
+                  onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('letter'); }}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(249,115,22,0.25)',
@@ -404,8 +405,8 @@ export default function Family51Page() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={() => engineRef.current && engineRef.current.open('reply')}
+                  whileTap={{ scale: 0.94 }}
+                  onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('reply'); }}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '16px 14px', borderRadius: 14, border: '1px solid rgba(6,182,212,0.25)',

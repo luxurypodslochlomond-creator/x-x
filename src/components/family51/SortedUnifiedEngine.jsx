@@ -43,17 +43,13 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
     <AnimatePresence mode="wait">
       <motion.div
         key={activeTool}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: '100%' }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
-        transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        exit={{ opacity: 0, y: '100%' }}
+        transition={{ type: 'spring', stiffness: 400, damping: 40, mass: 0.8 }}
         style={{
           position: 'fixed',
           inset: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
           width: '100%',
           height: '100%',
           background: '#080a0f',
@@ -62,17 +58,20 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           overflowX: 'hidden',
           display: 'flex',
           flexDirection: 'column',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '28px 20px 60px' }}>
         {/* BACK BUTTON */}
-        <button
-          onClick={handleBack}
-          style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16 }}
+        <motion.button
+          onClick={() => { if (navigator.vibrate) navigator.vibrate(8); handleBack(); }}
+          whileTap={{ scale: 0.9, opacity: 0.6 }}
+          transition={{ type: 'spring', stiffness: 600, damping: 30 }}
+          style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16, WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', userSelect: 'none' }}
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           BACK
-        </button>
+        </motion.button>
 
         {/* JOURNEY BAR */}
         <SortedJourneyBar
@@ -119,19 +118,24 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
             { id: 'reply',    label: 'REPLY',   color: '#06b6d4' },
             { id: 'conflict', label: 'DISPUTE', color: '#ef4444' },
           ].map(t => (
-            <button
+            <motion.button
               key={t.id}
-              onClick={() => handleToolOpen(t.id)}
+              whileTap={{ scale: 0.93 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+              onClick={() => { if (navigator.vibrate) navigator.vibrate(8); handleToolOpen(t.id); }}
               style={{
                 flex: 1, padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
-                letterSpacing: '0.1em', cursor: 'pointer', transition: 'all 0.15s',
+                letterSpacing: '0.1em', cursor: 'pointer',
                 border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(255,255,255,0.08)'}`,
                 background: activeTool === t.id ? `${t.color}15` : 'transparent',
                 color: activeTool === t.id ? t.color : 'rgba(255,255,255,0.3)',
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+                userSelect: 'none',
               }}
             >
               {t.label}
-            </button>
+            </motion.button>
           ))}
         </div>
         </div>
