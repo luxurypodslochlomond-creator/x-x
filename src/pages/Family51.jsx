@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSessionMemory } from '../hooks/useSessionMemory';
 import { Link } from 'react-router-dom';
 import { Menu, X, Eye, Scale, Trash2, Mail } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
@@ -24,10 +25,11 @@ import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 // ────────────────────────────────────────────────────────────────────────────
 
 export default function Family51Page() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [showWhy, setShowWhy] = useState(false);
-  const [showHistory, setShowHistory] = useState(false);
-  const [showFAQ, setShowFAQ] = useState(false);
+  const { saveState, getState } = useSessionMemory('family51');
+  const [menuOpen, setMenuOpen] = useState(() => getState('menuOpen') || false);
+  const [showWhy, setShowWhy] = useState(() => getState('showWhy') || false);
+  const [showHistory, setShowHistory] = useState(() => getState('showHistory') || false);
+  const [showFAQ, setShowFAQ] = useState(() => getState('showFAQ') || false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showPaySuccess, setShowPaySuccess] = useState(false);
   const [caseCount, setCaseCount] = useState(0);
@@ -36,6 +38,12 @@ export default function Family51Page() {
   const { isLocked, remaining, recordUse } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
   const engineRef = useRef(null);
+
+  // Save state silently on change
+  useEffect(() => { saveState('menuOpen', menuOpen); }, [menuOpen, saveState]);
+  useEffect(() => { saveState('showWhy', showWhy); }, [showWhy, saveState]);
+  useEffect(() => { saveState('showHistory', showHistory); }, [showHistory, saveState]);
+  useEffect(() => { saveState('showFAQ', showFAQ); }, [showFAQ, saveState]); 
 
   // Load case count from localStorage for badge + first visit onboarding
   useEffect(() => {
