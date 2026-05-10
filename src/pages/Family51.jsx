@@ -494,15 +494,15 @@ export default function Family51Page() {
                   <path d="M20 30v2" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
               </div>
-              <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 12px' }}>
-                <span style={{ color: '#fff' }}>Don't stop now.</span><br />
-                <span style={{ color: '#f97316' }}>We're still here.</span>
+              <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 10px' }}>
+                <span style={{ color: '#fff' }}>You decoded it.</span><br />
+                <span style={{ color: '#f97316' }}>Now act on it.</span>
               </h1>
-              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', margin: '0 0 8px', lineHeight: 1.6 }}>
-                You've used your 10 free decodes. Unlock unlimited for {geoPrice.inline} — less than a coffee, more useful than a solicitor's first call.
+              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', margin: '0 0 12px', lineHeight: 1.6 }}>
+                You got your 10 free decodes. You understand what the letter means now. That's the hardest part done. Premium helps you finish it — draft the reply, resolve the dispute, follow through. {geoPrice.inline}/month.
               </p>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.5 }}>
-                Cancel any time · nothing stored · not legal advice
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: '0 0 4px', lineHeight: 1.5 }}>
+                Cancel anytime. Nothing stored. Not legal advice.
               </p>
             </div>
 
