@@ -214,8 +214,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             )}
 
             {/* FREE PEOPLE */}
-            <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(6,182,212,0.04)', border: '1px solid rgba(6,182,212,0.12)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(6,182,212,0.5)', margin: '0 0 10px' }}>TALK TO A REAL PERSON</p>
+            <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(249,115,22,0.04)', border: '1px solid rgba(249,115,22,0.12)' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(249,115,22,0.6)', margin: '0 0 10px' }}>TALK TO A REAL PERSON</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {[
                   { name: 'Citizens Advice', desc: 'free debt & legal help', url: 'https://www.citizensadvice.org.uk' },
@@ -223,7 +223,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
                   { name: 'Debt Camel', desc: 'plain English guides', url: 'https://debtcamel.co.uk' },
                 ].map(({ name, desc, url }) => (
                   <a key={name} href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#06b6d4', flexShrink: 0 }} />
+                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#f97316', flexShrink: 0 }} />
                     <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>{name}</strong> — {desc}</span>
                   </a>
                 ))}
@@ -278,10 +278,15 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </button>
       </div>
 
+      {/* HUMAN + AI LINE */}
+      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.28)', textAlign: 'center', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
+        Built by a human who needed this too. Powered by AI — but the care is real.
+      </p>
+
       {/* DISCLAIMER */}
-      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.18)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
+      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
         General guidance only — not legal advice. Always verify with{' '}
-        <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.3)', textDecoration: 'underline' }}>Citizens Advice</a>.
+        <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.25)', textDecoration: 'underline' }}>Citizens Advice</a>.
       </p>
 
     </div>

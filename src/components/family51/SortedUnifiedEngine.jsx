@@ -145,7 +145,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         )}
         {activeTool === 'reply' && (
           <Family51ReplyWriter
-            accentColor="#06b6d4"
+            accentColor="#f97316"
             onResult={() => handleToolComplete('reply')}
             prefillContext={prefillContext}
             suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
@@ -171,8 +171,8 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
           {[
             { id: 'letter',   label: 'DECODE',  color: '#f97316' },
-            { id: 'reply',    label: 'REPLY',   color: '#06b6d4' },
-            { id: 'conflict', label: 'DISPUTE', color: '#ef4444' },
+            { id: 'reply',    label: 'REPLY',   color: '#f97316' },
+            { id: 'conflict', label: 'DISPUTE', color: '#f97316' },
           ].map(t => (
             <NativeButton
               key={t.id}

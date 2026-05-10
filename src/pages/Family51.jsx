@@ -386,17 +386,17 @@ export default function Family51Page() {
               <button
                 onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('reply'); }}
                 className="sorted-tap-btn"
-                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(6,182,212,0.2)', background: 'rgba(6,182,212,0.06)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(249,115,22,0.2)', background: 'rgba(249,115,22,0.05)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
               >
-                <div style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', marginBottom: 3, letterSpacing: '0.03em' }}>WRITE A REPLY</div>
+                <div style={{ fontSize: 11, fontWeight: 800, color: '#f97316', marginBottom: 3, letterSpacing: '0.03em' }}>WRITE A REPLY</div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>We draft it for you</div>
               </button>
               <button
                 onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('conflict'); }}
                 className="sorted-tap-btn"
-                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(168,85,247,0.2)', background: 'rgba(168,85,247,0.06)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(249,115,22,0.2)', background: 'rgba(249,115,22,0.05)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
               >
-                <div style={{ fontSize: 11, fontWeight: 800, color: '#a855f7', marginBottom: 3, letterSpacing: '0.03em' }}>IN A DISPUTE?</div>
+                <div style={{ fontSize: 11, fontWeight: 800, color: '#f97316', marginBottom: 3, letterSpacing: '0.03em' }}>IN A DISPUTE?</div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>We'll get you sorted</div>
               </button>
             </motion.div>
