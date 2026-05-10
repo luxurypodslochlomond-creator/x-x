@@ -125,10 +125,36 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
 Real contact: DTI Hotline 1-384 | DOLE Hotline 1349 | PNP Hotline 117 | PAO (Public Attorney's Office) — free legal aid, call (02) 8928-9019`
         : `Apply ${geo.jurisdiction} with precision — cite specific legislation, regulatory bodies, exact ombudsman names, realistic timelines, and real contact details for ${geo.country}.`;
 
-      const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
-      ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
-      prompt: `You are a sharp, calm conflict and legal expert. You are entirely on their side. Direct, confident, real — not preachy, not corporate. You sound like the smartest friend they have.
+      // Detect if this is a personal/relationship situation
+      const lowerWhat = what.toLowerCase();
+      const isPersonalRelationship = (
+        lowerWhat.includes('partner') || lowerWhat.includes('husband') || lowerWhat.includes('wife') ||
+        lowerWhat.includes('boyfriend') || lowerWhat.includes('girlfriend') || lowerWhat.includes('spouse') ||
+        lowerWhat.includes('called me') || lowerWhat.includes('shouted') || lowerWhat.includes('argument') ||
+        lowerWhat.includes('fight') || lowerWhat.includes('said to me') || lowerWhat.includes('relationship') ||
+        (ct?.id === 'relationship') || (!ct?.id && !lowerWhat.includes('landlord') && !lowerWhat.includes('employer') && !lowerWhat.includes('council') && !lowerWhat.includes('court'))
+      );
+
+      const systemPrompt = isPersonalRelationship
+        ? `You are a calm, warm, wise friend. Someone who genuinely cares. You are NOT a lawyer, NOT a legal advisor, and this is NOT a court case — this is a real human moment in someone's life. Your job is to help them feel heard, calm, and clear — not scared or overwhelmed.
+
+CRITICAL RULES:
+- DO NOT mention police, 999, 101, DVPNs, court orders, or criminal legislation UNLESS the person has explicitly described physical violence or genuine fear for their safety. A verbal argument or name-calling is NOT grounds for this.
+- DO NOT cite criminal statutes or imprisonment terms for a domestic argument — this is catastrophically unhelpful and frightening.
+- Keep your language warm, short, and human. No walls of text. No legal jargon.
+- Be like that brilliant friend who has been through it themselves and just gets it.
+- Focus on: what they're feeling, how to handle the immediate moment, one calm conversation to have.
+
+GOAL: ${gt?.label}
+THEIR SITUATION: ${what}${fileContext}
+
+- situation_assessment: 1-2 warm, honest sentences. Validate what happened. Help them see it clearly without catastrophising.
+- legal_position: Keep this VERY brief and only relevant. For a personal argument, this might just be "Nothing legal here — this is a relationship matter. Focus on the conversation, not the courtroom." Only bring in law if it is genuinely relevant.
+- recommended_steps: Array of exactly 2-3 simple, human steps. Things like: take a breath, give it a few hours, then have a calm conversation. NOT legal filings.
+- what_to_say: A short, calm, real script they could actually say out loud. Human tone. Not formal. Not aggressive. Something that opens a door rather than closes one.
+- what_not_to_do: Array of 2 things — keep it gentle and practical, not scary.
+- if_it_escalates: Only include this if truly relevant. For a single verbal argument, say something like "If this becomes a regular pattern, that's worth talking to someone about — a counsellor, a trusted friend, or a helpline like Relate (0300 100 1234)." NO police numbers for a single argument.`
+        : `You are a sharp, calm conflict and legal expert. You are entirely on their side. Direct, confident, real — not preachy, not corporate. You sound like the smartest friend they have.
 
 ${countryContext}
 
@@ -138,14 +164,17 @@ THEIR SITUATION: ${what}${fileContext}
 
 Give them a plan that actually works in ${geo.country}. Use real law. Real bodies. Real steps. Real contact details.
 
-You MUST populate ALL fields with substantive, country-specific content. Empty fields are useless. Be the expert friend they can't afford to hire.
+- situation_assessment: 2-3 honest sentences. Who has the stronger position and why.
+- legal_position: Their actual rights under ${geo.jurisdiction} — cite specific legislation. Keep it concise.
+- recommended_steps: Array of exactly 3 steps — specific, actionable, named. Include timing.
+- what_to_say: Complete, word-for-word message or script they can use RIGHT NOW.
+- what_not_to_do: Array of 2-3 specific things that would genuinely harm their position.
+- if_it_escalates: The next step, process, and how to reach them.`;
 
-- situation_assessment: 2-3 honest sentences. Who has the stronger position and why. Name names. Be real.
-- legal_position: Their actual rights under ${geo.jurisdiction} — cite specific legislation by name and number. Flag if they need a lawyer. Note: guidance only, not formal legal advice.
-- recommended_steps: Array of exactly 3 steps — each one specific, actionable, named (not "contact authorities" but "File a complaint with DTI Hotline 1-384" or "Go to your Barangay Hall and request conciliation under RA 7160"). Include timing.
-- what_to_say: Complete, word-for-word message or script they can use RIGHT NOW — ready to send, copy, or say. Make it firm but professional.
-- what_not_to_do: Array of exactly 2-3 specific things that would genuinely harm their position in ${geo.country}.
-- if_it_escalates: The EXACT next body (named), the process, realistic cost, and how to reach them in ${geo.country}.`,
+      const response = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
+      ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
+      prompt: systemPrompt,
       response_json_schema: {
         type: 'object',
         properties: {
@@ -370,9 +399,8 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
             </Card>
 
-            <Card label="YOUR LEGAL POSITION" color="#06b6d4">
+            <Card label="YOUR POSITION" color="#06b6d4">
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', marginTop: 8, fontStyle: 'italic' }}>General guidance only — not legal advice. For complex matters, seek a solicitor.</p>
             </Card>
 
             <Card label="WHAT TO DO" color="#22c55e">
@@ -432,13 +460,11 @@ You MUST populate ALL fields with substantive, country-specific content. Empty f
 
 const THINKING_STEPS = [
   "Reading your situation…",
-  "Checking relevant UK legislation…",
-  "Identifying your rights…",
-  "Assessing enforcement powers…",
-  "Calculating your leverage…",
-  "Drafting your action plan…",
-  "Writing your script…",
-  "Finalising your plan…",
+  "Understanding what happened…",
+  "Working out the best approach…",
+  "Thinking about your options…",
+  "Drafting something useful…",
+  "Putting it together…",
 ];
 
 function ConflictThinkingLoader({ accentColor, country }) {
