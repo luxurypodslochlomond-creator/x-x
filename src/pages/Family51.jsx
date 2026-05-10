@@ -247,15 +247,16 @@ export default function Family51Page() {
 
       <AnimatePresence mode="wait">
 
-         {/* ── WHY SECTION ────────────────────────────────────── */}
+         {/* ── FAQ SECTION ────────────────────────────────────── */}
          {showFAQ && (
-           <motion.div key="faq" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
+           <motion.div key="faq" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: 'easeInOut' }}>
              <SortedFAQ accentColor="#f97316" />
            </motion.div>
          )}
 
+         {/* ── WHY SECTION ────────────────────────────────────── */}
          {showWhy && (
-           <motion.div key="why" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+           <motion.div key="why" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: 'easeInOut' }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
