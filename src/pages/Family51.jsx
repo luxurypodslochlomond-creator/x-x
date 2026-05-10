@@ -208,10 +208,10 @@ export default function Family51Page() {
                   <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
                   Privacy
                 </Link>
-                <a href="mailto:family@uf51.love" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                <button onClick={() => { setShowMauro(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em', width: '100%', textAlign: 'left' }}>
                   <Mail className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                  Say hi
-                </a>
+                  Say hi to SORTED AI
+                </button>
                 {/* PRIVACY NOTE */}
                 <div style={{ padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
                   <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.6 }}>
