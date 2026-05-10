@@ -4,39 +4,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 const STEPS = [
   {
     icon: (
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
-        <rect x="10" y="6" width="32" height="40" rx="4" stroke="#f97316" strokeWidth="2" fill="rgba(249,115,22,0.06)" />
-        <path d="M18 17h16M18 24h16M18 31h10" stroke="#f97316" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
-        <circle cx="38" cy="38" r="9" fill="#f97316" />
-        <path d="M35 38l2 2 4-4" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <rect x="10" y="6" width="36" height="44" rx="5" stroke="#f97316" strokeWidth="2" fill="rgba(249,115,22,0.06)" />
+        <path d="M19 18h18M19 26h18M19 34h12" stroke="#f97316" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+        <circle cx="42" cy="42" r="10" fill="#f97316" />
+        <path d="M38 42l2.5 2.5L46 37" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    title: "Paste any scary letter",
-    sub: "Council tax. Eviction notice. Court summons. HMRC. Whatever's keeping you up at night.",
+    title: "Got a scary letter?",
+    sub: "Bailiff notice. Court summons. Council tax demand. HMRC. Eviction. Debt collector. Whatever it is — paste it in.",
     color: "#f97316",
+    tag: "YOU ARE NOT ALONE",
   },
   {
     icon: (
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
-        <circle cx="26" cy="26" r="20" stroke="#06b6d4" strokeWidth="2" fill="rgba(6,182,212,0.06)" />
-        <path d="M17 26l6 6 12-12" stroke="#06b6d4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <circle cx="28" cy="28" r="22" stroke="#06b6d4" strokeWidth="2" fill="rgba(6,182,212,0.06)" />
+        <path d="M18 28l7 7 13-14" stroke="#06b6d4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M28 10v4M28 42v4M10 28h4M42 28h4" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
       </svg>
     ),
     title: "We decode it in seconds",
-    sub: "Plain English. What it actually means. What you need to do. Deadlines. Who to call. No jargon.",
+    sub: "What it actually means. What happens if you ignore it. Your deadline. Exactly what to do next. No jargon.",
     color: "#06b6d4",
-  },
-  {
-    icon: (
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
-        <rect x="6" y="12" width="40" height="28" rx="4" stroke="#22c55e" strokeWidth="2" fill="rgba(34,197,94,0.06)" />
-        <path d="M14 24h24M14 30h16" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
-        <path d="M42 20l-6-5v10l6-5z" fill="#22c55e" />
-      </svg>
-    ),
-    title: "We write your reply",
-    sub: "Professional tone. Your rights. Their obligations. Copy, paste, send. Done.",
-    color: "#22c55e",
+    tag: "10 SECONDS",
   },
 ];
 
@@ -62,23 +53,23 @@ export default function SortedOnboarding({ onDone }) {
         position: 'fixed', inset: 0, zIndex: 200,
         background: '#080a0f',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        padding: '40px 24px',
+        padding: '40px 28px',
       }}
     >
       {/* Skip */}
       <button
         onClick={onDone}
-        style={{ position: 'absolute', top: 20, right: 20, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.25)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.1em' }}
+        style={{ position: 'absolute', top: 20, right: 20, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.2)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.1em' }}
       >
         SKIP
       </button>
 
-      {/* Progress dots */}
-      <div style={{ display: 'flex', gap: 6, marginBottom: 48 }}>
+      {/* Progress */}
+      <div style={{ display: 'flex', gap: 6, marginBottom: 52 }}>
         {STEPS.map((_, i) => (
           <div key={i} style={{
-            width: i === step ? 20 : 6, height: 6, borderRadius: 3,
-            background: i === step ? s.color : 'rgba(255,255,255,0.15)',
+            width: i === step ? 24 : 6, height: 6, borderRadius: 3,
+            background: i === step ? s.color : 'rgba(255,255,255,0.12)',
             transition: 'all 0.3s ease',
           }} />
         ))}
@@ -87,44 +78,49 @@ export default function SortedOnboarding({ onDone }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={step}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+          exit={{ opacity: 0, y: -24 }}
+          transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{ textAlign: 'center', maxWidth: 360 }}
         >
+          {/* Tag */}
+          <div style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 12px', borderRadius: 20, background: `${s.color}15`, border: `1px solid ${s.color}30` }}>
+            <div style={{ width: 5, height: 5, borderRadius: '50%', background: s.color }} />
+            <span style={{ fontSize: 9, fontWeight: 900, letterSpacing: '0.18em', color: s.color }}>{s.tag}</span>
+          </div>
+
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
             {s.icon}
           </div>
           <h2 style={{
-            fontSize: 'clamp(22px, 6vw, 30px)', fontWeight: 900, lineHeight: 1.15,
-            letterSpacing: '-0.03em', color: '#fff', margin: '0 0 14px'
+            fontSize: 'clamp(24px, 7vw, 34px)', fontWeight: 900, lineHeight: 1.1,
+            letterSpacing: '-0.03em', color: '#fff', margin: '0 0 16px'
           }}>
             {s.title}
           </h2>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', lineHeight: 1.65, margin: 0 }}>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.58)', lineHeight: 1.7, margin: 0 }}>
             {s.sub}
           </p>
         </motion.div>
       </AnimatePresence>
 
-      <div style={{ marginTop: 48, width: '100%', maxWidth: 360 }}>
+      <div style={{ marginTop: 52, width: '100%', maxWidth: 360 }}>
         <motion.button
           whileTap={{ scale: 0.96 }}
           onClick={next}
           style={{
-            width: '100%', padding: '18px 0', borderRadius: 14, cursor: 'pointer',
+            width: '100%', padding: '19px 0', borderRadius: 14, cursor: 'pointer',
             background: s.color, border: 'none', color: '#000',
             fontSize: 15, fontWeight: 900, letterSpacing: '0.04em',
-            transition: 'all 0.15s',
           }}
         >
-          {step < STEPS.length - 1 ? 'Next →' : "Let's go →"}
+          {step < STEPS.length - 1 ? 'Show me →' : "Let's go — paste my letter →"}
         </motion.button>
 
         {step === STEPS.length - 1 && (
-          <p style={{ textAlign: 'center', fontSize: 11, color: 'rgba(255,255,255,0.25)', marginTop: 14, letterSpacing: '0.06em' }}>
-            5 FREE · NO CARD · NOTHING STORED
+          <p style={{ textAlign: 'center', fontSize: 11, color: 'rgba(255,255,255,0.2)', marginTop: 14, letterSpacing: '0.06em', lineHeight: 1.6 }}>
+            10 FREE · NO CARD · NOTHING STORED · NO ACCOUNT
           </p>
         )}
       </div>

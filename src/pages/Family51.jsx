@@ -323,13 +323,13 @@ export default function Family51Page() {
 
             {/* HERO — punchy, one breath */}
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 18 }}>
-              <h1 style={{ fontSize: 'clamp(28px, 8vw, 42px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', margin: '0 0 8px' }}>
-                <span style={{ color: '#fff' }}>Stressed about</span><br />
-                <span style={{ color: '#fff' }}>something?</span><br />
-                <span style={{ color: '#f97316' }}>We've got you.</span>
+              <h1 style={{ fontSize: 'clamp(26px, 7.5vw, 40px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 10px' }}>
+                <span style={{ color: '#fff' }}>Got a scary letter?</span><br />
+                <span style={{ color: '#f97316' }}>We'll decode it.</span><br />
+                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 700 }}>In seconds. Plain English.</span>
               </h1>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.5 }}>
-                Plain English. Any language. Any country.
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: 0, lineHeight: 1.6 }}>
+                Council tax · bailiffs · eviction · HMRC · DWP · court summons · employers · landlords
               </p>
             </motion.div>
 
@@ -545,14 +545,14 @@ export default function Family51Page() {
                 </svg>
               </div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 12px' }}>
-                <span style={{ color: '#fff' }}>You've nailed your</span>{' '}
-                <span style={{ color: '#f97316' }}>10 free uses.</span>
+                <span style={{ color: '#fff' }}>Don't stop now.</span><br />
+                <span style={{ color: '#f97316' }}>We're still here.</span>
               </h1>
               <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', margin: '0 0 8px', lineHeight: 1.6 }}>
-                Keep going — unlimited, for less than a coffee.
+                You've used your 10 free decodes. Unlock unlimited for {geoPrice.inline} — less than a coffee, more useful than a solicitor's first call.
               </p>
               <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.5 }}>
-                {geoPrice.inline} · cancel any time · no small print · not legal advice
+                Cancel any time · nothing stored · not legal advice
               </p>
             </div>
 

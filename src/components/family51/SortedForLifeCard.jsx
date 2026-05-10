@@ -3,46 +3,6 @@ import { motion } from 'framer-motion';
 import { sortedCheckout } from '@/functions/sortedCheckout';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 
-// Custom SVG icons — no emoji
-const IconUnlimited = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-    <path d="M2 8c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2s-.9 2-2 2H4c-1.1 0-2-.9-2-2z" stroke="#f97316" strokeWidth="1.3" fill="none"/>
-    <path d="M5.5 8h5" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round"/>
-  </svg>
-);
-const IconAI = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-    <circle cx="8" cy="8" r="6" stroke="#f97316" strokeWidth="1.3" fill="none"/>
-    <path d="M5 8l2 2 4-4" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-const IconShield = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-    <path d="M8 2L3 4.5v4c0 2.5 2 4.5 5 5.5 3-1 5-3 5-5.5v-4L8 2z" stroke="#f97316" strokeWidth="1.3" fill="none"/>
-    <path d="M5.5 8l1.5 1.5L10 6.5" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-const IconGuide = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-    <rect x="3" y="2" width="10" height="12" rx="2" stroke="#f97316" strokeWidth="1.3" fill="none"/>
-    <path d="M5.5 6h5M5.5 9h3" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round"/>
-  </svg>
-);
-const IconCancel = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-    <circle cx="8" cy="8" r="6" stroke="#f97316" strokeWidth="1.3" fill="none"/>
-    <path d="M6 8h4" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round"/>
-  </svg>
-);
-
-const PERKS = [
-  { Icon: IconUnlimited, text: 'Unlimited decodes, replies & dispute plans' },
-  { Icon: IconAI,        text: 'AI that breaks down complex letters into plain English' },
-  { Icon: IconShield,    text: 'Every letter, every reply, every dispute — fully private, nothing stored' },
-  { Icon: IconGuide,     text: 'Know exactly what to do next — clear, straightforward steps' },
-  { Icon: IconCancel,    text: 'Cancel anytime — no contract, no catch' },
-];
-
 export default function SortedForLifeCard({ compact = false }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -77,36 +37,53 @@ export default function SortedForLifeCard({ compact = false }) {
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: compact ? 0 : 0.45 }}
+      transition={{ delay: compact ? 0 : 0.3 }}
       style={{
-        marginTop: compact ? 0 : 28,
-        padding: compact ? '22px 20px' : '26px 24px',
-        border: '1px solid rgba(249,115,22,0.45)',
+        marginTop: compact ? 0 : 24,
+        padding: compact ? '24px 20px' : '28px 24px',
+        border: '1.5px solid rgba(249,115,22,0.5)',
         borderRadius: 18,
-        background: 'linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(239,68,68,0.06) 100%)',
+        background: 'linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(239,68,68,0.05) 100%)',
       }}
     >
-      {/* HEADER */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 18 }}>
-        <div>
-          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.45)', margin: '0 0 5px' }}>UNLOCK FULL ACCESS</p>
-          <p style={{ fontSize: 19, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', margin: 0, lineHeight: 1 }}>SORTED FOR LIFE</p>
-        </div>
-        <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: 12 }}>
-          <p style={{ fontSize: 26, fontWeight: 900, color: '#f97316', margin: 0, letterSpacing: '-0.03em', lineHeight: 1 }}>{geo.label.replace('/month', '')}</p>
-          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', margin: '3px 0 0', letterSpacing: '0.04em' }}>{geo.sub}</p>
+      {/* EMOTIONAL HEADLINE */}
+      <div style={{ marginBottom: 20 }}>
+        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(249,115,22,0.6)', margin: '0 0 8px' }}>NEVER BE STUCK AGAIN</p>
+        <p style={{ fontSize: 22, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 6px', lineHeight: 1.15 }}>
+          Every letter.<br />Every reply.<br />We've got you.
+        </p>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+          <span style={{ fontSize: 32, fontWeight: 900, color: '#f97316', letterSpacing: '-0.03em' }}>{geo.label.replace('/month', '')}</span>
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>{geo.sub}</span>
         </div>
       </div>
 
-      {/* PERKS */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginBottom: 20 }}>
-        {PERKS.map(({ Icon, text }, i) => (
+      {/* WHAT THEY GET — emotionally framed */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 22 }}>
+        {[
+          { text: 'Unlimited decodes — paste any letter, any time', bold: 'Unlimited decodes' },
+          { text: 'We write your reply — professional, assertive, right tone', bold: 'We write your reply' },
+          { text: 'Dispute plans — when things go further', bold: 'Dispute plans' },
+          { text: 'Nothing stored, nothing tracked, ever', bold: 'Nothing stored' },
+          { text: 'Cancel any time — no contract, no catch', bold: 'Cancel any time' },
+        ].map(({ text, bold }, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <Icon />
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.45 }}>{text}</span>
+            <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(249,115,22,0.2)', border: '1px solid rgba(249,115,22,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+                <path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>
+              <strong style={{ color: '#fff', fontWeight: 700 }}>{bold}</strong> — {text.replace(bold + ' — ', '')}
+            </span>
           </div>
         ))}
       </div>
+
+      {/* SOCIAL PROOF LINE */}
+      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
+        "Less than a coffee. Worth more than a solicitor's first 5 minutes."
+      </p>
 
       {/* CTA */}
       <motion.button
@@ -114,8 +91,8 @@ export default function SortedForLifeCard({ compact = false }) {
         disabled={loading}
         whileTap={!loading ? { scale: 0.97 } : {}}
         style={{
-          width: '100%', padding: '16px 0', borderRadius: 12,
-          fontSize: 14, fontWeight: 900, letterSpacing: '0.06em',
+          width: '100%', padding: '18px 0', borderRadius: 14,
+          fontSize: 15, fontWeight: 900, letterSpacing: '0.04em',
           cursor: loading ? 'not-allowed' : 'pointer',
           border: 'none',
           background: loading ? 'rgba(249,115,22,0.25)' : '#f97316',
@@ -123,15 +100,15 @@ export default function SortedForLifeCard({ compact = false }) {
           transition: 'all 0.2s',
         }}
       >
-        {loading ? 'REDIRECTING TO STRIPE...' : geo.cta}
+        {loading ? 'REDIRECTING...' : geo.cta}
       </motion.button>
 
       {error && (
-        <p style={{ fontSize: 12, color: '#ef4444', textAlign: 'center', marginTop: 10, margin: '10px 0 0' }}>{error}</p>
+        <p style={{ fontSize: 12, color: '#ef4444', textAlign: 'center', marginTop: 10 }}>{error}</p>
       )}
 
-      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', textAlign: 'center', marginTop: 12, letterSpacing: '0.03em', lineHeight: 1.5 }}>
-        Secure payment via Stripe · Apple Pay &amp; Google Pay accepted
+      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', textAlign: 'center', marginTop: 12, letterSpacing: '0.03em', lineHeight: 1.5 }}>
+        Secure · Apple Pay &amp; Google Pay · Cancel anytime
       </p>
     </motion.div>
   );
