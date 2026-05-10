@@ -450,7 +450,10 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               NEW SITUATION
             </motion.button>
 
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', letterSpacing: '0.05em' }}>Nothing stored. Nothing seen. Yours alone.</p>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
+              SORTED provides guidance only — not legal advice. For serious matters, speak to a qualified solicitor. <a href="/SortedTerms" style={{ color: 'rgba(255,255,255,0.3)', textDecoration: 'underline' }}>Terms</a>
+            </p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.12)', textAlign: 'center', letterSpacing: '0.05em', marginTop: 4 }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>
         )}
       </AnimatePresence>
