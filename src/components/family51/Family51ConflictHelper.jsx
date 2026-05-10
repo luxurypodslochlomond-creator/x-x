@@ -219,18 +219,26 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
     }
   };
 
-  const sendEmail = async () => {
-    if (!emailAddr.trim() || !result || emailing) return;
-    setEmailing(true);
-    try {
-      const body = `SORTED analysed your conflict.\n\n─────────────────────\nSITUATION ASSESSMENT\n─────────────────────\n${result.situation_assessment}\n\n─────────────────────\nYOUR LEGAL POSITION\n─────────────────────\n${result.legal_position}\n\n─────────────────────\nWHAT TO DO\n─────────────────────\n${result.recommended_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n─────────────────────\nWHAT TO SAY\n─────────────────────\n${result.what_to_say}\n\nWHAT NOT TO DO:\n${result.what_not_to_do?.map(x => `X ${x}`).join('\n')}\n\nIF IT ESCALATES: ${result.if_it_escalates}\n\n─────────────────────\nSORTED — sorted.family51.com\nNothing is stored. This email was sent at your request only.`;
-      await base44.integrations.Core.SendEmail({ to: emailAddr.trim(), subject: 'Your SORTED conflict plan', body });
-      setEmailSent(true);
-    } catch (err) {
-      setResult(prev => ({ ...prev, _error: `Email failed: ${err?.message || 'Could not send'}. Try again.` }));
-    } finally {
-      setEmailing(false);
+  const handleSave = async () => {
+    const text =
+      `SORTED — Your Plan\n\n` +
+      `${result.situation_assessment}\n\n` +
+      `YOUR POSITION:\n${result.legal_position}\n\n` +
+      `WHAT TO DO:\n${result.recommended_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
+      (result.what_to_say ? `WHAT TO SAY:\n${result.what_to_say}\n\n` : '') +
+      (result.what_not_to_do?.length ? `DON'T:\n${result.what_not_to_do.map(x => `• ${x}`).join('\n')}\n\n` : '') +
+      `Via SORTED — uf51.love/Sorted\nGuidance only, not legal advice.`;
+
+    if (navigator.share) {
+      try { await navigator.share({ title: 'SORTED — Your Plan', text }); return; } catch (_) {}
     }
+    try { await navigator.clipboard.writeText(text); } catch (_) {
+      const el = document.createElement('textarea');
+      el.value = text; document.body.appendChild(el); el.select();
+      document.execCommand('copy'); document.body.removeChild(el);
+    }
+    setEmailSent(true); // reuse state as "saved" confirmation
+    setTimeout(() => setEmailSent(false), 2500);
   };
 
   const copy = (text, key) => {
@@ -440,8 +448,31 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               </Card>
             )}
 
-            {/* EMAIL TO SELF */}
-            <EmailToSelf emailAddr={emailAddr} setEmailAddr={setEmailAddr} onSend={sendEmail} sent={emailSent} sending={emailing} accentColor={accentColor} />
+            {/* SAVE / SHARE */}
+            <button
+              onClick={handleSave}
+              style={{
+                width: '100%', padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
+                letterSpacing: '0.08em', cursor: 'pointer',
+                border: '1px solid rgba(34,197,94,0.4)',
+                background: emailSent ? 'rgba(34,197,94,0.15)' : 'rgba(34,197,94,0.07)',
+                color: '#22c55e',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', transition: 'all 0.2s',
+              }}
+            >
+              {emailSent ? '✓ SAVED' : (
+                <>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    {navigator.share
+                      ? <><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></>
+                      : <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></>
+                    }
+                  </svg>
+                  {navigator.share ? 'SHARE / SAVE' : 'COPY TO CLIPBOARD'}
+                </>
+              )}
+            </button>
 
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
