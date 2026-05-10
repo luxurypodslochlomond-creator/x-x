@@ -328,8 +328,8 @@ export default function Family51Page() {
                 <span style={{ color: '#f97316' }}>We'll decode it.</span><br />
                 <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 700 }}>In seconds. Plain English.</span>
               </h1>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: 0, lineHeight: 1.6 }}>
-                Council tax · bailiffs · eviction · HMRC · DWP · court summons · employers · landlords
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.65 }}>
+                Whatever it is — we'll tell you exactly what it means and what to do next.
               </p>
             </motion.div>
 
