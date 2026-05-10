@@ -385,9 +385,8 @@ export default function Family51Page() {
               </button>
             </motion.div>
 
-            {/* TRUST STRIP — location pill only, privacy moved above fold */}
+            {/* TRUST STRIP — jurisdiction & free uses only */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
-              {selectedLocation && <TrustPill text={selectedLocation.country} />}
               <TrustPill text={selectedLocation?.jurisdiction || 'Local law'} />
               <TrustPill text="10 free uses" />
             </motion.div>
@@ -557,8 +556,9 @@ function WRTarget() {
 function WRPin() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <path d="M7 1.5C5.07 1.5 3.5 3.07 3.5 5c0 2.625 3.5 7 3.5 7S10.5 7.625 10.5 5c0-1.93-1.57-3.5-3.5-3.5Z" stroke="#f97316" strokeWidth="1.2" fill="rgba(249,115,22,0.15)" />
-      <circle cx="7" cy="5" r="1.2" fill="#f97316" />
+      <circle cx="7" cy="5" r="4" stroke="#f97316" strokeWidth="1.2" fill="none" />
+      <circle cx="7" cy="5" r="1.6" fill="#f97316" />
+      <path d="M7 9v3.5" stroke="#f97316" strokeWidth="1.1" strokeLinecap="round" opacity="0.5" />
     </svg>
   );
 }
