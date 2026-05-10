@@ -430,16 +430,16 @@ export default function Family51Page() {
         )}
 
         {/* ── CASE HISTORY ──────────────────────────────────── */}
-        {showHistory && (
-          <motion.div key="history" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
-            <SortedCaseHistory
-              isPremium={!isLocked}
-              onContinue={() => {
-                setShowHistory(false);
-              }}
-            />
-          </motion.div>
-        )}
+         {showHistory && (
+           <motion.div key="history" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: 'easeInOut' }}>
+             <SortedCaseHistory
+               isPremium={!isLocked}
+               onContinue={() => {
+                 setShowHistory(false);
+               }}
+             />
+           </motion.div>
+         )}
 
         {/* ── TOOL VIEW: UNIFIED ENGINE ──────────────────────────── */}
         <SortedUnifiedEngine
