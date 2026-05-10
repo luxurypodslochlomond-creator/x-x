@@ -272,10 +272,10 @@ export default function Family51Page() {
 
             {/* STATS CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 40 }}>
-              <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project" />
-              <StatCard number="92%" label="of serious legal problems in the USA receive no legal help at all" source="Legal Services Corp." />
-              <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health" />
-              <StatCard number="£100B+" label="annual UK legal aid spending gap — unmet demand" source="Law Society Intelligence" color="#ef4444" />
+              <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project 2023" />
+              <StatCard number="92%" label="of serious civil legal problems in the USA receive no professional help" source="Legal Services Corp. 2022" />
+              <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health Institute" />
+              <StatCard number="£1.7B" label="UK civil legal aid budget cut by over 40% since LASPO 2013 — millions left without help" source="Law Society 2023" color="#ef4444" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
@@ -408,22 +408,19 @@ export default function Family51Page() {
               <TrustPill text="10 free uses" />
             </motion.div>
 
-            {/* HOW IT WORKS — collapsed, clean */}
-            <details style={{ marginBottom: 20, cursor: 'pointer' }}>
-              <summary style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span>HOW IT WORKS</span>
-                <span style={{ opacity: 0.5 }}>↓</span>
-              </summary>
-              <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <WhyRow icon={<WRBolt />} text="Snap a photo or paste your letter — decoded in under 10 seconds" />
-                <WhyRow icon={<WRTarget />} text="Exact steps, deadlines, and who to contact — no walls of text" />
-                <WhyRow icon={<WRPin />} text="Knows your location, jurisdiction & local bodies automatically" />
-                <WhyRow icon={<WRLock />} text="Processed by AI then immediately discarded — never stored, never sold, never used to train anything" />
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', margin: '4px 0 0', lineHeight: 1.5 }}>
-                  10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.4)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
-                </p>
+            {/* HOW IT WORKS — always visible */}
+            <div style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 12px' }}>HOW IT WORKS</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <WhyRow icon={<WRBolt />} text="Paste, type or photo your letter — plain English breakdown in seconds" />
+                <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, and who to contact — no jargon" />
+                <WhyRow icon={<WRPin />} text="Knows your country & local legal bodies automatically" />
+                <WhyRow icon={<WRLock />} text="AI processes it then immediately discards it — nothing stored, nothing sold, ever" />
               </div>
-            </details>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.22)', margin: '12px 0 0', lineHeight: 1.5 }}>
+                10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.4)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
+              </p>
+            </div>
 
 
 
