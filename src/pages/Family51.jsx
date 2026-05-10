@@ -112,7 +112,7 @@ export default function Family51Page() {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
+    <div style={{ minHeight: '100vh', background: '#000', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
       <style>{`
         .sorted-tap-btn { transition: opacity 0.08s; }
         .sorted-tap-btn:active { opacity: 0.5; }
@@ -130,12 +130,12 @@ export default function Family51Page() {
       </AnimatePresence>
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(8,10,15,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(249,115,22,0.12)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <motion.button onClick={() => { setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-          <F51Mark />
-          <div style={{ lineHeight: 1.1 }}>
-            <div style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff' }}>SORTED</div>
-            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.22em', color: '#f97316' }}>WE'VE GOT YOU</div>
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(0,0,0,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(0,212,255,0.15)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <motion.button onClick={() => { setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'none', border: 'none', cursor: 'pointer', padding: 0, transition: 'opacity 0.15s' }} onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
+          <SortedMark />
+          <div style={{ lineHeight: 1.2 }}>
+            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#fff' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#00d4ff' }}>WE'VE GOT YOU</div>
           </div>
         </motion.button>
 
@@ -155,7 +155,7 @@ export default function Family51Page() {
              <motion.button
                onClick={() => { setShowFAQ(true); setMenuOpen(false); }}
                whileTap={{ scale: 0.95 }}
-               style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#f97316', background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: 6, padding: '5px 10px', cursor: 'pointer' }}
+               style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: '#00d4ff', background: 'rgba(0,212,255,0.1)', border: '1.5px solid rgba(0,212,255,0.3)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
              >
                FAQ
              </motion.button>
@@ -163,11 +163,11 @@ export default function Family51Page() {
                onClick={() => { setShowHistory(true); setShowFAQ(false); setShowWhy(false); setMenuOpen(false); }}
                whileTap={{ scale: 0.95 }}
                title="My Cases"
-               style={{ position: 'relative', width: 30, height: 30, borderRadius: '50%', border: '1px solid rgba(249,115,22,0.3)', background: 'rgba(249,115,22,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+               style={{ position: 'relative', width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(0,212,255,0.3)', background: 'rgba(0,212,255,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', WebkitTapHighlightColor: 'transparent' }}
              >
                <CasesIcon />
                {caseCount > 0 && (
-                 <div style={{ position: 'absolute', top: -4, right: -4, minWidth: 14, height: 14, borderRadius: 7, background: '#f97316', border: '1.5px solid #080a0f', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3px' }}>
+                 <div style={{ position: 'absolute', top: -4, right: -4, minWidth: 14, height: 14, borderRadius: 7, background: '#00d4ff', border: '1.5px solid #000', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3px' }}>
                    <span style={{ fontSize: 8, fontWeight: 900, color: '#000', lineHeight: 1 }}>{caseCount > 9 ? '9+' : caseCount}</span>
                  </div>
                )}
@@ -176,12 +176,12 @@ export default function Family51Page() {
                onClick={() => { setShowWhy(true); setMenuOpen(false); }}
                whileTap={{ scale: 0.95 }}
                title="Why SORTED?"
-               style={{ width: 30, height: 30, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 900, fontStyle: 'italic' }}
+               style={{ width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)', fontSize: 14, fontWeight: 900, fontStyle: 'italic', WebkitTapHighlightColor: 'transparent' }}
              >
                ?
              </motion.button>
-             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.9 }} style={{ background: menuOpen ? 'rgba(249,115,22,0.1)' : 'none', border: `1px solid ${menuOpen ? 'rgba(249,115,22,0.4)' : 'rgba(255,255,255,0.1)'}`, borderRadius: 8, cursor: 'pointer', padding: '5px 7px', color: '#f97316', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', display: 'flex', alignItems: 'center', gap: 5, transition: 'all 0.15s' }}>
-               {menuOpen ? <X className="w-4 h-4" /> : <><Menu className="w-4 h-4" /><span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', fontFamily: 'monospace' }}>MENU</span></>}
+             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.92 }} style={{ background: menuOpen ? 'rgba(0,212,255,0.12)' : 'rgba(255,255,255,0.04)', border: `1.5px solid ${menuOpen ? 'rgba(0,212,255,0.6)' : 'rgba(0,212,255,0.2)'}`, borderRadius: 10, cursor: 'pointer', padding: '7px 10px', color: '#00d4ff', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', display: 'flex', alignItems: 'center', gap: 7, transition: 'all 0.18s' }}>
+               {menuOpen ? <X className="w-4 h-4" /> : <><Menu className="w-4 h-4" /><span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', fontFamily: 'monospace' }}>MENU</span></>}
              </motion.button>
            </div>
          )}
@@ -190,31 +190,31 @@ export default function Family51Page() {
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
          {menuOpen && !showWhy && !showFAQ && (
-           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ position: 'sticky', top: 52, zIndex: 49, background: 'rgba(6,8,12,0.99)', backdropFilter: 'blur(24px)', borderBottom: '1px solid rgba(249,115,22,0.15)', padding: '0 20px' }}>
+           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.12 }} style={{ position: 'sticky', top: 54, zIndex: 49, background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(0,212,255,0.15)', padding: '0 20px' }}>
                  <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
-               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
+               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fff', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(0,212,255,0.06)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                  <WhyIcon />
                  Why we built this
                </button>
-               <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}>
+               <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fff', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(0,212,255,0.06)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                  <FAQIcon />
                  FAQ &amp; How It Works
                </button>
-               <Link to="/SortedTerms" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+               <Link to="/SortedTerms" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(0,212,255,0.06)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                   <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
                   Terms
                 </Link>
-                <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em' }}>
+                <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(0,212,255,0.06)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                   <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
                   Privacy
                 </Link>
-                <button onClick={() => { setShowMauro(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.07)', letterSpacing: '0.01em', width: '100%', textAlign: 'left' }}>
+                <button onClick={() => { setShowMauro(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fff', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(0,212,255,0.06)', letterSpacing: '0.02em', width: '100%', textAlign: 'left', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                   <Mail className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
                   Say hi to SORTED AI
                 </button>
                 {/* PRIVACY NOTE */}
-                <div style={{ padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: 0, lineHeight: 1.6 }}>
+                <div style={{ padding: '11px 0', borderBottom: '1px solid rgba(0,212,255,0.06)' }}>
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.6 }}>
                     Your letter is processed by AI then immediately discarded. Nothing is stored, logged, or sold. Nothing leaves your session except what you choose to email yourself.
                   </p>
                 </div>
@@ -225,7 +225,9 @@ export default function Family51Page() {
                     setMenuOpen(false);
                     window.location.reload();
                   }}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 0', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.4)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.01em' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }}
+                  onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
+                  onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
                 >
                   <Trash2 className="w-4 h-4" />
                   Clear all my data &amp; reset
@@ -688,9 +690,9 @@ function ConflictIcon({ color }) {
 function WhyIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="3" r="1" fill="currentColor" />
-      <path d="M8 5v4M5 14h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-      <rect x="2" y="7" width="12" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.2" fill="none" />
+      <circle cx="8" cy="3" r="1" fill="#00d4ff" />
+      <path d="M8 5v4M5 14h6" stroke="#00d4ff" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="2" y="7" width="12" height="6" rx="1.5" stroke="#00d4ff" strokeWidth="1.2" fill="none" />
     </svg>
   );
 }
@@ -721,6 +723,18 @@ function ProblemCard({ icon, title, desc }) {
       <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{title}</div>
       <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{desc}</p>
     </div>
+  );
+}
+
+// ─── SORTED MARK ICON ─────────────────────────────────────────
+function SortedMark() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
+      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#00d4ff" strokeWidth="1.8" fill="rgba(0,212,255,0.08)" />
+      <path d="M11 11V8a4 4 0 018 0v3" stroke="#00d4ff" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#00d4ff" strokeWidth="1.4" fill="rgba(0,212,255,0.2)" />
+      <circle cx="15" cy="19" r="0.8" fill="#00d4ff" />
+    </svg>
   );
 }
 
@@ -781,9 +795,9 @@ function PartnerIcon() {
 function CasesIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-      <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#f97316" strokeWidth="1.2" fill="none" />
-      <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-      <path d="M4.5 8h6M4.5 10.5h4" stroke="#f97316" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
+      <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#00d4ff" strokeWidth="1.2" fill="none" />
+      <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#00d4ff" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      <path d="M4.5 8h6M4.5 10.5h4" stroke="#00d4ff" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
     </svg>
   );
 }
@@ -791,9 +805,9 @@ function CasesIcon() {
 function FAQIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="8" r="6.5" stroke="#f97316" strokeWidth="1.2" fill="none" />
-      <path d="M8 5v1M8 8v3" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
-      <circle cx="8" cy="5" r="0.5" fill="#f97316" opacity="0.8" />
+      <circle cx="8" cy="8" r="6.5" stroke="#00d4ff" strokeWidth="1.2" fill="none" />
+      <path d="M8 5v1M8 8v3" stroke="#00d4ff" strokeWidth="1.2" strokeLinecap="round" />
+      <circle cx="8" cy="5" r="0.5" fill="#00d4ff" opacity="0.8" />
     </svg>
   );
 }

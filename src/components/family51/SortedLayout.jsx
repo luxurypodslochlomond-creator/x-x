@@ -54,10 +54,10 @@ function BitStream() {
 function SortedMark() {
   return (
     <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
-      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="1.8" fill="rgba(249,115,22,0.06)" />
-      <path d="M11 11V8a4 4 0 018 0v3" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f97316" strokeWidth="1.4" fill="rgba(249,115,22,0.25)" />
-      <circle cx="15" cy="19" r="0.8" fill="#f97316" />
+      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#00d4ff" strokeWidth="1.8" fill="rgba(0,212,255,0.08)" />
+      <path d="M11 11V8a4 4 0 018 0v3" stroke="#00d4ff" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#00d4ff" strokeWidth="1.4" fill="rgba(0,212,255,0.2)" />
+      <circle cx="15" cy="19" r="0.8" fill="#00d4ff" />
     </svg>
   );
 }
@@ -95,84 +95,80 @@ export default function SortedLayout({ children, currentPage }) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff' }}>
-
-      {/* Shannon transmission overlay */}
-      <AnimatePresence>
-        {transmitting && <ShannonTransmission active={transmitting} />}
-      </AnimatePresence>
+    <div style={{ minHeight: '100vh', background: '#000', color: '#fff' }}>
 
       {/* Header */}
       <header style={{
         position: 'sticky', top: 0, zIndex: 50,
-        background: 'rgba(8,10,15,0.97)',
-        backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(249,115,22,0.12)',
-        padding: '12px 20px',
+        background: 'rgba(0,0,0,0.98)',
+        backdropFilter: 'blur(24px)',
+        borderBottom: '1px solid rgba(249,115,22,0.2)',
+        padding: '14px 20px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <Link
           to="/Sorted"
           onClick={() => handleNavClick('/Sorted')}
-          style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit' }}
+          style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit', transition: 'opacity 0.15s' }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
           <SortedMark />
-          <div style={{ lineHeight: 1.1 }}>
-            <div style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff' }}>SORTED</div>
-            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.22em', color: '#f97316' }}>WE'VE GOT YOU</div>
+          <div style={{ lineHeight: 1.2 }}>
+            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#fff' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#00d4ff' }}>WE'VE GOT YOU</div>
           </div>
         </Link>
 
-        {/* Shannon bit stream — centre decoration */}
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-          <BitStream />
-        </div>
+        {/* Spacer */}
+        <div style={{ flex: 1 }} />
 
         <motion.button
           onClick={() => setMenuOpen(!menuOpen)}
-          whileTap={{ scale: 0.9 }}
+          whileTap={{ scale: 0.92 }}
           style={{
-            background: menuOpen ? 'rgba(249,115,22,0.1)' : 'none',
-            border: `1px solid ${menuOpen ? 'rgba(249,115,22,0.4)' : 'rgba(255,255,255,0.1)'}`,
-            borderRadius: 8, cursor: 'pointer', padding: '6px 8px',
-            color: '#f97316', display: 'flex', alignItems: 'center', gap: 6,
-            transition: 'all 0.15s',
+            background: menuOpen ? 'rgba(0,212,255,0.12)' : 'rgba(255,255,255,0.04)',
+            border: `1.5px solid ${menuOpen ? 'rgba(0,212,255,0.6)' : 'rgba(0,212,255,0.2)'}`,
+            borderRadius: 10, cursor: 'pointer', padding: '7px 10px',
+            color: '#00d4ff', display: 'flex', alignItems: 'center', gap: 7,
+            transition: 'all 0.18s',
+            WebkitTapHighlightColor: 'transparent',
           }}
         >
           {menuOpen
             ? <X className="w-4 h-4" />
             : <>
                 <Menu className="w-4 h-4" />
-                <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', fontFamily: 'monospace' }}>MENU</span>
+                <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', fontFamily: 'monospace' }}>MENU</span>
               </>
           }
         </motion.button>
       </header>
 
-      {/* Menu — Shannon terminal style */}
+      {/* Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.15 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.12 }}
             style={{
-              position: 'sticky', top: 53, zIndex: 49,
-              background: 'rgba(6,8,12,0.99)',
+              position: 'sticky', top: 54, zIndex: 49,
+              background: 'rgba(0,0,0,0.95)',
               backdropFilter: 'blur(24px)',
-              borderBottom: '1px solid rgba(249,115,22,0.15)',
+              borderBottom: '1.5px solid rgba(0,212,255,0.15)',
               padding: '0 20px',
             }}
           >
-            {/* Shannon header */}
+            {/* Header */}
             <div style={{
-              padding: '12px 0 8px',
-              borderBottom: '1px solid rgba(249,115,22,0.1)',
+              padding: '10px 0 8px',
+              borderBottom: '1px solid rgba(0,212,255,0.08)',
               fontFamily: 'monospace', fontSize: 9, letterSpacing: '0.2em',
-              color: 'rgba(249,115,22,0.4)',
+              color: 'rgba(0,212,255,0.3)',
             }}>
-              C.E. SHANNON — A MATHEMATICAL THEORY OF COMMUNICATION — 1948 — ZERO LOSS
+              NAVIGATION
             </div>
 
             <div style={{ maxWidth: 520, margin: '0 auto' }}>
@@ -184,19 +180,19 @@ export default function SortedLayout({ children, currentPage }) {
                     onClick={() => handleNavClick(item.path, true)}
                     style={{
                       display: 'flex', alignItems: 'center', gap: 12,
-                      padding: '13px 0',
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
-                      textDecoration: 'none', transition: 'all 0.1s',
+                      padding: '12px 0',
+                      borderBottom: '1px solid rgba(0,212,255,0.06)',
+                      textDecoration: 'none', transition: 'all 0.12s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
                     onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
                   >
-                    <span style={{ fontFamily: 'monospace', fontSize: 9, color: 'rgba(249,115,22,0.4)', minWidth: 24 }}>
+                    <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(0,212,255,0.35)', minWidth: 24 }}>
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    {item.icon && <span style={{ color: 'rgba(249,115,22,0.5)' }}>{item.icon}</span>}
-                    <span style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.85)', letterSpacing: '0.04em' }}>{item.label}</span>
-                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 8, color: 'rgba(249,115,22,0.25)' }}>→</span>
+                    {item.icon && <span style={{ color: 'rgba(0,212,255,0.4)' }}>{item.icon}</span>}
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', letterSpacing: '0.03em' }}>{item.label}</span>
+                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(0,212,255,0.2)' }}>→</span>
                   </a>
                 ) : (
                   <Link
@@ -205,19 +201,19 @@ export default function SortedLayout({ children, currentPage }) {
                     onClick={() => handleNavClick(item.path)}
                     style={{
                       display: 'flex', alignItems: 'center', gap: 12,
-                      padding: '13px 0',
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
-                      textDecoration: 'none', transition: 'all 0.1s',
+                      padding: '12px 0',
+                      borderBottom: '1px solid rgba(0,212,255,0.06)',
+                      textDecoration: 'none', transition: 'all 0.12s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
                     onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
                   >
-                    <span style={{ fontFamily: 'monospace', fontSize: 9, color: 'rgba(249,115,22,0.4)', minWidth: 24 }}>
+                    <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(0,212,255,0.35)', minWidth: 24 }}>
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    {item.icon && <span style={{ color: 'rgba(249,115,22,0.5)' }}>{item.icon}</span>}
-                    <span style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.85)', letterSpacing: '0.04em' }}>{item.label}</span>
-                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 8, color: 'rgba(249,115,22,0.25)' }}>→</span>
+                    {item.icon && <span style={{ color: 'rgba(0,212,255,0.4)' }}>{item.icon}</span>}
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', letterSpacing: '0.03em' }}>{item.label}</span>
+                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(0,212,255,0.2)' }}>→</span>
                   </Link>
                 )
               ))}
@@ -231,15 +227,15 @@ export default function SortedLayout({ children, currentPage }) {
                 }}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 12,
-                  padding: '13px 0 16px',
-                  fontSize: 12, fontWeight: 600,
-                  color: 'rgba(255,255,255,0.25)',
+                  padding: '12px 0 14px',
+                  fontSize: 13, fontWeight: 700,
+                  color: 'rgba(255,255,255,0.35)',
                   background: 'none', border: 'none', cursor: 'pointer',
-                  width: '100%', textAlign: 'left', letterSpacing: '0.04em',
-                  transition: 'all 0.1s',
+                  width: '100%', textAlign: 'left', letterSpacing: '0.03em',
+                  transition: 'all 0.12s',
                 }}
               >
-                <span style={{ fontFamily: 'monospace', fontSize: 9, color: 'rgba(255,255,255,0.15)', minWidth: 24 }}>
+                <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(255,255,255,0.15)', minWidth: 24 }}>
                   {String(menuItems.length + 1).padStart(2, '0')}
                 </span>
                 <Trash2 className="w-3.5 h-3.5" />
@@ -262,15 +258,15 @@ export default function SortedLayout({ children, currentPage }) {
         </motion.div>
       </main>
 
-      {/* Shannon footer signal */}
+      {/* Footer */}
       <div style={{
-        padding: '16px 20px',
-        borderTop: '1px solid rgba(249,115,22,0.06)',
+        padding: '14px 20px',
+        borderTop: '1px solid rgba(0,212,255,0.08)',
         display: 'flex', justifyContent: 'center',
-        fontFamily: 'monospace', fontSize: 8,
-        color: 'rgba(249,115,22,0.15)', letterSpacing: '0.15em',
+        fontFamily: 'monospace', fontSize: 9,
+        color: 'rgba(0,212,255,0.15)', letterSpacing: '0.14em',
       }}>
-        H = −Σ p(x) log p(x) — SHANNON ENTROPY — ZERO LOSS TRANSMISSION
+        ZERO LOSS — ZERO BULLSHIT
       </div>
     </div>
   );
