@@ -59,21 +59,12 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   const [completedTools, setCompletedTools] = useState([]);
   const [showShare, setShowShare] = useState(false);
 
-  // Open: set tool → next frame trigger CSS transition in
+  // Open: set tool → immediately visible
   const handleToolOpen = (toolId, handoffData = null) => {
-    if (activeTool && activeTool !== toolId) {
-      // Already open — just swap tool (no slide, just fade content)
-      setActiveTool(toolId);
-      setPrefillContext(handoffData || null);
-      setShowShare(false);
-      return;
-    }
     setActiveTool(toolId);
     setPrefillContext(handoffData || null);
     setShowShare(false);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => setVisible(true));
-    });
+    setVisible(true);
   };
 
   const handleToolComplete = (toolId) => {
