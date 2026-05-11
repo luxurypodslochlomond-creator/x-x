@@ -346,67 +346,82 @@ export default function Family51Page() {
 
             {/* SINGLE HERO CTA — one door, maximum clarity */}
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 12 }}>
+              {/* LETTER */}
               <motion.button
                 onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('letter'); }}
                 className="sorted-tap-btn"
                 whileTap={{ scale: 0.97 }}
                 style={{
                   width: '100%', textAlign: 'left', cursor: 'pointer',
-                  padding: '22px 22px', borderRadius: 16,
+                  padding: '20px 20px', borderRadius: 16,
                   border: '2px solid rgba(249,115,22,0.5)',
-                  background: 'linear-gradient(135deg, rgba(249,115,22,0.15) 0%, rgba(249,115,22,0.06) 100%)',
-                  boxShadow: '0 4px 24px rgba(249,115,22,0.12)',
+                  background: 'linear-gradient(135deg, rgba(249,115,22,0.14) 0%, rgba(249,115,22,0.05) 100%)',
                   WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                  display: 'flex', alignItems: 'center', gap: 16,
+                  display: 'flex', alignItems: 'center', gap: 14,
                 }}
               >
-                <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(249,115,22,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(249,115,22,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 17, fontWeight: 900, color: '#fff', marginBottom: 4, letterSpacing: '-0.02em' }}>Decode my letter now</div>
-                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Paste it, photo it, or type what happened — decoded in seconds</div>
+                  <div style={{ fontSize: 16, fontWeight: 900, color: '#fff', marginBottom: 3, letterSpacing: '-0.02em' }}>Decode a scary letter</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.4 }}>Paste it or snap a photo — plain English in seconds</div>
                 </div>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-                  <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                  <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </motion.button>
+
+              {/* SCAM */}
+              <motion.button
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('scam'); }}
+                className="sorted-tap-btn"
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  width: '100%', textAlign: 'left', cursor: 'pointer',
+                  padding: '20px 20px', borderRadius: 16,
+                  border: '2px solid rgba(239,68,68,0.45)',
+                  background: 'linear-gradient(135deg, rgba(239,68,68,0.12) 0%, rgba(239,68,68,0.04) 100%)',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                  display: 'flex', alignItems: 'center', gap: 14,
+                }}
+              >
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(239,68,68,0.16)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(239,68,68,0.12)"/>
+                    <path d="M12 8v4M12 16h.01" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 16, fontWeight: 900, color: '#fff', marginBottom: 3, letterSpacing: '-0.02em' }}>Is this a scam?</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', lineHeight: 1.4 }}>Photo it or paste it — instant verdict. Free forever.</div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                  <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </motion.button>
             </motion.div>
 
-            {/* SECONDARY OPTIONS — 2x2 grid */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.18 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 28 }}>
-              <button
-                onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('reply'); }}
-                className="sorted-tap-btn"
-                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(249,115,22,0.2)', background: 'rgba(249,115,22,0.05)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
-              >
-                <div style={{ fontSize: 11, fontWeight: 800, color: '#f97316', marginBottom: 3, letterSpacing: '0.03em' }}>WRITE A REPLY</div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>We draft it for you</div>
-              </button>
-              <button
-                onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('conflict'); }}
-                className="sorted-tap-btn"
-                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(249,115,22,0.2)', background: 'rgba(249,115,22,0.05)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
-              >
-                <div style={{ fontSize: 11, fontWeight: 800, color: '#f97316', marginBottom: 3, letterSpacing: '0.03em' }}>IN A DISPUTE?</div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>We'll get you sorted</div>
-              </button>
-              <button
-                onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('scam'); }}
-                className="sorted-tap-btn"
-                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(239,68,68,0.25)', background: 'rgba(239,68,68,0.06)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', gridColumn: 'span 2' }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ fontSize: 16 }}>🚨</span>
-                  <div>
-                    <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444', marginBottom: 3, letterSpacing: '0.03em' }}>IS THIS A SCAM? — FREE FOREVER</div>
-                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>Photo it or paste it — we'll tell you instantly. Protects the vulnerable.</div>
-                  </div>
-                </div>
-              </button>
+            {/* SECONDARY OPTIONS — clean 3-col strip */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.18 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 28 }}>
+              {[
+                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it',       color: '#f97316' },
+                { id: 'conflict', label: 'In a dispute?',    sub: 'Get sorted',        color: '#f97316' },
+                { id: 'scam',     label: 'Is it a scam?',   sub: 'Free forever',      color: '#ef4444' },
+              ].map(({ id, label, sub, color }) => (
+                <button
+                  key={id}
+                  onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open(id); }}
+                  className="sorted-tap-btn"
+                  style={{ textAlign: 'left', cursor: 'pointer', padding: '13px 12px', borderRadius: 12, border: `1px solid ${color}25`, background: `${color}06`, WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+                >
+                  <div style={{ fontSize: 10, fontWeight: 800, color, marginBottom: 3, letterSpacing: '0.03em', lineHeight: 1.3 }}>{label.toUpperCase()}</div>
+                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', lineHeight: 1.3 }}>{sub}</div>
+                </button>
+              ))}
             </motion.div>
 
             {/* TRUST STRIP — jurisdiction & free uses only */}
@@ -419,10 +434,11 @@ export default function Family51Page() {
             <div style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 12px' }}>HOW IT WORKS</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <WhyRow icon={<WRBolt />} text="Paste, type or photo your letter — plain English breakdown in seconds" />
-                <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, and who to contact — no jargon" />
-                <WhyRow icon={<WRPin />} text="Knows your country & local legal bodies automatically" />
-                <WhyRow icon={<WRLock />} text="AI processes it then immediately discards it — nothing stored, nothing sold, ever" />
+                <WhyRow icon={<WRBolt />} text="Paste, type or photo any letter — plain English in seconds" />
+                <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, who to contact — zero jargon" />
+                <WhyRow icon={<WRPin />} text="Knows your country and local legal bodies automatically" />
+                <WhyRow icon={<WRLock />} text="Scam checker — photo or paste any message for an instant verdict. Free forever." />
+                <WhyRow icon={<WRLock />} text="Nothing stored, nothing logged, nothing sold. Ever." />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.22)', margin: '12px 0 0', lineHeight: 1.5 }}>
                 10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.4)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
