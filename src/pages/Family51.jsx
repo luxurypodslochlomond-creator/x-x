@@ -339,14 +339,14 @@ export default function Family51Page() {
             {/* 4 TOOL BUTTONS — 2x2 grid */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
               {[
-                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',
-                  icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="rgba(245,166,35,0.07)"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.',
-                  icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="rgba(245,166,35,0.07)"/><path d="M12 8v4M12 16h.01" stroke="#f5a623" strokeWidth="2.2" strokeLinecap="round"/></svg> },
-                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',
-                  icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="rgba(245,166,35,0.07)"/></svg> },
-                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',
-                  icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f5a623" strokeWidth="1.8" fill="rgba(245,166,35,0.07)"/><path d="M9 12l2 2 4-4" stroke="#f5a623" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#f5a623',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#f5a623',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(245,166,35,0.1)"/><path d="M12 8v4M12 16h.01" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round"/></svg> },
+                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#f5a623',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#f5a623',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f5a623" strokeWidth="2"/><path d="M9 12l2 2 4-4" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
               ].map(({ id, label, sub, color, icon }) => (
                 <motion.button
                   key={id}
@@ -355,19 +355,19 @@ export default function Family51Page() {
                   whileTap={{ scale: 0.95 }}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
-                    padding: '16px 14px', borderRadius: 14,
-                    border: '1px solid rgba(245,166,35,0.18)',
-                    background: 'rgba(13,10,8,0.6)',
+                    padding: '15px 13px', borderRadius: 14,
+                    border: '1.5px solid rgba(245,166,35,0.2)',
+                    background: 'rgba(245,166,35,0.04)',
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 10, minHeight: 110,
+                    display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100,
                   }}
                 >
-                  <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(245,166,35,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {icon}
                   </div>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fef3e2', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.2 }}>{label}</div>
-                    <div style={{ fontSize: 11, color: 'rgba(254,243,226,0.4)', lineHeight: 1.3 }}>{sub}</div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fef3e2', marginBottom: 2, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
+                    <div style={{ fontSize: 10.5, color: 'rgba(254,243,226,0.38)', lineHeight: 1.35 }}>{sub}</div>
                   </div>
                 </motion.button>
               ))}
