@@ -316,11 +316,13 @@ export default function Family51Page() {
               )}
             </AnimatePresence>
 
-            {/* HERO — tight, punchy */}
+            {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
-              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 34px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 4px' }}>
-                <span style={{ color: '#f97316' }}>We'll decode it.</span>
-                <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 'clamp(14px, 4vw, 18px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#f97316', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.8 }}>Letters · Scams · Disputes · Replies</div>
+              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#fff' }}>
+                Got a scary letter?<br />
+                <span style={{ color: '#f97316' }}>We'll sort it.</span>
+                <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
               </h1>
             </motion.div>
 
@@ -353,7 +355,7 @@ export default function Family51Page() {
                   whileTap={{ scale: 0.95 }}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
-                    padding: '14px 13px', borderRadius: 14,
+                    padding: '15px 13px', borderRadius: 14,
                     border: `1.5px solid ${color === '#ef4444' ? 'rgba(239,68,68,0.35)' : 'rgba(249,115,22,0.3)'}`,
                     background: color === '#ef4444' ? 'rgba(239,68,68,0.06)' : 'rgba(249,115,22,0.06)',
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
