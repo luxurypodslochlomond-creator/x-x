@@ -26,26 +26,50 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
 
   const handleSave = async () => {
     const text = buildText();
+
+    // Try native share first (iOS share sheet — allows Save to Files, AirDrop, WhatsApp etc)
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'SORTED — Letter Breakdown', text });
+        // Share as a text file so iOS "Save to Files" works properly
+        const file = new File([text], 'sorted-letter-breakdown.txt', { type: 'text/plain' });
+        const canShareFile = navigator.canShare && navigator.canShare({ files: [file] });
+        if (canShareFile) {
+          await navigator.share({ title: 'SORTED — Letter Breakdown', files: [file] });
+        } else {
+          await navigator.share({ title: 'SORTED — Letter Breakdown', text });
+        }
         setSaved(true);
-        setTimeout(() => setSaved(false), 2500);
+        setTimeout(() => setSaved(false), 3000);
         return;
-      } catch (_) {}
+      } catch (err) {
+        // User cancelled share — don't fall through to clipboard, just return
+        if (err?.name === 'AbortError') return;
+        // Any other error — fall through to clipboard/download
+      }
     }
+
+    // Fallback 1: clipboard
     try {
       await navigator.clipboard.writeText(text);
-    } catch (_) {
-      const el = document.createElement('textarea');
-      el.value = text;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-    }
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+      return;
+    } catch (_) {}
+
+    // Fallback 2: download as .txt file
+    try {
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sorted-letter-breakdown.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (_) {}
   };
 
   if (!result || !sev) return null;
@@ -262,7 +286,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             transition: 'all 0.2s',
           }}
         >
-          {saved ? '✓ SAVED' : (navigator.share ? 'SHARE / SAVE' : 'COPY TO CLIPBOARD')}
+          {saved ? '✓ SAVED' : 'SHARE / SAVE AS FILE'}
         </button>
         <button
           onClick={onReset}
