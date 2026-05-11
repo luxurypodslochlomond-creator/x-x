@@ -1,0 +1,374 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { base44 } from '@/api/base44Client';
+import { detectGeo } from '@/hooks/useSortedGeo';
+
+const LOADING_STEPS = [
+  { text: 'Reading your message…',      sub: 'Nothing stored — gone when we\'re done' },
+  { text: 'Checking known scam patterns…', sub: 'We\'ve seen thousands of these' },
+  { text: 'Checking sender details…',    sub: 'Numbers, links, addresses' },
+  { text: 'Working out the verdict…',   sub: 'Almost there' },
+];
+
+const VERDICT = {
+  safe:    { color: '#22c55e', bg: 'rgba(34,197,94,0.10)',  border: 'rgba(34,197,94,0.35)',  emoji: '✅', label: 'Looks Legitimate' },
+  warning: { color: '#eab308', bg: 'rgba(234,179,8,0.10)', border: 'rgba(234,179,8,0.35)',  emoji: '⚠️', label: 'Be Careful' },
+  scam:    { color: '#ef4444', bg: 'rgba(239,68,68,0.10)', border: 'rgba(239,68,68,0.35)',  emoji: '🚨', label: 'Almost Certainly a Scam' },
+};
+
+export default function Family51ScamChecker({ accentColor = '#ef4444' }) {
+  const [inputText, setInputText] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
+  const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
+  const geo = detectGeo();
+  const fileInputRef = useRef(null);
+  const cameraInputRef = useRef(null);
+
+  useEffect(() => {
+    if (!loading) { setLoadingStep(0); return; }
+    const interval = setInterval(() => {
+      setLoadingStep(s => s < LOADING_STEPS.length - 1 ? s + 1 : s);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [loading]);
+
+  const runCheck = async (fileUrl, text) => {
+    setLoading(true);
+    setLoadingStep(0);
+    setResult(null);
+    setError(null);
+
+    try {
+      let visionFileUrl = null;
+      let content = text;
+
+      if (fileUrl) {
+        const lowerUrl = fileUrl.toLowerCase();
+        const isImage = lowerUrl.match(/\.(jpg|jpeg|png|gif|webp|heic|heif)/) || lowerUrl.includes('image/');
+        if (isImage) {
+          visionFileUrl = fileUrl;
+        } else {
+          const extracted = await base44.integrations.Core.ExtractDataFromUploadedFile({
+            file_url: fileUrl,
+            json_schema: { type: 'object', properties: { full_text: { type: 'string' } } },
+          });
+          content = extracted?.output?.full_text || text || '';
+        }
+      }
+
+      const response = await base44.integrations.Core.InvokeLLM({
+        model: 'claude_sonnet_4_6',
+        ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
+        prompt: `You are SORTED's scam detector. You help real people — including elderly and vulnerable people — figure out if something they've received is a scam. You are warm, clear, and never scary or preachy. You sound like a knowledgeable friend.
+
+The person is in: ${geo.country}.
+
+They have shared this message/letter/email/text:
+${content ? `\n---\n${content}\n---` : '(See attached image)'}
+
+Analyse it carefully. Common scam types include:
+- Parcel delivery scams (Royal Mail, DPD, Evri, FedEx, UPS)
+- HMRC / tax refund scams
+- Bank security alert scams
+- Prize / lottery scams
+- Tech support scams (Microsoft, Apple, BT)
+- Investment / crypto scams
+- Romance scams
+- Utility company scams
+- Government impersonation (DVLA, DWP, NHS)
+- Solicitor / inheritance scams
+- Threatening debt scams from non-existent companies
+
+Key scam red flags:
+- Urgency / panic language
+- Request to click a link, call a number, or pay immediately
+- Typos, odd grammar, generic greetings
+- Request for personal details, bank details, or gift cards
+- Too-good-to-be-true offers
+- Threats of arrest, fines, account closure
+- Links that don't match the official domain
+
+Return JSON with these exact fields:
+- verdict: exactly one of: safe / warning / scam
+- confidence: a percentage string e.g. "94% likely a scam"
+- scam_type: short name for the type of scam (or "Not a scam" / "Unknown")
+- what_this_is: 2-3 sentences. Plain English. What IS this? What's the scammer trying to do or get?
+- red_flags: array of 2-5 specific red flags found in this message. Be specific to what's actually in the text — don't be generic.
+- what_to_do: array of exactly 3 clear, calm action steps. No jargon. E.g. "Do not click any links in this message", "Forward it to report@phishing.gov.uk", "Block this number"
+- report_to: the specific reporting body for ${geo.country} — e.g. "Action Fraud (UK): actionfraud.police.uk or 0300 123 2040" — be specific to their country
+- reassurance: one warm, calm sentence. E.g. "You did the right thing checking — this is a very common scam and you haven't lost anything by looking."`,
+        response_json_schema: {
+          type: 'object',
+          properties: {
+            verdict:      { type: 'string' },
+            confidence:   { type: 'string' },
+            scam_type:    { type: 'string' },
+            what_this_is: { type: 'string' },
+            red_flags:    { type: 'array', items: { type: 'string' } },
+            what_to_do:   { type: 'array', items: { type: 'string' } },
+            report_to:    { type: 'string' },
+            reassurance:  { type: 'string' },
+          },
+        },
+      });
+
+      let raw = response;
+      if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch { raw = null; } }
+      if (raw?.response && typeof raw.response === 'object') raw = raw.response;
+      if (!raw || !raw.verdict) throw new Error('Could not analyse this. Please try again.');
+
+      setResult(raw);
+    } catch (err) {
+      setError(err?.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+      setUploading(false);
+    }
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setUploadedFileUrl(file_url);
+      setUploading(false);
+      await runCheck(file_url, null);
+    } catch (err) {
+      setError('Upload failed. Try again or paste the text instead.');
+      setUploading(false);
+      setLoading(false);
+    }
+    e.target.value = '';
+  };
+
+  const check = async () => {
+    if (!inputText.trim() && !uploadedFileUrl) return;
+    await runCheck(uploadedFileUrl || null, inputText);
+  };
+
+  const reset = () => {
+    setResult(null);
+    setInputText('');
+    setUploadedFileUrl(null);
+    setError(null);
+  };
+
+  const v = result ? (VERDICT[result.verdict] || VERDICT.warning) : null;
+
+  return (
+    <div className="space-y-5">
+
+      {/* HIDDEN FILE INPUTS */}
+      <input ref={fileInputRef} type="file" accept="image/*,application/pdf" onChange={handleFileUpload} style={{ display: 'none' }} />
+      <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
+
+      {/* LOADER */}
+      <AnimatePresence>
+        {loading && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            style={{ padding: '48px 20px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
+            <div style={{ position: 'relative', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <motion.div animate={{ scale: [1, 1.25, 1], opacity: [0.15, 0.3, 0.15] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }} />
+              <motion.div animate={{ scale: [1, 1.12, 1], opacity: [0.25, 0.5, 0.25] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+                style={{ position: 'absolute', inset: 8, borderRadius: '50%', background: accentColor }} />
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', zIndex: 1 }}>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <div style={{ textAlign: 'center', minHeight: 52 }}>
+              <AnimatePresence mode="wait">
+                <motion.div key={loadingStep} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35 }}>
+                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff', margin: '0 0 6px' }}>{LOADING_STEPS[loadingStep].text}</p>
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: 0 }}>{LOADING_STEPS[loadingStep].sub}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {LOADING_STEPS.map((_, i) => (
+                <motion.div key={i} animate={{ opacity: i === loadingStep ? 1 : 0.2, scale: i === loadingStep ? 1.3 : 1 }} transition={{ duration: 0.3 }}
+                  style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor }} />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* FORM */}
+      {!loading && !result && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+
+          <textarea
+            value={inputText}
+            onChange={e => setInputText(e.target.value)}
+            autoFocus
+            placeholder={`Paste the message, email, or text here — or take a photo of the letter.
+
+Copy exactly what it says — every word helps us check it.`}
+            style={{
+              width: '100%', height: 200, background: 'rgba(255,255,255,0.03)',
+              border: `1px solid ${inputText ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
+              borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
+              resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
+              transition: 'border-color 0.2s', boxSizing: 'border-box',
+            }}
+          />
+
+          {inputText.trim() ? (
+            <motion.button onClick={check} whileTap={{ scale: 0.97 }} style={{
+              width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+              fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
+              border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
+            }}>
+              CHECK THIS NOW →
+            </motion.button>
+          ) : (
+            <div style={{ display: 'flex', gap: 10 }}>
+              <motion.button whileTap={{ scale: 0.96 }} onClick={() => cameraInputRef.current?.click()} style={{
+                flex: 2, padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
+                letterSpacing: '0.06em', cursor: 'pointer',
+                border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                SNAP A PHOTO
+              </motion.button>
+              <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()} style={{
+                flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
+                letterSpacing: '0.06em', cursor: 'pointer',
+                border: `1px solid rgba(255,255,255,0.15)`, background: 'transparent', color: 'rgba(255,255,255,0.5)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                UPLOAD
+              </motion.button>
+            </div>
+          )}
+
+          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', margin: 0 }}>
+            Free forever. Nothing stored. Processed and gone instantly.
+          </p>
+        </div>
+      )}
+
+      {/* ERROR */}
+      {error && !loading && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          style={{ padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.08)', textAlign: 'center' }}>
+          <p style={{ fontSize: 13, color: '#ef4444', margin: '0 0 8px', fontWeight: 800 }}>Something went wrong</p>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: '0 0 10px' }}>{error}</p>
+          <button onClick={() => setError(null)} style={{ fontSize: 11, fontWeight: 800, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.4)', borderRadius: 8, padding: '6px 14px', cursor: 'pointer' }}>DISMISS</button>
+        </motion.div>
+      )}
+
+      {/* RESULT */}
+      <AnimatePresence>
+        {result && v && !loading && (
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+
+            {/* BIG VERDICT */}
+            <div style={{ borderRadius: 16, border: `2px solid ${v.border}`, background: v.bg, padding: '24px 20px', textAlign: 'center' }}>
+              <div style={{ fontSize: 48, marginBottom: 8, lineHeight: 1 }}>{v.emoji}</div>
+              <div style={{ fontSize: 22, fontWeight: 900, color: v.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{v.label}</div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>{result.confidence}</div>
+              {result.scam_type && result.scam_type !== 'Not a scam' && (
+                <div style={{ marginTop: 10, display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: v.color, border: `1px solid ${v.border}`, borderRadius: 20, padding: '4px 12px' }}>
+                  {result.scam_type.toUpperCase()}
+                </div>
+              )}
+            </div>
+
+            {/* REASSURANCE */}
+            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>{result.reassurance}</p>
+            </div>
+
+            {/* WHAT THIS IS */}
+            {result.what_this_is && (
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT THIS IS</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: 1.6 }}>{result.what_this_is}</p>
+              </div>
+            )}
+
+            {/* RED FLAGS */}
+            {result.red_flags?.length > 0 && (
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.2)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(239,68,68,0.7)', margin: '0 0 10px' }}>RED FLAGS WE SPOTTED</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {result.red_flags.map((flag, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                      <span style={{ color: '#ef4444', flexShrink: 0, marginTop: 1 }}>⚑</span>
+                      <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>{flag}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* WHAT TO DO */}
+            {result.what_to_do?.length > 0 && (
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.2)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(34,197,94,0.7)', margin: '0 0 10px' }}>WHAT TO DO</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {result.what_to_do.map((step, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                      <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <span style={{ fontSize: 11, fontWeight: 900, color: '#22c55e' }}>{i + 1}</span>
+                      </div>
+                      <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* REPORT TO */}
+            {result.report_to && (
+              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.25)', margin: '0 0 5px' }}>REPORT IT</p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>{result.report_to}</p>
+              </div>
+            )}
+
+            {/* SHARE + RESET */}
+            <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
+              <button
+                onClick={() => {
+                  const text = `SORTED scam check:\n\n${v.emoji} ${v.label}\n${result.confidence}\n\n${result.what_this_is || ''}\n\nWhat to do:\n${result.what_to_do?.map((s, i) => `${i+1}. ${s}`).join('\n') || ''}\n\nsorted.uf51.love — free, nothing stored`;
+                  if (navigator.share) { navigator.share({ title: 'SORTED Scam Check', text }); }
+                  else { navigator.clipboard?.writeText(text); }
+                }}
+                style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.5)' }}
+              >
+                SHARE RESULT
+              </button>
+              <button onClick={reset} style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
+                CHECK ANOTHER
+              </button>
+            </div>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+    </div>
+  );
+}

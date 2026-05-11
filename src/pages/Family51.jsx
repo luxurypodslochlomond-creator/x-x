@@ -376,7 +376,7 @@ export default function Family51Page() {
               </motion.button>
             </motion.div>
 
-            {/* SECONDARY OPTIONS — smaller, quieter */}
+            {/* SECONDARY OPTIONS — 2x2 grid */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.18 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 28 }}>
               <button
                 onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('reply'); }}
@@ -393,6 +393,19 @@ export default function Family51Page() {
               >
                 <div style={{ fontSize: 11, fontWeight: 800, color: '#f97316', marginBottom: 3, letterSpacing: '0.03em' }}>IN A DISPUTE?</div>
                 <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>We'll get you sorted</div>
+              </button>
+              <button
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open('scam'); }}
+                className="sorted-tap-btn"
+                style={{ textAlign: 'left', cursor: 'pointer', padding: '14px 14px', borderRadius: 12, border: '1px solid rgba(239,68,68,0.25)', background: 'rgba(239,68,68,0.06)', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', gridColumn: 'span 2' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 16 }}>🚨</span>
+                  <div>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: '#ef4444', marginBottom: 3, letterSpacing: '0.03em' }}>IS THIS A SCAM? — FREE FOREVER</div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>Photo it or paste it — we'll tell you instantly. Protects the vulnerable.</div>
+                  </div>
+                </div>
               </button>
             </motion.div>
 

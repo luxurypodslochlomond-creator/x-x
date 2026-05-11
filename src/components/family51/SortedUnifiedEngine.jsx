@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
+import Family51ScamChecker from '@/components/family51/Family51ScamChecker';
 import SortedJourneyBar from '@/components/family51/SortedJourneyBar';
 import SortedShareMoment from '@/components/family51/SortedShareMoment';
 
@@ -160,6 +161,11 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
             prefillContext={prefillContext}
           />
         )}
+        {activeTool === 'scam' && (
+          <Family51ScamChecker
+            accentColor="#ef4444"
+          />
+        )}
 
         <AnimatePresence>
           {showShare && activeTool === 'letter' && (
@@ -168,17 +174,18 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         </AnimatePresence>
 
         {/* BOTTOM NAV — pure CSS, no Framer on these */}
-        <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 8 }}>
+        <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {[
             { id: 'letter',   label: 'DECODE',  color: '#f97316' },
             { id: 'reply',    label: 'REPLY',   color: '#f97316' },
             { id: 'conflict', label: 'DISPUTE', color: '#f97316' },
+            { id: 'scam',     label: 'SCAM?',   color: '#ef4444' },
           ].map(t => (
             <NativeButton
               key={t.id}
               onClick={() => handleToolOpen(t.id)}
               style={{
-                flex: 1, padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
+                padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
                 letterSpacing: '0.1em',
                 border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(255,255,255,0.08)'}`,
                 background: activeTool === t.id ? `${t.color}15` : 'transparent',
