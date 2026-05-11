@@ -177,9 +177,9 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {[
             { id: 'letter',   label: 'DECODE',  color: '#f5a623' },
-            { id: 'reply',    label: 'REPLY',   color: '#e8902a' },
-            { id: 'conflict', label: 'DISPUTE', color: '#d97c30' },
-            { id: 'scam',     label: 'SCAM?',   color: '#c96a35' },
+            { id: 'reply',    label: 'REPLY',   color: '#f5a623' },
+            { id: 'conflict', label: 'DISPUTE', color: '#f5a623' },
+            { id: 'scam',     label: 'SCAM?',   color: '#ef4444' },
           ].map(t => (
             <NativeButton
               key={t.id}

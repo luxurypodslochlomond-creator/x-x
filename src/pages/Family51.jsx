@@ -341,8 +341,8 @@ export default function Family51Page() {
               {[
                 { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#f5a623',
                   icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(245,166,35,0.1)"/><path d="M12 8v4M12 16h.01" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round"/></svg> },
+                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#ef4444',
+                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(239,68,68,0.1)"/><path d="M12 8v4M12 16h.01" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/></svg> },
                 { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#f5a623',
                   icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
                 { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#f5a623',
