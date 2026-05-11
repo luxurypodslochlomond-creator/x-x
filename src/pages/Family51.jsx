@@ -139,13 +139,13 @@ export default function Family51Page() {
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(13,10,8,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <motion.button onClick={() => { setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'none', border: 'none', cursor: 'pointer', padding: 0, transition: 'opacity 0.15s' }} onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
+        <motion.div whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', transition: 'opacity 0.15s' }} onClick={() => { setShowWhy(false); setShowHistory(false); setShowFAQ(false); setMenuOpen(false); }} onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
           <SortedMark />
           <div style={{ lineHeight: 1.2 }}>
             <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#ffffff' }}>SORTED</div>
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#f5a623', opacity: 0.85 }}>WE'VE GOT YOU</div>
           </div>
-        </motion.button>
+        </motion.div>
 
         <div style={{ flex: 1 }} />
 
