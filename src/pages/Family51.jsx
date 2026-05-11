@@ -375,7 +375,7 @@ export default function Family51Page() {
 
             {/* TRUST STRIP — jurisdiction & free uses only */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
-              <TrustPill text={selectedLocation?.jurisdiction || 'Local law'} />
+              <TrustPill text="Your local law" />
               <TrustPill text="10 free uses" />
             </motion.div>
 
