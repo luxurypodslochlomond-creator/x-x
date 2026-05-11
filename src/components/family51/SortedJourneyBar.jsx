@@ -2,9 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const STEPS = [
-  { id: 'letter',   label: 'DECODE',  color: '#f97316', desc: 'Letter decoded' },
-  { id: 'reply',    label: 'REPLY',   color: '#06b6d4', desc: 'Write your reply' },
-  { id: 'conflict', label: 'DISPUTE', color: '#ef4444', desc: 'Know your rights' },
+  { id: 'letter',   label: 'DECODE',  color: '#f5a623', desc: 'Letter decoded' },
+  { id: 'reply',    label: 'REPLY',   color: '#f5a623', desc: 'Write your reply' },
+  { id: 'conflict', label: 'DISPUTE', color: '#f5a623', desc: 'Know your rights' },
 ];
 
 export default function SortedJourneyBar({ completedTools = [], currentTool, onNavigate }) {
