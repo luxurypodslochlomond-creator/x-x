@@ -104,7 +104,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           ? 'transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)' // ease-out up
           : 'transform 0.22s cubic-bezier(0.4, 0, 1, 1)',    // ease-in down
         willChange: 'transform',
-        background: '#080a0f',
+        background: '#0d0a08',
         overflowY: 'auto',
         overflowX: 'hidden',
         display: 'flex',
@@ -139,14 +139,14 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
 
         {activeTool === 'letter' && (
           <Family51LetterDecoder
-            accentColor="#f97316"
+            accentColor="#f5a623"
             onResult={() => handleToolComplete('letter')}
             onHandoff={(data) => handleToolOpen('reply', data)}
           />
         )}
         {activeTool === 'reply' && (
           <Family51ReplyWriter
-            accentColor="#f97316"
+            accentColor="#f5a623"
             onResult={() => handleToolComplete('reply')}
             prefillContext={prefillContext}
             suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
@@ -156,14 +156,14 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         )}
         {activeTool === 'conflict' && (
           <Family51ConflictHelper
-            accentColor="#ef4444"
+            accentColor="#f5a623"
             onResult={() => handleToolComplete('conflict')}
             prefillContext={prefillContext}
           />
         )}
         {activeTool === 'scam' && (
           <Family51ScamChecker
-            accentColor="#ef4444"
+            accentColor="#f5a623"
           />
         )}
 
@@ -176,10 +176,10 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         {/* BOTTOM NAV — pure CSS, no Framer on these */}
         <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {[
-            { id: 'letter',   label: 'DECODE',  color: '#f97316' },
-            { id: 'reply',    label: 'REPLY',   color: '#f97316' },
-            { id: 'conflict', label: 'DISPUTE', color: '#f97316' },
-            { id: 'scam',     label: 'SCAM?',   color: '#ef4444' },
+            { id: 'letter',   label: 'DECODE',  color: '#f5a623' },
+            { id: 'reply',    label: 'REPLY',   color: '#f5a623' },
+            { id: 'conflict', label: 'DISPUTE', color: '#f5a623' },
+            { id: 'scam',     label: 'SCAM?',   color: '#f5a623' },
           ].map(t => (
             <NativeButton
               key={t.id}
