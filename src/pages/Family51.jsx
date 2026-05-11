@@ -250,7 +250,7 @@ export default function Family51Page() {
          {/* ── FAQ SECTION ────────────────────────────────────── */}
          {showFAQ && (
            <motion.div key="faq" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: 'easeInOut' }}>
-             <SortedFAQ accentColor="#f97316" />
+             <SortedFAQ accentColor="#60a5fa" />
            </motion.div>
          )}
 
@@ -261,7 +261,7 @@ export default function Family51Page() {
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
                 <span style={{ color: '#fff' }}>Official letters</span>{' '}
-                <span style={{ color: '#f97316' }}>terrify people.</span>
+                <span style={{ color: '#60a5fa' }}>terrify people.</span>
               </h2>
             </div>
 
@@ -270,7 +270,7 @@ export default function Family51Page() {
               <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project 2023" />
               <StatCard number="92%" label="of serious civil legal problems in the USA receive no professional help" source="Legal Services Corp. 2022" />
               <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health Institute" />
-              <StatCard number="£1.7B" label="UK civil legal aid budget cut by over 40% since LASPO 2013 — millions left without help" source="Law Society 2023" color="#ef4444" />
+              <StatCard number="£1.7B" label="UK civil legal aid budget cut by over 40% since LASPO 2013 — millions left without help" source="Law Society 2023" color="#60a5fa" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
@@ -279,13 +279,13 @@ export default function Family51Page() {
               <ProblemCard icon={<LandlordIcon />} title="Landlords" desc="Eviction warnings. Deposit disputes. Rent increases." />
               <ProblemCard icon={<CourtIcon />} title="Courts" desc="Summons. Judgments. Legal jargon you don't understand." />
             </div>
-            <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, padding: 20, textAlign: 'center', marginBottom: 40 }}>
+            <div style={{ background: 'rgba(96,165,250,0.06)', border: '1px solid rgba(96,165,250,0.18)', borderRadius: 12, padding: 20, textAlign: 'center', marginBottom: 40 }}>
               <p style={{ fontSize: 14, color: '#fff', margin: 0, lineHeight: 1.6 }}>
                 <strong>You freeze.</strong> Read it 10 times. Still don't understand. Panic.
               </p>
             </div>
-            <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#ef4444', marginBottom: 8 }}>REAL TALK</div>
+            <div style={{ background: 'rgba(96,165,250,0.06)', border: '1px solid rgba(96,165,250,0.15)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#60a5fa', marginBottom: 8 }}>REAL TALK</div>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>
                 Some people <strong>bury their head in the sand.</strong> Don't open the letter. Hope it goes away. It doesn't.
               </p>
@@ -318,10 +318,10 @@ export default function Family51Page() {
 
             {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#f97316', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.8 }}>Letters · Scams · Disputes · Replies</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#60a5fa', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.9 }}>Letters · Scams · Disputes · Replies</div>
               <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#fff' }}>
                 Got a scary letter?<br />
-                <span style={{ color: '#f97316' }}>We'll sort it.</span>
+                <span style={{ color: '#34d399' }}>We'll sort it.</span>
                 <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
               </h1>
             </motion.div>
@@ -339,14 +339,14 @@ export default function Family51Page() {
             {/* 4 TOOL BUTTONS — 2x2 grid */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
               {[
-                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#f97316',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#ef4444',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(239,68,68,0.15)"/><path d="M12 8v4M12 16h.01" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/></svg> },
-                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#f97316',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#f97316',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#f97316" strokeWidth="2.5" strokeLinecap="round" opacity="0.5"/><circle cx="12" cy="12" r="9" stroke="#f97316" strokeWidth="2"/></svg> },
+                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#60a5fa',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#60a5fa',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(96,165,250,0.12)"/><path d="M12 8v4M12 16h.01" stroke="#60a5fa" strokeWidth="2.5" strokeLinecap="round"/></svg> },
+                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#34d399',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#34d399',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#34d399" strokeWidth="2"/><path d="M9 12l2 2 4-4" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
               ].map(({ id, label, sub, color, icon }) => (
                 <motion.button
                   key={id}
@@ -356,13 +356,13 @@ export default function Family51Page() {
                   style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '15px 13px', borderRadius: 14,
-                    border: `1.5px solid ${color === '#ef4444' ? 'rgba(239,68,68,0.35)' : 'rgba(249,115,22,0.3)'}`,
-                    background: color === '#ef4444' ? 'rgba(239,68,68,0.06)' : 'rgba(249,115,22,0.06)',
+                    border: `1.5px solid ${color === '#34d399' ? 'rgba(52,211,153,0.25)' : 'rgba(96,165,250,0.25)'}`,
+                    background: color === '#34d399' ? 'rgba(52,211,153,0.05)' : 'rgba(96,165,250,0.05)',
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
                     display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100,
                   }}
                 >
-                  <div style={{ width: 32, height: 32, borderRadius: 9, background: color === '#ef4444' ? 'rgba(239,68,68,0.14)' : 'rgba(249,115,22,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 9, background: color === '#34d399' ? 'rgba(52,211,153,0.12)' : 'rgba(96,165,250,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {icon}
                   </div>
                   <div>
@@ -477,15 +477,15 @@ export default function Family51Page() {
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
               <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <rect x="6" y="18" width="28" height="18" rx="4" stroke="#f97316" strokeWidth="2" fill="rgba(249,115,22,0.08)" />
-                  <path d="M13 18V13a7 7 0 0114 0" stroke="#f97316" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.35" strokeDasharray="4 3" />
-                  <circle cx="20" cy="27" r="3" fill="#f97316" opacity="0.9" />
-                  <path d="M20 30v2" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" />
+                  <rect x="6" y="18" width="28" height="18" rx="4" stroke="#34d399" strokeWidth="2" fill="rgba(52,211,153,0.08)" />
+                  <path d="M13 18V13a7 7 0 0114 0" stroke="#34d399" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.35" strokeDasharray="4 3" />
+                  <circle cx="20" cy="27" r="3" fill="#34d399" opacity="0.9" />
+                  <path d="M20 30v2" stroke="#34d399" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
               </div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 10px' }}>
                 <span style={{ color: '#fff' }}>You decoded it.</span><br />
-                <span style={{ color: '#f97316' }}>Now act on it.</span>
+                <span style={{ color: '#34d399' }}>Now act on it.</span>
               </h1>
               <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', margin: '0 0 12px', lineHeight: 1.6 }}>
                 You got your 10 free decodes. You understand what the letter means now. That's the hardest part done. Premium helps you finish it — draft the reply, resolve the dispute, follow through. {geoPrice.inline}/month.
@@ -529,34 +529,34 @@ function WhyRow({ icon, text }) {
 function WRBolt() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <path d="M8.5 1.5L3 7.5h4L4.5 12.5L11 6H7L8.5 1.5Z" stroke="#f97316" strokeWidth="1.3" strokeLinejoin="round" fill="rgba(249,115,22,0.15)" />
+      <path d="M8.5 1.5L3 7.5h4L4.5 12.5L11 6H7L8.5 1.5Z" stroke="#60a5fa" strokeWidth="1.3" strokeLinejoin="round" fill="rgba(96,165,250,0.15)" />
     </svg>
   );
 }
 function WRTarget() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <circle cx="7" cy="7" r="5.5" stroke="#f97316" strokeWidth="1.2" />
-      <circle cx="7" cy="7" r="3" stroke="#f97316" strokeWidth="1.2" opacity="0.6" />
-      <circle cx="7" cy="7" r="1" fill="#f97316" />
+      <circle cx="7" cy="7" r="5.5" stroke="#60a5fa" strokeWidth="1.2" />
+      <circle cx="7" cy="7" r="3" stroke="#60a5fa" strokeWidth="1.2" opacity="0.6" />
+      <circle cx="7" cy="7" r="1" fill="#60a5fa" />
     </svg>
   );
 }
 function WRPin() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <circle cx="7" cy="5" r="4" stroke="#f97316" strokeWidth="1.2" fill="none" />
-      <circle cx="7" cy="5" r="1.6" fill="#f97316" />
-      <path d="M7 9v3.5" stroke="#f97316" strokeWidth="1.1" strokeLinecap="round" opacity="0.5" />
+      <circle cx="7" cy="5" r="4" stroke="#60a5fa" strokeWidth="1.2" fill="none" />
+      <circle cx="7" cy="5" r="1.6" fill="#60a5fa" />
+      <path d="M7 9v3.5" stroke="#60a5fa" strokeWidth="1.1" strokeLinecap="round" opacity="0.5" />
     </svg>
   );
 }
 function WRLock() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <rect x="2.5" y="6.5" width="9" height="6" rx="1.2" stroke="#f97316" strokeWidth="1.2" fill="rgba(249,115,22,0.1)" />
-      <path d="M4.5 6.5V4.5a2.5 2.5 0 015 0v2" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
-      <circle cx="7" cy="9.5" r="1" fill="#f97316" />
+      <rect x="2.5" y="6.5" width="9" height="6" rx="1.2" stroke="#34d399" strokeWidth="1.2" fill="rgba(52,211,153,0.1)" />
+      <path d="M4.5 6.5V4.5a2.5 2.5 0 015 0v2" stroke="#34d399" strokeWidth="1.2" strokeLinecap="round" />
+      <circle cx="7" cy="9.5" r="1" fill="#34d399" />
     </svg>
   );
 }
@@ -693,7 +693,7 @@ function EmailIcon() {
   );
 }
 
-function StatCard({ number, label, color = '#f97316', source }) {
+function StatCard({ number, label, color = '#60a5fa', source }) {
   return (
     <div style={{ background: `${color}08`, border: `1px solid ${color}30`, borderRadius: 12, padding: 16, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4 }}>
       <div style={{ fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 900, color }}>{number}</div>
@@ -705,7 +705,7 @@ function StatCard({ number, label, color = '#f97316', source }) {
 
 function ProblemCard({ icon, title, desc }) {
   return (
-    <div style={{ paddingLeft: 16, borderLeft: '2px solid rgba(249,115,22,0.3)' }}>
+    <div style={{ paddingLeft: 16, borderLeft: '2px solid rgba(96,165,250,0.3)' }}>
       <div style={{ fontSize: 24, marginBottom: 6 }}>{icon}</div>
       <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{title}</div>
       <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{desc}</p>
