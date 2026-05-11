@@ -563,8 +563,8 @@ function WRLock() {
 function WRMail() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <rect x="1.5" y="3" width="11" height="8" rx="1.2" stroke="#f97316" strokeWidth="1.2" fill="rgba(249,115,22,0.1)" />
-      <path d="M2 3.5L7 7.5L12 3.5" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="1.5" y="3" width="11" height="8" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="rgba(245,166,35,0.1)" />
+      <path d="M2 3.5L7 7.5L12 3.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
 }
