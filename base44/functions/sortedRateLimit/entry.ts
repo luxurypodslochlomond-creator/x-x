@@ -4,7 +4,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 // For persistent rate limiting across restarts, we use the Base44 entity store
 const memoryStore = new Map();
 
-const MAX_CALLS = 5;       // free uses per window
+const MAX_CALLS = 10;      // free uses per 24hr window
 const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 function getClientFingerprint(req) {

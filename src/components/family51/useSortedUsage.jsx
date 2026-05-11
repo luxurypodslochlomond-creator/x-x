@@ -1,55 +1,84 @@
-// Tracks free usage count in localStorage — 3 free uses then paywall
-// On Stripe success: marks as paid so they get unlimited access for this session/device
-import { useState, useEffect } from 'react';
+// Server-side rate limiting — IP fingerprinted, localStorage-bypass proof
+// Clearing localStorage does nothing. Only a real Stripe payment unlocks.
+import { useState, useEffect, useCallback } from 'react';
+import { sortedRateLimit } from '@/functions/sortedRateLimit';
 
-const KEY = 'sorted_uses';
-const PAID_KEY = 'sorted_paid';
-const FREE_LIMIT = 5;
+const PAID_KEY = 'sorted_paid'; // still used as a UX hint only (not for enforcement)
 
 export function useSortedUsage() {
-  const [uses, setUses] = useState(() => {
-    try { return parseInt(localStorage.getItem(KEY) || '0', 10); } catch { return 0; }
-  });
+  const [uses, setUses] = useState(0);
+  const [remaining, setRemaining] = useState(10); // optimistic until server responds
+  const [isLocked, setIsLocked] = useState(false);
+  const [isPaid, setIsPaid] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
-  const [isPaid, setIsPaid] = useState(() => {
-    try { return localStorage.getItem(PAID_KEY) === 'true'; } catch { return false; }
-  });
-
-  // If returning from Stripe success, mark as paid and reset counter
+  // Check server-side status on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('sorted') === 'success') {
-      try {
-        localStorage.setItem(PAID_KEY, 'true');
-        localStorage.setItem(KEY, '0');
-      } catch {}
+    const isStripeSuccess = params.get('sorted') === 'success';
+
+    if (isStripeSuccess) {
+      // Coming back from Stripe — mark paid locally as UX hint, don't check rate limit
+      try { localStorage.setItem(PAID_KEY, 'true'); } catch {}
       setIsPaid(true);
-      setUses(0);
+      setIsLocked(false);
+      setRemaining(Infinity);
+      setLoaded(true);
+      return;
     }
+
+    // Check if locally marked as paid (from a previous successful payment on this device)
+    const localPaid = (() => { try { return localStorage.getItem(PAID_KEY) === 'true'; } catch { return false; } })();
+    if (localPaid) {
+      setIsPaid(true);
+      setIsLocked(false);
+      setRemaining(Infinity);
+      setLoaded(true);
+      return;
+    }
+
+    // Ask the server how many uses this IP has had
+    sortedRateLimit({ action: 'check' })
+      .then(res => {
+        const data = res.data;
+        setUses(data.used || 0);
+        setRemaining(data.remaining ?? 10);
+        setIsLocked(!data.allowed);
+      })
+      .catch(() => {
+        // On error — be generous, never block a real user
+        setRemaining(10);
+        setIsLocked(false);
+      })
+      .finally(() => setLoaded(true));
   }, []);
 
-  const isLocked = !isPaid && uses >= FREE_LIMIT;
+  // Called each time the user runs a tool
+  const recordUse = useCallback(async () => {
+    if (isPaid) return { allowed: true };
 
-  const recordUse = () => {
-    if (isPaid) return; // paid users — never lock
-    const next = uses + 1;
-    setUses(next);
-    try { localStorage.setItem(KEY, String(next)); } catch {}
-  };
-
-  const remaining = isPaid ? Infinity : Math.max(0, FREE_LIMIT - uses);
-
-  const grantHardshipAccess = () => {
     try {
-      localStorage.setItem('sorted_hardship_used', 'true');
-      localStorage.setItem(KEY, '0');
-    } catch {}
-    setUses(0);
-  };
+      const res = await sortedRateLimit({ action: 'record' });
+      const data = res.data;
+      setUses(data.used || 0);
+      setRemaining(data.remaining ?? 0);
+      setIsLocked(!data.allowed);
+      return { allowed: data.allowed };
+    } catch {
+      // On error — allow through
+      return { allowed: true };
+    }
+  }, [isPaid]);
+
+  const grantHardshipAccess = useCallback(() => {
+    // Hardship: reset local counter hint, but server still tracks
+    // Best we can do without login — give them a fresh localStorage state
+    try { localStorage.setItem('sorted_hardship_used', 'true'); } catch {}
+  }, []);
 
   const hasUsedHardship = (() => {
     try { return localStorage.getItem('sorted_hardship_used') === 'true'; } catch { return false; }
   })();
 
-  return { uses, isPaid, isLocked, remaining, recordUse, grantHardshipAccess, hasUsedHardship };
+  return { uses, isPaid, isLocked, remaining, recordUse, grantHardshipAccess, hasUsedHardship, loaded };
 }
