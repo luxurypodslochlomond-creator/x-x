@@ -307,7 +307,7 @@ export default function Family51Page() {
 
          {/* ── HOME: PREMIUM, FAST, CONFIDENT ─────────────────── */}
          {!isLocked && !menuOpen && !showWhy && !showFAQ && !showHistory && (
-          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '32px 20px 60px' }}>
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '16px 20px 60px' }}>
 
             {/* STRIPE SUCCESS — premium celebration */}
             <AnimatePresence>
@@ -316,62 +316,56 @@ export default function Family51Page() {
               )}
             </AnimatePresence>
 
-            {/* HERO — punchy, one breath */}
-            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} style={{ marginBottom: 18 }}>
-              <h1 style={{ fontSize: 'clamp(26px, 7.5vw, 40px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 10px' }}>
-                <span style={{ color: '#fff' }}>Got a scary letter?</span><br />
-                <span style={{ color: '#f97316' }}>We'll decode it.</span><br />
-                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 700 }}>In seconds. Plain English.</span>
+            {/* HERO — tight, punchy */}
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
+              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 34px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 4px' }}>
+                <span style={{ color: '#f97316' }}>We'll decode it.</span>
+                <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 'clamp(14px, 4vw, 18px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
               </h1>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.65 }}>
-                Whatever it is — we'll tell you exactly what it means and what to do next.
-              </p>
             </motion.div>
 
-            {/* PRIVACY TRUST — single confident statement */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.08 }} style={{ marginBottom: 16, padding: '10px 14px', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)', borderRadius: 10 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <svg width="13" height="13" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
-                  <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#22c55e" strokeWidth="1.1" />
-                  <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#22c55e" strokeWidth="1.1" strokeLinecap="round" />
-                </svg>
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e' }}>Nothing leaves your device</span>
-                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>·</span>
-                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>No account. No storage. No tracking. Ever.</span>
-              </div>
-              <div style={{ marginTop: 6, fontSize: 10, color: 'rgba(255,255,255,0.25)', lineHeight: 1.5 }}>
-                Your letter is processed by AI then immediately discarded — not stored, not logged, not used to train anything, not sold. Unlike every other service.
-              </div>
+            {/* PRIVACY TRUST — single line, compact */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '8px 12px', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.18)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 7 }}>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+                <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#22c55e" strokeWidth="1.1" />
+                <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#22c55e" strokeWidth="1.1" strokeLinecap="round" />
+              </svg>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#22c55e' }}>Nothing leaves your device</span>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)' }}>· No account. No storage. Ever.</span>
             </motion.div>
 
             {/* 4 TOOL BUTTONS — 2x2 grid */}
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
               {[
-                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',      color: '#f97316', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.',  color: '#ef4444', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(239,68,68,0.12)"/><path d="M12 8v4M12 16h.01" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"/></svg> },
-                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',    color: '#f97316', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'conflict', label: 'In a dispute?',    sub: 'We\'ll get you sorted',  color: '#f97316', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="5" stroke="#f97316" strokeWidth="2"/><circle cx="15" cy="15" r="5" stroke="#f97316" strokeWidth="2" opacity="0.5"/></svg> },
+                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#f97316',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#ef4444',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(239,68,68,0.15)"/><path d="M12 8v4M12 16h.01" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/></svg> },
+                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#f97316',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#f97316',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#f97316" strokeWidth="2.5" strokeLinecap="round" opacity="0.5"/><circle cx="12" cy="12" r="9" stroke="#f97316" strokeWidth="2"/></svg> },
               ].map(({ id, label, sub, color, icon }) => (
                 <motion.button
                   key={id}
                   onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open(id); }}
                   className="sorted-tap-btn"
-                  whileTap={{ scale: 0.96 }}
+                  whileTap={{ scale: 0.95 }}
                   style={{
                     textAlign: 'left', cursor: 'pointer',
-                    padding: '16px 14px', borderRadius: 14,
-                    border: `1.5px solid ${color === '#ef4444' ? 'rgba(239,68,68,0.4)' : 'rgba(249,115,22,0.35)'}`,
-                    background: `${color === '#ef4444' ? 'rgba(239,68,68,0.07)' : 'rgba(249,115,22,0.07)'}`,
+                    padding: '14px 13px', borderRadius: 14,
+                    border: `1.5px solid ${color === '#ef4444' ? 'rgba(239,68,68,0.35)' : 'rgba(249,115,22,0.3)'}`,
+                    background: color === '#ef4444' ? 'rgba(239,68,68,0.06)' : 'rgba(249,115,22,0.06)',
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 10,
+                    display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100,
                   }}
                 >
-                  <div style={{ width: 36, height: 36, borderRadius: 10, background: `${color === '#ef4444' ? 'rgba(239,68,68,0.15)' : 'rgba(249,115,22,0.15)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 9, background: color === '#ef4444' ? 'rgba(239,68,68,0.14)' : 'rgba(249,115,22,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {icon}
                   </div>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 900, color: '#fff', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.2 }}>{label}</div>
-                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', lineHeight: 1.3 }}>{sub}</div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fff', marginBottom: 2, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
+                    <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.38)', lineHeight: 1.35 }}>{sub}</div>
                   </div>
                 </motion.button>
               ))}
