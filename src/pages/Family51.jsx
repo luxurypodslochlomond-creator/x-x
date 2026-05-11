@@ -81,7 +81,7 @@ export default function Family51Page() {
     const lang = navigator.language || '';
 
     const geoMap = {
-      'Europe/London': { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'English law' },
+      'Europe/London': { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'UK law' },
       'Europe/Dublin': { country: 'Ireland', flag: '🇮🇪', code: 'IE', jurisdiction: 'Irish law' },
       'America/New_York': { country: 'United States', flag: '🇺🇸', code: 'US', jurisdiction: 'US law' },
       'America/Chicago': { country: 'United States', flag: '🇺🇸', code: 'US', jurisdiction: 'US law' },
@@ -115,7 +115,7 @@ export default function Family51Page() {
       'Europe/Istanbul': { country: 'Turkey', flag: '🇹🇷', code: 'TR', jurisdiction: 'Turkish law' },
     };
 
-    const detected = geoMap[tz] || { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'English law' };
+    const detected = geoMap[tz] || { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'UK law' };
     setSelectedLocation(detected);
   }, []);
 
