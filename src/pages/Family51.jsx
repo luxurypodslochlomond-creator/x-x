@@ -142,8 +142,8 @@ export default function Family51Page() {
         <motion.button onClick={() => { setShowWhy(false); setShowHistory(false); }} whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'none', border: 'none', cursor: 'pointer', padding: 0, transition: 'opacity 0.15s' }} onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
           <SortedMark />
           <div style={{ lineHeight: 1.2 }}>
-            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#fef3e2' }}>SORTED</div>
-            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#f5a623' }}>WE'VE GOT YOU</div>
+            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#ffffff' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#f5a623', opacity: 0.85 }}>WE'VE GOT YOU</div>
           </div>
         </motion.button>
 
@@ -339,14 +339,14 @@ export default function Family51Page() {
             {/* 4 TOOL BUTTONS — 2x2 grid */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
               {[
-                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(245,166,35,0.12)"/><path d="M12 8v4M12 16h.01" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round"/></svg> },
-                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f5a623" strokeWidth="2"/><path d="M9 12l2 2 4-4" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#60a5fa',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#f87171',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#f87171" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(248,113,113,0.1)"/><path d="M12 8v4M12 16h.01" stroke="#f87171" strokeWidth="2.5" strokeLinecap="round"/></svg> },
+                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#34d399',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#c084fc',
+                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#c084fc" strokeWidth="2"/><path d="M9 12l2 2 4-4" stroke="#c084fc" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
               ].map(({ id, label, sub, color, icon }) => (
                 <motion.button
                   key={id}
@@ -356,13 +356,13 @@ export default function Family51Page() {
                   style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '15px 13px', borderRadius: 14,
-                    border: '1.5px solid rgba(245,166,35,0.2)',
-                    background: 'rgba(245,166,35,0.04)',
+                    border: `1.5px solid ${color}30`,
+                    background: `${color}08`,
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
                     display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100,
                   }}
                 >
-                  <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(245,166,35,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 9, background: `${color}18`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {icon}
                   </div>
                   <div>
@@ -717,9 +717,9 @@ function ProblemCard({ icon, title, desc }) {
 function SortedMark() {
   return (
     <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
-      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#f5a623" strokeWidth="1.8" fill="rgba(245,166,35,0.08)" />
-      <path d="M11 11V8a4 4 0 018 0v3" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f5a623" strokeWidth="1.4" fill="rgba(245,166,35,0.2)" />
+      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#ffffff" strokeWidth="1.8" fill="rgba(255,255,255,0.06)" />
+      <path d="M11 11V8a4 4 0 018 0v3" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f5a623" strokeWidth="1.4" fill="rgba(245,166,35,0.25)" />
       <circle cx="15" cy="19" r="0.8" fill="#f5a623" />
     </svg>
   );

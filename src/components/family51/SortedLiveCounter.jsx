@@ -46,8 +46,8 @@ export default function SortedLiveCounter() {
         marginTop: 24,
         padding: '16px 20px',
         borderRadius: 12,
-        border: '1px solid rgba(249,115,22,0.2)',
-        background: 'rgba(249,115,22,0.05)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        background: 'rgba(255,255,255,0.03)',
         display: 'flex',
         alignItems: 'center',
         gap: 16,
@@ -66,10 +66,10 @@ export default function SortedLiveCounter() {
 
       <div style={{ flex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-          <span style={{ fontSize: 22, fontWeight: 900, color: '#f97316', letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>
+          <span style={{ fontSize: 22, fontWeight: 900, color: '#fef3e2', letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>
             {displayed.toLocaleString()}+
           </span>
-          <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(254,243,226,0.45)', letterSpacing: '0.08em' }}>
             PEOPLE HELPED
           </span>
         </div>
@@ -80,9 +80,9 @@ export default function SortedLiveCounter() {
 
       {/* Global — custom SVG globe, no emoji */}
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style={{ opacity: 0.4, flexShrink: 0 }}>
-        <circle cx="11" cy="11" r="9.5" stroke="#f97316" strokeWidth="1.2" />
-        <ellipse cx="11" cy="11" rx="4" ry="9.5" stroke="#f97316" strokeWidth="1.2" />
-        <path d="M1.5 11h19M3 6.5h16M3 15.5h16" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
+        <circle cx="11" cy="11" r="9.5" stroke="rgba(254,243,226,0.4)" strokeWidth="1.2" />
+        <ellipse cx="11" cy="11" rx="4" ry="9.5" stroke="rgba(254,243,226,0.4)" strokeWidth="1.2" />
+        <path d="M1.5 11h19M3 6.5h16M3 15.5h16" stroke="rgba(254,243,226,0.4)" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     </motion.div>
   );
