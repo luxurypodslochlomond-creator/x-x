@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 
 const STEPS = [
   { id: 'letter',   label: 'DECODE',  color: '#f5a623', desc: 'Letter decoded' },
-  { id: 'reply',    label: 'REPLY',   color: '#f5a623', desc: 'Write your reply' },
-  { id: 'conflict', label: 'DISPUTE', color: '#f5a623', desc: 'Know your rights' },
-  { id: 'scam',     label: 'SCAM?',   color: '#f5a623', desc: 'Scam check' },
+  { id: 'reply',    label: 'REPLY',   color: '#e8902a', desc: 'Write your reply' },
+  { id: 'conflict', label: 'DISPUTE', color: '#d97c30', desc: 'Know your rights' },
+  { id: 'scam',     label: 'SCAM?',   color: '#c96a35', desc: 'Scam check' },
 ];
 
 export default function SortedJourneyBar({ completedTools = [], currentTool, onNavigate }) {
