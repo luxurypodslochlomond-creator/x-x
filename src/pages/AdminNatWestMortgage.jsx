@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 1 May 2026 — NATWEST REPLIED (N Ahmad) — "We await contact" • OCTOPUS ELLA REPLIED — DD sorted 23 May ✅ Call booked for Paylink form</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 11 May 2026 — PAYMENT AGREEMENT SECURED — £100 on 23.05.2026 • Review 10.06.2026 • Nasir Akram (SST) ✅</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -199,12 +199,21 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 bg-amber-900/20 p-4 rounded-lg border-2 border-amber-500">
-                <div className="text-amber-400 font-bold text-lg min-w-fit">⏳ ACTION</div>
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-2 border-green-400">
+                <div className="text-green-400 font-bold text-lg min-w-fit">11/05/2026</div>
                 <div>
-                  <p className="text-white font-bold">Call NatWest when you have a payment amount — even £100 shows willing</p>
-                  <p className="text-gray-300 text-sm">They're not chasing. They're waiting. A partial payment + communication is always better than silence. Interest is accruing but account is held.</p>
-                  <p className="text-amber-400 font-bold text-sm mt-1">0800 161 5954 | Ref: 5521482 | sukhdip.kaur@natwest.com</p>
+                  <p className="text-white font-bold">🔥 £100 PAYMENT AGREEMENT — NASIR AKRAM (SST Secured)</p>
+                  <p className="text-gray-300 text-sm">You called. Agreed: £100 payment on <strong>23 May 2026</strong>. Nasir acknowledged your mental health progress and confirmed they're working WITH you to address arrears.</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ REVIEW DATE: 10 June 2026 — Time to prove you're serious about repayment</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-blue-900/20 p-4 rounded-lg border-2 border-blue-500">
+                <div className="text-blue-400 font-bold text-lg min-w-fit">📊 NEXT PHASE</div>
+                <div>
+                  <p className="text-white font-bold">Make the £100 payment on 23 May. Prepare for 10 June review.</p>
+                  <p className="text-gray-300 text-sm">By June, show them you've made progress. £100 is proof of commitment. At review, discuss either: (a) increased monthly payments once income stable, or (b) renegotiated terms.</p>
+                  <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: Turn one payment into a sustainable plan. You've got 30 days to show it can work.</p>
                 </div>
               </div>
             </div>
