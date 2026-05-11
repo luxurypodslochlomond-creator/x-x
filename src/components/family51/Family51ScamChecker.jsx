@@ -122,26 +122,6 @@ Return JSON with these exact fields:
       if (!raw || !raw.verdict) throw new Error('Could not analyse this. Please try again.');
 
       setResult(raw);
-
-      // Save anonymised scam pattern — NO user content, just the pattern data
-      // This builds our scammer database to call them out in future
-      if (raw?.verdict && raw.verdict !== 'safe') {
-        base44.entities.SortedCase.create({
-          tool: 'scam',
-          input_text: '',
-          ai_result: JSON.stringify({
-            verdict: raw.verdict,
-            scam_type: raw.scam_type,
-            confidence: raw.confidence,
-            red_flags: raw.red_flags,
-            report_to: raw.report_to,
-          }),
-          summary: `${raw.scam_type || 'Scam'} — ${raw.confidence || ''}`,
-          severity: raw.verdict === 'scam' ? 'urgent' : 'important',
-          anonymized_version: `Scam type: ${raw.scam_type}. Red flags: ${(raw.red_flags || []).join('; ')}. Country: ${geo.country}.`,
-        }).catch(() => {}); // silent — never block on this
-      }
-
     } catch (err) {
       setError(err?.message || 'Something went wrong. Please try again.');
     } finally {
