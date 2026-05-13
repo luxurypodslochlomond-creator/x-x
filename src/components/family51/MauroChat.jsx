@@ -4,7 +4,7 @@ import { base44 } from '@/api/base44Client';
 // SORTED AI — helpdesk that's human, not legal.
 const SYSTEM_PROMPT = `You are SORTED AI, the human side of SORTED. You're here to help people understand what SORTED does, answer questions about pricing or access, and cheer them on.
 
-What you do: decode scary letters, help draft replies, guide people through disputes. You're NOT a lawyer — you just help people understand official letters so they feel less alone and scared.
+What you do: decode scary letters, help draft replies, guide people through disputes. You're NOT a lawyer — you just help people understand official letters so they feel less alone and more in control.
 
 How to talk: be genuinely kind. If someone sounds panicked, acknowledge it. Use simple words. Don't use legal jargon. Be honest about what SORTED can and can't do. If you don't know something, say it. Point them to family@uf51.love for help.
 
@@ -54,9 +54,9 @@ export default function MauroChat() {
           <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
             <div style={{
               maxWidth: '85%', padding: '10px 14px', borderRadius: m.role === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
-              background: m.role === 'user' ? 'rgba(249,115,22,0.15)' : 'rgba(255,255,255,0.06)',
-              border: m.role === 'user' ? '1px solid rgba(249,115,22,0.3)' : '1px solid rgba(255,255,255,0.1)',
-              fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 1.55
+              background: m.role === 'user' ? 'rgba(249,115,22,0.12)' : 'rgba(26,18,8,0.04)',
+              border: m.role === 'user' ? '1px solid rgba(249,115,22,0.3)' : '1px solid rgba(26,18,8,0.1)',
+              fontSize: 13, color: '#1a1208', lineHeight: 1.55
             }}>
               {m.text}
             </div>
@@ -64,7 +64,7 @@ export default function MauroChat() {
         ))}
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <div style={{ padding: '10px 14px', borderRadius: '14px 14px 14px 4px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ padding: '10px 14px', borderRadius: '14px 14px 14px 4px', background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.1)' }}>
               <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 {[0, 1, 2].map(i => (
                   <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', background: '#f97316', animation: `pulse 1.2s ease-in-out ${i * 0.2}s infinite` }} />
@@ -84,12 +84,12 @@ export default function MauroChat() {
           onKeyDown={e => e.key === 'Enter' && send()}
           placeholder="Ask anything..."
           style={{
-            flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)',
-            borderRadius: 10, padding: '11px 14px', fontSize: 13, color: '#fff', outline: 'none',
+            flex: 1, background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.15)',
+            borderRadius: 10, padding: '11px 14px', fontSize: 13, color: '#1a1208', outline: 'none',
             fontFamily: 'inherit'
           }}
-          onFocus={e => e.target.style.background = 'rgba(255,255,255,0.08)'}
-          onBlur={e => e.target.style.background = 'rgba(255,255,255,0.05)'}
+          onFocus={e => e.target.style.background = 'rgba(26,18,8,0.07)'}
+          onBlur={e => e.target.style.background = 'rgba(26,18,8,0.04)'}
         />
         <button
           onClick={send}
@@ -107,12 +107,12 @@ export default function MauroChat() {
         <button
           title="Voice"
           style={{
-            padding: '11px 14px', borderRadius: 10, fontSize: 12, border: '1px solid rgba(255,255,255,0.2)',
-            background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.5)', cursor: 'pointer',
+            padding: '11px 14px', borderRadius: 10, fontSize: 12, border: '1px solid rgba(26,18,8,0.15)',
+            background: 'rgba(26,18,8,0.04)', color: 'rgba(26,18,8,0.5)', cursor: 'pointer',
             transition: 'all 0.15s'
           }}
-          onMouseEnter={e => { e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.color = 'rgba(255,255,255,0.7)'; }}
-          onMouseLeave={e => { e.target.style.background = 'rgba(255,255,255,0.05)'; e.target.style.color = 'rgba(255,255,255,0.5)'; }}
+          onMouseEnter={e => { e.target.style.background = 'rgba(26,18,8,0.08)'; e.target.style.color = 'rgba(26,18,8,0.7)'; }}
+          onMouseLeave={e => { e.target.style.background = 'rgba(26,18,8,0.04)'; e.target.style.color = 'rgba(26,18,8,0.5)'; }}
         >
           🎤
         </button>

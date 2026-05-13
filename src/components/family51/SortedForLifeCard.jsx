@@ -49,12 +49,12 @@ export default function SortedForLifeCard({ compact = false }) {
       {/* EMOTIONAL HEADLINE */}
       <div style={{ marginBottom: 20 }}>
         <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(249,115,22,0.6)', margin: '0 0 8px' }}>NEVER BE STUCK AGAIN</p>
-        <p style={{ fontSize: 22, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 6px', lineHeight: 1.15 }}>
+        <p style={{ fontSize: 22, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', margin: '0 0 6px', lineHeight: 1.15 }}>
           Every letter.<br />Every reply.<br />We've got you.
         </p>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
           <span style={{ fontSize: 32, fontWeight: 900, color: '#f97316', letterSpacing: '-0.03em' }}>{geo.label.replace('/month', '')}</span>
-          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>{geo.sub}</span>
+          <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.45)' }}>{geo.sub}</span>
         </div>
       </div>
 
@@ -73,15 +73,15 @@ export default function SortedForLifeCard({ compact = false }) {
                 <path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>
-              <strong style={{ color: '#fff', fontWeight: 700 }}>{bold}</strong> — {text.replace(bold + ' — ', '')}
+            <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.5 }}>
+              <strong style={{ color: '#1a1208', fontWeight: 700 }}>{bold}</strong> — {text.replace(bold + ' — ', '')}
             </span>
           </div>
         ))}
       </div>
 
       {/* SOCIAL PROOF LINE */}
-      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
+      <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.4)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
         "Less than a coffee. Worth more than a solicitor's first 5 minutes."
       </p>
 
@@ -107,7 +107,7 @@ export default function SortedForLifeCard({ compact = false }) {
         <p style={{ fontSize: 12, color: '#ef4444', textAlign: 'center', marginTop: 10 }}>{error}</p>
       )}
 
-      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', textAlign: 'center', marginTop: 12, letterSpacing: '0.03em', lineHeight: 1.5 }}>
+      <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textAlign: 'center', marginTop: 12, letterSpacing: '0.03em', lineHeight: 1.5 }}>
         Secure · Apple Pay &amp; Google Pay · Cancel anytime
       </p>
     </motion.div>

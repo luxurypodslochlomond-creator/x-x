@@ -56,9 +56,9 @@ export default function SortedAbout() {
         whileTap={{ scale: 0.97 }}
         style={{
           width: '100%', padding: '13px 18px', borderRadius: 12,
-          border: '1px solid rgba(255,255,255,0.08)',
-          background: 'rgba(255,255,255,0.02)',
-          color: 'rgba(255,255,255,0.4)', cursor: 'pointer',
+          border: '1px solid rgba(26,18,8,0.1)',
+          background: 'rgba(26,18,8,0.02)',
+          color: 'rgba(26,18,8,0.4)', cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           fontSize: 11, fontWeight: 800, letterSpacing: '0.12em',
         }}
@@ -85,7 +85,7 @@ export default function SortedAbout() {
               {/* THE PROBLEM */}
               <div>
                 <SectionLabel text="THE PROBLEM" color="#ef4444" />
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, margin: '10px 0 16px' }}>
+                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', lineHeight: 1.7, margin: '10px 0 16px' }}>
                   Millions of people receive official letters every day — from tax authorities, bailiffs, courts, landlords, 
                   employers — and have absolutely no idea what they mean or what to do. Legal advice costs 
                   £200–£500/hour. Citizens Advice has a 3-week wait. So people freeze. They ignore the letter. 
@@ -105,8 +105,8 @@ export default function SortedAbout() {
                       }}
                     >
                       <div style={{ fontSize: 22, fontWeight: 900, color: s.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{s.number}</div>
-                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.45 }}>{s.label}</div>
-                      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 6, lineHeight: 1.3 }}>Source: {s.source}</div>
+                      <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', lineHeight: 1.45 }}>{s.label}</div>
+                      <div style={{ fontSize: 9, color: 'rgba(26,18,8,0.3)', marginTop: 6, lineHeight: 1.3 }}>Source: {s.source}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -115,7 +115,7 @@ export default function SortedAbout() {
               {/* CHILDREN */}
               <div>
                 <SectionLabel text="THE CHILDREN — THIS IS WHO WE'RE FIGHTING FOR" color="#f97316" />
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', margin: '8px 0 12px', lineHeight: 1.6 }}>
+                <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.55)', margin: '8px 0 12px', lineHeight: 1.6 }}>
                   Every family that freezes when a letter arrives — every parent too scared to open the envelope — has children watching. This isn't abstract. This is 4.5 million kids in the UK alone.
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
@@ -128,11 +128,11 @@ export default function SortedAbout() {
                       style={{ border: `1px solid ${s.color}25`, borderRadius: 10, padding: '12px 14px', background: `${s.color}08` }}
                     >
                       <div style={{ fontSize: 20, fontWeight: 900, color: s.color, marginBottom: 4 }}>{s.number}</div>
-                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>{s.label}</div>
+                      <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', lineHeight: 1.4 }}>{s.label}</div>
                     </motion.div>
                   ))}
                 </div>
-                <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 8 }}>Sources: JRF · HRW · Eurostat · Save the Children · BBC / DWP data — figures current as of 2025/26</div>
+                <div style={{ fontSize: 9, color: 'rgba(26,18,8,0.3)', marginTop: 8 }}>Sources: JRF · HRW · Eurostat · Save the Children · BBC / DWP data — figures current as of 2025/26</div>
               </div>
 
               {/* GLOBAL REACH */}
@@ -140,10 +140,10 @@ export default function SortedAbout() {
                 <SectionLabel text="THIS ISN'T JUST A UK PROBLEM" color="#06b6d4" />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 10 }}>
                   {GLOBAL_STATS.map((g, i) => (
-                    <div key={i} style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
-                      <div style={{ fontSize: 11, fontWeight: 800, color: '#06b6d4', letterSpacing: '0.08em', marginBottom: 4 }}>{g.country}</div>
-                      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>{g.stat}</div>
-                      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', marginTop: 6 }}>Source: {g.source}</div>
+                    <div key={i} style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.08)', background: 'rgba(26,18,8,0.02)' }}>
+                      <div style={{ fontSize: 11, fontWeight: 800, color: '#0891b2', letterSpacing: '0.08em', marginBottom: 4 }}>{g.country}</div>
+                      <div style={{ fontSize: 12, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>{g.stat}</div>
+                      <div style={{ fontSize: 9, color: 'rgba(26,18,8,0.3)', marginTop: 6 }}>Source: {g.source}</div>
                     </div>
                   ))}
                 </div>
@@ -152,7 +152,7 @@ export default function SortedAbout() {
               {/* LANGUAGES */}
               <div>
                 <SectionLabel text="ANY LANGUAGE. ZERO BARRIERS." color="#22c55e" />
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', margin: '8px 0 12px', lineHeight: 1.6 }}>
+                <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.55)', margin: '8px 0 12px', lineHeight: 1.6 }}>
                   Paste your letter in any language. Get your answer in any language. 
                   English your second language? No problem. We've got you.
                 </p>
@@ -168,7 +168,7 @@ export default function SortedAbout() {
               {/* CURRENCIES */}
               <div>
                 <SectionLabel text="ALL CURRENCIES ACCEPTED" color="#eab308" />
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', margin: '8px 0 12px', lineHeight: 1.6 }}>
+                <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.55)', margin: '8px 0 12px', lineHeight: 1.6 }}>
                   Stripe handles payments in 135+ currencies. Wherever you are in the world — subscribe and get help instantly.
                 </p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -182,8 +182,8 @@ export default function SortedAbout() {
 
               {/* THE ANSWER */}
               <div style={{ border: '1px solid rgba(249,115,22,0.2)', borderRadius: 12, padding: '18px 18px', background: 'rgba(249,115,22,0.05)' }}>
-                <SectionLabel text="THE ANSWER" color="#f97316" />
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, margin: '10px 0 0' }}>
+                 <SectionLabel text="THE ANSWER" color="#f97316" />
+                 <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.7, margin: '10px 0 0' }}>
                   SORTED uses the same AI that law firms quietly use to review documents — available to everyone, 
                   in every language, for less than a coffee a week. No solicitor. No wait. No jargon. 
                   Just clarity, instantly, when you need it most.

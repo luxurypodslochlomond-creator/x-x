@@ -79,7 +79,7 @@ const FAQ_ITEMS = [
     items: [
       {
         q: 'Why do I get 10 free uses?',
-        a: 'Because if you\'re in a crisis, you shouldn\'t have to pay upfront. Try SORTED for free. Decode 10 scary letters, prove it works for you, then decide. If it helps, subscribe. If not, no harm done.'
+        a: 'Because if you\'re in a difficult moment, you shouldn\'t have to pay upfront. Try SORTED for free. Decode 10 letters, prove it works for you, then decide. If it helps, subscribe. If not, no harm done.'
       },
       {
         q: 'Can I cancel anytime?',

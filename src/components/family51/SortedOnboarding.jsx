@@ -11,7 +11,7 @@ const STEPS = [
         <path d="M38 42l2.5 2.5L46 37" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    title: "Got a scary letter?",
+    title: "Got a letter you don't understand?",
     sub: "Bailiff notice. Court summons. Council tax demand. HMRC. Eviction. Debt collector. Whatever it is — paste it in.",
     color: "#f97316",
     tag: "YOU ARE NOT ALONE",
@@ -51,7 +51,7 @@ export default function SortedOnboarding({ onDone }) {
       exit={{ opacity: 0 }}
       style={{
         position: 'fixed', inset: 0, zIndex: 200,
-        background: '#080a0f',
+        background: '#faf8f5',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         padding: '40px 28px',
       }}
@@ -59,7 +59,7 @@ export default function SortedOnboarding({ onDone }) {
       {/* Skip */}
       <button
         onClick={onDone}
-        style={{ position: 'absolute', top: 20, right: 20, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.2)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.1em' }}
+        style={{ position: 'absolute', top: 20, right: 20, fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.35)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.1em' }}
       >
         SKIP
       </button>
@@ -69,7 +69,7 @@ export default function SortedOnboarding({ onDone }) {
         {STEPS.map((_, i) => (
           <div key={i} style={{
             width: i === step ? 24 : 6, height: 6, borderRadius: 3,
-            background: i === step ? s.color : 'rgba(255,255,255,0.12)',
+            background: i === step ? s.color : 'rgba(26,18,8,0.12)',
             transition: 'all 0.3s ease',
           }} />
         ))}
@@ -95,11 +95,11 @@ export default function SortedOnboarding({ onDone }) {
           </div>
           <h2 style={{
             fontSize: 'clamp(24px, 7vw, 34px)', fontWeight: 900, lineHeight: 1.1,
-            letterSpacing: '-0.03em', color: '#fff', margin: '0 0 16px'
+            letterSpacing: '-0.03em', color: '#1a1208', margin: '0 0 16px'
           }}>
             {s.title}
           </h2>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.58)', lineHeight: 1.7, margin: 0 }}>
+          <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.6)', lineHeight: 1.7, margin: 0 }}>
             {s.sub}
           </p>
         </motion.div>
@@ -119,7 +119,7 @@ export default function SortedOnboarding({ onDone }) {
         </motion.button>
 
         {step === STEPS.length - 1 && (
-          <p style={{ textAlign: 'center', fontSize: 11, color: 'rgba(255,255,255,0.2)', marginTop: 14, letterSpacing: '0.06em', lineHeight: 1.6 }}>
+          <p style={{ textAlign: 'center', fontSize: 11, color: 'rgba(26,18,8,0.3)', marginTop: 14, letterSpacing: '0.06em', lineHeight: 1.6 }}>
             10 FREE · NO CARD · NOTHING STORED · NO ACCOUNT
           </p>
         )}
