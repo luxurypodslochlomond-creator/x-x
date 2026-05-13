@@ -736,7 +736,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
 
         {/* MOBILE MENU */}
-                  {isMobileMenuOpen && (
+                  {isMobileMenuOpen && currentPageName !== 'Platform' && (
                     <div className={`lg:hidden fixed inset-x-0 bottom-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#0a0f1a] z-[55] overflow-y-auto pb-6`}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
