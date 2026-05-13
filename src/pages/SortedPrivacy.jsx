@@ -158,7 +158,7 @@ export default function SortedPrivacy() {
           We believe your data is an extension of yourself — as personal as your body, your thoughts, your home. The idea that corporations can harvest, sell, and weaponise your private moments without consent is one of the defining injustices of our time.
         </p>
         <p>
-          SORTED exists for people in crisis. Someone terrified by a court letter. Someone who can't afford a solicitor. Someone who just needs to understand what's happening to them. The last thing they need is their moment of vulnerability becoming a data point in someone's ad engine.
+          SORTED exists for people in difficult moments. Someone who can't make sense of a court letter. Someone who can't afford a solicitor. Someone who just needs to understand what's happening to them. The last thing they need is their moment of vulnerability becoming a data point in someone's ad engine.
         </p>
         <p style={{ margin: 0 }}>
           We will always put you first. We will always be honest when we fall short. And we will never stop improving until your data is so protected it can't be touched by anyone — including us.
