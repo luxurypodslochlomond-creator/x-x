@@ -54,10 +54,10 @@ function BitStream() {
 function SortedMark() {
   return (
     <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
-      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#00d4ff" strokeWidth="1.8" fill="rgba(0,212,255,0.08)" />
-      <path d="M11 11V8a4 4 0 018 0v3" stroke="#00d4ff" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#00d4ff" strokeWidth="1.4" fill="rgba(0,212,255,0.2)" />
-      <circle cx="15" cy="19" r="0.8" fill="#00d4ff" />
+      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="1.8" fill="rgba(249,115,22,0.08)" />
+      <path d="M11 11V8a4 4 0 018 0v3" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f97316" strokeWidth="1.4" fill="rgba(249,115,22,0.2)" />
+      <circle cx="15" cy="19" r="0.8" fill="#f97316" />
     </svg>
   );
 }
@@ -95,14 +95,14 @@ export default function SortedLayout({ children, currentPage }) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#000', color: '#fff' }}>
+    <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208' }}>
 
       {/* Header */}
       <header style={{
         position: 'sticky', top: 0, zIndex: 50,
-        background: 'rgba(0,0,0,0.98)',
+        background: 'rgba(250,248,245,0.98)',
         backdropFilter: 'blur(24px)',
-        borderBottom: '1px solid rgba(249,115,22,0.2)',
+        borderBottom: '1px solid rgba(245,166,35,0.3)',
         padding: '14px 20px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
@@ -115,8 +115,8 @@ export default function SortedLayout({ children, currentPage }) {
         >
           <SortedMark />
           <div style={{ lineHeight: 1.2 }}>
-            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#fff' }}>SORTED</div>
-            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#00d4ff' }}>WE'VE GOT YOU</div>
+            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#1a1208' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#d97706' }}>WE'VE GOT YOU</div>
           </div>
         </Link>
 
@@ -127,10 +127,10 @@ export default function SortedLayout({ children, currentPage }) {
           onClick={() => setMenuOpen(!menuOpen)}
           whileTap={{ scale: 0.92 }}
           style={{
-            background: menuOpen ? 'rgba(0,212,255,0.12)' : 'rgba(255,255,255,0.04)',
-            border: `1.5px solid ${menuOpen ? 'rgba(0,212,255,0.6)' : 'rgba(0,212,255,0.2)'}`,
+            background: menuOpen ? 'rgba(245,166,35,0.12)' : 'rgba(245,166,35,0.04)',
+            border: `1.5px solid ${menuOpen ? 'rgba(245,166,35,0.6)' : 'rgba(245,166,35,0.25)'}`,
             borderRadius: 10, cursor: 'pointer', padding: '7px 10px',
-            color: '#00d4ff', display: 'flex', alignItems: 'center', gap: 7,
+            color: '#f5a623', display: 'flex', alignItems: 'center', gap: 7,
             transition: 'all 0.18s',
             WebkitTapHighlightColor: 'transparent',
           }}
@@ -155,18 +155,18 @@ export default function SortedLayout({ children, currentPage }) {
             transition={{ duration: 0.12 }}
             style={{
               position: 'sticky', top: 54, zIndex: 49,
-              background: 'rgba(0,0,0,0.95)',
+              background: 'rgba(250,248,245,0.98)',
               backdropFilter: 'blur(24px)',
-              borderBottom: '1.5px solid rgba(0,212,255,0.15)',
+              borderBottom: '1.5px solid rgba(245,166,35,0.2)',
               padding: '0 20px',
             }}
           >
             {/* Header */}
             <div style={{
               padding: '10px 0 8px',
-              borderBottom: '1px solid rgba(0,212,255,0.08)',
+              borderBottom: '1px solid rgba(245,166,35,0.15)',
               fontFamily: 'monospace', fontSize: 9, letterSpacing: '0.2em',
-              color: 'rgba(0,212,255,0.3)',
+              color: 'rgba(26,18,8,0.4)',
             }}>
               NAVIGATION
             </div>
@@ -174,26 +174,26 @@ export default function SortedLayout({ children, currentPage }) {
             <div style={{ maxWidth: 520, margin: '0 auto' }}>
               {menuItems.map((item, idx) => (
                 item.isEmail ? (
-                  <a
-                    key={idx}
-                    href={item.path}
-                    onClick={() => handleNavClick(item.path, true)}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: 12,
-                      padding: '12px 0',
-                      borderBottom: '1px solid rgba(0,212,255,0.06)',
-                      textDecoration: 'none', transition: 'all 0.12s',
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
-                    onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-                  >
-                    <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(0,212,255,0.35)', minWidth: 24 }}>
+                   <a
+                     key={idx}
+                     href={item.path}
+                     onClick={() => handleNavClick(item.path, true)}
+                     style={{
+                       display: 'flex', alignItems: 'center', gap: 12,
+                       padding: '12px 0',
+                       borderBottom: '1px solid rgba(245,166,35,0.15)',
+                       textDecoration: 'none', transition: 'all 0.12s',
+                     }}
+                     onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
+                     onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
+                   >
+                     <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.4)', minWidth: 24 }}>
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    {item.icon && <span style={{ color: 'rgba(0,212,255,0.4)' }}>{item.icon}</span>}
-                    <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', letterSpacing: '0.03em' }}>{item.label}</span>
-                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(0,212,255,0.2)' }}>→</span>
-                  </a>
+                    {item.icon && <span style={{ color: 'rgba(26,18,8,0.4)' }}>{item.icon}</span>}
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
+                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
+                    </a>
                 ) : (
                   <Link
                     key={idx}
@@ -229,13 +229,13 @@ export default function SortedLayout({ children, currentPage }) {
                   display: 'flex', alignItems: 'center', gap: 12,
                   padding: '12px 0 14px',
                   fontSize: 13, fontWeight: 700,
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(26,18,8,0.35)',
                   background: 'none', border: 'none', cursor: 'pointer',
                   width: '100%', textAlign: 'left', letterSpacing: '0.03em',
                   transition: 'all 0.12s',
                 }}
               >
-                <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(255,255,255,0.15)', minWidth: 24 }}>
+                <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.2)', minWidth: 24 }}>
                   {String(menuItems.length + 1).padStart(2, '0')}
                 </span>
                 <Trash2 className="w-3.5 h-3.5" />
@@ -261,10 +261,10 @@ export default function SortedLayout({ children, currentPage }) {
       {/* Footer */}
       <div style={{
         padding: '14px 20px',
-        borderTop: '1px solid rgba(0,212,255,0.08)',
+        borderTop: '1px solid rgba(245,166,35,0.2)',
         display: 'flex', justifyContent: 'center',
         fontFamily: 'monospace', fontSize: 9,
-        color: 'rgba(0,212,255,0.15)', letterSpacing: '0.14em',
+        color: 'rgba(26,18,8,0.35)', letterSpacing: '0.14em',
       }}>
         ZERO LOSS — ZERO BULLSHIT
       </div>
