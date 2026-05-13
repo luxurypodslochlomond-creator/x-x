@@ -3,33 +3,33 @@ import { Link } from 'react-router-dom';
 import { Shield, Lock, Eye, Trash2, Heart, CheckCircle, AlertTriangle } from 'lucide-react';
 
 const Section = ({ icon, title, children }) => (
-  <div style={{ marginBottom: 40, borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: 40 }}>
+  <div style={{ marginBottom: 40, borderBottom: '1px solid rgba(245,166,35,0.15)', paddingBottom: 40 }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-      <div style={{ color: '#f97316' }}>{icon}</div>
-      <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em' }}>{title}</h2>
+      <div style={{ color: '#f5a623' }}>{icon}</div>
+      <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>{title}</h2>
     </div>
-    <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 15, lineHeight: 1.75 }}>{children}</div>
+    <div style={{ color: 'rgba(26,18,8,0.65)', fontSize: 15, lineHeight: 1.75 }}>{children}</div>
   </div>
 );
 
 const Honest = ({ label, children }) => (
-  <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', borderRadius: 10, padding: '14px 18px', marginBottom: 12 }}>
-    <span style={{ fontWeight: 800, color: '#f97316', fontSize: 13 }}>{label} </span>
-    <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, lineHeight: 1.65 }}>{children}</span>
+  <div style={{ background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10, padding: '14px 18px', marginBottom: 12 }}>
+    <span style={{ fontWeight: 800, color: '#f5a623', fontSize: 13 }}>{label} </span>
+    <span style={{ color: 'rgba(26,18,8,0.75)', fontSize: 14, lineHeight: 1.65 }}>{children}</span>
   </div>
 );
 
 const Check = ({ children }) => (
   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10 }}>
     <CheckCircle style={{ color: '#22c55e', flexShrink: 0, marginTop: 2 }} size={16} />
-    <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, lineHeight: 1.6 }}>{children}</span>
+    <span style={{ color: 'rgba(26,18,8,0.75)', fontSize: 15, lineHeight: 1.6 }}>{children}</span>
   </div>
 );
 
 const Warn = ({ children }) => (
   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10 }}>
     <AlertTriangle style={{ color: '#f59e0b', flexShrink: 0, marginTop: 2 }} size={16} />
-    <span style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.6 }}>{children}</span>
+    <span style={{ color: 'rgba(26,18,8,0.65)', fontSize: 15, lineHeight: 1.6 }}>{children}</span>
   </div>
 );
 
@@ -43,29 +43,29 @@ export default function SortedPrivacy() {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #080a0f 0%, #1a0f2a 100%)', padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif', color: '#fff' }}>
+    <div style={{ minHeight: '100vh', background: '#faf8f5', padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif', color: '#1a1208' }}>
       <div style={{ maxWidth: 680, margin: '0 auto' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 48 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-          <Shield size={32} style={{ color: '#f97316' }} />
-          <h1 style={{ margin: 0, fontSize: 'clamp(28px, 6vw, 40px)', fontWeight: 900, letterSpacing: '-0.02em' }}>
+          <Shield size={32} style={{ color: '#f5a623' }} />
+          <h1 style={{ margin: 0, fontSize: 'clamp(28px, 6vw, 40px)', fontWeight: 900, letterSpacing: '-0.02em', color: '#1a1208' }}>
             SORTED — Data Sovereignty Pledge
           </h1>
         </div>
-        <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+        <p style={{ color: 'rgba(26,18,8,0.65)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>
           Your data is yours. Full stop. Here's exactly what happens — honest, plain English, no corporate waffle.
         </p>
-        <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, marginTop: 12 }}>Last updated: April 2026</p>
+        <p style={{ color: 'rgba(26,18,8,0.4)', fontSize: 13, marginTop: 12 }}>Last updated: April 2026</p>
       </div>
 
       {/* THE PLEDGE */}
-      <div style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.04))', border: '2px solid rgba(249,115,22,0.4)', borderRadius: 16, padding: '28px 24px', marginBottom: 48 }}>
-        <p style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#fff', lineHeight: 1.7, fontStyle: 'italic' }}>
+      <div style={{ background: 'linear-gradient(135deg, rgba(245,166,35,0.08), rgba(245,166,35,0.03))', border: '2px solid rgba(245,166,35,0.3)', borderRadius: 16, padding: '28px 24px', marginBottom: 48 }}>
+        <p style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#1a1208', lineHeight: 1.7, fontStyle: 'italic' }}>
           "Whatever you're going through — we're on your side. Your letter, your situation, your data — all of it stays yours. We will never share it, sell it, or use it for anything other than helping you. Not now, not ever, not for any price."
         </p>
-        <p style={{ margin: '16px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>— The SORTED Pledge</p>
+        <p style={{ margin: '16px 0 0', fontSize: 13, color: 'rgba(26,18,8,0.4)', fontWeight: 600 }}>— The SORTED Pledge</p>
       </div>
 
       {/* WHAT HAPPENS TO YOUR LETTER */}
@@ -73,20 +73,20 @@ export default function SortedPrivacy() {
         <p style={{ marginTop: 0 }}>When you paste or upload a letter, here's the exact journey — nothing hidden:</p>
         <div style={{ margin: '20px 0' }}>
           <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
-            <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>1</span>
-            <span>Your letter text is sent over HTTPS (encrypted in transit, like online banking) to an AI model for analysis.</span>
+            <span style={{ background: '#f5a623', color: '#fff', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>1</span>
+            <span style={{ color: 'rgba(26,18,8,0.75)' }}>Your letter text is sent over HTTPS (encrypted in transit, like online banking) to an AI model for analysis.</span>
           </div>
           <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
-            <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>2</span>
-            <span>The AI reads it, generates your breakdown, and sends the result back.</span>
+            <span style={{ background: '#f5a623', color: '#fff', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>2</span>
+            <span style={{ color: 'rgba(26,18,8,0.75)' }}>The AI reads it, generates your breakdown, and sends the result back.</span>
           </div>
           <div style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
-            <span style={{ background: '#f97316', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>3</span>
-            <span>Your letter content is immediately discarded. We never log it, store it, or look at it.</span>
+            <span style={{ background: '#f5a623', color: '#fff', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>3</span>
+            <span style={{ color: 'rgba(26,18,8,0.75)' }}>Your letter content is immediately discarded. We never log it, store it, or look at it.</span>
           </div>
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-            <span style={{ background: '#22c55e', color: '#000', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>✓</span>
-            <span>The result lives in your browser only. Nothing is saved anywhere unless you choose to email it to yourself.</span>
+            <span style={{ background: '#22c55e', color: '#fff', fontWeight: 900, fontSize: 12, borderRadius: 4, padding: '2px 8px', flexShrink: 0, marginTop: 2 }}>✓</span>
+            <span style={{ color: 'rgba(26,18,8,0.75)' }}>The result lives in your browser only. Nothing is saved anywhere unless you choose to email it to yourself.</span>
           </div>
         </div>
       </Section>
@@ -111,15 +111,15 @@ export default function SortedPrivacy() {
         <p>Here's how it works — completely transparent:</p>
         <div style={{ margin: '20px 0', background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: 10, padding: '16px' }}>
           <p style={{ fontSize: 13, fontWeight: 600, color: '#22c55e', margin: '0 0 10px' }}>The Anonymization:</p>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', margin: '0 0 10px', lineHeight: 1.65 }}>
+          <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: '0 0 10px', lineHeight: 1.65 }}>
             After we analyze your letter, we create an <strong>anonymized summary</strong>. We strip out: names, emails, amounts, dates, addresses. What's left? The pattern — the type of problem, the severity, what advice worked.
           </p>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: 1.65 }}>
+          <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.65 }}>
             Think of it like case law. "Smith v. Jones" becomes "Claimant v. Defendant" — the legal reasoning stays valuable forever.
           </p>
         </div>
-        <p style={{ marginTop: 16, marginBottom: 12 }}>Why? Because it makes us smarter. After 1,000 cases, we spot patterns that help the next person:</p>
-        <ul style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.75, paddingLeft: 20, margin: 0 }}>
+        <p style={{ marginTop: 16, marginBottom: 12, color: 'rgba(26,18,8,0.65)' }}>Why? Because it makes us smarter. After 1,000 cases, we spot patterns that help the next person:</p>
+        <ul style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.75, paddingLeft: 20, margin: 0 }}>
           <li>"Last 50 council tax letters like this — these 3 clauses always backfire"</li>
           <li>"Employment contracts with this language? People get better outcomes if they push back on X"</li>
           <li>"Debt letters from this organization — here's what actually works"</li>
@@ -175,13 +175,13 @@ export default function SortedPrivacy() {
       </Section>
 
       {/* CONTACT */}
-      <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '24px 20px', textAlign: 'center' }}>
-        <p style={{ margin: '0 0 8px', fontSize: 15, fontWeight: 700, color: '#fff' }}>Questions? Challenge us.</p>
-        <p style={{ margin: '0 0 16px', color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>If you think we're falling short of this pledge, tell us. We mean it.</p>
-        <a href="mailto:family@uf51.love" style={{ color: '#f97316', fontWeight: 700, fontSize: 15 }}>family@uf51.love</a>
+      <div style={{ background: 'rgba(245,166,35,0.05)', border: '1px solid rgba(245,166,35,0.2)', borderRadius: 12, padding: '24px 20px', textAlign: 'center' }}>
+        <p style={{ margin: '0 0 8px', fontSize: 15, fontWeight: 700, color: '#1a1208' }}>Questions? Challenge us.</p>
+        <p style={{ margin: '0 0 16px', color: 'rgba(26,18,8,0.55)', fontSize: 14 }}>If you think we're falling short of this pledge, tell us. We mean it.</p>
+        <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 700, fontSize: 15 }}>family@uf51.love</a>
       </div>
 
-      <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: 12, marginTop: 40 }}>
+      <p style={{ textAlign: 'center', color: 'rgba(26,18,8,0.35)', fontSize: 12, marginTop: 40 }}>
         SORTED is part of Universal Frequency 51 — built to help people, not harvest them.
       </p>
     </div>
