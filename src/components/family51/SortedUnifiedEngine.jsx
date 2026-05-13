@@ -104,7 +104,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           ? 'transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)' // ease-out up
           : 'transform 0.22s cubic-bezier(0.4, 0, 1, 1)',    // ease-in down
         willChange: 'transform',
-        background: '#0d0a08',
+        background: '#faf8f5',
         overflowY: 'auto',
         overflowX: 'hidden',
         display: 'flex',
@@ -119,7 +119,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           onClick={handleBack}
           style={{
             display: 'flex', alignItems: 'center', gap: 5,
-            fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)',
+            fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.35)',
             letterSpacing: '0.08em', background: 'none', border: 'none',
             marginBottom: 16,
           }}
@@ -174,7 +174,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         </AnimatePresence>
 
         {/* BOTTOM NAV — pure CSS, no Framer on these */}
-        <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(245,166,35,0.2)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {[
             { id: 'letter',   label: 'DECODE',  color: '#f5a623' },
             { id: 'reply',    label: 'REPLY',   color: '#f5a623' },
@@ -187,9 +187,9 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
               style={{
                 padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
                 letterSpacing: '0.1em',
-                border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(255,255,255,0.08)'}`,
-                background: activeTool === t.id ? `${t.color}15` : 'transparent',
-                color: activeTool === t.id ? t.color : 'rgba(255,255,255,0.3)',
+                border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(26,18,8,0.12)'}`,
+                background: activeTool === t.id ? `${t.color}12` : 'transparent',
+                color: activeTool === t.id ? t.color : 'rgba(26,18,8,0.35)',
               }}
             >
               {t.label}

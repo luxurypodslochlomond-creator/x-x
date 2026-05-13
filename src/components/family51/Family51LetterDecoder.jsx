@@ -566,7 +566,7 @@ function SendBreakdownByEmail({ result, accentColor }) {
 }
 
 function Label({ children }) {
-  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', marginBottom: 0 }}>{children}</p>;
+  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.35)', marginBottom: 0 }}>{children}</p>;
 }
 
 function Chip({ active, color, onClick, children }) {
@@ -596,6 +596,6 @@ function ResultCard({ label, color, children }) {
 
 const secondaryBtn = {
   flex: 1, padding: '11px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-  letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)',
-  background: 'transparent', color: 'rgba(255,255,255,0.4)', transition: 'all 0.15s',
+  letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)',
+  background: 'transparent', color: 'rgba(26,18,8,0.4)', transition: 'all 0.15s',
 };
