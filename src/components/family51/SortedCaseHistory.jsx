@@ -214,7 +214,7 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      style={{ border: `1px solid ${expanded ? tool.color + '45' : tool.color + '20'}`, borderRadius: 14, background: expanded ? `${tool.color}08` : 'rgba(255,255,255,0.02)', overflow: 'hidden', transition: 'border-color 0.2s, background 0.2s' }}
+      style={{ border: `1px solid ${expanded ? tool.color + '55' : tool.color + '25'}`, borderRadius: 14, background: expanded ? `${tool.color}08` : '#ffffff', overflow: 'hidden', transition: 'border-color 0.2s, background 0.2s' }}
     >
       {/* HEADER */}
       <div onClick={() => setExpanded(!expanded)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', cursor: 'pointer', userSelect: 'none' }}>
@@ -225,7 +225,7 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
             {caseItem.related_case_id && (
               <span style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.08em' }}>↩ LINKED CASE</span>
             )}
-            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 'auto' }}>{formatDate(caseItem.created_date)}</span>
+            <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', marginLeft: 'auto' }}>{formatDate(caseItem.created_date)}</span>
           </div>
           {editing ? (
             <div onClick={e => e.stopPropagation()} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
@@ -234,26 +234,26 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
                 value={editValue}
                 onChange={e => setEditValue(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') handleSaveEdit(); if (e.key === 'Escape') setEditing(false); }}
-                style={{ flex: 1, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 6, padding: '5px 9px', fontSize: 13, color: '#fff', outline: 'none', fontFamily: 'inherit' }}
+                style={{ flex: 1, background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.2)', borderRadius: 6, padding: '5px 9px', fontSize: 13, color: '#1a1208', outline: 'none', fontFamily: 'inherit' }}
               />
               <button onClick={handleSaveEdit} style={{ fontSize: 10, fontWeight: 900, color: '#22c55e', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 5, padding: '4px 9px', cursor: 'pointer' }}>SAVE</button>
-              <button onClick={() => setEditing(false)} style={{ fontSize: 10, fontWeight: 800, color: 'rgba(255,255,255,0.3)', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 5, padding: '4px 8px', cursor: 'pointer' }}>✕</button>
+              <button onClick={() => setEditing(false)} style={{ fontSize: 10, fontWeight: 800, color: 'rgba(26,18,8,0.35)', background: 'transparent', border: '1px solid rgba(26,18,8,0.1)', borderRadius: 5, padding: '4px 8px', cursor: 'pointer' }}>✕</button>
             </div>
           ) : (
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <p style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.35, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+              <p style={{ fontSize: 13, fontWeight: 600, color: '#1a1208', margin: 0, lineHeight: 1.35, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
                 {caseItem.summary || 'Tap to view analysis'}
               </p>
               <button
                 onClick={e => { e.stopPropagation(); setEditing(true); setEditValue(caseItem.summary || ''); }}
-                style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', padding: '2px 4px', color: 'rgba(255,255,255,0.2)', fontSize: 10 }}
+                style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', padding: '2px 4px', color: 'rgba(26,18,8,0.25)', fontSize: 10 }}
                 title="Edit note"
               >✎</button>
             </div>
           )}
         </div>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ transition: 'transform 0.2s', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0 }}>
-          <path d="M3 5l4 4 4-4" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 5l4 4 4-4" stroke="rgba(26,18,8,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
 
@@ -296,9 +296,9 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
                   style={{
                     display: 'flex', alignItems: 'center', gap: 6, padding: '11px 14px', borderRadius: 10,
                     fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer',
-                    border: confirmDelete ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(255,255,255,0.1)',
+                    border: confirmDelete ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(26,18,8,0.1)',
                     background: confirmDelete ? 'rgba(239,68,68,0.12)' : 'transparent',
-                    color: confirmDelete ? '#ef4444' : 'rgba(255,255,255,0.25)',
+                    color: confirmDelete ? '#ef4444' : 'rgba(26,18,8,0.3)',
                     transition: 'all 0.15s',
                   }}
                 >
@@ -352,19 +352,19 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
     return (
       <div style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px', textAlign: 'center' }}>
         <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 12 }}>SAVE YOUR CASES</div>
-          <h2 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 900, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.02em' }}>Upgrade to save forever</h2>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6 }}>
+          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.35)', marginBottom: 12 }}>SAVE YOUR CASES</div>
+          <h2 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 900, color: '#1a1208', margin: '0 0 12px', letterSpacing: '-0.02em' }}>Upgrade to save forever</h2>
+          <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.55)', margin: 0, lineHeight: 1.6 }}>
             Right now, your cases disappear when you close the browser. Premium saves them forever — decrypt anytime, delete whenever.
           </p>
         </div>
         <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', marginBottom: 20 }}>
-          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.5 }}>
-            <strong style={{ color: '#f97316' }}>$9.99/month</strong> — unlimited cases, your vault, delete whenever. Cancel anytime.
+          <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.5 }}>
+            <strong style={{ color: '#d97706' }}>$9.99/month</strong> — unlimited cases, your vault, delete whenever. Cancel anytime.
           </p>
         </div>
-        <button onClick={() => window.scrollTo(0, 0)} style={{ width: '100%', padding: '14px 0', borderRadius: 12, background: '#f97316', border: '1px solid #f97316', color: '#000', fontSize: 13, fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer', marginBottom: 12 }}>UPGRADE NOW</button>
-        <button onClick={() => window.history.back()} style={{ width: '100%', padding: '12px 0', borderRadius: 12, background: 'transparent', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.5)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>BACK</button>
+        <button onClick={() => window.scrollTo(0, 0)} style={{ width: '100%', padding: '14px 0', borderRadius: 12, background: '#f97316', border: '1px solid #f97316', color: '#fff', fontSize: 13, fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer', marginBottom: 12 }}>UPGRADE NOW</button>
+        <button onClick={() => window.history.back()} style={{ width: '100%', padding: '12px 0', borderRadius: 12, background: 'transparent', border: '1px solid rgba(26,18,8,0.15)', color: 'rgba(26,18,8,0.45)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>BACK</button>
       </div>
     );
   }
@@ -374,17 +374,17 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
 
       {/* HEADER */}
       <div style={{ marginBottom: 20 }}>
-        <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>ON THIS DEVICE</div>
+        <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.35)', marginBottom: 4 }}>ON THIS DEVICE</div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-          <div style={{ fontSize: 22, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>MY CASES</div>
-          {!isPremium && <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{cases.length} / {FREE_CASE_LIMIT} saved</div>}
+          <div style={{ fontSize: 22, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em' }}>MY CASES</div>
+          {!isPremium && <div style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)' }}>{cases.length} / {FREE_CASE_LIMIT} saved</div>}
           {isPremium && <div style={{ fontSize: 10, fontWeight: 800, color: '#22c55e', border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.1)', borderRadius: 4, padding: '2px 8px' }}>PREMIUM</div>}
         </div>
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: '6px 0 0', lineHeight: 1.5 }}>
+        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.4)', margin: '6px 0 0', lineHeight: 1.5 }}>
           {isPremium ? 'Saved to your vault. Yours to keep forever.' : 'Saved locally on this device. Nothing leaves your phone.'}
         </p>
         {!isPremium && cases.length >= FREE_CASE_LIMIT && (
-          <div style={{ marginTop: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', fontSize: 12, color: 'rgba(255,255,255,0.55)', lineHeight: 1.5 }}>
+          <div style={{ marginTop: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', fontSize: 12, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>
             <span style={{ color: '#f97316', fontWeight: 800 }}>3 cases saved</span> — newest replaces oldest. Subscribe for unlimited storage.
           </div>
         )}
@@ -392,7 +392,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
           <motion.button
             onClick={handleWipeAll}
             whileTap={{ scale: 0.95 }}
-            style={{ marginTop: 12, padding: '8px 14px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer', border: confirmWipe ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(255,255,255,0.1)', background: confirmWipe ? 'rgba(239,68,68,0.12)' : 'transparent', color: confirmWipe ? '#ef4444' : 'rgba(255,255,255,0.25)', transition: 'all 0.15s', display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            style={{ marginTop: 12, padding: '8px 14px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer', border: confirmWipe ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(26,18,8,0.1)', background: confirmWipe ? 'rgba(239,68,68,0.12)' : 'transparent', color: confirmWipe ? '#ef4444' : 'rgba(26,18,8,0.3)', transition: 'all 0.15s', display: 'inline-flex', alignItems: 'center', gap: 6 }}
           >
             <Trash2 size={11} />
             {confirmWipe ? 'CONFIRM DELETE FOREVER' : 'WIPE ALL CASES'}
@@ -414,9 +414,9 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
               onClick={() => setFilter(tab.id)}
               style={{
                 padding: '5px 12px', borderRadius: 20, fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer',
-                border: `1px solid ${filter === tab.id ? tab.color + '70' : 'rgba(255,255,255,0.1)'}`,
-                background: filter === tab.id ? `${tab.color}15` : 'transparent',
-                color: filter === tab.id ? tab.color : 'rgba(255,255,255,0.35)',
+                border: `1px solid ${filter === tab.id ? tab.color + '70' : 'rgba(26,18,8,0.12)'}`,
+                background: filter === tab.id ? `${tab.color}15` : 'rgba(26,18,8,0.03)',
+                color: filter === tab.id ? tab.color : 'rgba(26,18,8,0.4)',
                 transition: 'all 0.15s',
               }}
             >
@@ -435,10 +435,10 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
               <path d="M10 11h12M10 15h12M10 19h8" stroke="rgba(249,115,22,0.3)" strokeWidth="1.3" strokeLinecap="round"/>
             </svg>
           </div>
-          <p style={{ fontSize: 14, fontWeight: 700, color: 'rgba(255,255,255,0.5)', margin: '0 0 6px' }}>
+          <p style={{ fontSize: 14, fontWeight: 700, color: 'rgba(26,18,8,0.5)', margin: '0 0 6px' }}>
             {cases.length === 0 ? 'No cases yet' : 'No cases of this type'}
           </p>
-          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)', margin: 0, lineHeight: 1.6 }}>
             {cases.length === 0 ? 'Decode a letter — it\'ll appear here automatically.' : 'Try a different filter.'}
           </p>
         </div>

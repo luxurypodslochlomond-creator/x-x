@@ -261,7 +261,7 @@ export default function Family51Page() {
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.45)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
                 <span style={{ color: '#1a1208' }}>Official letters</span>{' '}
-                <span style={{ color: '#d97706' }}>terrify people.</span>
+                <span style={{ color: '#d97706' }}>leave people stuck.</span>
               </h2>
             </div>
 
@@ -320,7 +320,7 @@ export default function Family51Page() {
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#d97706', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.9 }}>Letters · Scams · Disputes · Replies</div>
               <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
-                Got a scary letter?<br />
+                Got a letter you don't understand?<br />
                 <span style={{ color: '#f5a623' }}>We'll sort it.</span>
                 <span style={{ color: 'rgba(26,18,8,0.4)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
               </h1>
@@ -490,7 +490,7 @@ export default function Family51Page() {
               <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.65)', margin: '0 0 12px', lineHeight: 1.6 }}>
                 You got your 10 free decodes. You understand what the letter means now. That's the hardest part done. Premium helps you finish it — draft the reply, resolve the dispute, follow through. {geoPrice.inline}/month.
               </p>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: '0 0 4px', lineHeight: 1.5 }}>
+              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.45)', margin: '0 0 4px', lineHeight: 1.5 }}>
                 Cancel anytime. Nothing stored. Not legal advice.
               </p>
             </div>
@@ -500,7 +500,7 @@ export default function Family51Page() {
             <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
               <button
                 onClick={() => setShowMauro(true)}
-                style={{ width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', background: 'none', cursor: 'pointer', letterSpacing: '0.02em' }}
+                style={{ width: '100%', textAlign: 'center', fontSize: 13, color: 'rgba(26,18,8,0.45)', fontWeight: 600, padding: '12px', borderRadius: 8, border: '1px solid rgba(26,18,8,0.12)', background: 'none', cursor: 'pointer', letterSpacing: '0.02em' }}
               >
                 Got questions? Talk to SORTED AI
               </button>
