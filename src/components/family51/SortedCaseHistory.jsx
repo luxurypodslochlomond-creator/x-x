@@ -404,7 +404,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
       {cases.length > 0 && (
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
           {[
-            { id: 'all',      label: 'ALL',      color: '#fff' },
+            { id: 'all',      label: 'ALL',      color: '#1a1208' },
             { id: 'letter',   label: 'DECODED',  color: '#f97316' },
             { id: 'reply',    label: 'REPLIES',  color: '#06b6d4' },
             { id: 'conflict', label: 'DISPUTES', color: '#ef4444' },
