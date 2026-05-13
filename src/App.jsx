@@ -201,8 +201,8 @@ const AuthenticatedApp = () => {
       <Route path="/Family51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><RedirectToSorted /></Suspense>} />
       <Route path="/Family51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51TermsPage /></Suspense>} />
       <Route path="/Family51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51PrivacyPage /></Suspense>} />
-      <Route path="/SortedTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SortedTermsPage /></Suspense>} />
-      <Route path="/SortedPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SortedPrivacyPage /></Suspense>} />
+      <Route path="/SortedTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="SortedTerms"><SortedTermsPage /></LayoutWrapper></Suspense>} />
+      <Route path="/SortedPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="SortedPrivacy"><SortedPrivacyPage /></LayoutWrapper></Suspense>} />
       <Route path="/SortedPressRelease" element={<SortedLayout currentPage="SortedPressRelease"><SortedPressReleasePage /></SortedLayout>} />
       <Route path="/SortedInvestorPress" element={<SortedLayout currentPage="SortedInvestorPress"><SortedInvestorPressPage /></SortedLayout>} />
       <Route path="/PetSounds51InvestorPress" element={<SortedLayout currentPage="PetSounds51InvestorPress"><PetSounds51InvestorPressPage /></SortedLayout>} />
