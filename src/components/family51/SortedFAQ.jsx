@@ -154,16 +154,16 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
       style={{ maxWidth: 560, margin: '0 auto', padding: '40px 20px 60px' }}
     >
       <div style={{ textAlign: 'center', marginBottom: 40 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>GOT QUESTIONS?</div>
+        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.4)', marginBottom: 14 }}>GOT QUESTIONS?</div>
         <h2 style={{ fontSize: 'clamp(24px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
-          <span style={{ color: '#fff' }}>Honest answers</span>{' '}
+          <span style={{ color: '#1a1208' }}>Honest answers</span>{' '}
           <span style={{ color: accentColor }}>from people who built this</span>
         </h2>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {FAQ_ITEMS.map((category, catIdx) => (
-          <div key={catIdx} style={{ borderRadius: 12, overflow: 'hidden', border: `1px solid ${openCategory === catIdx ? accentColor + '40' : 'rgba(255,255,255,0.08)'}`, background: openCategory === catIdx ? `${accentColor}08` : 'rgba(255,255,255,0.02)' }}>
+          <div key={catIdx} style={{ borderRadius: 12, overflow: 'hidden', border: `1px solid ${openCategory === catIdx ? accentColor + '50' : 'rgba(26,18,8,0.12)'}`, background: openCategory === catIdx ? `${accentColor}08` : 'rgba(26,18,8,0.02)' }}>
             {/* CATEGORY HEADER */}
             <button
               onClick={() => setOpenCategory(openCategory === catIdx ? null : catIdx)}
@@ -203,7 +203,7 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
                             display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, transition: 'all 0.2s'
                           }}
                         >
-                          <span style={{ fontSize: 13, fontWeight: 600, color: '#fff', textAlign: 'left', lineHeight: 1.4 }}>
+                          <span style={{ fontSize: 13, fontWeight: 600, color: '#1a1208', textAlign: 'left', lineHeight: 1.4 }}>
                             {item.q}
                           </span>
                           <motion.div
@@ -224,7 +224,7 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
                               transition={{ duration: 0.15 }}
                               style={{ borderTop: `1px solid ${accentColor}10`, background: `${accentColor}06`, padding: '12px 18px' }}
                             >
-                              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.6 }}>
+                              <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0, lineHeight: 1.6 }}>
                                 {item.a}
                               </p>
                             </motion.div>
@@ -250,12 +250,12 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
             <span style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.2em', color: '#eab308' }}>HARDSHIP ACCESS</span>
           </div>
 
-          <h3 style={{ fontSize: 20, fontWeight: 900, color: '#fff', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+          <h3 style={{ fontSize: 20, fontWeight: 900, color: '#1a1208', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
             Can't afford it right now?<br />
-            <span style={{ color: '#eab308' }}>We've still got you.</span>
+            <span style={{ color: '#d97706' }}>We've still got you.</span>
           </h3>
 
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: '0 0 20px', lineHeight: 1.65 }}>
+          <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', margin: '0 0 20px', lineHeight: 1.65 }}>
             No forms. No means testing. No judgment. Just email us — tell us what's going on — and we'll sort out free access. Simple as that.
           </p>
 
@@ -278,13 +278,13 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
           </a>
 
           {/* Sponsor seed */}
-          <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid rgba(26,18,8,0.08)', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M7 1.5L8.5 5H12L9 7.5L10 11L7 9L4 11L5 7.5L2 5H5.5L7 1.5Z" stroke="rgba(255,255,255,0.3)" strokeWidth="1.1" strokeLinejoin="round" fill="none" />
+                <path d="M7 1.5L8.5 5H12L9 7.5L10 11L7 9L4 11L5 7.5L2 5H5.5L7 1.5Z" stroke="rgba(26,18,8,0.3)" strokeWidth="1.1" strokeLinejoin="round" fill="none" />
               </svg>
             </div>
-            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', margin: 0, lineHeight: 1.5 }}>
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', margin: 0, lineHeight: 1.5 }}>
               Hardship access is currently funded by UF51. We're actively seeking bank &amp; financial services partners to sponsor free access at scale — making legal help truly universal.
             </p>
           </div>
@@ -293,8 +293,8 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
       </div>
 
       <div style={{ marginTop: 12, padding: '14px 18px', background: `${accentColor}05`, border: `1px solid ${accentColor}12`, borderRadius: 12, textAlign: 'center' }}>
-        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0, lineHeight: 1.6 }}>
-          Got a question not answered here? Email <strong style={{ color: 'rgba(255,255,255,0.6)' }}>family@uf51.love</strong> — we'll answer and add it to the FAQ.
+        <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0, lineHeight: 1.6 }}>
+          Got a question not answered here? Email <strong style={{ color: '#d97706' }}>family@uf51.love</strong> — we'll answer and add it to the FAQ.
         </p>
       </div>
     </motion.div>
