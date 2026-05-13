@@ -449,7 +449,7 @@ Don't worry about formatting. Just get it all in."
           )}
 
           {/* SUBTLE TRUST LINE */}
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textAlign: 'center', margin: 0, letterSpacing: '0.03em' }}>
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', textAlign: 'center', margin: 0, letterSpacing: '0.03em' }}>
             Nothing stored. Processed and gone. For long documents, snap just the key page.
           </p>
         </div>

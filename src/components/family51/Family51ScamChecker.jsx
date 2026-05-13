@@ -215,11 +215,12 @@ Return JSON with these exact fields:
 
 Copy exactly what it says — every word helps us check it.`}
             style={{
-              width: '100%', height: 200, background: 'rgba(255,255,255,0.03)',
-              border: `1px solid ${inputText ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
-              borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
+              width: '100%', height: 200, background: 'rgba(26,18,8,0.03)',
+              border: `1px solid ${inputText ? accentColor + '60' : 'rgba(26,18,8,0.15)'}`,
+              borderRadius: 14, color: '#1a1208', fontSize: 14, padding: '16px 18px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
               transition: 'border-color 0.2s', boxSizing: 'border-box',
+              caretColor: accentColor,
             }}
           />
 
@@ -233,24 +234,24 @@ Copy exactly what it says — every word helps us check it.`}
             </motion.button>
           ) : (
             <div style={{ display: 'flex', gap: 10 }}>
-              <motion.button whileTap={{ scale: 0.96 }} onClick={() => cameraInputRef.current?.click()} style={{
-                flex: 2, padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
-                letterSpacing: '0.06em', cursor: 'pointer',
-                border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                  <circle cx="12" cy="13" r="4"/>
-                </svg>
-                SNAP A PHOTO
-              </motion.button>
+               <motion.button whileTap={{ scale: 0.96 }} onClick={() => cameraInputRef.current?.click()} style={{
+                 flex: 2, padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
+                 letterSpacing: '0.06em', cursor: 'pointer',
+                 border: `2px solid ${accentColor}`, background: accentColor, color: '#000',
+                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+               }}>
+                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                   <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                   <circle cx="12" cy="13" r="4"/>
+                 </svg>
+                 SNAP A PHOTO
+               </motion.button>
               <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()} style={{
-                flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.06em', cursor: 'pointer',
-                border: `1px solid rgba(255,255,255,0.15)`, background: 'transparent', color: 'rgba(255,255,255,0.5)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-              }}>
+                 flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
+                 letterSpacing: '0.06em', cursor: 'pointer',
+                 border: `1px solid rgba(26,18,8,0.15)`, background: 'transparent', color: 'rgba(26,18,8,0.55)',
+                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+               }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="17 8 12 3 7 8"/>
@@ -261,7 +262,7 @@ Copy exactly what it says — every word helps us check it.`}
             </div>
           )}
 
-          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', margin: 0 }}>
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', textAlign: 'center', margin: 0 }}>
             Free forever. Nothing stored. Processed and gone instantly.
           </p>
         </div>

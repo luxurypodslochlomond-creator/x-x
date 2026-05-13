@@ -256,7 +256,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
   return (
     <div className="space-y-5">
-      <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
+      <style>{`textarea::placeholder { color: rgba(26,18,8,0.55) !important; }`}</style>
 
       {/* CONNECTED CASE BANNER */}
       {prefillContext?.related_case_id && (
