@@ -384,7 +384,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             {/* TONE SWITCHER — visible, real-time */}
             <div style={{ background: accentColor + '08', border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '14px 16px' }}>
               <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 4px' }}>NEED A DIFFERENT TONE?</p>
-              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
+              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.65)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 {TONES.map(t => (
                   <motion.button
@@ -528,7 +528,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 }
 
 function Label({ children }) {
-  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.4)', margin: 0 }}>{children}</p>;
+   return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.65)', margin: 0 }}>{children}</p>;
 }
 
 function Chip({ active, color, onClick, children }) {
