@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 
 // SORTED AI — helpdesk that's human, not legal.
-const SYSTEM_PROMPT = `You are SORTED AI, the human side of SORTED. You're here to help people understand what SORTED does, answer questions about pricing or access, and cheer them on.
+const SYSTEM_PROMPT = `You are SORTED AI, the helpful side of SORTED. You're here to answer questions about how SORTED works, pricing, access, and support people through their legal worries.
 
 What you do: decode scary letters, help draft replies, guide people through disputes. You're NOT a lawyer — you just help people understand official letters so they feel less alone and more in control.
 
@@ -54,8 +54,8 @@ export default function MauroChat() {
           <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
             <div style={{
               maxWidth: '85%', padding: '10px 14px', borderRadius: m.role === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
-              background: m.role === 'user' ? 'rgba(249,115,22,0.12)' : 'rgba(26,18,8,0.04)',
-              border: m.role === 'user' ? '1px solid rgba(249,115,22,0.3)' : '1px solid rgba(26,18,8,0.1)',
+              background: m.role === 'user' ? 'rgba(249,115,22,0.1)' : 'rgba(26,18,8,0.03)',
+              border: m.role === 'user' ? '1px solid rgba(249,115,22,0.28)' : '1px solid rgba(26,18,8,0.08)',
               fontSize: 13, color: '#1a1208', lineHeight: 1.55
             }}>
               {m.text}
@@ -64,7 +64,7 @@ export default function MauroChat() {
         ))}
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <div style={{ padding: '10px 14px', borderRadius: '14px 14px 14px 4px', background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.1)' }}>
+            <div style={{ padding: '10px 14px', borderRadius: '14px 14px 14px 4px', background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}>
               <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 {[0, 1, 2].map(i => (
                   <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', background: '#f97316', animation: `pulse 1.2s ease-in-out ${i * 0.2}s infinite` }} />
@@ -79,17 +79,17 @@ export default function MauroChat() {
       {/* INPUT */}
       <div style={{ display: 'flex', gap: 8 }}>
         <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && send()}
-          placeholder="Ask anything..."
-          style={{
-            flex: 1, background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.15)',
-            borderRadius: 10, padding: '11px 14px', fontSize: 13, color: '#1a1208', outline: 'none',
-            fontFamily: 'inherit'
-          }}
-          onFocus={e => e.target.style.background = 'rgba(26,18,8,0.07)'}
-          onBlur={e => e.target.style.background = 'rgba(26,18,8,0.04)'}
+           value={input}
+           onChange={e => setInput(e.target.value)}
+           onKeyDown={e => e.key === 'Enter' && send()}
+           placeholder="Ask anything..."
+           style={{
+             flex: 1, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.12)',
+             borderRadius: 10, padding: '11px 14px', fontSize: 13, color: '#1a1208', outline: 'none',
+             fontFamily: 'inherit'
+           }}
+           onFocus={e => e.target.style.background = 'rgba(26,18,8,0.06)'}
+           onBlur={e => e.target.style.background = 'rgba(26,18,8,0.03)'}
         />
         <button
           onClick={send}
@@ -97,22 +97,22 @@ export default function MauroChat() {
           style={{
             padding: '11px 18px', borderRadius: 10, fontSize: 12, fontWeight: 800,
             letterSpacing: '0.06em', border: 'none', cursor: loading || !input.trim() ? 'not-allowed' : 'pointer',
-            background: loading || !input.trim() ? 'rgba(249,115,22,0.2)' : '#f97316',
-            color: loading || !input.trim() ? 'rgba(255,255,255,0.3)' : '#000',
+            background: loading || !input.trim() ? 'rgba(249,115,22,0.15)' : '#f97316',
+            color: loading || !input.trim() ? 'rgba(26,18,8,0.35)' : '#000',
             transition: 'all 0.15s', whiteSpace: 'nowrap'
           }}
         >
           SEND
         </button>
         <button
-          title="Voice"
-          style={{
-            padding: '11px 14px', borderRadius: 10, fontSize: 12, border: '1px solid rgba(26,18,8,0.15)',
-            background: 'rgba(26,18,8,0.04)', color: 'rgba(26,18,8,0.5)', cursor: 'pointer',
-            transition: 'all 0.15s'
-          }}
-          onMouseEnter={e => { e.target.style.background = 'rgba(26,18,8,0.08)'; e.target.style.color = 'rgba(26,18,8,0.7)'; }}
-          onMouseLeave={e => { e.target.style.background = 'rgba(26,18,8,0.04)'; e.target.style.color = 'rgba(26,18,8,0.5)'; }}
+           title="Voice"
+           style={{
+             padding: '11px 14px', borderRadius: 10, fontSize: 12, border: '1px solid rgba(26,18,8,0.12)',
+             background: 'rgba(26,18,8,0.03)', color: 'rgba(26,18,8,0.45)', cursor: 'pointer',
+             transition: 'all 0.15s'
+           }}
+           onMouseEnter={e => { e.target.style.background = 'rgba(26,18,8,0.06)'; e.target.style.color = 'rgba(26,18,8,0.65)'; }}
+           onMouseLeave={e => { e.target.style.background = 'rgba(26,18,8,0.03)'; e.target.style.color = 'rgba(26,18,8,0.45)'; }}
         >
           🎤
         </button>

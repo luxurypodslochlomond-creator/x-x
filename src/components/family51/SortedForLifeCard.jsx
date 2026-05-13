@@ -41,14 +41,14 @@ export default function SortedForLifeCard({ compact = false }) {
       style={{
         marginTop: compact ? 0 : 24,
         padding: compact ? '24px 20px' : '28px 24px',
-        border: '1.5px solid rgba(249,115,22,0.5)',
+        border: '1.5px solid rgba(245,166,35,0.5)',
         borderRadius: 18,
-        background: 'linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(239,68,68,0.05) 100%)',
+        background: 'linear-gradient(135deg, rgba(249,115,22,0.08) 0%, rgba(217,119,6,0.04) 100%)',
       }}
     >
       {/* EMOTIONAL HEADLINE */}
       <div style={{ marginBottom: 20 }}>
-        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(249,115,22,0.6)', margin: '0 0 8px' }}>NEVER BE STUCK AGAIN</p>
+        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#f97316', margin: '0 0 8px' }}>NEVER BE STUCK AGAIN</p>
         <p style={{ fontSize: 22, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', margin: '0 0 6px', lineHeight: 1.15 }}>
           Every letter.<br />Every reply.<br />We've got you.
         </p>
@@ -68,7 +68,7 @@ export default function SortedForLifeCard({ compact = false }) {
           { text: 'Cancel any time — no contract, no catch', bold: 'Cancel any time' },
         ].map(({ text, bold }, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(249,115,22,0.2)', border: '1px solid rgba(249,115,22,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+            <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(249,115,22,0.15)', border: '1px solid rgba(249,115,22,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
               <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
                 <path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -95,8 +95,8 @@ export default function SortedForLifeCard({ compact = false }) {
           fontSize: 15, fontWeight: 900, letterSpacing: '0.04em',
           cursor: loading ? 'not-allowed' : 'pointer',
           border: 'none',
-          background: loading ? 'rgba(249,115,22,0.25)' : '#f97316',
-          color: loading ? 'rgba(255,255,255,0.5)' : '#000',
+          background: loading ? 'rgba(249,115,22,0.2)' : '#f97316',
+          color: loading ? 'rgba(26,18,8,0.4)' : '#000',
           transition: 'all 0.2s',
         }}
       >

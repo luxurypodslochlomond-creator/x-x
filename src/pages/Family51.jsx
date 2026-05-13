@@ -121,6 +121,7 @@ export default function Family51Page() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
+      {/* Color palette: warm orange (#f97316) + light cream (#faf8f5) + deep brown (#1a1208) */}
       <style>{`
         .sorted-tap-btn { transition: opacity 0.08s; }
         .sorted-tap-btn:active { opacity: 0.5; }
