@@ -18,7 +18,7 @@ export default function SortedTermsPage() {
       </div>
 
       <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)', marginBottom: 32 }}>
-        You've got a scary letter. We help you understand it. That's it. That's SORTED.
+        You've got a letter you don't understand. We help you make sense of it. That's it. That's SORTED.
       </p>
 
       <section style={{ marginBottom: 32 }}>
