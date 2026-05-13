@@ -192,7 +192,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments';
   const isTracktPage = currentPageName.startsWith('Trackt') || currentPageName === 'TracktDashboard';
   const isCTRL51Page = currentPageName.startsWith('CTRL51');
-  const isSortedSubPage = ['SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit', 'SortedTerms', 'SortedPrivacy', 'PetSounds51InvestorPress'].includes(currentPageName);
+  const isSortedSubPage = ['SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit', 'PetSounds51InvestorPress'].includes(currentPageName);
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName) || isTracktPage;
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
@@ -661,7 +661,11 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <PetSounds51Icon8Bit size={28} animate={false} />
                 <span className="text-xl font-black" style={{ color: '#d4a017' }}>PetSounds51</span>
               </Link>
-            
+            ) : (currentPageName === 'Family51' || currentPageName === 'Sorted' || currentPageName === 'SortedTerms' || currentPageName === 'SortedPrivacy') ? (
+              <Link to={createPageUrl("Sorted")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                <COOLASFUCKSorted size={28} />
+                <span className="text-xl font-black text-amber-600">SORTED</span>
+              </Link>
             ) : (
               <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <COOLASFUCKWaves size={28} animate={true} />
@@ -815,6 +819,11 @@ const LayoutInner = ({ children, currentPageName }) => {
                 <>
                   <PetSounds51Icon8Bit size={40} animate={false} />
                   <span className="text-2xl font-black" style={{ color: '#d4a017' }}>PetSounds51</span>
+                </>
+              ) : (currentPageName === 'Family51' || currentPageName === 'Sorted' || currentPageName === 'SortedTerms' || currentPageName === 'SortedPrivacy') ? (
+                <>
+                  <COOLASFUCKSorted size={40} />
+                  <span className="text-3xl font-black text-amber-600">SORTED</span>
                 </>
               ) : (
                 <>
