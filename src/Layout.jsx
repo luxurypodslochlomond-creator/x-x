@@ -192,7 +192,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments';
   const isTracktPage = currentPageName.startsWith('Trackt') || currentPageName === 'TracktDashboard';
   const isCTRL51Page = currentPageName.startsWith('CTRL51');
-  const isSortedSubPage = ['SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit', 'SortedTerms', 'SortedPrivacy', 'PetSounds51InvestorPress'].includes(currentPageName);
+  const isSortedSubPage = ['SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit', 'PetSounds51InvestorPress'].includes(currentPageName);
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName) || isTracktPage;
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
@@ -649,7 +649,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* MOBILE HEADER */}
         {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && (
-        <header className={`lg:hidden fixed ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b ${isPS51Page ? 'border-amber-700/40' : 'border-cyan-500/30'}`}>
+        <header className={`lg:hidden sticky ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b ${isPS51Page ? 'border-amber-700/40' : 'border-cyan-500/30'}`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
               <Link to={createPageUrl("CB51")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
@@ -803,7 +803,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* DESKTOP SIDEBAR */}
         {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && (
-        <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
+        <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50 sticky`}>
           <div className="p-6 border-b border-cyan-500/30">
             <Link to={createPageUrl(isCB51Page ? "CB51" : isPS51Page ? "PetSounds51" : "Welcome")} className="flex items-center gap-3 mb-4">
               {isCB51Page ? (
