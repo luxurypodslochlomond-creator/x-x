@@ -245,7 +245,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 
         {/* CONTEXT — minimal, clear */}
         <div>
-          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
+           <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.75)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
           <textarea
             value={context}
             onChange={e => setContext(e.target.value)}
@@ -267,14 +267,14 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}>
           <span style={{ fontSize: 13 }}>📍</span>
           <div style={{ flex: 1 }}>
-            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
+            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.75)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
         </div>
 
         {/* OPTIONAL EXTRAS — collapsed */}
         <details style={{ cursor: 'pointer' }}>
-          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.75)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
             ⚙️ YOUR NAME &amp; SITUATION TYPE (optional)
           </summary>
           <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -329,7 +329,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 cursor: context.trim() ? 'pointer' : 'not-allowed',
                 border: `2px solid ${context.trim() ? accentColor : 'rgba(26,18,8,0.12)'}`,
                 background: context.trim() ? accentColor : 'rgba(26,18,8,0.03)',
-                color: context.trim() ? '#000' : 'rgba(26,18,8,0.25)',
+                color: context.trim() ? '#000' : 'rgba(26,18,8,0.65)',
                 transition: 'all 0.2s',
               }}
             >

@@ -388,6 +388,7 @@ Don't worry about formatting. Just get it all in."
               borderRadius: 14, color: '#1a1208', fontSize: 14, padding: '16px 18px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
               transition: 'border-color 0.2s', boxSizing: 'border-box',
+              caretColor: accentColor,
             }}
             onFocus={e => e.target.style.borderColor = accentColor + '80'}
             onBlur={e => e.target.style.borderColor = letterText ? accentColor + '60' : 'rgba(26,18,8,0.15)'}
@@ -464,16 +465,16 @@ Don't worry about formatting. Just get it all in."
 
       {/* OPTIONAL EXTRAS — only shown after result or when they've started typing */}
       {letterText.trim() && !result && (
-        <div style={{ paddingTop: 4 }}>
-          {/* GEO — always visible when typing */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}>
-            <span style={{ fontSize: 12 }}>📍</span>
-            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.35)' }}>LOCATION:</span>
+      <div style={{ paddingTop: 4 }}>
+       {/* GEO — always visible when typing */}
+       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}>
+         <span style={{ fontSize: 12 }}>📍</span>
+         <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.75)' }}>LOCATION:</span>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
           {/* TYPE CHIPS — collapsible optional hint */}
           <details style={{ cursor: 'pointer' }}>
-            <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+            <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.75)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
               + OPTIONAL: what type of letter? (helps accuracy)
             </summary>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>

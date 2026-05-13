@@ -292,7 +292,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
       {/* GOAL — pill chips, light */}
       <div>
-        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)', margin: '0 0 8px' }}>WHAT DO YOU WANT?</p>
+        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.75)', margin: '0 0 8px' }}>WHAT DO YOU WANT?</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {GOALS.map(g => (
             <button
@@ -315,8 +315,8 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
       {/* OPTIONAL — conflict type & evidence */}
       <details style={{ cursor: 'pointer' }}>
-        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-          + OPTIONAL: conflict type &amp; evidence
+        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.75)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+         + OPTIONAL: conflict type &amp; evidence
         </summary>
         <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* Conflict type grid */}
