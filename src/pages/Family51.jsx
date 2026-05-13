@@ -120,7 +120,7 @@ export default function Family51Page() {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0d0a08', color: '#fef3e2', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
+    <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
       <style>{`
         .sorted-tap-btn { transition: opacity 0.08s; }
         .sorted-tap-btn:active { opacity: 0.5; }
@@ -138,12 +138,12 @@ export default function Family51Page() {
       </AnimatePresence>
 
       {/* ── STICKY HEADER ──────────────────────────────────── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(13,10,8,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.3)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <motion.div whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', transition: 'opacity 0.15s' }} onClick={() => { setShowWhy(false); setShowHistory(false); setShowFAQ(false); setMenuOpen(false); }} onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
           <SortedMark />
           <div style={{ lineHeight: 1.2 }}>
-            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#ffffff' }}>SORTED</div>
-            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#f5a623', opacity: 0.85 }}>WE'VE GOT YOU</div>
+            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#1a1208' }}>SORTED</div>
+            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#d97706', opacity: 0.85 }}>WE'VE GOT YOU</div>
           </div>
         </motion.div>
 
@@ -153,7 +153,7 @@ export default function Family51Page() {
            <motion.button
              onClick={handleBack}
              whileTap={{ scale: 0.95 }}
-             style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
+             style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
            >
              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
              BACK
@@ -198,42 +198,42 @@ export default function Family51Page() {
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
          {menuOpen && !showWhy && !showFAQ && (
-           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.12 }} style={{ position: 'sticky', top: 54, zIndex: 49, background: 'rgba(13,10,8,0.97)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.15)', padding: '0 20px' }}>
+           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.12 }} style={{ position: 'sticky', top: 54, zIndex: 49, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '0 20px' }}>
                  <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
-               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fef3e2', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.08)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
-                 <WhyIcon />
-                 Why we built this
-               </button>
-               <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fef3e2', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.08)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
-                 <FAQIcon />
-                 FAQ &amp; How It Works
-               </button>
-               <Link to="/SortedTerms" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fef3e2', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.08)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
-                  <Scale className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                  Terms
-                </Link>
-                <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fff', textDecoration: 'none', borderBottom: '1px solid rgba(0,212,255,0.06)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
-                  <Eye className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                  Privacy
-                </Link>
-                <button onClick={() => { setShowMauro(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#fff', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(0,212,255,0.06)', letterSpacing: '0.02em', width: '100%', textAlign: 'left', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
-                  <Mail className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                  Say hi to SORTED AI
+               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                  <WhyIcon />
+                  Why we built this
                 </button>
-                {/* PRIVACY NOTE */}
-                <div style={{ padding: '11px 0', borderBottom: '1px solid rgba(245,166,35,0.06)' }}>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0, lineHeight: 1.6 }}>
-                    Your letter is processed by AI then immediately discarded. Nothing is stored, logged, or sold. Nothing leaves your session except what you choose to email yourself.
-                  </p>
-                </div>
-                {/* NUCLEAR CLEAR */}
-                <button
-                  onClick={() => {
-                    try { localStorage.clear(); } catch {}
-                    setMenuOpen(false);
-                    window.location.reload();
-                  }}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }}
+                <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                  <FAQIcon />
+                  FAQ &amp; How It Works
+                </button>
+                <Link to="/SortedTerms" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                   <Scale className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
+                   Terms
+                 </Link>
+                 <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.1)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                   <Eye className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
+                   Privacy
+                 </Link>
+                 <button onClick={() => { setShowMauro(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.1)', letterSpacing: '0.02em', width: '100%', textAlign: 'left', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                   <Mail className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
+                   Say hi to SORTED AI
+                 </button>
+                 {/* PRIVACY NOTE */}
+                 <div style={{ padding: '11px 0', borderBottom: '1px solid rgba(245,166,35,0.08)' }}>
+                   <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: 0, lineHeight: 1.6 }}>
+                     Your letter is processed by AI then immediately discarded. Nothing is stored, logged, or sold. Nothing leaves your session except what you choose to email yourself.
+                   </p>
+                 </div>
+                 {/* NUCLEAR CLEAR */}
+                 <button
+                   onClick={() => {
+                     try { localStorage.clear(); } catch {}
+                     setMenuOpen(false);
+                     window.location.reload();
+                   }}
+                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: 'rgba(26,18,8,0.35)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }}
                   onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
                   onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
                 >
@@ -258,19 +258,19 @@ export default function Family51Page() {
          {showWhy && (
            <motion.div key="why" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: 'easeInOut' }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE PROBLEM</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.45)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
-                <span style={{ color: '#fff' }}>Official letters</span>{' '}
-                <span style={{ color: '#f5a623' }}>terrify people.</span>
+                <span style={{ color: '#1a1208' }}>Official letters</span>{' '}
+                <span style={{ color: '#d97706' }}>terrify people.</span>
               </h2>
             </div>
 
             {/* STATS CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 40 }}>
-              <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project 2023" />
-              <StatCard number="92%" label="of serious civil legal problems in the USA receive no professional help" source="Legal Services Corp. 2022" />
-              <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health Institute" />
-              <StatCard number="£1.7B" label="UK civil legal aid budget cut by over 40% since LASPO 2013 — millions left without help" source="Law Society 2023" color="#60a5fa" />
+              <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project 2023" color="#d97706" />
+              <StatCard number="92%" label="of serious civil legal problems in the USA receive no professional help" source="Legal Services Corp. 2022" color="#d97706" />
+              <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health Institute" color="#d97706" />
+              <StatCard number="£1.7B" label="UK civil legal aid budget cut by over 40% since LASPO 2013 — millions left without help" source="Law Society 2023" color="#2563eb" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
@@ -279,23 +279,23 @@ export default function Family51Page() {
               <ProblemCard icon={<LandlordIcon />} title="Landlords" desc="Eviction warnings. Deposit disputes. Rent increases." />
               <ProblemCard icon={<CourtIcon />} title="Courts" desc="Summons. Judgments. Legal jargon you don't understand." />
             </div>
-            <div style={{ background: 'rgba(245,166,35,0.05)', border: '1px solid rgba(245,166,35,0.15)', borderRadius: 12, padding: 20, textAlign: 'center', marginBottom: 40 }}>
-              <p style={{ fontSize: 14, color: '#fff', margin: 0, lineHeight: 1.6 }}>
+            <div style={{ background: 'rgba(245,166,35,0.07)', border: '1px solid rgba(245,166,35,0.2)', borderRadius: 12, padding: 20, textAlign: 'center', marginBottom: 40 }}>
+              <p style={{ fontSize: 14, color: '#1a1208', margin: 0, lineHeight: 1.6 }}>
                 <strong>You freeze.</strong> Read it 10 times. Still don't understand. Panic.
               </p>
             </div>
-            <div style={{ background: 'rgba(245,166,35,0.05)', border: '1px solid rgba(245,166,35,0.12)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#f5a623', marginBottom: 8 }}>REAL TALK</div>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>
+            <div style={{ background: 'rgba(245,166,35,0.07)', border: '1px solid rgba(245,166,35,0.18)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#d97706', marginBottom: 8 }}>REAL TALK</div>
+              <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.8)', margin: 0, lineHeight: 1.6 }}>
                 Some people <strong>bury their head in the sand.</strong> Don't open the letter. Hope it goes away. It doesn't.
               </p>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: '12px 0 0', lineHeight: 1.5 }}>
+              <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.55)', margin: '12px 0 0', lineHeight: 1.5 }}>
                 That's when deadlines pass. Legal action follows. Things get worse.
               </p>
             </div>
             <div style={{ marginTop: 40, textAlign: 'center' }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.5)', marginBottom: 14 }}>THE SOLUTION</div>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.45)', marginBottom: 14 }}>THE SOLUTION</div>
+              <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>
                 SORTED decodes it in <strong>your language</strong>. Shows you what it means. Lists what to do next. You're not alone anymore.
               </p>
             </div>
@@ -318,22 +318,22 @@ export default function Family51Page() {
 
             {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.8 }}>Letters · Scams · Disputes · Replies</div>
-              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#fef3e2' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#d97706', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.9 }}>Letters · Scams · Disputes · Replies</div>
+              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
                 Got a scary letter?<br />
                 <span style={{ color: '#f5a623' }}>We'll sort it.</span>
-                <span style={{ color: 'rgba(254,243,226,0.4)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
+                <span style={{ color: 'rgba(26,18,8,0.4)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
               </h1>
             </motion.div>
 
             {/* PRIVACY TRUST — single line, compact */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '8px 12px', background: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.2)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 7 }}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '8px 12px', background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.3)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 7 }}>
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
                 <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
                 <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
               </svg>
               <span style={{ fontSize: 11, fontWeight: 700, color: '#f5a623' }}>Nothing leaves your device</span>
-              <span style={{ fontSize: 11, color: 'rgba(254,243,226,0.3)' }}>· No account. No storage. Ever.</span>
+              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)' }}>· No account. No storage. Ever.</span>
             </motion.div>
 
             {/* 4 TOOL BUTTONS — 2x2 grid */}
@@ -356,8 +356,8 @@ export default function Family51Page() {
                   style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '15px 13px', borderRadius: 14,
-                    border: '1.5px solid rgba(245,166,35,0.2)',
-                    background: 'rgba(245,166,35,0.04)',
+                    border: '1.5px solid rgba(245,166,35,0.35)',
+                    background: '#ffffff',
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
                     display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100,
                   }}
@@ -366,8 +366,8 @@ export default function Family51Page() {
                     {icon}
                   </div>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#fef3e2', marginBottom: 2, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
-                    <div style={{ fontSize: 10.5, color: 'rgba(254,243,226,0.38)', lineHeight: 1.35 }}>{sub}</div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', marginBottom: 2, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
+                    <div style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.45)', lineHeight: 1.35 }}>{sub}</div>
                   </div>
                 </motion.button>
               ))}
@@ -380,8 +380,8 @@ export default function Family51Page() {
             </motion.div>
 
             {/* HOW IT WORKS — always visible */}
-            <div style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 12px' }}>HOW IT WORKS</p>
+            <div style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.35)', margin: '0 0 12px' }}>HOW IT WORKS</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <WhyRow icon={<WRBolt />} text="Paste, type or photo any letter — plain English in seconds" />
                 <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, who to contact — zero jargon" />
@@ -389,8 +389,8 @@ export default function Family51Page() {
                 <WhyRow icon={<WRLock />} text="Scam checker — photo or paste any message for an instant verdict. Free forever." />
                 <WhyRow icon={<WRLock />} text="Nothing stored, nothing logged, nothing sold. Ever." />
               </div>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.22)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(255,255,255,0.4)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
+              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', margin: '12px 0 0', lineHeight: 1.5 }}>
+                10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(26,18,8,0.6)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
               </p>
             </div>
 
@@ -399,7 +399,7 @@ export default function Family51Page() {
             <SortedLiveCounter />
 
             <div style={{ marginTop: 16, textAlign: 'center' }}>
-              <button onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }} style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.15)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+              <button onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }} style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.2)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
                 <Trash2 size={10} /> CLEAR ALL MY DATA
               </button>
             </div>
@@ -444,14 +444,14 @@ export default function Family51Page() {
                 exit={{ y: 60, opacity: 0 }}
                 transition={{ duration: 0.22 }}
                 onClick={e => e.stopPropagation()}
-                style={{ width: '100%', maxWidth: 520, background: '#0d1117', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px 20px 0 0', padding: '28px 24px 40px' }}
+                style={{ width: '100%', maxWidth: 520, background: '#faf8f5', border: '1px solid rgba(245,166,35,0.2)', borderRadius: '20px 20px 0 0', padding: '28px 24px 40px' }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
                   <div>
-                    <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>AI HELPDESK</div>
-                    <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>SORTED AI</div>
+                    <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.4)', marginBottom: 4 }}>AI HELPDESK</div>
+                    <div style={{ fontSize: 18, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em' }}>SORTED AI</div>
                   </div>
-                  <button onClick={() => setShowMauro(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.3)', fontSize: 20, lineHeight: 1 }}>
+                  <button onClick={() => setShowMauro(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.3)', fontSize: 20, lineHeight: 1 }}>
                     <X className="w-5 h-5" />
                   </button>
                 </div>
@@ -484,10 +484,10 @@ export default function Family51Page() {
                 </svg>
               </div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 10px' }}>
-                <span style={{ color: '#fff' }}>You decoded it.</span><br />
-                <span style={{ color: '#f5a623' }}>Now act on it.</span>
+                <span style={{ color: '#1a1208' }}>You decoded it.</span><br />
+                <span style={{ color: '#d97706' }}>Now act on it.</span>
               </h1>
-              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', margin: '0 0 12px', lineHeight: 1.6 }}>
+              <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.65)', margin: '0 0 12px', lineHeight: 1.6 }}>
                 You got your 10 free decodes. You understand what the letter means now. That's the hardest part done. Premium helps you finish it — draft the reply, resolve the dispute, follow through. {geoPrice.inline}/month.
               </p>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: '0 0 4px', lineHeight: 1.5 }}>
@@ -520,7 +520,7 @@ function WhyRow({ icon, text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
       <span style={{ flexShrink: 0, marginTop: 1, display: 'flex', alignItems: 'center' }}>{icon}</span>
-      <span style={{ fontSize: 12, color: 'rgba(254,243,226,0.65)', lineHeight: 1.45 }}>{text}</span>
+      <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', lineHeight: 1.45 }}>{text}</span>
     </div>
   );
 }
@@ -612,7 +612,7 @@ function TrustPill({ text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
       <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#f5a623' }} />
-      <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(254,243,226,0.5)', letterSpacing: '0.05em' }}>{text}</span>
+      <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(26,18,8,0.5)', letterSpacing: '0.05em' }}>{text}</span>
     </div>
   );
 }
@@ -695,10 +695,10 @@ function EmailIcon() {
 
 function StatCard({ number, label, color = '#f5a623', source }) {
   return (
-    <div style={{ background: `${color}08`, border: `1px solid ${color}30`, borderRadius: 12, padding: 16, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <div style={{ background: `${color}10`, border: `1px solid ${color}30`, borderRadius: 12, padding: 16, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4 }}>
       <div style={{ fontSize: 'clamp(18px, 5vw, 26px)', fontWeight: 900, color }}>{number}</div>
-      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.4 }}>{label}</p>
-      {source && <p style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', margin: 0, marginTop: 4 }}>{source}</p>}
+      <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.4 }}>{label}</p>
+      {source && <p style={{ fontSize: 9, color: 'rgba(26,18,8,0.3)', margin: 0, marginTop: 4 }}>{source}</p>}
     </div>
   );
 }
@@ -707,8 +707,8 @@ function ProblemCard({ icon, title, desc }) {
   return (
     <div style={{ paddingLeft: 16, borderLeft: '2px solid rgba(245,166,35,0.25)' }}>
       <div style={{ fontSize: 24, marginBottom: 6 }}>{icon}</div>
-      <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{title}</div>
-      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0 }}>{desc}</p>
+      <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1208', marginBottom: 4 }}>{title}</div>
+      <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', margin: 0 }}>{desc}</p>
     </div>
   );
 }
@@ -717,8 +717,8 @@ function ProblemCard({ icon, title, desc }) {
 function SortedMark() {
   return (
     <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
-      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#ffffff" strokeWidth="1.8" fill="rgba(255,255,255,0.06)" />
-      <path d="M11 11V8a4 4 0 018 0v3" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#1a1208" strokeWidth="1.8" fill="rgba(26,18,8,0.06)" />
+      <path d="M11 11V8a4 4 0 018 0v3" stroke="#1a1208" strokeWidth="1.8" strokeLinecap="round" fill="none" />
       <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f5a623" strokeWidth="1.4" fill="rgba(245,166,35,0.25)" />
       <circle cx="15" cy="19" r="0.8" fill="#f5a623" />
     </svg>
