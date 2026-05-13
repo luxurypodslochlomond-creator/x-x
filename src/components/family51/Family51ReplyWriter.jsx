@@ -236,7 +236,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, marginTop: 4 }} />
             <div>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: '#06b6d4', margin: '0 0 3px' }}>CONNECTED TO YOUR DECODED LETTER</p>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.4 }}>
+              <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.5)', margin: 0, lineHeight: 1.4 }}>
                 {prefillContext.sender && prefillContext.sender !== 'Unknown' ? `From: ${prefillContext.sender}` : ''}{prefillContext.summary ? ` — ${prefillContext.summary}` : ''}
               </p>
             </div>
@@ -245,36 +245,36 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 
         {/* CONTEXT — minimal, clear */}
         <div>
-          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
           <textarea
             value={context}
             onChange={e => setContext(e.target.value)}
             autoFocus={!prefillContext}
             placeholder="Who are you writing to? What happened? What do you want?"
             style={{
-              width: '100%', height: prefillContext ? 80 : 120, background: 'rgba(255,255,255,0.03)',
-              border: `1px solid ${context ? accentColor + '40' : 'rgba(255,255,255,0.12)'}`,
-              borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
+              width: '100%', height: prefillContext ? 80 : 120, background: 'rgba(26,18,8,0.03)',
+              border: `1px solid ${context ? accentColor + '40' : 'rgba(26,18,8,0.15)'}`,
+              borderRadius: 12, color: '#1a1208', fontSize: 13, padding: '14px 16px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
               transition: 'border-color 0.2s', boxSizing: 'border-box',
             }}
             onFocus={e => e.target.style.borderColor = accentColor + '60'}
-            onBlur={e => e.target.style.borderColor = context ? accentColor + '40' : 'rgba(255,255,255,0.12)'}
+            onBlur={e => e.target.style.borderColor = context ? accentColor + '40' : 'rgba(26,18,8,0.15)'}
           />
         </div>
 
         {/* LOCATION — always visible */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}>
           <span style={{ fontSize: 13 }}>📍</span>
           <div style={{ flex: 1 }}>
-            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
+            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
         </div>
 
         {/* OPTIONAL EXTRAS — collapsed */}
         <details style={{ cursor: 'pointer' }}>
-          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
             ⚙️ YOUR NAME &amp; SITUATION TYPE (optional)
           </summary>
           <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -284,9 +284,9 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               onChange={e => setName(e.target.value)}
               placeholder="Your name (for sign-off)"
               style={{
-                width: '100%', background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10,
-                color: '#fff', fontSize: 13, padding: '11px 14px',
+                width: '100%', background: 'rgba(26,18,8,0.03)',
+                border: '1px solid rgba(26,18,8,0.12)', borderRadius: 10,
+                color: '#1a1208', fontSize: 13, padding: '11px 14px',
                 outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
               }}
             />
@@ -313,8 +313,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 ))}
               </motion.div>
               <div style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#fff', margin: '0 0 6px' }}>WRITING YOUR REPLY</p>
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>Composing a {tone} letter in {geo.country} legal context…</p>
+                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#1a1208', margin: '0 0 6px' }}>WRITING YOUR REPLY</p>
+                <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: 0 }}>Composing a {tone} letter in {geo.country} legal context…</p>
               </div>
             </motion.div>
           ) : (
@@ -384,7 +384,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             {/* TONE SWITCHER — visible, real-time */}
             <div style={{ background: accentColor + '08', border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '14px 16px' }}>
               <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 4px' }}>NEED A DIFFERENT TONE?</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
+              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 {TONES.map(t => (
                   <motion.button
@@ -396,7 +396,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                       padding: '10px 12px', borderRadius: 8, textAlign: 'center', fontSize: 11, fontWeight: 800,
                       border: `2px solid ${resultTone === t.id ? accentColor : 'rgba(255,255,255,0.12)'}`,
                       background: resultTone === t.id ? accentColor + '15' : 'rgba(255,255,255,0.02)',
-                      color: resultTone === t.id ? accentColor : 'rgba(255,255,255,0.4)',
+                      color: resultTone === t.id ? accentColor : 'rgba(26,18,8,0.45)',
                       cursor: !loading ? 'pointer' : 'not-allowed',
                       transition: 'all 0.15s', opacity: loading ? 0.5 : 1,
                       letterSpacing: '0.08em',
@@ -416,7 +416,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                   {result.key_points.map((p, i) => (
                     <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                       <span style={{ color: accentColor, fontSize: 9, paddingTop: 4, fontWeight: 800 }}>{String(i+1).padStart(2,'0')}</span>
-                      <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{p}</span>
+                      <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', lineHeight: 1.5 }}>{p}</span>
                     </div>
                   ))}
                 </div>
@@ -424,14 +424,14 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             )}
 
             {/* LETTER */}
-            <div style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, padding: '20px 22px', background: 'rgba(255,255,255,0.015)' }}>
+            <div style={{ border: '1px solid rgba(26,18,8,0.1)', borderRadius: 8, padding: '20px 22px', background: 'rgba(26,18,8,0.02)' }}>
               {result.subject_line && (
-                <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: 14, marginBottom: 18 }}>
-                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)', margin: '0 0 5px' }}>SUBJECT LINE</p>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.4 }}>{result.subject_line}</p>
+                <div style={{ borderBottom: '1px solid rgba(26,18,8,0.06)', paddingBottom: 14, marginBottom: 18 }}>
+                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(26,18,8,0.3)', margin: '0 0 5px' }}>SUBJECT LINE</p>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: '#1a1208', margin: 0, lineHeight: 1.4 }}>{result.subject_line}</p>
                 </div>
               )}
-              <pre style={{ fontSize: 13, color: 'rgba(255,255,255,0.72)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.75, margin: 0 }}>{result.letter_body}</pre>
+              <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.82)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.75, margin: 0 }}>{result.letter_body}</pre>
             </div>
 
             {/* TIP */}
@@ -440,7 +440,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 <div style={{ width: 3, borderRadius: 2, background: '#eab308', alignSelf: 'stretch', flexShrink: 0 }} />
                 <div>
                   <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: '#eab308', marginBottom: 5 }}>BEFORE YOU SEND</p>
-                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
+                  <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.6)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
                 </div>
               </div>
             )}
@@ -462,8 +462,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 width: '100%', padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
                 letterSpacing: '0.08em', cursor: 'pointer',
                 border: '1px solid rgba(255,255,255,0.15)',
-                background: saved ? 'rgba(34,197,94,0.12)' : 'rgba(255,255,255,0.04)',
-                color: saved ? '#22c55e' : 'rgba(255,255,255,0.5)',
+                background: saved ? 'rgba(34,197,94,0.12)' : 'rgba(26,18,8,0.03)',
+                color: saved ? '#22c55e' : 'rgba(26,18,8,0.45)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
                 WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', transition: 'all 0.2s',
               }}
@@ -493,17 +493,17 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(6,182,212,0.04)', border: '1px solid rgba(6,182,212,0.15)' }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(6,182,212,0.6)', margin: '0 0 10px' }}>WANT TO TALK TO A REAL PERSON?</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>Citizens Advice</strong> — free, confidential advice on debt, benefits & legal issues · citizensadvice.org.uk</span>
-                </a>
-                <a href="https://www.stepchange.org" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>StepChange</strong> — free debt advice & repayment plans · stepchange.org · 0800 138 1111</span>
-                </a>
-                <a href="https://debtcamel.co.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                  <span><strong style={{ color: 'rgba(255,255,255,0.85)' }}>Debt Camel</strong> — plain English debt guides by Sara Williams · debtcamel.co.uk</span>
+                <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
+                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
+                     <span><strong style={{ color: '#1a1208' }}>Citizens Advice</strong> — free, confidential advice on debt, benefits & legal issues · citizensadvice.org.uk</span>
+                   </a>
+                   <a href="https://www.stepchange.org" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
+                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
+                     <span><strong style={{ color: '#1a1208' }}>StepChange</strong> — free debt advice & repayment plans · stepchange.org · 0800 138 1111</span>
+                   </a>
+                   <a href="https://debtcamel.co.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
+                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
+                     <span><strong style={{ color: '#1a1208' }}>Debt Camel</strong> — plain English debt guides by Sara Williams · debtcamel.co.uk</span>
                 </a>
               </div>
             </div>
@@ -515,11 +515,11 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
 
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
+            <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
               SORTED provides guidance only — not legal advice.{' '}
-              <a href="/SortedTerms" style={{ color: 'rgba(255,255,255,0.3)', textDecoration: 'underline' }}>Terms</a>
+              <a href="/SortedTerms" style={{ color: 'rgba(26,18,8,0.5)', textDecoration: 'underline' }}>Terms</a>
             </p>
-            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.1)', textAlign: 'center', letterSpacing: '0.1em', fontWeight: 700 }}>NOTHING STORED. NOTHING SEEN. YOURS ALONE.</p>
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.25)', textAlign: 'center', letterSpacing: '0.1em', fontWeight: 700 }}>NOTHING STORED. NOTHING SEEN. YOURS ALONE.</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -535,9 +535,9 @@ function Chip({ active, color, onClick, children }) {
   return (
     <button onClick={onClick} style={{
       padding: '5px 11px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer',
-      border: `1px solid ${active ? color : 'rgba(255,255,255,0.12)'}`,
+      border: `1px solid ${active ? color : 'rgba(26,18,8,0.12)'}`,
       background: active ? `${color}15` : 'transparent',
-      color: active ? color : 'rgba(255,255,255,0.4)',
+      color: active ? color : 'rgba(26,18,8,0.45)',
       transition: 'all 0.15s',
     }}>
       {children}
