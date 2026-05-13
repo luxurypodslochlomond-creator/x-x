@@ -256,7 +256,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
   return (
     <div className="space-y-5">
-      <style>{`textarea::placeholder { color: rgba(255,255,255,0.45) !important; }`}</style>
+      <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
 
       {/* CONNECTED CASE BANNER */}
       {prefillContext?.related_case_id && (
@@ -300,9 +300,9 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               onClick={() => setGoal(g.id)}
               style={{
                 padding: '7px 14px', borderRadius: 20, cursor: 'pointer',
-                border: `1px solid ${goal === g.id ? accentColor + '80' : 'rgba(255,255,255,0.1)'}`,
+                border: `1px solid ${goal === g.id ? accentColor + '80' : 'rgba(26,18,8,0.12)'}`,
                 background: goal === g.id ? accentColor + '18' : 'transparent',
-                color: goal === g.id ? '#fff' : 'rgba(26,18,8,0.5)',
+                color: goal === g.id ? '#1a1208' : 'rgba(26,18,8,0.55)',
                 fontSize: 11, fontWeight: 700, letterSpacing: '0.06em',
                 transition: 'all 0.12s',
               }}
@@ -327,8 +327,8 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
                 onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
                 style={{
                   padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                  border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.08)'}`,
-                  background: conflictType === t.id ? `${accentColor}12` : 'rgba(255,255,255,0.02)',
+                  border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(26,18,8,0.1)'}`,
+                  background: conflictType === t.id ? `${accentColor}12` : 'rgba(26,18,8,0.02)',
                   transition: 'all 0.15s',
                 }}
               >
@@ -377,8 +377,8 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 14,
               fontWeight: 800, letterSpacing: '0.06em',
               cursor: what.trim() ? 'pointer' : 'not-allowed',
-              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(255,255,255,0.15)'}`,
-              background: what.trim() ? accentColor + '18' : 'rgba(255,255,255,0.03)',
+              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(26,18,8,0.12)'}`,
+              background: what.trim() ? accentColor + '18' : 'rgba(26,18,8,0.03)',
               color: what.trim() ? '#1a1208' : 'rgba(26,18,8,0.35)',
               transition: 'all 0.2s',
             }}
@@ -477,7 +477,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
 
-            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.35)' }}>
+            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
               NEW SITUATION
             </motion.button>
 
@@ -557,15 +557,15 @@ function EmailToSelf({ emailAddr, setEmailAddr, onSend, sent, sending, accentCol
     </div>
   );
   return (
-    <div style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', background: 'rgba(255,255,255,0.02)' }}>
-      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>EMAIL THIS TO YOURSELF</p>
+    <div style={{ border: '1px solid rgba(26,18,8,0.1)', borderRadius: 10, padding: '12px 14px', background: 'rgba(26,18,8,0.02)' }}>
+      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)', margin: '0 0 8px' }}>EMAIL THIS TO YOURSELF</p>
       <div style={{ display: 'flex', gap: 8 }}>
         <input
           type="email"
           value={emailAddr}
           onChange={e => setEmailAddr(e.target.value)}
           placeholder="your@email.com"
-          style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff', fontSize: 12, padding: '9px 12px', outline: 'none', fontFamily: 'inherit' }}
+          style={{ flex: 1, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.12)', borderRadius: 8, color: '#1a1208', fontSize: 12, padding: '9px 12px', outline: 'none', fontFamily: 'inherit' }}
         />
         <motion.button
           onClick={onSend}
@@ -576,13 +576,13 @@ function EmailToSelf({ emailAddr, setEmailAddr, onSend, sent, sending, accentCol
           {sending ? '...' : 'SEND'}
         </motion.button>
       </div>
-      <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.18)', margin: '6px 0 0', letterSpacing: '0.04em' }}>One-time send. Never stored or reused.</p>
+      <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', margin: '6px 0 0', letterSpacing: '0.04em' }}>One-time send. Never stored or reused.</p>
     </div>
   );
 }
 
 function Label({ children }) {
-  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: 0 }}>{children}</p>;
+  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.4)', margin: 0 }}>{children}</p>;
 }
 
 function Card({ label, color, children }) {

@@ -327,9 +327,9 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
                 fontWeight: 900, letterSpacing: '0.1em',
                 cursor: context.trim() ? 'pointer' : 'not-allowed',
-                border: `2px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.1)'}`,
-                background: context.trim() ? accentColor : 'transparent',
-                color: context.trim() ? '#000' : 'rgba(255,255,255,0.2)',
+                border: `2px solid ${context.trim() ? accentColor : 'rgba(26,18,8,0.12)'}`,
+                background: context.trim() ? accentColor : 'rgba(26,18,8,0.03)',
+                color: context.trim() ? '#000' : 'rgba(26,18,8,0.25)',
                 transition: 'all 0.2s',
               }}
             >
@@ -394,8 +394,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                     whileTap={!loading ? { scale: 0.95 } : {}}
                     style={{
                       padding: '10px 12px', borderRadius: 8, textAlign: 'center', fontSize: 11, fontWeight: 800,
-                      border: `2px solid ${resultTone === t.id ? accentColor : 'rgba(255,255,255,0.12)'}`,
-                      background: resultTone === t.id ? accentColor + '15' : 'rgba(255,255,255,0.02)',
+                      border: `2px solid ${resultTone === t.id ? accentColor : 'rgba(26,18,8,0.12)'}`,
+                      background: resultTone === t.id ? accentColor + '15' : 'rgba(26,18,8,0.02)',
                       color: resultTone === t.id ? accentColor : 'rgba(26,18,8,0.45)',
                       cursor: !loading ? 'pointer' : 'not-allowed',
                       transition: 'all 0.15s', opacity: loading ? 0.5 : 1,
@@ -461,9 +461,9 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               style={{
                 width: '100%', padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
                 letterSpacing: '0.08em', cursor: 'pointer',
-                border: '1px solid rgba(255,255,255,0.15)',
+                border: '1px solid rgba(26,18,8,0.12)',
                 background: saved ? 'rgba(34,197,94,0.12)' : 'rgba(26,18,8,0.03)',
-                color: saved ? '#22c55e' : 'rgba(26,18,8,0.45)',
+                color: saved ? '#22c55e' : 'rgba(26,18,8,0.55)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
                 WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', transition: 'all 0.2s',
               }}
@@ -508,7 +508,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               </div>
             </div>
 
-            <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.1)', background: 'transparent', color: 'rgba(255,255,255,0.3)' }}>
+            <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
               WRITE ANOTHER
             </motion.button>
 
@@ -528,7 +528,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 }
 
 function Label({ children }) {
-  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: 0 }}>{children}</p>;
+  return <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.4)', margin: 0 }}>{children}</p>;
 }
 
 function Chip({ active, color, onClick, children }) {
@@ -562,6 +562,6 @@ const primaryBtn = {
 
 const secondaryBtn = {
   flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-  letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)',
-  background: 'transparent', color: 'rgba(255,255,255,0.4)', transition: 'all 0.15s',
+  letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)',
+  background: 'transparent', color: 'rgba(26,18,8,0.45)', transition: 'all 0.15s',
 };
