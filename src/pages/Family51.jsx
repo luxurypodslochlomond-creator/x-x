@@ -259,19 +259,19 @@ export default function Family51Page() {
          {showWhy && (
            <motion.div key="why" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: 'easeInOut' }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.45)', marginBottom: 14 }}>THE PROBLEM</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.6)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
                 <span style={{ color: '#1a1208' }}>Official letters</span>{' '}
-                <span style={{ color: '#d97706' }}>leave people stuck.</span>
+                <span style={{ color: '#f5a623' }}>leave people stuck.</span>
               </h2>
             </div>
 
             {/* STATS CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 40 }}>
-              <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project 2023" color="#d97706" />
-              <StatCard number="92%" label="of serious civil legal problems in the USA receive no professional help" source="Legal Services Corp. 2022" color="#d97706" />
-              <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health Institute" color="#d97706" />
-              <StatCard number="£1.7B" label="UK civil legal aid budget cut by over 40% since LASPO 2013 — millions left without help" source="Law Society 2023" color="#2563eb" />
+              <StatCard number="5.1B" label="people worldwide with unmet justice needs — two thirds of humanity" source="World Justice Project 2023" color="#f5a623" />
+              <StatCard number="92%" label="of serious civil legal problems in the USA receive no professional help" source="Legal Services Corp. 2022" color="#f5a623" />
+              <StatCard number="73%" label="of people referred to bailiffs have a mental health condition" source="Money & Mental Health Institute" color="#f5a623" />
+              <StatCard number="£1.7B" label="UK civil legal aid budget cut by over 40% since LASPO 2013 — millions left without help" source="Law Society 2023" color="#f5a623" />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
@@ -286,7 +286,7 @@ export default function Family51Page() {
               </p>
             </div>
             <div style={{ background: 'rgba(245,166,35,0.07)', border: '1px solid rgba(245,166,35,0.18)', borderRadius: 12, padding: 20, textAlign: 'center' }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#d97706', marginBottom: 8 }}>REAL TALK</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#f5a623', marginBottom: 8 }}>REAL TALK</div>
               <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.8)', margin: 0, lineHeight: 1.6 }}>
                 Some people <strong>bury their head in the sand.</strong> Don't open the letter. Hope it goes away. It doesn't.
               </p>
@@ -295,7 +295,7 @@ export default function Family51Page() {
               </p>
             </div>
             <div style={{ marginTop: 40, textAlign: 'center' }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.45)', marginBottom: 14 }}>THE SOLUTION</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.6)', marginBottom: 14 }}>THE SOLUTION</div>
               <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>
                 SORTED decodes it in <strong>your language</strong>. Shows you what it means. Lists what to do next. You're not alone anymore.
               </p>
@@ -319,11 +319,11 @@ export default function Family51Page() {
 
             {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#d97706', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.9 }}>Letters · Scams · Disputes · Replies</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Scams · Disputes · Replies</div>
               <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
                 Got a letter you don't understand?<br />
                 <span style={{ color: '#f5a623' }}>We'll sort it.</span>
-                <span style={{ color: 'rgba(26,18,8,0.4)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
+                <span style={{ color: 'rgba(26,18,8,0.55)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
               </h1>
             </motion.div>
 
@@ -334,7 +334,7 @@ export default function Family51Page() {
                 <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
               </svg>
               <span style={{ fontSize: 11, fontWeight: 700, color: '#f5a623' }}>Nothing leaves your device</span>
-              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)' }}>· No account. No storage. Ever.</span>
+              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)' }}>· No account. No storage. Ever.</span>
             </motion.div>
 
             {/* 4 TOOL BUTTONS — 2x2 grid */}
@@ -368,7 +368,7 @@ export default function Family51Page() {
                   </div>
                   <div>
                     <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', marginBottom: 2, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
-                    <div style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.45)', lineHeight: 1.35 }}>{sub}</div>
+                    <div style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.6)', lineHeight: 1.35 }}>{sub}</div>
                   </div>
                 </motion.button>
               ))}
@@ -382,7 +382,7 @@ export default function Family51Page() {
 
             {/* HOW IT WORKS — always visible */}
             <div style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.35)', margin: '0 0 12px' }}>HOW IT WORKS</p>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.55)', margin: '0 0 12px' }}>HOW IT WORKS</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <WhyRow icon={<WRBolt />} text="Paste, type or photo any letter — plain English in seconds" />
                 <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, who to contact — zero jargon" />
@@ -390,8 +390,8 @@ export default function Family51Page() {
                 <WhyRow icon={<WRLock />} text="Scam checker — photo or paste any message for an instant verdict. Free forever." />
                 <WhyRow icon={<WRLock />} text="Nothing stored, nothing logged, nothing sold. Ever." />
               </div>
-              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(26,18,8,0.6)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
+              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', margin: '12px 0 0', lineHeight: 1.5 }}>
+                10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(26,18,8,0.75)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
               </p>
             </div>
 
@@ -486,12 +486,12 @@ export default function Family51Page() {
               </div>
               <h1 style={{ fontSize: 'clamp(24px, 6vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 10px' }}>
                 <span style={{ color: '#1a1208' }}>You decoded it.</span><br />
-                <span style={{ color: '#d97706' }}>Now act on it.</span>
+                <span style={{ color: '#f5a623' }}>Now act on it.</span>
               </h1>
               <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.65)', margin: '0 0 12px', lineHeight: 1.6 }}>
                 You got your 10 free decodes. You understand what the letter means now. That's the hardest part done. Premium helps you finish it — draft the reply, resolve the dispute, follow through. {geoPrice.inline}/month.
               </p>
-              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.45)', margin: '0 0 4px', lineHeight: 1.5 }}>
+              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', margin: '0 0 4px', lineHeight: 1.5 }}>
                 Cancel anytime. Nothing stored. Not legal advice.
               </p>
             </div>

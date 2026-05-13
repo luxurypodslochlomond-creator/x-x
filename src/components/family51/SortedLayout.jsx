@@ -202,18 +202,18 @@ export default function SortedLayout({ children, currentPage }) {
                     style={{
                       display: 'flex', alignItems: 'center', gap: 12,
                       padding: '12px 0',
-                      borderBottom: '1px solid rgba(0,212,255,0.06)',
+                      borderBottom: '1px solid rgba(245,166,35,0.15)',
                       textDecoration: 'none', transition: 'all 0.12s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
                     onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
                   >
-                    <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(0,212,255,0.35)', minWidth: 24 }}>
+                    <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(245,166,35,0.4)', minWidth: 24 }}>
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    {item.icon && <span style={{ color: 'rgba(0,212,255,0.4)' }}>{item.icon}</span>}
-                    <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', letterSpacing: '0.03em' }}>{item.label}</span>
-                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(0,212,255,0.2)' }}>→</span>
+                    {item.icon && <span style={{ color: 'rgba(245,166,35,0.4)' }}>{item.icon}</span>}
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
+                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
                   </Link>
                 )
               ))}
