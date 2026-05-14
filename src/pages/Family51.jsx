@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSessionMemory } from '../hooks/useSessionMemory';
-import { Link } from 'react-router-dom';
-import { Menu, X, Eye, Scale, Trash2, Mail } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
-import { useRef } from 'react';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 import SortedAbout from '@/components/family51/SortedAbout';
@@ -26,39 +23,26 @@ import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 
 export default function Family51Page() {
   const { saveState, getState } = useSessionMemory('family51');
-  const [menuOpen, setMenuOpen] = useState(false); // Don't persist menu state - always start closed
   const [showWhy, setShowWhy] = useState(() => getState('showWhy') || false);
   const [showHistory, setShowHistory] = useState(() => getState('showHistory') || false);
   const [showFAQ, setShowFAQ] = useState(() => getState('showFAQ') || false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showPaySuccess, setShowPaySuccess] = useState(false);
-  const [caseCount, setCaseCount] = useState(0);
   const [showMauro, setShowMauro] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
   const engineRef = useRef(null);
 
-  // Save state silently on change (menuOpen not persisted - always starts closed)
+  // Save state silently on change
   useEffect(() => { saveState('showWhy', showWhy); }, [showWhy, saveState]);
   useEffect(() => { saveState('showHistory', showHistory); }, [showHistory, saveState]);
   useEffect(() => { saveState('showFAQ', showFAQ); }, [showFAQ, saveState]);
-  
-  // Add body class when menu opens to prevent content jump
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.classList.add('menu-open');
-    } else {
-      document.body.classList.remove('menu-open');
-    }
-    return () => document.body.classList.remove('menu-open');
-  }, [menuOpen]); 
 
   // Load case count from localStorage for badge + first visit onboarding
   useEffect(() => {
     try {
       const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
-      setCaseCount(cases.length);
     } catch {}
     // Show onboarding only on first ever visit — skip in builder iframe
     const inIframe = window.self !== window.top;
@@ -75,12 +59,6 @@ export default function Family51Page() {
       window.history.replaceState({}, '', window.location.pathname);
     }
   }, []);
-
-  const handleBack = () => {
-    setShowWhy(false);
-    setShowHistory(false);
-    setShowFAQ(false);
-  };
 
   useEffect(() => {
     document.title = 'SORTED — We\'ve Got You';
@@ -137,9 +115,6 @@ export default function Family51Page() {
         .sorted-tap-btn:active { opacity: 0.5; }
         @media (hover: hover) { .sorted-tap-btn:hover { opacity: 0.85; } }
 
-        /* Prevent content jump when fixed menu opens */
-        body.menu-open { padding-top: 120px; }
-
         /* Smooth scroll */
         html { scroll-behavior: smooth; }
 
@@ -167,162 +142,17 @@ export default function Family51Page() {
         )}
       </AnimatePresence>
 
-      {/* ── STICKY HEADER ──────────────────────────────────── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.3)', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <motion.div whileTap={{ scale: 0.95 }} style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', transition: 'opacity 0.15s' }} onClick={() => { setShowWhy(false); setShowHistory(false); setShowFAQ(false); setMenuOpen(false); }} onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
-          <SortedMark />
-          <div style={{ lineHeight: 1.2 }}>
-            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#1a1208' }}>SORTED</div>
-            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#d97706', opacity: 0.85 }}>WE'VE GOT YOU</div>
-          </div>
-        </motion.div>
-
-        <div style={{ flex: 1 }} />
-
-         {showWhy || showHistory || showFAQ ? (
-           <motion.button
-             onClick={handleBack}
-             whileTap={{ scale: 0.95 }}
-             style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.4)', letterSpacing: '0.08em', background: 'none', border: 'none', cursor: 'pointer' }}
-           >
-             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-             BACK
-           </motion.button>
-         ) : (
-           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-             <motion.button
-               onClick={() => { setShowFAQ(true); setMenuOpen(false); }}
-               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-               whileTap={{ scale: 0.95 }}
-               className="tap-feedback"
-               style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: '#f5a623', background: 'rgba(245,166,35,0.1)', border: '1.5px solid rgba(245,166,35,0.3)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}
-             >
-               FAQ
-             </motion.button>
-             <motion.button
-               onClick={() => { setShowHistory(true); setShowFAQ(false); setShowWhy(false); setMenuOpen(false); }}
-               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-               whileTap={{ scale: 0.95 }}
-               className="tap-feedback"
-               title="My Cases"
-               style={{ position: 'relative', width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}
-               >
-               <CasesIcon />
-               {caseCount > 0 && (
-                 <div style={{ position: 'absolute', top: -4, right: -4, minWidth: 14, height: 14, borderRadius: 7, background: '#f5a623', border: '1.5px solid #0d0a08', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3px' }}>
-                   <span style={{ fontSize: 8, fontWeight: 900, color: '#0d0a08', lineHeight: 1 }}>{caseCount > 9 ? '9+' : caseCount}</span>
-                 </div>
-               )}
-             </motion.button>
-             <motion.button
-               onClick={() => { setShowWhy(true); setMenuOpen(false); }}
-               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-               whileTap={{ scale: 0.95 }}
-               className="tap-feedback"
-               title="Why SORTED?"
-               style={{ width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(245,166,35,0.2)', background: 'rgba(245,166,35,0.04)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(245,166,35,0.6)', fontSize: 14, fontWeight: 900, fontStyle: 'italic', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}
-             >
-               ?
-             </motion.button>
-             <motion.button 
-               onClick={() => setMenuOpen(!menuOpen)} 
-               whileTap={{ scale: 0.92 }}
-               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-               style={{ 
-                 background: menuOpen ? 'rgba(245,166,35,0.12)' : 'rgba(254,243,226,0.04)', 
-                 border: `1.5px solid ${menuOpen ? 'rgba(245,166,35,0.6)' : 'rgba(245,166,35,0.25)'}`, 
-                 borderRadius: 10, 
-                 cursor: 'pointer', 
-                 padding: '7px 10px', 
-                 color: '#f5a623', 
-                 WebkitTapHighlightColor: 'transparent', 
-                 touchAction: 'manipulation',
-                 WebkitTouchCallout: 'none',
-                 WebkitUserSelect: 'none',
-                 userSelect: 'none',
-                 display: 'flex', 
-                 alignItems: 'center', 
-                 gap: 7, 
-                 transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)' 
-               }}
-             >
-               {menuOpen ? <X className="w-4 h-4" /> : <><Menu className="w-4 h-4" /><span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', fontFamily: 'monospace' }}>MENU</span></>}
-             </motion.button>
-           </div>
-         )}
-       </header>
-
-       {/* ── HAMBURGER MENU ──────────────────────────────────── */}
-       <AnimatePresence>
-         {menuOpen && !showWhy && !showFAQ && (
-           <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15, ease: 'easeOut' }} style={{ position: 'fixed', top: 54, left: 0, right: 0, zIndex: 49, background: 'rgba(250,248,245,0.99)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '0 20px', boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}>
-                 <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
-               <button 
-                 onClick={() => { setShowFAQ(true); setMenuOpen(false); }} 
-                 onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
-                 onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
-                 onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-               >
-                  <FAQIcon />
-                  FAQ &amp; How It Works
-                </button>
-                <Link 
-                  to="/SortedTerms" 
-                  onClick={() => setMenuOpen(false)}
-                  onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
-                  onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
-                  onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-                >
-                   <Scale className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
-                   Terms
-                 </Link>
-                 <Link 
-                   to="/SortedPrivacy" 
-                   onClick={() => setMenuOpen(false)}
-                   onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
-                   onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
-                   onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-                 >
-                   <Eye className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
-                   Privacy
-                 </Link>
-                 <a 
-                   href="mailto:family@uf51.love" 
-                   onClick={() => setMenuOpen(false)}
-                   onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
-                   onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
-                   onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-                 >
-                   <Mail className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
-                   Contact us
-                 </a>
-                 <button
-                   onClick={() => {
-                     try { localStorage.clear(); } catch {}
-                     setMenuOpen(false);
-                     window.location.reload();
-                   }}
-                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 12, fontWeight: 600, color: 'rgba(26,18,8,0.3)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }}
-                  onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
-                  onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Clear all my data
-                </button>
-                </div>
-                </motion.div>
-                )}
-                </AnimatePresence>
-
       <AnimatePresence mode="sync">
 
          {/* ── FAQ SECTION ────────────────────────────────────── */}
          {showFAQ && (
            <motion.div key="faq" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
+             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-end' }}>
+               <button onClick={() => setShowFAQ(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.4)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
+                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                 BACK
+               </button>
+             </div>
              <SortedFAQ accentColor="#f5a623" />
            </motion.div>
          )}
@@ -330,6 +160,12 @@ export default function Family51Page() {
          {/* ── WHY SECTION ────────────────────────────────────── */}
          {showWhy && (
            <motion.div key="why" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
+             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-end' }}>
+               <button onClick={() => setShowWhy(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.4)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
+                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                 BACK
+               </button>
+             </div>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.6)', marginBottom: 14 }}>THE PROBLEM</div>
               <h2 style={{ fontSize: 'clamp(26px, 6vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
@@ -379,7 +215,7 @@ export default function Family51Page() {
          )}
 
          {/* ── HOME: PREMIUM, FAST, CONFIDENT ─────────────────── */}
-         {!isLocked && !menuOpen && !showWhy && !showFAQ && !showHistory && (
+         {!isLocked && !showWhy && !showFAQ && !showHistory && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '16px 20px 60px' }}>
 
             {/* STRIPE SUCCESS — premium celebration */}
@@ -484,6 +320,12 @@ export default function Family51Page() {
         {/* ── CASE HISTORY ──────────────────────────────────── */}
          {showHistory && (
            <motion.div key="history" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
+             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-end' }}>
+               <button onClick={() => setShowHistory(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.4)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
+                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                 BACK
+               </button>
+             </div>
              <SortedCaseHistory
                isPremium={!isLocked}
                onContinue={() => {

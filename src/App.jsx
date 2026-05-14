@@ -206,7 +206,7 @@ const AuthenticatedApp = () => {
       <Route path="/WristHealingTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><WristHealingTermsPage /></Suspense>} />
       <Route path="/WristHealingPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><WristHealingPrivacyPage /></Suspense>} />
       <Route path="/Shed51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Shed51Page /></Suspense>} />
-      <Route path="/Sorted" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51Page /></Suspense>} />
+      <Route path="/Sorted" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SortedLayout currentPage="Sorted"><Family51Page /></SortedLayout></Suspense>} />
       <Route path="/Family51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><RedirectToSorted /></Suspense>} />
       <Route path="/Family51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51TermsPage /></Suspense>} />
       <Route path="/Family51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51PrivacyPage /></Suspense>} />
