@@ -192,7 +192,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments';
   const isTracktPage = currentPageName.startsWith('Trackt') || currentPageName === 'TracktDashboard';
   const isCTRL51Page = currentPageName.startsWith('CTRL51');
-  const isSortedPage = currentPageName === 'Family51' || currentPageName.startsWith('Sorted');
+  const isSortedPage = currentPageName === 'Family51' || currentPageName.startsWith('Sorted') || currentPageName === 'SortedFAQ';
   const isSortedSubPage = ['SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit', 'PetSounds51InvestorPress'].includes(currentPageName);
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName) || isTracktPage;
