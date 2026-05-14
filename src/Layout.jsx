@@ -67,7 +67,7 @@ const PUBLIC_PAGES = [
   'ScottManager', 'CB51', 'ScottArtist', 'ScottAddArtist', 'ScottCalendar', 'ScottArtistHome', 
   'ScottLive', 'ScottSessions', 'ScottFinanceAdmin', 'ScottToDo', 'ScottCalendarView',
   'ScottAbout', 'Prof51', 'CB51Pitch', 'FunderBrief', 'PetSounds51Data', 'WristHealingProtocol',
-  'SortedTerms', 'SortedPrivacy', 'SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit',
+  'SortedTerms', 'SortedPrivacy', 'SortedFAQ', 'SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit',
   'Family51', 'PetSounds51', 'PetSounds51Landing', 'PetSounds51Whitepaper', 'PetSounds51Press',
   'PetSounds51InvestorPress', 'PetSounds51PartnerBrief', 'PetSounds51MarketingAssets',
   'PetSounds51Terms', 'PetSounds51Privacy', 'CB51Terms', 'CB51Privacy', 'BuzzStop',
