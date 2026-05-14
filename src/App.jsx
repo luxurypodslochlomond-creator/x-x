@@ -69,7 +69,8 @@ const SortedInvestorPressPage = React.lazy(() => import('./pages/SortedInvestorP
 const PetSounds51InvestorPressPage = React.lazy(() => import('./pages/PetSounds51InvestorPress'));
 const SortedPartnerKitPage = React.lazy(() => import('./pages/SortedPartnerKit'));
 const SortedForOrgsPage = React.lazy(() => import('./pages/SortedForOrgs'));
-const SortedLayout = React.lazy(() => import('./components/family51/SortedLayout'));
+// SortedLayout - not lazy for instant loading
+import SortedLayout from './components/family51/SortedLayout';
 const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
 const AdminLogoUploadPage = React.lazy(() => import('./pages/AdminLogoUpload'));
