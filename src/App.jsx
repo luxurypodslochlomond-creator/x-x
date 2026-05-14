@@ -64,6 +64,7 @@ const Family51TermsPage = React.lazy(() => import('./pages/Family51Terms'));
 const Family51PrivacyPage = React.lazy(() => import('./pages/Family51Privacy'));
 const SortedTermsPage = React.lazy(() => import('./pages/SortedTerms'));
 const SortedPrivacyPage = React.lazy(() => import('./pages/SortedPrivacy'));
+const SortedFAQPage = React.lazy(() => import('./pages/SortedFAQ'));
 const SortedPressReleasePage = React.lazy(() => import('./pages/SortedPressRelease.jsx'));
 const SortedInvestorPressPage = React.lazy(() => import('./pages/SortedInvestorPress'));
 const PetSounds51InvestorPressPage = React.lazy(() => import('./pages/PetSounds51InvestorPress'));
@@ -213,6 +214,7 @@ const AuthenticatedApp = () => {
       <Route path="/Family51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51PrivacyPage /></Suspense>} />
       <Route path="/SortedTerms" element={<SortedLayout currentPage="SortedTerms"><SortedTermsPage /></SortedLayout>} />
       <Route path="/SortedPrivacy" element={<SortedLayout currentPage="SortedPrivacy"><SortedPrivacyPage /></SortedLayout>} />
+      <Route path="/SortedFAQ" element={<SortedLayout currentPage="SortedFAQ"><SortedFAQPage /></SortedLayout>} />
       <Route path="/SortedPressRelease" element={<SortedLayout currentPage="SortedPressRelease"><SortedPressReleasePage /></SortedLayout>} />
       <Route path="/SortedInvestorPress" element={<SortedLayout currentPage="SortedInvestorPress"><SortedInvestorPressPage /></SortedLayout>} />
       <Route path="/PetSounds51InvestorPress" element={<SortedLayout currentPage="PetSounds51InvestorPress"><PetSounds51InvestorPressPage /></SortedLayout>} />
