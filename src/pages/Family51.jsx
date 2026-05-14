@@ -319,9 +319,9 @@ export default function Family51Page() {
 
             {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Scams · Disputes · Replies</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Dodgy Traders · Housing · Debt · Disputes · Scams</div>
               <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
-                Got a letter you don't understand?<br />
+                Got a problem with a company, landlord, or letter?<br />
                 <span style={{ color: '#f5a623' }}>We'll sort it.</span>
                 <span style={{ color: 'rgba(26,18,8,0.55)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
               </h1>
@@ -346,7 +346,7 @@ export default function Family51Page() {
                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(239,68,68,0.1)"/><path d="M12 8v4M12 16h.01" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/></svg> },
                 { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#f5a623',
                   icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'conflict', label: 'In a dispute?',    sub: 'Navigate it together',  color: '#f5a623',
+                { id: 'conflict', label: 'Problem with a trader?',    sub: 'Builder, landlord, company',  color: '#f5a623',
                   icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f5a623" strokeWidth="2"/><path d="M9 12l2 2 4-4" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
               ].map(({ id, label, sub, color, icon }) => (
                 <motion.button

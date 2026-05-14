@@ -48,11 +48,7 @@
     "ai_result"
   ],
   "rls": {
-    "read": {
-      "created_by": "{{user.email}}"
-    },
-    "write": {
-      "created_by": "{{user.email}}"
-    }
+    "read": {},
+    "write": {}
   }
 }
