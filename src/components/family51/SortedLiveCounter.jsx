@@ -7,32 +7,25 @@ import { base44 } from '@/api/base44Client';
 // Shows on the home screen. Social proof for people who've been let down before.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const BASE_COUNT = 4271; // Represents real-world use before tracking began
-
 export default function SortedLiveCounter() {
   const [count, setCount] = useState(null);
-  const [displayed, setDisplayed] = useState(BASE_COUNT);
+  const [displayed, setDisplayed] = useState(0);
 
   useEffect(() => {
     base44.entities.SortedCase.list()
-      .then(cases => {
-        const total = BASE_COUNT + (cases?.length || 0);
-        setCount(total);
-      })
-      .catch(() => setCount(BASE_COUNT));
+      .then(cases => setCount(cases?.length || 0))
+      .catch(() => setCount(0));
   }, []);
 
   // Animate the number rolling up when count loads
   useEffect(() => {
-    if (!count) return;
-    const diff = count - displayed;
-    if (diff <= 0) return;
+    if (count === null) return;
     let step = 0;
     const steps = 30;
     const interval = setInterval(() => {
       step++;
-      setDisplayed(Math.round(BASE_COUNT + (diff * step / steps)));
-      if (step >= steps) clearInterval(interval);
+      setDisplayed(Math.round(count * step / steps));
+      if (step >= steps) { setDisplayed(count); clearInterval(interval); }
     }, 30);
     return () => clearInterval(interval);
   }, [count]);
@@ -67,7 +60,7 @@ export default function SortedLiveCounter() {
       <div style={{ flex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
           <span style={{ fontSize: 22, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>
-            {displayed.toLocaleString()}+
+            {displayed.toLocaleString()}
           </span>
           <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.4)', letterSpacing: '0.08em' }}>
             PEOPLE HELPED
