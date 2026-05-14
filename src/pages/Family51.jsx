@@ -199,7 +199,7 @@ export default function Family51Page() {
        {/* ── HAMBURGER MENU ──────────────────────────────────── */}
        <AnimatePresence>
          {menuOpen && !showWhy && !showFAQ && (
-           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.12 }} style={{ position: 'sticky', top: 54, zIndex: 49, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '0 20px' }}>
+           <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15, ease: 'easeOut' }} style={{ position: 'fixed', top: 54, left: 0, right: 0, zIndex: 49, background: 'rgba(250,248,245,0.99)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '0 20px', boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}>
                  <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
                <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                   <FAQIcon />

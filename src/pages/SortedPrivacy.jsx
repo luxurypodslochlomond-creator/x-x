@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Lock, Eye, Trash2, Heart, CheckCircle, AlertTriangle } from 'lucide-react';
 
@@ -34,17 +34,20 @@ const Warn = ({ children }) => (
 );
 
 export default function SortedPrivacy() {
-  useEffect(() => {
-    if (document.startViewTransition) {
-      document.startViewTransition(() => {
-        document.documentElement.style.viewTransitionName = 'page-transition';
-      });
-    }
-  }, []);
-
   return (
-    <div style={{ minHeight: '100vh', background: '#faf8f5', padding: '40px 20px 80px', fontFamily: 'system-ui, sans-serif', color: '#1a1208' }}>
-      <div style={{ maxWidth: 680, margin: '0 auto' }}>
+    <div style={{ minHeight: '100vh', background: '#faf8f5', fontFamily: 'system-ui, sans-serif', color: '#1a1208' }}>
+
+      {/* Nav header */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1px solid rgba(245,166,35,0.3)', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 16 }}>
+        <Link to="/Sorted" style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'rgba(26,18,8,0.5)', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em' }}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          BACK
+        </Link>
+        <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '0.1em', color: '#1a1208' }}>SORTED</div>
+        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: '#d97706' }}>PRIVACY PLEDGE</div>
+      </header>
+
+      <div style={{ padding: '40px 20px 80px', maxWidth: 680, margin: '0 auto' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 48 }}>
@@ -184,7 +187,7 @@ export default function SortedPrivacy() {
       <p style={{ textAlign: 'center', color: 'rgba(26,18,8,0.35)', fontSize: 12, marginTop: 40 }}>
         SORTED is part of Universal Frequency 51 — built to help people, not harvest them.
       </p>
-    </div>
+      </div>
     </div>
   );
 }
