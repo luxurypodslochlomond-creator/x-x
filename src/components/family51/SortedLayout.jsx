@@ -3,53 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Eye, Scale, Mail, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Shannon transmission animation — zero loss signal through noise
-function ShannonTransmission({ active }) {
-  if (!active) return null;
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      style={{
-        position: 'fixed', inset: 0, zIndex: 200,
-        background: '#080a0f',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        gap: 20,
-      }}
-    >
-      {/* Shannon noise → signal bars */}
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, height: 40 }}>
-        {[...Array(16)].map((_, i) => (
-          <motion.div
-            key={i}
-            style={{ width: 4, borderRadius: 2, background: '#f97316' }}
-            animate={{ height: [4, Math.random() * 36 + 4, 36, 4] }}
-            transition={{ duration: 0.6, delay: i * 0.03, ease: 'easeInOut' }}
-          />
-        ))}
-      </div>
-      <div style={{ fontFamily: 'monospace', fontSize: 10, letterSpacing: '0.25em', color: 'rgba(249,115,22,0.6)' }}>
-        TRANSMITTING — ZERO LOSS
-      </div>
-    </motion.div>
-  );
-}
 
-// Shannon-coded bit stream — decorative header element
-function BitStream() {
-  const bits = '01001000 01010101 01000111 01001000 01000101 01010011';
-  return (
-    <div style={{
-      fontFamily: 'monospace', fontSize: 8, letterSpacing: '0.1em',
-      color: 'rgba(249,115,22,0.18)', overflow: 'hidden', whiteSpace: 'nowrap',
-      maxWidth: 200, userSelect: 'none'
-    }}>
-      {bits}
-    </div>
-  );
-}
 
 function SortedMark() {
   return (
@@ -72,27 +26,17 @@ const menuItems = [
 
 export default function SortedLayout({ children, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [transmitting, setTransmitting] = useState(false);
-  const [pendingPath, setPendingPath] = useState(null);
   const location = useLocation();
 
-  // When location changes, briefly show transmission then clear
+  // Close menu on route change
   useEffect(() => {
-    setTransmitting(true);
-    const t = setTimeout(() => setTransmitting(false), 520);
-    return () => clearTimeout(t);
+    setMenuOpen(false);
   }, [location.pathname]);
 
-  const handleNavClick = (path, isEmail) => {
-    setMenuOpen(false);
-    if (!isEmail) {
-      setTransmitting(true);
-      setTimeout(() => setTransmitting(false), 520);
-    }
-  };
+  const handleNavClick = () => setMenuOpen(false);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208' }}>
+    <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', position: 'relative' }}>
 
       {/* Header */}
       <header style={{
@@ -146,16 +90,17 @@ export default function SortedLayout({ children, currentPage }) {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -6 }}
+            initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.12 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
             style={{
-              position: 'sticky', top: 54, zIndex: 49,
-              background: 'rgba(250,248,245,0.98)',
+              position: 'fixed', top: 54, left: 0, right: 0, zIndex: 49,
+              background: 'rgba(250,248,245,0.99)',
               backdropFilter: 'blur(24px)',
               borderBottom: '1.5px solid rgba(245,166,35,0.2)',
               padding: '0 20px',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
             }}
           >
             {/* Header */}
@@ -174,12 +119,12 @@ export default function SortedLayout({ children, currentPage }) {
                    <a
                      key={idx}
                      href={item.path}
-                     onClick={() => handleNavClick(item.path, true)}
+                     onClick={() => handleNavClick()}
                      style={{
                        display: 'flex', alignItems: 'center', gap: 12,
                        padding: '12px 0',
                        borderBottom: '1px solid rgba(245,166,35,0.15)',
-                       textDecoration: 'none', transition: 'all 0.12s',
+                       textDecoration: 'none', color: '#1a1208', transition: 'all 0.12s',
                      }}
                      onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
                      onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
@@ -195,12 +140,12 @@ export default function SortedLayout({ children, currentPage }) {
                   <Link
                     key={idx}
                     to={item.path}
-                    onClick={() => handleNavClick(item.path)}
+                    onClick={() => handleNavClick()}
                     style={{
                       display: 'flex', alignItems: 'center', gap: 12,
                       padding: '12px 0',
                       borderBottom: '1px solid rgba(245,166,35,0.15)',
-                      textDecoration: 'none', transition: 'all 0.12s',
+                      textDecoration: 'none', color: '#1a1208', transition: 'all 0.12s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
                     onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
