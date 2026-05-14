@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Eye, Scale, Mail, Trash2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-
-
 
 function SortedMark() {
   return (
@@ -33,10 +30,27 @@ export default function SortedLayout({ children, currentPage }) {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  const handleNavClick = () => setMenuOpen(false);
+  const handleNavClick = (path) => {
+    setMenuOpen(false);
+  };
 
   return (
     <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', position: 'relative' }}>
+      <style>{`
+        .sorted-menu-enter {
+          animation: menuSlideIn 0.12s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes menuSlideIn {
+          from { opacity: 0; transform: translateY(-8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .menu-item {
+          transition: padding-left 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .menu-item:hover {
+          padding-left: 6px !important;
+        }
+      `}</style>
 
       {/* Header */}
       <header style={{
@@ -50,9 +64,7 @@ export default function SortedLayout({ children, currentPage }) {
         <Link
           to="/Sorted"
           onClick={() => handleNavClick('/Sorted')}
-          style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit', transition: 'opacity 0.15s' }}
-          onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
-          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit' }}
         >
           <SortedMark />
           <div style={{ lineHeight: 1.2 }}>
@@ -61,143 +73,120 @@ export default function SortedLayout({ children, currentPage }) {
           </div>
         </Link>
 
-        {/* Spacer */}
         <div style={{ flex: 1 }} />
 
-        <motion.button
+        <button
           onClick={() => setMenuOpen(!menuOpen)}
-          whileTap={{ scale: 0.92 }}
           style={{
             background: menuOpen ? 'rgba(245,166,35,0.12)' : 'rgba(245,166,35,0.04)',
             border: `1.5px solid ${menuOpen ? 'rgba(245,166,35,0.6)' : 'rgba(245,166,35,0.25)'}`,
             borderRadius: 10, cursor: 'pointer', padding: '7px 10px',
             color: '#f5a623', display: 'flex', alignItems: 'center', gap: 7,
-            transition: 'all 0.18s',
             WebkitTapHighlightColor: 'transparent',
           }}
         >
-          {menuOpen
-            ? <X className="w-4 h-4" />
-            : <>
-                <Menu className="w-4 h-4" />
-                <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', fontFamily: 'monospace' }}>MENU</span>
-              </>
-          }
-        </motion.button>
+          {menuOpen ? <X className="w-4 h-4" /> : (
+            <>
+              <Menu className="w-4 h-4" />
+              <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', fontFamily: 'monospace' }}>MENU</span>
+            </>
+          )}
+        </button>
       </header>
 
-      {/* Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15, ease: 'easeOut' }}
-            style={{
-              position: 'fixed', top: 54, left: 0, right: 0, zIndex: 49,
-              background: 'rgba(250,248,245,0.99)',
-              backdropFilter: 'blur(24px)',
-              borderBottom: '1.5px solid rgba(245,166,35,0.2)',
-              padding: '0 20px',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
-            }}
-          >
-            {/* Header */}
-            <div style={{
-              padding: '10px 0 8px',
-              borderBottom: '1px solid rgba(245,166,35,0.15)',
-              fontFamily: 'monospace', fontSize: 9, letterSpacing: '0.2em',
-              color: 'rgba(26,18,8,0.4)',
-            }}>
-              NAVIGATION
-            </div>
+      {/* Menu Overlay */}
+      {menuOpen && (
+        <div className="sorted-menu-enter" style={{
+          position: 'fixed', top: 54, left: 0, right: 0, zIndex: 49,
+          background: 'rgba(250,248,245,0.99)',
+          backdropFilter: 'blur(24px)',
+          borderBottom: '1.5px solid rgba(245,166,35,0.2)',
+          padding: '0 20px',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+        }}>
+          <div style={{
+            padding: '10px 0 8px',
+            borderBottom: '1px solid rgba(245,166,35,0.15)',
+            fontFamily: 'monospace', fontSize: 9, letterSpacing: '0.2em',
+            color: 'rgba(26,18,8,0.4)',
+          }}>
+            NAVIGATION
+          </div>
 
-            <div style={{ maxWidth: 520, margin: '0 auto' }}>
-              {menuItems.map((item, idx) => (
-                item.isEmail ? (
-                   <a
-                     key={idx}
-                     href={item.path}
-                     onClick={() => handleNavClick()}
-                     style={{
-                       display: 'flex', alignItems: 'center', gap: 12,
-                       padding: '12px 0',
-                       borderBottom: '1px solid rgba(245,166,35,0.15)',
-                       textDecoration: 'none', color: '#1a1208', transition: 'all 0.12s',
-                     }}
-                     onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
-                     onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-                   >
-                     <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.4)', minWidth: 24 }}>
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    {item.icon && <span style={{ color: 'rgba(26,18,8,0.4)' }}>{item.icon}</span>}
-                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
-                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
-                    </a>
-                ) : (
-                  <Link
-                    key={idx}
-                    to={item.path}
-                    onClick={() => handleNavClick()}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: 12,
-                      padding: '12px 0',
-                      borderBottom: '1px solid rgba(245,166,35,0.15)',
-                      textDecoration: 'none', color: '#1a1208', transition: 'all 0.12s',
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
-                    onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
-                  >
-                    <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(245,166,35,0.4)', minWidth: 24 }}>
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    {item.icon && <span style={{ color: 'rgba(245,166,35,0.4)' }}>{item.icon}</span>}
-                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
-                    <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
-                  </Link>
-                )
-              ))}
+          <div style={{ maxWidth: 520, margin: '0 auto' }}>
+            {menuItems.map((item, idx) => (
+              item.isEmail ? (
+                <a
+                  key={idx}
+                  href={item.path}
+                  onClick={() => handleNavClick()}
+                  className="menu-item"
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 12,
+                    padding: '12px 0',
+                    borderBottom: '1px solid rgba(245,166,35,0.15)',
+                    textDecoration: 'none', color: '#1a1208',
+                  }}
+                >
+                  <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.4)', minWidth: 24 }}>
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  {item.icon && <span style={{ color: 'rgba(26,18,8,0.4)' }}>{item.icon}</span>}
+                  <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
+                  <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
+                </a>
+              ) : (
+                <Link
+                  key={idx}
+                  to={item.path}
+                  onClick={() => handleNavClick()}
+                  className="menu-item"
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 12,
+                    padding: '12px 0',
+                    borderBottom: '1px solid rgba(245,166,35,0.15)',
+                    textDecoration: 'none', color: '#1a1208',
+                  }}
+                >
+                  <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(245,166,35,0.4)', minWidth: 24 }}>
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  {item.icon && <span style={{ color: 'rgba(245,166,35,0.4)' }}>{item.icon}</span>}
+                  <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
+                  <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
+                </Link>
+              )
+            ))}
 
-              {/* Clear data */}
-              <button
-                onClick={() => {
-                  try { localStorage.clear(); } catch {}
-                  setMenuOpen(false);
-                  window.location.reload();
-                }}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 12,
-                  padding: '12px 0 14px',
-                  fontSize: 13, fontWeight: 700,
-                  color: 'rgba(26,18,8,0.35)',
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  width: '100%', textAlign: 'left', letterSpacing: '0.03em',
-                  transition: 'all 0.12s',
-                }}
-              >
-                <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.2)', minWidth: 24 }}>
-                  {String(menuItems.length + 1).padStart(2, '0')}
-                </span>
-                <Trash2 className="w-3.5 h-3.5" />
-                Clear all my data
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <button
+              onClick={() => {
+                try { localStorage.clear(); } catch {}
+                setMenuOpen(false);
+                window.location.reload();
+              }}
+              className="menu-item"
+              style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                padding: '12px 0 14px',
+                fontSize: 13, fontWeight: 700,
+                color: 'rgba(26,18,8,0.35)',
+                background: 'none', border: 'none', cursor: 'pointer',
+                width: '100%', textAlign: 'left', letterSpacing: '0.03em',
+              }}
+            >
+              <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.2)', minWidth: 24 }}>
+                {String(menuItems.length + 1).padStart(2, '0')}
+              </span>
+              <Trash2 className="w-3.5 h-3.5" />
+              Clear all my data
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Content */}
       <main style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
-        <motion.div
-          key={currentPage}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.18, ease: 'easeOut' }}
-        >
-          {children}
-        </motion.div>
+        {children}
       </main>
 
       {/* Footer */}
