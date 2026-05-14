@@ -43,7 +43,7 @@ export default function SortedInvestorPress() {
     addText('The problem: 5.1 billion people have unmet justice needs.\nThe solution: AI-powered legal clarity — subscription-funded, data-sovereign, live.\nThe market: £9.99/month × millions of users = infinite scale with zero marginal cost.', 11, false, [100, 100, 100], 12);
     
     addText('PRODUCT FACTS', 9, true, [249, 115, 22], 3);
-    addText('• 5 free uses — no card required\n• £9.99/month subscription (Stripe, live payment mode)\n• Decode letters, write replies, resolve disputes\n• Works in any language, any jurisdiction\n• Document content: processed in memory, never stored\n• No AI training on user data\n• Zero server liability exposure', 10, false, [80, 80, 80], 12);
+    addText('• 10 free uses — no card required\n• £9.99/month subscription (Stripe, live payment mode)\n• Decode letters, write replies, resolve disputes\n• Works in any language, any jurisdiction\n• Document content: processed in memory, never stored\n• No AI training on user data\n• Zero server liability exposure', 10, false, [80, 80, 80], 12);
 
     addText('FINANCIAL MODEL', 9, true, [249, 115, 22], 3);
     addText('Revenue: £9.99/month subscription\nMarginal cost: Near zero (serverless)\nInfrastructure: Scales to millions on existing architecture\nData liability: Zero — nothing stored\nB2B pathway: White-label for banks, insurers, HR platforms', 10, false, [80, 80, 80], 12);
@@ -52,7 +52,7 @@ export default function SortedInvestorPress() {
     addText('• Live globally — no waitlist\n• Stripe integration live in production\n• Jurisdiction detection: 20+ territories\n• Community Interest Company in formation\n• Platform: SORTED + PetSounds51 + CB51 + Learn51', 10, false, [80, 80, 80], 12);
 
     addText('CONTACT', 9, true, [249, 115, 22], 3);
-    addText('family@uf51.love\nProduct: uf51.love/Sorted\nPlatform: uf51.love', 11, false, [80, 80, 80], 0);
+    addText('family@uf51.love\nuf51.love/Sorted', 11, false, [80, 80, 80], 0);
 
     doc.save('SORTED-Investor-Brief.pdf');
     setSaving(false);
@@ -110,7 +110,7 @@ export default function SortedInvestorPress() {
             {[
               { value: '5.1B', label: 'Unmet justice needs' },
               { value: '£9.99', label: 'Monthly subscription' },
-              { value: '5 FREE', label: 'Uses — no card' },
+              { value: '10 FREE', label: 'Uses — no card' },
             ].map(({ value, label }) => (
               <div key={value} style={{ padding: '16px 12px', background: 'rgba(249,115,22,0.06)', border: '1px solid rgba(249,115,22,0.18)', borderRadius: 10, textAlign: 'center' }}>
                 <div style={{ fontSize: 24, fontWeight: 900, color: '#f97316', lineHeight: 1 }}>{value}</div>
@@ -148,7 +148,7 @@ export default function SortedInvestorPress() {
                 ['Revenue', '£9.99/month Stripe'],
                 ['Marginal cost', 'Near zero'],
                 ['Scale', 'Serverless — infinite'],
-                ['Paywall', '5 free uses'],
+                ['Paywall', '10 free uses'],
               ].map(([k, v]) => (
                 <div key={k} style={{ padding: '12px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8 }}>
                   <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginBottom: 4, letterSpacing: '0.06em' }}>{k.toUpperCase()}</div>

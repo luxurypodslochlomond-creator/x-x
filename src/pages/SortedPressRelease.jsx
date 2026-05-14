@@ -72,7 +72,7 @@ export default function SortedPressRelease() {
     addText('"Every other AI tool on the market is a surveillance business dressed up as a helper. SORTED is the opposite. We process your most sensitive documents and we refuse to keep them. That\'s not just a feature — it\'s a commitment."', 11, false, [80, 80, 80], 8);
 
     addText('THREE TOOLS IN ONE', 9, true, [220, 80, 20], 3);
-    addText('SORTED launches with three integrated tools: Decode a Letter (plain-English breakdown with urgency level, deadlines, and recommended action); Write My Reply (professionally drafted responses, tailored by tone and jurisdiction); and Dispute Help (structured guidance for neighbour disputes, employment conflicts, tenancy issues, and more). Three uses are free. Full access is £9.99 per month.', 11, false, [50, 50, 50], 8);
+    addText('SORTED launches with three integrated tools: Decode a Letter (plain-English breakdown with urgency level, deadlines, and recommended action); Write My Reply (professionally drafted responses, tailored by tone and jurisdiction); and Dispute Help (structured guidance for neighbour disputes, employment conflicts, tenancy issues, and more). Ten uses are free. Full access is £9.99 per month.', 11, false, [50, 50, 50], 8);
 
     addText('ETHICAL AI — WHAT IT ACTUALLY MEANS', 9, true, [220, 80, 20], 3);
     addText('SORTED is part of the Universal Frequency 51 ecosystem — a Glasgow-based social impact technology platform. Every product is built on the same ethical foundation: no surveillance, no data harvest, no corporate capture. The SaaS model is subscription-funded — not surveillance-funded.', 11, false, [50, 50, 50], 8);
@@ -186,7 +186,7 @@ export default function SortedPressRelease() {
 
           <PRSection label="THREE TOOLS IN ONE">
             <PRBody>SORTED launches with three integrated tools: <strong style={{ color: '#fff' }}>Decode a Letter</strong> — plain-English breakdown with urgency level, deadlines, and recommended action; <strong style={{ color: '#fff' }}>Write My Reply</strong> — professionally drafted responses tailored by tone and jurisdiction; and <strong style={{ color: '#fff' }}>Dispute Help</strong> — structured guidance for neighbour disputes, employment conflicts, tenancy issues, and more.</PRBody>
-            <PRBody>Three uses are free. Full access is £9.99 per month — less than one cup of coffee at most UK café chains.</PRBody>
+            <PRBody>Ten uses are free — no card, no signup. Full access is £9.99 per month — less than one cup of coffee at most UK café chains.</PRBody>
           </PRSection>
 
           <PRSection label="ETHICAL AI — WHAT IT ACTUALLY MEANS">

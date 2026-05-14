@@ -63,11 +63,8 @@ function SortedMark() {
 }
 
 const menuItems = [
-  { label: 'SORTED Home',       path: '/Sorted' },
-  { label: 'For Organisations', path: '/SortedForOrgs' },
-  { label: 'Partner Kit',       path: '/SortedPartnerKit' },
-  { label: 'Press Release',     path: '/SortedPressRelease' },
-  { label: 'Investor Brief',    path: '/SortedInvestorPress' },
+  { label: 'SORTED — Home',     path: '/Sorted' },
+  { label: 'FAQ & How It Works',path: '/Sorted#faq' },
   { label: 'Terms',             path: '/SortedTerms',   icon: <Scale className="w-3.5 h-3.5" /> },
   { label: 'Privacy',           path: '/SortedPrivacy', icon: <Eye   className="w-3.5 h-3.5" /> },
   { label: 'Contact',           path: 'mailto:family@uf51.love', icon: <Mail className="w-3.5 h-3.5" />, isEmail: true },
@@ -252,7 +249,7 @@ export default function SortedLayout({ children, currentPage }) {
           key={currentPage}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.2, delay: 0.05 }}
+          transition={{ duration: 0.18, ease: 'easeOut' }}
         >
           {children}
         </motion.div>
