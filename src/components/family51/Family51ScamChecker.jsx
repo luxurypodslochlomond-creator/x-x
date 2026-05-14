@@ -215,9 +215,9 @@ Return JSON with these exact fields:
 
 Copy exactly what it says — every word helps us check it.`}
             style={{
-              width: '100%', height: 200, background: 'rgba(26,18,8,0.03)',
-              border: `1px solid ${inputText ? accentColor + '60' : 'rgba(26,18,8,0.15)'}`,
-              borderRadius: 14, color: '#1a1208', fontSize: 14, padding: '16px 18px',
+              width: '100%', height: 200, background: 'rgba(255,255,255,0.05)',
+              border: `1px solid ${inputText ? accentColor + '60' : 'rgba(255,255,255,0.15)'}`,
+              borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
               transition: 'border-color 0.2s', boxSizing: 'border-box',
               caretColor: accentColor,
@@ -237,7 +237,7 @@ Copy exactly what it says — every word helps us check it.`}
                <motion.button whileTap={{ scale: 0.96 }} onClick={() => cameraInputRef.current?.click()} style={{
                  flex: 2, padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
                  letterSpacing: '0.06em', cursor: 'pointer',
-                 border: `2px solid ${accentColor}`, background: accentColor, color: '#000',
+                 border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                }}>
                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -249,7 +249,7 @@ Copy exactly what it says — every word helps us check it.`}
               <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()} style={{
                  flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
                  letterSpacing: '0.06em', cursor: 'pointer',
-                 border: `1px solid rgba(26,18,8,0.15)`, background: 'transparent', color: 'rgba(26,18,8,0.55)',
+                 border: `1px solid rgba(255,255,255,0.15)`, background: 'transparent', color: 'rgba(255,255,255,0.55)',
                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -262,7 +262,7 @@ Copy exactly what it says — every word helps us check it.`}
             </div>
           )}
 
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', textAlign: 'center', margin: 0 }}>
+          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', textAlign: 'center', margin: 0 }}>
             Free forever. Nothing stored. Processed and gone instantly.
           </p>
         </div>
@@ -273,7 +273,7 @@ Copy exactly what it says — every word helps us check it.`}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           style={{ padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.08)', textAlign: 'center' }}>
           <p style={{ fontSize: 13, color: '#ef4444', margin: '0 0 8px', fontWeight: 800 }}>Something went wrong</p>
-          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', margin: '0 0 10px' }}>{error}</p>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', margin: '0 0 10px' }}>{error}</p>
           <button onClick={() => setError(null)} style={{ fontSize: 11, fontWeight: 800, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.4)', borderRadius: 8, padding: '6px 14px', cursor: 'pointer' }}>DISMISS</button>
         </motion.div>
       )}
