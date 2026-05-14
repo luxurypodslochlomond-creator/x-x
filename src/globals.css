@@ -92,21 +92,40 @@ css
 
 /* VIEW TRANSITIONS API - Tight fade cross */
 ::view-transition-old(root) {
-  animation: vt-exit 0.25s cubic-bezier(0.4, 0, 1, 1);
+  animation: vt-exit 0.2s cubic-bezier(0.4, 0, 1, 1);
 }
 
 ::view-transition-new(root) {
-  animation: vt-enter 0.25s cubic-bezier(0, 0, 0.2, 1);
+  animation: vt-enter 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 @keyframes vt-exit {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.98); }
 }
 
 @keyframes vt-enter {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* SORTED page transitions */
+::view-transition-old(page-transition) {
+  animation: sorted-exit 0.18s cubic-bezier(0.35, 0, 1, 1);
+}
+
+::view-transition-new(page-transition) {
+  animation: sorted-enter 0.18s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes sorted-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes sorted-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* CB51 NATIVE APP RESPONSE - Snappy with depth */

@@ -4,8 +4,40 @@ Deno.serve(async (req) => {
     const hostname = req.headers.get('host') || '';
     const referer = req.headers.get('referer') || '';
     const isCB51 = hostname.includes('cb51.') || referer.includes('/CB51') || referer.includes('/Scott') || url.searchParams.get('brand') === 'cb51';
+    const isSorted = referer.includes('/Sorted') || referer.includes('/Family51') || url.searchParams.get('brand') === 'sorted';
 
-    const manifest = isCB51 ? {
+    const manifest = isSorted ? {
+      name: "SORTED — We've Got You",
+      short_name: "SORTED",
+      description: "Decode scary letters instantly. Plain English advice. Nothing stored.",
+      start_url: "/Sorted",
+      scope: "/",
+      display: "standalone",
+      orientation: "portrait-primary",
+      background_color: "#faf8f5",
+      theme_color: "#f5a623",
+      icons: [
+        { src: "/api/functions/serveOGImage?brand=sorted", sizes: "192x192", type: "image/png", purpose: "any" },
+        { src: "/api/functions/serveOGImage?brand=sorted", sizes: "512x512", type: "image/png", purpose: "any" }
+      ],
+      categories: ["productivity", "finance"],
+      shortcuts: [
+        {
+          name: "Decode Letter",
+          short_name: "Decode",
+          description: "Paste or photo a letter",
+          url: "/Sorted",
+          icons: [{ src: "/api/functions/serveOGImage?brand=sorted", sizes: "192x192" }]
+        },
+        {
+          name: "Scam Check",
+          short_name: "Scam",
+          description: "Check if it's a scam",
+          url: "/Sorted",
+          icons: [{ src: "/api/functions/serveOGImage?brand=sorted", sizes: "192x192" }]
+        }
+      ]
+    } : isCB51 ? {
       name: "CB51 : CitizenBand51 : Avoid the Noise",
       short_name: "CB51",
       description: "CB51 : CitizenBand51 : Avoid the Noise",

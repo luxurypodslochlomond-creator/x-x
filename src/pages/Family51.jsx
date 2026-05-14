@@ -26,7 +26,7 @@ import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 
 export default function Family51Page() {
   const { saveState, getState } = useSessionMemory('family51');
-  const [menuOpen, setMenuOpen] = useState(() => getState('menuOpen') || false);
+  const [menuOpen, setMenuOpen] = useState(false); // Don't persist menu state - always start closed
   const [showWhy, setShowWhy] = useState(() => getState('showWhy') || false);
   const [showHistory, setShowHistory] = useState(() => getState('showHistory') || false);
   const [showFAQ, setShowFAQ] = useState(() => getState('showFAQ') || false);
@@ -39,11 +39,20 @@ export default function Family51Page() {
   const geoPrice = useSortedGeoPrice();
   const engineRef = useRef(null);
 
-  // Save state silently on change
-  useEffect(() => { saveState('menuOpen', menuOpen); }, [menuOpen, saveState]);
+  // Save state silently on change (menuOpen not persisted - always starts closed)
   useEffect(() => { saveState('showWhy', showWhy); }, [showWhy, saveState]);
   useEffect(() => { saveState('showHistory', showHistory); }, [showHistory, saveState]);
-  useEffect(() => { saveState('showFAQ', showFAQ); }, [showFAQ, saveState]); 
+  useEffect(() => { saveState('showFAQ', showFAQ); }, [showFAQ, saveState]);
+  
+  // Add body class when menu opens to prevent content jump
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+    return () => document.body.classList.remove('menu-open');
+  }, [menuOpen]); 
 
   // Load case count from localStorage for badge + first visit onboarding
   useEffect(() => {
@@ -123,9 +132,29 @@ export default function Family51Page() {
     <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", overflowX: 'hidden', maxWidth: '100vw' }}>
       {/* Color palette: warm orange (#f97316) + light cream (#faf8f5) + deep brown (#1a1208) */}
       <style>{`
+        /* Native-feeling touches */
         .sorted-tap-btn { transition: opacity 0.08s; }
         .sorted-tap-btn:active { opacity: 0.5; }
         @media (hover: hover) { .sorted-tap-btn:hover { opacity: 0.85; } }
+
+        /* Prevent content jump when fixed menu opens */
+        body.menu-open { padding-top: 120px; }
+
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Disable pull-to-refresh on mobile */
+        body { overscroll-behavior-y: contain; }
+
+        /* Hardware acceleration for animations */
+        .hw-accel { transform: translateZ(0); will-change: transform; }
+
+        /* Disable text selection on buttons */
+        button { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+
+        /* Instant tap feedback */
+        .tap-feedback { transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .tap-feedback:active { transform: scale(0.94); }
       `}</style>
 
       {/* ONBOARDING — first visit only */}
@@ -163,16 +192,20 @@ export default function Family51Page() {
            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
              <motion.button
                onClick={() => { setShowFAQ(true); setMenuOpen(false); }}
+               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
                whileTap={{ scale: 0.95 }}
-               style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: '#f5a623', background: 'rgba(245,166,35,0.1)', border: '1.5px solid rgba(245,166,35,0.3)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
+               className="tap-feedback"
+               style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: '#f5a623', background: 'rgba(245,166,35,0.1)', border: '1.5px solid rgba(245,166,35,0.3)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}
              >
                FAQ
              </motion.button>
              <motion.button
                onClick={() => { setShowHistory(true); setShowFAQ(false); setShowWhy(false); setMenuOpen(false); }}
+               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
                whileTap={{ scale: 0.95 }}
+               className="tap-feedback"
                title="My Cases"
-               style={{ position: 'relative', width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', WebkitTapHighlightColor: 'transparent' }}
+               style={{ position: 'relative', width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}
                >
                <CasesIcon />
                {caseCount > 0 && (
@@ -183,13 +216,36 @@ export default function Family51Page() {
              </motion.button>
              <motion.button
                onClick={() => { setShowWhy(true); setMenuOpen(false); }}
+               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
                whileTap={{ scale: 0.95 }}
+               className="tap-feedback"
                title="Why SORTED?"
-               style={{ width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(245,166,35,0.2)', background: 'rgba(245,166,35,0.04)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(245,166,35,0.6)', fontSize: 14, fontWeight: 900, fontStyle: 'italic', WebkitTapHighlightColor: 'transparent' }}
+               style={{ width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(245,166,35,0.2)', background: 'rgba(245,166,35,0.04)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(245,166,35,0.6)', fontSize: 14, fontWeight: 900, fontStyle: 'italic', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}
              >
                ?
              </motion.button>
-             <motion.button onClick={() => setMenuOpen(!menuOpen)} whileTap={{ scale: 0.92 }} style={{ background: menuOpen ? 'rgba(245,166,35,0.12)' : 'rgba(254,243,226,0.04)', border: `1.5px solid ${menuOpen ? 'rgba(245,166,35,0.6)' : 'rgba(245,166,35,0.25)'}`, borderRadius: 10, cursor: 'pointer', padding: '7px 10px', color: '#f5a623', WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', display: 'flex', alignItems: 'center', gap: 7, transition: 'all 0.18s' }}>
+             <motion.button 
+               onClick={() => setMenuOpen(!menuOpen)} 
+               whileTap={{ scale: 0.92 }}
+               onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
+               style={{ 
+                 background: menuOpen ? 'rgba(245,166,35,0.12)' : 'rgba(254,243,226,0.04)', 
+                 border: `1.5px solid ${menuOpen ? 'rgba(245,166,35,0.6)' : 'rgba(245,166,35,0.25)'}`, 
+                 borderRadius: 10, 
+                 cursor: 'pointer', 
+                 padding: '7px 10px', 
+                 color: '#f5a623', 
+                 WebkitTapHighlightColor: 'transparent', 
+                 touchAction: 'manipulation',
+                 WebkitTouchCallout: 'none',
+                 WebkitUserSelect: 'none',
+                 userSelect: 'none',
+                 display: 'flex', 
+                 alignItems: 'center', 
+                 gap: 7, 
+                 transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)' 
+               }}
+             >
                {menuOpen ? <X className="w-4 h-4" /> : <><Menu className="w-4 h-4" /><span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', fontFamily: 'monospace' }}>MENU</span></>}
              </motion.button>
            </div>
@@ -201,19 +257,46 @@ export default function Family51Page() {
          {menuOpen && !showWhy && !showFAQ && (
            <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15, ease: 'easeOut' }} style={{ position: 'fixed', top: 54, left: 0, right: 0, zIndex: 49, background: 'rgba(250,248,245,0.99)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '0 20px', boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}>
                  <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
-               <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+               <button 
+                 onClick={() => { setShowFAQ(true); setMenuOpen(false); }} 
+                 onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
+                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
+                 onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
+                 onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
+               >
                   <FAQIcon />
                   FAQ &amp; How It Works
                 </button>
-                <Link to="/SortedTerms" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                <Link 
+                  to="/SortedTerms" 
+                  onClick={() => setMenuOpen(false)}
+                  onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
+                  onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
+                  onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
+                >
                    <Scale className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
                    Terms
                  </Link>
-                 <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                 <Link 
+                   to="/SortedPrivacy" 
+                   onClick={() => setMenuOpen(false)}
+                   onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
+                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
+                   onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
+                   onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
+                 >
                    <Eye className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
                    Privacy
                  </Link>
-                 <a href="mailto:family@uf51.love" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                 <a 
+                   href="mailto:family@uf51.love" 
+                   onClick={() => setMenuOpen(false)}
+                   onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
+                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }} 
+                   onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} 
+                   onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
+                 >
                    <Mail className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
                    Contact us
                  </a>
@@ -338,12 +421,13 @@ export default function Family51Page() {
                 { id: 'conflict', label: 'Dispute a company',    sub: 'Builder, landlord, trader',  color: '#f5a623',
                   icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f5a623" strokeWidth="2"/><path d="M9 12l2 2 4-4" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
               ].map(({ id, label, sub, color, icon }) => (
-                <motion.button
-                  key={id}
-                  onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open(id); }}
-                  className="sorted-tap-btn"
-                  whileTap={{ scale: 0.95 }}
-                  style={{
+               <motion.button
+                 key={id}
+                 onClick={() => { if (navigator.vibrate) navigator.vibrate(12); engineRef.current && engineRef.current.open(id); }}
+                 onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
+                 className="sorted-tap-btn tap-feedback"
+                 whileTap={{ scale: 0.95 }}
+                 style={{
                     textAlign: 'left', cursor: 'pointer',
                     padding: '15px 13px', borderRadius: 14,
                     border: '1.5px solid rgba(245,166,35,0.35)',

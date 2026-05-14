@@ -118,10 +118,19 @@ const AuthenticatedApp = () => {
   useEffect(() => {
     // Use View Transitions API for instant, native browser transitions
     if (document.startViewTransition) {
-      document.startViewTransition();
+      document.startViewTransition(() => {
+        // Set view transition names for smooth cross-fade
+        document.documentElement.style.viewTransitionName = 'page-transition';
+      });
     }
     setIsTransitioning(true);
-    const timer = setTimeout(() => setIsTransitioning(false), 60);
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+      // Clear transition name after animation
+      setTimeout(() => {
+        document.documentElement.style.viewTransitionName = '';
+      }, 300);
+    }, 60);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
