@@ -322,8 +322,8 @@ export default function Family51Page() {
               <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Dodgy Traders · Housing · Debt · Disputes · Scams</div>
               <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
                 Got a problem with a company, landlord, or letter?<br />
-                <span style={{ color: '#f5a623' }}>We'll sort it.</span>
-                <span style={{ color: 'rgba(26,18,8,0.55)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Plain English. Seconds.</span>
+                <span style={{ color: '#f5a623' }}>We'll help you sort it.</span>
+                <span style={{ color: 'rgba(26,18,8,0.55)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Right now. Plain English.</span>
               </h1>
             </motion.div>
 
