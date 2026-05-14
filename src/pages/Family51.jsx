@@ -16,6 +16,7 @@ import SortedOnboarding from '@/components/family51/SortedOnboarding';
 import SortedJourneyBar from '@/components/family51/SortedJourneyBar';
 import SortedShareMoment from '@/components/family51/SortedShareMoment';
 import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
+import { Trash2, X } from 'lucide-react';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first. v2
