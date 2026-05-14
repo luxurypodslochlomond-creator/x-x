@@ -49,6 +49,13 @@ export default function Family51Page() {
     const inIframe = window.self !== window.top;
     const seen = localStorage.getItem('sorted_onboarding_done');
     if (!seen && !inIframe) setShowOnboarding(true);
+    
+    // Check if FAQ should be opened (from menu click)
+    const openFAQ = localStorage.getItem('sorted_open_faq');
+    if (openFAQ === '1') {
+      setShowFAQ(true);
+      localStorage.removeItem('sorted_open_faq');
+    }
   }, []);
 
   // Detect Stripe success redirect

@@ -15,7 +15,7 @@ function SortedMark() {
 
 const menuItems = [
   { label: 'SORTED — Home',     path: '/Sorted' },
-  { label: 'FAQ & How It Works',path: '/Sorted#faq' },
+  { label: 'FAQ & How It Works',path: '/Sorted', faq: true },
   { label: 'Terms',             path: '/SortedTerms',   icon: <Scale className="w-3.5 h-3.5" /> },
   { label: 'Privacy',           path: '/SortedPrivacy', icon: <Eye   className="w-3.5 h-3.5" /> },
   { label: 'Contact',           path: 'mailto:family@uf51.love', icon: <Mail className="w-3.5 h-3.5" />, isEmail: true },
@@ -30,7 +30,11 @@ export default function SortedLayout({ children, currentPage }) {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  const handleNavClick = (path) => {
+  const handleNavClick = (path, faq) => {
+    if (faq) {
+      // Signal FAQ should open via localStorage
+      localStorage.setItem('sorted_open_faq', '1');
+    }
     setMenuOpen(false);
   };
 
@@ -139,7 +143,7 @@ export default function SortedLayout({ children, currentPage }) {
                 <Link
                   key={idx}
                   to={item.path}
-                  onClick={() => handleNavClick()}
+                  onClick={() => handleNavClick(item.path, item.faq)}
                   className="menu-item"
                   style={{
                     display: 'flex', alignItems: 'center', gap: 12,
