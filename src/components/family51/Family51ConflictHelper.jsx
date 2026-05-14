@@ -256,7 +256,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
   return (
     <div className="space-y-5">
-      <style>{`textarea::placeholder { color: rgba(26,18,8,0.55) !important; }`}</style>
+      <style>{`textarea::placeholder { color: rgba(255,255,255,0.35) !important; } input::placeholder { color: rgba(255,255,255,0.35) !important; }`}</style>
 
       {/* CONNECTED CASE BANNER */}
       {prefillContext?.related_case_id && (
@@ -273,26 +273,26 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
         autoFocus
         placeholder="Just tell us what's going on. Who's involved, what happened, what's been said. Don't filter it."
         style={{
-          width: '100%', height: 130, background: 'rgba(26,18,8,0.03)',
-          border: `1px solid ${what ? accentColor + '50' : 'rgba(26,18,8,0.15)'}`,
-          borderRadius: 12, color: '#1a1208', fontSize: 14, padding: '14px 16px',
+          width: '100%', height: 130, background: 'rgba(255,255,255,0.05)',
+          border: `1px solid ${what ? accentColor + '60' : 'rgba(255,255,255,0.15)'}`,
+          borderRadius: 12, color: '#fff', fontSize: 14, padding: '14px 16px',
           resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
           transition: 'border-color 0.2s', boxSizing: 'border-box',
           caretColor: accentColor,
         }}
-        onFocus={e => e.target.style.borderColor = accentColor + '70'}
-        onBlur={e => e.target.style.borderColor = what ? accentColor + '50' : 'rgba(26,18,8,0.12)'}
+        onFocus={e => e.target.style.borderColor = accentColor + '80'}
+        onBlur={e => e.target.style.borderColor = what ? accentColor + '60' : 'rgba(255,255,255,0.15)'}
       />
 
       {/* LOCATION — inline, compact */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 8, background: 'rgba(26,18,8,0.02)', border: '1px solid rgba(26,18,8,0.08)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
         <span style={{ fontSize: 12, opacity: 0.6 }}>📍</span>
         <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
       </div>
 
       {/* GOAL — pill chips, light */}
       <div>
-        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.75)', margin: '0 0 8px' }}>WHAT DO YOU WANT?</p>
+        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.55)', margin: '0 0 8px' }}>WHAT DO YOU WANT?</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {GOALS.map(g => (
             <button
@@ -300,9 +300,9 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               onClick={() => setGoal(g.id)}
               style={{
                 padding: '7px 14px', borderRadius: 20, cursor: 'pointer',
-                border: `1px solid ${goal === g.id ? accentColor + '80' : 'rgba(26,18,8,0.12)'}`,
-                background: goal === g.id ? accentColor + '18' : 'transparent',
-                color: goal === g.id ? '#1a1208' : 'rgba(26,18,8,0.55)',
+                border: `1px solid ${goal === g.id ? accentColor + '80' : 'rgba(255,255,255,0.15)'}`,
+                background: goal === g.id ? accentColor + '20' : 'transparent',
+                color: goal === g.id ? '#fff' : 'rgba(255,255,255,0.55)',
                 fontSize: 11, fontWeight: 700, letterSpacing: '0.06em',
                 transition: 'all 0.12s',
               }}
@@ -315,7 +315,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
       {/* OPTIONAL — conflict type & evidence */}
       <details style={{ cursor: 'pointer' }}>
-        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.75)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
          + OPTIONAL: conflict type &amp; evidence
         </summary>
         <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -327,13 +327,13 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
                 onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
                 style={{
                   padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                  border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(26,18,8,0.1)'}`,
-                  background: conflictType === t.id ? `${accentColor}12` : 'rgba(26,18,8,0.02)',
+                  border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.1)'}`,
+                  background: conflictType === t.id ? `${accentColor}18` : 'rgba(255,255,255,0.03)',
                   transition: 'all 0.15s',
                 }}
               >
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(26,18,8,0.55)', margin: 0 }}>{t.label}</p>
-                <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(255,255,255,0.55)', margin: 0 }}>{t.label}</p>
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
               </button>
             ))}
           </div>
@@ -377,9 +377,9 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 14,
               fontWeight: 800, letterSpacing: '0.06em',
               cursor: what.trim() ? 'pointer' : 'not-allowed',
-              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(26,18,8,0.12)'}`,
-              background: what.trim() ? accentColor + '18' : 'rgba(26,18,8,0.03)',
-              color: what.trim() ? '#1a1208' : 'rgba(26,18,8,0.35)',
+              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
+              background: what.trim() ? accentColor + '20' : 'rgba(255,255,255,0.04)',
+              color: what.trim() ? '#fff' : 'rgba(255,255,255,0.35)',
               transition: 'all 0.2s',
             }}
           >
@@ -404,11 +404,11 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
             <Card label="SITUATION ASSESSMENT" color={accentColor}>
-              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.8)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
             </Card>
 
             <Card label="YOUR POSITION" color="#06b6d4">
-              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.8)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
             </Card>
 
             <Card label="WHAT TO DO" color="#22c55e">
@@ -416,7 +416,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
                 {result.recommended_steps?.map((step, i) => (
                   <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                     <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.8)', lineHeight: 1.55 }}>{step}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55 }}>{step}</span>
                   </li>
                 ))}
               </ol>
@@ -424,7 +424,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
             {result.what_to_say && (
               <Card label="WHAT TO SAY / SEND" color={accentColor}>
-                <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.78)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: '0 0 12px' }}>{result.what_to_say}</pre>
+                <pre style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: '0 0 12px' }}>{result.what_to_say}</pre>
                 <motion.button onClick={() => copy(result.what_to_say, 'say')} whileTap={{ scale: 0.95 }} style={{ padding: '8px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
                   {copied === 'say' ? 'COPIED' : 'COPY THIS'}
                 </motion.button>
@@ -436,7 +436,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
                 {result.what_not_to_do?.map((item, i) => (
                   <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                     <span style={{ color: '#ef4444', fontSize: 10, paddingTop: 3 }}>X</span>
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)' }}>{item}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -444,7 +444,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
             {result.if_it_escalates && (
               <Card label="IF IT ESCALATES" color="#eab308">
-                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.72)', lineHeight: 1.65, margin: 0 }}>{result.if_it_escalates}</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_it_escalates}</p>
               </Card>
             )}
 
@@ -477,14 +477,14 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
 
-            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
+            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.45)' }}>
               NEW SITUATION
             </motion.button>
 
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
-              SORTED provides guidance only — not legal advice. For serious matters, speak to a qualified solicitor. <a href="/SortedTerms" style={{ color: 'rgba(26,18,8,0.5)', textDecoration: 'underline' }}>Terms</a>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
+              SORTED provides guidance only — not legal advice. For serious matters, speak to a qualified solicitor. <a href="/SortedTerms" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'underline' }}>Terms</a>
             </p>
-            <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.28)', textAlign: 'center', letterSpacing: '0.05em', marginTop: 4 }}>Nothing stored. Nothing seen. Yours alone.</p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', letterSpacing: '0.05em', marginTop: 4 }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -531,7 +531,7 @@ function ConflictThinkingLoader({ accentColor, country }) {
         ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#1a1208', margin: '0 0 10px' }}>BUILDING YOUR PLAN</p>
+        <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#fff', margin: '0 0 10px' }}>BUILDING YOUR PLAN</p>
         <AnimatePresence mode="wait">
           <motion.p
             key={stepIndex}
@@ -544,7 +544,7 @@ function ConflictThinkingLoader({ accentColor, country }) {
             ▸ {THINKING_STEPS[stepIndex]}
           </motion.p>
         </AnimatePresence>
-        <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', margin: 0 }}>Analysing against {country} law…</p>
+        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', margin: 0 }}>Analysing against {country} law…</p>
       </div>
     </motion.div>
   );

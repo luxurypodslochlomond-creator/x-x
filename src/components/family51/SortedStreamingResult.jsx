@@ -98,16 +98,16 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           />
           <span style={{ fontSize: 11, fontWeight: 900, color: sev.color, letterSpacing: '0.16em' }}>{result.severity}</span>
           {result.sender && result.sender !== 'Unknown' && (
-            <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', marginLeft: 'auto' }}>from {result.sender}</span>
+            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', marginLeft: 'auto' }}>from {result.sender}</span>
           )}
         </div>
 
-        <p style={{ fontSize: 20, fontWeight: 900, color: '#1a1208', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+        <p style={{ fontSize: 20, fontWeight: 900, color: '#fff', margin: '0 0 10px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
           {result.letter_summary || 'Official letter'}
         </p>
 
         {result.dont_panic && (
-          <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: 1.6 }}>
             {result.dont_panic}
           </p>
         )}
@@ -121,8 +121,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
               </div>
             )}
             {hasMoney && (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.12)' }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: 'rgba(26,18,8,0.65)' }}>£ {result.financial_impact}</span>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)' }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.75)' }}>£ {result.financial_impact}</span>
               </div>
             )}
           </div>
@@ -134,10 +134,10 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.1 }}
-        style={{ padding: '18px 20px', borderRadius: 14, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}
+        style={{ padding: '18px 20px', borderRadius: 14, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}
       >
-        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(26,18,8,0.3)', margin: '0 0 10px' }}>IN PLAIN ENGLISH</p>
-        <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.85)', lineHeight: 1.75, margin: 0 }}>
+        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.35)', margin: '0 0 10px' }}>IN PLAIN ENGLISH</p>
+        <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.88)', lineHeight: 1.75, margin: 0 }}>
           {result.what_this_means}
         </p>
       </motion.div>
@@ -148,9 +148,9 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
-          style={{ padding: '18px 20px', borderRadius: 14, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}
+          style={{ padding: '18px 20px', borderRadius: 14, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}
         >
-          <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(26,18,8,0.3)', margin: '0 0 14px' }}>WHAT TO DO</p>
+          <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.35)', margin: '0 0 14px' }}>WHAT TO DO</p>
           <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14 }}>
             {result.action_steps.slice(0, showMore ? undefined : 3).map((step, i) => (
               <motion.li
@@ -166,7 +166,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0, marginTop: 2,
                 }}>{i + 1}</span>
-                <span style={{ fontSize: 14, color: 'rgba(26,18,8,0.82)', lineHeight: 1.65 }}>{step}</span>
+                <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.88)', lineHeight: 1.65 }}>{step}</span>
               </motion.li>
             ))}
           </ol>
@@ -221,7 +221,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             {result.if_you_ignore_this && (
               <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(234,179,8,0.04)', border: '1px solid rgba(234,179,8,0.12)' }}>
                 <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(234,179,8,0.6)', margin: '0 0 8px' }}>IF YOU DON'T ACT</p>
-                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.72)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
               </div>
             )}
 
@@ -231,7 +231,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
                 <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(34,197,94,0.5)', margin: '0 0 10px' }}>FREE HELP AVAILABLE</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {result.free_help.map((help, i) => (
-                    <p key={i} style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', lineHeight: 1.65, margin: 0, paddingLeft: 12, borderLeft: `2px solid rgba(34,197,94,0.3)` }}>{help}</p>
+                    <p key={i} style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0, paddingLeft: 12, borderLeft: `2px solid rgba(34,197,94,0.3)` }}>{help}</p>
                   ))}
                 </div>
               </div>
@@ -246,9 +246,9 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
                   { name: 'National Debtline', desc: '0808 808 4000', url: 'https://www.nationaldebtline.org' },
                   { name: 'Debt Camel', desc: 'plain English guides', url: 'https://debtcamel.co.uk' },
                 ].map(({ name, desc, url }) => (
-                  <a key={name} href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'rgba(26,18,8,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <a key={name} href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#f97316', flexShrink: 0 }} />
-                    <span><strong style={{ color: '#1a1208' }}>{name}</strong> — {desc}</span>
+                    <span><strong style={{ color: '#fff' }}>{name}</strong> — {desc}</span>
                   </a>
                 ))}
               </div>
@@ -261,8 +261,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       <button
         onClick={() => setShowMore(v => !v)}
         style={{
-          fontSize: 12, fontWeight: 700, color: 'rgba(26,18,8,0.4)',
-          background: 'none', border: '1px solid rgba(26,18,8,0.1)',
+          fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.4)',
+          background: 'none', border: '1px solid rgba(255,255,255,0.1)',
           borderRadius: 10, padding: '11px 0', cursor: 'pointer',
           letterSpacing: '0.08em', width: '100%',
           WebkitTapHighlightColor: 'transparent',
@@ -293,8 +293,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           style={{
             flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
             letterSpacing: '0.08em', cursor: 'pointer',
-            border: '1px solid rgba(26,18,8,0.12)',
-            background: 'transparent', color: 'rgba(26,18,8,0.45)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            background: 'transparent', color: 'rgba(255,255,255,0.5)',
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
           }}
         >
@@ -303,14 +303,14 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       </div>
 
       {/* HUMAN + AI LINE */}
-      <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.45)', textAlign: 'center', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
+      <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textAlign: 'center', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
         Built by a human who needed this too. Powered by AI — but the care is real.
       </p>
 
       {/* DISCLAIMER */}
-      <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
+      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
         General guidance only — not legal advice. Always verify with{' '}
-        <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(26,18,8,0.5)', textDecoration: 'underline' }}>Citizens Advice</a>.
+        <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'underline' }}>Citizens Advice</a>.
       </p>
 
     </div>
