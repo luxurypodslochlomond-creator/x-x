@@ -201,11 +201,7 @@ export default function Family51Page() {
          {menuOpen && !showWhy && !showFAQ && (
            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.12 }} style={{ position: 'sticky', top: 54, zIndex: 49, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: '1.5px solid rgba(245,166,35,0.2)', padding: '0 20px' }}>
                  <div style={{ maxWidth: 520, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
-               <button onClick={() => { setShowWhy(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
-                  <WhyIcon />
-                  Why we built this
-                </button>
-                <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+               <button onClick={() => { setShowFAQ(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.15)', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                   <FAQIcon />
                   FAQ &amp; How It Works
                 </button>
@@ -213,33 +209,26 @@ export default function Family51Page() {
                    <Scale className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
                    Terms
                  </Link>
-                 <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.1)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                 <Link to="/SortedPrivacy" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                    <Eye className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
                    Privacy
                  </Link>
-                 <button onClick={() => { setShowMauro(true); setMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', background: 'none', border: 'none', cursor: 'pointer', borderBottom: '1px solid rgba(245,166,35,0.1)', letterSpacing: '0.02em', width: '100%', textAlign: 'left', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
+                 <a href="mailto:family@uf51.love" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: '#1a1208', textDecoration: 'none', borderBottom: '1px solid rgba(245,166,35,0.15)', letterSpacing: '0.02em', transition: 'all 0.12s' }} onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'} onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}>
                    <Mail className="w-4 h-4" style={{ color: 'rgba(26,18,8,0.4)' }} />
-                   Say hi to SORTED AI
-                 </button>
-                 {/* PRIVACY NOTE */}
-                 <div style={{ padding: '11px 0', borderBottom: '1px solid rgba(245,166,35,0.08)' }}>
-                   <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: 0, lineHeight: 1.6 }}>
-                     Your letter is processed by AI then immediately discarded. Nothing is stored, logged, or sold. Nothing leaves your session except what you choose to email yourself.
-                   </p>
-                 </div>
-                 {/* NUCLEAR CLEAR */}
+                   Contact us
+                 </a>
                  <button
                    onClick={() => {
                      try { localStorage.clear(); } catch {}
                      setMenuOpen(false);
                      window.location.reload();
                    }}
-                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 13, fontWeight: 700, color: 'rgba(26,18,8,0.35)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }}
+                   style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 0', fontSize: 12, fontWeight: 600, color: 'rgba(26,18,8,0.3)', background: 'none', border: 'none', cursor: 'pointer', width: '100%', textAlign: 'left', letterSpacing: '0.02em', transition: 'all 0.12s' }}
                   onMouseEnter={e => e.currentTarget.style.paddingLeft = '6px'}
                   onMouseLeave={e => e.currentTarget.style.paddingLeft = '0'}
                 >
                   <Trash2 className="w-4 h-4" />
-                  Clear all my data &amp; reset
+                  Clear all my data
                 </button>
                 </div>
                 </motion.div>
