@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
+import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
+import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 
 const LOADING_STEPS = [
   { text: 'Reading your message…',      sub: 'Nothing stored — gone when we\'re done' },
@@ -16,7 +18,7 @@ const VERDICT = {
   scam:    { color: '#ef4444', bg: 'rgba(239,68,68,0.10)', border: 'rgba(239,68,68,0.35)',  emoji: '🚨', label: 'Almost Certainly a Scam' },
 };
 
-export default function Family51ScamChecker({ accentColor = '#ef4444' }) {
+export default function Family51ScamChecker({ accentColor = '#ef4444', onResult }) {
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -122,12 +124,22 @@ Return JSON with these exact fields:
       if (!raw || !raw.verdict) throw new Error('Could not analyse this. Please try again.');
 
       setResult(raw);
-    } catch (err) {
+      // Record use + save to case history
+      await recordSortedUse();
+      saveCaseToHistory({
+        tool: 'scam',
+        input_text: text,
+        ai_result: JSON.stringify(raw),
+        summary: `${raw.scam_type || 'Scam check'} — ${raw.confidence}`,
+        severity: raw.verdict === 'scam' ? 'urgent' : raw.verdict === 'warning' ? 'important' : 'routine',
+      });
+      onResult?.();
+      } catch (err) {
       setError(err?.message || 'Something went wrong. Please try again.');
-    } finally {
+      } finally {
       setLoading(false);
       setUploading(false);
-    }
+      }
   };
 
   const handleFileUpload = async (e) => {
