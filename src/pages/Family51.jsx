@@ -229,13 +229,13 @@ export default function Family51Page() {
             {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Dodgy Traders · Housing · Debt · Disputes · Scams</div>
-              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
+              <h1 style={{ fontSize: 'clamp(26px, 7.5vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
                 Got a problem with a company, landlord, or letter?
               </h1>
-              <div style={{ marginTop: 6 }}>
-                <span style={{ fontSize: 'clamp(20px, 6vw, 28px)', fontWeight: 900, color: '#f5a623', letterSpacing: '-0.03em' }}>We'll help you sort it.</span>
+              <div style={{ marginTop: 8 }}>
+                <span style={{ fontSize: 'clamp(24px, 7vw, 34px)', fontWeight: 900, color: '#f5a623', letterSpacing: '-0.03em' }}>We'll help you sort it.</span>
               </div>
-              <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.45)', margin: '5px 0 0' }}>Right now. Plain English. No account needed.</p>
+              <p style={{ fontSize: 16, fontWeight: 500, color: 'rgba(26,18,8,0.45)', margin: '8px 0 0' }}>Right now. Plain English. No account needed.</p>
             </motion.div>
 
             {/* PRIVACY TRUST — single line, compact */}
@@ -302,19 +302,19 @@ export default function Family51Page() {
                  whileTap={{ scale: 0.95 }}
                  style={{
                     textAlign: 'left', cursor: 'pointer',
-                    padding: '16px 14px', borderRadius: 16,
-                    border: `1.5px solid ${border}`,
-                    background: bg,
-                    WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 10, minHeight: 108,
+                      padding: '20px 16px', borderRadius: 16,
+                      border: `1.5px solid ${border}`,
+                      background: bg,
+                      WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                      display: 'flex', flexDirection: 'column', gap: 12, minHeight: 124,
                   }}
                 >
                   <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 1px 4px ${color}25` }}>
                     {icon}
                   </div>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
-                    <div style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.55)', lineHeight: 1.35 }}>{sub}</div>
+                    <div style={{ fontSize: 15, fontWeight: 800, color: '#1a1208', marginBottom: 4, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
+                    <div style={{ fontSize: 12, color: 'rgba(26,18,8,0.55)', lineHeight: 1.4 }}>{sub}</div>
                   </div>
                 </motion.button>
               ))}
@@ -474,7 +474,7 @@ function WhyRow({ icon, text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
       <span style={{ flexShrink: 0, marginTop: 1, display: 'flex', alignItems: 'center' }}>{icon}</span>
-      <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', lineHeight: 1.45 }}>{text}</span>
+      <span style={{ fontSize: 14, color: 'rgba(26,18,8,0.65)', lineHeight: 1.5 }}>{text}</span>
     </div>
   );
 }

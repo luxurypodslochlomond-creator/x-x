@@ -99,7 +99,7 @@ export default function SortedOnboarding({ onDone }) {
           }}>
             {s.title}
           </h2>
-          <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.6)', lineHeight: 1.7, margin: 0 }}>
+          <p style={{ fontSize: 16, color: 'rgba(26,18,8,0.65)', lineHeight: 1.75, margin: 0 }}>
             {s.sub}
           </p>
         </motion.div>
@@ -111,8 +111,8 @@ export default function SortedOnboarding({ onDone }) {
           onClick={next}
           style={{
             width: '100%', padding: '19px 0', borderRadius: 14, cursor: 'pointer',
-            background: s.color, border: 'none', color: '#000',
-            fontSize: 15, fontWeight: 900, letterSpacing: '0.04em',
+            background: s.color, border: 'none', color: '#fff',
+            fontSize: 16, fontWeight: 900, letterSpacing: '0.04em',
           }}
         >
           {step < STEPS.length - 1 ? 'Show me →' : "Let's go — paste my letter →"}
