@@ -110,16 +110,14 @@ export default function SortedLayout({ children, currentPage }) {
           </div>
         )}
 
-        {/* CASES BRIEFCASE — always visible, greyed out when empty */}
+        {/* CASES BRIEFCASE — always visible & clickable, shows empty state */}
         <div
           onClick={() => {
-            if (caseCount > 0) {
-              setMenuOpen(false);
-              window.location.hash = '#case-history';
-            }
+            setMenuOpen(false);
+            window.location.hash = '#case-history';
           }}
           style={{
-            display: 'flex', alignItems: 'center', gap: 5, cursor: caseCount > 0 ? 'pointer' : 'default',
+            display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer',
             background: caseCount > 0 ? 'rgba(245,166,35,0.06)' : 'rgba(245,166,35,0.02)',
             border: `1.5px solid ${caseCount > 0 ? 'rgba(245,166,35,0.2)' : 'rgba(245,166,35,0.08)'}`,
             borderRadius: 8, padding: '5px 10px', marginRight: 8,
