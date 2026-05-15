@@ -217,7 +217,7 @@ export default function Family51Page() {
 
          {/* ── HOME: PREMIUM, FAST, CONFIDENT ─────────────────── */}
          {!isLocked && !showWhy && !showFAQ && !showHistory && (
-          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '16px 20px 60px' }}>
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '24px 20px 80px' }}>
 
             {/* STRIPE SUCCESS — premium celebration */}
             <AnimatePresence>
@@ -229,11 +229,11 @@ export default function Family51Page() {
             {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Dodgy Traders · Housing · Debt · Disputes · Scams</div>
-              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
+              <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
                 Got a problem with a company, landlord, or letter?<br />
                 <span style={{ color: '#f5a623' }}>We'll help you sort it.</span>
-                <span style={{ color: 'rgba(26,18,8,0.55)', fontSize: 'clamp(13px, 3.5vw, 16px)', fontWeight: 600, marginLeft: 8 }}>Right now. Plain English.</span>
               </h1>
+              <p style={{ fontSize: 'clamp(13px, 3.5vw, 15px)', fontWeight: 600, color: 'rgba(26,18,8,0.5)', margin: '6px 0 0', letterSpacing: '0.01em' }}>Right now. Plain English.</p>
             </motion.div>
 
             {/* PRIVACY TRUST — single line, compact */}
