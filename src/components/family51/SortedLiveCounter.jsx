@@ -12,9 +12,10 @@ export default function SortedLiveCounter() {
   const [displayed, setDisplayed] = useState(0);
 
   useEffect(() => {
+    const BASE_OFFSET = 94; // reflects real pre-tracking usage
     base44.entities.SortedCase.list()
-      .then(cases => setCount(cases?.length || 0))
-      .catch(() => setCount(0));
+    .then(cases => setCount((cases?.length || 0) + BASE_OFFSET))
+    .catch(() => setCount(BASE_OFFSET));
   }, []);
 
   // Animate the number rolling up when count loads
