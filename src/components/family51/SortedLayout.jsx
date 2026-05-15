@@ -139,7 +139,7 @@ export default function SortedLayout({ children, currentPage }) {
             <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" fill="none" />
             <path d="M4.5 8h6M4.5 10.5h4" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
           </svg>
-          <span style={{ fontSize: 10, fontWeight: 900, color: '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>{caseCount > 0 ? caseCount : '·'}</span>
+          <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>{caseCount}</span>
         </div>
 
         <button
