@@ -326,10 +326,10 @@ Return a JSON object with these EXACT fields:
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff', margin: '0 0 6px', lineHeight: 1.2 }}>
-                   {LOADING_STEPS[loadingStep].text}
+                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#1a1208', margin: '0 0 6px', lineHeight: 1.2 }}>
+                  {LOADING_STEPS[loadingStep].text}
                   </p>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', margin: 0, letterSpacing: '0.04em' }}>
+                  <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: 0, letterSpacing: '0.04em' }}>
                     {LOADING_STEPS[loadingStep].sub}
                   </p>
                 </motion.div>
@@ -351,7 +351,7 @@ Return a JSON object with these EXACT fields:
             {/* Scanning lines */}
             <div style={{ width: '100%', maxWidth: 200, display: 'flex', flexDirection: 'column', gap: 5 }}>
               {[1, 0.7, 0.9, 0.5, 0.8].map((w, i) => (
-                <div key={i} style={{ position: 'relative', height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.05)', overflow: 'hidden', width: `${w * 100}%` }}>
+                <div key={i} style={{ position: 'relative', height: 4, borderRadius: 2, background: 'rgba(26,18,8,0.07)', overflow: 'hidden', width: `${w * 100}%` }}>
                   <motion.div
                     style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, transparent, ${accentColor}80, transparent)`, borderRadius: 2 }}
                     animate={{ x: ['-100%', '250%'] }}
@@ -434,8 +434,8 @@ Don't worry about formatting. Just get it all in."
                 style={{
                   flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
                   letterSpacing: '0.06em', cursor: 'pointer',
-                  border: `1px solid rgba(255,255,255,0.15)`,
-                  background: 'transparent', color: 'rgba(255,255,255,0.5)',
+                  border: `1px solid rgba(26,18,8,0.2)`,
+                  background: 'transparent', color: 'rgba(26,18,8,0.55)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                 }}
               >
@@ -468,14 +468,14 @@ Don't worry about formatting. Just get it all in."
       {letterText.trim() && !result && (
       <div style={{ paddingTop: 4 }}>
        {/* GEO — always visible when typing */}
-       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
-         <span style={{ fontSize: 12 }}>📍</span>
-         <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.55)' }}>LOCATION:</span>
+       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
+       <span style={{ fontSize: 12 }}>📍</span>
+       <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.5)' }}>LOCATION:</span>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
           {/* TYPE CHIPS — collapsible optional hint */}
           <details style={{ cursor: 'pointer' }}>
-            <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+            <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
               + OPTIONAL: what type of letter? (helps accuracy)
             </summary>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -575,9 +575,9 @@ function Chip({ active, color, onClick, children }) {
 return (
   <button onClick={onClick} style={{
     padding: '5px 11px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer',
-    border: `1px solid ${active ? color : 'rgba(255,255,255,0.15)'}`,
+    border: `1px solid ${active ? color : 'rgba(26,18,8,0.15)'}`,
     background: active ? `${color}15` : 'transparent',
-    color: active ? color : 'rgba(255,255,255,0.45)',
+    color: active ? color : 'rgba(26,18,8,0.5)',
       transition: 'all 0.15s',
     }}>
       {children}
