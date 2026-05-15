@@ -54,6 +54,13 @@ function NativeButton({ onClick, children, style, className }) {
 }
 
 const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, recordUse }, ref) {
+  const TOOL_COLORS = {
+    letter:   { color: '#f5a623', bg: 'rgba(245,166,35,0.08)',  border: 'rgba(245,166,35,0.35)',  label: 'DECODE'  },
+    scam:     { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.35)',   label: 'SCAM?'   },
+    reply:    { color: '#2563eb', bg: 'rgba(37,99,235,0.08)',   border: 'rgba(37,99,235,0.35)',   label: 'REPLY'   },
+    conflict: { color: '#059669', bg: 'rgba(5,150,105,0.08)',   border: 'rgba(5,150,105,0.35)',   label: 'DISPUTE' },
+  };
+
   const [activeTool, setActiveTool] = useState(null);
   const [visible, setVisible] = useState(false); // drives the CSS transition
   const [prefillContext, setPrefillContext] = useState(null);
@@ -92,17 +99,18 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
 
   if (!activeTool) return null;
 
+  const tc = TOOL_COLORS[activeTool] || TOOL_COLORS.letter;
+
   return (
     <div
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        // Hardware-accelerated sheet slide — iOS sheet curve
         transform: visible ? 'translate3d(0, 0, 0)' : 'translate3d(0, 100%, 0)',
         transition: visible
-          ? 'transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)' // ease-out up
-          : 'transform 0.22s cubic-bezier(0.4, 0, 1, 1)',    // ease-in down
+          ? 'transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)'
+          : 'transform 0.22s cubic-bezier(0.4, 0, 1, 1)',
         willChange: 'transform',
         background: '#0f0c08',
         overflowY: 'auto',
@@ -112,23 +120,35 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         WebkitOverflowScrolling: 'touch',
       }}
     >
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '28px 20px 60px' }}>
+      {/* COLOURED TOP ACCENT BAR */}
+      <div style={{ height: 3, background: tc.color, flexShrink: 0, transition: 'background 0.2s' }} />
 
-        {/* BACK — opacity press, no scale */}
-        <NativeButton
-          onClick={handleBack}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 5,
-            fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)',
-            letterSpacing: '0.08em', background: 'none', border: 'none',
-            marginBottom: 16,
-          }}
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          BACK
-        </NativeButton>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '16px 16px 80px' }}>
+
+        {/* HEADER ROW — back + tool label */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+          <NativeButton
+            onClick={handleBack}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 6,
+              fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)',
+              letterSpacing: '0.08em', background: 'none', border: 'none', padding: '8px 0',
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            BACK
+          </NativeButton>
+          <div style={{
+            fontSize: 10, fontWeight: 800, letterSpacing: '0.14em',
+            color: tc.color, background: `${tc.color}18`,
+            border: `1px solid ${tc.color}40`,
+            borderRadius: 6, padding: '4px 10px',
+          }}>
+            {tc.label}
+          </div>
+        </div>
 
         {/* JOURNEY BAR */}
         <SortedJourneyBar
@@ -139,14 +159,14 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
 
         {activeTool === 'letter' && (
           <Family51LetterDecoder
-            accentColor="#f5a623"
+            accentColor={tc.color}
             onResult={() => handleToolComplete('letter')}
             onHandoff={(data) => handleToolOpen('reply', data)}
           />
         )}
         {activeTool === 'reply' && (
           <Family51ReplyWriter
-            accentColor="#f5a623"
+            accentColor={tc.color}
             onResult={() => handleToolComplete('reply')}
             prefillContext={prefillContext}
             suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
@@ -156,14 +176,14 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         )}
         {activeTool === 'conflict' && (
           <Family51ConflictHelper
-            accentColor="#f5a623"
+            accentColor={tc.color}
             onResult={() => handleToolComplete('conflict')}
             prefillContext={prefillContext}
           />
         )}
         {activeTool === 'scam' && (
           <Family51ScamChecker
-            accentColor="#f5a623"
+            accentColor={tc.color}
           />
         )}
 
@@ -173,28 +193,27 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           )}
         </AnimatePresence>
 
-        {/* BOTTOM NAV — pure CSS, no Framer on these */}
-        <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid rgba(245,166,35,0.2)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          {[
-            { id: 'letter',   label: 'DECODE',  color: '#f5a623' },
-            { id: 'reply',    label: 'REPLY',   color: '#f5a623' },
-            { id: 'conflict', label: 'DISPUTE', color: '#f5a623' },
-            { id: 'scam',     label: 'SCAM?',   color: '#ef4444' },
-          ].map(t => (
-            <NativeButton
-              key={t.id}
-              onClick={() => handleToolOpen(t.id)}
-              style={{
-                padding: '10px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
-                letterSpacing: '0.1em',
-                border: `1px solid ${activeTool === t.id ? t.color + '60' : 'rgba(255,255,255,0.12)'}`,
-                background: activeTool === t.id ? `${t.color}12` : 'transparent',
-                color: activeTool === t.id ? t.color : 'rgba(255,255,255,0.35)',
-              }}
-            >
-              {t.label}
-            </NativeButton>
-          ))}
+        {/* BOTTOM NAV — 4 distinct colours */}
+        <div style={{ marginTop: 32, paddingTop: 16, borderTop: `1px solid ${tc.color}25`, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+          {Object.entries(TOOL_COLORS).map(([id, t]) => {
+            const isActive = activeTool === id;
+            return (
+              <NativeButton
+                key={id}
+                onClick={() => handleToolOpen(id)}
+                style={{
+                  padding: '12px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
+                  letterSpacing: '0.1em',
+                  border: `1.5px solid ${isActive ? t.color + '80' : t.color + '28'}`,
+                  background: isActive ? `${t.color}18` : `${t.color}06`,
+                  color: isActive ? t.color : `${t.color}70`,
+                  transition: 'all 0.15s',
+                }}
+              >
+                {t.label}
+              </NativeButton>
+            );
+          })}
         </div>
       </div>
     </div>
