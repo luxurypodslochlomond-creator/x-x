@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
+import SortedShareMomentScam from './SortedShareMomentScam';
 
 const LOADING_STEPS = [
   { text: 'Reading your message…',      sub: 'Nothing stored — gone when we\'re done' },
@@ -364,21 +365,9 @@ Copy exactly what it says — every word helps us check it.`}
 
             {/* SHARE + RESET */}
             <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-              <button
-                onClick={() => {
-                  const text = `SORTED scam check:\n\n${v.emoji} ${v.label}\n${result.confidence}\n\n${result.what_this_is || ''}\n\nWhat to do:\n${result.what_to_do?.map((s, i) => `${i+1}. ${s}`).join('\n') || ''}\n\nsorted.uf51.love — free, nothing stored`;
-                  if (navigator.share) {
-                    navigator.share({ title: 'SORTED Scam Check', text }).catch(() => {
-                      navigator.clipboard?.writeText(text);
-                    });
-                  } else {
-                    navigator.clipboard?.writeText(text);
-                  }
-                }}
-                style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.15)', background: 'transparent', color: 'rgba(26,18,8,0.5)' }}
-              >
-                SHARE RESULT
-              </button>
+              <div style={{ flex: 1 }}>
+                <SortedShareMomentScam result={result} accentColor={accentColor} />
+              </div>
               <button onClick={reset} style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
                 CHECK ANOTHER
               </button>
