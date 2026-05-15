@@ -244,8 +244,8 @@ export default function Family51Page() {
                 <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
                 <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
               </svg>
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#f5a623' }}>Nothing leaves your device</span>
-              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)' }}>· No account. No storage. Ever.</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#f5a623' }}>We never store your data</span>
+              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)' }}>· No account. No logs. Ever.</span>
             </motion.div>
 
             {/* 4 TOOL BUTTONS — 2x2 grid */}
