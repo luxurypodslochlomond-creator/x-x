@@ -1,80 +1,77 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+
+const Section = ({ title, children }) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <div style={{ marginBottom: 24, borderBottom: '1px solid rgba(245,166,35,0.15)', paddingBottom: 24 }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: open ? 10 : 0 }}
+      >
+        <span style={{ fontSize: 15, fontWeight: 700, color: '#c47f0a' }}>{title}</span>
+        <span style={{ fontSize: 18, color: '#f5a623', lineHeight: 1 }}>{open ? '−' : '+'}</span>
+      </button>
+      {open && <p style={{ fontSize: 14, lineHeight: 1.8, color: 'rgba(26,18,8,0.68)', margin: 0 }}>{children}</p>}
+    </div>
+  );
+};
 
 export default function SortedTermsPage() {
   return (
-    <div style={{ padding: '40px 20px', maxWidth: 640, margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
-      <div style={{ marginBottom: 40 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 8, color: '#1a1208' }}>SORTED</h1>
-        <p style={{ fontSize: 13, letterSpacing: '0.08em', color: 'rgba(26,18,8,0.55)', textTransform: 'uppercase' }}>Terms of Service</p>
-        <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.4)', marginTop: 6 }}>Last updated: May 2026</p>
+    <div style={{ padding: '40px 20px', maxWidth: 580, margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+
+      {/* Header */}
+      <div style={{ marginBottom: 36 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+          <span style={{ fontSize: 26, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.5px' }}>SORTED</span>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', color: '#f5a623', background: 'rgba(245,166,35,0.12)', padding: '3px 8px', borderRadius: 4 }}>TERMS</span>
+        </div>
+        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: May 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
       </div>
 
-      <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(26,18,8,0.7)', marginBottom: 36, fontStyle: 'italic' }}>
-        You've got a letter you don't understand. We help you make sense of it — in plain English, your language, no jargon. That's SORTED. Built for real people, not corporations.
-      </p>
-
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>1. What SORTED Is</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          SORTED is an AI-powered document translation tool. You paste or photograph a letter — we decode it into plain English and suggest possible next steps. We work across most countries and languages. SORTED is <strong>not a law firm</strong> and does not provide legal advice. Think of us as a brilliant, well-read friend who helps you understand what something means — not a solicitor who can act on your behalf.
+      {/* Intro */}
+      <div style={{ background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10, padding: '16px 18px', marginBottom: 32 }}>
+        <p style={{ fontSize: 14, lineHeight: 1.8, color: 'rgba(26,18,8,0.72)', margin: 0 }}>
+          You've got a letter you don't understand. We decode it into plain English — fast, private, no jargon. That's SORTED. Built for real people, everywhere.
         </p>
-      </section>
+      </div>
 
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>2. Not Legal Advice</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          SORTED's output is information, not legal advice. It is not a substitute for a qualified solicitor, lawyer, or legal professional. If you're facing court proceedings, serious financial action, or a dispute with significant consequences — please also seek advice from a qualified professional in your country. SORTED can help you understand the situation and prepare, but the final decisions are always yours.
+      <Section title="1. What SORTED Is">
+        SORTED is an AI-powered document decoder — not a law firm. We translate complex letters into plain English and suggest possible next steps. Think of us as a brilliant, well-read friend who helps you understand what something means. For serious legal matters, also speak to a qualified professional in your country.
+      </Section>
+
+      <Section title="2. Not Legal Advice">
+        SORTED's output is information, not legal advice. It doesn't replace a solicitor, lawyer, or legal professional. For anything involving court, significant debt, or complex disputes — use SORTED to understand your situation, then seek qualified help. The decisions are always yours.
+      </Section>
+
+      <Section title="3. Accuracy">
+        AI is powerful but not perfect. Laws vary by country and circumstance. SORTED does its best — but always verify key facts before acting, especially in financial or legal situations. We're honest when something is uncertain.
+      </Section>
+
+      <Section title="4. Free Sessions, Then You Choose">
+        You get free uses to start. After that, subscribe or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
+      </Section>
+
+      <Section title="5. Our Liability">
+        SORTED is provided as a helpful service. To the extent permitted by applicable law, Universal Frequency 51 CIC is not liable for decisions made based on SORTED's output in complex legal situations we haven't been fully briefed on. This isn't coldness — it's honesty about what an AI decoder can and can't do.
+      </Section>
+
+      <Section title="6. Governing Law">
+        These terms are governed by Scots law (Scotland, UK). EU users: your local consumer protection rights under EU law apply and are not overridden here. Nothing in these terms removes rights you have under your own country's laws.
+      </Section>
+
+      <Section title="7. Changes">
+        If we update these terms meaningfully, we'll update the date above. We'll never change our core commitments: no data harvesting, no selling your info, no dark patterns. Ever.
+      </Section>
+
+      <div style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(245,166,35,0.2)', display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.45)', margin: 0 }}>
+          Questions? <a href="mailto:family@uf51.love" style={{ color: '#f5a623', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
         </p>
-      </section>
-
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>3. Your Responsibility</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          You decide what to do with what SORTED tells you. Read it. Think about it. Ask a real professional if the stakes are high. We're here to help you understand — never to pressure or direct your choices. SORTED outputs should always be verified before acting on them in any legal or financial context.
+        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.3)', margin: 0 }}>
+          Universal Frequency 51 CIC — built to help people, not harvest them. ♾️
         </p>
-      </section>
-
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>4. Free Sessions, Then You Choose</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          SORTED gives you free uses to start. After that, you can subscribe or walk away. No lock-in, no dark patterns, no guilt. If you're genuinely struggling financially, email us — we'll sort something. <a href="mailto:family@uf51.love" style={{ color: '#f5a623', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
-        </p>
-      </section>
-
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>5. Accuracy & Limitations</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          AI models are powerful but not infallible. SORTED does its best to give you accurate, helpful context — but laws vary by country, jurisdiction, and circumstance. Always check key facts with an official source or professional. We continuously work to improve accuracy, and we're honest when something is uncertain.
-        </p>
-      </section>
-
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>6. Our Liability</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          SORTED is provided as a helpful service, not as a guaranteed legal resource. To the extent permitted by applicable law, Universal Frequency 51 CIC is not liable for decisions made based on SORTED's output. We care deeply about the people who use this — but we can't be responsible for outcomes in complex legal situations we haven't been fully briefed on. That's not coldness — that's honesty.
-        </p>
-      </section>
-
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>7. Governing Law</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          SORTED is operated by Universal Frequency 51 CIC, based in Scotland, UK. These terms are governed by Scots law. If you're using SORTED from the EU, your local consumer protection rights (including EU consumer law) also apply and are not overridden by these terms. Nothing here removes rights you have under your own country's laws.
-        </p>
-      </section>
-
-      <section style={{ marginBottom: 32 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f5a623' }}>8. Changes to These Terms</h2>
-        <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(26,18,8,0.65)' }}>
-          If we update these terms in a meaningful way, we'll say so clearly on this page with a new date. Continuing to use SORTED after an update means you accept the new version. We'll never change the fundamentals — no data harvesting, no selling your info, no dark patterns — ever.
-        </p>
-      </section>
-
-      <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.4)', marginTop: 50, paddingTop: 20, borderTop: '1px solid rgba(245,166,35,0.2)' }}>
-        Questions? <a href="mailto:family@uf51.love" style={{ color: '#f5a623', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
-        <br /><br />
-        SORTED is part of <strong>Universal Frequency 51 CIC</strong> — built to help people, not harvest them. ♾️
-      </p>
+      </div>
     </div>
   );
 }
