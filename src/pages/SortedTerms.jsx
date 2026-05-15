@@ -31,12 +31,12 @@ export default function SortedTermsPage() {
 
       {/* TL;DR */}
       <div style={{ background: '#1a1208', borderRadius: 12, padding: '18px 20px', marginBottom: 12 }}>
-        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR — The 30-second version</p>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
           {[
             "We decode scary letters into plain English. We're not lawyers.",
             "You decide what to do. We just help you understand.",
-            "10 free uses. Then £7.99/month or walk away — no guilt, no lock-in.",
+            "10 free uses. Then £9.99/month or walk away — no guilt, no lock-in.",
             "If you can't afford it, email us. We'll sort something.",
             "We never store your documents. Ever.",
           ].map((line, i) => (
@@ -71,15 +71,19 @@ export default function SortedTermsPage() {
         You get free uses to start. After that, subscribe or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
       </Section>
 
-      <Section title="5. Our Liability">
+      <Section title="5. Cancelling Your Subscription">
+        Cancel anytime — no questions, no fees, no dark patterns. You keep access until the end of your billing period. To cancel, email <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> or cancel directly through your payment settings. EU and UK users: you have a 14-day cooling-off right on new subscriptions under consumer law.
+      </Section>
+
+      <Section title="6. Our Liability">
         SORTED is provided as a helpful service. To the extent permitted by applicable law, Universal Frequency 51 CIC is not liable for decisions made based on SORTED's output in complex legal situations we haven't been fully briefed on. This isn't coldness — it's honesty about what an AI decoder can and can't do.
       </Section>
 
-      <Section title="6. Governing Law">
+      <Section title="7. Governing Law">
         These terms are governed by Scots law (Scotland, UK). EU users: your local consumer protection rights under EU law apply and are not overridden here. Nothing in these terms removes rights you have under your own country's laws.
       </Section>
 
-      <Section title="7. Changes">
+      <Section title="8. Changes">
         If we update these terms meaningfully, we'll update the date above. We'll never change our core commitments: no data harvesting, no selling your info, no dark patterns. Ever.
       </Section>
 

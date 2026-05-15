@@ -38,7 +38,7 @@ export default function SortedPrivacy() {
 
       {/* TL;DR */}
       <div style={{ background: '#1a1208', borderRadius: 12, padding: '18px 20px', marginBottom: 12 }}>
-        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR — The 30-second version</p>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
           {[
             "We don't store your documents. They're processed and gone.",
