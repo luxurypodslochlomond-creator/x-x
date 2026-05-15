@@ -25,7 +25,7 @@ const menuItems = [
 export default function SortedLayout({ children, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const { remaining, isLocked } = useSortedUsage();
+  const { remaining, isLocked, isPaid } = useSortedUsage();
   const [caseCount, setCaseCount] = useState(0);
 
   useEffect(() => {
@@ -85,45 +85,48 @@ export default function SortedLayout({ children, currentPage }) {
 
         <div style={{ flex: 1 }} />
 
-        {/* FREE USES COUNTER */}
+        {/* FREE USES COUNTER — show remaining if not paid, show ∞ if paid */}
         {!isLocked && (
           <div style={{
             display: 'flex', alignItems: 'center', gap: 5,
-            background: 'rgba(245,166,35,0.1)', border: '1.5px solid rgba(245,166,35,0.3)',
+            background: isPaid ? 'rgba(5,150,105,0.08)' : 'rgba(245,166,35,0.1)',
+            border: `1.5px solid ${isPaid ? 'rgba(5,150,105,0.3)' : 'rgba(245,166,35,0.3)'}`,
             borderRadius: 8, padding: '5px 10px', marginRight: 8,
           }}>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <circle cx="6" cy="6" r="5" stroke="#f5a623" strokeWidth="1.2" />
-              <path d="M6 3.5v3l1.5 1.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', fontFamily: 'monospace' }}>{remaining} free</span>
+            {isPaid ? (
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <circle cx="6" cy="6" r="5" stroke="#059669" strokeWidth="1.2" />
+                <path d="M3.5 6l1.8 1.8 3.2-3.2" stroke="#059669" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <circle cx="6" cy="6" r="5" stroke="#f5a623" strokeWidth="1.2" />
+                <path d="M6 3.5v3l1.5 1.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+            <span style={{ fontSize: 11, fontWeight: 800, color: isPaid ? '#059669' : '#f5a623', fontFamily: 'monospace' }}>
+              {isPaid ? '∞ SORTED' : `${remaining} left`}
+            </span>
           </div>
         )}
 
-        {/* CASES ICON — only if there are saved cases */}
+        {/* CASES BRIEFCASE — always show with count if cases exist */}
         {caseCount > 0 && (
-          <Link
-            to="/Sorted"
-            onClick={() => setMenuOpen(false)}
+          <div
             style={{
-              display: 'flex', alignItems: 'center', gap: 5, textDecoration: 'none',
+              display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer',
               background: 'rgba(245,166,35,0.06)', border: '1.5px solid rgba(245,166,35,0.2)',
-              borderRadius: 8, padding: '5px 10px', marginRight: 8, position: 'relative',
+              borderRadius: 8, padding: '5px 10px', marginRight: 8,
             }}
-            title="Your saved cases"
+            title={`${caseCount} saved case${caseCount > 1 ? 's' : ''}`}
           >
             <svg width="14" height="14" viewBox="0 0 15 15" fill="none">
               <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="none" />
               <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" fill="none" />
               <path d="M4.5 8h6M4.5 10.5h4" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
             </svg>
-            <span style={{
-              fontSize: 10, fontWeight: 900, color: '#fff',
-              background: '#f5a623', borderRadius: '50%',
-              width: 16, height: 16, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'monospace',
-            }}>{caseCount}</span>
-          </Link>
+            <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', fontFamily: 'monospace' }}>{caseCount}</span>
+          </div>
         )}
 
         <button
