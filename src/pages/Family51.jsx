@@ -226,21 +226,6 @@ export default function Family51Page() {
               )}
             </AnimatePresence>
 
-            {/* WORDMARK */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} style={{ marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 36, height: 36, borderRadius: 10, background: '#f5a623', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M5 7h10M5 10h7M5 13h8" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
-                  <circle cx="15" cy="13" r="4" fill="#fff" opacity="0.9"/>
-                  <path d="M13.5 13l1 1 2-2" stroke="#f5a623" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div>
-                <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: '-0.04em', color: '#1a1208', lineHeight: 1 }}>SORTED</div>
-                <div style={{ fontSize: 10, fontWeight: 600, color: 'rgba(26,18,8,0.4)', letterSpacing: '0.08em', marginTop: 1 }}>WE'VE GOT YOU</div>
-              </div>
-            </motion.div>
-
             {/* HERO — clear + compact */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Dodgy Traders · Housing · Debt · Disputes · Scams</div>
