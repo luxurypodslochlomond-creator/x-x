@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
 import { anonymizeCase } from '@/utils/anonymizeCase';
+import { base44 } from '@/api/base44Client';
 
 // Case history is stored in localStorage — no login ever needed
 const STORAGE_KEY = 'sorted_case_history_v1';
@@ -50,6 +51,15 @@ export function saveCaseToHistory({ tool, input_text, ai_result, summary, severi
     // Prepend, keep max FREE_CASE_LIMIT (free users get 3 saved)
     const updated = [newCase, ...existing].slice(0, FREE_CASE_LIMIT);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    // Fire-and-forget DB save so the live counter increments
+    try {
+      base44.entities.SortedCase.create({
+        tool,
+        ai_result: (ai_result || '').slice(0, 500), // just enough for the counter
+        summary: summary || 'Decoded',
+        severity: severity || 'unknown',
+      }).catch(() => {}); // never block the UI
+    } catch {}
     return id; // return so callers can pass it forward as related_case_id
   } catch { return null; }
 }
