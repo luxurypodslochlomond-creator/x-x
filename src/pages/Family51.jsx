@@ -239,13 +239,13 @@ export default function Family51Page() {
             </motion.div>
 
             {/* PRIVACY TRUST — single line, compact */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '8px 12px', background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.3)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 7 }}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '9px 14px', background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.3)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, textAlign: 'center' }}>
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
                 <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
                 <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
               </svg>
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#f5a623' }}>Your letter is never stored</span>
-              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)' }}>· No account. Processed &amp; discarded.</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#f5a623' }}>Your letter is never saved or shared</span>
+              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>· No signup needed.</span>
             </motion.div>
 
             {/* 4 TOOL BUTTONS — 2x2 grid */}
