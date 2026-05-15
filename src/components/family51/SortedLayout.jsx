@@ -104,17 +104,23 @@ export default function SortedLayout({ children, currentPage }) {
                 <path d="M6 3.5v3l1.5 1.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             )}
-            <span style={{ fontSize: 11, fontWeight: 800, color: isPaid ? '#059669' : '#f5a623', fontFamily: 'monospace' }}>
-              {isPaid ? '∞ SORTED' : `${remaining} left`}
+            <span style={{ fontSize: 11, fontWeight: 800, color: isPaid ? '#059669' : '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>
+              {isPaid ? '∞ SORTED' : `${remaining} FREE`}
             </span>
           </div>
         )}
 
         {/* CASES BRIEFCASE — always visible & clickable, shows empty state */}
         <div
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             setMenuOpen(false);
-            window.location.hash = '#case-history';
+            const el = document.getElementById('case-history');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            else window.location.hash = '#case-history';
+          }}
+          onTouchStart={() => {
+            if ('vibrate' in navigator) navigator.vibrate(8);
           }}
           style={{
             display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer',
@@ -123,6 +129,8 @@ export default function SortedLayout({ children, currentPage }) {
             borderRadius: 8, padding: '5px 10px', marginRight: 8,
             opacity: caseCount > 0 ? 1 : 0.45,
             transition: 'all 0.2s',
+            WebkitTapHighlightColor: 'transparent',
+            WebkitUserSelect: 'none',
           }}
           title={caseCount > 0 ? `${caseCount} saved case${caseCount > 1 ? 's' : ''}` : 'Save a case to see it here'}
         >
@@ -131,7 +139,7 @@ export default function SortedLayout({ children, currentPage }) {
             <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" fill="none" />
             <path d="M4.5 8h6M4.5 10.5h4" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
           </svg>
-          <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', fontFamily: 'monospace' }}>{caseCount}</span>
+          <span style={{ fontSize: 10, fontWeight: 900, color: '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>{caseCount > 0 ? caseCount : '·'}</span>
         </div>
 
         <button
