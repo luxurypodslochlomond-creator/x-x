@@ -13,7 +13,8 @@ export default function SortedLiveCounter() {
 
   useEffect(() => {
     const BASE_OFFSET = 94; // reflects real pre-tracking usage
-    base44.entities.SortedCase.list()
+    // Fetch up to 1000 to get accurate count
+    base44.entities.SortedCase.list('-created_date', 1000)
     .then(cases => setCount((cases?.length || 0) + BASE_OFFSET))
     .catch(() => setCount(BASE_OFFSET));
   }, []);
