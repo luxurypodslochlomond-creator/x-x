@@ -230,10 +230,12 @@ export default function Family51Page() {
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Dodgy Traders · Housing · Debt · Disputes · Scams</div>
               <h1 style={{ fontSize: 'clamp(22px, 6.5vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
-                Got a problem with a company, landlord, or letter?<br />
-                <span style={{ color: '#f5a623' }}>We'll help you sort it.</span>
+                Got a problem with a company, landlord, or letter?
               </h1>
-              <p style={{ fontSize: 'clamp(13px, 3.5vw, 15px)', fontWeight: 600, color: 'rgba(26,18,8,0.5)', margin: '6px 0 0', letterSpacing: '0.01em' }}>Right now. Plain English.</p>
+              <div style={{ marginTop: 6 }}>
+                <span style={{ fontSize: 'clamp(20px, 6vw, 28px)', fontWeight: 900, color: '#f5a623', letterSpacing: '-0.03em' }}>We'll help you sort it.</span>
+              </div>
+              <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.45)', margin: '5px 0 0' }}>Right now. Plain English. No account needed.</p>
             </motion.div>
 
             {/* PRIVACY TRUST — single line, compact */}
@@ -247,17 +249,51 @@ export default function Family51Page() {
             </motion.div>
 
             {/* 4 TOOL BUTTONS — 2x2 grid */}
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
               {[
-                { id: 'letter',   label: 'Decode a letter',  sub: 'Paste or photo it',     color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M9 13h6M9 17h4" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'scam',     label: 'Is it a scam?',    sub: 'Instant verdict. Free.', color: '#ef4444',
-                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="rgba(239,68,68,0.1)"/><path d="M12 8v4M12 16h.01" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/></svg> },
-                { id: 'reply',    label: 'Write a reply',    sub: 'We draft it for you',   color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#f5a623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-                { id: 'conflict', label: 'Dispute a company',    sub: 'Builder, landlord, trader',  color: '#f5a623',
-                  icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#f5a623" strokeWidth="2"/><path d="M9 12l2 2 4-4" stroke="#f5a623" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-              ].map(({ id, label, sub, color, icon }) => (
+                {
+                  id: 'letter', label: 'Decode a letter', sub: 'Paste or photo it',
+                  color: '#f5a623', bg: 'rgba(245,166,35,0.08)', border: 'rgba(245,166,35,0.4)',
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <rect x="4" y="2" width="16" height="20" rx="2.5" fill="rgba(245,166,35,0.18)" stroke="#f5a623" strokeWidth="1.8"/>
+                      <path d="M8 7h8M8 11h8M8 15h5" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                  )
+                },
+                {
+                  id: 'scam', label: 'Is it a scam?', sub: 'Instant verdict. Free.',
+                  color: '#ef4444', bg: 'rgba(239,68,68,0.07)', border: 'rgba(239,68,68,0.35)',
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 3L4 7v5c0 5.25 3.5 10.15 8 11.35C17.5 22.15 21 17.25 21 12V7L12 3z" fill="rgba(239,68,68,0.15)" stroke="#ef4444" strokeWidth="1.8" strokeLinejoin="round"/>
+                      <path d="M12 9v4" stroke="#ef4444" strokeWidth="2.2" strokeLinecap="round"/>
+                      <circle cx="12" cy="16" r="1.1" fill="#ef4444"/>
+                    </svg>
+                  )
+                },
+                {
+                  id: 'reply', label: 'Write a reply', sub: 'We draft it for you',
+                  color: '#2563eb', bg: 'rgba(37,99,235,0.07)', border: 'rgba(37,99,235,0.3)',
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <rect x="2" y="4" width="20" height="16" rx="3" fill="rgba(37,99,235,0.15)" stroke="#2563eb" strokeWidth="1.8"/>
+                      <path d="M6 9l6 4 6-4" stroke="#2563eb" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M17 16l2.5 2.5" stroke="#2563eb" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                  )
+                },
+                {
+                  id: 'conflict', label: 'Dispute a company', sub: 'Builder, landlord, trader',
+                  color: '#059669', bg: 'rgba(5,150,105,0.07)', border: 'rgba(5,150,105,0.3)',
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" fill="rgba(5,150,105,0.12)" stroke="#059669" strokeWidth="1.8"/>
+                      <path d="M8 12l3 3 5-5" stroke="#059669" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )
+                },
+              ].map(({ id, label, sub, color, bg, border, icon }) => (
                <motion.button
                  key={id}
                  onClick={() => { if (navigator.vibrate) navigator.vibrate(12); engineRef.current && engineRef.current.open(id); }}
@@ -266,19 +302,19 @@ export default function Family51Page() {
                  whileTap={{ scale: 0.95 }}
                  style={{
                     textAlign: 'left', cursor: 'pointer',
-                    padding: '15px 13px', borderRadius: 14,
-                    border: '1.5px solid rgba(245,166,35,0.35)',
-                    background: '#ffffff',
+                    padding: '16px 14px', borderRadius: 16,
+                    border: `1.5px solid ${border}`,
+                    background: bg,
                     WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                    display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100,
+                    display: 'flex', flexDirection: 'column', gap: 10, minHeight: 108,
                   }}
                 >
-                  <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(245,166,35,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 1px 4px ${color}25` }}>
                     {icon}
                   </div>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', marginBottom: 2, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
-                    <div style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.6)', lineHeight: 1.35 }}>{sub}</div>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', marginBottom: 3, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
+                    <div style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.55)', lineHeight: 1.35 }}>{sub}</div>
                   </div>
                 </motion.button>
               ))}
