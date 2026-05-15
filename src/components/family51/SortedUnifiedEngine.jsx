@@ -194,7 +194,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         </AnimatePresence>
 
         {/* BOTTOM NAV — 4 distinct colours */}
-        <div style={{ marginTop: 32, paddingTop: 16, borderTop: `1px solid ${tc.color}25`, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${tc.color}25`, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           {Object.entries(TOOL_COLORS).map(([id, t]) => {
             const isActive = activeTool === id;
             return (

@@ -404,10 +404,10 @@ Don't worry about formatting. Just get it all in."
                 width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
                 fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
                 border: `2px solid ${accentColor}`,
-                background: accentColor, color: '#000',
-              }}
-            >
-              DECODE THIS LETTER →
+                 background: accentColor, color: '#fff',
+                }}
+                >
+                DECODE THIS LETTER →
             </motion.button>
           ) : (
             <div style={{ display: 'flex', gap: 10 }}>
