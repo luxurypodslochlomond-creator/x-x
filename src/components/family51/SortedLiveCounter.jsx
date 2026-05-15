@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { getSortedCount } from '@/functions/getSortedCount';
 
 // ─── SORTED LIVE COUNTER ──────────────────────────────────────────────────────
 // Real count from SortedCase entity + a base of 4,000+ to reflect pre-launch use.
@@ -12,10 +13,10 @@ export default function SortedLiveCounter() {
   const [displayed, setDisplayed] = useState(0);
 
   useEffect(() => {
-    const BASE_OFFSET = 94; // reflects real pre-tracking usage
-    base44.entities.SortedCase.list('-created_date', 999999)
-    .then(cases => setCount((cases?.length || 0) + BASE_OFFSET))
-    .catch(() => setCount(BASE_OFFSET));
+    const BASE_OFFSET = 94;
+    getSortedCount({})
+      .then(res => setCount((res?.data?.count || 0) + BASE_OFFSET))
+      .catch(() => setCount(BASE_OFFSET));
   }, []);
 
   // Animate the number rolling up when count loads
