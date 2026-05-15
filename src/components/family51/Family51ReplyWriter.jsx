@@ -245,36 +245,36 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 
         {/* CONTEXT — minimal, clear */}
         <div>
-           <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.6)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
+           <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.55)', margin: '0 0 8px' }}>WHAT'S THE SITUATION?</p>
           <textarea
             value={context}
             onChange={e => setContext(e.target.value)}
             autoFocus={!prefillContext}
             placeholder="Who are you writing to? What happened? What do you want?"
             style={{
-              width: '100%', height: prefillContext ? 80 : 120, background: 'rgba(255,255,255,0.05)',
-              border: `1px solid ${context ? accentColor + '60' : 'rgba(255,255,255,0.15)'}`,
-              borderRadius: 12, color: '#fff', fontSize: 13, padding: '14px 16px',
+              width: '100%', height: prefillContext ? 80 : 120, background: '#fff',
+              border: `1.5px solid ${context ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
+              borderRadius: 12, color: '#1a1208', fontSize: 13, padding: '14px 16px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
               transition: 'border-color 0.2s', boxSizing: 'border-box',
             }}
-            onFocus={e => e.target.style.borderColor = accentColor + '80'}
-            onBlur={e => e.target.style.borderColor = context ? accentColor + '60' : 'rgba(255,255,255,0.15)'}
+            onFocus={e => e.target.style.borderColor = accentColor}
+            onBlur={e => e.target.style.borderColor = context ? accentColor + '90' : 'rgba(26,18,8,0.15)'}
           />
         </div>
 
         {/* LOCATION — always visible */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
           <span style={{ fontSize: 13 }}>📍</span>
           <div style={{ flex: 1 }}>
-            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.55)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
+            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.5)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
         </div>
 
         {/* OPTIONAL EXTRAS — collapsed */}
         <details style={{ cursor: 'pointer' }}>
-          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
             ⚙️ YOUR NAME &amp; SITUATION TYPE (optional)
           </summary>
           <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -284,9 +284,9 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               onChange={e => setName(e.target.value)}
               placeholder="Your name (for sign-off)"
               style={{
-                width: '100%', background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.15)', borderRadius: 10,
-                color: '#fff', fontSize: 13, padding: '11px 14px',
+                width: '100%', background: '#fff',
+                border: '1px solid rgba(26,18,8,0.15)', borderRadius: 10,
+                color: '#1a1208', fontSize: 13, padding: '11px 14px',
                 outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
               }}
             />
@@ -313,8 +313,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 ))}
               </motion.div>
               <div style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#fff', margin: '0 0 6px' }}>WRITING YOUR REPLY</p>
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', margin: 0 }}>Composing a {tone} letter in {geo.country} legal context…</p>
+                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#1a1208', margin: '0 0 6px' }}>WRITING YOUR REPLY</p>
+                <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0 }}>Composing a {tone} letter in {geo.country} legal context…</p>
               </div>
             </motion.div>
           ) : (
@@ -327,9 +327,9 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
                 fontWeight: 900, letterSpacing: '0.1em',
                 cursor: context.trim() ? 'pointer' : 'not-allowed',
-                border: `2px solid ${context.trim() ? accentColor : 'rgba(255,255,255,0.15)'}`,
-                background: context.trim() ? accentColor : 'rgba(255,255,255,0.04)',
-                color: context.trim() ? '#000' : 'rgba(255,255,255,0.35)',
+                border: `2px solid ${context.trim() ? accentColor : 'rgba(26,18,8,0.15)'}`,
+                background: context.trim() ? accentColor : 'rgba(26,18,8,0.04)',
+                color: context.trim() ? '#fff' : 'rgba(26,18,8,0.3)',
                 transition: 'all 0.2s',
               }}
             >
@@ -535,9 +535,9 @@ function Chip({ active, color, onClick, children }) {
   return (
     <button onClick={onClick} style={{
       padding: '5px 11px', borderRadius: 20, fontSize: 11, fontWeight: 700, cursor: 'pointer',
-      border: `1px solid ${active ? color : 'rgba(255,255,255,0.15)'}`,
+      border: `1px solid ${active ? color : 'rgba(26,18,8,0.15)'}`,
       background: active ? `${color}15` : 'transparent',
-      color: active ? color : 'rgba(255,255,255,0.45)',
+      color: active ? color : 'rgba(26,18,8,0.5)',
       transition: 'all 0.15s',
     }}>
       {children}

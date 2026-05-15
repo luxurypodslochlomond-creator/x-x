@@ -112,7 +112,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           ? 'transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)'
           : 'transform 0.22s cubic-bezier(0.4, 0, 1, 1)',
         willChange: 'transform',
-        background: '#0f0c08',
+        background: '#faf8f5',
         overflowY: 'auto',
         overflowX: 'hidden',
         display: 'flex',
@@ -131,7 +131,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
             onClick={handleBack}
             style={{
               display: 'flex', alignItems: 'center', gap: 6,
-              fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)',
+              fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.5)',
               letterSpacing: '0.08em', background: 'none', border: 'none', padding: '8px 0',
             }}
           >
@@ -204,9 +204,9 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
                 style={{
                   padding: '12px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
                   letterSpacing: '0.1em',
-                  border: `1.5px solid ${isActive ? t.color + '80' : t.color + '28'}`,
-                  background: isActive ? `${t.color}18` : `${t.color}06`,
-                  color: isActive ? t.color : `${t.color}70`,
+                  border: `1.5px solid ${isActive ? t.color : t.color + '50'}`,
+                  background: isActive ? `${t.color}18` : `${t.color}08`,
+                  color: isActive ? t.color : t.color,
                   transition: 'all 0.15s',
                 }}
               >

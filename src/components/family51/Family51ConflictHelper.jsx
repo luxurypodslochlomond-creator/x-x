@@ -256,7 +256,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
   return (
     <div className="space-y-5">
-      <style>{`textarea::placeholder { color: rgba(255,255,255,0.35) !important; } input::placeholder { color: rgba(255,255,255,0.35) !important; }`}</style>
+      <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; } input::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
 
       {/* CONNECTED CASE BANNER */}
       {prefillContext?.related_case_id && (
@@ -273,26 +273,26 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
         autoFocus
         placeholder="Just tell us what's going on. Who's involved, what happened, what's been said. Don't filter it."
         style={{
-          width: '100%', height: 130, background: 'rgba(255,255,255,0.05)',
-          border: `1px solid ${what ? accentColor + '60' : 'rgba(255,255,255,0.15)'}`,
-          borderRadius: 12, color: '#fff', fontSize: 14, padding: '14px 16px',
+          width: '100%', height: 130, background: '#fff',
+          border: `1.5px solid ${what ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
+          borderRadius: 12, color: '#1a1208', fontSize: 14, padding: '14px 16px',
           resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
           transition: 'border-color 0.2s', boxSizing: 'border-box',
           caretColor: accentColor,
         }}
-        onFocus={e => e.target.style.borderColor = accentColor + '80'}
-        onBlur={e => e.target.style.borderColor = what ? accentColor + '60' : 'rgba(255,255,255,0.15)'}
+        onFocus={e => e.target.style.borderColor = accentColor}
+        onBlur={e => e.target.style.borderColor = what ? accentColor + '90' : 'rgba(26,18,8,0.15)'}
       />
 
       {/* LOCATION — inline, compact */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 8, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
         <span style={{ fontSize: 12, opacity: 0.6 }}>📍</span>
         <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
       </div>
 
       {/* GOAL — pill chips, light */}
       <div>
-        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.55)', margin: '0 0 8px' }}>WHAT DO YOU WANT?</p>
+        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.55)', margin: '0 0 8px' }}>WHAT DO YOU WANT?</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {GOALS.map(g => (
             <button
@@ -300,9 +300,9 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               onClick={() => setGoal(g.id)}
               style={{
                 padding: '7px 14px', borderRadius: 20, cursor: 'pointer',
-                border: `1px solid ${goal === g.id ? accentColor + '80' : 'rgba(255,255,255,0.15)'}`,
-                background: goal === g.id ? accentColor + '20' : 'transparent',
-                color: goal === g.id ? '#fff' : 'rgba(255,255,255,0.55)',
+                border: `1px solid ${goal === g.id ? accentColor : 'rgba(26,18,8,0.15)'}`,
+                background: goal === g.id ? accentColor + '15' : 'transparent',
+                color: goal === g.id ? accentColor : 'rgba(26,18,8,0.6)',
                 fontSize: 11, fontWeight: 700, letterSpacing: '0.06em',
                 transition: 'all 0.12s',
               }}
@@ -315,7 +315,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
       {/* OPTIONAL — conflict type & evidence */}
       <details style={{ cursor: 'pointer' }}>
-        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
+        <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
          + OPTIONAL: conflict type &amp; evidence
         </summary>
         <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -327,13 +327,13 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
                 onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
                 style={{
                   padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                  border: `1px solid ${conflictType === t.id ? accentColor + '70' : 'rgba(255,255,255,0.1)'}`,
-                  background: conflictType === t.id ? `${accentColor}18` : 'rgba(255,255,255,0.03)',
+                  border: `1px solid ${conflictType === t.id ? accentColor : 'rgba(26,18,8,0.12)'}`,
+                  background: conflictType === t.id ? `${accentColor}15` : '#fff',
                   transition: 'all 0.15s',
                 }}
               >
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(255,255,255,0.55)', margin: 0 }}>{t.label}</p>
-                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(26,18,8,0.6)', margin: 0 }}>{t.label}</p>
+                <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
               </button>
             ))}
           </div>
@@ -377,9 +377,9 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 14,
               fontWeight: 800, letterSpacing: '0.06em',
               cursor: what.trim() ? 'pointer' : 'not-allowed',
-              border: `1px solid ${what.trim() ? accentColor + '60' : 'rgba(255,255,255,0.12)'}`,
-              background: what.trim() ? accentColor + '20' : 'rgba(255,255,255,0.04)',
-              color: what.trim() ? '#fff' : 'rgba(255,255,255,0.35)',
+              border: `1px solid ${what.trim() ? accentColor : 'rgba(26,18,8,0.15)'}`,
+              background: what.trim() ? accentColor : 'rgba(26,18,8,0.04)',
+              color: what.trim() ? '#fff' : 'rgba(26,18,8,0.3)',
               transition: 'all 0.2s',
             }}
           >

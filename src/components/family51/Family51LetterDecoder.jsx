@@ -286,6 +286,7 @@ Return a JSON object with these EXACT fields:
 
   return (
     <div className="space-y-5">
+      <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; } input::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
 
       {/* LOADER */}
       <AnimatePresence>
@@ -383,15 +384,15 @@ Return a JSON object with these EXACT fields:
 
 Don't worry about formatting. Just get it all in."
             style={{
-              width: '100%', height: 200, background: 'rgba(255,255,255,0.05)',
-              border: `1px solid ${letterText ? accentColor + '70' : 'rgba(255,255,255,0.15)'}`,
-              borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
+              width: '100%', height: 200, background: '#fff',
+              border: `1.5px solid ${letterText ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
+              borderRadius: 14, color: '#1a1208', fontSize: 14, padding: '16px 18px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
               transition: 'border-color 0.2s', boxSizing: 'border-box',
               caretColor: accentColor,
             }}
-            onFocus={e => e.target.style.borderColor = accentColor + '90'}
-            onBlur={e => e.target.style.borderColor = letterText ? accentColor + '70' : 'rgba(255,255,255,0.15)'}
+            onFocus={e => e.target.style.borderColor = accentColor}
+            onBlur={e => e.target.style.borderColor = letterText ? accentColor + '90' : 'rgba(26,18,8,0.15)'}
           />
 
           {/* PRIMARY ACTION — decode if text, else two photo buttons */}
@@ -449,7 +450,7 @@ Don't worry about formatting. Just get it all in."
           )}
 
           {/* SUBTLE TRUST LINE */}
-          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', textAlign: 'center', margin: 0, letterSpacing: '0.03em' }}>
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, letterSpacing: '0.03em' }}>
             Nothing stored. Processed and gone. For long documents, snap just the key page.
           </p>
         </div>

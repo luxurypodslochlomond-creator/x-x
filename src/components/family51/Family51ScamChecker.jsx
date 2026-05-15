@@ -166,6 +166,7 @@ Return JSON with these exact fields:
 
   return (
     <div className="space-y-5">
+      <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; } input::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
 
       {/* HIDDEN FILE INPUTS */}
       <input ref={fileInputRef} type="file" accept="image/*,application/pdf" onChange={handleFileUpload} style={{ display: 'none' }} />
@@ -188,8 +189,8 @@ Return JSON with these exact fields:
             <div style={{ textAlign: 'center', minHeight: 52 }}>
               <AnimatePresence mode="wait">
                 <motion.div key={loadingStep} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35 }}>
-                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#fff', margin: '0 0 6px' }}>{LOADING_STEPS[loadingStep].text}</p>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', margin: 0 }}>{LOADING_STEPS[loadingStep].sub}</p>
+                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#1a1208', margin: '0 0 6px' }}>{LOADING_STEPS[loadingStep].text}</p>
+                  <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: 0 }}>{LOADING_STEPS[loadingStep].sub}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -215,9 +216,9 @@ Return JSON with these exact fields:
 
 Copy exactly what it says — every word helps us check it.`}
             style={{
-              width: '100%', height: 200, background: 'rgba(255,255,255,0.05)',
-              border: `1px solid ${inputText ? accentColor + '60' : 'rgba(255,255,255,0.15)'}`,
-              borderRadius: 14, color: '#fff', fontSize: 14, padding: '16px 18px',
+              width: '100%', height: 200, background: '#fff',
+              border: `1.5px solid ${inputText ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
+              borderRadius: 14, color: '#1a1208', fontSize: 14, padding: '16px 18px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
               transition: 'border-color 0.2s', boxSizing: 'border-box',
               caretColor: accentColor,
@@ -249,7 +250,7 @@ Copy exactly what it says — every word helps us check it.`}
               <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()} style={{
                  flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
                  letterSpacing: '0.06em', cursor: 'pointer',
-                 border: `1px solid rgba(255,255,255,0.15)`, background: 'transparent', color: 'rgba(255,255,255,0.55)',
+                 border: `1px solid rgba(26,18,8,0.15)`, background: 'transparent', color: 'rgba(26,18,8,0.5)',
                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -262,7 +263,7 @@ Copy exactly what it says — every word helps us check it.`}
             </div>
           )}
 
-          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', textAlign: 'center', margin: 0 }}>
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0 }}>
             Free forever. Nothing stored. Processed and gone instantly.
           </p>
         </div>
@@ -288,7 +289,7 @@ Copy exactly what it says — every word helps us check it.`}
             <div style={{ borderRadius: 16, border: `2px solid ${v.border}`, background: v.bg, padding: '24px 20px', textAlign: 'center' }}>
               <div style={{ fontSize: 48, marginBottom: 8, lineHeight: 1 }}>{v.emoji}</div>
               <div style={{ fontSize: 22, fontWeight: 900, color: v.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{v.label}</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>{result.confidence}</div>
+              <div style={{ fontSize: 13, color: 'rgba(26,18,8,0.55)', fontWeight: 600 }}>{result.confidence}</div>
               {result.scam_type && result.scam_type !== 'Not a scam' && (
                 <div style={{ marginTop: 10, display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', color: v.color, border: `1px solid ${v.border}`, borderRadius: 20, padding: '4px 12px' }}>
                   {result.scam_type.toUpperCase()}
@@ -297,15 +298,15 @@ Copy exactly what it says — every word helps us check it.`}
             </div>
 
             {/* REASSURANCE */}
-            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.6 }}>{result.reassurance}</p>
+            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}>
+              <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>{result.reassurance}</p>
             </div>
 
             {/* WHAT THIS IS */}
             {result.what_this_is && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', margin: '0 0 8px' }}>WHAT THIS IS</p>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: 1.6 }}>{result.what_this_is}</p>
+              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(26,18,8,0.02)', border: '1px solid rgba(26,18,8,0.08)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.4)', margin: '0 0 8px' }}>WHAT THIS IS</p>
+                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>{result.what_this_is}</p>
               </div>
             )}
 
@@ -317,7 +318,7 @@ Copy exactly what it says — every word helps us check it.`}
                   {result.red_flags.map((flag, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                       <span style={{ color: '#ef4444', flexShrink: 0, marginTop: 1 }}>⚑</span>
-                      <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>{flag}</span>
+                      <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{flag}</span>
                     </div>
                   ))}
                 </div>
@@ -334,7 +335,7 @@ Copy exactly what it says — every word helps us check it.`}
                       <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <span style={{ fontSize: 11, fontWeight: 900, color: '#22c55e' }}>{i + 1}</span>
                       </div>
-                      <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{step}</span>
+                      <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.8)', lineHeight: 1.5 }}>{step}</span>
                     </div>
                   ))}
                 </div>
@@ -343,9 +344,9 @@ Copy exactly what it says — every word helps us check it.`}
 
             {/* REPORT TO */}
             {result.report_to && (
-              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.25)', margin: '0 0 5px' }}>REPORT IT</p>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>{result.report_to}</p>
+              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(26,18,8,0.02)', border: '1px solid rgba(26,18,8,0.08)' }}>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)', margin: '0 0 5px' }}>REPORT IT</p>
+                <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.5 }}>{result.report_to}</p>
               </div>
             )}
 
@@ -357,7 +358,7 @@ Copy exactly what it says — every word helps us check it.`}
                   if (navigator.share) { navigator.share({ title: 'SORTED Scam Check', text }); }
                   else { navigator.clipboard?.writeText(text); }
                 }}
-                style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.5)' }}
+                style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.15)', background: 'transparent', color: 'rgba(26,18,8,0.5)' }}
               >
                 SHARE RESULT
               </button>
