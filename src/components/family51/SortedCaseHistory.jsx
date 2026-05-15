@@ -329,11 +329,18 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
   const [filter, setFilter] = useState('all');
   const [confirmWipe, setConfirmWipe] = useState(false);
 
+  // Refresh cases whenever component mounts or becomes visible
   useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      setCases(stored);
-    } catch { setCases([]); }
+    const loadCases = () => {
+      try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        setCases(stored);
+      } catch { setCases([]); }
+    };
+    loadCases();
+    // Also refresh when document becomes visible (tab focus)
+    window.addEventListener('visibilitychange', loadCases);
+    return () => window.removeEventListener('visibilitychange', loadCases);
   }, []);
 
   const handleDelete = (id) => {

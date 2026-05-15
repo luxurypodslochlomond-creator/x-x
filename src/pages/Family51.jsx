@@ -365,6 +365,7 @@ export default function Family51Page() {
                </button>
              </div>
              <SortedCaseHistory
+               key={showHistory}
                isPremium={!isLocked}
                onContinue={() => {
                  setShowHistory(false);
