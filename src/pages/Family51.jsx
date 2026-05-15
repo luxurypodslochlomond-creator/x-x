@@ -262,7 +262,7 @@ export default function Family51Page() {
                   )
                 },
                 {
-                  id: 'scam', label: 'Is it a scam?', sub: 'Instant verdict. Free.',
+                  id: 'scam', label: 'Is it a scam?', sub: 'Instant verdict. No signup.',
                   color: '#ef4444', bg: 'rgba(239,68,68,0.07)', border: 'rgba(239,68,68,0.35)',
                   icon: (
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -333,7 +333,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRBolt />} text="Paste, type or photo any letter — plain English in seconds" />
                 <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, who to contact — zero jargon" />
                 <WhyRow icon={<WRPin />} text="Knows your country and local legal bodies automatically" />
-                <WhyRow icon={<WRLock />} text="Scam checker — photo or paste any message for an instant verdict. Free forever." />
+                <WhyRow icon={<WRLock />} text="Scam checker — photo or paste any message for an instant verdict." />
                 <WhyRow icon={<WRLock />} text="Your letter is never saved or shared — processed and discarded." />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', margin: '12px 0 0', lineHeight: 1.5 }}>
