@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Eye, Scale, Mail, Trash2 } from 'lucide-react';
+import { useSortedUsage } from '@/components/family51/useSortedUsage';
 
 function SortedMark() {
   return (
@@ -24,6 +25,15 @@ const menuItems = [
 export default function SortedLayout({ children, currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { remaining, isLocked } = useSortedUsage();
+  const [caseCount, setCaseCount] = useState(0);
+
+  useEffect(() => {
+    try {
+      const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
+      setCaseCount(cases.length);
+    } catch {}
+  }, [location.pathname]);
 
   // Close menu on route change
   useEffect(() => {
@@ -74,6 +84,47 @@ export default function SortedLayout({ children, currentPage }) {
         </Link>
 
         <div style={{ flex: 1 }} />
+
+        {/* FREE USES COUNTER */}
+        {!isLocked && (
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            background: 'rgba(245,166,35,0.1)', border: '1.5px solid rgba(245,166,35,0.3)',
+            borderRadius: 8, padding: '5px 10px', marginRight: 8,
+          }}>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="5" stroke="#f5a623" strokeWidth="1.2" />
+              <path d="M6 3.5v3l1.5 1.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', fontFamily: 'monospace' }}>{remaining} free</span>
+          </div>
+        )}
+
+        {/* CASES ICON — only if there are saved cases */}
+        {caseCount > 0 && (
+          <Link
+            to="/Sorted"
+            onClick={() => setMenuOpen(false)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 5, textDecoration: 'none',
+              background: 'rgba(245,166,35,0.06)', border: '1.5px solid rgba(245,166,35,0.2)',
+              borderRadius: 8, padding: '5px 10px', marginRight: 8, position: 'relative',
+            }}
+            title="Your saved cases"
+          >
+            <svg width="14" height="14" viewBox="0 0 15 15" fill="none">
+              <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="none" />
+              <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+              <path d="M4.5 8h6M4.5 10.5h4" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
+            </svg>
+            <span style={{
+              fontSize: 10, fontWeight: 900, color: '#fff',
+              background: '#f5a623', borderRadius: '50%',
+              width: 16, height: 16, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontFamily: 'monospace',
+            }}>{caseCount}</span>
+          </Link>
+        )}
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
