@@ -29,10 +29,29 @@ export default function SortedTermsPage() {
         <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: May 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
       </div>
 
+      {/* TL;DR */}
+      <div style={{ background: '#1a1208', borderRadius: 12, padding: '18px 20px', marginBottom: 12 }}>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR — The 30-second version</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          {[
+            "We decode scary letters into plain English. We're not lawyers.",
+            "You decide what to do. We just help you understand.",
+            "10 free uses. Then £7.99/month or walk away — no guilt, no lock-in.",
+            "If you can't afford it, email us. We'll sort something.",
+            "We never store your documents. Ever.",
+          ].map((line, i) => (
+            <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <span style={{ color: '#f5a623', fontWeight: 900, fontSize: 14, flexShrink: 0 }}>✓</span>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.6 }}>{line}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Intro */}
       <div style={{ background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10, padding: '16px 18px', marginBottom: 32 }}>
-        <p style={{ fontSize: 14, lineHeight: 1.8, color: 'rgba(26,18,8,0.72)', margin: 0 }}>
-          You've got a letter you don't understand. We decode it into plain English — fast, private, no jargon. That's SORTED. Built for real people, everywhere.
+        <p style={{ fontSize: 13, lineHeight: 1.8, color: 'rgba(26,18,8,0.6)', margin: 0 }}>
+          The full version is below — plain English, no legalese. If something doesn't make sense, email us.
         </p>
       </div>
 

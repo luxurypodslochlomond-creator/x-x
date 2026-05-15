@@ -36,10 +36,29 @@ export default function SortedPrivacy() {
         <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: May 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
       </div>
 
+      {/* TL;DR */}
+      <div style={{ background: '#1a1208', borderRadius: 12, padding: '18px 20px', marginBottom: 12 }}>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR — The 30-second version</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          {[
+            "We don't store your documents. They're processed and gone.",
+            "No account. No email. No cookies. No tracking.",
+            "We never sell your data. To anyone. Ever.",
+            "Close the tab — everything disappears.",
+            "You're covered under UK GDPR, EU GDPR, and CCPA.",
+          ].map((line, i) => (
+            <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <span style={{ color: '#f5a623', fontWeight: 900, fontSize: 14, flexShrink: 0 }}>✓</span>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.6 }}>{line}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Big statement */}
       <div style={{ background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10, padding: '16px 18px', marginBottom: 32 }}>
-        <p style={{ fontSize: 14, lineHeight: 1.8, color: 'rgba(26,18,8,0.72)', margin: 0 }}>
-          Privacy isn't a legal checkbox for us — it's the whole point. You share sensitive documents. We designed SORTED so we <strong>cannot</strong> betray your trust, because we never hold your data in the first place.
+        <p style={{ fontSize: 13, lineHeight: 1.8, color: 'rgba(26,18,8,0.6)', margin: 0 }}>
+          Privacy isn't a legal checkbox for us — it's the whole point. We designed SORTED so we <strong>cannot</strong> betray your trust, because we never hold your data in the first place. Full details below.
         </p>
       </div>
 
