@@ -113,6 +113,10 @@ export default function SortedLayout({ children, currentPage }) {
         {/* CASES BRIEFCASE — always show with count if cases exist */}
         {caseCount > 0 && (
           <div
+            onClick={() => {
+              setMenuOpen(false);
+              window.location.hash = '#case-history';
+            }}
             style={{
               display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer',
               background: 'rgba(245,166,35,0.06)', border: '1.5px solid rgba(245,166,35,0.2)',
