@@ -324,6 +324,7 @@ export default function Family51Page() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
               <TrustPill text="Your local law" />
               <TrustPill text="10 free uses" />
+              <TrustPill text="Not legal advice" />
             </motion.div>
 
             {/* HOW IT WORKS — always visible */}
