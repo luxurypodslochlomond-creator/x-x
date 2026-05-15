@@ -334,7 +334,7 @@ export default function Family51Page() {
                 <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, who to contact — zero jargon" />
                 <WhyRow icon={<WRPin />} text="Knows your country and local legal bodies automatically" />
                 <WhyRow icon={<WRLock />} text="Scam checker — photo or paste any message for an instant verdict. Free forever." />
-                <WhyRow icon={<WRLock />} text="Nothing stored, nothing logged, nothing sold. Ever." />
+                <WhyRow icon={<WRLock />} text="Your letter is never saved or shared — processed and discarded." />
               </div>
               <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', margin: '12px 0 0', lineHeight: 1.5 }}>
                 10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(26,18,8,0.75)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
