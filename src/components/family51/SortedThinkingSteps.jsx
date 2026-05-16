@@ -55,15 +55,15 @@ function buildSteps(tool, input = '', geo = null) {
   const refNote     = specifics.ref     ? `Reference ${specifics.ref} logged`              : null;
 
   // Topic detection
-  const isDebt       = /debt|bailiff|ccj|county court|arrears|overdue|owe\b|balance due|debt collection|notice of|amount outstanding/.test(hint);
-  const isEviction   = /evict|section 21|s21|notice to quit|landlord|tenancy|rent\b|deposit|possession|leave the property/.test(hint);
+  const isDebt       = /debt|bailiff|ccj|county court|arrears|overdue|owe\b|balance due|debt collection|notice of|amount outstanding|final demand|default notice|lowell|cabot|intrum|overdales|pas\b/.test(hint);
+  const isEviction   = /evict|section 21|s21|notice to quit|landlord|tenancy|rent\b|deposit|possession|leave the property|housing association|social housing|letting agent/.test(hint);
   const isEmployment = /dismiss|redundan|workplace|employer|\bhr\b|disciplinary|unfair|capability|grievance|termination/.test(hint);
   const isHMRC       = /hmrc|self.?assess|vat\b|national insurance|tax return|underpayment|tax credit|penalty notice/.test(hint);
   const isCouncil    = /council tax|local authority|planning|enforcement notice|parking fine|rates\b|benefit overpayment/.test(hint);
   const isCourt      = /county court|claim form|summons|judgment|hearing|ccj|legal proceedings|court order|solicitor/.test(hint);
   const isInsurance  = /insurance|claim\b|policy|premium|damage|liability|underwriter|settlement/.test(hint);
   const isConsumer   = /refund|faulty|broken|consumer rights|trading standards|chargeback|not as described|repair|replace/.test(hint);
-  const isNeighbour  = /neighbour|noise complaint|boundary|fence|garden|shared area|anti.?social/.test(hint);
+  const isNeighbour  = /neighbour|neighbor|noise complaint|boundary|fence|garden|shared area|anti.?social|land dispute|over land|trespass|right of way|hedge|encroach|overhang|party wall/.test(hint);
   const isParcelScam = /parcel|delivery|royal mail|dpd|evri|fedex|ups|tracking|redelivery fee/.test(hint);
   const isBankScam   = /account.*suspend|verify.*account|bank.*alert|unusual.*activity|barclays|natwest|hsbc|lloyds|santander/.test(hint);
   const isTaxScam    = /tax refund|rebate|owed by hmrc|government.*gateway|tax.*overpayment/.test(hint);
