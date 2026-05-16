@@ -84,14 +84,16 @@ export default function SortedPrivacy() {
         </div>
       </Section>
 
-      <Section title="4. Your Control">
-        Close the tab — everything is gone. Hit "Clear all my data" anytime to wipe your local browser history. There's nothing stored on our end to delete. You are always in control.
+      <Section title="4. Your Control — Local Storage">
+        <p style={{ margin: '0 0 10px' }}>If you save cases using the "My Cases" feature, those are stored <strong>only in your own browser</strong> (localStorage) — never on our servers. They never leave your device unless you explicitly share them. You own them completely.</p>
+        <p style={{ margin: 0 }}>Close the tab — your session is gone. Hit <strong>"Clear all my data"</strong> anytime to wipe your local case history instantly. There's nothing on our end to delete — because we never had it.</p>
       </Section>
 
       <Section title="5. GDPR, UK & International Rights">
         <p style={{ margin: '0 0 10px' }}>SORTED is operated by Universal Frequency 51 CIC, Scotland, UK — subject to <strong>UK GDPR</strong> and the Data Protection Act 2018. Our privacy footprint is minimal by design.</p>
         <p style={{ margin: '0 0 10px' }}><strong>EU users:</strong> Your rights under EU GDPR fully apply — access, rectify, or erase any personal data we hold. In practice we hold almost none, but email us to confirm.</p>
         <p style={{ margin: '0 0 10px' }}><strong>California (USA):</strong> CCPA rights apply. We do not sell personal information. Ever.</p>
+        <p style={{ margin: '0 0 10px' }}><strong>Global users (100+ countries):</strong> We designed SORTED for everyone, everywhere. The same privacy protections apply regardless of where you are. No data is retained. No profiling. No exceptions.</p>
         <p style={{ margin: 0 }}>Wherever you are — your data is yours. That's not a legal formality. That's how we built it.</p>
       </Section>
 

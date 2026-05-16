@@ -79,11 +79,15 @@ export default function SortedTermsPage() {
         SORTED is provided as a helpful service. To the extent permitted by applicable law, Universal Frequency 51 CIC is not liable for decisions made based on SORTED's output in complex legal situations we haven't been fully briefed on. This isn't coldness — it's honesty about what an AI decoder can and can't do.
       </Section>
 
-      <Section title="7. Governing Law">
-        These terms are governed by Scots law (Scotland, UK). EU users: your local consumer protection rights under EU law apply and are not overridden here. Nothing in these terms removes rights you have under your own country's laws.
+      <Section title="7. Global Users">
+        SORTED works in 100+ countries. We try to give you advice relevant to your local law, but we're a Scottish CIC — not a multi-jurisdictional law firm. Always verify local specifics with a qualified professional in your country. Your local consumer protection rights always apply and are never overridden by these terms.
       </Section>
 
-      <Section title="8. Changes">
+      <Section title="8. Governing Law">
+        These terms are governed by Scots law (Scotland, UK). EU users: your rights under EU consumer law fully apply. Nothing here removes rights you have under your own country's laws — including statutory cooling-off periods, distance selling regulations, or consumer protection statutes.
+      </Section>
+
+      <Section title="9. Changes">
         If we update these terms meaningfully, we'll update the date above. We'll never change our core commitments: no data harvesting, no selling your info, no dark patterns. Ever.
       </Section>
 
