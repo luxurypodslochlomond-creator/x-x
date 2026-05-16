@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
+import { getScamReportingBody } from '@/utils/sortedGeoContext';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedShareMomentScam from './SortedShareMomentScam';
@@ -102,7 +103,7 @@ Return JSON with these exact fields:
 - what_this_is: 2-3 sentences. Plain English. What IS this? What's the scammer trying to do or get?
 - red_flags: array of 2-5 specific red flags found in this message. Be specific to what's actually in the text — don't be generic.
 - what_to_do: array of exactly 3 clear, calm action steps. No jargon. E.g. "Do not click any links in this message", "Forward it to report@phishing.gov.uk", "Block this number"
-- report_to: the specific reporting body for ${geo.country} — e.g. "Action Fraud (UK): actionfraud.police.uk or 0300 123 2040" — be specific to their country
+- report_to: use this exact string for their country: "${getScamReportingBody(geo)}"
 - reassurance: one warm, calm sentence. E.g. "You did the right thing checking — this is a very common scam and you haven't lost anything by looking."`,
         response_json_schema: {
           type: 'object',
