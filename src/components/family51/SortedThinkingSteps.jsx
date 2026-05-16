@@ -132,7 +132,7 @@ function buildSteps(tool, input = '', geo = null) {
     return [
       { text: 'Reading your letter',                   sub: senderNote || 'Nothing stored — this stays private' },
       { text: 'Identifying what type this is',         sub: 'Matching to known letter patterns' },
-      { text: jurisdictionLabel ? `Checking ${jurisdictionLabel}` : 'Checking your jurisdiction', sub: geoJurisdictionNote },
+      { text: jurisdictionLabel ? `Checking ${jurisdictionLabel}` : 'Checking what law applies', sub: jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'Your rights, your country, your situation' },
       { text: 'Spotting deadlines',                    sub: deadlineNote || 'Dates that actually matter' },
       { text: 'Finding your real options',             sub: amountNote || 'What you can actually do' },
       { text: 'Writing plain English',                 sub: 'No jargon. No nonsense.' },
@@ -171,7 +171,7 @@ function buildSteps(tool, input = '', geo = null) {
     ];
     return [
       { text: 'Understanding your situation',          sub: 'Reading what you told us' },
-      { text: 'Checking your rights',                  sub: 'In your jurisdiction specifically' },
+      { text: 'Checking your rights',                  sub: jurisdictionLabel ? `Your rights under ${jurisdictionLabel}` : 'What you\'re entitled to here' },
       { text: 'Choosing the right tone',               sub: 'Firm but fair. Clear and effective.' },
       { text: 'Drafting your letter',                  sub: senderNote || 'Sharp, direct, ready to send' },
       { text: 'Final polish',                          sub: deadlineNote || 'Making sure it lands right' },
@@ -207,10 +207,10 @@ function buildSteps(tool, input = '', geo = null) {
     return [
       { text: 'Understanding the dispute',             sub: 'Reading your situation carefully' },
       { text: 'Identifying your position',             sub: amountNote || 'What you\'re entitled to here' },
-      { text: 'Checking relevant law',                 sub: 'In your specific jurisdiction' },
+      { text: 'Checking relevant law',                 sub: jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'What applies in your country' },
       { text: 'Mapping the other side',                sub: 'What they can and can\'t do' },
       { text: 'Building your strategy',                sub: 'Step by step, what to do' },
-      { text: 'Finding free help',                     sub: 'Real services, real contacts' },
+      { text: 'Finding free help',                     sub: `Real contacts — ${consumerBody}` },
     ];
   }
 
