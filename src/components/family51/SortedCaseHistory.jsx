@@ -281,40 +281,73 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
               <div style={{ marginTop: 16 }}>
                 {renderContent(caseItem)}
               </div>
-              {/* CONTINUE + DELETE */}
-              <div style={{ marginTop: 16, display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
+              {/* ACTIONS: SHARE · EMAIL · DELETE */}
+              <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {/* Primary action */}
                 {onContinue && (
                   <motion.button
                     onClick={() => onContinue(caseItem)}
                     whileTap={{ scale: 0.96 }}
-                    style={{
-                      flex: 1, padding: '11px 0', borderRadius: 10,
-                      fontSize: 12, fontWeight: 900, letterSpacing: '0.08em', cursor: 'pointer',
-                      border: `2px solid ${tool.color}`,
-                      background: tool.color,
-                      color: '#000',
-                      transition: 'all 0.15s',
-                    }}
+                    style={{ width: '100%', padding: '11px 0', borderRadius: 10, fontSize: 12, fontWeight: 900, letterSpacing: '0.08em', cursor: 'pointer', border: `2px solid ${tool.color}`, background: tool.color, color: '#000', transition: 'all 0.15s' }}
                   >
                     {caseItem.tool === 'letter' ? 'CONTINUE → WRITE REPLY' : caseItem.tool === 'reply' ? 'CONTINUE → DISPUTE HELP' : 'OPEN THIS CASE'}
                   </motion.button>
                 )}
-                <motion.button
-                  onClick={handleDelete}
-                  whileTap={{ scale: 0.95 }}
-                  onBlur={() => setConfirmDelete(false)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 6, padding: '11px 14px', borderRadius: 10,
-                    fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer',
-                    border: confirmDelete ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(26,18,8,0.1)',
-                    background: confirmDelete ? 'rgba(239,68,68,0.12)' : 'transparent',
-                    color: confirmDelete ? '#ef4444' : 'rgba(26,18,8,0.3)',
-                    transition: 'all 0.15s',
-                  }}
-                >
-                  <Trash2 size={11} />
-                  {confirmDelete ? 'CONFIRM' : ''}
-                </motion.button>
+                {/* Secondary: share + email + delete row */}
+                <div style={{ display: 'flex', gap: 8 }}>
+                  {/* SHARE / COPY */}
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      const parsed = parseResult(caseItem.ai_result);
+                      let text = caseItem.summary || '';
+                      if (parsed) {
+                        if (parsed.what_this_means) text += '\n\n' + parsed.what_this_means;
+                        if (parsed.letter_body) text += '\n\n' + parsed.letter_body;
+                        if (parsed.what_to_say) text += '\n\nWhat to say:\n' + parsed.what_to_say;
+                        if (parsed.action_steps?.length) text += '\n\nSteps:\n' + parsed.action_steps.map((s,i)=>`${i+1}. ${s}`).join('\n');
+                      }
+                      if (navigator.share) {
+                        navigator.share({ title: 'SORTED — My Action Plan', text: text.trim() }).catch(() => {});
+                      } else {
+                        navigator.clipboard.writeText(text.trim()).then(() => alert('Copied to clipboard'));
+                      }
+                    }}
+                    style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '10px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer', border: `1px solid ${tool.color}40`, background: `${tool.color}08`, color: tool.color }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="10.5" cy="2.5" r="1.5" stroke="currentColor" strokeWidth="1.2"/><circle cx="10.5" cy="10.5" r="1.5" stroke="currentColor" strokeWidth="1.2"/><circle cx="2.5" cy="6.5" r="1.5" stroke="currentColor" strokeWidth="1.2"/><path d="M4 6.5L9 3M4 6.5L9 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                    SHARE
+                  </motion.button>
+                  {/* EMAIL */}
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      const parsed = parseResult(caseItem.ai_result);
+                      let body = caseItem.summary || '';
+                      if (parsed) {
+                        if (parsed.letter_body) body = parsed.letter_body;
+                        else if (parsed.what_to_say) body = parsed.what_to_say;
+                        else if (parsed.what_this_means) body = parsed.what_this_means;
+                      }
+                      const subject = parsed?.subject_line || `SORTED — ${caseItem.summary || 'My Action Plan'}`;
+                      window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.trim())}`;
+                    }}
+                    style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '10px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)', background: 'rgba(26,18,8,0.03)', color: 'rgba(26,18,8,0.55)' }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="2.5" width="11" height="8" rx="1" stroke="currentColor" strokeWidth="1.2"/><path d="M1.5 3L6.5 7L11.5 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                    EMAIL
+                  </motion.button>
+                  {/* DELETE */}
+                  <motion.button
+                    onClick={handleDelete}
+                    whileTap={{ scale: 0.95 }}
+                    onBlur={() => setConfirmDelete(false)}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '10px 14px', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer', border: confirmDelete ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(26,18,8,0.1)', background: confirmDelete ? 'rgba(239,68,68,0.12)' : 'transparent', color: confirmDelete ? '#ef4444' : 'rgba(26,18,8,0.3)', transition: 'all 0.15s' }}
+                  >
+                    <Trash2 size={11} />
+                    {confirmDelete ? 'CONFIRM' : ''}
+                  </motion.button>
+                </div>
               </div>
             </div>
           </motion.div>

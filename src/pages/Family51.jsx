@@ -346,6 +346,28 @@ export default function Family51Page() {
 
             <SortedLiveCounter />
 
+            {/* MY CASES BUTTON — always visible on home */}
+            {(() => {
+              let caseCount = 0;
+              try { caseCount = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]').length; } catch {}
+              return caseCount > 0 ? (
+                <motion.button
+                  onClick={() => setShowHistory(true)}
+                  whileTap={{ scale: 0.97 }}
+                  style={{ width: '100%', marginTop: 12, padding: '14px 18px', borderRadius: 14, border: '1.5px solid rgba(245,166,35,0.4)', background: 'rgba(245,166,35,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <CasesIcon />
+                    <div style={{ textAlign: 'left' }}>
+                      <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>My Cases</div>
+                      <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)' }}>{caseCount} saved · tap to view, edit or delete</div>
+                    </div>
+                  </div>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="rgba(26,18,8,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </motion.button>
+              ) : null;
+            })()}
+
             <div style={{ marginTop: 16, textAlign: 'center' }}>
               <button onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }} style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.2)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
                 <Trash2 size={10} /> CLEAR ALL MY DATA
