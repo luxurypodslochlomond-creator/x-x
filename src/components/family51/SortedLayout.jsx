@@ -85,54 +85,50 @@ export default function SortedLayout({ children, currentPage }) {
 
         <div style={{ flex: 1 }} />
 
-        {/* FREE USES COUNTER — show remaining if not paid, show ∞ if paid */}
-        {!isLocked && (
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 5,
+        {/* FREE USES COUNTER — tappable, links to upgrade */}
+        <Link
+          to="/Sorted?upgrade=1"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 5, textDecoration: 'none',
             background: isPaid ? 'rgba(5,150,105,0.08)' : 'rgba(245,166,35,0.1)',
             border: `1.5px solid ${isPaid ? 'rgba(5,150,105,0.3)' : 'rgba(245,166,35,0.3)'}`,
             borderRadius: 8, padding: '5px 10px', marginRight: 8,
-          }}>
-            {isPaid ? (
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <circle cx="6" cy="6" r="5" stroke="#059669" strokeWidth="1.2" />
-                <path d="M3.5 6l1.8 1.8 3.2-3.2" stroke="#059669" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <circle cx="6" cy="6" r="5" stroke="#f5a623" strokeWidth="1.2" />
-                <path d="M6 3.5v3l1.5 1.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
-            <span style={{ fontSize: 11, fontWeight: 800, color: isPaid ? '#059669' : '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>
-              {isPaid ? '∞ SORTED' : `${remaining} FREE`}
-            </span>
-          </div>
-        )}
+            WebkitTapHighlightColor: 'transparent',
+            cursor: 'pointer',
+          }}
+        >
+          {isPaid ? (
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="5" stroke="#059669" strokeWidth="1.2" />
+              <path d="M3.5 6l1.8 1.8 3.2-3.2" stroke="#059669" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ) : (
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="5" stroke="#f5a623" strokeWidth="1.2" />
+              <path d="M6 3.5v3l1.5 1.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
+          <span style={{ fontSize: 11, fontWeight: 800, color: isPaid ? '#059669' : '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>
+            {isPaid ? '∞ SORTED' : `${remaining} FREE`}
+          </span>
+        </Link>
 
-        {/* CASES BRIEFCASE — always visible & clickable, shows empty state */}
-        <div
-          onClick={(e) => {
-            e.preventDefault();
-            setMenuOpen(false);
-            const el = document.getElementById('case-history');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-            else window.location.hash = '#case-history';
-          }}
-          onTouchStart={() => {
-            if ('vibrate' in navigator) navigator.vibrate(8);
-          }}
+        {/* CASES BRIEFCASE — taps to /Sorted?cases=1 */}
+        <Link
+          to="/Sorted?cases=1"
+          onClick={() => { setMenuOpen(false); if ('vibrate' in navigator) navigator.vibrate(8); }}
           style={{
             display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer',
-            background: caseCount > 0 ? 'rgba(245,166,35,0.06)' : 'rgba(245,166,35,0.02)',
-            border: `1.5px solid ${caseCount > 0 ? 'rgba(245,166,35,0.2)' : 'rgba(245,166,35,0.08)'}`,
+            background: caseCount > 0 ? 'rgba(245,166,35,0.08)' : 'rgba(245,166,35,0.02)',
+            border: `1.5px solid ${caseCount > 0 ? 'rgba(245,166,35,0.3)' : 'rgba(245,166,35,0.08)'}`,
             borderRadius: 8, padding: '5px 10px', marginRight: 8,
-            opacity: caseCount > 0 ? 1 : 0.45,
+            opacity: caseCount > 0 ? 1 : 0.4,
             transition: 'all 0.2s',
             WebkitTapHighlightColor: 'transparent',
-            WebkitUserSelect: 'none',
+            textDecoration: 'none',
           }}
-          title={caseCount > 0 ? `${caseCount} saved case${caseCount > 1 ? 's' : ''}` : 'Save a case to see it here'}
+          title={caseCount > 0 ? `${caseCount} saved case${caseCount > 1 ? 's' : ''}` : 'No cases yet'}
         >
           <svg width="14" height="14" viewBox="0 0 15 15" fill="none">
             <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="none" />
@@ -140,7 +136,7 @@ export default function SortedLayout({ children, currentPage }) {
             <path d="M4.5 8h6M4.5 10.5h4" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
           </svg>
           <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>{caseCount}</span>
-        </div>
+        </Link>
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}

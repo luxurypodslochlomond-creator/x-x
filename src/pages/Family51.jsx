@@ -51,13 +51,24 @@ export default function Family51Page() {
     if (!seen && !inIframe) setShowOnboarding(true);
   }, []);
 
-  // Detect Stripe success redirect
+  // Detect Stripe success redirect + cases param
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('sorted') === 'success') {
       setShowPaySuccess(true);
-      // Clean the URL without reload
       window.history.replaceState({}, '', window.location.pathname);
+    }
+    if (params.get('cases') === '1') {
+      setShowHistory(true);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+    if (params.get('upgrade') === '1') {
+      window.history.replaceState({}, '', window.location.pathname);
+      // Scroll to upgrade section after a tick
+      setTimeout(() => {
+        const el = document.getElementById('sorted-upgrade');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 200);
     }
   }, []);
 
@@ -328,7 +339,7 @@ export default function Family51Page() {
             </motion.div>
 
             {/* HOW IT WORKS — always visible */}
-            <div style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
+            <div id="sorted-upgrade" style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.55)', margin: '0 0 12px' }}>HOW IT WORKS</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <WhyRow icon={<WRBolt />} text="Paste, type or photo any letter — plain English in seconds" />
