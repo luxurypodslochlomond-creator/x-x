@@ -1,207 +1,282 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * SortedThinkingSteps — the "expert working out loud" loader
- * Steps are contextual to what the user actually typed/uploaded.
- * Each tool generates its own relevant step set based on input.
+ * SortedThinkingSteps — best in world "expert thinking out loud" loader
+ * 
+ * Two layers of personalisation:
+ * 1. Steps are contextual to the detected topic (debt, eviction, HMRC, scam type, etc.)
+ * 2. The active step subtitle references specifics extracted from their actual text
+ *    (amount, company name, sender, deadline) so it feels like a real expert reading their document
  */
 
-// Generate contextual steps based on what the user described
-function buildContextualSteps(tool, inputHint = '') {
-  const hint = (inputHint || '').toLowerCase();
+// ─── Extract specifics from raw input ─────────────────────────────────────────
+function extractSpecifics(input = '') {
+  const text = input.slice(0, 600); // only need the opening
 
-  // Detect key themes in the input
-  const isDebt = /debt|bailiff|ccj|county court|arrears|overdue|owe|payment|balance due/.test(hint);
-  const isEviction = /evict|section 21|notice to quit|landlord|tenancy|rent|deposit/.test(hint);
-  const isEmployment = /dismiss|redundan|workplace|employer|hr|disciplinary|unfair/.test(hint);
-  const isHMRC = /hmrc|tax|self.?assess|vat|national insurance|fine|penalty/.test(hint);
-  const isCouncil = /council|local authority|planning|enforcement|parking|rates/.test(hint);
-  const isCourt = /court|claim|summons|judgment|hearing|solicitor|legal/.test(hint);
-  const isScam = /scam|phish|fraud|suspicious|bitcoin|crypto|prize|won|lottery|bank/.test(hint);
-  const isNeighbour = /neighbour|noise|boundary|fence|garden|shared/.test(hint);
-  const isInsurance = /insurance|claim|policy|premium|damage/.test(hint);
-  const isConsumer = /refund|return|faulty|broken|consumer|trading standards|chargeback/.test(hint);
+  // Amount: £1,234 or $500 or 1234.00
+  const amountMatch = text.match(/[£$€]\s?[\d,]+(?:\.\d{1,2})?|\b\d{1,6}(?:\.\d{2})?\s*(?:pounds?|dollars?|euros?)/i);
+  const amount = amountMatch?.[0]?.trim();
 
+  // Deadline / date: by 14 May, within 7 days, before 01/06/2026
+  const dateMatch = text.match(/(?:by|before|within|no later than)\s+[\w\s,\/]+(?:\d{4}|\d+ days?)/i);
+  const deadline = dateMatch?.[0]?.replace(/^(?:by|before|within|no later than)\s+/i, '').trim();
+
+  // Sender: "from X" or "Dear X" reversed — look for company/org names
+  const senderMatch = text.match(/(?:from|by|signed|regards,?)\s+([A-Z][a-zA-Z &]+(?:Ltd|LLC|PLC|Council|HMRC|Court|Bank|Insurance|Services|Finance|Recoveries|Solutions)?)/);
+  const sender = senderMatch?.[1]?.trim();
+
+  // Reference number
+  const refMatch = text.match(/(?:ref(?:erence)?(?:\s*no\.?)?|case\s*(?:no\.?)?|account\s*(?:no\.?)?)[:\s#]*([A-Z0-9\-\/]{5,20})/i);
+  const ref = refMatch?.[1]?.trim();
+
+  return { amount, deadline, sender, ref };
+}
+
+// ─── Build contextual steps ────────────────────────────────────────────────────
+function buildSteps(tool, input = '') {
+  const hint = input.toLowerCase();
+  const specifics = extractSpecifics(input);
+
+  const amountNote  = specifics.amount  ? `Checking the ${specifics.amount} claim`        : null;
+  const deadlineNote= specifics.deadline? `Deadline spotted: ${specifics.deadline}`        : null;
+  const senderNote  = specifics.sender  ? `Sent by: ${specifics.sender}`                  : null;
+  const refNote     = specifics.ref     ? `Reference ${specifics.ref} logged`              : null;
+
+  // Topic detection
+  const isDebt       = /debt|bailiff|ccj|county court|arrears|overdue|owe\b|balance due|debt collection|notice of|amount outstanding/.test(hint);
+  const isEviction   = /evict|section 21|s21|notice to quit|landlord|tenancy|rent\b|deposit|possession|leave the property/.test(hint);
+  const isEmployment = /dismiss|redundan|workplace|employer|\bhr\b|disciplinary|unfair|capability|grievance|termination/.test(hint);
+  const isHMRC       = /hmrc|self.?assess|vat\b|national insurance|tax return|underpayment|tax credit|penalty notice/.test(hint);
+  const isCouncil    = /council tax|local authority|planning|enforcement notice|parking fine|rates\b|benefit overpayment/.test(hint);
+  const isCourt      = /county court|claim form|summons|judgment|hearing|ccj|legal proceedings|court order|solicitor/.test(hint);
+  const isInsurance  = /insurance|claim\b|policy|premium|damage|liability|underwriter|settlement/.test(hint);
+  const isConsumer   = /refund|faulty|broken|consumer rights|trading standards|chargeback|not as described|repair|replace/.test(hint);
+  const isNeighbour  = /neighbour|noise complaint|boundary|fence|garden|shared area|anti.?social/.test(hint);
+  const isParcelScam = /parcel|delivery|royal mail|dpd|evri|fedex|ups|tracking|redelivery fee/.test(hint);
+  const isBankScam   = /account.*suspend|verify.*account|bank.*alert|unusual.*activity|barclays|natwest|hsbc|lloyds|santander/.test(hint);
+  const isTaxScam    = /tax refund|rebate|owed by hmrc|government.*gateway|tax.*overpayment/.test(hint);
+  const isTechScam   = /microsoft|apple support|virus.*detected|tech support|bt internet|broadband.*suspend/.test(hint);
+  const isInvestScam = /investment|crypto|bitcoin|returns|profit|trading platform|broker|forex/.test(hint);
+  const isRomanceScam= /met online|dating|love you|send money|western union|gift card|itunes|stranded|emergency/.test(hint);
+
+  // ── LETTER TOOL ──────────────────────────────────────────────────────────────
   if (tool === 'letter') {
-    if (isDebt) return [
-      { text: 'Reading your debt letter',        sub: 'Checking who it\'s from and why' },
-      { text: 'Verifying the debt is real',       sub: 'Bailiff letters are often bluffs' },
-      { text: 'Checking your rights on this',     sub: 'Debt collection rules in your jurisdiction' },
-      { text: 'Finding deadlines that matter',    sub: 'Some of these are strict — some aren\'t' },
-      { text: 'Working out your options',         sub: 'Dispute, negotiate, or ignore safely' },
-      { text: 'Writing it in plain English',      sub: 'No jargon. What it actually means.' },
-    ];
-    if (isEviction) return [
-      { text: 'Reading your eviction notice',     sub: 'Checking the type and validity' },
-      { text: 'Checking the notice period',       sub: 'Legal minimums in your area' },
-      { text: 'Looking at your tenancy rights',   sub: 'Section 21, Section 8 — what applies here' },
-      { text: 'Spotting any errors in the notice',sub: 'Invalid notices are surprisingly common' },
-      { text: 'Finding your real options',        sub: 'You have more time than you think' },
-      { text: 'Plain English summary',            sub: 'What this means and what to do' },
+    if (isCouncil) return [
+      { text: 'Reading your council letter',           sub: senderNote || 'Council tax, parking, planning, or benefit?' },
+      { text: 'Checking what they\'re actually claiming', sub: amountNote || 'Councils often get these wrong' },
+      { text: 'Checking your appeal rights',           sub: 'You have more time than they\'ll tell you' },
+      { text: 'Looking at the deadline',               sub: deadlineNote || 'Important — but you have options' },
+      { text: 'Finding your options',                  sub: 'Appeal, dispute, or negotiate a plan' },
+      { text: 'Plain English summary',                 sub: 'What this actually means for you' },
     ];
     if (isHMRC) return [
-      { text: 'Reading your HMRC letter',         sub: 'These can look scarier than they are' },
-      { text: 'Identifying what HMRC wants',      sub: 'Tax owed, info request, or penalty?' },
-      { text: 'Checking your rights',             sub: 'You can always appeal — here\'s how' },
-      { text: 'Looking at deadlines',             sub: 'HMRC deadlines are real — finding yours' },
-      { text: 'Finding your options',             sub: 'Payment plans, appeals, disputes' },
-      { text: 'Plain English summary',            sub: 'What this actually means for you' },
+      { text: 'Reading your HMRC letter',              sub: senderNote || 'These look scarier than they are' },
+      { text: 'Identifying exactly what they want',    sub: amountNote || 'Tax owed, penalty, or information request?' },
+      { text: 'Checking your appeal rights',           sub: 'You can always challenge HMRC — here\'s how' },
+      { text: 'Spotting the real deadline',            sub: deadlineNote || 'Some HMRC deadlines are extendable' },
+      { text: 'Mapping your options',                  sub: 'Appeal, payment plan, or dispute' },
+      { text: 'Plain English summary',                 sub: 'What it means and what to do next' },
+    ];
+    if (isDebt) return [
+      { text: 'Reading your debt letter',              sub: senderNote || 'Checking who sent this and why' },
+      { text: 'Verifying whether this debt is real',   sub: amountNote || 'Debt collector letters are often bluffs' },
+      { text: 'Checking your rights',                  sub: 'Statute-barred? Time-limited? Disputed?' },
+      { text: 'Finding the real deadline',             sub: deadlineNote || 'Not all deadlines are legally binding' },
+      { text: 'Mapping your options',                  sub: 'Dispute, negotiate, payment plan, or ignore safely' },
+      { text: 'Plain English summary',                 sub: 'What this actually means and what to do' },
+    ];
+    if (isEviction) return [
+      { text: 'Reading your eviction notice',          sub: senderNote || 'Checking the type and legal validity' },
+      { text: 'Verifying the notice is legally correct', sub: 'Invalid notices are surprisingly common' },
+      { text: 'Checking your notice period',           sub: deadlineNote || 'Legal minimum in your jurisdiction' },
+      { text: 'Looking at your tenancy rights',        sub: 'Section 21, Section 8 — what applies here' },
+      { text: 'Finding your options',                  sub: 'You have more time than you think' },
+      { text: 'Plain English summary',                 sub: 'Exactly what this means and next steps' },
     ];
     if (isEmployment) return [
-      { text: 'Reading your employment letter',   sub: 'Disciplinary, dismissal, or redundancy?' },
-      { text: 'Checking employment law',          sub: 'Your rights in this jurisdiction' },
-      { text: 'Looking at process followed',      sub: 'Procedural failures can be your strongest card' },
-      { text: 'Spotting deadlines',               sub: 'Employment tribunal windows are short' },
-      { text: 'Finding your options',             sub: 'Appeal, grievance, or tribunal?' },
-      { text: 'Plain English summary',            sub: 'What this means and what to do next' },
+      { text: 'Reading your employment letter',        sub: senderNote || 'Disciplinary, dismissal, or redundancy?' },
+      { text: 'Checking employment law',               sub: 'Your rights in this jurisdiction' },
+      { text: 'Looking at the procedure followed',     sub: 'Procedural failures are your strongest card' },
+      { text: 'Spotting the deadline',                 sub: deadlineNote || 'Employment tribunal windows are short' },
+      { text: 'Finding your options',                  sub: 'Appeal, grievance, tribunal, or negotiate' },
+      { text: 'Plain English summary',                 sub: 'What this means and what to do next' },
     ];
     if (isCourt) return [
-      { text: 'Reading your court document',      sub: 'Claim, summons, or judgment?' },
-      { text: 'Understanding what\'s being claimed', sub: 'Exact nature and amount' },
-      { text: 'Checking your response window',    sub: 'Court deadlines are strict' },
-      { text: 'Looking at your defence options',  sub: 'You have more options than you think' },
-      { text: 'Finding free legal help',          sub: 'Real services for your situation' },
-      { text: 'Plain English summary',            sub: 'Step by step what happens next' },
+      { text: 'Reading your court document',           sub: senderNote || 'Claim, summons, or judgment?' },
+      { text: 'Understanding what\'s being claimed',   sub: amountNote || 'Exact nature and amount' },
+      { text: 'Checking your response window',         sub: deadlineNote || 'Court deadlines are strict' },
+      { text: 'Looking at your defence options',       sub: refNote || 'More options than you think' },
+      { text: 'Finding free legal help',               sub: 'Real services for your situation' },
+      { text: 'Plain English summary',                 sub: 'Step by step what happens next' },
     ];
-    // Default letter steps
+    if (isInsurance) return [
+      { text: 'Reading your insurance letter',         sub: senderNote || 'Claim, rejection, or policy change?' },
+      { text: 'Checking what they\'re deciding',       sub: amountNote || 'Full picture before reacting' },
+      { text: 'Looking at your policy rights',         sub: 'Insurers must follow FCA rules' },
+      { text: 'Checking appeal routes',                sub: deadlineNote || 'FOS complaints are free and powerful' },
+      { text: 'Finding your options',                  sub: 'Dispute, appeal, or escalate to ombudsman' },
+      { text: 'Plain English summary',                 sub: 'What this means and what to do' },
+    ];
     return [
-      { text: 'Reading your letter',              sub: 'Nothing stored — this stays private' },
-      { text: 'Identifying what type this is',    sub: 'Matching to known letter patterns' },
-      { text: 'Checking your jurisdiction',       sub: 'Laws differ — getting yours right' },
-      { text: 'Spotting deadlines',               sub: 'Dates that matter most' },
-      { text: 'Finding your real options',        sub: 'What you can actually do' },
-      { text: 'Writing plain English',            sub: 'No jargon. No nonsense.' },
+      { text: 'Reading your letter',                   sub: senderNote || 'Nothing stored — this stays private' },
+      { text: 'Identifying what type this is',         sub: 'Matching to known letter patterns' },
+      { text: 'Checking your jurisdiction',            sub: 'Laws differ — getting yours exactly right' },
+      { text: 'Spotting deadlines',                    sub: deadlineNote || 'Dates that actually matter' },
+      { text: 'Finding your real options',             sub: amountNote || 'What you can actually do' },
+      { text: 'Writing plain English',                 sub: 'No jargon. No nonsense.' },
     ];
   }
 
+  // ── REPLY TOOL ───────────────────────────────────────────────────────────────
   if (tool === 'reply') {
     if (isDebt) return [
-      { text: 'Understanding your debt situation', sub: 'Reading exactly what you told us' },
-      { text: 'Checking what you legally owe',    sub: 'Not all claimed debts are valid' },
-      { text: 'Finding the right response',       sub: 'Dispute, request proof, or negotiate' },
-      { text: 'Drafting your letter',             sub: 'Firm, factual, and effective' },
-      { text: 'Adding the right legal references',sub: 'Makes them take you seriously' },
+      { text: 'Understanding your debt situation',     sub: 'Reading exactly what you told us' },
+      { text: 'Checking what you legally owe',         sub: amountNote || 'Not all claimed debts are valid' },
+      { text: 'Finding the right response strategy',   sub: 'Dispute, request proof, or negotiate' },
+      { text: 'Drafting your letter',                  sub: senderNote || 'Firm, factual, and hard to ignore' },
+      { text: 'Adding the right legal weight',         sub: 'References that make them take you seriously' },
     ];
     if (isEviction) return [
-      { text: 'Understanding your situation',     sub: 'Reading what you told us' },
-      { text: 'Checking tenancy law here',        sub: 'Your specific rights as a tenant' },
-      { text: 'Finding the strongest response',   sub: 'Challenge the notice if it\'s flawed' },
-      { text: 'Drafting your reply',              sub: 'Clear, confident, professional' },
-      { text: 'Final review',                     sub: 'Making sure it lands right' },
+      { text: 'Understanding your situation',          sub: 'Reading what you told us' },
+      { text: 'Checking tenancy law',                  sub: 'Your specific rights as a tenant here' },
+      { text: 'Finding the strongest response',        sub: 'Challenge the notice if it\'s flawed' },
+      { text: 'Drafting your reply',                   sub: senderNote || 'Clear, confident, professional' },
+      { text: 'Final review',                          sub: deadlineNote || 'Making sure it lands right' },
     ];
     if (isConsumer) return [
-      { text: 'Understanding your complaint',     sub: 'What happened and what you want' },
-      { text: 'Checking consumer law',            sub: 'Consumer Rights Act / local equivalent' },
-      { text: 'Building your case',               sub: 'What you\'re entitled to and why' },
-      { text: 'Drafting your letter',             sub: 'Formal, firm, and impossible to ignore' },
-      { text: 'Final polish',                     sub: 'Clear ask, clear deadline, clear consequences' },
-    ];
-    // Default reply steps
-    return [
-      { text: 'Understanding your situation',     sub: 'Reading what you told us' },
-      { text: 'Checking your rights',             sub: 'In your jurisdiction specifically' },
-      { text: 'Choosing the right tone',          sub: 'Firm but fair. Clear and effective.' },
-      { text: 'Drafting your letter',             sub: 'Sharp, direct, ready to send' },
-      { text: 'Final polish',                     sub: 'Making sure it lands right' },
-    ];
-  }
-
-  if (tool === 'conflict') {
-    if (isNeighbour) return [
-      { text: 'Reading your neighbour situation', sub: 'Noise, boundaries, shared areas?' },
-      { text: 'Checking property and nuisance law', sub: 'What\'s legally actionable here' },
-      { text: 'Looking at council powers',        sub: 'Environmental health, mediation routes' },
-      { text: 'Building your approach',           sub: 'Firm but neighbourly if possible' },
-      { text: 'Finding escalation routes',        sub: 'If talking doesn\'t work' },
-      { text: 'Writing what to say',              sub: 'Exact words for the conversation' },
+      { text: 'Understanding your complaint',          sub: 'What happened and what you\'re owed' },
+      { text: 'Checking consumer law',                 sub: amountNote || 'Consumer Rights Act / local equivalent' },
+      { text: 'Building your case',                    sub: 'What you\'re entitled to and why' },
+      { text: 'Drafting your letter',                  sub: senderNote || 'Formal, firm, impossible to ignore' },
+      { text: 'Final polish',                          sub: 'Clear ask, clear deadline, clear consequences' },
     ];
     if (isEmployment) return [
-      { text: 'Reading your workplace dispute',   sub: 'What happened and who\'s involved' },
-      { text: 'Checking employment rights',       sub: 'Grievance, disciplinary, or both?' },
-      { text: 'Looking at ACAS process',          sub: 'The right procedure protects you' },
-      { text: 'Building your position',           sub: 'What you can reasonably ask for' },
-      { text: 'Drafting your approach',           sub: 'What to say and how to say it' },
-      { text: 'Finding support',                  sub: 'Free help available to you' },
+      { text: 'Understanding your workplace situation',sub: 'Reading exactly what happened' },
+      { text: 'Checking your employment rights',       sub: 'Grievance, appeal, or formal complaint?' },
+      { text: 'Choosing the right approach',           sub: 'ACAS process protects you if followed' },
+      { text: 'Drafting your response',                sub: senderNote || 'Professional, evidenced, effective' },
+      { text: 'Final review',                          sub: deadlineNote || 'Timing matters here' },
+    ];
+    return [
+      { text: 'Understanding your situation',          sub: 'Reading what you told us' },
+      { text: 'Checking your rights',                  sub: 'In your jurisdiction specifically' },
+      { text: 'Choosing the right tone',               sub: 'Firm but fair. Clear and effective.' },
+      { text: 'Drafting your letter',                  sub: senderNote || 'Sharp, direct, ready to send' },
+      { text: 'Final polish',                          sub: deadlineNote || 'Making sure it lands right' },
+    ];
+  }
+
+  // ── CONFLICT TOOL ────────────────────────────────────────────────────────────
+  if (tool === 'conflict') {
+    if (isNeighbour) return [
+      { text: 'Reading your neighbour situation',      sub: 'Noise, boundaries, or shared areas?' },
+      { text: 'Checking nuisance and property law',    sub: 'What\'s legally actionable here' },
+      { text: 'Looking at council powers',             sub: 'Environmental health and mediation routes' },
+      { text: 'Building your approach',                sub: 'Firm but neighbourly if possible' },
+      { text: 'Mapping escalation routes',             sub: 'If talking doesn\'t work' },
+      { text: 'Writing what to say',                   sub: 'Exact words for the conversation' },
+    ];
+    if (isEmployment) return [
+      { text: 'Reading your workplace dispute',        sub: 'What happened and who\'s involved' },
+      { text: 'Checking employment rights',            sub: 'Grievance, disciplinary, or both?' },
+      { text: 'Looking at correct procedure',          sub: 'ACAS process — following it protects you' },
+      { text: 'Building your position',                sub: 'What you can reasonably ask for' },
+      { text: 'Drafting your approach',                sub: 'What to say and how to say it' },
+      { text: 'Finding free support',                  sub: 'ACAS, Citizens Advice, union help' },
     ];
     if (isEviction) return [
-      { text: 'Reading your landlord dispute',    sub: 'Deposit, repairs, or eviction?' },
-      { text: 'Checking tenant rights',           sub: 'What your landlord can and can\'t do' },
-      { text: 'Looking at housing law',           sub: 'Specific to your jurisdiction' },
-      { text: 'Building your position',           sub: 'Evidence, letters, timelines' },
-      { text: 'Finding your leverage',            sub: 'You have more than you think' },
-      { text: 'What to say and do next',          sub: 'Exact steps from here' },
+      { text: 'Reading your landlord dispute',         sub: 'Deposit, repairs, or eviction?' },
+      { text: 'Checking your tenant rights',           sub: amountNote || 'What your landlord can and can\'t do' },
+      { text: 'Looking at housing law',                sub: 'Specific to your jurisdiction' },
+      { text: 'Building your position',                sub: 'Evidence, letters, and timelines' },
+      { text: 'Finding your leverage',                 sub: 'You have more than you think' },
+      { text: 'What to say and do next',               sub: 'Exact steps from here' },
     ];
-    // Default conflict steps
     return [
-      { text: 'Understanding the dispute',        sub: 'Reading your situation carefully' },
-      { text: 'Identifying your position',        sub: 'What you\'re entitled to here' },
-      { text: 'Checking relevant law',            sub: 'In your specific jurisdiction' },
-      { text: 'Mapping the other side',           sub: 'What they can and can\'t do' },
-      { text: 'Building your strategy',           sub: 'Step by step, what to do' },
-      { text: 'Finding free help',                sub: 'Real services, real contacts' },
+      { text: 'Understanding the dispute',             sub: 'Reading your situation carefully' },
+      { text: 'Identifying your position',             sub: amountNote || 'What you\'re entitled to here' },
+      { text: 'Checking relevant law',                 sub: 'In your specific jurisdiction' },
+      { text: 'Mapping the other side',                sub: 'What they can and can\'t do' },
+      { text: 'Building your strategy',                sub: 'Step by step, what to do' },
+      { text: 'Finding free help',                     sub: 'Real services, real contacts' },
     ];
   }
 
+  // ── SCAM TOOL ────────────────────────────────────────────────────────────────
   if (tool === 'scam') {
+    if (isParcelScam) return [
+      { text: 'Reading this delivery message',         sub: 'Parcel scams are the #1 fraud right now' },
+      { text: 'Checking the sender details',           sub: senderNote || 'Real couriers never charge for redelivery this way' },
+      { text: 'Analysing any links',                   sub: 'Does the URL match the real company?' },
+      { text: 'Checking for pressure tactics',         sub: 'Urgency and fees are classic red flags' },
+      { text: 'Finding how to report it',              sub: 'Specific reporting route for you' },
+    ];
+    if (isBankScam) return [
+      { text: 'Reading this banking message',          sub: senderNote || 'These are designed to panic you' },
+      { text: 'Checking sender authenticity',          sub: 'Real banks never text asking for passwords' },
+      { text: 'Looking for social engineering',        sub: 'Urgency, fear, access requests — classic signs' },
+      { text: 'Assessing what they\'re after',         sub: 'Credentials, money transfer, or account access?' },
+      { text: 'Finding how to report it',              sub: 'Your bank\'s fraud line + Action Fraud' },
+    ];
+    if (isTaxScam) return [
+      { text: 'Reading this tax refund message',       sub: senderNote || 'HMRC tax refund scams are extremely common' },
+      { text: 'Checking if HMRC contacts this way',    sub: 'Hint: HMRC never texts about refunds' },
+      { text: 'Checking sender details',               sub: 'Email address and phone number analysis' },
+      { text: 'Assessing the risk',                    sub: amountNote || 'Have you entered any details yet?' },
+      { text: 'Finding how to report it',              sub: 'HMRC phishing team + Action Fraud' },
+    ];
+    if (isTechScam) return [
+      { text: 'Reading this tech support message',     sub: senderNote || 'Microsoft/Apple never call you unsolicited' },
+      { text: 'Checking the real sender',              sub: 'Pop-ups and calls claiming virus detection' },
+      { text: 'Looking for remote access requests',    sub: 'This is what makes tech scams dangerous' },
+      { text: 'Assessing what\'s at risk',             sub: 'Your device, your accounts, your money' },
+      { text: 'Finding how to report it',              sub: 'Action Fraud + the company being impersonated' },
+    ];
+    if (isInvestScam) return [
+      { text: 'Reading this investment offer',         sub: senderNote || 'Investment scams are the highest-loss fraud' },
+      { text: 'Checking FCA registration',             sub: 'Unregistered firms are illegal in the UK' },
+      { text: 'Looking for guaranteed return promises',sub: amountNote || 'No legitimate investment guarantees returns' },
+      { text: 'Checking pressure and urgency tactics', sub: 'Scarcity and time pressure are engineered' },
+      { text: 'Finding how to report it',              sub: 'FCA ScamSmart + Action Fraud' },
+    ];
+    if (isRomanceScam) return [
+      { text: 'Reading this message carefully',        sub: 'Romance scams cause real emotional harm too' },
+      { text: 'Checking for engineered connection',    sub: 'Moving fast, very complimentary, can\'t meet' },
+      { text: 'Looking at the money request',          sub: amountNote || 'Emergency, gift cards, wire transfer?' },
+      { text: 'Assessing the situation honestly',      sub: 'This is hard — but you deserve the truth' },
+      { text: 'Finding support and reporting routes',  sub: 'You\'re not alone — help exists' },
+    ];
     if (isDebt) return [
-      { text: 'Reading this debt message',        sub: 'Checking every claim they make' },
-      { text: 'Verifying if this company is real',sub: 'Fake debt collectors are very common' },
-      { text: 'Checking the numbers add up',      sub: 'Inflated fees are a red flag' },
-      { text: 'Assessing the risk level',         sub: 'Real threat or bluff?' },
-      { text: 'Finding who to report this to',    sub: 'FCA, Trading Standards, Action Fraud' },
+      { text: 'Reading this debt collection message',  sub: senderNote || 'Fake debt collectors are very common' },
+      { text: 'Verifying if this company is real',     sub: 'FCA register check + Companies House' },
+      { text: 'Checking the claimed amount',           sub: amountNote || 'Inflated fees are a major red flag' },
+      { text: 'Assessing threat vs reality',           sub: 'Real threat, bluff, or outright scam?' },
+      { text: 'Finding who to report this to',         sub: 'FCA, Trading Standards, Action Fraud' },
     ];
-    // Detect specific scam types
-    const isParcel = /parcel|delivery|royal mail|dpd|evri|fedex|ups|tracking/.test(hint);
-    const isBank = /bank|account|suspended|blocked|verify|barclays|natwest|hsbc|lloyds/.test(hint);
-    const isTax = /hmrc|tax refund|rebate|owed|government/.test(hint);
-    const isTech = /microsoft|apple|virus|computer|tech support|bt|broadband/.test(hint);
-    if (isParcel) return [
-      { text: 'Reading this delivery message',    sub: 'Parcel scams are the #1 fraud right now' },
-      { text: 'Checking the sender details',      sub: 'Real couriers never ask for card details' },
-      { text: 'Scanning the link if any',         sub: 'Does it go to the real site?' },
-      { text: 'Assessing the risk',               sub: 'Have you clicked or paid anything?' },
-      { text: 'Finding how to report it',         sub: 'Specific reporting route for you' },
-    ];
-    if (isBank) return [
-      { text: 'Reading this banking message',     sub: 'These are designed to panic you' },
-      { text: 'Checking sender authenticity',     sub: 'Real banks never text asking for passwords' },
-      { text: 'Looking for social engineering',   sub: 'Urgency, fear, pressure — classic signs' },
-      { text: 'Assessing what they want',         sub: 'Credentials, money, or access?' },
-      { text: 'Finding how to report it',         sub: 'Your bank\'s fraud line + Action Fraud' },
-    ];
-    if (isTax) return [
-      { text: 'Reading this HMRC message',        sub: 'Tax refund scams are extremely common' },
-      { text: 'Checking if HMRC contacts this way', sub: 'Hint: HMRC never texts about refunds' },
-      { text: 'Checking the sender details',      sub: 'Email address, phone number analysis' },
-      { text: 'Assessing the risk',               sub: 'Have you entered any details?' },
-      { text: 'Finding how to report it',         sub: 'HMRC phishing team + Action Fraud' },
-    ];
-    // Default scam steps
     return [
-      { text: 'Reading the message',              sub: 'Checking every detail' },
-      { text: 'Scanning known scam patterns',     sub: 'Matching against fraud databases' },
-      { text: 'Checking sender details',          sub: 'Numbers, links, language red flags' },
-      { text: 'Assessing the risk',               sub: 'How serious is this?' },
-      { text: 'Finding reporting routes',         sub: 'Who to tell and how' },
+      { text: 'Reading the message',                   sub: senderNote || 'Checking every detail carefully' },
+      { text: 'Scanning known scam patterns',          sub: 'Matching against fraud databases' },
+      { text: 'Checking sender details',               sub: 'Numbers, links, language red flags' },
+      { text: 'Assessing the risk level',              sub: amountNote || 'How serious is this?' },
+      { text: 'Finding your reporting routes',         sub: 'Who to tell and exactly how' },
     ];
   }
 
-  // Fallback
   return [
-    { text: 'Reading your submission',            sub: 'Nothing stored — gone when done' },
-    { text: 'Checking the details',               sub: 'Every word matters' },
-    { text: 'Finding what applies to you',        sub: 'Your jurisdiction, your rights' },
-    { text: 'Building your answer',               sub: 'Almost there' },
+    { text: 'Reading your submission',               sub: 'Nothing stored — gone when done' },
+    { text: 'Checking the details',                  sub: 'Every word matters' },
+    { text: 'Finding what applies',                  sub: 'Your jurisdiction, your rights' },
+    { text: 'Building your answer',                  sub: 'Almost there' },
   ];
 }
 
+// ─── Component ────────────────────────────────────────────────────────────────
 export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f97316', isActive = false, inputHint = '' }) {
-  const steps = buildContextualSteps(tool, inputHint);
+  const steps = useMemo(() => buildSteps(tool, inputHint), [tool, inputHint]);
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState([]);
 
-  // Reset when activated
   useEffect(() => {
     if (!isActive) {
       setCurrentStep(0);
@@ -212,27 +287,22 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
     setCurrentStep(0);
     setCompletedSteps([]);
 
-    // Each step: varied timing so it feels organic, not mechanical
-    const durations = steps.map((_, i) => 2400 + (i % 3) * 700 + (i % 2) * 300);
+    // Organic timing: 2.2s – 3.8s per step, varied so it never feels mechanical
+    const durations = steps.map((_, i) => 2200 + (i % 3) * 500 + (i % 2) * 400);
 
     let stepIndex = 0;
     let cancelled = false;
 
     const advance = () => {
-      if (cancelled) return;
-      if (stepIndex < steps.length - 1) {
-        setCompletedSteps(prev => [...prev, stepIndex]);
-        stepIndex++;
-        setCurrentStep(stepIndex);
-        setTimeout(advance, durations[stepIndex]);
-      }
+      if (cancelled || stepIndex >= steps.length - 1) return;
+      setCompletedSteps(prev => [...prev, stepIndex]);
+      stepIndex++;
+      setCurrentStep(stepIndex);
+      setTimeout(advance, durations[stepIndex]);
     };
 
-    const timer = setTimeout(advance, durations[0]);
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-    };
+    const t = setTimeout(advance, durations[0]);
+    return () => { cancelled = true; clearTimeout(t); };
   }, [isActive, tool, inputHint]);
 
   if (!isActive) return null;
@@ -242,27 +312,17 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      style={{
-        padding: '32px 24px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 0,
-      }}
+      style={{ padding: '32px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       {/* Pulsing brain orb */}
-      <div style={{ position: 'relative', width: 52, height: 52, marginBottom: 28 }}>
-        <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.25, 0.1] }}
+      <div style={{ position: 'relative', width: 50, height: 50, marginBottom: 26 }}>
+        <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.22, 0.08] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }}
-        />
-        <motion.div
-          animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.45, 0.2] }}
+          style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }} />
+        <motion.div animate={{ scale: [1, 1.14, 1], opacity: [0.18, 0.42, 0.18] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-          style={{ position: 'absolute', inset: 8, borderRadius: '50%', background: accentColor }}
-        />
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+          style={{ position: 'absolute', inset: 8, borderRadius: '50%', background: accentColor }} />
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
           style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 1 }}>
           <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
             stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
@@ -271,49 +331,35 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
         </svg>
       </div>
 
-      {/* Steps list */}
-      <div style={{ width: '100%', maxWidth: 290, display: 'flex', flexDirection: 'column', gap: 11 }}>
+      {/* Steps */}
+      <div style={{ width: '100%', maxWidth: 295, display: 'flex', flexDirection: 'column', gap: 11 }}>
         {steps.map((step, i) => {
-          const isDone = completedSteps.includes(i);
+          const isDone    = completedSteps.includes(i);
           const isCurrent = i === currentStep;
           const isPending = !isDone && !isCurrent;
 
           return (
-            <motion.div
-              key={`${tool}-${i}`}
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: isPending ? 0.22 : 1, x: 0 }}
-              transition={{ duration: 0.35, delay: i * 0.07 }}
-              style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}
+            <motion.div key={i}
+              initial={{ opacity: 0, x: -6 }}
+              animate={{ opacity: isPending ? 0.2 : 1, x: 0 }}
+              transition={{ duration: 0.3, delay: i * 0.06 }}
+              style={{ display: 'flex', alignItems: 'flex-start', gap: 11 }}
             >
-              {/* Status icon */}
+              {/* Icon */}
               <div style={{ width: 20, height: 20, flexShrink: 0, marginTop: 1 }}>
                 {isDone ? (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                    style={{
-                      width: 20, height: 20, borderRadius: '50%',
-                      background: accentColor,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}
-                  >
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+                    style={{ width: 20, height: 20, borderRadius: '50%', background: accentColor, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M2 5l2.5 2.5L8 3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 5l2.5 2.5L8 3" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </motion.div>
                 ) : isCurrent ? (
-                  <div style={{
-                    width: 20, height: 20, borderRadius: '50%',
-                    border: `2px solid ${accentColor}`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}>
-                    <motion.div
-                      animate={{ scale: [0.4, 1, 0.4] }}
-                      transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-                      style={{ width: 7, height: 7, borderRadius: '50%', background: accentColor }}
-                    />
+                  <div style={{ width: 20, height: 20, borderRadius: '50%', border: `2px solid ${accentColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <motion.div animate={{ scale: [0.35, 1, 0.35] }}
+                      transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+                      style={{ width: 7, height: 7, borderRadius: '50%', background: accentColor }} />
                   </div>
                 ) : (
                   <div style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid rgba(26,18,8,0.1)' }} />
@@ -324,43 +370,36 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
               <div style={{ flex: 1 }}>
                 <p style={{
                   fontSize: 13,
-                  fontWeight: isCurrent ? 900 : isDone ? 700 : 500,
-                  color: isDone ? accentColor : isCurrent ? '#1a1208' : 'rgba(26,18,8,0.3)',
+                  fontWeight: isCurrent ? 900 : isDone ? 700 : 400,
+                  color: isCurrent ? '#1a1208' : isDone ? accentColor : 'rgba(26,18,8,0.28)',
                   margin: '0 0 2px',
-                  letterSpacing: isCurrent ? '0.01em' : '0',
-                  transition: 'all 0.3s',
+                  transition: 'all 0.25s',
                 }}>
                   {step.text}
                 </p>
-                {isCurrent && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    style={{ fontSize: 11, color: 'rgba(26,18,8,0.42)', margin: 0, letterSpacing: '0.02em' }}
-                  >
-                    {step.sub}
-                  </motion.p>
-                )}
-                {isDone && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.45 }}
-                    style={{ fontSize: 10, color: accentColor, margin: 0 }}
-                  >
-                    ✓ done
-                  </motion.p>
-                )}
+                <AnimatePresence mode="wait">
+                  {isCurrent && (
+                    <motion.p key="sub-current"
+                      initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                      style={{ fontSize: 11, color: 'rgba(26,18,8,0.42)', margin: 0 }}>
+                      {step.sub}
+                    </motion.p>
+                  )}
+                  {isDone && (
+                    <motion.p key="sub-done"
+                      initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} exit={{ opacity: 0 }}
+                      style={{ fontSize: 10, color: accentColor, margin: 0, fontWeight: 600 }}>
+                      ✓ done
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
           );
         })}
       </div>
 
-      {/* Privacy note */}
-      <p style={{
-        fontSize: 10, color: 'rgba(26,18,8,0.28)', marginTop: 26,
-        textAlign: 'center', letterSpacing: '0.06em', fontWeight: 700
-      }}>
+      <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.25)', marginTop: 24, textAlign: 'center', letterSpacing: '0.06em', fontWeight: 700 }}>
         NOTHING STORED · PROCESSED &amp; GONE
       </p>
     </motion.div>
