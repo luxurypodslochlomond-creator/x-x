@@ -258,6 +258,50 @@ const COUNTRY_CONTEXTS = {
 - SAT (Servicio de Administración Tributaria) — tax: sat.gob.mx / 55 627 22 728
 - Scam reporting: CONDUSEF for financial fraud, FGR cybercrimes: fgr.org.mx / 800 463 4789, GN (Guardia Nacional) 088.`,
 
+  // ── CHILE ─────────────────────────────────────────────────────────────────────
+  'CL': `For Chile: apply Chilean law precisely.
+- Ley del Consumidor (Ley 19.496) — strong consumer protections
+- SERNAC (Servicio Nacional del Consumidor) — consumer complaints: sernac.cl / 800 700 100 (FREE)
+- CMF (Comisión para el Mercado Financiero) — banking and financial: cmfchile.cl / 800 700 401
+- Dirección del Trabajo — employment disputes: dt.gob.cl / 600 450 4000
+- Juzgados de Policía Local — small consumer claims
+- Mediación obligatoria (free mediation) before many court proceedings
+- SII (Servicio de Impuestos Internos) — tax: sii.cl / 22 395 1115
+- CAJ (Corporación de Asistencia Judicial) — FREE legal aid: cajmetro.cl / 600 222 5252
+- PDI (Policía de Investigaciones) — civil investigations
+- Scam reporting: PDI Brigada del Cibercrimen: pdichile.cl / 134; CSIRT: csirt.gob.cl.`,
+
+  // ── PERU ─────────────────────────────────────────────────────────────────────
+  'PE': `For Peru: apply Peruvian law precisely.
+- INDECOPI (Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual) — consumer protection: indecopi.gob.pe / 224-7777 (Lima) or 0800-4-4040 (FREE nationwide)
+- SBS (Superintendencia de Banca y Seguros) — banking: sbs.gob.pe / 0800-10840
+- Ministerio de Trabajo — employment disputes: trabajo.gob.pe / 0800-16872
+- Poder Judicial — civil courts
+- Defensoría del Pueblo — rights protection: defensoria.gob.pe / 0800-15170
+- SUNAT — tax: sunat.gob.pe / 0801-12-100
+- Scam reporting: PNP División de Delitos Informáticos: pnp.gob.pe / 105; CSIRT: pecert.gob.pe.`,
+
+  // ── URUGUAY ─────────────────────────────────────────────────────────────────
+  'UY': `For Uruguay: apply Uruguayan law precisely.
+- Área de Defensa del Consumidor (ADECO) — consumer protection: gub.uy / 0800 5000
+- BCU (Banco Central del Uruguay) — financial complaints: bcu.gub.uy / 2967 9898
+- Ministerio de Trabajo y Seguridad Social — employment: mtss.gub.uy / 0800 9000
+- Poder Judicial — courts: poderjudicial.gub.uy
+- DGI — tax: dgi.gub.uy / 0800 4641
+- Scam reporting: Policía Nacional: policia.gub.uy / 911; Unidad de Crimen Organizado.`,
+
+  // ── PORTUGAL ─────────────────────────────────────────────────────────────────
+  'PT': `For Portugal: apply Portuguese law precisely.
+- DECO (Associação Portuguesa para a Defesa do Consumidor): deco.pt / 213 710 200
+- Livro de Reclamações (Complaints Book) — mandatory in all businesses: livroreclamacoes.pt
+- Banco de Portugal — banking complaints: bportugal.pt / 213 130 000
+- ANACOM — telecom and postal: anacom.pt / 800 206 665
+- ACT (Autoridade para as Condições do Trabalho) — employment: act.gov.pt / 800 202 424
+- Centro de Arbitragem — consumer disputes without a lawyer
+- CNIACC — consumer conflicts arbitration
+- AT (Autoridade Tributária) — tax: portaldasfinancas.gov.pt / 217 206 707
+- Scam reporting: PJ (Polícia Judiciária) cybercrimes: pj.pt / 21 864 2000; CNCS: cncs.gov.pt.`,
+
   // ── ARGENTINA ────────────────────────────────────────────────────────────────
   'AR': `For Argentina: apply Argentine law precisely.
 - DEFENSA DEL CONSUMIDOR (Ley 24.240) — consumer protection: argentina.gob.ar/produccion/defensadelconsumidor
@@ -437,6 +481,10 @@ const SCAM_REPORTERS = {
   'MX': 'Guardia Nacional: 088. FGR cybercrimes: fgr.org.mx / 800 463 4789.',
   'AR': 'División Delitos Tecnológicos (Policía Federal). Local police: 911.',
   'CO': 'Policía Nacional DIJIN: policia.gov.co / 112. CAI Virtual for cybercrimes.',
+  'CL': 'PDI Brigada del Cibercrimen: pdichile.cl / 134. CSIRT: csirt.gob.cl. Carabinieri: 133.',
+  'PE': 'PNP División de Delitos Informáticos: pnp.gob.pe / 105. PECERT: pecert.gob.pe.',
+  'UY': 'Policía Nacional: policia.gub.uy / 911.',
+  'PT': 'Polícia Judiciária cybercrimes: pj.pt / 21 864 2000. CNCS: cncs.gov.pt.',
   'JP': 'National Police Agency: npa.go.jp. Local police: 110.',
   'KR': 'National Police Agency cybercrime: police.go.kr / 112. Financial Fraud: 1332.',
   'PH': 'NBI Cybercrime Division: nbi.gov.ph / 02-8523-8231. PNP Anti-Cybercrime: acg.pnp.gov.ph / 02-414-1560.',
@@ -476,15 +524,14 @@ const COUNTRY_LANGUAGE = {
   'PH': 'English', 'HK': 'English', 'MY': 'English',
   'DE': 'German', 'AT': 'German', 'CH': 'German',
   'FR': 'French', 'BE': 'French',
-  'ES': 'Spanish', 'MX': 'Spanish', 'AR': 'Spanish', 'CO': 'Spanish',
+  'ES': 'Spanish', 'MX': 'Spanish', 'AR': 'Spanish', 'CO': 'Spanish', 'CL': 'Spanish', 'PE': 'Spanish', 'UY': 'Spanish', 'VE': 'Spanish', 'EC': 'Spanish', 'BO': 'Spanish', 'PY': 'Spanish', 'CR': 'Spanish', 'PA': 'Spanish', 'GT': 'Spanish',
   'IT': 'Italian',
   'NL': 'Dutch',
   'SE': 'Swedish',
   'PL': 'Polish',
   'TR': 'Turkish',
   'RU': 'Russian',
-  'BR': 'Portuguese',
-  'PT': 'Portuguese',
+  'BR': 'Portuguese', 'PT': 'Portuguese', 'UY': 'Spanish',
   'JP': 'Japanese',
   'KR': 'Korean',
   'CN': 'Chinese (Simplified)',
