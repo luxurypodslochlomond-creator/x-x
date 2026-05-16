@@ -469,11 +469,45 @@ export function getScamReportingBody(geo) {
     `Report this to your national cybercrime or consumer protection authority in ${geo.country}. Also contact your bank immediately if any financial details were shared.`;
 }
 
+// Map country codes to their primary language for explicit response language instruction
+const COUNTRY_LANGUAGE = {
+  'GB': 'English', 'IE': 'English', 'AU': 'English', 'NZ': 'English', 'CA': 'English',
+  'US': 'English', 'ZA': 'English', 'NG': 'English', 'KE': 'English', 'SG': 'English',
+  'PH': 'English', 'HK': 'English', 'MY': 'English',
+  'DE': 'German', 'AT': 'German', 'CH': 'German',
+  'FR': 'French', 'BE': 'French',
+  'ES': 'Spanish', 'MX': 'Spanish', 'AR': 'Spanish', 'CO': 'Spanish',
+  'IT': 'Italian',
+  'NL': 'Dutch',
+  'SE': 'Swedish',
+  'PL': 'Polish',
+  'TR': 'Turkish',
+  'RU': 'Russian',
+  'BR': 'Portuguese',
+  'PT': 'Portuguese',
+  'JP': 'Japanese',
+  'KR': 'Korean',
+  'CN': 'Chinese (Simplified)',
+  'TW': 'Chinese (Traditional)',
+  'IN': 'English', // India: respond in English unless the document/message is in another language
+  'ID': 'Indonesian (Bahasa Indonesia)',
+  'VN': 'Vietnamese',
+  'TH': 'Thai',
+  'AE': 'English', // UAE: English is the dominant business language
+  'SA': 'Arabic',
+};
+
 /**
  * Returns the full geo context string to inject into prompts
+ * Includes: today's date, country, jurisdiction, legal context, AND language instruction
  */
 export function buildSortedGeoPromptContext(geo) {
   const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   const countryContext = getSortedGeoContext(geo);
-  return `Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} precisely. ${countryContext} When calculating urgency, use today's date.`;
+  const code = geo.code?.split('-')[0];
+  const lang = COUNTRY_LANGUAGE[code] || null;
+  const langInstruction = lang
+    ? `CRITICAL LANGUAGE RULE: Respond entirely in ${lang}. The user's language is ${lang}. Every word of your response — labels, explanations, action steps, everything — must be in ${lang}. Do not switch to English unless the document itself is in English and the user appears to be communicating in English.`
+    : `Detect the language the user is writing in or the language of the document they submitted, and respond fully in that same language. Do not default to English if the user's language is clearly something else.`;
+  return `Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} precisely. ${countryContext} When calculating urgency, use today's date. ${langInstruction}`;
 }

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
-import { getSortedGeoContext } from '@/utils/sortedGeoContext';
+import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
 import GeoSelector from './GeoSelector';
 import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
 import SortedShareButton from './SortedShareButton';
@@ -110,7 +110,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
         if (parts.length > 0) fileContext = `\n\nATTACHED EVIDENCE:\n${parts.join('\n')}`;
       }
 
-      const countryContext = getSortedGeoContext(geo);
+      const countryContext = buildSortedGeoPromptContext(geo);
 
       // Detect if this is a personal/relationship situation
       const lowerWhat = what.toLowerCase();
@@ -144,6 +144,7 @@ THEIR SITUATION: ${what}${fileContext}
         : `You are a sharp, calm conflict and legal expert. You are entirely on their side. Direct, confident, real — not preachy, not corporate. You sound like the smartest friend they have.
 
 ${countryContext}
+
 
 CONFLICT TYPE: ${ct?.label || 'General'}
 GOAL: ${gt?.label} — ${gt?.desc}
