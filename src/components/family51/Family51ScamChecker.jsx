@@ -190,7 +190,7 @@ Return JSON with these exact fields:
       {/* THINKING STEPS LOADER */}
       <AnimatePresence>
         {loading && (
-          <SortedThinkingSteps tool="scam" accentColor={accentColor} isActive={loading} />
+          <SortedThinkingSteps tool="scam" accentColor={accentColor} isActive={loading} inputHint={inputText} />
         )}
       </AnimatePresence>
 

@@ -287,7 +287,7 @@ Return a JSON object with these EXACT fields:
       {/* THINKING STEPS LOADER */}
       <AnimatePresence>
         {(loading || uploading) && (
-          <SortedThinkingSteps tool="letter" accentColor={accentColor} isActive={loading || uploading} />
+          <SortedThinkingSteps tool="letter" accentColor={accentColor} isActive={loading || uploading} inputHint={letterText} />
         )}
       </AnimatePresence>
 

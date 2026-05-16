@@ -355,7 +355,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       {/* ANALYSE — solid, confident */}
       <AnimatePresence mode="wait">
         {loading ? (
-          <SortedThinkingSteps tool="conflict" accentColor={accentColor} isActive={loading} />
+          <SortedThinkingSteps tool="conflict" accentColor={accentColor} isActive={loading} inputHint={what} />
         ) : (
           <motion.button
             key="btn"
