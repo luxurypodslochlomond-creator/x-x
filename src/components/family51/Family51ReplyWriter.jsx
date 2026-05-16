@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -307,18 +308,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
         {/* WRITE BUTTON */}
         <AnimatePresence mode="wait">
           {loading ? (
-            <motion.div key="loading" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ padding: '28px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, borderRadius: 14, border: `1px solid ${accentColor}30`, background: `${accentColor}06` }}>
-              <motion.div style={{ display: 'flex', gap: 6 }}>
-                {[0,1,2].map(i => (
-                  <motion.div key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: accentColor }}
-                    animate={{ y: [0, -10, 0] }} transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }} />
-                ))}
-              </motion.div>
-              <div style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', color: '#1a1208', margin: '0 0 6px' }}>WRITING YOUR REPLY</p>
-                <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0 }}>Composing a {tone} letter in {geo.country} legal context…</p>
-              </div>
-            </motion.div>
+            <SortedThinkingSteps tool="reply" accentColor={accentColor} isActive={loading} />
           ) : (
             <motion.button
               key="btn"

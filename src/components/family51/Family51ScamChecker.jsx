@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { getScamReportingBody } from '@/utils/sortedGeoContext';
@@ -186,35 +187,10 @@ Return JSON with these exact fields:
       <input ref={fileInputRef} type="file" accept="image/*,application/pdf" onChange={handleFileUpload} style={{ display: 'none' }} />
       <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
 
-      {/* LOADER */}
+      {/* THINKING STEPS LOADER */}
       <AnimatePresence>
         {loading && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            style={{ padding: '48px 20px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-            <div style={{ position: 'relative', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <motion.div animate={{ scale: [1, 1.25, 1], opacity: [0.15, 0.3, 0.15] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }} />
-              <motion.div animate={{ scale: [1, 1.12, 1], opacity: [0.25, 0.5, 0.25] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-                style={{ position: 'absolute', inset: 8, borderRadius: '50%', background: accentColor }} />
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', zIndex: 1 }}>
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <div style={{ textAlign: 'center', minHeight: 52 }}>
-              <AnimatePresence mode="wait">
-                <motion.div key={loadingStep} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35 }}>
-                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#1a1208', margin: '0 0 6px' }}>{LOADING_STEPS[loadingStep].text}</p>
-                  <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: 0 }}>{LOADING_STEPS[loadingStep].sub}</p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            <div style={{ display: 'flex', gap: 6 }}>
-              {LOADING_STEPS.map((_, i) => (
-                <motion.div key={i} animate={{ opacity: i === loadingStep ? 1 : 0.2, scale: i === loadingStep ? 1.3 : 1 }} transition={{ duration: 0.3 }}
-                  style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor }} />
-              ))}
-            </div>
-          </motion.div>
+          <SortedThinkingSteps tool="scam" accentColor={accentColor} isActive={loading} />
         )}
       </AnimatePresence>
 

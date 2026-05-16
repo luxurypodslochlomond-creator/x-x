@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -283,79 +284,10 @@ Return a JSON object with these EXACT fields:
     <div className="space-y-5">
       <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; } input::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
 
-      {/* LOADER */}
+      {/* THINKING STEPS LOADER */}
       <AnimatePresence>
         {(loading || uploading) && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{ padding: '48px 20px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}
-          >
-            {/* Breathing circle */}
-            <div style={{ position: 'relative', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <motion.div
-                animate={{ scale: [1, 1.25, 1], opacity: [0.15, 0.3, 0.15] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }}
-              />
-              <motion.div
-                animate={{ scale: [1, 1.12, 1], opacity: [0.25, 0.5, 0.25] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-                style={{ position: 'absolute', inset: 8, borderRadius: '50%', background: accentColor }}
-              />
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', zIndex: 1 }}>
-                <rect x="3" y="11" width="18" height="11" rx="2" stroke={accentColor} strokeWidth="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke={accentColor} strokeWidth="2" strokeLinecap="round"/>
-                <circle cx="12" cy="16" r="1.5" fill={accentColor} />
-              </svg>
-            </div>
-
-            {/* Step text */}
-            <div style={{ textAlign: 'center', minHeight: 52 }}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={loadingStep}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  <p style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: '#1a1208', margin: '0 0 6px', lineHeight: 1.2 }}>
-                  {LOADING_STEPS[loadingStep].text}
-                  </p>
-                  <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: 0, letterSpacing: '0.04em' }}>
-                    {LOADING_STEPS[loadingStep].sub}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Progress dots */}
-            <div style={{ display: 'flex', gap: 6 }}>
-              {LOADING_STEPS.map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{ opacity: i === loadingStep ? 1 : 0.2, scale: i === loadingStep ? 1.3 : 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor }}
-                />
-              ))}
-            </div>
-
-            {/* Scanning lines */}
-            <div style={{ width: '100%', maxWidth: 200, display: 'flex', flexDirection: 'column', gap: 5 }}>
-              {[1, 0.7, 0.9, 0.5, 0.8].map((w, i) => (
-                <div key={i} style={{ position: 'relative', height: 4, borderRadius: 2, background: 'rgba(26,18,8,0.07)', overflow: 'hidden', width: `${w * 100}%` }}>
-                  <motion.div
-                    style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, transparent, ${accentColor}80, transparent)`, borderRadius: 2 }}
-                    animate={{ x: ['-100%', '250%'] }}
-                    transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.22, ease: 'easeInOut' }}
-                  />
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          <SortedThinkingSteps tool="letter" accentColor={accentColor} isActive={loading || uploading} />
         )}
       </AnimatePresence>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -354,7 +355,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       {/* ANALYSE — solid, confident */}
       <AnimatePresence mode="wait">
         {loading ? (
-          <ConflictThinkingLoader accentColor={accentColor} country={geo.country} />
+          <SortedThinkingSteps tool="conflict" accentColor={accentColor} isActive={loading} />
         ) : (
           <motion.button
             key="btn"
