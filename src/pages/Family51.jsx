@@ -17,12 +17,14 @@ import SortedJourneyBar from '@/components/family51/SortedJourneyBar';
 import SortedShareMoment from '@/components/family51/SortedShareMoment';
 import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 import { Trash2, X } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first. v2
 // ────────────────────────────────────────────────────────────────────────────
 
 export default function Family51Page() {
+  const location = useLocation();
   const { saveState, getState } = useSessionMemory('family51');
   const [showWhy, setShowWhy] = useState(() => getState('showWhy') || false);
   const [showHistory, setShowHistory] = useState(() => getState('showHistory') || false);
@@ -51,9 +53,9 @@ export default function Family51Page() {
     if (!seen && !inIframe) setShowOnboarding(true);
   }, []);
 
-  // Detect Stripe success redirect + cases param
+  // Detect URL params (Stripe success, cases, upgrade) — reactive via React Router location
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(location.search);
     if (params.get('sorted') === 'success') {
       setShowPaySuccess(true);
       window.history.replaceState({}, '', window.location.pathname);
@@ -64,13 +66,12 @@ export default function Family51Page() {
     }
     if (params.get('upgrade') === '1') {
       window.history.replaceState({}, '', window.location.pathname);
-      // Scroll to upgrade section after a tick
       setTimeout(() => {
         const el = document.getElementById('sorted-upgrade');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }, 200);
     }
-  }, []);
+  }, [location.search]);
 
   useEffect(() => {
     document.title = 'SORTED — We\'ve Got You';
