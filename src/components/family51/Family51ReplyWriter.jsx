@@ -6,6 +6,7 @@ import { detectGeo } from '@/hooks/useSortedGeo';
 import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
+import SortedHelpLinks from './SortedHelpLinks';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 
 const SITUATIONS = [
@@ -490,24 +491,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               </motion.button>
             )}
 
-            {/* GET MORE HELP — Sara's ask */}
-            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(6,182,212,0.04)', border: '1px solid rgba(6,182,212,0.15)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(6,182,212,0.6)', margin: '0 0 10px' }}>WANT TO TALK TO A REAL PERSON?</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                     <span><strong style={{ color: '#1a1208' }}>Citizens Advice</strong> — free, confidential advice on debt, benefits & legal issues · citizensadvice.org.uk</span>
-                   </a>
-                   <a href="https://www.stepchange.org" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                     <span><strong style={{ color: '#1a1208' }}>StepChange</strong> — free debt advice & repayment plans · stepchange.org · 0800 138 1111</span>
-                   </a>
-                   <a href="https://debtcamel.co.uk" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.4 }}>
-                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#06b6d4', flexShrink: 0, display: 'inline-block' }} />
-                     <span><strong style={{ color: '#1a1208' }}>Debt Camel</strong> — plain English debt guides by Sara Williams · debtcamel.co.uk</span>
-                </a>
-              </div>
-            </div>
+            {/* GET MORE HELP — geo-aware */}
+            <SortedHelpLinks geo={geo} accentColor={accentColor} />
 
             <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
               WRITE ANOTHER
