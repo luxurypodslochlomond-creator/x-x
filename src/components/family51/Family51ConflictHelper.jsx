@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
+import { getSortedGeoContext } from '@/utils/sortedGeoContext';
 import GeoSelector from './GeoSelector';
 import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
 import SortedShareButton from './SortedShareButton';
@@ -109,21 +110,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
         if (parts.length > 0) fileContext = `\n\nATTACHED EVIDENCE:\n${parts.join('\n')}`;
       }
 
-      const countryContext = geo.code === 'PH' 
-        ? `PHILIPPINES-SPECIFIC LEGAL CONTEXT: Apply Philippine law precisely. Key laws and bodies to reference where relevant:
-- Civil Code of the Philippines (Republic Act 386) — property, contracts, obligations
-- Labor Code (PD 442) — employment disputes, illegal dismissal, NLRC jurisdiction
-- RA 9285 (Alternative Dispute Resolution Act) — mandatory mediation before court
-- RA 7160 (Local Government Code) — barangay conciliation (Katarungang Pambarangay) — this is often REQUIRED before court for neighbour/land disputes
-- HLURB / DHSUD — housing & real estate disputes (condo, subdivision)
-- DTI — consumer complaints (30-day resolution mandate)
-- DOLE — labour complaints (SENA mediation first)
-- PNP and NBI — for criminal harassment or threats
-- Small Claims Court (Rule of Procedure for Small Claims Cases) — up to PHP 400,000 without a lawyer
-- For land boundary disputes: DENR, Registry of Deeds, or DARAB (agrarian)
-- Barangay Hall is usually the FIRST and mandatory step for neighbour disputes in the Philippines
-Real contact: DTI Hotline 1-384 | DOLE Hotline 1349 | PNP Hotline 117 | PAO (Public Attorney's Office) — free legal aid, call (02) 8928-9019`
-        : `Apply ${geo.jurisdiction} with precision — cite specific legislation, regulatory bodies, exact ombudsman names, realistic timelines, and real contact details for ${geo.country}.`;
+      const countryContext = getSortedGeoContext(geo);
 
       // Detect if this is a personal/relationship situation
       const lowerWhat = what.toLowerCase();

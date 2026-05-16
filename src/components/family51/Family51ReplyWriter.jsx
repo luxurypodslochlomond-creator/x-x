@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
+import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
@@ -50,9 +51,9 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
 
   const generateLetter = async (selectedTone = tone) => {
     const t = TONES.find(x => x.id === selectedTone);
-    const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const geoContext = buildSortedGeoPromptContext(geo);
     
-    const prompt = `You are SORTED — a straight-talking advisor who writes letters for real people. You're like a knowledgeable friend — calm, direct, confident. Not dramatic. Not preachy. Not trying to sound impressive. Just clear and effective. Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} law — cite real rights, real regulatory bodies (e.g. ACAS, ICO, Ofgem, Citizens Advice, Employment Tribunal, etc.), and exact legislation where it matters.
+    const prompt = `You are SORTED — a straight-talking advisor who writes letters for real people. You're like a knowledgeable friend — calm, direct, confident. Not dramatic. Not preachy. Not trying to sound impressive. Just clear and effective. ${geoContext}
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}
@@ -65,7 +66,7 @@ Write a complete, ready-to-send letter. Rules:
 - Sound like a sharp, informed human — not a corporate robot. Direct, clear, confident.
 - No waffle, no padding, no "I hope this letter finds you well" nonsense.
 - State the issue fast. State what you want. State consequences if ignored.
-- Cite specific rights / legislation / bodies relevant to ${geo.jurisdiction} where it strengthens the case.
+- Cite specific rights / legislation / bodies relevant to ${geo.country} where it strengthens the case.
 - MAXIMUM 350 words for the letter body — tight, punchy, effective. Shorter is stronger.
 - Proper greeting and sign-off, but no fluff in between.
 - Ready to copy and paste with zero edits needed.

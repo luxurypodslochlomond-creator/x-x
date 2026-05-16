@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
+import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
@@ -75,13 +76,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
       const currentGeo = geoRef.current;
       const currentType = letterTypeRef.current;
-      const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      
-      const countrySpecific = currentGeo.code === 'PH'
-        ? `For Philippines: reference relevant laws (Civil Code RA 386, Labor Code PD 442, Consumer Act RA 7394, RA 9285 ADR). Name real bodies: DTI (1-384), DOLE (1349), NLRC, SEC, BSP, NBI, PAO (free legal aid 02-8928-9019). Small Claims Court handles up to PHP 400,000 without a lawyer. Barangay conciliation is required first for neighbour disputes.`
-        : `Reference specific legislation, named regulatory bodies, and real contact details for ${currentGeo.country}.`;
-      
-      const geoContext = `Today's date is ${today}. The person is in: ${currentGeo.country}. Apply ${currentGeo.jurisdiction} precisely. ${countrySpecific} When calculating urgency, use today's date.`;
+      const geoContext = buildSortedGeoPromptContext(currentGeo);
 
       // Route by file type: images → vision model directly; docs/PDFs → extract text first
       let letterContent = text;
