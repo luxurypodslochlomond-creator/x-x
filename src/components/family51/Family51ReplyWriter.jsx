@@ -308,7 +308,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
         {/* WRITE BUTTON */}
         <AnimatePresence mode="wait">
           {loading ? (
-            <SortedThinkingSteps tool="reply" accentColor={accentColor} isActive={loading} inputHint={situation} />
+            <SortedThinkingSteps tool="reply" accentColor={accentColor} isActive={loading} inputHint={situation} geo={geo} />
           ) : (
             <motion.button
               key="btn"

@@ -34,9 +34,20 @@ function extractSpecifics(input = '') {
 }
 
 // ─── Build contextual steps ────────────────────────────────────────────────────
-function buildSteps(tool, input = '') {
+function buildSteps(tool, input = '', geo = null) {
   const hint = input.toLowerCase();
   const specifics = extractSpecifics(input);
+
+  // Geo-specific legal terms
+  const geoName = geo?.country || geo?.label || null;
+  const isScotland = geoName && /scotland/i.test(geoName);
+  const isIreland  = geoName && /ireland/i.test(geoName);
+  const isWales    = geoName && /wales/i.test(geoName);
+  const jurisdictionLabel = isScotland ? 'Scottish law' : isIreland ? 'Irish law' : isWales ? 'Welsh law' : geoName ? `${geoName} law` : null;
+  const debtScheme = isScotland ? 'Debt Arrangement Scheme (Scotland)' : isIreland ? 'MABS debt support' : 'debt management options';
+  const tenantLaw  = isScotland ? 'Private Housing (Tenancies) (Scotland) Act' : isIreland ? 'Residential Tenancies Act' : 'Housing Act';
+  const consumerBody = isScotland ? 'Citizens Advice Scotland' : isIreland ? 'CCPC' : 'Citizens Advice';
+  const geoJurisdictionNote = jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'Laws differ — getting yours exactly right';
 
   const amountNote  = specifics.amount  ? `Checking the ${specifics.amount} claim`        : null;
   const deadlineNote= specifics.deadline? `Deadline spotted: ${specifics.deadline}`        : null;
@@ -81,18 +92,18 @@ function buildSteps(tool, input = '') {
     if (isDebt) return [
       { text: 'Reading your debt letter',              sub: senderNote || 'Checking who sent this and why' },
       { text: 'Verifying whether this debt is real',   sub: amountNote || 'Debt collector letters are often bluffs' },
-      { text: 'Checking your rights',                  sub: 'Statute-barred? Time-limited? Disputed?' },
+      { text: jurisdictionLabel ? `Checking your rights under ${jurisdictionLabel}` : 'Checking your rights', sub: 'Statute-barred? Time-limited? Disputed?' },
       { text: 'Finding the real deadline',             sub: deadlineNote || 'Not all deadlines are legally binding' },
-      { text: 'Mapping your options',                  sub: 'Dispute, negotiate, payment plan, or ignore safely' },
+      { text: 'Mapping your options',                  sub: `Dispute, negotiate, or ${debtScheme}` },
       { text: 'Plain English summary',                 sub: 'What this actually means and what to do' },
     ];
     if (isEviction) return [
       { text: 'Reading your eviction notice',          sub: senderNote || 'Checking the type and legal validity' },
       { text: 'Verifying the notice is legally correct', sub: 'Invalid notices are surprisingly common' },
-      { text: 'Checking your notice period',           sub: deadlineNote || 'Legal minimum in your jurisdiction' },
-      { text: 'Looking at your tenancy rights',        sub: 'Section 21, Section 8 — what applies here' },
+      { text: 'Checking your notice period',           sub: deadlineNote || (jurisdictionLabel ? `Legal minimum under ${jurisdictionLabel}` : 'Legal minimum in your jurisdiction') },
+      { text: 'Looking at your tenancy rights',        sub: jurisdictionLabel ? `Rights under the ${tenantLaw}` : 'Section 21, Section 8 — what applies here' },
       { text: 'Finding your options',                  sub: 'You have more time than you think' },
-      { text: 'Plain English summary',                 sub: 'Exactly what this means and next steps' },
+      { text: 'Plain English summary',                 sub: `Contact ${consumerBody} if you need more support` },
     ];
     if (isEmployment) return [
       { text: 'Reading your employment letter',        sub: senderNote || 'Disciplinary, dismissal, or redundancy?' },
@@ -121,7 +132,7 @@ function buildSteps(tool, input = '') {
     return [
       { text: 'Reading your letter',                   sub: senderNote || 'Nothing stored — this stays private' },
       { text: 'Identifying what type this is',         sub: 'Matching to known letter patterns' },
-      { text: 'Checking your jurisdiction',            sub: 'Laws differ — getting yours exactly right' },
+      { text: jurisdictionLabel ? `Checking ${jurisdictionLabel}` : 'Checking your jurisdiction', sub: geoJurisdictionNote },
       { text: 'Spotting deadlines',                    sub: deadlineNote || 'Dates that actually matter' },
       { text: 'Finding your real options',             sub: amountNote || 'What you can actually do' },
       { text: 'Writing plain English',                 sub: 'No jargon. No nonsense.' },
@@ -272,8 +283,8 @@ function buildSteps(tool, input = '') {
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f97316', isActive = false, inputHint = '' }) {
-  const steps = useMemo(() => buildSteps(tool, inputHint), [tool, inputHint]);
+export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f97316', isActive = false, inputHint = '', geo = null }) {
+  const steps = useMemo(() => buildSteps(tool, inputHint, geo), [tool, inputHint, geo]);
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState([]);
 
