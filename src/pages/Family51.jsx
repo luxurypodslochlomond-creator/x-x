@@ -48,9 +48,7 @@ export default function Family51Page() {
       const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
     } catch {}
     // Show onboarding only on first ever visit — skip in builder iframe
-    const inIframe = window.self !== window.top;
-    const seen = localStorage.getItem('sorted_onboarding_done');
-    if (!seen && !inIframe) setShowOnboarding(true);
+    // Onboarding removed — tool is the first thing people see now
   }, []);
 
   // Detect URL params (Stripe success, cases, upgrade) — reactive via React Router location
