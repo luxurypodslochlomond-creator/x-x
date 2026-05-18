@@ -28,11 +28,23 @@ export default function SortedLayout({ children, currentPage }) {
   const { remaining, isLocked, isPaid } = useSortedUsage();
   const [caseCount, setCaseCount] = useState(0);
 
-  useEffect(() => {
+  const refreshCaseCount = () => {
     try {
       const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
       setCaseCount(cases.length);
     } catch {}
+  };
+
+  useEffect(() => {
+    refreshCaseCount();
+    // Also refresh on storage changes (e.g. when a case is saved or deleted)
+    window.addEventListener('storage', refreshCaseCount);
+    // Poll every 2s so header stays in sync when cases are modified in-page
+    const interval = setInterval(refreshCaseCount, 2000);
+    return () => {
+      window.removeEventListener('storage', refreshCaseCount);
+      clearInterval(interval);
+    };
   }, [location.pathname]);
 
   // Close menu on route change

@@ -214,8 +214,8 @@ export default function Family51Page() {
          {/* ── FAQ SECTION ────────────────────────────────────── */}
          {showFAQ && (
            <motion.div key="faq" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
-             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-end' }}>
-               <button onClick={() => setShowFAQ(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.4)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
+             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-start', padding: '16px 20px 0' }}>
+               <button onClick={() => setShowFAQ(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.5)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                  BACK
                </button>
@@ -226,9 +226,9 @@ export default function Family51Page() {
 
          {/* ── WHY SECTION ────────────────────────────────────── */}
          {showWhy && (
-           <motion.div key="why" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }} style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px' }}>
-             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-end' }}>
-               <button onClick={() => setShowWhy(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.4)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
+           <motion.div key="why" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }} style={{ maxWidth: 520, margin: '0 auto', padding: '16px 20px 60px' }}>
+             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-start' }}>
+               <button onClick={() => setShowWhy(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.5)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                  BACK
                </button>
@@ -446,8 +446,8 @@ export default function Family51Page() {
         {/* ── CASE HISTORY ──────────────────────────────────── */}
          {showHistory && (
            <motion.div key="history" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
-             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-end' }}>
-               <button onClick={() => setShowHistory(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.4)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
+             <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-start', padding: '16px 20px 0' }}>
+               <button onClick={() => setShowHistory(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.5)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                  BACK
                </button>
