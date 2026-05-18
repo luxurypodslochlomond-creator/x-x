@@ -283,14 +283,14 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
               </div>
               {/* ACTIONS: SHARE · EMAIL · DELETE */}
               <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {/* Primary action */}
-                {onContinue && (
+                {/* Primary action — only show for letter/reply to continue the journey */}
+                {onContinue && caseItem.tool !== 'conflict' && (
                   <motion.button
                     onClick={() => onContinue(caseItem)}
                     whileTap={{ scale: 0.96 }}
                     style={{ width: '100%', padding: '11px 0', borderRadius: 10, fontSize: 12, fontWeight: 900, letterSpacing: '0.08em', cursor: 'pointer', border: `2px solid ${tool.color}`, background: tool.color, color: '#000', transition: 'all 0.15s' }}
                   >
-                    {caseItem.tool === 'letter' ? 'CONTINUE → WRITE REPLY' : caseItem.tool === 'reply' ? 'CONTINUE → DISPUTE HELP' : 'OPEN THIS CASE'}
+                    {caseItem.tool === 'letter' ? 'CONTINUE → WRITE REPLY' : 'CONTINUE → DISPUTE HELP'}
                   </motion.button>
                 )}
                 {/* Secondary: share + email + delete row */}
