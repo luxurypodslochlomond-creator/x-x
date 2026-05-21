@@ -55,8 +55,8 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
             const registration = await navigator.serviceWorker.ready;
             await registration.showNotification(notification.title, {
               body: notification.message,
-              icon: '/icon-192x192.png',
-              badge: '/icon-192x192.png',
+              icon: '/api/functions/serveCB51PNGIcon?size=192',
+              badge: '/api/functions/serveCB51PNGMaskableIcon?size=192',
               tag: `cb51-${notification.gig_offer_id || notification.id}`,
               data: { url: notification.action_url || '/CB51' },
               requireInteraction: true,
@@ -159,10 +159,10 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
       onSubscriptionChange?.(subscription);
       
       // Success notification
-      await registration.showNotification('✓ Ready for gig alerts', {
-        body: 'You\'ll get notified when team decisions are needed',
-        icon: '/icon-192x192.png',
-        badge: '/icon-192x192.png',
+      await registration.showNotification('✓ CB51 alerts ready', {
+        body: 'You\'ll be notified instantly when gig offers arrive',
+        icon: '/api/functions/serveCB51PNGIcon?size=192',
+        badge: '/api/functions/serveCB51PNGMaskableIcon?size=192',
         tag: 'cb51-welcome',
       });
     } catch (error) {

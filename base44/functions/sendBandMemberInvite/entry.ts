@@ -22,15 +22,15 @@ Deno.serve(async (req) => {
 
 Your manager just added you to ${artistName} on CB51.
 
-Tap the link below to set up your notifications. Takes about 10 seconds — no account, no app download needed.
+Tap the link below — takes about 10 seconds. No account, no app download needed.
 
 ${inviteUrl}
 
-Once you're set up, you'll get instant YES/NO gig offers straight to your phone.
+Once you're set up, you'll get instant YES/NO gig notifications straight to your phone.
 
 —
 CB51 • AI Co-Manager for Artists
-Avoid the Noise ♾️❤️`
+hello@cb51.io`
     });
 
     return Response.json({ 
