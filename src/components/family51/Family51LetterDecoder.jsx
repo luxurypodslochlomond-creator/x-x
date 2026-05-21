@@ -240,28 +240,102 @@ Return a JSON object with these EXACT fields:
     }
   };
 
+  // Read a .docx file client-side — no upload needed, works offline/poor signal
+  const readDocxClientSide = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const arrayBuffer = e.target.result;
+        // Extract raw text from docx XML (works without any library)
+        const uint8 = new Uint8Array(arrayBuffer);
+        // Convert to binary string for zip parsing
+        let binary = '';
+        for (let i = 0; i < uint8.length; i++) binary += String.fromCharCode(uint8[i]);
+        // docx is a zip — find word/document.xml inside it
+        const b64 = btoa(binary);
+        // Use a simple approach: decode the docx as text and extract XML content
+        const decoder = new TextDecoder('utf-8', { fatal: false });
+        const text = decoder.decode(uint8);
+        // Extract text between XML tags — handles most docx content
+        const xmlMatches = text.match(/<w:t[^>]*>([^<]*)<\/w:t>/g) || [];
+        const extracted = xmlMatches
+          .map(m => m.replace(/<[^>]+>/g, ''))
+          .join(' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (extracted.length > 20) {
+          resolve(extracted);
+        } else {
+          reject(new Error('Could not read document text'));
+        }
+      } catch (err) {
+        reject(err);
+      }
+    };
+    reader.onerror = () => reject(new Error('File read failed'));
+    reader.readAsArrayBuffer(file);
+  });
+
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    // Warn on large files — PDFs over 5MB likely won't read well
-    if (file.size > 5 * 1024 * 1024) {
-      setDecodeError('That file is too large. For best results, snap a photo of the relevant page instead of uploading a full document.');
+    if (file.size > 10 * 1024 * 1024) {
+      setDecodeError('That file is too large. For best results, snap a photo of the relevant page instead.');
       e.target.value = '';
       return;
     }
     setUploading(true);
-    setLoading(true); // set both immediately so there's no gap in the loader
+    setLoading(true);
     setDecodeError(null);
     setResult(null);
+
+    const isDocx = file.name?.toLowerCase().endsWith('.docx') || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    const isDoc = file.name?.toLowerCase().endsWith('.doc');
+
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      // For Word docs — extract text client-side first (no upload needed, works on poor signal)
+      if (isDocx) {
+        try {
+          const extractedText = await readDocxClientSide(file);
+          setLetterText(extractedText);
+          setUploading(false);
+          await runDecode(null, extractedText);
+          e.target.value = '';
+          return;
+        } catch (docxErr) {
+          console.warn('Client-side docx extraction failed, falling back to upload:', docxErr);
+          // Fall through to upload
+        }
+      }
+
+      // For images and PDFs — upload then decode
+      // Retry upload up to 2 times on network error
+      let file_url;
+      let lastErr;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const result = await base44.integrations.Core.UploadFile({ file });
+          file_url = result.file_url;
+          break;
+        } catch (err) {
+          lastErr = err;
+          if (attempt < 1) await new Promise(r => setTimeout(r, 2000)); // wait 2s before retry
+        }
+      }
+      if (!file_url) throw lastErr || new Error('Upload failed after retries');
+
       setUploadedFileUrl(file_url);
-      setLetterText('[Photo/file uploaded — AI will read it directly]');
-      setUploading(false); // file uploaded, now just decoding
+      setLetterText('[File uploaded — AI will read it directly]');
+      setUploading(false);
       await runDecode(file_url, null);
     } catch (err) {
       console.error('SORTED upload error:', err);
-      setDecodeError(`Upload failed: ${err?.message || 'Could not upload file'}. Please try again.`);
+      const isNetwork = err?.message?.toLowerCase().includes('network') || err?.message?.toLowerCase().includes('fetch');
+      setDecodeError(
+        isNetwork
+          ? 'Network error — poor signal? Try copying the text from your document and pasting it in instead.'
+          : `Upload failed: ${err?.message || 'Unknown error'}. Try pasting the text instead.`
+      );
       setUploading(false);
       setLoading(false);
     }
