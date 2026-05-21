@@ -10,6 +10,8 @@ import CB51DraftResponseEmail from './CB51DraftResponseEmail';
 import CB51BandResponseTimer from './CB51BandResponseTimer';
 import CB51GigFinanceTracker from './CB51GigFinanceTracker';
 import CB51ManagerEmailApproval from './CB51ManagerEmailApproval';
+import CB51VoteAggregator from './CB51VoteAggregator';
+import CB51DraftConfirmationEmail from './CB51DraftConfirmationEmail';
 
 /**
  * CB51 GIG DECISION ENGINE
@@ -363,9 +365,28 @@ export default function CB51GigDecisionEngine({ artistId }) {
           <div className="px-5 py-4 border-t border-white/5 space-y-3 bg-black/40">
             <CB51GigFinanceTracker artistId={currentGig.artist_id} />
             {currentGig.band_votes?.length > 0 && (
-              <CB51BandResponseTimer votes={currentGig.band_votes} totalMembers={currentGig.band_votes?.length || 0} />
+              <>
+                <CB51BandResponseTimer votes={currentGig.band_votes} totalMembers={currentGig.band_votes?.length || 0} />
+                {/* Show vote aggregator once manager approved */}
+                {currentGig.status === 'band_voting' && (
+                  <CB51VoteAggregator 
+                    gigId={currentGig.id} 
+                    artistId={artistId}
+                    bandMembers={currentGig.band_votes || []}
+                  />
+                )}
+              </>
             )}
-            {currentGig.promoter_email && (
+            {/* Show draft email when all votes in and all YES */}
+            {currentGig.all_responses_in && currentGig.status === 'band_voting' && (
+              <CB51DraftConfirmationEmail 
+                gig={currentGig}
+                onSent={() => {
+                  queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
+                }}
+              />
+            )}
+            {currentGig.promoter_email && currentGig.status !== 'band_voting' && (
               <CB51ManagerEmailApproval 
                 gig={currentGig}
                 onEmailSent={() => {
