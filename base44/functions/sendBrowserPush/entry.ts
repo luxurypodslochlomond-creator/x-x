@@ -90,8 +90,8 @@ Deno.serve(async (req) => {
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: isCB51Brand ? '/api/functions/serveCB51PNGIcon?size=192' : (icon || '/icon-192x192.png'),
-      badge: isCB51Brand ? '/api/functions/serveCB51PNGMaskableIcon?size=192' : (badge || '/icon-192x192.png'),
+      icon: isCB51Brand ? '/api/functions/serveCB51PNGIcon' : (icon || '/icon-192x192.png'),
+      badge: isCB51Brand ? '/api/functions/serveCB51PNGMaskableIcon' : (badge || '/icon-192x192.png'),
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
