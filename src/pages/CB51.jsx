@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Plus, Radio, Brain } from 'lucide-react';
+import { Plus, Radio } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
@@ -11,7 +11,6 @@ import CB51UnifiedDashboard from '@/components/cb51/CB51UnifiedDashboard';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
 import { useCB51NavBadges } from '@/components/cb51/CB51NavBadge';
 
-const CB51BrainTab = React.lazy(() => import('@/components/cb51/CB51BrainTab'));
 const CB51BadgeManager = React.lazy(() => import('@/components/cb51/CB51BadgeManager'));
 const CB51BackgroundSync = React.lazy(() => import('@/components/cb51/CB51BackgroundSync'));
 const CB51PushSubscriptionManager = React.lazy(() => import('@/components/cb51/CB51PushSubscriptionManager'));
@@ -22,7 +21,7 @@ export default function CB51Page() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeArtistId, setActiveArtistId] = useState(null);
-  const [activeTab, setActiveTab] = useState('home');
+
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -124,22 +123,11 @@ export default function CB51Page() {
 
         <div className="min-h-screen bg-black text-white flex flex-col">
           {/* ── HEADER ── */}
-          <div className="flex items-center justify-between px-5 pt-6 pb-3">
+          <div className="px-5 pt-6 pb-3">
             <div className="flex items-center gap-2.5">
               <Radio className="w-6 h-6 text-cyan-400" />
               <span className="text-xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
             </div>
-            <button
-              onClick={() => setActiveTab(activeTab === 'brain' ? 'home' : 'brain')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-black font-mono tracking-wider transition-all ${
-                activeTab === 'brain'
-                  ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/50'
-                  : 'text-gray-600 border-white/10 hover:text-gray-400'
-              }`}
-            >
-              <Brain className="w-3.5 h-3.5" />
-              BRAIN
-            </button>
           </div>
 
           {/* ── ARTIST SELECTOR ── */}
@@ -190,47 +178,32 @@ export default function CB51Page() {
 
           {/* ── CONTENT ── */}
           <div className="flex-1 overflow-hidden">
-            <AnimatePresence mode="wait">
-              {activeTab === 'brain' && currentArtistId ? (
-                <motion.div
-                  key="brain"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="px-5 pt-5 pb-32 overflow-y-auto h-full"
+            {currentArtistId ? (
+              <motion.div
+                key="dashboard"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="h-full"
+              >
+                <CB51UnifiedDashboard artistId={currentArtistId} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col items-center justify-center min-h-[400px] px-8 text-center"
+              >
+                <Radio className="w-10 h-10 text-cyan-400/40 mb-4" />
+                <p className="text-gray-500 text-sm mb-6">Add your first artist to get started</p>
+                <button
+                  onClick={() => navigate(createPageUrl('CB51AddArtist'))}
+                  className="bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-black font-black py-3 px-8 rounded-2xl text-sm transition-all"
                 >
-                  <Suspense fallback={<div className="py-20 text-center text-gray-600 text-sm">Loading…</div>}>
-                    <CB51BrainTab artistId={currentArtistId} />
-                  </Suspense>
-                </motion.div>
-              ) : currentArtistId ? (
-                <motion.div
-                  key="dashboard"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="h-full"
-                >
-                  <CB51UnifiedDashboard artistId={currentArtistId} />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="empty"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex flex-col items-center justify-center min-h-[400px] px-8 text-center"
-                >
-                  <Radio className="w-10 h-10 text-cyan-400/40 mb-4" />
-                  <p className="text-gray-500 text-sm mb-6">Add your first artist to get started</p>
-                  <button
-                    onClick={() => navigate(createPageUrl('CB51AddArtist'))}
-                    className="bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-black font-black py-3 px-8 rounded-2xl text-sm transition-all"
-                  >
-                    Add Artist
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  Add Artist
+                </button>
+              </motion.div>
+            )}
           </div>
 
           {/* iOS install prompt — bottom */}

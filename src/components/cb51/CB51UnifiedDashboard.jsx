@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, CheckCircle, DollarSign, Calendar, Zap, ArrowLeft } from 'lucide-react';
+import { Mail, CheckCircle, DollarSign, Calendar, Zap, ArrowLeft, Brain } from 'lucide-react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import CB51GigsTab from './CB51GigsTab';
@@ -13,6 +13,70 @@ const SECTIONS = [
   { id: 'finance',  label: 'FINANCE',  icon: DollarSign,  border: 'border-red-500',    bg: 'bg-red-500',     text: 'text-red-400'    },
   { id: 'calendar', label: 'CALENDAR', icon: Calendar,    border: 'border-amber-500',  bg: 'bg-amber-500',   text: 'text-amber-400'  },
 ];
+
+// ── AUTO BRIEFING BANNER ─────────────────────────────────────────────────────
+function AutoBriefingBanner({ artistId, onClose }) {
+  const [briefing, setBriefing] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const generateAutoBriefing = async () => {
+      try {
+        const [gigOffers, invoices, tasks] = await Promise.all([
+          base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'manager_reviewing' }).catch(() => []),
+          base44.entities.CB51Invoice?.filter?.({ artist_id: artistId, status: 'unpaid' }).catch(() => []),
+          base44.entities.CB51Task?.filter?.({ artist_id: artistId, status: { $ne: 'done' } }).catch(() => []),
+        ]);
+
+        const urgentItems = [];
+        if (gigOffers.length > 0) urgentItems.push(`${gigOffers.length} gig offer${gigOffers.length > 1 ? 's' : ''} waiting`);
+        if (invoices.length > 0) urgentItems.push(`${invoices.length} unpaid invoice${invoices.length > 1 ? 's' : ''}`);
+        if (tasks.length > 0) urgentItems.push(`${tasks.length} open task${tasks.length > 1 ? 's' : ''}`);
+
+        if (urgentItems.length === 0) {
+          setBriefing({ text: 'All clear — nothing urgent right now.', type: 'calm' });
+        } else {
+          setBriefing({
+            text: `Priority: ${urgentItems.join(' · ')}.`,
+            type: 'urgent'
+          });
+        }
+      } catch (err) {
+        console.error('Auto-briefing error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    generateAutoBriefing();
+  }, [artistId]);
+
+  if (loading) return null;
+  if (!briefing) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      className={`mx-3 mb-3 rounded-xl px-4 py-3 flex items-center justify-between ${
+        briefing.type === 'urgent' 
+          ? 'bg-cyan-500/10 border border-cyan-500/40' 
+          : 'bg-gray-900/50 border border-gray-800'
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        <Brain className={`w-4 h-4 ${briefing.type === 'urgent' ? 'text-cyan-400' : 'text-gray-500'}`} />
+        <p className={`text-sm font-mono ${briefing.type === 'urgent' ? 'text-cyan-400 font-bold' : 'text-gray-500'}`}>
+          {briefing.text}
+        </p>
+      </div>
+      <button onClick={onClose} className="text-gray-500 hover:text-gray-300">
+        <span className="text-xs font-black">×</span>
+      </button>
+    </motion.div>
+  );
+}
 
 // ── PENDING GIG ALERT — green YES / red NO ──────────────────────────────────
 function PendingGigAlert({ gig, onConfirm, onReject, confirming }) {
@@ -59,6 +123,7 @@ function PendingGigAlert({ gig, onConfirm, onReject, confirming }) {
 export default function CB51UnifiedDashboard({ artistId }) {
   const [activeSection, setActiveSection] = useState(null);
   const [confirming, setConfirming] = useState(false);
+  const [showBriefing, setShowBriefing] = useState(true);
   const queryClient = useQueryClient();
 
   const { data: pendingGigs = [] } = useQuery({
@@ -135,6 +200,13 @@ export default function CB51UnifiedDashboard({ artistId }) {
 
   return (
     <div className="pt-2 pb-8">
+      {/* AUTO BRIEFING — AI reads everything, surfaces what matters */}
+      <AnimatePresence>
+        {showBriefing && (
+          <AutoBriefingBanner artistId={artistId} onClose={() => setShowBriefing(false)} />
+        )}
+      </AnimatePresence>
+
       {/* PENDING GIG ALERT — shows when there's an offer waiting */}
       <AnimatePresence>
         {topPendingGig && (
