@@ -65,19 +65,49 @@ export default function CB51Page() {
   // NOT LOGGED IN
   if (!user && !pinVerified) {
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center px-8 text-center">
-        <Radio className="w-14 h-14 text-cyan-400 mb-6" />
-        <h1 className="text-white font-black text-3xl tracking-tight mb-2">CB51</h1>
-        <p className="text-gray-400 text-base mb-8 leading-relaxed">
-          AI co-manager for artists.<br />Avoid the noise.
-        </p>
-        <button
-          onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
-          className="w-full max-w-xs bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-black font-black py-4 rounded-2xl text-lg transition-all"
-        >
-          Sign In / Create Account
-        </button>
-        <p className="text-gray-600 text-xs mt-4">Free to start. Your artists & gigs saved permanently.</p>
+      <div className="min-h-screen bg-black flex flex-col justify-between px-8 py-16">
+        {/* TOP — branding */}
+        <div />
+
+        {/* MIDDLE — identity */}
+        <div className="flex flex-col items-center text-center">
+          {/* Signal rings — hand-drawn feel */}
+          <div className="relative mb-8">
+            <div className="w-20 h-20 rounded-full border-2 border-cyan-500/80 flex items-center justify-center">
+              <div className="w-13 h-13 rounded-full border border-cyan-500/40 flex items-center justify-center" style={{width:52,height:52}}>
+                <Radio className="w-7 h-7 text-cyan-400" />
+              </div>
+            </div>
+            {/* Pulse ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full border border-cyan-500/20"
+              animate={{ scale: [1, 1.5, 1.5], opacity: [0.6, 0, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut' }}
+            />
+          </div>
+
+          <h1 className="text-white font-black text-4xl tracking-widest font-mono mb-1">CB51</h1>
+          <p className="text-cyan-400/60 font-mono text-xs tracking-widest uppercase mb-6">CitizenBand51</p>
+
+          <p className="text-gray-300 text-lg font-bold mb-2 leading-snug">
+            Your AI co-manager.<br />Built for real musicians.
+          </p>
+          <p className="text-gray-600 text-sm mb-10">
+            Gig offers. Band votes. Finance. All in one place.
+          </p>
+
+          <button
+            onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
+            className="w-full max-w-xs bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-black font-black py-4 rounded-xl text-base tracking-wider font-mono transition-all"
+            style={{ boxShadow: '0 0 30px rgba(6,182,212,0.25)' }}
+          >
+            GET STARTED — FREE
+          </button>
+          <p className="text-gray-700 text-xs mt-4 font-mono">No label required. No bullshit.</p>
+        </div>
+
+        {/* BOTTOM — legal small */}
+        <p className="text-center text-gray-800 text-xs font-mono">CB51 · Avoid the Noise</p>
       </div>
     );
   }
