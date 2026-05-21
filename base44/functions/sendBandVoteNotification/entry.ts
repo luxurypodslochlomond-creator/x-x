@@ -46,35 +46,31 @@ Deno.serve(async (req) => {
     }
 
     webpush.setVapidDetails(
-      'mailto:support@universalfrequency51.com',
+      'mailto:noreply@cb51.io',
       vapidPublicKey,
       vapidPrivateKey
     );
 
+    // Build tokenised vote URL — no login needed
+    const voteToken = btoa(`${gigOfferId}:${bandMemberEmail}`);
+    const voteUrl = `/CB51Vote?token=${voteToken}`;
+
     // Notification payload with ACTION BUTTONS
     const notificationPayload = {
-      title: `🎸 GIG OFFER: ${venue || 'New Venue'}`,
-      body: `${date}${fee ? ` • £${fee}` : ''}\n${promoterName || 'Promoter'}`,
-      icon: '/icon-192x192.png',
-      badge: '/icon-192x192.png',
-      tag: `gig-vote-${gigOfferId}`,
-      requireInteraction: true, // Keep notification visible until user acts
+      title: `🎸 CB51: ${venue || 'New Gig Offer'}`,
+      body: `${date ? date + ' · ' : ''}${fee ? '£' + fee + ' · ' : ''}Tap to vote YES or NO`,
+      icon: '/api/functions/serveCB51PNGIcon?size=192',
+      badge: '/api/functions/serveCB51PNGMaskableIcon?size=192',
+      tag: `cb51-gig-vote-${gigOfferId}`,
+      requireInteraction: true,
       data: {
         gigOfferId,
         type: 'band_vote',
-        url: `/app/CB51BandVote?gigId=${gigOfferId}`
+        url: voteUrl
       },
       actions: [
-        {
-          action: 'approve',
-          title: '✅ YES',
-          icon: '/icon-192x192.png'
-        },
-        {
-          action: 'reject',
-          title: '❌ NO',
-          icon: '/icon-192x192.png'
-        }
+        { action: 'approve', title: '✅ YES' },
+        { action: 'reject', title: '❌ NO' }
       ]
     };
 

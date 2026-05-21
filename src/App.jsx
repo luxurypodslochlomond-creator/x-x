@@ -102,6 +102,7 @@ const CTRL51CheckoutSuccessPage = React.lazy(() => import('./pages/CTRL51Checkou
 const BrianHughesCVPage = React.lazy(() => import('./pages/BrianHughesCV'));
 const AdminSortedOutreachPage = React.lazy(() => import('./pages/AdminSortedOutreach'));
 const AdminSortedInfluencersPage = React.lazy(() => import('./pages/AdminSortedInfluencers'));
+const CB51VotePage = React.lazy(() => import('./pages/CB51Vote'));
 
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -255,6 +256,7 @@ const AuthenticatedApp = () => {
       <Route path="/BrianHughesCV" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BrianHughesCVPage /></Suspense>} />
       <Route path="/AdminSortedOutreach" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminSortedOutreach"><AdminSortedOutreachPage /></LayoutWrapper></Suspense>} />
       <Route path="/AdminSortedInfluencers" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminSortedInfluencers"><AdminSortedInfluencersPage /></LayoutWrapper></Suspense>} />
+      <Route path="/CB51Vote" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><CB51VotePage /></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

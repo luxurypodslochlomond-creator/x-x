@@ -36,20 +36,22 @@ Deno.serve(async (req) => {
       return Response.json({ sent: 0, message: 'No band members to notify' });
     }
 
-    // Send push notification with YES/NO buttons to each member
-    const notifyPromises = bandMembers.map(member =>
-      base44.asServiceRole.functions.invoke('sendBandVoteNotification', {
+    // Send push notification with YES/NO buttons + tokenised vote URL (no login needed)
+    const notifyPromises = bandMembers.map(member => {
+      const voteToken = btoa(`${gigOfferId}:${member.email}`);
+      return base44.asServiceRole.functions.invoke('sendBandVoteNotification', {
         gigOfferId: gigOfferId,
         venue: venue,
         date: date,
         fee: fee,
         promoterName: promoterName,
-        bandMemberEmail: member.email
+        bandMemberEmail: member.email,
+        voteUrl: `/CB51Vote?token=${voteToken}`
       }).catch(e => {
         console.log(`Failed to notify ${member.email}:`, e.message);
         return null;
-      })
-    );
+      });
+    });
 
     const results = await Promise.all(notifyPromises);
     const successful = results.filter(r => r && r.success).length;
