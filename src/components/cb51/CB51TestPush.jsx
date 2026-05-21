@@ -17,12 +17,14 @@ export default function CB51TestPush({ artistId }) {
   const handleTestPush = async () => {
     setTesting(true);
     try {
-      await base44.functions.invoke('sendGigConfirmationPush', {
-        artistId,
-        gigId: 'test-notification',
-        gigVenue: 'CB51 Test Notification',
-        gigDate: new Date().toISOString(),
-        gigFee: 0
+      // Use sendBrowserPush directly for testing - no artist lookup needed
+      await base44.functions.invoke('sendBrowserPush', {
+        title: '🎵 CB51 Test Notification',
+        message: 'Your CB51 push notifications are working! You\'ll receive gig updates here.',
+        notification_type: 'test',
+        icon: '/api/functions/serveCB51PNGIcon?size=192',
+        badge: '/api/functions/serveCB51PNGMaskableIcon?size=192',
+        brand: 'cb51'
       });
       setSent(true);
       setTimeout(() => setSent(false), 4000);
