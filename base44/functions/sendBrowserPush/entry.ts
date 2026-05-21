@@ -86,12 +86,13 @@ Deno.serve(async (req) => {
     // 2. Build payload - ALWAYS use CB51 PNG endpoints for icon rendering
     const isGigNotification = !!gig_offer_id;
     const isCB51Brand = brand === 'cb51' || isGigNotification;
+    const cacheBust = Math.floor(Date.now() / 60000); // Cache-bust every minute
     
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: isCB51Brand ? '/api/functions/serveCB51PNGIcon' : (icon || '/icon-192x192.png'),
-      badge: isCB51Brand ? '/api/functions/serveCB51PNGMaskableIcon' : (badge || '/icon-192x192.png'),
+      icon: isCB51Brand ? `/api/functions/serveCB51PNGIcon?v=${cacheBust}` : (icon || '/icon-192x192.png'),
+      badge: isCB51Brand ? `/api/functions/serveCB51PNGMaskableIcon?v=${cacheBust}` : (badge || '/icon-192x192.png'),
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
