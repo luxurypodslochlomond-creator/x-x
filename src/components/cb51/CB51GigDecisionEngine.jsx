@@ -12,6 +12,8 @@ import CB51GigFinanceTracker from './CB51GigFinanceTracker';
 import CB51ManagerEmailApproval from './CB51ManagerEmailApproval';
 import CB51VoteAggregator from './CB51VoteAggregator';
 import CB51DraftConfirmationEmail from './CB51DraftConfirmationEmail';
+import CB51GigApprovalConfirm from './CB51GigApprovalConfirm';
+import CB51TestNotifications from './CB51TestNotifications';
 
 /**
  * CB51 GIG DECISION ENGINE
@@ -119,6 +121,7 @@ export default function CB51GigDecisionEngine({ artistId }) {
   const [aiAnalysis, setAiAnalysis] = useState(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [lastAnalysedId, setLastAnalysedId] = useState(null);
+  const [showApprovalConfirm, setShowApprovalConfirm] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: pendingGigs = [], isLoading } = useQuery({
@@ -377,6 +380,10 @@ export default function CB51GigDecisionEngine({ artistId }) {
                 )}
               </>
             )}
+            {/* No band? Show test notification button */}
+            {(!currentGig.band_votes || currentGig.band_votes.length === 0) && currentGig.status === 'manager_reviewing' && (
+              <CB51TestNotifications artistId={artistId} />
+            )}
             {/* Show draft email when all votes in and all YES */}
             {currentGig.all_responses_in && currentGig.status === 'band_voting' && (
               <CB51DraftConfirmationEmail 
@@ -416,16 +423,16 @@ export default function CB51GigDecisionEngine({ artistId }) {
                 </button>
 
                 <button
-                  onClick={() => approveMutation.mutate(currentGig)}
-                  disabled={isBusy}
-                  className="py-6 flex flex-col items-center justify-center gap-1.5 bg-green-950/30 hover:bg-green-950/60 transition-all disabled:opacity-40 active:scale-95"
-                >
-                  {approveMutation.isPending
-                    ? <Loader className="w-8 h-8 text-green-400 animate-spin" />
-                    : <CheckCircle className="w-8 h-8 text-green-400" />
-                  }
-                  <span className="text-green-400 font-black text-base tracking-wider">YES</span>
-                </button>
+                   onClick={() => setShowApprovalConfirm(true)}
+                   disabled={isBusy}
+                   className="py-6 flex flex-col items-center justify-center gap-1.5 bg-green-950/30 hover:bg-green-950/60 transition-all disabled:opacity-40 active:scale-95"
+                 >
+                   {approveMutation.isPending
+                     ? <Loader className="w-8 h-8 text-green-400 animate-spin" />
+                     : <CheckCircle className="w-8 h-8 text-green-400" />
+                   }
+                   <span className="text-green-400 font-black text-base tracking-wider">YES</span>
+                 </button>
               </motion.div>
             ) : (
               <motion.div
@@ -462,7 +469,22 @@ export default function CB51GigDecisionEngine({ artistId }) {
             )}
           </AnimatePresence>
         </motion.div>
-      )}
-    </div>
-  );
-}
+        )}
+
+        {/* ── APPROVAL CONFIRMATION MODAL ── */}
+        <AnimatePresence>
+        {showApprovalConfirm && currentGig && (
+          <CB51GigApprovalConfirm
+            gig={currentGig}
+            onConfirm={(gig) => {
+              setShowApprovalConfirm(false);
+              approveMutation.mutate(gig);
+            }}
+            onCancel={() => setShowApprovalConfirm(false)}
+            loading={approveMutation.isPending}
+          />
+        )}
+        </AnimatePresence>
+        </div>
+        );
+        }
