@@ -22,8 +22,6 @@ export default function CB51TestPush({ artistId }) {
         title: '🎵 CB51 Test Notification',
         message: 'Your CB51 push notifications are working! You\'ll receive gig updates here.',
         notification_type: 'test',
-        icon: '/api/functions/serveCB51PNGIcon?size=192',
-        badge: '/api/functions/serveCB51PNGMaskableIcon?size=192',
         brand: 'cb51'
       });
       setSent(true);
