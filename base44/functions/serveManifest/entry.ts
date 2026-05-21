@@ -112,7 +112,7 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify(manifest), {
       headers: {
         'Content-Type': 'application/manifest+json',
-        'Cache-Control': 'public, max-age=3600'
+        'Cache-Control': 'public, max-age=300' // 5 min cache to catch brand detection changes
       }
     });
   } catch (error) {
