@@ -15,15 +15,14 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Artist not found' }, { status: 404 });
     }
 
-    // Send browser push notification via sendBrowserPush function
+    // Send browser push notification via sendBrowserPush function — CB51 branded
     await base44.asServiceRole.functions.invoke('sendBrowserPush', {
       userId: artist.id,
       userEmail: artist.email,
       title: `Gig Confirmed! 🎵`,
       body: `${gigVenue} on ${gigDate} - £${gigFee?.toLocaleString() || '0'} confirmed`,
       tag: `gig-${gigId}`,
-      icon: '/icon-192x192.png',
-      badge: '/icon-192x192.png',
+      brand: 'cb51',
       data: {
         gigId,
         navigateTo: `/ScottLive?gig=${gigId}`

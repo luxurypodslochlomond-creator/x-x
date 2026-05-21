@@ -22,22 +22,16 @@ Deno.serve(async (req) => {
       day: 'numeric' 
     });
 
-    // Send push to each member
+    // Send push to each member — CB51 branded
     const promises = memberEmails.map(async (email) => {
       try {
-        await base44.integrations.Core.SendPushNotification({
-          user_email: email,
+        await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+          recipient_email: email,
           title: 'Gig Vote: ' + (gigData.venue || 'New Show'),
-          body: `${gigDate} • ${gigData.city || 'TBA'} • Can you make it?`,
-          tag: `gig_vote_${gigId}`,
-          icon: 'https://cb51.io/cb51-logo-192x192.png',
-          badge: 'https://cb51.io/cb51-badge-72x72.png',
-          data: {
-            type: 'gig_vote',
-            gigId,
-            artistId,
-            action_url: `/CB51BandVote?gigId=${gigId}&artistId=${artistId}`
-          }
+          message: `${gigDate} • ${gigData.city || 'TBA'} • Can you make it?`,
+          notification_type: 'gig_vote',
+          gig_offer_id: gigId,
+          brand: 'cb51'
         }).catch(e => console.log(`Push failed for ${email}:`, e.message));
       } catch (e) {
         console.log(`Error notifying ${email}:`, e.message);
