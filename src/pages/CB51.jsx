@@ -124,60 +124,51 @@ export default function CB51Page() {
 
         <div className="min-h-screen bg-black text-white flex flex-col">
           {/* ── HEADER ── */}
-          <div className="flex items-center justify-between px-5 pt-6 pb-4">
+          <div className="flex items-center justify-between px-5 pt-6 pb-3">
             <div className="flex items-center gap-2.5">
               <Radio className="w-6 h-6 text-cyan-400" />
               <span className="text-xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
             </div>
             <button
               onClick={() => setActiveTab(activeTab === 'brain' ? 'home' : 'brain')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-black font-mono tracking-wider transition-all ${
                 activeTab === 'brain'
-                  ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40'
-                  : 'text-gray-500 hover:text-gray-300'
+                  ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/50'
+                  : 'text-gray-600 border-white/10 hover:text-gray-400'
               }`}
             >
               <Brain className="w-3.5 h-3.5" />
-              Brain
+              BRAIN
             </button>
           </div>
 
           {/* ── ARTIST SELECTOR ── */}
           {artists.length > 0 && (
-            <div className="px-5 pb-2">
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
+            <div className="px-5 pb-3">
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
                 {artists.map((artist) => {
                   const isActive = artist.id === currentArtistId;
                   return (
                     <button
                       key={artist.id}
-                      onClick={() => {
-                        setActiveArtistId(artist.id);
-                        navigate(createPageUrl(`ScottArtistHome?id=${artist.id}`));
-                      }}
-                      className="flex flex-col items-center gap-1.5 flex-shrink-0 min-w-[64px]"
+                      onClick={() => setActiveArtistId(artist.id)}
+                      className={`flex items-center gap-2 flex-shrink-0 px-3 py-2 rounded-lg border-2 transition-all ${
+                        isActive
+                          ? 'border-cyan-500 bg-cyan-500/10'
+                          : 'border-white/10 bg-white/5'
+                      }`}
                     >
                       {artist.profile_pic_url ? (
-                        <img
-                          src={artist.profile_pic_url}
-                          alt={artist.name}
-                          className={`w-14 h-14 rounded-full object-cover transition-all ${
-                            isActive ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-black' : 'opacity-70'
-                          }`}
-                        />
+                        <img src={artist.profile_pic_url} alt={artist.name} className="w-7 h-7 rounded-full object-cover" />
                       ) : (
-                        <div className={`w-14 h-14 rounded-full flex items-center justify-center font-black text-xl transition-all ${
-                          isActive
-                            ? 'bg-cyan-500 text-black ring-2 ring-cyan-400 ring-offset-2 ring-offset-black'
-                            : 'bg-gray-800 text-gray-400'
+                        <div className={`w-7 h-7 rounded-full flex items-center justify-center font-black text-sm ${
+                          isActive ? 'bg-cyan-500 text-black' : 'bg-gray-800 text-gray-400'
                         }`}>
                           {artist.name.charAt(0).toUpperCase()}
                         </div>
                       )}
-                      <span className={`text-[11px] font-bold truncate w-14 text-center leading-tight ${
-                        isActive ? 'text-cyan-400' : 'text-gray-500'
-                      }`}>
-                        {artist.name.length > 7 ? artist.name.slice(0, 7) + '…' : artist.name}
+                      <span className={`text-sm font-black truncate max-w-[100px] ${isActive ? 'text-cyan-400' : 'text-gray-500'}`}>
+                        {artist.name}
                       </span>
                     </button>
                   );
@@ -185,12 +176,10 @@ export default function CB51Page() {
                 {/* Add artist */}
                 <button
                   onClick={() => navigate(createPageUrl('CB51AddArtist'))}
-                  className="flex flex-col items-center gap-1.5 flex-shrink-0 min-w-[64px]"
+                  className="flex items-center gap-2 flex-shrink-0 px-3 py-2 rounded-lg border-2 border-dashed border-gray-800 text-gray-600 hover:text-gray-400 transition-all"
                 >
-                  <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-700 flex items-center justify-center">
-                    <Plus className="w-5 h-5 text-gray-600" />
-                  </div>
-                  <span className="text-[11px] text-gray-600 font-bold">Add</span>
+                  <Plus className="w-4 h-4" />
+                  <span className="text-sm font-black">Add</span>
                 </button>
               </div>
             </div>
