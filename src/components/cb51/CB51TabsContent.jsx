@@ -154,7 +154,7 @@ export function CB51FinanceTab({ artistId }) {
       className="py-6 space-y-6"
     >
       <div className="space-y-2 mb-6">
-        <h2 className="text-red-400 font-black text-xl">Finance</h2>
+        <h2 className="text-green-400 font-black text-xl">Finance</h2>
         <p className="text-gray-500 text-sm">Gig earnings summary</p>
       </div>
 
@@ -165,9 +165,9 @@ export function CB51FinanceTab({ artistId }) {
         </div>
       ) : (
         <>
-          <div className="bg-red-950/30 border border-red-500/30 rounded-xl p-4">
+          <div className="bg-green-950/30 border border-green-500/30 rounded-xl p-4">
             <p className="text-gray-400 text-xs mb-1">Total Earned (Confirmed)</p>
-            <p className="text-red-400 font-black text-3xl">
+            <p className="text-green-400 font-black text-3xl">
               £{confirmedGigs.reduce((sum, g) => sum + (g.fee || 0), 0).toLocaleString()}
             </p>
             <p className="text-gray-500 text-xs mt-2">From {confirmedGigs.length} gigs</p>
@@ -186,7 +186,7 @@ export function CB51FinanceTab({ artistId }) {
                     <p className="text-white font-bold text-sm">{gig.venue || gig.title}</p>
                     <p className="text-gray-400 text-xs">{gig.date_start}</p>
                   </div>
-                  <p className="text-red-400 font-black">£{gig.fee}</p>
+                  <p className="text-green-400 font-black">£{gig.fee}</p>
                 </div>
               </motion.div>
             ))}

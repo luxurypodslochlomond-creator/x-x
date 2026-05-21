@@ -131,9 +131,23 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Notify MANAGER they approved the gig
+    try {
+      await base44.asServiceRole.functions.invoke('sendBrowserPush', {
+        title: '✅ Gig Approved',
+        body: `You approved ${gig.venue || gig.title} on ${gig.date_start} for £${gig.fee || 0}`,
+        badge: '/icon-192x192.png',
+        icon: '/icon-192x192.png',
+        tag: `cb51-approved-${gigId}`,
+        requireInteraction: false
+      });
+    } catch (err) {
+      console.log('Manager notification (non-critical):', err.message);
+    }
+
     return Response.json({
       status: 'success',
-      message: isSoloArtist ? 'Gig confirmed (solo artist)' : 'Gig approved'
+      message: isSoloArtist ? 'Gig confirmed (solo artist) — push sent' : 'Gig approved — push sent'
     });
   } catch (error) {
     console.error('Approve gig error:', error);
