@@ -10,7 +10,7 @@ const SECTIONS = [
   { id: 'gigs',     label: 'GIGS',     icon: Zap,         border: 'border-cyan-500',   bg: 'bg-cyan-500',    text: 'text-cyan-400'   },
   { id: 'inbox',    label: 'INBOX',    icon: Mail,        border: 'border-orange-500', bg: 'bg-orange-500',  text: 'text-orange-400' },
   { id: 'tasks',    label: 'TO-DO',    icon: CheckCircle, border: 'border-green-500',  bg: 'bg-green-500',   text: 'text-green-400'  },
-  { id: 'finance',  label: 'FINANCE',  icon: DollarSign,  border: 'border-red-500',    bg: 'bg-red-500',     text: 'text-red-400'    },
+  { id: 'finance',  label: 'FINANCE',  icon: DollarSign,  border: 'border-green-500',  bg: 'bg-green-500',   text: 'text-green-400'  },
   { id: 'calendar', label: 'CALENDAR', icon: Calendar,    border: 'border-amber-500',  bg: 'bg-amber-500',   text: 'text-amber-400'  },
 ];
 
@@ -236,8 +236,15 @@ export default function CB51UnifiedDashboard({ artistId }) {
             <motion.button
               key={section.id}
               whileTap={{ scale: 0.94 }}
-              onClick={() => setActiveSection(section.id)}
+              onClick={() => {
+                setActiveSection(section.id);
+                // Haptic feedback on tap (mobile native app feel)
+                if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                  navigator.vibrate(8);
+                }
+              }}
               className={`bg-black border-2 ${section.border} rounded-xl p-4 text-center active:opacity-80 transition-opacity`}
+              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
             >
               <div className={`w-14 h-14 rounded-lg ${section.bg} text-black flex items-center justify-center mx-auto mb-2`}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
@@ -256,8 +263,14 @@ export default function CB51UnifiedDashboard({ artistId }) {
           return (
             <motion.button
               whileTap={{ scale: 0.97 }}
-              onClick={() => setActiveSection(section.id)}
+              onClick={() => {
+                setActiveSection(section.id);
+                if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                  navigator.vibrate(8);
+                }
+              }}
               className={`w-full bg-black border-2 ${section.border} rounded-xl p-4 flex items-center gap-4 active:opacity-80 transition-opacity`}
+              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
             >
               <div className={`w-14 h-14 rounded-lg ${section.bg} text-black flex items-center justify-center flex-shrink-0`}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
