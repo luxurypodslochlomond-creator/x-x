@@ -26,7 +26,7 @@ export default function CB51BadgeManager({ artistId }) {
       return pendingGigs.length + votingGigs.length;
     },
     enabled: !!artistId,
-    refetchInterval: 5000
+    refetchInterval: 60000
   });
 
   useEffect(() => {

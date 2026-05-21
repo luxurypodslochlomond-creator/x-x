@@ -505,7 +505,6 @@ export const PAGES = {
     "BigIssueFoodRescue": BigIssueFoodRescue,
     "BuildOnUF51": BuildOnUF51,
     "BusinessVault": BusinessVault,
-    "CB51": CB51,
     "CB51AAA": CB51AAA,
     "CB51About": CB51About,
     "CB51AddArtist": CB51AddArtist,
