@@ -10,6 +10,7 @@ import { ChevronRight } from 'lucide-react';
 export default function CB51GigsTab({ artistId }) {
   const [reviewingGig, setReviewingGig] = useState(null);
   const [confirmingGig, setConfirmingGig] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: confirmedGigs = [] } = useQuery({
@@ -63,15 +64,32 @@ export default function CB51GigsTab({ artistId }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="py-6 space-y-8"
+      className="py-4 space-y-6 px-5"
     >
-      {/* UPLOAD NEW OFFER */}
+      {/* ADD GIG — compact tap-to-expand */}
       <div>
-        <div className="space-y-2 mb-4">
-          <h2 className="text-white font-black text-lg">Add Gig Offer</h2>
-          <p className="text-gray-500 text-sm">Paste email, upload screenshot, or drag file</p>
-        </div>
-        <CB51GigUploadParser artistId={artistId} onSuccess={() => queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] })} />
+        <button
+          onClick={() => setShowUpload(!showUpload)}
+          className="w-full flex items-center justify-between px-4 py-3 bg-gray-900 border border-dashed border-cyan-500/40 rounded-xl text-cyan-400 font-bold text-sm transition-all hover:border-cyan-500/70 active:scale-95"
+        >
+          <span>＋ Add Gig Offer</span>
+          <span className="text-gray-600 text-xs font-mono">paste · upload · type</span>
+        </button>
+        <AnimatePresence>
+          {showUpload && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="overflow-hidden mt-2"
+            >
+              <CB51GigUploadParser artistId={artistId} onSuccess={() => {
+                queryClient.invalidateQueries({ queryKey: ['pendingGigs', artistId] });
+                setShowUpload(false);
+              }} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* PENDING OFFERS FOR REVIEW */}
@@ -154,19 +172,19 @@ export default function CB51GigsTab({ artistId }) {
       )}
 
       {/* DECISION ENGINE */}
-      <div className="border-t border-cyan-500/10 pt-8">
-        <div className="space-y-2 mb-6">
-          <h2 className="text-cyan-400 font-black text-xl">Pending Offers</h2>
-          <p className="text-gray-500 text-sm">YES/NO to decide · AI reads offers instantly</p>
+      <div className="border-t border-white/5 pt-5">
+        <div className="space-y-1 mb-4">
+          <h2 className="text-cyan-400 font-black text-base">Pending Offers</h2>
+          <p className="text-gray-600 text-xs">YES/NO to decide · AI reads offers instantly</p>
         </div>
         <CB51GigDecisionEngine artistId={artistId} />
       </div>
 
       {/* CONFIRMED GIGS */}
-      <div className="border-t border-cyan-500/10 pt-8">
-        <div className="space-y-2 mb-6">
-          <h2 className="text-cyan-400 font-black text-xl">Confirmed Gigs</h2>
-          <p className="text-gray-500 text-sm">Draft email ready · tap to send to promoter</p>
+      <div className="border-t border-white/5 pt-5">
+        <div className="space-y-1 mb-4">
+          <h2 className="text-cyan-400 font-black text-base">Confirmed Gigs</h2>
+          <p className="text-gray-600 text-xs">Draft email ready · tap to send to promoter</p>
         </div>
         <CB51ConfirmedGigDraftEmail artistId={artistId} />
       </div>
