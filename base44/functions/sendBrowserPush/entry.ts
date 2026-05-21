@@ -85,12 +85,13 @@ Deno.serve(async (req) => {
 
     // 2. Build payload - ALWAYS use CB51 PNG endpoints for icon rendering
     const isGigNotification = !!gig_offer_id;
+    const isCB51Brand = brand === 'cb51' || isGigNotification;
     
     const payload = JSON.stringify({
       title,
       body: message,
-      icon: icon || '/api/functions/serveCB51PNGIcon?size=192',
-      badge: badge || '/api/functions/serveCB51PNGMaskableIcon?size=192',
+      icon: isCB51Brand ? '/api/functions/serveCB51PNGIcon?size=192' : (icon || '/icon-192x192.png'),
+      badge: isCB51Brand ? '/api/functions/serveCB51PNGMaskableIcon?size=192' : (badge || '/icon-192x192.png'),
       tag: `cb51-${gig_offer_id || Date.now()}`,
       data: {
         notification_type,
@@ -102,8 +103,8 @@ Deno.serve(async (req) => {
       vibrate: [200, 100, 200],
       // Include approve/reject actions for gig offer notifications
       actions: isGigNotification ? [
-        { action: 'approve', title: '✅ Yes' },
-        { action: 'reject', title: '❌ No' }
+        { action: 'approve', title: 'Yes' },
+        { action: 'reject', title: 'No' }
       ] : []
     });
 
