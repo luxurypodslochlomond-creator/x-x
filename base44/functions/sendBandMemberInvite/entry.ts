@@ -9,21 +9,24 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Create invite link
-    const inviteUrl = `https://cb51.io/accept-invite?memberId=${memberId}&artistId=${artistId}`;
+    // Build tokenised join link — no login needed
+    const token = btoa(`${memberId}:${artistId}:${email}`);
+    const inviteUrl = `https://uf51.app/CB51Join?token=${token}`;
 
     // Send branded CB51 invitation email
     await base44.asServiceRole.integrations.Core.SendEmail({
       to: email,
       from_name: 'CB51',
-      subject: `${memberName}, you're invited to ${artistName}'s CB51 band`,
+      subject: `${memberName} — you've been added to ${artistName} on CB51`,
       body: `Hey ${memberName},
 
-${artistName} added you to their CB51 band management.
+Your manager just added you to ${artistName} on CB51.
 
-Click below to accept and start voting on gigs:
+Tap the link below to set up your notifications. Takes about 10 seconds — no account, no app download needed.
 
 ${inviteUrl}
+
+Once you're set up, you'll get instant YES/NO gig offers straight to your phone.
 
 —
 CB51 • AI Co-Manager for Artists
