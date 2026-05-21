@@ -176,21 +176,19 @@ export default function CB51UnifiedDashboard({ artistId }) {
             {section?.label}
           </span>
         </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.15 }}
-          >
-            {activeSection === 'gigs'     && <div className="px-4"><CB51GigsTab artistId={artistId} /></div>}
-            {activeSection === 'inbox'    && <CB51InboxTab artistId={artistId} />}
-            {activeSection === 'tasks'    && <CB51TasksTab artistId={artistId} />}
-            {activeSection === 'finance'  && <CB51FinanceTab artistId={artistId} />}
-            {activeSection === 'calendar' && <CB51CalendarTab artistId={artistId} />}
-          </motion.div>
-        </AnimatePresence>
+        {/* No AnimatePresence - instant switch, no judder */}
+        <motion.div
+          key={activeSection}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.08 }}
+        >
+          {activeSection === 'gigs'     && <div className="px-4"><CB51GigsTab artistId={artistId} /></div>}
+          {activeSection === 'inbox'    && <CB51InboxTab artistId={artistId} />}
+          {activeSection === 'tasks'    && <CB51TasksTab artistId={artistId} />}
+          {activeSection === 'finance'  && <CB51FinanceTab artistId={artistId} />}
+          {activeSection === 'calendar' && <CB51CalendarTab artistId={artistId} />}
+        </motion.div>
       </div>
     );
   }
@@ -201,32 +199,28 @@ export default function CB51UnifiedDashboard({ artistId }) {
   return (
     <div className="pt-2 pb-8">
       {/* AUTO BRIEFING — AI reads everything, surfaces what matters */}
-      <AnimatePresence>
-        {showBriefing && (
-          <AutoBriefingBanner artistId={artistId} onClose={() => setShowBriefing(false)} />
-        )}
-      </AnimatePresence>
+      {showBriefing && (
+        <AutoBriefingBanner artistId={artistId} onClose={() => setShowBriefing(false)} />
+      )}
 
       {/* PENDING GIG ALERT — shows when there's an offer waiting */}
-      <AnimatePresence>
-        {topPendingGig && (
-          <PendingGigAlert
-            gig={topPendingGig}
-            onConfirm={handleConfirm}
-            onReject={handleReject}
-            confirming={confirming}
-          />
-        )}
-        {pendingGigs.length > 1 && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center text-amber-400 font-black font-mono text-[10px] tracking-widest mb-3"
-          >
-            +{pendingGigs.length - 1} MORE OFFER{pendingGigs.length - 1 > 1 ? 'S' : ''} WAITING
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {topPendingGig && (
+        <PendingGigAlert
+          gig={topPendingGig}
+          onConfirm={handleConfirm}
+          onReject={handleReject}
+          confirming={confirming}
+        />
+      )}
+      {pendingGigs.length > 1 && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-amber-400 font-black font-mono text-[10px] tracking-widest mb-3"
+        >
+          +{pendingGigs.length - 1} MORE OFFER{pendingGigs.length - 1 > 1 ? 'S' : ''} WAITING
+        </motion.p>
+      )}
 
       {/* NAV GRID — 2x2 + calendar full width */}
       <div className="px-3 grid grid-cols-2 gap-2">
