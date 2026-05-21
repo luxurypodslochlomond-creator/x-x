@@ -187,9 +187,11 @@ const LayoutInner = ({ children, currentPageName }) => {
     const navigate = useNavigate();
 
   // Detect CB51 subdomain
+  const [brandContext, setBrandContext] = useState('uf51');
+  
   const isCB51Subdomain = window.location.hostname.startsWith('cb51.') || window.location.hostname === 'cb51.io';
-  const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain;
-  const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments';
+  const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain || brandContext === 'cb51';
+  const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments' || brandContext === 'ps51';
   const isTracktPage = currentPageName.startsWith('Trackt') || currentPageName === 'TracktDashboard';
   const isCTRL51Page = currentPageName.startsWith('CTRL51');
   const isSortedPage = currentPageName === 'Family51' || currentPageName.startsWith('Sorted') || currentPageName === 'SortedFAQ';
@@ -239,6 +241,10 @@ const LayoutInner = ({ children, currentPageName }) => {
       const isCB51 = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
       const isTRACKT = currentPageName.startsWith('Trackt');
       const isSORTED = currentPageName === 'Family51' || currentPageName.startsWith('Sorted');
+      
+      // Reset brand context when leaving CB51 tabs
+      if (!isCB51) setBrandContext('uf51');
+      
       const rootEl = document.getElementById('root');
       if (isCB51 && rootEl) {
         rootEl.setAttribute('data-cb51', 'true');
@@ -280,7 +286,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
   useEffect(() => {
     // Set branding based on CB51 vs UF51
-    const isCB51 = window.location.hostname.startsWith('cb51.') || currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott');
+    const isCB51 = window.location.hostname.startsWith('cb51.') || currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || brandContext === 'cb51';
     
     // Set document title
     document.title = isCB51 ? 'CB51 • AI Co-Manager for Artists' : 'Universal Frequency 51 • Heal the Planet';
