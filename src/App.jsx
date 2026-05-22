@@ -105,6 +105,7 @@ const AdminSortedInfluencersPage = React.lazy(() => import('./pages/AdminSortedI
 const CB51VotePage = React.lazy(() => import('./pages/CB51Vote'));
 const CB51JoinPage = React.lazy(() => import('./pages/CB51Join'));
 const CB51MainPage = React.lazy(() => import('./pages/CB51'));
+const CB51HowPage = React.lazy(() => import('./pages/CB51How'));
 
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -261,6 +262,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51Vote" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><CB51VotePage /></Suspense>} />
       <Route path="/CB51Join" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><CB51JoinPage /></Suspense>} />
       <Route path="/CB51" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><CB51MainPage /></Suspense>} />
+      <Route path="/CB51How" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><CB51HowPage /></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
