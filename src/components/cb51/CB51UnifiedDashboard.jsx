@@ -266,6 +266,12 @@ export default function CB51UnifiedDashboard({ artistId }) {
     enabled: !!artistId,
     staleTime: 30000,
   });
+  const { data: confirmedGigs = [] } = useQuery({
+    queryKey: ['confirmedGigs', artistId],
+    queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'confirmed' }).catch(() => []),
+    enabled: !!artistId,
+    staleTime: 60000,
+  });
 
   const badges = {
     gigs: pendingGigsForBadge.length,
@@ -282,6 +288,14 @@ export default function CB51UnifiedDashboard({ artistId }) {
     staleTime: 15000,
     refetchInterval: 30000,
   });
+
+  // Compute next gig for hero card
+  const now = new Date();
+  const nextGig = confirmedGigs
+    .filter(g => g.date_start && new Date(g.date_start) >= now)
+    .sort((a, b) => new Date(a.date_start) - new Date(b.date_start))[0] || null;
+  const daysUntil = nextGig ? Math.ceil((new Date(nextGig.date_start) - now) / (1000 * 60 * 60 * 24)) : null;
+  const urgentTasks = openTasks.filter(t => t.status !== 'done' && t.priority === 'urgent').length;
 
   const handleConfirm = async (gig) => {
     setConfirming(true);
@@ -347,86 +361,134 @@ export default function CB51UnifiedDashboard({ artistId }) {
   const topPendingGig = pendingGigs[0] || null;
 
   return (
-    <div className="pt-2 pb-8">
-      {/* PENDING GIG ALERT — shows when there's an offer waiting */}
-      {topPendingGig && (
-        <PendingGigAlert
-          gig={topPendingGig}
-          onConfirm={handleConfirm}
-          onReject={handleReject}
-          confirming={confirming}
-          artistId={artistId}
-        />
-      )}
-      {pendingGigs.length > 1 && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center text-amber-400 font-black font-mono text-[10px] tracking-widest mb-3"
-        >
-          +{pendingGigs.length - 1} MORE OFFER{pendingGigs.length - 1 > 1 ? 'S' : ''} WAITING
-        </motion.p>
+    <div className="pb-8">
+
+      {/* ── HERO CARD — next gig or offer waiting ── */}
+      <div className="px-4 pt-2 pb-4">
+        {topPendingGig ? (
+          <PendingGigAlert
+            gig={topPendingGig}
+            onConfirm={handleConfirm}
+            onReject={handleReject}
+            confirming={confirming}
+            artistId={artistId}
+          />
+        ) : nextGig ? (
+          <motion.button
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setActiveSection('calendar')}
+            className="w-full text-left bg-[#0d1a0d] border border-green-500/20 rounded-2xl p-5 active:opacity-80 transition-all"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            <p className="text-green-400 font-mono text-[10px] font-black tracking-widest mb-2">NEXT SHOW</p>
+            <p className="text-white font-black text-xl leading-tight">{nextGig.venue}</p>
+            {nextGig.city && <p className="text-gray-400 text-sm mt-0.5">{nextGig.city}</p>}
+            <div className="flex items-end justify-between mt-3">
+              <div>
+                {nextGig.date_start && <p className="text-gray-500 text-xs">{new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}</p>}
+                {nextGig.fee && <p className="text-green-400 font-black text-base mt-1">£{Number(nextGig.fee).toLocaleString()}</p>}
+              </div>
+              <div className="text-right">
+                <p className="text-white font-black text-4xl leading-none">{daysUntil}</p>
+                <p className="text-gray-500 text-xs font-mono">days away</p>
+              </div>
+            </div>
+          </motion.button>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full bg-[#0a0a0a] border border-white/5 rounded-2xl p-5"
+          >
+            <p className="text-gray-600 font-mono text-[10px] tracking-widest mb-1">STATUS</p>
+            <p className="text-white font-black text-lg">No upcoming shows</p>
+            <p className="text-gray-600 text-sm mt-1">Add a gig offer to get started</p>
+          </motion.div>
+        )}
+
+        {pendingGigs.length > 1 && (
+          <p className="text-center text-amber-400 font-black font-mono text-[10px] tracking-widest mt-2">
+            +{pendingGigs.length - 1} MORE OFFER{pendingGigs.length - 1 > 1 ? 'S' : ''} WAITING
+          </p>
+        )}
+      </div>
+
+      {/* ── QUICK STATS ROW (only if there's data worth showing) ── */}
+      {(urgentTasks > 0 || pendingGigsForBadge.length > 0) && (
+        <div className="px-4 mb-4 flex gap-2">
+          {pendingGigsForBadge.length > 0 && (
+            <div className="flex-1 bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-3 py-2.5 text-center">
+              <p className="text-cyan-400 font-black text-lg leading-none">{pendingGigsForBadge.length}</p>
+              <p className="text-gray-500 font-mono text-[9px] tracking-widest mt-0.5">OFFER{pendingGigsForBadge.length > 1 ? 'S' : ''}</p>
+            </div>
+          )}
+          {urgentTasks > 0 && (
+            <div className="flex-1 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2.5 text-center">
+              <p className="text-red-400 font-black text-lg leading-none">{urgentTasks}</p>
+              <p className="text-gray-500 font-mono text-[9px] tracking-widest mt-0.5">URGENT</p>
+            </div>
+          )}
+        </div>
       )}
 
-      {/* NAV GRID — 2x2 + calendar full width */}
-      <div className="px-3 grid grid-cols-2 gap-2">
+      {/* ── NAV GRID — 2×2 ── */}
+      <div className="px-4 grid grid-cols-2 gap-3">
         {SECTIONS.slice(0, 4).map((section) => {
           const Icon = section.icon;
           const badge = badges[section.id];
           return (
             <motion.button
               key={section.id}
-              whileTap={{ scale: 0.93 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className="relative bg-[#111] rounded-2xl p-5 text-center active:opacity-70 transition-all border border-white/5"
+              className="relative bg-[#0f0f0f] rounded-2xl py-6 px-4 text-center active:opacity-70 transition-all"
               style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
             >
               {badge > 0 && (
-                <span className="absolute top-2.5 right-2.5 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center leading-none">
+                <span className="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center leading-none">
                   {badge > 9 ? '9+' : badge}
                 </span>
               )}
               <div className={`w-14 h-14 rounded-2xl ${section.bg} text-black flex items-center justify-center mx-auto mb-3`}
-                style={{ boxShadow: `0 4px 20px ${section.glow}` }}>
+                style={{ boxShadow: `0 6px 24px ${section.glow}` }}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
               </div>
-              <p className="text-gray-400 font-bold text-xs font-mono tracking-widest">{section.label}</p>
+              <p className="text-white font-black text-xs font-mono tracking-widest">{section.label}</p>
             </motion.button>
           );
         })}
       </div>
 
-      {/* CALENDAR — full width */}
-      <div className="px-3 mt-2">
+      {/* ── CALENDAR — full width ── */}
+      <div className="px-4 mt-3">
         {(() => {
           const section = SECTIONS[4];
           const Icon = section.icon;
-          const badge = badges[section.id];
+          const calLabel = confirmedGigs.length > 0
+            ? `${confirmedGigs.length} confirmed show${confirmedGigs.length > 1 ? 's' : ''}`
+            : 'No shows booked yet';
           return (
             <motion.button
-              whileTap={{ scale: 0.97 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className="relative w-full bg-[#111] border border-white/5 rounded-2xl p-4 flex items-center gap-4 active:opacity-70 transition-all"
+              className="relative w-full bg-[#0f0f0f] rounded-2xl p-4 flex items-center gap-4 active:opacity-70 transition-all"
               style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
             >
-              {badge > 0 && (
-                <span className="absolute top-2.5 right-3 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center">
-                  {badge}
-                </span>
-              )}
               <div className={`w-14 h-14 rounded-2xl ${section.bg} text-black flex items-center justify-center flex-shrink-0`}
-                style={{ boxShadow: `0 4px 20px ${section.glow}` }}>
+                style={{ boxShadow: `0 6px 24px ${section.glow}` }}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
               </div>
               <div className="text-left">
-                <p className="text-gray-300 font-bold text-sm font-mono tracking-widest">{section.label}</p>
-                <p className="text-gray-600 text-xs mt-0.5">Confirmed shows & upcoming dates</p>
+                <p className="text-white font-black text-sm font-mono tracking-widest">{section.label}</p>
+                <p className="text-gray-600 text-xs mt-0.5">{calLabel}</p>
               </div>
             </motion.button>
           );
