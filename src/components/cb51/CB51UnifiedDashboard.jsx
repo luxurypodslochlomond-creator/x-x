@@ -5,7 +5,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import CB51GigsTab from './CB51GigsTab';
 import { CB51InboxTab, CB51TasksTab, CB51FinanceTab, CB51CalendarTab } from './CB51TabsContent';
-import CB51TestPush from './CB51TestPush';
 
 const SECTIONS = [
   { id: 'gigs',     label: 'GIGS',     icon: Zap,         border: 'border-cyan-500',   bg: 'bg-cyan-500',    text: 'text-cyan-400',   glow: 'rgba(6,182,212,0.12)'   },
@@ -351,9 +350,6 @@ export default function CB51UnifiedDashboard({ artistId }) {
     <div className="pt-2 pb-8">
       {/* LIVE STATS STRIP */}
       <LiveStatsStrip artistId={artistId} />
-
-      {/* TEST PUSH NOTIFICATION */}
-      <CB51TestPush artistId={artistId} />
 
       {/* PENDING GIG ALERT — shows when there's an offer waiting */}
       {topPendingGig && (
