@@ -361,10 +361,10 @@ export default function CB51UnifiedDashboard({ artistId }) {
   const topPendingGig = pendingGigs[0] || null;
 
   return (
-    <div className="pb-8">
+    <div className="pb-10">
 
-      {/* ── HERO CARD — next gig or offer waiting ── */}
-      <div className="px-4 pt-2 pb-4">
+      {/* ── HERO CARD ── */}
+      <div className="px-4 pt-3 pb-4">
         {topPendingGig ? (
           <PendingGigAlert
             gig={topPendingGig}
@@ -375,124 +375,135 @@ export default function CB51UnifiedDashboard({ artistId }) {
           />
         ) : nextGig ? (
           <motion.button
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setActiveSection('calendar')}
-            className="w-full text-left bg-[#0d1a0d] border border-green-500/20 rounded-2xl p-5 active:opacity-80 transition-all"
-            style={{ WebkitTapHighlightColor: 'transparent' }}
+            className="w-full text-left rounded-2xl p-5 overflow-hidden relative active:opacity-90 transition-all"
+            style={{
+              background: 'linear-gradient(135deg, #0f1f1a 0%, #0a1510 50%, #050f0a 100%)',
+              border: '1px solid rgba(16,185,129,0.25)',
+              boxShadow: '0 0 40px rgba(16,185,129,0.08), inset 0 1px 0 rgba(255,255,255,0.04)',
+              WebkitTapHighlightColor: 'transparent'
+            }}
           >
-            <p className="text-green-400 font-mono text-[10px] font-black tracking-widest mb-2">NEXT SHOW</p>
-            <p className="text-white font-black text-xl leading-tight">{nextGig.venue}</p>
-            {nextGig.city && <p className="text-gray-400 text-sm mt-0.5">{nextGig.city}</p>}
-            <div className="flex items-end justify-between mt-3">
+            {/* Subtle glow top-right */}
+            <div className="absolute top-0 right-0 w-32 h-32 rounded-full pointer-events-none"
+              style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
+            
+            <p className="text-emerald-400/70 font-mono text-[10px] font-black tracking-[0.2em] mb-3 uppercase">Next Show</p>
+            <p className="text-white font-black text-2xl leading-tight tracking-tight">{nextGig.venue}</p>
+            {nextGig.city && <p className="text-gray-400 text-sm mt-1">{nextGig.city}</p>}
+            
+            <div className="flex items-end justify-between mt-4">
               <div>
-                {nextGig.date_start && <p className="text-gray-500 text-xs">{new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}</p>}
-                {nextGig.fee && <p className="text-green-400 font-black text-base mt-1">£{Number(nextGig.fee).toLocaleString()}</p>}
+                {nextGig.date_start && (
+                  <p className="text-gray-500 text-xs">
+                    {new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
+                  </p>
+                )}
+                {nextGig.fee && (
+                  <p className="text-emerald-400 font-black text-xl mt-1.5 tracking-tight">
+                    £{Number(nextGig.fee).toLocaleString()}
+                  </p>
+                )}
               </div>
               <div className="text-right">
-                <p className="text-white font-black text-4xl leading-none">{daysUntil}</p>
-                <p className="text-gray-500 text-xs font-mono">days away</p>
+                <p className="text-white font-black leading-none" style={{ fontSize: 56, lineHeight: 1 }}>{daysUntil}</p>
+                <p className="text-gray-500 text-xs font-mono tracking-widest mt-1">DAYS</p>
               </div>
             </div>
           </motion.button>
         ) : (
           <motion.div
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full bg-[#0a0a0a] border border-white/5 rounded-2xl p-5"
+            className="w-full rounded-2xl p-5"
+            style={{
+              background: 'linear-gradient(135deg, #0d0d0d 0%, #080808 100%)',
+              border: '1px solid rgba(255,255,255,0.06)',
+            }}
           >
-            <p className="text-gray-600 font-mono text-[10px] tracking-widest mb-1">STATUS</p>
-            <p className="text-white font-black text-lg">No upcoming shows</p>
-            <p className="text-gray-600 text-sm mt-1">Add a gig offer to get started</p>
+            <p className="text-gray-600 font-mono text-[10px] tracking-[0.2em] mb-1 uppercase">Status</p>
+            <p className="text-white font-bold text-lg">No upcoming shows</p>
+            <p className="text-gray-600 text-sm mt-1">Paste a gig offer to get started</p>
           </motion.div>
         )}
 
         {pendingGigs.length > 1 && (
-          <p className="text-center text-amber-400 font-black font-mono text-[10px] tracking-widest mt-2">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center text-amber-400 font-black font-mono text-[10px] tracking-[0.15em] mt-3"
+          >
             +{pendingGigs.length - 1} MORE OFFER{pendingGigs.length - 1 > 1 ? 'S' : ''} WAITING
-          </p>
+          </motion.p>
         )}
       </div>
 
-      {/* ── QUICK STATS ROW (only if there's data worth showing) ── */}
-      {(urgentTasks > 0 || pendingGigsForBadge.length > 0) && (
-        <div className="px-4 mb-4 flex gap-2">
-          {pendingGigsForBadge.length > 0 && (
-            <div className="flex-1 bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-3 py-2.5 text-center">
-              <p className="text-cyan-400 font-black text-lg leading-none">{pendingGigsForBadge.length}</p>
-              <p className="text-gray-500 font-mono text-[9px] tracking-widest mt-0.5">OFFER{pendingGigsForBadge.length > 1 ? 'S' : ''}</p>
-            </div>
-          )}
-          {urgentTasks > 0 && (
-            <div className="flex-1 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2.5 text-center">
-              <p className="text-red-400 font-black text-lg leading-none">{urgentTasks}</p>
-              <p className="text-gray-500 font-mono text-[9px] tracking-widest mt-0.5">URGENT</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* ── NAV GRID — 2×2 ── */}
-      <div className="px-4 grid grid-cols-2 gap-3">
-        {SECTIONS.slice(0, 4).map((section) => {
+      {/* ── NAV LIST — clean rows ── */}
+      <div className="px-4 space-y-2">
+        {SECTIONS.map((section) => {
           const Icon = section.icon;
           const badge = badges[section.id];
+          
+          const rowColors = {
+            gigs:     { dot: '#06b6d4', bg: 'rgba(6,182,212,0.08)',    border: 'rgba(6,182,212,0.15)'   },
+            inbox:    { dot: '#f97316', bg: 'rgba(249,115,22,0.08)',   border: 'rgba(249,115,22,0.15)'  },
+            tasks:    { dot: '#ef4444', bg: 'rgba(239,68,68,0.08)',    border: 'rgba(239,68,68,0.15)'   },
+            finance:  { dot: '#10b981', bg: 'rgba(16,185,129,0.08)',   border: 'rgba(16,185,129,0.15)'  },
+            calendar: { dot: '#f59e0b', bg: 'rgba(245,158,11,0.08)',   border: 'rgba(245,158,11,0.15)'  },
+          };
+          const c = rowColors[section.id];
+
           return (
             <motion.button
               key={section.id}
-              whileTap={{ scale: 0.94 }}
-              onClick={() => {
-                setActiveSection(section.id);
-                if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
-              }}
-              className="relative bg-[#0f0f0f] rounded-2xl py-6 px-4 text-center active:opacity-70 transition-all"
-              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
-            >
-              {badge > 0 && (
-                <span className="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center leading-none">
-                  {badge > 9 ? '9+' : badge}
-                </span>
-              )}
-              <div className={`w-14 h-14 rounded-2xl ${section.bg} text-black flex items-center justify-center mx-auto mb-3`}
-                style={{ boxShadow: `0 6px 24px ${section.glow}` }}>
-                <Icon className="w-7 h-7" strokeWidth={2.5} />
-              </div>
-              <p className="text-white font-black text-xs font-mono tracking-widest">{section.label}</p>
-            </motion.button>
-          );
-        })}
-      </div>
-
-      {/* ── CALENDAR — full width ── */}
-      <div className="px-4 mt-3">
-        {(() => {
-          const section = SECTIONS[4];
-          const Icon = section.icon;
-          const calLabel = confirmedGigs.length > 0
-            ? `${confirmedGigs.length} confirmed show${confirmedGigs.length > 1 ? 's' : ''}`
-            : 'No shows booked yet';
-          return (
-            <motion.button
               whileTap={{ scale: 0.98 }}
               onClick={() => {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className="relative w-full bg-[#0f0f0f] rounded-2xl p-4 flex items-center gap-4 active:opacity-70 transition-all"
-              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+              className="w-full flex items-center gap-4 rounded-2xl px-4 py-4 text-left transition-all active:opacity-80"
+              style={{
+                background: c.bg,
+                border: `1px solid ${c.border}`,
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation'
+              }}
             >
-              <div className={`w-14 h-14 rounded-2xl ${section.bg} text-black flex items-center justify-center flex-shrink-0`}
-                style={{ boxShadow: `0 6px 24px ${section.glow}` }}>
-                <Icon className="w-7 h-7" strokeWidth={2.5} />
+              {/* Icon dot */}
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: `${c.dot}18`, border: `1px solid ${c.dot}30` }}>
+                <Icon className="w-5 h-5" style={{ color: c.dot }} strokeWidth={2} />
               </div>
-              <div className="text-left">
-                <p className="text-white font-black text-sm font-mono tracking-widest">{section.label}</p>
-                <p className="text-gray-600 text-xs mt-0.5">{calLabel}</p>
+
+              {/* Label */}
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-bold text-sm tracking-wide">{section.label}</p>
+                <p className="text-gray-600 text-xs mt-0.5">
+                  {section.id === 'gigs' && (pendingGigsForBadge.length > 0 ? `${pendingGigsForBadge.length} offer${pendingGigsForBadge.length > 1 ? 's' : ''} waiting` : 'All clear')}
+                  {section.id === 'inbox' && (badges.inbox > 0 ? `${badges.inbox} unread` : 'No new messages')}
+                  {section.id === 'tasks' && (badges.tasks > 0 ? `${badges.tasks} open` : 'All done')}
+                  {section.id === 'finance' && 'Income & invoices'}
+                  {section.id === 'calendar' && (confirmedGigs.length > 0 ? `${confirmedGigs.length} confirmed show${confirmedGigs.length > 1 ? 's' : ''}` : 'No shows booked')}
+                </p>
               </div>
+
+              {/* Badge or arrow */}
+              {badge > 0 ? (
+                <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-black flex-shrink-0 text-white"
+                  style={{ background: c.dot }}>
+                  {badge > 9 ? '9+' : badge}
+                </span>
+              ) : (
+                <svg className="w-4 h-4 text-gray-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              )}
             </motion.button>
           );
-        })()}
+        })}
       </div>
     </div>
   );
