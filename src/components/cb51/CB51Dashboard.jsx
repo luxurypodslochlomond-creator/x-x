@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { ArrowLeft as Back, Loader2, ChevronDown as Chevron } from 'lucide-react';
+import { ArrowLeft as Back, Loader2, ChevronDown as Chevron, Radio, Mail, CheckSquare, DollarSign, CalendarDays } from 'lucide-react';
 import CB51GigsTab from './CB51GigsTab';
 import { CB51InboxTab, CB51TasksTab, CB51FinanceTab, CB51CalendarTab } from './CB51TabsContent';
 
@@ -146,11 +146,11 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
 
 // ─── MAIN DASHBOARD ──────────────────────────────────────────────────────────
 const SECTIONS = [
-  { id: 'gigs',     label: 'Gigs',     color: '#06b6d4' },
-  { id: 'inbox',    label: 'Inbox',    color: '#f97316' },
-  { id: 'tasks',    label: 'Tasks',    color: '#ef4444' },
-  { id: 'finance',  label: 'Finance',  color: '#10b981' },
-  { id: 'calendar', label: 'Calendar', color: '#f59e0b' },
+  { id: 'gigs',     label: 'Gigs',     color: '#06b6d4', Icon: Radio },
+  { id: 'inbox',    label: 'Inbox',    color: '#f97316', Icon: Mail },
+  { id: 'tasks',    label: 'Tasks',    color: '#ef4444', Icon: CheckSquare },
+  { id: 'finance',  label: 'Finance',  color: '#10b981', Icon: DollarSign },
+  { id: 'calendar', label: 'Cal',      color: '#f59e0b', Icon: CalendarDays },
 ];
 
 export default function CB51Dashboard({ artistId }) {
@@ -343,29 +343,29 @@ export default function CB51Dashboard({ artistId }) {
         ))}
 
         {upcoming.length <= 1 && openTasks.filter(t => t.priority === 'urgent' || t.priority === 'high').length === 0 && (
-          <p className="text-gray-800 text-sm py-6">You're clear.</p>
+          <p className="text-gray-800 text-sm py-4 font-mono">Nothing pressing right now.</p>
         )}
       </div>
 
-      {/* ── STATS ROW ── */}
-      {(confirmed.length > 0 || openTasks.length > 0) && (
-        <div className="flex px-6 pt-6 gap-6">
-          {confirmed.length > 0 && (
-            <button onClick={() => setActive('calendar')} className="text-left" style={{ WebkitTapHighlightColor: 'transparent' }}>
-              <p className="text-white font-black text-2xl">{upcoming.length}</p>
-              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-0.5">UPCOMING</p>
+      {/* ── QUICK STATS — only show if there's something to say ── */}
+      {(upcoming.length > 0 || openTasks.length > 0 || pending.length > 0) && (
+        <div className="flex px-6 pt-5 pb-2 gap-8">
+          {upcoming.length > 0 && (
+            <button onClick={() => setActive('calendar')} className="text-left active:opacity-50" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <p className="text-white font-black text-3xl leading-none">{upcoming.length}</p>
+              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-1">SHOWS</p>
             </button>
           )}
           {openTasks.length > 0 && (
-            <button onClick={() => setActive('tasks')} className="text-left" style={{ WebkitTapHighlightColor: 'transparent' }}>
-              <p className="text-white font-black text-2xl">{openTasks.length}</p>
-              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-0.5">TASKS</p>
+            <button onClick={() => setActive('tasks')} className="text-left active:opacity-50" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <p className="text-white font-black text-3xl leading-none">{openTasks.length}</p>
+              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-1">TASKS</p>
             </button>
           )}
           {pending.length > 0 && (
-            <button onClick={() => setActive('gigs')} className="text-left" style={{ WebkitTapHighlightColor: 'transparent' }}>
-              <p className="font-black text-2xl" style={{ color: '#06b6d4' }}>{pending.length}</p>
-              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-0.5">OFFERS</p>
+            <button onClick={() => setActive('gigs')} className="text-left active:opacity-50" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <p className="font-black text-3xl leading-none" style={{ color: '#06b6d4' }}>{pending.length}</p>
+              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-1">OFFERS</p>
             </button>
           )}
         </div>
@@ -373,27 +373,34 @@ export default function CB51Dashboard({ artistId }) {
 
       {/* ── NAV BAR ── */}
       <div className="fixed bottom-0 left-0 right-0"
-        style={{ background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(255,255,255,0.06)', zIndex: 10 }}>
+        style={{ background: 'rgba(0,0,0,0.97)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(255,255,255,0.06)', zIndex: 10, paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="flex">
           {SECTIONS.map(sec => {
             const b = badges[sec.id];
+            const active = b > 0;
             return (
               <button
                 key={sec.id}
                 onClick={() => setActive(sec.id)}
-                className="relative flex-1 flex flex-col items-center gap-1 py-3 transition-all active:opacity-50"
+                className="relative flex-1 flex flex-col items-center gap-1 py-3 active:opacity-40 transition-opacity"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
-                {b > 0 && (
-                  <span
-                    className="absolute top-2 right-1/4 w-4 h-4 rounded-full text-black text-[8px] font-black flex items-center justify-center"
-                    style={{ background: sec.color }}
-                  >
-                    {b > 9 ? '9+' : b}
-                  </span>
-                )}
-                <span className="text-[11px] font-semibold tracking-wide"
-                  style={{ color: b > 0 ? sec.color : 'rgba(255,255,255,0.25)' }}>
+                <div className="relative">
+                  <sec.Icon
+                    className="w-5 h-5"
+                    style={{ color: active ? sec.color : 'rgba(255,255,255,0.2)' }}
+                  />
+                  {b > 0 && (
+                    <span
+                      className="absolute -top-1 -right-1.5 w-3.5 h-3.5 rounded-full text-black text-[8px] font-black flex items-center justify-center"
+                      style={{ background: sec.color }}
+                    >
+                      {b > 9 ? '9' : b}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[10px] font-semibold"
+                  style={{ color: active ? sec.color : 'rgba(255,255,255,0.2)' }}>
                   {sec.label}
                 </span>
               </button>
