@@ -63,52 +63,95 @@ export default function CB51Page() {
     );
   }
 
-  // NOT LOGGED IN
+  // NOT LOGGED IN — landing
   if (!user && !pinVerified) {
     return (
-      <div className="min-h-screen bg-black flex flex-col justify-between px-8 py-16">
-        {/* TOP — branding */}
-        <div />
+      <div className="min-h-screen bg-black flex flex-col" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
 
-        {/* MIDDLE — identity */}
-        <div className="flex flex-col items-center text-center">
-          {/* Signal rings — hand-drawn feel */}
-          <div className="relative mb-8">
-            <div className="w-20 h-20 rounded-full border-2 border-cyan-500/80 flex items-center justify-center">
-              <div className="w-13 h-13 rounded-full border border-cyan-500/40 flex items-center justify-center" style={{width:52,height:52}}>
-                <Radio className="w-7 h-7 text-cyan-400" />
-              </div>
-            </div>
-            {/* Pulse ring */}
-            <motion.div
-              className="absolute inset-0 rounded-full border border-cyan-500/20"
-              animate={{ scale: [1, 1.5, 1.5], opacity: [0.6, 0, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut' }}
-            />
+        {/* ── TOP BAR ── */}
+        <div className="flex items-center justify-between px-6 pt-10 pb-2">
+          <div className="flex items-center gap-2">
+            <Radio className="w-4 h-4 text-cyan-400" />
+            <span className="text-white font-black tracking-[0.25em] font-mono text-sm">CB51</span>
           </div>
-
-          <h1 className="text-white font-black text-4xl tracking-widest font-mono mb-1">CB51</h1>
-          <p className="text-cyan-400/60 font-mono text-xs tracking-widest uppercase mb-6">CitizenBand51</p>
-
-          <p className="text-gray-300 text-lg font-bold mb-2 leading-snug">
-            Your AI co-manager.<br />Built for real musicians.
-          </p>
-          <p className="text-gray-600 text-sm mb-10">
-            Gig offers. Band votes. Finance. All in one place.
-          </p>
-
           <button
             onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
-            className="w-full max-w-xs bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-black font-black py-4 rounded-xl text-base tracking-wider font-mono transition-all"
-            style={{ boxShadow: '0 0 30px rgba(6,182,212,0.25)' }}
+            className="text-cyan-400 font-bold text-sm active:opacity-50"
           >
-            GET STARTED — FREE
+            Sign in
           </button>
-          <p className="text-gray-700 text-xs mt-4 font-mono">No label required. No bullshit.</p>
         </div>
 
-        {/* BOTTOM — legal small */}
-        <p className="text-center text-gray-800 text-xs font-mono">CB51 · Avoid the Noise</p>
+        {/* ── HERO — the message ── */}
+        <div className="flex-1 flex flex-col justify-center px-6 pt-8 pb-6">
+
+          {/* The one line that matters */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-gray-600 text-xs font-mono tracking-[0.3em] uppercase mb-5">For artists who are serious</p>
+            <h1 className="text-white font-black leading-[0.92] mb-6"
+              style={{ fontSize: 'clamp(42px, 11vw, 72px)', letterSpacing: '-0.02em' }}>
+              Avoid<br />the<br />
+              <span style={{ color: '#06b6d4' }}>Noise.</span>
+            </h1>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-gray-500 text-base leading-relaxed mb-10 max-w-sm"
+          >
+            Every gig offer, band vote, invoice and task — handled in one place. 
+            So you can focus on the music.
+          </motion.p>
+
+          {/* ── PROOF LINES — real signals ── */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-col gap-3 mb-10"
+          >
+            {[
+              { label: 'Email comes in', detail: 'Gig offer parsed in seconds' },
+              { label: 'Band needs to vote', detail: 'Push sent automatically' },
+              { label: 'Fee agreed', detail: 'Invoice ready to send' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" style={{ background: '#06b6d4' }} />
+                <div>
+                  <span className="text-white text-sm font-semibold">{item.label} </span>
+                  <span className="text-gray-600 text-sm">→ {item.detail}</span>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* ── CTA ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <button
+              onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
+              className="w-full active:scale-95 text-black font-black py-4 text-base tracking-wider font-mono transition-all rounded-2xl"
+              style={{ background: '#06b6d4', boxShadow: '0 0 40px rgba(6,182,212,0.2)' }}
+            >
+              GET STARTED — FREE
+            </button>
+            <p className="text-center text-gray-700 text-xs mt-3 font-mono">No label. No contract. No bullshit.</p>
+          </motion.div>
+        </div>
+
+        {/* ── BOTTOM — quiet credibility ── */}
+        <div className="px-6 pb-10 pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+          <p className="text-gray-800 text-xs font-mono text-center">CB51 · CitizenBand51 · Avoid the Noise</p>
+        </div>
       </div>
     );
   }
