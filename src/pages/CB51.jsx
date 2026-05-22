@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Plus, Radio } from 'lucide-react';
+import { Plus, Radio, Bell } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 import CB51UnifiedDashboard from '@/components/cb51/CB51UnifiedDashboard';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
 import { useCB51NavBadges } from '@/components/cb51/CB51NavBadge';
+const CB51TestPush = React.lazy(() => import('@/components/cb51/CB51TestPush'));
 
 const CB51BadgeManager = React.lazy(() => import('@/components/cb51/CB51BadgeManager'));
 const CB51BackgroundSync = React.lazy(() => import('@/components/cb51/CB51BackgroundSync'));
@@ -21,6 +22,7 @@ export default function CB51Page() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeArtistId, setActiveArtistId] = useState(null);
+  const [showTestPush, setShowTestPush] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -124,10 +126,26 @@ export default function CB51Page() {
         <div className="min-h-screen bg-black text-white flex flex-col">
           {/* ── HEADER ── */}
           <div className="px-5 pt-6 pb-3">
-            <div className="flex items-center gap-2.5">
-              <Radio className="w-6 h-6 text-cyan-400" />
-              <span className="text-xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <Radio className="w-6 h-6 text-cyan-400" />
+                <span className="text-xl font-black text-cyan-400 tracking-widest font-mono">CB51</span>
+              </div>
+              <button
+                onClick={() => setShowTestPush(v => !v)}
+                className="p-2 rounded-xl text-gray-600 hover:text-cyan-400 transition-colors"
+                title="Test push notifications"
+              >
+                <Bell className="w-5 h-5" />
+              </button>
             </div>
+            {showTestPush && (
+              <Suspense fallback={null}>
+                <div className="mt-3">
+                  <CB51TestPush artistId={currentArtistId} />
+                </div>
+              </Suspense>
+            )}
           </div>
 
           {/* ── ARTIST SELECTOR ── */}

@@ -348,9 +348,6 @@ export default function CB51UnifiedDashboard({ artistId }) {
 
   return (
     <div className="pt-2 pb-8">
-      {/* LIVE STATS STRIP */}
-      <LiveStatsStrip artistId={artistId} />
-
       {/* PENDING GIG ALERT — shows when there's an offer waiting */}
       {topPendingGig && (
         <PendingGigAlert
@@ -384,19 +381,19 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className={`relative bg-gray-950 border-2 ${section.border} rounded-2xl p-5 text-center active:opacity-80 transition-all`}
-              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', boxShadow: `0 0 20px ${section.glow || 'rgba(6,182,212,0.06)'}` }}
+              className="relative bg-[#111] rounded-2xl p-5 text-center active:opacity-70 transition-all border border-white/5"
+              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
             >
               {badge > 0 && (
                 <span className="absolute top-2.5 right-2.5 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center leading-none">
                   {badge > 9 ? '9+' : badge}
                 </span>
               )}
-              <div className={`w-14 h-14 rounded-xl ${section.bg} text-black flex items-center justify-center mx-auto mb-3`}
-                style={{ boxShadow: `0 4px 15px ${section.glow || 'rgba(6,182,212,0.15)'}` }}>
+              <div className={`w-14 h-14 rounded-2xl ${section.bg} text-black flex items-center justify-center mx-auto mb-3`}
+                style={{ boxShadow: `0 4px 20px ${section.glow}` }}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
               </div>
-              <p className="text-white font-black text-xs font-mono tracking-widest">{section.label}</p>
+              <p className="text-gray-400 font-bold text-xs font-mono tracking-widest">{section.label}</p>
             </motion.button>
           );
         })}
@@ -415,20 +412,20 @@ export default function CB51UnifiedDashboard({ artistId }) {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className={`relative w-full bg-gray-950 border-2 ${section.border} rounded-2xl p-4 flex items-center gap-4 active:opacity-80 transition-all`}
-              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', boxShadow: `0 0 20px ${section.glow || 'rgba(245,158,11,0.06)'}` }}
+              className="relative w-full bg-[#111] border border-white/5 rounded-2xl p-4 flex items-center gap-4 active:opacity-70 transition-all"
+              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
             >
               {badge > 0 && (
                 <span className="absolute top-2.5 right-3 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center">
                   {badge}
                 </span>
               )}
-              <div className={`w-14 h-14 rounded-xl ${section.bg} text-black flex items-center justify-center flex-shrink-0`}
-                style={{ boxShadow: `0 4px 15px ${section.glow || 'rgba(245,158,11,0.15)'}` }}>
+              <div className={`w-14 h-14 rounded-2xl ${section.bg} text-black flex items-center justify-center flex-shrink-0`}
+                style={{ boxShadow: `0 4px 20px ${section.glow}` }}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
               </div>
               <div className="text-left">
-                <p className="text-white font-black text-sm font-mono tracking-widest">{section.label}</p>
+                <p className="text-gray-300 font-bold text-sm font-mono tracking-widest">{section.label}</p>
                 <p className="text-gray-600 text-xs mt-0.5">Confirmed shows & upcoming dates</p>
               </div>
             </motion.button>
