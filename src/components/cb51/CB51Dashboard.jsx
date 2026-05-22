@@ -153,7 +153,7 @@ const SECTIONS = [
   { id: 'calendar', label: 'Cal',      color: '#f59e0b', Icon: CalendarDays },
 ];
 
-export default function CB51Dashboard({ artistId }) {
+export default function CB51Dashboard({ artistId, artistName }) {
   const [active, setActive] = useState(null);
   const [confirming, setConfirming] = useState(false);
   const qc = useQueryClient();
@@ -239,7 +239,7 @@ export default function CB51Dashboard({ artistId }) {
 
   // ── Time-aware greeting ──
   const hour = now.getHours();
-  const greeting = hour < 12 ? 'Morning.' : hour < 17 ? 'Afternoon.' : 'Evening.';
+  const greeting = hour < 5 ? 'Still up?' : hour < 12 ? 'Morning.' : hour < 17 ? 'Afternoon.' : hour < 21 ? 'Evening.' : 'Late one.';
 
   // ── Home ──
   return (
@@ -247,9 +247,21 @@ export default function CB51Dashboard({ artistId }) {
 
       {/* ── BRIEFING HEADER ── */}
       <div className="px-6 pt-4 pb-2 flex items-baseline justify-between">
-        <span className="text-gray-700 text-xs font-mono tracking-[0.3em] uppercase">{greeting}</span>
+        <div>
+          <span className="text-gray-700 text-xs font-mono tracking-[0.3em] uppercase">{greeting}</span>
+          {pending.length === 0 && upcoming.length === 0 && openTasks.length === 0 && (
+            <p className="text-gray-800 text-xs mt-1 font-mono">Inbox zero. Schedule clear.</p>
+          )}
+        </div>
         {pending.length > 0 && (
-          <span className="text-[10px] font-mono text-cyan-500 tracking-widest animate-pulse">{pending.length} OFFER{pending.length > 1 ? 'S' : ''} IN</span>
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-[10px] font-mono text-cyan-500 tracking-widest"
+            style={{ animation: 'pulse 2s infinite' }}
+          >
+            {pending.length} OFFER{pending.length > 1 ? 'S' : ''} IN
+          </motion.span>
         )}
       </div>
 
@@ -303,8 +315,8 @@ export default function CB51Dashboard({ artistId }) {
         ) : (
           <div className="py-6">
             <p className="text-gray-700 text-[10px] font-mono tracking-[0.35em] mb-3">NEXT SHOW</p>
-            <p className="text-gray-600 font-black text-2xl">Nothing booked.</p>
-            <p className="text-gray-700 text-xs mt-1">Forward a gig offer to get started.</p>
+            <p className="text-gray-600 font-black text-2xl">Nothing booked yet.</p>
+            <p className="text-gray-700 text-xs mt-2 leading-relaxed">Forward a gig offer email to get started.<br />CB51 does the rest.</p>
           </div>
         )}
       </button>
@@ -358,7 +370,10 @@ export default function CB51Dashboard({ artistId }) {
         ))}
 
         {upcoming.length <= 1 && openTasks.filter(t => t.priority === 'urgent' || t.priority === 'high').length === 0 && !pending.length && (
-          <p className="text-gray-800 text-sm py-5 font-mono">All clear.</p>
+          <div className="py-5">
+            <p className="text-gray-800 text-sm font-mono">All clear.</p>
+            <p className="text-gray-900 text-xs mt-1">Nothing urgent. You're on top of it.</p>
+          </div>
         )}
       </div>
 
@@ -388,11 +403,11 @@ export default function CB51Dashboard({ artistId }) {
 
       {/* ── NAV BAR ── */}
       <div className="fixed bottom-0 left-0 right-0"
-        style={{ background: 'rgba(0,0,0,0.97)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(255,255,255,0.06)', zIndex: 10, paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        style={{ background: 'rgba(0,0,0,0.98)', backdropFilter: 'blur(24px)', borderTop: '1px solid rgba(255,255,255,0.06)', zIndex: 10, paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="flex">
           {SECTIONS.map(sec => {
             const b = badges[sec.id];
-            const active = b > 0;
+            const hasAlert = b > 0;
             return (
               <button
                 key={sec.id}
@@ -400,10 +415,15 @@ export default function CB51Dashboard({ artistId }) {
                 className="relative flex-1 flex flex-col items-center gap-1 py-3 active:opacity-40 transition-opacity"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
+                {/* Alert line at top */}
+                {hasAlert && (
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-[2px] rounded-full"
+                    style={{ background: sec.color, boxShadow: `0 0 8px ${sec.color}` }} />
+                )}
                 <div className="relative">
                   <sec.Icon
                     className="w-5 h-5"
-                    style={{ color: active ? sec.color : 'rgba(255,255,255,0.2)' }}
+                    style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.18)' }}
                   />
                   {b > 0 && (
                     <span
@@ -415,7 +435,7 @@ export default function CB51Dashboard({ artistId }) {
                   )}
                 </div>
                 <span className="text-[10px] font-semibold"
-                  style={{ color: active ? sec.color : 'rgba(255,255,255,0.2)' }}>
+                  style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.18)' }}>
                   {sec.label}
                 </span>
               </button>

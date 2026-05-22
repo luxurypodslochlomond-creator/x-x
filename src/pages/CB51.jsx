@@ -85,7 +85,6 @@ export default function CB51Page() {
         {/* ── HERO — the message ── */}
         <div className="flex-1 flex flex-col justify-center px-6 pt-8 pb-6">
 
-          {/* The one line that matters */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -102,28 +101,28 @@ export default function CB51Page() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-gray-500 text-base leading-relaxed mb-10 max-w-sm"
+            transition={{ delay: 0.25 }}
+            className="text-gray-400 text-base leading-relaxed mb-8 max-w-sm"
           >
-            Gig offers land in your inbox. You deal with them here instead.
-            That's basically it.
+            Your gig pipeline. Your band. Your money.<br />
+            One place. No chaos.
           </motion.p>
 
           {/* ── WHAT IT ACTUALLY DOES ── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-col gap-4 mb-10"
+            transition={{ delay: 0.45 }}
+            className="flex flex-col gap-3 mb-10"
           >
             {[
-              'Reads your gig emails and pulls out the details',
-              'Lets the band vote without a WhatsApp thread',
-              'Tracks what you\'re owed and what\'s outstanding',
-            ].map((line, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 rounded-full mt-[7px] flex-shrink-0" style={{ background: '#06b6d4' }} />
-                <p className="text-gray-400 text-sm leading-snug">{line}</p>
+              { text: 'Reads gig emails — pulls out every detail automatically', color: '#06b6d4' },
+              { text: 'Band votes on offers without a single WhatsApp', color: '#10b981' },
+              { text: 'Tracks fees, outstanding payments, the lot', color: '#f59e0b' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-3 py-2 px-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div className="w-1.5 h-1.5 rounded-full mt-[7px] flex-shrink-0" style={{ background: item.color }} />
+                <p className="text-gray-400 text-sm leading-snug">{item.text}</p>
               </div>
             ))}
           </motion.div>
@@ -133,15 +132,21 @@ export default function CB51Page() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
+            className="space-y-3"
           >
             <button
               onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
               className="w-full active:scale-95 text-black font-black py-4 text-base tracking-wider font-mono transition-all rounded-2xl"
-              style={{ background: '#06b6d4', boxShadow: '0 0 40px rgba(6,182,212,0.2)' }}
+              style={{ background: '#06b6d4', boxShadow: '0 0 40px rgba(6,182,212,0.25)' }}
             >
               GET STARTED — FREE
             </button>
-            <p className="text-center text-gray-700 text-xs mt-3">It's free. Just try it.</p>
+            <button
+              onClick={() => window.location.href = '/CB51How'}
+              className="w-full active:scale-95 text-gray-500 font-bold py-3 text-sm transition-all"
+            >
+              See how it works →
+            </button>
           </motion.div>
         </div>
 
@@ -246,7 +251,7 @@ export default function CB51Page() {
                 animate={{ opacity: 1 }}
                 className="h-full"
               >
-                <CB51Dashboard artistId={currentArtistId} />
+                <CB51Dashboard artistId={currentArtistId} artistName={artists.find(a => a.id === currentArtistId)?.name} />
               </motion.div>
             ) : (
               <motion.div
