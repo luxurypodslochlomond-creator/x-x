@@ -7,7 +7,7 @@ import { Plus, Radio, Bell } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
-import CB51UnifiedDashboard from '@/components/cb51/CB51UnifiedDashboard';
+import CB51Dashboard from '@/components/cb51/CB51Dashboard';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
 import { useCB51NavBadges } from '@/components/cb51/CB51NavBadge';
 const CB51TestPush = React.lazy(() => import('@/components/cb51/CB51TestPush'));
@@ -206,7 +206,7 @@ export default function CB51Page() {
                 animate={{ opacity: 1 }}
                 className="h-full"
               >
-                <CB51UnifiedDashboard artistId={currentArtistId} />
+                <CB51Dashboard artistId={currentArtistId} />
               </motion.div>
             ) : (
               <motion.div
