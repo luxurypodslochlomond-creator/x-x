@@ -360,12 +360,28 @@ export default function CB51UnifiedDashboard({ artistId }) {
   // Show first pending gig as alert card
   const topPendingGig = pendingGigs[0] || null;
 
+  const sectionColors = {
+    gigs:     '#06b6d4',
+    inbox:    '#f97316',
+    tasks:    '#ef4444',
+    finance:  '#10b981',
+    calendar: '#f59e0b',
+  };
+
+  const sectionSubtitles = {
+    gigs:     pendingGigsForBadge.length > 0 ? `${pendingGigsForBadge.length} offer${pendingGigsForBadge.length > 1 ? 's' : ''} waiting` : 'No new offers',
+    inbox:    badges.inbox > 0 ? `${badges.inbox} unread` : 'Clear',
+    tasks:    badges.tasks > 0 ? `${badges.tasks} open` : 'All clear',
+    finance:  'Income & invoices',
+    calendar: confirmedGigs.length > 0 ? `${confirmedGigs.length} show${confirmedGigs.length > 1 ? 's' : ''}` : 'No shows',
+  };
+
   return (
     <div className="pb-10">
 
-      {/* ── HERO CARD ── */}
-      <div className="px-4 pt-3 pb-4">
-        {topPendingGig ? (
+      {/* ── PENDING GIG — full bleed urgent card ── */}
+      {topPendingGig && (
+        <div className="px-4 pt-3 pb-2">
           <PendingGigAlert
             gig={topPendingGig}
             onConfirm={handleConfirm}
@@ -373,134 +389,117 @@ export default function CB51UnifiedDashboard({ artistId }) {
             confirming={confirming}
             artistId={artistId}
           />
-        ) : nextGig ? (
-          <motion.button
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setActiveSection('calendar')}
-            className="w-full text-left rounded-2xl p-5 overflow-hidden relative active:opacity-90 transition-all"
-            style={{
-              background: 'linear-gradient(135deg, #0f1f1a 0%, #0a1510 50%, #050f0a 100%)',
-              border: '1px solid rgba(16,185,129,0.25)',
-              boxShadow: '0 0 40px rgba(16,185,129,0.08), inset 0 1px 0 rgba(255,255,255,0.04)',
-              WebkitTapHighlightColor: 'transparent'
-            }}
-          >
-            {/* Subtle glow top-right */}
-            <div className="absolute top-0 right-0 w-32 h-32 rounded-full pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }} />
-            
-            <p className="text-emerald-400/70 font-mono text-[10px] font-black tracking-[0.2em] mb-3 uppercase">Next Show</p>
-            <p className="text-white font-black text-2xl leading-tight tracking-tight">{nextGig.venue}</p>
-            {nextGig.city && <p className="text-gray-400 text-sm mt-1">{nextGig.city}</p>}
-            
-            <div className="flex items-end justify-between mt-4">
-              <div>
-                {nextGig.date_start && (
-                  <p className="text-gray-500 text-xs">
-                    {new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
-                  </p>
-                )}
-                {nextGig.fee && (
-                  <p className="text-emerald-400 font-black text-xl mt-1.5 tracking-tight">
-                    £{Number(nextGig.fee).toLocaleString()}
-                  </p>
-                )}
-              </div>
-              <div className="text-right">
-                <p className="text-white font-black leading-none" style={{ fontSize: 56, lineHeight: 1 }}>{daysUntil}</p>
-                <p className="text-gray-500 text-xs font-mono tracking-widest mt-1">DAYS</p>
-              </div>
-            </div>
-          </motion.button>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full rounded-2xl p-5"
-            style={{
-              background: 'linear-gradient(135deg, #0d0d0d 0%, #080808 100%)',
-              border: '1px solid rgba(255,255,255,0.06)',
-            }}
-          >
-            <p className="text-gray-600 font-mono text-[10px] tracking-[0.2em] mb-1 uppercase">Status</p>
-            <p className="text-white font-bold text-lg">No upcoming shows</p>
-            <p className="text-gray-600 text-sm mt-1">Paste a gig offer to get started</p>
-          </motion.div>
-        )}
+          {pendingGigs.length > 1 && (
+            <p className="text-center text-amber-400 font-mono text-[10px] tracking-widest mt-2">
+              +{pendingGigs.length - 1} MORE WAITING
+            </p>
+          )}
+        </div>
+      )}
 
-        {pendingGigs.length > 1 && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center text-amber-400 font-black font-mono text-[10px] tracking-[0.15em] mt-3"
-          >
-            +{pendingGigs.length - 1} MORE OFFER{pendingGigs.length - 1 > 1 ? 'S' : ''} WAITING
-          </motion.p>
-        )}
-      </div>
+      {/* ── NEXT SHOW — cinematic hero ── */}
+      {!topPendingGig && (
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          whileTap={{ scale: 0.99 }}
+          onClick={() => setActiveSection('calendar')}
+          className="relative w-full text-left overflow-hidden active:opacity-90"
+          style={{ minHeight: 200, WebkitTapHighlightColor: 'transparent' }}
+        >
+          {/* Full bleed gradient background */}
+          <div className="absolute inset-0" style={{
+            background: nextGig
+              ? 'linear-gradient(160deg, #0a2018 0%, #061208 60%, #000 100%)'
+              : 'linear-gradient(160deg, #111 0%, #080808 100%)'
+          }} />
+          {nextGig && (
+            <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{
+              background: 'radial-gradient(circle at 80% 20%, rgba(16,185,129,0.18) 0%, transparent 65%)'
+            }} />
+          )}
 
-      {/* ── NAV LIST — clean rows ── */}
-      <div className="px-4 space-y-2">
+          {/* Content */}
+          <div className="relative px-6 py-8">
+            {nextGig ? (
+              <>
+                <p className="text-emerald-500/60 text-xs font-mono tracking-[0.25em] uppercase mb-4">Next Show</p>
+                <p className="text-white font-black leading-none mb-1" style={{ fontSize: 32 }}>{nextGig.venue}</p>
+                {nextGig.city && <p className="text-gray-400 text-base mt-2">{nextGig.city}</p>}
+                <div className="flex items-end justify-between mt-6">
+                  <div>
+                    {nextGig.date_start && (
+                      <p className="text-gray-500 text-sm">
+                        {new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
+                      </p>
+                    )}
+                    {nextGig.fee && (
+                      <p className="text-emerald-400 font-black text-2xl mt-2">£{Number(nextGig.fee).toLocaleString()}</p>
+                    )}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-white font-black" style={{ fontSize: 72, lineHeight: 1 }}>{daysUntil}</p>
+                    <p className="text-gray-600 text-xs font-mono tracking-widest">DAYS</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="text-gray-700 text-xs font-mono tracking-[0.25em] uppercase mb-4">Status</p>
+                <p className="text-gray-400 font-bold text-xl">No shows booked yet</p>
+                <p className="text-gray-700 text-sm mt-2">Paste a gig offer below to get started</p>
+              </>
+            )}
+          </div>
+
+          {/* Bottom fade into nav */}
+          <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, transparent, #000)' }} />
+        </motion.button>
+      )}
+
+      {/* ── NAV — 2×3 bold grid ── */}
+      <div className="px-4 pt-4 grid grid-cols-2 gap-3">
         {SECTIONS.map((section) => {
           const Icon = section.icon;
           const badge = badges[section.id];
-          
-          const rowColors = {
-            gigs:     { dot: '#06b6d4', bg: 'rgba(6,182,212,0.08)',    border: 'rgba(6,182,212,0.15)'   },
-            inbox:    { dot: '#f97316', bg: 'rgba(249,115,22,0.08)',   border: 'rgba(249,115,22,0.15)'  },
-            tasks:    { dot: '#ef4444', bg: 'rgba(239,68,68,0.08)',    border: 'rgba(239,68,68,0.15)'   },
-            finance:  { dot: '#10b981', bg: 'rgba(16,185,129,0.08)',   border: 'rgba(16,185,129,0.15)'  },
-            calendar: { dot: '#f59e0b', bg: 'rgba(245,158,11,0.08)',   border: 'rgba(245,158,11,0.15)'  },
-          };
-          const c = rowColors[section.id];
+          const color = sectionColors[section.id];
+          const subtitle = sectionSubtitles[section.id];
+          const hasAlert = badge > 0;
 
           return (
             <motion.button
               key={section.id}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className="w-full flex items-center gap-4 rounded-2xl px-4 py-4 text-left transition-all active:opacity-80"
+              className={`relative text-left rounded-2xl p-4 overflow-hidden active:opacity-80 transition-all ${
+                section.id === 'calendar' ? 'col-span-2' : ''
+              }`}
               style={{
-                background: c.bg,
-                border: `1px solid ${c.border}`,
+                background: hasAlert
+                  ? `linear-gradient(135deg, ${color}22 0%, ${color}08 100%)`
+                  : 'rgba(255,255,255,0.03)',
+                border: hasAlert
+                  ? `1px solid ${color}40`
+                  : '1px solid rgba(255,255,255,0.06)',
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation'
               }}
             >
-              {/* Icon dot */}
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: `${c.dot}18`, border: `1px solid ${c.dot}30` }}>
-                <Icon className="w-5 h-5" style={{ color: c.dot }} strokeWidth={2} />
-              </div>
-
-              {/* Label */}
-              <div className="flex-1 min-w-0">
-                <p className="text-white font-bold text-sm tracking-wide">{section.label}</p>
-                <p className="text-gray-600 text-xs mt-0.5">
-                  {section.id === 'gigs' && (pendingGigsForBadge.length > 0 ? `${pendingGigsForBadge.length} offer${pendingGigsForBadge.length > 1 ? 's' : ''} waiting` : 'All clear')}
-                  {section.id === 'inbox' && (badges.inbox > 0 ? `${badges.inbox} unread` : 'No new messages')}
-                  {section.id === 'tasks' && (badges.tasks > 0 ? `${badges.tasks} open` : 'All done')}
-                  {section.id === 'finance' && 'Income & invoices'}
-                  {section.id === 'calendar' && (confirmedGigs.length > 0 ? `${confirmedGigs.length} confirmed show${confirmedGigs.length > 1 ? 's' : ''}` : 'No shows booked')}
-                </p>
-              </div>
-
-              {/* Badge or arrow */}
-              {badge > 0 ? (
-                <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-black flex-shrink-0 text-white"
-                  style={{ background: c.dot }}>
+              {hasAlert && (
+                <span
+                  className="absolute top-3 right-3 text-black text-[11px] font-black rounded-full w-5 h-5 flex items-center justify-center"
+                  style={{ background: color }}
+                >
                   {badge > 9 ? '9+' : badge}
                 </span>
-              ) : (
-                <svg className="w-4 h-4 text-gray-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
               )}
+              <Icon className="w-6 h-6 mb-3" style={{ color }} strokeWidth={1.5} />
+              <p className="text-white font-bold text-sm">{section.label}</p>
+              <p className="text-gray-600 text-xs mt-0.5">{subtitle}</p>
             </motion.button>
           );
         })}
