@@ -427,16 +427,25 @@ export default function CB51UnifiedDashboard({ artistId }) {
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0 pr-4">
                       <p className="text-white font-black text-2xl leading-tight tracking-tight">{nextGig.venue}</p>
-                      {nextGig.city && <p className="text-gray-500 text-sm mt-1">{nextGig.city}</p>}
+                      {nextGig.city && <p className="text-gray-400 text-sm mt-1">{nextGig.city}</p>}
                       {nextGig.date_start && (
-                        <p className="text-gray-600 text-xs mt-3">
+                        <p className="text-gray-600 text-xs mt-3 font-mono">
                           {new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
                         </p>
                       )}
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="text-white font-black leading-none" style={{ fontSize: 52, lineHeight: 1 }}>{daysUntil}</p>
-                      <p className="text-gray-600 text-[9px] font-mono tracking-[0.2em] mt-1">DAYS</p>
+                    <div className="text-right flex-shrink-0 relative">
+                      {/* Pulse ring behind countdown */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <motion.div
+                          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0, 0.15] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                          className="w-16 h-16 rounded-full"
+                          style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.4) 0%, transparent 70%)' }}
+                        />
+                      </div>
+                      <p className="relative text-white font-black leading-none" style={{ fontSize: 52, lineHeight: 1 }}>{daysUntil}</p>
+                      <p className="text-emerald-600 text-[9px] font-mono tracking-[0.2em] mt-1">DAYS</p>
                     </div>
                   </div>
                 </>
@@ -452,7 +461,7 @@ export default function CB51UnifiedDashboard({ artistId }) {
         </div>
       )}
 
-      {/* ── NAV GRID — CB51 identity ── */}
+      {/* ── NAV GRID — CB51 signal identity ── */}
       <div className="px-4 grid grid-cols-3 gap-2.5 pb-8">
         {SECTIONS.map((section) => {
           const Icon = section.icon;
@@ -464,39 +473,46 @@ export default function CB51UnifiedDashboard({ artistId }) {
           return (
             <motion.button
               key={section.id}
-              whileTap={{ scale: 0.93 }}
+              whileTap={{ scale: 0.91 }}
               onClick={() => {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(6);
               }}
-              className="relative text-left rounded-2xl p-4 overflow-hidden active:opacity-80 flex flex-col"
+              className="relative text-left rounded-2xl overflow-hidden active:opacity-80 flex flex-col"
               style={{
                 background: hasAlert
-                  ? `linear-gradient(135deg, ${color}1a 0%, #080808 100%)`
-                  : '#0d0d0d',
-                border: `1px solid ${hasAlert ? color + '35' : 'rgba(255,255,255,0.05)'}`,
-                minHeight: 96,
+                  ? `linear-gradient(145deg, ${color}20 0%, #060606 100%)`
+                  : 'linear-gradient(145deg, #111 0%, #080808 100%)',
+                border: `1px solid ${hasAlert ? color + '50' : 'rgba(255,255,255,0.07)'}`,
+                minHeight: 100,
+                boxShadow: hasAlert ? `0 0 20px ${color}15` : 'none',
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation'
               }}
             >
-              {/* accent line top */}
-              <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl"
-                style={{ background: hasAlert ? color : 'transparent', opacity: 0.6 }} />
+              {/* Top accent bar — only lit when alert */}
+              <div className="absolute top-0 left-0 right-0 h-[2px]"
+                style={{ background: hasAlert ? `linear-gradient(90deg, ${color}, ${color}00)` : 'rgba(255,255,255,0.04)' }} />
 
-              {hasAlert && (
-                <span
-                  className="absolute top-2.5 right-2.5 text-black text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center"
-                  style={{ background: color }}
-                >
-                  {badge > 9 ? '9+' : badge}
-                </span>
-              )}
+              <div className="p-4 flex flex-col h-full">
+                {/* Icon row */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-8 h-8 rounded-xl flex items-center justify-center"
+                    style={{ background: hasAlert ? `${color}18` : 'rgba(255,255,255,0.04)' }}>
+                    <Icon className="w-4 h-4" style={{ color: hasAlert ? color : 'rgba(255,255,255,0.3)' }} strokeWidth={1.5} />
+                  </div>
+                  {hasAlert && (
+                    <span className="text-black text-[9px] font-black rounded-full w-4 h-4 flex items-center justify-center flex-shrink-0"
+                      style={{ background: color }}>
+                      {badge > 9 ? '9+' : badge}
+                    </span>
+                  )}
+                </div>
 
-              <Icon className="w-5 h-5 mb-auto" style={{ color: hasAlert ? color : 'rgba(255,255,255,0.25)' }} strokeWidth={1.5} />
-              <div className="mt-3">
-                <p className="text-white font-black text-xs tracking-wide leading-none">{section.label}</p>
-                <p className="mt-0.5 text-[10px] leading-tight" style={{ color: hasAlert ? color : 'rgba(255,255,255,0.2)' }}>
+                {/* Label */}
+                <p className="text-white font-black text-[11px] tracking-wider leading-none">{section.label}</p>
+                <p className="mt-1 text-[9px] leading-tight font-mono"
+                  style={{ color: hasAlert ? color + 'cc' : 'rgba(255,255,255,0.18)' }}>
                   {subtitle}
                 </p>
               </div>
