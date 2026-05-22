@@ -239,11 +239,11 @@ export default function CB51Dashboard({ artistId }) {
 
   // ── Home ──
   return (
-    <div className="pb-20 select-none">
+    <div className="min-h-screen bg-black text-white flex flex-col select-none" style={{ paddingBottom: 80 }}>
 
       {/* ── OFFER IN ── */}
       {pending[0] && (
-        <>
+        <div className="px-4 pt-2">
           <OfferCard
             gig={pending[0]}
             onConfirm={confirm}
@@ -254,127 +254,146 @@ export default function CB51Dashboard({ artistId }) {
           {pending.length > 1 && (
             <p className="text-center text-gray-700 text-xs mb-4">+{pending.length - 1} more</p>
           )}
-        </>
+        </div>
       )}
 
       {/* ── NEXT SHOW — pure type ── */}
-      {!pending[0] && (
-        <button
-          onClick={() => setActive('calendar')}
-          className="w-full text-left px-6 pt-6 pb-8"
-          style={{ WebkitTapHighlightColor: 'transparent' }}
-        >
-          {nextShow ? (
-            <>
-              <p className="text-gray-700 text-[10px] font-mono tracking-[0.35em] mb-5">NEXT SHOW</p>
-              <div className="flex items-end justify-between">
-                <div className="flex-1 min-w-0 pr-6">
-                  <p className="text-white font-black leading-[0.95] tracking-tight" style={{ fontSize: 34 }}>
-                    {nextShow.venue}
+      <button
+        onClick={() => setActive('calendar')}
+        className="w-full text-left px-6 pt-6 pb-6"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
+      >
+        {nextShow ? (
+          <>
+            <p className="text-gray-700 text-[10px] font-mono tracking-[0.35em] mb-4">NEXT SHOW</p>
+            <div className="flex items-end justify-between">
+              <div className="flex-1 min-w-0 pr-4">
+                <p className="text-white font-black leading-[0.9] tracking-tight" style={{ fontSize: 36 }}>
+                  {nextShow.venue}
+                </p>
+                {nextShow.city && (
+                  <p className="text-gray-600 text-sm mt-2">{nextShow.city}</p>
+                )}
+                {nextShow.date_start && (
+                  <p className="text-gray-700 text-xs mt-3 font-mono">
+                    {new Date(nextShow.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
                   </p>
-                  {nextShow.city && (
-                    <p className="text-gray-600 text-base mt-3 font-light">{nextShow.city}</p>
-                  )}
-                  {nextShow.date_start && (
-                    <p className="text-gray-700 text-xs mt-4 font-mono">
-                      {new Date(nextShow.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
-                    </p>
-                  )}
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <p className="text-white font-black leading-none" style={{ fontSize: 68 }}>{daysUntil}</p>
-                  <p className="text-gray-700 text-[9px] font-mono tracking-[0.3em] mt-1">DAYS</p>
-                </div>
+                )}
               </div>
-            </>
-          ) : (
-            <div className="py-4">
-              <p className="text-gray-700 text-[10px] font-mono tracking-[0.35em] mb-3">STATUS</p>
-              <p className="text-gray-500 text-lg font-light">No shows booked yet.</p>
+              <div className="text-right flex-shrink-0 pl-2">
+                <p className="text-white font-black leading-none" style={{ fontSize: 72 }}>{daysUntil}</p>
+                <p className="text-gray-700 text-[9px] font-mono tracking-[0.3em] mt-1">DAYS</p>
+              </div>
             </div>
-          )}
-        </button>
-      )}
+          </>
+        ) : (
+          <div className="py-4">
+            <p className="text-gray-700 text-[10px] font-mono tracking-[0.35em] mb-3">STATUS</p>
+            <p className="text-gray-500 text-xl font-light">No shows booked.</p>
+          </div>
+        )}
+      </button>
 
       {/* ── DIVIDER ── */}
-      <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
+      <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
 
-      {/* ── LIVE FEED — what's on right now ── */}
-      <div className="px-6 pt-6 space-y-0">
-        {/* Upcoming shows */}
-        {upcoming.slice(0, 4).map((gig, i) => {
+      {/* ── COMING UP — skip the next show (already shown above), show the rest ── */}
+      <div className="px-6 pt-4">
+        {upcoming.slice(1, 5).map((gig, i) => {
           const d = Math.ceil((new Date(gig.date_start) - now) / 86400000);
           return (
             <motion.button
               key={gig.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: i * 0.03 }}
+              transition={{ delay: i * 0.04 }}
               whileTap={{ opacity: 0.5 }}
               onClick={() => setActive('calendar')}
-              className="w-full flex items-center justify-between py-4 text-left"
+              className="w-full flex items-center justify-between py-3 text-left"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', WebkitTapHighlightColor: 'transparent' }}
             >
               <div className="flex items-center gap-3">
-                <div className="w-1 h-5 rounded-full" style={{ background: 'rgba(16,185,129,0.5)' }} />
+                <div className="w-[3px] h-4 rounded-full flex-shrink-0" style={{ background: '#10b981' }} />
                 <div>
-                  <p className="text-white text-sm font-semibold">{gig.venue}</p>
-                  {gig.city && <p className="text-gray-600 text-xs mt-0.5">{gig.city}</p>}
+                  <p className="text-gray-300 text-sm font-semibold">{gig.venue}</p>
+                  {gig.city && <p className="text-gray-600 text-xs">{gig.city}</p>}
                 </div>
               </div>
-              <span className="text-gray-600 text-sm font-mono">{d}d</span>
+              <span className="text-gray-600 text-xs font-mono">{d}d</span>
             </motion.button>
           );
         })}
 
-        {/* Open tasks */}
-        {openTasks.slice(0, 3).map((task, i) => (
+        {/* Open tasks — urgent ones only on home */}
+        {openTasks.filter(t => t.priority === 'urgent' || t.priority === 'high').slice(0, 3).map((task, i) => (
           <motion.button
             key={task.id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.1 + i * 0.03 }}
+            transition={{ delay: 0.1 + i * 0.04 }}
             whileTap={{ opacity: 0.5 }}
             onClick={() => setActive('tasks')}
-            className="w-full flex items-center gap-3 py-4 text-left"
+            className="w-full flex items-center gap-3 py-3 text-left"
             style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', WebkitTapHighlightColor: 'transparent' }}
           >
-            <div className="w-1 h-5 rounded-full" style={{ background: 'rgba(239,68,68,0.5)' }} />
-            <p className="text-gray-400 text-sm font-medium truncate flex-1">{task.title}</p>
-            {task.priority === 'urgent' && (
-              <span className="text-[9px] text-red-400 font-mono">URGENT</span>
-            )}
+            <div className="w-[3px] h-4 rounded-full flex-shrink-0" style={{ background: '#ef4444' }} />
+            <p className="text-gray-400 text-sm truncate flex-1">{task.title}</p>
+            <span className="text-[9px] text-red-500 font-mono uppercase">{task.priority}</span>
           </motion.button>
         ))}
 
-        {/* All clear */}
-        {upcoming.length === 0 && openTasks.length === 0 && (
-          <p className="text-gray-700 text-sm pt-6 pb-2">Nothing on. You're clear.</p>
+        {upcoming.length <= 1 && openTasks.filter(t => t.priority === 'urgent' || t.priority === 'high').length === 0 && (
+          <p className="text-gray-800 text-sm py-6">You're clear.</p>
         )}
       </div>
 
-      {/* ── NAV — minimal bottom touch targets ── */}
-      <div className="fixed bottom-0 left-0 right-0 px-4 pb-6 pt-3"
-        style={{ background: 'linear-gradient(to top, #000 60%, transparent)', zIndex: 10 }}>
-        <div className="flex gap-2 justify-center">
+      {/* ── STATS ROW ── */}
+      {(confirmed.length > 0 || openTasks.length > 0) && (
+        <div className="flex px-6 pt-6 gap-6">
+          {confirmed.length > 0 && (
+            <button onClick={() => setActive('calendar')} className="text-left" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <p className="text-white font-black text-2xl">{upcoming.length}</p>
+              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-0.5">UPCOMING</p>
+            </button>
+          )}
+          {openTasks.length > 0 && (
+            <button onClick={() => setActive('tasks')} className="text-left" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <p className="text-white font-black text-2xl">{openTasks.length}</p>
+              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-0.5">TASKS</p>
+            </button>
+          )}
+          {pending.length > 0 && (
+            <button onClick={() => setActive('gigs')} className="text-left" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <p className="font-black text-2xl" style={{ color: '#06b6d4' }}>{pending.length}</p>
+              <p className="text-gray-700 text-[9px] font-mono tracking-widest mt-0.5">OFFERS</p>
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* ── NAV BAR ── */}
+      <div className="fixed bottom-0 left-0 right-0"
+        style={{ background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(255,255,255,0.06)', zIndex: 10 }}>
+        <div className="flex">
           {SECTIONS.map(sec => {
             const b = badges[sec.id];
             return (
               <button
                 key={sec.id}
                 onClick={() => setActive(sec.id)}
-                className="relative flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all active:scale-90"
+                className="relative flex-1 flex flex-col items-center gap-1 py-3 transition-all active:opacity-50"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 {b > 0 && (
                   <span
-                    className="absolute top-1 right-1 w-4 h-4 rounded-full text-black text-[8px] font-black flex items-center justify-center"
+                    className="absolute top-2 right-1/4 w-4 h-4 rounded-full text-black text-[8px] font-black flex items-center justify-center"
                     style={{ background: sec.color }}
                   >
-                    {b}
+                    {b > 9 ? '9+' : b}
                   </span>
                 )}
-                <span className="text-[10px] font-semibold" style={{ color: b > 0 ? sec.color : 'rgba(255,255,255,0.2)' }}>
+                <span className="text-[11px] font-semibold tracking-wide"
+                  style={{ color: b > 0 ? sec.color : 'rgba(255,255,255,0.25)' }}>
                   {sec.label}
                 </span>
               </button>
