@@ -91,7 +91,7 @@ export default function CB51Page() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-gray-600 text-xs font-mono tracking-[0.3em] uppercase mb-5">For artists who are serious</p>
+            <p className="text-gray-600 text-xs font-mono tracking-[0.2em] uppercase mb-5">citizenband51</p>
             <h1 className="text-white font-black leading-[0.92] mb-6"
               style={{ fontSize: 'clamp(42px, 11vw, 72px)', letterSpacing: '-0.02em' }}>
               Avoid<br />the<br />
@@ -105,28 +105,25 @@ export default function CB51Page() {
             transition={{ delay: 0.3 }}
             className="text-gray-500 text-base leading-relaxed mb-10 max-w-sm"
           >
-            Every gig offer, band vote, invoice and task — handled in one place. 
-            So you can focus on the music.
+            Gig offers land in your inbox. You deal with them here instead.
+            That's basically it.
           </motion.p>
 
-          {/* ── PROOF LINES — real signals ── */}
+          {/* ── WHAT IT ACTUALLY DOES ── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-col gap-3 mb-10"
+            className="flex flex-col gap-4 mb-10"
           >
             {[
-              { label: 'Email comes in', detail: 'Gig offer parsed in seconds' },
-              { label: 'Band needs to vote', detail: 'Push sent automatically' },
-              { label: 'Fee agreed', detail: 'Invoice ready to send' },
-            ].map((item, i) => (
+              'Reads your gig emails and pulls out the details',
+              'Lets the band vote without a WhatsApp thread',
+              'Tracks what you\'re owed and what\'s outstanding',
+            ].map((line, i) => (
               <div key={i} className="flex items-start gap-3">
-                <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" style={{ background: '#06b6d4' }} />
-                <div>
-                  <span className="text-white text-sm font-semibold">{item.label} </span>
-                  <span className="text-gray-600 text-sm">→ {item.detail}</span>
-                </div>
+                <div className="w-1.5 h-1.5 rounded-full mt-[7px] flex-shrink-0" style={{ background: '#06b6d4' }} />
+                <p className="text-gray-400 text-sm leading-snug">{line}</p>
               </div>
             ))}
           </motion.div>
@@ -144,7 +141,7 @@ export default function CB51Page() {
             >
               GET STARTED — FREE
             </button>
-            <p className="text-center text-gray-700 text-xs mt-3 font-mono">No label. No contract. No bullshit.</p>
+            <p className="text-center text-gray-700 text-xs mt-3">It's free. Just try it.</p>
           </motion.div>
         </div>
 
