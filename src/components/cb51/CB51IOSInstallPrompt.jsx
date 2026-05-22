@@ -40,7 +40,7 @@ export default function CB51IOSInstallPrompt() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed bottom-6 inset-x-4 z-[60] flex items-center gap-3 bg-gray-950 border border-cyan-500/40 rounded-2xl px-4 py-3"
+          className="fixed bottom-24 inset-x-4 z-40 flex items-center gap-3 bg-gray-950 border border-cyan-500/40 rounded-2xl px-4 py-3"
           style={{ boxShadow: '0 8px 32px rgba(6,182,212,0.2)' }}
         >
           {/* CB51 icon */}

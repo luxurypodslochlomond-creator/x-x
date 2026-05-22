@@ -255,7 +255,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
     <div className="min-h-screen flex flex-col select-none" style={{ background: BG, color: TEXT, paddingBottom: 90 }}>
 
       {/* ── GREETING ── */}
-      <div className="px-5 pt-6 pb-3 flex items-center justify-between">
+      <div className="px-5 pt-8 pb-4 flex items-center justify-between">
         <div>
           <p className="font-black text-2xl tracking-tight" style={{ color: TEXT }}>{greeting}</p>
           <p className="text-sm mt-0.5" style={{ color: MUTED }}>
