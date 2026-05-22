@@ -54,23 +54,23 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
     <motion.div
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mx-4 mb-4 rounded-2xl overflow-hidden"
-      style={{ border: '1px solid rgba(6,182,212,0.3)', background: '#050f14' }}
+      className="rounded-2xl overflow-hidden"
+      style={{ border: '1.5px solid rgba(6,182,212,0.4)', background: '#fff', boxShadow: '0 2px 12px rgba(6,182,212,0.1)' }}
     >
       {/* Offer header */}
       <div className="flex items-center justify-between px-4 py-2"
-        style={{ background: 'rgba(6,182,212,0.08)', borderBottom: '1px solid rgba(6,182,212,0.1)' }}>
-        <span className="text-cyan-400 text-[10px] font-mono tracking-[0.25em]">OFFER IN</span>
-        <button onClick={expand} className="text-gray-600 hover:text-cyan-400 transition-colors p-1">
+        style={{ background: 'rgba(6,182,212,0.07)', borderBottom: '1px solid rgba(6,182,212,0.12)' }}>
+        <span className="text-[10px] font-black tracking-[0.25em]" style={{ color: '#06b6d4' }}>OFFER IN</span>
+        <button onClick={expand} className="p-1 transition-opacity active:opacity-50" style={{ color: '#06b6d4' }}>
           <Chevron className={`w-3 h-3 transition-transform ${expanded ? 'rotate-180' : ''}`} />
         </button>
       </div>
 
       {/* Details */}
       <div className="px-4 py-4">
-        <p className="text-white font-black text-xl leading-tight">{gig.venue}</p>
-        <p className="text-gray-500 text-sm mt-1">{gig.city}{gig.city && gig.date_start ? ' · ' : ''}{gig.date_start}</p>
-        {gig.promoter_name && <p className="text-gray-700 text-xs mt-2">from {gig.promoter_name}</p>}
+        <p className="font-black text-xl leading-tight" style={{ color: '#0f0f0f' }}>{gig.venue}</p>
+        <p className="text-sm mt-1" style={{ color: '#777' }}>{gig.city}{gig.city && gig.date_start ? ' · ' : ''}{gig.date_start}</p>
+        {gig.promoter_name && <p className="text-xs mt-2" style={{ color: '#aaa' }}>from {gig.promoter_name}</p>}
       </div>
 
       {/* AI read */}
@@ -81,11 +81,11 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
-            style={{ borderTop: '1px solid rgba(6,182,212,0.1)' }}
+            style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}
           >
             <div className="px-4 py-3">
               {loading ? (
-                <div className="flex items-center gap-2 text-gray-600">
+                <div className="flex items-center gap-2" style={{ color: '#aaa' }}>
                   <Loader2 className="w-3 h-3 animate-spin" />
                   <span className="text-xs">Reading…</span>
                 </div>
@@ -93,13 +93,13 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
                 <div className="space-y-2">
                   <div className="flex items-baseline gap-2">
                     <span className="font-black text-2xl" style={{ color: scoreCol }}>{ai.score}</span>
-                    <span className="text-xs text-gray-400">{ai.headline}</span>
+                    <span className="text-xs" style={{ color: '#555' }}>{ai.headline}</span>
                   </div>
                   {ai.flags?.length > 0 && (
                     <div className="flex flex-wrap gap-1">
                       {ai.flags.map((f, i) => (
-                        <span key={i} className="text-[10px] px-2 py-0.5 rounded-full text-amber-400"
-                          style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)' }}>
+                        <span key={i} className="text-[10px] px-2 py-0.5 rounded-full"
+                          style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)', color: '#b45309' }}>
                           {f}
                         </span>
                       ))}
@@ -108,8 +108,8 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
                   {ai.positives?.length > 0 && (
                     <div className="flex flex-wrap gap-1">
                       {ai.positives.map((p, i) => (
-                        <span key={i} className="text-[10px] px-2 py-0.5 rounded-full text-emerald-400"
-                          style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)' }}>
+                        <span key={i} className="text-[10px] px-2 py-0.5 rounded-full"
+                          style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', color: '#047857' }}>
                           {p}
                         </span>
                       ))}
@@ -123,19 +123,20 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
       </AnimatePresence>
 
       {/* Confirm / Reject */}
-      <div className="grid grid-cols-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <div className="grid grid-cols-2" style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}>
         <button
           onClick={() => onReject(gig)}
           disabled={confirming}
-          className="py-4 text-red-400 font-black text-sm tracking-widest active:bg-red-950 transition-colors disabled:opacity-40"
-          style={{ borderRight: '1px solid rgba(255,255,255,0.05)' }}
+          className="py-4 font-black text-sm tracking-widest transition-colors active:bg-red-50 disabled:opacity-40"
+          style={{ color: '#ef4444', borderRight: '1px solid rgba(0,0,0,0.06)' }}
         >
           PASS
         </button>
         <button
           onClick={() => onConfirm(gig)}
           disabled={confirming}
-          className="py-4 text-emerald-400 font-black text-sm tracking-widest active:bg-emerald-950 transition-colors disabled:opacity-40"
+          className="py-4 font-black text-sm tracking-widest transition-colors active:bg-emerald-50 disabled:opacity-40"
+          style={{ color: '#059669' }}
         >
           CONFIRM
         </button>
@@ -217,14 +218,14 @@ export default function CB51Dashboard({ artistId, artistName }) {
   if (active) {
     const sec = SECTIONS.find(s => s.id === active);
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen" style={{ background: '#f7f5f0', color: '#0f0f0f' }}>
         <button
           onClick={() => setActive(null)}
-          className="flex items-center gap-2 px-4 py-5 text-gray-600 hover:text-white transition-colors active:opacity-60"
-          style={{ WebkitTapHighlightColor: 'transparent' }}
+          className="flex items-center gap-2 px-4 py-5 active:opacity-60 transition-opacity"
+          style={{ WebkitTapHighlightColor: 'transparent', color: '#555' }}
         >
           <Back className="w-4 h-4" />
-          <span className="text-sm font-semibold" style={{ color: sec?.color }}>{sec?.label}</span>
+          <span className="text-sm font-bold" style={{ color: sec?.color }}>{sec?.label}</span>
         </button>
         <motion.div key={active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }}>
           {active === 'gigs'     && <div className="px-4"><CB51GigsTab artistId={artistId} /></div>}
@@ -244,15 +245,21 @@ export default function CB51Dashboard({ artistId, artistName }) {
   // ── Home ──
   const urgentTasks = openTasks.filter(t => t.priority === 'urgent' || t.priority === 'high');
 
+  const BG = '#f7f5f0';
+  const CARD = '#ffffff';
+  const TEXT = '#0f0f0f';
+  const MUTED = '#777';
+  const BORDER = 'rgba(0,0,0,0.08)';
+
   return (
-    <div className="min-h-screen flex flex-col select-none" style={{ background: '#0d1117', paddingBottom: 90 }}>
+    <div className="min-h-screen flex flex-col select-none" style={{ background: BG, color: TEXT, paddingBottom: 90 }}>
 
       {/* ── GREETING ── */}
-      <div className="px-5 pt-5 pb-3 flex items-center justify-between">
+      <div className="px-5 pt-6 pb-3 flex items-center justify-between">
         <div>
-          <p className="text-white font-black text-xl tracking-tight">{greeting}</p>
-          <p className="text-gray-500 text-sm mt-0.5">
-            {pending.length > 0 ? `${pending.length} offer${pending.length > 1 ? 's' : ''} waiting` 
+          <p className="font-black text-2xl tracking-tight" style={{ color: TEXT }}>{greeting}</p>
+          <p className="text-sm mt-0.5" style={{ color: MUTED }}>
+            {pending.length > 0 ? `${pending.length} offer${pending.length > 1 ? 's' : ''} waiting`
              : upcoming.length > 0 ? `${upcoming.length} show${upcoming.length > 1 ? 's' : ''} booked`
              : 'All clear today.'}
           </p>
@@ -261,7 +268,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="w-10 h-10 rounded-full flex items-center justify-center font-black text-black text-sm"
+            className="w-10 h-10 rounded-full flex items-center justify-center font-black text-white text-sm"
             style={{ background: '#06b6d4' }}
           >
             {pending.length}
@@ -280,7 +287,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
             artistId={artistId}
           />
           {pending.length > 1 && (
-            <button onClick={() => setActive('gigs')} className="w-full text-center text-cyan-600 text-xs py-1 active:opacity-50 font-semibold">
+            <button onClick={() => setActive('gigs')} className="w-full text-center text-xs py-1 active:opacity-50 font-bold" style={{ color: '#06b6d4' }}>
               +{pending.length - 1} more offer{pending.length - 1 > 1 ? 's' : ''} →
             </button>
           )}
@@ -292,29 +299,29 @@ export default function CB51Dashboard({ artistId, artistName }) {
         <button
           onClick={() => setActive('calendar')}
           className="w-full text-left rounded-2xl p-5 active:scale-[0.98] transition-transform"
-          style={{ background: '#161b22', border: '1px solid rgba(255,255,255,0.07)', WebkitTapHighlightColor: 'transparent' }}
+          style={{ background: CARD, border: `1px solid ${BORDER}`, boxShadow: '0 1px 4px rgba(0,0,0,0.06)', WebkitTapHighlightColor: 'transparent' }}
         >
-          <p className="text-gray-500 text-xs font-semibold tracking-widest uppercase mb-3">Next Show</p>
+          <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: MUTED }}>Next Show</p>
           {nextShow ? (
             <div className="flex items-end justify-between gap-4">
               <div className="flex-1 min-w-0">
-                <p className="text-white font-black text-2xl leading-tight break-words">{nextShow.venue}</p>
-                {nextShow.city && <p className="text-gray-400 text-sm mt-1">{nextShow.city}</p>}
+                <p className="font-black text-2xl leading-tight break-words" style={{ color: TEXT }}>{nextShow.venue}</p>
+                {nextShow.city && <p className="text-sm mt-1" style={{ color: MUTED }}>{nextShow.city}</p>}
                 {nextShow.date_start && (
-                  <p className="text-gray-600 text-xs mt-2 font-mono">
+                  <p className="text-xs mt-2 font-mono" style={{ color: '#aaa' }}>
                     {new Date(nextShow.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
                   </p>
                 )}
               </div>
-              <div className="text-right flex-shrink-0 bg-black/40 rounded-xl px-4 py-3">
+              <div className="text-right flex-shrink-0 rounded-xl px-4 py-3" style={{ background: BG }}>
                 <p className="font-black text-4xl leading-none tabular-nums" style={{ color: daysUntil <= 7 ? '#f59e0b' : '#06b6d4' }}>{daysUntil}</p>
-                <p className="text-gray-600 text-[9px] font-mono tracking-widest mt-1">DAYS</p>
+                <p className="text-[9px] font-mono tracking-widest mt-1" style={{ color: '#aaa' }}>DAYS</p>
               </div>
             </div>
           ) : (
             <div>
-              <p className="text-gray-400 font-bold text-lg">Nothing booked yet.</p>
-              <p className="text-gray-600 text-sm mt-1">Forward a gig offer to get started.</p>
+              <p className="font-bold text-lg" style={{ color: TEXT }}>Nothing booked yet.</p>
+              <p className="text-sm mt-1" style={{ color: MUTED }}>Forward a gig offer email to get started.</p>
             </div>
           )}
         </button>
@@ -322,64 +329,60 @@ export default function CB51Dashboard({ artistId, artistName }) {
 
       {/* ── QUICK ACTIONS GRID ── */}
       <div className="px-4 grid grid-cols-2 gap-3 mb-3">
-        {/* Gigs */}
         <button onClick={() => setActive('gigs')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
-          style={{ background: '#161b22', border: '1px solid rgba(6,182,212,0.15)' }}>
+          style={{ background: CARD, border: `1px solid rgba(6,182,212,0.25)`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
           <Radio className="w-5 h-5 mb-3" style={{ color: '#06b6d4' }} />
-          <p className="text-white font-black text-xl leading-none">{upcoming.length}</p>
-          <p className="text-gray-500 text-xs mt-1 font-semibold">Shows booked</p>
+          <p className="font-black text-2xl leading-none" style={{ color: TEXT }}>{upcoming.length}</p>
+          <p className="text-xs mt-1 font-semibold" style={{ color: MUTED }}>Shows booked</p>
         </button>
 
-        {/* Tasks */}
         <button onClick={() => setActive('tasks')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
-          style={{ background: '#161b22', border: urgentTasks.length > 0 ? '1px solid rgba(239,68,68,0.3)' : '1px solid rgba(255,255,255,0.07)' }}>
-          <CheckSquare className="w-5 h-5 mb-3" style={{ color: urgentTasks.length > 0 ? '#ef4444' : '#6b7280' }} />
-          <p className="font-black text-xl leading-none" style={{ color: urgentTasks.length > 0 ? '#ef4444' : 'white' }}>{openTasks.length}</p>
-          <p className="text-gray-500 text-xs mt-1 font-semibold">{urgentTasks.length > 0 ? `${urgentTasks.length} urgent` : 'Open tasks'}</p>
+          style={{ background: CARD, border: urgentTasks.length > 0 ? '1px solid rgba(239,68,68,0.35)' : `1px solid ${BORDER}`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+          <CheckSquare className="w-5 h-5 mb-3" style={{ color: urgentTasks.length > 0 ? '#ef4444' : '#aaa' }} />
+          <p className="font-black text-2xl leading-none" style={{ color: urgentTasks.length > 0 ? '#ef4444' : TEXT }}>{openTasks.length}</p>
+          <p className="text-xs mt-1 font-semibold" style={{ color: MUTED }}>{urgentTasks.length > 0 ? `${urgentTasks.length} urgent` : 'Open tasks'}</p>
         </button>
 
-        {/* Finance */}
         <button onClick={() => setActive('finance')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
-          style={{ background: '#161b22', border: '1px solid rgba(16,185,129,0.15)' }}>
+          style={{ background: CARD, border: `1px solid rgba(16,185,129,0.25)`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
           <DollarSign className="w-5 h-5 mb-3" style={{ color: '#10b981' }} />
-          <p className="text-white font-black text-xl leading-none">
+          <p className="font-black text-2xl leading-none" style={{ color: TEXT }}>
             £{confirmed.filter(g => g.fee).reduce((a, g) => a + (g.fee || 0), 0).toLocaleString()}
           </p>
-          <p className="text-gray-500 text-xs mt-1 font-semibold">Total booked</p>
+          <p className="text-xs mt-1 font-semibold" style={{ color: MUTED }}>Total booked</p>
         </button>
 
-        {/* Inbox */}
         <button onClick={() => setActive('inbox')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
-          style={{ background: '#161b22', border: messages.length > 0 ? '1px solid rgba(249,115,22,0.3)' : '1px solid rgba(255,255,255,0.07)' }}>
-          <Mail className="w-5 h-5 mb-3" style={{ color: messages.length > 0 ? '#f97316' : '#6b7280' }} />
-          <p className="font-black text-xl leading-none" style={{ color: messages.length > 0 ? '#f97316' : 'white' }}>{messages.length}</p>
-          <p className="text-gray-500 text-xs mt-1 font-semibold">Messages</p>
+          style={{ background: CARD, border: messages.length > 0 ? '1px solid rgba(249,115,22,0.35)' : `1px solid ${BORDER}`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+          <Mail className="w-5 h-5 mb-3" style={{ color: messages.length > 0 ? '#f97316' : '#aaa' }} />
+          <p className="font-black text-2xl leading-none" style={{ color: messages.length > 0 ? '#f97316' : TEXT }}>{messages.length}</p>
+          <p className="text-xs mt-1 font-semibold" style={{ color: MUTED }}>Messages</p>
         </button>
       </div>
 
       {/* ── UPCOMING SHOWS LIST ── */}
       {upcoming.slice(1, 4).length > 0 && (
         <div className="px-4 mb-3">
-          <div className="rounded-2xl overflow-hidden" style={{ background: '#161b22', border: '1px solid rgba(255,255,255,0.07)' }}>
-            <p className="text-gray-500 text-xs font-semibold tracking-widest uppercase px-4 pt-4 pb-2">Coming Up</p>
+          <div className="rounded-2xl overflow-hidden" style={{ background: CARD, border: `1px solid ${BORDER}`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+            <p className="text-xs font-bold tracking-widest uppercase px-4 pt-4 pb-2" style={{ color: MUTED }}>Coming Up</p>
             {upcoming.slice(1, 4).map((gig, i) => {
               const d = Math.ceil((new Date(gig.date_start) - now) / 86400000);
               return (
                 <button key={gig.id} onClick={() => setActive('calendar')}
-                  className="w-full flex items-center justify-between px-4 py-3 active:bg-white/5 transition-colors text-left"
-                  style={{ borderTop: i > 0 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
+                  className="w-full flex items-center justify-between px-4 py-3 text-left transition-colors active:bg-black/5"
+                  style={{ borderTop: i >= 0 ? `1px solid ${BORDER}` : 'none' }}>
                   <div className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#10b981' }} />
                     <div>
-                      <p className="text-gray-200 text-sm font-semibold">{gig.venue}</p>
-                      {gig.city && <p className="text-gray-600 text-xs">{gig.city}</p>}
+                      <p className="text-sm font-semibold" style={{ color: TEXT }}>{gig.venue}</p>
+                      {gig.city && <p className="text-xs" style={{ color: MUTED }}>{gig.city}</p>}
                     </div>
                   </div>
-                  <span className="text-gray-600 text-xs font-mono tabular-nums">{d}d</span>
+                  <span className="text-xs font-mono tabular-nums" style={{ color: MUTED }}>{d}d</span>
                 </button>
               );
             })}
@@ -390,16 +393,16 @@ export default function CB51Dashboard({ artistId, artistName }) {
       {/* ── URGENT TASKS LIST ── */}
       {urgentTasks.length > 0 && (
         <div className="px-4 mb-3">
-          <div className="rounded-2xl overflow-hidden" style={{ background: '#161b22', border: '1px solid rgba(239,68,68,0.15)' }}>
-            <p className="text-gray-500 text-xs font-semibold tracking-widest uppercase px-4 pt-4 pb-2">Needs Attention</p>
+          <div className="rounded-2xl overflow-hidden" style={{ background: CARD, border: '1px solid rgba(239,68,68,0.2)', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+            <p className="text-xs font-bold tracking-widest uppercase px-4 pt-4 pb-2" style={{ color: MUTED }}>Needs Attention</p>
             {urgentTasks.slice(0, 3).map((task, i) => (
               <button key={task.id} onClick={() => setActive('tasks')}
-                className="w-full flex items-center gap-3 px-4 py-3 active:bg-white/5 transition-colors text-left"
-                style={{ borderTop: i > 0 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
+                className="w-full flex items-center gap-3 px-4 py-3 text-left transition-colors active:bg-black/5"
+                style={{ borderTop: `1px solid ${BORDER}` }}>
                 <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#ef4444' }} />
-                <p className="text-gray-300 text-sm flex-1 truncate">{task.title}</p>
+                <p className="text-sm flex-1 truncate font-medium" style={{ color: TEXT }}>{task.title}</p>
                 <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full"
-                  style={{ background: task.priority === 'urgent' ? 'rgba(239,68,68,0.15)' : 'rgba(245,158,11,0.15)', color: task.priority === 'urgent' ? '#ef4444' : '#f59e0b' }}>
+                  style={{ background: task.priority === 'urgent' ? 'rgba(239,68,68,0.1)' : 'rgba(245,158,11,0.1)', color: task.priority === 'urgent' ? '#ef4444' : '#f59e0b' }}>
                   {task.priority}
                 </span>
               </button>
@@ -410,7 +413,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
 
       {/* ── NAV BAR ── */}
       <div className="fixed bottom-0 left-0 right-0"
-        style={{ background: 'rgba(13,17,23,0.98)', backdropFilter: 'blur(24px)', borderTop: '1px solid rgba(255,255,255,0.08)', zIndex: 10, paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        style={{ background: 'rgba(247,245,240,0.97)', backdropFilter: 'blur(24px)', borderTop: `1px solid ${BORDER}`, zIndex: 10, paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="flex">
           {SECTIONS.map(sec => {
             const b = badges[sec.id];
@@ -424,18 +427,18 @@ export default function CB51Dashboard({ artistId, artistName }) {
               >
                 {hasAlert && (
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-[2px] rounded-full"
-                    style={{ background: sec.color, boxShadow: `0 0 6px ${sec.color}` }} />
+                    style={{ background: sec.color }} />
                 )}
                 <div className="relative">
-                  <sec.Icon className="w-5 h-5" style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.2)' }} />
+                  <sec.Icon className="w-5 h-5" style={{ color: hasAlert ? sec.color : 'rgba(0,0,0,0.2)' }} />
                   {b > 0 && (
-                    <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 rounded-full text-black text-[8px] font-black flex items-center justify-center"
+                    <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 rounded-full text-white text-[8px] font-black flex items-center justify-center"
                       style={{ background: sec.color }}>
                       {b > 9 ? '9' : b}
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] font-semibold" style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.2)' }}>
+                <span className="text-[10px] font-semibold" style={{ color: hasAlert ? sec.color : 'rgba(0,0,0,0.25)' }}>
                   {sec.label}
                 </span>
               </button>
