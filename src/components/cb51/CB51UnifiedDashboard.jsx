@@ -1,82 +1,102 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, CheckCircle, DollarSign, Calendar, Zap, ArrowLeft, Brain, AlertTriangle, ChevronDown, Loader, X } from 'lucide-react';
+import { Mail, CheckCircle, DollarSign, Calendar, Zap, ArrowLeft, Brain, ChevronDown, Loader, TrendingUp, Clock, Star } from 'lucide-react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import CB51GigsTab from './CB51GigsTab';
 import { CB51InboxTab, CB51TasksTab, CB51FinanceTab, CB51CalendarTab } from './CB51TabsContent';
 import CB51TestPush from './CB51TestPush';
-import CB51GigApprovalConfirm from './CB51GigApprovalConfirm';
 
 const SECTIONS = [
-  { id: 'gigs',     label: 'GIGS',     icon: Zap,         border: 'border-cyan-500',   bg: 'bg-cyan-500',    text: 'text-cyan-400'   },
-  { id: 'inbox',    label: 'INBOX',    icon: Mail,        border: 'border-orange-500', bg: 'bg-orange-500',  text: 'text-orange-400' },
-  { id: 'tasks',    label: 'TO-DO',    icon: CheckCircle, border: 'border-green-500',  bg: 'bg-green-500',   text: 'text-green-400'  },
-  { id: 'finance',  label: 'FINANCE',  icon: DollarSign,  border: 'border-green-500',  bg: 'bg-green-500',   text: 'text-green-400'  },
-  { id: 'calendar', label: 'CALENDAR', icon: Calendar,    border: 'border-amber-500',  bg: 'bg-amber-500',   text: 'text-amber-400'  },
+  { id: 'gigs',     label: 'GIGS',     icon: Zap,         border: 'border-cyan-500',   bg: 'bg-cyan-500',    text: 'text-cyan-400',   glow: 'rgba(6,182,212,0.12)'   },
+  { id: 'inbox',    label: 'INBOX',    icon: Mail,        border: 'border-orange-500', bg: 'bg-orange-500',  text: 'text-orange-400', glow: 'rgba(249,115,22,0.12)'  },
+  { id: 'tasks',    label: 'TO-DO',    icon: CheckCircle, border: 'border-red-500',    bg: 'bg-red-500',     text: 'text-red-400',    glow: 'rgba(239,68,68,0.12)'   },
+  { id: 'finance',  label: 'FINANCE',  icon: DollarSign,  border: 'border-green-500',  bg: 'bg-green-500',   text: 'text-green-400',  glow: 'rgba(16,185,129,0.12)'  },
+  { id: 'calendar', label: 'CALENDAR', icon: Calendar,    border: 'border-amber-500',  bg: 'bg-amber-500',   text: 'text-amber-400',  glow: 'rgba(245,158,11,0.12)'  },
 ];
 
-// ── AUTO BRIEFING BANNER ─────────────────────────────────────────────────────
-function AutoBriefingBanner({ artistId, onClose }) {
-  const [briefing, setBriefing] = useState(null);
-  const [loading, setLoading] = useState(true);
+// ── LIVE STATS STRIP ─────────────────────────────────────────────────────────
+function LiveStatsStrip({ artistId }) {
+  const { data: confirmedGigs = [] } = useQuery({
+    queryKey: ['confirmedGigs', artistId],
+    queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'confirmed' }).catch(() => []),
+    enabled: !!artistId,
+    staleTime: 60000,
+  });
+  const { data: pendingGigs = [] } = useQuery({
+    queryKey: ['pendingGigsAlert', artistId],
+    queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'manager_reviewing' }).catch(() => []),
+    enabled: !!artistId,
+    staleTime: 15000,
+  });
+  const { data: tasks = [] } = useQuery({
+    queryKey: ['cb51Tasks', artistId],
+    queryFn: () => base44.entities.CB51Task?.filter?.({ artist_id: artistId }).catch(() => []),
+    enabled: !!artistId,
+    staleTime: 30000,
+  });
 
-  useEffect(() => {
-    const generateAutoBriefing = async () => {
-      try {
-        const [gigOffers, invoices, tasks] = await Promise.all([
-          base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'manager_reviewing' }).catch(() => []),
-          base44.entities.CB51Invoice?.filter?.({ artist_id: artistId, status: 'unpaid' }).catch(() => []),
-          base44.entities.CB51Task?.filter?.({ artist_id: artistId, status: { $ne: 'done' } }).catch(() => []),
-        ]);
+  const totalEarned = confirmedGigs.reduce((sum, g) => sum + (g.fee || 0), 0);
+  const openTasks = tasks.filter(t => t.status !== 'done').length;
 
-        const urgentItems = [];
-        if (gigOffers.length > 0) urgentItems.push(`${gigOffers.length} gig offer${gigOffers.length > 1 ? 's' : ''} waiting`);
-        if (invoices.length > 0) urgentItems.push(`${invoices.length} unpaid invoice${invoices.length > 1 ? 's' : ''}`);
-        if (tasks.length > 0) urgentItems.push(`${tasks.length} open task${tasks.length > 1 ? 's' : ''}`);
+  // Next upcoming gig
+  const now = new Date();
+  const upcomingGigs = confirmedGigs
+    .filter(g => g.date_start && new Date(g.date_start) >= now)
+    .sort((a, b) => new Date(a.date_start) - new Date(b.date_start));
+  const nextGig = upcomingGigs[0];
+  let daysUntil = null;
+  if (nextGig) {
+    daysUntil = Math.ceil((new Date(nextGig.date_start) - now) / (1000 * 60 * 60 * 24));
+  }
 
-        if (urgentItems.length === 0) {
-          setBriefing({ text: 'All clear — nothing urgent right now.', type: 'calm' });
-        } else {
-          setBriefing({
-            text: `Priority: ${urgentItems.join(' · ')}.`,
-            type: 'urgent'
-          });
-        }
-      } catch (err) {
-        console.error('Auto-briefing error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    generateAutoBriefing();
-  }, [artistId]);
-
-  if (loading) return null;
-  if (!briefing) return null;
+  const stats = [
+    {
+      icon: TrendingUp,
+      label: 'EARNED',
+      value: `£${totalEarned.toLocaleString()}`,
+      color: 'text-green-400',
+      bg: 'bg-green-500/10',
+      border: 'border-green-500/20',
+    },
+    {
+      icon: Clock,
+      label: 'NEXT GIG',
+      value: nextGig ? `${daysUntil}d` : '—',
+      sub: nextGig ? nextGig.venue?.slice(0, 14) : 'none booked',
+      color: 'text-amber-400',
+      bg: 'bg-amber-500/10',
+      border: 'border-amber-500/20',
+    },
+    {
+      icon: Star,
+      label: 'TO-DO',
+      value: openTasks,
+      color: openTasks > 0 ? 'text-red-400' : 'text-gray-500',
+      bg: openTasks > 0 ? 'bg-red-500/10' : 'bg-gray-800',
+      border: openTasks > 0 ? 'border-red-500/20' : 'border-gray-700',
+    },
+    {
+      icon: Zap,
+      label: 'OFFERS',
+      value: pendingGigs.length,
+      color: pendingGigs.length > 0 ? 'text-cyan-400' : 'text-gray-500',
+      bg: pendingGigs.length > 0 ? 'bg-cyan-500/10' : 'bg-gray-800',
+      border: pendingGigs.length > 0 ? 'border-cyan-500/30' : 'border-gray-700',
+    },
+  ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      className={`mx-3 mb-3 rounded-xl px-4 py-3 flex items-center justify-between ${
-        briefing.type === 'urgent' 
-          ? 'bg-cyan-500/10 border border-cyan-500/40' 
-          : 'bg-gray-900/50 border border-gray-800'
-      }`}
-    >
-      <div className="flex items-center gap-3">
-        <Brain className={`w-4 h-4 ${briefing.type === 'urgent' ? 'text-cyan-400' : 'text-gray-500'}`} />
-        <p className={`text-sm font-mono ${briefing.type === 'urgent' ? 'text-cyan-400 font-bold' : 'text-gray-500'}`}>
-          {briefing.text}
-        </p>
-      </div>
-      <button onClick={onClose} className="text-gray-500 hover:text-gray-300">
-        <span className="text-xs font-black">×</span>
-      </button>
-    </motion.div>
+    <div className="px-3 mb-4 grid grid-cols-4 gap-2">
+      {stats.map(({ icon: Icon, label, value, sub, color, bg, border }) => (
+        <div key={label} className={`${bg} border ${border} rounded-xl p-2.5 text-center`}>
+          <Icon className={`w-3.5 h-3.5 ${color} mx-auto mb-1`} />
+          <p className={`font-black text-base leading-none ${color}`}>{value}</p>
+          {sub && <p className="text-gray-600 text-[9px] mt-0.5 truncate">{sub}</p>}
+          <p className="text-gray-600 font-mono text-[8px] tracking-widest mt-0.5">{label}</p>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -226,8 +246,35 @@ function PendingGigAlert({ gig, onConfirm, onReject, confirming, artistId }) {
 export default function CB51UnifiedDashboard({ artistId }) {
   const [activeSection, setActiveSection] = useState(null);
   const [confirming, setConfirming] = useState(false);
-  const [showBriefing, setShowBriefing] = useState(true);
   const queryClient = useQueryClient();
+
+  const { data: pendingGigsForBadge = [] } = useQuery({
+    queryKey: ['pendingGigsBadge', artistId],
+    queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'manager_reviewing' }).catch(() => []),
+    enabled: !!artistId,
+    staleTime: 15000,
+    refetchInterval: 30000,
+  });
+  const { data: openTasks = [] } = useQuery({
+    queryKey: ['cb51Tasks', artistId],
+    queryFn: () => base44.entities.CB51Task?.filter?.({ artist_id: artistId }).catch(() => []),
+    enabled: !!artistId,
+    staleTime: 30000,
+  });
+  const { data: messages = [] } = useQuery({
+    queryKey: ['cb51Messages', artistId],
+    queryFn: () => base44.entities.CB51Message?.filter?.({ artist_id: artistId }).catch(() => []),
+    enabled: !!artistId,
+    staleTime: 30000,
+  });
+
+  const badges = {
+    gigs: pendingGigsForBadge.length,
+    inbox: messages.length,
+    tasks: openTasks.filter(t => t.status !== 'done').length,
+    finance: 0,
+    calendar: 0,
+  };
 
   const { data: pendingGigs = [] } = useQuery({
     queryKey: ['pendingGigsAlert', artistId],
@@ -265,17 +312,18 @@ export default function CB51UnifiedDashboard({ artistId }) {
 
   if (activeSection) {
     const section = SECTIONS.find(s => s.id === activeSection);
+    const SectionIcon = section?.icon;
     return (
       <div className="min-h-screen bg-black text-white">
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+        <div className="flex items-center gap-3 px-4 py-4 border-b border-white/5 bg-gray-950/80">
           <button
             onClick={() => setActiveSection(null)}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors active:scale-95"
+            className="flex items-center gap-1.5 text-gray-500 hover:text-white transition-colors active:scale-95 mr-1"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span className="text-xs font-black font-mono tracking-wider">BACK</span>
           </button>
-          <span className={`text-xs font-black font-mono tracking-widest ${section?.text}`}>
+          {SectionIcon && <SectionIcon className={`w-4 h-4 ${section?.text}`} />}
+          <span className={`text-sm font-black font-mono tracking-widest ${section?.text}`}>
             {section?.label}
           </span>
         </div>
@@ -301,10 +349,8 @@ export default function CB51UnifiedDashboard({ artistId }) {
 
   return (
     <div className="pt-2 pb-8">
-      {/* AUTO BRIEFING — AI reads everything, surfaces what matters */}
-      {showBriefing && (
-        <AutoBriefingBanner artistId={artistId} onClose={() => setShowBriefing(false)} />
-      )}
+      {/* LIVE STATS STRIP */}
+      <LiveStatsStrip artistId={artistId} />
 
       {/* TEST PUSH NOTIFICATION */}
       <CB51TestPush artistId={artistId} />
@@ -333,21 +379,25 @@ export default function CB51UnifiedDashboard({ artistId }) {
       <div className="px-3 grid grid-cols-2 gap-2">
         {SECTIONS.slice(0, 4).map((section) => {
           const Icon = section.icon;
+          const badge = badges[section.id];
           return (
             <motion.button
               key={section.id}
-              whileTap={{ scale: 0.94 }}
+              whileTap={{ scale: 0.93 }}
               onClick={() => {
                 setActiveSection(section.id);
-                // Haptic feedback on tap (mobile native app feel)
-                if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                  navigator.vibrate(8);
-                }
+                if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className={`bg-black border-2 ${section.border} rounded-xl p-4 text-center active:opacity-80 transition-opacity`}
-              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+              className={`relative bg-gray-950 border-2 ${section.border} rounded-2xl p-5 text-center active:opacity-80 transition-all`}
+              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', boxShadow: `0 0 20px ${section.glow || 'rgba(6,182,212,0.06)'}` }}
             >
-              <div className={`w-14 h-14 rounded-lg ${section.bg} text-black flex items-center justify-center mx-auto mb-2`}>
+              {badge > 0 && (
+                <span className="absolute top-2.5 right-2.5 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center leading-none">
+                  {badge > 9 ? '9+' : badge}
+                </span>
+              )}
+              <div className={`w-14 h-14 rounded-xl ${section.bg} text-black flex items-center justify-center mx-auto mb-3`}
+                style={{ boxShadow: `0 4px 15px ${section.glow || 'rgba(6,182,212,0.15)'}` }}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
               </div>
               <p className="text-white font-black text-xs font-mono tracking-widest">{section.label}</p>
@@ -361,22 +411,30 @@ export default function CB51UnifiedDashboard({ artistId }) {
         {(() => {
           const section = SECTIONS[4];
           const Icon = section.icon;
+          const badge = badges[section.id];
           return (
             <motion.button
               whileTap={{ scale: 0.97 }}
               onClick={() => {
                 setActiveSection(section.id);
-                if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                  navigator.vibrate(8);
-                }
+                if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(8);
               }}
-              className={`w-full bg-black border-2 ${section.border} rounded-xl p-4 flex items-center gap-4 active:opacity-80 transition-opacity`}
-              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation' }}
+              className={`relative w-full bg-gray-950 border-2 ${section.border} rounded-2xl p-4 flex items-center gap-4 active:opacity-80 transition-all`}
+              style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', boxShadow: `0 0 20px ${section.glow || 'rgba(245,158,11,0.06)'}` }}
             >
-              <div className={`w-14 h-14 rounded-lg ${section.bg} text-black flex items-center justify-center flex-shrink-0`}>
+              {badge > 0 && (
+                <span className="absolute top-2.5 right-3 bg-red-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center">
+                  {badge}
+                </span>
+              )}
+              <div className={`w-14 h-14 rounded-xl ${section.bg} text-black flex items-center justify-center flex-shrink-0`}
+                style={{ boxShadow: `0 4px 15px ${section.glow || 'rgba(245,158,11,0.15)'}` }}>
                 <Icon className="w-7 h-7" strokeWidth={2.5} />
               </div>
-              <p className="text-white font-black text-xs font-mono tracking-widest">{section.label}</p>
+              <div className="text-left">
+                <p className="text-white font-black text-sm font-mono tracking-widest">{section.label}</p>
+                <p className="text-gray-600 text-xs mt-0.5">Confirmed shows & upcoming dates</p>
+              </div>
             </motion.button>
           );
         })()}
