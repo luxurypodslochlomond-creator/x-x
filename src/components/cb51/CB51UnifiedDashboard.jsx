@@ -368,18 +368,22 @@ export default function CB51UnifiedDashboard({ artistId }) {
     calendar: '#f59e0b',
   };
 
-  const sectionSubtitles = {
-    gigs:     pendingGigsForBadge.length > 0 ? `${pendingGigsForBadge.length} offer${pendingGigsForBadge.length > 1 ? 's' : ''} waiting` : 'No new offers',
-    inbox:    badges.inbox > 0 ? `${badges.inbox} unread` : 'Clear',
-    tasks:    badges.tasks > 0 ? `${badges.tasks} open` : 'All clear',
-    finance:  'Income & invoices',
-    calendar: confirmedGigs.length > 0 ? `${confirmedGigs.length} show${confirmedGigs.length > 1 ? 's' : ''}` : 'No shows',
-  };
+  // Build a smart "what matters now" list — ordered by priority
+  const actionItems = [];
+  if (topPendingGig) {
+    actionItems.push({ type: 'gig_offer', gig: topPendingGig });
+  }
+  if (badges.tasks > 0) {
+    actionItems.push({ type: 'tasks', count: badges.tasks });
+  }
+  if (badges.inbox > 0) {
+    actionItems.push({ type: 'inbox', count: badges.inbox });
+  }
 
   return (
-    <div className="pb-10">
+    <div className="pb-16 min-h-screen">
 
-      {/* ── PENDING GIG — full bleed urgent card ── */}
+      {/* ── PENDING GIG OFFER — takes over if present ── */}
       {topPendingGig && (
         <div className="px-4 pt-3 pb-2">
           <PendingGigAlert
@@ -390,135 +394,151 @@ export default function CB51UnifiedDashboard({ artistId }) {
             artistId={artistId}
           />
           {pendingGigs.length > 1 && (
-            <p className="text-center text-amber-400 font-mono text-[10px] tracking-widest mt-2">
-              +{pendingGigs.length - 1} MORE WAITING
+            <p className="text-center text-amber-400/60 text-xs mt-2">
+              +{pendingGigs.length - 1} more waiting
             </p>
           )}
         </div>
       )}
 
-      {/* ── NEXT SHOW — contained card, no fee ── */}
+      {/* ── NEXT SHOW HERO ── */}
       {!topPendingGig && (
-        <div className="px-4 pt-3 pb-4">
-          <motion.button
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setActiveSection('calendar')}
-            className="relative w-full text-left rounded-2xl overflow-hidden"
-            style={{
-              WebkitTapHighlightColor: 'transparent',
-              background: nextGig
-                ? 'linear-gradient(135deg, #071a12 0%, #040e09 100%)'
-                : '#0a0a0a',
-              border: nextGig ? '1px solid rgba(16,185,129,0.2)' : '1px solid rgba(255,255,255,0.05)',
-              minHeight: 140,
-            }}
-          >
-            {nextGig && (
-              <div className="absolute inset-0 pointer-events-none" style={{
-                background: 'radial-gradient(ellipse at 85% 15%, rgba(16,185,129,0.15) 0%, transparent 60%)'
-              }} />
-            )}
-            <div className="relative p-5">
-              {nextGig ? (
-                <>
-                  <p className="text-emerald-500/50 text-[10px] font-mono tracking-[0.3em] uppercase mb-3">Next Show</p>
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1 min-w-0 pr-4">
-                      <p className="text-white font-black text-2xl leading-tight tracking-tight">{nextGig.venue}</p>
-                      {nextGig.city && <p className="text-gray-400 text-sm mt-1">{nextGig.city}</p>}
-                      {nextGig.date_start && (
-                        <p className="text-gray-600 text-xs mt-3 font-mono">
-                          {new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
-                        </p>
-                      )}
-                    </div>
-                    <div className="text-right flex-shrink-0 relative">
-                      {/* Pulse ring behind countdown */}
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <motion.div
-                          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0, 0.15] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                          className="w-16 h-16 rounded-full"
-                          style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.4) 0%, transparent 70%)' }}
-                        />
-                      </div>
-                      <p className="relative text-white font-black leading-none" style={{ fontSize: 52, lineHeight: 1 }}>{daysUntil}</p>
-                      <p className="text-emerald-600 text-[9px] font-mono tracking-[0.2em] mt-1">DAYS</p>
-                    </div>
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          whileTap={{ scale: 0.985 }}
+          onClick={() => setActiveSection('calendar')}
+          className="w-full text-left px-4 pt-3 pb-5"
+          style={{ WebkitTapHighlightColor: 'transparent' }}
+        >
+          {nextGig ? (
+            <div className="relative rounded-2xl overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, #06140f 0%, #030a07 100%)',
+                border: '1px solid rgba(16,185,129,0.15)',
+              }}
+            >
+              <div className="absolute inset-0 pointer-events-none"
+                style={{ background: 'radial-gradient(ellipse at 90% 10%, rgba(16,185,129,0.12) 0%, transparent 55%)' }} />
+              <div className="relative p-5">
+                <p className="text-emerald-600/60 text-[10px] font-mono tracking-[0.3em] mb-4">NEXT SHOW</p>
+                <div className="flex items-end justify-between">
+                  <div className="flex-1 min-w-0 pr-6">
+                    <p className="text-white font-black leading-none tracking-tight" style={{ fontSize: 28 }}>{nextGig.venue}</p>
+                    {nextGig.city && <p className="text-gray-500 text-sm mt-2">{nextGig.city}</p>}
+                    {nextGig.date_start && (
+                      <p className="text-gray-700 text-xs mt-3">
+                        {new Date(nextGig.date_start).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}
+                      </p>
+                    )}
                   </div>
-                </>
-              ) : (
-                <>
-                  <p className="text-gray-700 text-[10px] font-mono tracking-[0.3em] uppercase mb-3">Ready</p>
-                  <p className="text-gray-500 font-bold text-lg">No shows booked</p>
-                  <p className="text-gray-700 text-sm mt-1">Paste a gig offer to get started ↓</p>
-                </>
-              )}
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-white font-black leading-none" style={{ fontSize: 60, lineHeight: 1 }}>{daysUntil}</p>
+                    <p className="text-emerald-700 text-[9px] tracking-widest mt-1">DAYS</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </motion.button>
-        </div>
+          ) : (
+            <div className="rounded-2xl p-5" style={{ background: '#0a0a0a', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <p className="text-gray-600 text-sm">No shows booked yet.</p>
+              <p className="text-gray-700 text-xs mt-1">Paste a gig offer below to get started.</p>
+            </div>
+          )}
+        </motion.button>
       )}
 
-      {/* ── NAV GRID — CB51 signal identity ── */}
-      <div className="px-4 grid grid-cols-3 gap-2.5 pb-8">
+      {/* ── SECTION LINKS — horizontal pill row ── */}
+      <div className="px-4 flex gap-2 overflow-x-auto scrollbar-hide pb-1 mb-5">
         {SECTIONS.map((section) => {
           const Icon = section.icon;
           const badge = badges[section.id];
           const color = sectionColors[section.id];
-          const subtitle = sectionSubtitles[section.id];
           const hasAlert = badge > 0;
-
           return (
             <motion.button
               key={section.id}
-              whileTap={{ scale: 0.91 }}
+              whileTap={{ scale: 0.93 }}
               onClick={() => {
                 setActiveSection(section.id);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(6);
               }}
-              className="relative text-left rounded-2xl overflow-hidden active:opacity-80 flex flex-col"
+              className="flex items-center gap-1.5 flex-shrink-0 px-3 py-2 rounded-full transition-all"
               style={{
-                background: hasAlert
-                  ? `linear-gradient(145deg, ${color}20 0%, #060606 100%)`
-                  : 'linear-gradient(145deg, #111 0%, #080808 100%)',
-                border: `1px solid ${hasAlert ? color + '50' : 'rgba(255,255,255,0.07)'}`,
-                minHeight: 100,
-                boxShadow: hasAlert ? `0 0 20px ${color}15` : 'none',
+                background: hasAlert ? `${color}18` : 'rgba(255,255,255,0.04)',
+                border: `1px solid ${hasAlert ? color + '40' : 'rgba(255,255,255,0.07)'}`,
                 WebkitTapHighlightColor: 'transparent',
-                touchAction: 'manipulation'
               }}
             >
-              {/* Top accent bar — only lit when alert */}
-              <div className="absolute top-0 left-0 right-0 h-[2px]"
-                style={{ background: hasAlert ? `linear-gradient(90deg, ${color}, ${color}00)` : 'rgba(255,255,255,0.04)' }} />
+              <Icon className="w-3.5 h-3.5" style={{ color: hasAlert ? color : 'rgba(255,255,255,0.3)' }} strokeWidth={1.5} />
+              <span className="text-xs font-semibold" style={{ color: hasAlert ? color : 'rgba(255,255,255,0.35)' }}>
+                {section.label}
+              </span>
+              {hasAlert && (
+                <span className="text-black text-[9px] font-black rounded-full w-4 h-4 flex items-center justify-center"
+                  style={{ background: color }}>
+                  {badge > 9 ? '9+' : badge}
+                </span>
+              )}
+            </motion.button>
+          );
+        })}
+      </div>
 
-              <div className="p-4 flex flex-col h-full">
-                {/* Icon row */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-                    style={{ background: hasAlert ? `${color}18` : 'rgba(255,255,255,0.04)' }}>
-                    <Icon className="w-4 h-4" style={{ color: hasAlert ? color : 'rgba(255,255,255,0.3)' }} strokeWidth={1.5} />
-                  </div>
-                  {hasAlert && (
-                    <span className="text-black text-[9px] font-black rounded-full w-4 h-4 flex items-center justify-center flex-shrink-0"
-                      style={{ background: color }}>
-                      {badge > 9 ? '9+' : badge}
-                    </span>
-                  )}
+      {/* ── SMART CONTEXT — what matters right now ── */}
+      <div className="px-4 space-y-2">
+        {/* Confirmed shows coming up */}
+        {confirmedGigs.filter(g => g.date_start && new Date(g.date_start) >= new Date()).slice(0, 3).map((gig, i) => {
+          const days = Math.ceil((new Date(gig.date_start) - new Date()) / (1000 * 60 * 60 * 24));
+          return (
+            <motion.button
+              key={gig.id}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.04 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setActiveSection('calendar')}
+              className="w-full flex items-center justify-between rounded-xl px-4 py-3 text-left"
+              style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.05)', WebkitTapHighlightColor: 'transparent' }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-8 rounded-full flex-shrink-0" style={{ background: 'rgba(16,185,129,0.4)' }} />
+                <div>
+                  <p className="text-white text-sm font-semibold leading-tight">{gig.venue}</p>
+                  {gig.city && <p className="text-gray-600 text-xs">{gig.city}</p>}
                 </div>
-
-                {/* Label */}
-                <p className="text-white font-black text-[11px] tracking-wider leading-none">{section.label}</p>
-                <p className="mt-1 text-[9px] leading-tight font-mono"
-                  style={{ color: hasAlert ? color + 'cc' : 'rgba(255,255,255,0.18)' }}>
-                  {subtitle}
-                </p>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className="text-white font-black text-lg leading-none">{days}</p>
+                <p className="text-gray-700 text-[9px] tracking-wider">days</p>
               </div>
             </motion.button>
           );
         })}
+
+        {/* Open tasks preview */}
+        {openTasks.filter(t => t.status !== 'done').slice(0, 2).map((task, i) => (
+          <motion.button
+            key={task.id}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 + i * 0.04 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setActiveSection('tasks')}
+            className="w-full flex items-center gap-3 rounded-xl px-4 py-3 text-left"
+            style={{ background: '#0d0d0d', border: '1px solid rgba(239,68,68,0.12)', WebkitTapHighlightColor: 'transparent' }}
+          >
+            <div className="w-1.5 h-8 rounded-full flex-shrink-0" style={{ background: 'rgba(239,68,68,0.4)' }} />
+            <p className="text-gray-300 text-sm font-medium leading-tight truncate">{task.title}</p>
+          </motion.button>
+        ))}
+
+        {/* All clear state */}
+        {actionItems.length === 0 && confirmedGigs.filter(g => g.date_start && new Date(g.date_start) >= new Date()).length === 0 && openTasks.filter(t => t.status !== 'done').length === 0 && (
+          <div className="text-center py-8">
+            <p className="text-gray-700 text-sm">All clear.</p>
+          </div>
+        )}
       </div>
     </div>
   );
