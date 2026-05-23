@@ -3,10 +3,23 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKWaves, COOLASFUCKSorted, COOLASFUCKPaw } from '@/components/shared/COOLASFUCKIcon';
-import { Radio, Zap, Globe, GraduationCap, Signal, Brain, ChevronDown, ArrowRight } from 'lucide-react';
+import { Radio, Zap, Globe, GraduationCap, Signal, Brain, ChevronDown, ArrowRight, Building2 } from 'lucide-react';
 
 // Every product — what it does, who it's for, honest badge
 const PRODUCTS = [
+  {
+    id: 'ctrl51',
+    name: 'CTRL51',
+    tag: 'Procurement team?',
+    desc: 'AI fraud detection for council procurement. Catches price gouging, unapproved suppliers, and pattern anomalies before they cost you.',
+    badge: '£5k/month',
+    badgeColor: 'text-red-400 border-red-500/40',
+    Icon: Building2,
+    iconClass: 'text-red-400',
+    url: 'CTRL51',
+    border: 'border-red-500/40 hover:border-red-400/80',
+    glow: 'rgba(239,68,68,0.15)',
+  },
   {
     id: 'sorted',
     name: 'SORTED',
@@ -35,7 +48,7 @@ const PRODUCTS = [
     id: 'cb51',
     name: 'CB51',
     tag: 'Managing artists?',
-    desc: 'AI co-manager for touring musicians. Still building it. Will handle scheduling, contracts, payments, and the noise that drowns out the music.',
+    desc: 'AI co-manager for touring musicians. Scheduling, contracts, payments, band voting, and the noise that drowns out the music.',
     badge: 'Free Beta',
     badgeColor: 'text-cyan-400 border-cyan-500/40',
     Icon: Radio,
@@ -61,7 +74,7 @@ const PRODUCTS = [
     id: 'trackt',
     name: 'TRACKT',
     tag: 'Tracking assets?',
-    desc: 'AI RFID asset tracking for hospitals and logistics. Real-time intelligence. Natural language queries. Still developing, but works now.',
+    desc: 'AI RFID asset tracking for hospitals and logistics. Real-time intelligence. Natural language queries.',
     badge: 'In Development',
     badgeColor: 'text-blue-400 border-blue-500/40',
     Icon: Signal,
@@ -84,10 +97,22 @@ const PRODUCTS = [
     glow: 'rgba(168,85,247,0.15)',
   },
   {
+    id: 'freqs',
+    name: 'FREQUENCIES',
+    tag: 'Pain, sleep, recovery?',
+    desc: 'Healing frequencies for pain relief, sleep, wrist recovery, chakra work. All free. Built on real research — we link every source.',
+    badge: 'Free',
+    badgeColor: 'text-cyan-400 border-cyan-500/40',
+    Icon: COOLASFUCKWaves,
+    url: 'FrequencyChamber',
+    border: 'border-cyan-500/40 hover:border-cyan-400/80',
+    glow: 'rgba(6,182,212,0.15)',
+  },
+  {
     id: 'cleanup',
-    name: 'SUBMIT A CLEANUP',
+    name: 'LITTER PICKS',
     tag: 'Pick up litter. Earn tokens.',
-    desc: 'Photograph your cleanup, AI verifies the litter. Get rewarded with $P51 tokens. Adult or kid-friendly mode. No account needed to start.',
+    desc: 'Photograph your cleanup, AI verifies the litter. Get rewarded with $P51 tokens. Kid-friendly mode. No account needed.',
     badge: 'Free',
     badgeColor: 'text-green-400 border-green-500/40',
     Icon: Globe,
@@ -95,18 +120,6 @@ const PRODUCTS = [
     url: 'NewCleanup',
     border: 'border-green-500/40 hover:border-green-400/80',
     glow: 'rgba(34,197,94,0.15)',
-  },
-  {
-    id: 'freqs',
-    name: 'FREQUENCIES',
-    tag: 'Want to explore sound therapy?',
-    desc: 'Tinnitus relief, pain, sleep, recovery. All free. Built on real research — we tell you the source. You decide if it works for you.',
-    badge: 'Free',
-    badgeColor: 'text-cyan-400 border-cyan-500/40',
-    Icon: COOLASFUCKWaves,
-    url: 'FrequencyChamber',
-    border: 'border-cyan-500/40 hover:border-cyan-400/80',
-    glow: 'rgba(6,182,212,0.15)',
   },
 ];
 
