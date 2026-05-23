@@ -251,16 +251,15 @@ export default function CB51GigUploadParser({ artistId, onGigCreated }) {
       const managerId = currentUser?.id || '';
       const gigDate = editing.date_start?.trim() || new Date().toISOString().split('T')[0];
 
-      // Check for duplicate: same artist, venue, date
+      // Check for duplicate: same artist, venue, date (any status)
       const existingGigs = await base44.entities.GigOffer.filter({
         artist_id: selectedArtistId,
         venue: editing.venue_name.trim(),
         date: gigDate,
-        status: 'manager_reviewing'
       });
 
       if (existingGigs && existingGigs.length > 0) {
-        setSaveError('⚠️ This gig already exists for this date');
+        setSaveError(`⚠️ This gig already exists (status: ${existingGigs[0].status})`);
         throw new Error('Duplicate gig detected');
       }
 
