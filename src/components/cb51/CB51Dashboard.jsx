@@ -55,7 +55,7 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
       className="rounded-2xl overflow-hidden"
-      style={{ border: '1.5px solid rgba(6,182,212,0.4)', background: '#fff', boxShadow: '0 2px 12px rgba(6,182,212,0.1)' }}
+      style={{ border: '1.5px solid rgba(6,182,212,0.4)', background: '#0e1420', boxShadow: '0 4px 24px rgba(6,182,212,0.15)' }}
     >
       {/* Offer header */}
       <div className="flex items-center justify-between px-4 py-2"
@@ -68,9 +68,9 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
 
       {/* Details */}
       <div className="px-4 py-4">
-        <p className="font-black text-xl leading-tight" style={{ color: '#0f0f0f' }}>{gig.venue}</p>
-        <p className="text-sm mt-1" style={{ color: '#777' }}>{gig.city}{gig.city && gig.date_start ? ' · ' : ''}{gig.date_start}</p>
-        {gig.promoter_name && <p className="text-xs mt-2" style={{ color: '#aaa' }}>from {gig.promoter_name}</p>}
+        <p className="font-black text-xl leading-tight" style={{ color: '#f0f4ff' }}>{gig.venue}</p>
+        <p className="text-sm mt-1" style={{ color: '#64748b' }}>{gig.city}{gig.city && gig.date_start ? ' · ' : ''}{gig.date_start}</p>
+        {gig.promoter_name && <p className="text-xs mt-2" style={{ color: '#475569' }}>from {gig.promoter_name}</p>}
       </div>
 
       {/* AI read */}
@@ -93,7 +93,7 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
                 <div className="space-y-2">
                   <div className="flex items-baseline gap-2">
                     <span className="font-black text-2xl" style={{ color: scoreCol }}>{ai.score}</span>
-                    <span className="text-xs" style={{ color: '#555' }}>{ai.headline}</span>
+                    <span className="text-xs" style={{ color: '#94a3b8' }}>{ai.headline}</span>
                   </div>
                   {ai.flags?.length > 0 && (
                     <div className="flex flex-wrap gap-1">
@@ -123,20 +123,20 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
       </AnimatePresence>
 
       {/* Confirm / Reject */}
-      <div className="grid grid-cols-2" style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+      <div className="grid grid-cols-2" style={{ borderTop: '1px solid rgba(6,182,212,0.12)' }}>
         <button
           onClick={() => onReject(gig)}
           disabled={confirming}
-          className="py-4 font-black text-sm tracking-widest transition-colors active:bg-red-50 disabled:opacity-40"
-          style={{ color: '#ef4444', borderRight: '1px solid rgba(0,0,0,0.06)' }}
+          className="py-4 font-black text-sm tracking-widest transition-colors active:opacity-50 disabled:opacity-40"
+          style={{ color: '#ef4444', borderRight: '1px solid rgba(6,182,212,0.12)' }}
         >
           PASS
         </button>
         <button
           onClick={() => onConfirm(gig)}
           disabled={confirming}
-          className="py-4 font-black text-sm tracking-widest transition-colors active:bg-emerald-50 disabled:opacity-40"
-          style={{ color: '#059669' }}
+          className="py-4 font-black text-sm tracking-widest transition-colors active:opacity-50 disabled:opacity-40"
+          style={{ color: '#10b981' }}
         >
           CONFIRM
         </button>
@@ -218,7 +218,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
   if (active) {
     const sec = SECTIONS.find(s => s.id === active);
     return (
-      <div className="min-h-screen" style={{ background: '#f7f5f0', color: '#0f0f0f' }}>
+      <div className="min-h-screen" style={{ background: '#070a0f', color: '#f0f4ff' }}>
         <button
           onClick={() => setActive(null)}
           className="flex items-center gap-2 px-4 py-5 active:opacity-60 transition-opacity"
@@ -245,11 +245,11 @@ export default function CB51Dashboard({ artistId, artistName }) {
   // ── Home ──
   const urgentTasks = openTasks.filter(t => t.priority === 'urgent' || t.priority === 'high');
 
-  const BG = '#f7f5f0';
-  const CARD = '#ffffff';
-  const TEXT = '#0f0f0f';
-  const MUTED = '#777';
-  const BORDER = 'rgba(0,0,0,0.08)';
+  const BG = '#070a0f';
+  const CARD = '#0e1420';
+  const TEXT = '#f0f4ff';
+  const MUTED = '#64748b';
+  const BORDER = 'rgba(6,182,212,0.12)';
 
   return (
     <div className="min-h-screen flex flex-col select-none" style={{ background: BG, color: TEXT, paddingBottom: 90 }}>
@@ -313,7 +313,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
                   </p>
                 )}
               </div>
-              <div className="text-right flex-shrink-0 rounded-xl px-4 py-3" style={{ background: BG }}>
+              <div className="text-right flex-shrink-0 rounded-xl px-4 py-3" style={{ background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)' }}>
                 <p className="font-black text-4xl leading-none tabular-nums" style={{ color: daysUntil <= 7 ? '#f59e0b' : '#06b6d4' }}>{daysUntil}</p>
                 <p className="text-[9px] font-mono tracking-widest mt-1" style={{ color: '#aaa' }}>DAYS</p>
               </div>
@@ -413,7 +413,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
 
       {/* ── NAV BAR ── */}
       <div className="fixed bottom-0 left-0 right-0"
-        style={{ background: 'rgba(247,245,240,0.97)', backdropFilter: 'blur(24px)', borderTop: `1px solid ${BORDER}`, zIndex: 10, paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        style={{ background: 'rgba(7,10,15,0.97)', backdropFilter: 'blur(24px)', borderTop: `1px solid rgba(6,182,212,0.2)`, zIndex: 10, paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="flex">
           {SECTIONS.map(sec => {
             const b = badges[sec.id];
