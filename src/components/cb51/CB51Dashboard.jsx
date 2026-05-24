@@ -182,10 +182,11 @@ export default function CB51Dashboard({ artistId, artistName }) {
 
   const now = new Date();
   const upcoming = confirmed
-    .filter(g => g.date_start && new Date(g.date_start) >= now)
-    .sort((a, b) => new Date(a.date_start) - new Date(b.date_start));
+    .filter(g => (g.date || g.date_start) && new Date(g.date || g.date_start) >= now)
+    .sort((a, b) => new Date(a.date || a.date_start) - new Date(b.date || b.date_start));
   const nextShow = upcoming[0] || null;
-  const daysUntil = nextShow ? Math.ceil((new Date(nextShow.date_start) - now) / 86400000) : null;
+  const nextShowDate = nextShow ? new Date(nextShow.date || nextShow.date_start) : null;
+  const daysUntil = nextShowDate ? Math.ceil((nextShowDate - now) / 86400000) : null;
   const openTasks = tasks.filter(t => t.status !== 'done');
 
   const badges = {
@@ -307,9 +308,9 @@ export default function CB51Dashboard({ artistId, artistName }) {
               <div className="flex-1 min-w-0">
                 <p className="font-black text-2xl leading-tight break-words" style={{ color: TEXT }}>{nextShow.venue}</p>
                 {nextShow.city && <p className="text-sm mt-1" style={{ color: MUTED }}>{nextShow.city}</p>}
-                {nextShow.date_start && (
+                {nextShowDate && (
                   <p className="text-xs mt-2 font-mono" style={{ color: '#aaa' }}>
-                    {new Date(nextShow.date_start).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
+                    {nextShowDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
                   </p>
                 )}
               </div>
@@ -370,7 +371,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
           <div className="rounded-2xl overflow-hidden" style={{ background: CARD, border: `1px solid ${BORDER}`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
             <p className="text-xs font-bold tracking-widest uppercase px-4 pt-4 pb-2" style={{ color: MUTED }}>Coming Up</p>
             {upcoming.slice(1, 4).map((gig, i) => {
-              const d = Math.ceil((new Date(gig.date_start) - now) / 86400000);
+              const d = Math.ceil((new Date(gig.date || gig.date_start) - now) / 86400000);
               return (
                 <button key={gig.id} onClick={() => setActive('calendar')}
                   className="w-full flex items-center justify-between px-4 py-3 text-left transition-colors active:bg-black/5"
@@ -430,7 +431,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
                     style={{ background: sec.color }} />
                 )}
                 <div className="relative">
-                  <sec.Icon className="w-5 h-5" style={{ color: hasAlert ? sec.color : 'rgba(0,0,0,0.2)' }} />
+                  <sec.Icon className="w-5 h-5" style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.25)' }} />
                   {b > 0 && (
                     <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 rounded-full text-white text-[8px] font-black flex items-center justify-center"
                       style={{ background: sec.color }}>
@@ -438,7 +439,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] font-semibold" style={{ color: hasAlert ? sec.color : 'rgba(0,0,0,0.25)' }}>
+                <span className="text-[10px] font-semibold" style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.25)' }}>
                   {sec.label}
                 </span>
               </button>
