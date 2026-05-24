@@ -1,299 +1,359 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft, Plus, Trash2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowLeft, MapPin, Phone, Mail, Users, PoundSterling, Clock, AlertCircle, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-export default function CB51CalendarView() {
-          const navigate = useNavigate();
-          const queryClient = useQueryClient();
-          const [showAddEvent, setShowAddEvent] = useState(false);
-          const [selectedEvent, setSelectedEvent] = useState(null);
-          const [newEvent, setNewEvent] = useState({ 
-        title: '', 
-        date: '', 
-        time: '',
-        venue: '',
-        location: '',
-        city: '',
-        country: '',
-        promoter: '',
-        promoter_phone: '',
-        promoter_email: '',
-        emergency_contact_name: '',
-        emergency_contact_phone: '',
-        fee: '',
-        currency: 'GBP',
-        capacity: '',
-        notes: ''
-    });
+// Safe date parser — no timezone off-by-one on any browser
+const parseDate = (d) => {
+  if (!d) return null;
+  if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)) {
+    const [y, m, day] = d.split('-').map(Number);
+    return new Date(y, m - 1, day);
+  }
+  return new Date(d);
+};
 
-          const urlParams = new URLSearchParams(window.location.search);
-          const artistId = urlParams.get('id');
+const formatFull = (d) => {
+  const date = parseDate(d);
+  if (!date || isNaN(date)) return '—';
+  return date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+};
 
-    const { data: events = [] } = useQuery({
-        queryKey: ['events', artistId],
-        queryFn: () => artistId ? base44.entities.CB51Event.filter({ artist_id: artistId }) : [],
-        enabled: !!artistId
-    });
+const getDateParts = (d) => {
+  const date = parseDate(d);
+  if (!date || isNaN(date)) return { day: '?', month: '???' };
+  return {
+    day: date.getDate(),
+    month: date.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase(),
+  };
+};
 
-    const createEventMutation = useMutation({
-        mutationFn: (eventData) => base44.entities.CB51Event.create(eventData),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['events'] });
-            setNewEvent({ title: '', date: '', location: '' });
-            setShowAddEvent(false);
-        }
-    });
+const daysUntil = (d) => {
+  const date = parseDate(d);
+  if (!date || isNaN(date)) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.ceil((date - today) / 86400000);
+};
 
-    const deleteEventMutation = useMutation({
-        mutationFn: (id) => base44.entities.CB51Event.delete(id),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['events'] })
-    });
+// ── Single gig card ────────────────────────────────────────────────────────────
+function GigCard({ gig, isOpen, onToggle }) {
+  const dateStr = gig.date_start || gig.date;
+  const { day, month } = getDateParts(dateStr);
+  const days = daysUntil(dateStr);
+  const isPast = days !== null && days < 0;
+  const isSoon = days !== null && days >= 0 && days <= 7;
 
-    const handleAddEvent = () => {
-        if (!newEvent.title.trim() || !newEvent.date) return;
-        createEventMutation.mutate({ 
-            ...newEvent, 
-            artist_id: artistId,
-            fee: newEvent.fee ? parseFloat(newEvent.fee) : undefined,
-            capacity: newEvent.capacity ? parseInt(newEvent.capacity) : undefined
-        });
-        setNewEvent({ 
-            title: '', 
-            date: '', 
-            time: '',
-            venue: '',
-            location: '',
-            city: '',
-            country: '',
-            promoter: '',
-            promoter_phone: '',
-            promoter_email: '',
-            emergency_contact_name: '',
-            emergency_contact_phone: '',
-            fee: '',
-            currency: 'GBP',
-            capacity: '',
-            notes: ''
-        });
-    };
-
-    const isMobile = window.innerWidth < 1024;
-
-    // Safe date parser — handles "2025-06-12" strings correctly on all browsers
-    const parseDate = (d) => {
-        if (!d) return null;
-        // If it's a date-only string (YYYY-MM-DD), parse as UTC to avoid timezone off-by-one
-        if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)) {
-            const [y, m, day] = d.split('-').map(Number);
-            return new Date(y, m - 1, day);
-        }
-        return new Date(d);
-    };
-
-    const formatEventDate = (d) => {
-        const date = parseDate(d);
-        if (!date || isNaN(date)) return '—';
-        return date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-    };
-
-    const getDateParts = (d) => {
-        const date = parseDate(d);
-        if (!date || isNaN(date)) return { day: '?', month: '???' };
-        return {
-            day: date.getDate(),
-            month: date.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase()
-        };
-    };
-
-    return (
-        <div className="min-h-screen bg-black text-white p-4 pb-24">
-            <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-600 hover:text-cyan-400 transition-all mb-6">
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-bold font-mono">BACK</span>
-            </button>
-
-            <h1 className="text-3xl font-black text-cyan-400 font-mono mb-4">CALENDAR</h1>
-
-            {showAddEvent && (
-                <div className="rounded-xl p-4 mb-4 space-y-3" style={{ background: '#0e1420', border: '1px solid rgba(6,182,212,0.25)' }}>
-                    <Input placeholder="Event name" value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
-                    <div className="flex gap-2">
-                        <Input type="date" value={newEvent.date} onChange={(e) => setNewEvent({...newEvent, date: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                        <Input type="time" value={newEvent.time} onChange={(e) => setNewEvent({...newEvent, time: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                    </div>
-                    <div className="flex gap-2">
-                        <Input placeholder="Venue" value={newEvent.venue} onChange={(e) => setNewEvent({...newEvent, venue: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                        <Input placeholder="City" value={newEvent.city} onChange={(e) => setNewEvent({...newEvent, city: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                    </div>
-                    <Input placeholder="Address/Location" value={newEvent.location} onChange={(e) => setNewEvent({...newEvent, location: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
-                    <Input placeholder="Promoter name" value={newEvent.promoter} onChange={(e) => setNewEvent({...newEvent, promoter: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
-                    <div className="flex gap-2">
-                        <Input placeholder="Promoter phone" value={newEvent.promoter_phone} onChange={(e) => setNewEvent({...newEvent, promoter_phone: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                        <Input placeholder="Promoter email" value={newEvent.promoter_email} onChange={(e) => setNewEvent({...newEvent, promoter_email: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                    </div>
-                    <div className="flex gap-2">
-                        <Input placeholder="Emergency contact" value={newEvent.emergency_contact_name} onChange={(e) => setNewEvent({...newEvent, emergency_contact_name: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                        <Input placeholder="Emergency phone" value={newEvent.emergency_contact_phone} onChange={(e) => setNewEvent({...newEvent, emergency_contact_phone: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                    </div>
-                    <div className="flex gap-2">
-                        <Input type="number" placeholder="Fee" value={newEvent.fee} onChange={(e) => setNewEvent({...newEvent, fee: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                        <Input type="number" placeholder="Capacity" value={newEvent.capacity} onChange={(e) => setNewEvent({...newEvent, capacity: e.target.value})} className="bg-black border-gray-700 text-white text-xs flex-1" />
-                    </div>
-                    <Input placeholder="Notes" value={newEvent.notes} onChange={(e) => setNewEvent({...newEvent, notes: e.target.value})} className="bg-black border-gray-700 text-white text-xs" />
-                    <div className="flex gap-2">
-                        <Button onClick={() => setShowAddEvent(false)} className="flex-1 bg-gray-700">CANCEL</Button>
-                        <Button onClick={handleAddEvent} className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-black font-black">SAVE</Button>
-                    </div>
-                </div>
-            )}
-
-            <button onClick={() => setShowAddEvent(!showAddEvent)} className="w-full bg-cyan-500 hover:bg-cyan-600 text-black font-black py-3 rounded-xl mb-4 flex items-center justify-center gap-2">
-                <Plus className="w-4 h-4" /> ADD EVENT
-            </button>
-
-            <div className="space-y-2">
-                {events.length === 0 ? (
-                    <div className="text-center py-12 text-gray-700 font-mono">
-                        <p className="text-lg font-black text-gray-600">No shows yet</p>
-                        <p className="text-xs mt-1">Add your first event above</p>
-                    </div>
-                ) : (
-                    [...events].sort((a, b) => (parseDate(a.date) || 0) - (parseDate(b.date) || 0)).map(event => {
-                        const { day, month } = getDateParts(event.date);
-                        return (
-                        <motion.div key={event.id} layout className="rounded-xl overflow-hidden" style={{ background: '#0e1420', border: '1px solid rgba(6,182,212,0.15)' }}>
-                            <button 
-                                onClick={() => setSelectedEvent(selectedEvent?.id === event.id ? null : event)}
-                                className="w-full p-3 flex items-center gap-3 text-left transition-colors"
-                                style={{ WebkitTapHighlightColor: 'transparent' }}
-                            >
-                                {/* Date chip */}
-                                <div className="flex-shrink-0 w-12 h-14 rounded-xl flex flex-col items-center justify-center" style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.25)' }}>
-                                    <span className="font-black text-xl leading-none" style={{ color: '#06b6d4' }}>{day}</span>
-                                    <span className="text-[9px] font-bold tracking-widest mt-0.5" style={{ color: '#64748b' }}>{month}</span>
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <p className="text-white font-bold text-sm truncate">{event.title}</p>
-                                    {(event.city || event.venue) && <p className="text-gray-500 text-xs truncate">{event.city || event.venue}</p>}
-                                    {event.fee > 0 && <p className="text-green-400 text-xs font-bold mt-0.5">£{event.fee?.toLocaleString()}</p>}
-                                </div>
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        deleteEventMutation.mutate(event.id);
-                                    }}
-                                    className="flex-shrink-0 p-1"
-                                >
-                                    <Trash2 className="w-4 h-4 text-red-400/60" />
-                                </button>
-                            </button>
-
-                            {selectedEvent?.id === event.id && (
-                                <motion.div
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    className="border-t border-gray-800 bg-black/60 p-4 space-y-3 text-sm"
-                                >
-                                    <div>
-                                        <p className="text-cyan-400 font-mono font-bold text-xs">DATE</p>
-                                        <p className="text-white font-mono">{formatEventDate(event.date)}{event.time ? ` · ${event.time}` : ''}</p>
-                                    </div>
-                                    {event.location && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">LOCATION</p>
-                                            <p className="text-white font-mono">{event.location}</p>
-                                        </div>
-                                    )}
-                                    {event.venue && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">VENUE</p>
-                                            <p className="text-white font-mono">{event.venue}</p>
-                                        </div>
-                                    )}
-                                    {event.city && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">CITY</p>
-                                            <p className="text-white font-mono">{event.city}{event.country ? `, ${event.country}` : ''}</p>
-                                        </div>
-                                    )}
-                                    {event.fee && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">FEE</p>
-                                            <p className="text-green-400 font-black font-mono">£{event.fee?.toLocaleString()}</p>
-                                        </div>
-                                    )}
-                                    {event.promoter && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER</p>
-                                            <p className="text-white font-mono">{event.promoter}</p>
-                                        </div>
-                                    )}
-                                    {event.capacity && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">CAPACITY</p>
-                                            <p className="text-white font-mono">{event.capacity}</p>
-                                        </div>
-                                    )}
-                                    {event.time && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">TIME</p>
-                                            <p className="text-white font-mono">{event.time}</p>
-                                        </div>
-                                    )}
-                                    {event.promoter_phone && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER PHONE</p>
-                                            <p className="text-white font-mono">{event.promoter_phone}</p>
-                                        </div>
-                                    )}
-                                    {event.promoter_email && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">PROMOTER EMAIL</p>
-                                            <p className="text-white font-mono text-xs">{event.promoter_email}</p>
-                                        </div>
-                                    )}
-                                    {event.emergency_contact_name && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">EMERGENCY CONTACT</p>
-                                            <p className="text-white font-mono">{event.emergency_contact_name}</p>
-                                            {event.emergency_contact_phone && <p className="text-gray-400 font-mono text-xs">{event.emergency_contact_phone}</p>}
-                                        </div>
-                                    )}
-                                    {event.location && event.city && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">DIRECTIONS</p>
-                                            <a 
-                                                href={`https://maps.google.com/maps?q=${encodeURIComponent(`${event.location}, ${event.city}${event.country ? ', ' + event.country : ''}`)}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-amber-400 hover:text-amber-300 text-xs font-mono underline"
-                                            >
-                                                Open in Google Maps →
-                                            </a>
-                                        </div>
-                                    )}
-                                    {event.notes && (
-                                        <div>
-                                            <p className="text-cyan-400 font-mono font-bold text-xs">NOTES</p>
-                                            <p className="text-gray-400 text-xs">{event.notes}</p>
-                                        </div>
-                                    )}
-
-                                    <button onClick={() => { deleteEventMutation.mutate(event.id); setSelectedEvent(null); }} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded text-sm mt-2">DELETE</button>
-                                    </motion.div>
-                                    )}
-                                    </motion.div>
-                                    );
-                                    })
-                                    )}
-            </div>
+  return (
+    <motion.div
+      layout
+      className="rounded-2xl overflow-hidden"
+      style={{
+        background: '#0e1420',
+        border: `1px solid ${isPast ? 'rgba(100,116,139,0.2)' : isSoon ? 'rgba(245,158,11,0.35)' : 'rgba(6,182,212,0.18)'}`,
+      }}
+    >
+      {/* Row */}
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center gap-4 p-4 text-left active:opacity-70 transition-opacity"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
+      >
+        {/* Date chip */}
+        <div
+          className="flex-shrink-0 w-14 h-16 rounded-xl flex flex-col items-center justify-center"
+          style={{
+            background: isPast ? 'rgba(100,116,139,0.08)' : isSoon ? 'rgba(245,158,11,0.1)' : 'rgba(6,182,212,0.08)',
+            border: `1px solid ${isPast ? 'rgba(100,116,139,0.2)' : isSoon ? 'rgba(245,158,11,0.3)' : 'rgba(6,182,212,0.2)'}`,
+          }}
+        >
+          <span className="font-black text-2xl leading-none tabular-nums" style={{ color: isPast ? '#64748b' : isSoon ? '#f59e0b' : '#06b6d4' }}>{day}</span>
+          <span className="text-[9px] font-bold tracking-widest mt-0.5" style={{ color: isPast ? '#475569' : '#64748b' }}>{month}</span>
         </div>
-    );
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <p className="font-black text-base leading-snug" style={{ color: isPast ? '#64748b' : '#f0f4ff' }}>
+            {gig.venue}
+          </p>
+          {(gig.city || gig.location) && (
+            <p className="text-xs mt-0.5 truncate" style={{ color: '#475569' }}>
+              {[gig.city, gig.country].filter(Boolean).join(', ') || gig.location}
+            </p>
+          )}
+          {gig.fee > 0 && (
+            <p className="text-sm font-bold mt-1" style={{ color: isPast ? '#374151' : '#10b981' }}>
+              £{gig.fee.toLocaleString()}
+            </p>
+          )}
+        </div>
+
+        {/* Days pill */}
+        <div className="flex-shrink-0 flex flex-col items-end gap-1">
+          {days !== null && !isPast && (
+            <span
+              className="text-xs font-black tabular-nums px-2 py-0.5 rounded-full"
+              style={{
+                background: isSoon ? 'rgba(245,158,11,0.12)' : 'rgba(6,182,212,0.08)',
+                color: isSoon ? '#f59e0b' : '#06b6d4',
+              }}
+            >
+              {days === 0 ? 'TODAY' : `${days}d`}
+            </span>
+          )}
+          {isPast && <span className="text-[10px] font-mono" style={{ color: '#374151' }}>PAST</span>}
+          <ChevronDown
+            className="w-4 h-4 transition-transform mt-1"
+            style={{ color: '#334155', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          />
+        </div>
+      </button>
+
+      {/* Expanded detail */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-5 pt-1 space-y-4" style={{ borderTop: '1px solid rgba(6,182,212,0.1)' }}>
+
+              {/* Date + time */}
+              <div>
+                <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#334155' }}>DATE</p>
+                <p className="font-semibold text-sm" style={{ color: '#f0f4ff' }}>
+                  {formatFull(dateStr)}{gig.time ? ` · ${gig.time}` : ''}
+                </p>
+              </div>
+
+              {/* Venue / Location */}
+              {(gig.venue || gig.location) && (
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: '#334155' }} />
+                  <div>
+                    {gig.venue && <p className="text-sm font-semibold" style={{ color: '#f0f4ff' }}>{gig.venue}</p>}
+                    {gig.location && <p className="text-xs" style={{ color: '#64748b' }}>{gig.location}</p>}
+                    {gig.city && (
+                      <p className="text-xs" style={{ color: '#64748b' }}>
+                        {[gig.city, gig.country].filter(Boolean).join(', ')}
+                      </p>
+                    )}
+                    {(gig.location || gig.city) && (
+                      <a
+                        href={`https://maps.google.com/maps?q=${encodeURIComponent([gig.venue, gig.location, gig.city, gig.country].filter(Boolean).join(', '))}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-bold mt-1 inline-block"
+                        style={{ color: '#06b6d4' }}
+                      >
+                        Open in Maps →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Fee */}
+              {gig.fee > 0 && (
+                <div className="flex items-center gap-2">
+                  <PoundSterling className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#334155' }} />
+                  <p className="font-black text-lg" style={{ color: '#10b981' }}>£{gig.fee.toLocaleString()}</p>
+                  {gig.currency && gig.currency !== 'GBP' && (
+                    <span className="text-xs" style={{ color: '#475569' }}>{gig.currency}</span>
+                  )}
+                </div>
+              )}
+
+              {/* Capacity */}
+              {gig.capacity > 0 && (
+                <div className="flex items-center gap-2">
+                  <Users className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#334155' }} />
+                  <p className="text-sm" style={{ color: '#94a3b8' }}>{gig.capacity.toLocaleString()} capacity</p>
+                </div>
+              )}
+
+              {/* Promoter */}
+              {(gig.promoter || gig.promoter_name) && (
+                <div>
+                  <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#334155' }}>PROMOTER</p>
+                  <p className="text-sm font-semibold" style={{ color: '#f0f4ff' }}>{gig.promoter || gig.promoter_name}</p>
+                  {gig.promoter_phone && (
+                    <a href={`tel:${gig.promoter_phone}`} className="flex items-center gap-1.5 mt-1">
+                      <Phone className="w-3 h-3" style={{ color: '#475569' }} />
+                      <span className="text-xs" style={{ color: '#06b6d4' }}>{gig.promoter_phone}</span>
+                    </a>
+                  )}
+                  {gig.promoter_email && (
+                    <a href={`mailto:${gig.promoter_email}`} className="flex items-center gap-1.5 mt-1">
+                      <Mail className="w-3 h-3" style={{ color: '#475569' }} />
+                      <span className="text-xs" style={{ color: '#06b6d4' }}>{gig.promoter_email}</span>
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {/* Emergency contact */}
+              {gig.emergency_contact_name && (
+                <div>
+                  <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#ef4444' }}>EMERGENCY CONTACT</p>
+                  <p className="text-sm font-semibold" style={{ color: '#f0f4ff' }}>{gig.emergency_contact_name}</p>
+                  {gig.emergency_contact_phone && (
+                    <a href={`tel:${gig.emergency_contact_phone}`} className="flex items-center gap-1.5 mt-1">
+                      <Phone className="w-3 h-3" style={{ color: '#ef4444' }} />
+                      <span className="text-xs font-bold" style={{ color: '#ef4444' }}>{gig.emergency_contact_phone}</span>
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {/* Notes */}
+              {gig.notes && (
+                <div>
+                  <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#334155' }}>NOTES</p>
+                  <p className="text-sm" style={{ color: '#94a3b8' }}>{gig.notes}</p>
+                </div>
+              )}
+
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+// ── Main page ──────────────────────────────────────────────────────────────────
+export default function CB51CalendarView() {
+  const navigate = useNavigate();
+  const [openId, setOpenId] = useState(null);
+  const [showPast, setShowPast] = useState(false);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const artistId = urlParams.get('id');
+
+  // Single source of truth — confirmed GigOffers only
+  const { data: gigs = [], isLoading } = useQuery({
+    queryKey: ['confirmed-gigs-calendar', artistId],
+    queryFn: () => artistId
+      ? base44.entities.GigOffer.filter({ artist_id: artistId, status: 'confirmed' })
+      : [],
+    enabled: !!artistId,
+    staleTime: 30000,
+  });
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Dedupe by id, split into upcoming and past
+  const unique = gigs.filter((g, i, arr) => arr.findIndex(x => x.id === g.id) === i);
+  const upcoming = unique
+    .filter(g => {
+      const d = parseDate(g.date_start || g.date);
+      return d && d >= today;
+    })
+    .sort((a, b) => parseDate(a.date_start || a.date) - parseDate(b.date_start || b.date));
+
+  const past = unique
+    .filter(g => {
+      const d = parseDate(g.date_start || g.date);
+      return d && d < today;
+    })
+    .sort((a, b) => parseDate(b.date_start || b.date) - parseDate(a.date_start || a.date));
+
+  const totalFee = upcoming.reduce((sum, g) => sum + (g.fee || 0), 0);
+
+  return (
+    <div className="min-h-screen pb-24" style={{ background: '#070a0f', color: '#f0f4ff' }}>
+
+      {/* Header */}
+      <div className="px-4 pt-5 pb-4 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(6,182,212,0.1)' }}>
+        <button
+          onClick={() => navigate(-1)}
+          className="p-2 rounded-xl active:opacity-50 transition-opacity"
+          style={{ background: 'rgba(6,182,212,0.06)', border: '1px solid rgba(6,182,212,0.15)', WebkitTapHighlightColor: 'transparent' }}
+        >
+          <ArrowLeft className="w-4 h-4" style={{ color: '#06b6d4' }} />
+        </button>
+        <div className="flex-1">
+          <p className="font-black text-lg leading-none" style={{ color: '#f0f4ff' }}>Shows</p>
+          {!isLoading && (
+            <p className="text-xs mt-0.5" style={{ color: '#475569' }}>
+              {upcoming.length} confirmed{totalFee > 0 ? ` · £${totalFee.toLocaleString()} booked` : ''}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="px-4 pt-5 space-y-3">
+
+        {isLoading && (
+          <div className="flex items-center justify-center py-16">
+            <div className="w-6 h-6 rounded-full border-2 border-cyan-500/30 border-t-cyan-500 animate-spin" />
+          </div>
+        )}
+
+        {!isLoading && upcoming.length === 0 && (
+          <div className="text-center py-16 space-y-2">
+            <p className="font-black text-lg" style={{ color: '#334155' }}>Nothing booked yet</p>
+            <p className="text-sm" style={{ color: '#1e293b' }}>Confirm a gig offer from the dashboard</p>
+          </div>
+        )}
+
+        {/* Upcoming */}
+        {upcoming.map(gig => (
+          <GigCard
+            key={gig.id}
+            gig={gig}
+            isOpen={openId === gig.id}
+            onToggle={() => setOpenId(openId === gig.id ? null : gig.id)}
+          />
+        ))}
+
+        {/* Past shows toggle */}
+        {past.length > 0 && (
+          <div className="pt-2">
+            <button
+              onClick={() => setShowPast(v => !v)}
+              className="w-full flex items-center justify-between px-4 py-3 rounded-xl active:opacity-60 transition-opacity"
+              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}
+            >
+              <span className="text-xs font-bold tracking-widest" style={{ color: '#334155' }}>
+                PAST SHOWS ({past.length})
+              </span>
+              <ChevronDown
+                className="w-4 h-4 transition-transform"
+                style={{ color: '#334155', transform: showPast ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              />
+            </button>
+
+            <AnimatePresence>
+              {showPast && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="space-y-2 mt-2"
+                >
+                  {past.map(gig => (
+                    <GigCard
+                      key={gig.id}
+                      gig={gig}
+                      isOpen={openId === gig.id}
+                      onToggle={() => setOpenId(openId === gig.id ? null : gig.id)}
+                    />
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
 }
