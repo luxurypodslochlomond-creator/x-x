@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { CheckCircle, DollarSign, Calendar, ChevronRight, Plus, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { CheckCircle, DollarSign, Calendar, Plus, X } from 'lucide-react';
 
 // INBOX TAB
 export function CB51InboxTab({ artistId }) {
@@ -310,23 +309,43 @@ export function CB51FinanceTab({ artistId }) {
   );
 }
 
+// ─── SAFE DATE PARSE ───────────────────────────────────────────────────────────
+const parseTabDate = (d) => {
+  if (!d) return null;
+  if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)) {
+    const [y, m, day] = d.split('-').map(Number);
+    return new Date(y, m - 1, day);
+  }
+  return new Date(d);
+};
+
 // CALENDAR TAB
 export function CB51CalendarTab({ artistId }) {
-  const navigate = useNavigate();
-  const { data: confirmedGigs = [] } = useQuery({
+  const [openId, setOpenId] = useState(null);
+
+  const { data: gigsRaw = [] } = useQuery({
     queryKey: ['confirmedGigs', artistId],
-    queryFn: async () => {
-      const gigs = await base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'confirmed' }).catch(() => []);
-      const seen = new Set();
-      return gigs.filter(g => {
-        if (seen.has(g.id)) return false;
-        seen.add(g.id);
-        return true;
-      });
-    },
+    queryFn: () => base44.entities.GigOffer?.filter?.({ artist_id: artistId, status: 'confirmed' }).catch(() => []),
     enabled: !!artistId,
     staleTime: 30000
   });
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Dedupe then sort
+  const gigs = gigsRaw
+    .filter((g, i, arr) => arr.findIndex(x => x.id === g.id) === i)
+    .sort((a, b) => (parseTabDate(a.date_start || a.date) || 0) - (parseTabDate(b.date_start || b.date) || 0));
+
+  const upcoming = gigs.filter(g => {
+    const d = parseTabDate(g.date_start || g.date);
+    return d && d >= today;
+  });
+  const past = gigs.filter(g => {
+    const d = parseTabDate(g.date_start || g.date);
+    return d && d < today;
+  }).reverse();
 
   return (
     <motion.div
@@ -334,43 +353,125 @@ export function CB51CalendarTab({ artistId }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="py-6 space-y-6"
+      className="py-4 px-4 space-y-3"
     >
-      <div className="space-y-2 mb-6">
-        <h2 className="text-amber-400 font-black text-xl">Calendar</h2>
-        <p className="text-gray-500 text-sm">{confirmedGigs.length} confirmed shows</p>
+      <div className="mb-4">
+        <h2 className="font-black text-xl" style={{ color: '#f59e0b' }}>Shows</h2>
+        <p className="text-xs font-mono mt-0.5" style={{ color: '#334155' }}>
+          {upcoming.length} ahead{past.length > 0 ? ` · ${past.length} played` : ''}
+        </p>
       </div>
 
-      {confirmedGigs.length === 0 ? (
-        <div className="bg-gray-900 border border-white/10 rounded-xl p-6 text-center">
-          <Calendar className="w-8 h-8 text-gray-600 mx-auto mb-2" />
-          <p className="text-gray-400 font-bold">No shows scheduled</p>
+      {gigs.length === 0 ? (
+        <div className="rounded-2xl p-6 text-center" style={{ background: '#0e1420', border: '1px solid rgba(255,255,255,0.04)' }}>
+          <Calendar className="w-7 h-7 mx-auto mb-2" style={{ color: '#1e293b' }} />
+          <p className="font-bold text-sm" style={{ color: '#334155' }}>No shows confirmed yet</p>
         </div>
       ) : (
-        <div className="space-y-2">
-          {confirmedGigs.sort((a, b) => new Date(a.date_start) - new Date(b.date_start)).map(gig => (
-            <motion.button
-              key={gig.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              onClick={() => navigate(`/ScottLive?gig=${gig.id}`)}
-              className="w-full text-left bg-gray-900 border border-amber-500/20 rounded-lg p-4 hover:border-amber-500/60 hover:bg-gray-800/80 transition-all active:scale-95 cursor-pointer"
-            >
-              <div className="flex items-start gap-4">
-                <div className="bg-amber-500/20 border border-amber-500/40 rounded-lg px-4 py-3 text-center flex-shrink-0">
-                  <p className="text-amber-400 font-black text-lg">{new Date(gig.date_start).getDate()}</p>
-                  <p className="text-amber-600 text-xs font-bold">{new Date(gig.date_start).toLocaleDateString('en', { month: 'short' })}</p>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-white font-bold text-base">{gig.venue || gig.title}</p>
-                  <p className="text-gray-400 text-sm mt-1">{gig.location}</p>
-                  <p className="text-red-400 font-bold text-sm mt-2">£{gig.fee?.toLocaleString()}</p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-amber-600/50 flex-shrink-0 mt-1" />
+        <>
+          {upcoming.map(gig => {
+            const dateStr = gig.date_start || gig.date;
+            const d = parseTabDate(dateStr);
+            const days = d ? Math.ceil((d - today) / 86400000) : null;
+            const isSoon = days !== null && days <= 7;
+            const isOpen = openId === gig.id;
+            return (
+              <motion.div
+                key={gig.id}
+                layout
+                className="rounded-2xl overflow-hidden"
+                style={{ background: '#0e1420', border: `1px solid ${isSoon ? 'rgba(245,158,11,0.3)' : 'rgba(6,182,212,0.12)'}` }}
+              >
+                <button
+                  onClick={() => setOpenId(isOpen ? null : gig.id)}
+                  className="w-full flex items-center gap-3 px-4 py-3.5 text-left active:opacity-60 transition-opacity"
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
+                >
+                  {/* Date chip */}
+                  <div className="flex-shrink-0 w-12 h-14 rounded-xl flex flex-col items-center justify-center"
+                    style={{
+                      background: isSoon ? 'rgba(245,158,11,0.08)' : 'rgba(6,182,212,0.06)',
+                      border: `1px solid ${isSoon ? 'rgba(245,158,11,0.25)' : 'rgba(6,182,212,0.15)'}`,
+                    }}>
+                    <span className="font-black text-xl leading-none" style={{ color: isSoon ? '#f59e0b' : '#06b6d4' }}>
+                      {d ? d.getDate() : '?'}
+                    </span>
+                    <span className="text-[9px] font-bold tracking-widest mt-0.5" style={{ color: '#334155' }}>
+                      {d ? d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase() : ''}
+                    </span>
+                  </div>
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-sm leading-snug" style={{ color: '#f0f4ff' }}>{gig.venue}</p>
+                    {gig.city && <p className="text-xs mt-0.5" style={{ color: '#334155' }}>{gig.city}</p>}
+                    {gig.fee > 0 && <p className="text-xs font-black mt-1" style={{ color: '#10b981' }}>£{gig.fee.toLocaleString()}</p>}
+                  </div>
+                  {/* Days pill */}
+                  {days !== null && (
+                    <span className="text-xs font-black tabular-nums px-2 py-0.5 rounded-full flex-shrink-0"
+                      style={{
+                        background: isSoon ? 'rgba(245,158,11,0.1)' : 'rgba(6,182,212,0.06)',
+                        color: isSoon ? '#f59e0b' : '#475569'
+                      }}>
+                      {days === 0 ? 'TODAY' : `${days}d`}
+                    </span>
+                  )}
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                      style={{ borderTop: '1px solid rgba(6,182,212,0.08)' }}
+                    >
+                      <div className="px-4 py-3 space-y-2 text-xs" style={{ color: '#94a3b8' }}>
+                        {gig.time && <p><span style={{ color: '#334155' }}>Time:</span> {gig.time}</p>}
+                        {gig.location && <p><span style={{ color: '#334155' }}>Address:</span> {gig.location}</p>}
+                        {gig.promoter && <p><span style={{ color: '#334155' }}>Promoter:</span> {gig.promoter}</p>}
+                        {gig.promoter_email && (
+                          <a href={`mailto:${gig.promoter_email}`} className="block" style={{ color: '#06b6d4' }}>
+                            {gig.promoter_email}
+                          </a>
+                        )}
+                        {gig.promoter_phone && (
+                          <a href={`tel:${gig.promoter_phone}`} className="block" style={{ color: '#06b6d4' }}>
+                            {gig.promoter_phone}
+                          </a>
+                        )}
+                        {gig.notes && <p style={{ color: '#475569' }}>{gig.notes}</p>}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+
+          {past.length > 0 && (
+            <div className="pt-2">
+              <p className="text-[10px] font-mono tracking-widest mb-2" style={{ color: '#1e293b' }}>
+                PLAYED ({past.length})
+              </p>
+              <div className="space-y-1.5">
+                {past.slice(0, 5).map(gig => {
+                  const d = parseTabDate(gig.date_start || gig.date);
+                  return (
+                    <div key={gig.id} className="flex items-center gap-3 px-3 py-2 rounded-xl opacity-30"
+                      style={{ background: '#0e1420' }}>
+                      <span className="text-xs font-mono" style={{ color: '#475569' }}>
+                        {d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '—'}
+                      </span>
+                      <p className="text-sm font-semibold flex-1 truncate" style={{ color: '#64748b' }}>{gig.venue}</p>
+                      {gig.fee > 0 && <span className="text-xs" style={{ color: '#334155' }}>£{gig.fee.toLocaleString()}</span>}
+                    </div>
+                  );
+                })}
               </div>
-            </motion.button>
-          ))}
-        </div>
+            </div>
+          )}
+        </>
       )}
     </motion.div>
   );
