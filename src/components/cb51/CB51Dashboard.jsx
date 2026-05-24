@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { ArrowLeft as Back, Loader2, ChevronDown as Chevron, Radio, Mail, CheckSquare, DollarSign, CalendarDays } from 'lucide-react';
+import { ArrowLeft as Back, Loader2, ChevronDown as Chevron, Radio, Mail, CheckSquare, PoundSterling, CalendarDays } from 'lucide-react';
 import CB51GigsTab from './CB51GigsTab';
 import { CB51InboxTab, CB51TasksTab, CB51FinanceTab, CB51CalendarTab } from './CB51TabsContent';
 
@@ -150,7 +150,7 @@ const SECTIONS = [
   { id: 'gigs',     label: 'Gigs',     color: '#06b6d4', Icon: Radio },
   { id: 'inbox',    label: 'Inbox',    color: '#f97316', Icon: Mail },
   { id: 'tasks',    label: 'Tasks',    color: '#ef4444', Icon: CheckSquare },
-  { id: 'finance',  label: 'Finance',  color: '#10b981', Icon: DollarSign },
+  { id: 'finance',  label: 'Finance',  color: '#10b981', Icon: PoundSterling },
   { id: 'calendar', label: 'Cal',      color: '#f59e0b', Icon: CalendarDays },
 ];
 
@@ -181,9 +181,11 @@ export default function CB51Dashboard({ artistId, artistName }) {
   });
 
   const now = new Date();
-  const upcoming = confirmed
-    .filter(g => (g.date || g.date_start) && new Date(g.date || g.date_start) >= now)
-    .sort((a, b) => new Date(a.date || a.date_start) - new Date(b.date || b.date_start));
+  // Dedupe by ID first, then filter and sort
+  const uniqueConfirmed = confirmed.filter((g, idx, arr) => arr.findIndex(x => x.id === g.id) === idx);
+  const upcoming = uniqueConfirmed
+    .filter(g => (g.date_start || g.date) && new Date((g.date_start || g.date).split('T')[0]) >= new Date(now.toISOString().split('T')[0]))
+    .sort((a, b) => new Date(a.date_start || a.date) - new Date(b.date_start || b.date));
   const nextShow = upcoming[0] || null;
   const nextShowDate = nextShow ? new Date(nextShow.date || nextShow.date_start) : null;
   const daysUntil = nextShowDate ? Math.ceil((nextShowDate - now) / 86400000) : null;
@@ -349,7 +351,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
         <button onClick={() => setActive('finance')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
           style={{ background: CARD, border: `1px solid rgba(16,185,129,0.25)`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
-          <DollarSign className="w-5 h-5 mb-3" style={{ color: '#10b981' }} />
+          <PoundSterling className="w-5 h-5 mb-3" style={{ color: '#10b981' }} />
           <p className="font-black text-2xl leading-none" style={{ color: TEXT }}>
             £{confirmed.filter(g => g.fee).reduce((a, g) => a + (g.fee || 0), 0).toLocaleString()}
           </p>
