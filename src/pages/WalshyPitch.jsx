@@ -88,23 +88,44 @@ export default function WalshyPitch() {
           </p>
         </div>
 
-        {/* What Walshy gets */}
+        {/* What they get */}
         <div>
-          <p className="text-xs font-black tracking-widest text-cyan-400 uppercase mb-4">What You Get</p>
+          <p className="text-xs font-black tracking-widest text-cyan-400 uppercase mb-4">What You Both Get</p>
+          <div className="space-y-3">
+            <div className="p-4 border border-white/10 rounded-xl bg-white/[0.02]">
+              <p className="text-white font-black text-sm mb-1">Walshy — 5% equity</p>
+              <p className="text-gray-400 text-sm leading-snug">Ordinary shares. No board seat, no control, no veto — just real upside if this goes where it's going. Plus 5% of net revenue from UF51 products while the investment is active.</p>
+            </div>
+            <div className="p-4 border border-white/10 rounded-xl bg-white/[0.02]">
+              <p className="text-cyan-300 font-black text-sm mb-1">Graeme — 1% equity</p>
+              <p className="text-gray-400 text-sm leading-snug">He's not just an introducer — he's been strategising. Martin Lewis, vet screens, the right creative partner. 1% ordinary shares. Same terms. Part of the story from day one.</p>
+            </div>
+            <div className="p-4 border border-green-500/20 rounded-xl bg-green-500/5">
+              <p className="text-green-400 font-black text-sm mb-1">Revenue share — skin in the game</p>
+              <p className="text-gray-400 text-sm leading-snug">5% of net revenue split between Walshy (4%) and Graeme (1%) until the £15k is returned — then it stops and the equity remains. So you both win fastest by helping this succeed.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* The terms — no bullshit */}
+        <div className="border border-white/10 rounded-xl p-5 bg-white/[0.02]">
+          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-3">The Terms — Plain English</p>
           <div className="space-y-2">
             {[
-              "5% equity in UF51 Ltd — properly documented",
-              "First look at every future raise",
-              "Revenue share option on PetSounds51 vet deal",
-              "A builder who doesn't stop — ever",
-              "Graeme vouching for every word on this page",
+              "Ordinary shares only — no preference, no liquidation rights",
+              "No board seat, no veto, no control clauses",
+              "No drag-along — Brian cannot be forced to sell",
+              "Pro-rata rights on future raises — you can invest more, not less",
+              "Simple one-page shareholders agreement — no corporate bullshit",
+              "Revenue share stops once £15k is returned. Equity stays forever.",
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                <span className="text-gray-200 text-sm">{item}</span>
+                <div className="w-1.5 h-1.5 rounded-full bg-gray-500 mt-2 flex-shrink-0" />
+                <span className="text-gray-300 text-sm">{item}</span>
               </div>
             ))}
           </div>
+          <p className="text-gray-600 text-xs mt-4">This is written to be fair — not to trap anyone. If it needs tweaking, say so. That's how this works. 🏴󠁧󠁢󠁳󠁣󠁬󠁿</p>
         </div>
 
         {/* Martin Lewis angle */}
