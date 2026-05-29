@@ -9,65 +9,94 @@ export default function WalshyPitch() {
 
         {/* Header */}
         <div>
-          <p className="text-xs tracking-[0.3em] text-gray-600 uppercase mb-6">Via Graeme · Private</p>
+          <p className="text-xs tracking-[0.3em] text-gray-600 uppercase mb-6">Private · May 2026</p>
           <h1 className="text-4xl font-black leading-tight mb-5">
-            Not looking for cash.<br />
-            <span className="text-cyan-400">Looking for the right partner.</span>
+            Five problems.<br />
+            Billions of people<br />
+            <span className="text-cyan-400">affected by every one.</span>
           </h1>
           <p className="text-gray-400 leading-relaxed">
-            Graeme's idea was smarter than a straight investment — 
-            what if Chris brought services instead? Marketing, production, distribution. 
-            Things that cost money to buy but cost a partner almost nothing to provide.
+            This isn't about the tech. It's about the size of the problems being solved — 
+            and working software that's already doing it.
           </p>
         </div>
 
         <div className="h-px bg-white/10" />
 
-        {/* The litter app — the real entry point */}
+        {/* Market sizes — the hook */}
         <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">The Entry Point</p>
-          <p className="text-white font-black text-lg mb-3">The Litter App.</p>
-          <p className="text-gray-400 leading-relaxed text-sm">
-            There's a working environmental cleanup app — people photograph litter, earn tokens, build community. 
-            It needs polish. A small advance — based on the hours of work left to get it to market — 
-            is the most concrete ask here. It's not speculative. It's paying for defined work that's almost done.
-          </p>
-          <div className="mt-4 p-4 border border-cyan-500/20 rounded-lg bg-cyan-500/5 text-sm text-gray-300">
-            The hours are knowable. The cost is real. The market — environmental action apps, 
-            council partnerships, ESG funding — is genuinely massive. 
-            And it's the kind of thing that makes good press.
+          <p className="text-xs tracking-widest text-gray-500 uppercase mb-6">The Opportunity</p>
+          <div className="space-y-6">
+
+            <div>
+              <div className="flex items-baseline gap-3 mb-1">
+                <span className="text-2xl font-black text-white">£20bn+</span>
+                <span className="text-cyan-400 font-bold text-sm">Pet wellness · global</span>
+              </div>
+              <p className="text-gray-500 text-sm leading-snug">
+                <span className="text-gray-300 font-bold">PetSounds51</span> — psychoacoustic sound therapy for anxious animals. 
+                Peer-reviewed science. Vet TV screen distribution in discussion. 
+                Nobody doing this properly at scale.
+              </p>
+            </div>
+
+            <div>
+              <div className="flex items-baseline gap-3 mb-1">
+                <span className="text-2xl font-black text-white">Every adult</span>
+                <span className="text-amber-400 font-bold text-sm">who's feared a letter</span>
+              </div>
+              <p className="text-gray-500 text-sm leading-snug">
+                <span className="text-gray-300 font-bold">SORTED</span> — paste in any scary letter. 
+                HMRC, landlord, debt collector. Plain English back in seconds. Any language. Nothing stored. 
+                Martin Lewis's entire audience needs this.
+              </p>
+            </div>
+
+            <div>
+              <div className="flex items-baseline gap-3 mb-1">
+                <span className="text-2xl font-black text-white">£billions</span>
+                <span className="text-purple-400 font-bold text-sm">lost to council procurement fraud annually</span>
+              </div>
+              <p className="text-gray-500 text-sm leading-snug">
+                <span className="text-gray-300 font-bold">CTRL51</span> — AI fraud detection for public sector procurement. 
+                Flags price-fixing and unapproved suppliers automatically. 
+                One council at £5k/month funds the whole operation.
+              </p>
+            </div>
+
+            <div>
+              <div className="flex items-baseline gap-3 mb-1">
+                <span className="text-2xl font-black text-white">ESG · councils · brands</span>
+                <span className="text-green-400 font-bold text-sm">all need verified action</span>
+              </div>
+              <p className="text-gray-500 text-sm leading-snug">
+                <span className="text-gray-300 font-bold">Litter app</span> — verified environmental cleanup with photo proof, 
+                community tokens, and council integration. 
+                Brands pay for verified ESG. Councils need the data. Almost ready.
+              </p>
+            </div>
+
           </div>
         </div>
 
         <div className="h-px bg-white/10" />
 
-        {/* Services angle */}
+        {/* The real ask — services first */}
         <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">Where Services Could Land</p>
-          <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            If Chris has access to any of these — even one — it changes everything:
+          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">What Would Actually Move the Needle</p>
+          <p className="text-gray-300 leading-relaxed text-sm mb-5">
+            Cash is one option. But the right services partnership could be worth ten times more — 
+            and cost a fraction of that to provide.
           </p>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {[
-              {
-                title: "PetSounds51 — a proper ad.",
-                desc: "Sound therapy for anxious dogs, cats, horses. Peer-reviewed science. No competitor. It just needs the right creative to reach the audience. Think funny, warm, Scottish. Think the kind of ad people share. This could go global overnight with the right 30 seconds."
-              },
-              {
-                title: "SORTED — media & distribution.",
-                desc: "A tool that decodes scary legal letters in plain English. Any language. Nothing stored. The audience is enormous — every person who's ever been afraid to open a brown envelope. Martin Lewis's audience. Citizens Advice's audience. The right media partnership and this writes itself."
-              },
-              {
-                title: "Litter app — council & brand partnerships.",
-                desc: "Environmental action with verified proof. Brands pay for that. Councils need it. ESG funds love it. Introductions to the right people — procurement, marketing, sustainability leads — is worth more than any cash."
-              },
-            ].map(({ title, desc }) => (
-              <div key={title} className="flex gap-4">
+              "A proper ad for PetSounds51. Funny, warm, shareable. This goes global with the right 30 seconds.",
+              "Media or distribution for SORTED. The audience already exists — it just needs a door.",
+              "Introductions to council procurement teams, sustainability leads, or brand ESG budgets.",
+            ].map((item, i) => (
+              <div key={i} className="flex gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                <div>
-                  <p className="font-black text-white text-sm mb-1">{title}</p>
-                  <p className="text-gray-400 text-sm leading-snug">{desc}</p>
-                </div>
+                <p className="text-gray-400 text-sm leading-snug">{item}</p>
               </div>
             ))}
           </div>
@@ -75,47 +104,24 @@ export default function WalshyPitch() {
 
         <div className="h-px bg-white/10" />
 
-        {/* Global markets — Graeme's framing */}
+        {/* Cash fallback */}
         <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">The Scale</p>
-          <p className="text-gray-300 leading-relaxed text-sm">
-            Graeme's instinct was right — the products here aren't local. 
-            Pet anxiety is a global problem. Legal fear is a global problem. 
-            Environmental action is a global problem. 
-            None of this needs to start global — but it's built to be.
+          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">Or — A Small Advance</p>
+          <p className="text-gray-400 text-sm leading-relaxed mb-5">
+            The litter app needs a defined number of hours to get to market. 
+            A small advance against that work — based on actual time, not speculation — 
+            is the most concrete version of this conversation.
           </p>
-          <p className="text-gray-500 text-sm mt-3">
-            The right partner doesn't need to fund the world. 
-            They just need to open one door in the right market.
-          </p>
-        </div>
-
-        <div className="h-px bg-white/10" />
-
-        {/* If it IS cash */}
-        <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">If It Is Cash</p>
-          <div className="mb-4">
-            <p className="text-4xl font-black text-white">£15,000</p>
-            <p className="text-cyan-400 font-bold mt-1 text-sm">5% equity · Walshy &nbsp;·&nbsp; 1% equity · Graeme</p>
+          <div className="p-5 border border-cyan-500/20 rounded-xl bg-cyan-500/5">
+            <p className="text-3xl font-black text-white mb-1">£15,000</p>
+            <p className="text-cyan-400 font-bold text-sm mb-4">5% equity · no control · no board seat</p>
+            <ul className="space-y-1.5 text-sm text-gray-500">
+              <li>— Ordinary shares. Nothing predatory.</li>
+              <li>— Revenue share until the £15k returns — then it stops.</li>
+              <li>— Pro-rata rights on every future raise.</li>
+              <li>— One clean agreement. Plain English.</li>
+            </ul>
           </div>
-          <ul className="space-y-2 text-sm text-gray-500">
-            <li>— Ordinary shares only. No board seat. No control.</li>
-            <li>— Revenue share until the £15k comes back — then stops.</li>
-            <li>— Pro-rata rights on every future raise.</li>
-            <li>— One clean agreement. Plain English.</li>
-          </ul>
-        </div>
-
-        <div className="h-px bg-white/10" />
-
-        {/* Graeme */}
-        <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-3">Graeme's Part</p>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            1% equity, same deal, same terms. He didn't just make an introduction — 
-            he's been thinking through the strategy. He's part of this properly.
-          </p>
         </div>
 
         <div className="h-px bg-white/10" />
@@ -126,14 +132,14 @@ export default function WalshyPitch() {
             onClick={() => setShown(!shown)}
             className="w-full py-4 border border-white/20 text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:border-cyan-500/60 hover:text-cyan-400 transition-all"
           >
-            {shown ? "Close" : "Get in Touch"}
+            {shown ? "Close" : "Let's Talk"}
           </button>
 
           {shown && (
             <div className="mt-5 text-center space-y-1">
               <p className="text-white font-black">Brian Hughes</p>
               <p className="text-cyan-400 text-sm">brian@universalfrequency51.com</p>
-              <p className="text-gray-600 text-xs mt-3">Or just ask Graeme. He knows where I am. 🦆</p>
+              <p className="text-gray-600 text-xs mt-3">Happy to talk through any of it. No pressure. 🦆</p>
             </div>
           )}
 
