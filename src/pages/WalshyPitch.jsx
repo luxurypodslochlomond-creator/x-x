@@ -11,69 +11,60 @@ export default function WalshyPitch() {
         <div>
           <p className="text-xs tracking-[0.3em] text-gray-600 uppercase mb-6">Private · May 2026</p>
           <h1 className="text-4xl font-black leading-tight mb-5">
-            Five problems.<br />
-            Billions of people<br />
-            <span className="text-cyan-400">affected by every one.</span>
+            Three products.<br />
+            Huge audiences.<br />
+            <span className="text-cyan-400">No media partner yet.</span>
           </h1>
           <p className="text-gray-400 leading-relaxed">
-            This isn't about the tech. It's about the size of the problems being solved — 
-            and working software that's already doing it.
+            This is a conversation for someone who understands media, audiences, and what it takes 
+            to get the right product in front of the right people at the right moment.
           </p>
         </div>
 
         <div className="h-px bg-white/10" />
 
-        {/* Market sizes — the hook */}
+        {/* The products — framed for a media person */}
         <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-6">The Opportunity</p>
-          <div className="space-y-6">
+          <p className="text-xs tracking-widest text-gray-500 uppercase mb-6">What's Ready to Go</p>
+
+          <div className="space-y-7">
 
             <div>
-              <div className="flex items-baseline gap-3 mb-1">
-                <span className="text-2xl font-black text-white">£20bn+</span>
-                <span className="text-cyan-400 font-bold text-sm">Pet wellness · global</span>
-              </div>
-              <p className="text-gray-500 text-sm leading-snug">
-                <span className="text-gray-300 font-bold">PetSounds51</span> — psychoacoustic sound therapy for anxious animals. 
-                Peer-reviewed science. Vet TV screen distribution in discussion. 
-                Nobody doing this properly at scale.
+              <p className="text-white font-black text-lg mb-1">PetSounds51</p>
+              <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                Sound therapy for anxious pets — separation anxiety, fireworks, travel stress. 
+                Built on peer-reviewed veterinary science. Already working. Vet practice distribution in discussion.
               </p>
+              <div className="p-3 border border-amber-500/20 rounded-lg bg-amber-500/5 text-amber-300 text-sm">
+                The audience is every dog owner who's ever felt guilty leaving the house. 
+                That's tens of millions of people. It just needs the right ad — 
+                funny, warm, 30 seconds. The kind that gets shared without trying.
+              </div>
             </div>
 
             <div>
-              <div className="flex items-baseline gap-3 mb-1">
-                <span className="text-2xl font-black text-white">Every adult</span>
-                <span className="text-amber-400 font-bold text-sm">who's feared a letter</span>
-              </div>
-              <p className="text-gray-500 text-sm leading-snug">
-                <span className="text-gray-300 font-bold">SORTED</span> — paste in any scary letter. 
-                HMRC, landlord, debt collector. Plain English back in seconds. Any language. Nothing stored. 
-                Martin Lewis's entire audience needs this.
+              <p className="text-white font-black text-lg mb-1">SORTED</p>
+              <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                Paste in any scary letter — HMRC, landlord, debt collector, council. 
+                Get plain English back in seconds. Any language. Nothing stored. No login.
               </p>
+              <div className="p-3 border border-green-500/20 rounded-lg bg-green-500/5 text-green-300 text-sm">
+                Martin Lewis built an empire on financial anxiety. This is the same audience — 
+                millions of people who open brown envelopes with dread. 
+                One media partnership puts this in front of all of them.
+              </div>
             </div>
 
             <div>
-              <div className="flex items-baseline gap-3 mb-1">
-                <span className="text-2xl font-black text-white">£billions</span>
-                <span className="text-purple-400 font-bold text-sm">lost to council procurement fraud annually</span>
-              </div>
-              <p className="text-gray-500 text-sm leading-snug">
-                <span className="text-gray-300 font-bold">CTRL51</span> — AI fraud detection for public sector procurement. 
-                Flags price-fixing and unapproved suppliers automatically. 
-                One council at £5k/month funds the whole operation.
+              <p className="text-white font-black text-lg mb-1">Litter App</p>
+              <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                People photograph litter, earn rewards, councils get verified data. 
+                Brands get real ESG evidence. Almost ready to launch.
               </p>
-            </div>
-
-            <div>
-              <div className="flex items-baseline gap-3 mb-1">
-                <span className="text-2xl font-black text-white">ESG · councils · brands</span>
-                <span className="text-green-400 font-bold text-sm">all need verified action</span>
+              <div className="p-3 border border-cyan-500/20 rounded-lg bg-cyan-500/5 text-cyan-300 text-sm">
+                Environmental action with proof. Brands are spending millions trying to demonstrate ESG credentials. 
+                This is the real thing — verified, community-driven, scalable globally.
               </div>
-              <p className="text-gray-500 text-sm leading-snug">
-                <span className="text-gray-300 font-bold">Litter app</span> — verified environmental cleanup with photo proof, 
-                community tokens, and council integration. 
-                Brands pay for verified ESG. Councils need the data. Almost ready.
-              </p>
             </div>
 
           </div>
@@ -81,18 +72,18 @@ export default function WalshyPitch() {
 
         <div className="h-px bg-white/10" />
 
-        {/* The real ask — services first */}
+        {/* The partnership angle — what Chris can actually bring */}
         <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">What Would Actually Move the Needle</p>
-          <p className="text-gray-300 leading-relaxed text-sm mb-5">
-            Cash is one option. But the right services partnership could be worth ten times more — 
-            and cost a fraction of that to provide.
+          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">What a Partnership Looks Like</p>
+          <p className="text-gray-400 text-sm leading-relaxed mb-5">
+            Cash is one option. But someone with your background could bring something worth ten times that —
+            and it wouldn't cost you cash to provide it.
           </p>
           <div className="space-y-3">
             {[
-              "A proper ad for PetSounds51. Funny, warm, shareable. This goes global with the right 30 seconds.",
-              "Media or distribution for SORTED. The audience already exists — it just needs a door.",
-              "Introductions to council procurement teams, sustainability leads, or brand ESG budgets.",
+              "Media placement for PetSounds51 — the right creative, the right channels, the right moment.",
+              "Distribution for SORTED — it's built for a mass audience that already trusts certain voices.",
+              "Brand or council introductions for the litter app — ESG budgets are real and they're looking.",
             ].map((item, i) => (
               <div key={i} className="flex gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
@@ -104,22 +95,22 @@ export default function WalshyPitch() {
 
         <div className="h-px bg-white/10" />
 
-        {/* Cash fallback */}
+        {/* If cash — simple and clean */}
         <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">Or — A Small Advance</p>
+          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">Or a Small Investment</p>
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            The litter app needs a defined number of hours to get to market. 
-            A small advance against that work — based on actual time, not speculation — 
-            is the most concrete version of this conversation.
+            The litter app needs a defined amount of work to get to market. 
+            A small advance against that — based on actual hours, not speculation — 
+            is the most straightforward version of this.
           </p>
-          <div className="p-5 border border-cyan-500/20 rounded-xl bg-cyan-500/5">
+          <div className="p-5 border border-white/10 rounded-xl">
             <p className="text-3xl font-black text-white mb-1">£15,000</p>
-            <p className="text-cyan-400 font-bold text-sm mb-4">5% equity · no control · no board seat</p>
+            <p className="text-cyan-400 font-bold text-sm mb-4">5% equity · ordinary shares · no strings</p>
             <ul className="space-y-1.5 text-sm text-gray-500">
-              <li>— Ordinary shares. Nothing predatory.</li>
-              <li>— Revenue share until the £15k returns — then it stops.</li>
-              <li>— Pro-rata rights on every future raise.</li>
-              <li>— One clean agreement. Plain English.</li>
+              <li>— No board seat. No control. No preference shares.</li>
+              <li>— Revenue share on net until the £15k is returned — then it stops.</li>
+              <li>— Pro-rata rights on any future raise.</li>
+              <li>— One clean agreement. Plain English. Nothing hidden.</li>
             </ul>
           </div>
         </div>
@@ -139,7 +130,7 @@ export default function WalshyPitch() {
             <div className="mt-5 text-center space-y-1">
               <p className="text-white font-black">Brian Hughes</p>
               <p className="text-cyan-400 text-sm">brian@universalfrequency51.com</p>
-              <p className="text-gray-600 text-xs mt-3">Happy to talk through any of it. No pressure. 🦆</p>
+              <p className="text-gray-600 text-xs mt-3">No pressure. Happy to talk through any of it. 🦆</p>
             </div>
           )}
 
