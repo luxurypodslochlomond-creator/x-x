@@ -4,137 +4,124 @@ export default function WalshyPitch() {
   const [shown, setShown] = useState(false);
 
   return (
-    <div className="min-h-screen bg-black text-white" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="min-h-screen bg-white text-gray-900" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
       <div className="max-w-xl mx-auto px-6 py-16 space-y-12">
 
         {/* Header */}
         <div>
-          <p className="text-xs tracking-[0.3em] text-gray-600 uppercase mb-6">Private · May 2026</p>
-          <h1 className="text-4xl font-black leading-tight mb-5">
-            Three products.<br />
-            Huge audiences.<br />
-            <span className="text-cyan-400">No media partner yet.</span>
+          <p className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-6">For Chris · May 2026</p>
+          <h1 className="text-4xl font-black leading-tight mb-5 text-gray-900">
+            You saw the dogs<br />
+            stop and stare. 🐕<br />
+            <span className="text-amber-500">That wasn't a coincidence.</span>
           </h1>
-          <p className="text-gray-400 leading-relaxed">
-            This is a conversation for someone who understands media, audiences, and what it takes 
-            to get the right product in front of the right people at the right moment.
+          <p className="text-gray-500 leading-relaxed text-lg">
+            Dogs respond to specific psychoacoustic frequencies — peer-reviewed, tested, real. 
+            What you saw in that bar was it working. We built an app around it.
           </p>
         </div>
 
-        <div className="h-px bg-white/10" />
+        <div className="h-px bg-gray-100" />
 
-        {/* The products — framed for a media person */}
+        {/* PetSounds51 — the one he already believes in */}
         <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-6">What's Ready to Go</p>
-
-          <div className="space-y-7">
-
-            <div>
-              <p className="text-white font-black text-lg mb-1">PetSounds51</p>
-              <p className="text-gray-500 text-sm leading-relaxed mb-3">
-                Sound therapy for anxious pets — separation anxiety, fireworks, travel stress. 
-                Built on peer-reviewed veterinary science. Already working. Vet practice distribution in discussion.
-              </p>
-              <div className="p-3 border border-amber-500/20 rounded-lg bg-amber-500/5 text-amber-300 text-sm">
-                The audience is every dog owner who's ever felt guilty leaving the house. 
-                That's tens of millions of people. It just needs the right ad — 
-                funny, warm, 30 seconds. The kind that gets shared without trying.
-              </div>
-            </div>
-
-            <div>
-              <p className="text-white font-black text-lg mb-1">SORTED</p>
-              <p className="text-gray-500 text-sm leading-relaxed mb-3">
-                Paste in any scary letter — HMRC, landlord, debt collector, council. 
-                Get plain English back in seconds. Any language. Nothing stored. No login.
-              </p>
-              <div className="p-3 border border-green-500/20 rounded-lg bg-green-500/5 text-green-300 text-sm">
-                Martin Lewis built an empire on financial anxiety. This is the same audience — 
-                millions of people who open brown envelopes with dread. 
-                One media partnership puts this in front of all of them.
-              </div>
-            </div>
-
-            <div>
-              <p className="text-white font-black text-lg mb-1">Litter App</p>
-              <p className="text-gray-500 text-sm leading-relaxed mb-3">
-                People photograph litter, earn rewards, councils get verified data. 
-                Brands get real ESG evidence. Almost ready to launch.
-              </p>
-              <div className="p-3 border border-cyan-500/20 rounded-lg bg-cyan-500/5 text-cyan-300 text-sm">
-                Environmental action with proof. Brands are spending millions trying to demonstrate ESG credentials. 
-                This is the real thing — verified, community-driven, scalable globally.
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div className="h-px bg-white/10" />
-
-        {/* The partnership angle — what Chris can actually bring */}
-        <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">What a Partnership Looks Like</p>
-          <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            Cash is one option. But someone with your background could bring something worth ten times that —
-            and it wouldn't cost you cash to provide it.
+          <p className="text-xs tracking-widest text-gray-400 uppercase mb-4">PetSounds51</p>
+          <p className="text-gray-800 font-bold text-xl mb-3">
+            Sound therapy for anxious dogs, cats and horses.
           </p>
-          <div className="space-y-3">
-            {[
-              "Media placement for PetSounds51 — the right creative, the right channels, the right moment.",
-              "Distribution for SORTED — it's built for a mass audience that already trusts certain voices.",
-              "Brand or council introductions for the litter app — ESG budgets are real and they're looking.",
-            ].map((item, i) => (
-              <div key={i} className="flex gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                <p className="text-gray-400 text-sm leading-snug">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="h-px bg-white/10" />
-
-        {/* If cash — simple and clean */}
-        <div>
-          <p className="text-xs tracking-widest text-gray-500 uppercase mb-4">Or a Small Investment</p>
-          <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            The litter app needs a defined amount of work to get to market. 
-            A small advance against that — based on actual hours, not speculation — 
-            is the most straightforward version of this.
+          <p className="text-gray-500 leading-relaxed mb-5">
+            Separation anxiety. Fireworks. Travel stress. The frequencies are real, 
+            the science is real, and it's already working for people who've tried it. 
+            Free to start. Subscription for more protocols. No login needed.
           </p>
-          <div className="p-5 border border-white/10 rounded-xl">
-            <p className="text-3xl font-black text-white mb-1">£15,000</p>
-            <p className="text-cyan-400 font-bold text-sm mb-4">5% equity · ordinary shares · no strings</p>
-            <ul className="space-y-1.5 text-sm text-gray-500">
-              <li>— No board seat. No control. No preference shares.</li>
-              <li>— Revenue share on net until the £15k is returned — then it stops.</li>
-              <li>— Pro-rata rights on any future raise.</li>
-              <li>— One clean agreement. Plain English. Nothing hidden.</li>
-            </ul>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+            <p className="text-amber-800 font-bold mb-2">The audience is enormous.</p>
+            <p className="text-amber-700 text-sm leading-relaxed">
+              There are 12 million pet dogs in the UK alone. Every single owner 
+              has felt guilty leaving the house. A warm, funny 30-second ad — 
+              the kind that gets shared — puts this in front of all of them.
+              That's your world, not mine. That's why this conversation matters.
+            </p>
           </div>
         </div>
 
-        <div className="h-px bg-white/10" />
+        <div className="h-px bg-gray-100" />
 
-        {/* CTA */}
+        {/* SORTED — quick mention */}
+        <div>
+          <p className="text-xs tracking-widest text-gray-400 uppercase mb-4">While we're here — SORTED</p>
+          <p className="text-gray-800 font-bold text-xl mb-3">
+            Paste in a scary letter. Get plain English back.
+          </p>
+          <p className="text-gray-500 leading-relaxed">
+            HMRC. Landlords. Debt collectors. Any language. Nothing stored. 
+            No login. Already live. Martin Lewis built an empire on exactly this anxiety — 
+            SORTED just does it faster, privately, with AI. Same massive audience, zero barrier to entry.
+          </p>
+        </div>
+
+        <div className="h-px bg-gray-100" />
+
+        {/* The ask — light and confident */}
+        <div>
+          <p className="text-xs tracking-widest text-gray-400 uppercase mb-4">What I'm Looking For</p>
+          <p className="text-gray-600 leading-relaxed mb-6">
+            Honestly? Someone who gets it and wants to be part of it. 
+            That could look like two things:
+          </p>
+
+          <div className="space-y-4">
+            <div className="border border-gray-200 rounded-2xl p-5">
+              <p className="font-black text-gray-900 mb-2">A media partnership 🎯</p>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                You know how to get products in front of audiences at scale. 
+                PetSounds51 and SORTED are both ready. 
+                The right creative + the right channels = something that grows fast. 
+                No cash needed — just expertise and introductions.
+              </p>
+            </div>
+
+            <div className="border border-gray-200 rounded-2xl p-5">
+              <p className="font-black text-gray-900 mb-2">Or a small investment 💷</p>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                The litter app (people photograph litter, earn rewards, councils get data) 
+                needs a defined sprint to get to market. 
+              </p>
+              <div className="mt-4 bg-gray-50 rounded-xl p-4">
+                <p className="text-2xl font-black text-gray-900">£15,000</p>
+                <p className="text-amber-500 font-bold text-sm mt-1">5% equity · no strings · plain English agreement</p>
+                <p className="text-gray-400 text-xs mt-2">Revenue share back until £15k is returned, then it stops. That's it.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="h-px bg-gray-100" />
+
+        {/* CTA — warm */}
         <div className="pb-8">
+          <p className="text-gray-500 text-sm leading-relaxed mb-8">
+            No pressure at all. If none of this is right for you, 
+            I'd still love to know what you think — 
+            you saw those dogs react before I even told you what it was. 
+            That instinct is worth something. 🦆
+          </p>
+
           <button
             onClick={() => setShown(!shown)}
-            className="w-full py-4 border border-white/20 text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:border-cyan-500/60 hover:text-cyan-400 transition-all"
+            className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-white font-black text-sm tracking-widest uppercase rounded-2xl transition-all"
           >
-            {shown ? "Close" : "Let's Talk"}
+            {shown ? "Close ↑" : "Get in Touch"}
           </button>
 
           {shown && (
             <div className="mt-5 text-center space-y-1">
-              <p className="text-white font-black">Brian Hughes</p>
-              <p className="text-cyan-400 text-sm">brian@universalfrequency51.com</p>
-              <p className="text-gray-600 text-xs mt-3">No pressure. Happy to talk through any of it. 🦆</p>
+              <p className="font-black text-gray-900 text-lg">Brian Hughes</p>
+              <p className="text-amber-500 font-bold">brian@universalfrequency51.com</p>
+              <p className="text-gray-400 text-xs mt-3">Glasgow 🏴󠁧󠁢󠁳󠁣󠁬󠁿 · UF51</p>
             </div>
           )}
-
-          <p className="text-center text-gray-700 text-xs mt-8">UF51 · Glasgow 🏴󠁧󠁢󠁳󠁣󠁬󠁿</p>
         </div>
 
       </div>
