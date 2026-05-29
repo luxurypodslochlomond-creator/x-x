@@ -36,6 +36,17 @@ export default function WalshyPitch() {
           </p>
         </div>
 
+        {/* Graeme */}
+        <div className="border border-white/20 rounded-xl p-5 bg-white/[0.03]">
+          <p className="text-xs font-black tracking-widest text-cyan-400 uppercase mb-3">The Third Man 🏴󠁧󠁢󠁳󠁣󠁬󠁿</p>
+          <p className="text-white leading-relaxed mb-3">
+            <span className="font-black text-cyan-300">Graeme</span> brought this to you — and he's not just passing on a link. He's been actively thinking through the strategy: the Martin Lewis angle, vet TV screen distribution, the right creative partner. He sees what this could be.
+          </p>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Any deal here includes Graeme. Whether that's a finder's stake, a role in what gets built, or simply being recognised as part of the founding story — that's Brian's intention. Nobody gets left out.
+          </p>
+        </div>
+
         {/* What's been built */}
         <div>
           <p className="text-xs font-black tracking-widest text-cyan-400 uppercase mb-4">What's Been Built</p>
