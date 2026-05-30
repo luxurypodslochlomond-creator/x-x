@@ -210,19 +210,12 @@ export default function WelcomePage() {
 
           <p className="text-xl md:text-2xl text-gray-700 font-bold leading-snug">
             Tools that actually help people.<br />
-            <span className="text-emerald-600">No dark patterns. Your data stays yours.</span>
+            <span className="text-emerald-600">Built with AI. Zero bullshit.</span>
           </p>
 
           <p className="text-gray-500 text-base leading-relaxed max-w-xl mx-auto">
-            A small independent team using AI for the right reasons — decoding scary letters, calming anxious pets, rewarding people who clean up the planet. Built with honesty. Free where we can. Transparent about when it isn't.
+            Decoding scary letters. Calming anxious pets. Rewarding people who clean up the planet. Your data stays yours. Free where we can. Honest about when it isn't.
           </p>
-
-          {/* Honest tech line */}
-          <div className="flex flex-wrap gap-2 justify-center pt-1">
-            {['AI-powered', 'Data sovereign', 'Open source', 'No dark patterns', 'Works offline'].map(tag => (
-              <span key={tag} className="text-xs font-mono bg-white border border-gray-200 text-gray-500 px-3 py-1 rounded-full shadow-sm">{tag}</span>
-            ))}
-          </div>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
             <Link to={createPageUrl('AI51')}>
