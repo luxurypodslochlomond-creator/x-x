@@ -3,154 +3,187 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKWaves, COOLASFUCKSorted, COOLASFUCKPaw } from '@/components/shared/COOLASFUCKIcon';
-import { Radio, Zap, Globe, GraduationCap, Signal, Brain, ChevronDown, ArrowRight, Building2 } from 'lucide-react';
+import { Radio, Zap, Globe, GraduationCap, Signal, Brain, ChevronDown, ArrowRight, Building2, Leaf, Shield } from 'lucide-react';
 
-// Every product — what it does, who it's for, honest badge
-const PRODUCTS = [
-  {
-    id: 'ctrl51',
-    name: 'CTRL51',
-    tag: 'Procurement team?',
-    desc: 'AI fraud detection for council procurement. Catches price gouging, unapproved suppliers, and pattern anomalies before they cost you.',
-    badge: '£5k/month',
-    badgeColor: 'text-red-400 border-red-500/40',
-    Icon: Building2,
-    iconClass: 'text-red-400',
-    url: 'CTRL51',
-    border: 'border-red-500/40 hover:border-red-400/80',
-    glow: 'rgba(239,68,68,0.15)',
-  },
+// HERO THREE — what PhD Media + Chris Walsh responded to
+const HERO_THREE = [
   {
     id: 'sorted',
     name: 'SORTED',
-    tag: 'Got a scary letter?',
-    desc: 'Paste any letter — benefits, legal, council, landlord — and get plain English back. What it means. What to do. Any language.',
-    badge: 'Subscription',
-    badgeColor: 'text-green-400 border-green-500/40',
-    Icon: COOLASFUCKSorted,
+    emoji: '📄',
+    headline: 'Got a scary letter?',
+    desc: 'Paste any letter — benefits, legal, council, landlord — and get plain English back. What it means. What to do. Any language. Nothing stored.',
+    badge: '£9.99/month',
+    badgeColor: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+    border: 'border-emerald-300 hover:border-emerald-500',
+    bg: 'bg-white',
+    headlineColor: 'text-emerald-700',
     url: 'Family51',
-    border: 'border-green-500/40 hover:border-green-400/80',
-    glow: 'rgba(34,197,94,0.15)',
+    glow: 'rgba(16,185,129,0.12)',
+    Icon: COOLASFUCKSorted,
   },
   {
     id: 'petsounds',
     name: 'PETSOUNDS51',
-    tag: 'Anxious pet?',
-    desc: 'Sound therapy protocols for dogs, cats and horses. Built on peer-reviewed psychoacoustic research. Free to try. No signup.',
-    badge: 'Free · Subscription',
-    badgeColor: 'text-amber-400 border-amber-500/40',
-    Icon: COOLASFUCKPaw,
+    emoji: '🐾',
+    headline: 'Anxious pet?',
+    desc: 'Sound therapy for dogs, cats and horses. Built on peer-reviewed psychoacoustic research. Free separation anxiety protocol — no signup ever.',
+    badge: 'Free to try',
+    badgeColor: 'text-amber-700 bg-amber-50 border-amber-200',
+    border: 'border-amber-300 hover:border-amber-500',
+    bg: 'bg-white',
+    headlineColor: 'text-amber-700',
     url: 'PetSounds51',
-    border: 'border-amber-500/40 hover:border-amber-400/80',
-    glow: 'rgba(212,160,23,0.15)',
+    glow: 'rgba(212,160,23,0.12)',
+    Icon: COOLASFUCKPaw,
+  },
+  {
+    id: 'cleanup',
+    name: 'LITTER PICKS',
+    emoji: '🌍',
+    headline: 'Pick up litter. Earn tokens.',
+    desc: 'Photograph your cleanup. AI verifies the litter. Earn $P51 tokens. Kid-friendly. No account needed. Real environmental action, rewarded.',
+    badge: 'Free',
+    badgeColor: 'text-green-700 bg-green-50 border-green-200',
+    border: 'border-green-300 hover:border-green-500',
+    bg: 'bg-white',
+    headlineColor: 'text-green-700',
+    url: 'NewCleanup',
+    glow: 'rgba(34,197,94,0.12)',
+    Icon: Globe,
+    iconClass: 'text-green-600',
+  },
+];
+
+// REST OF THE TOOLS
+const OTHER_TOOLS = [
+  {
+    id: 'ctrl51',
+    name: 'CTRL51',
+    tag: 'Procurement fraud?',
+    desc: 'AI fraud detection for council procurement. Catches price gouging before it costs you.',
+    badge: '£5k/month',
+    badgeColor: 'text-red-600 border-red-300 bg-red-50',
+    Icon: Building2,
+    iconClass: 'text-red-500',
+    url: 'CTRL51',
+    border: 'border-red-200 hover:border-red-400',
   },
   {
     id: 'cb51',
     name: 'CB51',
     tag: 'Managing artists?',
-    desc: 'AI co-manager for touring musicians. Scheduling, contracts, payments, band voting, and the noise that drowns out the music.',
+    desc: 'AI co-manager for touring musicians. Scheduling, contracts, band voting — avoid the noise.',
     badge: 'Free Beta',
-    badgeColor: 'text-cyan-400 border-cyan-500/40',
+    badgeColor: 'text-cyan-700 border-cyan-300 bg-cyan-50',
     Icon: Radio,
-    iconClass: 'text-cyan-400',
+    iconClass: 'text-cyan-600',
     url: 'CB51',
-    border: 'border-cyan-500/40 hover:border-cyan-400/80',
-    glow: 'rgba(6,182,212,0.15)',
+    border: 'border-cyan-200 hover:border-cyan-400',
   },
   {
     id: 'buzzstop',
     name: 'BUZZSTOP',
     tag: 'Got tinnitus?',
-    desc: 'Three-layer AI frequency engine designed to mask and cancel tinnitus. Works in the browser. Free. No account needed.',
+    desc: 'Three-layer AI frequency engine to mask and cancel tinnitus. Works in browser. Free.',
     badge: 'Free',
-    badgeColor: 'text-pink-400 border-pink-500/40',
+    badgeColor: 'text-pink-700 border-pink-300 bg-pink-50',
     Icon: Zap,
-    iconClass: 'text-pink-400',
+    iconClass: 'text-pink-500',
     url: 'BuzzStop',
-    border: 'border-pink-500/40 hover:border-pink-400/80',
-    glow: 'rgba(236,72,153,0.15)',
-  },
-  {
-    id: 'trackt',
-    name: 'TRACKT',
-    tag: 'Tracking assets?',
-    desc: 'AI RFID asset tracking for hospitals and logistics. Real-time intelligence. Natural language queries.',
-    badge: 'In Development',
-    badgeColor: 'text-blue-400 border-blue-500/40',
-    Icon: Signal,
-    iconClass: 'text-blue-400',
-    url: 'Trackt',
-    border: 'border-blue-500/40 hover:border-blue-400/80',
-    glow: 'rgba(59,130,246,0.15)',
-  },
-  {
-    id: 'prof51',
-    name: 'PROF51',
-    tag: 'Still in education?',
-    desc: 'AI study co-manager for students. Timetables, essay outlines, budget tracker, lost property mesh. Built for how students actually live.',
-    badge: 'Free',
-    badgeColor: 'text-purple-400 border-purple-500/40',
-    Icon: GraduationCap,
-    iconClass: 'text-purple-400',
-    url: 'Prof51',
-    border: 'border-purple-500/40 hover:border-purple-400/80',
-    glow: 'rgba(168,85,247,0.15)',
+    border: 'border-pink-200 hover:border-pink-400',
   },
   {
     id: 'freqs',
     name: 'FREQUENCIES',
     tag: 'Pain, sleep, recovery?',
-    desc: 'Healing frequencies for pain relief, sleep, wrist recovery, chakra work. All free. Built on real research — we link every source.',
+    desc: 'Healing frequencies for pain relief, sleep, wrist recovery. All free. Every source linked.',
     badge: 'Free',
-    badgeColor: 'text-cyan-400 border-cyan-500/40',
+    badgeColor: 'text-indigo-700 border-indigo-300 bg-indigo-50',
     Icon: COOLASFUCKWaves,
     url: 'FrequencyChamber',
-    border: 'border-cyan-500/40 hover:border-cyan-400/80',
-    glow: 'rgba(6,182,212,0.15)',
+    border: 'border-indigo-200 hover:border-indigo-400',
   },
   {
-    id: 'cleanup',
-    name: 'LITTER PICKS',
-    tag: 'Pick up litter. Earn tokens.',
-    desc: 'Photograph your cleanup, AI verifies the litter. Get rewarded with $P51 tokens. Kid-friendly mode. No account needed.',
+    id: 'trackt',
+    name: 'TRACKT',
+    tag: 'Tracking assets?',
+    desc: 'AI RFID asset tracking for hospitals and logistics. Real-time. Natural language queries.',
+    badge: 'In Development',
+    badgeColor: 'text-blue-700 border-blue-300 bg-blue-50',
+    Icon: Signal,
+    iconClass: 'text-blue-500',
+    url: 'Trackt',
+    border: 'border-blue-200 hover:border-blue-400',
+  },
+  {
+    id: 'prof51',
+    name: 'PROF51',
+    tag: 'Still in education?',
+    desc: 'AI study co-manager for students. Timetables, essay outlines, budget tracker.',
     badge: 'Free',
-    badgeColor: 'text-green-400 border-green-500/40',
-    Icon: Globe,
-    iconClass: 'text-green-400',
-    url: 'NewCleanup',
-    border: 'border-green-500/40 hover:border-green-400/80',
-    glow: 'rgba(34,197,94,0.15)',
+    badgeColor: 'text-purple-700 border-purple-300 bg-purple-50',
+    Icon: GraduationCap,
+    iconClass: 'text-purple-500',
+    url: 'Prof51',
+    border: 'border-purple-200 hover:border-purple-400',
   },
 ];
 
-const ProductTile = ({ product, index }) => {
-  const { name, tag, desc, badge, badgeColor, Icon, iconClass, url, border, glow } = product;
+const HeroTile = ({ product, index }) => {
+  const { name, emoji, headline, desc, badge, badgeColor, border, bg, headlineColor, url, glow, Icon, iconClass } = product;
   return (
     <Link to={createPageUrl(url)}>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.06 * index }}
+        whileHover={{ y: -4 }}
+        whileTap={{ scale: 0.98 }}
+        className={`group ${bg} border-2 ${border} p-6 cursor-pointer transition-all h-full flex flex-col gap-3 rounded-xl shadow-sm`}
+        onMouseEnter={e => e.currentTarget.style.boxShadow = `0 8px 40px ${glow}`}
+        onMouseLeave={e => e.currentTarget.style.boxShadow = ''}
+      >
+        <div className="flex items-center justify-between">
+          <span className="text-3xl">{emoji}</span>
+          <span className={`text-[10px] font-mono font-bold border px-2 py-0.5 rounded-full ${badgeColor}`}>{badge}</span>
+        </div>
+        <div>
+          <p className={`font-black font-mono text-xs tracking-widest mb-1 ${headlineColor}`}>{name}</p>
+          <h3 className="text-gray-900 font-bold text-lg leading-tight">{headline}</h3>
+        </div>
+        <p className="text-gray-500 text-sm leading-relaxed flex-1">{desc}</p>
+        <div className={`flex items-center gap-1 text-xs font-mono font-bold ${headlineColor} group-hover:gap-2 transition-all`}>
+          <span>OPEN</span>
+          <ArrowRight className="w-3 h-3" />
+        </div>
+      </motion.div>
+    </Link>
+  );
+};
+
+const SmallTile = ({ tool, index }) => {
+  const { name, tag, desc, badge, badgeColor, Icon, iconClass, url, border } = tool;
+  return (
+    <Link to={createPageUrl(url)}>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.04 * index }}
-        whileHover={{ y: -3 }}
+        whileHover={{ y: -2 }}
         whileTap={{ scale: 0.97 }}
-        className={`group bg-black border-2 ${border} p-4 cursor-pointer transition-all h-full flex flex-col gap-2`}
-        onMouseEnter={e => e.currentTarget.style.boxShadow = `0 6px 30px ${glow}`}
-        onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+        className={`group bg-white border ${border} p-4 cursor-pointer transition-all h-full flex flex-col gap-2 rounded-lg shadow-sm`}
       >
         <div className="flex items-center justify-between">
           {iconClass
-            ? <Icon className={`w-7 h-7 ${iconClass} flex-shrink-0`} />
-            : <Icon size={28} animate={false} />
+            ? <Icon className={`w-5 h-5 ${iconClass}`} />
+            : <Icon size={20} animate={false} />
           }
           <span className={`text-[9px] font-mono font-bold border px-1.5 py-0.5 rounded-full ${badgeColor}`}>{badge}</span>
         </div>
-        <h3 className="text-white font-black font-mono text-sm leading-tight">{name}</h3>
-        <p className="text-gray-500 text-[11px] font-mono leading-tight">{tag}</p>
-        <p className="text-gray-400 text-xs leading-relaxed flex-1">{desc}</p>
-        <div className="flex items-center gap-1 text-[10px] font-mono text-gray-600 group-hover:text-gray-300 transition-colors pt-1">
-          <span>OPEN</span>
-          <ArrowRight className="w-2.5 h-2.5" />
-        </div>
+        <p className="text-gray-800 font-black font-mono text-xs">{name}</p>
+        <p className="text-gray-400 text-[11px] font-mono">{tag}</p>
+        <p className="text-gray-500 text-xs leading-relaxed flex-1">{desc}</p>
       </motion.div>
     </Link>
   );
@@ -160,146 +193,126 @@ export default function WelcomePage() {
   const [truthOpen, setTruthOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white">
-      <div className="max-w-6xl mx-auto px-6 py-20 space-y-20">
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      <div className="max-w-6xl mx-auto px-6 py-16 space-y-16">
 
         {/* HERO */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-6 max-w-3xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-5 max-w-3xl mx-auto">
 
-          {/* AI51 pulse mark */}
-          <Link to={createPageUrl('AI51')}>
-            <motion.div className="inline-block cursor-pointer mb-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-              <svg width="80" height="80" viewBox="0 0 64 64" fill="none" style={{ filter: 'drop-shadow(0 0 30px rgba(236,72,153,0.8))' }}>
-                <motion.rect x="28" y="28" width="8" height="8" fill="#ec4899"
-                  animate={{ opacity: [0.7, 1, 0.7] }} transition={{ duration: 1.2, repeat: Infinity }} />
-                <motion.rect x="20" y="20" width="24" height="24" fill="none" stroke="#06b6d4" strokeWidth="1"
-                  animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity }} />
-                <motion.rect x="12" y="12" width="40" height="40" fill="none" stroke="#ec4899" strokeWidth="0.8"
-                  animate={{ opacity: [0.15, 0.5, 0.15] }} transition={{ duration: 2.5, repeat: Infinity }} />
-                {[[25,9],[39,9],[9,25],[55,25],[25,55],[39,55]].map(([cx,cy], i) => (
-                  <motion.circle key={i} cx={cx} cy={cy} r="1.5" fill="#06b6d4"
-                    animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }} />
-                ))}
-              </svg>
-            </motion.div>
-          </Link>
+          <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-1.5 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-xs font-mono text-gray-500 tracking-widest">UNIVERSAL FREQUENCY 51</span>
+          </div>
 
-          <h1 className="text-5xl md:text-8xl font-black font-mono text-white leading-none tracking-tight"
-            style={{ textShadow: '0 0 40px rgba(6,182,212,0.5)' }}>
+          <h1 className="text-5xl md:text-7xl font-black text-gray-900 leading-none tracking-tight">
             UF51
           </h1>
 
-          <p className="text-gray-400 font-mono text-xs tracking-widest">UNIVERSAL FREQUENCY 51</p>
-
-          <p className="text-xl md:text-2xl text-white font-bold leading-snug pt-2">
-            We made stuff that actually helps.<br />
-            <span className="text-cyan-400">Pick what you need. Ignore the rest.</span>
+          <p className="text-xl md:text-2xl text-gray-700 font-bold leading-snug">
+            Tools that actually help people.<br />
+            <span className="text-emerald-600">No dark patterns. Your data stays yours.</span>
           </p>
 
-          <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
-            Just a small team using AI to help citizens solve real problems — decoding scary letters, calming stressed dogs, masking tinnitus, turning environmental action into reward. Each thing below does one job and does it properly. Free where we can. Honest about when it isn't.
+          <p className="text-gray-500 text-base leading-relaxed max-w-xl mx-auto">
+            A small independent team using AI for the right reasons — decoding scary letters, calming anxious pets, rewarding people who clean up the planet. Built with honesty. Free where we can. Transparent about when it isn't.
           </p>
+
+          {/* Honest tech line */}
+          <div className="flex flex-wrap gap-2 justify-center pt-1">
+            {['AI-powered', 'Data sovereign', 'Open source', 'No dark patterns', 'Works offline'].map(tag => (
+              <span key={tag} className="text-xs font-mono bg-white border border-gray-200 text-gray-500 px-3 py-1 rounded-full shadow-sm">{tag}</span>
+            ))}
+          </div>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
             <Link to={createPageUrl('AI51')}>
               <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 bg-pink-500/10 border-2 border-pink-500/60 hover:border-pink-400 text-pink-300 font-black font-mono px-5 py-2.5 text-sm transition-all">
+                className="flex items-center gap-2 bg-gray-900 text-white font-bold px-6 py-3 rounded-full text-sm shadow-md hover:shadow-lg transition-all">
                 <Brain className="w-4 h-4" />
-                TALK TO AI51
+                Talk to AI51
               </motion.button>
             </Link>
             <Link to={createPageUrl('FunderBrief')}>
               <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 bg-transparent border-2 border-cyan-500/40 hover:border-cyan-500/80 text-cyan-400 font-black font-mono px-5 py-2.5 text-sm transition-all">
-                WHAT IS THIS?
+                className="flex items-center gap-2 bg-white border-2 border-gray-200 hover:border-gray-400 text-gray-700 font-bold px-6 py-3 rounded-full text-sm shadow-sm transition-all">
+                What is this?
                 <ArrowRight className="w-4 h-4" />
               </motion.button>
             </Link>
           </div>
         </motion.div>
 
-        {/* PRODUCT TILES */}
-         <div className="space-y-4">
-           <div className="flex items-center gap-4">
-             <div className="h-px bg-cyan-500/20 flex-1" />
-             <p className="text-xs font-mono text-gray-500 tracking-widest">THE TOOLS</p>
-             <div className="h-px bg-cyan-500/20 flex-1" />
-           </div>
-           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-             {PRODUCTS.map((product, i) => (
-               <ProductTile key={product.id} product={product} index={i} />
-             ))}
-           </div>
-         </div>
+        {/* HERO THREE */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="h-px bg-gray-200 flex-1" />
+            <p className="text-xs font-mono text-gray-400 tracking-widest">START HERE</p>
+            <div className="h-px bg-gray-200 flex-1" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {HERO_THREE.map((product, i) => (
+              <HeroTile key={product.id} product={product} index={i} />
+            ))}
+          </div>
+        </div>
 
-         {/* LEARN51 — FEATURED SECTION */}
-         <div className="space-y-4">
-           <div className="flex items-center gap-4">
-             <div className="h-px bg-indigo-500/20 flex-1" />
-             <p className="text-xs font-mono text-gray-500 tracking-widest">FREE EDUCATION · EVERY CHILD ON EARTH</p>
-             <div className="h-px bg-indigo-500/20 flex-1" />
-           </div>
-           {/* Hero tile */}
-           <Link to={createPageUrl('Learn51')}>
-             <motion.div
-               initial={{ opacity: 0, y: 12 }}
-               animate={{ opacity: 1, y: 0 }}
-               whileHover={{ y: -3 }}
-               className="bg-black border-2 border-indigo-500/60 hover:border-indigo-400 p-6 cursor-pointer transition-all"
-               onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 40px rgba(99,102,241,0.25)'}
-               onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
-             >
-               <div className="flex flex-col md:flex-row md:items-center gap-4">
-                 <div className="text-5xl">🌍</div>
-                 <div className="flex-1">
-                   <div className="flex items-center gap-3 mb-1">
-                     <p className="text-indigo-400 font-black font-mono text-lg">LEARN51</p>
-                     <span className="text-[9px] font-mono font-bold border border-green-500/40 text-green-400 px-1.5 py-0.5 rounded-full">Free · Forever</span>
-                   </div>
-                   <p className="text-white text-sm font-bold mb-1">Free education for every child on Earth — no login, no data, no cost.</p>
-                   <p className="text-gray-400 text-xs leading-relaxed">Maths · Literacy · Life Skills · Mental Health · Real Rights · Works offline. On any device — phone, tablet, old laptop, TV. Built with AI, owned by no one, free to all.</p>
-                 </div>
-                 <div className="flex items-center gap-1 text-indigo-400 font-mono text-xs font-bold flex-shrink-0">
-                   <span>OPEN HUB</span>
-                   <ArrowRight className="w-3 h-3" />
-                 </div>
-               </div>
-             </motion.div>
-           </Link>
-           {/* Sub-tiles */}
-           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-             {[
-               { url: 'LifeSkills51', border: 'border-amber-500/40 hover:border-amber-400/80', text: 'text-amber-400', label: 'LIFE SKILLS', desc: 'Money, food, mental health, rights, work.', glow: 'rgba(245,158,11,0.15)' },
-               { url: 'GeorgieMaths', border: 'border-purple-500/40 hover:border-purple-400/80', text: 'text-purple-400', label: 'MATHS', desc: 'For every kind of mind. No pressure.', glow: 'rgba(168,85,247,0.15)' },
-               { url: 'ReadingSupport', border: 'border-cyan-500/40 hover:border-cyan-400/80', text: 'text-cyan-400', label: 'READING', desc: 'Dyslexia-friendly. All ages.', glow: 'rgba(6,182,212,0.15)' },
-               { url: 'YoungWarriors', border: 'border-pink-500/40 hover:border-pink-400/80', text: 'text-pink-400', label: 'YOUNG WARRIORS', desc: 'Kids making a real difference.', glow: 'rgba(236,72,153,0.15)' },
-             ].map(({ url, border, text, label, desc, glow }, i) => (
-               <Link key={url} to={createPageUrl(url)}>
-                 <motion.div
-                   initial={{ opacity: 0, y: 12 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ delay: 0.05 * i }}
-                   whileHover={{ y: -3 }}
-                   className={`bg-black border-2 ${border} p-4 cursor-pointer transition-all h-full flex flex-col gap-2`}
-                   onMouseEnter={e => e.currentTarget.style.boxShadow = `0 6px 30px ${glow}`}
-                   onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
-                 >
-                   <p className={`${text} font-black font-mono text-sm`}>{label}</p>
-                   <p className="text-gray-400 text-xs leading-relaxed flex-1">{desc}</p>
-                 </motion.div>
-               </Link>
-             ))}
-           </div>
-         </div>
+        {/* LEARN51 */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="h-px bg-gray-200 flex-1" />
+            <p className="text-xs font-mono text-gray-400 tracking-widest">FREE EDUCATION · EVERY CHILD ON EARTH</p>
+            <div className="h-px bg-gray-200 flex-1" />
+          </div>
+          <Link to={createPageUrl('Learn51')}>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -3 }}
+              className="bg-white border-2 border-indigo-200 hover:border-indigo-400 p-6 cursor-pointer transition-all rounded-xl shadow-sm"
+              onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 40px rgba(99,102,241,0.15)'}
+              onMouseLeave={e => e.currentTarget.style.boxShadow = ''}
+            >
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <div className="text-5xl">🌍</div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-1">
+                    <p className="text-indigo-600 font-black font-mono text-lg">LEARN51</p>
+                    <span className="text-[9px] font-mono font-bold border border-green-300 text-green-700 bg-green-50 px-1.5 py-0.5 rounded-full">Free · Forever</span>
+                  </div>
+                  <p className="text-gray-800 text-sm font-bold mb-1">Free education for every child on Earth — no login, no data, no cost.</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">Maths · Literacy · Life Skills · Mental Health · Real Rights · Works offline. Any device. Built with AI, owned by no one.</p>
+                </div>
+                <div className="flex items-center gap-1 text-indigo-600 font-mono text-xs font-bold flex-shrink-0">
+                  <span>OPEN HUB</span>
+                  <ArrowRight className="w-3 h-3" />
+                </div>
+              </div>
+            </motion.div>
+          </Link>
+        </div>
+
+        {/* MORE TOOLS */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="h-px bg-gray-200 flex-1" />
+            <p className="text-xs font-mono text-gray-400 tracking-widest">MORE TOOLS</p>
+            <div className="h-px bg-gray-200 flex-1" />
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {OTHER_TOOLS.map((tool, i) => (
+              <SmallTile key={tool.id} tool={tool} index={i} />
+            ))}
+          </div>
+        </div>
 
         {/* HONEST BIT */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-          className="bg-black border-2 border-white/10 hover:border-cyan-500/30 transition-all p-8 max-w-2xl mx-auto">
+          className="bg-white border border-gray-200 rounded-xl p-8 max-w-2xl mx-auto shadow-sm">
           <button
             onClick={() => setTruthOpen(!truthOpen)}
             className="w-full flex items-center justify-between text-left"
           >
-            <h2 className="text-lg font-black font-mono text-white">THE HONEST BIT</h2>
+            <h2 className="text-base font-black font-mono text-gray-800">THE HONEST BIT</h2>
             <motion.div animate={{ rotate: truthOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
               <ChevronDown className="w-5 h-5 text-gray-400" />
             </motion.div>
@@ -311,28 +324,26 @@ export default function WelcomePage() {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="pt-6 space-y-4 text-sm text-gray-400 leading-relaxed">
+            <div className="pt-6 space-y-4 text-sm text-gray-500 leading-relaxed">
               <p>
-                We're not going to claim frequencies cure anything. What the research shows — 
-                masking tinnitus, supporting relaxation, matching known psychoacoustic patterns — we link every source. You decide.
+                We use AI — but not to hook you, harvest your data, or keep you dependent. Most of what's here works without an account, without your data, and offline.
               </p>
               <p>
-                AI51 is not a therapist. Not a doctor. Not a life coach. It's just genuinely good to talk to and it won't bullshit you or try to keep you hooked.
+                We're not going to claim frequencies cure anything. What the research shows — masking tinnitus, supporting relaxation, matching known psychoacoustic patterns — we link every source. You decide.
               </p>
               <p>
-                ChatGPT, Claude, Gemini — great. We use AI too. The difference is we're not trying to make you dependent on it. 
-                Most of what's here works without an account, without your data, and offline.
+                AI51 is not a therapist, doctor, or life coach. It's just genuinely good to talk to and won't bullshit you or try to keep you hooked.
               </p>
               <p>
-                Some things cost money. We say so upfront. Nothing is hidden behind a signup wall just to get your email.
+                Some things cost money. We say so upfront. Nothing hidden behind a signup wall just to get your email.
               </p>
-              <p className="text-white font-bold font-mono">
+              <p className="text-gray-800 font-bold font-mono">
                 Small team. Real problems. Zero bullshit.
               </p>
               <div className="flex gap-3 pt-2 flex-wrap">
-                <Link to={createPageUrl('Whitepaper')} className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline">Technical Whitepaper</Link>
-                <Link to={createPageUrl('FunderBrief')} className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline">Funder Brief</Link>
-                <Link to={createPageUrl('Terms')} className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline">Terms</Link>
+                <Link to={createPageUrl('Whitepaper')} className="text-emerald-600 hover:text-emerald-700 font-mono text-xs underline">Technical Whitepaper</Link>
+                <Link to={createPageUrl('FunderBrief')} className="text-emerald-600 hover:text-emerald-700 font-mono text-xs underline">Funder Brief</Link>
+                <Link to={createPageUrl('Terms')} className="text-emerald-600 hover:text-emerald-700 font-mono text-xs underline">Terms</Link>
               </div>
             </div>
           </motion.div>
@@ -340,7 +351,7 @@ export default function WelcomePage() {
 
         {/* FOOTER */}
         <div className="text-center">
-          <p className="font-mono text-xs text-gray-600">Built with love ♾️❤️</p>
+          <p className="font-mono text-xs text-gray-400">Built with love ♾️❤️</p>
         </div>
 
       </div>
