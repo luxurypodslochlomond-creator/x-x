@@ -23,166 +23,181 @@ const LeafIcon = ({ size = 24, color = "#22c55e" }) => (
   </svg>
 );
 
+const Dot = () => (
+  <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mx-1 mb-0.5 align-middle" />
+);
+
 export default function WalshyPitch() {
   const [shown, setShown] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-      <div className="max-w-xl mx-auto px-6 py-16 space-y-12">
+    <div className="min-h-screen bg-[#0d0d0d] text-white" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <div className="max-w-xl mx-auto px-6 py-16 space-y-14">
 
         {/* Header */}
         <div>
-          <p className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-6">May 2026</p>
-          <h1 className="text-4xl font-black leading-tight mb-5 text-gray-900">
-            You saw the dogs<br />
-            stop and stare.<br />
-            <span className="text-amber-500">That wasn't a coincidence.</span>
+          <p className="text-xs tracking-[0.3em] text-gray-600 uppercase mb-8">May 2026 · Private</p>
+          <h1 className="text-5xl font-black leading-[1.1] mb-6">
+            We're building<br />
+            things that<br />
+            <span className="text-amber-400">actually work.</span>
           </h1>
-          <p className="text-gray-500 leading-relaxed text-lg">
-            Dogs respond to specific psychoacoustic frequencies. Peer-reviewed. Tested. Real.
-            What you saw in that bar was it working. We built a platform around it — 
-            and that's just one of three things we want to tell you about.
+          <p className="text-gray-400 leading-relaxed text-lg">
+            Not a startup with a vision board. Not an app looking for a problem. 
+            Three real products, real people using them, and a gap where the right person could make a genuine difference.
           </p>
         </div>
 
-        <div className="h-px bg-gray-100" />
+        {/* Divider */}
+        <div className="flex items-center gap-3">
+          <PawIcon size={14} color="#374151" />
+          <div className="flex-1 h-px bg-white/10" />
+          <PawIcon size={14} color="#374151" />
+        </div>
 
         {/* PetSounds51 */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <PawIcon size={18} />
-            <p className="text-xs tracking-widest text-gray-400 uppercase">PetSounds51</p>
+            <p className="text-xs tracking-widest text-amber-400 uppercase font-bold">PetSounds51</p>
           </div>
-          <p className="text-gray-800 font-bold text-xl mb-3">
-            Sound therapy for anxious pets. Already working.
+          <p className="text-white font-black text-2xl mb-4 leading-tight">
+            You know that moment when a dog walks into a room and just... stops?
           </p>
-          <p className="text-gray-500 leading-relaxed mb-5">
-            Separation anxiety. Fireworks. Travel stress. Dogs, cats, horses. 
-            The frequencies are real and the science is solid — 
-            we've built it into a simple app that anyone can use. 
-            Free to try, subscription for the full library. No login. No faff.
+          <p className="text-gray-400 leading-relaxed mb-4">
+            That happened in a bar. Someone walked past a screen playing our frequencies 
+            and their dog froze — ears up, completely tuned in. 
+            Nobody told them to look. Nobody trained them to stop.
           </p>
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
-            <p className="text-amber-800 font-bold mb-2">The audience is already there.</p>
-            <p className="text-amber-700 text-sm leading-relaxed">
-              12 million pet dogs in the UK alone. Every single owner has felt guilty leaving the house — 
-              or spent a fortune on a behaviourist. A warm, shareable piece of creative 
-              puts this in front of all of them. The product works. It just needs the right people to see it.
+          <p className="text-gray-400 leading-relaxed mb-6">
+            It's not magic. It's psychoacoustics — the specific frequencies that speak 
+            directly to the animal nervous system. Peer-reviewed. Properly researched. 
+            Built into an app that anyone can use in about 30 seconds.
+            Separation anxiety. Fireworks. Travel stress. Already helping.
+          </p>
+          <div className="bg-amber-950/40 border border-amber-500/20 rounded-2xl p-5">
+            <p className="text-amber-300 font-black mb-2">The audience doesn't need convincing.</p>
+            <p className="text-amber-200/70 text-sm leading-relaxed">
+              12 million dogs in the UK. Every owner has left the house wondering 
+              if their dog is okay. This answers that — and they'll tell everyone they know when it works. 
+              It just needs to get in front of people.
             </p>
           </div>
         </div>
 
-        <div className="h-px bg-gray-100" />
+        {/* Divider */}
+        <div className="flex items-center gap-3">
+          <WaveIcon size={14} color="#374151" />
+          <div className="flex-1 h-px bg-white/10" />
+          <WaveIcon size={14} color="#374151" />
+        </div>
 
         {/* SORTED */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <WaveIcon size={18} />
-            <p className="text-xs tracking-widest text-gray-400 uppercase">SORTED</p>
+            <p className="text-xs tracking-widest text-green-400 uppercase font-bold">SORTED</p>
           </div>
-          <p className="text-gray-800 font-bold text-xl mb-3">
-            Most people dread opening certain letters.
+          <p className="text-white font-black text-2xl mb-4 leading-tight">
+            There's a letter on most people's kitchen table right now that they haven't opened.
           </p>
-          <p className="text-gray-500 leading-relaxed mb-4">
-            HMRC. Landlords. Debt collectors. Bailiffs. The kind of envelope that sits on the 
-            kitchen table for three days because nobody knows what it actually means or what to do about it.
+          <p className="text-gray-400 leading-relaxed mb-4">
+            HMRC. The council. A landlord. A debt they'd forgotten about. 
+            Brown envelope. Sits there for three days because nobody knows 
+            what it actually means or what they're supposed to do about it.
           </p>
-          <p className="text-gray-500 leading-relaxed">
-            SORTED reads it for you. Plain English. In seconds. Any language. 
-            Nothing stored, nothing sold, no login. 
-            Already live. Already helping people. 
-            Martin Lewis built an empire on this exact anxiety — 
-            SORTED just does it faster and more privately.
+          <p className="text-gray-400 leading-relaxed">
+            SORTED reads it. Tells you exactly what it is in plain English. 
+            Tells you what to do. Any language. Takes about ten seconds. 
+            Nothing stored, nothing sold, no account, no login. 
+            Just — sorted. Already live. Already helping people who were genuinely scared.
           </p>
         </div>
 
-        <div className="h-px bg-gray-100" />
+        {/* Divider */}
+        <div className="flex items-center gap-3">
+          <LeafIcon size={14} color="#374151" />
+          <div className="flex-1 h-px bg-white/10" />
+          <LeafIcon size={14} color="#374151" />
+        </div>
 
-        {/* Litter Picks */}
+        {/* Litter */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <LeafIcon size={18} />
-            <p className="text-xs tracking-widest text-gray-400 uppercase">The Litter App</p>
+            <p className="text-xs tracking-widest text-green-400 uppercase font-bold">The Litter App</p>
           </div>
-          <p className="text-gray-800 font-bold text-xl mb-3">
-            People are already picking up litter. We just gave them a reason.
+          <p className="text-white font-black text-2xl mb-4 leading-tight">
+            People are already picking up litter. Millions of them. Every weekend.
           </p>
-          <p className="text-gray-500 leading-relaxed mb-4">
-            Photograph what you find. Get rewarded. The data goes to councils 
-            who actually need it to prove where the problems are and justify spending.
-            Brands get verified ESG evidence that isn't made up on a spreadsheet.
+          <p className="text-gray-400 leading-relaxed mb-4">
+            They just get nothing back for it. No record. No thanks. 
+            No data that anyone can actually use.
           </p>
-          <p className="text-gray-500 leading-relaxed">
-            It's nearly ready. This one just needs a defined push to get it across the line.
+          <p className="text-gray-400 leading-relaxed">
+            Take a photo of what you find, get rewarded. 
+            Councils get verified, real-world data about where the problems actually are. 
+            Brands get ESG evidence that wasn't generated by a consultant with a spreadsheet. 
+            Nearly ready to launch — this one just needs a final push.
           </p>
         </div>
 
-        <div className="h-px bg-gray-100" />
+        {/* Divider */}
+        <div className="h-px bg-white/10" />
 
-        {/* The ask — human, no jargon */}
+        {/* The ask — honest, not corporate */}
         <div>
-          <p className="text-xs tracking-widest text-gray-400 uppercase mb-4">What We're Looking For</p>
-
-          <p className="text-gray-600 leading-relaxed mb-6">
-            We're not pitching to a room. We're having a conversation with people 
-            who get what this is and might want to be involved. That could mean different things.
+          <p className="text-white font-black text-2xl mb-5 leading-tight">
+            So why are you reading this?
+          </p>
+          <p className="text-gray-400 leading-relaxed mb-8">
+            Because we think you might be the kind of person who can help — 
+            and we'd rather have an honest conversation than send a 40-slide deck 
+            to someone who'll never open it.
           </p>
 
           <div className="space-y-4">
-
-            <div className="border border-gray-200 rounded-2xl p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <WaveIcon size={16} color="#6b7280" />
-                <p className="font-black text-gray-900">Connections and expertise</p>
-              </div>
+            <div className="border border-white/10 rounded-2xl p-5 hover:border-amber-500/30 transition-colors">
+              <p className="font-black text-white mb-2">Connections matter more than cash right now.</p>
               <p className="text-gray-500 text-sm leading-relaxed">
-                If you know how to get the right product in front of the right audience — 
-                creative, distribution, brand introductions — that's genuinely worth more to us right now 
-                than anything else. PetSounds51, SORTED and the litter app are all ready to grow.
+                If you know how to get things in front of people — the right creative, 
+                the right channel, the right introduction — that's worth more to us than 
+                pretty much anything. PetSounds51 and SORTED are both ready.
               </p>
             </div>
 
-            <div className="border border-gray-200 rounded-2xl p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <LeafIcon size={16} color="#6b7280" />
-                <p className="font-black text-gray-900">A bit of cash, if it makes sense</p>
-              </div>
+            <div className="border border-white/10 rounded-2xl p-5 hover:border-green-500/20 transition-colors">
+              <p className="font-black text-white mb-2">And if putting a bit behind it makes sense to you, we can talk about that too.</p>
               <p className="text-gray-500 text-sm leading-relaxed">
-                For the litter app specifically, there's a defined amount of work 
-                between here and launch. If putting a bit behind that appeals to you, 
-                we're happy to have that conversation — fair terms, nothing complicated, 
-                nothing that makes either of us feel weird about it.
+                For the litter app specifically, there's a clear, defined amount of work 
+                between here and launch. If backing that appeals, we'll keep it simple — 
+                fair, straightforward, nothing that makes either of us feel weird about it.
               </p>
             </div>
-
           </div>
         </div>
 
-        <div className="h-px bg-gray-100" />
-
         {/* CTA */}
         <div className="pb-8">
-          <p className="text-gray-500 text-sm leading-relaxed mb-8">
-            No pressure. No deck to sit through. 
-            If any of this resonates — or if you just want to tell us what you think — 
-            that's genuinely a good enough reason to get in touch.
+          <p className="text-gray-600 text-sm leading-relaxed mb-8">
+            No pressure. No follow-up sequence. If it resonates — or even if you just want to push back on something — get in touch.
           </p>
 
           <button
             onClick={() => setShown(!shown)}
-            className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-white font-black text-sm tracking-widest uppercase rounded-2xl transition-all"
+            className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-black font-black text-sm tracking-widest uppercase rounded-2xl transition-all"
           >
-            {shown ? "Close" : "Get in Touch"}
+            {shown ? "Close" : "Let's Talk"}
           </button>
 
           {shown && (
             <div className="mt-6 text-center space-y-1">
-              <p className="font-black text-gray-900 text-lg">Brian Hughes</p>
-              <p className="text-amber-500 font-bold">brian@universalfrequency51.com</p>
+              <p className="font-black text-white text-lg">Brian Hughes</p>
+              <p className="text-amber-400 font-bold">brian@universalfrequency51.com</p>
               <div className="flex items-center justify-center gap-2 mt-4">
-                <PawIcon size={13} color="#d1d5db" />
-                <p className="text-gray-400 text-xs">Glasgow · UF51</p>
-                <LeafIcon size={13} color="#d1d5db" />
+                <PawIcon size={12} color="#374151" />
+                <p className="text-gray-600 text-xs">Glasgow · UF51</p>
+                <LeafIcon size={12} color="#374151" />
               </div>
             </div>
           )}
