@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// Custom PetSounds paw icon
 const PawIcon = ({ size = 24, color = "#f59e0b" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <ellipse cx="12" cy="17" rx="5" ry="4" fill={color} opacity="0.9"/>
@@ -11,11 +10,16 @@ const PawIcon = ({ size = 24, color = "#f59e0b" }) => (
   </svg>
 );
 
-// Simple waveform icon for sound/frequency
 const WaveIcon = ({ size = 24, color = "#f59e0b" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <path d="M2 12 L5 12 L6 7 L7 17 L8 10 L9 14 L10 6 L11 18 L12 9 L13 15 L14 11 L15 13 L16 12 L19 12 L22 12"
       stroke={color} strokeWidth="2" strokeLinecap="round" fill="none"/>
+  </svg>
+);
+
+const LeafIcon = ({ size = 24, color = "#22c55e" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <path d="M12 2C6 2 3 8 3 14c0 4 2.5 7 6 8 0-4 1-7 3-9-1 3-1 6 0 9 3.5-1 6-4.5 6-8 0-6-3-12-6-12z" fill={color} opacity="0.85"/>
   </svg>
 );
 
@@ -31,12 +35,13 @@ export default function WalshyPitch() {
           <p className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-6">May 2026</p>
           <h1 className="text-4xl font-black leading-tight mb-5 text-gray-900">
             You saw the dogs<br />
-            stop and stare. <span className="inline-block"><PawIcon size={36} /></span><br />
+            stop and stare.<br />
             <span className="text-amber-500">That wasn't a coincidence.</span>
           </h1>
           <p className="text-gray-500 leading-relaxed text-lg">
-            Dogs respond to specific psychoacoustic frequencies — peer-reviewed, tested, real. 
-            What you saw was it working. We built an app around it.
+            Dogs respond to specific psychoacoustic frequencies. Peer-reviewed. Tested. Real.
+            What you saw in that bar was it working. We built a platform around it — 
+            and that's just one of three things we want to tell you about.
           </p>
         </div>
 
@@ -44,28 +49,25 @@ export default function WalshyPitch() {
 
         {/* PetSounds51 */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3">
             <PawIcon size={18} />
             <p className="text-xs tracking-widest text-gray-400 uppercase">PetSounds51</p>
           </div>
           <p className="text-gray-800 font-bold text-xl mb-3">
-            Sound therapy for anxious dogs, cats and horses.
+            Sound therapy for anxious pets. Already working.
           </p>
           <p className="text-gray-500 leading-relaxed mb-5">
-            Separation anxiety. Fireworks. Travel stress. The frequencies are real, 
-            the science is real, and it's already working. 
-            Free to start. Subscription for more protocols. No login needed.
+            Separation anxiety. Fireworks. Travel stress. Dogs, cats, horses. 
+            The frequencies are real and the science is solid — 
+            we've built it into a simple app that anyone can use. 
+            Free to try, subscription for the full library. No login. No faff.
           </p>
-
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
-            <div className="flex items-center gap-2 mb-2">
-              <PawIcon size={16} />
-              <p className="text-amber-800 font-bold">The audience is enormous.</p>
-            </div>
+            <p className="text-amber-800 font-bold mb-2">The audience is already there.</p>
             <p className="text-amber-700 text-sm leading-relaxed">
-              12 million pet dogs in the UK alone. Every single owner 
-              has felt guilty leaving the house. A warm, funny ad — 
-              the kind that gets shared — puts this in front of all of them instantly.
+              12 million pet dogs in the UK alone. Every single owner has felt guilty leaving the house — 
+              or spent a fortune on a behaviourist. A warm, shareable piece of creative 
+              puts this in front of all of them. The product works. It just needs the right people to see it.
             </p>
           </div>
         </div>
@@ -74,54 +76,85 @@ export default function WalshyPitch() {
 
         {/* SORTED */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3">
             <WaveIcon size={18} />
             <p className="text-xs tracking-widest text-gray-400 uppercase">SORTED</p>
           </div>
           <p className="text-gray-800 font-bold text-xl mb-3">
-            Paste in a scary letter. Get plain English back.
+            Most people dread opening certain letters.
+          </p>
+          <p className="text-gray-500 leading-relaxed mb-4">
+            HMRC. Landlords. Debt collectors. Bailiffs. The kind of envelope that sits on the 
+            kitchen table for three days because nobody knows what it actually means or what to do about it.
           </p>
           <p className="text-gray-500 leading-relaxed">
-            HMRC. Landlords. Debt collectors. Any language. Nothing stored. 
-            No login. Already live. Martin Lewis built an empire on exactly this anxiety — 
-            SORTED does it in seconds, privately, with AI.
+            SORTED reads it for you. Plain English. In seconds. Any language. 
+            Nothing stored, nothing sold, no login. 
+            Already live. Already helping people. 
+            Martin Lewis built an empire on this exact anxiety — 
+            SORTED just does it faster and more privately.
           </p>
         </div>
 
         <div className="h-px bg-gray-100" />
 
-        {/* The ask */}
+        {/* Litter Picks */}
         <div>
-          <p className="text-xs tracking-widest text-gray-400 uppercase mb-4">How You Could Be Involved</p>
+          <div className="flex items-center gap-2 mb-3">
+            <LeafIcon size={18} />
+            <p className="text-xs tracking-widest text-gray-400 uppercase">The Litter App</p>
+          </div>
+          <p className="text-gray-800 font-bold text-xl mb-3">
+            People are already picking up litter. We just gave them a reason.
+          </p>
+          <p className="text-gray-500 leading-relaxed mb-4">
+            Photograph what you find. Get rewarded. The data goes to councils 
+            who actually need it to prove where the problems are and justify spending.
+            Brands get verified ESG evidence that isn't made up on a spreadsheet.
+          </p>
+          <p className="text-gray-500 leading-relaxed">
+            It's nearly ready. This one just needs a defined push to get it across the line.
+          </p>
+        </div>
+
+        <div className="h-px bg-gray-100" />
+
+        {/* The ask — human, no jargon */}
+        <div>
+          <p className="text-xs tracking-widest text-gray-400 uppercase mb-4">What We're Looking For</p>
+
           <p className="text-gray-600 leading-relaxed mb-6">
-            We're not looking for a boardroom. We're looking for the right people 
-            who get what this is and want to be part of it.
+            We're not pitching to a room. We're having a conversation with people 
+            who get what this is and might want to be involved. That could mean different things.
           </p>
 
           <div className="space-y-4">
+
             <div className="border border-gray-200 rounded-2xl p-5">
               <div className="flex items-center gap-2 mb-2">
                 <WaveIcon size={16} color="#6b7280" />
-                <p className="font-black text-gray-900">Expertise and introductions</p>
+                <p className="font-black text-gray-900">Connections and expertise</p>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed">
-                If you know how to get products in front of audiences — 
-                the right creative, the right channels, the right moment — 
-                that's worth more to us than cash. PetSounds51 and SORTED are both ready to grow.
+                If you know how to get the right product in front of the right audience — 
+                creative, distribution, brand introductions — that's genuinely worth more to us right now 
+                than anything else. PetSounds51, SORTED and the litter app are all ready to grow.
               </p>
             </div>
 
             <div className="border border-gray-200 rounded-2xl p-5">
               <div className="flex items-center gap-2 mb-2">
-                <PawIcon size={16} color="#6b7280" />
-                <p className="font-black text-gray-900">Smart capital</p>
+                <LeafIcon size={16} color="#6b7280" />
+                <p className="font-black text-gray-900">A bit of cash, if it makes sense</p>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed">
-                The litter app — people photograph litter, earn rewards, councils get verified data — 
-                needs a sprint to market. If a small investment makes sense for you, 
-                it's on the table and the terms are simple. We can talk through that if it feels right.
+                For the litter app specifically, there's a defined amount of work 
+                between here and launch. If putting a bit behind that appeals to you, 
+                we're happy to have that conversation — fair terms, nothing complicated, 
+                nothing that makes either of us feel weird about it.
               </p>
             </div>
+
           </div>
         </div>
 
@@ -130,9 +163,9 @@ export default function WalshyPitch() {
         {/* CTA */}
         <div className="pb-8">
           <p className="text-gray-500 text-sm leading-relaxed mb-8">
-            No pressure at all. If none of this lands, I'd still love to know what you think — 
-            you spotted something real before anyone told you what it was. 
-            That kind of instinct doesn't come from a pitch deck.
+            No pressure. No deck to sit through. 
+            If any of this resonates — or if you just want to tell us what you think — 
+            that's genuinely a good enough reason to get in touch.
           </p>
 
           <button
@@ -143,13 +176,13 @@ export default function WalshyPitch() {
           </button>
 
           {shown && (
-            <div className="mt-5 text-center space-y-1">
+            <div className="mt-6 text-center space-y-1">
               <p className="font-black text-gray-900 text-lg">Brian Hughes</p>
               <p className="text-amber-500 font-bold">brian@universalfrequency51.com</p>
-              <div className="flex items-center justify-center gap-1 mt-3">
-                <PawIcon size={14} color="#d1d5db" />
+              <div className="flex items-center justify-center gap-2 mt-4">
+                <PawIcon size={13} color="#d1d5db" />
                 <p className="text-gray-400 text-xs">Glasgow · UF51</p>
-                <PawIcon size={14} color="#d1d5db" />
+                <LeafIcon size={13} color="#d1d5db" />
               </div>
             </div>
           )}
