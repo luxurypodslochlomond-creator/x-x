@@ -1085,7 +1085,7 @@ You know them. You're here. That's enough. ♾️❤️`;
       </div>
 
       {/* MESSAGES - float above the field. aria-live so screen readers announce new messages for blind users */}
-      <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)' }} aria-live="polite" aria-label="Conversation with AI51">
+      <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)' }} aria-live="polite" aria-label="Conversation with AI51">
       {/* QUESTIONING LAYER — Help them self-discover before we answer */}
       {messages.length > 0 && !isProcessing && (
         <AI51QuestioningLayer
@@ -1149,29 +1149,31 @@ You know them. You're here. That's enough. ♾️❤️`;
                   }} />
                 )}
                 <div
-                  className={'max-w-[80%] px-4 py-3 rounded-2xl ' + (msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm')}
+                  className={'max-w-[85%] px-4 py-3 rounded-2xl ' + (msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm')}
                   style={{
                     background: msg.role === 'user'
-                      ? 'rgba(255,255,255,0.08)'
+                      ? 'rgba(255,255,255,0.10)'
                       : msg.offline
-                        ? 'rgba(70,45,0,0.35)'
-                        : 'rgba(70,20,100,0.35)',
+                        ? 'rgba(70,45,0,0.5)'
+                        : 'rgba(20,10,60,0.75)',
                     border: msg.role === 'user'
-                      ? '1px solid rgba(255,255,255,0.3)'
+                      ? '1px solid rgba(255,255,255,0.25)'
                       : msg.offline
-                        ? '1px solid rgba(245,158,11,0.45)'
-                        : '1px solid rgba(34,211,238,0.5)',
-                    boxShadow: msg.role === 'assistant' ? '0 2px 24px rgba(34,211,238,0.25)' : 'none',
-                    backdropFilter: 'blur(12px)',
+                        ? '1px solid rgba(245,158,11,0.5)'
+                        : '1px solid rgba(34,211,238,0.6)',
+                    boxShadow: msg.role === 'assistant' ? '0 4px 32px rgba(34,211,238,0.35), inset 0 1px 0 rgba(34,211,238,0.15)' : 'none',
+                    backdropFilter: 'blur(20px)',
                   }}
                 >
                   {msg.imageUrl && (
                    <img src={msg.imageUrl} alt="explanation diagram" className="w-64 max-w-full h-auto rounded-xl mb-2 border border-cyan-400/30" />
                   )}
                   {msg.role === 'assistant' && msg.streaming ? (
-                    <AI51StreamingText text={msg.content} isStreaming={true} onComplete={() => {
-                      setMessages(prev => prev.map((m, idx) => idx === prev.length - 1 ? { ...m, streaming: false } : m));
-                    }} />
+                    <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap break-words" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+                      <AI51StreamingText text={msg.content} isStreaming={true} onComplete={() => {
+                        setMessages(prev => prev.map((m, idx) => idx === prev.length - 1 ? { ...m, streaming: false } : m));
+                      }} />
+                    </p>
                   ) : (
                     <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap break-words" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>{msg.content}</p>
                   )}
