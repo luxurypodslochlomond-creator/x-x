@@ -1111,29 +1111,21 @@ You know them. You're here. That's enough. ♾️❤️`;
                 exit={{ opacity: 0 }}
                 className="text-center pt-12 space-y-4"
               >
-                <p className="text-white/60 font-sans text-xs tracking-[0.25em] uppercase">always here • voice or type • any language</p>
-                <div className="flex justify-center gap-2 flex-wrap px-4 max-w-sm mx-auto">
+                <p className="text-white/40 font-sans text-xs tracking-[0.2em] uppercase mb-2">voice or type • any language</p>
+                <div className="flex flex-col gap-2 px-6 max-w-xs mx-auto w-full">
                   {[
-                    "I've got a problem I can't solve — ask me questions before you answer",
-                    "Challenge me on something I probably believe that isn't true",
-                    "I want to build something — ask me what I actually need first",
-                    "I feel like I'm drowning and I don't know why",
-                    "What's the thing most people miss about consciousness?",
-                    "Help me think, not just answer",
-                    "I don't know what to do with my life — where do I start?",
                     "I just need someone real to talk to right now",
-                    "What am I actually capable of that I'm not seeing?",
+                    "I don't know what to do with my life — where do I start?",
                     "Nobody understands what I'm going through",
                     "Teach me something that would genuinely change how I see things",
-                    "I feel like I'm breaking and nobody sees it",
                   ].map((prompt) => (
                     <button
                       key={prompt}
                       onClick={() => sendMessageContentRef.current && sendMessageContentRef.current(prompt)}
-                      className="text-xs px-3 py-1.5 rounded-full transition-all font-sans text-white/70 hover:text-white"
+                      className="text-xs px-4 py-2.5 rounded-2xl transition-all font-sans text-white/65 hover:text-white text-left"
                       style={{
-                        background: 'rgba(255,255,255,0.08)',
-                        border: '1px solid rgba(255,255,255,0.2)',
+                        background: 'rgba(255,255,255,0.06)',
+                        border: '1px solid rgba(255,255,255,0.12)',
                       }}
                     >
                       {prompt}
