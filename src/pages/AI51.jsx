@@ -1086,20 +1086,7 @@ You know them. You're here. That's enough. ♾️❤️`;
 
       {/* MESSAGES - float above the field. aria-live so screen readers announce new messages for blind users */}
       <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)' }} aria-live="polite" aria-label="Conversation with AI51">
-      {/* QUESTIONING LAYER — Help them self-discover before we answer */}
-      {messages.length > 0 && !isProcessing && (
-        <AI51QuestioningLayer
-          userMessage={messages[messages.length - 1]?.role === 'user' ? messages[messages.length - 1].content : ''}
-          onDiscovery={(discovery) => {
-            // Log that they self-discovered (for learning)
-            saveMemoryIfNeeded('User engaged with self-discovery questions', `They reflected on: "${discovery.userThought}"`);
-          }}
-          onBypass={() => {
-            // They skipped — that's ok too
-          }}
-          isProcessing={isProcessing}
-        />
-      )}
+      {/* QUESTIONING LAYER — disabled, was injecting rogue cards */}
 
       <div className="max-w-lg mx-auto space-y-3 pt-6 pb-4">
           <AnimatePresence>
