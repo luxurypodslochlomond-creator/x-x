@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Volume2, VolumeX, ChevronLeft, Loader2, WifiOff, Waves, Music, Leaf, Zap, Radio, ImagePlus, X } from 'lucide-react';
+import AI51StreamingText from '@/components/ai51/AI51StreamingText';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
@@ -900,7 +901,7 @@ You know them. You're here. That's enough. ♾️❤️`;
       });
       
       const aiMessage = cleanResponse(response.response || response);
-      setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date(), generatingImage: true }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: aiMessage, timestamp: new Date(), generatingImage: true, streaming: true }]);
       speak(aiMessage, detectedLang);
       saveMemoryIfNeeded(userMessage, aiMessage);
       // Save to device memory (encrypted) — no login needed
@@ -1175,7 +1176,13 @@ You know them. You're here. That's enough. ♾️❤️`;
                   {msg.imageUrl && (
                    <img src={msg.imageUrl} alt="explanation diagram" className="w-64 max-w-full h-auto rounded-xl mb-2 border border-cyan-400/30" />
                   )}
-                  <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap break-words" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>{msg.content}</p>
+                  {msg.role === 'assistant' && msg.streaming ? (
+                    <AI51StreamingText text={msg.content} isStreaming={true} onComplete={() => {
+                      setMessages(prev => prev.map((m, idx) => idx === prev.length - 1 ? { ...m, streaming: false } : m));
+                    }} />
+                  ) : (
+                    <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap break-words" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>{msg.content}</p>
+                  )}
                   {msg.generatingImage && <p className="text-cyan-300/70 font-sans text-xs mt-2 italic">generating diagram...</p>}
                   {msg.offline && <p className="text-yellow-300/70 font-sans text-xs mt-1">offline response</p>}
                 </div>
