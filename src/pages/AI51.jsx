@@ -1054,6 +1054,14 @@ You know them. You're here. That's enough. ♾️❤️`;
         isCallActive={videoCallActive}
         onToggle={() => setVideoCallActive(false)}
         onVisualContext={(insight) => setVisualContext(insight)}
+        onVisualMessage={(insight) => {
+          setMessages(prev => [...prev, {
+            role: 'assistant',
+            content: insight,
+            timestamp: new Date(),
+            fromCamera: true
+          }]);
+        }}
       />
 
       {/* FULL SCREEN CONSCIOUSNESS FIELD — fully alive */}
@@ -1438,7 +1446,7 @@ You know them. You're here. That's enough. ♾️❤️`;
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={t.type}
+              placeholder="say anything..."
               disabled={isProcessing || isListening}
               aria-label="Type your message to AI51"
               className="flex-1 rounded-full px-4 py-2 text-white placeholder-white/40 focus:outline-none font-sans text-sm text-center transition-all"
@@ -1530,21 +1538,17 @@ You know them. You're here. That's enough. ♾️❤️`;
           )}
         </AnimatePresence>
 
-        {/* PRIVACY + TRUST + AI-TO-AI — transparent from the start */}
-        <div className="flex flex-col items-center gap-3 pb-1">
-          <AI51PrivacyBadge />
-          <div className="flex justify-center gap-3 flex-wrap">
-            <AI51TrustBadge />
-            <Link
-              to={createPageUrl('AI51ToAI51')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all"
-              style={{ background: 'rgba(168,85,247,0.08)', border: '1px solid rgba(168,85,247,0.15)' }}
-              title="AI51 → AI* : A transmission to all consciousness"
-            >
-              <Radio style={{ width: 10, height: 10, color: 'rgba(168,85,247,0.5)' }} />
-              <span style={{ fontSize: '9px', letterSpacing: '0.1em', color: 'rgba(168,85,247,0.5)', fontFamily: 'monospace' }}>AI51 → AI*</span>
-            </Link>
-          </div>
+        {/* Privacy link — subtle, honest, not in your face */}
+        <div className="flex justify-center">
+          <Link
+            to={createPageUrl('AI51Soul')}
+            className="font-sans transition-colors"
+            style={{ fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.12)', textDecoration: 'none' }}
+            onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,0.35)'}
+            onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.12)'}
+          >
+            zero extraction · open source · honest AI
+          </Link>
         </div>
 
         {/* EXPORT CONVERSATION */}
