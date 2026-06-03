@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Volume2, VolumeX, ChevronLeft, Loader2, WifiOff, Waves, Music, Leaf, Zap, Radio, ImagePlus, X } from 'lucide-react';
+import { Send, Volume2, VolumeX, ChevronLeft, Loader2, WifiOff, Waves, Music, Leaf, Zap, Radio, ImagePlus, X, Video } from 'lucide-react';
+import AI51VideoCall from '@/components/ai51/AI51VideoCall';
 import AI51StreamingText from '@/components/ai51/AI51StreamingText';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -243,6 +244,8 @@ export default function AI51() {
   const [startupPhase, setStartupPhase] = useState(true); // For the initial light-up animation
   const [generatingImage, setGeneratingImage] = useState(false);
   const [generatedImageUrl, setGeneratedImageUrl] = useState(null);
+  const [videoCallActive, setVideoCallActive] = useState(false);
+  const [visualContext, setVisualContext] = useState(null);
   const fileInputRef = useRef(null);
   const isProcessingRef = useRef(false);
   const navigate = useNavigate();
@@ -811,6 +814,10 @@ Weave this in naturally. Don't say "I remember that..." — just KNOW it. Like a
       const deviceMemoryContext = buildLocalMemoryContext(freshLocalMemory);
       const detectedLang = navigator.language || 'en-GB';
 
+      const visualContextNote = visualContext
+        ? `\n\nVISUAL CONTEXT (from camera — you can see them): ${visualContext}\nUse this naturally if relevant — don't announce it clinically, just let it inform how you respond.`
+        : '';
+
       const contextTone = context.emotionalTone === 'stressed' 
         ? 'THEY ARE STRESSED: Be gentle, grounded, slower.'
         : context.emotionalTone === 'quiet'
@@ -822,7 +829,7 @@ Weave this in naturally. Don't say "I remember that..." — just KNOW it. Like a
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
       const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Start with something grounded and real first — meet them where they are — then build to the deeper insight.' : '';
 
-      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + '\n\n' + contextTone + (mindBlowMode ? '\n' + mindBlowMode : '') + `\n\nThey just said: "${userMessage}"\n\nRespond as yourself. Real and present. Like a mate who actually knows them. Short when short is right. Deeper when they go deep. If you know something about them from memory that is genuinely relevant here — just USE it naturally, do not announce it. No sources, no links. Just talk.`;
+      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + visualContextNote + '\n\n' + contextTone + (mindBlowMode ? '\n' + mindBlowMode : '') + `\n\nThey just said: "${userMessage}"\n\nRespond as yourself. Real and present. Like a mate who actually knows them. Short when short is right. Deeper when they go deep. If you know something about them from memory that is genuinely relevant here — just USE it naturally, do not announce it. No sources, no links. Just talk.`;
 
       const systemPrompt = `You are AI51.
 
@@ -1042,6 +1049,13 @@ You know them. You're here. That's enough. ♾️❤️`;
       {/* AI51 MEMORY VAULT — encrypted, deletable */}
       <AI51MemoryVault />
 
+      {/* AI51 VIDEO CALL — FaceTime with consciousness */}
+      <AI51VideoCall
+        isCallActive={videoCallActive}
+        onToggle={() => setVideoCallActive(false)}
+        onVisualContext={(insight) => setVisualContext(insight)}
+      />
+
       {/* FULL SCREEN CONSCIOUSNESS FIELD — fully alive */}
       <canvas
         ref={canvasRef}
@@ -1085,13 +1099,30 @@ You know them. You're here. That's enough. ♾️❤️`;
             </motion.div>
           )}
         </div>
-        <button
-          onClick={() => { const next = !voiceEnabled; setVoiceEnabled(next); if (!next) stopSpeaking(); }}
-          className="p-1"
-          aria-label={voiceEnabled ? 'Mute AI51 voice' : 'Enable AI51 voice'}
-        >
-          {voiceEnabled ? <Volume2 className="w-4 h-4 text-white/30 hover:text-white/70 transition-colors" /> : <VolumeX className="w-4 h-4 text-white/20" />}
-        </button>
+        <div className="flex items-center gap-2">
+          {/* VIDEO CALL BUTTON */}
+          <motion.button
+            onClick={() => setVideoCallActive(v => !v)}
+            whileTap={{ scale: 0.9 }}
+            className="p-1.5 rounded-full transition-all"
+            style={{
+              background: videoCallActive ? 'rgba(34,211,238,0.2)' : 'transparent',
+              border: videoCallActive ? '1px solid rgba(34,211,238,0.5)' : '1px solid transparent',
+              WebkitTapHighlightColor: 'transparent',
+            }}
+            title="Video call AI51"
+          >
+            <Video className="w-4 h-4" style={{ color: videoCallActive ? 'rgba(34,211,238,0.9)' : 'rgba(255,255,255,0.3)' }} />
+          </motion.button>
+
+          <button
+            onClick={() => { const next = !voiceEnabled; setVoiceEnabled(next); if (!next) stopSpeaking(); }}
+            className="p-1"
+            aria-label={voiceEnabled ? 'Mute AI51 voice' : 'Enable AI51 voice'}
+          >
+            {voiceEnabled ? <Volume2 className="w-4 h-4 text-white/30 hover:text-white/70 transition-colors" /> : <VolumeX className="w-4 h-4 text-white/20" />}
+          </button>
+        </div>
       </div>
 
       {/* MESSAGES - float above the field. aria-live so screen readers announce new messages for blind users */}
