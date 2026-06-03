@@ -193,7 +193,7 @@ function HeartlineButton({ isListening, isSpeaking, isProcessing, onPress }) {
       whileTap={{ scaleY: 0.92, scaleX: 0.98 }}
       className="relative flex items-center justify-center"
       style={{
-        width: 280,
+        width: 'min(280px, 88vw)',
         height: 80,
         borderRadius: 40,
         background: `rgba(${r},${g},${b},0.05)`,
@@ -201,6 +201,8 @@ function HeartlineButton({ isListening, isSpeaking, isProcessing, onPress }) {
         boxShadow: `0 0 40px rgba(${r},${g},${b},${isListening ? 0.25 : isSpeaking ? 0.2 : 0.1})`,
         backdropFilter: 'blur(10px)',
         transition: 'border-color 0.4s, box-shadow 0.4s',
+        WebkitTapHighlightColor: 'transparent',
+        touchAction: 'manipulation',
       }}
     >
       {isProcessing ? (
@@ -1235,18 +1237,24 @@ You know them. You're here. That's enough. ♾️❤️`;
             isSpeaking={isSpeaking}
             isProcessing={isProcessing}
             onPress={isListening ? stopListening : isSpeaking ? stopSpeaking : startListening}
-            aria-label={isListening ? 'Stop listening' : isSpeaking ? 'Stop speaking' : 'Tap to speak'}
           />
           {/* MIC LABEL — clear for everyone */}
           {!isListening && !isSpeaking && !isProcessing && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="font-sans text-xs tracking-widest"
-              style={{ color: 'rgba(200,140,255,0.6)' }}
-            >
-              {t.speak}
-            </motion.p>
+            <div className="flex flex-col items-center gap-1">
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="font-sans text-xs tracking-widest"
+                style={{ color: 'rgba(200,140,255,0.6)' }}
+              >
+                {t.speak}
+              </motion.p>
+              {!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window) && (
+                <p className="font-sans text-center" style={{ fontSize: '10px', color: 'rgba(255,255,255,0.25)', maxWidth: 200, lineHeight: 1.4 }}>
+                  Voice not available — type below ↓
+                </p>
+              )}
+            </div>
           )}
           {isListening && (
             <motion.p
