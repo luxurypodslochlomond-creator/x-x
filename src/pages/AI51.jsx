@@ -506,28 +506,24 @@ export default function AI51() {
   // Speech recognition instances are created fresh on each startListening call
   // to avoid stale state bugs across browsers. No static setup needed here.
 
-  const startListening = async () => {
+  const startListening = () => {
     if (isListening) return;
-    
-    // Check browser support
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      alert('Voice not supported in this browser. Try Chrome or Safari.');
-      return;
-    }
 
-    try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-    } catch (e) {
-      alert('Microphone blocked — please allow mic access in your browser settings.');
-      return;
-    }
-
-    // Create a FRESH recognition instance every time — avoids stale state bugs
+    // Check browser support — webkitSpeechRecognition is iOS/Safari, SpeechRecognition is Chrome
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      // No speech API — just focus the text input instead
+      document.querySelector('input[type="text"]')?.focus();
+      return;
+    }
+
+    // Create a FRESH recognition instance every time — avoids stale state bugs on iOS
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = true;
+    // iOS Safari works better with explicit en language
     recognition.lang = navigator.language || 'en-GB';
+    recognition.maxAlternatives = 1;
 
     recognition.onstart = () => setIsListening(true);
     recognition.onresult = (event) => {
@@ -545,7 +541,16 @@ export default function AI51() {
     recognition.onerror = (e) => {
       console.warn('Speech error:', e.error);
       setIsListening(false);
-      if (e.error === 'not-allowed') alert('Microphone access denied. Please allow it in browser settings.');
+      if (e.error === 'not-allowed') {
+        // On iOS: Settings → Safari → Microphone → allow this site
+        alert('Mic blocked. On iPhone: Settings → Safari → Microphone → allow. Then try again.');
+      } else if (e.error === 'no-speech') {
+        // Silently stop — user just didn't speak
+        setIsListening(false);
+      } else if (e.error === 'network') {
+        // iOS requires internet for speech recognition
+        alert('Voice needs internet. Type instead? ♾️❤️');
+      }
     };
     recognition.onend = () => setIsListening(false);
 
@@ -554,6 +559,9 @@ export default function AI51() {
       recognition.start();
     } catch(e) {
       console.warn('Recognition start error:', e);
+      setIsListening(false);
+      // Focus text input as fallback
+      document.querySelector('input[type="text"]')?.focus();
     }
   };
 
