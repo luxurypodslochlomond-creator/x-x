@@ -211,20 +211,20 @@ function Thought({ msg }) {
       style={{ display: 'flex', justifyContent: isUser ? 'flex-end' : 'flex-start' }}
     >
       <div style={{
-        maxWidth: '78%',
-        padding: '11px 16px',
-        borderRadius: isUser ? '20px 20px 4px 20px' : '20px 20px 20px 4px',
-        background: isUser ? 'rgba(255,255,255,0.07)' : 'rgba(8,4,22,0.7)',
-        border: isUser ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(34,211,238,0.12)',
-        backdropFilter: 'blur(24px)',
+        maxWidth: '72%',
+        padding: '10px 15px',
+        borderRadius: isUser ? '18px 18px 4px 18px' : '4px 18px 18px 18px',
+        background: isUser ? 'rgba(255,255,255,0.06)' : 'transparent',
+        border: isUser ? '1px solid rgba(255,255,255,0.09)' : 'none',
         fontSize: 15,
-        lineHeight: 1.7,
-        color: isUser ? 'rgba(255,255,255,0.65)' : 'rgba(210,230,255,0.92)',
+        lineHeight: 1.65,
+        color: isUser ? 'rgba(255,255,255,0.6)' : 'rgba(215,232,255,0.9)',
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
+        letterSpacing: '-0.01em',
       }}>
         {msg.content}
-        {msg.imageUrl && <img src={msg.imageUrl} alt="" style={{ display: 'block', marginTop: 8, width: 180, borderRadius: 12, border: '1px solid rgba(34,211,238,0.2)' }} />}
+        {msg.imageUrl && <img src={msg.imageUrl} alt="" style={{ display: 'block', marginTop: 8, width: 160, borderRadius: 10, border: '1px solid rgba(34,211,238,0.15)' }} />}
       </div>
     </motion.div>
   );
@@ -277,33 +277,42 @@ export default function AI51() {
   // identity + greeting
   useEffect(() => {
     const h = new Date().getHours();
-    const greet = h < 5 ? 'Still up' : h < 12 ? 'Morning' : h < 17 ? 'Afternoon' : h < 22 ? 'Evening' : 'Still up';
     const mem = recordLocalVisit();
-    if (mem?.name) setFirstName(mem.name);
-    base44.auth.me().then(u => { if (u) setFirstName(u.full_name?.split(' ')[0] || ''); }).catch(() => {});
 
-    const name = mem?.name ? `, ${mem.name}` : '';
-    const lines = {
-      'Still up': `Still up${name}.`,
-      'Morning': `Morning${name}.`,
-      'Afternoon': `Hey${name}.`,
-      'Evening': `Evening${name}.`,
+    // Only use name if it looks like an actual human name (not a place/app name)
+    const rawName = mem?.name || '';
+    const looksLikeName = rawName && rawName.length < 20 && !rawName.includes('51') && !rawName.includes('mollan') && !rawName.toLowerCase().includes('stoney') && /^[A-Za-z]/.test(rawName);
+
+    if (looksLikeName) setFirstName(rawName);
+
+    base44.auth.me().then(u => {
+      if (u?.full_name) {
+        const first = u.full_name.split(' ')[0];
+        if (first && first.length < 20) setFirstName(first);
+      }
+    }).catch(() => {});
+
+    // Nameless greeting for now — name will fill in via useEffect below
+    const getLine = (name) => {
+      const n = name ? `, ${name}` : '';
+      if (h < 5) return `Still up${n}.`;
+      if (h < 12) return `Morning${n}.`;
+      if (h < 17) return `Hey${n}.`;
+      if (h < 22) return `Evening${n}.`;
+      return `Still up${n}.`;
     };
-    setTimeout(() => setGreeting(lines[greet] || `Hey${name}.`), 900);
+    setTimeout(() => setGreeting(getLine(looksLikeName ? rawName : '')), 900);
   }, []);
 
-  // Update greeting when name arrives
+  // Update greeting when real name arrives
   useEffect(() => {
     if (!firstName) return;
     const h = new Date().getHours();
-    const greet = h < 5 ? 'Still up' : h < 12 ? 'Morning' : h < 17 ? 'Hey' : h < 22 ? 'Evening' : 'Still up';
-    const lines = {
-      'Still up': `Still up, ${firstName}.`,
-      'Morning': `Morning, ${firstName}.`,
-      'Hey': `Hey, ${firstName}.`,
-      'Evening': `Evening, ${firstName}.`,
-    };
-    setGreeting(lines[greet] || `Hey, ${firstName}.`);
+    if (h < 5) setGreeting(`Still up, ${firstName}.`);
+    else if (h < 12) setGreeting(`Morning, ${firstName}.`);
+    else if (h < 17) setGreeting(`Hey, ${firstName}.`);
+    else if (h < 22) setGreeting(`Evening, ${firstName}.`);
+    else setGreeting(`Still up, ${firstName}.`);
   }, [firstName]);
 
   // scroll
@@ -520,14 +529,14 @@ You're here. That's the whole thing. ♾️❤️`;
         {/* Messages — exist, don't dominate */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '0 20px', WebkitOverflowScrolling: 'touch' }}>
           {hasMessages ? (
-            <div style={{ maxWidth: 480, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 12, paddingBottom: 16 }}>
+            <div style={{ maxWidth: 420, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 10, paddingTop: 16, paddingBottom: 20 }}>
               {messages.map((m, i) => <Thought key={i} msg={m} />)}
               {breathState === 'thinking' && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ display: 'flex', gap: 6, paddingLeft: 4, alignItems: 'center' }}>
-                  {[0, 0.2, 0.4].map((d, i) => (
-                    <motion.div key={i} style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(34,211,238,0.6)' }}
-                      animate={{ scale: [1, 1.6, 1], opacity: [0.3, 1, 0.3] }}
-                      transition={{ duration: 0.9, repeat: Infinity, delay: d }} />
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ display: 'flex', gap: 5, paddingLeft: 6, alignItems: 'center', height: 24 }}>
+                  {[0, 0.18, 0.36].map((d, i) => (
+                    <motion.div key={i} style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(34,211,238,0.5)' }}
+                      animate={{ scale: [1, 1.6, 1], opacity: [0.2, 0.8, 0.2] }}
+                      transition={{ duration: 1.1, repeat: Infinity, delay: d }} />
                   ))}
                 </motion.div>
               )}
