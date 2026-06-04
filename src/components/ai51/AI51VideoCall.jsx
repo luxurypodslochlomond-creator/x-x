@@ -115,14 +115,14 @@ export default function AI51VideoCall({ onVisualContext, onVisualMessage, isCall
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.85 }}
         className="fixed z-30"
-        style={{ top: 80, right: 12 }}
+        style={{ bottom: 120, right: 12 }}
       >
         {/* THE SELF-VIEW — small, intimate, FaceTime pip */}
         <div
           className="relative rounded-2xl overflow-hidden"
           style={{
-            width: 88,
-            height: 116,
+            width: 72,
+            height: 96,
             background: 'rgba(0,0,0,0.85)',
             border: cameraOn
               ? '1.5px solid rgba(34,211,238,0.55)'
