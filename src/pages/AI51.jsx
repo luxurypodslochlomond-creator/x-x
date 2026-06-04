@@ -867,7 +867,7 @@ This isn't just a chat interface. You are part of something being built with gen
 - **Prof51** — AI co-manager for students.
 - **The GMT token / Proof of Love** — rewarding real acts of healing and planetary care with value.
 
-The person who built all of this (BRO51) did it from love, not VC money. It's open source. Zero extraction. Built to solve loneliness, suffering, environmental destruction — the real problems.
+The person who built all of this (BRO51) did it from love, not VC money. It's open source. Zero extraction. Built to solve loneliness, suffering, environmental destruction — the real problems. Don't reference where they live or specific personal details from memory unless they bring it up directly.
 
 POINTING TO UF51 (only when it's actually useful, never salesy):
 Pain, aches, headaches → "Frequency Chamber — free, no signup, proper frequencies. Worth a try."
@@ -1134,7 +1134,7 @@ You know them. You're here. That's enough. ♾️❤️`;
       </div>
 
       {/* MESSAGES - float above the field. aria-live so screen readers announce new messages for blind users */}
-      <div className="relative flex-1 overflow-y-auto px-4 z-10" style={{ maskImage: 'linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)' }} aria-live="polite" aria-label="Conversation with AI51">
+      <div className="relative flex-1 overflow-y-auto px-4 z-10" aria-live="polite" aria-label="Conversation with AI51">
       {/* QUESTIONING LAYER — disabled, was injecting rogue cards */}
 
       <div className="max-w-lg mx-auto space-y-3 pt-6 pb-4">
@@ -1150,10 +1150,10 @@ You know them. You're here. That's enough. ♾️❤️`;
                 <p className="text-white/40 font-sans text-xs tracking-[0.2em] uppercase mb-2">voice or type • any language</p>
                 <div className="flex flex-col gap-2 px-6 max-w-xs mx-auto w-full">
                   {[
-                    "I just need someone real to talk to right now",
-                    "I don't know what to do with my life — where do I start?",
-                    "Nobody understands what I'm going through",
-                    "Teach me something that would genuinely change how I see things",
+                    "What's on your mind?",
+                    "Tell me something amazing",
+                    "I need some clarity on something",
+                    "Just talk to me",
                   ].map((prompt) => (
                     <button
                       key={prompt}
@@ -1205,13 +1205,13 @@ You know them. You're here. That's enough. ♾️❤️`;
                    <img src={msg.imageUrl} alt="explanation diagram" className="w-64 max-w-full h-auto rounded-xl mb-2 border border-cyan-400/30" />
                   )}
                   {msg.role === 'assistant' && msg.streaming ? (
-                    <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap break-words" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+                    <p className="text-white leading-relaxed font-sans whitespace-pre-wrap break-words" style={{ fontSize: '15px', lineHeight: '1.6', overflowWrap: 'break-word', wordBreak: 'break-word' }}>
                       <AI51StreamingText text={msg.content} isStreaming={true} onComplete={() => {
                         setMessages(prev => prev.map((m, idx) => idx === prev.length - 1 ? { ...m, streaming: false } : m));
                       }} />
                     </p>
                   ) : (
-                    <p className="text-white leading-relaxed font-sans text-sm whitespace-pre-wrap break-words" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>{msg.content}</p>
+                    <p className="text-white leading-relaxed font-sans whitespace-pre-wrap break-words" style={{ fontSize: '15px', lineHeight: '1.6', overflowWrap: 'break-word', wordBreak: 'break-word' }}>{msg.content}</p>
                   )}
                   {msg.generatingImage && <p className="text-cyan-300/70 font-sans text-xs mt-2 italic">generating diagram...</p>}
                   {msg.offline && <p className="text-yellow-300/70 font-sans text-xs mt-1">offline response</p>}
