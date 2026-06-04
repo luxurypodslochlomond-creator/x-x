@@ -19,7 +19,7 @@ function TheBreath({ state, onClick }) {
   const tRef = useRef(0);
 
   const colors = {
-    idle:       [180, 120, 255],
+    idle:       [34,  211, 238],
     listening:  [34,  211, 238],
     speaking:   [255, 160, 200],
     thinking:   [120, 200, 255],
@@ -180,7 +180,7 @@ function Field({ state }) {
       const pulse = (Math.sin(t * 1.8) * 0.5 + 0.5) * 0.18 + 0.06;
       const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.45);
       bloom.addColorStop(0, `rgba(34,211,238,${pulse})`);
-      bloom.addColorStop(0.5, `rgba(100,60,200,${pulse * 0.3})`);
+      bloom.addColorStop(0.5, `rgba(6,30,50,${pulse * 0.3})`);
       bloom.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = bloom;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -610,7 +610,7 @@ You're here. That's the whole thing. ♾️❤️`;
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowInput(true)}
-              style={{ fontSize: 11, letterSpacing: '0.3em', color: 'rgba(180,120,255,0.45)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 0', WebkitTapHighlightColor: 'transparent' }}
+              style={{ fontSize: 11, letterSpacing: '0.3em', color: 'rgba(34,211,238,0.4)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 0', WebkitTapHighlightColor: 'transparent' }}
             >
               TAP LINE TO SPEAK · TYPE
             </motion.button>
