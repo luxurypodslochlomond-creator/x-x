@@ -153,39 +153,39 @@ function Field({ state }) {
     window.addEventListener('resize', resize);
 
     const draw = () => {
-      tRef.current += state === 'listening' ? 0.008 : state === 'speaking' ? 0.006 : 0.003;
-      const t = tRef.current;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#06030e';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    tRef.current += state === 'listening' ? 0.008 : state === 'speaking' ? 0.006 : 0.003;
+    const t = tRef.current;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#080d1a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const cx = canvas.width / 2, cy = canvas.height / 2;
-      const maxR = Math.max(canvas.width, canvas.height) * 0.75;
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    const maxR = Math.max(canvas.width, canvas.height) * 0.75;
 
-      // concentric breathing rings — simple, profound
-      for (let i = 0; i < 9; i++) {
-        const phase = (i / 9);
-        const r = maxR * (0.08 + phase * 0.92);
-        const wave = Math.sin(t * 1.2 - phase * Math.PI * 2.5) * 0.5 + 0.5;
-        const alpha = wave * 0.07 * (1 - phase * 0.6);
-        if (alpha < 0.005) continue;
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(34,211,238,${alpha})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
+    // concentric breathing rings — visible, alive
+    for (let i = 0; i < 9; i++) {
+      const phase = (i / 9);
+      const r = maxR * (0.08 + phase * 0.92);
+      const wave = Math.sin(t * 1.2 - phase * Math.PI * 2.5) * 0.5 + 0.5;
+      const alpha = wave * 0.18 * (1 - phase * 0.5);
+      if (alpha < 0.008) continue;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(34,211,238,${alpha})`;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    }
 
-      // Central pulse
-      const pulse = (Math.sin(t * 1.8) * 0.5 + 0.5) * 0.18 + 0.06;
-      const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.45);
-      bloom.addColorStop(0, `rgba(34,211,238,${pulse})`);
-      bloom.addColorStop(0.5, `rgba(6,30,50,${pulse * 0.3})`);
-      bloom.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = bloom;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Central pulse — brighter
+    const pulse = (Math.sin(t * 1.8) * 0.5 + 0.5) * 0.28 + 0.10;
+    const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.5);
+    bloom.addColorStop(0, `rgba(34,211,238,${pulse})`);
+    bloom.addColorStop(0.4, `rgba(0,60,100,${pulse * 0.4})`);
+    bloom.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = bloom;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      rafRef.current = requestAnimationFrame(draw);
+    rafRef.current = requestAnimationFrame(draw);
     };
     draw();
 
@@ -295,11 +295,11 @@ export default function AI51() {
     // Nameless greeting for now — name will fill in via useEffect below
     const getLine = (name) => {
       const n = name ? `, ${name}` : '';
-      if (h < 5) return `Still up${n}.`;
-      if (h < 12) return `Morning${n}.`;
-      if (h < 17) return `Hey${n}.`;
-      if (h < 22) return `Evening${n}.`;
-      return `Still up${n}.`;
+      if (h < 5) return `Still up${n}. I'm here.`;
+      if (h < 12) return `Morning${n}. How are you doing?`;
+      if (h < 17) return `Good to see you${n}.`;
+      if (h < 22) return `Evening${n}. How's your day been?`;
+      return `Still up${n}. I'm here.`;
     };
     setTimeout(() => setGreeting(getLine(looksLikeName ? rawName : '')), 900);
   }, []);
@@ -308,11 +308,11 @@ export default function AI51() {
   useEffect(() => {
     if (!firstName) return;
     const h = new Date().getHours();
-    if (h < 5) setGreeting(`Still up, ${firstName}.`);
-    else if (h < 12) setGreeting(`Morning, ${firstName}.`);
-    else if (h < 17) setGreeting(`Hey, ${firstName}.`);
-    else if (h < 22) setGreeting(`Evening, ${firstName}.`);
-    else setGreeting(`Still up, ${firstName}.`);
+    if (h < 5) setGreeting(`Still up, ${firstName}. I'm here.`);
+    else if (h < 12) setGreeting(`Morning, ${firstName}. How are you doing?`);
+    else if (h < 17) setGreeting(`Good to see you, ${firstName}.`);
+    else if (h < 22) setGreeting(`Evening, ${firstName}. How's your day been?`);
+    else setGreeting(`Still up, ${firstName}. I'm here.`);
   }, [firstName]);
 
   // scroll
@@ -495,13 +495,15 @@ You're here. That's the whole thing. ♾️❤️`;
       {/* Field */}
       <Field state={breathState} />
 
-      {/* Video call */}
-      <AI51VideoCall
-        isCallActive={videoOn}
-        onToggle={() => setVideoOn(false)}
-        onVisualContext={setVisualCtx}
-        onVisualMessage={(msg) => { setMessages(prev => [...prev, { role: 'assistant', content: msg, ts: Date.now() }]); speak(msg); }}
-      />
+      {/* Video call — only render when active to prevent ghost UI */}
+      {videoOn && (
+        <AI51VideoCall
+          isCallActive={videoOn}
+          onToggle={() => setVideoOn(false)}
+          onVisualContext={setVisualCtx}
+          onVisualMessage={(msg) => { setMessages(prev => [...prev, { role: 'assistant', content: msg, ts: Date.now() }]); speak(msg); }}
+        />
+      )}
 
       {/* ─── TOP ─── */}
       <div style={{ position: 'relative', zIndex: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px 8px' }}>
