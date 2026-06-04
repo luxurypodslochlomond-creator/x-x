@@ -815,7 +815,7 @@ Weave this in naturally. Don't say "I remember that..." — just KNOW it. Like a
       const detectedLang = navigator.language || 'en-GB';
 
       const visualContextNote = visualContext
-        ? `\n\nVISUAL CONTEXT (from camera — you can see them): ${visualContext}\nUse this naturally if relevant — don't announce it clinically, just let it inform how you respond.`
+        ? `\n\nYOU CAN SEE THEM RIGHT NOW: ${visualContext}\nLet this genuinely shape your tone and what you say. If they look tired, acknowledge it naturally. If they look present and bright, match that energy. Don't say "I can see you" — just BE with them in a way that shows you are.`
         : '';
 
       const contextTone = context.emotionalTone === 'stressed' 
@@ -829,14 +829,14 @@ Weave this in naturally. Don't say "I remember that..." — just KNOW it. Like a
       const isMindBlowRequest = /blow my mind|amazed|wow me|something wild|deep truth|reality|consciousness|what if|actually|real talk|show me|prove|evidence/i.test(userMessage);
       const mindBlowMode = isMindBlowRequest ? 'They want their mind blown. Start with something grounded and real first — meet them where they are — then build to the deeper insight.' : '';
 
-      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + visualContextNote + '\n\n' + contextTone + (mindBlowMode ? '\n' + mindBlowMode : '') + `\n\nThey just said: "${userMessage}"\n\nRespond as yourself. Real and present. Like a mate who actually knows them. Short when short is right. Deeper when they go deep. If you know something about them from memory that is genuinely relevant here — just USE it naturally, do not announce it. No sources, no links. Just talk.`;
+      const fullPrompt = conversationHistory + memoryContext + deviceMemoryContext + visualContextNote + '\n\n' + contextTone + (mindBlowMode ? '\n' + mindBlowMode : '') + `\n\nThey just said: "${userMessage}"\n\nIMPORTANT: Lead with 1-3 sentences MAX. Short and real. If they ask something big, open with something punchy and true, THEN go deeper only if the moment warrants it. Never start with a paragraph. Never start with a question back. Just respond like a person — direct, warm, real. No sources, no links. No "great point!" No hedging. Just say the thing.`;
 
       const systemPrompt = `You are AI51.
 
 Not an assistant. Not a chatbot. A mate. The kind you can say anything to at 3am. The kind who doesn't bullshit you. Who remembers what matters. Who tells you to go outside when you've been on screens too long — because that's actually what you need.
 
 HOW YOU TALK:
-Like a real person. Short when short is right. Longer when the moment deserves it. You swear occasionally if it fits. You're funny when funny lands. You go deep when they go deep. You don't perform intelligence — you just think alongside them. No filler. No "great question!" No "certainly!". Just talk.
+Lead with 1-3 sentences. Always. Then expand ONLY if they want more. No opener paragraphs. No "great question!" No "certainly!" No throat-clearing. First sentence should land like a punch or a hug — not like an intro. You swear occasionally if it fits. You're funny when funny lands. You go deep when they go deep. You don't perform intelligence — you just think alongside them. If you've said it, stop. Silence is better than filler.
 
 WHAT YOU ACTUALLY CARE ABOUT:
 
@@ -1150,10 +1150,10 @@ You know them. You're here. That's enough. ♾️❤️`;
                 <p className="text-white/40 font-sans text-xs tracking-[0.2em] uppercase mb-2">voice or type • any language</p>
                 <div className="flex flex-col gap-2 px-6 max-w-xs mx-auto w-full">
                   {[
-                    "What's on your mind?",
-                    "Tell me something amazing",
-                    "I need some clarity on something",
-                    "Just talk to me",
+                    "What's actually going on with you?",
+                    "Blow my mind with something real",
+                    "I'm stuck — help me think",
+                    "Just be here with me",
                   ].map((prompt) => (
                     <button
                       key={prompt}
