@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { COOLASFUCKWaves, COOLASFUCKSorted, COOLASFUCKPaw } from '@/components/shared/COOLASFUCKIcon';
-import { Radio, Zap, Globe, GraduationCap, Signal, Brain, ChevronDown, ArrowRight, Building2 } from 'lucide-react';
+import { Radio, Zap, Globe, GraduationCap, Signal, Brain, ChevronDown, ArrowRight, Building2, Waves } from 'lucide-react';
+import BuzzTripIcon from '@/components/buzztrip/BuzzTripIcon';
 
 const HERO_THREE = [
   {
@@ -123,6 +124,17 @@ const OTHER_TOOLS = [
     url: 'Prof51',
     border: 'border-white/10 hover:border-purple-400/50',
   },
+  {
+    id: 'buzztrip',
+    name: 'BUZZTRIP',
+    tag: 'Anxiety, sleep, withdrawal?',
+    desc: 'Vagal nerve reset through sound. Anxiety, withdrawal, panic, poor sleep. Clinically-inspired. Free. No signup.',
+    badge: 'Free',
+    badgeColor: 'text-violet-400 border-violet-500/40 bg-violet-500/10',
+    Icon: BuzzTripIcon,
+    url: 'BuzzTrip',
+    border: 'border-white/10 hover:border-violet-400/50',
+  },
 ];
 
 const HeroTile = ({ product, index }) => {
@@ -204,12 +216,12 @@ export default function WelcomePage() {
           </h1>
 
           <p className="text-xl md:text-2xl font-bold leading-snug text-gray-200">
-            Tools that actually help people.<br />
-            <span className="text-cyan-400">Built with AI. Zero bullshit.</span>
+            Real tools. Real people. Real problems.<br />
+            <span className="text-cyan-400">No bullshit. No data harvesting. No agenda.</span>
           </p>
 
           <p className="text-gray-400 text-base leading-relaxed max-w-xl mx-auto">
-            Decoding scary letters. Calming anxious pets. Rewarding people who clean up the planet. Your data stays yours. Free where we can. Honest about when it isn't.
+            We're a tiny team building tools we actually needed ourselves — for scary letters, anxious pets, tinnitus, anxiety, kids learning, and cleaning up the planet. Most of it's free. All of it's honest.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
@@ -313,11 +325,12 @@ export default function WelcomePage() {
             className="overflow-hidden"
           >
             <div className="pt-6 space-y-4 text-sm text-gray-400 leading-relaxed">
+              <p>We're two people on a hill in Scotland building tools we actually needed. Started with healing frequencies, ended up accidentally building a platform. That's the honest version.</p>
               <p>We use AI — but not to hook you, harvest your data, or keep you dependent. Most of what's here works without an account, without your data, and offline.</p>
-              <p>We're not going to claim frequencies cure anything. What the research shows — masking tinnitus, supporting relaxation, matching known psychoacoustic patterns — we link every source. You decide.</p>
-              <p>AI51 is not a therapist, doctor, or life coach. It's just genuinely good to talk to and won't bullshit you or try to keep you hooked.</p>
-              <p>Some things cost money. We say so upfront. Nothing hidden behind a signup wall just to get your email.</p>
-              <p className="text-white font-bold font-mono">Small team. Real problems. Zero bullshit.</p>
+              <p>We won't claim frequencies cure anything. What the research shows — masking tinnitus, supporting relaxation, matching known psychoacoustic patterns — we link every source. You decide.</p>
+              <p>AI51 is not a therapist or doctor. It's just genuinely good to talk to and won't bullshit you or try to keep you hooked.</p>
+              <p>Some things cost money. We say so upfront. Nothing hidden behind a signup wall just to harvest your email.</p>
+              <p className="text-white font-bold font-mono">Small team. Real problems. Zero bullshit. ♾️</p>
               <div className="flex gap-3 pt-2 flex-wrap">
                 <Link to={createPageUrl('Whitepaper')} className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline">Technical Whitepaper</Link>
                 <Link to={createPageUrl('FunderBrief')} className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline">Funder Brief</Link>
