@@ -65,9 +65,9 @@ function TheBreath({ state, onClick }) {
             + Math.sin(nx * 3 * Math.PI + t * 0.9) * h * 0.18
             + Math.sin(nx * 7 * Math.PI + t * 0.4) * h * 0.07;
         } else {
-          // Resting breath — one slow sine, profoundly calm
-          y = h/2 + Math.sin(nx * Math.PI * 1.5 + t) * h * 0.20
-            + Math.sin(nx * Math.PI * 3 + t * 0.5) * h * 0.06;
+          // Resting breath — slow, alive, unmissable
+          y = h/2 + Math.sin(nx * Math.PI * 1.5 + t) * h * 0.30
+            + Math.sin(nx * Math.PI * 3 + t * 0.5) * h * 0.08;
         }
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
@@ -80,9 +80,9 @@ function TheBreath({ state, onClick }) {
       lg.addColorStop(1 - fade, `rgba(${r},${g},${b},0.9)`);
       lg.addColorStop(1, `rgba(${r},${g},${b},0)`);
       ctx.strokeStyle = lg;
-      ctx.lineWidth = state === 'idle' ? 1.8 : 2.4;
+      ctx.lineWidth = state === 'idle' ? 2.2 : 3.0;
       ctx.shadowColor = `rgba(${r},${g},${b},1)`;
-      ctx.shadowBlur = state === 'listening' ? 28 : state === 'speaking' ? 22 : 14;
+      ctx.shadowBlur = state === 'listening' ? 38 : state === 'speaking' ? 30 : 22;
       ctx.stroke();
 
       rafRef.current = requestAnimationFrame(draw);
@@ -107,8 +107,8 @@ function TheBreath({ state, onClick }) {
       whileTap={{ scaleY: 0.88 }}
       style={{
         width: '100%',
-        maxWidth: 340,
-        height: 72,
+        maxWidth: 420,
+        height: 90,
         position: 'relative',
         background: 'transparent',
         border: 'none',
