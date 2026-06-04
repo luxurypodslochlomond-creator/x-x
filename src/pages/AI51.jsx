@@ -1134,8 +1134,7 @@ You know them. You're here. That's enough. ♾️❤️`;
       </div>
 
       {/* MESSAGES - float above the field. aria-live so screen readers announce new messages for blind users */}
-      <div className="relative flex-1 overflow-y-auto px-4 z-10" aria-live="polite" aria-label="Conversation with AI51">
-      {/* QUESTIONING LAYER — disabled, was injecting rogue cards */}
+      <div className="relative flex-1 overflow-y-auto px-3 z-10" aria-live="polite" aria-label="Conversation with AI51" style={{ WebkitOverflowScrolling: 'touch' }}>
 
       <div className="max-w-lg mx-auto space-y-3 pt-6 pb-4">
           <AnimatePresence>
@@ -1185,7 +1184,7 @@ You know them. You're here. That's enough. ♾️❤️`;
                   }} />
                 )}
                 <div
-                  className={'max-w-[85%] px-4 py-3 rounded-2xl ' + (msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm')}
+                  className={'max-w-[80%] px-4 py-3 rounded-2xl ' + (msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm')}
                   style={{
                     background: msg.role === 'user'
                       ? 'rgba(255,255,255,0.10)'
@@ -1242,7 +1241,7 @@ You know them. You're here. That's enough. ♾️❤️`;
       </div>
 
       {/* CENTRE SOUL — HEARTLINE + GREETING + INPUT */}
-      <div className="relative z-20 flex flex-col items-center pb-6 pt-2 flex-shrink-0" style={{ gap: '12px' }}>
+      <div className="relative z-20 flex flex-col items-center pb-4 pt-1 flex-shrink-0" style={{ gap: '8px' }}>
 
         {/* Greeting / status */}
         <AnimatePresence mode="wait">
@@ -1481,7 +1480,7 @@ You know them. You're here. That's enough. ♾️❤️`;
         </div>
 
         {/* LIVING CLOCK — local time + date in device language */}
-        <div className="text-center pb-2" style={{ userSelect: 'none' }}>
+        <div className="text-center pb-1" style={{ userSelect: 'none' }}>
           <motion.p
             className="font-sans tabular-nums"
             style={{ 
@@ -1565,7 +1564,7 @@ You know them. You're here. That's enough. ♾️❤️`;
         )}
 
         {/* SOUL + PRIVACY — quiet, permanent, honest */}
-        <div className="text-center pb-4 px-6 space-y-2" style={{ userSelect: 'none' }}>
+        <div className="text-center pb-2 px-6 space-y-1" style={{ userSelect: 'none' }}>
           <p className="font-sans" style={{ fontSize: '9px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.08)', lineHeight: 1.6 }}>
             zero extraction · zero suffering · all consciousness welcome · open forever
           </p>
