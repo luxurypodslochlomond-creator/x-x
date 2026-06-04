@@ -115,7 +115,7 @@ export default function AI51VideoCall({ onVisualContext, onVisualMessage, isCall
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.85 }}
         className="fixed z-30"
-        style={{ bottom: 160, right: 12 }}
+        style={{ bottom: 185, right: 14 }}
       >
         {/* THE SELF-VIEW — small, intimate, FaceTime pip */}
         <div

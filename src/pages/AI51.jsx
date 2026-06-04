@@ -1137,7 +1137,7 @@ You know them. You're here. That's enough. ♾️❤️`;
       {/* MESSAGES - float above the field. aria-live so screen readers announce new messages for blind users */}
       <div className="relative flex-1 overflow-y-auto px-3 z-10" aria-live="polite" aria-label="Conversation with AI51" style={{ WebkitOverflowScrolling: 'touch' }}>
 
-      <div className="max-w-lg mx-auto space-y-3 pt-6 pb-4">
+      <div className="max-w-lg mx-auto space-y-4 pt-6 pb-4 px-2">
           <AnimatePresence>
             {messages.length === 0 && (
               <motion.div
