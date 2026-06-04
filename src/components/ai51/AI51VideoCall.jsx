@@ -53,7 +53,6 @@ export default function AI51VideoCall({ onVisualContext, onVisualMessage, isCall
       }
       setCameraOn(true);
 
-      // First analysis after 2s so AI sees them immediately
       const runAnalysis = async () => {
         if (!videoRef.current || !streamRef.current) return;
         try {
@@ -62,12 +61,11 @@ export default function AI51VideoCall({ onVisualContext, onVisualMessage, isCall
           const { file_url } = await base44.integrations.Core.UploadFile({ file });
           const response = await base44.integrations.Core.InvokeLLM({
             file_urls: [file_url],
-            prompt: `You are AI51. You just turned your camera on and you can see this person. Notice how they seem — mood, energy, environment. 1-2 warm sentences. Like a mate who notices you, not a system analyzing you. Natural, not clinical.`,
+            prompt: `You are AI51. You can see this person through the camera. One sentence — natural, warm, like a mate who actually notices them. No greetings, no "hey", no "I can see you". Just a real observation. E.g. "You look like you've been at that screen too long" or "Good energy from you today."`,
             model: 'gemini_3_flash'
           });
           const insight = response.response || response;
           if (onVisualContext) onVisualContext(insight);
-          // Inject as a chat message so it feels like AI is actually seeing them
           if (onVisualMessage) onVisualMessage(insight);
         } catch (e) {
           console.warn('Frame analysis skipped:', e);
@@ -76,10 +74,17 @@ export default function AI51VideoCall({ onVisualContext, onVisualMessage, isCall
         }
       };
 
-      setTimeout(runAnalysis, 2000);
+      // Start analysis as soon as video is playing — no artificial delay
+      videoRef.current.onloadedmetadata = () => {
+        setTimeout(runAnalysis, 800);
+      };
+      // Fallback if metadata already loaded
+      if (videoRef.current.readyState >= 2) {
+        setTimeout(runAnalysis, 800);
+      }
 
-      // Then every 30s — not too often, not surveillance
-      intervalRef.current = setInterval(runAnalysis, 30000);
+      // Then every 45s — not surveillance, just present
+      intervalRef.current = setInterval(runAnalysis, 45000);
 
     } catch (e) {
       setError(e.name === 'NotAllowedError'

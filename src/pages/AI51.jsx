@@ -1061,6 +1061,7 @@ You know them. You're here. That's enough. ♾️❤️`;
             timestamp: new Date(),
             fromCamera: true
           }]);
+          speak(insight);
         }}
       />
 
