@@ -1411,6 +1411,25 @@ You know them. You're here. That's enough. ♾️❤️`;
           )}
         </AnimatePresence>
 
+        {/* VIDEO CALL INVITE — big, warm, obvious */}
+        {!videoCallActive && messages.length === 0 && (
+          <motion.button
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            onClick={() => setVideoCallActive(true)}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full font-sans text-xs font-bold transition-all"
+            style={{
+              background: 'rgba(34,211,238,0.08)',
+              border: '1px solid rgba(34,211,238,0.3)',
+              color: 'rgba(34,211,238,0.8)',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            <Video className="w-3.5 h-3.5" />
+            talk face to face
+          </motion.button>
+        )}
+
         {/* TYPE INPUT — unified with consciousness field */}
         <div className="flex flex-col gap-1 w-full max-w-xs px-4">
           {/* Image preview */}
