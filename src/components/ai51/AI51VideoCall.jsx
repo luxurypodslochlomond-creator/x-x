@@ -83,8 +83,8 @@ export default function AI51VideoCall({ onVisualContext, onVisualMessage, isCall
         setTimeout(runAnalysis, 800);
       }
 
-      // Then every 45s — not surveillance, just present
-      intervalRef.current = setInterval(runAnalysis, 45000);
+      // Analyze once on connect — not surveillance, just present
+      // intervalRef.current = setInterval(runAnalysis, 45000);
 
     } catch (e) {
       setError(e.name === 'NotAllowedError'
@@ -115,7 +115,7 @@ export default function AI51VideoCall({ onVisualContext, onVisualMessage, isCall
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.85 }}
         className="fixed z-30"
-        style={{ bottom: 120, right: 12 }}
+        style={{ bottom: 160, right: 12 }}
       >
         {/* THE SELF-VIEW — small, intimate, FaceTime pip */}
         <div

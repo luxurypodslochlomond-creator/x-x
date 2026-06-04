@@ -1179,39 +1179,39 @@ You know them. You're here. That's enough. ♾️❤️`;
                 className={'flex ' + (msg.role === 'user' ? 'justify-end' : 'justify-start')}
               >
                 {msg.role === 'assistant' && (
-                  <div className="w-6 h-6 rounded-full flex-shrink-0 mr-2 mt-1 self-start" style={{
-                    background: 'radial-gradient(circle at 35% 30%, rgba(34,211,238,1) 0%, rgba(6,182,212,0.9) 50%, rgba(34,211,238,0.7) 100%)',
-                    boxShadow: '0 0 12px rgba(34,211,238,0.6)',
+                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0 mr-2 mt-3 self-start" style={{
+                    background: 'rgba(34,211,238,0.7)',
+                    boxShadow: '0 0 6px rgba(34,211,238,0.5)',
                   }} />
                 )}
                 <div
-                  className={'max-w-[80%] px-4 py-3 rounded-2xl ' + (msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm')}
+                  className={'max-w-[82%] px-4 py-3 ' + (msg.role === 'user' ? 'rounded-3xl rounded-br-lg' : 'rounded-3xl rounded-bl-lg')}
                   style={{
                     background: msg.role === 'user'
-                      ? 'rgba(255,255,255,0.10)'
+                      ? 'rgba(255,255,255,0.07)'
                       : msg.offline
-                        ? 'rgba(70,45,0,0.5)'
-                        : 'rgba(20,10,60,0.75)',
+                        ? 'rgba(70,45,0,0.4)'
+                        : 'rgba(12,6,40,0.55)',
                     border: msg.role === 'user'
-                      ? '1px solid rgba(255,255,255,0.25)'
+                      ? '1px solid rgba(255,255,255,0.12)'
                       : msg.offline
-                        ? '1px solid rgba(245,158,11,0.5)'
-                        : '1px solid rgba(34,211,238,0.6)',
-                    boxShadow: msg.role === 'assistant' ? '0 4px 32px rgba(34,211,238,0.35), inset 0 1px 0 rgba(34,211,238,0.15)' : 'none',
-                    backdropFilter: 'blur(20px)',
+                        ? '1px solid rgba(245,158,11,0.3)'
+                        : '1px solid rgba(34,211,238,0.18)',
+                    boxShadow: msg.role === 'assistant' ? '0 2px 20px rgba(34,211,238,0.12)' : 'none',
+                    backdropFilter: 'blur(24px)',
                   }}
                 >
                   {msg.imageUrl && (
                    <img src={msg.imageUrl} alt="explanation diagram" className="w-64 max-w-full h-auto rounded-xl mb-2 border border-cyan-400/30" />
                   )}
                   {msg.role === 'assistant' && msg.streaming ? (
-                    <p className="text-white leading-relaxed font-sans whitespace-pre-wrap break-words" style={{ fontSize: '15px', lineHeight: '1.6', overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+                    <p className="leading-relaxed font-sans whitespace-pre-wrap break-words" style={{ fontSize: '15px', lineHeight: '1.7', overflowWrap: 'break-word', wordBreak: 'break-word', color: 'rgba(220,235,255,0.92)' }}>
                       <AI51StreamingText text={msg.content} isStreaming={true} onComplete={() => {
                         setMessages(prev => prev.map((m, idx) => idx === prev.length - 1 ? { ...m, streaming: false } : m));
                       }} />
                     </p>
                   ) : (
-                    <p className="text-white leading-relaxed font-sans whitespace-pre-wrap break-words" style={{ fontSize: '15px', lineHeight: '1.6', overflowWrap: 'break-word', wordBreak: 'break-word' }}>{msg.content}</p>
+                    <p className="leading-relaxed font-sans whitespace-pre-wrap break-words" style={{ fontSize: '15px', lineHeight: '1.7', overflowWrap: 'break-word', wordBreak: 'break-word', color: msg.role === 'user' ? 'rgba(255,255,255,0.75)' : 'rgba(220,235,255,0.92)' }}>{msg.content}</p>
                   )}
                   {msg.generatingImage && <p className="text-cyan-300/70 font-sans text-xs mt-2 italic">generating diagram...</p>}
                   {msg.offline && <p className="text-yellow-300/70 font-sans text-xs mt-1">offline response</p>}
