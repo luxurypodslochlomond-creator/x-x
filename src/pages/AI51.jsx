@@ -208,26 +208,27 @@ function Thought({ msg }) {
   const isUser = msg.role === 'user';
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: 'spring', damping: 28, stiffness: 200 }}
+      transition={{ type: 'spring', damping: 30, stiffness: 220 }}
       style={{ display: 'flex', justifyContent: isUser ? 'flex-end' : 'flex-start' }}
     >
       <div style={{
-        maxWidth: '72%',
-        padding: '10px 15px',
-        borderRadius: isUser ? '18px 18px 4px 18px' : '4px 18px 18px 18px',
-        background: isUser ? 'rgba(255,255,255,0.06)' : 'transparent',
-        border: isUser ? '1px solid rgba(255,255,255,0.09)' : 'none',
-        fontSize: 15,
-        lineHeight: 1.65,
-        color: isUser ? 'rgba(255,255,255,0.6)' : 'rgba(215,232,255,0.9)',
+        maxWidth: '80%',
+        padding: isUser ? '10px 16px' : '4px 4px',
+        borderRadius: isUser ? '20px 20px 5px 20px' : '0',
+        background: isUser ? 'rgba(180,100,255,0.15)' : 'transparent',
+        border: isUser ? '1px solid rgba(180,100,255,0.25)' : 'none',
+        fontSize: isUser ? 15 : 18,
+        lineHeight: isUser ? 1.5 : 1.6,
+        color: isUser ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.96)',
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
-        letterSpacing: '-0.01em',
+        letterSpacing: isUser ? '0' : '-0.02em',
+        fontWeight: isUser ? 400 : 300,
       }}>
         {msg.content}
-        {msg.imageUrl && <img src={msg.imageUrl} alt="" style={{ display: 'block', marginTop: 8, width: 160, borderRadius: 10, border: '1px solid rgba(34,211,238,0.15)' }} />}
+        {msg.imageUrl && <img src={msg.imageUrl} alt="" style={{ display: 'block', marginTop: 8, width: 160, borderRadius: 10, border: '1px solid rgba(180,100,255,0.2)' }} />}
       </div>
     </motion.div>
   );
@@ -536,7 +537,7 @@ The whole point of you is that someone at 3am who's scared and alone opens this 
           UF51
         </Link>
 
-        <span style={{ fontSize: 13, letterSpacing: '0.35em', color: 'rgba(34,211,238,0.5)', fontWeight: 600 }}>51</span>
+        <span style={{ fontSize: 13, letterSpacing: '0.35em', color: 'rgba(180,100,255,0.6)', fontWeight: 600 }}>51</span>
 
         <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
           {!online && <WifiOff size={13} style={{ color: 'rgba(255,200,60,0.5)' }} />}
@@ -552,41 +553,46 @@ The whole point of you is that someone at 3am who's scared and alone opens this 
       {/* ─── CENTRE — the whole world ─── */}
       <div style={{ flex: 1, position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
-        {/* Messages — exist, don't dominate */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '0 20px', WebkitOverflowScrolling: 'touch' }}>
-          {hasMessages ? (
-            <div style={{ maxWidth: 420, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 10, paddingTop: 16, paddingBottom: 20 }}>
+        {hasMessages ? (
+          /* ── CONVERSATION MODE — messages pinned to bottom ── */
+          <div style={{ flex: 1, overflowY: 'auto', padding: '0 20px', WebkitOverflowScrolling: 'touch', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+            <div style={{ maxWidth: 420, width: '100%', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 20, paddingBottom: 12 }}>
               {messages.map((m, i) => <Thought key={i} msg={m} />)}
               {breathState === 'thinking' && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ display: 'flex', gap: 5, paddingLeft: 6, alignItems: 'center', height: 24 }}>
-                  {[0, 0.18, 0.36].map((d, i) => (
-                    <motion.div key={i} style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(34,211,238,0.5)' }}
-                      animate={{ scale: [1, 1.6, 1], opacity: [0.2, 0.8, 0.2] }}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ display: 'flex', gap: 6, paddingLeft: 4, alignItems: 'center', height: 28 }}>
+                  {[0, 0.2, 0.4].map((d, i) => (
+                    <motion.div key={i} style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(180,100,255,0.7)' }}
+                      animate={{ scale: [1, 1.7, 1], opacity: [0.3, 1, 0.3] }}
                       transition={{ duration: 1.1, repeat: Infinity, delay: d }} />
                   ))}
                 </motion.div>
               )}
               <div ref={scrollRef} />
             </div>
-          ) : (
-            // ─── EMPTY STATE — just the soul ───
-            <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 0 }}>
-              <AnimatePresence>
-                {greeting && (
-                  <motion.p
-                    key="greeting"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.8, ease: 'easeOut' }}
-                    style={{ fontSize: 34, fontWeight: 300, letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)', margin: 0, lineHeight: 1.3, textShadow: '0 0 60px rgba(180,100,255,0.4)' }}
-                  >
+          </div>
+        ) : (
+          /* ── EMPTY STATE — greeting anchored near bottom, above input ── */
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 28px 24px' }}>
+            <AnimatePresence>
+              {greeting && (
+                <motion.div
+                  key="greeting"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.4, ease: 'easeOut', delay: 0.4 }}
+                  style={{ maxWidth: 340 }}
+                >
+                  <p style={{ fontSize: 22, fontWeight: 300, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.92)', margin: '0 0 6px', lineHeight: 1.4, textShadow: '0 0 40px rgba(180,100,255,0.35)' }}>
                     {greeting}
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </div>
-          )}
-        </div>
+                  </p>
+                  <p style={{ fontSize: 12, color: 'rgba(180,100,255,0.45)', margin: 0, letterSpacing: '0.06em' }}>
+                    type or tap the wave ↓
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
 
       {/* ─── SOUL — heartline lives here ─── */}
@@ -615,7 +621,7 @@ The whole point of you is that someone at 3am who's scared and alone opens this 
             )}
             {breathState === 'idle' && (
               <motion.p key="idle2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                style={{ fontSize: 11, letterSpacing: '0.2em', color: 'rgba(34,211,238,0.45)', margin: 0 }}>
+                style={{ fontSize: 11, letterSpacing: '0.2em', color: 'rgba(180,100,255,0.4)', margin: 0 }}>
                 TAP WAVE TO SPEAK
               </motion.p>
             )}
@@ -634,8 +640,8 @@ The whole point of you is that someone at 3am who's scared and alone opens this 
             placeholder="Talk to 51..."
             style={{
               flex: 1,
-              background: 'rgba(255,255,255,0.08)',
-              border: '2px solid rgba(34,211,238,0.6)',
+              background: 'rgba(255,255,255,0.06)',
+              border: '1.5px solid rgba(180,100,255,0.45)',
               borderRadius: 32,
               padding: '15px 22px',
               color: '#fff',
@@ -643,8 +649,8 @@ The whole point of you is that someone at 3am who's scared and alone opens this 
               outline: 'none',
               backdropFilter: 'blur(20px)',
               WebkitTapHighlightColor: 'transparent',
-              caretColor: '#22d3ee',
-              boxShadow: '0 0 20px rgba(34,211,238,0.15)',
+              caretColor: '#b464ff',
+              boxShadow: '0 0 24px rgba(180,100,255,0.1)',
             }}
           />
           <motion.button
@@ -652,13 +658,13 @@ The whole point of you is that someone at 3am who's scared and alone opens this 
             onClick={inputText.trim() ? submitInput : handleBreath}
             style={{
               width: 54, height: 54, borderRadius: '50%', flexShrink: 0,
-              background: inputText.trim() ? 'rgba(34,211,238,0.35)' : 'rgba(34,211,238,0.15)',
-              border: '2px solid rgba(34,211,238,0.8)',
+              background: inputText.trim() ? 'rgba(180,100,255,0.4)' : 'rgba(180,100,255,0.12)',
+              border: '1.5px solid rgba(180,100,255,0.6)',
               cursor: 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 20, color: '#22d3ee',
+              fontSize: 20, color: '#c084fc',
               WebkitTapHighlightColor: 'transparent',
-              boxShadow: '0 0 20px rgba(34,211,238,0.3)',
+              boxShadow: '0 0 20px rgba(180,100,255,0.2)',
               transition: 'all 0.2s ease',
             }}
           >
