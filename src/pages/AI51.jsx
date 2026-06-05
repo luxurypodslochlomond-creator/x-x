@@ -620,7 +620,7 @@ You're here. That's the whole thing. ♾️❤️`;
             value={inputText}
             onChange={e => setInputText(e.target.value)}
             onKeyPress={e => { if (e.key === 'Enter') submitInput(); }}
-            placeholder="Talk to AI51..."
+            placeholder="Talk to 51..."
             style={{
               flex: 1,
               background: 'rgba(255,255,255,0.08)',
