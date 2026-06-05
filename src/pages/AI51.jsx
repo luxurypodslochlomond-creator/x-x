@@ -156,7 +156,7 @@ function Field({ state }) {
     tRef.current += state === 'listening' ? 0.008 : state === 'speaking' ? 0.006 : 0.003;
     const t = tRef.current;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#080d1a';
+    ctx.fillStyle = '#0a1020';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const cx = canvas.width / 2, cy = canvas.height / 2;
@@ -167,7 +167,7 @@ function Field({ state }) {
       const phase = (i / 9);
       const r = maxR * (0.08 + phase * 0.92);
       const wave = Math.sin(t * 1.2 - phase * Math.PI * 2.5) * 0.5 + 0.5;
-      const alpha = wave * 0.18 * (1 - phase * 0.5);
+      const alpha = wave * 0.32 * (1 - phase * 0.4);
       if (alpha < 0.008) continue;
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, Math.PI * 2);
@@ -490,7 +490,7 @@ You're here. That's the whole thing. ♾️❤️`;
   const hasMessages = messages.length > 0;
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: '#06030e', color: '#fff', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+    <div style={{ position: 'fixed', inset: 0, background: '#080e1f', color: '#fff', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
       {/* Field */}
       <Field state={breathState} />
@@ -512,7 +512,7 @@ You're here. That's the whole thing. ♾️❤️`;
           UF51
         </Link>
 
-        <span style={{ fontSize: 11, letterSpacing: '0.35em', color: 'rgba(255,255,255,0.25)' }}>AI51</span>
+        <span style={{ fontSize: 13, letterSpacing: '0.35em', color: 'rgba(34,211,238,0.5)', fontWeight: 600 }}>51</span>
 
         <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
           {!online && <WifiOff size={13} style={{ color: 'rgba(255,200,60,0.5)' }} />}
