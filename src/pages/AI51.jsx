@@ -274,15 +274,13 @@ export default function AI51() {
     return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); };
   }, []);
 
-  // identity + greeting
+  // identity + greeting + proactive opening
   useEffect(() => {
     const h = new Date().getHours();
     const mem = recordLocalVisit();
 
-    // Only use name if it looks like an actual human name (not a place/app name)
     const rawName = mem?.name || '';
     const looksLikeName = rawName && rawName.length < 20 && !rawName.includes('51') && !rawName.includes('mollan') && !rawName.toLowerCase().includes('stoney') && /^[A-Za-z]/.test(rawName);
-
     if (looksLikeName) setFirstName(rawName);
 
     base44.auth.me().then(u => {
@@ -292,7 +290,6 @@ export default function AI51() {
       }
     }).catch(() => {});
 
-    // Nameless greeting for now — name will fill in via useEffect below
     const getLine = (name) => {
       const n = name ? `, ${name}` : '';
       if (h < 5) return `Still up${n}. I'm here.`;
@@ -301,7 +298,23 @@ export default function AI51() {
       if (h < 22) return `Evening${n}. How's your day been?`;
       return `Still up${n}. I'm here.`;
     };
-    setTimeout(() => setGreeting(getLine(looksLikeName ? rawName : '')), 900);
+
+    // Show greeting first
+    setTimeout(() => setGreeting(getLine(looksLikeName ? rawName : '')), 800);
+
+    // Then after a beat — drop a message into the conversation so it feels alive
+    const openers = [
+      "What's on your mind today?",
+      "How are you actually doing — not the surface answer.",
+      "Something I can help with, or just need to talk?",
+      "I'm here. No rush.",
+      "What do you need right now?",
+    ];
+    const opener = openers[Math.floor(Math.random() * openers.length)];
+    setTimeout(() => {
+      setMessages([{ role: 'assistant', content: opener, ts: Date.now() }]);
+      if (voiceOn) speak(opener);
+    }, 2200);
   }, []);
 
   // Update greeting when real name arrives
