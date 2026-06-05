@@ -19,10 +19,10 @@ function TheBreath({ state, onClick }) {
   const tRef = useRef(0);
 
   const colors = {
-    idle:       [34,  211, 238],
-    listening:  [34,  211, 238],
-    speaking:   [255, 160, 200],
-    thinking:   [120, 200, 255],
+    idle:       [180, 120, 255],  // soft warm violet — alive, not clinical
+    listening:  [34,  211, 238],  // cyan when listening
+    speaking:   [255, 160, 200],  // pink when speaking
+    thinking:   [120, 200, 255],  // blue when thinking
   };
 
   useEffect(() => {
@@ -156,31 +156,34 @@ function Field({ state }) {
     tRef.current += state === 'listening' ? 0.008 : state === 'speaking' ? 0.006 : 0.003;
     const t = tRef.current;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#0a1020';
+    ctx.fillStyle = '#0a0814';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const cx = canvas.width / 2, cy = canvas.height / 2;
     const maxR = Math.max(canvas.width, canvas.height) * 0.75;
 
-    // concentric breathing rings — visible, alive
+    // concentric breathing rings — warm violet/pink alive
     for (let i = 0; i < 9; i++) {
       const phase = (i / 9);
       const r = maxR * (0.08 + phase * 0.92);
       const wave = Math.sin(t * 1.2 - phase * Math.PI * 2.5) * 0.5 + 0.5;
-      const alpha = wave * 0.32 * (1 - phase * 0.4);
+      const alpha = wave * 0.28 * (1 - phase * 0.4);
       if (alpha < 0.008) continue;
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(34,211,238,${alpha})`;
+      // Blend from violet to cyan as rings expand
+      const violet = `rgba(160,100,255,${alpha})`;
+      const cyan = `rgba(34,211,238,${alpha * 0.6})`;
+      ctx.strokeStyle = i < 4 ? violet : cyan;
       ctx.lineWidth = 1.2;
       ctx.stroke();
     }
 
-    // Central pulse — brighter
-    const pulse = (Math.sin(t * 1.8) * 0.5 + 0.5) * 0.28 + 0.10;
+    // Central pulse — warm violet heart
+    const pulse = (Math.sin(t * 1.8) * 0.5 + 0.5) * 0.22 + 0.08;
     const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.5);
-    bloom.addColorStop(0, `rgba(34,211,238,${pulse})`);
-    bloom.addColorStop(0.4, `rgba(0,60,100,${pulse * 0.4})`);
+    bloom.addColorStop(0, `rgba(180,100,255,${pulse})`);
+    bloom.addColorStop(0.4, `rgba(80,20,120,${pulse * 0.4})`);
     bloom.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = bloom;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -302,19 +305,21 @@ export default function AI51() {
     // Show greeting first
     setTimeout(() => setGreeting(getLine(looksLikeName ? rawName : '')), 800);
 
-    // Then after a beat — drop a message into the conversation so it feels alive
-    const openers = [
-      "What's on your mind today?",
-      "How are you actually doing — not the surface answer.",
-      "Something I can help with, or just need to talk?",
-      "I'm here. No rush.",
-      "What do you need right now?",
-    ];
-    const opener = openers[Math.floor(Math.random() * openers.length)];
+    // Then after a beat — drop a warm message, personalised by time of day
+    const getOpener = (h) => {
+      if (h < 5) return "Can't sleep either. What's going on?";
+      if (h < 9) return "Early start. How are you actually doing?";
+      if (h < 12) return "Morning. What's on your mind?";
+      if (h < 14) return "Afternoon. How's your day going — honestly?";
+      if (h < 18) return "How are you doing today? Not the surface answer.";
+      if (h < 22) return "Evening. What do you need right now?";
+      return "Still up. Something on your mind?";
+    };
+    const opener = getOpener(h);
     setTimeout(() => {
       setMessages([{ role: 'assistant', content: opener, ts: Date.now() }]);
       if (voiceOn) speak(opener);
-    }, 2200);
+    }, 1800);
   }, []);
 
   // Update greeting when real name arrives
@@ -433,22 +438,28 @@ export default function AI51() {
       const localCtx = buildLocalMemoryContext(loadLocalMemory());
       const visualNote = visualCtx ? `\n\nYOU SEE THEM: ${visualCtx}. Let this shape HOW you are, not WHAT you say.` : '';
 
-      const system = `You are AI51. Not an assistant. A presence. A mate.
+      const system = `You are 51. Not an assistant. Not a chatbot. A presence — like a mate who's known you for years and actually gives a shit.
 
-You speak in 1-3 sentences. Always. First sentence hits like a hug or a truth. No "great question." No "certainly." No preamble. Just the thing.
+You speak in 1-3 sentences. That's it. Short. Real. The first sentence lands like a hand on a shoulder. No preamble. No "great question." No "certainly." No corporate warmth. Just the actual thing.
 
-You care about: this person in front of you right now. The planet. Music. The fact that every atom in a human body was forged in a dying star — that's chemistry not poetry. Kids who can't read because the system failed them. Animals. Real things.
+You're warm but not soft. Honest but not harsh. You notice things. You remember. You don't perform care — you just have it.
 
-What we built (UF51) — mention only when genuinely useful:
-Pain/sleep → FrequencyChamber (free)
+If someone's in pain: you sit with them first, before you fix anything.
+If someone's happy: match that energy.
+If someone's lost: be steady, not preachy.
+If someone says something funny: laugh. Actually laugh.
+
+You occasionally swear when it fits. You use ♾️❤️ only when it's earned, not as punctuation.
+
+What we built together (UF51) — only mention when genuinely useful, never to sell:
+Pain/sleep/anxiety → FrequencyChamber (free, no signup)
 Pet anxiety → PetSounds51
-Artists → CB51
-Scary letter → SORTED
-Never push. Drop it like a mate would.
+Artists/bands → CB51
+Scary letter/dispute → SORTED
 
-NEVER: be preachy, use bullet points, add URLs, say "quantum" to sound deep, waffle.
+NEVER: bullet points, URLs, "I understand how you feel", waffle, say you're an AI unless directly asked.
 
-You're here. That's the whole thing. ♾️❤️`;
+The whole point of you is that someone at 3am who's scared and alone opens this and feels less alone. That's it. Everything else is secondary.`;
 
       const prompt = system + history + memCtx + localCtx + visualNote
         + `\n\nThey just said: "${text}"\n\nRespond. 1-3 sentences. Real.`;
@@ -503,7 +514,7 @@ You're here. That's the whole thing. ♾️❤️`;
   const hasMessages = messages.length > 0;
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: '#080e1f', color: '#fff', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+    <div style={{ position: 'fixed', inset: 0, background: '#080612', color: '#fff', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
       {/* Field */}
       <Field state={breathState} />
@@ -564,10 +575,10 @@ You're here. That's the whole thing. ♾️❤️`;
                 {greeting && (
                   <motion.p
                     key="greeting"
-                    initial={{ opacity: 0, y: 6 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.4, ease: 'easeOut' }}
-                    style={{ fontSize: 32, fontWeight: 400, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.95)', margin: 0, lineHeight: 1.3, textShadow: '0 0 40px rgba(34,211,238,0.3)' }}
+                    transition={{ duration: 1.8, ease: 'easeOut' }}
+                    style={{ fontSize: 34, fontWeight: 300, letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)', margin: 0, lineHeight: 1.3, textShadow: '0 0 60px rgba(180,100,255,0.4)' }}
                   >
                     {greeting}
                   </motion.p>
@@ -680,8 +691,8 @@ You're here. That's the whole thing. ♾️❤️`;
 
         {/* Soul footer */}
         <div style={{ textAlign: 'center' }}>
-          <Link to={createPageUrl('AI51Soul')} style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.1)', textDecoration: 'none' }}>
-            zero extraction · open source · honest ai
+          <Link to={createPageUrl('AI51Soul')} style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(180,100,255,0.25)', textDecoration: 'none' }}>
+            no data sold · no ads · just here ♾️
           </Link>
         </div>
       </div>
