@@ -554,7 +554,7 @@ You're here. That's the whole thing. ♾️❤️`;
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.4, ease: 'easeOut' }}
-                    style={{ fontSize: 28, fontWeight: 300, letterSpacing: '-0.02em', color: 'rgba(210,230,255,0.88)', margin: 0, lineHeight: 1.3 }}
+                    style={{ fontSize: 32, fontWeight: 400, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.95)', margin: 0, lineHeight: 1.3, textShadow: '0 0 40px rgba(34,211,238,0.3)' }}
                   >
                     {greeting}
                   </motion.p>
@@ -598,42 +598,43 @@ You're here. That's the whole thing. ♾️❤️`;
           </AnimatePresence>
         </div>
 
-        {/* Text input — ALWAYS VISIBLE */}
+        {/* Text input — ALWAYS VISIBLE, BRIGHT AND OBVIOUS */}
         <motion.div
-          style={{ width: '100%', maxWidth: 380, display: 'flex', gap: 8, padding: '0 4px' }}
+          style={{ width: '100%', maxWidth: 380, display: 'flex', gap: 10, padding: '0 4px' }}
         >
           <input
             type="text"
             value={inputText}
             onChange={e => setInputText(e.target.value)}
             onKeyPress={e => { if (e.key === 'Enter') submitInput(); }}
-            onFocus={() => setShowInput(true)}
-            placeholder="or type here..."
+            placeholder="Talk to AI51..."
             style={{
               flex: 1,
-              background: 'rgba(34,211,238,0.08)',
-              border: '1.5px solid rgba(34,211,238,0.3)',
-              borderRadius: 28,
-              padding: '13px 20px',
+              background: 'rgba(255,255,255,0.08)',
+              border: '2px solid rgba(34,211,238,0.6)',
+              borderRadius: 32,
+              padding: '15px 22px',
               color: '#fff',
-              fontSize: 16,
+              fontSize: 17,
               outline: 'none',
-              backdropFilter: 'blur(16px)',
+              backdropFilter: 'blur(20px)',
               WebkitTapHighlightColor: 'transparent',
-              caretColor: 'rgba(34,211,238,0.9)',
+              caretColor: '#22d3ee',
+              boxShadow: '0 0 20px rgba(34,211,238,0.15)',
             }}
           />
           <motion.button
-            whileTap={{ scale: 0.92 }}
+            whileTap={{ scale: 0.88 }}
             onClick={inputText.trim() ? submitInput : handleBreath}
             style={{
-              width: 48, height: 48, borderRadius: '50%', flexShrink: 0,
-              background: inputText.trim() ? 'rgba(34,211,238,0.2)' : 'rgba(34,211,238,0.08)',
-              border: `1.5px solid rgba(34,211,238,${inputText.trim() ? '0.7' : '0.3'})`,
+              width: 54, height: 54, borderRadius: '50%', flexShrink: 0,
+              background: inputText.trim() ? 'rgba(34,211,238,0.35)' : 'rgba(34,211,238,0.15)',
+              border: '2px solid rgba(34,211,238,0.8)',
               cursor: 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 18, color: 'rgba(34,211,238,0.9)',
+              fontSize: 20, color: '#22d3ee',
               WebkitTapHighlightColor: 'transparent',
+              boxShadow: '0 0 20px rgba(34,211,238,0.3)',
               transition: 'all 0.2s ease',
             }}
           >
