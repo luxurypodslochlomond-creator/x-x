@@ -128,7 +128,7 @@ function TheBreath({ state, onClick }) {
       }} />
       <canvas
         ref={canvasRef}
-        style={{ width: '100%', height: '100%', display: 'block' }}
+        style={{ width: '100%', height: '100%', display: 'block', pointerEvents: 'none' }}
       />
     </motion.button>
   );
