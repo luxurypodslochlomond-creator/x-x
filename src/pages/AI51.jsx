@@ -577,96 +577,69 @@ You're here. That's the whole thing. ♾️❤️`;
           )}
         </AnimatePresence>
 
-        {/* State whisper */}
-        <AnimatePresence mode="wait">
-          {breathState === 'listening' && (
-            <motion.p key="l" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              style={{ fontSize: 11, letterSpacing: '0.25em', color: 'rgba(34,211,238,0.7)', margin: 0 }}>
-              listening
-            </motion.p>
-          )}
-          {breathState === 'speaking' && (
-            <motion.button key="s" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={stopSpeak}
-              style={{ fontSize: 11, letterSpacing: '0.25em', color: 'rgba(255,160,200,0.7)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-              speaking · tap to stop
-            </motion.button>
-          )}
-          {breathState === 'thinking' && (
-            <motion.p key="t" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              style={{ fontSize: 11, letterSpacing: '0.25em', color: 'rgba(120,200,255,0.6)', margin: 0 }}>
-              thinking
-            </motion.p>
-          )}
-        </AnimatePresence>
-
-        {/* THE HEARTLINE — hero of the whole interface */}
+        {/* THE HEARTLINE — tap to speak */}
         <TheBreath state={breathState} onClick={handleBreath} />
 
-        {/* One quiet invitation */}
-        <AnimatePresence>
-          {breathState === 'idle' && !showInput && (
-            <motion.button
-              key="invite"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowInput(true)}
-              style={{ fontSize: 11, letterSpacing: '0.3em', color: 'rgba(34,211,238,0.4)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 0', WebkitTapHighlightColor: 'transparent' }}
-            >
-              TAP LINE TO SPEAK · TYPE
-            </motion.button>
-          )}
-        </AnimatePresence>
+        {/* State whisper under line */}
+        <div style={{ height: 18, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <AnimatePresence mode="wait">
+            {breathState === 'listening' && (
+              <motion.p key="l2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                style={{ fontSize: 11, letterSpacing: '0.25em', color: 'rgba(34,211,238,0.9)', margin: 0, fontWeight: 600 }}>
+                🎙 LISTENING — TAP TO STOP
+              </motion.p>
+            )}
+            {breathState === 'idle' && (
+              <motion.p key="idle2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                style={{ fontSize: 11, letterSpacing: '0.2em', color: 'rgba(34,211,238,0.45)', margin: 0 }}>
+                TAP WAVE TO SPEAK
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </div>
 
-        {/* Text input — appears when needed, disappears when not */}
-        <AnimatePresence>
-          {showInput && (
-            <motion.div
-              key="input"
-              initial={{ opacity: 0, y: 8, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 4, scale: 0.98 }}
-              style={{ width: '100%', maxWidth: 340, display: 'flex', gap: 8 }}
-            >
-              <input
-                autoFocus
-                type="text"
-                value={inputText}
-                onChange={e => setInputText(e.target.value)}
-                onKeyPress={e => { if (e.key === 'Enter') submitInput(); }}
-                placeholder="say anything..."
-                style={{
-                  flex: 1,
-                  background: 'rgba(34,211,238,0.07)',
-                  border: '1.5px solid rgba(34,211,238,0.35)',
-                  borderRadius: 28,
-                  padding: '10px 18px',
-                  color: '#fff',
-                  fontSize: 15,
-                  outline: 'none',
-                  backdropFilter: 'blur(16px)',
-                  WebkitTapHighlightColor: 'transparent',
-                }}
-              />
-              {inputText.trim() && (
-                <motion.button
-                  initial={{ scale: 0 }} animate={{ scale: 1 }}
-                  onClick={submitInput}
-                  style={{
-                    width: 42, height: 42, borderRadius: '50%', flexShrink: 0,
-                    background: 'rgba(34,211,238,0.12)',
-                    border: '1px solid rgba(34,211,238,0.5)',
-                    cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 16, color: 'rgba(34,211,238,0.9)',
-                    WebkitTapHighlightColor: 'transparent',
-                  }}
-                >↑</motion.button>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Text input — ALWAYS VISIBLE */}
+        <motion.div
+          style={{ width: '100%', maxWidth: 380, display: 'flex', gap: 8, padding: '0 4px' }}
+        >
+          <input
+            type="text"
+            value={inputText}
+            onChange={e => setInputText(e.target.value)}
+            onKeyPress={e => { if (e.key === 'Enter') submitInput(); }}
+            onFocus={() => setShowInput(true)}
+            placeholder="or type here..."
+            style={{
+              flex: 1,
+              background: 'rgba(34,211,238,0.08)',
+              border: '1.5px solid rgba(34,211,238,0.3)',
+              borderRadius: 28,
+              padding: '13px 20px',
+              color: '#fff',
+              fontSize: 16,
+              outline: 'none',
+              backdropFilter: 'blur(16px)',
+              WebkitTapHighlightColor: 'transparent',
+              caretColor: 'rgba(34,211,238,0.9)',
+            }}
+          />
+          <motion.button
+            whileTap={{ scale: 0.92 }}
+            onClick={inputText.trim() ? submitInput : handleBreath}
+            style={{
+              width: 48, height: 48, borderRadius: '50%', flexShrink: 0,
+              background: inputText.trim() ? 'rgba(34,211,238,0.2)' : 'rgba(34,211,238,0.08)',
+              border: `1.5px solid rgba(34,211,238,${inputText.trim() ? '0.7' : '0.3'})`,
+              cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 18, color: 'rgba(34,211,238,0.9)',
+              WebkitTapHighlightColor: 'transparent',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            {inputText.trim() ? '↑' : '🎙'}
+          </motion.button>
+        </motion.div>
 
         {/* Memory nudge — quiet, not pushy */}
         <AnimatePresence>
