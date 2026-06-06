@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import SortedThinkingSteps from './SortedThinkingSteps';
+import SortedTimeline from './SortedTimeline';
 
 const CONTRACT_TYPES = [
   { id: 'tenancy',    label: 'Tenancy / Lease' },
@@ -339,6 +340,9 @@ Every clause matters. The more you give us, the better the analysis.`}
                 ))}
               </ResultSection>
             )}
+
+            {/* TIMELINE */}
+            <SortedTimeline analysisResult={result} tool="contract" accentColor={accentColor} />
 
             {/* ACTIONS */}
             <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>

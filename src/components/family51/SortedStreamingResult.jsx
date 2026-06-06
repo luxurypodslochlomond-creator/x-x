@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SortedHelpLinks from './SortedHelpLinks';
 import SortedNextFiveMinutes from './SortedNextFiveMinutes';
 import SortedPushNudge from './SortedPushNudge';
+import SortedTimeline from './SortedTimeline';
 
 const SEVERITY_CONFIG = {
   'NOT URGENT':      { color: '#22c55e', bg: 'rgba(34,197,94,0.07)',   border: 'rgba(34,197,94,0.25)',  emoji: '✓' },
@@ -178,6 +179,9 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           )}
         </motion.div>
       )}
+
+      {/* ── WHAT HAPPENS NEXT — animated timeline ── */}
+      <SortedTimeline analysisResult={result} tool="letter" accentColor={accentColor} />
 
       {/* ── NEXT 5 MINUTES — emotional scaffolding ── */}
       <SortedNextFiveMinutes severity={result.severity} accentColor={accentColor} />
