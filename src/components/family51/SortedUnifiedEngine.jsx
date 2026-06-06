@@ -200,27 +200,30 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           )}
         </AnimatePresence>
 
-        {/* BOTTOM NAV — 4 distinct colours */}
-        <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${tc.color}25`, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          {Object.entries(TOOL_COLORS).map(([id, t]) => {
-            const isActive = activeTool === id;
-            return (
-              <NativeButton
-                key={id}
-                onClick={() => handleToolOpen(id)}
-                style={{
-                  padding: '12px 0', borderRadius: 10, fontSize: 10, fontWeight: 800,
-                  letterSpacing: '0.1em',
-                  border: `1.5px solid ${isActive ? t.color : t.color + '50'}`,
-                  background: isActive ? `${t.color}18` : `${t.color}08`,
-                  color: isActive ? t.color : t.color,
-                  transition: 'all 0.15s',
-                }}
-              >
-                {t.label}
-              </NativeButton>
-            );
-          })}
+        {/* BOTTOM NAV — 3 top row, 2 bottom row */}
+        <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${tc.color}25`, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+            {['letter', 'reply', 'conflict'].map(id => {
+              const t = TOOL_COLORS[id];
+              const isActive = activeTool === id;
+              return (
+                <NativeButton key={id} onClick={() => handleToolOpen(id)} style={{ padding: '12px 0', borderRadius: 10, fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', border: `1.5px solid ${isActive ? t.color : t.color + '50'}`, background: isActive ? `${t.color}18` : `${t.color}08`, color: t.color, transition: 'all 0.15s' }}>
+                  {t.label}
+                </NativeButton>
+              );
+            })}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            {['scam', 'contract'].map(id => {
+              const t = TOOL_COLORS[id];
+              const isActive = activeTool === id;
+              return (
+                <NativeButton key={id} onClick={() => handleToolOpen(id)} style={{ padding: '12px 0', borderRadius: 10, fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', border: `1.5px solid ${isActive ? t.color : t.color + '50'}`, background: isActive ? `${t.color}18` : `${t.color}08`, color: t.color, transition: 'all 0.15s' }}>
+                  {t.label}
+                </NativeButton>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

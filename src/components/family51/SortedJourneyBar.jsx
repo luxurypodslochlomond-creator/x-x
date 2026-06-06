@@ -2,10 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const STEPS = [
-  { id: 'letter',   label: 'DECODE',  color: '#f5a623', desc: 'Letter decoded' },
-  { id: 'reply',    label: 'REPLY',   color: '#f5a623', desc: 'Write your reply' },
-  { id: 'conflict', label: 'DISPUTE', color: '#f5a623', desc: 'Know your rights' },
-  { id: 'scam',     label: 'SCAM?',   color: '#ef4444', desc: 'Scam check' },
+  { id: 'letter',   label: 'DECODE',   color: '#f5a623', desc: 'Letter decoded' },
+  { id: 'reply',    label: 'REPLY',    color: '#2563eb', desc: 'Write your reply' },
+  { id: 'conflict', label: 'DISPUTE',  color: '#059669', desc: 'Know your rights' },
+  { id: 'scam',     label: 'SCAM?',    color: '#ef4444', desc: 'Scam check' },
+  { id: 'contract', label: 'CONTRACT', color: '#7c3aed', desc: 'Check a contract' },
 ];
 
 export default function SortedJourneyBar({ completedTools = [], currentTool, onNavigate }) {
