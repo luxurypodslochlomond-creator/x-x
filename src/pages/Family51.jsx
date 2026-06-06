@@ -302,14 +302,18 @@ export default function Family51Page() {
               <p style={{ fontSize: 16, fontWeight: 500, color: 'rgba(26,18,8,0.45)', margin: '8px 0 0' }}>Right now. Plain English. No account needed.</p>
             </motion.div>
 
-            {/* PRIVACY TRUST — single line, compact */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '9px 14px', background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.3)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, textAlign: 'center' }}>
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
-                <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
-                <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
-              </svg>
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#f5a623' }}>Your letter is never saved or shared</span>
-              <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>· No signup needed.</span>
+            {/* PRIVACY TRUST — stronger, covers contracts + photos + PDFs */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '10px 14px', background: 'rgba(245,166,35,0.07)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+                  <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
+                  <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
+                </svg>
+                <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', letterSpacing: '0.04em' }}>PRIVATE BY DESIGN — nothing is ever stored</span>
+              </div>
+              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0, lineHeight: 1.55 }}>
+                Every letter, contract, photo and PDF you share is <strong style={{ color: 'rgba(26,18,8,0.7)' }}>processed and immediately discarded</strong>. We never store it, never share it, never train on it. No account, no trace. This is a core architectural principle — not a policy we can change tomorrow.
+              </p>
             </motion.div>
 
             {/* 4 TOOL BUTTONS — 2x2 grid */}
@@ -358,7 +362,7 @@ export default function Family51Page() {
                   )
                 },
                 {
-                  id: 'contract', label: 'Check a contract', sub: 'Tenancy, employment, T&Cs',
+                  id: 'contract', label: 'Check a contract', sub: 'Paste, photo or PDF — any country',
                   color: '#7c3aed', bg: 'rgba(124,58,237,0.07)', border: 'rgba(124,58,237,0.3)',
                   gridColumn: '1 / -1',
                   icon: (
@@ -398,11 +402,16 @@ export default function Family51Page() {
               ))}
             </motion.div>
 
-            {/* TRUST STRIP — jurisdiction & free uses only */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 24 }}>
-              <TrustPill text="Your local law" />
-              <TrustPill text="10 free uses" />
-              <TrustPill text="Not legal advice" />
+            {/* TRUST STRIP */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ marginBottom: 20 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 10 }}>
+                <TrustPill text={selectedLocation ? `${selectedLocation.flag} ${selectedLocation.jurisdiction}` : '🇬🇧 UK law'} />
+                <TrustPill text="10 free uses" />
+                <TrustPill text="Works in every country" />
+              </div>
+              <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.38)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
+                Not legal advice — we explain what things mean and suggest next steps. For serious matters, always consult a solicitor, Citizens Advice (UK), Legal Aid, or your local consumer authority. We'll tell you exactly who to contact for your situation.
+              </p>
             </motion.div>
 
             {/* HOW IT WORKS — always visible */}
