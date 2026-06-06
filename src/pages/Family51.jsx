@@ -167,7 +167,21 @@ export default function Family51Page() {
       'Asia/Taipei': { country: 'Taiwan', flag: '🇹🇼', code: 'TW', jurisdiction: 'Taiwanese law · Consumer Protection Commission' },
     };
 
-    const detected = geoMap[tz] || { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', jurisdiction: 'UK law' };
+    // Scotland detection — same timezone as England but distinct legal system
+    const uiLang = navigator.language || navigator.languages?.[0] || '';
+    const isScottish = uiLang.toLowerCase().includes('gd') || 
+      (typeof Intl !== 'undefined' && Intl.DateTimeFormat().resolvedOptions().timeZone === 'Europe/London' &&
+       (navigator.languages || []).some(l => l.toLowerCase().startsWith('gd')));
+    
+    let detected = geoMap[tz] || { country: 'United Kingdom', code: 'GB', jurisdiction: 'UK law' };
+    
+    // Override for Scotland
+    if (detected.code === 'GB' && isScottish) {
+      detected = { country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' };
+    }
+    
+    // Remove flags from all entries
+    delete detected.flag;
     setSelectedLocation(detected);
   }, []);
 
@@ -402,53 +416,29 @@ export default function Family51Page() {
               ))}
             </motion.div>
 
-            {/* JURISDICTION DETECTOR — premium global moment */}
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ marginBottom: 20, borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
-              {/* Top: detected jurisdiction */}
-              <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(245,166,35,0.12)' }}>
-                <div style={{ fontSize: 26, lineHeight: 1, flexShrink: 0 }}>
-                  {selectedLocation ? selectedLocation.flag : '🌍'}
+            {/* JURISDICTION STRIP — slim, no flags, coolasfuck */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} style={{ marginBottom: 16, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.2)', background: '#fff', display: 'flex', alignItems: 'center', gap: 10 }}>
+              {/* Custom location pin — no flag, no politics */}
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
+                <circle cx="9" cy="7.5" r="4" stroke="#f5a623" strokeWidth="1.4" fill="rgba(245,166,35,0.12)" />
+                <circle cx="9" cy="7.5" r="1.5" fill="#f5a623" />
+                <path d="M9 11.5c0 0-4 2.5-4 4.5h8c0-2-4-4.5-4-4.5z" fill="rgba(245,166,35,0.15)" stroke="#f5a623" strokeWidth="1.1" strokeLinejoin="round" />
+              </svg>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#1a1208', lineHeight: 1.3 }}>
+                  {selectedLocation ? (
+                    <><span style={{ color: '#f5a623' }}>{selectedLocation.jurisdiction.split('·')[0].trim()}</span> · advice and contacts specific to {selectedLocation.country}</>
+                  ) : (
+                    <span style={{ color: 'rgba(26,18,8,0.4)' }}>Detecting your jurisdiction…</span>
+                  )}
                 </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.4)', marginBottom: 2 }}>DETECTED — YOUR JURISDICTION</div>
-                  <div style={{ fontSize: 14, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-                    {selectedLocation ? selectedLocation.jurisdiction : 'Detecting…'}
-                  </div>
-                  <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', marginTop: 1 }}>
-                    {selectedLocation ? selectedLocation.country : ''}
-                    {selectedLocation && <span style={{ color: '#f5a623', fontWeight: 700 }}> · advice calibrated to your laws</span>}
-                  </div>
-                </div>
-                <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 4 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16,185,129,0.6)', animation: 'pulse 2s infinite' }} />
-                  <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: '#10b981' }}>LIVE</span>
-                </div>
+                <div style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', marginTop: 2 }}>Not legal advice — we explain and guide · nothing stored</div>
               </div>
-              {/* Bottom: what that means */}
-              <div style={{ padding: '10px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                  <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>⚖️</span>
-                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>Advice, deadlines and authorities are specific to <strong style={{ color: 'rgba(26,18,8,0.8)' }}>{selectedLocation ? selectedLocation.country : 'your country'}</strong> — not generic.</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                  <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>🏛️</span>
-                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>
-                    We'll name the exact body to contact in <strong style={{ color: 'rgba(26,18,8,0.8)' }}>{selectedLocation ? selectedLocation.country : 'your country'}</strong>
-                    {selectedLocation?.jurisdiction && selectedLocation.jurisdiction !== 'UK law' ? (
-                      <> — {selectedLocation.jurisdiction.split('·').slice(1).join('·').trim() || 'your local consumer authority'}</>
-                    ) : (
-                      <> — Citizens Advice, Legal Aid, or the relevant ombudsman</>
-                    )}
-                    . Not generic global advice.
-                  </span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                  <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>📋</span>
-                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>Not legal advice — we explain and guide. For anything serious, we'll tell you exactly who to call next.</span>
-                </div>
+              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 3 }}>
+                <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 5px rgba(16,185,129,0.7)', animation: 'locpulse 2s infinite' }} />
               </div>
             </motion.div>
-            <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }`}</style>
+            <style>{`@keyframes locpulse { 0%,100%{opacity:1} 50%{opacity:0.3} }`}</style>
 
             {/* HOW IT WORKS — always visible */}
             <div id="sorted-upgrade" style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
