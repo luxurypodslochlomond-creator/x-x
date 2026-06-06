@@ -529,7 +529,7 @@ export default function Family51Page() {
                 <span style={{ color: '#f5a623' }}>Now act on it.</span>
               </h1>
               <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.65)', margin: '0 0 12px', lineHeight: 1.6 }}>
-                You got your 10 free decodes. You understand what the letter means now. That's the hardest part done. Premium helps you finish it — draft the reply, resolve the dispute, follow through. {geoPrice.inline}/month.
+                You got your 10 free uses. You understand what the letter means now. That's the hardest part done. Premium helps you finish it — draft the reply, resolve the dispute, follow through. {geoPrice.inline}/month.
               </p>
               <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', margin: '0 0 4px', lineHeight: 1.5 }}>
                 Cancel anytime. Nothing stored. Not legal advice.
