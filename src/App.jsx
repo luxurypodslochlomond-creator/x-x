@@ -123,21 +123,19 @@ const AuthenticatedApp = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Use View Transitions API for instant, native browser transitions
+    // Use View Transitions API for instant, native browser transitions (iOS/Android/Samsung feel)
     if (document.startViewTransition) {
       document.startViewTransition(() => {
-        // Set view transition names for smooth cross-fade
         document.documentElement.style.viewTransitionName = 'page-transition';
       });
     }
     setIsTransitioning(true);
     const timer = setTimeout(() => {
       setIsTransitioning(false);
-      // Clear transition name after animation
       setTimeout(() => {
         document.documentElement.style.viewTransitionName = '';
       }, 300);
-    }, 60);
+    }, 90); // Longer for smoother Samsung/Android feel
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
