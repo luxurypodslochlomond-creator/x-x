@@ -160,13 +160,19 @@ export default function SortedTimeline({ analysisResult, tool = 'letter', accent
       else if (verdict === 'review_carefully') derivedSeverity = 'important';
       else derivedSeverity = 'routine';
 
+      // Always have at least 3-4 steps for a good timeline feel
       derivedSteps = [
         { when: 'TODAY',     title: 'Read verdict',      detail: r.verdict_reason || 'Review the full analysis above.', action: 'Read' },
-        r.red_flags?.length  ? { when: 'TODAY',     title: 'Note red flags',    detail: `${r.red_flags.length} concern${r.red_flags.length > 1 ? 's' : ''} found — don't sign until you understand each one.`, action: 'Noted' } : null,
-        r.negotiate?.length  ? { when: 'THIS WEEK', title: 'Negotiate terms',   detail: r.negotiate[0] || 'Push back on the key terms before signing.', action: 'Asked' } : null,
-        r.questions?.length  ? { when: 'THIS WEEK', title: 'Ask questions',     detail: `Ask: "${r.questions[0]}"`, action: 'Asked' } : null,
+        ...(r.red_flags?.length  ? [{ when: 'TODAY',     title: 'Note red flags',    detail: `${r.red_flags.length} concern${r.red_flags.length > 1 ? 's' : ''} found — don't sign until you understand each one.`, action: 'Noted' }] : []),
+        ...(r.negotiate?.length  ? [{ when: 'THIS WEEK', title: 'Negotiate terms',   detail: r.negotiate[0] || 'Push back on the key terms before signing.', action: 'Asked' }] : []),
+        ...(r.questions?.length  ? [{ when: 'THIS WEEK', title: 'Ask questions',     detail: `Ask: "${r.questions[0]}"`, action: 'Asked' }] : []),
         { when: 'DONE',      title: 'Sign or walk',      detail: verdict === 'looks_ok' ? 'This looks reasonable — sign with confidence.' : 'Only sign when you\'re satisfied with every clause.', action: 'Decided' },
-      ].filter(Boolean);
+      ];
+
+      // Ensure minimum 3 steps for good UX
+      if (derivedSteps.length < 3) {
+        derivedSteps.splice(derivedSteps.length - 1, 0, { when: 'DAY 2', title: 'Sleep on it', detail: "Don't sign today. Read it again tomorrow with fresh eyes.", action: 'Waited' });
+      }
     }
 
     setSeverity(derivedSeverity);
