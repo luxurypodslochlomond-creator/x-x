@@ -174,40 +174,25 @@ export default function Family51Page() {
     delete detected.flag;
     setSelectedLocation(detected);
 
-    // For GB: use ip-api.com (free, fast, no key needed) to detect Scotland
+    // For GB: use HTTPS ipapi to detect Scotland/Wales within UK
     if (detected.code === 'GB') {
-      fetch('http://ip-api.com/json/?fields=regionName,city')
+      fetch('https://ipapi.co/json/')
         .then(r => r.json())
         .then(data => {
-          const region = (data.regionName || '').toLowerCase();
+          const region = (data.region || '').toLowerCase();
           const city = (data.city || '').toLowerCase();
-          const scottishKeywords = ['scotland', 'highland', 'grampian', 'tayside', 'fife', 'lothian', 'strathclyde', 'borders', 'dumfries', 'argyll', 'orkney', 'shetland', 'western isles', 'edinburgh', 'glasgow', 'aberdeen', 'dundee', 'inverness', 'stirling', 'perth', 'falkirk', 'kilmarnock', 'ayr', 'paisley', 'motherwell', 'hamilton', 'east kilbride', 'livingston', 'cumbernauld'];
-          const isScottish = scottishKeywords.some(k => region.includes(k) || city.includes(k));
-          if (isScottish) {
+          const scottish = ['scotland','highland','grampian','tayside','fife','lothian','strathclyde','borders','dumfries','argyll','orkney','shetland','edinburgh','glasgow','aberdeen','dundee','inverness','stirling','perth','falkirk','ayr','paisley','motherwell','hamilton','livingston'];
+          const welsh = ['wales','cardiff','swansea','newport','wrexham','gwynedd','conwy','powys','ceredigion','pembrokeshire','carmarthenshire'];
+          if (scottish.some(k => region.includes(k) || city.includes(k))) {
             setSelectedLocation({ country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' });
-          } else {
-            // Check for Wales too while we're at it
-            const welshKeywords = ['wales', 'cardiff', 'swansea', 'newport', 'wrexham', 'gwynedd', 'conwy', 'powys', 'ceredigion', 'pembrokeshire', 'carmarthenshire'];
-            const isWelsh = welshKeywords.some(k => region.includes(k) || city.includes(k));
-            if (isWelsh) {
-              setSelectedLocation({ country: 'Wales', code: 'WLS', jurisdiction: 'England & Wales law · Citizens Advice Wales · Welsh Government rights' });
-            }
+          } else if (welsh.some(k => region.includes(k) || city.includes(k))) {
+            setSelectedLocation({ country: 'Wales', code: 'WLS', jurisdiction: 'England & Wales law · Citizens Advice Wales' });
+          } else if ((data.region_code || '') === 'NIR' || city.includes('belfast') || city.includes('derry')) {
+            setSelectedLocation({ country: 'Northern Ireland', code: 'NIR', jurisdiction: 'Northern Ireland law · Law Centre NI · Citizens Advice NI' });
           }
+          // else stays as United Kingdom
         })
-        .catch(() => {
-          // ip-api failed — try backup
-          fetch('https://freeipapi.com/api/json')
-            .then(r => r.json())
-            .then(data => {
-              const region = (data.regionName || '').toLowerCase();
-              const city = (data.cityName || '').toLowerCase();
-              const isScottish = ['scotland','edinburgh','glasgow','aberdeen','dundee','inverness'].some(k => region.includes(k) || city.includes(k));
-              if (isScottish) {
-                setSelectedLocation({ country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' });
-              }
-            })
-            .catch(() => {}); // all failed, stay as UK
-        });
+        .catch(() => {}); // silent fail — stays as UK, user can tap "Change"
     }
   }, []);
 

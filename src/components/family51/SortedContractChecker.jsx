@@ -357,6 +357,9 @@ Every clause matters. The more you give us, the better the analysis.`}
             <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
               Not legal advice. Always consult a solicitor for important decisions.
             </p>
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', margin: '6px 0 0', lineHeight: 1.5 }}>
+              Need help? <a href="mailto:family@uf51.love" style={{ color: '#7c3aed', fontWeight: 700, textDecoration: 'none' }}>family@uf51.love</a>
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
