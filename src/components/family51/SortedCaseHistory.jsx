@@ -7,7 +7,7 @@ import SortedFollowUp from '@/components/family51/SortedFollowUp';
 
 // Case history is stored in localStorage — no login ever needed
 const STORAGE_KEY = 'sorted_case_history_v1';
-const FREE_CASE_LIMIT = 15; // enough for 5 full case threads (decode + reply + conflict each)
+const FREE_CASE_LIMIT = 10; // matches the 10 free AI uses — 1 saved slot per use, clean and fair
 
 const TOOL_CONFIG = {
   letter:   { label: 'DECODED LETTER', color: '#f97316' },
