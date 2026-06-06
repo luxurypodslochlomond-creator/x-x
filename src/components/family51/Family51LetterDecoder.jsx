@@ -507,6 +507,7 @@ Don't worry about formatting. Just get it all in."
               onHandoff={onHandoff}
               onReset={reset}
               caseId={caseId}
+              geo={geo}
             />
           </motion.div>
         )}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SortedHelpLinks from './SortedHelpLinks';
 
 const SEVERITY_CONFIG = {
   'NOT URGENT':      { color: '#22c55e', bg: 'rgba(34,197,94,0.07)',   border: 'rgba(34,197,94,0.25)',  emoji: '✓' },
@@ -8,7 +9,7 @@ const SEVERITY_CONFIG = {
   'VERY URGENT':     { color: '#dc2626', bg: 'rgba(220,38,38,0.07)',   border: 'rgba(220,38,38,0.25)',  emoji: '⚠' },
 };
 
-export default function SortedStreamingResult({ result, accentColor = '#f97316', onHandoff, onReset, caseId }) {
+export default function SortedStreamingResult({ result, accentColor = '#f97316', onHandoff, onReset, caseId, geo }) {
   const [showMore, setShowMore] = useState(false);
   const [saved, setSaved] = useState(false);
   const sev = result?.severity ? (SEVERITY_CONFIG[result.severity] || SEVERITY_CONFIG['NEEDS ATTENTION']) : null;
@@ -301,29 +302,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </button>
       </div>
 
-      {/* ── ALWAYS-VISIBLE TRUSTED HELP LINKS ── */}
-      <div style={{ padding: '16px 18px', borderRadius: 14, background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.15)' }}>
-        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(22,163,74,0.7)', margin: '0 0 12px' }}>FREE HELP — REAL PEOPLE</p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {[
-            { name: 'Citizens Advice', desc: 'Free legal & debt help', url: 'https://www.citizensadvice.org.uk' },
-            { name: 'National Debtline', desc: '0808 808 4000 · free debt advice', url: 'https://www.nationaldebtline.org' },
-            { name: 'Shelter', desc: 'Housing & eviction help', url: 'https://www.shelter.org.uk' },
-            { name: 'StepChange', desc: 'Free debt management', url: 'https://www.stepchange.org' },
-          ].map(({ name, desc, url }) => (
-            <a key={name} href={url} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', padding: '8px 10px', borderRadius: 9, background: '#fff', border: '1px solid rgba(26,18,8,0.08)' }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
-              <div>
-                <span style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', display: 'block' }}>{name}</span>
-                <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>{desc}</span>
-              </div>
-              <span style={{ marginLeft: 'auto', fontSize: 12, color: 'rgba(26,18,8,0.25)' }}>→</span>
-            </a>
-          ))}
-        </div>
-      </div>
+      {/* ── ALWAYS-VISIBLE GEO-AWARE TRUSTED HELP LINKS ── */}
+      <SortedHelpLinks geo={geo} accentColor="#22c55e" />
 
       {/* HUMAN + AI LINE */}
       <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.4)', textAlign: 'center', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
