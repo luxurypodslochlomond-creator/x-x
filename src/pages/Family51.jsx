@@ -32,6 +32,7 @@ export default function Family51Page() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showPaySuccess, setShowPaySuccess] = useState(false);
   const [showMauro, setShowMauro] = useState(false);
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const { isLocked, remaining, recordUse } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
@@ -173,20 +174,40 @@ export default function Family51Page() {
     delete detected.flag;
     setSelectedLocation(detected);
 
-    // Scotland: try IP-based region detection after initial render
+    // For GB: use ip-api.com (free, fast, no key needed) to detect Scotland
     if (detected.code === 'GB') {
-      fetch('https://ipapi.co/json/')
+      fetch('http://ip-api.com/json/?fields=regionName,city')
         .then(r => r.json())
         .then(data => {
-          const region = (data.region || '').toLowerCase();
+          const region = (data.regionName || '').toLowerCase();
           const city = (data.city || '').toLowerCase();
-          const scottishRegions = ['scotland', 'highland', 'grampian', 'tayside', 'fife', 'lothian', 'strathclyde', 'borders', 'dumfries', 'argyll', 'orkney', 'shetland', 'western isles', 'edinburgh', 'glasgow', 'aberdeen', 'dundee', 'inverness', 'stirling', 'perth'];
-          const isScottish = scottishRegions.some(r => region.includes(r) || city.includes(r));
+          const scottishKeywords = ['scotland', 'highland', 'grampian', 'tayside', 'fife', 'lothian', 'strathclyde', 'borders', 'dumfries', 'argyll', 'orkney', 'shetland', 'western isles', 'edinburgh', 'glasgow', 'aberdeen', 'dundee', 'inverness', 'stirling', 'perth', 'falkirk', 'kilmarnock', 'ayr', 'paisley', 'motherwell', 'hamilton', 'east kilbride', 'livingston', 'cumbernauld'];
+          const isScottish = scottishKeywords.some(k => region.includes(k) || city.includes(k));
           if (isScottish) {
             setSelectedLocation({ country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' });
+          } else {
+            // Check for Wales too while we're at it
+            const welshKeywords = ['wales', 'cardiff', 'swansea', 'newport', 'wrexham', 'gwynedd', 'conwy', 'powys', 'ceredigion', 'pembrokeshire', 'carmarthenshire'];
+            const isWelsh = welshKeywords.some(k => region.includes(k) || city.includes(k));
+            if (isWelsh) {
+              setSelectedLocation({ country: 'Wales', code: 'WLS', jurisdiction: 'England & Wales law · Citizens Advice Wales · Welsh Government rights' });
+            }
           }
         })
-        .catch(() => {}); // silent fail — stays as UK law
+        .catch(() => {
+          // ip-api failed — try backup
+          fetch('https://freeipapi.com/api/json')
+            .then(r => r.json())
+            .then(data => {
+              const region = (data.regionName || '').toLowerCase();
+              const city = (data.cityName || '').toLowerCase();
+              const isScottish = ['scotland','edinburgh','glasgow','aberdeen','dundee','inverness'].some(k => region.includes(k) || city.includes(k));
+              if (isScottish) {
+                setSelectedLocation({ country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' });
+              }
+            })
+            .catch(() => {}); // all failed, stay as UK
+        });
     }
   }, []);
 
@@ -432,12 +453,14 @@ export default function Family51Page() {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 11, fontWeight: 700, color: '#1a1208', lineHeight: 1.3 }}>
                   {selectedLocation ? (
-                    <><span style={{ color: '#f5a623' }}>{selectedLocation.jurisdiction.split('·')[0].trim()}</span> · advice and contacts specific to {selectedLocation.country}</>
+                    <><span style={{ color: '#f5a623' }}>{selectedLocation.jurisdiction.split('·')[0].trim()}</span> · advice specific to {selectedLocation.country}</>
                   ) : (
-                    <span style={{ color: 'rgba(26,18,8,0.4)' }}>Detecting your jurisdiction…</span>
+                    <span style={{ color: 'rgba(26,18,8,0.4)' }}>Detecting your location…</span>
                   )}
                 </div>
-                <div style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', marginTop: 2 }}>Not legal advice — we explain and guide · nothing stored</div>
+                <button onClick={() => setShowLocationPicker(true)} style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', background: 'none', border: 'none', padding: 0, cursor: 'pointer', marginTop: 2, textDecoration: 'underline', textDecorationStyle: 'dotted', display: 'block' }}>
+                  Not {selectedLocation?.country || 'right'}? Change
+                </button>
               </div>
               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 3 }}>
                 <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 5px rgba(16,185,129,0.7)', animation: 'locpulse 2s infinite' }} />
@@ -522,6 +545,68 @@ export default function Family51Page() {
         />
 
 
+
+        {/* ── LOCATION PICKER MODAL ─────────────── */}
+        <AnimatePresence>
+          {showLocationPicker && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}
+              onClick={() => setShowLocationPicker(false)}
+            >
+              <motion.div
+                initial={{ y: 60, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 60, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={e => e.stopPropagation()}
+                style={{ width: '100%', maxWidth: 520, background: '#faf8f5', borderRadius: '20px 20px 0 0', padding: '24px 20px 40px', maxHeight: '75vh', overflowY: 'auto' }}
+              >
+                <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.4)', marginBottom: 8 }}>YOUR LOCATION</div>
+                <div style={{ fontSize: 18, fontWeight: 900, color: '#1a1208', marginBottom: 16 }}>Where are you?</div>
+                {[
+                  { country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' },
+                  { country: 'England', code: 'ENG', jurisdiction: 'England & Wales law · Citizens Advice · Legal Aid Agency' },
+                  { country: 'Wales', code: 'WLS', jurisdiction: 'England & Wales law · Citizens Advice Wales · Welsh Government rights' },
+                  { country: 'Northern Ireland', code: 'NIR', jurisdiction: 'Northern Ireland law · Law Centre NI · Citizens Advice NI' },
+                  { country: 'Ireland', code: 'IE', jurisdiction: 'Irish law' },
+                  { country: 'United States', code: 'US', jurisdiction: 'US law' },
+                  { country: 'Canada', code: 'CA', jurisdiction: 'Canadian law' },
+                  { country: 'Australia', code: 'AU', jurisdiction: 'Australian law · ACCC · Fair Trading' },
+                  { country: 'New Zealand', code: 'NZ', jurisdiction: 'NZ law · Consumer NZ · Disputes Tribunal' },
+                  { country: 'India', code: 'IN', jurisdiction: 'Indian law' },
+                  { country: 'South Africa', code: 'ZA', jurisdiction: 'SA law · National Consumer Commission · NCC' },
+                  { country: 'Nigeria', code: 'NG', jurisdiction: 'Nigerian law · FCCPC consumer protection' },
+                  { country: 'Kenya', code: 'KE', jurisdiction: 'Kenyan law · CAK consumer protection' },
+                  { country: 'Germany', code: 'DE', jurisdiction: 'German law' },
+                  { country: 'France', code: 'FR', jurisdiction: 'French law' },
+                  { country: 'Spain', code: 'ES', jurisdiction: 'Spanish law' },
+                  { country: 'Italy', code: 'IT', jurisdiction: 'Italian law' },
+                  { country: 'Netherlands', code: 'NL', jurisdiction: 'Dutch law' },
+                  { country: 'UAE', code: 'AE', jurisdiction: 'UAE law' },
+                  { country: 'Singapore', code: 'SG', jurisdiction: 'Singapore law' },
+                  { country: 'Philippines', code: 'PH', jurisdiction: 'Philippine law' },
+                  { country: 'Brazil', code: 'BR', jurisdiction: 'Brazilian law · PROCON · CDC consumer code' },
+                  { country: 'Mexico', code: 'MX', jurisdiction: 'Mexican law · PROFECO consumer protection' },
+                ].map(loc => (
+                  <button
+                    key={loc.code}
+                    onClick={() => { setSelectedLocation(loc); setShowLocationPicker(false); }}
+                    style={{ width: '100%', textAlign: 'left', padding: '12px 14px', marginBottom: 6, borderRadius: 10, border: selectedLocation?.code === loc.code ? '1.5px solid #f5a623' : '1px solid rgba(26,18,8,0.1)', background: selectedLocation?.code === loc.code ? 'rgba(245,166,35,0.08)' : '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                  >
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1208' }}>{loc.country}</div>
+                      <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)' }}>{loc.jurisdiction.split('·')[0].trim()}</div>
+                    </div>
+                    {selectedLocation?.code === loc.code && <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#f5a623' }} />}
+                  </button>
+                ))}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* ── MAURO AI HELPDESK MODAL ─────────────── */}
         <AnimatePresence>
