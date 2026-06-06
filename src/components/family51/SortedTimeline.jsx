@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { base44 } from '@/api/base44Client';
 
 // ─── SORTED TIMELINE ─────────────────────────────────────────────────────────
 // Calm, animated timeline visualiser — shows the path forward after analysis.
@@ -102,76 +101,76 @@ function TimelineStep({ step, index, isActive, isDone, isLast, color, onClick })
 
 export default function SortedTimeline({ analysisResult, tool = 'letter', accentColor = '#f5a623' }) {
   const [steps, setSteps] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [severity, setSeverity] = useState('routine');
   const [doneSteps, setDoneSteps] = useState(new Set());
 
   useEffect(() => {
     if (!analysisResult) return;
-    generateTimeline();
+    buildTimelineFromResult();
   }, [analysisResult]);
 
-  // Animate the active dot along automatically every 2s (demo feel, user can override)
+  // Animate the active dot along automatically every 2.5s
   useEffect(() => {
     if (!steps) return;
     const t = setTimeout(() => {
       setActiveStep(s => s < steps.length - 1 ? s + 1 : s);
-    }, 2200);
+    }, 2500);
     return () => clearTimeout(t);
   }, [steps, activeStep]);
 
-  const generateTimeline = async () => {
+  const buildTimelineFromResult = () => {
     setLoading(true);
-    const summaryText = typeof analysisResult === 'string'
-      ? analysisResult
-      : JSON.stringify(analysisResult).slice(0, 1200);
+    let derivedSteps = [];
+    let derivedSeverity = 'routine';
 
-    const res = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are a calm, clear legal advisor. Based on this ${tool} analysis result, generate a "what happens next" timeline for the user.
+    if (tool === 'letter') {
+      // Build from letter decode result — no extra LLM call needed
+      const r = analysisResult;
+      const sev = r?.severity || 'NOT URGENT';
+      if (sev === 'VERY URGENT' || sev === 'URGENT') derivedSeverity = 'urgent';
+      else if (sev === 'NEEDS ATTENTION') derivedSeverity = 'important';
+      else derivedSeverity = 'routine';
 
-ANALYSIS:
-${summaryText}
+      const timeLabels = ['TODAY', 'DAY 2', 'THIS WEEK', 'DEADLINE', 'DONE'];
+      const actionSteps = r?.action_steps || [];
+      derivedSteps = actionSteps.slice(0, 5).map((step, i) => ({
+        when: timeLabels[i] || `STEP ${i + 1}`,
+        title: step.length > 30 ? step.slice(0, 28) + '…' : step,
+        detail: step,
+        action: i === 0 ? 'Start now' : i === actionSteps.length - 1 ? 'Done' : 'Next step',
+      }));
 
-Generate exactly 4-5 calm, reassuring steps showing the path forward. Each step should be actionable and specific.
-
-Respond ONLY with valid JSON:
-{
-  "severity": "urgent | important | routine",
-  "steps": [
-    {
-      "when": "TODAY",
-      "title": "Short title (2-4 words)",
-      "detail": "One calm, specific sentence explaining what to do and why",
-      "action": "The single most important action word (optional, e.g. 'Send reply', 'Call them', 'Keep copy')"
-    }
-  ]
-}
-
-"when" values should be: TODAY, DAY 3, WEEK 1, WEEK 2, DEADLINE — or similar. Keep it human and calm.
-If this is urgent (bailiffs, eviction, court), severity=urgent. If there are concerns, severity=important. Otherwise routine.`,
-      response_json_schema: {
-        type: 'object',
-        properties: {
-          severity: { type: 'string' },
-          steps: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                when:   { type: 'string' },
-                title:  { type: 'string' },
-                detail: { type: 'string' },
-                action: { type: 'string' },
-              }
-            }
-          }
-        }
+      // fallback if no action steps
+      if (derivedSteps.length === 0 && r?.what_this_means) {
+        derivedSteps = [
+          { when: 'TODAY',     title: 'Read carefully',   detail: 'Read the full breakdown above and understand what this letter means.', action: 'Done' },
+          { when: 'TODAY',     title: 'Take a photo',     detail: 'Photograph the letter — front and back — and email it to yourself.', action: 'Photographed' },
+          { when: 'THIS WEEK', title: 'Get advice',       detail: r.free_help?.[0] || 'Contact Citizens Advice for free guidance.', action: 'Called' },
+          { when: 'DEADLINE',  title: 'Respond',          detail: r.key_deadline && r.key_deadline !== 'No deadline mentioned' ? `Respond by ${r.key_deadline}.` : 'Reply when you\'re ready.', action: 'Replied' },
+        ];
       }
-    });
 
-    setSeverity(res.severity || 'routine');
-    setSteps(res.steps || []);
+    } else if (tool === 'contract') {
+      // Build from contract analysis — no extra LLM call needed
+      const r = analysisResult;
+      const verdict = r?.verdict || 'review_carefully';
+      if (verdict === 'serious_concerns') derivedSeverity = 'urgent';
+      else if (verdict === 'review_carefully') derivedSeverity = 'important';
+      else derivedSeverity = 'routine';
+
+      derivedSteps = [
+        { when: 'TODAY',     title: 'Read verdict',      detail: r.verdict_reason || 'Review the full analysis above.', action: 'Read' },
+        r.red_flags?.length  ? { when: 'TODAY',     title: 'Note red flags',    detail: `${r.red_flags.length} concern${r.red_flags.length > 1 ? 's' : ''} found — don't sign until you understand each one.`, action: 'Noted' } : null,
+        r.negotiate?.length  ? { when: 'THIS WEEK', title: 'Negotiate terms',   detail: r.negotiate[0] || 'Push back on the key terms before signing.', action: 'Asked' } : null,
+        r.questions?.length  ? { when: 'THIS WEEK', title: 'Ask questions',     detail: `Ask: "${r.questions[0]}"`, action: 'Asked' } : null,
+        { when: 'DONE',      title: 'Sign or walk',      detail: verdict === 'looks_ok' ? 'This looks reasonable — sign with confidence.' : 'Only sign when you\'re satisfied with every clause.', action: 'Decided' },
+      ].filter(Boolean);
+    }
+
+    setSeverity(derivedSeverity);
+    setSteps(derivedSteps);
     setActiveStep(0);
     setLoading(false);
   };
