@@ -432,7 +432,15 @@ export default function Family51Page() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
                   <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>🏛️</span>
-                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>We'll name the exact body to contact — Citizens Advice, Legal Aid, consumer ombudsman, court — wherever you are.</span>
+                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>
+                    We'll name the exact body to contact in <strong style={{ color: 'rgba(26,18,8,0.8)' }}>{selectedLocation ? selectedLocation.country : 'your country'}</strong>
+                    {selectedLocation?.jurisdiction && selectedLocation.jurisdiction !== 'UK law' ? (
+                      <> — {selectedLocation.jurisdiction.split('·').slice(1).join('·').trim() || 'your local consumer authority'}</>
+                    ) : (
+                      <> — Citizens Advice, Legal Aid, or the relevant ombudsman</>
+                    )}
+                    . Not generic global advice.
+                  </span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
                   <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>📋</span>
