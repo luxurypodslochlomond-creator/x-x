@@ -176,6 +176,19 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </motion.div>
       )}
 
+      {/* ── IF YOU DON'T ACT — always visible for urgent letters ── */}
+      {result.if_you_ignore_this && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.25 }}
+          style={{ padding: '16px 18px', borderRadius: 14, background: 'rgba(217,119,6,0.05)', border: '1px solid rgba(217,119,6,0.2)' }}
+        >
+          <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(217,119,6,0.8)', margin: '0 0 8px' }}>⚠ IF YOU DO NOTHING</p>
+          <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.78)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
+        </motion.div>
+      )}
+
       {/* ── CTA: WRITE REPLY ── */}
       {onHandoff && (
         <motion.button
@@ -288,6 +301,30 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </button>
       </div>
 
+      {/* ── ALWAYS-VISIBLE TRUSTED HELP LINKS ── */}
+      <div style={{ padding: '16px 18px', borderRadius: 14, background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.15)' }}>
+        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(22,163,74,0.7)', margin: '0 0 12px' }}>FREE HELP — REAL PEOPLE</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {[
+            { name: 'Citizens Advice', desc: 'Free legal & debt help', url: 'https://www.citizensadvice.org.uk' },
+            { name: 'National Debtline', desc: '0808 808 4000 · free debt advice', url: 'https://www.nationaldebtline.org' },
+            { name: 'Shelter', desc: 'Housing & eviction help', url: 'https://www.shelter.org.uk' },
+            { name: 'StepChange', desc: 'Free debt management', url: 'https://www.stepchange.org' },
+          ].map(({ name, desc, url }) => (
+            <a key={name} href={url} target="_blank" rel="noopener noreferrer"
+              style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', padding: '8px 10px', borderRadius: 9, background: '#fff', border: '1px solid rgba(26,18,8,0.08)' }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
+              <div>
+                <span style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', display: 'block' }}>{name}</span>
+                <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>{desc}</span>
+              </div>
+              <span style={{ marginLeft: 'auto', fontSize: 12, color: 'rgba(26,18,8,0.25)' }}>→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
       {/* HUMAN + AI LINE */}
       <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.4)', textAlign: 'center', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
         Built by a human who needed this too. Powered by AI — but the care is real.
@@ -295,8 +332,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
 
       {/* DISCLAIMER */}
       <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
-        General guidance only — not legal advice. Always verify with{' '}
-        <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(26,18,8,0.5)', textDecoration: 'underline' }}>Citizens Advice</a>.
+        General guidance only — not legal advice.
       </p>
 
     </div>
