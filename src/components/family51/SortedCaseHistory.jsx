@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
 import { anonymizeCase } from '@/utils/anonymizeCase';
 import { base44 } from '@/api/base44Client';
+import SortedFollowUp from '@/components/family51/SortedFollowUp';
 
 // Case history is stored in localStorage — no login ever needed
 const STORAGE_KEY = 'sorted_case_history_v1';
-const FREE_CASE_LIMIT = 5;
+const FREE_CASE_LIMIT = 15; // enough for 5 full case threads (decode + reply + conflict each)
 
 const TOOL_CONFIG = {
   letter:   { label: 'DECODED LETTER', color: '#f97316' },
@@ -199,13 +200,14 @@ function renderContent(caseItem) {
   return null;
 }
 
-function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
+function CaseCard({ caseItem, onDelete, onContinue, onEdit, onFollowUpSaved, linkedReplies = [], linkedConflicts = [] }) {
   const [expanded, setExpanded] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editValue, setEditValue] = useState(caseItem.summary || '');
   const tool = TOOL_CONFIG[caseItem.tool] || TOOL_CONFIG.letter;
   const sevColor = SEVERITY_COLORS[caseItem.severity] || SEVERITY_COLORS.unknown;
+  const hasThread = linkedReplies.length > 0 || linkedConflicts.length > 0;
 
   const handleSaveEdit = () => {
     onEdit(caseItem.id, editValue.trim());
@@ -281,8 +283,53 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit }) {
               <div style={{ marginTop: 16 }}>
                 {renderContent(caseItem)}
               </div>
+              {/* CASE THREAD — show linked replies/conflicts */}
+              {hasThread && (
+                <div style={{ marginTop: 16, marginBottom: 4 }}>
+                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.35)', margin: '0 0 8px' }}>CASE THREAD</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                    {/* Root — this case */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <div style={{ width: 8, height: 8, borderRadius: '50%', background: tool.color, flexShrink: 0 }} />
+                      <span style={{ fontSize: 11, fontWeight: 700, color: tool.color }}>{tool.label}</span>
+                      <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', flex: 1 }}>{caseItem.summary}</span>
+                    </div>
+                    {linkedReplies.map((r, i) => (
+                      <div key={r.id}>
+                        <div style={{ width: 1, height: 10, background: TOOL_CONFIG.reply.color + '40', marginLeft: 3.5 }} />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <div style={{ width: 8, height: 8, borderRadius: '50%', background: TOOL_CONFIG.reply.color, flexShrink: 0 }} />
+                          <span style={{ fontSize: 11, fontWeight: 700, color: TOOL_CONFIG.reply.color }}>{TOOL_CONFIG.reply.label}</span>
+                          <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', flex: 1 }}>{r.summary}</span>
+                        </div>
+                      </div>
+                    ))}
+                    {linkedConflicts.map((c, i) => (
+                      <div key={c.id}>
+                        <div style={{ width: 1, height: 10, background: TOOL_CONFIG.conflict.color + '40', marginLeft: 3.5 }} />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <div style={{ width: 8, height: 8, borderRadius: '50%', background: TOOL_CONFIG.conflict.color, flexShrink: 0 }} />
+                          <span style={{ fontSize: 11, fontWeight: 700, color: TOOL_CONFIG.conflict.color }}>{TOOL_CONFIG.conflict.label}</span>
+                          <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', flex: 1 }}>{c.summary}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* FOLLOW-UP LOGGER */}
+              <div style={{ marginTop: 14, marginBottom: 4 }}>
+                <SortedFollowUp
+                  caseId={caseItem.id}
+                  existingFollowUps={caseItem.follow_ups || []}
+                  accentColor={tool.color}
+                  onSaved={onFollowUpSaved}
+                />
+              </div>
+
               {/* ACTIONS: SHARE · EMAIL · DELETE */}
-              <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {/* Primary action — only show for letter/reply to continue the journey */}
                 {onContinue && caseItem.tool !== 'conflict' && (
                   <motion.button
@@ -362,16 +409,16 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
   const [filter, setFilter] = useState('all');
   const [confirmWipe, setConfirmWipe] = useState(false);
 
+  const loadCases = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      setCases(stored);
+    } catch { setCases([]); }
+  };
+
   // Refresh cases whenever component mounts or becomes visible
   useEffect(() => {
-    const loadCases = () => {
-      try {
-        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        setCases(stored);
-      } catch { setCases([]); }
-    };
     loadCases();
-    // Also refresh when document becomes visible (tab focus)
     window.addEventListener('visibilitychange', loadCases);
     return () => window.removeEventListener('visibilitychange', loadCases);
   }, []);
@@ -435,7 +482,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
         </p>
         {!isPremium && cases.length >= FREE_CASE_LIMIT && (
           <div style={{ marginTop: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', fontSize: 12, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>
-            <span style={{ color: '#f97316', fontWeight: 800 }}>3 cases saved</span> — newest replaces oldest. Subscribe for unlimited storage.
+            <span style={{ color: '#f97316', fontWeight: 800 }}>{cases.length} cases saved</span> — oldest replaced when full. Subscribe for unlimited storage.
           </div>
         )}
         {isPremium && cases.length > 0 && (
@@ -495,7 +542,18 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <AnimatePresence mode="popLayout">
-            {filtered.map(c => <CaseCard key={c.id} caseItem={c} onDelete={handleDelete} onContinue={onContinue} onEdit={handleEdit} />)}
+            {filtered.map(c => (
+              <CaseCard
+                key={c.id}
+                caseItem={c}
+                onDelete={handleDelete}
+                onContinue={onContinue}
+                onEdit={handleEdit}
+                onFollowUpSaved={loadCases}
+                linkedReplies={c.tool === 'letter' ? cases.filter(x => x.tool === 'reply' && x.related_case_id === c.id) : []}
+                linkedConflicts={c.tool !== 'conflict' ? cases.filter(x => x.tool === 'conflict' && x.related_case_id === c.id) : []}
+              />
+            ))}
           </AnimatePresence>
         </div>
       )}
