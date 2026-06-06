@@ -357,7 +357,18 @@ export default function Family51Page() {
                     </svg>
                   )
                 },
-              ].map(({ id, label, sub, color, bg, border, icon }) => (
+                {
+                  id: 'contract', label: 'Check a contract', sub: 'Tenancy, employment, T&Cs',
+                  color: '#7c3aed', bg: 'rgba(124,58,237,0.07)', border: 'rgba(124,58,237,0.3)',
+                  gridColumn: '1 / -1',
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <rect x="4" y="2" width="16" height="20" rx="2.5" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" strokeWidth="1.8"/>
+                      <path d="M8 7h8M8 11h8M8 15h5" stroke="#7c3aed" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                  )
+                },
+              ].map(({ id, label, sub, color, bg, border, icon, gridColumn }) => (
                <motion.button
                  key={id}
                  onClick={() => { if (navigator.vibrate) navigator.vibrate(12); engineRef.current && engineRef.current.open(id); }}
@@ -370,7 +381,10 @@ export default function Family51Page() {
                       border: `1.5px solid ${border}`,
                       background: bg,
                       WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                      display: 'flex', flexDirection: 'column', gap: 12, minHeight: 124,
+                      display: 'flex', flexDirection: gridColumn ? 'row' : 'column',
+                      alignItems: gridColumn ? 'center' : 'flex-start',
+                      gap: 12, minHeight: gridColumn ? 'auto' : 124,
+                      gridColumn: gridColumn || 'auto',
                   }}
                 >
                   <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 1px 4px ${color}25` }}>

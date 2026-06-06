@@ -4,6 +4,7 @@ import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
 import Family51ScamChecker from '@/components/family51/Family51ScamChecker';
+import SortedContractChecker from '@/components/family51/SortedContractChecker';
 import SortedJourneyBar from '@/components/family51/SortedJourneyBar';
 import SortedShareMoment from '@/components/family51/SortedShareMoment';
 
@@ -58,7 +59,8 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
     letter:   { color: '#f5a623', bg: 'rgba(245,166,35,0.08)',  border: 'rgba(245,166,35,0.35)',  label: 'DECODE'  },
     scam:     { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.35)',   label: 'SCAM?'   },
     reply:    { color: '#2563eb', bg: 'rgba(37,99,235,0.08)',   border: 'rgba(37,99,235,0.35)',   label: 'REPLY'   },
-    conflict: { color: '#059669', bg: 'rgba(5,150,105,0.08)',   border: 'rgba(5,150,105,0.35)',   label: 'DISPUTE' },
+    conflict: { color: '#059669', bg: 'rgba(5,150,105,0.08)',   border: 'rgba(5,150,105,0.35)',   label: 'DISPUTE'  },
+    contract: { color: '#7c3aed', bg: 'rgba(124,58,237,0.08)', border: 'rgba(124,58,237,0.35)',  label: 'CONTRACT' },
   };
 
   const [activeTool, setActiveTool] = useState(null);
@@ -183,6 +185,11 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         )}
         {activeTool === 'scam' && (
           <Family51ScamChecker
+            accentColor={tc.color}
+          />
+        )}
+        {activeTool === 'contract' && (
+          <SortedContractChecker
             accentColor={tc.color}
           />
         )}
