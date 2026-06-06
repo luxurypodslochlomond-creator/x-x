@@ -167,22 +167,27 @@ export default function Family51Page() {
       'Asia/Taipei': { country: 'Taiwan', flag: '🇹🇼', code: 'TW', jurisdiction: 'Taiwanese law · Consumer Protection Commission' },
     };
 
-    // Scotland detection — same timezone as England but distinct legal system
-    const uiLang = navigator.language || navigator.languages?.[0] || '';
-    const isScottish = uiLang.toLowerCase().includes('gd') || 
-      (typeof Intl !== 'undefined' && Intl.DateTimeFormat().resolvedOptions().timeZone === 'Europe/London' &&
-       (navigator.languages || []).some(l => l.toLowerCase().startsWith('gd')));
-    
     let detected = geoMap[tz] || { country: 'United Kingdom', code: 'GB', jurisdiction: 'UK law' };
-    
-    // Override for Scotland
-    if (detected.code === 'GB' && isScottish) {
-      detected = { country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' };
-    }
     
     // Remove flags from all entries
     delete detected.flag;
     setSelectedLocation(detected);
+
+    // Scotland: try IP-based region detection after initial render
+    if (detected.code === 'GB') {
+      fetch('https://ipapi.co/json/')
+        .then(r => r.json())
+        .then(data => {
+          const region = (data.region || '').toLowerCase();
+          const city = (data.city || '').toLowerCase();
+          const scottishRegions = ['scotland', 'highland', 'grampian', 'tayside', 'fife', 'lothian', 'strathclyde', 'borders', 'dumfries', 'argyll', 'orkney', 'shetland', 'western isles', 'edinburgh', 'glasgow', 'aberdeen', 'dundee', 'inverness', 'stirling', 'perth'];
+          const isScottish = scottishRegions.some(r => region.includes(r) || city.includes(r));
+          if (isScottish) {
+            setSelectedLocation({ country: 'Scotland', code: 'SCT', jurisdiction: 'Scots law · Scottish Legal Aid Board · Citizens Advice Scotland' });
+          }
+        })
+        .catch(() => {}); // silent fail — stays as UK law
+    }
   }, []);
 
   return (
