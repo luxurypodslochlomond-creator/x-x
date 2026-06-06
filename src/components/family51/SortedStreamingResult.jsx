@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedHelpLinks from './SortedHelpLinks';
+import SortedNextFiveMinutes from './SortedNextFiveMinutes';
+import SortedPushNudge from './SortedPushNudge';
 
 const SEVERITY_CONFIG = {
   'NOT URGENT':      { color: '#22c55e', bg: 'rgba(34,197,94,0.07)',   border: 'rgba(34,197,94,0.25)',  emoji: '✓' },
@@ -177,6 +179,9 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </motion.div>
       )}
 
+      {/* ── NEXT 5 MINUTES — emotional scaffolding ── */}
+      <SortedNextFiveMinutes severity={result.severity} accentColor={accentColor} />
+
       {/* ── IF YOU DON'T ACT — always visible for urgent letters ── */}
       {result.if_you_ignore_this && (
         <motion.div
@@ -301,6 +306,9 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           NEW LETTER
         </button>
       </div>
+
+      {/* ── PUSH NOTIFICATION NUDGE — one-time, gentle, dismissable ── */}
+      <SortedPushNudge deadline={result.key_deadline} />
 
       {/* ── ALWAYS-VISIBLE GEO-AWARE TRUSTED HELP LINKS ── */}
       <SortedHelpLinks geo={geo} accentColor="#22c55e" />
