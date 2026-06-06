@@ -402,17 +402,45 @@ export default function Family51Page() {
               ))}
             </motion.div>
 
-            {/* TRUST STRIP */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ marginBottom: 20 }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 10 }}>
-                <TrustPill text={selectedLocation ? `${selectedLocation.flag} ${selectedLocation.jurisdiction}` : '🇬🇧 UK law'} />
-                <TrustPill text="10 free uses" />
-                <TrustPill text="Works in every country" />
+            {/* JURISDICTION DETECTOR — premium global moment */}
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ marginBottom: 20, borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
+              {/* Top: detected jurisdiction */}
+              <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(245,166,35,0.12)' }}>
+                <div style={{ fontSize: 26, lineHeight: 1, flexShrink: 0 }}>
+                  {selectedLocation ? selectedLocation.flag : '🌍'}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.4)', marginBottom: 2 }}>DETECTED — YOUR JURISDICTION</div>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                    {selectedLocation ? selectedLocation.jurisdiction : 'Detecting…'}
+                  </div>
+                  <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', marginTop: 1 }}>
+                    {selectedLocation ? selectedLocation.country : ''}
+                    {selectedLocation && <span style={{ color: '#f5a623', fontWeight: 700 }}> · advice calibrated to your laws</span>}
+                  </div>
+                </div>
+                <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16,185,129,0.6)', animation: 'pulse 2s infinite' }} />
+                  <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: '#10b981' }}>LIVE</span>
+                </div>
               </div>
-              <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.38)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
-                Not legal advice — we explain what things mean and suggest next steps. For serious matters, always consult a solicitor, Citizens Advice (UK), Legal Aid, or your local consumer authority. We'll tell you exactly who to contact for your situation.
-              </p>
+              {/* Bottom: what that means */}
+              <div style={{ padding: '10px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                  <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>⚖️</span>
+                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>Advice, deadlines and authorities are specific to <strong style={{ color: 'rgba(26,18,8,0.8)' }}>{selectedLocation ? selectedLocation.country : 'your country'}</strong> — not generic.</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                  <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>🏛️</span>
+                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>We'll name the exact body to contact — Citizens Advice, Legal Aid, consumer ombudsman, court — wherever you are.</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                  <span style={{ fontSize: 12, flexShrink: 0, marginTop: 1 }}>📋</span>
+                  <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.6)', lineHeight: 1.5 }}>Not legal advice — we explain and guide. For anything serious, we'll tell you exactly who to call next.</span>
+                </div>
+              </div>
             </motion.div>
+            <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }`}</style>
 
             {/* HOW IT WORKS — always visible */}
             <div id="sorted-upgrade" style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
