@@ -151,7 +151,7 @@ export default function WalshyPitch() {
             </p>
             <div className="bg-gray-50 rounded p-4 mt-2">
               <p className="text-sm text-gray-600">
-                <strong>SEIS note:</strong> If UF51 Commercial Ltd qualifies (worth checking with an accountant), Chris could claim up to 50% tax relief — making the real cost closer to £10k. No promises, but it's worth exploring.
+                <strong>SEIS note:</strong> If UF51 Commercial Ltd qualifies (worth checking with an accountant), Chris could claim up to 50% income tax relief — reducing the net investment to around £10k. No promises on eligibility, but it's worth a conversation with your accountant.
               </p>
             </div>
           </div>
@@ -201,14 +201,42 @@ export default function WalshyPitch() {
           </div>
         </div>
 
+        {/* WHY NOW */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold mb-4 text-gray-800">Why now</h2>
+          <p className="text-gray-700 text-sm leading-relaxed mb-4">
+            AI capability has moved faster in the last two years than the previous decade. The tools available to a solo builder today are the same ones that cost enterprise teams millions eighteen months ago. That's not hype — it's why UF51 exists at all.
+          </p>
+          <p className="text-gray-700 text-sm leading-relaxed mb-4">
+            The window to get into markets like AI-assisted legal access, animal wellness tech, and verified ESG data is right now — before the big players notice, before the category gets crowded, and while a small team can still move faster than anyone else.
+          </p>
+          <div className="space-y-3 mt-4">
+            <div className="flex items-start gap-3">
+              <span className="text-amber-600 font-bold text-sm mt-0.5">🐾</span>
+              <p className="text-sm text-gray-600">The UK pet care market is worth <strong>£7.9 billion</strong> and growing. Pet anxiety products alone are a fast-expanding segment — driven by post-pandemic separation issues and a generation of owners who treat pets as family.</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-blue-600 font-bold text-sm mt-0.5">⚖️</span>
+              <p className="text-sm text-gray-600">The UK legal tech market is projected to reach <strong>£25 billion by 2030</strong>. The access-to-justice gap — real people who can't afford a solicitor — is enormous and largely unserved by technology. SORTED sits directly in that gap.</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-green-600 font-bold text-sm mt-0.5">🌍</span>
+              <p className="text-sm text-gray-600">ESG data and reporting is now a legal requirement for large UK companies. The market for verified environmental impact data is emerging fast — and almost nobody has community-scale, AI-verified ground truth. Earth51 does.</p>
+            </div>
+          </div>
+        </div>
+
         {/* MEDIA ANGLE */}
         <div className="mb-10">
           <h2 className="text-xl font-bold mb-4 text-gray-800">The story — and why it matters to Chris</h2>
           <p className="text-gray-700 text-sm leading-relaxed mb-3">
             This is a real story. Someone who nearly didn't make it, who rebuilt everything from scratch, and built AI tools from a laptop in Scotland that help people fight the system, calm their anxious pets, and clean up their communities.
           </p>
+          <p className="text-gray-700 text-sm leading-relaxed mb-3">
+            That story hasn't been told yet. For someone in media — Chris knows what an authentic, unspun story is worth. You can't manufacture that origin. We haven't even started telling it.
+          </p>
           <p className="text-gray-700 text-sm leading-relaxed">
-            That story hasn't been told yet. For someone in media — Chris knows what an authentic, unspun story is worth. You can't buy that kind of origin. We haven't even started telling it.
+            And for someone looking at what comes after a long career in media — this is the kind of thing you look back on and feel good about. Not just financially. Actually good.
           </p>
         </div>
 
