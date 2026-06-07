@@ -1,17 +1,39 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-
-// Simple clean investor brief — Chris Walsh & Graeme
-// No fluff. No fake metrics. Just honest.
+import { ChevronDown, ChevronUp, Download } from 'lucide-react';
 
 export default function WalshyPitch() {
   const [showStructure, setShowStructure] = useState(false);
 
+  const handleSave = () => {
+    window.print();
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900" style={{ fontFamily: 'Georgia, serif' }}>
-      
-      {/* HEADER */}
+
+      {/* SAVE BUTTON — admin only, hidden on print */}
+      <div className="no-print fixed top-4 right-4 z-50">
+        <button
+          onClick={handleSave}
+          className="flex items-center gap-2 bg-gray-900 text-white text-sm px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700 transition-colors"
+          style={{ fontFamily: 'system-ui, sans-serif' }}
+        >
+          <Download className="w-4 h-4" />
+          Save / Print PDF
+        </button>
+      </div>
+
+      <style>{`
+        @media print {
+          .no-print { display: none !important; }
+          body { margin: 0; }
+          @page { margin: 1.5cm; }
+        }
+      `}</style>
+
       <div className="max-w-2xl mx-auto px-8 pt-16 pb-16">
+
+        {/* HEADER */}
         <div className="mb-2">
           <span className="text-xs font-mono text-gray-400 tracking-widest uppercase">Private & Confidential — June 2026</span>
         </div>
@@ -24,17 +46,17 @@ export default function WalshyPitch() {
         {/* THE HUMAN BIT */}
         <div className="mb-10">
           <p className="text-gray-700 leading-relaxed mb-4">
-            Brian Hughes built this. Not a startup founder. Not a VC-backed exec. A person who lost everything, rebuilt himself through tech and music, and decided to spend that energy helping people navigate a world that wasn't designed for them.
+            Brian Hughes built this. Not a startup founder. Not a VC-backed exec. Someone who went through the worst of it — lost everything, rebuilt himself through music and tech — and decided to use what he'd learned to help people who were going through the same.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            What exists today is a live platform — real tools, real users, real code — covering three areas that matter: <strong>animal welfare, environmental action, and access to justice</strong>. Built on zero funding. With a lot of heart.
+            What exists today is working software covering three areas that matter: <strong>animal welfare, environmental action, and access to justice</strong>. Built on nothing. No investment. No team. Just someone who wouldn't stop.
           </p>
         </div>
 
         {/* THE 3 PRODUCTS */}
         <div className="mb-10">
-          <h2 className="text-xl font-bold mb-6 text-gray-800">The Products</h2>
-          
+          <h2 className="text-xl font-bold mb-6 text-gray-800">The Three Products</h2>
+
           {/* PetSounds51 */}
           <div className="border border-amber-200 rounded-lg p-6 mb-4 bg-amber-50">
             <div className="flex items-center gap-3 mb-3">
@@ -44,12 +66,15 @@ export default function WalshyPitch() {
                 <p className="text-sm text-amber-700">Sound therapy for anxious animals</p>
               </div>
             </div>
-            <p className="text-gray-700 text-sm leading-relaxed mb-3">
-              Peer-reviewed acoustic protocols for separation anxiety, firework fear, and vet stress in dogs, cats and horses. Free to try. £9.99/month or £29.99/year for full access. No vet visit. Works from a phone.
+            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              Acoustic protocols for dogs, cats and horses — separation anxiety, fireworks, vet visits. Based on peer-reviewed research. Works from a phone. No prescription. No vet appointment.
             </p>
-            <p className="text-sm text-gray-500">
-              <strong>Why it works commercially:</strong> 13 million pet owners in the UK. Vet bills for anxiety-related behaviour average £400+. We're £10/month.
-            </p>
+            <div className="space-y-1">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">What it needs next</p>
+              <p className="text-sm text-gray-600">→ A proper vet partnership to legitimise it — one letter of endorsement changes everything</p>
+              <p className="text-sm text-gray-600">→ A pet insurance tie-in — they'd pay us, not users, to reduce anxiety-related claims</p>
+              <p className="text-sm text-gray-600">→ £9.99/month or £29.99/year — 1,000 subscribers = £120k/year. We're not there yet but the product works</p>
+            </div>
           </div>
 
           {/* SORTED */}
@@ -61,54 +86,80 @@ export default function WalshyPitch() {
                 <p className="text-sm text-blue-700">Plain English for scary letters</p>
               </div>
             </div>
-            <p className="text-gray-700 text-sm leading-relaxed mb-3">
-              Upload any legal notice, debt letter, council demand, or HMRC correspondence. Get plain English back in seconds — what it means, what to do, what your rights are. Any language. Nothing stored.
+            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              You get a letter from HMRC, a bailiff, a council, a landlord. You don't know what it means or what to do. SORTED reads it and tells you — in plain English, in your language, in seconds. Nothing stored. Completely private.
             </p>
-            <p className="text-sm text-gray-500">
-              <strong>Why it works commercially:</strong> Legal aid has been gutted. 60% of UK adults receive a letter they don't fully understand each year. Citizens Advice queues are months long. We're instant.
-            </p>
+            <div className="space-y-1">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">What it needs next</p>
+              <p className="text-sm text-gray-600">→ A B2B version — housing associations, charities, law firms pay us to white-label it for their clients</p>
+              <p className="text-sm text-gray-600">→ A proper media push — this is a story that writes itself, and Chris is in the right world to help tell it</p>
+              <p className="text-sm text-gray-600">→ Legal aid has been gutted. Citizens Advice can't cope. We're instant and free at the basic level</p>
+            </div>
           </div>
 
-          {/* Earth51 / Litter */}
+          {/* Earth51 */}
           <div className="border border-green-200 rounded-lg p-6 mb-4 bg-green-50">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">🌍</span>
               <div>
                 <h3 className="font-bold text-gray-900">Earth51 / Litter Picking</h3>
-                <p className="text-sm text-green-700">Environmental action with AI verification</p>
+                <p className="text-sm text-green-700">Verified environmental action</p>
               </div>
             </div>
-            <p className="text-gray-700 text-sm leading-relaxed mb-3">
-              AI-verified litter picks logged on a public ledger. Real environmental data. Corporate ESG partnerships in development. Community-led. Built for councils, schools, and sustainability-focused businesses.
+            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              People log litter picks. AI verifies the photos. It all goes on a public ledger — real, verified environmental data that councils and corporates can actually use for ESG reporting.
             </p>
-            <p className="text-sm text-gray-500">
-              <strong>Why it works commercially:</strong> ESG reporting is now mandatory for large UK companies. Verified environmental data has real B2B value.
-            </p>
-          </div>
-        </div>
-
-        {/* THE ASK */}
-        <div className="mb-10">
-          <h2 className="text-xl font-bold mb-4 text-gray-800">The Invitation</h2>
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-            <p className="text-gray-700 leading-relaxed mb-4">
-              We're raising <strong>£20,000</strong> to fund 6 months of focused development and marketing across all three products.
-            </p>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              In return, we're offering <strong>15% equity in UF51 Commercial Ltd</strong> — a new holding company that sits above PetSounds51, SORTED, and Earth51. One stake. Three products. One relationship.
-            </p>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              <strong>UF51 CIC</strong> (the community interest company) retains 10% of commercial revenue as a community dividend — keeping the mission honest and the healing tools free for those who need them.
-            </p>
-            <div className="bg-white border border-gray-100 rounded p-4 mt-4">
-              <p className="text-sm text-gray-600"><strong>Potential SEIS relief:</strong> As a new UK Ltd, this investment may qualify for SEIS — meaning up to 50% tax relief on the £20k. Your real cost could be closer to £10k. Worth confirming with your accountant.</p>
+            <div className="space-y-1">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">What it needs next</p>
+              <p className="text-sm text-gray-600">→ One council pilot — paid, verified, reportable data they can put in their annual report</p>
+              <p className="text-sm text-gray-600">→ Corporate ESG tie-in — companies need verified environmental data and are paying for it</p>
+              <p className="text-sm text-gray-600">→ Schools angle is massive — kids, litter picks, certificates, real-world impact</p>
             </div>
           </div>
         </div>
 
-        {/* STRUCTURE - collapsible */}
+        {/* WHAT £20K ACTUALLY DOES */}
         <div className="mb-10">
-          <button 
+          <h2 className="text-xl font-bold mb-4 text-gray-800">What £20k actually does</h2>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Honestly? It buys roughly <strong>3 months of oxygen</strong>. Not forever. Not a full buildout. But enough time to stop surviving and start growing — to get the right conversations done, the right partnerships started, the right people seeing the products.
+            </p>
+            <ul className="space-y-2 text-sm text-gray-700">
+              <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">→</span> Platform costs, AI credits, hosting — the engine kept running</li>
+              <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">→</span> One focused vet partnership approach for PetSounds51</li>
+              <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">→</span> SORTED B2B conversations started — housing associations, charities</li>
+              <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">→</span> Earth51 council pilot scoped and proposed</li>
+              <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">→</span> Legal setup of UF51 Commercial Ltd so the investment is clean</li>
+              <li className="flex items-start gap-2"><span className="text-green-600 mt-0.5">→</span> Brian not choosing between the build and the electricity bill</li>
+            </ul>
+            <p className="text-gray-500 text-sm mt-4 italic">
+              That last one isn't a throwaway line. It's the honest reality of where we are.
+            </p>
+          </div>
+        </div>
+
+        {/* THE INVITATION */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold mb-4 text-gray-800">The Invitation</h2>
+          <div className="border border-gray-200 rounded-lg p-6">
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We're offering <strong>15% equity in UF51 Commercial Ltd</strong> for £20,000. That's one stake across all three products. One relationship. One conversation.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              <strong>UF51 CIC</strong> keeps 10% of commercial revenue as a community dividend — so the healing tools stay free for people who can't pay. That's non-negotiable and we're proud of it.
+            </p>
+            <div className="bg-gray-50 rounded p-4 mt-2">
+              <p className="text-sm text-gray-600">
+                <strong>SEIS note:</strong> If UF51 Commercial Ltd qualifies (worth checking with an accountant), Chris could claim up to 50% tax relief — making the real cost closer to £10k. No promises, but it's worth exploring.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* STRUCTURE */}
+        <div className="mb-10">
+          <button
             onClick={() => setShowStructure(!showStructure)}
             className="flex items-center gap-2 text-gray-500 text-sm hover:text-gray-700 transition-colors"
           >
@@ -128,14 +179,14 @@ export default function WalshyPitch() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-700">Graeme (Connector / Advisor)</span>
-                  <span className="font-bold">2–3% advisory shares</span>
+                  <span className="font-bold">2–3% advisory</span>
                 </div>
                 <div className="flex justify-between border-t border-gray-200 pt-2 mt-2">
                   <span className="text-gray-700">UF51 CIC (community dividend)</span>
                   <span className="font-bold">10% of revenue</span>
                 </div>
               </div>
-              <p className="text-xs text-gray-400 mt-4">Numbers are a starting point for conversation — not set in stone.</p>
+              <p className="text-xs text-gray-400 mt-4">A starting point for conversation — not set in stone.</p>
             </div>
           )}
         </div>
@@ -145,38 +196,27 @@ export default function WalshyPitch() {
           <div className="bg-gray-900 text-white rounded-lg p-6">
             <h3 className="font-bold mb-2">A note on Graeme</h3>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Graeme made this conversation happen. That means something. We'd want to look after him properly — whether that's a small advisory stake, a finder's arrangement, or something else that feels right to everyone. That conversation is separate but it will happen.
+              Graeme made this happen. That's the whole reason we're talking. We'd look after him properly — small advisory stake, finder's arrangement, or whatever feels right. That conversation is separate but it absolutely will happen. We look after people who show up for us.
             </p>
           </div>
         </div>
 
-        {/* WHAT £20K DOES */}
+        {/* MEDIA ANGLE */}
         <div className="mb-10">
-          <h2 className="text-xl font-bold mb-4 text-gray-800">What £20k does</h2>
-          <ul className="space-y-2 text-gray-700 text-sm">
-            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> 6 months of focused product development (PetSounds51 vet partnerships, SORTED B2B, Earth51 council deals)</li>
-            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> A proper go-to-market push — content, PR, the media angle Chris understands better than most</li>
-            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> Legal setup of UF51 Commercial Ltd (accountant, Companies House, SEIS application)</li>
-            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> Keeps Brian building rather than surviving</li>
-          </ul>
-        </div>
-
-        {/* MEDIA ANGLE - for Chris specifically */}
-        <div className="mb-10">
-          <h2 className="text-xl font-bold mb-4 text-gray-800">The media angle</h2>
+          <h2 className="text-xl font-bold mb-4 text-gray-800">The story — and why it matters to Chris</h2>
           <p className="text-gray-700 text-sm leading-relaxed mb-3">
-            This is a story. A real one. Someone who lost everything, rebuilt himself, and built an AI platform that helps people decode the legal system, helps pets stay calm, and gets communities cleaning up the planet. From a laptop. In Scotland.
+            This is a real story. Someone who nearly didn't make it, who rebuilt everything from scratch, and built AI tools from a laptop in Scotland that help people fight the system, calm their anxious pets, and clean up their communities.
           </p>
           <p className="text-gray-700 text-sm leading-relaxed">
-            That's not a press release. That's what happened. For someone who works in media — Chris knows that a genuine story has a value that no marketing budget can buy. And we haven't told it yet.
+            That story hasn't been told yet. For someone in media — Chris knows what an authentic, unspun story is worth. You can't buy that kind of origin. We haven't even started telling it.
           </p>
         </div>
 
-        {/* HONEST BIT */}
+        {/* HONEST QUOTE */}
         <div className="mb-12">
           <div className="border-l-4 border-gray-300 pl-6">
             <p className="text-gray-600 italic leading-relaxed text-sm">
-              "We're early. We don't have massive user numbers to show you. What we have is working software, a real mission, and a founder who has already survived worse than a startup failing. This isn't a pitch. It's an honest conversation about whether we want to build this together."
+              "We're early. No big user numbers. No polished deck. What we have is working software, a genuine mission, and a founder who's already been through worse than a startup failing. This isn't a pitch. It's an honest conversation about whether you want to build something real with us."
             </p>
             <p className="text-gray-500 text-xs mt-3">— Brian Hughes, Founder, UF51</p>
           </div>
@@ -186,8 +226,8 @@ export default function WalshyPitch() {
         <div className="border-t border-gray-200 pt-6 text-center">
           <p className="text-xs text-gray-400">universalfrequency51.com · Private document — please don't share without permission</p>
         </div>
-      </div>
 
+      </div>
     </div>
   );
 }
