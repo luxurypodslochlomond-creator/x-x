@@ -181,6 +181,51 @@ export default function ForChris() {
           </div>
         </div>
 
+        <div className="rule-dark" style={{ margin: '3rem 0' }} />
+
+        {/* THE OPPORTUNITY */}
+        <p className="label" style={{ marginBottom: '1.25rem' }}>What we build together</p>
+        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
+          The tech is built. The products work. What's missing is the commercial engine — and that's where the right partner changes everything. Here's what opens up with the right relationships:
+        </p>
+
+        <div style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
+          <div style={{ background: '#fef3c7', border: '1px solid #d97706', padding: '1rem 1.25rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#92400e', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>PET INSURANCE PARTNERSHIP</p>
+            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#78350f', margin: 0 }}>
+              One meeting with Pets at Home, Animal Friends, or Tesco Bank Pet Insurance. They're paying out on anxiety claims daily. PetSounds51 reduces those claims. That's a revenue share deal or white-label license. £500k-£2m partnership range.
+            </p>
+          </div>
+
+          <div style={{ background: '#dbeafe', border: '1px solid #2563eb', padding: '1rem 1.25rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#1e40af', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>FINANCIAL SERVICES COMPLIANCE</p>
+            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#1e3a8a', margin: 0 }}>
+              FCA Consumer Duty requires banks to support vulnerable customers. One conversation with HSBC, Lloyds, or NatWest's compliance team. SORTED becomes their mandated tool for customer communications. £100k-£500k annual contracts per bank.
+            </p>
+          </div>
+
+          <div style={{ background: '#dcfce7', border: '1px solid #16a34a', padding: '1rem 1.25rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#166534', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>ESG VERIFICATION PLATFORM</p>
+            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#14532d', margin: 0 }}>
+              Every FTSE 100 company needs auditable ESG data. Earth51 provides ground-truth verification. One intro to a purpose-led brand (Patagonia, Lush, Co-op) or a corporate CSR team. £50k-£250k per brand partnership.
+            </p>
+          </div>
+
+          <div style={{ background: '#f3e8ff', border: '1px solid #9333ea', padding: '1rem 1.25rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6b21a8', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>WHITE-LABEL EXPANSION</p>
+            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#581c87', margin: 0 }}>
+              All three products can be licensed to other markets. PetSounds51 in the US (huge pet spend). SORTED for legal aid orgs globally. Earth51 for UN SDG reporting. One licensing deal = £1m+ revenue.
+            </p>
+          </div>
+        </div>
+
+        <div className="callout" style={{ background: '#f0fdf4', border: '2px solid #16a34a' }}>
+          <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#166534', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>THE REAL OPPORTUNITY</p>
+          <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#14532d', margin: 0 }}>
+            This isn't about building more tech. It's about opening doors that are already there. The products work. The markets are proven. What's needed is someone who knows which conversations to have, which meetings to book, and how to structure deals that make everyone money. That's the gap. That's where you come in.
+          </p>
+        </div>
+
         <div className="rule" style={{ marginTop: '2.5rem' }} />
 
         {/* THE OFFER */}
