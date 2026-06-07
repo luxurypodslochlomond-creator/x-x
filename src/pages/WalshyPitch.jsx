@@ -117,12 +117,12 @@ export default function ForChris() {
           Three products solving<br />real problems.
         </h1>
         <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#6b7280', lineHeight: 1.6, marginBottom: '2.5rem' }}>
-          All live. All working. One commercial opportunity.
+          All built. All ready. One commercial opportunity.
         </p>
 
         {/* CONTEXT */}
         <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1rem' }}>
-          Most "tech opportunities" are ideas dressed up as products. This isn't that. The platform is built. The products are live and being used. What's missing is a commercial brain who understands how brands spend money, why they do it, and what actually moves the needle. That's the gap this is looking to fill.
+          Most "tech opportunities" are ideas dressed up as products. This isn't that. The platform is built. The products are real and ready to be taken to market. What's missing is a commercial brain who understands how brands spend money, why they do it, and what actually moves the needle. That's the gap this is looking to fill.
         </p>
         <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#6b7280', marginBottom: '0' }}>
           Worth saying — PetSounds51 is built on peer-reviewed acoustic research. SORTED uses real language model architecture, not a chatbot wrapper. Earth51's verification uses computer vision. These aren't buzzwords. The science works, which is why the products work. Spend five minutes with any of them and that's obvious.
@@ -162,7 +162,7 @@ export default function ForChris() {
               SORTED reads any letter — HMRC, bailiffs, courts, councils — and explains it in plain English. Any language. In seconds. Nothing stored. Legal aid has been decimated. Citizens Advice is overwhelmed. Nobody has built for the person on the other end of the letter.
             </p>
             <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> FCA Consumer Duty requires banks to demonstrably support vulnerable customers. SORTED is a compliance solution, not just a CSR story. HSBC, Lloyds, utilities, housing associations — organisations with millions of customers who get scary letters and can't afford a solicitor. You've sat in those rooms. You know how that conversation goes.
+              <strong style={{ color: '#374151' }}>Commercial angle:</strong> FCA Consumer Duty requires banks to demonstrably support vulnerable customers. SORTED is a compliance solution, not just a CSR story. HSBC, Lloyds, utilities, housing associations — organisations with millions of customers who get scary letters and can't afford a solicitor. That's a procurement conversation, not a charity pitch.
             </p>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default function ForChris() {
               Community litter picks, AI-verified photos, tamper-proof public ledger. ESG reporting is now a legal requirement for large UK companies and they need verified ground truth — not spreadsheets of good intentions.
             </p>
             <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> Purpose-led brand campaigns are now expected to be measurable at board level, not just by a comms team. Earth51 provides the auditable ground truth that makes those campaigns credible. The brands you've worked with for two decades need exactly this.
+              <strong style={{ color: '#374151' }}>Commercial angle:</strong> Purpose-led brand campaigns are now expected to be measurable at board level, not just by a comms team. Earth51 provides the auditable ground truth that makes those campaigns credible. Any brand being asked to evidence ESG impact needs exactly this.
             </p>
           </div>
         </div>
@@ -191,7 +191,7 @@ export default function ForChris() {
         <div className="number-big" style={{ marginBottom: '1.25rem' }}>17% for £20,000.</div>
 
         <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.8, color: '#374151', marginBottom: '0.75rem' }}>
-          One stake across all three products. Graeme Dey — who made the introduction — holds a small stake already, so this isn't a cold ask from nowhere. UF51 CIC retains 10% of commercial revenue by legal structure, keeping the core tools free for the people who need them most.
+          One stake across all three products. To be transparent on the cap table: Graeme holds 3% for making the introduction, founder equity sits alongside that, and UF51 CIC retains 10% of commercial revenue by legal structure — keeping the core tools free for the people who need them most.
         </p>
 
         <div className="seis-box">
@@ -206,7 +206,7 @@ export default function ForChris() {
         <div className="callout">
           <p className="label" style={{ marginBottom: '0.75rem' }}>Why now makes sense</p>
           <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151' }}>
-            A career at the top of media investment builds something that's hard to replicate — a complete picture of how commercial decisions get made, what brands actually need, and who to talk to. This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that's already moving.
+            You've spent your career understanding how commercial decisions actually get made — what brands need, what they'll pay for, and who's worth talking to. This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that has legs.
           </p>
         </div>
 
