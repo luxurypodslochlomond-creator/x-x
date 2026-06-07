@@ -97,11 +97,18 @@ export default function WalshyPitch() {
         @media (max-width: 640px) {
           .tight-grid {
             grid-template-columns: 1fr !important;
-            gap: 1rem !important;
+            gap: 1.2rem !important;
           }
           .product-box {
             border-bottom: 1px solid #f0ede8 !important;
           }
+          body {
+            font-size: 15px !important;
+            line-height: 1.7 !important;
+          }
+          h1 { font-size: 28px !important; }
+          h2 { font-size: 18px !important; }
+          h3 { font-size: 16px !important; }
         }
       `}</style>
 
@@ -120,7 +127,7 @@ export default function WalshyPitch() {
         </button>
       </div>
 
-      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem 1.5rem 2.5rem', fontSize: '13px' }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem 1.5rem 2.5rem', fontSize: '14px', lineHeight: '1.6' }}>
 
         {/* HEADER */}
         <div>
@@ -178,16 +185,16 @@ export default function WalshyPitch() {
 
           {/* THE REAL BIT */}
           <p className="label" style={{ marginBottom: '0.4rem' }}>What's really happening</p>
-          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.6rem' }}>
+          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.6rem' }}>
             Tech is done. Products work. We could spend years building but we're already past that. What we need is someone who knows how big organizations actually move — someone with relationships, who's done this before, who can open the right doors and structure deals that work.
           </p>
 
-          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.6rem' }}>
+          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.6rem' }}>
             One pet insurer conversation changes PetSounds51. One bank compliance team changes SORTED. One brand's ESG budget changes Earth51. We've got the products. We just need someone who knows how to have those conversations like they matter.
           </p>
 
           <div className="callout">
-            <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.7, color: '#374151', margin: 0 }}>
+            <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.7, color: '#1f2937', margin: 0 }}>
               That's not weakness. That's clarity. Build beautiful things. Find people who know how to scale them. Both matter.
             </p>
           </div>
@@ -197,7 +204,7 @@ export default function WalshyPitch() {
           {/* THE OFFER */}
           <p className="label" style={{ marginBottom: '0.3rem' }}>The offer</p>
           <div className="number-big">17% for £20k.</div>
-          <p className="p-body" style={{ fontSize: '0.7rem', lineHeight: 1.6, color: '#374151', marginBottom: '0.3rem' }}>
+          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.6, color: '#1f2937', marginBottom: '0.3rem' }}>
             One stake. All three products. Transparent: Graeme 3%, founder alongside, UF51 CIC holds 10% of revenue — keeping core tools free.
           </p>
           <div className="seis-box">
@@ -210,10 +217,10 @@ export default function WalshyPitch() {
         {/* FOOTER */}
         <div className="rule" style={{ margin: '1rem 0 0.75rem' }} />
         <div>
-          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.5rem' }}>
+          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.5rem' }}>
             Early enough that the right involvement actually shapes what this becomes. Not consultancy. Not advisory. A real stake in something that works.
           </p>
-          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.75rem' }}>
+          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.75rem' }}>
             Keen to explore if there's a fit.
           </p>
           <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.55rem', color: '#9ca3af', letterSpacing: '0.06em' }}>
