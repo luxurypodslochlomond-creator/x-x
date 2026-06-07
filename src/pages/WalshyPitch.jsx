@@ -110,7 +110,7 @@ export default function WalshyPitch() {
         </button>
       </div>
 
-      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2.5rem 1.5rem', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', fontSize: '13px' }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem 1.5rem 1.5rem', fontSize: '13px' }}>
 
         {/* HEADER */}
         <div>
@@ -198,11 +198,12 @@ export default function WalshyPitch() {
         </div>
 
         {/* FOOTER */}
-        <div style={{ borderTop: '1px solid #f0ede8', paddingTop: '0.75rem' }}>
-          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.6rem' }}>
+        <div className="rule" style={{ margin: '1rem 0 0.75rem' }} />
+        <div>
+          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.5rem' }}>
             Early enough that the right involvement actually shapes what this becomes. Not consultancy. Not advisory. A real stake in something that works.
           </p>
-          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.8rem' }}>
+          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.75, color: '#374151', marginBottom: '0.75rem' }}>
             Keen to explore if there's a fit.
           </p>
           <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.55rem', color: '#9ca3af', letterSpacing: '0.06em' }}>
