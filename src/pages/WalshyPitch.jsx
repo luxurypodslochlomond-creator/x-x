@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ForChris() {
+export default function WalshyPitch() {
   return (
     <div className="min-h-screen" style={{ background: '#ffffff', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1a1a1a' }}>
 
@@ -88,7 +88,8 @@ export default function ForChris() {
 
         @media print {
           .no-print { display: none !important; }
-          @page { margin: 1.8cm; size: A4; }
+          @page { margin: 1.5cm; size: A4; }
+          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}</style>
 
@@ -103,29 +104,29 @@ export default function ForChris() {
             color: '#9ca3af', background: 'white', cursor: 'pointer',
           }}
         >
-          Save as PDF
+          Save PDF
         </button>
       </div>
 
-      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '4.5rem 2rem 6rem' }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '3.5rem 2rem 4rem' }}>
 
         {/* META */}
-        <p className="label" style={{ marginBottom: '2.5rem' }}>Private · June 2026</p>
+        <p className="label" style={{ marginBottom: '2rem' }}>Private · June 2026</p>
 
         {/* HEADLINE */}
-        <h1 className="p-display" style={{ fontSize: 'clamp(2.2rem, 7vw, 3rem)', fontWeight: 700, lineHeight: 1.15, marginBottom: '1rem', color: '#1a1a1a' }}>
-          Three products solving<br />real problems.
+        <h1 className="p-display" style={{ fontSize: 'clamp(2rem, 7vw, 2.8rem)', fontWeight: 700, lineHeight: 1.15, marginBottom: '0.75rem', color: '#1a1a1a' }}>
+          Three products.<br/>All built. Real opportunity.
         </h1>
-        <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#6b7280', lineHeight: 1.6, marginBottom: '2.5rem' }}>
-          All built. All ready. One commercial opportunity.
+        <p className="p-display" style={{ fontSize: '1.05rem', fontStyle: 'italic', color: '#6b7280', lineHeight: 1.6, marginBottom: '2rem' }}>
+          Looking for a commercial partner to scale what's already working.
         </p>
 
         {/* CONTEXT */}
-        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '0' }}>
-          Three products. All built. All working. Now looking for the right commercial partner who already has the doors open — someone who knows how brands spend, what they need, and how to scale something real together.
+        <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.85, color: '#374151', marginBottom: '0' }}>
+          Three products. All live. All solving real problems. Now looking for the right commercial partner who already has the doors open.
         </p>
 
-        <div className="rule-dark" style={{ margin: '2.5rem 0' }} />
+        <div className="rule-dark" style={{ margin: '2rem 0' }} />
 
         {/* PRODUCTS */}
         <p className="label" style={{ marginBottom: '0.5rem' }}>What we built</p>
@@ -138,11 +139,11 @@ export default function ForChris() {
           </div>
           <div>
             <p className="hook">"My dog is destroying the house every time I leave."</p>
-            <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#4b5563' }}>
-              Fourteen million UK households own a pet. Separation anxiety affects roughly a third of dogs. The existing solutions — trainers, vets, medication — are slow, expensive and often don't work. PetSounds51 uses acoustic protocols built on peer-reviewed research. Works from a phone. Live now, subscription model.
+            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.8, color: '#4b5563' }}>
+              Fourteen million UK households own a pet. Separation anxiety affects roughly a third of dogs. PetSounds51 uses acoustic protocols built on peer-reviewed research. Subscription model, live now.
             </p>
-            <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> Pet insurers pay out on anxiety-related claims. One insurer partnership — reduce claims, fund the product. Brands with pet ranges (Pets at Home, Hills, Royal Canin) would pay to white-label this. One vet endorsement changes the B2C story completely.
+            <p className="p-sans" style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.5rem', lineHeight: 1.6 }}>
+              <strong style={{ color: '#374151' }}>Commercial:</strong> Pet insurers (More Than, Petplan) pay anxiety claims. One partnership = funded user acquisition. White-label for Pets at Home, vet practices.
             </p>
           </div>
         </div>
@@ -155,11 +156,11 @@ export default function ForChris() {
           </div>
           <div>
             <p className="hook">"We need to demonstrate real environmental impact."</p>
-            <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#4b5563' }}>
-              Community litter picks, AI-verified photos, tamper-proof public ledger. ESG reporting is now a legal requirement for large UK companies and they need verified ground truth — not spreadsheets of good intentions.
+            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.8, color: '#4b5563' }}>
+              Community litter picks, AI-verified photos, tamper-proof public ledger. ESG reporting is now a legal requirement for large UK companies.
             </p>
-            <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> Purpose-led brand campaigns are now expected to be measurable at board level, not just by a comms team. Earth51 provides the auditable ground truth that makes those campaigns credible. Any brand being asked to evidence ESG impact needs exactly this.
+            <p className="p-sans" style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.5rem', lineHeight: 1.6 }}>
+              <strong style={{ color: '#374151' }}>Commercial:</strong> FTSE 100 ESG budgets. Unilever, P&G, Tesco need auditable ground truth. £50k-£250k per brand partnership.
             </p>
           </div>
         </div>
@@ -172,202 +173,140 @@ export default function ForChris() {
           </div>
           <div>
             <p className="hook">"I got a letter from HMRC and I don't understand it."</p>
-            <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#4b5563' }}>
-              SORTED reads any letter — HMRC, bailiffs, courts, councils — and explains it in plain English. Any language. In seconds. Nothing stored. Legal aid has been decimated. Citizens Advice is overwhelmed. Nobody has built for the person on the other end of the letter.
+            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.8, color: '#4b5563' }}>
+              SORTED reads any letter — HMRC, bailiffs, courts, councils — and explains it in plain English. Any language. Nothing stored. Legal aid is decimated. Citizens Advice is overwhelmed.
             </p>
-            <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> FCA Consumer Duty requires banks to demonstrably support vulnerable customers. SORTED is a compliance solution, not just a CSR story. HSBC, Lloyds, utilities, housing associations — organisations with millions of customers who get scary letters and can't afford a solicitor. That's a procurement conversation, not a charity pitch.
+            <p className="p-sans" style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.5rem', lineHeight: 1.6 }}>
+              <strong style={{ color: '#374151' }}>Commercial:</strong> FCA Consumer Duty. HSBC, Lloyds, NatWest must support vulnerable customers. Procurement deal, not CSR. £100k-£500k per bank.
             </p>
           </div>
         </div>
 
-        <div className="rule-dark" style={{ margin: '3rem 0' }} />
+        <div className="rule-dark" style={{ margin: '2rem 0' }} />
 
         {/* TECHNICAL INNOVATION */}
-        <p className="label" style={{ marginBottom: '1.25rem' }}>Technical innovation</p>
-        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          This isn't a wrapper around ChatGPT. Every product is built on proprietary technology with genuine technical moats:
+        <p className="label" style={{ marginBottom: '1rem' }}>Technical innovation</p>
+        <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.85, color: '#374151', marginBottom: '1rem' }}>
+          Not wrappers. Proprietary tech with genuine moats:
         </p>
 
-        <div style={{ display: 'grid', gap: '1.25rem', marginBottom: '2rem' }}>
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>PET SOUNDS51 — FREQUENCY ENGINE</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              Custom audio synthesis engine generating species-specific therapeutic protocols. Not playlists — real-time frequency generation based on peer-reviewed research. Each protocol is a unique acoustic signature. Built-in session tracking, smart protocol recommendations, and offline playback. No other pet anxiety tool uses this approach.
+        <div style={{ display: 'grid', gap: '0.75rem', marginBottom: '1.5rem' }}>
+          <div style={{ border: '1px solid #e5e7eb', padding: '0.875rem', borderRadius: '6px', background: '#fafafa' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#374151', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>PET SOUNDS51 — FREQUENCY ENGINE</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
+              Custom audio synthesis generating species-specific therapeutic protocols. Real-time frequency generation. No other pet anxiety tool uses this approach.
             </p>
           </div>
 
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>SORTED — LEGAL DOCUMENT AI</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              Multi-language document parsing with contextual legal reasoning. Handles HMRC letters, court documents, council notices, bailiff letters — each with different structures and jurisdictions. Zero-storage architecture (nothing persisted), real-time streaming responses, and geo-aware pricing/legal context. Built for scale across multiple countries simultaneously.
+          <div style={{ border: '1px solid #e5e7eb', padding: '0.875rem', borderRadius: '6px', background: '#fafafa' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#374151', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>SORTED — LEGAL DOCUMENT AI</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
+              Multi-language document parsing with contextual legal reasoning. Zero-storage architecture. Geo-aware pricing/legal context. Built for multi-country scale.
             </p>
           </div>
 
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>EARTH51 — VERIFICATION LEDGER</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              AI-powered photo verification with perceptual hashing to prevent fraud. Every cleanup is cryptographically signed, timestamped, and stored on a public tamper-proof ledger. GPS validation, duplicate detection, and automated token rewards. This is ESG verification you can actually audit — not self-reported spreadsheets.
+          <div style={{ border: '1px solid #e5e7eb', padding: '0.875rem', borderRadius: '6px', background: '#fafafa' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#374151', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>EARTH51 — VERIFICATION LEDGER</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
+              AI-powered photo verification with perceptual hashing. Cryptographically signed, timestamped, tamper-proof ledger. Auditable ESG verification.
             </p>
           </div>
 
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>PLATFORM ARCHITECTURE</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              Single codebase, multi-brand deployment. PetSounds51, SORTED, Earth51, CB51, CTRL51, TRACKT — all running on shared infrastructure with isolated data, custom branding, and independent Stripe integrations. PWA-first (works offline, installable on iOS/Android), real-time sync, push notifications, and zero server architecture for cost efficiency. Built to spin up new products in days, not months.
+          <div style={{ border: '1px solid #e5e7eb', padding: '0.875rem', borderRadius: '6px', background: '#fafafa' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#374151', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>PLATFORM ARCHITECTURE</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
+              Single codebase, multi-brand deployment. PWA-first (offline, installable), real-time sync, push notifications. Built to spin up new products in days.
             </p>
           </div>
         </div>
 
         <div className="callout">
-          <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151', margin: 0 }}>
-            None of this is theoretical. It's all live, working, and deployed. The technical foundation is solid. What's needed is the commercial engine to monetize it properly.
+          <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.8, color: '#374151', margin: 0 }}>
+            All live. All working. Technical foundation is solid. What's needed is the commercial engine.
           </p>
         </div>
 
-        <div className="rule" style={{ marginTop: '2.5rem' }} />
+        <div className="rule" style={{ marginTop: '2rem' }} />
 
         {/* THE OPPORTUNITY */}
-        <p className="label" style={{ marginBottom: '1.25rem' }}>What we build together</p>
-        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          The tech is built. The products work. What's missing is the commercial engine — and that's where the right partner changes everything. Here's what opens up with the right relationships:
+        <p className="label" style={{ marginBottom: '1rem' }}>What opens up together</p>
+        <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.85, color: '#374151', marginBottom: '1rem' }}>
+          The tech is built. The products work. The right partner changes everything:
         </p>
 
-        <div style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
-          <div style={{ background: '#fef3c7', border: '1px solid #d97706', padding: '1rem 1.25rem', borderRadius: '6px' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#92400e', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>PET INSURANCE PARTNERSHIP</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#78350f', margin: 0 }}>
-              One meeting with Pets at Home, Animal Friends, or Tesco Bank Pet Insurance. They're paying out on anxiety claims daily. PetSounds51 reduces those claims. That's a revenue share deal or white-label license. £500k-£2m partnership range.
+        <div style={{ display: 'grid', gap: '0.75rem', marginBottom: '1.5rem' }}>
+          <div style={{ background: '#fef3c7', border: '1px solid #d97706', padding: '0.875rem 1rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#92400e', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>PET INSURANCE PARTNERSHIP</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#78350f', margin: 0 }}>
+              One meeting with Pets at Home, Animal Friends, Tesco Bank Pet Insurance. They pay anxiety claims daily. PetSounds51 reduces those claims. Revenue share or white-label. £500k-£2m.
             </p>
           </div>
 
-          <div style={{ background: '#dbeafe', border: '1px solid #2563eb', padding: '1rem 1.25rem', borderRadius: '6px' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#1e40af', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>FINANCIAL SERVICES COMPLIANCE</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#1e3a8a', margin: 0 }}>
-              FCA Consumer Duty requires banks to support vulnerable customers. One conversation with HSBC, Lloyds, or NatWest's compliance team. SORTED becomes their mandated tool for customer communications. £100k-£500k annual contracts per bank.
+          <div style={{ background: '#dbeafe', border: '1px solid #2563eb', padding: '0.875rem 1rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#1e40af', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>FCA COMPLIANCE</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#1e3a8a', margin: 0 }}>
+              FCA Consumer Duty requires banks to support vulnerable customers. HSBC, Lloyds, NatWest compliance teams. SORTED becomes mandated tool. £100k-£500k annual contracts.
             </p>
           </div>
 
-          <div style={{ background: '#dcfce7', border: '1px solid #16a34a', padding: '1rem 1.25rem', borderRadius: '6px' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#166534', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>ESG VERIFICATION PLATFORM</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#14532d', margin: 0 }}>
-              Every FTSE 100 company needs auditable ESG data. Earth51 provides ground-truth verification. One intro to a purpose-led brand (Patagonia, Lush, Co-op) or a corporate CSR team. £50k-£250k per brand partnership.
+          <div style={{ background: '#dcfce7', border: '1px solid #16a34a', padding: '0.875rem 1rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#166534', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>ESG VERIFICATION</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#14532d', margin: 0 }}>
+              FTSE 100 companies need auditable ESG data. Earth51 provides ground-truth verification. Patagonia, Lush, Co-op, corporate CSR teams. £50k-£250k per partnership.
             </p>
           </div>
 
-          <div style={{ background: '#f3e8ff', border: '1px solid #9333ea', padding: '1rem 1.25rem', borderRadius: '6px' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6b21a8', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>WHITE-LABEL EXPANSION</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#581c87', margin: 0 }}>
-              All three products can be licensed to other markets. PetSounds51 in the US (huge pet spend). SORTED for legal aid orgs globally. Earth51 for UN SDG reporting. One licensing deal = £1m+ revenue.
+          <div style={{ background: '#f3e8ff', border: '1px solid #9333ea', padding: '0.875rem 1rem', borderRadius: '6px' }}>
+            <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#6b21a8', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>WHITE-LABEL / GRANTS</p>
+            <p className="p-body" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#581c87', margin: 0 }}>
+              PetSounds51 US licensing. SORTED for legal aid globally. Innovate UK, Creative Scotland, National Lottery grants. £50k-£250k non-dilutive. One licensing deal = £1m+.
             </p>
           </div>
         </div>
 
         <div className="callout" style={{ background: '#f0fdf4', border: '2px solid #16a34a' }}>
-          <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#166534', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>THE REAL OPPORTUNITY</p>
-          <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#14532d', margin: 0 }}>
-            This isn't about building more tech. It's about opening doors that are already there. The products work. The markets are proven. What's needed is someone who knows which conversations to have, which meetings to book, and how to structure deals that make everyone money. That's the gap. That's where you come in.
+          <p className="p-sans" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#166534', marginBottom: '0.35rem', letterSpacing: '0.05em' }}>THE REAL OPPORTUNITY</p>
+          <p className="p-body" style={{ fontSize: '0.88rem', lineHeight: 1.8, color: '#14532d', margin: 0 }}>
+            This isn't about building more tech. It's about opening doors. The products work. The markets are proven. What's needed is someone who knows which conversations to have, which meetings to book, and how to structure deals. That's the gap. That's where you come in.
           </p>
         </div>
 
-        <div className="rule" style={{ marginTop: '2.5rem' }} />
+        <div className="rule" style={{ marginTop: '2rem' }} />
 
         {/* THE OFFER */}
-        <p className="label" style={{ marginBottom: '1.25rem' }}>The offer</p>
-        <div className="number-big" style={{ marginBottom: '1.25rem' }}>17% for £20,000.</div>
+        <p className="label" style={{ marginBottom: '0.75rem' }}>The offer</p>
+        <div className="number-big" style={{ marginBottom: '0.75rem' }}>17% for £20,000.</div>
 
-        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.8, color: '#374151', marginBottom: '0.75rem' }}>
-          One stake across all three products. To be transparent on the cap table: Graeme holds 3% for making the introduction, founder equity sits alongside that, and UF51 CIC retains 10% of commercial revenue by legal structure — keeping the core tools free for the people who need them most.
+        <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.8, color: '#374151', marginBottom: '0.5rem' }}>
+          One stake across all three products. Transparent cap table: Graeme holds 3% for the introduction, founder equity alongside, UF51 CIC retains 10% of commercial revenue — keeping core tools free for those who need them.
         </p>
 
         <div className="seis-box">
-          <p className="p-sans" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#15803d' }}>
-            <strong>On SEIS:</strong> If SEIS-qualifying — which is likely — up to 50% income tax relief applies. Effective outlay closer to £10k. Worth a conversation with your accountant before anything else.
+          <p className="p-sans" style={{ fontSize: '0.75rem', lineHeight: 1.7, color: '#15803d' }}>
+            <strong>SEIS:</strong> If SEIS-qualifying — likely — up to 50% income tax relief. Effective outlay closer to £10k. Talk to your accountant.
           </p>
         </div>
 
         <div className="rule" />
 
-        {/* THE OPPORTUNITY */}
-        <p className="label" style={{ marginBottom: '1.25rem' }}>What we build together</p>
-
-        <div style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>PET INSURANCE PARTNERSHIP</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              One deal with a major pet insurer (More Than, Petplan, Bought By Many) to offer PetSounds51 as a covered treatment. Instant access to millions of customers. They reduce anxiety-related claims. We get funded user acquisition. Everyone wins.
-            </p>
-          </div>
-
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>FINANCIAL SERVICES / FCA COMPLIANCE</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              HSBC, Lloyds, NatWest, Monzo — any bank struggling with FCA Consumer Duty requirements. SORTED becomes their vulnerable customer support tool. Procurement deal, not marketing spend. Millions of customers get help. Bank meets regulatory obligations. We get paid per-user or licensed annually.
-            </p>
-          </div>
-
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>ESG / CORPORATE PARTNERSHIPS</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              Unilever, P&G, Tesco, Sainsbury's — brands with ESG targets and budget to hit them. Earth51 provides verified, auditable environmental impact. They fund litter picks as part of their sustainability strategy. We become the infrastructure for measurable environmental action.
-            </p>
-          </div>
-
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>WHITE LABEL / LICENSING</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              Pets at Home white-labeling PetSounds51. Vet practices offering it as a prescribed treatment. Housing associations licensing SORTED for tenants. Local councils using Earth51 for community engagement. Each one is a B2B licensing deal, not a B2C grind.
-            </p>
-          </div>
-
-          <div style={{ border: '1px solid #e5e7eb', padding: '1.25rem', borderRadius: '8px', background: '#fafafa' }}>
-            <p className="p-sans" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>GRANT FUNDING</p>
-            <p className="p-body" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', margin: 0 }}>
-              Innovate UK, Creative Scotland, National Lottery — all have grants aligned with what we're building. Mental health, environmental impact, financial inclusion, tech innovation. £50k-£250k grants available. Non-dilutive funding to accelerate development without giving up more equity.
-            </p>
-          </div>
-        </div>
-
-        <div className="callout">
-          <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151', margin: 0 }}>
-            These aren't cold pitches. These are doors that open with the right introduction. Someone who already has the relationships, knows how to structure these deals, and understands how big organisations buy. The tech is ready. The products work. Now it's about execution at scale.
-          </p>
-        </div>
-
-        <div className="rule" style={{ marginTop: '2.5rem' }} />
-
         {/* WHY NOW */}
         <div className="callout">
-          <p className="label" style={{ marginBottom: '0.75rem' }}>Why now makes sense</p>
-          <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151' }}>
-            This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that has legs.
+          <p className="label" style={{ marginBottom: '0.5rem' }}>Why this makes sense</p>
+          <p className="p-body" style={{ fontSize: '0.88rem', lineHeight: 1.8, color: '#374151' }}>
+            Early enough that the right involvement shapes what it becomes. Not consultancy. Not advisory. A real stake in something that has legs. The build is done. Now it's about scaling with the right partner.
           </p>
         </div>
 
         <div className="rule" />
 
         {/* CLOSE */}
-        <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to stop splitting attention across building, supporting, selling and everything else at once, and actually finish the job properly.
-        </p>
-        <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          Looking for someone who'll keep it honest when something needs work, and who already has the relationships to move fast. The build is done. Now it's about scaling with the right partner.
-        </p>
-        <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '2rem' }}>
-          Keen to explore if there's a fit.
+        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
+          Looking for someone who'll keep it honest and who already has the relationships to move fast. Keen to explore if there's a fit.
         </p>
 
-        <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#9ca3af' }}>— Brian</p>
-
-        <p className="p-sans" style={{ fontSize: '0.7rem', color: '#6b7280', marginTop: '2.5rem', fontStyle: 'italic' }}>
-          P.S. Still owe my fencing babe a proper lesson. ♾️
-        </p>
-
-        <div className="rule" style={{ marginTop: '3rem' }} />
-
-        <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: '#9ca3af', letterSpacing: '0.06em' }}>
+        <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: '#9ca3af', letterSpacing: '0.06em', borderTop: '1px solid #f0ede8', paddingTop: '1.25rem' }}>
           <span>universalfrequency51.com</span>
-          <span>Private — please don't share</span>
+          <span>Private & Confidential · June 2026</span>
         </div>
 
       </div>
