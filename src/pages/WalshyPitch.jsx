@@ -224,7 +224,7 @@ export default function WalshyPitch() {
             Keen to explore if there's a fit.
           </p>
           <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.55rem', color: '#9ca3af', letterSpacing: '0.06em' }}>
-            <span>universalfrequency51.com</span>
+            <span>family@uf51.love</span>
             <span>Private & Confidential</span>
           </div>
         </div>
