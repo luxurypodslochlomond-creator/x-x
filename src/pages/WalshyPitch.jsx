@@ -122,7 +122,7 @@ export default function ForChris() {
 
         {/* CONTEXT */}
         <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '0' }}>
-          Three products. All built. All working. What's missing is a commercial brain who understands how brands actually spend money and what moves the needle. That's the gap.
+          Three products. All built. All working. Now looking for the right commercial partner who already has the doors open — someone who knows how brands spend, what they need, and how to scale something real together.
         </p>
 
         <div className="rule-dark" style={{ margin: '2.5rem 0' }} />
@@ -214,10 +214,10 @@ export default function ForChris() {
           The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to stop splitting attention across building, supporting, selling and everything else at once, and actually finish the job properly.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          What I need alongside the money is someone who'll be honest when something isn't good enough, and who knows how to open the right doors. I think there's something here worth exploring together.
+          Looking for someone who'll keep it honest when something needs work, and who already has the relationships to move fast. The build is done. Now it's about scaling with the right partner.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '2rem' }}>
-          No pressure. Just wanted you to see it straight.
+          Keen to explore if there's a fit.
         </p>
 
         <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#9ca3af' }}>— Brian</p>
