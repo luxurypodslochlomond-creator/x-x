@@ -97,10 +97,10 @@ export default function ForChris() {
         <div className="mb-16">
           <p className="section-label mb-3">Private · June 2026</p>
           <h1 className="pitch-display text-5xl font-bold leading-tight mb-5" style={{ color: '#1a1a1a' }}>
-            Here's what<br />I've built.
+            Three products.<br />Your kind of rooms.
           </h1>
           <p className="pitch-display text-xl" style={{ fontStyle: 'italic', color: '#78716c' }}>
-            And why I think you're the right person to be part of it.
+            A note for Chris — from Brian.
           </p>
         </div>
 
@@ -109,16 +109,16 @@ export default function ForChris() {
         {/* OPENING — HUMAN VOICE */}
         <div className="mb-16 space-y-5 pitch-body" style={{ fontSize: '1.1rem', lineHeight: '1.85', color: '#374151' }}>
           <p>
-            Graeme suggested I talk to you. I'm glad he did.
+            Graeme suggested we talk and that recommendation means something. He doesn't make them lightly.
           </p>
           <p>
-            I've been building a platform called UF51. Three AI products. All live. All working — not prototypes, not decks, not "coming soon". Real tools that real people are using right now.
+            There's a platform called UF51 — three AI products, all live, all working. Not prototypes. Not decks. Real tools that real people are using right now. The technology underneath them — language models, acoustic AI, computer vision, a verified public ledger — would take an enterprise team a year and serious budget to put together. It's been built leaner than that.
           </p>
           <p>
-            The technology underneath them — language models, acoustic AI, computer vision, a verified public ledger — would cost an enterprise team a year and serious budget to put together. I built it leaner than that, which is either impressive or slightly concerning depending on how you look at it.
+            But technology isn't the gap. The gap is rooms. The right conversations with the right people at the right organisations — and that's exactly where you come in.
           </p>
           <p>
-            I'm not looking for someone to hand me money and walk away. I'm looking for someone who's sat in the rooms I need to get into — and who sees what I see when they look at what's here.
+            What's on the table isn't money for a promise. It's a stake in three products that are already working, at the moment they need someone who understands how to take them somewhere.
           </p>
         </div>
 
@@ -143,7 +143,7 @@ export default function ForChris() {
               PetSounds51 uses acoustic protocols built on peer-reviewed research. Works from a phone. No vet appointment. No prescription. The UK pet care market is <span className="stat-pill">£7.9bn</span> — pet anxiety is one of the fastest-growing segments and almost nobody has addressed it properly with technology.
             </p>
             <p className="pull-quote">
-              One vet endorsement changes everything. Pet insurers would pay us — not users — to reduce anxiety-related claims. Any PHD client with a pet or wellness category could white-label this tomorrow. The product is ready. It's the conversation that needs opening.
+              One vet endorsement changes everything. Pet insurers would pay — not users — to reduce anxiety-related claims. Any PHD client with a pet or wellness category could white-label this tomorrow. The product is ready. The conversation is the thing that needs opening — and that's a conversation you could have.
             </p>
           </div>
         </div>
@@ -164,7 +164,7 @@ export default function ForChris() {
               Legal aid has been gutted. Citizens Advice is overwhelmed. The UK legal tech market is projected at <span className="stat-pill">£25bn by 2030</span>. Everyone is building for law firms. Nobody has properly built for the person on the other end of the letter.
             </p>
             <p className="pull-quote">
-              HSBC has a legal obligation under FCA Consumer Duty to demonstrate genuine support for vulnerable customers. SORTED solves that directly — it's not a CSR story, it's a compliance story. PHD manages their media. You know the room. That's one conversation, and there are dozens like it across financial services, utilities and housing associations.
+              HSBC has a legal obligation under FCA Consumer Duty to demonstrate genuine support for vulnerable customers. SORTED solves that directly — it's not a CSR story, it's a compliance story. PHD manages their media. You know that room. That's one conversation — and you could walk into it next week. There are dozens like it across financial services, utilities and housing associations.
             </p>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function ForChris() {
               People log litter picks. Computer vision verifies the photos. Everything goes on a public ledger — auditable, tamper-proof, community-scale environmental impact. ESG reporting is now a legal requirement for large UK companies and they need verified ground truth, not spreadsheets of good intentions.
             </p>
             <p className="pull-quote">
-              PHD's work with British Heart Foundation is exactly the model — purpose-led, community-scale, genuinely measurable. Earth51 produces the verified data that makes those campaigns credible to a board. Someone who understands how that story gets told matters enormously here.
+              PHD's work with British Heart Foundation is exactly the model — purpose-led, community-scale, genuinely measurable. Earth51 produces the verified data that makes those campaigns credible to a board. You already understand how that story gets told. That's not a small thing.
             </p>
           </div>
         </div>
@@ -191,11 +191,14 @@ export default function ForChris() {
 
         {/* THE OFFER */}
         <div className="mb-12">
-          <p className="section-label">What I'm proposing</p>
+          <p className="section-label">What's on the table</p>
           <div className="big-number mb-6">17% for £20,000.</div>
           <div className="space-y-4 pitch-body" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
             <p>
               One stake across all three products. UF51 CIC — the community interest company — retains 10% of commercial revenue as a structural dividend. That keeps the core tools free for the people who need them most. It's locked in by design, not goodwill.
+            </p>
+            <p>
+              The ask isn't passive capital. Your network and your judgment are worth more than the cheque. The number reflects that.
             </p>
           </div>
 
@@ -211,7 +214,7 @@ export default function ForChris() {
         <div className="mb-12">
           <p className="section-label">What £20k actually does</p>
           <p className="pitch-body mb-6" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
-            Three months of proper runway. Not survival — momentum. Enough to stop reacting and start building the right partnerships:
+            Three months of proper runway. Not survival — momentum. Enough to stop reacting and start walking through the right doors:
           </p>
           <div className="space-y-3 pitch-sans" style={{ fontSize: '0.95rem', color: '#4b5563' }}>
             {[
@@ -271,10 +274,10 @@ export default function ForChris() {
         {/* CLOSE */}
         <div className="mb-16 space-y-5 pitch-body" style={{ fontSize: '1.1rem', lineHeight: '1.85', color: '#374151' }}>
           <p>
-            Three working products. Real markets. Proper technology. Early enough to matter — not so early it's a leap of faith.
+            Three working products. Real markets. Proper technology. Early enough that your involvement shapes it — not so early it's a leap of faith.
           </p>
           <p>
-            I'd rather have a coffee than a Zoom. But whatever works for you.
+            A coffee would be better than a Zoom. Whatever works for you.
           </p>
           <p style={{ color: '#9ca3af', marginTop: '2rem' }}>— Brian</p>
         </div>
