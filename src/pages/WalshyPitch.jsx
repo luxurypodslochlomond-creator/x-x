@@ -122,7 +122,7 @@ export default function ForChris() {
 
         {/* CONTEXT */}
         <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '0' }}>
-          Three products. All built. All real. What's missing is a commercial brain who understands how brands spend money, why they do it, and what actually moves the needle. That's the gap this is looking to fill.
+          Three products. All built. All working. What's missing is a commercial brain who understands how brands actually spend money and what moves the needle. That's the gap.
         </p>
 
         <div className="rule-dark" style={{ margin: '2.5rem 0' }} />
@@ -147,25 +147,8 @@ export default function ForChris() {
           </div>
         </div>
 
-        {/* SORTED */}
-        <div className="product-row">
-          <div>
-            <p className="product-name" style={{ color: '#2563eb' }}>SORTED</p>
-            <p className="product-sub">Legal clarity · live</p>
-          </div>
-          <div>
-            <p className="hook">"I got a letter from HMRC and I don't understand it."</p>
-            <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#4b5563' }}>
-              SORTED reads any letter — HMRC, bailiffs, courts, councils — and explains it in plain English. Any language. In seconds. Nothing stored. Legal aid has been decimated. Citizens Advice is overwhelmed. Nobody has built for the person on the other end of the letter.
-            </p>
-            <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> FCA Consumer Duty requires banks to demonstrably support vulnerable customers. SORTED is a compliance solution, not just a CSR story. HSBC, Lloyds, utilities, housing associations — organisations with millions of customers who get scary letters and can't afford a solicitor. That's a procurement conversation, not a charity pitch.
-            </p>
-          </div>
-        </div>
-
         {/* EARTH51 */}
-        <div className="product-row" style={{ borderBottom: '1px solid #f0ede8' }}>
+        <div className="product-row">
           <div>
             <p className="product-name" style={{ color: '#16a34a' }}>Earth51</p>
             <p className="product-sub">Verified ESG · live</p>
@@ -177,6 +160,23 @@ export default function ForChris() {
             </p>
             <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
               <strong style={{ color: '#374151' }}>Commercial angle:</strong> Purpose-led brand campaigns are now expected to be measurable at board level, not just by a comms team. Earth51 provides the auditable ground truth that makes those campaigns credible. Any brand being asked to evidence ESG impact needs exactly this.
+            </p>
+          </div>
+        </div>
+
+        {/* SORTED */}
+        <div className="product-row" style={{ borderBottom: '1px solid #f0ede8' }}>
+          <div>
+            <p className="product-name" style={{ color: '#2563eb' }}>SORTED</p>
+            <p className="product-sub">Legal clarity · live</p>
+          </div>
+          <div>
+            <p className="hook">"I got a letter from HMRC and I don't understand it."</p>
+            <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#4b5563' }}>
+              SORTED reads any letter — HMRC, bailiffs, courts, councils — and explains it in plain English. Any language. In seconds. Nothing stored. Legal aid has been decimated. Citizens Advice is overwhelmed. Nobody has built for the person on the other end of the letter.
+            </p>
+            <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
+              <strong style={{ color: '#374151' }}>Commercial angle:</strong> FCA Consumer Duty requires banks to demonstrably support vulnerable customers. SORTED is a compliance solution, not just a CSR story. HSBC, Lloyds, utilities, housing associations — organisations with millions of customers who get scary letters and can't afford a solicitor. That's a procurement conversation, not a charity pitch.
             </p>
           </div>
         </div>
@@ -214,10 +214,10 @@ export default function ForChris() {
           The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to stop splitting attention across building, supporting, selling and everything else at once, and actually finish the job properly.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          What I need alongside the money is someone who can be honest when something isn't good enough yet, and who knows how to open the right conversations. I think there's something here worth exploring together.
+          What I need alongside the money is someone who'll be honest when something isn't good enough, and who knows how to open the right doors. I think there's something here worth exploring together.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '2rem' }}>
-          No pressure. Just wanted you to see it honestly rather than dressed up.
+          No pressure. Just wanted you to see it straight.
         </p>
 
         <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#9ca3af' }}>— Brian</p>
