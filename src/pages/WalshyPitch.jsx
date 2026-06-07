@@ -209,7 +209,7 @@ export default function WalshyPitch() {
           </p>
           <div className="seis-box">
             <p className="p-sans" style={{ fontSize: '0.65rem', lineHeight: 1.6, color: '#15803d', margin: 0 }}>
-              <strong>SEIS:</strong> 50% income tax relief likely. Effective cost £10k. Talk to your accountant.
+              <strong>SEIS:</strong> Company may qualify (first investment, under £200k raised, under 25 employees). If approved: 50% income tax relief. Effective cost ~£10k. Your accountant will confirm.
             </p>
           </div>
         </div>
