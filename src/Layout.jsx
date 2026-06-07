@@ -823,7 +823,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* DESKTOP SIDEBAR */}
         {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage && (
-        <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50 sticky`}>
+        <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
             <Link to={createPageUrl(isCB51Page ? "CB51" : isPS51Page ? "PetSounds51" : "Welcome")} className="flex items-center gap-3 mb-4">
               {isCB51Page ? (
@@ -937,7 +937,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
                             )}
 
-        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-0') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-6') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
           {children}
               {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage && (
               <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
