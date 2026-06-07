@@ -226,17 +226,42 @@ export default function WalshyPitch() {
           </div>
         </div>
 
+        {/* WHAT CHRIS BRINGS */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold mb-4 text-gray-800">What Chris brings beyond the money</h2>
+          <p className="text-gray-700 text-sm leading-relaxed mb-4">
+            This isn't just a financial ask. The honest truth is that the right introduction — to the right brand, at the right moment — is worth more than the investment itself.
+          </p>
+          <div className="space-y-4">
+            <div className="border-l-2 border-amber-400 pl-4">
+              <p className="text-sm font-bold text-gray-800 mb-1">Pet retail & insurance</p>
+              <p className="text-sm text-gray-600">The UK's biggest pet retailers have entire ESG and customer wellbeing programmes with no real product to point people to. PetSounds51 is that product — white-label ready, science-backed, instant. One conversation with the right brand partnership team changes everything. Chris knows how those conversations start.</p>
+            </div>
+            <div className="border-l-2 border-blue-400 pl-4">
+              <p className="text-sm font-bold text-gray-800 mb-1">Financial services & retail brands</p>
+              <p className="text-sm text-gray-600">SORTED's natural B2B home is any large consumer-facing brand that deals with vulnerable customers — banks, utilities, supermarkets, housing. They all have financial hardship teams and legal access obligations. They all need exactly what SORTED does. Chris has spent years talking to those brands at budget level.</p>
+            </div>
+            <div className="border-l-2 border-green-400 pl-4">
+              <p className="text-sm font-bold text-gray-800 mb-1">Media & storytelling instinct</p>
+              <p className="text-sm text-gray-600">Someone who has spent a career in media knows what makes a story land — and what makes it die. That instinct, applied to how we tell the UF51 story publicly, is genuinely rare. You can't hire that in. You find the right person and bring them in early.</p>
+            </div>
+          </div>
+          <p className="text-gray-500 text-sm mt-5 italic">
+            None of this is about using existing professional relationships. It's about the judgment, instinct, and network that someone builds over a career — and choosing to put that behind something that matters.
+          </p>
+        </div>
+
         {/* MEDIA ANGLE */}
         <div className="mb-10">
-          <h2 className="text-xl font-bold mb-4 text-gray-800">The story — and why it matters to Chris</h2>
+          <h2 className="text-xl font-bold mb-4 text-gray-800">The story</h2>
           <p className="text-gray-700 text-sm leading-relaxed mb-3">
-            This is a real story. Someone who nearly didn't make it, who rebuilt everything from scratch, and built AI tools from a laptop in Scotland that help people fight the system, calm their anxious pets, and clean up their communities.
+            Someone who nearly didn't make it, who rebuilt everything from scratch, and built AI tools from a laptop in Scotland that help people fight the system, calm their anxious pets, and clean up their communities.
           </p>
           <p className="text-gray-700 text-sm leading-relaxed mb-3">
-            That story hasn't been told yet. For someone in media — Chris knows what an authentic, unspun story is worth. You can't manufacture that origin. We haven't even started telling it.
+            That story hasn't been told yet. You can't manufacture that origin. We haven't even started telling it.
           </p>
           <p className="text-gray-700 text-sm leading-relaxed">
-            And for someone looking at what comes after a long career in media — this is the kind of thing you look back on and feel good about. Not just financially. Actually good.
+            And for someone thinking about what comes next after a long career — this is the kind of thing you look back on and feel good about. Not just financially. Actually good.
           </p>
         </div>
 
