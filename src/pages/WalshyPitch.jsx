@@ -222,13 +222,13 @@ export default function ForChris() {
 
         <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#9ca3af' }}>— Brian</p>
 
-        <p className="p-sans" style={{ fontSize: '0.7rem', color: '#d1d5db', marginTop: '2.5rem', fontStyle: 'italic' }}>
+        <p className="p-sans" style={{ fontSize: '0.7rem', color: '#6b7280', marginTop: '2.5rem', fontStyle: 'italic' }}>
           P.S. Still owe my fencing babe a proper lesson. ♾️
         </p>
 
         <div className="rule" style={{ marginTop: '3rem' }} />
 
-        <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: '#d1d5db', letterSpacing: '0.06em' }}>
+        <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: '#9ca3af', letterSpacing: '0.06em' }}>
           <span>universalfrequency51.com</span>
           <span>Private — please don't share</span>
         </div>
