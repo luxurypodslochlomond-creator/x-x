@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function WalshyPitch() {
   return (
-    <div className="min-h-screen" style={{ background: '#ffffff', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1a1a1a', overflow: 'hidden' }}>
+    <div className="min-h-screen" style={{ background: '#ffffff', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1a1a1a' }}>
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -93,6 +93,16 @@ export default function WalshyPitch() {
           @page { margin: 0.8cm; size: A4; }
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
+
+        @media (max-width: 640px) {
+          .tight-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+          }
+          .product-box {
+            border-bottom: 1px solid #f0ede8 !important;
+          }
+        }
       `}</style>
 
       {/* SAVE PDF */}
@@ -110,7 +120,7 @@ export default function WalshyPitch() {
         </button>
       </div>
 
-      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem 1.5rem 1.5rem', fontSize: '13px' }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem 1.5rem 2.5rem', fontSize: '13px' }}>
 
         {/* HEADER */}
         <div>
