@@ -203,15 +203,21 @@ export default function ForChris() {
         <div className="callout">
           <p className="label" style={{ marginBottom: '0.75rem' }}>Why now makes sense</p>
           <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151' }}>
-            Eighteen years at PHD builds something that's hard to replicate — a complete picture of how commercial media works, what brands actually need, and who makes the decisions. Taking that outside the agency world into something you've helped shape from the beginning is a different kind of career chapter. This is early enough that your involvement defines what it becomes. Not a consultancy gig. A stake in something built to last.
+            Eighteen years at PHD builds something that's hard to replicate — a complete picture of how commercial media works, what brands actually need, and who makes the decisions. If you're thinking about what the next chapter looks like, this is early enough that your involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that's already moving.
           </p>
         </div>
 
         <div className="rule" />
 
         {/* CLOSE */}
+        <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
+          I'll be straight with you. The products are live but they're not where they need to be yet. The investment isn't to paper over cracks — it's to let me stop splitting my focus and actually finish the job properly. Right now I'm building, selling, supporting and trying to grow all at once. That has to change.
+        </p>
+        <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
+          What I need alongside the money is someone who's been in the room when big commercial decisions get made. Someone who can open doors I can't, and tell me honestly when something isn't good enough yet. You've spent 18 years doing exactly that. I think we'd work well together.
+        </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '2rem' }}>
-          Three working products. Real problems. Real markets. A coffee beats a Zoom.
+          No pressure either way. Just wanted you to see the full picture honestly.
         </p>
 
         <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#9ca3af' }}>— Brian</p>
