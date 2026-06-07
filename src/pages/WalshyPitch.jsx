@@ -179,7 +179,7 @@ export default function ForChris() {
               Community litter picks, AI-verified photos, tamper-proof public ledger. ESG reporting is now a legal requirement for large UK companies and they need verified ground truth — not spreadsheets of good intentions.
             </p>
             <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> PHD's work with BHF is the model — purpose-led, measurable, brand-level. Earth51 provides the auditable data that makes those campaigns credible to a board, not just to a comms team. The brands you've worked with for two decades need this. Honestly — PHD itself is a natural first client conversation.
+              <strong style={{ color: '#374151' }}>Commercial angle:</strong> Purpose-led brand campaigns are now expected to be measurable at board level, not just by a comms team. Earth51 provides the auditable ground truth that makes those campaigns credible. The brands you've worked with for two decades need exactly this.
             </p>
           </div>
         </div>
@@ -191,7 +191,7 @@ export default function ForChris() {
         <div className="number-big" style={{ marginBottom: '1.25rem' }}>17% for £20,000.</div>
 
         <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.8, color: '#374151', marginBottom: '0.75rem' }}>
-          One stake across all three products. UF51 CIC — the community interest company — retains 10% of commercial revenue. Keeps the core tools free for the people who need them most. That's locked in by structure.
+          One stake across all three products. To be transparent on the cap table: Graeme holds a separate stake alongside this. Your 17% and Graeme's share sit alongside the founder equity. UF51 CIC — the community interest company — retains 10% of commercial revenue, locked in by structure, which keeps the core tools free for the people who need them most.
         </p>
 
         <div className="seis-box">
