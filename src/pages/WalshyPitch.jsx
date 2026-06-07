@@ -203,7 +203,7 @@ export default function ForChris() {
         <div className="callout">
           <p className="label" style={{ marginBottom: '0.75rem' }}>Why now makes sense</p>
           <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151' }}>
-            This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that has legs — with someone who knows which doors are worth knocking on.
+            This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that has legs.
           </p>
         </div>
 

@@ -605,7 +605,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "🔔 PWA Push Guide", url: createPageUrl("AdminPWAPushGuide"), icon: Bell, description: "How we cracked iOS push notifications" },
       { title: "📰 SORTED Press Release", url: "/SortedPressRelease", icon: FileText, description: "Launch PR — 25 April 2026 · download PDF" },
       { title: "📄 Brian Hughes CV", url: createPageUrl("BrianHughesCV"), icon: User, description: "One-pager CV · download PDF" },
-      { title: "🤝 Walshy Pitch", url: createPageUrl("WalshyPitch"), icon: Handshake, description: "£20k · 15% · Graeme · private pitch" },
+      { title: "🤝 Chris Walsh Pitch", url: createPageUrl("WalshyPitch"), icon: Handshake, description: "£20k · 17% · Graeme · private pitch" },
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
