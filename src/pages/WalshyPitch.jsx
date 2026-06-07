@@ -110,7 +110,7 @@ export default function ForChris() {
       <div style={{ maxWidth: '600px', margin: '0 auto', padding: '4.5rem 2rem 6rem' }}>
 
         {/* META */}
-        <p className="label" style={{ marginBottom: '2.5rem' }}>Private · For Chris Walsh · June 2026</p>
+        <p className="label" style={{ marginBottom: '2.5rem' }}>Private · June 2026</p>
 
         {/* HEADLINE */}
         <h1 className="p-display" style={{ fontSize: 'clamp(2.2rem, 7vw, 3rem)', fontWeight: 700, lineHeight: 1.15, marginBottom: '1rem', color: '#1a1a1a' }}>
@@ -125,7 +125,7 @@ export default function ForChris() {
           Eighteen years at the top of media investment teaches you something — most "tech opportunities" are ideas dressed up as products. This isn't that. The platform is built. The products are live and being used. What's missing is a commercial brain who's spent a career understanding how brands spend money, why they do it, and what actually moves the needle for them. That's the gap this is looking to fill.
         </p>
         <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#6b7280', marginBottom: '0' }}>
-          For what it's worth — your BSc in Physiology is actually relevant here. PetSounds51 is built on peer-reviewed acoustic research. SORTED uses real language model architecture, not a chatbot wrapper. Earth51's verification uses computer vision. These aren't buzzwords. The science works, which is why the products work. You'll be able to see that yourself when you use them.
+          Worth saying — PetSounds51 is built on peer-reviewed acoustic research. SORTED uses real language model architecture, not a chatbot wrapper. Earth51's verification uses computer vision. These aren't buzzwords. The science works, which is why the products work. Spend five minutes with any of them and that's obvious.
         </p>
 
         <div className="rule-dark" style={{ margin: '2.5rem 0' }} />
@@ -191,7 +191,7 @@ export default function ForChris() {
         <div className="number-big" style={{ marginBottom: '1.25rem' }}>17% for £20,000.</div>
 
         <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.8, color: '#374151', marginBottom: '0.75rem' }}>
-          One stake across all three products. To be transparent on the cap table: Graeme holds a separate stake alongside this. Your 17% and Graeme's share sit alongside the founder equity. UF51 CIC — the community interest company — retains 10% of commercial revenue, locked in by structure, which keeps the core tools free for the people who need them most.
+          One stake across all three products. Graeme Dey — who made the introduction — holds a small stake already, so this isn't a cold ask from nowhere. UF51 CIC retains 10% of commercial revenue by legal structure, keeping the core tools free for the people who need them most.
         </p>
 
         <div className="seis-box">
@@ -217,7 +217,7 @@ export default function ForChris() {
           I'll be straight with you. The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to let me stop splitting my attention across building, supporting, selling and everything else at once, and actually finish the job properly.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          What I need alongside the money is someone who's spent a career in rooms where big commercial decisions get made — who can be honest with me when something isn't good enough yet, and who knows which doors are worth knocking on. Campaign called you a "progressive thinker" for a reason. I think there's something here worth exploring together.
+          What I need alongside the money is someone who's spent a career in rooms where big commercial decisions get made — who can be honest when something isn't good enough yet, and who knows which doors are worth knocking on. I think there's something here worth exploring together.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '2rem' }}>
           No pressure. Just wanted you to see it honestly rather than dressed up.
