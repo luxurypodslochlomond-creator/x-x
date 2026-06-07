@@ -122,7 +122,7 @@ export default function ForChris() {
 
         {/* CONTEXT */}
         <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1rem' }}>
-          Eighteen years at the top of media investment teaches you something — most "tech opportunities" are ideas dressed up as products. This isn't that. The platform is built. The products are live and being used. What's missing is a commercial brain who's spent a career understanding how brands spend money, why they do it, and what actually moves the needle for them. That's the gap this is looking to fill.
+          Most "tech opportunities" are ideas dressed up as products. This isn't that. The platform is built. The products are live and being used. What's missing is a commercial brain who understands how brands spend money, why they do it, and what actually moves the needle. That's the gap this is looking to fill.
         </p>
         <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#6b7280', marginBottom: '0' }}>
           Worth saying — PetSounds51 is built on peer-reviewed acoustic research. SORTED uses real language model architecture, not a chatbot wrapper. Earth51's verification uses computer vision. These aren't buzzwords. The science works, which is why the products work. Spend five minutes with any of them and that's obvious.
@@ -206,7 +206,7 @@ export default function ForChris() {
         <div className="callout">
           <p className="label" style={{ marginBottom: '0.75rem' }}>Why now makes sense</p>
           <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151' }}>
-            Eighteen years at PHD builds something that's hard to replicate — a complete picture of how commercial media works, what brands actually need, and who makes the decisions. If you're thinking about what the next chapter looks like, this is early enough that your involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that's already moving.
+            A career at the top of media investment builds something that's hard to replicate — a complete picture of how commercial decisions get made, what brands actually need, and who to talk to. This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that's already moving.
           </p>
         </div>
 
