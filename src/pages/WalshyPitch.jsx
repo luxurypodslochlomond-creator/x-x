@@ -121,8 +121,11 @@ export default function ForChris() {
         </p>
 
         {/* CONTEXT */}
-        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '0' }}>
+        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1rem' }}>
           Eighteen years at the top of media investment teaches you something — most "tech opportunities" are ideas dressed up as products. This isn't that. The platform is built. The products are live and being used. What's missing is a commercial brain who's spent a career understanding how brands spend money, why they do it, and what actually moves the needle for them. That's the gap this is looking to fill.
+        </p>
+        <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#6b7280', marginBottom: '0' }}>
+          For what it's worth — your BSc in Physiology is actually relevant here. PetSounds51 is built on peer-reviewed acoustic research. SORTED uses real language model architecture, not a chatbot wrapper. Earth51's verification uses computer vision. These aren't buzzwords. The science works, which is why the products work. You'll be able to see that yourself when you use them.
         </p>
 
         <div className="rule-dark" style={{ margin: '2.5rem 0' }} />
@@ -176,7 +179,7 @@ export default function ForChris() {
               Community litter picks, AI-verified photos, tamper-proof public ledger. ESG reporting is now a legal requirement for large UK companies and they need verified ground truth — not spreadsheets of good intentions.
             </p>
             <p className="p-sans" style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.6rem', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>Commercial angle:</strong> PHD's work with BHF is the model — purpose-led, measurable, brand-level. Earth51 provides the auditable data that makes those campaigns credible to a board. The brands you've worked with for two decades need exactly this.
+              <strong style={{ color: '#374151' }}>Commercial angle:</strong> PHD's work with BHF is the model — purpose-led, measurable, brand-level. Earth51 provides the auditable data that makes those campaigns credible to a board, not just to a comms team. The brands you've worked with for two decades need this. Honestly — PHD itself is a natural first client conversation.
             </p>
           </div>
         </div>
@@ -211,13 +214,13 @@ export default function ForChris() {
 
         {/* CLOSE */}
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          I'll be straight with you. The products are live but they're not where they need to be yet. The investment isn't to paper over cracks — it's to let me stop splitting my focus and actually finish the job properly. Right now I'm building, selling, supporting and trying to grow all at once. That has to change.
+          I'll be straight with you. The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to let me stop splitting my attention across building, supporting, selling and everything else at once, and actually finish the job properly.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          What I need alongside the money is someone who's been in the room when big commercial decisions get made. Someone who can open doors I can't, and tell me honestly when something isn't good enough yet. You've spent 18 years doing exactly that. I think we'd work well together.
+          What I need alongside the money is someone who's spent a career in rooms where big commercial decisions get made — who can be honest with me when something isn't good enough yet, and who knows which doors are worth knocking on. Campaign called you a "progressive thinker" for a reason. I think there's something here worth exploring together.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '2rem' }}>
-          No pressure either way. Just wanted you to see the full picture honestly.
+          No pressure. Just wanted you to see it honestly rather than dressed up.
         </p>
 
         <p className="p-display" style={{ fontSize: '1.1rem', fontStyle: 'italic', color: '#9ca3af' }}>— Brian</p>
