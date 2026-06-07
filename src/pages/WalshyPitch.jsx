@@ -93,10 +93,10 @@ export default function ForChris() {
         <div className="mb-16">
           <p className="section-label mb-3">Private · June 2026 · For Chris</p>
           <h1 className="pitch-display font-bold leading-tight mb-5" style={{ fontSize: '2.8rem', color: '#1a1a1a' }}>
-            Following on from<br />our conversations.
+            You said put<br />something together.
           </h1>
           <p className="pitch-display text-xl" style={{ fontStyle: 'italic', color: '#78716c' }}>
-            Here's the structure, properly written down.
+            So here it is.
           </p>
         </div>
 
@@ -105,13 +105,13 @@ export default function ForChris() {
         {/* OPENING */}
         <div className="mb-16 space-y-5 pitch-body" style={{ fontSize: '1.1rem', lineHeight: '1.85', color: '#374151' }}>
           <p>
-            Good conversations deserve a proper follow-up. So here it is — everything we've talked about, in one place, so there's no ambiguity about what's on offer and what happens next.
+            We've had two good conversations. You asked me to write it up properly so you could see the full picture. This is that.
           </p>
           <p>
-            UF51 is three AI products — all live, all working. The platform underneath them took a year to build: language models, acoustic AI, computer vision, a verified public ledger. What it doesn't have yet is the right people walking it through the right doors. That's the gap — and it's the reason this conversation matters.
+            UF51 is three AI products — all live, all working. The platform underneath them took a year to build: language models, acoustic AI, computer vision, a verified public ledger. What it's missing is the right people walking it through the right doors.
           </p>
           <p>
-            Your background at PHD, the relationships across financial services, the understanding of how purposeful brands get built — that's not a nice-to-have. That's the thing that unlocks this.
+            Your background at PHD, the relationships across financial services, the understanding of how purposeful brands get built — that's the thing I think unlocks this. Hence the conversation.
           </p>
         </div>
 
