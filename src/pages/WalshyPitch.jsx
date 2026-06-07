@@ -46,10 +46,13 @@ export default function WalshyPitch() {
         {/* THE HUMAN BIT */}
         <div className="mb-10">
           <p className="text-gray-700 leading-relaxed mb-4">
-            Brian Hughes built this. Not a startup founder. Not a VC-backed exec. Someone who went through the worst of it — lost everything, rebuilt himself through music and tech — and decided to use what he'd learned to help people who were going through the same.
+            UF51 is a small ecosystem of AI tools built to actually help people — calm an anxious dog, decode a terrifying letter, log a litter pick that goes on a verified public ledger. Three products. All working. All live. Built by one person, mostly alone, on almost nothing.
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            The reason this conversation is happening now isn't about a funding crisis. It's about timing. AI has shifted what's possible faster than most people have caught up with — and the window to get into these markets with a product that already works, before the big players notice, is genuinely right now.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            What exists today is working software covering three areas that matter: <strong>animal welfare, environmental action, and access to justice</strong>. Built on nothing. No investment. No team. Just someone who wouldn't stop.
+            We're not looking for a cheque. We're looking for someone who gets where things are going — and wants to be part of shaping it.
           </p>
         </div>
 
@@ -251,17 +254,17 @@ export default function WalshyPitch() {
           </p>
         </div>
 
-        {/* MEDIA ANGLE */}
+        {/* WHAT THIS ACTUALLY IS */}
         <div className="mb-10">
-          <h2 className="text-xl font-bold mb-4 text-gray-800">The story</h2>
+          <h2 className="text-xl font-bold mb-4 text-gray-800">What we're actually looking for</h2>
           <p className="text-gray-700 text-sm leading-relaxed mb-3">
-            Someone who nearly didn't make it, who rebuilt everything from scratch, and built AI tools from a laptop in Scotland that help people fight the system, calm their anxious pets, and clean up their communities.
+            Someone who's been in the room when big brands make decisions. Who knows the difference between a product that belongs in a pitch deck and one that actually belongs in a partnership. Who can look at PetSounds51 and immediately think of three people worth calling.
           </p>
           <p className="text-gray-700 text-sm leading-relaxed mb-3">
-            That story hasn't been told yet. You can't manufacture that origin. We haven't even started telling it.
+            The world is changing faster than most companies can keep up with. The people who shape what comes next aren't the ones with the most capital — they're the ones who understood it early and moved. This is that moment, for these products, in these markets.
           </p>
           <p className="text-gray-700 text-sm leading-relaxed">
-            And for someone thinking about what comes next after a long career — this is the kind of thing you look back on and feel good about. Not just financially. Actually good.
+            If that sounds interesting rather than risky, we should talk properly.
           </p>
         </div>
 
@@ -269,9 +272,8 @@ export default function WalshyPitch() {
         <div className="mb-12">
           <div className="border-l-4 border-gray-300 pl-6">
             <p className="text-gray-600 italic leading-relaxed text-sm">
-              "We're early. No big user numbers. No polished deck. What we have is working software, a genuine mission, and a founder who's already been through worse than a startup failing. This isn't a pitch. It's an honest conversation about whether you want to build something real with us."
+              "We're early. The numbers aren't there yet. But the products work, the markets are real, and the timing is genuinely interesting. This isn't a polished pitch — it's an honest conversation about whether you want in on something before it's obvious."
             </p>
-            <p className="text-gray-500 text-xs mt-3">— Brian Hughes, Founder, UF51</p>
           </div>
         </div>
 
