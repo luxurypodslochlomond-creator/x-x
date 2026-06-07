@@ -211,7 +211,7 @@ export default function ForChris() {
 
         {/* CLOSE */}
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          I'll be straight with you. The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to let me stop splitting my attention across building, supporting, selling and everything else at once, and actually finish the job properly.
+          The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to stop splitting attention across building, supporting, selling and everything else at once, and actually finish the job properly.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
           What I need alongside the money is someone who can be honest when something isn't good enough yet, and who knows how to open the right conversations. I think there's something here worth exploring together.
