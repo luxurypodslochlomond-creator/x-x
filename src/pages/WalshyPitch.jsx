@@ -121,11 +121,8 @@ export default function ForChris() {
         </p>
 
         {/* CONTEXT */}
-        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '1rem' }}>
-          Most "tech opportunities" are ideas dressed up as products. This isn't that. The platform is built. The products are real and ready to be taken to market. What's missing is a commercial brain who understands how brands spend money, why they do it, and what actually moves the needle. That's the gap this is looking to fill.
-        </p>
-        <p className="p-body" style={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#6b7280', marginBottom: '0' }}>
-          Worth saying — PetSounds51 is built on peer-reviewed acoustic research. SORTED uses real language model architecture, not a chatbot wrapper. Earth51's verification uses computer vision. These aren't buzzwords. The science works, which is why the products work. Spend five minutes with any of them and that's obvious.
+        <p className="p-body" style={{ fontSize: '1rem', lineHeight: 1.85, color: '#374151', marginBottom: '0' }}>
+          Three products. All built. All real. What's missing is a commercial brain who understands how brands spend money, why they do it, and what actually moves the needle. That's the gap this is looking to fill.
         </p>
 
         <div className="rule-dark" style={{ margin: '2.5rem 0' }} />
