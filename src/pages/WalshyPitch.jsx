@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-// A letter. Not a pitch deck.
 export default function ForChris() {
   const [showStructure, setShowStructure] = useState(false);
 
   return (
-    <div className="min-h-screen" style={{ background: '#f9f6f0', fontFamily: '"Georgia", "Times New Roman", serif', color: '#1a1a1a' }}>
+    <div className="min-h-screen" style={{ background: '#f9f6f0', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1a1a1a' }}>
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
@@ -72,8 +71,6 @@ export default function ForChris() {
           font-weight: 500;
         }
 
-        .dot-sep { color: #d1d5db; margin: 0 0.5rem; }
-
         @media print {
           .no-print { display: none !important; }
           body { background: #fff !important; }
@@ -81,7 +78,6 @@ export default function ForChris() {
         }
       `}</style>
 
-      {/* SAVE PDF */}
       <div className="no-print fixed top-5 right-5 z-50">
         <button
           onClick={() => window.print()}
@@ -95,36 +91,33 @@ export default function ForChris() {
 
         {/* MASTHEAD */}
         <div className="mb-16">
-          <p className="section-label mb-3">Private · June 2026</p>
-          <h1 className="pitch-display text-5xl font-bold leading-tight mb-5" style={{ color: '#1a1a1a' }}>
-            Three products.<br />Your kind of rooms.
+          <p className="section-label mb-3">Private · June 2026 · For Chris</p>
+          <h1 className="pitch-display font-bold leading-tight mb-5" style={{ fontSize: '2.8rem', color: '#1a1a1a' }}>
+            Following on from<br />our conversations.
           </h1>
           <p className="pitch-display text-xl" style={{ fontStyle: 'italic', color: '#78716c' }}>
-            A note for Chris — from Brian.
+            Here's the structure, properly written down.
           </p>
         </div>
 
         <div className="mb-14" style={{ height: '1px', background: 'linear-gradient(to right, #d6d3d1, transparent)' }} />
 
-        {/* OPENING — HUMAN VOICE */}
+        {/* OPENING */}
         <div className="mb-16 space-y-5 pitch-body" style={{ fontSize: '1.1rem', lineHeight: '1.85', color: '#374151' }}>
           <p>
-            Graeme suggested we talk and that recommendation means something. He doesn't make them lightly.
+            Good conversations deserve a proper follow-up. So here it is — everything we've talked about, in one place, so there's no ambiguity about what's on offer and what happens next.
           </p>
           <p>
-            There's a platform called UF51 — three AI products, all live, all working. Not prototypes. Not decks. Real tools that real people are using right now. The technology underneath them — language models, acoustic AI, computer vision, a verified public ledger — would take an enterprise team a year and serious budget to put together. It's been built leaner than that.
+            UF51 is three AI products — all live, all working. The platform underneath them took a year to build: language models, acoustic AI, computer vision, a verified public ledger. What it doesn't have yet is the right people walking it through the right doors. That's the gap — and it's the reason this conversation matters.
           </p>
           <p>
-            But technology isn't the gap. The gap is rooms. The right conversations with the right people at the right organisations — and that's exactly where you come in.
-          </p>
-          <p>
-            What's on the table isn't money for a promise. It's a stake in three products that are already working, at the moment they need someone who understands how to take them somewhere.
+            Your background at PHD, the relationships across financial services, the understanding of how purposeful brands get built — that's not a nice-to-have. That's the thing that unlocks this.
           </p>
         </div>
 
         {/* THE THREE PRODUCTS */}
-        <div className="mb-6">
-          <p className="section-label">The three products</p>
+        <div className="mb-8">
+          <p className="section-label">What we've built</p>
         </div>
 
         {/* PETSOUNDS51 */}
@@ -137,13 +130,13 @@ export default function ForChris() {
           </p>
           <div className="space-y-4 pitch-body" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
             <p>
-              A dog with separation anxiety. A cat terrified of fireworks. A horse that won't load into a trailer. These aren't niche problems — they affect millions of UK pet owners. The existing options are expensive, slow, and often don't work.
+              A dog with separation anxiety. A cat terrified of fireworks. A horse that won't load. These affect millions of UK pet owners — and the existing options are expensive, slow, and often don't work.
             </p>
             <p>
-              PetSounds51 uses acoustic protocols built on peer-reviewed research. Works from a phone. No vet appointment. No prescription. The UK pet care market is <span className="stat-pill">£7.9bn</span> — pet anxiety is one of the fastest-growing segments and almost nobody has addressed it properly with technology.
+              PetSounds51 uses acoustic protocols built on peer-reviewed research. Works from a phone. No vet appointment. No prescription. The UK pet care market is <span className="stat-pill">£7.9bn</span> — pet anxiety is one of its fastest-growing segments.
             </p>
             <p className="pull-quote">
-              One vet endorsement changes everything. Pet insurers would pay — not users — to reduce anxiety-related claims. Any PHD client with a pet or wellness category could white-label this tomorrow. The product is ready. The conversation is the thing that needs opening — and that's a conversation you could have.
+              One vet endorsement changes the B2B story completely. Pet insurers would pay — not users — to reduce anxiety-related claims. Any brand with a pet or wellness category could white-label this. The product is done. The conversation is the thing that needs opening.
             </p>
           </div>
         </div>
@@ -158,13 +151,13 @@ export default function ForChris() {
           </p>
           <div className="space-y-4 pitch-body" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
             <p>
-              Someone gets a letter from HMRC. Or a bailiff. Or the council. They don't understand it, they don't know what to do, and they can't afford a solicitor to explain it to them. SORTED reads the letter and tells them — plain English, any language, in seconds. Nothing stored. No data kept.
+              Someone gets a letter from HMRC. Or a bailiff. Or the council. They don't understand it, can't afford a solicitor, and don't know what to do. SORTED reads the letter and explains it — plain English, any language, in seconds. Nothing stored. No data kept.
             </p>
             <p>
               Legal aid has been gutted. Citizens Advice is overwhelmed. The UK legal tech market is projected at <span className="stat-pill">£25bn by 2030</span>. Everyone is building for law firms. Nobody has properly built for the person on the other end of the letter.
             </p>
             <p className="pull-quote">
-              HSBC has a legal obligation under FCA Consumer Duty to demonstrate genuine support for vulnerable customers. SORTED solves that directly — it's not a CSR story, it's a compliance story. PHD manages their media. You know that room. That's one conversation — and you could walk into it next week. There are dozens like it across financial services, utilities and housing associations.
+              HSBC has a legal obligation under FCA Consumer Duty to demonstrate genuine support for vulnerable customers. SORTED solves that directly — it's not a CSR story, it's a compliance story. You know that room. That's one conversation, and there are dozens like it across financial services, utilities and housing associations.
             </p>
           </div>
         </div>
@@ -179,10 +172,10 @@ export default function ForChris() {
           </p>
           <div className="space-y-4 pitch-body" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
             <p>
-              People log litter picks. Computer vision verifies the photos. Everything goes on a public ledger — auditable, tamper-proof, community-scale environmental impact. ESG reporting is now a legal requirement for large UK companies and they need verified ground truth, not spreadsheets of good intentions.
+              People log litter picks. Computer vision verifies the photos. Everything goes on a public ledger — auditable, tamper-proof, community-scale impact. ESG reporting is a legal requirement for large UK companies and they need verified ground truth, not spreadsheets of good intentions.
             </p>
             <p className="pull-quote">
-              PHD's work with British Heart Foundation is exactly the model — purpose-led, community-scale, genuinely measurable. Earth51 produces the verified data that makes those campaigns credible to a board. You already understand how that story gets told. That's not a small thing.
+              PHD's work with British Heart Foundation is exactly the model — purpose-led, community-scale, genuinely measurable. Earth51 produces the verified data that makes those campaigns credible to a board. You already understand how that story gets told.
             </p>
           </div>
         </div>
@@ -195,36 +188,36 @@ export default function ForChris() {
           <div className="big-number mb-6">17% for £20,000.</div>
           <div className="space-y-4 pitch-body" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
             <p>
-              One stake across all three products. UF51 CIC — the community interest company — retains 10% of commercial revenue as a structural dividend. That keeps the core tools free for the people who need them most. It's locked in by design, not goodwill.
+              One stake across all three products. UF51 CIC — the community interest company — retains 10% of commercial revenue as a structural dividend. That keeps the core tools free for the people who need them most. Locked in by design, not goodwill.
             </p>
             <p>
-              The ask isn't passive capital. Your network and your judgment are worth more than the cheque. The number reflects that.
+              This isn't passive capital. The value is the network, the judgment, the doors. The number reflects that.
             </p>
           </div>
 
           <div className="mt-6 p-5 rounded-sm border border-amber-200" style={{ background: '#fffbeb' }}>
             <p className="pitch-sans font-semibold text-sm text-gray-800 mb-1">On SEIS</p>
             <p className="pitch-sans text-sm text-gray-600 leading-relaxed">
-              If UF51 Commercial Ltd qualifies — which is likely — you could claim up to 50% income tax relief, bringing the effective outlay closer to £10k. Worth a conversation with your accountant before we shake hands.
+              If UF51 Commercial Ltd qualifies — which is likely — up to 50% income tax relief is available, bringing the effective outlay closer to £10k. Worth a conversation with your accountant before we shake hands.
             </p>
           </div>
         </div>
 
         {/* WHAT £20K DOES */}
         <div className="mb-12">
-          <p className="section-label">What £20k actually does</p>
+          <p className="section-label">What £20k unlocks</p>
           <p className="pitch-body mb-6" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
-            Three months of proper runway. Not survival — momentum. Enough to stop reacting and start walking through the right doors:
+            Three months of proper momentum — enough to walk through the right doors:
           </p>
-          <div className="space-y-3 pitch-sans" style={{ fontSize: '0.95rem', color: '#4b5563' }}>
+          <div className="space-y-0 pitch-sans" style={{ fontSize: '0.95rem', color: '#4b5563' }}>
             {[
               'Platform infrastructure and AI compute running at scale',
               'PetSounds51 vet partnership — one endorsement transforms the B2B story',
-              'SORTED outreach to HSBC, utilities, housing associations',
+              'SORTED outreach to financial services — HSBC, utilities, housing associations',
               'Earth51 council pilot scoped and proposed',
-              'UF51 Commercial Ltd properly incorporated — clean structure from day one',
+              'UF51 Commercial Ltd properly incorporated — clean cap table from day one',
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4 py-2.5 border-b border-gray-100">
+              <div key={i} className="flex items-start gap-4 py-3 border-b border-gray-100">
                 <span style={{ color: '#d97706', fontWeight: 'bold', flexShrink: 0, marginTop: '2px' }}>—</span>
                 <span>{item}</span>
               </div>
@@ -232,7 +225,7 @@ export default function ForChris() {
           </div>
         </div>
 
-        {/* EQUITY STRUCTURE — COLLAPSIBLE */}
+        {/* EQUITY STRUCTURE */}
         <div className="mb-12">
           <button
             onClick={() => setShowStructure(!showStructure)}
@@ -244,7 +237,7 @@ export default function ForChris() {
 
           {showStructure && (
             <div className="mt-5 border border-gray-200 rounded-sm bg-white p-5">
-              <div className="space-y-0 pitch-sans text-sm">
+              <div className="pitch-sans text-sm">
                 {[
                   { label: 'Founder (Brian)', value: '80%', color: '#1a1a1a' },
                   { label: 'Chris Walsh', value: '17%', color: '#d97706' },
@@ -267,17 +260,17 @@ export default function ForChris() {
         {/* GRAEME NOTE */}
         <div className="mb-12 pitch-body" style={{ fontSize: '1rem', lineHeight: '1.8', color: '#374151' }}>
           <p>
-            <strong>A word on Graeme.</strong> He made this introduction and that matters. He'll be properly looked after — advisory equity and a finder's arrangement. That conversation happens regardless of how this one goes.
+            <strong>On Graeme.</strong> He made this introduction and that matters. He'll be properly looked after — advisory equity and a finder's arrangement. That conversation happens regardless of how this one goes.
           </p>
         </div>
 
         {/* CLOSE */}
         <div className="mb-16 space-y-5 pitch-body" style={{ fontSize: '1.1rem', lineHeight: '1.85', color: '#374151' }}>
           <p>
-            Three working products. Real markets. Proper technology. Early enough that your involvement shapes it — not so early it's a leap of faith.
+            Three working products. Real markets. Real technology. Early enough that getting involved now shapes what this becomes.
           </p>
           <p>
-            A coffee would be better than a Zoom. Whatever works for you.
+            A coffee would be better than a Zoom.
           </p>
           <p style={{ color: '#9ca3af', marginTop: '2rem' }}>— Brian</p>
         </div>
