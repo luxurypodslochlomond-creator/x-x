@@ -96,7 +96,7 @@ export default function WalshyPitch() {
             </p>
             <div className="border-t border-blue-500/20 pt-4">
               <p className="text-xs font-mono text-blue-500/70 uppercase tracking-widest mb-2">The unlock</p>
-              <p className="text-gray-400 text-sm">B2B white-label. Any large consumer brand with a financial wellbeing or vulnerability obligation — banks, utilities, supermarkets, housing associations — needs exactly this and has budget for it. Chris knows how those conversations start better than anyone.</p>
+              <p className="text-gray-400 text-sm">B2B white-label. HSBC has a legal obligation under FCA Consumer Duty to support vulnerable customers — SORTED solves that problem directly. PHD runs their media. That is one conversation away. Banks, utilities, housing associations all have the same need and the same budget pressure.</p>
             </div>
           </div>
 
@@ -211,7 +211,7 @@ export default function WalshyPitch() {
             </div>
             <div className="border-l-2 border-blue-500 pl-5">
               <p className="text-sm font-black text-white mb-1">Financial services and consumer brands</p>
-              <p className="text-sm text-gray-400 leading-relaxed">SORTED belongs in the financial wellbeing strategy of every major UK bank, utility and supermarket. They have regulatory obligations around vulnerable customers and budgets to match. PHD's commercial relationships in that space are exactly the door SORTED needs opened.</p>
+              <p className="text-sm text-gray-400 leading-relaxed">SORTED belongs in the financial wellbeing strategy of every major UK bank. HSBC already has the FCA Consumer Duty obligation — they must demonstrate real support for vulnerable customers. SORTED is exactly that product. PHD manages their media. Chris knows the room.</p>
             </div>
             <div className="border-l-2 border-green-500 pl-5">
               <p className="text-sm font-black text-white mb-1">ESG and cause-led campaigns</p>
