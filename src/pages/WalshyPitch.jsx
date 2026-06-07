@@ -203,7 +203,7 @@ export default function ForChris() {
         <div className="callout">
           <p className="label" style={{ marginBottom: '0.75rem' }}>Why now makes sense</p>
           <p className="p-body" style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#374151' }}>
-            You've spent your career understanding how commercial decisions actually get made — what brands need, what they'll pay for, and who's worth talking to. This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that has legs.
+            This is early enough that the right involvement genuinely shapes what it becomes. Not a consultancy arrangement. Not an advisory credit on a deck. A real stake in something that has legs — with someone who knows which doors are worth knocking on.
           </p>
         </div>
 
@@ -214,7 +214,7 @@ export default function ForChris() {
           I'll be straight with you. The products are live but they're not yet where they could be. The investment isn't to paper over cracks — it's to let me stop splitting my attention across building, supporting, selling and everything else at once, and actually finish the job properly.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '1.5rem' }}>
-          What I need alongside the money is someone who's spent a career in rooms where big commercial decisions get made — who can be honest when something isn't good enough yet, and who knows which doors are worth knocking on. I think there's something here worth exploring together.
+          What I need alongside the money is someone who can be honest when something isn't good enough yet, and who knows how to open the right conversations. I think there's something here worth exploring together.
         </p>
         <p className="p-body" style={{ fontSize: '1.05rem', lineHeight: 1.85, color: '#374151', marginBottom: '2rem' }}>
           No pressure. Just wanted you to see it honestly rather than dressed up.
