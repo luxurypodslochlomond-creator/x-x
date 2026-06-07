@@ -140,8 +140,8 @@ export default function WalshyPitch() {
             Looking for a partner who gets it.
           </p>
 
-          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.7, color: '#374151', marginBottom: '0.8rem' }}>
-            Three live products solving real problems. All working. Now looking for someone who already has the doors open and can move fast.
+          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.7, color: '#1f2937', marginBottom: '0.8rem' }}>
+            Three live products. All solving real problems. All working. Now looking for someone who already has the doors open and can move fast.
           </p>
 
           <div className="rule" style={{ marginBottom: '0.8rem' }} />
@@ -186,16 +186,16 @@ export default function WalshyPitch() {
           {/* THE REAL BIT */}
           <p className="label" style={{ marginBottom: '0.4rem' }}>What's really happening</p>
           <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.6rem' }}>
-            Tech is done. Products work. We could spend years building but we're already past that. What we need is someone who knows how big organizations actually move — someone with relationships, who's done this before, who can open the right doors and structure deals that work.
+            Tech is done. Products work. We're past the building phase. What we need is someone who knows how big organizations move — relationships, experience, the right doors. Someone who can structure deals that work.
           </p>
 
           <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.6rem' }}>
-            One pet insurer conversation changes PetSounds51. One bank compliance team changes SORTED. One brand's ESG budget changes Earth51. We've got the products. We just need someone who knows how to have those conversations like they matter.
+            One pet insurer conversation changes PetSounds51. One bank compliance team changes SORTED. One ESG budget changes Earth51. We've built the products. Now we need someone who knows how to have those conversations.
           </p>
 
           <div className="callout">
             <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.7, color: '#1f2937', margin: 0 }}>
-              That's not weakness. That's clarity. Build beautiful things. Find people who know how to scale them. Both matter.
+              That's clarity, not weakness. Build beautiful things. Find people who know how to scale them. Both matter.
             </p>
           </div>
 
@@ -205,11 +205,11 @@ export default function WalshyPitch() {
           <p className="label" style={{ marginBottom: '0.3rem' }}>The offer</p>
           <div className="number-big">17% for £20k.</div>
           <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.6, color: '#1f2937', marginBottom: '0.3rem' }}>
-            One stake. All three products. Transparent: Graeme 3%, founder alongside, UF51 CIC holds 10% of revenue — keeping core tools free.
+            One stake. All three products. Transparent cap table: Graeme 3%, founder alongside, UF51 CIC holds 10% revenue — keeping core tools free.
           </p>
           <div className="seis-box">
             <p className="p-sans" style={{ fontSize: '0.65rem', lineHeight: 1.6, color: '#15803d', margin: 0 }}>
-              <strong>SEIS:</strong> Company may qualify (first investment, under £200k raised, under 25 employees). If approved: 50% income tax relief. Effective cost ~£10k. Your accountant will confirm.
+              <strong>SEIS eligible:</strong> 50% income tax relief. Effective cost £10k.
             </p>
           </div>
         </div>
