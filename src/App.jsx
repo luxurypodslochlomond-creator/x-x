@@ -109,6 +109,7 @@ const CB51HowPage = React.lazy(() => import('./pages/CB51How'));
 const WalshyPitchPage = React.lazy(() => import('./pages/WalshyPitch'));
 
 
+
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
 const MainPage = mainPageKey ? Pages[mainPageKey] : <></>;

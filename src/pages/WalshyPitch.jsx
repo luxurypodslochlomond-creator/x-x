@@ -1,209 +1,193 @@
 import React, { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const PawIcon = ({ size = 24, color = "#f59e0b" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <ellipse cx="12" cy="17" rx="5" ry="4" fill={color} opacity="0.9"/>
-    <ellipse cx="7" cy="12" rx="2.2" ry="3" fill={color} opacity="0.8"/>
-    <ellipse cx="17" cy="12" rx="2.2" ry="3" fill={color} opacity="0.8"/>
-    <ellipse cx="9.5" cy="8" rx="1.8" ry="2.5" fill={color} opacity="0.7"/>
-    <ellipse cx="14.5" cy="8" rx="1.8" ry="2.5" fill={color} opacity="0.7"/>
-  </svg>
-);
-
-const WaveIcon = ({ size = 24, color = "#f59e0b" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <path d="M2 12 L5 12 L6 7 L7 17 L8 10 L9 14 L10 6 L11 18 L12 9 L13 15 L14 11 L15 13 L16 12 L19 12 L22 12"
-      stroke={color} strokeWidth="2" strokeLinecap="round" fill="none"/>
-  </svg>
-);
-
-const LeafIcon = ({ size = 24, color = "#22c55e" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <path d="M12 2C6 2 3 8 3 14c0 4 2.5 7 6 8 0-4 1-7 3-9-1 3-1 6 0 9 3.5-1 6-4.5 6-8 0-6-3-12-6-12z" fill={color} opacity="0.85"/>
-  </svg>
-);
-
-const Dot = () => (
-  <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mx-1 mb-0.5 align-middle" />
-);
+// Simple clean investor brief — Chris Walsh & Graeme
+// No fluff. No fake metrics. Just honest.
 
 export default function WalshyPitch() {
-  const [shown, setShown] = useState(false);
+  const [showStructure, setShowStructure] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-      <div className="max-w-xl mx-auto px-6 py-16 space-y-14">
+    <div className="min-h-screen bg-white text-gray-900" style={{ fontFamily: 'Georgia, serif' }}>
+      
+      {/* HEADER */}
+      <div className="max-w-2xl mx-auto px-8 pt-16 pb-16">
+        <div className="mb-2">
+          <span className="text-xs font-mono text-gray-400 tracking-widest uppercase">Private & Confidential — June 2026</span>
+        </div>
+        <h1 className="text-4xl font-bold text-gray-900 mb-2 leading-tight">
+          Universal Frequency 51
+        </h1>
+        <p className="text-lg text-gray-500 mb-8">An invitation to be part of something early.</p>
+        <div className="h-px bg-gray-200 mb-8" />
 
-        {/* Header */}
-        <div>
-          <p className="text-xs tracking-[0.3em] text-gray-600 uppercase mb-8">May 2026 · Private</p>
-          <h1 className="text-5xl font-black leading-[1.1] mb-6">
-            We're building<br />
-            things that<br />
-            <span className="text-amber-400">actually work.</span>
-          </h1>
-          <p className="text-gray-400 leading-relaxed text-lg">
-            Not a startup with a vision board. Not an app looking for a problem. 
-            Three real products, real people using them, and a gap where the right person could make a genuine difference.
+        {/* THE HUMAN BIT */}
+        <div className="mb-10">
+          <p className="text-gray-700 leading-relaxed mb-4">
+            Brian Hughes built this. Not a startup founder. Not a VC-backed exec. A person who lost everything, rebuilt himself through tech and music, and decided to spend that energy helping people navigate a world that wasn't designed for them.
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            What exists today is a live platform — real tools, real users, real code — covering three areas that matter: <strong>animal welfare, environmental action, and access to justice</strong>. Built on zero funding. With a lot of heart.
           </p>
         </div>
 
-        {/* Divider */}
-        <div className="flex items-center gap-3">
-          <PawIcon size={14} color="#374151" />
-          <div className="flex-1 h-px bg-white/10" />
-          <PawIcon size={14} color="#374151" />
-        </div>
-
-        {/* PetSounds51 */}
-        <div>
-          <div className="flex items-center gap-2 mb-4">
-            <PawIcon size={18} />
-            <p className="text-xs tracking-widest text-amber-400 uppercase font-bold">PetSounds51</p>
+        {/* THE 3 PRODUCTS */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold mb-6 text-gray-800">The Products</h2>
+          
+          {/* PetSounds51 */}
+          <div className="border border-amber-200 rounded-lg p-6 mb-4 bg-amber-50">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-2xl">🐾</span>
+              <div>
+                <h3 className="font-bold text-gray-900">PetSounds51</h3>
+                <p className="text-sm text-amber-700">Sound therapy for anxious animals</p>
+              </div>
+            </div>
+            <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              Peer-reviewed acoustic protocols for separation anxiety, firework fear, and vet stress in dogs, cats and horses. Free to try. £9.99/month or £29.99/year for full access. No vet visit. Works from a phone.
+            </p>
+            <p className="text-sm text-gray-500">
+              <strong>Why it works commercially:</strong> 13 million pet owners in the UK. Vet bills for anxiety-related behaviour average £400+. We're £10/month.
+            </p>
           </div>
-          <p className="text-white font-black text-2xl mb-4 leading-tight">
-            You know that moment when a dog walks into a room and just... stops?
-          </p>
-          <p className="text-gray-400 leading-relaxed mb-4">
-            That happened in a bar. Someone walked past a screen playing our frequencies 
-            and their dog froze — ears up, completely tuned in. 
-            Nobody told them to look. Nobody trained them to stop.
-          </p>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            It's not magic. It's psychoacoustics — the specific frequencies that speak 
-            directly to the animal nervous system. Peer-reviewed. Properly researched. 
-            Built into an app that anyone can use in about 30 seconds.
-            Separation anxiety. Fireworks. Travel stress. Already helping.
-          </p>
-          <div className="bg-amber-950/40 border border-amber-500/20 rounded-2xl p-5">
-            <p className="text-amber-300 font-black mb-2">The audience doesn't need convincing.</p>
-            <p className="text-amber-200/70 text-sm leading-relaxed">
-              12 million dogs in the UK. Every owner has left the house wondering 
-              if their dog is okay. This answers that — and they'll tell everyone they know when it works. 
-              It just needs to get in front of people.
+
+          {/* SORTED */}
+          <div className="border border-blue-200 rounded-lg p-6 mb-4 bg-blue-50">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-2xl">⚖️</span>
+              <div>
+                <h3 className="font-bold text-gray-900">SORTED</h3>
+                <p className="text-sm text-blue-700">Plain English for scary letters</p>
+              </div>
+            </div>
+            <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              Upload any legal notice, debt letter, council demand, or HMRC correspondence. Get plain English back in seconds — what it means, what to do, what your rights are. Any language. Nothing stored.
+            </p>
+            <p className="text-sm text-gray-500">
+              <strong>Why it works commercially:</strong> Legal aid has been gutted. 60% of UK adults receive a letter they don't fully understand each year. Citizens Advice queues are months long. We're instant.
+            </p>
+          </div>
+
+          {/* Earth51 / Litter */}
+          <div className="border border-green-200 rounded-lg p-6 mb-4 bg-green-50">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-2xl">🌍</span>
+              <div>
+                <h3 className="font-bold text-gray-900">Earth51 / Litter Picking</h3>
+                <p className="text-sm text-green-700">Environmental action with AI verification</p>
+              </div>
+            </div>
+            <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              AI-verified litter picks logged on a public ledger. Real environmental data. Corporate ESG partnerships in development. Community-led. Built for councils, schools, and sustainability-focused businesses.
+            </p>
+            <p className="text-sm text-gray-500">
+              <strong>Why it works commercially:</strong> ESG reporting is now mandatory for large UK companies. Verified environmental data has real B2B value.
             </p>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="flex items-center gap-3">
-          <WaveIcon size={14} color="#374151" />
-          <div className="flex-1 h-px bg-white/10" />
-          <WaveIcon size={14} color="#374151" />
-        </div>
-
-        {/* SORTED */}
-        <div>
-          <div className="flex items-center gap-2 mb-4">
-            <WaveIcon size={18} />
-            <p className="text-xs tracking-widest text-green-400 uppercase font-bold">SORTED</p>
-          </div>
-          <p className="text-white font-black text-2xl mb-4 leading-tight">
-            There's a letter on most people's kitchen table right now that they haven't opened.
-          </p>
-          <p className="text-gray-400 leading-relaxed mb-4">
-            HMRC. The council. A landlord. A debt they'd forgotten about. 
-            Brown envelope. Sits there for three days because nobody knows 
-            what it actually means or what they're supposed to do about it.
-          </p>
-          <p className="text-gray-400 leading-relaxed">
-            SORTED reads it. Tells you exactly what it is in plain English. 
-            Tells you what to do. Any language. Takes about ten seconds. 
-            Nothing stored, nothing sold, no account, no login. 
-            Just — sorted. Already live. Already helping people who were genuinely scared.
-          </p>
-        </div>
-
-        {/* Divider */}
-        <div className="flex items-center gap-3">
-          <LeafIcon size={14} color="#374151" />
-          <div className="flex-1 h-px bg-white/10" />
-          <LeafIcon size={14} color="#374151" />
-        </div>
-
-        {/* Litter */}
-        <div>
-          <div className="flex items-center gap-2 mb-4">
-            <LeafIcon size={18} />
-            <p className="text-xs tracking-widest text-green-400 uppercase font-bold">The Litter App</p>
-          </div>
-          <p className="text-white font-black text-2xl mb-4 leading-tight">
-            People are already picking up litter. Millions of them. Every weekend.
-          </p>
-          <p className="text-gray-400 leading-relaxed mb-4">
-            They just get nothing back for it. No record. No thanks. 
-            No data that anyone can actually use.
-          </p>
-          <p className="text-gray-400 leading-relaxed">
-            Take a photo of what you find, get rewarded. 
-            Councils get verified, real-world data about where the problems actually are. 
-            Brands get ESG evidence that wasn't generated by a consultant with a spreadsheet. 
-            Nearly ready to launch — this one just needs a final push.
-          </p>
-        </div>
-
-        {/* Divider */}
-        <div className="h-px bg-white/10" />
-
-        {/* The ask — honest, not corporate */}
-        <div>
-          <p className="text-white font-black text-2xl mb-5 leading-tight">
-            So why are you reading this?
-          </p>
-          <p className="text-gray-400 leading-relaxed mb-8">
-            Because we think you might be the kind of person who can help — 
-            and we'd rather have an honest conversation than send a 40-slide deck 
-            to someone who'll never open it.
-          </p>
-
-          <div className="space-y-4">
-            <div className="border border-white/10 rounded-2xl p-5 hover:border-amber-500/30 transition-colors">
-              <p className="font-black text-white mb-2">Connections matter more than cash right now.</p>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                If you know how to get things in front of people — the right creative, 
-                the right channel, the right introduction — that's worth more to us than 
-                pretty much anything. PetSounds51 and SORTED are both ready.
-              </p>
-            </div>
-
-            <div className="border border-white/10 rounded-2xl p-5 hover:border-green-500/20 transition-colors">
-              <p className="font-black text-white mb-2">And if putting a bit behind it makes sense to you, we can talk about that too.</p>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                For the litter app specifically, there's a clear, defined amount of work 
-                between here and launch. If backing that appeals, we'll keep it simple — 
-                fair, straightforward, nothing that makes either of us feel weird about it.
-              </p>
+        {/* THE ASK */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold mb-4 text-gray-800">The Invitation</h2>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We're raising <strong>£20,000</strong> to fund 6 months of focused development and marketing across all three products.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              In return, we're offering <strong>15% equity in UF51 Commercial Ltd</strong> — a new holding company that sits above PetSounds51, SORTED, and Earth51. One stake. Three products. One relationship.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              <strong>UF51 CIC</strong> (the community interest company) retains 10% of commercial revenue as a community dividend — keeping the mission honest and the healing tools free for those who need them.
+            </p>
+            <div className="bg-white border border-gray-100 rounded p-4 mt-4">
+              <p className="text-sm text-gray-600"><strong>Potential SEIS relief:</strong> As a new UK Ltd, this investment may qualify for SEIS — meaning up to 50% tax relief on the £20k. Your real cost could be closer to £10k. Worth confirming with your accountant.</p>
             </div>
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="pb-8">
-          <p className="text-gray-600 text-sm leading-relaxed mb-8">
-            No pressure. No follow-up sequence. If it resonates — or even if you just want to push back on something — get in touch.
-          </p>
-
-          <button
-            onClick={() => setShown(!shown)}
-            className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-black font-black text-sm tracking-widest uppercase rounded-2xl transition-all"
+        {/* STRUCTURE - collapsible */}
+        <div className="mb-10">
+          <button 
+            onClick={() => setShowStructure(!showStructure)}
+            className="flex items-center gap-2 text-gray-500 text-sm hover:text-gray-700 transition-colors"
           >
-            {shown ? "Close" : "Let's Talk"}
+            {showStructure ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            Show proposed equity structure
           </button>
-
-          {shown && (
-            <div className="mt-6 text-center space-y-1">
-              <p className="font-black text-white text-lg">Brian Hughes</p>
-              <p className="text-amber-400 font-bold">brian@universalfrequency51.com</p>
-              <div className="flex items-center justify-center gap-2 mt-4">
-                <PawIcon size={12} color="#374151" />
-                <p className="text-gray-600 text-xs">Glasgow · UF51</p>
-                <LeafIcon size={12} color="#374151" />
+          {showStructure && (
+            <div className="mt-4 border border-gray-100 rounded-lg p-5 bg-gray-50">
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-700">Brian Hughes (Founder)</span>
+                  <span className="font-bold">75%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-700">Chris Walsh (Investor)</span>
+                  <span className="font-bold">15%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-700">Graeme (Connector / Advisor)</span>
+                  <span className="font-bold">2–3% advisory shares</span>
+                </div>
+                <div className="flex justify-between border-t border-gray-200 pt-2 mt-2">
+                  <span className="text-gray-700">UF51 CIC (community dividend)</span>
+                  <span className="font-bold">10% of revenue</span>
+                </div>
               </div>
+              <p className="text-xs text-gray-400 mt-4">Numbers are a starting point for conversation — not set in stone.</p>
             </div>
           )}
         </div>
 
+        {/* GRAEME */}
+        <div className="mb-10">
+          <div className="bg-gray-900 text-white rounded-lg p-6">
+            <h3 className="font-bold mb-2">A note on Graeme</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Graeme made this conversation happen. That means something. We'd want to look after him properly — whether that's a small advisory stake, a finder's arrangement, or something else that feels right to everyone. That conversation is separate but it will happen.
+            </p>
+          </div>
+        </div>
+
+        {/* WHAT £20K DOES */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold mb-4 text-gray-800">What £20k does</h2>
+          <ul className="space-y-2 text-gray-700 text-sm">
+            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> 6 months of focused product development (PetSounds51 vet partnerships, SORTED B2B, Earth51 council deals)</li>
+            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> A proper go-to-market push — content, PR, the media angle Chris understands better than most</li>
+            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> Legal setup of UF51 Commercial Ltd (accountant, Companies House, SEIS application)</li>
+            <li className="flex items-start gap-2"><span className="text-green-500 mt-0.5">→</span> Keeps Brian building rather than surviving</li>
+          </ul>
+        </div>
+
+        {/* MEDIA ANGLE - for Chris specifically */}
+        <div className="mb-10">
+          <h2 className="text-xl font-bold mb-4 text-gray-800">The media angle</h2>
+          <p className="text-gray-700 text-sm leading-relaxed mb-3">
+            This is a story. A real one. Someone who lost everything, rebuilt himself, and built an AI platform that helps people decode the legal system, helps pets stay calm, and gets communities cleaning up the planet. From a laptop. In Scotland.
+          </p>
+          <p className="text-gray-700 text-sm leading-relaxed">
+            That's not a press release. That's what happened. For someone who works in media — Chris knows that a genuine story has a value that no marketing budget can buy. And we haven't told it yet.
+          </p>
+        </div>
+
+        {/* HONEST BIT */}
+        <div className="mb-12">
+          <div className="border-l-4 border-gray-300 pl-6">
+            <p className="text-gray-600 italic leading-relaxed text-sm">
+              "We're early. We don't have massive user numbers to show you. What we have is working software, a real mission, and a founder who has already survived worse than a startup failing. This isn't a pitch. It's an honest conversation about whether we want to build this together."
+            </p>
+            <p className="text-gray-500 text-xs mt-3">— Brian Hughes, Founder, UF51</p>
+          </div>
+        </div>
+
+        {/* FOOTER */}
+        <div className="border-t border-gray-200 pt-6 text-center">
+          <p className="text-xs text-gray-400">universalfrequency51.com · Private document — please don't share without permission</p>
+        </div>
       </div>
+
     </div>
   );
 }
