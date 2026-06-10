@@ -418,6 +418,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const navs = React.useMemo(() => {
     // 1. PRODUCTS (paid / subscription tools)
     const productsNav = [
+      { title: "ZAPP", url: createPageUrl("Zapp"), icon: Zap, highlight: true, description: "Build anything with AI · for kids" },
       { title: "CTRL51", url: createPageUrl("CTRL51"), icon: CTRL51Icon, highlight: true, description: "Procurement control · £5k/month" },
       { title: "SORTED", url: createPageUrl("Sorted"), icon: COOLASFUCKSorted, highlight: true, description: "Decode scary letters · subscription" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: COOLASFUCKPaw, highlight: true, description: "Sound therapy for animals · subscription" },
