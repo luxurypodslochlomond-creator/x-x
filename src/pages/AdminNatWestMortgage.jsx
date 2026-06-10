@@ -208,12 +208,21 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-2 border-green-400">
+                <div className="text-green-300 font-bold text-lg min-w-fit">10/06/2026</div>
+                <div>
+                  <p className="text-white font-bold">🔥 £200 PAYMENT AGREEMENT — SST Secured</p>
+                  <p className="text-gray-300 text-sm">Called on review date. <strong>£200 payment agreed for 23 June 2026.</strong> They accepted the offer. Communication maintained perfectly — two months in a row showing commitment.</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ NEXT REVIEW: 10 July 2026 — Keep the pattern going. ♾️❤️</p>
+                </div>
+              </div>
+
               <div className="flex items-start gap-4 bg-blue-900/20 p-4 rounded-lg border-2 border-blue-500">
                 <div className="text-blue-400 font-bold text-lg min-w-fit">📊 NEXT PHASE</div>
                 <div>
-                  <p className="text-white font-bold">Make the £100 payment on 23 May. Prepare for 10 June review.</p>
-                  <p className="text-gray-300 text-sm">By June, show them you've made progress. £100 is proof of commitment. At review, discuss either: (a) increased monthly payments once income stable, or (b) renegotiated terms.</p>
-                  <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: Turn one payment into a sustainable plan. You've got 30 days to show it can work.</p>
+                  <p className="text-white font-bold">Make the £200 payment on 23 June. Call back on 10 July.</p>
+                  <p className="text-gray-300 text-sm">Pattern established: £100 May → £200 June → increasing each month. This is the trajectory that leads to a formal repayment plan. Keep it going.</p>
+                  <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: By July, propose a fixed monthly amount. You're building trust payment by payment.</p>
                 </div>
               </div>
             </div>
