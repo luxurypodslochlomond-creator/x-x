@@ -92,13 +92,20 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
 
     try {
       const result = await base44.integrations.Core.InvokeLLM({
-        model: 'gemini_3_flash',
+        model: 'claude_sonnet_4_6',
         prompt: `${SYSTEM_PROMPT}
 
 BUILD THIS NOW: "${idea}"
 
+CRITICAL BEFORE YOU OUTPUT:
+- Every button you mention MUST have an onclick handler that works
+- Every game state variable MUST be initialised before use
+- Test the full game loop in your head: start → play → win/lose → play again
+- The Play Again / Restart button MUST fully reset ALL state variables back to defaults
+- NO placeholder text like "// add logic here" — write the complete working code
+
 Return ONLY valid JSON: {"html": "<complete single-file HTML app here>"}
-No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.`,
+No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE html>.`,
         response_json_schema: {
           type: 'object',
           properties: {
@@ -269,9 +276,10 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
             className="text-white/30 text-xs font-mono"
           >
             {buildTime < 8 ? `⚡ ${buildTime}s`
-              : buildTime < 15 ? `🔥 ${buildTime}s — it's taking shape!`
-              : buildTime < 22 ? `🚀 ${buildTime}s — almost done...`
-              : `💥 ${buildTime}s — nearly there!`}
+              : buildTime < 18 ? `🔥 ${buildTime}s — it's taking shape!`
+              : buildTime < 30 ? `🚀 ${buildTime}s — crafting epic code...`
+              : buildTime < 45 ? `💥 ${buildTime}s — nearly there!`
+              : `🏆 ${buildTime}s — making it PERFECT...`}
           </motion.p>
         </div>
 
