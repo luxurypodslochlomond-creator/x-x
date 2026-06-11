@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
 const BUILD_STAGES = [
-  { emoji: '🧠', text: 'thinking about your idea...' },
+  { emoji: '💡', text: 'thinking about your idea...' },
   { emoji: '🎨', text: 'choosing colours and style...' },
   { emoji: '⚙️', text: 'building the game engine...' },
   { emoji: '🔊', text: 'wiring up the sound effects...' },
   { emoji: '✨', text: 'adding sparkles and animations...' },
   { emoji: '🚀', text: 'almost ready... making it incredible...' },
-  { emoji: '⚡', text: 'final touches... this is going to be good...' },
+  { emoji: '⚡', text: 'final touches... this is going to be SO good...' },
 ];
 
 const SYSTEM_PROMPT = `You are ZAPP — a genius AI that builds AMAZING, fully working mini web apps for children aged 8-13.
@@ -241,13 +241,29 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
             building: <span className="text-violet-300 font-bold">"{idea}"</span>
           </p>
 
-          {buildTime > 5 && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-white/20 text-xs font-mono"
-            >
+          {buildTime > 5 && buildTime <= 15 && (
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/20 text-xs font-mono">
               {buildTime}s — making it really good for you...
+            </motion.p>
+          )}
+          {buildTime > 15 && buildTime <= 25 && (
+            <motion.p
+              key="patience"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-violet-300/60 text-sm font-bold"
+            >
+              🤩 this one is going to be AMAZING...
+            </motion.p>
+          )}
+          {buildTime > 25 && (
+            <motion.p
+              key="wow"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-pink-300/70 text-sm font-bold"
+            >
+              💥 nearly there — worth the wait!!
             </motion.p>
           )}
         </div>
@@ -352,14 +368,14 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
       {/* App display */}
       <div className="flex-1 relative overflow-hidden">
         {builderMode ? (
-          <div className="flex h-full">
-            <div className="w-2/5 overflow-y-auto border-r border-white/5 p-4" style={{ background: 'rgba(0,0,0,0.5)' }}>
+          <div className="flex flex-col md:flex-row h-full">
+            <div className="md:w-2/5 h-48 md:h-full overflow-y-auto border-b md:border-b-0 md:border-r border-white/5 p-4" style={{ background: 'rgba(0,0,0,0.5)' }}>
               <p className="text-xs font-mono text-violet-400 mb-3 font-black tracking-widest">⚡ SOURCE CODE</p>
               <pre className="text-xs font-mono leading-relaxed overflow-x-auto whitespace-pre-wrap break-all" style={{ color: '#c4b5fd' }}>
                 {builtHtml}
               </pre>
             </div>
-            <motion.div className="flex-1" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <motion.div className="flex-1 min-h-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <iframe
                 srcDoc={builtHtml}
                 className="w-full h-full border-0"
