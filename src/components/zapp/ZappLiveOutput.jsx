@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
 const BUILD_STAGES = [
-  { emoji: '💡', text: 'thinking about your idea...' },
-  { emoji: '🎨', text: 'choosing colours and style...' },
+  { emoji: '💡', text: 'cooking up your idea...' },
+  { emoji: '🎨', text: 'picking the most epic colours...' },
   { emoji: '⚙️', text: 'building the game engine...' },
-  { emoji: '🔊', text: 'wiring up the sound effects...' },
-  { emoji: '✨', text: 'adding sparkles and animations...' },
-  { emoji: '🚀', text: 'almost ready... making it incredible...' },
-  { emoji: '⚡', text: 'final touches... this is going to be SO good...' },
+  { emoji: '🔊', text: 'adding BIG sounds...' },
+  { emoji: '✨', text: 'loading sparkles and animations...' },
+  { emoji: '🏆', text: 'polishing every last pixel...' },
+  { emoji: '⚡', text: 'launching in 3... 2... 1...' },
 ];
 
 const SYSTEM_PROMPT = `You are ZAPP — a genius AI that builds AMAZING, fully working mini web apps for children aged 8-13.
@@ -66,7 +66,7 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset 
     const stageInterval = setInterval(() => {
       i = Math.min(i + 1, BUILD_STAGES.length - 1);
       setStageIndex(i);
-    }, 3500);
+    }, 2000);
 
     // Build timer for fun
     let secs = 0;
@@ -77,14 +77,13 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset 
 
     try {
       const result = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
+        model: 'gpt_5_4',
         prompt: `${SYSTEM_PROMPT}
 
-The child wants to build: "${idea}"
+BUILD THIS NOW: "${idea}"
 
-Return ONLY valid JSON with a single key "html" containing the complete HTML document as a string.
-The HTML must start with <!DOCTYPE html> and be a complete, fully working, self-contained single-page app.
-Make it INCREDIBLE. This child is about to see their idea come to life — blow their mind.`,
+Return ONLY valid JSON: {"html": "<complete single-file HTML app here>"}
+No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.`,
         response_json_schema: {
           type: 'object',
           properties: {
@@ -241,31 +240,17 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
             building: <span className="text-violet-300 font-bold">"{idea}"</span>
           </p>
 
-          {buildTime > 5 && buildTime <= 15 && (
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/20 text-xs font-mono">
-              {buildTime}s — making it really good for you...
-            </motion.p>
-          )}
-          {buildTime > 15 && buildTime <= 25 && (
-            <motion.p
-              key="patience"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-violet-300/60 text-sm font-bold"
-            >
-              🤩 this one is going to be AMAZING...
-            </motion.p>
-          )}
-          {buildTime > 25 && (
-            <motion.p
-              key="wow"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-pink-300/70 text-sm font-bold"
-            >
-              💥 nearly there — worth the wait!!
-            </motion.p>
-          )}
+          <motion.p
+            key={Math.floor(buildTime / 3)}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-white/30 text-xs font-mono"
+          >
+            {buildTime < 8 ? `⚡ ${buildTime}s`
+              : buildTime < 15 ? `🔥 ${buildTime}s — it's taking shape!`
+              : buildTime < 22 ? `🚀 ${buildTime}s — almost done...`
+              : `💥 ${buildTime}s — nearly there!`}
+          </motion.p>
         </div>
 
         {/* Stage progress dots */}
