@@ -62,14 +62,20 @@ Generate a COMPLETE, self-contained HTML page that:
 9. If it's a story/quiz, have real content relevant to the topic
 10. Add satisfying interactions — button clicks, animations, sounds via Web Audio API if relevant
 
-IMPORTANT: Output ONLY the raw HTML. No markdown. No explanation. Just the HTML starting with <!DOCTYPE html>
+IMPORTANT: Return your response as JSON with a single key "html" containing the complete HTML string starting with <!DOCTYPE html>. No markdown fences, no explanation — just the html field with the full working page.
 
 Make it genuinely impressive. A child should look at it and say "WHOA I made this!"`,
         model: 'claude_sonnet_4_6',
+        response_json_schema: {
+          type: 'object',
+          properties: {
+            html: { type: 'string', description: 'The complete HTML page' }
+          }
+        }
       });
 
-      // Stream the code character by character for the effect
-      const fullCode = result;
+      // Extract HTML from result object
+      const fullCode = result?.html || (typeof result === 'string' ? result : JSON.stringify(result));
       if (builderMode) {
         await streamCodeEffect(fullCode);
       } else {
@@ -82,7 +88,8 @@ Make it genuinely impressive. A child should look at it and say "WHOA I made thi
 
       onComplete(fullCode, title);
     } catch (err) {
-      setError('Something went wrong — tap to try again');
+      console.error('ZAPP build error:', err);
+      setError(`Something went wrong — ${err?.message || 'tap to try again'}`);
       setIsBuilding(false);
     }
   };
