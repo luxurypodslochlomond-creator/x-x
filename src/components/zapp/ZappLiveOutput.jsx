@@ -62,11 +62,11 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset 
 
   const buildApp = async () => {
     let i = 0;
-    // Advance through stages once — hold on last stage, never loop
+    // Spread 7 stages evenly across ~25s build — advance once, hold on last, never loop
     const stageInterval = setInterval(() => {
       i = Math.min(i + 1, BUILD_STAGES.length - 1);
       setStageIndex(i);
-    }, 2800);
+    }, 3500);
 
     // Build timer for fun
     let secs = 0;

@@ -76,12 +76,14 @@ export default function ZappCreator({ onSubmit }) {
       }
       setVoiceText(final || interim);
       if (final) {
-        setValue(final);
+        const trimmed = final.trim();
         setVoiceText('');
         setIsListening(false);
         setVoicePulse(false);
-        // Auto-submit after voice
-        setTimeout(() => handleSubmit(final), 400);
+        // Call onSubmit directly with the captured text — avoids stale closure on value state
+        if (trimmed.length >= 3) {
+          setTimeout(() => onSubmit(trimmed), 350);
+        }
       }
     };
 
