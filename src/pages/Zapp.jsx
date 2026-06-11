@@ -34,12 +34,13 @@ export default function Zapp() {
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-white/5">
         <button onClick={handleReset} className="flex items-center gap-2">
-          <ZappBolt size={28} animated={phase !== 'building'} />
-          <span className="text-xl font-black tracking-tight" style={{
+          <ZappBolt size={32} animated={phase !== 'building'} />
+          <span className="text-2xl font-black tracking-tight" style={{
             background: 'linear-gradient(135deg, #a78bfa, #f472b6, #60a5fa)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>ZAPP</span>
+          <span className="text-white/30 text-xs font-bold hidden sm:block ml-1">build anything with AI ⚡</span>
         </button>
 
         <div className="flex items-center gap-3">
