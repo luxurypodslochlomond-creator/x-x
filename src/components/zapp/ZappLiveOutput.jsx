@@ -3,334 +3,252 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
 const BUILD_STAGES = [
-  { label: 'thinking about your idea...' },
-  { label: 'designing the layout...' },
-  { label: 'writing the logic...' },
-  { label: 'adding the finishing touches...' },
-  { label: 'almost there...' },
+  'thinking about your idea...',
+  'designing the layout...',
+  'writing the code...',
+  'adding colours and animations...',
+  'almost ready...',
 ];
 
-export default function ZappLiveOutput({ idea, phase, builderMode, onComplete, onReset, generatedCode, appTitle }) {
+export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset }) {
   const [stageIndex, setStageIndex] = useState(0);
-  const [streamedCode, setStreamedCode] = useState('');
-  const [isBuilding, setIsBuilding] = useState(false);
+  const [builtHtml, setBuiltHtml] = useState('');
+  const [isDone, setIsDone] = useState(false);
   const [error, setError] = useState(null);
   const [shareMsg, setShareMsg] = useState('');
-  const iframeRef = useRef(null);
-  const codeEndRef = useRef(null);
+  const [appTitle, setAppTitle] = useState('');
   const hasStarted = useRef(false);
 
   useEffect(() => {
-    if (phase === 'building' && !hasStarted.current) {
+    if (!hasStarted.current) {
       hasStarted.current = true;
-      startBuilding();
+      buildApp();
     }
-  }, [phase]);
+  }, []);
 
-  // Auto-scroll code stream
-  useEffect(() => {
-    if (builderMode && codeEndRef.current) {
-      codeEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [streamedCode]);
-
-  const startBuilding = async () => {
-    setIsBuilding(true);
-
-    // Cycle stages while AI is working (in parallel)
-    let stageI = 0;
+  const buildApp = async () => {
+    // Cycle build stages while waiting
+    let i = 0;
     const stageInterval = setInterval(() => {
-      stageI = (stageI + 1) % BUILD_STAGES.length;
-      setStageIndex(stageI);
+      i = (i + 1) % BUILD_STAGES.length;
+      setStageIndex(i);
     }, 1800);
 
-    // Call AI to generate the app immediately
     try {
       const result = await base44.integrations.Core.InvokeLLM({
         prompt: `You are ZAPP — a safe, child-friendly AI that builds real, working mini web apps for children aged 8-13.
 
-SAFETY RULES (non-negotiable — apply to ALL requests without exception):
+SAFETY RULES (non-negotiable):
 - ZERO violence, weapons, gore, or anything scary
-- ZERO sexual or romantic content of any kind
-- ZERO bullying, hate, discrimination, or mean language
-- ZERO external links, URLs, or connections to the internet
-- ZERO data collection, forms that submit data, or tracking
-- ZERO references to drugs, alcohol, gambling, or adult themes
-- If the idea seems inappropriate for a child, build a fun, safe version instead (e.g. "love" → a heart animation app, "war" → a friendly castle-building game)
-- Always kind, positive, encouraging tone
+- ZERO sexual or romantic content
+- ZERO bullying, hate, or mean language  
+- ZERO external links or internet connections
+- ZERO data collection or tracking
+- If the idea seems inappropriate, make a fun safe version instead
+- Always kind and encouraging
 
 The child wants to build: "${idea}"
 
 Generate a COMPLETE, self-contained HTML page that:
-1. Works perfectly as a standalone app — no external dependencies except inline CSS and vanilla JS
-2. Is genuinely fun, interactive and polished — NOT basic
-3. Has beautiful, bold, colourful design — dark background, bright colours, large readable fonts
-4. Actually does what the child asked for — if they want a quiz, it's a real quiz with questions and scoring
-5. Has a clear title at the top
-6. Uses modern CSS (flexbox, grid, animations, gradients) — looks amazing on screen
-7. If it's a game, it should actually be playable and fun
-8. Add satisfying interactions — button clicks, animations, sounds via Web Audio API if relevant
+1. Actually builds EXACTLY what the child asked for — a clicker game should have clicking mechanics, upgrades, a score; a quiz should have real questions about the topic; a drawing tool should let you draw
+2. Is genuinely fun and polished — NOT a basic placeholder
+3. Has bold, colourful, exciting design — dark background, bright colours, large fonts, satisfying animations
+4. Works 100% offline — only inline CSS and vanilla JS, no CDN imports
+5. Has a big clear title at the top
+6. Includes real content — if it's a quiz about horses, write actual horse questions
+7. Has satisfying feedback — sounds via Web Audio API, animations on click, score tracking
+8. Works great on both desktop and mobile
 
-IMPORTANT: Return your response as JSON with a single key "html" containing the complete HTML string starting with <!DOCTYPE html>. No markdown fences, no explanation — just the html field with the full working page.
-
-Make it genuinely impressive. A child should look at it and say "WHOA I made this!"`,
+IMPORTANT: Return JSON with a single key "html" containing the complete HTML as a string starting with <!DOCTYPE html>`,
         response_json_schema: {
           type: 'object',
           properties: {
-            html: { type: 'string', description: 'The complete HTML page' }
-          }
+            html: { type: 'string' }
+          },
+          required: ['html']
         }
       });
 
-      console.log('ZAPP raw result:', result);
-      // Extract HTML from result object - handle all response shapes
-      let fullCode = '';
+      clearInterval(stageInterval);
+
+      // Robustly extract HTML
+      let html = '';
       if (result?.html) {
-        fullCode = result.html;
+        html = result.html;
       } else if (typeof result === 'string') {
-        // Try to parse if it's a JSON string
-        try {
-          const parsed = JSON.parse(result);
-          fullCode = parsed.html || result;
-        } catch {
-          fullCode = result;
-        }
-      } else {
-        fullCode = JSON.stringify(result);
+        try { html = JSON.parse(result)?.html || result; } catch { html = result; }
       }
 
-      // Validate we got actual HTML
-      if (!fullCode || !fullCode.includes('<html') && !fullCode.includes('<!DOCTYPE')) {
-        throw new Error('No HTML generated — please try again');
+      if (!html || html.length < 100) {
+        throw new Error('App generation failed — please try again');
       }
 
-      if (builderMode) {
-        await streamCodeEffect(fullCode);
-      } else {
-        setStreamedCode(fullCode);
-      }
-
-      // Extract title from HTML
-      const titleMatch = fullCode.match(/<title>(.*?)<\/title>/i);
+      const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
       const title = titleMatch ? titleMatch[1] : idea;
 
-      clearInterval(stageInterval);
-      onComplete(fullCode, title);
+      setBuiltHtml(html);
+      setAppTitle(title);
+      setIsDone(true);
+      onComplete(html, title);
+
     } catch (err) {
       clearInterval(stageInterval);
       console.error('ZAPP build error:', err);
-      setError(`Something went wrong — ${err?.message || 'tap to try again'}`);
-      setIsBuilding(false);
+      setError(err?.message || 'Something went wrong — tap to try again');
     }
   };
-
-  const streamCodeEffect = async (code) => {
-    const chunkSize = 8;
-    for (let i = 0; i < code.length; i += chunkSize) {
-      setStreamedCode(code.slice(0, i + chunkSize));
-      await sleep(2);
-    }
-    setStreamedCode(code);
-  };
-
-  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
   const handleShare = () => {
-    const shareUrl = window.location.href;
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(shareUrl);
-      setShareMsg('link copied!');
-      setTimeout(() => setShareMsg(''), 2000);
+      navigator.clipboard.writeText(window.location.href);
+      setShareMsg('link copied! ✓');
+      setTimeout(() => setShareMsg(''), 2500);
     }
   };
 
-  // Inject generated code into iframe — show as soon as we have it
-  const iframeSrcDoc = generatedCode || null;
+  // ERROR STATE
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-80px)] gap-6">
+        <div className="text-5xl">😬</div>
+        <p className="text-red-400 text-lg font-bold text-center max-w-sm">{error}</p>
+        <button
+          onClick={onReset}
+          className="px-8 py-4 rounded-2xl font-black text-white text-lg"
+          style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', boxShadow: '0 0 30px rgba(124,58,237,0.5)' }}
+        >
+          try again ⚡
+        </button>
+      </div>
+    );
+  }
 
-  return (
-    <div className="flex flex-col h-[calc(100vh-80px)]">
-      
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-6 py-3 border-b border-white/5">
-        <div className="flex items-center gap-3 min-w-0">
-          {phase === 'building' ? (
-            <div className="flex items-center gap-2">
-              <BuildingSpinner />
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={stageIndex}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  className="text-sm font-medium text-violet-300"
-                >
-                  {BUILD_STAGES[stageIndex]?.label}
-                </motion.span>
-              </AnimatePresence>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <span className="text-green-400 text-lg">✓</span>
-              <span className="text-white/80 text-sm font-bold truncate">{appTitle || idea}</span>
-            </div>
-          )}
+  // BUILDING STATE
+  if (!isDone) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-80px)] gap-8">
+        {/* Pulsing bolt */}
+        <div className="relative">
+          {[0,1,2].map(i => (
+            <motion.div
+              key={i}
+              className="absolute inset-0 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.4) 0%, transparent 70%)' }}
+              animate={{ scale: [1, 3 + i * 0.6], opacity: [0.5, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.4, ease: 'easeOut' }}
+            />
+          ))}
+          <motion.div
+            animate={{
+              filter: ['drop-shadow(0 0 12px rgba(167,139,250,0.9))', 'drop-shadow(0 0 35px rgba(244,114,182,1))', 'drop-shadow(0 0 12px rgba(167,139,250,0.9))'],
+              scale: [1, 1.15, 1]
+            }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+          >
+            <svg width="90" height="90" viewBox="0 0 32 32" fill="none">
+              <defs>
+                <linearGradient id="zg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#a78bfa" />
+                  <stop offset="50%" stopColor="#f472b6" />
+                  <stop offset="100%" stopColor="#60a5fa" />
+                </linearGradient>
+              </defs>
+              <polygon points="19,2 8,18 15,18 13,30 24,14 17,14" fill="url(#zg)" />
+            </svg>
+          </motion.div>
         </div>
 
+        <div className="text-center">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={stageIndex}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className="text-white/70 text-xl font-semibold"
+            >
+              {BUILD_STAGES[stageIndex]}
+            </motion.p>
+          </AnimatePresence>
+          <p className="text-white/30 text-sm mt-2">building: <span className="text-violet-300">{idea}</span></p>
+        </div>
+
+        <button
+          onClick={onReset}
+          className="text-white/20 hover:text-white/50 text-sm transition-colors"
+        >
+          cancel
+        </button>
+      </div>
+    );
+  }
+
+  // DONE — show the app
+  return (
+    <div className="flex flex-col" style={{ height: 'calc(100vh - 80px)' }}>
+
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 flex-shrink-0">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-green-400 text-base flex-shrink-0">✓</span>
+          <span className="text-white/70 text-sm font-bold truncate">{appTitle || idea}</span>
+        </div>
         <div className="flex items-center gap-2 flex-shrink-0">
-          {phase === 'done' && (
-            <>
-              <motion.button
-                onClick={handleShare}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 rounded-lg text-sm font-bold transition-all"
-                style={{
-                  background: shareMsg ? 'rgba(34, 197, 94, 0.2)' : 'rgba(167, 139, 250, 0.15)',
-                  border: shareMsg ? '1px solid rgba(34, 197, 94, 0.4)' : '1px solid rgba(167, 139, 250, 0.3)',
-                  color: shareMsg ? '#4ade80' : '#c4b5fd',
-                }}
-              >
-                {shareMsg || 'share with friends'}
-              </motion.button>
-            </>
-          )}
+          <motion.button
+            onClick={handleShare}
+            whileTap={{ scale: 0.95 }}
+            className="px-4 py-2 rounded-lg text-sm font-bold transition-all"
+            style={{
+              background: shareMsg ? 'rgba(34,197,94,0.15)' : 'rgba(167,139,250,0.12)',
+              border: shareMsg ? '1px solid rgba(34,197,94,0.4)' : '1px solid rgba(167,139,250,0.3)',
+              color: shareMsg ? '#4ade80' : '#c4b5fd',
+            }}
+          >
+            {shareMsg || '🔗 share'}
+          </motion.button>
           <button
             onClick={onReset}
             className="px-4 py-2 rounded-lg text-sm font-bold text-white/40 hover:text-white/80 transition-colors"
             style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
-            build something new
+            build something new ⚡
           </button>
         </div>
       </div>
 
-      {/* Idea label */}
-      <div className="px-6 py-2 border-b border-white/5">
-        <span className="text-xs text-white/25 font-mono">you wanted: </span>
-        <span className="text-xs text-white/50 font-medium">{idea}</span>
-      </div>
-
-      {/* Main area */}
-      <div className={`flex-1 flex overflow-hidden ${builderMode && (streamedCode || phase === 'building') ? 'flex-row' : 'flex-col'}`}>
-        
-        {/* Code stream — builder mode */}
-        {builderMode && (streamedCode || phase === 'building') && (
-          <div className="w-1/2 overflow-y-auto border-r border-white/5 p-4">
-            <div className="text-xs font-mono text-white/20 mb-2 font-bold tracking-widest">BUILDING YOUR APP</div>
-            <pre className="text-xs font-mono leading-relaxed overflow-x-auto" style={{ color: '#a78bfa' }}>
-              <CodeHighlight code={streamedCode} />
-              {phase === 'building' && <span className="animate-pulse text-pink-400">▋</span>}
-            </pre>
-            <div ref={codeEndRef} />
+      {/* App iframe — full remaining height */}
+      <div className="flex-1 relative overflow-hidden">
+        {builderMode ? (
+          // Builder mode: code left, preview right
+          <div className="flex h-full">
+            <div className="w-2/5 overflow-y-auto border-r border-white/5 p-4 bg-black/30">
+              <p className="text-xs font-mono text-white/20 mb-2 font-bold tracking-widest">SOURCE CODE</p>
+              <pre className="text-xs font-mono leading-relaxed overflow-x-auto whitespace-pre-wrap break-all" style={{ color: '#a78bfa' }}>
+                {builtHtml}
+              </pre>
+            </div>
+            <div className="flex-1">
+              <iframe
+                srcDoc={builtHtml}
+                className="w-full h-full border-0"
+                title="Your ZAPP app"
+                sandbox="allow-scripts"
+              />
+            </div>
           </div>
+        ) : (
+          // Magic mode: just the app, full screen
+          <motion.iframe
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            srcDoc={builtHtml}
+            className="w-full h-full border-0"
+            title="Your ZAPP app"
+            sandbox="allow-scripts"
+          />
         )}
-
-        {/* App preview */}
-        <div className={`${builderMode && (streamedCode || phase === 'building') ? 'w-1/2' : 'flex-1'} relative`}>
-          {phase === 'building' && !builderMode && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
-              <ZappBuildAnimation />
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={stageIndex}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  className="text-center"
-                >
-                  <p className="text-white/60 text-lg font-medium">{BUILD_STAGES[stageIndex]?.label}</p>
-                  <p className="text-white/25 text-sm mt-1">your app is coming to life...</p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          )}
-
-          {phase === 'done' && iframeSrcDoc && (
-            <motion.iframe
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              ref={iframeRef}
-              srcDoc={iframeSrcDoc}
-              className="w-full h-full border-0"
-              title="Your ZAPP creation"
-              sandbox="allow-scripts allow-same-origin"
-            />
-          )}
-
-          {error && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <p className="text-red-400 text-lg font-bold">{error}</p>
-                <button onClick={onReset} className="mt-4 px-6 py-3 rounded-xl bg-violet-600 text-white font-bold">
-                  try again
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );
-}
-
-// Pulsing bolt animation during build
-function ZappBuildAnimation() {
-  return (
-    <div className="relative">
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute inset-0 rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.3) 0%, transparent 70%)' }}
-          animate={{ scale: [1, 2.5 + i * 0.5], opacity: [0.6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.4, ease: 'easeOut' }}
-        />
-      ))}
-      <motion.div
-        animate={{
-          filter: [
-            'drop-shadow(0 0 10px rgba(167,139,250,0.8))',
-            'drop-shadow(0 0 30px rgba(244,114,182,1))',
-            'drop-shadow(0 0 10px rgba(167,139,250,0.8))',
-          ],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{ duration: 1, repeat: Infinity }}
-      >
-        <svg width="80" height="80" viewBox="0 0 32 32" fill="none">
-          <defs>
-            <linearGradient id="buildGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#a78bfa" />
-              <stop offset="50%" stopColor="#f472b6" />
-              <stop offset="100%" stopColor="#60a5fa" />
-            </linearGradient>
-          </defs>
-          <polygon points="19,2 8,18 15,18 13,30 24,14 17,14" fill="url(#buildGrad)" />
-        </svg>
-      </motion.div>
-    </div>
-  );
-}
-
-function BuildingSpinner() {
-  return (
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-      className="w-4 h-4 rounded-full border-2 border-violet-500 border-t-transparent flex-shrink-0"
-    />
-  );
-}
-
-function CodeHighlight({ code }) {
-  // Simple syntax colouring
-  const highlighted = code
-    .replace(/(&lt;|<)(\/?)(\w+)/g, (m, lt, slash, tag) =>
-      `<span style="color:#f472b6">${lt}${slash}${tag}</span>`)
-    .replace(/(#[0-9a-fA-F]{3,6})/g, '<span style="color:#60a5fa">$1</span>');
-
-  return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
 }
