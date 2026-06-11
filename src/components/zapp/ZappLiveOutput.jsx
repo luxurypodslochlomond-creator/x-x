@@ -50,15 +50,16 @@ SAFETY RULES (non-negotiable):
 The child wants to build: "${idea}"
 
 Generate a COMPLETE, self-contained HTML page that:
-1. Actually builds EXACTLY what the child asked for — a clicker game should have clicking mechanics, upgrades, a score; a quiz should have real questions about the topic; a drawing tool should let you draw
-2. Is genuinely fun and polished — NOT a basic placeholder
-3. Has bold, colourful, exciting design — dark background, bright colours, large fonts, satisfying animations
-4. Works 100% offline — only inline CSS and vanilla JS, no CDN imports
-5. Has a big clear title at the top
-6. Includes real content — if it's a quiz about horses, write actual horse questions
-7. MUST have satisfying sound effects using Web Audio API (beeps, pops, whooshes on every interaction) — kids LOVE this
-8. Has big score tracking, animations on click, confetti or particles when you win
-8. Works great on both desktop and mobile
+1. Builds EXACTLY what was described — follow every detail of the description precisely, implement EVERY feature mentioned
+2. Is FULLY FUNCTIONAL — not a skeleton — a real working game or app a child can actually play right now
+3. Bold colourful design — dark background (#0a0a0f), bright neon colours, large fonts (min 18px), big elements
+4. Works 100% offline — only inline CSS and vanilla JS, NO external CDN imports
+5. MUST use Web Audio API for sound effects on every single interaction — beeps, pops, chimes, buzzes, dings
+6. Satisfying animations — CSS transitions/keyframes on every click, bounce effects, colour flashes, particles
+7. Real content — write actual questions, actual game mechanics, actual story text. No placeholders whatsoever
+8. Score/progress always visible — show the player their score, streak, level, or progress at all times
+9. Use Math.random() to shuffle and vary content so the experience is DIFFERENT every time it loads
+10. Big touch targets (min 60px tap areas) — works great on both desktop and mobile
 
 IMPORTANT: Return JSON with a single key "html" containing the complete HTML as a string starting with <!DOCTYPE html>`,
         response_json_schema: {

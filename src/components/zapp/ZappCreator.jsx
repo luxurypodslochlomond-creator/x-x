@@ -2,16 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const QUICK_IDEAS = [
-  { emoji: '🐴', label: 'Horse Quiz', idea: 'a quiz about horses with fun facts and a score at the end' },
-  { emoji: '⚡', label: 'Clicker Game', idea: 'a cookie clicker game where you click a giant cookie to earn cookies and buy upgrades like grandmas and farms' },
-  { emoji: '🎨', label: 'Pixel Art', idea: 'a pixel art drawing tool with a colour palette and a grid to draw on' },
-  { emoji: '📖', label: 'Choose Your Story', idea: 'a choose your own adventure story where you explore a magical forest and make choices that change what happens' },
-  { emoji: '🌈', label: 'Colour Mixer', idea: 'a colour mixing tool where you mix red, blue and yellow paint together to make new colours' },
-  { emoji: '😊', label: 'Mood Tracker', idea: 'a mood tracker with emoji faces where you pick how you feel and it shows a chart of your week' },
-  { emoji: '🃏', label: 'Card Game', idea: 'a snap card game you play against the computer with colourful cards' },
-  { emoji: '🔢', label: 'Times Tables', idea: 'a fun times tables quiz that gives you points and a star when you get them right' },
-  { emoji: '🌟', label: 'Wish Maker', idea: 'a magical wish maker where you type a wish and it sparkles and saves your wishes in a list' },
-  { emoji: '🍕', label: 'Snack Rater', idea: 'an app to rate your favourite snacks out of 10 with funny comments and a leaderboard' },
+  { emoji: '🃏', label: 'SNAP!', idea: 'a two-player SNAP card game where cards flip one at a time onto a pile, and you have to press SNAP! as fast as possible when two matching cards appear. Cards should have big colourful emojis (animals, fruit, shapes). Show both player scores. Play a loud buzzer sound on wrong snap, a celebration sound and confetti on correct snap. Make it feel FAST and exciting with big animations when SNAP happens.' },
+  { emoji: '⚡', label: 'Cookie Clicker', idea: 'a cookie clicker idle game — big cookie in the middle, click it to earn cookies. Buy upgrades: Grandma (costs 50, +1/sec), Farm (costs 200, +5/sec), Factory (costs 1000, +20/sec), Portal (costs 5000, +100/sec). Show cookies per second, total cookies, upgrade shop on the right. Make clicking feel satisfying with pop animations and click sounds. Add cookie particles when you click.' },
+  { emoji: '🐴', label: 'Horse Quiz', idea: 'a 10-question multiple choice quiz all about horses — breeds, facts, care, riding. Big colourful question cards, 4 answer buttons, a progress bar, fun horse sound effects (whinny on correct, sad trombone on wrong), final score screen with a star rating and encouraging message. Randomise question order each time so it\'s different every play.' },
+  { emoji: '🎨', label: 'Pixel Art', idea: 'a 16x16 pixel art drawing tool. Colour palette with 20 bright colours. Click or drag to paint pixels. Eraser tool. Fill bucket tool. Clear button. Save as PNG download button. Make it feel like a proper art app — satisfying click sounds, smooth drawing.' },
+  { emoji: '📖', label: 'Adventure Story', idea: 'a choose your own adventure story set in a magical forest. At least 15 different story nodes, branching choices, different endings (good ending, bad ending, secret ending). Animated scene descriptions, emoji illustrations, keep track of items you collect. Sound effects for atmosphere.' },
+  { emoji: '🔢', label: 'Times Tables', idea: 'a fast-paced times tables quiz — random question appears, type the answer, press enter. Big satisfying correct/wrong animations. Score streak counter — lose streak on wrong answer. Speed bonus for fast answers. Hall of fame top 5 scores saved in browser. Encouraging messages. Satisfying ding sounds for correct, buzz for wrong.' },
+  { emoji: '🌈', label: 'Colour Mixer', idea: 'a colour mixing lab — three big paint pot sliders for red, green, blue (0-255). Show the mixed colour live in a big circle. Name the colour (use a lookup table of 50+ colour names). Let you save colours to a palette. Mixing sound effect. Paint splat animations.' },
+  { emoji: '🐉', label: 'Dragon Tapper', idea: 'a dragon evolution idle tapper — tap a baby dragon egg to hatch it, then tap the dragon to earn gold. Buy evolutions: Baby Dragon, Fire Dragon, Ice Dragon, Thunder Dragon, Cosmic Dragon. Each evolution looks different (use CSS/emoji art), gets bigger, breathes fire animation. Dragon roar sounds. Satisfying evolution cutscene.' },
+  { emoji: '🌟', label: 'Wish Jar', idea: 'a magical glowing wish jar — type a wish, press the sparkle button, it flies into the jar with a star animation and a magical chime sound. The jar fills up visually as you add wishes. Click wishes in the jar to read them. Delete wishes with a puff of smoke animation. Make it feel genuinely magical with CSS animations and Web Audio sparkle sounds.' },
+  { emoji: '🎵', label: 'Beat Maker', idea: 'a simple 8-step drum machine beat maker. Rows for: Kick, Snare, Hi-Hat, Clap. 8 step buttons per row. Play/stop button. Tempo slider (60-180 BPM). Each button lights up when active. Current step highlighted as it plays. Web Audio API for all sounds — actual drum sounds synthesised. Save and load 3 preset beats.' },
 ];
 
 export default function ZappCreator({ onSubmit }) {
