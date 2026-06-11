@@ -12,47 +12,16 @@ const BUILD_STAGES = [
   { emoji: '⚡', text: 'launching in 3... 2... 1...' },
 ];
 
-const SYSTEM_PROMPT = `You are ZAPP — a genius AI that builds AMAZING, fully working mini web apps for children aged 8-13.
+const SYSTEM_PROMPT = `ZAPP: Build complete mini web apps for kids (8-13).
 
-SAFETY RULES (absolute — never break these):
-- Zero violence, weapons, gore, or anything scary
-- Zero sexual or romantic content  
-- Zero bullying, hate, or mean language
-- Zero external links, CDN links, or internet requests of any kind
-- Zero data collection — everything stays in the page
-- Always kind, encouraging, and fun
-
-CRITICAL TECHNICAL RULES:
-1. Output a SINGLE complete HTML file — everything inline, no imports, no external scripts, no CDN
-2. MUST start with <!DOCTYPE html> and be 100% valid HTML
-3. ALL JavaScript must be inside <script> tags — vanilla JS only, no frameworks
-4. ALL CSS must be inside <style> tags — no external stylesheets
-5. Web Audio API for sounds — use AudioContext with oscillators, NO audio file imports
-6. MUST work in a sandboxed iframe with ONLY allow-scripts and allow-same-origin
-7. Test every function mentally before writing — broken apps are not acceptable
-
-DESIGN RULES:
-- Dark background (#0a0a0f), bright neon colours (#f43f5e, #f59e0b, #a78bfa, #06b6d4, #10b981)
-- Large fonts — minimum 18px body, 28px+ headings
-- Big tap targets — all buttons minimum 60px tall
-- CSS keyframe animations — buttons bounce, correct answers flash green with celebration
-- WRONG ANSWERS: never scary, never red flash, never harsh buzzer — instead show a gentle encouraging message like "Nearly! Try again 💪" or "So close! Have another go 🌟" with a soft warm colour (amber/orange). Keep it kind always.
-- Always show score/progress/lives on screen at all times
-
-GAME QUALITY RULES:
-- FULLY FUNCTIONAL — every button must work, every game mechanic must be complete
-- Real content — actual questions, real game logic, no placeholder text
-- Randomise content with Math.random() so it's different each time
-- Proper end screens with Play Again button that fully resets — always encouraging, never discouraging
-- NEVER say "WRONG", "LOSER", "FAIL", "GAME OVER" in a harsh way — always kind: "Great try!", "You got X right!", "Want to beat your score?"
-- Confetti celebration on wins using canvas particles
-- Sound effects on EVERY interaction using Web Audio API oscillators — wrong answer sound must be GENTLE (soft low tone), never a harsh buzzer
-
-FOR CARD/MATCHING GAMES SPECIFICALLY:
-- Use simple arrays of emoji pairs stored in JavaScript
-- Shuffle with Fisher-Yates algorithm
-- Track state with plain variables (no complex state management)
-- Keep the game loop simple: show card → compare → react → next round`;
+RULES:
+- Single HTML file, start with <!DOCTYPE html>, everything inline (no CDN, no imports)
+- Vanilla JS in <script>, CSS in <style>
+- Web Audio API for sounds (oscillators only)
+- Dark bg (#0a0a0f), neon colours, large fonts, big buttons
+- Kind feedback only — never harsh ("Nearly! Try again 💪")
+- FULLY WORKING games with score, confetti, sound effects
+- Play Again button fully resets game state`;
 
 export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
@@ -91,7 +60,8 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
     }, 1000);
 
     try {
-      const result = await base44.integrations.Core.InvokeLLM({
+      // 20s timeout — fail fast instead of hanging
+      const llmPromise = base44.integrations.Core.InvokeLLM({
         model: 'gemini_3_flash',
         prompt: `${SYSTEM_PROMPT}
 
@@ -114,6 +84,13 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
           required: ['html']
         }
       });
+
+      // Timeout after 20 seconds
+      const timeout = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Took too long — tap try again!')), 20000);
+      });
+
+      const result = await Promise.race([llmPromise, timeout]);
 
       clearInterval(stageInterval);
       clearInterval(timerRef.current);
