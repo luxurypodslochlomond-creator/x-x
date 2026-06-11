@@ -5,14 +5,11 @@ import { base44 } from '@/api/base44Client';
 const BUILD_STAGES = [
   { emoji: '🧠', text: 'thinking about your idea...' },
   { emoji: '🎨', text: 'choosing colours and style...' },
-  { emoji: '⚙️', text: 'writing the game engine...' },
-  { emoji: '🔊', text: 'composing sound effects...' },
-  { emoji: '🃏', text: 'setting up the game logic...' },
-  { emoji: '💡', text: 'making sure it actually works...' },
+  { emoji: '⚙️', text: 'building the game engine...' },
+  { emoji: '🔊', text: 'wiring up the sound effects...' },
   { emoji: '✨', text: 'adding sparkles and animations...' },
-  { emoji: '🎉', text: 'testing the win screen...' },
-  { emoji: '🔥', text: 'making it even more fun...' },
-  { emoji: '🚀', text: 'almost ready to launch...' },
+  { emoji: '🚀', text: 'almost ready... making it incredible...' },
+  { emoji: '⚡', text: 'final touches... this is going to be good...' },
 ];
 
 const SYSTEM_PROMPT = `You are ZAPP — a genius AI that builds AMAZING, fully working mini web apps for children aged 8-13.
@@ -65,13 +62,11 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset 
 
   const buildApp = async () => {
     let i = 0;
+    // Advance through stages once — hold on last stage, never loop
     const stageInterval = setInterval(() => {
-      // Only go forward, stop at the last stage — no looping
-      if (i < BUILD_STAGES.length - 1) {
-        i++;
-        setStageIndex(i);
-      }
-    }, 2200);
+      i = Math.min(i + 1, BUILD_STAGES.length - 1);
+      setStageIndex(i);
+    }, 2800);
 
     // Build timer for fun
     let secs = 0;
@@ -266,7 +261,7 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
               style={{
                 width: i === stageIndex ? 24 : 8,
                 height: 8,
-                background: i <= stageIndex ? '#a78bfa' : 'rgba(255,255,255,0.1)'
+                background: i < stageIndex ? '#a78bfa' : i === stageIndex ? '#f472b6' : 'rgba(255,255,255,0.1)'
               }}
               animate={{ width: i === stageIndex ? 24 : 8 }}
               transition={{ duration: 0.3 }}
