@@ -5,9 +5,13 @@ import { base44 } from '@/api/base44Client';
 const BUILD_STAGES = [
   { emoji: '🧠', text: 'thinking about your idea...' },
   { emoji: '🎨', text: 'choosing colours and style...' },
-  { emoji: '⚙️', text: 'building the game engine...' },
-  { emoji: '🔊', text: 'adding sound effects...' },
-  { emoji: '✨', text: 'adding animations and sparkles...' },
+  { emoji: '⚙️', text: 'writing the game engine...' },
+  { emoji: '🔊', text: 'composing sound effects...' },
+  { emoji: '🃏', text: 'setting up the game logic...' },
+  { emoji: '💡', text: 'making sure it actually works...' },
+  { emoji: '✨', text: 'adding sparkles and animations...' },
+  { emoji: '🎉', text: 'testing the win screen...' },
+  { emoji: '🔥', text: 'making it even more fun...' },
   { emoji: '🚀', text: 'almost ready to launch...' },
 ];
 
@@ -62,8 +66,11 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset 
   const buildApp = async () => {
     let i = 0;
     const stageInterval = setInterval(() => {
-      i = (i + 1) % BUILD_STAGES.length;
-      setStageIndex(i);
+      // Only go forward, stop at the last stage — no looping
+      if (i < BUILD_STAGES.length - 1) {
+        i++;
+        setStageIndex(i);
+      }
     }, 2200);
 
     // Build timer for fun
