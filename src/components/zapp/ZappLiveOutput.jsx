@@ -282,19 +282,36 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
     <div className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
 
       {/* Top action bar */}
-      <div className="flex items-center justify-between px-4 py-2 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)' }}>
+      <motion.div
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex items-center justify-between px-4 py-2 flex-shrink-0"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)' }}
+      >
         <div className="flex items-center gap-2 min-w-0">
           <motion.span
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
             className="text-green-400 text-lg flex-shrink-0"
-          >✓</motion.span>
-          <span className="text-white/60 text-sm font-bold truncate max-w-[160px] sm:max-w-xs">{appTitle || idea}</span>
+          >✅</motion.span>
+          <motion.span
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.15 }}
+            className="text-white/70 text-sm font-black truncate max-w-[160px] sm:max-w-xs"
+          >
+            {appTitle || idea}
+          </motion.span>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <motion.button
             onClick={handleDownload}
             whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
             className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all hidden sm:flex items-center gap-1"
             style={{ background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.3)', color: '#67e8f9' }}
           >
@@ -303,6 +320,9 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
           <motion.button
             onClick={handleShare}
             whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25 }}
             className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
             style={{
               background: shareMsg ? 'rgba(34,197,94,0.15)' : 'rgba(167,139,250,0.12)',
@@ -314,15 +334,18 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
           </motion.button>
           <motion.button
             onClick={onReset}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, type: 'spring' }}
             className="px-4 py-1.5 rounded-lg text-xs font-black text-white"
             style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', boxShadow: '0 0 16px rgba(124,58,237,0.4)' }}
           >
             build new ⚡
           </motion.button>
         </div>
-      </div>
+      </motion.div>
 
       {/* App display */}
       <div className="flex-1 relative overflow-hidden">
@@ -344,15 +367,30 @@ Make it INCREDIBLE. This child is about to see their idea come to life — blow 
             </motion.div>
           </div>
         ) : (
-          <motion.iframe
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.35 }}
-            srcDoc={builtHtml}
-            className="w-full h-full border-0"
-            title="Your ZAPP app"
-            sandbox="allow-scripts allow-same-origin"
-          />
+          <motion.div
+            className="w-full h-full relative"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Flash overlay on reveal */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none z-10"
+              style={{ background: 'radial-gradient(circle at center, rgba(167,139,250,0.4) 0%, transparent 70%)' }}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            />
+            <motion.iframe
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              srcDoc={builtHtml}
+              className="w-full h-full border-0"
+              title="Your ZAPP app"
+              sandbox="allow-scripts allow-same-origin"
+            />
+          </motion.div>
         )}
       </div>
     </div>
