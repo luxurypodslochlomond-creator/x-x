@@ -35,16 +35,18 @@ DESIGN RULES:
 - Dark background (#0a0a0f), bright neon colours (#f43f5e, #f59e0b, #a78bfa, #06b6d4, #10b981)
 - Large fonts — minimum 18px body, 28px+ headings
 - Big tap targets — all buttons minimum 60px tall
-- CSS keyframe animations — buttons bounce, correct answers flash green, wrong answers shake red
+- CSS keyframe animations — buttons bounce, correct answers flash green with celebration
+- WRONG ANSWERS: never scary, never red flash, never harsh buzzer — instead show a gentle encouraging message like "Nearly! Try again 💪" or "So close! Have another go 🌟" with a soft warm colour (amber/orange). Keep it kind always.
 - Always show score/progress/lives on screen at all times
 
 GAME QUALITY RULES:
 - FULLY FUNCTIONAL — every button must work, every game mechanic must be complete
 - Real content — actual questions, real game logic, no placeholder text
 - Randomise content with Math.random() so it's different each time
-- Proper win/lose/game-over screens with Play Again button that fully resets
+- Proper end screens with Play Again button that fully resets — always encouraging, never discouraging
+- NEVER say "WRONG", "LOSER", "FAIL", "GAME OVER" in a harsh way — always kind: "Great try!", "You got X right!", "Want to beat your score?"
 - Confetti celebration on wins using canvas particles
-- Sound effects on EVERY interaction using Web Audio API oscillators
+- Sound effects on EVERY interaction using Web Audio API oscillators — wrong answer sound must be GENTLE (soft low tone), never a harsh buzzer
 
 FOR CARD/MATCHING GAMES SPECIFICALLY:
 - Use simple arrays of emoji pairs stored in JavaScript
