@@ -92,7 +92,7 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
 
     try {
       const result = await base44.integrations.Core.InvokeLLM({
-        model: 'gemini_3_1_pro',
+        model: 'gemini_3_flash',
         prompt: `${SYSTEM_PROMPT}
 
 BUILD THIS NOW: "${idea}"
