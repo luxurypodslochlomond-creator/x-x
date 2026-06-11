@@ -82,8 +82,28 @@ Make it genuinely impressive. A child should look at it and say "WHOA I made thi
         }
       });
 
-      // Extract HTML from result object
-      const fullCode = result?.html || (typeof result === 'string' ? result : JSON.stringify(result));
+      console.log('ZAPP raw result:', result);
+      // Extract HTML from result object - handle all response shapes
+      let fullCode = '';
+      if (result?.html) {
+        fullCode = result.html;
+      } else if (typeof result === 'string') {
+        // Try to parse if it's a JSON string
+        try {
+          const parsed = JSON.parse(result);
+          fullCode = parsed.html || result;
+        } catch {
+          fullCode = result;
+        }
+      } else {
+        fullCode = JSON.stringify(result);
+      }
+
+      // Validate we got actual HTML
+      if (!fullCode || !fullCode.includes('<html') && !fullCode.includes('<!DOCTYPE')) {
+        throw new Error('No HTML generated — please try again');
+      }
+
       if (builderMode) {
         await streamCodeEffect(fullCode);
       } else {
@@ -124,8 +144,8 @@ Make it genuinely impressive. A child should look at it and say "WHOA I made thi
     }
   };
 
-  // Inject generated code into iframe
-  const iframeSrcDoc = phase === 'done' && generatedCode ? generatedCode : null;
+  // Inject generated code into iframe — show as soon as we have it
+  const iframeSrcDoc = generatedCode || null;
 
   return (
     <div className="flex flex-col h-[calc(100vh-80px)]">
