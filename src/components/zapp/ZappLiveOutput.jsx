@@ -77,7 +77,7 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset 
 
     try {
       const result = await base44.integrations.Core.InvokeLLM({
-        model: 'gpt_5_4',
+        model: 'claude_sonnet_4_6',
         prompt: `${SYSTEM_PROMPT}
 
 BUILD THIS NOW: "${idea}"
