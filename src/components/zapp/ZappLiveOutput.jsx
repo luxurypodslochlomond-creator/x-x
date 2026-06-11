@@ -56,7 +56,8 @@ Generate a COMPLETE, self-contained HTML page that:
 4. Works 100% offline — only inline CSS and vanilla JS, no CDN imports
 5. Has a big clear title at the top
 6. Includes real content — if it's a quiz about horses, write actual horse questions
-7. Has satisfying feedback — sounds via Web Audio API, animations on click, score tracking
+7. MUST have satisfying sound effects using Web Audio API (beeps, pops, whooshes on every interaction) — kids LOVE this
+8. Has big score tracking, animations on click, confetti or particles when you win
 8. Works great on both desktop and mobile
 
 IMPORTANT: Return JSON with a single key "html" containing the complete HTML as a string starting with <!DOCTYPE html>`,
@@ -232,7 +233,7 @@ IMPORTANT: Return JSON with a single key "html" containing the complete HTML as 
                 srcDoc={builtHtml}
                 className="w-full h-full border-0"
                 title="Your ZAPP app"
-                sandbox="allow-scripts"
+                sandbox="allow-scripts allow-same-origin"
               />
             </div>
           </div>
@@ -245,7 +246,7 @@ IMPORTANT: Return JSON with a single key "html" containing the complete HTML as 
             srcDoc={builtHtml}
             className="w-full h-full border-0"
             title="Your ZAPP app"
-            sandbox="allow-scripts"
+            sandbox="allow-scripts allow-same-origin"
           />
         )}
       </div>
