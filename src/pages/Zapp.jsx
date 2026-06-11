@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ZappCreator from '@/components/zapp/ZappCreator';
 import ZappLiveOutput from '@/components/zapp/ZappLiveOutput';
+import ZappGallery from '@/components/zapp/ZappGallery';
+import ZappSaveModal from '@/components/zapp/ZappSaveModal';
+import ZappRemixModal from '@/components/zapp/ZappRemixModal';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Inline bolt so no extra import needed
 const Bolt = ({ size = 28 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
     <defs>
@@ -19,53 +21,64 @@ const Bolt = ({ size = 28 }) => (
 
 export default function Zapp() {
   const [idea, setIdea] = useState('');
-  const [phase, setPhase] = useState('home'); // home | building
+  const [phase, setPhase] = useState('home'); // home | building | gallery
   const [builderMode, setBuilderMode] = useState(false);
+  const [builtHtml, setBuiltHtml] = useState('');
+  const [appTitle, setAppTitle] = useState('');
+  const [showSave, setShowSave] = useState(false);
+  const [showRemix, setShowRemix] = useState(null); // ZappCreation record to remix
+  const [remixSource, setRemixSource] = useState(null); // original record if remixing
+  const [remixInstruction, setRemixInstruction] = useState('');
 
   const handleIdeaSubmit = (ideaText) => {
     setIdea(ideaText);
+    setRemixSource(null);
+    setRemixInstruction('');
+    setBuiltHtml('');
+    setAppTitle('');
     setPhase('building');
   };
 
   const handleReset = () => {
     setIdea('');
     setPhase('home');
+    setBuiltHtml('');
+    setAppTitle('');
+    setRemixSource(null);
+    setRemixInstruction('');
+    setShowSave(false);
+  };
+
+  const handleBuildComplete = (html, title) => {
+    setBuiltHtml(html);
+    setAppTitle(title);
+    // Auto-prompt save after a second
+    setTimeout(() => setShowSave(true), 800);
+  };
+
+  const handleRemixRequest = (original, instruction) => {
+    setShowRemix(null);
+    setRemixSource(original);
+    setRemixInstruction(instruction);
+    // Build a remixed idea incorporating the instruction
+    const remixIdea = `Take this existing app: "${original.idea}" — and make this change: ${instruction}. Keep everything that works well but evolve it.`;
+    setIdea(remixIdea);
+    setBuiltHtml('');
+    setAppTitle('');
+    setPhase('building');
   };
 
   return (
     <div
       className="min-h-screen text-white overflow-hidden"
-      style={{
-        background: '#0a0a0f',
-        fontFamily: "'Inter', system-ui, sans-serif"
-      }}
+      style={{ background: '#0a0a0f', fontFamily: "'Inter', system-ui, sans-serif" }}
     >
-      {/* Ambient background blobs */}
+      {/* Ambient background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div style={{
-          position: 'absolute', top: '-10%', left: '20%',
-          width: 500, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)',
-          filter: 'blur(60px)'
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-10%', right: '20%',
-          width: 400, height: 400, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(219,39,119,0.10) 0%, transparent 70%)',
-          filter: 'blur(60px)'
-        }} />
-        <div style={{
-          position: 'absolute', top: '40%', right: '5%',
-          width: 300, height: 300, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)',
-          filter: 'blur(50px)'
-        }} />
-        {/* Grid */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: `linear-gradient(rgba(120,80,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(120,80,255,0.025) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
+        <div style={{ position: 'absolute', top: '-10%', left: '20%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+        <div style={{ position: 'absolute', bottom: '-10%', right: '20%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(219,39,119,0.10) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+        <div style={{ position: 'absolute', top: '40%', right: '5%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)', filter: 'blur(50px)' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(120,80,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(120,80,255,0.025) 1px, transparent 1px)`, backgroundSize: '50px 50px' }} />
       </div>
 
       {/* Header */}
@@ -77,26 +90,35 @@ export default function Zapp() {
           whileTap={{ scale: 0.97 }}
         >
           <motion.div
-            animate={phase === 'home' ? {
-              filter: ['drop-shadow(0 0 8px rgba(167,139,250,0.8))', 'drop-shadow(0 0 20px rgba(244,114,182,1))', 'drop-shadow(0 0 8px rgba(167,139,250,0.8))']
-            } : {}}
+            animate={phase === 'home' ? { filter: ['drop-shadow(0 0 8px rgba(167,139,250,0.8))', 'drop-shadow(0 0 20px rgba(244,114,182,1))', 'drop-shadow(0 0 8px rgba(167,139,250,0.8))'] } : {}}
             transition={{ duration: 2, repeat: Infinity }}
           >
             <Bolt size={32} />
           </motion.div>
           <span className="font-black text-2xl tracking-tight" style={{
             background: 'linear-gradient(135deg, #a78bfa 0%, #f472b6 50%, #60a5fa 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>ZAPP</span>
           {phase === 'home' && (
-            <span className="text-white/25 text-xs font-semibold hidden sm:block">
-              build anything · AI · for kids
-            </span>
+            <span className="text-white/25 text-xs font-semibold hidden sm:block">build anything · AI · for kids</span>
           )}
         </motion.button>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          {/* Gallery tab */}
+          <motion.button
+            onClick={() => setPhase(phase === 'gallery' ? 'home' : 'gallery')}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
+            style={{
+              background: phase === 'gallery' ? 'rgba(251,191,36,0.15)' : 'rgba(255,255,255,0.04)',
+              border: phase === 'gallery' ? '1px solid rgba(251,191,36,0.5)' : '1px solid rgba(255,255,255,0.08)',
+              color: phase === 'gallery' ? '#fbbf24' : 'rgba(255,255,255,0.3)',
+            }}
+          >
+            🏆 <span className="hidden sm:inline">Hall of Fame</span>
+          </motion.button>
+
           {/* Builder mode toggle */}
           <button
             onClick={() => setBuilderMode(!builderMode)}
@@ -121,34 +143,60 @@ export default function Zapp() {
       {/* Main content */}
       <main className="relative z-10">
         <AnimatePresence mode="wait">
-          {phase === 'home' ? (
-            <motion.div
-              key="home"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-            >
+          {phase === 'gallery' ? (
+            <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <ZappGallery
+                onPlay={() => {}}
+                onRemix={(item) => setShowRemix(item)}
+              />
+            </motion.div>
+          ) : phase === 'home' ? (
+            <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.2 }}>
               <ZappCreator onSubmit={handleIdeaSubmit} />
             </motion.div>
           ) : (
-            <motion.div
-              key="building"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
+            <motion.div key="building" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
               <ZappLiveOutput
                 idea={idea}
                 builderMode={builderMode}
-                onComplete={() => {}}
+                onComplete={handleBuildComplete}
                 onReset={handleReset}
+                onSave={builtHtml ? () => setShowSave(true) : undefined}
+                onRemix={builtHtml ? () => {
+                  // Remix the current build as if it were a gallery item
+                  setShowRemix({ id: null, title: appTitle || idea, idea, emoji: '⚡' });
+                } : undefined}
               />
             </motion.div>
           )}
         </AnimatePresence>
       </main>
+
+      {/* Save Modal */}
+      <AnimatePresence>
+        {showSave && builtHtml && (
+          <ZappSaveModal
+            appTitle={appTitle}
+            html={builtHtml}
+            idea={idea}
+            remixOf={remixSource?.id || null}
+            remixInstruction={remixInstruction || null}
+            onSaved={() => { setShowSave(false); setPhase('gallery'); }}
+            onClose={() => setShowSave(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Remix Modal */}
+      <AnimatePresence>
+        {showRemix && (
+          <ZappRemixModal
+            original={showRemix}
+            onSubmit={handleRemixRequest}
+            onClose={() => setShowRemix(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,0 +1,45 @@
+{
+  "name": "ZappCreation",
+  "type": "object",
+  "description": "A kid's saved ZAPP creation \u2014 no accounts needed, just pride",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "App title (AI-generated or kid-named)"
+    },
+    "idea": {
+      "type": "string",
+      "description": "The original idea prompt"
+    },
+    "html": {
+      "type": "string",
+      "description": "The full generated HTML app"
+    },
+    "emoji": {
+      "type": "string",
+      "description": "Emoji representing the app"
+    },
+    "creator_name": {
+      "type": "string",
+      "description": "Optional first name only \u2014 no accounts needed"
+    },
+    "remix_of": {
+      "type": "string",
+      "description": "ID of the original ZappCreation if this is a remix"
+    },
+    "remix_instruction": {
+      "type": "string",
+      "description": "What the remixer asked for"
+    },
+    "play_count": {
+      "type": "number",
+      "default": 0,
+      "description": "How many times kids played this app"
+    }
+  },
+  "required": [
+    "title",
+    "idea",
+    "html"
+  ]
+}

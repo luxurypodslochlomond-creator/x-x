@@ -39,7 +39,7 @@ BUILD RULES (make it INCREDIBLE):
 The app MUST work perfectly in a sandboxed iframe with allow-scripts and allow-same-origin only.
 Start with <!DOCTYPE html> and include everything inline in a single HTML file.`;
 
-export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset }) {
+export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onSave, onRemix }) {
   const [stageIndex, setStageIndex] = useState(0);
   const [builtHtml, setBuiltHtml] = useState('');
   const [isDone, setIsDone] = useState(false);
@@ -309,6 +309,32 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
           </motion.span>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
+          {onSave && (
+            <motion.button
+              onClick={onSave}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.18 }}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all hidden sm:flex items-center gap-1"
+              style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24' }}
+            >
+              🏆 save
+            </motion.button>
+          )}
+          {onRemix && (
+            <motion.button
+              onClick={onRemix}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.19 }}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all hidden sm:flex items-center gap-1"
+              style={{ background: 'rgba(244,114,182,0.12)', border: '1px solid rgba(244,114,182,0.3)', color: '#f472b6' }}
+            >
+              🔀 remix
+            </motion.button>
+          )}
           <motion.button
             onClick={handleDownload}
             whileTap={{ scale: 0.95 }}
