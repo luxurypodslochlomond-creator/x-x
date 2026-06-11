@@ -77,7 +77,7 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
 
     try {
       const result = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
+        model: 'gpt_5_4',
         prompt: `${SYSTEM_PROMPT}
 
 BUILD THIS NOW: "${idea}"
@@ -316,7 +316,7 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.18 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all hidden sm:flex items-center gap-1"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
               style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24' }}
             >
               🏆 save
@@ -329,7 +329,7 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.19 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all hidden sm:flex items-center gap-1"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
               style={{ background: 'rgba(244,114,182,0.12)', border: '1px solid rgba(244,114,182,0.3)', color: '#f472b6' }}
             >
               🔀 remix
@@ -341,7 +341,7 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all hidden sm:flex items-center gap-1"
+            className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
             style={{ background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.3)', color: '#67e8f9' }}
           >
             ⬇ save
@@ -380,7 +380,7 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
       <div className="flex-1 relative overflow-hidden">
         {builderMode ? (
           <div className="flex flex-col md:flex-row h-full">
-            <div className="md:w-2/5 h-48 md:h-full overflow-y-auto border-b md:border-b-0 md:border-r border-white/5 p-4" style={{ background: 'rgba(0,0,0,0.5)' }}>
+            <div className="md:w-2/5 h-[45vh] md:h-full overflow-y-auto border-b md:border-b-0 md:border-r border-white/5 p-4" style={{ background: 'rgba(0,0,0,0.5)' }}>
               <p className="text-xs font-mono text-violet-400 mb-3 font-black tracking-widest">⚡ SOURCE CODE</p>
               <pre className="text-xs font-mono leading-relaxed overflow-x-auto whitespace-pre-wrap break-all" style={{ color: '#c4b5fd' }}>
                 {builtHtml}
