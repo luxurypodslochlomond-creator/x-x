@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { base44 } from '@/api/base44Client';
 import ZappCreator from '@/components/zapp/ZappCreator';
 import ZappLiveOutput from '@/components/zapp/ZappLiveOutput';
 import ZappGallery from '@/components/zapp/ZappGallery';
@@ -21,14 +22,31 @@ const Bolt = ({ size = 28 }) => (
 
 export default function Zapp() {
   const [idea, setIdea] = useState('');
-  const [phase, setPhase] = useState('home'); // home | building | gallery
+  const [phase, setPhase] = useState('home'); // home | building | gallery | play
   const [builderMode, setBuilderMode] = useState(false);
   const [builtHtml, setBuiltHtml] = useState('');
   const [appTitle, setAppTitle] = useState('');
   const [showSave, setShowSave] = useState(false);
-  const [showRemix, setShowRemix] = useState(null); // ZappCreation record to remix
-  const [remixSource, setRemixSource] = useState(null); // original record if remixing
+  const [showRemix, setShowRemix] = useState(null);
+  const [remixSource, setRemixSource] = useState(null);
   const [remixInstruction, setRemixInstruction] = useState('');
+  const [savedId, setSavedId] = useState(null); // ID after saving — used for share link
+  const [directPlay, setDirectPlay] = useState(null); // ZappCreation for direct play via URL
+
+  // Handle ?play=ID in URL — load and play that app directly
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const playId = params.get('play');
+    if (playId) {
+      base44.entities.ZappCreation.filter({ id: playId }).then(results => {
+        const item = results?.[0];
+        if (item) {
+          setDirectPlay(item);
+          setPhase('play');
+        }
+      }).catch(() => {});
+    }
+  }, []);
 
   const handleIdeaSubmit = (ideaText) => {
     setIdea(ideaText);
@@ -52,7 +70,7 @@ export default function Zapp() {
   const handleBuildComplete = (html, title) => {
     setBuiltHtml(html);
     setAppTitle(title);
-    // Auto-prompt save after a second
+    setSavedId(null);
     setTimeout(() => setShowSave(true), 800);
   };
 
@@ -143,7 +161,33 @@ export default function Zapp() {
       {/* Main content */}
       <main className="relative z-10">
         <AnimatePresence mode="wait">
-          {phase === 'gallery' ? (
+          {phase === 'play' && directPlay ? (
+            <motion.div key="play" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
+              <div className="flex items-center justify-between px-4 py-2 flex-shrink-0"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.4)' }}>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{directPlay.emoji || '⚡'}</span>
+                  <span className="text-white font-black text-sm truncate max-w-[200px]">{directPlay.title}</span>
+                  {directPlay.creator_name && <span className="text-white/30 text-xs">by {directPlay.creator_name}</span>}
+                </div>
+                <div className="flex items-center gap-2">
+                  <motion.button
+                    onClick={() => { setShowRemix(directPlay); }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-3 py-1.5 rounded-lg text-xs font-black"
+                    style={{ background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6' }}
+                  >🔀 remix</motion.button>
+                  <motion.button
+                    onClick={handleReset}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-1.5 rounded-lg text-xs font-black text-white"
+                    style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}
+                  >build new ⚡</motion.button>
+                </div>
+              </div>
+              <iframe srcDoc={directPlay.html} className="flex-1 w-full border-0" title={directPlay.title} sandbox="allow-scripts allow-same-origin" />
+            </motion.div>
+          ) : phase === 'gallery' ? (
             <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <ZappGallery
                 onPlay={() => {}}
@@ -161,9 +205,9 @@ export default function Zapp() {
                 builderMode={builderMode}
                 onComplete={handleBuildComplete}
                 onReset={handleReset}
+                savedId={savedId}
                 onSave={builtHtml ? () => setShowSave(true) : undefined}
                 onRemix={builtHtml ? () => {
-                  // Remix the current build as if it were a gallery item
                   setShowRemix({ id: null, title: appTitle || idea, idea, emoji: '⚡' });
                 } : undefined}
               />
@@ -181,7 +225,7 @@ export default function Zapp() {
             idea={idea}
             remixOf={remixSource?.id || null}
             remixInstruction={remixInstruction || null}
-            onSaved={() => { setShowSave(false); setPhase('gallery'); }}
+            onSaved={(id) => { setSavedId(id); setShowSave(false); }}
             onClose={() => setShowSave(false)}
           />
         )}

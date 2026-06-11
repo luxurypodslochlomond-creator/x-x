@@ -9,6 +9,8 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
   const [emoji, setEmoji] = useState('⚡');
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [savedLink, setSavedLink] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const handleSave = async () => {
     setSaving(true);
@@ -25,9 +27,11 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
         record.remix_of = remixOf;
         record.remix_instruction = remixInstruction;
       }
-      await base44.entities.ZappCreation.create(record);
+      const created = await base44.entities.ZappCreation.create(record);
+      const link = `${window.location.origin}/Zapp?play=${created?.id}`;
+      setSavedLink(link);
       setSaved(true);
-      setTimeout(() => onSaved(), 1200);
+      setTimeout(() => onSaved(created?.id), 3000);
     } catch (e) {
       console.error('Save error:', e);
       setSaving(false);
@@ -59,7 +63,22 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
               className="text-6xl mb-3"
             >🏆</motion.div>
             <p className="text-white font-black text-xl">saved to the Hall of Fame!</p>
-            <p className="text-white/40 text-sm mt-1">other kids can now play your creation</p>
+            <p className="text-white/40 text-sm mt-2 mb-4">share this link with friends so they can play it right now! 🎉</p>
+            {savedLink && (
+              <motion.button
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                onClick={() => { navigator.clipboard?.writeText(savedLink); setCopied(true); }}
+                className="w-full py-3 rounded-xl font-black text-sm transition-all"
+                style={{
+                  background: copied ? 'rgba(34,197,94,0.15)' : 'rgba(167,139,250,0.15)',
+                  border: copied ? '1px solid rgba(34,197,94,0.5)' : '1px solid rgba(167,139,250,0.4)',
+                  color: copied ? '#4ade80' : '#c4b5fd'
+                }}
+              >
+                {copied ? '✅ link copied! send it to your friends!' : '🔗 tap to copy friend link'}
+              </motion.button>
+            )}
           </div>
         ) : (
           <>

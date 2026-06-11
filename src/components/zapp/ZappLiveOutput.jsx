@@ -54,7 +54,7 @@ FOR CARD/MATCHING GAMES SPECIFICALLY:
 - Track state with plain variables (no complex state management)
 - Keep the game loop simple: show card → compare → react → next round`;
 
-export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onSave, onRemix }) {
+export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
   const [builtHtml, setBuiltHtml] = useState('');
   const [isDone, setIsDone] = useState(false);
@@ -147,11 +147,18 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
   };
 
   const handleShare = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      setShareMsg('link copied! ✓');
-      setTimeout(() => setShareMsg(''), 2500);
+    if (!navigator.clipboard) return;
+    if (savedId) {
+      // Share a direct play link — friends tap it and the app opens instantly
+      const url = `${window.location.origin}/Zapp?play=${savedId}`;
+      navigator.clipboard.writeText(url);
+      setShareMsg('friend link copied! 🎉');
+    } else {
+      // Not saved yet — nudge to save first
+      setShareMsg('save it first! 🏆');
+      if (onSave) setTimeout(() => onSave(), 600);
     }
+    setTimeout(() => setShareMsg(''), 3000);
   };
 
   const handleDownload = () => {
@@ -374,7 +381,7 @@ No explanation. No markdown. Just the JSON. Start the HTML with <!DOCTYPE html>.
               color: shareMsg ? '#4ade80' : '#c4b5fd',
             }}
           >
-            {shareMsg || '🔗 share'}
+            {shareMsg || (savedId ? '🔗 share with friends' : '🔗 share')}
           </motion.button>
           <motion.button
             onClick={onReset}
