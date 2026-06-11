@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 
 const BUILD_STAGES = [
-  { label: 'thinking about your idea...', duration: 800 },
-  { label: 'designing the layout...', duration: 600 },
-  { label: 'writing the logic...', duration: 400 },
-  { label: 'adding the finishing touches...', duration: 400 },
-  { label: 'almost there...', duration: 300 },
+  { label: 'thinking about your idea...' },
+  { label: 'designing the layout...' },
+  { label: 'writing the logic...' },
+  { label: 'adding the finishing touches...' },
+  { label: 'almost there...' },
 ];
 
 export default function ZappLiveOutput({ idea, phase, builderMode, onComplete, onReset, generatedCode, appTitle }) {
@@ -37,13 +37,14 @@ export default function ZappLiveOutput({ idea, phase, builderMode, onComplete, o
   const startBuilding = async () => {
     setIsBuilding(true);
 
-    // Run through stages
-    for (let i = 0; i < BUILD_STAGES.length; i++) {
-      setStageIndex(i);
-      await sleep(BUILD_STAGES[i].duration);
-    }
+    // Cycle stages while AI is working (in parallel)
+    let stageI = 0;
+    const stageInterval = setInterval(() => {
+      stageI = (stageI + 1) % BUILD_STAGES.length;
+      setStageIndex(stageI);
+    }, 1800);
 
-    // Call AI to generate the app
+    // Call AI to generate the app immediately
     try {
       const result = await base44.integrations.Core.InvokeLLM({
         prompt: `You are ZAPP — an AI that builds real, working mini web apps for children aged 8-13.
@@ -65,7 +66,6 @@ Generate a COMPLETE, self-contained HTML page that:
 IMPORTANT: Return your response as JSON with a single key "html" containing the complete HTML string starting with <!DOCTYPE html>. No markdown fences, no explanation — just the html field with the full working page.
 
 Make it genuinely impressive. A child should look at it and say "WHOA I made this!"`,
-        model: 'claude_sonnet_4_6',
         response_json_schema: {
           type: 'object',
           properties: {
@@ -86,8 +86,10 @@ Make it genuinely impressive. A child should look at it and say "WHOA I made thi
       const titleMatch = fullCode.match(/<title>(.*?)<\/title>/i);
       const title = titleMatch ? titleMatch[1] : idea;
 
+      clearInterval(stageInterval);
       onComplete(fullCode, title);
     } catch (err) {
+      clearInterval(stageInterval);
       console.error('ZAPP build error:', err);
       setError(`Something went wrong — ${err?.message || 'tap to try again'}`);
       setIsBuilding(false);
