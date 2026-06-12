@@ -33,29 +33,35 @@ export default function ZappGallery({ onPlay, onRemix }) {
 
   if (playing) {
     return (
-      <div className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
-        {/* Slim bar at top */}
-        <div className="flex items-center justify-between px-4 py-2 flex-shrink-0"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.6)' }}>
+      <div style={{
+        position: 'fixed', inset: 0, zIndex: 999,
+        display: 'flex', flexDirection: 'column',
+        background: '#000',
+        // Push below UF51 mobile header on mobile, nothing on desktop
+        paddingTop: 'env(safe-area-inset-top, 0px)'
+      }}>
+        {/* Slim bar */}
+        <div className="flex items-center justify-between px-3 flex-shrink-0"
+          style={{ height: 44, borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)' }}>
           <div className="flex items-center gap-2 min-w-0">
-            <span className="text-base flex-shrink-0">{playing.emoji || '⚡'}</span>
-            <span className="text-white font-black text-xs truncate max-w-[120px]">{playing.title}</span>
-            {playing.creator_name && <span className="text-white/30 text-xs flex-shrink-0">by {playing.creator_name}</span>}
+            <span className="text-sm flex-shrink-0">{playing.emoji || '⚡'}</span>
+            <span className="text-white font-black text-xs truncate max-w-[110px]">{playing.title}</span>
+            {playing.creator_name && <span className="text-white/30 text-[10px] flex-shrink-0">by {playing.creator_name}</span>}
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-1.5 flex-shrink-0">
             <motion.button onClick={() => onRemix(playing)} whileTap={{ scale: 0.95 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-black"
+              className="px-2.5 py-1 rounded-lg text-[11px] font-black"
               style={{ background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6' }}>
               🔀 remix
             </motion.button>
             <motion.button onClick={() => setPlaying(null)} whileTap={{ scale: 0.95 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-black"
+              className="px-2.5 py-1 rounded-lg text-[11px] font-black"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)' }}>
               ← back
             </motion.button>
           </div>
         </div>
-        {/* Game fills everything below the bar */}
+        {/* Game fills ALL remaining space */}
         <iframe
           srcDoc={playing.html}
           className="w-full border-0"
