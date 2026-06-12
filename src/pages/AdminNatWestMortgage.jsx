@@ -426,6 +426,11 @@ export default function AdminNatWestMortgage() {
           </CardHeader>
           <CardContent className="space-y-4">
 
+            <div className="bg-green-900/30 border-2 border-green-400 rounded-lg p-4">
+              <p className="text-green-300 font-black mb-2">✅ 12/06/2026 — EMAIL SENT TO SANTANDER</p>
+              <p className="text-gray-200 text-sm">Replied to Breathing Space email requesting affordable repayment arrangement. Asked for: reduced monthly plan, freeze on interest/charges, formal Overdraft Reduction Plan. Mentioned bereavement and mental health. Awaiting response.</p>
+            </div>
+
             <div className="bg-red-900/30 border-2 border-red-500 rounded-lg p-4">
               <p className="text-red-300 font-black mb-2">⚠️ CURRENT STATUS — 12 June 2026</p>
               <ul className="text-white text-sm space-y-1">
