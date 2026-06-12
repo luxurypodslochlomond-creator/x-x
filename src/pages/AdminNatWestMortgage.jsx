@@ -428,7 +428,14 @@ export default function AdminNatWestMortgage() {
 
             <div className="bg-green-900/30 border-2 border-green-400 rounded-lg p-4">
               <p className="text-green-300 font-black mb-2">✅ 12/06/2026 — EMAIL SENT TO SANTANDER</p>
-              <p className="text-gray-200 text-sm">Replied to Breathing Space email requesting affordable repayment arrangement. Asked for: reduced monthly plan, freeze on interest/charges, formal Overdraft Reduction Plan. Mentioned bereavement and mental health. Awaiting response.</p>
+              <p className="text-gray-200 text-sm">Replied to Breathing Space email requesting affordable repayment arrangement. Asked for: reduced monthly plan, freeze on interest/charges, formal Overdraft Reduction Plan. Mentioned bereavement and mental health.</p>
+            </div>
+
+            <div className="bg-amber-900/30 border-2 border-amber-400 rounded-lg p-4">
+              <p className="text-amber-300 font-black mb-2">📞 12/06/2026 — SANTANDER REPLIED: PHONE ONLY</p>
+              <p className="text-gray-200 text-sm">Auto-reply confirmed they do not accept inbound emails. <strong>Must call to arrange repayment plan.</strong></p>
+              <p className="text-amber-300 text-sm font-bold mt-2">📞 Call: <span className="text-white">0800 011 3142</span> — Santander Financial Support</p>
+              <p className="text-gray-400 text-xs mt-1">Say: "I'd like to set up an affordable repayment arrangement for my overdraft. I'm in financial difficulty due to bereavement and mental health challenges."</p>
             </div>
 
             <div className="bg-red-900/30 border-2 border-red-500 rounded-lg p-4">
