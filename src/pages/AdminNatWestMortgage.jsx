@@ -217,6 +217,15 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-2 border-green-400">
+                <div className="text-green-300 font-bold text-lg min-w-fit">12/06/2026</div>
+                <div>
+                  <p className="text-white font-bold">✅ BRIAN REPLIED TO NARGIS — Confirmation Sent</p>
+                  <p className="text-gray-300 text-sm">Replied to SSTSecured@natwest.com confirming the arrangement. Stated: £200 payment on 23rd June, will call on the 23rd to process, will continue monthly updates. Agreement confirmed in writing from our side.</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ Both sides now have the arrangement confirmed in writing ♾️</p>
+                </div>
+              </div>
+
               <div className="flex items-start gap-4 bg-blue-900/20 p-4 rounded-lg border-2 border-blue-500">
                 <div className="text-blue-400 font-bold text-lg min-w-fit">📊 NEXT PHASE</div>
                 <div>
