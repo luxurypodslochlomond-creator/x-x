@@ -33,21 +33,27 @@ export default function ZappGallery({ onPlay, onRemix }) {
 
   if (playing) {
     return (
-      <div className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
-        <div className="flex items-center justify-between px-4 py-2 flex-shrink-0"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.4)' }}>
-          <div className="flex items-center gap-2">
-            <span className="text-xl">{playing.emoji || '⚡'}</span>
-            <span className="text-white font-black text-sm truncate max-w-[160px]">{playing.title}</span>
+      <div className="fixed inset-0 z-50 flex flex-col" style={{ background: '#000' }}>
+        <iframe
+          srcDoc={playing.html}
+          className="flex-1 w-full border-0"
+          title={playing.title}
+          sandbox="allow-scripts allow-same-origin"
+        />
+        <div className="flex-shrink-0 flex items-center justify-between px-4 py-2"
+          style={{ background: 'rgba(0,0,0,0.9)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-lg flex-shrink-0">{playing.emoji || '⚡'}</span>
+            <span className="text-white font-black text-sm truncate max-w-[130px]">{playing.title}</span>
             {playing.creator_name && (
-              <span className="text-white/30 text-xs">by {playing.creator_name}</span>
+              <span className="text-white/30 text-xs flex-shrink-0">by {playing.creator_name}</span>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <motion.button
               onClick={() => onRemix(playing)}
               whileTap={{ scale: 0.95 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-black"
+              className="px-3 py-2 rounded-lg text-xs font-black"
               style={{ background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6' }}
             >
               🔀 remix
@@ -55,19 +61,13 @@ export default function ZappGallery({ onPlay, onRemix }) {
             <motion.button
               onClick={() => setPlaying(null)}
               whileTap={{ scale: 0.95 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-black text-white/50 hover:text-white transition-colors"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
+              className="px-3 py-2 rounded-lg text-xs font-black"
+              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)' }}
             >
               ← back
             </motion.button>
           </div>
         </div>
-        <iframe
-          srcDoc={playing.html}
-          className="flex-1 w-full border-0"
-          title={playing.title}
-          sandbox="allow-scripts allow-same-origin"
-        />
       </div>
     );
   }
