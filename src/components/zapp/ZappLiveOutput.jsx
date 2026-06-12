@@ -19,9 +19,12 @@ RULES:
 - Vanilla JS in <script>, CSS in <style>
 - Web Audio API for sounds (oscillators only)
 - Dark bg (#0a0a0f), neon colours, large fonts, big buttons
+- MOBILE FIRST: all buttons min 60px tall, touch-friendly, no hover-only interactions
+- Use viewport units (vw/vh) not fixed pixel sizes so it works on any screen
 - Kind feedback only — never harsh ("Nearly! Try again 💪")
 - FULLY WORKING games with score, confetti, sound effects
-- Play Again button fully resets game state`;
+- Play Again button fully resets game state
+- <meta name="viewport" content="width=device-width, initial-scale=1"> MUST be included`;
 
 export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
@@ -31,6 +34,7 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
   const [shareMsg, setShareMsg] = useState('');
   const [appTitle, setAppTitle] = useState('');
   const [buildTime, setBuildTime] = useState(0);
+  const [fullscreen, setFullscreen] = useState(false);
   const hasStarted = useRef(false);
   const timerRef = useRef(null);
 
@@ -287,98 +291,88 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
     );
   }
 
+  // FULLSCREEN play mode for mobile — maximum game space
+  if (fullscreen) {
+    return (
+      <div className="fixed inset-0 z-50 flex flex-col" style={{ background: '#000' }}>
+        <iframe
+          srcDoc={builtHtml}
+          className="flex-1 w-full border-0"
+          title="Your ZAPP app"
+          sandbox="allow-scripts allow-same-origin"
+          style={{ height: '100%' }}
+        />
+        <div className="flex-shrink-0 flex items-center justify-between px-4 py-2"
+          style={{ background: 'rgba(0,0,0,0.85)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <button onClick={() => setFullscreen(false)}
+            className="text-white/60 text-sm font-bold px-3 py-2 rounded-lg"
+            style={{ background: 'rgba(255,255,255,0.06)' }}>
+            ← back
+          </button>
+          <div className="flex items-center gap-2">
+            {onSave && <button onClick={onSave} className="text-yellow-400 text-sm font-bold px-3 py-2 rounded-lg" style={{ background: 'rgba(251,191,36,0.12)' }}>🏆</button>}
+            <button onClick={handleShare} className="text-violet-300 text-sm font-bold px-3 py-2 rounded-lg" style={{ background: 'rgba(167,139,250,0.12)' }}>🔗</button>
+            <button onClick={onReset} className="text-white text-sm font-black px-4 py-2 rounded-lg"
+              style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}>⚡ new</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // DONE — show the built app
   return (
     <div className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
 
-      {/* Top action bar */}
+      {/* Top action bar — scrollable on mobile */}
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="flex items-center justify-between px-4 py-2 flex-shrink-0"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)' }}
+        className="flex items-center gap-2 px-3 py-2 flex-shrink-0 overflow-x-auto"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)', scrollbarWidth: 'none' }}
       >
-        <div className="flex items-center gap-2 min-w-0">
-          <motion.span
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-            className="text-green-400 text-lg flex-shrink-0"
-          >✅</motion.span>
-          <motion.span
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15 }}
-            className="text-white/70 text-sm font-black truncate max-w-[160px] sm:max-w-xs"
+        <span className="text-green-400 text-base flex-shrink-0">✅</span>
+        <span className="text-white/70 text-xs font-black truncate flex-shrink-0 max-w-[100px] sm:max-w-xs">
+          {appTitle || idea}
+        </span>
+        <div className="flex items-center gap-1.5 flex-shrink-0 ml-auto">
+          {/* Fullscreen button — key for mobile kids */}
+          <motion.button
+            onClick={() => setFullscreen(true)}
+            whileTap={{ scale: 0.95 }}
+            className="px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1"
+            style={{ background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.4)', color: '#4ade80' }}
           >
-            {appTitle || idea}
-          </motion.span>
-        </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
+            ▶ play
+          </motion.button>
           {onSave && (
-            <motion.button
-              onClick={onSave}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.18 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
-              style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24' }}
-            >
+            <motion.button onClick={onSave} whileTap={{ scale: 0.95 }}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold"
+              style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24' }}>
               🏆 save
             </motion.button>
           )}
           {onRemix && (
-            <motion.button
-              onClick={onRemix}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.19 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
-              style={{ background: 'rgba(244,114,182,0.12)', border: '1px solid rgba(244,114,182,0.3)', color: '#f472b6' }}
-            >
+            <motion.button onClick={onRemix} whileTap={{ scale: 0.95 }}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold"
+              style={{ background: 'rgba(244,114,182,0.12)', border: '1px solid rgba(244,114,182,0.3)', color: '#f472b6' }}>
               🔀 remix
             </motion.button>
           )}
-          <motion.button
-            onClick={handleDownload}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1"
-            style={{ background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.3)', color: '#67e8f9' }}
-          >
-            ⬇ save
-          </motion.button>
-          <motion.button
-            onClick={handleShare}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.25 }}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
+          <motion.button onClick={handleShare} whileTap={{ scale: 0.95 }}
+            className="px-3 py-1.5 rounded-lg text-xs font-bold"
             style={{
               background: shareMsg ? 'rgba(34,197,94,0.15)' : 'rgba(167,139,250,0.12)',
               border: shareMsg ? '1px solid rgba(34,197,94,0.4)' : '1px solid rgba(167,139,250,0.3)',
               color: shareMsg ? '#4ade80' : '#c4b5fd',
-            }}
-          >
-            {shareMsg || (savedId ? '🔗 share with friends' : '🔗 share')}
+            }}>
+            {shareMsg || '🔗'}
           </motion.button>
-          <motion.button
-            onClick={onReset}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, type: 'spring' }}
-            className="px-4 py-1.5 rounded-lg text-xs font-black text-white"
-            style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', boxShadow: '0 0 16px rgba(124,58,237,0.4)' }}
-          >
-            build new ⚡
+          <motion.button onClick={onReset} whileTap={{ scale: 0.95 }}
+            className="px-3 py-1.5 rounded-lg text-xs font-black text-white"
+            style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}>
+            ⚡ new
           </motion.button>
         </div>
       </motion.div>
