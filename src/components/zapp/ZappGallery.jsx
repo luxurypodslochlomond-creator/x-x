@@ -33,48 +33,38 @@ export default function ZappGallery({ onPlay, onRemix }) {
 
   if (playing) {
     return (
-      <div style={{
-        position: 'fixed', inset: 0, zIndex: 999,
-        display: 'flex', flexDirection: 'column',
-        background: '#000',
-        // Push below UF51 mobile header on mobile, nothing on desktop
-        paddingTop: 'env(safe-area-inset-top, 0px)'
-      }}>
-        {/* Slim bar */}
-        <div className="flex items-center justify-between px-3 flex-shrink-0"
-          style={{ height: 44, borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)' }}>
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="text-sm flex-shrink-0">{playing.emoji || '⚡'}</span>
-            <span className="text-white font-black text-xs truncate max-w-[110px]">{playing.title}</span>
-            {playing.creator_name && <span className="text-white/30 text-[10px] flex-shrink-0">by {playing.creator_name}</span>}
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9999, display: 'flex', flexDirection: 'column', background: '#000' }}>
+        {/* Slim bar — always at very top */}
+        <div style={{ height: 48, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', background: 'rgba(10,10,15,0.95)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
+            <span style={{ fontSize: 16, flexShrink: 0 }}>{playing.emoji || '⚡'}</span>
+            <span style={{ color: '#fff', fontWeight: 900, fontSize: 12, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 110 }}>{playing.title}</span>
+            {playing.creator_name && <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 10, flexShrink: 0 }}>by {playing.creator_name}</span>}
           </div>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            <motion.button onClick={() => onRemix(playing)} whileTap={{ scale: 0.95 }}
-              className="px-2.5 py-1 rounded-lg text-[11px] font-black"
-              style={{ background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6' }}>
+          <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+            <button onClick={() => onRemix(playing)}
+              style={{ padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 900, background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6', cursor: 'pointer' }}>
               🔀 remix
-            </motion.button>
-            <motion.button onClick={() => setPlaying(null)} whileTap={{ scale: 0.95 }}
-              className="px-2.5 py-1 rounded-lg text-[11px] font-black"
-              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)' }}>
+            </button>
+            <button onClick={() => setPlaying(null)}
+              style={{ padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 900, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)', cursor: 'pointer' }}>
               ← back
-            </motion.button>
+            </button>
           </div>
         </div>
         {/* Game fills ALL remaining space */}
         <iframe
           srcDoc={playing.html}
-          className="w-full border-0"
           title={playing.title}
           sandbox="allow-scripts allow-same-origin"
-          style={{ flex: 1, minHeight: 0, display: 'block' }}
+          style={{ flex: 1, width: '100%', border: 'none', display: 'block', minHeight: 0 }}
         />
       </div>
     );
   }
 
   return (
-    <div className="px-4 py-6 max-w-4xl mx-auto" style={{ minHeight: 'calc(100vh - 72px)' }}>
+    <div className="px-4 py-6 max-w-4xl mx-auto" style={{ minHeight: '80vh' }}>
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}

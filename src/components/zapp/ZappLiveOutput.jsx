@@ -161,7 +161,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
   // ERROR STATE
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center gap-6 px-6" style={{ height: 'calc(100vh - 72px)' }}>
+      <div className="flex flex-col items-center justify-center gap-6 px-6" style={{ height: '100%', minHeight: '60vh' }}>
         <motion.div
           animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
           transition={{ duration: 0.5 }}
@@ -188,7 +188,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
   if (!isDone) {
     const stage = BUILD_STAGES[stageIndex];
     return (
-      <div className="flex flex-col items-center justify-center gap-8 px-6" style={{ height: 'calc(100vh - 72px)' }}>
+      <div className="flex flex-col items-center justify-center gap-8 px-6" style={{ height: '100%', minHeight: '60vh' }}>
 
         {/* Animated bolt */}
         <div className="relative flex items-center justify-center">
@@ -292,7 +292,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
 
   // DONE — show the built app
   return (
-    <div className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
+    <div className="flex flex-col" style={{ height: '100%' }}>
 
       {/* Top action bar — scrollable on mobile */}
       <motion.div

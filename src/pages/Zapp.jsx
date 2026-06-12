@@ -88,8 +88,8 @@ export default function Zapp() {
 
   return (
     <div
-      className="min-h-screen text-white overflow-hidden"
-      style={{ background: '#0a0a0f', fontFamily: "'Inter', system-ui, sans-serif" }}
+      className="text-white overflow-hidden"
+      style={{ background: '#0a0a0f', fontFamily: "'Inter', system-ui, sans-serif", height: '100dvh', display: 'flex', flexDirection: 'column' }}
     >
       {/* Ambient background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -159,10 +159,10 @@ export default function Zapp() {
       </header>
 
       {/* Main content */}
-      <main className="relative z-10">
+      <main className="relative z-10 flex-1 min-h-0 overflow-hidden">
         <AnimatePresence mode="wait">
           {phase === 'play' && directPlay ? (
-            <motion.div key="play" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
+            <motion.div key="play" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col" style={{ height: '100%' }}>
               <div className="flex items-center justify-between px-4 py-2 flex-shrink-0"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.4)' }}>
                 <div className="flex items-center gap-2">
