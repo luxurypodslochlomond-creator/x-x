@@ -417,6 +417,80 @@ export default function AdminNatWestMortgage() {
           </CardContent>
         </Card>
 
+        {/* SANTANDER OVERDRAFT */}
+        <Card className="bg-gradient-to-r from-red-900/40 to-orange-900/40 border-4 border-red-500">
+          <CardHeader>
+            <CardTitle className="text-red-300 flex items-center gap-2">
+              🏦 SANTANDER — Overdraft £1,600 | Breathing Space ENDED 05/06/2026
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+
+            <div className="bg-red-900/30 border-2 border-red-500 rounded-lg p-4">
+              <p className="text-red-300 font-black mb-2">⚠️ CURRENT STATUS — 12 June 2026</p>
+              <ul className="text-white text-sm space-y-1">
+                <li>• <strong>Breathing Space ended:</strong> 05 June 2026 — they sent email to confirm</li>
+                <li>• <strong>Overdraft amount:</strong> £1,600 (going over due to overdraft charges)</li>
+                <li>• <strong>They suggested:</strong> Close account + open new one — DO NOT do this yet</li>
+                <li>• <strong>Interest/charges:</strong> Were frozen during Breathing Space — may restart</li>
+                <li>• <strong>Status:</strong> Waiting to hear from you — no legal action yet</li>
+              </ul>
+            </div>
+
+            <div className="bg-amber-900/30 border-2 border-amber-500 rounded-lg p-4">
+              <p className="text-amber-400 font-black mb-2">🚨 DO NOT CLOSE ACCOUNT YET</p>
+              <p className="text-sm text-gray-200">If you close the account, the £1,600 overdraft becomes an <strong>immediate debt they'll chase hard</strong>. Only close if they agree IN WRITING to freeze it and let you repay at an affordable rate with no further charges.</p>
+            </div>
+
+            <div className="bg-green-900/30 border-2 border-green-500 rounded-lg p-4">
+              <p className="text-green-400 font-black mb-2">✅ WHAT TO DO — Call them first</p>
+              <ul className="text-sm text-gray-200 space-y-1">
+                <li>📞 <strong>0800 011 3142</strong> — Santander Financial Support Team</li>
+                <li>• Ask for: <strong>Reduced repayment plan</strong> (even £20-£50/month)</li>
+                <li>• Ask for: <strong>Freeze interest and charges</strong> (they were already doing it)</li>
+                <li>• Ask for: <strong>Overdraft Reduction Plan</strong> (formal arrangement)</li>
+                <li>• Mention: mental health difficulties, bereavement, financial hardship</li>
+              </ul>
+            </div>
+
+            <div className="bg-blue-900/30 border-2 border-blue-500 rounded-lg p-4">
+              <p className="text-blue-400 font-black mb-2">📝 WHAT TO SAY ON THE CALL</p>
+              <p className="text-sm text-gray-200 italic">"I'm calling regarding my account. My breathing space has ended and I'd like to discuss an affordable repayment arrangement for my overdraft. I'm experiencing financial difficulty and mental health challenges but I want to work with you to find a solution."</p>
+            </div>
+
+            <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+              <p className="text-cyan-300 text-sm font-bold">💡 KEY STRATEGY:</p>
+              <ul className="text-xs text-gray-300 space-y-1 mt-1">
+                <li>• Same approach as NatWest — it worked there, it'll work here</li>
+                <li>• Santander are legally obligated to treat you fairly under FCA vulnerable customer rules</li>
+                <li>• Even £20/month is better than no arrangement — they'll accept it</li>
+                <li>• Get everything confirmed in writing by email after any call</li>
+              </ul>
+            </div>
+
+          </CardContent>
+        </Card>
+
+        {/* SANTANDER EMAIL LAUNCHER */}
+        <Card className="bg-gradient-to-r from-red-900/40 to-orange-900/40 border-2 border-red-500">
+          <CardHeader>
+            <CardTitle className="text-red-300 flex items-center gap-2">
+              <Mail className="w-6 h-6" />
+              SANTANDER — Quick Email (if you prefer email over phone)
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-gray-400 text-sm">Tap to open a pre-filled draft. You review and send from your own email. ✅</p>
+            <EmailLauncher
+              to="financialsupport@santander.co.uk"
+              subject="Account Holder — Overdraft Repayment Arrangement Request"
+              body={`Dear Santander Financial Support Team,\n\nI am writing to request an affordable repayment arrangement for my overdraft following the end of my Breathing Space period on 05 June 2026.\n\nI have been experiencing significant financial difficulty due to bereavement and mental health challenges. I am committed to resolving this and would like to discuss:\n\n1. A reduced monthly repayment plan\n2. Continuation of the interest and charges freeze\n3. A formal Overdraft Reduction Plan\n\nI am happy to discuss my income and expenditure in detail. Please could you contact me to discuss the best way forward?\n\nKind regards,\nBrian Hughes\nPlease contact: GLA101@proton.me`}
+              label="✉️ Repayment Arrangement Request — Santander Financial Support"
+              color="amber"
+            />
+          </CardContent>
+        </Card>
+
         {/* THE REAL TALK */}
         <Card className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border-2 border-cyan-500/50">
           <CardContent className="p-8">
