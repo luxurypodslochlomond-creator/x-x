@@ -34,7 +34,6 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
   const [shareMsg, setShareMsg] = useState('');
   const [appTitle, setAppTitle] = useState('');
   const [buildTime, setBuildTime] = useState(0);
-  const [fullscreen, setFullscreen] = useState(false);
   const hasStarted = useRef(false);
   const timerRef = useRef(null);
 
@@ -291,35 +290,6 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
     );
   }
 
-  // FULLSCREEN play mode for mobile — maximum game space
-  if (fullscreen) {
-    return (
-      <div className="fixed inset-0 z-50 flex flex-col" style={{ background: '#000' }}>
-        <iframe
-          srcDoc={builtHtml}
-          className="flex-1 w-full border-0"
-          title="Your ZAPP app"
-          sandbox="allow-scripts allow-same-origin"
-          style={{ height: '100%' }}
-        />
-        <div className="flex-shrink-0 flex items-center justify-between px-4 py-2"
-          style={{ background: 'rgba(0,0,0,0.85)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <button onClick={() => setFullscreen(false)}
-            className="text-white/60 text-sm font-bold px-3 py-2 rounded-lg"
-            style={{ background: 'rgba(255,255,255,0.06)' }}>
-            ← back
-          </button>
-          <div className="flex items-center gap-2">
-            {onSave && <button onClick={onSave} className="text-yellow-400 text-sm font-bold px-3 py-2 rounded-lg" style={{ background: 'rgba(251,191,36,0.12)' }}>🏆</button>}
-            <button onClick={handleShare} className="text-violet-300 text-sm font-bold px-3 py-2 rounded-lg" style={{ background: 'rgba(167,139,250,0.12)' }}>🔗</button>
-            <button onClick={onReset} className="text-white text-sm font-black px-4 py-2 rounded-lg"
-              style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}>⚡ new</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   // DONE — show the built app
   return (
     <div className="flex flex-col" style={{ height: 'calc(100vh - 72px)' }}>
@@ -337,15 +307,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
           {appTitle || idea}
         </span>
         <div className="flex items-center gap-1.5 flex-shrink-0 ml-auto">
-          {/* Fullscreen button — key for mobile kids */}
-          <motion.button
-            onClick={() => setFullscreen(true)}
-            whileTap={{ scale: 0.95 }}
-            className="px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1"
-            style={{ background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.4)', color: '#4ade80' }}
-          >
-            ▶ play
-          </motion.button>
+
           {onSave && (
             <motion.button onClick={onSave} whileTap={{ scale: 0.95 }}
               className="px-3 py-1.5 rounded-lg text-xs font-bold"
