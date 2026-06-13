@@ -606,6 +606,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "🔔 PWA Push Guide", url: createPageUrl("AdminPWAPushGuide"), icon: Bell, description: "How we cracked iOS push notifications" },
       { title: "📰 SORTED Press Release", url: "/SortedPressRelease", icon: FileText, description: "Launch PR — 25 April 2026 · download PDF" },
       { title: "📄 Brian Hughes CV", url: createPageUrl("BrianHughesCV"), icon: User, description: "One-pager CV · download PDF" },
+      { title: "⚽ Fergus Hughes Profile", url: createPageUrl("FergusHughesProfile"), icon: User, description: "Player profile for Greg / Tony Begg" },
       { title: "🤝 Chris Walsh Pitch", url: createPageUrl("WalshyPitch"), icon: Handshake, description: "£20k · 17% · Graeme · private pitch" },
     ] : [];
 
