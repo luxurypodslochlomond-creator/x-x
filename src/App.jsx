@@ -108,6 +108,7 @@ const CB51MainPage = React.lazy(() => import('./pages/CB51'));
 const CB51HowPage = React.lazy(() => import('./pages/CB51How'));
 const WalshyPitchPage = React.lazy(() => import('./pages/WalshyPitch'));
 const ZappPage = React.lazy(() => import('./pages/Zapp'));
+const FergusHughesProfilePage = React.lazy(() => import('./pages/FergusHughesProfile'));
 
 
 
@@ -266,6 +267,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51How" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><CB51HowPage /></Suspense>} />
       <Route path="/WalshyPitch" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><WalshyPitchPage /></Suspense>} />
       <Route path="/Zapp" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappPage /></Suspense>} />
+      <Route path="/FergusHughesProfile" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><FergusHughesProfilePage /></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
