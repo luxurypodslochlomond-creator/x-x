@@ -33,7 +33,7 @@ GENERAL RULES:
 - Confetti on wins: spawn 40+ coloured divs with CSS animation falling from top
 - At least 3 different sound effects using Web Audio API oscillators`;
 
-export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onSave, onRemix, savedId }) {
+export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
   const [builtHtml, setBuiltHtml] = useState('');
   const [isDone, setIsDone] = useState(false);
@@ -178,15 +178,23 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
           <p className="text-white font-black text-2xl mb-2">Oops! Something went wrong</p>
           <p className="text-white/50 text-base">{error}</p>
         </div>
-        <motion.button
-          onClick={onReset}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-10 py-5 rounded-2xl font-black text-white text-xl"
-          style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', boxShadow: '0 0 40px rgba(124,58,237,0.6)' }}
-        >
-          try again ⚡
-        </motion.button>
+        <div className="flex flex-col items-center gap-3">
+          <motion.button
+            onClick={onRetry || onReset}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-10 py-5 rounded-2xl font-black text-white text-xl"
+            style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', boxShadow: '0 0 40px rgba(124,58,237,0.6)' }}
+          >
+            try again ⚡
+          </motion.button>
+          <button
+            onClick={onReset}
+            className="text-white/25 hover:text-white/50 text-sm transition-colors"
+          >
+            start over with a new idea
+          </button>
+        </div>
       </div>
     );
   }

@@ -65,6 +65,13 @@ export default function Zapp() {
     setRemixSource(null);
     setRemixInstruction('');
     setShowSave(false);
+    setSavedId(null);
+  };
+
+  // Retry keeps the same idea/remix context — just re-mounts ZappLiveOutput
+  const [buildKey, setBuildKey] = useState(0);
+  const handleRetry = () => {
+    setBuildKey(k => k + 1);
   };
 
   const handleBuildComplete = (html, title) => {
@@ -201,10 +208,12 @@ export default function Zapp() {
           ) : (
             <motion.div key="building" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} style={{ height: '100%' }}>
               <ZappLiveOutput
+                key={buildKey}
                 idea={idea}
                 builderMode={builderMode}
                 onComplete={handleBuildComplete}
                 onReset={handleReset}
+                onRetry={handleRetry}
                 savedId={savedId}
                 onSave={builtHtml ? () => setShowSave(true) : undefined}
                 onRemix={builtHtml ? () => {
