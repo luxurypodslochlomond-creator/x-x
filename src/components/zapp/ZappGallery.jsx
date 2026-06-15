@@ -28,7 +28,6 @@ export default function ZappGallery({ onPlay, onRemix }) {
       await base44.entities.ZappCreation.update(item.id, { play_count: (item.play_count || 0) + 1 });
     } catch {}
     setPlaying(item);
-    if (onPlay) onPlay(item);
   };
 
   if (playing) {
