@@ -71,7 +71,7 @@ export default function Zapp() {
     setBuiltHtml(html);
     setAppTitle(title);
     setSavedId(null);
-    setTimeout(() => setShowSave(true), 800);
+    // Don't auto-show save modal — kids want to play first, save button is in toolbar
   };
 
   const handleRemixRequest = (original, instruction) => {
@@ -199,7 +199,7 @@ export default function Zapp() {
               <ZappCreator onSubmit={handleIdeaSubmit} />
             </motion.div>
           ) : (
-            <motion.div key="building" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+            <motion.div key="building" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} style={{ height: '100%' }}>
               <ZappLiveOutput
                 idea={idea}
                 builderMode={builderMode}
