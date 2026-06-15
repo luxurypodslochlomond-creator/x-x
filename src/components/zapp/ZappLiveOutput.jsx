@@ -12,19 +12,26 @@ const BUILD_STAGES = [
   { emoji: '⚡', text: 'launching in 3... 2... 1...' },
 ];
 
-const SYSTEM_PROMPT = `ZAPP: Build complete mini web apps for kids (8-13).
+const SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen.
 
-RULES:
+CRITICAL MOBILE RULES — the app will be displayed in a phone-sized iframe, so:
+- body { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; background: #0a0a0f; }
+- Use 100vh for full height — the game must fill the whole screen, no scrolling needed
+- All interactive buttons MUST be at least 64px tall and 100% width or very large — easy to tap with a thumb
+- Font sizes: headings min 2rem, body min 1.2rem — readable on a small screen
+- Use flexbox/grid with vh/vw units — NEVER use fixed pixel widths that might overflow
+- NO horizontal overflow — everything must fit within 100vw
+
+GENERAL RULES:
 - Single HTML file, start with <!DOCTYPE html>, everything inline (no CDN, no imports)
 - Vanilla JS in <script>, CSS in <style>
-- Web Audio API for sounds (oscillators only)
-- Dark bg (#0a0a0f), neon colours, large fonts, big buttons
-- MOBILE FIRST: all buttons min 60px tall, touch-friendly, no hover-only interactions
-- Use viewport units (vw/vh) not fixed pixel sizes so it works on any screen
-- Kind feedback only — never harsh ("Nearly! Try again 💪")
-- FULLY WORKING games with score, confetti, sound effects
-- Play Again button fully resets game state
-- <meta name="viewport" content="width=device-width, initial-scale=1"> MUST be included`;
+- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> MUST be first meta tag
+- Web Audio API for sounds (oscillators only — no external audio files)
+- Dark bg (#0a0a0f), neon colours (use bright purples, pinks, cyans, greens), large fonts
+- Kind encouraging feedback only — NEVER harsh. Wrong answers: "Nearly! Try again 💪" with a warm soft sound
+- FULLY WORKING: every button works, full game loop, score tracked, Play Again resets ALL state to defaults
+- Confetti on wins: spawn 40+ coloured divs with CSS animation falling from top
+- At least 3 different sound effects using Web Audio API oscillators`;
 
 export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
@@ -90,7 +97,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
 
       // Timeout after 20 seconds
       const timeout = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Took too long — tap try again!')), 20000);
+        setTimeout(() => reject(new Error('Took too long — tap try again!')), 35000);
       });
 
       const result = await Promise.race([llmPromise, timeout]);
