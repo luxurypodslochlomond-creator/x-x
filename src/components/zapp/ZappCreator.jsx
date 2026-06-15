@@ -49,12 +49,24 @@ export default function ZappCreator({ onSubmit }) {
     }
   };
 
-  const startListening = () => {
+  const startListening = async () => {
     if (!hasVoice) return;
+
+    // Request mic permission explicitly first (fixes iOS/Android first-tap issue)
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (err) {
+      // Permission denied — show a friendly message
+      setVoiceText('Mic blocked! Please allow microphone access in your browser settings 🎤');
+      setIsListening(false);
+      setTimeout(() => setVoiceText(''), 4000);
+      return;
+    }
+
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognitionRef.current = recognition;
-    recognition.lang = 'en-US';
+    recognition.lang = 'en-GB';
     recognition.continuous = false;
     recognition.interimResults = true;
 
@@ -80,16 +92,19 @@ export default function ZappCreator({ onSubmit }) {
         setVoiceText('');
         setIsListening(false);
         setVoicePulse(false);
-        // Call onSubmit directly with the captured text — avoids stale closure on value state
         if (trimmed.length >= 3) {
           setTimeout(() => onSubmit(trimmed), 350);
         }
       }
     };
 
-    recognition.onerror = () => {
+    recognition.onerror = (e) => {
       setIsListening(false);
       setVoicePulse(false);
+      if (e.error === 'not-allowed') {
+        setVoiceText('Mic blocked! Check browser permissions 🎤');
+        setTimeout(() => setVoiceText(''), 4000);
+      }
     };
 
     recognition.onend = () => {
@@ -129,7 +144,7 @@ export default function ZappCreator({ onSubmit }) {
         </p>
       </motion.div>
 
-      {/* VOICE BUTTON — front and centre */}
+      {/* VOICE BUTTON — front and centre — COOLASFUCK for kids */}
       {hasVoice && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -139,27 +154,49 @@ export default function ZappCreator({ onSubmit }) {
         >
           <motion.button
             onClick={isListening ? stopListening : startListening}
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.94 }}
-            className="relative flex items-center justify-center rounded-full font-black text-white"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.9 }}
+            className="relative flex flex-col items-center justify-center rounded-3xl font-black text-white select-none"
             style={{
-              width: 80, height: 80,
+              width: 120, height: 120,
               background: isListening
-                ? 'linear-gradient(135deg, #ef4444, #f97316)'
-                : 'linear-gradient(135deg, #7c3aed, #db2777)',
+                ? 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)'
+                : 'linear-gradient(135deg, #7c3aed 0%, #ec4899 60%, #f97316 100%)',
               boxShadow: isListening
-                ? '0 0 0 0 rgba(239,68,68,0.7)'
-                : '0 0 30px rgba(124,58,237,0.5)',
+                ? '0 0 40px rgba(239,68,68,0.8), 0 0 80px rgba(239,68,68,0.3)'
+                : '0 0 40px rgba(124,58,237,0.6), 0 0 80px rgba(236,72,153,0.3)',
+              border: '3px solid rgba(255,255,255,0.3)',
             }}
             animate={isListening ? {
-              boxShadow: ['0 0 0 0 rgba(239,68,68,0.7)', '0 0 0 20px rgba(239,68,68,0)', '0 0 0 0 rgba(239,68,68,0)']
+              boxShadow: [
+                '0 0 40px rgba(239,68,68,0.8), 0 0 80px rgba(239,68,68,0.3)',
+                '0 0 60px rgba(239,68,68,1), 0 0 120px rgba(239,68,68,0.5)',
+                '0 0 40px rgba(239,68,68,0.8), 0 0 80px rgba(239,68,68,0.3)',
+              ],
+              scale: [1, 1.04, 1],
             } : {}}
-            transition={isListening ? { duration: 1, repeat: Infinity } : {}}
+            transition={isListening ? { duration: 0.8, repeat: Infinity } : {}}
           >
+            {/* Animated soundwave bars when listening */}
             {isListening ? (
-              <span style={{ fontSize: 32 }}>🛑</span>
+              <>
+                <div className="flex items-end gap-1 mb-1" style={{ height: 36 }}>
+                  {[0.6, 1, 0.7, 1, 0.5, 1, 0.8].map((h, i) => (
+                    <motion.div
+                      key={i}
+                      style={{ width: 5, borderRadius: 3, background: '#fff', originY: 1 }}
+                      animate={{ scaleY: [h, 1, h * 0.4, 1, h] }}
+                      transition={{ duration: 0.5 + i * 0.07, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  ))}
+                </div>
+                <span className="text-white font-black text-xs tracking-wide">STOP</span>
+              </>
             ) : (
-              <span style={{ fontSize: 32 }}>🎤</span>
+              <>
+                <span style={{ fontSize: 44 }}>🎤</span>
+                <span className="text-white font-black text-xs tracking-wide mt-1">SPEAK!</span>
+              </>
             )}
           </motion.button>
 
@@ -172,12 +209,12 @@ export default function ZappCreator({ onSubmit }) {
                 exit={{ opacity: 0, y: -4 }}
                 className="text-center"
               >
-                <p className="font-black text-red-400 text-base">listening... say your idea!</p>
+                <p className="font-black text-orange-400 text-lg">🔥 listening... say your idea!</p>
                 {voiceText && (
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="text-white/70 text-sm mt-1 max-w-xs text-center italic"
+                    className="text-white/80 text-base mt-1 max-w-xs text-center italic font-bold"
                   >
                     "{voiceText}"
                   </motion.p>
@@ -189,9 +226,9 @@ export default function ZappCreator({ onSubmit }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-white/30 text-sm font-semibold"
+                className="text-white/50 text-sm font-bold"
               >
-                tap to speak your idea
+                tap the button · say your idea out loud!
               </motion.p>
             )}
           </AnimatePresence>
