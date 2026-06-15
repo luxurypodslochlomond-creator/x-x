@@ -108,6 +108,9 @@ const CB51MainPage = React.lazy(() => import('./pages/CB51'));
 const CB51HowPage = React.lazy(() => import('./pages/CB51How'));
 const WalshyPitchPage = React.lazy(() => import('./pages/WalshyPitch'));
 const ZappPage = React.lazy(() => import('./pages/Zapp'));
+const ZappAboutPage = React.lazy(() => import('./pages/ZappAbout'));
+const ZappTermsPage = React.lazy(() => import('./pages/ZappTerms'));
+const ZappPrivacyPage = React.lazy(() => import('./pages/ZappPrivacy'));
 const FergusHughesProfilePage = React.lazy(() => import('./pages/FergusHughesProfile'));
 
 
@@ -267,6 +270,9 @@ const AuthenticatedApp = () => {
       <Route path="/CB51How" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><CB51HowPage /></Suspense>} />
       <Route path="/WalshyPitch" element={<Suspense fallback={<div style={{background:'#000',minHeight:'100vh'}} />}><WalshyPitchPage /></Suspense>} />
       <Route path="/Zapp" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappPage /></Suspense>} />
+      <Route path="/ZappAbout" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappAboutPage /></Suspense>} />
+      <Route path="/ZappTerms" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappTermsPage /></Suspense>} />
+      <Route path="/ZappPrivacy" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappPrivacyPage /></Suspense>} />
       <Route path="/FergusHughesProfile" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><FergusHughesProfilePage /></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
