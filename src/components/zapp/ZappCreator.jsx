@@ -119,6 +119,7 @@ const IdeaShape = ({ shape, color, accent }) => {
 export default function ZappCreator({ onSubmit }) {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+
   const [customMode, setCustomMode] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [voiceText, setVoiceText] = useState('');
@@ -400,68 +401,93 @@ export default function ZappCreator({ onSubmit }) {
         </div>
       </motion.div>
 
-      {/* Type your own */}
+      {/* Type your own — always visible, premium feel */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.5 }}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.45 }}
         className="w-full max-w-2xl"
       >
-        {!customMode ? (
-          <button
-            onClick={() => { setCustomMode(true); setTimeout(() => textareaRef.current?.focus(), 100); }}
-            className="w-full py-3 rounded-xl font-bold text-white/25 hover:text-white/50 text-sm transition-all"
-            style={{ border: '1px dashed rgba(255,255,255,0.08)', background: 'transparent' }}
-          >
-            or type your own idea →
-          </button>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-2xl overflow-hidden"
+        <div
+          className="relative rounded-3xl overflow-hidden transition-all duration-300"
+          style={{
+            background: 'linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(219,39,119,0.06) 100%)',
+            border: isFocused
+              ? '1.5px solid rgba(167,139,250,0.6)'
+              : value.length > 0
+              ? '1.5px solid rgba(167,139,250,0.3)'
+              : '1.5px solid rgba(255,255,255,0.07)',
+            boxShadow: isFocused
+              ? '0 0 0 4px rgba(124,58,237,0.12), 0 20px 60px rgba(124,58,237,0.2)'
+              : value.length > 0
+              ? '0 8px 32px rgba(124,58,237,0.1)'
+              : 'none',
+          }}
+        >
+          {/* Subtle top label */}
+          <div className="px-5 pt-4 pb-0">
+            <span className="text-white/20 text-xs font-black tracking-widest uppercase">
+              or describe your own idea
+            </span>
+          </div>
+
+          <textarea
+            ref={textareaRef}
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onKeyDown={handleKeyDown}
+            placeholder="a game where you dodge meteors and collect stars..."
+            rows={3}
+            className="w-full bg-transparent text-white px-5 pt-3 pb-4 resize-none outline-none leading-relaxed"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: isFocused ? '2px solid rgba(167,139,250,0.7)' : '2px solid rgba(255,255,255,0.1)',
-              boxShadow: isFocused ? '0 0 40px rgba(167,139,250,0.2)' : 'none'
+              fontSize: 17,
+              fontWeight: 500,
+              caretColor: '#a78bfa',
+              color: 'rgba(255,255,255,0.9)',
             }}
+          />
+
+          {/* Bottom bar with char hint + ZAPP button */}
+          <div
+            className="flex items-center justify-between px-4 pb-4 gap-3"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
           >
-            <textarea
-              ref={textareaRef}
-              value={value}
-              onChange={e => setValue(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              onKeyDown={handleKeyDown}
-              placeholder="a quiz about dinosaurs with 10 questions..."
-              rows={3}
-              className="w-full bg-transparent text-white text-lg font-medium px-5 pt-5 pb-3 resize-none outline-none placeholder-white/20 leading-relaxed"
-              style={{ caretColor: '#a78bfa' }}
-            />
-            <div className="flex justify-between items-center px-4 pb-4">
-              <button onClick={() => setCustomMode(false)} className="text-white/20 hover:text-white/50 text-sm transition-colors">cancel</button>
-              <motion.button
-                onClick={() => handleSubmit()}
-                disabled={value.trim().length < 3}
-                whileHover={{ scale: value.trim().length >= 3 ? 1.05 : 1 }}
-                whileTap={{ scale: value.trim().length >= 3 ? 0.97 : 1 }}
-                className="flex items-center gap-2 px-7 py-3 rounded-xl font-black text-base transition-all"
-                style={{
-                  background: value.trim().length >= 3
-                    ? 'linear-gradient(135deg, #7c3aed, #db2777)'
-                    : 'rgba(255,255,255,0.05)',
-                  color: value.trim().length >= 3 ? '#fff' : 'rgba(255,255,255,0.2)',
-                  boxShadow: value.trim().length >= 3 ? '0 0 30px rgba(124,58,237,0.5)' : 'none'
-                }}
-              >
-                ZAPP it ⚡
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
+            <span className="text-white/15 text-xs font-mono">
+              {value.length > 0 ? `${value.length} chars` : 'type anything · no rules'}
+            </span>
+            <motion.button
+              onClick={() => handleSubmit()}
+              disabled={value.trim().length < 3}
+              whileHover={{ scale: value.trim().length >= 3 ? 1.04 : 1 }}
+              whileTap={{ scale: value.trim().length >= 3 ? 0.96 : 1 }}
+              className="flex items-center gap-2 font-black text-sm tracking-wide transition-all"
+              style={{
+                padding: '10px 22px',
+                borderRadius: 14,
+                background: value.trim().length >= 3
+                  ? 'linear-gradient(135deg, #7c3aed 0%, #db2777 100%)'
+                  : 'rgba(255,255,255,0.04)',
+                color: value.trim().length >= 3 ? '#fff' : 'rgba(255,255,255,0.15)',
+                boxShadow: value.trim().length >= 3
+                  ? '0 0 24px rgba(124,58,237,0.6), 0 4px 16px rgba(219,39,119,0.3)'
+                  : 'none',
+                border: value.trim().length >= 3
+                  ? 'none'
+                  : '1px solid rgba(255,255,255,0.06)',
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+                <polygon points="19,2 8,18 15,18 13,30 24,14 17,14" fill="currentColor" />
+              </svg>
+              ZAPP IT
+            </motion.button>
+          </div>
+        </div>
       </motion.div>
 
-      <p className="text-white/10 text-xs mt-6 font-mono text-center">
+      <p className="text-white/10 text-xs mt-6 font-mono text-center pb-4">
         no account needed · nothing stored · safe for kids
       </p>
     </div>
