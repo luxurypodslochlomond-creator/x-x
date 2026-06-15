@@ -26,6 +26,7 @@ export default function ZappCreator({ onSubmit }) {
   const [voicePulse, setVoicePulse] = useState(false);
   const textareaRef = useRef(null);
   const recognitionRef = useRef(null);
+  const lastTranscriptRef = useRef(''); // iOS Safari fallback — capture last heard text
 
   const handleSubmit = (text) => {
     const t = (text || value).trim();
@@ -86,14 +87,19 @@ export default function ZappCreator({ onSubmit }) {
           interim += event.results[i][0].transcript;
         }
       }
-      setVoiceText(final || interim);
+      // Always keep a ref to the latest transcript so onend can use it (iOS Safari fix)
+      const latest = final || interim;
+      lastTranscriptRef.current = latest;
+      setVoiceText(latest);
+
       if (final) {
         const trimmed = final.trim();
+        lastTranscriptRef.current = '';
         setVoiceText('');
         setIsListening(false);
         setVoicePulse(false);
         if (trimmed.length >= 3) {
-          setTimeout(() => onSubmit(trimmed), 350);
+          setTimeout(() => onSubmit(trimmed), 200);
         }
       }
     };
@@ -102,14 +108,21 @@ export default function ZappCreator({ onSubmit }) {
       setIsListening(false);
       setVoicePulse(false);
       if (e.error === 'not-allowed') {
-        setVoiceText('Mic blocked! Check browser permissions 🎤');
+        setVoiceText('Mic blocked! Check browser settings 🎤');
         setTimeout(() => setVoiceText(''), 4000);
       }
     };
 
+    // iOS Safari often fires onend before a final result — use whatever we captured
     recognition.onend = () => {
       setIsListening(false);
       setVoicePulse(false);
+      const captured = lastTranscriptRef.current.trim();
+      if (captured.length >= 3) {
+        lastTranscriptRef.current = '';
+        setVoiceText('');
+        setTimeout(() => onSubmit(captured), 200);
+      }
     };
 
     recognition.start();
