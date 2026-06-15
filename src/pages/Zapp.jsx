@@ -159,7 +159,7 @@ export default function Zapp() {
       </header>
 
       {/* Main content */}
-      <main className="relative z-10 flex-1 min-h-0 overflow-hidden">
+      <main className="relative z-10 flex-1 min-h-0" style={{ overflowY: phase === 'home' ? 'auto' : 'hidden', overflowX: 'hidden' }}>
         <AnimatePresence mode="wait">
           {phase === 'play' && directPlay ? (
             <motion.div key="play" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col" style={{ height: '100%' }}>

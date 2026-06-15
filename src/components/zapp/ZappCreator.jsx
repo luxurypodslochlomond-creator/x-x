@@ -144,92 +144,78 @@ export default function ZappCreator({ onSubmit }) {
         </p>
       </motion.div>
 
-      {/* VOICE BUTTON — front and centre — COOLASFUCK for kids */}
+      {/* VOICE BUTTON — BIG COOLASFUCK pill for kids */}
       {hasVoice && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.15, duration: 0.4 }}
-          className="mb-8 flex flex-col items-center gap-3"
+          className="mb-8 flex flex-col items-center gap-4 w-full max-w-xs"
         >
           <motion.button
             onClick={isListening ? stopListening : startListening}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.9 }}
-            className="relative flex flex-col items-center justify-center rounded-3xl font-black text-white select-none"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.93 }}
+            className="relative flex items-center justify-center gap-4 w-full select-none"
             style={{
-              width: 120, height: 120,
+              height: 80,
+              borderRadius: 40,
               background: isListening
                 ? 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)'
-                : 'linear-gradient(135deg, #7c3aed 0%, #ec4899 60%, #f97316 100%)',
+                : 'linear-gradient(135deg, #7c3aed 0%, #ec4899 60%, #f59e0b 100%)',
               boxShadow: isListening
-                ? '0 0 40px rgba(239,68,68,0.8), 0 0 80px rgba(239,68,68,0.3)'
-                : '0 0 40px rgba(124,58,237,0.6), 0 0 80px rgba(236,72,153,0.3)',
-              border: '3px solid rgba(255,255,255,0.3)',
+                ? '0 0 0 4px rgba(239,68,68,0.2), 0 8px 40px rgba(239,68,68,0.6)'
+                : '0 0 0 4px rgba(124,58,237,0.15), 0 8px 40px rgba(124,58,237,0.5)',
+              border: 'none',
+              cursor: 'pointer',
             }}
-            animate={isListening ? {
-              boxShadow: [
-                '0 0 40px rgba(239,68,68,0.8), 0 0 80px rgba(239,68,68,0.3)',
-                '0 0 60px rgba(239,68,68,1), 0 0 120px rgba(239,68,68,0.5)',
-                '0 0 40px rgba(239,68,68,0.8), 0 0 80px rgba(239,68,68,0.3)',
-              ],
-              scale: [1, 1.04, 1],
-            } : {}}
-            transition={isListening ? { duration: 0.8, repeat: Infinity } : {}}
+            animate={isListening ? { scale: [1, 1.03, 1] } : {}}
+            transition={isListening ? { duration: 0.7, repeat: Infinity, ease: 'easeInOut' } : {}}
           >
-            {/* Animated soundwave bars when listening */}
-            {isListening ? (
-              <>
-                <div className="flex items-end gap-1 mb-1" style={{ height: 36 }}>
-                  {[0.6, 1, 0.7, 1, 0.5, 1, 0.8].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      style={{ width: 5, borderRadius: 3, background: '#fff', originY: 1 }}
-                      animate={{ scaleY: [h, 1, h * 0.4, 1, h] }}
-                      transition={{ duration: 0.5 + i * 0.07, repeat: Infinity, ease: 'easeInOut' }}
-                    />
-                  ))}
-                </div>
-                <span className="text-white font-black text-xs tracking-wide">STOP</span>
-              </>
-            ) : (
-              <>
-                <span style={{ fontSize: 44 }}>🎤</span>
-                <span className="text-white font-black text-xs tracking-wide mt-1">SPEAK!</span>
-              </>
+            {/* Mic SVG icon */}
+            {!isListening && (
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                <rect x="8" y="2" width="8" height="13" rx="4" fill="white" />
+                <path d="M5 10a7 7 0 0 0 14 0" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+                <line x1="12" y1="17" x2="12" y2="21" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+                <line x1="9" y1="21" x2="15" y2="21" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
+              </svg>
             )}
+
+            {/* Animated bars when listening */}
+            {isListening && (
+              <div className="flex items-center gap-1" style={{ height: 36 }}>
+                {[0.4, 0.9, 0.6, 1, 0.5, 0.9, 0.7, 1, 0.4].map((h, i) => (
+                  <motion.div
+                    key={i}
+                    style={{ width: 4, borderRadius: 4, background: 'rgba(255,255,255,0.9)' }}
+                    animate={{ height: [36 * h * 0.4, 36 * h, 36 * h * 0.3, 36 * h, 36 * h * 0.4] }}
+                    transition={{ duration: 0.45 + i * 0.06, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                ))}
+              </div>
+            )}
+
+            <span className="text-white font-black text-xl tracking-tight">
+              {isListening ? 'LISTENING...' : '🎤 SPEAK YOUR IDEA'}
+            </span>
           </motion.button>
 
           <AnimatePresence mode="wait">
-            {isListening ? (
-              <motion.div
-                key="listening"
+            {isListening && voiceText ? (
+              <motion.p
+                key="voicetext"
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                className="text-center"
-              >
-                <p className="font-black text-orange-400 text-lg">🔥 listening... say your idea!</p>
-                {voiceText && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-white/80 text-base mt-1 max-w-xs text-center italic font-bold"
-                  >
-                    "{voiceText}"
-                  </motion.p>
-                )}
-              </motion.div>
-            ) : (
-              <motion.p
-                key="idle"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-white/50 text-sm font-bold"
+                className="text-white/90 text-base font-bold text-center italic px-4"
               >
-                tap the button · say your idea out loud!
+                "{voiceText}"
               </motion.p>
+            ) : isListening ? (
+              <motion.p key="listening-hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-orange-300 font-bold text-sm">say your idea now! tap to stop</motion.p>
+            ) : (
+              <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/30 text-sm font-semibold text-center">tap the big button · say your idea out loud</motion.p>
             )}
           </AnimatePresence>
         </motion.div>
