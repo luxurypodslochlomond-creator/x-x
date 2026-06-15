@@ -190,7 +190,7 @@ export default function Zapp() {
           ) : phase === 'gallery' ? (
             <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <ZappGallery
-                onPlay={() => {}}
+                onPlay={(item) => { setDirectPlay(item); setPhase('play'); }}
                 onRemix={(item) => setShowRemix(item)}
               />
             </motion.div>
