@@ -188,7 +188,7 @@ export default function Zapp() {
               <iframe srcDoc={directPlay.html} className="flex-1 w-full border-0" title={directPlay.title} sandbox="allow-scripts allow-same-origin" />
             </motion.div>
           ) : phase === 'gallery' ? (
-            <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
               <ZappGallery
                 onPlay={(item) => { setDirectPlay(item); setPhase('play'); }}
                 onRemix={(item) => setShowRemix(item)}

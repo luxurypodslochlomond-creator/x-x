@@ -5,7 +5,7 @@ import { base44 } from '@/api/base44Client';
 export default function ZappGallery({ onPlay, onRemix }) {
   const [creations, setCreations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [playing, setPlaying] = useState(null); // id of creation being previewed
+  const [playing, setPlaying] = useState(null); // creation being previewed
 
   useEffect(() => {
     loadGallery();
@@ -32,8 +32,8 @@ export default function ZappGallery({ onPlay, onRemix }) {
 
   if (playing) {
     return (
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9999, display: 'flex', flexDirection: 'column', background: '#000' }}>
-        {/* Slim bar — always at very top */}
+      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', background: '#000' }}>
+        {/* Slim bar */}
         <div style={{ height: 48, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', background: 'rgba(10,10,15,0.95)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
             <span style={{ fontSize: 16, flexShrink: 0 }}>{playing.emoji || '⚡'}</span>
