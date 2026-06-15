@@ -2,20 +2,119 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const QUICK_IDEAS = [
-  { emoji: '🃏', label: 'SNAP!', color: '#f43f5e', idea: 'Build a single-player SNAP card game. Show one card at a time from a shuffled deck of 20 emoji cards (use 10 pairs: 🐶🐶🐱🐱🐸🐸🦊🦊🐼🐼🦁🦁🐯🐯🐨🐨🦄🦄🐙🐙). Show the CURRENT card and PREVIOUS card side by side. Player clicks the big SNAP button if they match. Score goes up on correct snap with confetti and chime. Show wrong answer flash if they miss. Game ends when deck runs out — show final score and Play Again.' },
-  { emoji: '🍪', label: 'Cookie Clicker', color: '#f59e0b', idea: 'Build a cookie clicker idle game. Giant cookie emoji in centre — click it to earn cookies, show +1 pop and click sound each time. Show cookie count big at top. Three upgrade buttons: Grandma costs 50 cookies gives +1 per second, Farm costs 200 cookies gives +5 per second, Factory costs 500 cookies gives +15 per second. Show how many of each upgrade owned. Auto-earn cookies every second based on upgrades. Unlock fanfare sound when buying upgrade.' },
-  { emoji: '🐴', label: 'Horse Quiz', color: '#8b5cf6', idea: 'Build a 10-question multiple choice horse quiz. Questions about horse breeds, facts, and care. Show one question at a time with 4 big answer buttons. Flash green and play ding on correct, flash red and buzz on wrong. Show progress bar and score. Shuffle questions randomly. End screen shows score out of 10 with confetti if 8 or more correct. Play Again button.' },
-  { emoji: '🎨', label: 'Pixel Art', color: '#06b6d4', idea: 'Build a pixel art drawing app with a 16x16 grid of squares. Show 16 colour swatches including bright neons. Click a colour to select it. Click or drag on the grid to paint squares that colour. Eraser button to clear squares. Clear All button. Each paint click makes a satisfying pop sound using Web Audio API.' },
-  { emoji: '📖', label: 'Adventure', color: '#10b981', idea: 'Build a choose-your-own-adventure story in a magical forest. Start with an intro scene and 2 choices. Each choice leads to a new scene with 2 more choices. At least 8 scenes total with 2 different endings (good and bad). Show a big emoji illustration for each scene. Atmospheric chime sounds on scene change. Back button to restart from beginning.' },
-  { emoji: '🔢', label: 'Times Tables', color: '#3b82f6', idea: 'Build a times tables quiz game. Show a random multiplication question like 6 x 7. Player types the answer in a big input box and presses Enter or Check button. Flash green with a celebration ding if correct. If wrong, show the correct answer gently with a kind message like "Nearly! It was 42 — you will get it next time! 💪" and a soft warm sound — never scary or harsh. Show score and current streak. After 10 questions show final score with a big encouraging message. New random questions each round.' },
-  { emoji: '🐉', label: 'Dragon Tapper', color: '#ec4899', idea: 'Build a dragon tapper clicker game. Show a big dragon egg emoji. Click it to earn gold coins — show +1 gold and pop sound each click. Display gold count. Three evolution buttons: Hatch Egg costs 20 gold shows 🐣, Baby Dragon costs 100 gold shows 🐲, Fire Dragon costs 500 gold shows 🔥🐉. When evolving play a roar sound and show confetti. Show current evolution stage with big emoji.' },
-  { emoji: '🥁', label: 'Beat Maker', color: '#f97316', idea: 'Build an 8-step drum machine. Four rows: Kick 🥁, Snare 🪘, Hi-Hat 🎩, Clap 👏. Each row has 8 toggle buttons — click to turn on or off. Play button starts the beat looping through all 8 steps left to right. Highlight current step with bright colour. Use Web Audio API to synthesise each drum sound — kick is low thump, snare is noise burst, hihat is short hiss, clap is sharp crack. Stop button. Tempo slider.' },
-  { emoji: '🌟', label: 'Wish Jar', color: '#a78bfa', idea: 'Build a magical wish jar app. Show a big glowing jar illustration made from CSS. Text input box and a Wish button. When player types a wish and clicks Wish, animate a star flying into the jar with a magical chime sound. Show all wishes listed below the jar. Each wish can be deleted with a click. Jar glows brighter as more wishes are added. Purple and gold colour scheme.' },
-  { emoji: '🎮', label: 'My own idea!', color: '#14b8a6', idea: '' },
+  {
+    label: 'SNAP!', color: '#f43f5e', accent: '#ff8fa3',
+    visual: { shape: 'cards', bg: 'linear-gradient(135deg, #1a0008 0%, #2d0010 100%)' },
+    idea: 'Build a single-player SNAP card game. Show one card at a time from a shuffled deck of 20 emoji cards (use 10 pairs: 🐶🐶🐱🐱🐸🐸🦊🦊🐼🐼🦁🦁🐯🐯🐨🐨🦄🦄🐙🐙). Show the CURRENT card and PREVIOUS card side by side. Player clicks the big SNAP button if they match. Score goes up on correct snap with confetti and chime. Show wrong answer flash if they miss. Game ends when deck runs out — show final score and Play Again.'
+  },
+  {
+    label: 'COOKIE\nCLICKER', color: '#f59e0b', accent: '#fde68a',
+    visual: { shape: 'circle', bg: 'linear-gradient(135deg, #1a0e00 0%, #2d1800 100%)' },
+    idea: 'Build a cookie clicker idle game. Giant cookie in centre — click it to earn cookies, show +1 pop and click sound. Show cookie count big at top. Three upgrade buttons: Grandma costs 50 cookies gives +1 per second, Farm costs 200 cookies gives +5 per second, Factory costs 500 cookies gives +15 per second. Auto-earn cookies every second based on upgrades.'
+  },
+  {
+    label: 'HORSE\nQUIZ', color: '#8b5cf6', accent: '#c4b5fd',
+    visual: { shape: 'diamond', bg: 'linear-gradient(135deg, #0d0018 0%, #1a0030 100%)' },
+    idea: 'Build a 10-question multiple choice horse quiz. Questions about horse breeds, facts, and care. Show one question at a time with 4 big answer buttons. Flash green and play ding on correct, flash red and buzz on wrong. Show progress bar and score. End screen with confetti if 8 or more correct.'
+  },
+  {
+    label: 'PIXEL\nART', color: '#06b6d4', accent: '#67e8f9',
+    visual: { shape: 'grid', bg: 'linear-gradient(135deg, #00101a 0%, #001a2d 100%)' },
+    idea: 'Build a pixel art drawing app with a 16x16 grid of squares. Show 16 colour swatches including bright neons. Click a colour to select it. Click or drag on the grid to paint squares that colour. Eraser button to clear squares. Clear All button. Each paint click makes a satisfying pop sound using Web Audio API.'
+  },
+  {
+    label: 'ADVENTURE', color: '#10b981', accent: '#6ee7b7',
+    visual: { shape: 'arrow', bg: 'linear-gradient(135deg, #001a0e 0%, #002d18 100%)' },
+    idea: 'Build a choose-your-own-adventure story in a magical forest. Start with an intro scene and 2 choices. Each choice leads to a new scene with 2 more choices. At least 8 scenes total with 2 different endings. Show a big emoji illustration for each scene. Atmospheric chime sounds on scene change.'
+  },
+  {
+    label: 'TIMES\nTABLES', color: '#3b82f6', accent: '#93c5fd',
+    visual: { shape: 'multiply', bg: 'linear-gradient(135deg, #00081a 0%, #00102d 100%)' },
+    idea: 'Build a times tables quiz game. Show a random multiplication question like 6 x 7. Player types the answer and presses Enter or Check. Flash green with celebration if correct. If wrong, show correct answer kindly — never scary or harsh. Show score and streak. After 10 questions show final score with big encouraging message.'
+  },
+  {
+    label: 'DRAGON\nTAPPER', color: '#ec4899', accent: '#f9a8d4',
+    visual: { shape: 'flame', bg: 'linear-gradient(135deg, #1a0010 0%, #2d001a 100%)' },
+    idea: 'Build a dragon tapper clicker game. Big dragon egg in centre. Click it to earn gold coins — show +1 gold and pop sound each click. Three evolution buttons: Hatch Egg costs 20 gold, Baby Dragon costs 100 gold, Fire Dragon costs 500 gold. When evolving play a roar sound and show confetti.'
+  },
+  {
+    label: 'BEAT\nMAKER', color: '#f97316', accent: '#fdba74',
+    visual: { shape: 'bars', bg: 'linear-gradient(135deg, #1a0800 0%, #2d1000 100%)' },
+    idea: 'Build an 8-step drum machine. Four rows: Kick, Snare, Hi-Hat, Clap. Each row has 8 toggle buttons. Play button starts the beat looping. Highlight current step with bright colour. Use Web Audio API to synthesise each drum sound. Stop button. Tempo slider.'
+  },
+  {
+    label: 'WISH\nJAR', color: '#a78bfa', accent: '#ddd6fe',
+    visual: { shape: 'star', bg: 'linear-gradient(135deg, #0d0018 0%, #140025 100%)' },
+    idea: 'Build a magical wish jar app. Big glowing jar made from CSS. Text input and Wish button. When player types a wish animate a star flying into the jar with magical chime. Show all wishes listed. Jar glows brighter as more wishes added. Purple and gold colour scheme.'
+  },
+  {
+    label: 'MY OWN\nIDEA', color: '#14b8a6', accent: '#5eead4',
+    visual: { shape: 'plus', bg: 'linear-gradient(135deg, #001a18 0%, #002d28 100%)' },
+    idea: ''
+  },
 ];
 
 // Voice support check
 const hasVoice = typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
+
+// Custom geometric shape for each idea card — no emoji, pure CSS/SVG
+const IdeaShape = ({ shape, color, accent }) => {
+  const s = { position: 'absolute', top: 12, left: 12 };
+  if (shape === 'cards') return (
+    <div style={s}>
+      <div style={{ width: 28, height: 36, background: `${color}30`, border: `2px solid ${color}80`, borderRadius: 5, position: 'absolute', top: 0, left: 0, transform: 'rotate(-8deg)' }} />
+      <div style={{ width: 28, height: 36, background: `${color}20`, border: `2px solid ${color}60`, borderRadius: 5, position: 'absolute', top: 2, left: 8, transform: 'rotate(5deg)' }} />
+    </div>
+  );
+  if (shape === 'circle') return (
+    <div style={{ ...s, width: 38, height: 38, borderRadius: '50%', background: `radial-gradient(circle, ${accent}40 0%, ${color}20 60%, transparent 100%)`, border: `2px solid ${color}60` }} />
+  );
+  if (shape === 'diamond') return (
+    <div style={{ ...s, width: 30, height: 30, background: `${color}30`, border: `2px solid ${color}70`, transform: 'rotate(45deg)', borderRadius: 4, marginTop: 4 }} />
+  );
+  if (shape === 'grid') return (
+    <div style={{ ...s, display: 'grid', gridTemplateColumns: 'repeat(4,7px)', gap: 2 }}>
+      {Array.from({length:16}).map((_,i) => (
+        <div key={i} style={{ width: 7, height: 7, borderRadius: 1.5, background: i%3===0 ? accent : i%5===0 ? color : `${color}30`, border: `1px solid ${color}40` }} />
+      ))}
+    </div>
+  );
+  if (shape === 'arrow') return (
+    <svg style={s} width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path d="M6 18 L22 18 M16 10 L26 18 L16 26" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8"/>
+    </svg>
+  );
+  if (shape === 'multiply') return (
+    <svg style={s} width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <text x="4" y="26" fontSize="22" fontWeight="900" fill={color} opacity="0.8" fontFamily="monospace">×</text>
+    </svg>
+  );
+  if (shape === 'flame') return (
+    <svg style={s} width="32" height="36" viewBox="0 0 32 36" fill="none">
+      <path d="M16 2 C16 2 24 10 24 18 C24 24 20 30 16 30 C12 30 8 24 8 18 C8 12 12 6 16 2Z" fill={`${color}30`} stroke={color} strokeWidth="1.5" opacity="0.9"/>
+      <path d="M16 14 C16 14 20 18 20 22 C20 25 18 28 16 28 C14 28 12 25 12 22 C12 18 16 14 16 14Z" fill={accent} opacity="0.5"/>
+    </svg>
+  );
+  if (shape === 'bars') return (
+    <div style={{ ...s, display: 'flex', alignItems: 'flex-end', gap: 3, height: 36 }}>
+      {[0.5, 1, 0.7, 0.9, 0.6, 1, 0.4, 0.8].map((h,i) => (
+        <div key={i} style={{ width: 4, height: 36*h*0.8, background: i%2===0 ? color : accent, borderRadius: 2, opacity: 0.8 }} />
+      ))}
+    </div>
+  );
+  if (shape === 'star') return (
+    <svg style={s} width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <polygon points="18,2 21,13 32,13 23,20 26,31 18,24 10,31 13,20 4,13 15,13" fill={`${color}35`} stroke={color} strokeWidth="1.5" opacity="0.9"/>
+    </svg>
+  );
+  if (shape === 'plus') return (
+    <svg style={s} width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <line x1="18" y1="5" x2="18" y2="31" stroke={color} strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
+      <line x1="5" y1="18" x2="31" y2="18" stroke={color} strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
+    </svg>
+  );
+  return null;
+};
 
 export default function ZappCreator({ onSubmit }) {
   const [value, setValue] = useState('');
@@ -220,7 +319,7 @@ export default function ZappCreator({ onSubmit }) {
             )}
 
             <span className="text-white font-black text-xl tracking-tight">
-              {isListening ? 'LISTENING...' : '🎤 SPEAK YOUR IDEA'}
+              {isListening ? 'LISTENING...' : 'SPEAK YOUR IDEA'}
             </span>
           </motion.button>
 
@@ -260,17 +359,42 @@ export default function ZappCreator({ onSubmit }) {
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 + i * 0.04 }}
-              whileHover={{ scale: 1.08, y: -4 }}
-              whileTap={{ scale: 0.92 }}
-              className="flex flex-col items-center gap-2 px-3 py-5 rounded-2xl font-bold transition-shadow"
+              whileHover={{ scale: 1.06, y: -5 }}
+              whileTap={{ scale: 0.93 }}
+              className="relative flex flex-col items-end justify-between overflow-hidden"
               style={{
-                background: `${item.color}15`,
-                border: `2px solid ${item.color}40`,
-                boxShadow: `0 4px 24px ${item.color}18`,
+                background: item.visual.bg,
+                border: `1.5px solid ${item.color}35`,
+                borderRadius: 20,
+                padding: '14px 14px 12px',
+                minHeight: 110,
+                boxShadow: `0 8px 32px ${item.color}20, inset 0 1px 0 rgba(255,255,255,0.05)`,
               }}
             >
-              <span style={{ fontSize: 32 }}>{item.emoji}</span>
-              <span className="text-xs font-black text-center leading-tight text-white/90">{item.label}</span>
+              {/* Abstract geometric visual — top left */}
+              <IdeaShape shape={item.visual.shape} color={item.color} accent={item.accent} />
+
+              {/* Label — bottom right */}
+              <span
+                className="font-black leading-tight text-left w-full whitespace-pre-line"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: '0.04em',
+                  color: item.accent,
+                  textShadow: `0 0 20px ${item.color}80`,
+                  marginTop: 'auto',
+                }}
+              >
+                {item.label}
+              </span>
+
+              {/* Glow dot top right */}
+              <div style={{
+                position: 'absolute', top: 10, right: 10,
+                width: 6, height: 6, borderRadius: '50%',
+                background: item.color,
+                boxShadow: `0 0 8px ${item.color}`,
+              }} />
             </motion.button>
           ))}
         </div>
@@ -289,7 +413,7 @@ export default function ZappCreator({ onSubmit }) {
             className="w-full py-3 rounded-xl font-bold text-white/25 hover:text-white/50 text-sm transition-all"
             style={{ border: '1px dashed rgba(255,255,255,0.08)', background: 'transparent' }}
           >
-            ✏️ or type your own idea...
+            or type your own idea →
           </button>
         ) : (
           <motion.div
