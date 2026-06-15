@@ -240,18 +240,16 @@ export default function Zapp() {
         )}
       </AnimatePresence>
 
-      {/* Footer — only on home screen */}
-      {phase === 'home' && (
-        <footer className="relative z-20 flex items-center justify-center gap-4 py-3 flex-shrink-0" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-          <a href="/ZappAbout" className="text-white/20 hover:text-white/50 text-xs transition-colors">About</a>
-          <span className="text-white/10">·</span>
-          <a href="/ZappTerms" className="text-white/20 hover:text-white/50 text-xs transition-colors">Terms</a>
-          <span className="text-white/10">·</span>
-          <a href="/ZappPrivacy" className="text-white/20 hover:text-white/50 text-xs transition-colors">Privacy</a>
-          <span className="text-white/10">·</span>
-          <span className="text-white/10 text-xs">safe · free · no account · built by UF51</span>
-        </footer>
-      )}
+      {/* Footer — always visible */}
+      <footer className="relative z-20 flex items-center justify-center gap-4 py-2 flex-shrink-0" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <a href="/ZappAbout" className="text-white/30 hover:text-white/60 text-xs transition-colors">About</a>
+        <span className="text-white/10">·</span>
+        <a href="/ZappTerms" className="text-white/30 hover:text-white/60 text-xs transition-colors">Terms</a>
+        <span className="text-white/10">·</span>
+        <a href="/ZappPrivacy" className="text-white/30 hover:text-white/60 text-xs transition-colors">Privacy</a>
+        <span className="text-white/10">·</span>
+        <span className="text-white/10 text-xs">safe · free · no account · built by UF51</span>
+      </footer>
 
       {/* Remix Modal */}
       <AnimatePresence>
