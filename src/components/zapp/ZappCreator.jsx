@@ -172,7 +172,7 @@ export default function ZappCreator({ onSubmit }) {
     lastTranscriptRef.current = '';
 
     recognition.lang = 'en-GB';
-    recognition.continuous = true;   // keep listening until we stop it — works better on iOS
+    recognition.continuous = false;  // single utterance — most reliable cross-browser
     recognition.interimResults = true;
 
     recognition.onstart = () => {
@@ -192,21 +192,11 @@ export default function ZappCreator({ onSubmit }) {
         }
       }
 
+      // Always update display with whatever we have
       const latest = final || interim;
-      lastTranscriptRef.current = latest;
-      setVoiceText(latest);
-
-      // When we get a final result, stop and submit
-      if (final && !hasSubmittedRef.current) {
-        hasSubmittedRef.current = true;
-        recognition.stop();
-        const trimmed = final.trim();
-        setVoiceText(trimmed);
-        setIsListening(false);
-        setVoicePulse(false);
-        if (trimmed.length >= 3) {
-          setTimeout(() => onSubmit(trimmed), 300);
-        }
+      if (latest) {
+        lastTranscriptRef.current = latest;
+        setVoiceText(latest);
       }
     };
 
@@ -214,13 +204,20 @@ export default function ZappCreator({ onSubmit }) {
       setIsListening(false);
       setVoicePulse(false);
       lastTranscriptRef.current = '';
-      if (e.error === 'not-allowed') {
-        setVoiceText('Mic blocked! Check browser settings 🎤');
+      const msgs = {
+        'not-allowed': 'Mic blocked! Check browser settings 🎤',
+        'no-speech': 'Nothing heard — tap and try again',
+        'network': 'Network error — check your connection',
+        'aborted': '',
+      };
+      const msg = msgs[e.error] || `Mic error: ${e.error}`;
+      if (msg) {
+        setVoiceText(msg);
         setTimeout(() => setVoiceText(''), 4000);
       }
     };
 
-    // Fallback: onend fires — submit whatever we captured if we haven't already
+    // onend always fires — this is where we submit
     recognition.onend = () => {
       setIsListening(false);
       setVoicePulse(false);
@@ -228,9 +225,9 @@ export default function ZappCreator({ onSubmit }) {
         const captured = lastTranscriptRef.current.trim();
         if (captured.length >= 3) {
           hasSubmittedRef.current = true;
-          lastTranscriptRef.current = '';
           setVoiceText(captured);
-          setTimeout(() => onSubmit(captured), 300);
+          setValue(captured); // also put it in the text box as fallback
+          setTimeout(() => onSubmit(captured), 400);
         }
       }
     };
