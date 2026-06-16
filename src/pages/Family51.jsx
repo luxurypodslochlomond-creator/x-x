@@ -61,7 +61,7 @@ export default function Family51Page() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1208', position: 'relative' }}>
       <div style={{ maxWidth: 520, margin: '0 auto', padding: '20px 16px 60px' }}>
 
         {/* HERO */}
@@ -78,6 +78,11 @@ export default function Family51Page() {
         <div style={{ marginBottom: 14, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
           <SortedToolCard variant="primary" icon="letter" title="Decode a Letter" description="Plain English breakdown, urgency check, what to actually do" accentColor="#f5a623" onClick={() => engineRef.current?.open('letter')} />
           <SortedToolCard variant="primary" icon="reply" title="Write a Reply" description="Ready-to-send response, right tone, zero waffle" accentColor="#2563eb" onClick={() => engineRef.current?.open('reply')} />
+        </div>
+
+        {/* DIVIDER */}
+        <div style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg, transparent, rgba(245,166,35,0.25), transparent)' }} />
         </div>
 
         {/* QUICK INPUT ROW */}

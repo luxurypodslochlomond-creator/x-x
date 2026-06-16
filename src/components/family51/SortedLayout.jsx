@@ -38,7 +38,7 @@ export default function SortedLayout({ children, currentPage }) {
   }, [location.pathname]);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1208', position: 'relative' }}>
 
 
       {/* Header */}
@@ -70,7 +70,7 @@ export default function SortedLayout({ children, currentPage }) {
             display: 'flex', alignItems: 'center', gap: 5, textDecoration: 'none',
             background: isPaid ? 'rgba(5,150,105,0.08)' : 'rgba(245,166,35,0.1)',
             border: `1.5px solid ${isPaid ? 'rgba(5,150,105,0.3)' : 'rgba(245,166,35,0.3)'}`,
-            borderRadius: 8, padding: '5px 10px', marginRight: 8,
+            borderRadius: 8, padding: '6px 12px', marginRight: 10,
             WebkitTapHighlightColor: 'transparent',
             cursor: 'pointer',
           }}
@@ -99,7 +99,7 @@ export default function SortedLayout({ children, currentPage }) {
             display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer',
             background: caseCount > 0 ? 'rgba(245,166,35,0.08)' : 'rgba(245,166,35,0.02)',
             border: `1.5px solid ${caseCount > 0 ? 'rgba(245,166,35,0.3)' : 'rgba(245,166,35,0.08)'}`,
-            borderRadius: 8, padding: '5px 10px', marginRight: 8,
+            borderRadius: 8, padding: '6px 12px', marginRight: 0,
             opacity: caseCount > 0 ? 1 : 0.4,
             transition: 'all 0.2s',
             WebkitTapHighlightColor: 'transparent',

@@ -46,8 +46,11 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
           border: `1.5px solid ${accentColor}30`,
           background: `linear-gradient(135deg, ${accentColor}10, ${accentColor}05)`,
           opacity: disabled ? 0.5 : 1, textAlign: 'left',
-          display: 'flex', flexDirection: 'column', gap: 8, transition: 'all 0.15s',
+          display: 'flex', flexDirection: 'column', gap: 8,
+          transition: 'all 0.15s',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
         }}
+        whileHover={disabled ? {} : { y: -2, boxShadow: '0 4px 12px rgba(0,0,0,0.07)' }}
       >
         <div style={{ color: accentColor, opacity: 0.9 }}>{iconSvg}</div>
         <div>
@@ -68,8 +71,11 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
         width: '100%', padding: '12px 10px', borderRadius: 10, cursor: disabled ? 'not-allowed' : 'pointer',
         border: '1px solid rgba(26,18,8,0.1)', background: '#fff',
         opacity: disabled ? 0.5 : 1, textAlign: 'center',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, transition: 'all 0.12s',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5,
+        transition: 'all 0.12s',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
       }}
+      whileHover={disabled ? {} : { y: -1, boxShadow: '0 3px 8px rgba(0,0,0,0.06)' }}
     >
       <div style={{ color: 'rgba(26,18,8,0.45)' }}>{iconSvg}</div>
       <span style={{ fontSize: 11, fontWeight: 800, color: 'rgba(26,18,8,0.6)', letterSpacing: '0.04em' }}>{title}</span>
