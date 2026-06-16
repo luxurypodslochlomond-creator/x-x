@@ -515,8 +515,35 @@ export default function Family51Page() {
              <SortedCaseHistory
                key={showHistory}
                isPremium={!isLocked}
-               onContinue={() => {
+               onContinue={(caseItem) => {
                  setShowHistory(false);
+                 let parsed = null;
+                 try { parsed = JSON.parse(caseItem.ai_result); } catch {}
+                 if (caseItem.tool === 'letter') {
+                   const ctx = {
+                     sender: parsed?.sender || 'Unknown',
+                     summary: parsed?.letter_summary || caseItem.summary || '',
+                     deadline: parsed?.key_deadline || '',
+                     what_this_means: parsed?.what_this_means || '',
+                     action_steps: parsed?.action_steps || [],
+                     severity: parsed?.severity || '',
+                     financial_impact: parsed?.financial_impact || '',
+                     suggested_tone: parsed?.suggested_tone || 'calm',
+                     related_case_id: caseItem.id,
+                   };
+                   engineRef.current && engineRef.current.open('reply', ctx);
+                 } else if (caseItem.tool === 'reply') {
+                   const ctx = {
+                     related_case_id: caseItem.related_case_id || caseItem.id,
+                     summary: caseItem.summary || '',
+                     reply_summary: parsed?.subject_line || '',
+                     reply_body: parsed?.letter_body || '',
+                     situation_hint: parsed?.letter_body
+                       ? `I sent a reply (subject: ${parsed.subject_line || 'reply'}) but they ignored it.\n\nMy reply:\n${parsed.letter_body?.slice(0, 500)}`
+                       : `I sent a reply about ${caseItem.summary || 'my situation'} but they ignored it.`,
+                   };
+                   engineRef.current && engineRef.current.open('conflict', ctx);
+                 }
                }}
              />
            </motion.div>

@@ -173,7 +173,13 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
             prefillContext={prefillContext}
             suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
             relatedCaseId={prefillContext?.related_case_id}
-            onHandoff={() => handleToolOpen('conflict', { related_case_id: prefillContext?.related_case_id })}
+            onHandoff={(replyCtx) => handleToolOpen('conflict', {
+              ...prefillContext,
+              related_case_id: prefillContext?.related_case_id,
+              reply_summary: replyCtx?.subject_line || '',
+              reply_body: replyCtx?.letter_body || '',
+              situation_hint: replyCtx?.situation_hint || '',
+            })}
           />
         )}
         {activeTool === 'conflict' && (

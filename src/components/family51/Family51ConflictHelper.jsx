@@ -30,7 +30,17 @@ const GOALS = [
 
 export default function Family51ConflictHelper({ accentColor = '#ef4444', onResult, prefillContext }) {
   const [conflictType, setConflictType] = useState('');
-  const [what, setWhat]                 = useState('');
+  const buildDefaultWhat = () => {
+    if (!prefillContext) return '';
+    const parts = [];
+    if (prefillContext.situation_hint) return prefillContext.situation_hint;
+    if (prefillContext.what_this_means) parts.push(`Original issue: ${prefillContext.what_this_means}`);
+    if (prefillContext.summary) parts.push(`Summary: ${prefillContext.summary}`);
+    if (prefillContext.sender && prefillContext.sender !== 'Unknown') parts.push(`Involving: ${prefillContext.sender}`);
+    if (prefillContext.reply_summary) parts.push(`I sent a reply (${prefillContext.reply_summary}) but they ignored it.`);
+    return parts.join('\n');
+  };
+  const [what, setWhat]                 = useState(() => buildDefaultWhat());
   const [goal, setGoal]                 = useState('deescalate');
   const [loading, setLoading]           = useState(false);
   const [result, setResult]             = useState(null);
@@ -247,11 +257,25 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
     <div className="space-y-5">
       <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; } input::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
 
-      {/* CONNECTED CASE BANNER */}
-      {prefillContext?.related_case_id && (
-        <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.25)', display: 'flex', gap: 10, alignItems: 'center' }}>
-          <div style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor, flexShrink: 0 }} />
-          <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: 0 }}>CONNECTED TO YOUR CASE — continuing your thread</p>
+      {/* CONNECTED CASE BANNER — shows full context */}
+      {prefillContext && (
+        <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.25)', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor, flexShrink: 0, marginTop: 4 }} />
+          <div>
+            <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 4px' }}>
+              {prefillContext.related_case_id ? 'CONNECTED TO YOUR CASE — continuing your thread' : 'COMING FROM YOUR REPLY'}
+            </p>
+            {prefillContext.summary && (
+              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', margin: 0, lineHeight: 1.4 }}>
+                {prefillContext.sender && prefillContext.sender !== 'Unknown' ? `${prefillContext.sender}: ` : ''}{prefillContext.summary}
+              </p>
+            )}
+            {prefillContext.reply_summary && (
+              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', margin: '2px 0 0', lineHeight: 1.4 }}>
+                You replied (subject: {prefillContext.reply_summary}) — they ignored it.
+              </p>
+            )}
+          </div>
         </div>
       )}
 

@@ -29,7 +29,15 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [situation, setSituation] = useState('');
   const buildContext = (pc) => {
     if (!pc) return '';
-    return `Replying to: ${pc.sender || 'unknown sender'}\nLetter summary: ${pc.summary || ''}\n${pc.deadline && pc.deadline !== 'No deadline mentioned' ? `Key deadline: ${pc.deadline}\n` : ''}${pc.what_this_means ? `\nBackground: ${pc.what_this_means}` : ''}`;
+    const parts = [];
+    if (pc.sender && pc.sender !== 'Unknown') parts.push(`Replying to: ${pc.sender}`);
+    if (pc.summary) parts.push(`Letter summary: ${pc.summary}`);
+    if (pc.deadline && pc.deadline !== 'No deadline mentioned') parts.push(`Key deadline: ${pc.deadline}`);
+    if (pc.what_this_means) parts.push(`Background: ${pc.what_this_means}`);
+    if (pc.action_steps?.length) parts.push(`Recommended steps:\n${pc.action_steps.map((s, i) => `${i + 1}. ${s}`).join('\n')}`);
+    if (pc.severity) parts.push(`Severity: ${pc.severity}`);
+    if (pc.financial_impact && pc.financial_impact !== 'No specific financial amount mentioned.') parts.push(`Financial impact: ${pc.financial_impact}`);
+    return parts.join('\n');
   };
 
   const [context, setContext] = useState(() => buildContext(prefillContext));
@@ -466,7 +474,11 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             {/* HANDOFF — escalate to dispute help */}
             {onHandoff && (
               <motion.button
-                onClick={onHandoff}
+                onClick={() => onHandoff({
+                  subject_line: result?.subject_line,
+                  letter_body: result?.letter_body,
+                  situation_hint: `I sent a reply (${resultTone || tone} tone) to ${prefillContext?.sender || 'them'} about ${prefillContext?.summary || 'my situation'}. They ignored it.`,
+                })}
                 whileTap={{ scale: 0.97 }}
                 style={{
                   width: '100%', padding: '14px 0', borderRadius: 12, fontSize: 12,
