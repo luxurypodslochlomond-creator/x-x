@@ -192,11 +192,13 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         {activeTool === 'scam' && (
           <Family51ScamChecker
             accentColor={tc.color}
+            onResult={() => handleToolComplete('scam')}
           />
         )}
         {activeTool === 'contract' && (
           <SortedContractChecker
             accentColor={tc.color}
+            onResult={() => handleToolComplete('contract')}
           />
         )}
 

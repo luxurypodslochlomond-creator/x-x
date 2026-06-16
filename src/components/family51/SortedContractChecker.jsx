@@ -25,7 +25,9 @@ const verdictStyle = {
   serious_concerns: { color: '#ef4444', bg: 'rgba(239,68,68,0.10)',  border: 'rgba(239,68,68,0.30)',  emoji: '🚨', label: 'Serious Concerns' },
 };
 
-export default function SortedContractChecker({ accentColor = '#7c3aed' }) {
+import { recordSortedUse } from '@/hooks/useSortedRateLimit';
+
+export default function SortedContractChecker({ accentColor = '#7c3aed', onResult }) {
   const [contractType, setContractType] = useState('');
   const [inputText, setInputText]       = useState('');
   const [loading, setLoading]           = useState(false);
@@ -51,6 +53,15 @@ export default function SortedContractChecker({ accentColor = '#7c3aed' }) {
     setLoadingStep(0);
     setResult(null);
     setError(null);
+
+    try {
+      const limitCheck = await recordSortedUse();
+      if (!limitCheck.allowed) {
+        setError('You\'ve used your 10 free uses. Subscribe for unlimited access.');
+        setLoading(false);
+        return;
+      }
+    } catch {}
 
     let visionFileUrl = null;
     let content = text;
@@ -120,6 +131,7 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
     setResult(res);
     setLoading(false);
     setUploading(false);
+    onResult?.();
   };
 
   const handleFileUpload = async (e) => {

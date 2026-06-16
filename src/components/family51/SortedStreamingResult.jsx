@@ -205,7 +205,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.35 }}
-          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggestedTone: result.suggested_tone, related_case_id: caseId }); }}
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggested_tone: result.suggested_tone, related_case_id: caseId, action_steps: result.action_steps, severity: result.severity, financial_impact: result.financial_impact }); }}
           whileTap={{ opacity: 0.7 }}
           style={{
             width: '100%', padding: '18px 0', borderRadius: 14, fontSize: 14,
