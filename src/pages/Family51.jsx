@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, MapPin, Menu, X, ChevronDown, ChevronRight, Trash2, Eye, Monitor, Phone, Award, Share2, Star, Users, Globe } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
@@ -18,9 +18,6 @@ import SortedFileUploadButton from '@/components/family51/SortedFileUploadButton
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedTrustRow from '@/components/family51/SortedTrustRow';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
-
-const PinIcon = Globe;
-const LockIcon = Lock;
 
 function loadLocation() {
   try {
@@ -96,7 +93,11 @@ export default function Family51Page() {
                 padding: '11px 6px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.15)', background: '#fff',
                 color: 'rgba(26,18,8,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 gap: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer', textAlign: 'center',
+                transition: 'all 0.12s',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
               }}
+              onMouseEnter={e => { e.target.style.transform = 'translateY(-1px)'; e.target.style.boxShadow = '0 3px 8px rgba(0,0,0,0.06)'; }}
+              onMouseLeave={e => { e.target.style.transform = ''; e.target.style.boxShadow = '0 1px 2px rgba(0,0,0,0.03)'; }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8"/><path d="M3 9h18" stroke="currentColor" strokeWidth="1.5"/></svg>
               TYPE / PASTE
@@ -106,7 +107,11 @@ export default function Family51Page() {
 
         {/* SECONDARY TOOLS */}
         <div style={{ marginBottom: 12 }}>
-          <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.33)', margin: '0 0 8px', textAlign: 'center' }}>SOMETHING ELSE?</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
+            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.28)', whiteSpace: 'nowrap' }}>SOMETHING ELSE?</span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
             <SortedToolCard variant="secondary" icon="scam" title="Scam Checker" description="Spot it fast" onClick={() => engineRef.current?.open('scam')} />
             <SortedToolCard variant="secondary" icon="contract" title="Contract Checker" description="Rights grabs" onClick={() => engineRef.current?.open('contract')} />
@@ -155,15 +160,22 @@ export default function Family51Page() {
         </div>
 
         {/* MAURO CHAT */}
-        <div style={{ marginBottom: 28 }}>
-          <button onClick={() => setShowMauro(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.45)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', marginBottom: 8 }}>
+        <div style={{ marginBottom: 28, borderRadius: 14, padding: '14px 16px', background: '#fff', border: '1px solid rgba(26,18,8,0.08)' }}>
+          <button onClick={() => setShowMauro(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.5)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', marginBottom: showMauro ? 10 : 0, width: '100%' }}>
             NEED TO TALK? {showMauro ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
           </button>
           <AnimatePresence>{showMauro && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} style={{ overflow: 'hidden' }}><MauroChat /></motion.div>}</AnimatePresence>
         </div>
 
+        {/* DIVIDER */}
+        <div style={{ marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(245,166,35,0.15)' }} />
+          <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.25)' }}>SORTED FOR LIFE</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(245,166,35,0.15)' }} />
+        </div>
+
         {/* SORTED FOR LIFE CARD */}
-        <SortedForLifeCard geoPrice={geoPrice} onSuccess={() => setShowSuccess(true)} />
+        <SortedForLifeCard geoPrice={geoPrice} />
 
         {/* FOOTER LINKS */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 12, paddingBottom: 16 }}>
@@ -188,7 +200,7 @@ export default function Family51Page() {
               initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
               onClick={e => e.stopPropagation()}
-              style={{ width: '100%', maxWidth: 520, maxHeight: '80vh', overflowY: 'auto', background: '#faf8f5', borderRadius: '20px 20px 0 0', padding: '24px 20px 40px' }}
+              style={{ width: '100%', maxWidth: 520, maxHeight: '80vh', overflowY: 'auto', background: '#fdf9f0', borderRadius: '20px 20px 0 0', padding: '24px 20px 40px' }}
             >
               <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(26,18,8,0.15)', margin: '0 auto 20px' }} />
               <h2 style={{ fontSize: 18, fontWeight: 900, color: '#1a1208', margin: '0 0 4px' }}>Where are you?</h2>
@@ -231,7 +243,7 @@ export default function Family51Page() {
         {showPaywall && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowPaywall(false)} style={{ position: 'fixed', inset: 0, zIndex: 10001, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
             <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: 400 }}>
-              <SortedForLifeCard geoPrice={geoPrice} onSuccess={() => { setShowPaywall(false); setShowSuccess(true); }} />
+              <SortedForLifeCard geoPrice={geoPrice} />
             </motion.div>
           </motion.div>
         )}

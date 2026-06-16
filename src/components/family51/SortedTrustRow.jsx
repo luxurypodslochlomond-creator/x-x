@@ -9,17 +9,18 @@ export default function SortedTrustRow({ selectedLocation, geoPrice, onShowLocat
         <button
           onClick={() => onShowLocationPicker(true)}
           style={{
-            padding: '6px 10px', borderRadius: 8, background: 'rgba(245,166,35,0.06)',
+            padding: '7px 12px', borderRadius: 10, background: 'rgba(245,166,35,0.06)',
             border: '1px solid rgba(245,166,35,0.2)', display: 'flex', alignItems: 'center',
             gap: 5, cursor: 'pointer', fontSize: 10, color: 'rgba(26,18,8,0.5)', fontWeight: 600,
-            letterSpacing: '0.02em',
+            letterSpacing: '0.02em', transition: 'all 0.15s',
+            boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
           }}
         >
           <PinIcon color="#f5a623" size={10} />
           {selectedLocation?.jurisdiction?.split('·')[0]?.trim() || 'UK law'}
         </button>
         <div style={{
-          padding: '6px 10px', borderRadius: 8, background: 'rgba(245,166,35,0.04)',
+          padding: '7px 12px', borderRadius: 10, background: 'rgba(245,166,35,0.04)',
           border: '1px solid rgba(245,166,35,0.12)', display: 'flex', alignItems: 'center',
           gap: 5, minWidth: 0,
         }}>
