@@ -72,9 +72,9 @@ export default function ZappGallery({ onPlay, onRemix }) {
       >
         <div className="flex items-center justify-center gap-3 mb-1">
           <ZappGeometricIcon shape="zap" size={36} color="#fbbf24" accent="#fde68a" />
-          <h2 className="font-black text-3xl text-white">Hall of Fame</h2>
+          <h2 className="font-black text-3xl text-white">Community Gallery</h2>
         </div>
-        <p className="text-white/30 text-sm">apps built by kids, for kids — tap to play!</p>
+        <p className="text-white/30 text-sm">apps built by kids, for everyone — tap to discover!</p>
       </motion.div>
 
       {loading ? (
@@ -108,9 +108,9 @@ export default function ZappGallery({ onPlay, onRemix }) {
               </motion.div>
             </div>
           </motion.div>
-          <p className="text-white/50 font-black text-2xl mb-2">the hall is empty</p>
+          <p className="text-white/50 font-black text-2xl mb-2">nothing here yet</p>
           <p className="text-white/20 text-base max-w-xs mx-auto leading-relaxed">
-            build an app, save it here, and let other kids play it. your creation could be the first!
+            build something and share it — your creation could be the first in the gallery!
           </p>
           <div className="mt-8 flex items-center justify-center gap-3 text-white/10">
             <span className="w-2 h-2 rounded-full bg-violet-500/30" />

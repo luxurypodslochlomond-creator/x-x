@@ -6,7 +6,7 @@ import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 const BUILD_STAGES = [
   { shape: 'pulse', text: 'warming up the AI engine...' },
   { shape: 'spectrum', text: 'designing the layout...' },
-  { shape: 'gear', text: 'coding the game logic...' },
+  { shape: 'gear', text: 'coding the app logic...' },
   { shape: 'waveform', text: 'composing sound effects...' },
   { shape: 'sparkle', text: 'adding colourful sparkles...' },
   { shape: 'diamond', text: 'polishing the visuals...' },
@@ -22,11 +22,11 @@ const TARGET_TIME = 32;
 // How long each stage shows before advancing (ms)
 const STAGE_DURATION = 3200;
 
-const SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen.
+const SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen. Kids might ask for games, study tools, art pads, quizzes, music makers, or anything — build exactly what they ask for.
 
 CRITICAL MOBILE RULES — the app will be displayed in a phone-sized iframe, so:
 - body { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; background: #0a0a0f; }
-- Use 100vh for full height — the game must fill the whole screen, no scrolling needed
+- Use 100vh for full height — the app must fill the whole screen, no scrolling needed
 - All interactive buttons MUST be at least 64px tall and 100% width or very large — easy to tap with a thumb
 - Font sizes: headings min 2rem, body min 1.2rem — readable on a small screen
 - Use flexbox/grid with vh/vw units — NEVER use fixed pixel widths that might overflow
@@ -39,9 +39,11 @@ GENERAL RULES:
 - Web Audio API for sounds (oscillators only — no external audio files)
 - Dark bg (#0a0a0f), neon colours (use bright purples, pinks, cyans, greens), large fonts
 - Kind encouraging feedback only — NEVER harsh. Wrong answers: "Nearly! Try again 💪" with a warm soft sound
-- FULLY WORKING: every button works, full game loop, score tracked, Play Again resets ALL state to defaults
-- Confetti on wins: spawn 40+ coloured divs with CSS animation falling from top
-- At least 3 different sound effects using Web Audio API oscillators`;
+- FULLY WORKING: every button works, complete app loop, any scores/states reset properly on restart
+- If it's a game: confetti on wins with 40+ coloured divs, score tracking, at least 3 sound effects
+- If it's a study tool: clear questions, instant feedback, progress shown visually
+- If it's a creative tool: responsive canvas/drawing area, colour picker, clear/reset button
+- Always include at least 3 different sound effects using Web Audio API oscillators`;
 
 export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
@@ -117,9 +119,9 @@ BUILD THIS NOW: "${idea}"
 
 CRITICAL BEFORE YOU OUTPUT:
 - Every button you mention MUST have an onclick handler that works
-- Every game state variable MUST be initialised before use
-- Test the full game loop in your head: start → play → win/lose → play again
-- The Play Again / Restart button MUST fully reset ALL state variables back to defaults
+- Every state variable MUST be initialised before use
+- Test the full app flow in your head: start → interact → complete → restart
+- The Restart / Reset button MUST fully reset ALL state variables back to defaults
 - NO placeholder text like "// add logic here" — write the complete working code
 
 Return ONLY valid JSON: {"html": "<complete single-file HTML app here>"}
@@ -432,8 +434,8 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
               ] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <ZappGeometricIcon shape="trophy" size={22} color="#fbbf24" accent="#fde68a" />
-              save to the hall of fame
+              <ZappGeometricIcon shape="zap" size={22} color="#fbbf24" accent="#fde68a" />
+              save to the community gallery
               <ZappGeometricIcon shape="star" size={16} color="#fbbf24" accent="#fde68a" />
             </motion.button>
           </motion.div>
@@ -458,7 +460,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
             <motion.button onClick={onSave} whileTap={{ scale: 0.95 }}
               className="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5"
               style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24' }}>
-              <ZappGeometricIcon shape="trophy" size={14} color="#fbbf24" accent="#fde68a" />
+              <ZappGeometricIcon shape="zap" size={14} color="#fbbf24" accent="#fde68a" />
               save
             </motion.button>
           )}
