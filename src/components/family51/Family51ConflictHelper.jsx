@@ -417,11 +417,11 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
             <Card label="SITUATION ASSESSMENT" color={accentColor}>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
+              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
             </Card>
 
             <Card label="YOUR POSITION" color="#06b6d4">
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
+              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
             </Card>
 
             <Card label="WHAT TO DO" color="#22c55e">
@@ -429,7 +429,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
                 {result.recommended_steps?.map((step, i) => (
                   <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                     <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55 }}>{step}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.55 }}>{step}</span>
                   </li>
                 ))}
               </ol>
@@ -437,7 +437,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
             {result.what_to_say && (
               <Card label="WHAT TO SAY / SEND" color={accentColor}>
-                <pre style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: '0 0 12px' }}>{result.what_to_say}</pre>
+                <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: '0 0 12px' }}>{result.what_to_say}</pre>
                 <motion.button onClick={() => copy(result.what_to_say, 'say')} whileTap={{ scale: 0.95 }} style={{ padding: '8px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
                   {copied === 'say' ? 'COPIED' : 'COPY THIS'}
                 </motion.button>
@@ -449,7 +449,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
                 {result.what_not_to_do?.map((item, i) => (
                   <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                     <span style={{ color: '#ef4444', fontSize: 10, paddingTop: 3 }}>X</span>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>{item}</span>
+                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)' }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -457,7 +457,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 
             {result.if_it_escalates && (
               <Card label="IF IT ESCALATES" color="#eab308">
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_it_escalates}</p>
+                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_it_escalates}</p>
               </Card>
             )}
 
@@ -490,11 +490,11 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
 
-            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.45)' }}>
+            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
               NEW SITUATION
             </motion.button>
 
-            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
               SORTED provides guidance only — not legal advice. For serious matters, speak to a qualified solicitor. <a href="/SortedTerms" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'underline' }}>Terms</a>
             </p>
             <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', letterSpacing: '0.05em', marginTop: 4 }}>Nothing stored. Nothing seen. Yours alone.</p>
@@ -600,7 +600,7 @@ function Label({ children }) {
 
 function Card({ label, color, children }) {
   return (
-    <div style={{ border: `1px solid ${color}40`, borderRadius: 12, padding: '14px 18px', background: '#1a1208' }}>
+    <div style={{ border: `1px solid ${color}30`, borderRadius: 12, padding: '14px 18px', background: '#fff' }}>
       <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: color, marginBottom: 10 }}>{label}</p>
       {children}
     </div>

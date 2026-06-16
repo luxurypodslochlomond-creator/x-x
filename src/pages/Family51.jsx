@@ -18,6 +18,7 @@ import SortedShareMoment from '@/components/family51/SortedShareMoment';
 import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 import { Trash2, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { DecodeIcon, ReplyToolIcon, ScamToolIcon, ConflictToolIcon, ContractToolIcon, CasesIcon, ArrowLeft, ArrowRight, CameraIcon, SortedMark, F51Mark, BoltIcon, TargetIcon, PinIcon, LockIcon, MailIcon, CouncilIcon, EmployerIcon, LandlordIcon, CourtIcon } from '@/components/family51/SortedIcons';
 
 // ─── PHOTO BUTTON — triggers camera/file picker, uploads, passes file URL ──────
 function PhotoButton({ onPhotoSelected }) {
@@ -274,7 +275,7 @@ export default function Family51Page() {
            <motion.div key="faq" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
              <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-start', padding: '16px 20px 0' }}>
                <button onClick={() => setShowFAQ(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.5)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
-                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                 <ArrowLeft />
                  BACK
                </button>
              </div>
@@ -287,7 +288,7 @@ export default function Family51Page() {
            <motion.div key="why" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }} style={{ maxWidth: 520, margin: '0 auto', padding: '16px 20px 60px' }}>
              <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-start' }}>
                <button onClick={() => setShowWhy(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.5)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
-                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                 <ArrowLeft />
                  BACK
                </button>
              </div>
@@ -360,54 +361,74 @@ export default function Family51Page() {
               </p>
             </motion.div>
 
-            {/* PRIMARY: decode input — THE thing people need */}
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} style={{ marginBottom: 20 }}>
-              <div
+            {/* PRIMARY TOOLS — the core flow: decode → reply */}
+            <div style={{ marginBottom: 18, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              {/* DECODE */}
+              <motion.div
+                initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
                 onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('letter'); }}
                 className="tap-feedback"
                 style={{
-                  cursor: 'pointer',
-                  padding: '18px 20px',
-                  borderRadius: 16,
-                  border: '2px solid rgba(245,166,35,0.35)',
-                  background: 'rgba(245,166,35,0.05)',
-                  marginBottom: 10,
-                  WebkitTapHighlightColor: 'transparent',
-                  touchAction: 'manipulation',
+                  cursor: 'pointer', padding: '16px 14px', borderRadius: 16,
+                  border: '2px solid rgba(245,166,35,0.35)', background: 'rgba(245,166,35,0.05)',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
-                  <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <rect x="4" y="2" width="16" height="20" rx="2.5" stroke="#f5a623" strokeWidth="1.8"/>
-                      <path d="M8 7h8M8 11h8M8 15h5" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round"/>
-                    </svg>
-                  </div>
-                  <span style={{ fontSize: 15, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>Decode a letter or document</span>
+                <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
+                  <DecodeIcon color="#f5a623" size={16} />
                 </div>
-                <div style={{ padding: '12px 16px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)', fontSize: 13, color: 'rgba(26,18,8,0.4)', lineHeight: 1.5 }}>
-                  Paste, type or take a photo — we'll tell you what it means in plain English
+                <div style={{ fontSize: 14, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em', marginBottom: 4 }}>Decode</div>
+                <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', lineHeight: 1.4, marginBottom: 10 }}>Understand any letter in plain English</div>
+                <div style={{ width: '100%', padding: '10px 0', borderRadius: 10, background: '#f5a623', color: '#fff', textAlign: 'center', fontSize: 12, fontWeight: 800, letterSpacing: '0.06em' }}>
+                  START →
                 </div>
-                <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
-                  <div style={{ flex: 1, padding: '11px 0', borderRadius: 10, background: '#f5a623', color: '#fff', textAlign: 'center', fontSize: 13, fontWeight: 800, letterSpacing: '0.06em' }}>
-                    START →
-                  </div>
-                  <PhotoButton onPhotoSelected={(fileUrl) => {
-                    engineRef.current && engineRef.current.open('letter', { triggerPhoto: true, prefillFileUrl: fileUrl });
-                  }} />
+              </motion.div>
+
+              {/* REPLY */}
+              <motion.div
+                initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('reply'); }}
+                className="tap-feedback"
+                style={{
+                  cursor: 'pointer', padding: '16px 14px', borderRadius: 16,
+                  border: '2px solid rgba(37,99,235,0.35)', background: 'rgba(37,99,235,0.04)',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                }}
+              >
+                <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(37,99,235,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
+                  <ReplyToolIcon color="#2563eb" size={16} />
+                </div>
+                <div style={{ fontSize: 14, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em', marginBottom: 4 }}>Reply</div>
+                <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)', lineHeight: 1.4, marginBottom: 10 }}>Write a professional reply — right tone, right words</div>
+                <div style={{ width: '100%', padding: '10px 0', borderRadius: 10, background: '#2563eb', color: '#fff', textAlign: 'center', fontSize: 12, fontWeight: 800, letterSpacing: '0.06em' }}>
+                  WRITE →
+                </div>
+              </motion.div>
+            </div>
+
+            {/* PHOTO BUTTON ROW — quick snap for decode */}
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 18 }}>
+              <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+                <PhotoButton onPhotoSelected={(fileUrl) => {
+                  engineRef.current && engineRef.current.open('letter', { triggerPhoto: true, prefillFileUrl: fileUrl });
+                }} />
+                <div style={{ flex: 1, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.15)', background: '#fff', color: 'rgba(26,18,8,0.55)', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                  onClick={() => engineRef.current && engineRef.current.open('letter')}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8"/><path d="M3 9h18" stroke="currentColor" strokeWidth="1.5"/></svg>
+                  PASTE TEXT INSTEAD
                 </div>
               </div>
             </motion.div>
 
-            {/* SECONDARY: smaller tools */}
+            {/* SECONDARY: other tools */}
             <div style={{ marginBottom: 14 }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 10px', textAlign: 'center' }}>SOMETHING ELSE?</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
                 {[
-                  { id: 'scam', label: 'Check a scam', color: '#ef4444' },
-                  { id: 'conflict', label: 'Dispute help', color: '#059669' },
-                  { id: 'contract', label: 'Check contract', color: '#7c3aed' },
-                ].map(({ id, label, color }) => (
+                  { id: 'scam', label: 'Check a scam', color: '#ef4444', icon: <ScamToolIcon color="#ef4444" size={14} /> },
+                  { id: 'conflict', label: 'Dispute help', color: '#059669', icon: <ConflictToolIcon color="#059669" size={14} /> },
+                  { id: 'contract', label: 'Check contract', color: '#7c3aed', icon: <ContractToolIcon color="#7c3aed" size={14} /> },
+                ].map(({ id, label, color, icon }) => (
                   <motion.button
                     key={id}
                     onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open(id); }}
@@ -418,8 +439,10 @@ export default function Family51Page() {
                       letterSpacing: '0.04em', cursor: 'pointer', textAlign: 'center',
                       border: `1.5px solid ${color}25`, background: `${color}05`, color,
                       WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
                     }}
                   >
+                    {icon}
                     {label}
                   </motion.button>
                 ))}
@@ -448,13 +471,13 @@ export default function Family51Page() {
                   style={{ width: '100%', marginBottom: 14, padding: '14px 18px', borderRadius: 14, border: '1.5px solid rgba(245,166,35,0.35)', background: 'rgba(245,166,35,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <CasesIcon />
+                    <CasesIcon color="#f5a623" />
                     <div style={{ textAlign: 'left' }}>
                       <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>My Cases</div>
                       <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)' }}>{caseCount} saved</div>
                     </div>
                   </div>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="rgba(26,18,8,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <ArrowRight />
                 </motion.button>
               ) : null;
             })()}
@@ -475,7 +498,7 @@ export default function Family51Page() {
            <motion.div key="history" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
              <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'flex-start', padding: '16px 20px 0' }}>
                <button onClick={() => setShowHistory(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(26,18,8,0.5)', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 5 }}>
-                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                 <ArrowLeft />
                  BACK
                </button>
              </div>
@@ -674,181 +697,14 @@ export default function Family51Page() {
 
 
 
-// ─── WHY ROW ─────────────────────────────────────────────────────────────────
+// ─── WHY ROW ═══════════════════════════════════════════════════════════════
+// (icons now imported from SortedIcons)
 function WhyRow({ icon, text }) {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
       <span style={{ flexShrink: 0, marginTop: 1, display: 'flex', alignItems: 'center' }}>{icon}</span>
       <span style={{ fontSize: 14, color: 'rgba(26,18,8,0.65)', lineHeight: 1.5 }}>{text}</span>
     </div>
-  );
-}
-
-// ─── WHY ROW ICONS (custom SVG, no emoji) ────────────────────────────────────
-function WRBolt() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <path d="M8.5 1.5L3 7.5h4L4.5 12.5L11 6H7L8.5 1.5Z" stroke="#f5a623" strokeWidth="1.3" strokeLinejoin="round" fill="rgba(245,166,35,0.15)" />
-    </svg>
-  );
-}
-function WRTarget() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <circle cx="7" cy="7" r="5.5" stroke="#f5a623" strokeWidth="1.2" />
-      <circle cx="7" cy="7" r="3" stroke="#f5a623" strokeWidth="1.2" opacity="0.6" />
-      <circle cx="7" cy="7" r="1" fill="#f5a623" />
-    </svg>
-  );
-}
-function WRPin() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <circle cx="7" cy="5" r="4" stroke="#f5a623" strokeWidth="1.2" fill="none" />
-      <circle cx="7" cy="5" r="1.6" fill="#f5a623" />
-      <path d="M7 9v3.5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" opacity="0.5" />
-    </svg>
-  );
-}
-function WRLock() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <rect x="2.5" y="6.5" width="9" height="6" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="rgba(245,166,35,0.1)" />
-      <path d="M4.5 6.5V4.5a2.5 2.5 0 015 0v2" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" />
-      <circle cx="7" cy="9.5" r="1" fill="#f5a623" />
-    </svg>
-  );
-}
-function WRMail() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <rect x="1.5" y="3" width="11" height="8" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="rgba(245,166,35,0.1)" />
-      <path d="M2 3.5L7 7.5L12 3.5" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-// ─── BIG BUTTON ───────────────────────────────────────────────────────────────
-function BigButton({ color, onClick, icon, label, sub, tag, delay }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <motion.button
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay }}
-      whileTap={{ scale: 0.96 }}
-      whileHover={{ scale: 1.01 }}
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        width: '100%', textAlign: 'left', cursor: 'pointer', padding: '22px 22px',
-        borderRadius: 16, border: `1px solid ${hovered ? color + '80' : color + '30'}`,
-        background: hovered ? `${color}12` : `${color}07`,
-        transition: 'border 0.12s, background 0.12s, box-shadow 0.12s', display: 'flex', alignItems: 'center', gap: 18,
-        boxShadow: hovered ? `0 0 30px ${color}20` : 'none',
-        WebkitTapHighlightColor: 'transparent',
-        touchAction: 'manipulation',
-      }}
-    >
-      <div style={{ flexShrink: 0 }}>{icon}</div>
-      <div style={{ flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-          <span style={{ fontSize: 15, fontWeight: 900, letterSpacing: '-0.01em', color: '#fff' }}>{label}</span>
-          <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color, border: `1px solid ${color}50`, borderRadius: 4, padding: '2px 6px' }}>{tag}</span>
-        </div>
-        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.4 }}>{sub}</p>
-      </div>
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, opacity: hovered ? 1 : 0.3, transition: 'opacity 0.15s' }}>
-        <path d="M4 9H14M14 9L10 5M14 9L10 13" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </motion.button>
-  );
-}
-
-// ─── TRUST PILLS ─────────────────────────────────────────────────────────────
-function TrustPill({ text }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-      <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#f5a623' }} />
-      <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(26,18,8,0.5)', letterSpacing: '0.05em' }}>{text}</span>
-    </div>
-  );
-}
-
-// ─── CUSTOM ICONS ────────────────────────────────────────────────────────────
-function F51Mark() {
-  return (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-      {/* Briefcase body */}
-      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#f97316" strokeWidth="1.8" fill="rgba(249,115,22,0.06)" />
-      {/* Briefcase handle */}
-      <path d="M11 11V8a4 4 0 018 0v3" stroke="#f97316" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      {/* Centre clasp */}
-      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f97316" strokeWidth="1.4" fill="rgba(249,115,22,0.25)" />
-      {/* Clasp lock dot */}
-      <circle cx="15" cy="19" r="0.8" fill="#f97316" />
-    </svg>
-  );
-}
-
-function TalkIcon({ color }) {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <path d="M6 8h24a2 2 0 012 2v12a2 2 0 01-2 2H20l-6 4v-4H6a2 2 0 01-2-2V10a2 2 0 012-2z" stroke={color} strokeWidth="1.5" fill={`${color}12`} />
-      <path d="M11 16h14M11 20h8" stroke={color} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
-      <circle cx="26" cy="14" r="1" fill={color} opacity="0.8" />
-    </svg>
-  );
-}
-
-function DocIcon({ color }) {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <rect x="8" y="4" width="20" height="28" rx="3" stroke={color} strokeWidth="1.5" fill="none" />
-      <path d="M13 11h10M13 16h10M13 21h6" stroke={color} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
-      <circle cx="27" cy="27" r="6" fill={color} />
-      <path d="M25 27l1.5 1.5L29 25" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ReplyIcon({ color }) {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <rect x="4" y="8" width="28" height="20" rx="3" stroke={color} strokeWidth="1.5" fill="none" />
-      <path d="M10 16h16M10 20h10" stroke={color} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
-      <path d="M30 14l-5-4v8l5-4z" fill={color} />
-    </svg>
-  );
-}
-
-function ConflictIcon({ color }) {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="13" cy="13" r="7" stroke={color} strokeWidth="1.5" fill="none" />
-      <circle cx="23" cy="23" r="7" stroke={color} strokeWidth="1.5" fill="none" opacity="0.5" />
-      <path d="M18 8v4M18 24v4M8 18h4M24 18h4" stroke={color} strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-    </svg>
-  );
-}
-
-function WhyIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="3" r="1" fill="#f5a623" />
-      <path d="M8 5v4M5 14h6" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" />
-      <rect x="2" y="7" width="12" height="6" rx="1.5" stroke="#f5a623" strokeWidth="1.2" fill="none" />
-    </svg>
-  );
-}
-
-function EmailIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <rect x="1.5" y="3" width="13" height="10" rx="1" stroke="currentColor" strokeWidth="1.2" fill="none" />
-      <path d="M2 3.5L8 7.5L14 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
   );
 }
 
@@ -872,88 +728,4 @@ function ProblemCard({ icon, title, desc }) {
   );
 }
 
-// ─── SORTED MARK ICON ─────────────────────────────────────────
-function SortedMark() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
-      <rect x="3" y="11" width="24" height="16" rx="3" stroke="#1a1208" strokeWidth="1.8" fill="rgba(26,18,8,0.06)" />
-      <path d="M11 11V8a4 4 0 018 0v3" stroke="#1a1208" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <rect x="12" y="16.5" width="6" height="5" rx="1.2" stroke="#f5a623" strokeWidth="1.4" fill="rgba(245,166,35,0.25)" />
-      <circle cx="15" cy="19" r="0.8" fill="#f5a623" />
-    </svg>
-  );
-}
-
-// Custom problem icons
-function CouncilIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <rect x="4" y="6" width="16" height="12" rx="1" stroke="#f97316" strokeWidth="1.5" fill="none" />
-      <rect x="6" y="10" width="3" height="4" fill="#f97316" opacity="0.6" />
-      <rect x="10.5" y="9" width="3" height="5" fill="#f97316" opacity="0.6" />
-      <rect x="15" y="10" width="3" height="4" fill="#f97316" opacity="0.6" />
-      <path d="M8 6L8 4M12 6L12 4M16 6L16 4" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-    </svg>
-  );
-}
-
-function EmployerIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <rect x="3" y="8" width="18" height="11" rx="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
-      <circle cx="8" cy="6.5" r="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
-      <circle cx="12" cy="6.5" r="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
-      <circle cx="16" cy="6.5" r="1.5" stroke="#f97316" strokeWidth="1.5" fill="none" />
-      <path d="M7 13v2M12 13v2M17 13v2" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
-    </svg>
-  );
-}
-
-function LandlordIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M4 20h16M7 20V9M17 20V9M10 20V11M14 20V11M12 5L5 9H19L12 5Z" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="12" cy="14" r="1.5" fill="#f97316" opacity="0.6" />
-    </svg>
-  );
-}
-
-function CourtIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M6 4v4M12 4v4M18 4v4M4 9h16M5 9v9a2 2 0 002 2h10a2 2 0 002-2V9M9 13h6" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M10 17l2 2 4-4" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
-    </svg>
-  );
-}
-
-function PartnerIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="5" cy="4" r="1.5" stroke="#f97316" strokeWidth="1.2" />
-      <circle cx="11" cy="4" r="1.5" stroke="#f97316" strokeWidth="1.2" />
-      <path d="M5 5.5v3a1 1 0 001 1h4a1 1 0 001-1v-3" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
-      <path d="M4 11.5h8M5 13h6" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function CasesIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-      <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="none" />
-      <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-      <path d="M4.5 8h6M4.5 10.5h4" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
-    </svg>
-  );
-}
-
-function FAQIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="8" r="6.5" stroke="#f5a623" strokeWidth="1.2" fill="none" />
-      <path d="M8 5v1M8 8v3" stroke="#f5a623" strokeWidth="1.2" strokeLinecap="round" />
-      <circle cx="8" cy="5" r="0.5" fill="#f5a623" opacity="0.8" />
-    </svg>
-  );
-}
+// ─── ICONS NOW IMPORTED FROM SortedIcons ─────────────────────
