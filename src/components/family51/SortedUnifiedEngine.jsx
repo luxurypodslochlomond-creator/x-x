@@ -1,5 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Family51LetterDecoder from '@/components/family51/Family51LetterDecoder';
 import Family51ReplyWriter from '@/components/family51/Family51ReplyWriter';
 import Family51ConflictHelper from '@/components/family51/Family51ConflictHelper';
@@ -163,54 +163,64 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           />
         )}
 
-        {activeTool === 'letter' && (
-          <Family51LetterDecoder
-            accentColor={tc.color}
-            onResult={() => handleToolComplete('letter')}
-            onHandoff={(data) => {
-              setTriggerPhoto(false);
-              handleToolOpen('reply', data);
-            }}
-            triggerPhoto={triggerPhoto}
-            prefillFileUrl={prefillContext?.prefillFileUrl}
-            onPhotoTriggered={() => setTriggerPhoto(false)}
-          />
-        )}
-        {activeTool === 'reply' && (
-          <Family51ReplyWriter
-            accentColor={tc.color}
-            onResult={() => handleToolComplete('reply')}
-            prefillContext={prefillContext}
-            suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
-            relatedCaseId={prefillContext?.related_case_id}
-            onHandoff={(replyCtx) => handleToolOpen('conflict', {
-              ...prefillContext,
-              related_case_id: prefillContext?.related_case_id,
-              reply_summary: replyCtx?.subject_line || '',
-              reply_body: replyCtx?.letter_body || '',
-              situation_hint: replyCtx?.situation_hint || '',
-            })}
-          />
-        )}
-        {activeTool === 'conflict' && (
-          <Family51ConflictHelper
-            accentColor={tc.color}
-            onResult={() => handleToolComplete('conflict')}
-            prefillContext={prefillContext}
-          />
-        )}
-        {activeTool === 'scam' && (
-          <Family51ScamChecker
-            accentColor={tc.color}
-            onResult={() => handleToolComplete('scam')}
-          />
-        )}
-        {activeTool === 'contract' && (
-          <SortedContractChecker
-            accentColor={tc.color}
-            onResult={() => handleToolComplete('contract')}
-          />
-        )}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTool}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.18 }}
+          >
+            {activeTool === 'letter' && (
+              <Family51LetterDecoder
+                accentColor={tc.color}
+                onResult={() => handleToolComplete('letter')}
+                onHandoff={(data) => {
+                  setTriggerPhoto(false);
+                  handleToolOpen('reply', data);
+                }}
+                triggerPhoto={triggerPhoto}
+                prefillFileUrl={prefillContext?.prefillFileUrl}
+                onPhotoTriggered={() => setTriggerPhoto(false)}
+              />
+            )}
+            {activeTool === 'reply' && (
+              <Family51ReplyWriter
+                accentColor={tc.color}
+                onResult={() => handleToolComplete('reply')}
+                prefillContext={prefillContext}
+                suggestedTone={prefillContext?.suggestedTone || prefillContext?.suggested_tone}
+                relatedCaseId={prefillContext?.related_case_id}
+                onHandoff={(replyCtx) => handleToolOpen('conflict', {
+                  ...prefillContext,
+                  related_case_id: prefillContext?.related_case_id,
+                  reply_summary: replyCtx?.subject_line || '',
+                  reply_body: replyCtx?.letter_body || '',
+                  situation_hint: replyCtx?.situation_hint || '',
+                })}
+              />
+            )}
+            {activeTool === 'conflict' && (
+              <Family51ConflictHelper
+                accentColor={tc.color}
+                onResult={() => handleToolComplete('conflict')}
+                prefillContext={prefillContext}
+              />
+            )}
+            {activeTool === 'scam' && (
+              <Family51ScamChecker
+                accentColor={tc.color}
+                onResult={() => handleToolComplete('scam')}
+              />
+            )}
+            {activeTool === 'contract' && (
+              <SortedContractChecker
+                accentColor={tc.color}
+                onResult={() => handleToolComplete('contract')}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
 
         <AnimatePresence>
           {showShare && activeTool === 'letter' && (
