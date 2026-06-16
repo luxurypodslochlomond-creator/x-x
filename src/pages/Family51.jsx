@@ -20,7 +20,7 @@ import { Trash2, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { DecodeIcon, ReplyToolIcon, ScamToolIcon, ConflictToolIcon, ContractToolIcon, CasesIcon, ArrowLeft, ArrowRight, CameraIcon, SortedMark, F51Mark, BoltIcon, TargetIcon, PinIcon, LockIcon, MailIcon, CouncilIcon, EmployerIcon, LandlordIcon, CourtIcon } from '@/components/family51/SortedIcons';
 
-// ─── PHOTO BUTTON — triggers camera/file picker, uploads, passes file URL ──────
+// ─── PHOTO BUTTON — camera only, uploads image, passes file URL ──────
 function PhotoButton({ onPhotoSelected }) {
   const fileRef = React.useRef(null);
   const [uploading, setUpLoading] = React.useState(false);
@@ -49,7 +49,42 @@ function PhotoButton({ onPhotoSelected }) {
       <input ref={fileRef} type="file" accept="image/*" capture="environment" onChange={handleFileChange} style={{ display: 'none' }} />
       <div onClick={handleClick} style={{ flex: 0, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', color: '#f5a623', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', opacity: uploading ? 0.5 : 1 }}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        {uploading ? 'UPLOADING...' : 'SNAP PHOTO'}
+        {uploading ? '...' : 'SNAP PHOTO'}
+      </div>
+    </>
+  );
+}
+
+// ─── FILE UPLOAD BUTTON — PDF, DOCX, images, any document ──────
+function FileUploadButton({ onFileSelected }) {
+  const fileRef = React.useRef(null);
+  const [uploading, setUpLoading] = React.useState(false);
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    if (fileRef.current) fileRef.current.click();
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUpLoading(true);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      onFileSelected && onFileSelected(file_url);
+    } catch {
+      onFileSelected && onFileSelected(null);
+    }
+    setUpLoading(false);
+    if (fileRef.current) fileRef.current.value = '';
+  };
+
+  return (
+    <>
+      <input ref={fileRef} type="file" accept=".pdf,.docx,.doc,.png,.jpg,.jpeg,.webp,image/*" onChange={handleFileChange} style={{ display: 'none' }} />
+      <div onClick={handleClick} style={{ flex: 0, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(37,99,235,0.3)', background: 'rgba(37,99,235,0.06)', color: '#2563eb', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', opacity: uploading ? 0.5 : 1 }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        {uploading ? '...' : 'UPLOAD FILE'}
       </div>
     </>
   );
@@ -406,16 +441,19 @@ export default function Family51Page() {
               </motion.div>
             </div>
 
-            {/* PHOTO BUTTON ROW — quick snap for decode */}
+            {/* QUICK INPUT ROW — snap photo, upload file, or type */}
             <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 18 }}>
               <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
                 <PhotoButton onPhotoSelected={(fileUrl) => {
                   engineRef.current && engineRef.current.open('letter', { triggerPhoto: true, prefillFileUrl: fileUrl });
                 }} />
-                <div style={{ flex: 1, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.15)', background: '#fff', color: 'rgba(26,18,8,0.55)', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                <FileUploadButton onFileSelected={(fileUrl) => {
+                  engineRef.current && engineRef.current.open('letter', { triggerPhoto: false, prefillFileUrl: fileUrl });
+                }} />
+                <div style={{ flex: 1, padding: '11px 10px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.15)', background: '#fff', color: 'rgba(26,18,8,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
                   onClick={() => engineRef.current && engineRef.current.open('letter')}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8"/><path d="M3 9h18" stroke="currentColor" strokeWidth="1.5"/></svg>
-                  PASTE TEXT INSTEAD
+                  TYPE / PASTE
                 </div>
               </div>
             </motion.div>
