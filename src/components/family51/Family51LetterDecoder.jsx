@@ -47,10 +47,18 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const cameraInputRef = useRef(null);
   const geoRef = useRef(geo);
   const letterTypeRef = useRef(letterType);
+  const resultRef = useRef(null);
 
   // Keep refs in sync so handleFileUpload always has fresh values
   useEffect(() => { geoRef.current = geo; }, [geo]);
   useEffect(() => { letterTypeRef.current = letterType; }, [letterType]);
+
+  // Scroll to result when it appears
+  useEffect(() => {
+    if (result && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [result]);
 
   // Auto-trigger camera when SNAP PHOTO is clicked on home screen
   useEffect(() => {
@@ -520,7 +528,7 @@ Don't worry about formatting. Just get it all in."
       {/* RESULT — streaming reveal */}
       <AnimatePresence>
         {result && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+          <motion.div ref={resultRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
             <SortedStreamingResult
               result={result}
               accentColor={accentColor}

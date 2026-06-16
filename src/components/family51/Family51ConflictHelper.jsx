@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
@@ -52,6 +52,14 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
   const [geo, setGeo]                   = useState(() => detectGeo());
   const [attachments, setAttachments]   = useState([]);
   const [uploading, setUploading]       = useState(false);
+  const resultRef = useRef(null);
+
+  // Scroll to result when it appears
+  useEffect(() => {
+    if (result && !result._error && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [result]);
 
   const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files || []);
@@ -414,7 +422,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       {/* RESULT */}
       <AnimatePresence>
         {result && !result._error && (
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+          <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
             <Card label="SITUATION ASSESSMENT" color={accentColor}>
               <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
@@ -58,6 +58,14 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [copied, setCopied]       = useState(false);
   const [geo, setGeo]             = useState(() => detectGeo());
   const [error, setError] = useState(null);
+  const resultRef = useRef(null);
+
+  // Scroll to result when it appears
+  useEffect(() => {
+    if (result && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [result]);
 
   const generateLetter = async (selectedTone = tone) => {
     const t = TONES.find(x => x.id === selectedTone);
@@ -346,7 +354,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
     <div className="space-y-5">
       <AnimatePresence>
         {result && (
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+          <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
             {/* LOADING STATE */}
             {loading && !result && (
