@@ -392,7 +392,7 @@ export default function Family51Page() {
                 Paste, type, snap a photo or upload a file
               </h1>
               <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
-                We'll tell you what it means and what to do next.
+               We'll decode it into plain English — any language — then tell you exactly what to do.
               </p>
             </motion.div>
 
