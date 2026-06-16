@@ -4,14 +4,20 @@ import { base44 } from '@/api/base44Client';
 import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
 const BUILD_STAGES = [
-  { shape: 'pulse', text: 'cooking up your idea...' },
+  { shape: 'pulse', text: 'warming up the magic machine...' },
   { shape: 'spectrum', text: 'picking the most epic colours...' },
   { shape: 'gear', text: 'building the game engine...' },
-  { shape: 'waveform', text: 'adding BIG sounds...' },
-  { shape: 'sparkle', text: 'loading sparkles and animations...' },
+  { shape: 'waveform', text: 'composing BIG sounds...' },
+  { shape: 'sparkle', text: 'sprinkling particles everywhere...' },
   { shape: 'diamond', text: 'polishing every last pixel...' },
-  { shape: 'burst', text: 'launching in 3... 2... 1...' },
+  { shape: 'burst', text: 'adding secret sauce...' },
+  { shape: 'pulse', text: 'making it extra fun...' },
+  { shape: 'spectrum', text: 'testing the buttons...' },
+  { shape: 'sparkle', text: 'almost there...' },
 ];
+
+// Target build time for progress bar (seconds)
+const TARGET_TIME = 28;
 
 const SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen.
 
@@ -57,11 +63,12 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
 
   const buildApp = async () => {
     let i = 0;
-    // Spread 7 stages evenly across ~25s build — advance once, hold on last, never loop
+    // Cycle through stages cheerfully — never stop at a fake "launching" stage
+    // Speed up slightly toward the end so the last few stages feel like momentum
     const stageInterval = setInterval(() => {
-      i = Math.min(i + 1, BUILD_STAGES.length - 1);
+      i = (i + 1) % BUILD_STAGES.length;
       setStageIndex(i);
-    }, 2000);
+    }, 2800);
 
     // Build timer for fun
     let secs = 0;
@@ -269,42 +276,55 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
             building: <span className="text-violet-300 font-bold">"{idea}"</span>
           </p>
 
-          <motion.p
-            key={Math.floor(buildTime / 3)}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-white/30 text-xs font-mono"
-          >
-            {buildTime < 8 ? `${buildTime}s...`
-              : buildTime < 18 ? `${buildTime}s — taking shape...`
-              : buildTime < 30 ? `${buildTime}s — crafting epic code...`
-              : buildTime < 45 ? `${buildTime}s — nearly there...`
-              : `${buildTime}s — making it PERFECT...`}
-          </motion.p>
+          <p className="text-white/20 text-xs font-mono">
+            {buildTime}s of magic cooking
+          </p>
         </div>
 
-        {/* Stage progress dots */}
-        <div className="flex gap-2">
-          {BUILD_STAGES.map((_, i) => (
+        {/* Real progress bar — fills toward the 28s target */}
+        <div className="w-full max-w-[280px] space-y-1.5">
+          <div className="w-full h-1.5 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }}>
+            <motion.div
+              className="h-full rounded-full"
+              style={{
+                background: 'linear-gradient(90deg, #7c3aed, #db2777, #fbbf24)',
+                width: `${Math.min((buildTime / TARGET_TIME) * 100, 95)}%`,
+              }}
+              transition={{ duration: 0.4 }}
+            />
+          </div>
+          <div className="flex justify-between text-white/20 text-[10px] font-mono">
+            <span>{buildTime}s of magic</span>
+            <span>~{TARGET_TIME}s</span>
+          </div>
+        </div>
+
+        {/* Magic sparkles as progress fills */}
+        <div className="flex gap-2 flex-wrap justify-center">
+        {[...Array(6)].map((_, i) => {
+          const isLit = buildTime > (i * TARGET_TIME / 6);
+          return (
             <motion.div
               key={i}
               className="rounded-full"
               style={{
-                width: i === stageIndex ? 24 : 8,
-                height: 8,
-                background: i < stageIndex ? '#a78bfa' : i === stageIndex ? '#f472b6' : 'rgba(255,255,255,0.1)'
+                width: 6,
+                height: 6,
+                background: isLit ? `hsl(${250 + i * 15}, 80%, ${65 + i * 5}%)` : 'rgba(255,255,255,0.06)',
+                boxShadow: isLit ? `0 0 ${6 + i * 2}px currentColor` : 'none',
               }}
-              animate={{ width: i === stageIndex ? 24 : 8 }}
-              transition={{ duration: 0.3 }}
+              animate={isLit ? { scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] } : {}}
+              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
             />
-          ))}
+          );
+        })}
         </div>
 
         <button
-          onClick={onReset}
-          className="text-white/15 hover:text-white/40 text-sm transition-colors mt-2"
+        onClick={onReset}
+        className="text-white/10 hover:text-white/30 text-xs transition-colors mt-2"
         >
-          cancel
+        cancel
         </button>
       </div>
     );
