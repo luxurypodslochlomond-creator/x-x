@@ -354,7 +354,7 @@ export default function Family51Page() {
             {/* HERO — one line, confident */}
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ marginBottom: 18, textAlign: 'center' }}>
               <h1 style={{ fontSize: 'clamp(22px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 6px', color: '#1a1208' }}>
-                Paste, type, or snap a photo of any letter
+                Paste, type, snap a photo or upload a file
               </h1>
               <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
                 We'll tell you what it means and what to do next.
