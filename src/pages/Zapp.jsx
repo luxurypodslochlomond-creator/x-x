@@ -23,7 +23,7 @@ const Bolt = ({ size = 28 }) => (
 
 export default function Zapp() {
   const [idea, setIdea] = useState('');
-  const [phase, setPhase] = useState('home'); // home | building | gallery | play
+  const [phase, setPhase] = useState('gallery'); // gallery | home | building | play — gallery first, hook them instantly
   const [builderMode, setBuilderMode] = useState(false);
   const [builtHtml, setBuiltHtml] = useState('');
   const [appTitle, setAppTitle] = useState('');
@@ -142,8 +142,17 @@ export default function Zapp() {
               color: phase === 'gallery' ? '#fbbf24' : 'rgba(255,255,255,0.3)',
             }}
           >
-            <ZappGeometricIcon shape="trophy" size={16} color={phase === 'gallery' ? '#fbbf24' : 'rgba(255,255,255,0.3)'} accent="#fde68a" />
-            <span className="hidden sm:inline">Hall of Fame</span>
+            {phase === 'gallery' ? (
+              <>
+                <ZappGeometricIcon shape="zap" size={16} color="#fbbf24" accent="#fde68a" />
+                <span className="hidden sm:inline">build yours</span>
+              </>
+            ) : (
+              <>
+                <ZappGeometricIcon shape="trophy" size={16} color="rgba(255,255,255,0.3)" accent="rgba(255,255,255,0.5)" />
+                <span className="hidden sm:inline">Hall of Fame</span>
+              </>
+            )}
           </motion.button>
 
           {/* Builder mode toggle */}

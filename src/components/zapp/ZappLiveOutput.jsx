@@ -48,8 +48,30 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
   const [shareMsg, setShareMsg] = useState('');
   const [appTitle, setAppTitle] = useState('');
   const [buildTime, setBuildTime] = useState(0);
+  const [sparks, setSparks] = useState([]);
   const hasStarted = useRef(false);
   const timerRef = useRef(null);
+  const sparkIdRef = useRef(0);
+
+  // Interactive bolt tap — creates spark particles
+  const handleBoltTap = () => {
+    if (isDone) return;
+    const id = sparkIdRef.current++;
+    const newSparks = Array.from({ length: 12 }, (_, i) => ({
+      id: `${id}-${i}`,
+      angle: (i / 12) * Math.PI * 2,
+      distance: 30 + Math.random() * 50,
+      color: ['#a78bfa', '#f472b6', '#60a5fa', '#fbbf24'][i % 4],
+      size: 4 + Math.random() * 6,
+      duration: 0.5 + Math.random() * 0.5,
+      delay: Math.random() * 0.1,
+    }));
+    setSparks(prev => [...prev, ...newSparks]);
+    // Clean up old sparks after animation
+    setTimeout(() => {
+      setSparks(prev => prev.filter(s => !s.id.startsWith(`${id}-`)));
+    }, 1500);
+  };
 
   useEffect(() => {
     if (!hasStarted.current) {
@@ -217,7 +239,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
     return (
       <div className="flex flex-col items-center justify-center gap-8 px-6" style={{ height: '100%', minHeight: '60vh' }}>
 
-        {/* Animated bolt */}
+        {/* Interactive bolt — tap for sparks */}
         <div className="relative flex items-center justify-center">
           {[0, 1, 2, 3].map(i => (
             <motion.div
@@ -232,7 +254,38 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
               transition={{ duration: 2, repeat: Infinity, delay: i * 0.3, ease: 'easeInOut' }}
             />
           ))}
-          <motion.div
+
+          {/* Spark particles */}
+          <AnimatePresence>
+            {sparks.map(spark => (
+              <motion.div
+                key={spark.id}
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  width: spark.size,
+                  height: spark.size,
+                  background: spark.color,
+                  boxShadow: `0 0 ${spark.size * 3}px ${spark.color}`,
+                }}
+                initial={{
+                  x: 0, y: 0, opacity: 1, scale: 1,
+                }}
+                animate={{
+                  x: Math.cos(spark.angle) * spark.distance,
+                  y: Math.sin(spark.angle) * spark.distance,
+                  opacity: 0,
+                  scale: 0,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: spark.duration, delay: spark.delay, ease: 'easeOut' }}
+              />
+            ))}
+          </AnimatePresence>
+
+          <motion.button
+            onClick={handleBoltTap}
+            whileTap={{ scale: 0.85 }}
+            className="cursor-pointer relative"
             animate={{
               filter: [
                 'drop-shadow(0 0 15px rgba(167,139,250,1))',
@@ -254,7 +307,17 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
               </defs>
               <polygon points="19,2 8,18 15,18 13,30 24,14 17,14" fill="url(#zg2)" />
             </svg>
-          </motion.div>
+          </motion.button>
+
+          {/* Subtle instruction on first visit */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.4, 0] }}
+            transition={{ duration: 3, delay: 2 }}
+            className="absolute -bottom-7 text-white/30 text-[10px] pointer-events-none"
+          >
+            tap the bolt
+          </motion.p>
         </div>
 
         {/* Stage text */}
