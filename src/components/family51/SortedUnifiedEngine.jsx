@@ -68,12 +68,14 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   const [prefillContext, setPrefillContext] = useState(null);
   const [completedTools, setCompletedTools] = useState([]);
   const [showShare, setShowShare] = useState(false);
+  const [triggerPhoto, setTriggerPhoto] = useState(false);
 
   // Open: set tool → immediately visible
   const handleToolOpen = (toolId, handoffData = null) => {
     setActiveTool(toolId);
     setPrefillContext(handoffData || null);
     setShowShare(false);
+    setTriggerPhoto(handoffData?.triggerPhoto || false);
     setVisible(true);
   };
 
@@ -88,7 +90,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   const handleBack = () => {
     if (navigator.vibrate) navigator.vibrate(8);
     setVisible(false);
-    // Wait for slide-out then clear
+    setTriggerPhoto(false);
     setTimeout(() => {
       setActiveTool(null);
       setPrefillContext(null);
@@ -165,7 +167,13 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           <Family51LetterDecoder
             accentColor={tc.color}
             onResult={() => handleToolComplete('letter')}
-            onHandoff={(data) => handleToolOpen('reply', data)}
+            onHandoff={(data) => {
+              setTriggerPhoto(false);
+              handleToolOpen('reply', data);
+            }}
+            triggerPhoto={triggerPhoto}
+            prefillFileUrl={prefillContext?.prefillFileUrl}
+            onPhotoTriggered={() => setTriggerPhoto(false)}
           />
         )}
         {activeTool === 'reply' && (
@@ -210,9 +218,9 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           )}
         </AnimatePresence>
 
-        </div>
-        </div>
-        );
-        });
+      </div>
+    </div>
+  );
+});
 
-        export default SortedUnifiedEngine;
+export default SortedUnifiedEngine;

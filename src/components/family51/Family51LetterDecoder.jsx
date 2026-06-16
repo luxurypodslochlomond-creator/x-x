@@ -31,7 +31,7 @@ const LOADING_STEPS = [
   { text: 'Almost there…',               sub: 'Plain English coming up' },
 ];
 
-export default function Family51LetterDecoder({ accentColor = '#f97316', onResult, onHandoff }) {
+export default function Family51LetterDecoder({ accentColor = '#f97316', onResult, onHandoff, triggerPhoto, prefillFileUrl, onPhotoTriggered }) {
   const [letterText, setLetterText] = useState('');
   const [letterType, setLetterType] = useState('');
   const [loading, setLoading] = useState(false);
@@ -51,6 +51,26 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   // Keep refs in sync so handleFileUpload always has fresh values
   useEffect(() => { geoRef.current = geo; }, [geo]);
   useEffect(() => { letterTypeRef.current = letterType; }, [letterType]);
+
+  // Auto-trigger camera when SNAP PHOTO is clicked on home screen
+  useEffect(() => {
+    if (triggerPhoto && cameraInputRef.current) {
+      setTimeout(() => {
+        cameraInputRef.current?.click();
+        onPhotoTriggered && onPhotoTriggered();
+      }, 400);
+    }
+  }, [triggerPhoto]);
+
+  // Pre-fill with uploaded file URL from home screen photo button
+  useEffect(() => {
+    if (prefillFileUrl && !uploadedFileUrl) {
+      setUploadedFileUrl(prefillFileUrl);
+      setLetterText('[Photo uploaded — AI will read it directly]');
+      // Auto-decode
+      setTimeout(() => runDecode(prefillFileUrl, null), 300);
+    }
+  }, [prefillFileUrl]);
 
   // Progress through loading steps while waiting
   useEffect(() => {

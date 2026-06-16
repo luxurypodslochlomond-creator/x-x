@@ -19,6 +19,41 @@ import SortedPremiumSuccess from '@/components/family51/SortedPremiumSuccess';
 import { Trash2, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
+// ─── PHOTO BUTTON — triggers camera/file picker, uploads, passes file URL ──────
+function PhotoButton({ onPhotoSelected }) {
+  const fileRef = React.useRef(null);
+  const [uploading, setUpLoading] = React.useState(false);
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    if (fileRef.current) fileRef.current.click();
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUpLoading(true);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      onPhotoSelected && onPhotoSelected(file_url);
+    } catch {
+      onPhotoSelected && onPhotoSelected(null);
+    }
+    setUpLoading(false);
+    if (fileRef.current) fileRef.current.value = '';
+  };
+
+  return (
+    <>
+      <input ref={fileRef} type="file" accept="image/*" capture="environment" onChange={handleFileChange} style={{ display: 'none' }} />
+      <div onClick={handleClick} style={{ flex: 0, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', color: '#f5a623', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', opacity: uploading ? 0.5 : 1 }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        {uploading ? 'UPLOADING...' : 'SNAP PHOTO'}
+      </div>
+    </>
+  );
+}
+
 // ─── FAMILY51 ────────────────────────────────────────────────────────────────
 // Instant. Like pressing play. No reading first. v2
 // ────────────────────────────────────────────────────────────────────────────
@@ -318,47 +353,48 @@ export default function Family51Page() {
             {/* HERO — one line, confident */}
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ marginBottom: 18, textAlign: 'center' }}>
               <h1 style={{ fontSize: 'clamp(22px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 6px', color: '#1a1208' }}>
-                Got a letter or a problem?
+                Paste, type, or snap a photo of any letter
               </h1>
               <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
-                Paste it below. We'll tell you what it means and what to do.
+                We'll tell you what it means and what to do next.
               </p>
             </motion.div>
 
             {/* PRIMARY: decode input — THE thing people need */}
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-              onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('letter'); }}
-              className="tap-feedback"
-              style={{
-                cursor: 'pointer',
-                padding: '18px 20px',
-                borderRadius: 16,
-                border: '2px solid rgba(245,166,35,0.35)',
-                background: 'rgba(245,166,35,0.05)',
-                marginBottom: 20,
-                WebkitTapHighlightColor: 'transparent',
-                touchAction: 'manipulation',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
-                <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <rect x="4" y="2" width="16" height="20" rx="2.5" stroke="#f5a623" strokeWidth="1.8"/>
-                    <path d="M8 7h8M8 11h8M8 15h5" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round"/>
-                  </svg>
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} style={{ marginBottom: 20 }}>
+              <div
+                onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('letter'); }}
+                className="tap-feedback"
+                style={{
+                  cursor: 'pointer',
+                  padding: '18px 20px',
+                  borderRadius: 16,
+                  border: '2px solid rgba(245,166,35,0.35)',
+                  background: 'rgba(245,166,35,0.05)',
+                  marginBottom: 10,
+                  WebkitTapHighlightColor: 'transparent',
+                  touchAction: 'manipulation',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <rect x="4" y="2" width="16" height="20" rx="2.5" stroke="#f5a623" strokeWidth="1.8"/>
+                      <path d="M8 7h8M8 11h8M8 15h5" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <span style={{ fontSize: 15, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>Decode a letter or document</span>
                 </div>
-                <span style={{ fontSize: 15, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>Decode a letter or document</span>
-              </div>
-              <div style={{ padding: '12px 16px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)', fontSize: 13, color: 'rgba(26,18,8,0.4)', lineHeight: 1.5 }}>
-                Paste, type or take a photo — we'll tell you what it means in plain English
-              </div>
-              <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
-                <div style={{ flex: 1, padding: '11px 0', borderRadius: 10, background: '#f5a623', color: '#fff', textAlign: 'center', fontSize: 13, fontWeight: 800, letterSpacing: '0.06em' }}>
-                  START →
+                <div style={{ padding: '12px 16px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)', fontSize: 13, color: 'rgba(26,18,8,0.4)', lineHeight: 1.5 }}>
+                  Paste, type or take a photo — we'll tell you what it means in plain English
                 </div>
-                <div style={{ flex: 0, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', color: '#f5a623', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700 }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                  SNAP PHOTO
+                <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
+                  <div style={{ flex: 1, padding: '11px 0', borderRadius: 10, background: '#f5a623', color: '#fff', textAlign: 'center', fontSize: 13, fontWeight: 800, letterSpacing: '0.06em' }}>
+                    START →
+                  </div>
+                  <PhotoButton onPhotoSelected={(fileUrl) => {
+                    engineRef.current && engineRef.current.open('letter', { triggerPhoto: true, prefillFileUrl: fileUrl });
+                  }} />
                 </div>
               </div>
             </motion.div>
