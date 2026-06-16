@@ -112,6 +112,7 @@ const ZappAboutPage = React.lazy(() => import('./pages/ZappAbout'));
 const ZappTermsPage = React.lazy(() => import('./pages/ZappTerms'));
 const ZappPrivacyPage = React.lazy(() => import('./pages/ZappPrivacy'));
 const FergusHughesProfilePage = React.lazy(() => import('./pages/FergusHughesProfile'));
+const RealityCheckPage = React.lazy(() => import('./pages/RealityCheck'));
 
 
 
@@ -274,6 +275,7 @@ const AuthenticatedApp = () => {
       <Route path="/ZappTerms" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappTermsPage /></Suspense>} />
       <Route path="/ZappPrivacy" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappPrivacyPage /></Suspense>} />
       <Route path="/FergusHughesProfile" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><FergusHughesProfilePage /></Suspense>} />
+      <Route path="/RealityCheck" element={<Suspense fallback={<div style={{background:'#05080f',minHeight:'100vh'}} />}><RealityCheckPage /></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
