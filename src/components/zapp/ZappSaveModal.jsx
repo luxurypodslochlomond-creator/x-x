@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
 const EMOJIS = ['⚡','🎮','🎨','🏆','🌟','🐉','🎵','🔥','🚀','🌈','🦄','🍕','🎪','🤖','🦊','🎯'];
 
@@ -59,11 +60,13 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              className="text-6xl mb-3"
-            >🏆</motion.div>
+              transition={{ type: 'spring', stiffness: 300, damping: 12 }}
+              className="mb-3 flex justify-center"
+            >
+              <ZappGeometricIcon shape="trophy" size={72} color="#fbbf24" accent="#fde68a" />
+            </motion.div>
             <p className="text-white font-black text-xl">saved to the Hall of Fame!</p>
-            <p className="text-white/40 text-sm mt-2 mb-4">share this link with friends so they can play it right now! 🎉</p>
+            <p className="text-white/40 text-sm mt-2 mb-4">share this link with friends so they can play it right now!</p>
             {savedLink && (
               <motion.button
                 initial={{ opacity: 0, y: 6 }}
@@ -76,13 +79,24 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
                   color: copied ? '#4ade80' : '#c4b5fd'
                 }}
               >
-                {copied ? '✅ link copied! send it to your friends!' : '🔗 tap to copy friend link'}
+                {copied ? (
+                  <span className="flex items-center justify-center gap-1.5">
+                    <ZappGeometricIcon shape="check" size={16} color="#4ade80" accent="#86efac" /> link copied! send it to your friends!
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-1.5">
+                    <ZappGeometricIcon shape="link" size={16} color="#c4b5fd" accent="#a78bfa" /> tap to copy friend link
+                  </span>
+                )}
               </motion.button>
             )}
           </div>
         ) : (
           <>
-            <h3 className="text-white font-black text-xl mb-1 text-center">save to Hall of Fame 🏆</h3>
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <ZappGeometricIcon shape="trophy" size={22} color="#fbbf24" accent="#fde68a" />
+              <h3 className="text-white font-black text-xl text-center">save to Hall of Fame</h3>
+            </div>
             <p className="text-white/30 text-sm text-center mb-5">let other kids play your creation!</p>
 
             {/* Emoji picker */}
@@ -133,7 +147,11 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
                 className="flex-1 py-3 rounded-xl font-black text-white text-sm"
                 style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', boxShadow: '0 0 20px rgba(124,58,237,0.4)' }}
               >
-                {saving ? '⏳ saving...' : '🏆 save it!'}
+                {saving ? 'saving...' : (
+                  <span className="flex items-center justify-center gap-1.5">
+                    <ZappGeometricIcon shape="trophy" size={16} color="#fff" accent="#fff" /> save it!
+                  </span>
+                )}
               </motion.button>
             </div>
           </>

@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
 const REMIX_IDEAS = [
-  { emoji: '🎃', label: 'Halloween theme' },
-  { emoji: '🚀', label: 'Make it harder' },
-  { emoji: '👥', label: 'Add multiplayer' },
-  { emoji: '🌈', label: 'More colours' },
-  { emoji: '⏱️', label: 'Add a timer' },
-  { emoji: '🏆', label: 'Add leaderboard' },
-  { emoji: '🔊', label: 'Bigger sounds' },
-  { emoji: '😂', label: 'Make it funny' },
+  { shape: 'halloween', label: 'Halloween theme', color: '#f97316' },
+  { shape: 'rocket', label: 'Make it harder', color: '#ef4444' },
+  { shape: 'people', label: 'Add multiplayer', color: '#8b5cf6' },
+  { shape: 'palette', label: 'More colours', color: '#f472b6' },
+  { shape: 'timer', label: 'Add a timer', color: '#06b6d4' },
+  { shape: 'podium', label: 'Add leaderboard', color: '#fbbf24' },
+  { shape: 'waveform', label: 'Bigger sounds', color: '#34d399' },
+  { shape: 'laugh', label: 'Make it funny', color: '#ec4899' },
 ];
 
 export default function ZappRemixModal({ original, onSubmit, onClose }) {
@@ -41,10 +42,12 @@ export default function ZappRemixModal({ original, onSubmit, onClose }) {
         style={{ background: '#0f0f1a', border: '1px solid rgba(244,114,182,0.3)', boxShadow: '0 0 60px rgba(219,39,119,0.25)' }}
       >
         <div className="text-center mb-5">
-          <p className="text-4xl mb-2">🔀</p>
+          <div className="mb-2 flex justify-center">
+            <ZappGeometricIcon shape="shuffle" size={44} color="#f472b6" accent="#f9a8d4" />
+          </div>
           <h3 className="text-white font-black text-xl">remix this app!</h3>
           <p className="text-white/30 text-sm mt-1">
-            remixing: <span className="text-pink-300">{original.emoji} {original.title}</span>
+            remixing: <span className="text-pink-300">{original.title}</span>
           </p>
         </div>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
 export default function ZappGallery({ onPlay, onRemix }) {
   const [creations, setCreations] = useState([]);
@@ -36,14 +37,14 @@ export default function ZappGallery({ onPlay, onRemix }) {
         {/* Slim bar */}
         <div style={{ height: 48, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', background: 'rgba(10,10,15,0.95)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
-            <span style={{ fontSize: 16, flexShrink: 0 }}>{playing.emoji || '⚡'}</span>
+            <ZappGeometricIcon shape="zap" size={18} color="#a78bfa" accent="#c4b5fd" />
             <span style={{ color: '#fff', fontWeight: 900, fontSize: 12, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 110 }}>{playing.title}</span>
             {playing.creator_name && <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 10, flexShrink: 0 }}>by {playing.creator_name}</span>}
           </div>
           <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
             <button onClick={() => onRemix(playing)}
-              style={{ padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 900, background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6', cursor: 'pointer' }}>
-              🔀 remix
+              style={{ padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 900, background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <ZappGeometricIcon shape="shuffle" size={13} color="#f472b6" accent="#f9a8d4" /> remix
             </button>
             <button onClick={() => setPlaying(null)}
               style={{ padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 900, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)', cursor: 'pointer' }}>
@@ -69,7 +70,10 @@ export default function ZappGallery({ onPlay, onRemix }) {
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-8"
       >
-        <h2 className="font-black text-3xl text-white mb-1">🏆 Hall of Fame</h2>
+        <div className="flex items-center justify-center gap-3 mb-1">
+          <ZappGeometricIcon shape="trophy" size={36} color="#fbbf24" accent="#fde68a" />
+          <h2 className="font-black text-3xl text-white">Hall of Fame</h2>
+        </div>
         <p className="text-white/30 text-sm">apps built by kids, for kids — tap to play!</p>
       </motion.div>
 
@@ -77,9 +81,10 @@ export default function ZappGallery({ onPlay, onRemix }) {
         <div className="flex justify-center items-center py-20">
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
-            className="text-4xl"
-          >⚡</motion.div>
+            transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+          >
+            <ZappGeometricIcon shape="gear" size={48} color="#a78bfa" accent="#c4b5fd" animate={false} />
+          </motion.div>
         </div>
       ) : creations.length === 0 ? (
         <motion.div
@@ -87,7 +92,7 @@ export default function ZappGallery({ onPlay, onRemix }) {
           animate={{ opacity: 1 }}
           className="text-center py-20"
         >
-          <p className="text-5xl mb-4">🌟</p>
+          <div className="mb-4"><ZappGeometricIcon shape="star" size={56} color="#a78bfa" accent="#c4b5fd" /></div>
           <p className="text-white/40 font-black text-lg">no apps yet — be the first!</p>
           <p className="text-white/20 text-sm mt-2">build something amazing and save it to the Hall of Fame</p>
         </motion.div>
@@ -117,9 +122,9 @@ export default function ZappGallery({ onPlay, onRemix }) {
                 />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                   style={{ background: 'rgba(0,0,0,0.5)' }}>
-                  <span className="text-white font-black text-sm px-3 py-1.5 rounded-lg"
+                  <span className="text-white font-black text-sm px-4 py-2 rounded-xl flex items-center gap-1.5"
                     style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}>
-                    ▶ play
+                    <ZappGeometricIcon shape="zap" size={14} color="#fff" accent="#fff" /> play
                   </span>
                 </div>
               </div>
@@ -128,12 +133,14 @@ export default function ZappGallery({ onPlay, onRemix }) {
               <div className="p-3">
                 <div className="flex items-start justify-between gap-1">
                   <div className="min-w-0">
-                    <p className="text-white font-black text-xs truncate">{item.emoji || '⚡'} {item.title}</p>
+                    <p className="text-white font-black text-xs truncate">{item.title}</p>
                     {item.creator_name && (
                       <p className="text-white/30 text-[10px] truncate">by {item.creator_name}</p>
                     )}
                     {item.remix_of && (
-                      <p className="text-pink-400/60 text-[10px]">🔀 remix</p>
+                      <p className="text-pink-400/60 text-[10px] flex items-center gap-1">
+                        <ZappGeometricIcon shape="shuffle" size={10} color="#f472b6" accent="#f9a8d4" /> remix
+                      </p>
                     )}
                   </div>
                   {(item.play_count > 0) && (
@@ -142,10 +149,10 @@ export default function ZappGallery({ onPlay, onRemix }) {
                 </div>
                 <button
                   onClick={() => onRemix(item)}
-                  className="mt-2 w-full py-1 rounded-lg text-[10px] font-black text-pink-400/70 hover:text-pink-400 transition-colors"
+                  className="mt-2 w-full py-1 rounded-lg text-[10px] font-black text-pink-400/70 hover:text-pink-400 transition-colors flex items-center justify-center gap-1"
                   style={{ background: 'rgba(244,114,182,0.06)', border: '1px solid rgba(244,114,182,0.15)' }}
                 >
-                  🔀 remix this
+                  <ZappGeometricIcon shape="shuffle" size={10} color="#f472b6" accent="#f9a8d4" /> remix this
                 </button>
               </div>
             </motion.div>

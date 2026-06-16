@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
 const BUILD_STAGES = [
-  { emoji: '💡', text: 'cooking up your idea...' },
-  { emoji: '🎨', text: 'picking the most epic colours...' },
-  { emoji: '⚙️', text: 'building the game engine...' },
-  { emoji: '🔊', text: 'adding BIG sounds...' },
-  { emoji: '✨', text: 'loading sparkles and animations...' },
-  { emoji: '🏆', text: 'polishing every last pixel...' },
-  { emoji: '⚡', text: 'launching in 3... 2... 1...' },
+  { shape: 'pulse', text: 'cooking up your idea...' },
+  { shape: 'spectrum', text: 'picking the most epic colours...' },
+  { shape: 'gear', text: 'building the game engine...' },
+  { shape: 'waveform', text: 'adding BIG sounds...' },
+  { shape: 'sparkle', text: 'loading sparkles and animations...' },
+  { shape: 'diamond', text: 'polishing every last pixel...' },
+  { shape: 'burst', text: 'launching in 3... 2... 1...' },
 ];
 
 const SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen.
@@ -170,10 +171,11 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
     return (
       <div className="flex flex-col items-center justify-center gap-6 px-6" style={{ height: '100%', minHeight: '60vh' }}>
         <motion.div
-          animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
+          animate={{ rotate: [0, -8, 8, -8, 8, 0] }}
           transition={{ duration: 0.5 }}
-          className="text-6xl"
-        >😬</motion.div>
+        >
+          <ZappGeometricIcon shape="alert" size={80} color="#f59e0b" accent="#fbbf24" />
+        </motion.div>
         <div className="text-center">
           <p className="text-white font-black text-2xl mb-2">Oops! Something went wrong</p>
           <p className="text-white/50 text-base">{error}</p>
@@ -253,9 +255,9 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
               initial={{ opacity: 0, y: 12, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.95 }}
-              className="flex items-center justify-center gap-3"
+              className="flex items-center justify-center gap-4"
             >
-              <span className="text-3xl">{stage.emoji}</span>
+              <ZappGeometricIcon shape={stage.shape} size={40} color="#a78bfa" accent="#f472b6" animate={true} />
               <span className="text-white font-black text-xl">{stage.text}</span>
             </motion.div>
           </AnimatePresence>
@@ -270,11 +272,11 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
             animate={{ opacity: 1, y: 0 }}
             className="text-white/30 text-xs font-mono"
           >
-            {buildTime < 8 ? `⚡ ${buildTime}s`
-              : buildTime < 18 ? `🔥 ${buildTime}s — it's taking shape!`
-              : buildTime < 30 ? `🚀 ${buildTime}s — crafting epic code...`
-              : buildTime < 45 ? `💥 ${buildTime}s — nearly there!`
-              : `🏆 ${buildTime}s — making it PERFECT...`}
+            {buildTime < 8 ? `${buildTime}s...`
+              : buildTime < 18 ? `${buildTime}s — taking shape...`
+              : buildTime < 30 ? `${buildTime}s — crafting epic code...`
+              : buildTime < 45 ? `${buildTime}s — nearly there...`
+              : `${buildTime}s — making it PERFECT...`}
           </motion.p>
         </div>
 
@@ -317,7 +319,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
         className="flex items-center gap-2 px-3 py-2 flex-shrink-0 overflow-x-auto"
         style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)', scrollbarWidth: 'none' }}
       >
-        <span className="text-green-400 text-base flex-shrink-0">✅</span>
+        <ZappGeometricIcon shape="check" size={20} color="#34d399" accent="#6ee7b7" />
         <span className="text-white/70 text-xs font-black truncate flex-shrink-0 max-w-[100px] sm:max-w-xs">
           {appTitle || idea}
         </span>
@@ -325,31 +327,34 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
 
           {onSave && (
             <motion.button onClick={onSave} whileTap={{ scale: 0.95 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5"
               style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24' }}>
-              🏆 save
+              <ZappGeometricIcon shape="trophy" size={14} color="#fbbf24" accent="#fde68a" />
+              save
             </motion.button>
           )}
           {onRemix && (
             <motion.button onClick={onRemix} whileTap={{ scale: 0.95 }}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5"
               style={{ background: 'rgba(244,114,182,0.12)', border: '1px solid rgba(244,114,182,0.3)', color: '#f472b6' }}>
-              🔀 remix
+              <ZappGeometricIcon shape="shuffle" size={14} color="#f472b6" accent="#f9a8d4" />
+              remix
             </motion.button>
           )}
           <motion.button onClick={handleShare} whileTap={{ scale: 0.95 }}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold"
+            className="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5"
             style={{
               background: shareMsg ? 'rgba(34,197,94,0.15)' : 'rgba(167,139,250,0.12)',
               border: shareMsg ? '1px solid rgba(34,197,94,0.4)' : '1px solid rgba(167,139,250,0.3)',
               color: shareMsg ? '#4ade80' : '#c4b5fd',
             }}>
-            {shareMsg || '🔗'}
+            {shareMsg ? shareMsg : <><ZappGeometricIcon shape="link" size={14} color="#c4b5fd" accent="#a78bfa" /></>}
           </motion.button>
           <motion.button onClick={onReset} whileTap={{ scale: 0.95 }}
-            className="px-3 py-1.5 rounded-lg text-xs font-black text-white"
+            className="px-3 py-1.5 rounded-lg text-xs font-black text-white flex items-center gap-1.5"
             style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}>
-            ⚡ new
+            <ZappGeometricIcon shape="zap" size={14} color="#fff" accent="#fff" />
+            new
           </motion.button>
         </div>
       </motion.div>

@@ -5,6 +5,7 @@ import ZappLiveOutput from '@/components/zapp/ZappLiveOutput';
 import ZappGallery from '@/components/zapp/ZappGallery';
 import ZappSaveModal from '@/components/zapp/ZappSaveModal';
 import ZappRemixModal from '@/components/zapp/ZappRemixModal';
+import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Bolt = ({ size = 28 }) => (
@@ -141,7 +142,8 @@ export default function Zapp() {
               color: phase === 'gallery' ? '#fbbf24' : 'rgba(255,255,255,0.3)',
             }}
           >
-            🏆 <span className="hidden sm:inline">Hall of Fame</span>
+            <ZappGeometricIcon shape="trophy" size={16} color={phase === 'gallery' ? '#fbbf24' : 'rgba(255,255,255,0.3)'} accent="#fde68a" />
+            <span className="hidden sm:inline">Hall of Fame</span>
           </motion.button>
 
           {/* Builder mode toggle */}
@@ -181,15 +183,19 @@ export default function Zapp() {
                   <motion.button
                     onClick={() => { setShowRemix(directPlay); }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-3 py-1.5 rounded-lg text-xs font-black"
+                    className="px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5"
                     style={{ background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6' }}
-                  >🔀 remix</motion.button>
+                  >
+                    <ZappGeometricIcon shape="shuffle" size={14} color="#f472b6" accent="#f9a8d4" /> remix
+                  </motion.button>
                   <motion.button
                     onClick={handleReset}
                     whileTap={{ scale: 0.95 }}
-                    className="px-4 py-1.5 rounded-lg text-xs font-black text-white"
+                    className="px-4 py-1.5 rounded-lg text-xs font-black text-white flex items-center gap-1.5"
                     style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}
-                  >build new ⚡</motion.button>
+                  >
+                    <ZappGeometricIcon shape="zap" size={14} color="#fff" accent="#fff" /> build new
+                  </motion.button>
                 </div>
               </div>
               <iframe srcDoc={directPlay.html} className="flex-1 w-full border-0" title={directPlay.title} sandbox="allow-scripts allow-same-origin" />
