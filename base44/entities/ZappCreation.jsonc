@@ -17,7 +17,7 @@
     },
     "emoji": {
       "type": "string",
-      "description": "Emoji representing the app"
+      "description": "Geometric icon shape name representing the app (e.g. 'zap', 'trophy', 'star')"
     },
     "creator_name": {
       "type": "string",

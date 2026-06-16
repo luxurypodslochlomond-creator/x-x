@@ -92,9 +92,31 @@ export default function ZappGallery({ onPlay, onRemix }) {
           animate={{ opacity: 1 }}
           className="text-center py-20"
         >
-          <div className="mb-4"><ZappGeometricIcon shape="star" size={56} color="#a78bfa" accent="#c4b5fd" /></div>
-          <p className="text-white/40 font-black text-lg">no apps yet — be the first!</p>
-          <p className="text-white/20 text-sm mt-2">build something amazing and save it to the Hall of Fame</p>
+          <motion.div
+            className="mb-6 flex justify-center"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <div className="relative">
+              <ZappGeometricIcon shape="star" size={72} color="#a78bfa" accent="#c4b5fd" />
+              <motion.div
+                className="absolute inset-0"
+                animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0, 0.4] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ZappGeometricIcon shape="star" size={72} color="#fbbf24" accent="#fde68a" />
+              </motion.div>
+            </div>
+          </motion.div>
+          <p className="text-white/50 font-black text-2xl mb-2">the hall is empty</p>
+          <p className="text-white/20 text-base max-w-xs mx-auto leading-relaxed">
+            build an app, save it here, and let other kids play it. your creation could be the first!
+          </p>
+          <div className="mt-8 flex items-center justify-center gap-3 text-white/10">
+            <span className="w-2 h-2 rounded-full bg-violet-500/30" />
+            <span className="w-2 h-2 rounded-full bg-pink-500/30" />
+            <span className="w-2 h-2 rounded-full bg-cyan-500/30" />
+          </div>
         </motion.div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -131,8 +153,11 @@ export default function ZappGallery({ onPlay, onRemix }) {
 
               {/* Info */}
               <div className="p-3">
-                <div className="flex items-start justify-between gap-1">
-                  <div className="min-w-0">
+                <div className="flex items-start gap-2">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <ZappGeometricIcon shape={item.emoji || 'zap'} size={18} color="#a78bfa" accent="#c4b5fd" />
+                  </div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-white font-black text-xs truncate">{item.title}</p>
                     {item.creator_name && (
                       <p className="text-white/30 text-[10px] truncate">by {item.creator_name}</p>

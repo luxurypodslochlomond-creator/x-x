@@ -314,6 +314,41 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
   return (
     <div className="flex flex-col" style={{ height: '100%' }}>
 
+      {/* Celebrate banner — appears briefly after build, nudges to save */}
+      <AnimatePresence>
+        {onSave && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
+            className="flex-shrink-0 overflow-hidden"
+            style={{ borderBottom: '1px solid rgba(251,191,36,0.15)' }}
+          >
+            <motion.button
+              onClick={onSave}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.97 }}
+              className="w-full flex items-center justify-center gap-3 py-3 text-sm font-black"
+              style={{
+                background: 'linear-gradient(90deg, rgba(251,191,36,0.1), rgba(251,191,36,0.2), rgba(251,191,36,0.1))',
+                color: '#fbbf24',
+              }}
+              animate={{ background: [
+                'linear-gradient(90deg, rgba(251,191,36,0.1), rgba(251,191,36,0.2), rgba(251,191,36,0.1))',
+                'linear-gradient(90deg, rgba(251,191,36,0.15), rgba(251,191,36,0.3), rgba(251,191,36,0.15))',
+                'linear-gradient(90deg, rgba(251,191,36,0.1), rgba(251,191,36,0.2), rgba(251,191,36,0.1))'
+              ] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <ZappGeometricIcon shape="trophy" size={22} color="#fbbf24" accent="#fde68a" />
+              save to the hall of fame
+              <ZappGeometricIcon shape="star" size={16} color="#fbbf24" accent="#fde68a" />
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Top action bar — scrollable on mobile */}
       <motion.div
         initial={{ opacity: 0, y: -8 }}
