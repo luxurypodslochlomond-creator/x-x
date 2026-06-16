@@ -17,7 +17,10 @@ const BUILD_STAGES = [
 ];
 
 // Target build time for progress bar (seconds)
-const TARGET_TIME = 28;
+const TARGET_TIME = 32;
+
+// How long each stage shows before advancing (ms)
+const STAGE_DURATION = 3200;
 
 const SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen.
 
@@ -51,7 +54,9 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
   const [sparks, setSparks] = useState([]);
   const hasStarted = useRef(false);
   const timerRef = useRef(null);
+  const stageRef = useRef(null);
   const sparkIdRef = useRef(0);
+  const mountedRef = useRef(true);
 
   // Interactive bolt tap — creates spark particles
   const handleBoltTap = () => {
@@ -79,18 +84,21 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
       buildApp();
     }
     return () => {
+      mountedRef.current = false;
       if (timerRef.current) clearInterval(timerRef.current);
+      if (stageRef.current) clearInterval(stageRef.current);
     };
   }, []);
 
   const buildApp = async () => {
     let i = 0;
-    // Cycle through stages cheerfully — never stop at a fake "launching" stage
-    // Speed up slightly toward the end so the last few stages feel like momentum
-    const stageInterval = setInterval(() => {
-      i = (i + 1) % BUILD_STAGES.length;
+    // Progress through stages once, then hold on the final stage
+    // Never loop back — looping looks like a reset to kids
+    stageRef.current = setInterval(() => {
+      if (!mountedRef.current) return;
+      i = Math.min(i + 1, BUILD_STAGES.length - 1);
       setStageIndex(i);
-    }, 2800);
+    }, STAGE_DURATION);
 
     // Build timer for fun
     let secs = 0;
@@ -125,14 +133,14 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
         }
       });
 
-      // Timeout after 20 seconds
+      // Timeout at 42s — enough for complex builds like card games
       const timeout = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Took too long — tap try again!')), 35000);
+        setTimeout(() => reject(new Error('Took too long — tap try again!')), 42000);
       });
 
       const result = await Promise.race([llmPromise, timeout]);
 
-      clearInterval(stageInterval);
+      clearInterval(stageRef.current);
       clearInterval(timerRef.current);
 
       let html = '';
@@ -163,7 +171,7 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
       if (onComplete) onComplete(html, title);
 
     } catch (err) {
-      clearInterval(stageInterval);
+      clearInterval(stageRef.current);
       clearInterval(timerRef.current);
       console.error('ZAPP build error:', err);
       setError(err?.message || 'Something went wrong — tap to try again!');
