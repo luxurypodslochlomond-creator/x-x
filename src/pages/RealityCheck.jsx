@@ -320,7 +320,7 @@ export default function RealityCheckPage() {
             transition={{ delay: 0.5, duration: 0.7 }}
             className="text-[3.25rem] font-light text-white mb-4 tracking-tight leading-none"
           >
-            Ground Zero
+            Safe Harbour
           </motion.h1>
 
           {/* Subtitle */}
