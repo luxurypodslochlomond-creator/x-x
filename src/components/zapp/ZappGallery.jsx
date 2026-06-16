@@ -71,7 +71,7 @@ export default function ZappGallery({ onPlay, onRemix }) {
         className="text-center mb-8"
       >
         <div className="flex items-center justify-center gap-3 mb-1">
-          <ZappGeometricIcon shape="trophy" size={36} color="#fbbf24" accent="#fde68a" />
+          <ZappGeometricIcon shape="zap" size={36} color="#fbbf24" accent="#fde68a" />
           <h2 className="font-black text-3xl text-white">Hall of Fame</h2>
         </div>
         <p className="text-white/30 text-sm">apps built by kids, for kids — tap to play!</p>

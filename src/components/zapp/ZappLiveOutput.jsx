@@ -4,16 +4,16 @@ import { base44 } from '@/api/base44Client';
 import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
 const BUILD_STAGES = [
-  { shape: 'pulse', text: 'warming up the magic machine...' },
-  { shape: 'spectrum', text: 'picking the most epic colours...' },
-  { shape: 'gear', text: 'building the game engine...' },
-  { shape: 'waveform', text: 'composing BIG sounds...' },
-  { shape: 'sparkle', text: 'sprinkling particles everywhere...' },
-  { shape: 'diamond', text: 'polishing every last pixel...' },
-  { shape: 'burst', text: 'adding secret sauce...' },
-  { shape: 'pulse', text: 'making it extra fun...' },
-  { shape: 'spectrum', text: 'testing the buttons...' },
-  { shape: 'sparkle', text: 'almost there...' },
+  { shape: 'pulse', text: 'warming up the AI engine...' },
+  { shape: 'spectrum', text: 'designing the layout...' },
+  { shape: 'gear', text: 'coding the game logic...' },
+  { shape: 'waveform', text: 'composing sound effects...' },
+  { shape: 'sparkle', text: 'adding colourful sparkles...' },
+  { shape: 'diamond', text: 'polishing the visuals...' },
+  { shape: 'burst', text: 'hooking up all the buttons...' },
+  { shape: 'pulse', text: 'checking everything works...' },
+  { shape: 'spectrum', text: 'final touches...' },
+  { shape: 'sparkle', text: 'almost ready...' },
 ];
 
 // Target build time for progress bar (seconds)
