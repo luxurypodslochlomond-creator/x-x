@@ -47,7 +47,7 @@ function PhotoButton({ onPhotoSelected }) {
   return (
     <>
       <input ref={fileRef} type="file" accept="image/*" capture="environment" onChange={handleFileChange} style={{ display: 'none' }} />
-      <div onClick={handleClick} style={{ flex: 0, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', color: '#f5a623', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', opacity: uploading ? 0.5 : 1 }}>
+      <div onClick={handleClick} style={{ width: '100%', padding: '11px 8px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', color: '#f5a623', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer', opacity: uploading ? 0.5 : 1, textAlign: 'center' }}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
         {uploading ? '...' : 'SNAP PHOTO'}
       </div>
@@ -82,7 +82,7 @@ function FileUploadButton({ onFileSelected }) {
   return (
     <>
       <input ref={fileRef} type="file" accept=".pdf,.docx,.doc,.png,.jpg,.jpeg,.webp,image/*" onChange={handleFileChange} style={{ display: 'none' }} />
-      <div onClick={handleClick} style={{ flex: 0, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(37,99,235,0.3)', background: 'rgba(37,99,235,0.06)', color: '#2563eb', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', opacity: uploading ? 0.5 : 1 }}>
+      <div onClick={handleClick} style={{ width: '100%', padding: '11px 8px', borderRadius: 10, border: '1px solid rgba(37,99,235,0.3)', background: 'rgba(37,99,235,0.06)', color: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer', opacity: uploading ? 0.5 : 1, textAlign: 'center' }}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         {uploading ? '...' : 'UPLOAD FILE'}
       </div>
@@ -387,8 +387,8 @@ export default function Family51Page() {
             </AnimatePresence>
 
             {/* HERO — one line, confident */}
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ marginBottom: 18, textAlign: 'center' }}>
-              <h1 style={{ fontSize: 'clamp(22px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 6px', color: '#1a1208' }}>
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ marginBottom: 16, textAlign: 'center' }}>
+              <h1 style={{ fontSize: 'clamp(22px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 5px', color: '#1a1208' }}>
                 Paste, type, snap a photo or upload a file
               </h1>
               <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
@@ -397,7 +397,7 @@ export default function Family51Page() {
             </motion.div>
 
             {/* PRIMARY TOOLS — the core flow: decode → reply */}
-            <div style={{ marginBottom: 18, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+            <div style={{ marginBottom: 14, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               {/* DECODE */}
               <motion.div
                 initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
@@ -441,16 +441,16 @@ export default function Family51Page() {
               </motion.div>
             </div>
 
-            {/* QUICK INPUT ROW — snap photo, upload file, or type */}
-            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 18 }}>
-              <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+            {/* QUICK INPUT ROW — 3 equal columns */}
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 14 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
                 <PhotoButton onPhotoSelected={(fileUrl) => {
                   engineRef.current && engineRef.current.open('letter', { triggerPhoto: true, prefillFileUrl: fileUrl });
                 }} />
                 <FileUploadButton onFileSelected={(fileUrl) => {
                   engineRef.current && engineRef.current.open('letter', { triggerPhoto: false, prefillFileUrl: fileUrl });
                 }} />
-                <div style={{ flex: 1, padding: '11px 10px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.15)', background: '#fff', color: 'rgba(26,18,8,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                <div style={{ padding: '11px 6px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.15)', background: '#fff', color: 'rgba(26,18,8,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer', textAlign: 'center' }}
                   onClick={() => engineRef.current && engineRef.current.open('letter')}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8"/><path d="M3 9h18" stroke="currentColor" strokeWidth="1.5"/></svg>
                   TYPE / PASTE
@@ -459,8 +459,8 @@ export default function Family51Page() {
             </motion.div>
 
             {/* SECONDARY: other tools */}
-            <div style={{ marginBottom: 14 }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 10px', textAlign: 'center' }}>SOMETHING ELSE?</p>
+            <div style={{ marginBottom: 12 }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.33)', margin: '0 0 8px', textAlign: 'center' }}>SOMETHING ELSE?</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
                 {[
                   { id: 'scam', label: 'Check a scam', color: '#ef4444', icon: <ScamToolIcon color="#ef4444" size={14} /> },
@@ -487,20 +487,20 @@ export default function Family51Page() {
               </div>
             </div>
 
-            {/* LOCATION + PRIVACY — tiny trust row */}
-            <div style={{ marginBottom: 14, display: 'flex', gap: 8 }}>
+            {/* LOCATION + PRIVACY — tight trust row */}
+            <div style={{ marginBottom: 10, display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 8 }}>
               {/* Location badge */}
-              <button onClick={() => setShowLocationPicker(true)} style={{ flex: 0, padding: '7px 12px', borderRadius: 8, background: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.2)', display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 10, color: 'rgba(26,18,8,0.5)', fontWeight: 600, letterSpacing: '0.02em' }}>
+              <button onClick={() => setShowLocationPicker(true)} style={{ padding: '6px 10px', borderRadius: 8, background: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.2)', display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 10, color: 'rgba(26,18,8,0.5)', fontWeight: 600, letterSpacing: '0.02em' }}>
                 <PinIcon color="#f5a623" size={10} />
                 {selectedLocation?.jurisdiction?.split('·')[0]?.trim() || 'UK law'}
               </button>
               {/* Privacy */}
-              <div style={{ flex: 1, padding: '7px 10px', borderRadius: 8, background: 'rgba(245,166,35,0.04)', border: '1px solid rgba(245,166,35,0.12)', display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
+              <div style={{ padding: '6px 10px', borderRadius: 8, background: 'rgba(245,166,35,0.04)', border: '1px solid rgba(245,166,35,0.12)', display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
                 <LockIcon color="rgba(26,18,8,0.3)" size={10} />
                 <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', letterSpacing: '0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Nothing stored. No account. No trace.</span>
               </div>
             </div>
-            <div style={{ marginBottom: 20, textAlign: 'center' }}>
+            <div style={{ marginBottom: 16, textAlign: 'center' }}>
               <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.03em' }}>{geoPrice.inline} when you're ready for unlimited.</span>
             </div>
 
