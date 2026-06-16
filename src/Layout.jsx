@@ -434,6 +434,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "AI51 — What it is", url: createPageUrl("AI51Soul"), icon: Heart, highlight: true, description: "Honest. Private. Yours." },
       { title: "Frequency Chamber", url: createPageUrl("FrequencyChamber"), icon: COOLASFUCKWaves, highlight: true, description: "FREE healing frequencies" },
       { title: "Shed51", url: createPageUrl("Shed51"), icon: Waves, highlight: true, description: "Connection frequencies for two · free" },
+      { title: "Ground Zero", url: "/RealityCheck", icon: Heart, highlight: true, description: "Reality check · breathing · reset" },
       { title: "Chakra51 Pain Relief", url: createPageUrl("Chakra51"), icon: Zap, highlight: true, description: "Target pain — back, neck, joints" },
       { title: "Age Reversal Protocol", url: createPageUrl("AgeReversal"), icon: Dna, highlight: true, description: "Turn back the clock — works offline" },
       { title: "Wrist Healing Protocol", url: createPageUrl("WristHealingProtocol"), icon: CustomSaxIcon, highlight: true, description: "Bone & musician recovery" },
