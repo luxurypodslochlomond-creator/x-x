@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, MapPin, Menu, X, ChevronDown, ChevronRight, Trash2, Eye, Monitor, Phone, Award, Share2, Star, Users, Globe } from 'lucide-react';
@@ -158,6 +159,13 @@ export default function Family51Page() {
 
         {/* SORTED FOR LIFE CARD */}
         <SortedForLifeCard geoPrice={geoPrice} onSuccess={() => setShowSuccess(true)} />
+
+        {/* FOOTER LINKS */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 12, paddingBottom: 16 }}>
+          <Link to="/SortedFAQ" style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textDecoration: 'none' }}>FAQ</Link>
+          <Link to="/SortedTerms" style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textDecoration: 'none' }}>Terms</Link>
+          <Link to="/SortedPrivacy" style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textDecoration: 'none' }}>Privacy</Link>
+        </div>
       </div>
 
       {/* TOOL ENGINE */}

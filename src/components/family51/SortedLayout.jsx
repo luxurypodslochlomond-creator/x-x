@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Eye, Scale, Mail, Trash2 } from 'lucide-react';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 
 function SortedMark() {
@@ -14,18 +13,9 @@ function SortedMark() {
   );
 }
 
-const menuItems = [
-  { label: 'SORTED — Home',     path: '/Sorted', icon: <Mail className="w-3.5 h-3.5" /> },
-  { label: 'FAQ & How It Works',path: '/SortedFAQ', icon: <Mail className="w-3.5 h-3.5" /> },
-  { label: 'Terms',             path: '/SortedTerms',   icon: <Scale className="w-3.5 h-3.5" /> },
-  { label: 'Privacy',           path: '/SortedPrivacy', icon: <Eye   className="w-3.5 h-3.5" /> },
-  { label: 'Contact',           path: 'mailto:family@uf51.love', icon: <Mail className="w-3.5 h-3.5" />, isEmail: true },
-];
-
 export default function SortedLayout({ children, currentPage }) {
-  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const { remaining, isLocked, isPaid } = useSortedUsage();
+  const { remaining, isPaid } = useSortedUsage();
   const [caseCount, setCaseCount] = useState(0);
 
   const refreshCaseCount = () => {
@@ -47,32 +37,9 @@ export default function SortedLayout({ children, currentPage }) {
     };
   }, [location.pathname]);
 
-  // Close menu on route change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
-
-  const handleNavClick = () => {
-    setMenuOpen(false);
-  };
-
   return (
     <div style={{ minHeight: '100vh', background: '#faf8f5', color: '#1a1208', position: 'relative' }}>
-      <style>{`
-        .sorted-menu-enter {
-          animation: menuSlideIn 0.12s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes menuSlideIn {
-          from { opacity: 0; transform: translateY(-8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .menu-item {
-          transition: padding-left 0.12s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .menu-item:hover {
-          padding-left: 6px !important;
-        }
-      `}</style>
+
 
       {/* Header */}
       <header style={{
@@ -85,7 +52,6 @@ export default function SortedLayout({ children, currentPage }) {
       }}>
         <Link
           to="/Sorted"
-          onClick={() => handleNavClick('/Sorted')}
           style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit' }}
         >
           <SortedMark />
@@ -100,7 +66,6 @@ export default function SortedLayout({ children, currentPage }) {
         {/* FREE USES COUNTER — tappable, links to upgrade */}
         <Link
           to="/Sorted?upgrade=1"
-          onClick={() => setMenuOpen(false)}
           style={{
             display: 'flex', alignItems: 'center', gap: 5, textDecoration: 'none',
             background: isPaid ? 'rgba(5,150,105,0.08)' : 'rgba(245,166,35,0.1)',
@@ -129,7 +94,7 @@ export default function SortedLayout({ children, currentPage }) {
         {/* CASES BRIEFCASE — taps to /Sorted?cases=1 */}
         <Link
           to="/Sorted?cases=1"
-          onClick={() => { setMenuOpen(false); if ('vibrate' in navigator) navigator.vibrate(8); }}
+          onClick={() => { if ('vibrate' in navigator) navigator.vibrate(8); }}
           style={{
             display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer',
             background: caseCount > 0 ? 'rgba(245,166,35,0.08)' : 'rgba(245,166,35,0.02)',
@@ -150,114 +115,7 @@ export default function SortedLayout({ children, currentPage }) {
           <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', fontFamily: 'monospace', letterSpacing: '0.04em' }}>{caseCount}</span>
         </Link>
 
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            background: menuOpen ? 'rgba(245,166,35,0.12)' : 'rgba(245,166,35,0.04)',
-            border: `1.5px solid ${menuOpen ? 'rgba(245,166,35,0.6)' : 'rgba(245,166,35,0.25)'}`,
-            borderRadius: 10, cursor: 'pointer', padding: '7px 10px',
-            color: '#f5a623', display: 'flex', alignItems: 'center', gap: 7,
-            WebkitTapHighlightColor: 'transparent',
-          }}
-        >
-          {menuOpen ? <X className="w-4 h-4" /> : (
-            <>
-              <Menu className="w-4 h-4" />
-              <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.16em', fontFamily: 'monospace' }}>MENU</span>
-            </>
-          )}
-        </button>
       </header>
-
-      {/* Menu Overlay */}
-      {menuOpen && (
-        <div className="sorted-menu-enter" style={{
-          position: 'fixed', top: 54, left: 0, right: 0, zIndex: 49,
-          background: 'rgba(250,248,245,0.99)',
-          backdropFilter: 'blur(24px)',
-          borderBottom: '1.5px solid rgba(245,166,35,0.2)',
-          padding: '0 20px',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
-        }}>
-          <div style={{
-            padding: '10px 0 8px',
-            borderBottom: '1px solid rgba(245,166,35,0.15)',
-            fontFamily: 'monospace', fontSize: 9, letterSpacing: '0.2em',
-            color: 'rgba(26,18,8,0.4)',
-          }}>
-            NAVIGATION
-          </div>
-
-          <div style={{ maxWidth: 520, margin: '0 auto' }}>
-            {menuItems.map((item, idx) => (
-              item.isEmail ? (
-                <a
-                  key={idx}
-                  href={item.path}
-                  onClick={() => handleNavClick()}
-                  className="menu-item"
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 12,
-                    padding: '12px 0',
-                    borderBottom: '1px solid rgba(245,166,35,0.15)',
-                    textDecoration: 'none', color: '#1a1208',
-                  }}
-                >
-                  <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.4)', minWidth: 24 }}>
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  {item.icon && <span style={{ color: 'rgba(26,18,8,0.4)' }}>{item.icon}</span>}
-                  <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
-                  <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
-                </a>
-              ) : (
-                <Link
-                  key={idx}
-                  to={item.path}
-                  onClick={handleNavClick}
-                  className="menu-item"
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 12,
-                    padding: '12px 0',
-                    borderBottom: '1px solid rgba(245,166,35,0.15)',
-                    textDecoration: 'none', color: '#1a1208',
-                  }}
-                >
-                  <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(245,166,35,0.4)', minWidth: 24 }}>
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  {item.icon && <span style={{ color: 'rgba(245,166,35,0.4)' }}>{item.icon}</span>}
-                  <span style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', letterSpacing: '0.03em' }}>{item.label}</span>
-                  <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 9, color: 'rgba(245,166,35,0.25)' }}>→</span>
-                </Link>
-              )
-            ))}
-
-            <button
-              onClick={() => {
-                try { localStorage.clear(); } catch {}
-                setMenuOpen(false);
-                window.location.reload();
-              }}
-              className="menu-item"
-              style={{
-                display: 'flex', alignItems: 'center', gap: 12,
-                padding: '12px 0 14px',
-                fontSize: 13, fontWeight: 700,
-                color: 'rgba(26,18,8,0.35)',
-                background: 'none', border: 'none', cursor: 'pointer',
-                width: '100%', textAlign: 'left', letterSpacing: '0.03em',
-              }}
-            >
-              <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(26,18,8,0.2)', minWidth: 24 }}>
-                {String(menuItems.length + 1).padStart(2, '0')}
-              </span>
-              <Trash2 className="w-3.5 h-3.5" />
-              Clear all my data
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Content */}
       <main style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
