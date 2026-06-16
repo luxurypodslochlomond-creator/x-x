@@ -304,9 +304,9 @@ export default function Family51Page() {
           </motion.div>
          )}
 
-         {/* ── HOME: PREMIUM, FAST, CONFIDENT ─────────────────── */}
+         {/* ── HOME: ONE CLEAR ACTION ─────────────────── */}
          {!isLocked && !showWhy && !showFAQ && !showHistory && (
-          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '24px 20px 80px' }}>
+          <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} style={{ maxWidth: 520, margin: '0 auto', padding: '20px 20px 80px' }}>
 
             {/* STRIPE SUCCESS — premium celebration */}
             <AnimatePresence>
@@ -315,164 +315,93 @@ export default function Family51Page() {
               )}
             </AnimatePresence>
 
-            {/* HERO — clear + compact */}
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#f5a623', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 5, opacity: 0.95 }}>Letters · Dodgy Traders · Housing · Debt · Disputes · Scams</div>
-              <h1 style={{ fontSize: 'clamp(26px, 7.5vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0, color: '#1a1208' }}>
-                Got a problem with a company, landlord, or letter?
+            {/* HERO — one line, confident */}
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ marginBottom: 18, textAlign: 'center' }}>
+              <h1 style={{ fontSize: 'clamp(22px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 6px', color: '#1a1208' }}>
+                Got a letter or a problem?
               </h1>
-              <div style={{ marginTop: 8 }}>
-                <span style={{ fontSize: 'clamp(24px, 7vw, 34px)', fontWeight: 900, color: '#f5a623', letterSpacing: '-0.03em' }}>We'll help you sort it.</span>
-              </div>
-              <p style={{ fontSize: 16, fontWeight: 500, color: 'rgba(26,18,8,0.45)', margin: '8px 0 0' }}>Right now. Plain English. No account needed.</p>
-            </motion.div>
-
-            {/* PRIVACY TRUST — stronger, covers contracts + photos + PDFs */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.06 }} style={{ marginBottom: 14, padding: '10px 14px', background: 'rgba(245,166,35,0.07)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
-                  <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
-                  <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
-                </svg>
-                <span style={{ fontSize: 11, fontWeight: 800, color: '#f5a623', letterSpacing: '0.04em' }}>PRIVATE BY DESIGN — nothing is ever stored</span>
-              </div>
-              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0, lineHeight: 1.55 }}>
-                Every letter, contract, photo and PDF you share is <strong style={{ color: 'rgba(26,18,8,0.7)' }}>processed and immediately discarded</strong>. We never store it, never share it, never train on it. No account, no trace. This is a core architectural principle — not a policy we can change tomorrow.
+              <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
+                Paste it below. We'll tell you what it means and what to do.
               </p>
             </motion.div>
 
-            {/* 4 TOOL BUTTONS — 2x2 grid */}
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
-              {[
-                {
-                  id: 'letter', label: 'Decode a letter', sub: 'Paste or photo it',
-                  color: '#f5a623', bg: 'rgba(245,166,35,0.08)', border: 'rgba(245,166,35,0.4)',
-                  icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <rect x="4" y="2" width="16" height="20" rx="2.5" fill="rgba(245,166,35,0.18)" stroke="#f5a623" strokeWidth="1.8"/>
-                      <path d="M8 7h8M8 11h8M8 15h5" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round"/>
-                    </svg>
-                  )
-                },
-                {
-                  id: 'scam', label: 'Is it a scam?', sub: 'Instant verdict. No signup.',
-                  color: '#ef4444', bg: 'rgba(239,68,68,0.07)', border: 'rgba(239,68,68,0.35)',
-                  icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 3L4 7v5c0 5.25 3.5 10.15 8 11.35C17.5 22.15 21 17.25 21 12V7L12 3z" fill="rgba(239,68,68,0.15)" stroke="#ef4444" strokeWidth="1.8" strokeLinejoin="round"/>
-                      <path d="M12 9v4" stroke="#ef4444" strokeWidth="2.2" strokeLinecap="round"/>
-                      <circle cx="12" cy="16" r="1.1" fill="#ef4444"/>
-                    </svg>
-                  )
-                },
-                {
-                  id: 'reply', label: 'Write a reply', sub: 'We draft it for you',
-                  color: '#2563eb', bg: 'rgba(37,99,235,0.07)', border: 'rgba(37,99,235,0.3)',
-                  icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <rect x="2" y="4" width="20" height="16" rx="3" fill="rgba(37,99,235,0.15)" stroke="#2563eb" strokeWidth="1.8"/>
-                      <path d="M6 9l6 4 6-4" stroke="#2563eb" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M17 16l2.5 2.5" stroke="#2563eb" strokeWidth="1.8" strokeLinecap="round"/>
-                    </svg>
-                  )
-                },
-                {
-                  id: 'conflict', label: 'Dispute a company', sub: 'Builder, landlord, trader',
-                  color: '#059669', bg: 'rgba(5,150,105,0.07)', border: 'rgba(5,150,105,0.3)',
-                  icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="9" fill="rgba(5,150,105,0.12)" stroke="#059669" strokeWidth="1.8"/>
-                      <path d="M8 12l3 3 5-5" stroke="#059669" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  )
-                },
-                {
-                  id: 'contract', label: 'Check a contract', sub: 'Paste, photo or PDF — any country',
-                  color: '#7c3aed', bg: 'rgba(124,58,237,0.07)', border: 'rgba(124,58,237,0.3)',
-                  gridColumn: '1 / -1',
-                  icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <rect x="4" y="2" width="16" height="20" rx="2.5" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" strokeWidth="1.8"/>
-                      <path d="M8 7h8M8 11h8M8 15h5" stroke="#7c3aed" strokeWidth="1.8" strokeLinecap="round"/>
-                    </svg>
-                  )
-                },
-              ].map(({ id, label, sub, color, bg, border, icon, gridColumn }) => (
-               <motion.button
-                 key={id}
-                 onClick={() => { if (navigator.vibrate) navigator.vibrate(12); engineRef.current && engineRef.current.open(id); }}
-                 onTouchStart={() => { if (navigator.vibrate) navigator.vibrate(8); }}
-                 className="sorted-tap-btn tap-feedback"
-                 whileTap={{ scale: 0.95 }}
-                 style={{
-                    textAlign: 'left', cursor: 'pointer',
-                      padding: '20px 16px', borderRadius: 16,
-                      border: `1.5px solid ${border}`,
-                      background: bg,
-                      WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                      display: 'flex', flexDirection: gridColumn ? 'row' : 'column',
-                      alignItems: gridColumn ? 'center' : 'flex-start',
-                      gap: 12, minHeight: gridColumn ? 'auto' : 124,
-                      gridColumn: gridColumn || 'auto',
-                  }}
-                >
-                  <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 1px 4px ${color}25` }}>
-                    {icon}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 15, fontWeight: 800, color: '#1a1208', marginBottom: 4, letterSpacing: '-0.01em', lineHeight: 1.25 }}>{label}</div>
-                    <div style={{ fontSize: 12, color: 'rgba(26,18,8,0.55)', lineHeight: 1.4 }}>{sub}</div>
-                  </div>
-                </motion.button>
-              ))}
-            </motion.div>
-
-            {/* JURISDICTION STRIP — slim, no flags, coolasfuck */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} style={{ marginBottom: 16, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.2)', background: '#fff', display: 'flex', alignItems: 'center', gap: 10 }}>
-              {/* Custom location pin — no flag, no politics */}
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
-                <circle cx="9" cy="7.5" r="4" stroke="#f5a623" strokeWidth="1.4" fill="rgba(245,166,35,0.12)" />
-                <circle cx="9" cy="7.5" r="1.5" fill="#f5a623" />
-                <path d="M9 11.5c0 0-4 2.5-4 4.5h8c0-2-4-4.5-4-4.5z" fill="rgba(245,166,35,0.15)" stroke="#f5a623" strokeWidth="1.1" strokeLinejoin="round" />
-              </svg>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: '#1a1208', lineHeight: 1.3 }}>
-                  {selectedLocation ? (
-                    <><span style={{ color: '#f5a623' }}>{selectedLocation.jurisdiction.split('·')[0].trim()}</span> · advice specific to {selectedLocation.country}</>
-                  ) : (
-                    <span style={{ color: 'rgba(26,18,8,0.4)' }}>Detecting your location…</span>
-                  )}
+            {/* PRIMARY: decode input — THE thing people need */}
+            <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
+              onClick={() => { if (navigator.vibrate) navigator.vibrate(10); engineRef.current && engineRef.current.open('letter'); }}
+              className="tap-feedback"
+              style={{
+                cursor: 'pointer',
+                padding: '18px 20px',
+                borderRadius: 16,
+                border: '2px solid rgba(245,166,35,0.35)',
+                background: 'rgba(245,166,35,0.05)',
+                marginBottom: 20,
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+                <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <rect x="4" y="2" width="16" height="20" rx="2.5" stroke="#f5a623" strokeWidth="1.8"/>
+                    <path d="M8 7h8M8 11h8M8 15h5" stroke="#f5a623" strokeWidth="1.8" strokeLinecap="round"/>
+                  </svg>
                 </div>
-                <button onClick={() => setShowLocationPicker(true)} style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', background: 'none', border: 'none', padding: 0, cursor: 'pointer', marginTop: 2, textDecoration: 'underline', textDecorationStyle: 'dotted', display: 'block' }}>
-                  Not {selectedLocation?.country || 'right'}? Change
-                </button>
+                <span style={{ fontSize: 15, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>Decode a letter or document</span>
               </div>
-              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 3 }}>
-                <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 5px rgba(16,185,129,0.7)', animation: 'locpulse 2s infinite' }} />
+              <div style={{ padding: '12px 16px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)', fontSize: 13, color: 'rgba(26,18,8,0.4)', lineHeight: 1.5 }}>
+                Paste, type or take a photo — we'll tell you what it means in plain English
+              </div>
+              <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
+                <div style={{ flex: 1, padding: '11px 0', borderRadius: 10, background: '#f5a623', color: '#fff', textAlign: 'center', fontSize: 13, fontWeight: 800, letterSpacing: '0.06em' }}>
+                  START →
+                </div>
+                <div style={{ flex: 0, padding: '11px 14px', borderRadius: 10, border: '1px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)', color: '#f5a623', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700 }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  SNAP PHOTO
+                </div>
               </div>
             </motion.div>
-            <style>{`@keyframes locpulse { 0%,100%{opacity:1} 50%{opacity:0.3} }`}</style>
 
-            {/* HOW IT WORKS — always visible */}
-            <div id="sorted-upgrade" style={{ marginBottom: 24, padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(245,166,35,0.2)', background: '#fff' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.55)', margin: '0 0 12px' }}>HOW IT WORKS</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <WhyRow icon={<WRBolt />} text="Paste, type or photo any letter — plain English in seconds" />
-                <WhyRow icon={<WRTarget />} text="Exact next steps, deadlines, who to contact — zero jargon" />
-                <WhyRow icon={<WRPin />} text="Knows your country and local legal bodies automatically" />
-                <WhyRow icon={<WRLock />} text="Scam checker — photo or paste any message for an instant verdict." />
-                <WhyRow icon={<WRLock />} text="Your letter is never saved or shared — processed and discarded." />
+            {/* SECONDARY: smaller tools */}
+            <div style={{ marginBottom: 14 }}>
+              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 10px', textAlign: 'center' }}>SOMETHING ELSE?</p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+                {[
+                  { id: 'scam', label: 'Check a scam', color: '#ef4444' },
+                  { id: 'conflict', label: 'Dispute help', color: '#059669' },
+                  { id: 'contract', label: 'Check contract', color: '#7c3aed' },
+                ].map(({ id, label, color }) => (
+                  <motion.button
+                    key={id}
+                    onClick={() => { if (navigator.vibrate) navigator.vibrate(8); engineRef.current && engineRef.current.open(id); }}
+                    whileTap={{ scale: 0.96 }}
+                    className="tap-feedback"
+                    style={{
+                      padding: '14px 8px', borderRadius: 12, fontSize: 11, fontWeight: 800,
+                      letterSpacing: '0.04em', cursor: 'pointer', textAlign: 'center',
+                      border: `1.5px solid ${color}25`, background: `${color}05`, color,
+                      WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                    }}
+                  >
+                    {label}
+                  </motion.button>
+                ))}
               </div>
-              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.55)', margin: '12px 0 0', lineHeight: 1.5 }}>
-                10 free uses — no card, no signup. Then <strong style={{ color: 'rgba(26,18,8,0.75)' }}>{geoPrice.inline}</strong> for unlimited. Cancel anytime.
-              </p>
             </div>
 
-
+            {/* PRIVACY — tiny */}
+            <div style={{ marginBottom: 20, padding: '8px 12px', borderRadius: 8, background: 'rgba(245,166,35,0.05)', border: '1px solid rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
+                <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
+              </svg>
+              <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.03em' }}>Nothing stored. No account. No trace. {geoPrice.inline} when you're ready for unlimited.</span>
+            </div>
 
             <SortedLiveCounter />
 
-            {/* MY CASES BUTTON — always visible on home */}
+            {/* MY CASES */}
             {(() => {
               let caseCount = 0;
               try { caseCount = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]').length; } catch {}
@@ -480,13 +409,13 @@ export default function Family51Page() {
                 <motion.button
                   onClick={() => setShowHistory(true)}
                   whileTap={{ scale: 0.97 }}
-                  style={{ width: '100%', marginTop: 12, padding: '14px 18px', borderRadius: 14, border: '1.5px solid rgba(245,166,35,0.4)', background: 'rgba(245,166,35,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
+                  style={{ width: '100%', marginBottom: 14, padding: '14px 18px', borderRadius: 14, border: '1.5px solid rgba(245,166,35,0.35)', background: 'rgba(245,166,35,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <CasesIcon />
                     <div style={{ textAlign: 'left' }}>
                       <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', letterSpacing: '-0.01em' }}>My Cases</div>
-                      <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)' }}>{caseCount} saved · tap to view, edit or delete</div>
+                      <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.45)' }}>{caseCount} saved</div>
                     </div>
                   </div>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="rgba(26,18,8,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -494,14 +423,16 @@ export default function Family51Page() {
               ) : null;
             })()}
 
-            <div style={{ marginTop: 16, textAlign: 'center' }}>
-              <button onClick={() => { try { localStorage.clear(); } catch {} window.location.reload(); }} style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.2)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                <Trash2 size={10} /> CLEAR ALL MY DATA
-              </button>
+            {/* FOOTER LINKS — tiny */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 8, fontSize: 10, color: 'rgba(26,18,8,0.3)', fontWeight: 600 }}>
+              <button onClick={() => setShowWhy(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit' }}>About</button>
+              <button onClick={() => setShowFAQ(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit' }}>FAQ</button>
+              <a href="/SortedTerms" style={{ color: 'inherit', textDecoration: 'none' }}>Terms</a>
+              <a href="/SortedPrivacy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy</a>
             </div>
 
           </motion.div>
-        )}
+         )}
 
         {/* ── CASE HISTORY ──────────────────────────────────── */}
          {showHistory && (
