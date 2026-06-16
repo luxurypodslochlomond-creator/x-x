@@ -1,112 +1,87 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// ── Organic Particles ─────────────────────────────────────────
-const Particles = () => {
-  const particlesRef = useRef(
-    Array.from({ length: 24 }, (_, i) => ({
-      id: i,
-      x: 20 + Math.random() * 60,
-      y: 20 + Math.random() * 60,
-      size: 0.5 + Math.random() * 1.5,
-      driftX: (Math.random() - 0.5) * 40,
-      driftY: (Math.random() - 0.5) * 40,
-      duration: 12 + Math.random() * 20,
-      delay: Math.random() * 10,
-      hue: Math.random() > 0.6 ? 190 : 35, // mostly cyan, some warm
-    }))
-  );
+// ── Floating Light Orbs ───────────────────────────────────────
+const LightOrbs = () => {
+  const orbs = useRef([
+    { x: 25, y: 30, s: 300, r: 0.06, g: 0.1, b: 0.18, d: 18 },
+    { x: 75, y: 60, s: 250, r: 0.12, g: 0.06, b: 0.02, d: 22 },
+    { x: 50, y: 70, s: 200, r: 0.05, g: 0.08, b: 0.12, d: 14 },
+  ]);
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {particlesRef.current.map((p) => (
+      {orbs.current.map((o, i) => (
         <motion.div
-          key={p.id}
-          className="absolute rounded-full"
+          key={i}
+          className="absolute rounded-full blur-3xl"
           style={{
-            width: p.size,
-            height: p.size,
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            background: p.hue === 190
-              ? 'radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)'
-              : 'radial-gradient(circle, rgba(200,160,100,0.3) 0%, transparent 70%)',
+            left: `${o.x}%`, top: `${o.y}%`,
+            width: o.s, height: o.s,
+            background: `radial-gradient(circle, rgba(${Math.round(o.r*255)},${Math.round(o.g*255)},${Math.round(o.b*255)},0.15) 0%, transparent 70%)`,
           }}
           animate={{
-            x: [0, p.driftX, 0, -p.driftX * 0.7, 0],
-            y: [0, p.driftY, 0, -p.driftY * 0.7, 0],
-            opacity: [0, 0.5, 0.1, 0.4, 0],
+            x: [-20, 20, -20],
+            y: [-15, 15, -15],
+            opacity: [0.5, 0.8, 0.5],
+            scale: [1, 1.1, 1],
           }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: 'easeInOut',
-          }}
+          transition={{ duration: o.d, repeat: Infinity, ease: 'easeInOut', delay: i * 3 }}
         />
       ))}
     </div>
   );
 };
 
-// ── Concentric Breathing Rings ────────────────────────────────
-const BreathingRings = ({ phase, progress, size = 120, large = false }) => {
-  const baseScale = phase === 'in' ? 1 + progress * 0.5 : phase === 'hold' ? 1.5 : 1.5 - progress * 0.5;
-  const breathAlpha = phase === 'in' ? 0.15 + progress * 0.55 : phase === 'hold' ? 0.7 : 0.7 - progress * 0.55;
-  const s = large ? size * 1.5 : size;
-
-  const rings = [
-    { scale: 1, border: 'border-cyan-400/20', blur: 60, alpha: breathAlpha * 0.9, delay: 0 },
-    { scale: 1.25, border: 'border-cyan-400/10', blur: 30, alpha: breathAlpha * 0.4, delay: 0.08 },
-    { scale: 1.55, border: 'border-cyan-400/5', blur: 0, alpha: breathAlpha * 0.2, delay: 0.16 },
-  ];
+// ── Organic Breathing Orb ─────────────────────────────────────
+const BreathingOrb = ({ phase, progress, size = 200, standalone = false }) => {
+  const s = phase === 'in' ? 1 + progress * 0.45 : phase === 'hold' ? 1.45 : 1.45 - progress * 0.45;
+  const glow = phase === 'in' ? 0.1 + progress * 0.6 : phase === 'hold' ? 0.7 : 0.7 - progress * 0.6;
 
   return (
-    <div className="flex items-center justify-center relative" style={{ height: large ? '18rem' : '12rem' }}>
-      {/* Warm diffused glow behind everything */}
+    <div className="flex items-center justify-center relative" style={{ height: standalone ? '16rem' : size * 1.2 }}>
+      {/* Deep inner glow */}
       <motion.div
-        animate={{
-          scale: baseScale * 1.2,
-          opacity: breathAlpha * 0.25,
-        }}
+        animate={{ scale: s, opacity: glow * 0.6 }}
         transition={{ duration: 0.12, ease: 'linear' }}
         className="absolute rounded-full"
         style={{
-          width: s,
-          height: s,
-          background: 'radial-gradient(circle, rgba(200,150,100,0.2) 0%, transparent 70%)',
-          filter: 'blur(35px)',
+          width: size, height: size,
+          background: 'radial-gradient(circle at 50% 50%, rgba(20,80,120,0.3) 0%, rgba(10,30,60,0.1) 50%, transparent 70%)',
+          filter: 'blur(15px)',
         }}
       />
 
-      {rings.map((ring, i) => (
-        <motion.div
-          key={i}
-          animate={{
-            scale: baseScale * ring.scale,
-            opacity: ring.alpha,
-          }}
-          transition={{ duration: 0.12, ease: 'linear', delay: ring.delay }}
-          className={`absolute rounded-full ${ring.border} flex items-center justify-center`}
-          style={{
-            width: s,
-            height: s,
-            boxShadow: i === 0 ? `0 0 ${ring.blur}px rgba(6,182,212,${breathAlpha * 0.15})` : 'none',
-          }}
-        >
-          {i === 0 && (
-            <span className="text-cyan-300/60 text-[11px] font-mono tracking-[0.25em] uppercase select-none">
-              {phase === 'in' ? 'breathe in' : phase === 'hold' ? 'hold' : 'breathe out'}
-            </span>
-          )}
-        </motion.div>
-      ))}
+      {/* The orb itself — soft gradient sphere */}
+      <motion.div
+        animate={{ scale: s, opacity: glow }}
+        transition={{ duration: 0.12, ease: 'linear' }}
+        className="absolute rounded-full flex items-center justify-center"
+        style={{
+          width: size, height: size,
+          background: 'radial-gradient(circle at 40% 40%, rgba(30,100,160,0.25) 0%, rgba(10,40,70,0.15) 40%, rgba(5,15,30,0.3) 100%)',
+          boxShadow: `0 0 ${80 * glow}px rgba(20,100,180,${0.15 * glow}), 0 0 ${40 * glow}px rgba(160,120,60,${0.08 * glow}), inset 0 0 ${60 * glow}px rgba(20,100,180,${0.1 * glow})`,
+          border: '1px solid rgba(30,100,160,0.12)',
+        }}
+      >
+        <span className="text-cyan-300/50 text-[11px] font-mono tracking-[0.25em] uppercase select-none">
+          {phase === 'in' ? 'in' : phase === 'hold' ? 'hold' : 'out'}
+        </span>
+      </motion.div>
+
+      {/* Ghost outer ring */}
+      <motion.div
+        animate={{ scale: s * 1.4, opacity: glow * 0.15 }}
+        transition={{ duration: 0.12, ease: 'linear', delay: 0.05 }}
+        className="absolute rounded-full border border-cyan-400/8"
+        style={{ width: size, height: size }}
+      />
     </div>
   );
 };
 
-// ── Immersive Audio Engine ────────────────────────────────────
-const useImmersiveAudio = () => {
+// ── Warm Audio Engine (no harsh noise) ────────────────────────
+const useWarmAudio = () => {
   const ctxRef = useRef(null);
   const nodesRef = useRef([]);
 
@@ -114,77 +89,97 @@ const useImmersiveAudio = () => {
     if (nodesRef.current.length > 0) return;
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     ctxRef.current = ctx;
-    const allNodes = [];
+    const all = [];
 
-    // Master chain
-    const masterGain = ctx.createGain();
-    masterGain.gain.setValueAtTime(0, ctx.currentTime);
-    masterGain.gain.linearRampToValueAtTime(0.22, ctx.currentTime + 3.5);
-    masterGain.connect(ctx.destination);
-    allNodes.push(masterGain);
+    // Master — gentle fade in
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0, ctx.currentTime);
+    master.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 4);
+    master.connect(ctx.destination);
+    all.push(master);
 
-    // 1 — Brown noise → steep low-pass (cuts the static hiss)
-    const noiseBuf = ctx.createBuffer(1, 2 * ctx.sampleRate, ctx.sampleRate);
-    const data = noiseBuf.getChannelData(0);
+    // 1 — Deep 55Hz drone (fundamental grounding, near alpha-theta boundary)
+    const d1 = ctx.createOscillator();
+    d1.type = 'sine'; d1.frequency.value = 55;
+    const g1 = ctx.createGain();
+    g1.gain.setValueAtTime(0, ctx.currentTime);
+    g1.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 3);
+    d1.connect(g1); g1.connect(master); d1.start(0);
+    all.push(d1, g1);
+
+    // 2 — 110Hz (octave, adds warmth and body)
+    const d2 = ctx.createOscillator();
+    d2.type = 'sine'; d2.frequency.value = 110;
+    const g2 = ctx.createGain();
+    g2.gain.setValueAtTime(0, ctx.currentTime);
+    g2.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 3.5);
+    d2.connect(g2); g2.connect(master); d2.start(0);
+    all.push(d2, g2);
+
+    // 3 — 220Hz (second octave, adds presence without harshness)
+    const d3 = ctx.createOscillator();
+    d3.type = 'sine'; d3.frequency.value = 220;
+    const g3 = ctx.createGain();
+    g3.gain.setValueAtTime(0, ctx.currentTime);
+    g3.gain.linearRampToValueAtTime(0.03, ctx.currentTime + 4);
+    d3.connect(g3); g3.connect(master); d3.start(0);
+    all.push(d3, g3);
+
+    // 4 — 432Hz (very subtle, the "musical" overtone)
+    const d4 = ctx.createOscillator();
+    d4.type = 'sine'; d4.frequency.value = 432;
+    const g4 = ctx.createGain();
+    g4.gain.setValueAtTime(0, ctx.currentTime);
+    g4.gain.linearRampToValueAtTime(0.025, ctx.currentTime + 5);
+    d4.connect(g4); g4.connect(master); d4.start(0);
+    all.push(d4, g4);
+
+    // 5 — Gentle 6Hz LFO modulating the low drones for entrainment
+    const lfo = ctx.createOscillator();
+    lfo.type = 'sine'; lfo.frequency.value = 6;
+    const lfoG = ctx.createGain();
+    lfoG.gain.value = 0.04;
+    lfo.connect(lfoG); lfoG.connect(g1.gain); // modulate the 55Hz drone
+    lfo.start(0);
+    all.push(lfo, lfoG);
+
+    // 6 — Ultra-quiet, heavily filtered noise (ocean-floor rumble, not static)
+    const buf = ctx.createBuffer(1, 2 * ctx.sampleRate, ctx.sampleRate);
+    const d = buf.getChannelData(0);
     let last = 0;
-    for (let i = 0; i < data.length; i++) {
-      data[i] = ((last + 0.012 * (Math.random() * 2 - 1)) / 1.012) * 2.2;
-      last = data[i];
+    for (let i = 0; i < d.length; i++) {
+      d[i] = ((last + 0.008 * (Math.random() * 2 - 1)) / 1.008) * 1.5;
+      last = d[i];
     }
     const noiseSrc = ctx.createBufferSource();
-    noiseSrc.buffer = noiseBuf; noiseSrc.loop = true;
-    const lp = ctx.createBiquadFilter();
-    lp.type = 'lowpass'; lp.frequency.value = 320; lp.Q.value = 0.6;
-    const noiseGain = ctx.createGain();
-    noiseGain.gain.value = 0.55;
-    noiseSrc.connect(lp); lp.connect(noiseGain); noiseGain.connect(masterGain);
+    noiseSrc.buffer = buf; noiseSrc.loop = true;
+    // Very steep low-pass at 200Hz — removes all hiss
+    const lp1 = ctx.createBiquadFilter();
+    lp1.type = 'lowpass'; lp1.frequency.value = 200; lp1.Q.value = 0.5;
+    const lp2 = ctx.createBiquadFilter();
+    lp2.type = 'lowpass'; lp2.frequency.value = 180; lp2.Q.value = 0.5;
+    const nGain = ctx.createGain();
+    nGain.gain.setValueAtTime(0, ctx.currentTime);
+    nGain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 4);
+    noiseSrc.connect(lp1); lp1.connect(lp2); lp2.connect(nGain); nGain.connect(master);
     noiseSrc.start(0);
-    allNodes.push(noiseSrc, lp, noiseGain);
+    all.push(noiseSrc, lp1, lp2, nGain);
 
-    // 2 — 86Hz warm drone (Schumann harmonic, grounding)
-    const drone = ctx.createOscillator();
-    drone.type = 'sine'; drone.frequency.value = 86;
-    const droneGain = ctx.createGain();
-    droneGain.gain.setValueAtTime(0, ctx.currentTime);
-    droneGain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 2.5);
-    drone.connect(droneGain); droneGain.connect(masterGain);
-    drone.start(0);
-    allNodes.push(drone, droneGain);
-
-    // 3 — 7Hz theta LFO modulating the drone
-    const lfo = ctx.createOscillator();
-    lfo.type = 'sine'; lfo.frequency.value = 7;
-    const lfoAmp = ctx.createGain();
-    lfoAmp.gain.value = 0.05;
-    lfo.connect(lfoAmp); lfoAmp.connect(droneGain.gain);
-    lfo.start(0);
-    allNodes.push(lfo, lfoAmp);
-
-    // 4 — 432Hz subtle overtone
-    const overtone = ctx.createOscillator();
-    overtone.type = 'sine'; overtone.frequency.value = 432;
-    const overtoneGain = ctx.createGain();
-    overtoneGain.gain.setValueAtTime(0, ctx.currentTime);
-    overtoneGain.gain.linearRampToValueAtTime(0.035, ctx.currentTime + 4);
-    overtone.connect(overtoneGain); overtoneGain.connect(masterGain);
-    overtone.start(0);
-    allNodes.push(overtone, overtoneGain);
-
-    nodesRef.current = allNodes;
+    nodesRef.current = all;
   }, []);
 
   const stop = useCallback(() => {
     if (!ctxRef.current || nodesRef.current.length === 0) return;
     const ctx = ctxRef.current;
     nodesRef.current.forEach(n => {
-      try { if (n instanceof GainNode) n.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 2.5); } catch (_) {}
+      try { if (n instanceof GainNode) n.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 3); } catch (_) {}
     });
     setTimeout(() => {
       nodesRef.current.forEach(n => { try { n.stop?.(); } catch (_) {} });
       nodesRef.current = [];
       ctxRef.current?.close();
       ctxRef.current = null;
-    }, 2700);
+    }, 3200);
   }, []);
 
   return { start, stop };
@@ -199,15 +194,6 @@ const QUESTIONS = [
   { q: "Is the story your brain is telling you — the failure story — actually true? Or just loud?", pause: 6 },
   { q: "You've survived every bad day so far. That's 100% success rate. What does that tell you?", pause: 5 },
 ];
-
-// ── Question Counter ──────────────────────────────────────────
-const QuestionDot = ({ active, done }) => (
-  <div
-    className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
-      active ? 'bg-cyan-400 w-3' : done ? 'bg-cyan-500/30' : 'bg-white/5'
-    }`}
-  />
-);
 
 // ── MAIN PAGE ─────────────────────────────────────────────────
 export default function RealityCheckPage() {
@@ -227,9 +213,8 @@ export default function RealityCheckPage() {
   const [sitTimer, setSitTimer] = useState(300);
   const sitIntervalRef = useRef(null);
 
-  const { start: startAudio, stop: stopAudio } = useImmersiveAudio();
+  const { start: startAudio, stop: stopAudio } = useWarmAudio();
 
-  // ── Breathing cycle tick ────────────────────────────────────
   useEffect(() => {
     if (!breathActive) return;
     const tick = () => {
@@ -244,7 +229,6 @@ export default function RealityCheckPage() {
     return () => clearInterval(breathTimerRef.current);
   }, [breathActive, breathPhase, breathPhaseStart]);
 
-  // ── Question sequence ───────────────────────────────────────
   useEffect(() => {
     if (mode !== 'reality') return;
     if (qIdx >= QUESTIONS.length) { setShowAffirmation(true); return; }
@@ -259,7 +243,6 @@ export default function RealityCheckPage() {
     return () => { clearTimeout(t); clearInterval(iv); };
   }, [mode, qIdx]);
 
-  // ── Sit timer ───────────────────────────────────────────────
   useEffect(() => {
     if (!sitActive) return;
     sitIntervalRef.current = setInterval(() => {
@@ -268,17 +251,17 @@ export default function RealityCheckPage() {
     return () => clearInterval(sitIntervalRef.current);
   }, [sitActive]);
 
-  const startRealityCheck = () => {
+  const reality = () => {
     setMode('reality'); setQIdx(0); setQVisible(false); setShowAffirmation(false);
     setBreathActive(true); setBreathPhase('in'); setBreathPhaseStart(Date.now()); setBreathProgress(0);
     startAudio();
   };
-  const startReset = () => {
+  const reset = () => {
     setMode('reset'); setSitActive(true); setSitTimer(300);
     setBreathActive(true); setBreathPhase('in'); setBreathPhaseStart(Date.now()); setBreathProgress(0);
     startAudio();
   };
-  const stopAll = () => {
+  const stop = () => {
     setMode(null); setBreathActive(false); setSitActive(false); setShowAffirmation(false);
     setQIdx(0); clearInterval(breathTimerRef.current); clearInterval(sitIntervalRef.current);
     stopAudio();
@@ -286,120 +269,118 @@ export default function RealityCheckPage() {
 
   const fmt = s => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
 
-  // ── HOME ────────────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════
+  // HOME SCREEN — single orb, organic shapes, no blocky buttons
+  // ═══════════════════════════════════════════════════════════
   if (!mode) {
     return (
-      <div className="min-h-screen bg-[#050a14] text-white flex flex-col items-center justify-center p-8 relative overflow-hidden">
-        <Particles />
-        {/* Slow morphing ambience */}
-        <motion.div
-          animate={{ opacity: [0.06, 0.1, 0.05, 0.09, 0.06] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] rounded-full"
-          style={{ background: 'radial-gradient(circle at 50% 45%, rgba(6,182,212,0.08) 0%, rgba(180,120,60,0.04) 40%, transparent 70%)' }}
-        />
+      <div className="min-h-screen bg-[#040b16] text-white flex flex-col items-center justify-center p-8 relative overflow-hidden">
+        <LightOrbs />
 
-        <div className="relative z-10 text-center max-w-md w-full">
-          {/* Hero breathing circle */}
+        {/* Central breathing orb — the only visual anchor */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="relative z-10 flex flex-col items-center max-w-sm w-full"
+        >
+          {/* The orb */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="mb-12 flex justify-center"
+            animate={{ scale: [1, 1.025, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-44 h-44 rounded-full flex items-center justify-center mb-12"
+            style={{
+              background: 'radial-gradient(circle at 45% 40%, rgba(25,90,150,0.25) 0%, rgba(8,30,55,0.2) 50%, rgba(3,10,20,0.4) 100%)',
+              boxShadow: '0 0 120px rgba(20,100,180,0.1), 0 0 50px rgba(160,120,50,0.05), inset 0 0 80px rgba(20,100,180,0.06)',
+              border: '1px solid rgba(25,90,150,0.1)',
+            }}
           >
             <motion.div
-              animate={{ scale: [1, 1.03, 1], borderColor: ['rgba(6,182,212,0.15)', 'rgba(6,182,212,0.25)', 'rgba(6,182,212,0.15)'] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-36 h-36 rounded-full border-2 flex items-center justify-center bg-[#0a1628]/20"
-              style={{ boxShadow: '0 0 120px rgba(6,182,212,0.08), 0 0 60px rgba(180,130,80,0.05)' }}
-            >
-              {/* Inner dot - the center of calm */}
-              <motion.div
-                animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                className="w-2 h-2 rounded-full bg-cyan-400/40"
-              />
-            </motion.div>
+              animate={{ scale: [1, 1.4, 1], opacity: [0.25, 0.45, 0.25] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-2 h-2 rounded-full bg-cyan-400/50"
+              style={{ boxShadow: '0 0 20px rgba(6,182,212,0.3)' }}
+            />
           </motion.div>
 
+          {/* Whisper text */}
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-cyan-400/40 text-[11px] font-mono tracking-[0.25em] uppercase mb-8"
+            transition={{ delay: 0.3, duration: 0.7 }}
+            className="text-cyan-400/35 text-[11px] font-mono tracking-[0.3em] uppercase mb-8"
           >
             you're not broken. you're overwhelmed.
           </motion.p>
 
+          {/* Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.7 }}
-            className="text-6xl font-light text-white mb-5 tracking-tight"
+            transition={{ delay: 0.5, duration: 0.7 }}
+            className="text-[3.25rem] font-light text-white mb-4 tracking-tight leading-none"
           >
             Ground Zero
           </motion.h1>
 
+          {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-slate-400/80 text-sm mb-16 leading-relaxed"
+            transition={{ delay: 0.65, duration: 0.6 }}
+            className="text-slate-400/70 text-sm mb-16 leading-relaxed"
           >
-            When everything is too loud. One button. Help.
+            When everything is too loud. Help.
           </motion.p>
 
-          <motion.div
+          {/* Single prominent action — organically shaped */}
+          <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="space-y-3.5"
+            transition={{ delay: 0.85, duration: 0.6 }}
+            onClick={reality}
+            className="w-full max-w-xs py-5 rounded-3xl bg-gradient-to-b from-[#0d2a4a]/60 to-[#06101e]/60 border border-[#1a4a6e]/25 text-cyan-200 text-base font-light tracking-wide hover:border-[#1a4a6e]/45 hover:from-[#0f3055]/60 transition-all duration-700"
+            style={{ boxShadow: '0 0 40px rgba(20,100,180,0.06)' }}
           >
-            <button
-              onClick={startRealityCheck}
-              className="w-full py-4.5 px-6 bg-gradient-to-b from-cyan-500/10 to-transparent border border-cyan-500/20 rounded-2xl text-cyan-200 hover:border-cyan-500/35 hover:from-cyan-500/15 transition-all duration-500 text-base font-light tracking-wide"
-            >
-              Reality Check — talk me down
-            </button>
+            Reality Check
+          </motion.button>
 
-            <button
-              onClick={startReset}
-              className="w-full py-4.5 px-6 bg-white/[0.02] border border-white/[0.05] rounded-2xl text-slate-300/80 hover:bg-white/[0.05] hover:border-white/[0.08] transition-all duration-500 text-base font-light tracking-wide"
-            >
-              5 Minute Reset — just be here
-            </button>
-          </motion.div>
+          {/* Secondary — a quiet text link, NOT a matching block */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            onClick={reset}
+            className="mt-5 text-slate-400 text-sm font-light hover:text-slate-300 transition-colors duration-500"
+          >
+            or, just sit here for 5 minutes
+          </motion.button>
 
           <motion.p
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.3 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="text-slate-600 text-xs mt-14"
+            animate={{ opacity: 0.25 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+            className="text-slate-600 text-xs mt-12"
           >
             No signup. No data stored. Just help.
           </motion.p>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
-  // ── REALITY CHECK MODE ──────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════
+  // REALITY CHECK — questions with breathing orb above
+  // ═══════════════════════════════════════════════════════════
   if (mode === 'reality') {
     return (
-      <div className="min-h-screen bg-[#050a14] text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
-        <Particles />
-        <motion.div
-          animate={{ opacity: [0.05, 0.09, 0.05] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35rem] h-[35rem] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 60%)' }}
-        />
+      <div className="min-h-screen bg-[#040b16] text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
+        <LightOrbs />
 
-        <div className="relative z-10 w-full max-w-xl text-center flex flex-col items-center">
-          {/* Breathing rings at top */}
-          <BreathingRings phase={breathPhase} progress={breathProgress} size={110} />
+        <div className="relative z-10 w-full max-w-xl flex flex-col items-center">
+          {/* Breathing orb at top */}
+          <BreathingOrb phase={breathPhase} progress={breathProgress} size={140} standalone />
 
-          {/* Question area */}
           <AnimatePresence mode="wait">
             {showAffirmation ? (
               <motion.div
@@ -407,32 +388,26 @@ export default function RealityCheckPage() {
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="mt-10 space-y-8"
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                className="mt-8 space-y-7 text-center"
               >
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <p className="text-cyan-200 text-2xl font-light leading-relaxed">
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                  <p className="text-cyan-200/90 text-2xl font-light leading-relaxed">
                     You're still here.
                   </p>
-                  <p className="text-white/70 text-xl font-light mt-2">You're still fighting.</p>
+                  <p className="text-white/60 text-xl font-light mt-2">You're still fighting.</p>
                 </motion.div>
 
                 <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="text-slate-400 text-sm"
+                  className="text-slate-400/70 text-sm"
                 >
                   That's not failure — that's grit.
                 </motion.p>
 
                 <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.6 }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 0.5 }}
                   transition={{ delay: 0.7 }}
                   className="text-slate-500 text-xs"
                 >
@@ -440,21 +415,18 @@ export default function RealityCheckPage() {
                 </motion.p>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9 }}
-                  className="mt-10 flex flex-col gap-3"
+                  className="mt-10 flex flex-col items-center gap-3"
                 >
                   <button
-                    onClick={startReset}
-                    className="w-full py-3.5 px-6 bg-white/[0.03] border border-white/[0.06] rounded-2xl text-slate-300/80 hover:bg-white/[0.06] transition-all duration-500 text-sm font-light"
+                    onClick={reset}
+                    className="py-3.5 px-8 rounded-3xl bg-white/[0.03] border border-white/[0.06] text-slate-300/80 text-sm font-light hover:bg-white/[0.06] transition-all duration-500"
                   >
                     Sit with this for 5 minutes
                   </button>
-                  <button
-                    onClick={stopAll}
-                    className="w-full py-3.5 px-6 text-slate-500 hover:text-slate-400 transition-all text-sm font-light"
-                  >
+                  <button onClick={stop} className="text-slate-500 hover:text-slate-400 text-sm font-light transition-colors duration-500">
                     I'm okay now. Thank you.
                   </button>
                 </motion.div>
@@ -462,43 +434,46 @@ export default function RealityCheckPage() {
             ) : qVisible ? (
               <motion.div
                 key={qIdx}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="mt-10 w-full"
+                className="mt-8 text-center w-full"
               >
-                <p className="text-white text-2xl font-light leading-relaxed px-8">
+                <p className="text-white text-xl font-light leading-relaxed px-6">
                   {QUESTIONS[qIdx]?.q}
                 </p>
 
-                {/* Glow progress indicator instead of bar */}
-                <div className="mt-12 mb-2 flex items-center justify-center">
-                  <motion.div
-                    className="h-0.5 rounded-full bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
-                    animate={{ width: `${qProgress * 12}rem`, opacity: 0.3 + qProgress * 0.5 }}
-                    transition={{ duration: 0.05 }}
-                  />
-                </div>
+                {/* Soft glow progress */}
+                <motion.div
+                  className="h-px rounded-full mx-auto mt-10"
+                  style={{ background: 'linear-gradient(90deg, transparent, rgba(6,182,212,0.3), transparent)' }}
+                  animate={{ width: `${qProgress * 10}rem`, opacity: 0.25 + qProgress * 0.4 }}
+                  transition={{ duration: 0.05 }}
+                />
 
-                {/* Dot track */}
-                <div className="flex items-center justify-center gap-2 mt-4">
+                <div className="flex items-center justify-center gap-2 mt-5">
                   {QUESTIONS.map((_, i) => (
-                    <QuestionDot key={i} active={i === qIdx} done={i < qIdx} />
+                    <div
+                      key={i}
+                      className={`rounded-full transition-all duration-500 ${
+                        i === qIdx ? 'w-3 h-1.5 bg-cyan-400/70' : i < qIdx ? 'w-1.5 h-1.5 bg-cyan-500/20' : 'w-1.5 h-1.5 bg-white/4'
+                      }`}
+                    />
                   ))}
                 </div>
 
-                <p className="text-slate-600 text-xs mt-6">just breathe. the question is enough.</p>
+                <p className="text-slate-600/70 text-xs mt-6">just breathe. the question is enough.</p>
               </motion.div>
             ) : (
-              <motion.div key="pause" initial={{ opacity: 0 }} animate={{ opacity: 0.15 }} className="mt-10">
+              <motion.div key="pause" initial={{ opacity: 0 }} animate={{ opacity: 0.12 }} className="mt-8">
                 <p className="text-slate-500 text-sm">...</p>
               </motion.div>
             )}
           </AnimatePresence>
 
           {!showAffirmation && (
-            <button onClick={stopAll} className="fixed bottom-8 left-1/2 -translate-x-1/2 text-slate-600 hover:text-slate-400 text-xs transition-colors tracking-wide">
+            <button onClick={stop} className="fixed bottom-8 left-1/2 -translate-x-1/2 text-slate-600/60 hover:text-slate-400 text-xs transition-colors tracking-wide">
               I need to stop
             </button>
           )}
@@ -507,46 +482,42 @@ export default function RealityCheckPage() {
     );
   }
 
-  // ── 5 MINUTE RESET MODE ─────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════
+  // 5 MINUTE RESET — large orb, nothing else matters
+  // ═══════════════════════════════════════════════════════════
   return (
-    <div className="min-h-screen bg-[#050a14] text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      <Particles />
-      <motion.div
-        animate={{ opacity: [0.07, 0.13, 0.07] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute inset-0"
-        style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(6,182,212,0.06) 0%, rgba(180,130,80,0.03) 40%, transparent 70%)' }}
-      />
+    <div className="min-h-screen bg-[#040b16] text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      <LightOrbs />
 
-      <div className="relative z-10 text-center max-w-md w-full flex flex-col items-center">
-        {/* Breathing rings — large, the star */}
-        <BreathingRings phase={breathPhase} progress={breathProgress} size={180} large />
+      <div className="relative z-10 flex flex-col items-center max-w-sm w-full">
+        {/* Large breathing orb — the only thing to look at */}
+        <BreathingOrb phase={breathPhase} progress={breathProgress} size={220} standalone />
 
         {/* Timer */}
         <motion.p
           key={sitTimer}
-          initial={{ opacity: 0.6, scale: 0.95 }}
+          initial={{ opacity: 0.5, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="text-slate-400 text-4xl font-light font-mono tracking-widest mt-4 tabular-nums"
+          className="text-slate-400/80 text-5xl font-light font-mono tracking-[0.15em] mt-4 tabular-nums"
         >
           {sitActive ? fmt(sitTimer) : 'done'}
         </motion.p>
 
-        <p className="text-slate-500/60 text-xs mt-6 leading-relaxed max-w-xs mx-auto">
+        <p className="text-slate-500/50 text-xs mt-6 leading-relaxed max-w-[16rem] mx-auto text-center">
           {sitActive
             ? "Nothing to do. Nowhere to be. Just breathe."
             : "Five minutes of just being here. How do you feel?"}
         </p>
 
         {!sitActive && (
-          <div className="mt-12 flex flex-col gap-3 w-full px-4">
+          <div className="mt-12 flex flex-col items-center gap-3 w-full">
             <button
               onClick={() => { setSitActive(true); setSitTimer(300); }}
-              className="w-full py-3.5 px-6 bg-white/[0.03] border border-white/[0.06] rounded-2xl text-slate-300/80 hover:bg-white/[0.06] transition-all duration-500 text-sm font-light"
+              className="py-3.5 px-10 rounded-3xl bg-white/[0.03] border border-white/[0.06] text-slate-300/80 text-sm font-light hover:bg-white/[0.06] transition-all duration-500"
             >
               Another 5 minutes
             </button>
-            <button onClick={stopAll} className="w-full py-3.5 px-6 text-slate-500 hover:text-slate-400 transition-all text-sm font-light">
+            <button onClick={stop} className="text-slate-500 hover:text-slate-400 text-sm font-light transition-colors duration-500">
               I'm good now
             </button>
           </div>
@@ -554,7 +525,7 @@ export default function RealityCheckPage() {
       </div>
 
       {sitActive && (
-        <button onClick={stopAll} className="fixed bottom-8 left-1/2 -translate-x-1/2 text-slate-600 hover:text-slate-400 text-xs transition-colors tracking-wide">
+        <button onClick={stop} className="fixed bottom-8 left-1/2 -translate-x-1/2 text-slate-600/60 hover:text-slate-400 text-xs transition-colors tracking-wide">
           stop
         </button>
       )}
