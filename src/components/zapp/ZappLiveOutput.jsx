@@ -147,10 +147,10 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
       // Share a direct play link — friends tap it and the app opens instantly
       const url = `${window.location.origin}/Zapp?play=${savedId}`;
       navigator.clipboard.writeText(url);
-      setShareMsg('friend link copied! 🎉');
+      setShareMsg('friend link copied!');
     } else {
       // Not saved yet — nudge to save first
-      setShareMsg('save it first! 🏆');
+      setShareMsg('save it first!');
       if (onSave) setTimeout(() => onSave(), 600);
     }
     setTimeout(() => setShareMsg(''), 3000);
@@ -188,7 +188,10 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
             className="px-10 py-5 rounded-2xl font-black text-white text-xl"
             style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)', boxShadow: '0 0 40px rgba(124,58,237,0.6)' }}
           >
-            try again ⚡
+            <span className="flex items-center justify-center gap-1.5">
+              try again
+              <ZappGeometricIcon shape="zap" size={18} color="#fbbf24" accent="#fde68a" />
+            </span>
           </motion.button>
           <button
             onClick={onReset}
@@ -364,7 +367,9 @@ No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE h
         {builderMode ? (
           <div className="flex flex-col md:flex-row h-full">
             <div className="md:w-2/5 h-[45vh] md:h-full overflow-y-auto border-b md:border-b-0 md:border-r border-white/5 p-4" style={{ background: 'rgba(0,0,0,0.5)' }}>
-              <p className="text-xs font-mono text-violet-400 mb-3 font-black tracking-widest">⚡ SOURCE CODE</p>
+              <p className="text-xs font-mono text-violet-400 mb-3 font-black tracking-widest flex items-center gap-1.5">
+                <ZappGeometricIcon shape="zap" size={14} color="#a78bfa" accent="#c4b5fd" /> SOURCE CODE
+              </p>
               <pre className="text-xs font-mono leading-relaxed overflow-x-auto whitespace-pre-wrap break-all" style={{ color: '#c4b5fd' }}>
                 {builtHtml}
               </pre>

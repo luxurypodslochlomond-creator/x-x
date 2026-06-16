@@ -159,7 +159,7 @@ export default function ZappCreator({ onSubmit }) {
       await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch (err) {
       // Permission denied — show a friendly message
-      setVoiceText('Mic blocked! Please allow microphone access in your browser settings 🎤');
+      setVoiceText('Mic blocked! Please allow microphone access in your browser settings');
       setIsListening(false);
       setTimeout(() => setVoiceText(''), 4000);
       return;
@@ -205,7 +205,7 @@ export default function ZappCreator({ onSubmit }) {
       setVoicePulse(false);
       lastTranscriptRef.current = '';
       const msgs = {
-        'not-allowed': 'Mic blocked! Check browser settings 🎤',
+        'not-allowed': 'Mic blocked! Check browser settings',
         'no-speech': 'Nothing heard — tap and try again',
         'network': 'Network error — check your connection',
         'aborted': '',
@@ -260,7 +260,7 @@ export default function ZappCreator({ onSubmit }) {
           what do you<br />want to build?
         </h1>
         <p className="text-white/40 font-semibold" style={{ fontSize: 'clamp(1rem, 3vw, 1.25rem)' }}>
-          tap an idea · or say it out loud ⚡
+          tap an idea · or say it out loud
         </p>
       </motion.div>
 

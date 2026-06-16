@@ -3,11 +3,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
-const EMOJIS = ['⚡','🎮','🎨','🏆','🌟','🐉','🎵','🔥','🚀','🌈','🦄','🍕','🎪','🤖','🦊','🎯'];
+const SHAPES = [
+  { shape: 'zap', color: '#fbbf24' },
+  { shape: 'diamond', color: '#a78bfa' },
+  { shape: 'star', color: '#f472b6' },
+  { shape: 'pulse', color: '#60a5fa' },
+  { shape: 'flame', color: '#f97316' },
+  { shape: 'waveform', color: '#34d399' },
+  { shape: 'sparkle', color: '#fbbf24' },
+  { shape: 'rocket', color: '#ef4444' },
+  { shape: 'burst', color: '#ec4899' },
+  { shape: 'spectrum', color: '#7c3aed' },
+  { shape: 'people', color: '#8b5cf6' },
+  { shape: 'laugh', color: '#14b8a6' },
+  { shape: 'check', color: '#22c55e' },
+  { shape: 'gear', color: '#64748b' },
+  { shape: 'trophy', color: '#fbbf24' },
+  { shape: 'shuffle', color: '#f472b6' },
+];
 
 export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInstruction, onSaved, onClose }) {
   const [name, setName] = useState('');
-  const [emoji, setEmoji] = useState('⚡');
+  const [selectedShape, setSelectedShape] = useState(0);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [savedLink, setSavedLink] = useState('');
@@ -20,7 +37,7 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
         title: appTitle || idea,
         idea,
         html,
-        emoji,
+        emoji: SHAPES[selectedShape].shape,
         creator_name: name.trim() || null,
         play_count: 0,
       };
@@ -99,19 +116,21 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
             </div>
             <p className="text-white/30 text-sm text-center mb-5">let other kids play your creation!</p>
 
-            {/* Emoji picker */}
-            <p className="text-white/40 text-xs font-black mb-2 uppercase tracking-widest">pick an emoji</p>
+            {/* Shape picker */}
+            <p className="text-white/40 text-xs font-black mb-2 uppercase tracking-widest">pick an icon</p>
             <div className="grid grid-cols-8 gap-1.5 mb-4">
-              {EMOJIS.map(e => (
+              {SHAPES.map((s, i) => (
                 <button
-                  key={e}
-                  onClick={() => setEmoji(e)}
-                  className="text-xl rounded-lg py-1 transition-all"
+                  key={s.shape}
+                  onClick={() => setSelectedShape(i)}
+                  className="rounded-lg py-1.5 transition-all flex items-center justify-center"
                   style={{
-                    background: emoji === e ? 'rgba(167,139,250,0.25)' : 'rgba(255,255,255,0.04)',
-                    border: emoji === e ? '1px solid rgba(167,139,250,0.6)' : '1px solid transparent'
+                    background: selectedShape === i ? `${s.color}25` : 'rgba(255,255,255,0.04)',
+                    border: selectedShape === i ? `1px solid ${s.color}60` : '1px solid transparent'
                   }}
-                >{e}</button>
+                >
+                  <ZappGeometricIcon shape={s.shape} size={22} color={s.color} accent={s.color} />
+                </button>
               ))}
             </div>
 

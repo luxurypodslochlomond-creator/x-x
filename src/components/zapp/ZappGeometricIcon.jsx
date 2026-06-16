@@ -237,6 +237,13 @@ const shapes = {
       <line x1="11" y1="5" x2="5" y2="11" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
+
+  flame: ({ size, color, accent }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2c0 0 6 5 6 10a6 6 0 0 1-12 0c0-3 2-6 6-10z" fill={`${color}15`} stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M12 10c0 0 3 3 3 5.5c0 2-1.5 3.5-3 3.5s-3-1.5-3-3.5c0-1.5 3-5.5 3-5.5z" fill={accent} opacity="0.5" stroke={color} strokeWidth="1" />
+    </svg>
+  ),
 };
 
 export default function ZappGeometricIcon({ shape, size = 32, color = '#a78bfa', accent = '#f472b6', animate = false }) {

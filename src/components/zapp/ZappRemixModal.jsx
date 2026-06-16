@@ -60,9 +60,9 @@ export default function ZappRemixModal({ original, onSubmit, onClose }) {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.94 }}
               className="flex items-center gap-2 px-3 py-2.5 rounded-xl font-bold text-sm text-white/80 transition-all"
-              style={{ background: 'rgba(244,114,182,0.08)', border: '1px solid rgba(244,114,182,0.2)' }}
+              style={{ background: `${r.color}14`, border: `1px solid ${r.color}30` }}
             >
-              <span className="text-lg">{r.emoji}</span>
+              <ZappGeometricIcon shape={r.shape} size={18} color={r.color} accent={r.color} />
               <span className="text-xs">{r.label}</span>
             </motion.button>
           ))}
@@ -94,7 +94,11 @@ export default function ZappRemixModal({ original, onSubmit, onClose }) {
               className="flex-1 py-3 rounded-xl font-black text-white text-sm"
               style={{ background: 'linear-gradient(135deg, #db2777, #7c3aed)', boxShadow: '0 0 20px rgba(219,39,119,0.4)' }}
             >
-              🔀 remix it ⚡
+              <span className="flex items-center justify-center gap-1.5">
+                <ZappGeometricIcon shape="shuffle" size={14} color="#fff" accent="rgba(255,255,255,0.7)" />
+                remix it
+                <ZappGeometricIcon shape="zap" size={14} color="#fbbf24" accent="#fde68a" />
+              </span>
             </motion.button>
           )}
         </div>

@@ -175,7 +175,10 @@ export default function Zapp() {
               <div className="flex items-center justify-between px-4 py-2 flex-shrink-0"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.4)' }}>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">{directPlay.emoji || '⚡'}</span>
+                  {directPlay.emoji && /^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}]/u.test(directPlay.emoji)
+                    ? <span className="text-xl">{directPlay.emoji}</span>
+                    : <ZappGeometricIcon shape={directPlay.emoji || 'zap'} size={20} color="#fbbf24" accent="#fde68a" />
+                  }
                   <span className="text-white font-black text-sm truncate max-w-[200px]">{directPlay.title}</span>
                   {directPlay.creator_name && <span className="text-white/30 text-xs">by {directPlay.creator_name}</span>}
                 </div>
@@ -223,7 +226,7 @@ export default function Zapp() {
                 savedId={savedId}
                 onSave={builtHtml ? () => setShowSave(true) : undefined}
                 onRemix={builtHtml ? () => {
-                  setShowRemix({ id: null, title: appTitle || idea, idea, emoji: '⚡' });
+                  setShowRemix({ id: null, title: appTitle || idea, idea });
                 } : undefined}
               />
             </motion.div>
