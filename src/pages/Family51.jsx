@@ -487,13 +487,21 @@ export default function Family51Page() {
               </div>
             </div>
 
-            {/* PRIVACY — tiny */}
-            <div style={{ marginBottom: 20, padding: '8px 12px', borderRadius: 8, background: 'rgba(245,166,35,0.05)', border: '1px solid rgba(245,166,35,0.15)', display: 'flex', alignItems: 'center', gap: 6 }}>
-              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                <rect x="1.5" y="5" width="9" height="6" rx="1" stroke="#f5a623" strokeWidth="1.1" />
-                <path d="M3.5 5V3.5a2.5 2.5 0 015 0V5" stroke="#f5a623" strokeWidth="1.1" strokeLinecap="round" />
-              </svg>
-              <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.03em' }}>Nothing stored. No account. No trace. {geoPrice.inline} when you're ready for unlimited.</span>
+            {/* LOCATION + PRIVACY — tiny trust row */}
+            <div style={{ marginBottom: 14, display: 'flex', gap: 8 }}>
+              {/* Location badge */}
+              <button onClick={() => setShowLocationPicker(true)} style={{ flex: 0, padding: '7px 12px', borderRadius: 8, background: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.2)', display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 10, color: 'rgba(26,18,8,0.5)', fontWeight: 600, letterSpacing: '0.02em' }}>
+                <PinIcon color="#f5a623" size={10} />
+                {selectedLocation?.jurisdiction?.split('·')[0]?.trim() || 'UK law'}
+              </button>
+              {/* Privacy */}
+              <div style={{ flex: 1, padding: '7px 10px', borderRadius: 8, background: 'rgba(245,166,35,0.04)', border: '1px solid rgba(245,166,35,0.12)', display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
+                <LockIcon color="rgba(26,18,8,0.3)" size={10} />
+                <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', letterSpacing: '0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Nothing stored. No account. No trace.</span>
+              </div>
+            </div>
+            <div style={{ marginBottom: 20, textAlign: 'center' }}>
+              <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.03em' }}>{geoPrice.inline} when you're ready for unlimited.</span>
             </div>
 
             <SortedLiveCounter />
