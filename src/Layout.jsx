@@ -13,7 +13,7 @@ import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import BuzzTripIcon from '@/components/buzztrip/BuzzTripIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PlatformIcon from '@/components/shared/PlatformIcon';
-import CTRL51Icon from '@/components/ctrl51/CTRL51Icon';
+
 // import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 // import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
 // import PerformanceMonitor from '@/components/shared/PerformanceMonitor';
@@ -193,8 +193,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const isCB51Page = currentPageName.startsWith('CB51') || currentPageName.startsWith('Scott') || isCB51Subdomain || brandContext === 'cb51';
   const isPS51Page = currentPageName.startsWith('PetSounds51') || currentPageName === 'AdminPetSoundsPayments' || brandContext === 'ps51';
   const isTracktPage = currentPageName.startsWith('Trackt') || currentPageName === 'TracktDashboard';
-  const isCTRL51Page = currentPageName.startsWith('CTRL51');
-  const isSortedPage = currentPageName === 'Family51' || currentPageName.startsWith('Sorted') || currentPageName === 'SortedFAQ';
+    const isSortedPage = currentPageName === 'Family51' || currentPageName.startsWith('Sorted') || currentPageName === 'SortedFAQ';
   const isSortedSubPage = ['SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit', 'PetSounds51InvestorPress'].includes(currentPageName);
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName) || isTracktPage;
@@ -419,7 +418,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     // 1. PRODUCTS (paid / subscription tools)
     const productsNav = [
       { title: "ZAPP", url: createPageUrl("Zapp"), icon: Zap, highlight: true, description: "Build anything with AI · for kids" },
-      { title: "CTRL51", url: createPageUrl("CTRL51"), icon: CTRL51Icon, highlight: true, description: "Procurement control · £5k/month" },
+
       { title: "SORTED", url: createPageUrl("Sorted"), icon: COOLASFUCKSorted, highlight: true, description: "Decode scary letters · subscription" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: COOLASFUCKPaw, highlight: true, description: "Sound therapy for animals · subscription" },
       { title: "CB51", url: createPageUrl("CB51"), icon: Radio, highlight: true, description: "Manage your artists · avoid the noise" },
@@ -667,7 +666,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         )}
 
         {/* MOBILE HEADER */}
-        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
         <header className={`lg:hidden sticky ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b ${isPS51Page ? 'border-amber-700/40' : 'border-cyan-500/30'}`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
@@ -825,7 +824,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   )}
 
         {/* DESKTOP SIDEBAR */}
-        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-cyan-500/30">
             <Link to={createPageUrl(isCB51Page ? "CB51" : isPS51Page ? "PetSounds51" : "Welcome")} className="flex items-center gap-3 mb-4">
@@ -940,9 +939,9 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
                             )}
 
-        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-6') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-6') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
           {children}
-              {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isCTRL51Page && !isSortedPage && (
+              {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
               <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
               <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>

@@ -93,12 +93,7 @@ const ReadingSupportPage = React.lazy(() => import('./pages/ReadingSupport'));
 const YoungWarriorsPage = React.lazy(() => import('./pages/YoungWarriors'));
 const SupportLearn51Page = React.lazy(() => import('./pages/SupportLearn51'));
 const PlatformPage = React.lazy(() => import('./pages/Platform'));
-const CTRL51Page = React.lazy(() => import('./pages/CTRL51'));
-const CTRL51DashboardPage = React.lazy(() => import('./pages/CTRL51Dashboard'));
-const CTRL51PricingPage = React.lazy(() => import('./pages/CTRL51Pricing'));
-const CTRL51TermsPage = React.lazy(() => import('./pages/CTRL51Terms'));
-const CTRL51PrivacyPage = React.lazy(() => import('./pages/CTRL51Privacy'));
-const CTRL51CheckoutSuccessPage = React.lazy(() => import('./pages/CTRL51CheckoutSuccess'));
+
 const BrianHughesCVPage = React.lazy(() => import('./pages/BrianHughesCV'));
 const AdminSortedOutreachPage = React.lazy(() => import('./pages/AdminSortedOutreach'));
 const AdminSortedInfluencersPage = React.lazy(() => import('./pages/AdminSortedInfluencers'));
@@ -256,12 +251,7 @@ const AuthenticatedApp = () => {
         <Route path="/SupportLearn51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SupportLearn51Page /></Suspense>} />
       </Route>
       <Route path="/Platform" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="Platform"><PlatformPage /></LayoutWrapper></Suspense>} />
-      <Route path="/CTRL51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING CTRL51" />}><LayoutWrapper currentPageName="CTRL51"><CTRL51Page /></LayoutWrapper></Suspense>} />
-      <Route path="/CTRL51Dashboard" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CTRL51Dashboard"><CTRL51DashboardPage /></LayoutWrapper></Suspense>} />
-      <Route path="/CTRL51Pricing" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CTRL51Pricing"><CTRL51PricingPage /></LayoutWrapper></Suspense>} />
-      <Route path="/CTRL51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><CTRL51TermsPage /></Suspense>} />
-      <Route path="/CTRL51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><CTRL51PrivacyPage /></Suspense>} />
-      <Route path="/CTRL51CheckoutSuccess" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="CTRL51CheckoutSuccess"><CTRL51CheckoutSuccessPage /></LayoutWrapper></Suspense>} />
+
       <Route path="/BrianHughesCV" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><BrianHughesCVPage /></Suspense>} />
       <Route path="/AdminSortedOutreach" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminSortedOutreach"><AdminSortedOutreachPage /></LayoutWrapper></Suspense>} />
       <Route path="/AdminSortedInfluencers" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminSortedInfluencers"><AdminSortedInfluencersPage /></LayoutWrapper></Suspense>} />
