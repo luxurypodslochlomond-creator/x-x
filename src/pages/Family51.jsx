@@ -155,6 +155,8 @@ export default function Family51Page() {
           <a href="/SortedTerms" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>Terms</a>
           <span style={{ color: '#ddd' }}>•</span>
           <a href="/SortedPrivacy" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>Privacy</a>
+          <span style={{ color: '#ddd' }}>•</span>
+          <a href="/SortedGlobalAccess" style={{ textDecoration: 'none', color: '#22c55e', fontWeight: 700 }}>🌍 Global Access</a>
         </div>
         <p style={{ fontSize: 10, color: '#aaa', margin: 0, letterSpacing: '0.05em' }}>
           ZERO LOSS — ZERO BULLSHIT

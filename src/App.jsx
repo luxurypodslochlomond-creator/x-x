@@ -108,6 +108,7 @@ const ZappTermsPage = React.lazy(() => import('./pages/ZappTerms'));
 const ZappPrivacyPage = React.lazy(() => import('./pages/ZappPrivacy'));
 const FergusHughesProfilePage = React.lazy(() => import('./pages/FergusHughesProfile'));
 const RealityCheckPage = React.lazy(() => import('./pages/RealityCheck'));
+const SortedGlobalAccessPage = React.lazy(() => import('./pages/SortedGlobalAccess'));
 
 
 
@@ -266,6 +267,7 @@ const AuthenticatedApp = () => {
       <Route path="/ZappPrivacy" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappPrivacyPage /></Suspense>} />
       <Route path="/FergusHughesProfile" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><FergusHughesProfilePage /></Suspense>} />
       <Route path="/RealityCheck" element={<Suspense fallback={<div style={{background:'#05080f',minHeight:'100vh'}} />}><RealityCheckPage /></Suspense>} />
+      <Route path="/SortedGlobalAccess" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SortedLayout currentPage="SortedGlobalAccess"><SortedGlobalAccessPage /></SortedLayout></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
