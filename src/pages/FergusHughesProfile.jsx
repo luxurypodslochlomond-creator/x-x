@@ -47,23 +47,43 @@ export default function FergusHughesProfile() {
     <div className="min-h-screen bg-gray-100 p-6">
       <style>{`
         @media print {
-          body * {
-            visibility: hidden;
+          /* Hide layout elements - header, footer, sidebar, nav */
+          header, footer, aside, nav, main > header, main > footer, [data-standalone], .lg\\:block, .lg\\:ml-80, .fixed, .sticky {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
           }
-          .print-container, .print-container * {
-            visibility: visible;
+          
+          /* Hide body background */
+          body, body * {
+            background: white !important;
           }
+          
+          /* Hide buttons */
+          button, [role="button"] {
+            display: none !important;
+          }
+          
+          /* Show ONLY the profile */
           .print-container {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            box-shadow: none;
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 2cm !important;
+            box-shadow: none !important;
+            background: white !important;
           }
+          
+          .print-container, .print-container * {
+            visibility: visible !important;
+            display: block !important;
+            color: black !important;
+          }
+          
           @page {
-            margin: 1cm;
+            margin: 0;
             size: A4;
           }
         }
