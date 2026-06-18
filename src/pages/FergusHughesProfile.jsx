@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const profile = {
   name: "Fergus Hughes",
@@ -29,7 +29,6 @@ const profile = {
   playerDescription: "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session.",
   whyMovingOn: "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now.",
   goal: "To play for the national team",
-  videoLink: "",
   contactName: "Brian Hughes (Father)",
   contactPhone: "07494 023328",
   school: "Inverkeithing High School",
@@ -38,67 +37,28 @@ const profile = {
 };
 
 export default function FergusHughesProfile() {
-  const [showPrintTip, setShowPrintTip] = useState(false);
-
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
-    <div className="min-h-screen bg-white p-6">
+    <div className="min-h-screen bg-white p-8">
       <style>{`
         @media print {
-          header, footer, aside, nav, main > header, main > footer, [data-standalone], .lg\\:block, .lg\\:ml-80, .fixed, .sticky, body > div > div {
-            display: none !important;
-            visibility: hidden !important;
+          body * { visibility: hidden; }
+          #profile-content, #profile-content * { visibility: visible; }
+          #profile-content { 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            margin: 0; 
+            padding: 0;
+            border: none;
           }
-          body, body * { background: white !important; }
-          button, [role="button"] { display: none !important; }
-          .print-container {
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
-            width: 100% !important;
-            margin: 0 !important;
-            padding: 1.5cm !important;
-            box-shadow: none !important;
-            background: white !important;
-          }
-          .print-container, .print-container * {
-            visibility: visible !important;
-            display: block !important;
-            color: black !important;
-          }
-          @page { margin: 0; size: A4; }
+          @page { margin: 1cm; size: A4; }
         }
       `}</style>
       
-      {/* Admin toolbar */}
-      <div className="max-w-3xl mx-auto mb-6 flex items-center justify-between print:hidden">
-        <div>
-          <h1 className="text-lg font-bold text-gray-700">Fergus Hughes — Player Profile</h1>
-          <p className="text-xs text-gray-500 mt-1">Professional one-pager for scouts & coaches</p>
-        </div>
-        <div className="flex gap-2">
-          <button onClick={() => setShowPrintTip(!showPrintTip)} className="px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-600 hover:bg-gray-50">
-            Export PDF
-          </button>
-          <button onClick={handlePrint} className="px-3 py-1.5 text-xs bg-gray-800 text-white rounded hover:bg-gray-700">
-            Print
-          </button>
-        </div>
-      </div>
-
-      {showPrintTip && (
-        <div className="max-w-3xl mx-auto mb-4 bg-gray-50 border border-gray-200 rounded p-3 text-xs text-gray-700 print:hidden">
-          Click Print → Change destination to "Save as PDF" → Set margins to "Minimum"
-        </div>
-      )}
-
-      {/* THE ONE-PAGER */}
-      <div className="print-container max-w-3xl mx-auto bg-white border border-gray-200" style={{ fontFamily: 'Georgia, serif' }}>
+      <div id="profile-content" className="max-w-3xl mx-auto bg-white border border-gray-200 p-8" style={{ fontFamily: 'Georgia, serif' }}>
         {/* Header */}
-        <div className="border-b-2 border-gray-800 pb-4 mb-4">
+        <div className="border-b-2 border-gray-800 pb-4 mb-5">
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">{profile.name}</h1>
@@ -113,8 +73,8 @@ export default function FergusHughesProfile() {
         </div>
 
         <div className="space-y-5">
-          {/* Key Stats - 3 columns */}
-          <div className="grid grid-cols-3 gap-3 border-b border-gray-200 pb-4">
+          {/* Key Stats */}
+          <div className="grid grid-cols-3 gap-4 border-b border-gray-200 pb-4">
             <div>
               <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Position</p>
               <p className="text-gray-900 font-semibold text-sm">{profile.position}</p>
@@ -143,21 +103,18 @@ export default function FergusHughesProfile() {
           </div>
 
           {/* Why Moving On */}
-          <div className="bg-gray-50 border-l-4 border-gray-400 p-3">
+          <div className="bg-gray-50 border-l-4 border-gray-400 p-4">
             <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Why I'm Moving On</h2>
             <p className="font-sans text-sm text-gray-800 italic">{profile.whyMovingOn}</p>
           </div>
 
-          {/* Achievements & Strengths - 2 columns */}
+          {/* Achievements & Strengths */}
           <div className="grid grid-cols-2 gap-6">
             <div>
               <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Achievements</h2>
               <ul className="space-y-1.5">
                 {profile.achievements.map((a, i) => (
-                  <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
-                    <span className="text-gray-400 mt-0.5">•</span>
-                    <span>{a}</span>
-                  </li>
+                  <li key={i} className="font-sans text-sm text-gray-800">• {a}</li>
                 ))}
               </ul>
             </div>
@@ -165,10 +122,7 @@ export default function FergusHughesProfile() {
               <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Strengths</h2>
               <ul className="space-y-1.5">
                 {profile.strengths.map((s, i) => (
-                  <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
-                    <span className="text-gray-400 mt-0.5">•</span>
-                    <span>{s}</span>
-                  </li>
+                  <li key={i} className="font-sans text-sm text-gray-800">• {s}</li>
                 ))}
               </ul>
             </div>
@@ -209,9 +163,16 @@ export default function FergusHughesProfile() {
         </div>
       </div>
 
-      <p className="text-center text-xs text-gray-400 mt-6 print:hidden">
-        Admin only — Update profile data at top of file
-      </p>
+      {/* Instructions for Brian */}
+      <div className="max-w-3xl mx-auto mt-6 p-4 bg-blue-50 border border-blue-200 rounded text-sm text-blue-900">
+        <p className="font-semibold mb-2">To save as PDF:</p>
+        <ol className="list-decimal list-inside space-y-1 text-xs">
+          <li>Press Ctrl+P (or Cmd+P on Mac)</li>
+          <li>Change "Destination" to "Save as PDF"</li>
+          <li>Set margins to "Minimum"</li>
+          <li>Click "Save"</li>
+        </ol>
+      </div>
     </div>
   );
 }
