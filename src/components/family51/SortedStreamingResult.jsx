@@ -138,16 +138,23 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
 
       {/* Timeline removed - too much clutter */}
 
-      {/* ── IF YOU DON'T ACT — always visible for urgent letters ── */}
-      {result.if_you_ignore_this && (
+      {/* ── FREE HELP — clean, no duplication */}
+      {result.free_help?.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.25 }}
-          style={{ padding: '16px 18px', borderRadius: 14, background: 'rgba(217,119,6,0.05)', border: '1px solid rgba(217,119,6,0.2)' }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          style={{ padding: '14px 16px', borderRadius: 12, background: '#fff', border: '1px solid rgba(34,197,94,0.25)' }}
         >
-          <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(217,119,6,0.8)', margin: '0 0 8px' }}>IF YOU DO NOTHING</p>
-          <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.78)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(34,197,94,0.85)', margin: '0 0 10px' }}>FREE EXPERT HELP</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {result.free_help.slice(0, 2).map((help, i) => (
+              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(34,197,94,0.6)', flexShrink: 0, marginTop: 5 }} />
+                <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.5 }}>{help}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
       )}
 
@@ -172,91 +179,34 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </motion.button>
       )}
 
-      {/* ── EXTRA INFO — expanded detail ── */}
-      <AnimatePresence>
-        {showMore && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: 10, overflow: 'hidden' }}
-          >
-            {result.if_you_ignore_this && (
-              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(217,119,6,0.05)', border: '1px solid rgba(217,119,6,0.15)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(217,119,6,0.7)', margin: '0 0 8px' }}>IF YOU DON'T ACT</p>
-                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_you_ignore_this}</p>
-              </div>
-            )}
 
-            {result.free_help?.length > 0 && (
-              <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.15)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(22,163,74,0.7)', margin: '0 0 10px' }}>FREE HELP AVAILABLE</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {result.free_help.map((help, i) => (
-                    <p key={i} style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.65, margin: 0, paddingLeft: 12, borderLeft: `2px solid rgba(34,197,94,0.4)` }}>{help}</p>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(249,115,22,0.05)', border: '1px solid rgba(249,115,22,0.15)' }}>
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: 'rgba(234,88,12,0.7)', margin: '0 0 10px' }}>TALK TO A REAL PERSON</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {[
-                  { name: 'Citizens Advice', desc: 'free debt & legal help', url: 'https://www.citizensadvice.org.uk' },
-                  { name: 'National Debtline', desc: '0808 808 4000', url: 'https://www.nationaldebtline.org' },
-                  { name: 'Debt Camel', desc: 'plain English guides', url: 'https://debtcamel.co.uk' },
-                ].map(({ name, desc, url }) => (
-                  <a key={name} href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#f97316', flexShrink: 0 }} />
-                    <span><strong style={{ color: '#1a1208' }}>{name}</strong> — {desc}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
-      {/* ── SEE MORE / HIDE TOGGLE ── */}
-      <button
-        onClick={() => setShowMore(v => !v)}
-        style={{
-          fontSize: 12, fontWeight: 700, color: 'rgba(26,18,8,0.45)',
-          background: 'none', border: '1px solid rgba(26,18,8,0.12)',
-          borderRadius: 10, padding: '11px 0', cursor: 'pointer',
-          letterSpacing: '0.08em', width: '100%',
-          WebkitTapHighlightColor: 'transparent',
-        }}
-      >
-        {showMore ? '↑ SHOW LESS' : '↓ SEE MORE DETAIL'}
-      </button>
 
-      {/* ── BOTTOM ACTIONS ── */}
-      <div style={{ display: 'flex', gap: 8 }}>
+      {/* ── BOTTOM ACTIONS ── Clean, consistent */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
         <CopyBreakdownButton result={result} sev={sev} />
         <button
           onClick={handleSave}
           style={{
-            flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
-            letterSpacing: '0.08em', cursor: 'pointer',
-            border: '1px solid rgba(34,197,94,0.4)',
-            background: saved ? 'rgba(34,197,94,0.12)' : 'rgba(34,197,94,0.06)',
+            flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+            letterSpacing: '0.06em', cursor: 'pointer',
+            border: '1px solid rgba(34,197,94,0.35)',
+            background: saved ? 'rgba(34,197,94,0.1)' : 'rgba(34,197,94,0.05)',
             color: '#16a34a',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-            transition: 'all 0.2s',
           }}
         >
-          {saved ? '✓ SAVED' : 'SHARE / SAVE'}
+          {saved ? 'SAVED' : 'SHARE'}
         </button>
         <button
           onClick={onReset}
           style={{
-            flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
-            letterSpacing: '0.08em', cursor: 'pointer',
-            border: '1px solid rgba(26,18,8,0.12)',
-            background: 'transparent', color: 'rgba(26,18,8,0.45)',
+            flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+            letterSpacing: '0.06em', cursor: 'pointer',
+            border: '1px solid rgba(26,18,8,0.15)',
+            background: 'rgba(26,18,8,0.03)',
+            color: 'rgba(26,18,8,0.5)',
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
           }}
         >
@@ -264,20 +214,11 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </button>
       </div>
 
-      {/* ── PUSH NOTIFICATION NUDGE — one-time, gentle, dismissable ── */}
-      <SortedPushNudge deadline={result.key_deadline} />
 
-      {/* ── ALWAYS-VISIBLE GEO-AWARE TRUSTED HELP LINKS ── */}
-      <SortedHelpLinks geo={geo} accentColor="#22c55e" />
-
-      {/* HUMAN + AI LINE */}
-      <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.4)', textAlign: 'center', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
-        Built by a human who needed this too. Powered by AI — but the care is real.
-      </p>
 
       {/* DISCLAIMER */}
-      <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
-        General guidance only — not legal advice.
+      <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
+        Guidance only — not legal advice.
       </p>
 
     </div>
@@ -294,13 +235,10 @@ function CopyBreakdownButton({ result, sev }) {
   const handleCopy = async () => {
     const text = 
       `SORTED LETTER BREAKDOWN\n\n` +
-      `${result.letter_summary || 'Official letter'}\n` +
-      `Severity: ${result.severity} — ${result.severity_explanation}\n\n` +
-      (result.we_hear_you ? `${result.we_hear_you}\n\n` : '') +
-      `WHAT THIS MEANS:\n${result.what_this_means}\n\n` +
-      (result.key_deadline && result.key_deadline !== 'No deadline mentioned' ? `DEADLINE: ${result.key_deadline}\n\n` : '') +
-      (result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' ? `AMOUNT: ${result.financial_impact}\n\n` : '') +
-      `ACTION STEPS:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
+      `${result.letter_summary}\n` +
+      `Severity: ${result.severity}\n\n` +
+      (result.one_sentence ? `${result.one_sentence}\n\n` : '') +
+      `WHAT TO DO:\n${result.three_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
       (result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : '') +
       `Via SORTED — uf51.love/Sorted`;
 
