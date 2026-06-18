@@ -29,7 +29,7 @@ const profile = {
   goal: "To play for the national team",
   videoLink: "",
   contactName: "Brian Hughes (Father)",
-  contactPhone: "TBC — add your number",
+  contactPhone: "07494 023328",
   school: "Inverkeithing High School",
   canTravelTo: "Can travel to Falkirk training. Driving theory passed, practical test imminent.",
 };
