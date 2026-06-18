@@ -20,7 +20,32 @@ export default function MauroChat() {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const bottomRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Handle iOS keyboard visibility
+  useEffect(() => {
+    const handleFocusIn = () => setIsKeyboardOpen(true);
+    const handleFocusOut = () => setIsKeyboardOpen(false);
+    
+    document.addEventListener('focusin', handleFocusIn);
+    document.addEventListener('focusout', handleFocusOut);
+    
+    return () => {
+      document.removeEventListener('focusin', handleFocusIn);
+      document.removeEventListener('focusout', handleFocusOut);
+    };
+  }, []);
+
+  // Scroll to keep input visible when keyboard opens
+  useEffect(() => {
+    if (isKeyboardOpen && inputRef.current) {
+      setTimeout(() => {
+        inputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }, 300);
+    }
+  }, [isKeyboardOpen]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -49,7 +74,7 @@ export default function MauroChat() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
       {/* MESSAGES */}
-      <div style={{ maxHeight: 320, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16, paddingRight: 4 }}>
+      <div style={{ maxHeight: isKeyboardOpen ? '45vh' : 320, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16, paddingRight: 4, WebkitOverflowScrolling: 'touch' }}>
         {messages.map((m, i) => (
           <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
             <div style={{
@@ -79,6 +104,7 @@ export default function MauroChat() {
       {/* INPUT */}
       <div style={{ display: 'flex', gap: 8 }}>
         <input
+           ref={inputRef}
            value={input}
            onChange={e => setInput(e.target.value)}
            onKeyDown={e => e.key === 'Enter' && send()}
@@ -86,11 +112,11 @@ export default function MauroChat() {
            style={{
              flex: 1, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.12)',
              borderRadius: 10, padding: '11px 14px', fontSize: 13, color: '#1a1208', outline: 'none',
-             fontFamily: 'inherit'
+             fontFamily: 'inherit', WebkitAppearance: 'none'
            }}
-           onFocus={e => e.target.style.background = 'rgba(26,18,8,0.06)'}
-           onBlur={e => e.target.style.background = 'rgba(26,18,8,0.03)'}
-        />
+           onFocus={e => { e.target.style.background = 'rgba(26,18,8,0.06)'; setIsKeyboardOpen(true); }}
+           onBlur={e => { e.target.style.background = 'rgba(26,18,8,0.03)'; setTimeout(() => setIsKeyboardOpen(false), 200); }}
+         />
         <button
           onClick={send}
           disabled={loading || !input.trim()}
