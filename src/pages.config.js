@@ -259,7 +259,6 @@ const P2PFoodRescue = lazy(() => import('./pages/P2PFoodRescue'));
 const PRMaterials = lazy(() => import('./pages/PRMaterials'));
 const PassItOn = lazy(() => import('./pages/PassItOn'));
 const PatientZero = lazy(() => import('./pages/PatientZero'));
-const PetSounds51 = lazy(() => import('./pages/PetSounds51'));
 const PetSounds51Enterprise = lazy(() => import('./pages/PetSounds51Enterprise'));
 const PetSounds51Privacy = lazy(() => import('./pages/PetSounds51Privacy'));
 const PetSounds51Story = lazy(() => import('./pages/PetSounds51Story'));
@@ -618,7 +617,6 @@ export const PAGES = {
     "PRMaterials": PRMaterials,
     "PassItOn": PassItOn,
     "PatientZero": PatientZero,
-    "PetSounds51": PetSounds51,
     "PetSounds51Enterprise": PetSounds51Enterprise,
     "PetSounds51Privacy": PetSounds51Privacy,
     "PetSounds51Story": PetSounds51Story,
