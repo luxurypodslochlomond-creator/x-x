@@ -420,31 +420,42 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               </div>
             )}
 
-            {/* ACTIONS — clean, two buttons */}
-            <div style={{ display: 'flex', gap: 8 }}>
-              <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: copied ? 'rgba(34,197,94,0.6)' : accentColor + '60', color: copied ? '#22c55e' : accentColor, background: copied ? 'rgba(34,197,94,0.08)' : `${accentColor}10` }}>
-                {copied ? '✓ COPIED' : 'COPY LETTER'}
+            {/* ACTIONS — clean, three buttons like decoder */}
+            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+              <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{
+                flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+                letterSpacing: '0.06em', cursor: 'pointer',
+                border: copied ? '1px solid rgba(34,197,94,0.6)' : accentColor + '60',
+                background: copied ? 'rgba(34,197,94,0.08)' : `${accentColor}08`,
+                color: copied ? '#22c55e' : accentColor,
+                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+              }}>
+                {copied ? 'COPIED' : 'COPY'}
               </motion.button>
-              <motion.button onClick={() => openInEmailApp()} whileTap={{ scale: 0.95 }} style={{ ...primaryBtn, borderColor: 'rgba(34,197,94,0.4)', color: '#22c55e', background: 'rgba(34,197,94,0.07)' }}>
-                OPEN IN EMAIL APP
+              <motion.button onClick={() => openInEmailApp()} whileTap={{ scale: 0.95 }} style={{
+                flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+                letterSpacing: '0.06em', cursor: 'pointer',
+                border: '1px solid rgba(34,197,94,0.35)',
+                background: 'rgba(34,197,94,0.05)',
+                color: '#16a34a',
+                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+              }}>
+                EMAIL
               </motion.button>
+              <button
+                onClick={handleSave}
+                style={{
+                  flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+                  letterSpacing: '0.06em', cursor: 'pointer',
+                  border: '1px solid rgba(34,197,94,0.35)',
+                  background: saved ? 'rgba(34,197,94,0.1)' : 'rgba(34,197,94,0.05)',
+                  color: saved ? '#22c55e' : '#16a34a',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                }}
+              >
+                {saved ? 'SAVED' : 'SHARE'}
+              </button>
             </div>
-
-            {/* SAVE / SHARE — native share sheet */}
-            <button
-              onClick={handleSave}
-              style={{
-                width: '100%', padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
-                letterSpacing: '0.08em', cursor: 'pointer',
-                border: '1px solid rgba(255,255,255,0.12)',
-                background: saved ? 'rgba(34,197,94,0.12)' : 'rgba(255,255,255,0.04)',
-                color: saved ? '#22c55e' : 'rgba(26,18,8,0.5)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', transition: 'all 0.2s',
-              }}
-            >
-              {saved ? '✓ SAVED' : (navigator.share ? 'SHARE / SAVE TO NOTES' : 'SAVE TO CLIPBOARD')}
-            </button>
 
             {/* HANDOFF — escalate to dispute help */}
             {onHandoff && (
@@ -468,8 +479,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               </motion.button>
             )}
 
-            {/* GET MORE HELP — geo-aware */}
-            <SortedHelpLinks geo={geo} accentColor={accentColor} />
+
 
             <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
               WRITE ANOTHER
@@ -478,11 +488,9 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
             {/* SHARE THE TOOL */}
             <SortedShareButton accentColor={accentColor} />
 
-            <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
-              SORTED provides guidance only — not legal advice.{' '}
-              <a href="/SortedTerms" style={{ color: 'rgba(26,18,8,0.5)', textDecoration: 'underline' }}>Terms</a>
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
+              Guidance only — not legal advice.
             </p>
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', letterSpacing: '0.1em', fontWeight: 700 }}>NOTHING STORED. NOTHING SEEN. YOURS ALONE.</p>
           </motion.div>
         )}
       </AnimatePresence>

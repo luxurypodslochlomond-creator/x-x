@@ -468,43 +468,36 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               </Card>
             )}
 
-            {/* SAVE / SHARE */}
-            <button
-              onClick={handleSave}
-              style={{
-                width: '100%', padding: '13px 0', borderRadius: 10, fontSize: 12, fontWeight: 800,
-                letterSpacing: '0.08em', cursor: 'pointer',
-                border: '1px solid rgba(34,197,94,0.4)',
-                background: emailSent ? 'rgba(34,197,94,0.15)' : 'rgba(34,197,94,0.07)',
-                color: '#22c55e',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation', transition: 'all 0.2s',
-              }}
-            >
-              {emailSent ? '✓ SAVED' : (
-                <>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    {navigator.share
-                      ? <><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></>
-                      : <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></>
-                    }
-                  </svg>
-                  {navigator.share ? 'SHARE / SAVE' : 'COPY TO CLIPBOARD'}
-                </>
-              )}
-            </button>
+            {/* SAVE / SHARE / NEW — three buttons like decoder */}
+            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+              <button
+                onClick={handleSave}
+                style={{
+                  flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+                  letterSpacing: '0.06em', cursor: 'pointer',
+                  border: '1px solid rgba(34,197,94,0.35)',
+                  background: emailSent ? 'rgba(34,197,94,0.1)' : 'rgba(34,197,94,0.05)',
+                  color: '#16a34a',
+                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+                }}
+              >
+                {emailSent ? 'SAVED' : 'SHARE'}
+              </button>
+              <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{
+                flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+                letterSpacing: '0.06em', cursor: 'pointer',
+                border: '1px solid rgba(26,18,8,0.15)',
+                background: 'rgba(26,18,8,0.03)',
+                color: 'rgba(26,18,8,0.5)',
+                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+              }}>
+                NEW
+              </motion.button>
+            </div>
 
-            {/* SHARE THE TOOL */}
-            <SortedShareButton accentColor={accentColor} />
-
-            <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
-              NEW SITUATION
-            </motion.button>
-
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
-              SORTED provides guidance only — not legal advice. For serious matters, speak to a qualified solicitor. <a href="/SortedTerms" style={{ color: 'rgba(26,18,8,0.4)', textDecoration: 'underline' }}>Terms</a>
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
+              Guidance only — not legal advice.
             </p>
-            <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.25)', textAlign: 'center', letterSpacing: '0.05em', marginTop: 4 }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>
         )}
       </AnimatePresence>

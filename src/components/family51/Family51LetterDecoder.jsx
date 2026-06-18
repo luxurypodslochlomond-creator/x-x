@@ -140,7 +140,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
       const promptText = `You are SORTED — a calm, experienced advisor who helps people understand official letters. You sound like a knowledgeable friend who's seen this before. Clear, brief, supportive. ${geoContext} A person has received this letter${currentType ? ` (type: ${currentType})` : ''} and needs to understand it quickly.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}
 
-      YOUR JOB: Get them to free expert advice fast. These situations are too important for AI alone.
+      YOUR JOB: Help them take action fast. Give them real steps they can do RIGHT NOW.
 
       OUTPUT — KEEP IT SHORT AND CALM:
       Return JSON with ONLY these fields:
@@ -149,12 +149,13 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       - key_deadline: Exact date or null
       - amount: Specific amount or null
       - one_sentence: ONE sentence explaining what this is
-      - three_steps: Exactly 3 action steps. First step: always "Call Citizens Advice or National Debtline first"
-      - free_help: 2 services max. Always include National Debtline: 0808 808 4000
+      - three_steps: Exactly 3 action steps. Make them SPECIFIC and ACTIONABLE (e.g. "Call your supplier today to request a repayment plan — they must offer one before disconnecting"). NOT "call Citizens Advice" — give them real actions first.
+      - free_help: 2 services max. Always include National Debtline: 0808 808 4000. This is for AFTER they've tried the action steps.
 
       RULES:
       - NEVER invent phone numbers
-      - First step always: get human advice
+      - Action steps first — actual things they can do
+      - Free help is secondary — only if action steps don't work
       - Be honest if unclear
       - England/Wales vs Scotland: different rules`;
 
