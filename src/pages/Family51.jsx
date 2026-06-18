@@ -61,11 +61,14 @@ export default function Family51Page() {
 
         {/* HERO */}
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ marginBottom: 16, textAlign: 'center' }}>
-          <h1 style={{ fontSize: 'clamp(22px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 5px', color: '#1a1208' }}>
-            Paste, type, snap a photo or upload a file
+          <h1 style={{ fontSize: 'clamp(24px, 7vw, 36px)', fontWeight: 900, lineHeight: 1.12, letterSpacing: '-0.03em', margin: '0 0 8px', color: '#1a1208' }}>
+            Got a scary letter?<br />You're in the right place.
           </h1>
-          <p style={{ fontSize: 14, fontWeight: 500, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
-            We'll decode it into plain language — any language — then tell you exactly what to do.
+          <p style={{ fontSize: 15, fontWeight: 600, color: '#f5a623', margin: '0 0 6px', letterSpacing: '-0.01em' }}>
+            AI reads it. Explains it. Tells you what to do — instantly.
+          </p>
+          <p style={{ fontSize: 13, fontWeight: 400, color: 'rgba(26,18,8,0.45)', margin: 0 }}>
+            Paste, type, snap a photo or upload a file — any language, nothing stored, no account needed.
           </p>
         </motion.div>
 

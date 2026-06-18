@@ -53,7 +53,7 @@ export default function SortedAbout() {
     <div style={{ marginTop: 0 }}>
       {/* Short intro — always visible */}
       <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.6)', lineHeight: 1.65, margin: '0 0 12px' }}>
-        Millions of people get scary official letters every day and have no idea what to do. Legal advice costs £200/hour. Citizens Advice has a 3-week wait. So people freeze — and things get worse.
+        Millions of people get scary official letters every day — from bailiffs, courts, landlords, employers — and have no idea what they mean or what to do. Legal advice costs £200/hour. Citizens Advice has a 3-week wait. So people freeze, ignore the letter, and things spiral. SORTED is the thing you can reach for <em style={{ fontStyle: 'normal', fontWeight: 700, color: '#f5a623' }}>right now</em> when that happens.
       </p>
       <motion.button
         onClick={() => setOpen(!open)}
@@ -67,7 +67,7 @@ export default function SortedAbout() {
           fontSize: 11, fontWeight: 800, letterSpacing: '0.12em',
         }}
       >
-        <span>WHY SORTED EXISTS</span>
+        <span>WHY WE BUILT THIS</span>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
