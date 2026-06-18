@@ -8,27 +8,21 @@ import MauroChat from '@/components/family51/MauroChat';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedPhotoButton from '@/components/family51/SortedPhotoButton';
 import SortedFileUploadButton from '@/components/family51/SortedFileUploadButton';
+import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
-
 
 export default function Family51Page() {
   const engineRef = useRef(null);
   const { usageCount, isPremium, recordUse, isLocked } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
-  const [showPaywall, setShowPaywall] = useState(false);
 
   const openTool = (engineId, handoffData = null) => {
     engineRef.current?.open(engineId, handoffData);
   };
 
-  const handlePhotoDecoded = (text) => {
-    openTool('letter', { prefillText: text });
-  };
-
-  const handleFileDecoded = (text) => {
-    openTool('letter', { prefillText: text });
-  };
+  const handlePhotoDecoded = (url) => openTool('letter', { prefillText: url });
+  const handleFileDecoded = (url) => openTool('letter', { prefillText: url });
 
   return (
     <div style={{ minHeight: '100dvh', background: '#fef8ee', color: '#1a1208' }}>
@@ -39,144 +33,111 @@ export default function Family51Page() {
         geoPrice={geoPrice}
         recordUse={recordUse}
         isLocked={isLocked}
-        onPaywall={() => setShowPaywall(true)}
+        onPaywall={() => {}}
       />
 
-      {/* HERO */}
-      <div style={{
-        padding: '40px 20px 28px',
-        textAlign: 'center',
-        maxWidth: 520,
-        margin: '0 auto',
-      }}>
+      {/* ── HERO ── */}
+      <div style={{ padding: '40px 20px 0', textAlign: 'center', maxWidth: 480, margin: '0 auto' }}>
+
+        {/* Free badge */}
         <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          background: 'rgba(212,118,10,0.08)', border: '1px solid rgba(212,118,10,0.2)',
-          borderRadius: 20, padding: '5px 14px', marginBottom: 18,
+          display: 'inline-flex', alignItems: 'center', gap: 7,
+          background: 'rgba(212,118,10,0.07)', border: '1px solid rgba(212,118,10,0.18)',
+          borderRadius: 20, padding: '5px 14px', marginBottom: 20,
         }}>
           <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e' }} />
           <span style={{ fontSize: 11, fontWeight: 700, color: '#d4760a', letterSpacing: '0.08em' }}>FREE TO USE · NO SIGNUP</span>
         </div>
 
+        {/* Headline */}
         <h1 style={{
-          fontSize: 'clamp(30px, 8vw, 42px)',
-          fontWeight: 900,
-          lineHeight: 1.1,
-          margin: '0 0 14px',
-          color: '#1a1208',
-          letterSpacing: '-0.03em',
+          fontSize: 'clamp(32px, 9vw, 44px)', fontWeight: 900, lineHeight: 1.05,
+          margin: '0 0 14px', color: '#1a1208', letterSpacing: '-0.03em',
         }}>
           We'll decode it.<br />
           <span style={{ color: '#d4760a' }}>Tell you what to do.</span>
         </h1>
 
         <p style={{
-          fontSize: 15,
-          color: 'rgba(26,18,8,0.6)',
-          lineHeight: 1.6,
-          margin: '0 0 24px',
-          maxWidth: 380,
-          marginLeft: 'auto',
-          marginRight: 'auto',
+          fontSize: 15, color: 'rgba(26,18,8,0.55)', lineHeight: 1.6,
+          margin: '0 0 28px', maxWidth: 360, marginLeft: 'auto', marginRight: 'auto',
         }}>
-          Paste, type, snap a photo or upload a file — any language, any country, nothing stored.
+          Got a scary letter? Stuck in a dispute? Paste it, photo it, or upload — any language, nothing stored.
         </p>
 
-        {/* 2 PRIMARY TOOLS */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 14 }}>
-          <SortedToolCard
-            icon="letter"
-            title="Decode a Letter"
-            description="Plain English breakdown, urgency check, what to actually do"
-            accentColor="#d4760a"
-            onClick={() => openTool('letter')}
-          />
-          <SortedToolCard
-            icon="reply"
-            title="Write a Reply"
-            description="Ready-to-send response, right tone, zero waffle"
-            accentColor="#b85c00"
-            onClick={() => openTool('reply')}
-          />
-        </div>
+        {/* PRIMARY CTA */}
+        <button
+          onClick={() => openTool('letter')}
+          style={{
+            width: '100%', background: '#d4760a', color: '#fff', border: 'none',
+            borderRadius: 14, padding: '16px 28px', fontSize: 16, fontWeight: 900,
+            cursor: 'pointer', letterSpacing: '-0.01em', marginBottom: 10,
+            boxShadow: '0 4px 18px rgba(212,118,10,0.28)',
+          }}
+        >
+          Start — paste or type
+        </button>
 
-        {/* INPUT BUTTONS — horizontal row */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+        {/* SECONDARY INPUT ROW */}
+        <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
           <SortedPhotoButton onDecoded={handlePhotoDecoded} compact />
           <SortedFileUploadButton onDecoded={handleFileDecoded} compact />
-          <button
-            onClick={() => openTool('letter')}
-            style={{
-              flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-              background: 'rgba(26,18,8,0.04)', border: '1.5px solid rgba(26,18,8,0.12)',
-              borderRadius: 10, padding: '10px 8px', fontSize: 12, fontWeight: 700,
-              color: 'rgba(26,18,8,0.55)', cursor: 'pointer', letterSpacing: '0.02em',
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="1" y="2" width="12" height="10" rx="2" stroke="currentColor" strokeWidth="1.4" fill="none"/>
-              <path d="M4 5h6M4 7.5h4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-            </svg>
-            TYPE / PASTE
-          </button>
-        </div>
-
-        {/* DIVIDER with "SOMETHING ELSE?" */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0 12px' }}>
-          <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.08)' }} />
-          <span style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em' }}>SOMETHING ELSE?</span>
-          <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.08)' }} />
-        </div>
-
-        {/* 3 SECONDARY TOOLS — smaller cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-          {[
-            { id: 'scam', engineId: 'scam', title: 'Scam Checker', description: 'Spot it fast', icon: 'scam' },
-            { id: 'contract', engineId: 'contract', title: 'Contract Checker', description: 'Rights grabs', icon: 'contract' },
-            { id: 'conflict', engineId: 'conflict', title: 'Resolve Conflict', description: 'Step-by-step', icon: 'conflict' },
-          ].map(tool => (
-            <SortedToolCard
-              key={tool.id}
-              icon={tool.icon}
-              title={tool.title}
-              description={tool.description}
-              accentColor="rgba(26,18,8,0.4)"
-              onClick={() => openTool(tool.engineId)}
-              variant="secondary"
-            />
-          ))}
         </div>
 
         {/* TRUST ROW */}
-        <div style={{ marginTop: 16 }}>
-          <SortedTrustRow geoPrice={geoPrice} usageCount={usageCount} isPremium={isPremium} />
+        <SortedTrustRow geoPrice={geoPrice} usageCount={usageCount} isPremium={isPremium} />
+      </div>
+
+      {/* ── DIVIDER ── */}
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '8px 20px 0' }} />
+
+      {/* ── TOOLS — what else can I do? ── */}
+      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+        <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em', textAlign: 'center', marginBottom: 12 }}>
+          WHAT DO YOU NEED?
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9, marginBottom: 9 }}>
+          <SortedToolCard icon="letter" title="Decode a Letter" description="Plain English · urgency · what to do" accentColor="#d4760a" onClick={() => openTool('letter')} />
+          <SortedToolCard icon="reply" title="Write a Reply" description="Right tone · zero waffle · ready to send" accentColor="#b85c00" onClick={() => openTool('reply')} />
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 9 }}>
+          <SortedToolCard icon="scam" title="Scam Checker" description="Spot it fast" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('scam')} variant="secondary" />
+          <SortedToolCard icon="contract" title="Contract Checker" description="Rights grabs" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('contract')} variant="secondary" />
+          <SortedToolCard icon="conflict" title="Resolve Conflict" description="Step-by-step" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('conflict')} variant="secondary" />
         </div>
       </div>
 
-      {/* LIVE COUNTER */}
-      <div style={{ padding: '28px 16px 0', maxWidth: 560, margin: '0 auto' }}>
+      {/* ── LIVE COUNTER ── */}
+      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <SortedLiveCounter />
       </div>
 
-      {/* DIVIDER */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '28px 20px 0' }} />
+      {/* ── DIVIDER ── */}
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '24px 20px 0' }} />
 
-      {/* MAURO CHAT */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 560, margin: '0 auto' }}>
+      {/* ── MAURO CHAT ── */}
+      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <MauroChat />
       </div>
 
-      {/* CASE HISTORY */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 560, margin: '0 auto' }}>
+      {/* ── CASE HISTORY ── */}
+      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <SortedCaseHistory onOpenTool={(toolId, data) => openTool(toolId, data)} isPremium={isPremium} />
       </div>
 
-      {/* ABOUT */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 560, margin: '0 auto' }}>
+      {/* ── PAYWALL — always visible at bottom ── */}
+      {!isPremium && (
+        <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+          <SortedForLifeCard />
+        </div>
+      )}
+
+      {/* ── ABOUT ── */}
+      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <SortedAbout />
       </div>
 
-      {/* FOOTER */}
+      {/* ── FOOTER ── */}
       <div style={{ padding: '32px 20px', textAlign: 'center', marginTop: 16 }}>
         <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
           {[
@@ -185,11 +146,7 @@ export default function Family51Page() {
             { label: 'FAQ', href: '/SortedFAQ' },
             { label: 'Press', href: '/SortedPressRelease' },
           ].map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)', textDecoration: 'none', fontWeight: 600 }}
-            >
+            <a key={link.href} href={link.href} style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)', textDecoration: 'none', fontWeight: 600 }}>
               {link.label}
             </a>
           ))}
