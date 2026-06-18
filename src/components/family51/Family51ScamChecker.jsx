@@ -201,7 +201,6 @@ Return JSON with these exact fields:
           <textarea
             value={inputText}
             onChange={e => setInputText(e.target.value)}
-            autoFocus
             placeholder={`Paste the message, email, or text here — or take a photo of the letter.
 
 Copy exactly what it says — every word helps us check it.`}

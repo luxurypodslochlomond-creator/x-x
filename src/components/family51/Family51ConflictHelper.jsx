@@ -291,7 +291,6 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       <textarea
         value={what}
         onChange={e => setWhat(e.target.value)}
-        autoFocus
         placeholder="Just tell us what's going on. Who's involved, what happened, what's been said. Don't filter it."
         style={{
           width: '100%', height: 130, background: '#fff',
@@ -503,9 +502,9 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
             </motion.button>
 
             <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', lineHeight: 1.6, margin: '4px 0 0' }}>
-              SORTED provides guidance only — not legal advice. For serious matters, speak to a qualified solicitor. <a href="/SortedTerms" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'underline' }}>Terms</a>
+              SORTED provides guidance only — not legal advice. For serious matters, speak to a qualified solicitor. <a href="/SortedTerms" style={{ color: 'rgba(26,18,8,0.4)', textDecoration: 'underline' }}>Terms</a>
             </p>
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', letterSpacing: '0.05em', marginTop: 4 }}>Nothing stored. Nothing seen. Yours alone.</p>
+            <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.25)', textAlign: 'center', letterSpacing: '0.05em', marginTop: 4 }}>Nothing stored. Nothing seen. Yours alone.</p>
           </motion.div>
         )}
       </AnimatePresence>

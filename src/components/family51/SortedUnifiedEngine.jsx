@@ -107,12 +107,19 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
     open: (toolId, handoffData = null) => handleToolOpen(toolId, handoffData),
   }));
 
-  if (!activeTool) return null;
-
   const tc = TOOL_COLORS[activeTool] || TOOL_COLORS.letter;
+  const sheetRef = useRef(null);
+
+  // Scroll the sheet itself to top when tool changes
+  useEffect(() => {
+    if (visible && sheetRef.current) {
+      sheetRef.current.scrollTop = 0;
+    }
+  }, [activeTool, visible]);
 
   return (
     <div
+      ref={sheetRef}
       style={{
         position: 'fixed',
         inset: 0,
@@ -123,11 +130,13 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
           : 'transform 0.22s cubic-bezier(0.4, 0, 1, 1)',
         willChange: 'transform',
         background: '#faf8f5',
-        overflowY: 'auto',
+        overflowY: activeTool ? 'auto' : 'hidden',
         overflowX: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         WebkitOverflowScrolling: 'touch',
+        // Keep mounted when not active so no remount flash
+        pointerEvents: visible ? 'auto' : 'none',
       }}
     >
       {/* COLOURED TOP ACCENT BAR */}

@@ -268,7 +268,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
           <textarea
             value={context}
             onChange={e => setContext(e.target.value)}
-            autoFocus={!prefillContext}
+            autoFocus={false}
             placeholder="Who are you writing to? What happened? What do you want?"
             style={{
               width: '100%', height: prefillContext ? 80 : 120, background: '#fff',
@@ -355,39 +355,6 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
       <AnimatePresence>
         {result && (
           <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
-
-            {/* LOADING STATE */}
-            {loading && !result && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                style={{
-                  padding: '32px 20px',
-                  textAlign: 'center',
-                  borderTop: '1px solid rgba(255,255,255,0.06)',
-                  marginTop: 20,
-                }}
-              >
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                  style={{
-                    width: 48,
-                    height: 48,
-                    border: '2px solid rgba(6, 182, 212, 0.2)',
-                    borderTop: '2px solid #06b6d4',
-                    borderRadius: '50%',
-                    margin: '0 auto 16px',
-                  }}
-                />
-                <p style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.7)', margin: 0, letterSpacing: '0.05em' }}>
-                  ✨ Writing your reply…
-                </p>
-                <p style={{ fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.4)', margin: '8px 0 0', letterSpacing: '0.03em' }}>
-                  AI is composing your message in {tone.toLowerCase()} tone
-                </p>
-              </motion.div>
-            )}
 
             {/* TONE SWITCHER — visible, real-time */}
             <div style={{ background: accentColor + '08', border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '14px 16px' }}>

@@ -394,7 +394,6 @@ Return JSON with these fields:
           <textarea
             value={letterText}
             onChange={e => setLetterText(e.target.value)}
-            autoFocus
             placeholder="Paste your letter here — or take a photo below.
 
 Don't worry about formatting. Just get it all in."
