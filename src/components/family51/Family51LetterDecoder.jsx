@@ -32,7 +32,7 @@ const SEVERITY_CONFIG = {
 };
 
 const LOADING_STEPS = [
-  { text: 'Reading your letter…',        sub: 'This stays private — nothing is stored' },
+  { text: 'Analyzing…',                  sub: 'This stays private — nothing is stored' },
   { text: 'Identifying what this is…',   sub: 'Matching to known letter types' },
   { text: 'Checking any deadlines…',     sub: 'Dates matter — we\'re looking' },
   { text: 'Finding your options…',       sub: 'What you can actually do' },
@@ -140,7 +140,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
       const promptText = `You are SORTED — a calm, experienced advisor who helps people understand official letters. You sound like a knowledgeable friend who's seen this before. Clear, brief, supportive. ${geoContext} A person has received this letter${currentType ? ` (type: ${currentType})` : ''} and needs to understand it quickly.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}
 
-      YOUR JOB: Be HONEST and HELPFUL. Sometimes they're at fault. Sometimes it's scary but fixable. Tell them the truth.
+      YOUR JOB: Be HONEST, DIRECT, and HELPFUL. Tell them the truth — even if they're at fault.
 
       OUTPUT — KEEP IT SHORT AND CALM:
       Return JSON with ONLY these fields:
@@ -148,22 +148,25 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       - severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
       - key_deadline: Exact date or null
       - amount: Specific amount or null
-      - one_sentence: ONE sentence explaining what this is
-      - three_steps: Exactly 3 action steps. Be HONEST:
-        • If they're at fault: "Pay the £65 within 14 days to avoid it increasing to £130"
-        • If it's private parking: "This is from a private company, not the council. They can't issue fines like councils can, but they may send debt collectors. Decide if you want to contest or pay."
-        • If they can appeal: "You have grounds to appeal — gather evidence (photos, permits) and submit at [official portal]"
-        • If it's serious: "Contact [specific body] immediately — this needs expert help"
-      - free_help: 2 services max. Always include National Debtline: 0808 808 4000. This is backup support.
+      - one_sentence: ONE sentence explaining what this is — in PLAIN ENGLISH, no jargon
+      - three_steps: Exactly 3 action steps. Be HONEST and SPECIFIC:
+        • If they're at fault: "Pay the £65 within 14 days — it doubles to £130 after that"
+        • If it's private parking: "Private company, not council. They can't fine like councils can, but may send collectors. Your call: contest or pay."
+        • If council parking: "Council fine — legally enforceable. Pay £65 in 14 days or it becomes £130."
+        • If they can appeal: "You have grounds — gather [specific evidence] and appeal at [portal/link]"
+        • If debt collector: "They must prove you owe it. Write back: 'I dispute this debt — provide proof or cease contact.'"
+        • If it's serious: "Contact [specific body] today — this needs expert help ASAP"
+      - free_help: 2 services max. Always include National Debtline: 0808 808 4000. This is BACKUP — only if the action steps don't work or they need emotional support.
 
-      RULES:
-      - NEVER invent phone numbers
+      CRITICAL RULES:
+      - NEVER invent phone numbers or websites
       - Be HONEST if they're at fault — don't give false hope
-      - Tell them if it's private vs council (different law!)
-      - Action steps first — actual things they can do
-      - Free help is secondary — only if action steps don't work or they need emotional support
-      - England/Wales vs Scotland: different rules
-      - Keep it human, not robotic`;
+      - Tell them: private vs council (completely different law!)
+      - Action steps FIRST — real things they can do TODAY
+      - Free help is SECONDARY — backup only
+      - England/Wales vs Scotland vs NI: different rules, cite the right one
+      - Sound HUMAN — like a friend who knows this stuff, not a robot
+      - If unclear, say "Can't tell from this letter — call [body] to check"`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',

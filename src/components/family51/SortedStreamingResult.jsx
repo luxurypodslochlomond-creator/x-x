@@ -184,7 +184,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
 
 
       {/* ── BOTTOM ACTIONS ── Clean, consistent */}
-      <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+      <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
         <CopyBreakdownButton result={result} sev={sev} />
         <button
           onClick={handleSave}
@@ -193,7 +193,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             letterSpacing: '0.06em', cursor: 'pointer',
             border: '1px solid rgba(34,197,94,0.35)',
             background: saved ? 'rgba(34,197,94,0.1)' : 'rgba(34,197,94,0.05)',
-            color: '#16a34a',
+            color: saved ? '#22c55e' : '#16a34a',
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
           }}
         >
@@ -214,10 +214,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         </button>
       </div>
 
-
-
       {/* DISCLAIMER */}
-      <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
+      <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '8px 0 0' }}>
         Guidance only — not legal advice.
       </p>
 
