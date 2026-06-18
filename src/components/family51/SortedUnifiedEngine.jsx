@@ -70,7 +70,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   const [showShare, setShowShare] = useState(false);
   const [triggerPhoto, setTriggerPhoto] = useState(false);
 
-  // Open: set tool → immediately visible
+  // Open: set tool → immediately visible, scroll to top
   const handleToolOpen = (toolId, handoffData = null) => {
     if (isLocked && onPaywall) {
       onPaywall();
@@ -81,6 +81,8 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
     setShowShare(false);
     setTriggerPhoto(handoffData?.triggerPhoto || false);
     setVisible(true);
+    // Always scroll to top when a tool opens
+    setTimeout(() => window.scrollTo(0, 0), 50);
   };
 
   const handleToolComplete = (toolId) => {

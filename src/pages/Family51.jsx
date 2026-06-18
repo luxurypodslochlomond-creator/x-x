@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedTrustRow from '@/components/family51/SortedTrustRow';
@@ -17,12 +17,17 @@ export default function Family51Page() {
   const { usageCount, isPremium, recordUse, isLocked } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
 
+  // Fix: scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const openTool = (engineId, handoffData = null) => {
     engineRef.current?.open(engineId, handoffData);
   };
 
-  const handlePhotoDecoded = (url) => openTool('letter', { prefillText: url });
-  const handleFileDecoded = (url) => openTool('letter', { prefillText: url });
+  const handlePhotoDecoded = (url) => openTool('letter', { prefillFileUrl: url });
+  const handleFileDecoded = (url) => openTool('letter', { prefillFileUrl: url });
 
   return (
     <div style={{ minHeight: '100dvh', background: '#fef8ee', color: '#1a1208' }}>
