@@ -2,12 +2,13 @@ import React from 'react';
 import { PinIcon, LockIcon } from './SortedIcons';
 
 export default function SortedTrustRow({ selectedLocation, geoPrice, onShowLocationPicker }) {
+  const safeGeoPrice = geoPrice || { inline: '£9.99/month' };
 
   return (
     <div style={{ marginBottom: 18 }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 8, marginBottom: 8 }}>
         <button
-          onClick={() => onShowLocationPicker(true)}
+          onClick={() => onShowLocationPicker && onShowLocationPicker(true)}
           style={{
             padding: '8px 14px', borderRadius: 12, background: 'rgba(245,166,35,0.05)',
             border: '1.5px solid rgba(245,166,35,0.18)', display: 'flex', alignItems: 'center',
@@ -32,7 +33,7 @@ export default function SortedTrustRow({ selectedLocation, geoPrice, onShowLocat
       </div>
       <div style={{ textAlign: 'center' }}>
         <span style={{ fontSize: 11, color: 'rgba(26,18,8,0.38)', letterSpacing: '0.03em' }}>
-          10 free uses. Then {geoPrice.inline} for unlimited.
+          10 free uses. Then {safeGeoPrice.inline} for unlimited.
         </span>
       </div>
     </div>

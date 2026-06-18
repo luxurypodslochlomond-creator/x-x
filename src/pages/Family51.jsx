@@ -60,7 +60,7 @@ export default function Family51Page() {
   const [engineInput, setEngineInput] = useState('');
   const engineRef = useRef(null);
   const { usageCount, isPremium } = useSortedUsage();
-  const { geoPrice } = useSortedGeoPrice();
+  const geoPrice = useSortedGeoPrice();
 
   const handleToolSelect = (toolId, prefill = '') => {
     setActiveTool(toolId);
