@@ -19,16 +19,19 @@ export default function Family51Page() {
   const paywallRef = useRef(null);
   const caseHistoryRef = useRef(null);
 
-  // Fix: scroll to top on mount, then handle URL params
+  // Handle header badge taps
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('upgrade')) {
-      setTimeout(() => paywallRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-    } else if (params.get('cases')) {
-      setTimeout(() => caseHistoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    } else {
-      window.scrollTo(0, 0);
-    }
+    const handleHash = () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('upgrade')) {
+        setTimeout(() => paywallRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+      } else if (params.get('cases')) {
+        setTimeout(() => caseHistoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+      }
+    };
+    handleHash();
+    window.addEventListener('popstate', handleHash);
+    return () => window.removeEventListener('popstate', handleHash);
   }, []);
 
   const openTool = (engineId, handoffData = null) => {
@@ -135,17 +138,23 @@ export default function Family51Page() {
       {/* ── DIVIDER ── */}
       <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '24px 20px 0' }} />
 
-      {/* ── LIVE COUNTER ── */}
-      <div style={{ padding: '16px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <SortedLiveCounter />
-      </div>
-
-      {/* ── CASE HISTORY ── */}
+      {/* ── CASE HISTORY — your stuff first ── */}
       <div ref={caseHistoryRef} style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <SortedCaseHistory onOpenTool={(toolId, data) => openTool(toolId, data)} isPremium={isPremium} />
       </div>
 
-      {/* ── PAYWALL — always visible at bottom ── */}
+      {/* ── DIVIDER ── */}
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '24px 20px 0' }} />
+
+      {/* ── LIVE COUNTER — others helped (social proof) ── */}
+      <div style={{ padding: '16px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+        <SortedLiveCounter />
+      </div>
+
+      {/* ── DIVIDER ── */}
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '24px 20px 0' }} />
+
+      {/* ── PAYWALL — when you need unlimited ── */}
       {!isPremium && (
         <div ref={paywallRef} style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
           <SortedForLifeCard />

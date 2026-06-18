@@ -63,9 +63,10 @@ export default function SortedLayout({ children, currentPage }) {
 
         <div style={{ flex: 1 }} />
 
-        {/* FREE USES COUNTER — tappable, links to upgrade */}
+        {/* FREE USES COUNTER — what counts as a use? each tool run */}
         <Link
           to="/Sorted?upgrade=1"
+          title="Each tool use = 1 free use. Unlimited after that."
           style={{
             display: 'flex', alignItems: 'center', gap: 5, textDecoration: 'none',
             background: isPaid ? 'rgba(5,150,105,0.08)' : 'rgba(245,166,35,0.1)',
@@ -91,7 +92,7 @@ export default function SortedLayout({ children, currentPage }) {
           </span>
         </Link>
 
-        {/* CASES BRIEFCASE — taps to /Sorted?cases=1 */}
+        {/* CASES BRIEFCASE — your saved cases, tap to view */}
         <Link
           to="/Sorted?cases=1"
           onClick={() => { if ('vibrate' in navigator) navigator.vibrate(8); }}
@@ -105,7 +106,7 @@ export default function SortedLayout({ children, currentPage }) {
             WebkitTapHighlightColor: 'transparent',
             textDecoration: 'none',
           }}
-          title={caseCount > 0 ? `${caseCount} saved case${caseCount > 1 ? 's' : ''}` : 'No cases yet'}
+          title={caseCount > 0 ? `Your ${caseCount} saved case${caseCount > 1 ? 's' : ''} — tap to scroll` : 'No cases yet — they appear here when you decode letters'}
         >
           <svg width="14" height="14" viewBox="0 0 15 15" fill="none">
             <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#f5a623" strokeWidth="1.2" fill="none" />
