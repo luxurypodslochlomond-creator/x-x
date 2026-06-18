@@ -16,10 +16,19 @@ export default function Family51Page() {
   const engineRef = useRef(null);
   const { usageCount, isPremium, recordUse, isLocked } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
+  const paywallRef = useRef(null);
+  const caseHistoryRef = useRef(null);
 
-  // Fix: scroll to top on mount
+  // Fix: scroll to top on mount, then handle URL params
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('upgrade')) {
+      setTimeout(() => paywallRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+    } else if (params.get('cases')) {
+      setTimeout(() => caseHistoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const openTool = (engineId, handoffData = null) => {
@@ -132,13 +141,13 @@ export default function Family51Page() {
       </div>
 
       {/* ── CASE HISTORY ── */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+      <div ref={caseHistoryRef} style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <SortedCaseHistory onOpenTool={(toolId, data) => openTool(toolId, data)} isPremium={isPremium} />
       </div>
 
       {/* ── PAYWALL — always visible at bottom ── */}
       {!isPremium && (
-        <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+        <div ref={paywallRef} style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
           <SortedForLifeCard />
         </div>
       )}
