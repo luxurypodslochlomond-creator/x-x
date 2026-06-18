@@ -159,6 +159,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       - free_help: 2 services max — ONLY bodies that exist in THEIR country (e.g. UK: National Debtline; Australia: National Debt Helpline 1800 007 007; USA: local legal aid; Ireland: MABS 0818 07 2000). NEVER invent phone numbers. NEVER cite UK bodies for non-UK users. This is BACKUP — only if the action steps don't work or they need emotional support.
 
       CRITICAL RULES:
+      - NEVER use emojis. NO EMOJI ANYWHERE. Period.
       - NEVER invent phone numbers or websites
       - Be HONEST if they're at fault — don't give false hope
       - Tell them: private vs council (completely different law!)
