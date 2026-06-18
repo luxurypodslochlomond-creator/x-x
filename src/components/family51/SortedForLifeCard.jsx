@@ -39,27 +39,32 @@ export default function SortedForLifeCard({ compact = false }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: compact ? 0 : 0.3 }}
       style={{
-        marginTop: compact ? 0 : 24,
+        marginTop: compact ? 0 : 0,
         padding: compact ? '24px 20px' : '28px 24px',
-        border: '1.5px solid rgba(245,166,35,0.5)',
-        borderRadius: 18,
-        background: 'linear-gradient(135deg, rgba(249,115,22,0.08) 0%, rgba(217,119,6,0.04) 100%)',
+        border: '2px solid rgba(245,166,35,0.45)',
+        borderRadius: 20,
+        background: 'linear-gradient(150deg, rgba(249,115,22,0.06) 0%, rgba(217,119,6,0.02) 100%)',
+        boxShadow: '0 4px 20px rgba(245,166,35,0.06)',
       }}
     >
-      {/* EMOTIONAL HEADLINE */}
-      <div style={{ marginBottom: 20 }}>
-        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#f97316', margin: '0 0 8px' }}>NEVER BE STUCK AGAIN</p>
-        <p style={{ fontSize: 22, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', margin: '0 0 6px', lineHeight: 1.15 }}>
+      <div style={{ marginBottom: 22 }}>
+        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#f97316', margin: '0 0 10px' }}>
+          NEVER BE STUCK AGAIN
+        </p>
+        <p style={{ fontSize: 24, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.025em', margin: '0 0 8px', lineHeight: 1.1 }}>
           Every letter.<br />Every reply.<br />We've got you.
         </p>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-          <span style={{ fontSize: 32, fontWeight: 900, color: '#f97316', letterSpacing: '-0.03em' }}>{geo.label.replace('/month', '')}</span>
-          <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.45)' }}>{geo.sub}</span>
+          <span style={{ fontSize: 34, fontWeight: 900, color: '#d97706', letterSpacing: '-0.03em' }}>
+            {geo.label.replace('/month', '')}
+          </span>
+          <span style={{ fontSize: 14, color: 'rgba(26,18,8,0.42)', fontWeight: 500 }}>
+            {geo.sub}
+          </span>
         </div>
       </div>
 
-      {/* WHAT THEY GET — emotionally framed */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 22 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
         {[
           { text: 'Unlimited decodes — paste any letter, any time', bold: 'Unlimited decodes' },
           { text: 'We write your reply — professional, assertive, right tone', bold: 'We write your reply' },
@@ -68,36 +73,39 @@ export default function SortedForLifeCard({ compact = false }) {
           { text: 'Cancel any time — no contract, no catch', bold: 'Cancel any time' },
         ].map(({ text, bold }, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(249,115,22,0.15)', border: '1px solid rgba(249,115,22,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
-              <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                <path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <div style={{
+              width: 20, height: 20, borderRadius: '50%',
+              background: 'rgba(245,166,35,0.12)', border: '1.5px solid rgba(245,166,35,0.3)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1,
+            }}>
+              <svg width="10" height="10" viewBox="0 0 9 9" fill="none">
+                <path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#d97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.5 }}>
+            <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.72)', lineHeight: 1.5 }}>
               <strong style={{ color: '#1a1208', fontWeight: 700 }}>{bold}</strong> — {text.replace(bold + ' — ', '')}
             </span>
           </div>
         ))}
       </div>
 
-      {/* SOCIAL PROOF LINE */}
-      <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.4)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
+      <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
         "Less than a coffee. Worth more than a solicitor's first 5 minutes."
       </p>
 
-      {/* CTA */}
       <motion.button
         onClick={handleCheckout}
         disabled={loading}
         whileTap={!loading ? { scale: 0.97 } : {}}
         style={{
-          width: '100%', padding: '18px 0', borderRadius: 14,
-          fontSize: 15, fontWeight: 900, letterSpacing: '0.04em',
+          width: '100%', padding: '18px 0', borderRadius: 16,
+          fontSize: 16, fontWeight: 900, letterSpacing: '0.04em',
           cursor: loading ? 'not-allowed' : 'pointer',
           border: 'none',
-          background: loading ? 'rgba(249,115,22,0.2)' : '#f97316',
-          color: loading ? 'rgba(26,18,8,0.4)' : '#000',
+          background: loading ? 'rgba(249,115,22,0.2)' : '#d97706',
+          color: loading ? 'rgba(26,18,8,0.4)' : '#fff',
           transition: 'all 0.2s',
+          boxShadow: loading ? 'none' : '0 4px 16px rgba(217,119,6,0.25)',
         }}
       >
         {loading ? 'REDIRECTING...' : geo.cta}
@@ -107,7 +115,7 @@ export default function SortedForLifeCard({ compact = false }) {
         <p style={{ fontSize: 12, color: '#ef4444', textAlign: 'center', marginTop: 10 }}>{error}</p>
       )}
 
-      <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textAlign: 'center', marginTop: 12, letterSpacing: '0.03em', lineHeight: 1.5 }}>
+      <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.32)', textAlign: 'center', marginTop: 14, letterSpacing: '0.03em', lineHeight: 1.5 }}>
         Secure · Apple Pay &amp; Google Pay · Cancel anytime
       </p>
     </motion.div>

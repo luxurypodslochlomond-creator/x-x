@@ -49,56 +49,98 @@ export default function Family51Page() {
 
   const { isLocked, remaining, recordUse, loaded } = useSortedUsage();
 
-  // Handle "Snap a Photo" result from onboarding
   const handleOnboardingPhoto = (fileUrl) => {
     setShowOnboarding(false);
     setTimeout(() => engineRef.current?.open('letter', { triggerPhoto: true, prefillFileUrl: fileUrl }), 100);
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1208', position: 'relative' }}>
-      <div style={{ maxWidth: 520, margin: '0 auto', padding: '20px 16px 60px' }}>
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(170deg, #fef8ee 0%, #fdf6ea 25%, #faf4e6 50%, #f9f3e5 75%, #f8f2e4 100%)',
+      color: '#1a1208',
+      position: 'relative',
+    }}>
+      {/* Subtle radial glow behind hero */}
+      <div style={{
+        position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
+        width: '100%', maxWidth: 600, height: 320,
+        background: 'radial-gradient(ellipse at 50% 0%, rgba(245,166,35,0.08) 0%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0,
+      }} />
+
+      <div style={{ maxWidth: 520, margin: '0 auto', padding: '28px 16px 60px', position: 'relative', zIndex: 1 }}>
 
         {/* HERO */}
-        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ marginBottom: 16, textAlign: 'center' }}>
-          <h1 style={{ fontSize: 'clamp(24px, 7vw, 36px)', fontWeight: 900, lineHeight: 1.12, letterSpacing: '-0.03em', margin: '0 0 8px', color: '#1a1208' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          style={{ marginBottom: 28, textAlign: 'center' }}
+        >
+          <h1 style={{
+            fontSize: 'clamp(26px, 7.5vw, 38px)',
+            fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.035em',
+            margin: '0 0 10px', color: '#1a1208',
+          }}>
             Got a scary letter?<br />You're in the right place.
           </h1>
-          <p style={{ fontSize: 15, fontWeight: 600, color: '#f5a623', margin: '0 0 6px', letterSpacing: '-0.01em' }}>
+          <p style={{
+            fontSize: 16, fontWeight: 600, color: '#d97706',
+            margin: '0 0 8px', letterSpacing: '-0.01em', lineHeight: 1.4,
+          }}>
             AI reads it. Explains it. Tells you what to do — instantly.
           </p>
-          <p style={{ fontSize: 13, fontWeight: 400, color: 'rgba(26,18,8,0.45)', margin: 0 }}>
-            Paste, type, snap a photo or upload a file — any language, nothing stored, no account needed.
+          <p style={{ fontSize: 13, fontWeight: 400, color: 'rgba(26,18,8,0.42)', margin: 0, lineHeight: 1.5 }}>
+            Paste, type, snap a photo or upload a file<br />
+            Any language. Nothing stored. No account needed.
           </p>
         </motion.div>
 
         {/* PRIMARY TOOLS */}
-        <div style={{ marginBottom: 14, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.08 }}
+          style={{ marginBottom: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}
+        >
           <SortedToolCard variant="primary" icon="letter" title="Decode a Letter" description="Plain English breakdown, urgency check, what to actually do" accentColor="#f5a623" onClick={() => engineRef.current?.open('letter')} />
           <SortedToolCard variant="primary" icon="reply" title="Write a Reply" description="Ready-to-send response, right tone, zero waffle" accentColor="#2563eb" onClick={() => engineRef.current?.open('reply')} />
-        </div>
+        </motion.div>
 
-        {/* DIVIDER */}
-        <div style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg, transparent, rgba(245,166,35,0.25), transparent)' }} />
-        </div>
+        {/* MORE TOOLS */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.13 }}
+          style={{ marginBottom: 18, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}
+        >
+          <SortedToolCard variant="secondary" icon="scam" title="Scam Checker" description="Spot it fast" onClick={() => engineRef.current?.open('scam')} />
+          <SortedToolCard variant="secondary" icon="contract" title="Contract Checker" description="Rights grabs" onClick={() => engineRef.current?.open('contract')} />
+          <SortedToolCard variant="secondary" icon="conflict" title="Resolve Conflict" description="Step-by-step" onClick={() => engineRef.current?.open('conflict')} />
+        </motion.div>
 
         {/* QUICK INPUT ROW */}
-        <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 14 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.16 }}
+          style={{ marginBottom: 20 }}
+        >
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
             <SortedPhotoButton onPhotoSelected={(fileUrl) => engineRef.current?.open('letter', { triggerPhoto: true, prefillFileUrl: fileUrl })} />
             <SortedFileUploadButton onFileSelected={(fileUrl) => engineRef.current?.open('letter', { triggerPhoto: false, prefillFileUrl: fileUrl })} />
             <div
               onClick={() => engineRef.current?.open('letter')}
               style={{
-                padding: '11px 6px', borderRadius: 10, border: '1px solid rgba(26,18,8,0.15)', background: '#fff',
-                color: 'rgba(26,18,8,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                padding: '11px 6px', borderRadius: 12, border: '1.5px solid rgba(26,18,8,0.12)', background: '#fff',
+                color: 'rgba(26,18,8,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 gap: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer', textAlign: 'center',
-                transition: 'all 0.12s',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                transition: 'all 0.15s',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
               }}
-              onMouseEnter={e => { e.target.style.transform = 'translateY(-1px)'; e.target.style.boxShadow = '0 3px 8px rgba(0,0,0,0.06)'; }}
-              onMouseLeave={e => { e.target.style.transform = ''; e.target.style.boxShadow = '0 1px 2px rgba(0,0,0,0.03)'; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)'; }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8"/><path d="M3 9h18" stroke="currentColor" strokeWidth="1.5"/></svg>
               TYPE / PASTE
@@ -106,84 +148,101 @@ export default function Family51Page() {
           </div>
         </motion.div>
 
-        {/* SECONDARY TOOLS */}
-        <div style={{ marginBottom: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
-            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.28)', whiteSpace: 'nowrap' }}>SOMETHING ELSE?</span>
-            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-            <SortedToolCard variant="secondary" icon="scam" title="Scam Checker" description="Spot it fast" onClick={() => engineRef.current?.open('scam')} />
-            <SortedToolCard variant="secondary" icon="contract" title="Contract Checker" description="Rights grabs" onClick={() => engineRef.current?.open('contract')} />
-            <SortedToolCard variant="secondary" icon="conflict" title="Resolve Conflict" description="Step-by-step" onClick={() => engineRef.current?.open('conflict')} />
-          </div>
-        </div>
-
         {/* TRUST ROW */}
         <SortedTrustRow selectedLocation={selectedLocation} geoPrice={geoPrice} onShowLocationPicker={setShowLocationPicker} />
 
         {/* LIVE COUNTER */}
-        <div style={{ marginBottom: 24, textAlign: 'center' }}>
+        <div style={{ marginBottom: 28 }}>
           <SortedLiveCounter />
         </div>
 
         {/* CASE HISTORY */}
-        <div style={{ marginBottom: 28, padding: '14px 16px', borderRadius: 12, background: '#fff', border: '1px solid rgba(26,18,8,0.08)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-            <button onClick={() => setShowCases(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.5)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em' }}>
+        <div style={{
+          marginBottom: 28, padding: '16px 18px', borderRadius: 16,
+          background: '#fff', border: '1.5px solid rgba(26,18,8,0.07)',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.03)',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+            <button
+              onClick={() => setShowCases(v => !v)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.45)',
+                background: 'none', border: 'none', cursor: 'pointer',
+                letterSpacing: '0.06em', padding: 0,
+              }}
+            >
               YOUR CASES {showCases ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
             </button>
           </div>
           <AnimatePresence>
             {showCases && (
-              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} style={{ overflow: 'hidden' }}>
-                <SortedCaseHistory onFollowUp={(input) => { setFollowUpInput(input); setShowFollowUp(true); }} />
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                style={{ overflow: 'hidden' }}
+              >
+                <div style={{ paddingTop: 12 }}>
+                  <SortedCaseHistory onFollowUp={(input) => { setFollowUpInput(input); setShowFollowUp(true); }} />
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* ABOUT — always visible, the why matters */}
+        {/* ABOUT — always visible */}
         <div style={{ marginBottom: 28 }}>
           <SortedAbout />
         </div>
 
         {/* FAQ */}
         <div style={{ marginBottom: 28 }}>
-          <button onClick={() => setShowFAQ(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.45)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', marginBottom: 8 }}>
+          <button
+            onClick={() => setShowFAQ(v => !v)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 6,
+              fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.42)',
+              background: 'none', border: 'none', cursor: 'pointer',
+              letterSpacing: '0.06em', marginBottom: 10, padding: 0,
+            }}
+          >
             FAQ & HOW IT WORKS {showFAQ ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
           </button>
-          <AnimatePresence>{showFAQ && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} style={{ overflow: 'hidden' }}><SortedFAQ /></motion.div>}</AnimatePresence>
+          <AnimatePresence>
+            {showFAQ && (
+              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} style={{ overflow: 'hidden' }}>
+                <SortedFAQ />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* MAURO CHAT */}
-        <div style={{ marginBottom: 28 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
-            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.28)', whiteSpace: 'nowrap' }}>SORTED AI — ASK ANYTHING</span>
-            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
-          </div>
-          <div style={{ borderRadius: 14, padding: '14px 16px', background: '#fff', border: '1px solid rgba(249,115,22,0.15)' }}>
+        <div style={{ marginBottom: 32 }}>
+          <div style={{
+            borderRadius: 18, padding: '16px 18px',
+            background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.95) 100%)',
+            border: '1.5px solid rgba(249,115,22,0.18)',
+            boxShadow: '0 2px 8px rgba(249,115,22,0.06)',
+          }}>
             <MauroChat />
           </div>
         </div>
 
-        {/* DIVIDER */}
-        <div style={{ marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ flex: 1, height: 1, background: 'rgba(245,166,35,0.15)' }} />
-          <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.25)' }}>SORTED FOR LIFE</span>
-          <div style={{ flex: 1, height: 1, background: 'rgba(245,166,35,0.15)' }} />
+        {/* PRICING */}
+        <div style={{
+          borderTop: '1.5px solid rgba(245,166,35,0.18)',
+          paddingTop: 28,
+        }}>
+          <SortedForLifeCard geoPrice={geoPrice} />
         </div>
 
-        {/* SORTED FOR LIFE CARD */}
-        <SortedForLifeCard geoPrice={geoPrice} />
-
         {/* FOOTER LINKS */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 12, paddingBottom: 16 }}>
-          <Link to="/SortedFAQ" style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textDecoration: 'none' }}>FAQ</Link>
-          <Link to="/SortedTerms" style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textDecoration: 'none' }}>Terms</Link>
-          <Link to="/SortedPrivacy" style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', textDecoration: 'none' }}>Privacy</Link>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginTop: 20, paddingBottom: 16 }}>
+          <Link to="/SortedFAQ" style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)', textDecoration: 'none', fontWeight: 500 }}>FAQ</Link>
+          <Link to="/SortedTerms" style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)', textDecoration: 'none', fontWeight: 500 }}>Terms</Link>
+          <Link to="/SortedPrivacy" style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)', textDecoration: 'none', fontWeight: 500 }}>Privacy</Link>
         </div>
       </div>
 
@@ -240,7 +299,7 @@ export default function Family51Page() {
       {/* PREMIUM SUCCESS MODAL */}
       <AnimatePresence>{showSuccess && <SortedPremiumSuccess onDismiss={() => setShowSuccess(false)} onEnter={() => { setShowSuccess(false); engineRef.current?.open('letter'); }} />}</AnimatePresence>
 
-      {/* PAYWALL — upgrade from any state */}
+      {/* PAYWALL */}
       <AnimatePresence>
         {showPaywall && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowPaywall(false)} style={{ position: 'fixed', inset: 0, zIndex: 10001, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
