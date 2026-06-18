@@ -227,37 +227,47 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
   // Read a .docx file client-side — no upload needed, works offline/poor signal
   const readDocxClientSide = (file) => new Promise((resolve, reject) => {
+    console.log('[SORTED] readDocxClientSide starting for:', file.name);
     const reader = new FileReader();
     reader.onload = async (e) => {
       try {
+        console.log('[SORTED] File loaded, size:', e.target.result.byteLength, 'bytes');
         const arrayBuffer = e.target.result;
-        // Extract raw text from docx XML (works without any library)
         const uint8 = new Uint8Array(arrayBuffer);
-        // Convert to binary string for zip parsing
-        let binary = '';
-        for (let i = 0; i < uint8.length; i++) binary += String.fromCharCode(uint8[i]);
-        // docx is a zip — find word/document.xml inside it
-        const b64 = btoa(binary);
-        // Use a simple approach: decode the docx as text and extract XML content
+        console.log('[SORTED] Uint8Array created, length:', uint8.length);
+        
+        // Use TextDecoder to extract text
         const decoder = new TextDecoder('utf-8', { fatal: false });
         const text = decoder.decode(uint8);
+        console.log('[SORTED] Decoded text length:', text.length);
+        
         // Extract text between XML tags — handles most docx content
         const xmlMatches = text.match(/<w:t[^>]*>([^<]*)<\/w:t>/g) || [];
+        console.log('[SORTED] Found XML matches:', xmlMatches.length);
+        
         const extracted = xmlMatches
           .map(m => m.replace(/<[^>]+>/g, ''))
           .join(' ')
           .replace(/\s+/g, ' ')
           .trim();
+        
+        console.log('[SORTED] Extracted text length:', extracted.length);
+        console.log('[SORTED] Extract preview:', extracted.slice(0, 200) + '...');
+        
         if (extracted.length > 20) {
           resolve(extracted);
         } else {
-          reject(new Error('Could not read document text'));
+          reject(new Error('Could not read document text - extracted only ' + extracted.length + ' chars'));
         }
       } catch (err) {
+        console.error('[SORTED] DOCX extraction error:', err);
         reject(err);
       }
     };
-    reader.onerror = () => reject(new Error('File read failed'));
+    reader.onerror = (err) => {
+      console.error('[SORTED] FileReader error:', err);
+      reject(new Error('File read failed'));
+    };
     reader.readAsArrayBuffer(file);
   });
 
@@ -494,7 +504,10 @@ Don't worry about formatting. Just get it all in."
                 </motion.button>
                 <motion.button
                 whileTap={{ scale: 0.96 }}
-                onClick={() => fileInputRef.current?.click()}
+                onClick={() => {
+                  console.log('[SORTED] Upload button clicked, triggering file input');
+                  fileInputRef.current?.click();
+                }}
                 style={{
                  width: '100%', padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
                  letterSpacing: '0.02em', cursor: 'pointer',
