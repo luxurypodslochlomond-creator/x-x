@@ -164,7 +164,6 @@ const AuthenticatedApp = () => {
           }
         />
       ))}
-      <Route path="/PetSounds51" element={<LayoutWrapper currentPageName="PetSounds51"><PetSounds51 /></LayoutWrapper>} />
       <Route path="/BuzzTrip" element={<BuzzTripPage />} />
       <Route path="/BuzzTripAbout" element={<BuzzTripAboutPage />} />
       <Route path="/BuzzTripTerms" element={<BuzzTripTermsPage />} />
