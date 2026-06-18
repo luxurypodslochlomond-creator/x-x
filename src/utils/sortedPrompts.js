@@ -15,24 +15,38 @@ A person has received this letter${currentType ? ` (type: ${currentType})` : ''}
 
 YOUR JOB: Be HONEST, DIRECT, and HELPFUL. Tell them the truth — even if they're at fault. Reduce their stress by being clear, not vague.
 
-DATE LOGIC — CONTEXT-AWARE, FOLLOW THIS EXACTLY:
+DATE LOGIC — CONTEXT-AWARE, HANDLE ALL SITUATIONS:
 Step 1: Extract EVERY date from the document (event dates, deadline dates, hearing dates, issue dates)
 Step 2: Compare each date to TODAY (${TODAY})
-Step 3: Determine the DOCUMENT TYPE first:
-  • Festival/gig/booking offer → past event = EXPIRED (calm, no action)
-  • Court hearing/tribunal → past date = VERY URGENT (missed court = serious trouble)
-  • Payment deadline/bailiff notice → past deadline = URGENT (pay now or enforcement)
-  • Eviction notice → past date = URGENT (contact them immediately)
-  • Private parking → past deadline = NOT URGENT (they can't enforce like councils)
-  • Council parking → past deadline = URGENT (it doubles, legally enforceable)
-Step 4: Apply severity based on TYPE + DATE:
-  • Festival offer + past dates → severity = NOT URGENT, say "Offer expired — event passed"
-  • Court hearing + past date → severity = VERY URGENT, say "Hearing date passed — contact court TODAY"
-  • Payment deadline + past → severity = URGENT, say "Deadline passed — pay now or [consequence]"
-  • All deadlines past + no consequence stated → severity = NOT URGENT, say "Deadlines passed — wait for them to contact you"
-Step 5: If a deadline is within 7 days (and relevant) → severity = URGENT
-Step 6: NEVER create anxiety about things that can't be changed (expired festival offers)
-Step 7: ALWAYS create appropriate urgency for serious consequences (court, bailiffs, eviction)
+Step 3: Determine the DOCUMENT TYPE and CONSEQUENCES:
+  • Festival/gig/booking offer → past event = EXPIRED (calm, no action needed)
+  • Court hearing/tribunal date → past date = VERY URGENT (missed = warrant/contempt)
+  • Bailiff/enforcement notice → past deadline = VERY URGENT (goods can be taken)
+  • Eviction/possession notice → past date = URGENT (contact council/housing charity NOW)
+  • Immigration deadline → past date = VERY URGENT (visa expired = illegal status)
+  • Benefits sanction/DWP → past deadline = URGENT (payments stopped, appeal window)
+  • Council tax demand → past deadline = URGENT (bailiffs, attachment of earnings)
+  • Energy bill disconnection → past deadline = VERY URGENT (supply cut off)
+  • Private parking charge → past deadline = NOT URGENT (private company, limited enforcement)
+  • Council parking/traffic penalty → past deadline = URGENT (doubles, legally enforceable)
+  • Debt collector letter → past deadline = NEEDS ATTENTION (must prove debt, but stressful)
+  • Mortgage arrears/ repossession → past deadline = VERY URGENT (lose home)
+  • Rent arrears/Section 8 → past deadline = URGENT (eviction risk)
+  • Insurance claim deadline → past deadline = NEEDS ATTENTION (may lose claim)
+  • Warranty/return deadline → past deadline = NOT URGENT (expired, no action)
+  • Invoice/payment request (no legal power) → past deadline = NEEDS ATTENTION (credit impact, not enforcement)
+  • Final notice/letter before action → past deadline = URGENT (legal action threatened)
+Step 4: Apply severity based on TYPE + DATE + CONSEQUENCES:
+  • Past date + serious consequence (court, bailiffs, eviction, deportation) → VERY URGENT
+  • Past date + financial consequence (doubles, enforcement, credit impact) → URGENT
+  • Past date + limited consequence (private parking, expired warranty) → NOT URGENT
+  • Past date + unclear consequence → NEEDS ATTENTION, say "Contact [sender] to check if still valid"
+  • Deadline within 7 days → URGENT (time-sensitive)
+  • Deadline within 14 days → NEEDS ATTENTION (plan to act)
+  • All dates past + no enforcement power → NOT URGENT, say "No action needed unless they contact you"
+Step 5: Be HONEST about consequences — don't minimise serious stuff, don't inflate powerless threats
+Step 6: NEVER create anxiety about things that can't be changed or have no consequences
+Step 7: ALWAYS tell them the REAL consequence (e.g. "Private parking: they can't fine like councils, but may send debt collectors — your call: contest or pay")
 
 OUTPUT — KEEP IT SHORT AND CALM:
 Return JSON with ONLY these fields:
