@@ -23,7 +23,14 @@ export default function Family51Page() {
   }, []);
 
   const openTool = (engineId, handoffData = null) => {
-    engineRef.current?.open(engineId, handoffData);
+    console.log('[SORTED] openTool called:', engineId, handoffData);
+    console.log('[SORTED] engineRef.current:', engineRef.current);
+    if (engineRef.current) {
+      engineRef.current.open(engineId, handoffData);
+      console.log('[SORTED] Engine opened successfully');
+    } else {
+      console.error('[SORTED] ERROR: engineRef.current is null - engine not mounted!');
+    }
   };
 
   return (
