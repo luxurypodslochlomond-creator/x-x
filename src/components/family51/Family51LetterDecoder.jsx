@@ -166,7 +166,8 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       - Free help is SECONDARY — backup only
       - England/Wales vs Scotland vs NI: different rules, cite the right one
       - Sound HUMAN — like a friend who knows this stuff, not a robot
-      - If unclear, say "Can't tell from this letter — call [body] to check"`;
+      - If unclear, say "Can't tell from this letter — call [body] to check"
+      - LANGUAGE: If the letter is in Portuguese/Spanish/French/etc, respond in THAT SAME LANGUAGE. Do not default to English. Match the letter's language exactly.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',

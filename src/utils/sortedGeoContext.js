@@ -554,7 +554,7 @@ export function buildSortedGeoPromptContext(geo) {
   const code = geo.code?.split('-')[0];
   const lang = COUNTRY_LANGUAGE[code] || null;
   const langInstruction = lang
-    ? `CRITICAL LANGUAGE RULE: Respond entirely in ${lang}. The user's language is ${lang}. Every word of your response — labels, explanations, action steps, everything — must be in ${lang}. Do not switch to English unless the document itself is in English and the user appears to be communicating in English.`
-    : `Detect the language the user is writing in or the language of the document they submitted, and respond fully in that same language. Do not default to English if the user's language is clearly something else.`;
+    ? `CRITICAL LANGUAGE RULE: The user's country language is ${lang}. If the document/letter they uploaded is in ${lang}, respond entirely in ${lang}. If the document is in a DIFFERENT language (e.g. Portuguese letter in UK), translate/decode it to ${lang} for the breakdown, but offer to write replies in EITHER language. NEVER assume English — always match the document's language or the user's apparent preference.`
+    : `Detect the language the user is writing in or the language of the document they submitted, and respond fully in that same language. Do not default to English if the user's language is clearly something else. If they upload a Portuguese letter, respond in Portuguese. If they upload a Spanish letter, respond in Spanish. Match their language exactly.`;
   return `Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} precisely. ${countryContext} When calculating urgency, use today's date. ${langInstruction}`;
 }
