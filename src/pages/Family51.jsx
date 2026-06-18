@@ -143,12 +143,9 @@ export default function Family51Page() {
           </AnimatePresence>
         </div>
 
-        {/* ABOUT */}
+        {/* ABOUT — always visible, the why matters */}
         <div style={{ marginBottom: 28 }}>
-          <button onClick={() => setShowAbout(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.45)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', marginBottom: 8 }}>
-            WHY SORTED EXISTS {showAbout ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
-          </button>
-          <AnimatePresence>{showAbout && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} style={{ overflow: 'hidden' }}><SortedAbout /></motion.div>}</AnimatePresence>
+          <SortedAbout />
         </div>
 
         {/* FAQ */}
@@ -160,11 +157,15 @@ export default function Family51Page() {
         </div>
 
         {/* MAURO CHAT */}
-        <div style={{ marginBottom: 28, borderRadius: 14, padding: '14px 16px', background: '#fff', border: '1px solid rgba(26,18,8,0.08)' }}>
-          <button onClick={() => setShowMauro(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.5)', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em', marginBottom: showMauro ? 10 : 0, width: '100%' }}>
-            NEED TO TALK? {showMauro ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
-          </button>
-          <AnimatePresence>{showMauro && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} style={{ overflow: 'hidden' }}><MauroChat /></motion.div>}</AnimatePresence>
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
+            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.28)', whiteSpace: 'nowrap' }}>SORTED AI — ASK ANYTHING</span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.07)' }} />
+          </div>
+          <div style={{ borderRadius: 14, padding: '14px 16px', background: '#fff', border: '1px solid rgba(249,115,22,0.15)' }}>
+            <MauroChat />
+          </div>
         </div>
 
         {/* DIVIDER */}

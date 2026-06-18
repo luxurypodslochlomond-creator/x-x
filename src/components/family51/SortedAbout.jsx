@@ -50,7 +50,11 @@ export default function SortedAbout() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ marginTop: 32 }}>
+    <div style={{ marginTop: 0 }}>
+      {/* Short intro — always visible */}
+      <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.6)', lineHeight: 1.65, margin: '0 0 12px' }}>
+        Millions of people get scary official letters every day and have no idea what to do. Legal advice costs £200/hour. Citizens Advice has a 3-week wait. So people freeze — and things get worse.
+      </p>
       <motion.button
         onClick={() => setOpen(!open)}
         whileTap={{ scale: 0.97 }}
