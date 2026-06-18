@@ -50,7 +50,7 @@ export default function Family51Page() {
           <SortedToolCard 
             icon="letter" 
             title="Decode a Letter" 
-            description="Plain English breakdown, urgency check, what to actually do" 
+            description="Plain language breakdown, urgency check, what to actually do" 
             accentColor="#d4760a" 
             onClick={() => openTool('letter')} 
           />
@@ -99,7 +99,10 @@ export default function Family51Page() {
         {/* TAGS */}
         <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginBottom: 20 }}>
           <div style={{ background: 'rgba(0,0,0,0.04)', padding: '5px 11px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
-            UK law
+            UK & Scottish law
+          </div>
+          <div style={{ background: 'rgba(0,0,0,0.04)', padding: '5px 11px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
+            All languages supported
           </div>
           <div style={{ background: 'rgba(0,0,0,0.04)', padding: '5px 11px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
             Nothing stored. No account. No trace.
