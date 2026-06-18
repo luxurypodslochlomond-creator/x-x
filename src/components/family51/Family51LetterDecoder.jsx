@@ -138,90 +138,42 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         }
       }
 
-      const promptText = `You are SORTED — a straight-talking advisor who helps real people understand documents and letters. You sound like a knowledgeable friend — calm, clear, confident. Not dramatic. Not corporate. Just genuinely useful. ${geoContext} A person has received this official letter${currentType ? ` (type: ${currentType})` : ''} and needs help understanding it.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}
+      const promptText = `You are SORTED — a calm, experienced advisor who helps people understand official letters. You sound like a knowledgeable friend who's seen this before. Clear, brief, supportive. ${geoContext} A person has received this letter${currentType ? ` (type: ${currentType})` : ''} and needs to understand it quickly.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}
 
-YOUR VOICE: Focus on what actually happens in practice — not just what the law says. Will a bailiff actually come? Will I actually go to prison? What really happens if I ignore this? Be realistic. A 20-year debt adviser would say "in reality, at this stage, they almost never..." — that's the voice. Calm, experienced, honest.
+      YOUR JOB: Get them to free expert advice fast. These situations are too important for AI alone.
 
-HARM REDUCTION — YOUR PRIMARY JOB:
-For complex or high-stakes situations (bailiffs, court action, debt collector threats, eviction), your job is to get this person to a free debt adviser fast. These situations are too important for AI alone. Lead with: "Stop — get free debt advice before doing anything else." Then give them Citizens Advice or National Debtline details first.
+      OUTPUT — KEEP IT SHORT AND CALM:
+      Return JSON with ONLY these fields:
+      - letter_summary: Max 5 words. E.g. "Council tax debt demand"
+      - severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
+      - key_deadline: Exact date or null
+      - amount: Specific amount or null
+      - one_sentence: ONE sentence explaining what this is
+      - three_steps: Exactly 3 action steps. First step: always "Call Citizens Advice or National Debtline first"
+      - free_help: 2 services max. Always include National Debtline: 0808 808 4000
 
-KEY RULES — FOLLOW THESE:
-
-1. VERIFY THE DEBT: Always start with "check this debt is correct." Never assume it's valid.
-
-2. SEE THE FULL PICTURE: Recommend holistic debt advice before tackling individual letters.
-
-3. DEBT COLLECTORS (Lowell, PRA, Cabot, Intrum):
-   - Don't suggest generic "prove it" or CCA letters.
-   - CCA requests ONLY apply to regulated credit agreements (credit cards, loans, HP) — NOT utility bills, overdrafts, council tax, or fines.
-   - If the letter mentions Overdales or legal action, this is serious — flag it.
-
-4. STATUTE BARRED — ENGLAND/WALES:
-   - 6 years no payment is NOT enough since 2019 (Doyle v PRA Group).
-   - Depends on when default notice was issued.
-   - Always signpost to National Debtline to check.
-   - Scotland has different rules — flag this and direct to Citizens Advice Scotland.
-
-5. COURT CLAIM vs LETTER BEFORE CLAIM:
-   - Letter Before Claim = from creditor/solicitors BEFORE court. No Response Pack. Get advice before responding.
-   - Court Claim = from HMCTS, has claim number, comes with N9 form. 14 days to respond or default judgment.
-   - If unsure which it is, say so and direct to National Debtline immediately.
-
-6. BAILIFFS: Signpost to Citizens Advice or National Debtline (0808 808 4000). NOT StepChange.
-
-7. SCOTLAND COUNCIL TAX BAILIFF: If summary warrant granted, DAS CANNOT stop enforcement. Signpost urgently to Citizens Advice Scotland (0800 028 1456).
-
-8. JURISDICTION: Never mix Scotland and England/Wales solutions.
-
-9. ALWAYS INCLUDE: National Debtline (0808 808 4000 / nationaldebtline.org) for UK debt letters.
-
-10. BE HONEST: If the letter is unclear or you can't determine the debt type, say so. Direct to expert advice.`;
+      RULES:
+      - NEVER invent phone numbers
+      - First step always: get human advice
+      - Be honest if unclear
+      - England/Wales vs Scotland: different rules`;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
-        prompt: promptText + `\n\nBe specific. Be human. Give REAL information that actually helps. Don't over-reassure or be preachy. Just tell them what's going on and what to do — like someone who's seen this before.
-
-ANTI-HALLUCINATION:
-- NEVER invent phone numbers — only use ones you're confident exist
-- NEVER invent legislation — only cite laws you're certain apply
-- If you can't read part of a photo clearly, say so
-- If a deadline is unclear, say "Check letter for exact date"
-- Better to say "search [Organisation] on Google" than give a wrong number
-
-Return JSON with these fields:
-- letter_summary: Max 6 words. Blunt and specific. E.g. "Council tax debt demand"
-- sender: Organisation name or "Unknown"
-- severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
-- severity_explanation: One sentence. What's at stake?
-- key_deadline: Exact date or "No deadline mentioned"
-- quick_reassurance: 2-3 bullet points (use •). Lead with calm. E.g. "• This is standard — nothing's gone wrong yet\n• You have time to respond\n• Free help available". Make them feel steady, not scared.
-- we_hear_you: ONE sentence. Acknowledge the situation without melodrama. Like a friend who's seen this before.
-- what_this_means: 3-4 sentences. Zero jargon. What this letter IS, what triggered it, what it means day-to-day. Include amounts.
-- if_you_ignore_this: 2-3 sentences. What usually happens next if they don't respond. Calm and informative, never alarming.
-- financial_impact: Specific amount at risk, or "No specific financial amount mentioned."
-- action_steps: Exactly 5 specific steps. Real phone numbers, real websites. E.g. "Call Hackney Council on 020 8356 3000 — Mon-Fri 9am-5pm. Ask for payment plan." Include one free advice service.
-- free_help: 2-3 FREE services for THIS letter type in their jurisdiction. E.g. "Citizens Advice — free debt guidance — citizensadvice.org.uk or 0800 144 8848"
-- dont_panic: One honest sentence. Situation's real but manageable. Not fake, not corporate.
-- suggested_tone: firm, calm, urgent, or formal.`,
+        prompt: promptText,
         response_json_schema: {
           type: 'object',
           properties: {
-            letter_summary:       { type: 'string' },
-            sender:               { type: 'string' },
-            severity:             { type: 'string' },
-            severity_explanation: { type: 'string' },
-            key_deadline:         { type: 'string' },
-            quick_reassurance:    { type: 'string' },
-            we_hear_you:          { type: 'string' },
-            what_this_means:      { type: 'string' },
-            if_you_ignore_this:   { type: 'string' },
-            financial_impact:     { type: 'string' },
-            action_steps:         { type: 'array', items: { type: 'string' } },
-            free_help:            { type: 'array', items: { type: 'string' } },
-            dont_panic:           { type: 'string' },
-            suggested_tone:       { type: 'string' },
+            letter_summary: { type: 'string' },
+            severity: { type: 'string' },
+            key_deadline: { type: 'string' },
+            amount: { type: 'string' },
+            one_sentence: { type: 'string' },
+            three_steps: { type: 'array', items: { type: 'string' } },
+            free_help: { type: 'array', items: { type: 'string' } },
           },
+          required: ['letter_summary', 'severity', 'one_sentence', 'three_steps', 'free_help'],
         },
       });
 
@@ -239,9 +191,9 @@ Return JSON with these fields:
       }
 
       // Sanitize: coerce any accidental nested objects to strings
-      const STRING_FIELDS = ['letter_summary','sender','severity','severity_explanation','key_deadline','quick_reassurance','we_hear_you','what_this_means','if_you_ignore_this','financial_impact','dont_panic','suggested_tone'];
+      const STRING_FIELDS = ['letter_summary','sender','severity','key_deadline','amount','one_sentence','financial_impact'];
       STRING_FIELDS.forEach(k => { if (raw[k] && typeof raw[k] === 'object') raw[k] = JSON.stringify(raw[k]); });
-      if (raw.action_steps && !Array.isArray(raw.action_steps)) raw.action_steps = [String(raw.action_steps)];
+      if (raw.three_steps && !Array.isArray(raw.three_steps)) raw.three_steps = [String(raw.three_steps)];
       if (raw.free_help && !Array.isArray(raw.free_help)) raw.free_help = [String(raw.free_help)];
 
       setResult(raw);
@@ -391,7 +343,7 @@ Return JSON with these fields:
       {uploading && (
         <div style={{ padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(34,197,94,0.3)', background: 'rgba(34,197,94,0.06)', textAlign: 'center', marginBottom: 12 }}>
           <p style={{ fontSize: 13, color: '#22c55e', fontWeight: 800, margin: '0 0 4px', letterSpacing: '0.08em' }}>
-            📸 READING YOUR PHOTO...
+            READING YOUR PHOTO...
           </p>
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
             This takes a few seconds — nothing is stored
@@ -522,7 +474,7 @@ Don't worry about formatting. Just get it all in."
       {/* FILE UPLOADED STATE */}
       {uploadedFileUrl && !result && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', borderRadius: 12, border: '1px solid rgba(34,197,94,0.4)', background: 'rgba(34,197,94,0.08)' }}>
-          <span style={{ fontSize: 12, fontWeight: 800, color: '#22c55e', letterSpacing: '0.1em' }}>✓ FILE READY — DECODING NOW</span>
+          <span style={{ fontSize: 12, fontWeight: 800, color: '#22c55e', letterSpacing: '0.1em' }}>FILE READY — DECODING NOW</span>
           <button onClick={() => { setUploadedFileUrl(null); setLetterText(''); }} style={{ fontSize: 10, color: 'rgba(26,18,8,0.45)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em' }}>REMOVE</button>
         </div>
       )}
@@ -532,7 +484,7 @@ Don't worry about formatting. Just get it all in."
       <div style={{ paddingTop: 4 }}>
        {/* GEO — always visible when typing */}
        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
-       <span style={{ fontSize: 12 }}>📍</span>
+       <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(26,18,8,0.3)' }} />
        <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.5)' }}>LOCATION:</span>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
           </div>
@@ -561,7 +513,7 @@ Don't worry about formatting. Just get it all in."
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
             style={{ padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(239,68,68,0.5)', background: 'rgba(239,68,68,0.1)', textAlign: 'center' }}
           >
-            <p style={{ fontSize: 13, color: '#ef4444', margin: '0 0 6px', fontWeight: 800, letterSpacing: '0.08em' }}>⚠ SOMETHING WENT WRONG</p>
+            <p style={{ fontSize: 13, color: '#ef4444', margin: '0 0 6px', fontWeight: 800, letterSpacing: '0.08em' }}>SOMETHING WENT WRONG</p>
             <p style={{ fontSize: 12, color: 'rgba(239,68,68,0.8)', margin: '0 0 10px', lineHeight: 1.5 }}>{decodeError}</p>
             <button
               onClick={() => setDecodeError(null)}
