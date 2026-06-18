@@ -419,7 +419,10 @@ Return JSON with these fields:
               {EXAMPLE_LETTERS.map((ex, i) => (
                 <motion.button
                   key={i}
-                  onClick={() => setLetterText(ex.text)}
+                  onClick={() => {
+                    setLetterText(ex.text);
+                    setTimeout(() => decode(), 100);
+                  }}
                   whileTap={{ scale: 0.96 }}
                   style={{
                     fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.5)',
