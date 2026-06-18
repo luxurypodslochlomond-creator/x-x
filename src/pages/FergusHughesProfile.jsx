@@ -20,10 +20,10 @@ const profile = {
     "Trained Barber — cuts hair for teammates & friends while at school",
   ],
   strengths: [
-    "Commitment & Work Rate — 100% every session, always worked hard and gave it my all",
+    "Commitment — Always worked hard and gave it my all",
     "Leadership — Captain of a strong team through a respectable season",
-    "Attitude — Keep my head high at all times, even after mistakes or bad games",
-    "Determination — Something teammates, coaches and parents have noticed",
+    "Attitude — Keep my head high at all times, even after mistakes",
+    "Determination — Teammates, coaches and parents have all noticed",
   ],
   developmentArea: "Strength and physicality — actively working to improve",
   playerDescription: "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session.",
@@ -45,7 +45,7 @@ export default function FergusHughesProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className="min-h-screen bg-white p-6">
       <style>{`
         @media print {
           header, footer, aside, nav, main > header, main > footer, [data-standalone], .lg\\:block, .lg\\:ml-80, .fixed, .sticky, body > div > div {
@@ -74,101 +74,99 @@ export default function FergusHughesProfile() {
       `}</style>
       
       {/* Admin toolbar */}
-      <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between print:hidden">
+      <div className="max-w-3xl mx-auto mb-6 flex items-center justify-between print:hidden">
         <div>
-          <h1 className="text-xl font-bold text-gray-800">Fergus Hughes — Player Profile</h1>
-          <p className="text-sm text-gray-500 mt-1">Professional one-pager for scouts & coaches</p>
+          <h1 className="text-lg font-bold text-gray-700">Fergus Hughes — Player Profile</h1>
+          <p className="text-xs text-gray-500 mt-1">Professional one-pager for scouts & coaches</p>
         </div>
-        <div className="flex gap-3">
-          <button onClick={() => setShowPrintTip(!showPrintTip)} className="px-4 py-2 text-sm border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
-            How to export PDF
+        <div className="flex gap-2">
+          <button onClick={() => setShowPrintTip(!showPrintTip)} className="px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-600 hover:bg-gray-50">
+            Export PDF
           </button>
-          <button onClick={handlePrint} className="px-4 py-2 text-sm bg-gray-900 text-white rounded-lg hover:bg-gray-700">
-            Print / Save PDF
+          <button onClick={handlePrint} className="px-3 py-1.5 text-xs bg-gray-800 text-white rounded hover:bg-gray-700">
+            Print
           </button>
         </div>
       </div>
 
       {showPrintTip && (
-        <div className="max-w-4xl mx-auto mb-4 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800 print:hidden">
-          Click Print → Change destination to "Save as PDF" → Set margins to "Minimum" → Disable headers/footers
+        <div className="max-w-3xl mx-auto mb-4 bg-gray-50 border border-gray-200 rounded p-3 text-xs text-gray-700 print:hidden">
+          Click Print → Change destination to "Save as PDF" → Set margins to "Minimum"
         </div>
       )}
 
       {/* THE ONE-PAGER */}
-      <div className="print-container max-w-4xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden" style={{ fontFamily: 'Georgia, serif' }}>
+      <div className="print-container max-w-3xl mx-auto bg-white border border-gray-200" style={{ fontFamily: 'Georgia, serif' }}>
         {/* Header */}
-        <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-8 pt-8 pb-6">
+        <div className="border-b-2 border-gray-800 pb-4 mb-4">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-white tracking-tight">{profile.name}</h1>
-              <p className="text-gray-300 mt-1.5 font-sans text-base">Football Player Profile</p>
+              <h1 className="text-3xl font-bold text-gray-900">{profile.name}</h1>
+              <p className="text-sm text-gray-600 mt-1 font-sans">Football Player Profile</p>
             </div>
-            <div className="text-right text-xs text-gray-300 font-sans mt-1.5 space-y-0.5">
-              <p className="text-white font-semibold">DOB: {profile.dob}</p>
+            <div className="text-right text-xs text-gray-600 font-sans space-y-0.5">
+              <p className="font-semibold">DOB: {profile.dob}</p>
               <p>Age {profile.age} • {profile.nationality}</p>
-              {profile.height && <p>{profile.height}</p>}
+              <p>{profile.height} • {profile.weight}</p>
             </div>
           </div>
         </div>
 
-        <div className="px-8 py-6 space-y-6">
+        <div className="space-y-5">
           {/* Key Stats - 3 columns */}
-          <div className="grid grid-cols-3 gap-4 border-b border-gray-200 pb-5">
+          <div className="grid grid-cols-3 gap-3 border-b border-gray-200 pb-4">
             <div>
-              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-1">Position</p>
+              <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Position</p>
               <p className="text-gray-900 font-semibold text-sm">{profile.position}</p>
               {profile.secondPosition && <p className="text-gray-500 text-xs mt-0.5">Also: {profile.secondPosition}</p>}
             </div>
             <div>
-              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-1">Preferred Foot</p>
+              <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Preferred Foot</p>
               <p className="text-gray-900 font-semibold text-sm">{profile.preferredFoot}</p>
             </div>
             <div>
-              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-1">Current Club</p>
+              <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Current Club</p>
               <p className="text-gray-900 font-semibold text-sm">{profile.currentClub}</p>
             </div>
           </div>
 
           {/* Club History */}
           <div>
-            <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Club History</h2>
-            <div className="space-y-1">
-              {profile.previousClubs.map((c, i) => (
-                <div key={i} className="flex items-baseline gap-2">
-                  <span className="text-gray-900 font-sans text-sm font-semibold w-48">{c.club}</span>
-                  <span className="text-gray-500 font-sans text-sm">{c.years}</span>
-                  {c.details && <span className="text-gray-400 font-sans text-sm">— {c.details}</span>}
-                </div>
-              ))}
-            </div>
+            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Club History</h2>
+            {profile.previousClubs.map((c, i) => (
+              <div key={i} className="flex items-baseline gap-2">
+                <span className="text-gray-900 font-sans text-sm font-semibold w-44">{c.club}</span>
+                <span className="text-gray-500 font-sans text-sm">{c.years}</span>
+                {c.details && <span className="text-gray-400 font-sans text-sm">— {c.details}</span>}
+              </div>
+            ))}
           </div>
 
           {/* Why Moving On */}
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
-            <h2 className="text-xs font-bold tracking-widest text-blue-600 uppercase font-sans mb-2">Why I'm Moving On</h2>
-            <p className="font-sans text-sm text-blue-900 italic">{profile.whyMovingOn}</p>
+          <div className="bg-gray-50 border-l-4 border-gray-400 p-3">
+            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Why I'm Moving On</h2>
+            <p className="font-sans text-sm text-gray-800 italic">{profile.whyMovingOn}</p>
           </div>
 
           {/* Achievements & Strengths - 2 columns */}
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Achievements</h2>
+              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Achievements</h2>
               <ul className="space-y-1.5">
                 {profile.achievements.map((a, i) => (
                   <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
-                    <span className="text-green-600 mt-0.5">✓</span>
+                    <span className="text-gray-400 mt-0.5">•</span>
                     <span>{a}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Strengths</h2>
+              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Strengths</h2>
               <ul className="space-y-1.5">
                 {profile.strengths.map((s, i) => (
                   <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
-                    <span className="text-blue-600 mt-0.5">●</span>
+                    <span className="text-gray-400 mt-0.5">•</span>
                     <span>{s}</span>
                   </li>
                 ))}
@@ -177,32 +175,32 @@ export default function FergusHughesProfile() {
           </div>
 
           {/* Development */}
-          <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
-            <h2 className="text-xs font-bold tracking-widest text-amber-600 uppercase font-sans mb-2">Area of Development</h2>
-            <p className="font-sans text-sm text-amber-900">{profile.developmentArea}</p>
+          <div>
+            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Area of Development</h2>
+            <p className="font-sans text-sm text-gray-700">{profile.developmentArea}</p>
           </div>
 
           {/* In His Own Words */}
           <div className="border-l-4 border-gray-300 pl-4 py-2">
-            <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">In His Own Words</h2>
+            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">In His Own Words</h2>
             <p className="text-gray-700 italic text-sm leading-relaxed">"{profile.playerDescription}"</p>
           </div>
 
           {/* Ambition */}
           <div>
-            <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Ambition</h2>
+            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Ambition</h2>
             <p className="font-sans text-base text-gray-900 font-semibold">{profile.goal}</p>
           </div>
 
           {/* Contact & Logistics */}
-          <div className="border-t-2 border-gray-200 pt-5 grid grid-cols-2 gap-6">
+          <div className="border-t border-gray-200 pt-4 grid grid-cols-2 gap-6">
             <div>
-              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Contact</h2>
+              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Contact</h2>
               <p className="font-sans text-sm text-gray-900 font-semibold">{profile.contactName}</p>
               <p className="font-sans text-sm text-gray-600">{profile.contactPhone}</p>
             </div>
             <div>
-              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Logistics</h2>
+              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Logistics</h2>
               <p className="font-sans text-sm text-gray-700">{profile.school}</p>
               <p className="font-sans text-xs text-gray-500 mt-0.5">{profile.schoolSchedule}</p>
               <p className="font-sans text-sm text-gray-600 mt-1">Travel: {profile.canTravelTo}</p>
@@ -212,7 +210,7 @@ export default function FergusHughesProfile() {
       </div>
 
       <p className="text-center text-xs text-gray-400 mt-6 print:hidden">
-        Admin only — Update the profile object at the top of this file
+        Admin only — Update profile data at top of file
       </p>
     </div>
   );

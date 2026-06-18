@@ -220,7 +220,7 @@ const AuthenticatedApp = () => {
       <Route path="/ZappAbout" element={<ZappAboutPage />} />
       <Route path="/ZappTerms" element={<ZappTermsPage />} />
       <Route path="/ZappPrivacy" element={<ZappPrivacyPage />} />
-      <Route path="/FergusHughesProfile" element={<LayoutWrapper currentPageName="FergusHughesProfile"><FergusHughesProfilePage /></LayoutWrapper>} />
+      <Route path="/FergusHughesProfile" element={<FergusHughesProfilePage />} />
       <Route path="/RealityCheck" element={<RealityCheckPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
