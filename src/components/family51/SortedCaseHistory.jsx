@@ -320,6 +320,7 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit, onFollowUpSaved, lin
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editValue, setEditValue] = useState(caseItem.summary || '');
+  const [shareFeedback, setShareFeedback] = useState('');
   const tool = TOOL_CONFIG[caseItem.tool] || TOOL_CONFIG.letter;
   const sev = SEVERITY_CONFIG[caseItem.severity] || SEVERITY_CONFIG.unknown;
   const hasThread = linkedReplies.length > 0 || linkedConflicts.length > 0;
@@ -336,7 +337,7 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit, onFollowUpSaved, lin
     onDelete(caseItem.id);
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     const parsed = parseResult(caseItem.ai_result);
     const anonymize = (s) => (s || '')
       .replace(/\b[A-Z][a-z]+ [A-Z][a-z]+\b/g, '[Name]')
@@ -347,11 +348,21 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit, onFollowUpSaved, lin
     if (parsed?.what_this_means) text += anonymize(safeStr(parsed.what_this_means)) + '\n\n';
     if (parsed?.action_steps?.length) text += 'Steps:\n' + parsed.action_steps.map((s,i)=>`${i+1}. ${anonymize(safeStr(s))}`).join('\n') + '\n\n';
     text += 'SORTED decodes legal letters for free → sorted.family51.com';
-    if (navigator.share) {
-      navigator.share({ title: 'SORTED helped me', text: text.trim() }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(text.trim()).then(() => alert('Copied to clipboard!'));
-    }
+    // Try native share first, then clipboard, then prompt
+    try {
+      if (navigator.share && navigator.canShare && navigator.canShare({ text })) {
+        await navigator.share({ title: 'SORTED helped me', text: text.trim() });
+        return;
+      }
+    } catch {}
+    try {
+      await navigator.clipboard.writeText(text.trim());
+      setShareFeedback('Copied to clipboard!');
+      setTimeout(() => setShareFeedback(''), 2500);
+      return;
+    } catch {}
+    // Final fallback — show text in a prompt the user can copy
+    window.prompt('Copy this text to share:', text.trim());
   };
 
   const handleEmail = () => {
@@ -363,7 +374,13 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit, onFollowUpSaved, lin
       else if (parsed.what_this_means) body = safeStr(parsed.what_this_means);
     }
     const subject = parsed?.subject_line ? safeStr(parsed.subject_line) : `SORTED — ${caseItem.summary || 'My Action Plan'}`;
-    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.trim())}`;
+    const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.trim())}`;
+    // Use window.open — more reliable than location.href in iframes
+    const win = window.open(mailto, '_blank');
+    if (!win) {
+      // If popup blocked, try location as fallback
+      window.location.href = mailto;
+    }
   };
 
   const handleExport = () => {
@@ -486,10 +503,42 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit, onFollowUpSaved, lin
             style={{ overflow: 'hidden' }}
           >
             <div style={{ padding: '0 18px 20px', borderTop: `1px solid rgba(26,18,8,0.06)` }}>
+              {/* WHAT YOU SENT — show original input */}
+              {caseItem.input_text && (
+                <div style={{ marginTop: 16 }}>
+                  <ContentSection label="WHAT YOU SENT" color="rgba(26,18,8,0.4)">
+                    <p style={{
+                      fontSize: 13, color: 'rgba(26,18,8,0.55)', margin: 0, lineHeight: 1.65,
+                      fontStyle: 'italic', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+                      maxHeight: 160, overflowY: 'auto',
+                    }}>
+                      {caseItem.input_text.length > 500
+                        ? caseItem.input_text.slice(0, 500) + '…'
+                        : caseItem.input_text}
+                    </p>
+                  </ContentSection>
+                </div>
+              )}
+
               {/* AI RESULT CONTENT */}
-              <div style={{ marginTop: 18 }}>
+              <div style={{ marginTop: 4 }}>
                 <CaseContent caseItem={caseItem} />
               </div>
+
+              {/* Share feedback toast */}
+              {shareFeedback && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    padding: '10px 16px', borderRadius: 10, fontSize: 13, fontWeight: 800,
+                    background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)',
+                    color: '#22c55e', textAlign: 'center', marginBottom: 8,
+                  }}
+                >
+                  ✓ {shareFeedback}
+                </motion.div>
+              )}
 
               {/* CASE THREAD */}
               {hasThread && (
