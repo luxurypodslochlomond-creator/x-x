@@ -8,6 +8,7 @@ const SEVERITY_CONFIG = {
   'NEEDS ATTENTION': { color: '#d97706', bg: 'rgba(217,119,6,0.06)',   border: 'rgba(217,119,6,0.2)' },
   'URGENT':          { color: '#ea580c', bg: 'rgba(234,88,12,0.06)',   border: 'rgba(234,88,12,0.2)' },
   'VERY URGENT':     { color: '#dc2626', bg: 'rgba(220,38,38,0.06)',   border: 'rgba(220,38,38,0.2)' },
+  'EXPIRED':         { color: '#22c55e', bg: 'rgba(34,197,94,0.04)',   border: 'rgba(34,197,94,0.15)' },
 };
 
 export default function SortedStreamingResult({ result, accentColor = '#f97316', onHandoff, onReset, caseId, geo }) {
@@ -189,25 +190,27 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         <button
           onClick={handleSave}
           style={{
-            flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-            letterSpacing: '0.06em', cursor: 'pointer',
+            flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+            letterSpacing: '0.08em', cursor: 'pointer',
             border: '1px solid rgba(34,197,94,0.35)',
-            background: saved ? 'rgba(34,197,94,0.1)' : 'rgba(34,197,94,0.05)',
+            background: saved ? 'rgba(34,197,94,0.08)' : 'rgba(34,197,94,0.05)',
             color: saved ? '#22c55e' : '#16a34a',
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+            transition: 'all 0.2s',
           }}
         >
-          {saved ? 'SAVED' : 'SHARE'}
+          {saved ? '✓ SAVED' : 'SHARE'}
         </button>
         <button
           onClick={onReset}
           style={{
-            flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-            letterSpacing: '0.06em', cursor: 'pointer',
+            flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+            letterSpacing: '0.08em', cursor: 'pointer',
             border: '1px solid rgba(26,18,8,0.15)',
-            background: 'rgba(26,18,8,0.03)',
+            background: 'rgba(26,18,8,0.04)',
             color: 'rgba(26,18,8,0.5)',
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+            transition: 'all 0.2s',
           }}
         >
           NEW

@@ -670,25 +670,25 @@ const LayoutInner = ({ children, currentPageName }) => {
         <header className={`lg:hidden sticky ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b ${isPS51Page ? 'border-amber-700/40' : 'border-cyan-500/30'}`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
-              <Link to={createPageUrl("CB51")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href={createPageUrl("CB51")} className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); window.location.href = createPageUrl("CB51"); setMobileMenuOpen(false); }}>
                 <Radio className="w-7 h-7 text-cyan-400" />
                 <span className="text-xl font-black text-cyan-400">CB51</span>
-              </Link>
+              </a>
             ) : isPS51Page ? (
-              <Link to={createPageUrl("PetSounds51")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href={createPageUrl("PetSounds51")} className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); window.location.href = createPageUrl("PetSounds51"); setMobileMenuOpen(false); }}>
                 <PetSounds51Icon8Bit size={28} animate={false} />
                 <span className="text-xl font-black" style={{ color: '#d4a017' }}>PetSounds51</span>
-              </Link>
+              </a>
             ) : (currentPageName === 'Family51' || currentPageName === 'Sorted' || currentPageName === 'SortedTerms' || currentPageName === 'SortedPrivacy') ? (
-              <Link to={createPageUrl("Sorted")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href={createPageUrl("Sorted")} className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); window.location.href = createPageUrl("Sorted"); setMobileMenuOpen(false); }}>
                 <COOLASFUCKSorted size={28} />
                 <span className="text-xl font-black text-amber-600">SORTED</span>
-              </Link>
+              </a>
             ) : (
-              <Link to={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+              <a href={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); window.location.href = createPageUrl("Welcome"); setMobileMenuOpen(false); }}>
                 <COOLASFUCKWaves size={28} animate={true} />
                 <span className="text-xl font-black text-white">UF51</span>
-              </Link>
+              </a>
             )}
 
             <div className="flex items-center gap-1.5">
