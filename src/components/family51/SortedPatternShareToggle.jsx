@@ -2,15 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { isPatternSharingEnabled, togglePatternSharing } from '@/utils/sortedLearning';
 
 export default function SortedPatternShareToggle({ accentColor = '#f97316' }) {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
-    setEnabled(isPatternSharingEnabled());
+    // Default ON, but respect if user turned it off
+    const stored = localStorage.getItem('sorted_pattern_share_enabled');
+    setEnabled(stored === null || stored === 'true');
   }, []);
 
   const handleToggle = () => {
     const newValue = !enabled;
-    togglePatternSharing(newValue);
+    // Only save if turning OFF (default is ON)
+    if (!newValue) {
+      togglePatternSharing(false);
+    } else {
+      localStorage.removeItem('sorted_pattern_share_enabled'); // reset to default
+    }
     setEnabled(newValue);
   };
 
@@ -55,14 +62,14 @@ export default function SortedPatternShareToggle({ accentColor = '#f97316' }) {
           </div>
         </div>
       </div>
-      {enabled && (
-        <p style={{ fontSize: 9, color: 'rgba(26,18,8,0.35)', margin: 0, lineHeight: 1.4 }}>
-          ✓ Your letter data stays private. Only anonymized patterns shared (e.g. "fake bailiff threat - 127 reports"). No names, addresses, or personal details ever sent.
+      {!enabled && (
+        <p style={{ fontSize: 9, color: '#ef4444', margin: 0, lineHeight: 1.4, fontWeight: 700 }}>
+          ✕ Pattern sharing OFF — you're protected but not helping others
         </p>
       )}
-      {!enabled && (
+      {enabled && (
         <p style={{ fontSize: 9, color: 'rgba(26,18,8,0.35)', margin: 0, lineHeight: 1.4 }}>
-          Turn on to help build intel on scammers and bad actors. Your data stays private — only patterns shared.
+          ✓ Active: Your anonymized patterns protect others. No personal data ever sent — only scam indicators like "fake bailiff threat - 127 reports this week".
         </p>
       )}
     </div>
