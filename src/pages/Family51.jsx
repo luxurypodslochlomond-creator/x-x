@@ -112,17 +112,20 @@ export default function Family51Page() {
         </div>
       </div>
 
-      {/* ── LIVE COUNTER ── */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <SortedLiveCounter />
+      {/* ── SORTED AI — not sure what to do? just ask ── */}
+      <div style={{ padding: '20px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+        <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em', textAlign: 'center', marginBottom: 12 }}>
+          NOT SURE WHAT YOU NEED?
+        </p>
+        <MauroChat />
       </div>
 
       {/* ── DIVIDER ── */}
       <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '24px 20px 0' }} />
 
-      {/* ── MAURO CHAT ── */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <MauroChat />
+      {/* ── LIVE COUNTER ── */}
+      <div style={{ padding: '16px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+        <SortedLiveCounter />
       </div>
 
       {/* ── CASE HISTORY ── */}
