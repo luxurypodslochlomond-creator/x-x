@@ -156,7 +156,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         • If they can appeal: "You have grounds — gather [specific evidence] and appeal at [portal/link]"
         • If debt collector: "They must prove you owe it. Write back: 'I dispute this debt — provide proof or cease contact.'"
         • If it's serious: "Contact [specific body] today — this needs expert help ASAP"
-      - free_help: 2 services max. Always include National Debtline: 0808 808 4000. This is BACKUP — only if the action steps don't work or they need emotional support.
+      - free_help: 2 services max — ONLY bodies that exist in THEIR country (e.g. UK: National Debtline; Australia: National Debt Helpline 1800 007 007; USA: local legal aid; Ireland: MABS 0818 07 2000). NEVER invent phone numbers. NEVER cite UK bodies for non-UK users. This is BACKUP — only if the action steps don't work or they need emotional support.
 
       CRITICAL RULES:
       - NEVER invent phone numbers or websites

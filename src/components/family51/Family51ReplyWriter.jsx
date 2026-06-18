@@ -84,7 +84,7 @@ Write a complete, ready-to-send letter. Rules:
 - Sound like a sharp, informed human — not a corporate robot. Direct, clear, confident.
 - No waffle, no padding, no "I hope this letter finds you well" nonsense.
 - State the issue fast. State what you want. State consequences if ignored.
-- Cite specific rights / legislation / bodies relevant to ${geo.country} where it strengthens the case.
+- Cite specific rights / legislation / bodies relevant to ${geo.country} where it strengthens the case. ONLY cite bodies that exist in that country (e.g. UK: Citizens Advice; Australia: National Debt Helpline; Ireland: MABS; USA: local legal aid). NEVER invent phone numbers or cite UK bodies for non-UK users.
 - MAXIMUM 350 words for the letter body — tight, punchy, effective. Shorter is stronger.
 - Proper greeting and sign-off, but no fluff in between.
 - Ready to copy and paste with zero edits needed.
