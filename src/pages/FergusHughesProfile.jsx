@@ -39,8 +39,35 @@ const profile = {
 export default function FergusHughesProfile() {
   const [showPrintTip, setShowPrintTip] = useState(false);
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
+      <style>{`
+        @media print {
+          body * {
+            visibility: hidden;
+          }
+          .print-container, .print-container * {
+            visibility: visible;
+          }
+          .print-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+          }
+          @page {
+            margin: 1cm;
+            size: A4;
+          }
+        }
+      `}</style>
       {/* Admin toolbar — hidden on print */}
       <div className="max-w-3xl mx-auto mb-6 flex items-center justify-between print:hidden">
         <div>
@@ -55,7 +82,7 @@ export default function FergusHughesProfile() {
             How to export PDF
           </button>
           <button
-            onClick={() => window.print()}
+            onClick={handlePrint}
             className="px-4 py-2 text-sm bg-gray-900 text-white rounded-lg hover:bg-gray-700"
           >
             Print / Save PDF
@@ -71,7 +98,7 @@ export default function FergusHughesProfile() {
 
       {/* THE ONE-PAGER — this is what prints */}
       <div
-        className="max-w-3xl mx-auto bg-white shadow-sm"
+        className="print-container max-w-3xl mx-auto bg-white shadow-sm"
         style={{ fontFamily: 'Georgia, serif' }}
       >
         {/* Header */}
