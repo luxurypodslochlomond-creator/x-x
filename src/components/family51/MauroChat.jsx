@@ -16,7 +16,7 @@ Keep replies short and warm. You're texting a stressed friend, not writing a pol
 
 export default function MauroChat() {
   const [messages, setMessages] = useState([
-    { role: 'assistant', text: "Hey — I'm SORTED AI. Got a letter you don't understand? Worried about something official? Just tell me what's going on and I'll help you figure it out. No jargon, no judgment." }
+    { role: 'assistant', text: "I'm SORTED AI. Got a letter you don't understand, or not sure where to start? Just tell me what's going on — no jargon, no judgment, I'll help you figure it out." }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);

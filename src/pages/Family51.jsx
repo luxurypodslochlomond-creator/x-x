@@ -96,10 +96,21 @@ export default function Family51Page() {
       {/* ── DIVIDER ── */}
       <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '8px 20px 0' }} />
 
-      {/* ── TOOLS — what else can I do? ── */}
+      {/* ── SORTED AI — first thing after hero ── */}
       <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em', textAlign: 'center', marginBottom: 12 }}>
-          WHAT DO YOU NEED?
+          NOT SURE WHERE TO START? JUST ASK
+        </p>
+        <MauroChat />
+      </div>
+
+      {/* ── DIVIDER ── */}
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '24px 20px 0' }} />
+
+      {/* ── TOOLS ── */}
+      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+        <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em', textAlign: 'center', marginBottom: 12 }}>
+          OR PICK WHAT FITS
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9, marginBottom: 9 }}>
           <SortedToolCard icon="letter" title="I got a scary letter" description="Plain English · what it means · what to do" accentColor="#d4760a" onClick={() => openTool('letter')} />
@@ -110,14 +121,6 @@ export default function Family51Page() {
           <SortedToolCard icon="contract" title="Check a contract" description="Know your rights" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('contract')} variant="secondary" />
           <SortedToolCard icon="conflict" title="I'm in a dispute" description="Clear plan, step by step" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('conflict')} variant="secondary" />
         </div>
-      </div>
-
-      {/* ── SORTED AI — not sure what to do? just ask ── */}
-      <div style={{ padding: '20px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em', textAlign: 'center', marginBottom: 12 }}>
-          NOT SURE WHAT YOU NEED?
-        </p>
-        <MauroChat />
       </div>
 
       {/* ── DIVIDER ── */}
