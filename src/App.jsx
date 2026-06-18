@@ -164,6 +164,7 @@ const AuthenticatedApp = () => {
           }
         />
       ))}
+      <Route path="/PetSounds51" element={<PetSounds51 />} />
       <Route path="/BuzzTrip" element={<BuzzTripPage />} />
       <Route path="/BuzzTripAbout" element={<BuzzTripAboutPage />} />
       <Route path="/BuzzTripTerms" element={<BuzzTripTermsPage />} />
