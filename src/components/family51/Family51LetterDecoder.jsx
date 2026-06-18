@@ -16,6 +16,14 @@ const LETTER_TYPES = [
   'Driving / traffic', 'Benefits / DWP', 'Court / legal', 'Tax / government', 'Immigration', 'Other',
 ];
 
+const EXAMPLE_LETTERS = [
+  { type: 'Council Tax', text: 'FINAL NOTICE\nCouncil Tax Arrears: £1,247\nPay within 7 days or bailiffs will be instructed.\nHackney Council' },
+  { type: 'Energy Bill', text: 'URGENT: Your account is £347 in arrears. Your energy supply will be disconnected within 14 days unless payment is received.' },
+  { type: 'Debt Collector', text: 'We have been instructed to collect £2,890. This is your final opportunity before legal action. Lowell Financial Ltd.' },
+  { type: 'Parking Fine', text: 'Penalty Charge Notice: £130. Reduced to £65 if paid within 14 days. Contravention: parked outside designated bay.' },
+  { type: 'Landlord', text: 'Section 21 Notice: You are required to vacate the property within 2 months. No fault eviction.' },
+];
+
 const SEVERITY_CONFIG = {
   'NOT URGENT':    { color: '#22c55e', bg: 'rgba(34,197,94,0.08)',   border: 'rgba(34,197,94,0.3)' },
   'NEEDS ATTENTION': { color: '#eab308', bg: 'rgba(234,179,8,0.08)', border: 'rgba(234,179,8,0.3)' },
@@ -302,6 +310,7 @@ Return JSON with these fields:
     setLoading(true);
     setDecodeError(null);
     setResult(null);
+    setDecodeError(null);
 
     const isDocx = file.name?.toLowerCase().endsWith('.docx') || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
     const isDoc = file.name?.toLowerCase().endsWith('.doc');
@@ -379,6 +388,18 @@ Return JSON with these fields:
         )}
       </AnimatePresence>
 
+      {/* UPLOADING FEEDBACK */}
+      {uploading && (
+        <div style={{ padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(34,197,94,0.3)', background: 'rgba(34,197,94,0.06)', textAlign: 'center', marginBottom: 12 }}>
+          <p style={{ fontSize: 13, color: '#22c55e', fontWeight: 800, margin: '0 0 4px', letterSpacing: '0.08em' }}>
+            📸 READING YOUR PHOTO...
+          </p>
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
+            This takes a few seconds — nothing is stored
+          </p>
+        </div>
+      )}
+
       {/* FORM — hidden while loading */}
       {!loading && !uploading && (<>
 
@@ -389,6 +410,32 @@ Return JSON with these fields:
       {/* STEP 1: MAIN INPUT — paste or snap, nothing else */}
       {!uploadedFileUrl && !result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+
+          {/* EXAMPLE LETTERS — reduce anxiety, show it works */}
+          <div>
+            <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.45)', margin: '0 0 8px' }}>
+              GOT ONE OF THESE? TAP TO SEE HOW SORTED HELPS →
+            </p>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {EXAMPLE_LETTERS.map((ex, i) => (
+                <motion.button
+                  key={i}
+                  onClick={() => setLetterText(ex.text)}
+                  whileTap={{ scale: 0.96 }}
+                  style={{
+                    fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.5)',
+                    border: '1px solid rgba(26,18,8,0.12)', borderRadius: 8,
+                    padding: '6px 10px', background: 'transparent', cursor: 'pointer',
+                    transition: 'all 0.15s',
+                  }}
+                  onMouseEnter={e => { e.target.style.borderColor = accentColor; e.target.style.color = accentColor; }}
+                  onMouseLeave={e => { e.target.style.borderColor = 'rgba(26,18,8,0.12)'; e.target.style.color = 'rgba(26,18,8,0.5)'; }}
+                >
+                  {ex.type}
+                </motion.button>
+              ))}
+            </div>
+          </div>
 
           {/* BIG PASTE AREA — first thing they see */}
           <textarea

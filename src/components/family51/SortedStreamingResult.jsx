@@ -282,6 +282,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
 
       {/* ── BOTTOM ACTIONS ── */}
       <div style={{ display: 'flex', gap: 8 }}>
+        <CopyBreakdownButton result={result} sev={sev} />
         <button
           onClick={handleSave}
           style={{
@@ -295,7 +296,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             transition: 'all 0.2s',
           }}
         >
-          {saved ? '✓ SAVED' : 'SHARE / SAVE AS FILE'}
+          {saved ? '✓ SAVED' : 'SHARE / SAVE'}
         </button>
         <button
           onClick={onReset}
@@ -307,7 +308,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
           }}
         >
-          NEW LETTER
+          NEW
         </button>
       </div>
 
@@ -328,5 +329,67 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       </p>
 
     </div>
+  );
+}
+
+// ─── COPY BREAKDOWN BUTTON ──────────────────────────────────────────────────────
+// One-tap copy of the full breakdown — paste into email, text, or notes
+// ──────────────────────────────────────────────────────────────────────────────
+
+function CopyBreakdownButton({ result, sev }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    const text = 
+      `SORTED LETTER BREAKDOWN\n\n` +
+      `${result.letter_summary || 'Official letter'}\n` +
+      `Severity: ${result.severity} — ${result.severity_explanation}\n\n` +
+      (result.we_hear_you ? `${result.we_hear_you}\n\n` : '') +
+      `WHAT THIS MEANS:\n${result.what_this_means}\n\n` +
+      (result.key_deadline && result.key_deadline !== 'No deadline mentioned' ? `DEADLINE: ${result.key_deadline}\n\n` : '') +
+      (result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.' ? `AMOUNT: ${result.financial_impact}\n\n` : '') +
+      `ACTION STEPS:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
+      (result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : '') +
+      `Via SORTED — uf51.love/Sorted`;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (_) {}
+  };
+
+  return (
+    <motion.button
+      onClick={handleCopy}
+      whileTap={{ scale: 0.96 }}
+      style={{
+        flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+        letterSpacing: '0.08em', cursor: 'pointer',
+        border: copied ? '1px solid rgba(34,197,94,0.6)' : `1px solid ${sev.color}60`,
+        background: copied ? 'rgba(34,197,94,0.08)' : sev.bg,
+        color: copied ? '#22c55e' : sev.color,
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+        WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+        transition: 'all 0.2s',
+      }}
+    >
+      {copied ? (
+        <>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7L5.5 9.5L11 3.5" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          COPIED
+        </>
+      ) : (
+        <>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <rect x="3" y="3" width="8" height="8" rx="1.2" stroke="currentColor" strokeWidth="1.2"/>
+            <path d="M2 10V4a1 1 0 0 1 1-1h1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+          </svg>
+          COPY BREAKDOWN
+        </>
+      )}
+    </motion.button>
   );
 }
