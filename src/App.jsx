@@ -218,14 +218,15 @@ const AuthenticatedApp = () => {
       <Route path="/Family51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><RedirectToSorted /></Suspense>} />
       <Route path="/Family51Terms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51TermsPage /></Suspense>} />
       <Route path="/Family51Privacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><Family51PrivacyPage /></Suspense>} />
-      <Route path="/SortedTerms" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SortedLayout currentPage="SortedTerms"><SortedTermsPage /></SortedLayout></Suspense>} />
-      <Route path="/SortedPrivacy" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SortedLayout currentPage="SortedPrivacy"><SortedPrivacyPage /></SortedLayout></Suspense>} />
+      <Route path="/SortedTerms" element={<SortedLayout currentPage="SortedTerms"><SortedTermsPage /></SortedLayout>} />
+      <Route path="/SortedPrivacy" element={<SortedLayout currentPage="SortedPrivacy"><SortedPrivacyPage /></SortedLayout>} />
       <Route path="/SortedFAQ" element={<SortedLayout currentPage="SortedFAQ"><SortedFAQPage /></SortedLayout>} />
       <Route path="/SortedPressRelease" element={<SortedLayout currentPage="SortedPressRelease"><SortedPressReleasePage /></SortedLayout>} />
       <Route path="/SortedInvestorPress" element={<SortedLayout currentPage="SortedInvestorPress"><SortedInvestorPressPage /></SortedLayout>} />
       <Route path="/PetSounds51InvestorPress" element={<SortedLayout currentPage="PetSounds51InvestorPress"><PetSounds51InvestorPressPage /></SortedLayout>} />
       <Route path="/SortedPartnerKit" element={<SortedLayout currentPage="SortedPartnerKit"><SortedPartnerKitPage /></SortedLayout>} />
       <Route path="/SortedForOrgs" element={<SortedLayout currentPage="SortedForOrgs"><SortedForOrgsPage /></SortedLayout>} />
+      <Route path="/SortedGlobalAccess" element={<SortedLayout currentPage="SortedGlobalAccess"><SortedGlobalAccessPage /></SortedLayout>} />
       <Route path="/ST51" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper></Suspense>} />
       <Route path="/AdminHMRCTracker" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminHMRCTracker"><AdminHMRCTrackerPage /></LayoutWrapper></Suspense>} />
       <Route path="/AdminLogoUpload" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><LayoutWrapper currentPageName="AdminLogoUpload"><AdminLogoUploadPage /></LayoutWrapper></Suspense>} />
@@ -267,7 +268,6 @@ const AuthenticatedApp = () => {
       <Route path="/ZappPrivacy" element={<Suspense fallback={<div style={{background:'#0a0a0f',minHeight:'100vh'}} />}><ZappPrivacyPage /></Suspense>} />
       <Route path="/FergusHughesProfile" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><FergusHughesProfilePage /></Suspense>} />
       <Route path="/RealityCheck" element={<Suspense fallback={<div style={{background:'#05080f',minHeight:'100vh'}} />}><RealityCheckPage /></Suspense>} />
-      <Route path="/SortedGlobalAccess" element={<Suspense fallback={<COOLASFUCK8BitLoading message="LOADING" />}><SortedLayout currentPage="SortedGlobalAccess"><SortedGlobalAccessPage /></SortedLayout></Suspense>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
