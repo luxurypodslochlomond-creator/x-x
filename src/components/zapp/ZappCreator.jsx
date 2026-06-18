@@ -171,7 +171,7 @@ export default function ZappCreator({ onSubmit }) {
     hasSubmittedRef.current = false;
     lastTranscriptRef.current = '';
 
-    recognition.lang = 'en-GB';
+    // NO lang set — browser auto-detects speech language. Works for any language.
     recognition.continuous = false;  // single utterance — most reliable cross-browser
     recognition.interimResults = true;
 
@@ -260,7 +260,7 @@ export default function ZappCreator({ onSubmit }) {
           what do you<br />want to build?
         </h1>
         <p className="text-white/40 font-semibold" style={{ fontSize: 'clamp(1rem, 3vw, 1.25rem)' }}>
-          tap an idea · or say it out loud
+          tap an idea · or say it out loud · any language
         </p>
       </motion.div>
 
@@ -338,6 +338,10 @@ export default function ZappCreator({ onSubmit }) {
               <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/30 text-sm font-semibold text-center">tap the big button · say your idea out loud</motion.p>
             )}
           </AnimatePresence>
+          <div className="flex items-center gap-1.5 mt-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400/60" />
+            <span className="text-white/20 text-[10px] font-semibold tracking-wider">WORKS IN ALL LANGUAGES</span>
+          </div>
         </motion.div>
       )}
 

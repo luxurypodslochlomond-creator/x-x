@@ -266,7 +266,7 @@ export default function Zapp() {
         <span className="text-white/10">·</span>
         <a href="/ZappPrivacy" className="text-white/30 hover:text-white/60 text-xs transition-colors">Privacy</a>
         <span className="text-white/10">·</span>
-        <span className="text-white/10 text-xs">safe · free · no account · built by UF51</span>
+        <span className="text-white/10 text-xs">safe · free · no account · any language · built by UF51</span>
       </footer>
 
       {/* Remix Modal */}

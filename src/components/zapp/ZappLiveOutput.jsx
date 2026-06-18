@@ -32,6 +32,8 @@ CRITICAL MOBILE RULES — the app will be displayed in a phone-sized iframe, so:
 - Use flexbox/grid with vh/vw units — NEVER use fixed pixel widths that might overflow
 - NO horizontal overflow — everything must fit within 100vw
 
+LANGUAGE: Match whatever language the kid uses. If they describe their idea in French, build the whole app in French. Spanish → Spanish. Portuguese → Portuguese. Japanese → Japanese. Any language on Earth — auto-detect and use that language for all UI text, labels, and feedback. This app works worldwide.
+
 GENERAL RULES:
 - Single HTML file, start with <!DOCTYPE html>, everything inline (no CDN, no imports)
 - Vanilla JS in <script>, CSS in <style>
