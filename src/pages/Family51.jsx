@@ -1,17 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
-import SortedPhotoButton from '@/components/family51/SortedPhotoButton';
-import SortedFileUploadButton from '@/components/family51/SortedFileUploadButton';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
+import { SortedMark } from '@/components/family51/SortedIcons';
 
 export default function Family51Page() {
   const engineRef = useRef(null);
-  const { usageCount, isPremium, recordUse, isLocked } = useSortedUsage();
+  const { isPremium, recordUse, isLocked } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
   const paywallRef = useRef(null);
   const caseHistoryRef = useRef(null);
@@ -29,9 +28,6 @@ export default function Family51Page() {
     engineRef.current?.open(engineId, handoffData);
   };
 
-  const handlePhotoDecoded = (url) => openTool('letter', { prefillFileUrl: url });
-  const handleFileDecoded = (url) => openTool('letter', { prefillFileUrl: url });
-
   return (
     <div style={{ minHeight: '100dvh', background: '#FDFBF7', color: '#1a1a1a', overflowX: 'hidden' }}>
       
@@ -45,27 +41,23 @@ export default function Family51Page() {
       />
 
       {/* HEADER */}
-      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 28, height: 28, background: '#d4760a', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: 'white', fontWeight: 900, fontSize: 14 }}>S</span>
-          </div>
+      <div style={{ padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 560, margin: '0 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <SortedMark size={32} accentColor="#d4760a" />
           <div>
-            <div style={{ fontWeight: 900, fontSize: 16, letterSpacing: '-0.02em' }}>SORTED</div>
-            <div style={{ fontSize: 10, color: '#666', fontWeight: 600 }}>WE'VE GOT YOU</div>
+            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: '-0.02em', color: '#1a1a1a' }}>SORTED</div>
+            <div style={{ fontSize: 10, color: '#888', fontWeight: 600, letterSpacing: '0.05em' }}>WE'VE GOT YOU</div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <div style={{ background: '#FFE5C7', padding: '6px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700, color: '#d4760a' }}>
-            10 FREE
-          </div>
+        <div style={{ background: 'rgba(212,118,10,0.08)', padding: '6px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700, color: '#d4760a' }}>
+          10 FREE
         </div>
       </div>
 
       {/* HERO */}
-      <div style={{ padding: '32px 20px 24px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '24px 20px 16px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
         <h1 style={{
-          fontSize: 'clamp(28px, 7vw, 38px)', fontWeight: 900, lineHeight: 1.1,
+          fontSize: 'clamp(26px, 7vw, 36px)', fontWeight: 900, lineHeight: 1.1,
           margin: '0 0 12px', color: '#1a1a1a', letterSpacing: '-0.03em',
         }}>
           Paste, type, snap a photo or upload a file
@@ -78,89 +70,69 @@ export default function Family51Page() {
       </div>
 
       {/* MAIN CARDS */}
-      <div style={{ padding: '0 20px', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '16px 20px 8px', maxWidth: 520, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
-          <div onClick={() => openTool('letter')} style={{
-            padding: '20px 16px', background: 'white', borderRadius: 12,
-            border: '2px solid #F3D7A1', cursor: 'pointer',
-            transition: 'all 0.2s', ':hover': { borderColor: '#d4760a' }
-          }}>
-            <div style={{ fontSize: 24, marginBottom: 8 }}>📄</div>
-            <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4, color: '#1a1a1a' }}>Decode a Letter</div>
-            <div style={{ fontSize: 11, color: '#666', lineHeight: 1.4 }}>Plain English breakdown, urgency check, what to actually do</div>
-          </div>
-          <div onClick={() => openTool('reply')} style={{
-            padding: '20px 16px', background: 'white', borderRadius: 12,
-            border: '2px solid #B8C5E7', cursor: 'pointer',
-            transition: 'all 0.2s', ':hover': { borderColor: '#6B7A99' }
-          }}>
-            <div style={{ fontSize: 24, marginBottom: 8 }}>✍️</div>
-            <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4, color: '#1a1a1a' }}>Write a Reply</div>
-            <div style={{ fontSize: 11, color: '#666', lineHeight: 1.4 }}>Ready-to-send response, right tone, zero waffle</div>
-          </div>
-        </div>
-
-        {/* ACTION BUTTONS */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 24, justifyContent: 'center' }}>
-          <SortedPhotoButton onDecoded={handlePhotoDecoded} />
-          <SortedFileUploadButton onDecoded={handleFileDecoded} />
-          <button
-            onClick={() => openTool('letter')}
-            style={{
-              flex: 1, maxWidth: 140, padding: '12px 16px', background: 'white',
-              border: '2px solid #ddd', borderRadius: 10, fontWeight: 700, fontSize: 11,
-              cursor: 'pointer', color: '#666', letterSpacing: '0.05em'
-            }}
-          >
-            TYPE / PASTE
-          </button>
+          <SortedToolCard 
+            icon="letter" 
+            title="Decode a Letter" 
+            description="Plain English breakdown, urgency check, what to actually do" 
+            accentColor="#d4760a" 
+            onClick={() => openTool('letter')} 
+          />
+          <SortedToolCard 
+            icon="reply" 
+            title="Write a Reply" 
+            description="Ready-to-send response, right tone, zero waffle" 
+            accentColor="#6B7A99" 
+            onClick={() => openTool('reply')} 
+          />
         </div>
 
         {/* SOMETHING ELSE */}
-        <div style={{ marginBottom: 16 }}>
+        <div style={{ marginBottom: 20 }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: '#999', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 12 }}>
             SOMETHING ELSE?
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
-            <div onClick={() => openTool('scam')} style={{
-              padding: '16px 12px', background: 'white', borderRadius: 10,
-              border: '1px solid #eee', cursor: 'pointer', textAlign: 'center'
-            }}>
-              <div style={{ fontSize: 20, marginBottom: 6 }}>⚠️</div>
-              <div style={{ fontWeight: 600, fontSize: 12, color: '#1a1a1a', marginBottom: 3 }}>Scam Checker</div>
-              <div style={{ fontSize: 10, color: '#888' }}>Spot it fast</div>
-            </div>
-            <div onClick={() => openTool('contract')} style={{
-              padding: '16px 12px', background: 'white', borderRadius: 10,
-              border: '1px solid #eee', cursor: 'pointer', textAlign: 'center'
-            }}>
-              <div style={{ fontSize: 20, marginBottom: 6 }}>📋</div>
-              <div style={{ fontWeight: 600, fontSize: 12, color: '#1a1a1a', marginBottom: 3 }}>Contract Checker</div>
-              <div style={{ fontSize: 10, color: '#888' }}>Rights grabs</div>
-            </div>
-            <div onClick={() => openTool('conflict')} style={{
-              padding: '16px 12px', background: 'white', borderRadius: 10,
-              border: '1px solid #eee', cursor: 'pointer', textAlign: 'center'
-            }}>
-              <div style={{ fontSize: 20, marginBottom: 6 }}>🤝</div>
-              <div style={{ fontWeight: 600, fontSize: 12, color: '#1a1a1a', marginBottom: 3 }}>Resolve Conflict</div>
-              <div style={{ fontSize: 10, color: '#888' }}>Step-by-step</div>
-            </div>
+            <SortedToolCard 
+              icon="scam" 
+              title="Scam Checker" 
+              description="Spot it fast" 
+              accentColor="rgba(0,0,0,0.35)" 
+              onClick={() => openTool('scam')} 
+              variant="secondary" 
+            />
+            <SortedToolCard 
+              icon="contract" 
+              title="Contract Checker" 
+              description="Rights grabs" 
+              accentColor="rgba(0,0,0,0.35)" 
+              onClick={() => openTool('contract')} 
+              variant="secondary" 
+            />
+            <SortedToolCard 
+              icon="conflict" 
+              title="Resolve Conflict" 
+              description="Step-by-step" 
+              accentColor="rgba(0,0,0,0.35)" 
+              onClick={() => openTool('conflict')} 
+              variant="secondary" 
+            />
           </div>
         </div>
 
         {/* TAGS */}
-        <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginBottom: 16 }}>
-          <div style={{ background: '#f5f5f5', padding: '4px 10px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
+        <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginBottom: 20 }}>
+          <div style={{ background: 'rgba(0,0,0,0.04)', padding: '5px 11px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
             UK law
           </div>
-          <div style={{ background: '#f5f5f5', padding: '4px 10px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
+          <div style={{ background: 'rgba(0,0,0,0.04)', padding: '5px 11px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
             Nothing stored. No account. No trace.
           </div>
         </div>
 
         {/* PRICING CALLOUT */}
-        <div style={{ textAlign: 'center', padding: '12px', background: 'rgba(212,118,10,0.05)', borderRadius: 8, marginBottom: 24 }}>
+        <div style={{ textAlign: 'center', padding: '12px', background: 'rgba(212,118,10,0.05)', borderRadius: 10, marginBottom: 16 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#d4760a' }}>
             $9.99/month when you're ready for unlimited.
           </div>
@@ -168,12 +140,12 @@ export default function Family51Page() {
       </div>
 
       {/* LIVE COUNTER */}
-      <div style={{ padding: '24px 20px', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '16px 20px', maxWidth: 520, margin: '0 auto' }}>
         <SortedLiveCounter />
       </div>
 
       {/* DIVIDER */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent)', margin: '0 20px' }} />
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)', margin: '0 20px' }} />
 
       {/* YOUR CASES */}
       <div ref={caseHistoryRef} style={{ padding: '32px 20px 0', maxWidth: 520, margin: '0 auto' }}>
@@ -188,15 +160,15 @@ export default function Family51Page() {
       )}
 
       {/* FOOTER */}
-      <div style={{ padding: '48px 20px', textAlign: 'center', marginTop: 24 }}>
-        <div style={{ display: 'flex', gap: 20, justifyContent: 'center', marginBottom: 16 }}>
-          <a href="/SortedFAQ" style={{ fontSize: 13, color: '#6B6B6B', textDecoration: 'none', fontWeight: 600 }}>FAQ & HOW IT WORKS</a>
+      <div style={{ padding: '40px 20px', textAlign: 'center', marginTop: 24 }}>
+        <div style={{ display: 'flex', gap: 18, justifyContent: 'center', marginBottom: 12, fontSize: 12, color: '#888' }}>
+          <a href="/SortedFAQ" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>FAQ</a>
           <span style={{ color: '#ddd' }}>•</span>
-          <a href="/SortedTerms" style={{ fontSize: 13, color: '#6B6B6B', textDecoration: 'none', fontWeight: 600 }}>Terms</a>
+          <a href="/SortedTerms" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>Terms</a>
           <span style={{ color: '#ddd' }}>•</span>
-          <a href="/SortedPrivacy" style={{ fontSize: 13, color: '#6B6B6B', textDecoration: 'none', fontWeight: 600 }}>Privacy</a>
+          <a href="/SortedPrivacy" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>Privacy</a>
         </div>
-        <p style={{ fontSize: 11, color: '#999', margin: 0 }}>
+        <p style={{ fontSize: 10, color: '#aaa', margin: 0, letterSpacing: '0.05em' }}>
           ZERO LOSS — ZERO BULLSHIT
         </p>
       </div>
