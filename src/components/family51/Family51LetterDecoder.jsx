@@ -373,7 +373,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
                   key={i}
                   onClick={() => {
                     setLetterText(ex.text);
-                    setTimeout(() => decode(), 100);
+                    // Just fill the text - let them choose when to decode
                   }}
                   whileTap={{ scale: 0.96 }}
                   style={{
@@ -529,6 +529,22 @@ Don't worry about formatting. Just get it all in."
       <AnimatePresence>
         {result && (
           <motion.div ref={resultRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+            {/* BACK BUTTON - top of result */}
+            <button
+              onClick={reset}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.45)',
+                background: 'none', border: 'none', cursor: 'pointer',
+                marginBottom: 12, letterSpacing: '0.06em',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              Try another letter
+            </button>
+            
             <SortedStreamingResult
               result={result}
               accentColor={accentColor}
