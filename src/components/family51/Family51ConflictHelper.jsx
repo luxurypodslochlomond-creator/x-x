@@ -403,7 +403,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               transition: 'all 0.2s',
             }}
           >
-            GET MY PLAN →
+            Get my plan →
           </motion.button>
         )}
       </AnimatePresence>

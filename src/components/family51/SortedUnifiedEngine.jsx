@@ -56,11 +56,11 @@ function NativeButton({ onClick, children, style, className }) {
 
 const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, recordUse, isLocked, onPaywall }, ref) {
   const TOOL_COLORS = {
-    letter:   { color: '#f5a623', bg: 'rgba(245,166,35,0.08)',  border: 'rgba(245,166,35,0.35)',  label: 'DECODE'  },
-    scam:     { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.35)',   label: 'SCAM?'   },
-    reply:    { color: '#2563eb', bg: 'rgba(37,99,235,0.08)',   border: 'rgba(37,99,235,0.35)',   label: 'REPLY'   },
-    conflict: { color: '#059669', bg: 'rgba(5,150,105,0.08)',   border: 'rgba(5,150,105,0.35)',   label: 'DISPUTE'  },
-    contract: { color: '#7c3aed', bg: 'rgba(124,58,237,0.08)', border: 'rgba(124,58,237,0.35)',  label: 'CONTRACT' },
+    letter:   { color: '#f5a623', bg: 'rgba(245,166,35,0.08)',  border: 'rgba(245,166,35,0.35)',  label: 'DECODE A LETTER',    hint: 'Paste, type or snap a photo of your letter below.' },
+    scam:     { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.35)',   label: 'SCAM CHECK',         hint: 'Paste the message, email or text below — or snap a photo.' },
+    reply:    { color: '#2563eb', bg: 'rgba(37,99,235,0.08)',   border: 'rgba(37,99,235,0.35)',   label: 'WRITE A REPLY',      hint: 'Describe the situation below and we\'ll write the letter for you.' },
+    conflict: { color: '#059669', bg: 'rgba(5,150,105,0.08)',   border: 'rgba(5,150,105,0.35)',   label: 'RESOLVE A DISPUTE',  hint: 'Tell us what\'s happening below — we\'ll give you a clear plan.' },
+    contract: { color: '#7c3aed', bg: 'rgba(124,58,237,0.08)', border: 'rgba(124,58,237,0.35)',  label: 'CHECK A CONTRACT',   hint: 'Paste the contract text or clause you\'re unsure about.' },
   };
 
   const [activeTool, setActiveTool] = useState(null);
@@ -144,28 +144,35 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '16px 16px 80px' }}>
 
-        {/* HEADER ROW — back + tool label */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-          <NativeButton
-            onClick={handleBack}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 6,
-              fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.5)',
-              letterSpacing: '0.08em', background: 'none', border: 'none', padding: '8px 0',
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            BACK
-          </NativeButton>
-          <div style={{
-            fontSize: 10, fontWeight: 800, letterSpacing: '0.14em',
-            color: tc.color, background: `${tc.color}18`,
-            border: `1px solid ${tc.color}40`,
-            borderRadius: 6, padding: '4px 10px',
-          }}>
-            {tc.label}
+        {/* HEADER ROW — back + tool label + human hint */}
+        <div style={{ marginBottom: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+            <NativeButton
+              onClick={handleBack}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.45)',
+                letterSpacing: '0.06em', background: 'none', border: 'none', padding: '8px 0',
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Back
+            </NativeButton>
+            <div style={{
+              fontSize: 10, fontWeight: 800, letterSpacing: '0.1em',
+              color: tc.color, background: `${tc.color}15`,
+              border: `1px solid ${tc.color}35`,
+              borderRadius: 20, padding: '4px 12px',
+            }}>
+              SORTED
+            </div>
+          </div>
+          {/* HUMAN GUIDANCE — tells the user exactly what to do */}
+          <div style={{ borderLeft: `3px solid ${tc.color}`, paddingLeft: 12 }}>
+            <p style={{ fontSize: 17, fontWeight: 800, color: '#1a1208', margin: '0 0 3px', letterSpacing: '-0.01em' }}>{tc.label}</p>
+            <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.5)', margin: 0, lineHeight: 1.5 }}>{tc.hint}</p>
           </div>
         </div>
 

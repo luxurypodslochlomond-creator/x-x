@@ -220,7 +220,7 @@ Copy exactly what it says — every word helps us check it.`}
               fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
               border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
             }}>
-              CHECK THIS NOW →
+              Check this now →
             </motion.button>
           ) : (
             <div style={{ display: 'flex', gap: 10 }}>
@@ -234,26 +234,26 @@ Copy exactly what it says — every word helps us check it.`}
                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                    <circle cx="12" cy="13" r="4"/>
                  </svg>
-                 SNAP A PHOTO
-               </motion.button>
-              <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()} style={{
-                 flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
-                 letterSpacing: '0.06em', cursor: 'pointer',
-                 border: `1px solid rgba(26,18,8,0.15)`, background: 'transparent', color: 'rgba(26,18,8,0.5)',
-                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-               }}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="17 8 12 3 7 8"/>
-                  <line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
-                UPLOAD
-              </motion.button>
+                 Snap a photo
+                 </motion.button>
+                 <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()} style={{
+                   flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
+                   letterSpacing: '0.02em', cursor: 'pointer',
+                   border: `1px solid rgba(26,18,8,0.15)`, background: 'transparent', color: 'rgba(26,18,8,0.5)',
+                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                 }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                   Upload a file
+                 </motion.button>
             </div>
           )}
 
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0 }}>
-            Free forever. Nothing stored. Processed and gone instantly.
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
+            Free. Nothing stored. Gone the moment we're done.
           </p>
         </div>
       )}

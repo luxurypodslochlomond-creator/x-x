@@ -341,7 +341,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 transition: 'all 0.2s',
               }}
             >
-              WRITE MY REPLY →
+              Write my reply →
             </motion.button>
           )}
         </AnimatePresence>

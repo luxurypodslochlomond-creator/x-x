@@ -421,7 +421,7 @@ Don't worry about formatting. Just get it all in."
                  background: accentColor, color: '#fff',
                 }}
                 >
-                DECODE THIS LETTER →
+                Decode this letter →
             </motion.button>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
@@ -440,32 +440,32 @@ Don't worry about formatting. Just get it all in."
                   <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                   <circle cx="12" cy="13" r="4"/>
                 </svg>
-                SNAP PHOTO
-              </motion.button>
-              <motion.button
+                Snap a photo
+                </motion.button>
+                <motion.button
                 whileTap={{ scale: 0.96 }}
                 onClick={() => fileInputRef.current?.click()}
                 style={{
-                  width: '100%', padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
-                  letterSpacing: '0.04em', cursor: 'pointer',
-                  border: `1px solid rgba(26,18,8,0.2)`,
-                  background: 'transparent', color: 'rgba(26,18,8,0.55)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+                 width: '100%', padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
+                 letterSpacing: '0.02em', cursor: 'pointer',
+                 border: `1px solid rgba(26,18,8,0.2)`,
+                 background: 'transparent', color: 'rgba(26,18,8,0.55)',
+                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
                 }}
-              >
+                >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="17 8 12 3 7 8"/>
-                  <line x1="12" y1="3" x2="12" y2="15"/>
+                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                 <polyline points="17 8 12 3 7 8"/>
+                 <line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
-                UPLOAD
-              </motion.button>
+                Upload a file
+                </motion.button>
             </div>
           )}
 
           {/* SUBTLE TRUST LINE */}
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, letterSpacing: '0.03em' }}>
-            Nothing stored. Processed and gone. For long documents, snap just the key page.
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
+            Nothing is stored. For long documents, just snap the key page.
           </p>
         </div>
       )}
