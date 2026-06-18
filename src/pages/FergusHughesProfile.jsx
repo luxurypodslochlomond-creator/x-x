@@ -5,33 +5,33 @@ const profile = {
   dob: "May 2009",
   age: "17",
   nationality: "Scottish",
-  position: "TBC — update when Fergus replies",
-  secondPosition: "",
-  preferredFoot: "",
+  position: "Centre-Back / Right-Back",
+  secondPosition: "Wing",
+  preferredFoot: "Right",
   height: "",
   weight: "",
   currentClub: "TBC",
   previousClubs: [
-    { club: "Dunfermline Community", years: "TBC", ageGroup: "TBC" }
+    { club: "Dunfermline Community", years: "2024-2026", ageGroup: "U17s (age 15), U16s (age 16)" }
   ],
   achievements: [
-    "Player of the Year — [Season TBC]",
-    "Parents' Player of the Year — [Season TBC]",
+    "Player of the Year — 2025/26 Season",
+    "Team Captain — 2025/26 Season",
   ],
   strengths: [
-    "TBC — update when Fergus replies",
-    "TBC",
-    "TBC",
+    "Commitment & Work Rate — 100% every session, gave everything earning Player of the Year",
+    "Leadership — Captain of a strong team, takes initiative on pitch",
+    "Attitude — Keeps head high at all times, even after mistakes or bad games",
   ],
-  developmentArea: "TBC — honest self-assessment to follow",
-  playerDescription: "TBC — in Fergus's own words",
-  whyMovingOn: "TBC",
-  goal: "TBC",
+  developmentArea: "Strength and physicality — actively working to improve",
+  playerDescription: "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session.",
+  whyMovingOn: "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now.",
+  goal: "To play for the national team",
   videoLink: "",
   contactName: "Brian Hughes (Father)",
   contactPhone: "TBC — add your number",
-  school: "TBC",
-  canTravelTo: "TBC",
+  school: "Inverkeithing High School",
+  canTravelTo: "Can travel to Falkirk training. Driving theory passed, practical test imminent.",
 };
 
 export default function FergusHughesProfile() {
