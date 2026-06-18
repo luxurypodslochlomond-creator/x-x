@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-export default function SortedPhotoButton({ onPhotoSelected, disabled = false }) {
+export default function SortedPhotoButton({ onPhotoSelected, onDecoded, disabled = false, compact = false }) {
   const [uploading, setUploading] = useState(false);
   const cameraInputRef = useRef(null);
 
@@ -16,6 +16,7 @@ export default function SortedPhotoButton({ onPhotoSelected, disabled = false })
     try {
       const result = await import('@/api/base44Client').then(m => m.base44.integrations.Core.UploadFile({ file }));
       onPhotoSelected?.(result.file_url);
+      onDecoded?.(result.file_url);
     } catch (err) {
       console.error('Photo upload failed:', err);
     } finally {
@@ -30,7 +31,7 @@ export default function SortedPhotoButton({ onPhotoSelected, disabled = false })
       <div
         onClick={handleClick}
         style={{
-          width: '100%', padding: '11px 8px', borderRadius: 10,
+          ...(compact ? { flex: 1 } : { width: '100%' }), padding: '11px 8px', borderRadius: 10,
           border: '1px solid rgba(245,166,35,0.3)', background: 'rgba(245,166,35,0.08)',
           color: '#f5a623', display: 'flex', alignItems: 'center', justifyContent: 'center',
           gap: 5, fontSize: 11, fontWeight: 700, cursor: uploading ? 'not-allowed' : 'pointer',

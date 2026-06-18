@@ -11,48 +11,6 @@ import SortedFileUploadButton from '@/components/family51/SortedFileUploadButton
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 
-const TOOLS = [
-  {
-    id: 'decode',
-    engineId: 'letter',
-    title: 'Decode a Letter',
-    description: 'Plain English · what it means · what to do',
-    icon: 'letter',
-    color: '#d4760a',
-  },
-  {
-    id: 'reply',
-    engineId: 'reply',
-    title: 'Write a Reply',
-    description: 'Draft a response · firm but fair',
-    icon: 'reply',
-    color: '#b85c00',
-  },
-  {
-    id: 'conflict',
-    engineId: 'conflict',
-    title: 'Resolve a Conflict',
-    description: 'Navigate disputes · know your rights',
-    icon: 'conflict',
-    color: '#7c3a00',
-  },
-  {
-    id: 'scam',
-    engineId: 'scam',
-    title: 'Is This a Scam?',
-    description: 'Spot fraud · protect yourself',
-    icon: 'scam',
-    color: '#c0392b',
-  },
-  {
-    id: 'contract',
-    engineId: 'contract',
-    title: 'Check a Contract',
-    description: 'Understand terms · find the traps',
-    icon: 'contract',
-    color: '#1a6b3a',
-  },
-];
 
 export default function Family51Page() {
   const engineRef = useRef(null);
@@ -124,53 +82,74 @@ export default function Family51Page() {
           Paste, type, snap a photo or upload a file — any language, any country, nothing stored.
         </p>
 
-        {/* PRIMARY ENTRY POINTS */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+        {/* 2 PRIMARY TOOLS */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 14 }}>
+          <SortedToolCard
+            icon="letter"
+            title="Decode a Letter"
+            description="Plain English breakdown, urgency check, what to actually do"
+            accentColor="#d4760a"
+            onClick={() => openTool('letter')}
+          />
+          <SortedToolCard
+            icon="reply"
+            title="Write a Reply"
+            description="Ready-to-send response, right tone, zero waffle"
+            accentColor="#b85c00"
+            onClick={() => openTool('reply')}
+          />
+        </div>
+
+        {/* INPUT BUTTONS — horizontal row */}
+        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+          <SortedPhotoButton onDecoded={handlePhotoDecoded} compact />
+          <SortedFileUploadButton onDecoded={handleFileDecoded} compact />
           <button
             onClick={() => openTool('letter')}
             style={{
-              background: '#d4760a',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 12,
-              padding: '14px 28px',
-              fontSize: 15,
-              fontWeight: 800,
-              cursor: 'pointer',
-              letterSpacing: '-0.01em',
-              width: '100%',
+              flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              background: 'rgba(26,18,8,0.04)', border: '1.5px solid rgba(26,18,8,0.12)',
+              borderRadius: 10, padding: '10px 8px', fontSize: 12, fontWeight: 700,
+              color: 'rgba(26,18,8,0.55)', cursor: 'pointer', letterSpacing: '0.02em',
             }}
           >
-            Start — paste or type
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect x="1" y="2" width="12" height="10" rx="2" stroke="currentColor" strokeWidth="1.4" fill="none"/>
+              <path d="M4 5h6M4 7.5h4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+            </svg>
+            TYPE / PASTE
           </button>
-
-          <SortedPhotoButton onDecoded={handlePhotoDecoded} />
-          <SortedFileUploadButton onDecoded={handleFileDecoded} />
         </div>
 
-        {/* TRUST ROW */}
-        <SortedTrustRow geoPrice={geoPrice} usageCount={usageCount} isPremium={isPremium} />
-      </div>
+        {/* DIVIDER with "SOMETHING ELSE?" */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0 12px' }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.08)' }} />
+          <span style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em' }}>SOMETHING ELSE?</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.08)' }} />
+        </div>
 
-      {/* DIVIDER */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.15), transparent)', margin: '0 20px' }} />
-
-      {/* TOOL GRID */}
-      <div style={{ padding: '28px 16px 0', maxWidth: 560, margin: '0 auto' }}>
-        <p style={{ fontSize: 12, fontWeight: 700, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 14 }}>
-          CHOOSE A TOOL
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          {TOOLS.map((tool) => (
+        {/* 3 SECONDARY TOOLS — smaller cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+          {[
+            { id: 'scam', engineId: 'scam', title: 'Scam Checker', description: 'Spot it fast', icon: 'scam' },
+            { id: 'contract', engineId: 'contract', title: 'Contract Checker', description: 'Rights grabs', icon: 'contract' },
+            { id: 'conflict', engineId: 'conflict', title: 'Resolve Conflict', description: 'Step-by-step', icon: 'conflict' },
+          ].map(tool => (
             <SortedToolCard
               key={tool.id}
               icon={tool.icon}
               title={tool.title}
               description={tool.description}
-              accentColor={tool.color}
+              accentColor="rgba(26,18,8,0.4)"
               onClick={() => openTool(tool.engineId)}
+              variant="secondary"
             />
           ))}
+        </div>
+
+        {/* TRUST ROW */}
+        <div style={{ marginTop: 16 }}>
+          <SortedTrustRow geoPrice={geoPrice} usageCount={usageCount} isPremium={isPremium} />
         </div>
       </div>
 

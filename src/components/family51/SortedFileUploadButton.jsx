@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-export default function SortedFileUploadButton({ onFileSelected, disabled = false }) {
+export default function SortedFileUploadButton({ onFileSelected, onDecoded, disabled = false, compact = false }) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -16,6 +16,7 @@ export default function SortedFileUploadButton({ onFileSelected, disabled = fals
     try {
       const result = await import('@/api/base44Client').then(m => m.base44.integrations.Core.UploadFile({ file }));
       onFileSelected?.(result.file_url);
+      onDecoded?.(result.file_url);
     } catch (err) {
       console.error('File upload failed:', err);
     } finally {
@@ -30,7 +31,7 @@ export default function SortedFileUploadButton({ onFileSelected, disabled = fals
       <div
         onClick={handleClick}
         style={{
-          width: '100%', padding: '11px 8px', borderRadius: 10,
+          ...(compact ? { flex: 1 } : { width: '100%' }), padding: '11px 8px', borderRadius: 10,
           border: '1px solid rgba(37,99,235,0.3)', background: 'rgba(37,99,235,0.06)',
           color: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center',
           gap: 5, fontSize: 11, fontWeight: 700, cursor: uploading ? 'not-allowed' : 'pointer',
