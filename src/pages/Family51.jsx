@@ -102,13 +102,13 @@ export default function Family51Page() {
           WHAT DO YOU NEED?
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9, marginBottom: 9 }}>
-          <SortedToolCard icon="letter" title="Decode a Letter" description="Plain English · urgency · what to do" accentColor="#d4760a" onClick={() => openTool('letter')} />
-          <SortedToolCard icon="reply" title="Write a Reply" description="Right tone · zero waffle · ready to send" accentColor="#b85c00" onClick={() => openTool('reply')} />
+          <SortedToolCard icon="letter" title="I got a scary letter" description="Plain English · what it means · what to do" accentColor="#d4760a" onClick={() => openTool('letter')} />
+          <SortedToolCard icon="reply" title="I need to write back" description="Right tone · zero waffle · ready to send" accentColor="#b85c00" onClick={() => openTool('reply')} />
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 9 }}>
-          <SortedToolCard icon="scam" title="Scam Checker" description="Spot it fast" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('scam')} variant="secondary" />
-          <SortedToolCard icon="contract" title="Contract Checker" description="Rights grabs" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('contract')} variant="secondary" />
-          <SortedToolCard icon="conflict" title="Resolve Conflict" description="Step-by-step" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('conflict')} variant="secondary" />
+          <SortedToolCard icon="scam" title="Is this a scam?" description="Spot it fast" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('scam')} variant="secondary" />
+          <SortedToolCard icon="contract" title="Check a contract" description="Know your rights" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('contract')} variant="secondary" />
+          <SortedToolCard icon="conflict" title="I'm in a dispute" description="Clear plan, step by step" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('conflict')} variant="secondary" />
         </div>
       </div>
 
