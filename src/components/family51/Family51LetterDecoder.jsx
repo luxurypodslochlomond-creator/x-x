@@ -6,10 +6,12 @@ import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
 import { buildPrompt } from '@/utils/sortedPrompts';
+import { buildLearningContext } from '@/utils/sortedLearning';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedStreamingResult from './SortedStreamingResult';
+import SortedPatternShareToggle from './SortedPatternShareToggle';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -139,7 +141,8 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         }
       }
 
-      const promptText = buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType);
+      const learningContext = buildLearningContext(currentType || 'letter');
+      const promptText = buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType) + learningContext;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
@@ -516,6 +519,9 @@ Don't worry about formatting. Just get it all in."
       {/* OPTIONAL EXTRAS — only shown after result or when they've started typing */}
       {letterText.trim() && !result && (
       <div style={{ paddingTop: 4 }}>
+       {/* PATTERN SHARING - opt-in to help others */}
+       <SortedPatternShareToggle accentColor={accentColor} />
+       
        {/* GEO — always visible when typing */}
        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
        <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(26,18,8,0.3)' }} />
