@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 const FAQ_ITEMS = [
@@ -148,11 +147,7 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
   const [openItem, setOpenItem] = useState(null);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      style={{ maxWidth: 560, margin: '0 auto', padding: '40px 20px 60px' }}
-    >
+    <div style={{ maxWidth: 560, margin: '0 auto', padding: '40px 20px 60px' }}>
       <div style={{ textAlign: 'center', marginBottom: 40 }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.4)', marginBottom: 14 }}>GOT QUESTIONS?</div>
         <h2 style={{ fontSize: 'clamp(24px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0 }}>
@@ -175,67 +170,44 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
               <span style={{ fontSize: 14, fontWeight: 800, color: accentColor, letterSpacing: '0.05em' }}>
                 {category.category}
               </span>
-              <motion.div
-                animate={{ rotate: openCategory === catIdx ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div style={{ transform: `rotate(${openCategory === catIdx ? 180 : 0}deg)`, transition: 'transform 0.2s' }}>
                 <ChevronDown size={18} color={accentColor} />
-              </motion.div>
+              </div>
             </button>
 
             {/* ITEMS */}
-            <AnimatePresence>
-              {openCategory === catIdx && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  style={{ borderTop: `1px solid ${accentColor}20`, background: `${accentColor}04` }}
-                >
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                    {category.items.map((item, itemIdx) => (
-                      <div key={itemIdx} style={{ borderBottom: itemIdx < category.items.length - 1 ? `1px solid ${accentColor}15` : 'none' }}>
-                        <button
-                          onClick={() => setOpenItem(openItem === `${catIdx}-${itemIdx}` ? null : `${catIdx}-${itemIdx}`)}
-                          style={{
-                            width: '100%', padding: '14px 18px', background: 'none', border: 'none', cursor: 'pointer',
-                            display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, transition: 'all 0.2s'
-                          }}
-                        >
-                          <span style={{ fontSize: 13, fontWeight: 600, color: '#1a1208', textAlign: 'left', lineHeight: 1.4 }}>
-                            {item.q}
-                          </span>
-                          <motion.div
-                            animate={{ rotate: openItem === `${catIdx}-${itemIdx}` ? 180 : 0 }}
-                            transition={{ duration: 0.2 }}
-                            style={{ flexShrink: 0, marginTop: 2 }}
-                          >
-                            <ChevronDown size={14} color={accentColor} />
-                          </motion.div>
-                        </button>
+            {openCategory === catIdx && (
+              <div style={{ borderTop: `1px solid ${accentColor}20`, background: `${accentColor}04` }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  {category.items.map((item, itemIdx) => (
+                    <div key={itemIdx} style={{ borderBottom: itemIdx < category.items.length - 1 ? `1px solid ${accentColor}15` : 'none' }}>
+                      <button
+                        onClick={() => setOpenItem(openItem === `${catIdx}-${itemIdx}` ? null : `${catIdx}-${itemIdx}`)}
+                        style={{
+                          width: '100%', padding: '14px 18px', background: 'none', border: 'none', cursor: 'pointer',
+                          display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, transition: 'all 0.2s'
+                        }}
+                      >
+                        <span style={{ fontSize: 13, fontWeight: 600, color: '#1a1208', textAlign: 'left', lineHeight: 1.4 }}>
+                          {item.q}
+                        </span>
+                        <div style={{ transform: `rotate(${openItem === `${catIdx}-${itemIdx}` ? 180 : 0}deg)`, transition: 'transform 0.2s', flexShrink: 0, marginTop: 2 }}>
+                          <ChevronDown size={14} color={accentColor} />
+                        </div>
+                      </button>
 
-                        <AnimatePresence>
-                          {openItem === `${catIdx}-${itemIdx}` && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.15 }}
-                              style={{ borderTop: `1px solid ${accentColor}10`, background: `${accentColor}06`, padding: '12px 18px' }}
-                            >
-                              <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0, lineHeight: 1.6 }}>
-                                {item.a}
-                              </p>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      {openItem === `${catIdx}-${itemIdx}` && (
+                        <div style={{ borderTop: `1px solid ${accentColor}10`, background: `${accentColor}06`, padding: '12px 18px' }}>
+                          <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0, lineHeight: 1.6 }}>
+                            {item.a}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -297,6 +269,6 @@ export default function SortedFAQ({ accentColor = '#f97316' }) {
           Got a question not answered here? Email <strong style={{ color: '#d97706' }}>family@uf51.love</strong> — we'll answer and add it to the FAQ.
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
