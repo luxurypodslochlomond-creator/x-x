@@ -264,6 +264,14 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    
+    console.log('[SORTED] File selected:', {
+      name: file.name,
+      type: file.type,
+      size: file.size,
+      extension: file.name.split('.').pop()?.toLowerCase()
+    });
+    
     if (file.size > 10 * 1024 * 1024) {
       setDecodeError('That file is too large. For best results, snap a photo of the relevant page instead.');
       e.target.value = '';
@@ -280,17 +288,32 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
     try {
       // For Word docs — extract text client-side first (no upload needed, works on poor signal)
       if (isDocx) {
+        console.log('[SORTED] DOCX detected, extracting client-side:', file.name, file.type);
         try {
           const extractedText = await readDocxClientSide(file);
+          console.log('[SORTED] DOCX extracted:', extractedText.slice(0, 100) + '...');
           setLetterText(extractedText);
           setUploading(false);
           await runDecode(null, extractedText);
           e.target.value = '';
           return;
         } catch (docxErr) {
-          console.warn('Client-side docx extraction failed, falling back to upload:', docxErr);
-          // Fall through to upload
+          console.error('[SORTED] Client-side docx extraction failed:', docxErr);
+          setDecodeError(`Could not read .docx file. Please copy the text from your document and paste it instead.`);
+          setUploading(false);
+          setLoading(false);
+          e.target.value = '';
+          return;
         }
+      }
+
+      // For .doc files — not supported
+      if (isDoc) {
+        setDecodeError('Old .doc format not supported. Please save as .docx or copy/paste the text.');
+        setUploading(false);
+        setLoading(false);
+        e.target.value = '';
+        return;
       }
 
       // For images and PDFs — upload then decode
@@ -299,15 +322,21 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       let lastErr;
       for (let attempt = 0; attempt < 2; attempt++) {
         try {
+          console.log('[SORTED] Uploading file:', file.name, file.type, file.size);
           const result = await base44.integrations.Core.UploadFile({ file });
+          console.log('[SORTED] Upload successful:', result.file_url);
           file_url = result.file_url;
           break;
         } catch (err) {
+          console.error(`[SORTED] Upload attempt ${attempt + 1} failed:`, err);
           lastErr = err;
           if (attempt < 1) await new Promise(r => setTimeout(r, 2000)); // wait 2s before retry
         }
       }
-      if (!file_url) throw lastErr || new Error('Upload failed after retries');
+      if (!file_url) {
+        console.error('[SORTED] Upload failed after retries:', lastErr);
+        throw lastErr || new Error('Upload failed after retries');
+      }
 
       setUploadedFileUrl(file_url);
       setLetterText('[File uploaded — AI will read it directly]');
@@ -366,7 +395,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       {!loading && !uploading && (<>
 
       {/* Hidden inputs */}
-      <input ref={fileInputRef} type="file" accept="image/*,application/pdf,.doc,.docx" onChange={handleFileUpload} style={{ display: 'none' }} />
+      <input ref={fileInputRef} type="file" accept="image/*,.pdf,.doc,.docx,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" onChange={handleFileUpload} style={{ display: 'none' }} />
       <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" onChange={handleFileUpload} style={{ display: 'none' }} />
 
       {/* STEP 1: MAIN INPUT — paste or snap, nothing else */}
