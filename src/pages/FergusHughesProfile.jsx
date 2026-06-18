@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 
 const profile = {
   name: "Fergus Hughes",
-  dob: "May 2009",
+  dob: "15/05/2009",
   age: "17",
   nationality: "Scottish",
   position: "Centre-Back / Right-Back",
   secondPosition: "Wing",
   preferredFoot: "Right",
-  height: "",
-  weight: "",
-  currentClub: "TBC",
+  height: "6'1\" (185 cm)",
+  weight: "73 kg",
+  currentClub: "Dunfermline Community / Hill of Beath (trial)",
   previousClubs: [
     { club: "Dunfermline Community", years: "2024-2026", ageGroup: "U17s (age 15), U16s (age 16)" }
   ],
