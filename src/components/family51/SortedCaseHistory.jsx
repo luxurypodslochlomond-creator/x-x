@@ -530,26 +530,9 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
 
   const filtered = filter === 'all' ? cases : cases.filter(c => c.tool === filter);
 
-  // Free tier: show paywall
+  // Free tier with no cases yet — show nothing, don't block the hero
   if (!isPremium && cases.length === 0) {
-    return (
-      <div style={{ maxWidth: 520, margin: '0 auto', padding: '40px 20px 60px', textAlign: 'center' }}>
-        <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.35)', marginBottom: 12 }}>SAVE YOUR CASES</div>
-          <h2 style={{ fontSize: 'clamp(22px, 5vw, 32px)', fontWeight: 900, color: '#1a1208', margin: '0 0 12px', letterSpacing: '-0.02em' }}>Upgrade to save forever</h2>
-          <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.55)', margin: 0, lineHeight: 1.6 }}>
-            Right now, your cases disappear when you close the browser. Premium saves them forever — decrypt anytime, delete whenever.
-          </p>
-        </div>
-        <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', marginBottom: 20 }}>
-          <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.5 }}>
-            <strong style={{ color: '#d97706' }}>$9.99/month</strong> — unlimited cases, your vault, delete whenever. Cancel anytime.
-          </p>
-        </div>
-        <button onClick={() => window.scrollTo(0, 0)} style={{ width: '100%', padding: '14px 0', borderRadius: 12, background: '#f97316', border: '1px solid #f97316', color: '#fff', fontSize: 13, fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer', marginBottom: 12 }}>UPGRADE NOW</button>
-        <button onClick={() => window.history.back()} style={{ width: '100%', padding: '12px 0', borderRadius: 12, background: 'transparent', border: '1px solid rgba(26,18,8,0.15)', color: 'rgba(26,18,8,0.45)', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>BACK</button>
-      </div>
-    );
+    return null;
   }
 
   return (
