@@ -38,7 +38,7 @@ const profile = {
 
 export default function FergusHughesProfile() {
   return (
-    <div className="min-h-screen bg-white p-8">
+    <div className="min-h-screen bg-white px-4 py-6 sm:p-8">
       <style>{`
         @media print {
           body * { visibility: hidden; }
@@ -56,7 +56,7 @@ export default function FergusHughesProfile() {
         }
       `}</style>
       
-      <div id="profile-content" className="max-w-3xl mx-auto bg-white border border-gray-200 p-8" style={{ fontFamily: 'Georgia, serif' }}>
+      <div id="profile-content" className="max-w-3xl mx-auto bg-white border border-gray-200 p-4 sm:p-6 md:p-8" style={{ fontFamily: 'Georgia, serif' }}>
         {/* Header */}
         <div className="border-b-2 border-gray-800 pb-4 mb-5">
           <div className="flex items-start justify-between">
@@ -74,7 +74,7 @@ export default function FergusHughesProfile() {
 
         <div className="space-y-5">
           {/* Key Stats */}
-          <div className="grid grid-cols-3 gap-4 border-b border-gray-200 pb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-b border-gray-200 pb-4">
             <div>
               <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Position</p>
               <p className="text-gray-900 font-semibold text-sm">{profile.position}</p>
@@ -109,7 +109,7 @@ export default function FergusHughesProfile() {
           </div>
 
           {/* Achievements & Strengths */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Achievements</h2>
               <ul className="space-y-1.5">
@@ -147,7 +147,7 @@ export default function FergusHughesProfile() {
           </div>
 
           {/* Contact & Logistics */}
-          <div className="border-t border-gray-200 pt-4 grid grid-cols-2 gap-6">
+          <div className="border-t border-gray-200 pt-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Contact</h2>
               <p className="font-sans text-sm text-gray-900 font-semibold">{profile.contactName}</p>
