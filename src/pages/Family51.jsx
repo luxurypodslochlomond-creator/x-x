@@ -176,7 +176,10 @@ export default function Family51Page() {
           {TOOLS.map((tool) => (
             <SortedToolCard
               key={tool.id}
-              tool={tool}
+              icon={tool.icon}
+              title={tool.title}
+              description={tool.description}
+              accentColor={tool.color}
               onClick={() => handleToolSelect(tool.id)}
             />
           ))}
