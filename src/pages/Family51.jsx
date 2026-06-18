@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import SortedLayout from '@/components/family51/SortedLayout';
+import React, { useState, useRef } from 'react';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedTrustRow from '@/components/family51/SortedTrustRow';
@@ -15,87 +14,75 @@ import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 const TOOLS = [
   {
     id: 'decode',
+    engineId: 'letter',
     title: 'Decode a Letter',
     description: 'Plain English · what it means · what to do',
     icon: 'letter',
     color: '#d4760a',
-    gradient: 'linear-gradient(135deg, rgba(212,118,10,0.12) 0%, rgba(212,118,10,0.04) 100%)',
   },
   {
     id: 'reply',
+    engineId: 'reply',
     title: 'Write a Reply',
     description: 'Draft a response · firm but fair',
     icon: 'reply',
     color: '#b85c00',
-    gradient: 'linear-gradient(135deg, rgba(184,92,0,0.10) 0%, rgba(184,92,0,0.03) 100%)',
   },
   {
     id: 'conflict',
+    engineId: 'conflict',
     title: 'Resolve a Conflict',
     description: 'Navigate disputes · know your rights',
     icon: 'conflict',
     color: '#7c3a00',
-    gradient: 'linear-gradient(135deg, rgba(124,58,0,0.10) 0%, rgba(124,58,0,0.03) 100%)',
   },
   {
     id: 'scam',
+    engineId: 'scam',
     title: 'Is This a Scam?',
     description: 'Spot fraud · protect yourself',
     icon: 'scam',
     color: '#c0392b',
-    gradient: 'linear-gradient(135deg, rgba(192,57,43,0.10) 0%, rgba(192,57,43,0.03) 100%)',
   },
   {
     id: 'contract',
+    engineId: 'contract',
     title: 'Check a Contract',
     description: 'Understand terms · find the traps',
     icon: 'contract',
     color: '#1a6b3a',
-    gradient: 'linear-gradient(135deg, rgba(26,107,58,0.10) 0%, rgba(26,107,58,0.03) 100%)',
   },
 ];
 
 export default function Family51Page() {
-  const [activeTool, setActiveTool] = useState(null);
-  const [engineInput, setEngineInput] = useState('');
   const engineRef = useRef(null);
-  const { usageCount, isPremium } = useSortedUsage();
+  const { usageCount, isPremium, recordUse, isLocked } = useSortedUsage();
   const geoPrice = useSortedGeoPrice();
+  const [showPaywall, setShowPaywall] = useState(false);
 
-  const handleToolSelect = (toolId, prefill = '') => {
-    setActiveTool(toolId);
-    setEngineInput(prefill);
-    setTimeout(() => {
-      document.getElementById('sorted-engine')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 80);
+  const openTool = (engineId, handoffData = null) => {
+    engineRef.current?.open(engineId, handoffData);
   };
 
   const handlePhotoDecoded = (text) => {
-    handleToolSelect('decode', text);
+    openTool('letter', { prefillText: text });
   };
 
   const handleFileDecoded = (text) => {
-    handleToolSelect('decode', text);
+    openTool('letter', { prefillText: text });
   };
-
-  if (activeTool) {
-    return (
-      <div id="sorted-engine" style={{ minHeight: '100dvh', background: '#fef8ee' }}>
-        <SortedUnifiedEngine
-          ref={engineRef}
-          initialTool={activeTool}
-          initialInput={engineInput}
-          onBack={() => setActiveTool(null)}
-          isPremium={isPremium}
-          usageCount={usageCount}
-          geoPrice={geoPrice}
-        />
-      </div>
-    );
-  }
 
   return (
     <div style={{ minHeight: '100dvh', background: '#fef8ee', color: '#1a1208' }}>
+
+      {/* ENGINE — always mounted, slides up when active */}
+      <SortedUnifiedEngine
+        ref={engineRef}
+        geoPrice={geoPrice}
+        recordUse={recordUse}
+        isLocked={isLocked}
+        onPaywall={() => setShowPaywall(true)}
+      />
 
       {/* HERO */}
       <div style={{
@@ -138,9 +125,9 @@ export default function Family51Page() {
         </p>
 
         {/* PRIMARY ENTRY POINTS */}
-        <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 20 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
           <button
-            onClick={() => handleToolSelect('decode')}
+            onClick={() => openTool('letter')}
             style={{
               background: '#d4760a',
               color: '#fff',
@@ -151,6 +138,7 @@ export default function Family51Page() {
               fontWeight: 800,
               cursor: 'pointer',
               letterSpacing: '-0.01em',
+              width: '100%',
             }}
           >
             Start — paste or type
@@ -180,7 +168,7 @@ export default function Family51Page() {
               title={tool.title}
               description={tool.description}
               accentColor={tool.color}
-              onClick={() => handleToolSelect(tool.id)}
+              onClick={() => openTool(tool.engineId)}
             />
           ))}
         </div>
@@ -201,7 +189,7 @@ export default function Family51Page() {
 
       {/* CASE HISTORY */}
       <div style={{ padding: '24px 16px 0', maxWidth: 560, margin: '0 auto' }}>
-        <SortedCaseHistory onOpenTool={handleToolSelect} isPremium={isPremium} />
+        <SortedCaseHistory onOpenTool={(toolId, data) => openTool(toolId, data)} isPremium={isPremium} />
       </div>
 
       {/* ABOUT */}
