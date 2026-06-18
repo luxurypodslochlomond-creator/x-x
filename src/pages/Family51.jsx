@@ -2,14 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedTrustRow from '@/components/family51/SortedTrustRow';
-import SortedAbout from '@/components/family51/SortedAbout';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import MauroChat from '@/components/family51/MauroChat';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedPhotoButton from '@/components/family51/SortedPhotoButton';
 import SortedFileUploadButton from '@/components/family51/SortedFileUploadButton';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
-import SortedAIIcon from '@/components/family51/SortedAIIcon';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 
@@ -101,115 +99,55 @@ export default function Family51Page() {
         <SortedTrustRow geoPrice={geoPrice} usageCount={usageCount} isPremium={isPremium} />
       </div>
 
-      {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '8px 20px 0' }} />
-
-      {/* ── SORTED AI — MAIN FEATURE, RIGHT AFTER HERO ── */}
-      <div style={{ padding: '28px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        {/* Card header with icon */}
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: 12, 
-          marginBottom: 16,
-          padding: '14px 18px',
-          background: 'linear-gradient(135deg, rgba(249,115,22,0.08), rgba(249,115,22,0.04))',
-          border: '1.5px solid rgba(249,115,22,0.25)',
-          borderRadius: 16,
-          boxShadow: '0 4px 20px rgba(249,115,22,0.08)'
-        }}>
-          <SortedAIIcon size={32} animate={true} />
-          <div style={{ flex: 1 }}>
-            <h2 style={{ fontSize: 16, fontWeight: 900, color: '#1a1208', margin: 0, letterSpacing: '-0.02em' }}>
-              SORTED AI
-            </h2>
-            <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.5)', margin: '2px 0 0', lineHeight: 1.3 }}>
-              Your friend for scary letters & disputes
-            </p>
-          </div>
-        </div>
-        
-        {/* Chat interface */}
-        <MauroChat />
-        
-        {/* Helper text */}
-        <p style={{ 
-          fontSize: 11, 
-          fontWeight: 700, 
-          color: 'rgba(26,18,8,0.3)', 
-          letterSpacing: '0.12em', 
-          textAlign: 'center', 
-          marginTop: 16,
-          marginBottom: 0
-        }}>
-          OR PICK A TOOL BELOW
-        </p>
-      </div>
-
-      {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '20px 20px 0' }} />
-
-      {/* ── TOOLS ── */}
+      {/* ── TOOLS GRID ── */}
       <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9, marginBottom: 9 }}>
-          <SortedToolCard icon="letter" title="I got a scary letter" description="Plain English · what it means · what to do" accentColor="#d4760a" onClick={() => openTool('letter')} />
-          <SortedToolCard icon="reply" title="I need to write back" description="Right tone · zero waffle · ready to send" accentColor="#b85c00" onClick={() => openTool('reply')} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
+          <SortedToolCard icon="letter" title="I got a scary letter" description="Plain English · what to do" accentColor="#d4760a" onClick={() => openTool('letter')} />
+          <SortedToolCard icon="reply" title="I need to write back" description="Right tone · ready to send" accentColor="#b85c00" onClick={() => openTool('reply')} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 9 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
           <SortedToolCard icon="scam" title="Is this a scam?" description="Spot it fast" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('scam')} variant="secondary" />
-          <SortedToolCard icon="contract" title="Check a contract" description="Know your rights" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('contract')} variant="secondary" />
-          <SortedToolCard icon="conflict" title="I'm in a dispute" description="Clear plan, step by step" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('conflict')} variant="secondary" />
+          <SortedToolCard icon="contract" title="Check contract" description="Know your rights" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('contract')} variant="secondary" />
+          <SortedToolCard icon="conflict" title="In a dispute" description="Clear plan" accentColor="rgba(26,18,8,0.35)" onClick={() => openTool('conflict')} variant="secondary" />
         </div>
       </div>
 
       {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '24px 20px 0' }} />
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '32px 20px 0' }} />
 
-      {/* ── CASE HISTORY — your stuff first ── */}
+      {/* ── YOUR CASES — only if you have them ── */}
       <div ref={caseHistoryRef} style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <SortedCaseHistory onOpenTool={(toolId, data) => openTool(toolId, data)} isPremium={isPremium} />
       </div>
 
       {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '24px 20px 0' }} />
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.1), transparent)', margin: '32px 20px 0' }} />
 
-      {/* ── LIVE COUNTER — others helped (social proof) ── */}
+      {/* ── LIVE COUNTER — others helped ── */}
       <div style={{ padding: '16px 16px 0', maxWidth: 480, margin: '0 auto' }}>
         <SortedLiveCounter />
       </div>
 
-      {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '24px 20px 0' }} />
-
-      {/* ── PAYWALL — when you need unlimited ── */}
+      {/* ── PAYWALL — only when you hit limits ── */}
       {!isPremium && (
-        <div ref={paywallRef} style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-          <SortedForLifeCard />
-        </div>
+        <>
+          <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '32px 20px 0' }} />
+          <div ref={paywallRef} style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+            <SortedForLifeCard />
+          </div>
+        </>
       )}
 
-      {/* ── ABOUT ── */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <SortedAbout />
-      </div>
-
-      {/* ── FOOTER ── */}
-      <div style={{ padding: '32px 20px', textAlign: 'center', marginTop: 16 }}>
-        <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
-          {[
-            { label: 'Terms', href: '/SortedTerms' },
-            { label: 'Privacy', href: '/SortedPrivacy' },
-            { label: 'FAQ', href: '/SortedFAQ' },
-            { label: 'Press', href: '/SortedPressRelease' },
-          ].map(link => (
-            <a key={link.href} href={link.href} style={{ fontSize: 12, color: 'rgba(26,18,8,0.35)', textDecoration: 'none', fontWeight: 600 }}>
-              {link.label}
-            </a>
-          ))}
-        </div>
-        <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.25)', margin: 0 }}>
+      {/* ── SIMPLE FOOTER ── */}
+      <div style={{ padding: '40px 20px', textAlign: 'center', marginTop: 24 }}>
+        <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.3)', margin: '0 0 8px' }}>
           SORTED is not a law firm and does not provide legal advice.
         </p>
+        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', fontSize: 12, color: 'rgba(26,18,8,0.4)' }}>
+          <a href="/SortedTerms" style={{ textDecoration: 'none', color: 'inherit' }}>Terms</a>
+          <a href="/SortedPrivacy" style={{ textDecoration: 'none', color: 'inherit' }}>Privacy</a>
+          <a href="/SortedFAQ" style={{ textDecoration: 'none', color: 'inherit' }}>FAQ</a>
+        </div>
       </div>
     </div>
   );
