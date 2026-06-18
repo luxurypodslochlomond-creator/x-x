@@ -54,7 +54,7 @@ function NativeButton({ onClick, children, style, className }) {
   );
 }
 
-const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, recordUse }, ref) {
+const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, recordUse, isLocked, onPaywall }, ref) {
   const TOOL_COLORS = {
     letter:   { color: '#f5a623', bg: 'rgba(245,166,35,0.08)',  border: 'rgba(245,166,35,0.35)',  label: 'DECODE'  },
     scam:     { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.35)',   label: 'SCAM?'   },
@@ -72,6 +72,10 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
 
   // Open: set tool → immediately visible
   const handleToolOpen = (toolId, handoffData = null) => {
+    if (isLocked && onPaywall) {
+      onPaywall();
+      return;
+    }
     setActiveTool(toolId);
     setPrefillContext(handoffData || null);
     setShowShare(false);

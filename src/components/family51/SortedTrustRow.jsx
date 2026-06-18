@@ -32,7 +32,7 @@ export default function SortedTrustRow({ selectedLocation, geoPrice, onShowLocat
       </div>
       <div style={{ marginBottom: 16, textAlign: 'center' }}>
         <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.03em' }}>
-          {geoPrice.inline} when you're ready for unlimited.
+          10 free uses. Then {geoPrice.inline} for unlimited.
         </span>
       </div>
     </>

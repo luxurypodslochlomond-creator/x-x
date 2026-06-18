@@ -18,6 +18,7 @@ import SortedFileUploadButton from '@/components/family51/SortedFileUploadButton
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedTrustRow from '@/components/family51/SortedTrustRow';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
+import { useSortedUsage } from '@/components/family51/useSortedUsage';
 
 function loadLocation() {
   try {
@@ -31,9 +32,7 @@ export default function Family51Page() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [showMauro, setShowMauro] = useState(false);
   const [showCases, setShowCases] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showFollowUp, setShowFollowUp] = useState(false);
   const [showLocationPicker, setShowLocationPicker] = useState(false);
@@ -46,10 +45,9 @@ export default function Family51Page() {
     const params = new URLSearchParams(window.location.search);
     if (params.get('upgrade') === '1') setShowPaywall(true);
     if (params.get('cases') === '1') setShowCases(true);
-    if (params.get('mauro') === '1') setShowMauro(true);
   }, []);
 
-  const recordUse = () => {};
+  const { isLocked, remaining, recordUse, loaded } = useSortedUsage();
 
   // Handle "Snap a Photo" result from onboarding
   const handleOnboardingPhoto = (fileUrl) => {
@@ -187,7 +185,7 @@ export default function Family51Page() {
       </div>
 
       {/* TOOL ENGINE */}
-      <SortedUnifiedEngine ref={engineRef} geoPrice={geoPrice} recordUse={recordUse} />
+      <SortedUnifiedEngine ref={engineRef} geoPrice={geoPrice} recordUse={recordUse} isLocked={isLocked} onPaywall={() => setShowPaywall(true)} />
 
       {/* LOCATION PICKER MODAL */}
       <AnimatePresence>
