@@ -62,15 +62,15 @@ export default function SortedShareButton({ accentColor = '#f97316' }) {
         style={{
           width: '100%', padding: '14px 18px', borderRadius: 12, cursor: 'pointer',
           border: `1px solid ${accentColor}40`, background: `${accentColor}0d`,
-          color: '#fff', fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: 12
+          color: '#1a1208', fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: 12
         }}
       >
         <ShareIconSVG color={accentColor} />
         <div style={{ flex: 1, textAlign: 'left' }}>
-          <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.04em', color: '#fff' }}>
+          <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.04em', color: '#1a1208' }}>
             Someone else needs this?
           </div>
-          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginTop: 2 }}>
+          <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', marginTop: 2 }}>
             Got a scary letter? SORTED decodes it free.
           </div>
         </div>
@@ -86,12 +86,12 @@ export default function SortedShareButton({ accentColor = '#f97316' }) {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            style={{ marginTop: 8, border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, overflow: 'hidden', background: 'rgba(255,255,255,0.03)' }}
+            style={{ marginTop: 8, border: '1px solid rgba(26,18,8,0.1)', borderRadius: 12, overflow: 'hidden', background: 'rgba(26,18,8,0.03)' }}
           >
             <button onClick={whatsapp} style={optBtn('#22c55e')}>
               <WhatsAppIcon /> Share on WhatsApp
             </button>
-            <button onClick={handleCopy} style={optBtn('rgba(255,255,255,0.7)')}>
+            <button onClick={handleCopy} style={optBtn('rgba(26,18,8,0.6)')}>
               <CopyIcon /> {copied ? '✓ Copied!' : 'Copy link'}
             </button>
           </motion.div>
@@ -103,7 +103,7 @@ export default function SortedShareButton({ accentColor = '#f97316' }) {
 
 const optBtn = (color) => ({
   width: '100%', padding: '12px 16px', background: 'none', border: 'none',
-  borderBottom: '1px solid rgba(255,255,255,0.06)', cursor: 'pointer',
+  borderBottom: '1px solid rgba(26,18,8,0.08)', cursor: 'pointer',
   color, fontSize: 13, fontWeight: 700, fontFamily: 'inherit',
   display: 'flex', alignItems: 'center', gap: 10, textAlign: 'left',
 });
