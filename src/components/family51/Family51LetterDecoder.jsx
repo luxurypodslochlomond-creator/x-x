@@ -168,6 +168,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       - England/Wales vs Scotland vs NI: different rules, cite the right one
       - Sound HUMAN — like a friend who knows this stuff, not a robot
       - If unclear, say "Can't tell from this letter — call [body] to check"
+      - DEADLINE LOGIC: If the document mentions event/performance dates that are in the PAST (before today's date), you MUST flag this as URGENT and tell them the opportunity may have expired. Do NOT calculate deadlines from issue date alone — check if the actual event date has passed.
       - LANGUAGE: If the letter is in a FOREIGN language (Portuguese, Spanish, French, etc), TRANSLATE the breakdown into English so the user understands it. Then offer to write their reply in EITHER the original language (to send back) OR English. The user uploaded it because they DON'T understand — help them understand first, then help them respond.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
