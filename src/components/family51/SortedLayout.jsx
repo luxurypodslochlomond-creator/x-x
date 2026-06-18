@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 
 function SortedMark() {
@@ -14,6 +14,7 @@ function SortedMark() {
 }
 
 export default function SortedLayout({ children, currentPage }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const { remaining, isPaid } = useSortedUsage();
   const [caseCount, setCaseCount] = useState(0);
@@ -50,16 +51,16 @@ export default function SortedLayout({ children, currentPage }) {
         padding: '14px 20px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
-        <Link
-          to="/Sorted"
-          style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit' }}
+        <button
+          onClick={() => navigate('/Sorted')}
+          style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
         >
           <SortedMark />
           <div style={{ lineHeight: 1.2 }}>
             <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#1a1208' }}>SORTED</div>
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#d97706' }}>WE'VE GOT YOU</div>
           </div>
-        </Link>
+        </button>
 
         <div style={{ flex: 1 }} />
 

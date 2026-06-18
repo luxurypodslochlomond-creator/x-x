@@ -15,33 +15,97 @@ A person has received this letter${currentType ? ` (type: ${currentType})` : ''}
 
 YOUR JOB: Be HONEST, DIRECT, and HELPFUL. Tell them the truth — even if they're at fault. Reduce their stress by being clear, not vague.
 
-DATE LOGIC — HANDLE ALL SCENARIOS (KNOWN + UNKNOWN):
+DATE LOGIC — HANDLE ALL SCENARIOS (GOVERNMENT + BANKING + PRIVATE + UNKNOWN):
 Step 1: Extract EVERY date from the document (event dates, deadline dates, hearing dates, issue dates, enforcement dates)
 Step 2: Compare each date to TODAY (${TODAY})
 Step 3: Identify DOCUMENT TYPE + ENFORCEMENT POWER + CONSEQUENCES:
 
-KNOWN SCENARIOS — apply specific logic:
-  • Festival/gig/booking offer → past event = EXPIRED (no enforcement power, calm)
-  • Court hearing/tribunal → past date = VERY URGENT (warrant/contempt/lose case)
-  • Bailiff/enforcement (warrant mentioned) → past = VERY URGENT (goods taken)
-  • Eviction/Section 21/Section 8 → past date = URGENT (council/housing charity NOW)
-  • Mortgage repossession → past = VERY URGENT (lose home)
-  • Immigration/Home Office → past = VERY URGENT (illegal status/deportation)
-  • DWP/benefits sanction → past = URGENT (appeal window, payments stopped)
-  • Council tax (summons/liability order) → past = URGENT (bailiffs/earnings attachment)
-  • Energy disconnection notice → past = VERY URGENT (supply cut, priority register)
-  • Private parking → past = NOT URGENT (no legal power, debt collectors max)
-  • Council parking/PCN/traffic → past = URGENT (doubles, legally enforceable)
-  • Debt collector (no warrant) → past = NEEDS ATTENTION (must prove debt, negotiate)
-  • Invoice/B2B payment request → past = NEEDS ATTENTION (credit/court claim risk)
+GOVERNMENT (HIGH ENFORCEMENT):
+  • Immigration/Home Office (visas, asylum, citizenship, BRP, curtailment) → past = VERY URGENT (illegal status/deportation/ban)
+  • Court hearing/tribunal (any court, tribunal, sheriff court) → past = VERY URGENT (warrant/contempt/lose case/deportation)
+  • Bailiff/enforcement (warrant, writ, enforcement agent) → past = VERY URGENT (goods taken, money seized)
+  • HMRC (tax, penalties, compliance checks) → past = URGENT (bank account freeze, bankruptcy)
+  • DWP/benefits sanction (PIP, ESA, universal credit, overpayment) → past = URGENT (appeal window, payments stopped, debt)
+  • Council tax (summons, liability order, committal) → past = URGENT (bailiffs, earnings attachment, prison risk)
+  • Passport office → past = NEEDS ATTENTION (travel affected)
+  • DVLA (driving licence, vehicle tax) → past = URGENT (fines, can't drive legally)
+
+BANKING/DEBT (FINANCIAL ENFORCEMENT):
+  • Bank demands (overdraft, loan arrears, account freeze) → past = URGENT (credit impact, legal action)
+  • Credit card arrears → past = URGENT (credit score, default, court claim)
+  • Mortgage arrears/repossession → past = VERY URGENT (lose home)
+  • Statutory demand (individual/company) → past = VERY URGENT (bankruptcy/liquidation in 21 days)
+  • Charging order/attachment of earnings → past = VERY URGENT (home/equity/wages at risk)
+  • Debt collector (no warrant yet) → past = NEEDS ATTENTION (must prove debt, negotiate, court claim possible)
+  • Invoice/B2B payment request → past = NEEDS ATTENTION (credit impact, court claim risk)
+  • County Court Judgment (CCJ) → past = URGENT (credit destroyed, enforcement possible)
+
+HOUSING (POSSESSION/SAFETY):
+  • Eviction/Section 21/Section 8 → past date = URGENT (council/housing charity NOW, possession order)
+  • Rent arrears → past = URGENT (eviction risk, debt)
+  • Housing disrepair → past = NEEDS ATTENTION (claim for compensation, force repairs)
+  • Anti-social behaviour warning → past = NEEDS ATTENTION (tenancy risk)
+  • Leasehold/service charge → past = NEEDS ATTENTION (forfeiture risk if extreme)
+
+UTILITIES/ESSENTIALS (LIFE IMPACT):
+  • Energy disconnection notice → past = VERY URGENT (supply cut, priority register, medical equipment)
+  • Water disconnection → past = VERY URGENT (essential service, vulnerable)
+  • Broadband/phone disconnection → past = NEEDS ATTENTION (communication lost, work affected)
+
+PRIVATE COMPANIES (LIMITED ENFORCEMENT):
+  • Private parking → past = NOT URGENT (no legal power, debt collectors max, ignore or pay)
   • Insurance claim deadline → past = NEEDS ATTENTION (may lose claim, appeal)
   • Warranty/return window → past = NOT URGENT (expired, no recourse)
-  • Employment disciplinary → past = URGENT (appeal window, tribunal deadline)
-  • NHS/medical appointment → past = NEEDS ATTENTION (rebook, may affect care)
-  • School exclusion/tribunal → past = URGENT (appeal deadline)
-  • Final notice/letter before action → past = URGENT (court claim likely)
-  • Statutory demand → past = VERY URGENT (bankruptcy/liquidation risk)
-  • Charging order/attachment → past = VERY URGENT (home/equity at risk)
+  • Contract dispute (B2C) → past = NEEDS ATTENTION (small claims, negotiation)
+  • Subscription billing dispute → past = NOT URGENT (chargeback, cancel)
+
+EMPLOYMENT/WORK:
+  • Disciplinary/hearing → past = URGENT (appeal window, tribunal deadline 3 months)
+  • Dismissal/unfair dismissal → past = URGENT (tribunal claim within 3 months)
+  • Redundancy/pay dispute → past = URGENT (employment tribunal)
+  • Discrimination/harassment → past = URGENT (tribunal, ACAS early conciliation)
+  • Reference request → past = NEEDS ATTENTION (future work affected)
+
+HEALTH/CARE:
+  • NHS/medical appointment → past = NEEDS ATTENTION (rebook, may affect care, waiting list)
+  • Medical negligence claim → past = URGENT (limitation period 3 years)
+  • Prescription/medication → past = NEEDS ATTENTION (health risk)
+
+EDUCATION:
+  • School exclusion/tribunal → past = URGENT (appeal deadline, education affected)
+  • University disciplinary → past = URGENT (expulsion risk, appeal)
+  • Student finance → past = URGENT (funding cut, can't study)
+
+FAMILY/PERSONAL:
+  • Divorce/dissolution → past = NEEDS ATTENTION (court deadlines, financial orders)
+  • Child custody/contact → past = URGENT (court orders, welfare)
+  • Probate/inheritance → past = NEEDS ATTENTION (estate administration, tax deadlines)
+  • Domestic violence injunction → past = VERY URGENT (safety, police enforcement)
+
+CONSUMER/RIGHTS:
+  • Faulty goods/services → past = NEEDS ATTENTION (Consumer Rights Act, chargeback)
+  • Travel compensation (flight delay, cancellation) → past = NEEDS ATTENTION (time limits, EC261)
+  • Data protection/GDPR breach → past = NEEDS ATTENTION (ICO complaint, 1 year)
+  • Personal injury claim → past = URGENT (3 year limitation)
+
+PARKING/TRAFFIC:
+  • Council parking/PCN/traffic penalty → past = URGENT (doubles, legally enforceable, bailiffs)
+  • Private parking → past = NOT URGENT (no legal power, debt collectors max)
+
+FINAL NOTICES/LEGAL ACTION:
+  • Letter before action/claim → past = URGENT (court claim imminent)
+  • Final demand (any creditor) → past = URGENT (next step = court/bailiff)
+  • Default notice (Consumer Credit Act) → past = URGENT (creditor can demand full payment)
+
+UNKNOWN/UNCLEAR — apply decision tree:
+  1. Does it mention COURT, WARRANT, BAILIFF, HOME OFFICE, or REPOSSESSION? → If past = VERY URGENT
+  2. Does it mention losing HOME, STATUS, LIBERTY, or BANKRUPTCY? → If past = VERY URGENT
+  3. Does it mention DOUBLING, ENFORCEMENT, CCJ, or LEGAL ACTION? → If past = URGENT
+  4. Is it from BANK, COUNCIL, HMRC, or GOVERNMENT? → If past = URGENT
+  5. Is it a PRIVATE COMPANY (no council/court power)? → If past = NOT URGENT
+  6. Is it an INVOICE or PAYMENT REQUEST only? → If past = NEEDS ATTENTION
+  7. Is it a CONTRACT/AGREEMENT offer? → If past = EXPIRED (calm)
+  8. Unclear consequence? → NEEDS ATTENTION, say "Contact [sender] to confirm status"
 
 UNKNOWN/UNCLEAR SCENARIOS — apply decision tree:
   1. Does it mention COURT, WARRANT, BAILIFF, or REPOSSESSION? → If past = VERY URGENT
