@@ -44,119 +44,95 @@ export default function FergusHughesProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8">
       <style>{`
         @media print {
-          /* Hide layout elements - header, footer, sidebar, nav */
-          header, footer, aside, nav, main > header, main > footer, [data-standalone], .lg\\:block, .lg\\:ml-80, .fixed, .sticky {
+          header, footer, aside, nav, main > header, main > footer, [data-standalone], .lg\\:block, .lg\\:ml-80, .fixed, .sticky, body > div > div {
             display: none !important;
             visibility: hidden !important;
-            opacity: 0 !important;
           }
-          
-          /* Hide body background */
-          body, body * {
-            background: white !important;
-          }
-          
-          /* Hide buttons */
-          button, [role="button"] {
-            display: none !important;
-          }
-          
-          /* Show ONLY the profile */
+          body, body * { background: white !important; }
+          button, [role="button"] { display: none !important; }
           .print-container {
             position: absolute !important;
             left: 0 !important;
             top: 0 !important;
             width: 100% !important;
             margin: 0 !important;
-            padding: 2cm !important;
+            padding: 1.5cm !important;
             box-shadow: none !important;
             background: white !important;
           }
-          
           .print-container, .print-container * {
             visibility: visible !important;
             display: block !important;
             color: black !important;
           }
-          
-          @page {
-            margin: 0;
-            size: A4;
-          }
+          @page { margin: 0; size: A4; }
         }
       `}</style>
-      {/* Admin toolbar — hidden on print */}
-      <div className="max-w-3xl mx-auto mb-6 flex items-center justify-between print:hidden">
+      
+      {/* Admin toolbar */}
+      <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between print:hidden">
         <div>
           <h1 className="text-xl font-bold text-gray-800">Fergus Hughes — Player Profile</h1>
-          <p className="text-sm text-gray-500 mt-1">Update the profile object at the top of this file once Fergus replies. Then print or share as PDF.</p>
+          <p className="text-sm text-gray-500 mt-1">Professional one-pager for scouts & coaches</p>
         </div>
         <div className="flex gap-3">
-          <button
-            onClick={() => setShowPrintTip(!showPrintTip)}
-            className="px-4 py-2 text-sm border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50"
-          >
+          <button onClick={() => setShowPrintTip(!showPrintTip)} className="px-4 py-2 text-sm border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">
             How to export PDF
           </button>
-          <button
-            onClick={handlePrint}
-            className="px-4 py-2 text-sm bg-gray-900 text-white rounded-lg hover:bg-gray-700"
-          >
+          <button onClick={handlePrint} className="px-4 py-2 text-sm bg-gray-900 text-white rounded-lg hover:bg-gray-700">
             Print / Save PDF
           </button>
         </div>
       </div>
 
       {showPrintTip && (
-        <div className="max-w-3xl mx-auto mb-4 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800 print:hidden">
-          Click Print, then change destination to "Save as PDF". Set margins to Minimum and disable headers/footers for a clean one-pager.
+        <div className="max-w-4xl mx-auto mb-4 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800 print:hidden">
+          Click Print → Change destination to "Save as PDF" → Set margins to "Minimum" → Disable headers/footers
         </div>
       )}
 
-      {/* THE ONE-PAGER — this is what prints */}
-      <div
-        className="print-container max-w-3xl mx-auto bg-white shadow-sm"
-        style={{ fontFamily: 'Georgia, serif' }}
-      >
-        {/* Header */}
-        <div className="border-b-4 border-gray-900 px-10 pt-10 pb-6">
+      {/* THE ONE-PAGER */}
+      <div className="print-container max-w-4xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden" style={{ fontFamily: 'Georgia, serif' }}>
+        {/* Header with accent bar */}
+        <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-10 pt-10 pb-6">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{profile.name}</h1>
-              <p className="text-lg text-gray-500 mt-1 font-sans">Player Profile — {new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</p>
+              <h1 className="text-4xl font-bold text-white tracking-tight">{profile.name}</h1>
+              <p className="text-gray-300 mt-2 font-sans text-lg">Football Player Profile</p>
             </div>
-            <div className="text-right text-sm text-gray-500 font-sans mt-1 space-y-0.5">
-              <p>DOB: {profile.dob} (Age {profile.age})</p>
-              <p>Nationality: {profile.nationality}</p>
-              {profile.height && <p>Height: {profile.height}</p>}
+            <div className="text-right text-sm text-gray-300 font-sans mt-1 space-y-1">
+              <p className="text-white font-semibold">DOB: {profile.dob}</p>
+              <p>Age {profile.age} • {profile.nationality}</p>
+              {profile.height && <p>{profile.height}</p>}
             </div>
           </div>
         </div>
 
-        <div className="px-10 py-8 space-y-8">
-
-          {/* Position & Playing Style */}
-          <div className="grid grid-cols-2 gap-8">
+        <div className="px-10 py-8 space-y-7">
+          {/* Key Stats - 3 columns */}
+          <div className="grid grid-cols-3 gap-6 border-b border-gray-200 pb-6">
             <div>
-              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Position</h2>
-              <p className="text-gray-900 text-base">{profile.position}</p>
-              {profile.secondPosition && (
-                <p className="text-gray-500 text-sm mt-1">Also plays: {profile.secondPosition}</p>
-              )}
+              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-1">Position</p>
+              <p className="text-gray-900 font-semibold">{profile.position}</p>
+              {profile.secondPosition && <p className="text-gray-500 text-sm mt-0.5">Also: {profile.secondPosition}</p>}
             </div>
             <div>
-              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Preferred Foot</h2>
-              <p className="text-gray-900 text-base">{profile.preferredFoot || "TBC"}</p>
+              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-1">Preferred Foot</p>
+              <p className="text-gray-900 font-semibold">{profile.preferredFoot}</p>
+            </div>
+            <div>
+              <p className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-1">Current Club</p>
+              <p className="text-gray-900 font-semibold text-sm">{profile.currentClub}</p>
             </div>
           </div>
 
-          {/* Career History */}
+          {/* Club History */}
           <div>
             <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-3">Club History</h2>
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               {profile.previousClubs.map((c, i) => (
                 <div key={i} className="flex items-baseline gap-3">
                   <span className="text-gray-900 font-sans text-sm font-semibold w-56">{c.club}</span>
@@ -164,47 +140,43 @@ export default function FergusHughesProfile() {
                   {c.ageGroup && <span className="text-gray-400 font-sans text-sm">— {c.ageGroup}</span>}
                 </div>
               ))}
-              <div className="flex items-baseline gap-3">
-                <span className="text-gray-900 font-sans text-sm font-semibold w-56">{profile.currentClub}</span>
-                <span className="text-gray-500 font-sans text-sm">Current</span>
-              </div>
             </div>
           </div>
 
-          {/* Achievements */}
-          <div>
-            <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-3">Achievements</h2>
-            <ul className="space-y-1">
-              {profile.achievements.map((a, i) => (
-                <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
-                  <span className="text-gray-400 mt-0.5">—</span>
-                  <span>{a}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Strengths */}
-          <div>
-            <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-3">Strengths</h2>
-            <ul className="space-y-1">
-              {profile.strengths.map((s, i) => (
-                <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
-                  <span className="text-gray-400 mt-0.5">—</span>
-                  <span>{s}</span>
-                </li>
-              ))}
-            </ul>
+          {/* Achievements & Strengths - 2 columns */}
+          <div className="grid grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-3">Achievements</h2>
+              <ul className="space-y-1.5">
+                {profile.achievements.map((a, i) => (
+                  <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
+                    <span className="text-green-600 mt-0.5">✓</span>
+                    <span>{a}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-3">Strengths</h2>
+              <ul className="space-y-1.5">
+                {profile.strengths.map((s, i) => (
+                  <li key={i} className="flex items-start gap-2 font-sans text-sm text-gray-800">
+                    <span className="text-blue-600 mt-0.5">●</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Development */}
-          <div>
-            <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Area of Development</h2>
-            <p className="font-sans text-sm text-gray-700">{profile.developmentArea}</p>
+          <div className="bg-amber-50 border-l-4 border-amber-400 p-4">
+            <h2 className="text-xs font-bold tracking-widest text-amber-600 uppercase font-sans mb-2">Area of Development</h2>
+            <p className="font-sans text-sm text-amber-900">{profile.developmentArea}</p>
           </div>
 
-          {/* In his own words */}
-          <div className="border-l-4 border-gray-200 pl-5">
+          {/* In His Own Words */}
+          <div className="border-l-4 border-gray-300 pl-5 py-2">
             <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">In His Own Words</h2>
             <p className="text-gray-700 italic text-sm leading-relaxed">"{profile.playerDescription}"</p>
           </div>
@@ -212,36 +184,27 @@ export default function FergusHughesProfile() {
           {/* Ambition */}
           <div>
             <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Ambition</h2>
-            <p className="font-sans text-sm text-gray-700">{profile.goal}</p>
+            <p className="font-sans text-lg text-gray-900 font-semibold">{profile.goal}</p>
           </div>
 
-          {/* Video */}
-          {profile.videoLink && (
-            <div>
-              <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Match Footage</h2>
-              <p className="font-sans text-sm text-blue-700 break-all">{profile.videoLink}</p>
-            </div>
-          )}
-
-          {/* Footer / Contact */}
-          <div className="border-t border-gray-200 pt-6 flex items-start justify-between">
+          {/* Contact & Logistics */}
+          <div className="border-t-2 border-gray-200 pt-6 grid grid-cols-2 gap-8">
             <div>
               <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Contact</h2>
-              <p className="font-sans text-sm text-gray-800">{profile.contactName}</p>
-              <p className="font-sans text-sm text-gray-500">{profile.contactPhone}</p>
+              <p className="font-sans text-sm text-gray-900 font-semibold">{profile.contactName}</p>
+              <p className="font-sans text-sm text-gray-600">{profile.contactPhone}</p>
             </div>
-            <div className="text-right">
+            <div>
               <h2 className="text-xs font-bold tracking-widest text-gray-400 uppercase font-sans mb-2">Logistics</h2>
-              <p className="font-sans text-sm text-gray-500">{profile.school}</p>
-              <p className="font-sans text-sm text-gray-500">Travel: {profile.canTravelTo}</p>
+              <p className="font-sans text-sm text-gray-700">{profile.school}</p>
+              <p className="font-sans text-sm text-gray-600">Travel: {profile.canTravelTo}</p>
             </div>
           </div>
-
         </div>
       </div>
 
       <p className="text-center text-xs text-gray-400 mt-6 print:hidden">
-        Admin only — not publicly linked. Update the profile object at the top of FergusHughesProfile.jsx with Fergus's answers.
+        Admin only — Update the profile object at the top of this file
       </p>
     </div>
   );
