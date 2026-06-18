@@ -29,6 +29,9 @@ export default function Family51Page() {
   return (
     <div style={{ minHeight: '100dvh', background: '#FDFBF7', color: '#1a1a1a', overflowX: 'hidden' }}>
       
+      {/* SORTED ENGINE MODAL */}
+      <SortedUnifiedEngine ref={engineRef} geoPrice={geoPrice} recordUse={recordUse} isLocked={isLocked} />
+
       {/* HERO */}
       <div style={{ padding: '32px 20px 16px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
         <h1 style={{
