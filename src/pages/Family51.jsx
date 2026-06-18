@@ -40,22 +40,8 @@ export default function Family51Page() {
         onPaywall={() => {}}
       />
 
-      {/* HEADER */}
-      <div style={{ padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 560, margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <SortedMark size={32} accentColor="#d4760a" />
-          <div>
-            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: '-0.02em', color: '#1a1a1a' }}>SORTED</div>
-            <div style={{ fontSize: 10, color: '#888', fontWeight: 600, letterSpacing: '0.05em' }}>WE'VE GOT YOU</div>
-          </div>
-        </div>
-        <div style={{ background: 'rgba(212,118,10,0.08)', padding: '6px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700, color: '#d4760a' }}>
-          10 FREE
-        </div>
-      </div>
-
       {/* HERO */}
-      <div style={{ padding: '24px 20px 16px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '32px 20px 16px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
         <h1 style={{
           fontSize: 'clamp(26px, 7vw, 36px)', fontWeight: 900, lineHeight: 1.1,
           margin: '0 0 12px', color: '#1a1a1a', letterSpacing: '-0.03em',
