@@ -142,14 +142,23 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
       YOUR JOB: Be HONEST, DIRECT, and HELPFUL. Tell them the truth — even if they're at fault.
 
+      DATE LOGIC — FOLLOW THIS EXACTLY:
+      Step 1: Extract EVERY date from the document (event dates, deadline dates, issue dates)
+      Step 2: Compare each date to TODAY (${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })})
+      Step 3: If an EVENT DATE (performance, appointment, hearing) is in the PAST → severity = VERY URGENT, tell them "The event date has passed — contact them immediately to check if still valid"
+      Step 4: If a RESPONSE DEADLINE is in the PAST → severity = VERY URGENT, tell them "Deadline expired — contact them urgently"
+      Step 5: If a deadline is within 7 days → severity = URGENT
+      Step 6: If event date is FUTURE but response deadline is past → severity = URGENT, explain the contradiction
+
       OUTPUT — KEEP IT SHORT AND CALM:
       Return JSON with ONLY these fields:
       - letter_summary: Max 5 words. E.g. "Council tax debt demand"
       - severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
-      - key_deadline: Exact date or null
+      - key_deadline: The EARLIEST deadline that matters (response deadline OR event date — whichever comes first)
       - amount: Specific amount or null
       - one_sentence: ONE sentence explaining what this is — in PLAIN ENGLISH, no jargon
       - three_steps: Exactly 3 action steps. Be HONEST and SPECIFIC:
+        • If dates are in the PAST: "Contact [sender] TODAY — the event/deadline has passed, check if still valid"
         • If they're at fault: "Pay the £65 within 14 days — it doubles to £130 after that"
         • If it's private parking: "Private company, not council. They can't fine like councils can, but may send collectors. Your call: contest or pay."
         • If council parking: "Council fine — legally enforceable. Pay £65 in 14 days or it becomes £130."
@@ -168,7 +177,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       - England/Wales vs Scotland vs NI: different rules, cite the right one
       - Sound HUMAN — like a friend who knows this stuff, not a robot
       - If unclear, say "Can't tell from this letter — call [body] to check"
-      - DEADLINE LOGIC: If the document mentions event/performance dates that are in the PAST (before today's date), you MUST flag this as URGENT and tell them the opportunity may have expired. Do NOT calculate deadlines from issue date alone — check if the actual event date has passed.
+      - DATE COMPARISON IS MANDATORY: You MUST compare all dates to today's date. If today is 18 June 2026 and event is 12 June 2026 → IT'S IN THE PAST. Say so.
       - LANGUAGE: If the letter is in a FOREIGN language (Portuguese, Spanish, French, etc), TRANSLATE the breakdown into English so the user understands it. Then offer to write their reply in EITHER the original language (to send back) OR English. The user uploaded it because they DON'T understand — help them understand first, then help them respond.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
