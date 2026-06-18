@@ -37,7 +37,7 @@ export default function Family51Page() {
   const handleFileDecoded = (url) => openTool('letter', { prefillFileUrl: url });
 
   return (
-    <div style={{ minHeight: '100dvh', background: '#fef8ee', color: '#1a1208' }}>
+    <div style={{ minHeight: '100dvh', background: '#fef8ee', color: '#1a1208', overflowX: 'hidden', WebkitOverflowScrolling: 'touch' }}>
 
       {/* ENGINE — always mounted, slides up when active */}
       <SortedUnifiedEngine

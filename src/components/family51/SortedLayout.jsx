@@ -38,7 +38,7 @@ export default function SortedLayout({ children, currentPage }) {
   }, [location.pathname]);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1208', position: 'relative' }}>
+    <div style={{ minHeight: '100dvh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1208', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch' }}>
 
 
       {/* Header */}
