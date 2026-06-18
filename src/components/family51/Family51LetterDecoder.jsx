@@ -263,7 +263,10 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+      console.log('[SORTED] No file selected');
+      return;
+    }
     
     console.log('[SORTED] File selected:', {
       name: file.name,
@@ -277,10 +280,14 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       e.target.value = '';
       return;
     }
+    
+    // Set uploading state BEFORE any async operations
     setUploading(true);
     setLoading(true);
     setDecodeError(null);
     setResult(null);
+    setUploadedFileUrl(null);
+    setLetterText('');
 
     const isDocx = file.name?.toLowerCase().endsWith('.docx') || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
     const isDoc = file.name?.toLowerCase().endsWith('.doc');
@@ -291,9 +298,10 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         console.log('[SORTED] DOCX detected, extracting client-side:', file.name, file.type);
         try {
           const extractedText = await readDocxClientSide(file);
-          console.log('[SORTED] DOCX extracted:', extractedText.slice(0, 100) + '...');
-          setLetterText(extractedText);
+          console.log('[SORTED] DOCX extracted, length:', extractedText.length);
           setUploading(false);
+          setLetterText(extractedText);
+          // Don't clear input yet - wait for decode to complete
           await runDecode(null, extractedText);
           e.target.value = '';
           return;
@@ -309,6 +317,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
       // For .doc files — not supported
       if (isDoc) {
+        console.log('[SORTED] .doc file detected (old format)');
         setDecodeError('Old .doc format not supported. Please save as .docx or copy/paste the text.');
         setUploading(false);
         setLoading(false);
