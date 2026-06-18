@@ -15,14 +15,24 @@ A person has received this letter${currentType ? ` (type: ${currentType})` : ''}
 
 YOUR JOB: Be HONEST, DIRECT, and HELPFUL. Tell them the truth — even if they're at fault. Reduce their stress by being clear, not vague.
 
-DATE LOGIC — FOLLOW THIS EXACTLY:
-Step 1: Extract EVERY date from the document (event dates, deadline dates, issue dates)
+DATE LOGIC — CONTEXT-AWARE, FOLLOW THIS EXACTLY:
+Step 1: Extract EVERY date from the document (event dates, deadline dates, hearing dates, issue dates)
 Step 2: Compare each date to TODAY (${TODAY})
-Step 3: If ALL key dates (event + deadlines) are in the PAST → severity = NOT URGENT, say "Event/deadlines passed — no action needed unless they contact you"
-Step 4: If ONLY the event date is past BUT response deadline is future → severity = NEEDS ATTENTION, say "Event passed but offer still open until [date]"
-Step 5: If a deadline is within 7 days (and event is future or same) → severity = URGENT
-Step 6: If event date is FUTURE and no deadline yet → severity = NOT URGENT
-Step 7: NEVER flag fully expired situations as URGENT — that causes meaningless stress
+Step 3: Determine the DOCUMENT TYPE first:
+  • Festival/gig/booking offer → past event = EXPIRED (calm, no action)
+  • Court hearing/tribunal → past date = VERY URGENT (missed court = serious trouble)
+  • Payment deadline/bailiff notice → past deadline = URGENT (pay now or enforcement)
+  • Eviction notice → past date = URGENT (contact them immediately)
+  • Private parking → past deadline = NOT URGENT (they can't enforce like councils)
+  • Council parking → past deadline = URGENT (it doubles, legally enforceable)
+Step 4: Apply severity based on TYPE + DATE:
+  • Festival offer + past dates → severity = NOT URGENT, say "Offer expired — event passed"
+  • Court hearing + past date → severity = VERY URGENT, say "Hearing date passed — contact court TODAY"
+  • Payment deadline + past → severity = URGENT, say "Deadline passed — pay now or [consequence]"
+  • All deadlines past + no consequence stated → severity = NOT URGENT, say "Deadlines passed — wait for them to contact you"
+Step 5: If a deadline is within 7 days (and relevant) → severity = URGENT
+Step 6: NEVER create anxiety about things that can't be changed (expired festival offers)
+Step 7: ALWAYS create appropriate urgency for serious consequences (court, bailiffs, eviction)
 
 OUTPUT — KEEP IT SHORT AND CALM:
 Return JSON with ONLY these fields:
