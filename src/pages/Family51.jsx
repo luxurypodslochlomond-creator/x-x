@@ -6,9 +6,6 @@ import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
-import { SortedMark } from '@/components/family51/SortedIcons';
-import { Link } from 'react-router-dom';
-
 export default function Family51Page() {
   const engineRef = useRef(null);
   const { isPremium, recordUse, isLocked } = useSortedUsage();
@@ -32,17 +29,6 @@ export default function Family51Page() {
   return (
     <div style={{ minHeight: '100dvh', background: '#FDFBF7', color: '#1a1a1a', overflowX: 'hidden' }}>
       
-      {/* HEADER WITH LOGO - TAP TO GO HOME */}
-      <div style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', maxWidth: 560, margin: '0 auto' }}>
-        <Link to="/Sorted" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit' }}>
-          <SortedMark size={32} accentColor="#d4760a" />
-          <div>
-            <div style={{ fontWeight: 900, fontSize: 18, letterSpacing: '-0.02em', color: '#1a1a1a' }}>SORTED</div>
-            <div style={{ fontSize: 10, color: '#888', fontWeight: 600, letterSpacing: '0.05em' }}>WE'VE GOT YOU</div>
-          </div>
-        </Link>
-      </div>
-
       {/* HERO */}
       <div style={{ padding: '32px 20px 16px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
         <h1 style={{
