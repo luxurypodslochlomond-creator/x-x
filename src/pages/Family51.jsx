@@ -19,19 +19,14 @@ export default function Family51Page() {
   const paywallRef = useRef(null);
   const caseHistoryRef = useRef(null);
 
-  // Handle header badge taps
+  // Handle header badge taps - make sure they actually scroll
   useEffect(() => {
-    const handleHash = () => {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('upgrade')) {
-        setTimeout(() => paywallRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
-      } else if (params.get('cases')) {
-        setTimeout(() => caseHistoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-      }
-    };
-    handleHash();
-    window.addEventListener('popstate', handleHash);
-    return () => window.removeEventListener('popstate', handleHash);
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('upgrade')) {
+      setTimeout(() => paywallRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+    } else if (params.get('cases')) {
+      setTimeout(() => caseHistoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
   }, []);
 
   const openTool = (engineId, handoffData = null) => {
