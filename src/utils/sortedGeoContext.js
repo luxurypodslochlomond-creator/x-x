@@ -554,7 +554,7 @@ export function buildSortedGeoPromptContext(geo) {
   const code = geo.code?.split('-')[0];
   const lang = COUNTRY_LANGUAGE[code] || null;
   const langInstruction = lang
-    ? `CRITICAL LANGUAGE RULE: The user's country language is ${lang}. If the document/letter they uploaded is in ${lang}, respond entirely in ${lang}. If the document is in a DIFFERENT language (e.g. Portuguese letter in UK), translate/decode it to ${lang} for the breakdown, but offer to write replies in EITHER language. NEVER assume English — always match the document's language or the user's apparent preference.`
-    : `Detect the language the user is writing in or the language of the document they submitted, and respond fully in that same language. Do not default to English if the user's language is clearly something else. If they upload a Portuguese letter, respond in Portuguese. If they upload a Spanish letter, respond in Spanish. Match their language exactly.`;
+    ? `CRITICAL LANGUAGE RULE: The user's browser/country language is ${lang}. If they upload a letter in a DIFFERENT language (e.g. Portuguese letter when their browser is English), TRANSLATE the breakdown to ${lang} so they understand it. Then offer to write their reply in EITHER the original language (to send back) OR ${lang} (for their records). ALWAYS decode foreign letters into ${lang} first — that's why they're using SORTED.`
+    : `Detect the language the user is writing in. If they upload a letter in a foreign language, translate/decode it into THEIR language (detected from their browser/input) so they understand it. Then offer to write replies in either the original language or their language. NEVER leave them stuck with a language they don't understand.`;
   return `Today's date is ${today}. The person is in: ${geo.country}. Apply ${geo.jurisdiction} precisely. ${countryContext} When calculating urgency, use today's date. ${langInstruction}`;
 }
