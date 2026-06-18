@@ -481,12 +481,16 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 
 
 
-            <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{ width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: '1px solid rgba(26,18,8,0.12)', background: 'transparent', color: 'rgba(26,18,8,0.45)' }}>
-              WRITE ANOTHER
+            <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{
+              width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
+              letterSpacing: '0.06em', cursor: 'pointer',
+              border: '1px solid rgba(26,18,8,0.15)',
+              background: 'rgba(26,18,8,0.03)',
+              color: 'rgba(26,18,8,0.5)',
+              marginTop: 8,
+            }}>
+              NEW
             </motion.button>
-
-            {/* SHARE THE TOOL */}
-            <SortedShareButton accentColor={accentColor} />
 
             <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
               Guidance only — not legal advice.
