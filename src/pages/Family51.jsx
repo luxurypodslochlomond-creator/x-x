@@ -9,6 +9,7 @@ import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedPhotoButton from '@/components/family51/SortedPhotoButton';
 import SortedFileUploadButton from '@/components/family51/SortedFileUploadButton';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
+import SortedAIIcon from '@/components/family51/SortedAIIcon';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 
@@ -103,22 +104,53 @@ export default function Family51Page() {
       {/* ── DIVIDER ── */}
       <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '8px 20px 0' }} />
 
-      {/* ── SORTED AI — first thing after hero ── */}
-      <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em', textAlign: 'center', marginBottom: 12 }}>
-          NOT SURE WHERE TO START? JUST ASK
-        </p>
+      {/* ── SORTED AI — MAIN FEATURE, RIGHT AFTER HERO ── */}
+      <div style={{ padding: '28px 16px 0', maxWidth: 480, margin: '0 auto' }}>
+        {/* Card header with icon */}
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: 12, 
+          marginBottom: 16,
+          padding: '14px 18px',
+          background: 'linear-gradient(135deg, rgba(249,115,22,0.08), rgba(249,115,22,0.04))',
+          border: '1.5px solid rgba(249,115,22,0.25)',
+          borderRadius: 16,
+          boxShadow: '0 4px 20px rgba(249,115,22,0.08)'
+        }}>
+          <SortedAIIcon size={32} animate={true} />
+          <div style={{ flex: 1 }}>
+            <h2 style={{ fontSize: 16, fontWeight: 900, color: '#1a1208', margin: 0, letterSpacing: '-0.02em' }}>
+              SORTED AI
+            </h2>
+            <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.5)', margin: '2px 0 0', lineHeight: 1.3 }}>
+              Your friend for scary letters & disputes
+            </p>
+          </div>
+        </div>
+        
+        {/* Chat interface */}
         <MauroChat />
+        
+        {/* Helper text */}
+        <p style={{ 
+          fontSize: 11, 
+          fontWeight: 700, 
+          color: 'rgba(26,18,8,0.3)', 
+          letterSpacing: '0.12em', 
+          textAlign: 'center', 
+          marginTop: 16,
+          marginBottom: 0
+        }}>
+          OR PICK A TOOL BELOW
+        </p>
       </div>
 
       {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '24px 20px 0' }} />
+      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(212,118,10,0.12), transparent)', margin: '20px 20px 0' }} />
 
       {/* ── TOOLS ── */}
       <div style={{ padding: '24px 16px 0', maxWidth: 480, margin: '0 auto' }}>
-        <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.12em', textAlign: 'center', marginBottom: 12 }}>
-          OR PICK WHAT FITS
-        </p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 9, marginBottom: 9 }}>
           <SortedToolCard icon="letter" title="I got a scary letter" description="Plain English · what it means · what to do" accentColor="#d4760a" onClick={() => openTool('letter')} />
           <SortedToolCard icon="reply" title="I need to write back" description="Right tone · zero waffle · ready to send" accentColor="#b85c00" onClick={() => openTool('reply')} />
