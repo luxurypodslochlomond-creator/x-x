@@ -153,6 +153,7 @@ const AuthenticatedApp = () => {
           <MainPage />
         </LayoutWrapper>
       } />
+      <Route path="/PetSounds51" element={<PetSounds51 />} />
       {Object.entries(Pages).map(([path, Page]) => (
         <Route
           key={path}
@@ -164,7 +165,6 @@ const AuthenticatedApp = () => {
           }
         />
       ))}
-      <Route path="/PetSounds51" element={<PetSounds51 />} />
       <Route path="/BuzzTrip" element={<BuzzTripPage />} />
       <Route path="/BuzzTripAbout" element={<BuzzTripAboutPage />} />
       <Route path="/BuzzTripTerms" element={<BuzzTripTermsPage />} />
