@@ -43,21 +43,21 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
         whileTap={{ scale: disabled ? 1 : 0.97 }}
         style={{
           width: '100%', padding: '20px 16px', borderRadius: 16, cursor: disabled ? 'not-allowed' : 'pointer',
-          border: 'none',
-          background: `linear-gradient(145deg, #fff 0%, ${accentColor}08 100%)`,
+          border: `2px solid ${accentColor}`,
+          background: '#fff',
           opacity: disabled ? 0.5 : 1, textAlign: 'left',
           display: 'flex', flexDirection: 'column', gap: 10,
           transition: 'all 0.2s',
-          boxShadow: `0 2px 8px rgba(0,0,0,0.04), 0 0 0 1.5px ${accentColor}18`,
+          boxShadow: `0 2px 10px ${accentColor}30`,
         }}
         whileHover={disabled ? {} : {
           y: -3,
-          boxShadow: `0 6px 20px rgba(0,0,0,0.08), 0 0 0 1.5px ${accentColor}30`,
+          boxShadow: `0 6px 20px ${accentColor}40`,
         }}
       >
         <div style={{
           width: 40, height: 40, borderRadius: 12,
-          background: `${accentColor}12`,
+          background: `${accentColor}20`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: accentColor,
         }}>
