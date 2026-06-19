@@ -75,17 +75,31 @@ export default function SortedTrustStrip() {
         <div style={{ height: 1, background: 'rgba(0,0,0,0.05)' }} />
 
         {/* Bottom row — principles */}
-        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-          {[
-            { icon: '🔒', text: 'Nothing stored' },
-            { icon: '🌍', text: 'Any country' },
-            { icon: '💬', text: 'All languages' },
-          ].map(item => (
-            <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <span style={{ fontSize: 11 }}>{item.icon}</span>
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#888' }}>{item.text}</span>
-            </div>
-          ))}
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* Lock icon — Nothing stored */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="11" width="14" height="10" rx="2" stroke="#888" strokeWidth="1.8"/>
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="#888" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#888' }}>Nothing stored</span>
+          </div>
+          {/* Globe icon — Any country */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#888" strokeWidth="1.8"/>
+              <path d="M3 12h18M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9" stroke="#888" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#888' }}>Any country</span>
+          </div>
+          {/* Translate icon — All languages */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M4 5h10M9 3v2M5 9c0 2 2 4 4 5M9 14s-1-1-2-3" stroke="#888" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M14 20l3-7 3 7M15.5 17h3" stroke="#888" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#888' }}>All languages</span>
+          </div>
           <div style={{ marginLeft: 'auto' }}>
             <a href="/SortedAbout" style={{
               fontSize: 11,
@@ -94,7 +108,7 @@ export default function SortedTrustStrip() {
               textDecoration: 'none',
               letterSpacing: '0.02em',
             }}>
-              Our story →
+              The facts →
             </a>
           </div>
         </div>
