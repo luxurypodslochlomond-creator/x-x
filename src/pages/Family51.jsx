@@ -109,7 +109,7 @@ export default function Family51Page() {
         {/* TAGS */}
         <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginBottom: 20 }}>
           <div style={{ background: 'rgba(0,0,0,0.04)', padding: '5px 11px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
-            UK & Scottish law
+            Any country, any jurisdiction
           </div>
           <div style={{ background: 'rgba(0,0,0,0.04)', padding: '5px 11px', borderRadius: 12, fontSize: 10, fontWeight: 600, color: '#666' }}>
             All languages supported
@@ -122,7 +122,7 @@ export default function Family51Page() {
         {/* PRICING CALLOUT */}
         <div style={{ textAlign: 'center', padding: '12px', background: 'rgba(212,118,10,0.05)', borderRadius: 10, marginBottom: 16 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#d4760a' }}>
-            $9.99/month when you're ready for unlimited.
+            From £9.99/month when you're ready for unlimited.
           </div>
         </div>
       </div>
@@ -157,6 +157,8 @@ export default function Family51Page() {
           <a href="/SortedPrivacy" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>Privacy</a>
           <span style={{ color: '#ddd' }}>•</span>
           <a href="/SortedGlobalAccess" style={{ textDecoration: 'none', color: '#22c55e', fontWeight: 700 }}>🌍 Global Access</a>
+          <span style={{ color: '#ddd' }}>•</span>
+          <a href="/SortedFAQ#about" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>About</a>
         </div>
         <p style={{ fontSize: 10, color: '#aaa', margin: 0, letterSpacing: '0.05em' }}>
           ZERO LOSS — ZERO BULLSHIT
