@@ -40,7 +40,7 @@ export default function SortedAboutPage() {
         <div style={{ background: 'rgba(212,118,10,0.06)', border: '1px solid rgba(212,118,10,0.2)', borderRadius: 12, padding: '18px 20px', marginBottom: 20 }}>
           <p style={{ fontSize: 13, fontWeight: 700, color: '#d4760a', margin: '0 0 8px' }}>The problem is enormous</p>
           <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.7 }}>
-            There's a <strong>£100 billion annual gap</strong> in UK legal aid. Two-thirds of people with serious legal problems get zero professional help. Across the world, 5.1 billion people have no meaningful access to justice. SORTED is our answer to that — starting small, thinking big.
+            Since 2012, UK legal aid funding has been cut by nearly <strong>£1 billion a year</strong> — leaving two-thirds of people with serious legal problems getting zero professional help. Globally, an estimated <strong>5.1 billion people</strong> have no meaningful access to justice. SORTED is our answer to that — starting small, thinking big.
           </p>
         </div>
 

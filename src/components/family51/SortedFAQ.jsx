@@ -82,7 +82,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'Can I cancel anytime?',
-        a: 'Yes. No contract, no lock-in. Cancel from your account instantly. We\'ll refund overpayment if you cancel mid-month.'
+        a: 'Yes. No contract, no lock-in. Cancel anytime and you keep access until the end of your billing period. Email us at family@uf51.love if you have any payment questions — we\'ll always do right by you.'
       },
       {
         q: 'What if I can\'t afford £9.99/month?',
