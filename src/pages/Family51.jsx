@@ -83,7 +83,7 @@ export default function Family51Page() {
               icon="scam" 
               title="Scam Checker" 
               description="Spot it fast" 
-              accentColor="rgba(0,0,0,0.35)" 
+              accentColor="#ef4444" 
               onClick={() => openTool('scam')} 
               variant="secondary" 
             />
@@ -91,7 +91,7 @@ export default function Family51Page() {
               icon="contract" 
               title="Contract Checker" 
               description="Rights grabs" 
-              accentColor="rgba(0,0,0,0.35)" 
+              accentColor="#7c3aed" 
               onClick={() => openTool('contract')} 
               variant="secondary" 
             />
@@ -99,7 +99,7 @@ export default function Family51Page() {
               icon="conflict" 
               title="Resolve Conflict" 
               description="Step-by-step" 
-              accentColor="rgba(0,0,0,0.35)" 
+              accentColor="#059669" 
               onClick={() => openTool('conflict')} 
               variant="secondary" 
             />
