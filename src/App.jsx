@@ -69,6 +69,7 @@ import SortedPartnerKitPage from './pages/SortedPartnerKit';
 import SortedForOrgsPage from './pages/SortedForOrgs';
 import SortedLayout from './components/family51/SortedLayout';
 import SortedGlobalAccessPage from './pages/SortedGlobalAccess';
+import SortedAboutPage from './pages/SortedAbout';
 const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
 const AdminLogoUploadPage = React.lazy(() => import('./pages/AdminLogoUpload'));
@@ -185,6 +186,7 @@ const AuthenticatedApp = () => {
       <Route path="/SortedPartnerKit" element={<SortedLayout currentPage="SortedPartnerKit"><SortedPartnerKitPage /></SortedLayout>} />
       <Route path="/SortedForOrgs" element={<SortedLayout currentPage="SortedForOrgs"><SortedForOrgsPage /></SortedLayout>} />
       <Route path="/SortedGlobalAccess" element={<SortedLayout currentPage="SortedGlobalAccess"><SortedGlobalAccessPage /></SortedLayout>} />
+      <Route path="/SortedAbout" element={<SortedLayout currentPage="SortedAbout"><SortedAboutPage /></SortedLayout>} />
       <Route path="/Family51" element={<RedirectToSorted />} />
       <Route path="/BrianHughesCV" element={<BrianHughesCVPage />} />
       {/* ── MAGIC51/LEARN51 — same page, no layout ── */}

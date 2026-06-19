@@ -158,7 +158,7 @@ export default function Family51Page() {
           <span style={{ color: '#ddd', fontSize: 10 }}>•</span>
           <a href="/SortedGlobalAccess" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>Global</a>
           <span style={{ color: '#ddd', fontSize: 10 }}>•</span>
-          <a href="/SortedFAQ" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>About</a>
+          <a href="/SortedAbout" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>About</a>
         </div>
         <p style={{ fontSize: 10, color: '#bbb', margin: 0, letterSpacing: '0.08em' }}>
           Built by Universal Frequency 51 CIC · Scotland

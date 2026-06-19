@@ -120,7 +120,7 @@ const FAQ_ITEMS = [
     items: [
       {
         q: 'Is my data actually private?',
-        a: 'Yes. Your letter is encrypted in transit, processed by AI, then permanently deleted. We don\'t store it, log it, or use it to train models. We do create anonymized case patterns (no names, emails, amounts) to improve advice for future users — but you\'re never identified. Check our Data Sovereignty Pledge for full details.'
+        a: 'Yes. Your letter is encrypted in transit, processed by AI, then permanently deleted. We don\'t store it, log it, or use it to train models. We do create anonymized case patterns (no names, emails, amounts) to improve advice for future users — but you\'re never identified. Check our Privacy page for full details.'
       },
       {
         q: 'What do you mean by "anonymized patterns"?',
