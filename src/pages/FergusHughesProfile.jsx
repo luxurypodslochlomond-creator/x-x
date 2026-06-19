@@ -163,15 +163,18 @@ export default function FergusHughesProfile() {
         </div>
       </div>
 
-      {/* Instructions for Brian */}
-      <div className="max-w-3xl mx-auto mt-6 p-4 bg-blue-50 border border-blue-200 rounded text-sm text-blue-900">
-        <p className="font-semibold mb-2">To save as PDF:</p>
-        <ol className="list-decimal list-inside space-y-1 text-xs">
-          <li>Press Ctrl+P (or Cmd+P on Mac)</li>
-          <li>Change "Destination" to "Save as PDF"</li>
-          <li>Set margins to "Minimum"</li>
-          <li>Click "Save"</li>
-        </ol>
+      {/* Save as PDF Button */}
+      <div className="max-w-3xl mx-auto mt-6 flex flex-col sm:flex-row gap-4 items-center">
+        <button
+          onClick={() => window.print()}
+          className="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-lg transition-all flex items-center gap-2"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          Save as PDF
+        </button>
+        <p className="text-xs text-gray-500">Then choose "Save as PDF" and download</p>
       </div>
     </div>
   );
