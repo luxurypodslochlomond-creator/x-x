@@ -128,13 +128,13 @@ export default function Family51Page() {
         </div>
       </div>
 
-      {/* LIVE COUNTER */}
-      <div style={{ padding: '16px 20px', maxWidth: 520, margin: '0 auto' }}>
-        <SortedLiveCounter />
-      </div>
-
       {/* TRUST STRIP */}
       <SortedTrustStrip />
+
+      {/* LIVE COUNTER */}
+      <div style={{ padding: '0 20px 16px', maxWidth: 520, margin: '0 auto' }}>
+        <SortedLiveCounter />
+      </div>
 
       {/* DIVIDER */}
       <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)', margin: '0 20px' }} />
