@@ -148,20 +148,20 @@ export default function Family51Page() {
       )}
 
       {/* FOOTER */}
-      <div style={{ padding: '40px 20px', textAlign: 'center', marginTop: 24 }}>
-        <div style={{ display: 'flex', gap: 18, justifyContent: 'center', marginBottom: 12, fontSize: 12, color: '#888' }}>
-          <a href="/SortedFAQ" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>FAQ</a>
-          <span style={{ color: '#ddd' }}>•</span>
-          <a href="/SortedTerms" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>Terms</a>
-          <span style={{ color: '#ddd' }}>•</span>
-          <a href="/SortedPrivacy" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>Privacy</a>
-          <span style={{ color: '#ddd' }}>•</span>
-          <a href="/SortedGlobalAccess" style={{ textDecoration: 'none', color: '#22c55e', fontWeight: 700 }}>🌍 Global Access</a>
-          <span style={{ color: '#ddd' }}>•</span>
-          <a href="/SortedFAQ#about" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 600 }}>About</a>
+      <div style={{ padding: '40px 20px 32px', textAlign: 'center', marginTop: 24 }}>
+        <div style={{ display: 'flex', gap: 14, justifyContent: 'center', alignItems: 'center', marginBottom: 14, flexWrap: 'nowrap' }}>
+          <a href="/SortedFAQ" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>FAQ</a>
+          <span style={{ color: '#ddd', fontSize: 10 }}>•</span>
+          <a href="/SortedTerms" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>Terms</a>
+          <span style={{ color: '#ddd', fontSize: 10 }}>•</span>
+          <a href="/SortedPrivacy" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>Privacy</a>
+          <span style={{ color: '#ddd', fontSize: 10 }}>•</span>
+          <a href="/SortedGlobalAccess" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>Global</a>
+          <span style={{ color: '#ddd', fontSize: 10 }}>•</span>
+          <a href="/SortedFAQ" style={{ textDecoration: 'none', color: '#888', fontWeight: 600, fontSize: 12, whiteSpace: 'nowrap' }}>About</a>
         </div>
-        <p style={{ fontSize: 10, color: '#aaa', margin: 0, letterSpacing: '0.05em' }}>
-          ZERO LOSS — ZERO BULLSHIT
+        <p style={{ fontSize: 10, color: '#bbb', margin: 0, letterSpacing: '0.08em' }}>
+          Built by Universal Frequency 51 CIC · Scotland
         </p>
       </div>
     </div>
