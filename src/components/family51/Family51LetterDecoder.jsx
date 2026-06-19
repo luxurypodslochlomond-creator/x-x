@@ -433,7 +433,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
             onChange={e => setLetterText(e.target.value)}
             placeholder="Paste your letter here — or take a photo below.
 
-Don't worry about formatting. Just get it all in."
+Don't worry about formatting. Just get it all in. If the law applies in a different country, just mention it."
             style={{
               width: '100%', height: 200, background: '#fff',
               border: `1.5px solid ${letterText ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
