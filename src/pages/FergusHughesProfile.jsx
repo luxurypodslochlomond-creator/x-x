@@ -1,4 +1,6 @@
 import React from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const profile = {
   name: "Fergus Hughes",
@@ -37,31 +39,24 @@ const profile = {
 };
 
 export default function FergusHughesProfile() {
+  const downloadPDF = async () => {
+    const element = document.getElementById('profile-content');
+    const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+    const imgData = canvas.toDataURL('image/png');
+    
+    const pdf = new jsPDF({ format: 'a4' });
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('Fergus-Hughes-Profile.pdf');
+  };
+
   return (
     <div className="min-h-screen bg-white px-4 py-6 sm:p-8">
       <style>{`
         @media print {
-          body * { visibility: hidden; }
-          #profile-content, #profile-content * { visibility: visible; }
-          #profile-content { 
-            position: absolute; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            margin: 0; 
-            padding: 20px;
-            border: none;
-            background: white;
-          }
-          /* Force no browser headers/footers - works in Chrome, Safari, Edge */
-          @page { 
-            margin: 0.5cm; 
-            size: A4;
-            padding: 0;
-          }
-          /* Hide the download button */
           button { display: none !important; }
-          p { color: black !important; }
         }
       `}</style>
       
@@ -173,9 +168,9 @@ export default function FergusHughesProfile() {
       </div>
 
       {/* Download PDF Button */}
-      <div className="max-w-3xl mx-auto mt-6 flex flex-col sm:flex-row gap-4 items-center">
+      <div className="max-w-3xl mx-auto mt-6">
         <button
-          onClick={() => window.print()}
+          onClick={downloadPDF}
           className="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-lg transition-all flex items-center gap-2"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +178,6 @@ export default function FergusHughesProfile() {
           </svg>
           Download PDF
         </button>
-        <p className="text-xs text-gray-500">Click then select "Save as PDF" to download the file</p>
       </div>
     </div>
   );
