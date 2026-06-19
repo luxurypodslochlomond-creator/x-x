@@ -163,7 +163,7 @@ export default function FergusHughesProfile() {
         </div>
       </div>
 
-      {/* Save as PDF Button */}
+      {/* Download PDF Button */}
       <div className="max-w-3xl mx-auto mt-6 flex flex-col sm:flex-row gap-4 items-center">
         <button
           onClick={() => window.print()}
@@ -172,9 +172,9 @@ export default function FergusHughesProfile() {
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
           </svg>
-          Save as PDF
+          Download PDF
         </button>
-        <p className="text-xs text-gray-500">Then choose "Save as PDF" and download</p>
+        <p className="text-xs text-gray-500">Click then select "Save as PDF" to download the file</p>
       </div>
     </div>
   );
