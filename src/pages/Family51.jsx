@@ -60,7 +60,7 @@ export default function Family51Page() {
           <SortedToolCard 
             icon="letter" 
             title="Decode a Letter" 
-            description="Plain language breakdown, urgency check, what to actually do" 
+            description="Debt, rent arrears, council letters — plain language breakdown, urgency check, what to actually do" 
             accentColor="#d4760a" 
             onClick={() => openTool('letter')} 
           />
