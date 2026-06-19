@@ -75,7 +75,7 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
     );
   }
 
-  // secondary — clean, minimal
+  // secondary — clean, minimal, but colored
   return (
     <motion.button
       onClick={onClick}
@@ -83,23 +83,23 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
       whileTap={{ scale: disabled ? 1 : 0.96 }}
       style={{
         width: '100%', padding: '14px 10px', borderRadius: 14, cursor: disabled ? 'not-allowed' : 'pointer',
-        border: '1.5px solid rgba(26,18,8,0.08)', background: '#fff',
+        border: `1.5px solid ${accentColor}30`, background: '#fff',
         opacity: disabled ? 0.5 : 1, textAlign: 'center',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
         transition: 'all 0.15s',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+        boxShadow: `0 1px 3px ${accentColor}10`,
       }}
       whileHover={disabled ? {} : {
         y: -2,
-        boxShadow: '0 4px 14px rgba(0,0,0,0.07)',
-        border: '1.5px solid rgba(26,18,8,0.15)',
+        boxShadow: `0 4px 14px ${accentColor}25`,
+        border: `1.5px solid ${accentColor}50`,
       }}
     >
-      <div style={{ width: 32, height: 32, borderRadius: 10, background: 'rgba(26,18,8,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(26,18,8,0.45)' }}>
+      <div style={{ width: 32, height: 32, borderRadius: 10, background: `${accentColor}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: accentColor }}>
         {iconSvg}
       </div>
-      <span style={{ fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.6)', letterSpacing: '0.04em' }}>{title}</span>
-      <span style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', lineHeight: 1.3 }}>{description}</span>
+      <span style={{ fontSize: 12, fontWeight: 800, color: accentColor, letterSpacing: '0.04em' }}>{title}</span>
+      <span style={{ fontSize: 10, color: `${accentColor}99`, lineHeight: 1.3 }}>{description}</span>
     </motion.button>
   );
 }
