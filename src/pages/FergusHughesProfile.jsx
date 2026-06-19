@@ -53,6 +53,10 @@ export default function FergusHughesProfile() {
             border: none;
           }
           @page { margin: 1cm; size: A4; }
+          /* Remove all footers and headers */
+          footer, header { display: none !important; }
+          /* Remove default browser footer (URL, date, page numbers) */
+          @page { @bottom-center { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
         }
       `}</style>
       
