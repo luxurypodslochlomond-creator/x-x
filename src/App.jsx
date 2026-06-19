@@ -19,7 +19,7 @@ const CB51TermsPage = React.lazy(() => import('./pages/CB51Terms'));
 const CB51PrivacyPage = React.lazy(() => import('./pages/CB51Privacy'));
 const StoneymollanPage = React.lazy(() => import('./pages/Stoneymollan'));
 const PetSounds51ResearchOutreach = React.lazy(() => import('./pages/PetSounds51ResearchOutreach'));
-const PetSounds51 = React.lazy(() => import('./pages/PetSounds51'));
+import PetSounds51 from './pages/PetSounds51';
 const CB51CalendarView = React.lazy(() => import('./pages/CB51CalendarView'));
 const CB51MessageInbox = React.lazy(() => import('./pages/CB51MessageInbox'));
 const CB51FinanceAdmin = React.lazy(() => import('./pages/CB51FinanceAdmin'));
