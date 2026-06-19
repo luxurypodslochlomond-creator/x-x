@@ -151,6 +151,44 @@ export default function Family51Page() {
         </div>
       )}
 
+      {/* HUMAN HELP STRIP */}
+      <div style={{ padding: '0 20px 24px', maxWidth: 520, margin: '0 auto' }}>
+        <div style={{ background: '#f9f5ef', borderRadius: 12, padding: '16px 18px', border: '1px solid rgba(0,0,0,0.06)' }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#999', letterSpacing: '0.1em', marginBottom: 12 }}>NEED A HUMAN RIGHT NOW?</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <a href="tel:08001448848" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 8, padding: '10px 14px', border: '1px solid rgba(0,0,0,0.07)' }}>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a' }}>Citizens Advice</div>
+                <div style={{ fontSize: 11, color: '#888' }}>Free advice — debt, housing, benefits</div>
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: '#d4760a' }}>0800 144 8848</div>
+            </a>
+            <a href="tel:08001234567" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 8, padding: '10px 14px', border: '1px solid rgba(0,0,0,0.07)' }}>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a' }}>National Debtline</div>
+                <div style={{ fontSize: 11, color: '#888' }}>Free debt advice — UK</div>
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: '#d4760a' }}>0808 808 4000</div>
+            </a>
+            <a href="tel:08082005000" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 8, padding: '10px 14px', border: '1px solid rgba(0,0,0,0.07)' }}>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a' }}>Shelter</div>
+                <div style={{ fontSize: 11, color: '#888' }}>Housing, eviction, homelessness</div>
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: '#d4760a' }}>0808 800 4444</div>
+            </a>
+            <a href="tel:08001381111" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 8, padding: '10px 14px', border: '1px solid rgba(0,0,0,0.07)' }}>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a' }}>StepChange</div>
+                <div style={{ fontSize: 11, color: '#888' }}>Free debt management plans</div>
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: '#d4760a' }}>0800 138 1111</div>
+            </a>
+          </div>
+          <div style={{ fontSize: 10, color: '#bbb', marginTop: 10, textAlign: 'center' }}>All free. All UK-based. Tap to call.</div>
+        </div>
+      </div>
+
       {/* FOOTER */}
       <div style={{ padding: '40px 20px 32px', textAlign: 'center', marginTop: 24 }}>
         <div style={{ display: 'flex', gap: 14, justifyContent: 'center', alignItems: 'center', marginBottom: 14, flexWrap: 'nowrap' }}>
