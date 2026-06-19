@@ -49,14 +49,19 @@ export default function FergusHughesProfile() {
             top: 0; 
             width: 100%; 
             margin: 0; 
-            padding: 0;
+            padding: 20px;
             border: none;
+            background: white;
           }
-          @page { margin: 1cm; size: A4; }
-          /* Remove all footers and headers */
-          footer, header { display: none !important; }
-          /* Remove default browser footer (URL, date, page numbers) */
-          @page { @bottom-center { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+          /* Force no browser headers/footers - works in Chrome, Safari, Edge */
+          @page { 
+            margin: 0.5cm; 
+            size: A4;
+            padding: 0;
+          }
+          /* Hide the download button */
+          button { display: none !important; }
+          p { color: black !important; }
         }
       `}</style>
       
