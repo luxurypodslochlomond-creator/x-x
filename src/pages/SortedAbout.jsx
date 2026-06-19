@@ -148,7 +148,7 @@ export default function SortedAboutPage() {
 
         {/* Contact */}
         <div style={{ textAlign: 'center', padding: '20px', background: '#1a1208', borderRadius: 14, marginBottom: 28 }}>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: '0 0 8px' }}>Questions, partnerships, press enquiries?</p>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: '0 0 8px' }}>Questions or feedback? We'd love to hear from you.</p>
           <a
             href="mailto:family@uf51.love"
             style={{ fontSize: 15, fontWeight: 800, color: '#d4760a', textDecoration: 'none' }}
