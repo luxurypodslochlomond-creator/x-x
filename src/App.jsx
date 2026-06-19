@@ -99,12 +99,12 @@ const CB51JoinPage = React.lazy(() => import('./pages/CB51Join'));
 const CB51MainPage = React.lazy(() => import('./pages/CB51'));
 const CB51HowPage = React.lazy(() => import('./pages/CB51How'));
 const WalshyPitchPage = React.lazy(() => import('./pages/WalshyPitch'));
-const ZappPage = React.lazy(() => import('./pages/Zapp'));
+import ZappPage from './pages/Zapp';
 const ZappAboutPage = React.lazy(() => import('./pages/ZappAbout'));
 const ZappTermsPage = React.lazy(() => import('./pages/ZappTerms'));
 const ZappPrivacyPage = React.lazy(() => import('./pages/ZappPrivacy'));
-const FergusHughesProfilePage = React.lazy(() => import('./pages/FergusHughesProfile'));
-const RealityCheckPage = React.lazy(() => import('./pages/RealityCheck'));
+import FergusHughesProfilePage from './pages/FergusHughesProfile';
+import RealityCheckPage from './pages/RealityCheck';
 
 
 
