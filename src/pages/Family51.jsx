@@ -6,6 +6,7 @@ import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
+import SortedTrustStrip from '@/components/family51/SortedTrustStrip';
 export default function Family51Page() {
   const engineRef = useRef(null);
   const { isPremium, recordUse, isLocked } = useSortedUsage();
@@ -131,6 +132,9 @@ export default function Family51Page() {
       <div style={{ padding: '16px 20px', maxWidth: 520, margin: '0 auto' }}>
         <SortedLiveCounter />
       </div>
+
+      {/* TRUST STRIP */}
+      <SortedTrustStrip />
 
       {/* DIVIDER */}
       <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)', margin: '0 20px' }} />
