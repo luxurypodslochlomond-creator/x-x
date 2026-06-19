@@ -88,50 +88,50 @@ export default function SortedGlobalAccess() {
   const features = [
     {
       icon: Smartphone,
-      title: 'Offline Mode (PWA)',
-      desc: 'Download once, use forever without internet. Works on 2G networks.',
+      title: 'Install as an App (PWA)',
+      desc: 'Add to your home screen and it loads faster. Works well on slow mobile connections.',
       status: 'READY',
       color: '#06b6d4',
     },
     {
       icon: Languages,
-      title: 'Auto Language Detection',
-      desc: 'Arabic, Farsi, Russian, Swahili, Spanish, French — auto-translates to your language.',
+      title: 'Any Language',
+      desc: 'Upload a letter in Arabic, Farsi, Russian, Swahili, Spanish, Tagalog, French, Polish — SORTED decodes it. Mention the country if the law applies somewhere different to where you are.',
       status: 'READY',
       color: '#22c55e',
     },
     {
-      icon: WifiOff,
-      title: 'Low Bandwidth Mode',
-      desc: 'Strips images and animations for slow connections. Text-only mode.',
-      status: 'READY',
-      color: '#f97316',
-    },
-    {
       icon: Globe,
-      title: 'Works Anywhere',
-      desc: 'Palestine, Russia, Iran, North Korea, Africa — no blocks, no restrictions.',
+      title: 'Cross-Border Legal Help',
+      desc: 'Visiting another country? Got property abroad? Just tell SORTED which jurisdiction applies — it handles the rest.',
       status: 'READY',
       color: '#8b5cf6',
     },
     {
-      icon: Download,
-      title: 'SMS / WhatsApp Fallback',
-      desc: 'Send letter photo via SMS/WhatsApp, get AI analysis back. Coming soon.',
-      status: 'COMING',
+      icon: WifiOff,
+      title: 'Works on Poor Signal',
+      desc: 'Lightweight design — works on slow 3G connections. No video, no heavy assets.',
+      status: 'READY',
+      color: '#f97316',
+    },
+    {
+      icon: Zap,
+      title: 'No Account Required',
+      desc: '10 free uses with no sign-up. Nothing stored. Nothing linked to you.',
+      status: 'READY',
       color: '#ec4899',
     },
   ];
 
   const regions = [
-    { region: 'Palestine', features: 'Arabic auto-detection, offline mode, low-bandwidth', status: 'ready' },
-    { region: 'Russia', features: 'Russian language support, works without VPN', status: 'ready' },
-    { region: 'Iran', features: 'Farsi/Persian detection, SMS fallback coming', status: 'ready' },
-    { region: 'North Korea', features: 'Offline-only mode, no internet required after install', status: 'limited' },
-    { region: 'Africa (All)', features: '2G-optimized, Swahili/French/Arabic support', status: 'ready' },
-    { region: 'Syria', features: 'Arabic support, offline mode', status: 'ready' },
-    { region: 'Yemen', features: 'Low-bandwidth mode, Arabic', status: 'ready' },
-    { region: 'Afghanistan', features: 'Dari/Pashto coming, offline mode', status: 'limited' },
+    { region: 'UK', features: 'Full support — council letters, HMRC, DWP, courts, debt, tenancy, employment', status: 'ready' },
+    { region: 'Philippines', features: 'Filipino/Tagalog + English — tenancy, debt, employment disputes', status: 'ready' },
+    { region: 'EU (all countries)', features: 'Cross-border support — mention the country and the AI applies the right jurisdiction', status: 'ready' },
+    { region: 'USA', features: 'State and federal law — eviction, debt collection, employment, benefits', status: 'ready' },
+    { region: 'Australia & NZ', features: 'English language — tenancy, consumer rights, employment', status: 'ready' },
+    { region: 'Middle East & North Africa', features: 'Arabic auto-detection — UAE, Saudi Arabia, Egypt, Morocco', status: 'ready' },
+    { region: 'Sub-Saharan Africa', features: 'Swahili, French, English — works on slow connections', status: 'ready' },
+    { region: 'South Asia', features: 'Hindi, Urdu, Bengali, Punjabi, Gujarati support', status: 'ready' },
   ];
 
   return (
@@ -154,10 +154,10 @@ export default function SortedGlobalAccess() {
             SORTED GLOBAL ACCESS
           </div>
           <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 8, lineHeight: 1.2 }}>
-            Free Legal Help for Everyone, Everywhere ♾️
+            SORTED works everywhere ♾️
           </div>
           <div style={{ fontSize: 13, opacity: 0.85, lineHeight: 1.6 }}>
-            Works offline. Auto-detects your language. No blocks. No restrictions. Built for people who need it most.
+            Any language. Any country. Visiting abroad, living abroad, or dealing with a letter from overseas — just tell SORTED where the law applies and it handles the rest.
           </div>
           {!isOnline && (
             <div style={{
@@ -215,13 +215,12 @@ export default function SortedGlobalAccess() {
         border: '1.5px dashed rgba(26,18,8,0.15)',
       }}>
         <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', marginBottom: 8 }}>
-          How to Install for Offline Use
+          Add to your home screen
         </div>
         <ol style={{ margin: 0, paddingLeft: 20, fontSize: 12, color: 'rgba(26,18,8,0.6)', lineHeight: 1.8 }}>
-          <li>Tap "INSTALL SORTED" button above (if shown)</li>
-          <li>Or use your browser menu: "Add to Home Screen"</li>
-          <li>Once installed, works completely offline</li>
-          <li>No internet needed after first load</li>
+          <li>On iPhone: tap Share → "Add to Home Screen"</li>
+          <li>On Android: tap the browser menu → "Add to Home Screen" or "Install App"</li>
+          <li>It opens like a normal app — no App Store needed</li>
         </ol>
       </div>
 
@@ -231,10 +230,10 @@ export default function SortedGlobalAccess() {
         fontSize: 12, color: 'rgba(26,18,8,0.35)', lineHeight: 1.6,
       }}>
         <p style={{ marginBottom: 8 }}>
-          Built with ♾️❤️ for people who need it most.
+          Built with ♾️❤️ by Universal Frequency 51 CIC
         </p>
         <p>
-          If you're in a crisis zone or conflict area, SORTED is free forever. No paywall. No restrictions.
+          Can't afford it? Email <strong style={{ color: '#d97706' }}>family@uf51.love</strong> — we'll sort it.
         </p>
       </div>
     </div>

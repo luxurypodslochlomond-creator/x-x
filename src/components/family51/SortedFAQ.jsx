@@ -32,7 +32,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'What languages do you support?',
-        a: 'Any language. Upload a letter in Spanish, French, Arabic, Mandarin — SORTED decodes it and replies in English (or you can ask for your native language). Jurisdiction-aware too — we know the laws of the UK, US, Canada, Australia, and more.'
+        a: 'Any language. Upload a letter in Spanish, French, Arabic, Mandarin, Tagalog, Polish — SORTED decodes it and replies in plain language. If the law applies in a different country to where you are, just mention it in your message and we\'ll handle it accordingly.'
       },
       {
         q: 'How long does it take?',
