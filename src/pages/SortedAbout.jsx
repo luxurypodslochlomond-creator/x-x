@@ -38,12 +38,12 @@ export default function SortedAboutPage() {
 
         {/* The gap */}
         <div style={{ background: 'rgba(212,118,10,0.06)', border: '1px solid rgba(212,118,10,0.2)', borderRadius: 12, padding: '18px 20px', marginBottom: 20 }}>
-          <p style={{ fontSize: 13, fontWeight: 700, color: '#d4760a', margin: '0 0 8px' }}>The problem is enormous</p>
+          <p style={{ fontSize: 13, fontWeight: 700, color: '#d4760a', margin: '0 0 8px' }}>The problem is global</p>
           <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.7 }}>
-            Since the Legal Aid Act cuts in 2012, civil legal aid cases in England and Wales collapsed from <strong>nearly 1 million to just 110,000</strong> by 2024/25 — a 90% drop. Today, <strong>80% of family court cases</strong> have at least one person representing themselves with no legal help. Globally, the World Justice Project estimates <strong>5.1 billion people</strong> have unmet justice needs. SORTED is our answer to that — starting small, thinking big.
+            The World Justice Project estimates <strong>5.1 billion people</strong> worldwide have unmet justice needs — that's nearly two-thirds of humanity who can't get meaningful legal help when they need it. In the UK alone, civil legal aid cases collapsed <strong>90% since 2012</strong> — from nearly 1 million a year to just 110,000 by 2024/25 — and <strong>80% of family court cases</strong> now have at least one person with no legal representation. The UK is just one example of a global crisis. SORTED exists to change that.
           </p>
           <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', margin: '10px 0 0', lineHeight: 1.5 }}>
-            Sources: UK Parliament POST briefing 2025 · Law Society · World Justice Project
+            Sources: World Justice Project · UK Parliament POST briefing 2025 · Law Society
           </p>
         </div>
 

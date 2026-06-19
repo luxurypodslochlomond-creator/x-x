@@ -11,7 +11,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'Why don\'t I just hire a solicitor?',
-        a: 'Solicitors cost £150–400/hour. SORTED costs £9.99/month. Since 2012, civil legal aid cases in England and Wales collapsed 90% — from nearly 1 million cases a year to just 110,000 by 2024/25 (UK Parliament, 2025). Today 80% of family court cases have someone representing themselves with no legal help. We bridge that gap, instantly.'
+        a: 'Solicitors cost £150–400/hour. SORTED costs £9.99/month. The World Justice Project estimates 5.1 billion people worldwide have unmet justice needs. In the UK alone, civil legal aid cases collapsed 90% since 2012 — from nearly 1 million a year to just 110,000 by 2024/25. That\'s a global crisis, not just a British one. We bridge that gap, instantly.'
       },
       {
         q: 'Is this actually legal advice?',
