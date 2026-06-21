@@ -221,7 +221,7 @@ export default function WelcomePage() {
           </p>
 
           <p className="text-gray-400 text-base leading-relaxed max-w-xl mx-auto">
-            We're a tiny team building tools we actually needed ourselves — for scary letters, anxious pets, tinnitus, anxiety, kids learning, and cleaning up the planet. Most of it's free. All of it's honest.
+            We're a small team building tools we actually needed ourselves — for scary letters, anxious pets, tinnitus, anxiety, kids learning, and cleaning up the planet. Most of it's free. All of it's honest.
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center pt-2">
