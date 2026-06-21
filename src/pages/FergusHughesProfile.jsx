@@ -59,7 +59,9 @@ const profile = {
 
   developmentFocus: "Fergus is currently working on increasing his physical strength and power to further complement his technical ability, leadership qualities and defensive presence.",
 
-  playerStatement: "I believe my biggest strengths are my leadership, mentality and commitment. I take responsibility on the pitch, communicate with my teammates and always look to help the team. I never hide when things become difficult and I always give everything I have in training and matches.\n\nI feel I am ready to challenge myself at a higher level and continue developing in an environment that pushes me to improve every day.",
+  playerStatement: "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session.",
+
+  whyMovingOn: "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now.",
 
   ambition: "To reach the highest level possible within the game and earn the opportunity to represent Scotland at international level.",
 
@@ -209,10 +211,10 @@ export default function FergusHughesProfile() {
 
           {/* ── PLAYER STATEMENT ── */}
           <section className="bg-gray-900 text-white -mx-6 sm:-mx-8 px-6 sm:px-8 py-6">
-            <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase font-sans mb-3">Player Statement</h2>
-            {profile.playerStatement.split('\n\n').map((para, i) => (
-              <p key={i} className="text-sm sm:text-base leading-relaxed italic mb-3 text-gray-200">"{para}"</p>
-            ))}
+            <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase font-sans mb-3">In Fergus's Words</h2>
+            <p className="text-sm sm:text-base leading-relaxed italic mb-4 text-gray-200">"{profile.playerStatement}"</p>
+            <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase font-sans mb-3 mt-5">Why I'm Ready For The Next Level</h2>
+            <p className="text-sm sm:text-base leading-relaxed italic text-gray-200">"{profile.whyMovingOn}"</p>
           </section>
 
           {/* ── AMBITION ── */}
