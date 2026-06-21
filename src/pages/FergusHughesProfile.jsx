@@ -151,7 +151,11 @@ export default function FergusHughesProfile() {
 
       <div id="profile-content" className="max-w-3xl mx-auto bg-white shadow-2xl">
         {/* ── HEADER ── */}
-        <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white px-6 sm:px-8 py-8 sm:py-10">
+        <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+          <div className="w-full h-64 sm:h-80 overflow-hidden">
+            <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes in action" className="w-full h-full object-cover object-center" />
+          </div>
+          <div className="px-6 sm:px-8 py-8 sm:py-10">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight">{profile.name}</h1>
           <p className="text-lg sm:text-xl font-bold text-gray-300 mt-1">{profile.position}</p>
           <div className="flex flex-wrap gap-x-5 gap-y-2 mt-4 text-sm font-sans text-gray-400 items-center">
@@ -176,9 +180,19 @@ export default function FergusHughesProfile() {
               {profile.preferredFoot}
             </span>
           </div>
+          </div>
         </div>
 
         <div className="px-6 sm:px-8 py-8 space-y-8" style={{ fontFamily: 'Georgia, serif' }}>
+          {/* ── ACTION PHOTO GALLERY ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">In Action</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f5ecc23e6_IMG_0359.png" alt="Fergus Hughes on the ball" className="w-full h-32 sm:h-40 object-cover rounded" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2489f755c_IMG_0356.png" alt="Fergus Hughes striking the ball" className="w-full h-32 sm:h-40 object-cover rounded" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes dribbling" className="w-full h-32 sm:h-40 object-cover rounded col-span-2 sm:col-span-1" />
+            </div>
+          </section>
           {/* ── ABOUT FERGUS ── */}
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">About Fergus</h2>
