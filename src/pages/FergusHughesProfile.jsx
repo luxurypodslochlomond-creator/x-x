@@ -208,7 +208,7 @@ export default function FergusHughesProfile() {
                 <span className="text-gray-500 font-semibold">Secondary Position</span>
                 <span className="text-gray-900 font-bold">{profile.positions.secondary}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+              <div className="flex justify-between border-b border-gray-100 pb-1.5 sm:col-span-2">
                 <span className="text-gray-500 font-semibold">Additional Position</span>
                 <span className="text-gray-900 font-bold">{profile.positions.additional}</span>
               </div>
