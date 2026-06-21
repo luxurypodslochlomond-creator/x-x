@@ -12,7 +12,7 @@ const profile = {
   preferredFoot: "Right Footed",
   currentClub: "Dunfermline Community FC",
 
-  about: "Fergus Hughes is a commanding, athletic defender with natural leadership qualities and experience playing above his age group throughout his development.\n\nA versatile defender capable of operating as a centre-back or right-back, Fergus combines strong defensive fundamentals with a mature mentality rarely found in young players. His attitude, commitment and desire to improve have seen him trusted with captaincy responsibilities and recognised as Player of the Year during the 2025/26 season.\n\nFergus is a player who leads by example, embraces responsibility and consistently sets high standards for himself and those around him.",
+  about: "Fergus Hughes is a defender who plays primarily as a centre-back or right-back. He has experience playing above his age group throughout his development.\n\nHe was given captaincy responsibilities and recognised as Player of the Year during the 2025/26 season. He works hard, takes on feedback, and looks to improve his game consistently.\n\nFergus is committed to his development and looks to move up to the next level.",
 
   positions: {
     primary: "Centre-Back",
@@ -24,7 +24,7 @@ const profile = {
 
   journey: {
     club: "Dunfermline Community FC (2024–2026)",
-    story: "Despite being one of the younger players within the group, Fergus regularly challenged himself by competing at older age levels.\n\nHis performances, leadership and consistency earned him the captain's armband during the 2025/26 season, where he helped drive standards both on and off the pitch.\n\nHis development has been built on hard work, resilience and a willingness to constantly push himself outside his comfort zone.",
+    story: "Despite being one of the younger players within the group, Fergus competed at older age levels throughout his development.\n\nHe was given the captain's armband during the 2025/26 season.\n\nHis development has been built on hard work and a willingness to push himself.",
   },
 
   honours: [
@@ -37,27 +37,23 @@ const profile = {
   attributes: [
     {
       title: "Leadership",
-      desc: "A natural organiser and communicator who takes responsibility in difficult moments. Leads teammates through actions, standards and positivity.",
+      desc: "Given captaincy responsibilities during the 2025/26 season. Communicates with teammates and organises the back line.",
     },
     {
       title: "Defensive Mentality",
-      desc: "Strong desire to defend, compete and win individual battles. Enjoys the physical and tactical side of the game.",
+      desc: "Works hard in defensive situations and competes in individual battles.",
     },
     {
       title: "Commitment",
-      desc: "Consistently gives maximum effort in training and matches. Dedicated to improving every aspect of his game.",
-    },
-    {
-      title: "Resilience",
-      desc: "Responds positively to setbacks and pressure situations. Maintains confidence and focus regardless of circumstances.",
+      desc: "Gives full effort in training and matches.",
     },
     {
       title: "Coachability",
-      desc: "Eager to learn, takes on information quickly and actively seeks feedback to improve.",
+      desc: "Takes on feedback and looks to improve his game.",
     },
   ],
 
-  developmentFocus: "Fergus is currently working on increasing his physical strength and power to further complement his technical ability, leadership qualities and defensive presence.",
+  developmentFocus: "Fergus is currently working on increasing his physical strength and power.",
 
   playerStatement: "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session.",
 
@@ -65,7 +61,7 @@ const profile = {
 
   ambition: "To reach the highest level possible within the game and earn the opportunity to represent Scotland at international level.",
 
-  character: "Away from football, Fergus is a qualified barber and regularly cuts hair for teammates and friends. This reflects the confidence, responsibility, communication skills and professionalism that he brings into football.",
+  character: "Away from football, Fergus is a qualified barber and cuts hair for teammates and friends.",
 
   availability: {
     based: "Fife",
@@ -153,7 +149,7 @@ export default function FergusHughesProfile() {
         {/* ── HEADER ── */}
         <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white">
           <div className="w-full h-64 sm:h-80 overflow-hidden">
-            <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes in action" className="w-full h-full object-cover object-center" />
+            <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes in action" className="w-full h-full object-cover object-center" crossOrigin="anonymous" referrerPolicy="no-referrer" />
           </div>
           <div className="px-6 sm:px-8 py-8 sm:py-10">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight">{profile.name}</h1>
@@ -188,9 +184,9 @@ export default function FergusHughesProfile() {
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">In Action</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f5ecc23e6_IMG_0359.png" alt="Fergus Hughes on the ball" className="w-full h-32 sm:h-40 object-cover rounded" />
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2489f755c_IMG_0356.png" alt="Fergus Hughes striking the ball" className="w-full h-32 sm:h-40 object-cover rounded" />
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes dribbling" className="w-full h-32 sm:h-40 object-cover rounded col-span-2 sm:col-span-1" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f5ecc23e6_IMG_0359.png" alt="Fergus Hughes on the ball" className="w-full h-32 sm:h-40 object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2489f755c_IMG_0356.png" alt="Fergus Hughes striking the ball" className="w-full h-32 sm:h-40 object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes dribbling" className="w-full h-32 sm:h-40 object-cover rounded col-span-2 sm:col-span-1" crossOrigin="anonymous" referrerPolicy="no-referrer" />
             </div>
           </section>
           {/* ── ABOUT FERGUS ── */}
