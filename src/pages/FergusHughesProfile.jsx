@@ -28,10 +28,10 @@ const profile = {
   },
 
   honours: [
-    { icon: "🏆", text: "Player of the Year (2025/26)" },
-    { icon: "👑", text: "Team Captain (2025/26)" },
-    { icon: "⬆️", text: "Regularly played above his age group" },
-    { icon: "⭐", text: "Recognised for leadership, professionalism and commitment" },
+    { icon: "trophy", text: "Player of the Year (2025/26)" },
+    { icon: "captain", text: "Team Captain (2025/26)" },
+    { icon: "arrowUp", text: "Regularly played above his age group" },
+    { icon: "star", text: "Recognised for leadership, professionalism and commitment" },
   ],
 
   attributes: [
@@ -83,6 +83,37 @@ const profile = {
   scoutsSummary: "Fergus Hughes is a committed, highly coachable defender with leadership qualities, experience playing above his age group and a mentality built around hard work and accountability. Standing at 6'1\", he possesses the physical profile, attitude and determination required to progress within the game and is actively seeking an opportunity to test himself at the next level.",
 };
 
+const HonourIcon = ({ type }) => {
+  const icons = {
+    trophy: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/>
+        <path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+        <path d="M18 2H6v7a6 6 0 0012 0V2z"/>
+      </svg>
+    ),
+    captain: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 19V5a2 2 0 012-2h14a2 2 0 012 2v14"/>
+        <path d="M3 19l4-2 5 2 5-2 4 2"/>
+        <path d="M12 7l1.2 2.4 2.6.4-1.9 1.8.5 2.6L12 13l-2.4 1.2.5-2.6L8.2 9.8l2.6-.4z"/>
+      </svg>
+    ),
+    arrowUp: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4"/><path d="M12 8v8"/>
+      </svg>
+    ),
+    star: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 16.8 5.7 21.4 8 14 2 9.4h7.6z"/>
+      </svg>
+    ),
+  };
+  return icons[type] || null;
+};
+
 export default function FergusHughesProfile() {
   const downloadPDF = async () => {
     const element = document.getElementById('profile-content');
@@ -123,12 +154,27 @@ export default function FergusHughesProfile() {
         <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white px-6 sm:px-8 py-8 sm:py-10">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight">{profile.name}</h1>
           <p className="text-lg sm:text-xl font-bold text-gray-300 mt-1">{profile.position}</p>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-4 text-sm font-sans text-gray-400">
-            <span>🇸🇨 {profile.nationality}</span>
-            <span>· {profile.age}</span>
-            <span>· 📏 {profile.height}</span>
-            <span>· ⚖️ {profile.weight}</span>
-            <span>· ⚽ {profile.preferredFoot}</span>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 mt-4 text-sm font-sans text-gray-400 items-center">
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3 2 L21 2 L21 12 C21 16 17 20 12 22 C7 20 3 16 3 12 Z"/></svg>
+              {profile.nationality}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              {profile.age}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+              {profile.height}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="5" r="3"/><path d="M12 8v8m-3-3h6"/></svg>
+              {profile.weight}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v10l5 5"/></svg>
+              {profile.preferredFoot}
+            </span>
           </div>
         </div>
 
@@ -183,7 +229,7 @@ export default function FergusHughesProfile() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {profile.honours.map((h, i) => (
                 <div key={i} className="flex items-center gap-3 bg-gray-50 border border-gray-200 px-3 py-2.5 rounded">
-                  <span className="text-lg">{h.icon}</span>
+                  <span className="text-gray-700 flex-shrink-0"><HonourIcon type={h.icon} /></span>
                   <span className="font-sans text-sm text-gray-800 font-semibold">{h.text}</span>
                 </div>
               ))}
@@ -233,11 +279,26 @@ export default function FergusHughesProfile() {
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Availability</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-sans text-sm">
-              <div className="flex items-center gap-2"><span>📍</span> <span className="text-gray-800">Based in {profile.availability.based}</span></div>
-              <div className="flex items-center gap-2"><span>🎓</span> <span className="text-gray-800">{profile.availability.school}</span></div>
-              <div className="flex items-center gap-2"><span>🚗</span> <span className="text-gray-800">{profile.availability.travel}</span></div>
-              <div className="flex items-center gap-2"><span>✅</span> <span className="text-gray-800">Driving Theory Passed</span></div>
-              <div className="flex items-center gap-2"><span>✅</span> <span className="text-gray-800">Practical Test {profile.availability.practicalTest}</span></div>
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span className="text-gray-800">Based in {profile.availability.based}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <span className="text-gray-800">{profile.availability.school}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17H3v-6l2-5h9l4 5h2a2 2 0 012 2v4h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+                <span className="text-gray-800">{profile.availability.travel}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span className="text-gray-800">Driving Theory Passed</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                <span className="text-gray-800">Practical Test {profile.availability.practicalTest}</span>
+              </div>
             </div>
           </section>
 
@@ -245,12 +306,18 @@ export default function FergusHughesProfile() {
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Contact</h2>
             <p className="font-sans text-base font-bold text-gray-900">{profile.contact.name}</p>
-            <p className="font-sans text-lg font-black text-gray-900 mt-1">📞 {profile.contact.phone}</p>
+            <p className="font-sans text-lg font-black text-gray-900 mt-1 flex items-center gap-2">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+              {profile.contact.phone}
+            </p>
           </section>
 
           {/* ── SCOUT'S SUMMARY ── */}
           <section className="bg-gradient-to-br from-gray-100 to-gray-50 border-2 border-gray-800 -mx-6 sm:-mx-8 px-6 sm:px-8 py-6">
-            <h2 className="text-xs font-black tracking-widest text-gray-800 uppercase font-sans mb-3">⚡ Scout's Summary</h2>
+            <h2 className="text-xs font-black tracking-widest text-gray-800 uppercase font-sans mb-3 flex items-center gap-2">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+              Scout's Summary
+            </h2>
             <p className="text-sm sm:text-base text-gray-900 leading-relaxed font-semibold">{profile.scoutsSummary}</p>
           </section>
         </div>
