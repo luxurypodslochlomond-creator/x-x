@@ -113,7 +113,18 @@ const HonourIcon = ({ type }) => {
 export default function FergusHughesProfile() {
   const downloadPDF = async () => {
     const element = document.getElementById('profile-content');
-    const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+    
+    // Wait for all images to fully load before capturing
+    const images = element.querySelectorAll('img');
+    await Promise.all(Array.from(images).map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(resolve => {
+        img.onload = resolve;
+        img.onerror = resolve;
+      });
+    }));
+
+    const canvas = await html2canvas(element, { scale: 2, useCORS: true, allowTaint: false, backgroundColor: '#ffffff', imageTimeout: 15000 });
     const imgData = canvas.toDataURL('image/png');
 
     const pdf = new jsPDF({ format: 'a4' });
@@ -148,8 +159,8 @@ export default function FergusHughesProfile() {
       <div id="profile-content" className="max-w-3xl mx-auto bg-white shadow-2xl">
         {/* ── HEADER ── */}
         <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-          <div className="w-full h-64 sm:h-80 overflow-hidden">
-            <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes in action" className="w-full h-full object-cover object-center" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+          <div className="w-full aspect-[4/3] sm:aspect-[16/9] overflow-hidden">
+            <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes in action" className="w-full h-full object-cover object-top" crossOrigin="anonymous" referrerPolicy="no-referrer" />
           </div>
           <div className="px-6 sm:px-8 py-8 sm:py-10">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight">{profile.name}</h1>
@@ -265,7 +276,7 @@ export default function FergusHughesProfile() {
           </section>
 
           {/* ── PLAYER STATEMENT ── */}
-          <section className="bg-gray-900 text-white -mx-6 sm:-mx-8 px-6 sm:px-8 py-6">
+          <section className="bg-gray-900 text-white px-6 py-6 rounded">
             <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase font-sans mb-3">In Fergus's Words</h2>
             <p className="text-sm sm:text-base leading-relaxed italic mb-4 text-gray-200">"{profile.playerStatement}"</p>
             <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase font-sans mb-3 mt-5">Why I'm Ready For The Next Level</h2>
@@ -322,7 +333,7 @@ export default function FergusHughesProfile() {
           </section>
 
           {/* ── REFERENCES ── */}
-          <section className="bg-gradient-to-br from-gray-100 to-gray-50 border-2 border-gray-800 -mx-6 sm:-mx-8 px-6 sm:px-8 py-6">
+          <section className="bg-gradient-to-br from-gray-100 to-gray-50 border-2 border-gray-800 px-6 py-6 rounded">
             <h2 className="text-xs font-black tracking-widest text-gray-800 uppercase font-sans mb-3 flex items-center gap-2">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
               References
