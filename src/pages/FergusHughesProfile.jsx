@@ -159,8 +159,8 @@ export default function FergusHughesProfile() {
       <div id="profile-content" className="max-w-3xl mx-auto bg-white shadow-2xl">
         {/* ── HEADER ── */}
         <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-          <div className="w-full aspect-[4/3] sm:aspect-[16/9] overflow-hidden">
-            <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes in action" className="w-full h-full object-cover object-top" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+          <div className="w-full aspect-[4/3] sm:aspect-[16/9] overflow-hidden bg-gray-900">
+            <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes in action" className="block w-full h-full object-cover object-top" crossOrigin="anonymous" referrerPolicy="no-referrer" />
           </div>
           <div className="px-6 sm:px-8 py-8 sm:py-10">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight">{profile.name}</h1>
@@ -195,8 +195,8 @@ export default function FergusHughesProfile() {
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">In Action</h2>
             <div className="grid grid-cols-2 gap-2">
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f5ecc23e6_IMG_0359.png" alt="Fergus Hughes on the ball" className="w-full aspect-video object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2489f755c_IMG_0356.png" alt="Fergus Hughes striking the ball" className="w-full aspect-video object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f5ecc23e6_IMG_0359.png" alt="Fergus Hughes on the ball" className="block w-full aspect-video object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2489f755c_IMG_0356.png" alt="Fergus Hughes striking the ball" className="block w-full aspect-video object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
             </div>
           </section>
           {/* ── ABOUT FERGUS ── */}
