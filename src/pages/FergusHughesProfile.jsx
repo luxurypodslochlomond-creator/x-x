@@ -80,7 +80,7 @@ const profile = {
     phone: "07494 023328",
   },
 
-  scoutsSummary: "Fergus Hughes is a committed, highly coachable defender with leadership qualities, experience playing above his age group and a mentality built around hard work and accountability. Standing at 6'1\", he possesses the physical profile, attitude and determination required to progress within the game and is actively seeking an opportunity to test himself at the next level.",
+  references: "References available on request from Dunfermline Community FC management.",
 };
 
 const HonourIcon = ({ type }) => {
@@ -312,13 +312,13 @@ export default function FergusHughesProfile() {
             </p>
           </section>
 
-          {/* ── SCOUT'S SUMMARY ── */}
+          {/* ── REFERENCES ── */}
           <section className="bg-gradient-to-br from-gray-100 to-gray-50 border-2 border-gray-800 -mx-6 sm:-mx-8 px-6 sm:px-8 py-6">
             <h2 className="text-xs font-black tracking-widest text-gray-800 uppercase font-sans mb-3 flex items-center gap-2">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-              Scout's Summary
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+              References
             </h2>
-            <p className="text-sm sm:text-base text-gray-900 leading-relaxed font-semibold">{profile.scoutsSummary}</p>
+            <p className="text-sm sm:text-base text-gray-900 leading-relaxed font-semibold">{profile.references}</p>
           </section>
         </div>
       </div>
