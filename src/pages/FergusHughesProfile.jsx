@@ -183,10 +183,9 @@ export default function FergusHughesProfile() {
           {/* ── ACTION PHOTO GALLERY ── */}
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">In Action</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f5ecc23e6_IMG_0359.png" alt="Fergus Hughes on the ball" className="w-full h-32 sm:h-40 object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2489f755c_IMG_0356.png" alt="Fergus Hughes striking the ball" className="w-full h-32 sm:h-40 object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
-              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/fd878de13_IMG_0358.png" alt="Fergus Hughes dribbling" className="w-full h-32 sm:h-40 object-cover rounded col-span-2 sm:col-span-1" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+            <div className="grid grid-cols-2 gap-2">
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/f5ecc23e6_IMG_0359.png" alt="Fergus Hughes on the ball" className="w-full aspect-video object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+              <img src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2489f755c_IMG_0356.png" alt="Fergus Hughes striking the ball" className="w-full aspect-video object-cover rounded" crossOrigin="anonymous" referrerPolicy="no-referrer" />
             </div>
           </section>
           {/* ── ABOUT FERGUS ── */}
