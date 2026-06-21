@@ -200,23 +200,23 @@ export default function FergusHughesProfile() {
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Player Profile</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 font-sans text-sm">
-              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-1.5 gap-0.5">
                 <span className="text-gray-500 font-semibold">Position</span>
                 <span className="text-gray-900 font-bold">{profile.positions.primary}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-1.5 gap-0.5">
                 <span className="text-gray-500 font-semibold">Secondary Position</span>
                 <span className="text-gray-900 font-bold">{profile.positions.secondary}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 pb-1.5 sm:col-span-2">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-1.5 sm:col-span-2 gap-0.5">
                 <span className="text-gray-500 font-semibold">Additional Position</span>
                 <span className="text-gray-900 font-bold">{profile.positions.additional}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-1.5 gap-0.5">
                 <span className="text-gray-500 font-semibold">Preferred Foot</span>
                 <span className="text-gray-900 font-bold">{profile.positions.preferredFoot}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-100 pb-1.5 sm:col-span-2">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-gray-100 pb-1.5 sm:col-span-2 gap-0.5">
                 <span className="text-gray-500 font-semibold">Current Club</span>
                 <span className="text-gray-900 font-bold">{profile.positions.currentClub}</span>
               </div>
