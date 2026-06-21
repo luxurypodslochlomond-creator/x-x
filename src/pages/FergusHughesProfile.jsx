@@ -4,166 +4,253 @@ import jsPDF from 'jspdf';
 
 const profile = {
   name: "Fergus Hughes",
-  dob: "15/05/2009",
-  age: "17",
+  position: "Centre-Back | Right-Back",
   nationality: "Scottish",
-  position: "Centre-Back / Right-Back",
-  secondPosition: "Wing",
-  preferredFoot: "Right",
-  height: "6'1\" (185 cm)",
-  weight: "73 kg",
-  currentClub: "Dunfermline Community",
-  previousClubs: [
-    { club: "Dunfermline Community", years: "2024-2026", details: "U17s at age 15, then U16s at age 16" }
+  age: "17 Years Old",
+  height: "6'1\" (185cm)",
+  weight: "73kg",
+  preferredFoot: "Right Footed",
+  currentClub: "Dunfermline Community FC",
+
+  about: "Fergus Hughes is a commanding, athletic defender with natural leadership qualities and experience playing above his age group throughout his development.\n\nA versatile defender capable of operating as a centre-back or right-back, Fergus combines strong defensive fundamentals with a mature mentality rarely found in young players. His attitude, commitment and desire to improve have seen him trusted with captaincy responsibilities and recognised as Player of the Year during the 2025/26 season.\n\nFergus is a player who leads by example, embraces responsibility and consistently sets high standards for himself and those around him.",
+
+  positions: {
+    primary: "Centre-Back",
+    secondary: "Right-Back",
+    additional: "Wing-Back / Wide Defender",
+    preferredFoot: "Right",
+    currentClub: "Dunfermline Community FC",
+  },
+
+  journey: {
+    club: "Dunfermline Community FC (2024–2026)",
+    story: "Despite being one of the younger players within the group, Fergus regularly challenged himself by competing at older age levels.\n\nHis performances, leadership and consistency earned him the captain's armband during the 2025/26 season, where he helped drive standards both on and off the pitch.\n\nHis development has been built on hard work, resilience and a willingness to constantly push himself outside his comfort zone.",
+  },
+
+  honours: [
+    { icon: "🏆", text: "Player of the Year (2025/26)" },
+    { icon: "👑", text: "Team Captain (2025/26)" },
+    { icon: "⬆️", text: "Regularly played above his age group" },
+    { icon: "⭐", text: "Recognised for leadership, professionalism and commitment" },
   ],
-  achievements: [
-    "Player of the Year — 2025/26 Season",
-    "Team Captain — 2025/26 Season",
-    "Trained Barber — cuts hair for teammates & friends while at school",
+
+  attributes: [
+    {
+      title: "Leadership",
+      desc: "A natural organiser and communicator who takes responsibility in difficult moments. Leads teammates through actions, standards and positivity.",
+    },
+    {
+      title: "Defensive Mentality",
+      desc: "Strong desire to defend, compete and win individual battles. Enjoys the physical and tactical side of the game.",
+    },
+    {
+      title: "Commitment",
+      desc: "Consistently gives maximum effort in training and matches. Dedicated to improving every aspect of his game.",
+    },
+    {
+      title: "Resilience",
+      desc: "Responds positively to setbacks and pressure situations. Maintains confidence and focus regardless of circumstances.",
+    },
+    {
+      title: "Coachability",
+      desc: "Eager to learn, takes on information quickly and actively seeks feedback to improve.",
+    },
   ],
-  strengths: [
-    "Commitment — Always worked hard and gave it my all",
-    "Leadership — Captain of a strong team through a respectable season",
-    "Attitude — Keep my head high at all times, even after mistakes",
-    "Determination — Teammates, coaches and parents have all noticed",
-  ],
-  developmentArea: "Strength and physicality — actively working to improve",
-  playerDescription: "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session.",
-  whyMovingOn: "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now.",
-  goal: "To play for the national team",
-  contactName: "Brian Hughes (Father)",
-  contactPhone: "07494 023328",
-  school: "Inverkeithing High School",
-  schoolSchedule: "Finishes 1pm Mon/Wed, 3:15pm Tue/Thu/Fri",
-  canTravelTo: "Can travel to Falkirk training. Driving theory passed, practical test imminent.",
+
+  developmentFocus: "Fergus is currently working on increasing his physical strength and power to further complement his technical ability, leadership qualities and defensive presence.",
+
+  playerStatement: "I believe my biggest strengths are my leadership, mentality and commitment. I take responsibility on the pitch, communicate with my teammates and always look to help the team. I never hide when things become difficult and I always give everything I have in training and matches.\n\nI feel I am ready to challenge myself at a higher level and continue developing in an environment that pushes me to improve every day.",
+
+  ambition: "To reach the highest level possible within the game and earn the opportunity to represent Scotland at international level.",
+
+  character: "Away from football, Fergus is a qualified barber and regularly cuts hair for teammates and friends. This reflects the confidence, responsibility, communication skills and professionalism that he brings into football.",
+
+  availability: {
+    based: "Fife",
+    school: "Inverkeithing High School",
+    travel: "Able to travel throughout Central Scotland",
+    drivingTheory: true,
+    practicalTest: "Pending",
+  },
+
+  contact: {
+    name: "Brian Hughes (Father)",
+    phone: "07494 023328",
+  },
+
+  scoutsSummary: "Fergus Hughes is a committed, highly coachable defender with leadership qualities, experience playing above his age group and a mentality built around hard work and accountability. Standing at 6'1\", he possesses the physical profile, attitude and determination required to progress within the game and is actively seeking an opportunity to test himself at the next level.",
 };
 
 export default function FergusHughesProfile() {
   const downloadPDF = async () => {
     const element = document.getElementById('profile-content');
-    const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+    const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
     const imgData = canvas.toDataURL('image/png');
-    
+
     const pdf = new jsPDF({ format: 'a4' });
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
-    
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+    heightLeft -= pdfHeight;
+
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+      heightLeft -= pdfHeight;
+    }
+
     pdf.save('Fergus-Hughes-Profile.pdf');
   };
 
   return (
-    <div className="min-h-screen bg-white px-4 py-6 sm:p-8">
+    <div className="min-h-screen bg-gray-100 px-4 py-6 sm:p-8">
       <style>{`
         @media print {
           button { display: none !important; }
         }
       `}</style>
-      
-      <div id="profile-content" className="max-w-3xl mx-auto bg-white border border-gray-200 p-4 sm:p-6 md:p-8" style={{ fontFamily: 'Georgia, serif' }}>
-        {/* Header */}
-        <div className="border-b-2 border-gray-800 pb-4 mb-5">
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">{profile.name}</h1>
-              <p className="text-sm text-gray-600 mt-1 font-sans">Football Player Profile</p>
-            </div>
-            <div className="text-right text-xs text-gray-600 font-sans space-y-0.5">
-              <p className="font-semibold">DOB: {profile.dob}</p>
-              <p>Age {profile.age} • {profile.nationality}</p>
-              <p>{profile.height} • {profile.weight}</p>
-            </div>
+
+      <div id="profile-content" className="max-w-3xl mx-auto bg-white shadow-2xl">
+        {/* ── HEADER ── */}
+        <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white px-6 sm:px-8 py-8 sm:py-10">
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight">{profile.name}</h1>
+          <p className="text-lg sm:text-xl font-bold text-gray-300 mt-1">{profile.position}</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-4 text-sm font-sans text-gray-400">
+            <span>🇸🇨 {profile.nationality}</span>
+            <span>· {profile.age}</span>
+            <span>· 📏 {profile.height}</span>
+            <span>· ⚖️ {profile.weight}</span>
+            <span>· ⚽ {profile.preferredFoot}</span>
           </div>
         </div>
 
-        <div className="space-y-5">
-          {/* Key Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-b border-gray-200 pb-4">
-            <div>
-              <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Position</p>
-              <p className="text-gray-900 font-semibold text-sm">{profile.position}</p>
-              {profile.secondPosition && <p className="text-gray-500 text-xs mt-0.5">Also: {profile.secondPosition}</p>}
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Preferred Foot</p>
-              <p className="text-gray-900 font-semibold text-sm">{profile.preferredFoot}</p>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Current Club</p>
-              <p className="text-gray-900 font-semibold text-sm">{profile.currentClub}</p>
-            </div>
-          </div>
-
-          {/* Club History */}
-          <div>
-            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Club History</h2>
-            {profile.previousClubs.map((c, i) => (
-              <div key={i} className="flex items-baseline gap-2">
-                <span className="text-gray-900 font-sans text-sm font-semibold w-44">{c.club}</span>
-                <span className="text-gray-500 font-sans text-sm">{c.years}</span>
-                {c.details && <span className="text-gray-400 font-sans text-sm">— {c.details}</span>}
-              </div>
+        <div className="px-6 sm:px-8 py-8 space-y-8" style={{ fontFamily: 'Georgia, serif' }}>
+          {/* ── ABOUT FERGUS ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">About Fergus</h2>
+            {profile.about.split('\n\n').map((para, i) => (
+              <p key={i} className="text-sm sm:text-base text-gray-800 leading-relaxed mb-3">{para}</p>
             ))}
-          </div>
+          </section>
 
-          {/* Why Moving On */}
-          <div className="bg-gray-50 border-l-4 border-gray-400 p-4">
-            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Why I'm Moving On</h2>
-            <p className="font-sans text-sm text-gray-800 italic">{profile.whyMovingOn}</p>
-          </div>
-
-          {/* Achievements & Strengths */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Achievements</h2>
-              <ul className="space-y-1.5">
-                {profile.achievements.map((a, i) => (
-                  <li key={i} className="font-sans text-sm text-gray-800">• {a}</li>
-                ))}
-              </ul>
+          {/* ── PLAYER PROFILE ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Player Profile</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 font-sans text-sm">
+              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+                <span className="text-gray-500 font-semibold">Position</span>
+                <span className="text-gray-900 font-bold">{profile.positions.primary}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+                <span className="text-gray-500 font-semibold">Secondary Position</span>
+                <span className="text-gray-900 font-bold">{profile.positions.secondary}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+                <span className="text-gray-500 font-semibold">Additional Position</span>
+                <span className="text-gray-900 font-bold">{profile.positions.additional}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-100 pb-1.5">
+                <span className="text-gray-500 font-semibold">Preferred Foot</span>
+                <span className="text-gray-900 font-bold">{profile.positions.preferredFoot}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-100 pb-1.5 sm:col-span-2">
+                <span className="text-gray-500 font-semibold">Current Club</span>
+                <span className="text-gray-900 font-bold">{profile.positions.currentClub}</span>
+              </div>
             </div>
-            <div>
-              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-2">Strengths</h2>
-              <ul className="space-y-1.5">
-                {profile.strengths.map((s, i) => (
-                  <li key={i} className="font-sans text-sm text-gray-800">• {s}</li>
-                ))}
-              </ul>
+          </section>
+
+          {/* ── FOOTBALL JOURNEY ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Football Journey</h2>
+            <p className="text-sm font-sans font-bold text-gray-900 mb-2">{profile.journey.club}</p>
+            {profile.journey.story.split('\n\n').map((para, i) => (
+              <p key={i} className="text-sm sm:text-base text-gray-800 leading-relaxed mb-3">{para}</p>
+            ))}
+          </section>
+
+          {/* ── HONOURS & RECOGNITION ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Honours & Recognition</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {profile.honours.map((h, i) => (
+                <div key={i} className="flex items-center gap-3 bg-gray-50 border border-gray-200 px-3 py-2.5 rounded">
+                  <span className="text-lg">{h.icon}</span>
+                  <span className="font-sans text-sm text-gray-800 font-semibold">{h.text}</span>
+                </div>
+              ))}
             </div>
-          </div>
+          </section>
 
-          {/* Development */}
-          <div>
-            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Area of Development</h2>
-            <p className="font-sans text-sm text-gray-700">{profile.developmentArea}</p>
-          </div>
-
-          {/* In His Own Words */}
-          <div className="border-l-4 border-gray-300 pl-4 py-2">
-            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">In His Own Words</h2>
-            <p className="text-gray-700 italic text-sm leading-relaxed">"{profile.playerDescription}"</p>
-          </div>
-
-          {/* Ambition */}
-          <div>
-            <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Ambition</h2>
-            <p className="font-sans text-base text-gray-900 font-semibold">{profile.goal}</p>
-          </div>
-
-          {/* Contact & Logistics */}
-          <div className="border-t border-gray-200 pt-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Contact</h2>
-              <p className="font-sans text-sm text-gray-900 font-semibold">{profile.contactName}</p>
-              <p className="font-sans text-sm text-gray-600">{profile.contactPhone}</p>
+          {/* ── KEY ATTRIBUTES ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Key Attributes</h2>
+            <div className="space-y-3">
+              {profile.attributes.map((attr, i) => (
+                <div key={i} className="border-l-4 border-gray-800 pl-3">
+                  <p className="font-sans font-black text-sm text-gray-900">{attr.title}</p>
+                  <p className="font-sans text-sm text-gray-600 leading-relaxed mt-0.5">{attr.desc}</p>
+                </div>
+              ))}
             </div>
-            <div>
-              <h2 className="text-xs font-bold text-gray-500 uppercase font-sans mb-1">Logistics</h2>
-              <p className="font-sans text-sm text-gray-700">{profile.school}</p>
-              <p className="font-sans text-xs text-gray-500 mt-0.5">{profile.schoolSchedule}</p>
-              <p className="font-sans text-sm text-gray-600 mt-1">Travel: {profile.canTravelTo}</p>
+          </section>
+
+          {/* ── CURRENT DEVELOPMENT FOCUS ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Current Development Focus</h2>
+            <p className="text-sm sm:text-base text-gray-800 leading-relaxed">{profile.developmentFocus}</p>
+          </section>
+
+          {/* ── PLAYER STATEMENT ── */}
+          <section className="bg-gray-900 text-white -mx-6 sm:-mx-8 px-6 sm:px-8 py-6">
+            <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase font-sans mb-3">Player Statement</h2>
+            {profile.playerStatement.split('\n\n').map((para, i) => (
+              <p key={i} className="text-sm sm:text-base leading-relaxed italic mb-3 text-gray-200">"{para}"</p>
+            ))}
+          </section>
+
+          {/* ── AMBITION ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Ambition</h2>
+            <p className="text-base sm:text-lg text-gray-900 font-bold leading-relaxed">{profile.ambition}</p>
+          </section>
+
+          {/* ── CHARACTER OFF THE PITCH ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Character Off The Pitch</h2>
+            <p className="text-sm sm:text-base text-gray-800 leading-relaxed">{profile.character}</p>
+          </section>
+
+          {/* ── AVAILABILITY ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Availability</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-sans text-sm">
+              <div className="flex items-center gap-2"><span>📍</span> <span className="text-gray-800">Based in {profile.availability.based}</span></div>
+              <div className="flex items-center gap-2"><span>🎓</span> <span className="text-gray-800">{profile.availability.school}</span></div>
+              <div className="flex items-center gap-2"><span>🚗</span> <span className="text-gray-800">{profile.availability.travel}</span></div>
+              <div className="flex items-center gap-2"><span>✅</span> <span className="text-gray-800">Driving Theory Passed</span></div>
+              <div className="flex items-center gap-2"><span>✅</span> <span className="text-gray-800">Practical Test {profile.availability.practicalTest}</span></div>
             </div>
-          </div>
+          </section>
+
+          {/* ── CONTACT ── */}
+          <section>
+            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">Contact</h2>
+            <p className="font-sans text-base font-bold text-gray-900">{profile.contact.name}</p>
+            <p className="font-sans text-lg font-black text-gray-900 mt-1">📞 {profile.contact.phone}</p>
+          </section>
+
+          {/* ── SCOUT'S SUMMARY ── */}
+          <section className="bg-gradient-to-br from-gray-100 to-gray-50 border-2 border-gray-800 -mx-6 sm:-mx-8 px-6 sm:px-8 py-6">
+            <h2 className="text-xs font-black tracking-widest text-gray-800 uppercase font-sans mb-3">⚡ Scout's Summary</h2>
+            <p className="text-sm sm:text-base text-gray-900 leading-relaxed font-semibold">{profile.scoutsSummary}</p>
+          </section>
         </div>
       </div>
 
