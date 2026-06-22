@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 12 Jun 2026 — £200 PAYMENT AGREED FOR 23.06.2026 • Nargis (SST Secured) • Monthly check-ins continuing ✅</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 22 Jun 2026 — £200 PAYMENT READY FOR 23.06.2026 • Benefits landed (£800) • Pattern: £100 → £200 → building trust ♾️❤️</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -223,6 +223,15 @@ export default function AdminNatWestMortgage() {
                   <p className="text-white font-bold">✅ BRIAN REPLIED TO NARGIS — Confirmation Sent</p>
                   <p className="text-gray-300 text-sm">Replied to SSTSecured@natwest.com confirming the arrangement. Stated: £200 payment on 23rd June, will call on the 23rd to process, will continue monthly updates. Agreement confirmed in writing from our side.</p>
                   <p className="text-green-400 font-bold text-sm mt-1">✅ Both sides now have the arrangement confirmed in writing ♾️</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-4 border-green-500 shadow-[0_0_40px_rgba(34,197,94,0.4)]">
+                <div className="text-green-300 font-bold text-lg min-w-fit">22/06/2026</div>
+                <div>
+                  <p className="text-white font-bold">✅ £800 BENEFITS LANDED — PAYMENT READY</p>
+                  <p className="text-gray-300 text-sm">Benefits payment received. <strong>£200 ready to pay NatWest tomorrow (23 June).</strong> Leaves £600 breathing room.</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ Pattern holding: £100 May → £200 June → building trust payment by payment</p>
                 </div>
               </div>
 
