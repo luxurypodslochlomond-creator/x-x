@@ -124,8 +124,8 @@ export default function FergusHughesProfile() {
       });
     }));
 
-    const canvas = await html2canvas(element, { scale: 2, useCORS: true, allowTaint: false, backgroundColor: '#ffffff', imageTimeout: 15000 });
-    const imgData = canvas.toDataURL('image/png');
+    const canvas = await html2canvas(element, { scale: 1.5, useCORS: true, allowTaint: false, backgroundColor: '#ffffff', imageTimeout: 15000 });
+    const imgData = canvas.toDataURL('image/jpeg', 0.92);
 
     const pdf = new jsPDF({ format: 'a4' });
     const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -135,13 +135,13 @@ export default function FergusHughesProfile() {
     let heightLeft = imgHeight;
     let position = 0;
 
-    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+    pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, imgHeight);
     heightLeft -= pdfHeight;
 
-    while (heightLeft >= 0) {
+    while (heightLeft > 1) {
       position = heightLeft - imgHeight;
       pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, imgHeight);
       heightLeft -= pdfHeight;
     }
 
@@ -187,7 +187,7 @@ export default function FergusHughesProfile() {
           </div>
         </div>
 
-        <div className="px-6 sm:px-8 py-8 space-y-8" style={{ fontFamily: 'Georgia, serif' }}>
+        <div className="px-6 sm:px-8 py-6 space-y-5" style={{ fontFamily: 'Georgia, serif' }}>
           {/* ── ABOUT FERGUS ── */}
           <section>
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase font-sans mb-3 border-b-2 border-gray-800 pb-1">About Fergus</h2>
