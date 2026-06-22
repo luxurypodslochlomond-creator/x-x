@@ -447,8 +447,18 @@ export default function AdminNatWestMortgage() {
               <p className="text-gray-400 text-xs mt-1">Say: "I'd like to set up an affordable repayment arrangement for my overdraft. I'm in financial difficulty due to bereavement and mental health challenges."</p>
             </div>
 
+            <div className="bg-green-900/30 border-4 border-green-500 rounded-lg p-4 shadow-[0_0_40px_rgba(34,197,94,0.4)]">
+              <p className="text-green-300 font-black mb-2">✅ 22/06/2026 — ARRANGEMENT AGREED ON THE PHONE</p>
+              <ul className="text-white text-sm space-y-1">
+                <li>• <strong>£40/month</strong> overdraft reduction plan — agreed ✅</li>
+                <li>• <strong>No new account</strong> — told them, they accepted ✅</li>
+                <li>• Santander seemed happy with the arrangement</li>
+                <li>• <strong>NEXT:</strong> Email financialsupport@santander.co.uk to get it confirmed in writing</li>
+              </ul>
+            </div>
+
             <div className="bg-red-900/30 border-2 border-red-500 rounded-lg p-4">
-              <p className="text-red-300 font-black mb-2">⚠️ CURRENT STATUS — 12 June 2026</p>
+              <p className="text-red-300 font-black mb-2">⚠️ PREVIOUS STATUS — 12 June 2026</p>
               <ul className="text-white text-sm space-y-1">
                 <li>• <strong>Breathing Space ended:</strong> 05 June 2026 — they sent email to confirm</li>
                 <li>• <strong>Overdraft amount:</strong> £1,600 (going over due to overdraft charges)</li>
