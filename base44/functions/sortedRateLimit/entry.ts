@@ -1,14 +1,12 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
 
-const MAX_CALLS = 10;
-const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+const MAX_CALLS = 3; // lifetime — no daily reset
 
 function getClientFingerprint(req) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
     || req.headers.get('x-real-ip')
     || 'unknown';
   const ua = req.headers.get('user-agent') || '';
-  // Compact key — store as page_name (max 200 chars is fine)
   return `rl::${ip}::${ua.slice(0, 30)}`;
 }
 
@@ -20,12 +18,10 @@ Deno.serve(async (req) => {
 
     const body = await req.json().catch(() => ({}));
     const action = body.action || 'check';
-    const now = Date.now();
     const fingerprint = getClientFingerprint(req);
 
     const base44 = createClientFromRequest(req);
 
-    // Use PrivacyAnalytics: page_name = fingerprint, session_duration_seconds = count
     let records = [];
     try {
       records = await base44.asServiceRole.entities.PrivacyAnalytics.filter({
@@ -35,11 +31,10 @@ Deno.serve(async (req) => {
     } catch { records = []; }
 
     const record = records[0] || null;
-    const windowExpired = !record || (now - new Date(record.created_date).getTime()) > WINDOW_MS;
 
     if (action === 'check') {
-      if (!record || windowExpired) {
-        return Response.json({ allowed: true, remaining: MAX_CALLS, used: 0, resets_in_hours: 24 });
+      if (!record) {
+        return Response.json({ allowed: true, remaining: MAX_CALLS, used: 0 });
       }
       const used = record.session_duration_seconds || 0;
       const remaining = Math.max(0, MAX_CALLS - used);
@@ -47,13 +42,11 @@ Deno.serve(async (req) => {
         allowed: used < MAX_CALLS,
         remaining,
         used,
-        resets_in_hours: Math.ceil((WINDOW_MS - (now - new Date(record.created_date).getTime())) / 3600000)
       });
     }
 
     if (action === 'record') {
-      if (!record || windowExpired) {
-        // Fresh window — create new record
+      if (!record) {
         try {
           await base44.asServiceRole.entities.PrivacyAnalytics.create({
             event_type: 'feature_used',
@@ -64,7 +57,7 @@ Deno.serve(async (req) => {
         } catch (e) {
           console.error('[RateLimit] create error:', e.message);
         }
-        console.log(`[RateLimit] NEW window for ${fingerprint.slice(0, 25)} — used: 1/${MAX_CALLS}`);
+        console.log(`[RateLimit] NEW user ${fingerprint.slice(0, 25)} — used: 1/${MAX_CALLS}`);
         return Response.json({ allowed: true, remaining: MAX_CALLS - 1, used: 1 });
       }
 
@@ -75,7 +68,7 @@ Deno.serve(async (req) => {
         return Response.json({
           allowed: false,
           remaining: 0,
-          message: 'Free limit reached. Please subscribe for unlimited access.'
+          message: 'Free limit reached. Subscribe for unlimited access.'
         }, { status: 429 });
       }
 
@@ -97,6 +90,6 @@ Deno.serve(async (req) => {
 
   } catch (error) {
     console.error('[RateLimit] Error:', error.message);
-    return Response.json({ allowed: true, remaining: 5, used: 0 });
+    return Response.json({ allowed: true, remaining: 3, used: 0 });
   }
 });
