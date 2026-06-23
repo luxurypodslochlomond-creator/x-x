@@ -61,7 +61,7 @@ export default function Family51Page() {
       {/* HOW IT WORKS */}
       <div style={{ padding: '8px 20px 24px', maxWidth: 520, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 4 }}>
-          {['Paste your letter', 'Get plain English', 'Know your next step'].map((step, i) => (
+          {['Paste your letter', 'Get plain language', 'Know your next step'].map((step, i) => (
             <React.Fragment key={i}>
               <div style={{ flex: 1, textAlign: 'center', padding: '0 4px' }}>
                 <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(217,119,6,0.08)', border: '2px solid rgba(217,119,6,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px', fontSize: 15, fontWeight: 900, color: '#d97706' }}>{i + 1}</div>
