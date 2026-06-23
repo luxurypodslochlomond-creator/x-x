@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { base44 } from '@/api/base44Client';
 
 const QUICK_IDEAS = [
   {
@@ -55,8 +54,8 @@ const QUICK_IDEAS = [
   },
 ];
 
-// Voice support — hidden file input with capture works on ALL devices (iOS native recorder, Android mic)
-const hasVoice = typeof window !== 'undefined';
+// Voice support — webkitSpeechRecognition works on iOS/Android, triggers its own permission prompt
+const hasVoice = typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
 
 // Custom geometric shape for each idea card — no emoji, pure CSS/SVG
 const IdeaShape = ({ shape, color, accent }) => {
@@ -126,8 +125,9 @@ export default function ZappCreator({ onSubmit }) {
   const [voiceText, setVoiceText] = useState('');
   const [voicePulse, setVoicePulse] = useState(false);
   const textareaRef = useRef(null);
-  const fileInputRef = useRef(null);
-  const [voiceStatus, setVoiceStatus] = useState(''); // '' | 'recording' | 'transcribing' | error message
+  const recognitionRef = useRef(null);
+  const lastTranscriptRef = useRef('');
+  const hasSubmittedRef = useRef(false);
 
   const handleSubmit = (text) => {
     const t = (text || value).trim();
@@ -151,58 +151,93 @@ export default function ZappCreator({ onSubmit }) {
     }
   };
 
-  const handleVoiceTap = () => {
-    // Open native voice recorder (iOS Voice Memos / Android mic)
-    fileInputRef.current?.click();
-  };
+  const startListening = () => {
+    if (!hasVoice) return;
 
-  const handleVoiceFile = async (e) => {
-    const file = e.target.files?.[0];
-    // Reset input so the same file can be selected again
-    e.target.value = '';
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognitionRef.current = recognition;
+    hasSubmittedRef.current = false;
+    lastTranscriptRef.current = '';
 
-    if (!file) {
+    // NO lang set — browser auto-detects speech language. Works for any language.
+    recognition.continuous = false;
+    recognition.interimResults = true;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      setVoiceText('');
+      setVoicePulse(true);
+    };
+
+    recognition.onresult = (event) => {
+      let interim = '';
+      let final = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          final += event.results[i][0].transcript;
+        } else {
+          interim += event.results[i][0].transcript;
+        }
+      }
+
+      const latest = final || interim;
+      if (latest) {
+        lastTranscriptRef.current = latest;
+        setVoiceText(latest);
+      }
+    };
+
+    recognition.onerror = (e) => {
+      console.error('ZAPP voice error:', e.error, e.message);
       setIsListening(false);
       setVoicePulse(false);
-      return;
-    }
-
-    if (file.size < 1000) {
-      setVoiceText('Recording too short — try again!');
-      setTimeout(() => setVoiceText(''), 4000);
-      return;
-    }
-
-    setIsListening(true);
-    setVoicePulse(true);
-    setVoiceStatus('transcribing');
-    setVoiceText('listening to your idea...');
-
-    try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
-      const result = await base44.integrations.Core.TranscribeAudio({ audio_url: file_url });
-
-      const text = (typeof result === 'string' ? result : result?.text || result?.transcript || '').trim();
-      if (text.length >= 3) {
-        setVoiceText(text);
-        setValue(text);
-        setVoiceStatus('');
-        setTimeout(() => onSubmit(text), 600);
-      } else {
-        setVoiceText('Nothing heard — try again!');
-        setVoiceStatus('');
-        setIsListening(false);
-        setVoicePulse(false);
+      lastTranscriptRef.current = '';
+      const msgs = {
+        'not-allowed': 'Mic blocked! Check browser settings',
+        'no-speech': 'Nothing heard — tap and try again',
+        'network': 'Network error — check your connection',
+        'aborted': '',
+        'audio-capture': 'No microphone found',
+        'service-not-allowed': 'Mic blocked! Check browser settings',
+      };
+      const msg = msgs[e.error] || `Mic error: ${e.error}`;
+      if (msg) {
+        setVoiceText(msg);
         setTimeout(() => setVoiceText(''), 4000);
       }
-    } catch (err) {
-      console.error('ZAPP voice transcription error:', err);
-      setVoiceText('Could not transcribe — try again!');
-      setVoiceStatus('');
+    };
+
+    recognition.onend = () => {
       setIsListening(false);
       setVoicePulse(false);
+      if (!hasSubmittedRef.current) {
+        const captured = lastTranscriptRef.current.trim();
+        if (captured.length >= 3) {
+          hasSubmittedRef.current = true;
+          setVoiceText(captured);
+          setValue(captured);
+          setTimeout(() => onSubmit(captured), 400);
+        }
+      }
+    };
+
+    // Start recognition — this triggers the iOS permission prompt itself
+    try {
+      recognition.start();
+    } catch (err) {
+      console.error('ZAPP voice start error:', err);
+      setIsListening(false);
+      setVoicePulse(false);
+      setVoiceText('Could not start mic — try again');
       setTimeout(() => setVoiceText(''), 4000);
     }
+  };
+
+  const stopListening = () => {
+    recognitionRef.current?.stop();
+    setIsListening(false);
+    setVoicePulse(false);
   };
 
   return (
@@ -237,7 +272,7 @@ export default function ZappCreator({ onSubmit }) {
           className="mb-8 flex flex-col items-center gap-4 w-full max-w-xs"
         >
           <motion.button
-            onClick={isListening ? undefined : handleVoiceTap}
+            onClick={isListening ? stopListening : startListening}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.93 }}
             className="relative flex items-center justify-center gap-4 w-full select-none"
@@ -281,22 +316,12 @@ export default function ZappCreator({ onSubmit }) {
             )}
 
             <span className="text-white font-black text-xl tracking-tight">
-              {voiceStatus === 'transcribing' ? 'LISTENING...' : isListening ? 'LISTENING...' : 'SPEAK YOUR IDEA'}
+              {isListening ? 'LISTENING...' : 'SPEAK YOUR IDEA'}
             </span>
           </motion.button>
 
-          {/* Hidden file input — opens native iOS/Android voice recorder */}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="audio/*"
-            capture="microphone"
-            onChange={handleVoiceFile}
-            style={{ display: 'none' }}
-          />
-
           <AnimatePresence mode="wait">
-            {voiceText ? (
+            {isListening && voiceText ? (
               <motion.p
                 key="voicetext"
                 initial={{ opacity: 0, y: 4 }}
@@ -304,10 +329,12 @@ export default function ZappCreator({ onSubmit }) {
                 exit={{ opacity: 0 }}
                 className="text-white/90 text-base font-bold text-center italic px-4"
               >
-                {voiceStatus === 'transcribing' ? voiceText : `"${voiceText}"`}
+                "{voiceText}"
               </motion.p>
+            ) : isListening ? (
+              <motion.p key="listening-hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-orange-300 font-bold text-sm">say your idea now! tap to stop</motion.p>
             ) : (
-              <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/30 text-sm font-semibold text-center">tap the big button · record your idea · tap done</motion.p>
+              <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/30 text-sm font-semibold text-center">tap the big button · say your idea out loud</motion.p>
             )}
           </AnimatePresence>
           <div className="flex items-center gap-1.5 mt-1">
