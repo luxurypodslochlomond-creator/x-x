@@ -57,15 +57,15 @@ export default function Family51Page() {
       </div>
 
       {/* HOW IT WORKS */}
-      <div style={{ padding: '8px 20px 20px', maxWidth: 520, margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+      <div style={{ padding: '8px 20px 24px', maxWidth: 520, margin: '0 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 4 }}>
           {['Paste your letter', 'Get plain English', 'Know your next step'].map((step, i) => (
             <React.Fragment key={i}>
-              <div style={{ flex: 1, textAlign: 'center' }}>
-                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(217,119,6,0.1)', border: '1.5px solid rgba(217,119,6,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px', fontSize: 12, fontWeight: 900, color: '#d97706' }}>{i + 1}</div>
-                <div style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.6)', lineHeight: 1.3 }}>{step}</div>
+              <div style={{ flex: 1, textAlign: 'center', padding: '0 4px' }}>
+                <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(217,119,6,0.08)', border: '2px solid rgba(217,119,6,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px', fontSize: 15, fontWeight: 900, color: '#d97706' }}>{i + 1}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.55)', lineHeight: 1.3 }}>{step}</div>
               </div>
-              {i < 2 && <div style={{ width: 16, height: 1, background: 'rgba(217,119,6,0.2)', flexShrink: 0 }} />}
+              {i < 2 && <div style={{ width: 20, height: 2, background: 'rgba(217,119,6,0.15)', flexShrink: 0, marginTop: 19, borderRadius: 1 }} />}
             </React.Fragment>
           ))}
         </div>
