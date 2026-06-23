@@ -131,7 +131,7 @@ export default function SortedLayout({ children, currentPage }) {
         fontFamily: 'monospace', fontSize: 9,
         color: 'rgba(26,18,8,0.35)', letterSpacing: '0.14em',
       }}>
-        HONEST HELP · NOTHING STORED
+        HONEST HELP · YOUR LETTERS STAY ON YOUR DEVICE
       </div>
     </div>
   );

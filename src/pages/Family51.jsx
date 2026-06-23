@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
@@ -14,6 +15,7 @@ export default function Family51Page() {
   const geoPrice = useSortedGeoPrice();
   const paywallRef = useRef(null);
   const caseHistoryRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -22,7 +24,7 @@ export default function Family51Page() {
     } else if (params.get('cases')) {
       setTimeout(() => caseHistoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
-  }, []);
+  }, [location.search]);
 
   const openTool = (engineId, handoffData = null) => {
     console.log('[SORTED] openTool called:', engineId, handoffData);
