@@ -284,7 +284,10 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 
         {/* LOCATION — always visible */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
-          <span style={{ fontSize: 13 }}>📍</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" stroke={accentColor} strokeWidth="2" strokeLinejoin="round"/>
+            <circle cx="12" cy="9" r="2.5" stroke={accentColor} strokeWidth="2"/>
+          </svg>
           <div style={{ flex: 1 }}>
             <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.5)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
@@ -293,8 +296,12 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
 
         {/* OPTIONAL EXTRAS — collapsed */}
         <details style={{ cursor: 'pointer' }}>
-          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-            ⚙️ YOUR NAME &amp; SITUATION TYPE (optional)
+          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" stroke="rgba(26,18,8,0.45)" strokeWidth="2"/>
+              <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="rgba(26,18,8,0.45)" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            YOUR NAME &amp; SITUATION TYPE (optional)
           </summary>
           <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
             <input

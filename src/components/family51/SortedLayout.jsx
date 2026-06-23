@@ -28,13 +28,12 @@ export default function SortedLayout({ children, currentPage }) {
 
   useEffect(() => {
     refreshCaseCount();
-    // Also refresh on storage changes (e.g. when a case is saved or deleted)
-    window.addEventListener('storage', refreshCaseCount);
-    // Poll every 2s so header stays in sync when cases are modified in-page
-    const interval = setInterval(refreshCaseCount, 2000);
+    const handler = () => refreshCaseCount();
+    window.addEventListener('storage', handler);
+    window.addEventListener('sorted-cases-changed', handler);
     return () => {
-      window.removeEventListener('storage', refreshCaseCount);
-      clearInterval(interval);
+      window.removeEventListener('storage', handler);
+      window.removeEventListener('sorted-cases-changed', handler);
     };
   }, [location.pathname]);
 

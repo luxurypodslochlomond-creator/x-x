@@ -143,8 +143,10 @@ Return JSON with ONLY these fields:
 - severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - key_deadline: The EARLIEST deadline that matters OR null if all expired
 - amount: Specific amount or null
-- one_sentence: ONE sentence explaining what this is — in PLAIN ENGLISH, no jargon. If expired: "Event passed — no action needed."
-- three_steps: Exactly 3 action steps. Be HONEST and SPECIFIC:
+- we_hear_you: ONE warm sentence acknowledging their situation — empathetic but brief. E.g. "This looks stressful but you have options."
+- what_this_means: ONE sentence explaining what this is — in PLAIN ENGLISH, no jargon. If expired: "Event passed — no action needed."
+- if_you_ignore_this: ONE sentence on what happens if they do nothing. Be honest, not scary.
+- action_steps: Exactly 3 action steps. Be HONEST and SPECIFIC:
   • If ALL dates in PAST: ["Event passed — no action needed", "Keep this letter for your records", "Only respond if they contact you again"]
   • If they're at fault: "Pay the £65 within 14 days — it doubles to £130 after that"
   • If it's private parking: "Private company, not council. They can't fine like councils can, but may send collectors. Your call: contest or pay."
@@ -154,6 +156,8 @@ Return JSON with ONLY these fields:
   • If it's serious: "Contact [specific body] today — this needs expert help ASAP"
 - free_help: 2 services max — ONLY bodies that exist in THEIR country (e.g. UK: National Debtline; Australia: National Debt Helpline 1800 007 007; USA: local legal aid; Ireland: MABS 0818 07 2000). NEVER invent phone numbers. NEVER cite UK bodies for non-UK users. This is BACKUP — only if the action steps don't work or they need emotional support.
 - expired: true/false — set true if ALL key dates are in the past
+
+IMPORTANT: The three_steps field name has been changed to action_steps. Use action_steps exactly.
 
 CRITICAL RULES:
 - NEVER use emojis. NO EMOJI ANYWHERE. Period.

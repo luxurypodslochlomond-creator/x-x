@@ -156,12 +156,14 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
             severity: { type: 'string' },
             key_deadline: { type: 'string' },
             amount: { type: 'string' },
-            one_sentence: { type: 'string' },
-            three_steps: { type: 'array', items: { type: 'string' } },
+            we_hear_you: { type: 'string' },
+            what_this_means: { type: 'string' },
+            if_you_ignore_this: { type: 'string' },
+            action_steps: { type: 'array', items: { type: 'string' } },
             free_help: { type: 'array', items: { type: 'string' } },
             expired: { type: 'boolean' },
           },
-          required: ['letter_summary', 'severity', 'one_sentence', 'three_steps', 'free_help'],
+          required: ['letter_summary', 'severity', 'what_this_means', 'action_steps', 'free_help'],
         },
       });
 
@@ -179,9 +181,12 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
 
       // Sanitize: coerce any accidental nested objects to strings
-      const STRING_FIELDS = ['letter_summary','sender','severity','key_deadline','amount','one_sentence','financial_impact'];
+      const STRING_FIELDS = ['letter_summary','sender','severity','key_deadline','amount','we_hear_you','what_this_means','if_you_ignore_this','one_sentence','financial_impact'];
       STRING_FIELDS.forEach(k => { if (raw[k] && typeof raw[k] === 'object') raw[k] = JSON.stringify(raw[k]); });
-      if (raw.three_steps && !Array.isArray(raw.three_steps)) raw.three_steps = [String(raw.three_steps)];
+      // Backwards compat: map old field names to new ones
+      if (raw.three_steps && !raw.action_steps) raw.action_steps = raw.three_steps;
+      if (raw.one_sentence && !raw.what_this_means) raw.what_this_means = raw.one_sentence;
+      if (raw.action_steps && !Array.isArray(raw.action_steps)) raw.action_steps = [String(raw.action_steps)];
       if (raw.free_help && !Array.isArray(raw.free_help)) raw.free_help = [String(raw.free_help)];
 
       setResult(raw);

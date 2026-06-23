@@ -66,6 +66,7 @@ export function saveCaseToHistory({ tool, input_text, ai_result, summary, severi
     };
     const updated = [newCase, ...existing].slice(0, FREE_CASE_LIMIT);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new CustomEvent('sorted-cases-changed'));
     try {
       base44.entities.SortedCase.create({
         tool,
@@ -643,19 +644,19 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
   const handleDelete = (id) => {
     const updated = cases.filter(c => c.id !== id);
     setCases(updated);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); window.dispatchEvent(new CustomEvent('sorted-cases-changed')); } catch {}
   };
 
   const handleEdit = (id, newSummary) => {
     const updated = cases.map(c => c.id === id ? { ...c, summary: newSummary } : c);
     setCases(updated);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); window.dispatchEvent(new CustomEvent('sorted-cases-changed')); } catch {}
   };
 
   const handleWipeAll = () => {
     if (!confirmWipe) { setConfirmWipe(true); return; }
     setCases([]);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify([])); } catch {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify([])); window.dispatchEvent(new CustomEvent('sorted-cases-changed')); } catch {}
     setConfirmWipe(false);
   };
 

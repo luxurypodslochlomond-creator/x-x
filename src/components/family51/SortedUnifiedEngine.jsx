@@ -86,7 +86,9 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   };
 
   const handleToolComplete = (toolId) => {
-    if (recordUse) recordUse();
+    // Note: recordUse() is NOT called here — each tool component already calls
+    // recordSortedUse() internally before the LLM call. Calling it here too
+    // would double-count uses against the rate limit.
     setCompletedTools(prev => prev.includes(toolId) ? prev : [...prev, toolId]);
     if (toolId === 'letter' && !completedTools.includes('letter')) {
       setTimeout(() => setShowShare(true), 1200);

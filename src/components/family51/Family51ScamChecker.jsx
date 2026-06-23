@@ -16,10 +16,33 @@ const LOADING_STEPS = [
 ];
 
 const VERDICT = {
-  safe:    { color: '#22c55e', bg: 'rgba(34,197,94,0.10)',  border: 'rgba(34,197,94,0.35)',  emoji: '✅', label: 'Looks Legitimate' },
-  warning: { color: '#eab308', bg: 'rgba(234,179,8,0.10)', border: 'rgba(234,179,8,0.35)',  emoji: '⚠️', label: 'Be Careful' },
-  scam:    { color: '#ef4444', bg: 'rgba(239,68,68,0.10)', border: 'rgba(239,68,68,0.35)',  emoji: '🚨', label: 'Almost Certainly a Scam' },
+  safe:    { color: '#22c55e', bg: 'rgba(34,197,94,0.10)',  border: 'rgba(34,197,94,0.35)',  label: 'Looks Legitimate', icon: 'check' },
+  warning: { color: '#eab308', bg: 'rgba(234,179,8,0.10)', border: 'rgba(234,179,8,0.35)',  label: 'Be Careful', icon: 'warning' },
+  scam:    { color: '#ef4444', bg: 'rgba(239,68,68,0.10)', border: 'rgba(239,68,68,0.35)',  label: 'Almost Certainly a Scam', icon: 'scam' },
 };
+
+function VerdictIcon({ type, color }) {
+  if (type === 'check') return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="20" stroke={color} strokeWidth="2.5"/>
+      <path d="M15 24l6 6 12-12" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+  if (type === 'warning') return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <path d="M24 4L2 42h44L24 4z" stroke={color} strokeWidth="2.5" strokeLinejoin="round"/>
+      <line x1="24" y1="18" x2="24" y2="28" stroke={color} strokeWidth="3" strokeLinecap="round"/>
+      <circle cx="24" cy="34" r="1.5" fill={color}/>
+    </svg>
+  );
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="20" stroke={color} strokeWidth="2.5"/>
+      <line x1="24" y1="14" x2="24" y2="28" stroke={color} strokeWidth="3" strokeLinecap="round"/>
+      <circle cx="24" cy="34" r="1.5" fill={color}/>
+    </svg>
+  );
+}
 
 export default function Family51ScamChecker({ accentColor = '#ef4444', onResult }) {
   const [inputText, setInputText] = useState('');
@@ -276,7 +299,7 @@ Copy exactly what it says — every word helps us check it.`}
 
             {/* BIG VERDICT */}
             <div style={{ borderRadius: 16, border: `2px solid ${v.border}`, background: v.bg, padding: '24px 20px', textAlign: 'center' }}>
-              <div style={{ fontSize: 48, marginBottom: 8, lineHeight: 1 }}>{v.emoji}</div>
+              <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><VerdictIcon type={v.icon} color={v.color} /></div>
               <div style={{ fontSize: 22, fontWeight: 900, color: v.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{v.label}</div>
               <div style={{ fontSize: 13, color: 'rgba(26,18,8,0.55)', fontWeight: 600 }}>{result.confidence}</div>
               {result.scam_type && result.scam_type !== 'Not a scam' && (
@@ -306,7 +329,9 @@ Copy exactly what it says — every word helps us check it.`}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {result.red_flags.map((flag, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                      <span style={{ color: '#ef4444', flexShrink: 0, marginTop: 1 }}>⚑</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
+                        <path d="M5 3v18M5 4h11l-2 4 2 4H5" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
                       <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{flag}</span>
                     </div>
                   ))}
