@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const QUICK_IDEAS = [
   {
@@ -53,9 +53,6 @@ const QUICK_IDEAS = [
     idea: ''
   },
 ];
-
-// Voice support — webkitSpeechRecognition works on iOS/Android, triggers its own permission prompt
-const hasVoice = typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
 
 // Custom geometric shape for each idea card — no emoji, pure CSS/SVG
 const IdeaShape = ({ shape, color, accent }) => {
@@ -119,15 +116,7 @@ const IdeaShape = ({ shape, color, accent }) => {
 export default function ZappCreator({ onSubmit }) {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-
-  const [customMode, setCustomMode] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-  const [voiceText, setVoiceText] = useState('');
-  const [voicePulse, setVoicePulse] = useState(false);
   const textareaRef = useRef(null);
-  const recognitionRef = useRef(null);
-  const lastTranscriptRef = useRef('');
-  const hasSubmittedRef = useRef(false);
 
   const handleSubmit = (text) => {
     const t = (text || value).trim();
@@ -144,100 +133,10 @@ export default function ZappCreator({ onSubmit }) {
 
   const handleQuickTap = (item) => {
     if (!item.idea) {
-      setCustomMode(true);
       setTimeout(() => textareaRef.current?.focus(), 100);
     } else {
       onSubmit(item.idea);
     }
-  };
-
-  const startListening = () => {
-    if (!hasVoice) return;
-
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognitionRef.current = recognition;
-    hasSubmittedRef.current = false;
-    lastTranscriptRef.current = '';
-
-    // NO lang set — browser auto-detects speech language. Works for any language.
-    recognition.continuous = false;
-    recognition.interimResults = true;
-
-    recognition.onstart = () => {
-      setIsListening(true);
-      setVoiceText('');
-      setVoicePulse(true);
-    };
-
-    recognition.onresult = (event) => {
-      let interim = '';
-      let final = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) {
-          final += event.results[i][0].transcript;
-        } else {
-          interim += event.results[i][0].transcript;
-        }
-      }
-
-      const latest = final || interim;
-      if (latest) {
-        lastTranscriptRef.current = latest;
-        setVoiceText(latest);
-      }
-    };
-
-    recognition.onerror = (e) => {
-      console.error('ZAPP voice error:', e.error, e.message);
-      setIsListening(false);
-      setVoicePulse(false);
-      lastTranscriptRef.current = '';
-      const msgs = {
-        'not-allowed': 'Mic blocked! Check browser settings',
-        'no-speech': 'Nothing heard — tap and try again',
-        'network': 'Network error — check your connection',
-        'aborted': '',
-        'audio-capture': 'No microphone found',
-        'service-not-allowed': 'Mic blocked! Check browser settings',
-      };
-      const msg = msgs[e.error] || `Mic error: ${e.error}`;
-      if (msg) {
-        setVoiceText(msg);
-        setTimeout(() => setVoiceText(''), 4000);
-      }
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-      setVoicePulse(false);
-      if (!hasSubmittedRef.current) {
-        const captured = lastTranscriptRef.current.trim();
-        if (captured.length >= 3) {
-          hasSubmittedRef.current = true;
-          setVoiceText(captured);
-          setValue(captured);
-          setTimeout(() => onSubmit(captured), 400);
-        }
-      }
-    };
-
-    // Start recognition — this triggers the iOS permission prompt itself
-    try {
-      recognition.start();
-    } catch (err) {
-      console.error('ZAPP voice start error:', err);
-      setIsListening(false);
-      setVoicePulse(false);
-      setVoiceText('Could not start mic — try again');
-      setTimeout(() => setVoiceText(''), 4000);
-    }
-  };
-
-  const stopListening = () => {
-    recognitionRef.current?.stop();
-    setIsListening(false);
-    setVoicePulse(false);
   };
 
   return (
@@ -259,154 +158,16 @@ export default function ZappCreator({ onSubmit }) {
           what do you<br />want to build?
         </h1>
         <p className="text-white/40 font-semibold" style={{ fontSize: 'clamp(1rem, 3vw, 1.25rem)' }}>
-          tap an idea · or say it out loud · any language
+          type your idea · or tap one below · any language
         </p>
       </motion.div>
 
-      {/* VOICE BUTTON — BIG COOLASFUCK pill for kids */}
-      {hasVoice && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.15, duration: 0.4 }}
-          className="mb-8 flex flex-col items-center gap-4 w-full max-w-xs"
-        >
-          <motion.button
-            onClick={isListening ? stopListening : startListening}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.93 }}
-            className="relative flex items-center justify-center gap-4 w-full select-none"
-            style={{
-              height: 80,
-              borderRadius: 40,
-              background: isListening
-                ? 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)'
-                : 'linear-gradient(135deg, #7c3aed 0%, #ec4899 60%, #f59e0b 100%)',
-              boxShadow: isListening
-                ? '0 0 0 4px rgba(239,68,68,0.2), 0 8px 40px rgba(239,68,68,0.6)'
-                : '0 0 0 4px rgba(124,58,237,0.15), 0 8px 40px rgba(124,58,237,0.5)',
-              border: 'none',
-              cursor: 'pointer',
-            }}
-            animate={isListening ? { scale: [1, 1.03, 1] } : {}}
-            transition={isListening ? { duration: 0.7, repeat: Infinity, ease: 'easeInOut' } : {}}
-          >
-            {/* Mic SVG icon */}
-            {!isListening && (
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                <rect x="8" y="2" width="8" height="13" rx="4" fill="white" />
-                <path d="M5 10a7 7 0 0 0 14 0" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" />
-                <line x1="12" y1="17" x2="12" y2="21" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
-                <line x1="9" y1="21" x2="15" y2="21" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
-              </svg>
-            )}
-
-            {/* Animated bars when listening */}
-            {isListening && (
-              <div className="flex items-center gap-1" style={{ height: 36 }}>
-                {[0.4, 0.9, 0.6, 1, 0.5, 0.9, 0.7, 1, 0.4].map((h, i) => (
-                  <motion.div
-                    key={i}
-                    style={{ width: 4, borderRadius: 4, background: 'rgba(255,255,255,0.9)' }}
-                    animate={{ height: [36 * h * 0.4, 36 * h, 36 * h * 0.3, 36 * h, 36 * h * 0.4] }}
-                    transition={{ duration: 0.45 + i * 0.06, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-                ))}
-              </div>
-            )}
-
-            <span className="text-white font-black text-xl tracking-tight">
-              {isListening ? 'LISTENING...' : 'SPEAK YOUR IDEA'}
-            </span>
-          </motion.button>
-
-          <AnimatePresence mode="wait">
-            {isListening && voiceText ? (
-              <motion.p
-                key="voicetext"
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="text-white/90 text-base font-bold text-center italic px-4"
-              >
-                "{voiceText}"
-              </motion.p>
-            ) : isListening ? (
-              <motion.p key="listening-hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-orange-300 font-bold text-sm">say your idea now! tap to stop</motion.p>
-            ) : (
-              <motion.p key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white/30 text-sm font-semibold text-center">tap the big button · say your idea out loud</motion.p>
-            )}
-          </AnimatePresence>
-          <div className="flex items-center gap-1.5 mt-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400/60" />
-            <span className="text-white/20 text-[10px] font-semibold tracking-wider">WORKS IN ALL LANGUAGES</span>
-          </div>
-        </motion.div>
-      )}
-
-      {/* Quick idea grid */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        className="w-full max-w-2xl mb-6"
-      >
-        <p className="text-white/20 text-xs font-black tracking-widest text-center mb-4 uppercase">or tap an idea to build instantly</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-          {QUICK_IDEAS.map((item, i) => (
-            <motion.button
-              key={item.label}
-              onClick={() => handleQuickTap(item)}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + i * 0.04 }}
-              whileHover={{ scale: 1.06, y: -5 }}
-              whileTap={{ scale: 0.93 }}
-              className="relative flex flex-col items-end justify-between overflow-hidden"
-              style={{
-                background: item.visual.bg,
-                border: `1.5px solid ${item.color}35`,
-                borderRadius: 20,
-                padding: '14px 14px 12px',
-                minHeight: 110,
-                boxShadow: `0 8px 32px ${item.color}20, inset 0 1px 0 rgba(255,255,255,0.05)`,
-              }}
-            >
-              {/* Abstract geometric visual — top left */}
-              <IdeaShape shape={item.visual.shape} color={item.color} accent={item.accent} />
-
-              {/* Label — bottom right */}
-              <span
-                className="font-black leading-tight text-left w-full whitespace-pre-line"
-                style={{
-                  fontSize: 11,
-                  letterSpacing: '0.04em',
-                  color: item.accent,
-                  textShadow: `0 0 20px ${item.color}80`,
-                  marginTop: 'auto',
-                }}
-              >
-                {item.label}
-              </span>
-
-              {/* Glow dot top right */}
-              <div style={{
-                position: 'absolute', top: 10, right: 10,
-                width: 6, height: 6, borderRadius: '50%',
-                background: item.color,
-                boxShadow: `0 0 8px ${item.color}`,
-              }} />
-            </motion.button>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Type your own — always visible, premium feel */}
+      {/* TYPE YOUR IDEA — top, big and prominent */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.45 }}
-        className="w-full max-w-2xl"
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="w-full max-w-2xl mb-8"
       >
         <div
           className="relative rounded-3xl overflow-hidden transition-all duration-300"
@@ -424,10 +185,9 @@ export default function ZappCreator({ onSubmit }) {
               : 'none',
           }}
         >
-          {/* Subtle top label */}
           <div className="px-5 pt-4 pb-0">
             <span className="text-white/20 text-xs font-black tracking-widest uppercase">
-              or describe your own idea
+              type your idea here
             </span>
           </div>
 
@@ -440,6 +200,7 @@ export default function ZappCreator({ onSubmit }) {
             onKeyDown={handleKeyDown}
             placeholder="a game where you dodge meteors and collect stars..."
             rows={3}
+            autoFocus
             className="w-full bg-transparent text-white px-5 pt-3 pb-4 resize-none outline-none leading-relaxed"
             style={{
               fontSize: 17,
@@ -449,7 +210,6 @@ export default function ZappCreator({ onSubmit }) {
             }}
           />
 
-          {/* Bottom bar with char hint + ZAPP button */}
           <div
             className="flex items-center justify-between px-4 pb-4 gap-3"
             style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
@@ -484,6 +244,60 @@ export default function ZappCreator({ onSubmit }) {
               ZAPP IT
             </motion.button>
           </div>
+        </div>
+      </motion.div>
+
+      {/* Quick idea grid */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        className="w-full max-w-2xl"
+      >
+        <p className="text-white/20 text-xs font-black tracking-widest text-center mb-4 uppercase">or tap an idea to build instantly</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          {QUICK_IDEAS.map((item, i) => (
+            <motion.button
+              key={item.label}
+              onClick={() => handleQuickTap(item)}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 + i * 0.04 }}
+              whileHover={{ scale: 1.06, y: -5 }}
+              whileTap={{ scale: 0.93 }}
+              className="relative flex flex-col items-end justify-between overflow-hidden"
+              style={{
+                background: item.visual.bg,
+                border: `1.5px solid ${item.color}35`,
+                borderRadius: 20,
+                padding: '14px 14px 12px',
+                minHeight: 110,
+                boxShadow: `0 8px 32px ${item.color}20, inset 0 1px 0 rgba(255,255,255,0.05)`,
+              }}
+            >
+              <IdeaShape shape={item.visual.shape} color={item.color} accent={item.accent} />
+
+              <span
+                className="font-black leading-tight text-left w-full whitespace-pre-line"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: '0.04em',
+                  color: item.accent,
+                  textShadow: `0 0 20px ${item.color}80`,
+                  marginTop: 'auto',
+                }}
+              >
+                {item.label}
+              </span>
+
+              <div style={{
+                position: 'absolute', top: 10, right: 10,
+                width: 6, height: 6, borderRadius: '50%',
+                background: item.color,
+                boxShadow: `0 0 8px ${item.color}`,
+              }} />
+            </motion.button>
+          ))}
         </div>
       </motion.div>
 

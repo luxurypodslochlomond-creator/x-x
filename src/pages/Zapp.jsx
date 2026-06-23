@@ -91,6 +91,7 @@ export default function Zapp() {
     setIdea(remixIdea);
     setBuiltHtml('');
     setAppTitle('');
+    setBuildKey(k => k + 1); // Force ZappLiveOutput to remount — otherwise hasStarted ref blocks rebuild
     setPhase('building');
   };
 
