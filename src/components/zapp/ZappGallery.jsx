@@ -129,21 +129,18 @@ export default function ZappGallery({ onPlay, onRemix }) {
               className="rounded-2xl overflow-hidden cursor-pointer group"
               style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
             >
-              {/* Preview thumbnail — mini iframe */}
+              {/* Static preview card — no live iframes (perf) */}
               <div
-                className="relative overflow-hidden"
-                style={{ height: 120, background: '#0a0a0f' }}
+                className="relative overflow-hidden flex items-center justify-center"
+                style={{ height: 120, background: `linear-gradient(135deg, ${item.emoji === 'star' ? '#0d0018' : '#0a0a0f'} 0%, #14001f 100%)` }}
                 onClick={() => handlePlay(item)}
               >
-                <iframe
-                  srcDoc={item.html}
-                  className="w-full border-0 pointer-events-none"
-                  style={{ height: 400, transform: 'scale(0.3)', transformOrigin: 'top left', width: '333%' }}
-                  title={item.title}
-                  sandbox="allow-scripts allow-same-origin"
-                />
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <ZappGeometricIcon shape={item.emoji || 'zap'} size={48} color="#a78bfa" accent="#f472b6" animate={false} />
+                  <span className="text-white/30 text-[10px] font-black tracking-widest uppercase">tap to play</span>
+                </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ background: 'rgba(0,0,0,0.5)' }}>
+                  style={{ background: 'rgba(0,0,0,0.6)' }}>
                   <span className="text-white font-black text-sm px-4 py-2 rounded-xl flex items-center gap-1.5"
                     style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}>
                     <ZappGeometricIcon shape="zap" size={14} color="#fff" accent="#fff" /> play

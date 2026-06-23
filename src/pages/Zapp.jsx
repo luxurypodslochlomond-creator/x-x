@@ -23,7 +23,7 @@ const Bolt = ({ size = 28 }) => (
 
 export default function Zapp() {
   const [idea, setIdea] = useState('');
-  const [phase, setPhase] = useState('gallery'); // gallery | home | building | play — gallery first, hook them instantly
+  const [phase, setPhase] = useState('home'); // home | gallery | building | play — land on builder, not gallery
   const [builderMode, setBuilderMode] = useState(false);
   const [builtHtml, setBuiltHtml] = useState('');
   const [appTitle, setAppTitle] = useState('');
