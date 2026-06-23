@@ -276,7 +276,7 @@ Copy exactly what it says — every word helps us check it.`}
           )}
 
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
-            Free. Nothing stored. Gone the moment we're done.
+            Free. Your text stays on your device.
           </p>
         </div>
       )}
@@ -286,7 +286,7 @@ Copy exactly what it says — every word helps us check it.`}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           style={{ padding: '16px 18px', borderRadius: 12, border: '1px solid rgba(239,68,68,0.4)', background: 'rgba(239,68,68,0.08)', textAlign: 'center' }}>
           <p style={{ fontSize: 13, color: '#ef4444', margin: '0 0 8px', fontWeight: 800 }}>Something went wrong</p>
-          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', margin: '0 0 10px' }}>{error}</p>
+          <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.55)', margin: '0 0 10px' }}>{error}</p>
           <button onClick={() => setError(null)} style={{ fontSize: 11, fontWeight: 800, color: '#ef4444', background: 'none', border: '1px solid rgba(239,68,68,0.4)', borderRadius: 8, padding: '6px 14px', cursor: 'pointer' }}>DISMISS</button>
         </motion.div>
       )}

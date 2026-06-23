@@ -267,7 +267,7 @@ Every clause matters. The more you give us, the better the analysis.`}
           )}
 
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0 }}>
-            Free forever. Nothing stored. Processed and gone instantly.
+            Free. Your contract stays on your device.
           </p>
         </div>
       )}
