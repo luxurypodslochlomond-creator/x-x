@@ -136,24 +136,12 @@ export default function Family51Page() {
           </div>
         </div>
 
-        {/* PRICING CALLOUT */}
-        <div style={{ textAlign: 'center', padding: '12px', background: 'rgba(217,119,6,0.05)', borderRadius: 12, marginBottom: 16, border: '1px solid rgba(217,119,6,0.12)' }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: '#d97706' }}>
-            From £9.99/month when you're ready for unlimited.
-          </div>
-        </div>
       </div>
 
-      {/* TRUST STRIP */}
-      <SortedTrustStrip />
-
-      {/* LIVE COUNTER */}
+      {/* LIVE COUNTER — social proof right after tools */}
       <div style={{ padding: '0 20px 16px', maxWidth: 520, margin: '0 auto' }}>
         <SortedLiveCounter />
       </div>
-
-      {/* DIVIDER */}
-      <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)', margin: '0 20px' }} />
 
       {/* YOUR CASES */}
       <div ref={caseHistoryRef} style={{ padding: '32px 20px 0', maxWidth: 520, margin: '0 auto' }}>
@@ -171,6 +159,9 @@ export default function Family51Page() {
       <div style={{ padding: '0 20px 24px', maxWidth: 520, margin: '0 auto' }}>
         <SortedHelplines />
       </div>
+
+      {/* TRUST STRIP — who we are, at the bottom as a trust signal */}
+      <SortedTrustStrip />
 
       {/* FOOTER */}
       <div style={{ padding: '40px 20px 32px', textAlign: 'center', marginTop: 24 }}>
