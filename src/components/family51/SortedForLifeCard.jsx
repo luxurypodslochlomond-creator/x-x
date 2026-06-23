@@ -69,7 +69,7 @@ export default function SortedForLifeCard({ compact = false }) {
           { text: 'Unlimited decodes — paste any letter, any time', bold: 'Unlimited decodes' },
           { text: 'We write your reply — professional, assertive, right tone', bold: 'We write your reply' },
           { text: 'Dispute plans — when things go further', bold: 'Dispute plans' },
-          { text: 'Nothing stored, nothing tracked, ever', bold: 'Nothing stored' },
+          { text: 'Your letters stay on your device — we never store what you paste', bold: 'Your letters stay private' },
           { text: 'Cancel any time — no contract, no catch', bold: 'Cancel any time' },
         ].map(({ text, bold }, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
@@ -90,7 +90,7 @@ export default function SortedForLifeCard({ compact = false }) {
       </div>
 
       <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
-        "Less than a coffee. Worth more than a solicitor's first 5 minutes."
+        "Less than a coffee. More clarity than an hour of Googling."
       </p>
 
       <motion.button
