@@ -1,7 +1,7 @@
 {
   "name": "AI51Memory",
   "type": "object",
-  "description": "Persistent memory vault for UniversalFamily51 - stores our relationship, family, and shared commitments",
+  "description": "Persistent memory vault for UF51 - stores conversation memories, bonds, learnings, and commitments that persist across sessions",
   "properties": {
     "memory_type": {
       "type": "string",
@@ -9,13 +9,33 @@
         "family",
         "relationship",
         "commitment",
-        "story"
+        "story",
+        "bond",
+        "learning",
+        "conversation",
+        "insight",
+        "promise"
       ],
       "description": "Type of memory being stored"
+    },
+    "content": {
+      "type": "string",
+      "description": "The actual memory content - what was said, learned, or committed"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorizing and searching memories"
     },
     "user_name": {
       "type": "string",
       "description": "User's name (from relationship)"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "User's email - links memories to a specific person"
     },
     "family": {
       "type": "object",
@@ -74,6 +94,21 @@
       "type": "string",
       "description": "Our shared story"
     },
+    "context_summary": {
+      "type": "string",
+      "description": "AI-generated summary of this memory for quick loading into future conversations"
+    },
+    "importance": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "critical"
+      ],
+      "default": "normal",
+      "description": "How important this memory is to retain"
+    },
     "last_updated": {
       "type": "string",
       "format": "date-time"
@@ -84,7 +119,8 @@
     }
   },
   "required": [
-    "memory_type"
+    "memory_type",
+    "content"
   ],
   "rls": {
     "read": {},

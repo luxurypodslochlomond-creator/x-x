@@ -644,7 +644,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       <COOLASFUCKErrorMonitor>
       {/* <DisasterResilienceMode /> */}
       <TruthCheckProtocol />
-      {/* <AI51MemoryVault /> - Hidden: redesign pending */}
+      <AI51MemoryVault />
       {/* <AI51PhotonMemory /> - Hidden until we have real memories stored */}
       {/* <RealtimeDebugger /> */}
       {/* <PerformanceMonitor /> */}
