@@ -66,12 +66,12 @@ export default function SortedForLifeCard({ compact = false }) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
         {[
-          { text: 'Unlimited decodes — paste, type, or snap a photo', bold: 'Unlimited decodes' },
-          { text: 'We write your reply — professional, assertive, right tone', bold: 'We write your reply' },
-          { text: 'Dispute plans — when things go further', bold: 'Dispute plans' },
-          { text: 'Your letters stay on your device — we never store what you paste', bold: 'Your letters stay private' },
-          { text: 'Cancel any time — no contract, no catch', bold: 'Cancel any time' },
-        ].map(({ text, bold }, i) => (
+          { bold: 'Unlimited decodes', rest: 'paste, type, or snap a photo' },
+          { bold: 'We write your reply', rest: 'professional, assertive, right tone' },
+          { bold: 'Dispute plans', rest: 'when things go further' },
+          { bold: 'Your letters stay private', rest: 'on your device — we never store what you paste' },
+          { bold: 'Cancel any time', rest: 'no contract, no catch' },
+        ].map(({ bold, rest }, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
             <div style={{
               width: 20, height: 20, borderRadius: '50%',
@@ -83,7 +83,7 @@ export default function SortedForLifeCard({ compact = false }) {
               </svg>
             </div>
             <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.72)', lineHeight: 1.5 }}>
-              <strong style={{ color: '#1a1208', fontWeight: 700 }}>{bold}</strong> — {text.replace(bold + ' — ', '')}
+              <strong style={{ color: '#1a1208', fontWeight: 700 }}>{bold}</strong> — {rest}
             </span>
           </div>
         ))}
