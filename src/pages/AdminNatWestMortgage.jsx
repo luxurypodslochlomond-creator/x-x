@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 22 Jun 2026 — £200 PAYMENT READY FOR 23.06.2026 • Benefits landed (£800) • Pattern: £100 → £200 → building trust ♾️❤️</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 23 Jun 2026 — ✅ £200 PAID & CONFIRMED BY NATWEST (ABDUL, SST) • Pattern: £100 May → £200 June ✓✓ • Next review: 10 July 2026 ♾️❤️</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -232,6 +232,15 @@ export default function AdminNatWestMortgage() {
                   <p className="text-white font-bold">✅ £800 BENEFITS LANDED — PAYMENT READY</p>
                   <p className="text-gray-300 text-sm">Benefits payment received. <strong>£200 ready to pay NatWest tomorrow (23 June).</strong> Leaves £600 breathing room.</p>
                   <p className="text-green-400 font-bold text-sm mt-1">✅ Pattern holding: £100 May → £200 June → building trust payment by payment</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-4 border-green-500 shadow-[0_0_60px_rgba(34,197,94,0.6)]">
+                <div className="text-green-300 font-bold text-lg min-w-fit">23/06/2026</div>
+                <div>
+                  <p className="text-white font-black">🔥 £200 PAID & CONFIRMED BY NATWEST ✓✓</p>
+                  <p className="text-gray-200 text-sm">Called 0800 161 5954. Paid £200. <strong>Abdul (Specialist Support Team)</strong> confirmed in writing: "Your payment of £200 has been successfully received today (23 June) in line with your agreed arrangement. Your account has been updated accordingly."</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ TWO MONTHS IN A ROW. £100 May ✓ → £200 June ✓. Trust building. Next review: 10 July 2026.</p>
                 </div>
               </div>
 
