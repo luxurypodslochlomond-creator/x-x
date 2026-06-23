@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { base44 } from '@/api/base44Client';
 
 const QUICK_IDEAS = [
   {
@@ -54,8 +55,8 @@ const QUICK_IDEAS = [
   },
 ];
 
-// Voice support check
-const hasVoice = typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
+// Voice support — MediaRecorder works reliably on iOS (webkitSpeechRecognition does not)
+const hasVoice = typeof window !== 'undefined' && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function' && typeof window.MediaRecorder !== 'undefined';
 
 // Custom geometric shape for each idea card — no emoji, pure CSS/SVG
 const IdeaShape = ({ shape, color, accent }) => {
@@ -125,9 +126,8 @@ export default function ZappCreator({ onSubmit }) {
   const [voiceText, setVoiceText] = useState('');
   const [voicePulse, setVoicePulse] = useState(false);
   const textareaRef = useRef(null);
-  const recognitionRef = useRef(null);
-  const lastTranscriptRef = useRef('');
-  const hasSubmittedRef = useRef(false); // prevent double-submit from onresult + onend race
+  const recorderRef = useRef(null);
+  const stopTimeoutRef = useRef(null);
 
   const handleSubmit = (text) => {
     const t = (text || value).trim();
@@ -154,91 +154,89 @@ export default function ZappCreator({ onSubmit }) {
   const startListening = async () => {
     if (!hasVoice) return;
 
-    // Request mic permission explicitly first (fixes iOS/Android first-tap issue)
+    let stream;
     try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch (err) {
-      // Permission denied — show a friendly message
       setVoiceText('Mic blocked! Please allow microphone access in your browser settings');
       setIsListening(false);
       setTimeout(() => setVoiceText(''), 4000);
       return;
     }
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognitionRef.current = recognition;
-    hasSubmittedRef.current = false;
-    lastTranscriptRef.current = '';
+    setIsListening(true);
+    setVoiceText('');
+    setVoicePulse(true);
 
-    // NO lang set — browser auto-detects speech language. Works for any language.
-    recognition.continuous = false;  // single utterance — most reliable cross-browser
-    recognition.interimResults = true;
+    // Pick a mimeType the browser actually supports (iOS Safari doesn't support audio/webm)
+    let mimeType = 'audio/webm';
+    if (!MediaRecorder.isTypeSupported(mimeType)) {
+      mimeType = 'audio/mp4';
+    }
+    if (!MediaRecorder.isTypeSupported(mimeType)) {
+      mimeType = ''; // let browser choose default
+    }
 
-    recognition.onstart = () => {
-      setIsListening(true);
-      setVoiceText('');
-      setVoicePulse(true);
-    };
+    const recorder = mimeType
+      ? new MediaRecorder(stream, { mimeType })
+      : new MediaRecorder(stream);
+    recorderRef.current = recorder;
+    const chunks = [];
 
-    recognition.onresult = (event) => {
-      let interim = '';
-      let final = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) {
-          final += event.results[i][0].transcript;
+    recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+
+    recorder.onstop = async () => {
+      // Release the mic immediately
+      stream.getTracks().forEach(t => t.stop());
+
+      const blob = new Blob(chunks, { type: recorder.mimeType || 'audio/webm' });
+      if (blob.size < 1000) {
+        setIsListening(false);
+        setVoicePulse(false);
+        setVoiceText('Nothing heard — tap and try again');
+        setTimeout(() => setVoiceText(''), 4000);
+        return;
+      }
+
+      setVoiceText('transcribing...');
+
+      try {
+        const ext = (recorder.mimeType || '').includes('mp4') ? 'm4a' : 'webm';
+        const file = new File([blob], `voice.${ext}`, { type: blob.type });
+        const { file_url } = await base44.integrations.Core.UploadFile({ file });
+        const result = await base44.integrations.Core.TranscribeAudio({ audio_url: file_url });
+
+        const text = (typeof result === 'string' ? result : result?.text || result?.transcript || '').trim();
+        if (text.length >= 3) {
+          setVoiceText(text);
+          setValue(text);
+          setTimeout(() => onSubmit(text), 400);
         } else {
-          interim += event.results[i][0].transcript;
+          setVoiceText('Nothing heard — tap and try again');
+          setTimeout(() => setVoiceText(''), 4000);
         }
-      }
-
-      // Always update display with whatever we have
-      const latest = final || interim;
-      if (latest) {
-        lastTranscriptRef.current = latest;
-        setVoiceText(latest);
-      }
-    };
-
-    recognition.onerror = (e) => {
-      setIsListening(false);
-      setVoicePulse(false);
-      lastTranscriptRef.current = '';
-      const msgs = {
-        'not-allowed': 'Mic blocked! Check browser settings',
-        'no-speech': 'Nothing heard — tap and try again',
-        'network': 'Network error — check your connection',
-        'aborted': '',
-      };
-      const msg = msgs[e.error] || `Mic error: ${e.error}`;
-      if (msg) {
-        setVoiceText(msg);
+      } catch (err) {
+        console.error('ZAPP voice transcription error:', err);
+        setVoiceText('Could not transcribe — try again');
         setTimeout(() => setVoiceText(''), 4000);
       }
-    };
-
-    // onend always fires — this is where we submit
-    recognition.onend = () => {
       setIsListening(false);
       setVoicePulse(false);
-      if (!hasSubmittedRef.current) {
-        const captured = lastTranscriptRef.current.trim();
-        if (captured.length >= 3) {
-          hasSubmittedRef.current = true;
-          setVoiceText(captured);
-          setValue(captured); // also put it in the text box as fallback
-          setTimeout(() => onSubmit(captured), 400);
-        }
-      }
     };
 
-    recognition.start();
+    recorder.start();
+
+    // Auto-stop after 15 seconds max
+    stopTimeoutRef.current = setTimeout(() => {
+      if (recorder.state === 'recording') recorder.stop();
+    }, 15000);
   };
 
   const stopListening = () => {
-    recognitionRef.current?.stop();
-    setIsListening(false);
-    setVoicePulse(false);
+    if (stopTimeoutRef.current) clearTimeout(stopTimeoutRef.current);
+    if (recorderRef.current && recorderRef.current.state === 'recording') {
+      recorderRef.current.stop();
+    }
   };
 
   return (
