@@ -7,6 +7,7 @@ import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { useSortedGeoPrice } from '@/hooks/useSortedGeoPrice';
 import SortedTrustStrip from '@/components/family51/SortedTrustStrip';
+import SortedHelplines from '@/components/family51/SortedHelplines';
 export default function Family51Page() {
   const engineRef = useRef(null);
   const { isPremium, recordUse, isLocked } = useSortedUsage();
@@ -53,6 +54,21 @@ export default function Family51Page() {
         }}>
           We'll decode it into plain language — any language — then tell you exactly what to do.
         </p>
+      </div>
+
+      {/* HOW IT WORKS */}
+      <div style={{ padding: '8px 20px 20px', maxWidth: 520, margin: '0 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+          {['Paste your letter', 'Get plain English', 'Know your next step'].map((step, i) => (
+            <React.Fragment key={i}>
+              <div style={{ flex: 1, textAlign: 'center' }}>
+                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(217,119,6,0.1)', border: '1.5px solid rgba(217,119,6,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px', fontSize: 12, fontWeight: 900, color: '#d97706' }}>{i + 1}</div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.6)', lineHeight: 1.3 }}>{step}</div>
+              </div>
+              {i < 2 && <div style={{ width: 16, height: 1, background: 'rgba(217,119,6,0.2)', flexShrink: 0 }} />}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
 
       {/* MAIN CARDS */}
@@ -116,7 +132,7 @@ export default function Family51Page() {
             All languages supported
           </div>
           <div style={{ background: 'rgba(217,119,6,0.06)', padding: '6px 12px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#d97706', border: '1px solid rgba(217,119,6,0.15)' }}>
-            Nothing stored. No account. No trace.
+            Your letters stay on your device
           </div>
         </div>
 
@@ -153,45 +169,7 @@ export default function Family51Page() {
 
       {/* HUMAN HELP STRIP */}
       <div style={{ padding: '0 20px 24px', maxWidth: 520, margin: '0 auto' }}>
-        <div style={{ background: 'rgba(217,119,6,0.03)', borderRadius: 16, padding: '18px 20px', border: '1px solid rgba(217,119,6,0.12)' }}>
-          <div style={{ fontSize: 10, fontWeight: 800, color: '#d97706', letterSpacing: '0.14em', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.36 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#d97706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            NEED A HUMAN RIGHT NOW?
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <a href="tel:08001448848" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 12, padding: '12px 16px', border: '1px solid rgba(217,119,6,0.1)', transition: 'border-color 0.15s' }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208' }}>Citizens Advice</div>
-                <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>Free advice — debt, housing, benefits</div>
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 800, color: '#d97706', fontFamily: 'monospace' }}>0800 144 8848</div>
-            </a>
-            <a href="tel:08088084000" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 12, padding: '12px 16px', border: '1px solid rgba(217,119,6,0.1)' }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208' }}>National Debtline</div>
-                <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>Free debt advice — UK</div>
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 800, color: '#d97706', fontFamily: 'monospace' }}>0808 808 4000</div>
-            </a>
-            <a href="tel:08088004444" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 12, padding: '12px 16px', border: '1px solid rgba(217,119,6,0.1)' }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208' }}>Shelter</div>
-                <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>Housing, eviction, homelessness</div>
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 800, color: '#d97706', fontFamily: 'monospace' }}>0808 800 4444</div>
-            </a>
-            <a href="tel:08001381111" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', background: '#fff', borderRadius: 12, padding: '12px 16px', border: '1px solid rgba(217,119,6,0.1)' }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208' }}>StepChange</div>
-                <div style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)' }}>Free debt management plans</div>
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 800, color: '#d97706', fontFamily: 'monospace' }}>0800 138 1111</div>
-            </a>
-          </div>
-          <div style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', marginTop: 12, textAlign: 'center' }}>All free. All UK-based. Tap to call.</div>
-        </div>
+        <SortedHelplines />
       </div>
 
       {/* FOOTER */}

@@ -66,7 +66,7 @@ export default function SortedForLifeCard({ compact = false }) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
         {[
-          { text: 'Unlimited decodes — paste any letter, any time', bold: 'Unlimited decodes' },
+          { text: 'Unlimited decodes — paste, type, or snap a photo', bold: 'Unlimited decodes' },
           { text: 'We write your reply — professional, assertive, right tone', bold: 'We write your reply' },
           { text: 'Dispute plans — when things go further', bold: 'Dispute plans' },
           { text: 'Your letters stay on your device — we never store what you paste', bold: 'Your letters stay private' },
@@ -102,7 +102,7 @@ export default function SortedForLifeCard({ compact = false }) {
           fontSize: 16, fontWeight: 900, letterSpacing: '0.04em',
           cursor: loading ? 'not-allowed' : 'pointer',
           border: 'none',
-          background: loading ? 'rgba(249,115,22,0.2)' : '#d97706',
+          background: loading ? 'rgba(217,119,6,0.2)' : '#d97706',
           color: loading ? 'rgba(26,18,8,0.4)' : '#fff',
           transition: 'all 0.2s',
           boxShadow: loading ? 'none' : '0 4px 16px rgba(217,119,6,0.25)',
