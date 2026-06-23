@@ -106,12 +106,15 @@ export default function SortedLayout({ children, currentPage }) {
             WebkitTapHighlightColor: 'transparent',
             textDecoration: 'none',
           }}
-          title={caseCount > 0 ? `Your ${caseCount} saved case${caseCount > 1 ? 's' : ''} — tap to scroll` : 'No cases yet — they appear here when you decode letters'}
+          title={caseCount > 0 ? `Vault: ${caseCount} case${caseCount > 1 ? 's' : ''} secured — tap to open` : 'Your vault is empty — decode a letter to start'}
         >
           <svg width="14" height="14" viewBox="0 0 15 15" fill="none">
-            <rect x="2" y="4" width="11" height="9" rx="1.2" stroke="#d97706" strokeWidth="1.2" fill="none" />
-            <path d="M5 4V3a2.5 2.5 0 015 0v1" stroke="#d97706" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-            <path d="M4.5 8h6M4.5 10.5h4" stroke="#d97706" strokeWidth="1.1" strokeLinecap="round" opacity="0.6" />
+            <rect x="2" y="3" width="11" height="10" rx="1.5" stroke="#d97706" strokeWidth="1.2" fill="none" />
+            <rect x="5" y="5.5" width="5" height="5" rx="0.8" stroke="#d97706" strokeWidth="1.1" fill="none" />
+            <circle cx="7.5" cy="8" r="1.3" stroke="#d97706" strokeWidth="1" fill="none" />
+            <path d="M7.5 9.3v1.2" stroke="#d97706" strokeWidth="0.9" strokeLinecap="round" />
+            <circle cx="4" cy="6" r="0.5" fill="#d97706" opacity="0.5" />
+            <circle cx="4" cy="10" r="0.5" fill="#d97706" opacity="0.5" />
           </svg>
           <span style={{ fontSize: 11, fontWeight: 800, color: '#d97706', fontFamily: 'monospace', letterSpacing: '0.04em' }}>{caseCount}</span>
         </Link>

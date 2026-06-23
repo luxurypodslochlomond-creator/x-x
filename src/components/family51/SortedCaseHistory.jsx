@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, FileText, ChevronDown, Share2, Mail, Download, ArrowRight, Plus, Pencil, Check, X } from 'lucide-react';
+import { Trash2, FileText, ChevronDown, Share2, Mail, Download, ArrowRight, Plus, Pencil, Check, X, Lock, Shield, Archive } from 'lucide-react';
 import { anonymizeCase } from '@/utils/anonymizeCase';
 import { base44 } from '@/api/base44Client';
 import SortedFollowUp from '@/components/family51/SortedFollowUp';
@@ -622,6 +622,61 @@ function CaseCard({ caseItem, onDelete, onContinue, onEdit, onFollowUpSaved, lin
   );
 }
 
+// ── VAULT HEADER ──
+function VaultHeader({ count, isPremium }) {
+  return (
+    <div style={{
+      borderRadius: 16, overflow: 'hidden',
+      background: 'linear-gradient(135deg, rgba(217,119,6,0.06) 0%, rgba(8,145,178,0.04) 100%)',
+      border: '1.5px solid rgba(217,119,6,0.12)',
+      marginBottom: 20,
+    }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 14, padding: '18px 20px',
+        borderBottom: count > 0 ? '1px solid rgba(217,119,6,0.08)' : 'none',
+      }}>
+        <div style={{
+          width: 48, height: 48, borderRadius: 12, flexShrink: 0,
+          background: 'rgba(217,119,6,0.08)', border: '1.5px solid rgba(217,119,6,0.2)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <Lock size={22} color="#d97706" strokeWidth={2.2} />
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.18em', color: 'rgba(26,18,8,0.35)', marginBottom: 2 }}>
+            YOUR CASE VAULT
+          </div>
+          <h2 style={{ fontSize: 22, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.1 }}>
+            {count === 0 ? 'Empty vault' : count === 1 ? '1 case secured' : `${count} cases secured`}
+          </h2>
+        </div>
+        {isPremium ? (
+          <span style={{
+            fontSize: 9, fontWeight: 900, color: '#22c55e', letterSpacing: '0.12em',
+            background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)',
+            borderRadius: 6, padding: '4px 8px', flexShrink: 0,
+          }}>UNLIMITED</span>
+        ) : (
+          <span style={{
+            fontSize: 11, fontWeight: 800, color: 'rgba(26,18,8,0.3)', flexShrink: 0,
+          }}>
+            {count}/{FREE_CASE_LIMIT}
+          </span>
+        )}
+      </div>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px',
+        background: 'rgba(34,197,94,0.04)',
+      }}>
+        <Shield size={13} color="#22c55e" strokeWidth={2.5} style={{ flexShrink: 0 }} />
+        <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0, fontWeight: 600, lineHeight: 1.4 }}>
+          Locked to this device · Only you can see this · Nothing leaves your phone
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ── MAIN EXPORT ──
 export default function SortedCaseHistory({ onContinue, isPremium = false }) {
   const [cases, setCases] = useState([]);
@@ -673,28 +728,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
 
   return (
     <div style={{ maxWidth: 560, margin: '0 auto', padding: '32px 20px 60px' }}>
-      {/* HEADER */}
-      <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(26,18,8,0.3)', marginBottom: 6 }}>
-          SAVED ON THIS DEVICE
-        </div>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', margin: 0 }}>My Cases</h2>
-          <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.35)' }}>
-            {cases.length}{!isPremium ? ` / ${FREE_CASE_LIMIT}` : ''}
-          </span>
-          {isPremium && (
-            <span style={{
-              fontSize: 10, fontWeight: 900, color: '#22c55e', letterSpacing: '0.1em',
-              background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)',
-              borderRadius: 6, padding: '3px 10px',
-            }}>PREMIUM</span>
-          )}
-        </div>
-        <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.4)', margin: '8px 0 0', lineHeight: 1.5 }}>
-          Nothing leaves your phone. Tap a case to view the full breakdown.
-        </p>
-      </div>
+      <VaultHeader count={cases.length} isPremium={isPremium} />
 
       {/* FILTER TABS */}
       {cases.length > 0 && (
@@ -738,12 +772,18 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
           border: '1.5px dashed rgba(217,119,6,0.15)', borderRadius: 16,
           background: 'rgba(217,119,6,0.02)',
         }}>
-          <FileText size={32} color="rgba(217,119,6,0.3)" style={{ marginBottom: 16 }} />
+          <div style={{
+            width: 56, height: 56, borderRadius: 14, margin: '0 auto 16px',
+            background: 'rgba(217,119,6,0.06)', border: '1.5px solid rgba(217,119,6,0.15)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <Archive size={26} color="rgba(217,119,6,0.35)" strokeWidth={1.8} />
+          </div>
           <p style={{ fontSize: 15, fontWeight: 700, color: 'rgba(26,18,8,0.5)', margin: '0 0 6px' }}>
-            {cases.length === 0 ? 'No cases yet' : 'No cases of this type'}
+            {cases.length === 0 ? 'Your vault is empty' : 'No cases of this type'}
           </p>
           <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.35)', margin: 0, lineHeight: 1.6 }}>
-            {cases.length === 0 ? 'Decode a letter and it\'ll appear here.' : 'Try a different filter.'}
+            {cases.length === 0 ? 'Decode a letter and it lands here — safe, private, ready when you need it.' : 'Try a different filter.'}
           </p>
         </div>
       ) : (
@@ -779,7 +819,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
             }}
           >
             <Trash2 size={13} />
-            {confirmWipe ? 'TAP AGAIN TO DELETE ALL' : 'Wipe all cases'}
+            {confirmWipe ? 'TAP AGAIN TO WIPE VAULT' : 'Wipe entire vault'}
           </motion.button>
         </div>
       )}
