@@ -9,8 +9,8 @@ const STORAGE_KEY = 'sorted_case_history_v1';
 const FREE_CASE_LIMIT = 10;
 
 const TOOL_CONFIG = {
-  letter:   { label: 'DECODED', color: '#f97316', bg: 'rgba(249,115,22,0.08)' },
-  reply:    { label: 'REPLY',   color: '#06b6d4', bg: 'rgba(6,182,212,0.08)' },
+  letter:   { label: 'DECODED', color: '#d97706', bg: 'rgba(217,119,6,0.08)' },
+  reply:    { label: 'REPLY',   color: '#0891b2', bg: 'rgba(8,145,178,0.08)' },
   conflict: { label: 'DISPUTE', color: '#ef4444', bg: 'rgba(239,68,68,0.08)' },
 };
 
@@ -233,11 +233,11 @@ function CaseContent({ caseItem }) {
       {parsed.key_deadline && parsed.key_deadline !== 'No deadline mentioned' && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: 10, padding: '12px 16px',
-          borderRadius: 12, background: 'rgba(249,115,22,0.08)', border: '1.5px solid rgba(249,115,22,0.3)',
+          borderRadius: 12, background: 'rgba(217,119,6,0.08)', border: '1.5px solid rgba(217,119,6,0.3)',
           marginBottom: 12,
         }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#f97316', animation: 'sortedPing 2s infinite' }} />
-          <span style={{ fontSize: 13, fontWeight: 800, color: '#f97316' }}>Deadline: {safeStr(parsed.key_deadline)}</span>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#d97706', animation: 'sortedPing 2s infinite' }} />
+          <span style={{ fontSize: 13, fontWeight: 800, color: '#d97706' }}>Deadline: {safeStr(parsed.key_deadline)}</span>
         </div>
       )}
     </div>
@@ -666,8 +666,8 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
 
   const filterTabs = [
     { id: 'all',      label: 'ALL',      color: '#1a1208' },
-    { id: 'letter',   label: 'DECODED',  color: '#f97316' },
-    { id: 'reply',    label: 'REPLIES',  color: '#06b6d4' },
+    { id: 'letter',   label: 'DECODED',  color: '#d97706' },
+    { id: 'reply',    label: 'REPLIES',  color: '#0891b2' },
     { id: 'conflict', label: 'DISPUTES', color: '#ef4444' },
   ];
 
@@ -735,10 +735,10 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
       {filtered.length === 0 ? (
         <div style={{
           textAlign: 'center', padding: '52px 24px',
-          border: '1.5px dashed rgba(249,115,22,0.15)', borderRadius: 16,
-          background: 'rgba(249,115,22,0.02)',
+          border: '1.5px dashed rgba(217,119,6,0.15)', borderRadius: 16,
+          background: 'rgba(217,119,6,0.02)',
         }}>
-          <FileText size={32} color="rgba(249,115,22,0.3)" style={{ marginBottom: 16 }} />
+          <FileText size={32} color="rgba(217,119,6,0.3)" style={{ marginBottom: 16 }} />
           <p style={{ fontSize: 15, fontWeight: 700, color: 'rgba(26,18,8,0.5)', margin: '0 0 6px' }}>
             {cases.length === 0 ? 'No cases yet' : 'No cases of this type'}
           </p>

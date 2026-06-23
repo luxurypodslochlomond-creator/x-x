@@ -23,16 +23,16 @@ export default function SortedTrustStrip() {
             flexShrink: 0,
             width: 36,
             height: 36,
-            borderRadius: 9,
-            background: 'rgba(212,118,10,0.08)',
-            border: '1px solid rgba(212,118,10,0.2)',
+            borderRadius: 10,
+            background: 'rgba(217,119,6,0.08)',
+            border: '1px solid rgba(217,119,6,0.2)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2Z" stroke="#d4760a" strokeWidth="1.8" strokeLinejoin="round"/>
-              <path d="M9 12l2 2 4-4" stroke="#d4760a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2Z" stroke="#d97706" strokeWidth="1.8" strokeLinejoin="round"/>
+              <path d="M9 12l2 2 4-4" stroke="#d97706" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
 
@@ -42,9 +42,9 @@ export default function SortedTrustStrip() {
                 fontSize: 10,
                 fontWeight: 800,
                 letterSpacing: '0.08em',
-                color: '#d4760a',
-                background: 'rgba(212,118,10,0.08)',
-                border: '1px solid rgba(212,118,10,0.2)',
+                color: '#d97706',
+                background: 'rgba(217,119,6,0.08)',
+                border: '1px solid rgba(217,119,6,0.2)',
                 borderRadius: 20,
                 padding: '2px 8px',
               }}>
@@ -53,8 +53,8 @@ export default function SortedTrustStrip() {
             </div>
             <p style={{
               fontSize: 13,
-              fontWeight: 600,
-              color: '#1a1a1a',
+              fontWeight: 700,
+              color: '#1a1208',
               margin: '0 0 2px',
               lineHeight: 1.4,
             }}>
@@ -62,7 +62,7 @@ export default function SortedTrustStrip() {
             </p>
             <p style={{
               fontSize: 12,
-              color: '#888',
+              color: 'rgba(26,18,8,0.5)',
               margin: 0,
               lineHeight: 1.5,
             }}>
@@ -72,39 +72,39 @@ export default function SortedTrustStrip() {
         </div>
 
         {/* Divider */}
-        <div style={{ height: 1, background: 'rgba(0,0,0,0.05)' }} />
+        <div style={{ height: 1, background: 'rgba(26,18,8,0.06)' }} />
 
         {/* Bottom row — principles */}
         <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
           {/* Lock icon — Nothing stored */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-              <rect x="5" y="11" width="14" height="10" rx="2" stroke="#888" strokeWidth="1.8"/>
-              <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="#888" strokeWidth="1.8" strokeLinecap="round"/>
+              <rect x="5" y="11" width="14" height="10" rx="2" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8"/>
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8" strokeLinecap="round"/>
             </svg>
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#888' }}>Nothing stored</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.5)' }}>Nothing stored</span>
           </div>
           {/* Globe icon — Any country */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="9" stroke="#888" strokeWidth="1.8"/>
-              <path d="M3 12h18M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9" stroke="#888" strokeWidth="1.8" strokeLinecap="round"/>
+              <circle cx="12" cy="12" r="9" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8"/>
+              <path d="M3 12h18M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8" strokeLinecap="round"/>
             </svg>
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#888' }}>Any country</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.5)' }}>Any country</span>
           </div>
           {/* Translate icon — All languages */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-              <path d="M4 5h10M9 3v2M5 9c0 2 2 4 4 5M9 14s-1-1-2-3" stroke="#888" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M14 20l3-7 3 7M15.5 17h3" stroke="#888" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4 5h10M9 3v2M5 9c0 2 2 4 4 5M9 14s-1-1-2-3" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M14 20l3-7 3 7M15.5 17h3" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#888' }}>All languages</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.5)' }}>All languages</span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
             <a href="/SortedAbout" style={{
               fontSize: 11,
               fontWeight: 700,
-              color: '#d4760a',
+              color: '#d97706',
               textDecoration: 'none',
               letterSpacing: '0.02em',
             }}>

@@ -19,8 +19,8 @@ export default function SortedLiveCounter() {
       style={{
         padding: '18px 22px',
         borderRadius: 16,
-        background: 'linear-gradient(135deg, rgba(245,166,35,0.04) 0%, rgba(245,166,35,0.02) 100%)',
-        border: '1.5px solid rgba(245,166,35,0.15)',
+        background: 'linear-gradient(135deg, rgba(217,119,6,0.04) 0%, rgba(217,119,6,0.02) 100%)',
+        border: '1.5px solid rgba(217,119,6,0.15)',
         display: 'flex',
         alignItems: 'center',
         gap: 14,

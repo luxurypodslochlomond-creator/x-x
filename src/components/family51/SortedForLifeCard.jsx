@@ -41,14 +41,14 @@ export default function SortedForLifeCard({ compact = false }) {
       style={{
         marginTop: compact ? 0 : 0,
         padding: compact ? '24px 20px' : '28px 24px',
-        border: '2px solid rgba(245,166,35,0.45)',
+        border: '2px solid rgba(217,119,6,0.45)',
         borderRadius: 20,
-        background: 'linear-gradient(150deg, rgba(249,115,22,0.06) 0%, rgba(217,119,6,0.02) 100%)',
-        boxShadow: '0 4px 20px rgba(245,166,35,0.06)',
+        background: 'linear-gradient(150deg, rgba(217,119,6,0.06) 0%, rgba(217,119,6,0.02) 100%)',
+        boxShadow: '0 4px 20px rgba(217,119,6,0.06)',
       }}
     >
       <div style={{ marginBottom: 22 }}>
-        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#f97316', margin: '0 0 10px' }}>
+        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#d97706', margin: '0 0 10px' }}>
           NEVER BE STUCK AGAIN
         </p>
         <p style={{ fontSize: 24, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.025em', margin: '0 0 8px', lineHeight: 1.1 }}>
@@ -75,7 +75,7 @@ export default function SortedForLifeCard({ compact = false }) {
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
             <div style={{
               width: 20, height: 20, borderRadius: '50%',
-              background: 'rgba(245,166,35,0.12)', border: '1.5px solid rgba(245,166,35,0.3)',
+              background: 'rgba(217,119,6,0.12)', border: '1.5px solid rgba(217,119,6,0.3)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1,
             }}>
               <svg width="10" height="10" viewBox="0 0 9 9" fill="none">

@@ -56,9 +56,9 @@ function NativeButton({ onClick, children, style, className }) {
 
 const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, recordUse, isLocked, onPaywall }, ref) {
   const TOOL_COLORS = {
-    letter:   { color: '#f5a623', bg: 'rgba(245,166,35,0.08)',  border: 'rgba(245,166,35,0.35)',  label: 'DECODE A LETTER',    hint: 'Paste, type or snap a photo of your letter below.' },
+    letter:   { color: '#d97706', bg: 'rgba(217,119,6,0.08)',  border: 'rgba(217,119,6,0.35)',  label: 'DECODE A LETTER',    hint: 'Paste, type or snap a photo of your letter below.' },
     scam:     { color: '#ef4444', bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.35)',   label: 'SCAM CHECK',         hint: 'Paste the message, email or text below — or snap a photo.' },
-    reply:    { color: '#2563eb', bg: 'rgba(37,99,235,0.08)',   border: 'rgba(37,99,235,0.35)',   label: 'WRITE A REPLY',      hint: 'Describe the situation below and we\'ll write the letter for you.' },
+    reply:    { color: '#0891b2', bg: 'rgba(8,145,178,0.08)',   border: 'rgba(8,145,178,0.35)',   label: 'WRITE A REPLY',      hint: 'Describe the situation below and we\'ll write the letter for you.' },
     conflict: { color: '#059669', bg: 'rgba(5,150,105,0.08)',   border: 'rgba(5,150,105,0.35)',   label: 'RESOLVE A DISPUTE',  hint: 'Tell us what\'s happening below — we\'ll give you a clear plan.' },
     contract: { color: '#7c3aed', bg: 'rgba(124,58,237,0.08)', border: 'rgba(124,58,237,0.35)',  label: 'CHECK A CONTRACT',   hint: 'Paste the contract text or clause you\'re unsure about.' },
   };
