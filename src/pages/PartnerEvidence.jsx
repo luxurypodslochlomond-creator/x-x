@@ -3,17 +3,17 @@ import { motion } from 'framer-motion';
 import { jsPDF } from 'jspdf';
 
 // UF51 — Evidence One-Pager
-// SORTED colour palette. Warm amber on cream.
-// Every number sourced. Every link real. No bullshit.
+// Simple. Custom. Honest. Amber on cream.
+// Numbers are real, but context is achievable — not unicorn fantasy.
 
 const AMBER = '#d97706';
 const AMBER_DARK = '#b45309';
-const AMBER_LIGHT = 'rgba(217,119,6,0.06)';
 const CREAM = '#fdf9f0';
 const CREAM_DEEP = '#faf8f5';
 const INK = '#1a1208';
 const INK_SOFT = '#5a4a35';
 const INK_MUTE = '#9a8a70';
+const BORDER = 'rgba(217,119,6,0.18)';
 
 export default function PartnerEvidence() {
   const [copied, setCopied] = useState(false);
@@ -30,7 +30,7 @@ export default function PartnerEvidence() {
   const handlePDF = () => {
     setSaving(true);
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-    const margin = 18;
+    const margin = 20;
     const pageWidth = 210;
     const usable = pageWidth - margin * 2;
     let y = margin;
@@ -51,359 +51,206 @@ export default function PartnerEvidence() {
     const divider = () => {
       doc.setDrawColor(225, 215, 195);
       doc.line(margin, y, pageWidth - margin, y);
-      y += 5;
+      y += 6;
     };
 
-    // HEADER
     addText('UF51', 22, true, [26, 18, 8], 1);
-    addText('EVIDENCE PACK — JUNE 2026', 7, true, [180, 130, 6], 6);
+    addText('EVIDENCE — JUNE 2026', 8, true, [180, 130, 6], 8);
 
-    // HERO
-    addText('The data behind the decision.', 15, true, [26, 18, 8], 2);
-    addText('Every claim below is backed by publicly available research or verifiable technical fact. Sources cited inline. Full source list at the end. Conservative figures used throughout — where a range exists, the lower bound is quoted.', 10, false, [80, 70, 50], 6);
-
-    divider();
-
-    // MARKET INTELLIGENCE
-    addText('1. MARKET INTELLIGENCE', 12, true, [180, 130, 6], 3);
-
-    addText('PetSounds51 — Pet Care & Animal Wellness', 10, true, [180, 130, 6], 2);
-    addText('Global pet care market: ~$263 billion (2024), growing at ~5.9% CAGR (Grand View Research). US pet spending: $158 billion in 2024 (APPA). UK pet population: ~13 million dogs, ~12 million cats (PFMA/UK Pet Food, 2024). Spending on pet wellness is recession-resilient and accelerating as pets are increasingly treated as family members.', 9, false, [80, 70, 50], 4);
-
-    addText('SORTED — Legal Technology & Access to Justice', 10, true, [180, 130, 6], 2);
-    addText('Global legal tech market: ~$29 billion (2025), projected ~$73 billion by 2035, CAGR ~9.4% (Precedence Research). AI-powered document processing is the frontier of one of the fastest-growing B2B sectors.', 9, false, [80, 70, 50], 4);
-
-    addText('Earth51 — ESG & Environmental Services', 10, true, [180, 130, 6], 2);
-    addText('ESG reporting is now mandatory for large EU companies under the Corporate Sustainability Reporting Directive (CSRD, European Commission). Global green bond issuance reached ~$700 billion in 2024 (Bank for International Settlements / Climate Bonds Initiative). Verified, fraud-proof environmental impact data is a genuine and growing market need as reporting requirements tighten.', 9, false, [80, 70, 50], 6);
+    addText('Small team. Real products. Honest numbers.', 14, true, [26, 18, 8], 3);
+    addText('Three products are live and taking real payments via Stripe. This page exists to give you context — what is built, what the markets look like, and what is honestly achievable. No unicorn projections. Sourced figures throughout.', 10, false, [80, 70, 50], 8);
 
     divider();
 
-    // SCIENTIFIC RESEARCH
-    addText('2. SCIENTIFIC RESEARCH BACKING', 12, true, [26, 18, 8], 3);
-    addText('The science behind PetSounds51 builds on published, peer-reviewed research in veterinary psychoacoustics:', 9, false, [80, 70, 50], 3);
-    addText('- Noise anxiety (including storm and fireworks phobia) in dogs is a clinically recognised condition with established behavioural and pharmacological treatment protocols. (PMC/NIH: "Therapy and Prevention of Noise Fears in Dogs" — review, 2023)', 9, false, [80, 70, 50], 2);
-    addText('- Music as a perioperative, non-pharmacological intervention to reduce stress in dogs and cats is an active area of veterinary research. (Frontiers in Veterinary Science, 2025)', 9, false, [80, 70, 50], 2);
-    addText('- Psychoacoustically designed music significantly reduced anxiety-related behaviours in dogs compared with conventional music in observational studies. (Through a Dog\'s Ear / iCalmPet research, Leeds & Spector)', 9, false, [80, 70, 50], 2);
-    addText('- Bioacoustic and species-appropriate sound therapy is used in veterinary practice as a complementary stress-reduction tool. (IVC Journal)', 9, false, [80, 70, 50], 6);
+    // WHAT'S LIVE
+    addText('WHAT IS ACTUALLY LIVE', 11, true, [180, 130, 6], 4);
+
+    addText('PetSounds51', 10, true, [26, 18, 8], 2);
+    addText('Sound therapy for anxious pets. Browser-native, no app download. Species-specific protocols for dogs, cats, horses. Live on Stripe: £29.99/year, £9.99/month.', 9, false, [80, 70, 50], 4);
+
+    addText('SORTED', 10, true, [26, 18, 8], 2);
+    addText('Legal document decoder — any language, any jurisdiction. Documents processed in memory, never stored. PWA with local case vault. Live on Stripe: £9.99/month, £9.99 lifetime.', 9, false, [80, 70, 50], 4);
+
+    addText('Earth51', 10, true, [26, 18, 8], 2);
+    addText('AI-verified litter collection with fraud detection. COPPA-compliant. Generates verified ESG impact data. Status: functional but needs refinement before public launch.', 9, false, [80, 70, 50], 8);
 
     divider();
 
-    // ACCESS TO JUSTICE CRISIS
-    addText('3. THE ACCESS TO JUSTICE CRISIS', 12, true, [180, 130, 6], 3);
-    addText('SORTED exists because the system is broken. This is documented, not opinion:', 9, false, [80, 70, 50], 3);
-    addText('- 92% of low-income Americans receive no or inadequate professional legal help for their civil legal problems. (Legal Services Corporation — "The Justice Gap" report)', 9, false, [80, 70, 50], 2);
-    addText("- Legal aid 'deserts' are growing across England and Wales, with significant areas having no local provider for housing, family, or immigration law. (The Law Society, UK)", 9, false, [80, 70, 50], 2);
-    addText('- Criminal legal aid duty solicitor numbers have declined approximately 30% since 2014/15. (Institute for Government — Performance Tracker)', 9, false, [80, 70, 50], 6);
+    // MARKET CONTEXT
+    addText('MARKET CONTEXT (WHY THESE PRODUCTS)', 11, true, [180, 130, 6], 4);
+
+    addText('Pet care is a growing, recession-resilient market. Global market ~$263B (2024, Grand View Research). UK has ~13M dogs and ~12M cats (PFMA / UK Pet Food). Spending on pet wellness accelerates as pets are treated as family.', 9, false, [80, 70, 50], 4);
+
+    addText('Legal tech is growing fast — ~$29B (2025), projected ~$73B by 2035, CAGR ~9.4% (Precedence Research). The access-to-justice crisis creates real demand: 92% of low-income Americans get no or inadequate legal help (Legal Services Corporation). UK legal aid deserts are expanding (The Law Society).', 9, false, [80, 70, 50], 4);
+
+    addText('ESG reporting is now regulated. The EU CSRD makes sustainability reporting mandatory for large companies (European Commission). Global green bond issuance reached ~$700B in 2024 (BIS / Climate Bonds Initiative). Verified environmental data is a genuine need.', 9, false, [80, 70, 50], 8);
 
     divider();
 
-    // TECHNICAL FACTS
-    addText('4. TECHNICAL FACTS — WHAT IS ACTUALLY BUILT', 12, true, [26, 18, 8], 3);
-    addText('PetSounds51: Browser-native real-time audio synthesis. No app download, no hardware. PWA, works offline. Species-specific protocols for dogs, cats, horses. Stripe live: £29.99/year, £9.99/month.', 9, false, [80, 70, 50], 3);
-    addText('SORTED: AI-powered legal document decoder. Any language, any jurisdiction. Documents processed in memory and never stored server-side. PWA with local case vault. Stripe live: £9.99/month, £9.99 lifetime.', 9, false, [80, 70, 50], 3);
-    addText('Earth51: AI-verified litter collection with fraud detection and weight estimation. COPPA-compliant. Token reward system. Generates verified, reportable ESG impact data. Status: needs refinement before public launch.', 9, false, [80, 70, 50], 6);
+    // SCIENCE
+    addText('THE SCIENCE (PETSOUNDS51)', 11, true, [180, 130, 6], 4);
+    addText('- Noise anxiety in dogs (fireworks, storms) is a clinically recognised condition with established treatment protocols. (PMC / NIH, 2023)', 9, false, [80, 70, 50], 2);
+    addText('- Music as a non-pharmacological stress-reduction intervention for dogs and cats is an active area of veterinary research. (Frontiers in Veterinary Science)', 9, false, [80, 70, 50], 2);
+    addText('- Psychoacoustically designed music reduced anxiety behaviours in dogs in observational studies. (Through a Dog\'s Ear / iCalmPet, Leeds & Spector)', 9, false, [80, 70, 50], 8);
 
     divider();
 
-    // CREDIBILITY
-    addText('5. CREDIBILITY & COMPLIANCE ANCHORS', 12, true, [180, 130, 6], 3);
-    addText('- Community Interest Company (CIC) formed and registered. 10% of revenue committed to CIC mission.', 9, false, [80, 70, 50], 2);
-    addText('- Stripe: Live payment infrastructure (not test mode). Real transactions.', 9, false, [80, 70, 50], 2);
-    addText('- COPPA compliant: Earth51 designed for child-safe data from day one.', 9, false, [80, 70, 50], 2);
-    addText('- GDPR/CCPA aligned: SORTED processes documents in memory — never stores user data.', 9, false, [80, 70, 50], 2);
-    addText('- Open source architecture: Transparent, auditable technology stack.', 9, false, [80, 70, 50], 6);
+    // WHAT'S ACHIEVABLE
+    addText('WHAT IS HONESTLY ACHIEVABLE', 11, true, [180, 130, 6], 4);
+    addText("This is not a pitch to capture a $263B market. It is a small operation building useful tools that people pay for. The achievable path is: grow each product's paying user base organically through community trust and partner networks. PetSounds51 at £29.99/year needs ~3,400 subscribers to reach £100k/year. SORTED at £9.99/month needs ~840 subscribers for the same. These are not big numbers — they are achievable with focused community-driven growth, not paid ad blitzes. The market data above confirms the demand exists. The question is reaching people, not whether they exist.", 9, false, [80, 70, 50], 8);
 
     divider();
 
     addText('Brian Hughes — family@uf51.love', 11, true, [26, 18, 8], 1);
-    addText('Glasgow, Scotland · uf51.love · CIC formed · All data sourced from publicly available reports. See full source list.', 8, false, [120, 110, 90], 0);
+    addText('Glasgow, Scotland · uf51.love · CIC formed · All figures sourced from publicly available research.', 8, false, [120, 110, 90], 0);
 
-    doc.save('UF51-Evidence-Pack-June-2026.pdf');
+    doc.save('UF51-Evidence-June-2026.pdf');
     setSaving(false);
   };
 
-  const headlineStats = [
-    { stat: '~$263B', label: 'Global pet care market', source: 'Grand View Research' },
-    { stat: '~$29B', label: 'Legal tech market (2025)', source: 'Precedence Research' },
-    { stat: '92%', label: 'No legal help for the poor', source: 'Legal Services Corp' },
-    { stat: '~$700B', label: 'Green bond issuance (2024)', source: 'BIS / Climate Bonds' },
-    { stat: '25M', label: 'UK dogs + cats', source: 'PFMA / UK Pet Food' },
-    { stat: 'CIC', label: 'Registered & committed', source: 'Companies House' },
-  ];
-
   const sources = [
-    { name: 'Grand View Research — Pet Care Market Analysis', url: 'https://www.grandviewresearch.com/industry-analysis/pet-care-market' },
-    { name: 'Fortune Business Insights — Pet Care Market', url: 'https://www.fortunebusinessinsights.com/industry-reports/pet-care-market-101221' },
-    { name: 'APPA (American Pet Products Association) — Industry Figures', url: 'https://americanpetproducts.org/industry-trends-and-stats' },
+    { name: 'Grand View Research — Pet Care Market', url: 'https://www.grandviewresearch.com/industry-analysis/pet-care-market' },
     { name: 'PFMA / UK Pet Food — Pet Population', url: 'https://www.ukpetfood.org/information-centre/statistics/pet-population.html' },
+    { name: 'APPA — US Pet Industry Figures', url: 'https://americanpetproducts.org/industry-trends-and-stats' },
     { name: 'Precedence Research — Legal Tech Market', url: 'https://www.precedenceresearch.com/legal-tech-market' },
-    { name: 'Grand View Research — Legal AI Market', url: 'https://www.grandviewresearch.com/industry-analysis/artificial-intelligence-ai-in-legal-market' },
     { name: 'Legal Services Corporation — The Justice Gap', url: 'https://justicegap.lsc.gov/resource/2022-justice-gap-report/' },
     { name: 'The Law Society — Legal Aid Deserts', url: 'https://www.lawsociety.org.uk/topics/legal-aid' },
-    { name: 'Institute for Government — Performance Tracker', url: 'https://www.instituteforgovernment.org.uk/performance-tracker' },
     { name: 'European Commission — CSRD Directive', url: 'https://finance.ec.europa.eu/capital-markets-union-and-financial-markets/company-reporting-and-auditing/company-reporting/corporate-sustainability-reporting_en' },
-    { name: 'Bank for International Settlements — Green Bond Market Growth', url: 'https://www.bis.org/publ/qtrpdf/r_qt2503d.pdf' },
-    { name: 'Climate Bonds Initiative — Green Bond Market', url: 'https://www.climatebonds.net/market' },
-    { name: 'PMC / NIH — Noise Fears in Dogs (Review)', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9852993/' },
-    { name: 'Frontiers in Veterinary Science', url: 'https://www.frontiersin.org/journals/veterinary-science' },
+    { name: 'Bank for International Settlements — Green Bonds', url: 'https://www.bis.org/publ/qtrpdf/r_qt2503d.pdf' },
+    { name: 'PMC / NIH — Noise Fears in Dogs (2023)', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9852993/' },
     { name: 'Through a Dog\'s Ear / iCalmPet Research', url: 'https://icalmpet.com/pages/research' },
-    { name: 'IVC Journal — Veterinary Practice', url: 'https://ivcjournal.com/' },
   ];
 
   return (
     <div style={{ minHeight: '100vh', background: `linear-gradient(180deg, ${CREAM} 0%, ${CREAM_DEEP} 40%)`, color: INK, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
 
-      {/* HEADER */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: `1px solid ${AMBER}40`, padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      {/* SIMPLE HEADER */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: `1px solid ${BORDER}`, padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <UF51Icon />
-          <div style={{ lineHeight: 1.2 }}>
-            <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: INK }}>UF51</div>
-            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: AMBER, opacity: 0.8 }}>EVIDENCE PACK</div>
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: INK }}>UF51</div>
+            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.2em', color: AMBER, opacity: 0.7 }}>EVIDENCE</div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8 }}>
           <motion.button whileTap={{ scale: 0.95 }} onClick={handlePDF} disabled={saving}
-            style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', color: '#fff', background: AMBER_DARK, border: `1px solid ${AMBER_DARK}`, borderRadius: 8, padding: '10px 22px', cursor: 'pointer' }}>
-            {saving ? 'SAVING…' : '↓ PDF'}
+            style={{ fontSize: 10, fontWeight: 700, color: '#fff', background: AMBER_DARK, border: 'none', borderRadius: 8, padding: '9px 18px', cursor: 'pointer' }}>
+            {saving ? '…' : '↓ PDF'}
           </motion.button>
           <motion.button whileTap={{ scale: 0.95 }} onClick={handleCopy}
-            style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', color: copied ? AMBER_DARK : INK_SOFT, background: copied ? AMBER_LIGHT : 'rgba(0,0,0,0.03)', border: `1px solid ${copied ? AMBER + '40' : 'rgba(0,0,0,0.08)'}`, borderRadius: 8, padding: '10px 22px', cursor: 'pointer' }}>
-            {copied ? '✓ COPIED' : 'COPY'}
+            style={{ fontSize: 10, fontWeight: 700, color: copied ? AMBER_DARK : INK_SOFT, background: copied ? 'rgba(217,119,6,0.08)' : 'transparent', border: `1px solid ${BORDER}`, borderRadius: 8, padding: '9px 18px', cursor: 'pointer' }}>
+            {copied ? '✓' : 'COPY'}
           </motion.button>
         </div>
       </header>
 
-      <div id="evidence-body" style={{ maxWidth: 720, margin: '0 auto', padding: '48px 24px 80px' }}>
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+      <div id="evidence-body" style={{ maxWidth: 640, margin: '0 auto', padding: '40px 24px 72px' }}>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
 
           {/* HERO */}
-          <div style={{ marginBottom: 48 }}>
-            <h1 style={{ fontSize: 'clamp(28px, 5.5vw, 44px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.035em', margin: '0 0 20px', color: INK }}>
-              The data behind<br />
-              <span style={{ color: AMBER }}>the decision.</span>
+          <div style={{ marginBottom: 40 }}>
+            <h1 style={{ fontSize: 'clamp(26px, 5vw, 38px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', margin: '0 0 16px', color: INK }}>
+              Small team.<br />
+              <span style={{ color: AMBER }}>Real products.</span><br />
+              Honest numbers.
             </h1>
-            <p style={{ fontSize: 15, color: INK_SOFT, lineHeight: 1.75, margin: 0, maxWidth: 580, borderLeft: `3px solid ${AMBER}50`, paddingLeft: 18 }}>
-              Every claim below is backed by publicly available research or verifiable technical fact. Sources cited inline. Full source list at the end. <strong style={{ color: INK }}>Conservative figures used throughout — where a range exists, the lower bound is quoted.</strong>
+            <p style={{ fontSize: 14, color: INK_SOFT, lineHeight: 1.7, margin: 0, maxWidth: 520 }}>
+              Three products are live and taking real payments via Stripe. This page gives you context — what is built, what the markets look like, and what is honestly achievable. No unicorn projections. Every figure is sourced.
             </p>
           </div>
 
-          {/* HEADLINE STATS */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: AMBER, marginBottom: 16 }}>THE NUMBERS THAT MATTER</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 10 }}>
-              {headlineStats.map((f, i) => (
-                <div key={i} style={{ padding: '18px 14px', background: 'rgba(217,119,6,0.04)', border: `1px solid ${AMBER}30`, borderTop: `3px solid ${AMBER}`, borderRadius: 12, textAlign: 'center' }}>
-                  <div style={{ fontSize: 22, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em', marginBottom: 4 }}>{f.stat}</div>
-                  <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.08em', color: INK_MUTE, textTransform: 'uppercase', lineHeight: 1.3, marginBottom: 6 }}>{f.label}</div>
-                  <div style={{ fontSize: 7, color: AMBER, fontStyle: 'italic' }}>{f.source}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* WHAT'S LIVE */}
+          <Section label="WHAT IS ACTUALLY LIVE">
+            <ProductRow name="PetSounds51" tag="PET WELLNESS" price="£29.99/yr · £9.99/mo">
+              Sound therapy for anxious pets. Browser-native, no app download. Species-specific protocols for dogs, cats, horses. Live on Stripe.
+            </ProductRow>
+            <ProductRow name="SORTED" tag="LEGAL TECH" price="£9.99/mo · £9.99 lifetime">
+              Legal document decoder — any language, any jurisdiction. Documents processed in memory, never stored. PWA with local case vault.
+            </ProductRow>
+            <ProductRow name="Earth51" tag="ESG / ENVIRONMENT" price="Pre-launch">
+              AI-verified litter collection with fraud detection. COPPA-compliant. Generates verified ESG impact data. Needs refinement before public launch.
+            </ProductRow>
+          </Section>
 
-          <div style={{ height: 1, background: `${AMBER}20`, margin: '0 0 36px' }} />
+          <Divider />
 
-          {/* 1. MARKET INTELLIGENCE */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: INK, marginBottom: 20 }}>1. MARKET INTELLIGENCE</div>
+          {/* MARKET CONTEXT */}
+          <Section label="MARKET CONTEXT">
+            <ContextRow title="Pet Care">
+              Global market ~$263B (2024). UK has ~13M dogs, ~12M cats. Spending on pet wellness accelerates as pets are treated as family. Recession-resilient.
+              <Cite>Grand View Research · PFMA / UK Pet Food</Cite>
+            </ContextRow>
+            <ContextRow title="Legal Tech">
+              ~$29B (2025), projected ~$73B by 2035. 92% of low-income Americans get no or inadequate legal help. UK legal aid deserts are expanding. Real demand exists.
+              <Cite>Precedence Research · Legal Services Corporation · The Law Society</Cite>
+            </ContextRow>
+            <ContextRow title="ESG Reporting">
+              EU CSRD makes sustainability reporting mandatory for large companies. Global green bond issuance ~$700B (2024). Verified environmental data is a genuine need.
+              <Cite>European Commission · BIS / Climate Bonds Initiative</Cite>
+            </ContextRow>
+          </Section>
 
-            {/* PetSounds51 */}
-            <div style={{ marginBottom: 16, padding: '22px 24px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 14 }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, marginBottom: 14, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 20, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em' }}>PetSounds51</span>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: INK_MUTE }}>PET CARE & ANIMAL WELLNESS</span>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 14 }}>
-                <StatBox stat="~$263B" label="Global market (2024)" source="Grand View Research" color={AMBER_DARK} />
-                <StatBox stat="25M" label="UK dogs + cats" source="PFMA / UK Pet Food" color={AMBER_DARK} />
-                <StatBox stat="$158B" label="US pet industry (2024)" source="APPA" color={AMBER_DARK} />
-              </div>
-              <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
-                The pet care market grew through recession and continues accelerating. Humanisation of pets drives spending on wellness, anxiety, and behavioural health — exactly where PetSounds51 sits.
-              </p>
-            </div>
+          <Divider />
 
-            {/* SORTED */}
-            <div style={{ marginBottom: 16, padding: '22px 24px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 14 }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, marginBottom: 14, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 20, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em' }}>SORTED</span>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: INK_MUTE }}>LEGAL TECH & ACCESS TO JUSTICE</span>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 14 }}>
-                <StatBox stat="~$29B" label="Legal tech (2025)" source="Precedence Research" color={AMBER_DARK} />
-                <StatBox stat="~$73B" label="Projected by 2035" source="Precedence Research" color={AMBER_DARK} />
-                <StatBox stat="~9.4%" label="Legal tech CAGR" source="Precedence Research" color={AMBER_DARK} />
-              </div>
-              <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
-                Legal tech is one of the fastest-growing B2B sectors. AI-powered document processing is the frontier — and the access-to-justice crisis creates enormous public-sector and consumer demand.
-              </p>
-            </div>
-
-            {/* Earth51 */}
-            <div style={{ padding: '22px 24px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 14 }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, marginBottom: 14, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 20, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em' }}>Earth51</span>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: INK_MUTE }}>ESG & ENVIRONMENTAL SERVICES</span>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 14 }}>
-                <StatBox stat="Mandatory" label="ESG reporting (EU)" source="European Commission" color={AMBER_DARK} />
-                <StatBox stat="~$700B" label="Green bonds (2024)" source="BIS / Climate Bonds" color={AMBER_DARK} />
-                <StatBox stat="CSRD" label="Directive in force" source="European Commission" color={AMBER_DARK} />
-              </div>
-              <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
-                ESG reporting is no longer optional — it is regulated. Verified, fraud-proof environmental impact data is a genuine market need. Earth51 generates exactly that data, gamified through children's litter picks.
-              </p>
-            </div>
-          </div>
-
-          <div style={{ height: 1, background: `${AMBER}20`, margin: '0 0 36px' }} />
-
-          {/* 2. SCIENTIFIC RESEARCH */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: INK, marginBottom: 20 }}>2. SCIENTIFIC RESEARCH BACKING</div>
-            <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.7, margin: '0 0 20px' }}>
-              The science behind PetSounds51 builds on published, peer-reviewed research in veterinary psychoacoustics and animal behavioural science:
+          {/* SCIENCE */}
+          <Section label="THE SCIENCE (PETSOUNDS51)">
+            <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: '0 0 16px' }}>
+              The science builds on published, peer-reviewed research:
             </p>
-            {[
-              { finding: 'Noise anxiety (including storm and fireworks phobia) in dogs is a clinically recognised condition with established behavioural and pharmacological treatment protocols.', source: 'PMC / NIH — "Therapy and Prevention of Noise Fears in Dogs" (Review, 2023)', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9852993/' },
-              { finding: 'Music as a perioperative, non-pharmacological intervention to reduce stress in dogs and cats is an active area of veterinary research.', source: 'Frontiers in Veterinary Science (2025)', url: 'https://www.frontiersin.org/journals/veterinary-science' },
-              { finding: 'Psychoacoustically designed music significantly reduced anxiety-related behaviours in dogs compared with conventional music in observational studies.', source: "Through a Dog's Ear / iCalmPet research (Leeds & Spector)", url: 'https://icalmpet.com/pages/research' },
-              { finding: 'Bioacoustic and species-appropriate sound therapy is used in veterinary practice as a complementary stress-reduction tool.', source: 'IVC Journal', url: 'https://ivcjournal.com/' },
-            ].map((r, i) => (
-              <div key={i} style={{ marginBottom: 12, padding: '18px 20px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 12, display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 22, fontWeight: 900, color: AMBER, letterSpacing: '-0.02em', flexShrink: 0, minWidth: 40 }}>{i + 1}</div>
-                <div>
-                  <p style={{ fontSize: 13, color: INK, fontWeight: 600, lineHeight: 1.55, margin: '0 0 8px' }}>{r.finding}</p>
-                  <a href={r.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: AMBER_DARK, margin: 0, fontStyle: 'italic', textDecoration: 'none', borderBottom: `1px solid ${AMBER}40` }}>{r.source} →</a>
-                </div>
-              </div>
-            ))}
-          </div>
+            <Bullet>Noise anxiety in dogs (fireworks, storms) is a clinically recognised condition with established treatment protocols. <Cite inline>PMC / NIH, 2023</Cite></Bullet>
+            <Bullet>Music as a non-pharmacological stress-reduction intervention for dogs and cats is an active area of veterinary research. <Cite inline>Frontiers in Veterinary Science</Cite></Bullet>
+            <Bullet>Psychoacoustically designed music reduced anxiety behaviours in dogs in observational studies. <Cite inline>Through a Dog's Ear / iCalmPet</Cite></Bullet>
+          </Section>
 
-          <div style={{ height: 1, background: `${AMBER}20`, margin: '0 0 36px' }} />
+          <Divider />
 
-          {/* 3. ACCESS TO JUSTICE CRISIS */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: AMBER, marginBottom: 20 }}>3. THE ACCESS TO JUSTICE CRISIS</div>
-            <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.7, margin: '0 0 20px' }}>
-              SORTED exists because the system is broken. This is not opinion — it is documented:
+          {/* WHAT'S ACHIEVABLE */}
+          <Section label="WHAT IS HONESTLY ACHIEVABLE">
+            <div style={{ padding: '20px 22px', background: 'rgba(217,119,6,0.04)', borderLeft: `3px solid ${AMBER}`, borderRadius: 8 }}>
+              <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.7, margin: 0 }}>
+                This is not a pitch to capture a $263B market. It is a small operation building useful tools that people pay for.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: 12, margin: '16px 0', flexWrap: 'wrap' }}>
+              <AchievableStat figure="~3,400" label="PS51 subscribers = £100k/yr" />
+              <AchievableStat figure="~840" label="SORTED subscribers = £100k/yr" />
+            </div>
+            <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
+              These are not big numbers. They are achievable with focused, community-driven growth — not paid ad blitzes. The market data confirms the demand exists. The question is reaching people, not whether they exist.
             </p>
-            {[
-              { stat: '92%', text: 'of low-income Americans receive no or inadequate professional legal help for their civil legal problems.', source: 'Legal Services Corporation — "The Justice Gap" report', url: 'https://www.lsc.gov/about-lsc/our-impact/justice-gap' },
-              { stat: 'Deserts', text: 'Legal aid "deserts" are growing across England and Wales — large areas with no local provider for housing, family, or immigration law.', source: 'The Law Society (UK)', url: 'https://www.lawsociety.org.uk/topics/legal-aid' },
-              { stat: '~30%', text: 'decline in criminal legal aid duty solicitor numbers since 2014/15.', source: 'Institute for Government — Performance Tracker', url: 'https://www.instituteforgovernment.org.uk/performance-tracker' },
-            ].map((d, i) => (
-              <div key={i} style={{ display: 'flex', gap: 16, marginBottom: 10, padding: '18px 20px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 12, alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 22, fontWeight: 900, color: AMBER, letterSpacing: '-0.02em', flexShrink: 0, minWidth: 60 }}>{d.stat}</div>
-                <div>
-                  <p style={{ fontSize: 13, color: INK, fontWeight: 600, lineHeight: 1.5, margin: '0 0 6px' }}>{d.text}</p>
-                  <a href={d.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, color: AMBER_DARK, margin: 0, fontStyle: 'italic', textDecoration: 'none', borderBottom: `1px solid ${AMBER}40` }}>{d.source} →</a>
-                </div>
-              </div>
-            ))}
-          </div>
+          </Section>
 
-          <div style={{ height: 1, background: `${AMBER}20`, margin: '0 0 36px' }} />
+          <Divider />
 
-          {/* 4. TECHNICAL FACTS */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: INK, marginBottom: 20 }}>4. TECHNICAL FACTS — WHAT IS ACTUALLY BUILT</div>
-            {[
-              {
-                name: 'PetSounds51',
-                points: [
-                  'Browser-native real-time audio synthesis (no pre-recorded playlists)',
-                  'No app download, no hardware — works as PWA, offline-capable',
-                  'Species-specific frequency protocols for dogs, cats, horses',
-                  'Stripe checkout live: £29.99/year and £9.99/month',
-                ],
-              },
-              {
-                name: 'SORTED',
-                points: [
-                  'AI-powered legal document decoder — any language, any jurisdiction',
-                  'Documents processed in memory — never stored server-side',
-                  'PWA with offline case vault (local storage, user-owned)',
-                  'Stripe checkout live: £9.99/month and £9.99 one-time lifetime',
-                ],
-              },
-              {
-                name: 'Earth51',
-                points: [
-                  'AI-verified litter collection with fraud detection and weight estimation',
-                  'COPPA-compliant (child-safe data from day one)',
-                  'Token reward system for verified cleanups',
-                  'Generates verified, reportable ESG impact data for B2B clients',
-                  'Status: needs refinement before public launch',
-                ],
-              },
-            ].map((p, i) => (
-              <div key={i} style={{ marginBottom: 16, padding: '22px 24px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 14 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 900, color: AMBER_DARK, margin: '0 0 14px', letterSpacing: '-0.02em' }}>{p.name}</h3>
-                {p.points.map((pt, j) => (
-                  <div key={j} style={{ display: 'flex', gap: 10, marginBottom: 8, alignItems: 'flex-start' }}>
-                    <span style={{ color: AMBER, fontWeight: 900, flexShrink: 0, fontSize: 14 }}>•</span>
-                    <span style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.5 }}>{pt}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-
-          <div style={{ height: 1, background: `${AMBER}20`, margin: '0 0 36px' }} />
-
-          {/* 5. CREDIBILITY */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: AMBER, marginBottom: 20 }}>5. CREDIBILITY & COMPLIANCE ANCHORS</div>
-            {[
-              'Community Interest Company (CIC) formed and registered. 10% of revenue committed to CIC mission.',
-              'Stripe: Live payment infrastructure (not test mode). Real transactions.',
-              'COPPA compliant: Earth51 designed for child-safe data from day one.',
-              'GDPR/CCPA aligned: SORTED processes documents in memory — never stores user data.',
-              'Open source architecture: Built on transparent, auditable technology stack.',
-            ].map((c, i) => (
-              <div key={i} style={{ display: 'flex', gap: 12, marginBottom: 10, alignItems: 'flex-start', padding: '16px 20px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 12 }}>
-                <span style={{ fontSize: 16, fontWeight: 900, color: AMBER, flexShrink: 0, minWidth: 24 }}>✓</span>
-                <span style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.5 }}>{c}</span>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ height: 1, background: `${AMBER}20`, margin: '0 0 36px' }} />
-
-          {/* 6. FULL SOURCE LIST */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: INK, marginBottom: 20 }}>6. FULL SOURCE LIST — VERIFY EVERYTHING YOURSELF</div>
-            <p style={{ fontSize: 12, color: INK_MUTE, lineHeight: 1.6, margin: '0 0 16px', fontStyle: 'italic' }}>
+          {/* SOURCES */}
+          <Section label="VERIFY EVERYTHING YOURSELF">
+            <p style={{ fontSize: 11, color: INK_MUTE, lineHeight: 1.5, margin: '0 0 12px', fontStyle: 'italic' }}>
               Every link below is publicly accessible. Click and verify.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {sources.map((s, i) => (
-                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '10px 16px', background: '#fff', border: `1px solid ${AMBER}20`, borderRadius: 8, textDecoration: 'none', fontSize: 11, color: INK_SOFT, lineHeight: 1.4 }}>
+                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer"
+                  style={{ display: 'flex', gap: 8, padding: '8px 12px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 6, textDecoration: 'none', fontSize: 11, color: INK_SOFT, lineHeight: 1.3 }}>
                   <span style={{ color: AMBER, fontWeight: 900, flexShrink: 0 }}>{i + 1}.</span>
                   <span>{s.name} <span style={{ color: AMBER_DARK }}>↗</span></span>
                 </a>
               ))}
             </div>
-          </div>
+          </Section>
 
-          <div style={{ height: 1, background: `${AMBER}20`, margin: '0 0 36px' }} />
+          <Divider />
 
           {/* CONTACT */}
-          <div style={{ textAlign: 'left', padding: '8px 0' }}>
-            <h2 style={{ fontSize: 24, fontWeight: 900, margin: '0 0 6px', letterSpacing: '-0.02em', color: INK }}>Brian Hughes</h2>
-            <p style={{ fontSize: 12, color: INK_MUTE, margin: '0 0 16px', lineHeight: 1.6 }}>
-              Glasgow, Scotland · uf51.love · CIC formed<br />
-              All market data sourced from publicly available industry reports. Full source list above — every link is publicly verifiable.
+          <div>
+            <h2 style={{ fontSize: 20, fontWeight: 900, margin: '0 0 4px', letterSpacing: '-0.02em', color: INK }}>Brian Hughes</h2>
+            <p style={{ fontSize: 12, color: INK_MUTE, margin: '0 0 14px', lineHeight: 1.6 }}>
+              Glasgow, Scotland · uf51.love · CIC formed
             </p>
-            <a href="mailto:family@uf51.love?subject=UF51 Evidence Pack"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: AMBER_DARK, color: '#fff', fontWeight: 700, fontSize: 12, letterSpacing: '0.05em', borderRadius: 8, textDecoration: 'none' }}>
+            <a href="mailto:family@uf51.love?subject=UF51 Evidence"
+              style={{ display: 'inline-block', padding: '12px 24px', background: AMBER_DARK, color: '#fff', fontWeight: 700, fontSize: 12, borderRadius: 8, textDecoration: 'none' }}>
               family@uf51.love
             </a>
-            <div style={{ marginTop: 14, fontSize: 11, color: INK_MUTE }}>
-              Live at <a href="https://uf51.love" style={{ color: AMBER_DARK, textDecoration: 'none' }}>uf51.love</a>
-            </div>
           </div>
 
         </motion.div>
@@ -412,20 +259,79 @@ export default function PartnerEvidence() {
   );
 }
 
-function StatBox({ stat, label, source, color }) {
+// — SIMPLE COMPONENTS —
+
+function Section({ label, children }) {
   return (
-    <div style={{ padding: '12px 14px', background: 'rgba(217,119,6,0.05)', borderLeft: `3px solid ${AMBER}`, borderRadius: 8 }}>
-      <div style={{ fontSize: 18, fontWeight: 900, color, letterSpacing: '-0.02em' }}>{stat}</div>
-      <div style={{ fontSize: 8, fontWeight: 700, color: INK_MUTE, textTransform: 'uppercase' }}>{label}</div>
-      <div style={{ fontSize: 7, color: AMBER, fontStyle: 'italic', marginTop: 2 }}>{source}</div>
+    <div style={{ marginBottom: 36 }}>
+      <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.2em', color: AMBER, marginBottom: 16 }}>{label}</div>
+      {children}
+    </div>
+  );
+}
+
+function Divider() {
+  return <div style={{ height: 1, background: BORDER, margin: '0 0 32px' }} />;
+}
+
+function ProductRow({ name, tag, price, children }) {
+  return (
+    <div style={{ marginBottom: 12, padding: '18px 20px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 10 }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+          <span style={{ fontSize: 17, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em' }}>{name}</span>
+          <span style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', color: INK_MUTE }}>{tag}</span>
+        </div>
+        <span style={{ fontSize: 10, fontWeight: 700, color: AMBER, whiteSpace: 'nowrap' }}>{price}</span>
+      </div>
+      <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.55, margin: 0 }}>{children}</p>
+    </div>
+  );
+}
+
+function ContextRow({ title, children }) {
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <h3 style={{ fontSize: 13, fontWeight: 800, color: INK, margin: '0 0 6px' }}>{title}</h3>
+      <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.6, margin: 0 }}>{children}</p>
+    </div>
+  );
+}
+
+function Bullet({ children }) {
+  return (
+    <div style={{ display: 'flex', gap: 10, marginBottom: 10, alignItems: 'flex-start' }}>
+      <span style={{ color: AMBER, fontWeight: 900, flexShrink: 0, fontSize: 13 }}>•</span>
+      <span style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.55 }}>{children}</span>
+    </div>
+  );
+}
+
+function Cite({ children, inline }) {
+  return (
+    <span style={{
+      display: inline ? 'inline' : 'block',
+      fontSize: 10,
+      color: AMBER_DARK,
+      fontStyle: 'italic',
+      marginTop: inline ? 0 : 4,
+    }}>{children}</span>
+  );
+}
+
+function AchievableStat({ figure, label }) {
+  return (
+    <div style={{ flex: '1 1 200px', padding: '14px 16px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 8, textAlign: 'center' }}>
+      <div style={{ fontSize: 20, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em' }}>{figure}</div>
+      <div style={{ fontSize: 9, fontWeight: 700, color: INK_MUTE, letterSpacing: '0.04em', marginTop: 2 }}>{label}</div>
     </div>
   );
 }
 
 function UF51Icon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
-      <circle cx="15" cy="15" r="13" stroke={AMBER} strokeWidth="1.8" fill={`rgba(217,119,6,0.08)`} />
+    <svg width="26" height="26" viewBox="0 0 30 30" fill="none">
+      <circle cx="15" cy="15" r="13" stroke={AMBER} strokeWidth="1.8" fill="rgba(217,119,6,0.08)" />
       <path d="M8 15 L11 15 L12.5 9 L14 21 L15.5 11 L17 19 L18.5 13 L20 17 L22 15" stroke={AMBER} strokeWidth="2" strokeLinecap="round" fill="none" />
     </svg>
   );
