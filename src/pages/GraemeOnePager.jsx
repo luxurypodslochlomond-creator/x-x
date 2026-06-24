@@ -89,15 +89,25 @@ export default function GraemeOnePager() {
 
     divider([34, 197, 94]);
 
+    // WHY WE WIN
+    addText('WHY WE WIN — OUR MOATS', 11, true, [20, 20, 20], 3);
+    addText('What stops someone with more money cloning this in 3 months? Each product has a defensible layer:', 9, false, [100, 100, 100], 4);
+    addText('PetSounds51: Built on published veterinary neuroscience with real-time audio synthesis — not pre-recorded files. Works offline, no app, no hardware. Closest competitors use generic pre-recorded playlists. None doing species-specific frequency synthesis in the browser.', 9, false, [60, 60, 60], 3);
+    addText('SORTED: Documents processed in memory — never stored. Zero data liability. This is the defensible architecture — competitors store data and create risk. Any language, any jurisdiction. At £9.99/month, priced at 1/10th of legal aid.', 9, false, [60, 60, 60], 3);
+    addText('Earth51: The moat is the verification layer — AI-verified impact data with fraud detection, not the litter picking itself. COPPA compliant, privacy-first for kids. No competitor combines gamified collection + verified ESG reporting + child-safe data.', 9, false, [60, 60, 60], 6);
+
     // WHY NOW
     addText('WHY NOW', 11, true, [20, 20, 20], 3);
     addText('All three products are BUILT and in production — not concepts, not prototypes. PetSounds51 and SORTED are payment-ready via Stripe and Apple Pay, tested end to end. Earth51 needs refinement before launch. No paying subscribers yet — I am honest about that. What exists is working technology, live payment infrastructure, and three massive converging markets with conservative, achievable revenue targets. Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.', 9, false, [50, 50, 50], 6);
 
     addText('THE PARTNERSHIP', 9, true, [212, 160, 23], 3);
     addText('Equal partnership is on the table.', 10, true, [50, 50, 50], 2);
-    addText('WHAT UF51 BRINGS: Three built products, live tech, live payment infrastructure, a registered CIC with 10% revenue commitment, and the mission. WHAT THE PARTNER BRINGS: Reach — ad inventory, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 9, false, [50, 50, 50], 4);
-    addText('10% of all revenue from this partnership goes to our Community Interest Company — the CIC is formed and registered. A new company will be set up specifically for this joint venture, clean and separate. Profits flow, mission stays protected.', 9, false, [60, 60, 60], 4);
-    addText('I am one man with three built products and a mission I believe in. I cannot scale this alone — I need a partner who sees what I see. The numbers in this document are real, the markets are real, the tech is real, the achievable targets are conservative. I have no paying subscribers yet — I am honest about that. What I have is working technology, payment infrastructure ready to go, and the will to build something that lasts. Everything is on the table and I am always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.', 9, false, [50, 50, 50], 6);
+    addText('WHAT UF51 BRINGS: Three built products, live tech, live payment infrastructure, a registered CIC with 10% revenue commitment, and the mission. WHAT THE PARTNER BRINGS: Distribution — ad inventory, audience reach, media channels. Commercial expertise — someone who has scaled at the highest level. Capital — £40K runway to get products market-ready. Brand relationships — access to B2B conversations. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone.', 9, false, [50, 50, 50], 4);
+    addText('10% of all revenue from this partnership goes to our Community Interest Company — the CIC is formed and registered. A new company will be incorporated specifically for this joint venture, clean and separate. Profits flow, mission stays protected.', 9, false, [60, 60, 60], 4);
+    addText('THE DEAL — £40K OVER 6 MONTHS:', 9, true, [212, 160, 23], 3);
+    addText('Month 1: £20K upfront — runway to finalize products, prepare for market entry through partner channels.\nMonth 3: £20K — after first milestone, products market-ready, first subscribers through partner channels.\nMonth 6: Products live, partnership proven — first subscribers acquired, revenue flowing, equal partnership established.', 9, false, [60, 60, 60], 4);
+    addText('This is runway, not a salary. I have invested years of unpaid time and personal funds — I am broke and honest about that. The £40K lets me focus 100% on getting products market-ready in 3 months, with your input shaping the commercial direction. Equal partnership, not a vendor deal.', 9, false, [100, 100, 100], 6);
+    addText('I am the founder and builder. I have invested years of unpaid time and personal funds into these products — I am broke and honest about that. What I need is runway and the right partner expertise to get these to market. This is not about money — it is about finding someone who sees what I see and has the commercial firepower to make it real. The £40K is fair runway: enough to focus 100% on getting products market-ready in 3 months, with your input shaping the commercial direction. After that, the products go through your channels and we both win. No egos, no hidden terms — just two people deciding if this makes sense.', 9, false, [50, 50, 50], 6);
 
     addText('CONTACT', 9, true, [120, 120, 120], 3);
     addText('Brian Hughes — family@uf51.love\nuf51.love — Glasgow, Scotland\nCommunity Interest Company (CIC) — formed\nNew company to be incorporated for this partnership', 11, false, [60, 60, 60], 0);
@@ -127,6 +137,7 @@ export default function GraemeOnePager() {
       ],
       product: 'Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis — no app, no hardware, no prescription. Works offline. Built on published veterinary neuroscience.',
       b2b: 'Vet surgeries, pet insurers, animal shelters, pet care brands',
+      moat: 'Built on published veterinary neuroscience with real-time audio synthesis — not pre-recorded files. Works offline, no app, no hardware. Closest competitors use generic pre-recorded playlists. None doing species-specific frequency synthesis in the browser.',
     },
     {
       name: 'SORTED',
@@ -148,6 +159,7 @@ export default function GraemeOnePager() {
       ],
       product: 'AI decodes any legal letter into plain language, writes professional replies, guides dispute resolution. Any language, any jurisdiction. Documents processed in memory — never stored. Zero data liability.',
       b2b: 'Banks, insurers, HR platforms, housing associations, councils',
+      moat: 'Documents processed in memory — never stored. Zero data liability. This is the defensible architecture — competitors store data and create risk. Any language, any jurisdiction. At £9.99/month, priced at 1/10th of legal aid.',
     },
     {
       name: 'Earth51',
@@ -169,6 +181,7 @@ export default function GraemeOnePager() {
       ],
       product: 'Kids photograph litter they collect. AI verifies the photo (fraud detection + weight estimation). They earn verified P51 tokens — exchangeable for rewards. Tested with real kids outdoors. Every pickup generates verified, reportable ESG impact data that brands and councils can use in their sustainability reporting. The real product is not litter picking — it is verified impact data that brands must report on.',
       b2b: 'Councils, brands (CSR/ESG), schools, supermarkets',
+      moat: 'The moat is the verification layer — AI-verified impact data with fraud detection, not the litter picking itself. COPPA compliant, privacy-first for kids. No competitor combines gamified collection + verified ESG reporting + child-safe data.',
     },
   ];
 
@@ -303,6 +316,24 @@ export default function GraemeOnePager() {
 
           <div style={{ height: 1, background: 'rgba(255,255,255,0.05)', margin: '0 0 40px' }} />
 
+          {/* WHY WE WIN — MOATS */}
+          <div style={{ marginBottom: 40 }}>
+            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#fff', marginBottom: 14 }}>WHY WE WIN — OUR MOATS</div>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, margin: '0 0 16px', maxWidth: 640 }}>
+              What stops someone with more money cloning this in 3 months? Each product has a defensible layer that's hard to copy:
+            </p>
+            {products.map((p) => (
+              <div key={p.name} style={{ padding: '14px 18px', background: p.bg, border: `1px solid ${p.border}`, borderRadius: 10, marginBottom: 10 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                  <span style={{ fontSize: 13, fontWeight: 900, color: p.color }}>{p.name}</span>
+                </div>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, margin: 0 }}>{p.moat}</p>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ height: 1, background: 'rgba(255,255,255,0.05)', margin: '0 0 40px' }} />
+
           {/* WHY NOW */}
           <div style={{ marginBottom: 40 }}>
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#fff', marginBottom: 14 }}>WHY NOW</div>
@@ -332,7 +363,7 @@ export default function GraemeOnePager() {
               <div style={{ padding: '18px 20px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12 }}>
                 <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.5)', marginBottom: 10 }}>WHAT THE PARTNER BRINGS</div>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 7 }}>
-                  {['Distribution — ad inventory, audience reach', 'Capital — to scale marketing and operations', 'Speed — to move before competitors', 'Commercial infrastructure at scale', 'The conviction to move fast'].map(item => (
+                  {['Distribution — ad inventory, audience reach, media channels', 'Commercial expertise — scaled at the highest level', 'Capital — £40K runway to get products market-ready', 'Brand relationships — access to B2B conversations', 'The conviction to move fast'].map(item => (
                     <li key={item} style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.5, display: 'flex', gap: 8 }}>
                       <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 900 }}>›</span>{item}
                     </li>
@@ -344,8 +375,46 @@ export default function GraemeOnePager() {
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, margin: '0 0 12px', padding: '14px 18px', background: 'rgba(34,197,94,0.03)', border: '1px solid rgba(34,197,94,0.12)', borderRadius: 10 }}>
               <strong style={{ color: '#22c55e' }}>10% of all revenue goes to our CIC</strong> — the Community Interest Company is formed and registered. A new company will be incorporated specifically for this joint venture, clean and separate. Profits flow, mission stays protected.
             </p>
-            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, margin: '14px 0 0', fontStyle: 'italic' }}>
-              I'm one man with three built products and a mission I believe in. I can't scale this alone — I need a partner who sees what I see. The numbers here are real, the markets are real, the tech is real, the achievable targets are conservative. I have no paying subscribers yet — I'm honest about that. What I have is working technology, payment infrastructure ready to go, and the will to build something that lasts. Everything is on the table and I'm always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.
+
+            {/* DEAL STRUCTURE */}
+            <div style={{ marginTop: 16, padding: '20px 22px', background: 'rgba(212,160,23,0.06)', border: '1px solid rgba(212,160,23,0.25)', borderRadius: 12 }}>
+              <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#d4a017', marginBottom: 16 }}>THE DEAL — £40K OVER 6 MONTHS</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 8, background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <span style={{ fontSize: 10, fontWeight: 900, color: '#d4a017' }}>M1</span>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>£20K upfront</div>
+                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', marginTop: 2 }}>Runway to finalize products, prepare for market entry through partner channels</div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 8, background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <span style={{ fontSize: 10, fontWeight: 900, color: '#d4a017' }}>M3</span>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>£20K at month 3</div>
+                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', marginTop: 2 }}>After first milestone — products market-ready, first subscribers through partner channels</div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 8, background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <span style={{ fontSize: 10, fontWeight: 900, color: '#22c55e' }}>M6</span>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 900, color: '#fff', letterSpacing: '-0.02em' }}>Products live, partnership proven</div>
+                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', marginTop: 2 }}>First subscribers acquired, revenue flowing, equal partnership established</div>
+                  </div>
+                </div>
+              </div>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, margin: '16px 0 0', padding: '12px 14px', background: 'rgba(255,255,255,0.02)', borderRadius: 8, fontStyle: 'italic' }}>
+                This is runway, not a salary. I've invested years of unpaid time and personal funds — I'm broke and honest about that. The £40K lets me focus 100% on getting products market-ready in 3 months, with your input shaping the commercial direction. Equal partnership, not a vendor deal.
+              </p>
+            </div>
+
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, margin: '16px 0 0', fontStyle: 'italic' }}>
+              I'm the founder and builder. I've invested years of unpaid time and personal funds into these products — I'm broke and honest about that. What I need is runway and the right partner's expertise to get these to market. This isn't about money — it's about finding someone who sees what I see and has the commercial firepower to make it real. The £40K is fair runway: enough to focus 100% on getting products market-ready in 3 months, with your input shaping the commercial direction. After that, the products go through your channels and we both win. No egos, no hidden terms — just two people deciding if this makes sense.
             </p>
           </div>
 
