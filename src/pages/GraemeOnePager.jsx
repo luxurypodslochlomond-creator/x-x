@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf';
 
 // UF51 — Partner Brief
 // One page. No graphs. No corporate deck energy.
-// A letter to someone who's ready to build something real.
+// A letter to someone ready to build something real, together.
 
 export default function GraemeOnePager() {
   const [copied, setCopied] = useState(false);
@@ -88,9 +88,9 @@ export default function GraemeOnePager() {
 
     // THE HONEST CLOSE
     addText('WHY THIS, WHY YOU', 10, true, [40, 35, 30], 2);
-    addText('This is not a pitch to one person. I am looking for a serious commercial partner — someone who has the distribution, the relationships, and the conviction to help get these products to market. Someone who sees what I see and is ready to build something real, not just advise.', 9, false, [80, 70, 60], 3);
-    addText('I am a dad in Glasgow. This morning I was picking up litter with Georgie, then taking her to football. That is not a pitch line — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. That is the gap. That is why I am asking.', 9, false, [80, 70, 60], 3);
-    addText('This is not a vendor deal. It is not an investment pitch. It is an equal partnership — your commercial expertise and distribution, my built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Two people deciding if this makes sense.', 9, false, [80, 70, 60], 6);
+    addText('This is not about one person. I am looking for a serious commercial partner — someone who has the distribution, the relationships, and the conviction to help get these products to market. Someone who sees what I see and is ready to build something real, not just advise.', 9, false, [80, 70, 60], 3);
+    addText('I am a dad in Glasgow. This morning I was picking up litter with Georgie, then taking her to football. That is not a slogan — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. That is the gap. That is why I am asking.', 9, false, [80, 70, 60], 3);
+    addText('This is not a vendor deal. It is not an investment ask. It is an equal partnership — your commercial expertise and distribution, my built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Two people deciding if this makes sense.', 9, false, [80, 70, 60], 6);
 
     divider();
 
@@ -255,13 +255,13 @@ export default function GraemeOnePager() {
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>WHY THIS, WHY YOU</div>
             <div style={{ padding: '24px 26px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
               <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: '0 0 16px' }}>
-                This is not a pitch to one person. I am looking for a serious commercial partner — someone who has the distribution, the relationships, and the conviction to help get these products to market. Someone who sees what I see and is ready to build something real, not just advise.
+                This is not about one person. I am looking for a serious commercial partner — someone who has the distribution, the relationships, and the conviction to help get these products to market. Someone who sees what I see and is ready to build something real, not just advise.
               </p>
                 <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: '0 0 16px' }}>
-                  I am a dad in Glasgow. This morning I was picking up litter with Georgie, then taking her to football. That is not a pitch line — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. <strong style={{ color: '#2a2520' }}>That is the gap. That is why I am asking.</strong>
+                  I am a dad in Glasgow. This morning I was picking up litter with Georgie, then taking her to football. That is not a slogan — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. <strong style={{ color: '#2a2520' }}>That is the gap. That is why I am asking.</strong>
                 </p>
                 <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: 0 }}>
-                  This is not a vendor deal. It is not an investment pitch. It is an equal partnership — your commercial expertise and distribution, my products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Just two people deciding if this makes sense.
+                  This is not a vendor deal. It is not an investment ask. It is an equal partnership — your commercial expertise and distribution, my products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Just two people deciding if this makes sense.
                 </p>
             </div>
           </div>
