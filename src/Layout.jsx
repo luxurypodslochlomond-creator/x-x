@@ -609,6 +609,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "⚽ Fergus Hughes Profile", url: createPageUrl("FergusHughesProfile"), icon: User, description: "Player profile for Greg / Tony Begg" },
       { title: "🤝 Chris Walsh Pitch", url: createPageUrl("WalshyPitch"), icon: Handshake, description: "£20k · 17% · Graeme · private pitch" },
       { title: "📄 Graeme One-Pager", url: createPageUrl("GraemeOnePager"), icon: FileText, description: "3 products · market facts · PDF download" },
+      { title: "📊 Partner Evidence Pack", url: createPageUrl("PartnerEvidence"), icon: FileText, description: "Sourced research · market data · PDF download" },
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };

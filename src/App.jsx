@@ -107,6 +107,7 @@ const ZappPrivacyPage = React.lazy(() => import('./pages/ZappPrivacy'));
 import FergusHughesProfilePage from './pages/FergusHughesProfile';
 import RealityCheckPage from './pages/RealityCheck';
 import GraemeOnePagerPage from './pages/GraemeOnePager';
+import PartnerEvidencePage from './pages/PartnerEvidence';
 
 
 
@@ -226,6 +227,7 @@ const AuthenticatedApp = () => {
       <Route path="/FergusHughesProfile" element={<FergusHughesProfilePage />} />
       <Route path="/RealityCheck" element={<RealityCheckPage />} />
       <Route path="/GraemeOnePager" element={<GraemeOnePagerPage />} />
+      <Route path="/PartnerEvidence" element={<PartnerEvidencePage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </>
