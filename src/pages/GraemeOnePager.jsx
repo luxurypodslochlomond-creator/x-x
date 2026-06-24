@@ -88,7 +88,8 @@ export default function GraemeOnePager() {
 
     addText('THE PARTNERSHIP', 9, true, [212, 160, 23], 3);
     addText('Equal partnership is on the table. UF51 brings three live products, the tech, and the mission. The right partner brings reach — ad inventory, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 10, false, [50, 50, 50], 4);
-    addText('10% of all revenue from this partnership goes to our Community Interest Company — the CIC is formed and registered. A new company will be set up specifically for this joint venture, clean and separate. Profits flow, mission stays protected.', 9, false, [60, 60, 60], 6);
+    addText('10% of all revenue from this partnership goes to our Community Interest Company — the CIC is formed and registered. A new company will be set up specifically for this joint venture, clean and separate. Profits flow, mission stays protected.', 9, false, [60, 60, 60], 4);
+    addText('I am one man with three live products and a mission I believe in. I cannot scale this alone — I need a partner who sees what I see. The numbers in this document are real, the revenue is real, and the markets are real. I am honest about what I have and honest about what I do not. Everything is on the table and I am always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.', 9, false, [50, 50, 50], 6);
 
     addText('CONTACT', 9, true, [120, 120, 120], 3);
     addText('Brian Hughes — family@uf51.love\nuf51.love — Glasgow, Scotland\nCommunity Interest Company (CIC) — formed\nNew company to be incorporated for this partnership', 11, false, [60, 60, 60], 0);
@@ -265,6 +266,9 @@ export default function GraemeOnePager() {
             </p>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, margin: '12px 0 0', padding: '14px 18px', background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.15)', borderRadius: 10 }}>
               <strong style={{ color: '#22c55e' }}>10% of all revenue goes to our CIC</strong> — the Community Interest Company is formed and registered. A new company will be incorporated specifically for this joint venture, clean and separate. Profits flow, mission stays protected.
+            </p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: '16px 0 0', fontStyle: 'italic' }}>
+              I'm one man with three live products and a mission I believe in. I can't scale this alone — I need a partner who sees what I see. The numbers here are real, the revenue is real, the markets are real. I'm honest about what I have and honest about what I don't. Everything is on the table and I'm always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.
             </p>
           </div>
 
