@@ -46,12 +46,12 @@ export default function GraemeOnePager() {
 
     // HEADER
     addText('UNIVERSAL FREQUENCY 51 — PARTNER BRIEF', 8, true, [120, 120, 120], 2);
-    addText('Three Products. One Mission. Live Now.', 18, true, [20, 20, 20], 3);
+    addText('Three Products. One Mission. Built Now.', 18, true, [20, 20, 20], 3);
     addText('June 2026', 9, false, [140, 140, 140], 6);
 
     // INTRO
     addText('WHO WE ARE', 9, true, [212, 160, 23], 3);
-    addText('UF51 is a Glasgow-based Community Interest Company (formed) building technology that heals. Three products are live, subscription-funded, and sitting in massive underserved markets. Each runs in the browser — no app downloads, no hardware, no installation barrier. Consumer-grade AI, but built on real research and real revenue.', 10, false, [60, 60, 60], 6);
+    addText('UF51 is a Glasgow-based Community Interest Company (formed) building technology that heals. Three products are built and in production — two are payment-ready via Stripe and Apple Pay, tested end to end. Each runs in the browser — no app downloads, no hardware, no installation barrier. Consumer-grade AI, built on real research. No paying subscribers yet — honest about that. The tech works, the payment infrastructure is live, the markets are real.', 10, false, [60, 60, 60], 6);
 
     divider();
 
@@ -59,7 +59,7 @@ export default function GraemeOnePager() {
     addText('1. PETSOUNDS51 — Animal Acoustic Therapy', 13, true, [212, 160, 23], 3);
     addText('THE MARKET:', 9, true, [120, 120, 120], 2);
     addText('• Global pet care market: $259 billion (2025), 6.1% CAGR\n• Animal anxiety treatment market: $2B+ and growing\n• 70%+ of dogs exhibit anxiety-related behaviours\n• 45% of UK households own a pet (PFMA 2024)\n• Vet anxiety prescriptions up 300%+ in a decade\n• Average UK pet owner spends £1,000+/year\n• Our price: £29.99/year — impulse territory', 9, false, [60, 60, 60], 4);
-    addText('THE PRODUCT: Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis — no app, no hardware, no prescription. Works offline. Built on published veterinary neuroscience. Live and generating revenue.', 9, false, [60, 60, 60], 4);
+    addText('THE PRODUCT: Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis — no app, no hardware, no prescription. Works offline. Built on published veterinary neuroscience. Built, tested, payment-ready — waiting for first subscribers.', 9, false, [60, 60, 60], 4);
     addText('B2B: Vet surgeries, pet insurers, animal shelters, pet care brands. Licensing model ready.', 9, false, [60, 60, 60], 6);
 
     divider([212, 160, 23]);
@@ -84,12 +84,12 @@ export default function GraemeOnePager() {
 
     // WHY NOW
     addText('WHY NOW', 11, true, [20, 20, 20], 3);
-    addText('All three products are LIVE — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.', 10, false, [50, 50, 50], 6);
+    addText('All three products are BUILT and in production — not concepts, not prototypes. PetSounds51 and SORTED are payment-ready via Stripe and Apple Pay, tested end to end. Earth51 (litter picking) is built but needs refinement before launch. No paying subscribers yet — I am honest about that. What exists is working technology, live payment infrastructure, and three massive converging markets. Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.', 10, false, [50, 50, 50], 6);
 
     addText('THE PARTNERSHIP', 9, true, [212, 160, 23], 3);
-    addText('Equal partnership is on the table. UF51 brings three live products, the tech, and the mission. The right partner brings reach — ad inventory, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 10, false, [50, 50, 50], 4);
+    addText('Equal partnership is on the table. UF51 brings three built products, the tech, and the mission. The right partner brings reach — ad inventory, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 10, false, [50, 50, 50], 4);
     addText('10% of all revenue from this partnership goes to our Community Interest Company — the CIC is formed and registered. A new company will be set up specifically for this joint venture, clean and separate. Profits flow, mission stays protected.', 9, false, [60, 60, 60], 4);
-    addText('I am one man with three live products and a mission I believe in. I cannot scale this alone — I need a partner who sees what I see. The numbers in this document are real, the revenue is real, and the markets are real. I am honest about what I have and honest about what I do not. Everything is on the table and I am always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.', 9, false, [50, 50, 50], 6);
+    addText('I am one man with three built products and a mission I believe in. I cannot scale this alone — I need a partner who sees what I see. The numbers in this document are real, the markets are real, the tech is real. I have no paying subscribers yet — I am honest about that. What I have is working technology, payment infrastructure ready to go, and the will to build something that lasts. Everything is on the table and I am always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.', 9, false, [50, 50, 50], 6);
 
     addText('CONTACT', 9, true, [120, 120, 120], 3);
     addText('Brian Hughes — family@uf51.love\nuf51.love — Glasgow, Scotland\nCommunity Interest Company (CIC) — formed\nNew company to be incorporated for this partnership', 11, false, [60, 60, 60], 0);
@@ -182,7 +182,7 @@ export default function GraemeOnePager() {
 
       {/* BANNER */}
       <div style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '8px 20px', textAlign: 'center' }}>
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.35)' }}>UF51 PARTNER BRIEF — JUNE 2026 — ALL PRODUCTS LIVE</span>
+        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.35)' }}>UF51 PARTNER BRIEF — JUNE 2026 — PRODUCTS BUILT, PAYMENT READY</span>
       </div>
 
       <div id="graeme-body" style={{ maxWidth: 820, margin: '0 auto', padding: '48px 20px 80px' }}>
@@ -191,7 +191,7 @@ export default function GraemeOnePager() {
           {/* HERO */}
           <div style={{ marginBottom: 48 }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>
-              {['LIVE PRODUCTS', 'SUBSCRIPTION REVENUE', 'CIC FORMED', '10% TO MISSION', 'GLOBAL SCALE'].map(t => (
+              {['BUILT PRODUCTS', 'PAYMENT READY', 'CIC FORMED', '10% TO MISSION', 'GLOBAL SCALE'].map(t => (
                 <span key={t} style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 4, padding: '3px 8px' }}>{t}</span>
               ))}
             </div>
@@ -201,7 +201,7 @@ export default function GraemeOnePager() {
               One platform.
             </h1>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, margin: 0, maxWidth: 640, borderLeft: '3px solid rgba(255,255,255,0.1)', paddingLeft: 16 }}>
-              UF51 builds technology that heals — animals, people, and the planet. All three products are live, subscription-funded, and sitting in trillion-dollar markets with no dominant player. Consumer-grade AI, built on real research and real revenue.
+              UF51 builds technology that heals — animals, people, and the planet. All three products are built and in production. Two are payment-ready via Stripe and Apple Pay — live, tested, waiting for first subscribers. Sitting in trillion-dollar markets with no dominant player. Consumer-grade AI, built on real research.
             </p>
           </div>
 
@@ -252,7 +252,7 @@ export default function GraemeOnePager() {
           <div style={{ marginBottom: 36 }}>
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#fff', marginBottom: 12 }}>WHY NOW</div>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12 }}>
-              All three products are <strong style={{ color: '#fff' }}>LIVE</strong> — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.
+              All three products are <strong style={{ color: '#fff' }}>BUILT</strong> — not concepts, not prototypes. PetSounds51 and SORTED are payment-ready via Stripe and Apple Pay, tested end to end. Earth51 needs refinement before launch. No paying subscribers yet — honest about that. Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.
             </p>
           </div>
 
@@ -262,13 +262,13 @@ export default function GraemeOnePager() {
           <div style={{ marginBottom: 36 }}>
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#d4a017', marginBottom: 12 }}>THE PARTNERSHIP</div>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: 'rgba(212,160,23,0.04)', border: '1px solid rgba(212,160,23,0.2)', borderRadius: 12 }}>
-              <strong style={{ color: '#d4a017' }}>Equal partnership is on the table.</strong> UF51 brings three live products, the tech, and the mission. The right partner brings reach — ad inventory, distribution channels, and the capital to scale fast. This isn't a vendor deal. Two sides building something together, each bringing what the other can't do alone. Open, fair, fast-moving.
+              <strong style={{ color: '#d4a017' }}>Equal partnership is on the table.</strong> UF51 brings three built products, the tech, and the mission. The right partner brings reach — ad inventory, distribution channels, and the capital to scale fast. This isn't a vendor deal. Two sides building something together, each bringing what the other can't do alone. Open, fair, fast-moving.
             </p>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, margin: '12px 0 0', padding: '14px 18px', background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.15)', borderRadius: 10 }}>
               <strong style={{ color: '#22c55e' }}>10% of all revenue goes to our CIC</strong> — the Community Interest Company is formed and registered. A new company will be incorporated specifically for this joint venture, clean and separate. Profits flow, mission stays protected.
             </p>
             <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: '16px 0 0', fontStyle: 'italic' }}>
-              I'm one man with three live products and a mission I believe in. I can't scale this alone — I need a partner who sees what I see. The numbers here are real, the revenue is real, the markets are real. I'm honest about what I have and honest about what I don't. Everything is on the table and I'm always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.
+              I'm one man with three built products and a mission I believe in. I can't scale this alone — I need a partner who sees what I see. The numbers here are real, the markets are real, the tech is real. I have no paying subscribers yet — I'm honest about that. What I have is working technology, payment infrastructure ready to go, and the will to build something that lasts. Everything is on the table and I'm always open to discussion. No egos, no hidden terms — just two people deciding if this makes sense.
             </p>
           </div>
 
