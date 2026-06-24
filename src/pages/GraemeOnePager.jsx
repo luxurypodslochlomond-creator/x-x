@@ -51,7 +51,7 @@ export default function GraemeOnePager() {
 
     // INTRO
     addText('WHO WE ARE', 9, true, [212, 160, 23], 3);
-    addText('UF51 is a Glasgow-based Community Interest Company building technology that heals. Three products are live, subscription-funded, and sitting in massive underserved markets. Each is data-sovereign, browser-native, and built for global scale from day one.', 10, false, [60, 60, 60], 6);
+    addText('UF51 is a Glasgow-based Community Interest Company (formed) building technology that heals. Three products are live, subscription-funded, and sitting in massive underserved markets. Each runs in the browser — no app downloads, no hardware, no installation barrier. Consumer-grade AI, but built on real research and real revenue.', 10, false, [60, 60, 60], 6);
 
     divider();
 
@@ -87,10 +87,11 @@ export default function GraemeOnePager() {
     addText('All three products are LIVE — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.', 10, false, [50, 50, 50], 6);
 
     addText('THE PARTNERSHIP', 9, true, [212, 160, 23], 3);
-    addText('Equal partnership is on the table. UF51 brings three live products, the tech, and the mission. The right partner brings reach — TV ad inventory, relationships with bars and vets, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 10, false, [50, 50, 50], 6);
+    addText('Equal partnership is on the table. UF51 brings three live products, the tech, and the mission. The right partner brings reach — ad inventory, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 10, false, [50, 50, 50], 4);
+    addText('10% of all revenue from this partnership goes to our Community Interest Company — the CIC is formed and registered. A new company will be set up specifically for this joint venture, clean and separate. Profits flow, mission stays protected.', 9, false, [60, 60, 60], 6);
 
     addText('CONTACT', 9, true, [120, 120, 120], 3);
-    addText('Brian Hughes — family@uf51.love\nuf51.love — Glasgow, Scotland\nCommunity Interest Company (CIC) in formation', 11, false, [60, 60, 60], 0);
+    addText('Brian Hughes — family@uf51.love\nuf51.love — Glasgow, Scotland\nCommunity Interest Company (CIC) — formed\nNew company to be incorporated for this partnership', 11, false, [60, 60, 60], 0);
 
     doc.save('UF51-Partner-OnePager-June-2026.pdf');
     setSaving(false);
@@ -189,7 +190,7 @@ export default function GraemeOnePager() {
           {/* HERO */}
           <div style={{ marginBottom: 48 }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>
-              {['LIVE PRODUCTS', 'SUBSCRIPTION REVENUE', 'CIC FORMING', 'DATA SOVEREIGN', 'GLOBAL SCALE'].map(t => (
+              {['LIVE PRODUCTS', 'SUBSCRIPTION REVENUE', 'CIC FORMED', '10% TO MISSION', 'GLOBAL SCALE'].map(t => (
                 <span key={t} style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 4, padding: '3px 8px' }}>{t}</span>
               ))}
             </div>
@@ -199,7 +200,7 @@ export default function GraemeOnePager() {
               One platform.
             </h1>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, margin: 0, maxWidth: 640, borderLeft: '3px solid rgba(255,255,255,0.1)', paddingLeft: 16 }}>
-              UF51 builds technology that heals — animals, people, and the planet. All three products are live, subscription-funded, and sitting in trillion-dollar markets with no dominant player.
+              UF51 builds technology that heals — animals, people, and the planet. All three products are live, subscription-funded, and sitting in trillion-dollar markets with no dominant player. Consumer-grade AI, built on real research and real revenue.
             </p>
           </div>
 
@@ -260,7 +261,10 @@ export default function GraemeOnePager() {
           <div style={{ marginBottom: 36 }}>
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#d4a017', marginBottom: 12 }}>THE PARTNERSHIP</div>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: 'rgba(212,160,23,0.04)', border: '1px solid rgba(212,160,23,0.2)', borderRadius: 12 }}>
-              <strong style={{ color: '#d4a017' }}>Equal partnership is on the table.</strong> UF51 brings three live products, the tech, and the mission. The right partner brings reach — TV ad inventory, relationships with bars and vets, distribution channels, and the capital to scale fast. This isn't a vendor deal. This is two sides building something together, each bringing what the other can't do alone. We're open, we're fair, and we move fast.
+              <strong style={{ color: '#d4a017' }}>Equal partnership is on the table.</strong> UF51 brings three live products, the tech, and the mission. The right partner brings reach — ad inventory, distribution channels, and the capital to scale fast. This isn't a vendor deal. Two sides building something together, each bringing what the other can't do alone. Open, fair, fast-moving.
+            </p>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, margin: '12px 0 0', padding: '14px 18px', background: 'rgba(34,197,94,0.04)', border: '1px solid rgba(34,197,94,0.15)', borderRadius: 10 }}>
+              <strong style={{ color: '#22c55e' }}>10% of all revenue goes to our CIC</strong> — the Community Interest Company is formed and registered. A new company will be incorporated specifically for this joint venture, clean and separate. Profits flow, mission stays protected.
             </p>
           </div>
 
@@ -270,7 +274,7 @@ export default function GraemeOnePager() {
           <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: '28px 24px', textAlign: 'center' }}>
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 12 }}>LET'S TALK</div>
             <h2 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 10px' }}>Brian Hughes</h2>
-            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', margin: '0 0 20px' }}>Glasgow, Scotland · Community Interest Company (CIC) in formation</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', margin: '0 0 20px' }}>Glasgow, Scotland · CIC formed · New company to be incorporated for this partnership</p>
             <a href="mailto:family@uf51.love?subject=UF51 Partnership"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#fff', color: '#000', fontWeight: 900, fontSize: 13, letterSpacing: '0.06em', borderRadius: 10, textDecoration: 'none' }}>
               family@uf51.love
