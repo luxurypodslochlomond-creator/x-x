@@ -52,7 +52,7 @@ export default function GraemeOnePager() {
     // HERO
     addText('Three products. Built and ready.', 15, true, [40, 35, 30], 2);
     addText('Looking for the person who will help them fly.', 11, false, [100, 90, 75], 4);
-    addText('I build technology that heals — animals, people, the planet. Three products are built, in production, two are payment-ready via Stripe and Apple Pay. No paying subscribers yet — honest about that. What exists is working tech, live payments, and three converging markets worth over $2 trillion combined. What is missing is the commercial firepower to get them to market. That is what this is about.', 9, false, [80, 70, 60], 6);
+    addText('I build technology that heals — animals, people, the planet. Three products are in production — two are payment-ready via Stripe and Apple Pay, one needs work. No paying subscribers yet. I am honest about where I am: the tech is real, the markets are real, but I cannot finish and launch this alone. I need a partner. Not investment — a partner. Someone with the commercial reach I do not have.', 9, false, [80, 70, 60], 6);
 
     divider();
 
@@ -89,7 +89,7 @@ export default function GraemeOnePager() {
     // THE HONEST CLOSE
     addText('WHY THIS, WHY YOU', 10, true, [40, 35, 30], 2);
     addText('You have spent years scaling other people\'s brands at the highest level. You know how to move audiences, open doors, and close deals. You also know what it feels like to build someone else\'s vision instead of your own.', 9, false, [80, 70, 60], 3);
-    addText('I am the founder and builder. I have three working products, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these to the people who need them. That is the gap.', 9, false, [80, 70, 60], 3);
+    addText('I am a dad in Glasgow. This morning I was picking up litter with my boy Georgie, then taking him to football. That is not a pitch line — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. That is the gap. That is why I am asking.', 9, false, [80, 70, 60], 3);
     addText('This is not a vendor deal. It is not an investment pitch. It is an equal partnership — your commercial expertise and distribution, my built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Two people deciding if this makes sense.', 9, false, [80, 70, 60], 6);
 
     divider();
@@ -172,11 +172,11 @@ export default function GraemeOnePager() {
           <div style={{ marginBottom: 48 }}>
             <h1 style={{ fontSize: 'clamp(28px, 5.5vw, 44px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.035em', margin: '0 0 20px', color: '#2a2520' }}>
               Three products.<br />
-              <span style={{ color: '#b8860b' }}>Built and ready.</span><br />
-              Looking for wings.
+              <span style={{ color: '#b8860b' }}>Not finished.</span><br />
+              Not ready to fly alone.
             </h1>
             <p style={{ fontSize: 15, color: '#6b6055', lineHeight: 1.75, margin: 0, maxWidth: 580, borderLeft: '3px solid rgba(184,134,11,0.3)', paddingLeft: 18 }}>
-              I build technology that heals — animals, people, the planet. Three products are built, in production, two are payment-ready via Stripe and Apple Pay. No paying subscribers yet — honest about that. What exists is working tech, live payments, and three converging markets worth over $2 trillion combined. What is missing is the commercial firepower to get them to market. <strong style={{ color: '#2a2520' }}>That is what this is about.</strong>
+              I build technology that heals — animals, people, the planet. Three products are in production — two are payment-ready via Stripe and Apple Pay, one needs work. No paying subscribers yet. I am honest about where I am: the tech is real, the markets are real, but I cannot finish and launch this alone. <strong style={{ color: '#2a2520' }}>I need a partner.</strong> Not investment — a partner. Someone with the commercial reach I do not have.
             </p>
           </div>
 
@@ -258,10 +258,10 @@ export default function GraemeOnePager() {
                 You have spent years scaling other people's brands at the highest level. You know how to move audiences, open doors, and close deals. You also know what it feels like to build someone else's vision instead of your own.
               </p>
               <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: '0 0 16px' }}>
-                I am the founder and builder. I have three working products, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these to the people who need them. <strong style={{ color: '#2a2520' }}>That is the gap.</strong>
+                I am a dad in Glasgow. This morning I was picking up litter with my boy Georgie, then taking him to football. That is not a pitch line — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. <strong style={{ color: '#2a2520' }}>That is the gap. That is why I am asking.</strong>
               </p>
               <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: 0 }}>
-                This is not a vendor deal. It is not an investment pitch. It is an equal partnership — your commercial expertise and distribution, my built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Just two people deciding if this makes sense.
+                This is not a vendor deal. It is not an investment pitch. It is an equal partnership — your commercial expertise and distribution, my products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Just two people deciding if this makes sense.
               </p>
             </div>
           </div>
