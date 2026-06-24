@@ -47,7 +47,7 @@ export default function GraemeOnePager() {
     // HEADER
     addText('UNIVERSAL FREQUENCY 51 — PARTNER BRIEF', 8, true, [120, 120, 120], 2);
     addText('Three Products. One Mission. Live Now.', 18, true, [20, 20, 20], 3);
-    addText('Prepared for Graeme / TV Ad Partnership — June 2026', 9, false, [140, 140, 140], 6);
+    addText('June 2026', 9, false, [140, 140, 140], 6);
 
     // INTRO
     addText('WHO WE ARE', 9, true, [212, 160, 23], 3);
@@ -84,7 +84,7 @@ export default function GraemeOnePager() {
 
     // WHY NOW
     addText('WHY NOW', 11, true, [20, 20, 20], 3);
-    addText('All three products are LIVE — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). The TV ad company partnership comes at the exact moment these markets are converging: pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection.', 10, false, [50, 50, 50], 6);
+    addText('All three products are LIVE — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.', 10, false, [50, 50, 50], 6);
 
     addText('THE PARTNERSHIP', 9, true, [212, 160, 23], 3);
     addText('Equal partnership is on the table. UF51 brings three live products, the tech, and the mission. The right partner brings reach — TV ad inventory, relationships with bars and vets, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 10, false, [50, 50, 50], 6);
@@ -171,7 +171,7 @@ export default function GraemeOnePager() {
             style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: copied ? '#22c55e' : '#fff', background: copied ? 'rgba(34,197,94,0.1)' : 'rgba(255,255,255,0.05)', border: `1px solid ${copied ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.12)'}`, borderRadius: 6, padding: '8px 16px', cursor: 'pointer' }}>
             {copied ? '✓ COPIED' : 'COPY TEXT'}
           </motion.button>
-          <a href="mailto:family@uf51.love?subject=UF51 Partnership — Graeme Introduction"
+          <a href="mailto:family@uf51.love?subject=UF51 Partnership"
             style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.5)', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 6, padding: '8px 16px', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
             CONTACT
           </a>
@@ -180,7 +180,7 @@ export default function GraemeOnePager() {
 
       {/* BANNER */}
       <div style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '8px 20px', textAlign: 'center' }}>
-        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.35)' }}>PREPARED FOR GRAEME / TV AD PARTNERSHIP — JUNE 2026 — ALL PRODUCTS LIVE</span>
+        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.35)' }}>UF51 PARTNER BRIEF — JUNE 2026 — ALL PRODUCTS LIVE</span>
       </div>
 
       <div id="graeme-body" style={{ maxWidth: 820, margin: '0 auto', padding: '48px 20px 80px' }}>
@@ -199,7 +199,7 @@ export default function GraemeOnePager() {
               One platform.
             </h1>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, margin: 0, maxWidth: 640, borderLeft: '3px solid rgba(255,255,255,0.1)', paddingLeft: 16 }}>
-              UF51 builds technology that heals — animals, people, and the planet. All three products are live, subscription-funded, and sitting in trillion-dollar markets with no dominant player. This is the data Graeme asked for.
+              UF51 builds technology that heals — animals, people, and the planet. All three products are live, subscription-funded, and sitting in trillion-dollar markets with no dominant player.
             </p>
           </div>
 
@@ -250,7 +250,7 @@ export default function GraemeOnePager() {
           <div style={{ marginBottom: 36 }}>
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#fff', marginBottom: 12 }}>WHY NOW</div>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12 }}>
-              All three products are <strong style={{ color: '#fff' }}>LIVE</strong> — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The TV ad partnership arrives at the exact moment these markets converge.
+              All three products are <strong style={{ color: '#fff' }}>LIVE</strong> — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.
             </p>
           </div>
 
@@ -271,7 +271,7 @@ export default function GraemeOnePager() {
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 12 }}>LET'S TALK</div>
             <h2 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 10px' }}>Brian Hughes</h2>
             <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', margin: '0 0 20px' }}>Glasgow, Scotland · Community Interest Company (CIC) in formation</p>
-            <a href="mailto:family@uf51.love?subject=UF51 Partnership — Graeme Introduction"
+            <a href="mailto:family@uf51.love?subject=UF51 Partnership"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', background: '#fff', color: '#000', fontWeight: 900, fontSize: 13, letterSpacing: '0.06em', borderRadius: 10, textDecoration: 'none' }}>
               family@uf51.love
             </a>
