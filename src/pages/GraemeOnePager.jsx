@@ -56,6 +56,13 @@ export default function GraemeOnePager() {
 
     divider();
 
+    // FACTS — evidence strip
+    addText('FACTS — NOT HYPE', 10, true, [30, 138, 78], 3);
+    addText('3 products built & live  |  2 Stripe-ready now  |  £0 subscribers — yet  |  1 CIC registered  |  Peer-reviewed research  |  Built solo in Glasgow', 9, false, [80, 70, 60], 2);
+    addText('I am not going to pretend I have traction I do not have. What I have is real, working technology — built solo, bootstrapped, honest. The next chapter needs you.', 8, false, [120, 110, 95], 6);
+
+    divider();
+
     // THREE PRODUCTS — compact
     addText('1. PETSOUNDS51 — Animal Acoustic Therapy', 11, true, [180, 130, 20], 2);
     addText('Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis on published veterinary neuroscience — no app, no hardware, works offline. Market: $259B pet care, 6.1% CAGR. Price: £29.99/year. Target: 100K subscribers = £3M/year. B2B: vets, insurers, pet brands.', 9, false, [80, 70, 60], 2);
@@ -177,6 +184,29 @@ export default function GraemeOnePager() {
             </h1>
             <p style={{ fontSize: 15, color: '#6b6055', lineHeight: 1.75, margin: 0, maxWidth: 580, borderLeft: '3px solid rgba(184,134,11,0.3)', paddingLeft: 18 }}>
               I build technology that heals — animals, people, the planet. Three products are in production — two are payment-ready via Stripe and Apple Pay, one needs work. No paying subscribers yet. I am honest about where I am: the tech is real, the markets are real, but I cannot finish and launch this alone. <strong style={{ color: '#2a2520' }}>I need a partner.</strong> Not investment — a partner. Someone with the commercial reach I do not have.
+            </p>
+          </div>
+
+          {/* FACTS — evidence, not hype */}
+          <div style={{ marginBottom: 40 }}>
+            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#1e8a4e', marginBottom: 16 }}>FACTS — NOT HYPE</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 10 }}>
+              {[
+                { stat: '3', label: 'Products built & live' },
+                { stat: '2', label: 'Stripe-ready now' },
+                { stat: '£0', label: 'Subscribers — yet' },
+                { stat: '1', label: 'CIC registered' },
+                { stat: 'Peer-reviewed', label: 'Research-backed' },
+                { stat: 'Glasgow', label: 'Built & bootstrapped' },
+              ].map((f, i) => (
+                <div key={i} style={{ padding: '16px 14px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 10, textAlign: 'center' }}>
+                  <div style={{ fontSize: 20, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.02em', marginBottom: 4 }}>{f.stat}</div>
+                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: '#8a7d6f', textTransform: 'uppercase', lineHeight: 1.3 }}>{f.label}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.65, margin: '14px 0 0', fontStyle: 'italic' }}>
+              I am not going to pretend I have traction I don't have. What I have is real, working technology — built solo, bootstrapped, honest. The next chapter needs you.
             </p>
           </div>
 
