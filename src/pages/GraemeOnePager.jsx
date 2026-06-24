@@ -58,7 +58,7 @@ export default function GraemeOnePager() {
     // 1. PETSOUNDS51
     addText('1. PETSOUNDS51 — Animal Acoustic Therapy', 13, true, [212, 160, 23], 3);
     addText('THE MARKET:', 9, true, [120, 120, 120], 2);
-    addText('• Global pet care market: $259 billion (2025), 6.1% CAGR\n• Animal anxiety treatment market: $2B+ and growing\n• 70%+ of dogs exhibit anxiety-related behaviours\n• 67% of UK households own a pet\n• Vet anxiety prescriptions up 300%+ in a decade\n• Average UK pet owner spends £1,000+/year\n• Our price: £29.99/year — impulse territory', 9, false, [60, 60, 60], 4);
+    addText('• Global pet care market: $259 billion (2025), 6.1% CAGR\n• Animal anxiety treatment market: $2B+ and growing\n• 70%+ of dogs exhibit anxiety-related behaviours\n• 45% of UK households own a pet (PFMA 2024)\n• Vet anxiety prescriptions up 300%+ in a decade\n• Average UK pet owner spends £1,000+/year\n• Our price: £29.99/year — impulse territory', 9, false, [60, 60, 60], 4);
     addText('THE PRODUCT: Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis — no app, no hardware, no prescription. Works offline. Built on published veterinary neuroscience. Live and generating revenue.', 9, false, [60, 60, 60], 4);
     addText('B2B: Vet surgeries, pet insurers, animal shelters, pet care brands. Licensing model ready.', 9, false, [60, 60, 60], 6);
 
@@ -108,7 +108,7 @@ export default function GraemeOnePager() {
         { value: '6.1%', label: 'CAGR — pet care growth' },
         { value: '$2B+', label: 'Animal anxiety treatment' },
         { value: '70%+', label: 'Dogs show anxiety behaviours' },
-        { value: '67%', label: 'UK households own a pet' },
+        { value: '45%', label: 'UK households own a pet' },
         { value: '£29.99', label: 'Annual subscription — impulse price' },
       ],
       product: 'Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis — no app, no hardware, no prescription. Works offline. Built on published veterinary neuroscience.',
