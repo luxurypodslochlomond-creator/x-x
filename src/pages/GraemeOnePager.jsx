@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { jsPDF } from 'jspdf';
 
-// UF51 — Partner One-Pager for Graeme / TV Ad Company
+// UF51 — Partner One-Pager
 // Three products. One page. Facts only. PDF download.
 
 export default function GraemeOnePager() {
@@ -201,7 +201,7 @@ export default function GraemeOnePager() {
               One platform.
             </h1>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, margin: 0, maxWidth: 640, borderLeft: '3px solid rgba(255,255,255,0.1)', paddingLeft: 16 }}>
-              UF51 builds technology that heals — animals, people, and the planet. All three products are built and in production. Two are payment-ready via Stripe and Apple Pay — live, tested, waiting for first subscribers. Sitting in trillion-dollar markets with no dominant player. Consumer-grade AI, built on real research.
+              UF51 builds technology that heals — animals, people, and the planet. All three products are built and in production. Two are payment-ready via Stripe and Apple Pay — live, tested, waiting for first subscribers. Combined markets exceed $2 trillion with no dominant player. Consumer-grade AI, built on real research.
             </p>
           </div>
 
