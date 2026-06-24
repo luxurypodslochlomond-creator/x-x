@@ -86,6 +86,9 @@ export default function GraemeOnePager() {
     addText('WHY NOW', 11, true, [20, 20, 20], 3);
     addText('All three products are LIVE — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). The TV ad company partnership comes at the exact moment these markets are converging: pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection.', 10, false, [50, 50, 50], 6);
 
+    addText('THE PARTNERSHIP', 9, true, [212, 160, 23], 3);
+    addText('Equal partnership is on the table. UF51 brings three live products, the tech, and the mission. The right partner brings reach — TV ad inventory, relationships with bars and vets, distribution channels, and the capital to scale fast. This is not a vendor deal. Two sides building something together, each bringing what the other cannot do alone. Open, fair, fast-moving.', 10, false, [50, 50, 50], 6);
+
     addText('CONTACT', 9, true, [120, 120, 120], 3);
     addText('Brian Hughes — family@uf51.love\nuf51.love — Glasgow, Scotland\nCommunity Interest Company (CIC) in formation', 11, false, [60, 60, 60], 0);
 
@@ -248,6 +251,16 @@ export default function GraemeOnePager() {
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#fff', marginBottom: 12 }}>WHY NOW</div>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12 }}>
               All three products are <strong style={{ color: '#fff' }}>LIVE</strong> — not concepts, not prototypes. Subscription revenue is flowing via Stripe (production mode). Pet wellness is exploding, access to justice is in crisis, and environmental action is a mandated corporate priority. UF51 owns the intersection. The TV ad partnership arrives at the exact moment these markets converge.
+            </p>
+          </div>
+
+          <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', margin: '0 0 36px' }} />
+
+          {/* PARTNERSHIP PROPOSAL */}
+          <div style={{ marginBottom: 36 }}>
+            <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#d4a017', marginBottom: 12 }}>THE PARTNERSHIP</div>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: 'rgba(212,160,23,0.04)', border: '1px solid rgba(212,160,23,0.2)', borderRadius: 12 }}>
+              <strong style={{ color: '#d4a017' }}>Equal partnership is on the table.</strong> UF51 brings three live products, the tech, and the mission. The right partner brings reach — TV ad inventory, relationships with bars and vets, distribution channels, and the capital to scale fast. This isn't a vendor deal. This is two sides building something together, each bringing what the other can't do alone. We're open, we're fair, and we move fast.
             </p>
           </div>
 
