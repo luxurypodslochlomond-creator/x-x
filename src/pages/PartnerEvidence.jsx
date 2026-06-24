@@ -68,13 +68,13 @@ export default function PartnerEvidence() {
     addText('1. MARKET INTELLIGENCE', 12, true, [180, 130, 6], 3);
 
     addText('PetSounds51 — Pet Care & Animal Wellness', 10, true, [180, 130, 6], 2);
-    addText('Global pet care market: ~$260 billion (2024), growing at ~5.9% CAGR (Grand View Research / Fortune Business Insights). US pet spending: $150B+ in 2024 (APPA). UK pet population: ~13 million dogs, ~12 million cats (PFMA/UK Pet Food, 2024). Spending on pet wellness is recession-resilient and accelerating as pets are increasingly treated as family members.', 9, false, [80, 70, 50], 4);
+    addText('Global pet care market: ~$263 billion (2024), growing at ~5.9% CAGR (Grand View Research). US pet spending: $158 billion in 2024 (APPA). UK pet population: ~13 million dogs, ~12 million cats (PFMA/UK Pet Food, 2024). Spending on pet wellness is recession-resilient and accelerating as pets are increasingly treated as family members.', 9, false, [80, 70, 50], 4);
 
     addText('SORTED — Legal Technology & Access to Justice', 10, true, [180, 130, 6], 2);
-    addText('Global legal tech market: ~$28.8 billion (2024), projected ~$73 billion by 2034, CAGR ~9.4% (Precedence Research). Legal AI sub-segment: ~$1.7 billion (2024), CAGR ~13% (Grand View Research). AI-powered document processing is the frontier of one of the fastest-growing B2B sectors.', 9, false, [80, 70, 50], 4);
+    addText('Global legal tech market: ~$29 billion (2025), projected ~$73 billion by 2035, CAGR ~9.4% (Precedence Research). AI-powered document processing is the frontier of one of the fastest-growing B2B sectors.', 9, false, [80, 70, 50], 4);
 
     addText('Earth51 — ESG & Environmental Services', 10, true, [180, 130, 6], 2);
-    addText('ESG reporting is now mandatory for large EU companies under the Corporate Sustainability Reporting Directive (CSRD, European Commission). Global green bond issuance exceeded $700 billion in 2023 (Climate Bonds Initiative). Verified, fraud-proof environmental impact data is a genuine and growing market need as reporting requirements tighten.', 9, false, [80, 70, 50], 6);
+    addText('ESG reporting is now mandatory for large EU companies under the Corporate Sustainability Reporting Directive (CSRD, European Commission). Global green bond issuance reached ~$700 billion in 2024 (Bank for International Settlements / Climate Bonds Initiative). Verified, fraud-proof environmental impact data is a genuine and growing market need as reporting requirements tighten.', 9, false, [80, 70, 50], 6);
 
     divider();
 
@@ -123,10 +123,10 @@ export default function PartnerEvidence() {
   };
 
   const headlineStats = [
-    { stat: '~$260B', label: 'Global pet care market', source: 'Grand View Research' },
-    { stat: '~$28.8B', label: 'Legal tech market (2024)', source: 'Precedence Research' },
+    { stat: '~$263B', label: 'Global pet care market', source: 'Grand View Research' },
+    { stat: '~$29B', label: 'Legal tech market (2025)', source: 'Precedence Research' },
     { stat: '92%', label: 'No legal help for the poor', source: 'Legal Services Corp' },
-    { stat: '~$700B', label: 'Green bond issuance (2023)', source: 'Climate Bonds Initiative' },
+    { stat: '~$700B', label: 'Green bond issuance (2024)', source: 'BIS / Climate Bonds' },
     { stat: '25M', label: 'UK dogs + cats', source: 'PFMA / UK Pet Food' },
     { stat: 'CIC', label: 'Registered & committed', source: 'Companies House' },
   ];
@@ -134,14 +134,15 @@ export default function PartnerEvidence() {
   const sources = [
     { name: 'Grand View Research — Pet Care Market Analysis', url: 'https://www.grandviewresearch.com/industry-analysis/pet-care-market' },
     { name: 'Fortune Business Insights — Pet Care Market', url: 'https://www.fortunebusinessinsights.com/industry-reports/pet-care-market-101221' },
-    { name: 'APPA (American Pet Products Association) — Industry Figures', url: 'https://www.americanpetproducts.org/industrytrends' },
+    { name: 'APPA (American Pet Products Association) — Industry Figures', url: 'https://americanpetproducts.org/industry-trends-and-stats' },
     { name: 'PFMA / UK Pet Food — Pet Population', url: 'https://www.ukpetfood.org/information-centre/statistics/pet-population.html' },
     { name: 'Precedence Research — Legal Tech Market', url: 'https://www.precedenceresearch.com/legal-tech-market' },
     { name: 'Grand View Research — Legal AI Market', url: 'https://www.grandviewresearch.com/industry-analysis/artificial-intelligence-ai-in-legal-market' },
-    { name: 'Legal Services Corporation — The Justice Gap', url: 'https://www.lsc.gov/about-lsc/our-impact/justice-gap' },
+    { name: 'Legal Services Corporation — The Justice Gap', url: 'https://justicegap.lsc.gov/resource/2022-justice-gap-report/' },
     { name: 'The Law Society — Legal Aid Deserts', url: 'https://www.lawsociety.org.uk/topics/legal-aid' },
     { name: 'Institute for Government — Performance Tracker', url: 'https://www.instituteforgovernment.org.uk/performance-tracker' },
     { name: 'European Commission — CSRD Directive', url: 'https://finance.ec.europa.eu/capital-markets-union-and-financial-markets/company-reporting-and-auditing/company-reporting/corporate-sustainability-reporting_en' },
+    { name: 'Bank for International Settlements — Green Bond Market Growth', url: 'https://www.bis.org/publ/qtrpdf/r_qt2503d.pdf' },
     { name: 'Climate Bonds Initiative — Green Bond Market', url: 'https://www.climatebonds.net/market' },
     { name: 'PMC / NIH — Noise Fears in Dogs (Review)', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9852993/' },
     { name: 'Frontiers in Veterinary Science', url: 'https://www.frontiersin.org/journals/veterinary-science' },
@@ -192,8 +193,8 @@ export default function PartnerEvidence() {
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: AMBER, marginBottom: 16 }}>THE NUMBERS THAT MATTER</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 10 }}>
               {headlineStats.map((f, i) => (
-                <div key={i} style={{ padding: '18px 14px', background: '#fff', border: `1px solid ${AMBER}25`, borderRadius: 12, textAlign: 'center' }}>
-                  <div style={{ fontSize: 20, fontWeight: 900, color: INK, letterSpacing: '-0.02em', marginBottom: 4 }}>{f.stat}</div>
+                <div key={i} style={{ padding: '18px 14px', background: 'rgba(217,119,6,0.04)', border: `1px solid ${AMBER}30`, borderTop: `3px solid ${AMBER}`, borderRadius: 12, textAlign: 'center' }}>
+                  <div style={{ fontSize: 22, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em', marginBottom: 4 }}>{f.stat}</div>
                   <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.08em', color: INK_MUTE, textTransform: 'uppercase', lineHeight: 1.3, marginBottom: 6 }}>{f.label}</div>
                   <div style={{ fontSize: 7, color: AMBER, fontStyle: 'italic' }}>{f.source}</div>
                 </div>
@@ -214,9 +215,9 @@ export default function PartnerEvidence() {
                 <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: INK_MUTE }}>PET CARE & ANIMAL WELLNESS</span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 14 }}>
-                <StatBox stat="~$260B" label="Global market (2024)" source="Grand View Research" color={AMBER_DARK} />
+                <StatBox stat="~$263B" label="Global market (2024)" source="Grand View Research" color={AMBER_DARK} />
                 <StatBox stat="25M" label="UK dogs + cats" source="PFMA / UK Pet Food" color={AMBER_DARK} />
-                <StatBox stat="$150B+" label="US pet industry (2024)" source="APPA" color={AMBER_DARK} />
+                <StatBox stat="$158B" label="US pet industry (2024)" source="APPA" color={AMBER_DARK} />
               </div>
               <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
                 The pet care market grew through recession and continues accelerating. Humanisation of pets drives spending on wellness, anxiety, and behavioural health — exactly where PetSounds51 sits.
@@ -230,9 +231,9 @@ export default function PartnerEvidence() {
                 <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: INK_MUTE }}>LEGAL TECH & ACCESS TO JUSTICE</span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 14 }}>
-                <StatBox stat="~$28.8B" label="Legal tech (2024)" source="Precedence Research" color={AMBER_DARK} />
-                <StatBox stat="~$73B" label="Projected by 2034" source="Precedence Research" color={AMBER_DARK} />
-                <StatBox stat="~13%" label="Legal AI CAGR" source="Grand View Research" color={AMBER_DARK} />
+                <StatBox stat="~$29B" label="Legal tech (2025)" source="Precedence Research" color={AMBER_DARK} />
+                <StatBox stat="~$73B" label="Projected by 2035" source="Precedence Research" color={AMBER_DARK} />
+                <StatBox stat="~9.4%" label="Legal tech CAGR" source="Precedence Research" color={AMBER_DARK} />
               </div>
               <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
                 Legal tech is one of the fastest-growing B2B sectors. AI-powered document processing is the frontier — and the access-to-justice crisis creates enormous public-sector and consumer demand.
@@ -247,7 +248,7 @@ export default function PartnerEvidence() {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 14 }}>
                 <StatBox stat="Mandatory" label="ESG reporting (EU)" source="European Commission" color={AMBER_DARK} />
-                <StatBox stat="~$700B" label="Green bonds (2023)" source="Climate Bonds Initiative" color={AMBER_DARK} />
+                <StatBox stat="~$700B" label="Green bonds (2024)" source="BIS / Climate Bonds" color={AMBER_DARK} />
                 <StatBox stat="CSRD" label="Directive in force" source="European Commission" color={AMBER_DARK} />
               </div>
               <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
@@ -413,8 +414,8 @@ export default function PartnerEvidence() {
 
 function StatBox({ stat, label, source, color }) {
   return (
-    <div style={{ padding: '12px 14px', background: AMBER_LIGHT, borderRadius: 10 }}>
-      <div style={{ fontSize: 16, fontWeight: 900, color, letterSpacing: '-0.02em' }}>{stat}</div>
+    <div style={{ padding: '12px 14px', background: 'rgba(217,119,6,0.05)', borderLeft: `3px solid ${AMBER}`, borderRadius: 8 }}>
+      <div style={{ fontSize: 18, fontWeight: 900, color, letterSpacing: '-0.02em' }}>{stat}</div>
       <div style={{ fontSize: 8, fontWeight: 700, color: INK_MUTE, textTransform: 'uppercase' }}>{label}</div>
       <div style={{ fontSize: 7, color: AMBER, fontStyle: 'italic', marginTop: 2 }}>{source}</div>
     </div>
