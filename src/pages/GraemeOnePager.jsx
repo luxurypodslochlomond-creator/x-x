@@ -49,52 +49,32 @@ export default function GraemeOnePager() {
     addText('COMMERCIAL PARTNER BRIEF — JUNE 2026', 7, true, [160, 150, 135], 6);
 
     // SUMMARY
-    addText('Three products. Built and live. Need commercial distribution.', 15, true, [40, 35, 30], 2);
-    addText('UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are real, and the infrastructure is live. What is missing is commercial distribution. This brief is for a commercial partner who can take these products to market through existing channels.', 9, false, [80, 70, 60], 6);
-
-    divider();
-
-    // KEY FACTS
-    addText('KEY FACTS', 10, true, [30, 138, 78], 3);
-    addText('3 products built & live  |  2 Stripe-ready now  |  £0 subscribers — yet  |  1 CIC registered  |  Peer-reviewed research  |  Built solo in Glasgow', 9, false, [80, 70, 60], 6);
+    addText('Three products. Built and live. Need a partner.', 15, true, [40, 35, 30], 2);
+    addText('I built three products. Two take payments. None have subscribers yet — because I am a builder, not a salesman. You bring the channels, I bring the products. 50/50.', 9, false, [80, 70, 60], 4);
+    addText('KEY FACTS:  3 products live  |  2 Stripe-ready  |  £0 subscribers — yet', 9, true, [30, 138, 78], 6);
 
     divider();
 
     // THREE PRODUCTS
     addText('1. PETSOUNDS51 — Animal Acoustic Therapy', 11, true, [180, 130, 20], 2);
-    addText('Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis on published veterinary neuroscience — no app, no hardware, works offline. Market: $259B pet care, 6.1% CAGR. Price: £29.99/year. Target: 100K subscribers = £3M/year. B2B: vets, insurers, pet brands.', 9, false, [80, 70, 60], 2);
-    addText('Moat: Species-specific real-time frequency synthesis in the browser. Competitors use pre-recorded playlists.', 8, true, [120, 100, 80], 4);
+    addText('Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis on published veterinary neuroscience. Market: $259B pet care. Price: £29.99/year.', 9, false, [80, 70, 60], 2);
+    addText('Why it wins: Species-specific real-time frequency synthesis in the browser. Competitors use pre-recorded playlists.', 8, true, [120, 100, 80], 4);
 
     addText('2. SORTED — Access to Justice AI', 11, true, [200, 100, 10], 2);
-    addText('AI decodes any legal letter into plain language, writes replies, guides disputes. Any language, any jurisdiction. Documents processed in memory — never stored. Market: $849B legal services, $25B legal tech. Price: £9.99/month. Target: 50K subscribers = £6M/year. B2B: banks, insurers, councils, housing associations.', 9, false, [80, 70, 60], 2);
-    addText('Moat: Zero data storage architecture. Competitors store documents and create liability. We never touch them.', 8, true, [120, 100, 80], 4);
+    addText('AI decodes any legal letter into plain language, writes replies, guides disputes. Documents processed in memory — never stored. Market: $849B legal services. Price: £9.99/month.', 9, false, [80, 70, 60], 2);
+    addText('Why it wins: Zero data storage architecture. Competitors store documents and create liability.', 8, true, [120, 100, 80], 4);
 
     addText('3. EARTH51 — Verified ESG Impact', 11, true, [30, 150, 80], 2);
-    addText('Kids photograph litter they collect. AI verifies it (fraud detection, weight estimation). Every pickup generates verified, reportable ESG data. Market: $1.3T environmental services, $30B+ ESG spend (mandated). Target: 50 councils + brand sponsors = £1M+ year one. B2B: councils, brands, schools, supermarkets.', 9, false, [80, 70, 60], 2);
-    addText('Moat: AI-verified impact data with fraud detection, COPPA compliant. No competitor combines gamified collection + verified ESG reporting + child-safe data.', 8, true, [120, 100, 80], 4);
-
-    divider();
-
-    // WHY NOW
-    addText('WHY NOW', 10, true, [40, 35, 30], 2);
-    addText('All three products are BUILT — not concepts. Two are payment-ready. Earth51 needs refinement before launch. Pet wellness is a growing market. Access to justice is in crisis. Environmental action is a mandated corporate priority. UF51 owns the intersection of these three markets.', 9, false, [80, 70, 60], 6);
+    addText('Kids photograph litter they collect. AI verifies it (fraud detection, weight estimation). Every pickup generates verified, reportable ESG data. Market: $1.3T environmental services. B2B: councils, brands, schools.', 9, false, [80, 70, 60], 2);
+    addText('Why it wins: AI-verified impact data with fraud detection, COPPA compliant.', 8, true, [120, 100, 80], 4);
 
     divider();
 
     // THE DEAL
-    addText('THE DEAL — BUY IN 50% FOR £40K', 10, true, [180, 130, 20], 3);
-    addText('50% of the new company for £40K. Equal partnership — you own half, I own half. That is the offer.', 9, true, [80, 70, 60], 2);
-    addText('The £40K is paid over 6 months — £20K in months 1–3, £20K in months 4–6. Both partners have 6 months to get everything right.', 9, false, [80, 70, 60], 2);
-    addText('Months 1–3: Finalize products, prepare for market entry through partner channels.', 9, false, [80, 70, 60], 2);
-    addText('Months 4–6: Products market-ready, first subscribers coming through partner channels.', 9, false, [80, 70, 60], 2);
-    addText('Month 6: Products live. Revenue flowing. Partnership proven.', 9, false, [80, 70, 60], 4);
-    addText('10% of all revenue goes to the CIC — formed and registered. The new company is incorporated clean and separate, 50/50 ownership from day one.', 9, false, [80, 70, 60], 6);
-
-    divider();
-
-    // NEXT STEP
-    addText('NEXT STEP', 10, true, [40, 35, 30], 2);
-    addText('This is a buy-in — 50% of the new company for £40K, paid over 6 months. Your distribution and commercial expertise, my built products. Both partners have skin in the game from day one. Straightforward terms, no hidden clauses.', 9, false, [80, 70, 60], 6);
+    addText('THE OFFER', 10, true, [180, 130, 20], 3);
+    addText('50% of the new company. £40K. Paid over 6 months.', 12, true, [40, 35, 30], 3);
+    addText('You own half. I own half. You bring the distribution, I keep building. Both of us have skin in the game from day one — £20K in months 1–3, £20K in months 4–6, then revenue flows through your channels.', 9, false, [80, 70, 60], 3);
+    addText('10% of all revenue goes to the CIC. New company incorporated clean and separate. Straightforward terms, no hidden clauses.', 9, false, [80, 70, 60], 6);
 
     divider();
 
@@ -169,131 +149,70 @@ export default function GraemeOnePager() {
         </div>
       </header>
 
-      <div id="graeme-body" style={{ maxWidth: 720, margin: '0 auto', padding: '48px 24px 80px' }}>
+      <div id="graeme-body" style={{ maxWidth: 640, margin: '0 auto', padding: '48px 24px 80px' }}>
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
 
-          {/* SUMMARY */}
-          <div style={{ marginBottom: 48 }}>
-            <h1 style={{ fontSize: 'clamp(28px, 5.5vw, 44px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.035em', margin: '0 0 20px', color: '#2a2520' }}>
+          {/* HERO — 3 punchy lines, no wall of text */}
+          <div style={{ marginBottom: 44 }}>
+            <h1 style={{ fontSize: 'clamp(30px, 6vw, 46px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.035em', margin: '0 0 14px', color: '#2a2520' }}>
               Three products.<br />
               <span style={{ color: '#b8860b' }}>Built and live.</span><br />
-              Need commercial distribution.
+              Need a partner.
             </h1>
-            <p style={{ fontSize: 15, color: '#6b6055', lineHeight: 1.75, margin: 0, maxWidth: 580, borderLeft: '3px solid rgba(184,134,11,0.3)', paddingLeft: 18 }}>
-              UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are real, and the infrastructure is live. <strong style={{ color: '#2a2520' }}>What is missing is commercial distribution.</strong> This brief is for a commercial partner who can take these products to market through existing channels.
+            <p style={{ fontSize: 15, color: '#6b6055', lineHeight: 1.6, margin: 0 }}>
+              I built three products. Two take payments. None have subscribers yet — because I'm a builder, not a salesman. <strong style={{ color: '#2a2520' }}>You bring the channels, I bring the products. 50/50.</strong>
             </p>
           </div>
 
-          {/* KEY FACTS */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#1e8a4e', marginBottom: 16 }}>KEY FACTS</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 10 }}>
-              {[
-                { stat: '3', label: 'Products built & live' },
-                { stat: '2', label: 'Stripe-ready now' },
-                { stat: '£0', label: 'Subscribers — yet' },
-                { stat: '1', label: 'CIC registered' },
-                { stat: 'Peer-reviewed', label: 'Research-backed' },
-                { stat: 'Glasgow', label: 'Built & bootstrapped' },
-              ].map((f, i) => (
-                <div key={i} style={{ padding: '16px 14px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 10, textAlign: 'center' }}>
-                  <div style={{ fontSize: 20, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.02em', marginBottom: 4 }}>{f.stat}</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: '#8a7d6f', textTransform: 'uppercase', lineHeight: 1.3 }}>{f.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 36px' }} />
-
-          {/* THREE PRODUCTS */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#a09588', marginBottom: 20 }}>THE PRODUCTS</div>
-            {products.map((p, idx) => (
-              <div key={p.name} style={{ marginBottom: 24, padding: '20px 22px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
-                  <div>
-                    <span style={{ fontSize: 9, fontWeight: 800, color: '#c9bca8', marginRight: 8 }}>{idx + 1}</span>
-                    <span style={{ fontSize: 19, fontWeight: 900, color: p.color, letterSpacing: '-0.02em' }}>{p.name}</span>
-                  </div>
-                  <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: '#a09588' }}>{p.tagline.toUpperCase()}</span>
-                </div>
-                <p style={{ fontSize: 13, color: '#6b6055', lineHeight: 1.65, margin: '0 0 14px' }}>{p.desc}</p>
-                <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 12, fontSize: 11 }}>
-                  <span style={{ color: '#8a7d6f' }}><strong style={{ color: p.color }}>{p.market}</strong></span>
-                  <span style={{ color: '#8a7d6f' }}><strong style={{ color: '#2a2520' }}>{p.price}</strong></span>
-                </div>
-                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '10px 14px', background: 'rgba(184,134,11,0.04)', borderRadius: 8, marginBottom: 10 }}>
-                  <span style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.1em', color: p.color, flexShrink: 0, paddingTop: 2 }}>TARGET →</span>
-                  <span style={{ fontSize: 12, color: '#2a2520', fontWeight: 600 }}>{p.target}</span>
-                </div>
-                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.1em', color: '#2a2520', flexShrink: 0, paddingTop: 2 }}>MOAT →</span>
-                  <span style={{ fontSize: 12, color: '#6b6055', lineHeight: 1.5 }}>{p.moat}</span>
-                </div>
+          {/* KEY FACTS — kept tight */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginBottom: 44 }}>
+            {[
+              { stat: '3', label: 'Products live' },
+              { stat: '2', label: 'Stripe-ready' },
+              { stat: '£0', label: 'Subscribers — yet' },
+            ].map((f, i) => (
+              <div key={i} style={{ padding: '14px 10px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 10, textAlign: 'center' }}>
+                <div style={{ fontSize: 22, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.02em', marginBottom: 2 }}>{f.stat}</div>
+                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.06em', color: '#8a7d6f', textTransform: 'uppercase', lineHeight: 1.3 }}>{f.label}</div>
               </div>
             ))}
           </div>
 
-          <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 36px' }} />
-
-          {/* WHY NOW */}
-          <div style={{ marginBottom: 36 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>WHY NOW</div>
-            <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
-              All three products are <strong style={{ color: '#2a2520' }}>BUILT</strong> — not concepts. Two are payment-ready. Earth51 needs refinement before launch. Pet wellness is a growing market. Access to justice is in crisis. Environmental action is a <strong style={{ color: '#1e8a4e' }}>mandated corporate priority</strong>. UF51 owns the intersection of these three markets.
-            </p>
-          </div>
-
-          <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 36px' }} />
-
-          {/* THE DEAL */}
-          <div style={{ marginBottom: 36 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#b8860b', marginBottom: 14 }}>THE DEAL — BUY IN 50% FOR £40K</div>
-            <div style={{ padding: '16px 20px', background: 'rgba(184,134,11,0.06)', border: '1px solid rgba(184,134,11,0.2)', borderRadius: 10, marginBottom: 14 }}>
-              <div style={{ fontSize: 18, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.01em', marginBottom: 4 }}>50% of the new company for £40K</div>
-              <div style={{ fontSize: 12, color: '#6b6055', lineHeight: 1.5 }}>Equal partnership — you own half, I own half. That is the offer.</div>
-            </div>
-            <div style={{ padding: '12px 16px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 8, marginBottom: 14 }}>
-              <p style={{ fontSize: 12, color: '#6b6055', lineHeight: 1.65, margin: 0 }}>
-                The £40K is paid over 6 months — £20K in months 1–3, £20K in months 4–6. Both partners have 6 months to get everything right.
-              </p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
-              {[
-                { label: 'Months 1–3', value: '£20K', detail: 'Finalize products, prepare for market entry through partner channels' },
-                { label: 'Months 4–6', value: '£20K', detail: 'Products market-ready, first subscribers through partner channels' },
-                { label: 'Month 6', value: 'Live + proven', detail: 'Revenue flowing, equal partnership established', green: true },
-              ].map(step => (
-                <div key={step.label} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 18px', background: '#fff', border: `1px solid ${step.green ? 'rgba(30,138,78,0.2)' : 'rgba(0,0,0,0.06)'}`, borderRadius: 10 }}>
-                  <div style={{ width: 64, textAlign: 'center', flexShrink: 0 }}>
-                    <span style={{ fontSize: 9, fontWeight: 800, color: step.green ? '#1e8a4e' : '#b8860b' }}>{step.label}</span>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 15, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.01em' }}>{step.value}</div>
-                    <div style={{ fontSize: 11, color: '#8a7d6f', marginTop: 2, lineHeight: 1.4 }}>{step.detail}</div>
-                  </div>
+          {/* THREE PRODUCTS — simplified, punchy */}
+          <div style={{ marginBottom: 44 }}>
+            {products.map((p, idx) => (
+              <div key={p.name} style={{ marginBottom: 14, padding: '20px 22px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: 19, fontWeight: 900, color: p.color, letterSpacing: '-0.02em' }}>{p.name}</span>
+                  <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.08em', color: '#a09588' }}>{p.tagline.toUpperCase()}</span>
                 </div>
-              ))}
-            </div>
-            <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.65, margin: 0, padding: '12px 16px', background: 'rgba(184,134,11,0.04)', borderRadius: 8 }}>
-              <strong style={{ color: '#2a2520' }}>10% of all revenue goes to the CIC</strong> — formed and registered. The new company is incorporated clean and separate, 50/50 ownership from day one.
-            </p>
+                <p style={{ fontSize: 13, color: '#6b6055', lineHeight: 1.55, margin: '0 0 12px' }}>{p.desc}</p>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: p.color, background: 'rgba(184,134,11,0.06)', padding: '4px 10px', borderRadius: 6 }}>{p.market}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: '#2a2520', background: 'rgba(0,0,0,0.04)', padding: '4px 10px', borderRadius: 6 }}>{p.price}</span>
+                </div>
+                <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.5, margin: 0, fontStyle: 'italic' }}>
+                  <strong style={{ color: '#2a2520', fontStyle: 'normal' }}>Why it wins:</strong> {p.moat}
+                </p>
+              </div>
+            ))}
           </div>
 
-          <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 36px' }} />
-
-          {/* NEXT STEP */}
-          <div style={{ marginBottom: 36 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>NEXT STEP</div>
-            <div style={{ padding: '24px 26px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
-              <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: 0 }}>
-                This is a buy-in — 50% of the new company for £40K, paid over 6 months. Your distribution and commercial expertise, my built products. Both partners have skin in the game from day one. Straightforward terms, no hidden clauses.
+          {/* THE DEAL — one clean section, no repetition */}
+          <div style={{ marginBottom: 44 }}>
+            <div style={{ padding: '24px 26px', background: 'rgba(184,134,11,0.06)', border: '1px solid rgba(184,134,11,0.2)', borderRadius: 12 }}>
+              <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#b8860b', marginBottom: 12 }}>THE OFFER</div>
+              <div style={{ fontSize: 'clamp(22px, 4.5vw, 28px)', fontWeight: 900, color: '#2a2520', letterSpacing: '-0.02em', marginBottom: 10, lineHeight: 1.1 }}>
+                50% of the new company.<br />£40K. Paid over 6 months.
+              </div>
+              <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.6, margin: '0 0 16px' }}>
+                You own half. I own half. You bring the distribution, I keep building. Both of us have skin in the game from day one — <strong style={{ color: '#2a2520' }}>£20K in months 1–3, £20K in months 4–6</strong>, then revenue flows through your channels.
+              </p>
+              <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.5, margin: 0 }}>
+                10% of all revenue goes to the CIC. New company incorporated clean and separate. Straightforward terms, no hidden clauses.
               </p>
             </div>
           </div>
-
-          <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 36px' }} />
 
           {/* CONTACT */}
           <div style={{ textAlign: 'left', padding: '8px 0' }}>
