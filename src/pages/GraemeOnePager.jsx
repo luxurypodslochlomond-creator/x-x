@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { jsPDF } from 'jspdf';
 
-// UF51 — Partner Brief
-// One page. No graphs. No corporate deck energy.
-// A letter to someone ready to build something real, together.
+// UF51 — Commercial Partner Brief
+// Facts. Numbers. Markets. No bullshit.
 
 export default function GraemeOnePager() {
   const [copied, setCopied] = useState(false);
@@ -47,57 +46,53 @@ export default function GraemeOnePager() {
 
     // HEADER
     addText('UF51', 22, true, [40, 35, 30], 1);
-    addText('PARTNER BRIEF — JUNE 2026', 7, true, [160, 150, 135], 6);
+    addText('COMMERCIAL PARTNER BRIEF — JUNE 2026', 7, true, [160, 150, 135], 6);
 
-    // HERO
-    addText('Three products. Built and ready.', 15, true, [40, 35, 30], 2);
-    addText('Looking for the person who will help them fly.', 11, false, [100, 90, 75], 4);
-    addText('I build technology that heals — animals, people, the planet. Three products are in production — two are payment-ready via Stripe and Apple Pay, one needs work. No paying subscribers yet. I am honest about where I am: the tech is real, the markets are real, but I cannot finish and launch this alone. I need a partner. Not investment — a partner. Someone with the commercial reach I do not have.', 9, false, [80, 70, 60], 6);
-
-    divider();
-
-    // FACTS — evidence strip
-    addText('FACTS — NOT HYPE', 10, true, [30, 138, 78], 3);
-    addText('3 products built & live  |  2 Stripe-ready now  |  £0 subscribers — yet  |  1 CIC registered  |  Peer-reviewed research  |  Built solo in Glasgow', 9, false, [80, 70, 60], 2);
-    addText('I am not going to pretend I have traction I do not have. What I have is real, working technology — built solo, bootstrapped, honest. The next chapter needs you.', 8, false, [120, 110, 95], 6);
+    // SUMMARY
+    addText('Three products. Built and live. Need commercial distribution.', 15, true, [40, 35, 30], 2);
+    addText('UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are validated, and the infrastructure is live. What is missing is commercial distribution. This brief is for a commercial partner who can take these products to market through existing channels.', 9, false, [80, 70, 60], 6);
 
     divider();
 
-    // THREE PRODUCTS — compact
+    // KEY FACTS
+    addText('KEY FACTS', 10, true, [30, 138, 78], 3);
+    addText('3 products built & live  |  2 Stripe-ready now  |  £0 subscribers — yet  |  1 CIC registered  |  Peer-reviewed research  |  Built solo in Glasgow', 9, false, [80, 70, 60], 6);
+
+    divider();
+
+    // THREE PRODUCTS
     addText('1. PETSOUNDS51 — Animal Acoustic Therapy', 11, true, [180, 130, 20], 2);
     addText('Browser-native psychoacoustic therapy for dogs, cats, horses. Real-time audio synthesis on published veterinary neuroscience — no app, no hardware, works offline. Market: $259B pet care, 6.1% CAGR. Price: £29.99/year. Target: 100K subscribers = £3M/year. B2B: vets, insurers, pet brands.', 9, false, [80, 70, 60], 2);
-    addText('Moat: Species-specific real-time frequency synthesis in the browser. Competitors use pre-recorded playlists. Nobody else does this.', 8, true, [120, 100, 80], 4);
+    addText('Moat: Species-specific real-time frequency synthesis in the browser. Competitors use pre-recorded playlists.', 8, true, [120, 100, 80], 4);
 
     addText('2. SORTED — Access to Justice AI', 11, true, [200, 100, 10], 2);
     addText('AI decodes any legal letter into plain language, writes replies, guides disputes. Any language, any jurisdiction. Documents processed in memory — never stored. Market: $849B legal services, $25B legal tech. Price: £9.99/month. Target: 50K subscribers = £6M/year. B2B: banks, insurers, councils, housing associations.', 9, false, [80, 70, 60], 2);
-    addText('Moat: Zero data storage architecture. Competitors store documents and create liability. We never touch them. That is the defensible layer.', 8, true, [120, 100, 80], 4);
+    addText('Moat: Zero data storage architecture. Competitors store documents and create liability. We never touch them.', 8, true, [120, 100, 80], 4);
 
     addText('3. EARTH51 — Verified ESG Impact', 11, true, [30, 150, 80], 2);
-    addText('Kids photograph litter they collect. AI verifies it (fraud detection, weight estimation). They earn tokens for rewards. Every pickup generates verified, reportable ESG data. Market: $1.3T environmental services, $30B+ ESG spend (mandated). Target: 50 councils + brand sponsors = £1M+ year one. B2B: councils, brands, schools, supermarkets.', 9, false, [80, 70, 60], 2);
-    addText('Moat: The verification layer, not the litter picking. AI-verified impact data with fraud detection, COPPA compliant. No competitor combines gamified collection + verified ESG reporting + child-safe data.', 8, true, [120, 100, 80], 4);
+    addText('Kids photograph litter they collect. AI verifies it (fraud detection, weight estimation). Every pickup generates verified, reportable ESG data. Market: $1.3T environmental services, $30B+ ESG spend (mandated). Target: 50 councils + brand sponsors = £1M+ year one. B2B: councils, brands, schools, supermarkets.', 9, false, [80, 70, 60], 2);
+    addText('Moat: AI-verified impact data with fraud detection, COPPA compliant. No competitor combines gamified collection + verified ESG reporting + child-safe data.', 8, true, [120, 100, 80], 4);
 
     divider();
 
     // WHY NOW
     addText('WHY NOW', 10, true, [40, 35, 30], 2);
-    addText('All three products are BUILT — not concepts. Two are payment-ready. Earth51 needs refinement before launch. Pet wellness is exploding. Access to justice is in crisis. Environmental action is a mandated corporate priority. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.', 9, false, [80, 70, 60], 6);
+    addText('All three products are BUILT — not concepts. Two are payment-ready. Earth51 needs refinement before launch. Pet wellness is a growing market. Access to justice is in crisis. Environmental action is a mandated corporate priority. UF51 owns the intersection of these three markets.', 9, false, [80, 70, 60], 6);
 
     divider();
 
     // THE DEAL
     addText('THE DEAL — £40K OVER 6 MONTHS', 10, true, [180, 130, 20], 3);
-    addText('Month 1: £20K upfront — runway to finalize products and prepare for market entry through your channels.', 9, false, [80, 70, 60], 2);
-    addText('Month 3: £20K — after first milestone. Products market-ready, first subscribers coming through your channels.', 9, false, [80, 70, 60], 2);
-    addText('Month 6: Products live. Revenue flowing. Equal partnership proven.', 9, false, [80, 70, 60], 4);
-    addText('This is runway, not a salary. I have invested years of unpaid time and personal funds into these products. The £40K lets me focus 100% for 3 months, with your input shaping the commercial direction. After that, products go through your channels and we both win. 10% of all revenue goes to our Community Interest Company — formed and registered. A new company will be incorporated for this partnership, clean and separate.', 9, false, [80, 70, 60], 6);
+    addText('Month 1: £20K upfront — runway to finalize products and prepare for market entry through commercial channels.', 9, false, [80, 70, 60], 2);
+    addText('Month 3: £20K — after first milestone. Products market-ready, first subscribers coming through partner channels.', 9, false, [80, 70, 60], 2);
+    addText('Month 6: Products live. Revenue flowing. Partnership proven.', 9, false, [80, 70, 60], 4);
+    addText('This is runway, not a salary. 10% of all revenue goes to the CIC — formed and registered. A new company will be incorporated for this partnership, clean and separate.', 9, false, [80, 70, 60], 6);
 
     divider();
 
-    // THE HONEST CLOSE
-    addText('WHY THIS, WHY YOU', 10, true, [40, 35, 30], 2);
-    addText('This is not about one person. I am looking for a serious commercial partner — someone who has the distribution, the relationships, and the conviction to help get these products to market. Someone who sees what I see and is ready to build something real, not just advise.', 9, false, [80, 70, 60], 3);
-    addText('I am a dad in Glasgow. This morning I was picking up litter with Georgie, then taking her to football. That is not a slogan — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. That is the gap. That is why I am asking.', 9, false, [80, 70, 60], 3);
-    addText('This is not a vendor deal. It is not an investment ask. It is an equal partnership — your commercial expertise and distribution, my built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Two people deciding if this makes sense.', 9, false, [80, 70, 60], 6);
+    // NEXT STEP
+    addText('NEXT STEP', 10, true, [40, 35, 30], 2);
+    addText('This is a commercial partnership — your distribution and commercial expertise, built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.', 9, false, [80, 70, 60], 6);
 
     divider();
 
@@ -118,7 +113,7 @@ export default function GraemeOnePager() {
       price: '£29.99/year',
       target: '100K subscribers = £3M/year',
       b2b: 'Vets, insurers, pet brands',
-      moat: 'Species-specific real-time frequency synthesis in the browser. Competitors use pre-recorded playlists. Nobody else does this.',
+      moat: 'Species-specific real-time frequency synthesis in the browser. Competitors use pre-recorded playlists.',
     },
     {
       name: 'SORTED',
@@ -129,7 +124,7 @@ export default function GraemeOnePager() {
       price: '£9.99/month',
       target: '50K subscribers = £6M/year',
       b2b: 'Banks, insurers, councils, housing',
-      moat: 'Zero data storage architecture. Competitors store documents and create liability. We never touch them.',
+      moat: 'Zero data storage architecture. Competitors store documents and create liability.',
     },
     {
       name: 'Earth51',
@@ -140,7 +135,7 @@ export default function GraemeOnePager() {
       price: 'B2B contracts',
       target: '50 councils + brands = £1M+ yr 1',
       b2b: 'Councils, brands, schools, supermarkets',
-      moat: 'The verification layer, not the litter picking. AI-verified impact data with fraud detection, COPPA compliant.',
+      moat: 'AI-verified impact data with fraud detection, COPPA compliant.',
     },
   ];
 
@@ -175,21 +170,21 @@ export default function GraemeOnePager() {
       <div id="graeme-body" style={{ maxWidth: 720, margin: '0 auto', padding: '48px 24px 80px' }}>
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
 
-          {/* HERO */}
+          {/* SUMMARY */}
           <div style={{ marginBottom: 48 }}>
             <h1 style={{ fontSize: 'clamp(28px, 5.5vw, 44px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.035em', margin: '0 0 20px', color: '#2a2520' }}>
               Three products.<br />
-              <span style={{ color: '#b8860b' }}>Not finished.</span><br />
-              Not ready to fly alone.
+              <span style={{ color: '#b8860b' }}>Built and live.</span><br />
+              Need commercial distribution.
             </h1>
             <p style={{ fontSize: 15, color: '#6b6055', lineHeight: 1.75, margin: 0, maxWidth: 580, borderLeft: '3px solid rgba(184,134,11,0.3)', paddingLeft: 18 }}>
-              I build technology that heals — animals, people, the planet. Three products are in production — two are payment-ready via Stripe and Apple Pay, one needs work. No paying subscribers yet. I am honest about where I am: the tech is real, the markets are real, but I cannot finish and launch this alone. <strong style={{ color: '#2a2520' }}>I need a partner.</strong> Not investment — a partner. Someone with the commercial reach I do not have.
+              UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are validated, and the infrastructure is live. <strong style={{ color: '#2a2520' }}>What is missing is commercial distribution.</strong> This brief is for a commercial partner who can take these products to market through existing channels.
             </p>
           </div>
 
-          {/* FACTS — evidence, not hype */}
+          {/* KEY FACTS */}
           <div style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#1e8a4e', marginBottom: 16 }}>FACTS — NOT HYPE</div>
+            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#1e8a4e', marginBottom: 16 }}>KEY FACTS</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 10 }}>
               {[
                 { stat: '3', label: 'Products built & live' },
@@ -205,14 +200,11 @@ export default function GraemeOnePager() {
                 </div>
               ))}
             </div>
-            <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.65, margin: '14px 0 0', fontStyle: 'italic' }}>
-              I am not going to pretend I have traction I don't have. What I have is real, working technology — built solo, bootstrapped, honest. The next chapter needs you.
-            </p>
           </div>
 
           <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 36px' }} />
 
-          {/* THREE PRODUCTS — clean, compact */}
+          {/* THREE PRODUCTS */}
           <div style={{ marginBottom: 40 }}>
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#a09588', marginBottom: 20 }}>THE PRODUCTS</div>
             {products.map((p, idx) => (
@@ -247,7 +239,7 @@ export default function GraemeOnePager() {
           <div style={{ marginBottom: 36 }}>
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>WHY NOW</div>
             <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.8, margin: 0, padding: '18px 20px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
-              All three products are <strong style={{ color: '#2a2520' }}>BUILT</strong> — not concepts. Two are payment-ready. Earth51 needs refinement before launch. Pet wellness is exploding. Access to justice is in crisis. Environmental action is a <strong style={{ color: '#1e8a4e' }}>mandated corporate priority</strong>. UF51 owns the intersection. The right partner accelerates at the exact moment these markets converge.
+              All three products are <strong style={{ color: '#2a2520' }}>BUILT</strong> — not concepts. Two are payment-ready. Earth51 needs refinement before launch. Pet wellness is a growing market. Access to justice is in crisis. Environmental action is a <strong style={{ color: '#1e8a4e' }}>mandated corporate priority</strong>. UF51 owns the intersection of these three markets.
             </p>
           </div>
 
@@ -258,9 +250,9 @@ export default function GraemeOnePager() {
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#b8860b', marginBottom: 14 }}>THE DEAL — £40K OVER 6 MONTHS</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
               {[
-                { label: 'Month 1', value: '£20K upfront', detail: 'Runway to finalize products, prepare for market entry through your channels' },
-                { label: 'Month 3', value: '£20K', detail: 'After first milestone — products market-ready, first subscribers through your channels' },
-                { label: 'Month 6', value: 'Live + proven', detail: 'Revenue flowing, equal partnership established', green: true },
+                { label: 'Month 1', value: '£20K upfront', detail: 'Runway to finalize products, prepare for market entry through partner channels' },
+                { label: 'Month 3', value: '£20K', detail: 'After first milestone — products market-ready, first subscribers through partner channels' },
+                { label: 'Month 6', value: 'Live + proven', detail: 'Revenue flowing, partnership established', green: true },
               ].map(step => (
                 <div key={step.label} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 18px', background: '#fff', border: `1px solid ${step.green ? 'rgba(30,138,78,0.2)' : 'rgba(0,0,0,0.06)'}`, borderRadius: 10 }}>
                   <div style={{ width: 52, textAlign: 'center', flexShrink: 0 }}>
@@ -273,26 +265,20 @@ export default function GraemeOnePager() {
                 </div>
               ))}
             </div>
-            <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.65, margin: 0, padding: '12px 16px', background: 'rgba(184,134,11,0.04)', borderRadius: 8, fontStyle: 'italic' }}>
-              This is runway, not a salary. I have invested years of unpaid time and personal funds. The £40K lets me focus 100% for 3 months, with your input shaping commercial direction. <strong style={{ color: '#2a2520' }}>10% of all revenue goes to our CIC</strong> — formed and registered. A new company will be incorporated for this partnership, clean and separate.
+            <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.65, margin: 0, padding: '12px 16px', background: 'rgba(184,134,11,0.04)', borderRadius: 8 }}>
+              This is runway, not a salary. <strong style={{ color: '#2a2520' }}>10% of all revenue goes to the CIC</strong> — formed and registered. A new company will be incorporated for this partnership, clean and separate.
             </p>
           </div>
 
           <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 36px' }} />
 
-          {/* WHY THIS, WHY YOU — the human close */}
+          {/* NEXT STEP */}
           <div style={{ marginBottom: 36 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>WHY THIS, WHY YOU</div>
+            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>NEXT STEP</div>
             <div style={{ padding: '24px 26px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
-              <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: '0 0 16px' }}>
-                This is not about one person. I am looking for a serious commercial partner — someone who has the distribution, the relationships, and the conviction to help get these products to market. Someone who sees what I see and is ready to build something real, not just advise.
+              <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: 0 }}>
+                This is a commercial partnership — your distribution and commercial expertise, built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.
               </p>
-                <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: '0 0 16px' }}>
-                  I am a dad in Glasgow. This morning I was picking up litter with Georgie, then taking her to football. That is not a slogan — that is Earth51. That is the mission, lived, with my kids. I have three products in production, live payment infrastructure, and a mission I will not compromise on. What I do not have is the commercial reach to get these finished and into the world. <strong style={{ color: '#2a2520' }}>That is the gap. That is why I am asking.</strong>
-                </p>
-                <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: 0 }}>
-                  This is not a vendor deal. It is not an investment ask. It is an equal partnership — your commercial expertise and distribution, my products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. No egos, no hidden terms. Just two people deciding if this makes sense.
-                </p>
             </div>
           </div>
 
