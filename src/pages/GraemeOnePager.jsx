@@ -82,17 +82,18 @@ export default function GraemeOnePager() {
     divider();
 
     // THE DEAL
-    addText('THE DEAL — £40K OVER 6 MONTHS', 10, true, [180, 130, 20], 3);
-    addText('Month 1: £20K upfront — runway to finalize products and prepare for market entry through commercial channels.', 9, false, [80, 70, 60], 2);
-    addText('Month 3: £20K — after first milestone. Products market-ready, first subscribers coming through partner channels.', 9, false, [80, 70, 60], 2);
+    addText('THE DEAL — 50% EQUITY, £40K RUNWAY, 6 MONTHS', 10, true, [180, 130, 20], 3);
+    addText('50% of the new company on the table. Equal partnership — not investment, not a loan, not a salary.', 9, true, [80, 70, 60], 2);
+    addText('Months 1–3: £20K runway. Finalize products, prepare for market entry through partner channels.', 9, false, [80, 70, 60], 2);
+    addText('Months 4–6: £20K runway. Products market-ready, first subscribers coming through partner channels.', 9, false, [80, 70, 60], 2);
     addText('Month 6: Products live. Revenue flowing. Partnership proven.', 9, false, [80, 70, 60], 4);
-    addText('This is runway, not a salary. 10% of all revenue goes to the CIC — formed and registered. A new company will be incorporated for this partnership, clean and separate.', 9, false, [80, 70, 60], 6);
+    addText('The £40K is runway over 6 months — time to get everything right, together. 10% of all revenue goes to the CIC — formed and registered. The new company is incorporated clean and separate, 50/50 ownership.', 9, false, [80, 70, 60], 6);
 
     divider();
 
     // NEXT STEP
     addText('NEXT STEP', 10, true, [40, 35, 30], 2);
-    addText('This is a commercial partnership — your distribution and commercial expertise, built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.', 9, false, [80, 70, 60], 6);
+    addText('This is a commercial partnership — your distribution and commercial expertise, built products and mission. 50% equity on the table, £40K runway over 6 months to get everything right, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.', 9, false, [80, 70, 60], 6);
 
     divider();
 
@@ -247,15 +248,19 @@ export default function GraemeOnePager() {
 
           {/* THE DEAL */}
           <div style={{ marginBottom: 36 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#b8860b', marginBottom: 14 }}>THE DEAL — £40K OVER 6 MONTHS</div>
+            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#b8860b', marginBottom: 14 }}>THE DEAL — 50% EQUITY, £40K RUNWAY, 6 MONTHS</div>
+            <div style={{ padding: '14px 18px', background: 'rgba(184,134,11,0.06)', border: '1px solid rgba(184,134,11,0.2)', borderRadius: 10, marginBottom: 14 }}>
+              <div style={{ fontSize: 16, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.01em', marginBottom: 2 }}>50% of the new company</div>
+              <div style={{ fontSize: 11, color: '#6b6055', lineHeight: 1.4 }}>Equal partnership — not investment, not a loan, not a salary.</div>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
               {[
-                { label: 'Month 1', value: '£20K upfront', detail: 'Runway to finalize products, prepare for market entry through partner channels' },
-                { label: 'Month 3', value: '£20K', detail: 'After first milestone — products market-ready, first subscribers through partner channels' },
-                { label: 'Month 6', value: 'Live + proven', detail: 'Revenue flowing, partnership established', green: true },
+                { label: 'Months 1–3', value: '£20K runway', detail: 'Finalize products, prepare for market entry through partner channels' },
+                { label: 'Months 4–6', value: '£20K runway', detail: 'Products market-ready, first subscribers through partner channels' },
+                { label: 'Month 6', value: 'Live + proven', detail: 'Revenue flowing, equal partnership established', green: true },
               ].map(step => (
                 <div key={step.label} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 18px', background: '#fff', border: `1px solid ${step.green ? 'rgba(30,138,78,0.2)' : 'rgba(0,0,0,0.06)'}`, borderRadius: 10 }}>
-                  <div style={{ width: 52, textAlign: 'center', flexShrink: 0 }}>
+                  <div style={{ width: 64, textAlign: 'center', flexShrink: 0 }}>
                     <span style={{ fontSize: 9, fontWeight: 800, color: step.green ? '#1e8a4e' : '#b8860b' }}>{step.label}</span>
                   </div>
                   <div>
@@ -266,7 +271,7 @@ export default function GraemeOnePager() {
               ))}
             </div>
             <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.65, margin: 0, padding: '12px 16px', background: 'rgba(184,134,11,0.04)', borderRadius: 8 }}>
-              This is runway, not a salary. <strong style={{ color: '#2a2520' }}>10% of all revenue goes to the CIC</strong> — formed and registered. A new company will be incorporated for this partnership, clean and separate.
+              The £40K is runway over 6 months — time to get everything right, together. <strong style={{ color: '#2a2520' }}>10% of all revenue goes to the CIC</strong> — formed and registered. The new company is incorporated clean and separate, 50/50 ownership.
             </p>
           </div>
 
@@ -277,7 +282,7 @@ export default function GraemeOnePager() {
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>NEXT STEP</div>
             <div style={{ padding: '24px 26px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
               <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: 0 }}>
-                This is a commercial partnership — your distribution and commercial expertise, built products and mission. £40K of fair runway, 3 months to get market-ready, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.
+                This is a commercial partnership — your distribution and commercial expertise, built products and mission. 50% equity on the table, £40K runway over 6 months to get everything right, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.
               </p>
             </div>
           </div>
