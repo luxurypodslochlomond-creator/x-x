@@ -44,10 +44,10 @@ export default function WalshyPitch() {
         <div style={{ marginBottom: 48, textAlign: 'center' }}>
           <h1 style={{ fontSize: 'clamp(26px, 5vw, 38px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 20px', color: '#2a2520' }}>
             Three products. Built.<br />
-            Working. <span style={{ color: '#d97706' }}>Zero users.</span>
+            Working. <span style={{ color: '#d97706' }}>Early.</span>
           </h1>
           <p style={{ fontSize: 16, lineHeight: 1.75, color: '#6b6055', margin: '0 auto', maxWidth: 520 }}>
-            That's the honest starting point. The tech works, payments are live, the products solve real problems. What they don't have yet is the person who can get them into the right hands.
+            The tech works, payments are live, the products solve real problems. A handful of early users have proved the concept — what's needed now is the person who can take them to scale.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function WalshyPitch() {
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12, paddingTop: 10, borderTop: '1px solid rgba(0,0,0,0.04)' }}>
               <span style={{ color: '#8a7d6f' }}>Price: <strong style={{ color: '#2a2520' }}>£29.99/yr</strong></span>
               <span style={{ color: '#8a7d6f' }}>Status: <strong style={{ color: '#1e8a4e' }}>Live</strong></span>
-              <span style={{ color: '#8a7d6f' }}>Users: <strong style={{ color: '#a09588' }}>0</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Stage: <strong style={{ color: '#a09588' }}>Early users</strong></span>
             </div>
           </div>
 
@@ -87,7 +87,7 @@ export default function WalshyPitch() {
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12, paddingTop: 10, borderTop: '1px solid rgba(0,0,0,0.04)' }}>
               <span style={{ color: '#8a7d6f' }}>Price: <strong style={{ color: '#2a2520' }}>£9.99/mo</strong></span>
               <span style={{ color: '#8a7d6f' }}>Status: <strong style={{ color: '#1e8a4e' }}>Live</strong></span>
-              <span style={{ color: '#8a7d6f' }}>Users: <strong style={{ color: '#a09588' }}>0</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Stage: <strong style={{ color: '#a09588' }}>Early users</strong></span>
             </div>
           </div>
 
@@ -103,7 +103,7 @@ export default function WalshyPitch() {
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12, paddingTop: 10, borderTop: '1px solid rgba(0,0,0,0.04)' }}>
               <span style={{ color: '#8a7d6f' }}>Model: <strong style={{ color: '#2a2520' }}>B2B contracts</strong></span>
               <span style={{ color: '#8a7d6f' }}>Status: <strong style={{ color: '#c47200' }}>Near launch</strong></span>
-              <span style={{ color: '#8a7d6f' }}>Users: <strong style={{ color: '#a09588' }}>0</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Stage: <strong style={{ color: '#a09588' }}>Pre-pilot</strong></span>
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function WalshyPitch() {
         {/* THE CLOSE */}
         <div style={{ marginBottom: 40, textAlign: 'center' }}>
           <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 auto 20px', maxWidth: 500 }}>
-            Three products that work. Three markets that pay. Zero users — yet. The only thing missing is the person who can change that.
+            Three products that work. Three markets that pay. Early traction — but a long way to go. The only thing missing is the person who can change that.
           </p>
           <p style={{ fontSize: 15, lineHeight: 1.85, color: '#2a2520', margin: '0 auto', maxWidth: 500, fontWeight: 600 }}>
             If that's you, let's talk.
