@@ -1,231 +1,172 @@
 import React from 'react';
 
+// WalshyPitch — a letter, not a deck.
+// Warm, human, honest. The way Brian would actually talk to Chris.
+
 export default function WalshyPitch() {
   return (
-    <div className="min-h-screen" style={{ background: '#ffffff', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1a1a1a' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 100%)', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#2a2520' }}>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
-
-        .p-display { font-family: "Playfair Display", Georgia, serif; }
-        .p-sans    { font-family: "Inter", -apple-system, sans-serif; }
-        .p-body    { font-family: Georgia, "Times New Roman", serif; }
-
-        .label {
-          font-family: "Inter", sans-serif;
-          font-size: 0.55rem;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          font-weight: 600;
-          color: #9ca3af;
-        }
-
-        .rule { height: 1px; background: #f0ede8; }
-
-        .tight-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.25rem;
-        }
-
-        .product-box {
-          border-top: 1px solid #f0ede8;
-          padding: 1rem 0;
-        }
-
-        .product-name {
-          font-family: "Inter", sans-serif;
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          margin-bottom: 0.2rem;
-        }
-
-        .product-sub {
-          font-family: "Inter", sans-serif;
-          font-size: 0.6rem;
-          color: #9ca3af;
-          font-weight: 400;
-        }
-
-        .hook {
-          font-family: "Playfair Display", Georgia, serif;
-          font-size: 0.75rem;
-          font-style: italic;
-          color: #374151;
-          margin: 0.35rem 0;
-          line-height: 1.3;
-        }
-
-        .tiny-text {
-          font-size: 0.65rem;
-          line-height: 1.5;
-          color: #4b5563;
-          margin: 0.25rem 0;
-        }
-
-        .number-big {
-          font-family: "Playfair Display", Georgia, serif;
-          font-size: 2.2rem;
-          font-weight: 700;
-          line-height: 1;
-          letter-spacing: -0.02em;
-          color: #1a1a1a;
-          margin: 0.5rem 0;
-        }
-
-        .callout {
-          background: #f9f7f4;
-          border-left: 3px solid #1a1a1a;
-          padding: 0.75rem 1rem;
-          margin: 0.75rem 0;
-        }
-
-        .seis-box {
-          background: #f0fdf4;
-          border-left: 3px solid #16a34a;
-          padding: 0.5rem 0.75rem;
-          margin-top: 0.5rem;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         @media print {
           .no-print { display: none !important; }
-          @page { margin: 0.8cm; size: A4; }
+          @page { margin: 1.2cm; size: A4; }
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        }
-
-        @media (max-width: 640px) {
-          .tight-grid {
-            grid-template-columns: 1fr !important;
-            gap: 1.2rem !important;
-          }
-          .product-box {
-            border-bottom: 1px solid #f0ede8 !important;
-          }
-          body {
-            font-size: 15px !important;
-            line-height: 1.7 !important;
-          }
-          h1 { font-size: 28px !important; }
-          h2 { font-size: 18px !important; }
-          h3 { font-size: 16px !important; }
         }
       `}</style>
 
       {/* SAVE PDF */}
-      <div className="no-print" style={{ position: 'fixed', top: '0.75rem', right: '0.75rem', zIndex: 50 }}>
+      <div className="no-print" style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 50 }}>
         <button
           onClick={() => window.print()}
-          className="p-sans"
           style={{
-            fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase',
-            padding: '0.35rem 0.75rem', border: '1px solid #d1d5db',
-            color: '#9ca3af', background: 'white', cursor: 'pointer',
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.05em',
+            padding: '10px 22px', border: '1px solid #d97706',
+            color: '#d97706', background: 'white', borderRadius: 8, cursor: 'pointer',
           }}
         >
           Save PDF
         </button>
       </div>
 
-      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem 1.5rem 2.5rem', fontSize: '14px', lineHeight: '1.6' }}>
+      <div style={{ maxWidth: 620, margin: '0 auto', padding: '60px 24px 80px' }}>
 
-        {/* HEADER */}
-        <div>
-          <p className="label" style={{ marginBottom: '1rem' }}>Private · June 2026</p>
+        {/* LETTERHEAD */}
+        <div style={{ marginBottom: 48 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: '#a09588', marginBottom: 8 }}>
+            A LETTER TO CHRIS
+          </div>
+          <div style={{ width: 40, height: 3, background: '#d97706', borderRadius: 2 }} />
+        </div>
 
-          <h1 className="p-display" style={{ fontSize: '1.8rem', fontWeight: 700, lineHeight: 1.15, marginBottom: '0.4rem', color: '#1a1a1a' }}>
-            Three products.<br/>All built. Real.
+        {/* THE HOOK — honest, human */}
+        <div style={{ marginBottom: 44 }}>
+          <h1 style={{ fontSize: 'clamp(26px, 5vw, 38px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 24px', color: '#2a2520' }}>
+            I built three things.<br />
+            They work. I can't fly them alone.
           </h1>
-          <p className="p-display" style={{ fontSize: '0.8rem', fontStyle: 'italic', color: '#6b7280', lineHeight: 1.4, marginBottom: '0.8rem' }}>
-            Looking for a partner who gets it.
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: '#6b6055', margin: 0 }}>
+            Chris — you know how to open doors. I know how to build things that matter. This isn't a pitch deck. It's a straightforward ask: help me get three working products into the world, and take a real stake in all of them.
           </p>
+        </div>
 
-          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.7, color: '#1f2937', marginBottom: '0.8rem' }}>
-            Three live products. All solving real problems. All working. Now looking for someone who already has the doors open and can move fast.
-          </p>
+        <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
 
-          <div className="rule" style={{ marginBottom: '0.8rem' }} />
-
-          {/* PRODUCTS */}
-          <p className="label" style={{ marginBottom: '0.5rem' }}>What we built</p>
-
-          <div className="tight-grid" style={{ marginBottom: '0.8rem' }}>
-            <div className="product-box">
-              <p className="product-name" style={{ color: '#d97706' }}>PetSounds51</p>
-              <p className="product-sub">Sound therapy · live</p>
-              <p className="hook">"My dog is destroying the house."</p>
-              <p className="tiny-text">14m UK pet households. Separation anxiety. Acoustic protocols built on research. Works. Now.</p>
-              <p className="p-sans" style={{ fontSize: '0.6rem', color: '#9ca3af', marginTop: '0.25rem' }}>
-                <strong style={{ color: '#374151' }}>Move:</strong> Pet insurers. One partnership = scaled acquisition.
-              </p>
-            </div>
-
-            <div className="product-box">
-              <p className="product-name" style={{ color: '#16a34a' }}>Earth51</p>
-              <p className="product-sub">Verified ESG · live</p>
-              <p className="hook">"We need real impact proof."</p>
-              <p className="tiny-text">Community litter picks. AI-verified. Tamper-proof ledger. ESG is now legally required.</p>
-              <p className="p-sans" style={{ fontSize: '0.6rem', color: '#9ca3af', marginTop: '0.25rem' }}>
-                <strong style={{ color: '#374151' }}>Move:</strong> FTSE 100 ESG budgets. Auditable ground truth.
-              </p>
-            </div>
-
-            <div className="product-box" style={{ borderBottom: '1px solid #f0ede8', gridColumn: '1 / -1' }}>
-              <p className="product-name" style={{ color: '#2563eb' }}>SORTED</p>
-              <p className="product-sub">Legal clarity · live</p>
-              <p className="hook">"HMRC letter. Can't understand it."</p>
-              <p className="tiny-text">Reads any letter. Plain English. Any language. Nothing stored. Legal aid is gone. Citizens Advice drowning.</p>
-              <p className="p-sans" style={{ fontSize: '0.6rem', color: '#9ca3af', marginTop: '0.25rem' }}>
-                <strong style={{ color: '#374151' }}>Move:</strong> FCA Consumer Duty. Banks need this. Compliance = procurement.
-              </p>
-            </div>
+        {/* THE THREE — simple, one per line */}
+        <div style={{ marginBottom: 44 }}>
+          <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: '#d97706', marginBottom: 24 }}>
+            WHAT I BUILT
           </div>
 
-          <div className="rule" style={{ marginBottom: '0.8rem' }} />
-
-          {/* THE REAL BIT */}
-          <p className="label" style={{ marginBottom: '0.4rem' }}>What's really happening</p>
-          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.6rem' }}>
-            Tech is done. Products work. We're past the building phase. What we need is someone who knows how big organizations move — relationships, experience, the right doors. Someone who can structure deals that work.
-          </p>
-
-          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.6rem' }}>
-            One pet insurer conversation changes PetSounds51. One bank compliance team changes SORTED. One ESG budget changes Earth51. We've built the products. Now we need someone who knows how to have those conversations.
-          </p>
-
-          <div className="callout">
-            <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.7, color: '#1f2937', margin: 0 }}>
-              That's clarity, not weakness. Build beautiful things. Find people who know how to scale them. Both matter.
+          {/* PetSounds51 */}
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 20, fontWeight: 800, color: '#d97706', letterSpacing: '-0.02em' }}>PetSounds51</span>
+              <span style={{ fontSize: 12, color: '#a09588', fontWeight: 500 }}>— sound therapy for anxious animals</span>
+            </div>
+            <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6b6055', margin: '0 0 8px' }}>
+              Real-time audio built on published veterinary research. No app, no hardware — works in a browser. Dogs, cats, horses. Live and payment-ready.
+            </p>
+            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: 0, fontStyle: 'italic' }}>
+              One pet insurer partnership = scaled acquisition overnight.
             </p>
           </div>
 
-          <div className="rule" style={{ marginBottom: '0.6rem' }} />
+          {/* SORTED */}
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 20, fontWeight: 800, color: '#c47200', letterSpacing: '-0.02em' }}>SORTED</span>
+              <span style={{ fontSize: 12, color: '#a09588', fontWeight: 500 }}>— decodes scary legal letters</span>
+            </div>
+            <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6b6055', margin: '0 0 8px' }}>
+              Paste any letter — HMRC, council, debt collector — get plain English in seconds. Any language. Nothing stored, ever. Live and payment-ready.
+            </p>
+            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: 0, fontStyle: 'italic' }}>
+              Banks need this for FCA Consumer Duty. Compliance = procurement.
+            </p>
+          </div>
 
-          {/* THE OFFER */}
-          <p className="label" style={{ marginBottom: '0.3rem' }}>The offer</p>
-          <div className="number-big">17% for £20k.</div>
-          <p className="p-body" style={{ fontSize: '0.75rem', lineHeight: 1.6, color: '#1f2937', marginBottom: '0.3rem' }}>
-            One stake. All three products. Transparent cap table: Graeme 3%, founder alongside, UF51 CIC holds 10% revenue — keeping core tools free.
-          </p>
-          <div className="seis-box">
-            <p className="p-sans" style={{ fontSize: '0.65rem', lineHeight: 1.6, color: '#15803d', margin: 0 }}>
-              <strong>SEIS eligible:</strong> 50% income tax relief. Effective cost £10k.
+          {/* Earth51 */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 20, fontWeight: 800, color: '#1e8a4e', letterSpacing: '-0.02em' }}>Earth51</span>
+              <span style={{ fontSize: 12, color: '#a09588', fontWeight: 500 }}>— kids pick litter, AI verifies it</span>
+            </div>
+            <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6b6055', margin: '0 0 8px' }}>
+              Children photograph litter they collect. AI verifies it — fraud detection, weight estimation, tamper-proof. Every pickup becomes reportable ESG data. Built, needs refinement before launch.
+            </p>
+            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: 0, fontStyle: 'italic' }}>
+              ESG is now legally required. Councils and brands need ground truth.
             </p>
           </div>
         </div>
 
-        {/* FOOTER */}
-        <div className="rule" style={{ margin: '1rem 0 0.75rem' }} />
-        <div>
-          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.5rem' }}>
-            Early enough that the right involvement actually shapes what this becomes. Not consultancy. Not advisory. A real stake in something that works.
+        <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
+
+        {/* THE HONEST MIDDLE */}
+        <div style={{ marginBottom: 44 }}>
+          <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 0 20px' }}>
+            The tech is done. Products work. What I don't have is the commercial reach — the relationships, the experience of how big organizations actually move. That's you.
           </p>
-          <p className="p-body" style={{ fontSize: '0.8rem', lineHeight: 1.75, color: '#1f2937', marginBottom: '0.75rem' }}>
+          <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 0 20px' }}>
+            One pet insurer conversation changes PetSounds51. One bank compliance team changes SORTED. One ESG budget changes Earth51. I've built the products. Now I need someone who knows how to have those conversations.
+          </p>
+          <div style={{ padding: '18px 22px', background: 'rgba(217,119,6,0.06)', borderLeft: '3px solid #d97706', borderRadius: 8 }}>
+            <p style={{ fontSize: 14, lineHeight: 1.75, color: '#2a2520', margin: 0, fontStyle: 'italic' }}>
+              That's clarity, not weakness. Build beautiful things. Find people who know how to scale them. Both matter.
+            </p>
+          </div>
+        </div>
+
+        <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
+
+        {/* THE OFFER — clear, warm, no jargon */}
+        <div style={{ marginBottom: 44 }}>
+          <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: '#d97706', marginBottom: 16 }}>
+            THE OFFER
+          </div>
+          <div style={{ fontSize: 32, fontWeight: 800, color: '#2a2520', letterSpacing: '-0.02em', marginBottom: 16, lineHeight: 1.1 }}>
+            17% for £20k.
+          </div>
+          <p style={{ fontSize: 14, lineHeight: 1.75, color: '#6b6055', margin: '0 0 16px' }}>
+            One stake across all three products. Transparent cap table. 10% of all revenue goes to our Community Interest Company — that's what keeps the core tools free for the people who need them most.
+          </p>
+          <div style={{ padding: '12px 16px', background: 'rgba(30,138,78,0.06)', borderLeft: '3px solid #1e8a4e', borderRadius: 8 }}>
+            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#15803d', margin: 0, fontWeight: 500 }}>
+              SEIS eligible — 50% income tax relief. Your effective cost: £10k.
+            </p>
+          </div>
+        </div>
+
+        <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
+
+        {/* THE CLOSE — human */}
+        <div style={{ marginBottom: 40 }}>
+          <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 0 20px' }}>
+            I'm a dad in Glasgow. This morning I was picking up litter with my daughter, then taking her to football. That's not a slogan — that's Earth51. That's the mission, lived, with my kids.
+          </p>
+          <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 0 20px' }}>
+            I've got three products built, live payment infrastructure, and a mission I won't compromise on. What I don't have is you — the person who can walk into a room and make the deal happen.
+          </p>
+          <p style={{ fontSize: 15, lineHeight: 1.85, color: '#2a2520', margin: 0, fontWeight: 500 }}>
+            Not consultancy. Not advisory. A real stake in something that works. Early enough that your involvement actually shapes what this becomes.
+          </p>
+        </div>
+
+        {/* SIGN OFF */}
+        <div style={{ paddingTop: 8 }}>
+          <p style={{ fontSize: 15, lineHeight: 1.8, color: '#6b6055', margin: '0 0 28px' }}>
             Keen to explore if there's a fit.
           </p>
-          <div className="p-sans" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.55rem', color: '#9ca3af', letterSpacing: '0.06em' }}>
-            <span>family@uf51.love</span>
-            <span>Private & Confidential</span>
+          <div style={{ fontSize: 18, fontWeight: 800, color: '#2a2520', marginBottom: 4 }}>Brian Hughes</div>
+          <div style={{ fontSize: 13, color: '#a09588', marginBottom: 16 }}>Glasgow, Scotland</div>
+          <a href="mailto:family@uf51.love?subject=UF51 Partnership"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 26px', background: '#d97706', color: '#fff', fontWeight: 700, fontSize: 13, letterSpacing: '0.04em', borderRadius: 8, textDecoration: 'none' }}>
+            family@uf51.love
+          </a>
+          <div style={{ marginTop: 16, fontSize: 12, color: '#c9bca8' }}>
+            Private & Confidential
           </div>
         </div>
 
