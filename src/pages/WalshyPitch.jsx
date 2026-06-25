@@ -40,14 +40,14 @@ export default function WalshyPitch() {
           </div>
         </div>
 
-        {/* THE HOOK */}
+        {/* THE HONEST OPENING */}
         <div style={{ marginBottom: 48, textAlign: 'center' }}>
-          <h1 style={{ fontSize: 'clamp(28px, 5.5vw, 42px)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.035em', margin: '0 0 20px', color: '#2a2520' }}>
+          <h1 style={{ fontSize: 'clamp(26px, 5vw, 38px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 20px', color: '#2a2520' }}>
             Three products. Built.<br />
-            <span style={{ color: '#d97706' }}>Working.</span> Ready to scale.
+            Working. <span style={{ color: '#d97706' }}>Zero users.</span>
           </h1>
           <p style={{ fontSize: 16, lineHeight: 1.75, color: '#6b6055', margin: '0 auto', maxWidth: 520 }}>
-            Three live products solving real problems in three converging markets. All built, all working. What's missing isn't more tech — it's the person who can open doors and close deals.
+            That's the honest starting point. The tech works, payments are live, the products solve real problems. What they don't have yet is the person who can get them into the right hands.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default function WalshyPitch() {
         {/* THE THREE PRODUCTS */}
         <div style={{ marginBottom: 44 }}>
           <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: '#d97706', marginBottom: 24, textAlign: 'center' }}>
-            WHAT I BUILT
+            WHAT'S BUILT
           </div>
 
           {/* PetSounds51 */}
@@ -69,9 +69,9 @@ export default function WalshyPitch() {
               Real-time audio built on published veterinary research. No app, no hardware — works in a browser. Dogs, cats, horses. Live and payment-ready.
             </p>
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12, paddingTop: 10, borderTop: '1px solid rgba(0,0,0,0.04)' }}>
-              <span style={{ color: '#8a7d6f' }}>Market: <strong style={{ color: '#d97706' }}>$259B</strong></span>
               <span style={{ color: '#8a7d6f' }}>Price: <strong style={{ color: '#2a2520' }}>£29.99/yr</strong></span>
-              <span style={{ color: '#8a7d6f' }}>Target: <strong style={{ color: '#2a2520' }}>100K subs = £3M/yr</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Status: <strong style={{ color: '#1e8a4e' }}>Live</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Users: <strong style={{ color: '#a09588' }}>0</strong></span>
             </div>
           </div>
 
@@ -85,9 +85,9 @@ export default function WalshyPitch() {
               Paste any letter — HMRC, council, debt collector — get plain English in seconds. Any language. Nothing stored, ever. Live and payment-ready.
             </p>
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12, paddingTop: 10, borderTop: '1px solid rgba(0,0,0,0.04)' }}>
-              <span style={{ color: '#8a7d6f' }}>Market: <strong style={{ color: '#c47200' }}>$849B legal</strong></span>
               <span style={{ color: '#8a7d6f' }}>Price: <strong style={{ color: '#2a2520' }}>£9.99/mo</strong></span>
-              <span style={{ color: '#8a7d6f' }}>Target: <strong style={{ color: '#2a2520' }}>50K subs = £6M/yr</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Status: <strong style={{ color: '#1e8a4e' }}>Live</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Users: <strong style={{ color: '#a09588' }}>0</strong></span>
             </div>
           </div>
 
@@ -101,59 +101,78 @@ export default function WalshyPitch() {
               Kids photograph litter they collect. AI verifies it — fraud detection, weight estimation, tamper-proof. Every pickup becomes reportable ESG data. Built, needs refinement before launch.
             </p>
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12, paddingTop: 10, borderTop: '1px solid rgba(0,0,0,0.04)' }}>
-              <span style={{ color: '#8a7d6f' }}>Market: <strong style={{ color: '#1e8a4e' }}>$1.3T env + ESG</strong></span>
               <span style={{ color: '#8a7d6f' }}>Model: <strong style={{ color: '#2a2520' }}>B2B contracts</strong></span>
-              <span style={{ color: '#8a7d6f' }}>Target: <strong style={{ color: '#2a2520' }}>50 councils = £1M+ yr 1</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Status: <strong style={{ color: '#c47200' }}>Near launch</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Users: <strong style={{ color: '#a09588' }}>0</strong></span>
             </div>
           </div>
         </div>
 
         <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
 
-        {/* MARKET POTENTIAL */}
+        {/* THE OPPORTUNITY — honest stats */}
         <div style={{ marginBottom: 44 }}>
           <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: '#d97706', marginBottom: 20, textAlign: 'center' }}>
-            MARKET POTENTIAL — ACHIEVABLE WITH THE RIGHT PARTNER
+            THE SIZE OF THE OPPORTUNITY
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12, marginBottom: 24 }}>
-            {[
-              { market: '$259B', label: 'Pet care', color: '#d97706' },
-              { market: '$849B', label: 'Legal services', color: '#c47200' },
-              { market: '$1.3T', label: 'Env + ESG', color: '#1e8a4e' },
-            ].map((m, i) => (
-              <div key={i} style={{ padding: '20px 16px', background: 'white', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12, textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-                <div style={{ fontSize: 24, fontWeight: 800, color: m.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{m.market}</div>
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: '#8a7d6f', textTransform: 'uppercase' }}>{m.label}</div>
+          <div style={{ padding: '24px 26px', background: 'white', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12, boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: '#6b6055', margin: '0 0 20px' }}>
+              Three markets. All real, all growing, all proven to pay for solutions like these.
+            </p>
+
+            {/* Pet care */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.04)' }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: '#2a2520' }}>Pet care & wellbeing</div>
+                <div style={{ fontSize: 12, color: '#a09588', marginTop: 2 }}>70% of UK households own a pet</div>
               </div>
-            ))}
-          </div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: '#d97706', letterSpacing: '-0.02em' }}>$259B</div>
+            </div>
 
-          <p style={{ fontSize: 14, lineHeight: 1.8, color: '#6b6055', margin: '0 0 12px' }}>
-            Three converging markets. All growing. All mandated or recession-proof. Combined achievable revenue with the right distribution: <strong style={{ color: '#2a2520' }}>£10M+ within 24 months</strong> — 100K pet subscribers, 50K SORTED subscribers, and 50 council ESG contracts.
-          </p>
-          <p style={{ fontSize: 14, lineHeight: 1.8, color: '#6b6055', margin: 0 }}>
-            The tech is built. The markets are real. What's missing is the person who can walk into a room and make the deal happen.
-          </p>
+            {/* Legal */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.04)' }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: '#2a2520' }}>Legal & debt services</div>
+                <div style={{ fontSize: 12, color: '#a09588', marginTop: 2 }}>9M UK people in problem debt</div>
+              </div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: '#c47200', letterSpacing: '-0.02em' }}>$849B</div>
+            </div>
+
+            {/* ESG */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '12px 0' }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: '#2a2520' }}>Environmental & ESG</div>
+                <div style={{ fontSize: 12, color: '#a09588', marginTop: 2 }}>£1.5T global ESG spend mandated by 2030</div>
+              </div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: '#1e8a4e', letterSpacing: '-0.02em' }}>$1.3T</div>
+            </div>
+
+            <div style={{ marginTop: 20, padding: '14px 18px', background: 'rgba(217,119,6,0.05)', borderLeft: '3px solid #d97706', borderRadius: 8 }}>
+              <p style={{ fontSize: 13, lineHeight: 1.75, color: '#6b6055', margin: 0 }}>
+                Even capturing a fraction of one of these markets changes everything. The products are positioned in spaces where people are already paying for solutions — just not good ones.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
 
-        {/* THE OPPORTUNITY — replaces the personal story */}
+        {/* WHAT THIS NEEDS */}
         <div style={{ marginBottom: 44 }}>
           <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: '#2a2520', marginBottom: 20, textAlign: 'center' }}>
             WHAT THIS NEEDS
           </div>
           <div style={{ padding: '24px 26px', background: 'white', border: '1px solid rgba(217,119,6,0.15)', borderRadius: 12, boxShadow: '0 2px 12px rgba(217,119,6,0.06)' }}>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 0 16px' }}>
-              Everything technical is done. Products work. Payment infrastructure is live. What these products need is someone who knows how organizations buy — the relationships, the experience, the ability to structure deals that actually close.
+              I can build. I can't sell. Not the way these products need someone to sell — not a quick pitch, but someone who genuinely lives in the products, understands them inside out, and can have the right conversations with the right people.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 0 16px' }}>
-              One pet insurer conversation changes PetSounds51. One bank compliance team changes SORTED. One ESG budget changes Earth51. That's not theory — those are the specific doors this needs opened.
+              One pet insurer conversation changes PetSounds51. One bank compliance team changes SORTED. One ESG budget changes Earth51. Those are the specific doors that need opened — and they need someone who'll put in the work to open them properly.
             </p>
             <div style={{ padding: '14px 18px', background: 'rgba(217,119,6,0.06)', borderLeft: '3px solid #d97706', borderRadius: 8, margin: 0 }}>
               <p style={{ fontSize: 14, lineHeight: 1.75, color: '#2a2520', margin: 0, fontStyle: 'italic' }}>
-                This is an opportunity to get in early on three working products, shape how they reach market, and take a real stake across all of them.
+                This isn't a consultancy or an advisory role. It's a real stake, early enough to shape everything, for someone willing to genuinely live in these products and give them their best chance of success.
               </p>
             </div>
           </div>
@@ -184,10 +203,10 @@ export default function WalshyPitch() {
         {/* THE CLOSE */}
         <div style={{ marginBottom: 40, textAlign: 'center' }}>
           <p style={{ fontSize: 15, lineHeight: 1.85, color: '#6b6055', margin: '0 auto 20px', maxWidth: 500 }}>
-            Not consultancy. Not advisory. A real stake in something that works. Early enough that the right involvement actually shapes what this becomes.
+            Three products that work. Three markets that pay. Zero users — yet. The only thing missing is the person who can change that.
           </p>
           <p style={{ fontSize: 15, lineHeight: 1.85, color: '#2a2520', margin: '0 auto', maxWidth: 500, fontWeight: 600 }}>
-            Three products. Three markets. One partner who can make them fly. Let's talk.
+            If that's you, let's talk.
           </p>
         </div>
 
