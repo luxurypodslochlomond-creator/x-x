@@ -50,7 +50,7 @@ export default function GraemeOnePager() {
 
     // SUMMARY
     addText('Three products. Built and live. Need commercial distribution.', 15, true, [40, 35, 30], 2);
-    addText('UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are validated, and the infrastructure is live. What is missing is commercial distribution. This brief is for a commercial partner who can take these products to market through existing channels.', 9, false, [80, 70, 60], 6);
+    addText('UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are real, and the infrastructure is live. What is missing is commercial distribution. This brief is for a commercial partner who can take these products to market through existing channels.', 9, false, [80, 70, 60], 6);
 
     divider();
 
@@ -82,18 +82,19 @@ export default function GraemeOnePager() {
     divider();
 
     // THE DEAL
-    addText('THE DEAL — 50% EQUITY, £40K RUNWAY, 6 MONTHS', 10, true, [180, 130, 20], 3);
-    addText('50% of the new company on the table. Equal partnership — not investment, not a loan, not a salary.', 9, true, [80, 70, 60], 2);
-    addText('Months 1–3: £20K runway. Finalize products, prepare for market entry through partner channels.', 9, false, [80, 70, 60], 2);
-    addText('Months 4–6: £20K runway. Products market-ready, first subscribers coming through partner channels.', 9, false, [80, 70, 60], 2);
+    addText('THE DEAL — BUY IN 50% FOR £40K', 10, true, [180, 130, 20], 3);
+    addText('50% of the new company for £40K. Equal partnership — you own half, I own half. That is the offer.', 9, true, [80, 70, 60], 2);
+    addText('The £40K is paid over 6 months — £20K in months 1–3, £20K in months 4–6. Both partners have 6 months to get everything right.', 9, false, [80, 70, 60], 2);
+    addText('Months 1–3: Finalize products, prepare for market entry through partner channels.', 9, false, [80, 70, 60], 2);
+    addText('Months 4–6: Products market-ready, first subscribers coming through partner channels.', 9, false, [80, 70, 60], 2);
     addText('Month 6: Products live. Revenue flowing. Partnership proven.', 9, false, [80, 70, 60], 4);
-    addText('The £40K is runway over 6 months — time to get everything right, together. 10% of all revenue goes to the CIC — formed and registered. The new company is incorporated clean and separate, 50/50 ownership.', 9, false, [80, 70, 60], 6);
+    addText('10% of all revenue goes to the CIC — formed and registered. The new company is incorporated clean and separate, 50/50 ownership from day one.', 9, false, [80, 70, 60], 6);
 
     divider();
 
     // NEXT STEP
     addText('NEXT STEP', 10, true, [40, 35, 30], 2);
-    addText('This is a commercial partnership — your distribution and commercial expertise, built products and mission. 50% equity on the table, £40K runway over 6 months to get everything right, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.', 9, false, [80, 70, 60], 6);
+    addText('This is a buy-in — 50% of the new company for £40K, paid over 6 months. Your distribution and commercial expertise, my built products. Both partners have skin in the game from day one. Straightforward terms, no hidden clauses.', 9, false, [80, 70, 60], 6);
 
     divider();
 
@@ -179,7 +180,7 @@ export default function GraemeOnePager() {
               Need commercial distribution.
             </h1>
             <p style={{ fontSize: 15, color: '#6b6055', lineHeight: 1.75, margin: 0, maxWidth: 580, borderLeft: '3px solid rgba(184,134,11,0.3)', paddingLeft: 18 }}>
-              UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are validated, and the infrastructure is live. <strong style={{ color: '#2a2520' }}>What is missing is commercial distribution.</strong> This brief is for a commercial partner who can take these products to market through existing channels.
+              UF51 has three products in production — two are payment-ready via Stripe, one needs refinement. No paying subscribers yet. The technology is built, the markets are real, and the infrastructure is live. <strong style={{ color: '#2a2520' }}>What is missing is commercial distribution.</strong> This brief is for a commercial partner who can take these products to market through existing channels.
             </p>
           </div>
 
@@ -248,15 +249,20 @@ export default function GraemeOnePager() {
 
           {/* THE DEAL */}
           <div style={{ marginBottom: 36 }}>
-            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#b8860b', marginBottom: 14 }}>THE DEAL — 50% EQUITY, £40K RUNWAY, 6 MONTHS</div>
-            <div style={{ padding: '14px 18px', background: 'rgba(184,134,11,0.06)', border: '1px solid rgba(184,134,11,0.2)', borderRadius: 10, marginBottom: 14 }}>
-              <div style={{ fontSize: 16, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.01em', marginBottom: 2 }}>50% of the new company</div>
-              <div style={{ fontSize: 11, color: '#6b6055', lineHeight: 1.4 }}>Equal partnership — not investment, not a loan, not a salary.</div>
+            <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#b8860b', marginBottom: 14 }}>THE DEAL — BUY IN 50% FOR £40K</div>
+            <div style={{ padding: '16px 20px', background: 'rgba(184,134,11,0.06)', border: '1px solid rgba(184,134,11,0.2)', borderRadius: 10, marginBottom: 14 }}>
+              <div style={{ fontSize: 18, fontWeight: 900, color: '#2a2520', letterSpacing: '-0.01em', marginBottom: 4 }}>50% of the new company for £40K</div>
+              <div style={{ fontSize: 12, color: '#6b6055', lineHeight: 1.5 }}>Equal partnership — you own half, I own half. That is the offer.</div>
+            </div>
+            <div style={{ padding: '12px 16px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 8, marginBottom: 14 }}>
+              <p style={{ fontSize: 12, color: '#6b6055', lineHeight: 1.65, margin: 0 }}>
+                The £40K is paid over 6 months — £20K in months 1–3, £20K in months 4–6. Both partners have 6 months to get everything right.
+              </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
               {[
-                { label: 'Months 1–3', value: '£20K runway', detail: 'Finalize products, prepare for market entry through partner channels' },
-                { label: 'Months 4–6', value: '£20K runway', detail: 'Products market-ready, first subscribers through partner channels' },
+                { label: 'Months 1–3', value: '£20K', detail: 'Finalize products, prepare for market entry through partner channels' },
+                { label: 'Months 4–6', value: '£20K', detail: 'Products market-ready, first subscribers through partner channels' },
                 { label: 'Month 6', value: 'Live + proven', detail: 'Revenue flowing, equal partnership established', green: true },
               ].map(step => (
                 <div key={step.label} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 18px', background: '#fff', border: `1px solid ${step.green ? 'rgba(30,138,78,0.2)' : 'rgba(0,0,0,0.06)'}`, borderRadius: 10 }}>
@@ -271,7 +277,7 @@ export default function GraemeOnePager() {
               ))}
             </div>
             <p style={{ fontSize: 12, color: '#8a7d6f', lineHeight: 1.65, margin: 0, padding: '12px 16px', background: 'rgba(184,134,11,0.04)', borderRadius: 8 }}>
-              The £40K is runway over 6 months — time to get everything right, together. <strong style={{ color: '#2a2520' }}>10% of all revenue goes to the CIC</strong> — formed and registered. The new company is incorporated clean and separate, 50/50 ownership.
+              <strong style={{ color: '#2a2520' }}>10% of all revenue goes to the CIC</strong> — formed and registered. The new company is incorporated clean and separate, 50/50 ownership from day one.
             </p>
           </div>
 
@@ -282,7 +288,7 @@ export default function GraemeOnePager() {
             <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.24em', color: '#2a2520', marginBottom: 14 }}>NEXT STEP</div>
             <div style={{ padding: '24px 26px', background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 12 }}>
               <p style={{ fontSize: 14, color: '#6b6055', lineHeight: 1.85, margin: 0 }}>
-                This is a commercial partnership — your distribution and commercial expertise, built products and mission. 50% equity on the table, £40K runway over 6 months to get everything right, then products go through your channels and revenue flows. Straightforward terms, no hidden clauses.
+                This is a buy-in — 50% of the new company for £40K, paid over 6 months. Your distribution and commercial expertise, my built products. Both partners have skin in the game from day one. Straightforward terms, no hidden clauses.
               </p>
             </div>
           </div>
