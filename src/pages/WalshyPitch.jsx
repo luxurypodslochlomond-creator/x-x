@@ -68,9 +68,14 @@ export default function WalshyPitch() {
             <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6b6055', margin: '0 0 8px' }}>
               Real-time audio built on published veterinary research. No app, no hardware — works in a browser. Dogs, cats, horses. Live and payment-ready.
             </p>
-            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: 0, fontStyle: 'italic' }}>
+            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: '0 0 8px', fontStyle: 'italic' }}>
               One pet insurer partnership = scaled acquisition overnight.
             </p>
+            <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12 }}>
+              <span style={{ color: '#8a7d6f' }}>Market: <strong style={{ color: '#d97706' }}>$259B pet care</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Price: <strong style={{ color: '#2a2520' }}>£29.99/yr</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Achievable: <strong style={{ color: '#2a2520' }}>100K subs = £3M/yr</strong></span>
+            </div>
           </div>
 
           {/* SORTED */}
@@ -82,9 +87,14 @@ export default function WalshyPitch() {
             <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6b6055', margin: '0 0 8px' }}>
               Paste any letter — HMRC, council, debt collector — get plain English in seconds. Any language. Nothing stored, ever. Live and payment-ready.
             </p>
-            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: 0, fontStyle: 'italic' }}>
+            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: '0 0 8px', fontStyle: 'italic' }}>
               Banks need this for FCA Consumer Duty. Compliance = procurement.
             </p>
+            <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12 }}>
+              <span style={{ color: '#8a7d6f' }}>Market: <strong style={{ color: '#c47200' }}>$849B legal · $25B legal tech</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Price: <strong style={{ color: '#2a2520' }}>£9.99/mo</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Achievable: <strong style={{ color: '#2a2520' }}>50K subs = £6M/yr</strong></span>
+            </div>
           </div>
 
           {/* Earth51 */}
@@ -96,9 +106,14 @@ export default function WalshyPitch() {
             <p style={{ fontSize: 14, lineHeight: 1.7, color: '#6b6055', margin: '0 0 8px' }}>
               Children photograph litter they collect. AI verifies it — fraud detection, weight estimation, tamper-proof. Every pickup becomes reportable ESG data. Built, needs refinement before launch.
             </p>
-            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: 0, fontStyle: 'italic' }}>
+            <p style={{ fontSize: 13, lineHeight: 1.6, color: '#8a7d6f', margin: '0 0 8px', fontStyle: 'italic' }}>
               ESG is now legally required. Councils and brands need ground truth.
             </p>
+            <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 12 }}>
+              <span style={{ color: '#8a7d6f' }}>Market: <strong style={{ color: '#1e8a4e' }}>$1.3T env · $30B+ ESG</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Model: <strong style={{ color: '#2a2520' }}>B2B contracts</strong></span>
+              <span style={{ color: '#8a7d6f' }}>Achievable: <strong style={{ color: '#2a2520' }}>50 councils = £1M+ yr 1</strong></span>
+            </div>
           </div>
         </div>
 
@@ -117,6 +132,35 @@ export default function WalshyPitch() {
               That's clarity, not weakness. Build beautiful things. Find people who know how to scale them. Both matter.
             </p>
           </div>
+        </div>
+
+        <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
+
+        {/* MARKET POTENTIAL — achievable with the right partner */}
+        <div style={{ marginBottom: 44 }}>
+          <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: '#d97706', marginBottom: 20 }}>
+            MARKET POTENTIAL — ACHIEVABLE WITH THE RIGHT PARTNER
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12, marginBottom: 20 }}>
+            {[
+              { market: '$259B', label: 'Pet care', color: '#d97706' },
+              { market: '$849B', label: 'Legal services', color: '#c47200' },
+              { market: '$1.3T', label: 'Environmental + ESG', color: '#1e8a4e' },
+            ].map((m, i) => (
+              <div key={i} style={{ padding: '18px 16px', background: 'white', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 10, textAlign: 'center' }}>
+                <div style={{ fontSize: 22, fontWeight: 800, color: m.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{m.market}</div>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: '#8a7d6f', textTransform: 'uppercase' }}>{m.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <p style={{ fontSize: 14, lineHeight: 1.8, color: '#6b6055', margin: '0 0 16px' }}>
+            Three converging markets. All growing. All mandated or recession-proof. Combined achievable revenue with the right distribution: <strong style={{ color: '#2a2520' }}>£10M+ within 24 months</strong> — that's 100K pet subscribers, 50K SORTED subscribers, and 50 council ESG contracts.
+          </p>
+          <p style={{ fontSize: 14, lineHeight: 1.8, color: '#6b6055', margin: 0 }}>
+            I can build it. I cannot sell it into boardrooms. That's the gap — and that's why the right partner changes everything.
+          </p>
         </div>
 
         <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '0 0 40px' }} />
