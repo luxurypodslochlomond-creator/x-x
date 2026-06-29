@@ -19,12 +19,21 @@ const URL_REGEX = /(https?:\/\/[^\s]+|[a-z0-9-]+\.(?:com|co\.uk|org|net|gov\.uk|
 // Email addresses
 const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/gi;
 
-// Crypto wallet addresses (Bitcoin, Ethereum)
-const BTC_REGEX = /\b(?:bc1|[13])[a-zA-HJ-NP-Z0-9]{25,42}\b/g;
-const ETH_REGEX = /\b0x[a-fA-F0-9]{40}\b/g;
-
 // Sort code (UK bank)
 const SORT_CODE_REGEX = /\b\d{2}[-\s]?\d{2}[-\s]?\d{2}\b/g;
+
+// Gift card / voucher request keywords — the #1 scam targeting older & vulnerable people
+const GIFT_CARD_KEYWORDS = [
+  'gift card', 'itunes card', 'apple card', 'google play card', 'steam card',
+  'amazon card', 'voucher', 'google play voucher', 'app store voucher',
+];
+
+// Bank transfer / money request keywords
+const BANK_TRANSFER_KEYWORDS = [
+  'bank transfer', 'wire transfer', 'western union', 'moneygram',
+  'sort code', 'account number', 'transfer money', 'send money',
+  'payment required', 'payment needed', 'pay now', 'pay immediately',
+];
 
 // Urgency / threat keywords — the language scammers use to panic people
 const URGENCY_KEYWORDS = [
@@ -60,7 +69,8 @@ export function detectScamPatterns(text) {
     phones: [],
     urls: [],
     emails: [],
-    crypto: [],
+    giftCardHits: [],
+    bankTransferHits: [],
     sortCodes: [],
     urgencyHits: [],
     paymentHits: [],
@@ -96,14 +106,20 @@ export function detectScamPatterns(text) {
     if (!findings.emails.includes(email)) findings.emails.push(email);
   }
 
-  // Extract crypto addresses
-  while ((match = BTC_REGEX.exec(text)) !== null) {
-    findings.crypto.push({ type: 'Bitcoin', address: match[0] });
-    findings.riskScore += 25;
+  // Check gift card / voucher requests
+  for (const keyword of GIFT_CARD_KEYWORDS) {
+    if (lowerText.includes(keyword)) {
+      findings.giftCardHits.push(keyword);
+      findings.riskScore += 25;
+    }
   }
-  while ((match = ETH_REGEX.exec(text)) !== null) {
-    findings.crypto.push({ type: 'Ethereum', address: match[0] });
-    findings.riskScore += 25;
+
+  // Check bank transfer / money requests
+  for (const keyword of BANK_TRANSFER_KEYWORDS) {
+    if (lowerText.includes(keyword)) {
+      findings.bankTransferHits.push(keyword);
+      findings.riskScore += 15;
+    }
   }
 
   // Extract sort codes
@@ -137,7 +153,8 @@ export function detectScamPatterns(text) {
     findings.phones.length > 0 ||
     findings.urls.length > 0 ||
     findings.emails.length > 0 ||
-    findings.crypto.length > 0 ||
+    findings.giftCardHits.length > 0 ||
+    findings.bankTransferHits.length > 0 ||
     findings.sortCodes.length > 0 ||
     findings.urgencyHits.length > 0 ||
     findings.paymentHits.length > 0;
@@ -150,10 +167,16 @@ export function getPatternWarnings(findings) {
   const warnings = [];
   if (!findings) return warnings;
 
-  if (findings.crypto.length > 0) {
+  if (findings.giftCardHits.length > 0) {
     warnings.push({
       level: 'danger',
-      text: `Crypto wallet address found — requesting crypto payment is a major scam red flag.`,
+      text: `Gift card / voucher requested — NO real organisation, bank, or government body EVER asks for gift cards. This is always a scam.`,
+    });
+  }
+  if (findings.bankTransferHits.length > 0) {
+    warnings.push({
+      level: 'danger',
+      text: `Bank transfer or money payment requested — your bank will never ask you to transfer money to "protect" your account. Hang up and call your bank on the number on your card.`,
     });
   }
   if (findings.sortCodes.length > 0) {

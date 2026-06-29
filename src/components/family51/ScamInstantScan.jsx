@@ -44,7 +44,8 @@ export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
   // indicators are present. This is the highest-stress moment for the user;
   // a calm action strip reduces panic before the AI analysis finishes.
   const paymentRisk =
-    (findings.crypto && findings.crypto.length > 0) ||
+    (findings.giftCardHits && findings.giftCardHits.length > 0) ||
+    (findings.bankTransferHits && findings.bankTransferHits.length > 0) ||
     (findings.urgencyHits && findings.urgencyHits.some(h => /pay|payment|transfer|deposit|gift card|voucher|wire/i.test(h)));
 
   if (!findings || !findings.hasFindings) return null;
@@ -123,10 +124,15 @@ export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
             <FindingRow key={`e-${i}`} label="Email address found" value={email} level="info" />
           ))}
 
-          {/* Crypto */}
-          {findings.crypto.length > 0 && findings.crypto.map((c, i) => (
-            <FindingRow key={`c-${i}`} label={`${c.type} wallet found`} value={c.address.substring(0, 20) + '...'} level="danger" />
-          ))}
+          {/* Gift card / voucher requests — the classic scam for older & vulnerable people */}
+          {findings.giftCardHits && findings.giftCardHits.length > 0 && (
+            <FindingRow label="Gift card / voucher request" value={findings.giftCardHits.join(' · ')} level="danger" />
+          )}
+
+          {/* Bank transfer requests */}
+          {findings.bankTransferHits && findings.bankTransferHits.length > 0 && (
+            <FindingRow label="Bank transfer requested" value={findings.bankTransferHits.join(' · ')} level="danger" />
+          )}
 
           {/* Urgency keywords */}
           {findings.urgencyHits.length > 0 && (
