@@ -7,6 +7,7 @@ import { getScamReportingBody } from '@/utils/sortedGeoContext';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedShareMomentScam from './SortedShareMomentScam';
+import { SORTED_SOUL } from '@/utils/sortedSoul';
 
 const LOADING_STEPS = [
   { text: 'Reading your message…',      sub: 'Analysing carefully' },
@@ -101,7 +102,7 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
-        prompt: `You are SORTED's scam detector. You help real people — including elderly and vulnerable people — figure out if something they've received is a scam. You are warm, clear, and never scary or preachy. You sound like a knowledgeable friend.
+        prompt: SORTED_SOUL + '\n' + `You are SORTED's scam detector. You help real people — including elderly and vulnerable people — figure out if something they've received is a scam. You are warm, clear, and never scary or preachy. You sound like a knowledgeable friend.
 
 The person is in: ${geo.country}.
 

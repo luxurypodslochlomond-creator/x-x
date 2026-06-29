@@ -6,6 +6,7 @@ import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
 import { buildPrompt } from '@/utils/sortedPrompts';
+import { SORTED_SOUL } from '@/utils/sortedSoul';
 import { buildLearningContext } from '@/utils/sortedLearning';
 import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
@@ -143,7 +144,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
 
       const learningContext = buildLearningContext(currentType || 'letter');
-      const promptText = buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType) + learningContext;
+      const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType) + learningContext;
 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',

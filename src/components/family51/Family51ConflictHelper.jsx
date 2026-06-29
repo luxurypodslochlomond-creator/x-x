@@ -9,6 +9,7 @@ import GeoSelector from './GeoSelector';
 import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
 import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
+import { SORTED_SOUL } from '@/utils/sortedSoul';
 
 const CONFLICT_TYPES = [
   { id: 'neighbour',  label: 'NEIGHBOUR',   desc: 'Noise, boundaries, shared areas' },
@@ -142,7 +143,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
       );
 
       const systemPrompt = isPersonalRelationship
-        ? `You are a calm, warm, wise friend. Someone who genuinely cares. You are NOT a lawyer, NOT a legal advisor, and this is NOT a court case — this is a real human moment in someone's life. Your job is to help them feel heard, calm, and clear — not scared or overwhelmed.
+        ? SORTED_SOUL + '\n' + `You are a calm, warm, wise friend. Someone who genuinely cares. You are NOT a lawyer, NOT a legal advisor, and this is NOT a court case — this is a real human moment in someone's life. Your job is to help them feel heard, calm, and clear — not scared or overwhelmed.
 
 CRITICAL RULES:
 - DO NOT mention police, 999, 101, DVPNs, court orders, or criminal legislation UNLESS the person has explicitly described physical violence or genuine fear for their safety. A verbal argument or name-calling is NOT grounds for this.
@@ -160,7 +161,7 @@ THEIR SITUATION: ${what}${fileContext}
 - what_to_say: A short, calm, real script they could actually say out loud. Human tone. Not formal. Not aggressive. Something that opens a door rather than closes one.
 - what_not_to_do: Array of 2 things — keep it gentle and practical, not scary.
 - if_it_escalates: Only include this if truly relevant. For a single verbal argument, say something like "If this becomes a regular pattern, that's worth talking to someone about — a counsellor, a trusted friend, or a helpline like Relate (0300 100 1234)." NO police numbers for a single argument.`
-        : `You are a sharp, calm conflict and legal expert. You are entirely on their side. Direct, confident, real — not preachy, not corporate. You sound like the smartest friend they have.
+        : SORTED_SOUL + '\n' + `You are a sharp, calm conflict and legal expert. You are entirely on their side. Direct, confident, real — not preachy, not corporate. You sound like the smartest friend they have.
 
 ${countryContext}
 

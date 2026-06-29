@@ -9,6 +9,7 @@ import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
 import SortedHelpLinks from './SortedHelpLinks';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
+import { SORTED_SOUL } from '@/utils/sortedSoul';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
@@ -71,7 +72,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
     const t = TONES.find(x => x.id === selectedTone);
     const geoContext = buildSortedGeoPromptContext(geo);
     
-    const prompt = `You are SORTED — a straight-talking advisor who writes letters for real people. You're like a knowledgeable friend — calm, direct, confident. Not dramatic. Not preachy. Not trying to sound impressive. Just clear and effective. ${geoContext}
+    const prompt = SORTED_SOUL + '\n' + `You are SORTED — a straight-talking advisor who writes letters for real people. You're like a knowledgeable friend — calm, direct, confident. Not dramatic. Not preachy. Not trying to sound impressive. Just clear and effective. ${geoContext}
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}

@@ -26,6 +26,7 @@ const verdictStyle = {
 };
 
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
+import { SORTED_SOUL } from '@/utils/sortedSoul';
 
 export default function SortedContractChecker({ accentColor = '#7c3aed', onResult }) {
   const [contractType, setContractType] = useState('');
@@ -82,7 +83,7 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
 
     const res = await base44.integrations.Core.InvokeLLM({
       ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
-      prompt: `You are a plain-English contract expert helping ordinary people understand what they're signing.
+      prompt: SORTED_SOUL + '\n' + `You are a plain-English contract expert helping ordinary people understand what they're signing.
 
 Contract type: ${contractType || 'Not specified'}
 
