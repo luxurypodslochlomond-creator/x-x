@@ -13,6 +13,7 @@ import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedStreamingResult from './SortedStreamingResult';
 import SortedPatternShareToggle from './SortedPatternShareToggle';
+import LetterInstantScan from './LetterInstantScan';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -507,6 +508,11 @@ Don't worry about formatting. Just get it all in. If the law applies in a differ
                 Upload a file
                 </motion.button>
             </div>
+          )}
+
+          {/* INSTANT SCAN — instant letter detection before AI runs */}
+          {letterText.trim() && (
+            <LetterInstantScan text={letterText} accentColor={accentColor} />
           )}
 
           {/* SUBTLE TRUST LINE */}
