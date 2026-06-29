@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/api/functions/serveFavicon?type=uf51" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- PERFORMANCE: Preconnect to critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://uf51.love" />
+    <link rel="dns-prefetch" href="https://api.base44.com" />
+    
+    <!-- INSTANT PAINT: Critical CSS inlined -->
+    <style>
+      #root{min-height:100vh}
+      @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+      #root:not(:empty){animation:fadeIn .2s ease-out}
+    </style>
 
     <!-- PATH-AWARE OG TAGS — set before React mounts so social scrapers see the right info -->
     <script>

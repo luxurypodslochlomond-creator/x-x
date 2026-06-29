@@ -212,7 +212,6 @@ const AuthenticatedApp = () => {
       </Route>
       <Route path="/Platform" element={<LayoutWrapper currentPageName="Platform"><PlatformPage /></LayoutWrapper>} />
 
-      <Route path="/BrianHughesCV" element={<BrianHughesCVPage />} />
       <Route path="/AdminSortedOutreach" element={<LayoutWrapper currentPageName="AdminSortedOutreach"><AdminSortedOutreachPage /></LayoutWrapper>} />
       <Route path="/AdminSortedInfluencers" element={<LayoutWrapper currentPageName="AdminSortedInfluencers"><AdminSortedInfluencersPage /></LayoutWrapper>} />
       <Route path="/CB51Vote" element={<CB51VotePage />} />

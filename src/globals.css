@@ -197,8 +197,11 @@ css
   100% { transform: scale(2.5); opacity: 0; }
 }
 
-/* Smooth scroll for the whole app */
+/* Smooth scroll ONLY for anchor links — not programmatic scrolls */
 html {
+  scroll-behavior: auto;
+}
+html.scroll-smooth {
   scroll-behavior: smooth;
 }
 
