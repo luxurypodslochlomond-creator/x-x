@@ -40,6 +40,13 @@ export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
   const findings = detectScamPatterns(text);
   const warnings = getPatternWarnings(findings);
 
+  // Payment emergency strip — appears only when crypto wallets or payment
+  // indicators are present. This is the highest-stress moment for the user;
+  // a calm action strip reduces panic before the AI analysis finishes.
+  const paymentRisk =
+    (findings.crypto && findings.crypto.length > 0) ||
+    (findings.urgencyHits && findings.urgencyHits.some(h => /pay|payment|transfer|deposit|gift card|voucher|wire/i.test(h)));
+
   if (!findings || !findings.hasFindings) return null;
 
   return (
@@ -66,6 +73,21 @@ export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
         </div>
 
         <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {/* ALREADY PAID? — calm emergency strip */}
+          {paymentRisk && (
+            <div style={{
+              padding: '10px 12px', borderRadius: 8,
+              background: 'rgba(6,182,212,0.05)', border: '1px solid rgba(6,182,212,0.25)',
+            }}>
+              <p style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.1em', color: '#06b6d4', margin: '0 0 4px', textTransform: 'uppercase' }}>
+                Already paid or sent money?
+              </p>
+              <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0, lineHeight: 1.45 }}>
+                Call your bank now — most can reverse a transfer if reported within 24 hours. Don't feel embarrassed; this happens to thousands of people every day.
+              </p>
+            </div>
+          )}
+
           {/* Warnings */}
           {warnings.map((w, i) => {
             const s = WARNING_STYLE[w.level];
