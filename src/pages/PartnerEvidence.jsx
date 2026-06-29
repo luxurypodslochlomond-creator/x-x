@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { jsPDF } from 'jspdf';
 
 // UF51 — Evidence One-Pager
 // Zero ego. Calm. One page. That's it.
@@ -26,8 +25,9 @@ export default function PartnerEvidence() {
     });
   };
 
-  const handlePDF = () => {
+  const handlePDF = async () => {
     setSaving(true);
+    const { jsPDF } = await import('jspdf');
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
     const margin = 20;
     const pageWidth = 210;
@@ -107,8 +107,8 @@ export default function PartnerEvidence() {
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
           <motion.button whileTap={{ scale: 0.95 }} onClick={handlePDF} disabled={saving}
-            style={{ fontSize: 10, fontWeight: 700, color: '#fff', background: AMBER_DARK, border: 'none', borderRadius: 8, padding: '9px 18px', cursor: 'pointer' }}>
-            {saving ? '…' : '↓ PDF'}
+            style={{ fontSize: 10, fontWeight: 700, color: '#fff', background: AMBER_DARK, border: 'none', borderRadius: 8, padding: '9px 18px', cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? 0.7 : 1 }}>
+            {saving ? 'GENERATING…' : '↓ PDF'}
           </motion.button>
           <motion.button whileTap={{ scale: 0.95 }} onClick={handleCopy}
             style={{ fontSize: 10, fontWeight: 700, color: copied ? AMBER_DARK : INK_SOFT, background: copied ? 'rgba(217,119,6,0.08)' : 'transparent', border: `1px solid ${BORDER}`, borderRadius: 8, padding: '9px 18px', cursor: 'pointer' }}>
