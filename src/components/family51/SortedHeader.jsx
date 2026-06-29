@@ -14,27 +14,13 @@ function SortedMark() {
 }
 
 export default function SortedHeader() {
-  const location = useLocation();
   const { remaining, isPaid } = useSortedUsage();
-  const [caseCount, setCaseCount] = useState(0);
-
-  const refreshCaseCount = () => {
+  const [caseCount, setCaseCount] = useState(() => {
     try {
       const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
-      setCaseCount(cases.length);
-    } catch {}
-  };
-
-  useEffect(() => {
-    refreshCaseCount();
-    const handler = () => refreshCaseCount();
-    window.addEventListener('storage', handler);
-    window.addEventListener('sorted-cases-changed', handler);
-    return () => {
-      window.removeEventListener('storage', handler);
-      window.removeEventListener('sorted-cases-changed', handler);
-    };
-  }, [location.pathname]);
+      return cases.length;
+    } catch { return 0; }
+  });
 
   return (
     <header style={{
