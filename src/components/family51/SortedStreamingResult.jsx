@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedHelpLinks from './SortedHelpLinks';
 import SortedPushNudge from './SortedPushNudge';
+import SortedFeedback from './SortedFeedback';
 
 const SEVERITY_CONFIG = {
   'NOT URGENT':      { color: '#22c55e', bg: 'rgba(34,197,94,0.06)',   border: 'rgba(34,197,94,0.2)' },
@@ -216,6 +217,9 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           NEW
         </button>
       </div>
+
+      {/* FEEDBACK — was this helpful? */}
+      <SortedFeedback tool="letter" caseId={caseId} accentColor={accentColor} />
 
       {/* DISCLAIMER */}
       <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '8px 0 0' }}>

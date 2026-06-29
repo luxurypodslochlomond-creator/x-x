@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedTimeline from './SortedTimeline';
+import SortedFeedback from './SortedFeedback';
 
 const CONTRACT_TYPES = [
   { id: 'tenancy',    label: 'Tenancy / Lease' },
@@ -83,7 +84,7 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
 
     const res = await base44.integrations.Core.InvokeLLM({
       ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
-      prompt: SORTED_SOUL + '\n' + `You are a plain-English contract expert helping ordinary people understand what they're signing.
+      prompt: SORTED_SOUL + '\n' + `Analyse this contract in plain English so an ordinary person understands what they're signing.
 
 Contract type: ${contractType || 'Not specified'}
 
@@ -368,9 +369,11 @@ Every clause matters. The more you give us, the better the analysis.`}
               </button>
             </div>
 
+            <SortedFeedback tool="contract" accentColor={accentColor} />
+
             <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
-              Not legal advice. Always consult a solicitor for important decisions.
-            </p>
+               Not legal advice. Always consult a solicitor for important decisions.
+             </p>
             <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', margin: '6px 0 0', lineHeight: 1.5 }}>
               Need help? <a href="mailto:family@uf51.love" style={{ color: '#7c3aed', fontWeight: 700, textDecoration: 'none' }}>family@uf51.love</a>
             </p>

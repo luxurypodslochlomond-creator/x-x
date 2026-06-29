@@ -10,6 +10,7 @@ import SortedShareButton from './SortedShareButton';
 import SortedHelpLinks from './SortedHelpLinks';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
+import SortedFeedback from './SortedFeedback';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
@@ -72,7 +73,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
     const t = TONES.find(x => x.id === selectedTone);
     const geoContext = buildSortedGeoPromptContext(geo);
     
-    const prompt = SORTED_SOUL + '\n' + `You are SORTED — a straight-talking advisor who writes letters for real people. You're like a knowledgeable friend — calm, direct, confident. Not dramatic. Not preachy. Not trying to sound impressive. Just clear and effective. ${geoContext}
+    const prompt = SORTED_SOUL + '\n' + `Write a letter for someone in this situation. ${geoContext}
 
 SITUATION: ${situation || 'Not specified'}
 TONE: ${t?.label} — ${t?.desc}
@@ -81,11 +82,10 @@ NAME: ${name || '[Your Name]'}
 CONTEXT:
 ${context}
 
-Write a complete, ready-to-send letter. Rules:
-- Sound like a sharp, informed human — not a corporate robot. Direct, clear, confident.
+Write a complete, ready-to-send letter.
 - No waffle, no padding, no "I hope this letter finds you well" nonsense.
 - State the issue fast. State what you want. State consequences if ignored.
-- Cite specific rights / legislation / bodies relevant to ${geo.country} where it strengthens the case. ONLY cite bodies that exist in that country (e.g. UK: Citizens Advice; Australia: National Debt Helpline; Ireland: MABS; USA: local legal aid). NEVER invent phone numbers or cite UK bodies for non-UK users.
+- Cite specific rights / legislation / bodies relevant to ${geo.country} where it strengthens the case.
 - MAXIMUM 350 words for the letter body — tight, punchy, effective. Shorter is stronger.
 - Proper greeting and sign-off, but no fluff in between.
 - Ready to copy and paste with zero edits needed.
@@ -500,8 +500,10 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               NEW
             </motion.button>
 
+            <SortedFeedback tool="reply" accentColor={accentColor} />
+
             <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
-              Guidance only — not legal advice.
+               Guidance only — not legal advice.
             </p>
           </motion.div>
         )}

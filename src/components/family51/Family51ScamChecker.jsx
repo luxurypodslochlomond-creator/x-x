@@ -8,6 +8,7 @@ import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedShareMomentScam from './SortedShareMomentScam';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
+import SortedFeedback from './SortedFeedback';
 
 const LOADING_STEPS = [
   { text: 'Reading your message…',      sub: 'Analysing carefully' },
@@ -102,7 +103,7 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult 
       const response = await base44.integrations.Core.InvokeLLM({
         model: 'claude_sonnet_4_6',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
-        prompt: SORTED_SOUL + '\n' + `You are SORTED's scam detector. You help real people — including elderly and vulnerable people — figure out if something they've received is a scam. You are warm, clear, and never scary or preachy. You sound like a knowledgeable friend.
+        prompt: SORTED_SOUL + '\n' + `Check if this message is a scam. The person may be elderly or vulnerable — be warm, clear, never scary.
 
 The person is in: ${geo.country}.
 
@@ -383,6 +384,8 @@ Copy exactly what it says — every word helps us check it.`}
                 CHECK ANOTHER
               </button>
             </div>
+
+            <SortedFeedback tool="scam" accentColor={accentColor} />
 
           </motion.div>
         )}
