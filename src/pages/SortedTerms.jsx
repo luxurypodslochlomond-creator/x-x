@@ -36,7 +36,7 @@ export default function SortedTermsPage() {
           {[
             "We decode scary letters into plain English. We're not lawyers.",
             "You decide what to do. We just help you understand.",
-            "10 free uses. Then £9.99/month or walk away — no guilt, no lock-in.",
+            "3 free uses. Then £9.99/month or walk away — no guilt, no lock-in.",
             "If you can't afford it, email us. We'll sort something.",
             "We never store your documents. Ever.",
           ].map((line, i) => (
@@ -68,7 +68,7 @@ export default function SortedTermsPage() {
       </Section>
 
       <Section title="4. Free Sessions, Then You Choose">
-        You get free uses to start. After that, subscribe or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
+        You get 3 free uses to start. After that, subscribe or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
       </Section>
 
       <Section title="5. Cancelling Your Subscription">

@@ -160,12 +160,12 @@ export default function SortedAboutPage() {
         {/* Footer nav */}
         <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'nowrap', paddingBottom: 32 }}>
           {[
-            { label: 'FAQ', href: '/SortedFAQ' },
-            { label: 'Terms', href: '/SortedTerms' },
-            { label: 'Privacy', href: '/SortedPrivacy' },
-            { label: 'Global', href: '/SortedGlobalAccess' },
-          ].map(({ label, href }) => (
-            <a key={label} href={href} style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.38)', textDecoration: 'none', whiteSpace: 'nowrap' }}>{label}</a>
+            { label: 'FAQ', to: '/SortedFAQ' },
+            { label: 'Terms', to: '/SortedTerms' },
+            { label: 'Privacy', to: '/SortedPrivacy' },
+            { label: 'Global', to: '/SortedGlobalAccess' },
+          ].map(({ label, to }) => (
+            <Link key={label} to={to} style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.38)', textDecoration: 'none', whiteSpace: 'nowrap' }}>{label}</Link>
           ))}
         </div>
 

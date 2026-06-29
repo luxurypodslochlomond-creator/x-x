@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
@@ -168,15 +168,15 @@ export default function Family51Page() {
       {/* FOOTER */}
       <div style={{ padding: '40px 20px 32px', textAlign: 'center', marginTop: 24 }}>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap' }}>
-          <a href="/SortedFAQ" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>FAQ</a>
+          <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>FAQ</Link>
           <span style={{ color: 'rgba(26,18,8,0.15)', fontSize: 10 }}>•</span>
-          <a href="/SortedTerms" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>Terms</a>
+          <Link to="/SortedTerms" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>Terms</Link>
           <span style={{ color: 'rgba(26,18,8,0.15)', fontSize: 10 }}>•</span>
-          <a href="/SortedPrivacy" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>Privacy</a>
+          <Link to="/SortedPrivacy" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>Privacy</Link>
           <span style={{ color: 'rgba(26,18,8,0.15)', fontSize: 10 }}>•</span>
-          <a href="/SortedGlobalAccess" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>Global</a>
+          <Link to="/SortedGlobalAccess" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>Global</Link>
           <span style={{ color: 'rgba(26,18,8,0.15)', fontSize: 10 }}>•</span>
-          <a href="/SortedAbout" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>About</a>
+          <Link to="/SortedAbout" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>About</Link>
         </div>
         <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', margin: 0, letterSpacing: '0.08em' }}>
           Built by Universal Frequency 51 CIC · Scotland
