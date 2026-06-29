@@ -13,7 +13,7 @@ const CONTRACT_TYPES = [
 ];
 
 const LOADING_STEPS = [
-  { text: 'Reading every clause…',        sub: 'Nothing stored — gone when we\'re done' },
+  { text: 'Reading every clause…',        sub: 'Finding the traps' },
   { text: 'Finding the traps…',           sub: 'Unfair terms, hidden obligations' },
   { text: 'Spotting your leverage…',      sub: 'What you can push back on' },
   { text: 'Almost done…',                 sub: 'Building your analysis' },
@@ -57,7 +57,7 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
     try {
       const limitCheck = await recordSortedUse();
       if (!limitCheck.allowed) {
-        setError('You\'ve used your 10 free uses. Subscribe for unlimited access.');
+        setError('You\'ve used your 3 free uses. Subscribe for unlimited access.');
         setLoading(false);
         return;
       }
@@ -115,17 +115,14 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
 
     // Save to case history
     try {
-      const cases = JSON.parse(localStorage.getItem('sorted_case_history_v1') || '[]');
-      cases.unshift({
-        id: Date.now(),
+      const { saveCaseToHistory } = await import('@/components/family51/SortedCaseHistory');
+      saveCaseToHistory({
         tool: 'contract',
         input_text: (content || '').slice(0, 300),
         ai_result: JSON.stringify(res),
         summary: res.verdict_reason || res.summary?.slice(0, 100),
         severity: res.verdict === 'serious_concerns' ? 'urgent' : res.verdict === 'review_carefully' ? 'important' : 'routine',
-        created_date: new Date().toISOString(),
       });
-      localStorage.setItem('sorted_case_history_v1', JSON.stringify(cases.slice(0, 20)));
     } catch {}
 
     setResult(res);
@@ -267,7 +264,7 @@ Every clause matters. The more you give us, the better the analysis.`}
           )}
 
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0 }}>
-            Free. Your contract stays on your device.
+            Free. Your contract is analysed by AI and saved to your case vault.
           </p>
         </div>
       )}

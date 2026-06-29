@@ -9,7 +9,7 @@ import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedShareMomentScam from './SortedShareMomentScam';
 
 const LOADING_STEPS = [
-  { text: 'Reading your message…',      sub: 'Nothing stored — gone when we\'re done' },
+  { text: 'Reading your message…',      sub: 'Analysing carefully' },
   { text: 'Checking known scam patterns…', sub: 'We\'ve seen thousands of these' },
   { text: 'Checking sender details…',    sub: 'Numbers, links, addresses' },
   { text: 'Working out the verdict…',   sub: 'Almost there' },
@@ -69,6 +69,16 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult 
     setLoadingStep(0);
     setResult(null);
     setError(null);
+
+    // Check rate limit BEFORE running the LLM — don't waste credits on blocked users
+    try {
+      const limitCheck = await recordSortedUse();
+      if (!limitCheck.allowed) {
+        setError('You\'ve used your 3 free uses. Subscribe for unlimited access.');
+        setLoading(false);
+        return;
+      }
+    } catch {}
 
     try {
       let visionFileUrl = null;
@@ -150,8 +160,7 @@ Return JSON with these exact fields:
       if (!raw || !raw.verdict) throw new Error('Could not analyse this. Please try again.');
 
       setResult(raw);
-      // Record use + save to case history
-      await recordSortedUse();
+      // Save to case history
       saveCaseToHistory({
         tool: 'scam',
         input_text: text,
@@ -276,7 +285,7 @@ Copy exactly what it says — every word helps us check it.`}
           )}
 
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
-            Free. Your text stays on your device.
+            Free. Your message is analysed by AI and saved to your case vault.
           </p>
         </div>
       )}

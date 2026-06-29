@@ -152,7 +152,7 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
     // Server-side rate limit check
     const limitCheck = await recordSortedUse();
     if (!limitCheck.allowed) {
-      setError('You\'ve used your 10 free uses. Subscribe for unlimited access.');
+      setError('You\'ve used your 3 free uses. Subscribe for unlimited access.');
       setLoading(false);
       return;
     }

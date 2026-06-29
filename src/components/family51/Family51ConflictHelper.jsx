@@ -96,7 +96,7 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
       // Server-side rate limit check
       const limitCheck = await recordSortedUse();
       if (!limitCheck.allowed) {
-        setResult({ _error: 'You\'ve used your 5 free uses. Subscribe for unlimited access.' });
+        setResult({ _error: 'You\'ve used your 3 free uses. Subscribe for unlimited access.' });
         setLoading(false);
         return;
       }
