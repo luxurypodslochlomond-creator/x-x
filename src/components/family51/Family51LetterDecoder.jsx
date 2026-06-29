@@ -111,7 +111,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       // Server-side rate limit check — not bypassable via browser storage
       const limitCheck = await recordSortedUse();
       if (!limitCheck.allowed) {
-        setDecodeError('You\'ve used your 10 free uses. Subscribe for unlimited access.');
+        setDecodeError('You\'ve used your 3 free uses. Subscribe for unlimited access.');
         setLoading(false);
         return;
       }

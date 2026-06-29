@@ -147,7 +147,7 @@ export default function Family51Page() {
 
       {/* YOUR CASES */}
       <div ref={caseHistoryRef} style={{ padding: '32px 20px 0', maxWidth: 520, margin: '0 auto' }}>
-        <SortedCaseHistory onOpenTool={(toolId, data) => openTool(toolId, data)} isPremium={isPremium} />
+        <SortedCaseHistory onContinue={(caseItem) => openTool(caseItem.tool === 'letter' ? 'reply' : 'conflict', { related_case_id: caseItem.id, summary: caseItem.summary, input_text: caseItem.input_text, ai_result: caseItem.ai_result })} isPremium={isPremium} />
       </div>
 
       {/* PAYWALL */}

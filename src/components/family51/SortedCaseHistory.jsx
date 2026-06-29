@@ -6,7 +6,7 @@ import { base44 } from '@/api/base44Client';
 import SortedFollowUp from '@/components/family51/SortedFollowUp';
 
 const STORAGE_KEY = 'sorted_case_history_v1';
-const FREE_CASE_LIMIT = 10;
+const FREE_CASE_LIMIT = 3;
 
 const TOOL_CONFIG = {
   letter:   { label: 'DECODED', color: '#d97706', bg: 'rgba(217,119,6,0.08)' },
@@ -670,7 +670,7 @@ function VaultHeader({ count, isPremium }) {
       }}>
         <Shield size={13} color="#22c55e" strokeWidth={2.5} style={{ flexShrink: 0 }} />
         <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0, fontWeight: 600, lineHeight: 1.4 }}>
-          Locked to this device · Only you can see this · Nothing leaves your phone
+          Locked to this device · Only you can see this · Anonymized patterns help others
         </p>
       </div>
     </div>

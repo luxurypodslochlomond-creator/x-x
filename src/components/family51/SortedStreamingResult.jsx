@@ -20,8 +20,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
     `SORTED — Letter Breakdown\n\n` +
     `${result.letter_summary}\n` +
     `Severity: ${result.severity}\n\n` +
-    (result.one_sentence ? `${result.one_sentence}\n\n` : '') +
-    `WHAT TO DO:\n${result.three_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
+    (result.what_this_means ? `${result.what_this_means}\n\n` : '') +
+    `WHAT TO DO:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
     (result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : '') +
     `Via SORTED — uf51.love/Sorted`;
 
@@ -67,7 +67,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
   if (!result || !sev) return null;
 
   const hasDeadline = result.key_deadline && result.key_deadline !== 'No deadline mentioned';
-  const hasMoney = result.financial_impact && result.financial_impact !== 'No specific financial amount mentioned.';
+  const hasMoney = result.amount && result.amount !== 'No specific financial amount mentioned.';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -91,9 +91,9 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           {result.letter_summary}
         </p>
 
-        {result.one_sentence && (
+        {result.what_this_means && (
           <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.5 }}>
-            {result.one_sentence}
+            {result.what_this_means}
           </p>
         )}
 
@@ -106,7 +106,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             )}
             {hasMoney && (
               <div style={{ padding: '5px 10px', borderRadius: 6, background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.1)' }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.7)' }}>£{result.financial_impact}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.7)' }}>£{result.amount}</span>
               </div>
             )}
           </div>
@@ -114,7 +114,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       </motion.div>
 
       {/* ── WHAT TO DO ── Just 3 steps, numbered circles */}
-      {result.three_steps?.length > 0 && (
+      {result.action_steps?.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,7 +123,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
         >
           <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', margin: '0 0 12px' }}>WHAT TO DO</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {result.three_steps.map((step, i) => (
+            {result.action_steps.map((step, i) => (
               <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                 <div style={{
                   minWidth: 22, height: 22, borderRadius: '50%', background: accentColor,
@@ -165,7 +165,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.35 }}
-          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, one_sentence: result.one_sentence, suggested_tone: result.suggested_tone, related_case_id: caseId, three_steps: result.three_steps, severity: result.severity, financial_impact: result.financial_impact }); }}
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, one_sentence: result.what_this_means, suggested_tone: result.suggested_tone, related_case_id: caseId, three_steps: result.action_steps, severity: result.severity, financial_impact: result.amount }); }}
           whileTap={{ opacity: 0.7 }}
           style={{
             width: '100%', padding: '18px 0', borderRadius: 14, fontSize: 14,
@@ -238,8 +238,8 @@ function CopyBreakdownButton({ result, sev }) {
       `SORTED LETTER BREAKDOWN\n\n` +
       `${result.letter_summary}\n` +
       `Severity: ${result.severity}\n\n` +
-      (result.one_sentence ? `${result.one_sentence}\n\n` : '') +
-      `WHAT TO DO:\n${result.three_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
+      (result.what_this_means ? `${result.what_this_means}\n\n` : '') +
+      `WHAT TO DO:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
       (result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : '') +
       `Via SORTED — uf51.love/Sorted`;
 
