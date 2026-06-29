@@ -28,6 +28,7 @@ const verdictStyle = {
 
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
+import ContractInstantScan from './ContractInstantScan';
 
 export default function SortedContractChecker({ accentColor = '#7c3aed', onResult }) {
   const [contractType, setContractType] = useState('');
@@ -263,6 +264,10 @@ Every clause matters. The more you give us, the better the analysis.`}
                 PDF / FILE
               </motion.button>
             </div>
+          )}
+
+          {inputText.trim().length >= 20 && (
+            <ContractInstantScan text={inputText} accentColor={accentColor} />
           )}
 
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0 }}>
