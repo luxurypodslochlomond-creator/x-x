@@ -213,6 +213,30 @@ const SCAM_CATEGORIES = {
       'our appeal', 'fundraiser',
     ],
   },
+
+  // Courier fraud — UK NCA priority. Police/bank impersonation + courier collects cash/cards
+  COURIER: {
+    label: 'Courier fraud',
+    description: 'Someone pretends to be police or your bank, asks you to withdraw cash or hand over cards, then sends a "courier" to collect. Real police and banks NEVER do this.',
+    keywords: [
+      'undercover operation', 'corrupt bank staff', 'don\'t go to the branch',
+      'withdraw cash', 'hand over your card', 'courier will collect',
+      'collect your card', 'collect the cash', 'we\'ll send someone',
+      'operative will visit', 'keep this secret', 'don\'t tell anyone at the bank',
+    ],
+  },
+
+  // Money muling — "use your account to move money" (payment division fraud)
+  MONEY_MULING: {
+    label: 'Money muling / money laundering',
+    description: 'Someone asks you to receive money into your bank account and pass it on. This is money laundering — you could go to prison and lose your bank account.',
+    keywords: [
+      'use your account', 'receive money into your account', 'transfer it on',
+      'keep a percentage', 'keep a cut', 'easy money for using your account',
+      'payment processor', 'act as a middleman', 'hold this money',
+      'forward the funds', 'money mule', 'pass it through your account',
+    ],
+  },
 };
 
 // ── PAYMENT INDICATORS ────────────────────────────────────────────────────────
