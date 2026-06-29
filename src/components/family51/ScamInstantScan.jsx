@@ -74,6 +74,19 @@ export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
         </div>
 
         <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {/* SCAM TYPE — the most useful info: "this looks like a delivery scam" */}
+          {findings.scamTypes && findings.scamTypes.length > 0 && findings.scamTypes.map((st, i) => (
+            <div key={`st-${i}`} style={{
+              padding: '10px 12px', borderRadius: 8,
+              background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.3)',
+            }}>
+              <p style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.1em', color: '#ef4444', margin: '0 0 4px', textTransform: 'uppercase' }}>
+                This looks like: {st.label}
+              </p>
+              <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.45 }}>{st.description}</p>
+            </div>
+          ))}
+
           {/* ALREADY PAID? — calm emergency strip */}
           {paymentRisk && (
             <div style={{
