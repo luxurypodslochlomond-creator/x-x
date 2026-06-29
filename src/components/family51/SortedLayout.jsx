@@ -50,8 +50,9 @@ export default function SortedLayout({ children, currentPage }) {
         padding: '14px 20px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
-        <button
-          onClick={() => navigate('/Sorted')}
+        <Link
+          to="/Sorted"
+          onClick={(e) => { e.preventDefault(); navigate('/Sorted'); }}
           style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'inherit', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
         >
           <SortedMark />
@@ -59,7 +60,7 @@ export default function SortedLayout({ children, currentPage }) {
             <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '0.08em', color: '#1a1208' }}>SORTED</div>
             <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.24em', color: '#d97706', opacity: 0.7 }}>WE'VE GOT YOU</div>
           </div>
-        </button>
+        </Link>
 
         <div style={{ flex: 1 }} />
 
@@ -122,7 +123,7 @@ export default function SortedLayout({ children, currentPage }) {
       </header>
 
       {/* Content */}
-      <main style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+      <main style={{ maxWidth: '100vw', overflowX: 'hidden', paddingTop: '20px' }}>
         {children}
       </main>
 
