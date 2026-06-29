@@ -162,14 +162,17 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
               </svg>
               Back
             </NativeButton>
-            <div style={{
-              fontSize: 10, fontWeight: 800, letterSpacing: '0.1em',
-              color: tc.color, background: `${tc.color}15`,
-              border: `1px solid ${tc.color}35`,
-              borderRadius: 20, padding: '4px 12px',
-            }}>
+            <NativeButton
+              onClick={handleBack}
+              style={{
+                fontSize: 10, fontWeight: 800, letterSpacing: '0.1em',
+                color: tc.color, background: `${tc.color}15`,
+                border: `1px solid ${tc.color}35`,
+                borderRadius: 20, padding: '4px 12px',
+              }}
+            >
               SORTED
-            </div>
+            </NativeButton>
           </div>
           {/* HUMAN GUIDANCE — tells the user exactly what to do */}
           <div style={{ borderLeft: `3px solid ${tc.color}`, paddingLeft: 12 }}>
