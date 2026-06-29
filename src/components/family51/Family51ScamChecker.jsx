@@ -47,7 +47,7 @@ function VerdictIcon({ type, color }) {
   );
 }
 
-export default function Family51ScamChecker({ accentColor = '#ef4444', onResult }) {
+export default function Family51ScamChecker({ accentColor = '#ef4444', onResult, onHandoff }) {
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -251,7 +251,7 @@ Copy exactly what it says — every word helps us check it.`}
 
           {inputText.trim() ? (
             <>
-              <ScamInstantScan text={inputText} accentColor={accentColor} />
+              <ScamInstantScan text={inputText} accentColor={accentColor} onHandoff={onHandoff} />
               <motion.button onClick={check} whileTap={{ scale: 0.97 }} style={{
                 width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
                 fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',

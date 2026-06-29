@@ -235,12 +235,14 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
               <Family51ScamChecker
                 accentColor={tc.color}
                 onResult={() => handleToolComplete('scam')}
+                onHandoff={(data) => handleToolOpen('reply', data)}
               />
             )}
             {activeTool === 'contract' && (
               <SortedContractChecker
                 accentColor={tc.color}
                 onResult={() => handleToolComplete('contract')}
+                onHandoff={(data) => handleToolOpen('reply', data)}
               />
             )}
           </motion.div>

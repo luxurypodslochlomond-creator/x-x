@@ -30,7 +30,7 @@ import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import ContractInstantScan from './ContractInstantScan';
 
-export default function SortedContractChecker({ accentColor = '#7c3aed', onResult }) {
+export default function SortedContractChecker({ accentColor = '#7c3aed', onResult, onHandoff }) {
   const [contractType, setContractType] = useState('');
   const [inputText, setInputText]       = useState('');
   const [loading, setLoading]           = useState(false);
@@ -267,7 +267,7 @@ Every clause matters. The more you give us, the better the analysis.`}
           )}
 
           {inputText.trim().length >= 20 && (
-            <ContractInstantScan text={inputText} accentColor={accentColor} />
+            <ContractInstantScan text={inputText} accentColor={accentColor} onHandoff={onHandoff} />
           )}
 
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0 }}>

@@ -36,7 +36,7 @@ function FindingRow({ label, value, level = 'info' }) {
   );
 }
 
-export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
+export default function ScamInstantScan({ text, accentColor = '#ef4444', onHandoff }) {
   const findings = detectScamPatterns(text);
   const warnings = getPatternWarnings(findings);
 
@@ -49,6 +49,17 @@ export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
     (findings.urgencyHits && findings.urgencyHits.some(h => /pay|payment|transfer|deposit|gift card|voucher|wire/i.test(h)));
 
   if (!findings || !findings.hasFindings) return null;
+
+  const hasScamSignal = warnings.length > 0 || (findings.scamTypes && findings.scamTypes.length > 0);
+
+  const handleWriteReply = () => {
+    if (!onHandoff) return;
+    if (navigator.vibrate) navigator.vibrate(8);
+    onHandoff({
+      summary: 'Suspicious message — needs a protective reply',
+      what_this_means: `I received this suspicious message and need help writing a protective reply or formal complaint:\n\n${text.slice(0, 2000)}`,
+    });
+  };
 
   return (
     <AnimatePresence>
@@ -150,6 +161,22 @@ export default function ScamInstantScan({ text, accentColor = '#ef4444' }) {
           {/* Urgency keywords */}
           {findings.urgencyHits.length > 0 && (
             <FindingRow label="Urgency language detected" value={findings.urgencyHits.join(' · ')} level="warning" />
+          )}
+
+          {/* HANDOFF — jump to Reply Writer for a protective reply */}
+          {hasScamSignal && onHandoff && (
+            <button
+              onClick={handleWriteReply}
+              style={{
+                width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 13,
+                fontWeight: 800, letterSpacing: '0.06em', cursor: 'pointer',
+                border: `1.5px solid ${accentColor}`, background: `${accentColor}10`, color: accentColor,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                WebkitTapHighlightColor: 'transparent',
+              }}
+            >
+              Write a protective reply →
+            </button>
           )}
         </div>
       </motion.div>

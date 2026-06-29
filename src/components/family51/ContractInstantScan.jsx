@@ -32,13 +32,22 @@ function FindingRow({ label, value, level = 'info' }) {
   );
 }
 
-export default function ContractInstantScan({ text, accentColor = '#7c3aed' }) {
+export default function ContractInstantScan({ text, accentColor = '#7c3aed', onHandoff }) {
   const findings = detectContractPatterns(text);
   const warnings = getContractWarnings(findings);
 
   if (!findings || !findings.hasFindings) return null;
 
   const hasRisk = findings.riskyClauses.length > 0;
+
+  const handleNegotiate = () => {
+    if (!onHandoff) return;
+    if (navigator.vibrate) navigator.vibrate(8);
+    onHandoff({
+      summary: 'Contract with risky clauses',
+      what_this_means: `I'm reviewing a contract and need help responding to these concerns:\n\n${findings.riskyClauses.map(c => `• ${c.label}: ${c.description}`).join('\n')}\n\nContract text:\n${text.slice(0, 2000)}`,
+    });
+  };
 
   return (
     <AnimatePresence>
@@ -121,6 +130,22 @@ export default function ContractInstantScan({ text, accentColor = '#7c3aed' }) {
               </div>
             );
           })}
+
+          {/* HANDOFF — jump to Reply Writer for negotiation help */}
+          {hasRisk && onHandoff && (
+            <button
+              onClick={handleNegotiate}
+              style={{
+                width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 13,
+                fontWeight: 800, letterSpacing: '0.06em', cursor: 'pointer',
+                border: `1.5px solid ${accentColor}`, background: `${accentColor}10`, color: accentColor,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                WebkitTapHighlightColor: 'transparent',
+              }}
+            >
+              Get help negotiating this →
+            </button>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>
