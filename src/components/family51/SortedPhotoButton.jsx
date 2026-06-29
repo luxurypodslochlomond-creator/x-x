@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
+import SortedPrivacyStrip from './SortedPrivacyStrip';
 
-export default function SortedPhotoButton({ onPhotoSelected, onDecoded, disabled = false, compact = false }) {
+export default function SortedPhotoButton({ onPhotoSelected, onDecoded, disabled = false, compact = false, showPrivacy = true }) {
   const [uploading, setUploading] = useState(false);
   const cameraInputRef = useRef(null);
 
@@ -48,6 +49,7 @@ export default function SortedPhotoButton({ onPhotoSelected, onDecoded, disabled
         </svg>
         {uploading ? '...' : 'SNAP PHOTO'}
       </div>
+      {showPrivacy && !compact && <SortedPrivacyStrip />}
     </>
   );
 }

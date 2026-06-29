@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
+import SortedPrivacyStrip from './SortedPrivacyStrip';
 
-export default function SortedFileUploadButton({ onFileSelected, onDecoded, disabled = false, compact = false }) {
+export default function SortedFileUploadButton({ onFileSelected, onDecoded, disabled = false, compact = false, showPrivacy = true }) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -48,6 +49,7 @@ export default function SortedFileUploadButton({ onFileSelected, onDecoded, disa
         </svg>
         {uploading ? '...' : 'UPLOAD FILE'}
       </div>
+      {showPrivacy && !compact && <SortedPrivacyStrip />}
     </>
   );
 }
