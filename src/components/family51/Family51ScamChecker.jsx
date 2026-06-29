@@ -9,6 +9,7 @@ import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedShareMomentScam from './SortedShareMomentScam';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import SortedFeedback from './SortedFeedback';
+import ScamInstantScan from './ScamInstantScan';
 
 const LOADING_STEPS = [
   { text: 'Reading your message…',      sub: 'Analysing carefully' },
@@ -249,13 +250,16 @@ Copy exactly what it says — every word helps us check it.`}
           />
 
           {inputText.trim() ? (
-            <motion.button onClick={check} whileTap={{ scale: 0.97 }} style={{
-              width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
-              fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
-              border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
-            }}>
-              Check this now →
-            </motion.button>
+            <>
+              <ScamInstantScan text={inputText} accentColor={accentColor} />
+              <motion.button onClick={check} whileTap={{ scale: 0.97 }} style={{
+                width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+                fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
+                border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
+              }}>
+                Check this now →
+              </motion.button>
+            </>
           ) : (
             <div style={{ display: 'flex', gap: 10 }}>
                <motion.button whileTap={{ scale: 0.96 }} onClick={() => cameraInputRef.current?.click()} style={{
@@ -367,13 +371,26 @@ Copy exactly what it says — every word helps us check it.`}
               </div>
             )}
 
-            {/* REPORT TO */}
-            {result.report_to && (
-              <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(26,18,8,0.02)', border: '1px solid rgba(26,18,8,0.08)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)', margin: '0 0 5px' }}>REPORT IT</p>
-                <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.5 }}>{result.report_to}</p>
-              </div>
-            )}
+            {/* REPORT TO — one-tap report button */}
+            {result.report_to && (() => {
+              const domainMatch = result.report_to.match(/[a-z0-9-]+\.[a-z]{2,}(?:\.[a-z]{2,})?/i);
+              const reportUrl = domainMatch ? `https://${domainMatch[0].replace(/\.$/, '')}` : null;
+              return (
+                <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(26,18,8,0.02)', border: '1px solid rgba(26,18,8,0.08)' }}>
+                  <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)', margin: '0 0 5px' }}>REPORT IT</p>
+                  <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: '0 0 8px', lineHeight: 1.5 }}>{result.report_to}</p>
+                  {reportUrl && (
+                    <a href={reportUrl} target="_blank" rel="noopener noreferrer" style={{
+                      display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: '0.08em',
+                      color: '#fff', background: accentColor, borderRadius: 8, padding: '8px 16px',
+                      textDecoration: 'none', cursor: 'pointer',
+                    }}>
+                      REPORT NOW →
+                    </a>
+                  )}
+                </div>
+              );
+            })()}
 
             {/* SHARE + RESET */}
             <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
