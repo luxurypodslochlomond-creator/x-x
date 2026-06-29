@@ -77,8 +77,8 @@ const FAQ_ITEMS = [
     category: 'Pricing & Access',
     items: [
       {
-        q: 'Why do I get 10 free uses?',
-        a: 'Because if you\'re in a difficult moment, you shouldn\'t have to pay upfront. Try SORTED for free. Decode 10 letters, prove it works for you, then decide. If it helps, subscribe. If not, no harm done.'
+        q: 'Why do I get 3 free uses?',
+        a: 'Because if you\'re in a difficult moment, you shouldn\'t have to pay upfront. Try SORTED for free. Decode 3 letters, prove it works for you, then decide. If it helps, subscribe. If not, no harm done.'
       },
       {
         q: 'Can I cancel anytime?',
