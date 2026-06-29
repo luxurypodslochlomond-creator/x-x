@@ -18,8 +18,8 @@ const FAQ_ITEMS = [
         a: 'No. We\'re not lawyers. But we decode what lawyers would charge £500 to explain, and we help you understand your options. For serious cases (court proceedings, etc.), we recommend you then take our decoded letter to a real solicitor — you\'ll understand the issue way better, and their time will be cheaper.'
       },
       {
-        q: 'Why do you say "nothing is stored"?',
-        a: 'Your letter is processed by AI, then immediately deleted. We don\'t log it, train on it, or sell it. You can email the result to yourself if you want to keep it — we never keep a copy. This is data sovereignty: your data is yours alone.'
+        q: 'What actually happens to my letter?',
+        a: 'Honest answer: your letter is processed by AI to decode it. The result is saved to your device\'s local case vault (so you can reference it later). If you\'re a subscriber, it\'s also saved encrypted to your private account — accessible only to you. We don\'t sell it, share it, or use it for training in an identifiable way. Anonymized patterns (no names, emails, amounts, dates) are kept to improve advice for future users. You can clear your vault anytime.'
       }
     ]
   },
@@ -120,7 +120,7 @@ const FAQ_ITEMS = [
     items: [
       {
         q: 'Is my data actually private?',
-        a: 'Yes. Your letter is encrypted in transit, processed by AI, then permanently deleted. We don\'t store it, log it, or use it to train models. We do create anonymized case patterns (no names, emails, amounts) to improve advice for future users — but you\'re never identified. Check our Privacy page for full details.'
+        a: 'Yes — but let\'s be precise. Your letter is encrypted in transit and processed by AI. The decoded result is saved to your device (local vault) and, if you\'re a subscriber, to your private account (encrypted, only you can access it). We never sell or share your data. Anonymized patterns (stripped of names, emails, amounts, dates) are retained to improve advice — but you\'re never identified. You can clear your vault anytime. Full details on our Privacy page.'
       },
       {
         q: 'What do you mean by "anonymized patterns"?',
@@ -136,7 +136,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'What if I want to delete my data?',
-        a: 'Hit "Clear all my data" in the menu. Your case history is wiped from this device instantly. You stay completely anonymous — we have nothing stored on our servers to delete.'
+        a: 'Hit "Clear all my data" in the menu. Your case history is wiped from this device instantly. If you\'re a subscriber with cases saved to your account, email family@uf51.love and we\'ll delete those too. You stay completely anonymous — we never sell or share your data.'
       }
     ]
   }
