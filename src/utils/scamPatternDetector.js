@@ -5,9 +5,17 @@
  * older people, broke people, people in debt, lonely people, people
  * who are stressed or mentally unwell.
  *
- * Each category has real-world keywords scammers actually use.
- * The detector also identifies the LIKELY SCAM TYPE so the user
- * immediately knows what they're dealing with.
+ * SCAM CATEGORIES ARE UNIVERSAL — delivery scams, romance scams,
+ * impersonation, etc. happen in every country worldwide.
+ *
+ * Keyword detection is English-first (most SORTED users are
+ * English-speaking). For non-English messages, the AI layer
+ * (InvokeLLM) handles all 30+ languages natively — it is the
+ * authoritative analyser. This instant scan is a fast pre-filter.
+ *
+ * Phone and URL detection is international — works in any country.
+ * Country-specific scam reporting is handled by sortedGeoContext.js,
+ * which has reporting bodies for 30+ countries.
  *
  * This is the "smart layer" — useful in <1 second, before AI loads.
  * Over time, new scam patterns can be added here as they emerge.
@@ -15,8 +23,8 @@
 
 // ── CONTACT EXTRACTION ──────────────────────────────────────────────────────
 
-// UK phone patterns (07xxx mobiles, 0800/0845/0300, +44 variants)
-const PHONE_REGEX = /(\+44\s?7\d{3}|\(?0\d{1,4}\)?\s?\d{3,4}\s?\d{3,4})/g;
+// International phone patterns — works in any country
+const PHONE_REGEX = /(\+\d{1,3}\s?\d{1,4}[\s-]?\d{3,4}[\s-]?\d{3,4}|\(\d{1,4}\)\s?\d{3,4}[\s-]?\d{3,4}|\b0\d{2,4}[\s-]?\d{3,4}[\s-]?\d{3,4}\b)/g;
 
 // URLs — anything that looks like a link
 const URL_REGEX = /(https?:\/\/[^\s]+|[a-z0-9-]+\.(?:com|co\.uk|org|net|gov\.uk|io|xyz|info|biz|me|cc|tk|ml|ga|cf)[/\S]*)/gi;
@@ -231,12 +239,27 @@ const URGENCY_KEYWORDS = [
   'penalty', 'fine pending', 'overdue', 'deadline',
 ];
 
-// Legitimate UK domains — if a URL uses these, it's less suspicious
+// Legitimate domains worldwide — if a URL uses these, it's less suspicious
 const LEGIT_DOMAINS = [
+  // UK
   'gov.uk', 'nhs.uk', 'hmrc.gov.uk', 'royalmail.com', 'dpd.co.uk',
   'evri.com', 'fedex.com', 'ups.com', 'dhl.com', 'barclays.co.uk',
   'hsbc.co.uk', 'natwest.com', 'lloydsbank.com', 'santander.co.uk',
   'halifax.co.uk', 'nationwide.co.uk', 'tescobank.com',
+  // US
+  'irs.gov', 'ssa.gov', 'usps.com', 'ftc.gov', 'amazon.com', 'apple.com',
+  // Australia
+  'ato.gov.au', 'auspost.com.au', 'mygov.gov.au', 'centrelink.gov.au',
+  // Canada
+  'canada.ca', 'canadapost.ca', 'cra-arc.gc.ca',
+  // Ireland
+  'gov.ie', 'revenue.ie', 'anpost.ie',
+  // New Zealand
+  'govt.nz', 'ird.govt.nz', 'nzpost.co.nz',
+  // EU / international
+  'europa.eu', 'eur-lex.europa.eu',
+  // Universal brands
+  'google.com', 'microsoft.com', 'netflix.com', 'spotify.com',
 ];
 
 // ── MAIN DETECTION FUNCTION ──────────────────────────────────────────────────
