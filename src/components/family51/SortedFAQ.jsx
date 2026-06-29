@@ -136,7 +136,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'What if I want to delete my data?',
-        a: 'Hit "Clear all my data" in the menu. Your case history is wiped from this device instantly. If you\'re a subscriber with cases saved to your account, email family@uf51.love and we\'ll delete those too. You stay completely anonymous — we never sell or share your data.'
+        a: 'In your case vault, tap "Delete my server data" — all cases stored on our servers are wiped instantly. Your local device vault is unaffected (use "Wipe entire vault" for that). You stay completely anonymous — we never sell or share your data.'
       }
     ]
   }

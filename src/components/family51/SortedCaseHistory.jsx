@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, FileText, ChevronDown, Share2, Mail, Download, ArrowRight, Plus, Pencil, Check, X, Lock, Shield, Archive } from 'lucide-react';
+import { Trash2, FileText, ChevronDown, Share2, Mail, Download, ArrowRight, Plus, Pencil, Check, X, Lock, Shield, Archive, Server } from 'lucide-react';
 import { anonymizeCase } from '@/utils/anonymizeCase';
 import { base44 } from '@/api/base44Client';
 import SortedFollowUp from '@/components/family51/SortedFollowUp';
@@ -682,6 +682,8 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
   const [cases, setCases] = useState([]);
   const [filter, setFilter] = useState('all');
   const [confirmWipe, setConfirmWipe] = useState(false);
+  const [deletingServer, setDeletingServer] = useState(false);
+  const [serverDeleteConfirm, setServerDeleteConfirm] = useState(false);
 
   const loadCases = () => {
     try {
@@ -713,6 +715,22 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
     setCases([]);
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify([])); window.dispatchEvent(new CustomEvent('sorted-cases-changed')); } catch {}
     setConfirmWipe(false);
+  };
+
+  const handleDeleteServerData = async () => {
+    if (!serverDeleteConfirm) { setServerDeleteConfirm(true); return; }
+    setDeletingServer(true);
+    try {
+      const { deleteSortedCases } = await import('@/functions/deleteSortedCases');
+      await deleteSortedCases({});
+      setCases([]);
+      window.dispatchEvent(new CustomEvent('sorted-cases-changed'));
+    } catch (error) {
+      console.error('Failed to delete server data:', error);
+    } finally {
+      setDeletingServer(false);
+      setServerDeleteConfirm(false);
+    }
   };
 
   const filtered = filter === 'all' ? cases : cases.filter(c => c.tool === filter);
@@ -807,7 +825,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
 
       {/* WIPE ALL — premium only, bottom */}
       {isPremium && cases.length > 0 && (
-        <div style={{ marginTop: 24, textAlign: 'center' }}>
+        <div style={{ marginTop: 24, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 12 }}>
           <motion.button
             onClick={handleWipeAll}
             whileTap={{ scale: 0.95 }}
@@ -821,6 +839,40 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
             <Trash2 size={13} />
             {confirmWipe ? 'TAP AGAIN TO WIPE VAULT' : 'Wipe entire vault'}
           </motion.button>
+
+          {/* DELETE SERVER DATA — self-serve, honest */}
+          <motion.button
+            onClick={handleDeleteServerData}
+            whileTap={{ scale: 0.95 }}
+            disabled={deletingServer}
+            style={{
+              padding: '10px 20px', borderRadius: 10, fontSize: 11, fontWeight: 700,
+              cursor: deletingServer ? 'not-allowed' : 'pointer',
+              border: 'none', background: 'transparent',
+              color: serverDeleteConfirm ? '#ef4444' : 'rgba(26,18,8,0.25)',
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              opacity: deletingServer ? 0.6 : 1,
+            }}
+          >
+            {deletingServer ? (
+              <>
+                <svg className="animate-spin" width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round" />
+                </svg>
+                DELETING…
+              </>
+            ) : (
+              <>
+                <Server size={13} />
+                {serverDeleteConfirm ? 'TAP AGAIN TO DELETE SERVER DATA' : 'Delete my server data'}
+              </>
+            )}
+          </motion.button>
+          {serverDeleteConfirm && !deletingServer && (
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', margin: 0, maxWidth: 400 }}>
+              This deletes all cases stored on our servers. Local vault (this device) is unaffected.
+            </p>
+          )}
         </div>
       )}
     </div>
