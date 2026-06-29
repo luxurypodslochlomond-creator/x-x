@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import SortedHeader from '@/components/family51/SortedHeader';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
@@ -38,7 +39,10 @@ export default function Family51Page() {
   };
 
   return (
-    <div style={{ minHeight: '100dvh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1a1a', overflowX: 'hidden', paddingTop: 'clamp(60px, 8vw, 80px)' }}>
+    <div style={{ minHeight: '100dvh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1a1a', overflowX: 'hidden' }}>
+      
+      {/* STICKY HEADER */}
+      <SortedHeader />
       
       {/* SORTED ENGINE MODAL */}
       <SortedUnifiedEngine ref={engineRef} geoPrice={geoPrice} recordUse={recordUse} isLocked={isLocked} />
