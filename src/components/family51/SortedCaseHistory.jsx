@@ -735,7 +735,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
 
   const filtered = filter === 'all' ? cases : cases.filter(c => c.tool === filter);
 
-  if (!isPremium && cases.length === 0) return null;
+  if (cases.length === 0) return null;
 
   const filterTabs = [
     { id: 'all',      label: 'ALL',      color: '#1a1208' },
