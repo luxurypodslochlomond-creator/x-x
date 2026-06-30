@@ -2,6 +2,8 @@ import React from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
+const ARIAL = { fontFamily: 'Arial, sans-serif' };
+
 export default function FergusHughesProfile() {
   const downloadPDF = async () => {
     const element = document.getElementById('profile-content');
@@ -29,134 +31,160 @@ export default function FergusHughesProfile() {
     pdf.save('Fergus-Hughes-Profile.pdf');
   };
 
+  const Section = ({ title, children, last = false }) => (
+    <div className={last ? '' : 'mb-5 pb-5 border-b border-gray-200'}>
+      <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={ARIAL}>{title}</p>
+      {children}
+    </div>
+  );
+
+  const StatChip = ({ label, value }) => (
+    <div className="bg-gray-50 border border-gray-200 rounded px-3 py-2 text-center">
+      <p className="text-[10px] font-black tracking-widest text-gray-400 uppercase" style={ARIAL}>{label}</p>
+      <p className="text-sm font-black text-gray-900 mt-0.5" style={ARIAL}>{value}</p>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-6 sm:p-8">
-      <div id="profile-content" className="max-w-2xl mx-auto bg-white p-10" style={{ fontFamily: 'Georgia, serif' }}>
+      <div id="profile-content" className="max-w-3xl mx-auto bg-white shadow-xl" style={{ fontFamily: 'Georgia, serif' }}>
 
-        {/* HEADER */}
-        <div className="flex justify-between items-start border-b-2 border-gray-300 pb-5 mb-5">
+        {/* HEADER BAND */}
+        <div className="bg-gray-900 text-white px-8 py-6 flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-black text-gray-900" style={{ fontFamily: 'Arial, sans-serif' }}>Fergus Hughes</h1>
-            <p className="text-gray-500 text-sm mt-1" style={{ fontFamily: 'Arial, sans-serif' }}>Football Player Profile</p>
+            <h1 className="text-4xl font-black tracking-tight" style={ARIAL}>FERGUS HUGHES</h1>
+            <p className="text-gray-300 text-sm mt-1 tracking-wide uppercase" style={ARIAL}>Football Player Profile</p>
+            <p className="text-red-400 text-sm mt-2 font-bold" style={ARIAL}>Centre-Back / Right-Back · Right Foot</p>
           </div>
-          <div className="text-right text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>
-            <p className="font-bold text-gray-800">DOB: 15/05/2009</p>
-            <p className="text-gray-600">Age 17 • Scottish</p>
-            <p className="text-gray-600">6'1" (185 cm) • 73 kg</p>
-          </div>
-        </div>
-
-        {/* POSITION / FOOT / CLUB — inline grid */}
-        <div className="grid grid-cols-3 gap-4 mb-5 border-b border-gray-200 pb-5">
-          <div>
-            <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-1" style={{ fontFamily: 'Arial, sans-serif' }}>Position</p>
-            <p className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Centre-Back / Right-Back</p>
-            <p className="text-gray-500 text-xs mt-0.5" style={{ fontFamily: 'Arial, sans-serif' }}>Also: Wing-Back</p>
-          </div>
-          <div>
-            <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-1" style={{ fontFamily: 'Arial, sans-serif' }}>Preferred Foot</p>
-            <p className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Right</p>
-          </div>
-          <div>
-            <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-1" style={{ fontFamily: 'Arial, sans-serif' }}>Current Club</p>
-            <p className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Irvine Meadow FC</p>
+          <div className="text-right hidden sm:block">
+            <p className="text-xs font-black tracking-widest text-gray-400 uppercase" style={ARIAL}>Current Club</p>
+            <p className="text-xl font-black text-white mt-0.5" style={ARIAL}>Irvine Meadow FC</p>
+            <p className="text-gray-400 text-xs mt-0.5" style={ARIAL}>Senior Debut · 27 Jun 2026</p>
           </div>
         </div>
 
-        {/* CLUB HISTORY */}
-        <div className="mb-5 border-b border-gray-200 pb-5">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Club History</p>
-          <div className="flex gap-4 items-baseline mb-1">
-            <span className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Irvine Meadow FC</span>
-            <span className="text-gray-500 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>2026–present — senior debut 27 Jun 2026</span>
+        {/* VITAL STATS STRIP */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 px-8 py-4 border-b-2 border-red-700">
+          <StatChip label="Age" value="17" />
+          <StatChip label="Height" value="6'1 / 185cm" />
+          <StatChip label="Weight" value="73 kg" />
+          <StatChip label="Nationality" value="Scottish" />
+          <StatChip label="DOB" value="15/05/2009" />
+        </div>
+
+        {/* BODY */}
+        <div className="px-8 py-6">
+
+          {/* CLUB HISTORY + MATCH LOG side by side */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5 pb-5 border-b border-gray-200">
+            <Section title="Club History">
+              <div className="space-y-2">
+                <div className="flex items-baseline gap-2">
+                  <span className="w-2 h-2 bg-red-700 rounded-full flex-shrink-0 mt-1.5" />
+                  <div>
+                    <p className="font-black text-gray-900 text-sm" style={ARIAL}>Irvine Meadow FC</p>
+                    <p className="text-gray-500 text-xs" style={ARIAL}>2026–present · senior debut 27 Jun 2026</p>
+                  </div>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="w-2 h-2 bg-gray-300 rounded-full flex-shrink-0 mt-1.5" />
+                  <div>
+                    <p className="text-gray-700 text-sm font-bold" style={ARIAL}>DAFC / Pars Foundation</p>
+                    <p className="text-gray-500 text-xs" style={ARIAL}>DACC 2009 · 2024–2026 · released Jun 2026</p>
+                  </div>
+                </div>
+              </div>
+            </Section>
+
+            <Section title="Match Log (Irvine Meadow)">
+              <ul className="space-y-2 text-sm text-gray-800" style={ARIAL}>
+                <li className="flex justify-between items-baseline border-b border-gray-100 pb-1">
+                  <span><strong>27 Jun 2026</strong> · Troon (H)</span>
+                  <span className="font-black text-gray-900">2–0 · 90'</span>
+                </li>
+                <li className="flex justify-between items-baseline">
+                  <span><strong>04 Jul 2026</strong> · East Kilbride (H)</span>
+                  <span className="text-gray-400 italic text-xs">fixture</span>
+                </li>
+              </ul>
+              <p className="text-[11px] text-gray-400 mt-2 italic" style={ARIAL}>Shirt 5 · senior debut vs Troon</p>
+            </Section>
           </div>
-          <div className="flex gap-4 items-baseline">
-            <span className="text-gray-700 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>DAFC / Pars Foundation (DACC 2009)</span>
-            <span className="text-gray-500 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>2024–2026 — released Jun 2026</span>
+
+          {/* ACHIEVEMENTS + STRENGTHS side by side */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5 pb-5 border-b border-gray-200">
+            <Section title="Achievements">
+              <ul className="space-y-1 text-sm text-gray-800" style={ARIAL}>
+                <li>• Player of the Year — 2025/26 Season</li>
+                <li>• Team Captain — 2025/26 Season</li>
+                <li>• Trained Barber — cuts hair for teammates &amp; friends while at school</li>
+              </ul>
+            </Section>
+
+            <Section title="Strengths">
+              <ul className="space-y-1 text-sm text-gray-800" style={ARIAL}>
+                <li>• <strong>Commitment</strong> — Always worked hard and gave it my all</li>
+                <li>• <strong>Leadership</strong> — Captain of a strong team through a respectable season</li>
+                <li>• <strong>Attitude</strong> — Keep my head high at all times, even after mistakes</li>
+                <li>• <strong>Determination</strong> — Teammates, coaches and parents have all noticed</li>
+              </ul>
+            </Section>
           </div>
-        </div>
 
-        {/* WHY MOVING ON */}
-        <div className="mb-5 border-l-4 border-gray-300 pl-4">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Why I'm Moving On</p>
-          <p className="text-sm text-gray-700 italic leading-relaxed">
-            "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now."
-          </p>
-        </div>
-
-        {/* MATCH LOG */}
-        <div className="mb-5 border-b border-gray-200 pb-5">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Match Log (Irvine Meadow FC)</p>
-          <ul className="space-y-1 text-sm text-gray-800" style={{ fontFamily: 'Arial, sans-serif' }}>
-            <li>• <strong>27 Jun 2026</strong> — Irvine Meadow 2–0 Troon (home) · 90 min · senior debut · shirt 5</li>
-            <li>• <strong>04 Jul 2026</strong> — vs East Kilbride (home) · fixture confirmed</li>
-          </ul>
-        </div>
-
-        {/* ACHIEVEMENTS */}
-        <div className="mb-5">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Achievements</p>
-          <ul className="space-y-1 text-sm text-gray-800" style={{ fontFamily: 'Arial, sans-serif' }}>
-            <li>• Player of the Year — 2025/26 Season</li>
-            <li>• Team Captain — 2025/26 Season</li>
-            <li>• Trained Barber — cuts hair for teammates &amp; friends while at school</li>
-          </ul>
-        </div>
-
-        {/* STRENGTHS */}
-        <div className="mb-5">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Strengths</p>
-          <ul className="space-y-1 text-sm text-gray-800" style={{ fontFamily: 'Arial, sans-serif' }}>
-            <li>• <strong>Commitment</strong> — Always worked hard and gave it my all</li>
-            <li>• <strong>Leadership</strong> — Captain of a strong team through a respectable season</li>
-            <li>• <strong>Attitude</strong> — Keep my head high at all times, even after mistakes</li>
-            <li>• <strong>Determination</strong> — Teammates, coaches and parents have all noticed</li>
-          </ul>
-        </div>
-
-        {/* AREA OF DEVELOPMENT */}
-        <div className="mb-5 border-b border-gray-200 pb-5">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Area of Development</p>
-          <p className="text-sm text-gray-800" style={{ fontFamily: 'Arial, sans-serif' }}>Strength and physicality — actively working to improve</p>
-        </div>
-
-        {/* IN HIS OWN WORDS */}
-        <div className="mb-5 border-l-4 border-gray-300 pl-4">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>In His Own Words</p>
-          <p className="text-sm text-gray-700 italic leading-relaxed">
-            "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session."
-          </p>
-        </div>
-
-        {/* AMBITION */}
-        <div className="mb-5 border-b border-gray-200 pb-5">
-          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Ambition</p>
-          <p className="text-lg font-black text-gray-900" style={{ fontFamily: 'Arial, sans-serif' }}>To reach the highest level possible and represent Scotland internationally</p>
-        </div>
-
-        {/* CONTACT + LOGISTICS side by side */}
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Contact</p>
-            <p className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Brian Hughes (Father)</p>
-            <p className="text-gray-700 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>07494 023328</p>
+          {/* QUOTES — full width, two quote blocks */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5 pb-5 border-b border-gray-200">
+            <div className="border-l-4 border-red-700 pl-4">
+              <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={ARIAL}>Why I'm Moving On</p>
+              <p className="text-sm text-gray-700 italic leading-relaxed">
+                "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now."
+              </p>
+            </div>
+            <div className="border-l-4 border-gray-300 pl-4">
+              <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={ARIAL}>In His Own Words</p>
+              <p className="text-sm text-gray-700 italic leading-relaxed">
+                "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session."
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Logistics</p>
-            <p className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Inverkeithing High School</p>
-            <p className="text-gray-500 text-xs mt-0.5" style={{ fontFamily: 'Arial, sans-serif' }}>Finishes 1pm Mon/Wed, 3:15pm Tue/Thu/Fri</p>
-            <p className="text-gray-700 text-sm mt-1" style={{ fontFamily: 'Arial, sans-serif' }}>Travel: Can travel throughout Central Scotland. Driving theory passed, practical test imminent.</p>
-          </div>
-        </div>
 
+          {/* DEVELOPMENT + AMBITION side by side */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5 pb-5 border-b border-gray-200">
+            <Section title="Area of Development">
+              <p className="text-sm text-gray-800" style={ARIAL}>Strength and physicality — actively working to improve</p>
+            </Section>
+            <div>
+              <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={ARIAL}>Ambition</p>
+              <p className="text-base font-black text-gray-900 leading-snug" style={ARIAL}>
+                To reach the highest level possible and represent Scotland internationally.
+              </p>
+            </div>
+          </div>
+
+          {/* CONTACT + LOGISTICS side by side */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={ARIAL}>Contact</p>
+              <p className="font-black text-gray-900 text-sm" style={ARIAL}>Brian Hughes (Father)</p>
+              <p className="text-gray-700 text-sm" style={ARIAL}>07494 023328</p>
+            </div>
+            <div>
+              <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={ARIAL}>Logistics</p>
+              <p className="font-black text-gray-900 text-sm" style={ARIAL}>Inverkeithing High School</p>
+              <p className="text-gray-500 text-xs mt-0.5" style={ARIAL}>Finishes 1pm Mon/Wed · 3:15pm Tue/Thu/Fri</p>
+              <p className="text-gray-700 text-sm mt-1" style={ARIAL}>Travel: Can travel throughout Central Scotland. Driving theory passed, practical test imminent.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       {/* Download Button */}
-      <div className="max-w-2xl mx-auto mt-6">
+      <div className="max-w-3xl mx-auto mt-6 flex flex-col sm:flex-row gap-3 items-center justify-between">
+        <p className="text-xs text-gray-500" style={ARIAL}>Ready for scouts · Greg Gordon · Tony Begg</p>
         <button
           onClick={downloadPDF}
           className="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-lg transition-all flex items-center gap-2"
-          style={{ fontFamily: 'Arial, sans-serif' }}
+          style={ARIAL}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
