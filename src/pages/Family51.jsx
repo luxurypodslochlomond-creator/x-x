@@ -89,7 +89,7 @@ export default function Family51Page() {
 
         {/* SOMETHING ELSE */}
         <div style={{ marginBottom: 20 }}>
-          <div style={{ fontSize: 10, fontWeight: 800, color: 'rgba(26,18,8,0.3)', letterSpacing: '0.14em', textAlign: 'center', marginBottom: 12 }}>
+          <div style={{ fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.4)', letterSpacing: '0.14em', textAlign: 'center', marginBottom: 12 }}>
             SOMETHING ELSE?
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
