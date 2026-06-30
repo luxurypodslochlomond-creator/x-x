@@ -174,10 +174,10 @@ export default function FergusHughesProfile() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
               <div>
                 <p className="text-[15px] text-stone-100" style={SERIF}>
-                  Profile maintained by Brian Hughes — musician &amp; father.
+                  Managed by Scott — artist manager.
                 </p>
                 <p className="text-[13px] text-stone-400 mt-3 leading-relaxed" style={SANS}>
-                  Built with care, not fanfare. Updated as the journey moves.
+                  The same care given to musicians, now given to a young footballer's beginning. No fanfare — just the work.
                 </p>
               </div>
               <div>
