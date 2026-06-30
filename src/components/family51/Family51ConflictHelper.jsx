@@ -11,6 +11,7 @@ import { Upload, X, FileIcon, ImageIcon, Video } from 'lucide-react';
 import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
+import SortedPrivacyStrip from './SortedPrivacyStrip';
 
 const CONFLICT_TYPES = [
   { id: 'neighbour',  label: 'NEIGHBOUR',   desc: 'Noise, boundaries, shared areas' },
@@ -369,6 +370,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               </div>
             </div>
           </label>
+          <SortedPrivacyStrip accentColor={accentColor} />
           {attachments.length > 0 && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {attachments.map((att, i) => (

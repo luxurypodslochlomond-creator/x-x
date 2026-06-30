@@ -14,6 +14,7 @@ import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedStreamingResult from './SortedStreamingResult';
 import SortedPatternShareToggle from './SortedPatternShareToggle';
 import LetterInstantScan from './LetterInstantScan';
+import SortedPrivacyStrip from './SortedPrivacyStrip';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -38,7 +39,7 @@ const SEVERITY_CONFIG = {
 };
 
 const LOADING_STEPS = [
-  { text: 'Analyzing…',                  sub: 'This stays private — nothing is stored' },
+  { text: 'Analyzing…',                  sub: 'Reading every word carefully' },
   { text: 'Identifying what this is…',   sub: 'Matching to known letter types' },
   { text: 'Checking any deadlines…',     sub: 'Dates matter — we\'re looking' },
   { text: 'Finding your options…',       sub: 'What you can actually do' },
@@ -389,7 +390,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
             READING YOUR PHOTO...
           </p>
           <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0 }}>
-            This takes a few seconds — nothing is stored
+            This takes a few seconds — reading it carefully
           </p>
         </div>
       )}
@@ -515,10 +516,8 @@ Don't worry about formatting. Just get it all in. If the law applies in a differ
             <LetterInstantScan text={letterText} accentColor={accentColor} />
           )}
 
-          {/* SUBTLE TRUST LINE */}
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
-            Nothing is stored. For long documents, just snap the key page.
-          </p>
+          {/* HONEST PRIVACY STRIP — one consistent message */}
+          <SortedPrivacyStrip accentColor={accentColor} />
         </div>
       )}
 

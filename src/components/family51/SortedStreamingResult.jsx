@@ -107,7 +107,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
             )}
             {hasMoney && (
               <div style={{ padding: '5px 10px', borderRadius: 6, background: 'rgba(26,18,8,0.04)', border: '1px solid rgba(26,18,8,0.1)' }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.7)' }}>£{result.amount}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.7)' }}>{result.amount}</span>
               </div>
             )}
           </div>
@@ -166,7 +166,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.35 }}
-          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, one_sentence: result.what_this_means, suggested_tone: result.suggested_tone, related_case_id: caseId, three_steps: result.action_steps, severity: result.severity, financial_impact: result.amount }); }}
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onHandoff({ summary: result.letter_summary, sender: result.sender, deadline: result.key_deadline, what_this_means: result.what_this_means, suggested_tone: result.suggested_tone, related_case_id: caseId, action_steps: result.action_steps, severity: result.severity, financial_impact: result.amount }); }}
           whileTap={{ opacity: 0.7 }}
           style={{
             width: '100%', padding: '18px 0', borderRadius: 14, fontSize: 14,

@@ -10,6 +10,7 @@ import SortedShareMomentScam from './SortedShareMomentScam';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import SortedFeedback from './SortedFeedback';
 import ScamInstantScan from './ScamInstantScan';
+import SortedPrivacyStrip from './SortedPrivacyStrip';
 
 const LOADING_STEPS = [
   { text: 'Reading your message…',      sub: 'Analysing carefully' },
@@ -183,17 +184,40 @@ Return JSON with these exact fields:
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      setError('That file is too large. For best results, snap a photo of the relevant part instead.');
+      e.target.value = '';
+      return;
+    }
     setUploading(true);
     setLoading(true);
     setError(null);
     setResult(null);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      // Retry upload up to 2 times on network error
+      let file_url;
+      let lastErr;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const result = await base44.integrations.Core.UploadFile({ file });
+          file_url = result.file_url;
+          break;
+        } catch (err) {
+          lastErr = err;
+          if (attempt < 1) await new Promise(r => setTimeout(r, 2000));
+        }
+      }
+      if (!file_url) throw lastErr || new Error('Upload failed');
       setUploadedFileUrl(file_url);
       setUploading(false);
       await runCheck(file_url, null);
     } catch (err) {
-      setError('Upload failed. Try again or paste the text instead.');
+      const isNetwork = err?.message?.toLowerCase().includes('network') || err?.message?.toLowerCase().includes('fetch');
+      setError(
+        isNetwork
+          ? 'Network error — poor signal? Try copying the text and pasting it in instead.'
+          : 'Upload failed. Try again or paste the text instead.'
+      );
       setUploading(false);
       setLoading(false);
     }
@@ -290,9 +314,7 @@ Copy exactly what it says — every word helps us check it.`}
             </div>
           )}
 
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
-            Free. Your message is analysed by AI and saved to your case vault.
-          </p>
+          <SortedPrivacyStrip accentColor={accentColor} />
         </div>
       )}
 

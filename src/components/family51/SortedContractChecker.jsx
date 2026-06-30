@@ -21,14 +21,38 @@ const LOADING_STEPS = [
 ];
 
 const verdictStyle = {
-  looks_ok:         { color: '#059669', bg: 'rgba(5,150,105,0.10)',  border: 'rgba(5,150,105,0.30)',  emoji: '✅', label: 'Looks OK' },
-  review_carefully: { color: '#f5a623', bg: 'rgba(245,166,35,0.10)', border: 'rgba(245,166,35,0.30)', emoji: '⚠️', label: 'Review Carefully' },
-  serious_concerns: { color: '#ef4444', bg: 'rgba(239,68,68,0.10)',  border: 'rgba(239,68,68,0.30)',  emoji: '🚨', label: 'Serious Concerns' },
+  looks_ok:         { color: '#059669', bg: 'rgba(5,150,105,0.10)',  border: 'rgba(5,150,105,0.30)',  label: 'Looks OK', icon: 'check' },
+  review_carefully: { color: '#f5a623', bg: 'rgba(245,166,35,0.10)', border: 'rgba(245,166,35,0.30)', label: 'Review Carefully', icon: 'warning' },
+  serious_concerns: { color: '#ef4444', bg: 'rgba(239,68,68,0.10)',  border: 'rgba(239,68,68,0.30)',  label: 'Serious Concerns', icon: 'alert' },
 };
+
+function ContractVerdictIcon({ type, color }) {
+  if (type === 'check') return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="20" stroke={color} strokeWidth="2.5"/>
+      <path d="M15 24l6 6 12-12" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+  if (type === 'warning') return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <path d="M24 4L2 42h44L24 4z" stroke={color} strokeWidth="2.5" strokeLinejoin="round"/>
+      <line x1="24" y1="18" x2="24" y2="28" stroke={color} strokeWidth="3" strokeLinecap="round"/>
+      <circle cx="24" cy="34" r="1.5" fill={color}/>
+    </svg>
+  );
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="20" stroke={color} strokeWidth="2.5"/>
+      <line x1="24" y1="14" x2="24" y2="28" stroke={color} strokeWidth="3" strokeLinecap="round"/>
+      <circle cx="24" cy="34" r="1.5" fill={color}/>
+    </svg>
+  );
+}
 
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import ContractInstantScan from './ContractInstantScan';
+import SortedPrivacyStrip from './SortedPrivacyStrip';
 
 export default function SortedContractChecker({ accentColor = '#7c3aed', onResult, onHandoff }) {
   const [contractType, setContractType] = useState('');
@@ -137,13 +161,42 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      setError('That file is too large. For best results, snap a photo of the relevant page instead.');
+      e.target.value = '';
+      return;
+    }
     setUploading(true);
     setLoading(true);
     setError(null);
     setResult(null);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setUploading(false);
-    await runAnalysis(file_url, null);
+    try {
+      // Retry upload up to 2 times on network error
+      let file_url;
+      let lastErr;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const result = await base44.integrations.Core.UploadFile({ file });
+          file_url = result.file_url;
+          break;
+        } catch (err) {
+          lastErr = err;
+          if (attempt < 1) await new Promise(r => setTimeout(r, 2000));
+        }
+      }
+      if (!file_url) throw lastErr || new Error('Upload failed');
+      setUploading(false);
+      await runAnalysis(file_url, null);
+    } catch (err) {
+      const isNetwork = err?.message?.toLowerCase().includes('network') || err?.message?.toLowerCase().includes('fetch');
+      setError(
+        isNetwork
+          ? 'Network error — poor signal? Try copying the text and pasting it in instead.'
+          : 'Upload failed. Try again or paste the text instead.'
+      );
+      setUploading(false);
+      setLoading(false);
+    }
     e.target.value = '';
   };
 
@@ -270,9 +323,7 @@ Every clause matters. The more you give us, the better the analysis.`}
             <ContractInstantScan text={inputText} accentColor={accentColor} onHandoff={onHandoff} />
           )}
 
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.4)', textAlign: 'center', margin: 0 }}>
-            Free. Your contract is analysed by AI and saved to your case vault.
-          </p>
+          <SortedPrivacyStrip accentColor={accentColor} />
         </div>
       )}
 
@@ -294,7 +345,7 @@ Every clause matters. The more you give us, the better the analysis.`}
 
             {/* BIG VERDICT */}
             <div style={{ borderRadius: 16, border: `2px solid ${vs.border}`, background: vs.bg, padding: '24px 20px', textAlign: 'center' }}>
-              <div style={{ fontSize: 48, marginBottom: 8, lineHeight: 1 }}>{vs.emoji}</div>
+              <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><ContractVerdictIcon type={vs.icon} color={vs.color} /></div>
               <div style={{ fontSize: 22, fontWeight: 900, color: vs.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{vs.label}</div>
               <div style={{ fontSize: 13, color: 'rgba(26,18,8,0.55)', fontWeight: 600 }}>{result.verdict_reason}</div>
             </div>
