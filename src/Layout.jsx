@@ -559,8 +559,8 @@ const LayoutInner = ({ children, currentPageName }) => {
     // SORTED MENU
     const sortedNav = [
       { title: "Decode a Letter", url: createPageUrl("Sorted"), icon: FileText, highlight: true, description: "Plain English advice" },
-      { title: "Write a Reply", url: createPageUrl("Sorted"), icon: Mail, highlight: true, description: "Draft responses" },
-      { title: "Resolve Conflict", url: createPageUrl("Sorted"), icon: Shield, highlight: true, description: "Navigate disputes" },
+      { title: "Write a Reply", url: createPageUrl("Sorted"), icon: Mail, highlight: true, description: "We'll help you say it" },
+      { title: "Resolve Conflict", url: createPageUrl("Sorted"), icon: Shield, highlight: true, description: "Find a way through it" },
       { title: "📰 Press Release", url: "/SortedPressRelease", icon: FileText, highlight: true, description: "Launch PR — save as PDF" },
       { title: "📄 Investor Brief", url: createPageUrl("SortedInvestorPress"), icon: FileText, highlight: true, description: "ESG · B2B · financial services" },
       { title: "Terms", url: "/SortedTerms", icon: Scale },
