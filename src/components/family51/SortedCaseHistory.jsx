@@ -735,8 +735,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
 
   const filtered = filter === 'all' ? cases : cases.filter(c => c.tool === filter);
 
-  if (cases.length === 0) return null;
-
+  // Always render — show the empty vault state + free-case tally even when nothing's saved yet
   const filterTabs = [
     { id: 'all',      label: 'ALL',      color: '#1a1208' },
     { id: 'letter',   label: 'DECODED',  color: '#d97706' },
