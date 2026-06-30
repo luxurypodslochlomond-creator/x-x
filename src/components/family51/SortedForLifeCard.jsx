@@ -69,7 +69,7 @@ export default function SortedForLifeCard({ compact = false }) {
           { bold: 'Unlimited decodes', rest: 'paste, type, or snap a photo' },
           { bold: 'We write your reply', rest: 'professional, assertive, right tone' },
           { bold: 'Dispute plans', rest: 'when things go further' },
-          { bold: 'Your letters stay private', rest: 'on your device — we never store what you paste' },
+          { bold: 'Your vault stays yours', rest: 'files uploaded for analysis, results saved privately on your device' },
           { bold: 'Cancel any time', rest: 'no contract, no catch' },
         ].map(({ bold, rest }, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
