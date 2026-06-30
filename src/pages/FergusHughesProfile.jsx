@@ -184,9 +184,6 @@ export default function FergusHughesProfile() {
                 <h4 className="text-[10px] tracking-[0.25em] uppercase text-stone-500 mb-2" style={SANS}>Contact</h4>
                 <p className="text-stone-100 font-semibold text-[15px]" style={SANS}>Brian Hughes</p>
                 <p className="text-[#fbbf24] mt-1 text-[15px]" style={SANS}>07494 023328</p>
-                <p className="flex items-center gap-1.5 text-stone-300 font-semibold text-[14px] mt-3" style={SANS}><Pin /> Inverkeithing High School</p>
-                <p className="text-[12px] text-stone-400 mt-1" style={SANS}>Out 1pm Mon/Wed · 3:15pm Tue/Thu/Fri</p>
-                <p className="text-[12px] text-stone-400 mt-1.5" style={SANS}>Travels Central Scotland · driving theory passed, practical imminent.</p>
               </div>
             </div>
 
