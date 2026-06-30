@@ -100,45 +100,6 @@ export default function PerformanceOptimizer() {
             navigator.serviceWorker.register('/sw.js').catch(() => {});
         }
 
-        // PREFETCH LIKELY NEXT PAGES (only when online)
-        if (navigator.onLine) {
-            const prefetchLinks = [
-                '/pages/Radio',
-                '/pages/Profile',
-                '/pages/NewCleanup',
-            ];
-
-            const prefetch = (href) => {
-                const link = document.createElement('link');
-                link.rel = 'prefetch';
-                link.href = href;
-                document.head.appendChild(link);
-            };
-
-            // Delay prefetch to not block initial load
-            setTimeout(() => {
-                prefetchLinks.forEach(prefetch);
-            }, 2000);
-        }
-
-        // AGGRESSIVE OFFLINE CACHING
-        const cacheEssentialData = async () => {
-            if ('caches' in window) {
-                const cache = await caches.open('uf51-v1');
-                // Cache critical pages
-                cache.addAll([
-                    '/',
-                    '/pages/NewCleanup',
-                    '/pages/Profile',
-                    '/pages/Radio',
-                    '/pages/DecompressionChamber',
-                ]).catch(() => {});
-            }
-        };
-
-        // Cache after 3s to not block initial load
-        setTimeout(cacheEssentialData, 3000);
-
         // CLEANUP
         return () => {
             observer.disconnect();
