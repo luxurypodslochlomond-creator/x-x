@@ -625,48 +625,49 @@ function VaultHeader({ count, isPremium }) {
     <div style={{
       borderRadius: 16, overflow: 'hidden',
       background: 'linear-gradient(135deg, rgba(217,119,6,0.06) 0%, rgba(8,145,178,0.04) 100%)',
-      border: '1.5px solid rgba(217,119,6,0.12)',
-      marginBottom: 20,
+      border: '1px solid rgba(217,119,6,0.1)',
+      marginBottom: 14,
     }}>
       <div style={{
-        display: 'flex', alignItems: 'center', gap: 14, padding: '18px 20px',
+        display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px',
         borderBottom: count > 0 ? '1px solid rgba(217,119,6,0.08)' : 'none',
       }}>
         <div style={{
-          width: 48, height: 48, borderRadius: 12, flexShrink: 0,
-          background: 'rgba(217,119,6,0.08)', border: '1.5px solid rgba(217,119,6,0.2)',
+          width: 40, height: 40, borderRadius: 10, flexShrink: 0,
+          background: 'rgba(217,119,6,0.08)', border: '1px solid rgba(217,119,6,0.18)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <Lock size={22} color="#d97706" strokeWidth={2.2} />
+          <Lock size={18} color="#d97706" strokeWidth={2.2} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 10, fontWeight: 900, letterSpacing: '0.18em', color: 'rgba(26,18,8,0.35)', marginBottom: 2 }}>
+          <div style={{ fontSize: 9.5, fontWeight: 900, letterSpacing: '0.16em', color: 'rgba(26,18,8,0.35)', marginBottom: 1 }}>
             YOUR CASE VAULT
           </div>
-          <h2 style={{ fontSize: 22, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.1 }}>
-            {count === 0 ? 'Empty vault' : count === 1 ? '1 case secured' : `${count} cases secured`}
-          </h2>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+            <h2 style={{ fontSize: 19, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.15 }}>
+              {count === 0 ? 'Empty vault' : count === 1 ? '1 case secured' : `${count} cases secured`}
+            </h2>
+            {!isPremium && (
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.3)' }}>
+                {count}/{FREE_CASE_LIMIT}
+              </span>
+            )}
+          </div>
         </div>
-        {isPremium ? (
+        {isPremium && (
           <span style={{
             fontSize: 9, fontWeight: 900, color: '#22c55e', letterSpacing: '0.12em',
             background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)',
             borderRadius: 6, padding: '4px 8px', flexShrink: 0,
           }}>UNLIMITED</span>
-        ) : (
-          <span style={{
-            fontSize: 11, fontWeight: 800, color: 'rgba(26,18,8,0.3)', flexShrink: 0,
-          }}>
-            {count}/{FREE_CASE_LIMIT}
-          </span>
         )}
       </div>
       <div style={{
-        display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px',
+        display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px',
         background: 'rgba(34,197,94,0.04)',
       }}>
-        <Shield size={13} color="#22c55e" strokeWidth={2.5} style={{ flexShrink: 0 }} />
-        <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: 0, fontWeight: 600, lineHeight: 1.4 }}>
+        <Shield size={12} color="#22c55e" strokeWidth={2.5} style={{ flexShrink: 0 }} />
+        <p style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.5)', margin: 0, fontWeight: 600, lineHeight: 1.4 }}>
           Locked to this device · Only you can see this · Anonymized patterns help others
         </p>
       </div>
@@ -741,12 +742,12 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
   ];
 
   return (
-    <div style={{ maxWidth: 560, margin: '0 auto', padding: '32px 20px 60px' }}>
+    <div style={{ maxWidth: 560, margin: '0 auto', padding: '18px 16px 36px' }}>
       <VaultHeader count={cases.length} isPremium={isPremium} />
 
       {/* FILTER TABS */}
       {cases.length > 0 && (
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20, overflowX: 'auto', paddingBottom: 2 }}>
+        <div style={{ display: 'flex', gap: 6, marginBottom: 10, overflowX: 'auto', paddingBottom: 0 }}>
           {filterTabs.map(tab => {
             const count = tab.id === 'all' ? cases.length : cases.filter(c => c.tool === tab.id).length;
             const active = filter === tab.id;
@@ -782,8 +783,8 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
       {/* CASES */}
       {filtered.length === 0 ? (
         <div style={{
-          textAlign: 'center', padding: '52px 24px',
-          border: '1.5px dashed rgba(217,119,6,0.15)', borderRadius: 16,
+          textAlign: 'center', padding: '36px 20px',
+          border: '1px dashed rgba(217,119,6,0.15)', borderRadius: 16,
           background: 'rgba(217,119,6,0.02)',
         }}>
           <div style={{
@@ -801,7 +802,7 @@ export default function SortedCaseHistory({ onContinue, isPremium = false }) {
           </p>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <AnimatePresence mode="popLayout">
             {filtered.map(c => (
               <CaseCard
