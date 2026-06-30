@@ -154,7 +154,7 @@ export default function SortedGlobalAccess() {
             SORTED GLOBAL ACCESS
           </div>
           <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 8, lineHeight: 1.2 }}>
-            SORTED works everywhere ♾️
+            SORTED works everywhere
           </div>
           <div style={{ fontSize: 13, opacity: 0.85, lineHeight: 1.6 }}>
             Any language. Any country. Visiting abroad, living abroad, or dealing with a letter from overseas — just tell SORTED where the law applies and it handles the rest.
@@ -167,7 +167,7 @@ export default function SortedGlobalAccess() {
               display: 'flex', alignItems: 'center', gap: 8,
             }}>
               <WifiOff size={14} />
-              YOU'RE OFFLINE — SORTED STILL WORKS
+              YOU'RE OFFLINE — YOUR SAVED CASES ARE STILL HERE
             </div>
           )}
           {installable && (
@@ -183,7 +183,7 @@ export default function SortedGlobalAccess() {
               }}
             >
               <Download size={16} />
-              INSTALL SORTED (WORKS OFFLINE)
+              INSTALL SORTED TO YOUR HOME SCREEN
             </motion.button>
           )}
         </div>
@@ -230,7 +230,7 @@ export default function SortedGlobalAccess() {
         fontSize: 12, color: 'rgba(26,18,8,0.35)', lineHeight: 1.6,
       }}>
         <p style={{ marginBottom: 8 }}>
-          Built with ♾️❤️ by Universal Frequency 51 CIC
+          Built with love by Universal Frequency 51 CIC
         </p>
         <p>
           Can't afford it? Email <strong style={{ color: '#d97706' }}>family@uf51.love</strong> — we'll sort it.
