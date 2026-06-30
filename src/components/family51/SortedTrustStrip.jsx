@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function SortedTrustStrip() {
   return (
@@ -82,7 +83,7 @@ export default function SortedTrustStrip() {
               <rect x="5" y="11" width="14" height="10" rx="2" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8"/>
               <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="rgba(26,18,8,0.4)" strokeWidth="1.8" strokeLinecap="round"/>
             </svg>
-            <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.5)' }}>Nothing stored</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.5)' }}>Your vault, your device</span>
           </div>
           {/* Globe icon — Any country */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
@@ -101,7 +102,7 @@ export default function SortedTrustStrip() {
             <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.5)' }}>All languages</span>
           </div>
           <div style={{ marginLeft: 'auto' }}>
-            <a href="/SortedAbout" style={{
+            <Link to="/SortedAbout" style={{
               fontSize: 11,
               fontWeight: 700,
               color: '#d97706',
@@ -109,7 +110,7 @@ export default function SortedTrustStrip() {
               letterSpacing: '0.02em',
             }}>
               The facts →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

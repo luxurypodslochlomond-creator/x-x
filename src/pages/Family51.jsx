@@ -134,7 +134,7 @@ export default function Family51Page() {
             All languages supported
           </div>
           <div style={{ background: 'rgba(217,119,6,0.06)', padding: '6px 12px', borderRadius: 20, fontSize: 10, fontWeight: 700, color: '#d97706', border: '1px solid rgba(217,119,6,0.15)' }}>
-            Your letters stay on your device
+            Uploaded for analysis · your vault is yours
           </div>
         </div>
 
