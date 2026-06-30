@@ -12,7 +12,7 @@ const HERO_THREE = [
     name: 'SORTED',
     emoji: '📄',
     headline: 'Got a scary letter?',
-    desc: 'Paste, type, snap a photo or upload a file — letters, contracts, legal docs, scam messages. Get plain English back instantly. What it means. What to do. Any language. Nothing stored.',
+    desc: 'Paste, type, snap a photo or upload a file — letters, contracts, legal docs, scam messages. Get plain English back instantly. What it means. What to do. Any language. You own your case vault.',
     badge: '£9.99/month',
     badgeColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/40',
     border: 'border-emerald-500/30 hover:border-emerald-400',
