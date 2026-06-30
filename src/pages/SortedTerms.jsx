@@ -38,7 +38,7 @@ export default function SortedTermsPage() {
             "You decide what to do. We just help you understand.",
             "3 free uses. Then £9.99/month or walk away — no guilt, no lock-in.",
             "If you can't afford it, email us. We'll sort something.",
-            "We never store your documents. Ever.",
+            "Your vault stays yours — files uploaded for analysis, results saved privately to you.",
           ].map((line, i) => (
             <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
               <span style={{ color: '#f5a623', fontWeight: 900, fontSize: 14, flexShrink: 0 }}>✓</span>

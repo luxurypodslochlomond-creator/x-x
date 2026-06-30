@@ -99,10 +99,10 @@ export default function SortedAboutPage() {
         <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 12, padding: '18px 20px', marginBottom: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
             <LockIcon />
-            <p style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', margin: 0 }}>Mathematically private — not just a promise</p>
+            <p style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', margin: 0 }}>Private by design — not just a promise</p>
           </div>
           <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.62)', margin: 0, lineHeight: 1.75 }}>
-            Most tools say "we take your privacy seriously." We built ours so there's nothing to take. Your documents are processed and immediately discarded. No account. No profile. No data trail. We can't hand over what we never held — and that matters most to people in situations where they genuinely fear who might be watching.
+            Most tools say "we take your privacy seriously." We built ours so trust stays in your hands. Your files are uploaded for analysis, your vault is yours, and you can delete everything anytime. We don't sell or share your data, and we keep no copies of your original letters. For people who genuinely fear who might be watching — that's the point.
           </p>
         </div>
 

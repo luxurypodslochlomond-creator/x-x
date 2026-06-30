@@ -41,10 +41,10 @@ export default function SortedPrivacy() {
         <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
           {[
-            "We don't store your documents. They're processed and gone.",
-            "No account. No email. No cookies. No tracking.",
+            "Files uploaded for analysis — your vault stays private to you.",
+            "No login required. No tracking cookies. No selling your data.",
             "We never sell your data. To anyone. Ever.",
-            "Close the tab — everything disappears.",
+            "Delete your vault or your server data anytime — it's yours.",
             "You're covered under UK GDPR, EU GDPR, and CCPA.",
           ].map((line, i) => (
             <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
@@ -58,12 +58,12 @@ export default function SortedPrivacy() {
       {/* Big statement */}
       <div style={{ background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10, padding: '16px 18px', marginBottom: 32 }}>
         <p style={{ fontSize: 13, lineHeight: 1.8, color: 'rgba(26,18,8,0.6)', margin: 0 }}>
-          Privacy isn't a legal checkbox for us — it's the whole point. We designed SORTED so we <strong>cannot</strong> betray your trust, because we never hold your data in the first place. Full details below.
+          Privacy isn't a legal checkbox for us — it's the whole point. We designed SORTED so trust stays in your hands — your vault is yours, your data is yours, and you can delete it whenever you choose. Full details below.
         </p>
       </div>
 
       <Section title="1. What We Collect">
-        <p style={{ margin: '0 0 10px' }}><strong>Almost nothing.</strong> No name. No email. No location. No account required. Your document is sent securely to an AI model for analysis, then immediately discarded — never stored on our servers. The result lives only in your browser session.</p>
+        <p style={{ margin: '0 0 10px' }}><strong>Almost nothing.</strong> No name. No email. No location. No account required. Your document is sent securely to an AI model for analysis. The decoded result is saved to your private vault — on your device by default, and (if you subscribe) encrypted on our servers, accessible only to you. We don't keep copies of your original letters.</p>
         <p style={{ margin: 0 }}>If you subscribe, Stripe handles your payment. We receive confirmation a payment was made — not your card details. <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: '#f5a623', textDecoration: 'none', fontWeight: 600 }}>Stripe's privacy policy</a> applies to that transaction.</p>
       </Section>
 
@@ -74,7 +74,7 @@ export default function SortedPrivacy() {
 
       <Section title="3. What We Never Do">
         <div style={{ marginTop: 4 }}>
-          <NeverItem text="Store your letter, document, or personal content" />
+          <NeverItem text="Keep copies of your original letters on our servers" />
           <NeverItem text="Sell, rent, or share your data with anyone" />
           <NeverItem text="Use your documents to train AI models" />
           <NeverItem text="Share your info with advertisers or marketers" />
@@ -85,8 +85,8 @@ export default function SortedPrivacy() {
       </Section>
 
       <Section title="4. Your Control — Local Storage">
-        <p style={{ margin: '0 0 10px' }}>If you save cases using the "My Cases" feature, those are stored <strong>only in your own browser</strong> (localStorage) — never on our servers. They never leave your device unless you explicitly share them. You own them completely.</p>
-        <p style={{ margin: 0 }}>Close the tab — your session is gone. Hit <strong>"Clear all my data"</strong> anytime to wipe your local case history instantly. There's nothing on our end to delete — because we never had it.</p>
+        <p style={{ margin: '0 0 10px' }}>If you save cases using the "My Cases" feature, the decoded results live in your private vault — on your device by default, and (if you subscribe) encrypted on our servers, accessible only to you. You own them completely, and can delete them anytime.</p>
+        <p style={{ margin: 0 }}>Close the tab — your session is gone. Hit <strong>"Clear all my data"</strong> to wipe your local case history, or <strong>"Delete my server data"</strong> to wipe any saved cases from our servers. It's all yours to control.</p>
       </Section>
 
       <Section title="5. GDPR, UK & International Rights">

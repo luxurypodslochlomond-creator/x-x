@@ -7,7 +7,7 @@ const FAQ_ITEMS = [
     items: [
       {
         q: 'How is SORTED different from ChatGPT or Google?',
-        a: 'ChatGPT gives explanations. SORTED gives you action. We decode legal jargon, identify what\'s being asked of you, cite actual legal bodies (HMRC, courts, councils), and tell you step-by-step what to do — and by when. Plus: nothing is stored or trained on your data. Ever.'
+        a: 'ChatGPT gives explanations. SORTED gives you action. We decode legal jargon, identify what\'s being asked of you, cite actual legal bodies (HMRC, courts, councils), and tell you step-by-step what to do — and by when. Plus: your vault stays yours — files uploaded for analysis, results saved privately to you, anonymized patterns used to improve advice.'
       },
       {
         q: 'Why don\'t I just hire a solicitor?',
@@ -132,7 +132,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'Can the government or police access my letters?',
-        a: 'We don\'t have copies to give them. Your letter is never stored. Only you and your AI session have it.'
+        a: 'We don\'t keep copies of your original letters. Your letter is uploaded for analysis and the result lives in your private vault — on your device, and encrypted on our servers only if you subscribe. You can delete everything anytime.'
       },
       {
         q: 'What if I want to delete my data?',
