@@ -141,7 +141,7 @@ export default function Family51Page() {
       </div>
 
       {/* YOUR CASES */}
-      <div ref={caseHistoryRef} style={{ padding: '32px 20px 0', maxWidth: 520, margin: '0 auto', scrollMarginTop: 80 }}>
+      <div ref={caseHistoryRef} style={{ padding: '8px 20px 0', maxWidth: 520, margin: '0 auto', scrollMarginTop: 80 }}>
         <SortedCaseHistory onContinue={(caseItem) => openTool(caseItem.tool === 'letter' ? 'reply' : 'conflict', { related_case_id: caseItem.id, summary: caseItem.summary, input_text: caseItem.input_text, ai_result: caseItem.ai_result })} isPremium={isPremium} />
       </div>
 
