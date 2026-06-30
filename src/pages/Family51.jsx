@@ -27,13 +27,8 @@ export default function Family51Page() {
   }, [location.search]);
 
   const openTool = (engineId, handoffData = null) => {
-    console.log('[SORTED] openTool called:', engineId, handoffData);
-    console.log('[SORTED] engineRef.current:', engineRef.current);
     if (engineRef.current) {
       engineRef.current.open(engineId, handoffData);
-      console.log('[SORTED] Engine opened successfully');
-    } else {
-      console.error('[SORTED] ERROR: engineRef.current is null - engine not mounted!');
     }
   };
 
@@ -49,12 +44,12 @@ export default function Family51Page() {
           fontSize: 'clamp(26px, 7vw, 36px)', fontWeight: 900, lineHeight: 1.1,
           margin: '0 0 12px', color: '#1a1a1a', letterSpacing: '-0.03em',
         }}>
-          Paste, type, snap a photo or upload a file
+          Whatever that letter says — let's work out what it means together.
         </h1>
         <p style={{
           fontSize: 15, color: 'rgba(26,18,8,0.5)', lineHeight: 1.5, margin: 0,
         }}>
-          We'll decode it into plain language — any language — then tell you exactly what to do.
+          Paste it, snap a photo, or upload a file. We'll decode it into plain language — any language — and tell you exactly what to do next.
         </p>
       </div>
 
