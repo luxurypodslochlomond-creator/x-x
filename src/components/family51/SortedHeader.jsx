@@ -44,10 +44,10 @@ export default function SortedHeader() {
 
       <div style={{ flex: 1 }} />
 
-      {/* FREE USES COUNTER */}
+      {/* FREE USES COUNTER — shows your case tally, not the paywall */}
       <Link
-        to="/Sorted?upgrade=1"
-        title="Each tool use = 1 free use. Unlimited after that."
+        to="/Sorted?cases=1"
+        title="Tap to see your free-case tally"
         style={{
           display: 'flex', alignItems: 'center', gap: 5, textDecoration: 'none',
           background: isPaid ? 'rgba(5,150,105,0.08)' : 'rgba(217,119,6,0.1)',
