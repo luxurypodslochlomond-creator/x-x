@@ -59,16 +59,20 @@ export default function FergusHughesProfile() {
           </div>
           <div>
             <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-1" style={{ fontFamily: 'Arial, sans-serif' }}>Current Club</p>
-            <p className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Dunfermline Community FC</p>
+            <p className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Irvine Meadow FC</p>
           </div>
         </div>
 
         {/* CLUB HISTORY */}
         <div className="mb-5 border-b border-gray-200 pb-5">
           <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Club History</p>
+          <div className="flex gap-4 items-baseline mb-1">
+            <span className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Irvine Meadow FC</span>
+            <span className="text-gray-500 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>2026–present — senior debut 27 Jun 2026</span>
+          </div>
           <div className="flex gap-4 items-baseline">
-            <span className="font-black text-gray-900 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>Dunfermline Community FC</span>
-            <span className="text-gray-500 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>2024–2026 — U17s at age 15, then U16s at age 16</span>
+            <span className="text-gray-700 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>DAFC / Pars Foundation (DACC 2009)</span>
+            <span className="text-gray-500 text-sm" style={{ fontFamily: 'Arial, sans-serif' }}>2024–2026 — released Jun 2026</span>
           </div>
         </div>
 
@@ -78,6 +82,15 @@ export default function FergusHughesProfile() {
           <p className="text-sm text-gray-700 italic leading-relaxed">
             "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now."
           </p>
+        </div>
+
+        {/* MATCH LOG */}
+        <div className="mb-5 border-b border-gray-200 pb-5">
+          <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Match Log (Irvine Meadow FC)</p>
+          <ul className="space-y-1 text-sm text-gray-800" style={{ fontFamily: 'Arial, sans-serif' }}>
+            <li>• <strong>27 Jun 2026</strong> — vs Troon (away) · 2–0 win · 90 min · senior debut</li>
+            <li>• <strong>04 Jul 2026</strong> — vs East Kilbride (home) · fixture confirmed</li>
+          </ul>
         </div>
 
         {/* ACHIEVEMENTS */}
