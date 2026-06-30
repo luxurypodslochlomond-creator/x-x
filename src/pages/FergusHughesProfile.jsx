@@ -2,6 +2,7 @@ import React from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
+const SERIF = { fontFamily: 'Georgia, "Times New Roman", serif' };
 const SANS = { fontFamily: "'Segoe UI', Arial, sans-serif" };
 
 export default function FergusHughesProfile() {
@@ -11,7 +12,7 @@ export default function FergusHughesProfile() {
       scale: 2,
       useCORS: true,
       allowTaint: false,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#fafaf9',
     });
     const imgData = canvas.toDataURL('image/jpeg', 0.92);
     const pdf = new jsPDF({ format: 'a4' });
@@ -31,98 +32,93 @@ export default function FergusHughesProfile() {
     pdf.save('Fergus-Hughes-Profile.pdf');
   };
 
-  // small clean custom icons
-  const Ball = () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 6.5l3 2.3-1.2 3.7h-3.6L9 8.8 12 6.5z" fill="#16a34a" fillOpacity="0.12" />
-      <path d="M12 6.5V3.5M14.8 12.5l3 1M9.2 12.5l-3 1" />
-    </svg>
-  );
   const Pin = () => (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#78716c" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9a3412" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 21s-6-5.7-6-10a6 6 0 1112 0c0 4.3-6 10-6 10z" />
       <circle cx="12" cy="11" r="2" />
     </svg>
   );
 
-  const Section = ({ title, children }) => (
-    <section className="py-7 border-t border-stone-100 first:border-t-0">
-      <h3 className="text-[11px] font-bold tracking-[0.22em] uppercase text-stone-400 mb-4" style={SANS}>{title}</h3>
-      {children}
+  // numbered editorial section
+  const Section = ({ n, title, children }) => (
+    <section className="grid grid-cols-12 gap-4 py-7 border-t border-stone-200/80">
+      <div className="col-span-12 sm:col-span-4">
+        <div className="flex items-baseline gap-2.5">
+          <span className="text-[13px] font-semibold text-[#9a3412]" style={SANS}>{n}</span>
+          <h3 className="text-[11px] font-bold tracking-[0.22em] uppercase text-stone-400" style={SANS}>{title}</h3>
+        </div>
+      </div>
+      <div className="col-span-12 sm:col-span-8 sm:pl-2">
+        {children}
+      </div>
     </section>
   );
 
   return (
     <div className="min-h-screen bg-stone-200/40 flex items-start justify-center px-4 py-10 sm:py-14">
-      <div className="w-full max-w-[640px]">
+      <div className="w-full max-w-[620px]">
 
-        <article id="profile-content" className="bg-white rounded-2xl shadow-sm border border-stone-200/80 overflow-hidden">
+        <article id="profile-content" className="bg-[#fafaf9] rounded-2xl shadow-sm border border-stone-200/80 overflow-hidden">
 
-          {/* HERO */}
-          <header className="px-8 sm:px-10 pt-9 pb-8">
-            <div className="flex items-start gap-5">
-              {/* initials avatar */}
-              <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-stone-900 to-stone-700 flex items-center justify-center">
-                <span className="text-white text-xl font-bold tracking-tight" style={SANS}>FH</span>
+          {/* MASTHEAD */}
+          <header className="px-8 sm:px-10 pt-10 pb-9 border-b border-stone-200/80">
+            <div className="flex items-center justify-between mb-7">
+              {/* monogram crest */}
+              <div className="w-12 h-12 rounded-full border border-stone-300 flex items-center justify-center">
+                <span className="text-[15px] font-bold text-stone-800 tracking-tight" style={SERIF}>FH</span>
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Ball />
-                  <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-green-700" style={SANS}>Footballer</span>
-                </div>
-                <h1 className="text-[28px] sm:text-[32px] font-bold text-stone-900 leading-none tracking-tight" style={SANS}>Fergus Hughes</h1>
-                <p className="text-[15px] text-stone-500 mt-2" style={SANS}>Centre-Back / Right-Back · right foot · 17</p>
-              </div>
+              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-stone-400" style={SANS}>Player Profile · 2026</span>
             </div>
 
-            {/* stat strip — clean row */}
-            <dl className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-stone-100 mt-8 rounded-xl overflow-hidden">
-              {[
-                { k: 'Club', v: 'Irvine Meadow' },
-                { k: 'Born', v: '15 May 2009' },
-                { k: 'Height', v: "6'1 / 185cm" },
-                { k: 'Nationality', v: 'Scottish' },
-              ].map((s) => (
-                <div key={s.k} className="bg-white px-4 py-3.5">
-                  <dt className="text-[10px] font-semibold tracking-[0.15em] uppercase text-stone-400" style={SANS}>{s.k}</dt>
-                  <dd className="text-[13px] font-semibold text-stone-800 mt-1 leading-tight" style={SANS}>{s.v}</dd>
-                </div>
-              ))}
-            </dl>
+            <h1 className="text-[40px] sm:text-[46px] font-bold text-stone-900 leading-[1.02] tracking-tight" style={SERIF}>Fergus Hughes</h1>
+            <p className="text-[15px] text-stone-500 mt-3" style={SANS}>Centre-Back / Right-Back &nbsp;·&nbsp; right foot &nbsp;·&nbsp; 17</p>
+
+            {/* inline stat row — hairlines, not boxes */}
+            <div className="flex flex-wrap items-center mt-7 text-[13px]" style={SANS}>
+              <span className="text-stone-800 font-semibold">Irvine Meadow FC</span>
+              <span className="mx-3 text-stone-300">/</span>
+              <span className="text-stone-600">b. 15 May 2009</span>
+              <span className="mx-3 text-stone-300">/</span>
+              <span className="text-stone-600">6'1 · 185cm</span>
+              <span className="mx-3 text-stone-300">/</span>
+              <span className="text-stone-600">Scottish</span>
+            </div>
           </header>
 
-          {/* BODY */}
+          {/* LEAD PULL QUOTE */}
+          <div className="px-8 sm:px-10 py-10 bg-white/40">
+            <div className="relative pl-7">
+              <span className="absolute -left-1 -top-3 text-5xl leading-none text-[#9a3412]/40" style={SERIF}>"</span>
+              <blockquote className="text-[19px] leading-[1.6] text-stone-800" style={SERIF}>
+                I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now.
+              </blockquote>
+              <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mt-4" style={SANS}>Why I'm Moving On</p>
+            </div>
+          </div>
+
+          {/* NUMBERED SECTIONS */}
           <div className="px-8 sm:px-10 pb-10">
 
-            {/* LEAD QUOTE — the real him */}
-            <blockquote className="border-l-2 border-green-600 pl-4 my-1">
-              <p className="text-[16px] leading-relaxed text-stone-800" style={SANS}>
-                "I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now."
-              </p>
-              <footer className="text-[10px] tracking-[0.2em] uppercase text-stone-400 mt-3" style={SANS}>Why I'm Moving On</footer>
-            </blockquote>
-
-            <Section title="Clubs">
-              <ul className="space-y-3">
+            <Section n="01" title="Clubs">
+              <ul className="space-y-3.5">
                 <li className="flex justify-between items-baseline gap-4">
                   <div>
                     <p className="text-stone-900 font-semibold text-[15px]" style={SANS}>Irvine Meadow FC</p>
-                    <p className="text-xs text-stone-400 mt-0.5" style={SANS}>senior debut 27 Jun 2026</p>
+                    <p className="text-xs text-stone-400 mt-0.5" style={SANS}>senior debut · 27 Jun 2026</p>
                   </div>
                   <p className="text-xs text-stone-400 whitespace-nowrap" style={SANS}>2026 —</p>
                 </li>
                 <li className="flex justify-between items-baseline gap-4">
                   <div>
                     <p className="text-stone-700 text-[15px]" style={SANS}>DAFC / Pars Foundation <span className="text-stone-400">(DACC 2009)</span></p>
-                    <p className="text-xs text-stone-400 mt-0.5" style={SANS}>released Jun 2026</p>
+                    <p className="text-xs text-stone-400 mt-0.5" style={SANS}>released · Jun 2026</p>
                   </div>
-                  <p className="text-xs text-stone-400 whitespace-nowrap" style={SANS}>2024 — 2026</p>
+                  <p className="text-xs text-stone-400 whitespace-nowrap" style={SANS}>2024 — 26</p>
                 </li>
               </ul>
             </Section>
 
-            <Section title="Matches · Irvine Meadow">
+            <Section n="02" title="Matches · Irvine Meadow">
               <ul className="space-y-2.5">
                 <li className="flex justify-between items-baseline gap-4 pb-2.5 border-b border-stone-100">
                   <span className="text-[15px] text-stone-800" style={SANS}>27 Jun · Troon <span className="text-stone-400">(home)</span></span>
@@ -135,8 +131,16 @@ export default function FergusHughesProfile() {
               </ul>
             </Section>
 
-            <Section title="What People See In Him">
-              <ul className="space-y-2.5 text-[15px] text-stone-800" style={SANS}>
+            <Section n="03" title="In His Own Words">
+              <blockquote className="border-l-2 border-stone-300 pl-4">
+                <p className="text-[16px] leading-[1.65] text-stone-800" style={SERIF}>
+                  I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session.
+                </p>
+              </blockquote>
+            </Section>
+
+            <Section n="04" title="What People See">
+              <ul className="space-y-2.5 text-[15px] text-stone-800 leading-relaxed" style={SANS}>
                 <li><span className="font-semibold">Commitment</span> — always worked hard, gave it his all.</li>
                 <li><span className="font-semibold">Leadership</span> — captain of a strong team.</li>
                 <li><span className="font-semibold">Attitude</span> — keeps his head high, even after mistakes.</li>
@@ -144,7 +148,7 @@ export default function FergusHughesProfile() {
               </ul>
             </Section>
 
-            <Section title="Honours">
+            <Section n="05" title="Honours">
               <ul className="space-y-2.5 text-[15px] text-stone-800" style={SANS}>
                 <li>Player of the Year — 2025/26</li>
                 <li>Team Captain — 2025/26</li>
@@ -152,40 +156,46 @@ export default function FergusHughesProfile() {
               </ul>
             </Section>
 
-            <Section title="Working On">
+            <Section n="06" title="Working On">
               <p className="text-[15px] text-stone-700" style={SANS}>Strength and physicality — actively working to improve.</p>
             </Section>
 
-            <Section title="In His Own Words">
-              <blockquote className="border-l-2 border-stone-200 pl-4">
-                <p className="text-[16px] leading-relaxed text-stone-800" style={SANS}>
-                  "I'm a natural leader and someone who takes initiative on the pitch. My attitude is one of the things I am proud of — I keep my head high at all times even when I make a mistake or have a bad game. I give 100% every session."
-                </p>
-              </blockquote>
-            </Section>
-
-            <Section title="Ambition">
-              <p className="text-[19px] font-semibold text-stone-900 leading-snug" style={SANS}>
+            <Section n="07" title="Ambition">
+              <p className="text-[21px] font-semibold text-stone-900 leading-snug" style={SERIF}>
                 To reach the highest level possible and represent Scotland.
               </p>
             </Section>
-
-            {/* CONTACT */}
-            <section className="pt-7 mt-7 border-t border-stone-100 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <h4 className="text-[11px] font-bold tracking-[0.22em] uppercase text-stone-400 mb-3" style={SANS}>Contact</h4>
-                <p className="text-stone-900 font-semibold text-[15px]" style={SANS}>Brian Hughes <span className="text-stone-400 font-normal">— Father</span></p>
-                <p className="text-green-700 mt-1 font-medium text-[15px]" style={SANS}>07494 023328</p>
-              </div>
-              <div>
-                <h4 className="text-[11px] font-bold tracking-[0.22em] uppercase text-stone-400 mb-3" style={SANS}>Logistics</h4>
-                <p className="flex items-center gap-1.5 text-stone-900 font-semibold text-[15px]" style={SANS}><Pin /> Inverkeithing High School</p>
-                <p className="text-[13px] text-stone-500 mt-1" style={SANS}>Out 1pm Mon/Wed · 3:15pm Tue/Thu/Fri</p>
-                <p className="text-[13px] text-stone-600 mt-1.5" style={SANS}>Travels Central Scotland · driving theory passed, practical imminent.</p>
-              </div>
-            </section>
-
           </div>
+
+          {/* COLOPHON — the soul */}
+          <footer className="px-8 sm:px-10 py-9 bg-stone-900 text-stone-300">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-stone-500 mb-5" style={SANS}>Colophon</p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
+              <div>
+                <p className="text-[15px] text-stone-100" style={SERIF}>
+                  Profile maintained by Brian Hughes — musician &amp; father.
+                </p>
+                <p className="text-[13px] text-stone-400 mt-3 leading-relaxed" style={SANS}>
+                  Built with care, not fanfare. Updated as the journey moves.
+                </p>
+              </div>
+              <div>
+                <h4 className="text-[10px] tracking-[0.25em] uppercase text-stone-500 mb-2" style={SANS}>Contact</h4>
+                <p className="text-stone-100 font-semibold text-[15px]" style={SANS}>Brian Hughes</p>
+                <p className="text-[#fbbf24] mt-1 text-[15px]" style={SANS}>07494 023328</p>
+                <p className="flex items-center gap-1.5 text-stone-300 font-semibold text-[14px] mt-3" style={SANS}><Pin /> Inverkeithing High School</p>
+                <p className="text-[12px] text-stone-400 mt-1" style={SANS}>Out 1pm Mon/Wed · 3:15pm Tue/Thu/Fri</p>
+                <p className="text-[12px] text-stone-400 mt-1.5" style={SANS}>Travels Central Scotland · driving theory passed, practical imminent.</p>
+              </div>
+            </div>
+
+            <div className="flex items-end justify-between mt-9 pt-6 border-t border-stone-700/60">
+              <span className="text-[22px] text-stone-100" style={SERIF}>F.H.</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase text-stone-500" style={SANS}>No. 5 · 2026</span>
+            </div>
+          </footer>
+
         </article>
 
         {/* Download */}
