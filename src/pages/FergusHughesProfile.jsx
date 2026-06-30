@@ -88,7 +88,7 @@ export default function FergusHughesProfile() {
         <div className="mb-5 border-b border-gray-200 pb-5">
           <p className="text-xs font-black tracking-widest text-gray-400 uppercase mb-2" style={{ fontFamily: 'Arial, sans-serif' }}>Match Log (Irvine Meadow FC)</p>
           <ul className="space-y-1 text-sm text-gray-800" style={{ fontFamily: 'Arial, sans-serif' }}>
-            <li>• <strong>27 Jun 2026</strong> — vs Troon (home) · 2–0 win · 90 min · senior debut · shirt 5</li>
+            <li>• <strong>27 Jun 2026</strong> — Irvine Meadow 2–0 Troon (home) · 90 min · senior debut · shirt 5</li>
             <li>• <strong>04 Jul 2026</strong> — vs East Kilbride (home) · fixture confirmed</li>
           </ul>
         </div>
