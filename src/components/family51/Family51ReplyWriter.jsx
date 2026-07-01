@@ -62,10 +62,12 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [error, setError] = useState(null);
   const resultRef = useRef(null);
 
-  // Scroll to result when it appears
+  // Scroll to result when it appears — small delay so content has rendered
   useEffect(() => {
     if (result && resultRef.current) {
-      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
     }
   }, [result]);
 
@@ -73,29 +75,39 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
     const t = TONES.find(x => x.id === selectedTone);
     const geoContext = buildSortedGeoPromptContext(geo);
     
-    const prompt = SORTED_SOUL + '\n' + `Write a letter for someone in this situation. ${geoContext}
+    const prompt = SORTED_SOUL + '\n' + `You are helping someone write a reply. ${geoContext}
 
 SITUATION: ${situation || 'Not specified'}
-TONE: ${t?.label} — ${t?.desc}
+TONE REQUESTED: ${t?.label} — ${t?.desc}
 NAME: ${name || '[Your Name]'}
 
 CONTEXT:
 ${context}
 
-FIRST — Work out what this document/situation actually is before writing anything.
-- If it is clearly NOT a dispute, demand, or official letter (e.g. a personal essay, journal, academic reflection, creative writing, newsletter, homework), DO NOT write a defensive "no legal weight / no action needed" reply. Say plainly what it is and that no formal reply is needed — honest, not cautious.
-- Only write a reply letter if there is genuinely someone to address and something to ask or push back on.
+STEP 1 — IDENTIFY WHAT THIS ACTUALLY IS.
+Is this:
+A) An official letter, demand, invoice, or notice requiring a formal reply?
+B) A personal, academic, or creative document (essay, journal, PhD research, story, newsletter) that does NOT require a legal or formal reply?
 
-Write a complete, ready-to-send letter.
-- No waffle, no padding, no "I hope this letter finds you well" nonsense.
-- State the issue fast. State what you want. State consequences if ignored.
-- Cite specific rights / legislation / bodies relevant to ${geo.country} where it strengthens the case.
-- MAXIMUM 350 words for the letter body — tight, punchy, effective. Shorter is stronger.
-- Proper greeting and sign-off, but no fluff in between.
-- Ready to copy and paste with zero edits needed.
-- CRITICAL: The tip should focus on what is LIKELY TO ACTUALLY HAPPEN in practice — not just legal theory. What does this organisation usually do when they receive this kind of letter? What's the realistic outcome?
+STEP 2 — RESPOND APPROPRIATELY.
 
-Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes, and one critical tip before sending.`;
+If (B) — non-official document like an academic essay or personal writing:
+- Do NOT write a defensive legal letter. That is wrong and useless.
+- Write a warm, genuine, engaged response matching the document type.
+- For academic work: respond as a thoughtful peer. Acknowledge key ideas, ask a question, share a real reaction.
+- subject_line: a natural, human reply subject line (e.g. "Re: A Chat with Granny — some thoughts")
+- letter_body: warm, human, 2-4 paragraphs. No "Dear Sir/Madam", no legal language.
+- key_points: 2-3 central themes or ideas in the document
+- tip: what kind of reply would genuinely land well for this type of document
+
+If (A) — official letter or demand:
+- Write a complete, ready-to-send formal letter.
+- State the issue fast. State what you want. Consequences if ignored.
+- Cite specific rights / legislation relevant to ${geo.country}.
+- MAXIMUM 350 words. Tight, no fluff.
+- tip: what will ACTUALLY happen in practice when they receive this.
+
+Return JSON: subject_line (string), letter_body (string), key_points (array of 2-3 strings), tip (string).`;
 
     const schema = {
       type: 'object',
@@ -361,6 +373,12 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
     );
   }
 
+  // Detect if this is a non-formal/non-legal response (academic, creative, personal)
+  const isNonLetter = result && (
+    !result.subject_line?.match(/re:|urgent|notice|complaint|demand|formal|invoice/i) &&
+    result.key_points?.some(p => /theme|essay|research|idea|question|reflect|wonder|play|journal|PhD/i.test(p))
+  );
+
   // STEP 3: RESULT VIEW — CLEAN, REAL-TIME TONE SWITCHING
   return (
     <div className="space-y-5">
@@ -368,7 +386,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
         {result && (
           <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
 
-            {/* TONE SWITCHER — visible, real-time */}
+            {/* TONE SWITCHER — only for formal letters */}
+            {!isNonLetter && (
             <div style={{ background: accentColor + '08', border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '14px 16px' }}>
               <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 4px' }}>NEED A DIFFERENT TONE?</p>
               <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
@@ -394,11 +413,12 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
                 ))}
               </div>
             </div>
+            )}
 
             {/* KEY POINTS */}
             {result.key_points?.length > 0 && (
               <div style={{ border: `1px solid ${accentColor}20`, borderRadius: 8, padding: '14px 18px', background: `${accentColor}05` }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'aa', marginBottom: 10 }}>THIS LETTER MAKES THESE POINTS</p>
+                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'aa', marginBottom: 10 }}>{isNonLetter ? 'WHAT THIS IS REALLY ABOUT' : 'THIS LETTER MAKES THESE POINTS'}</p>
                 <div className="space-y-2">
                   {result.key_points.map((p, i) => (
                     <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
@@ -469,8 +489,8 @@ Return: subject line, full letter body (MAX 350 words), 2-3 key points it makes,
               </button>
             </div>
 
-            {/* HANDOFF — escalate to dispute help */}
-            {onHandoff && (
+            {/* HANDOFF — escalate to dispute help (only for formal letters) */}
+            {onHandoff && !isNonLetter && (
               <motion.button
                 onClick={() => onHandoff({
                   subject_line: result?.subject_line,
