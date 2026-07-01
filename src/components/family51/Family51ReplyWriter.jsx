@@ -26,9 +26,29 @@ const TONES = [
   { id: 'urgent', label: 'URGENT',  desc: 'Assert. Make them act.' },
 ];
 
+const SENDER_KEY = 'sorted_sender_profile_v1';
+
+const inputStyle = {
+  width: '100%', background: '#fff',
+  border: '1px solid rgba(26,18,8,0.15)', borderRadius: 10,
+  color: '#1a1208', fontSize: 13, padding: '11px 14px',
+  outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
+};
+
+function loadSenderProfile() {
+  try {
+    const raw = localStorage.getItem(SENDER_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (_) {}
+  return { name: '', email: '', address: '', phone: '' };
+}
+
 export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult, prefillContext, onHandoff, suggestedTone, relatedCaseId }) {
   const [saved, setSaved] = useState(false);
   const [situation, setSituation] = useState('');
+  // SENDER PROFILE — persisted, so you never re-type your details
+  const [sender, setSender] = useState(() => loadSenderProfile());
+  const [recipient, setRecipient] = useState({ name: '', email: '', organisation: '' });
   const buildContext = (pc) => {
     if (!pc) return '';
     const parts = [];
@@ -53,7 +73,16 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
     }
   }, [prefillContext]);
   const [tone, setTone]           = useState(() => suggestedTone || 'calm');
-  const [name, setName]           = useState('');
+  const [name, setName]           = useState(() => loadSenderProfile().name || '');
+  // Keep sender profile in sync with the name field + persist
+  const updateSender = (field, value) => {
+    setSender(prev => {
+      const next = { ...prev, [field]: value };
+      if (field === 'name') setName(value);
+      try { localStorage.setItem(SENDER_KEY, JSON.stringify(next)); } catch (_) {}
+      return next;
+    });
+  };
   const [loading, setLoading]     = useState(false);
   const [result, setResult]       = useState(null);
   const [resultTone, setResultTone] = useState(null);
@@ -79,8 +108,13 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
 
 SITUATION: ${situation || 'Not specified'}
 TONE REQUESTED: ${t?.label} — ${t?.desc}
-NAME: ${name || '[Your Name]'}
 
+WHO IS WRITING (sender — use these exact details in the letter, no placeholders):
+- Name: ${sender.name || '[Your Name]'}
+${sender.email ? `- Email: ${sender.email}\n` : ''}${sender.address ? `- Address: ${sender.address}\n` : ''}${sender.phone ? `- Phone: ${sender.phone}\n` : ''}
+WHO THE LETTER IS TO (recipient — address them by name if provided):
+- Recipient: ${recipient.name || (prefillContext?.sender && prefillContext.sender !== 'Unknown' ? prefillContext.sender : '[Recipient name]')}
+${recipient.organisation ? `- Organisation: ${recipient.organisation}\n` : ''}${recipient.email ? `- Their email: ${recipient.email}\n` : ''}
 CONTEXT:
 ${context}
 
@@ -102,6 +136,9 @@ If (B) — non-official document like an academic essay or personal writing:
 
 If (A) — official letter or demand:
 - Write a complete, ready-to-send formal letter.
+- Address the recipient by their name if provided. If no recipient name, use their organisation name or "Dear Sir/Madam".
+- Sign off with the sender's name (not "[Your Name]") — the letter must be ready to send with zero edits.
+- Include the sender's address, email, and phone at the top or bottom if provided.
 - State the issue fast. State what you want. Consequences if ignored.
 - Cite specific rights / legislation relevant to ${geo.country}.
 - MAXIMUM 350 words. Tight, no fluff.
@@ -226,12 +263,12 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
     setTimeout(() => setCopied(false), 2200);
   };
 
-  const openInEmailApp = (recipientEmail = '') => {
+  const openInEmailApp = () => {
     if (!result) return;
+    const to = recipient.email || prefillContext?.senderEmail || '';
     const subject = encodeURIComponent(result.subject_line || 'Your reply');
     const body = encodeURIComponent(result.letter_body || '');
-    const to = encodeURIComponent(recipientEmail.trim());
-    window.open(`mailto:${to}?subject=${subject}&body=${body}`, '_blank');
+    window.open(`mailto:${encodeURIComponent(to.trim())}?subject=${subject}&body=${body}`, '_blank');
   };
 
   const handleToneChange = async (newTone) => {
@@ -311,29 +348,35 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
           </div>
         </div>
 
-        {/* OPTIONAL EXTRAS — collapsed */}
-        <details style={{ cursor: 'pointer' }}>
-          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="3" stroke="rgba(26,18,8,0.45)" strokeWidth="2"/>
-              <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="rgba(26,18,8,0.45)" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            YOUR NAME &amp; SITUATION TYPE (optional)
-          </summary>
-          <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {/* WHO TO SEND TO — recipient details */}
+        <div style={{ background: '#fff', border: '1px solid rgba(26,18,8,0.1)', borderRadius: 12, padding: '14px 16px' }}>
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.55)', margin: '0 0 10px' }}>WHO IS THIS GOING TO?</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <input
               type="text"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              placeholder="Your name (for sign-off)"
-              style={{
-                width: '100%', background: '#fff',
-                border: '1px solid rgba(26,18,8,0.15)', borderRadius: 10,
-                color: '#1a1208', fontSize: 13, padding: '11px 14px',
-                outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
-              }}
+              value={recipient.name}
+              onChange={e => setRecipient(r => ({ ...r, name: e.target.value }))}
+              placeholder="Recipient name (e.g. John Smith)"
+              style={inputStyle}
             />
-            {!prefillContext && (
+            <input
+              type="text"
+              value={recipient.organisation}
+              onChange={e => setRecipient(r => ({ ...r, organisation: e.target.value }))}
+              placeholder="Organisation (e.g. ACME Council)"
+              style={inputStyle}
+            />
+            <input
+              type="email"
+              value={recipient.email}
+              onChange={e => setRecipient(r => ({ ...r, email: e.target.value }))}
+              placeholder="Their email (opens in your email app)"
+              style={inputStyle}
+            />
+          </div>
+          {!prefillContext && (
+            <div style={{ marginTop: 12 }}>
+              <p style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.08em', margin: '0 0 6px' }}>SITUATION TYPE (optional)</p>
               <div className="flex flex-wrap gap-2">
                 {SITUATIONS.map(s => (
                   <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
@@ -341,7 +384,53 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
                   </Chip>
                 ))}
               </div>
-            )}
+            </div>
+          )}
+        </div>
+
+        {/* MY DETAILS — saved, so you never re-type them */}
+        <details style={{ cursor: 'pointer' }}>
+          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="3" stroke="rgba(26,18,8,0.45)" strokeWidth="2"/>
+                <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="rgba(26,18,8,0.45)" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+              MY DETAILS {sender.name ? `— ${sender.name}` : '(saved for next time)'}
+            </span>
+          </summary>
+          <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <input
+              type="text"
+              value={sender.name}
+              onChange={e => updateSender('name', e.target.value)}
+              placeholder="Your name"
+              style={inputStyle}
+            />
+            <input
+              type="email"
+              value={sender.email}
+              onChange={e => updateSender('email', e.target.value)}
+              placeholder="Your email"
+              style={inputStyle}
+            />
+            <input
+              type="text"
+              value={sender.address}
+              onChange={e => updateSender('address', e.target.value)}
+              placeholder="Your address (for the letterhead)"
+              style={inputStyle}
+            />
+            <input
+              type="tel"
+              value={sender.phone}
+              onChange={e => updateSender('phone', e.target.value)}
+              placeholder="Your phone (optional)"
+              style={inputStyle}
+            />
+            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', margin: '4px 0 0', lineHeight: 1.4 }}>
+              Saved on this device only. Next time you write a letter, these fill in automatically.
+            </p>
           </div>
         </details>
 
@@ -513,7 +602,7 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
 
 
 
-            <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{
+            <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setRecipient({ name: '', email: '', organisation: '' }); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{
               width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
               letterSpacing: '0.06em', cursor: 'pointer',
               border: '1px solid rgba(26,18,8,0.15)',
