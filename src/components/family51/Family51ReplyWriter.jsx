@@ -48,7 +48,7 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const [situation, setSituation] = useState('');
   // SENDER PROFILE — persisted, so you never re-type your details
   const [sender, setSender] = useState(() => loadSenderProfile());
-  const [recipient, setRecipient] = useState({ name: '', email: '', organisation: '' });
+  const [recipient, setRecipient] = useState({ name: '', email: '', organisation: '', address: '' });
   const buildContext = (pc) => {
     if (!pc) return '';
     const parts = [];
@@ -114,7 +114,7 @@ WHO IS WRITING (sender — use these exact details in the letter, no placeholder
 ${sender.email ? `- Email: ${sender.email}\n` : ''}${sender.address ? `- Address: ${sender.address}\n` : ''}${sender.phone ? `- Phone: ${sender.phone}\n` : ''}
 WHO THE LETTER IS TO (recipient — address them by name if provided):
 - Recipient: ${recipient.name || (prefillContext?.sender && prefillContext.sender !== 'Unknown' ? prefillContext.sender : '[Recipient name]')}
-${recipient.organisation ? `- Organisation: ${recipient.organisation}\n` : ''}${recipient.email ? `- Their email: ${recipient.email}\n` : ''}
+${recipient.organisation ? `- Organisation: ${recipient.organisation}\n` : ''}${recipient.email ? `- Their email: ${recipient.email}\n` : ''}${recipient.address ? `- Their address: ${recipient.address}\n` : ''}
 CONTEXT:
 ${context}
 
@@ -137,6 +137,7 @@ If (B) — non-official document like an academic essay or personal writing:
 If (A) — official letter or demand:
 - Write a complete, ready-to-send formal letter.
 - Address the recipient by their name if provided. If no recipient name, use their organisation name or "Dear Sir/Madam".
+- If the recipient's address is provided, include it in the letterhead / "Dear" block so the letter is fully addressed and ready to post with zero edits.
 - Sign off with the sender's name (not "[Your Name]") — the letter must be ready to send with zero edits.
 - Include the sender's address, email, and phone at the top or bottom if provided.
 - State the issue fast. State what you want. Consequences if ignored.
@@ -371,6 +372,13 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
               value={recipient.email}
               onChange={e => setRecipient(r => ({ ...r, email: e.target.value }))}
               placeholder="Their email (opens in your email app)"
+              style={inputStyle}
+            />
+            <input
+              type="text"
+              value={recipient.address}
+              onChange={e => setRecipient(r => ({ ...r, address: e.target.value }))}
+              placeholder="Their address (so the letter is fully addressed)"
               style={inputStyle}
             />
           </div>
