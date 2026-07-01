@@ -80,47 +80,44 @@ export default function SortedFeedback({ tool, caseId, accentColor = '#f97316' }
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           style={{
-            padding: '12px 14px', borderRadius: 10,
-            background: 'rgba(26,18,8,0.02)',
-            border: '1px solid rgba(26,18,8,0.08)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            paddingTop: 2,
           }}
         >
-          <p style={{
-            fontSize: 10, fontWeight: 800, letterSpacing: '0.1em',
-            color: 'rgba(26,18,8,0.4)', margin: '0 0 10px', textAlign: 'center',
+          <span style={{
+            fontSize: 9.5, fontWeight: 800, letterSpacing: '0.1em',
+            color: 'rgba(26,18,8,0.32)', marginRight: 2,
           }}>
-            WAS THIS HELPFUL?
-          </p>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <motion.button
-              onClick={() => handleVote('helpful')}
-              whileTap={{ scale: 0.95 }}
-              style={{
-                flex: 1, padding: '10px 0', borderRadius: 8, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.08em', cursor: 'pointer',
-                border: '1px solid rgba(34,197,94,0.3)',
-                background: 'rgba(34,197,94,0.05)',
-                color: '#16a34a',
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-              }}
-            >
-              YES, HELPED
-            </motion.button>
-            <motion.button
-              onClick={() => handleVote('not_helpful')}
-              whileTap={{ scale: 0.95 }}
-              style={{
-                flex: 1, padding: '10px 0', borderRadius: 8, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.08em', cursor: 'pointer',
-                border: '1px solid rgba(239,68,68,0.25)',
-                background: 'rgba(239,68,68,0.04)',
-                color: '#ef4444',
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-              }}
-            >
-              NOT REALLY
-            </motion.button>
-          </div>
+            HELPFUL?
+          </span>
+          <motion.button
+            onClick={() => handleVote('helpful')}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              padding: '6px 12px', borderRadius: 999, fontSize: 10.5, fontWeight: 800,
+              letterSpacing: '0.06em', cursor: 'pointer',
+              border: '1px solid rgba(34,197,94,0.25)',
+              background: 'transparent',
+              color: '#16a34a',
+              WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+            }}
+          >
+            YES
+          </motion.button>
+          <motion.button
+            onClick={() => handleVote('not_helpful')}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              padding: '6px 12px', borderRadius: 999, fontSize: 10.5, fontWeight: 800,
+              letterSpacing: '0.06em', cursor: 'pointer',
+              border: '1px solid rgba(239,68,68,0.2)',
+              background: 'transparent',
+              color: '#ef4444',
+              WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+            }}
+          >
+            NOT REALLY
+          </motion.button>
         </motion.div>
       )}
     </AnimatePresence>

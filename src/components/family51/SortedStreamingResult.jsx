@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SortedHelpLinks from './SortedHelpLinks';
 import SortedPushNudge from './SortedPushNudge';
 import SortedFeedback from './SortedFeedback';
+import { CaseActionBar } from './SortedCaseExport';
+import { Copy, Share2, RotateCcw } from 'lucide-react';
 
 const SEVERITY_CONFIG = {
   'NOT URGENT':      { color: '#22c55e', bg: 'rgba(34,197,94,0.06)',   border: 'rgba(34,197,94,0.2)' },
@@ -15,6 +17,7 @@ const SEVERITY_CONFIG = {
 export default function SortedStreamingResult({ result, accentColor = '#f97316', onHandoff, onReset, caseId, geo }) {
   const [showMore, setShowMore] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [flash, setFlash] = useState(null);
   const sev = result?.severity ? (SEVERITY_CONFIG[result.severity] || SEVERITY_CONFIG['NEEDS ATTENTION']) : null;
 
   const buildText = () =>
@@ -38,7 +41,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
           await navigator.share({ title: 'SORTED — Letter Breakdown', text });
         }
         setSaved(true);
-        setTimeout(() => setSaved(false), 3000);
+        setFlash('SHARED');
+        setTimeout(() => { setSaved(false); setFlash(null); }, 3000);
         return;
       } catch (err) {
         if (err?.name === 'AbortError') return;
@@ -47,7 +51,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
     try {
       await navigator.clipboard.writeText(text);
       setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
+      setFlash('SHARED');
+      setTimeout(() => { setSaved(false); setFlash(null); }, 3000);
       return;
     } catch (_) {}
     try {
@@ -61,7 +66,24 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
       setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
+      setFlash('SHARED');
+      setTimeout(() => { setSaved(false); setFlash(null); }, 3000);
+    } catch (_) {}
+  };
+
+  const handleCopy = async () => {
+    const text =
+      `SORTED LETTER BREAKDOWN\n\n` +
+      `${result.letter_summary}\n` +
+      `Severity: ${result.severity}\n\n` +
+      (result.what_this_means ? `${result.what_this_means}\n\n` : '') +
+      `WHAT TO DO:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
+      (result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : '') +
+      `Via SORTED — uf51.love/Sorted`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setFlash('COPIED');
+      setTimeout(() => setFlash(null), 1800);
     } catch (_) {}
   };
 
@@ -185,38 +207,22 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
 
 
 
-      {/* ── BOTTOM ACTIONS ── Clean, consistent */}
-      <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
-        <CopyBreakdownButton result={result} sev={sev} />
-        <button
-          onClick={handleSave}
-          style={{
-            flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-            letterSpacing: '0.08em', cursor: 'pointer',
-            border: '1px solid rgba(34,197,94,0.35)',
-            background: saved ? 'rgba(34,197,94,0.08)' : 'rgba(34,197,94,0.05)',
-            color: saved ? '#22c55e' : '#16a34a',
-            WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-            transition: 'all 0.2s',
-          }}
+      {/* ── BOTTOM ACTIONS ── bespoke icon bar, matches the vault */}
+      <CaseActionBar actions={[
+        { icon: Copy, label: 'COPY', accent: sev.color, onClick: handleCopy },
+        { icon: Share2, label: 'SHARE', accent: '#16a34a', onClick: handleSave },
+        { icon: RotateCcw, label: 'NEW', accent: 'rgba(26,18,8,0.5)', onClick: onReset },
+      ]} />
+
+      {flash && (
+        <motion.p
+          initial={{ opacity: 0, y: 2 }}
+          animate={{ opacity: 1, y: 0 }}
+          style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.45)', textAlign: 'center', margin: 0 }}
         >
-          {saved ? '✓ SAVED' : 'SHARE'}
-        </button>
-        <button
-          onClick={onReset}
-          style={{
-            flex: 1, padding: '13px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-            letterSpacing: '0.08em', cursor: 'pointer',
-            border: '1px solid rgba(26,18,8,0.15)',
-            background: 'rgba(26,18,8,0.04)',
-            color: 'rgba(26,18,8,0.5)',
-            WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-            transition: 'all 0.2s',
-          }}
-        >
-          NEW
-        </button>
-      </div>
+          {flash}
+        </motion.p>
+      )}
 
       {/* FEEDBACK — was this helpful? */}
       <SortedFeedback tool="letter" caseId={caseId} accentColor={accentColor} />
