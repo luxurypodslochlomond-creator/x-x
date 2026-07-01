@@ -82,6 +82,10 @@ NAME: ${name || '[Your Name]'}
 CONTEXT:
 ${context}
 
+FIRST — Work out what this document/situation actually is before writing anything.
+- If it is clearly NOT a dispute, demand, or official letter (e.g. a personal essay, journal, academic reflection, creative writing, newsletter, homework), DO NOT write a defensive "no legal weight / no action needed" reply. Say plainly what it is and that no formal reply is needed — honest, not cautious.
+- Only write a reply letter if there is genuinely someone to address and something to ask or push back on.
+
 Write a complete, ready-to-send letter.
 - No waffle, no padding, no "I hope this letter finds you well" nonsense.
 - State the issue fast. State what you want. State consequences if ignored.
