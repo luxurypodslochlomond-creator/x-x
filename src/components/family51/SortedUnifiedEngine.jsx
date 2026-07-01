@@ -144,7 +144,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
       {/* COLOURED TOP ACCENT BAR */}
       <div style={{ height: 3, background: tc.color, flexShrink: 0, transition: 'background 0.2s' }} />
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '16px 16px 80px' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '16px 16px 40px' }}>
 
         {/* HEADER ROW — back + tool label + human hint */}
         <div style={{ marginBottom: 18 }}>
