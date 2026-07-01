@@ -1,12 +1,9 @@
-import { createClient } from 'npm:@base44/sdk@0.8.25';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
 
 Deno.serve(async (req) => {
   try {
-    // Use service role directly — no user auth needed for public counter
-    const base44 = createClient({
-      serviceRoleKey: Deno.env.get('BASE44_SERVICE_ROLE_KEY'),
-      appId: Deno.env.get('BASE44_APP_ID')
-    });
+    // createClientFromRequest handles auth + app context from the request itself
+    const base44 = createClientFromRequest(req);
     
     // Fetch in pages of 500 until we have the full count — never loads full records
     let total = 0;
