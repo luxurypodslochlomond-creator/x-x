@@ -320,6 +320,30 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         return;
       }
 
+      // For plain-text files (.txt, .md, .csv, .json, .rtf, .log) — read on-device, no upload needed
+      const textExt = file.name?.toLowerCase().match(/\.(txt|md|csv|json|rtf|log|text)$/);
+      const isTextMime = file.type === 'text/plain' || file.type === 'text/markdown' || file.type === 'application/json' || file.type === 'text/csv' || file.type === 'text/rtf';
+      if (textExt || isTextMime) {
+        try {
+          const text = await file.text();
+          if (text && text.trim().length >= 10) {
+            setUploading(false);
+            setLetterText(text);
+            await runDecode(null, text);
+          } else {
+            setDecodeError('That text file looks empty. Paste the text in instead.');
+            setUploading(false);
+            setLoading(false);
+          }
+        } catch (e) {
+          setDecodeError('Could not read that text file. Paste the text in instead.');
+          setUploading(false);
+          setLoading(false);
+        }
+        e.target.value = '';
+        return;
+      }
+
       // For images and PDFs — upload then decode
       // Retry upload up to 2 times on network error
       let file_url;
