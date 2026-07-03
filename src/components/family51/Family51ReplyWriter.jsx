@@ -11,6 +11,7 @@ import SortedHelpLinks from './SortedHelpLinks';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import SortedFeedback from './SortedFeedback';
+import SortedResultShell, { SortedResultSection } from './SortedResultShell';
 
 const SITUATIONS = [
   'Disputing a bill', 'Replying to landlord', 'Debt collector',
@@ -476,156 +477,102 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
     result.key_points?.some(p => /theme|essay|research|idea|question|reflect|wonder|play|journal|PhD/i.test(p))
   );
 
-  // STEP 3: RESULT VIEW — CLEAN, REAL-TIME TONE SWITCHING
+  // STEP 3: RESULT VIEW — unified shell, same look as every other tool
+  const resetResult = () => { setResult(null); setContext(''); setSituation(''); setRecipient({ name: '', email: '', organisation: '' }); setSaved(false); };
+
+  const handleShareUnified = async () => {
+    await handleSave();
+  };
+
+  const handleCopyUnified = async () => {
+    await copyLetter();
+  };
+
+  const handleHandoffUnified = () => {
+    if (!onHandoff || isNonLetter) return null;
+    onHandoff({
+      subject_line: result?.subject_line,
+      letter_body: result?.letter_body,
+      situation_hint: `I sent a reply (${resultTone || tone} tone) to ${prefillContext?.sender || 'them'} about ${prefillContext?.summary || 'my situation'}. They ignored it.`,
+    });
+  };
+
   return (
     <div className="space-y-5">
       <AnimatePresence>
         {result && (
-          <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
-
-            {/* TONE SWITCHER — only for formal letters */}
-            {!isNonLetter && (
-            <div style={{ background: accentColor + '08', border: `1px solid ${accentColor}30`, borderRadius: 12, padding: '14px 16px' }}>
-              <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: accentColor, margin: '0 0 4px' }}>NEED A DIFFERENT TONE?</p>
-              <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                {TONES.map(t => (
-                  <motion.button
-                    key={t.id}
-                    onClick={() => handleToneChange(t.id)}
-                    disabled={loading}
-                    whileTap={!loading ? { scale: 0.95 } : {}}
-                    style={{
-                      padding: '10px 12px', borderRadius: 8, textAlign: 'center', fontSize: 11, fontWeight: 800,
-                      border: `2px solid ${resultTone === t.id ? accentColor : 'rgba(26,18,8,0.15)'}`,
-                      background: resultTone === t.id ? accentColor + '20' : 'rgba(26,18,8,0.03)',
-                      color: resultTone === t.id ? accentColor : 'rgba(26,18,8,0.55)',
-                      cursor: !loading ? 'pointer' : 'not-allowed',
-                      transition: 'all 0.15s', opacity: loading ? 0.5 : 1,
-                      letterSpacing: '0.08em',
-                    }}
-                  >
-                    {loading ? '...' : t.label}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-            )}
-
-            {/* KEY POINTS */}
-            {result.key_points?.length > 0 && (
-              <div style={{ border: `1px solid ${accentColor}20`, borderRadius: 8, padding: '14px 18px', background: `${accentColor}05` }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: accentColor + 'aa', marginBottom: 10 }}>{isNonLetter ? 'WHAT THIS IS REALLY ABOUT' : 'THIS LETTER MAKES THESE POINTS'}</p>
-                <div className="space-y-2">
-                  {result.key_points.map((p, i) => (
-                    <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                      <span style={{ color: accentColor, fontSize: 9, paddingTop: 4, fontWeight: 800 }}>{String(i+1).padStart(2,'0')}</span>
-                      <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{p}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* LETTER */}
-            <div style={{ border: '1px solid rgba(26,18,8,0.1)', borderRadius: 8, padding: '20px 22px', background: '#fff' }}>
-              {result.subject_line && (
-                <div style={{ borderBottom: '1px solid rgba(26,18,8,0.08)', paddingBottom: 14, marginBottom: 18 }}>
-                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(26,18,8,0.35)', margin: '0 0 5px' }}>SUBJECT LINE</p>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: '#1a1208', margin: 0, lineHeight: 1.4 }}>{result.subject_line}</p>
-                </div>
+          <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+            <SortedResultShell
+              accentColor={accentColor}
+              tool="reply"
+              onCopy={handleCopyUnified}
+              onShare={handleShareUnified}
+              onReset={resetResult}
+              onEmail={openInEmailApp}
+              onHandoff={onHandoff && !isNonLetter ? handleHandoffUnified : null}
+              handoffLabel="THEY IGNORED ME — GET DISPUTE HELP →"
+              flash={copied ? 'COPIED' : saved ? 'SAVED' : null}
+            >
+              {/* TONE SWITCHER — only for formal letters */}
+              {!isNonLetter && (
+                <SortedResultSection label="NEED A DIFFERENT TONE?" color={accentColor}>
+                  <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: '0 0 10px', lineHeight: 1.4 }}>Calm usually works best — but if they've already ignored you, try Firm or Formal.</p>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                    {TONES.map(t => (
+                      <motion.button
+                        key={t.id}
+                        onClick={() => handleToneChange(t.id)}
+                        disabled={loading}
+                        whileTap={!loading ? { scale: 0.95 } : {}}
+                        style={{
+                          padding: '10px 12px', borderRadius: 8, textAlign: 'center', fontSize: 11, fontWeight: 800,
+                          border: `2px solid ${resultTone === t.id ? accentColor : 'rgba(26,18,8,0.15)'}`,
+                          background: resultTone === t.id ? accentColor + '20' : 'rgba(26,18,8,0.03)',
+                          color: resultTone === t.id ? accentColor : 'rgba(26,18,8,0.55)',
+                          cursor: !loading ? 'pointer' : 'not-allowed',
+                          transition: 'all 0.15s', opacity: loading ? 0.5 : 1,
+                          letterSpacing: '0.08em',
+                        }}
+                      >
+                        {loading ? '...' : t.label}
+                      </motion.button>
+                    ))}
+                  </div>
+                </SortedResultSection>
               )}
-              <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.75, margin: 0 }}>{result.letter_body}</pre>
-            </div>
 
-            {/* TIP */}
-            {result.tip && (
-              <div style={{ border: '1px solid rgba(234,179,8,0.2)', borderRadius: 8, padding: '12px 16px', background: 'rgba(234,179,8,0.04)', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                <div style={{ width: 3, borderRadius: 2, background: '#eab308', alignSelf: 'stretch', flexShrink: 0 }} />
-                <div>
-                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: '#eab308', marginBottom: 5 }}>BEFORE YOU SEND</p>
+              {/* KEY POINTS */}
+              {result.key_points?.length > 0 && (
+                <SortedResultSection label={isNonLetter ? 'WHAT THIS IS REALLY ABOUT' : 'THIS LETTER MAKES THESE POINTS'} color={accentColor}>
+                  <div className="space-y-2">
+                    {result.key_points.map((p, i) => (
+                      <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                        <span style={{ color: accentColor, fontSize: 9, paddingTop: 4, fontWeight: 800 }}>{String(i+1).padStart(2,'0')}</span>
+                        <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{p}</span>
+                      </div>
+                    ))}
+                  </div>
+                </SortedResultSection>
+              )}
+
+              {/* LETTER */}
+              <SortedResultSection color={accentColor}>
+                {result.subject_line && (
+                  <div style={{ borderBottom: '1px solid rgba(26,18,8,0.08)', paddingBottom: 14, marginBottom: 18 }}>
+                    <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(26,18,8,0.35)', margin: '0 0 5px' }}>SUBJECT LINE</p>
+                    <p style={{ fontSize: 15, fontWeight: 700, color: '#1a1208', margin: 0, lineHeight: 1.4 }}>{result.subject_line}</p>
+                  </div>
+                )}
+                <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.75, margin: 0 }}>{result.letter_body}</pre>
+              </SortedResultSection>
+
+              {/* TIP */}
+              {result.tip && (
+                <SortedResultSection label="BEFORE YOU SEND" color="#eab308">
                   <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
-                </div>
-              </div>
-            )}
-
-            {/* ACTIONS — clean, three buttons like decoder */}
-            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-              <motion.button onClick={copyLetter} whileTap={{ scale: 0.95 }} style={{
-                flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.06em', cursor: 'pointer',
-                border: copied ? '1px solid rgba(34,197,94,0.6)' : accentColor + '60',
-                background: copied ? 'rgba(34,197,94,0.08)' : `${accentColor}08`,
-                color: copied ? '#22c55e' : accentColor,
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-              }}>
-                {copied ? 'COPIED' : 'COPY'}
-              </motion.button>
-              <motion.button onClick={() => openInEmailApp()} whileTap={{ scale: 0.95 }} style={{
-                flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.06em', cursor: 'pointer',
-                border: '1px solid rgba(34,197,94,0.35)',
-                background: 'rgba(34,197,94,0.05)',
-                color: '#16a34a',
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-              }}>
-                EMAIL
-              </motion.button>
-              <button
-                onClick={handleSave}
-                style={{
-                  flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-                  letterSpacing: '0.06em', cursor: 'pointer',
-                  border: '1px solid rgba(34,197,94,0.35)',
-                  background: saved ? 'rgba(34,197,94,0.1)' : 'rgba(34,197,94,0.05)',
-                  color: saved ? '#22c55e' : '#16a34a',
-                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                }}
-              >
-                {saved ? 'SAVED' : 'SHARE'}
-              </button>
-            </div>
-
-            {/* HANDOFF — escalate to dispute help (only for formal letters) */}
-            {onHandoff && !isNonLetter && (
-              <motion.button
-                onClick={() => onHandoff({
-                  subject_line: result?.subject_line,
-                  letter_body: result?.letter_body,
-                  situation_hint: `I sent a reply (${resultTone || tone} tone) to ${prefillContext?.sender || 'them'} about ${prefillContext?.summary || 'my situation'}. They ignored it.`,
-                })}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  width: '100%', padding: '14px 0', borderRadius: 12, fontSize: 12,
-                  fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer',
-                  border: '1px solid rgba(239,68,68,0.4)',
-                  background: 'rgba(239,68,68,0.08)', color: '#ef4444',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                  transition: 'all 0.15s',
-                }}
-              >
-                THEY IGNORED ME — GET DISPUTE HELP →
-              </motion.button>
-            )}
-
-
-
-            <motion.button onClick={() => { setResult(null); setContext(''); setSituation(''); setRecipient({ name: '', email: '', organisation: '' }); setSaved(false); }} whileTap={{ scale: 0.95 }} style={{
-              width: '100%', padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-              letterSpacing: '0.06em', cursor: 'pointer',
-              border: '1px solid rgba(26,18,8,0.15)',
-              background: 'rgba(26,18,8,0.03)',
-              color: 'rgba(26,18,8,0.5)',
-              marginTop: 8,
-            }}>
-              NEW
-            </motion.button>
-
-            <SortedFeedback tool="reply" accentColor={accentColor} />
-
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
-               Guidance only — not legal advice.
-            </p>
+                </SortedResultSection>
+              )}
+            </SortedResultShell>
           </motion.div>
         )}
       </AnimatePresence>

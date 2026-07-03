@@ -12,6 +12,7 @@ import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import SortedPrivacyStrip from './SortedPrivacyStrip';
+import SortedResultShell, { SortedResultSection } from './SortedResultShell';
 
 const CONFLICT_TYPES = [
   { id: 'neighbour',  label: 'NEIGHBOUR',   desc: 'Noise, boundaries, shared areas' },
@@ -422,94 +423,74 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
         )}
       </AnimatePresence>
 
-      {/* RESULT */}
+      {/* RESULT — unified shell, same look as every other tool */}
       <AnimatePresence>
         {result && !result._error && (
-          <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+          <motion.div ref={resultRef} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+            <SortedResultShell
+              accentColor={accentColor}
+              tool="conflict"
+              onCopy={() => {
+                const text = result.situation_assessment + '\n\nYOUR POSITION:\n' + result.legal_position + '\n\nWHAT TO DO:\n' + (result.recommended_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n') || '') + '\n\nVia SORTED — uf51.love/Sorted';
+                copy(text, 'all');
+              }}
+              onShare={handleSave}
+              onReset={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }}
+              flash={copied ? 'COPIED' : emailSent ? 'SAVED' : null}
+            >
+              <SortedResultSection label="SITUATION ASSESSMENT" color={accentColor}>
+                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
+              </SortedResultSection>
 
-            <Card label="SITUATION ASSESSMENT" color={accentColor}>
-              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.65, margin: 0 }}>{result.situation_assessment}</p>
-            </Card>
+              <SortedResultSection label="YOUR POSITION" color="#06b6d4">
+                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
+              </SortedResultSection>
 
-            <Card label="YOUR POSITION" color="#06b6d4">
-              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.65, margin: 0 }}>{result.legal_position}</p>
-            </Card>
+              <SortedResultSection label="WHAT TO DO" color="#22c55e">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {result.recommended_steps?.map((step, i) => (
+                    <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                      <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
+                      <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.55 }}>{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </SortedResultSection>
 
-            <Card label="WHAT TO DO" color="#22c55e">
-              <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {result.recommended_steps?.map((step, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 11, fontWeight: 800, color: '#22c55e', minWidth: 18, paddingTop: 2 }}>{i + 1}.</span>
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', lineHeight: 1.55 }}>{step}</span>
-                  </li>
-                ))}
-              </ol>
-            </Card>
+              {result.what_to_say && (
+                <SortedResultSection label="WHAT TO SAY / SEND" color={accentColor}>
+                  <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: '0 0 12px' }}>{result.what_to_say}</pre>
+                  <motion.button onClick={() => copy(result.what_to_say, 'say')} whileTap={{ scale: 0.95 }} style={{ padding: '8px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
+                    {copied === 'say' ? 'COPIED' : 'COPY THIS'}
+                  </motion.button>
+                </SortedResultSection>
+              )}
 
-            {result.what_to_say && (
-              <Card label="WHAT TO SAY / SEND" color={accentColor}>
-                <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.65, margin: '0 0 12px' }}>{result.what_to_say}</pre>
-                <motion.button onClick={() => copy(result.what_to_say, 'say')} whileTap={{ scale: 0.95 }} style={{ padding: '8px 16px', borderRadius: 8, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
-                  {copied === 'say' ? 'COPIED' : 'COPY THIS'}
-                </motion.button>
-              </Card>
-            )}
+              <SortedResultSection label="WHAT NOT TO DO" color="#ef4444">
+                <div className="space-y-2">
+                  {result.what_not_to_do?.map((item, i) => (
+                    <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                      <span style={{ color: '#ef4444', fontSize: 10, paddingTop: 3 }}>X</span>
+                      <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)' }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </SortedResultSection>
 
-            <Card label="WHAT NOT TO DO" color="#ef4444">
-              <div className="space-y-2">
-                {result.what_not_to_do?.map((item, i) => (
-                  <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <span style={{ color: '#ef4444', fontSize: 10, paddingTop: 3 }}>X</span>
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            {result.if_it_escalates && (
-              <Card label="IF IT ESCALATES" color="#eab308">
-                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_it_escalates}</p>
-              </Card>
-            )}
-
-            {/* SAVE / SHARE / NEW — three buttons like decoder */}
-            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-              <button
-                onClick={handleSave}
-                style={{
-                  flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-                  letterSpacing: '0.06em', cursor: 'pointer',
-                  border: '1px solid rgba(34,197,94,0.35)',
-                  background: emailSent ? 'rgba(34,197,94,0.1)' : 'rgba(34,197,94,0.05)',
-                  color: '#16a34a',
-                  WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-                }}
-              >
-                {emailSent ? 'SAVED' : 'SHARE'}
-              </button>
-              <motion.button onClick={() => { setResult(null); setWhat(''); setConflictType(''); setEmailSent(false); setEmailAddr(''); }} whileTap={{ scale: 0.95 }} style={{
-                flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.06em', cursor: 'pointer',
-                border: '1px solid rgba(26,18,8,0.15)',
-                background: 'rgba(26,18,8,0.03)',
-                color: 'rgba(26,18,8,0.5)',
-                WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-              }}>
-                NEW
-              </motion.button>
-            </div>
-
-            <SortedFeedback tool="conflict" accentColor={accentColor} />
-
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', textAlign: 'center', lineHeight: 1.5, margin: '12px 0 0' }}>
-               Guidance only — not legal advice.
-            </p>
+              {result.if_it_escalates && (
+                <SortedResultSection label="IF IT ESCALATES" color="#eab308">
+                  <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', lineHeight: 1.65, margin: 0 }}>{result.if_it_escalates}</p>
+                </SortedResultSection>
+              )}
+            </SortedResultShell>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   );
 }
+
+
 
 const THINKING_STEPS = [
   "Reading your situation…",
