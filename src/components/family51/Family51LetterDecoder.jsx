@@ -156,6 +156,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
         response_json_schema: {
           type: 'object',
           properties: {
+            document_type: { type: 'string', description: 'What type of letter/document this is — council tax, debt collector, parking fine, etc.' },
             letter_summary: { type: 'string' },
             sender: { type: 'string', description: 'Who sent the letter — the organisation or company name. "Unknown" if not identifiable.' },
             reference_number: { type: 'string', description: 'Any reference, case, account, or PCN number on the letter. "Not found" if none.' },

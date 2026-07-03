@@ -112,13 +112,14 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
       ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
       prompt: SORTED_SOUL + '\n' + `Analyse this contract in plain language so an ordinary person understands what they're signing.
 
-Contract type: ${contractType || 'Not specified'}
+Detect what type of contract this is and state it in document_type.
 
 CONTRACT TEXT:
 ${content ? `\n---\n${content}\n---` : '(See attached image)'}
 
 Analyse this contract and respond ONLY with valid JSON in this exact format:
 {
+  "document_type": "what type of contract this is — tenancy, employment, service, settlement, etc.",
   "summary": "2-3 sentence plain language summary of what this contract is and what it commits the person to",
   "red_flags": ["list of concerning clauses, unfair terms, or things that could harm the person — each as a short plain sentence"],
   "what_is_missing": ["list of standard protections or clauses that are absent from this contract and should be there — these silences can be the most important thing"],
@@ -130,6 +131,7 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
       response_json_schema: {
         type: 'object',
         properties: {
+          document_type:    { type: 'string', description: 'What type of contract this is' },
           summary:          { type: 'string' },
           red_flags:        { type: 'array', items: { type: 'string' } },
           what_is_missing:  { type: 'array', items: { type: 'string' } },
@@ -250,20 +252,6 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
       {/* FORM */}
       {!loading && !result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-
-          {/* Contract type chips */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-            {CONTRACT_TYPES.map(t => (
-              <button key={t.id} onClick={() => setContractType(t.id === contractType ? '' : t.id)}
-                style={{ fontSize: 12, fontWeight: 700, padding: '5px 12px', borderRadius: 20,
-                  border: `1.5px solid ${contractType === t.id ? accentColor : 'rgba(26,18,8,0.15)'}`,
-                  background: contractType === t.id ? `${accentColor}15` : 'transparent',
-                  color: contractType === t.id ? accentColor : 'rgba(26,18,8,0.55)',
-                  cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}>
-                {t.label}
-              </button>
-            ))}
-          </div>
 
           <textarea
             value={inputText}

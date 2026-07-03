@@ -158,6 +158,7 @@ CRITICAL RULES:
 GOAL: ${gt?.label}
 THEIR SITUATION: ${what}${fileContext}
 
+- conflict_type: What type of conflict this is (relationship, family, neighbour, etc.)
 - situation_assessment: 1-2 warm, honest sentences. Validate what happened. Help them see it clearly without catastrophising.
 - legal_position: Keep this VERY brief and only relevant. For a personal argument, this might just be "Nothing legal here — this is a relationship matter. Focus on the conversation, not the courtroom." Only bring in law if it is genuinely relevant.
 - recommended_steps: Array of exactly 2-3 simple, human steps. Things like: take a breath, give it a few hours, then have a calm conversation. NOT legal filings.
@@ -175,6 +176,7 @@ THEIR SITUATION: ${what}${fileContext}
 
 Give them a plan that actually works in ${geo.country}. Use real law. Real bodies. Real steps. Real contact details.
 
+- conflict_type: What type of conflict this is (neighbour, workplace, landlord, consumer, etc.)
 - situation_assessment: 2-3 honest sentences. Who has the stronger position and why.
 - legal_position: Their actual rights under ${geo.jurisdiction} — cite specific legislation. Keep it concise.
 - recommended_steps: Array of exactly 3 steps — specific, actionable, named. Include timing.
@@ -189,6 +191,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       response_json_schema: {
         type: 'object',
         properties: {
+          conflict_type:        { type: 'string', description: 'What type of conflict this is' },
           situation_assessment: { type: 'string' },
           legal_position:       { type: 'string' },
           recommended_steps:    { type: 'array', items: { type: 'string' } },
@@ -340,27 +343,10 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       {/* OPTIONAL — conflict type & evidence */}
       <details style={{ cursor: 'pointer' }}>
         <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-         + OPTIONAL: conflict type &amp; evidence
+         + OPTIONAL: add evidence
         </summary>
         <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {/* Conflict type grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-            {CONFLICT_TYPES.map(t => (
-              <button
-                key={t.id}
-                onClick={() => setConflictType(conflictType === t.id ? '' : t.id)}
-                style={{
-                  padding: '10px 12px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                  border: `1px solid ${conflictType === t.id ? accentColor : 'rgba(26,18,8,0.12)'}`,
-                  background: conflictType === t.id ? `${accentColor}15` : '#fff',
-                  transition: 'all 0.15s',
-                }}
-              >
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: conflictType === t.id ? accentColor : 'rgba(26,18,8,0.6)', margin: 0 }}>{t.label}</p>
-                <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', margin: '2px 0 0', lineHeight: 1.3 }}>{t.desc}</p>
-              </button>
-            ))}
-          </div>
+
           {/* File upload */}
           <label style={{ cursor: uploading ? 'not-allowed' : 'pointer', display: 'block' }}>
             <input type="file" multiple accept="image/*,video/*,.pdf,.doc,.docx" onChange={handleFileUpload} disabled={uploading} style={{ display: 'none' }} />

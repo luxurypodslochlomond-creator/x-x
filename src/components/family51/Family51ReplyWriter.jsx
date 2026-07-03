@@ -146,11 +146,12 @@ If (A) — official letter or demand:
 - MAXIMUM 350 words. Tight, no fluff.
 - tip: what will ACTUALLY happen in practice when they receive this.
 
-Return JSON: subject_line (string), letter_body (string), key_points (array of 2-3 strings), tip (string).`;
+Return JSON: document_type (string — what type of document/situation this is), subject_line (string), letter_body (string), key_points (array of 2-3 strings), tip (string).`;
 
     const schema = {
       type: 'object',
       properties: {
+        document_type: { type: 'string', description: 'What type of document/situation this is — official letter, personal, academic, etc.' },
         subject_line: { type: 'string' },
         letter_body:  { type: 'string' },
         key_points:   { type: 'array', items: { type: 'string' } },
@@ -376,18 +377,7 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
               style={inputStyle}
             />
           </div>
-          {!prefillContext && (
-            <div style={{ marginTop: 12 }}>
-              <p style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.08em', margin: '0 0 6px' }}>SITUATION TYPE (optional)</p>
-              <div className="flex flex-wrap gap-2">
-                {SITUATIONS.map(s => (
-                  <Chip key={s} active={situation === s} color={accentColor} onClick={() => setSituation(situation === s ? '' : s)}>
-                    {s}
-                  </Chip>
-                ))}
-              </div>
-            </div>
-          )}
+
         </div>
 
         {/* MY DETAILS — saved, so you never re-type them */}
