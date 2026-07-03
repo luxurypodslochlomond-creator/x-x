@@ -484,11 +484,13 @@ Don't worry about formatting. Just get it all in. If the law applies in a differ
               onClick={decode}
               whileTap={{ scale: 0.97 }}
               style={{
-                width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
-                fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
-                border: `2px solid ${accentColor}`,
-                 background: accentColor, color: '#fff',
-                }}
+                 width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
+                 fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
+                 border: 'none',
+                 background: `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)`,
+                 color: '#fff',
+                 boxShadow: `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30`,
+                  }}
                 >
                 Decode this letter →
             </motion.button>
@@ -500,9 +502,11 @@ Don't worry about formatting. Just get it all in. If the law applies in a differ
                 style={{
                   width: '100%', padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
                   letterSpacing: '0.04em', cursor: 'pointer',
-                  border: `2px solid ${accentColor}`,
-                  background: accentColor, color: '#000',
+                  border: 'none',
+                  background: `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)`,
+                  color: '#fff',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                  boxShadow: `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30`,
                 }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

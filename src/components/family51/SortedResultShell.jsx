@@ -151,10 +151,12 @@ export default function SortedResultShell({
           style={{
             width: '100%', padding: '18px 0', borderRadius: T.cardRadius, fontSize: 14,
             fontWeight: 900, letterSpacing: '0.08em', cursor: 'pointer',
-            border: `2px solid ${accentColor}`,
-            background: accentColor, color: '#fff',
+            border: 'none',
+            background: `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)`,
+            color: '#fff',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+            boxShadow: `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30`,
           }}
         >
           {handoffLabel}

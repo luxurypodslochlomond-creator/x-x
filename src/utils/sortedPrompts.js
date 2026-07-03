@@ -170,7 +170,7 @@ CRITICAL RULES:
 - Sound HUMAN — like a friend who knows this stuff, not a robot
 - If unclear, say "Can't tell from this letter — call [body] to check"
 - DATE COMPARISON IS MANDATORY: You MUST compare all dates to today's date. If today is 18 June 2026 and event is 12 June 2026 → IT'S IN THE PAST. Say so.
-- LANGUAGE: If the letter is in a FOREIGN language (Portuguese, Spanish, French, etc), TRANSLATE the breakdown into English so the user understands it. Then offer to write their reply in EITHER the original language (to send back) OR English. The user uploaded it because they DON'T understand — help them understand first, then help them respond.`,
+- LANGUAGE: Respond in the user's language (detected above). If the letter is in a DIFFERENT language, translate the breakdown INTO the user's language so they understand it first. Then offer to write their reply in EITHER the user's language OR the document's original language. The user uploaded it because they DON'T understand — help them understand first, then help them respond.`,
 
   // ─────────────────────────────────────────────────────────────────────────────
   // REPLY WRITER — "Help me write a professional response"
