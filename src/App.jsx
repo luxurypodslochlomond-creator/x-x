@@ -128,9 +128,13 @@ const AuthenticatedApp = () => {
   useEffect(() => {
     // Use View Transitions API for instant, native browser transitions (iOS/Android/Samsung feel)
     if (document.startViewTransition && document.visibilityState !== 'hidden') {
-      document.startViewTransition(() => {
-        document.documentElement.style.viewTransitionName = 'page-transition';
-      });
+      try {
+        document.startViewTransition(() => {
+          document.documentElement.style.viewTransitionName = 'page-transition';
+        });
+      } catch (e) {
+        // View transitions can throw if visibility changes mid-transition — safe to ignore
+      }
     }
     setIsTransitioning(true);
     const timer = setTimeout(() => {
