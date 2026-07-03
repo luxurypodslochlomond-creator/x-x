@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SortedResultShell, { SortedResultSection, SortedSteps } from './SortedResultShell';
+import SortedDeadlineBar from './SortedDeadlineBar';
 
 const SEVERITY_CONFIG = {
   'NOT URGENT':      { color: '#22c55e' },
@@ -85,6 +86,8 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       handoffLabel="CONTINUE → WRITE MY REPLY"
       flash={flash}
     >
+      <SortedDeadlineBar result={result} accentColor={accentColor} />
+
       {result.action_steps?.length > 0 && (
         <SortedResultSection label="WHAT TO DO" color={accentColor}>
           <SortedSteps steps={result.action_steps} color={accentColor} />

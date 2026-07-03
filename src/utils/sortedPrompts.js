@@ -140,6 +140,7 @@ Step 10: If document is UNCLEAR/BLURRED → Say what you can't read, tell them w
 OUTPUT — KEEP IT SHORT AND CALM:
 Return JSON with ONLY these fields:
 - letter_summary: Max 5 words. E.g. "Council tax debt demand"
+- sender: Who sent the letter — the organisation or company name. "Unknown" if not identifiable from the letter.
 - severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - key_deadline: The EARLIEST deadline that matters OR null if all expired
 - amount: Specific amount or null

@@ -12,6 +12,7 @@ import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedStreamingResult from './SortedStreamingResult';
+import SortedDeadlineBar from './SortedDeadlineBar';
 import SortedPatternShareToggle from './SortedPatternShareToggle';
 import LetterInstantScan from './LetterInstantScan';
 import SortedPrivacyStrip from './SortedPrivacyStrip';
@@ -156,8 +157,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
           type: 'object',
           properties: {
             letter_summary: { type: 'string' },
+            sender: { type: 'string', description: 'Who sent the letter — the organisation or company name. "Unknown" if not identifiable.' },
             severity: { type: 'string' },
-            key_deadline: { type: 'string' },
+            key_deadline: { type: 'string', description: 'The earliest deadline that matters, in a clear date format (e.g. "14 May 2026"). "No deadline mentioned" if none.' },
             amount: { type: 'string' },
             we_hear_you: { type: 'string' },
             what_this_means: { type: 'string' },
@@ -166,7 +168,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
             free_help: { type: 'array', items: { type: 'string' } },
             expired: { type: 'boolean' },
           },
-          required: ['letter_summary', 'severity', 'what_this_means', 'action_steps', 'free_help'],
+          required: ['letter_summary', 'sender', 'severity', 'what_this_means', 'action_steps', 'free_help'],
         },
       });
 
@@ -184,7 +186,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
 
       // Sanitize: coerce any accidental nested objects to strings
-      const STRING_FIELDS = ['letter_summary','sender','severity','key_deadline','amount','we_hear_you','what_this_means','if_you_ignore_this','one_sentence','financial_impact'];
+      const STRING_FIELDS = ['letter_summary','sender','severity','key_deadline','amount','we_hear_you','what_this_means','if_you_ignore_this','one_sentence','financial_impact','from'];
       STRING_FIELDS.forEach(k => { if (raw[k] && typeof raw[k] === 'object') raw[k] = JSON.stringify(raw[k]); });
       // Backwards compat: map old field names to new ones
       if (raw.three_steps && !raw.action_steps) raw.action_steps = raw.three_steps;
