@@ -72,70 +72,17 @@ function buildSteps(tool, input = '', geo = null) {
   const isRomanceScam= /met online|dating|love you|send money|western union|gift card|itunes|stranded|emergency/.test(hint);
 
   // ── LETTER TOOL ──────────────────────────────────────────────────────────────
+  // Honest steps — we don't guess the document type before the AI has read it.
+  // We only surface specifics we can see (amount, deadline, sender) without claiming
+  // to know what kind of letter it is. The AI delivers the verdict, not the loader.
   if (tool === 'letter') {
-    if (isCouncil) return [
-      { text: 'Reading your council letter',           sub: senderNote || 'Council tax, parking, planning, or benefit?' },
-      { text: 'Checking what they\'re actually claiming', sub: amountNote || 'Councils often get these wrong' },
-      { text: 'Checking your appeal rights',           sub: 'You have more time than they\'ll tell you' },
-      { text: 'Looking at the deadline',               sub: deadlineNote || 'Important — but you have options' },
-      { text: 'Finding your options',                  sub: 'Appeal, dispute, or negotiate a plan' },
-      { text: 'Plain English summary',                 sub: 'What this actually means for you' },
-    ];
-    if (isHMRC) return [
-      { text: 'Reading your HMRC letter',              sub: senderNote || 'These look scarier than they are' },
-      { text: 'Identifying exactly what they want',    sub: amountNote || 'Tax owed, penalty, or information request?' },
-      { text: 'Checking your appeal rights',           sub: 'You can always challenge HMRC — here\'s how' },
-      { text: 'Spotting the real deadline',            sub: deadlineNote || 'Some HMRC deadlines are extendable' },
-      { text: 'Mapping your options',                  sub: 'Appeal, payment plan, or dispute' },
-      { text: 'Plain English summary',                 sub: 'What it means and what to do next' },
-    ];
-    if (isDebt) return [
-      { text: 'Reading your debt letter',              sub: senderNote || 'Checking who sent this and why' },
-      { text: 'Verifying whether this debt is real',   sub: amountNote || 'Debt collector letters are often bluffs' },
-      { text: jurisdictionLabel ? `Checking your rights under ${jurisdictionLabel}` : 'Checking your rights', sub: 'Statute-barred? Time-limited? Disputed?' },
-      { text: 'Finding the real deadline',             sub: deadlineNote || 'Not all deadlines are legally binding' },
-      { text: 'Mapping your options',                  sub: `Dispute, negotiate, or ${debtScheme}` },
-      { text: 'Plain English summary',                 sub: 'What this actually means and what to do' },
-    ];
-    if (isEviction) return [
-      { text: 'Reading your eviction notice',          sub: senderNote || 'Checking the type and legal validity' },
-      { text: 'Verifying the notice is legally correct', sub: 'Invalid notices are surprisingly common' },
-      { text: 'Checking your notice period',           sub: deadlineNote || (jurisdictionLabel ? `Legal minimum under ${jurisdictionLabel}` : 'Legal minimum in your jurisdiction') },
-      { text: 'Looking at your tenancy rights',        sub: jurisdictionLabel ? `Rights under the ${tenantLaw}` : 'Section 21, Section 8 — what applies here' },
-      { text: 'Finding your options',                  sub: 'You have more time than you think' },
-      { text: 'Plain English summary',                 sub: `Contact ${consumerBody} if you need more support` },
-    ];
-    if (isEmployment) return [
-      { text: 'Reading your employment letter',        sub: senderNote || 'Disciplinary, dismissal, or redundancy?' },
-      { text: 'Checking employment law',               sub: 'Your rights in this jurisdiction' },
-      { text: 'Looking at the procedure followed',     sub: 'Procedural failures are your strongest card' },
-      { text: 'Spotting the deadline',                 sub: deadlineNote || 'Employment tribunal windows are short' },
-      { text: 'Finding your options',                  sub: 'Appeal, grievance, tribunal, or negotiate' },
-      { text: 'Plain English summary',                 sub: 'What this means and what to do next' },
-    ];
-    if (isCourt) return [
-      { text: 'Reading your court document',           sub: senderNote || 'Claim, summons, or judgment?' },
-      { text: 'Understanding what\'s being claimed',   sub: amountNote || 'Exact nature and amount' },
-      { text: 'Checking your response window',         sub: deadlineNote || 'Court deadlines are strict' },
-      { text: 'Looking at your defence options',       sub: refNote || 'More options than you think' },
-      { text: 'Finding free legal help',               sub: 'Real services for your situation' },
-      { text: 'Plain English summary',                 sub: 'Step by step what happens next' },
-    ];
-    if (isInsurance) return [
-      { text: 'Reading your insurance letter',         sub: senderNote || 'Claim, rejection, or policy change?' },
-      { text: 'Checking what they\'re deciding',       sub: amountNote || 'Full picture before reacting' },
-      { text: 'Looking at your policy rights',         sub: 'Insurers must follow FCA rules' },
-      { text: 'Checking appeal routes',                sub: deadlineNote || 'FOS complaints are free and powerful' },
-      { text: 'Finding your options',                  sub: 'Dispute, appeal, or escalate to ombudsman' },
-      { text: 'Plain English summary',                 sub: 'What this means and what to do' },
-    ];
     return [
-      { text: 'Reading your letter',                   sub: senderNote || 'Nothing stored — this stays private' },
-      { text: 'Identifying what type this is',         sub: 'Matching to known letter patterns' },
-      { text: jurisdictionLabel ? `Checking ${jurisdictionLabel}` : 'Checking what law applies', sub: jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'Your rights, your country, your situation' },
+      { text: 'Reading your letter',                   sub: senderNote || 'Every word — carefully' },
+      { text: 'Working out what this actually is',     sub: amountNote || 'Official letter, notice, or something else?' },
+      { text: jurisdictionLabel ? `Checking ${jurisdictionLabel}` : 'Checking what law applies', sub: jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'Your rights, your country' },
       { text: 'Spotting deadlines',                    sub: deadlineNote || 'Dates that actually matter' },
       { text: 'Finding your real options',             sub: amountNote || 'What you can actually do' },
-      { text: 'Writing plain English',                 sub: 'No jargon. No nonsense.' },
+      { text: 'Writing it in plain English',           sub: 'No jargon. No nonsense.' },
     ];
   }
 
