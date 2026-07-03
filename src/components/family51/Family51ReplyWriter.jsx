@@ -344,87 +344,23 @@ Return JSON: document_type (string — what type of document/situation this is),
           </div>
         </div>
 
-        {/* WHO TO SEND TO — recipient details */}
-        <div style={{ background: '#fff', border: '1px solid rgba(26,18,8,0.1)', borderRadius: 12, padding: '14px 16px' }}>
-          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.55)', margin: '0 0 10px' }}>WHO IS THIS GOING TO?</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <input
-              type="text"
-              value={recipient.name}
-              onChange={e => setRecipient(r => ({ ...r, name: e.target.value }))}
-              placeholder="Recipient name (e.g. John Smith)"
-              style={inputStyle}
-            />
-            <input
-              type="text"
-              value={recipient.organisation}
-              onChange={e => setRecipient(r => ({ ...r, organisation: e.target.value }))}
-              placeholder="Organisation (e.g. ACME Council)"
-              style={inputStyle}
-            />
-            <input
-              type="email"
-              value={recipient.email}
-              onChange={e => setRecipient(r => ({ ...r, email: e.target.value }))}
-              placeholder="Their email (opens in your email app)"
-              style={inputStyle}
-            />
-            <input
-              type="text"
-              value={recipient.address}
-              onChange={e => setRecipient(r => ({ ...r, address: e.target.value }))}
-              placeholder="Their address (so the letter is fully addressed)"
-              style={inputStyle}
-            />
-          </div>
-
+        {/* WHO TO SEND TO — just the name, keep it simple */}
+        <div>
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.55)', margin: '0 0 8px' }}>WHO IS THIS GOING TO?</p>
+          <input
+            type="text"
+            value={recipient.name}
+            onChange={e => setRecipient(r => ({ ...r, name: e.target.value }))}
+            placeholder="Recipient name (e.g. John Smith)"
+            style={{
+              ...inputStyle,
+              border: `1.5px solid ${recipient.name ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
+              borderRadius: 12, padding: '14px 16px',
+            }}
+            onFocus={e => e.target.style.borderColor = accentColor}
+            onBlur={e => e.target.style.borderColor = recipient.name ? accentColor + '90' : 'rgba(26,18,8,0.15)'}
+          />
         </div>
-
-        {/* MY DETAILS — saved, so you never re-type them */}
-        <details style={{ cursor: 'pointer' }}>
-          <summary style={{ fontSize: 9, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="3" stroke="rgba(26,18,8,0.45)" strokeWidth="2"/>
-                <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="rgba(26,18,8,0.45)" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-              MY DETAILS {sender.name ? `— ${sender.name}` : '(saved for next time)'}
-            </span>
-          </summary>
-          <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <input
-              type="text"
-              value={sender.name}
-              onChange={e => updateSender('name', e.target.value)}
-              placeholder="Your name"
-              style={inputStyle}
-            />
-            <input
-              type="email"
-              value={sender.email}
-              onChange={e => updateSender('email', e.target.value)}
-              placeholder="Your email"
-              style={inputStyle}
-            />
-            <input
-              type="text"
-              value={sender.address}
-              onChange={e => updateSender('address', e.target.value)}
-              placeholder="Your address (for the letterhead)"
-              style={inputStyle}
-            />
-            <input
-              type="tel"
-              value={sender.phone}
-              onChange={e => updateSender('phone', e.target.value)}
-              placeholder="Your phone (optional)"
-              style={inputStyle}
-            />
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.4)', margin: '4px 0 0', lineHeight: 1.4 }}>
-              Saved on this device only. Next time you write a letter, these fill in automatically.
-            </p>
-          </div>
-        </details>
 
         {/* WRITE BUTTON */}
         <AnimatePresence mode="wait">

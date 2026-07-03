@@ -59,6 +59,7 @@ const WristHealingPrivacyPage = React.lazy(() => import('./pages/WristHealingPri
 const Shed51Page = React.lazy(() => import('./pages/Shed51'));
 // Sorted pages - NOT lazy for instant loading
 import Family51Page from './pages/Family51';
+import SortedHome from './pages/SortedHome';
 import SortedTermsPage from './pages/SortedTerms';
 import SortedPrivacyPage from './pages/SortedPrivacy';
 import SortedFAQPage from './pages/SortedFAQ';
@@ -178,7 +179,7 @@ const AuthenticatedApp = () => {
       <Route path="/WristHealingTerms" element={<WristHealingTermsPage />} />
       <Route path="/WristHealingPrivacy" element={<WristHealingPrivacyPage />} />
       <Route path="/Shed51" element={<Shed51Page />} />
-      <Route path="/Sorted" element={<SortedLayout currentPage="Sorted"><Family51Page /></SortedLayout>} />
+      <Route path="/Sorted" element={<SortedLayout currentPage="Sorted"><SortedHome /></SortedLayout>} />
       <Route path="/SortedTerms" element={<SortedLayout currentPage="SortedTerms"><SortedTermsPage /></SortedLayout>} />
       <Route path="/SortedPrivacy" element={<SortedLayout currentPage="SortedPrivacy"><SortedPrivacyPage /></SortedLayout>} />
       <Route path="/SortedFAQ" element={<SortedLayout currentPage="SortedFAQ"><SortedFAQPage /></SortedLayout>} />
