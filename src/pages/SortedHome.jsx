@@ -41,11 +41,12 @@ export default function SortedHome() {
           <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: ACCENT_COLOR }}>ANY LETTER · ANY LANGUAGE · ANY COUNTRY</span>
         </div>
         <h1 style={{
-          fontSize: 'clamp(28px, 7vw, 38px)', fontWeight: 900, lineHeight: 1.1,
-          margin: '0 0 12px', color: '#1a1a1a', letterSpacing: '-0.035em',
+          fontSize: 'clamp(28px, 7vw, 40px)', fontWeight: 700, lineHeight: 1.08,
+          margin: '0 0 14px', color: '#1a1a1a', letterSpacing: '-0.025em',
+          fontFamily: "'Fraunces', Georgia, serif",
         }}>
           Whatever that letter says —{' '}
-          <span style={{ color: ACCENT_COLOR }}>we've got you.</span>
+          <em style={{ color: ACCENT_COLOR, fontStyle: 'italic', fontWeight: 600 }}>we've got you.</em>
         </h1>
         <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.5)', lineHeight: 1.55, margin: 0, maxWidth: 440, marginLeft: 'auto', marginRight: 'auto' }}>
           Paste it, snap a photo, or tell us what's happening. We'll decode it into plain language and tell you exactly what to do next.
@@ -57,34 +58,15 @@ export default function SortedHome() {
         <SortedV2Flow />
       </div>
 
-      {/* HOW IT WORKS — minimal, refined */}
-      <div style={{ padding: '28px 20px 0', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 0 }}>
-          {[
-            { num: '1', label: 'Paste or snap', desc: 'Letter, photo, or just describe it' },
-            { num: '2', label: 'We decode it', desc: 'Plain language, any language' },
-            { num: '3', label: 'Know your next step', desc: 'Actions, replies, real help' },
-          ].map((step, i) => (
-            <React.Fragment key={i}>
-              <div style={{ flex: 1, textAlign: 'center', padding: '0 6px' }}>
-                <div style={{
-                  width: 40, height: 40, borderRadius: '50%',
-                  background: '#fff', border: `2px solid ${ACCENT_COLOR}30`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  margin: '0 auto 8px', fontSize: 14, fontWeight: 900, color: ACCENT_COLOR,
-                  boxShadow: '0 2px 8px rgba(26,18,8,0.04)',
-                }}>{step.num}</div>
-                <div style={{ fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.7)', marginBottom: 2 }}>{step.label}</div>
-                <div style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', lineHeight: 1.3 }}>{step.desc}</div>
-              </div>
-              {i < 2 && (
-                <div style={{ display: 'flex', alignItems: 'center', paddingTop: 14 }}>
-                  <div style={{ width: 20, height: 2, background: `${ACCENT_COLOR}20`, borderRadius: 1 }} />
-                </div>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
+      {/* WARM WHISPER — replaces the numbered steps. Feels human, not instructional. */}
+      <div style={{ padding: '20px 20px 0', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center' }}>
+        <p style={{
+          fontSize: 13, color: 'rgba(26,18,8,0.38)', margin: 0, lineHeight: 1.5,
+          fontWeight: 500, fontStyle: 'italic',
+          fontFamily: "'Fraunces', Georgia, serif",
+        }}>
+          Paste it. We read it. You know what to do.
+        </p>
       </div>
 
       {/* LIVE COUNTER */}

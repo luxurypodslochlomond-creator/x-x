@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Camera, Upload, MapPin, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { Camera, Upload, MapPin, ArrowRight, CheckCircle2, Sparkles, Lock } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -259,7 +259,7 @@ Return JSON:
 
           {/* ACTION ROW — camera + upload + location */}
           <div style={{
-            padding: '12px 18px 16px', borderTop: '1px solid rgba(26,18,8,0.05)',
+            padding: '12px 18px 0', borderTop: '1px solid rgba(26,18,8,0.05)',
             display: 'flex', alignItems: 'center', gap: 8,
           }}>
             <motion.button whileTap={{ scale: 0.95 }} onClick={() => cameraInputRef.current?.click()}
@@ -283,6 +283,16 @@ Return JSON:
               <MapPin size={12} color={ACCENT} />
               <GeoSelector geo={geo} onChange={setGeo} accentColor={ACCENT} />
             </div>
+          </div>
+
+          {/* TRUST WHISPER — lives INSIDE the box, right where vulnerability happens */}
+          <div style={{
+            padding: '10px 18px 14px', display: 'flex', alignItems: 'center', gap: 6,
+          }}>
+            <Lock size={11} color="rgba(26,18,8,0.25)" style={{ flexShrink: 0 }} />
+            <p style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.3)', margin: 0, fontWeight: 500, lineHeight: 1.4 }}>
+              Nothing leaves your device until you sort it · 3 free · no signup
+            </p>
           </div>
         </motion.div>
 
