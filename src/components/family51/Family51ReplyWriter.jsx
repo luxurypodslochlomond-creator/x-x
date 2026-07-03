@@ -178,10 +178,10 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
       return null;
     };
 
-    // Use fast model directly — no fallback chain that doubles wait time
+    // Claude for quality — single call, no slow double-fallback chain
     let result = null;
     try {
-      result = await attemptGenerate('gpt_5_mini');
+      result = await attemptGenerate('claude_sonnet_4_6');
     } catch (err) {
       console.error('SORTED: generation failed:', err?.message);
       throw new Error('Could not generate your letter. Please check your connection and try again.');

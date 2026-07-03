@@ -108,6 +108,7 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
     }
 
     const res = await base44.integrations.Core.InvokeLLM({
+      model: 'claude_sonnet_4_6',
       ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
       prompt: SORTED_SOUL + '\n' + `Analyse this contract in plain language so an ordinary person understands what they're signing.
 

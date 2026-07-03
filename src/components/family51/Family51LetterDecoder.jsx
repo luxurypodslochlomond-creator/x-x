@@ -150,7 +150,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType) + learningContext;
 
       const response = await base44.integrations.Core.InvokeLLM({
-        model: 'gpt_5_mini',
+        model: 'claude_sonnet_4_6',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
         prompt: promptText,
         response_json_schema: {
