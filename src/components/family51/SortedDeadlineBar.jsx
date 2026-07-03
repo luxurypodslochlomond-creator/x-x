@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CalendarPlus, AlertCircle, Clock } from 'lucide-react';
+import { CalendarPlus, AlertCircle, Clock, Hash, FileText, Mail, Phone, MapPin } from 'lucide-react';
 
 /**
- * SortedDeadlineBar — shows sender + deadline with live countdown.
- * One tap saves a reminder to their phone calendar. Zero headache.
+ * SortedDeadlineBar — unified "Key Intel" strip.
+ * Shows sender, reference number, letter date, reply-to contact, and deadline
+ * with live countdown. One tap saves a reminder to their phone calendar.
  */
+
 function parseDeadline(dateStr) {
   if (!dateStr) return null;
-  // Try common formats
   const cleaned = dateStr.trim().replace(/\s+/g, ' ');
-  // Try ISO first
   let d = new Date(cleaned);
   if (isNaN(d)) {
-    // Try "14 May 2026", "14 May", "May 14, 2026", etc
     const formats = [
       /^\d{1,2}\s+\w+\s+\d{4}$/,
       /^\d{1,2}\s+\w+$/,
@@ -24,7 +23,6 @@ function parseDeadline(dateStr) {
     for (const f of formats) {
       if (f.test(cleaned)) { d = new Date(cleaned); break; }
     }
-    // Add current year if only day+month
     if (isNaN(d) && /^\d{1,2}\s+\w+$/.test(cleaned)) {
       d = new Date(cleaned + ' ' + new Date().getFullYear());
     }
@@ -42,7 +40,6 @@ function buildICS(summary, deadline, description) {
   start.setHours(9, 0, 0, 0);
   const end = new Date(start);
   end.setHours(10, 0, 0, 0);
-  // Reminder 2 days before
   const alarmStart = new Date(start);
   alarmStart.setDate(alarmStart.getDate() - 2);
 
@@ -67,24 +64,53 @@ function buildICS(summary, deadline, description) {
   ].join('\r\n');
 }
 
+function isReal(value) {
+  if (!value) return false;
+  const v = String(value).trim();
+  return v.length > 1 && !['unknown', 'n/a', 'not found', 'null', 'none', 'no deadline mentioned'].includes(v.toLowerCase());
+}
+
+function detectContactIcon(contact) {
+  const c = (contact || '').toLowerCase();
+  if (c.includes('@') || c.includes('email') || c.includes('mail:')) return Mail;
+  if (/\b\d{3,}/.test(c) || c.includes('phone') || c.includes('call') || c.includes('tel')) return Phone;
+  if (c.includes('address') || c.includes('street') || c.includes('st,') || c.includes('reply to')) return MapPin;
+  return Mail;
+}
+
+function IntelRow({ icon: Icon, label, value, color }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <Icon size={13} color={color || 'rgba(26,18,8,0.4)'} style={{ flexShrink: 0 }} />
+      <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)', minWidth: 42 }}>{label}</span>
+      <p style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', margin: 0, flex: 1, wordBreak: 'break-word' }}>{value}</p>
+    </div>
+  );
+}
+
 export default function SortedDeadlineBar({ result, accentColor = '#f97316' }) {
   const [saved, setSaved] = useState(false);
   const [now, setNow] = useState(Date.now());
 
-  // Live countdown — ticks every minute
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 60000);
     return () => clearInterval(t);
   }, []);
 
   const sender = result?.sender;
+  const refNumber = result?.reference_number;
+  const letterDate = result?.letter_date;
+  const replyTo = result?.reply_to_contact;
   const deadlineStr = result?.key_deadline;
   const deadlineDate = parseDeadline(deadlineStr);
 
-  const hasSender = sender && sender !== 'Unknown' && sender !== 'N/A' && sender.length > 1;
+  const hasSender = isReal(sender);
+  const hasRef = isReal(refNumber);
+  const hasLetterDate = isReal(letterDate);
+  const hasReplyTo = isReal(replyTo);
   const hasDeadline = deadlineStr && deadlineStr !== 'No deadline mentioned' && deadlineStr !== 'null' && deadlineDate;
 
-  if (!hasSender && !hasDeadline) return null;
+  if (!hasSender && !hasDeadline && !hasRef && !hasLetterDate && !hasReplyTo) return null;
 
   // Calculate countdown
   let countdown = null;
@@ -121,8 +147,12 @@ export default function SortedDeadlineBar({ result, accentColor = '#f97316' }) {
 
   const handleSaveReminder = () => {
     const summary = `SORTED — ${result?.letter_summary || 'Letter deadline'}`;
-    const description = `Deadline: ${deadlineStr}\nFrom: ${sender || 'Unknown'}\n\nVia SORTED — uf51.love/Sorted`;
-    const ics = buildICS(summary, deadlineDate, description);
+    const descParts = [`Deadline: ${deadlineStr}`];
+    if (hasSender) descParts.push(`From: ${sender}`);
+    if (hasRef) descParts.push(`Ref: ${refNumber}`);
+    if (hasReplyTo) descParts.push(`Reply to: ${replyTo}`);
+    descParts.push('', 'Via SORTED — uf51.love/Sorted');
+    const ics = buildICS(summary, deadlineDate, descParts.join('\n'));
     const blob = new Blob([ics], { type: 'text/calendar' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -136,6 +166,8 @@ export default function SortedDeadlineBar({ result, accentColor = '#f97316' }) {
     setTimeout(() => setSaved(false), 2500);
   };
 
+  const ContactIcon = hasReplyTo ? detectContactIcon(replyTo) : Mail;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -147,17 +179,27 @@ export default function SortedDeadlineBar({ result, accentColor = '#f97316' }) {
         display: 'flex', flexDirection: 'column', gap: 10,
       }}
     >
-      {/* Sender row */}
-      {hasSender && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)' }}>FROM</span>
-          <p style={{ fontSize: 13, fontWeight: 700, color: '#1a1208', margin: 0, flex: 1 }}>{sender}</p>
-        </div>
-      )}
+      {/* KEY INTEL header */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingBottom: 6, borderBottom: '1px solid rgba(26,18,8,0.06)' }}>
+        <span style={{ fontSize: 9, fontWeight: 900, letterSpacing: '0.14em', color: 'rgba(26,18,8,0.5)' }}>KEY INTEL</span>
+        <div style={{ flex: 1, height: 1, background: 'rgba(26,18,8,0.06)' }} />
+      </div>
+
+      {/* Sender */}
+      {hasSender && <IntelRow icon={FileText} label="FROM" value={sender} />}
+
+      {/* Reference number */}
+      {hasRef && <IntelRow icon={Hash} label="REF" value={refNumber} color={accentColor} />}
+
+      {/* Letter date */}
+      {hasLetterDate && <IntelRow icon={FileText} label="DATED" value={letterDate} />}
+
+      {/* Reply-to contact */}
+      {hasReplyTo && <IntelRow icon={ContactIcon} label="REPLY TO" value={replyTo} color={accentColor} />}
 
       {/* Deadline row */}
       {hasDeadline && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', paddingTop: hasSender || hasRef || hasLetterDate || hasReplyTo ? 6 : 0 }}>
           <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)' }}>DEADLINE</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Clock size={13} color={countdownColor} />

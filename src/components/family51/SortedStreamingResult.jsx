@@ -25,7 +25,13 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
   const buildText = () =>
     `SORTED — Letter Breakdown\n\n` +
     `${result.letter_summary}\n` +
-    `Severity: ${result.severity}\n\n` +
+    `Severity: ${result.severity}\n` +
+    (result.sender && result.sender !== 'Unknown' ? `From: ${result.sender}\n` : '') +
+    (result.reference_number && result.reference_number !== 'Not found' ? `Ref: ${result.reference_number}\n` : '') +
+    (result.letter_date && result.letter_date !== 'Not found' ? `Dated: ${result.letter_date}\n` : '') +
+    (result.reply_to_contact && result.reply_to_contact !== 'Not found' ? `Reply to: ${result.reply_to_contact}\n` : '') +
+    (result.key_deadline && result.key_deadline !== 'No deadline mentioned' ? `Deadline: ${result.key_deadline}\n` : '') +
+    `\n` +
     (result.what_this_means ? `${result.what_this_means}\n\n` : '') +
     `WHAT TO DO:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
     (result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : '') +

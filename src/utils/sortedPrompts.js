@@ -141,6 +141,9 @@ OUTPUT — KEEP IT SHORT AND CALM:
 Return JSON with ONLY these fields:
 - letter_summary: Max 5 words. E.g. "Council tax debt demand"
 - sender: Who sent the letter — the organisation or company name. "Unknown" if not identifiable from the letter.
+- reference_number: Any reference, case, account, or PCN number on the letter. "Not found" if none.
+- letter_date: The date the letter was issued/written, in a clear format (e.g. "14 May 2026"). "Not found" if not visible.
+- reply_to_contact: How to respond — phone, email, address, or portal mentioned on the letter. Be specific (e.g. "Call 0207 555 1234" or "Email disputes@lowell.co.uk" or "Reply to: 123 High St, London"). "Not found" if no contact method is given.
 - severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - key_deadline: The EARLIEST deadline that matters OR null if all expired
 - amount: Specific amount or null

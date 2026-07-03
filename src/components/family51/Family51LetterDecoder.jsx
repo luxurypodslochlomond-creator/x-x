@@ -158,6 +158,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
           properties: {
             letter_summary: { type: 'string' },
             sender: { type: 'string', description: 'Who sent the letter — the organisation or company name. "Unknown" if not identifiable.' },
+            reference_number: { type: 'string', description: 'Any reference, case, account, or PCN number on the letter. "Not found" if none.' },
+            letter_date: { type: 'string', description: 'The date the letter was issued/written (e.g. "14 May 2026"). "Not found" if not visible.' },
+            reply_to_contact: { type: 'string', description: 'How to respond — phone, email, address, or portal. "Not found" if none.' },
             severity: { type: 'string' },
             key_deadline: { type: 'string', description: 'The earliest deadline that matters, in a clear date format (e.g. "14 May 2026"). "No deadline mentioned" if none.' },
             amount: { type: 'string' },
@@ -186,7 +189,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
 
       // Sanitize: coerce any accidental nested objects to strings
-      const STRING_FIELDS = ['letter_summary','sender','severity','key_deadline','amount','we_hear_you','what_this_means','if_you_ignore_this','one_sentence','financial_impact','from'];
+      const STRING_FIELDS = ['letter_summary','sender','reference_number','letter_date','reply_to_contact','severity','key_deadline','amount','we_hear_you','what_this_means','if_you_ignore_this','one_sentence','financial_impact','from'];
       STRING_FIELDS.forEach(k => { if (raw[k] && typeof raw[k] === 'object') raw[k] = JSON.stringify(raw[k]); });
       // Backwards compat: map old field names to new ones
       if (raw.three_steps && !raw.action_steps) raw.action_steps = raw.three_steps;
