@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import SortedV2Flow from '@/components/family51/SortedV2Flow';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
@@ -8,52 +9,91 @@ import SortedHelplines from '@/components/family51/SortedHelplines';
 import SortedTrustStrip from '@/components/family51/SortedTrustStrip';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 
+const ACCENT_COLOR = '#d97706';
+
 export default function SortedHome() {
   const { isPremium } = useSortedUsage();
 
   return (
-    <div style={{ minHeight: '100dvh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1a1a', overflowX: 'hidden' }}>
+    <div style={{ minHeight: '100dvh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf6ef 30%, #f8f5f0 100%)', color: '#1a1a1a', overflowX: 'hidden', position: 'relative' }}>
+
+      {/* WARM GLOW — subtle decorative element at top */}
+      <div style={{
+        position: 'absolute', top: -120, left: '50%', transform: 'translateX(-50%)',
+        width: 400, height: 300, borderRadius: '50%',
+        background: `radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%)`,
+        pointerEvents: 'none', zIndex: 0,
+      }} />
 
       {/* HERO */}
-      <div style={{ padding: '28px 20px 8px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
-        <h1 style={{
-          fontSize: 'clamp(24px, 6vw, 32px)', fontWeight: 900, lineHeight: 1.15,
-          margin: '0 0 10px', color: '#1a1a1a', letterSpacing: '-0.03em',
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        style={{ padding: '32px 20px 4px', textAlign: 'center', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}
+      >
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 16,
+          padding: '6px 14px', borderRadius: 20,
+          background: 'rgba(217,119,6,0.08)', border: '1px solid rgba(217,119,6,0.15)',
         }}>
-          Whatever that letter says — we've got you.
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: ACCENT_COLOR, display: 'inline-block' }} />
+          <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', color: ACCENT_COLOR }}>ANY LETTER · ANY LANGUAGE · ANY COUNTRY</span>
+        </div>
+        <h1 style={{
+          fontSize: 'clamp(28px, 7vw, 38px)', fontWeight: 900, lineHeight: 1.1,
+          margin: '0 0 12px', color: '#1a1a1a', letterSpacing: '-0.035em',
+        }}>
+          Whatever that letter says —{' '}
+          <span style={{ color: ACCENT_COLOR }}>we've got you.</span>
         </h1>
-        <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.5)', lineHeight: 1.5, margin: 0 }}>
-          Paste it, snap a photo, or tell us what's happening. We'll work out what it means and what to do — in any language, any country.
+        <p style={{ fontSize: 15, color: 'rgba(26,18,8,0.5)', lineHeight: 1.55, margin: 0, maxWidth: 440, marginLeft: 'auto', marginRight: 'auto' }}>
+          Paste it, snap a photo, or tell us what's happening. We'll decode it into plain language and tell you exactly what to do next.
         </p>
-      </div>
+      </motion.div>
 
       {/* THE ONE INPUT */}
-      <div style={{ padding: '20px 20px 8px', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '24px 20px 4px', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <SortedV2Flow />
       </div>
 
-      {/* HOW IT WORKS — minimal */}
-      <div style={{ padding: '20px 20px 0', maxWidth: 520, margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 4 }}>
-          {['Paste or snap', 'We decode it', 'Know your next step'].map((step, i) => (
+      {/* HOW IT WORKS — minimal, refined */}
+      <div style={{ padding: '28px 20px 0', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 0 }}>
+          {[
+            { num: '1', label: 'Paste or snap', desc: 'Letter, photo, or just describe it' },
+            { num: '2', label: 'We decode it', desc: 'Plain language, any language' },
+            { num: '3', label: 'Know your next step', desc: 'Actions, replies, real help' },
+          ].map((step, i) => (
             <React.Fragment key={i}>
-              <div style={{ flex: 1, textAlign: 'center', padding: '0 4px' }}>
-                <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(217,119,6,0.08)', border: '2px solid rgba(217,119,6,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px', fontSize: 13, fontWeight: 900, color: '#d97706' }}>{i + 1}</div>
-                <div style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.5)', lineHeight: 1.3 }}>{step}</div>
+              <div style={{ flex: 1, textAlign: 'center', padding: '0 6px' }}>
+                <div style={{
+                  width: 40, height: 40, borderRadius: '50%',
+                  background: '#fff', border: `2px solid ${ACCENT_COLOR}30`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 8px', fontSize: 14, fontWeight: 900, color: ACCENT_COLOR,
+                  boxShadow: '0 2px 8px rgba(26,18,8,0.04)',
+                }}>{step.num}</div>
+                <div style={{ fontSize: 12, fontWeight: 800, color: 'rgba(26,18,8,0.7)', marginBottom: 2 }}>{step.label}</div>
+                <div style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', lineHeight: 1.3 }}>{step.desc}</div>
               </div>
-              {i < 2 && <div style={{ width: 16, height: 2, background: 'rgba(217,119,6,0.15)', flexShrink: 0, marginTop: 17, borderRadius: 1 }} />}
+              {i < 2 && (
+                <div style={{ display: 'flex', alignItems: 'center', paddingTop: 14 }}>
+                  <div style={{ width: 20, height: 2, background: `${ACCENT_COLOR}20`, borderRadius: 1 }} />
+                </div>
+              )}
             </React.Fragment>
           ))}
         </div>
       </div>
 
       {/* LIVE COUNTER */}
-      <div style={{ padding: '16px 20px 0', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '20px 20px 0', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <SortedLiveCounter />
       </div>
 
       {/* YOUR CASES */}
-      <div style={{ padding: '24px 20px 0', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '20px 20px 0', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <SortedCaseHistory
           onContinue={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           isPremium={isPremium}
@@ -62,20 +102,20 @@ export default function SortedHome() {
 
       {/* PAYWALL */}
       {!isPremium && (
-        <div style={{ padding: '28px 20px 0', maxWidth: 520, margin: '0 auto' }}>
+        <div style={{ padding: '24px 20px 0', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <SortedForLifeCard />
         </div>
       )}
 
       {/* HELPLINES */}
-      <div style={{ padding: '0 20px 20px', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '0 20px 20px', maxWidth: 540, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <SortedHelplines />
       </div>
 
       <SortedTrustStrip />
 
       {/* FOOTER */}
-      <div style={{ padding: '32px 20px 28px', textAlign: 'center', marginTop: 16 }}>
+      <div style={{ padding: '32px 20px 28px', textAlign: 'center', marginTop: 12, position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap' }}>
           <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: 'rgba(26,18,8,0.5)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>FAQ</Link>
           <span style={{ color: 'rgba(26,18,8,0.15)', fontSize: 10 }}>•</span>

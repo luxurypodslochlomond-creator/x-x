@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Camera, Upload, MapPin } from 'lucide-react';
+import { Camera, Upload, MapPin, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -12,6 +12,7 @@ import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } fr
 import GeoSelector from './GeoSelector';
 
 const ACCENT = '#d97706';
+const ACCENT_DARK = '#b45309';
 
 const SEVERITY = {
   urgent: { color: '#ef4444', label: 'URGENT — ACT NOW' },
@@ -23,6 +24,7 @@ export default function SortedV2Flow() {
   const [text, setText] = useState('');
   const [file, setFile] = useState(null);
   const [fileUrl, setFileUrl] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
@@ -31,6 +33,10 @@ export default function SortedV2Flow() {
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
   const resultRef = useRef(null);
+  const ctaRef = useRef(null);
+
+  const hasContent = text.trim() || fileUrl;
+  const ready = Boolean(hasContent) && !uploading;
 
   useEffect(() => {
     if (result && resultRef.current) {
@@ -38,10 +44,18 @@ export default function SortedV2Flow() {
     }
   }, [result]);
 
+  // After file upload completes, gently scroll to the CTA so the user sees it
+  useEffect(() => {
+    if (fileUrl && ctaRef.current) {
+      setTimeout(() => ctaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+    }
+  }, [fileUrl]);
+
   const handleFile = async (selectedFile) => {
     if (!selectedFile) return;
     if (selectedFile.size > 10 * 1024 * 1024) { setError('File too large. Max 10MB.'); return; }
     setFile(selectedFile);
+    setUploading(true);
     setError(null);
     try {
       const res = await base44.integrations.Core.UploadFile({ file: selectedFile });
@@ -49,12 +63,14 @@ export default function SortedV2Flow() {
     } catch (err) {
       setError('Could not upload. Try pasting the text instead.');
       setFile(null);
+      setFileUrl(null);
+    } finally {
+      setUploading(false);
     }
   };
 
   const analyse = async () => {
-    if (loading) return;
-    if (!text.trim() && !fileUrl) { setError('Paste your letter or snap a photo first.'); return; }
+    if (loading || !hasContent) return;
     setLoading(true);
     setResult(null);
     setError(null);
@@ -166,77 +182,154 @@ Return JSON:
   // ── INPUT STATE ──
   if (!result && !loading) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
         <AnimatePresence>
           {error && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              style={{ padding: '12px 16px', borderRadius: 10, border: '1px solid rgba(239,68,68,0.35)', background: 'rgba(239,68,68,0.07)' }}>
-              <p style={{ fontSize: 12, color: '#ef4444', margin: 0, fontWeight: 600 }}>{error}</p>
+            <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+              style={{ marginBottom: 12, padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(239,68,68,0.3)', background: 'rgba(239,68,68,0.06)' }}>
+              <p style={{ fontSize: 13, color: '#ef4444', margin: 0, fontWeight: 600, lineHeight: 1.5 }}>{error}</p>
             </motion.div>
           )}
         </AnimatePresence>
 
-        <textarea
-          value={text}
-          onChange={e => setText(e.target.value)}
-          placeholder="Paste your letter, describe what's happening, or snap a photo below. Don't worry about formatting — just get it all in."
+        {/* THE INPUT CARD — the centerpiece */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
           style={{
-            width: '100%', height: 140, background: '#fff',
-            border: `1.5px solid ${text ? ACCENT + '90' : 'rgba(26,18,8,0.15)'}`,
-            borderRadius: 14, color: '#1a1208', fontSize: 14, padding: '16px 18px',
-            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
-            transition: 'border-color 0.2s', boxSizing: 'border-box',
+            background: '#fff',
+            borderRadius: 20,
+            boxShadow: ready
+              ? `0 8px 32px ${ACCENT}18, 0 2px 8px rgba(26,18,8,0.06)`
+              : '0 2px 12px rgba(26,18,8,0.05)',
+            border: ready ? `1.5px solid ${ACCENT}40` : '1.5px solid rgba(26,18,8,0.08)',
+            overflow: 'hidden',
+            transition: 'box-shadow 0.3s, border-color 0.3s',
           }}
-          onFocus={e => e.target.style.borderColor = ACCENT}
-          onBlur={e => e.target.style.borderColor = text ? ACCENT + '90' : 'rgba(26,18,8,0.15)'}
-        />
+        >
+          {/* TEXTAREA */}
+          <textarea
+            value={text}
+            onChange={e => setText(e.target.value)}
+            placeholder="Paste your letter, describe what's happening, or snap a photo. Don't worry about formatting — just get it in."
+            style={{
+              width: '100%', minHeight: 130, background: 'transparent',
+              border: 'none', color: '#1a1208', fontSize: 15, padding: '20px 22px 16px',
+              resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
+              boxSizing: 'border-box',
+            }}
+          />
 
-        {file && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: 'rgba(217,119,6,0.08)', border: '1px solid rgba(217,119,6,0.2)' }}>
-            <span style={{ fontSize: 12, color: ACCENT, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{file.name}</span>
-            <button onClick={() => { setFile(null); setFileUrl(null); }} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>REMOVE</button>
-          </div>
-        )}
+          {/* FILE PILL — shown when a file is attached */}
+          <AnimatePresence>
+            {file && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                style={{ overflow: 'hidden' }}
+              >
+                <div style={{
+                  margin: '0 18px 12px', padding: '12px 16px', borderRadius: 12,
+                  background: uploading ? 'rgba(217,119,6,0.06)' : 'rgba(34,197,94,0.08)',
+                  border: `1px solid ${uploading ? 'rgba(217,119,6,0.2)' : 'rgba(34,197,94,0.25)'}`,
+                  display: 'flex', alignItems: 'center', gap: 10,
+                }}>
+                  {uploading ? (
+                    <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                      <circle cx="12" cy="12" r="10" stroke={ACCENT} strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round" />
+                    </svg>
+                  ) : (
+                    <CheckCircle2 size={16} color="#22c55e" style={{ flexShrink: 0 }} />
+                  )}
+                  <span style={{ fontSize: 13, color: uploading ? ACCENT_DARK : '#16a34a', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                    {uploading ? 'Uploading…' : file.name}
+                  </span>
+                  {!uploading && (
+                    <button onClick={() => { setFile(null); setFileUrl(null); }}
+                      style={{ background: 'none', border: 'none', color: 'rgba(26,18,8,0.4)', cursor: 'pointer', fontSize: 12, fontWeight: 700, flexShrink: 0, padding: '4px 8px' }}>
+                      REMOVE
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          <motion.button whileTap={{ scale: 0.96 }} onClick={() => cameraInputRef.current?.click()}
-            style={{ padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800, cursor: 'pointer', border: 'none',
-              background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT}DD)`, color: '#fff',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-              boxShadow: `0 4px 14px ${ACCENT}40` }}>
-            <Camera size={16} /> Snap a photo
-          </motion.button>
-          <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()}
-            style={{ padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800, cursor: 'pointer',
-              border: '1px solid rgba(26,18,8,0.2)', background: 'transparent', color: 'rgba(26,18,8,0.55)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
-            <Upload size={14} /> Upload a file
-          </motion.button>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
-          <MapPin size={14} color={ACCENT} />
-          <div style={{ flex: 1 }}>
-            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.5)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
-            <GeoSelector geo={geo} onChange={setGeo} accentColor={ACCENT} />
-          </div>
-        </div>
-
-        <motion.button
-          onClick={analyse}
-          disabled={!text.trim() && !fileUrl}
-          whileTap={(text.trim() || fileUrl) ? { scale: 0.97 } : {}}
-          style={{
-            width: '100%', padding: '18px 0', borderRadius: 14, fontSize: 16,
-            fontWeight: 900, letterSpacing: '0.1em', cursor: (text.trim() || fileUrl) ? 'pointer' : 'not-allowed',
-            border: 'none',
-            background: (text.trim() || fileUrl) ? `linear-gradient(135deg, ${ACCENT}, ${ACCENT}DD)` : 'rgba(26,18,8,0.04)',
-            color: (text.trim() || fileUrl) ? '#fff' : 'rgba(26,18,8,0.3)',
-            boxShadow: (text.trim() || fileUrl) ? `0 4px 14px ${ACCENT}40, 0 1px 3px ${ACCENT}30` : 'none',
-            transition: 'all 0.2s',
+          {/* ACTION ROW — camera + upload + location */}
+          <div style={{
+            padding: '12px 18px 16px', borderTop: '1px solid rgba(26,18,8,0.05)',
+            display: 'flex', alignItems: 'center', gap: 8,
           }}>
-          SORT IT →
-        </motion.button>
+            <motion.button whileTap={{ scale: 0.95 }} onClick={() => cameraInputRef.current?.click()}
+              style={{
+                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, cursor: 'pointer',
+                border: '1px solid rgba(26,18,8,0.12)', background: 'rgba(26,18,8,0.02)', color: 'rgba(26,18,8,0.6)',
+                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+              }}>
+              <Camera size={15} /> Photo
+            </motion.button>
+            <motion.button whileTap={{ scale: 0.95 }} onClick={() => fileInputRef.current?.click()}
+              style={{
+                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, cursor: 'pointer',
+                border: '1px solid rgba(26,18,8,0.12)', background: 'rgba(26,18,8,0.02)', color: 'rgba(26,18,8,0.6)',
+                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+              }}>
+              <Upload size={14} /> File
+            </motion.button>
+            <div style={{ flex: 1 }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.4)' }}>
+              <MapPin size={12} color={ACCENT} />
+              <GeoSelector geo={geo} onChange={setGeo} accentColor={ACCENT} />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* THE CTA — pulsing when ready */}
+        <motion.div ref={ctaRef} style={{ marginTop: 14, scrollMarginTop: 80 }}>
+          <motion.button
+            onClick={analyse}
+            disabled={!ready}
+            whileTap={ready ? { scale: 0.97 } : {}}
+            animate={ready ? { boxShadow: [`0 4px 14px ${ACCENT}40, 0 1px 3px ${ACCENT}30`, `0 6px 24px ${ACCENT}55, 0 2px 6px ${ACCENT}40`, `0 4px 14px ${ACCENT}40, 0 1px 3px ${ACCENT}30`] } : {}}
+            transition={ready ? { duration: 2, repeat: Infinity, ease: 'easeInOut' } : {}}
+            style={{
+              width: '100%', padding: '20px 0', borderRadius: 18, fontSize: 17,
+              fontWeight: 900, letterSpacing: '0.08em', cursor: ready ? 'pointer' : 'not-allowed',
+              border: 'none',
+              background: ready ? `linear-gradient(135deg, ${ACCENT}, ${ACCENT_DARK})` : 'rgba(26,18,8,0.04)',
+              color: ready ? '#fff' : 'rgba(26,18,8,0.25)',
+              transition: 'background 0.2s, color 0.2s',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+            }}
+          >
+            {ready ? (
+              <>
+                {fileUrl && !text.trim() ? 'SORT IT' : 'SORT IT'}
+                <ArrowRight size={18} />
+              </>
+            ) : (
+              <>
+                <Sparkles size={16} />
+                READY WHEN YOU ARE
+              </>
+            )}
+          </motion.button>
+
+          {/* subtle hint when ready */}
+          <AnimatePresence>
+            {ready && (
+              <motion.p
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                style={{ textAlign: 'center', fontSize: 11, color: 'rgba(26,18,8,0.35)', margin: '8px 0 0', fontWeight: 500 }}
+              >
+                Tap to decode — takes about 10 seconds
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
         <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
         <input ref={fileInputRef} type="file" accept="image/*,application/pdf" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
