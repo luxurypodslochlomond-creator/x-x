@@ -226,19 +226,25 @@ export default function SortedDeadlineBar({ result, accentColor = '#f97316' }) {
         </div>
       )}
 
-      {/* Save reminder button */}
+      {/* Save reminder button — matches the crafted CTA style */}
       {hasDeadline && !isOverdue && (
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={handleSaveReminder}
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-            width: '100%', padding: '11px 0', borderRadius: 10, fontSize: 12,
-            fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer',
-            border: `1px solid ${accentColor}40`,
-            background: saved ? 'rgba(34,197,94,0.08)' : 'transparent',
-            color: saved ? '#22c55e' : accentColor,
+            width: '100%', padding: '14px 0', borderRadius: 14, fontSize: 12,
+            fontWeight: 900, letterSpacing: '0.08em', cursor: 'pointer',
+            border: 'none',
+            background: saved
+              ? 'linear-gradient(135deg, #22c55e, #16a34a)'
+              : `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)`,
+            color: '#fff',
             transition: 'all 0.2s',
+            boxShadow: saved
+              ? '0 4px 14px rgba(34,197,94,0.4), 0 1px 3px rgba(34,197,94,0.3)'
+              : `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30`,
+            WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
           }}
         >
           {saved ? (
