@@ -178,20 +178,13 @@ Return JSON: subject_line (string), letter_body (string), key_points (array of 2
       return null;
     };
 
-    // Try claude first, then fall back to default
+    // Use fast model directly — no fallback chain that doubles wait time
     let result = null;
     try {
-      result = await attemptGenerate('claude_sonnet_4_6');
+      result = await attemptGenerate('gpt_5_mini');
     } catch (err) {
-      console.warn('SORTED: claude_sonnet_4_6 failed:', err?.message);
-    }
-    if (!result) {
-      try {
-        result = await attemptGenerate(null);
-      } catch (err2) {
-        console.error('SORTED: fallback also failed:', err2?.message);
-        throw new Error('Could not generate your letter. Please check your connection and try again.');
-      }
+      console.error('SORTED: generation failed:', err?.message);
+      throw new Error('Could not generate your letter. Please check your connection and try again.');
     }
     if (!result) {
       throw new Error('The AI returned an empty response. Please try again.');

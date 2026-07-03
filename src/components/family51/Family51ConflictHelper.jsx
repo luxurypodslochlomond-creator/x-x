@@ -183,7 +183,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 - if_it_escalates: The next step, process, and how to reach them.`;
 
       const response = await base44.integrations.Core.InvokeLLM({
-      model: 'claude_sonnet_4_6',
+      model: 'gpt_5_mini',
       ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
       prompt: systemPrompt,
       response_json_schema: {

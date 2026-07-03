@@ -103,7 +103,7 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult,
       }
 
       const response = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
+        model: 'gpt_5_mini',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
         prompt: SORTED_SOUL + '\n' + `Check if this message is a scam. The person may be elderly or vulnerable — be warm, clear, never scary.
 

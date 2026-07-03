@@ -109,7 +109,7 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
 
     const res = await base44.integrations.Core.InvokeLLM({
       ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
-      prompt: SORTED_SOUL + '\n' + `Analyse this contract in plain English so an ordinary person understands what they're signing.
+      prompt: SORTED_SOUL + '\n' + `Analyse this contract in plain language so an ordinary person understands what they're signing.
 
 Contract type: ${contractType || 'Not specified'}
 
@@ -118,7 +118,7 @@ ${content ? `\n---\n${content}\n---` : '(See attached image)'}
 
 Analyse this contract and respond ONLY with valid JSON in this exact format:
 {
-  "summary": "2-3 sentence plain English summary of what this contract is and what it commits the person to",
+  "summary": "2-3 sentence plain language summary of what this contract is and what it commits the person to",
   "red_flags": ["list of concerning clauses, unfair terms, or things that could harm the person — each as a short plain sentence"],
   "what_is_missing": ["list of standard protections or clauses that are absent from this contract and should be there — these silences can be the most important thing"],
   "negotiate": ["list of specific things they could try to negotiate or push back on — practical and actionable"],

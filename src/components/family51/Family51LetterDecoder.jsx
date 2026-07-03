@@ -40,11 +40,11 @@ const SEVERITY_CONFIG = {
 };
 
 const LOADING_STEPS = [
-  { text: 'Analyzing…',                  sub: 'Reading every word carefully' },
+  { text: 'Reading every word…',         sub: 'Analyzing carefully' },
   { text: 'Identifying what this is…',   sub: 'Matching to known letter types' },
-  { text: 'Checking any deadlines…',     sub: 'Dates matter — we\'re looking' },
+  { text: 'Checking deadlines…',         sub: 'Dates matter — we\'re looking' },
   { text: 'Finding your options…',       sub: 'What you can actually do' },
-  { text: 'Almost there…',               sub: 'Plain English coming up' },
+  { text: 'Almost there…',               sub: 'Your breakdown is coming' },
 ];
 
 export default function Family51LetterDecoder({ accentColor = '#f97316', onResult, onHandoff, triggerPhoto, prefillFileUrl, onPhotoTriggered }) {
@@ -150,7 +150,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType) + learningContext;
 
       const response = await base44.integrations.Core.InvokeLLM({
-        model: 'claude_sonnet_4_6',
+        model: 'gpt_5_mini',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
         prompt: promptText,
         response_json_schema: {
