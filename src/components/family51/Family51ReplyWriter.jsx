@@ -440,10 +440,11 @@ Return JSON: document_type (string — what type of document/situation this is),
                 width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
                 fontWeight: 900, letterSpacing: '0.1em',
                 cursor: context.trim() ? 'pointer' : 'not-allowed',
-                border: `2px solid ${context.trim() ? accentColor : 'rgba(26,18,8,0.15)'}`,
-                background: context.trim() ? accentColor : 'rgba(26,18,8,0.04)',
+                border: 'none',
+                background: context.trim() ? `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)` : 'rgba(26,18,8,0.04)',
                 color: context.trim() ? '#fff' : 'rgba(26,18,8,0.3)',
                 transition: 'all 0.2s',
+                boxShadow: context.trim() ? `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30` : 'none',
               }}
             >
               Write my reply →

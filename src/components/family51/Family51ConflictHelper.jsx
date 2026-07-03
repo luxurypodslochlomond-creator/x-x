@@ -388,10 +388,11 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
               width: '100%', padding: '16px 0', borderRadius: 12, fontSize: 14,
               fontWeight: 800, letterSpacing: '0.06em',
               cursor: what.trim() ? 'pointer' : 'not-allowed',
-              border: `1px solid ${what.trim() ? accentColor : 'rgba(26,18,8,0.15)'}`,
-              background: what.trim() ? accentColor : 'rgba(26,18,8,0.04)',
+              border: 'none',
+              background: what.trim() ? `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)` : 'rgba(26,18,8,0.04)',
               color: what.trim() ? '#fff' : 'rgba(26,18,8,0.3)',
               transition: 'all 0.2s',
+              boxShadow: what.trim() ? `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30` : 'none',
             }}
           >
             Get my plan →

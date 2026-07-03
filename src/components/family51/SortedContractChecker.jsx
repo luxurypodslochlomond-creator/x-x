@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedTimeline from './SortedTimeline';
 import SortedFeedback from './SortedFeedback';
+import SortedResultShell, { SortedResultSection, SortedBullets } from './SortedResultShell';
 
 const CONTRACT_TYPES = [
   { id: 'tenancy',    label: 'Tenancy / Lease' },
@@ -274,36 +275,43 @@ Every clause matters. The more you give us, the better the analysis.`}
             <motion.button onClick={analyse} whileTap={{ scale: 0.97 }} style={{
               width: '100%', padding: '17px 0', borderRadius: 14, fontSize: 15,
               fontWeight: 900, letterSpacing: '0.1em', cursor: 'pointer',
-              border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
+              border: 'none',
+              background: `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)`,
+              color: '#fff',
+              boxShadow: `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30`,
             }}>
               ANALYSE CONTRACT →
             </motion.button>
           ) : (
-            <div style={{ display: 'flex', gap: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
               <motion.button whileTap={{ scale: 0.96 }} onClick={() => cameraInputRef.current?.click()} style={{
-                flex: 2, padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
-                letterSpacing: '0.06em', cursor: 'pointer',
-                border: `2px solid ${accentColor}`, background: accentColor, color: '#fff',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                width: '100%', padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
+                letterSpacing: '0.04em', cursor: 'pointer',
+                border: 'none',
+                background: `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)`,
+                color: '#fff',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                boxShadow: `0 4px 14px ${accentColor}40, 0 1px 3px ${accentColor}30`,
               }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                   <circle cx="12" cy="13" r="4"/>
                 </svg>
-                SNAP A PHOTO
+                Snap a photo
               </motion.button>
               <motion.button whileTap={{ scale: 0.96 }} onClick={() => fileInputRef.current?.click()} style={{
-                flex: 1, padding: '16px 0', borderRadius: 14, fontSize: 11, fontWeight: 800,
-                letterSpacing: '0.06em', cursor: 'pointer',
-                border: `1px solid rgba(26,18,8,0.15)`, background: 'transparent', color: 'rgba(26,18,8,0.5)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                width: '100%', padding: '16px 0', borderRadius: 14, fontSize: 13, fontWeight: 800,
+                letterSpacing: '0.02em', cursor: 'pointer',
+                border: `1px solid rgba(26,18,8,0.2)`,
+                background: 'transparent', color: 'rgba(26,18,8,0.55)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
               }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="17 8 12 3 7 8"/>
                   <line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
-                PDF / FILE
+                Upload a file
               </motion.button>
             </div>
           )}
@@ -326,114 +334,71 @@ Every clause matters. The more you give us, the better the analysis.`}
         </motion.div>
       )}
 
-      {/* RESULT */}
+      {/* RESULT — unified shell, same look as every other tool */}
       <AnimatePresence>
         {result && vs && !loading && (
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
+            <SortedResultShell
+              verdict={{
+                label: vs.label.toUpperCase(),
+                color: vs.color,
+                summary: result.document_type || 'Contract Analysis',
+                detail: result.verdict_reason,
+              }}
+              accentColor={accentColor}
+              tool="contract"
+              onCopy={copyAll}
+              onShare={copyAll}
+              onReset={reset}
+              onHandoff={onHandoff}
+              handoffLabel="CONTINUE → WRITE MY REPLY"
+              flash={copied ? 'COPIED' : null}
+            >
+              <SortedResultSection label="IN PLAIN ENGLISH" color={accentColor}>
+                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>{result.summary}</p>
+              </SortedResultSection>
 
-            {/* BIG VERDICT */}
-            <div style={{ borderRadius: 16, border: `2px solid ${vs.border}`, background: vs.bg, padding: '24px 20px', textAlign: 'center' }}>
-              <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><ContractVerdictIcon type={vs.icon} color={vs.color} /></div>
-              <div style={{ fontSize: 22, fontWeight: 900, color: vs.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{vs.label}</div>
-              <div style={{ fontSize: 13, color: 'rgba(26,18,8,0.55)', fontWeight: 600 }}>{result.verdict_reason}</div>
-            </div>
+              {result.red_flags?.length > 0 && (
+                <SortedResultSection label={`RED FLAGS (${result.red_flags.length})`} color="#ef4444" delay={0.15}>
+                  <SortedBullets items={result.red_flags} color="#ef4444" symbol="⚑" />
+                </SortedResultSection>
+              )}
 
-            {/* PLAIN ENGLISH */}
-            <ResultSection title="In Plain English" color={accentColor}>
-              <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>{result.summary}</p>
-            </ResultSection>
+              {result.what_is_missing?.length > 0 && (
+                <SortedResultSection label="WHAT'S MISSING" color="#7c3aed" delay={0.2}>
+                  <p style={{ fontSize: 11, color: 'rgba(124,58,237,0.7)', margin: '0 0 10px', lineHeight: 1.4 }}>
+                    Standard protections that aren't in this contract — what they didn't write can matter as much as what they did.
+                  </p>
+                  <SortedBullets items={result.what_is_missing} color="#7c3aed" symbol="○" />
+                </SortedResultSection>
+              )}
 
-            {/* RED FLAGS */}
-            {result.red_flags?.length > 0 && (
-              <ResultSection title={`Red Flags (${result.red_flags.length})`} color="#ef4444">
-                {result.red_flags.map((f, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 8 }}>
-                    <span style={{ color: '#ef4444', flexShrink: 0, marginTop: 1 }}>⚑</span>
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{f}</span>
+              {result.negotiate?.length > 0 && (
+                <SortedResultSection label="WHAT TO NEGOTIATE" color="#f5a623" delay={0.25}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {result.negotiate.map((n, i) => (
+                      <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                        <div style={{ minWidth: 22, height: 22, borderRadius: '50%', background: 'rgba(245,166,35,0.15)', border: '1px solid rgba(245,166,35,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <span style={{ fontSize: 11, fontWeight: 900, color: '#f5a623' }}>{i + 1}</span>
+                        </div>
+                        <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5, margin: 0 }}>{n}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </ResultSection>
-            )}
+                </SortedResultSection>
+              )}
 
-            {/* WHAT'S MISSING */}
-            {result.what_is_missing?.length > 0 && (
-              <ResultSection title="What's Missing (The Silence)" color="#7c3aed">
-                <p style={{ fontSize: 11, color: 'rgba(124,58,237,0.7)', margin: '0 0 10px', lineHeight: 1.4 }}>
-                  Standard protections that aren't in this contract — what they didn't write can matter as much as what they did.
-                </p>
-                {result.what_is_missing.map((m, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 8 }}>
-                    <span style={{ color: '#7c3aed', flexShrink: 0, marginTop: 2, fontSize: 14 }}>○</span>
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{m}</span>
-                  </div>
-                ))}
-              </ResultSection>
-            )}
+              {result.questions?.length > 0 && (
+                <SortedResultSection label="QUESTIONS TO ASK" color={accentColor} delay={0.3}>
+                  <SortedBullets items={result.questions} color={accentColor} />
+                </SortedResultSection>
+              )}
 
-            {/* NEGOTIATE */}
-            {result.negotiate?.length > 0 && (
-              <ResultSection title="What to Negotiate" color="#f5a623">
-                {result.negotiate.map((n, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 8 }}>
-                    <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(245,166,35,0.15)', border: '1px solid rgba(245,166,35,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <span style={{ fontSize: 11, fontWeight: 900, color: '#f5a623' }}>{i + 1}</span>
-                    </div>
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{n}</span>
-                  </div>
-                ))}
-              </ResultSection>
-            )}
-
-            {/* QUESTIONS */}
-            {result.questions?.length > 0 && (
-              <ResultSection title="Questions to Ask Before Signing" color={accentColor}>
-                {result.questions.map((q, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 8 }}>
-                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: accentColor, marginTop: 7, flexShrink: 0 }} />
-                    <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{q}</span>
-                  </div>
-                ))}
-              </ResultSection>
-            )}
-
-            {/* TIMELINE */}
-            <SortedTimeline analysisResult={result} tool="contract" accentColor={accentColor} />
-
-            {/* ACTIONS */}
-            <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-              <button onClick={copyAll} style={{ flex: 1, padding: '12px', borderRadius: 10, border: `1.5px solid ${accentColor}40`,
-                background: copied ? `${accentColor}15` : 'transparent', color: accentColor,
-                fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer' }}>
-                {copied ? '✓ COPIED' : 'COPY ANALYSIS'}
-              </button>
-              <button onClick={reset} style={{ flex: 1, padding: '12px', borderRadius: 10, border: '1.5px solid rgba(26,18,8,0.15)',
-                background: 'transparent', color: 'rgba(26,18,8,0.55)',
-                fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', cursor: 'pointer' }}>
-                NEW CONTRACT
-              </button>
-            </div>
-
-            <SortedFeedback tool="contract" accentColor={accentColor} />
-
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>
-               Not legal advice. Always consult a solicitor for important decisions.
-             </p>
-            <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.3)', textAlign: 'center', margin: '6px 0 0', lineHeight: 1.5 }}>
-              Need help? <a href="mailto:family@uf51.love" style={{ color: '#7c3aed', fontWeight: 700, textDecoration: 'none' }}>family@uf51.love</a>
-            </p>
+              <SortedTimeline analysisResult={result} tool="contract" accentColor={accentColor} />
+            </SortedResultShell>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
-  );
-}
-
-function ResultSection({ title, color, children }) {
-  return (
-    <div style={{ padding: '14px 18px', borderRadius: 12, background: `${color}06`, border: `1px solid ${color}25` }}>
-      <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: `${color}cc`, margin: '0 0 10px' }}>{title.toUpperCase()}</p>
-      {children}
     </div>
   );
 }
