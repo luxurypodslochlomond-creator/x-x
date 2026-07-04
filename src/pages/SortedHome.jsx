@@ -16,74 +16,72 @@ export default function SortedHome() {
   return (
     <div style={{
       minHeight: '100dvh',
-      background: '#f8f6f3',
-      color: '#1a1a1a',
+      background: '#f9f8f6',
+      color: '#1c1c1e',
       overflowX: 'hidden',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
+      WebkitFontSmoothing: 'antialiased',
     }}>
-      {/* HERO — clean, bold, system font. No serif. */}
+      {/* HERO */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        style={{ padding: '32px 20px 0', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}
+        transition={{ duration: 0.25 }}
+        style={{ padding: '28px 20px 0', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}
       >
         <h1 style={{
-          fontSize: 'clamp(26px, 7vw, 36px)', fontWeight: 700, lineHeight: 1.1,
-          margin: 0, color: '#1a1a1a', letterSpacing: '-0.02em',
+          fontSize: 'clamp(26px, 7vw, 34px)', fontWeight: 700, lineHeight: 1.15,
+          margin: 0, letterSpacing: '-0.02em',
         }}>
-          Whatever it is —{' '}
-          <span style={{ color: GOLD }}>we've got you.</span>
+          Got a letter? Stuck in a mess?
         </h1>
         <p style={{
-          fontSize: 14, color: 'rgba(26,26,26,0.4)', margin: '10px 0 0', fontWeight: 400,
+          fontSize: 15, color: 'rgba(28,28,30,0.5)', margin: '8px 0 0', fontWeight: 400, lineHeight: 1.4,
         }}>
-          Scary letter, stuck dispute, weird message — paste it, we'll sort it.
+          Paste it. We'll tell you what it means and what to do.
         </p>
       </motion.div>
 
-      {/* THE INPUT */}
-      <div style={{ padding: '24px 20px 0', maxWidth: 520, margin: '0 auto' }}>
+      {/* INPUT */}
+      <div style={{ padding: '20px 20px 0', maxWidth: 520, margin: '0 auto' }}>
         <SortedV2Flow />
       </div>
 
-      {/* LIVE COUNTER */}
-      <div style={{ padding: '24px 20px 0', maxWidth: 520, margin: '0 auto' }}>
+      {/* COUNTER */}
+      <div style={{ padding: '20px 20px 0', maxWidth: 520, margin: '0 auto' }}>
         <SortedLiveCounter />
       </div>
 
-      {/* CASE VAULT */}
-      <div style={{ padding: '24px 20px 0', maxWidth: 520, margin: '0 auto' }}>
+      {/* VAULT */}
+      <div style={{ padding: '20px 20px 0', maxWidth: 520, margin: '0 auto' }}>
         <SortedCaseHistory
           onContinue={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           isPremium={isPremium}
         />
       </div>
 
-      {/* SUBSCRIPTION */}
       {!isPremium && (
         <div style={{ padding: '20px 20px 0', maxWidth: 520, margin: '0 auto' }}>
           <SortedForLifeCard />
         </div>
       )}
 
-      {/* HELPLINES */}
       <div style={{ padding: '20px 20px 0', maxWidth: 520, margin: '0 auto' }}>
         <SortedHelplines />
       </div>
 
       {/* FOOTER */}
-      <div style={{ padding: '32px 20px 40px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '28px 20px 36px', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap' }}>
-          <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: 'rgba(26,26,26,0.35)', fontWeight: 500, fontSize: 12 }}>FAQ</Link>
-          <span style={{ color: 'rgba(26,26,26,0.1)', fontSize: 9 }}>·</span>
-          <Link to="/SortedTerms" style={{ textDecoration: 'none', color: 'rgba(26,26,26,0.35)', fontWeight: 500, fontSize: 12 }}>Terms</Link>
-          <span style={{ color: 'rgba(26,26,26,0.1)', fontSize: 9 }}>·</span>
-          <Link to="/SortedPrivacy" style={{ textDecoration: 'none', color: 'rgba(26,26,26,0.35)', fontWeight: 500, fontSize: 12 }}>Privacy</Link>
-          <span style={{ color: 'rgba(26,26,26,0.1)', fontSize: 9 }}>·</span>
-          <Link to="/SortedAbout" style={{ textDecoration: 'none', color: 'rgba(26,26,26,0.35)', fontWeight: 500, fontSize: 12 }}>About</Link>
+          <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: 'rgba(28,28,30,0.35)', fontWeight: 500, fontSize: 12 }}>FAQ</Link>
+          <span style={{ color: 'rgba(28,28,30,0.1)' }}>·</span>
+          <Link to="/SortedTerms" style={{ textDecoration: 'none', color: 'rgba(28,28,30,0.35)', fontWeight: 500, fontSize: 12 }}>Terms</Link>
+          <span style={{ color: 'rgba(28,28,30,0.1)' }}>·</span>
+          <Link to="/SortedPrivacy" style={{ textDecoration: 'none', color: 'rgba(28,28,30,0.35)', fontWeight: 500, fontSize: 12 }}>Privacy</Link>
+          <span style={{ color: 'rgba(28,28,30,0.1)' }}>·</span>
+          <Link to="/SortedAbout" style={{ textDecoration: 'none', color: 'rgba(28,28,30,0.35)', fontWeight: 500, fontSize: 12 }}>About</Link>
         </div>
-        <p style={{ fontSize: 10, color: 'rgba(26,26,26,0.22)', margin: 0 }}>
+        <p style={{ fontSize: 10, color: 'rgba(28,28,30,0.22)', margin: 0 }}>
           Universal Frequency 51 CIC · Scotland
         </p>
       </div>

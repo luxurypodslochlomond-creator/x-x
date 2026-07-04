@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Camera, FileText, ChevronDown, ArrowRight, Shield } from 'lucide-react';
+import { CheckCircle2, Camera, FileText, ArrowRight, Shield, Loader2 } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -12,10 +12,9 @@ import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } fr
 import GeoSelector from './GeoSelector';
 
 const GOLD = '#c6995c';
-const INK = '#1a1a1a';
-const PAPER = '#ffffff';
-const MUTED = 'rgba(26,26,26,0.4)';
-const BORDER = 'rgba(26,26,26,0.08)';
+const INK = '#1c1c1e';
+const MUTED = 'rgba(28,28,30,0.45)';
+const BORDER = 'rgba(28,28,30,0.08)';
 
 const SEVERITY = {
   urgent: { color: '#dc2626', label: 'URGENT — ACT NOW' },
@@ -40,6 +39,9 @@ export default function SortedV2Flow() {
 
   const hasContent = text.trim() || fileUrl;
   const ready = Boolean(hasContent) && !uploading;
+
+  // Journey step: 1=paste, 2=decoding, 3=sorted
+  const journeyStep = result ? 3 : loading ? 2 : 1;
 
   useEffect(() => {
     if (result && resultRef.current) {
@@ -181,249 +183,280 @@ Return JSON:
     window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
   };
 
-  // ── INPUT STATE ──
-  if (!result && !loading) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-        <AnimatePresence>
-          {error && (
-            <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              style={{ marginBottom: 12, padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(220,38,38,0.2)', background: 'rgba(220,38,38,0.04)' }}>
-              <p style={{ fontSize: 13, color: '#dc2626', margin: 0, fontWeight: 500, lineHeight: 1.5 }}>{error}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* THE INPUT CARD — light, warm, like a note on a desk */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            background: PAPER,
-            borderRadius: 18,
-            boxShadow: ready
-              ? '0 4px 24px rgba(198,153,92,0.10), 0 1px 4px rgba(0,0,0,0.04)'
-              : '0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02)',
-            border: ready ? `1px solid ${GOLD}40` : `1px solid ${BORDER}`,
-            overflow: 'hidden',
-            transition: 'box-shadow 0.3s, border-color 0.3s',
-          }}
-        >
-          {/* TEXTAREA */}
-          <textarea
-            value={text}
-            onChange={e => setText(e.target.value)}
-            placeholder="Paste the letter. Or tell us what's happening."
-            style={{
-              width: '100%', minHeight: 130, background: 'transparent',
-              border: 'none', color: INK, fontSize: 16, padding: '20px 20px 12px',
-              resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
-              boxSizing: 'border-box',
-            }}
-          />
-
-          {/* FILE PILL */}
-          <AnimatePresence>
-            {file && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                style={{ overflow: 'hidden' }}
-              >
-                <div style={{
-                  margin: '0 16px 10px', padding: '10px 14px', borderRadius: 10,
-                  background: uploading ? 'rgba(198,153,92,0.06)' : 'rgba(22,163,74,0.05)',
-                  border: `1px solid ${uploading ? 'rgba(198,153,92,0.15)' : 'rgba(22,163,74,0.2)'}`,
-                  display: 'flex', alignItems: 'center', gap: 10,
-                }}>
-                  {uploading ? (
-                    <svg className="animate-spin" width="15" height="15" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                      <circle cx="12" cy="12" r="10" stroke={GOLD} strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round" />
-                    </svg>
-                  ) : (
-                    <CheckCircle2 size={15} color="#16a34a" style={{ flexShrink: 0 }} />
-                  )}
-                  <span style={{ fontSize: 13, color: uploading ? GOLD : '#16a34a', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
-                    {uploading ? 'Uploading…' : file.name}
-                  </span>
-                  {!uploading && (
-                    <button onClick={() => { setFile(null); setFileUrl(null); }}
-                      style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer', fontSize: 12, fontWeight: 600, flexShrink: 0, padding: '4px 8px' }}>
-                      REMOVE
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* ACTION ROW — clean, light, native */}
-          <div style={{
-            padding: '8px 14px 12px', borderTop: `1px solid ${BORDER}`,
-            display: 'flex', alignItems: 'center', gap: 4,
-          }}>
-            <button onClick={() => cameraInputRef.current?.click()}
-              style={{
-                padding: '8px 14px', borderRadius: 10, fontSize: 13, fontWeight: 500, cursor: 'pointer',
-                border: 'none', background: 'transparent', color: MUTED,
-                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
-                WebkitTapHighlightColor: 'transparent',
-              }}>
-              <Camera size={16} color={GOLD} /> Photo
-            </button>
-            <button onClick={() => fileInputRef.current?.click()}
-              style={{
-                padding: '8px 14px', borderRadius: 10, fontSize: 13, fontWeight: 500, cursor: 'pointer',
-                border: 'none', background: 'transparent', color: MUTED,
-                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
-                WebkitTapHighlightColor: 'transparent',
-              }}>
-              <FileText size={16} color={GOLD} /> File
-            </button>
-            <div style={{ flex: 1 }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: 12, fontWeight: 500, color: MUTED }}>
-              <GeoSelector geo={geo} onChange={setGeo} accentColor={GOLD} />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* THE CTA — warm gold, confident */}
-        <motion.div ref={ctaRef} style={{ marginTop: 14, scrollMarginTop: 80 }}>
-          <motion.button
-            onClick={analyse}
-            disabled={!ready}
-            whileTap={ready ? { scale: 0.98 } : {}}
-            style={{
-              width: '100%', padding: '16px', borderRadius: 14, fontSize: 15,
-              fontWeight: 600, cursor: ready ? 'pointer' : 'default',
-              border: 'none',
-              background: ready ? GOLD : 'rgba(26,26,26,0.04)',
-              color: ready ? '#fff' : MUTED,
-              transition: 'background 0.3s, color 0.3s',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-            }}
-          >
-            {ready ? (
-              <>
-                Sort it
-                <ArrowRight size={17} color="#fff" />
-              </>
-            ) : (
-              'Ready when you are'
-            )}
-          </motion.button>
-        </motion.div>
-
-        {/* THE JOURNEY — visible 1-2-3, elegant, not SaaS-y */}
-        <div style={{
-          marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-          fontSize: 12, fontWeight: 500, color: MUTED,
-        }}>
-          <span>Paste it</span>
-          <ArrowRight size={11} color={GOLD} style={{ opacity: 0.5 }} />
-          <span>We decode it</span>
-          <ArrowRight size={11} color={GOLD} style={{ opacity: 0.5 }} />
-          <span style={{ color: GOLD, fontWeight: 600 }}>You're sorted</span>
-        </div>
-
-        {/* TRUST WHISPER */}
-        <div style={{
-          marginTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-        }}>
-          <Shield size={11} color={MUTED} style={{ opacity: 0.5 }} />
-          <p style={{ fontSize: 11, color: MUTED, margin: 0, fontWeight: 400, opacity: 0.7 }}>
-            Private to your device · 3 free · no signup
-          </p>
-        </div>
-
-        <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
-        <input ref={fileInputRef} type="file" accept="image/*,application/pdf" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
-      </div>
-    );
-  }
-
   // ── LOADING STATE ──
   if (loading) {
     return <SortedThinkingSteps tool="letter" accentColor={GOLD} isActive={loading} inputHint={text} geo={geo} />;
   }
 
   // ── RESULT STATE ──
-  const vs = result ? SEVERITY[result.severity] || SEVERITY.routine : null;
+  if (result) {
+    const vs = SEVERITY[result.severity] || SEVERITY.routine;
+    return (
+      <div ref={resultRef}>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+          <SortedResultShell
+            verdict={{
+              label: vs.label,
+              color: vs.color,
+              summary: result.summary,
+              detail: result.what_it_means,
+              badges: [{ text: result.document_type, color: GOLD }],
+            }}
+            accentColor={GOLD}
+            tool={result.detected_tool || 'letter'}
+            onCopy={copyAll}
+            onShare={copyAll}
+            onReset={reset}
+            onEmail={result.ready_reply ? openEmail : null}
+            flash={copied ? 'COPIED' : null}
+          >
+            {(result.key_intel?.sender || result.key_intel?.deadline || result.key_intel?.reference || result.key_intel?.contact_method) && (
+              <SortedResultSection label="KEY INTEL" color={GOLD}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {result.key_intel.sender && <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.7)', margin: 0 }}><strong>From:</strong> {result.key_intel.sender}</p>}
+                  {result.key_intel.reference && <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.7)', margin: 0 }}><strong>Ref:</strong> {result.key_intel.reference}</p>}
+                  {result.key_intel.deadline && <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.7)', margin: 0 }}><strong>Deadline:</strong> {result.key_intel.deadline}</p>}
+                  {result.key_intel.contact_method && <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.7)', margin: 0 }}><strong>Contact:</strong> {result.key_intel.contact_method}</p>}
+                </div>
+              </SortedResultSection>
+            )}
 
-  return (
-    <div ref={resultRef}>
-      <AnimatePresence>
-        {result && vs && (
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-            <SortedResultShell
-              verdict={{
-                label: vs.label,
-                color: vs.color,
-                summary: result.summary,
-                detail: result.what_it_means,
-                badges: [{ text: result.document_type, color: GOLD }],
-              }}
-              accentColor={GOLD}
-              tool={result.detected_tool || 'letter'}
-              onCopy={copyAll}
-              onShare={copyAll}
-              onReset={reset}
-              onEmail={result.ready_reply ? openEmail : null}
-              flash={copied ? 'COPIED' : null}
-            >
-              {(result.key_intel?.sender || result.key_intel?.deadline || result.key_intel?.reference || result.key_intel?.contact_method) && (
-                <SortedResultSection label="KEY INTEL" color={GOLD}>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {result.key_intel.sender && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>From:</strong> {result.key_intel.sender}</p>}
-                    {result.key_intel.reference && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>Ref:</strong> {result.key_intel.reference}</p>}
-                    {result.key_intel.deadline && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>Deadline:</strong> {result.key_intel.deadline}</p>}
-                    {result.key_intel.contact_method && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>Contact:</strong> {result.key_intel.contact_method}</p>}
+            {result.action_steps?.length > 0 && (
+              <SortedResultSection label="WHAT TO DO" color={GOLD} delay={0.15}>
+                <SortedSteps steps={result.action_steps} color={GOLD} />
+              </SortedResultSection>
+            )}
+
+            {result.what_not_to_do?.length > 0 && (
+              <SortedResultSection label="DON'T DO THIS" color="#dc2626" delay={0.2}>
+                <SortedBullets items={result.what_not_to_do} color="#dc2626" symbol="✕" />
+              </SortedResultSection>
+            )}
+
+            {result.ready_reply && (
+              <SortedResultSection label="READY-TO-SEND REPLY" color={GOLD} delay={0.25}>
+                {result.ready_reply.subject && (
+                  <div style={{ borderBottom: '1px solid rgba(28,28,30,0.08)', paddingBottom: 12, marginBottom: 14 }}>
+                    <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(28,28,30,0.35)', margin: '0 0 4px' }}>SUBJECT</p>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: INK, margin: 0 }}>{result.ready_reply.subject}</p>
                   </div>
-                </SortedResultSection>
-              )}
+                )}
+                <pre style={{ fontSize: 13, color: 'rgba(28,28,30,0.8)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.7, margin: 0 }}>{result.ready_reply.body}</pre>
+              </SortedResultSection>
+            )}
 
-              {result.action_steps?.length > 0 && (
-                <SortedResultSection label="WHAT TO DO" color={GOLD} delay={0.15}>
-                  <SortedSteps steps={result.action_steps} color={GOLD} />
-                </SortedResultSection>
-              )}
+            {result.tip && (
+              <SortedResultSection label="BEFORE YOU GO" color="#d97706" delay={0.3}>
+                <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.6)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
+              </SortedResultSection>
+            )}
 
-              {result.what_not_to_do?.length > 0 && (
-                <SortedResultSection label="DON'T DO THIS" color="#dc2626" delay={0.2}>
-                  <SortedBullets items={result.what_not_to_do} color="#dc2626" symbol="✕" />
-                </SortedResultSection>
-              )}
+            {result.helplines?.length > 0 && (
+              <SortedResultSection label="REAL HELP NEAR YOU" color="#16a34a" delay={0.35}>
+                <SortedBullets items={result.helplines} color="#16a34a" />
+              </SortedResultSection>
+            )}
+          </SortedResultShell>
+        </motion.div>
+      </div>
+    );
+  }
 
-              {result.ready_reply && (
-                <SortedResultSection label="READY-TO-SEND REPLY" color={GOLD} delay={0.25}>
-                  {result.ready_reply.subject && (
-                    <div style={{ borderBottom: '1px solid rgba(26,26,26,0.08)', paddingBottom: 12, marginBottom: 14 }}>
-                      <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(26,26,26,0.35)', margin: '0 0 4px' }}>SUBJECT</p>
-                      <p style={{ fontSize: 14, fontWeight: 600, color: INK, margin: 0 }}>{result.ready_reply.subject}</p>
-                    </div>
-                  )}
-                  <pre style={{ fontSize: 13, color: 'rgba(26,26,26,0.8)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.7, margin: 0 }}>{result.ready_reply.body}</pre>
-                </SortedResultSection>
-              )}
-
-              {result.tip && (
-                <SortedResultSection label="BEFORE YOU GO" color="#d97706" delay={0.3}>
-                  <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.6)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
-                </SortedResultSection>
-              )}
-
-              {result.helplines?.length > 0 && (
-                <SortedResultSection label="REAL HELP IN YOUR AREA" color="#16a34a" delay={0.35}>
-                  <SortedBullets items={result.helplines} color="#16a34a" />
-                </SortedResultSection>
-              )}
-            </SortedResultShell>
+  // ── INPUT STATE ──
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+      <AnimatePresence>
+        {error && (
+          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+            style={{ marginBottom: 12, padding: '14px 16px', borderRadius: 12, border: '1px solid rgba(220,38,38,0.2)', background: 'rgba(220,38,38,0.04)' }}>
+            <p style={{ fontSize: 13, color: '#dc2626', margin: 0, fontWeight: 500, lineHeight: 1.5 }}>{error}</p>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* INPUT CARD */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25 }}
+        style={{
+          background: '#fff',
+          borderRadius: 16,
+          boxShadow: ready
+            ? '0 4px 20px rgba(198,153,92,0.10), 0 1px 3px rgba(0,0,0,0.03)'
+            : '0 1px 4px rgba(0,0,0,0.04)',
+          border: ready ? `1px solid ${GOLD}50` : `1px solid ${BORDER}`,
+          overflow: 'hidden',
+          transition: 'box-shadow 0.3s, border-color 0.3s',
+        }}
+      >
+        <textarea
+          value={text}
+          onChange={e => setText(e.target.value)}
+          placeholder="Paste the letter here…"
+          style={{
+            width: '100%', minHeight: 120, background: 'transparent',
+            border: 'none', color: INK, fontSize: 16, padding: '18px 18px 10px',
+            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
+            boxSizing: 'border-box',
+          }}
+        />
+
+        {/* FILE PILL */}
+        <AnimatePresence>
+          {file && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              style={{ overflow: 'hidden' }}
+            >
+              <div style={{
+                margin: '0 14px 8px', padding: '10px 12px', borderRadius: 10,
+                background: uploading ? 'rgba(198,153,92,0.06)' : 'rgba(22,163,74,0.05)',
+                border: `1px solid ${uploading ? 'rgba(198,153,92,0.15)' : 'rgba(22,163,74,0.2)'}`,
+                display: 'flex', alignItems: 'center', gap: 8,
+              }}>
+                {uploading ? (
+                  <Loader2 size={14} className="animate-spin" color={GOLD} style={{ flexShrink: 0 }} />
+                ) : (
+                  <CheckCircle2 size={14} color="#16a34a" style={{ flexShrink: 0 }} />
+                )}
+                <span style={{ fontSize: 13, color: uploading ? GOLD : '#16a34a', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                  {uploading ? 'Uploading…' : file.name}
+                </span>
+                {!uploading && (
+                  <button onClick={() => { setFile(null); setFileUrl(null); }}
+                    style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer', fontSize: 12, fontWeight: 600, flexShrink: 0, padding: '4px 6px' }}>
+                    REMOVE
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ACTION ROW */}
+        <div style={{
+          padding: '6px 12px 10px', borderTop: `1px solid ${BORDER}`,
+          display: 'flex', alignItems: 'center', gap: 2,
+        }}>
+          <button onClick={() => cameraInputRef.current?.click()}
+            style={{
+              padding: '8px 12px', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer',
+              border: 'none', background: 'transparent', color: MUTED,
+              display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+              WebkitTapHighlightColor: 'transparent',
+            }}>
+            <Camera size={16} color={GOLD} /> Photo
+          </button>
+          <button onClick={() => fileInputRef.current?.click()}
+            style={{
+              padding: '8px 12px', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer',
+              border: 'none', background: 'transparent', color: MUTED,
+              display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+              WebkitTapHighlightColor: 'transparent',
+            }}>
+            <FileText size={16} color={GOLD} /> File
+          </button>
+          <div style={{ flex: 1 }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: 12, fontWeight: 500, color: MUTED }}>
+            <GeoSelector geo={geo} onChange={setGeo} accentColor={GOLD} />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* CTA */}
+      <motion.div ref={ctaRef} style={{ marginTop: 12, scrollMarginTop: 80 }}>
+        <motion.button
+          onClick={analyse}
+          disabled={!ready}
+          whileTap={ready ? { scale: 0.98 } : {}}
+          style={{
+            width: '100%', padding: '15px', borderRadius: 12, fontSize: 15,
+            fontWeight: 600, cursor: ready ? 'pointer' : 'default',
+            border: 'none',
+            background: ready ? GOLD : 'rgba(28,28,30,0.05)',
+            color: ready ? '#fff' : MUTED,
+            transition: 'background 0.2s, color 0.2s',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+          }}
+        >
+          {ready ? (
+            <>
+              Sort it
+              <ArrowRight size={16} color="#fff" />
+            </>
+          ) : (
+            'Ready when you are'
+          )}
+        </motion.button>
+      </motion.div>
+
+      {/* THE JOURNEY — visible 1-2-3, always present, step 1 active */}
+      <div style={{
+        marginTop: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0,
+      }}>
+        {/* Step 1 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{
+            width: 22, height: 22, borderRadius: '50%',
+            background: journeyStep >= 1 ? GOLD : 'transparent',
+            border: `1.5px solid ${journeyStep >= 1 ? GOLD : 'rgba(28,28,30,0.15)'}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 11, fontWeight: 700, color: journeyStep >= 1 ? '#fff' : MUTED,
+          }}>1</div>
+          <span style={{ fontSize: 12, fontWeight: 500, color: journeyStep >= 1 ? INK : MUTED }}>Paste it</span>
+        </div>
+        {/* Line */}
+        <div style={{
+          width: 24, height: 1.5,
+          background: journeyStep >= 2 ? GOLD : 'rgba(28,28,30,0.1)',
+          margin: '0 6px',
+        }} />
+        {/* Step 2 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{
+            width: 22, height: 22, borderRadius: '50%',
+            background: journeyStep >= 2 ? GOLD : 'transparent',
+            border: `1.5px solid ${journeyStep >= 2 ? GOLD : 'rgba(28,28,30,0.15)'}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 11, fontWeight: 700, color: journeyStep >= 2 ? '#fff' : MUTED,
+          }}>2</div>
+          <span style={{ fontSize: 12, fontWeight: 500, color: journeyStep >= 2 ? INK : MUTED }}>We decode</span>
+        </div>
+        {/* Line */}
+        <div style={{
+          width: 24, height: 1.5,
+          background: journeyStep >= 3 ? GOLD : 'rgba(28,28,30,0.1)',
+          margin: '0 6px',
+        }} />
+        {/* Step 3 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{
+            width: 22, height: 22, borderRadius: '50%',
+            background: journeyStep >= 3 ? GOLD : 'transparent',
+            border: `1.5px solid ${journeyStep >= 3 ? GOLD : 'rgba(28,28,30,0.15)'}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 11, fontWeight: 700, color: journeyStep >= 3 ? '#fff' : MUTED,
+          }}>3</div>
+          <span style={{ fontSize: 12, fontWeight: 500, color: journeyStep >= 3 ? INK : MUTED }}>Sorted</span>
+        </div>
+      </div>
+
+      {/* TRUST */}
+      <div style={{
+        marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+      }}>
+        <Shield size={11} color={MUTED} style={{ opacity: 0.5 }} />
+        <p style={{ fontSize: 11, color: MUTED, margin: 0, fontWeight: 400, opacity: 0.7 }}>
+          Private to your device · 3 free · no signup
+        </p>
+      </div>
+
+      <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
+      <input ref={fileInputRef} type="file" accept="image/*,application/pdf" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
     </div>
   );
 }

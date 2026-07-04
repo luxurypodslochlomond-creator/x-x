@@ -7,7 +7,7 @@ export default function SortedLayout({ children, currentPage }) {
   const navigate = useNavigate();
   
   return (
-    <div style={{ minHeight: '100dvh', background: '#f8f6f3', color: '#1a1a1a', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch' }}>
+    <div style={{ minHeight: '100dvh', background: '#f9f8f6', color: '#1c1c1e', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif' }}>
       
       {/* STICKY HEADER */}
       <SortedHeader />
@@ -25,9 +25,9 @@ export default function SortedLayout({ children, currentPage }) {
               border: 'none',
               cursor: 'pointer',
               padding: 8,
-              color: '#d4a574',
+              color: '#c6995c',
               fontSize: 13,
-              fontWeight: 700,
+              fontWeight: 600,
             }}
           >
             <ArrowLeft size={16} />
@@ -44,12 +44,12 @@ export default function SortedLayout({ children, currentPage }) {
       {/* Footer */}
       <div style={{
         padding: '14px 20px',
-        borderTop: '1px solid rgba(26,18,8,0.06)',
+        borderTop: '1px solid rgba(28,28,30,0.05)',
         display: 'flex',
         justifyContent: 'center',
         fontFamily: 'monospace',
         fontSize: 9,
-        color: 'rgba(26,18,8,0.3)',
+        color: 'rgba(28,28,30,0.3)',
         letterSpacing: '0.14em',
         marginTop: '40px',
       }}>
