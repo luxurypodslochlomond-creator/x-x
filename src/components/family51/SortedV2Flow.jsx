@@ -406,20 +406,9 @@ Return JSON:
         )}
       </motion.button>
 
-      {/* THE JOURNEY — felt progress, not a checklist */}
-      <div style={{
-        marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        <JourneyDot num={1} label="Paste" active={journeyStep >= 1} gold={GOLD} ink={INK} muted={MUTED} />
-        <JourneyLine active={journeyStep >= 2} gold={GOLD} />
-        <JourneyDot num={2} label="Decode" active={journeyStep >= 2} gold={GOLD} ink={INK} muted={MUTED} />
-        <JourneyLine active={journeyStep >= 3} gold={GOLD} />
-        <JourneyDot num={3} label="Sorted" active={journeyStep >= 3} gold={GOLD} ink={INK} muted={MUTED} />
-      </div>
-
       {/* Trust */}
       <div style={{
-        marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
+        marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
       }}>
         <Shield size={11} color={MUTED} style={{ opacity: 0.5 }} />
         <p style={{ fontSize: 11, color: MUTED, margin: 0, fontWeight: 400, opacity: 0.7 }}>

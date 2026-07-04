@@ -18,7 +18,7 @@ export default function SortedHeader() {
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
-      background: 'rgba(249,248,246,0.92)',
+      background: 'rgba(252,250,246,0.92)',
       backdropFilter: 'blur(20px)',
       WebkitBackdropFilter: 'blur(20px)',
       borderBottom: '1px solid rgba(28,28,30,0.05)',

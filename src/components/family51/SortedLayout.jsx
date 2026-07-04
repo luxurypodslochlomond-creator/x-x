@@ -7,7 +7,7 @@ export default function SortedLayout({ children, currentPage }) {
   const navigate = useNavigate();
   
   return (
-    <div style={{ minHeight: '100dvh', background: '#f9f8f6', color: '#1c1c1e', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif' }}>
+    <div style={{ minHeight: '100dvh',       background: '#fcfaf6', color: '#1c1c1e', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif' }}>
       
       {/* STICKY HEADER */}
       <SortedHeader />
