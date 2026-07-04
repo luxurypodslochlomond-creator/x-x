@@ -398,11 +398,11 @@ Return JSON:
       >
         {ready ? (
           <>
-            Sort it
+            Tell me what it means
             <ArrowRight size={17} color="#fff" />
           </>
         ) : (
-          'Ready when you are'
+          'Paste your letter to start'
         )}
       </motion.button>
 

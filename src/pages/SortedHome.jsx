@@ -37,12 +37,12 @@ export default function SortedHome() {
           fontSize: 'clamp(22px, 6vw, 28px)', fontWeight: 700, lineHeight: 1.25,
           margin: 0, letterSpacing: '-0.02em',
         }}>
-          Whatever that letter says — let's work out what it means together.
+          Got a letter you don't understand?
         </h1>
         <p style={{
           fontSize: 14, color: 'rgba(28,28,30,0.5)', margin: '8px 0 0', fontWeight: 400, lineHeight: 1.5,
         }}>
-          Paste it, snap a photo, or upload a file. We'll decode it into plain language — any language — and tell you exactly what to do next.
+          Paste it, snap a photo, or upload a file. We'll explain it in plain language — any language — and tell you what to do next.
         </p>
       </motion.div>
 
