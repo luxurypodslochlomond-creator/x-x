@@ -7,7 +7,7 @@ export default function SortedLayout({ children, currentPage }) {
   const navigate = useNavigate();
   
   return (
-    <div style={{ minHeight: '100dvh', background: 'linear-gradient(180deg, #fdf9f0 0%, #faf8f5 40%)', color: '#1a1208', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch' }}>
+    <div style={{ minHeight: '100dvh', background: '#f8f6f3', color: '#1a1a1a', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch' }}>
       
       {/* STICKY HEADER */}
       <SortedHeader />
@@ -25,7 +25,7 @@ export default function SortedLayout({ children, currentPage }) {
               border: 'none',
               cursor: 'pointer',
               padding: 8,
-              color: '#d97706',
+              color: '#d4a574',
               fontSize: 13,
               fontWeight: 700,
             }}
@@ -44,12 +44,12 @@ export default function SortedLayout({ children, currentPage }) {
       {/* Footer */}
       <div style={{
         padding: '14px 20px',
-        borderTop: '1px solid rgba(217,119,6,0.2)',
+        borderTop: '1px solid rgba(26,18,8,0.06)',
         display: 'flex',
         justifyContent: 'center',
         fontFamily: 'monospace',
         fontSize: 9,
-        color: 'rgba(26,18,8,0.35)',
+        color: 'rgba(26,18,8,0.3)',
         letterSpacing: '0.14em',
         marginTop: '40px',
       }}>

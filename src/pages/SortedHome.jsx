@@ -16,16 +16,16 @@ export default function SortedHome() {
   return (
     <div style={{
       minHeight: '100dvh',
-      background: 'linear-gradient(180deg, #fdf9f0 0%, #faf6ef 30%, #f8f5f0 100%)',
+      background: '#f8f6f3',
       color: '#1a1a1a',
       overflowX: 'hidden',
       position: 'relative',
     }}>
-      {/* WARM GLOW */}
+      {/* SUBTLE GOLD GLOW */}
       <div style={{
-        position: 'absolute', top: -120, left: '50%', transform: 'translateX(-50%)',
-        width: 400, height: 300, borderRadius: '50%',
-        background: `radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%)`,
+        position: 'absolute', top: -100, left: '50%', transform: 'translateX(-50%)',
+        width: 500, height: 350, borderRadius: '50%',
+        background: `radial-gradient(circle, rgba(212,165,116,0.06) 0%, transparent 70%)`,
         pointerEvents: 'none', zIndex: 0,
       }} />
 

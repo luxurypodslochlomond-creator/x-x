@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Camera, Upload, MapPin, ArrowRight, CheckCircle2, Sparkles, Lock } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -10,9 +10,18 @@ import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } from './SortedResultShell';
 import GeoSelector from './GeoSelector';
+import { ApertureIcon, DocumentIcon, CompassIcon, ResolveIcon, ShieldIcon } from './SortedIcons';
 
-const ACCENT = '#d97706';
-const ACCENT_DARK = '#b45309';
+const ACCENT = '#d4a574';
+const ACCENT_DARK = '#b8895c';
+
+// ── INPUT CARD DESIGN TOKENS ──
+const INK = '#0c0a09';        // warm black (the card)
+const CREAM = '#f5ede0';      // warm white (text on card)
+const GOLD = '#d4a574';       // warm gold (accent)
+const GOLD_BRIGHT = '#e8b888'; // lighter gold (hover/active)
+const MUTED = '#8a7d6a';      // warm grey (muted text)
+const BORDER = 'rgba(212,165,116,0.15)'; // subtle gold border
 
 const SEVERITY = {
   urgent: { color: '#ef4444', label: 'URGENT — ACT NOW' },
@@ -44,7 +53,6 @@ export default function SortedV2Flow() {
     }
   }, [result]);
 
-  // After file upload completes, gently scroll to the CTA so the user sees it
   useEffect(() => {
     if (fileUrl && ctaRef.current) {
       setTimeout(() => ctaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
@@ -192,36 +200,36 @@ Return JSON:
           )}
         </AnimatePresence>
 
-        {/* THE INPUT CARD — the centerpiece */}
+        {/* THE INPUT CARD — a dark jewel on clean white. Warm, intimate, drawn to it. */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
           style={{
-            background: '#fff',
-            borderRadius: 20,
+            background: INK,
+            borderRadius: 22,
             boxShadow: ready
-              ? `0 8px 32px ${ACCENT}18, 0 2px 8px rgba(26,18,8,0.06)`
-              : '0 2px 12px rgba(26,18,8,0.05)',
-            border: ready ? `1.5px solid ${ACCENT}40` : '1.5px solid rgba(26,18,8,0.08)',
+              ? `0 16px 48px rgba(212,165,116,0.12), 0 4px 12px rgba(0,0,0,0.15)`
+              : '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
+            border: ready ? `1px solid ${GOLD}40` : `1px solid ${BORDER}`,
             overflow: 'hidden',
-            transition: 'box-shadow 0.3s, border-color 0.3s',
+            transition: 'box-shadow 0.4s, border-color 0.4s',
           }}
         >
           {/* TEXTAREA */}
           <textarea
             value={text}
             onChange={e => setText(e.target.value)}
-            placeholder="Paste your letter, describe what's happening, or snap a photo. Don't worry about formatting — just get it in."
+            placeholder="Paste it here. Or tell us what's happening."
             style={{
-              width: '100%', minHeight: 130, background: 'transparent',
-              border: 'none', color: '#1a1208', fontSize: 15, padding: '20px 22px 16px',
+              width: '100%', minHeight: 140, background: 'transparent',
+              border: 'none', color: CREAM, fontSize: 15, padding: '24px 24px 16px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
               boxSizing: 'border-box',
             }}
           />
 
-          {/* FILE PILL — shown when a file is attached */}
+          {/* FILE PILL */}
           <AnimatePresence>
             {file && (
               <motion.div
@@ -231,24 +239,24 @@ Return JSON:
                 style={{ overflow: 'hidden' }}
               >
                 <div style={{
-                  margin: '0 18px 12px', padding: '12px 16px', borderRadius: 12,
-                  background: uploading ? 'rgba(217,119,6,0.06)' : 'rgba(34,197,94,0.08)',
-                  border: `1px solid ${uploading ? 'rgba(217,119,6,0.2)' : 'rgba(34,197,94,0.25)'}`,
+                  margin: '0 20px 12px', padding: '12px 16px', borderRadius: 12,
+                  background: uploading ? 'rgba(212,165,116,0.08)' : 'rgba(34,197,94,0.08)',
+                  border: `1px solid ${uploading ? 'rgba(212,165,116,0.2)' : 'rgba(34,197,94,0.25)'}`,
                   display: 'flex', alignItems: 'center', gap: 10,
                 }}>
                   {uploading ? (
                     <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                      <circle cx="12" cy="12" r="10" stroke={ACCENT} strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round" />
+                      <circle cx="12" cy="12" r="10" stroke={GOLD} strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round" />
                     </svg>
                   ) : (
                     <CheckCircle2 size={16} color="#22c55e" style={{ flexShrink: 0 }} />
                   )}
-                  <span style={{ fontSize: 13, color: uploading ? ACCENT_DARK : '#16a34a', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                  <span style={{ fontSize: 13, color: uploading ? GOLD : '#16a34a', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
                     {uploading ? 'Uploading…' : file.name}
                   </span>
                   {!uploading && (
                     <button onClick={() => { setFile(null); setFileUrl(null); }}
-                      style={{ background: 'none', border: 'none', color: 'rgba(26,18,8,0.4)', cursor: 'pointer', fontSize: 12, fontWeight: 700, flexShrink: 0, padding: '4px 8px' }}>
+                      style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer', fontSize: 12, fontWeight: 700, flexShrink: 0, padding: '4px 8px' }}>
                       REMOVE
                     </button>
                   )}
@@ -257,85 +265,86 @@ Return JSON:
             )}
           </AnimatePresence>
 
-          {/* ACTION ROW — camera + upload + location */}
+          {/* ACTION ROW — custom icons, gold accent */}
           <div style={{
-            padding: '12px 18px 0', borderTop: '1px solid rgba(26,18,8,0.05)',
-            display: 'flex', alignItems: 'center', gap: 8,
+            padding: '14px 20px 0', borderTop: `1px solid ${BORDER}`,
+            display: 'flex', alignItems: 'center', gap: 6,
           }}>
             <motion.button whileTap={{ scale: 0.95 }} onClick={() => cameraInputRef.current?.click()}
               style={{
-                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, cursor: 'pointer',
-                border: '1px solid rgba(26,18,8,0.12)', background: 'rgba(26,18,8,0.02)', color: 'rgba(26,18,8,0.6)',
-                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                border: `1px solid ${BORDER}`, background: 'transparent', color: MUTED,
+                display: 'flex', alignItems: 'center', gap: 7, transition: 'all 0.15s',
+                WebkitTapHighlightColor: 'transparent',
               }}>
-              <Camera size={15} /> Photo
+              <ApertureIcon size={16} color={GOLD} /> Photo
             </motion.button>
             <motion.button whileTap={{ scale: 0.95 }} onClick={() => fileInputRef.current?.click()}
               style={{
-                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 700, cursor: 'pointer',
-                border: '1px solid rgba(26,18,8,0.12)', background: 'rgba(26,18,8,0.02)', color: 'rgba(26,18,8,0.6)',
-                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                border: `1px solid ${BORDER}`, background: 'transparent', color: MUTED,
+                display: 'flex', alignItems: 'center', gap: 7, transition: 'all 0.15s',
+                WebkitTapHighlightColor: 'transparent',
               }}>
-              <Upload size={14} /> File
+              <DocumentIcon size={16} color={GOLD} /> File
             </motion.button>
             <div style={{ flex: 1 }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: 'rgba(26,18,8,0.4)' }}>
-              <MapPin size={12} color={ACCENT} />
-              <GeoSelector geo={geo} onChange={setGeo} accentColor={ACCENT} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: MUTED }}>
+              <CompassIcon size={13} color={GOLD} />
+              <GeoSelector geo={geo} onChange={setGeo} accentColor={GOLD} />
             </div>
           </div>
 
-          {/* TRUST WHISPER — lives INSIDE the box, right where vulnerability happens */}
+          {/* TRUST WHISPER — elegant, inside the card */}
           <div style={{
-            padding: '10px 18px 14px', display: 'flex', alignItems: 'center', gap: 6,
+            padding: '10px 20px 18px', display: 'flex', alignItems: 'center', gap: 7,
           }}>
-            <Lock size={11} color="rgba(26,18,8,0.25)" style={{ flexShrink: 0 }} />
-            <p style={{ fontSize: 10.5, color: 'rgba(26,18,8,0.3)', margin: 0, fontWeight: 500, lineHeight: 1.4 }}>
+            <ShieldIcon size={12} color={MUTED} />
+            <p style={{ fontSize: 10.5, color: MUTED, margin: 0, fontWeight: 500, lineHeight: 1.4, opacity: 0.7 }}>
               Nothing leaves your device until you sort it · 3 free · no signup
             </p>
           </div>
         </motion.div>
 
-        {/* THE CTA — pulsing when ready */}
-        <motion.div ref={ctaRef} style={{ marginTop: 14, scrollMarginTop: 80 }}>
+        {/* THE CTA — elegant, confident, not screaming */}
+        <motion.div ref={ctaRef} style={{ marginTop: 16, scrollMarginTop: 80 }}>
           <motion.button
             onClick={analyse}
             disabled={!ready}
-            whileTap={ready ? { scale: 0.97 } : {}}
-            animate={ready ? { boxShadow: [`0 4px 14px ${ACCENT}40, 0 1px 3px ${ACCENT}30`, `0 6px 24px ${ACCENT}55, 0 2px 6px ${ACCENT}40`, `0 4px 14px ${ACCENT}40, 0 1px 3px ${ACCENT}30`] } : {}}
-            transition={ready ? { duration: 2, repeat: Infinity, ease: 'easeInOut' } : {}}
+            whileTap={ready ? { scale: 0.98 } : {}}
+            animate={ready ? { boxShadow: [`0 4px 20px ${GOLD}15`, `0 8px 32px ${GOLD}30`, `0 4px 20px ${GOLD}15`] } : {}}
+            transition={ready ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : {}}
             style={{
-              width: '100%', padding: '20px 0', borderRadius: 18, fontSize: 17,
-              fontWeight: 900, letterSpacing: '0.08em', cursor: ready ? 'pointer' : 'not-allowed',
-              border: 'none',
-              background: ready ? `linear-gradient(135deg, ${ACCENT}, ${ACCENT_DARK})` : 'rgba(26,18,8,0.04)',
-              color: ready ? '#fff' : 'rgba(26,18,8,0.25)',
-              transition: 'background 0.2s, color 0.2s',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              width: '100%', padding: '18px 0', borderRadius: 16, fontSize: 16,
+              fontWeight: 700, letterSpacing: '0.02em', cursor: ready ? 'pointer' : 'default',
+              border: ready ? 'none' : `1px solid ${BORDER}`,
+              background: ready ? `linear-gradient(135deg, ${GOLD}, ${GOLD_BRIGHT})` : 'transparent',
+              color: ready ? INK : MUTED,
+              transition: 'background 0.3s, color 0.3s, border-color 0.3s',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
               WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
             }}
           >
             {ready ? (
               <>
-                {fileUrl && !text.trim() ? 'SORT IT' : 'SORT IT'}
-                <ArrowRight size={18} />
+                Sort it
+                <ResolveIcon size={18} color={INK} />
               </>
             ) : (
               <>
-                <Sparkles size={16} />
-                READY WHEN YOU ARE
+                <ShieldIcon size={14} color={MUTED} />
+                Ready when you are
               </>
             )}
           </motion.button>
 
-          {/* subtle hint when ready */}
           <AnimatePresence>
             {ready && (
               <motion.p
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                style={{ textAlign: 'center', fontSize: 11, color: 'rgba(26,18,8,0.35)', margin: '8px 0 0', fontWeight: 500 }}
+                style={{ textAlign: 'center', fontSize: 11, color: 'rgba(26,18,8,0.35)', margin: '10px 0 0', fontWeight: 500 }}
               >
-                Tap to decode — takes about 10 seconds
+                Takes about 10 seconds
               </motion.p>
             )}
           </AnimatePresence>
