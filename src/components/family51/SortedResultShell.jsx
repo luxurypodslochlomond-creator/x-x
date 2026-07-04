@@ -14,8 +14,8 @@ const T = {
   labelSpacing: '0.12em',
   bodySize: 13,
   bodyLineHeight: 1.6,
-  bodyColor: 'rgba(26,18,8,0.75)',
-  muted: 'rgba(26,18,8,0.35)',
+  bodyColor: 'rgba(26,26,26,0.75)',
+  muted: 'rgba(26,26,26,0.35)',
   ink: '#1a1a1a',
 };
 
@@ -38,7 +38,7 @@ function VerdictHeader({ verdict }) {
         <span style={{ fontSize: 10, fontWeight: T.labelWeight, color, letterSpacing: T.labelSpacing }}>{label}</span>
       </div>
       {summary && (
-        <p style={{ fontSize: 19, fontWeight: 700, color: T.ink, margin: '0 0 8px', lineHeight: 1.25, fontFamily: "'Fraunces', Georgia, serif" }}>{summary}</p>
+        <p style={{ fontSize: 18, fontWeight: 600, color: T.ink, margin: '0 0 8px', lineHeight: 1.3 }}>{summary}</p>
       )}
       {detail && (
         <p style={{ fontSize: T.bodySize, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: T.bodyLineHeight }}>{detail}</p>
@@ -111,7 +111,7 @@ export function SortedBullets({ items, color, symbol = '•' }) {
 // ── THE SHELL ── Wraps every tool's result. Verdict → sections → CTA → action bar → feedback → disclaimer.
 export default function SortedResultShell({
   verdict,            // { label, color, summary, detail, badges? } | null
-  accentColor = '#d4a574',
+  accentColor = '#c6995c',
   tool,
   caseId,
   children,           // tool-specific SortedResultSection components
@@ -137,7 +137,7 @@ export default function SortedResultShell({
       ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: T.gap }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: T.gap, fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif' }}>
       <VerdictHeader verdict={verdict} />
       {children}
 

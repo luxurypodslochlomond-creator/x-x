@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Camera, FileText, ChevronDown, ArrowRight, Shield } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -10,23 +10,17 @@ import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } from './SortedResultShell';
 import GeoSelector from './GeoSelector';
-import { ApertureIcon, DocumentIcon, CompassIcon, ResolveIcon, ShieldIcon } from './SortedIcons';
 
-const ACCENT = '#d4a574';
-const ACCENT_DARK = '#b8895c';
-
-// ── INPUT CARD DESIGN TOKENS ──
-const INK = '#0c0a09';        // warm black (the card)
-const CREAM = '#f5ede0';      // warm white (text on card)
-const GOLD = '#d4a574';       // warm gold (accent)
-const GOLD_BRIGHT = '#e8b888'; // lighter gold (hover/active)
-const MUTED = '#8a7d6a';      // warm grey (muted text)
-const BORDER = 'rgba(212,165,116,0.15)'; // subtle gold border
+const GOLD = '#c6995c';
+const INK = '#1a1a1a';
+const PAPER = '#ffffff';
+const MUTED = 'rgba(26,26,26,0.4)';
+const BORDER = 'rgba(26,26,26,0.08)';
 
 const SEVERITY = {
-  urgent: { color: '#ef4444', label: 'URGENT — ACT NOW' },
-  important: { color: '#f59e0b', label: 'IMPORTANT' },
-  routine: { color: '#10b981', label: 'ROUTINE' },
+  urgent: { color: '#dc2626', label: 'URGENT — ACT NOW' },
+  important: { color: '#d97706', label: 'IMPORTANT' },
+  routine: { color: '#16a34a', label: 'ROUTINE' },
 };
 
 export default function SortedV2Flow() {
@@ -194,37 +188,37 @@ Return JSON:
         <AnimatePresence>
           {error && (
             <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              style={{ marginBottom: 12, padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(239,68,68,0.3)', background: 'rgba(239,68,68,0.06)' }}>
-              <p style={{ fontSize: 13, color: '#ef4444', margin: 0, fontWeight: 600, lineHeight: 1.5 }}>{error}</p>
+              style={{ marginBottom: 12, padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(220,38,38,0.2)', background: 'rgba(220,38,38,0.04)' }}>
+              <p style={{ fontSize: 13, color: '#dc2626', margin: 0, fontWeight: 500, lineHeight: 1.5 }}>{error}</p>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* THE INPUT CARD — a dark jewel on clean white. Warm, intimate, drawn to it. */}
+        {/* THE INPUT CARD — light, warm, like a note on a desk */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
+          transition={{ duration: 0.3 }}
           style={{
-            background: INK,
-            borderRadius: 22,
+            background: PAPER,
+            borderRadius: 18,
             boxShadow: ready
-              ? `0 16px 48px rgba(212,165,116,0.12), 0 4px 12px rgba(0,0,0,0.15)`
-              : '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
+              ? '0 4px 24px rgba(198,153,92,0.10), 0 1px 4px rgba(0,0,0,0.04)'
+              : '0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02)',
             border: ready ? `1px solid ${GOLD}40` : `1px solid ${BORDER}`,
             overflow: 'hidden',
-            transition: 'box-shadow 0.4s, border-color 0.4s',
+            transition: 'box-shadow 0.3s, border-color 0.3s',
           }}
         >
           {/* TEXTAREA */}
           <textarea
             value={text}
             onChange={e => setText(e.target.value)}
-            placeholder="Paste it here. Or tell us what's happening."
+            placeholder="Paste the letter. Or tell us what's happening."
             style={{
-              width: '100%', minHeight: 140, background: 'transparent',
-              border: 'none', color: CREAM, fontSize: 15, padding: '24px 24px 16px',
-              resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.65,
+              width: '100%', minHeight: 130, background: 'transparent',
+              border: 'none', color: INK, fontSize: 16, padding: '20px 20px 12px',
+              resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
               boxSizing: 'border-box',
             }}
           />
@@ -239,24 +233,24 @@ Return JSON:
                 style={{ overflow: 'hidden' }}
               >
                 <div style={{
-                  margin: '0 20px 12px', padding: '12px 16px', borderRadius: 12,
-                  background: uploading ? 'rgba(212,165,116,0.08)' : 'rgba(34,197,94,0.08)',
-                  border: `1px solid ${uploading ? 'rgba(212,165,116,0.2)' : 'rgba(34,197,94,0.25)'}`,
+                  margin: '0 16px 10px', padding: '10px 14px', borderRadius: 10,
+                  background: uploading ? 'rgba(198,153,92,0.06)' : 'rgba(22,163,74,0.05)',
+                  border: `1px solid ${uploading ? 'rgba(198,153,92,0.15)' : 'rgba(22,163,74,0.2)'}`,
                   display: 'flex', alignItems: 'center', gap: 10,
                 }}>
                   {uploading ? (
-                    <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                    <svg className="animate-spin" width="15" height="15" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
                       <circle cx="12" cy="12" r="10" stroke={GOLD} strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round" />
                     </svg>
                   ) : (
-                    <CheckCircle2 size={16} color="#22c55e" style={{ flexShrink: 0 }} />
+                    <CheckCircle2 size={15} color="#16a34a" style={{ flexShrink: 0 }} />
                   )}
-                  <span style={{ fontSize: 13, color: uploading ? GOLD : '#16a34a', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                  <span style={{ fontSize: 13, color: uploading ? GOLD : '#16a34a', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
                     {uploading ? 'Uploading…' : file.name}
                   </span>
                   {!uploading && (
                     <button onClick={() => { setFile(null); setFileUrl(null); }}
-                      style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer', fontSize: 12, fontWeight: 700, flexShrink: 0, padding: '4px 8px' }}>
+                      style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer', fontSize: 12, fontWeight: 600, flexShrink: 0, padding: '4px 8px' }}>
                       REMOVE
                     </button>
                   )}
@@ -265,90 +259,85 @@ Return JSON:
             )}
           </AnimatePresence>
 
-          {/* ACTION ROW — custom icons, gold accent */}
+          {/* ACTION ROW — clean, light, native */}
           <div style={{
-            padding: '14px 20px 0', borderTop: `1px solid ${BORDER}`,
-            display: 'flex', alignItems: 'center', gap: 6,
+            padding: '8px 14px 12px', borderTop: `1px solid ${BORDER}`,
+            display: 'flex', alignItems: 'center', gap: 4,
           }}>
-            <motion.button whileTap={{ scale: 0.95 }} onClick={() => cameraInputRef.current?.click()}
+            <button onClick={() => cameraInputRef.current?.click()}
               style={{
-                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                border: `1px solid ${BORDER}`, background: 'transparent', color: MUTED,
-                display: 'flex', alignItems: 'center', gap: 7, transition: 'all 0.15s',
+                padding: '8px 14px', borderRadius: 10, fontSize: 13, fontWeight: 500, cursor: 'pointer',
+                border: 'none', background: 'transparent', color: MUTED,
+                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
                 WebkitTapHighlightColor: 'transparent',
               }}>
-              <ApertureIcon size={16} color={GOLD} /> Photo
-            </motion.button>
-            <motion.button whileTap={{ scale: 0.95 }} onClick={() => fileInputRef.current?.click()}
+              <Camera size={16} color={GOLD} /> Photo
+            </button>
+            <button onClick={() => fileInputRef.current?.click()}
               style={{
-                padding: '10px 16px', borderRadius: 12, fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                border: `1px solid ${BORDER}`, background: 'transparent', color: MUTED,
-                display: 'flex', alignItems: 'center', gap: 7, transition: 'all 0.15s',
+                padding: '8px 14px', borderRadius: 10, fontSize: 13, fontWeight: 500, cursor: 'pointer',
+                border: 'none', background: 'transparent', color: MUTED,
+                display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
                 WebkitTapHighlightColor: 'transparent',
               }}>
-              <DocumentIcon size={16} color={GOLD} /> File
-            </motion.button>
+              <FileText size={16} color={GOLD} /> File
+            </button>
             <div style={{ flex: 1 }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: MUTED }}>
-              <CompassIcon size={13} color={GOLD} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: 12, fontWeight: 500, color: MUTED }}>
               <GeoSelector geo={geo} onChange={setGeo} accentColor={GOLD} />
             </div>
           </div>
-
-          {/* TRUST WHISPER — elegant, inside the card */}
-          <div style={{
-            padding: '10px 20px 18px', display: 'flex', alignItems: 'center', gap: 7,
-          }}>
-            <ShieldIcon size={12} color={MUTED} />
-            <p style={{ fontSize: 10.5, color: MUTED, margin: 0, fontWeight: 500, lineHeight: 1.4, opacity: 0.7 }}>
-              Nothing leaves your device until you sort it · 3 free · no signup
-            </p>
-          </div>
         </motion.div>
 
-        {/* THE CTA — elegant, confident, not screaming */}
-        <motion.div ref={ctaRef} style={{ marginTop: 16, scrollMarginTop: 80 }}>
+        {/* THE CTA — warm gold, confident */}
+        <motion.div ref={ctaRef} style={{ marginTop: 14, scrollMarginTop: 80 }}>
           <motion.button
             onClick={analyse}
             disabled={!ready}
             whileTap={ready ? { scale: 0.98 } : {}}
-            animate={ready ? { boxShadow: [`0 4px 20px ${GOLD}15`, `0 8px 32px ${GOLD}30`, `0 4px 20px ${GOLD}15`] } : {}}
-            transition={ready ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : {}}
             style={{
-              width: '100%', padding: '18px 0', borderRadius: 16, fontSize: 16,
-              fontWeight: 700, letterSpacing: '0.02em', cursor: ready ? 'pointer' : 'default',
-              border: ready ? 'none' : `1px solid ${BORDER}`,
-              background: ready ? `linear-gradient(135deg, ${GOLD}, ${GOLD_BRIGHT})` : 'transparent',
-              color: ready ? INK : MUTED,
-              transition: 'background 0.3s, color 0.3s, border-color 0.3s',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+              width: '100%', padding: '16px', borderRadius: 14, fontSize: 15,
+              fontWeight: 600, cursor: ready ? 'pointer' : 'default',
+              border: 'none',
+              background: ready ? GOLD : 'rgba(26,26,26,0.04)',
+              color: ready ? '#fff' : MUTED,
+              transition: 'background 0.3s, color 0.3s',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
             }}
           >
             {ready ? (
               <>
                 Sort it
-                <ResolveIcon size={18} color={INK} />
+                <ArrowRight size={17} color="#fff" />
               </>
             ) : (
-              <>
-                <ShieldIcon size={14} color={MUTED} />
-                Ready when you are
-              </>
+              'Ready when you are'
             )}
           </motion.button>
-
-          <AnimatePresence>
-            {ready && (
-              <motion.p
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                style={{ textAlign: 'center', fontSize: 11, color: 'rgba(26,18,8,0.35)', margin: '10px 0 0', fontWeight: 500 }}
-              >
-                Takes about 10 seconds
-              </motion.p>
-            )}
-          </AnimatePresence>
         </motion.div>
+
+        {/* THE JOURNEY — visible 1-2-3, elegant, not SaaS-y */}
+        <div style={{
+          marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+          fontSize: 12, fontWeight: 500, color: MUTED,
+        }}>
+          <span>Paste it</span>
+          <ArrowRight size={11} color={GOLD} style={{ opacity: 0.5 }} />
+          <span>We decode it</span>
+          <ArrowRight size={11} color={GOLD} style={{ opacity: 0.5 }} />
+          <span style={{ color: GOLD, fontWeight: 600 }}>You're sorted</span>
+        </div>
+
+        {/* TRUST WHISPER */}
+        <div style={{
+          marginTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+        }}>
+          <Shield size={11} color={MUTED} style={{ opacity: 0.5 }} />
+          <p style={{ fontSize: 11, color: MUTED, margin: 0, fontWeight: 400, opacity: 0.7 }}>
+            Private to your device · 3 free · no signup
+          </p>
+        </div>
 
         <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
         <input ref={fileInputRef} type="file" accept="image/*,application/pdf" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
@@ -358,7 +347,7 @@ Return JSON:
 
   // ── LOADING STATE ──
   if (loading) {
-    return <SortedThinkingSteps tool="letter" accentColor={ACCENT} isActive={loading} inputHint={text} geo={geo} />;
+    return <SortedThinkingSteps tool="letter" accentColor={GOLD} isActive={loading} inputHint={text} geo={geo} />;
   }
 
   // ── RESULT STATE ──
@@ -375,9 +364,9 @@ Return JSON:
                 color: vs.color,
                 summary: result.summary,
                 detail: result.what_it_means,
-                badges: [{ text: result.document_type, color: ACCENT }],
+                badges: [{ text: result.document_type, color: GOLD }],
               }}
-              accentColor={ACCENT}
+              accentColor={GOLD}
               tool={result.detected_tool || 'letter'}
               onCopy={copyAll}
               onShare={copyAll}
@@ -386,49 +375,49 @@ Return JSON:
               flash={copied ? 'COPIED' : null}
             >
               {(result.key_intel?.sender || result.key_intel?.deadline || result.key_intel?.reference || result.key_intel?.contact_method) && (
-                <SortedResultSection label="KEY INTEL" color={ACCENT}>
+                <SortedResultSection label="KEY INTEL" color={GOLD}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {result.key_intel.sender && <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0 }}><strong>From:</strong> {result.key_intel.sender}</p>}
-                    {result.key_intel.reference && <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0 }}><strong>Ref:</strong> {result.key_intel.reference}</p>}
-                    {result.key_intel.deadline && <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0 }}><strong>Deadline:</strong> {result.key_intel.deadline}</p>}
-                    {result.key_intel.contact_method && <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.7)', margin: 0 }}><strong>Contact:</strong> {result.key_intel.contact_method}</p>}
+                    {result.key_intel.sender && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>From:</strong> {result.key_intel.sender}</p>}
+                    {result.key_intel.reference && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>Ref:</strong> {result.key_intel.reference}</p>}
+                    {result.key_intel.deadline && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>Deadline:</strong> {result.key_intel.deadline}</p>}
+                    {result.key_intel.contact_method && <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.7)', margin: 0 }}><strong>Contact:</strong> {result.key_intel.contact_method}</p>}
                   </div>
                 </SortedResultSection>
               )}
 
               {result.action_steps?.length > 0 && (
-                <SortedResultSection label="WHAT TO DO" color={ACCENT} delay={0.15}>
-                  <SortedSteps steps={result.action_steps} color={ACCENT} />
+                <SortedResultSection label="WHAT TO DO" color={GOLD} delay={0.15}>
+                  <SortedSteps steps={result.action_steps} color={GOLD} />
                 </SortedResultSection>
               )}
 
               {result.what_not_to_do?.length > 0 && (
-                <SortedResultSection label="DON'T DO THIS" color="#ef4444" delay={0.2}>
-                  <SortedBullets items={result.what_not_to_do} color="#ef4444" symbol="✕" />
+                <SortedResultSection label="DON'T DO THIS" color="#dc2626" delay={0.2}>
+                  <SortedBullets items={result.what_not_to_do} color="#dc2626" symbol="✕" />
                 </SortedResultSection>
               )}
 
               {result.ready_reply && (
-                <SortedResultSection label="READY-TO-SEND REPLY" color={ACCENT} delay={0.25}>
+                <SortedResultSection label="READY-TO-SEND REPLY" color={GOLD} delay={0.25}>
                   {result.ready_reply.subject && (
-                    <div style={{ borderBottom: '1px solid rgba(26,18,8,0.08)', paddingBottom: 12, marginBottom: 14 }}>
-                      <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(26,18,8,0.35)', margin: '0 0 4px' }}>SUBJECT</p>
-                      <p style={{ fontSize: 14, fontWeight: 700, color: '#1a1208', margin: 0 }}>{result.ready_reply.subject}</p>
+                    <div style={{ borderBottom: '1px solid rgba(26,26,26,0.08)', paddingBottom: 12, marginBottom: 14 }}>
+                      <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(26,26,26,0.35)', margin: '0 0 4px' }}>SUBJECT</p>
+                      <p style={{ fontSize: 14, fontWeight: 600, color: INK, margin: 0 }}>{result.ready_reply.subject}</p>
                     </div>
                   )}
-                  <pre style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.75, margin: 0 }}>{result.ready_reply.body}</pre>
+                  <pre style={{ fontSize: 13, color: 'rgba(26,26,26,0.8)', whiteSpace: 'pre-wrap', fontFamily: 'inherit', lineHeight: 1.7, margin: 0 }}>{result.ready_reply.body}</pre>
                 </SortedResultSection>
               )}
 
               {result.tip && (
-                <SortedResultSection label="BEFORE YOU GO" color="#eab308" delay={0.3}>
-                  <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
+                <SortedResultSection label="BEFORE YOU GO" color="#d97706" delay={0.3}>
+                  <p style={{ fontSize: 12, color: 'rgba(26,26,26,0.6)', margin: 0, lineHeight: 1.5 }}>{result.tip}</p>
                 </SortedResultSection>
               )}
 
               {result.helplines?.length > 0 && (
-                <SortedResultSection label="REAL HELP IN YOUR AREA" color="#10b981" delay={0.35}>
-                  <SortedBullets items={result.helplines} color="#10b981" />
+                <SortedResultSection label="REAL HELP IN YOUR AREA" color="#16a34a" delay={0.35}>
+                  <SortedBullets items={result.helplines} color="#16a34a" />
                 </SortedResultSection>
               )}
             </SortedResultShell>

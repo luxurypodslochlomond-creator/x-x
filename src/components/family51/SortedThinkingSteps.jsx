@@ -3,56 +3,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * SortedThinkingSteps — the waiting moment.
- * The dark input card transforms: a warm gold light works inside it,
- * narrating what it's doing. Feels like a companion thinking, not a spinner.
+ * Light card, warm gold pulse, companion narrating what it's doing.
  */
 
-// ─── Extract specifics from raw input ─────────────────────────────────────────
 function extractSpecifics(input = '') {
   const text = input.slice(0, 600);
-
   const amountMatch = text.match(/[£$€]\s?[\d,]+(?:\.\d{1,2})?|\b\d{1,6}(?:\.\d{2})?\s*(?:pounds?|dollars?|euros?)/i);
   const amount = amountMatch?.[0]?.trim();
-
   const dateMatch = text.match(/(?:by|before|within|no later than)\s+[\w\s,\/]+(?:\d{4}|\d+ days?)/i);
   const deadline = dateMatch?.[0]?.replace(/^(?:by|before|within|no later than)\s+/i, '').trim();
-
   const senderMatch = text.match(/(?:from|by|signed|regards,?)\s+([A-Z][a-zA-Z &]+(?:Ltd|LLC|PLC|Council|HMRC|Court|Bank|Insurance|Services|Finance|Recoveries|Solutions)?)/);
   const sender = senderMatch?.[1]?.trim();
-
   const refMatch = text.match(/(?:ref(?:erence)?(?:\s*no\.?)?|case\s*(?:no\.?)?|account\s*(?:no\.?)?)[:\s#]*([A-Z0-9\-\/]{5,20})/i);
   const ref = refMatch?.[1]?.trim();
-
   return { amount, deadline, sender, ref };
 }
 
-// ─── Build contextual steps ────────────────────────────────────────────────────
 function buildSteps(tool, input = '', geo = null) {
   const hint = input.toLowerCase();
   const specifics = extractSpecifics(input);
-
   const geoName = geo?.country || geo?.label || null;
   const isScotland = geoName && /scotland/i.test(geoName);
   const isIreland  = geoName && /ireland/i.test(geoName);
   const isWales    = geoName && /wales/i.test(geoName);
   const jurisdictionLabel = isScotland ? 'Scottish law' : isIreland ? 'Irish law' : isWales ? 'Welsh law' : geoName ? `${geoName} law` : null;
-  const debtScheme = isScotland ? 'Debt Arrangement Scheme (Scotland)' : isIreland ? 'MABS debt support' : 'debt management options';
-  const tenantLaw  = isScotland ? 'Private Housing (Tenancies) (Scotland) Act' : isIreland ? 'Residential Tenancies Act' : 'Housing Act';
   const consumerBody = isScotland ? 'Citizens Advice Scotland' : isIreland ? 'CCPC' : 'Citizens Advice';
-  const geoJurisdictionNote = jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'Laws differ — getting yours exactly right';
-
   const amountNote  = specifics.amount  ? `Checking the ${specifics.amount} claim`        : null;
   const deadlineNote= specifics.deadline? `Deadline spotted: ${specifics.deadline}`        : null;
   const senderNote  = specifics.sender  ? `Sent by: ${specifics.sender}`                  : null;
-  const refNote     = specifics.ref     ? `Reference ${specifics.ref} logged`              : null;
 
   const isDebt       = /debt|bailiff|ccj|county court|arrears|overdue|owe\b|balance due|debt collection|notice of|amount outstanding|final demand|default notice|lowell|cabot|intrum|overdales|pas\b/.test(hint);
   const isEviction   = /evict|section 21|s21|notice to quit|landlord|tenancy|rent\b|deposit|possession|leave the property|housing association|social housing|letting agent/.test(hint);
   const isEmployment = /dismiss|redundan|workplace|employer|\bhr\b|disciplinary|unfair|capability|grievance|termination/.test(hint);
-  const isHMRC       = /hmrc|self.?assess|vat\b|national insurance|tax return|underpayment|tax credit|penalty notice/.test(hint);
-  const isCouncil    = /council tax|local authority|planning|enforcement notice|parking fine|rates\b|benefit overpayment/.test(hint);
-  const isCourt      = /county court|claim form|summons|judgment|hearing|ccj|legal proceedings|court order|solicitor/.test(hint);
-  const isInsurance  = /insurance|claim\b|policy|premium|damage|liability|underwriter|settlement/.test(hint);
   const isConsumer   = /refund|faulty|broken|consumer rights|trading standards|chargeback|not as described|repair|replace/.test(hint);
   const isNeighbour  = /neighbour|neighbor|noise complaint|boundary|fence|garden|shared area|anti.?social|land dispute|over land|trespass|right of way|hedge|encroach|overhang|party wall/.test(hint);
   const isParcelScam = /parcel|delivery|royal mail|dpd|evri|fedex|ups|tracking|redelivery fee/.test(hint);
@@ -213,13 +195,11 @@ function buildSteps(tool, input = '', geo = null) {
   ];
 }
 
-// ─── Design tokens ───
-const INK = '#0c0a09';
-const CREAM = '#f5ede0';
-const GOLD = '#d4a574';
-const MUTED = '#8a7d6a';
+const INK = '#1a1a1a';
+const GOLD = '#c6995c';
+const MUTED = 'rgba(26,26,26,0.4)';
+const BORDER = 'rgba(26,26,26,0.08)';
 
-// ─── Component ────────────────────────────────────────────────────────────────
 export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOLD, isActive = false, inputHint = '', geo = null }) {
   const steps = useMemo(() => buildSteps(tool, inputHint, geo), [tool, inputHint, geo]);
   const [currentStep, setCurrentStep] = useState(0);
@@ -231,15 +211,11 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOL
       setCompletedSteps([]);
       return;
     }
-
     setCurrentStep(0);
     setCompletedSteps([]);
-
     const durations = steps.map((_, i) => 2200 + (i % 3) * 500 + (i % 2) * 400);
-
     let stepIndex = 0;
     let cancelled = false;
-
     const advance = () => {
       if (cancelled || stepIndex >= steps.length - 1) return;
       setCompletedSteps(prev => [...prev, stepIndex]);
@@ -247,7 +223,6 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOL
       setCurrentStep(stepIndex);
       setTimeout(advance, durations[stepIndex]);
     };
-
     const t = setTimeout(advance, durations[0]);
     return () => { cancelled = true; clearTimeout(t); };
   }, [isActive, tool, inputHint]);
@@ -260,27 +235,28 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOL
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       style={{
-        background: INK,
-        borderRadius: 22,
-        padding: '36px 24px 32px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
-        border: '1px solid rgba(212,165,116,0.15)',
+        background: '#ffffff',
+        borderRadius: 18,
+        padding: '32px 24px 28px',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02)',
+        border: `1px solid ${BORDER}`,
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
       }}
     >
-      {/* Warm gold orb — like a candle flame working */}
-      <div style={{ position: 'relative', width: 44, height: 44, margin: '0 auto 28px' }}>
-        <motion.div animate={{ scale: [1, 1.4, 1], opacity: [0.06, 0.18, 0.06] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+      {/* Warm gold pulse — like a heartbeat working */}
+      <div style={{ position: 'relative', width: 40, height: 40, margin: '0 auto 24px' }}>
+        <motion.div animate={{ scale: [1, 1.5, 1], opacity: [0.08, 0.2, 0.08] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }} />
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.35, 0.15] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-          style={{ position: 'absolute', inset: 6, borderRadius: '50%', background: accentColor }} />
-        <motion.div animate={{ scale: [0.8, 1, 0.8], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ position: 'absolute', inset: 14, borderRadius: '50%', background: accentColor }} />
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+          style={{ position: 'absolute', inset: 5, borderRadius: '50%', background: accentColor }} />
+        <motion.div animate={{ scale: [0.7, 1, 0.7], opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ position: 'absolute', inset: 12, borderRadius: '50%', background: accentColor }} />
       </div>
 
-      {/* Steps — cream text on dark card, like a companion narrating */}
+      {/* Steps */}
       <div style={{ width: '100%', maxWidth: 300, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
         {steps.map((step, i) => {
           const isDone    = completedSteps.includes(i);
@@ -294,14 +270,13 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOL
               transition={{ duration: 0.3, delay: i * 0.06 }}
               style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}
             >
-              {/* Status circle */}
               <div style={{ width: 18, height: 18, flexShrink: 0, marginTop: 1 }}>
                 {isDone ? (
                   <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 22 }}
                     style={{ width: 18, height: 18, borderRadius: '50%', background: accentColor, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
-                      <path d="M2 5l2.5 2.5L8 3" stroke={INK} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 5l2.5 2.5L8 3" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </motion.div>
                 ) : isCurrent ? (
@@ -311,16 +286,15 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOL
                       style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor }} />
                   </div>
                 ) : (
-                  <div style={{ width: 18, height: 18, borderRadius: '50%', border: '1.5px solid rgba(245,237,224,0.1)' }} />
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', border: '1.5px solid rgba(26,26,26,0.1)' }} />
                 )}
               </div>
 
-              {/* Text */}
               <div style={{ flex: 1 }}>
                 <p style={{
-                  fontSize: 13,
-                  fontWeight: isCurrent ? 700 : isDone ? 600 : 400,
-                  color: isCurrent ? CREAM : isDone ? accentColor : MUTED,
+                  fontSize: 14,
+                  fontWeight: isCurrent ? 600 : isDone ? 500 : 400,
+                  color: isCurrent ? INK : isDone ? accentColor : MUTED,
                   margin: '0 0 2px',
                   transition: 'all 0.25s',
                 }}>
@@ -330,7 +304,7 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOL
                   {isCurrent && (
                     <motion.p key="sub-current"
                       initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                      style={{ fontSize: 11, color: MUTED, margin: 0 }}>
+                      style={{ fontSize: 12, color: MUTED, margin: 0 }}>
                       {step.sub}
                     </motion.p>
                   )}
@@ -341,8 +315,7 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOL
         })}
       </div>
 
-      {/* Quiet reassurance at the bottom */}
-      <p style={{ fontSize: 10, color: MUTED, marginTop: 28, textAlign: 'center', letterSpacing: '0.08em', fontWeight: 600, opacity: 0.5 }}>
+      <p style={{ fontSize: 11, color: MUTED, marginTop: 24, textAlign: 'center', fontWeight: 400, opacity: 0.6 }}>
         Working on it — won't be long
       </p>
     </motion.div>
