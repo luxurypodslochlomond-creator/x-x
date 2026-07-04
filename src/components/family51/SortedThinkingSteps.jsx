@@ -2,31 +2,24 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * SortedThinkingSteps — best in world "expert thinking out loud" loader
- * 
- * Two layers of personalisation:
- * 1. Steps are contextual to the detected topic (debt, eviction, HMRC, scam type, etc.)
- * 2. The active step subtitle references specifics extracted from their actual text
- *    (amount, company name, sender, deadline) so it feels like a real expert reading their document
+ * SortedThinkingSteps — the waiting moment.
+ * The dark input card transforms: a warm gold light works inside it,
+ * narrating what it's doing. Feels like a companion thinking, not a spinner.
  */
 
 // ─── Extract specifics from raw input ─────────────────────────────────────────
 function extractSpecifics(input = '') {
-  const text = input.slice(0, 600); // only need the opening
+  const text = input.slice(0, 600);
 
-  // Amount: £1,234 or $500 or 1234.00
   const amountMatch = text.match(/[£$€]\s?[\d,]+(?:\.\d{1,2})?|\b\d{1,6}(?:\.\d{2})?\s*(?:pounds?|dollars?|euros?)/i);
   const amount = amountMatch?.[0]?.trim();
 
-  // Deadline / date: by 14 May, within 7 days, before 01/06/2026
   const dateMatch = text.match(/(?:by|before|within|no later than)\s+[\w\s,\/]+(?:\d{4}|\d+ days?)/i);
   const deadline = dateMatch?.[0]?.replace(/^(?:by|before|within|no later than)\s+/i, '').trim();
 
-  // Sender: "from X" or "Dear X" reversed — look for company/org names
   const senderMatch = text.match(/(?:from|by|signed|regards,?)\s+([A-Z][a-zA-Z &]+(?:Ltd|LLC|PLC|Council|HMRC|Court|Bank|Insurance|Services|Finance|Recoveries|Solutions)?)/);
   const sender = senderMatch?.[1]?.trim();
 
-  // Reference number
   const refMatch = text.match(/(?:ref(?:erence)?(?:\s*no\.?)?|case\s*(?:no\.?)?|account\s*(?:no\.?)?)[:\s#]*([A-Z0-9\-\/]{5,20})/i);
   const ref = refMatch?.[1]?.trim();
 
@@ -38,7 +31,6 @@ function buildSteps(tool, input = '', geo = null) {
   const hint = input.toLowerCase();
   const specifics = extractSpecifics(input);
 
-  // Geo-specific legal terms
   const geoName = geo?.country || geo?.label || null;
   const isScotland = geoName && /scotland/i.test(geoName);
   const isIreland  = geoName && /ireland/i.test(geoName);
@@ -54,7 +46,6 @@ function buildSteps(tool, input = '', geo = null) {
   const senderNote  = specifics.sender  ? `Sent by: ${specifics.sender}`                  : null;
   const refNote     = specifics.ref     ? `Reference ${specifics.ref} logged`              : null;
 
-  // Topic detection
   const isDebt       = /debt|bailiff|ccj|county court|arrears|overdue|owe\b|balance due|debt collection|notice of|amount outstanding|final demand|default notice|lowell|cabot|intrum|overdales|pas\b/.test(hint);
   const isEviction   = /evict|section 21|s21|notice to quit|landlord|tenancy|rent\b|deposit|possession|leave the property|housing association|social housing|letting agent/.test(hint);
   const isEmployment = /dismiss|redundan|workplace|employer|\bhr\b|disciplinary|unfair|capability|grievance|termination/.test(hint);
@@ -71,10 +62,6 @@ function buildSteps(tool, input = '', geo = null) {
   const isInvestScam = /investment|crypto|bitcoin|returns|profit|trading platform|broker|forex/.test(hint);
   const isRomanceScam= /met online|dating|love you|send money|western union|gift card|itunes|stranded|emergency/.test(hint);
 
-  // ── LETTER TOOL ──────────────────────────────────────────────────────────────
-  // Honest steps — we don't guess the document type before the AI has read it.
-  // We only surface specifics we can see (amount, deadline, sender) without claiming
-  // to know what kind of letter it is. The AI delivers the verdict, not the loader.
   if (tool === 'letter') {
     return [
       { text: 'Reading your letter',                   sub: senderNote || 'Every word — carefully' },
@@ -86,7 +73,6 @@ function buildSteps(tool, input = '', geo = null) {
     ];
   }
 
-  // ── REPLY TOOL ───────────────────────────────────────────────────────────────
   if (tool === 'reply') {
     if (isDebt) return [
       { text: 'Understanding your debt situation',     sub: 'Reading exactly what you told us' },
@@ -125,7 +111,6 @@ function buildSteps(tool, input = '', geo = null) {
     ];
   }
 
-  // ── CONFLICT TOOL ────────────────────────────────────────────────────────────
   if (tool === 'conflict') {
     if (isNeighbour) return [
       { text: 'Reading your neighbour situation',      sub: 'Noise, boundaries, or shared areas?' },
@@ -161,7 +146,6 @@ function buildSteps(tool, input = '', geo = null) {
     ];
   }
 
-  // ── SCAM TOOL ────────────────────────────────────────────────────────────────
   if (tool === 'scam') {
     if (isParcelScam) return [
       { text: 'Reading this delivery message',         sub: 'Parcel scams are the #1 fraud right now' },
@@ -229,8 +213,14 @@ function buildSteps(tool, input = '', geo = null) {
   ];
 }
 
+// ─── Design tokens ───
+const INK = '#0c0a09';
+const CREAM = '#f5ede0';
+const GOLD = '#d4a574';
+const MUTED = '#8a7d6a';
+
 // ─── Component ────────────────────────────────────────────────────────────────
-export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f97316', isActive = false, inputHint = '', geo = null }) {
+export default function SortedThinkingSteps({ tool = 'letter', accentColor = GOLD, isActive = false, inputHint = '', geo = null }) {
   const steps = useMemo(() => buildSteps(tool, inputHint, geo), [tool, inputHint, geo]);
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState([]);
@@ -245,7 +235,6 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
     setCurrentStep(0);
     setCompletedSteps([]);
 
-    // Organic timing: 2.2s – 3.8s per step, varied so it never feels mechanical
     const durations = steps.map((_, i) => 2200 + (i % 3) * 500 + (i % 2) * 400);
 
     let stepIndex = 0;
@@ -270,27 +259,29 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      style={{ padding: '32px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      style={{
+        background: INK,
+        borderRadius: 22,
+        padding: '36px 24px 32px',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
+        border: '1px solid rgba(212,165,116,0.15)',
+      }}
     >
-      {/* Pulsing brain orb */}
-      <div style={{ position: 'relative', width: 50, height: 50, marginBottom: 26 }}>
-        <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.22, 0.08] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+      {/* Warm gold orb — like a candle flame working */}
+      <div style={{ position: 'relative', width: 44, height: 44, margin: '0 auto 28px' }}>
+        <motion.div animate={{ scale: [1, 1.4, 1], opacity: [0.06, 0.18, 0.06] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: accentColor }} />
-        <motion.div animate={{ scale: [1, 1.14, 1], opacity: [0.18, 0.42, 0.18] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-          style={{ position: 'absolute', inset: 8, borderRadius: '50%', background: accentColor }} />
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 1 }}>
-          <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
-            stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-          <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
-            stroke={accentColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        </svg>
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.35, 0.15] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+          style={{ position: 'absolute', inset: 6, borderRadius: '50%', background: accentColor }} />
+        <motion.div animate={{ scale: [0.8, 1, 0.8], opacity: [0.4, 0.8, 0.4] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ position: 'absolute', inset: 14, borderRadius: '50%', background: accentColor }} />
       </div>
 
-      {/* Steps */}
-      <div style={{ width: '100%', maxWidth: 295, display: 'flex', flexDirection: 'column', gap: 11 }}>
+      {/* Steps — cream text on dark card, like a companion narrating */}
+      <div style={{ width: '100%', maxWidth: 300, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
         {steps.map((step, i) => {
           const isDone    = completedSteps.includes(i);
           const isCurrent = i === currentStep;
@@ -299,28 +290,28 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
           return (
             <motion.div key={i}
               initial={{ opacity: 0, x: -6 }}
-              animate={{ opacity: isPending ? 0.2 : 1, x: 0 }}
+              animate={{ opacity: isPending ? 0.25 : 1, x: 0 }}
               transition={{ duration: 0.3, delay: i * 0.06 }}
-              style={{ display: 'flex', alignItems: 'flex-start', gap: 11 }}
+              style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}
             >
-              {/* Icon */}
-              <div style={{ width: 20, height: 20, flexShrink: 0, marginTop: 1 }}>
+              {/* Status circle */}
+              <div style={{ width: 18, height: 18, flexShrink: 0, marginTop: 1 }}>
                 {isDone ? (
                   <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 22 }}
-                    style={{ width: 20, height: 20, borderRadius: '50%', background: accentColor, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M2 5l2.5 2.5L8 3" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                    style={{ width: 18, height: 18, borderRadius: '50%', background: accentColor, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
+                      <path d="M2 5l2.5 2.5L8 3" stroke={INK} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </motion.div>
                 ) : isCurrent ? (
-                  <div style={{ width: 20, height: 20, borderRadius: '50%', border: `2px solid ${accentColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <motion.div animate={{ scale: [0.35, 1, 0.35] }}
-                      transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
-                      style={{ width: 7, height: 7, borderRadius: '50%', background: accentColor }} />
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', border: `1.5px solid ${accentColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <motion.div animate={{ scale: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+                      style={{ width: 6, height: 6, borderRadius: '50%', background: accentColor }} />
                   </div>
                 ) : (
-                  <div style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid rgba(26,18,8,0.1)' }} />
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', border: '1.5px solid rgba(245,237,224,0.1)' }} />
                 )}
               </div>
 
@@ -328,8 +319,8 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
               <div style={{ flex: 1 }}>
                 <p style={{
                   fontSize: 13,
-                  fontWeight: isCurrent ? 900 : isDone ? 700 : 400,
-                  color: isCurrent ? '#1a1208' : isDone ? accentColor : 'rgba(26,18,8,0.28)',
+                  fontWeight: isCurrent ? 700 : isDone ? 600 : 400,
+                  color: isCurrent ? CREAM : isDone ? accentColor : MUTED,
                   margin: '0 0 2px',
                   transition: 'all 0.25s',
                 }}>
@@ -339,15 +330,8 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
                   {isCurrent && (
                     <motion.p key="sub-current"
                       initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                      style={{ fontSize: 11, color: 'rgba(26,18,8,0.42)', margin: 0 }}>
+                      style={{ fontSize: 11, color: MUTED, margin: 0 }}>
                       {step.sub}
-                    </motion.p>
-                  )}
-                  {isDone && (
-                    <motion.p key="sub-done"
-                      initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} exit={{ opacity: 0 }}
-                      style={{ fontSize: 10, color: accentColor, margin: 0, fontWeight: 600 }}>
-                      ✓ done
                     </motion.p>
                   )}
                 </AnimatePresence>
@@ -357,8 +341,9 @@ export default function SortedThinkingSteps({ tool = 'letter', accentColor = '#f
         })}
       </div>
 
-      <p style={{ fontSize: 10, color: 'rgba(26,18,8,0.25)', marginTop: 24, textAlign: 'center', letterSpacing: '0.06em', fontWeight: 700 }}>
-        NOTHING STORED · PROCESSED &amp; GONE
+      {/* Quiet reassurance at the bottom */}
+      <p style={{ fontSize: 10, color: MUTED, marginTop: 28, textAlign: 'center', letterSpacing: '0.08em', fontWeight: 600, opacity: 0.5 }}>
+        Working on it — won't be long
       </p>
     </motion.div>
   );

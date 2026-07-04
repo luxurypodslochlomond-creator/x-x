@@ -16,7 +16,7 @@ const T = {
   bodyLineHeight: 1.6,
   bodyColor: 'rgba(26,18,8,0.75)',
   muted: 'rgba(26,18,8,0.35)',
-  ink: '#1a1208',
+  ink: '#1a1a1a',
 };
 
 // ── VERDICT HEADER ── Top of every result. Severity dot + label + summary + detail + badges.
@@ -38,7 +38,7 @@ function VerdictHeader({ verdict }) {
         <span style={{ fontSize: 10, fontWeight: T.labelWeight, color, letterSpacing: T.labelSpacing }}>{label}</span>
       </div>
       {summary && (
-        <p style={{ fontSize: 18, fontWeight: 800, color: T.ink, margin: '0 0 8px', lineHeight: 1.2 }}>{summary}</p>
+        <p style={{ fontSize: 19, fontWeight: 700, color: T.ink, margin: '0 0 8px', lineHeight: 1.25, fontFamily: "'Fraunces', Georgia, serif" }}>{summary}</p>
       )}
       {detail && (
         <p style={{ fontSize: T.bodySize, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: T.bodyLineHeight }}>{detail}</p>
@@ -111,7 +111,7 @@ export function SortedBullets({ items, color, symbol = '•' }) {
 // ── THE SHELL ── Wraps every tool's result. Verdict → sections → CTA → action bar → feedback → disclaimer.
 export default function SortedResultShell({
   verdict,            // { label, color, summary, detail, badges? } | null
-  accentColor = '#f97316',
+  accentColor = '#d4a574',
   tool,
   caseId,
   children,           // tool-specific SortedResultSection components

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getSortedCount } from '@/functions/getSortedCount';
 
-// Honest counter — shows the REAL number of cases decoded (from getSortedCount).
-// No fake ticking, no seed number. If we're early, we say we're early.
+const GOLD = '#d4a574';
+
+// Honest counter — shows the REAL number of cases decoded.
+// No fake ticking, no seed number. If we're early, we say we're early — humanly.
 export default function SortedLiveCounter() {
-  const [count, setCount] = useState(null); // null = loading
+  const [count, setCount] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -19,7 +21,7 @@ export default function SortedLiveCounter() {
     return () => { cancelled = true; };
   }, []);
 
-  // Still early — honest framing, no fake numbers
+  // Still early — honest, human, no startup pitch
   if (count === null || count === 0) {
     return (
       <motion.div
@@ -27,24 +29,22 @@ export default function SortedLiveCounter() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
         style={{
-          padding: '18px 22px',
-          borderRadius: 16,
-          background: 'linear-gradient(135deg, rgba(217,119,6,0.04) 0%, rgba(217,119,6,0.02) 100%)',
-          border: '1.5px solid rgba(217,119,6,0.15)',
+          padding: '16px 20px',
+          borderRadius: 14,
+          background: 'rgba(212,165,116,0.03)',
+          border: '1px solid rgba(212,165,116,0.12)',
           display: 'flex',
           alignItems: 'center',
-          gap: 14,
+          gap: 12,
         }}
       >
-        <div style={{ position: 'relative', flexShrink: 0 }}>
-          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#22c55e' }} />
-        </div>
+        <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 14, fontWeight: 900, color: '#1a1208', lineHeight: 1.2 }}>
-            Be among the first helped
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.2 }}>
+            You're not alone
           </div>
-          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.38)', margin: '3px 0 0' }}>
-            We're early — built honest, growing by word of mouth
+          <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', margin: '2px 0 0' }}>
+            Built with care in Scotland — here for anyone who needs it
           </p>
         </div>
       </motion.div>
@@ -57,29 +57,27 @@ export default function SortedLiveCounter() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
       style={{
-        padding: '18px 22px',
-        borderRadius: 16,
-        background: 'linear-gradient(135deg, rgba(217,119,6,0.04) 0%, rgba(217,119,6,0.02) 100%)',
-        border: '1.5px solid rgba(217,119,6,0.15)',
+        padding: '16px 20px',
+        borderRadius: 14,
+        background: 'rgba(212,165,116,0.03)',
+        border: '1px solid rgba(212,165,116,0.12)',
         display: 'flex',
         alignItems: 'center',
-        gap: 14,
+        gap: 12,
       }}
     >
-      <div style={{ position: 'relative', flexShrink: 0 }}>
-        <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#22c55e' }} />
-      </div>
+      <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
 
       <div style={{ flex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-          <span style={{ fontSize: 24, fontWeight: 900, color: '#1a1208' }}>
+          <span style={{ fontSize: 22, fontWeight: 800, color: '#1a1a1a', fontFamily: "'Fraunces', Georgia, serif" }}>
             {count.toLocaleString()}
           </span>
-          <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.4)' }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.35)', letterSpacing: '0.1em' }}>
             PEOPLE HELPED
           </span>
         </div>
-        <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.38)', margin: '3px 0 0' }}>
+        <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.35)', margin: '2px 0 0' }}>
           letters decoded · replies written · disputes resolved
         </p>
       </div>
