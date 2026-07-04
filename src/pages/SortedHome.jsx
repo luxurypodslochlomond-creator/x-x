@@ -11,7 +11,7 @@ import { useSortedUsage } from '@/components/family51/useSortedUsage';
 const ACCENT_COLOR = '#d97706';
 
 export default function SortedHome() {
-  const { isPremium } = useSortedUsage();
+  const { isPaid: isPremium } = useSortedUsage();
 
   return (
     <div style={{
