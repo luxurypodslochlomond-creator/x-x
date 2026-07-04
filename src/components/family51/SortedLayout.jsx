@@ -47,10 +47,10 @@ export default function SortedLayout({ children, currentPage }) {
         borderTop: '1px solid rgba(28,28,30,0.05)',
         display: 'flex',
         justifyContent: 'center',
-        fontFamily: 'monospace',
-        fontSize: 9,
-        color: 'rgba(28,28,30,0.3)',
-        letterSpacing: '0.14em',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
+        fontSize: 10,
+        color: 'rgba(28,28,30,0.25)',
+        letterSpacing: '0.08em',
         marginTop: '40px',
       }}>
         HONEST HELP · YOUR CASES ARE PRIVATE TO YOU

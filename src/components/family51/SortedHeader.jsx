@@ -4,7 +4,7 @@ import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { SortedMark } from './SortedIcons';
 
 const GOLD = '#c6995c';
-const INK = '#1a1a1a';
+const INK = '#1c1c1e';
 
 export default function SortedHeader() {
   const { remaining, isPaid } = useSortedUsage();
@@ -18,10 +18,10 @@ export default function SortedHeader() {
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
-      background: 'rgba(248,246,243,0.92)',
+      background: 'rgba(249,248,246,0.92)',
       backdropFilter: 'blur(20px)',
       WebkitBackdropFilter: 'blur(20px)',
-      borderBottom: '1px solid rgba(26,26,26,0.05)',
+      borderBottom: '1px solid rgba(28,28,30,0.05)',
       padding: '14px 20px',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',

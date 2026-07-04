@@ -14,9 +14,9 @@ const T = {
   labelSpacing: '0.12em',
   bodySize: 13,
   bodyLineHeight: 1.6,
-  bodyColor: 'rgba(26,26,26,0.75)',
-  muted: 'rgba(26,26,26,0.35)',
-  ink: '#1a1a1a',
+  bodyColor: 'rgba(28,28,30,0.75)',
+  muted: 'rgba(28,28,30,0.35)',
+  ink: '#1c1c1e',
 };
 
 // ── VERDICT HEADER ── Top of every result. Severity dot + label + summary + detail + badges.
@@ -41,7 +41,7 @@ function VerdictHeader({ verdict }) {
         <p style={{ fontSize: 18, fontWeight: 600, color: T.ink, margin: '0 0 8px', lineHeight: 1.3 }}>{summary}</p>
       )}
       {detail && (
-        <p style={{ fontSize: T.bodySize, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: T.bodyLineHeight }}>{detail}</p>
+        <p style={{ fontSize: T.bodySize, color: 'rgba(28,28,30,0.75)', margin: 0, lineHeight: T.bodyLineHeight }}>{detail}</p>
       )}
       {badges?.length > 0 && (
         <div style={{ display: 'flex', gap: 10, marginTop: 12, flexWrap: 'wrap' }}>
@@ -87,7 +87,7 @@ export function SortedSteps({ steps, color, startDelay = 0.1 }) {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 11, fontWeight: 800, color: '#fff', flexShrink: 0, marginTop: 1,
           }}>{i + 1}</div>
-          <p style={{ fontSize: T.bodySize, color: 'rgba(26,18,8,0.8)', lineHeight: T.bodyLineHeight, margin: 0 }}>{step}</p>
+          <p style={{ fontSize: T.bodySize, color: 'rgba(28,28,30,0.8)', lineHeight: T.bodyLineHeight, margin: 0 }}>{step}</p>
         </div>
       ))}
     </div>
@@ -101,7 +101,7 @@ export function SortedBullets({ items, color, symbol = '•' }) {
       {items.map((item, i) => (
         <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
           <span style={{ color, fontSize: 12, fontWeight: 800, flexShrink: 0, marginTop: 2 }}>{symbol}</span>
-          <p style={{ fontSize: T.bodySize, color: 'rgba(26,18,8,0.75)', lineHeight: T.bodyLineHeight, margin: 0 }}>{item}</p>
+          <p style={{ fontSize: T.bodySize, color: 'rgba(28,28,30,0.75)', lineHeight: T.bodyLineHeight, margin: 0 }}>{item}</p>
         </div>
       ))}
     </div>
@@ -128,12 +128,12 @@ export default function SortedResultShell({
         { icon: Copy, label: 'COPY', accent: accentColor, onClick: onCopy },
         { icon: Mail, label: 'EMAIL', accent: '#0891b2', onClick: onEmail },
         { icon: Share2, label: 'SHARE', accent: '#16a34a', onClick: onShare },
-        { icon: RotateCcw, label: 'NEW', accent: 'rgba(26,18,8,0.5)', onClick: onReset },
+        { icon: RotateCcw, label: 'NEW', accent: 'rgba(28,28,30,0.5)', onClick: onReset },
       ]
     : [
         { icon: Copy, label: 'COPY', accent: accentColor, onClick: onCopy },
         { icon: Share2, label: 'SHARE', accent: '#16a34a', onClick: onShare },
-        { icon: RotateCcw, label: 'NEW', accent: 'rgba(26,18,8,0.5)', onClick: onReset },
+        { icon: RotateCcw, label: 'NEW', accent: 'rgba(28,28,30,0.5)', onClick: onReset },
       ];
 
   return (
@@ -150,7 +150,7 @@ export default function SortedResultShell({
           whileTap={{ opacity: 0.7 }}
           style={{
             width: '100%', padding: '18px 0', borderRadius: T.cardRadius, fontSize: 14,
-            fontWeight: 900, letterSpacing: '0.08em', cursor: 'pointer',
+            fontWeight: 600, letterSpacing: '0.01em', cursor: 'pointer',
             border: 'none',
             background: `linear-gradient(135deg, ${accentColor}, ${accentColor}DD)`,
             color: '#fff',
@@ -169,7 +169,7 @@ export default function SortedResultShell({
         <motion.p
           initial={{ opacity: 0, y: 2 }}
           animate={{ opacity: 1, y: 0 }}
-          style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.45)', textAlign: 'center', margin: 0 }}
+          style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', color: 'rgba(28,28,30,0.45)', textAlign: 'center', margin: 0 }}
         >
           {flash}
         </motion.p>
