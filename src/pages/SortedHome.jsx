@@ -22,28 +22,28 @@ export default function SortedHome() {
       fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
       WebkitFontSmoothing: 'antialiased',
     }}>
-      {/* HERO */}
+      {/* HERO — calm, direct, human */}
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
+        initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25 }}
-        style={{ padding: '28px 20px 0', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}
+        transition={{ duration: 0.2 }}
+        style={{ padding: '24px 20px 0', textAlign: 'center', maxWidth: 520, margin: '0 auto' }}
       >
         <h1 style={{
-          fontSize: 'clamp(26px, 7vw, 34px)', fontWeight: 700, lineHeight: 1.15,
+          fontSize: 'clamp(24px, 6.5vw, 32px)', fontWeight: 700, lineHeight: 1.2,
           margin: 0, letterSpacing: '-0.02em',
         }}>
-          Got a letter? Stuck in a mess?
+          Got a scary letter?
         </h1>
         <p style={{
-          fontSize: 15, color: 'rgba(28,28,30,0.5)', margin: '8px 0 0', fontWeight: 400, lineHeight: 1.4,
+          fontSize: 15, color: 'rgba(28,28,30,0.5)', margin: '6px 0 0', fontWeight: 400, lineHeight: 1.4,
         }}>
-          Paste it. We'll tell you what it means and what to do.
+          Paste it. We'll tell you what it means — in plain English.
         </p>
       </motion.div>
 
       {/* INPUT */}
-      <div style={{ padding: '20px 20px 0', maxWidth: 520, margin: '0 auto' }}>
+      <div style={{ padding: '18px 20px 0', maxWidth: 520, margin: '0 auto' }}>
         <SortedV2Flow />
       </div>
 

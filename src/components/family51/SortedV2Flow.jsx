@@ -16,6 +16,10 @@ const INK = '#1c1c1e';
 const MUTED = 'rgba(28,28,30,0.45)';
 const BORDER = 'rgba(28,28,30,0.08)';
 
+// Haptic feedback — native feel
+const tap = () => { try { navigator.vibrate?.(8); } catch {} };
+const tapStrong = () => { try { navigator.vibrate?.(15); } catch {} };
+
 const SEVERITY = {
   urgent: { color: '#dc2626', label: 'URGENT — ACT NOW' },
   important: { color: '#d97706', label: 'IMPORTANT' },
@@ -35,25 +39,25 @@ export default function SortedV2Flow() {
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
   const resultRef = useRef(null);
-  const ctaRef = useRef(null);
+  const textareaRef = useRef(null);
 
   const hasContent = text.trim() || fileUrl;
   const ready = Boolean(hasContent) && !uploading;
-
-  // Journey step: 1=paste, 2=decoding, 3=sorted
   const journeyStep = result ? 3 : loading ? 2 : 1;
+
+  // Auto-grow textarea — feels alive
+  useEffect(() => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    ta.style.height = 'auto';
+    ta.style.height = Math.max(120, ta.scrollHeight) + 'px';
+  }, [text]);
 
   useEffect(() => {
     if (result && resultRef.current) {
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
   }, [result]);
-
-  useEffect(() => {
-    if (fileUrl && ctaRef.current) {
-      setTimeout(() => ctaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
-    }
-  }, [fileUrl]);
 
   const handleFile = async (selectedFile) => {
     if (!selectedFile) return;
@@ -75,6 +79,7 @@ export default function SortedV2Flow() {
 
   const analyse = async () => {
     if (loading || !hasContent) return;
+    tapStrong();
     setLoading(true);
     setResult(null);
     setError(null);
@@ -162,10 +167,11 @@ Return JSON:
     }
   };
 
-  const reset = () => { setResult(null); setText(''); setFile(null); setFileUrl(null); setError(null); };
+  const reset = () => { tap(); setResult(null); setText(''); setFile(null); setFileUrl(null); setError(null); };
 
   const copyAll = () => {
     if (!result) return;
+    tap();
     const parts = [`SORTED — ${result.summary}`, '', result.what_it_means, '', 'WHAT TO DO:',
       ...result.action_steps.map((s, i) => `${i + 1}. ${s}`)];
     if (result.ready_reply) parts.push('', 'READY REPLY:', `Subject: ${result.ready_reply.subject}`, '', result.ready_reply.body);
@@ -178,6 +184,7 @@ Return JSON:
 
   const openEmail = () => {
     if (!result?.ready_reply) return;
+    tap();
     const subject = encodeURIComponent(result.ready_reply.subject || 'Your reply');
     const body = encodeURIComponent(result.ready_reply.body || '');
     window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
@@ -193,7 +200,7 @@ Return JSON:
     const vs = SEVERITY[result.severity] || SEVERITY.routine;
     return (
       <div ref={resultRef}>
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
           <SortedResultShell
             verdict={{
               label: vs.label,
@@ -274,35 +281,40 @@ Return JSON:
         )}
       </AnimatePresence>
 
-      {/* INPUT CARD */}
+      {/* INPUT — the hero surface. No harsh borders. Soft elevation like iOS. */}
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
+        initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25 }}
+        transition={{ duration: 0.2 }}
         style={{
           background: '#fff',
           borderRadius: 16,
           boxShadow: ready
-            ? '0 4px 20px rgba(198,153,92,0.10), 0 1px 3px rgba(0,0,0,0.03)'
-            : '0 1px 4px rgba(0,0,0,0.04)',
-          border: ready ? `1px solid ${GOLD}50` : `1px solid ${BORDER}`,
+            ? '0 8px 28px rgba(198,153,92,0.12), 0 2px 6px rgba(0,0,0,0.03)'
+            : '0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)',
+          border: ready ? `1px solid ${GOLD}40` : '1px solid transparent',
           overflow: 'hidden',
-          transition: 'box-shadow 0.3s, border-color 0.3s',
+          transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
         }}
       >
+        {/* Textarea — auto-grows, feels alive */}
         <textarea
+          ref={textareaRef}
           value={text}
           onChange={e => setText(e.target.value)}
           placeholder="Paste the letter here…"
+          rows={4}
           style={{
             width: '100%', minHeight: 120, background: 'transparent',
             border: 'none', color: INK, fontSize: 16, padding: '18px 18px 10px',
-            resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,
-            boxSizing: 'border-box',
+            resize: 'none', outline: 'none',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
+            lineHeight: 1.6, boxSizing: 'border-box',
+            WebkitFontSmoothing: 'antialiased',
           }}
         />
 
-        {/* FILE PILL */}
+        {/* File pill */}
         <AnimatePresence>
           {file && (
             <motion.div
@@ -326,7 +338,7 @@ Return JSON:
                   {uploading ? 'Uploading…' : file.name}
                 </span>
                 {!uploading && (
-                  <button onClick={() => { setFile(null); setFileUrl(null); }}
+                  <button onClick={() => { tap(); setFile(null); setFileUrl(null); }}
                     style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer', fontSize: 12, fontWeight: 600, flexShrink: 0, padding: '4px 6px' }}>
                     REMOVE
                   </button>
@@ -336,116 +348,76 @@ Return JSON:
           )}
         </AnimatePresence>
 
-        {/* ACTION ROW */}
+        {/* Action row — generous touch targets, native feel */}
         <div style={{
-          padding: '6px 12px 10px', borderTop: `1px solid ${BORDER}`,
-          display: 'flex', alignItems: 'center', gap: 2,
+          padding: '4px 10px 8px', borderTop: `1px solid ${BORDER}`,
+          display: 'flex', alignItems: 'center', gap: 0,
         }}>
-          <button onClick={() => cameraInputRef.current?.click()}
+          <motion.button whileTap={{ scale: 0.94 }} onClick={() => { tap(); cameraInputRef.current?.click(); }}
             style={{
-              padding: '8px 12px', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer',
+              padding: '10px 14px', borderRadius: 10, fontSize: 14, fontWeight: 500, cursor: 'pointer',
               border: 'none', background: 'transparent', color: MUTED,
-              display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+              display: 'flex', alignItems: 'center', gap: 6,
               WebkitTapHighlightColor: 'transparent',
             }}>
-            <Camera size={16} color={GOLD} /> Photo
-          </button>
-          <button onClick={() => fileInputRef.current?.click()}
+            <Camera size={17} color={GOLD} /> Photo
+          </motion.button>
+          <motion.button whileTap={{ scale: 0.94 }} onClick={() => { tap(); fileInputRef.current?.click(); }}
             style={{
-              padding: '8px 12px', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer',
+              padding: '10px 14px', borderRadius: 10, fontSize: 14, fontWeight: 500, cursor: 'pointer',
               border: 'none', background: 'transparent', color: MUTED,
-              display: 'flex', alignItems: 'center', gap: 6, transition: 'all 0.15s',
+              display: 'flex', alignItems: 'center', gap: 6,
               WebkitTapHighlightColor: 'transparent',
             }}>
-            <FileText size={16} color={GOLD} /> File
-          </button>
+            <FileText size={17} color={GOLD} /> File
+          </motion.button>
           <div style={{ flex: 1 }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: 12, fontWeight: 500, color: MUTED }}>
+          <div style={{ display: 'flex', alignItems: 'center', fontSize: 13, fontWeight: 500, color: MUTED }}>
             <GeoSelector geo={geo} onChange={setGeo} accentColor={GOLD} />
           </div>
         </div>
       </motion.div>
 
-      {/* CTA */}
-      <motion.div ref={ctaRef} style={{ marginTop: 12, scrollMarginTop: 80 }}>
-        <motion.button
-          onClick={analyse}
-          disabled={!ready}
-          whileTap={ready ? { scale: 0.98 } : {}}
-          style={{
-            width: '100%', padding: '15px', borderRadius: 12, fontSize: 15,
-            fontWeight: 600, cursor: ready ? 'pointer' : 'default',
-            border: 'none',
-            background: ready ? GOLD : 'rgba(28,28,30,0.05)',
-            color: ready ? '#fff' : MUTED,
-            transition: 'background 0.2s, color 0.2s',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-          }}
-        >
-          {ready ? (
-            <>
-              Sort it
-              <ArrowRight size={16} color="#fff" />
-            </>
-          ) : (
-            'Ready when you are'
-          )}
-        </motion.button>
-      </motion.div>
+      {/* CTA — spring physics, haptic, always right below input */}
+      <motion.button
+        onClick={analyse}
+        disabled={!ready}
+        whileTap={ready ? { scale: 0.97 } : {}}
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+        style={{
+          width: '100%', padding: '16px', borderRadius: 14, fontSize: 16,
+          fontWeight: 600, cursor: ready ? 'pointer' : 'default',
+          border: 'none',
+          background: ready ? GOLD : 'rgba(28,28,30,0.05)',
+          color: ready ? '#fff' : MUTED,
+          transition: 'background 0.2s, color 0.2s',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          marginTop: 12,
+          WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+        }}
+      >
+        {ready ? (
+          <>
+            Sort it
+            <ArrowRight size={17} color="#fff" />
+          </>
+        ) : (
+          'Ready when you are'
+        )}
+      </motion.button>
 
-      {/* THE JOURNEY — visible 1-2-3, always present, step 1 active */}
+      {/* THE JOURNEY — felt progress, not a checklist */}
       <div style={{
-        marginTop: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0,
+        marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        {/* Step 1 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <div style={{
-            width: 22, height: 22, borderRadius: '50%',
-            background: journeyStep >= 1 ? GOLD : 'transparent',
-            border: `1.5px solid ${journeyStep >= 1 ? GOLD : 'rgba(28,28,30,0.15)'}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 11, fontWeight: 700, color: journeyStep >= 1 ? '#fff' : MUTED,
-          }}>1</div>
-          <span style={{ fontSize: 12, fontWeight: 500, color: journeyStep >= 1 ? INK : MUTED }}>Paste it</span>
-        </div>
-        {/* Line */}
-        <div style={{
-          width: 24, height: 1.5,
-          background: journeyStep >= 2 ? GOLD : 'rgba(28,28,30,0.1)',
-          margin: '0 6px',
-        }} />
-        {/* Step 2 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <div style={{
-            width: 22, height: 22, borderRadius: '50%',
-            background: journeyStep >= 2 ? GOLD : 'transparent',
-            border: `1.5px solid ${journeyStep >= 2 ? GOLD : 'rgba(28,28,30,0.15)'}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 11, fontWeight: 700, color: journeyStep >= 2 ? '#fff' : MUTED,
-          }}>2</div>
-          <span style={{ fontSize: 12, fontWeight: 500, color: journeyStep >= 2 ? INK : MUTED }}>We decode</span>
-        </div>
-        {/* Line */}
-        <div style={{
-          width: 24, height: 1.5,
-          background: journeyStep >= 3 ? GOLD : 'rgba(28,28,30,0.1)',
-          margin: '0 6px',
-        }} />
-        {/* Step 3 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <div style={{
-            width: 22, height: 22, borderRadius: '50%',
-            background: journeyStep >= 3 ? GOLD : 'transparent',
-            border: `1.5px solid ${journeyStep >= 3 ? GOLD : 'rgba(28,28,30,0.15)'}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 11, fontWeight: 700, color: journeyStep >= 3 ? '#fff' : MUTED,
-          }}>3</div>
-          <span style={{ fontSize: 12, fontWeight: 500, color: journeyStep >= 3 ? INK : MUTED }}>Sorted</span>
-        </div>
+        <JourneyDot num={1} label="Paste" active={journeyStep >= 1} gold={GOLD} ink={INK} muted={MUTED} />
+        <JourneyLine active={journeyStep >= 2} gold={GOLD} />
+        <JourneyDot num={2} label="Decode" active={journeyStep >= 2} gold={GOLD} ink={INK} muted={MUTED} />
+        <JourneyLine active={journeyStep >= 3} gold={GOLD} />
+        <JourneyDot num={3} label="Sorted" active={journeyStep >= 3} gold={GOLD} ink={INK} muted={MUTED} />
       </div>
 
-      {/* TRUST */}
+      {/* Trust */}
       <div style={{
         marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
       }}>
@@ -458,5 +430,35 @@ Return JSON:
       <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
       <input ref={fileInputRef} type="file" accept="image/*,application/pdf" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
     </div>
+  );
+}
+
+// ── Journey components — clean, native, spring-animated ──
+function JourneyDot({ num, label, active, gold, ink, muted }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+      <motion.div
+        animate={{ scale: active ? 1 : 0.9 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        style={{
+          width: 22, height: 22, borderRadius: '50%',
+          background: active ? gold : 'transparent',
+          border: `1.5px solid ${active ? gold : 'rgba(28,28,30,0.12)'}`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 11, fontWeight: 700, color: active ? '#fff' : muted,
+        }}
+      >{num}</motion.div>
+      <span style={{ fontSize: 12, fontWeight: 500, color: active ? ink : muted }}>{label}</span>
+    </div>
+  );
+}
+
+function JourneyLine({ active, gold }) {
+  return (
+    <motion.div
+      animate={{ backgroundColor: active ? gold : 'rgba(28,28,30,0.08)' }}
+      transition={{ duration: 0.3 }}
+      style={{ width: 20, height: 1.5, margin: '0 5px' }}
+    />
   );
 }
