@@ -13,7 +13,7 @@ import GeoSelector from './GeoSelector';
 
 const GOLD = '#c6995c';
 const INK = '#1c1c1e';
-const MUTED = 'rgba(28,28,30,0.45)';
+const MUTED = 'rgba(28,28,30,0.6)';
 const BORDER = 'rgba(28,28,30,0.08)';
 
 // Haptic feedback — native feel
@@ -302,11 +302,11 @@ Return JSON:
           ref={textareaRef}
           value={text}
           onChange={e => setText(e.target.value)}
-          placeholder="Paste the letter here…"
+          placeholder="Paste the letter here…" aria-label="Paste your letter here"
           rows={4}
           style={{
             width: '100%', minHeight: 120, background: 'transparent',
-            border: 'none', color: INK, fontSize: 16, padding: '18px 18px 10px',
+            border: 'none', color: INK, fontSize: 17, padding: '20px 20px 12px',
             resize: 'none', outline: 'none',
             fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
             lineHeight: 1.6, boxSizing: 'border-box',
@@ -385,7 +385,7 @@ Return JSON:
         whileTap={ready ? { scale: 0.97 } : {}}
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         style={{
-          width: '100%', padding: '16px', borderRadius: 14, fontSize: 16,
+          width: '100%', padding: '18px', borderRadius: 14, fontSize: 17,
           fontWeight: 600, cursor: ready ? 'pointer' : 'default',
           border: 'none',
           background: ready ? GOLD : 'rgba(28,28,30,0.05)',
@@ -410,8 +410,8 @@ Return JSON:
       <div style={{
         marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
       }}>
-        <Shield size={11} color={MUTED} style={{ opacity: 0.5 }} />
-        <p style={{ fontSize: 11, color: MUTED, margin: 0, fontWeight: 400, opacity: 0.7 }}>
+        <Shield size={13} color={MUTED} style={{ opacity: 0.6 }} />
+        <p style={{ fontSize: 13, color: MUTED, margin: 0, fontWeight: 400, opacity: 0.8 }}>
           Private to your device · 3 free · no signup
         </p>
       </div>
