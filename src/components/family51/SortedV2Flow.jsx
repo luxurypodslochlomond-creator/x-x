@@ -288,11 +288,11 @@ Return JSON:
         transition={{ duration: 0.2 }}
         style={{
           background: '#fff',
-          borderRadius: 16,
+          borderRadius: 20,
           boxShadow: ready
-            ? '0 8px 28px rgba(198,153,92,0.12), 0 2px 6px rgba(0,0,0,0.03)'
-            : '0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)',
-          border: ready ? `1px solid ${GOLD}40` : '1px solid transparent',
+            ? '0 12px 40px rgba(198,153,92,0.10), 0 2px 8px rgba(0,0,0,0.04)'
+            : '0 4px 16px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.03)',
+          border: ready ? `1px solid ${GOLD}30` : '1px solid rgba(28,28,30,0.06)',
           overflow: 'hidden',
           transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
         }}
@@ -302,11 +302,11 @@ Return JSON:
           ref={textareaRef}
           value={text}
           onChange={e => setText(e.target.value)}
-          placeholder="Paste the letter here…" aria-label="Paste your letter here"
-          rows={4}
+          placeholder="Paste the letter, contract, or email here…" aria-label="Paste your letter here"
+          rows={5}
           style={{
-            width: '100%', minHeight: 120, background: 'transparent',
-            border: 'none', color: INK, fontSize: 17, padding: '20px 20px 12px',
+            width: '100%', minHeight: 160, background: 'transparent',
+            border: 'none', color: INK, fontSize: 18, padding: '24px 24px 14px',
             resize: 'none', outline: 'none',
             fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
             lineHeight: 1.6, boxSizing: 'border-box',
@@ -385,14 +385,15 @@ Return JSON:
         whileTap={ready ? { scale: 0.97 } : {}}
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         style={{
-          width: '100%', padding: '18px', borderRadius: 14, fontSize: 17,
+          width: '100%', padding: '20px', borderRadius: 16, fontSize: 18,
           fontWeight: 600, cursor: ready ? 'pointer' : 'default',
           border: 'none',
-          background: ready ? GOLD : 'rgba(28,28,30,0.05)',
+          background: ready ? INK : 'rgba(28,28,30,0.06)',
           color: ready ? '#fff' : MUTED,
           transition: 'background 0.2s, color 0.2s',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          marginTop: 12,
+          marginTop: 14,
+          boxShadow: ready ? '0 4px 20px rgba(28,28,30,0.18)' : 'none',
           WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
         }}
       >
@@ -410,9 +411,9 @@ Return JSON:
       <div style={{
         marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
       }}>
-        <Shield size={13} color={MUTED} style={{ opacity: 0.6 }} />
-        <p style={{ fontSize: 13, color: MUTED, margin: 0, fontWeight: 400, opacity: 0.8 }}>
-          Private to your device · 3 free · no signup
+        <Shield size={14} color={MUTED} style={{ opacity: 0.5 }} />
+        <p style={{ fontSize: 14, color: MUTED, margin: 0, fontWeight: 400 }}>
+          Private · 3 free · no signup
         </p>
       </div>
 
