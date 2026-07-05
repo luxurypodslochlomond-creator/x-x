@@ -10,15 +10,9 @@ import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } from './SortedResultShell';
 import GeoSelector from './GeoSelector';
+import { COLOR, RADIUS, FONT, TOUCH, MOTION, SHADOW, haptic } from './sortedDesignSystem';
 
-const GOLD = '#c6995c';
-const INK = '#1c1c1e';
-const MUTED = 'rgba(28,28,30,0.6)';
-const BORDER = 'rgba(28,28,30,0.08)';
-
-// Haptic feedback — native feel
-const tap = () => { try { navigator.vibrate?.(8); } catch {} };
-const tapStrong = () => { try { navigator.vibrate?.(15); } catch {} };
+const { gold: GOLD, ink: INK, muted: MUTED, border: BORDER } = COLOR;
 
 const SEVERITY = {
   urgent: { color: '#dc2626', label: 'URGENT — ACT NOW' },
@@ -45,12 +39,12 @@ export default function SortedV2Flow() {
   const ready = Boolean(hasContent) && !uploading;
   const journeyStep = result ? 3 : loading ? 2 : 1;
 
-  // Auto-grow textarea — feels alive
+  // Auto-grow textarea — feels alive, but reserved min-height prevents jiggle
   useEffect(() => {
     const ta = textareaRef.current;
     if (!ta) return;
     ta.style.height = 'auto';
-    ta.style.height = Math.max(120, ta.scrollHeight) + 'px';
+    ta.style.height = Math.max(160, ta.scrollHeight) + 'px';
   }, [text]);
 
   useEffect(() => {
