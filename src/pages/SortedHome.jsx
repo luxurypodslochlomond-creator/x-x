@@ -58,13 +58,12 @@ export default function SortedHome() {
         >
           <div style={{ width: 32, height: 2, background: GOLD, margin: '0 auto 16px', borderRadius: 1 }} />
           <h1 style={{
-            fontFamily: FONT.display,
+            fontFamily: FONT.family,
             fontSize: FONT.heading,
-            fontWeight: 600,
+            fontWeight: 700,
             lineHeight: FONT.lineHeightTight,
             margin: 0,
-            letterSpacing: '-0.025em',
-            fontOpticalSizing: 'auto',
+            letterSpacing: '-0.02em',
           }}>
             Whatever that letter says —<br />let's work out what it means together.
           </h1>

@@ -41,10 +41,11 @@ export const SPACE = {
 };
 
 // ── TYPOGRAPHY ── 16px minimum. Always. No exceptions.
-// Two voices: Fraunces for headings (editorial, confident), system sans for everything else (native, readable).
+// ONE voice: system sans everywhere — fastest load, most accessible, most native.
+// No web font download = instant render. Sans-serif = dyslexia-friendly + screen-optimized.
 export const FONT = {
-  family: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
-  display: '"Fraunces", Georgia, "Times New Roman", serif',
+  family: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, system-ui, sans-serif',
+  display: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, system-ui, sans-serif',
   body: 16,
   bodyLarge: 18,
   bodySmall: 15,    // only for secondary/muted text, never primary
