@@ -11,6 +11,7 @@ import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } from './SortedResultShell';
 import GeoSelector from './GeoSelector';
 import { COLOR, RADIUS, FONT, TOUCH, MOTION, SHADOW, haptic } from './sortedDesignSystem';
+const { tap, strong: tapStrong } = haptic;
 
 const { gold: GOLD, ink: INK, muted: MUTED, border: BORDER } = COLOR;
 
@@ -302,9 +303,11 @@ Return JSON:
             width: '100%', minHeight: 160, background: 'transparent',
             border: 'none', color: INK, fontSize: 18, padding: '24px 24px 14px',
             resize: 'none', outline: 'none',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
-            lineHeight: 1.6, boxSizing: 'border-box',
+            fontFamily: '"Fraunces", Georgia, "Times New Roman", serif',
+            fontWeight: 400,
+            lineHeight: 1.65, boxSizing: 'border-box',
             WebkitFontSmoothing: 'antialiased',
+            fontOpticalSizing: 'auto',
           }}
         />
 
@@ -374,22 +377,22 @@ Return JSON:
 
       {/* CTA — spring physics, haptic, always right below input */}
       <motion.button
-        onClick={analyse}
-        disabled={!ready}
-        whileTap={ready ? { scale: 0.97 } : {}}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-        style={{
-          width: '100%', padding: '20px', borderRadius: 16, fontSize: 18,
-          fontWeight: 600, cursor: ready ? 'pointer' : 'default',
-          border: 'none',
-          background: ready ? INK : 'rgba(28,28,30,0.06)',
-          color: ready ? '#fff' : MUTED,
-          transition: 'background 0.2s, color 0.2s',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          marginTop: 14,
-          boxShadow: ready ? '0 4px 20px rgba(28,28,30,0.18)' : 'none',
-          WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-        }}
+      onClick={analyse}
+      disabled={!ready}
+      whileTap={ready ? { scale: 0.97 } : {}}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+      style={{
+        width: '100%', padding: '20px', borderRadius: 16, fontSize: 17,
+        fontWeight: 600, cursor: ready ? 'pointer' : 'default',
+        border: 'none',
+        background: ready ? INK : 'rgba(28,28,30,0.06)',
+        color: ready ? '#fff' : MUTED,
+        transition: 'background 0.2s, color 0.2s',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+        marginTop: 14, letterSpacing: '-0.01em',
+        boxShadow: ready ? '0 4px 20px rgba(28,28,30,0.18)' : 'none',
+        WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+      }}
       >
         {ready ? (
           <>

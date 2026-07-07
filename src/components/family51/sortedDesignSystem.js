@@ -41,18 +41,20 @@ export const SPACE = {
 };
 
 // ── TYPOGRAPHY ── 16px minimum. Always. No exceptions.
+// Two voices: Fraunces for headings (editorial, confident), system sans for everything else (native, readable).
 export const FONT = {
   family: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
+  display: '"Fraunces", Georgia, "Times New Roman", serif',
   body: 16,
   bodyLarge: 18,
   bodySmall: 15,    // only for secondary/muted text, never primary
   label: 11,
   micro: 13,        // timestamps, meta — never body
-  heading: 'clamp(32px, 7vw, 44px)',
+  heading: 'clamp(30px, 7vw, 42px)',
   subheading: 'clamp(17px, 3.5vw, 19px)',
   lineHeight: 1.55,
-  lineHeightTight: 1.3,
-  labelSpacing: '0.12em',
+  lineHeightTight: 1.15,
+  labelSpacing: '0.14em',
   labelWeight: 700,
 };
 

@@ -27,25 +27,33 @@ export default function SortedHome() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={MOTION.fade}
-          style={{ padding: '48px 24px 0', textAlign: 'center', maxWidth: 600, margin: '0 auto' }}
+          style={{ padding: '52px 24px 0', textAlign: 'center', maxWidth: 560, margin: '0 auto' }}
         >
+          {/* Gold hairline — crafted, not decorative */}
           <div style={{
-            fontSize: 13, fontWeight: 700, letterSpacing: FONT.labelSpacing,
-            color: COLOR.gold, textTransform: 'uppercase', marginBottom: 16,
+            width: 32, height: 2, background: COLOR.gold,
+            margin: '0 auto 20px', borderRadius: 1,
+          }} />
+
+          <div style={{
+            fontSize: FONT.label, fontWeight: FONT.labelWeight, letterSpacing: FONT.labelSpacing,
+            color: COLOR.gold, textTransform: 'uppercase', marginBottom: 18,
           }}>
             SORTED
           </div>
 
           <h1 style={{
-            fontSize: FONT.heading, fontWeight: 700, lineHeight: 1.08,
-            margin: 0, letterSpacing: '-0.03em',
+            fontFamily: FONT.display,
+            fontSize: FONT.heading, fontWeight: 600, lineHeight: FONT.lineHeightTight,
+            margin: 0, letterSpacing: '-0.025em',
+            fontOpticalSizing: 'auto',
           }}>
             We read the fine print<br />so you don't have to.
           </h1>
 
           <p style={{
             fontSize: FONT.subheading, color: COLOR.muted,
-            margin: '20px auto 0', fontWeight: 400, lineHeight: 1.5, maxWidth: 440,
+            margin: '22px auto 0', fontWeight: 400, lineHeight: 1.5, maxWidth: 420,
           }}>
             Scary letter. Legal jargon. Contract you're about to sign. Paste it — get clarity in seconds.
           </p>
