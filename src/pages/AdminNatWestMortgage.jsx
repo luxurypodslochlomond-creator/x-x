@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 23 Jun 2026 — ✅ £200 PAID & CONFIRMED BY NATWEST (ABDUL, SST) • Pattern: £100 May → £200 June ✓✓ • Next review: 10 July 2026 ♾️❤️</p>
+          <p className="text-sm text-amber-400 font-mono">🔥 UPDATED: 10 Jul 2026 — ⚠️ REVIEW CALL MADE · £210 AGREED FOR 23 JULY · SST SAID "IT CAN'T GO ON" — LEGAL LETTER MAY FOLLOW • Pattern: £100 May → £200 June → £210 July • TIME TO GET A FIXED REPAYMENT PLAN ♾️❤️</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -244,12 +244,21 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
+              <div className="flex items-start gap-4 bg-amber-900/30 p-4 rounded-lg border-4 border-amber-500 shadow-[0_0_40px_rgba(245,158,11,0.4)]">
+                <div className="text-amber-300 font-bold text-lg min-w-fit">10/07/2026</div>
+                <div>
+                  <p className="text-white font-bold">⚠️ REVIEW CALL — "IT CAN'T GO ON"</p>
+                  <p className="text-gray-200 text-sm">Called for July review. <strong>£210 agreed for 23 July 2026.</strong> SST warned: "This can't go on indefinitely" — legal letter may follow. They don't want it to get there. Neither do we.</p>
+                  <p className="text-amber-400 font-bold text-sm mt-1">🚨 THIS IS THE WAKE-UP CALL: Monthly "pay what I can" has run its course. They now want a FIXED repayment plan. Time to get serious about a long-term proposal AND get free debt advice.</p>
+                </div>
+              </div>
+
               <div className="flex items-start gap-4 bg-blue-900/20 p-4 rounded-lg border-2 border-blue-500">
                 <div className="text-blue-400 font-bold text-lg min-w-fit">📊 NEXT PHASE</div>
                 <div>
-                  <p className="text-white font-bold">Make the £200 payment on 23 June. Call back on 10 July.</p>
-                  <p className="text-gray-300 text-sm">Pattern established: £100 May → £200 June → increasing each month. This is the trajectory that leads to a formal repayment plan. Keep it going.</p>
-                  <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: By July, propose a fixed monthly amount. You're building trust payment by payment.</p>
+                  <p className="text-white font-bold">Pay £210 on 23 July. Then: GET A FIXED PLAN IN PLACE before August review.</p>
+                  <p className="text-gray-300 text-sm">The monthly review pattern bought you 4 months of breathing room. But they've drawn a line. Next call, you need to propose a <strong>fixed monthly repayment amount</strong> for the arrears — not "I'll pay what I can." That's what stops the legal letter.</p>
+                  <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: By August review, propose a fixed monthly amount + get free debt advice to strengthen your position.</p>
                 </div>
               </div>
             </div>
