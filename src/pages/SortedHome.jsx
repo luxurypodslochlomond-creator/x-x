@@ -79,30 +79,17 @@ export default function SortedHome() {
           </p>
         </motion.div>
 
-        {/* JOURNEY — 3 steps, native feel */}
+        {/* JOURNEY — calm flow, no tutorial energy */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...MOTION.fade, delay: 0.08 }}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0, marginTop: 28, marginBottom: 28 }}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 24, marginBottom: 32, flexWrap: 'wrap' }}
         >
-          {[
-            { num: 1, label: 'Paste your letter' },
-            { num: 2, label: 'Get plain language' },
-            { num: 3, label: 'Know your next step' },
-          ].map((step, i) => (
-            <React.Fragment key={step.num}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                <div style={{
-                  width: 28, height: 28, borderRadius: '50%',
-                  background: 'transparent',
-                  border: `1.5px solid ${GOLD}40`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 13, fontWeight: 700, color: GOLD,
-                }}>{step.num}</div>
-                <span style={{ fontSize: 11, fontWeight: 500, color: MUTED, textAlign: 'center', maxWidth: 80 }}>{step.label}</span>
-              </div>
-              {i < 2 && <div style={{ width: 24, height: 1.5, background: `${GOLD}25`, margin: '0 8px', marginBottom: 20 }} />}
+          {['Paste it in', 'We decode it', 'You know what to do'].map((phrase, i, arr) => (
+            <React.Fragment key={phrase}>
+              <span style={{ fontSize: 13, fontWeight: 500, color: MUTED }}>{phrase}</span>
+              {i < arr.length - 1 && <span style={{ width: 4, height: 4, borderRadius: '50%', background: `${GOLD}50`, flexShrink: 0 }} />}
             </React.Fragment>
           ))}
         </motion.div>
