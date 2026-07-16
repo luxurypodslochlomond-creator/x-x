@@ -146,6 +146,12 @@ export default function BuzzStopEngine({ onStop }) {
     return ctx.current;
   }, []);
 
+  // iOS Safari locks audio until a user gesture creates+resumes the context.
+  // Call this on the first tap so START plays instantly.
+  const unlockAudio = useCallback(() => {
+    getCtx().catch(() => {});
+  }, [getCtx]);
+
   const startPrimary = useCallback(async (hz) => {
     const actx = await getCtx();
     try { primaryOsc.current?.stop(); } catch (e) {}
@@ -422,13 +428,13 @@ export default function BuzzStopEngine({ onStop }) {
                   )}
                   <p className="text-gray-400 text-sm font-mono tracking-widest">ARE YOU WEARING HEADPHONES?</p>
                   <div className="grid grid-cols-2 gap-3">
-                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => setHasHeadphones(true)}
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => { unlockAudio(); setHasHeadphones(true); }}
                       className="py-6 rounded-2xl flex flex-col items-center gap-3 transition-all"
                       style={{ background: C.greenDim, border: `1.5px solid ${C.greenBorder}` }}>
                       <HeadphonesIcon size={32} color={C.green} />
                       <span className="font-black text-base" style={{ color: C.green }}>YES</span>
                     </motion.button>
-                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => setHasHeadphones(false)}
+                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => { unlockAudio(); setHasHeadphones(false); }}
                       className="py-6 rounded-2xl flex flex-col items-center gap-3 transition-all"
                       style={{ background: C.surface, border: `1.5px solid ${C.surfaceBorder}` }}>
                       <SpeakerIcon size={32} color="#94a3b8" />
