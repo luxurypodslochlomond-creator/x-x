@@ -173,6 +173,10 @@ const AuthenticatedApp = () => {
           }
         />
       ))}
+      <Route path="/BuzzStop" element={<BuzzStopPage />} />
+      <Route path="/BuzzStopAbout" element={<BuzzStopAboutPage />} />
+      <Route path="/BuzzStopTerms" element={<BuzzStopTermsPage />} />
+      <Route path="/BuzzStopPrivacy" element={<BuzzStopPrivacyPage />} />
       <Route path="/BuzzTrip" element={<BuzzTripPage />} />
       <Route path="/BuzzTripAbout" element={<BuzzTripAboutPage />} />
       <Route path="/BuzzTripTerms" element={<BuzzTripTermsPage />} />
