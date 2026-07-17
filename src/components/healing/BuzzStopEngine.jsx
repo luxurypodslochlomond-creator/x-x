@@ -418,7 +418,7 @@ export default function BuzzStopEngine({ onStop }) {
                 <div className="text-6xl font-black text-white tracking-tighter mb-2">
                   BUZZ<span style={{ color: C.green }}>STOP</span>
                 </div>
-                <p className="text-gray-500 text-sm">On-device audio engine.<br/>Finds your frequency. Cancels it.</p>
+                <p className="text-white text-base font-bold leading-snug">Cancel your tinnitus frequency.<br/><span className="text-gray-500 font-medium text-sm">Free · No signup · 60 seconds</span></p>
               </div>
 
               {hasHeadphones === null ? (
@@ -491,6 +491,7 @@ export default function BuzzStopEngine({ onStop }) {
                     </div>
                     <div className="px-4 pb-3 text-center">
                       <span className="text-xs font-black tracking-widest" style={{ color: C.green }}>100% FREE · ALWAYS</span>
+                      <p className="text-[11px] mt-2 leading-relaxed" style={{ color: 'rgba(255,255,255,0.3)' }}>Symptom relief, not a cure. Works while you use it.</p>
                     </div>
                   </div>
 
