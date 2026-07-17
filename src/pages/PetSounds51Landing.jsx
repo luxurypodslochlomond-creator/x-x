@@ -47,11 +47,11 @@ export default function PetSounds51Landing() {
           It's 11pm. There's a storm.<br />Your dog is shaking and you feel helpless.
         </h2>
         <p className="text-base mb-2 leading-relaxed" style={{ color: '#a89870' }}>
-          Press play. That's it. AI-generated sound tuned specifically to how your pet hears — 
+          Press play. That's it. Purpose-built sound tuned specifically to how your pet hears — 
           not a generic playlist, not white noise. Built by a pet owner, powered by real research.
         </p>
         <p className="text-xs mb-6" style={{ color: '#8aab3a' }}>
-          80% of dogs showed fewer anxiety behaviours in peer-reviewed studies · No side effects · Works alongside your vet
+          Dogs showed fewer anxiety behaviours in peer-reviewed studies (Wells, Queen's Belfast) · No side effects · Works alongside your vet
         </p>
 
         {/* PRICE ANCHOR — show value immediately */}
@@ -108,7 +108,7 @@ export default function PetSounds51Landing() {
         <h3 className="font-black text-xs tracking-widest mb-4 text-center" style={{ color: '#d4a017' }}>WHY IT ACTUALLY WORKS</h3>
         <p className="text-sm leading-relaxed mb-3" style={{ color: '#c8b87a' }}>
           Real published research — not marketing — shows slow-tempo music under 60 BPM measurably calms anxious animals.
-          Over <strong style={{ color: '#d4a017' }}>70% of shelter dogs</strong> and <strong style={{ color: '#d4a017' }}>80% of home dogs</strong> showed fewer anxiety behaviours in peer-reviewed studies.
+          In <strong style={{ color: '#d4a017' }}>Wells' peer-reviewed studies (Queen's Belfast, 2002–2012)</strong>, shelter and home dogs spent significantly more time resting and less time vocalising when exposed to calm music.
         </p>
         <p className="text-sm leading-relaxed mb-3" style={{ color: '#a89870' }}>
           But here's what most products miss: your dog hears up to 65,000 Hz. Your cat up to 79,000 Hz. 
@@ -116,7 +116,7 @@ export default function PetSounds51Landing() {
         </p>
         <p className="text-sm leading-relaxed" style={{ color: '#8aab3a' }}>
           Every protocol is built differently — the thunderstorm one physically masks sudden bangs. 
-          The night one uses slow entrainment toward sleep. The pain one uses 40Hz gamma tones (MIT research, 2016). 
+          The night one uses slow entrainment toward sleep. The pain one uses 40Hz gamma tones (MIT research, 2016 — emerging evidence in pets, used alongside vet care). 
           They're not all the same thing with different names.
         </p>
       </div>

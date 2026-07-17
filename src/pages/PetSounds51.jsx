@@ -107,14 +107,14 @@ export default function PetSounds51() {
      };
 
      setMeta('og:title', 'PetSounds51 • Science-backed calm for anxious pets');
-     setMeta('og:description', 'Sound therapy for anxious pets — built on peer-reviewed research. Try the Separation Anxiety protocol free. No signup needed.');
+     setMeta('og:description', 'Sound therapy for anxious pets — built on peer-reviewed research on how sound calms animals. Try the Separation Anxiety protocol free. No signup needed.');
      setMeta('og:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
      setMeta('og:url', window.location.href);
      setMeta('og:type', 'website');
 
-     setMetaName('description', 'Sound therapy for anxious pets — built on peer-reviewed research. Try the Separation Anxiety protocol free. No signup needed.');
+     setMetaName('description', 'Sound therapy for anxious pets — built on peer-reviewed research on how sound calms animals. Try the Separation Anxiety protocol free. No signup needed.');
      setMetaName('twitter:card', 'summary_large_image');
-     setMetaName('twitter:title', 'PetSounds51 • Healing frequencies for anxious pets');
+     setMetaName('twitter:title', 'PetSounds51 • Calming frequencies for anxious pets');
      setMetaName('twitter:description', 'Science-backed sound therapy. Try FREE for separation anxiety.');
      setMetaName('twitter:image', window.location.origin + '/api/functions/servePetSounds51OGImage');
 
