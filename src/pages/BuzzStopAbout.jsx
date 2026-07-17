@@ -44,7 +44,7 @@ export default function BuzzStopAbout() {
                 <div className="w-3 h-3 rounded-full" style={{ background: '#8b5cf6' }} />
                 <h3 className="font-bold text-white">Cortex Layer (Binaural Beats)</h3>
               </div>
-              <p>200/210 Hz binaural beats trigger alpha brainwaves (8–12 Hz), the frequency associated with calm, relaxation, and reduced pain perception. Peer-reviewed research supports this.</p>
+              <p>200 Hz in your left ear, 210 Hz in your right — your brain perceives a 10 Hz binaural beat, matching alpha brainwaves (8–12 Hz) associated with calm, relaxation, and reduced pain perception. Peer-reviewed research supports this. Requires headphones.</p>
             </div>
 
             {/* Pattern */}
@@ -53,7 +53,7 @@ export default function BuzzStopAbout() {
                 <div className="w-3 h-3 rounded-full" style={{ background: '#f97316' }} />
                 <h3 className="font-bold text-white">Pattern Layer (Neuroplasticity)</h3>
               </div>
-              <p>Tinnitus is partly a neurological pattern — your brain amplifies the signal. A slow 0.08 Hz LFO (frequency modulation) breaks this habit loop, helping your brain reset its focus.</p>
+              <p>Tinnitus is partly a neurological pattern — your brain amplifies the signal. A slow 0.08 Hz amplitude modulation gently shifts the signal's intensity, which may help interrupt the habit loop. This is a practical technique, not a proven clinical treatment.</p>
             </div>
 
             {/* Shimmer */}

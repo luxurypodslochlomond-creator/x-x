@@ -306,18 +306,22 @@ export default function BuzzStopEngine({ onStop }) {
     invOsc.start();
     nodes.push(invOsc, invGain);
 
-    // 2. Alpha cortex calming — binaural only with headphones
+    // 2. Alpha cortex calming — TRUE binaural beat (stereo, headphones only)
+    // 200 Hz left ear, 210 Hz right ear → 10 Hz alpha beat perceived by brain
     if (hasHeadphones) {
       const aGain = actx.createGain();
       aGain.gain.value = 0.07;
       aGain.connect(masterGain.current);
-      [200, 210].forEach(f => {
+      [{ f: 200, pan: -1 }, { f: 210, pan: 1 }].forEach(({ f, pan }) => {
         const o = actx.createOscillator();
         o.type = 'sine';
         o.frequency.value = f;
-        o.connect(aGain);
+        const panner = actx.createStereoPanner();
+        panner.pan.value = pan;
+        o.connect(panner);
+        panner.connect(aGain);
         o.start();
-        nodes.push(o);
+        nodes.push(o, panner);
       });
       nodes.push(aGain);
     }
@@ -414,7 +418,7 @@ export default function BuzzStopEngine({ onStop }) {
                 <div className="text-6xl font-black text-white tracking-tighter mb-2">
                   BUZZ<span style={{ color: C.green }}>STOP</span>
                 </div>
-                <p className="text-gray-500 text-sm">On-device AI audio engine.<br/>Finds your frequency. Cancels it.</p>
+                <p className="text-gray-500 text-sm">On-device audio engine.<br/>Finds your frequency. Cancels it.</p>
               </div>
 
               {hasHeadphones === null ? (
@@ -482,7 +486,7 @@ export default function BuzzStopEngine({ onStop }) {
                     </div>
                     <div className="px-4 py-3 border-t border-green-900/30">
                       <p className="text-xs text-center leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
-                        BuzzStop uses <span style={{ color: C.green, fontWeight: 700 }}>destructive interference</span> — the same physics as noise-cancelling headphones — to identify and cancel your exact tinnitus frequency with AI precision.
+                        BuzzStop uses <span style={{ color: C.green, fontWeight: 700 }}>destructive interference</span> — the same physics as noise-cancelling headphones — to identify and cancel your exact tinnitus frequency with pinpoint accuracy.
                       </p>
                     </div>
                     <div className="px-4 pb-3 text-center">
@@ -505,7 +509,7 @@ export default function BuzzStopEngine({ onStop }) {
                       { icon: <WaveIcon size={18} color={C.green} />, text: 'A tone plays — listen carefully' },
                       { icon: <WarmIcon size={18} />, text: 'Warmer = yes, zoom in on that zone' },
                       { icon: <ColdIcon size={18} />, text: 'Colder = no, jump to the other half' },
-                      { icon: <LockIcon size={18} color={C.green} />, text: 'Lock it — 4 AI layers cancel the signal' },
+                      { icon: <LockIcon size={18} color={C.green} />, text: 'Lock it — 4 layers cancel the signal' },
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3 px-3 py-2.5 rounded-xl"
                         style={{ background: C.surface, border: `1px solid ${C.surfaceBorder}` }}>
