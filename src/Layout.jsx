@@ -134,8 +134,17 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
         </div>
       </button>
 
+      <AnimatePresence initial={false}>
       {isOpen && (
-        <div className="flex flex-col gap-1 mb-2">
+        <motion.div
+          key="nav-content"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.26, ease: [0.32, 0.72, 0, 1] }}
+          style={{ overflow: 'hidden' }}
+        >
+        <div className="flex flex-col gap-1 mb-2 pt-1">
           {items.map(item => {
             const IconComponent = item.icon;
             const isActive = isActivePage(item.url);
@@ -169,7 +178,9 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
             );
           })}
         </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </>
   );
 };

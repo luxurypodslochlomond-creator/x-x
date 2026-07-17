@@ -163,7 +163,7 @@ export default function BuzzStopAbout() {
           </div>
 
           <p className="text-gray-500 text-xs mt-4 leading-relaxed">
-            We believe relief from pain should not require a monthly payment or your personal data. So we built it free. And we're keeping it that way.
+            We believe relief from this kind of pain should not require a monthly payment or your personal data. So we built BuzzStop free, and we're keeping it that way. (Some of our other UF51 tools are paid — that's how tools like this one stay free for the people who need them most.)
           </p>
         </section>
 
