@@ -909,6 +909,32 @@ export default function AnimalFrequencyEngine({ protocol = 'separation', species
 
   useEffect(() => { return () => stopAudio(); }, []);
 
+  // ── LEAVE-IT-PLAYING RESILIENCE ──────────────────────────────────────────────
+  // Browsers suspend the AudioContext when a tab is hidden or the screen sleeps,
+  // and screen wake locks are released on sleep. If we don't recover, the sound
+  // silently dies the moment the owner walks away — which is exactly when they
+  // need it most. Re-acquire on visibility, resume on suspend.
+  useEffect(() => {
+    const handleVisibility = async () => {
+      if (!isPlayingRef.current) return;
+      const ctx = audioCtxRef.current;
+      if (ctx && ctx.state === 'suspended') {
+        try { await ctx.resume(); } catch (e) {}
+      }
+      if ('wakeLock' in navigator && !wakeLockRef.current) {
+        try {
+          wakeLockRef.current = await navigator.wakeLock.request('screen');
+        } catch (e) {}
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('pageshow', handleVisibility);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('pageshow', handleVisibility);
+    };
+  }, []);
+
   const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
   const progress = timerTarget ? Math.min((timer / timerTarget) * 100, 100) : 0;
 

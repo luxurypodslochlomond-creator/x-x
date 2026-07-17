@@ -9,6 +9,7 @@ import { verifyPS51Subscription } from '@/functions/verifyPS51Subscription';
 import { sendPS51ConfirmationEmail } from '@/functions/sendPS51ConfirmationEmail';
 import { getPS51Session } from '@/functions/getPS51Session';
 import PS51SmartFinder from '@/components/petsounds/PS51SmartFinder';
+import PS51PlacementGuide from '@/components/petsounds/PS51PlacementGuide';
 import { logPS51SessionStart } from '@/components/petsounds/PS51SessionLogger';
 
 
@@ -380,6 +381,9 @@ export default function PetSounds51() {
           </div>
         )}
       </div>
+
+      {/* PLACEMENT GUIDE — where you put your phone matters */}
+      <PS51PlacementGuide />
 
       {/* SPECIES SELECTOR */}
       <div className="max-w-4xl mx-auto mb-8">
