@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, Wallet, Moon, Home as HomeIcon, Check } from 'lucide-react';
+import { ArrowRight, Users, Wallet, Mail, Home as HomeIcon, Check } from 'lucide-react';
 
 // CB51 — calm, clear, fast. Built for Scott: a Glasgow artist manager with a roster, a junior to delegate to, and an ADHD brain that wants one thing at a time.
 // Warm paper, ink text, one high-contrast "needs you" card, everything else quiet below. No dashboard, no score numbers, no shouting.
@@ -20,9 +20,9 @@ const CAN_WAIT = [
 
 const TABS = [
   { icon: HomeIcon, label: "Home", active: true },
+  { icon: Mail, label: "Inbox" },
   { icon: Users, label: "Roster" },
   { icon: Wallet, label: "Money" },
-  { icon: Moon, label: "Quiet" },
 ];
 
 export default function CB51Home() {
