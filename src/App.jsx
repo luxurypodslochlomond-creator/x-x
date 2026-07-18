@@ -109,6 +109,7 @@ import FergusHughesProfilePage from './pages/FergusHughesProfile';
 import RealityCheckPage from './pages/RealityCheck';
 import GraemeOnePagerPage from './pages/GraemeOnePager';
 import PartnerEvidencePage from './pages/PartnerEvidence';
+import CB51Home from './pages/CB51Home';
 
 
 
@@ -226,6 +227,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51Vote" element={<CB51VotePage />} />
       <Route path="/CB51Join" element={<CB51JoinPage />} />
       <Route path="/CB51" element={<CB51MainPage />} />
+      <Route path="/CB51Home" element={<CB51Home />} />
       <Route path="/CB51How" element={<CB51HowPage />} />
       <Route path="/WalshyPitch" element={<WalshyPitchPage />} />
       <Route path="/Zapp" element={<ZappPage />} />
