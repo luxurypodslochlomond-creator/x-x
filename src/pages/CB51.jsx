@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
 import CB51Dashboard from '@/components/cb51/CB51Dashboard';
+import CB51Home from './CB51Home';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
 import { useCB51NavBadges } from '@/components/cb51/CB51NavBadge';
 const CB51TestPush = React.lazy(() => import('@/components/cb51/CB51TestPush'));
@@ -244,32 +245,9 @@ export default function CB51Page() {
 
           {/* ── CONTENT ── */}
           <div className="flex-1 overflow-hidden">
-            {currentArtistId ? (
-              <motion.div
-                key="dashboard"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="h-full"
-              >
-                <CB51Dashboard artistId={currentArtistId} artistName={artists.find(a => a.id === currentArtistId)?.name} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-center min-h-[400px] px-8 text-center"
-              >
-                <Radio className="w-10 h-10 text-cyan-400/40 mb-4" />
-                <p className="text-gray-500 text-sm mb-6">Add your first artist to get started</p>
-                <button
-                  onClick={() => navigate(createPageUrl('CB51AddArtist'))}
-                  className="bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-black font-black py-3 px-8 rounded-2xl text-sm transition-all"
-                >
-                  Add Artist
-                </button>
-              </motion.div>
-            )}
+            <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full">
+              <CB51Home />
+            </motion.div>
           </div>
 
           {/* iOS install prompt — bottom */}
