@@ -7,7 +7,7 @@ const PAID_KEY = 'sorted_paid'; // still used as a UX hint only (not for enforce
 
 export function useSortedUsage() {
   const [uses, setUses] = useState(0);
-  const [remaining, setRemaining] = useState(3); // optimistic until server responds
+  const [remaining, setRemaining] = useState(5); // optimistic until server responds
   const [isLocked, setIsLocked] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -42,12 +42,12 @@ export function useSortedUsage() {
       .then(res => {
         const data = res.data;
         setUses(data.used || 0);
-        setRemaining(data.remaining ?? 3);
+        setRemaining(data.remaining ?? 5);
         setIsLocked(!data.allowed);
       })
       .catch(() => {
         // On error — be generous, never block a real user
-        setRemaining(3);
+        setRemaining(5);
         setIsLocked(false);
       })
       .finally(() => setLoaded(true));

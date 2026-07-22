@@ -81,7 +81,7 @@ export default function SortedV2Flow() {
 
     const limitCheck = await recordSortedUse();
     if (!limitCheck.allowed) {
-      setError("You've used your 3 free uses. Subscribe for unlimited access.");
+      setError("You've used your 5 free uses. Subscribe for unlimited access.");
       setLoading(false);
       return;
     }
@@ -410,7 +410,7 @@ Return JSON:
       }}>
         <Shield size={14} color={MUTED} style={{ opacity: 0.5 }} />
         <p style={{ fontSize: 14, color: MUTED, margin: 0, fontWeight: 400 }}>
-          Private · 3 free · no signup
+          Private · 5 free · no signup
         </p>
       </div>
 

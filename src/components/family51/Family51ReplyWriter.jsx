@@ -202,7 +202,7 @@ Return JSON: document_type (string — what type of document/situation this is),
     // Server-side rate limit check
     const limitCheck = await recordSortedUse();
     if (!limitCheck.allowed) {
-      setError('You\'ve used your 3 free uses. Subscribe for unlimited access.');
+      setError('You\'ve used your 5 free uses. Subscribe for unlimited access.');
       setLoading(false);
       return;
     }

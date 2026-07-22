@@ -41,7 +41,7 @@ export default function SortedPartnerKit() {
     addText('5.1B people worldwide have unmet legal needs. 92% of serious US legal problems get zero help. 4.5M UK children in poverty. 73% of people at bailiffs have mental health issues.', 10, false, [200, 200, 200], 8);
 
     addText('WHAT WE\'VE BUILT', 9, true, [6, 182, 212], 3);
-    addText('SORTED uses AI to decode council letters, eviction warnings, court summons — anything that terrifies people. Plain English. 30 seconds. No signup needed. 3 free uses, then £9.99/month.', 10, false, [200, 200, 200], 8);
+    addText('SORTED uses AI to decode council letters, eviction warnings, court summons — anything that terrifies people. Plain English. 30 seconds. No signup needed. 5 free uses, then £9.99/month.', 10, false, [200, 200, 200], 8);
 
     addText('FOR MEDIA AGENCIES & FINANCIAL SERVICES', 9, true, [6, 182, 212], 3);
     addText('White-label for banks (HSBC, Barclays, Lloyds) — put SORTED inside your mortgage distress journey. CSR campaign vehicle with full audit trail. Revenue share on subscriptions. Unique consumer legal anxiety intelligence.', 10, false, [200, 200, 200], 8);
@@ -127,7 +127,7 @@ export default function SortedPartnerKit() {
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', color: '#06b6d4', marginBottom: 12 }}>WHAT WE'VE BUILT</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 20px', lineHeight: 1.2 }}>AI that decodes scary letters in 30 seconds.</h2>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, margin: '0 0 20px' }}>
-              SORTED uses AI to decode council letters, eviction warnings, redundancy notices, court summons — anything that terrifies people. Plain English. Instant. No signup needed. 3 free uses, then £9.99/month.
+              SORTED uses AI to decode council letters, eviction warnings, redundancy notices, court summons — anything that terrifies people. Plain English. Instant. No signup needed. 5 free uses, then £9.99/month.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
               <FeatureBox icon="lightning" title="30 seconds" desc="Letters decoded to plain English" />

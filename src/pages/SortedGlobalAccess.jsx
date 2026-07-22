@@ -117,7 +117,7 @@ export default function SortedGlobalAccess() {
     {
       icon: Zap,
       title: 'No Account Required',
-      desc: '3 free uses with no sign-up. Your vault stays yours.',
+      desc: '5 free uses with no sign-up. Your vault stays yours.',
       status: 'READY',
       color: '#ec4899',
     },

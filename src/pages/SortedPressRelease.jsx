@@ -78,7 +78,7 @@ export default function SortedPressRelease() {
     addText('SORTED is part of the Universal Frequency 51 ecosystem — a Glasgow-based social impact technology platform. Every product is built on the same ethical foundation: no surveillance, no data harvest, no corporate capture. The SaaS model is subscription-funded — not surveillance-funded.', 11, false, [50, 50, 50], 8);
 
     addText('AVAILABILITY', 9, true, [220, 80, 20], 3);
-    addText('Available now at uf51.love/Sorted — no download, no installation, no account required for three free uses. Live globally, optimised for mobile.', 11, false, [50, 50, 50], 8);
+    addText('Available now at uf51.love/Sorted — no download, no installation, no account required for five free uses. Live globally, optimised for mobile.', 11, false, [50, 50, 50], 8);
 
     divider();
 
@@ -195,7 +195,7 @@ export default function SortedPressRelease() {
           </PRSection>
 
           <PRSection label="AVAILABILITY">
-            <PRBody>SORTED is available now at <strong style={{ color: '#f97316' }}>uf51.love/Sorted</strong> — no download, no installation, no account required for three free uses. The platform is live globally and optimised for mobile.</PRBody>
+            <PRBody>SORTED is available now at <strong style={{ color: '#f97316' }}>uf51.love/Sorted</strong> — no download, no installation, no account required for five free uses. The platform is live globally and optimised for mobile.</PRBody>
           </PRSection>
 
           <Divider />

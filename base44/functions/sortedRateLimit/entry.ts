@@ -1,6 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
 
-const MAX_CALLS = 3; // lifetime — no daily reset
+const MAX_CALLS = 5; // lifetime — no daily reset
 
 function getClientFingerprint(req) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
@@ -90,6 +90,6 @@ Deno.serve(async (req) => {
 
   } catch (error) {
     console.error('[RateLimit] Error:', error.message);
-    return Response.json({ allowed: true, remaining: 3, used: 0 });
+    return Response.json({ allowed: true, remaining: 5, used: 0 });
   }
 });

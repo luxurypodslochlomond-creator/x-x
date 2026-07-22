@@ -77,7 +77,7 @@ const FAQ_ITEMS = [
     category: 'Pricing & Access',
     items: [
       {
-        q: 'Why do I get 3 free uses?',
+        q: 'Why do I get 5 free uses?',
         a: 'Because if you\'re in a difficult moment, you shouldn\'t have to pay upfront. Try SORTED for free. Decode 3 letters, prove it works for you, then decide. If it helps, subscribe. If not, no harm done.'
       },
       {

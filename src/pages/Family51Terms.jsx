@@ -27,9 +27,9 @@ export default function Family51TermsPage() {
         </section>
 
         <section style={{ marginBottom: 32 }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>3 Free Sessions, Then You Choose</h2>
+          <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, color: '#f97316' }}>5 Free Sessions, Then You Choose</h2>
           <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)' }}>
-            Try SORTED for free 3 times. After that, you can subscribe or walk away. No lock-in. No judgement.
+            Try SORTED for free 5 times. After that, you can subscribe or walk away. No lock-in. No judgement.
           </p>
         </section>
 
