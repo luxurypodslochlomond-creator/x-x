@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 22 Jul 2026 — ✅ £210 PAID & CONFIRMED BY NARGIS (SST Secured) · 48HR CALLBACK ARRANGED · SIMONE TO CALL BACK · ASK FOR CASE MANAGER NEXT • Pattern: £100 May → £200 June → £210 July ✓✓✓ ♾️❤️</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 22 Jul 2026 — ✅ £210 PAID & CONFIRMED BY NARGIS (SST Secured) · 48HR CALLBACK ARRANGED · ASK FOR CASE MANAGER NEXT • Pattern: £100 May → £200 June → £210 July ✓✓✓ ♾️❤️</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -265,9 +265,9 @@ export default function AdminNatWestMortgage() {
               <div className="flex items-start gap-4 bg-cyan-900/30 p-4 rounded-lg border-4 border-cyan-500 shadow-[0_0_40px_rgba(6,182,212,0.4)]">
                 <div className="text-cyan-300 font-bold text-lg min-w-fit">22/07/2026</div>
                 <div>
-                  <p className="text-white font-bold">📞 48-HOUR CALLBACK ARRANGED — SIMONE</p>
-                  <p className="text-gray-200 text-sm">Nargis arranged for <strong>Simone</strong> (Specialist Support Team) to call back <strong>within 48 hours</strong> — callback to number ending <strong>328</strong>. Purpose: discuss circumstances further, review Universal Credit update (SMI enquiry), and agree next steps on the mortgage account.</p>
-                  <p className="text-cyan-400 font-bold text-sm mt-1">🎯 WHEN SIMONE CALLS: Ask for a dedicated case manager so you always speak to the same person. Also give her the UC/SMI update.</p>
+                  <p className="text-white font-bold">📞 48-HOUR CALLBACK ARRANGED — SST TEAM</p>
+                  <p className="text-gray-200 text-sm">Nargis arranged for <strong>someone</strong> from the Specialist Support Team to call back <strong>within 48 hours</strong> — callback to number ending <strong>328</strong>. Purpose: discuss circumstances further, review Universal Credit update (SMI enquiry), and agree next steps on the mortgage account.</p>
+                  <p className="text-cyan-400 font-bold text-sm mt-1">🎯 WHEN THEY CALL: Ask for a dedicated case manager so you always speak to the same person. Also give them the UC/SMI update.</p>
                 </div>
               </div>
 
