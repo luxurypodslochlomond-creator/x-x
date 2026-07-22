@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-amber-400 font-mono">🔥 UPDATED: 10 Jul 2026 — ⚠️ REVIEW CALL MADE · £210 AGREED FOR 23 JULY · SST SAID "IT CAN'T GO ON" — LEGAL LETTER MAY FOLLOW • Pattern: £100 May → £200 June → £210 July • TIME TO GET A FIXED REPAYMENT PLAN ♾️❤️</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 22 Jul 2026 — ✅ £210 PAID & CONFIRMED BY NARGIS (SST Secured) · 48HR CALLBACK ARRANGED · SIMONE TO CALL BACK · ASK FOR CASE MANAGER NEXT • Pattern: £100 May → £200 June → £210 July ✓✓✓ ♾️❤️</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -250,6 +250,24 @@ export default function AdminNatWestMortgage() {
                   <p className="text-white font-bold">⚠️ REVIEW CALL — "IT CAN'T GO ON"</p>
                   <p className="text-gray-200 text-sm">Called for July review. <strong>£210 agreed for 23 July 2026.</strong> SST warned: "This can't go on indefinitely" — legal letter may follow. They don't want it to get there. Neither do we.</p>
                   <p className="text-amber-400 font-bold text-sm mt-1">🚨 THIS IS THE WAKE-UP CALL: Monthly "pay what I can" has run its course. They now want a FIXED repayment plan. Time to get serious about a long-term proposal AND get free debt advice.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-4 border-green-500 shadow-[0_0_60px_rgba(34,197,94,0.6)]">
+                <div className="text-green-300 font-bold text-lg min-w-fit">22/07/2026</div>
+                <div>
+                  <p className="text-white font-black">🔥 £210 PAID & CONFIRMED BY NARGIS ✓✓✓</p>
+                  <p className="text-gray-200 text-sm">Called 0800 161 5954. Paid £210. <strong>Nargis (Specialist Support Team)</strong> sent written confirmation email (10:42, to GLA101@proton.me): "I can confirm that a payment of <strong>£210.00</strong> has been successfully received and applied to your mortgage account."</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ THREE MONTHS IN A ROW. £100 May ✓ → £200 June ✓ → £210 July ✓. Pattern holding. Trust building.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-cyan-900/30 p-4 rounded-lg border-4 border-cyan-500 shadow-[0_0_40px_rgba(6,182,212,0.4)]">
+                <div className="text-cyan-300 font-bold text-lg min-w-fit">22/07/2026</div>
+                <div>
+                  <p className="text-white font-bold">📞 48-HOUR CALLBACK ARRANGED — SIMONE</p>
+                  <p className="text-gray-200 text-sm">Nargis arranged for <strong>Simone</strong> (Specialist Support Team) to call back <strong>within 48 hours</strong> — callback to number ending <strong>328</strong>. Purpose: discuss circumstances further, review Universal Credit update (SMI enquiry), and agree next steps on the mortgage account.</p>
+                  <p className="text-cyan-400 font-bold text-sm mt-1">🎯 WHEN SIMONE CALLS: Ask for a dedicated case manager so you always speak to the same person. Also give her the UC/SMI update.</p>
                 </div>
               </div>
 
