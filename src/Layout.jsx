@@ -958,6 +958,11 @@ const LayoutInner = ({ children, currentPageName }) => {
               {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
               <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
+              <p className="text-xs text-center pb-1">
+                <Link to="/ExtractionProofCovenant" className="text-green-500/70 hover:text-green-400 font-mono tracking-wide">
+                  🔓 Open Source · Extraction-Proof — our covenant
+                </Link>
+              </p>
               <p className="text-xs text-gray-600 text-center pb-4">Built on <a href="https://base44.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400">Base44</a></p>
             </footer>
           )}
