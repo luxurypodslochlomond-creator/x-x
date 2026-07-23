@@ -487,6 +487,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     // 6. LEARN (understand the ecosystem)
     const learnNav = [
       { title: "🔓 Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Open source · build on UF51 · free" },
+      { title: "Extraction-Proof Covenant", url: "/ExtractionProofCovenant", icon: Shield, description: "Open source · impossible to exploit" },
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
       { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, description: "One-pager for funders" },
       { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, description: "Fund real people healing Earth" },
