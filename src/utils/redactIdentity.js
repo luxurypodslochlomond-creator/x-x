@@ -124,18 +124,13 @@ export function redactIdentity(text) {
     (m) => placeholder(m, 'NAME')
   );
 
-  // ── 10. STANDALONE LIKELY PERSON NAMES (2 capitalised words, not institutions) ─
-  // Catches "Brian Hughes" without a title — but checks against KEEP_WORDS
-  redacted = redacted.replace(
-    /\b([A-Z][a-z]+)\s([A-Z][a-z]+)\b/g,
-    (full, first, last) => {
-      // Keep if either word is an institution word
-      if (KEEP_WORDS.has(first) || KEEP_WORDS.has(last)) return full;
-      // Keep common sentence-start phrases ("Dear Sir", "Yours Sincerely")
-      if (first === 'Dear' || first === 'Yours' || first === 'Please' || first === 'Thank' || first === 'Kind' || first === 'Best' || first === 'With') return full;
-      return placeholder(full, 'NAME');
-    }
-  );
+  // ── 10. STANDALONE PERSON NAMES — DISABLED (honest limitation) ─────
+  // We do NOT guess two-capitalised-words as names. Regex cannot reliably tell
+  // "Brian Hughes" (a name) from "Account No" / "Dear Sir" / "NatWest Bank"
+  // (not names). A false positive here strips SUBSTANCE, which we never do.
+  // Names are caught reliably when preceded by a title (Mr/Mrs/Ms/Dr/Sir…).
+  // Honest limit: a bare name mid-sentence without a title is NOT redacted.
+  // This is the safer failure — we'd rather miss a name than hide substance.
 
   return { redacted, map };
 }
