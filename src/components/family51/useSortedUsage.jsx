@@ -80,5 +80,13 @@ export function useSortedUsage() {
     try { return localStorage.getItem('sorted_hardship_used') === 'true'; } catch { return false; }
   })();
 
-  return { uses, isPaid, isLocked, remaining, recordUse, grantHardshipAccess, hasUsedHardship, loaded };
+  // Paywall trigger — scrolls to the Sorted For Life card so locked users
+  // find out BEFORE they type a whole letter, not after they hit Decode.
+  const onPaywall = useCallback(() => {
+    try {
+      document.getElementById('sorted-paywall')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch {}
+  }, []);
+
+  return { uses, isPaid, isLocked, remaining, recordUse, grantHardshipAccess, hasUsedHardship, loaded, onPaywall };
 }

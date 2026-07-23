@@ -108,7 +108,7 @@ export default function SortedHome() {
             description="Debt, rent arrears, council letters — urgency check, what to do next"
             accentColor={TOOL_COLORS.letter}
             onClick={() => openTool('letter')}
-            disabled={isLocked && !isPaid}
+
           />
           <SortedToolCard
             variant="primary"
@@ -117,7 +117,7 @@ export default function SortedHome() {
             description="Ready-to-send response, right tone, zero waffle"
             accentColor={TOOL_COLORS.reply}
             onClick={() => openTool('reply')}
-            disabled={isLocked && !isPaid}
+
           />
         </motion.div>
 
@@ -139,7 +139,7 @@ export default function SortedHome() {
               description="Spot it fast"
               accentColor={TOOL_COLORS.scam}
               onClick={() => openTool('scam')}
-              disabled={isLocked && !isPaid}
+  
             />
             <SortedToolCard
               variant="secondary"
@@ -148,7 +148,7 @@ export default function SortedHome() {
               description="Step-by-step"
               accentColor={TOOL_COLORS.conflict}
               onClick={() => openTool('conflict')}
-              disabled={isLocked && !isPaid}
+  
             />
             <SortedToolCard
               variant="secondary"
@@ -157,7 +157,7 @@ export default function SortedHome() {
               description="Before you sign"
               accentColor={TOOL_COLORS.contract}
               onClick={() => openTool('contract')}
-              disabled={isLocked && !isPaid}
+  
             />
           </div>
         </motion.div>
@@ -193,7 +193,7 @@ export default function SortedHome() {
 
         {/* SUBSCRIPTION */}
         {!isPaid && (
-          <div style={{ marginTop: 20 }}>
+          <div id="sorted-paywall" style={{ marginTop: 20, scrollMarginTop: 90 }}>
             <SortedForLifeCard />
           </div>
         )}

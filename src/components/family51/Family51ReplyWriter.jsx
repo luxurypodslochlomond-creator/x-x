@@ -202,7 +202,7 @@ Return JSON: document_type (string — what type of document/situation this is),
     // Server-side rate limit check
     const limitCheck = await recordSortedUse();
     if (!limitCheck.allowed) {
-      setError('You\'ve used your 5 free uses. Subscribe for unlimited access.');
+      setError("That's today's free limit — come back tomorrow. No paywall, just a daily reset so everyone gets a turn.");
       setLoading(false);
       return;
     }

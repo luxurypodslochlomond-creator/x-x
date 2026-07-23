@@ -91,18 +91,21 @@ export default function Family51ConflictHelper({ accentColor = '#ef4444', onResu
     return <FileIcon className="w-4 h-4" />;
   };
 
-  const analyse = async () => {
+  const analyse = async (skipRateLimit = false) => {
     if (!what.trim() || loading) return;
     setLoading(true);
     setResult(null);
 
     try {
-      // Server-side rate limit check
-      const limitCheck = await recordSortedUse();
-      if (!limitCheck.allowed) {
-        setResult({ _error: 'You\'ve used your 5 free uses. Subscribe for unlimited access.' });
-        setLoading(false);
-        return;
+      // Server-side rate limit check — skipped on goal-change regeneration
+      // (same problem, new angle — shouldn't burn a fresh daily use)
+      if (!skipRateLimit) {
+        const limitCheck = await recordSortedUse();
+        if (!limitCheck.allowed) {
+          setResult({ _error: "That's today's free limit — come back tomorrow. No paywall, just a daily reset so everyone gets a turn." });
+          setLoading(false);
+          return;
+        }
       }
       const ct = CONFLICT_TYPES.find(t => t.id === conflictType);
       const gt = GOALS.find(g => g.id === goal);
@@ -215,6 +218,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       }
       setResult(raw);
       setResultGoal(goal);
+      onResult?.();
       // Save to local case history — no login needed
       saveCaseToHistory({
         tool: 'conflict',
@@ -229,7 +233,6 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
       setResult({ _error: err?.message || 'Analysis failed. Please try again.' });
     } finally {
       setLoading(false);
-      onResult?.();
     }
   };
 
@@ -264,7 +267,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
   // Auto-regenerate if goal changes after generating (only when result exists and goal changes)
   useEffect(() => {
     if (result && !result._error && resultGoal && goal !== resultGoal && !loading && what.trim()) {
-      analyse();
+      analyse(true);
     }
   }, [goal]); // eslint-disable-line react-hooks/exhaustive-deps
 
