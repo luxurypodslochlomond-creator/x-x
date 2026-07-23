@@ -77,8 +77,8 @@ const FAQ_ITEMS = [
     category: 'Pricing & Access',
     items: [
       {
-        q: 'Why do I get 5 free uses?',
-        a: 'Because if you\'re in a difficult moment, you shouldn\'t have to pay upfront. Try SORTED for free. Decode 3 letters, prove it works for you, then decide. If it helps, subscribe. If not, no harm done.'
+        q: 'Why do I get 10 free uses a day?',
+        a: 'Because if you\'re in a difficult moment, you shouldn\'t have to pay upfront — and a one-time trial isn\'t enough for a crisis that unfolds over days. You get 10 free decodes every day, resetting overnight. That covers most real situations without a card. If it helps, subscribe for unlimited. If not, no harm done.'
       },
       {
         q: 'Can I cancel anytime?',
@@ -124,7 +124,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'What do you mean by "anonymized patterns"?',
-        a: 'After we decode your letter, we extract the pattern (letter type, severity, what advice worked) and strip out all personally identifiable info (your name, email, amounts, dates, addresses). What\'s left is the legal reasoning — like published case law. This helps us get smarter without compromising your privacy.'
+        a: 'After we decode your letter, we strip out your identity — names, emails, addresses, NI and account numbers, phone numbers. But we keep the substance: the amount owed, the deadline, the legal issue, what advice worked. Hiding WHO you are protects you; hiding WHAT happened would protect the other side. So we only ever hide the who. What\'s left is legal reasoning — like published case law — that helps us get smarter without ever pointing back to a person.'
       },
       {
         q: 'Can I opt out of pattern learning?',
