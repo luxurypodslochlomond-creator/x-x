@@ -69,8 +69,8 @@ export default function SortedForLifeCard({ compact = false }) {
           { bold: 'Unlimited decodes', rest: 'paste, type, or snap a photo' },
           { bold: 'We write your reply', rest: 'professional, assertive, right tone' },
           { bold: 'Dispute plans', rest: 'when things go further' },
-          { bold: 'Your vault stays yours', rest: 'files uploaded for analysis, results saved privately on your device' },
-          { bold: 'Cancel any time', rest: 'no contract, no catch' },
+          { bold: 'Your cases stay yours', rest: 'saved privately on your device' },
+          { bold: 'Pay once', rest: 'no subscription, no contract, no catch' },
         ].map(({ bold, rest }, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
             <div style={{
@@ -116,7 +116,7 @@ export default function SortedForLifeCard({ compact = false }) {
       )}
 
       <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.32)', textAlign: 'center', marginTop: 14, letterSpacing: '0.03em', lineHeight: 1.5 }}>
-        Secure · Apple Pay &amp; Google Pay · Cancel anytime
+        Secure · Apple Pay &amp; Google Pay · Pay once, sorted forever
       </p>
     </motion.div>
   );

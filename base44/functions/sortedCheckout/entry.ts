@@ -7,9 +7,9 @@ Deno.serve(async (req) => {
     const { success_url, cancel_url } = await req.json();
 
     const session = await stripe.checkout.sessions.create({
-      mode: 'subscription',
+      mode: 'payment',
       line_items: [{
-        price: 'price_1TM6omLgeWr0ng8p0puGXadx', // £9.99/month
+        price: 'price_1TM6esLgeWr0ng8pa8EX1QNP', // £9.99 one-time — Sorted For Life
         quantity: 1,
       }],
       success_url: success_url || 'https://uf51.love/Sorted?sorted=success',

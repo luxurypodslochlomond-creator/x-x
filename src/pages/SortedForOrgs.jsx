@@ -52,8 +52,8 @@ const pillars = [
   },
   {
     icon: <PrivacyIcon />,
-    title: 'Nothing stored. Ever.',
-    desc: 'Processed by AI, immediately discarded. GDPR compliant by design. Nothing to breach. Nothing to audit.',
+    title: 'Private by design',
+    desc: 'The full analysis stays on your client\'s device. Only anonymous patterns — no names, no addresses, no amounts — help us improve. GDPR-aligned by design. Anonymised reporting for you, nothing that identifies a person.',
   },
   {
     icon: <GlobalIcon />,

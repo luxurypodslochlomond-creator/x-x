@@ -1,31 +1,32 @@
-// Localised pricing copy for SORTED — based on timezone geo detection
-// Stripe handles actual currency conversion; this is just the display copy
+// Localised pricing copy for SORTED — pay once, sorted forever.
+// One-off payment. No subscription, no extraction.
+// Stripe handles actual currency conversion; this is just the display copy.
 
 const GEO_PRICES = {
-  GB: { symbol: '£', amount: '9.99', currency: 'GBP', label: '£9.99/month', cta: 'GET SORTED — £9.99/MONTH', sub: '/ month · cancel anytime', inline: '£9.99/month' },
-  IE: { symbol: '€', amount: '9.99', currency: 'EUR', label: '€9.99/month', cta: 'GET SORTED — €9.99/MONTH', sub: '/ month · cancel anytime', inline: '€9.99/month' },
-  US: { symbol: '$', amount: '9.99', currency: 'USD', label: '$9.99/month', cta: 'GET SORTED — $9.99/MONTH', sub: '/ month · cancel anytime', inline: '$9.99/month' },
-  CA: { symbol: '$', amount: '13.99', currency: 'CAD', label: 'CA$13.99/month', cta: 'GET SORTED — CA$13.99/MONTH', sub: '/ month · cancel anytime', inline: 'CA$13.99/month' },
-  AU: { symbol: '$', amount: '15.99', currency: 'AUD', label: 'AU$15.99/month', cta: 'GET SORTED — AU$15.99/MONTH', sub: '/ month · cancel anytime', inline: 'AU$15.99/month' },
-  NZ: { symbol: '$', amount: '17.99', currency: 'NZD', label: 'NZ$17.99/month', cta: 'GET SORTED — NZ$17.99/MONTH', sub: '/ month · cancel anytime', inline: 'NZ$17.99/month' },
-  ZA: { symbol: 'R', amount: '189', currency: 'ZAR', label: 'R189/month', cta: 'GET SORTED — R189/MONTH', sub: '/ month · cancel anytime', inline: 'R189/month' },
-  FR: { symbol: '€', amount: '9.99', currency: 'EUR', label: '€9.99/month', cta: 'GET SORTED — €9.99/MONTH', sub: '/ month · cancel anytime', inline: '€9.99/month' },
-  DE: { symbol: '€', amount: '9.99', currency: 'EUR', label: '€9.99/month', cta: 'GET SORTED — €9.99/MONTH', sub: '/ month · cancel anytime', inline: '€9.99/month' },
-  ES: { symbol: '€', amount: '9.99', currency: 'EUR', label: '€9.99/month', cta: 'GET SORTED — €9.99/MONTH', sub: '/ month · cancel anytime', inline: '€9.99/month' },
-  IT: { symbol: '€', amount: '9.99', currency: 'EUR', label: '€9.99/month', cta: 'GET SORTED — €9.99/MONTH', sub: '/ month · cancel anytime', inline: '€9.99/month' },
-  NL: { symbol: '€', amount: '9.99', currency: 'EUR', label: '€9.99/month', cta: 'GET SORTED — €9.99/MONTH', sub: '/ month · cancel anytime', inline: '€9.99/month' },
-  AE: { symbol: '$', amount: '9.99', currency: 'USD', label: '$9.99/month', cta: 'GET SORTED — $9.99/MONTH', sub: '/ month · cancel anytime', inline: '$9.99/month' },
-  IN: { symbol: '₹', amount: '849', currency: 'INR', label: '₹849/month', cta: 'GET SORTED — ₹849/MONTH', sub: '/ month · cancel anytime', inline: '₹849/month' },
-  SG: { symbol: '$', amount: '13.99', currency: 'SGD', label: 'SG$13.99/month', cta: 'GET SORTED — SG$13.99/MONTH', sub: '/ month · cancel anytime', inline: 'SG$13.99/month' },
-  PH: { symbol: '₱', amount: '579', currency: 'PHP', label: '₱579/month', cta: 'GET SORTED — ₱579/MONTH', sub: '/ month · cancel anytime', inline: '₱579/month' },
-  MY: { symbol: 'RM', amount: '44.99', currency: 'MYR', label: 'RM44.99/month', cta: 'GET SORTED — RM44.99/MONTH', sub: '/ month · cancel anytime', inline: 'RM44.99/month' },
-  TH: { symbol: '฿', amount: '349', currency: 'THB', label: '฿349/month', cta: 'GET SORTED — ฿349/MONTH', sub: '/ month · cancel anytime', inline: '฿349/month' },
-  ID: { symbol: 'Rp', amount: '159000', currency: 'IDR', label: 'Rp159,000/month', cta: 'GET SORTED — Rp159,000/MONTH', sub: '/ month · cancel anytime', inline: 'Rp159,000/month' },
+  GB: { symbol: '£', amount: '9.99',  currency: 'GBP', label: '£9.99',          cta: 'GET SORTED — £9.99',          sub: 'once · yours forever', inline: '£9.99' },
+  IE: { symbol: '€', amount: '9.99',  currency: 'EUR', label: '€9.99',          cta: 'GET SORTED — €9.99',          sub: 'once · yours forever', inline: '€9.99' },
+  US: { symbol: '$', amount: '9.99',  currency: 'USD', label: '$9.99',          cta: 'GET SORTED — $9.99',          sub: 'once · yours forever', inline: '$9.99' },
+  CA: { symbol: '$', amount: '13.99', currency: 'CAD', label: 'CA$13.99',       cta: 'GET SORTED — CA$13.99',       sub: 'once · yours forever', inline: 'CA$13.99' },
+  AU: { symbol: '$', amount: '15.99', currency: 'AUD', label: 'AU$15.99',       cta: 'GET SORTED — AU$15.99',       sub: 'once · yours forever', inline: 'AU$15.99' },
+  NZ: { symbol: '$', amount: '17.99', currency: 'NZD', label: 'NZ$17.99',       cta: 'GET SORTED — NZ$17.99',       sub: 'once · yours forever', inline: 'NZ$17.99' },
+  ZA: { symbol: 'R', amount: '189',   currency: 'ZAR', label: 'R189',           cta: 'GET SORTED — R189',           sub: 'once · yours forever', inline: 'R189' },
+  FR: { symbol: '€', amount: '9.99',  currency: 'EUR', label: '€9.99',          cta: 'GET SORTED — €9.99',          sub: 'once · yours forever', inline: '€9.99' },
+  DE: { symbol: '€', amount: '9.99',  currency: 'EUR', label: '€9.99',          cta: 'GET SORTED — €9.99',          sub: 'once · yours forever', inline: '€9.99' },
+  ES: { symbol: '€', amount: '9.99',  currency: 'EUR', label: '€9.99',          cta: 'GET SORTED — €9.99',          sub: 'once · yours forever', inline: '€9.99' },
+  IT: { symbol: '€', amount: '9.99',  currency: 'EUR', label: '€9.99',          cta: 'GET SORTED — €9.99',          sub: 'once · yours forever', inline: '€9.99' },
+  NL: { symbol: '€', amount: '9.99',  currency: 'EUR', label: '€9.99',          cta: 'GET SORTED — €9.99',          sub: 'once · yours forever', inline: '€9.99' },
+  AE: { symbol: '$', amount: '9.99',  currency: 'USD', label: '$9.99',          cta: 'GET SORTED — $9.99',          sub: 'once · yours forever', inline: '$9.99' },
+  IN: { symbol: '₹', amount: '849',   currency: 'INR', label: '₹849',           cta: 'GET SORTED — ₹849',           sub: 'once · yours forever', inline: '₹849' },
+  SG: { symbol: '$', amount: '13.99', currency: 'SGD', label: 'SG$13.99',       cta: 'GET SORTED — SG$13.99',       sub: 'once · yours forever', inline: 'SG$13.99' },
+  PH: { symbol: '₱', amount: '579',   currency: 'PHP', label: '₱579',           cta: 'GET SORTED — ₱579',           sub: 'once · yours forever', inline: '₱579' },
+  MY: { symbol: 'RM', amount: '44.99', currency: 'MYR', label: 'RM44.99',       cta: 'GET SORTED — RM44.99',       sub: 'once · yours forever', inline: 'RM44.99' },
+  TH: { symbol: '฿', amount: '349',   currency: 'THB', label: '฿349',           cta: 'GET SORTED — ฿349',           sub: 'once · yours forever', inline: '฿349' },
+  ID: { symbol: 'Rp', amount: '159000', currency: 'IDR', label: 'Rp159,000',   cta: 'GET SORTED — Rp159,000',     sub: 'once · yours forever', inline: 'Rp159,000' },
 };
 
 const DEFAULT = GEO_PRICES.GB;
 
-// Detect country from timezone (same logic as Family51.jsx)
+// Detect country from timezone
 function detectCountryCode() {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';

@@ -143,20 +143,20 @@ export default function SortedHome() {
             />
             <SortedToolCard
               variant="secondary"
-              icon="contract"
-              title="Contract Checker"
-              description="Rights grabs"
-              accentColor={TOOL_COLORS.contract}
-              onClick={() => openTool('contract')}
-              disabled={isLocked && !isPaid}
-            />
-            <SortedToolCard
-              variant="secondary"
               icon="conflict"
               title="Resolve Conflict"
               description="Step-by-step"
               accentColor={TOOL_COLORS.conflict}
               onClick={() => openTool('conflict')}
+              disabled={isLocked && !isPaid}
+            />
+            <SortedToolCard
+              variant="secondary"
+              icon="contract"
+              title="Contract Checker"
+              description="Before you sign"
+              accentColor={TOOL_COLORS.contract}
+              onClick={() => openTool('contract')}
               disabled={isLocked && !isPaid}
             />
           </div>
@@ -169,7 +169,7 @@ export default function SortedHome() {
           transition={{ ...MOTION.fade, delay: 0.28 }}
           style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap', marginTop: 20 }}
         >
-          {['Any country, any jurisdiction', 'All languages supported', 'Uploaded for analysis · your vault is yours'].map(pill => (
+          {['Any country, any jurisdiction', 'All languages supported', 'Private to this device · your cases are yours'].map(pill => (
             <span key={pill} style={{
               fontSize: 12, fontWeight: 500, color: MUTED,
               background: `${GOLD}08`, border: `1px solid ${GOLD}20`,
@@ -197,6 +197,27 @@ export default function SortedHome() {
             <SortedForLifeCard />
           </div>
         )}
+
+        {/* FUNDED BY ORGS — the honest money pathway */}
+        <div style={{
+          marginTop: 20, padding: '20px 22px', borderRadius: 16,
+          background: `${GOLD}05`, border: `1px solid ${GOLD}18`,
+        }}>
+          <p style={{ fontSize: FONT.bodySmall, color: MUTED, margin: '0 0 6px', fontWeight: 700, letterSpacing: '0.01em' }}>
+            Free for people. Funded by orgs.
+          </p>
+          <p style={{ fontSize: FONT.bodySmall, color: MUTED, margin: '0 0 14px', lineHeight: 1.6 }}>
+            SORTED stays free for anyone in a panic — no paywall, no account, ever. Organisations pay to bring it to the people they serve. That's what keeps it free for you.
+          </p>
+          <Link to="/SortedForOrgs" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            fontSize: FONT.bodySmall, fontWeight: 800, color: GOLD,
+            background: `${GOLD}0d`, border: `1px solid ${GOLD}30`,
+            borderRadius: 10, padding: '9px 16px', textDecoration: 'none',
+          }}>
+            How orgs &amp; ESG funds help →
+          </Link>
+        </div>
 
         {/* HELPLINES */}
         <div style={{ marginTop: 20 }}>

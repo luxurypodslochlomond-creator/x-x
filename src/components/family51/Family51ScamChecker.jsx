@@ -78,7 +78,7 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult,
     try {
       const limitCheck = await recordSortedUse();
       if (!limitCheck.allowed) {
-        setError('You\'ve used your 5 free uses. Subscribe for unlimited access.');
+        setError('That\'s today\'s 10 free uses done — come back tomorrow. No paywall, just a daily reset so everyone gets a turn.');
         setLoading(false);
         return;
       }
