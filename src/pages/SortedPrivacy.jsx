@@ -33,7 +33,7 @@ export default function SortedPrivacy() {
           <span style={{ fontSize: 26, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.5px' }}>SORTED</span>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', color: '#f5a623', background: 'rgba(245,166,35,0.12)', padding: '3px 8px', borderRadius: 4 }}>PRIVACY</span>
         </div>
-        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: May 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
+        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: July 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
       </div>
 
       {/* TL;DR */}
@@ -69,7 +69,7 @@ export default function SortedPrivacy() {
 
       <Section title="2. How We Use AI">
         <p style={{ margin: '0 0 10px' }}>Your document is processed by a large language model (LLM) via encrypted HTTPS. Our AI provider's terms explicitly prohibit training on API-submitted data — your content is processed and immediately discarded, never retained.</p>
-        <p style={{ margin: 0 }}>We may create fully anonymised pattern summaries — e.g. "a debt letter was submitted" — with zero names, amounts, dates, or identifying info. These cannot be traced back to you, and help us improve future advice quality.</p>
+        <p style={{ margin: 0 }}>We may create anonymised pattern summaries — e.g. "a debt letter was submitted" — with your identity stripped (names, emails, addresses, NI and account numbers, phone numbers). We keep the substance — the amount, the deadline, the legal issue — because hiding those would protect the other side, not you. What's left cannot be traced back to you, and helps us improve future advice quality.</p>
       </Section>
 
       <Section title="3. What We Never Do">

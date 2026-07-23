@@ -204,14 +204,14 @@ export default function SortedHome() {
         </div>
 
         {/* FOOTER */}
-        <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <div style={{ display: 'flex', gap: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap' }}>
-            <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall }}>FAQ</Link>
-            <Link to="/SortedTerms" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall }}>Terms</Link>
-            <Link to="/SortedPrivacy" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall }}>Privacy</Link>
-            <Link to="/SortedAbout" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall }}>About</Link>
+        <div style={{ marginTop: 44, paddingTop: 24, borderTop: `1px solid ${BORDER}`, textAlign: 'center' }}>
+          <div style={{ display: 'flex', gap: 22, justifyContent: 'center', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap' }}>
+            <Link to="/SortedAbout" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>About</Link>
+            <Link to="/SortedTerms" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>Terms</Link>
+            <Link to="/SortedPrivacy" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>Privacy</Link>
+            <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>FAQ</Link>
           </div>
-          <p style={{ fontSize: FONT.bodySmall, color: FAINT, margin: 0, fontWeight: 400 }}>
+          <p style={{ fontSize: 11, color: FAINT, margin: 0, fontWeight: 400, letterSpacing: '0.02em' }}>
             SORTEDSOS.ORG · Universal Frequency 51 CIC · Scotland
           </p>
         </div>

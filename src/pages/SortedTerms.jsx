@@ -26,7 +26,7 @@ export default function SortedTermsPage() {
           <span style={{ fontSize: 26, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.5px' }}>SORTED</span>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', color: '#f5a623', background: 'rgba(245,166,35,0.12)', padding: '3px 8px', borderRadius: 4 }}>TERMS</span>
         </div>
-        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: May 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
+        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: July 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
       </div>
 
       {/* TL;DR */}
@@ -36,7 +36,7 @@ export default function SortedTermsPage() {
           {[
             "We decode scary letters into plain English. We're not lawyers.",
             "You decide what to do. We just help you understand.",
-            "5 free uses. Then £9.99/month or walk away — no guilt, no lock-in.",
+            "10 free decodes every day, resetting overnight. Or unlimited for £9.99/month — no guilt, no lock-in.",
             "If you can't afford it, email us. We'll sort something.",
             "Your vault stays yours — files uploaded for analysis, results saved privately to you.",
           ].map((line, i) => (
@@ -67,8 +67,8 @@ export default function SortedTermsPage() {
         AI is powerful but not perfect. Laws vary by country and circumstance. SORTED does its best — but always verify key facts before acting, especially in financial or legal situations. We're honest when something is uncertain.
       </Section>
 
-      <Section title="4. Free Sessions, Then You Choose">
-        You get 5 free uses to start. After that, subscribe or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
+      <Section title="4. Free Decodes Every Day, Then You Choose">
+        You get 10 free decodes every day, resetting overnight — enough for most real situations without a card. If you need more, subscribe for unlimited, or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
       </Section>
 
       <Section title="5. Cancelling Your Subscription">
