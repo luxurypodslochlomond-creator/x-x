@@ -49,7 +49,7 @@ export default function SortedForLifeCard({ compact = false }) {
     >
       <div style={{ marginBottom: 22 }}>
         <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#d97706', margin: '0 0 10px' }}>
-          NEVER BE STUCK AGAIN
+          YOU'VE SEEN IT WORK — NOW KEEP IT
         </p>
         <p style={{ fontSize: 24, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.025em', margin: '0 0 8px', lineHeight: 1.1 }}>
           Every letter.<br />Every reply.<br />We've got you.
@@ -91,6 +91,9 @@ export default function SortedForLifeCard({ compact = false }) {
 
       <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
         "More clarity than an hour of Googling — one payment, yours for life."
+      </p>
+      <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.5)', margin: '0 0 16px', lineHeight: 1.5, fontWeight: 600 }}>
+        Your payment keeps SORTED free for someone who can't afford it right now.
       </p>
 
       <motion.button
