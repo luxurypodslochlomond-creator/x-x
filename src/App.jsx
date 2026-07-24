@@ -63,10 +63,8 @@ import SortedHome from './pages/SortedHome';
 import SortedTermsPage from './pages/SortedTerms';
 import SortedPrivacyPage from './pages/SortedPrivacy';
 import SortedFAQPage from './pages/SortedFAQ';
-import SortedPressReleasePage from './pages/SortedPressRelease.jsx';
 import SortedInvestorPressPage from './pages/SortedInvestorPress';
 import PetSounds51InvestorPressPage from './pages/PetSounds51InvestorPress';
-import SortedPartnerKitPage from './pages/SortedPartnerKit';
 import SortedForOrgsPage from './pages/SortedForOrgs';
 import SortedLayout from './components/family51/SortedLayout';
 import SortedGlobalAccessPage from './pages/SortedGlobalAccess';
@@ -192,10 +190,8 @@ const AuthenticatedApp = () => {
       <Route path="/SortedTerms" element={<SortedLayout currentPage="SortedTerms"><SortedTermsPage /></SortedLayout>} />
       <Route path="/SortedPrivacy" element={<SortedLayout currentPage="SortedPrivacy"><SortedPrivacyPage /></SortedLayout>} />
       <Route path="/SortedFAQ" element={<SortedLayout currentPage="SortedFAQ"><SortedFAQPage /></SortedLayout>} />
-      <Route path="/SortedPressRelease" element={<SortedLayout currentPage="SortedPressRelease"><SortedPressReleasePage /></SortedLayout>} />
       <Route path="/SortedInvestorPress" element={<SortedLayout currentPage="SortedInvestorPress"><SortedInvestorPressPage /></SortedLayout>} />
       <Route path="/PetSounds51InvestorPress" element={<SortedLayout currentPage="PetSounds51InvestorPress"><PetSounds51InvestorPressPage /></SortedLayout>} />
-      <Route path="/SortedPartnerKit" element={<SortedLayout currentPage="SortedPartnerKit"><SortedPartnerKitPage /></SortedLayout>} />
       <Route path="/SortedForOrgs" element={<SortedLayout currentPage="SortedForOrgs"><SortedForOrgsPage /></SortedLayout>} />
       <Route path="/SortedGlobalAccess" element={<SortedLayout currentPage="SortedGlobalAccess"><SortedGlobalAccessPage /></SortedLayout>} />
       <Route path="/SortedAbout" element={<SortedLayout currentPage="SortedAbout"><SortedAboutPage /></SortedLayout>} />

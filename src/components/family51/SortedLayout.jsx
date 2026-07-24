@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import SortedHeader from './SortedHeader';
 
 export default function SortedLayout({ children, currentPage }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Back-button should land at the top of the page, not halfway down.
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname]);
   
   return (
     <div style={{ minHeight: '100dvh',       background: '#fcfaf6', color: '#1c1c1e', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif' }}>
