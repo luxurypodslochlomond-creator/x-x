@@ -51,8 +51,8 @@ export const FONT = {
   bodySmall: 15,    // only for secondary/muted text, never primary
   label: 11,
   micro: 13,        // timestamps, meta — never body
-  heading: 'clamp(30px, 7vw, 42px)',
-  subheading: 'clamp(17px, 3.5vw, 19px)',
+  heading: 'clamp(26px, 6.2vw, 34px)',
+  subheading: 'clamp(16px, 3.2vw, 18px)',
   lineHeight: 1.55,
   lineHeightTight: 1.15,
   labelSpacing: '0.14em',
