@@ -220,7 +220,10 @@ export default function SortedHome() {
             <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>FAQ</Link>
           </div>
           <p style={{ fontSize: 11, color: FAINT, margin: 0, fontWeight: 400, letterSpacing: '0.02em' }}>
-            SORTEDSOS.ORG · Universal Frequency 51 CIC · Scotland
+            SORTEDSOS.ORG · Universal Frequency 51 CIC
+          </p>
+          <p style={{ fontSize: 11, color: FAINT, margin: '4px 0 0', fontWeight: 500, letterSpacing: '0.02em' }}>
+            Made in Scotland from Electrons
           </p>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import SortedResultShell, { SortedResultSection, SortedSteps } from './SortedResultShell';
 import SortedDeadlineBar from './SortedDeadlineBar';
 
@@ -92,6 +93,20 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       handoffLabel="CONTINUE → WRITE MY REPLY"
       flash={flash}
     >
+      {result.if_you_ignore_this && (
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+          style={{
+            padding: '10px 14px', borderRadius: 10,
+            background: 'rgba(26,18,8,0.03)', borderLeft: `3px solid ${sev.color}55`,
+          }}
+        >
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(28,28,30,0.4)', margin: '0 0 4px', textTransform: 'uppercase' }}>If you ignore this</p>
+          <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.75)', margin: 0, lineHeight: 1.55 }}>{result.if_you_ignore_this}</p>
+        </motion.div>
+      )}
       <SortedDeadlineBar result={result} accentColor={accentColor} />
 
       {result.action_steps?.length > 0 && (

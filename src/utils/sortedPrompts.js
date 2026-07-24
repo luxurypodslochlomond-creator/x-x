@@ -147,7 +147,6 @@ Return JSON with ONLY these fields:
 - severity: EXACTLY: NOT URGENT / NEEDS ATTENTION / URGENT / VERY URGENT
 - key_deadline: The EARLIEST deadline that matters OR null if all expired
 - amount: Specific amount or null
-- we_hear_you: ONE warm sentence acknowledging their situation — empathetic but brief. E.g. "This looks stressful but you have options."
 - what_this_means: ONE sentence explaining what this is — in PLAIN LANGUAGE (the document's language), no jargon. If expired: "Event passed — no action needed."
 - if_you_ignore_this: ONE sentence on what happens if they do nothing. Be honest, not scary.
 - action_steps: Exactly 3 action steps. Be HONEST and SPECIFIC:
