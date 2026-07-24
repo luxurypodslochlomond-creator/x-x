@@ -223,7 +223,7 @@ export default function SortedHome() {
             SORTEDSOS.ORG · Universal Frequency 51 CIC
           </p>
           <p style={{ fontSize: 12, color: MUTED, margin: '4px 0 0', fontWeight: 600, letterSpacing: '0.02em' }}>
-            Made in Scotland · for everyone
+            Made in Scotland from Electrons
           </p>
         </div>
       </div>
