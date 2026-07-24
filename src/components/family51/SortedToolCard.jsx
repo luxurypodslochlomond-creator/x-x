@@ -68,7 +68,7 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
           <span style={{ fontSize: 15, fontWeight: 900, color: accentColor, display: 'block', marginBottom: 4, letterSpacing: '-0.01em', textAlign: 'center' }}>
             {title}
           </span>
-          <span style={{ fontSize: 12, color: accentColor, opacity: 0.8, lineHeight: 1.45, display: 'block', textAlign: 'center' }}>
+          <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.62)', fontWeight: 500, lineHeight: 1.45, display: 'block', textAlign: 'center' }}>
             {description}
           </span>
         </div>
