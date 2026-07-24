@@ -20,7 +20,7 @@ const HELPLINES = {
       { name: 'MABS', desc: 'Money advice & budgeting', phone: '0818 07 2000' },
       { name: 'Citizens Information', desc: 'Rights & entitlements', phone: '0818 07 4000' },
       { name: 'Threshold', desc: 'Housing & tenant rights', phone: '1800 454 454' },
-      { name: 'Legal Aid Board', desc: 'Free legal advice', phone: '1890 612 200' },
+      { name: 'Legal Aid Board', desc: 'Free legal advice', phone: '0818 615 200' },
     ],
   },
   US: {
@@ -36,7 +36,7 @@ const HELPLINES = {
     services: [
       { name: 'National Debt Helpline', desc: 'Free financial counselling', phone: '1800 007 007' },
       { name: 'Lifeline', desc: 'Crisis support', phone: '13 11 14' },
-      { name: 'Tenants NSW/QLD/VIC', desc: 'Tenant rights (varies by state)', phone: '1800 007 007' },
+      { name: '1800 RESPECT', desc: 'Domestic & family violence support', phone: '1800 737 732' },
     ],
   },
   CA: {
