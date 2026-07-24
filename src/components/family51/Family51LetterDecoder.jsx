@@ -465,7 +465,10 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
                 </motion.button>
               ))}
               <motion.button
-                onClick={() => textareaRef.current?.focus()}
+                onClick={() => {
+                  const isSample = EXAMPLE_LETTERS.some(ex => ex.text === letterText);
+                  if (isSample) setLetterText('');
+                }}
                 whileTap={{ scale: 0.96 }}
                 style={{
                   fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.5)',
