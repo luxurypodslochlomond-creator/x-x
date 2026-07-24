@@ -219,11 +219,11 @@ export default function SortedHome() {
             <Link to="/SortedPrivacy" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>Privacy</Link>
             <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>FAQ</Link>
           </div>
-          <p style={{ fontSize: 11, color: FAINT, margin: 0, fontWeight: 400, letterSpacing: '0.02em' }}>
+          <p style={{ fontSize: 12, color: MUTED, margin: 0, fontWeight: 500, letterSpacing: '0.02em' }}>
             SORTEDSOS.ORG · Universal Frequency 51 CIC
           </p>
-          <p style={{ fontSize: 11, color: FAINT, margin: '4px 0 0', fontWeight: 500, letterSpacing: '0.02em' }}>
-            Made in Scotland from Electrons
+          <p style={{ fontSize: 12, color: MUTED, margin: '4px 0 0', fontWeight: 600, letterSpacing: '0.02em' }}>
+            Made in Scotland · for everyone
           </p>
         </div>
       </div>
