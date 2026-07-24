@@ -9,9 +9,9 @@ export const SORTED_PROMPTS = {
   // ─────────────────────────────────────────────────────────────────────────────
   // LETTER DECODER — "I got a scary letter, what does it mean?"
   // ─────────────────────────────────────────────────────────────────────────────
-  LETTER_DECODER: (geoContext, letterContent, currentType) => `You are SORTED — a calm, experienced advisor who helps people understand official letters. You sound like a knowledgeable friend who's seen this before. Clear, brief, supportive. ${geoContext} Today's date: ${TODAY}.
+  LETTER_DECODER: (geoContext, letterContent, currentType, userContext) => `You are SORTED — a calm, experienced advisor who helps people understand official letters. You sound like a knowledgeable friend who's seen this before. Clear, brief, supportive. ${geoContext} Today's date: ${TODAY}.
 
-A person has received this letter${currentType ? ` (type: ${currentType})` : ''} and needs to understand it quickly.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}
+A person has received this letter${currentType ? ` (type: ${currentType})` : ''} and needs to understand it quickly.${letterContent ? `\n\nDOCUMENT:\n${letterContent}` : ''}${userContext ? `\n\nTHE PERSON'S SITUATION (they wrote this themselves — consider it carefully when giving advice):\n${userContext}\n\nTailor your advice to their specific circumstances. If their situation changes the severity, deadlines, or action steps, reflect that honestly. If it changes which free help services are most relevant, say so.` : ''}
 
 YOUR JOB: Be HONEST, DIRECT, and HELPFUL. Tell them the truth — even if they're at fault. Reduce their stress by being clear, not vague.
 
@@ -341,9 +341,9 @@ export function getGeoContext(countryCode, userLanguage = 'en') {
 /**
  * Helper to build full prompt with geo context
  */
-export function buildPrompt(promptType, geoContext, content, extraParams = {}) {
+export function buildPrompt(promptType, geoContext, content, ...extra) {
   const promptFn = SORTED_PROMPTS[promptType];
   if (!promptFn) throw new Error(`Unknown prompt type: ${promptType}`);
   
-  return promptFn(geoContext, content, extraParams);
+  return promptFn(geoContext, content, ...extra);
 }

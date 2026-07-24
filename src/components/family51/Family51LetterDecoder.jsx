@@ -35,6 +35,7 @@ const EXAMPLE_LETTERS = [
 export default function Family51LetterDecoder({ accentColor = '#f97316', onResult, onHandoff, triggerPhoto, prefillFileUrl, onPhotoTriggered }) {
   const [letterText, setLetterText] = useState('');
   const [letterType, setLetterType] = useState('');
+  const [userContext, setUserContext] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [result, setResult] = useState(null);
@@ -48,11 +49,13 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const cameraInputRef = useRef(null);
   const geoRef = useRef(geo);
   const letterTypeRef = useRef(letterType);
+  const userContextRef = useRef(userContext);
   const resultRef = useRef(null);
 
   // Keep refs in sync so handleFileUpload always has fresh values
   useEffect(() => { geoRef.current = geo; }, [geo]);
   useEffect(() => { letterTypeRef.current = letterType; }, [letterType]);
+  useEffect(() => { userContextRef.current = userContext; }, [userContext]);
 
   // Scroll to result when it appears
   useEffect(() => {
@@ -96,6 +99,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
       const currentGeo = geoRef.current;
       const currentType = letterTypeRef.current;
+      const currentContext = userContextRef.current;
       const geoContext = buildSortedGeoPromptContext(currentGeo);
 
       // Route by file type: images → vision model directly; docs/PDFs → extract text first
@@ -122,7 +126,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
 
       const learningContext = buildLearningContext(currentType || 'letter');
-      const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType) + learningContext;
+      const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType, currentContext) + learningContext;
 
       const response = await callSortedLLM({
         model: 'claude_sonnet_4_6',
@@ -370,7 +374,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
     await runDecode(uploadedFileUrl || null, letterText);
   };
 
-  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUploadedFileUrl(null); setDecodeError(null); };
+  const reset = () => { setResult(null); setLetterText(''); setLetterType(''); setUserContext(''); setUploadedFileUrl(null); setDecodeError(null); };
 
 
 
@@ -577,6 +581,24 @@ Don't worry about formatting. Just get it all in."
                 style={{ overflow: 'hidden' }}
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 4 }}>
+                  <div>
+                    <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.5)', margin: '0 0 6px' }}>YOUR SITUATION (OPTIONAL):</p>
+                    <textarea
+                      value={userContext}
+                      onChange={e => setUserContext(e.target.value)}
+                      placeholder="Anything that matters about your situation — e.g. 'I'm a single parent', 'I lost my job last month', 'English isn't my first language', 'I'm disabled'. Helps SORTED tailor its advice to you."
+                      style={{
+                        width: '100%', minHeight: 70, background: '#fff',
+                        border: `1px solid ${userContext ? accentColor + '70' : 'rgba(26,18,8,0.1)'}`,
+                        borderRadius: 10, color: '#1a1208', fontSize: 12, padding: '10px 12px',
+                        resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.5,
+                        transition: 'border-color 0.2s', boxSizing: 'border-box',
+                        caretColor: accentColor,
+                      }}
+                      onFocus={e => e.target.style.borderColor = accentColor}
+                      onBlur={e => e.target.style.borderColor = userContext ? accentColor + '70' : 'rgba(26,18,8,0.1)'}
+                    />
+                  </div>
                   <SortedPatternShareToggle accentColor={accentColor} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(26,18,8,0.3)' }} />
