@@ -60,9 +60,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const [geo, setGeo] = useState(() => detectGeo());
   const [decodeError, setDecodeError] = useState(null);
   const [caseId, setCaseId] = useState(null);
+  const [showFineTune, setShowFineTune] = useState(false);
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
-  const textareaRef = useRef(null);
   const geoRef = useRef(geo);
   const letterTypeRef = useRef(letterType);
   const resultRef = useRef(null);
@@ -486,7 +486,6 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
 
           {/* BIG PASTE AREA — first thing they see */}
           <textarea
-            ref={textareaRef}
             value={letterText}
             onChange={e => setLetterText(e.target.value)}
             placeholder="Paste your letter here — or snap a photo below.
@@ -503,6 +502,11 @@ Don't worry about formatting. Just get it all in."
             onFocus={e => e.target.style.borderColor = accentColor}
             onBlur={e => e.target.style.borderColor = letterText ? accentColor + '90' : 'rgba(26,18,8,0.15)'}
           />
+
+          {/* INSTANT SCAN — recognition lands the moment they paste, before they tap anything */}
+          {letterText.trim() && (
+            <LetterInstantScan text={letterText} accentColor={accentColor} />
+          )}
 
           {/* PRIMARY ACTION — decode if text, else two photo buttons */}
           {letterText.trim() ? (
@@ -565,11 +569,6 @@ Don't worry about formatting. Just get it all in."
             </div>
           )}
 
-          {/* INSTANT SCAN — instant letter detection before AI runs */}
-          {letterText.trim() && (
-            <LetterInstantScan text={letterText} accentColor={accentColor} />
-          )}
-
           {/* HONEST PRIVACY STRIP — one consistent message */}
           <SortedPrivacyStrip accentColor={accentColor} />
         </div>
@@ -583,31 +582,46 @@ Don't worry about formatting. Just get it all in."
         </div>
       )}
 
-      {/* OPTIONAL EXTRAS — only shown after result or when they've started typing */}
+      {/* FINE-TUNE — optional extras collapsed by default for a calm paste moment */}
       {letterText.trim() && !result && (
-      <div style={{ paddingTop: 4 }}>
-       {/* PATTERN SHARING - opt-in to help others */}
-       <SortedPatternShareToggle accentColor={accentColor} />
-       
-       {/* GEO — always visible when typing */}
-       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, padding: '8px 12px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
-       <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(26,18,8,0.3)' }} />
-       <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.5)' }}>LOCATION:</span>
-            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-          </div>
-          {/* TYPE CHIPS — collapsible optional hint */}
-          <details style={{ cursor: 'pointer' }}>
-            <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-              + What type of letter? (optional)
-            </summary>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
-              {LETTER_TYPES.map(type => (
-                <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
-                  {type}
-                </Chip>
-              ))}
-            </div>
-          </details>
+        <div style={{ paddingTop: 4 }}>
+          <button
+            onClick={() => setShowFineTune(v => !v)}
+            style={{
+              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              padding: '10px 0', background: 'transparent', border: 'none', cursor: 'pointer',
+              fontSize: 11, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.06em',
+            }}
+          >
+            {showFineTune ? '− Hide options' : '＋ Fine-tune (optional)'}
+          </button>
+          <AnimatePresence initial={false}>
+            {showFineTune && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.26, ease: [0.32, 0.72, 0, 1] }}
+                style={{ overflow: 'hidden' }}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 4 }}>
+                  <SortedPatternShareToggle accentColor={accentColor} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
+                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'rgba(26,18,8,0.3)' }} />
+                    <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', color: 'rgba(26,18,8,0.5)' }}>LOCATION:</span>
+                    <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                    {LETTER_TYPES.map(type => (
+                      <Chip key={type} active={letterType === type} color={accentColor} onClick={() => setLetterType(letterType === type ? '' : type)}>
+                        {type}
+                      </Chip>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
 
