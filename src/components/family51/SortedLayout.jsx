@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import SortedHeader from './SortedHeader';
@@ -17,6 +17,14 @@ export default function SortedLayout({ children, currentPage }) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  // Some browsers re-apply the saved scroll position on back/forward AFTER our
+  // layout-effect reset — re-pin to the top on the next frame so they can't win.
+  useEffect(() => {
+    const onPop = () => requestAnimationFrame(() => window.scrollTo(0, 0));
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   
   return (
     <div style={{ minHeight: '100dvh',       background: '#fcfaf6', color: '#1c1c1e', position: 'relative', overflowX: 'hidden', WebkitOverflowScrolling: 'touch', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif' }}>
