@@ -57,7 +57,7 @@ export default function SortedHome() {
           style={{ paddingTop: 24, textAlign: 'center' }}
         >
           <div style={{ display: 'inline-block', padding: '5px 12px', border: `1px solid ${GOLD}55`, borderRadius: 999, marginBottom: 16, fontSize: 12, fontWeight: 600, color: GOLD, letterSpacing: '0.01em', background: `${GOLD}0d` }}>
-            Help with debt, rent & official letters
+            Your SOS, answered.
           </div>
           <h1 style={{
             fontFamily: FONT.family,
