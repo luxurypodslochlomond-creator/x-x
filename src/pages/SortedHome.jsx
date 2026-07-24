@@ -105,7 +105,7 @@ export default function SortedHome() {
             variant="primary"
             icon="letter"
             title="Decode a Letter"
-            description="Debt, rent arrears, council letters — urgency check, what to do next"
+            description="Council, debt, rent, parking, mortgage, court & benefits letters — urgency check, what to do next"
             accentColor={TOOL_COLORS.letter}
             onClick={() => openTool('letter')}
 
