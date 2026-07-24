@@ -90,7 +90,7 @@ export default function SortedForLifeCard({ compact = false }) {
       </div>
 
       <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: '0 0 16px', lineHeight: 1.5, fontStyle: 'italic' }}>
-        "Less than a coffee. More clarity than an hour of Googling."
+        "More clarity than an hour of Googling — one payment, yours for life."
       </p>
 
       <motion.button
