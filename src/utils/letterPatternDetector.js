@@ -285,15 +285,6 @@ export function getLetterWarnings(findings) {
   const warnings = [];
   if (!findings) return warnings;
 
-  // Letter type identification — most useful info for the user
-  if (findings.letterTypes.length > 0) {
-    const topType = findings.letterTypes[0];
-    warnings.push({
-      level: findings.urgencyLevel === 'urgent' ? 'danger' : 'warning',
-      text: `This looks like: ${topType.label}. ${topType.calmNote}`,
-    });
-  }
-
   // Deadline alert
   if (findings.deadlines.length > 0) {
     warnings.push({
