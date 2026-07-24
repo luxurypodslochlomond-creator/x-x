@@ -440,7 +440,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
           {/* EXAMPLE LETTERS — reduce anxiety, show it works */}
           <div>
             <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.45)', margin: '0 0 8px' }}>
-              GOT ONE OF THESE? TAP TO SEE HOW SORTED HELPS →
+              Got one of these? Tap to try →
             </p>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLE_LETTERS.map((ex, i) => (
@@ -470,9 +470,9 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
           <textarea
             value={letterText}
             onChange={e => setLetterText(e.target.value)}
-            placeholder="Paste your letter here — or take a photo below.
+            placeholder="Paste your letter here — or snap a photo below.
 
-Don't worry about formatting. Just get it all in. If the law applies in a different country, just mention it."
+Don't worry about formatting. Just get it all in."
             style={{
               width: '100%', height: 200, background: '#fff',
               border: `1.5px solid ${letterText ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
@@ -579,7 +579,7 @@ Don't worry about formatting. Just get it all in. If the law applies in a differ
           {/* TYPE CHIPS — collapsible optional hint */}
           <details style={{ cursor: 'pointer' }}>
             <summary style={{ fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.45)', letterSpacing: '0.1em', listStyle: 'none', userSelect: 'none' }}>
-              + OPTIONAL: what type of letter? (helps accuracy)
+              + What type of letter? (optional)
             </summary>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
               {LETTER_TYPES.map(type => (
