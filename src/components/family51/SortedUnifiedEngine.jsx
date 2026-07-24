@@ -81,8 +81,8 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
     setShowShare(false);
     setTriggerPhoto(handoffData?.triggerPhoto || false);
     setVisible(true);
-    // Always scroll to top when a tool opens
-    setTimeout(() => window.scrollTo(0, 0), 50);
+    // The sheet resets its own scroll below — never touch the window,
+    // or we destroy the user's place on the page behind it.
   };
 
   const handleToolComplete = (toolId) => {
@@ -118,6 +118,15 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
       sheetRef.current.scrollTop = 0;
     }
   }, [activeTool, visible]);
+
+  // Lock the background page while the sheet is open so it can't jump or
+  // lose the user's scroll position. Restored exactly on close.
+  useEffect(() => {
+    if (!visible) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [visible]);
 
   return (
     <div
