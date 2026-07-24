@@ -65,7 +65,7 @@ export default function SortedHome() {
             margin: 0,
             letterSpacing: '-0.02em',
           }}>
-            Whatever that letter says —<br />let's work out what it means together.
+            Got a letter that's scaring you?<br />Let's read it together.
           </h1>
           <p style={{
             fontSize: FONT.subheading,
@@ -75,7 +75,7 @@ export default function SortedHome() {
             lineHeight: 1.5,
             maxWidth: 420,
           }}>
-            Paste it, snap a photo, or upload a file. We'll decode it into plain language — any language — and tell you exactly what to do next.
+            Brown envelope, council, eviction, HMRC, court or debt — we decode it into plain English and tell you exactly what to do next. Paste it, snap a photo, or upload a file. Any language, no judgement.
           </p>
         </motion.div>
 
