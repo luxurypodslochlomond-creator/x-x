@@ -54,9 +54,9 @@ export default function SortedHome() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={MOTION.fade}
-          style={{ paddingTop: 18, textAlign: 'center' }}
+          style={{ paddingTop: 12, textAlign: 'center' }}
         >
-          <div style={{ display: 'inline-block', padding: '5px 12px', border: `1px solid ${GOLD}55`, borderRadius: 999, marginBottom: 14, fontSize: 12, fontWeight: 600, color: GOLD, letterSpacing: '0.01em', background: `${GOLD}0d` }}>
+          <div style={{ display: 'inline-block', padding: '5px 12px', border: `1px solid ${GOLD}55`, borderRadius: 999, marginBottom: 10, fontSize: 12, fontWeight: 600, color: GOLD, letterSpacing: '0.01em', background: `${GOLD}0d` }}>
             Your SOS, answered.
           </div>
           <h1 style={{
@@ -86,7 +86,7 @@ export default function SortedHome() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...MOTION.fade, delay: 0.15 }}
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 28 }}
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 22 }}
         >
           <SortedToolCard
             variant="primary"

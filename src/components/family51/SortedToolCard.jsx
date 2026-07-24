@@ -45,8 +45,8 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
           width: '100%', padding: '20px 16px', borderRadius: 16, cursor: disabled ? 'not-allowed' : 'pointer',
           border: `2px solid ${accentColor}`,
           background: '#fff',
-          opacity: disabled ? 0.5 : 1, textAlign: 'left',
-          display: 'flex', flexDirection: 'column', gap: 10,
+          opacity: disabled ? 0.5 : 1, textAlign: 'center',
+          display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center',
           transition: 'all 0.2s',
           boxShadow: `0 2px 10px ${accentColor}30`,
         }}
@@ -59,15 +59,16 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
           width: 40, height: 40, borderRadius: 12,
           background: `${accentColor}20`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
+          alignSelf: 'center',
           color: accentColor,
         }}>
           {iconSvg}
         </div>
         <div>
-          <span style={{ fontSize: 15, fontWeight: 900, color: '#1a1208', display: 'block', marginBottom: 4, letterSpacing: '-0.01em' }}>
+          <span style={{ fontSize: 15, fontWeight: 900, color: accentColor, display: 'block', marginBottom: 4, letterSpacing: '-0.01em', textAlign: 'center' }}>
             {title}
           </span>
-          <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.5)', lineHeight: 1.45, display: 'block' }}>
+          <span style={{ fontSize: 12, color: accentColor, opacity: 0.8, lineHeight: 1.45, display: 'block', textAlign: 'center' }}>
             {description}
           </span>
         </div>
