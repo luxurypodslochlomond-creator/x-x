@@ -71,7 +71,11 @@ export default function SortedTermsPage() {
         You get 10 free decodes every day, resetting overnight — enough for most real situations without a card. If you need more, subscribe for unlimited, or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
       </Section>
 
-      <Section title="5. Cancelling Your Subscription">
+      <Section title="5. One-Time Payment & Service Continuity">
+        If you pay the one-time £9.99 fee, that single payment covers unlimited access to SORTED for as long as the service operates — there is no subscription and no recurring charge. We intend to run SORTED for a long time, but if the service is ever discontinued for any reason, no refunds are owed for the one-time fee. If that ever happens, we'll give you at least 30 days' notice and a way to export your saved cases before the service closes. This is honest, not a lifetime guarantee — you're paying once for a service that runs as long as it can, not forever.
+      </Section>
+
+      <Section title="6. Cancelling Your Subscription">
         Cancel anytime — no questions, no fees, no dark patterns. You keep access until the end of your billing period. To cancel, email <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> or cancel directly through your payment settings. EU and UK users: you have a 14-day cooling-off right on new subscriptions under consumer law.
       </Section>
 

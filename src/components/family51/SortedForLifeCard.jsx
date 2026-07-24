@@ -116,7 +116,7 @@ export default function SortedForLifeCard({ compact = false }) {
       )}
 
       <p style={{ fontSize: 11, color: 'rgba(26,18,8,0.32)', textAlign: 'center', marginTop: 14, letterSpacing: '0.03em', lineHeight: 1.5 }}>
-        Secure · Apple Pay &amp; Google Pay · Pay once, sorted forever
+        Secure · Apple Pay &amp; Google Pay · Pay once, no subscription
       </p>
     </motion.div>
   );
