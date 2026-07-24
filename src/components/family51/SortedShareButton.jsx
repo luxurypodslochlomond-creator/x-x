@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SHARE_URL = 'https://uf51.love/Sorted';
-const SHARE_TEXT = "Got a scary letter? SORTED decodes it in seconds — plain English, free, nothing stored.";
+const SHARE_TEXT = "Found this when I was stressing over a letter — it explains what it actually means and what to do. Free, nothing saved. Might help someone you know 👇";
 
 export default function SortedShareButton({ accentColor = '#f97316' }) {
   const [shared, setShared] = useState(false);

@@ -5,7 +5,7 @@ export default function SortedShareMoment({ onDismiss }) {
   const [copied, setCopied] = useState(false);
 
   const shareUrl = 'https://uf51.love/Sorted';
-  const shareText = "Just used SORTED — it decoded a scary letter into plain English in seconds. Free to try. No signup needed. sorted.uf51.love";
+  const shareText = "Found this — it reads scary letters and tells you what they actually mean and what to do. Free, nothing stored. If you've got one you've been ignoring, try it 👇";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shareUrl).then(() => {
