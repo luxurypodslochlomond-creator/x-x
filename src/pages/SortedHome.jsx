@@ -75,7 +75,7 @@ export default function SortedHome() {
             lineHeight: 1.5,
             maxWidth: 420,
           }}>
-            Brown envelope, council, eviction, HMRC, court or debt — we decode it into plain English and tell you exactly what to do next. Paste it, snap a photo, or upload a file. Any language, no judgement.
+            Paste it, snap a photo, or upload — any language, no judgement.
           </p>
         </motion.div>
 
