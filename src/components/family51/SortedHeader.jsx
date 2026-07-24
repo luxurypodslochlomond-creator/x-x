@@ -28,9 +28,9 @@ export default function SortedHeader() {
     }}>
       <Link
         to="/Sorted"
-        style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
+        style={{ display: 'flex', alignItems: 'center', gap: 11, textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
       >
-        <SortedGlyph height={18} />
+        <SortedGlyph height={19} />
         <span style={{ fontSize: 17, fontWeight: 800, letterSpacing: '0.01em', color: INK }}>Sorted</span>
       </Link>
 
