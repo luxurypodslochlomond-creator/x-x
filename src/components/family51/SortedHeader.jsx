@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
-import { SOSBeacon } from './SortedBrandBar';
+import { SortedGlyph } from './SortedGlyph';
 
 const GOLD = '#c6995c';
 const INK = '#1c1c1e';
@@ -30,7 +30,7 @@ export default function SortedHeader() {
         to="/Sorted"
         style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
       >
-        <SOSBeacon size={26} animate={false} />
+        <SortedGlyph size={26} />
         <span style={{ fontSize: 17, fontWeight: 800, letterSpacing: '0.01em', color: INK }}>Sorted</span>
       </Link>
 
