@@ -16,8 +16,8 @@ const FeatureCard = ({ icon: Icon, title, desc, status, color }) => (
         <Icon size={22} color={color} />
       </div>
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 14, fontWeight: 800, color: '#1a1208', marginBottom: 2 }}>{title}</div>
-        <div style={{ fontSize: 12, color: 'rgba(26,18,8,0.5)', lineHeight: 1.5 }}>{desc}</div>
+        <div style={{ fontSize: 14, fontWeight: 800, color: '#1c1c1e', marginBottom: 2 }}>{title}</div>
+        <div style={{ fontSize: 12, color: 'rgba(28,28,30,0.6)', lineHeight: 1.5 }}>{desc}</div>
       </div>
       {status && (
         <span style={{
@@ -35,7 +35,7 @@ const RegionCard = ({ region, features, status }) => (
     border: '1px solid rgba(26,18,8,0.08)', marginBottom: 10,
   }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-      <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1208' }}>{region}</div>
+      <div style={{ fontSize: 14, fontWeight: 700, color: '#1c1c1e' }}>{region}</div>
       {status === 'ready' ? (
         <CheckCircle size={16} color="#22c55e" />
       ) : status === 'limited' ? (
@@ -44,7 +44,7 @@ const RegionCard = ({ region, features, status }) => (
         <span style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', background: '#F1F5F9', padding: '2px 8px', borderRadius: 6 }}>COMING</span>
       )}
     </div>
-    <div style={{ fontSize: 12, color: 'rgba(26,18,8,0.5)', lineHeight: 1.6 }}>{features}</div>
+    <div style={{ fontSize: 12, color: 'rgba(28,28,30,0.6)', lineHeight: 1.6 }}>{features}</div>
   </div>
 );
 
@@ -136,18 +136,15 @@ export default function SortedGlobalAccess() {
 
   return (
     <div style={{
-      minHeight: '100vh', background: 'linear-gradient(135deg, #faf8f5 0%, #f0e9e2 100%)',
+      minHeight: '100vh', background: '#fcfaf6', color: '#1c1c1e',
       padding: '20px 16px',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif',
     }}>
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
-        <Link to="/Sorted" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 16, color: '#1a1208', textDecoration: 'none' }}>
-          <ArrowLeft size={18} />
-          <span style={{ fontSize: 13, fontWeight: 700 }}>Back to SORTED</span>
-        </Link>
-        
+
         <div style={{
-          background: '#1a1208', borderRadius: 16, padding: '24px 20px',
+          background: '#1c1c1e', borderRadius: 16, padding: '24px 20px',
           color: '#fff', marginBottom: 20,
         }}>
           <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.15em', opacity: 0.7, marginBottom: 6 }}>
@@ -191,7 +188,7 @@ export default function SortedGlobalAccess() {
 
       {/* Features */}
       <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', marginBottom: 12 }}>
+        <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(28,28,30,0.6)', marginBottom: 12 }}>
           GLOBAL FEATURES
         </div>
         {features.map(f => (
@@ -201,7 +198,7 @@ export default function SortedGlobalAccess() {
 
       {/* Regions */}
       <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.35)', marginBottom: 12 }}>
+        <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(28,28,30,0.6)', marginBottom: 12 }}>
           REGIONAL SUPPORT
         </div>
         {regions.map(r => (
@@ -214,7 +211,7 @@ export default function SortedGlobalAccess() {
         background: '#fff', borderRadius: 14, padding: 18,
         border: '1.5px dashed rgba(26,18,8,0.15)',
       }}>
-        <div style={{ fontSize: 13, fontWeight: 800, color: '#1a1208', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: '#1c1c1e', marginBottom: 8 }}>
           Add to your home screen
         </div>
         <ol style={{ margin: 0, paddingLeft: 20, fontSize: 12, color: 'rgba(26,18,8,0.6)', lineHeight: 1.8 }}>
@@ -227,13 +224,13 @@ export default function SortedGlobalAccess() {
       {/* Footer */}
       <div style={{
         marginTop: 24, textAlign: 'center',
-        fontSize: 12, color: 'rgba(26,18,8,0.35)', lineHeight: 1.6,
+        fontSize: 12, color: 'rgba(28,28,30,0.6)', lineHeight: 1.6,
       }}>
         <p style={{ marginBottom: 8 }}>
           Built with love by Universal Frequency 51 CIC
         </p>
         <p>
-          Can't afford it? Email <strong style={{ color: '#d97706' }}>family@uf51.love</strong> — we'll sort it.
+          Can't afford it? Email <strong style={{ color: '#c6995c' }}>family@uf51.love</strong> — we'll sort it.
         </p>
       </div>
     </div>

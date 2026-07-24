@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 const Section = ({ title, children }) => {
   const [open, setOpen] = useState(true);
   return (
-    <div style={{ marginBottom: 24, borderBottom: '1px solid rgba(245,166,35,0.15)', paddingBottom: 24 }}>
+    <div style={{ marginBottom: 24, borderBottom: '1px solid rgba(198,153,92,0.15)', paddingBottom: 24 }}>
       <button
         onClick={() => setOpen(!open)}
         style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: open ? 10 : 0 }}
       >
-        <span style={{ fontSize: 15, fontWeight: 700, color: '#c47f0a' }}>{title}</span>
-        <span style={{ fontSize: 18, color: '#f5a623', lineHeight: 1 }}>{open ? '−' : '+'}</span>
+        <span style={{ fontSize: 15, fontWeight: 700, color: '#c6995c' }}>{title}</span>
+        <span style={{ fontSize: 18, color: '#c6995c', lineHeight: 1 }}>{open ? '−' : '+'}</span>
       </button>
       {open && <p style={{ fontSize: 14, lineHeight: 1.8, color: 'rgba(26,18,8,0.68)', margin: 0 }}>{children}</p>}
     </div>
@@ -18,20 +18,20 @@ const Section = ({ title, children }) => {
 
 export default function SortedTermsPage() {
   return (
-    <div style={{ padding: '40px 20px', maxWidth: 580, margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+    <div style={{ padding: '40px 20px', maxWidth: 580, margin: '0 auto', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif' }}>
 
       {/* Header */}
       <div style={{ marginBottom: 36 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-          <span style={{ fontSize: 26, fontWeight: 900, color: '#1a1208', letterSpacing: '-0.5px' }}>SORTED</span>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', color: '#f5a623', background: 'rgba(245,166,35,0.12)', padding: '3px 8px', borderRadius: 4 }}>TERMS</span>
+          <span style={{ fontSize: 26, fontWeight: 900, color: '#1c1c1e', letterSpacing: '-0.5px' }}>SORTED</span>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', color: '#c6995c', background: 'rgba(198,153,92,0.12)', padding: '3px 8px', borderRadius: 4 }}>TERMS</span>
         </div>
-        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.38)', margin: 0 }}>Last updated: July 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
+        <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.6)', margin: 0 }}>Last updated: July 2026 · Universal Frequency 51 CIC · Scotland, UK</p>
       </div>
 
       {/* TL;DR */}
-      <div style={{ background: '#1a1208', borderRadius: 12, padding: '18px 20px', marginBottom: 12 }}>
-        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#f5a623', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR</p>
+      <div style={{ background: '#1c1c1e', borderRadius: 12, padding: '18px 20px', marginBottom: 12 }}>
+        <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: '#c6995c', margin: '0 0 10px', textTransform: 'uppercase' }}>TL;DR</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
           {[
             "We decode scary letters into plain English. We're not lawyers.",
@@ -41,7 +41,7 @@ export default function SortedTermsPage() {
             "Your vault stays yours — files uploaded for analysis, results saved privately to you.",
           ].map((line, i) => (
             <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span style={{ color: '#f5a623', fontWeight: 900, fontSize: 14, flexShrink: 0 }}>✓</span>
+              <span style={{ color: '#c6995c', fontWeight: 900, fontSize: 14, flexShrink: 0 }}>✓</span>
               <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', lineHeight: 1.6 }}>{line}</span>
             </div>
           ))}
@@ -49,7 +49,7 @@ export default function SortedTermsPage() {
       </div>
 
       {/* Intro */}
-      <div style={{ background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.25)', borderRadius: 10, padding: '16px 18px', marginBottom: 32 }}>
+      <div style={{ background: 'rgba(198,153,92,0.08)', border: '1px solid rgba(198,153,92,0.25)', borderRadius: 10, padding: '16px 18px', marginBottom: 32 }}>
         <p style={{ fontSize: 13, lineHeight: 1.8, color: 'rgba(26,18,8,0.6)', margin: 0 }}>
           The full version is below — plain English, no legalese. If something doesn't make sense, email us.
         </p>
@@ -68,7 +68,7 @@ export default function SortedTermsPage() {
       </Section>
 
       <Section title="4. Free Decodes Every Day, Then You Choose">
-        You get 10 free decodes every day, resetting overnight — enough for most real situations without a card. If you need more, subscribe for unlimited, or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
+        You get 10 free decodes every day, resetting overnight — enough for most real situations without a card. If you need more, subscribe for unlimited, or walk away — no lock-in, no dark patterns. If you're genuinely struggling financially, email us at <a href="mailto:family@uf51.love" style={{ color: '#c6995c', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> and we'll sort something.
       </Section>
 
       <Section title="5. One-Time Payment & Service Continuity">
@@ -76,7 +76,7 @@ export default function SortedTermsPage() {
       </Section>
 
       <Section title="6. Cancelling Your Subscription">
-        Cancel anytime — no questions, no fees, no dark patterns. You keep access until the end of your billing period. To cancel, email <a href="mailto:family@uf51.love" style={{ color: '#f5a623', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> or cancel directly through your payment settings. EU and UK users: you have a 14-day cooling-off right on new subscriptions under consumer law.
+        Cancel anytime — no questions, no fees, no dark patterns. You keep access until the end of your billing period. To cancel, email <a href="mailto:family@uf51.love" style={{ color: '#c6995c', fontWeight: 600, textDecoration: 'none' }}>family@uf51.love</a> or cancel directly through your payment settings. EU and UK users: you have a 14-day cooling-off right on new subscriptions under consumer law.
       </Section>
 
       <Section title="6. Our Liability">
@@ -95,11 +95,11 @@ export default function SortedTermsPage() {
         If we update these terms meaningfully, we'll update the date above. We'll never change our core commitments: no data harvesting, no selling your info, no dark patterns. Ever.
       </Section>
 
-      <div style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(245,166,35,0.2)', display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.45)', margin: 0 }}>
-          Questions? <a href="mailto:family@uf51.love" style={{ color: '#f5a623', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
+      <div style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(198,153,92,0.2)', display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.6)', margin: 0 }}>
+          Questions? <a href="mailto:family@uf51.love" style={{ color: '#c6995c', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>
         </p>
-        <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.3)', margin: 0 }}>
+        <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.6)', margin: 0 }}>
           Universal Frequency 51 CIC — built to help people, not harvest them. ♾️
         </p>
       </div>
