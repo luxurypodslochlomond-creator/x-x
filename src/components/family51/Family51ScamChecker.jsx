@@ -7,9 +7,8 @@ import { detectGeo } from '@/hooks/useSortedGeo';
 import { getScamReportingBody } from '@/utils/sortedGeoContext';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
-import SortedShareMomentScam from './SortedShareMomentScam';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
-import SortedFeedback from './SortedFeedback';
+import SortedResultShell, { SortedResultSection, SortedBullets, SortedSteps } from './SortedResultShell';
 import ScamInstantScan from './ScamInstantScan';
 import SortedPrivacyStrip from './SortedPrivacyStrip';
 
@@ -57,6 +56,7 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult,
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
+  const [flash, setFlash] = useState(null);
   const geo = detectGeo();
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
@@ -239,6 +239,19 @@ Return JSON with these exact fields:
 
   const v = result ? (VERDICT[result.verdict] || VERDICT.warning) : null;
 
+  const buildShareText = () => {
+    const EMOJI = { safe: '✅', warning: '⚠️', scam: '🚨' };
+    return `SORTED Scam Check\n\n${EMOJI[result.verdict] || ''} ${v.label}\n${result.confidence}\n\n${result.what_this_is || ''}\n\nWhat to do:\n${result.what_to_do?.map((s, i) => `${i + 1}. ${s}`).join('\n') || ''}\n\nReport to: ${result.report_to || 'Action Fraud'}\n\nsorted.uf51.love — free, instant, nothing stored`;
+  };
+  const copyAll = () => {
+    try { navigator.clipboard.writeText(buildShareText()); setFlash('COPIED'); setTimeout(() => setFlash(null), 2000); } catch {}
+  };
+  const shareResult = async () => {
+    const text = buildShareText();
+    if (navigator.share) { try { await navigator.share({ title: 'SORTED Scam Check', text }); return; } catch {} }
+    try { await navigator.clipboard.writeText(text); setFlash('COPIED'); setTimeout(() => setFlash(null), 2000); } catch {}
+  };
+
   return (
     <div className="space-y-5">
       <style>{`textarea::placeholder { color: rgba(26,18,8,0.35) !important; } input::placeholder { color: rgba(26,18,8,0.35) !important; }`}</style>
@@ -329,13 +342,19 @@ Copy exactly what it says — every word helps us check it.`}
         </motion.div>
       )}
 
-      {/* RESULT */}
+      {/* RESULT — unified shell, same skeleton as every other tool */}
       <AnimatePresence>
         {result && v && !loading && (
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-
-            {/* BIG VERDICT */}
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
+            <SortedResultShell
+              accentColor={accentColor}
+              tool="scam"
+              onCopy={copyAll}
+              onShare={shareResult}
+              onReset={reset}
+              flash={flash}
+            >
+              {/* BIG VERDICT — the scam tool's punchy answer moment */}
             <div style={{ borderRadius: 16, border: `2px solid ${v.border}`, background: v.bg, padding: '24px 20px', textAlign: 'center' }}>
               <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}><VerdictIcon type={v.icon} color={v.color} /></div>
               <div style={{ fontSize: 22, fontWeight: 900, color: v.color, letterSpacing: '-0.02em', marginBottom: 4 }}>{v.label}</div>
@@ -348,50 +367,31 @@ Copy exactly what it says — every word helps us check it.`}
             </div>
 
             {/* REASSURANCE */}
-            <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(26,18,8,0.03)', border: '1px solid rgba(26,18,8,0.08)' }}>
-              <p style={{ fontSize: 14, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>{result.reassurance}</p>
-            </div>
+            {result.reassurance && (
+              <SortedResultSection color={accentColor}>
+                <p style={{ fontSize: 14, color: 'rgba(28,28,30,0.75)', margin: 0, lineHeight: 1.6 }}>{result.reassurance}</p>
+              </SortedResultSection>
+            )}
 
             {/* WHAT THIS IS */}
             {result.what_this_is && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(26,18,8,0.02)', border: '1px solid rgba(26,18,8,0.08)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(26,18,8,0.4)', margin: '0 0 8px' }}>WHAT THIS IS</p>
-                <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>{result.what_this_is}</p>
-              </div>
+              <SortedResultSection label="WHAT THIS IS" color={accentColor}>
+                <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.75)', margin: 0, lineHeight: 1.6 }}>{result.what_this_is}</p>
+              </SortedResultSection>
             )}
 
             {/* RED FLAGS */}
             {result.red_flags?.length > 0 && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.2)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(239,68,68,0.7)', margin: '0 0 10px' }}>RED FLAGS WE SPOTTED</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {result.red_flags.map((flag, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-                        <path d="M5 3v18M5 4h11l-2 4 2 4H5" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                      <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.7)', lineHeight: 1.5 }}>{flag}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <SortedResultSection label="RED FLAGS WE SPOTTED" color="#ef4444">
+                <SortedBullets items={result.red_flags} color="#ef4444" symbol="⚑" />
+              </SortedResultSection>
             )}
 
             {/* WHAT TO DO */}
             {result.what_to_do?.length > 0 && (
-              <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.2)' }}>
-                <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(34,197,94,0.7)', margin: '0 0 10px' }}>WHAT TO DO</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {result.what_to_do.map((step, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                      <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <span style={{ fontSize: 11, fontWeight: 900, color: '#22c55e' }}>{i + 1}</span>
-                      </div>
-                      <span style={{ fontSize: 13, color: 'rgba(26,18,8,0.8)', lineHeight: 1.5 }}>{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <SortedResultSection label="WHAT TO DO" color="#22c55e">
+                <SortedSteps steps={result.what_to_do} color="#22c55e" />
+              </SortedResultSection>
             )}
 
             {/* REPORT TO — one-tap report button */}
@@ -399,9 +399,8 @@ Copy exactly what it says — every word helps us check it.`}
               const domainMatch = result.report_to.match(/[a-z0-9-]+\.[a-z]{2,}(?:\.[a-z]{2,})?/i);
               const reportUrl = domainMatch ? `https://${domainMatch[0].replace(/\.$/, '')}` : null;
               return (
-                <div style={{ padding: '12px 16px', borderRadius: 10, background: 'rgba(26,18,8,0.02)', border: '1px solid rgba(26,18,8,0.08)' }}>
-                  <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.4)', margin: '0 0 5px' }}>REPORT IT</p>
-                  <p style={{ fontSize: 12, color: 'rgba(26,18,8,0.65)', margin: '0 0 8px', lineHeight: 1.5 }}>{result.report_to}</p>
+                <SortedResultSection label="REPORT IT" color={accentColor}>
+                  <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.65)', margin: '0 0 10px', lineHeight: 1.5 }}>{result.report_to}</p>
                   {reportUrl && (
                     <a href={reportUrl} target="_blank" rel="noopener noreferrer" style={{
                       display: 'inline-block', fontSize: 11, fontWeight: 800, letterSpacing: '0.08em',
@@ -411,22 +410,11 @@ Copy exactly what it says — every word helps us check it.`}
                       REPORT NOW →
                     </a>
                   )}
-                </div>
+                </SortedResultSection>
               );
             })()}
 
-            {/* SHARE + RESET */}
-            <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-              <div style={{ flex: 1 }}>
-                <SortedShareMomentScam result={result} accentColor={accentColor} />
-              </div>
-              <button onClick={reset} style={{ flex: 1, padding: '12px 0', borderRadius: 10, fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', cursor: 'pointer', border: `1px solid ${accentColor}40`, background: 'transparent', color: accentColor }}>
-                CHECK ANOTHER
-              </button>
-            </div>
-
-            <SortedFeedback tool="scam" accentColor={accentColor} />
-
+            </SortedResultShell>
           </motion.div>
         )}
       </AnimatePresence>
