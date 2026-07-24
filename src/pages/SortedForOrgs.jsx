@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { COLOR, FONT } from '@/components/family51/sortedDesignSystem';
+
+const { gold: GOLD, ink: INK, paper: PAPER, muted: MUTED, border: BORDER } = COLOR;
 
 // ─── SORTED FOR ORGANISATIONS ─────────────────────────────────────────────────
 // B2B landing — community advice centres, debt charities, housing associations,
@@ -10,31 +13,11 @@ const CONTACT_EMAIL = 'family@uf51.love';
 const MAILTO = `mailto:${CONTACT_EMAIL}?subject=SORTED%20Pilot%20Request%20%E2%80%94%20Organisation&body=Hi%2C%0A%0AI%20represent%20[Organisation%20Name]%20and%20we%20support%20people%20who%20receive%20official%20letters%20they%20find%20difficult%20to%20understand.%0A%0AWe%20would%20like%20to%20explore%20a%20free%20pilot%20of%20SORTED%20for%20our%20team%20%2F%20clients.%0A%0AOur%20organisation%3A%0AApproximate%20number%20of%20people%20we%20support%3A%0ACountry%3A%0A%0ABest%20way%20to%20reach%20us%3A%0A`;
 
 const orgs = [
-  {
-    icon: <AdviceIcon />,
-    title: 'Community Advice Centres',
-    desc: 'Advisers drowning in letter backlogs. Clients who came in too late because they were scared to open the envelope.',
-  },
-  {
-    icon: <DebtIcon />,
-    title: 'Debt Charities',
-    desc: 'StepChange, CAP, Christians Against Poverty — millions of clients, all getting letters they don\'t understand.',
-  },
-  {
-    icon: <HousingIcon />,
-    title: 'Housing Associations',
-    desc: 'Tenants receive eviction notices, rent arrears letters, section 21s — and freeze. SORTED unfreezes them.',
-  },
-  {
-    icon: <FaithIcon />,
-    title: 'Faith Groups',
-    desc: 'Churches, mosques, gurdwaras are the first call for help. They need tools — not just compassion.',
-  },
-  {
-    icon: <SupportIcon />,
-    title: 'Vulnerable Support Orgs',
-    desc: 'Domestic abuse survivors, mental health services, addiction recovery — all receive official letters in crisis.',
-  },
+  { icon: <AdviceIcon />, title: 'Community Advice Centres', desc: 'Advisers drowning in letter backlogs. Clients who came in too late because they were scared to open the envelope.' },
+  { icon: <DebtIcon />, title: 'Debt Charities', desc: 'StepChange, CAP, Christians Against Poverty — millions of clients, all getting letters they don\'t understand.' },
+  { icon: <HousingIcon />, title: 'Housing Associations', desc: 'Tenants receive eviction notices, rent arrears letters, section 21s — and freeze. SORTED unfreezes them.' },
+  { icon: <FaithIcon />, title: 'Faith Groups', desc: 'Churches, mosques, gurdwaras are the first call for help. They need tools — not just compassion.' },
+  { icon: <SupportIcon />, title: 'Vulnerable Support Orgs', desc: 'Domestic abuse survivors, mental health services, addiction recovery — all receive official letters in crisis.' },
 ];
 
 const stats = [
@@ -45,27 +28,13 @@ const stats = [
 ];
 
 const pillars = [
-  {
-    icon: <SpeedIcon />,
-    title: 'Instant for your clients',
-    desc: 'No app download. No account. Paste the letter. Understand it in seconds. Works on any phone.',
-  },
-  {
-    icon: <PrivacyIcon />,
-    title: 'Private by design',
-    desc: 'The full analysis stays on your client\'s device. Only anonymous patterns — no names, no addresses, no amounts — help us improve. GDPR-aligned by design. Anonymised reporting for you, nothing that identifies a person.',
-  },
-  {
-    icon: <GlobalIcon />,
-    title: 'Any language. Any country.',
-    desc: 'Your clients speak Urdu, Somali, Spanish, Romanian. SORTED works in all of them — same quality, same clarity.',
-  },
-  {
-    icon: <ScaleIcon />,
-    title: 'Scales without hiring',
-    desc: 'One adviser can now support ten times more people. SORTED handles the letter. You handle the person.',
-  },
+  { icon: <SpeedIcon />, title: 'Instant for your clients', desc: 'No app download. No account. Paste the letter. Understand it in seconds. Works on any phone.' },
+  { icon: <PrivacyIcon />, title: 'Private by design', desc: 'The full analysis stays on your client\'s device. Only anonymous patterns — no names, no addresses, no amounts — help us improve. GDPR-aligned by design. Anonymised reporting for you, nothing that identifies a person.' },
+  { icon: <GlobalIcon />, title: 'Any language. Any country.', desc: 'Your clients speak Urdu, Somali, Spanish, Romanian. SORTED works in all of them — same quality, same clarity.' },
+  { icon: <ScaleIcon />, title: 'Scales without hiring', desc: 'One adviser can now support ten times more people. SORTED handles the letter. You handle the person.' },
 ];
+
+const labelStyle = { fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: GOLD, textTransform: 'uppercase', marginBottom: 18 };
 
 export default function SortedForOrgs() {
   const [copied, setCopied] = useState(false);
@@ -77,141 +46,105 @@ export default function SortedForOrgs() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#080a0f', color: '#fff', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+    <div style={{ minHeight: '100dvh', background: PAPER, color: INK, fontFamily: FONT.family, WebkitFontSmoothing: 'antialiased' }}>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section style={{ maxWidth: 640, margin: '0 auto', padding: '60px 24px 0' }}>
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '40px 24px 0' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.25)', borderRadius: 20, padding: '5px 14px', marginBottom: 24 }}>
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#f97316', flexShrink: 0 }} />
-            <span style={{ fontSize: 10, fontWeight: 800, color: '#f97316', letterSpacing: '0.15em' }}>FOR ORGANISATIONS</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: `${GOLD}0d`, border: `1px solid ${GOLD}30`, borderRadius: 20, padding: '5px 14px', marginBottom: 22 }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: GOLD, flexShrink: 0 }} />
+            <span style={{ fontSize: 11, fontWeight: 800, color: GOLD, letterSpacing: '0.12em' }}>FOR ORGANISATIONS</span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(30px, 7vw, 48px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', margin: '0 0 20px' }}>
-            <span style={{ color: '#fff' }}>Your clients are getting</span>{' '}
-            <span style={{ color: '#f97316' }}>scary letters.</span><br />
-            <span style={{ color: '#fff' }}>They\'re not opening them.</span>
+          <h1 style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '0 0 18px', color: INK }}>
+            Your clients are getting <span style={{ color: GOLD }}>scary letters.</span><br />They're not opening them.
           </h1>
 
-          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, margin: '0 0 16px', fontWeight: 400 }}>
+          <p style={{ fontSize: 16, color: MUTED, lineHeight: 1.65, margin: '0 0 14px' }}>
             By the time they come to you — the deadline has passed. The case has escalated. The damage is done.
           </p>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, margin: '0 0 36px', fontWeight: 600 }}>
-            SORTED intercepts at the <span style={{ color: '#f97316' }}>moment of fear</span> — before it becomes a crisis.
+          <p style={{ fontSize: 16, color: INK, lineHeight: 1.6, margin: '0 0 32px', fontWeight: 600 }}>
+            SORTED intercepts at the <span style={{ color: GOLD }}>moment of fear</span> — before it becomes a crisis.
           </p>
 
-          <a
-            href={MAILTO}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: '#f97316', color: '#000', fontWeight: 900, fontSize: 14, letterSpacing: '0.04em', borderRadius: 10, padding: '14px 28px', textDecoration: 'none', transition: 'opacity 0.15s' }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-          >
+          <a href={MAILTO} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: INK, color: GOLD, fontWeight: 800, fontSize: 14, letterSpacing: '0.04em', borderRadius: 10, padding: '14px 26px', textDecoration: 'none' }}>
             <MailIcon />
             Request a free pilot
           </a>
-
         </motion.div>
       </section>
 
-      {/* ── DIVIDER ──────────────────────────────────────────── */}
-      <div style={{ maxWidth: 640, margin: '48px auto 0', padding: '0 24px' }}>
-        <div style={{ height: 1, background: 'rgba(255,255,255,0.06)' }} />
-      </div>
+      <Divider />
 
       {/* ── STATS ────────────────────────────────────────────── */}
-      <section style={{ maxWidth: 640, margin: '0 auto', padding: '48px 24px 0' }}>
-        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 20 }}>THE SCALE OF THE PROBLEM</p>
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
+        <p style={labelStyle}>The scale of the problem</p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           {stats.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              style={{ background: 'rgba(249,115,22,0.05)', border: '1px solid rgba(249,115,22,0.18)', borderRadius: 12, padding: '18px 16px' }}
-            >
-              <div style={{ fontSize: 'clamp(22px, 5vw, 30px)', fontWeight: 900, color: '#f97316', marginBottom: 6 }}>{s.number}</div>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.45 }}>{s.label}</p>
-              <p style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', margin: '6px 0 0' }}>{s.source}</p>
+            <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
+              style={{ background: `${GOLD}06`, border: `1px solid ${GOLD}1c`, borderRadius: 12, padding: '18px 16px' }}>
+              <div style={{ fontSize: 'clamp(22px, 5vw, 30px)', fontWeight: 800, color: GOLD, marginBottom: 6 }}>{s.number}</div>
+              <p style={{ fontSize: 13, color: MUTED, margin: 0, lineHeight: 1.45 }}>{s.label}</p>
+              <p style={{ fontSize: 11, color: 'rgba(28,28,30,0.45)', margin: '6px 0 0' }}>{s.source}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ── DIVIDER ──────────────────────────────────────────── */}
-      <div style={{ maxWidth: 640, margin: '48px auto 0', padding: '0 24px' }}>
-        <div style={{ height: 1, background: 'rgba(255,255,255,0.06)' }} />
-      </div>
+      <Divider />
 
       {/* ── WHO THIS IS FOR ──────────────────────────────────── */}
-      <section style={{ maxWidth: 640, margin: '0 auto', padding: '48px 24px 0' }}>
-        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 20 }}>WHO WE WORK WITH</p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
+        <p style={labelStyle}>Who we work with</p>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           {orgs.map((org, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.07 }}
-              style={{ display: 'flex', gap: 16, padding: '20px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
-            >
+            <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 }}
+              style={{ display: 'flex', gap: 16, padding: '20px 0', borderBottom: `1px solid ${BORDER}` }}>
               <div style={{ flexShrink: 0, marginTop: 2 }}>{org.icon}</div>
               <div>
-                <div style={{ fontSize: 14, fontWeight: 800, color: '#fff', marginBottom: 5 }}>{org.title}</div>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.55 }}>{org.desc}</p>
+                <div style={{ fontSize: 15, fontWeight: 800, color: INK, marginBottom: 5 }}>{org.title}</div>
+                <p style={{ fontSize: 14, color: MUTED, margin: 0, lineHeight: 1.55 }}>{org.desc}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ── DIVIDER ──────────────────────────────────────────── */}
-      <div style={{ maxWidth: 640, margin: '48px auto 0', padding: '0 24px' }}>
-        <div style={{ height: 1, background: 'rgba(255,255,255,0.06)' }} />
-      </div>
+      <Divider />
 
       {/* ── HOW IT WORKS ─────────────────────────────────────── */}
-      <section style={{ maxWidth: 640, margin: '0 auto', padding: '48px 24px 0' }}>
-        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 20 }}>WHY SORTED WORKS FOR ORGANISATIONS</p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
+        <p style={labelStyle}>Why SORTED works for organisations</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {pillars.map((p, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              style={{ display: 'flex', gap: 16, padding: '18px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12 }}
-            >
+            <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
+              style={{ display: 'flex', gap: 16, padding: '18px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 12 }}>
               <div style={{ flexShrink: 0, marginTop: 2 }}>{p.icon}</div>
               <div>
-                <div style={{ fontSize: 14, fontWeight: 800, color: '#fff', marginBottom: 5 }}>{p.title}</div>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', margin: 0, lineHeight: 1.55 }}>{p.desc}</p>
+                <div style={{ fontSize: 15, fontWeight: 800, color: INK, marginBottom: 5 }}>{p.title}</div>
+                <p style={{ fontSize: 14, color: MUTED, margin: 0, lineHeight: 1.55 }}>{p.desc}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ── DIVIDER ──────────────────────────────────────────── */}
-      <div style={{ maxWidth: 640, margin: '48px auto 0', padding: '0 24px' }}>
-        <div style={{ height: 1, background: 'rgba(255,255,255,0.06)' }} />
-      </div>
+      <Divider />
 
       {/* ── THE MODEL ────────────────────────────────────────── */}
-      <section style={{ maxWidth: 640, margin: '0 auto', padding: '48px 24px 0' }}>
-        <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 20 }}>HOW WE WORK WITH ORGANISATIONS</p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
+        <p style={labelStyle}>How we work with organisations</p>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           {[
             { step: '01', title: 'Free pilot', desc: 'We give your team or clients free unlimited access. No contracts, no setup, no IT.' },
             { step: '02', title: 'Your clients use it directly', desc: 'No app needed. Share a link. They paste their letter. They get clarity. You get less crisis calls.' },
             { step: '03', title: 'Agree a model that works', desc: 'Per-seat licence, per-client-served, or grant-funded access. We\'ll find what works for your budget.' },
           ].map((m, i) => (
-            <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div style={{ fontSize: 11, fontWeight: 900, color: '#f97316', letterSpacing: '0.08em', minWidth: 24, marginTop: 2 }}>{m.step}</div>
+            <div key={i} style={{ display: 'flex', gap: 16, padding: '18px 0', borderBottom: `1px solid ${BORDER}` }}>
+              <div style={{ fontSize: 13, fontWeight: 800, color: GOLD, letterSpacing: '0.06em', minWidth: 28, marginTop: 2 }}>{m.step}</div>
               <div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{m.title}</div>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.5 }}>{m.desc}</p>
+                <div style={{ fontSize: 15, fontWeight: 700, color: INK, marginBottom: 4 }}>{m.title}</div>
+                <p style={{ fontSize: 14, color: MUTED, margin: 0, lineHeight: 1.5 }}>{m.desc}</p>
               </div>
             </div>
           ))}
@@ -219,43 +152,39 @@ export default function SortedForOrgs() {
       </section>
 
       {/* ── CTA BLOCK ────────────────────────────────────────── */}
-      <section style={{ maxWidth: 640, margin: '48px auto 0', padding: '0 24px 80px' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          style={{ background: 'rgba(249,115,22,0.07)', border: '1px solid rgba(249,115,22,0.25)', borderRadius: 16, padding: '32px 24px', textAlign: 'center' }}
-        >
-          <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)', marginBottom: 12 }}>START A CONVERSATION</div>
-          <h2 style={{ fontSize: 'clamp(20px, 5vw, 28px)', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.15 }}>
+      <section style={{ maxWidth: 640, margin: '40px auto 0', padding: '0 24px 72px' }}>
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+          style={{ background: `${GOLD}08`, border: `1px solid ${GOLD}28`, borderRadius: 16, padding: '32px 24px', textAlign: 'center' }}>
+          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: GOLD, marginBottom: 12, textTransform: 'uppercase' }}>Start a conversation</div>
+          <h2 style={{ fontSize: 'clamp(22px, 5vw, 28px)', fontWeight: 800, color: INK, letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.15 }}>
             Ready to run a pilot?
           </h2>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', margin: '0 0 28px', lineHeight: 1.6 }}>
+          <p style={{ fontSize: 15, color: MUTED, margin: '0 0 28px', lineHeight: 1.6 }}>
             No sales process. No demo call required. Just email us, tell us about your organisation, and we'll get you set up — free.
           </p>
 
-          <a
-            href={MAILTO}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: '#f97316', color: '#000', fontWeight: 900, fontSize: 14, letterSpacing: '0.04em', borderRadius: 10, padding: '14px 28px', textDecoration: 'none', marginBottom: 16, transition: 'opacity 0.15s' }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-          >
+          <a href={MAILTO} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: INK, color: GOLD, fontWeight: 800, fontSize: 14, letterSpacing: '0.04em', borderRadius: 10, padding: '14px 26px', textDecoration: 'none', marginBottom: 16 }}>
             <MailIcon />
             Email us to start a pilot
           </a>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>{CONTACT_EMAIL}</span>
-            <button
-              onClick={copyEmail}
-              style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: copied ? '#22c55e' : 'rgba(255,255,255,0.3)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 8px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.1)', transition: 'color 0.2s' }}
-            >
+            <span style={{ fontSize: 14, color: MUTED }}>{CONTACT_EMAIL}</span>
+            <button onClick={copyEmail}
+              style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', color: copied ? '#16a34a' : GOLD, background: copied ? 'rgba(22,163,74,0.08)' : `${GOLD}0d`, border: `1px solid ${copied ? 'rgba(22,163,74,0.3)' : `${GOLD}40`}`, cursor: 'pointer', padding: '5px 10px', borderRadius: 6 }}>
               {copied ? 'COPIED' : 'COPY'}
             </button>
           </div>
         </motion.div>
       </section>
+    </div>
+  );
+}
 
+function Divider() {
+  return (
+    <div style={{ maxWidth: 640, margin: '40px auto 0', padding: '0 24px' }}>
+      <div style={{ height: 1, background: BORDER }} />
     </div>
   );
 }
@@ -269,88 +198,79 @@ function MailIcon() {
     </svg>
   );
 }
-
 function AdviceIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <circle cx="10" cy="10" r="8.5" stroke="#f97316" strokeWidth="1.3" />
-      <path d="M7 8.5c0-1.657 1.343-3 3-3s3 1.343 3 3c0 1.2-.7 2.24-1.714 2.74L10 12v1.5" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" />
-      <circle cx="10" cy="15.5" r="0.7" fill="#f97316" />
+      <circle cx="10" cy="10" r="8.5" stroke={GOLD} strokeWidth="1.3" />
+      <path d="M7 8.5c0-1.657 1.343-3 3-3s3 1.343 3 3c0 1.2-.7 2.24-1.714 2.74L10 12v1.5" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+      <circle cx="10" cy="15.5" r="0.7" fill={GOLD} />
     </svg>
   );
 }
-
 function DebtIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <rect x="2" y="5" width="16" height="11" rx="2" stroke="#f97316" strokeWidth="1.3" />
-      <path d="M6 9h8M6 12h5" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
-      <path d="M7 5V4a3 3 0 016 0v1" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" />
+      <rect x="2" y="5" width="16" height="11" rx="2" stroke={GOLD} strokeWidth="1.3" />
+      <path d="M6 9h8M6 12h5" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
+      <path d="M7 5V4a3 3 0 016 0v1" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
     </svg>
   );
 }
-
 function HousingIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M3 18h14M5 18v-8M15 18v-8M10 4L3 10H17L10 4Z" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="8" y="13" width="4" height="5" rx="0.5" stroke="#f97316" strokeWidth="1.2" />
+      <path d="M3 18h14M5 18v-8M15 18v-8M10 4L3 10H17L10 4Z" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="8" y="13" width="4" height="5" rx="0.5" stroke={GOLD} strokeWidth="1.2" />
     </svg>
   );
 }
-
 function FaithIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M10 2v16M4 8h12" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M10 12c-2.5 2.5-6 3-6 3s1-3.5 3.5-5" stroke="#f97316" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
+      <path d="M10 2v16M4 8h12" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 12c-2.5 2.5-6 3-6 3s1-3.5 3.5-5" stroke={GOLD} strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
     </svg>
   );
 }
-
 function SupportIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M10 17.5S3 13.5 3 8.5a4.5 4.5 0 019-0.5 4.5 4.5 0 019 .5c0 5-7 9-7 9H10z" stroke="#f97316" strokeWidth="1.3" strokeLinejoin="round" />
+      <path d="M10 17.5S3 13.5 3 8.5a4.5 4.5 0 019-0.5 4.5 4.5 0 019 .5c0 5-7 9-7 9H10z" stroke={GOLD} strokeWidth="1.3" strokeLinejoin="round" />
     </svg>
   );
 }
-
 function SpeedIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M5 10L8.5 13.5L15 6.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="10" cy="10" r="8.5" stroke="#f97316" strokeWidth="1.2" opacity="0.3" />
+      <path d="M5 10L8.5 13.5L15 6.5" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="10" cy="10" r="8.5" stroke={GOLD} strokeWidth="1.2" opacity="0.3" />
     </svg>
   );
 }
-
 function PrivacyIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <rect x="4" y="9" width="12" height="8" rx="1.5" stroke="#f97316" strokeWidth="1.3" />
-      <path d="M7 9V6.5a3 3 0 016 0V9" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" />
-      <circle cx="10" cy="13" r="1.2" fill="#f97316" />
+      <rect x="4" y="9" width="12" height="8" rx="1.5" stroke={GOLD} strokeWidth="1.3" />
+      <path d="M7 9V6.5a3 3 0 016 0V9" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+      <circle cx="10" cy="13" r="1.2" fill={GOLD} />
     </svg>
   );
 }
-
 function GlobalIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <circle cx="10" cy="10" r="8.5" stroke="#f97316" strokeWidth="1.3" />
-      <path d="M10 1.5C10 1.5 7 5.5 7 10s3 8.5 3 8.5M10 1.5C10 1.5 13 5.5 13 10s-3 8.5-3 8.5" stroke="#f97316" strokeWidth="1.1" opacity="0.5" />
-      <path d="M1.5 10h17" stroke="#f97316" strokeWidth="1.1" opacity="0.5" />
+      <circle cx="10" cy="10" r="8.5" stroke={GOLD} strokeWidth="1.3" />
+      <path d="M10 1.5C10 1.5 7 5.5 7 10s3 8.5 3 8.5M10 1.5C10 1.5 13 5.5 13 10s-3 8.5-3 8.5" stroke={GOLD} strokeWidth="1.1" opacity="0.5" />
+      <path d="M1.5 10h17" stroke={GOLD} strokeWidth="1.1" opacity="0.5" />
     </svg>
   );
 }
-
 function ScaleIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M10 3v14M5 17h10" stroke="#f97316" strokeWidth="1.3" strokeLinecap="round" />
-      <path d="M10 5L4 8l-1.5 4c0 1.5 3 1.5 3 0L4 8" stroke="#f97316" strokeWidth="1.1" strokeLinejoin="round" opacity="0.7" />
-      <path d="M10 5l6 3 1.5 4c0 1.5-3 1.5-3 0L16 8" stroke="#f97316" strokeWidth="1.1" strokeLinejoin="round" opacity="0.7" />
+      <path d="M10 3v14M5 17h10" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M10 5L4 8l-1.5 4c0 1.5 3 1.5 3 0L4 8" stroke={GOLD} strokeWidth="1.1" strokeLinejoin="round" opacity="0.7" />
+      <path d="M10 5l6 3 1.5 4c0 1.5-3 1.5-3 0L16 8" stroke={GOLD} strokeWidth="1.1" strokeLinejoin="round" opacity="0.7" />
     </svg>
   );
 }
