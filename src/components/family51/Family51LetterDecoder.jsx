@@ -25,11 +25,11 @@ const LETTER_TYPES = [
 ];
 
 const EXAMPLE_LETTERS = [
-  { type: 'Council Tax', text: 'FINAL NOTICE\nCouncil Tax Arrears: £1,247\nPay within 7 days or bailiffs will be instructed.\nHackney Council' },
-  { type: 'Energy Bill', text: 'URGENT: Your account is £347 in arrears. Your energy supply will be disconnected within 14 days unless payment is received.' },
-  { type: 'Debt Collector', text: 'We have been instructed to collect £2,890. This is your final opportunity before legal action. Lowell Financial Ltd.' },
-  { type: 'Parking Fine', text: 'Penalty Charge Notice: £130. Reduced to £65 if paid within 14 days. Contravention: parked outside designated bay.' },
-  { type: 'Landlord', text: 'Section 21 Notice: You are required to vacate the property within 2 months. No fault eviction.' },
+  { type: 'Council Tax', text: 'Hackney Council\nCouncil Tax — Arrears Notice\nReference: CT-24891\nOutstanding: £1,247\nYou are required to bring this account up to date within 7 days. If payment is not received, the council may apply for a liability order, which can lead to enforcement by bailiffs.' },
+  { type: 'Energy Bill', text: 'Your energy account — £347 in arrears\nAccount: 8841 2093\nWe want to help you avoid disconnection. Please contact us within 14 days to arrange a payment plan. If no arrangement is made, your supply may be disconnected.' },
+  { type: 'Debt Collector', text: 'Lowell Financial Ltd\nRe: Outstanding balance of £2,890\nWe have been instructed to recover the above balance. Please contact us within 14 days to discuss repayment options and avoid further action.' },
+  { type: 'Parking Fine', text: 'Penalty Charge Notice — £130\nVehicle: AB12 CDE\nContravention: parked outside a designated bay.\nReduced to £65 if paid within 14 days.' },
+  { type: 'Landlord', text: 'Notice under Section 21, Housing Act 1988\nYou are required to give up possession of the property on or after a date two months from service of this notice.' },
 ];
 
 const SEVERITY_CONFIG = {
@@ -62,6 +62,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const [caseId, setCaseId] = useState(null);
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
+  const textareaRef = useRef(null);
   const geoRef = useRef(geo);
   const letterTypeRef = useRef(letterType);
   const resultRef = useRef(null);
@@ -440,7 +441,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
           {/* EXAMPLE LETTERS — reduce anxiety, show it works */}
           <div>
             <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.45)', margin: '0 0 8px' }}>
-              Got one of these? Tap to try →
+              Try a sample — or paste any letter below →
             </p>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLE_LETTERS.map((ex, i) => (
@@ -463,11 +464,26 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
                   {ex.type}
                 </motion.button>
               ))}
+              <motion.button
+                onClick={() => textareaRef.current?.focus()}
+                whileTap={{ scale: 0.96 }}
+                style={{
+                  fontSize: 10, fontWeight: 700, color: 'rgba(26,18,8,0.5)',
+                  border: '1px dashed rgba(26,18,8,0.22)', borderRadius: 8,
+                  padding: '6px 10px', background: 'transparent', cursor: 'pointer',
+                  transition: 'all 0.15s',
+                }}
+                onMouseEnter={e => { e.target.style.borderColor = accentColor; e.target.style.color = accentColor; }}
+                onMouseLeave={e => { e.target.style.borderColor = 'rgba(26,18,8,0.22)'; e.target.style.color = 'rgba(26,18,8,0.5)'; }}
+              >
+                Something else
+              </motion.button>
             </div>
           </div>
 
           {/* BIG PASTE AREA — first thing they see */}
           <textarea
+            ref={textareaRef}
             value={letterText}
             onChange={e => setLetterText(e.target.value)}
             placeholder="Paste your letter here — or snap a photo below.
