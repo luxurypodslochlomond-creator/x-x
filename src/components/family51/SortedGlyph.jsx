@@ -6,27 +6,28 @@ const GOLD = '#c6995c';
  * SortedGlyph — our logo.
  * The actual Morse code for SOS:  ··· ─── ···
  * Meaning: "you sent a distress signal — we heard it, it's sorted."
- * Calm and quiet (not a screaming alarm), ownable, legible at small size.
  *
- * Geometry: viewBox 48×18, bold dots (r1.9) and dashes (4.6×3.8) so the
- * three letters S·O·S separate clearly even at 18px.
+ * Geometry: dashes are ~2.4× a dot width so S·O·S rhythm is unmistakable,
+ * even at 20px. Letter gaps wider than intra-letter gaps so the three
+ * letters separate clearly.
  */
-export function SortedGlyph({ height = 19, color = GOLD }) {
-  const width = height * (48 / 18);
+export function SortedGlyph({ height = 20, color = GOLD }) {
+  const width = height * (68 / 18);
+  const dashY = 9 - 1.9;
   return (
-    <svg width={width} height={height} viewBox="0 0 48 18" fill="none" style={{ flexShrink: 0, display: 'block' }}>
+    <svg width={width} height={height} viewBox="0 0 68 18" fill="none" style={{ flexShrink: 0, display: 'block' }}>
       {/* S = three dots */}
-      <circle cx="4" cy="9" r="1.9" fill={color} />
-      <circle cx="9" cy="9" r="1.9" fill={color} />
-      <circle cx="14" cy="9" r="1.9" fill={color} />
-      {/* O = three dashes */}
-      <rect x="16.7" y="7.1" width="4.6" height="3.8" rx="1.9" fill={color} />
-      <rect x="22.2" y="7.1" width="4.6" height="3.8" rx="1.9" fill={color} />
-      <rect x="27.7" y="7.1" width="4.6" height="3.8" rx="1.9" fill={color} />
+      <circle cx="3.5" cy="9" r="1.9" fill={color} />
+      <circle cx="8.5" cy="9" r="1.9" fill={color} />
+      <circle cx="13.5" cy="9" r="1.9" fill={color} />
+      {/* O = three long dashes */}
+      <rect x="18" y={dashY} width="9" height="3.8" rx="1.9" fill={color} />
+      <rect x="29" y={dashY} width="9" height="3.8" rx="1.9" fill={color} />
+      <rect x="40" y={dashY} width="9" height="3.8" rx="1.9" fill={color} />
       {/* S = three dots */}
-      <circle cx="35" cy="9" r="1.9" fill={color} />
-      <circle cx="40" cy="9" r="1.9" fill={color} />
-      <circle cx="45" cy="9" r="1.9" fill={color} />
+      <circle cx="53.5" cy="9" r="1.9" fill={color} />
+      <circle cx="58.5" cy="9" r="1.9" fill={color} />
+      <circle cx="63.5" cy="9" r="1.9" fill={color} />
     </svg>
   );
 }

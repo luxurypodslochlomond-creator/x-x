@@ -30,7 +30,7 @@ export default function SortedHeader() {
         to="/Sorted"
         style={{ display: 'flex', alignItems: 'center', gap: 11, textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
       >
-        <SortedGlyph height={19} />
+        <SortedGlyph height={20} />
         <span style={{ fontSize: 17, fontWeight: 800, letterSpacing: '0.01em', color: INK }}>Sorted</span>
       </Link>
 
