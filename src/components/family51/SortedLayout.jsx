@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import SortedHeader from './SortedHeader';
+
+// Stop the browser re-applying the old scroll position on back/forward.
+if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
 
 export default function SortedLayout({ children, currentPage }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Back-button should land at the top of the page, not halfway down.
-  useEffect(() => {
-    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
-    window.scrollTo({ top: 0, behavior: 'instant' });
+  // Every SORTED page lands at the top — useLayoutEffect runs before paint,
+  // so the new page never flashes at the old scroll position.
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
   }, [location.pathname]);
   
   return (
