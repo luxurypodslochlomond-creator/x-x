@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
+import { callSortedLLM } from '@/utils/sortedLLM';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { getScamReportingBody } from '@/utils/sortedGeoContext';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
@@ -102,7 +103,7 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult,
         }
       }
 
-      const response = await base44.integrations.Core.InvokeLLM({
+      const response = await callSortedLLM({
         model: 'gpt_5_mini',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
         prompt: SORTED_SOUL + '\n' + `Check if this message is a scam. The person may be elderly or vulnerable — be warm, clear, never scary.

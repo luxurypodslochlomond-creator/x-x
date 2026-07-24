@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
+import { callSortedLLM } from '@/utils/sortedLLM';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
@@ -159,38 +160,21 @@ Return JSON: document_type (string — what type of document/situation this is),
       },
     };
 
-    const attemptGenerate = async (useModel) => {
-      const opts = { prompt, response_json_schema: schema };
-      if (useModel) opts.model = useModel;
-      const response = await base44.integrations.Core.InvokeLLM(opts);
-      console.log('[ReplyWriter] Raw LLM response:', JSON.stringify(response)?.slice(0, 300));
-      // Normalise — some models nest under different keys
-      if (response && typeof response === 'object') {
-        const body = response.letter_body || response.body || response.letter || response.text || response.content;
-        if (body) {
-          return {
-            subject_line: response.subject_line || response.subject || 'Your reply',
-            letter_body: body,
-            key_points: response.key_points || response.keyPoints || [],
-            tip: response.tip || response.important_tip || '',
-          };
-        }
+    const response = await callSortedLLM({ prompt, response_json_schema: schema, model: 'claude_sonnet_4_6' });
+    console.log('[ReplyWriter] Raw LLM response:', JSON.stringify(response)?.slice(0, 300));
+    // Normalise — some models nest under different keys
+    if (response && typeof response === 'object') {
+      const body = response.letter_body || response.body || response.letter || response.text || response.content;
+      if (body) {
+        return {
+          subject_line: response.subject_line || response.subject || 'Your reply',
+          letter_body: body,
+          key_points: response.key_points || response.keyPoints || [],
+          tip: response.tip || response.important_tip || '',
+        };
       }
-      return null;
-    };
-
-    // Claude for quality — single call, no slow double-fallback chain
-    let result = null;
-    try {
-      result = await attemptGenerate('claude_sonnet_4_6');
-    } catch (err) {
-      console.error('SORTED: generation failed:', err?.message);
-      throw new Error('Could not generate your letter. Please check your connection and try again.');
     }
-    if (!result) {
-      throw new Error('The AI returned an empty response. Please try again.');
-    }
-    return result;
+    throw new Error('The AI returned an empty response. Please try again.');
   };
 
   const write = async () => {
@@ -288,7 +272,7 @@ Return JSON: document_type (string — what type of document/situation this is),
   if (!result) {
     // STEP 1 & 2: TONE PICKER + CONTEXT FORM
     return (
-      <div className="space-y-5">
+      <div className="space-y-3">
         {/* ERROR */}
         <AnimatePresence>
           {error && (
@@ -321,7 +305,7 @@ Return JSON: document_type (string — what type of document/situation this is),
             autoFocus={false}
             placeholder="Who are you writing to? What happened? What do you want?"
             style={{
-              width: '100%', height: prefillContext ? 80 : 120, background: '#fff',
+              width: '100%', height: prefillContext ? 72 : 96, background: '#fff',
               border: `1.5px solid ${context ? accentColor + '90' : 'rgba(26,18,8,0.15)'}`,
               borderRadius: 12, color: '#1a1208', fontSize: 13, padding: '14px 16px',
               resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.6,

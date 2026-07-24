@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
+import { callSortedLLM } from '@/utils/sortedLLM';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedTimeline from './SortedTimeline';
 import SortedFeedback from './SortedFeedback';
@@ -108,7 +109,7 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
       }
     }
 
-    const res = await base44.integrations.Core.InvokeLLM({
+    const res = await callSortedLLM({
       model: 'claude_sonnet_4_6',
       ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
       prompt: SORTED_SOUL + '\n' + `Analyse this contract in plain language so an ordinary person understands what they're signing.

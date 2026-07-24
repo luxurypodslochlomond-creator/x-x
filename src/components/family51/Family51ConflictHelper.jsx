@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedFeedback from './SortedFeedback';
 import { base44 } from '@/api/base44Client';
+import { callSortedLLM } from '@/utils/sortedLLM';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
@@ -187,7 +188,7 @@ Give them a plan that actually works in ${geo.country}. Use real law. Real bodie
 - what_not_to_do: Array of 2-3 specific things that would genuinely harm their position.
 - if_it_escalates: The next step, process, and how to reach them.`;
 
-      const response = await base44.integrations.Core.InvokeLLM({
+      const response = await callSortedLLM({
       model: 'claude_sonnet_4_6',
       ...(imageUrls.length > 0 ? { file_urls: imageUrls } : {}),
       prompt: systemPrompt,

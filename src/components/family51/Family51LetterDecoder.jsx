@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import { base44 } from '@/api/base44Client';
+import { callSortedLLM } from '@/utils/sortedLLM';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
@@ -149,7 +150,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       const learningContext = buildLearningContext(currentType || 'letter');
       const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType) + learningContext;
 
-      const response = await base44.integrations.Core.InvokeLLM({
+      const response = await callSortedLLM({
         model: 'claude_sonnet_4_6',
         ...(visionFileUrl ? { file_urls: [visionFileUrl] } : {}),
         prompt: promptText,
