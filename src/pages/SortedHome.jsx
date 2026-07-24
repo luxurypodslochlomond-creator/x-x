@@ -54,7 +54,7 @@ export default function SortedHome() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={MOTION.fade}
-          style={{ paddingTop: 24, textAlign: 'center' }}
+          style={{ paddingTop: 14, textAlign: 'center' }}
         >
           <div style={{ display: 'inline-block', padding: '5px 12px', border: `1px solid ${GOLD}55`, borderRadius: 999, marginBottom: 16, fontSize: 12, fontWeight: 600, color: GOLD, letterSpacing: '0.01em', background: `${GOLD}0d` }}>
             Your SOS, answered.
@@ -79,21 +79,6 @@ export default function SortedHome() {
           }}>
             Paste it, snap a photo, or upload — any language, no judgement.
           </p>
-        </motion.div>
-
-        {/* JOURNEY — calm flow, no tutorial energy */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...MOTION.fade, delay: 0.08 }}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 24, marginBottom: 32, flexWrap: 'wrap' }}
-        >
-          {['Paste it in', 'We decode it', 'You know what to do'].map((phrase, i, arr) => (
-            <React.Fragment key={phrase}>
-              <span style={{ fontSize: 13, fontWeight: 500, color: MUTED }}>{phrase}</span>
-              {i < arr.length - 1 && <span style={{ width: 4, height: 4, borderRadius: '50%', background: `${GOLD}50`, flexShrink: 0 }} />}
-            </React.Fragment>
-          ))}
         </motion.div>
 
         {/* PRIMARY TOOLS — two big cards */}
