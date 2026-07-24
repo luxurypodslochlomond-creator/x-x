@@ -143,8 +143,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         background: '#faf8f5',
         overflowY: activeTool ? 'auto' : 'hidden',
         overflowX: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
+        overscrollBehavior: 'contain',
         WebkitOverflowScrolling: 'touch',
         // Keep mounted when not active so no remount flash
         pointerEvents: visible ? 'auto' : 'none',
@@ -153,7 +152,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
       {/* COLOURED TOP ACCENT BAR */}
       <div style={{ height: 3, background: tc.color, flexShrink: 0, transition: 'background 0.2s' }} />
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto', width: '100%', padding: '16px 16px 40px' }}>
+      <div style={{ maxWidth: 560, margin: '0 auto', width: '100%', padding: '16px 16px calc(40px + env(safe-area-inset-bottom))' }}>
 
         {/* HEADER ROW — back + tool label + human hint */}
         <div style={{ marginBottom: 18 }}>
