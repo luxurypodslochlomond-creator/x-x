@@ -47,14 +47,14 @@ export default function SortedHome() {
         pointerEvents: 'none', zIndex: 0,
       }} />
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: 560, margin: '0 auto', padding: '8px 20px 48px' }}>
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: 560, margin: '0 auto', padding: '4px 20px 48px' }}>
 
         {/* HERO */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={MOTION.fade}
-          style={{ paddingTop: 12, textAlign: 'center' }}
+          style={{ paddingTop: 6, textAlign: 'center' }}
         >
           <div style={{ display: 'inline-block', padding: '5px 12px', border: `1px solid ${GOLD}55`, borderRadius: 999, marginBottom: 10, fontSize: 12, fontWeight: 600, color: GOLD, letterSpacing: '0.01em', background: `${GOLD}0d` }}>
             Your SOS, answered.
@@ -72,7 +72,7 @@ export default function SortedHome() {
           <p style={{
             fontSize: FONT.subheading,
             color: MUTED,
-            margin: '18px auto 0',
+            margin: '14px auto 0',
             fontWeight: 400,
             lineHeight: 1.5,
             maxWidth: 420,
@@ -92,7 +92,7 @@ export default function SortedHome() {
             variant="primary"
             icon="letter"
             title="Decode a Letter"
-            description="Council, debt, rent, parking, mortgage, court & benefits letters — urgency check, what to do next"
+            description="Council, debt, rent & benefits — plain-English, what to do next"
             accentColor={TOOL_COLORS.letter}
             onClick={() => openTool('letter')}
 
