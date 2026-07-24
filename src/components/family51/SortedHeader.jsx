@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
-import { SortedMark } from './SortedIcons';
+import { SOSBeacon } from './SortedBrandBar';
 
 const GOLD = '#c6995c';
 const INK = '#1c1c1e';
@@ -30,8 +30,8 @@ export default function SortedHeader() {
         to="/Sorted"
         style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
       >
-        <SortedMark size={26} color={GOLD} />
-        <span style={{ fontSize: 17, fontWeight: 700, letterSpacing: '-0.01em', color: INK }}>Sorted</span>
+        <SOSBeacon size={26} animate={false} />
+        <span style={{ fontSize: 17, fontWeight: 800, letterSpacing: '0.01em', color: INK }}>Sorted</span>
       </Link>
 
       <div style={{ flex: 1 }} />
