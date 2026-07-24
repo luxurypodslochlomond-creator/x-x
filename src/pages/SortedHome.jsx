@@ -7,6 +7,7 @@ import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
 import SortedHelplines from '@/components/family51/SortedHelplines';
+import SortedBrandBar from '@/components/family51/SortedBrandBar';
 import { useSortedUsage } from '@/components/family51/useSortedUsage';
 import { COLOR, FONT, MOTION } from '@/components/family51/sortedDesignSystem';
 
@@ -49,12 +50,15 @@ export default function SortedHome() {
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 560, margin: '0 auto', padding: '8px 20px 48px' }}>
 
+        {/* BRAND BAR — centred app identity, kills the dead top space */}
+        <SortedBrandBar />
+
         {/* HERO */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={MOTION.fade}
-          style={{ paddingTop: 24, textAlign: 'center' }}
+          style={{ paddingTop: 18, textAlign: 'left' }}
         >
           <div style={{ display: 'inline-block', padding: '5px 12px', border: `1px solid ${GOLD}55`, borderRadius: 999, marginBottom: 16, fontSize: 12, fontWeight: 600, color: GOLD, letterSpacing: '0.01em', background: `${GOLD}0d` }}>
             Help with debt, rent & official letters
