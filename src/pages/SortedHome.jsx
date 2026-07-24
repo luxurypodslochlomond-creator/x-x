@@ -65,7 +65,7 @@ export default function SortedHome() {
             margin: 0,
             letterSpacing: '-0.02em',
           }}>
-            Got a letter that's scaring you?<br />Let's read it together.
+            Letter you've been putting off?<br />Let's read it together.
           </h1>
           <p style={{
             fontSize: FONT.subheading,
