@@ -74,6 +74,18 @@ export default function Zapp() {
     setBuiltHtml('');
     setAppTitle('');
     setBlueprint(null);
+    setPhase('building');
+  };
+
+  // Opt-in: kid taps "break it down first" on the home screen to reach the
+  // Blueprint. The fast path (type → ZAPP IT) stays untouched — one tap to magic.
+  const handleBreakItDown = (ideaText) => {
+    setIdea(ideaText);
+    setRemixSource(null);
+    setRemixInstruction('');
+    setBuiltHtml('');
+    setAppTitle('');
+    setBlueprint(null);
     setPhase('blueprint');
   };
 
@@ -281,7 +293,7 @@ export default function Zapp() {
                   </span>
                 </motion.div>
               )}
-              <ZappCreator onSubmit={handleIdeaSubmit} />
+              <ZappCreator onSubmit={handleIdeaSubmit} onBreakItDown={handleBreakItDown} />
             </motion.div>
           ) : phase === 'blueprint' ? (
             <motion.div key="blueprint" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} style={{ height: '100%', display:'flex', flexDirection:'column' }}>

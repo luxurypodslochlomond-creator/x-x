@@ -113,7 +113,7 @@ const IdeaShape = ({ shape, color, accent }) => {
   return null;
 };
 
-export default function ZappCreator({ onSubmit }) {
+export default function ZappCreator({ onSubmit, onBreakItDown }) {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const textareaRef = useRef(null);
@@ -244,6 +244,18 @@ export default function ZappCreator({ onSubmit }) {
               ZAPP IT
             </motion.button>
           </div>
+          {onBreakItDown && (
+            <div className="px-4 pb-4 -mt-1 text-center">
+              <button
+                onClick={() => { const t = value.trim(); if (t.length >= 3) onBreakItDown(t); }}
+                disabled={value.trim().length < 3}
+                className="text-xs font-bold transition-opacity"
+                style={{ color: value.trim().length >= 3 ? '#a78bfa' : 'rgba(255,255,255,0.12)' }}
+              >
+                or break it down first ✎
+              </button>
+            </div>
+          )}
         </div>
       </motion.div>
 
