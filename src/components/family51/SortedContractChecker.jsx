@@ -116,6 +116,8 @@ export default function SortedContractChecker({ accentColor = '#7c3aed', onResul
 
 Detect what type of contract this is and state it in document_type.
 
+LANGUAGE HANDLING: Detect the contract's language automatically. Respond in the contract's language for all fields EXCEPT if the contract is NOT in English — then ALSO provide an english_explanation (3-4 sentence plain-English summary of what the contract is and what it commits the person to). If the contract IS in English, set english_explanation to null.
+
 CONTRACT TEXT:
 ${content ? `\n---\n${content}\n---` : '(See attached image)'}
 
@@ -128,7 +130,8 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
   "negotiate": ["list of specific things they could try to negotiate or push back on — practical and actionable"],
   "questions": ["list of questions they should ask before signing"],
   "verdict": "one of: looks_ok | review_carefully | serious_concerns",
-  "verdict_reason": "one sentence explaining the verdict"
+  "verdict_reason": "one sentence explaining the verdict",
+  "english_explanation": "If the contract is NOT in English — 3-4 sentence plain-English summary. If in English — null."
 }`,
       response_json_schema: {
         type: 'object',
@@ -141,6 +144,7 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
           questions:        { type: 'array', items: { type: 'string' } },
           verdict:          { type: 'string' },
           verdict_reason:   { type: 'string' },
+          english_explanation: { type: ['string', 'null'] },
         },
       },
     });
@@ -224,7 +228,8 @@ Analyse this contract and respond ONLY with valid JSON in this exact format:
       ``,
       `VERDICT\n${result.verdict_reason}`,
       ``,
-      `IN PLAIN ENGLISH\n${result.summary}`,
+      (result.english_explanation ? `IN ENGLISH\n${result.english_explanation}\n` : ''),
+      `SUMMARY\n${result.summary}`,
       result.red_flags?.length        ? `\nRED FLAGS\n${result.red_flags.map(f => `• ${f}`).join('\n')}` : '',
       result.what_is_missing?.length  ? `\nWHAT'S MISSING\n${result.what_is_missing.map(m => `• ${m}`).join('\n')}` : '',
       result.negotiate?.length        ? `\nWHAT TO NEGOTIATE\n${result.negotiate.map(n => `• ${n}`).join('\n')}` : '',
@@ -355,7 +360,13 @@ Every clause matters. The more you give us, the better the analysis.`}
               handoffLabel="CONTINUE → WRITE MY REPLY"
               flash={copied ? 'COPIED' : null}
             >
-              <SortedResultSection label="IN PLAIN ENGLISH" color={accentColor}>
+              {result.english_explanation && (
+                <SortedResultSection label="IN PLAIN ENGLISH" color="#3b82f6">
+                  <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.85)', margin: 0, lineHeight: 1.6 }}>{result.english_explanation}</p>
+                </SortedResultSection>
+              )}
+
+              <SortedResultSection label="SUMMARY" color={accentColor}>
                 <p style={{ fontSize: 13, color: 'rgba(26,18,8,0.75)', margin: 0, lineHeight: 1.6 }}>{result.summary}</p>
               </SortedResultSection>
 

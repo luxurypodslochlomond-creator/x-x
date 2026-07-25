@@ -110,6 +110,8 @@ export default function Family51ScamChecker({ accentColor = '#ef4444', onResult,
 
 The person is in: ${geo.country}.
 
+LANGUAGE HANDLING: Detect the message's language automatically. Respond in the message's language for all fields EXCEPT if the message is NOT in English — then ALSO provide an english_explanation (3-4 sentence plain-English summary of what the message says, what it's trying to get the person to do, and the verdict). If the message IS in English, set english_explanation to null.
+
 They have shared this message/letter/email/text:
 ${content ? `\n---\n${content}\n---` : '(See attached image)'}
 
@@ -143,7 +145,8 @@ Return JSON with these exact fields:
 - red_flags: array of 2-5 specific red flags found in this message. Be specific to what's actually in the text — don't be generic.
 - what_to_do: array of exactly 3 clear, calm action steps. No jargon. E.g. "Do not click any links in this message", "Forward it to report@phishing.gov.uk", "Block this number"
 - report_to: use this exact string for their country: "${getScamReportingBody(geo)}"
-- reassurance: one warm, calm sentence. E.g. "You did the right thing checking — this is a very common scam and you haven't lost anything by looking."`,
+- reassurance: one warm, calm sentence. E.g. "You did the right thing checking — this is a very common scam and you haven't lost anything by looking."
+- english_explanation: If the message is NOT in English — 3-4 sentence plain-English summary of what it says and the verdict. If in English — null.`,
         response_json_schema: {
           type: 'object',
           properties: {
@@ -155,6 +158,7 @@ Return JSON with these exact fields:
             what_to_do:   { type: 'array', items: { type: 'string' } },
             report_to:    { type: 'string' },
             reassurance:  { type: 'string' },
+            english_explanation: { type: ['string', 'null'] },
           },
         },
       });
@@ -241,7 +245,7 @@ Return JSON with these exact fields:
 
   const buildShareText = () => {
     const EMOJI = { safe: '✅', warning: '⚠️', scam: '🚨' };
-    return `SORTED Scam Check\n\n${EMOJI[result.verdict] || ''} ${v.label}\n${result.confidence}\n\n${result.what_this_is || ''}\n\nWhat to do:\n${result.what_to_do?.map((s, i) => `${i + 1}. ${s}`).join('\n') || ''}\n\nReport to: ${result.report_to || 'Action Fraud'}\n\nsorted.uf51.love — free, instant, nothing stored`;
+    return `SORTED Scam Check\n\n${EMOJI[result.verdict] || ''} ${v.label}\n${result.confidence}\n\n${result.english_explanation ? `In English:\n${result.english_explanation}\n\n` : ''}${result.what_this_is || ''}\n\nWhat to do:\n${result.what_to_do?.map((s, i) => `${i + 1}. ${s}`).join('\n') || ''}\n\nReport to: ${result.report_to || 'Action Fraud'}\n\nsorted.uf51.love — free, instant, nothing stored`;
   };
   const copyAll = () => {
     try { navigator.clipboard.writeText(buildShareText()); setFlash('COPIED'); setTimeout(() => setFlash(null), 2000); } catch {}
@@ -365,6 +369,13 @@ Copy exactly what it says — every word helps us check it.`}
                 </div>
               )}
             </div>
+
+            {/* ENGLISH EXPLANATION — for foreign-language messages */}
+            {result.english_explanation && (
+              <SortedResultSection label="IN PLAIN ENGLISH" color="#3b82f6">
+                <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.85)', margin: 0, lineHeight: 1.55 }}>{result.english_explanation}</p>
+              </SortedResultSection>
+            )}
 
             {/* REASSURANCE */}
             {result.reassurance && (
