@@ -79,13 +79,13 @@ const LANDSCAPE = [
   {
     name: 'DoNotPay',
     what: 'Subscription "robot lawyer" — parking tickets, small claims, unsubscribe letters. US-centric.',
-    gap: 'Controversial and narrow: dozens of FTC/unauthorised-practice findings, and a 2024 DOJ settlement. Stores user data, runs on paid subscriptions, and is built for the person who already knows what they need. It does not decode an unfamiliar letter in any language for someone who cannot read it.',
-    source: 'FTC actions 2023–2024; Washington Attorney General settlement; press coverage.'
+    gap: 'A different mission: it pursues a specific grievance on your behalf, where you already know you have one. It does not meet the moment of an unfamiliar letter from a court, council or creditor — and it stores user data and runs on paid subscriptions, which sits at odds with the nothing-stored, free-to-start model our users need.',
+    source: 'resolver.co.uk and donotpay.com product scope; FTC and state actions 2023–2024.'
   },
   {
     name: 'LegalZoom / Rocket Lawyer',
     what: 'Paid document-generation and legal-plan services, primarily US.',
-    gap: 'Serves people who already know they need a will, a contract, an incorporation. They do not meet the moment of fear — an unexpected letter from a court or council — and they assume the literacy and confidence to start. They sell legal products, not access.',
+    gap: 'A different job: they help you create a document when you already know what you need — a will, a contract, an incorporation. They are not built for the unexpected letter you did not ask for and cannot read, and that is simply not their mission rather than a failing of theirs.',
     source: 'legalzoom.com; rocketlawyer.com product scope.'
   },
 ];
@@ -211,7 +211,7 @@ export default function SortedResearchBrief() {
             07 · The Landscape
           </div>
           <h2 style={{ fontSize: 21, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.005em', margin: '0 0 18px', color: INK }}>
-            Everyone serves the confident. Nobody meets the moment of fear.
+            Each of these does a real job. None of them meets the moment of fear.
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {LANDSCAPE.map((l) => (
