@@ -4,7 +4,7 @@
 //
 // The "personality" is not cosmetic: `buildFlavor` is prepended to the kid's idea on
 // the server (zappBuild), so the animal genuinely changes the feel of what gets made.
-// Tara builds calm and clear; Felix builds fast and flashy; Luna builds beautiful.
+// Rocco builds calm and clear; Scout builds fast and flashy; Echo builds beautiful.
 //
 // Memory is DEVICE-LOCAL ONLY (see ZappAnimalMemory.js). Nothing about the kid is ever
 // sent to our servers — so the buddy "knows" the kid without us collecting anything.
@@ -13,12 +13,12 @@
 export const ZAPP_ANIMALS = [
   {
     id: 'turtle',
-    name: 'Tara',
+    name: 'Rocco',
     emoji: '🐢',
     color: '#10b981',
     accent: '#6ee7b7',
     tagline: 'patient · steady · step by step',
-    bio: 'Tara takes her time. She helps you build things that teach you something — quizzes, puzzles, things you get a little better at each go. No rush, no pressure.',
+    bio: 'Rocco takes his time. He helps you build things that teach you something — quizzes, puzzles, things you get a little better at each go. No rush, no pressure.',
     buildFlavor: 'Build style: calm, clear and rewarding. Use gentle encouraging feedback. Prefer learning and steady progress over flashing lights. When the player gets stuck, show a kind "you can do it" hint. Keep colours soft and readable.',
     greets: [
       "Slow and steady wins it. What shall we build?",
@@ -32,12 +32,12 @@ export const ZAPP_ANIMALS = [
   },
   {
     id: 'fox',
-    name: 'Felix',
+    name: 'Scout',
     emoji: '🦊',
     color: '#f97316',
     accent: '#fdba74',
     tagline: 'quick · playful · loves fun',
-    bio: 'Felix is fast and fun. He loves games that make you laugh and keep you moving. Quick reflexes, bright colours, big energy.',
+    bio: 'Scout is fast and fun. He loves games that make you laugh and keep you moving. Quick reflexes, bright colours, big energy.',
     buildFlavor: 'Build style: fast, flashy and fun. Big satisfying feedback on every tap. Prefer action and colour over long instructions. Keep it playful and a little bit cheeky, never mean.',
     greets: [
       "Hey hey! What are we building — something fun?",
@@ -51,12 +51,12 @@ export const ZAPP_ANIMALS = [
   },
   {
     id: 'octopus',
-    name: 'Olive',
+    name: 'Inky',
     emoji: '🐙',
     color: '#8b5cf6',
     accent: '#c4b5fd',
     tagline: 'curious · explores · many ways in',
-    bio: 'Olive is curious about everything. She loves adventures, worlds to explore, and tools that let you try lots of different things. Eight arms, eight ideas.',
+    bio: 'Inky is curious about everything. He loves adventures, worlds to explore, and tools that let you try lots of different things. Eight arms, eight ideas.',
     buildFlavor: 'Build style: explorable and full of choices. Let the player discover things. Prefer branching paths, hidden surprises and several things to try over one straight line.',
     greets: [
       "So many possibilities… what shall we explore?",
@@ -70,12 +70,12 @@ export const ZAPP_ANIMALS = [
   },
   {
     id: 'bird',
-    name: 'Pip',
+    name: 'Bolt',
     emoji: '🐦',
     color: '#fbbf24',
     accent: '#fde68a',
     tagline: 'brave · first tries · bold ideas',
-    bio: 'Pip is brave. She loves it when you try something you have never done before. Big ideas, first attempts, anything new — Pip is your bird.',
+    bio: 'Bolt is brave. He loves it when you try something you have never done before. Big ideas, first attempts, anything new — Pip is your bird.',
     buildFlavor: 'Build style: bold and encouraging. Celebrate first tries. Prefer original ideas over safe ones. Add a brave "go for it" tone and reward effort, not just success.',
     greets: [
       "Be brave! What's the big idea today?",
@@ -89,12 +89,12 @@ export const ZAPP_ANIMALS = [
   },
   {
     id: 'owl',
-    name: 'Luna',
+    name: 'Echo',
     emoji: '🦉',
     color: '#a78bfa',
     accent: '#ddd6fe',
     tagline: 'thoughtful · art · stories · music',
-    bio: 'Luna is quiet and thoughtful. She loves stories, art, music and beautiful things. If you want to make something that feels like magic, Luna is your owl.',
+    bio: 'Echo is quiet and thoughtful. He loves stories, art, music and beautiful things. If you want to make something that feels like magic, Luna is your owl.',
     buildFlavor: 'Build style: beautiful and atmospheric. Rich colours, soft sounds, a sense of mood. Add a short poetic touch where it fits. Make it feel handmade, not mass-produced.',
     greets: [
       "Hoo's there… what shall we create?",
