@@ -11,7 +11,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'Why don\'t I just hire a solicitor?',
-        a: 'Solicitors cost £150–400/hour. SORTED costs £9.99/month. The World Justice Project estimates 5.1 billion people worldwide have unmet justice needs. In the UK alone, civil legal aid cases collapsed 90% since 2012 — from nearly 1 million a year to just 110,000 by 2024/25. That\'s a global crisis, not just a British one. We bridge that gap, instantly.'
+        a: 'Solicitors cost £150–400/hour. SORTED costs £9.99/month. The World Justice Project estimates 5.1 billion people worldwide have unmet justice needs. In England & Wales, civil legal aid case volumes fell by around 57% between 2012 and 2024 (IFS). For social-welfare legal aid — the kind that helps with benefits, housing and debt — grants collapsed by over 90% after LASPO 2012, from around 925,000 cases in 2012/13 to a tiny fraction today. That\'s a global crisis, not just a British one. We bridge that gap, instantly.'
       },
       {
         q: 'Is this actually legal advice?',
