@@ -63,9 +63,9 @@ export default function SortedAboutPage() {
           source="World Justice Project, 2023"
         />
         <StatCard
-          number="−90%"
-          label="Drop in UK civil legal aid cases since 2012. From ~1 million to just 110,000 per year."
-          source="UK Parliament POST Briefing, 2025"
+          number="−57%"
+          label="Fall in UK civil legal aid case volumes since 2012 — and social-welfare legal help (benefits, housing, debt) collapsed by over 90% after LASPO."
+          source="IFS, 2024; UK Parliament POST Briefing"
         />
         <StatCard
           number="80%"
@@ -149,6 +149,7 @@ export default function SortedAboutPage() {
             { label: 'FAQ', to: '/SortedFAQ' },
             { label: 'Terms', to: '/SortedTerms' },
             { label: 'Privacy', to: '/SortedPrivacy' },
+            { label: 'Evidence', to: '/SortedResearchBrief' },
             { label: 'Global', to: '/SortedGlobalAccess' },
           ].map(({ label, to }) => (
             <Link key={label} to={to} style={{ fontSize: 12, fontWeight: 600, color: MUTED, textDecoration: 'none', whiteSpace: 'nowrap' }}>{label}</Link>
