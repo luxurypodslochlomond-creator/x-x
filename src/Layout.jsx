@@ -376,6 +376,8 @@ const LayoutInner = ({ children, currentPageName }) => {
       faviconType = 'ps51'; // PS51 (golden)
     } else if (isCB51Page) {
       faviconType = 'cb51'; // CB51 (cyan)
+    } else if (isSortedPage || currentPageName === 'Family51') {
+      faviconType = 'sorted'; // SORTED (Morse SOS on warm paper)
     }
     faviconLink.href = `/api/functions/serveFavicon?type=${faviconType}`;
 
