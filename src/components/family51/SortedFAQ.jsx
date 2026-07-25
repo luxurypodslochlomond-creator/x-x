@@ -81,8 +81,12 @@ const FAQ_ITEMS = [
         a: 'Because if you\'re in a difficult moment, you shouldn\'t have to pay upfront — and a one-time trial isn\'t enough for a crisis that unfolds over days. You get 10 free decodes every day, resetting overnight. That covers most real situations without a card. If it helps, subscribe for unlimited. If not, no harm done.'
       },
       {
+        q: 'Is it £9.99 a month, or one payment for life?',
+        a: 'Both — your choice. You can pay £9.99 a month (cancel anytime), or pay £9.99 once and get SORTED for life — no further payments, ever. The lifetime option exists because a lot of the people who need this most don\'t want another monthly direct debit hanging over them. One payment, sorted, done.'
+      },
+      {
         q: 'Can I cancel anytime?',
-        a: 'Yes. No contract, no lock-in. Cancel anytime and you keep access until the end of your billing period. Email us at family@uf51.love if you have any payment questions — we\'ll always do right by you.'
+        a: 'Yes — on the monthly plan. No contract, no lock-in, cancel anytime and you keep access until the end of your billing period. On the lifetime plan there\'s nothing to cancel — it\'s already yours forever. Email us at family@uf51.love if you have any payment questions — we\'ll always do right by you.'
       },
       {
         q: 'What if I can\'t afford £9.99/month?',
@@ -132,7 +136,7 @@ const FAQ_ITEMS = [
       },
       {
         q: 'Can the government or police access my letters?',
-        a: 'We don\'t keep copies of your original letters. Your letter is uploaded for analysis and the result lives in your private vault — on your device, and encrypted on our servers only if you subscribe. You can delete everything anytime.'
+        a: 'We don\'t store your original letters in your case vault — only the decoded result. Your letter is uploaded for analysis, the AI reads it, and the breakdown lives in your private vault — on your device, and on our servers only if you subscribe. You can delete everything anytime.'
       },
       {
         q: 'What if I want to delete my data?',
