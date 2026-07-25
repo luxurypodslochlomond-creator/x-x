@@ -12,22 +12,22 @@ const GOLD = '#c6995c';
  * letters separate clearly.
  */
 export function SortedGlyph({ height = 20, color = GOLD }) {
-  const width = height * (68 / 18);
+  const width = height * (76 / 18);
   const dashY = 9 - 1.9;
   return (
-    <svg width={width} height={height} viewBox="0 0 68 18" fill="none" style={{ flexShrink: 0, display: 'block' }}>
+    <svg width={width} height={height} viewBox="0 0 76 18" fill="none" style={{ flexShrink: 0, display: 'block' }}>
       {/* S = three dots */}
       <circle cx="3.5" cy="9" r="1.9" fill={color} />
       <circle cx="8.5" cy="9" r="1.9" fill={color} />
       <circle cx="13.5" cy="9" r="1.9" fill={color} />
-      {/* O = three long dashes */}
-      <rect x="18" y={dashY} width="9" height="3.8" rx="1.9" fill={color} />
-      <rect x="29" y={dashY} width="9" height="3.8" rx="1.9" fill={color} />
-      <rect x="40" y={dashY} width="9" height="3.8" rx="1.9" fill={color} />
+      {/* O = three dashes — shorter dashes, wider gaps so the rhythm reads at any size */}
+      <rect x="19" y={dashY} width="7" height="3.8" rx="1.9" fill={color} />
+      <rect x="30" y={dashY} width="7" height="3.8" rx="1.9" fill={color} />
+      <rect x="41" y={dashY} width="7" height="3.8" rx="1.9" fill={color} />
       {/* S = three dots */}
-      <circle cx="53.5" cy="9" r="1.9" fill={color} />
-      <circle cx="58.5" cy="9" r="1.9" fill={color} />
-      <circle cx="63.5" cy="9" r="1.9" fill={color} />
+      <circle cx="55.5" cy="9" r="1.9" fill={color} />
+      <circle cx="60.5" cy="9" r="1.9" fill={color} />
+      <circle cx="65.5" cy="9" r="1.9" fill={color} />
     </svg>
   );
 }
