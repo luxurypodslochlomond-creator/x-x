@@ -93,6 +93,7 @@ export default function ZappPrivacy() {
             <p>We do not knowingly collect personal information from children under 13. We do not require any personal information to use ZAPP. The optional Hall of Fame name field should contain only a first name — parents and guardians should supervise this.</p>
             <p>If you believe a child has submitted personal information that should be removed, contact us at hello@universalfrequency51.com and we will remove it promptly.</p>
             <p>We do not use children's data for any form of advertising, profiling, or commercial purposes.</p>
+            <p><strong className="text-white">Build buddies remember you on your device only.</strong> If a child picks an animal "build buddy", its memory of past builds lives in the browser's local storage on that device — never on our servers. We never receive the child's name, identity, or build history. Clearing the browser's site data wipes the buddy's memory completely. This is how a buddy can "know" a child without us collecting anything.</p>
           </Section>
 
           <Section title="4. AI processing — Google Gemini">

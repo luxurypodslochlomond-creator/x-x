@@ -25,7 +25,7 @@ const STAGE_DURATION = 3200;
 // Build prompt + kid-safety layer live server-side in base44/shared/zappSafety.ts
 // (zappBuild function). Kept off the client so kids can't read or tamper with it.
 
-export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
+export default function ZappLiveOutput({ idea, buildFlavor, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
   const [builtHtml, setBuiltHtml] = useState('');
   const [isDone, setIsDone] = useState(false);
@@ -94,7 +94,10 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
       // input guard strips PII + blocks unsafe ideas, then the output HTML is
       // scanned for external/network/exfiltration patterns before it reaches
       // the kid. Returns {html, title} or {blocked, reason}.
-      const result = await base44.functions.invoke('zappBuild', { idea });
+      // If the kid has a build buddy, its personality flavor is prepended to the
+      // idea on the SERVER only — the saved idea stays the kid's original words.
+      const buildIdea = buildFlavor ? `${buildFlavor}\n\nKid's idea: ${idea}` : idea;
+      const result = await base44.functions.invoke('zappBuild', { idea: buildIdea });
 
       clearInterval(stageRef.current);
       clearInterval(timerRef.current);

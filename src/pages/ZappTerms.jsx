@@ -65,8 +65,8 @@ export default function ZappTerms() {
           </div>
 
           <Section title="1. Who can use ZAPP">
-            <p>ZAPP is free to use for anyone. It is primarily designed for children aged 8–13, under parental or guardian supervision where appropriate.</p>
-            <p>Children under 13 should use ZAPP with a parent or guardian's knowledge. We do not knowingly collect personal data from children under 13. See our Privacy Policy.</p>
+            <p>ZAPP is free to use for anyone. It is primarily designed for children aged 8–13. It is built to be safe to use alone — every idea is checked by our safety system and every generated app is scanned for danger before it reaches a child — but we still encourage a grown-up knowing you are here.</p>
+            <p>We do not knowingly collect personal data from children under 13. No account, email, or name is required to build. See our Privacy Policy.</p>
             <p>By using ZAPP you agree to these terms. If you are using ZAPP on behalf of a child, you accept these terms on their behalf.</p>
           </Section>
 

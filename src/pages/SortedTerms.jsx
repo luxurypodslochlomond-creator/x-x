@@ -95,6 +95,10 @@ export default function SortedTermsPage() {
         If we update these terms meaningfully, we'll update the date above. We'll never change our core commitments: no data harvesting, no selling your info, no dark patterns. Ever.
       </Section>
 
+      <Section title="10. Children and young people">
+        SORTED is not made for children under 13 and we do not knowingly collect data from them. A young person under 18 who is dealing with a frightening letter (debt, eviction, benefits, immigration) should ask a trusted adult to use SORTED on their behalf — the trusted adult reads the plain-English summary and decides the next step together with the young person. We built SORTED so no child has to face a scary official letter alone and in the dark. See our Privacy Policy, Section 7.
+      </Section>
+
       <div style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(198,153,92,0.2)', display: 'flex', flexDirection: 'column', gap: 6 }}>
         <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.6)', margin: 0 }}>
           Questions? <a href="mailto:family@uf51.love" style={{ color: '#c6995c', textDecoration: 'none', fontWeight: 600 }}>family@uf51.love</a>

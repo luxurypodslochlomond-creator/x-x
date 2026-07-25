@@ -34,7 +34,16 @@ GENERAL RULES:
 - If it's a game: confetti on wins with 40+ coloured divs, score tracking, at least 3 sound effects
 - If it's a study tool: clear questions, instant feedback, progress shown visually
 - If it's a creative tool: responsive canvas/drawing area, colour picker, clear/reset button
-- Always include at least 3 different sound effects using Web Audio API oscillators`;
+- Always include at least 3 different sound effects using Web Audio API oscillators
+
+HONESTY — NON-NEGOTIABLE: every app must show one tiny line at the very bottom, in the SAME language as the app, small and unobtrusive (font-size around 10px, opacity 0.4): "An AI friend helped make this — it can be wrong. Check with a grown-up if it's about something important." This teaches the kid to question AI, not blindly trust it.
+
+ACCESSIBILITY — build for every kid, including kids who learn or move differently:
+- Support keyboard controls where the game allows (arrows / Enter / Space) alongside touch
+- Use high-contrast colours so text stays readable
+- NEVER flash faster than 3 times per second (photosensitive seizure safety)
+- Add aria-label to every button and control
+- Keep tap targets at least 44px so unsteady hands can use them`;
 
 export const INPUT_GUARD_PROMPT = `You are a safety filter for ZAPP, a kids' app-building tool used by children aged 8-13 worldwide.
 

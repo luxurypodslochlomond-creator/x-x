@@ -6,6 +6,9 @@ import ZappGallery from '@/components/zapp/ZappGallery';
 import ZappSaveModal from '@/components/zapp/ZappSaveModal';
 import ZappRemixModal from '@/components/zapp/ZappRemixModal';
 import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
+import ZappBuddyPicker from '@/components/zapp/ZappBuddyPicker';
+import { getAnimal } from '@/components/zapp/ZappAnimals';
+import { getBuddyId, setBuddyId as persistBuddy, rememberBuild, getBuildCount } from '@/components/zapp/ZappAnimalMemory';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Bolt = ({ size = 28 }) => (
@@ -33,6 +36,19 @@ export default function Zapp() {
   const [remixInstruction, setRemixInstruction] = useState('');
   const [savedId, setSavedId] = useState(null); // ID after saving — used for share link
   const [directPlay, setDirectPlay] = useState(null); // ZappCreation for direct play via URL
+  const [buddyId, setBuddyIdState] = useState(() => getBuddyId()); // device-local build buddy
+  const [showPicker, setShowPicker] = useState(false);
+
+  const buddy = getAnimal(buddyId);
+  const buildsDone = getBuildCount();
+  const buddyGreeting = buddy
+    ? (buildsDone > 0 ? buddy.returns[Math.min(buildsDone - 1, buddy.returns.length - 1)] : buddy.greets[0])
+    : '';
+
+  const handleBuddyChoose = (id) => {
+    if (id) { persistBuddy(id); setBuddyIdState(id); }
+    setShowPicker(false);
+  };
 
   // Handle ?play=ID in URL — load and play that app directly
   useEffect(() => {
@@ -79,6 +95,8 @@ export default function Zapp() {
     setBuiltHtml(html);
     setAppTitle(title);
     setSavedId(null);
+    // Remember this build ON THE DEVICE ONLY — nothing sent to us (COPPA-clean).
+    rememberBuild(idea);
     // Don't auto-show save modal — kids want to play first, save button is in toolbar
   };
 
@@ -170,6 +188,18 @@ export default function Zapp() {
             <span className="hidden sm:inline">{builderMode ? 'builder mode' : 'magic mode'}</span>
           </button>
 
+          {buddy && (
+            <motion.button
+              onClick={() => setShowPicker(true)}
+              whileTap={{ scale: 0.92 }}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
+              style={{ background: `${buddy.color}15`, border: `1px solid ${buddy.color}40` }}
+              title="change your build buddy"
+            >
+              <span style={{ fontSize: 16, filter: `drop-shadow(0 0 6px ${buddy.color}80)` }}>{buddy.emoji}</span>
+              <span className="hidden sm:inline text-xs font-bold" style={{ color: buddy.accent }}>{buddy.name}</span>
+            </motion.button>
+          )}
           <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: 'rgba(52,211,153,0.85)' }}>
             <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 8px rgba(52,211,153,0.8)' }} />
             kid-safe · checked · free
@@ -222,6 +252,19 @@ export default function Zapp() {
             </motion.div>
           ) : phase === 'home' ? (
             <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.2 }} style={{ height: '100%', overflowY: 'auto' }}>
+              {buddy && buddyGreeting && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="text-center pt-6"
+                >
+                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm" style={{ background: `${buddy.color}10`, border: `1px solid ${buddy.color}25`, color: buddy.accent }}>
+                    <span style={{ fontSize: 16 }}>{buddy.emoji}</span>
+                    {buddyGreeting}
+                  </span>
+                </motion.div>
+              )}
               <ZappCreator onSubmit={handleIdeaSubmit} />
             </motion.div>
           ) : (
@@ -229,6 +272,7 @@ export default function Zapp() {
               <ZappLiveOutput
                 key={buildKey}
                 idea={idea}
+                buildFlavor={buddy?.buildFlavor || ''}
                 builderMode={builderMode}
                 onComplete={handleBuildComplete}
                 onReset={handleReset}
@@ -278,6 +322,13 @@ export default function Zapp() {
             onSubmit={handleRemixRequest}
             onClose={() => setShowRemix(null)}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Build Buddy Picker — first visit, or when kid taps their buddy to change */}
+      <AnimatePresence>
+        {(!buddyId || showPicker) && (
+          <ZappBuddyPicker key="picker" onChoose={handleBuddyChoose} />
         )}
       </AnimatePresence>
     </div>
