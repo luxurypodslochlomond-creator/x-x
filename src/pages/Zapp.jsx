@@ -170,9 +170,9 @@ export default function Zapp() {
             <span className="hidden sm:inline">{builderMode ? 'builder mode' : 'magic mode'}</span>
           </button>
 
-          <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium" style={{ color: 'rgba(255,255,255,0.12)' }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 opacity-70" />
-            safe · free · no account
+          <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: 'rgba(52,211,153,0.85)' }}>
+            <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 8px rgba(52,211,153,0.8)' }} />
+            kid-safe · checked · free
           </div>
         </div>
       </header>
@@ -267,7 +267,7 @@ export default function Zapp() {
         <span className="text-white/10">·</span>
         <a href="/ZappPrivacy" className="text-white/30 hover:text-white/60 text-xs transition-colors">Privacy</a>
         <span className="text-white/10">·</span>
-        <span className="text-white/10 text-xs">safe · free · no account · any language · built by UF51</span>
+        <span className="text-white/20 text-xs">kid-safe · checked · free · no account · any language · built by UF51</span>
       </footer>
 
       {/* Remix Modal */}

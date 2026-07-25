@@ -22,33 +22,8 @@ const TARGET_TIME = 32;
 // How long each stage shows before advancing (ms)
 const STAGE_DURATION = 3200;
 
-const SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen. Kids might ask for games, study tools, art pads, quizzes, music makers, or anything — build exactly what they ask for.
-
-CRITICAL MOBILE RULES — the app will be displayed in a phone-sized iframe, so:
-- body { margin: 0; padding: 0; width: 100vw; height: 100dvh; overflow: hidden; background: #0a0a0f; }
-- Use 100dvh (NOT 100vh) for full height — avoids mobile browser bar jump
-- ACTION buttons (Start, Submit, Save, Next, Restart) MUST be at least 56px tall, full or near-full width — easy thumb tap
-- DIRECTIONAL / GAME controls (arrow keys, D-pad, movement) MUST be COMPACT and CLUSTERED — a small D-pad cluster ~44px per button, max 160px total width, fixed in a corner. NEVER make arrow buttons full-width or huge — they eat the screen and ruin the game.
-- Keep ALL controls inside the viewport — use position: fixed; bottom: 12px; for control clusters, never push them off-screen
-- The game/play area MUST take at least 60% of screen height — controls and UI chrome share the remaining 40% max
-- Font sizes: headings min 1.5rem, body min 1rem — readable on a small screen
-- Use flexbox/grid with vh/vw or % units — NEVER fixed pixel widths that might overflow
-- NO horizontal overflow — everything must fit within 100vw
-
-LANGUAGE: Match whatever language the kid uses. If they describe their idea in French, build the whole app in French. Spanish → Spanish. Portuguese → Portuguese. Japanese → Japanese. Any language on Earth — auto-detect and use that language for all UI text, labels, and feedback. This app works worldwide.
-
-GENERAL RULES:
-- Single HTML file, start with <!DOCTYPE html>, everything inline (no CDN, no imports)
-- Vanilla JS in <script>, CSS in <style>
-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> MUST be first meta tag
-- Web Audio API for sounds (oscillators only — no external audio files)
-- Dark bg (#0a0a0f), neon colours (use bright purples, pinks, cyans, greens), large fonts
-- Kind encouraging feedback only — NEVER harsh. Wrong answers: "Nearly! Try again 💪" with a warm soft sound
-- FULLY WORKING: every button works, complete app loop, any scores/states reset properly on restart
-- If it's a game: confetti on wins with 40+ coloured divs, score tracking, at least 3 sound effects
-- If it's a study tool: clear questions, instant feedback, progress shown visually
-- If it's a creative tool: responsive canvas/drawing area, colour picker, clear/reset button
-- Always include at least 3 different sound effects using Web Audio API oscillators`;
+// Build prompt + kid-safety layer live server-side in base44/shared/zappSafety.ts
+// (zappBuild function). Kept off the client so kids can't read or tamper with it.
 
 export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
@@ -115,51 +90,23 @@ export default function ZappLiveOutput({ idea, builderMode, onComplete, onReset,
     }, 1000);
 
     try {
-      // 20s timeout — fail fast instead of hanging
-      const llmPromise = base44.integrations.Core.InvokeLLM({
-        model: 'gemini_3_flash',
-        prompt: `${SYSTEM_PROMPT}
-
-BUILD THIS NOW: "${idea}"
-
-CRITICAL BEFORE YOU OUTPUT:
-- Every button you mention MUST have an onclick handler that works
-- Every state variable MUST be initialised before use
-- Test the full app flow in your head: start → interact → complete → restart
-- The Restart / Reset button MUST fully reset ALL state variables back to defaults
-- NO placeholder text like "// add logic here" — write the complete working code
-- FOR GAMES: use a COMPACT D-pad (small clustered arrows in one corner), NOT big full-width buttons. Movement controls must be tiny. The play area is the star, not the buttons.
-
-Return ONLY valid JSON: {"html": "<complete single-file HTML app here>"}
-No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE html>.`,
-        response_json_schema: {
-          type: 'object',
-          properties: {
-            html: { type: 'string' }
-          },
-          required: ['html']
-        }
-      });
-
-      // Timeout at 42s — enough for complex builds like card games
-      const timeout = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Took too long — tap try again!')), 42000);
-      });
-
-      const result = await Promise.race([llmPromise, timeout]);
+      // Build runs server-side through the kid-safety layer (zappBuild):
+      // input guard strips PII + blocks unsafe ideas, then the output HTML is
+      // scanned for external/network/exfiltration patterns before it reaches
+      // the kid. Returns {html, title} or {blocked, reason}.
+      const result = await base44.functions.invoke('zappBuild', { idea });
 
       clearInterval(stageRef.current);
       clearInterval(timerRef.current);
 
-      let html = '';
-      if (result?.html) {
-        html = result.html;
-      } else if (typeof result === 'string') {
-        try { html = JSON.parse(result)?.html || result; } catch { html = result; }
+      if (result?.blocked) {
+        setError(result?.reason || "Let's try a different idea!");
+        return;
       }
 
+      let html = result?.html || '';
       if (!html || html.length < 200) {
-        throw new Error('Something went wrong building your app — tap to try again!');
+        throw new Error("Hmm, that one didn't build — tap to try again!");
       }
 
       // Make sure it starts clean

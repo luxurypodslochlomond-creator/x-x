@@ -301,8 +301,8 @@ export default function ZappCreator({ onSubmit }) {
         </div>
       </motion.div>
 
-      <p className="text-white/10 text-xs mt-6 font-mono text-center pb-4">
-        no account needed · nothing stored · safe for kids
+      <p className="text-white/20 text-xs mt-6 font-mono text-center pb-4">
+        no account needed · ideas checked for safety · first name optional
       </p>
     </div>
   );

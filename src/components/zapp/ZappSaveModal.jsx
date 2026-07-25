@@ -33,23 +33,23 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
   const handleSave = async () => {
     setSaving(true);
     try {
-      const record = {
+      // Save runs server-side (zappSave): re-scans the HTML for danger and strips
+      // contact info from the optional first-name field before persisting.
+      const saved = await base44.functions.invoke('zappSave', {
         title: appTitle || idea,
         idea,
         html,
         emoji: SHAPES[selectedShape].shape,
-        creator_name: name.trim() || null,
-        play_count: 0,
-      };
-      if (remixOf) {
-        record.remix_of = remixOf;
-        record.remix_instruction = remixInstruction;
-      }
-      const created = await base44.entities.ZappCreation.create(record);
-      const link = `${window.location.origin}/Zapp?play=${created?.id}`;
+        creator_name: name.trim(),
+        remix_of: remixOf || null,
+        remix_instruction: remixInstruction || null,
+      });
+      if (saved?.error) throw new Error(saved?.blocked ? "Let's try a different idea!" : 'save failed');
+      const id = saved?.id;
+      const link = `${window.location.origin}/Zapp?play=${id}`;
       setSavedLink(link);
       setSaved(true);
-      setTimeout(() => onSaved(created?.id), 3000);
+      setTimeout(() => onSaved(id), 3000);
     } catch (e) {
       console.error('Save error:', e);
       setSaving(false);
