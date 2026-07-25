@@ -4,7 +4,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/api/functions/serveFavicon?type=uf51" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
+    <!-- STATIC OG TAGS — visible to scrapers that don't run JS (WhatsApp, Telegram, etc.) -->
+    <!-- JS below overrides these per-page for JS-capable clients -->
+    <title>SORTED — Decode Scary Letters in 30 Seconds</title>
+    <meta name="description" content="Got a scary letter? SORTED decodes it instantly — plain English, any language, nothing stored. Free to try." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://uf51.love/Sorted" />
+    <meta property="og:title" content="SORTED — Decode Scary Letters in 30 Seconds" />
+    <meta property="og:description" content="Got a scary letter? SORTED decodes it instantly — plain English, any language, nothing stored. Free to try." />
+    <meta property="og:image" content="https://uf51.love/api/functions/serveSortedOGImage" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SORTED — Decode Scary Letters in 30 Seconds" />
+    <meta name="twitter:description" content="Got a scary letter? SORTED decodes it instantly — plain English, any language, nothing stored. Free to try." />
+    <meta name="twitter:image" content="https://uf51.love/api/functions/serveSortedOGImage" />
+
     <!-- PERFORMANCE: Preconnect to critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,35 +49,35 @@
           meta = {
             title: 'SORTED \u2014 Decode Scary Letters in 30 Seconds',
             desc: 'Got a scary letter? SORTED reads it for you \u2014 plain English, any language, nothing stored. Free to try.',
-            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
-            url: 'https://uf51.love/Family51'
+            image: 'https://uf51.love/api/functions/serveSortedOGImage',
+            url: 'https://uf51.love/Sorted'
           };
         } else if (path === 'sortedpressrelease') {
           meta = {
             title: 'SORTED \u2014 Press Release 2026',
             desc: 'AI that decodes scary letters for anyone, anywhere. Launching 2026.',
-            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            image: 'https://uf51.love/api/functions/serveSortedOGImage',
             url: 'https://uf51.love/SortedPressRelease'
           };
         } else if (path === 'sortedinvestorpress') {
           meta = {
             title: 'SORTED \u2014 Investor Brief 2026',
             desc: 'AI access to justice. \u00a39.99/month. ESG-aligned. B2B white-label for financial services.',
-            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            image: 'https://uf51.love/api/functions/serveSortedOGImage',
             url: 'https://uf51.love/SortedInvestorPress'
           };
         } else if (path === 'sortedpartnerkit') {
           meta = {
             title: 'SORTED Partner Kit \u2014 Build With Us',
             desc: '25% affiliate commission. White-label for financial services. ESG impact data.',
-            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            image: 'https://uf51.love/api/functions/serveSortedOGImage',
             url: 'https://uf51.love/SortedPartnerKit'
           };
         } else if (path === 'sortedfororgs') {
           meta = {
             title: 'SORTED for Organisations \u2014 Free Pilot for Advice Centres',
             desc: 'Help your clients understand official letters before deadlines pass. AI-assisted, private, multilingual. Free pilot for advice centres, debt charities and housing associations.',
-            image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+            image: 'https://uf51.love/api/functions/serveSortedOGImage',
             url: 'https://uf51.love/SortedForOrgs'
           };
         } else if (path.startsWith('petsounds51')) {
