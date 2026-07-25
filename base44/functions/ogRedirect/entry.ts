@@ -31,6 +31,12 @@ const PAGE_META = {
     image: '/api/functions/serveOGImage?brand=sorted',
     color: '#f97316',
   },
+  SortedForOrgs: {
+    title: 'SORTED for Organisations — Free Pilot for Advice Centres',
+    description: 'Help your clients understand official letters before deadlines pass. AI-assisted, private, multilingual. Free pilot for advice centres, debt charities and housing associations.',
+    image: '/api/functions/serveOGImage?brand=sorted',
+    color: '#f97316',
+  },
   SortedPartnerKit: {
     title: 'SORTED — Partner With Us',
     description: '25% affiliate commission. White-label for financial services. ESG impact data. Equity pathway.',

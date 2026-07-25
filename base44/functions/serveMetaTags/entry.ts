@@ -30,6 +30,12 @@ Deno.serve(async (req) => {
       image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
       url: 'https://uf51.love/SortedInvestorPress',
     },
+    'SortedForOrgs': {
+      title: 'SORTED for Organisations — Free Pilot for Advice Centres',
+      description: 'Help your clients understand official letters before deadlines pass. AI-assisted, private, multilingual. Free pilot for advice centres, debt charities and housing associations.',
+      image: 'https://uf51.love/api/functions/serveOGImage?brand=sorted',
+      url: 'https://uf51.love/SortedForOrgs',
+    },
     'SortedPressRelease': {
       title: 'SORTED — Press Release',
       description: 'AI that decodes scary letters for anyone, anywhere. Launching 2026. Built by Universal Frequency 51.',
