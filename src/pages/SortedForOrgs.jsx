@@ -151,6 +151,20 @@ export default function SortedForOrgs() {
         </div>
       </section>
 
+      {/* ── EVIDENCE LINK ─────────────────────────────────────── */}
+      <section style={{ maxWidth: 640, margin: '40px auto 0', padding: '0 24px' }}>
+        <a href="/SortedResearchBrief" style={{ textDecoration: 'none' }}>
+          <div style={{ background: `${GOLD}06`, border: `1px solid ${GOLD}22`, borderRadius: 12, padding: '18px 20px', display: 'flex', alignItems: 'center', gap: 14 }}>
+            <div style={{ flexShrink: 0, fontSize: 18, color: GOLD }}>⌖</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: GOLD, textTransform: 'uppercase', marginBottom: 4 }}>Read the evidence</div>
+              <div style={{ fontSize: 14, color: INK, fontWeight: 600, lineHeight: 1.45 }}>The full research brief — nine cited strands behind every figure on this page.</div>
+            </div>
+            <div style={{ fontSize: 13, color: GOLD, fontWeight: 700 }}>→</div>
+          </div>
+        </a>
+      </section>
+
       {/* ── CTA BLOCK ────────────────────────────────────────── */}
       <section style={{ maxWidth: 640, margin: '40px auto 0', padding: '0 24px 72px' }}>
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}

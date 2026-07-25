@@ -161,6 +161,18 @@ export default function SortedInvestorPress() {
 
           <div style={{ height: 1, background: BORDER, margin: '28px 0' }} />
 
+          {/* EVIDENCE */}
+          <a href="/SortedResearchBrief" style={{ display: 'block', textDecoration: 'none', marginBottom: 28 }}>
+            <div style={{ background: `${GOLD}06`, border: `1px solid ${GOLD}22`, borderRadius: 12, padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{ flexShrink: 0, fontSize: 16, color: GOLD }}>⌖</div>
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: GOLD, textTransform: 'uppercase', marginBottom: 4 }}>Read the evidence</div>
+                <div style={{ fontSize: 14, color: INK, fontWeight: 600, lineHeight: 1.45 }}>The full research brief — nine cited strands behind every claim on this page.</div>
+              </div>
+              <div style={{ marginLeft: 'auto', fontSize: 13, color: GOLD, fontWeight: 700 }}>→</div>
+            </div>
+          </a>
+
           {/* CONTACT */}
           <div style={{ background: `${GOLD}08`, border: `1px solid ${GOLD}30`, borderRadius: 14, padding: '24px 20px', textAlign: 'center' }}>
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.2em', color: MUTED, marginBottom: 14 }}>GET IN TOUCH</div>

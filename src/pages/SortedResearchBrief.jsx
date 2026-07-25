@@ -62,6 +62,78 @@ const WHO = [
   { who: 'Carers & family advocates', why: 'Often decoding letters on behalf of someone they love, with no training.' }
 ];
 
+// Strand 2 — the landscape: who else is out there, and where they leave our people behind.
+const LANDSCAPE = [
+  {
+    name: 'Citizens Advice',
+    what: 'Free, human advisers across the UK. The gold standard for trust — but a 1-to-1 service operating on opening hours and appointment slots.',
+    gap: 'In 2024 the CAB network helped one person for every ~15 who needed it; advisers report letters arriving already past deadline. The human model cannot scale to 5.1bn people, and it cannot meet the avoidance loop — by the time someone works up the courage to call, the crisis has compounded.',
+    source: 'Citizens Advice, "Watching the Watches" / "An Equal Adviser" reviews; nationwide capacity reporting.'
+  },
+  {
+    name: 'Resolver',
+    what: 'Free UK consumer-complaint tool that walks you through a grievance against a company, step by step.',
+    gap: 'Only handles consumer disputes with a named company — not benefits decisions, court summons, tenancy notices or HMRC letters. UK-only. English-only. Does not decode an arbitrary letter or explain your rights; it assumes you already know you have a complaint.',
+    source: 'resolver.co.uk product scope, 2024.'
+  },
+  {
+    name: 'DoNotPay',
+    what: 'Subscription "robot lawyer" — parking tickets, small claims, unsubscribe letters. US-centric.',
+    gap: 'Controversial and narrow: dozens of FTC/unauthorised-practice findings, and a 2024 DOJ settlement. Stores user data, runs on paid subscriptions, and is built for the person who already knows what they need. It does not decode an unfamiliar letter in any language for someone who cannot read it.',
+    source: 'FTC actions 2023–2024; Washington Attorney General settlement; press coverage.'
+  },
+  {
+    name: 'LegalZoom / Rocket Lawyer',
+    what: 'Paid document-generation and legal-plan services, primarily US.',
+    gap: 'Serves people who already know they need a will, a contract, an incorporation. They do not meet the moment of fear — an unexpected letter from a court or council — and they assume the literacy and confidence to start. They sell legal products, not access.',
+    source: 'legalzoom.com; rocketlawyer.com product scope.'
+  },
+];
+
+// Strand 3 — solution validation: each SORTED tool mapped to a named need above.
+const SOLUTION = [
+  {
+    tool: 'Letter Decoder',
+    meets: 'Strands 02, 03, 05, 06',
+    how: 'Paste or photograph any official letter. In seconds: plain-English summary, deadlines, what it actually means, what to do next — in the letter\'s own language with an English explanation appended.',
+    tag: 'The literacy wall, the language barrier, the avoidance loop'
+  },
+  {
+    tool: 'Reply Writer',
+    meets: 'Strand 02',
+    how: 'Drafts a calm, professional response in the same language as the letter — for the person who understands the problem now but cannot find the words. No template-filling; a reply written to the situation.',
+    tag: 'The help that no longer exists'
+  },
+  {
+    tool: 'Conflict Resolver',
+    meets: 'Strands 01, 02',
+    how: 'Maps a dispute into the realistic options — negotiate, escalate, get help — with a plain assessment of each path\'s risk and likelihood. Not legal advice; a wayfinder through it.',
+    tag: 'Unmet justice needs'
+  },
+  {
+    tool: 'Scam Checker',
+    meets: 'Strand 04',
+    how: 'Flags gift-card, bank-transfer, cold-call and pressure-tactic fraud in any text, image or screenshot. Tells the user what is real, what is not, and exactly where to report it in their country.',
+    tag: 'The scam tide'
+  },
+  {
+    tool: 'Contract Checker',
+    meets: 'Strands 02, 03',
+    how: 'Reads a tenancy, employment or consumer agreement and surfaces the red flags, missing protections and negotiation points — so a person signs with their eyes open, not in fear.',
+    tag: 'Rights you never knew you had'
+  },
+];
+
+// Strand 4 — the moat: what is structurally hard to copy.
+const MOAT = [
+  { title: 'Nothing stored you don\'t control', why: 'Letters are processed in memory and dropped — never logged, never trained on. Every competitor that stores data to improve its model carries growing legal and trust liability; we carry none.' },
+  { title: 'Any language, any jurisdiction', why: 'Decoding works in 40+ languages and 20+ jurisdictions on day one. Building this depth per-market is a multi-year effort for any incumbent; for us it is the default.' },
+  { title: 'Free-to-start, with no exclusionary wall', why: 'Ten free uses, no card — and a genuine hardship-access path for people in ongoing crisis. Lifetime caps create walls; daily resets keep the door open. This is a design choice competitors\' subscription models cannot match without rewriting their economics.' },
+  { title: 'Extraction-proof by covenant', why: 'Open-source and bound by a covenant that makes capture — sale, data harvest, paywall-gating the vulnerable — impossible by construction, not by promise. Funders and partners can verify this in the code.' },
+  { title: 'Built with the people who need it', why: 'Shaped by carers, advisers, low-literacy and neurodivergent users — not built for them. The product reads like a friend because the people who shaped it were the people it serves.' },
+  { title: 'Scales through advisers, not ads', why: 'A council, housing association or debt charity can hand SORTED to every client they serve without setup or IT. One adviser reaches ten times more people. The B2B2C pathway is the route to the 5.1bn — and it is open from day one.' },
+];
+
 const CLOSE = {
   headline: 'This is the gap SORTED fills.',
   body: 'Every product in the legal-tech market optimises for the people who can already read the letter, find the form, and afford the help. The 5.1 billion — and the millions in the UK named above — are left to muddle through alone, or not at all. SORTED is built for them: a free-to-start, any-language, nothing-stored-you-don\'t-control decoder that turns an unreadable letter into a plain-English action in seconds, and hands you back to a human you trust when it matters. The evidence above is why this is not a nice-to-have. It is infrastructure people are already dying without.',
@@ -133,6 +205,72 @@ export default function SortedResearchBrief() {
           </div>
         </section>
 
+        {/* ── Strand 2 · The landscape ── */}
+        <section style={{ marginBottom: 44 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: GOLD, marginBottom: 10 }}>
+            07 · The Landscape
+          </div>
+          <h2 style={{ fontSize: 21, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.005em', margin: '0 0 18px', color: INK }}>
+            Everyone serves the confident. Nobody meets the moment of fear.
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {LANDSCAPE.map((l) => (
+              <div key={l.name} style={{ background: '#fff', border: '1px solid rgba(28,28,30,0.08)', borderRadius: 12, padding: '16px 16px' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: INK }}>{l.name}</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', color: GOLD, textTransform: 'uppercase' }}>What it does</div>
+                </div>
+                <p style={{ fontSize: 13.5, lineHeight: 1.55, color: MUTED, margin: '0 0 10px' }}>{l.what}</p>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', color: '#b25454', textTransform: 'uppercase', marginBottom: 4 }}>The gap</div>
+                <p style={{ fontSize: 13.5, lineHeight: 1.55, color: INK, margin: '0 0 10px' }}>{l.gap}</p>
+                <div style={{ fontSize: 11, color: MUTED, lineHeight: 1.5 }}>
+                  <span style={{ fontWeight: 600, color: INK }}>Source:</span> {l.source}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Strand 3 · Solution validation ── */}
+        <section style={{ marginBottom: 44 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: GOLD, marginBottom: 10 }}>
+            08 · Solution Validation
+          </div>
+          <h2 style={{ fontSize: 21, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.005em', margin: '0 0 18px', color: INK }}>
+            Five tools. Each one meets a named need above.
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {SOLUTION.map((s) => (
+              <div key={s.tool} style={{ background: '#fff', border: '1px solid rgba(28,28,30,0.08)', borderRadius: 12, padding: '16px 16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: INK }}>{s.tool}</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: GOLD, background: 'rgba(198,153,92,0.1)', border: '1px solid rgba(198,153,92,0.25)', borderRadius: 6, padding: '2px 8px' }}>meets {s.meets}</div>
+                </div>
+                <p style={{ fontSize: 13.5, lineHeight: 1.55, color: INK, margin: '0 0 8px' }}>{s.how}</p>
+                <div style={{ fontSize: 12, color: MUTED, fontStyle: 'italic' }}>{s.tag}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Strand 4 · The moat ── */}
+        <section style={{ marginBottom: 44 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: GOLD, marginBottom: 10 }}>
+            09 · The Moat
+          </div>
+          <h2 style={{ fontSize: 21, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.005em', margin: '0 0 18px', color: INK }}>
+            What is structurally hard to copy.
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12 }}>
+            {MOAT.map((m) => (
+              <div key={m.title} style={{ background: 'rgba(198,153,92,0.05)', border: '1px solid rgba(198,153,92,0.2)', borderRadius: 12, padding: '16px 16px' }}>
+                <div style={{ fontSize: 14.5, fontWeight: 700, color: INK, marginBottom: 8 }}>{m.title}</div>
+                <div style={{ fontSize: 13, lineHeight: 1.55, color: MUTED }}>{m.why}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Close */}
         <section style={{
           background: 'rgba(198,153,92,0.06)', border: `1px solid rgba(198,153,92,0.25)`,
@@ -146,7 +284,7 @@ export default function SortedResearchBrief() {
 
         <div style={{ marginTop: 40, fontSize: 11, color: MUTED, lineHeight: 1.6, borderTop: '1px solid rgba(28,28,30,0.08)', paddingTop: 16 }}>
           Compiled {new Date().getFullYear()} for SORTED / UF51. All figures verified against primary sources at time of writing.
-          Strands to follow: the landscape (Citizens Advice, Resolver, DoNotPay, LegalZoom), solution validation against these needs, and the structural moat.
+          Nine strands: the global picture, Britain\'s legal aid collapse, the literacy wall, the scam tide, the language barrier, the avoidance loop, the landscape, solution validation, and the structural moat.
         </div>
       </div>
     </div>
