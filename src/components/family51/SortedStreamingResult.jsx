@@ -33,6 +33,7 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
     (result.reply_to_contact && result.reply_to_contact !== 'Not found' ? `Reply to: ${result.reply_to_contact}\n` : '') +
     (result.key_deadline && result.key_deadline !== 'No deadline mentioned' ? `Deadline: ${result.key_deadline}\n` : '') +
     `\n` +
+    (result.english_explanation ? `IN ENGLISH:\n${result.english_explanation}\n\n` : '') +
     (result.what_this_means ? `${result.what_this_means}\n\n` : '') +
     `WHAT TO DO:\n${result.action_steps?.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n` +
     (result.free_help?.length > 0 ? `FREE HELP:\n${result.free_help.join('\n')}\n\n` : '') +
@@ -93,6 +94,20 @@ export default function SortedStreamingResult({ result, accentColor = '#f97316',
       handoffLabel="CONTINUE → WRITE MY REPLY"
       flash={flash}
     >
+      {result.english_explanation && (
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            padding: '12px 14px', borderRadius: 10,
+            background: 'rgba(59,130,246,0.06)', borderLeft: `3px solid #3b82f6`,
+          }}
+        >
+          <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: '#2563eb', margin: '0 0 6px', textTransform: 'uppercase' }}>In plain English</p>
+          <p style={{ fontSize: 13, color: 'rgba(28,28,30,0.85)', margin: 0, lineHeight: 1.55 }}>{result.english_explanation}</p>
+        </motion.div>
+      )}
       {result.if_you_ignore_this && (
         <motion.div
           initial={{ opacity: 0, y: 6 }}

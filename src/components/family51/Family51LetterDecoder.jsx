@@ -146,6 +146,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
             amount: { type: 'string' },
             what_this_means: { type: 'string' },
             if_you_ignore_this: { type: 'string' },
+            english_explanation: { type: ['string', 'null'], description: 'Plain-English summary of the letter — only if the document is NOT in English. null if document is in English.' },
             action_steps: { type: 'array', items: { type: 'string' } },
             free_help: { type: 'array', items: { type: 'string' } },
             expired: { type: 'boolean' },
