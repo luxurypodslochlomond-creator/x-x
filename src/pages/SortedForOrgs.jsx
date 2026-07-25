@@ -31,7 +31,7 @@ const pillars = [
   { icon: <SpeedIcon />, title: 'Instant for your clients', desc: 'No app download. No account. Paste the letter. Understand it in seconds. Works on any phone.' },
   { icon: <PrivacyIcon />, title: 'Private by design', desc: 'The full analysis stays on your client\'s device. Only anonymous patterns — no names, no addresses, no amounts — help us improve. GDPR-aligned by design. Anonymised reporting for you, nothing that identifies a person.' },
   { icon: <GlobalIcon />, title: 'Any language. Any country.', desc: 'Your clients speak Urdu, Somali, Spanish, Romanian. SORTED works in all of them — same quality, same clarity.' },
-  { icon: <ScaleIcon />, title: 'Scales without hiring', desc: 'One adviser can now support ten times more people. SORTED handles the letter. You handle the person.' },
+  { icon: <ScaleIcon />, title: 'Scales without hiring', desc: 'Earlier intervention. Fewer missed deadlines. Better triage. More clients helped with the same staff — because the letter is already decoded before they reach you.' },
 ];
 
 const labelStyle = { fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: GOLD, textTransform: 'uppercase', marginBottom: 18 };
@@ -63,8 +63,11 @@ export default function SortedForOrgs() {
           <p style={{ fontSize: 16, color: MUTED, lineHeight: 1.65, margin: '0 0 14px' }}>
             By the time they come to you — the deadline has passed. The case has escalated. The damage is done.
           </p>
-          <p style={{ fontSize: 16, color: INK, lineHeight: 1.6, margin: '0 0 32px', fontWeight: 600 }}>
-            SORTED intercepts at the <span style={{ color: GOLD }}>moment of fear</span> — before it becomes a crisis.
+          <p style={{ fontSize: 17, color: INK, lineHeight: 1.6, margin: '0 0 14px', fontWeight: 600 }}>
+            SORTED uses AI to explain official letters in <span style={{ color: GOLD }}>plain English</span> — what it says, what it means, what to do — in under two minutes, in 40+ languages.
+          </p>
+          <p style={{ fontSize: 16, color: MUTED, lineHeight: 1.65, margin: '0 0 32px' }}>
+            It intercepts at the <span style={{ color: GOLD, fontWeight: 600 }}>moment of fear</span> — before the deadline passes, before the case escalates, before it becomes a crisis.
           </p>
 
           <a href={MAILTO} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: INK, color: GOLD, fontWeight: 800, fontSize: 14, letterSpacing: '0.04em', borderRadius: 10, padding: '14px 26px', textDecoration: 'none' }}>
@@ -112,6 +115,30 @@ export default function SortedForOrgs() {
 
       <Divider />
 
+      {/* ── THE JOURNEY ─────────────────────────────────────── */}
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
+        <p style={labelStyle}>How it works for your client</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {[
+            { n: '1', t: 'They receive a scary letter', d: 'A court summons, an arrears notice, an eviction letter. They freeze.' },
+            { n: '2', t: 'They paste it into SORTED', d: 'No app, no account, no login. On any phone. Takes ten seconds.' },
+            { n: '3', t: 'They get a plain-English explanation', d: 'What the letter says. What it means. How urgent it is. In their language.' },
+            { n: '4', t: 'They get clear next steps', d: 'Who to contact. What deadline matters. What to do today — not in a week.' },
+            { n: '5', t: 'Your adviser steps in if needed', d: 'When the case is complex, SORTED flags it. Your human takes over. The letter is already understood.' },
+          ].map((s, i, arr) => (
+            <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 0', borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : 'none' }}>
+              <div style={{ flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: `1.5px solid ${GOLD}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: GOLD, marginTop: 1 }}>{s.n}</div>
+              <div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: INK, marginBottom: 4 }}>{s.t}</div>
+                <p style={{ fontSize: 14, color: MUTED, margin: 0, lineHeight: 1.5 }}>{s.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Divider />
+
       {/* ── HOW IT WORKS ─────────────────────────────────────── */}
       <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
         <p style={labelStyle}>Why SORTED works for organisations</p>
@@ -125,6 +152,28 @@ export default function SortedForOrgs() {
                 <p style={{ fontSize: 14, color: MUTED, margin: 0, lineHeight: 1.55 }}>{p.desc}</p>
               </div>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ── TRUST ───────────────────────────────────────────── */}
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
+        <p style={labelStyle}>Why organisations trust SORTED</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {[
+            { icon: <ShieldIcon />, t: 'AI-assisted, not AI-only', d: 'SORTED explains the letter and flags urgency. It never gives legal advice. Complex cases route to your human advisers.' },
+            { icon: <PrivacyIcon />, t: 'Nothing stored, nothing tracked', d: 'The full letter stays on the client\'s device. We never see names, addresses, or amounts. GDPR-aligned by design.' },
+            { icon: <HeartIcon />, t: 'Built by people who\'ve been there', d: 'Created with input from advisers and people who\'ve faced these letters themselves. Not a tech demo — a tool born from need.' },
+          ].map((item, i) => (
+            <div key={i} style={{ display: 'flex', gap: 14, padding: '16px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 12 }}>
+              <div style={{ flexShrink: 0, marginTop: 2 }}>{item.icon}</div>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 800, color: INK, marginBottom: 4 }}>{item.t}</div>
+                <p style={{ fontSize: 13, color: MUTED, margin: 0, lineHeight: 1.5 }}>{item.d}</p>
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -171,10 +220,10 @@ export default function SortedForOrgs() {
           style={{ background: `${GOLD}08`, border: `1px solid ${GOLD}28`, borderRadius: 16, padding: '32px 24px', textAlign: 'center' }}>
           <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: GOLD, marginBottom: 12, textTransform: 'uppercase' }}>Start a conversation</div>
           <h2 style={{ fontSize: 'clamp(22px, 5vw, 28px)', fontWeight: 800, color: INK, letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.15 }}>
-            Ready to run a pilot?
+            Help people before fear becomes crisis.
           </h2>
           <p style={{ fontSize: 15, color: MUTED, margin: '0 0 28px', lineHeight: 1.6 }}>
-            No sales process. No demo call required. Just email us, tell us about your organisation, and we'll get you set up — free.
+            Join the first organisations using AI to help clients understand official letters before deadlines are missed. No sales process. Just email us, tell us about your work, and we'll set you up — free.
           </p>
 
           <a href={MAILTO} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: INK, color: GOLD, fontWeight: 800, fontSize: 14, letterSpacing: '0.04em', borderRadius: 10, padding: '14px 26px', textDecoration: 'none', marginBottom: 16 }}>
@@ -285,6 +334,21 @@ function ScaleIcon() {
       <path d="M10 3v14M5 17h10" stroke={GOLD} strokeWidth="1.3" strokeLinecap="round" />
       <path d="M10 5L4 8l-1.5 4c0 1.5 3 1.5 3 0L4 8" stroke={GOLD} strokeWidth="1.1" strokeLinejoin="round" opacity="0.7" />
       <path d="M10 5l6 3 1.5 4c0 1.5-3 1.5-3 0L16 8" stroke={GOLD} strokeWidth="1.1" strokeLinejoin="round" opacity="0.7" />
+    </svg>
+  );
+}
+function ShieldIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 2L3 5v5c0 4 3 6.5 7 8 4-1.5 7-4 7-8V5l-7-3z" stroke={GOLD} strokeWidth="1.3" strokeLinejoin="round" />
+      <path d="M7 10l2 2 4-4" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function HeartIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 17.5S3 13.5 3 8.5a4.5 4.5 0 019-0.5 4.5 4.5 0 019 .5c0 5-7 9-7 9H10z" stroke={GOLD} strokeWidth="1.3" strokeLinejoin="round" />
     </svg>
   );
 }
