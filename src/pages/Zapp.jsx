@@ -7,6 +7,7 @@ import ZappSaveModal from '@/components/zapp/ZappSaveModal';
 import ZappRemixModal from '@/components/zapp/ZappRemixModal';
 import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 import ZappBuddyPicker from '@/components/zapp/ZappBuddyPicker';
+import ZappBlueprint from '@/components/zapp/ZappBlueprint';
 import { getAnimal } from '@/components/zapp/ZappAnimals';
 import { getBuddyId, setBuddyId as persistBuddy, rememberBuild, getBuildCount } from '@/components/zapp/ZappAnimalMemory';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -38,6 +39,7 @@ export default function Zapp() {
   const [directPlay, setDirectPlay] = useState(null); // ZappCreation for direct play via URL
   const [buddyId, setBuddyIdState] = useState(() => getBuddyId()); // device-local build buddy
   const [showPicker, setShowPicker] = useState(false);
+  const [blueprint, setBlueprint] = useState(null); // kid's decomposition notes — transient, never stored
 
   const buddy = getAnimal(buddyId);
   const buildsDone = getBuildCount();
@@ -71,7 +73,8 @@ export default function Zapp() {
     setRemixInstruction('');
     setBuiltHtml('');
     setAppTitle('');
-    setPhase('building');
+    setBlueprint(null);
+    setPhase('blueprint');
   };
 
   const handleReset = () => {
@@ -83,12 +86,24 @@ export default function Zapp() {
     setRemixInstruction('');
     setShowSave(false);
     setSavedId(null);
+    setBlueprint(null);
   };
 
   // Retry keeps the same idea/remix context — just re-mounts ZappLiveOutput
   const [buildKey, setBuildKey] = useState(0);
   const handleRetry = () => {
     setBuildKey(k => k + 1);
+  };
+
+  const handleBlueprintBuild = (parts) => {
+    setBlueprint(parts);
+    setBuildKey(k => k + 1);
+    setPhase('building');
+  };
+  const handleBlueprintSkip = () => {
+    setBlueprint(null);
+    setBuildKey(k => k + 1);
+    setPhase('building');
   };
 
   const handleBuildComplete = (html, title) => {
@@ -109,6 +124,7 @@ export default function Zapp() {
     setIdea(remixIdea);
     setBuiltHtml('');
     setAppTitle('');
+    setBlueprint(null); // remix is a different idea — don't carry stale notes
     setBuildKey(k => k + 1); // Force ZappLiveOutput to remount — otherwise hasStarted ref blocks rebuild
     setPhase('building');
   };
@@ -267,11 +283,16 @@ export default function Zapp() {
               )}
               <ZappCreator onSubmit={handleIdeaSubmit} />
             </motion.div>
+          ) : phase === 'blueprint' ? (
+            <motion.div key="blueprint" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} style={{ height: '100%', display:'flex', flexDirection:'column' }}>
+              <ZappBlueprint idea={idea} buddy={buddy} onBuild={handleBlueprintBuild} onSkip={handleBlueprintSkip} />
+            </motion.div>
           ) : (
             <motion.div key="building" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} style={{ height: '100%' }}>
               <ZappLiveOutput
                 key={buildKey}
                 idea={idea}
+                blueprint={blueprint}
                 buildFlavor={buddy?.buildFlavor || ''}
                 builderMode={builderMode}
                 onComplete={handleBuildComplete}

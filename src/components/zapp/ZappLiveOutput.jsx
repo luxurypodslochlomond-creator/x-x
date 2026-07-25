@@ -25,7 +25,7 @@ const STAGE_DURATION = 3200;
 // Build prompt + kid-safety layer live server-side in base44/shared/zappSafety.ts
 // (zappBuild function). Kept off the client so kids can't read or tamper with it.
 
-export default function ZappLiveOutput({ idea, buildFlavor, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
+export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
   const [builtHtml, setBuiltHtml] = useState('');
   const [isDone, setIsDone] = useState(false);
@@ -96,7 +96,10 @@ export default function ZappLiveOutput({ idea, buildFlavor, builderMode, onCompl
       // the kid. Returns {html, title} or {blocked, reason}.
       // If the kid has a build buddy, its personality flavor is prepended to the
       // idea on the SERVER only — the saved idea stays the kid's original words.
-      const buildIdea = buildFlavor ? `${buildFlavor}\n\nKid's idea: ${idea}` : idea;
+      const blueprintBlock = blueprint
+        ? `\n\nThe kid broke their idea into parts (their own notes — match what they imagined):\n- Opens with: ${blueprint.opening || '—'}\n- Tapping does: ${blueprint.interaction || '—'}\n- Ends / loops: ${blueprint.ending || '—'}\n- Trickiest bit to get right: ${blueprint.trickiest || '—'}`
+        : '';
+      const buildIdea = (buildFlavor ? `${buildFlavor}\n\nKid's idea: ${idea}` : idea) + blueprintBlock;
       const result = await base44.functions.invoke('zappBuild', { idea: buildIdea });
 
       clearInterval(stageRef.current);
