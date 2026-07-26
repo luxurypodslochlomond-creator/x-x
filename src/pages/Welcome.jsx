@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { COOLASFUCKWaves, COOLASFUCKSorted, COOLASFUCKPaw } from '@/components/shared/COOLASFUCKIcon';
 import { Radio, Zap, Globe, GraduationCap, Signal, Brain, ChevronDown, ArrowRight, Building2, Waves } from 'lucide-react';
 import BuzzTripIcon from '@/components/buzztrip/BuzzTripIcon';
+import ZappLoveBanner from '@/components/welcome/ZappLoveBanner';
 
 const HERO_THREE = [
   {
@@ -241,6 +242,8 @@ export default function WelcomePage() {
             </Link>
           </div>
         </motion.div>
+
+        <ZappLoveBanner />
 
         {/* HERO THREE */}
         <div className="space-y-4">
