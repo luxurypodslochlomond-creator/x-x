@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import ZappVoiceInput from '@/components/zapp/ZappVoiceInput';
 
 const QUICK_IDEAS = [
   {
@@ -175,7 +176,7 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
           what do you<br />want to build?
         </h1>
         <p className="text-white/40 font-semibold" style={{ fontSize: 'clamp(1rem, 3vw, 1.25rem)' }}>
-          type your idea · or tap one below · any language
+        type · say it · or tap one below · any language
         </p>
       </motion.div>
 
@@ -230,9 +231,12 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
             className="flex items-center justify-between px-4 pb-4 gap-3"
             style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
           >
-            <span className="text-white/15 text-xs font-mono">
-              {value === sampleRef.current ? 'tap to change · or just press ZAPP IT' : value.length > 0 ? `${value.length} chars` : 'type anything · no rules'}
-            </span>
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <ZappVoiceInput onTranscript={(t) => { setValue(t); setIsFocused(true); }} />
+              <span className="text-white/15 text-xs font-mono truncate">
+                {value === sampleRef.current ? 'tap to change · or just press ZAPP IT' : value.length > 0 ? `${value.length} chars` : 'type · or say it · no rules'}
+              </span>
+            </div>
             <motion.button
               onClick={() => handleSubmit()}
               disabled={value.trim().length < 3}
