@@ -89,32 +89,25 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
       setBuildTime(secs);
     }, 1000);
 
-    try {
-      // Build runs server-side through the kid-safety layer (zappBuild):
-      // input guard strips PII + blocks unsafe ideas, then the output HTML is
-      // scanned for external/network/exfiltration patterns before it reaches
-      // the kid. Returns {html, title} or {blocked, reason}.
-      // If the kid has a build buddy, its personality flavor is prepended to the
-      // idea on the SERVER only — the saved idea stays the kid's original words.
-      const blueprintBlock = blueprint
-        ? `\n\nThe kid broke their idea into parts (their own notes — match what they imagined):\n- Opens with: ${blueprint.opening || '—'}\n- Tapping does: ${blueprint.interaction || '—'}\n- Ends / loops: ${blueprint.ending || '—'}\n- Trickiest bit to get right: ${blueprint.trickiest || '—'}`
-        : '';
-      const buildIdea = (buildFlavor ? `${buildFlavor}\n\nKid's idea: ${idea}` : idea) + blueprintBlock;
+    // Build runs server-side through the kid-safety layer (zappBuild):
+    // input guard strips PII + blocks unsafe ideas, then the output HTML is
+    // scanned for external/network/exfiltration patterns before it reaches
+    // the kid. Returns {html, title} or {blocked, reason}.
+    // If the kid has a build buddy, its personality flavor is prepended to the
+    // idea on the SERVER only — the saved idea stays the kid's original words.
+    const blueprintBlock = blueprint
+      ? `\n\nThe kid broke their idea into parts (their own notes — match what they imagined):\n- Opens with: ${blueprint.opening || '—'}\n- Tapping does: ${blueprint.interaction || '—'}\n- Ends / loops: ${blueprint.ending || '—'}\n- Trickiest bit to get right: ${blueprint.trickiest || '—'}`
+      : '';
+    const buildIdea = (buildFlavor ? `${buildFlavor}\n\nKid's idea: ${idea}` : idea) + blueprintBlock;
+
+    // One attempt → normalised result. The model is flaky and mobile networks
+    // drop — a kid should never see "oops" on a single hiccup, so we silently
+    // retry once before ever showing the error. A safety BLOCKED is never retried.
+    const attempt = async () => {
       const result = await base44.functions.invoke('zappBuild', { idea: buildIdea });
-
-      clearInterval(stageRef.current);
-      clearInterval(timerRef.current);
-
-      if (result?.blocked) {
-        setError(result?.reason || "let's try a different idea!");
-        return;
-      }
-
+      if (result?.blocked) return { blocked: true, reason: result?.reason };
       let html = result?.html || '';
-      if (!html || html.length < 200) {
-        throw new Error("let's give it another go — tap the bolt");
-      }
-
+      if (!html || html.length < 200) return { fail: true };
       // Make sure it starts clean
       if (!html.trim().startsWith('<!DOCTYPE') && !html.trim().startsWith('<html')) {
         const docStart = html.indexOf('<!DOCTYPE');
@@ -122,20 +115,39 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
         const start = docStart >= 0 ? docStart : htmlStart >= 0 ? htmlStart : -1;
         if (start >= 0) html = html.slice(start);
       }
+      if (!html || html.length < 200) return { fail: true };
+      return { html };
+    };
 
+    const succeed = (html) => {
+      clearInterval(stageRef.current); clearInterval(timerRef.current);
       const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
       const title = titleMatch ? titleMatch[1].trim() : idea;
-
-      setBuiltHtml(html);
-      setAppTitle(title);
-      setIsDone(true);
+      setBuiltHtml(html); setAppTitle(title); setIsDone(true);
       if (onComplete) onComplete(html, title);
+    };
+    const giveUp = (msg) => {
+      clearInterval(stageRef.current); clearInterval(timerRef.current);
+      setError(msg);
+    };
 
+    try {
+      let res = await attempt();
+      if (res.fail) res = await attempt(); // silent retry — flaky model / network
+      if (res.blocked) { giveUp(res.reason || "let's try a different idea!"); return; }
+      if (res.html) { succeed(res.html); return; }
+      giveUp("let's give it another go — tap the bolt");
     } catch (err) {
-      clearInterval(stageRef.current);
-      clearInterval(timerRef.current);
-      console.error('ZAPP build error:', err);
-      setError(err?.message || "let's try that again!");
+      // Network error — one silent retry before we admit defeat.
+      try {
+        const res = await attempt();
+        if (res.blocked) { giveUp(res.reason || "let's try a different idea!"); return; }
+        if (res.html) { succeed(res.html); return; }
+        giveUp("let's give it another go — tap the bolt");
+      } catch (e2) {
+        console.error('ZAPP build error:', e2);
+        giveUp("let's try that again!");
+      }
     }
   };
 

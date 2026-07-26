@@ -54,10 +54,12 @@ Output ONLY the raw HTML starting with <!DOCTYPE html>. No JSON. No markdown. No
 
     let out = await runBuild();
     // Flaky first response — one silent retry saves the kid from a discouraging
-    // "try again". Only retry on empty/truncated output, never on a legit BLOCKED.
+    // "try again". Retry on empty/truncated output OR when the model rambled
+    // prose instead of HTML. Never retry a legit BLOCKED.
+    const looksLikeHtml = (s) => /<!DOCTYPE/i.test(s) || /<html[\s>]/i.test(s);
     const isBlocked = /^\s*BLOCKED:/i.test(String(out || '').trim());
-    if (!isBlocked && (!out || out.length < 200)) {
-      console.warn('[zappBuild] short/empty first response, retrying…');
+    if (!isBlocked && (!out || out.length < 200 || !looksLikeHtml(out))) {
+      console.warn('[zappBuild] no usable HTML in first response, retrying…');
       out = await runBuild();
     }
 
