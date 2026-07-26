@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
+import { buildFallbackHtml } from '@/components/zapp/ZappFallbackApp';
 
 const BUILD_STAGES = [
   { shape: 'pulse', text: 'warming up...' },
@@ -34,6 +35,7 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
   const [appTitle, setAppTitle] = useState('');
   const [buildTime, setBuildTime] = useState(0);
   const [sparks, setSparks] = useState([]);
+  const [fellBack, setFellBack] = useState(false);
   const hasStarted = useRef(false);
   const timerRef = useRef(null);
   const stageRef = useRef(null);
@@ -130,23 +132,31 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
       clearInterval(stageRef.current); clearInterval(timerRef.current);
       setError(msg);
     };
+    // The AI is having a rough night — never send a kid away empty-handed.
+    // A calm, honest magic pad keeps the groove alive, with a clear way to
+    // try their real idea again. Safety BLOCKS never get a fallback.
+    const showFallback = () => {
+      clearInterval(stageRef.current); clearInterval(timerRef.current);
+      setBuiltHtml(buildFallbackHtml(idea)); setAppTitle(idea);
+      setFellBack(true); setIsDone(true);
+    };
 
     try {
       let res = await attempt();
       if (res.fail) res = await attempt(); // silent retry — flaky model / network
       if (res.blocked) { giveUp(res.reason || "let's try a different idea!"); return; }
       if (res.html) { succeed(res.html); return; }
-      giveUp("let's give it another go — tap the bolt");
+      showFallback();
     } catch (err) {
-      // Network error — one silent retry before we admit defeat.
+      // Network error — one silent retry before we fall back.
       try {
         const res = await attempt();
         if (res.blocked) { giveUp(res.reason || "let's try a different idea!"); return; }
         if (res.html) { succeed(res.html); return; }
-        giveUp("let's give it another go — tap the bolt");
+        showFallback();
       } catch (e2) {
         console.error('ZAPP build error:', e2);
-        giveUp("let's try that again!");
+        showFallback();
       }
     }
   };
@@ -383,9 +393,17 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
   return (
     <div className="flex flex-col" style={{ height: '100%' }}>
 
+      {/* Fallback banner — only when the AI couldn't build after all retries */}
+      {fellBack && (
+        <div className="flex-shrink-0 flex items-center justify-between gap-3 px-4 py-2.5" style={{ background: 'rgba(251,191,36,0.08)', borderBottom: '1px solid rgba(251,191,36,0.25)' }}>
+          <span className="text-xs text-amber-300/80 font-semibold leading-tight">the builder's resting — here's a magic pad while it wakes up ✨</span>
+          <button onClick={onRetry} className="flex-shrink-0 text-xs font-black px-3 py-1.5 rounded-lg text-white" style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}>try my idea again</button>
+        </div>
+      )}
+
       {/* Celebrate banner — appears briefly after build, nudges to save */}
       <AnimatePresence>
-        {onSave && (
+        {onSave && !fellBack && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -432,7 +450,7 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
         </span>
         <div className="flex items-center gap-1.5 flex-shrink-0 ml-auto">
 
-          {onSave && (
+          {onSave && !fellBack && (
             <motion.button onClick={onSave} whileTap={{ scale: 0.95 }}
               className="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5"
               style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24' }}>
