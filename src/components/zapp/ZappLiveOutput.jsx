@@ -5,16 +5,13 @@ import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 import { buildFallbackHtml } from '@/components/zapp/ZappFallbackApp';
 
 const BUILD_STAGES = [
-  { shape: 'pulse', text: 'warming up...' },
-  { shape: 'spectrum', text: 'drawing it out...' },
+  { shape: 'pulse', text: 'thinking about your idea...' },
+  { shape: 'spectrum', text: 'sketching it out...' },
   { shape: 'gear', text: 'wiring it up...' },
-  { shape: 'waveform', text: 'making sounds...' },
-  { shape: 'sparkle', text: 'adding sparkles...' },
-  { shape: 'diamond', text: 'making it shiny...' },
-  { shape: 'burst', text: 'connecting buttons...' },
-  { shape: 'pulse', text: 'checking it works...' },
-  { shape: 'spectrum', text: 'final touches...' },
-  { shape: 'sparkle', text: 'almost ready...' },
+  { shape: 'waveform', text: 'giving it sounds...' },
+  { shape: 'burst', text: 'connecting the buttons...' },
+  { shape: 'pulse', text: 'making sure it works...' },
+  { shape: 'spectrum', text: 'almost there...' },
 ];
 
 // Target build time for progress bar (seconds)
