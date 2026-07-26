@@ -357,27 +357,6 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
           </div>
         </div>
 
-        {/* Magic sparkles as progress fills */}
-        <div className="flex gap-2 flex-wrap justify-center">
-        {[...Array(6)].map((_, i) => {
-          const isLit = buildTime > (i * TARGET_TIME / 6);
-          return (
-            <motion.div
-              key={i}
-              className="rounded-full"
-              style={{
-                width: 6,
-                height: 6,
-                background: isLit ? `hsl(${250 + i * 15}, 80%, ${65 + i * 5}%)` : 'rgba(255,255,255,0.06)',
-                boxShadow: isLit ? `0 0 ${6 + i * 2}px currentColor` : 'none',
-              }}
-              animate={isLit ? { scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] } : {}}
-              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-            />
-          );
-        })}
-        </div>
-
         <button
         onClick={onReset}
         className="text-white/10 hover:text-white/30 text-xs transition-colors mt-2"

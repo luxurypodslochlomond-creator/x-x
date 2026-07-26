@@ -11,6 +11,7 @@ import ZappBlueprint from '@/components/zapp/ZappBlueprint';
 import { getAnimal } from '@/components/zapp/ZappAnimals';
 import { getBuddyId, setBuddyId as persistBuddy, rememberBuild, getBuildCount } from '@/components/zapp/ZappAnimalMemory';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Bolt = ({ size = 28 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
@@ -337,14 +338,14 @@ export default function Zapp() {
       </AnimatePresence>
 
       {/* Footer — always visible */}
-      <footer className="relative z-20 flex items-center justify-center gap-4 py-2 flex-shrink-0" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-        <a href="/ZappAbout" className="text-white/30 hover:text-white/60 text-xs transition-colors">About</a>
-        <span className="text-white/10">·</span>
-        <a href="/ZappTerms" className="text-white/30 hover:text-white/60 text-xs transition-colors">Terms</a>
-        <span className="text-white/10">·</span>
-        <a href="/ZappPrivacy" className="text-white/30 hover:text-white/60 text-xs transition-colors">Privacy</a>
-        <span className="text-white/10">·</span>
-        <span className="text-white/20 text-xs">kid-safe · checked · free · no account · any language · built by UF51</span>
+      <footer className="relative z-20 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2 px-4 flex-shrink-0" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <Link to="/ZappAbout" className="text-white/50 hover:text-white text-xs font-semibold transition-colors">About</Link>
+        <span className="text-white/15">·</span>
+        <Link to="/ZappTerms" className="text-white/50 hover:text-white text-xs font-semibold transition-colors">Terms</Link>
+        <span className="text-white/15">·</span>
+        <Link to="/ZappPrivacy" className="text-white/50 hover:text-white text-xs font-semibold transition-colors">Privacy</Link>
+        <span className="text-white/15 hidden sm:inline">·</span>
+        <span className="text-white/25 text-xs">kid-safe · no account · built by UF51</span>
       </footer>
 
       {/* Remix Modal */}
