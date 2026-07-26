@@ -17,14 +17,15 @@ export default function ZappBuddyPicker({ onChoose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center px-5"
-      style={{ background: 'rgba(10,10,15,0.96)', backdropFilter: 'blur(8px)' }}
+      className="fixed inset-0 z-50 flex flex-col items-center px-5 overflow-y-auto"
+      style={{ background: 'rgba(10,10,15,0.96)', backdropFilter: 'blur(8px)', WebkitOverflowScrolling: 'touch' }}
     >
+      <div className="my-auto w-full max-w-2xl flex flex-col items-center py-8">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05, duration: 0.4 }}
-        className="text-center mb-8 max-w-md"
+        className="text-center mb-6 max-w-md"
       >
         <p className="text-white/30 text-xs font-black tracking-widest uppercase mb-3">meet your build buddy</p>
         <h1 className="font-black leading-tight mb-3" style={{
@@ -109,6 +110,7 @@ export default function ZappBuddyPicker({ onChoose }) {
           </button>
         </div>
       </motion.div>
+      </div>
     </motion.div>
   );
 }
