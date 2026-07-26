@@ -106,6 +106,25 @@ export const ZAPP_ANIMALS = [
       "You returned — lovely. What shall we make?",
     ],
   },
+  {
+    id: 'squirrel',
+    name: 'Rusty',
+    emoji: '🐿️',
+    color: '#ef4444',
+    accent: '#fca5a5',
+    tagline: 'clever · gathers · keeps it simple',
+    bio: 'Rusty is quick and clever. He loves collecting things and keeping life simple. Games about gathering, sorting, and small wins that add up to something good.',
+    buildFlavor: 'Build style: simple and satisfying. Short rounds, clear goals, small wins that add up. Prefer gathering and collecting mechanics. Keep it light and easy, never overwhelming or busy.',
+    greets: [
+      "Quick — let's gather something good!",
+      "Nuts and ideas — what are we collecting?",
+      "Small wins, big fun. What's the plan?",
+    ],
+    returns: [
+      "Back already? Let's collect some more.",
+      "Good to see you — what are we gathering today?",
+    ],
+  },
 ];
 
 export function getAnimal(id) {

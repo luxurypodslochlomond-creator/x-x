@@ -113,10 +113,27 @@ const IdeaShape = ({ shape, color, accent }) => {
   return null;
 };
 
+const SAMPLE_IDEAS = [
+  'a game where you catch falling stars',
+  'a rainbow drawing pad',
+  'a drum machine with big beats',
+  'a quiz about ocean animals',
+  'a clicker where a squirrel gathers acorns',
+  'a magical wish jar',
+  'a times tables race',
+  'a story where you choose the path',
+];
+
 export default function ZappCreator({ onSubmit, onBreakItDown }) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(() => SAMPLE_IDEAS[Math.floor(Math.random() * SAMPLE_IDEAS.length)]);
+  const sampleRef = useRef(value);
   const [isFocused, setIsFocused] = useState(false);
   const textareaRef = useRef(null);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    if (sampleRef.current && value === sampleRef.current) setValue('');
+  };
 
   const handleSubmit = (text) => {
     const t = (text || value).trim();
@@ -195,12 +212,11 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
             ref={textareaRef}
             value={value}
             onChange={e => setValue(e.target.value)}
-            onFocus={() => setIsFocused(true)}
+            onFocus={handleFocus}
             onBlur={() => setIsFocused(false)}
             onKeyDown={handleKeyDown}
-            placeholder="a game where you dodge meteors and collect stars..."
+            placeholder="type your own idea…"
             rows={3}
-            autoFocus
             className="w-full bg-transparent text-white px-5 pt-3 pb-4 resize-none outline-none leading-relaxed"
             style={{
               fontSize: 17,
@@ -215,7 +231,7 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
             style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
           >
             <span className="text-white/15 text-xs font-mono">
-              {value.length > 0 ? `${value.length} chars` : 'type anything · no rules'}
+              {value === sampleRef.current ? 'tap to change · or just press ZAPP IT' : value.length > 0 ? `${value.length} chars` : 'type anything · no rules'}
             </span>
             <motion.button
               onClick={() => handleSubmit()}

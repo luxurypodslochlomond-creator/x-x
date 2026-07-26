@@ -40,7 +40,7 @@ export default function ZappBuddyPicker({ onChoose }) {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-2xl w-full mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-2xl w-full mb-6">
         {ZAPP_ANIMALS.map((a, i) => (
           <motion.button
             key={a.id}
