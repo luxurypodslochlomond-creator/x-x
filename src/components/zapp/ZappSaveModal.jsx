@@ -35,7 +35,7 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
     try {
       // Save runs server-side (zappSave): re-scans the HTML for danger and strips
       // contact info from the optional first-name field before persisting.
-      const saved = await base44.functions.invoke('zappSave', {
+      const res = await base44.functions.invoke('zappSave', {
         title: appTitle || idea,
         idea,
         html,
@@ -44,6 +44,8 @@ export default function ZappSaveModal({ appTitle, html, idea, remixOf, remixInst
         remix_of: remixOf || null,
         remix_instruction: remixInstruction || null,
       });
+      // SDK returns axios-style {data}; invoke() throws on non-2xx.
+      const saved = res?.data ?? res;
       if (saved?.error) throw new Error(saved?.blocked ? "Let's try a different idea!" : 'save failed');
       const id = saved?.id;
       const link = `${window.location.origin}/Zapp?play=${id}`;

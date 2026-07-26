@@ -106,19 +106,33 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
     // drop — a kid should never see "oops" on a single hiccup, so we silently
     // retry once before ever showing the error. A safety BLOCKED is never retried.
     const attempt = async () => {
-      const result = await base44.functions.invoke('zappBuild', { idea: buildIdea });
-      if (result?.blocked) return { blocked: true, reason: result?.reason };
-      let html = result?.html || '';
-      if (!html || html.length < 200) return { fail: true };
-      // Make sure it starts clean
-      if (!html.trim().startsWith('<!DOCTYPE') && !html.trim().startsWith('<html')) {
-        const docStart = html.indexOf('<!DOCTYPE');
-        const htmlStart = html.indexOf('<html');
-        const start = docStart >= 0 ? docStart : htmlStart >= 0 ? htmlStart : -1;
-        if (start >= 0) html = html.slice(start);
+      try {
+        const res = await base44.functions.invoke('zappBuild', { idea: buildIdea });
+        // The SDK returns an axios-style object — the JSON is on .data, NOT res.
+        // Reading res.html directly silently breaks EVERY build (the bug that
+        // made ZAPP say "try again" for every idea & every character). res.data
+        // ?? res covers both current and any older SDK shape.
+        const result = res?.data ?? res;
+        if (result?.blocked) return { blocked: true, reason: result?.reason };
+        let html = result?.html || '';
+        if (!html || html.length < 200) return { fail: true };
+        // Make sure it starts clean
+        if (!html.trim().startsWith('<!DOCTYPE') && !html.trim().startsWith('<html')) {
+          const docStart = html.indexOf('<!DOCTYPE');
+          const htmlStart = html.indexOf('<html');
+          const start = docStart >= 0 ? docStart : htmlStart >= 0 ? htmlStart : -1;
+          if (start >= 0) html = html.slice(start);
+        }
+        if (!html || html.length < 200) return { fail: true };
+        return { html };
+      } catch (err) {
+        // invoke() THROWS on non-2xx — a safety BLOCK returns 400/502/500.
+        // The body is at err.response.data; surface the kind reason if it's a
+        // block, otherwise treat as a flaky network/timeout and let it retry.
+        const result = err?.response?.data ?? err?.data;
+        if (result?.blocked) return { blocked: true, reason: result?.reason };
+        return { fail: true };
       }
-      if (!html || html.length < 200) return { fail: true };
-      return { html };
     };
 
     const succeed = (html) => {
@@ -143,21 +157,14 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
 
     try {
       let res = await attempt();
-      if (res.fail) res = await attempt(); // silent retry — flaky model / network
+      if (res.fail) res = await attempt(); // one silent retry — flaky model / network
       if (res.blocked) { giveUp(res.reason || "let's try a different idea!"); return; }
       if (res.html) { succeed(res.html); return; }
       showFallback();
     } catch (err) {
-      // Network error — one silent retry before we fall back.
-      try {
-        const res = await attempt();
-        if (res.blocked) { giveUp(res.reason || "let's try a different idea!"); return; }
-        if (res.html) { succeed(res.html); return; }
-        showFallback();
-      } catch (e2) {
-        console.error('ZAPP build error:', e2);
-        showFallback();
-      }
+      // attempt() catches internally — this is a last-resort safety net.
+      console.error('ZAPP build error:', err);
+      showFallback();
     }
   };
 
