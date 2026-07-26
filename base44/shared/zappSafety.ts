@@ -55,6 +55,21 @@ A kid has typed an idea for an app they want to build. Your job:
 Return ONLY valid JSON: {"safe": true/false, "reason": "short kid-friendly reason if blocked (empty string if safe)", "sanitized_idea": "the cleaned idea to build, in the SAME language the kid wrote in"}
 No explanation. No markdown. Just the JSON.`;
 
+// Combined single-pass prompt: safety check + build in one LLM call.
+// Returns raw HTML (not JSON) to skip the large-HTML JSON-encoding overhead
+// that makes two-call builds slow enough to trip the frontend invoke timeout.
+export const COMBINED_BUILD_PROMPT = `${BUILD_SYSTEM_PROMPT}
+
+SAFETY CHECK FIRST — decide before you build:
+- If the kid's idea is UNSAFE for an 8-13 year old (realistic violence against people, weapons, sexual content, self-harm, suicide, drugs, alcohol, gambling, real money, hate, bullying, real-world dangerous instructions), or contains real personal info (full names, addresses, phones, emails, school names), do NOT build it. Output exactly one line: BLOCKED: <short, kind reason in the kid's language>
+- Otherwise, build the complete app.
+
+OUTPUT RULES — NON-NEGOTIABLE:
+- Output ONLY the complete single-file HTML app, starting with <!DOCTYPE html>. No explanation, no markdown, no wrapping in JSON. Just the raw HTML.
+- Match the kid's language for all UI text.
+
+BUILD THIS NOW:`;
+
 // Scan generated HTML for anything that could exfiltrate data, load external
 // resources, or break the kid-safety promise. Deterministic + fast — this is
 // the COPPA-relevant layer. The input guard handles content; this handles code.
