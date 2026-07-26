@@ -227,16 +227,17 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
             }}
           />
 
+          <div className="flex justify-center pb-2 pt-1">
+            <ZappVoiceInput onTranscript={(t) => { setValue(t); setIsFocused(true); }} />
+          </div>
+
           <div
             className="flex items-center justify-between px-4 pb-4 gap-3"
             style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
           >
-            <div className="flex items-center gap-3 min-w-0 flex-1">
-              <ZappVoiceInput onTranscript={(t) => { setValue(t); setIsFocused(true); }} />
-              <span className="text-white/15 text-xs font-mono truncate">
-                {value === sampleRef.current ? 'tap to change · or just press ZAPP IT' : value.length > 0 ? `${value.length} chars` : 'type · or say it · no rules'}
-              </span>
-            </div>
+            <span className="text-white/15 text-xs font-mono">
+              {value === sampleRef.current ? 'tap to change · or just press ZAPP IT' : value.length > 0 ? `${value.length} chars` : 'type anything · no rules'}
+            </span>
             <motion.button
               onClick={() => handleSubmit()}
               disabled={value.trim().length < 3}
