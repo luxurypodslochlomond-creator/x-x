@@ -51,10 +51,8 @@ KID'S IDEA: """${idea}"""`,
     }
     const sanitized = String(guard?.sanitized_idea || idea).slice(0, 500);
 
-    // 2. BUILD — generate the single-file HTML app
-    const build = await base44.asServiceRole.integrations.Core.InvokeLLM({
-      model: 'gemini_3_flash',
-      prompt: `${BUILD_SYSTEM_PROMPT}
+    // 2. BUILD — generate the single-file HTML app (retry once on a flaky short response)
+    const buildPrompt = `${BUILD_SYSTEM_PROMPT}
 
 BUILD THIS NOW: "${sanitized}"
 
@@ -67,19 +65,31 @@ CRITICAL BEFORE YOU OUTPUT:
 - FOR GAMES: use a COMPACT D-pad (small clustered arrows in one corner), NOT big full-width buttons. Movement controls must be tiny. The play area is the star, not the buttons.
 
 Return ONLY valid JSON: {"html": "<complete single-file HTML app here>"}
-No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE html>.`,
-      response_json_schema: {
-        type: 'object',
-        properties: { html: { type: 'string' } },
-        required: ['html'],
-      },
-    });
+No explanation. No markdown. Just the JSON. The HTML MUST start with <!DOCTYPE html>.`;
 
-    let html = '';
-    if (build?.html) {
-      html = build.html;
-    } else if (typeof build === 'string') {
-      try { html = JSON.parse(build)?.html || build; } catch { html = build; }
+    const runBuild = async () => {
+      const r = await base44.asServiceRole.integrations.Core.InvokeLLM({
+        model: 'gemini_3_flash',
+        prompt: buildPrompt,
+        response_json_schema: {
+          type: 'object',
+          properties: { html: { type: 'string' } },
+          required: ['html'],
+        },
+      });
+      if (r?.html) return r.html;
+      if (typeof r === 'string') {
+        try { return JSON.parse(r)?.html || r; } catch { return r; }
+      }
+      return '';
+    };
+
+    let html = await runBuild();
+    // The model occasionally returns a truncated/empty first response —
+    // one silent retry saves the kid from a discouraging "try again".
+    if (!html || html.length < 200) {
+      console.warn('[zappBuild] short first response, retrying…');
+      html = await runBuild();
     }
 
     if (!html || html.length < 200) {
