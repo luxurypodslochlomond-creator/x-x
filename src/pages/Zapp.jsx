@@ -41,6 +41,7 @@ export default function Zapp() {
   const [directPlay, setDirectPlay] = useState(null); // ZappCreation for direct play via URL
   const [buddyId, setBuddyIdState] = useState(() => getBuddyId()); // device-local build buddy
   const [showPicker, setShowPicker] = useState(false);
+  const [pickerDismissed, setPickerDismissed] = useState(false); // so "skip for now" actually dismisses
   const [blueprint, setBlueprint] = useState(null); // kid's decomposition notes — transient, never stored
 
   const buddy = getAnimal(buddyId);
@@ -52,6 +53,7 @@ export default function Zapp() {
   const handleBuddyChoose = (id) => {
     if (id) { persistBuddy(id); setBuddyIdState(id); }
     setShowPicker(false);
+    setPickerDismissed(true);
   };
 
   // Handle ?play=ID in URL — load and play that app directly
@@ -221,7 +223,7 @@ export default function Zapp() {
 
           {buddy && (
             <motion.button
-              onClick={() => setShowPicker(true)}
+              onClick={() => { setPickerDismissed(false); setShowPicker(true); }}
               whileTap={{ scale: 0.92 }}
               className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
               style={{ background: `${buddy.color}15`, border: `1px solid ${buddy.color}40` }}
@@ -363,7 +365,7 @@ export default function Zapp() {
 
       {/* Build Buddy Picker — first visit, or when kid taps their buddy to change */}
       <AnimatePresence>
-        {(!buddyId || showPicker) && (
+        {(!buddyId || showPicker) && !pickerDismissed && (
           <ZappBuddyPicker key="picker" onChoose={handleBuddyChoose} />
         )}
       </AnimatePresence>
