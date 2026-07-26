@@ -12,6 +12,7 @@ import { getAnimal } from '@/components/zapp/ZappAnimals';
 import { getBuddyId, setBuddyId as persistBuddy, rememberBuild, getBuildCount } from '@/components/zapp/ZappAnimalMemory';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 
 const Bolt = ({ size = 28 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
@@ -143,6 +144,7 @@ export default function Zapp() {
   };
 
   return (
+    <GlobalErrorBoundary>
     <div
       className="text-white overflow-hidden"
       style={{ background: '#0a0a0f', fontFamily: "'Inter', system-ui, sans-serif", height: '100dvh', display: 'flex', flexDirection: 'column' }}
@@ -366,5 +368,6 @@ export default function Zapp() {
         )}
       </AnimatePresence>
     </div>
+    </GlobalErrorBoundary>
   );
 }
