@@ -224,6 +224,41 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
             />
           ))}
 
+          {/* Warm outer aura — adds soul so it never reads cold/techy */}
+          <motion.div
+            className="absolute rounded-full pointer-events-none"
+            style={{ width: 320, height: 320, background: 'radial-gradient(circle, rgba(251,191,36,0.10) 0%, transparent 65%)' }}
+            animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+
+          {/* Slow rotating conic shimmer ring — depth + richness */}
+          <motion.div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: 184, height: 184,
+              background: 'conic-gradient(from 0deg, rgba(167,139,250,0) 0deg, rgba(167,139,250,0.55) 40deg, rgba(244,114,182,0.65) 90deg, rgba(96,165,250,0.55) 140deg, rgba(251,191,36,0.5) 200deg, rgba(244,114,182,0.55) 260deg, rgba(167,139,250,0) 320deg, rgba(167,139,250,0) 360deg)',
+              maskImage: 'radial-gradient(circle, transparent 56%, black 58%, black 60%, transparent 62%)',
+              WebkitMaskImage: 'radial-gradient(circle, transparent 56%, black 58%, black 60%, transparent 62%)',
+              filter: 'blur(2px)',
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+          />
+
+          {/* Orbiting sparkle dots — travels around the bolt continuously */}
+          {['#a78bfa', '#f472b6', '#fbbf24'].map((c, i) => (
+            <motion.div
+              key={`orbit-${i}`}
+              className="absolute pointer-events-none"
+              style={{ width: 200, height: 200, left: '50%', top: '50%', marginLeft: -100, marginTop: -100 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 6 + i * 1.5, repeat: Infinity, ease: 'linear' }}
+            >
+              <div style={{ position: 'absolute', top: -5, left: '50%', marginLeft: -5, width: 10, height: 10, borderRadius: '50%', background: c, boxShadow: `0 0 14px ${c}` }} />
+            </motion.div>
+          ))}
+
           {/* Spark particles */}
           <AnimatePresence>
             {sparks.map(spark => (
@@ -317,13 +352,20 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
         <div className="w-full max-w-[280px] space-y-1.5">
           <div className="w-full h-1.5 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }}>
             <motion.div
-              className="h-full rounded-full"
+              className="h-full rounded-full relative overflow-hidden"
               style={{
                 background: 'linear-gradient(90deg, #7c3aed, #db2777, #fbbf24)',
                 width: `${Math.min((buildTime / TARGET_TIME) * 100, 95)}%`,
               }}
               transition={{ duration: 0.4 }}
-            />
+            >
+              <motion.div
+                className="absolute inset-y-0"
+                style={{ width: '40%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)' }}
+                animate={{ x: ['-120%', '320%'] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </motion.div>
           </div>
           <div className="flex justify-between text-white/20 text-[10px] font-mono">
             <span>{buildTime}s of magic</span>
@@ -477,13 +519,20 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Flash overlay on reveal */}
+            {/* Cinematic reveal — bloom + warm light + sweep */}
             <motion.div
-              className="absolute inset-0 pointer-events-none z-10"
-              style={{ background: 'radial-gradient(circle at center, rgba(167,139,250,0.4) 0%, transparent 70%)' }}
+              className="absolute inset-0 pointer-events-none z-20"
+              style={{ background: 'radial-gradient(circle at center, rgba(255,255,255,0.85) 0%, rgba(167,139,250,0.5) 25%, rgba(219,39,119,0.25) 50%, transparent 75%)' }}
               initial={{ opacity: 1 }}
               animate={{ opacity: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              transition={{ duration: 0.9, delay: 0.05, ease: 'easeOut' }}
+            />
+            <motion.div
+              className="absolute inset-0 pointer-events-none z-20"
+              style={{ background: 'linear-gradient(105deg, transparent 35%, rgba(251,191,36,0.5) 50%, transparent 65%)' }}
+              initial={{ x: '-60%' }}
+              animate={{ x: '120%' }}
+              transition={{ duration: 0.7, delay: 0.15, ease: 'easeInOut' }}
             />
             <motion.iframe
               initial={{ opacity: 0, scale: 0.97 }}
