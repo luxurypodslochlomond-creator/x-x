@@ -4,14 +4,14 @@ import { base44 } from '@/api/base44Client';
 import ZappGeometricIcon from '@/components/zapp/ZappGeometricIcon';
 
 const BUILD_STAGES = [
-  { shape: 'pulse', text: 'warming up the AI engine...' },
-  { shape: 'spectrum', text: 'designing the layout...' },
-  { shape: 'gear', text: 'coding the app logic...' },
-  { shape: 'waveform', text: 'composing sound effects...' },
-  { shape: 'sparkle', text: 'adding colourful sparkles...' },
-  { shape: 'diamond', text: 'polishing the visuals...' },
-  { shape: 'burst', text: 'hooking up all the buttons...' },
-  { shape: 'pulse', text: 'checking everything works...' },
+  { shape: 'pulse', text: 'warming up...' },
+  { shape: 'spectrum', text: 'drawing it out...' },
+  { shape: 'gear', text: 'wiring it up...' },
+  { shape: 'waveform', text: 'making sounds...' },
+  { shape: 'sparkle', text: 'adding sparkles...' },
+  { shape: 'diamond', text: 'making it shiny...' },
+  { shape: 'burst', text: 'connecting buttons...' },
+  { shape: 'pulse', text: 'checking it works...' },
   { shape: 'spectrum', text: 'final touches...' },
   { shape: 'sparkle', text: 'almost ready...' },
 ];
@@ -106,13 +106,13 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
       clearInterval(timerRef.current);
 
       if (result?.blocked) {
-        setError(result?.reason || "Let's try a different idea!");
+        setError(result?.reason || "let's try a different idea!");
         return;
       }
 
       let html = result?.html || '';
       if (!html || html.length < 200) {
-        throw new Error("Hmm, that one didn't build — tap to try again!");
+        throw new Error("let's give it another go — tap the bolt");
       }
 
       // Make sure it starts clean
@@ -135,7 +135,7 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
       clearInterval(stageRef.current);
       clearInterval(timerRef.current);
       console.error('ZAPP build error:', err);
-      setError(err?.message || 'Something went wrong — tap to try again!');
+      setError(err?.message || "let's try that again!");
     }
   };
 
@@ -175,7 +175,7 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
           <ZappGeometricIcon shape="alert" size={80} color="#f59e0b" accent="#fbbf24" />
         </motion.div>
         <div className="text-center">
-          <p className="text-white font-black text-2xl mb-2">Oops! Something went wrong</p>
+          <p className="text-white font-black text-2xl mb-2">oops! that one got away</p>
           <p className="text-white/50 text-base">{error}</p>
         </div>
         <div className="flex flex-col items-center gap-3">
@@ -195,7 +195,7 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
             onClick={onReset}
             className="text-white/25 hover:text-white/50 text-sm transition-colors"
           >
-            start over with a new idea
+            start fresh
           </button>
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
   if (!isDone) {
     const stage = BUILD_STAGES[stageIndex];
     return (
-      <div className="flex flex-col items-center justify-center gap-8 px-6" style={{ height: '100%', minHeight: '60vh' }}>
+      <div className="flex flex-col items-center justify-center gap-6 px-6" style={{ height: '100%', minHeight: '60vh' }}>
 
         {/* Interactive bolt — tap for sparks */}
         <div className="relative flex items-center justify-center">
@@ -246,18 +246,6 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
             transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
           />
 
-          {/* Orbiting sparkle dots — travels around the bolt continuously */}
-          {['#a78bfa', '#f472b6', '#fbbf24'].map((c, i) => (
-            <motion.div
-              key={`orbit-${i}`}
-              className="absolute pointer-events-none"
-              style={{ width: 200, height: 200, left: '50%', top: '50%', marginLeft: -100, marginTop: -100 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 6 + i * 1.5, repeat: Infinity, ease: 'linear' }}
-            >
-              <div style={{ position: 'absolute', top: -5, left: '50%', marginLeft: -5, width: 10, height: 10, borderRadius: '50%', background: c, boxShadow: `0 0 14px ${c}` }} />
-            </motion.div>
-          ))}
 
           {/* Spark particles */}
           <AnimatePresence>
@@ -325,26 +313,22 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
         </div>
 
         {/* Stage text */}
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2.5">
           <AnimatePresence mode="wait">
             <motion.div
               key={stageIndex}
-              initial={{ opacity: 0, y: 12, scale: 0.95 }}
+              initial={{ opacity: 0, y: 10, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.95 }}
-              className="flex items-center justify-center gap-4"
+              exit={{ opacity: 0, y: -10, scale: 0.96 }}
+              className="flex items-center justify-center gap-2.5"
             >
-              <ZappGeometricIcon shape={stage.shape} size={40} color="#a78bfa" accent="#f472b6" animate={true} />
-              <span className="text-white font-black text-xl">{stage.text}</span>
+              <ZappGeometricIcon shape={stage.shape} size={34} color="#a78bfa" accent="#f472b6" animate={true} />
+              <span className="text-white font-black text-lg">{stage.text}</span>
             </motion.div>
           </AnimatePresence>
 
           <p className="text-white/30 text-sm">
-            building: <span className="text-violet-300 font-bold">"{idea}"</span>
-          </p>
-
-          <p className="text-white/20 text-xs font-mono">
-            {buildTime}s of magic cooking
+            "<span className="text-violet-300 font-bold">{idea.length > 44 ? idea.slice(0, 44) + '…' : idea}</span>"
           </p>
         </div>
 

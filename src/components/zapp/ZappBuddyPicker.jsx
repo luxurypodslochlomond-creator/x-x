@@ -36,7 +36,7 @@ export default function ZappBuddyPicker({ onChoose }) {
           who should help you build?
         </h1>
         <p className="text-white/40 text-sm leading-relaxed">
-          Pick a buddy. They change how your apps feel — and they remember you next time, right here on your device.
+          they change how your apps feel —<br />and remember you next time.<br /><span className="text-white/30">only on your device, not ours.</span>
         </p>
       </motion.div>
 
