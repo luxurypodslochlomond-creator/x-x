@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
@@ -29,6 +29,53 @@ const money = (n, cur) => {
   const sym = (cur === 'USD' ? '$' : cur === 'EUR' ? '€' : '£');
   return `${sym}${Number(n).toLocaleString()}`;
 };
+
+const verdictCache = new Map();
+function useGigVerdict(offer) {
+  const key = offer?.id;
+  const [state, setState] = useState({ loading: false, verdict: null, flags: [] });
+  useEffect(() => {
+    if (!key) return;
+    if (verdictCache.has(key)) { setState(verdictCache.get(key)); return; }
+    let cancelled = false;
+    setState({ loading: true, verdict: null, flags: [] });
+    (async () => {
+      try {
+        const prompt = `You are a calm, honest artist-manager's assistant. A gig offer just came in. Give ONE short sentence in plain English on whether it's worth taking (fee vs a typical UK gig, how soon it is, any obvious concern). Then list 0-2 red flags, each under 5 words. No hype, no emoji. Offer: venue="${offer.venue || offer.title || ''}", date="${offer.date_start || offer.date || ''}", fee=${offer.fee == null ? 'unknown' : offer.fee} ${offer.currency || 'GBP'}, promoter="${offer.promoter_name || offer.promoter || ''}". Reply as JSON {"verdict": string, "flags": string[]}.`;
+        const res = await base44.integrations.Core.InvokeLLM({
+          prompt,
+          response_json_schema: { type: 'object', properties: { verdict: { type: 'string' }, flags: { type: 'array', items: { type: 'string' } } } },
+        });
+        if (cancelled) return;
+        const v = { loading: false, verdict: res?.verdict || null, flags: Array.isArray(res?.flags) ? res.flags.slice(0, 2) : [] };
+        verdictCache.set(key, v);
+        setState(v);
+      } catch {
+        if (!cancelled) setState({ loading: false, verdict: null, flags: [] });
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [key]);
+  return state;
+}
+
+function OfferVerdict({ offer }) {
+  const v = useGigVerdict(offer);
+  if (!v.loading && !v.verdict && v.flags.length === 0) return null;
+  return (
+    <div className="mt-1.5">
+      {v.loading && <p className="text-xs italic" style={{ color: MUTED }}>reading the offer…</p>}
+      {v.verdict && <p className="text-xs leading-snug" style={{ color: SOFT }}>{v.verdict}</p>}
+      {v.flags.length > 0 && (
+        <div className="flex flex-wrap gap-1 mt-1">
+          {v.flags.map((f, i) => (
+            <span key={i} className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: DANGER_SOFT, color: DANGER }}>{f}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function CB51Stream({ artistId, artistName }) {
   const [showAdd, setShowAdd] = useState(false);
@@ -191,6 +238,7 @@ function StreamCard({ item, busy, act, artistId }) {
               {data.date_start || data.date}{fee ? ` · ${fee}` : ''}
             </p>
             {data.promoter_name && <p className="text-xs mt-1" style={{ color: MUTED }}>{data.promoter_name}</p>}
+            <OfferVerdict offer={data} />
           </div>
           {d !== null && (
             <span className="text-[11px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap"
