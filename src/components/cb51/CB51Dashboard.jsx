@@ -61,7 +61,7 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
   };
 
   const score = ai?.score;
-  const scoreCol = score >= 75 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444';
+  const scoreCol = score >= 75 ? '#059669' : score >= 50 ? '#d97706' : '#dc2626';
   const dateStr = gig.date_start || gig.date;
 
   return (
@@ -69,28 +69,28 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
       className="rounded-2xl overflow-hidden"
-      style={{ border: '1.5px solid rgba(6,182,212,0.4)', background: '#0e1420', boxShadow: '0 4px 24px rgba(6,182,212,0.12)' }}
+      style={{ border: '1.5px solid rgba(6,182,212,0.4)', background: '#ffffff', boxShadow: '0 4px 24px rgba(6,182,212,0.12)' }}
     >
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 py-2.5"
         style={{ background: 'rgba(6,182,212,0.06)', borderBottom: '1px solid rgba(6,182,212,0.1)' }}>
-        <span className="text-[10px] font-black tracking-[0.22em]" style={{ color: '#06b6d4' }}>OFFER IN</span>
-        <button onClick={expand} className="p-1 active:opacity-50 transition-opacity" style={{ color: '#06b6d4' }}>
+        <span className="text-[10px] font-black tracking-[0.22em]" style={{ color: '#0891b2' }}>OFFER IN</span>
+        <button onClick={expand} className="p-1 active:opacity-50 transition-opacity" style={{ color: '#0891b2' }}>
           <Chevron className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
         </button>
       </div>
 
       {/* Core info */}
       <div className="px-4 pt-4 pb-3">
-        <p className="font-black text-xl leading-tight" style={{ color: '#f0f4ff' }}>{gig.venue}</p>
-        <p className="text-sm mt-1.5 font-mono" style={{ color: '#475569' }}>
+        <p className="font-black text-xl leading-tight" style={{ color: '#1c1917' }}>{gig.venue}</p>
+        <p className="text-sm mt-1.5 font-mono" style={{ color: '#a8a29e' }}>
           {gig.city}{gig.city && dateStr ? ' · ' : ''}{dateStr}
         </p>
         {gig.fee > 0 && (
-          <p className="text-base font-black mt-2" style={{ color: '#10b981' }}>£{gig.fee.toLocaleString()}</p>
+          <p className="text-base font-black mt-2" style={{ color: '#059669' }}>£{gig.fee.toLocaleString()}</p>
         )}
         {gig.promoter_name && (
-          <p className="text-xs mt-1.5" style={{ color: '#334155' }}>from {gig.promoter_name}</p>
+          <p className="text-xs mt-1.5" style={{ color: '#78716c' }}>from {gig.promoter_name}</p>
         )}
       </div>
 
@@ -106,7 +106,7 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
           >
             <div className="px-4 py-4">
               {loading ? (
-                <div className="flex items-center gap-2" style={{ color: '#475569' }}>
+                <div className="flex items-center gap-2" style={{ color: '#a8a29e' }}>
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />
                   <span className="text-xs font-mono">Reading the offer…</span>
                 </div>
@@ -137,7 +137,7 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
                     </div>
                   )}
                   {ai.avgFee && (
-                    <p className="text-xs" style={{ color: '#334155' }}>
+                    <p className="text-xs" style={{ color: '#78716c' }}>
                       avg fee on record: £{ai.avgFee.toLocaleString()}
                     </p>
                   )}
@@ -154,7 +154,7 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
           onClick={() => onReject(gig)}
           disabled={confirming}
           className="py-4 font-black text-sm tracking-widest active:opacity-40 disabled:opacity-30 transition-opacity"
-          style={{ color: '#ef4444', borderRight: '1px solid rgba(6,182,212,0.1)' }}
+          style={{ color: '#dc2626', borderRight: '1px solid rgba(6,182,212,0.1)' }}
         >
           PASS
         </button>
@@ -162,7 +162,7 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
           onClick={() => onConfirm(gig)}
           disabled={confirming}
           className="py-4 font-black text-sm tracking-widest active:opacity-40 disabled:opacity-30 transition-opacity"
-          style={{ color: '#10b981' }}
+          style={{ color: '#059669' }}
         >
           {confirming ? '…' : 'CONFIRM'}
         </button>
@@ -173,11 +173,11 @@ function OfferCard({ gig, onConfirm, onReject, confirming, artistId }) {
 
 // ─── NAV SECTIONS ─────────────────────────────────────────────────────────────
 const SECTIONS = [
-  { id: 'gigs',     label: 'Gigs',    color: '#06b6d4', Icon: Radio },
-  { id: 'inbox',   label: 'Inbox',   color: '#f97316', Icon: Mail },
-  { id: 'tasks',   label: 'Tasks',   color: '#ef4444', Icon: CheckSquare },
-  { id: 'finance', label: 'Money',   color: '#10b981', Icon: PoundSterling },
-  { id: 'calendar',label: 'Shows',   color: '#f59e0b', Icon: CalendarDays },
+  { id: 'gigs',     label: 'Gigs',    color: '#0891b2', Icon: Radio },
+  { id: 'inbox',   label: 'Inbox',   color: '#ea580c', Icon: Mail },
+  { id: 'tasks',   label: 'Tasks',   color: '#dc2626', Icon: CheckSquare },
+  { id: 'finance', label: 'Money',   color: '#059669', Icon: PoundSterling },
+  { id: 'calendar',label: 'Shows',   color: '#d97706', Icon: CalendarDays },
 ];
 
 // ─── MAIN DASHBOARD ───────────────────────────────────────────────────────────
@@ -261,13 +261,13 @@ export default function CB51Dashboard({ artistId, artistName }) {
   if (active) {
     const sec = SECTIONS.find(s => s.id === active);
     return (
-      <div className="min-h-screen" style={{ background: '#070a0f', color: '#f0f4ff' }}>
+      <div className="min-h-screen" style={{ background: '#f7f5f0', color: '#1c1917' }}>
         <button
           onClick={() => setActive(null)}
           className="flex items-center gap-2 px-4 pt-5 pb-3 active:opacity-50 transition-opacity"
           style={{ WebkitTapHighlightColor: 'transparent' }}
         >
-          <Back className="w-4 h-4" style={{ color: '#334155' }} />
+          <Back className="w-4 h-4" style={{ color: '#78716c' }} />
           <span className="text-sm font-black tracking-wide" style={{ color: sec?.color }}>{sec?.label}</span>
         </button>
         <motion.div key={active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.1 }}>
@@ -283,21 +283,23 @@ export default function CB51Dashboard({ artistId, artistName }) {
 
   // ── Greeting ──────────────────────────────────────────────────────────────
   const hour = new Date().getHours();
-  const greeting = hour < 5 ? 'Still up?' : hour < 12 ? 'Morning.' : hour < 17 ? 'Afternoon.' : hour < 21 ? 'Evening.' : 'Late one.';
+  const firstName = artistName ? artistName.split(' ')[0] : null;
+  const greetWord = hour < 5 ? 'Still up' : hour < 12 ? 'Morning' : hour < 17 ? 'Afternoon' : hour < 21 ? 'Evening' : 'Late one';
+  const greeting = firstName ? `${greetWord}, ${firstName}` : greetWord;
 
   return (
-    <div className="min-h-screen flex flex-col select-none" style={{ background: '#070a0f', color: '#f0f4ff', paddingBottom: 90 }}>
+    <div className="min-h-screen flex flex-col select-none" style={{ background: '#f7f5f0', color: '#1c1917', paddingBottom: 90 }}>
 
       {/* ── GREETING ── */}
       <div className="px-5 pt-8 pb-5 flex items-center justify-between">
         <div>
-          <p className="font-black text-2xl tracking-tight" style={{ color: '#f0f4ff' }}>{greeting}</p>
-          <p className="text-sm mt-1 font-mono" style={{ color: '#334155' }}>
+          <p className="font-black text-2xl tracking-tight" style={{ color: '#1c1917' }}>{greeting}.</p>
+          <p className="text-sm mt-1 font-mono" style={{ color: '#78716c' }}>
             {pending.length > 0
-              ? `${pending.length} offer${pending.length > 1 ? 's' : ''} waiting`
+              ? `${pending.length} offer${pending.length > 1 ? 's' : ''} to look at`
               : upcoming.length > 0
-              ? `${upcoming.length} show${upcoming.length > 1 ? 's' : ''} confirmed`
-              : 'Nothing waiting.'}
+              ? `${upcoming.length} show${upcoming.length > 1 ? 's' : ''} locked in`
+              : 'All caught up.'}
           </p>
         </div>
         {pending.length > 0 && (
@@ -305,7 +307,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className="w-10 h-10 rounded-full flex items-center justify-center font-black text-black text-sm"
-            style={{ background: '#06b6d4' }}
+            style={{ background: '#0891b2' }}
           >
             {pending.length}
           </motion.div>
@@ -325,7 +327,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
           {pending.length > 1 && (
             <button onClick={() => setActive('gigs')}
               className="w-full text-center py-2 text-xs font-black active:opacity-50 transition-opacity"
-              style={{ color: '#06b6d4' }}>
+              style={{ color: '#0891b2' }}>
               +{pending.length - 1} more offer{pending.length > 2 ? 's' : ''} →
             </button>
           )}
@@ -337,40 +339,40 @@ export default function CB51Dashboard({ artistId, artistName }) {
         <button
           onClick={() => setActive('calendar')}
           className="w-full text-left rounded-2xl p-5 active:scale-[0.98] transition-transform"
-          style={{ background: '#0e1420', border: 'rgba(6,182,212,0.12) 1px solid', WebkitTapHighlightColor: 'transparent' }}
+          style={{ background: '#ffffff', border: 'rgba(6,182,212,0.12) 1px solid', WebkitTapHighlightColor: 'transparent' }}
         >
-          <p className="text-[10px] font-black tracking-widest uppercase mb-3" style={{ color: '#334155' }}>Next Show</p>
+          <p className="text-[10px] font-black tracking-widest uppercase mb-3" style={{ color: '#78716c' }}>Next Show</p>
           {nextShow ? (
             <div className="flex items-end justify-between gap-4">
               <div className="flex-1 min-w-0">
-                <p className="font-black text-2xl leading-tight break-words" style={{ color: '#f0f4ff' }}>
+                <p className="font-black text-2xl leading-tight break-words" style={{ color: '#1c1917' }}>
                   {nextShow.venue}
                 </p>
                 {nextShow.city && (
-                  <p className="text-sm mt-1" style={{ color: '#475569' }}>{nextShow.city}</p>
+                  <p className="text-sm mt-1" style={{ color: '#a8a29e' }}>{nextShow.city}</p>
                 )}
                 {nextDate && (
-                  <p className="text-xs mt-2 font-mono" style={{ color: '#334155' }}>
+                  <p className="text-xs mt-2 font-mono" style={{ color: '#78716c' }}>
                     {nextDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
                   </p>
                 )}
                 {nextShow.fee > 0 && (
-                  <p className="text-sm font-black mt-2" style={{ color: '#10b981' }}>£{nextShow.fee.toLocaleString()}</p>
+                  <p className="text-sm font-black mt-2" style={{ color: '#059669' }}>£{nextShow.fee.toLocaleString()}</p>
                 )}
               </div>
               <div className="flex-shrink-0 rounded-xl px-4 py-3 text-center"
                 style={{ background: 'rgba(6,182,212,0.06)', border: '1px solid rgba(6,182,212,0.15)' }}>
                 <p className="font-black text-4xl leading-none tabular-nums"
-                  style={{ color: daysUntil !== null && daysUntil <= 7 ? '#f59e0b' : '#06b6d4' }}>
+                  style={{ color: daysUntil !== null && daysUntil <= 7 ? '#d97706' : '#0891b2' }}>
                   {daysUntil ?? '—'}
                 </p>
-                <p className="text-[9px] font-mono tracking-widest mt-1" style={{ color: '#334155' }}>DAYS</p>
+                <p className="text-[9px] font-mono tracking-widest mt-1" style={{ color: '#78716c' }}>DAYS</p>
               </div>
             </div>
           ) : (
             <div>
-              <p className="font-bold text-base" style={{ color: '#475569' }}>Nothing booked yet.</p>
-              <p className="text-sm mt-1" style={{ color: '#1e293b' }}>Forward a gig offer email to start.</p>
+              <p className="font-bold text-base" style={{ color: '#a8a29e' }}>Nothing booked yet.</p>
+              <p className="text-sm mt-1" style={{ color: '#a8a29e' }}>Forward a gig offer email to start.</p>
             </div>
           )}
         </button>
@@ -382,25 +384,25 @@ export default function CB51Dashboard({ artistId, artistName }) {
         {/* Shows */}
         <button onClick={() => setActive('calendar')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
-          style={{ background: '#0e1420', border: '1px solid rgba(6,182,212,0.2)' }}>
-          <Radio className="w-5 h-5 mb-3" style={{ color: '#06b6d4' }} />
-          <p className="font-black text-3xl leading-none tabular-nums" style={{ color: '#f0f4ff' }}>{upcoming.length}</p>
-          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#334155' }}>Shows ahead</p>
+          style={{ background: '#ffffff', border: '1px solid rgba(6,182,212,0.2)' }}>
+          <Radio className="w-5 h-5 mb-3" style={{ color: '#0891b2' }} />
+          <p className="font-black text-3xl leading-none tabular-nums" style={{ color: '#1c1917' }}>{upcoming.length}</p>
+          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#78716c' }}>Shows ahead</p>
         </button>
 
         {/* Tasks */}
         <button onClick={() => setActive('tasks')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
           style={{
-            background: '#0e1420',
+            background: '#ffffff',
             border: urgentTasks.length > 0 ? '1px solid rgba(239,68,68,0.3)' : '1px solid rgba(6,182,212,0.12)'
           }}>
-          <CheckSquare className="w-5 h-5 mb-3" style={{ color: urgentTasks.length > 0 ? '#ef4444' : '#334155' }} />
+          <CheckSquare className="w-5 h-5 mb-3" style={{ color: urgentTasks.length > 0 ? '#dc2626' : '#78716c' }} />
           <p className="font-black text-3xl leading-none tabular-nums"
-            style={{ color: urgentTasks.length > 0 ? '#ef4444' : '#f0f4ff' }}>
+            style={{ color: urgentTasks.length > 0 ? '#dc2626' : '#1c1917' }}>
             {openTasks.length}
           </p>
-          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#334155' }}>
+          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#78716c' }}>
             {urgentTasks.length > 0 ? `${urgentTasks.length} urgent` : 'Open tasks'}
           </p>
         </button>
@@ -408,27 +410,27 @@ export default function CB51Dashboard({ artistId, artistName }) {
         {/* Money */}
         <button onClick={() => setActive('finance')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
-          style={{ background: '#0e1420', border: '1px solid rgba(16,185,129,0.2)' }}>
-          <PoundSterling className="w-5 h-5 mb-3" style={{ color: '#10b981' }} />
-          <p className="font-black text-3xl leading-none tabular-nums" style={{ color: '#f0f4ff' }}>
+          style={{ background: '#ffffff', border: '1px solid rgba(16,185,129,0.2)' }}>
+          <PoundSterling className="w-5 h-5 mb-3" style={{ color: '#059669' }} />
+          <p className="font-black text-3xl leading-none tabular-nums" style={{ color: '#1c1917' }}>
             £{totalBooked > 0 ? (totalBooked >= 1000 ? `${(totalBooked / 1000).toFixed(1)}k` : totalBooked.toLocaleString()) : '0'}
           </p>
-          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#334155' }}>Booked value</p>
+          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#78716c' }}>Booked value</p>
         </button>
 
         {/* Inbox */}
         <button onClick={() => setActive('inbox')}
           className="rounded-2xl p-4 text-left active:scale-95 transition-transform"
           style={{
-            background: '#0e1420',
+            background: '#ffffff',
             border: messages.length > 0 ? '1px solid rgba(249,115,22,0.3)' : '1px solid rgba(6,182,212,0.12)'
           }}>
-          <Mail className="w-5 h-5 mb-3" style={{ color: messages.length > 0 ? '#f97316' : '#334155' }} />
+          <Mail className="w-5 h-5 mb-3" style={{ color: messages.length > 0 ? '#ea580c' : '#78716c' }} />
           <p className="font-black text-3xl leading-none tabular-nums"
-            style={{ color: messages.length > 0 ? '#f97316' : '#f0f4ff' }}>
+            style={{ color: messages.length > 0 ? '#ea580c' : '#1c1917' }}>
             {messages.length}
           </p>
-          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#334155' }}>Messages</p>
+          <p className="text-xs mt-1.5 font-semibold" style={{ color: '#78716c' }}>Messages</p>
         </button>
       </div>
 
@@ -436,8 +438,8 @@ export default function CB51Dashboard({ artistId, artistName }) {
       {upcoming.slice(1, 4).length > 0 && (
         <div className="px-4 mb-3">
           <div className="rounded-2xl overflow-hidden"
-            style={{ background: '#0e1420', border: '1px solid rgba(6,182,212,0.1)' }}>
-            <p className="text-[10px] font-black tracking-widest uppercase px-4 pt-4 pb-2" style={{ color: '#334155' }}>
+            style={{ background: '#ffffff', border: '1px solid rgba(6,182,212,0.1)' }}>
+            <p className="text-[10px] font-black tracking-widest uppercase px-4 pt-4 pb-2" style={{ color: '#78716c' }}>
               Coming Up
             </p>
             {upcoming.slice(1, 4).map((gig, i) => {
@@ -448,14 +450,14 @@ export default function CB51Dashboard({ artistId, artistName }) {
                   className="w-full flex items-center justify-between px-4 py-3 text-left active:bg-white/[0.02] transition-colors"
                   style={{ borderTop: '1px solid rgba(6,182,212,0.07)' }}>
                   <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#10b981' }} />
+                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#059669' }} />
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: '#f0f4ff' }}>{gig.venue}</p>
-                      {gig.city && <p className="text-xs" style={{ color: '#334155' }}>{gig.city}</p>}
+                      <p className="text-sm font-semibold" style={{ color: '#1c1917' }}>{gig.venue}</p>
+                      {gig.city && <p className="text-xs" style={{ color: '#78716c' }}>{gig.city}</p>}
                     </div>
                   </div>
                   {days !== null && (
-                    <span className="text-xs font-mono tabular-nums" style={{ color: '#475569' }}>{days}d</span>
+                    <span className="text-xs font-mono tabular-nums" style={{ color: '#a8a29e' }}>{days}d</span>
                   )}
                 </button>
               );
@@ -468,20 +470,20 @@ export default function CB51Dashboard({ artistId, artistName }) {
       {urgentTasks.length > 0 && (
         <div className="px-4 mb-3">
           <div className="rounded-2xl overflow-hidden"
-            style={{ background: '#0e1420', border: '1px solid rgba(239,68,68,0.15)' }}>
-            <p className="text-[10px] font-black tracking-widest uppercase px-4 pt-4 pb-2" style={{ color: '#334155' }}>
+            style={{ background: '#ffffff', border: '1px solid rgba(239,68,68,0.15)' }}>
+            <p className="text-[10px] font-black tracking-widest uppercase px-4 pt-4 pb-2" style={{ color: '#78716c' }}>
               Needs Attention
             </p>
             {urgentTasks.slice(0, 3).map(task => (
               <button key={task.id} onClick={() => setActive('tasks')}
                 className="w-full flex items-center gap-3 px-4 py-3 text-left active:bg-white/[0.02] transition-colors"
                 style={{ borderTop: '1px solid rgba(239,68,68,0.08)' }}>
-                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#ef4444' }} />
-                <p className="text-sm flex-1 truncate font-semibold" style={{ color: '#f0f4ff' }}>{task.title}</p>
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#dc2626' }} />
+                <p className="text-sm flex-1 truncate font-semibold" style={{ color: '#1c1917' }}>{task.title}</p>
                 <span className="text-[10px] font-black px-2 py-0.5 rounded-full flex-shrink-0"
                   style={{
                     background: task.priority === 'urgent' ? 'rgba(239,68,68,0.1)' : 'rgba(245,158,11,0.1)',
-                    color: task.priority === 'urgent' ? '#ef4444' : '#f59e0b'
+                    color: task.priority === 'urgent' ? '#dc2626' : '#d97706'
                   }}>
                   {task.priority?.toUpperCase()}
                 </span>
@@ -494,9 +496,9 @@ export default function CB51Dashboard({ artistId, artistName }) {
       {/* ── BOTTOM NAV ── */}
       <div className="fixed bottom-0 left-0 right-0 z-10"
         style={{
-          background: 'rgba(7,10,15,0.97)',
+          background: 'rgba(247,245,240,0.97)',
           backdropFilter: 'blur(24px)',
-          borderTop: '1px solid rgba(6,182,212,0.15)',
+          borderTop: '1px solid rgba(0,0,0,0.06)',
           paddingBottom: 'env(safe-area-inset-bottom)'
         }}>
         <div className="flex">
@@ -516,7 +518,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
                 )}
                 <div className="relative">
                   <sec.Icon className="w-5 h-5"
-                    style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.18)' }} />
+                    style={{ color: hasAlert ? sec.color : 'rgba(120,113,108,0.45)' }} />
                   {b > 0 && (
                     <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 rounded-full text-black text-[8px] font-black flex items-center justify-center"
                       style={{ background: sec.color }}>
@@ -525,7 +527,7 @@ export default function CB51Dashboard({ artistId, artistName }) {
                   )}
                 </div>
                 <span className="text-[10px] font-semibold"
-                  style={{ color: hasAlert ? sec.color : 'rgba(255,255,255,0.18)' }}>
+                  style={{ color: hasAlert ? sec.color : 'rgba(120,113,108,0.45)' }}>
                   {sec.label}
                 </span>
               </button>
