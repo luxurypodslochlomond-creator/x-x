@@ -245,8 +245,15 @@ export default function CB51Page() {
 
           {/* ── CONTENT ── */}
           <div className="flex-1 overflow-hidden">
-            <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full">
-              <CB51Home />
+            <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full">
+              {currentArtistId ? (
+                <CB51Dashboard
+                  artistId={currentArtistId}
+                  artistName={artists.find(a => a.id === currentArtistId)?.name}
+                />
+              ) : (
+                <CB51Home />
+              )}
             </motion.div>
           </div>
 
