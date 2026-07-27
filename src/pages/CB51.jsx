@@ -7,6 +7,7 @@ import { Plus, Radio, Bell } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
+import SilentBoundary from '@/components/cb51/SilentBoundary';
 import CB51Stream from '@/components/cb51/CB51Stream';
 import CB51Home from './CB51Home';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
@@ -167,9 +168,11 @@ export default function CB51Page() {
       <CB51ErrorBoundary>
         {/* BACKGROUND SERVICES - invisible */}
         <Suspense fallback={null}>
-          {user && <CB51PushSubscriptionManager userEmail={user.email} />}
-          {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
-          <CB51BackgroundSync />
+          <SilentBoundary>
+            {user && <CB51PushSubscriptionManager userEmail={user.email} />}
+            {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
+            <CB51BackgroundSync />
+          </SilentBoundary>
         </Suspense>
 
         <div className="min-h-screen flex flex-col" style={{ background: '#f7f5f0', color: '#1c1917' }}>
