@@ -7,7 +7,7 @@ import { Plus, Radio, Bell } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CB51ErrorBoundary from '@/components/scott/CB51ErrorBoundary';
 import CB51PINGuard from '@/components/cb51/CB51PINGuard';
-import CB51Dashboard from '@/components/cb51/CB51Dashboard';
+import CB51Stream from '@/components/cb51/CB51Stream';
 import CB51Home from './CB51Home';
 import CB51IOSInstallPrompt from '@/components/cb51/CB51IOSInstallPrompt';
 import { useCB51NavBadges } from '@/components/cb51/CB51NavBadge';
@@ -68,17 +68,18 @@ export default function CB51Page() {
   // NOT LOGGED IN — landing
   if (!user && !pinVerified) {
     return (
-      <div className="min-h-screen bg-black flex flex-col" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+      <div className="min-h-screen flex flex-col" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#f7f5f0', color: '#1c1917' }}>
 
         {/* ── TOP BAR ── */}
         <div className="flex items-center justify-between px-6 pt-10 pb-2">
           <div className="flex items-center gap-2">
-            <Radio className="w-4 h-4 text-cyan-400" />
-            <span className="text-white font-black tracking-[0.25em] font-mono text-sm">CB51</span>
+            <Radio className="w-4 h-4" style={{ color: '#0891b2' }} />
+            <span className="font-black tracking-[0.25em] font-mono text-sm" style={{ color: '#1c1917' }}>CB51</span>
           </div>
           <button
             onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
-            className="text-cyan-400 font-bold text-sm active:opacity-50"
+            className="font-bold text-sm active:opacity-50"
+            style={{ color: '#0891b2' }}
           >
             Sign in
           </button>
@@ -92,11 +93,11 @@ export default function CB51Page() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-gray-600 text-xs font-mono tracking-[0.2em] uppercase mb-5">citizenband51</p>
-            <h1 className="text-white font-black leading-[0.92] mb-6"
-              style={{ fontSize: 'clamp(42px, 11vw, 72px)', letterSpacing: '-0.02em' }}>
+            <p className="text-xs font-mono tracking-[0.2em] uppercase mb-5" style={{ color: '#78716c' }}>citizenband51</p>
+            <h1 className="font-black leading-[0.92] mb-6"
+              style={{ fontSize: 'clamp(42px, 11vw, 72px)', letterSpacing: '-0.02em', color: '#1c1917' }}>
               Avoid<br />the<br />
-              <span style={{ color: '#06b6d4' }}>Noise.</span>
+              <span style={{ color: '#0891b2' }}>Noise.</span>
             </h1>
           </motion.div>
 
@@ -104,7 +105,7 @@ export default function CB51Page() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
-            className="text-gray-400 text-base leading-relaxed mb-8 max-w-sm"
+            className="text-base leading-relaxed mb-8 max-w-sm" style={{ color: '#57534e' }}
           >
             Your gig pipeline. Your band. Your money.<br />
             One place. No chaos.
@@ -122,9 +123,9 @@ export default function CB51Page() {
               { text: 'Band votes on offers without a single WhatsApp', color: '#10b981' },
               { text: 'Tracks fees, outstanding payments, the lot', color: '#f59e0b' },
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-3 py-2 px-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <div key={i} className="flex items-start gap-3 py-2 px-3 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(28,25,23,0.06)' }}>
                 <div className="w-1.5 h-1.5 rounded-full mt-[7px] flex-shrink-0" style={{ background: item.color }} />
-                <p className="text-gray-400 text-sm leading-snug">{item.text}</p>
+                <p className="text-sm leading-snug" style={{ color: '#57534e' }}>{item.text}</p>
               </div>
             ))}
           </motion.div>
@@ -139,13 +140,14 @@ export default function CB51Page() {
             <button
               onClick={() => base44.auth.redirectToLogin(window.location.origin + '/CB51')}
               className="w-full active:scale-95 text-black font-black py-4 text-base tracking-wider font-mono transition-all rounded-2xl"
-              style={{ background: '#06b6d4', boxShadow: '0 0 40px rgba(6,182,212,0.25)' }}
+              style={{ background: '#0891b2', boxShadow: '0 8px 30px rgba(8,145,178,0.25)' }}
             >
               GET STARTED — FREE
             </button>
             <button
               onClick={() => window.location.href = '/CB51How'}
-              className="w-full active:scale-95 text-gray-500 font-bold py-3 text-sm transition-all"
+              className="w-full active:scale-95 font-bold py-3 text-sm transition-all"
+              style={{ color: '#78716c' }}
             >
               See how it works →
             </button>
@@ -153,8 +155,8 @@ export default function CB51Page() {
         </div>
 
         {/* ── BOTTOM — quiet credibility ── */}
-        <div className="px-6 pb-10 pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
-          <p className="text-gray-800 text-xs font-mono text-center">CB51 · CitizenBand51 · Avoid the Noise</p>
+        <div className="px-6 pb-10 pt-4 border-t" style={{ borderColor: 'rgba(28,25,23,0.08)' }}>
+          <p className="text-xs font-mono text-center" style={{ color: '#a8a29e' }}>CB51 · CitizenBand51 · Avoid the Noise</p>
         </div>
       </div>
     );
@@ -248,7 +250,7 @@ export default function CB51Page() {
           <div className="flex-1 overflow-hidden">
             <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full">
               {currentArtistId ? (
-                <CB51Dashboard
+                <CB51Stream
                   artistId={currentArtistId}
                   artistName={artists.find(a => a.id === currentArtistId)?.name}
                 />
