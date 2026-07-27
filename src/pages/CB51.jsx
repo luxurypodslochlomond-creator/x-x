@@ -54,11 +54,12 @@ export default function CB51Page() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: '#f7f5f0' }}>
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          className="w-10 h-10 rounded-full border-2 border-cyan-500/20 border-t-cyan-500"
+          className="w-10 h-10 rounded-full"
+          style={{ border: '2px solid rgba(8,145,178,0.2)', borderTopColor: '#0891b2' }}
         />
       </div>
     );
@@ -169,17 +170,18 @@ export default function CB51Page() {
           <CB51BackgroundSync />
         </Suspense>
 
-        <div className="min-h-screen bg-black text-white flex flex-col">
+        <div className="min-h-screen flex flex-col" style={{ background: '#f7f5f0', color: '#1c1917' }}>
           {/* ── HEADER ── */}
           <div className="px-5 pt-8 pb-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Radio className="w-5 h-5 text-cyan-400" />
-                <span className="text-lg font-black text-white tracking-widest font-mono">CB51</span>
+                <Radio className="w-5 h-5" style={{ color: '#0891b2' }} />
+                <span className="text-lg font-black tracking-widest font-mono" style={{ color: '#1c1917' }}>CB51</span>
               </div>
               <button
                 onClick={() => setShowTestPush(v => !v)}
-                className="p-2 rounded-xl text-gray-700 hover:text-gray-400 transition-colors"
+                className="p-2 rounded-xl transition-colors"
+                style={{ color: '#78716c' }}
                 title="Test push notifications"
               >
                 <Bell className="w-5 h-5" />
@@ -206,24 +208,23 @@ export default function CB51Page() {
                       onClick={() => setActiveArtistId(artist.id)}
                       className="flex items-center gap-2.5 flex-shrink-0 px-3 py-2 rounded-full transition-all"
                       style={isActive ? {
-                        background: 'rgba(6,182,212,0.12)',
-                        border: '1px solid rgba(6,182,212,0.4)',
-                        boxShadow: '0 0 12px rgba(6,182,212,0.1)'
+                        background: 'rgba(8,145,178,0.10)',
+                        border: '1px solid rgba(8,145,178,0.45)'
                       } : {
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)'
+                        background: 'rgba(28,25,23,0.03)',
+                        border: '1px solid rgba(28,25,23,0.10)'
                       }}
                     >
                       {artist.profile_pic_url ? (
                         <img src={artist.profile_pic_url} alt={artist.name} className="w-6 h-6 rounded-full object-cover" />
                       ) : (
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center font-black text-xs ${
-                          isActive ? 'bg-cyan-500 text-black' : 'bg-gray-800 text-gray-500'
+                          isActive ? 'bg-cyan-500 text-black' : 'bg-stone-200 text-stone-600'
                         }`}>
                           {artist.name.charAt(0).toUpperCase()}
                         </div>
                       )}
-                      <span className={`text-sm font-semibold truncate max-w-[100px] ${isActive ? 'text-white' : 'text-gray-500'}`}>
+                      <span className={`text-sm font-semibold truncate max-w-[100px] ${isActive ? 'text-stone-900' : 'text-stone-500'}`}>
                         {artist.name}
                       </span>
                     </button>
@@ -231,8 +232,8 @@ export default function CB51Page() {
                 })}
                 <button
                   onClick={() => navigate(createPageUrl('CB51AddArtist'))}
-                  className="flex items-center gap-1.5 flex-shrink-0 px-3 py-2 rounded-full transition-all text-gray-600 hover:text-gray-400"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.1)' }}
+                  className="flex items-center gap-1.5 flex-shrink-0 px-3 py-2 rounded-full transition-all"
+                  style={{ background: 'rgba(28,25,23,0.02)', border: '1px dashed rgba(28,25,23,0.2)', color: '#78716c' }}
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span className="text-xs font-semibold">Add</span>
