@@ -14,16 +14,16 @@ const BUILD_STAGES = [
   { shape: 'spectrum', text: 'almost there...' },
 ];
 
-// Target build time for progress bar (seconds)
-const TARGET_TIME = 32;
+// Target build time for progress bar (seconds). Tighter prompt → faster builds.
+const TARGET_TIME = 24;
 
 // How long each stage shows before advancing (ms)
-const STAGE_DURATION = 3200;
+const STAGE_DURATION = 2800;
 
 // Build prompt + kid-safety layer live server-side in base44/shared/zappSafety.ts
 // (zappBuild function). Kept off the client so kids can't read or tamper with it.
 
-export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMode, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
+export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMode, existingHtml, onComplete, onReset, onRetry, onSave, onRemix, savedId }) {
   const [stageIndex, setStageIndex] = useState(0);
   const [builtHtml, setBuiltHtml] = useState('');
   const [isDone, setIsDone] = useState(false);
@@ -102,9 +102,13 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
     // One attempt → normalised result. The model is flaky and mobile networks
     // drop — a kid should never see "oops" on a single hiccup, so we silently
     // retry once before ever showing the error. A safety BLOCKED is never retried.
+    // For remix, existingHtml is passed separately so the server evolves the
+    // real app instead of rebuilding from the text idea.
     const attempt = async () => {
       try {
-        const res = await base44.functions.invoke('zappBuild', { idea: buildIdea });
+        const payload = { idea: buildIdea };
+        if (existingHtml) payload.existingHtml = existingHtml;
+        const res = await base44.functions.invoke('zappBuild', payload);
         // The SDK returns an axios-style object — the JSON is on .data, NOT res.
         // Reading res.html directly silently breaks EVERY build (the bug that
         // made ZAPP say "try again" for every idea & every character). res.data

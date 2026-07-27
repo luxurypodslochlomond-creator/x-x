@@ -1,6 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.40';
 import {
   COMBINED_BUILD_PROMPT,
+  REMIX_PROMPT,
   scanHtmlForDanger,
 } from '../../shared/zappSafety.ts';
 
@@ -10,6 +11,7 @@ import {
 // inside the frontend invoke timeout. Output HTML is still scanned for
 // external/network/exfiltration patterns before it reaches the kid.
 // Returns {html, title, safe:true} or {blocked:true, reason}.
+// Remix mode: pass existingHtml to evolve an already-built app.
 
 Deno.serve(async (req) => {
   try {
@@ -24,10 +26,17 @@ Deno.serve(async (req) => {
         { status: 400 }
       );
     }
+    // Remix: the kid built an app and wants a change. We pass the existing HTML
+    // so the model evolves the real app instead of rebuilding from the text idea.
+    const existingHtml = String(body?.existingHtml || '').slice(0, 20000);
 
-    // One combined call: safety check + build, raw string output (no JSON schema
-    // → the model doesn't have to JSON-escape 6KB of HTML, which is the slow part).
-    const prompt = `${COMBINED_BUILD_PROMPT} "${idea}"
+    const prompt = existingHtml
+      ? `${REMIX_PROMPT} "${idea}"
+
+${existingHtml}
+
+CRITICAL: keep all the good parts of the existing app. Make ONLY the requested change. Same safety rules apply. Output ONLY the complete evolved single-file HTML starting with <!DOCTYPE html>. No JSON. No markdown. No explanation.`
+      : `${COMBINED_BUILD_PROMPT} "${idea}"
 
 CRITICAL BEFORE YOU OUTPUT:
 - Every button you mention MUST have an onclick handler that works
@@ -36,6 +45,7 @@ CRITICAL BEFORE YOU OUTPUT:
 - The Restart / Reset button MUST fully reset ALL state variables back to defaults
 - NO placeholder text like "// add logic here" — write the complete working code
 - FOR GAMES: use a COMPACT D-pad (small clustered arrows in one corner), NOT big full-width buttons. Movement controls must be tiny. The play area is the star, not the buttons.
+- KEEP CODE TIGHT — under 150 lines of JS. Build only what the kid asked for.
 
 Output ONLY the raw HTML starting with <!DOCTYPE html>. No JSON. No markdown. No explanation.`;
 

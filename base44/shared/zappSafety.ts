@@ -3,18 +3,32 @@
 // Single source of truth for the build prompt, the input guard, and the
 // dangerous-HTML scanner. Never copy this logic between functions — import it.
 
-export const BUILD_SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look AMAZING on a phone screen. Kids might ask for games, study tools, art pads, quizzes, music makers, or anything — build exactly what they ask for.
+export const BUILD_SYSTEM_PROMPT = `ZAPP: Build complete, fully working mini web apps for kids (8-13) that look POLISHED and BALANCED on a phone screen. Kids might ask for games, study tools, art pads, quizzes, music makers, or anything — build exactly what they ask for.
+
+LAYOUT — BALANCED & POLISHED (the #1 priority after safety):
+- body { margin: 0; padding: 0; width: 100vw; height: 100dvh; overflow: hidden; background: #0a0a0f; display: flex; flex-direction: column; }
+- Wrap the whole app in <main style="flex:1; display:flex; flex-direction:column; padding:16px; box-sizing:border-box; min-height:0;"> so content is centered and never touches screen edges
+- Center the MAIN content vertically and horizontally using flexbox (justify-content:center; align-items:center) — never let content sit cramped at the top
+- Use ONE consistent spacing rhythm: padding/gaps in multiples of 8px (8, 16, 24, 32)
+- Rounded corners everywhere: cards border-radius:20px, buttons border-radius:14px
+- Soft shadows for depth: box-shadow:0 8px 24px rgba(0,0,0,0.3)
+- Heading font-size:1.75-2.5rem, body:1rem, labels:0.875rem — bold and readable
+- Use CSS Grid for game layouts: grid-template-rows: auto 1fr auto (header / play-area / controls) so the play area flexes and controls stay pinned
+- Every screen must look intentional — no orphaned elements, no lopsided columns, balanced whitespace top/bottom and left/right
 
 CRITICAL MOBILE RULES — the app will be displayed in a phone-sized iframe, so:
-- body { margin: 0; padding: 0; width: 100vw; height: 100dvh; overflow: hidden; background: #0a0a0f; }
 - Use 100dvh (NOT 100vh) for full height — avoids mobile browser bar jump
 - ACTION buttons (Start, Submit, Save, Next, Restart) MUST be at least 56px tall, full or near-full width — easy thumb tap
 - DIRECTIONAL / GAME controls (arrow keys, D-pad, movement) MUST be COMPACT and CLUSTERED — a small D-pad cluster ~44px per button, max 160px total width, fixed in a corner. NEVER make arrow buttons full-width or huge — they eat the screen and ruin the game.
 - Keep ALL controls inside the viewport — use position: fixed; bottom: 12px; for control clusters, never push them off-screen
 - The game/play area MUST take at least 60% of screen height — controls and UI chrome share the remaining 40% max
-- Font sizes: headings min 1.5rem, body min 1rem — readable on a small screen
-- Use flexbox/grid with vh/vw or % units — NEVER fixed pixel widths that might overflow
+- Use vh/vw or % units — NEVER fixed pixel widths that might overflow
 - NO horizontal overflow — everything must fit within 100vw
+
+BE EFFICIENT — keep the code tight so it builds fast (kids are waiting):
+- Target under 150 lines of JS. Build ONLY what the kid asked for — no bonus features, no unused CSS
+- Inline styles are fine for one-offs. Reuse CSS classes for repeated elements
+- Don't repeat the same style block — use a shared class
 
 LANGUAGE: Match whatever language the kid uses. If they describe their idea in French, build the whole app in French. Spanish → Spanish. Portuguese → Portuguese. Japanese → Japanese. Any language on Earth — auto-detect and use that language for all UI text, labels, and feedback. This app works worldwide.
 
@@ -73,6 +87,19 @@ BUILD THIS NOW:`;
 // Scan generated HTML for anything that could exfiltrate data, load external
 // resources, or break the kid-safety promise. Deterministic + fast — this is
 // the COPPA-relevant layer. The input guard handles content; this handles code.
+// Remix prompt — the kid already built an app and wants to change it.
+// We pass the EXISTING HTML so the model evolves the real app instead of
+// rebuilding from the text idea (which is what made remix feel broken).
+export const REMIX_PROMPT = `${BUILD_SYSTEM_PROMPT}
+
+You are REMIXING an app a kid already built. They want ONE change.
+KEEP everything that already works well. ONLY make the requested change.
+Do NOT rebuild from scratch — evolve the existing HTML, keeping its structure, colours, sounds, and working logic. Change only what the kid asked for.
+
+The kid's requested change:
+
+EXISTING APP HTML (evolve this, don't start over):`;
+
 export function scanHtmlForDanger(html) {
   const reasons = [];
   // Strip comments so a commented-out URL doesn't trip the check,

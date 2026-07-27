@@ -37,6 +37,7 @@ export default function Zapp() {
   const [showRemix, setShowRemix] = useState(null);
   const [remixSource, setRemixSource] = useState(null);
   const [remixInstruction, setRemixInstruction] = useState('');
+  const [remixHtml, setRemixHtml] = useState(null); // existing HTML to evolve on remix
   const [savedId, setSavedId] = useState(null); // ID after saving — used for share link
   const [directPlay, setDirectPlay] = useState(null); // ZappCreation for direct play via URL
   const [buddyId, setBuddyIdState] = useState(() => getBuddyId()); // device-local build buddy
@@ -75,6 +76,7 @@ export default function Zapp() {
     setIdea(ideaText);
     setRemixSource(null);
     setRemixInstruction('');
+    setRemixHtml(null);
     setBuiltHtml('');
     setAppTitle('');
     setBlueprint(null);
@@ -87,6 +89,7 @@ export default function Zapp() {
     setIdea(ideaText);
     setRemixSource(null);
     setRemixInstruction('');
+    setRemixHtml(null);
     setBuiltHtml('');
     setAppTitle('');
     setBlueprint(null);
@@ -100,6 +103,7 @@ export default function Zapp() {
     setAppTitle('');
     setRemixSource(null);
     setRemixInstruction('');
+    setRemixHtml(null);
     setShowSave(false);
     setSavedId(null);
     setBlueprint(null);
@@ -135,9 +139,12 @@ export default function Zapp() {
     setShowRemix(null);
     setRemixSource(original);
     setRemixInstruction(instruction);
-    // Build a remixed idea incorporating the instruction
-    const remixIdea = `Take this existing app: "${original.idea}" — and make this change: ${instruction}. Keep everything that works well but evolve it.`;
-    setIdea(remixIdea);
+    // Pass the REAL built HTML so the server evolves the actual app, not a
+    // rebuild from the text idea (which is what made remix feel broken).
+    setRemixHtml(original.html || null);
+    // The idea sent to the server is just the change the kid asked for —
+    // short, focused. The existing HTML travels separately as existingHtml.
+    setIdea(instruction);
     setBuiltHtml('');
     setAppTitle('');
     setBlueprint(null); // remix is a different idea — don't carry stale notes
@@ -312,13 +319,14 @@ export default function Zapp() {
                 blueprint={blueprint}
                 buildFlavor={buddy?.buildFlavor || ''}
                 builderMode={builderMode}
+                existingHtml={remixHtml}
                 onComplete={handleBuildComplete}
                 onReset={handleReset}
                 onRetry={handleRetry}
                 savedId={savedId}
                 onSave={builtHtml ? () => setShowSave(true) : undefined}
                 onRemix={builtHtml ? () => {
-                  setShowRemix({ id: null, title: appTitle || idea, idea });
+                  setShowRemix({ id: null, title: appTitle || idea, idea, html: builtHtml });
                 } : undefined}
               />
             </motion.div>
