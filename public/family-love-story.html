@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Family — You'll Never Walk Alone</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald: #0b6b3a;
+    --gold: #d4af37;
+    --ink: #1a1a1a;
+    --paper: #f7f3ec;
+    --love: #b03a2e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(ellipse at top, #f7f3ec 0%, #ece4d3 100%);
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--paper);
+    border: 1px solid rgba(11, 107, 58, 0.18);
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    text-align: center;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "☘️";
+    position: absolute;
+    top: 18px;
+    left: 22px;
+    font-size: 18px;
+    opacity: 0.5;
+  }
+  .card::after {
+    content: "♾️";
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-size: 16px;
+    opacity: 0.5;
+  }
+  .tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .node {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(11, 107, 58, 0.25);
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--emerald);
+  }
+  .node::before { content: "❤"; color: var(--love); font-size: 11px; }
+  .dad {
+    background: var(--emerald);
+    color: #fff;
+    border-color: var(--emerald);
+    font-size: 15px;
+  }
+  .dad::before { color: var(--gold); font-size: 13px; }
+  .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .mum {
+    font-size: 12px;
+    font-weight: 400;
+    color: #6b6b6b;
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+  .connector {
+    width: 1px;
+    height: 14px;
+    background: rgba(11, 107, 58, 0.35);
+  }
+  .lyric {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding: 0 8px;
+  }
+  .lyric em {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--emerald);
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .sig {
+    margin-top: 22px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+  }
+  .sig b { color: var(--emerald); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="tree">
+      <div class="node dad">Brian &nbsp;·&nbsp; Da</div>
+
+      <div class="connector"></div>
+
+      <div class="row">
+        <span class="mum">Aileen's lads</span>
+      </div>
+      <div class="row">
+        <span class="node">Archie · 20</span>
+        <span class="node">Fergus · 17</span>
+      </div>
+
+      <div class="connector"></div>
+
+      <div class="row">
+        <span class="mum">Gill's weans</span>
+      </div>
+      <div class="row">
+        <span class="node">Lennox · 11</span>
+        <span class="node">Georgie · 9</span>
+      </div>
+
+      <div class="connector"></div>
+
+      <div class="row">
+        <span class="mum">Aileen &nbsp;·&nbsp; Gill &nbsp;—&nbsp; the two who made it possible</span>
+      </div>
+    </div>
+
+    <p class="lyric">
+      "Walk on, walk on,<br />
+      with hope in your heart…"
+      <em>and you'll never walk alone.</em>
+    </p>
+
+    <div class="sig"><b>26.07.2026</b> &nbsp;·&nbsp; first time, all four, together</div>
+  </div>
+</body>
+</html>
