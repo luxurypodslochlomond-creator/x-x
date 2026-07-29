@@ -33,10 +33,27 @@ export default function CB51Page() {
   }, []);
 
   useEffect(() => {
-    base44.auth.me()
-      .then(setUser)
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
+    // PIN check first (instant, no network) — avoids showing the marketing
+    // page to a logged-in user while the OAuth token is still settling.
+    if (typeof window !== 'undefined' &&
+        localStorage.getItem('cb51_pin_verified') === 'true') {
+      setUser({ _pin: true });
+      setLoading(false);
+      return;
+    }
+    // Retry like the PINGuard does — first load often has an unsettled token
+    let cancelled = false;
+    (async () => {
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          const u = await base44.auth.me();
+          if (u && !cancelled) { setUser(u); setLoading(false); return; }
+        } catch { /* token not settled yet — wait and retry */ }
+        if (attempt < 2 && !cancelled) await new Promise(r => setTimeout(r, 700));
+      }
+      if (!cancelled) { setUser(null); setLoading(false); }
+    })();
+    return () => { cancelled = true; };
   }, []);
 
   const pinVerified = typeof window !== 'undefined' &&
@@ -169,7 +186,7 @@ export default function CB51Page() {
         {/* BACKGROUND SERVICES - invisible */}
         <Suspense fallback={null}>
           <SilentBoundary>
-            {user && <CB51PushSubscriptionManager userEmail={user.email} />}
+            {user?.email && <CB51PushSubscriptionManager userEmail={user.email} />}
             {currentArtistId && <CB51BadgeManager artistId={currentArtistId} />}
             <CB51BackgroundSync />
           </SilentBoundary>
