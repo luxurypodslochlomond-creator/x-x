@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 const RedirectToSorted = () => <Navigate to="/Sorted" replace />;
 import SortedPageTransition from '@/components/shared/SortedPageTransition';
@@ -224,7 +224,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminSortedInfluencers" element={<LayoutWrapper currentPageName="AdminSortedInfluencers"><AdminSortedInfluencersPage /></LayoutWrapper>} />
       <Route path="/CB51Vote" element={<CB51VotePage />} />
       <Route path="/CB51Join" element={<CB51JoinPage />} />
-      <Route path="/CB51" element={<CB51MainPage />} />
+      <Route path="/CB51" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ background: '#f7f5f0' }}><div className="w-8 h-8 rounded-full animate-spin" style={{ border: '2px solid rgba(8,145,178,0.2)', borderTopColor: '#0891b2' }} /></div>}><CB51MainPage /></Suspense>} />
       <Route path="/CB51How" element={<CB51HowPage />} />
       <Route path="/WalshyPitch" element={<WalshyPitchPage />} />
       <Route path="/Zapp" element={<ZappPage />} />
