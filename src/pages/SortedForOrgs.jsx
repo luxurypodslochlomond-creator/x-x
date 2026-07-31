@@ -209,6 +209,9 @@ export default function SortedForOrgs() {
         <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: '16px 0 0', lineHeight: 1.5, fontStyle: 'italic' }}>
           If transparent registration on the Scottish AI Register is a procurement requirement for your council, we will prioritise it for your pilot.
         </p>
+        <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: '10px 0 0', lineHeight: 1.5 }}>
+          The same transparency bar applies to any UK or national AI assurance framework — SORTED works across England, Wales, Northern Ireland and Scotland, and in 40+ languages worldwide. Scotland is where we're piloting first, not where the product ends.
+        </p>
       </section>
 
       <Divider />

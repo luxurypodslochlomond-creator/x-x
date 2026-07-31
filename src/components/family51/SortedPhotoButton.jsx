@@ -49,6 +49,11 @@ export default function SortedPhotoButton({ onPhotoSelected, onDecoded, disabled
         </svg>
         {uploading ? '...' : 'SNAP PHOTO'}
       </div>
+      {showPrivacy && !compact && (
+        <div style={{ fontSize: 10, color: '#9a8a6a', textAlign: 'center', marginTop: 6, lineHeight: 1.4, padding: '0 4px' }}>
+          For full identity protection, paste the text instead — a photo is read directly by the AI and can\u2019t be redacted on the device first.
+        </div>
+      )}
       {showPrivacy && !compact && <SortedPrivacyStrip />}
     </>
   );
