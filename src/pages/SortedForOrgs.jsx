@@ -180,6 +180,39 @@ export default function SortedForOrgs() {
 
       <Divider />
 
+      {/* ── SCOTLAND AI STRATEGY ALIGNMENT ───────────────────── */}
+      <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
+        <p style={labelStyle}>Aligned with Scotland's AI Strategy 2026–2031</p>
+        <p style={{ fontSize: 15, color: INK, lineHeight: 1.6, margin: '0 0 20px', fontWeight: 600 }}>
+          Scotland's national strategy asks for AI that's transparent, evidence-based, trusted in public services, and safeguarded for fairness and human rights. SORTED was built to those same principles — before the strategy existed.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {[
+            { t: 'Public trust & confidence', d: 'Human-in-the-loop by design. SORTED explains the letter and flags urgency — it never gives legal advice. Complex cases route to your human advisers.' },
+            { t: 'Transparency & accountability', d: 'Every analysis is plain-English, quoting the source letter. We are committed to transparent registration on the Scottish AI Register as the programme matures.' },
+            { t: 'Evidence-based, informed decisions', d: 'Helpline numbers are hand-verified against each organisation\u2019s official site. The AI is hard-constrained never to invent one — silence over a wrong number.' },
+            { t: 'Safe data handling (the "AI Safe Sharing Check")', d: 'Identity details are redacted on the client\u2019s device before any AI analysis. The AI never sees names, emails, or account numbers.' },
+            { t: 'Fair Work & human rights', d: 'SORTED augments advisers — it doesn\u2019t replace them. Less backlog, earlier help, more people reached with the same staff.' },
+          ].map((m, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
+              style={{ display: 'flex', gap: 14, padding: '16px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 12 }}>
+              <div style={{ flexShrink: 0, marginTop: 2, color: GOLD }}>
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 10l3 3 7-7" stroke={GOLD} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </div>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 800, color: INK, marginBottom: 4 }}>{m.t}</div>
+                <p style={{ fontSize: 13, color: MUTED, margin: 0, lineHeight: 1.5 }}>{m.d}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: '16px 0 0', lineHeight: 1.5, fontStyle: 'italic' }}>
+          If transparent registration on the Scottish AI Register is a procurement requirement for your council, we will prioritise it for your pilot.
+        </p>
+      </section>
+
+      <Divider />
+
       {/* ── THE MODEL ────────────────────────────────────────── */}
       <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
         <p style={labelStyle}>How we work with organisations</p>
