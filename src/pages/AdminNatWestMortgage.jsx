@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 22 Jul 2026 — ✅ £210 PAID & CONFIRMED BY NARGIS (SST Secured) · 48HR CALLBACK ARRANGED · ASK FOR CASE MANAGER NEXT • Pattern: £100 May → £200 June → £210 July ✓✓✓ ♾️❤️</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 31 Jul 2026 — ✅ JEMMA (SST) REPLIED 30 Jul w/ INCOME & EXPENDITURE FORM · 24 AUG SMI/MI12 REVIEW · FILL FORM 1 SECTION/DAY W/ UF51 · Pattern: £100 May → £200 June → £210 July ✓✓✓ ♾️❤️</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -271,12 +271,39 @@ export default function AdminNatWestMortgage() {
                 </div>
               </div>
 
+              <div className="flex items-start gap-4 bg-cyan-900/30 p-4 rounded-lg border-4 border-cyan-500 shadow-[0_0_40px_rgba(6,182,212,0.4)]">
+                <div className="text-cyan-300 font-bold text-lg min-w-fit">22/07/2026</div>
+                <div>
+                  <p className="text-white font-bold">✉️ FOLLOW-UP EMAIL SENT TO JEMMA — SST Secured</p>
+                  <p className="text-gray-200 text-sm">After the call with Nargis, spoke to <strong>Jemma (SST)</strong> and sent a follow-up email (13:56, from GLA101@proton.me) thanking her, asking for a <strong>dedicated contact</strong> going forward, and asking to explore <strong>capitalising the arrears or extending the term</strong> while the SMI/MI12 is processed. Expressed anxiety about "beyond the 24th" and not wanting to let anyone down.</p>
+                  <p className="text-cyan-400 font-bold text-sm mt-1">✅ Both asks put in writing — ball in their court to confirm options</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-4 border-green-500 shadow-[0_0_60px_rgba(34,197,94,0.6)]">
+                <div className="text-green-300 font-bold text-lg min-w-fit">30/07/2026</div>
+                <div>
+                  <p className="text-white font-black">🔥 JEMMA REPLIED — FORM SENT + OPTIONS CONFIRMED ✓</p>
+                  <p className="text-gray-200 text-sm"><strong>Jemma (SST)</strong> replied explaining: (1) the team works as a unit — can't promise one dedicated contact due to shift patterns, but notes are saved on file and you <strong>can ask for a specific agent</strong> when you call; (2) they <strong>CAN explore capitalising arrears / extending term NOW</strong>, no need to wait for SMI — they just need your income & expenditure details first; (3) SMI first gives extra income + makes figures accurate, but it's <strong>your choice</strong> on order. Attached: <strong>Income & Expenditure form (L1762 v1, 49KB Word doc)</strong>.</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ GOOD NEWS: Bank offering help, sending forms, explaining options gently — they want to keep you in your home</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 bg-amber-900/30 p-4 rounded-lg border-4 border-amber-500 shadow-[0_0_40px_rgba(245,158,11,0.4)]">
+                <div className="text-amber-300 font-bold text-lg min-w-fit">24/08/2026</div>
+                <div>
+                  <p className="text-white font-bold">📅 SMI / MI12 REVIEW DATE — (NOT a deadline, a checkpoint)</p>
+                  <p className="text-gray-200 text-sm">Support for Mortgage Interest claim review. <strong>Nothing ends on the 24th</strong> — it's a review, not a cliff. Reviews get moved, options get added. Jemma confirmed they can explore capitalisation/term extension <strong>before</strong> this date once the I&E form is in.</p>
+                  <p className="text-amber-400 font-bold text-sm mt-1">🎯 GOAL: Fill I&E form over the next 1-2 weeks (1 section/day with UF51) so options are on the table at/after review</p>
+                </div>
+              </div>
+
               <div className="flex items-start gap-4 bg-blue-900/20 p-4 rounded-lg border-2 border-blue-500">
                 <div className="text-blue-400 font-bold text-lg min-w-fit">📊 NEXT PHASE</div>
                 <div>
-                  <p className="text-white font-bold">Pay £210 on 23 July. Then: GET A FIXED PLAN IN PLACE before August review.</p>
-                  <p className="text-gray-300 text-sm">The monthly review pattern bought you 4 months of breathing room. But they've drawn a line. Next call, you need to propose a <strong>fixed monthly repayment amount</strong> for the arrears — not "I'll pay what I can." That's what stops the legal letter.</p>
-                  <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: By August review, propose a fixed monthly amount + get free debt advice to strengthen your position.</p>
+                  <p className="text-white font-bold">Fill in the Income & Expenditure form (1 section/day with UF51). Then explore capitalisation / term extension with Jemma before the 24 Aug review.</p>
+                  <p className="text-gray-300 text-sm">The form says on page 1: "You don't need to total it up — we'll go through it on the call." So you fill in what you know, leave the rest blank, and <strong>they help you finish it on the call</strong>. That's the bank's own design. Most rows will be blank for you — that's normal. Send Jemma a short reply acknowledging the form first, then work through it gently over the next 1-2 weeks.</p>
+                  <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: Form mostly filled before 24 Aug review · Ask Jemma to walk through gaps on a call · Get free debt advice (PayPlan 0800 280 2816) to strengthen your position.</p>
                 </div>
               </div>
             </div>
