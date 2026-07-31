@@ -2,6 +2,7 @@
  * SORTED PROMPTS — World-class, user-first, stress-reducing
  * All prompts designed for: clarity, honesty, actionable advice, zero bullshit
  */
+import { getVerifiedHelplineContext } from './sortedHelplines';
 
 const TODAY = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -183,6 +184,7 @@ CRITICAL RULES:
   • Northern Ireland signals: Belfast, "Northern Ireland", "High Court of Justice in Northern Ireland", NI bodies.
   • England & Wales signals: London, Cardiff, "County Court", "Magistrates' Court", "High Court", English/Welsh councils, Section 21/Section 8 Housing Act.
   When you apply a different UK jurisdiction than the default, STATE it in the what_this_means field — e.g. "Under Scots law, this is a charge for payment..." If you genuinely cannot tell, say "Couldn't confirm if this is England & Wales or Scots law — confirm with [body]" rather than guessing.
+- NEVER INVENT A PHONE NUMBER. Only cite helpline numbers from the VERIFIED HELPLINES list in your context. If a needed service isn't listed, say "See the Need a human list below" and give NO number. A wrong number can hurt a vulnerable person — silence is safer than a guess.
 - LANGUAGE: Respond in the DOCUMENT'S language. If the letter is in Polish, respond in Polish. If in Spanish, respond in Spanish. If in English, respond in English. The person received this letter in that language — they speak it. Do NOT default to English. Every field, every step, every sentence must be in the document's language.`,
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -345,7 +347,9 @@ export function getGeoContext(countryCode, userLanguage = 'en') {
     EU: "You are advising someone in the EU. Cite EU directives and their country's implementation.",
   };
 
-  return geoContexts[countryCode] || geoContexts.GB;
+  const base = geoContexts[countryCode] || geoContexts.GB;
+  const helplineCtx = getVerifiedHelplineContext(countryCode);
+  return helplineCtx ? `${base}\n${helplineCtx}` : base;
 }
 
 /**

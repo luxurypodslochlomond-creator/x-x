@@ -1,8 +1,8 @@
 import React from 'react';
 import { getHelplines } from '@/utils/sortedHelplines';
 
-export default function SortedHelplines() {
-  const helplines = getHelplines();
+export default function SortedHelplines({ geoCode }) {
+  const helplines = getHelplines(geoCode);
   const phoneHref = (num) => 'tel:' + num.replace(/\s+/g, '');
 
   return (
@@ -38,7 +38,7 @@ export default function SortedHelplines() {
       )}
 
       <div style={{ fontSize: 10, color: 'rgba(26,18,8,0.35)', marginTop: 12, textAlign: 'center' }}>
-        All free. {helplines.label}. Tap to call. Always verify on the organisation's official website.
+        All free. {helplines.label}. Tap to call. Numbers checked {helplines.verifiedOn || 'recently'} against each organisation's official website.
       </div>
     </div>
   );
