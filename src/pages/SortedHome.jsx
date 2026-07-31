@@ -63,7 +63,7 @@ export default function SortedHome() {
             fontFamily: FONT.family,
             fontSize: 'clamp(24px, 5.6vw, 31px)',
             fontWeight: 700,
-            lineHeight: FONT.lineHeightTight,
+            lineHeight: 1.22,
             margin: 0,
             letterSpacing: '-0.02em',
           }}>

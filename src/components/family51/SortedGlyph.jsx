@@ -11,7 +11,7 @@ const GOLD = '#c6995c';
  * even at 20px. Letter gaps wider than intra-letter gaps so the three
  * letters separate clearly.
  */
-export function SortedGlyph({ height = 20, color = GOLD }) {
+export function SortedGlyph({ height = 20, color = GOLD, dashColor = color }) {
   const width = height * (76 / 18);
   const dashY = 9 - 1.9;
   return (
@@ -21,9 +21,9 @@ export function SortedGlyph({ height = 20, color = GOLD }) {
       <circle cx="8.5" cy="9" r="1.9" fill={color} />
       <circle cx="13.5" cy="9" r="1.9" fill={color} />
       {/* O = three dashes — shorter dashes, wider gaps so the rhythm reads at any size */}
-      <rect x="19" y={dashY} width="7" height="3.8" rx="1.9" fill={color} />
-      <rect x="30" y={dashY} width="7" height="3.8" rx="1.9" fill={color} />
-      <rect x="41" y={dashY} width="7" height="3.8" rx="1.9" fill={color} />
+      <rect x="19" y={dashY} width="7" height="3.8" rx="1.9" fill={dashColor} />
+      <rect x="30" y={dashY} width="7" height="3.8" rx="1.9" fill={dashColor} />
+      <rect x="41" y={dashY} width="7" height="3.8" rx="1.9" fill={dashColor} />
       {/* S = three dots */}
       <circle cx="55.5" cy="9" r="1.9" fill={color} />
       <circle cx="60.5" cy="9" r="1.9" fill={color} />
