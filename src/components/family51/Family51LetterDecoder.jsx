@@ -17,6 +17,7 @@ import SortedDeadlineBar from './SortedDeadlineBar';
 import SortedPatternShareToggle from './SortedPatternShareToggle';
 import LetterInstantScan from './LetterInstantScan';
 import SortedPrivacyStrip from './SortedPrivacyStrip';
+import { redactIdentity, reattachIdentity } from '@/utils/redactIdentity';
 
 const LETTER_TYPES = [
   'Council tax', 'Energy bill', 'Rent / landlord', 'Debt collector',
@@ -51,6 +52,7 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
   const letterTypeRef = useRef(letterType);
   const userContextRef = useRef(userContext);
   const resultRef = useRef(null);
+  const redactionMapRef = useRef({});
 
   // Keep refs in sync so handleFileUpload always has fresh values
   useEffect(() => { geoRef.current = geo; }, [geo]);
@@ -126,7 +128,19 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       }
 
       const learningContext = buildLearningContext(currentType || 'letter');
-      const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, letterContent, currentType, currentContext) + learningContext;
+      // Redact identity on the device BEFORE the AI sees anything (text path only —
+      // images bypass and are read directly by the vision model). The reattachment
+      // map stays in the browser so we can fill real names/numbers back in for the
+      // user afterwards. The AI never sees personal identity — only the substance.
+      let safeContent = letterContent;
+      let redactionMap = {};
+      if (letterContent && !visionFileUrl) {
+        const r = redactIdentity(letterContent);
+        safeContent = r.redacted;
+        redactionMap = r.map;
+      }
+      redactionMapRef.current = redactionMap;
+      const promptText = SORTED_SOUL + '\n' + buildPrompt('LETTER_DECODER', geoContext, safeContent, currentType, currentContext) + learningContext;
 
       const response = await callSortedLLM({
         model: 'claude_sonnet_4_6',
@@ -176,6 +190,16 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
       if (raw.one_sentence && !raw.what_this_means) raw.what_this_means = raw.one_sentence;
       if (raw.action_steps && !Array.isArray(raw.action_steps)) raw.action_steps = [String(raw.action_steps)];
       if (raw.free_help && !Array.isArray(raw.free_help)) raw.free_help = [String(raw.free_help)];
+
+      // Re-attach real identity (client-side only) so the user sees actual names,
+      // phone numbers, and references — while the AI never saw any of it.
+      if (redactionMap && Object.keys(redactionMap).length > 0) {
+        const reStr = (s) => typeof s === 'string' ? reattachIdentity(s, redactionMap) : s;
+        const reArr = (a) => Array.isArray(a) ? a.map(reStr) : a;
+        ['letter_summary','sender','reference_number','letter_date','reply_to_contact','key_deadline','amount','what_this_means','if_you_ignore_this','english_explanation']
+          .forEach(k => { if (raw[k]) raw[k] = reStr(raw[k]); });
+        ['action_steps','free_help'].forEach(k => { if (raw[k]) raw[k] = reArr(raw[k]); });
+      }
 
       setResult(raw);
       const SEVERITY_MAP = { 'NOT URGENT': 'routine', 'NEEDS ATTENTION': 'important', 'URGENT': 'urgent', 'VERY URGENT': 'urgent' };
