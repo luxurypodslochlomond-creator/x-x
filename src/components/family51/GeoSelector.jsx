@@ -6,7 +6,9 @@ export default function GeoSelector({ geo, onChange, accentColor = '#06b6d4' }) 
   const [searchTerm, setSearchTerm] = useState('');
 
   const geoOptions = [
-    { country: 'United Kingdom', jurisdiction: 'UK law', code: 'GB' },
+    { country: 'England & Wales', jurisdiction: 'UK law (England & Wales)', code: 'GB' },
+    { country: 'Scotland', jurisdiction: 'Scots law', code: 'SCOTLAND' },
+    { country: 'Northern Ireland', jurisdiction: 'NI law', code: 'NI' },
     { country: 'USA (Eastern)', jurisdiction: 'US federal & state law', code: 'US-NY' },
     { country: 'USA (Pacific)', jurisdiction: 'US federal & state law', code: 'US-CA' },
     { country: 'Australia', jurisdiction: 'Australian law', code: 'AU' },

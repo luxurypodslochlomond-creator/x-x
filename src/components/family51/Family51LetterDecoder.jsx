@@ -461,6 +461,25 @@ export default function Family51LetterDecoder({ accentColor = '#f97316', onResul
             </div>
           </div>
 
+          {/* JURISDICTION — the UK has three legal systems. Don't bury this. */}
+          {(geo.code === 'GB' || geo.code === 'SCOTLAND' || geo.code === 'NI') && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', padding: '8px 12px', borderRadius: 10, background: 'rgba(217,119,6,0.04)', border: '1px solid rgba(217,119,6,0.15)' }}>
+              <span style={{ fontSize: 10, fontWeight: 800, color: 'rgba(26,18,8,0.5)', letterSpacing: '0.08em' }}>LAW APPLIES TO:</span>
+              {[{ code: 'GB', label: 'England & Wales', jur: 'UK law' }, { code: 'SCOTLAND', label: 'Scotland', jur: 'Scots law' }, { code: 'NI', label: 'Northern Ireland', jur: 'NI law' }].map(opt => {
+                const active = geo.code === opt.code;
+                return (
+                  <button key={opt.code} onClick={() => setGeo({ country: opt.label, jurisdiction: opt.jur, code: opt.code })}
+                    style={{ fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 20, cursor: 'pointer',
+                      border: `1px solid ${active ? accentColor : 'rgba(26,18,8,0.15)'}`,
+                      background: active ? `${accentColor}15` : 'transparent',
+                      color: active ? accentColor : 'rgba(26,18,8,0.5)', transition: 'all 0.15s' }}>
+                    {opt.label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
           {/* BIG PASTE AREA — first thing they see */}
           <textarea
             value={letterText}

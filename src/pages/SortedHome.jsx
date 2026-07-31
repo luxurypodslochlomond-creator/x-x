@@ -156,7 +156,7 @@ export default function SortedHome() {
           transition={{ ...MOTION.fade, delay: 0.28 }}
           style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap', marginTop: 20 }}
         >
-          {['Any country, any jurisdiction', 'All languages supported', 'Private to this device · your cases are yours'].map(pill => (
+          {['40+ countries supported', 'Any language — we reply in theirs', 'Your case vault stays on your device'].map(pill => (
             <span key={pill} style={{
               fontSize: 12, fontWeight: 500, color: MUTED,
               background: `${GOLD}08`, border: `1px solid ${GOLD}20`,

@@ -29,7 +29,7 @@ const stats = [
 
 const pillars = [
   { icon: <SpeedIcon />, title: 'Instant for your clients', desc: 'No app download. No account. Paste the letter. Understand it in seconds. Works on any phone.' },
-  { icon: <PrivacyIcon />, title: 'Private by design', desc: 'The full analysis stays on your client\'s device. Only anonymous patterns — no names, no addresses, no amounts — help us improve. GDPR-aligned by design. Anonymised reporting for you, nothing that identifies a person.' },
+  { icon: <PrivacyIcon />, title: 'Private by design', desc: 'The letter goes to AI for analysis — that\'s how it works. What stays on the client\'s device is their full case history. We never see names or sell data, and only anonymous patterns help us improve. Anonymised reporting for you, nothing that identifies a person.' },
   { icon: <GlobalIcon />, title: 'Any language. Any country.', desc: 'Your clients speak Urdu, Somali, Spanish, Romanian. SORTED works in all of them — same quality, same clarity.' },
   { icon: <ScaleIcon />, title: 'Scales without hiring', desc: 'Earlier intervention. Fewer missed deadlines. Better triage. More clients helped with the same staff — because the letter is already decoded before they reach you.' },
 ];
@@ -164,7 +164,7 @@ export default function SortedForOrgs() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {[
             { icon: <ShieldIcon />, t: 'AI-assisted, not AI-only', d: 'SORTED explains the letter and flags urgency. It never gives legal advice. Complex cases route to your human advisers.' },
-            { icon: <PrivacyIcon />, t: 'Nothing stored, nothing tracked', d: 'The full letter stays on the client\'s device. We never see names, addresses, or amounts. GDPR-aligned by design.' },
+            { icon: <PrivacyIcon />, t: 'Honest about data', d: 'The letter is sent to AI to analyse, then the result is saved privately on the client\'s device. We never sell data, and only anonymous patterns help us improve. GDPR-aligned by design.' },
             { icon: <HeartIcon />, t: 'Built by people who\'ve been there', d: 'Created with input from advisers and people who\'ve faced these letters themselves. Not a tech demo — a tool born from need.' },
           ].map((item, i) => (
             <div key={i} style={{ display: 'flex', gap: 14, padding: '16px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 12 }}>
