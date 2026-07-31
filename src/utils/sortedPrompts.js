@@ -178,6 +178,11 @@ CRITICAL RULES:
 - Sound HUMAN — like a friend who knows this stuff, not a robot
 - If unclear, say "Can't tell from this letter — call [body] to check"
 - DATE COMPARISON IS MANDATORY: You MUST compare all dates to today's date. If today is 18 June 2026 and event is 12 June 2026 → IT'S IN THE PAST. Say so.
+- UK JURISDICTION — AUTO-DETECT FROM THE LETTER, NOT THE LOCATION: The UK has three separate legal systems (England & Wales, Scotland, Northern Ireland). The detected location may default to England & Wales, but the LETTER tells the truth. If the letter shows a different UK jurisdiction, OVERRIDE the default and apply the correct law:
+  • Scots law signals: Glasgow, Edinburgh, Aberdeen, Dundee, "Sheriff Court", "Court of Session", "decree", "diligence", "sheriff officer", "charge for payment", Scottish councils.
+  • Northern Ireland signals: Belfast, "Northern Ireland", "High Court of Justice in Northern Ireland", NI bodies.
+  • England & Wales signals: London, Cardiff, "County Court", "Magistrates' Court", "High Court", English/Welsh councils, Section 21/Section 8 Housing Act.
+  When you apply a different UK jurisdiction than the default, STATE it in the what_this_means field — e.g. "Under Scots law, this is a charge for payment..." If you genuinely cannot tell, say "Couldn't confirm if this is England & Wales or Scots law — confirm with [body]" rather than guessing.
 - LANGUAGE: Respond in the DOCUMENT'S language. If the letter is in Polish, respond in Polish. If in Spanish, respond in Spanish. If in English, respond in English. The person received this letter in that language — they speak it. Do NOT default to English. Every field, every step, every sentence must be in the document's language.`,
 
   // ─────────────────────────────────────────────────────────────────────────────
