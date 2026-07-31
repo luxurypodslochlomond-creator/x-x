@@ -277,17 +277,17 @@ export default function SortedResearchBrief() {
             10 · Aligned with Scotland's AI Strategy 2026–2031
           </div>
           <h2 style={{ fontSize: 21, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.005em', margin: '0 0 14px', color: INK }}>
-            Scotland is procuring AI for public services that is transparent, evidence-based, and human-in-the-loop. SORTED already meets that bar.
+            Scotland's AI Strategy 2026–2031 emphasises AI that is transparent, trusted in public services, and safeguarded for fairness and human rights. SORTED was built to those same principles — before the strategy existed.
           </h2>
           <p style={{ fontSize: 15, lineHeight: 1.6, color: MUTED, margin: '0 0 18px', maxWidth: 640 }}>
-            The strategy's headline outcomes are public trust and confidence, responsible adoption in public services, safeguarding of fairness and human rights, and an evidence-based, human-led model. Each priority below maps to a structural property SORTED was built with — not retrofitted for the pitch.
+            The strategy's foreword stresses public trust, responsible adoption in public services, Fair Work, and safeguards for fairness and human rights. Each theme below maps to a structural property SORTED was built with — not retrofitted for the pitch.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {[
               { pri: 'Public trust & confidence', how: 'Human-in-the-loop by design. SORTED explains and flags urgency; it never gives legal advice. Complex cases route to a human adviser.' },
               { pri: 'Transparency & accountability', how: 'Every analysis is plain-English and quotes the source letter. SORTED is committed to transparent registration on the Scottish AI Register as the programme matures.' },
               { pri: 'Evidence-based, informed decisions', how: 'Helpline numbers are hand-verified against each organisation\u2019s official site. The AI is hard-constrained never to invent one — silence over a wrong number.' },
-              { pri: 'Safe data handling ("AI Safe Sharing Check")', how: 'Identity details are redacted on the client\u2019s device before any AI analysis. The AI never sees names, emails, or account numbers (text and documents; photos read directly).' },
+              { pri: 'Safe data handling', how: 'Identity details are redacted on the client\u2019s device before any AI analysis. The AI never sees names, emails, or account numbers (text and documents; photos read directly).' },
               { pri: 'Fair Work & human rights', how: 'SORTED augments advisers rather than replacing them — less backlog, earlier help, more people reached with the same staff. Free for the citizen, funded by the institution.' },
             ].map((m) => (
               <div key={m.pri} style={{ background: '#fff', border: '1px solid rgba(28,28,30,0.08)', borderRadius: 12, padding: '16px 16px' }}>

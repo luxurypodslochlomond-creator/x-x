@@ -218,6 +218,7 @@ export default function SortedHome() {
             <Link to="/SortedTerms" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>Terms</Link>
             <Link to="/SortedPrivacy" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>Privacy</Link>
             <Link to="/SortedFAQ" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>FAQ</Link>
+            <Link to="/SortedResearchBrief" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>Research Brief</Link>
           </div>
           <p style={{ fontSize: 12, color: MUTED, margin: 0, fontWeight: 500, letterSpacing: '0.02em' }}>
             SORTEDSOS.ORG · Universal Frequency 51 CIC
