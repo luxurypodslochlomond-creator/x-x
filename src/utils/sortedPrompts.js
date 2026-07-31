@@ -344,10 +344,11 @@ export function getGeoContext(countryCode, userLanguage = 'en') {
     US: "You are advising someone in the USA. Cite US federal/state law and US-specific services.",
     AU: "You are advising someone in Australia. Cite Australian law and Australia-specific services.",
     CA: "You are advising someone in Canada. Cite Canadian law and Canada-specific services.",
+    NZ: "You are advising someone in New Zealand. Cite New Zealand law and NZ-specific services.",
     EU: "You are advising someone in the EU. Cite EU directives and their country's implementation.",
   };
 
-  const base = geoContexts[countryCode] || geoContexts.GB;
+  const base = geoContexts[countryCode] || "The person may be outside our core coverage regions. Give clear, jurisdiction-neutral guidance based on what the letter itself states, and STRONGLY advise consulting a local qualified adviser or free legal-aid service. Do NOT assume a specific country's law unless the document clearly indicates it (e.g. a named court, statute, or agency). If you cannot determine the jurisdiction, say so plainly.";
   const helplineCtx = getVerifiedHelplineContext(countryCode);
   return helplineCtx ? `${base}\n${helplineCtx}` : base;
 }

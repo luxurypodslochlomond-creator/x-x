@@ -84,7 +84,10 @@ const HELPLINES = {
  * The AI is told to ONLY cite numbers from this list and never invent one.
  */
 export function getVerifiedHelplineContext(code) {
-  const entry = HELPLINES[code] || HELPLINES.GB;
+  const entry = HELPLINES[code];
+  if (!entry) {
+    return `VERIFIED HELPLINES — no verified numbers are available for this country yet. Do NOT cite, guess, or invent any phone number. Tell the person to search for their nearest free citizen-advice / legal-aid service; if they are in immediate danger, call their local emergency number (e.g. 911, 112, 999).`;
+  }
   const lines = entry.services.map(s => `  - ${s.name}: ${s.phone} (${s.desc})`).join('\n');
   return `VERIFIED HELPLINES (${entry.label}) — last checked ${VERIFIED_ON} against each organisation's official website. You may ONLY cite phone numbers from this list. NEVER invent, guess, or hallucinate a phone number. If the person needs a service not listed here, say "See the Need a human list below" and give NO number:\n${lines}`;
 }
