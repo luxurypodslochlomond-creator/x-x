@@ -215,7 +215,7 @@ export default function SortedForOrgs() {
         <div style={{ background: `${GOLD}06`, border: `1px solid ${GOLD}22`, borderRadius: 12, padding: '16px 18px', marginTop: 16 }}>
           <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: GOLD, textTransform: 'uppercase', marginBottom: 8 }}>Already happening in Scotland</div>
           <p style={{ fontSize: 13.5, lineHeight: 1.6, color: INK, margin: '0 0 8px' }}>
-            The strategy\u2019s own case study is an AI triage tool built for <strong>Citizens Advice Scotland</strong> through the Scottish Government\u2019s <strong>CivTech</strong> programme \u2014 augmenting caseworkers, not replacing them. That\u2019s exactly SORTED\u2019s model. CivTech is also a live route to pilot with the public sector.
+            The strategy\u2019s own case study is an AI triage tool built for <strong>Citizens Advice Scotland</strong> through the Scottish Government\u2019s <strong>CivTech</strong> programme \u2014 augmenting caseworkers, not replacing them. That\u2019s exactly SORTED\u2019s model. CivTech Round 12 opens summer 2026, making it a live procurement route right now \u2014 and the advice-letter lane the case study proved is open for a new team.
           </p>
           <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: 0, lineHeight: 1.5 }}>
             Source: Scottish Government, \u201cScotland\u2019s AI Strategy 2026\u20132031\u201d, AI Action Plan (CAS case study); Law Society of Scotland, \u201cAI: opening the door to justice\u201d (2023).
