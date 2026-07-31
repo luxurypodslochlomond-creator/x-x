@@ -61,13 +61,13 @@ export default function SortedHome() {
           </div>
           <h1 style={{
             fontFamily: FONT.family,
-            fontSize: FONT.heading,
+            fontSize: 'clamp(24px, 5.6vw, 31px)',
             fontWeight: 700,
             lineHeight: FONT.lineHeightTight,
             margin: 0,
             letterSpacing: '-0.02em',
           }}>
-            Letter you've been putting off?<br />Let's read it together.
+            Letter you've been putting&nbsp;off?<br />Let's read it together.
           </h1>
           <p style={{
             fontSize: FONT.subheading,
