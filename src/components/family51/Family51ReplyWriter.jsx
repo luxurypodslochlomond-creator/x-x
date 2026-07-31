@@ -6,7 +6,6 @@ import { callSortedLLM } from '@/utils/sortedLLM';
 import { saveCaseToHistory } from '@/components/family51/SortedCaseHistory';
 import { detectGeo } from '@/hooks/useSortedGeo';
 import { buildSortedGeoPromptContext } from '@/utils/sortedGeoContext';
-import GeoSelector from './GeoSelector';
 import SortedShareButton from './SortedShareButton';
 import SortedHelpLinks from './SortedHelpLinks';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
@@ -105,8 +104,11 @@ export default function Family51ReplyWriter({ accentColor = '#06b6d4', onResult,
   const generateLetter = async (selectedTone = tone) => {
     const t = TONES.find(x => x.id === selectedTone);
     const geoContext = buildSortedGeoPromptContext(geo);
+    const jurisdictionInstruction = `JURISDICTION DETECTION: The browser-detected default is ${geo.country} (${geo.jurisdiction}) — use this only as a fallback. DETECT THE ACTUAL JURISDICTION from the context, the sender's address, the recipient's address, and any organisation names mentioned (e.g. "HMRC", "Council", "Citizens Advice", "Shelter", "StepChange" → UK; "IRS", "FTC", "Attorney General" → USA; "ATO", "Fair Trading", "NCAT/VCAT/QCAT" → Australia; "RTB", "MABS", "Revenue", "FLAC" → Ireland; "Disputes Tribunal", "Tenancy Tribunal", "IRD" → New Zealand; "FCAC", "LTB", "Procon" → Canada). If a clear jurisdiction is present in the content, apply THAT jurisdiction's law and cite its specific rights, legislation, and regulatory bodies — overriding the default.`;
     
     const prompt = SORTED_SOUL + '\n' + `You are helping someone write a reply. ${geoContext}
+
+${jurisdictionInstruction}
 
 SITUATION: ${situation || 'Not specified'}
 TONE REQUESTED: ${t?.label} — ${t?.desc}
@@ -143,7 +145,7 @@ If (A) — official letter or demand:
 - Sign off with the sender's name (not "[Your Name]") — the letter must be ready to send with zero edits.
 - Include the sender's address, email, and phone at the top or bottom if provided.
 - State the issue fast. State what you want. Consequences if ignored.
-- Cite specific rights / legislation relevant to ${geo.country}.
+- Cite specific rights / legislation relevant to the detected jurisdiction (see JURISDICTION DETECTION above).
 - MAXIMUM 350 words. Tight, no fluff.
 - tip: what will ACTUALLY happen in practice when they receive this.
 
@@ -314,18 +316,6 @@ Return JSON: document_type (string — what type of document/situation this is),
             onFocus={e => e.target.style.borderColor = accentColor}
             onBlur={e => e.target.style.borderColor = context ? accentColor + '90' : 'rgba(26,18,8,0.15)'}
           />
-        </div>
-
-        {/* LOCATION — always visible */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10, background: '#fff', border: '1px solid rgba(26,18,8,0.1)' }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" stroke={accentColor} strokeWidth="2" strokeLinejoin="round"/>
-            <circle cx="12" cy="9" r="2.5" stroke={accentColor} strokeWidth="2"/>
-          </svg>
-          <div style={{ flex: 1 }}>
-            <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', color: 'rgba(26,18,8,0.5)', margin: '0 0 2px' }}>LOCATION — for accurate legal references</p>
-            <GeoSelector geo={geo} onChange={setGeo} accentColor={accentColor} />
-          </div>
         </div>
 
         {/* WHO TO SEND TO — just the name, keep it simple */}
