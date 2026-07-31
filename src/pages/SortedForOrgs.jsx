@@ -191,7 +191,7 @@ export default function SortedForOrgs() {
             { t: 'Public trust & confidence', d: 'Human-in-the-loop by design. SORTED explains the letter and flags urgency — it never gives legal advice. Complex cases route to your human advisers.' },
             { t: 'Transparency & accountability', d: 'Every analysis is plain-English, quoting the source letter. We are committed to transparent registration on the Scottish AI Register as the programme matures.' },
             { t: 'Evidence-based, informed decisions', d: 'Helpline numbers are hand-verified against each organisation\u2019s official site. The AI is hard-constrained never to invent one — silence over a wrong number.' },
-            { t: 'Safe data handling (the "AI Safe Sharing Check")', d: 'Identity details are redacted on the client\u2019s device before any AI analysis. The AI never sees names, emails, or account numbers.' },
+            { t: 'Safe data handling (the "AI Safe Sharing Check")', d: 'Identity redaction is built in — names, emails, NHS and account numbers can be stripped on the client\u2019s device before analysis. Paste text for the strongest protection; photos are read directly by the AI.' },
             { t: 'Fair Work & human rights', d: 'SORTED augments advisers — it doesn\u2019t replace them. Less backlog, earlier help, more people reached with the same staff.' },
           ].map((m, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
