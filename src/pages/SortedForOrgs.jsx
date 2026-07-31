@@ -184,15 +184,15 @@ export default function SortedForOrgs() {
       <section style={{ maxWidth: 640, margin: '0 auto', padding: '0 24px' }}>
         <p style={labelStyle}>Aligned with Scotland's AI Strategy 2026–2031</p>
         <p style={{ fontSize: 15, color: INK, lineHeight: 1.6, margin: '0 0 20px', fontWeight: 600 }}>
-          Scotland's national strategy asks for AI that's transparent, evidence-based, trusted in public services, and safeguarded for fairness and human rights. SORTED was built to those same principles — before the strategy existed.
+          Scotland's AI Strategy 2026–2031 (published 20 March 2026) sets a 2031 outcome of "trusted use of AI in public services — transparent, fair and accountable". SORTED was built to those same principles — before the strategy existed.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {[
-            { t: 'Public trust & confidence', d: 'Human-in-the-loop by design. SORTED explains the letter and flags urgency — it never gives legal advice. Complex cases route to your human advisers.' },
-            { t: 'Transparency & accountability', d: 'Every analysis is plain-English, quoting the source letter. We are committed to transparent registration on the Scottish AI Register as the programme matures.' },
-            { t: 'Evidence-based, informed decisions', d: 'Helpline numbers are hand-verified against each organisation\u2019s official site. The AI is hard-constrained never to invent one — silence over a wrong number.' },
-            { t: 'Safe data handling', d: 'Identity details are redacted on the client\u2019s device before any AI analysis — the AI never sees names, emails, or account numbers. (Pasted text and documents; photos are read directly by the AI.)' },
-            { t: 'Fair Work & human rights', d: 'SORTED augments advisers — it doesn\u2019t replace them. Less backlog, earlier help, more people reached with the same staff.' },
+            { t: 'Trusted use of AI in public services', d: 'Human-in-the-loop by design. SORTED explains the letter and flags urgency — it never gives legal advice. Complex cases route to your human advisers. The strategy names "transparent, fair and accountable" public-service AI as a 2031 outcome.' },
+            { t: 'Informed citizens', d: 'Every analysis is plain-English, quoting the source letter. SORTED states what the letter is and what it is not — meeting the strategy\u2019s outcome that people "understand\u2026 what it can and cannot do".' },
+            { t: 'Inclusive AI literacy', d: 'Free, no account, any language, built for low-literacy and limited-English users — the income, geography and digital-exclusion gaps the strategy names explicitly.' },
+            { t: 'Fairness, accountability & human rights', d: 'Helpline numbers are hand-verified against each organisation\u2019s official site; the AI is hard-constrained never to invent one. Identity is redacted on the client\u2019s device before any AI analysis (text and documents; photos read directly).' },
+            { t: 'Register-ready', d: 'The Scottish AI Register is now mandatory for public-sector AI use — the first such register in the UK. SORTED is built to be registered, not black-boxed.' },
           ].map((m, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
               style={{ display: 'flex', gap: 14, padding: '16px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 12 }}>
@@ -207,11 +207,20 @@ export default function SortedForOrgs() {
           ))}
         </div>
         <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: '16px 0 0', lineHeight: 1.5, fontStyle: 'italic' }}>
-          If transparent registration on the Scottish AI Register is a procurement requirement for your council, we will prioritise it for your pilot.
+          The Scottish AI Register is now mandatory for public-sector AI use — the first such register in the UK. SORTED is built to be register-ready for your pilot.
         </p>
         <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: '10px 0 0', lineHeight: 1.5 }}>
           The same transparency bar applies to any UK or national AI assurance framework — SORTED works across England, Wales, Northern Ireland and Scotland, and in 40+ languages worldwide. Scotland is where we're piloting first, not where the product ends.
         </p>
+        <div style={{ background: `${GOLD}06`, border: `1px solid ${GOLD}22`, borderRadius: 12, padding: '16px 18px', marginTop: 16 }}>
+          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: GOLD, textTransform: 'uppercase', marginBottom: 8 }}>Already happening in Scotland</div>
+          <p style={{ fontSize: 13.5, lineHeight: 1.6, color: INK, margin: '0 0 8px' }}>
+            The strategy\u2019s own case study is an AI triage tool built for <strong>Citizens Advice Scotland</strong> through the Scottish Government\u2019s <strong>CivTech</strong> programme \u2014 augmenting caseworkers, not replacing them. That\u2019s exactly SORTED\u2019s model. CivTech is also a live route to pilot with the public sector.
+          </p>
+          <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: 0, lineHeight: 1.5 }}>
+            Source: Scottish Government, \u201cScotland\u2019s AI Strategy 2026\u20132031\u201d, AI Action Plan (CAS case study); Law Society of Scotland, \u201cAI: opening the door to justice\u201d (2023).
+          </p>
+        </div>
       </section>
 
       <Divider />

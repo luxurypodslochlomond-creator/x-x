@@ -277,18 +277,18 @@ export default function SortedResearchBrief() {
             10 · Aligned with Scotland's AI Strategy 2026–2031
           </div>
           <h2 style={{ fontSize: 21, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.005em', margin: '0 0 14px', color: INK }}>
-            Scotland's AI Strategy 2026–2031 emphasises AI that is transparent, trusted in public services, and safeguarded for fairness and human rights. SORTED was built to those same principles — before the strategy existed.
+            Scotland's AI Strategy 2026–2031 (published 20 March 2026) sets a 2031 outcome of "trusted use of AI in public services — transparent, fair and accountable", and carries forward the 2021 principles of "fairness, accountability and respect for human rights". SORTED was built to those same principles — before the strategy existed.
           </h2>
           <p style={{ fontSize: 15, lineHeight: 1.6, color: MUTED, margin: '0 0 18px', maxWidth: 640 }}>
-            The strategy's foreword stresses public trust, responsible adoption in public services, Fair Work, and safeguards for fairness and human rights. Each theme below maps to a structural property SORTED was built with — not retrofitted for the pitch.
+            The strategy's stated purpose is to "harness the potential of AI to drive responsible growth". Its 2031 outcomes — informed citizens, inclusive AI literacy, and trusted, transparent, fair and accountable AI in public services — each map to a structural property SORTED was built with, not retrofitted for the pitch.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {[
-              { pri: 'Public trust & confidence', how: 'Human-in-the-loop by design. SORTED explains and flags urgency; it never gives legal advice. Complex cases route to a human adviser.' },
-              { pri: 'Transparency & accountability', how: 'Every analysis is plain-English and quotes the source letter. SORTED is committed to transparent registration on the Scottish AI Register as the programme matures.' },
-              { pri: 'Evidence-based, informed decisions', how: 'Helpline numbers are hand-verified against each organisation\u2019s official site. The AI is hard-constrained never to invent one — silence over a wrong number.' },
-              { pri: 'Safe data handling', how: 'Identity details are redacted on the client\u2019s device before any AI analysis. The AI never sees names, emails, or account numbers (text and documents; photos read directly).' },
-              { pri: 'Fair Work & human rights', how: 'SORTED augments advisers rather than replacing them — less backlog, earlier help, more people reached with the same staff. Free for the citizen, funded by the institution.' },
+              { pri: 'Trusted use of AI in public services', how: 'Human-in-the-loop by design. SORTED explains and flags urgency; it never gives legal advice. Complex cases route to a human adviser. The strategy names "transparent, fair and accountable" public-service AI as a 2031 outcome.' },
+              { pri: 'Informed citizens', how: 'Every analysis is plain-English and quotes the source letter. SORTED states what the letter is and what it is not — meeting the strategy\u2019s outcome that people "understand\u2026 what it can and cannot do".' },
+              { pri: 'Inclusive AI literacy', how: 'Free, no account, any language, built for low-literacy and limited-English users — the income, geography and digital-exclusion gaps the strategy names explicitly.' },
+              { pri: 'Fairness, accountability & human rights', how: 'Helpline numbers are hand-verified against each organisation\u2019s official site; the AI is hard-constrained never to invent one. Identity is redacted on the client\u2019s device before any AI analysis (text and documents; photos read directly).' },
+              { pri: 'Register-ready', how: 'The Scottish AI Register is now mandatory for public-sector AI use — the first such register in the UK. SORTED is built to be registered, not black-boxed.' },
             ].map((m) => (
               <div key={m.pri} style={{ background: '#fff', border: '1px solid rgba(28,28,30,0.08)', borderRadius: 12, padding: '16px 16px' }}>
                 <div style={{ fontSize: 14.5, fontWeight: 700, color: INK, marginBottom: 5 }}>{m.pri}</div>
@@ -298,6 +298,15 @@ export default function SortedResearchBrief() {
           </div>
           <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5, marginTop: 14 }}>
             <span style={{ fontWeight: 600, color: INK }}>Source:</span> Scottish Government, "Scotland's AI Strategy 2026–2031" (2026); Scottish AI Register. gov.scot/publications/scotlands-ai-strategy-2026-2031
+          </div>
+          <div style={{ background: 'rgba(198,153,92,0.06)', border: '1px solid rgba(198,153,92,0.22)', borderRadius: 12, padding: '16px 18px', marginTop: 18 }}>
+            <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: GOLD, textTransform: 'uppercase', marginBottom: 8 }}>Proof point — already happening in Scotland</div>
+            <p style={{ fontSize: 13.5, lineHeight: 1.6, color: INK, margin: '0 0 8px' }}>
+              The strategy\u2019s own case study is an AI triage and safeguarding tool built for <strong>Citizens Advice Scotland\u2019s Extra Help Unit</strong> through the Scottish Government\u2019s <strong>CivTech</strong> programme (launched October 2024). It identifies high-risk cases, flags safeguarding concerns in real time, and is designed to augment \u2014 not replace \u2014 professional caseworkers. That is precisely SORTED\u2019s model: AI that intercepts at the moment of fear, and hands back to a human when it matters.
+            </p>
+            <p style={{ fontSize: 12, color: MUTED, lineHeight: 1.5, margin: 0 }}>
+              <span style={{ fontWeight: 600, color: INK }}>Also:</span> Law Society of Scotland Journal, \u201cAI: opening the door to justice\u201d (Clare Fraser, August 2023) \u2014 the Scottish legal profession\u2019s call for a citizen-first, hallucination-constrained, data-private AI for access to justice.
+            </p>
           </div>
         </section>
 
