@@ -87,6 +87,24 @@ export default function AdminSortedOutreach() {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-black text-cyan-400 mb-8">SORTED Outreach Tracker</h1>
 
+        {/* WEEKEND PLAN — 1-3 Aug 2026 */}
+        <div className="bg-amber-500/10 border-2 border-amber-500/50 rounded-xl p-5 mb-8">
+          <div className="flex items-center gap-2 mb-2">
+            <Clock className="w-5 h-5 text-amber-400" />
+            <h2 className="text-lg font-bold text-amber-400">Weekend Plan — 1-3 Aug 2026</h2>
+          </div>
+          <ol className="list-decimal list-inside space-y-1 text-sm text-white/90">
+            <li><span className="font-bold">Sat 1 / Sun 2 Aug</span> — Point <span className="text-amber-300 font-mono">sortedSOS.org</span> to production (DNS live, links resolve).</li>
+            <li><span className="font-bold">Mon 4 Aug</span> — Send two emails (domain live so links work &amp; look pro):
+              <ul className="list-disc list-inside ml-4 mt-1 text-white/80">
+                <li><span className="text-cyan-300">CivTech</span> → civtech@gov.scot — Round 12 sponsor / innovator interest (cite CAS × HelpFirst precedent).</li>
+                <li><span className="text-cyan-300">Citizens Advice Scotland</span> — warm intro citing their own HelpFirst CivTech 8.1 story; ask for 20-min chat.</li>
+              </ul>
+            </li>
+          </ol>
+          <p className="mt-3 text-xs text-amber-300/80">Why Monday: sending Friday with a dead domain wastes the email. Live domain = professional first impression + working links.</p>
+        </div>
+
         {/* ADD NEW */}
         <div className="bg-[#0f1419] border-2 border-cyan-500/30 rounded-xl p-6 mb-8">
           <h2 className="text-xl font-bold text-cyan-400 mb-4">📬 Add Outreach</h2>
