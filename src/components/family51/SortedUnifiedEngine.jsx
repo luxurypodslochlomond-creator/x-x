@@ -71,8 +71,11 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   const [triggerPhoto, setTriggerPhoto] = useState(false);
 
   // Open: set tool → immediately visible, scroll to top
-  const handleToolOpen = (toolId, handoffData = null) => {
-    if (isLocked && onPaywall) {
+  const handleToolOpen = (toolId, handoffData = null, { bypassLock = false } = {}) => {
+    // Initial tool opens from the home cards respect the lock. Handoffs
+    // (continuations of an open case — decode→reply, reply→conflict, etc.)
+    // bypass it: never bounce someone mid-case to the paywall.
+    if (!bypassLock && isLocked && onPaywall) {
       onPaywall();
       return;
     }
@@ -212,7 +215,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
                 onResult={() => handleToolComplete('letter')}
                 onHandoff={(data) => {
                   setTriggerPhoto(false);
-                  handleToolOpen('reply', data);
+                  handleToolOpen('reply', data, { bypassLock: true });
                 }}
                 triggerPhoto={triggerPhoto}
                 prefillFileUrl={prefillContext?.prefillFileUrl}
@@ -232,7 +235,7 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
                   reply_summary: replyCtx?.subject_line || '',
                   reply_body: replyCtx?.letter_body || '',
                   situation_hint: replyCtx?.situation_hint || '',
-                })}
+                }, { bypassLock: true })}
               />
             )}
             {activeTool === 'conflict' && (
@@ -246,14 +249,14 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
               <Family51ScamChecker
                 accentColor={tc.color}
                 onResult={() => handleToolComplete('scam')}
-                onHandoff={(data) => handleToolOpen('reply', data)}
+                onHandoff={(data) => handleToolOpen('reply', data, { bypassLock: true })}
               />
             )}
             {activeTool === 'contract' && (
               <SortedContractChecker
                 accentColor={tc.color}
                 onResult={() => handleToolComplete('contract')}
-                onHandoff={(data) => handleToolOpen('reply', data)}
+                onHandoff={(data) => handleToolOpen('reply', data, { bypassLock: true })}
               />
             )}
           </motion.div>

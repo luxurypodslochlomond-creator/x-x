@@ -185,8 +185,12 @@ Return JSON: document_type (string — what type of document/situation this is),
     setLoading(true);
     setResult(null);
     setError(null);
-    // Server-side rate limit check
-    const limitCheck = await recordSortedUse();
+    // Server-side rate limit check — skip if this is a continuation of a
+    // case that already counted (decode → write reply). One act of help =
+    // one use; never block someone mid-case.
+    const limitCheck = prefillContext?.related_case_id
+      ? { allowed: true }
+      : await recordSortedUse();
     if (!limitCheck.allowed) {
       setError("That's today's free limit — come back tomorrow. No paywall, just a daily reset so everyone gets a turn.");
       setLoading(false);
