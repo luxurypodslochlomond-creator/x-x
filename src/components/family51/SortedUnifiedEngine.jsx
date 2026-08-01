@@ -122,14 +122,12 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
     }
   }, [activeTool, visible]);
 
-  // Lock the background page while the sheet is open so it can't jump or
-  // lose the user's scroll position. Restored exactly on close.
-  useEffect(() => {
-    if (!visible) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = prev; };
-  }, [visible]);
+  // NOTE: we deliberately do NOT lock body overflow while the sheet is open.
+  // The sheet is position:fixed inset:0 with overscroll-behavior:contain, so
+  // the background can't be seen or scrolled anyway. Locking body overflow
+  // freezes touch-scrolling INSIDE the sheet on iOS Safari — the classic
+  // "decoded a photo, now I can't scroll" bug. Leaving the body free lets
+  // the sheet scroll natively.
 
   return (
     <div

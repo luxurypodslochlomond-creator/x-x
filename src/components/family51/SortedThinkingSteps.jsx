@@ -26,7 +26,17 @@ function buildSteps(tool, input = '', geo = null) {
   const isScotland = geoName && /scotland/i.test(geoName);
   const isIreland  = geoName && /ireland/i.test(geoName);
   const isWales    = geoName && /wales/i.test(geoName);
-  const jurisdictionLabel = isScotland ? 'Scottish law' : isIreland ? 'Irish law' : isWales ? 'Welsh law' : geoName ? `${geoName} law` : null;
+  const isUK       = geo?.code === 'GB' || /united kingdom/i.test(geoName || '');
+  // The UK has three separate legal systems. The AI auto-detects which one
+  // applies from the letter itself (Glasgow → Scots law, London → E&W, etc),
+  // so we never claim a single "United Kingdom law" — we show we're working
+  // out which one. For everywhere else, name the jurisdiction directly.
+  const subJurisdiction = isScotland ? 'Scottish law' : isIreland ? 'Irish law' : isWales ? 'Welsh law' : geoName ? `${geoName} law` : null;
+  const jurisdictionStep = isUK
+    ? { text: 'Checking which UK law applies', sub: 'England, Scotland or Northern Ireland — detected from your letter' }
+    : subJurisdiction
+      ? { text: `Checking ${subJurisdiction}`, sub: `Applying ${subJurisdiction}` }
+      : { text: 'Checking what law applies', sub: 'Your rights, your country' };
   const consumerBody = isScotland ? 'Citizens Advice Scotland' : isIreland ? 'CCPC' : 'Citizens Advice';
   const amountNote  = specifics.amount  ? `Checking the ${specifics.amount} claim`        : null;
   const deadlineNote= specifics.deadline? `Deadline spotted: ${specifics.deadline}`        : null;
@@ -48,7 +58,7 @@ function buildSteps(tool, input = '', geo = null) {
     return [
       { text: 'Reading your letter',                   sub: senderNote || 'Every word — carefully' },
       { text: 'Working out what this actually is',     sub: amountNote || 'Official letter, notice, or something else?' },
-      { text: jurisdictionLabel ? `Checking ${jurisdictionLabel}` : 'Checking what law applies', sub: jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'Your rights, your country' },
+      { text: jurisdictionStep.text,                   sub: jurisdictionStep.sub },
       { text: 'Spotting deadlines',                    sub: deadlineNote || 'Dates that actually matter' },
       { text: 'Finding your real options',             sub: amountNote || 'What you can actually do' },
       { text: 'Writing it in plain English',           sub: 'No jargon. No nonsense.' },
@@ -86,7 +96,7 @@ function buildSteps(tool, input = '', geo = null) {
     ];
     return [
       { text: 'Understanding your situation',          sub: 'Reading what you told us' },
-      { text: 'Checking your rights',                  sub: jurisdictionLabel ? `Your rights under ${jurisdictionLabel}` : 'What you\'re entitled to here' },
+      { text: jurisdictionStep.text,                   sub: jurisdictionStep.sub },
       { text: 'Choosing the right tone',               sub: 'Firm but fair. Clear and effective.' },
       { text: 'Drafting your letter',                  sub: senderNote || 'Sharp, direct, ready to send' },
       { text: 'Final polish',                          sub: deadlineNote || 'Making sure it lands right' },
@@ -121,7 +131,7 @@ function buildSteps(tool, input = '', geo = null) {
     return [
       { text: 'Understanding the dispute',             sub: 'Reading your situation carefully' },
       { text: 'Identifying your position',             sub: amountNote || 'What you\'re entitled to here' },
-      { text: 'Checking relevant law',                 sub: jurisdictionLabel ? `Applying ${jurisdictionLabel}` : 'What applies in your country' },
+      { text: 'Checking relevant law',                 sub: jurisdictionStep.sub },
       { text: 'Mapping the other side',                sub: 'What they can and can\'t do' },
       { text: 'Building your strategy',                sub: 'Step by step, what to do' },
       { text: 'Finding free help',                     sub: `Real contacts — ${consumerBody}` },
