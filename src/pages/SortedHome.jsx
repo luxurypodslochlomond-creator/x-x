@@ -57,6 +57,9 @@ export default function SortedHome() {
           transition={MOTION.fade}
           style={{ paddingTop: 6, textAlign: 'center' }}
         >
+          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', color: FAINT, margin: '0 0 14px', textTransform: 'uppercase' }}>
+            {new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
           <div style={{ display: 'inline-block', padding: '5px 12px', border: `1px solid ${GOLD}55`, borderRadius: 999, marginBottom: 10, fontSize: 12, fontWeight: 600, color: GOLD, letterSpacing: '0.01em', background: `${GOLD}0d` }}>
             Your SOS, answered.
           </div>
