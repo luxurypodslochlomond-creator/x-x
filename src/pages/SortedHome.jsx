@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SortedToolCard from '@/components/family51/SortedToolCard';
 import SortedUnifiedEngine from '@/components/family51/SortedUnifiedEngine';
+import SortedV2Flow from '@/components/family51/SortedV2Flow';
 import SortedLiveCounter from '@/components/family51/SortedLiveCounter';
 import SortedCaseHistory from '@/components/family51/SortedCaseHistory';
 import SortedForLifeCard from '@/components/family51/SortedForLifeCard';
@@ -77,16 +78,34 @@ export default function SortedHome() {
             lineHeight: 1.5,
             maxWidth: 420,
           }}>
-            Paste it, snap a photo, or upload — any language, no judgement.
+            Any language, no judgement. Paste it below — we'll do the rest.
           </p>
         </motion.div>
 
-        {/* PRIMARY TOOLS — two big cards */}
+        {/* THE ONE THING — paste and get sorted */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...MOTION.fade, delay: 0.12 }}
+          style={{ marginTop: 18 }}
+        >
+          <SortedV2Flow />
+        </motion.div>
+
+        {/* OR PICK A SPECIFIC TOOL */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ...MOTION.fade, delay: 0.14 }}
+          style={{ fontSize: 11, fontWeight: 700, letterSpacing: FONT.labelSpacing, color: FAINT, margin: '36px 0 10px', textTransform: 'uppercase', textAlign: 'center' }}
+        >
+          Or pick a specific tool
+        </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...MOTION.fade, delay: 0.15 }}
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 22 }}
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}
         >
           <SortedToolCard
             variant="primary"
