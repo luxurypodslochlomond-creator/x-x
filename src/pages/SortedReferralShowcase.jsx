@@ -129,7 +129,7 @@ const ECONOMICS = [
 // Showcase of potential — projected reach, honestly modelled.
 const PROJECTIONS = [
   { period: 'Year 1', reach: '5,000 individuals', via: 'Direct launch + 3 partner pilots', note: 'Proof of the model. Anonymous pattern data starts flowing.' },
-  { period: 'Year 3', reach: '150,000 individuals', via: '20+ referral partners, white-label for 3 orgs', note: 'Break-even on B2B licences alone. B2C subscription covers R&D.' },
+  { period: 'Year 3', reach: '150,000 individuals', via: '20+ referral partners, white-label for 3 orgs', note: 'Break-even on B2B licences alone. Sorted For Life revenue covers R&D.' },
   { period: 'Year 5', reach: 'Reaching advice clients nationwide', via: 'National advice-network deployment', note: 'The ambition: every person handed a scary letter in the UK can decode it the same hour — free, no matter their language or income.' },
 ];
 
