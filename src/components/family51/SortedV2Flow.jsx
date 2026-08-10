@@ -298,10 +298,10 @@ Return JSON:
           value={text}
           onChange={e => setText(e.target.value)}
           placeholder="Paste the letter, contract, or email here…" aria-label="Paste your letter here"
-          rows={5}
+          rows={4}
           style={{
-            width: '100%', minHeight: 160, background: 'transparent',
-            border: 'none', color: INK, fontSize: 18, padding: '24px 24px 14px',
+            width: '100%', minHeight: 116, background: 'transparent',
+            border: 'none', color: INK, fontSize: 16, padding: '18px 20px 10px',
             resize: 'none', outline: 'none',
             fontFamily: '"Fraunces", Georgia, "Times New Roman", serif',
             fontWeight: 400,
@@ -382,7 +382,7 @@ Return JSON:
       whileTap={ready ? { scale: 0.97 } : {}}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       style={{
-        width: '100%', padding: '20px', borderRadius: 16, fontSize: 17,
+        width: '100%', padding: '16px', borderRadius: 14, fontSize: 16,
         fontWeight: 600, cursor: ready ? 'pointer' : 'default',
         border: 'none',
         background: ready ? INK : 'rgba(28,28,30,0.06)',

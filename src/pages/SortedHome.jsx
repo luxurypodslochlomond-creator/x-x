@@ -100,7 +100,7 @@ export default function SortedHome() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ ...MOTION.fade, delay: 0.14 }}
-          style={{ fontSize: 11, fontWeight: 700, letterSpacing: FONT.labelSpacing, color: FAINT, margin: '36px 0 10px', textTransform: 'uppercase', textAlign: 'center' }}
+          style={{ fontSize: 11, fontWeight: 700, letterSpacing: FONT.labelSpacing, color: FAINT, margin: '28px 0 10px', textTransform: 'uppercase', textAlign: 'center' }}
         >
           Or pick a specific tool
         </motion.p>
