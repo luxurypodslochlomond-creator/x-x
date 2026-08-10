@@ -576,6 +576,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Write a Reply", url: createPageUrl("Sorted"), icon: Mail, highlight: true, description: "We'll help you say it" },
       { title: "Resolve Conflict", url: createPageUrl("Sorted"), icon: Shield, highlight: true, description: "Find a way through it" },
       { title: "📄 Investor Brief", url: createPageUrl("SortedInvestorPress"), icon: FileText, highlight: true, description: "ESG · B2B · financial services" },
+      { title: "🤝 Referral Showcase", url: createPageUrl("SortedReferralShowcase"), icon: FileText, highlight: true, description: "Beneficiary · partners · viability" },
       { title: "Terms", url: "/SortedTerms", icon: Scale },
       { title: "Privacy", url: "/SortedPrivacy", icon: Eye },
     ];
