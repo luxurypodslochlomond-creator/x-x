@@ -136,7 +136,7 @@ const ECONOMICS = [
 const PROJECTIONS = [
   { period: 'Year 1', reach: '5,000 individuals', via: 'Direct launch + 3 partner pilots', note: 'Proof of the model. Anonymous pattern data starts flowing.' },
   { period: 'Year 3', reach: '150,000 individuals', via: '20+ referral partners, white-label for 3 orgs', note: 'Break-even on B2B licences alone. B2C subscription covers R&D.' },
-  { period: 'Year 5', reach: 'Reaching every Scottish advice client', via: 'National advice-network deployment', note: 'The ambition: every person handed a scary letter in Scotland can decode it the same hour — free, no matter their language or income.' },
+  { period: 'Year 5', reach: 'Reaching advice clients nationwide', via: 'National advice-network deployment', note: 'The ambition: every person handed a scary letter in the UK can decode it the same hour — free, no matter their language or income.' },
 ];
 
 const VIABILITY_POINTS = [
@@ -192,7 +192,7 @@ export default function SortedReferralShowcase() {
               SORTED exists for one person: the one who <span style={{ color: GOLD, fontWeight: 800 }}>cannot read the letter, cannot pay for help, and cannot wait</span>. Everyone else — the partners, the funders, the paying users — exists to make sure that person gets help first. That is the whole point. The economics below exist only to keep that promise standing.
             </p>
           </div>
-          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>Built in Scotland. Pilot-ready for Scottish advice networks first — then everywhere.</p>
+          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>UK-first. Pilot-ready for advice networks across the country — then everywhere.</p>
           <div style={{ height: 2, width: 56, background: GOLD, marginTop: 22, borderRadius: 2 }} />
         </motion.div>
 
