@@ -186,7 +186,7 @@ export default function SortedReferralShowcase() {
               SORTED exists for one person: the one who <span style={{ color: GOLD, fontWeight: 800 }}>cannot read the letter, cannot pay for help, and cannot wait</span>. Everyone else — the partners, the funders, the paying users — exists to make sure that person gets help first. That is the whole point. The economics below exist only to keep that promise standing.
             </p>
           </div>
-          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>UK-first. Pilot-ready for advice networks across the country — then everywhere. Registered Community Interest Company (CIC) since November 2025 — mission-locked, asset-locked.</p>
+          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>UK-first. Pilot-ready for advice networks across the country — then everywhere. Registered Community Interest Company (CIC No. SC870603) since November 2025 — mission-locked, asset-locked. Verifiable on the Companies House register.</p>
           <div style={{ height: 2, width: 56, background: GOLD, marginTop: 22, borderRadius: 2 }} />
         </motion.div>
 
