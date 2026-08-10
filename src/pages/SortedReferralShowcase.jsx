@@ -12,15 +12,15 @@ const CONTACT_EMAIL = 'family@uf51.love';
 const BENEFICIARIES = [
   {
     group: 'People who cannot read the letter',
-    size: '5.2m adults in England alone (1 in 6) are functionally illiterate',
+    size: '6.6m adults in England (1 in 6) have very low literacy skills',
     need: 'A formal letter from a court, council or creditor is a closed door. They need it opened in plain English — not a referral to a form they also cannot read.',
-    source: 'OECD PIAAC / National Literacy Trust',
+    source: 'OECD PIAAC 2023 / National Literacy Trust, 2024',
   },
   {
     group: 'People who cannot read it in English',
-    size: '62,000+ in Scotland alone; hundreds of thousands UK-wide',
+    size: '313,000+ in Scotland alone (5.8%); millions UK-wide',
     need: 'Benefits decisions, tenancy notices and court summons arrive in English. The letter is technically "received". The meaning never lands.',
-    source: 'Scotland\'s Census 2022 / Migration Observatory, Oxford',
+    source: 'Scotland\'s Census 2022',
   },
   {
     group: 'People in poverty & debt',
@@ -144,6 +144,22 @@ const VIABILITY_POINTS = [
   { point: 'The need is recurring, not one-off', why: 'People do not stop receiving letters. Subscriptions and org licences compound.' },
   { point: 'B2B2C is the distribution moat', why: 'A partner hands SORTED to every client. We do not pay to acquire — we are distributed by the trusted organisations people already turn to.' },
   { point: 'Hardship access does not break the model', why: 'Free-to-start and lifetime tiers are supported by the margin on paying users and org licences — by design, not by charity.' },
+];
+
+// Global context — the problem is not UK-only. SORTED is jurisdiction-agnostic.
+const GLOBAL = {
+  headline: '5.1 billion people — two-thirds of the world — lack meaningful access to justice',
+  source: 'Task Force on Justice / HiiL / SDG16+ Pathfinders',
+  note: 'The UK figures above are a slice of a global pattern. SORTED auto-detects the jurisdiction and works in 40+ languages, so the same tool that decodes a Glasgow council letter can decode a court notice in Lagos, a tenancy dispute in Toronto, or a benefits decision in Brisbane.',
+};
+
+// International equivalents — where readers beyond the UK can get human help.
+const INTERNATIONAL_HELP = [
+  { region: 'United States', route: '211 (dial 2-1-1) for local services; Legal Aid Society / Legal Services Corporation for free legal help.' },
+  { region: 'Canada', route: 'Pro Bono Ontario, Community Legal Education Ontario (CLEO), and provincial Legal Aid commissions.' },
+  { region: 'Australia', route: 'State Legal Aid commissions, Financial Rights Legal Centre, and the National Debt Helpline (1800 007 007).' },
+  { region: 'European Union', route: 'National consumer protection authorities and the European Consumer Centres (ECC-Net) for cross-border disputes.' },
+  { region: 'Global south', route: 'UNDP / UN Women legal aid programmes, and community paralegal networks (e.g. Namati).' },
 ];
 
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
@@ -271,6 +287,29 @@ export default function SortedReferralShowcase() {
           </div>
           <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: '16px 0 0', lineHeight: 1.5, fontStyle: 'italic' }}>
             Projections are modelled, not promised. Year 1 is the only one that is a commitment; the rest are the trajectory the model is built to reach.
+          </p>
+        </Section>
+
+        {/* ── 06 · GLOBAL CONTEXT ───────────────────────────── */}
+        <Section tag="06 · Global Context" title="The UK figures are a slice of a global pattern.">
+          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+            style={{ background: `${GOLD}08`, border: `1px solid ${GOLD}28`, borderRadius: RADIUS.card, padding: '22px 24px', marginBottom: 20 }}>
+            <div style={{ fontSize: 'clamp(20px, 5vw, 26px)', fontWeight: 800, color: INK, lineHeight: 1.25, marginBottom: 10 }}>{GLOBAL.headline}</div>
+            <p style={{ fontSize: 11, color: 'rgba(28,28,30,0.5)', margin: '0 0 14px' }}>Source: {GLOBAL.source}</p>
+            <p style={{ fontSize: 14.5, color: MUTED, lineHeight: 1.6, margin: 0 }}>{GLOBAL.note}</p>
+          </motion.div>
+
+          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: GOLD, textTransform: 'uppercase', marginBottom: 12 }}>Where to get human help — beyond the UK</div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {INTERNATIONAL_HELP.map((h, i, arr) => (
+              <div key={i} style={{ display: 'flex', gap: 14, padding: '14px 0', borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : 'none' }}>
+                <div style={{ flexShrink: 0, minWidth: 110, fontSize: 14, fontWeight: 800, color: INK }}>{h.region}</div>
+                <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.55, margin: 0 }}>{h.route}</p>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', margin: '14px 0 0', lineHeight: 1.5, fontStyle: 'italic' }}>
+            SORTED is not a substitute for a qualified adviser in complex cases — it is the first step that gets a person to the right human, in any language, in any country.
           </p>
         </Section>
 
