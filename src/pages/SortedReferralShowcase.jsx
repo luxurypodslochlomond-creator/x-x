@@ -26,7 +26,7 @@ const BENEFICIARIES = [
     group: 'People in poverty & debt',
     size: 'Social-welfare legal aid down ~57% since 2012',
     need: 'They face DWP, councils and creditors alone. By the time they reach a human adviser, the deadline has usually passed.',
-    source: 'IFS / MoJ Legal Aid Statistics',
+    source: 'IFS, 2024 (comparing to pre-LASPO 2012-13 levels)',
   },
   {
     group: 'Older & vulnerable adults',
@@ -59,10 +59,10 @@ const REFERRAL_PARTNERS = [
   },
   {
     name: 'StepChange & debt charities',
-    reach: 'StepChange supported ~500,000 people in 2023 (183,000 full debt advice)',
+    reach: 'StepChange supported over 160,000 people with full debt advice in 2025',
     role: 'Debt advice for people already in crisis. Every client brings a stack of letters they do not understand.',
     gap: 'Advisers spend the first session just decoding the paperwork. SORTED pre-decodes it — so the human hour is spent on the solution, not the reading.',
-    source: 'StepChange Impact Report, 2023',
+    source: 'StepChange Impact Report, 2025',
   },
   {
     name: 'Housing associations',
@@ -109,20 +109,14 @@ const ECONOMICS = [
   {
     tier: 'Free-to-start',
     price: '£0',
-    who: 'Every individual. 10 uses, no card, daily reset.',
-    why: 'The door stays open. Lifetime caps build walls; daily resets keep people coming back. This is the acquisition engine — not a limitation.',
+    who: 'Every individual. 10 uses, no card, no account.',
+    why: 'The door stays open. No paywall between a scared person and the decode. This is the acquisition engine — not a limitation.',
   },
   {
-    tier: 'Individual subscription',
-    price: '£9.99 / month',
-    who: 'People who use SORTED regularly — recurring disputes, carers, self-employed.',
-    why: 'One solved letter is worth more than a month of subscription. Churn is low because the need is recurring, not optional.',
-  },
-  {
-    tier: 'Lifetime access',
-    price: '£49 one-time',
-    who: 'People who cannot justify a subscription but need it permanently — vulnerable, older, low-income.',
-    why: 'Captures the people subscriptions exclude. Protects the mission and the margin at the same time.',
+    tier: 'Sorted For Life',
+    price: '£9.99 one-time',
+    who: 'People who need SORTED permanently — carers, recurring disputes, vulnerable, older, low-income.',
+    why: 'One payment, lifetime access. Priced so the people who need it most can afford it. This is the live product, not a projection.',
   },
   {
     tier: 'Organisation licence',
@@ -141,7 +135,7 @@ const PROJECTIONS = [
 
 const VIABILITY_POINTS = [
   { point: 'Marginal cost per decode is near-zero', why: 'AI inference at scale costs pence. One adviser licence serves thousands of clients.' },
-  { point: 'The need is recurring, not one-off', why: 'People do not stop receiving letters. Subscriptions and org licences compound.' },
+  { point: 'The need is recurring, not one-off', why: 'People do not stop receiving letters. Lifetime access and org licences compound.' },
   { point: 'B2B2C is the distribution moat', why: 'A partner hands SORTED to every client. We do not pay to acquire — we are distributed by the trusted organisations people already turn to.' },
   { point: 'Hardship access does not break the model', why: 'Free-to-start and lifetime tiers are supported by the margin on paying users and org licences — by design, not by charity.' },
 ];
@@ -192,7 +186,7 @@ export default function SortedReferralShowcase() {
               SORTED exists for one person: the one who <span style={{ color: GOLD, fontWeight: 800 }}>cannot read the letter, cannot pay for help, and cannot wait</span>. Everyone else — the partners, the funders, the paying users — exists to make sure that person gets help first. That is the whole point. The economics below exist only to keep that promise standing.
             </p>
           </div>
-          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>UK-first. Pilot-ready for advice networks across the country — then everywhere.</p>
+          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>UK-first. Pilot-ready for advice networks across the country — then everywhere. Registered Community Interest Company (CIC) since November 2025 — mission-locked, asset-locked.</p>
           <div style={{ height: 2, width: 56, background: GOLD, marginTop: 22, borderRadius: 2 }} />
         </motion.div>
 
@@ -246,7 +240,7 @@ export default function SortedReferralShowcase() {
         </Section>
 
         {/* ── 04 · FINANCIAL VIABILITY ──────────────────────── */}
-        <Section tag="04 · Financial Viability" title="Four revenue streams. One model that serves everyone and pays for itself.">
+        <Section tag="04 · Financial Viability" title="Three ways in. One model that serves everyone and pays for itself.">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
             {ECONOMICS.map((e, i) => (
               <div key={i} style={{ background: '#fff', border: `1px solid ${BORDER}`, borderRadius: RADIUS.card, padding: '18px 18px' }}>
