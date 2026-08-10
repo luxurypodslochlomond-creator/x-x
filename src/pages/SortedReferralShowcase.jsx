@@ -136,7 +136,7 @@ const ECONOMICS = [
 const PROJECTIONS = [
   { period: 'Year 1', reach: '5,000 individuals', via: 'Direct launch + 3 partner pilots', note: 'Proof of the model. Anonymous pattern data starts flowing.' },
   { period: 'Year 3', reach: '150,000 individuals', via: '20+ referral partners, white-label for 3 orgs', note: 'Break-even on B2B licences alone. B2C subscription covers R&D.' },
-  { period: 'Year 5', reach: '1,000,000+ individuals', via: 'National advice-network deployment', note: 'SORTED becomes default first-step infrastructure for official letters.' },
+  { period: 'Year 5', reach: 'Reaching every Scottish advice client', via: 'National advice-network deployment', note: 'The ambition: every person handed a scary letter in Scotland can decode it the same hour — free, no matter their language or income.' },
 ];
 
 const VIABILITY_POINTS = [
@@ -186,7 +186,14 @@ export default function SortedReferralShowcase() {
           <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.6, margin: '0 0 0' }}>
             Every figure is cited. This is the document for conversations with Citizens Advice, debt charities, housing associations and funders.
           </p>
-          <div style={{ height: 2, width: 56, background: GOLD, marginTop: 28, borderRadius: 2 }} />
+
+          <div style={{ marginTop: 24, padding: '16px 18px', background: '#fff', border: `1px solid ${GOLD}40`, borderLeft: `3px solid ${GOLD}`, borderRadius: 10 }}>
+            <p style={{ fontSize: 15, color: INK, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
+              SORTED exists for one person: the one who <span style={{ color: GOLD, fontWeight: 800 }}>cannot read the letter, cannot pay for help, and cannot wait</span>. Everyone else — the partners, the funders, the paying users — exists to make sure that person gets help first. That is the whole point. The economics below exist only to keep that promise standing.
+            </p>
+          </div>
+          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>Built in Scotland. Pilot-ready for Scottish advice networks first — then everywhere.</p>
+          <div style={{ height: 2, width: 56, background: GOLD, marginTop: 22, borderRadius: 2 }} />
         </motion.div>
 
         <Divider />
@@ -269,7 +276,7 @@ export default function SortedReferralShowcase() {
         </Section>
 
         {/* ── 05 · SHOWCASE OF POTENTIAL ────────────────────── */}
-        <Section tag="05 · Showcase of Potential" title="A modelled path from pilot to national infrastructure.">
+        <Section tag="05 · Showcase of Potential" title="A modelled path — measured in people helped, not growth.">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {PROJECTIONS.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
