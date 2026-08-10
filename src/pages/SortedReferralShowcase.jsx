@@ -30,9 +30,9 @@ const BENEFICIARIES = [
   },
   {
     group: 'Older & vulnerable adults',
-    size: 'Over-65s lose £1m+ per day to scams; £4,000 average per victim',
+    size: '1.9m older people scammed; £7.4bn total losses; ~£4,000 average per victim',
     need: 'Highest scam exposure, lowest digital confidence, often isolated. They need to know what is real and where to report it — instantly.',
-    source: 'Action Fraud / Independent Age',
+    source: 'Independent Age, "The hidden cost of scams" (2024)',
   },
   {
     group: 'ADHD & neurodivergent adults',
@@ -52,21 +52,21 @@ const BENEFICIARIES = [
 const REFERRAL_PARTNERS = [
   {
     name: 'Citizens Advice',
-    reach: '2.6m people helped face-to-face / by phone per year (England & Wales)',
+    reach: '2.71m people helped with one-to-one advice per year (England & Wales, 2024-25)',
     role: 'The gold standard for trust. Advisers triage, but operate on opening hours and appointment slots.',
-    gap: 'The network helps roughly 1 person for every ~15 who need it. Letters arrive already past deadline. SORTED intercepts at the moment of fear — before the courage to call is needed.',
-    source: 'Citizens Advice nationwide capacity reporting, 2024',
+    gap: 'Demand outstrips capacity — advisers report letters arriving already past deadline, and by the time someone works up the courage to call, the crisis has compounded. SORTED intercepts at the moment of fear.',
+    source: 'Citizens Advice annual impact report, 2024-25',
   },
   {
     name: 'StepChange & debt charities',
-    reach: 'StepChange advised 600,000+ clients in 2023',
+    reach: 'StepChange supported ~500,000 people in 2023 (183,000 full debt advice)',
     role: 'Debt advice for people already in crisis. Every client brings a stack of letters they do not understand.',
     gap: 'Advisers spend the first session just decoding the paperwork. SORTED pre-decodes it — so the human hour is spent on the solution, not the reading.',
-    source: 'StepChange annual review, 2023',
+    source: 'StepChange Impact Report, 2023',
   },
   {
     name: 'Housing associations',
-    reach: 'Over 6m social-rented homes in England alone',
+    reach: '4.0m social-rented homes in England',
     role: 'Tenants receive eviction notices, rent-arrears letters, section 21s — and freeze.',
     gap: 'Housing officers cannot reach every tenant before the deadline. SORTED lets the association hand every tenant a decoder — one link, no IT, no setup.',
     source: 'MHCLG / English Housing Survey',
