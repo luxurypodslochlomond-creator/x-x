@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { COLOR, FONT, RADIUS, SPACE, SHADOW } from '@/components/family51/sortedDesignSystem';
+import { COLOR, FONT, RADIUS } from '@/components/family51/sortedDesignSystem';
 
 const { gold: GOLD, ink: INK, paper: PAPER, muted: MUTED, border: BORDER, green: GREEN } = COLOR;
 
@@ -75,7 +75,7 @@ const REFERRAL_PARTNERS = [
     name: 'Faith & community groups',
     reach: 'Churches, mosques, gurdwaras are the first call for help',
     role: 'Trusted, present, but not legally trained. People bring their letters here before anywhere else.',
-    gap: 'They have compassion but not the tools. SORTED gives them a way to help instantly — in any language — and route the complex cases up.',
+    gap: 'They have compassion but not the tools. SORTED gives them a way to help instantly — in any language — and route complex cases to a specialist.',
     source: 'Community partner fieldwork',
   },
 ];
@@ -122,7 +122,7 @@ const ECONOMICS = [
     tier: 'Organisation licence',
     price: 'Per-seat / per-client-served',
     who: 'Advice centres, housing associations, debt charities.',
-    why: 'One adviser reaches ten times more people. The B2B2C pathway is how SORTED reaches people who will never find it on their own — and it is open from day one. Grant-funded access for hardship.',
+    why: 'One adviser reaches ten times more people. The B2B2C pathway is how SORTED reaches people who will never find it on their own. Grant-funded access for hardship.',
   },
 ];
 
@@ -174,23 +174,18 @@ export default function SortedReferralShowcase() {
             Who SORTED is for. Who sends them.<br />How it stays standing.
           </h1>
 
-          <p style={{ fontSize: 17, color: INK, lineHeight: 1.6, margin: '0 0 14px', fontWeight: 600 }}>
-            A funder-ready map of the <span style={{ color: GOLD }}>beneficiary group</span>, the <span style={{ color: GOLD }}>referral partners</span> who reach them, the pathway from partner to person, and the financial viability that makes it sustainable.
-          </p>
-          <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.6, margin: '0 0 0' }}>
-            Every figure is cited. This is the document for conversations with Citizens Advice, debt charities, housing associations and funders.
+          <p style={{ fontSize: 16, color: INK, lineHeight: 1.55, margin: '0 0 20px', fontWeight: 600 }}>
+            Every figure cited. Built for conversations with advice services, housing providers and funders.
           </p>
 
-          <div style={{ marginTop: 24, padding: '16px 18px', background: '#fff', border: `1px solid ${GOLD}40`, borderLeft: `3px solid ${GOLD}`, borderRadius: 10 }}>
+          <div style={{ padding: '16px 18px', background: '#fff', border: `1px solid ${GOLD}40`, borderLeft: `3px solid ${GOLD}`, borderRadius: 10 }}>
             <p style={{ fontSize: 15, color: INK, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
               SORTED exists for one person: the one who <span style={{ color: GOLD, fontWeight: 800 }}>cannot read the letter, cannot pay for help, and cannot wait</span>. Everyone else — the partners, the funders, the paying users — exists to make sure that person gets help first. That is the whole point. The economics below exist only to keep that promise standing.
             </p>
           </div>
-          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>UK-first. Pilot-ready for advice networks across the country — then everywhere. Registered Community Interest Company (CIC No. SC870603) since November 2025 — mission-locked, asset-locked. Verifiable on the Companies House register.</p>
+          <p style={{ fontSize: 12, color: MUTED, margin: '12px 0 0', fontStyle: 'italic' }}>UK-first, then everywhere. Registered Community Interest Company (CIC No. SC870603) since November 2025 — mission-locked, asset-locked. Verifiable on Companies House.</p>
           <div style={{ height: 2, width: 56, background: GOLD, marginTop: 22, borderRadius: 2 }} />
         </motion.div>
-
-        <Divider />
 
         {/* ── 01 · THE BENEFICIARY GROUP ────────────────────── */}
         <Section tag="01 · The Beneficiary Group" title="A well-defined group, one shared failure point: a letter they cannot act on alone.">
@@ -349,11 +344,5 @@ function Section({ tag, title, children }) {
       <h2 style={{ fontSize: 'clamp(20px, 4.5vw, 24px)', fontWeight: 800, lineHeight: 1.25, letterSpacing: '-0.01em', margin: '0 0 20px', color: INK }}>{title}</h2>
       {children}
     </section>
-  );
-}
-
-function Divider() {
-  return (
-    <div style={{ height: 1, background: BORDER, marginTop: 40 }} />
   );
 }
