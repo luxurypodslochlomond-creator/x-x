@@ -93,6 +93,8 @@ export default function SortedV2Flow() {
 
 ${geoContext}
 
+JURISDICTION OVERRIDE: The detected location above is a starting point. If the document content clearly indicates a DIFFERENT jurisdiction (e.g. a Glasgow council letter means Scotland/Scots law, a NSW tribunal notice means Australia, a Lagos court summons means Nigeria), apply THAT jurisdiction's law and helplines — not the detected one. The letter itself is the authority on where the person is, not their browser timezone.
+
 USER INPUT (text):
 ${text || '(no text — see attached file/image)'}
 
@@ -357,7 +359,7 @@ Return JSON:
               display: 'flex', alignItems: 'center', gap: 6,
               WebkitTapHighlightColor: 'transparent',
             }}>
-            <Camera size={17} color={GOLD} /> Photo
+            <Camera size={17} color={GOLD} /> Snap photo
           </motion.button>
           <motion.button whileTap={{ scale: 0.94 }} onClick={() => { tap(); fileInputRef.current?.click(); }}
             style={{
@@ -366,7 +368,7 @@ Return JSON:
               display: 'flex', alignItems: 'center', gap: 6,
               WebkitTapHighlightColor: 'transparent',
             }}>
-            <FileText size={17} color={GOLD} /> File
+            <FileText size={17} color={GOLD} /> Upload
           </motion.button>
           <div style={{ flex: 1 }} />
           <div style={{ display: 'flex', alignItems: 'center', fontSize: 13, fontWeight: 500, color: MUTED }}>
@@ -400,7 +402,7 @@ Return JSON:
             <ArrowRight size={17} color="#fff" />
           </>
         ) : (
-          'Paste your letter to start'
+          'Paste, snap, or upload to start'
         )}
       </motion.button>
 
