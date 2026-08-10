@@ -382,7 +382,7 @@ Return JSON:
       whileTap={ready ? { scale: 0.97 } : {}}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       style={{
-        width: '100%', padding: '16px', borderRadius: 14, fontSize: 16,
+        width: '100%', padding: '16px', borderRadius: 20, fontSize: 16,
         fontWeight: 600, cursor: ready ? 'pointer' : 'default',
         border: 'none',
         background: ready ? INK : 'rgba(28,28,30,0.06)',
