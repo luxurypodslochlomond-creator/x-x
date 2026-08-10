@@ -94,8 +94,8 @@ const PATHWAY = [
   },
   {
     step: '03',
-    title: 'SORTED decodes it in plain English',
-    detail: 'What it says. What it means. How urgent it is. What to do today. Identity redacted on the device before any AI touches it.',
+    title: 'SORTED decodes it in plain language',
+    detail: 'What it says. What it means. How urgent it is. What to do today. In English or their own language. Identity redacted on the device before any AI touches it.',
   },
   {
     step: '04',
@@ -128,7 +128,7 @@ const ECONOMICS = [
     tier: 'Organisation licence',
     price: 'Per-seat / per-client-served',
     who: 'Advice centres, housing associations, debt charities.',
-    why: 'One adviser reaches ten times more people. The B2B2C pathway is the route to the 5.1bn — and it is open from day one. Grant-funded access for hardship.',
+    why: 'One adviser reaches ten times more people. The B2B2C pathway is how SORTED reaches people who will never find it on their own — and it is open from day one. Grant-funded access for hardship.',
   },
 ];
 
