@@ -303,9 +303,9 @@ Return JSON:
             width: '100%', minHeight: 116, background: 'transparent',
             border: 'none', color: INK, fontSize: 16, padding: '18px 20px 10px',
             resize: 'none', outline: 'none',
-            fontFamily: '"Fraunces", Georgia, "Times New Roman", serif',
+            fontFamily: FONT.family,
             fontWeight: 400,
-            lineHeight: 1.65, boxSizing: 'border-box',
+            lineHeight: 1.6, boxSizing: 'border-box',
             WebkitFontSmoothing: 'antialiased',
             fontOpticalSizing: 'auto',
           }}
