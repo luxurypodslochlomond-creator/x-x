@@ -5,6 +5,8 @@ import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOL
 import { base44 } from '@/api/base44Client';
 import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
 import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
+import FrequencyAIRouter from '@/components/healing/FrequencyAIRouter';
+import { FREQUENCIES } from '@/components/healing/frequencyData';
 
 
 /**
@@ -21,7 +23,8 @@ import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 // - Recommended timer
 // - AI51 stack suggestions (combine with other frequencies)
 
-const FREQUENCIES = [
+// FREQUENCIES array is imported from src/components/healing/frequencyData.js
+const _FREQUENCIES_UNUSED = [
   // === PHYSICAL PAIN (most urgent) ===
   {
     id: 'chest_heart',
@@ -1524,8 +1527,10 @@ export default function FrequencyChamber() {
         )}
       </AnimatePresence>
 
-      {/* FREQUENCY GRID */}
+      {/* AI ROUTER + FREQUENCY GRID */}
       {!isPlaying && (
+      <>
+      <FrequencyAIRouter frequencies={FREQUENCIES} onSelect={(freq) => freq.isBuzzStop ? setShowBuzzStop(true) : play(freq)} />
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {FREQUENCIES
@@ -1887,6 +1892,7 @@ export default function FrequencyChamber() {
         </div>
 
       </div>
+      </>
       )}
 
       {/* BUZZSTOP ENGINE MODAL */}
