@@ -95,6 +95,7 @@ const FREQUENCIES = [
     id: 'anxiety',
     name: 'ANXIETY RELIEF',
     hz: 10,
+    binaural: true,
     icon: COOLASFUCKShield,
     color: '#a855f7',
     color2: '#10b981',
@@ -113,6 +114,7 @@ const FREQUENCIES = [
     id: 'depression',
     name: 'MOOD LIFT',
     hz: 10,
+    binaural: true,
     icon: COOLASFUCKBrain,
     color: '#fbbf24',
     color2: '#ec4899',
@@ -131,6 +133,7 @@ const FREQUENCIES = [
     id: 'loneliness',
     name: 'YOU ARE NOT ALONE',
     hz: 10,
+    binaural: true,
     icon: COOLASFUCKHeart,
     color: '#ec4899',
     color2: '#a855f7',
@@ -166,6 +169,7 @@ const FREQUENCIES = [
     id: 'focus',
     name: 'LASER FOCUS',
     hz: 40,
+    binaural: true,
     icon: COOLASFUCKBrain,
     color: '#22c55e', // Primary: Green for concentration
     color2: '#fbbf24', // Harmonic: Gold for mental clarity
@@ -186,6 +190,7 @@ const FREQUENCIES = [
     id: 'earth',
     name: "EARTH'S HEARTBEAT",
     hz: 7.83,
+    binaural: true,
     icon: COOLASFUCKShield,
     color: '#10b981',
     visual: 'schumann',
@@ -202,6 +207,7 @@ const FREQUENCIES = [
     id: 'sleep',
     name: 'DEEP SLEEP',
     hz: 2,
+    binaural: true,
     icon: COOLASFUCKMoon,
     color: '#3b82f6', // Primary: Blue for sleep/melatonin
     color2: '#a855f7', // Harmonic: Purple for dream state
@@ -216,6 +222,110 @@ const FREQUENCIES = [
     device: 'headphones',
     psychology: 'Body releasing. Mind drifting. Deep rest coming.' // Sleep medicine
     },
+
+  // === FULL SOLFEGGIO SCALE — UNIVERSAL FREQUENCIES ===
+  {
+    id: 'solfeggio_396',
+    name: 'FEAR RELEASE',
+    hz: 396,
+    icon: COOLASFUCKShield,
+    color: '#ef4444',
+    color2: '#10b981',
+    visual: 'shield',
+    description: 'Liberation from guilt + fear + deep emotional release',
+    waveform: 'sine',
+    harmonics: [198, 792, 99],
+    timer: '15 min',
+    stackWith: ['calm', 'anxiety'],
+    context: 'SOLFEGGIO 396Hz: Part of the ancient Solfeggio scale rediscovered by Dr. Joseph Puleo. Traditionally associated with releasing fear and guilt. Listed honestly as Traditional Practice — culturally and spiritually significant, limited clinical trials. The pure sine wave is calming regardless of belief.',
+    device: 'both',
+    psychology: 'Releasing what holds you back. Fear dissolving. Freedom growing.'
+  },
+  {
+    id: 'solfeggio_417',
+    name: 'CHANGE + TRANSITION',
+    hz: 417,
+    icon: COOLASFUCKWaves,
+    color: '#f59e0b',
+    color2: '#06b6d4',
+    visual: 'waves',
+    description: 'Undoing stagnation + facilitating change + clearing energy',
+    waveform: 'sine',
+    harmonics: [209, 834, 160],
+    timer: '15 min',
+    stackWith: ['calm', 'solfeggio_396'],
+    context: 'SOLFEGGIO 417Hz: Traditionally associated with facilitating change and undoing stagnant situations. Pure sine wave. Traditional Practice — culturally significant, not yet clinically proven.',
+    device: 'both',
+    psychology: 'Stagnation breaking. Change flowing. You are moving forward now.'
+  },
+  {
+    id: 'solfeggio_639',
+    name: 'CONNECTION + HARMONY',
+    hz: 639,
+    icon: COOLASFUCKHeart,
+    color: '#ec4899',
+    color2: '#a855f7',
+    visual: 'heart',
+    description: 'Relationships + communication + emotional connection',
+    waveform: 'sine',
+    harmonics: [320, 1278, 160],
+    timer: '15 min',
+    stackWith: ['calm', 'solfeggio_417'],
+    context: 'SOLFEGGIO 639Hz: Traditionally associated with harmonious relationships and enhanced communication. Pure sine wave. Traditional Practice — the "connection" frequency in the solfeggio scale.',
+    device: 'both',
+    psychology: 'Opening to connection. Communication flowing. Love growing.'
+  },
+  {
+    id: 'solfeggio_741',
+    name: 'INTUITION + EXPRESSION',
+    hz: 741,
+    icon: COOLASFUCKBrain,
+    color: '#a855f7',
+    color2: '#22c55e',
+    visual: 'waves',
+    description: 'Problem-solving + intuition + self-expression',
+    waveform: 'sine',
+    harmonics: [371, 1482, 186],
+    timer: '15 min',
+    stackWith: ['focus', 'solfeggio_639'],
+    context: 'SOLFEGGIO 741Hz: Traditionally associated with awakening intuition and solving problems. Pure sine wave. Traditional Practice — the "expression" frequency in the solfeggio scale.',
+    device: 'both',
+    psychology: 'Intuition awakening. Clarity growing. Your inner voice is speaking.'
+  },
+  {
+    id: 'solfeggio_852',
+    name: 'SPIRITUAL AWAKENING',
+    hz: 852,
+    icon: COOLASFUCKBrain,
+    color: '#3b82f6',
+    color2: '#a855f7',
+    visual: 'waves',
+    description: 'Spiritual awakening + returning to source + deep clarity',
+    waveform: 'sine',
+    harmonics: [426, 1704, 213],
+    timer: '20 min',
+    stackWith: ['calm', 'solfeggio_741'],
+    context: 'SOLFEGGIO 852Hz: Traditionally associated with spiritual awakening and returning to spiritual order. Pure sine wave. Traditional Practice — the "awakening" frequency in the solfeggio scale.',
+    device: 'both',
+    psychology: 'Awakening. Remembering. You are part of something greater.'
+  },
+  {
+    id: 'solfeggio_963',
+    name: 'PINEAL ACTIVATION',
+    hz: 963,
+    icon: COOLASFUCKBrain,
+    color: '#fbbf24',
+    color2: '#ec4899',
+    visual: 'gamma',
+    description: 'Higher consciousness + pineal gland + crown connection',
+    waveform: 'sine',
+    harmonics: [482, 1926, 241],
+    timer: '20 min',
+    stackWith: ['solfeggio_852', 'calm'],
+    context: 'SOLFEGGIO 963Hz: The "frequency of the gods" in the solfeggio tradition — associated with crown chakra activation and higher consciousness. Pure sine wave. Traditional Practice — the highest frequency in the solfeggio scale.',
+    device: 'both',
+    psychology: 'Crown opening. Higher consciousness activating. You are connected.'
+  },
 
   // === DENTAL + ROOT CANAL ===
   {
@@ -330,6 +440,7 @@ const FREQUENCIES = [
     id: 'box_breathing',
     name: '4-7-8 BREATHING GUIDE',
     hz: 4,
+    binaural: true,
     displayHz: '4-7-8 cycle',
     icon: COOLASFUCKShield,
     color: '#10b981',
@@ -646,6 +757,34 @@ export default function FrequencyChamber() {
         return; // Skip standard oscillator path
       }
 
+      if (freq.binaural) {
+        // PURE BINAURAL BEAT — stereo routing, no stacking
+        // Brain entrains to the difference between left and right ears
+        // Stacking muddies the signal — purity is essential for entrainment
+        const beatHz = freq.hz;
+        const merger = ctx.createChannelMerger(2);
+
+        const leftOsc = ctx.createOscillator();
+        leftOsc.type = 'sine';
+        leftOsc.frequency.value = carrier;
+        const leftGain = ctx.createGain();
+        leftGain.gain.value = 0.4;
+        leftOsc.connect(leftGain);
+        leftGain.connect(merger, 0, 0);
+
+        const rightOsc = ctx.createOscillator();
+        rightOsc.type = 'sine';
+        rightOsc.frequency.value = carrier + beatHz;
+        const rightGain = ctx.createGain();
+        rightGain.gain.value = 0.4;
+        rightOsc.connect(rightGain);
+        rightGain.connect(merger, 0, 1);
+
+        merger.connect(masterGain);
+        leftOsc.start();
+        rightOsc.start();
+        nodes.push(leftOsc, rightOsc, leftGain, rightGain, merger);
+      } else {
       const osc = ctx.createOscillator();
       osc.type = freq.waveform;
       osc.frequency.value = carrier;
@@ -788,6 +927,7 @@ export default function FrequencyChamber() {
           nodes.push(ambOsc, ambGain);
         });
       } // End of !freq.isSweep check
+      } // End of non-binaural else block
 
       nodesRef.current = nodes;
       setIsPlaying(true);
@@ -1446,7 +1586,7 @@ export default function FrequencyChamber() {
               {['tinnitus_sweep', 'earth', 'calm', 'muscle_tension'].includes(freq.id) && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-cyan-500/15 border border-cyan-500/50 rounded text-[10px] font-black text-cyan-400 font-mono">🔬 EXPERIMENTAL</span>
               )}
-              {['chest_heart', 'nerve_pain', 'inflammation', 'bro51_heart_boost', 'bro51_full_body', 'bro51_gut_repair', 'cat_healing'].includes(freq.id) && (
+              {['chest_heart', 'nerve_pain', 'inflammation', 'bro51_heart_boost', 'bro51_full_body', 'bro51_gut_repair', 'cat_healing', 'solfeggio_396', 'solfeggio_417', 'solfeggio_639', 'solfeggio_741', 'solfeggio_852', 'solfeggio_963'].includes(freq.id) && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-500/15 border border-amber-500/50 rounded text-[10px] font-black text-amber-400 font-mono">◈ TRADITIONAL PRACTICE</span>
               )}
             </div>
