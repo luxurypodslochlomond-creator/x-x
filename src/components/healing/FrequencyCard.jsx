@@ -36,7 +36,9 @@ export default function FrequencyCard({ freq, index, onPlay, isRecommended, allF
         boxShadow: isRecommended
           ? `0 0 40px ${freq.color}, 0 0 60px ${freq.color}80`
           : `0 0 20px ${freq.color}40`,
-        backgroundColor: isRecommended ? `${freq.color}10` : 'black'
+        backgroundColor: isRecommended ? `${freq.color}10` : 'black',
+        contentVisibility: 'auto',
+        containIntrinsicSize: '320px'
       }}
     >
       {isRecommended && (

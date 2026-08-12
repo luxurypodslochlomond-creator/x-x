@@ -45,6 +45,7 @@ export default function FrequencyChamber() {
   const [showDataControls, setShowDataControls] = useState(false);
   const [currentSweepFreq, setCurrentSweepFreq] = useState(20);
   const [showBuzzStop, setShowBuzzStop] = useState(false);
+  const [cardsReady, setCardsReady] = useState(false);
 
   const audioCtxRef = useRef(null);
   const nodesRef = useRef([]);
@@ -58,6 +59,12 @@ export default function FrequencyChamber() {
   const timerTargetRef = useRef(null);
   const isPlayingRef = useRef(false);
   const animFrameRef = useRef(null);
+
+  // DEFER CARD GRID — header + AIRouter paint first, cards render after (zero blocking)
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => requestAnimationFrame(() => setCardsReady(true)));
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   // === PLAY FREQUENCY ===
   const play = async (freq) => {
@@ -1039,7 +1046,8 @@ export default function FrequencyChamber() {
       <FrequencyAIRouter frequencies={FREQUENCIES} onSelect={(freq) => freq.isBuzzStop ? setShowBuzzStop(true) : play(freq)} />
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {FREQUENCIES
+        {cardsReady ? (
+        FREQUENCIES
           .filter(freq => {
             if (deviceFilter === 'all') return true;
             if (deviceFilter === 'speaker') return freq.device === 'speaker' || freq.device === 'both';
@@ -1055,7 +1063,10 @@ export default function FrequencyChamber() {
             isRecommended={ai51Recommendation?.frequencyId === freq.id}
             allFrequencies={FREQUENCIES}
           />
-        ))}
+        ))
+        ) : (
+          <div className="col-span-full flex items-center justify-center py-20 text-gray-600 font-mono text-xs">Tuning in…</div>
+        )}
         </div>
 
         <FrequencyInfoPanels
