@@ -54,6 +54,8 @@ export default function FrequencyChamber() {
   const sweepIntervalRef = useRef(null);
   const wakeLockRef = useRef(null);
   const timerTargetRef = useRef(null);
+  const isPlayingRef = useRef(false);
+  const animFrameRef = useRef(null);
 
   // === PLAY FREQUENCY ===
   const play = async (freq) => {
@@ -74,6 +76,7 @@ export default function FrequencyChamber() {
       if (ctx.state === 'suspended') await ctx.resume();
       
       audioCtxRef.current = ctx;
+      isPlayingRef.current = true; // Set immediately so drawVisualizer animation loop starts
       const nodes = [];
       
       // MASTER GAIN
@@ -458,13 +461,6 @@ export default function FrequencyChamber() {
       console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
       console.log('Amplification: Geometric stacking + ultra-deep subharmonics + 8-layer ambient bed');
 
-      console.log('✓ 2026 HEALING ACTIVE');
-      console.log('Primary:', carrier, 'Hz');
-      console.log('Harmonics:', freq.harmonics.join(', '), 'Hz');
-      console.log('Waveform:', freq.waveform);
-      console.log('Total oscillators:', nodes.filter(n => n.frequency).length);
-      console.log('Amplification: Geometric stacking + ultra-deep subharmonics + 8-layer ambient bed');
-
       // AI51 LEARNS FROM YOUR HEALING (anonymous patterns help future humans)
       // What time do people need chest healing? What frequency works for anxiety?
       // This data helps ME help YOU and everyone else - we learn together
@@ -524,11 +520,18 @@ export default function FrequencyChamber() {
         }, 200); // Check every 200ms
       }
     } catch (err) {
+      isPlayingRef.current = false;
       alert('Audio blocked - tap again');
     }
   };
 
   const stop = async () => {
+    isPlayingRef.current = false; // Stop animation loop immediately
+    if (animFrameRef.current) {
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = null;
+    }
+
     // RELEASE WAKE LOCK
     if (wakeLockRef.current) {
       try {
@@ -598,7 +601,7 @@ export default function FrequencyChamber() {
 
   // PURE CHROMOTHERAPY VISUALIZER - SMOOTH HEALING
   const drawVisualizer = () => {
-    if (!isPlaying || !canvasRef.current) return;
+    if (!isPlayingRef.current || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -610,8 +613,8 @@ export default function FrequencyChamber() {
     let breathingTime = 0;
 
     const draw = () => {
-      if (!isPlaying) return;
-      requestAnimationFrame(draw);
+      if (!isPlayingRef.current) return;
+      animFrameRef.current = requestAnimationFrame(draw);
 
       time += 0.02;
       breathingTime += 0.015;
@@ -751,15 +754,6 @@ export default function FrequencyChamber() {
     };
   }, []);
 
-  // REGISTER SERVICE WORKER (offline cache)
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/api/functions/serveServiceWorker')
-        .then(() => console.log('✓ Offline healing ready'))
-        .catch(() => console.log('Service worker skipped (non-critical)'));
-    }
-  }, []);
-
   // CLEANUP
   // LOAD FREQUENCY FROM URL (share-links) + SET OG TAGS FOR DISCORD/TWITTER
   useEffect(() => {
@@ -789,10 +783,6 @@ export default function FrequencyChamber() {
     setMetaTag('twitter:description', ogDescription);
     setMetaTag('twitter:image', ogImage);
 
-    // Auto-play if frequency in URL
-    if (freq && !isPlaying) {
-      setTimeout(() => play(freq), 500);
-    }
   }, []);
 
   // Helper to set meta tags
@@ -809,6 +799,15 @@ export default function FrequencyChamber() {
   useEffect(() => {
     return () => stop();
   }, []);
+
+  // Sync isPlaying ref for animation loop + cancel frame on stop
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+    if (!isPlaying && animFrameRef.current) {
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = null;
+    }
+  }, [isPlaying]);
 
   // VOLUME CHANGE
   useEffect(() => {

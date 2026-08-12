@@ -29,7 +29,7 @@ export default function FrequencyCard({ freq, index, onPlay, isRecommended, allF
       onClick={() => freq.isBuzzStop ? onPlay(freq, true) : onPlay(freq)}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      className="p-8 border-4 bg-black hover:bg-white/5 transition-all relative text-left h-full sticky"
+      className="p-5 sm:p-8 border-4 bg-black hover:bg-white/5 transition-all relative text-left h-full md:sticky"
       style={{
         top: `${(index % 3) * 20}px`,
         borderColor: freq.color,
