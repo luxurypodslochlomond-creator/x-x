@@ -954,7 +954,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
                             )}
 
-        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? (isOffline ? 'pt-[90px] lg:pt-6' : 'pt-[72px] lg:pt-6') : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? 'lg:pt-6' : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
           {children}
               {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
               <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
