@@ -1,11 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX, X, Share2 } from 'lucide-react';
-import { COOLASFUCKWaves, COOLASFUCKFire, COOLASFUCKBrain, COOLASFUCKHeart, COOLASFUCKMoon, COOLASFUCKShield, COOLASFUCKZap, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
+import { Volume2, VolumeX, Share2 } from 'lucide-react';
+import { COOLASFUCKWaves, COOLASFUCKHeadphones, COOLASFUCKSpeaker } from '@/components/shared/COOLASFUCKIcon';
 import { base44 } from '@/api/base44Client';
-import FrequencyP2PShare from '@/components/healing/FrequencyP2PShare';
-import BuzzStopEngine from '@/components/healing/BuzzStopEngine';
 import FrequencyAIRouter from '@/components/healing/FrequencyAIRouter';
+import SacredGeometryBackground from '@/components/healing/SacredGeometryBackground';
+
+const BuzzStopEngine = lazy(() => import('@/components/healing/BuzzStopEngine'));
+const FrequencyP2PShare = lazy(() => import('@/components/healing/FrequencyP2PShare'));
 import FrequencyInfoPanels from '@/components/healing/FrequencyInfoPanels';
 import FrequencyCard from '@/components/healing/FrequencyCard';
 import { FREQUENCIES } from '@/components/healing/frequencyData';
@@ -830,7 +832,9 @@ export default function FrequencyChamber() {
     <div className="min-h-screen bg-black text-white p-3 sm:p-4">
 
       {/* HEADER */}
-      <div className="max-w-6xl mx-auto mb-6 sm:mb-8 text-center px-2">
+      <div className="max-w-6xl mx-auto mb-6 sm:mb-8 text-center px-2 relative">
+        <SacredGeometryBackground color="#d4a017" opacity={0.04} />
+        <div className="relative z-10">
         <div className="flex flex-col items-center gap-2 mb-4">
           <COOLASFUCKWaves size={48} animate={true} />
           <h1 className="text-2xl sm:text-3xl font-black text-white">
@@ -892,6 +896,7 @@ export default function FrequencyChamber() {
             <COOLASFUCKHeadphones size={16} animate={deviceFilter === 'headphones'} />
             HEADPHONES
           </motion.button>
+        </div>
         </div>
       </div>
 
@@ -1078,7 +1083,9 @@ export default function FrequencyChamber() {
                   ✕ CLOSE
                 </button>
               </div>
-              <BuzzStopEngine onStop={() => setShowBuzzStop(false)} />
+              <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" /></div>}>
+                <BuzzStopEngine onStop={() => setShowBuzzStop(false)} />
+              </Suspense>
             </div>
           </motion.div>
         )}
@@ -1087,11 +1094,13 @@ export default function FrequencyChamber() {
       {/* P2P SHARE MODAL */}
       <AnimatePresence>
         {showShare && selected && (
-          <FrequencyP2PShare
-            frequency={selected}
-            timer={timer}
-            onClose={() => setShowShare(false)}
-          />
+          <Suspense fallback={null}>
+            <FrequencyP2PShare
+              frequency={selected}
+              timer={timer}
+              onClose={() => setShowShare(false)}
+            />
+          </Suspense>
         )}
       </AnimatePresence>
 
