@@ -527,8 +527,8 @@ export default function NewCleanupPage() {
                     reader.readAsDataURL(file);
                 } else {
                 try {
-                    // IPFS UPLOAD - Interplanetary decentralized storage
-                    const uploadResult = await base44.functions.invoke('uploadToIPFS', { file });
+                    // Upload via always-available Core integration
+                    const uploadResult = await base44.integrations.Core.UploadFile({ file });
                     const file_url = uploadResult.file_url;
 
                     setCapturedPhotos(prev => [...prev, file_url]);
@@ -610,8 +610,8 @@ export default function NewCleanupPage() {
                 }
             } else {
                 if (fileOrUrl instanceof File) {
-                // IPFS UPLOAD
-                const uploadResult = await base44.functions.invoke('uploadToIPFS', { file: fileOrUrl });
+                // Upload via always-available Core integration
+                const uploadResult = await base44.integrations.Core.UploadFile({ file: fileOrUrl });
                 photoUrl = uploadResult.file_url;
                 } else {
                     photoUrl = fileOrUrl;
