@@ -501,10 +501,10 @@ export default function AdminStoneymollanLegal() {
         >
           <h3 className="font-black text-red-400 mb-3 text-lg">🔥 THE SMOKING GUN — Estate Manager's Admission</h3>
           <blockquote className="border-l-4 border-red-400 pl-4 text-white text-lg italic mb-3">
-            "The barn is technically not ours"
+            "You know the barn technically isn't yours, don't you?"
           </blockquote>
           <p className="text-white/70 text-sm">— Cameron Estate Manager, spoken directly to Brian Hughes</p>
-          <p className="text-red-300 text-sm mt-3 font-bold">This is a verbal admission that Cameron Estate do not assert clear ownership of the barn. Combined with 28+ years of use (former owner 24yrs + Brian/Gill from Feb 2022), maintenance investment, and sole road access — this case is extremely strong.</p>
+          <p className="text-red-300 text-sm mt-3 font-bold">This acknowledges the Estate was aware of Brian's use of the byre. They have never written, interdicted, or taken any legal action to stop that use in 28 years. Combined with 28+ years of use (former owner 24yrs + Brian/Gill from Feb 2022), maintenance investment, and sole road access — this case is extremely strong.</p>
         </motion.div>
 
         {/* NOTES */}
