@@ -9,7 +9,6 @@ import { saveCaseToHistory } from './SortedCaseHistory';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } from './SortedResultShell';
-import GeoSelector from './GeoSelector';
 import { COLOR, RADIUS, FONT, TOUCH, MOTION, SHADOW, haptic } from './sortedDesignSystem';
 const { tap, strong: tapStrong } = haptic;
 
@@ -371,9 +370,6 @@ Return JSON:
             <FileText size={17} color={GOLD} /> Upload
           </motion.button>
           <div style={{ flex: 1 }} />
-          <div style={{ display: 'flex', alignItems: 'center', fontSize: 13, fontWeight: 500, color: MUTED }}>
-            <GeoSelector geo={geo} onChange={setGeo} accentColor={GOLD} />
-          </div>
         </div>
       </motion.div>
 
