@@ -369,7 +369,6 @@ Return JSON:
             }}>
             <FileText size={17} color={GOLD} /> Upload
           </motion.button>
-          <div style={{ flex: 1 }} />
         </div>
       </motion.div>
 
