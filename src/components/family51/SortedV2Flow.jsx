@@ -9,6 +9,8 @@ import { saveCaseToHistory } from './SortedCaseHistory';
 import { recordSortedUse } from '@/hooks/useSortedRateLimit';
 import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } from './SortedResultShell';
+import SortedVoiceInput from './SortedVoiceInput';
+import SortedVoiceOutput from './SortedVoiceOutput';
 import { COLOR, RADIUS, FONT, TOUCH, MOTION, SHADOW, haptic } from './sortedDesignSystem';
 const { tap, strong: tapStrong } = haptic;
 
@@ -213,6 +215,9 @@ Return JSON:
             onEmail={result.ready_reply ? openEmail : null}
             flash={copied ? 'COPIED' : null}
           >
+            <div style={{ marginBottom: 4 }}>
+              <SortedVoiceOutput result={result} accentColor={GOLD} />
+            </div>
             {(result.key_intel?.sender || result.key_intel?.deadline || result.key_intel?.reference || result.key_intel?.contact_method) && (
               <SortedResultSection label="KEY INTEL" color={GOLD}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -369,6 +374,10 @@ Return JSON:
             }}>
             <FileText size={17} color={GOLD} /> Upload
           </motion.button>
+          <SortedVoiceInput
+            disabled={loading}
+            onTranscript={(t) => { setText(t); }}
+          />
         </div>
       </motion.div>
 
