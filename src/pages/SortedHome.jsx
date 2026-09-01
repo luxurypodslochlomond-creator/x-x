@@ -123,7 +123,7 @@ export default function SortedHome() {
             variant="primary"
             icon="reply"
             title="Write a Reply"
-            description="Ready-to-send response, right tone, zero waffle"
+            description="Ready-to-send, right tone, nothing extra"
             accentColor={TOOL_COLORS.reply}
             onClick={() => openTool('reply')}
 
