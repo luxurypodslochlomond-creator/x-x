@@ -116,10 +116,10 @@ export default function AdminStoneymollanLegal() {
         name: 'E C Henderson',
         org: 'Hendersons Chartered Surveyors',
         address: 'East Netherton, Milnathort',
-        role: 'YOUR Chartered Surveyor — Hero of the Felling Battle',
-        notes: 'Eddie Henderson filed objections/representations to Forest and Land Scotland on Brian\'s behalf when Cameron Estate / Scottish Woodlands tried to run felling extraction routes past the house & cabins. The application went QUIET after Henderson\'s intervention. PAID IN FULL: £786 on 28 March 2026.',
-        status: 'PAID ✅',
-        color: 'green'
+        role: 'Former Chartered Surveyor — NO LONGER INVOLVED',
+        notes: 'Eddie filed the original objections that sent the felling application quiet. But after the last email setting out what we needed, Alice went quiet and Eddie phoned to say they\'re too busy to take it further. PAID IN FULL: £786 on 28 March 2026. Chapter closed — move forward without them.',
+        status: 'TOO BUSY — CLOSED',
+        color: 'amber'
       },
       {
         name: 'Scottish Woodlands',
@@ -136,6 +136,14 @@ export default function AdminStoneymollanLegal() {
         notes: 'Own the adjacent field. Do NOT hold a specific registered deed for the barn itself. This is the critical gap that supports the prescriptive possession claim.',
         status: 'NO BARN DEED',
         color: 'red'
+      },
+      {
+        name: 'Alistair (Land Agent)',
+        org: 'Independent Land Agent — came to the property 01 Sep 2026',
+        role: 'NEW ADVISOR — sees the woodland issue clearly',
+        notes: 'Came today. Could see exactly what\'s going on with the Auchendennan Muir woodland creation. Willing to help and advise. His advice: go straight to Barry Harper (Scottish Woodlands) yourself — not through him — to keep costs down. For the prescriptive possession (barn), you still need a lawyer. He\'s a practical ally, not a solicitor.',
+        status: 'NEW — WILL ADVISE',
+        color: 'green'
       },
       {
         name: 'Lynn Pacitti',
@@ -448,46 +456,44 @@ export default function AdminStoneymollanLegal() {
           transition={{ delay: 0.55 }}
           className="border-4 border-green-500 bg-green-900/20 p-6 rounded-lg"
         >
-          <h2 className="text-2xl font-black text-green-400 mb-4">🎯 WHAT TO DO NOW — In Order</h2>
+          <h2 className="text-2xl font-black text-green-400 mb-4">🎯 WHAT TO DO NOW — Updated 01 Sep 2026</h2>
           <div className="space-y-4">
             <div className="border-2 border-green-400 bg-black/40 p-4 rounded-lg">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-2xl font-black text-green-400 font-mono">1</span>
-                <h3 className="font-black text-white text-lg">CALL EDDIE HENDERSON TODAY</h3>
+                <h3 className="font-black text-white text-lg">WOODLAND: GO STRAIGHT TO BARRY HARPER</h3>
               </div>
-              <p className="text-green-300 font-mono font-bold mb-2">📞 01577 862566 &nbsp;|&nbsp; 📱 07734 345135</p>
-              <p className="text-white/80 text-sm mb-2">Say: <span className="text-green-300 italic">"Eddie, the felling application has gone quiet — we're ready to discuss the barn as we flagged in December."</span></p>
+              <p className="text-white/80 text-sm mb-2">Alistair (land agent, came today) can see exactly what\'s going on. His advice: <span className="text-green-300 font-bold">contact Barry Harper at Scottish Woodlands directly</span> — not through a surveyor — to keep costs down. You don\'t need Eddie for this. The five-pillar objection is already drafted and verified.</p>
               <div className="bg-green-900/30 border border-green-500/40 p-3 rounded text-xs text-white/70 space-y-1">
-                <p>✓ He already knows the full picture — felling, barn, Cameron Estate, access</p>
-                <p>✓ He is RICS regulated rural chartered surveyor</p>
-                <p>✓ He replied "All noted — one to discuss in due course" in Dec 2025</p>
-                <p>✓ He saw Cameron's chess move — road access to unlock barn value</p>
-                <p>✓ He's already paid — but this would be new instruction</p>
+                <p>✓ Five-pillar objection is drafted, verified, ready (see Research below)</p>
+                <p>✓ Cameron Home Farm has its own access — they don\'t need your road</p>
+                <p>✓ Going direct to Barry Harper saves surveyor fees</p>
+                <p>✓ Alistair will advise from the side if you need him</p>
               </div>
             </div>
 
             <div className="border border-amber-500/40 bg-amber-900/10 p-4 rounded-lg">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-xl font-black text-amber-400 font-mono">2</span>
-                <h3 className="font-black text-white">GET JOHN GILBERT AFFIDAVIT</h3>
+                <h3 className="font-black text-white">BARN: FIND A LAWYER FOR PRESCRIPTIVE POSSESSION</h3>
               </div>
-              <p className="text-white/70 text-sm">Previous owner John Gilbert used barn 24 years — put the roof on. A sworn affidavit from him confirming this is <span className="text-amber-300 font-bold">near-unassailable evidence</span>. Can Eddie help locate him?</p>
+              <p className="text-white/70 text-sm">The woodland issue and the barn are <span className="text-amber-300 font-bold">two separate matters</span>. The barn (prescriptive possession) still needs a solicitor experienced in KLTR procedure. Lynn Pacitti declined — ask Alistair or search Law Society of Scotland for a rural property solicitor.</p>
             </div>
 
             <div className="border border-amber-500/40 bg-amber-900/10 p-4 rounded-lg">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-xl font-black text-amber-400 font-mono">3</span>
-                <h3 className="font-black text-white">GATHER MAINTENANCE EVIDENCE</h3>
+                <h3 className="font-black text-white">GET JOHN GILBERT AFFIDAVIT</h3>
               </div>
-              <p className="text-white/70 text-sm">Receipts for door repair, roof maintenance, water work, any spend on the barn. Photos showing you use it. This shows proprietor-level possession.</p>
+              <p className="text-white/70 text-sm">Previous owner John Gilbert used barn 24 years — put the roof on. A sworn affidavit from him confirming this is <span className="text-amber-300 font-bold">near-unassailable evidence</span>. This is for the barn case, not the woodland.</p>
             </div>
 
-            <div className="border border-white/20 bg-white/5 p-4 rounded-lg">
+            <div className="border border-amber-500/40 bg-amber-900/10 p-4 rounded-lg">
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-xl font-black text-white/50 font-mono">4</span>
-                <h3 className="font-black text-white/70">INSTRUCT SOLICITOR (Eddie can recommend)</h3>
+                <span className="text-xl font-black text-amber-400 font-mono">4</span>
+                <h3 className="font-black text-white">GATHER MAINTENANCE EVIDENCE</h3>
               </div>
-              <p className="text-white/50 text-sm">Eddie may know exactly which Scottish property solicitor to use for the Land Register application. Let him guide you — he knows rural Scots law firms.</p>
+              <p className="text-white/70 text-sm">Receipts for door repair, roof maintenance, water work, any spend on the barn. Photos showing you use it. This shows proprietor-level possession — for the barn case.</p>
             </div>
           </div>
         </motion.div>
