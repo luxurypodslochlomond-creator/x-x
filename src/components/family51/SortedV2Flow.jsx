@@ -433,7 +433,7 @@ Return JSON:
             <ArrowRight size={17} color="#fff" />
           </>
         ) : (
-          'Paste, snap, or upload to start'
+          'Tell me what it means'
         )}
       </motion.button>
 
