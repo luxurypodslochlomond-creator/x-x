@@ -74,7 +74,13 @@ export default function SortedV2Flow() {
   };
 
   const analyse = async () => {
-    if (loading || !hasContent) return;
+    if (loading) return;
+    if (!hasContent) {
+      tap();
+      textareaRef.current?.focus();
+      textareaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
     tapStrong();
     setLoading(true);
     setResult(null);
@@ -288,7 +294,7 @@ Return JSON:
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2 }}
         style={{
-          background: '#fff',
+          background: '#fffdf8',
           borderRadius: 20,
           boxShadow: ready
             ? `0 8px 28px ${GOLD}28, 0 2px 8px rgba(0,0,0,0.04)`
@@ -317,8 +323,8 @@ Return JSON:
             </svg>
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <span style={{ fontSize: 13, fontWeight: 800, color: GOLD, letterSpacing: '0.08em', display: 'block' }}>
-              DROP IT HERE
+            <span style={{ fontSize: 14, fontWeight: 700, color: GOLD, letterSpacing: '0.01em', display: 'block' }}>
+              Drop it here
             </span>
             <span style={{ fontSize: 11, color: MUTED, fontWeight: 500, display: 'block' }}>
               We'll figure out what it is
@@ -411,29 +417,27 @@ Return JSON:
       {/* CTA — spring physics, haptic, always right below input */}
       <motion.button
       onClick={analyse}
-      disabled={!ready}
-      whileTap={ready ? { scale: 0.97 } : {}}
+      disabled={loading}
+      whileTap={{ scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       style={{
         width: '100%', padding: '16px', borderRadius: 20, fontSize: 16,
-        fontWeight: 600, cursor: ready ? 'pointer' : 'default',
+        fontWeight: 600, cursor: 'pointer',
         border: 'none',
-        background: ready ? INK : 'rgba(28,28,30,0.06)',
-        color: ready ? '#fff' : MUTED,
-        transition: 'background 0.2s, color 0.2s',
+        background: INK,
+        color: '#fff',
         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         marginTop: 14, letterSpacing: '-0.01em',
-        boxShadow: ready ? `0 4px 20px ${GOLD}38` : 'none',
+        boxShadow: `0 4px 20px ${GOLD}38`,
+        opacity: loading ? 0.6 : 1,
         WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
       }}
       >
-        {ready ? (
+        {loading ? 'Reading it now…' : (
           <>
             Tell me what it means
             <ArrowRight size={17} color="#fff" />
           </>
-        ) : (
-          'Tell me what it means'
         )}
       </motion.button>
 
