@@ -6,16 +6,16 @@ import SortedFeedback from './SortedFeedback';
 
 // ── DESIGN TOKENS ── One set of values for ALL tools. Native consistency.
 const T = {
-  cardRadius: 14,
+  cardRadius: 16,
   cardPad: 18,
   gap: 12,
-  labelSize: 9,
+  labelSize: 10,
   labelWeight: 800,
   labelSpacing: '0.12em',
-  bodySize: 13,
+  bodySize: 14,
   bodyLineHeight: 1.6,
   bodyColor: 'rgba(28,28,30,0.75)',
-  muted: 'rgba(28,28,30,0.35)',
+  muted: 'rgba(28,28,30,0.4)',
   ink: '#1c1c1e',
 };
 

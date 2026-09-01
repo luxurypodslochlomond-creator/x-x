@@ -140,7 +140,7 @@ export default function SortedHome() {
           <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: FONT.labelSpacing, color: FAINT, margin: '0 0 10px', textTransform: 'uppercase' }}>
             Something else?
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <SortedToolCard
               variant="secondary"
               icon="scam"
@@ -148,7 +148,6 @@ export default function SortedHome() {
               description="Spot it fast"
               accentColor={TOOL_COLORS.scam}
               onClick={() => openTool('scam')}
-  
             />
             <SortedToolCard
               variant="secondary"
@@ -157,7 +156,6 @@ export default function SortedHome() {
               description="Step-by-step"
               accentColor={TOOL_COLORS.conflict}
               onClick={() => openTool('conflict')}
-  
             />
             <SortedToolCard
               variant="secondary"
@@ -166,7 +164,6 @@ export default function SortedHome() {
               description="Before you sign"
               accentColor={TOOL_COLORS.contract}
               onClick={() => openTool('contract')}
-  
             />
           </div>
         </motion.div>

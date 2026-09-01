@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Camera, FileText, ArrowRight, Shield, Loader2, Lock } from 'lucide-react';
+// FileText also used for the input card header icon — same icon system as tool cards
 import { base44 } from '@/api/base44Client';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
 import { detectGeo } from '@/hooks/useSortedGeo';
@@ -295,7 +296,7 @@ Return JSON:
         transition={{ duration: 0.2 }}
         style={{
           background: '#fffdf8',
-          borderRadius: 20,
+          borderRadius: 16,
           boxShadow: ready
             ? `0 8px 28px ${GOLD}28, 0 2px 8px rgba(0,0,0,0.04)`
             : `0 4px 16px ${GOLD}18, 0 1px 3px rgba(0,0,0,0.03)`,
@@ -304,30 +305,26 @@ Return JSON:
           transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
         }}
       >
-        {/* Header strip — gives the hero presence, matches the cards below */}
+        {/* Header strip — warm, human, matches the hero voice */}
         <div style={{
           display: 'flex', alignItems: 'center', gap: 10,
           padding: '14px 18px 10px',
           borderBottom: `1px solid ${BORDER}`,
         }}>
           <div style={{
-            width: 36, height: 36, borderRadius: 10,
+            width: 40, height: 40, borderRadius: 12,
             background: `${GOLD}18`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             color: GOLD, flexShrink: 0,
           }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"/>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
+            <FileText size={20} strokeWidth={2} />
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <span style={{ fontSize: 14, fontWeight: 700, color: GOLD, letterSpacing: '0.01em', display: 'block' }}>
-              Drop it here
+            <span style={{ fontSize: 15, fontWeight: 700, color: GOLD, letterSpacing: '-0.01em', display: 'block' }}>
+              Paste it here
             </span>
-            <span style={{ fontSize: 11, color: MUTED, fontWeight: 500, display: 'block' }}>
-              We'll figure out what it is
+            <span style={{ fontSize: 13, color: MUTED, fontWeight: 500, display: 'block' }}>
+              We'll read it with you — any language
             </span>
           </div>
         </div>
@@ -427,7 +424,7 @@ Return JSON:
             disabled={loading}
             whileTap={{ scale: 0.97 }}
             style={{
-              width: '100%', padding: '16px', borderRadius: 20, fontSize: 16,
+              width: '100%', padding: '16px', borderRadius: 16, fontSize: 16,
               fontWeight: 600, cursor: 'pointer',
               border: 'none',
               background: INK,

@@ -1,39 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FileText, Reply, ShieldAlert, FileCheck, Scale } from 'lucide-react';
 
 const ICONS = {
-  letter: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/>
-    </svg>
-  ),
-  reply: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-    </svg>
-  ),
-  scam: (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-      <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-      <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-    </svg>
-  ),
-  contract: (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-      <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-    </svg>
-  ),
-  conflict: (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </svg>
-  ),
+  letter: FileText,
+  reply: Reply,
+  scam: ShieldAlert,
+  contract: FileCheck,
+  conflict: Scale,
 };
+
+const ICON_SIZE = { primary: 20, secondary: 18 };
 
 export default function SortedToolCard({ variant = 'primary', icon, title, description, accentColor = '#f5a623', onClick, disabled = false }) {
   const isPrimary = variant === 'primary';
-  const iconSvg = ICONS[icon] || ICONS.letter;
+  const Icon = ICONS[icon] || FileText;
+  const sz = ICON_SIZE[variant];
 
   if (isPrimary) {
     return (
@@ -42,7 +24,7 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
         disabled={disabled}
         whileTap={{ scale: disabled ? 1 : 0.97 }}
         style={{
-          width: '100%', padding: '20px 16px', borderRadius: 16, cursor: disabled ? 'not-allowed' : 'pointer',
+          width: '100%', padding: '18px 16px', borderRadius: 16, cursor: disabled ? 'not-allowed' : 'pointer',
           border: `2px solid ${accentColor}`,
           background: '#fff',
           opacity: disabled ? 0.5 : 1, textAlign: 'center',
@@ -57,18 +39,18 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
       >
         <div style={{
           width: 40, height: 40, borderRadius: 12,
-          background: `${accentColor}20`,
+          background: `${accentColor}18`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           alignSelf: 'center',
           color: accentColor,
         }}>
-          {iconSvg}
+          <Icon size={sz} strokeWidth={2} />
         </div>
         <div>
-          <span style={{ fontSize: 15, fontWeight: 900, color: accentColor, display: 'block', marginBottom: 4, letterSpacing: '-0.01em', textAlign: 'center' }}>
+          <span style={{ fontSize: 15, fontWeight: 800, color: accentColor, display: 'block', marginBottom: 4, letterSpacing: '-0.01em', textAlign: 'center' }}>
             {title}
           </span>
-          <span style={{ fontSize: 12, color: 'rgba(26,18,8,0.62)', fontWeight: 500, lineHeight: 1.45, display: 'block', textAlign: 'center' }}>
+          <span style={{ fontSize: 13, color: 'rgba(28,28,30,0.6)', fontWeight: 500, lineHeight: 1.45, display: 'block', textAlign: 'center' }}>
             {description}
           </span>
         </div>
@@ -76,17 +58,17 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
     );
   }
 
-  // secondary — bold, colored, never grey
+  // secondary — same icon weight, same scale, just tighter
   return (
     <motion.button
       onClick={onClick}
       disabled={disabled}
       whileTap={{ scale: disabled ? 1 : 0.96 }}
       style={{
-        width: '100%', padding: '14px 10px', borderRadius: 14, cursor: disabled ? 'not-allowed' : 'pointer',
+        width: '100%', padding: '16px 12px', borderRadius: 16, cursor: disabled ? 'not-allowed' : 'pointer',
         border: `2px solid ${accentColor}`, background: '#fff',
         opacity: disabled ? 0.5 : 1, textAlign: 'center',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
         transition: 'all 0.15s',
         boxShadow: `0 2px 8px ${accentColor}30`,
       }}
@@ -95,11 +77,11 @@ export default function SortedToolCard({ variant = 'primary', icon, title, descr
         boxShadow: `0 6px 18px ${accentColor}40`,
       }}
     >
-      <div style={{ width: 32, height: 32, borderRadius: 10, background: `${accentColor}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: accentColor }}>
-        {iconSvg}
+      <div style={{ width: 36, height: 36, borderRadius: 10, background: `${accentColor}18`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: accentColor }}>
+        <Icon size={sz} strokeWidth={2} />
       </div>
-      <span style={{ fontSize: 12, fontWeight: 800, color: accentColor, letterSpacing: '0.04em' }}>{title}</span>
-      <span style={{ fontSize: 10, color: accentColor, opacity: 0.7, lineHeight: 1.3 }}>{description}</span>
+      <span style={{ fontSize: 13, fontWeight: 800, color: accentColor, letterSpacing: '-0.01em' }}>{title}</span>
+      <span style={{ fontSize: 12, color: 'rgba(28,28,30,0.55)', fontWeight: 500, lineHeight: 1.35 }}>{description}</span>
     </motion.button>
   );
 }
