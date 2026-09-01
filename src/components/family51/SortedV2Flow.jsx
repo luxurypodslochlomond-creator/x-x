@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Camera, FileText, ArrowRight, Shield, Loader2, Lock } from 'lucide-react';
+import { CheckCircle2, Camera, FileText, ArrowRight, ArrowLeft, Shield, Loader2, Lock } from 'lucide-react';
 // FileText also used for the input card header icon — same icon system as tool cards
 import { base44 } from '@/api/base44Client';
 import { SORTED_SOUL } from '@/utils/sortedSoul';
@@ -15,7 +15,7 @@ import SortedVoiceOutput from './SortedVoiceOutput';
 import { COLOR, RADIUS, FONT, TOUCH, MOTION, SHADOW, haptic } from './sortedDesignSystem';
 const { tap, strong: tapStrong } = haptic;
 
-const { gold: GOLD, ink: INK, muted: MUTED, border: BORDER } = COLOR;
+const { gold: GOLD, ink: INK, muted: MUTED, border: BORDER, paper: PAPER } = COLOR;
 
 const SEVERITY = {
   urgent: { color: '#dc2626', label: 'URGENT — ACT NOW' },
@@ -196,16 +196,53 @@ Return JSON:
   };
 
   // ── LOADING STATE ──
+  // ── LOADING STATE ── full-screen takeover, native feel
   if (loading) {
-    return <SortedThinkingSteps tool="letter" accentColor={GOLD} isActive={loading} inputHint={text} geo={geo} />;
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        style={{
+          position: 'fixed', inset: 0, background: PAPER,
+          zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          overflowY: 'auto', padding: '24px 20px',
+          overscrollBehavior: 'none',
+          fontFamily: FONT.family,
+        }}
+      >
+        <SortedThinkingSteps tool="letter" accentColor={GOLD} isActive={loading} inputHint={text} geo={geo} />
+      </motion.div>
+    );
   }
 
   // ── RESULT STATE ──
   if (result) {
     const vs = SEVERITY[result.severity] || SEVERITY.routine;
     return (
-      <div ref={resultRef}>
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+      <motion.div
+        ref={resultRef}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          position: 'fixed', inset: 0, background: PAPER,
+          zIndex: 100, overflowY: 'auto', overscrollBehavior: 'none',
+          fontFamily: FONT.family,
+        }}
+      >
+        <div style={{ maxWidth: 560, margin: '0 auto', padding: '16px 20px 48px' }}>
+          {/* Back button — native top-left affordance */}
+          <button onClick={reset} style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            background: 'none', border: 'none', color: MUTED,
+            fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            padding: '6px 0 14px', marginLeft: -4,
+            WebkitTapHighlightColor: 'transparent',
+          }}>
+            <ArrowLeft size={16} /> Back
+          </button>
           <SortedResultShell
             verdict={{
               label: vs.label,
@@ -272,8 +309,8 @@ Return JSON:
               </SortedResultSection>
             )}
           </SortedResultShell>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     );
   }
 
