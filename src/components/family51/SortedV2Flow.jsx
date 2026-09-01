@@ -433,9 +433,9 @@ Return JSON:
         WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
       }}
       >
-        {loading ? 'Reading it now…' : (
+        {loading ? 'Sorting it…' : (
           <>
-            Tell me what it means
+            Sort it
             <ArrowRight size={17} color="#fff" />
           </>
         )}
