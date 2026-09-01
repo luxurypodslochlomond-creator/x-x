@@ -100,7 +100,7 @@ export default function SortedHome() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ ...MOTION.fade, delay: 0.14 }}
-          style={{ fontSize: 11, fontWeight: 700, letterSpacing: FONT.labelSpacing, color: FAINT, margin: '28px 0 10px', textTransform: 'uppercase', textAlign: 'center' }}
+          style={{ fontSize: 11, fontWeight: 700, letterSpacing: FONT.labelSpacing, color: FAINT, margin: '24px 0 10px', textTransform: 'uppercase', textAlign: 'center' }}
         >
           Or pick a specific tool
         </motion.p>
@@ -135,7 +135,7 @@ export default function SortedHome() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...MOTION.fade, delay: 0.22 }}
-          style={{ marginTop: 16 }}
+          style={{ marginTop: 20 }}
         >
           <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: FONT.labelSpacing, color: FAINT, margin: '0 0 10px', textTransform: 'uppercase' }}>
             Something else?
@@ -188,7 +188,7 @@ export default function SortedHome() {
         </motion.div>
 
         {/* COUNTER */}
-        <div style={{ marginTop: 28 }}>
+        <div style={{ marginTop: 24 }}>
           <SortedLiveCounter />
         </div>
 
@@ -234,7 +234,7 @@ export default function SortedHome() {
         </div>
 
         {/* FOOTER */}
-        <div style={{ marginTop: 44, paddingTop: 24, borderTop: `1px solid ${BORDER}`, textAlign: 'center' }}>
+        <div style={{ marginTop: 36, paddingTop: 24, borderTop: `1px solid ${BORDER}`, textAlign: 'center' }}>
           <div style={{ display: 'flex', gap: 22, justifyContent: 'center', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap' }}>
             <Link to="/SortedAbout" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>About</Link>
             <Link to="/SortedTerms" style={{ textDecoration: 'none', color: MUTED, fontWeight: 500, fontSize: FONT.bodySmall, letterSpacing: '0.01em', transition: 'color 0.15s' }}>Terms</Link>

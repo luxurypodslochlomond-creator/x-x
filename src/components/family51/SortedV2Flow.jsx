@@ -423,7 +423,7 @@ Return JSON:
         transition: 'background 0.2s, color 0.2s',
         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         marginTop: 14, letterSpacing: '-0.01em',
-        boxShadow: ready ? '0 4px 20px rgba(28,28,30,0.18)' : 'none',
+        boxShadow: ready ? `0 4px 20px ${GOLD}38` : 'none',
         WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
       }}
       >
