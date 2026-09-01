@@ -414,32 +414,41 @@ Return JSON:
         </div>
       </motion.div>
 
-      {/* CTA — spring physics, haptic, always right below input */}
-      <motion.button
-      onClick={analyse}
-      disabled={loading}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-      style={{
-        width: '100%', padding: '16px', borderRadius: 20, fontSize: 16,
-        fontWeight: 600, cursor: 'pointer',
-        border: 'none',
-        background: INK,
-        color: '#fff',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        marginTop: 14, letterSpacing: '-0.01em',
-        boxShadow: `0 4px 20px ${GOLD}38`,
-        opacity: loading ? 0.6 : 1,
-        WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
-      }}
-      >
-        {loading ? 'Sorting it…' : (
-          <>
-            Sort it
-            <ArrowRight size={17} color="#fff" />
-          </>
+      {/* CTA — only appears once you've dropped something in */}
+      <AnimatePresence>
+        {(hasContent || loading) && (
+          <motion.button
+            key="sort-cta"
+            initial={{ opacity: 0, y: 8, height: 0, marginTop: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto', marginTop: 14 }}
+            exit={{ opacity: 0, y: 8, height: 0, marginTop: 0 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+            onClick={analyse}
+            disabled={loading}
+            whileTap={{ scale: 0.97 }}
+            style={{
+              width: '100%', padding: '16px', borderRadius: 20, fontSize: 16,
+              fontWeight: 600, cursor: 'pointer',
+              border: 'none',
+              background: INK,
+              color: '#fff',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              letterSpacing: '-0.01em',
+              boxShadow: `0 4px 20px ${GOLD}38`,
+              opacity: loading ? 0.6 : 1,
+              overflow: 'hidden',
+              WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
+            }}
+          >
+            {loading ? 'Sorting it…' : (
+              <>
+                Sort it
+                <ArrowRight size={17} color="#fff" />
+              </>
+            )}
+          </motion.button>
         )}
-      </motion.button>
+      </AnimatePresence>
 
       {/* Trust */}
       <div style={{
