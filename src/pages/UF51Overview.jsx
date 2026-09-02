@@ -27,7 +27,9 @@ const PRODUCTS = [
       global: 'Global pet care market ≈ $260B+; the pet wellness/mental-health segment is the fastest-growing slice.',
       addressable: 'Tens of millions of households with an anxious pet. UK alone has ~13M dogs. Repeat, low-churn subscription.',
     },
-    traction: 'Live and taking payment. Peer-reviewed whitepaper, press centre, live response dataset, and a free tier that converts.',
+    traction: 'Live and free to use; paid tiers built and ready (pre-revenue). Peer-reviewed whitepaper, press centre, and a live response dataset.',
+    differentiation: 'Not generic calming playlists on Spotify — targeted, protocol-based, and research-grounded. Free to start with no account; non-pharmaceutical and owner-administered.',
+    monetisation: 'Freemium: free Separation Anxiety protocol; annual / monthly subscription for the full protocol library.',
     partner: 'Retail & vet distribution — a natural fit with Pets at Home (UK’s largest pet retailer): in-store QR, app bundling, vet-channel referral.',
     keywords: ['pet anxiety', 'separation anxiety', 'non-pharmaceutical', 'vet-researched', 'Pets at Home', 'pet wellness', 'subscription'],
   },
@@ -46,7 +48,9 @@ const PRODUCTS = [
       global: 'The global legal-aid gap covers billions of people with no access to affordable legal help.',
       addressable: 'Anyone with a frightening letter — a population that grows with every rate rise and every enforcement cycle.',
     },
-    traction: 'Live and taking payment (one-off “for life” + subscription). Case history, live help counter, and anonymised pattern-learning that improves the advice over time.',
+    traction: 'Live; paid “for life” tier live in Stripe; 100+ real letters decoded to date. Case history, live help counter, and anonymised pattern-learning that improves the advice over time.',
+    differentiation: 'Not ChatGPT-for-legal — purpose-built, jurisdiction-aware, and private by design (identity redacted on-device before the AI sees it). Built for the scared user, not the curious one.',
+    monetisation: 'Freemium with a daily free limit; one-off “for life” + monthly subscription for unlimited use.',
     partner: 'Banks & financial services — offer SORTED to customers in arrears as part of FCA Consumer Duty / vulnerable-customer support. Financial inclusion, ESG, and regulatory duty in one move.',
     keywords: ['legal aid', 'financial inclusion', 'vulnerable customers', 'FCA Consumer Duty', 'cost-of-living', 'debt', 'plain English', 'banks', 'ESG'],
   },
@@ -65,7 +69,9 @@ const PRODUCTS = [
       global: 'Global environmental / civic-tech spend is rising fast across local government, ESG budgets, and schools.',
       addressable: 'Every community, every council, every school. UK councils spend £1B+/yr on street cleansing — a fraction redirected to prevention and engagement pays for itself.',
     },
-    traction: 'Live cleanup feed, missions, token economy, and a kid-facing scanner (earth51.love) already shipping.',
+    traction: '63 real cleanups logged; P51 token economy live (33 transactions, ~518 P51 moved); kid-facing scanner (earth51.love) shipping.',
+    differentiation: 'Not a "report it" council app — it rewards the doer, not the problem. AI verification + token reward + a kid scanner in one loop.',
+    monetisation: 'Token economy (P51) redeemable for real value; B2G/B2B partnerships with councils, ESG budgets, and schools.',
     partner: 'Local government, ESG corporate volunteering, and schools — a measurable, shareable environmental-impact channel.',
     keywords: ['environment', 'civic tech', 'ESG', 'local government', 'schools', 'gamification', 'token economy', 'community'],
   },
@@ -84,7 +90,9 @@ const PRODUCTS = [
       global: 'Global EdTech ≈ $100B+; kids’ coding and creative-AI tools are among the fastest-growing segments.',
       addressable: 'Every child with a phone or tablet — a global, evergreen audience of first-time builders.',
     },
-    traction: 'Live, with a saved-creations gallery, play counts, and remix. Free to every child, by design.',
+    traction: '10 real apps built by kids; 87 total plays; remix gallery live. Free to every child, by design.',
+    differentiation: 'Not Scratch or Code.org — no learning curve; a real, playable app from a single sentence. Kid-safety layer, no accounts, honest AI disclaimer.',
+    monetisation: 'Free for kids; future school / distributor licensing.',
     partner: 'Schools, parents, and EdTech distributors — a safe, account-free entry point to AI literacy.',
     keywords: ['kids', 'EdTech', 'AI literacy', 'COPPA', 'creativity', 'safe AI', 'no accounts'],
   },
@@ -98,11 +106,11 @@ const ECOSYSTEM = {
     'Privacy-first architecture (on-device redaction, device-local storage)',
     'Token economy (P51) with IPFS-backed proof',
     'Offline-capable PWA — installable, works on poor signal',
-    'Open source — extraction-proof by covenant',
+    'Open source',
   ],
   proof: [
     'Real products, live today — not decks',
-    'Real paying users across paid tiers',
+    'Real usage: 100+ letters decoded, 63 cleanups, 10 kid-built apps',
     'Peer-reviewed research foundation (PetSounds51)',
     'Honest privacy — nothing stored unless it has to be',
   ],
@@ -113,6 +121,15 @@ function Section({ label, children }) {
     <div style={{ marginBottom: 14 }}>
       <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.14em', color: INK_FAINT, margin: '0 0 4px', textTransform: 'uppercase' }}>{label}</p>
       <p style={{ fontSize: 13, lineHeight: 1.6, color: INK_SOFT, margin: 0 }}>{children}</p>
+    </div>
+  );
+}
+
+function Proof({ n, label }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+      <span style={{ fontSize: 18, fontWeight: 900, color: INK, letterSpacing: '-0.02em' }}>{n}</span>
+      <span style={{ fontSize: 11, fontWeight: 600, color: INK_FAINT, letterSpacing: '0.04em' }}>{label}</span>
     </div>
   );
 }
@@ -155,6 +172,8 @@ function ProductCard({ p, index }) {
         </div>
       </div>
 
+      <Section label="Why this, not the rest">{p.differentiation}</Section>
+      <Section label="How it earns">{p.monetisation}</Section>
       <Section label="Why it’s real">{p.traction}</Section>
       <Section label="Partnership angle">{p.partner}</Section>
 
@@ -196,6 +215,15 @@ export default function UF51Overview() {
               <span key={p.name} style={{ fontSize: 11, fontWeight: 700, color: INK, background: '#fff', border: `1px solid ${p.accent}55`, borderRadius: 999, padding: '4px 12px' }}>{p.icon} {p.name}</span>
             ))}
           </div>
+
+          {/* HONEST PROOF STRIP — real numbers from the live system, no spin */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 22px', marginTop: 16, padding: '12px 16px', background: '#fff', border: `1px solid ${LINE}`, borderRadius: 12 }}>
+            <Proof n="4" label="live products" />
+            <Proof n="100+" label="letters decoded" />
+            <Proof n="63" label="cleanups logged" />
+            <Proof n="10" label="apps built by kids" />
+            <Proof n="87" label="plays" />
+          </div>
         </div>
 
         {/* ECOSYSTEM THREAD */}
@@ -224,9 +252,9 @@ export default function UF51Overview() {
         {/* CLOSING */}
         <div style={{ marginTop: 24, padding: '20px 22px', background: '#fff', border: `1px solid ${LINE}`, borderRadius: 14, textAlign: 'center' }}>
           <p style={{ fontSize: 14, lineHeight: 1.6, color: INK_SOFT, margin: '0 0 6px' }}>
-            Built to be useful before it’s built to scale. Free to start, honest on privacy, open by covenant.
+            Live products, real usage, honest privacy. Free to start, built to last.
           </p>
-          <p style={{ fontSize: 11, color: INK_FAINT, margin: 0, letterSpacing: '0.04em' }}>Universal Frequency 51 · open source · extraction-proof</p>
+          <p style={{ fontSize: 11, color: INK_FAINT, margin: 0, letterSpacing: '0.04em' }}>Universal Frequency 51 · open source · privacy-first</p>
         </div>
       </div>
     </div>
