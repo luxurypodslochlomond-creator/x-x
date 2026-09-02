@@ -152,6 +152,9 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
         overflowX: 'hidden',
         overscrollBehavior: 'contain',
         WebkitOverflowScrolling: 'touch',
+        // Leaves room for the sticky header so scrollIntoView inside any tool
+        // lands the result BELOW the header — not hidden under it.
+        scrollPaddingTop: 84,
         // Keep mounted when not active so no remount flash
         pointerEvents: visible ? 'auto' : 'none',
       }}
@@ -161,8 +164,15 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
 
       <div style={{ maxWidth: 560, margin: '0 auto', width: '100%', padding: '16px 16px calc(40px + env(safe-area-inset-bottom))' }}>
 
-        {/* HEADER ROW — back + tool label + human hint */}
-        <div style={{ marginBottom: 18 }}>
+        {/* HEADER ROW — back + tool label + human hint.
+            Sticky so the Back button never scrolls away — you can always
+            get out of a tool, even mid-result. */}
+        <div style={{
+          position: 'sticky', top: 0, zIndex: 5,
+          background: '#faf8f5',
+          paddingBottom: 12, marginBottom: 6,
+          borderBottom: '1px solid rgba(28,28,30,0.06)',
+        }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
             <NativeButton
               onClick={handleBack}
