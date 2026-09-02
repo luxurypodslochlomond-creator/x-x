@@ -130,6 +130,18 @@ export default function PartnerEvidence() {
 
           <Divider />
 
+          {/* RIGHT PARTNERSHIPS — categories, no name-dropping */}
+          <Section label="RIGHT PARTNERSHIPS">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+              <PartnerCard product="PetSounds51" partners="Pet retailers · vet chains · animal charities" />
+              <PartnerCard product="SORTED" partners="Advice charities · high-street banks · housing associations" />
+              <PartnerCard product="Earth51" partners="ESG-led banks · councils · corporate sustainability teams" />
+              <PartnerCard product="ZAPP" partners="Schools · EdTech distributors · youth charities" />
+            </div>
+          </Section>
+
+          <Divider />
+
           {/* ACHIEVABLE — short */}
           <Section label="WHAT IS ACHIEVABLE">
             <div style={{ display: 'flex', gap: 12, margin: '0 0 16px', flexWrap: 'wrap' }}>
@@ -213,6 +225,15 @@ function MarketRow({ title, line1, line2, cite }) {
       <p style={{ fontSize: 12, color: INK_SOFT, lineHeight: 1.5, margin: 0 }}>{line1}</p>
       <p style={{ fontSize: 12, color: INK_SOFT, lineHeight: 1.5, margin: '2px 0 0' }}>{line2}</p>
       <span style={{ fontSize: 10, color: AMBER_DARK, fontStyle: 'italic', marginTop: 4, display: 'block' }}>{cite}</span>
+    </div>
+  );
+}
+
+function PartnerCard({ product, partners }) {
+  return (
+    <div style={{ padding: '8px 10px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 6 }}>
+      <div style={{ fontSize: 10, fontWeight: 900, color: AMBER_DARK, marginBottom: 2 }}>{product}</div>
+      <div style={{ fontSize: 10, color: INK_SOFT, lineHeight: 1.4 }}>{partners}</div>
     </div>
   );
 }
