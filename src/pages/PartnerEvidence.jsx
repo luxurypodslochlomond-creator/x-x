@@ -33,6 +33,8 @@ export default function PartnerEvidence() {
       'ESG: EU CSRD mandatory. Green bonds ~$650B in 2025. Earth51 turns real cleanups into reportable ESG evidence.',
       'EdTech: ~$197B (2025) → ~$353B by 2030. ZAPP gives every kid a builder. School/EdTech distributor = reach at near-zero cost.',
       '',
+      'RIGHT PARTNERSHIPS: PetSounds51 → pet retailers/vet chains/animal charities (~£12bn UK pet spend, 31,000 vets). SORTED → advice charities/high-street banks/housing associations (2.7M helped by advice charities/yr). Earth51 → ESG-led banks/councils/sustainability teams. ZAPP → schools/EdTech distributors/youth charities.',
+      '',
       'ACHIEVABLE: ~3,400 PS51 subs or ~840 SORTED subs = £100k/yr. That is ~1 in 3,800 UK dog owners, or ~1 in 63,000 UK adults — tiny fractions of a real market, community-driven not ad spend.',
       '',
       'VERIFY YOURSELF',
@@ -57,6 +59,9 @@ export default function PartnerEvidence() {
     { name: 'European Commission — CSRD Directive', url: 'https://finance.ec.europa.eu/capital-markets-union-and-financial-markets/company-reporting-and-auditing/company-reporting/corporate-sustainability-reporting_en' },
     { name: 'Climate Bonds Initiative — Green Bonds', url: 'https://www.climatebonds.net/news-events/press-room/press-releases/sustainable-debt-market-nears-usd7-trillion-aligned-issuance-demonstrating-strong-global-momentum' },
     { name: 'MarketsandMarkets — EdTech Market', url: 'https://www.marketsandmarkets.com/Market-Reports/educational-technology-ed-tech-market-1066.html' },
+    { name: 'Statista — UK Pet Spend', url: 'https://www.statista.com/topics/10264/pet-food-market-in-the-uk/' },
+    { name: 'RCVS — UK Vet Register', url: 'https://www.rcvs.org.uk/about-us/news-and-views/news/surveys-of-the-professions-2024-reports-published' },
+    { name: 'Citizens Advice — Annual Impact', url: 'https://www.citizensadvice.org.uk/about-us/information/all-our-impact/' },
   ];
 
   return (
@@ -133,8 +138,8 @@ export default function PartnerEvidence() {
           {/* RIGHT PARTNERSHIPS — categories, no name-dropping */}
           <Section label="RIGHT PARTNERSHIPS">
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
-              <PartnerCard product="PetSounds51" partners="Pet retailers · vet chains · animal charities" />
-              <PartnerCard product="SORTED" partners="Advice charities · high-street banks · housing associations" />
+              <PartnerCard product="PetSounds51" partners="Pet retailers · vet chains · animal charities" scale="~£12bn UK pet spend · 31,000 vets" />
+              <PartnerCard product="SORTED" partners="Advice charities · high-street banks · housing associations" scale="2.7M helped by advice charities/yr" />
               <PartnerCard product="Earth51" partners="ESG-led banks · councils · corporate sustainability teams" />
               <PartnerCard product="ZAPP" partners="Schools · EdTech distributors · youth charities" />
             </div>
@@ -229,11 +234,12 @@ function MarketRow({ title, line1, line2, cite }) {
   );
 }
 
-function PartnerCard({ product, partners }) {
+function PartnerCard({ product, partners, scale }) {
   return (
     <div style={{ padding: '8px 10px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 6 }}>
       <div style={{ fontSize: 10, fontWeight: 900, color: AMBER_DARK, marginBottom: 2 }}>{product}</div>
       <div style={{ fontSize: 10, color: INK_SOFT, lineHeight: 1.4 }}>{partners}</div>
+      {scale && <div style={{ fontSize: 10, fontWeight: 700, color: INK, marginTop: 3 }}>{scale}</div>}
     </div>
   );
 }
