@@ -7,6 +7,7 @@ import Family51ScamChecker from '@/components/family51/Family51ScamChecker';
 import SortedContractChecker from '@/components/family51/SortedContractChecker';
 import SortedJourneyBar from '@/components/family51/SortedJourneyBar';
 import SortedShareMoment from '@/components/family51/SortedShareMoment';
+import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 
 /*
   COOLASFUCK PWA DESIGN PRINCIPLE:
@@ -69,6 +70,11 @@ const SortedUnifiedEngine = forwardRef(function SortedUnifiedEngine({ geoPrice, 
   const [completedTools, setCompletedTools] = useState([]);
   const [showShare, setShowShare] = useState(false);
   const [triggerPhoto, setTriggerPhoto] = useState(false);
+
+  // Lock the background page while the tool sheet is open — no rubber-band
+  // judder behind the slide-up, no scroll bleed. position:fixed technique
+  // keeps native touch-scroll working inside the sheet on iOS.
+  useBodyScrollLock(visible);
 
   // Open: set tool → immediately visible, scroll to top
   const handleToolOpen = (toolId, handoffData = null, { bypassLock = false } = {}) => {

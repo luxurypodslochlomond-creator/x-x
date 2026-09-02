@@ -197,6 +197,17 @@ function buildSteps(tool, input = '', geo = null) {
     ];
   }
 
+  if (tool === 'auto') {
+    return [
+      { text: 'Reading what you pasted',              sub: senderNote || 'Every word — carefully' },
+      { text: 'Working out what this actually is',    sub: amountNote || 'Letter, scam, contract, or something else?' },
+      { text: jurisdictionStep.text,                  sub: jurisdictionStep.sub },
+      { text: 'Spotting deadlines',                   sub: deadlineNote || 'Dates that actually matter' },
+      { text: 'Finding your real options',             sub: 'What you can actually do' },
+      { text: 'Writing it in plain English',           sub: 'No jargon. No nonsense.' },
+    ];
+  }
+
   return [
     { text: 'Reading your submission',               sub: 'Nothing stored — gone when done' },
     { text: 'Checking the details',                  sub: 'Every word matters' },

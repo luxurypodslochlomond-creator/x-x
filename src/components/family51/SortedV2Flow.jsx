@@ -12,6 +12,7 @@ import SortedThinkingSteps from './SortedThinkingSteps';
 import SortedResultShell, { SortedResultSection, SortedSteps, SortedBullets } from './SortedResultShell';
 import SortedVoiceInput from './SortedVoiceInput';
 import SortedVoiceOutput from './SortedVoiceOutput';
+import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 import { COLOR, RADIUS, FONT, TOUCH, MOTION, SHADOW, haptic } from './sortedDesignSystem';
 const { tap, strong: tapStrong } = haptic;
 
@@ -50,11 +51,9 @@ export default function SortedV2Flow() {
     ta.style.height = Math.max(160, ta.scrollHeight) + 'px';
   }, [text]);
 
-  useEffect(() => {
-    if (result && resultRef.current) {
-      setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
-  }, [result]);
+  // Lock background scroll during loading + result takeovers — no judder,
+  // no rubber-band behind the fixed overlay, scroll position preserved.
+  useBodyScrollLock(loading || Boolean(result));
 
   const handleFile = async (selectedFile) => {
     if (!selectedFile) return;
@@ -212,7 +211,7 @@ Return JSON:
           fontFamily: FONT.family,
         }}
       >
-        <SortedThinkingSteps tool="letter" accentColor={GOLD} isActive={loading} inputHint={text} geo={geo} />
+        <SortedThinkingSteps tool="auto" accentColor={GOLD} isActive={loading} inputHint={text} geo={geo} />
       </motion.div>
     );
   }
@@ -361,7 +360,7 @@ Return JSON:
               Paste it here
             </span>
             <span style={{ fontSize: 13, color: MUTED, fontWeight: 500, display: 'block' }}>
-              We'll read it with you — any language
+              We'll read it with you — step by step
             </span>
           </div>
         </div>
@@ -464,11 +463,11 @@ Return JSON:
               width: '100%', padding: '16px', borderRadius: 16, fontSize: 16,
               fontWeight: 600, cursor: 'pointer',
               border: 'none',
-              background: INK,
+              background: `linear-gradient(135deg, ${GOLD}, ${GOLD}DD)`,
               color: '#fff',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               letterSpacing: '-0.01em',
-              boxShadow: `0 4px 20px ${GOLD}38`,
+              boxShadow: `0 4px 20px ${GOLD}40`,
               opacity: loading ? 0.6 : 1,
               overflow: 'hidden',
               WebkitTapHighlightColor: 'transparent', touchAction: 'manipulation',
