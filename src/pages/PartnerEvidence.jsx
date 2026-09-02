@@ -20,16 +20,18 @@ export default function PartnerEvidence() {
     const lines = [
       'UF51 — EVIDENCE',
       '',
-      'Three products. Live on Stripe. Real payments.',
+      'Four products. Two live on Stripe. Two live and free.',
       '',
       'PetSounds51 — Sound therapy for anxious pets. £29.99/yr, £9.99/mo. Live on Stripe.',
       'SORTED — Legal document decoder. Any language. Nothing stored. £9.99/mo, £9.99 lifetime. Live on Stripe.',
-      'Earth51 — AI-verified litter collection. ESG impact data. Pre-launch.',
+      'Earth51 — AI-verified litter collection. ESG impact data. Live and free.',
+      'ZAPP — Kids describe an idea, AI builds a real app. No accounts, COPPA-safe. Live and free.',
       '',
       'THE MARKETS',
-      'Pet Care: ~$182B global market (2025) → ~$284B by 2033. UK: ~13M dogs, ~12M cats.',
-      'Legal Tech: ~$29B (2025) → ~$73B by 2035. 92% of low-income Americans get no or inadequate legal help.',
-      'ESG: EU CSRD makes sustainability reporting mandatory. Global green bond issuance ~$700B/yr.',
+      'Pet Care: ~$182B (2025) → ~$284B by 2033. UK ~13M dogs, ~12M cats. Pet-retail/vet partnership = mass reach.',
+      'Legal Tech: ~$29B (2025) → ~$73B by 2035. 92% of low-income Americans get no or inadequate help. CAB/bank partnership could keep SORTED free and pay for itself.',
+      'ESG: EU CSRD mandatory. Green bonds ~$650B in 2025. Earth51 turns real cleanups into reportable ESG evidence.',
+      'EdTech: ~$197B (2025) → ~$353B by 2030. ZAPP gives every kid a builder. School/EdTech distributor = reach at near-zero cost.',
       '',
       'VERIFY YOURSELF',
       ...sources.map((s, i) => `${i + 1}. ${s.name} — ${s.url}`),
@@ -51,7 +53,8 @@ export default function PartnerEvidence() {
     { name: 'Precedence Research — Legal Tech Market', url: 'https://www.precedenceresearch.com/legal-technology-market' },
     { name: 'Legal Services Corporation — The Justice Gap', url: 'https://justicegap.lsc.gov/resource/2022-justice-gap-report/' },
     { name: 'European Commission — CSRD Directive', url: 'https://finance.ec.europa.eu/capital-markets-union-and-financial-markets/company-reporting-and-auditing/company-reporting/corporate-sustainability-reporting_en' },
-    { name: 'BIS — Green Bond Market', url: 'https://www.bis.org/publ/qtrpdf/r_qt2503d.htm' },
+    { name: 'Climate Bonds Initiative — Green Bonds', url: 'https://www.climatebonds.net/news-events/press-room/press-releases/sustainable-debt-market-nears-usd7-trillion-aligned-issuance-demonstrating-strong-global-momentum' },
+    { name: 'MarketsandMarkets — EdTech Market', url: 'https://www.marketsandmarkets.com/Market-Reports/educational-technology-ed-tech-market-1066.html' },
   ];
 
   return (
@@ -82,12 +85,12 @@ export default function PartnerEvidence() {
           {/* HERO — calm, short */}
           <div style={{ marginBottom: 48 }}>
             <h1 style={{ fontSize: 'clamp(24px, 5vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 14px', color: INK }}>
-              Three products.<br />
-              <span style={{ color: AMBER }}>Live on Stripe.</span><br />
-              Real payments.
+              Four products.<br />
+              <span style={{ color: AMBER }}>Two live on Stripe.</span><br />
+              Two live and free.
             </h1>
             <p style={{ fontSize: 14, color: INK_SOFT, lineHeight: 1.7, margin: 0, maxWidth: 480 }}>
-              No unicorn projections. No hype. Just what is built, the markets it serves, and what is honestly achievable. Every figure is sourced.
+              What's built, the markets it serves, and what's honestly achievable with the right partnerships. Every figure is sourced — verify it yourself.
             </p>
           </div>
 
@@ -99,8 +102,11 @@ export default function PartnerEvidence() {
             <FactRow title="SORTED" tag="LEGAL TECH" price="£9.99/mo">
               Legal document decoder. Any language. Nothing stored. Live on Stripe.
             </FactRow>
-            <FactRow title="Earth51" tag="ENVIRONMENT" price="Pre-launch">
-              AI-verified litter collection. ESG impact data. Needs refinement.
+            <FactRow title="Earth51" tag="ENVIRONMENT" price="Live · free">
+              AI-verified litter collection. ESG impact data. Token economy. Live and free.
+            </FactRow>
+            <FactRow title="ZAPP" tag="EDTECH" price="Live · free">
+              Kids describe an idea — AI builds a real app. No accounts, COPPA-safe. Live and free.
             </FactRow>
           </Section>
 
@@ -108,9 +114,10 @@ export default function PartnerEvidence() {
 
           {/* MARKETS — short */}
           <Section label="THE MARKETS">
-            <MarketRow title="Pet Care" line1="~$182B global market (2025) → ~$284B by 2033." line2="UK: ~13M dogs, ~12M cats. Recession-resilient." cite="Grand View Research · PFMA" />
-            <MarketRow title="Legal Tech" line1="~$29B (2025) → ~$73B by 2035." line2="92% of low-income Americans get no or inadequate legal help." cite="Precedence Research · LSC" />
-            <MarketRow title="ESG Reporting" line1="EU CSRD makes sustainability reporting mandatory." line2="Global green bond issuance ~$700B/yr." cite="European Commission · BIS" />
+            <MarketRow title="Pet Care" line1="~$182B global market (2025) → ~$284B by 2033." line2="UK: ~13M dogs, ~12M cats. Recession-resilient. A pet-retail or vet partnership = mass reach without ad spend." cite="Grand View Research · PFMA" />
+            <MarketRow title="Legal Tech" line1="~$29B (2025) → ~$73B by 2035." line2="92% of low-income Americans get no or inadequate legal help. A CAB or bank partnership could keep SORTED free for those who need it — and pay for itself in a year." cite="Precedence Research · LSC" />
+            <MarketRow title="ESG Reporting" line1="EU CSRD makes sustainability reporting mandatory." line2="Green bonds ~$650B in 2025 alone. Earth51 turns real cleanups into reportable ESG evidence." cite="European Commission · Climate Bonds" />
+            <MarketRow title="EdTech" line1="~$197B (2025) → ~$353B by 2030." line2="ZAPP gives every kid a builder — no account, no risk. A school or EdTech distributor = reach at near-zero cost." cite="MarketsandMarkets" />
           </Section>
 
           <Divider />
@@ -121,8 +128,11 @@ export default function PartnerEvidence() {
               <Stat figure="~3,400" label="PS51 subs = £100k/yr" />
               <Stat figure="~840" label="SORTED subs = £100k/yr" />
             </div>
+            <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: '0 0 10px' }}>
+              Achievable with community-driven growth and the right partnerships — not ad spend.
+            </p>
             <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
-              Not big numbers. Achievable with community-driven growth, not ad blitzes.
+              Every product also builds a data asset: SORTED's anonymised cases sharpen the advice over time; Earth51's verified cleanups become reportable ESG evidence.
             </p>
           </Section>
 
