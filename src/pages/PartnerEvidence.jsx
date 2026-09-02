@@ -59,7 +59,13 @@ export default function PartnerEvidence() {
 
   return (
     <div style={{ minHeight: '100vh', background: `linear-gradient(180deg, ${CREAM} 0%, ${CREAM_DEEP} 40%)`, color: INK, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
-      <style>{`@media print { .no-print { display: none !important; } body { background: #fff !important; } }`}</style>
+      <style>{`
+        @media print {
+          .no-print { display: none !important; }
+          body { background: #fff !important; }
+          footer, [class*="footer"], [class*="Footer"], #root > div > footer { display: none !important; }
+        }
+      `}</style>
 
       {/* CALM HEADER */}
       <header className="no-print" style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: `1px solid ${BORDER}`, padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
@@ -79,11 +85,11 @@ export default function PartnerEvidence() {
         </div>
       </header>
 
-      <div id="evidence-body" style={{ maxWidth: 560, margin: '0 auto', padding: '48px 24px 80px' }}>
+      <div id="evidence-body" style={{ maxWidth: 560, margin: '0 auto', padding: '32px 24px 40px' }}>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
 
           {/* HERO — calm, short */}
-          <div style={{ marginBottom: 48 }}>
+          <div style={{ marginBottom: 28 }}>
             <h1 style={{ fontSize: 'clamp(24px, 5vw, 34px)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.03em', margin: '0 0 14px', color: INK }}>
               Four products.<br />
               <span style={{ color: AMBER }}>Two live on Stripe.</span><br />
@@ -138,31 +144,29 @@ export default function PartnerEvidence() {
 
           <Divider />
 
-          {/* SOURCES — short list */}
+          {/* SOURCES + CONTACT — combined to keep it to 2 pages */}
           <Section label="VERIFY YOURSELF">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 16 }}>
               {sources.map((s, i) => (
                 <a key={i} href={s.url} target="_blank" rel="noopener noreferrer"
-                  style={{ display: 'flex', gap: 8, padding: '7px 12px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 6, textDecoration: 'none', fontSize: 11, color: INK_SOFT, lineHeight: 1.3 }}>
+                  style={{ display: 'flex', gap: 6, padding: '5px 10px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 6, textDecoration: 'none', fontSize: 10, color: INK_SOFT, lineHeight: 1.3 }}>
                   <span style={{ color: AMBER, fontWeight: 900, flexShrink: 0 }}>{i + 1}.</span>
                   <span>{s.name} <span style={{ color: AMBER_DARK }}>↗</span></span>
                 </a>
               ))}
             </div>
+
+            {/* CONTACT inline */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, paddingTop: 12, borderTop: `1px solid ${BORDER}` }}>
+              <p style={{ fontSize: 11, color: INK_MUTE, margin: 0, lineHeight: 1.6 }}>
+                Glasgow, Scotland · Open to licensing partnerships
+              </p>
+              <a href="mailto:family@uf51.love?subject=UF51 Partnership"
+                style={{ display: 'inline-block', padding: '9px 22px', background: AMBER_DARK, color: '#fff', fontWeight: 700, fontSize: 11, borderRadius: 8, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                family@uf51.love
+              </a>
+            </div>
           </Section>
-
-          <Divider />
-
-          {/* CONTACT — no name, no ego */}
-          <div style={{ textAlign: 'center', paddingBottom: 16 }}>
-            <p style={{ fontSize: 12, color: INK_MUTE, margin: '0 0 14px', lineHeight: 1.6 }}>
-              Glasgow, Scotland · CIC formed
-            </p>
-            <a href="mailto:family@uf51.love?subject=UF51"
-              style={{ display: 'inline-block', padding: '12px 28px', background: AMBER_DARK, color: '#fff', fontWeight: 700, fontSize: 12, borderRadius: 8, textDecoration: 'none' }}>
-              family@uf51.love
-            </a>
-          </div>
 
         </motion.div>
       </div>
@@ -174,7 +178,7 @@ export default function PartnerEvidence() {
 
 function Section({ label, children }) {
   return (
-    <div style={{ marginBottom: 36 }}>
+    <div style={{ marginBottom: 20 }}>
       <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.2em', color: AMBER, marginBottom: 14 }}>{label}</div>
       {children}
     </div>
@@ -182,12 +186,12 @@ function Section({ label, children }) {
 }
 
 function Divider() {
-  return <div style={{ height: 1, background: BORDER, margin: '0 0 28px' }} />;
+  return <div style={{ height: 1, background: BORDER, margin: '0 0 16px' }} />;
 }
 
 function FactRow({ title, tag, price, children }) {
   return (
-    <div style={{ marginBottom: 10, padding: '14px 16px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 8 }}>
+    <div style={{ marginBottom: 6, padding: '10px 14px', background: '#fff', border: `1px solid ${BORDER}`, borderRadius: 8 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
           <span style={{ fontSize: 15, fontWeight: 900, color: AMBER_DARK, letterSpacing: '-0.02em' }}>{title}</span>
@@ -202,7 +206,7 @@ function FactRow({ title, tag, price, children }) {
 
 function MarketRow({ title, line1, line2, cite }) {
   return (
-    <div style={{ marginBottom: 12 }}>
+    <div style={{ marginBottom: 8 }}>
       <h3 style={{ fontSize: 12, fontWeight: 800, color: INK, margin: '0 0 4px' }}>{title}</h3>
       <p style={{ fontSize: 12, color: INK_SOFT, lineHeight: 1.5, margin: 0 }}>{line1}</p>
       <p style={{ fontSize: 12, color: INK_SOFT, lineHeight: 1.5, margin: '2px 0 0' }}>{line2}</p>
