@@ -16,7 +16,7 @@ const PRODUCTS = [
     accent: '#d4a017',
     tagline: 'Sound therapy for anxious pets — built on peer-reviewed research.',
     problem: 'Around 70% of dogs show anxiety. Owners feel helpless, drugs are a last resort, and a behaviour consult can cost £200+.',
-    solution: 'Targeted acoustic-therapy protocols through a simple web app. The Separation Anxiety protocol is free; the full library is subscription.',
+    solution: 'Targeted acoustic-therapy protocols through a simple web app. The Separation Anxiety protocol is free; the full library is subscription. An AI engine that personalises the protocol to each pet — species, breed, behaviour — is on the roadmap.',
     market: 'Global pet care ≈ $260B; pet wellness is the fastest-growing slice.',
     status: 'Live · Stripe-ready · pre-revenue',
     fits: 'Pets at Home · vet channel',
