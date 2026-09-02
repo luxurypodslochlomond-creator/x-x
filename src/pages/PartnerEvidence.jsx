@@ -33,6 +33,8 @@ export default function PartnerEvidence() {
       'ESG: EU CSRD mandatory. Green bonds ~$650B in 2025. Earth51 turns real cleanups into reportable ESG evidence.',
       'EdTech: ~$197B (2025) → ~$353B by 2030. ZAPP gives every kid a builder. School/EdTech distributor = reach at near-zero cost.',
       '',
+      'ACHIEVABLE: ~3,400 PS51 subs or ~840 SORTED subs = £100k/yr. That is ~1 in 3,800 UK dog owners, or ~1 in 63,000 UK adults — tiny fractions of a real market, community-driven not ad spend.',
+      '',
       'VERIFY YOURSELF',
       ...sources.map((s, i) => `${i + 1}. ${s.name} — ${s.url}`),
       '',
@@ -135,7 +137,7 @@ export default function PartnerEvidence() {
               <Stat figure="~840" label="SORTED subs = £100k/yr" />
             </div>
             <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: '0 0 10px' }}>
-              Achievable with community-driven growth and the right partnerships — not ad spend.
+              That's ~1 in every 3,800 UK dog owners for PetSounds51 — and ~1 in 63,000 UK adults for SORTED. Tiny fractions of a real market, achievable with community-driven growth and the right partnerships, not ad spend.
             </p>
             <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
               Every product also builds a data asset: SORTED's anonymised cases sharpen the advice over time; Earth51's verified cleanups become reportable ESG evidence.
