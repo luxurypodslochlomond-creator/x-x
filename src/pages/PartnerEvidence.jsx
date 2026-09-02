@@ -28,7 +28,7 @@ export default function PartnerEvidence() {
       'ZAPP — Kids describe an idea, AI builds a real app. No accounts, COPPA-safe. Live and free.',
       '',
       'THE MARKETS',
-      'Pet Care: ~$182B (2025) → ~$284B by 2033. UK ~13M dogs, ~12M cats. Pet-retail/vet partnership = mass reach.',
+      'Pet Care: ~$182B (2025) → ~$284B by 2033. UK ~13.5M dogs, ~12.5M cats. Pet-retail/vet partnership = mass reach.',
       'Legal Tech: ~$29B (2025) → ~$73B by 2035. 92% of low-income Americans get no or inadequate help. CAB/bank partnership could keep SORTED free and pay for itself.',
       'ESG: EU CSRD mandatory. Green bonds ~$650B in 2025. Earth51 turns real cleanups into reportable ESG evidence.',
       'EdTech: ~$197B (2025) → ~$353B by 2030. ZAPP gives every kid a builder. School/EdTech distributor = reach at near-zero cost.',
@@ -40,7 +40,7 @@ export default function PartnerEvidence() {
       'VERIFY YOURSELF',
       ...sources.map((s, i) => `${i + 1}. ${s.name} — ${s.url}`),
       '',
-      'family@uf51.love — Glasgow, Scotland — CIC formed',
+      'family@uf51.love — Glasgow, Scotland — Open to licensing partnerships',
     ].join('\n');
     navigator.clipboard.writeText(lines).then(() => {
       setCopied(true);
@@ -65,12 +65,15 @@ export default function PartnerEvidence() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: `linear-gradient(180deg, ${CREAM} 0%, ${CREAM_DEEP} 40%)`, color: INK, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div className="evidence-page" style={{ minHeight: '100vh', background: `linear-gradient(180deg, ${CREAM} 0%, ${CREAM_DEEP} 40%)`, color: INK, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
       <style>{`
         @media print {
+          @page { margin: 0; }
           .no-print { display: none !important; }
-          body { background: #fff !important; }
-          footer, [class*="footer"], [class*="Footer"], #root > div > footer { display: none !important; }
+          body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+          .evidence-page { min-height: 0 !important; background: #fff !important; }
+          #evidence-body { padding: 14mm 12mm !important; max-width: none !important; margin: 0 !important; }
+          footer, [class*="footer"], [class*="Footer"], [class*="base44"], [class*="Base44"] { display: none !important; }
         }
       `}</style>
 
@@ -197,15 +200,15 @@ export default function PartnerEvidence() {
 
 function Section({ label, children }) {
   return (
-    <div style={{ marginBottom: 20 }}>
-      <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.2em', color: AMBER, marginBottom: 14 }}>{label}</div>
+    <div style={{ marginBottom: 14 }}>
+      <div style={{ fontSize: 8, fontWeight: 800, letterSpacing: '0.2em', color: AMBER, marginBottom: 10 }}>{label}</div>
       {children}
     </div>
   );
 }
 
 function Divider() {
-  return <div style={{ height: 1, background: BORDER, margin: '0 0 16px' }} />;
+  return <div style={{ height: 1, background: BORDER, margin: '0 0 10px' }} />;
 }
 
 function FactRow({ title, tag, price, children }) {
