@@ -35,7 +35,7 @@ export default function PartnerEvidence() {
       '',
       'RIGHT PARTNERSHIPS: PetSounds51 → pet retailers/vet chains/animal charities (~£12bn UK pet spend, 31,000 vets). SORTED → advice charities/high-street banks/housing associations (2.7M helped by advice charities/yr). Earth51 → ESG-led banks/councils/sustainability teams. ZAPP → schools/EdTech distributors/youth charities.',
       '',
-      'ACHIEVABLE: ~3,400 PS51 subs or ~840 SORTED subs = £100k/yr. That is ~1 in 3,800 UK dog owners, or ~1 in 63,000 UK adults — tiny fractions of a real market, community-driven not ad spend.',
+      'ACHIEVABLE: ~3,400 PS51 subs or ~840 SORTED subs = £100k/yr. That is ~1 in 4,000 UK dog owners, or ~1 in 63,000 UK adults — tiny fractions of a real market, community-driven not ad spend.',
       '',
       'VERIFY YOURSELF',
       ...sources.map((s, i) => `${i + 1}. ${s.name} — ${s.url}`),
@@ -127,7 +127,7 @@ export default function PartnerEvidence() {
 
           {/* MARKETS — short */}
           <Section label="THE MARKETS">
-            <MarketRow title="Pet Care" line1="~$182B global market (2025) → ~$284B by 2033." line2="UK: ~13M dogs, ~12M cats. Recession-resilient. A pet-retail or vet partnership = mass reach without ad spend." cite="Grand View Research · PFMA" />
+            <MarketRow title="Pet Care" line1="~$182B global market (2025) → ~$284B by 2033." line2="UK: ~13.5M dogs, ~12.5M cats. Recession-resilient. A pet-retail or vet partnership = mass reach without ad spend." cite="Grand View Research · PFMA" />
             <MarketRow title="Legal Tech" line1="~$29B (2025) → ~$73B by 2035." line2="92% of low-income Americans get no or inadequate legal help. A CAB or bank partnership could keep SORTED free for those who need it — and pay for itself in a year." cite="Precedence Research · LSC" />
             <MarketRow title="ESG Reporting" line1="EU CSRD makes sustainability reporting mandatory." line2="Green bonds ~$650B in 2025 alone. Earth51 turns real cleanups into reportable ESG evidence." cite="European Commission · Climate Bonds" />
             <MarketRow title="EdTech" line1="~$197B (2025) → ~$353B by 2030." line2="ZAPP gives every kid a builder — no account, no risk. A school or EdTech distributor = reach at near-zero cost." cite="MarketsandMarkets" />
@@ -154,7 +154,7 @@ export default function PartnerEvidence() {
               <Stat figure="~840" label="SORTED subs = £100k/yr" />
             </div>
             <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: '0 0 10px' }}>
-              That's ~1 in every 3,800 UK dog owners for PetSounds51 — and ~1 in 63,000 UK adults for SORTED. Tiny fractions of a real market, achievable with community-driven growth and the right partnerships, not ad spend.
+              That's ~1 in every 4,000 UK dog owners for PetSounds51 — and ~1 in 63,000 UK adults for SORTED. Tiny fractions of a real market, achievable with community-driven growth and the right partnerships, not ad spend.
             </p>
             <p style={{ fontSize: 13, color: INK_SOFT, lineHeight: 1.65, margin: 0 }}>
               Every product also builds a data asset: SORTED's anonymised cases sharpen the advice over time; Earth51's verified cleanups become reportable ESG evidence.
