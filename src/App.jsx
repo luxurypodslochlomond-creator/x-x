@@ -110,6 +110,7 @@ import RealityCheckPage from './pages/RealityCheck';
 import GraemeOnePagerPage from './pages/GraemeOnePager';
 import PartnerEvidencePage from './pages/PartnerEvidence';
 import ExtractionProofCovenantPage from './pages/ExtractionProofCovenant';
+import UF51OverviewPage from './pages/UF51Overview';
 
 
 
@@ -238,6 +239,7 @@ const AuthenticatedApp = () => {
       <Route path="/GraemeOnePager" element={<GraemeOnePagerPage />} />
       <Route path="/PartnerEvidence" element={<PartnerEvidencePage />} />
       <Route path="/ExtractionProofCovenant" element={<LayoutWrapper currentPageName="ExtractionProofCovenant"><ExtractionProofCovenantPage /></LayoutWrapper>} />
+      <Route path="/UF51Overview" element={<LayoutWrapper currentPageName="UF51Overview"><UF51OverviewPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </>

@@ -72,7 +72,7 @@ const PUBLIC_PAGES = [
   'PetSounds51InvestorPress', 'PetSounds51PartnerBrief', 'PetSounds51MarketingAssets',
   'PetSounds51Terms', 'PetSounds51Privacy', 'CB51Terms', 'CB51Privacy', 'BuzzStop',
   'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy',
-  'BuzzTrip', 'BuzzTripAbout'
+  'BuzzTrip', 'BuzzTripAbout', 'UF51Overview'
 ];
 
 // OFFLINE-OK PAGES
