@@ -1,0 +1,52 @@
+{
+  "name": "ParklifeLogo",
+  "type": "object",
+  "description": "Logo creations for National Parklife \u2014 Gill's hammock and cushion brand",
+  "properties": {
+    "image_url": {
+      "type": "string",
+      "description": "URL to the generated logo image"
+    },
+    "prompt": {
+      "type": "string",
+      "description": "The prompt used to generate this logo"
+    },
+    "style": {
+      "type": "string",
+      "enum": [
+        "emblem",
+        "lineart",
+        "label",
+        "typographic",
+        "nature",
+        "custom"
+      ],
+      "default": "custom",
+      "description": "Logo style category"
+    },
+    "is_preset": {
+      "type": "boolean",
+      "default": false,
+      "description": "True for pre-generated starter logos"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional notes about this logo"
+    }
+  },
+  "required": [
+    "image_url"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

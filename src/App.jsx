@@ -96,6 +96,7 @@ const PlatformPage = React.lazy(() => import('./pages/Platform'));
 const BrianHughesCVPage = React.lazy(() => import('./pages/BrianHughesCV'));
 const AdminSortedOutreachPage = React.lazy(() => import('./pages/AdminSortedOutreach'));
 const AdminSortedInfluencersPage = React.lazy(() => import('./pages/AdminSortedInfluencers'));
+const AdminNationalParklifePage = React.lazy(() => import('./pages/AdminNationalParklife'));
 const CB51VotePage = React.lazy(() => import('./pages/CB51Vote'));
 const CB51JoinPage = React.lazy(() => import('./pages/CB51Join'));
 const CB51MainPage = React.lazy(() => import('./pages/CB51'));
@@ -225,6 +226,7 @@ const AuthenticatedApp = () => {
 
       <Route path="/AdminSortedOutreach" element={<LayoutWrapper currentPageName="AdminSortedOutreach"><AdminSortedOutreachPage /></LayoutWrapper>} />
       <Route path="/AdminSortedInfluencers" element={<LayoutWrapper currentPageName="AdminSortedInfluencers"><AdminSortedInfluencersPage /></LayoutWrapper>} />
+      <Route path="/AdminNationalParklife" element={<LayoutWrapper currentPageName="AdminNationalParklife"><AdminNationalParklifePage /></LayoutWrapper>} />
       <Route path="/CB51Vote" element={<CB51VotePage />} />
       <Route path="/CB51Join" element={<CB51JoinPage />} />
       <Route path="/CB51" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ background: '#f7f5f0' }}><div className="w-8 h-8 rounded-full animate-spin" style={{ border: '2px solid rgba(8,145,178,0.2)', borderTopColor: '#0891b2' }} /></div>}><CB51MainPage /></Suspense>} />
