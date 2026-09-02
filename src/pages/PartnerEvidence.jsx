@@ -15,100 +15,59 @@ const BORDER = 'rgba(217,119,6,0.18)';
 
 export default function PartnerEvidence() {
   const [copied, setCopied] = useState(false);
-  const [saving, setSaving] = useState(false);
 
   const handleCopy = () => {
-    const text = document.getElementById('evidence-body')?.innerText || '';
-    navigator.clipboard.writeText(text).then(() => {
+    const lines = [
+      'UF51 — EVIDENCE',
+      '',
+      'Three products. Live on Stripe. Real payments.',
+      '',
+      'PetSounds51 — Sound therapy for anxious pets. £29.99/yr, £9.99/mo. Live on Stripe.',
+      'SORTED — Legal document decoder. Any language. Nothing stored. £9.99/mo, £9.99 lifetime. Live on Stripe.',
+      'Earth51 — AI-verified litter collection. ESG impact data. Pre-launch.',
+      '',
+      'THE MARKETS',
+      'Pet Care: ~$182B global market (2025) → ~$284B by 2033. UK: ~13M dogs, ~12M cats.',
+      'Legal Tech: ~$29B (2025) → ~$73B by 2035. 92% of low-income Americans get no or inadequate legal help.',
+      'ESG: EU CSRD makes sustainability reporting mandatory. Global green bond issuance ~$700B/yr.',
+      '',
+      'VERIFY YOURSELF',
+      ...sources.map((s, i) => `${i + 1}. ${s.name} — ${s.url}`),
+      '',
+      'family@uf51.love — Glasgow, Scotland — CIC formed',
+    ].join('\n');
+    navigator.clipboard.writeText(lines).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     });
   };
 
-  const handlePDF = async () => {
-    setSaving(true);
-    const { jsPDF } = await import('jspdf');
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-    const margin = 20;
-    const pageWidth = 210;
-    const usable = pageWidth - margin * 2;
-    let y = margin;
-
-    const addText = (text, size, bold, color, gap = 5) => {
-      doc.setFontSize(size);
-      doc.setFont('helvetica', bold ? 'bold' : 'normal');
-      doc.setTextColor(...color);
-      const lines = doc.splitTextToSize(text, usable);
-      lines.forEach(line => {
-        if (y > 275) { doc.addPage(); y = margin; }
-        doc.text(line, margin, y);
-        y += size * 0.4;
-      });
-      y += gap;
-    };
-
-    const divider = () => {
-      doc.setDrawColor(225, 215, 195);
-      doc.line(margin, y, pageWidth - margin, y);
-      y += 6;
-    };
-
-    addText('UF51', 22, true, [26, 18, 8], 1);
-    addText('EVIDENCE — JUNE 2026', 8, true, [180, 130, 6], 8);
-
-    addText('Three products. Live on Stripe. Real payments.', 14, true, [26, 18, 8], 3);
-    addText("No unicorn projections. No hype. Just what is built, the markets it serves, and what is honestly achievable. Every figure is sourced.", 10, false, [80, 70, 50], 8);
-
-    divider();
-
-    addText('WHAT IS LIVE', 11, true, [180, 130, 6], 4);
-    addText('PetSounds51 — Sound therapy for anxious pets. £29.99/year, £9.99/month. Live on Stripe.', 9, false, [80, 70, 50], 3);
-    addText('SORTED — Legal document decoder. Any language. Nothing stored. £9.99/month, £9.99 lifetime. Live on Stripe.', 9, false, [80, 70, 50], 3);
-    addText('Earth51 — AI-verified litter collection. ESG impact data. Pre-launch.', 9, false, [80, 70, 50], 8);
-
-    divider();
-
-    addText('THE MARKETS', 11, true, [180, 130, 6], 4);
-    addText('Pet care: ~$263B global market (2024). UK has ~13M dogs, ~12M cats. Recession-resilient.', 9, false, [80, 70, 50], 3);
-    addText("Legal tech: ~$29B (2025), projected ~$73B by 2035. 92% of low-income Americans get no or inadequate legal help.", 9, false, [80, 70, 50], 3);
-    addText('ESG: EU CSRD makes sustainability reporting mandatory. Global green bonds ~$700B (2024).', 9, false, [80, 70, 50], 8);
-
-    divider();
-
-    addText('WHAT IS ACHIEVABLE', 11, true, [180, 130, 6], 4);
-    addText("~3,400 PetSounds51 subscribers = £100k/year. ~840 SORTED subscribers = same. Not big numbers. Achievable with community-driven growth, not ad blitzes.", 9, false, [80, 70, 50], 8);
-
-    divider();
-
-    addText('family@uf51.love — Glasgow, Scotland — CIC formed', 11, true, [26, 18, 8], 1);
-    addText('All figures sourced from publicly available research.', 8, false, [120, 110, 90], 0);
-
-    doc.save('UF51-Evidence-June-2026.pdf');
-    setSaving(false);
-  };
+  // Browser print-to-PDF keeps every <a> as a real clickable link in the saved PDF.
+  const handlePDF = () => window.print();
 
   const sources = [
     { name: 'Grand View Research — Pet Care Market', url: 'https://www.grandviewresearch.com/industry-analysis/pet-care-market' },
     { name: 'PFMA / UK Pet Food — Pet Population', url: 'https://www.ukpetfood.org/information-centre/statistics/pet-population.html' },
-    { name: 'Precedence Research — Legal Tech Market', url: 'https://www.precedenceresearch.com/legal-tech-market' },
+    { name: 'Precedence Research — Legal Tech Market', url: 'https://www.precedenceresearch.com/legal-technology-market' },
     { name: 'Legal Services Corporation — The Justice Gap', url: 'https://justicegap.lsc.gov/resource/2022-justice-gap-report/' },
     { name: 'European Commission — CSRD Directive', url: 'https://finance.ec.europa.eu/capital-markets-union-and-financial-markets/company-reporting-and-auditing/company-reporting/corporate-sustainability-reporting_en' },
-    { name: 'BIS — Green Bond Market', url: 'https://www.bis.org/publ/qtrpdf/r_qt2503d.pdf' },
+    { name: 'BIS — Green Bond Market', url: 'https://www.bis.org/publ/qtrpdf/r_qt2503d.htm' },
   ];
 
   return (
     <div style={{ minHeight: '100vh', background: `linear-gradient(180deg, ${CREAM} 0%, ${CREAM_DEEP} 40%)`, color: INK, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+      <style>{`@media print { .no-print { display: none !important; } body { background: #fff !important; } }`}</style>
 
       {/* CALM HEADER */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: `1px solid ${BORDER}`, padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+      <header className="no-print" style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,245,0.98)', backdropFilter: 'blur(24px)', borderBottom: `1px solid ${BORDER}`, padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <UF51Icon />
           <div style={{ fontSize: 15, fontWeight: 900, letterSpacing: '0.06em', color: INK }}>UF51</div>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
-          <motion.button whileTap={{ scale: 0.95 }} onClick={handlePDF} disabled={saving}
-            style={{ fontSize: 10, fontWeight: 700, color: '#fff', background: AMBER_DARK, border: 'none', borderRadius: 8, padding: '9px 18px', cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? 0.7 : 1 }}>
-            {saving ? 'GENERATING…' : '↓ PDF'}
+          <motion.button whileTap={{ scale: 0.95 }} onClick={handlePDF}
+            style={{ fontSize: 10, fontWeight: 700, color: '#fff', background: AMBER_DARK, border: 'none', borderRadius: 8, padding: '9px 18px', cursor: 'pointer' }}>
+            ↓ PDF
           </motion.button>
           <motion.button whileTap={{ scale: 0.95 }} onClick={handleCopy}
             style={{ fontSize: 10, fontWeight: 700, color: copied ? AMBER_DARK : INK_SOFT, background: copied ? 'rgba(217,119,6,0.08)' : 'transparent', border: `1px solid ${BORDER}`, borderRadius: 8, padding: '9px 18px', cursor: 'pointer' }}>
@@ -149,9 +108,9 @@ export default function PartnerEvidence() {
 
           {/* MARKETS — short */}
           <Section label="THE MARKETS">
-            <MarketRow title="Pet Care" line1="~$263B global market (2024)." line2="UK: ~13M dogs, ~12M cats. Recession-resilient." cite="Grand View Research · PFMA" />
+            <MarketRow title="Pet Care" line1="~$182B global market (2025) → ~$284B by 2033." line2="UK: ~13M dogs, ~12M cats. Recession-resilient." cite="Grand View Research · PFMA" />
             <MarketRow title="Legal Tech" line1="~$29B (2025) → ~$73B by 2035." line2="92% of low-income Americans get no or inadequate legal help." cite="Precedence Research · LSC" />
-            <MarketRow title="ESG Reporting" line1="EU CSRD makes sustainability reporting mandatory." line2="Global green bonds ~$700B (2024)." cite="European Commission · BIS" />
+            <MarketRow title="ESG Reporting" line1="EU CSRD makes sustainability reporting mandatory." line2="Global green bond issuance ~$700B/yr." cite="European Commission · BIS" />
           </Section>
 
           <Divider />
