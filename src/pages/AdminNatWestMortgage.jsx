@@ -44,7 +44,7 @@ export default function AdminNatWestMortgage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-black">NATWEST MORTGAGE</h1>
           <p className="text-xl text-gray-300">Reference: 5521482 • You Negotiated This ♾️</p>
-          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 31 Jul 2026 — ✅ JEMMA (SST) REPLIED 30 Jul w/ INCOME & EXPENDITURE FORM · 24 AUG SMI/MI12 REVIEW · FILL FORM 1 SECTION/DAY W/ UF51 · Pattern: £100 May → £200 June → £210 July ✓✓✓ ♾️❤️</p>
+          <p className="text-sm text-green-400 font-mono">🔥 UPDATED: 8 Sep 2026 — ✅ RAJ (SST) CALLED & SENT SUMMARY: DWP SENDING MI12 FOR SMI ✓ · 15-DAY LETTER MAY BE ISSUED BUT BANK NOT ACTING ON IT · STAY ENGAGED + REALISTIC PROPOSAL · Pattern: £100 May → £200 June → £210 July ✓✓✓ ♾️❤️</p>
         </motion.div>
 
         {/* CURRENT STATUS - 3 MONTH DEFERRAL + 30 DAY BREATHING SPACE */}
@@ -306,6 +306,15 @@ export default function AdminNatWestMortgage() {
                   <p className="text-blue-400 font-bold text-sm mt-1">🎯 GOAL: Form mostly filled before 24 Aug review · Ask Jemma to walk through gaps on a call · Get free debt advice (PayPlan 0800 280 2816) to strengthen your position.</p>
                 </div>
               </div>
+
+              <div className="flex items-start gap-4 bg-green-900/30 p-4 rounded-lg border-4 border-green-500 shadow-[0_0_60px_rgba(34,197,94,0.6)]">
+                <div className="text-green-300 font-bold text-lg min-w-fit">08/09/2026</div>
+                <div>
+                  <p className="text-white font-black">🔥 RAJ (SST) CALLED & SENT SUMMARY — DWP SMI COMING THROUGH ✓</p>
+                  <p className="text-gray-200 text-sm">Spoke with <strong>Raj (Rajinder Singh, SST Secured)</strong>. He sent a written summary: (1) <strong>DWP confirmed they're sending the Mi12 form for Support for Mortgage Interest</strong> — the government will start paying the mortgage interest; (2) Bank <strong>may issue a 15-day letter</strong> about potential progression if arrears aren't addressed, but Raj <strong>reassured the Bank is NOT looking to act on it at this stage</strong>; (3) As long as you stay engaged, provide updates, and the Bank feels there's a realistic proposal, they'll <strong>continue to support you</strong>.</p>
+                  <p className="text-green-400 font-bold text-sm mt-1">✅ THIS IS GOOD NEWS: SMI is coming, the 15-day letter is procedural (not enforcement), and the Bank is still on your side. Reply to Raj to confirm engagement and keep the line open.</p>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -406,6 +415,14 @@ export default function AdminNatWestMortgage() {
               body={`Good afternoon Sukhi,\n\nI'm writing to follow up on ref 5521482. I'm still working towards making a payment and am hoping to confirm a specific amount in May. I'll be in touch as soon as I'm in a position to do so.\n\nThank you for your continued patience.\n\nKind regards,\nBrian Hughes\nRef: 5521482`}
               label="✉️ Follow-up to Sukhi Kaur — NatWest"
               color="cyan"
+            />
+
+            <EmailLauncher
+              to="SSTSecured@natwest.com"
+              subject="Re: Ref: 5521482 — Thank you for the summary"
+              body={`Dear Raj,\n\nThank you for following up our conversation with this summary. I can confirm the points you've set out match my understanding of our discussion.\n\n1. Yes — I have received notification from the DWP that they will now be sending me the Mi12 form for Support for Mortgage Interest. I'm grateful this is progressing and will share any further updates as I receive them.\n\n2. I note the Bank may need to issue a 15-day letter regarding potential progression if arrears are not addressed. I appreciate your reassurance that the Bank is not looking to act upon the letter at this stage, and I want to assure you I am taking this seriously and working to address the arrears.\n\n3. I can confirm I will stay engaged with the team, provide regular updates, and continue working towards a realistic proposal to get back on track with the mortgage.\n\nI am currently working through the Income & Expenditure form Jemma sent over, and I will have that returned as soon as I can so we can explore the options around capitalising the arrears or extending the term. I will also keep you updated on the SMI/MI12 progress as I hear back from the DWP.\n\nThank you again for your continued support and patience. I will be in touch with my next update soon.\n\nKind regards,\nBrian Hughes\nRef: 5521482`}
+              label="✉️ REPLY TO RAJ — Confirm summary & ongoing engagement"
+              color="green"
             />
 
             <EmailLauncher
