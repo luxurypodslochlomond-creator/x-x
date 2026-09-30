@@ -72,7 +72,8 @@ const PUBLIC_PAGES = [
   'PetSounds51InvestorPress', 'PetSounds51PartnerBrief', 'PetSounds51MarketingAssets',
   'PetSounds51Terms', 'PetSounds51Privacy', 'CB51Terms', 'CB51Privacy', 'BuzzStop',
   'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy',
-  'BuzzTrip', 'BuzzTripAbout', 'UF51Overview'
+  'BuzzTrip', 'BuzzTripAbout', 'UF51Overview',
+  'NewCleanup', 'Earth51', 'CleanupFeed', 'Missions', 'Stoneymollan', 'StoneymollanMarketing'
 ];
 
 // OFFLINE-OK PAGES
@@ -455,11 +456,11 @@ const LayoutInner = ({ children, currentPageName }) => {
       ...(user ? [{ title: "My Wallet", url: createPageUrl("Profile"), icon: User, description: "Your P51 & rewards" }] : []),
     ];
 
-    // 3. LITTER PICKS
+    // 3. PHOTO51
     const litterNav = [
-      { title: "Submit a Litter Pick", url: createPageUrl("NewCleanup"), icon: Globe, highlight: true, description: "Take action · earn tokens" },
-      { title: "earth51.love", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
-      { title: "Cleanup Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "See all cleanups" },
+      { title: "Submit a Photo51", url: createPageUrl("NewCleanup"), icon: Globe, highlight: true, description: "Take action · earn tokens" },
+      { title: "Photo51 for Kids", url: createPageUrl("Earth51"), icon: Globe, highlight: true, description: "AI litter scanner for kids" },
+      { title: "Photo51 Feed", url: createPageUrl("CleanupFeed"), icon: Shield, description: "See all photo51 submissions" },
       { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Community impact actions" },
       { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from doing good" },
       { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
@@ -787,7 +788,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             <>
                               <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                               <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} isMobile />
-                              <NavSection title="LITTER PICKS" color="green" items={litterNav} isActivePage={isActivePage} isMobile />
+                              <NavSection title="PHOTO51" color="green" items={litterNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="🌍 LEARN51 — FREE FOR EVERY CHILD" color="cyan" items={kidsNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="LEARN" color="gray" items={learnNav} isActivePage={isActivePage} isMobile />
@@ -903,7 +904,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               <>
                 <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} defaultOpen={true} />
                 <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} />
-                <NavSection title="LITTER PICKS" color="green" items={litterNav} isActivePage={isActivePage} />
+                <NavSection title="PHOTO51" color="green" items={litterNav} isActivePage={isActivePage} />
                 <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} />
                 <NavSection title="🌍 LEARN51 — FREE FOR EVERY CHILD" color="cyan" items={kidsNav} isActivePage={isActivePage} />
                 <NavSection title="LEARN" color="gray" items={learnNav} isActivePage={isActivePage} />
