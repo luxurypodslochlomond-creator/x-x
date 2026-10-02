@@ -333,6 +333,13 @@ export default function TogetherChangeClimate() {
               <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-xs font-bold mt-2">
                 Read our open-source covenant <ArrowRight className="w-3 h-3" />
               </Link>
+              <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-white/10">
+                This platform is one part of UF51's Planetary Healing family — the verified solutions here are the
+                knowledge engine behind our on-the-ground action.{" "}
+                <Link to={createPageUrl('NewCleanup')} className="text-emerald-400 hover:text-emerald-300 font-bold">
+                  Take action →
+                </Link>
+              </p>
             </div>
           </div>
         </div>
