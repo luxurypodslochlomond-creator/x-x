@@ -115,6 +115,7 @@ import UF51OverviewPage from './pages/UF51Overview';
 import TogetherChangeClimatePage from './pages/TogetherChangeClimate';
 import UF51TokenPage from './pages/UF51Token';
 import UF51ThreadJournalPage from './pages/UF51ThreadJournal';
+const AdminUF51BudgetPage = React.lazy(() => import('./pages/AdminUF51Budget'));
 
 
 
@@ -249,6 +250,7 @@ const AuthenticatedApp = () => {
       <Route path="/ClimatePlatform" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><TogetherChangeClimatePage /></LayoutWrapper>} />
       <Route path="/UF51Token" element={<LayoutWrapper currentPageName="UF51Token"><UF51TokenPage /></LayoutWrapper>} />
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
+      <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </>
