@@ -73,7 +73,8 @@ const PUBLIC_PAGES = [
   'PetSounds51Terms', 'PetSounds51Privacy', 'CB51Terms', 'CB51Privacy', 'BuzzStop',
   'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy',
   'BuzzTrip', 'BuzzTripAbout', 'UF51Overview',
-  'NewCleanup', 'Earth51', 'CleanupFeed', 'Missions', 'Stoneymollan', 'StoneymollanMarketing'
+  'NewCleanup', 'Earth51', 'CleanupFeed', 'Missions', 'Stoneymollan', 'StoneymollanMarketing',
+  'TogetherChangeClimate', 'ClimatePlatform'
 ];
 
 // OFFLINE-OK PAGES

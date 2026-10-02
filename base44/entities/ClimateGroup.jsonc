@@ -1,0 +1,31 @@
+{
+  "name": "ClimateGroup",
+  "type": "object",
+  "description": "Region/topic gatherings on the 'Together We Change Climate' platform \u2014 people working on the same thing in an area can share ideas directly. Faithful to Janine's spec.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Group name, e.g. 'Seagrass Restorers \u2014 West Coast'"
+    },
+    "topic": {
+      "type": "string",
+      "description": "Shared interest (plastic shelters, plastic clothes, saving seagrasses, etc)"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region/area \u2014 rough, privacy-respecting"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this group is doing together"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Creator email (email required for groups, per spec)"
+    }
+  },
+  "required": [
+    "name",
+    "topic"
+  ]
+}

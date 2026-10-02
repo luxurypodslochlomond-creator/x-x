@@ -1,0 +1,121 @@
+{
+  "name": "ClimateSolution",
+  "type": "object",
+  "description": "A verified climate solution or climate-crisis entry on the 'Together We Change Climate' public platform. Faithful to Janine Selendy's spec: two summary types (Solutions / Climate Crisis), her category taxonomy, rough location, image, and translation-ready fields.",
+  "properties": {
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "solution",
+        "climate_crisis"
+      ],
+      "description": "Solution (a positive action to replicate) or Climate Crisis (an emergency to alert the world to)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of this entry"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Short summary shown on the card and when tapping the image"
+    },
+    "details": {
+      "type": "string",
+      "description": "Longer description / LinkedIn-style detail body"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "agriculture",
+        "water",
+        "heat",
+        "coastal_erosion_protection",
+        "seagrasses",
+        "mangroves",
+        "oceans",
+        "zooplankton",
+        "phytoplankton",
+        "forest_preservation",
+        "rewilding",
+        "urban_geodesign",
+        "transportation",
+        "electric_vehicles",
+        "renewable_energy",
+        "solar_desalination",
+        "drought",
+        "flooding",
+        "extreme_weather",
+        "other"
+      ],
+      "description": "Category from Janine's spec taxonomy"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Subcategory, e.g. agriculture: water supply, drought, resilient crops"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country / region \u2014 rough mapping only, privacy-respecting"
+    },
+    "region_rough": {
+      "type": "string",
+      "description": "Rough location for mapping (no precise coordinates, per her privacy stance)"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Copyright-free image URL"
+    },
+    "image_credit": {
+      "type": "string",
+      "description": "Image source/credit"
+    },
+    "source_name": {
+      "type": "string",
+      "description": "Source of this entry, e.g. Horizon Solutions Site article"
+    },
+    "source_url": {
+      "type": "string",
+      "description": "Link to the source article"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "reviewed",
+        "published"
+      ],
+      "default": "published",
+      "description": "All material must be reviewed before publication (per Solutions Site model)"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show in the top image carousel"
+    },
+    "scale": {
+      "type": "string",
+      "enum": [
+        "individual",
+        "community",
+        "city",
+        "country",
+        "global"
+      ],
+      "description": "Scale of this example, from individuals to whole countries (per her spec)"
+    }
+  },
+  "required": [
+    "entry_type",
+    "title",
+    "summary",
+    "category"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
