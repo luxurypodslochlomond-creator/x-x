@@ -465,6 +465,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Community impact actions" },
       { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from doing good" },
       { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
+      { title: "Together We Change Climate", url: createPageUrl("TogetherChangeClimate"), icon: Globe, highlight: true, description: "Janine Selendy's platform · verified solutions" },
     ];
 
     // 4. MUSIC & RESEARCH
