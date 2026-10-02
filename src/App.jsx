@@ -113,6 +113,7 @@ import PartnerEvidencePage from './pages/PartnerEvidence';
 import ExtractionProofCovenantPage from './pages/ExtractionProofCovenant';
 import UF51OverviewPage from './pages/UF51Overview';
 import TogetherChangeClimatePage from './pages/TogetherChangeClimate';
+import UF51TokenPage from './pages/UF51Token';
 
 
 
@@ -245,6 +246,7 @@ const AuthenticatedApp = () => {
       <Route path="/UF51Overview" element={<LayoutWrapper currentPageName="UF51Overview"><UF51OverviewPage /></LayoutWrapper>} />
       <Route path="/TogetherChangeClimate" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><TogetherChangeClimatePage /></LayoutWrapper>} />
       <Route path="/ClimatePlatform" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><TogetherChangeClimatePage /></LayoutWrapper>} />
+      <Route path="/UF51Token" element={<LayoutWrapper currentPageName="UF51Token"><UF51TokenPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </>

@@ -74,7 +74,7 @@ const PUBLIC_PAGES = [
   'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy',
   'BuzzTrip', 'BuzzTripAbout', 'UF51Overview',
   'NewCleanup', 'Earth51', 'CleanupFeed', 'Missions', 'Stoneymollan', 'StoneymollanMarketing',
-  'TogetherChangeClimate', 'ClimatePlatform'
+  'TogetherChangeClimate', 'ClimatePlatform', 'UF51Token'
 ];
 
 // OFFLINE-OK PAGES
