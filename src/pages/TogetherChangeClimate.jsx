@@ -181,7 +181,13 @@ export default function TogetherChangeClimate() {
   const [selectedType, setSelectedType] = useState('all');
   const [openItem, setOpenItem] = useState(null);
   const [heroIndex, setHeroIndex] = useState(0);
-  const [lang, setLang] = useState('en');
+  // Live translations: bundled for common languages, AI-translated on demand for any other —
+  // the user's choice and the translated result are cached locally so repeat visits are instant and zero-loss.
+  const [lang, setLang] = useState(() => { try { return localStorage.getItem('climate51_lang') || 'auto'; } catch { return 'auto'; } });
+  const [liveStrings, setLiveStrings] = useState(null);
+  const [translating, setTranslating] = useState(false);
+  const [autoLang, setAutoLang] = useState('en');
+  const [otherOpen, setOtherOpen] = useState(false);
 
   useEffect(() => { base44.entities.ClimateSolution.list().then(r => { setItems(r); setLoading(false); }).catch(() => setLoading(false)); }, []);
 
@@ -190,7 +196,47 @@ export default function TogetherChangeClimate() {
     return () => clearInterval(t);
   }, []);
 
-  const t = T[lang] || T.en;
+  // Auto-detect the browser language once.
+  useEffect(() => {
+    try {
+      const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+      setAutoLang((nav || 'en').split('-')[0].toLowerCase() || 'en');
+    } catch { setAutoLang('en'); }
+  }, []);
+
+  // Resolve the effective language and trigger live translation when it's not one of the bundled ones.
+  useEffect(() => {
+    const resolved = lang === 'auto' ? autoLang : lang;
+    if (T[resolved]) { setLiveStrings(null); return; }
+    if (resolved === 'en') { setLiveStrings(null); return; }
+    const cacheKey = 'climate51_t_' + resolved;
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) { setLiveStrings(JSON.parse(cached)); return; }
+    } catch { /* ignore */ }
+    let cancelled = false;
+    setTranslating(true);
+    base44.functions.invoke('translateClimate', { lang: resolved, strings: { ...T.en } })
+      .then(res => {
+        if (cancelled) return;
+        const out = res?.data?.translations || res?.translations;
+        if (out && out.brand) {
+          setLiveStrings(out);
+          try { localStorage.setItem(cacheKey, JSON.stringify(out)); } catch { /* storage full */ }
+        }
+      })
+      .catch(() => { /* fall back to English silently */ })
+      .finally(() => { if (!cancelled) setTranslating(false); });
+    return () => { cancelled = true; };
+  }, [lang, autoLang]);
+
+  const handleLang = (code) => {
+    setLang(code);
+    try { localStorage.setItem('climate51_lang', code); } catch { /* ignore */ }
+  };
+
+  const chosen = lang === 'auto' ? autoLang : lang;
+  const t = T[chosen] || liveStrings || T.en;
 
   const filtered = useMemo(() => {
     return items.filter(i => {
@@ -252,44 +298,78 @@ export default function TogetherChangeClimate() {
           <Languages className="w-3 h-3 text-cyan-400" />
           <select
             value={lang}
-            onChange={e => setLang(e.target.value)}
-            aria-label="Select language / Idioma / Sprache"
-            className="bg-transparent text-gray-300 border border-white/10 rounded-md px-1 py-0.5 text-[11px] outline-none cursor-pointer hover:border-cyan-400/50 transition-colors"
+            onChange={e => {
+              if (e.target.value === '__other') { setOtherOpen(true); }
+              else { setOtherOpen(false); handleLang(e.target.value); }
+            }}
+            aria-label="Select language / Idioma / Sprache / 言語"
+            className="bg-transparent text-gray-300 border border-white/10 rounded-md px-1.5 py-0.5 text-[11px] outline-none cursor-pointer hover:border-cyan-400/50 transition-colors max-w-[160px]"
           >
+            <option value="auto" className="bg-[#161b22]">🌐 Auto-detect</option>
             {LANGS.map(l => <option key={l.code} value={l.code} className="bg-[#161b22]">{l.label}</option>)}
+            <option value="__other" className="bg-[#161b22]">✨ Any other language…</option>
           </select>
+          {translating && <span className="text-[10px] text-cyan-400/70 animate-pulse">translating…</span>}
         </div>
       </div>
 
-      {/* SEARCH + FILTERS */}
+      {/* ANY-LANGUAGE INPUT — live AI translation for languages outside the bundled list */}
+      {otherOpen && (
+        <div className="px-4 py-3 border-b border-white/10 bg-cyan-500/5 flex items-center gap-2 max-w-6xl mx-auto">
+          <span className="text-[11px] text-gray-300 flex-shrink-0">Type any language:</span>
+          <input
+            autoFocus
+            placeholder="e.g. Yoruba, Tagalog, Swedish, Māori…"
+            onKeyDown={e => {
+              if (e.key === 'Enter' && e.currentTarget.value.trim()) {
+                const code = e.currentTarget.value.trim().toLowerCase();
+                handleLang(code);
+                setOtherOpen(false);
+              }
+            }}
+            className="flex-1 bg-white/[0.04] border border-cyan-400/30 focus:border-cyan-400 rounded-lg px-3 py-1.5 text-[12px] text-white placeholder-gray-500 outline-none"
+          />
+          <button
+            onClick={(e) => {
+              const input = e.currentTarget.previousElementSibling;
+              if (input && input.value.trim()) {
+                handleLang(input.value.trim().toLowerCase());
+                setOtherOpen(false);
+              }
+            }}
+            className="px-3 py-1.5 rounded-lg bg-cyan-400/90 text-black text-[11px] font-bold"
+          >Go</button>
+          <button onClick={() => setOtherOpen(false)} className="text-gray-500 hover:text-white text-xs px-1">×</button>
+        </div>
+      )}
+
+      {/* SEARCH + FILTERS — search full width, filters stacked below so nothing ever squeezes on mobile */}
       <div className="px-4 py-5 max-w-6xl mx-auto">
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-            <input
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              placeholder={t.search}
-              className="w-full bg-white/[0.04] border border-white/10 focus:border-emerald-400/60 rounded-xl pl-9 pr-4 py-3 text-sm text-white placeholder-gray-500 outline-none"
-            />
-          </div>
-          <div className="flex gap-2">
-            <button onClick={() => setSelectedType(selectedType === 'solution' ? 'all' : 'solution')}
-              className={`px-4 py-2 rounded-xl text-sm font-bold border transition-all ${selectedType === 'solution' ? 'bg-emerald-400/90 text-black border-emerald-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>{t.solutions}</button>
-            <button onClick={() => setSelectedType(selectedType === 'crisis' ? 'all' : 'crisis')}
-              className={`px-4 py-2 rounded-xl text-sm font-bold border transition-all ${selectedType === 'crisis' ? 'bg-amber-400/90 text-black border-amber-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>{t.crises}</button>
-          </div>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <input
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder={t.search}
+            className="w-full bg-white/[0.04] border border-white/10 focus:border-emerald-400/60 rounded-xl pl-9 pr-4 py-3 text-sm text-white placeholder-gray-500 outline-none"
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-2 mt-3">
+          <button onClick={() => setSelectedType(selectedType === 'solution' ? 'all' : 'solution')}
+            className={`px-4 py-3 rounded-xl text-sm font-bold border transition-all ${selectedType === 'solution' ? 'bg-emerald-400/90 text-black border-emerald-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>{t.solutions}</button>
+          <button onClick={() => setSelectedType(selectedType === 'crisis' ? 'all' : 'crisis')}
+            className={`px-4 py-3 rounded-xl text-sm font-bold border transition-all ${selectedType === 'crisis' ? 'bg-amber-400/90 text-black border-amber-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>{t.crises}</button>
         </div>
       </div>
 
-      {/* CATEGORY CHIPS */}
+      {/* CATEGORY CHIPS — native horizontal scroll (what phones expect for a tag rail), compact so far less sliding */}
       <div className="px-4 pb-2 max-w-6xl mx-auto">
-        <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4" style={{ scrollbarWidth: 'none' }}>
+        <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-2 -mx-4 px-4 snap-x" style={{ scrollbarWidth: 'none' }} aria-label="Filter by category">
           <button onClick={() => setSelectedCategory('all')}
-            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${selectedCategory === 'all' ? 'bg-emerald-400/90 text-black border-emerald-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>{t.all}</button>
+            className={`flex-shrink-0 snap-start px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${selectedCategory === 'all' ? 'bg-emerald-400/90 text-black border-emerald-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>{t.all}</button>
           {CATEGORIES.map(c => (
             <button key={c.id} onClick={() => setSelectedCategory(c.id)}
-              className={`flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${selectedCategory === c.id ? 'bg-emerald-400/90 text-black border-emerald-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>
+              className={`flex-shrink-0 snap-start flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${selectedCategory === c.id ? 'bg-emerald-400/90 text-black border-emerald-400' : 'bg-white/[0.04] border-white/10 text-gray-300'}`}>
               <c.icon className="w-3 h-3" />{c.label}
             </button>
           ))}
