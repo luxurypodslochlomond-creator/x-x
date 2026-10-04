@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Globe, Droplets, Leaf, Sun, Shield, Waves, TreePine, Recycle, Zap, Languages, MapPin, Heart, HandHeart, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X } from 'lucide-react';
+import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X } from 'lucide-react';
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
