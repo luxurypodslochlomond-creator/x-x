@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X } from 'lucide-react';
+import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check } from 'lucide-react';
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
@@ -232,6 +232,24 @@ export default function TogetherChangeClimate() {
   const [translating, setTranslating] = useState(false);
   const [autoLang, setAutoLang] = useState('en');
   const [otherOpen, setOtherOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    const url = window.location.origin + '/TogetherChangeClimate';
+    const shareData = {
+      title: 'Together We Change Climate',
+      text: 'A public record of climate emergencies and the positive actions that work — every language on Earth.',
+      url,
+    };
+    try {
+      if (navigator.share) { await navigator.share(shareData); return; }
+    } catch { /* user cancelled */ }
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* fallback silently */ }
+  };
 
   useEffect(() => { base44.entities.ClimateSolution.list().then(r => { setItems(r); setLoading(false); }).catch(() => setLoading(false)); }, []);
 
@@ -296,6 +314,8 @@ export default function TogetherChangeClimate() {
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
+        @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6, 0 0 24px rgba(226,96,42,.55); } }
+        @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
       `}</style>
 
@@ -330,6 +350,14 @@ export default function TogetherChangeClimate() {
               <option value="__other">✨ Type any language…</option>
             </select>
             {translating && <span className="text-[9px] font-mono text-[#1e3a2b] animate-pulse">…</span>}
+            <button
+              onClick={handleShare}
+              aria-label="Share this platform"
+              className="ml-1 flex items-center gap-1 px-2.5 py-1.5 min-h-[36px] bg-[#141210] text-[#efe7d6] border border-[#141210] text-[10px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#141210] transition-colors"
+            >
+              {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
+              {copied ? 'Copied' : 'Share'}
+            </button>
           </div>
         </div>
 
@@ -342,11 +370,11 @@ export default function TogetherChangeClimate() {
           </h1>
           {/* Freedom stamp — unlabelled */}
           <div className="absolute right-5 top-16 w-[104px] h-[104px] rounded-full border-8 border-[#e2602a] pointer-events-none"
-            style={{ transform: 'rotate(-17deg)', opacity: 0.9, boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6', animation: 'twcc-stamp .25s ease-out .1s both' }} />
+            style={{ transform: 'rotate(-17deg)', opacity: 0.9, boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6', animation: 'twcc-stamp .25s ease-out .1s both, twcc-stamp-pulse 3.2s ease-in-out .6s infinite' }} />
         </div>
 
         {/* Signal band */}
-        <div className="relative z-10 bg-[#e2602a] px-5 py-5 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both' }}>
+        <div className="relative z-10 bg-[#e2602a] px-5 py-5 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
           <p className="text-[11px] font-bold uppercase leading-relaxed max-w-[330px] text-[#141210] tracking-wide">{t.sub}</p>
         </div>
       </div>
