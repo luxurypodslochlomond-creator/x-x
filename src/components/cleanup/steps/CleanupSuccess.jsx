@@ -8,6 +8,8 @@ import P51Symbol from '@/components/shared/P51Symbol';
 import FraudDetectionModal from '@/components/cleanup/FraudDetectionModal';
 import TechExplainerModal from '@/components/cleanup/TechExplainerModal';
 
+const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+
 export default function CleanupSuccess({
   formData, step, setStep, setCapturedPhotos, setFormData, setAiAnalysis, setAfterPhoto,
   handleShare, showFraudModal, setShowFraudModal, showTechModal, setShowTechModal
@@ -29,67 +31,64 @@ export default function CleanupSuccess({
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-6 pt-24 lg:pt-6">
+    <div className="min-h-screen bg-[#efe7d6] text-[#141210] p-6 pt-24 lg:pt-6" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <div className="max-w-xl mx-auto space-y-6">
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="space-y-6">
-          <div className="bg-black border-4 border-green-500 p-6 text-center relative">
-            <div className="absolute top-0 left-0 w-4 h-4 bg-green-500" />
-            <div className="absolute top-0 right-0 w-4 h-4 bg-green-500" />
-            <div className="absolute bottom-0 left-0 w-4 h-4 bg-green-500" />
-            <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500" />
+        <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="space-y-6">
+          <div className="bg-[#f7f1e5] border-2 border-[#141210] p-6 text-center relative">
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#1e3a2b]" />
 
             {step === 'success_offline' ? (
               <>
-                <WifiOff className="w-16 h-16 text-amber-500 mx-auto mb-4" />
-                <p className="text-3xl font-black font-mono text-amber-400 mb-2">SAVED OFFLINE</p>
-                <p className="text-amber-300 font-mono text-sm mb-2">Will sync + AI verify when online</p>
-                <p className="text-cyan-400 text-xs font-mono">✓ Zero fraud • AI checks photo</p>
+                <WifiOff className="w-14 h-14 text-[#e2602a] mx-auto mb-4 mt-2" />
+                <p className="font-black font-mono uppercase text-[#e2602a] mb-2" style={{ ...headStyle, fontSize: 'clamp(24px,7vw,32px)' }}>Saved Offline</p>
+                <p className="text-[#5a5246] font-mono text-sm mb-2">Will sync + AI verify when online</p>
+                <p className="text-[#1e3a2b] text-xs font-mono">✓ Zero fraud · AI checks photo</p>
               </>
             ) : (
               <>
-                <COOLASFUCKHeart size={64} animate={true} className="mx-auto mb-4" />
-                <p className="text-4xl font-black font-mono text-green-400 mb-2">
+                <div className="mt-2"><COOLASFUCKHeart size={56} animate={true} className="mx-auto mb-3" /></div>
+                <p className="font-black font-mono uppercase text-[#1e3a2b] mb-1" style={{ ...headStyle, fontSize: 'clamp(30px,9vw,42px)' }}>
                   +{formData.tokens_awarded.toFixed(1)} <P51Symbol showTooltip={true} />
                 </p>
-                <p className="text-green-300 font-black font-mono text-sm">CLEANUP VERIFIED</p>
+                <p className="text-[#141210] font-black font-mono text-xs uppercase tracking-widest">Cleanup Verified</p>
               </>
             )}
           </div>
 
-          <div className="bg-black border-4 border-cyan-500 p-6">
-            <h2 className="text-2xl font-black font-mono text-cyan-400 text-center mb-6">WHAT'S NEXT?</h2>
+          <div className="bg-[#f7f1e5] border-2 border-[#141210] p-5">
+            <h2 className="font-black font-mono uppercase text-[#141210] text-center mb-5" style={{ ...headStyle, fontSize: 'clamp(20px,6vw,26px)' }}>What's Next?</h2>
             <div className="space-y-3">
-              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
                 onClick={resetForAnother}
-                className="w-full bg-green-600 hover:bg-green-700 border-4 border-green-400 text-black py-5 font-black font-mono text-lg flex items-center justify-center gap-3">
-                <Recycle className="w-6 h-6" /> ANOTHER CLEANUP
+                className="w-full bg-[#1e3a2b] hover:bg-[#141210] border-2 border-[#141210] text-[#efe7d6] py-4 font-black font-mono uppercase text-base flex items-center justify-center gap-3 transition-colors">
+                <Recycle className="w-5 h-5" /> Another Cleanup
               </motion.button>
 
-              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(createPageUrl('Radio'))}
-                className="w-full bg-purple-600 hover:bg-purple-700 border-4 border-purple-400 text-white py-5 font-black font-mono text-lg flex items-center justify-center gap-3">
-                <COOLASFUCKMusicNote size={24} animate={true} /> LISTEN TO MUSIC
+                className="w-full bg-[#f7f1e5] hover:bg-[#e2602a] hover:text-[#141210] border-2 border-[#141210] text-[#141210] py-4 font-black font-mono uppercase text-base flex items-center justify-center gap-3 transition-colors">
+                <COOLASFUCKMusicNote size={22} animate={true} /> Listen To Music
               </motion.button>
 
-              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(createPageUrl('FrequencyChamber'))}
-                className="w-full bg-pink-600 hover:bg-pink-700 border-4 border-pink-400 text-white py-5 font-black font-mono text-lg flex items-center justify-center gap-3">
-                <COOLASFUCKHeart size={24} animate={true} /> HEAL
+                className="w-full bg-[#f7f1e5] hover:bg-[#e2602a] hover:text-[#141210] border-2 border-[#141210] text-[#141210] py-4 font-black font-mono uppercase text-base flex items-center justify-center gap-3 transition-colors">
+                <COOLASFUCKHeart size={22} animate={true} /> Heal
               </motion.button>
 
-              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(createPageUrl('Profile'))}
-                className="w-full bg-amber-600 hover:bg-amber-700 border-4 border-amber-400 text-black py-5 font-black font-mono text-lg flex items-center justify-center gap-3">
-                <P51Symbol /> SEE BALANCE
+                className="w-full bg-[#e2602a] hover:bg-[#141210] hover:text-[#efe7d6] border-2 border-[#141210] text-[#141210] py-4 font-black font-mono uppercase text-base flex items-center justify-center gap-3 transition-colors">
+                <P51Symbol /> See Balance
               </motion.button>
             </div>
           </div>
 
           {step === 'success' && (
-            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+            <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
               onClick={handleShare}
-              className="w-full bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 border-4 border-cyan-400 text-white py-4 font-black font-mono flex items-center justify-center gap-2">
-              <Share2 className="w-5 h-5" /> SHARE YOUR IMPACT
+              className="w-full bg-[#141210] hover:bg-[#e2602a] hover:text-[#141210] border-2 border-[#141210] text-[#efe7d6] py-4 font-black font-mono uppercase flex items-center justify-center gap-2 transition-colors">
+              <Share2 className="w-5 h-5" /> Share Your Impact
             </motion.button>
           )}
         </motion.div>

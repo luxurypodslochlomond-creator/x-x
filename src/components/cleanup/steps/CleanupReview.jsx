@@ -4,60 +4,64 @@ import { Input } from '@/components/ui/input';
 import { AlertCircle, ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react';
 import P51Symbol from '@/components/shared/P51Symbol';
 
+const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+
 export default function CleanupReview({
   formData, supportAmount, setSupportAmount,
   isLoading, isOffline, error, setStep, handleSubmit
 }) {
   return (
-    <div className="min-h-screen bg-black text-white p-6 pt-24 lg:pt-6">
+    <div className="min-h-screen bg-[#efe7d6] text-[#141210] p-6 pt-24 lg:pt-6" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <div className="max-w-xl mx-auto space-y-6">
-        <Button onClick={() => setStep('analysis')} variant="ghost" className="text-white/60 hover:text-white font-mono">
+        <Button onClick={() => setStep('analysis')} variant="ghost" className="text-[#5a5246] hover:text-[#141210] font-mono uppercase text-xs tracking-widest">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back
         </Button>
 
-        <div className="space-y-4">
-          <div className="border border-white/20 p-4">
-            <p className="text-white/60 text-xs font-mono mb-1">WEIGHT</p>
-            <p className="text-white text-3xl font-mono">{formData.litter_weight}kg</p>
+        <h2 className="font-black uppercase text-[#141210]" style={{ ...headStyle, fontSize: 'clamp(28px, 8vw, 38px)' }}>Review</h2>
+
+        <div className="space-y-3">
+          <div className="border border-[#141210] bg-[#f7f1e5] p-4">
+            <p className="text-[#5a5246] text-[10px] font-mono uppercase tracking-widest mb-1">Weight</p>
+            <p className="text-[#141210] text-3xl font-black font-mono">{formData.litter_weight}kg</p>
           </div>
 
-          <div className="border border-white/20 p-4">
-            <p className="text-white/60 text-xs font-mono mb-1">LOCATION</p>
-            <p className="text-white text-lg font-mono">{formData.location || formData.county || 'Not specified'}</p>
+          <div className="border border-[#141210] bg-[#f7f1e5] p-4">
+            <p className="text-[#5a5246] text-[10px] font-mono uppercase tracking-widest mb-1">Location</p>
+            <p className="text-[#141210] text-lg font-mono">{formData.location || formData.county || 'Not specified'}</p>
           </div>
 
-          <div className="border-2 border-amber-500 bg-amber-500/10 p-4">
-            <p className="text-amber-500 text-xs font-mono mb-1">PAYMENT</p>
-            <p className="text-white text-4xl font-mono">{formData.tokens_awarded.toFixed(1)} <P51Symbol showTooltip={true} /></p>
-            {isOffline && <p className="text-amber-400 text-xs font-mono mt-2">Will sync when online</p>}
+          <div className="border-2 border-[#141210] border-l-8 border-l-[#e2602a] bg-[#f7f1e5] p-4">
+            <p className="text-[#e2602a] text-[10px] font-mono font-black uppercase tracking-widest mb-1">Payment</p>
+            <p className="text-[#141210] text-4xl font-black font-mono">{formData.tokens_awarded.toFixed(1)} <P51Symbol showTooltip={true} /></p>
+            {isOffline && <p className="text-[#5a5246] text-xs font-mono mt-2">Will sync when online</p>}
           </div>
 
           {!isOffline && (
-            <div className="border border-white/20 p-4">
-              <p className="text-white text-sm font-mono mb-3">Support artists? (optional)</p>
+            <div className="border border-[#141210] bg-[#f7f1e5] p-4">
+              <p className="text-[#141210] text-sm font-mono mb-3">Support artists? (optional)</p>
               <Input type="number" value={supportAmount}
                 onChange={(e) => setSupportAmount(parseFloat(e.target.value) || 0)}
                 placeholder="0" max={formData.tokens_awarded}
-                className="bg-white/10 border-white/20 text-white text-lg font-mono" />
+                className="bg-[#efe7d6] border-[#141210] text-[#141210] text-lg font-mono" />
             </div>
           )}
 
           {error && (
-            <div className="bg-red-500/10 border border-red-500/20 p-4">
+            <div className="bg-[#e2602a]/10 border-2 border-[#e2602a] p-4">
               <div className="flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-red-400" />
-                <p className="text-red-400 font-mono text-sm">{error}</p>
+                <AlertCircle className="w-5 h-5 text-[#e2602a]" />
+                <p className="text-[#141210] font-mono text-sm">{error}</p>
               </div>
             </div>
           )}
 
-          <div className="flex gap-4">
+          <div className="flex gap-3 pt-1">
             <Button onClick={() => setStep('analysis')} variant="outline"
-              className="flex-1 border-white/20 text-white py-6 font-bold hover:bg-white/10" disabled={isLoading}>
+              className="flex-1 border-2 border-[#141210] text-[#141210] py-6 font-black font-mono uppercase hover:bg-[#141210] hover:text-[#efe7d6]" disabled={isLoading}>
               Edit
             </Button>
             <Button onClick={handleSubmit} disabled={isLoading}
-              className="flex-1 bg-amber-500 hover:bg-amber-600 text-black py-6 font-bold">
+              className="flex-1 bg-[#e2602a] hover:bg-[#141210] hover:text-[#efe7d6] border-2 border-[#141210] text-[#141210] py-6 font-black font-mono uppercase">
               {isLoading ? (
                 <><Loader2 className="w-5 h-5 mr-2 animate-spin" />{isOffline ? 'Saving' : 'Submitting'}</>
               ) : (
