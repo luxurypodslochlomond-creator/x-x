@@ -59,16 +59,67 @@ const CATEGORY_IMAGE = (cat) => {
   return map[cat] || IMAGES.global;
 };
 
-// ── Interface language support (landing Janine's multi-language spec honestly) ──
+// ── Interface language support — Janine's "all languages" spec: broad preset list + free-type any language (AI-translated live) ──
 const LANGS = [
   { code: 'en', label: 'English' },
+  { code: 'ga', label: 'Gaeilge' },
+  { code: 'gd', label: 'Gàidhlig' },
+  { code: 'cy', label: 'Cymraeg' },
+  { code: 'sco', label: 'Scots' },
+  { code: 'br', label: 'Brezhoneg' },
+  { code: 'kw', label: 'Kernewek' },
   { code: 'es', label: 'Español' },
+  { code: 'es-CO', label: 'Español (Colombia)' },
   { code: 'fr', label: 'Français' },
   { code: 'de', label: 'Deutsch' },
   { code: 'pt', label: 'Português' },
-  { code: 'hi', label: 'हिन्दी' },
-  { code: 'zh', label: '中文' },
+  { code: 'it', label: 'Italiano' },
+  { code: 'nl', label: 'Nederlands' },
+  { code: 'sv', label: 'Svenska' },
+  { code: 'no', label: 'Norsk' },
+  { code: 'da', label: 'Dansk' },
+  { code: 'fi', label: 'Suomi' },
+  { code: 'is', label: 'Íslenska' },
+  { code: 'pl', label: 'Polski' },
+  { code: 'cs', label: 'Čeština' },
+  { code: 'sk', label: 'Slovenčina' },
+  { code: 'uk', label: 'Українська' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'el', label: 'Ελληνικά' },
+  { code: 'tr', label: 'Türkçe' },
   { code: 'ar', label: 'العربية' },
+  { code: 'he', label: 'עברית' },
+  { code: 'fa', label: 'فارسی' },
+  { code: 'hi', label: 'हिन्दी' },
+  { code: 'bn', label: 'বাংলা' },
+  { code: 'ta', label: 'தமிழ்' },
+  { code: 'te', label: 'తెలుగు' },
+  { code: 'mr', label: 'मराठी' },
+  { code: 'pa', label: 'ਪੰਜਾਬੀ' },
+  { code: 'ur', label: 'اردو' },
+  { code: 'th', label: 'ไทย' },
+  { code: 'vi', label: 'Tiếng Việt' },
+  { code: 'id', label: 'Bahasa Indonesia' },
+  { code: 'ms', label: 'Bahasa Melayu' },
+  { code: 'tl', label: 'Tagalog' },
+  { code: 'zh', label: '中文 (简体)' },
+  { code: 'zh-TW', label: '中文 (繁體)' },
+  { code: 'ja', label: '日本語' },
+  { code: 'ko', label: '한국어' },
+  { code: 'sw', label: 'Kiswahili' },
+  { code: 'yo', label: 'Yorùbá' },
+  { code: 'ig', label: 'Igbo' },
+  { code: 'zu', label: 'isiZulu' },
+  { code: 'am', label: 'አማርኛ' },
+  { code: 'ha', label: 'Hausa' },
+  { code: 'qu', label: 'Runasimi (Quechua)' },
+  { code: 'gn', label: 'Avañeʼẽ (Guaraní)' },
+  { code: 'haw', label: 'ʻŌlelo Hawaiʻi' },
+  { code: 'mi', label: 'Te Reo Māori' },
+  { code: 'sm', label: 'Gagana Sāmoa' },
+  { code: 'fj', label: 'Vosa Vakaviti' },
+  { code: 'la', label: 'Latina (Latin)' },
+  { code: 'grc', label: 'Ἀρχαία ἑλληνική (Ancient Greek)' },
 ];
 
 // Universal reframe: "it's not mine, it's for the world, the planet, all of us."
@@ -194,7 +245,7 @@ export default function TogetherChangeClimate() {
   useEffect(() => {
     const resolved = lang === 'auto' ? autoLang : lang;
     if (T[resolved]) { setLiveStrings(null); return; }
-    if (resolved === 'en') { setLiveStrings(null); return; }
+    if (resolved === 'en' || resolved === 'auto') { setLiveStrings(null); return; }
     const cacheKey = 'climate51_t_' + resolved;
     try {
       const cached = localStorage.getItem(cacheKey);
@@ -223,6 +274,8 @@ export default function TogetherChangeClimate() {
 
   const chosen = lang === 'auto' ? autoLang : lang;
   const t = T[chosen] || liveStrings || T.en;
+  const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
+  const isRTL = RTL_LANGS.has((chosen || '').split('-')[0]);
 
   const filtered = useMemo(() => {
     return items.filter(i => {
@@ -239,7 +292,7 @@ export default function TogetherChangeClimate() {
   const featured = useMemo(() => items.filter(i => i.featured).slice(0, 3), [items]);
 
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
@@ -269,11 +322,12 @@ export default function TogetherChangeClimate() {
                 else { setOtherOpen(false); handleLang(e.target.value); }
               }}
               aria-label="Select language"
-              className="bg-transparent text-[#141210] border border-[#141210] px-1.5 py-1 text-[10px] font-mono font-bold outline-none cursor-pointer"
+              size={1}
+              className="bg-transparent text-[#141210] border border-[#141210] px-1.5 py-1 text-[10px] font-mono font-bold outline-none cursor-pointer max-w-[150px] truncate"
             >
               <option value="auto">🌐 Auto</option>
               {LANGS.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
-              <option value="__other">✨ Any other…</option>
+              <option value="__other">✨ Type any language…</option>
             </select>
             {translating && <span className="text-[9px] font-mono text-[#1e3a2b] animate-pulse">…</span>}
           </div>
@@ -300,13 +354,13 @@ export default function TogetherChangeClimate() {
       {/* ── ANY-LANGUAGE INPUT ── */}
       {otherOpen && (
         <div className="px-4 py-3 bg-[#efe7d6] border-b-2 border-[#141210] flex items-center gap-2">
-          <span className="text-[10px] font-mono font-bold uppercase flex-shrink-0">Type any language:</span>
+          <span className="text-[10px] font-mono font-bold uppercase flex-shrink-0">Any language on Earth:</span>
           <input
             autoFocus
-            placeholder="e.g. Yoruba, Tagalog, Swedish, Māori…"
+            placeholder="e.g. Gàidhlig, Cymraeg, Quechua, Ancient Greek, Hawaiian…"
             onKeyDown={e => {
               if (e.key === 'Enter' && e.currentTarget.value.trim()) {
-                handleLang(e.currentTarget.value.trim().toLowerCase());
+                handleLang(e.currentTarget.value.trim());
                 setOtherOpen(false);
               }
             }}
@@ -315,7 +369,7 @@ export default function TogetherChangeClimate() {
           <button
             onClick={(e) => {
               const input = e.currentTarget.previousElementSibling;
-              if (input && input.value.trim()) { handleLang(input.value.trim().toLowerCase()); setOtherOpen(false); }
+              if (input && input.value.trim()) { handleLang(input.value.trim()); setOtherOpen(false); }
             }}
             className="px-3 py-1.5 bg-[#141210] text-[#efe7d6] text-[10px] font-black font-mono uppercase"
           >Go</button>
