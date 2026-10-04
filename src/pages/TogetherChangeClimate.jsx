@@ -87,11 +87,10 @@ function SolutionCard({ item, onOpen }) {
   return (
     <motion.button
       onClick={() => onOpen(item)}
-      initial={{ opacity: 0, y: 10 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.98 }}
-      className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] ${
+      whileTap={{ scale: 0.97 }}
+      className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${
         item.entry_type === 'solution' ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
       } min-h-[96px] flex items-end`}
     >
@@ -117,6 +116,12 @@ function SolutionCard({ item, onOpen }) {
 
 function EntryModal({ item, onClose, t = T.en }) {
   const Icon = CATEGORIES.find(c => c.id === item.category)?.icon || Globe;
+  // Lock body scroll while the sheet is open — stops the page drifting behind it on mobile
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
   return (
     <motion.div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-sm p-0 sm:p-6" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <motion.div
@@ -130,7 +135,7 @@ function EntryModal({ item, onClose, t = T.en }) {
         <div className="relative h-52 sm:h-60 bg-[#141210]">
           <img src={item.image_url || CATEGORY_IMAGE(item.category)} alt={item.title} className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(226,96,42,.2), rgba(20,18,16,.5) 50%, #141210 100%)' }} />
-          <button onClick={onClose} aria-label="Close" className="absolute top-3 right-3 p-2 bg-[#efe7d6] border border-[#141210] text-[#141210] hover:bg-[#e2602a] transition-colors">
+          <button onClick={onClose} aria-label="Close" className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors">
             <X className="w-5 h-5" />
           </button>
           <div className="absolute bottom-3 left-4 right-4">
@@ -314,7 +319,7 @@ export default function TogetherChangeClimate() {
             }}
             className="px-3 py-1.5 bg-[#141210] text-[#efe7d6] text-[10px] font-black font-mono uppercase"
           >Go</button>
-          <button onClick={() => setOtherOpen(false)} className="text-[#5a5246] hover:text-[#141210] text-sm px-1">×</button>
+          <button onClick={() => setOtherOpen(false)} aria-label="Close" className="w-9 h-9 flex items-center justify-center flex-shrink-0 border border-[#141210] bg-[#f7f1e5] text-[#141210] active:bg-[#e2602a] text-base leading-none">×</button>
         </div>
       )}
 
@@ -340,7 +345,7 @@ export default function TogetherChangeClimate() {
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder={t.search}
-            className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-2.5 text-[11px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
+            className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[13px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
           />
         </div>
         <p className="text-[9px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
@@ -348,19 +353,19 @@ export default function TogetherChangeClimate() {
 
       {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}
       <div className="px-4 py-3 bg-[#efe7d6] border-b-2 border-[#141210]">
-        <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x" style={{ scrollbarWidth: 'none' }} aria-label="Filter by category">
+        <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }} aria-label="Filter by category">
           <button
             onClick={() => setSelectedCategory('all')}
-            className={`flex-shrink-0 snap-start px-3 py-1.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
-              selectedCategory === 'all' ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] hover:bg-[#141210] hover:text-[#efe7d6]'
+            className={`flex-shrink-0 snap-start px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+              selectedCategory === 'all' ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
             }`}
           >{t.all}</button>
           {CATEGORIES.map(c => (
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.id)}
-              className={`flex-shrink-0 snap-start flex items-center gap-1 px-3 py-1.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
-                selectedCategory === c.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] hover:bg-[#141210] hover:text-[#efe7d6]'
+              className={`flex-shrink-0 snap-start flex items-center gap-1 px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+                selectedCategory === c.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
               }`}
             >
               <c.icon className="w-3 h-3" />{c.label}
@@ -378,10 +383,10 @@ export default function TogetherChangeClimate() {
               <motion.button
                 key={item.id}
                 onClick={() => setOpenItem(item)}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.04 }}
-                className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] ${item.entry_type === 'solution' ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'} min-h-[94px] flex items-end`}
+                initial={false}
+                animate={{ opacity: 1 }}
+                whileTap={{ scale: 0.97 }}
+                className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${item.entry_type === 'solution' ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'} min-h-[94px] flex items-end`}
               >
                 <img src={item.image_url || CATEGORY_IMAGE(item.category)} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover"
                   style={{ filter: 'grayscale(1) contrast(1.4)', mixBlendMode: 'multiply', opacity: 0.42 }}
@@ -411,9 +416,9 @@ export default function TogetherChangeClimate() {
                 </div>
                 <div className="grid grid-cols-2 gap-2.5">
                   {solutions.map((item, i) => (
-                    <motion.div key={item.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
+                    <div key={item.id}>
                       <SolutionCard item={item} onOpen={setOpenItem} />
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </section>
@@ -427,9 +432,9 @@ export default function TogetherChangeClimate() {
                 </div>
                 <div className="grid grid-cols-2 gap-2.5">
                   {crises.map((item, i) => (
-                    <motion.div key={item.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
+                    <div key={item.id}>
                       <SolutionCard item={item} onOpen={setOpenItem} />
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </section>
