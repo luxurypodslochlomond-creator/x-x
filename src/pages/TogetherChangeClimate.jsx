@@ -124,7 +124,7 @@ const LANGS = [
 
 // Universal reframe: "it's not mine, it's for the world, the planet, all of us."
 const T = {
-  en: { title_a: 'Together we change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No fund raising', donate: 'Donations welcome', search: 'Search solutions and crises…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and built to be trusted', govern_body: 'Every entry is reviewed before publication. Only copyright-free images are used. Location is kept to a rough region to protect privacy, while remaining honest and verifiable. The platform is open source, extraction-proof, and runs as a public service — no advertising, no fundraising, ever. Interface translations are provided for the platform; entries themselves are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — the verified solutions here are the knowledge engine behind our on-the-ground action.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals' },
+  en: { title_a: 'Together we change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No fund raising', donate: 'Donations welcome', search: 'Search solutions and crises…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and built to be trusted', govern_body: 'Every entry is reviewed before publication. Only copyright-free images are used. Location is kept to a rough region to protect privacy, while remaining honest and verifiable. The platform is open source, extraction-proof, and runs as a public service — no advertising, no fundraising, ever. Interface translations are provided for the platform; entries themselves are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — the verified solutions here are the knowledge engine behind our on-the-ground action.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals', groups: 'Groups', groups_sub: 'People working on the same thing in an area can share ideas directly — find your region or topic and join in.', groups_note: 'New gatherings form as the community grows. To start one for your region or topic, email a short description to hello@horizon-international.org.', live: 'Live record', entries_now: 'entries on the record right now' },
   es: { title_a: 'Juntos cambiamos el', title_b: 'curso', title_c: 'del cambio climático', sub: 'Un registro público de emergencias climáticas y las acciones positivas que funcionan — compartido abiertamente, internacionalmente — para que cualquiera en la Tierra pueda replicar lo que funciona.', service: 'Un servicio público · para el mundo', noads: 'Sin publicidad', nofund: 'Sin recaudación', donate: 'Donaciones bienvenidas', search: 'Buscar soluciones y crisis…', solutions: 'Soluciones', crises: 'Crisis Climáticas', defs: 'Definiciones', rev: 'Revisado', connect: 'Conectando el planeta…', empty: 'Sin resultados aún.', govern: 'Construido para el planeta — y para ser confiable', govern_body: 'Cada entrada se revisa antes de publicarse. Solo se usan imágenes sin derechos de autor. La ubicación se mantiene en una región aproximada para proteger la privacidad, siendo honesta y verificable. La plataforma es de código abierto, a prueba de extracción, y funciona como servicio público — sin publicidad, sin recaudación. Las traducciones de la interfaz se ofrecen en la plataforma; las entradas son traducidas por nuestra comunidad con el tiempo.', covenant: 'Lee nuestro pacto de código abierto', family: 'Esta plataforma es parte de la familia de Curación Planetaria de UF51 — las soluciones verificadas aquí son el motor de conocimiento detrás de nuestra acción sobre el terreno.', action: 'Actúa', honour: 'Construido en honor de Janine M. H. Selendy y Horizon International — y entregado al mundo, al planeta, a todos nosotros.', all: 'Todo', featured: 'Señales' },
   fr: { title_a: 'Ensemble, nous changeons le', title_b: 'cours', title_c: 'du changement climatique', sub: 'Un registre public des urgences climatiques et des actions positives qui fonctionnent — partagé ouvertement, à l\'international — pour que chacun sur Terre puisse répliquer ce qui fonctionne.', service: 'Un service public · pour le monde', noads: 'Aucune publicité', nofund: 'Aucune levée de fonds', donate: 'Dons bienvenus', search: 'Rechercher solutions et crises…', solutions: 'Solutions', crises: 'Crises Climatiques', defs: 'Définitions', rev: 'Vérifié', connect: 'Connexion de la planète…', empty: 'Aucun résultat pour l\'instant.', govern: 'Conçu pour la planète — et pour être digne de confiance', govern_body: 'Chaque entrée est vérifiée avant publication. Seules des images libres de droits sont utilisées. La localisation est limitée à une région approximative pour protéger la vie privée, tout en restant honnête et vérifiable. La plateforme est open source, in-extractible, et fonctionne en service public — sans publicité, sans levée de fonds. Les traductions de l\'interface sont fournies sur la plateforme; les entrées sont traduites par notre communauté au fil du temps.', covenant: 'Lire notre pacte open source', family: 'Cette plateforme fait partie de la famille de Guérison Planétaire UF51 — les solutions vérifiées ici sont le moteur de connaissance derrière notre action de terrain.', action: 'Agir', honour: 'Construit en l\'honneur de Janine M. H. Selendy et Horizon International — et remis au monde, à la planète, à nous tous.', all: 'Tout', featured: 'Signaux' },
   de: { title_a: 'Gemeinsam ändern wir den', title_b: 'Lauf', title_c: 'des Klimawandels', sub: 'Ein öffentliches Register von Klimanotlagen und positiven Maßnahmen, die funktionieren — offen geteilt, international — damit jeder auf der Erde nachahmen kann, was gut ist.', service: 'Ein öffentlicher Dienst · für die Welt', noads: 'Keine Werbung', nofund: 'Keine Spendenaufrufe', donate: 'Spenden willkommen', search: 'Lösungen und Krisen suchen…', solutions: 'Lösungen', crises: 'Klimakrisen', defs: 'Definitionen', rev: 'Geprüft', connect: 'Planet verbinden…', empty: 'Noch keine Treffer.', govern: 'Für den Planeten gebaut — und gebaut, um vertraut zu werden', govern_body: 'Jeder Eintrag wird vor der Veröffentlichung geprüft. Es werden nur urheberrechtsfreie Bilder verwendet. Der Standort bleibt grob, um die Privatsphäre zu schützen, bleibt aber ehrlich und überprüfbar. Die Plattform ist Open Source, extraktionssicher und ein öffentlicher Dienst — ohne Werbung, ohne Spendenaufrufe. Oberflächenübersetzungen werden auf der Plattform angeboten; Einträge werden mit der Zeit von unserer Gemeinschaft übersetzt.', covenant: 'Unser Open-Source-Pakt', family: 'Diese Plattform ist Teil der UF51 Planetary-Healing-Familie — die verifizierten Lösungen hier sind die Wissens-Engine hinter unserer Arbeit vor Ort.', action: 'Handeln', honour: 'Zu Ehren von Janine M. H. Selendy & Horizon International gebaut — und der Welt, dem Planeten, uns allen übergeben.', all: 'Alle', featured: 'Signale' },
@@ -222,6 +222,7 @@ function EntryModal({ item, onClose, t = T.en }) {
 
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
+  const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -251,7 +252,10 @@ export default function TogetherChangeClimate() {
     } catch { /* fallback silently */ }
   };
 
-  useEffect(() => { base44.entities.ClimateSolution.list().then(r => { setItems(r); setLoading(false); }).catch(() => setLoading(false)); }, []);
+  useEffect(() => {
+    base44.entities.ClimateSolution.list().then(r => { setItems(r); setLoading(false); }).catch(() => setLoading(false));
+    base44.entities.ClimateGroup.list().then(r => setGroups(r || [])).catch(() => setGroups([]));
+  }, []);
 
   useEffect(() => {
     try {
@@ -291,7 +295,7 @@ export default function TogetherChangeClimate() {
   };
 
   const chosen = lang === 'auto' ? autoLang : lang;
-  const t = T[chosen] || liveStrings || T.en;
+  const t = { ...T.en, ...(T[chosen] || liveStrings || {}) };
   const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
   const isRTL = RTL_LANGS.has((chosen || '').split('-')[0]);
 
@@ -304,6 +308,8 @@ export default function TogetherChangeClimate() {
       return matchesQ && matchesCat && matchesType;
     });
   }, [items, query, selectedCategory, selectedType]);
+
+  const showEntries = selectedType !== 'groups';
 
   const solutions = filtered.filter(i => i.entry_type === 'solution');
   const crises = filtered.filter(i => i.entry_type === 'climate_crisis');
@@ -379,6 +385,17 @@ export default function TogetherChangeClimate() {
         </div>
       </div>
 
+      {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
+      <div className="px-4 py-2 bg-[#141210] flex items-center justify-between gap-3">
+        <span className="flex items-center gap-1.5 text-[9px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
+          {t.live}
+        </span>
+        <span className="text-[9px] font-mono text-[#efe7d6]/70">
+          {items.length} {t.entries_now}
+        </span>
+      </div>
+
       {/* ── ANY-LANGUAGE INPUT ── */}
       {otherOpen && (
         <div className="px-4 py-3 bg-[#efe7d6] border-b-2 border-[#141210] flex items-center gap-2">
@@ -410,16 +427,22 @@ export default function TogetherChangeClimate() {
         <div className="flex gap-2 mb-3">
           <button
             onClick={() => setSelectedType(selectedType === 'solution' ? 'all' : 'solution')}
-            className={`flex-1 px-3 py-2.5 text-[11px] font-black font-mono uppercase border transition-colors duration-150 ${
+            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
               selectedType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.solutions}</button>
           <button
             onClick={() => setSelectedType(selectedType === 'climate_crisis' ? 'all' : 'climate_crisis')}
-            className={`flex-1 px-3 py-2.5 text-[11px] font-black font-mono uppercase border transition-colors duration-150 ${
+            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
               selectedType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.crises}</button>
+          <button
+            onClick={() => setSelectedType(selectedType === 'groups' ? 'all' : 'groups')}
+            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+              selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
+            }`}
+          >{t.groups}</button>
         </div>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
@@ -489,7 +512,7 @@ export default function TogetherChangeClimate() {
           </div>
         ) : (
           <>
-            {solutions.length > 0 && (
+            {showEntries && solutions.length > 0 && (
               <section className="px-4 py-5 border-b-2 border-[#141210]">
                 <div className="flex items-center gap-2 mb-3">
                   <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.solutions}</h2>
@@ -505,7 +528,7 @@ export default function TogetherChangeClimate() {
                 </div>
               </section>
             )}
-            {crises.length > 0 && (
+            {showEntries && crises.length > 0 && (
               <section className="px-4 py-5 border-b-2 border-[#141210]">
                 <div className="flex items-center gap-2 mb-3">
                   <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.crises}</h2>
@@ -521,13 +544,38 @@ export default function TogetherChangeClimate() {
                 </div>
               </section>
             )}
-            {(solutions.length + crises.length) === 0 && (
+            {showEntries && (solutions.length + crises.length) === 0 && (
               <div className="py-20 text-center px-4">
                 <Globe className="w-10 h-10 text-[#5a5246] mx-auto" />
                 <p className="text-[#5a5246] text-[11px] font-mono uppercase mt-3">{t.empty}</p>
               </div>
             )}
           </>
+        )}
+
+        {/* ── GROUPS — Janine's spec: people working on the same thing in an area can share ideas directly ── */}
+        {(selectedType === 'all' || selectedType === 'groups') && groups.length > 0 && (
+          <section className="px-4 py-5 border-b-2 border-[#141210]">
+            <div className="flex items-center gap-2 mb-1">
+              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.groups}</h2>
+              <div className="flex-1 h-px bg-[#141210]/20" />
+              <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{groups.length}</span>
+            </div>
+            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.groups_sub}</p>
+            <div className="space-y-2">
+              {groups.map(g => (
+                <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
+                  <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] leading-tight">{g.name}</h4>
+                  <div className="flex items-center gap-1.5 text-[#1e3a2b] mt-1">
+                    <MapPin className="w-3 h-3" />
+                    <span className="text-[9px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
+                  </div>
+                  <p className="text-[11px] font-mono text-[#141210] leading-relaxed mt-2">{g.description}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-[9px] font-mono text-[#5a5246] leading-relaxed mt-3">{t.groups_note}</p>
+          </section>
         )}
 
         {/* ── DEFINITIONS ── */}
