@@ -249,7 +249,7 @@ export default function TogetherChangeClimate() {
   }, [items, query, selectedCategory, selectedType]);
 
   const solutions = filtered.filter(i => i.entry_type === 'solution');
-  const crises = filtered.filter(i => i.entry_type === 'crisis');
+  const crises = filtered.filter(i => i.entry_type === 'climate_crisis');
 
   return (
     <div className="min-h-screen bg-[#0a0f1a] text-white">
