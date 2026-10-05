@@ -23,7 +23,7 @@ export default function P51Symbol({ className = "", showTooltip = true, large = 
         className={`inline-flex items-center gap-1 relative ${className} ${showTooltip ? 'cursor-pointer hover:opacity-80 transition-opacity active:scale-95' : ''}`}
         style={{ touchAction: 'manipulation' }}
       >
-        <span className={`font-mono font-bold text-pink-400 ${large ? 'text-3xl' : ''}`}>$P51</span>
+        <span className={`font-mono font-bold text-pink-400 ${large ? 'text-3xl' : ''}`}>P51</span>
         {showTooltip && (
           <HelpCircle className="w-4 h-4 text-pink-400/60" />
         )}

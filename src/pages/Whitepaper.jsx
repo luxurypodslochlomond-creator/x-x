@@ -46,12 +46,12 @@ export default function WhitepaperPage() {
                                 "Historically, money has been backed by gold, oil, and governments.
                             </p>
                             <p className="text-green-400 font-black text-xl md:text-3xl leading-tight">
-                                $P51 is backed by Earth health."
+                                P51 is backed by Earth health."
                             </p>
                             <div className="mt-4 pt-4 border-t border-green-500/30 grid grid-cols-3 gap-2 text-xs text-center">
                                 <div className="text-gray-400"><p className="text-yellow-400 font-bold text-base">Gold</p><p>Scarce metal</p><p className="text-gray-500">Arbitrary</p></div>
                                 <div className="text-gray-400"><p className="text-orange-400 font-bold text-base">Oil</p><p>Destructive resource</p><p className="text-gray-500">Extractive</p></div>
-                                <div className="text-gray-400"><p className="text-green-400 font-bold text-base">$P51</p><p>Planetary healing</p><p className="text-green-400 font-bold">Generative ✅</p></div>
+                                <div className="text-gray-400"><p className="text-green-400 font-bold text-base">P51</p><p>Planetary healing</p><p className="text-green-400 font-bold">Generative ✅</p></div>
                             </div>
                         </div>
                     </motion.div>
@@ -178,12 +178,12 @@ export default function WhitepaperPage() {
 
                             <div className="bg-black/60 p-4 rounded-xl border border-cyan-500/30">
                                 <p className="text-cyan-400 font-black mb-3">The New Asset Class: Verified Environmental Restoration</p>
-                                <p className="text-sm text-gray-300 mb-3">Right now markets price oil, gold, carbon credits, data. <strong className="text-white">The world does not yet price planetary repair.</strong> $P51 creates that market.</p>
+                                <p className="text-sm text-gray-300 mb-3">Right now markets price oil, gold, carbon credits, data. <strong className="text-white">The world does not yet price planetary repair.</strong> P51 creates that market.</p>
                                 <div className="space-y-2 text-xs">
-                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Nike, Apple, Coca-Cola must prove sustainability — they can buy verified $P51 impact</span></div>
+                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Nike, Apple, Coca-Cola must prove sustainability — they can buy verified P51 impact</span></div>
                                     <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>$30 trillion ESG funds need measurable environmental data — we provide it</span></div>
-                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Governments spend billions on cleanup — $P51 gives them verified, distributed delivery</span></div>
-                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Carbon market ($900B+) proves the demand exists — $P51 is the verified upgrade</span></div>
+                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Governments spend billions on cleanup — P51 gives them verified, distributed delivery</span></div>
+                                    <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /><span>Carbon market ($900B+) proves the demand exists — P51 is the verified upgrade</span></div>
                                 </div>
                             </div>
 
@@ -204,7 +204,7 @@ export default function WhitepaperPage() {
 
                             <div className="bg-black/60 p-4 rounded-xl border border-green-500/30">
                                 <p className="text-green-400 font-black mb-2">The Self-Healing Economy</p>
-                                <p className="text-xs text-gray-300">Plastic pollution increases → more opportunity to earn $P51 → more people remove plastic → system corrects itself. <strong className="text-white">A self-regulating regenerative economy that mirrors biological immune response.</strong> The more damage, the stronger the healing incentive.</p>
+                                <p className="text-xs text-gray-300">Plastic pollution increases → more opportunity to earn P51 → more people remove plastic → system corrects itself. <strong className="text-white">A self-regulating regenerative economy that mirrors biological immune response.</strong> The more damage, the stronger the healing incentive.</p>
                             </div>
 
                         </div>
@@ -300,6 +300,31 @@ export default function WhitepaperPage() {
                                     </div>
                                     <p className="text-cyan-400 font-bold text-sm mt-3">
                                         Einstein = extraction. Planck = transformation. We chose Planck. ♾️❤️♾️
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-black/60 p-6 rounded-xl border-2 border-cyan-500">
+                                <h3 className="text-xl font-bold text-cyan-400 mb-4">📡 SHANNON: INFORMATION IS PHYSICAL (The Third Equation)</h3>
+                                <div className="space-y-3 text-sm">
+                                    <p className="text-gray-300">
+                                        <strong className="text-white">Claude Shannon (1948) proved:</strong> Information is not abstract — it is physical, measurable, and has entropy. His equation <strong className="text-cyan-400">H = −Σ p log₂ p</strong> is the foundation of every bit, every hash, every signature, every proof on Earth.
+                                    </p>
+                                    <div className="bg-cyan-900/40 border-2 border-cyan-500 rounded p-3 my-3">
+                                        <p className="text-cyan-300 font-mono text-center text-xl mb-2">H = −Σ p(x) log₂ p(x)</p>
+                                        <p className="text-xs text-gray-400 text-center">Information entropy — the physics of proof itself</p>
+                                    </div>
+                                    <div className="bg-black/60 p-3 rounded border border-cyan-500/30">
+                                        <p className="text-cyan-300 font-bold text-xs mb-2">WHY SHANNON IS THE THIRD PILLAR:</p>
+                                        <ul className="space-y-1.5 text-xs text-gray-300 ml-4">
+                                            <li>• <strong className="text-white">Planck</strong> = energy is quantized (E = hν)</li>
+                                            <li>• <strong className="text-white">Einstein</strong> = energy = matter (E = mc², extraction)</li>
+                                            <li>• <strong className="text-white">Shannon</strong> = information is quantized (H = −Σ p log p)</li>
+                                            <li>• <strong className="text-cyan-400">Proof-of-Impact lives in Shannon's domain</strong> — every photo, GPS coord, and crypto signature is a measurable bit of truth</li>
+                                        </ul>
+                                    </div>
+                                    <p className="text-cyan-400 font-bold text-sm mt-3">
+                                        Without Shannon, there is no "proof." He gave us the unit (the bit), the math (entropy), and the limit (channel capacity). Every verification on this platform — every hash, every signature, every IPFS pin — is Shannon's physics, working. ♾️
                                     </p>
                                 </div>
                             </div>
@@ -446,7 +471,7 @@ export default function WhitepaperPage() {
                                         <p className="text-gray-300">Neural networks running entirely on your phone — <strong className="text-green-400">AI verifies cleanup before it ever hits our servers.</strong> Private. Offline. Unfakeable.</p>
                                     </div>
                                 </div>
-                                <p className="text-green-400 font-bold text-xs mt-3">Carbon credits are a $900B market despite being largely unverifiable. $P51 is mathematically more fraud-proof than anything in that market.</p>
+                                <p className="text-green-400 font-bold text-xs mt-3">Carbon credits are a $900B market despite being largely unverifiable. P51 is mathematically more fraud-proof than anything in that market.</p>
                             </div>
 
                             <div className="bg-green-900/30 p-4 rounded-xl border-2 border-green-500/50">
@@ -470,7 +495,7 @@ export default function WhitepaperPage() {
                             <div className="bg-cyan-900/30 p-4 rounded-xl border-2 border-cyan-500/50">
                                 <h3 className="text-lg font-bold text-cyan-400 mb-3">🛰️ NEW: IPFS Decentralized Storage (Nov 2025)</h3>
                                 <p className="text-sm text-white mb-2">
-                                    Every cleanup photo + $P51 transaction is now <strong>pinned to IPFS</strong> (InterPlanetary File System) = 
+                                    Every cleanup photo + P51 transaction is now <strong>pinned to IPFS</strong> (InterPlanetary File System) = 
                                     decentralized storage that survives server shutdowns, government censorship, and quantum attacks.
                                 </p>
                                 <div className="space-y-2 text-xs text-gray-300 ml-4">
@@ -681,7 +706,8 @@ export default function WhitepaperPage() {
                             <p>4. NASA: Schumann Resonance astronaut health effects</p>
                             <p>5. Planck, M. (1900): "Energy distribution in normal spectrum"</p>
                             <p>6. Franklin, R. (1953): Photo 51 - DNA X-ray crystallography</p>
-                            <p>7. UK CIC Regulator: Asset Lock requirements</p>
+                            <p>7. Shannon, C. E. (1948): "A Mathematical Theory of Communication" — information entropy & the bit</p>
+                            <p>8. UK CIC Regulator: Asset Lock requirements</p>
                         </div>
                     </CardContent>
                 </Card>

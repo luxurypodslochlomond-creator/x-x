@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check } from 'lucide-react';
+import Transmission from '@/components/climate/Transmission';
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
@@ -392,6 +393,9 @@ export default function TogetherChangeClimate() {
           <p className="text-[11px] font-bold uppercase leading-relaxed max-w-[330px] text-[#141210] tracking-wide">{t.sub}</p>
         </div>
       </div>
+
+      {/* ── TRANSMISSION — the soul of the platform, spoken in the artist's voice ── */}
+      <Transmission />
 
       {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
       <div className="px-4 py-2 bg-[#141210] flex items-center justify-between gap-3">

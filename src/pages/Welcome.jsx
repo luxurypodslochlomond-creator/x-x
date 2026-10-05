@@ -41,7 +41,7 @@ const HERO_THREE = [
     name: 'LITTER PICKS',
     emoji: '🌍',
     headline: 'Pick up litter. Earn tokens.',
-    desc: 'Photograph your cleanup. AI verifies the litter. Earn $P51 tokens. Kid-friendly. No account needed. Real environmental action, rewarded.',
+    desc: 'Photograph your cleanup. AI verifies the litter. Earn P51 tokens. Kid-friendly. No account needed. Real environmental action, rewarded.',
     badge: 'Free',
     badgeColor: 'text-green-400 bg-green-500/10 border-green-500/40',
     border: 'border-green-500/30 hover:border-green-400',
