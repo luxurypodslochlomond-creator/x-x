@@ -135,6 +135,7 @@ const T = {
 };
 
 function SolutionCard({ item, onOpen }) {
+  const isSolution = item.entry_type === 'solution';
   return (
     <motion.button
       onClick={() => onOpen(item)}
@@ -142,23 +143,25 @@ function SolutionCard({ item, onOpen }) {
       animate={{ opacity: 1, y: 0 }}
       whileTap={{ scale: 0.96 }}
       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${
-        item.entry_type === 'solution' ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
-      } min-h-[96px] flex items-end`}
+      className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
+        isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
+      } min-h-[110px] flex items-end`}
     >
       <img
         src={item.image_url || CATEGORY_IMAGE(item.category)}
         alt=""
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'grayscale(1) contrast(1.4)', mixBlendMode: 'multiply', opacity: 0.42 }}
+        style={{ filter: 'grayscale(1) contrast(1.25)' }}
         onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
       />
-      <div className="relative p-3 w-full">
-        <div className="text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b]">
-          {item.entry_type === 'solution' ? 'Solution' : 'Crisis'}
+      {/* Gradient scrim — guarantees title readability on any image */}
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
+      <div className="relative p-2.5 w-full">
+        <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
+          {isSolution ? 'Solution' : 'Crisis'}
         </div>
-        <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-3 mt-1">
+        <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
           {item.title}
         </h3>
       </div>
@@ -489,21 +492,8 @@ export default function TogetherChangeClimate() {
         <div className="px-4 py-5 bg-[#efe7d6] border-b-2 border-[#141210]">
           <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
           <div className="grid grid-cols-2 gap-2.5">
-            {featured.map((item, i) => (
-              <motion.button
-                key={item.id}
-                onClick={() => setOpenItem(item)}
-                initial={false}
-                animate={{ opacity: 1 }}
-                whileTap={{ scale: 0.96 }}
-                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${item.entry_type === 'solution' ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'} min-h-[94px] flex items-end`}
-              >
-                <img src={item.image_url || CATEGORY_IMAGE(item.category)} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover"
-                  style={{ filter: 'grayscale(1) contrast(1.4)', mixBlendMode: 'multiply', opacity: 0.42 }}
-                  onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }} />
-                <strong className="relative text-[11px] font-black font-mono uppercase leading-tight text-[#141210] p-2.5 line-clamp-3">{item.title}</strong>
-              </motion.button>
+            {featured.map((item) => (
+              <SolutionCard key={item.id} item={item} onOpen={setOpenItem} />
             ))}
           </div>
         </div>
