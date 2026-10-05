@@ -140,7 +140,8 @@ function SolutionCard({ item, onOpen }) {
       onClick={() => onOpen(item)}
       initial={false}
       animate={{ opacity: 1, y: 0 }}
-      whileTap={{ scale: 0.97 }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${
         item.entry_type === 'solution' ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
       } min-h-[96px] flex items-end`}
@@ -183,6 +184,10 @@ function EntryModal({ item, onClose, t = T.en }) {
         exit={{ y: '100%', opacity: 0 }}
         transition={{ type: 'spring', stiffness: 380, damping: 38, mass: 0.8 }}
       >
+        {/* Native grab handle — bottom-sheet feel */}
+        <div className="sm:hidden flex justify-center pt-2.5 pb-1 bg-[#efe7d6]">
+          <div className="w-10 h-1 rounded-full bg-[#141210]/25" />
+        </div>
         <div className="relative h-52 sm:h-60 bg-[#141210]">
           <img src={item.image_url || CATEGORY_IMAGE(item.category)} alt={item.title} className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(226,96,42,.2), rgba(20,18,16,.5) 50%, #141210 100%)' }} />
@@ -427,19 +432,19 @@ export default function TogetherChangeClimate() {
         <div className="flex gap-2 mb-3">
           <button
             onClick={() => setSelectedType(selectedType === 'solution' ? 'all' : 'solution')}
-            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
               selectedType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.solutions}</button>
           <button
             onClick={() => setSelectedType(selectedType === 'climate_crisis' ? 'all' : 'climate_crisis')}
-            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
               selectedType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.crises}</button>
           <button
             onClick={() => setSelectedType(selectedType === 'groups' ? 'all' : 'groups')}
-            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
               selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.groups}</button>
@@ -461,7 +466,7 @@ export default function TogetherChangeClimate() {
         <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }} aria-label="Filter by category">
           <button
             onClick={() => setSelectedCategory('all')}
-            className={`flex-shrink-0 snap-start px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+            className={`flex-shrink-0 snap-start px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
               selectedCategory === 'all' ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
             }`}
           >{t.all}</button>
@@ -469,7 +474,7 @@ export default function TogetherChangeClimate() {
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.id)}
-              className={`flex-shrink-0 snap-start flex items-center gap-1 px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 ${
+              className={`flex-shrink-0 snap-start flex items-center gap-1 px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
                 selectedCategory === c.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
               }`}
             >
@@ -490,7 +495,8 @@ export default function TogetherChangeClimate() {
                 onClick={() => setOpenItem(item)}
                 initial={false}
                 animate={{ opacity: 1 }}
-                whileTap={{ scale: 0.97 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                 className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${item.entry_type === 'solution' ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'} min-h-[94px] flex items-end`}
               >
                 <img src={item.image_url || CATEGORY_IMAGE(item.category)} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover"
