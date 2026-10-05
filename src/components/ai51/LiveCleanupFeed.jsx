@@ -75,7 +75,7 @@ export default function LiveCleanupFeed({ compact = false }) {
               transition={{ duration: 1.5, repeat: Infinity }}
               className="text-green-400 font-bold text-xs whitespace-nowrap ml-2"
             >
-              +{Math.floor(cleanup.litter_weight)} $P51
+              +{Math.floor(cleanup.litter_weight)} P51
             </motion.span>
           </motion.div>
         ))}

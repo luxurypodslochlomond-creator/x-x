@@ -47,9 +47,9 @@ export default function GlobalCurrencyBridge() {
                     <div className="bg-black border border-cyan-500/30 p-4 rounded">
                         <p className="text-cyan-400 font-bold mb-2">✓ TWO-WAY CURRENCY CONVERSION:</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
-                            <li>• £ ↔ $P51 ↔ $ ↔ € ↔ ¥ ↔ ₹ (all directions)</li>
+                            <li>• £ ↔ P51 ↔ $ ↔ € ↔ ¥ ↔ ₹ (all directions)</li>
                             <li>• Revolut/Wise handle multi-currency instantly</li>
-                            <li>• $P51 = bridge token between all currencies</li>
+                            <li>• P51 = bridge token between all currencies</li>
                             <li>• No barriers - works seamlessly</li>
                         </ul>
                     </div>
@@ -129,12 +129,12 @@ export default function GlobalCurrencyBridge() {
                 
                 <div className="space-y-3 text-xs font-mono">
                     <div className="bg-black border border-blue-500/30 p-3 rounded">
-                        <p className="text-white font-bold mb-2">LAYER 1: $P51 (UNIVERSAL BRIDGE)</p>
+                        <p className="text-white font-bold mb-2">LAYER 1: P51 (UNIVERSAL BRIDGE)</p>
                         <ul className="text-gray-300 space-y-1">
                             <li>• Internal currency (earn by cleaning, creating, healing)</li>
                             <li>• Quantum-secured, works offline</li>
                             <li>• Bridges to ANY fiat currency</li>
-                            <li>• 1 $P51 = ~£1 (or equivalent in other currencies)</li>
+                            <li>• 1 P51 = ~£1 (or equivalent in other currencies)</li>
                         </ul>
                     </div>
 
@@ -153,7 +153,7 @@ export default function GlobalCurrencyBridge() {
                         <ul className="text-gray-300 space-y-1">
                             <li>• Live rates from Revolut/Wise API</li>
                             <li>• £100 = ~$125 = ~€115 = ~¥19,000 (live conversion)</li>
-                            <li>• $P51 adjusts to local purchasing power</li>
+                            <li>• P51 adjusts to local purchasing power</li>
                             <li>• Artists receive in THEIR currency</li>
                         </ul>
                     </div>
@@ -179,9 +179,9 @@ export default function GlobalCurrencyBridge() {
                     <div className="bg-gradient-to-r from-cyan-500/10 to-black border-l-4 border-cyan-500 p-3">
                         <p className="text-white font-bold mb-1">SCENARIO 1: UK FAN → SAUDI ARTIST</p>
                         <div className="text-gray-400 text-xs space-y-1 mt-2">
-                            <p>1. UK fan cleans 10kg litter → earns 10 $P51</p>
-                            <p>2. Spends 5 $P51 on Saudi artist's track</p>
-                            <p>3. Saudi artist gets 4.5 $P51 (90% after platform 10%)</p>
+                            <p>1. UK fan cleans 10kg litter → earns 10 P51</p>
+                            <p>2. Spends 5 P51 on Saudi artist's track</p>
+                            <p>3. Saudi artist gets 4.5 P51 (90% after platform 10%)</p>
                             <p>4. Artist cashes out → Revolut converts to SAR (Saudi Riyal)</p>
                             <p>5. Saudi artist receives SAR in local bank</p>
                         </div>
@@ -193,13 +193,13 @@ export default function GlobalCurrencyBridge() {
                     <div className="bg-gradient-to-r from-purple-500/10 to-black border-l-4 border-purple-500 p-3">
                         <p className="text-white font-bold mb-1">SCENARIO 2: JAPANESE FAN → SCOTTISH ARTIST</p>
                         <div className="text-gray-400 text-xs space-y-1 mt-2">
-                            <p>1. Japanese fan buys 100 $P51 with ¥15,000 (via Stripe/Revolut)</p>
-                            <p>2. Spends 50 $P51 on Scott's music</p>
-                            <p>3. Scott gets 45 $P51 (90%)</p>
+                            <p>1. Japanese fan buys 100 P51 with ¥15,000 (via Stripe/Revolut)</p>
+                            <p>2. Spends 50 P51 on Scott's music</p>
+                            <p>3. Scott gets 45 P51 (90%)</p>
                             <p>4. Scott cashes out → receives £45 in UK bank</p>
                         </div>
                         <p className="text-cyan-400 text-xs mt-2 font-bold">
-                            → ¥ → $P51 → £ (seamless conversion, zero complexity) ✓
+                            → ¥ → P51 → £ (seamless conversion, zero complexity) ✓
                         </p>
                     </div>
 
@@ -207,7 +207,7 @@ export default function GlobalCurrencyBridge() {
                         <p className="text-white font-bold mb-1">SCENARIO 3: P2P OFFLINE</p>
                         <div className="text-gray-400 text-xs space-y-1 mt-2">
                             <p>1. Scott (UK) meets producer (USA) at festival</p>
-                            <p>2. Offline P2P transfer: 50 $P51 via WebRTC mesh</p>
+                            <p>2. Offline P2P transfer: 50 P51 via WebRTC mesh</p>
                             <p>3. No internet needed, quantum-signed</p>
                             <p>4. Producer later cashes out → receives $ in USA bank</p>
                         </div>
@@ -261,7 +261,7 @@ export default function GlobalCurrencyBridge() {
                 <div className="mt-4 bg-green-900/20 border border-green-500/50 p-3 rounded">
                     <p className="text-green-400 font-bold text-xs mb-1">TOTAL SUPPORT:</p>
                     <p className="text-gray-300 text-xs">
-                        Revolut supports 28 currencies • Wise supports 50+ • $P51 bridges ALL of them
+                        Revolut supports 28 currencies • Wise supports 50+ • P51 bridges ALL of them
                     </p>
                 </div>
             </div>
@@ -362,7 +362,7 @@ export default function GlobalCurrencyBridge() {
                     <div className="bg-black border border-purple-500/30 p-3 rounded">
                         <p className="text-purple-400 font-bold text-xs mb-2">✓ TWO-WAY FLOW:</p>
                         <p className="text-gray-300 text-xs">
-                            $P51 ↔ ANY currency (£/$€/¥/₹/etc) seamlessly
+                            P51 ↔ ANY currency (£/$€/¥/₹/etc) seamlessly
                         </p>
                     </div>
 

@@ -305,7 +305,7 @@ export default function MapPage() {
                     <Card className="bg-black/50 border-2 border-cyan-500/30 max-w-2xl mx-auto">
                         <CardContent className="p-6">
                             <p className="text-gray-300 text-lg">
-                                Every dot is a soul healing the planet. Every marker is proof that love is not just a feeling - it's a <span className="text-cyan-400 font-mono">$P51</span> currency.
+                                Every dot is a soul healing the planet. Every marker is proof that love is not just a feeling - it's a <span className="text-cyan-400 font-mono">P51</span> currency.
                             </p>
                         </CardContent>
                     </Card>

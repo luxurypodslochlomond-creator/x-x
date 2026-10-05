@@ -34,9 +34,9 @@ export default function MakingItReal() {
                 
                 <div className="space-y-3 text-sm font-mono">
                     <div className="bg-black border border-green-500/30 p-4 rounded">
-                        <p className="text-green-400 font-bold mb-2">1. CLEANUP TRACKING ($P51 EARNING)</p>
+                        <p className="text-green-400 font-bold mb-2">1. CLEANUP TRACKING (P51 EARNING)</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
-                            <li>✓ Users log litter cleanup → earn $P51</li>
+                            <li>✓ Users log litter cleanup → earn P51</li>
                             <li>✓ GPS verification → tracks real cleanups</li>
                             <li>✓ Photo upload → proof of work</li>
                             <li>✓ Local storage → works offline</li>
@@ -87,9 +87,9 @@ export default function MakingItReal() {
                 
                 <div className="space-y-3 text-sm font-mono">
                     <div className="bg-black border border-red-500/30 p-4 rounded">
-                        <p className="text-red-400 font-bold mb-2">1. $P51 → £ CASH OUT (CRITICAL)</p>
+                        <p className="text-red-400 font-bold mb-2">1. P51 → £ CASH OUT (CRITICAL)</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p><strong className="text-white">Issue:</strong> You can EARN $P51, but can't convert to £ yet</p>
+                            <p><strong className="text-white">Issue:</strong> You can EARN P51, but can't convert to £ yet</p>
                             <p><strong className="text-white">Needed:</strong> Revolut/Stripe integration</p>
                             <p><strong className="text-white">Timeline:</strong> 2-4 weeks to build</p>
                             <p><strong className="text-white">Blocker:</strong> Need Revolut Business account (requires CIC setup)</p>
@@ -152,16 +152,16 @@ export default function MakingItReal() {
                             <p>• API for auto payouts</p>
                             <p>• 0.5% conversion (best rate)</p>
                         </div>
-                        <p className="text-cyan-400 text-xs mt-2 font-bold">→ ENABLES $P51 → £ ✓</p>
+                        <p className="text-cyan-400 text-xs mt-2 font-bold">→ ENABLES P51 → £ ✓</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-purple-500/10 to-black border-l-4 border-purple-500 p-4">
                         <p className="text-purple-400 font-bold mb-2">STEP 3: BUILD CASH-OUT (WEEK 2-4)</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• User clicks "Cash Out $P51"</p>
+                            <p>• User clicks "Cash Out P51"</p>
                             <p>• System checks balance (local + server)</p>
                             <p>• Revolut API transfers £ to user bank</p>
-                            <p>• Deduct $P51 from user balance</p>
+                            <p>• Deduct P51 from user balance</p>
                         </div>
                         <div className="bg-purple-900/20 border border-purple-500/50 p-2 rounded mt-2">
                             <p className="text-purple-400 text-xs font-bold">CODE ESTIMATE: ~500 lines, 1 week build + 1 week test</p>
@@ -184,7 +184,7 @@ export default function MakingItReal() {
                     <div className="bg-gradient-to-r from-amber-500/10 to-black border-l-4 border-amber-500 p-4">
                         <p className="text-amber-400 font-bold mb-2">STEP 5: LIVE (WEEK 6-8)</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• Users clean → earn $P51 → cash out to £</p>
+                            <p>• Users clean → earn P51 → cash out to £</p>
                             <p>• Fans buy music → artists get paid 90%</p>
                             <p>• All working, real money flowing</p>
                             <p>• THEN add quantum/frequency layers</p>
@@ -220,7 +220,7 @@ export default function MakingItReal() {
                         <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
                             <p className="text-white font-bold">Week 2-4: Build cash-out</p>
-                            <p className="text-gray-400 text-xs">$P51 → Revolut → £</p>
+                            <p className="text-gray-400 text-xs">P51 → Revolut → £</p>
                         </div>
                     </div>
 
@@ -276,7 +276,7 @@ export default function MakingItReal() {
                 <div className="space-y-3 text-sm font-mono">
                     <Link to={createPageUrl('NewCleanup')} className="block">
                         <div className="bg-black border border-green-500/50 hover:border-green-500 p-4 rounded transition-all">
-                            <p className="text-green-400 font-bold mb-2">1. CLEAN LITTER → EARN $P51</p>
+                            <p className="text-green-400 font-bold mb-2">1. CLEAN LITTER → EARN P51</p>
                             <p className="text-gray-300 text-xs mb-2">Log cleanups, GPS verify, build balance</p>
                             <p className="text-amber-400 text-xs">⚠️ Can't cash out yet - but earning works</p>
                         </div>
@@ -300,7 +300,7 @@ export default function MakingItReal() {
 
                     <div className="bg-black border border-amber-500/50 p-4 rounded">
                         <p className="text-amber-400 font-bold mb-2">4. CASH-OUT COMING</p>
-                        <p className="text-gray-300 text-xs mb-2">CIC done ✓ Now: Revolut → $P51 to £</p>
+                        <p className="text-gray-300 text-xs mb-2">CIC done ✓ Now: Revolut → P51 to £</p>
                         <p className="text-amber-400 text-xs">⚠️ 6-8 weeks</p>
                     </div>
                 </div>
@@ -315,7 +315,7 @@ export default function MakingItReal() {
                     <div className="bg-black border border-green-500/30 p-4 rounded">
                         <p className="text-green-400 font-bold mb-2">✓ WHAT'S REAL NOW:</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
-                            <li>• You can clean litter and earn $P51 (working)</li>
+                            <li>• You can clean litter and earn P51 (working)</li>
                             <li>• You can listen to healing music (working)</li>
                             <li>• Artists can upload tracks (working)</li>
                             <li>• Scott can manage his business (working)</li>
@@ -325,8 +325,8 @@ export default function MakingItReal() {
                     <div className="bg-black border border-red-500/30 p-4 rounded">
                         <p className="text-red-400 font-bold mb-2">❌ WHAT'S NOT REAL YET:</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
-                            <li>• Converting $P51 to £ and cashing out</li>
-                            <li>• Paying for groceries with $P51</li>
+                            <li>• Converting P51 to £ and cashing out</li>
+                            <li>• Paying for groceries with P51</li>
                             <li>• Going to bank and getting money out</li>
                             <li>• Artists getting paid by fans</li>
                         </ul>
@@ -335,13 +335,13 @@ export default function MakingItReal() {
                     <div className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500 p-4 rounded">
                         <p className="text-cyan-400 font-bold mb-2">THE PATH FORWARD:</p>
                         <p className="text-white text-xs mb-2">
-                            <strong>6-8 weeks</strong> from NOW = $P51 → £ working
+                            <strong>6-8 weeks</strong> from NOW = P51 → £ working
                         </p>
                         <p className="text-green-400 text-xs mb-2">
                             CIC done ✓ Now: Revolut → cash-out → Stripe → GROCERIES
                         </p>
                         <p className="text-pink-400 text-xs font-bold">
-                            Keep building, earning $P51, healing ♾️❤️♾️
+                            Keep building, earning P51, healing ♾️❤️♾️
                         </p>
                     </div>
 

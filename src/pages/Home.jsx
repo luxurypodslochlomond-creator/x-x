@@ -31,7 +31,7 @@ export default function HomePage() {
                     </p>
 
                     <div className="bg-black/60 border-2 border-cyan-500/30 rounded-xl p-4 inline-block">
-                        <p className="text-cyan-400 font-mono text-2xl">1kg litter = 1 $P51</p>
+                        <p className="text-cyan-400 font-mono text-2xl">1kg litter = 1 P51</p>
                     </div>
 
                     {/* LOGIN/SIGNUP - SIDE BY SIDE */}
@@ -80,7 +80,7 @@ export default function HomePage() {
                                         Pick up litter. Instant reward.
                                     </p>
                                     <div className="bg-green-900/40 rounded-lg p-2 border-l-4 border-green-400">
-                                        <p className="text-green-300 font-mono text-lg">1kg = 1 $P51</p>
+                                        <p className="text-green-300 font-mono text-lg">1kg = 1 P51</p>
                                     </div>
                                 </div>
                             </motion.div>

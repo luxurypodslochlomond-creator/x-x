@@ -106,7 +106,7 @@ export default function InterplanetaryMoneyPage() {
                         <div className="bg-black/60 border border-green-500/50 rounded-lg p-6 space-y-3">
                             <p className="text-green-400 font-black text-lg">IPFS STORAGE (LIVE NOW)</p>
                             <p className="text-gray-300">
-                                Every cleanup photo + $P51 transaction is <strong className="text-white">pinned to IPFS</strong> = 
+                                Every cleanup photo + P51 transaction is <strong className="text-white">pinned to IPFS</strong> = 
                                 decentralized storage that survives server shutdowns, government censorship, quantum attacks.
                             </p>
                             <div className="bg-green-900/20 border border-green-500/30 rounded p-3 font-mono text-xs text-green-300">
@@ -161,7 +161,7 @@ export default function InterplanetaryMoneyPage() {
                             <div className="bg-black/60 border border-pink-500/50 rounded-lg p-4">
                                 <p className="text-pink-400 font-black mb-2">✓ INSTANT REWARD</p>
                                 <p className="text-sm text-gray-400">
-                                    1kg = 1 $P51, paid immediately, no middlemen
+                                    1kg = 1 P51, paid immediately, no middlemen
                                 </p>
                             </div>
                             <div className="bg-black/60 border border-amber-500/50 rounded-lg p-4">

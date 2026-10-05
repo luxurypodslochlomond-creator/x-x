@@ -70,7 +70,7 @@ Return JSON with:
   "description": "Detailed description of what will be done, how, and why (200-500 words)",
   "expected_impact": "Specific measurable outcomes (e.g., '500kg plastic removed from beach', '10 families fed for 1 month')",
   "verification_method": "How we'll prove it worked (e.g., 'Photo evidence before/after', 'Third-party receipt confirmation')",
-  "suggested_target": "Realistic $P51 amount needed (number only)"
+  "suggested_target": "Realistic P51 amount needed (number only)"
 }
 
 Make it BEAUTIFUL but PRACTICAL. This is REAL healing, not fantasy.`,
@@ -267,7 +267,7 @@ Make it BEAUTIFUL but PRACTICAL. This is REAL healing, not fantasy.`,
                                         value={formData.gmt_target}
                                         onChange={(e) => setFormData({...formData, gmt_target: e.target.value})}
                                         className="bg-gray-900/50 border-gray-700 text-white pr-20"
-                                        placeholder="How much $P51 do you need?"
+                                        placeholder="How much P51 do you need?"
                                     />
                                     <div className="absolute inset-y-0 right-4 flex items-center">
                                         <P51Symbol />

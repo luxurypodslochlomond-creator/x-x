@@ -59,19 +59,19 @@ export default function TheLoveEconomy() {
                         <Pillar
                             icon={Leaf}
                             title="Planetary Healing"
-                            text="The primary way to mint new $P51. Every verified cleanup of our home, from a single piece of litter to a full-scale mission, generates new Love Currency into the system."
+                            text="The primary way to mint new P51. Every verified cleanup of our home, from a single piece of litter to a full-scale mission, generates new Love Currency into the system."
                             delay={0.2}
                         />
                         <Pillar
                             icon={Heart}
                             title="Acts of Love"
-                            text="Non-physical healing also has value. Submitting a verified 'Proof of Love'—an act of kindness, compassion, or community support—is rewarded with $P51 from the Family Fund."
+                            text="Non-physical healing also has value. Submitting a verified 'Proof of Love'—an act of kindness, compassion, or community support—is rewarded with P51 from the Family Fund."
                             delay={0.3}
                         />
                         <Pillar
                             icon={Users}
                             title="Soul Support"
-                            text="Allies can provide liquidity by purchasing existing $P51 from Healers via the Love Bridge. This provides instant cash for our Healers and strengthens the entire ecosystem without inflating supply."
+                            text="Allies can provide liquidity by purchasing existing P51 from Healers via the Love Bridge. This provides instant cash for our Healers and strengthens the entire ecosystem without inflating supply."
                             delay={0.4}
                         />
                     </div>

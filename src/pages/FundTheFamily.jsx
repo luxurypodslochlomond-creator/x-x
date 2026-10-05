@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -27,7 +26,7 @@ const MissionCard = ({ icon: Icon, title, description, amount, funded, onFund })
         </CardContent>
         <CardFooter className="p-4 bg-black/20 flex justify-between items-center">
              <div>
-                <p className="text-xl font-bold text-white">{amount} <span className="text-cyan-400 font-mono">$P51</span></p>
+                <p className="text-xl font-bold text-white">{amount} <span className="text-cyan-400 font-mono">P51</span></p>
                 <p className="text-xs text-gray-500">Needed</p>
             </div>
             <Button onClick={onFund} className="bg-cyan-600 hover:bg-cyan-700">Fuel Mission</Button>
@@ -90,7 +89,7 @@ export default function FundUF51() {
                             <div className="text-center">
                                 <h2 className="text-3xl font-black text-purple-300 mb-4">To Our Early Supporters</h2>
                                 <p className="text-xl text-white mb-6">
-                                    You kept us alive when we were building this. We didn't have $P51 yet. You gave fiat.
+                                    You kept us alive when we were building this. We didn't have P51 yet. You gave fiat.
                                 </p>
                             </div>
 
@@ -111,8 +110,8 @@ export default function FundUF51() {
                                     <p className="ml-4">→ We return your original amount in GBP/USD</p>
                                     <p className="ml-4">→ Simple. Fair. No bullshit.</p>
                                     
-                                    <p className="mt-4"><strong className="text-white">Option 2: $P51 Conversion</strong></p>
-                                    <p className="ml-4">→ Convert your support into equivalent $P51</p>
+                                    <p className="mt-4"><strong className="text-white">Option 2: P51 Conversion</strong></p>
+                                    <p className="ml-4">→ Convert your support into equivalent P51</p>
                                     <p className="ml-4">→ Tradeable, useable, backed by real healing</p>
                                     <p className="ml-4">→ You become an Ally with verified stake</p>
                                 </div>
@@ -135,7 +134,7 @@ export default function FundUF51() {
                             <div className="p-4 bg-cyan-900/30 border-l-4 border-cyan-400">
                                 <p className="font-bold text-cyan-300 mb-2">Your Call. Zero Pressure.</p>
                                 <p className="text-gray-300 text-sm">
-                                    You gave us fiat when we needed it. We'll give you back fiat or $P51 - whatever you want. 
+                                    You gave us fiat when we needed it. We'll give you back fiat or P51 - whatever you want. 
                                     You helped us survive. We don't forget that. Even if it takes time to track everyone down.
                                 </p>
                             </div>
@@ -151,7 +150,7 @@ export default function FundUF51() {
                     <Card className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 border-4 border-cyan-500/50">
                         <CardContent className="p-8 space-y-6">
                             <div className="text-center">
-                                <h2 className="text-3xl font-black text-cyan-300 mb-4">Two Ways To Get $P51</h2>
+                                <h2 className="text-3xl font-black text-cyan-300 mb-4">Two Ways To Get P51</h2>
                                 <p className="text-xl text-white mb-6">
                                     You can EARN it or you can BUY it. Both are valid. Here's why.
                                 </p>
@@ -160,10 +159,10 @@ export default function FundUF51() {
                             <div className="bg-gradient-to-br from-green-900/40 to-cyan-900/40 p-6 rounded-xl border-2 border-green-400 mb-6">
                                 <h3 className="text-xl font-bold text-green-300 mb-4">1. EARN IT (Healers):</h3>
                                 <div className="space-y-2 text-green-100 text-sm">
-                                    <p>• Clean Earth → Get $P51 (1kg = 10 $P51)</p>
-                                    <p>• Acts of love → Get $P51</p>
-                                    <p>• Create beauty → Get $P51</p>
-                                    <p>• <strong className="text-white">You did the work. The $P51 is YOURS.</strong></p>
+                                    <p>• Clean Earth → Get P51 (1kg = 10 P51)</p>
+                                    <p>• Acts of love → Get P51</p>
+                                    <p>• Create beauty → Get P51</p>
+                                    <p>• <strong className="text-white">You did the work. The P51 is YOURS.</strong></p>
                                     <p>• <strong className="text-white">You keep 90%. 10% goes to missions.</strong></p>
                                 </div>
                             </div>
@@ -176,8 +175,8 @@ export default function FundUF51() {
                                     <div className="bg-black/40 p-4 rounded-lg border-l-4 border-blue-500">
                                         <p className="text-blue-300 font-bold mb-2">A. Buy from Healers (Secondary Market)</p>
                                         <p className="text-gray-300 text-sm">
-                                            → Buy $P51 from people who earned it<br/>
-                                            → They get cash now, you get $P51<br/>
+                                            → Buy P51 from people who earned it<br/>
+                                            → They get cash now, you get P51<br/>
                                             → Helps them pay bills TODAY
                                         </p>
                                     </div>
@@ -186,7 +185,7 @@ export default function FundUF51() {
                                         <p className="text-purple-300 font-bold mb-2">B. Buy Directly from UF51 (Primary Market)</p>
                                         <p className="text-gray-300 text-sm">
                                             → Send fiat directly to UF51<br/>
-                                            → We create NEW $P51 (90% to you, 10% to missions)<br/>
+                                            → We create NEW P51 (90% to you, 10% to missions)<br/>
                                             → <strong className="text-white">Your capital goes DIRECTLY to verified healing missions</strong><br/>
                                             → Jane Goodall water projects, Palestine aid, ocean cleanup, animal welfare
                                         </p>
@@ -198,8 +197,8 @@ export default function FundUF51() {
                                 <p className="font-bold text-yellow-300 mb-2 text-xl">Is This "Printing Money"?</p>
                                 <p className="text-white mb-3">No. Here's why:</p>
                                 <div className="space-y-2 text-gray-300 text-sm">
-                                    <p>• <strong className="text-white">Healers:</strong> $P51 backed by work ALREADY DONE (verified cleanup)</p>
-                                    <p>• <strong className="text-white">Allies (Primary):</strong> $P51 backed by missions THAT WILL HAPPEN (pre-funded with established partners)</p>
+                                    <p>• <strong className="text-white">Healers:</strong> P51 backed by work ALREADY DONE (verified cleanup)</p>
+                                    <p>• <strong className="text-white">Allies (Primary):</strong> P51 backed by missions THAT WILL HAPPEN (pre-funded with established partners)</p>
                                     <p>• <strong className="text-white">Both are backed by REAL HEALING.</strong> One retrospective, one prospective.</p>
                                 </div>
                                 <p className="text-cyan-300 font-bold mt-4">
@@ -229,7 +228,7 @@ export default function FundUF51() {
                             <div className="p-4 bg-cyan-900/30 border-l-4 border-cyan-400">
                                 <p className="font-bold text-cyan-300 mb-2">No Gaming. No Bullshit. The Truth:</p>
                                 <p className="text-gray-300 text-sm mb-3">
-                                    Yes, Allies can acquire large amounts of $P51. <strong className="text-white">That's intentional.</strong>
+                                    Yes, Allies can acquire large amounts of P51. <strong className="text-white">That's intentional.</strong>
                                 </p>
                                 <p className="text-gray-300 text-sm">
                                     Their capital directly funds real-world healing that wouldn't happen otherwise. They're not extracting 
@@ -246,7 +245,7 @@ export default function FundUF51() {
                         <CardContent className="p-6">
                             <h3 className="text-xl font-bold text-blue-200 mb-3">For Our Healers:</h3>
                             <p className="text-blue-100">
-                                If you heal the planet through cleanups, acts of love, or creation – you <strong>earn</strong> $P51, you never pay for it. 
+                                If you heal the planet through cleanups, acts of love, or creation – you <strong>earn</strong> P51, you never pay for it. 
                                 This page is for Allies (wealthy individuals, foundations, funds) who want to convert capital into verified healing missions.
                             </p>
                         </CardContent>
@@ -265,13 +264,13 @@ export default function FundUF51() {
                                 </CardHeader>
                                 <CardContent className="p-0">
                                     <p className="text-lg text-gray-300 mb-4 max-w-2xl mx-auto">
-                                        Your contribution becomes <span className="text-cyan-400 font-mono">$P51</span> - a verified, tradeable, carbon-negative currency backed by real planetary healing.
+                                        Your contribution becomes <span className="text-cyan-400 font-mono">P51</span> - a verified, tradeable, carbon-negative currency backed by real planetary healing.
                                     </p>
                                     
                                     <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 p-6 rounded-xl border border-green-500/30 mb-8">
                                         <h3 className="text-xl font-bold text-white mb-4">What You Get:</h3>
                                         <div className="space-y-2 text-left text-gray-300">
-                                            <p>✅ <strong className="text-white">90% in $P51 tokens</strong> (yours to use, trade, or cash out)</p>
+                                            <p>✅ <strong className="text-white">90% in P51 tokens</strong> (yours to use, trade, or cash out)</p>
                                             <p>✅ <strong className="text-white">10% to UF51 Fund</strong> (real-world missions: water, food, reforestation)</p>
                                             <p>✅ <strong className="text-white">Verified impact</strong> (blockchain-recorded planetary healing)</p>
                                             <p>✅ <strong className="text-white">Tradeable & liquid</strong> (can be converted back to fiat/crypto)</p>
@@ -361,7 +360,7 @@ export default function FundUF51() {
                     <section className="text-center pt-8 border-t border-gray-800">
                         <h2 className="text-3xl font-bold text-white mb-4">Real Currency. Real Impact. Real Freedom.</h2>
                         <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-                            <span className="font-mono text-cyan-400">$P51</span> is not a donation - it's a currency. 
+                            <span className="font-mono text-cyan-400">P51</span> is not a donation - it's a currency. 
                             Use it in our ecosystem, trade it, or convert it back to fiat. 
                             Every token is backed by verified planetary healing.
                         </p>
@@ -376,7 +375,7 @@ export default function FundUF51() {
                             </h2>
 
                             <p className="text-xl text-white mb-8">
-                                "Where does $P51 get its value?"
+                                "Where does P51 get its value?"
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -393,8 +392,8 @@ export default function FundUF51() {
                                 <div className="p-6 bg-green-950/40 rounded-xl border border-green-500/30 text-left">
                                 <h3 className="text-xl font-bold text-green-300 mb-3">Our Value:</h3>
                                 <div className="space-y-2 text-gray-300">
-                                    <p className="flex items-center gap-2">$P51: Proof you healed Earth</p>
-                                    <p className="text-lg text-green-200 mt-3">1 $P51 ≈ 1kg waste removed + photo + GPS + community verified</p>
+                                    <p className="flex items-center gap-2">P51: Proof you healed Earth</p>
+                                    <p className="text-lg text-green-200 mt-3">1 P51 ≈ 1kg waste removed + photo + GPS + community verified</p>
                                 </div>
                                 </div>
                             </div>
@@ -405,7 +404,7 @@ export default function FundUF51() {
                                     <p><span className="font-bold text-white">₴ (Ukrainian Hryvnia):</span> 8 years (currency 1996, Unicode 2004)</p>
                                     <p><span className="font-bold text-white">₿ (Bitcoin):</span> 8 years (started 2009, Unicode 2017)</p>
                                     <p><span className="font-bold text-white">Ξ (Ethereum):</span> 2 years (started 2015, Unicode 2017)</p>
-                                    <p className="text-cyan-400 mt-4"><span className="font-bold">$P51:</span> We're on the journey. For now, $P51 works perfectly.</p>
+                                    <p className="text-cyan-400 mt-4"><span className="font-bold">P51:</span> We're on the journey. For now, P51 works perfectly.</p>
                                 </div>
                             </div>
                             </div>

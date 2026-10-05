@@ -81,7 +81,7 @@ export default function P51ActivityFeed({ limit = 5 }) {
             </div>
 
             <div className="pt-4 border-t-2 border-cyan-500/30 mt-4">
-                <p className="text-center text-cyan-400 text-xs font-mono">⚡ Real cleanups • Real $P51</p>
+                <p className="text-center text-cyan-400 text-xs font-mono">⚡ Real cleanups • Real P51</p>
             </div>
 
             {/* Modal - Full screen overlay */}
@@ -143,7 +143,7 @@ export default function P51ActivityFeed({ limit = 5 }) {
                         {/* Earnings */}
                         <div className="bg-green-900/40 border-2 border-green-500 p-4 text-center mt-4">
                             <p className="text-green-400 font-black font-mono text-lg">
-                                {selectedCleanup.tokens_awarded || selectedCleanup.litter_weight || 0} $P51 EARNED
+                                {selectedCleanup.tokens_awarded || selectedCleanup.litter_weight || 0} P51 EARNED
                             </p>
                         </div>
 

@@ -30,7 +30,7 @@ export default function MicroLitterBonus({ itemCount, baseTokens }) {
       <Sparkles className="w-5 h-5" />
       <div className="text-center">
         <span className="text-sm font-black">MICRO-LITTER HERO +{bonusPercentage}%</span>
-        <p className="text-xs font-bold opacity-90">{itemCount} tiny items • +{bonusTokens.toFixed(2)} $P51</p>
+        <p className="text-xs font-bold opacity-90">{itemCount} tiny items • +{bonusTokens.toFixed(2)} P51</p>
       </div>
       <Zap className="w-5 h-5" />
     </motion.div>

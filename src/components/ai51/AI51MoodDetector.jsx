@@ -25,7 +25,7 @@ const MOOD_PATTERNS = {
   },
   energized: {
     keywords: ['excited', 'happy', 'great', 'awesome', 'amazing', 'love', 'proud', 'grateful', 'blessed'],
-    suggestion: { feature: 'Cleanup', emoji: '🌍', message: 'That energy? Channel it - clean the planet, earn $P51' }
+    suggestion: { feature: 'Cleanup', emoji: '🌍', message: 'That energy? Channel it - clean the planet, earn P51' }
   },
   creative: {
     keywords: ['create', 'write', 'compose', 'make', 'build', 'art', 'music', 'song', 'poem'],

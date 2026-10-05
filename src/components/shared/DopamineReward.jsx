@@ -10,7 +10,7 @@ export default function DopamineReward({ type = 'standard', amount, multiplier, 
         standard: {
             color: '#22c55e',
             icon: Heart,
-            text: '+' + amount + ' $P51',
+            text: '+' + amount + ' P51',
             duration: 2000
         },
         streak: {

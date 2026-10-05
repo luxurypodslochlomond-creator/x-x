@@ -590,7 +590,7 @@ export default function SafeFusion() {
                                     <p className="text-gray-400">Zoom uses this. 300M daily users. Proven at scale.</p>
                                 </div>
                                 <div className="bg-green-900/20 border-2 border-purple-500 rounded p-3">
-                                    <p className="text-purple-400 font-bold mb-1">✓ Blockchain ($P51)</p>
+                                    <p className="text-purple-400 font-bold mb-1">✓ Blockchain (P51)</p>
                                     <p className="text-gray-400">Solana = 400ms transactions. Zero downtime. Works.</p>
                                 </div>
                                 <div className="bg-green-900/20 border-2 border-pink-500 rounded p-3">
@@ -639,7 +639,7 @@ export default function SafeFusion() {
                                         <li><strong className="text-white">Visit uf51.love</strong> → Instant load (PWA cached)</li>
                                         <li><strong className="text-white">Pick frequency</strong> → Plays immediately (local audio)</li>
                                         <li><strong className="text-white">Clean litter</strong> → Photo uploads P2P (works offline)</li>
-                                        <li><strong className="text-white">Earn $P51</strong> → Blockchain confirms (400ms)</li>
+                                        <li><strong className="text-white">Earn P51</strong> → Blockchain confirms (400ms)</li>
                                         <li><strong className="text-white">Share with friend</strong> → Bluetooth/QR (zero server)</li>
                                     </ol>
                                     <p className="text-green-400 font-bold text-xs mt-3 text-center">

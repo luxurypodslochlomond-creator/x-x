@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
                                 <div className="bg-green-900/30 p-4 rounded-lg border-l-4 border-green-400">
                                     <h4 className="font-bold text-white mb-2">⚖️ Litter Weight</h4>
                                     <p className="text-sm text-gray-300"><strong>What:</strong> Weight of litter you collected</p>
-                                    <p className="text-sm text-gray-300"><strong>Why:</strong> To calculate $P51 payment</p>
+                                    <p className="text-sm text-gray-300"><strong>Why:</strong> To calculate P51 payment</p>
                                     <p className="text-sm text-gray-300"><strong>Who sees it:</strong> You and the public leaderboard (optional)</p>
                                 </div>
 
@@ -118,7 +118,7 @@ export default function PrivacyPolicyPage() {
                                         <ul className="text-xs text-gray-300 space-y-1">
                                             <li>• <strong className="text-white">We're NOT tracking YOU.</strong> We're tracking CORPORATE WASTE.</li>
                                             <li>• <strong className="text-white">Your identity stays private.</strong> Only the pollution data is public.</li>
-                                            <li>• <strong className="text-white">You can opt out.</strong> Clean for $P51 without contributing to corporate database.</li>
+                                            <li>• <strong className="text-white">You can opt out.</strong> Clean for P51 without contributing to corporate database.</li>
                                             <li>• <strong className="text-white">Surveillance tech FOR accountability,</strong> not FOR control.</li>
                                         </ul>
                                     </div>
@@ -306,7 +306,7 @@ export default function PrivacyPolicyPage() {
                                 </div>
                                 <div className="bg-gray-900/50 p-3 rounded-lg">
                                     <p className="text-white font-bold text-sm">Revolut (Payment Processing)</p>
-                                    <p className="text-xs text-gray-400">For $P51 → fiat conversions. Sees bank details only when you convert.</p>
+                                    <p className="text-xs text-gray-400">For P51 → fiat conversions. Sees bank details only when you convert.</p>
                                 </div>
                             </div>
                         </section>
@@ -338,7 +338,7 @@ export default function PrivacyPolicyPage() {
                                         We collect ONLY the minimum data needed to:
                                         <ul className="mt-2 space-y-1 ml-4">
                                             <li>1. Verify cleanups are real (photo hash + weight)</li>
-                                            <li>2. Calculate $P51 rewards fairly</li>
+                                            <li>2. Calculate P51 rewards fairly</li>
                                             <li>3. Prevent fraud (duplicate photos, fake locations)</li>
                                         </ul>
                                     </p>

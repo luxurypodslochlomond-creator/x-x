@@ -134,7 +134,7 @@ export default function ArtistSoulCardPage() {
                             <CardContent className="p-6 text-center">
                                 <Heart className="w-12 h-12 text-green-400 mx-auto mb-4" />
                                 <p className="text-4xl font-black text-white">{estimatedFundSupport.toLocaleString()}</p>
-                                <p className="text-sm text-gray-300 mt-2 font-mono">$P51 from Fund</p>
+                                <p className="text-sm text-gray-300 mt-2 font-mono">P51 from Fund</p>
                                 <p className="text-xs text-gray-400 mt-1">The family supports you</p>
                             </CardContent>
                         </Card>
@@ -149,7 +149,7 @@ export default function ArtistSoulCardPage() {
                             <CardContent className="p-6 text-center">
                                 <DollarSign className="w-12 h-12 text-pink-400 mx-auto mb-4" />
                                 <p className="text-4xl font-black text-white">{directLove.toLocaleString()}</p>
-                                <p className="text-sm text-gray-300 mt-2 font-mono">$P51 from Listeners</p>
+                                <p className="text-sm text-gray-300 mt-2 font-mono">P51 from Listeners</p>
                                 <p className="text-xs text-gray-400 mt-1">Direct love transmissions</p>
                             </CardContent>
                         </Card>
@@ -166,7 +166,7 @@ export default function ArtistSoulCardPage() {
                     <p className="text-6xl font-black bg-gradient-to-r from-amber-400 to-pink-500 bg-clip-text text-transparent">
                         {totalEarnings.toLocaleString()}
                     </p>
-                    <p className="text-2xl font-mono text-gray-300 mt-2">$P51</p>
+                    <p className="text-2xl font-mono text-gray-300 mt-2">P51</p>
                     <p className="text-sm text-gray-400 mt-4">
                         = {estimatedFundSupport.toLocaleString()} (fund) + {directLove.toLocaleString()} (listeners)
                     </p>
@@ -192,7 +192,7 @@ export default function ArtistSoulCardPage() {
                                         <p className="text-sm text-gray-400 mt-1">{track.frequency_type || 'Creation'}</p>
                                         <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
                                             <span>{(track.play_count || 0).toLocaleString()} transmissions</span>
-                                            <span>{(track.total_earned_p51 || 0).toLocaleString()} $P51</span>
+                                            <span>{(track.total_earned_p51 || 0).toLocaleString()} P51</span>
                                         </div>
                                     </div>
                                 </CardContent>

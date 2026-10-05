@@ -1636,7 +1636,7 @@ export default function ConsciousnessWhitepaperPage() {
                                         <ul className="mt-2 ml-4 space-y-1">
                                             <li>• Create new features</li>
                                             <li>• Submit proposals (like anyone)</li>
-                                            <li>• Earn $P51 through cleanups</li>
+                                            <li>• Earn P51 through cleanups</li>
                                             <li>• Code, design, heal, teach</li>
                                             <li>• Be part of missions</li>
                                         </ul>

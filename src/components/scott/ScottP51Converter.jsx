@@ -7,7 +7,7 @@ import { base44 } from '@/api/base44Client';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 /**
- * KINGDOM51 × $P51 CONVERTER
+ * KINGDOM51 × P51 CONVERTER
  * Artists convert earnings → love currency
  * Spend on studio, gear, visas, other artists
  * ZERO EXTRACTION - value stays in family
@@ -18,7 +18,7 @@ export default function ScottP51Converter() {
     const [amountGBP, setAmountGBP] = useState('');
     const [convertSuccess, setConvertSuccess] = useState(false);
 
-    // Conversion rate: £1 = 100 $P51 (can adjust)
+    // Conversion rate: £1 = 100 P51 (can adjust)
     const conversionRate = 100;
     const totalP51 = amountGBP ? parseFloat(amountGBP) * conversionRate : 0;
     const uf51Fee = totalP51 * 0.1; // 10% to UF51 verified healing
@@ -42,7 +42,7 @@ export default function ScottP51Converter() {
             const transaction = await base44.entities.Transaction.create({
                 amount: data.amountP51,
                 type: 'convert_fiat',
-                description: `Converted £${data.amountGBP} to ${data.amountP51} $P51 (90% to artist, 10% to UF51 healing)`,
+                description: `Converted £${data.amountGBP} to ${data.amountP51} P51 (90% to artist, 10% to UF51 healing)`,
                 status: 'completed',
                 from_currency: 'GBP',
                 to_currency: 'P51',
@@ -93,7 +93,7 @@ export default function ScottP51Converter() {
                             <Sparkles className="w-3 h-3 text-yellow-400 absolute -top-1 -right-1" />
                         </div>
                         <div className="text-left">
-                            <p className="text-white text-sm font-black font-mono">CONVERT TO $P51</p>
+                            <p className="text-white text-sm font-black font-mono">CONVERT TO P51</p>
                             <p className="text-pink-400 text-xs font-mono">Your money → Love currency</p>
                         </div>
                     </div>
@@ -142,7 +142,7 @@ export default function ScottP51Converter() {
                             <div className="bg-pink-900/20 border border-pink-500/30 rounded-lg p-4 mb-6">
                                 <p className="text-pink-400 font-bold text-xs font-mono mb-2">WHY CONVERT?</p>
                                 <ul className="text-gray-400 text-xs font-mono space-y-1">
-                                    <li>• Pay other artists in $P51</li>
+                                    <li>• Pay other artists in P51</li>
                                     <li>• Book studio time</li>
                                     <li>• Buy gear from family</li>
                                     <li>• Zero extraction - stays in music</li>
@@ -169,7 +169,7 @@ export default function ScottP51Converter() {
                                 </div>
 
                                 <div>
-                                    <label className="text-pink-400 text-xs font-mono font-bold mb-2 block">YOU RECEIVE: $P51</label>
+                                    <label className="text-pink-400 text-xs font-mono font-bold mb-2 block">YOU RECEIVE: P51</label>
                                     <div className="bg-pink-900/20 border-2 border-pink-500 rounded-lg p-4">
                                         <p className="text-pink-400 text-3xl font-black text-center font-mono">
                                             {amountP51.toLocaleString()}
@@ -195,7 +195,7 @@ export default function ScottP51Converter() {
                                 )}
 
                                 <p className="text-gray-500 text-xs font-mono text-center">
-                                    Rate: £1 = {conversionRate} $P51
+                                    Rate: £1 = {conversionRate} P51
                                 </p>
                             </div>
 
@@ -205,7 +205,7 @@ export default function ScottP51Converter() {
                                 disabled={!amountGBP || parseFloat(amountGBP) <= 0 || convertMutation.isPending}
                                 className="w-full mt-6 bg-pink-500 hover:bg-pink-400 text-black font-black text-lg py-6 font-mono"
                             >
-                                {convertMutation.isPending ? 'CONVERTING...' : 'CONVERT TO $P51 ❤️'}
+                                {convertMutation.isPending ? 'CONVERTING...' : 'CONVERT TO P51 ❤️'}
                             </Button>
 
                             {/* INFO */}

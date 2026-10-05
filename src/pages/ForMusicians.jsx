@@ -266,7 +266,7 @@ export default function ForMusiciansPage() {
                                         90% goes to YOU. No label cuts. No streaming crumbs.
                                     </p>
                                     <p className="text-sm text-gray-300 font-mono mb-2">
-                                        Listeners spend $P51 (earned from healing Earth) directly on your music.
+                                        Listeners spend P51 (earned from healing Earth) directly on your music.
                                     </p>
                                     <p className="text-xs text-purple-300 font-mono italic">
                                         10% to missions (water, food, Earth). Your email = your wallet.
@@ -279,7 +279,7 @@ export default function ForMusiciansPage() {
                                     </div>
                                     <h3 className="text-lg font-black font-mono text-cyan-400 mb-2">P2P sharing with payment</h3>
                                     <p className="text-base text-white font-mono mb-2">
-                                        We hide your $P51 wallet IN the music file. Friend shares your track via Bluetooth/email → you get paid when they connect.
+                                        We hide your P51 wallet IN the music file. Friend shares your track via Bluetooth/email → you get paid when they connect.
                                     </p>
                                     <p className="text-sm text-gray-300 font-mono mb-2">
                                         One FLAC file = music + payment system. Viral spread + artist payment combined.
@@ -377,7 +377,7 @@ export default function ForMusiciansPage() {
                             <div className="space-y-4 text-lg font-mono">
                                 <p className="flex items-start gap-3">
                                     <span className="text-2xl text-green-400">✓</span>
-                                    <span><strong className="text-white text-xl">You keep 90%</strong> of all $P51 earned</span>
+                                    <span><strong className="text-white text-xl">You keep 90%</strong> of all P51 earned</span>
                                 </p>
                                 <p className="flex items-start gap-3">
                                     <span className="text-2xl text-green-400">✓</span>
@@ -852,7 +852,7 @@ export default function ForMusiciansPage() {
                             <p className="text-white font-bold">What happens next:</p>
                             <div className="space-y-2 text-left text-sm text-gray-300">
                                 <p>✅ Your track is live on Radio</p>
-                                <p>✅ You earn $P51 from every play</p>
+                                <p>✅ You earn P51 from every play</p>
                                 <p>✅ 90% goes to you, 10% to missions</p>
                                 <p>✅ Check your earnings anytime</p>
                             </div>

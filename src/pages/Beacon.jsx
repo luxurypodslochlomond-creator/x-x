@@ -649,7 +649,7 @@ export default function BeaconPage() {
             >
               <Leaf className="w-12 h-12 mx-auto mb-2 text-green-400" />
               <p className="text-xl font-black font-mono text-green-400">CLEAN TOGETHER</p>
-              <p className="text-green-300/70 text-xs font-mono mt-1">Heal Earth side by side • Earn $P51</p>
+              <p className="text-green-300/70 text-xs font-mono mt-1">Heal Earth side by side • Earn P51</p>
             </motion.button>
 
             {/* LISTEN TOGETHER */}

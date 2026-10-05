@@ -571,7 +571,7 @@ export default function Prof51ZeroServerArchitecture() {
                             <div className="bg-pink-900/20 border border-pink-500/30 rounded p-2">
                                 <p className="text-white font-bold mb-1">🌍 CLEANUP (Earth healing)</p>
                                 <p className="text-gray-300">→ Proof photos stored distributed</p>
-                                <p className="text-gray-300">→ $P51 ledger = blockchain (no servers)</p>
+                                <p className="text-gray-300">→ P51 ledger = blockchain (no servers)</p>
                             </div>
                         </div>
 

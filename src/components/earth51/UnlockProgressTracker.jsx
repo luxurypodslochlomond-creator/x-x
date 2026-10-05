@@ -177,7 +177,7 @@ export default function UnlockProgressTracker({ totalCleanups = 0 }) {
       <div className="bg-gradient-to-r from-pink-900/30 to-purple-900/30 border-2 border-pink-500 p-3">
         <p className="text-pink-400 font-black text-xs font-mono mb-1">NO CREDIT SYSTEM</p>
         <p className="text-white font-mono text-xs leading-relaxed">
-          Every cleanup = real $P51 today. Every cleanup unlocks something real. Keep going. The rewards never stop. ♾️❤️
+          Every cleanup = real P51 today. Every cleanup unlocks something real. Keep going. The rewards never stop. ♾️❤️
         </p>
       </div>
     </div>

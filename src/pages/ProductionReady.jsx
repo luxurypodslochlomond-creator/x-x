@@ -77,7 +77,7 @@ export default function ProductionReady() {
                             <p className="text-cyan-400 font-black text-sm mb-3">⚡ AUTO-SYNC WHEN ONLINE:</p>
                             <ul className="space-y-1 text-xs text-white">
                                 <li>✓ Cleanups upload to blockchain</li>
-                                <li>✓ $P51 balance updates</li>
+                                <li>✓ P51 balance updates</li>
                                 <li>✓ New music downloads</li>
                                 <li>✓ AI51 memory syncs</li>
                                 <li>✓ Community feed refreshes</li>
@@ -289,7 +289,7 @@ export default function ProductionReady() {
                             <ul className="space-y-1 text-xs text-gray-300">
                                 <li>✓ Cleanup tracking (photos + GPS)</li>
                                 <li>✓ AI fraud detection</li>
-                                <li>✓ $P51 instant rewards</li>
+                                <li>✓ P51 instant rewards</li>
                                 <li>✓ Offline-first logging</li>
                                 <li>✓ Community feed</li>
                                 <li>✓ Leaderboards</li>

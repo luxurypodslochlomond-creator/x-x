@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
@@ -16,7 +15,7 @@ const SDGs = [
   { number: 7, title: "Clean Energy", how: "Carbon-negative blockchain (Algorand). Technology with environmental conscience. Teaching others to choose green tech.", icon: Zap, color: "#FCC30B", metric: "carbon_negative", strength: "GOOD" },
   { number: 8, title: "Decent Work", how: "Cleaning Earth = viable income. Instant payment. Zero exploitation.", icon: Users, color: "#A21942", metric: "income_earned", strength: "STRONG" },
   { number: 9, title: "Industry Innovation", how: "Love currency. Zero-loss transmission (Shannon's theorem). AI + human verification. Completely new economic model. Open source = technology transfer.", icon: Zap, color: "#FD6925", metric: "tech_innovation", strength: "GOOD" },
-  { number: 10, title: "Reduced Inequalities", how: "Same reward globally. 1kg = 10 $P51. Scotland or Somalia. Equal dignity.", icon: Heart, color: "#DD1367", metric: "global_equality", strength: "STRONG" },
+  { number: 10, title: "Reduced Inequalities", how: "Same reward globally. 1kg = 10 P51. Scotland or Somalia. Equal dignity.", icon: Heart, color: "#DD1367", metric: "global_equality", strength: "STRONG" },
   { number: 11, title: "Sustainable Cities", how: "Communities clean their streets. Earn value. Own their environment.", icon: Globe, color: "#FD9D24", metric: "city_cleanups", strength: "GOOD" },
   { number: 12, title: "Responsible Consumption", how: "Circular economy. Salvage protocol. Value what exists before buying new.", icon: Leaf, color: "#BF8B2E", metric: "items_salvaged", strength: "GOOD" },
   { number: 13, title: "Climate Action", how: "Direct action = direct payment. Every kilogram tracked. Cryptographic proof.", icon: Leaf, color: "#3F7E44", metric: "carbon_prevented", strength: "STRONG" },
@@ -34,7 +33,7 @@ const SDGCard = ({ sdg, expanded, onClick, liveData }) => {
             case "people_paid":
                 return `${liveData.totalUsers.toLocaleString()} people paid`;
             case "income_earned":
-                return `${liveData.totalTokens.toLocaleString()} $P51 earned`;
+                return `${liveData.totalTokens.toLocaleString()} P51 earned`;
             case "all_users":
                 return `${liveData.totalUsers.toLocaleString()} souls equal`;
             case "beach_cleanups":
@@ -172,7 +171,7 @@ CONTRIBUTING TO ALL 17 UN SUSTAINABLE DEVELOPMENT GOALS 2030
 ZERO GREENWASHING. MATHEMATICALLY VERIFIED PROOF.
 
 Total Weight Cleaned: ${liveData.totalWeight.toLocaleString()} kg
-Total Value Created: ${liveData.totalTokens.toLocaleString()} $P51
+Total Value Created: ${liveData.totalTokens.toLocaleString()} P51
 Total People Paid: ${liveData.totalUsers.toLocaleString()}
 Beach Cleanups: ${liveData.beachCleanups}
 City Cleanups: ${liveData.streetCleanups}
@@ -368,7 +367,7 @@ Live Dashboard: uf51.love/UNSDGAlignment
                                             <p className="text-xs text-gray-300 mb-2"><strong>What it does:</strong></p>
                                             <ul className="text-xs text-gray-400 space-y-1 ml-4 list-disc list-inside">
                                                 <li>Every cleanup visible on map</li>
-                                                <li>Every $P51 transaction traceable</li>
+                                                <li>Every P51 transaction traceable</li>
                                                 <li>Total impact updated live</li>
                                                 <li>Zero hidden data</li>
                                             </ul>

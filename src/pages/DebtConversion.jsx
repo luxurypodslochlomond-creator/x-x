@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
@@ -45,7 +44,7 @@ export default function DebtConversion() {
     });
 
     const queryClient = useQueryClient();
-    const P51_RATE = 0.10; // 1 $P51 = £0.10
+    const P51_RATE = 0.10; // 1 P51 = £0.10
 
     // Set document title
     useEffect(() => {

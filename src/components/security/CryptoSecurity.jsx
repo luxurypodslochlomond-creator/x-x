@@ -1,6 +1,6 @@
 /**
  * CRYPTOGRAPHIC SECURITY MODULE
- * Makes $P51 system UNFUCKABLE using Web Crypto API
+ * Makes P51 system UNFUCKABLE using Web Crypto API
  * 
  * Features:
  * - ECDSA P-256 + Post-Quantum Hybrid (Kyber + Dilithium ready)

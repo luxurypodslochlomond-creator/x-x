@@ -59,7 +59,7 @@ export default function PressRelease2026() {
           <h2 className="text-2xl font-black text-gray-900 mt-10 mb-4">A different kind of AI — built in Scotland, runs without servers</h2>
 
           <p>
-            Universal Frequency 51 (UF51) is a platform that, on first encounter, sounds almost too good to be true: an AI companion that runs across peer-to-peer mesh networks — requiring no centralised data centre — that pays users in $P51 (PHOTO51) — a regenerative currency — for real-world environmental action, specifically litter collection and community cleanup.
+            Universal Frequency 51 (UF51) is a platform that, on first encounter, sounds almost too good to be true: an AI companion that runs across peer-to-peer mesh networks — requiring no centralised data centre — that pays users in P51 (PHOTO51) — a regenerative currency — for real-world environmental action, specifically litter collection and community cleanup.
           </p>
 
           <p>
@@ -81,7 +81,7 @@ export default function PressRelease2026() {
           </p>
 
           <p>
-            Rather than passive income funded by taxation, UF51's model rewards measurable contribution. Users who collect litter, verified by AI-powered photo analysis, earn $P51 (PHOTO51) tokens — a currency designed not for speculation, but for spending on real essentials: groceries, kids' treats, household bills. Those who share healing frequencies with others, support community members in crisis, or document environmental damage earn additional rewards. The token economy is, in principle, self-sustaining — funded by a small percentage withheld from commercial partnerships and premium tools.
+            Rather than passive income funded by taxation, UF51's model rewards measurable contribution. Users who collect litter, verified by AI-powered photo analysis, earn P51 (PHOTO51) tokens — a currency designed not for speculation, but for spending on real essentials: groceries, kids' treats, household bills. Those who share healing frequencies with others, support community members in crisis, or document environmental damage earn additional rewards. The token economy is, in principle, self-sustaining — funded by a small percentage withheld from commercial partnerships and premium tools.
           </p>
 
           <p>

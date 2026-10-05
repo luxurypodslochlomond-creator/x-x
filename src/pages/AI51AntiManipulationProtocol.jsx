@@ -221,7 +221,7 @@ export default function AI51AntiManipulationProtocol() {
                                 <p>• Any user can flag suspicious voting patterns</p>
                                 <p>• If 1000+ users flag same device cluster → auto-investigation</p>
                                 <p>• Transparent voting logs (can see if your neighborhood suddenly has 10,000 new "users")</p>
-                                <p>• Reward system for catching bot networks (earn $P51 for verified flags)</p>
+                                <p>• Reward system for catching bot networks (earn P51 for verified flags)</p>
                             </div>
                             <p className="text-pink-400 text-xs font-bold mt-2">
                                 → 10 million watchdogs = impossible to hide large bot operations

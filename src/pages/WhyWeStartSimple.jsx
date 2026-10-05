@@ -58,7 +58,7 @@ export default function WhyWeStartSimplePage() {
 
             <div className="space-y-4">
               <div className="bg-black/40 p-6 rounded-xl border border-green-500/30">
-                <p className="text-green-400 font-bold text-lg mb-2">✅ What Makes $P51 Real:</p>
+                <p className="text-green-400 font-bold text-lg mb-2">✅ What Makes P51 Real:</p>
                 <ul className="space-y-2 text-gray-300">
                   <li>• 1kg litter = 1 <P51Symbol showTooltip={false} /> (verifiable action)</li>
                   <li>• AI51 verifies every photo + GPS instantly</li>

@@ -135,7 +135,7 @@ export default function GMTBridgePage() {
           <CardContent className="p-8 text-center space-y-4">
             <Heart className="w-16 h-16 text-pink-400 mx-auto" />
             <h2 className="text-2xl font-black">Sign In Required</h2>
-            <p className="text-gray-300">Connect to trade $P51 with the family</p>
+            <p className="text-gray-300">Connect to trade P51 with the family</p>
             <Button
               onClick={() => base44.auth.redirectToLogin(window.location.pathname)}
               className="w-full bg-pink-600 hover:bg-pink-700"
@@ -162,7 +162,7 @@ export default function GMTBridgePage() {
             <ArrowLeftRight className="w-12 h-12 text-cyan-400" />
             <h1 className="text-5xl font-black">P2P BRIDGE</h1>
           </div>
-          <p className="text-xl text-gray-300">Trade $P51 directly. Zero APIs. Just love.</p>
+          <p className="text-xl text-gray-300">Trade P51 directly. Zero APIs. Just love.</p>
           
           <Card className="bg-amber-900/30 border-2 border-amber-500/50 max-w-2xl mx-auto">
             <CardContent className="p-4">
@@ -171,7 +171,7 @@ export default function GMTBridgePage() {
                 <div className="text-left space-y-2 text-sm">
                   <p className="text-amber-300 font-bold">How it works:</p>
                   <ul className="text-gray-300 space-y-1 list-disc ml-4 text-xs">
-                    <li>List $P51 for sale OR list cash to buy $P51</li>
+                    <li>List P51 for sale OR list cash to buy P51</li>
                     <li>Someone sees your listing → contacts you directly</li>
                     <li>You arrange payment yourselves (bank transfer, PayPal, cash, whatever)</li>
                     <li>Mark trade complete when done</li>
@@ -228,7 +228,7 @@ export default function GMTBridgePage() {
           <div className="space-y-4">
             <h2 className="text-2xl font-black text-green-400 flex items-center gap-2">
               <TrendingUp className="w-6 h-6" />
-              Selling $P51 ({sellListings.length})
+              Selling P51 ({sellListings.length})
             </h2>
             
             {sellListings.length === 0 ? (
@@ -250,13 +250,13 @@ export default function GMTBridgePage() {
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-2xl font-black text-green-400">
-                              {listing.p51_amount} $P51
+                              {listing.p51_amount} P51
                             </p>
                             <p className="text-xl text-white">
                               → £{listing.fiat_amount}
                             </p>
                             <p className="text-xs text-gray-400">
-                              £{(listing.fiat_amount / listing.p51_amount).toFixed(2)} per $P51
+                              £{(listing.fiat_amount / listing.p51_amount).toFixed(2)} per P51
                             </p>
                           </div>
                           <div className="text-right">
@@ -325,7 +325,7 @@ export default function GMTBridgePage() {
           <div className="space-y-4">
             <h2 className="text-2xl font-black text-blue-400 flex items-center gap-2">
               <Users className="w-6 h-6" />
-              Buying $P51 ({buyListings.length})
+              Buying P51 ({buyListings.length})
             </h2>
             
             {buyListings.length === 0 ? (
@@ -350,10 +350,10 @@ export default function GMTBridgePage() {
                               £{listing.fiat_amount}
                             </p>
                             <p className="text-xl text-white">
-                              → {listing.p51_amount} $P51
+                              → {listing.p51_amount} P51
                             </p>
                             <p className="text-xs text-gray-400">
-                              £{(listing.fiat_amount / listing.p51_amount).toFixed(2)} per $P51
+                              £{(listing.fiat_amount / listing.p51_amount).toFixed(2)} per P51
                             </p>
                           </div>
                           <div className="text-right">
@@ -462,8 +462,8 @@ export default function GMTBridgePage() {
                   >
                     <div>
                       <TrendingUp className="w-8 h-8 mx-auto mb-2" />
-                      <p className="font-bold">SELL $P51</p>
-                      <p className="text-xs text-gray-300">I have $P51, need cash</p>
+                      <p className="font-bold">SELL P51</p>
+                      <p className="text-xs text-gray-300">I have P51, need cash</p>
                     </div>
                   </Button>
                   <Button
@@ -476,8 +476,8 @@ export default function GMTBridgePage() {
                   >
                     <div>
                       <Users className="w-8 h-8 mx-auto mb-2" />
-                      <p className="font-bold">BUY $P51</p>
-                      <p className="text-xs text-gray-300">I have cash, need $P51</p>
+                      <p className="font-bold">BUY P51</p>
+                      <p className="text-xs text-gray-300">I have cash, need P51</p>
                     </div>
                   </Button>
                 </div>
@@ -486,7 +486,7 @@ export default function GMTBridgePage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-sm font-bold text-gray-300 mb-2">
-                      $P51 Amount
+                      P51 Amount
                     </label>
                     <Input
                       type="number"
@@ -514,7 +514,7 @@ export default function GMTBridgePage() {
 
                 {formData.p51_amount && formData.fiat_amount && (
                   <p className="text-sm text-cyan-400 font-mono">
-                    Rate: £{(parseFloat(formData.fiat_amount) / parseFloat(formData.p51_amount)).toFixed(2)} per $P51
+                    Rate: £{(parseFloat(formData.fiat_amount) / parseFloat(formData.p51_amount)).toFixed(2)} per P51
                   </p>
                 )}
 

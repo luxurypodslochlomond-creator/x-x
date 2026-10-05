@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
@@ -206,7 +205,7 @@ export default function BluetoothShareModal({ isOpen, onClose, track }) {
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <span className="text-cyan-400 flex-shrink-0">✓</span>
-                                        <span>When recipient connects, artist gets $P51 automatically.</span>
+                                        <span>When recipient connects, artist gets P51 automatically.</span>
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <span className="text-cyan-400 flex-shrink-0">✓</span>

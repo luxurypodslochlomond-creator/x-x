@@ -48,7 +48,7 @@ export class LocalLedger {
         // DOUBLE-SPEND CHECK
         const availableBalance = ledger.balance - ledger.pending_out;
         if (amount > availableBalance) {
-            throw new Error(`Insufficient balance. Available: ${availableBalance.toFixed(1)} $P51`);
+            throw new Error(`Insufficient balance. Available: ${availableBalance.toFixed(1)} P51`);
         }
 
         // Lock funds

@@ -33,7 +33,7 @@ export default function Earth51Terms() {
           <div className="space-y-2 text-white font-mono text-xs">
             <p>✓ Take photos of litter you collect</p>
             <p>✓ AI51 checks it's real</p>
-            <p>✓ Earn $P51 tokens (1kg = 1 $P51)</p>
+            <p>✓ Earn P51 tokens (1kg = 1 P51)</p>
             <p>✓ Spend in shop or save up!</p>
             <p>✓ Always ask a parent before cleaning</p>
             <p>✓ Never touch dangerous stuff (needles, glass, etc)</p>
@@ -50,7 +50,7 @@ export default function Earth51Terms() {
             <p><strong>EDUCATIONAL:</strong> Teaches AI literacy, environmental responsibility</p>
             <p><strong>NO ADS:</strong> Zero commercial tracking or advertising</p>
             <p><strong>OPEN SOURCE:</strong> Code publicly auditable</p>
-            <p><strong>TOKENS:</strong> $P51 stored locally, optional account for cloud sync</p>
+            <p><strong>TOKENS:</strong> P51 stored locally, optional account for cloud sync</p>
           </div>
         </div>
 

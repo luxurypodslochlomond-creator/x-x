@@ -67,8 +67,8 @@ export async function sendTransferNotification(recipient, amount, sender) {
     if (Notification.permission !== 'granted') return;
 
     try {
-        new Notification('$P51 Received!', {
-            body: `+${amount} $P51 from ${sender}`,
+        new Notification('P51 Received!', {
+            body: `+${amount} P51 from ${sender}`,
             icon: '/icon-192x192.png',
             badge: '/icon-96x96.png',
             tag: 'p51-transfer',

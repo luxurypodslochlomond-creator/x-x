@@ -12,7 +12,7 @@ import { base44 } from '@/api/base44Client';
  * - Negotiating deal → AI51 listens, team can join to help
  * - Desert festival → zero internet, full team comms working
  * - Share artist updates → everyone sees instantly
- * - Trade $P51 credits between team P2P
+ * - Trade P51 credits between team P2P
  * 
  * ALWAYS THERE FOR THE TEAM ❤️
  */
@@ -496,7 +496,7 @@ export default function ScottP2PSync() {
                         <p>✓ Voice/video calls OFFLINE</p>
                         <p>✓ AI51 listens + helps with deals</p>
                         <p>✓ Works at festivals (zero internet)</p>
-                        <p>✓ Trade $P51 credits between crew</p>
+                        <p>✓ Trade P51 credits between crew</p>
                     </div>
                 </div>
             )}

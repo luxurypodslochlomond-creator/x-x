@@ -320,7 +320,7 @@ export default function OpenSourceDeclaration() {
                             <p className="text-pink-400 font-black text-sm mb-2">⚠️ ZERO EXTRACTION FROM UF51:</p>
                             <p className="text-white text-xs mb-2">
                                 White label = <strong>YOU build your own thing</strong> using our code. 
-                                You DON'T extract from UF51's $P51 ecosystem, our artists, or our community.
+                                You DON'T extract from UF51's P51 ecosystem, our artists, or our community.
                             </p>
                             <p className="text-cyan-400 text-xs">
                                 Fork the code. Build your platform. Keep 100% of YOUR revenue. 

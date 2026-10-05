@@ -22,7 +22,7 @@ export default function SMSInvite({ amount, message, onSuccess }) {
             // DOUBLE-SPEND CHECK
             const availableBalance = LocalLedger.getBalance();
             if (parseFloat(amount) > availableBalance) {
-                throw new Error(`Insufficient balance. Available: ${availableBalance.toFixed(1)} $P51`);
+                throw new Error(`Insufficient balance. Available: ${availableBalance.toFixed(1)} P51`);
             }
 
             const user = await base44.auth.me();
@@ -58,7 +58,7 @@ export default function SMSInvite({ amount, message, onSuccess }) {
             });
 
             // Send SMS via integration
-            const smsText = `${user.full_name || 'Someone'} sent you ${amount} $P51! 💰\n\nClaim: uf51.love/claim/${claimCode}\n\nGet paid to heal Earth ♾️`;
+            const smsText = `${user.full_name || 'Someone'} sent you ${amount} P51! 💰\n\nClaim: uf51.love/claim/${claimCode}\n\nGet paid to heal Earth ♾️`;
 
             await base44.integrations.Core.SendEmail({
                 to: user.email, // For now - would use SMS API in production

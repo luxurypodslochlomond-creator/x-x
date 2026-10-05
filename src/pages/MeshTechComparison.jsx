@@ -57,7 +57,7 @@ export default function MeshTechComparison() {
         {
             feature: 'Business Model',
             bitchat: 'Open source, free forever',
-            uf51: 'Open source + love economy (earn $P51)',
+            uf51: 'Open source + love economy (earn P51)',
             winner: 'tie',
             note: 'Both non-extractive, both unstoppable'
         },
@@ -210,7 +210,7 @@ export default function MeshTechComparison() {
                             <div className="space-y-1 text-xs text-gray-300">
                                 <p>✓ Student life coordination (lost items, meetups, study groups)</p>
                                 <p>✓ Healing frequencies + biometric feedback</p>
-                                <p>✓ P2P economy ($P51 payments offline)</p>
+                                <p>✓ P2P economy (P51 payments offline)</p>
                                 <p>✓ Love-first design (warm, helpful, family vibes)</p>
                                 <p className="text-cyan-400 font-bold mt-2">TARGET: Students, families, artists, disaster zones</p>
                             </div>
@@ -323,7 +323,7 @@ export default function MeshTechComparison() {
                                 <p className="text-green-400">+ AI translation (multi-language)</p>
                                 <p className="text-green-400">+ Biometric feedback (HRV)</p>
                                 <p className="text-green-400">+ Student safety protocols</p>
-                                <p className="text-green-400">+ $P51 economy integration</p>
+                                <p className="text-green-400">+ P51 economy integration</p>
                             </div>
                         </div>
                     </div>

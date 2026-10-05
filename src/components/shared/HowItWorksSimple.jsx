@@ -13,7 +13,7 @@ export default function HowItWorksSimple({ compact = false }) {
         },
         {
             emoji: "💚",
-            title: "2. Get $P51",
+            title: "2. Get P51",
             description: "Real money for real healing",
             color: "from-pink-500 to-rose-600",
             glow: "rgba(236, 72, 153, 0.3)"
@@ -90,8 +90,8 @@ export default function HowItWorksSimple({ compact = false }) {
                 <div className="flex items-start gap-3">
                     <Heart className="w-5 h-5 text-pink-400 flex-shrink-0 mt-0.5" />
                     <div>
-                        <p className="text-white font-bold">$P51 = Real money</p>
-                        <p className="text-gray-400">1kg = 1 $P51. Building the bridge to spend it.</p>
+                        <p className="text-white font-bold">P51 = Real money</p>
+                        <p className="text-gray-400">1kg = 1 P51. Building the bridge to spend it.</p>
                     </div>
                 </div>
 
@@ -118,7 +118,7 @@ export default function HowItWorksSimple({ compact = false }) {
                         <span className="text-xl text-teal-400">→</span>
                         <div className="bg-pink-500/20 rounded-lg p-3 flex-1 max-w-[140px] text-center">
                             <p className="text-2xl mb-1">💰</p>
-                            <p className="text-xs text-pink-300 font-bold">Get 1 $P51</p>
+                            <p className="text-xs text-pink-300 font-bold">Get 1 P51</p>
                         </div>
                     </div>
 
@@ -153,7 +153,7 @@ export default function HowItWorksSimple({ compact = false }) {
                     <div className="bg-[#0a0f1a]/60 rounded-lg p-4 border border-teal-500/20">
                         <p className="text-sm text-white font-bold mb-2 text-center">Want to send extra love?</p>
                         <div className="bg-amber-900/20 rounded-lg p-3 border border-amber-500/30">
-                            <p className="text-amber-300 font-bold mb-1 text-sm">💝 Send $P51 directly</p>
+                            <p className="text-amber-300 font-bold mb-1 text-sm">💝 Send P51 directly</p>
                             <p className="text-gray-400 text-xs">Artist gets 90%. Earth gets 10%.</p>
                             <p className="text-amber-400 text-xs mt-2 font-bold">Bridge coming → real money soon.</p>
                         </div>
@@ -166,14 +166,14 @@ export default function HowItWorksSimple({ compact = false }) {
 
             {/* SIMPLE UNIVERSAL RATE */}
             <div className="bg-gradient-to-r from-green-900/20 to-teal-900/20 rounded-xl p-6 border border-green-500/30">
-                <h3 className="text-lg font-black text-white mb-3 text-center">1kg = 1 $P51. Everywhere.</h3>
+                <h3 className="text-lg font-black text-white mb-3 text-center">1kg = 1 P51. Everywhere.</h3>
                 <p className="text-gray-300 text-center text-sm mb-3">
                     <strong className="text-white">Same rate globally.</strong> More buying power where costs are lower.
                 </p>
                 
                 <div className="bg-[#0a0f1a]/60 rounded-lg p-3 text-xs text-gray-400 text-center">
-                    Palestine: 10 $P51 = more bread (lower costs)<br/>
-                    Glasgow: 10 $P51 = less bread (higher costs)<br/>
+                    Palestine: 10 P51 = more bread (lower costs)<br/>
+                    Glasgow: 10 P51 = less bread (higher costs)<br/>
                     <span className="text-green-300 font-bold">Same work. Same currency. Natural fairness.</span>
                 </div>
             </div>
@@ -182,7 +182,7 @@ export default function HowItWorksSimple({ compact = false }) {
             <div className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 rounded-xl p-4 border border-cyan-500/30 text-center">
                 <p className="text-white font-bold mb-2 text-sm">🌉 The Bridge (Coming Soon)</p>
                 <p className="text-gray-300 text-xs">
-                    Building connection so $P51 → real money. <strong className="text-cyan-300">In progress.</strong>
+                    Building connection so P51 → real money. <strong className="text-cyan-300">In progress.</strong>
                 </p>
             </div>
 

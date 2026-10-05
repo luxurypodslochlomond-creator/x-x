@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
@@ -52,7 +51,7 @@ const SendToUser = ({ user, onFinish }) => {
             return;
         }
         if (p51Amount > (user.love_balance || 0)) {
-            setError("You don't have enough $P51 to send.");
+            setError("You don't have enough P51 to send.");
             return;
         }
         
@@ -71,7 +70,7 @@ const SendToUser = ({ user, onFinish }) => {
         return (
             <div className="text-center py-10">
                 <CheckCircle className="w-16 h-16 mx-auto text-green-400" />
-                <h3 className="text-2xl font-bold mt-4">$P51 Transmitted!</h3>
+                <h3 className="text-2xl font-bold mt-4">P51 Transmitted!</h3>
                 <p className="text-gray-400">Your gift is on its way through the cosmos.</p>
             </div>
         );
@@ -87,7 +86,7 @@ const SendToUser = ({ user, onFinish }) => {
                 <Label htmlFor="amount" className="text-lg">Amount to Send</Label>
                 <div className="relative">
                     <Input id="amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0" className="bg-gray-900/50 border-gray-600 pr-20 mt-1" />
-                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none font-mono">$P51</div>
+                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none font-mono">P51</div>
                 </div>
                  <Button type="button" variant="link" onClick={() => setAmount(user.love_balance || 0)} className="text-xs text-cyan-400 p-0 h-auto mt-1">Send all</Button>
             </div>
@@ -98,7 +97,7 @@ const SendToUser = ({ user, onFinish }) => {
             {error && <p className="text-red-500 flex items-center gap-2 text-sm"><AlertTriangle className="w-4 h-4" />{error}</p>}
             <Button type="submit" disabled={isProcessing} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold h-12 text-lg">
                 {isProcessing ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Send className="w-5 h-5 mr-2" />}
-                Transmit $P51
+                Transmit P51
             </Button>
         </form>
     );
@@ -112,7 +111,7 @@ export default function PassItOnPage() {
     });
 
     useEffect(() => {
-        document.title = 'Forging the Sacred Name: $P51 is Our Currency';
+        document.title = 'Forging the Sacred Name: P51 is Our Currency';
     }, []);
 
     if (isLoading) return <QuantumLoader />;
@@ -123,14 +122,14 @@ export default function PassItOnPage() {
                 <header className="text-center mb-8">
                     <Gift className="w-16 h-16 mx-auto text-pink-400 mb-4" />
                     <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-white">Pass It On</h1>
-                    <p className="text-lg text-gray-400">Send your earned $P51 to another soul.</p>
+                    <p className="text-lg text-gray-400">Send your earned P51 to another soul.</p>
                 </header>
 
                 <Card className="bg-black/40 border border-gray-700 rounded-2xl">
                     <CardHeader className="text-center">
-                        <p className="text-gray-400">Your Current $P51 Balance</p>
+                        <p className="text-gray-400">Your Current P51 Balance</p>
                         <CardTitle className="text-4xl font-bold flex items-center justify-center gap-2">
-                            {(user?.love_balance || 0).toLocaleString()} <span className="font-mono">$P51</span>
+                            {(user?.love_balance || 0).toLocaleString()} <span className="font-mono">P51</span>
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="p-6">

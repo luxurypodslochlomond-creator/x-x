@@ -95,7 +95,7 @@ export default function DirectFundingRoutes() {
                     <div className="bg-gradient-to-r from-purple-500/10 to-black border-l-4 border-purple-500 p-4">
                         <p className="text-purple-400 font-bold mb-2">3. QUANTUM PAYMENTS (OUR INNOVATION)</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
-                            <li>• <strong className="text-white">$P51:</strong> Internal currency, 0% fee on transfers</li>
+                            <li>• <strong className="text-white">P51:</strong> Internal currency, 0% fee on transfers</li>
                             <li>• <strong className="text-white">Quantum-secured:</strong> Unhackable, future-proof</li>
                             <li>• <strong className="text-white">Offline-first:</strong> Works in festivals/sheds/anywhere</li>
                             <li>• <strong className="text-white">Love-locked:</strong> Can't be used for extraction/weapons</li>
@@ -187,7 +187,7 @@ export default function DirectFundingRoutes() {
                                 <td className="text-green-400">Zero ✓✓</td>
                             </tr>
                             <tr className="border-b border-gray-800">
-                                <td className="py-2 text-green-400">$P51 P2P</td>
+                                <td className="py-2 text-green-400">P51 P2P</td>
                                 <td className="text-green-400">0% ✓✓</td>
                                 <td className="text-green-400">Instant ✓</td>
                                 <td className="text-green-400">Yes ✓</td>
@@ -223,8 +223,8 @@ export default function DirectFundingRoutes() {
                         <div className="space-y-1 text-xs text-gray-300">
                             <p>1. Creative Scotland grants £50k to UF51 CIC</p>
                             <p>2. CIC takes 10% (£5k) for platform costs</p>
-                            <p>3. Remaining £45k distributed to artists as $P51</p>
-                            <p>4. Artists cash out $P51 → £ via Revolut (1% fee)</p>
+                            <p>3. Remaining £45k distributed to artists as P51</p>
+                            <p>4. Artists cash out P51 → £ via Revolut (1% fee)</p>
                             <p>5. Artist receives £44.5k (89% of original)</p>
                         </div>
                         <p className="text-green-400 text-xs mt-2 font-bold">
@@ -235,11 +235,11 @@ export default function DirectFundingRoutes() {
                     <div className="bg-black border border-cyan-500/30 p-4 rounded">
                         <p className="text-cyan-400 font-bold mb-2">SCENARIO 2: FAN TO ARTIST (P2P)</p>
                         <div className="space-y-1 text-xs text-gray-300">
-                            <p>1. Fan cleans 10kg litter → earns 10 $P51</p>
-                            <p>2. Fan spends 5 $P51 on artist track</p>
-                            <p>3. Artist receives 4.5 $P51 (90%, platform keeps 10%)</p>
+                            <p>1. Fan cleans 10kg litter → earns 10 P51</p>
+                            <p>2. Fan spends 5 P51 on artist track</p>
+                            <p>3. Artist receives 4.5 P51 (90%, platform keeps 10%)</p>
                             <p>4. Artist cashes out → Revolut converts to £ (1%)</p>
-                            <p>5. Or keeps as $P51 to pay producer/studio</p>
+                            <p>5. Or keeps as P51 to pay producer/studio</p>
                         </div>
                         <p className="text-cyan-400 text-xs mt-2 font-bold">
                             → Direct fan-to-artist, 90% reach, instant ✓
@@ -249,14 +249,14 @@ export default function DirectFundingRoutes() {
                     <div className="bg-black border border-pink-500/30 p-4 rounded">
                         <p className="text-pink-400 font-bold mb-2">SCENARIO 3: INTERNATIONAL (QUANTUM)</p>
                         <div className="space-y-1 text-xs text-gray-300">
-                            <p>1. Saudi fan buys 100 $P51 with ﷼450 (via Revolut)</p>
-                            <p>2. Spends 50 $P51 on Scottish artist's album</p>
-                            <p>3. Scottish artist gets 45 $P51 (90%)</p>
-                            <p>4. Artist uses $P51 to pay Japanese producer</p>
+                            <p>1. Saudi fan buys 100 P51 with ﷼450 (via Revolut)</p>
+                            <p>2. Spends 50 P51 on Scottish artist's album</p>
+                            <p>3. Scottish artist gets 45 P51 (90%)</p>
+                            <p>4. Artist uses P51 to pay Japanese producer</p>
                             <p>5. Producer cashes out → ¥ via Wise</p>
                         </div>
                         <p className="text-pink-400 text-xs mt-2 font-bold">
-                            → ﷼ → $P51 → ¥ (zero barriers, multi-currency) ✓
+                            → ﷼ → P51 → ¥ (zero barriers, multi-currency) ✓
                         </p>
                     </div>
 
@@ -264,7 +264,7 @@ export default function DirectFundingRoutes() {
                         <p className="text-green-400 font-bold mb-2">SCENARIO 4: OFFLINE FESTIVAL</p>
                         <div className="space-y-1 text-xs text-gray-300">
                             <p>1. 2 artists at festival (zero internet)</p>
-                            <p>2. Artist A pays Artist B 20 $P51 via WebRTC mesh</p>
+                            <p>2. Artist A pays Artist B 20 P51 via WebRTC mesh</p>
                             <p>3. Quantum-signed, cryptographically secure</p>
                             <p>4. Both phones sync when back online</p>
                             <p>5. Transaction recorded, Artist B can cash out</p>
@@ -323,8 +323,8 @@ export default function DirectFundingRoutes() {
                     <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                         <div>
-                            <p className="text-white font-bold">NOW: $P51 + Stripe working</p>
-                            <p className="text-gray-400 text-xs">UK users earn $P51, cash out to £</p>
+                            <p className="text-white font-bold">NOW: P51 + Stripe working</p>
+                            <p className="text-gray-400 text-xs">UK users earn P51, cash out to £</p>
                         </div>
                     </div>
 
@@ -372,7 +372,7 @@ export default function DirectFundingRoutes() {
                         <p className="text-green-400 font-bold text-xs mb-2">✓ YES - DIRECT FUNDS LEGALLY ROUTED:</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
                             <li>• Grants → CIC → Artists (90% reach)</li>
-                            <li>• P2P → $P51 → Artists (90% reach)</li>
+                            <li>• P2P → P51 → Artists (90% reach)</li>
                             <li>• Fans → Quantum → Artists (90% reach)</li>
                             <li>• International → Multi-currency → Artists (89% reach after conversion)</li>
                         </ul>

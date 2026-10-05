@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
@@ -654,7 +653,7 @@ Where systems that break you don't reach.
                                         <div>
                                             <h3 className="text-white font-bold text-lg mb-1">Sync When Possible</h3>
                                             <p className="text-base text-gray-200">
-                                                When local eventually gets internet (travel, VPN, border crossing) → everything syncs → $P51 credited → artists paid.
+                                                When local eventually gets internet (travel, VPN, border crossing) → everything syncs → P51 credited → artists paid.
                                             </p>
                                         </div>
                                     </div>
@@ -747,7 +746,7 @@ Where systems that break you don't reach.
                                 <div className="bg-yellow-900/30 border-2 border-yellow-500 rounded-lg p-6">
                                     <h3 className="text-yellow-300 font-bold mb-3 text-xl">No Instant Payment Offline</h3>
                                     <p className="text-base text-white mb-3 leading-relaxed">
-                                        Can't verify cleanups without internet. Photos stored locally. When you connect → AI verifies → $P51 credited if real.
+                                        Can't verify cleanups without internet. Photos stored locally. When you connect → AI verifies → P51 credited if real.
                                     </p>
                                     <p className="text-sm text-yellow-400 font-bold">
                                         Being offline is not fraud. Being in North Korea is not suspicious. We verify when you sync. Fair. Dignified.

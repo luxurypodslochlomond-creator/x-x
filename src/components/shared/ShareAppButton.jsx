@@ -19,7 +19,7 @@ export default function ShareAppButton({
             title: 'UF51 - Clean Earth, Get Paid, Listen Free',
             text: `💚 I'm using UF51 and thought you'd love it bro:
 
-🌍 Clean Earth → Earn $P51 tokens
+🌍 Clean Earth → Earn P51 tokens
 🎵 Healing music → 100% free, artists get 90%
 💗 Love-based economy → No ads, no bullshit
 

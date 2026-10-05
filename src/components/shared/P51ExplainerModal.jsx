@@ -30,7 +30,7 @@ export default function P51ExplainerModal({ isOpen, onClose }) {
                         <div className="bg-cyan-600 p-4 rounded-t-lg border-b-4 border-cyan-400">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <h2 className="text-3xl font-mono font-black text-white">$P51</h2>
+                                    <h2 className="text-3xl font-mono font-black text-white">P51</h2>
                                     <p className="text-pink-100 font-mono text-sm">Verified Love Currency</p>
                                 </div>
                                 <button
@@ -49,8 +49,8 @@ export default function P51ExplainerModal({ isOpen, onClose }) {
                             <div className="space-y-3">
                                 <h3 className="text-2xl font-mono font-bold text-white">What is it?</h3>
                                 <p className="text-gray-300 font-mono text-sm leading-relaxed">
-                                    $P51 is currency you earn by doing verified actions that heal the planet. 
-                                    Every $P51 represents proof you cleaned 1kg of litter, helped someone, or created beauty.
+                                    P51 is currency you earn by doing verified actions that heal the planet. 
+                                    Every P51 represents proof you cleaned 1kg of litter, helped someone, or created beauty.
                                 </p>
                                 <p className="text-gray-400 font-mono text-sm italic">
                                     Named after Rosalind Franklin's Photo 51 - the image that revealed DNA's structure.
@@ -71,7 +71,7 @@ export default function P51ExplainerModal({ isOpen, onClose }) {
                                         <li>Most crypto = speculation (no real work)</li>
                                     </ul>
                                     <p className="text-pink-400 pt-2 font-bold">
-                                        $P51 = Photo + GPS + AI proof you did real healing work.
+                                        P51 = Photo + GPS + AI proof you did real healing work.
                                     </p>
                                 </div>
                             </div>
@@ -227,11 +227,11 @@ export default function P51ExplainerModal({ isOpen, onClose }) {
                                     The bottom line:
                                 </p>
                                 <p className="text-gray-300 font-mono text-sm leading-relaxed">
-                                    $P51 is the first currency where every unit represents verified planetary healing. 
+                                    P51 is the first currency where every unit represents verified planetary healing. 
                                     No speculation. No hype. Just proof you did real work that matters.
                                 </p>
                                 <p className="text-pink-400 font-mono text-sm mt-3 font-bold">
-                                    1kg cleaned = 1 $P51. Forever.
+                                    1kg cleaned = 1 P51. Forever.
                                 </p>
                             </div>
 

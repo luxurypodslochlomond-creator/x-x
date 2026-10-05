@@ -193,7 +193,7 @@ export default function UnstoppableArchitecture() {
                                                 <li>• <strong className="text-white">No central brain</strong> - Every node makes decisions locally</li>
                                                 <li>• <strong className="text-white">Redundant paths</strong> - Multiple routes to same destination</li>
                                                 <li>• <strong className="text-white">Self-healing</strong> - Network routes around dead nodes automatically</li>
-                                                <li>• <strong className="text-white">Nutrient sharing</strong> - Resources flow to where needed (like our $P51)</li>
+                                                <li>• <strong className="text-white">Nutrient sharing</strong> - Resources flow to where needed (like our P51)</li>
                                                 <li>• <strong className="text-white">Scale infinitely</strong> - Largest organism on Earth = mycelium network (8.9 km²)</li>
                                             </ul>
                                             <p className="text-green-400 font-bold mt-2">
@@ -273,7 +273,7 @@ export default function UnstoppableArchitecture() {
                                             <div className="bg-purple-900/20 border-l-4 border-pink-400 p-3">
                                                 <p className="text-pink-400 font-bold text-xs mb-2">TIER 4: BLOCKCHAIN (Immutable Record)</p>
                                                 <ul className="space-y-1 ml-4 text-xs text-gray-300">
-                                                    <li>• Financial transactions ($P51)</li>
+                                                    <li>• Financial transactions (P51)</li>
                                                     <li>• Proof-of-cleanup timestamps</li>
                                                     <li>• Can't be altered retroactively</li>
                                                     <li>• 10,000+ nodes verify each block</li>
@@ -378,7 +378,7 @@ export default function UnstoppableArchitecture() {
                                                 <li>• <strong className="text-white">Scales to millions</strong> - supercolonies span continents</li>
                                             </ul>
                                             <p className="text-green-400 font-bold mt-2">
-                                                = Our $P51 voting uses SAME algorithm. Nature-tested for 100 million years. ✓
+                                                = Our P51 voting uses SAME algorithm. Nature-tested for 100 million years. ✓
                                             </p>
                                         </div>
                                     </div>
@@ -572,7 +572,7 @@ export default function UnstoppableArchitecture() {
                                                 <ul className="space-y-1 ml-4 text-gray-300">
                                                     <li>→ WebRTC mesh topology</li>
                                                     <li>→ Auto-healing routes (DHT)</li>
-                                                    <li>→ $P51 flows to cleaners</li>
+                                                    <li>→ P51 flows to cleaners</li>
                                                     <li>→ Data packets hop P2P</li>
                                                 </ul>
                                             </div>
@@ -933,12 +933,12 @@ export default function UnstoppableArchitecture() {
                                     <li>• <strong className="text-white">Zero overhead</strong> → No banks, no interest, no fees</li>
                                 </ul>
                                 <p className="text-purple-400 font-bold mt-2 mb-3">
-                                    = $P51 uses gift economy PLUS blockchain (trust + verification) ♾️
+                                    = P51 uses gift economy PLUS blockchain (trust + verification) ♾️
                                 </p>
                                 <div className="bg-green-900/30 border-2 border-green-500 rounded p-3">
                                     <p className="text-green-400 font-bold text-xs mb-2">OUR IMPLEMENTATION:</p>
                                     <ul className="space-y-1 ml-4 text-xs">
-                                        <li>• Clean litter = gift to Earth → Earth gifts you $P51</li>
+                                        <li>• Clean litter = gift to Earth → Earth gifts you P51</li>
                                         <li>• Buy music = gift to artist → Artist gifts healing frequencies</li>
                                         <li>• No middlemen extracting value</li>
                                         <li>• Blockchain records gifts (permanent gratitude)</li>
@@ -999,7 +999,7 @@ export default function UnstoppableArchitecture() {
                                     <li>• <strong className="text-white">Delay-tolerant networking</strong> - Messages queue until delivery possible (Mars = 4-24 min delay)</li>
                                     <li>• <strong className="text-white">Offline-first</strong> - Entire colony works without Earth connection</li>
                                     <li>• <strong className="text-white">Mesh bridges planets</strong> - Satellite relays connect Earth ↔ Mars meshes</li>
-                                    <li>• <strong className="text-white">$P51 works everywhere</strong> - Clean Mars litter = earn tokens (same protocol)</li>
+                                    <li>• <strong className="text-white">P51 works everywhere</strong> - Clean Mars litter = earn tokens (same protocol)</li>
                                 </ul>
                                 <p className="text-purple-400 font-bold mt-2">
                                     Architecture designed for multi-planet species. Zero redesign needed. 🔮
@@ -1059,7 +1059,7 @@ export default function UnstoppableArchitecture() {
                                 </div>
                                 <div className="bg-black/60 border-2 border-cyan-500 rounded p-3">
                                     <p className="text-cyan-400 font-bold mb-1">✓ Solana Blockchain</p>
-                                    <p className="text-gray-300">$P51 tokens. Proof-of-cleanup. 400ms transaction speed.</p>
+                                    <p className="text-gray-300">P51 tokens. Proof-of-cleanup. 400ms transaction speed.</p>
                                 </div>
                                 <div className="bg-black/60 border-2 border-purple-500 rounded p-3">
                                     <p className="text-purple-400 font-bold mb-1">✓ PWA (Progressive Web App)</p>

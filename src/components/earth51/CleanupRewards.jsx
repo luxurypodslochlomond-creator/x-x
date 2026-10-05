@@ -4,7 +4,7 @@ import { Sparkles, Gift } from 'lucide-react';
 
 /**
  * REAL REWARDS - NO CREDIT GRIND
- * 1kg cleanup = Instant $P51 + Progress to next unlock
+ * 1kg cleanup = Instant P51 + Progress to next unlock
  */
 
 export default function CleanupRewards({ weight, p51Earned, nextUnlock, progressToNext }) {
@@ -14,7 +14,7 @@ export default function CleanupRewards({ weight, p51Earned, nextUnlock, progress
       animate={{ opacity: 1, scale: 1 }}
       className="space-y-3"
     >
-      {/* INSTANT $P51 */}
+      {/* INSTANT P51 */}
       <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-4 border-green-500 p-4">
         <div className="flex items-center gap-3 mb-2">
           <Sparkles className="w-6 h-6 text-green-400 animate-pulse" />
@@ -22,7 +22,7 @@ export default function CleanupRewards({ weight, p51Earned, nextUnlock, progress
         </div>
         <div className="text-center">
           <p className="text-5xl font-black font-mono text-green-400 mb-1">
-            {p51Earned.toFixed(1)} $P51
+            {p51Earned.toFixed(1)} P51
           </p>
           <p className="text-green-300 text-xs font-mono">From {weight}kg cleanup</p>
           <p className="text-green-600 text-[10px] font-mono mt-1">

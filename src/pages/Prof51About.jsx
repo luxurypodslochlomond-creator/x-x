@@ -243,7 +243,7 @@ export default function Prof51About() {
                         <div className="bg-gradient-to-r from-green-500/20 to-amber-500/20 border-4 border-green-500 rounded-lg p-4" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
                             <p className="text-green-400 font-bold text-sm mb-2">🌍 FUTURE: STUDENTS RISING TOGETHER</p>
                             <p className="text-white mb-1">Not being political. Just practical.</p>
-                            <p className="text-gray-300 mb-1">→ Mass campus cleanups (earn $P51, heal planet, build community)</p>
+                            <p className="text-gray-300 mb-1">→ Mass campus cleanups (earn P51, heal planet, build community)</p>
                             <p className="text-gray-300 mb-1">→ Better than protests (protests = just shouting, cleanups = actual change)</p>
                             <p className="text-gray-300 mb-1">→ Students worldwide connecting (Edinburgh → MIT → Tokyo → Lagos)</p>
                             <p className="text-gray-300 mb-1">→ Rise together, not compete against each other</p>
@@ -256,7 +256,7 @@ export default function Prof51About() {
 
                             <div className="bg-black border-2 border-purple-500/50 rounded-lg p-3 mb-3">
                                 <p className="text-cyan-400 text-xs mb-1">✓ Studies (AI handles busywork)</p>
-                                <p className="text-green-400 text-xs mb-1">✓ Money (save £43/week, earn $P51)</p>
+                                <p className="text-green-400 text-xs mb-1">✓ Money (save £43/week, earn P51)</p>
                                 <p className="text-pink-400 text-xs mb-1">✓ Social (find your people)</p>
                                 <p className="text-amber-400 text-xs mb-1">✓ Accommodation (flatmates sorted)</p>
                                 <p className="text-purple-400 text-xs mb-1">✓ Food (call direct, save money)</p>
@@ -598,7 +598,7 @@ export default function Prof51About() {
                                         <p className="text-cyan-400 font-bold text-xs mb-1">💪 EMPOWERED (NOT HELPLESS):</p>
                                         <p className="text-gray-300 text-xs mb-1">→ Excel assignment due? AI does it in 30 seconds (not 3 hour panic)</p>
                                         <p className="text-gray-300 text-xs mb-1">→ Don't understand topic? 1000 students globally who DO understand, answer in minutes</p>
-                                        <p className="text-gray-300 text-xs mb-1">→ Broke AF? Earn $P51 helping others, spend on food</p>
+                                        <p className="text-gray-300 text-xs mb-1">→ Broke AF? Earn P51 helping others, spend on food</p>
                                         <p className="text-green-400 text-xs font-bold">FEEL: I can handle this. I got this. ✓</p>
                                     </div>
 
@@ -971,7 +971,7 @@ export default function Prof51About() {
                         <div className="bg-black border-2 border-green-500 rounded-lg p-3">
                             <p className="text-green-400 font-bold mb-1">💰 MONEY STRESS (universal)</p>
                             <p className="text-white">Students poor in Glasgow, Mumbai, Rio, Lagos, everywhere.</p>
-                            <p className="text-purple-400 mt-1">Prof51: Budget tracker + earn $P51 helping others</p>
+                            <p className="text-purple-400 mt-1">Prof51: Budget tracker + earn P51 helping others</p>
                         </div>
 
                         <div className="bg-black border-2 border-purple-500 rounded-lg p-3">
@@ -1055,7 +1055,7 @@ export default function Prof51About() {
                                 <p className="text-gray-300 text-xs mb-3">→ Visual diagrams, examples, step-by-step</p>
 
                                 <p className="text-cyan-400 font-bold text-xs mb-1">PHD/MASTERS → UNDERGRADS:</p>
-                                <p className="text-gray-300 text-xs mb-2">→ Advanced students tutor beginners (earn $P51)</p>
+                                <p className="text-gray-300 text-xs mb-2">→ Advanced students tutor beginners (earn P51)</p>
                                 <p className="text-gray-300 text-xs mb-2">→ "I did this module last year - here's the tricks"</p>
                                 <p className="text-gray-300 text-xs mb-3">→ Knowledge flows down, money flows up (circular)</p>
 

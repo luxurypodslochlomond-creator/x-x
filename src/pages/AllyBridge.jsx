@@ -80,7 +80,7 @@ export default function AllyBridgePage() {
                         <div className="space-y-3 text-gray-300">
                             <p><strong className="text-white">EARN</strong> <P51Symbol /> through action:</p>
                             <ul className="space-y-2 text-sm">
-                                <li>✓ Clean litter (1kg = 1 $P51)</li>
+                                <li>✓ Clean litter (1kg = 1 P51)</li>
                                 <li>✓ Prove love actions</li>
                                 <li>✓ Complete missions</li>
                             </ul>
@@ -117,7 +117,7 @@ export default function AllyBridgePage() {
                     </div>
                     <div className="space-y-3 text-gray-300">
                         <p>
-                            When you <strong className="text-cyan-400">buy $P51 as an Ally</strong>, 
+                            When you <strong className="text-cyan-400">buy P51 as an Ally</strong>, 
                             you're <strong className="text-white">funding the healers</strong>.
                         </p>
                         <p>
@@ -171,7 +171,7 @@ export default function AllyBridgePage() {
                                 <p className="text-cyan-300 font-bold">Instant Payment via Stripe</p>
                             </div>
                             <p className="text-gray-300 text-sm">
-                                <strong>Rate:</strong> 1 $P51 = 1 {currency}
+                                <strong>Rate:</strong> 1 P51 = 1 {currency}
                                 <br/>
                                 <strong>Methods:</strong> Card, PayPal
                                 <br/>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAudio } from './AudioProvider';
@@ -34,10 +33,10 @@ export default function FloatingMusicPlayer() {
     const handleSendLove = async () => {
         if (!currentTrack || !user) return; // User will be null based on current implementation.
 
-        const amount = prompt(`Send $P51 to ${currentTrack.artist}? (You have ${user.love_balance || 0} $P51)`);
+        const amount = prompt(`Send P51 to ${currentTrack.artist}? (You have ${user.love_balance || 0} P51)`);
         if (!amount) return;
         
-        alert(`Coming soon: Direct $P51 to artists. For now, their 90% comes from the fund.`);
+        alert(`Coming soon: Direct P51 to artists. For now, their 90% comes from the fund.`);
     };
 
     // SHARE HANDLER - INLINE VERSION (NO EXTERNAL DEPENDENCY)
@@ -306,7 +305,7 @@ export default function FloatingMusicPlayer() {
                                 className="flex-1 bg-pink-600 hover:bg-pink-700"
                             >
                                 <Heart className="w-4 h-4 mr-2" />
-                                Send $P51
+                                Send P51
                             </Button>
                         )}
                     </div>

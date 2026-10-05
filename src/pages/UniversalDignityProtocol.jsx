@@ -65,7 +65,7 @@ export default function UniversalDignityProtocolPage() {
                         <div className="space-y-4 text-xl text-white">
                             <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
                                 <p className="font-black text-green-400 mb-2">✅ HONEST PAYMENT</p>
-                                <p className="text-sm text-gray-300">1kg cleaned = 1 $P51. Simple. Transparent. Fair.</p>
+                                <p className="text-sm text-gray-300">1kg cleaned = 1 P51. Simple. Transparent. Fair.</p>
                             </div>
                             <div className="bg-black/60 border-2 border-green-500 rounded-lg p-4">
                                 <p className="font-black text-green-400 mb-2">✅ REAL IMPACT TRACKING</p>
@@ -129,7 +129,7 @@ export default function UniversalDignityProtocolPage() {
                                 <div className="space-y-3 text-base">
                                     <div className="bg-black/60 rounded p-3 border-l-4 border-green-500">
                                         <p className="text-green-400 font-bold">PREDICTABLE PAYMENT:</p>
-                                        <p className="text-gray-300 text-sm">1kg = 1 $P51. Always. No variable rewards. You KNOW what you're getting. Builds trust, not addiction.</p>
+                                        <p className="text-gray-300 text-sm">1kg = 1 P51. Always. No variable rewards. You KNOW what you're getting. Builds trust, not addiction.</p>
                                     </div>
                                     <div className="bg-black/60 rounded p-3 border-l-4 border-cyan-500">
                                         <p className="text-cyan-400 font-bold">REAL IMPACT FEEDBACK:</p>
@@ -175,7 +175,7 @@ export default function UniversalDignityProtocolPage() {
                         </h2>
                         <div className="space-y-4 text-lg text-gray-200">
                             <p>• <strong className="text-pink-400">Purpose-driven:</strong> You clean because Earth needs healing</p>
-                            <p>• <strong className="text-cyan-400">Payment:</strong> You get $P51 because you DESERVE payment for work</p>
+                            <p>• <strong className="text-cyan-400">Payment:</strong> You get P51 because you DESERVE payment for work</p>
                             <p>• <strong className="text-green-400">Community:</strong> Everyone benefits (you, artists, Earth)</p>
                             <p>• <strong className="text-purple-400">Transparency:</strong> 10% to Earth missions (you choose which ones)</p>
                             <p>• <strong className="text-yellow-400">NO extraction:</strong> We don't take a cut. We're family.</p>

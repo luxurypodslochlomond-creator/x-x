@@ -84,7 +84,7 @@ const FundMissionModal = ({ mission, user, isOpen, onClose }) => {
             return;
         }
         if (fundAmount > (user.love_balance || 0)) {
-            setError("You don't have enough $P51.");
+            setError("You don't have enough P51.");
             return;
         }
 
@@ -642,16 +642,16 @@ export default function MissionsPage() {
                     <CardContent className="p-8 space-y-4">
                         <div className="flex items-center gap-3 mb-4">
                             <Heart className="w-10 h-10 text-pink-400" />
-                            <h2 className="text-3xl font-black text-white">Fund With $P51</h2>
+                            <h2 className="text-3xl font-black text-white">Fund With P51</h2>
                         </div>
                         
                         <p className="text-lg text-white mb-4">
-                            Use your earned $P51 to directly fund verified humanitarian missions. 100% transparent. Real impact.
+                            Use your earned P51 to directly fund verified humanitarian missions. 100% transparent. Real impact.
                         </p>
 
                         <div className="bg-black/60 rounded-xl p-6">
                             <div className="space-y-3 text-sm text-gray-300">
-                                <p>• <strong className="text-white">Earn $P51</strong> by cleaning Earth (1kg = 1 $P51)</p>
+                                <p>• <strong className="text-white">Earn P51</strong> by cleaning Earth (1kg = 1 P51)</p>
                                 <p>• <strong className="text-white">Send instantly</strong> to any mission you choose</p>
                                 <p>• <strong className="text-white">Track impact</strong> in real-time</p>
                                 <p>• <strong className="text-white">Verified partners</strong> ensure money reaches people</p>
@@ -659,7 +659,7 @@ export default function MissionsPage() {
                         </div>
 
                         <p className="text-gray-400 text-xs">
-                            £/$/€ bridge coming soon for those who want to fund with fiat. For now, earn $P51 and send directly.
+                            £/$/€ bridge coming soon for those who want to fund with fiat. For now, earn P51 and send directly.
                         </p>
                     </CardContent>
                 </Card>

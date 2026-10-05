@@ -42,7 +42,7 @@ export default function OpenSourcePage() {
                         <div className="space-y-6">
                             <div>
                                 <p className="text-xl font-bold text-green-400 mb-2">1. Trust Through Transparency</p>
-                                <p>You can SEE exactly how your $P51 is calculated. How cleanups are verified. How the Love Oracle works. No black boxes. No hidden algorithms favoring the wealthy.</p>
+                                <p>You can SEE exactly how your P51 is calculated. How cleanups are verified. How the Love Oracle works. No black boxes. No hidden algorithms favoring the wealthy.</p>
                             </div>
                             
                             <div>
@@ -149,7 +149,7 @@ export default function OpenSourcePage() {
 
                             <div>
                                 <p className="text-lg font-bold text-cyan-300 mb-2">2. Audit The Code</p>
-                                <p className="text-sm">Review the codebase. If you find vulnerabilities, exploits, or improvements - tell us. We reward security researchers with $P51.</p>
+                                <p className="text-sm">Review the codebase. If you find vulnerabilities, exploits, or improvements - tell us. We reward security researchers with P51.</p>
                             </div>
 
                             <div>
@@ -241,7 +241,7 @@ export default function OpenSourcePage() {
                         <div className="space-y-4">
                             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/30">
                                 <p className="font-bold text-green-300 mb-2">🌍 The 10% Sacred Tithe</p>
-                                <p className="text-sm">All $P51 creation triggers a 10% contribution to the Universal Love Treasury. This funds real-world missions: ocean cleanup, animal welfare, humanitarian aid.</p>
+                                <p className="text-sm">All P51 creation triggers a 10% contribution to the Universal Love Treasury. This funds real-world missions: ocean cleanup, animal welfare, humanitarian aid.</p>
                                 <p className="text-xs text-gray-500 mt-2">100% transparent. All treasury transactions publicly visible.</p>
                             </div>
 
@@ -259,7 +259,7 @@ export default function OpenSourcePage() {
 
                             <div className="p-4 bg-pink-900/20 rounded-lg border border-pink-500/30">
                                 <p className="font-bold text-pink-300 mb-2">💖 Community Support</p>
-                                <p className="text-sm">Family members can directly support development by circulating $P51 for platform improvements. Voluntary. Optional. Appreciated.</p>
+                                <p className="text-sm">Family members can directly support development by circulating P51 for platform improvements. Voluntary. Optional. Appreciated.</p>
                                 <p className="text-xs text-gray-500 mt-2">We never guilt, pressure, or exploit our family for funding.</p>
                             </div>
                         </div>
@@ -435,7 +435,7 @@ export default function OpenSourcePage() {
                             <div className="bg-black/60 p-4 rounded-lg border-2 border-pink-500/50">
                                 <p className="text-pink-300 font-black mb-3">🛰️ IPFS DECENTRALIZED STORAGE:</p>
                                 <p className="text-sm text-gray-300 mb-3">
-                                    All cleanup photos + $P51 transactions → pinned to IPFS (InterPlanetary File System)
+                                    All cleanup photos + P51 transactions → pinned to IPFS (InterPlanetary File System)
                                 </p>
                                 <p className="text-white font-bold text-sm">
                                     = Data survives server shutdowns, government censorship, corporate capture

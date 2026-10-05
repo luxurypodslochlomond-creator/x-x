@@ -91,7 +91,7 @@ export default function GrantOpportunitiesPage() {
             url: "https://www.linscotland.co.uk/our-funds/scottish-investment-bank/scottish-angel-network/",
             nextSteps: [
                 "Perfect 3-min pitch deck",
-                "Show traction (users, cleanups, $P51 circulation)",
+                "Show traction (users, cleanups, P51 circulation)",
                 "Attend pitch event",
                 "Emphasize scalability"
             ],

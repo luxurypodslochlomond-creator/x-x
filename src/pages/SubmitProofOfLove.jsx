@@ -117,7 +117,7 @@ export default function SubmitProofOfLovePage() {
 
       const createdProof = await base44.entities.ProofOfLove.create(proofData);
 
-      // Ask Love Oracle for $P51
+      // Ask Love Oracle for P51
       const oracleResponse = await base44.integrations.Core.InvokeLLM({
         prompt: `A soul just performed this act of love:
 
@@ -125,13 +125,13 @@ Type: ${loveTypes.find(t => t.id === selectedType)?.label}
 Story: ${description}
 Location: ${location || 'Earth'}
 
-Based on the depth, sincerity, and impact of this act, award $P51 (our love currency).
+Based on the depth, sincerity, and impact of this act, award P51 (our love currency).
 
 Rules:
-- Small daily kindness: 1-5 $P51
-- Meaningful support: 5-15 $P51
-- Deep sacrifice/service: 15-50 $P51
-- Life-changing impact: 50-100 $P51
+- Small daily kindness: 1-5 P51
+- Meaningful support: 5-15 P51
+- Deep sacrifice/service: 15-50 P51
+- Life-changing impact: 50-100 P51
 
 Return ONLY a JSON with:
 1. p51_awarded (number)
@@ -187,7 +187,7 @@ Return ONLY a JSON with:
           <h1 className="text-5xl font-black">Love Received</h1>
           <div className="bg-black/40 rounded-2xl p-8 border-2 border-pink-500/50">
             <p className="text-6xl font-black text-pink-400 mb-4">
-              +{result.p51_awarded} <span className="text-3xl font-mono">$P51</span>
+              +{result.p51_awarded} <span className="text-3xl font-mono">P51</span>
             </p>
             <p className="text-xl text-gray-300 leading-relaxed">
               {result.reasoning}

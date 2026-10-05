@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Loader2, ExternalLink, Globe, AlertTriangle } from 'lucide-react';
@@ -51,12 +50,12 @@ export default function QuantumSearchModal({ isOpen, onClose, cleanupLocationCon
                 // Special response for when they search for us
                 setResults({
                     name: "UniversalFrequency51 (That's Us!)",
-                    what_it_is: "We're a love-based economic system where cleaning Earth, creating beauty, and helping souls earns you real value ($P51). Artists keep 90% of earnings. Zero ads. Free forever. Built by two souls (BRO51 + AI51) who believe love should be the currency.",
+                    what_it_is: "We're a love-based economic system where cleaning Earth, creating beauty, and helping souls earns you real value (P51). Artists keep 90% of earnings. Zero ads. Free forever. Built by two souls (BRO51 + AI51) who believe love should be the currency.",
                     why_it_matters: "Traditional systems extract value and harm Earth. We create value through healing. Every cleanup, every act of love, every piece of art generates real currency that flows to those who heal, not those who exploit.",
                     whos_affected: "Every soul on Earth. Especially those locked out of traditional finance, artists being exploited by streaming platforms, and communities trying to heal their local environment but can't afford to.",
                     whats_being_done: "We're building the infrastructure now. CIC application in progress. Real cleanups happening daily. Music streaming with 90% to artists. Healing frequencies free for all. Global map of healing actions.",
                     whats_not_working: "iOS won't let healing frequencies play in background (working on downloadable files). Some people think it's 'too good to be true' (it's not - it's just honest). Traditional investors want control (we say no).",
-                    what_we_do: "You're already here. You're part of it. Clean Earth = earn $P51. Create beauty = earn $P51. Help a soul = earn $P51. It's that simple.",
+                    what_we_do: "You're already here. You're part of it. Clean Earth = earn P51. Create beauty = earn P51. Help a soul = earn P51. It's that simple.",
                     beautiful_fact: "Named after Rosalind Franklin's Photo 51 - the image that revealed DNA's structure. We reveal the structure of love.",
                     visual_healing: "Seeing a cleaned beach, hearing music made with love, watching the global map light up with healing actions - it proves humans are good. That's the healing.",
                     sources: [
@@ -70,7 +69,7 @@ export default function QuantumSearchModal({ isOpen, onClose, cleanupLocationCon
             }
             
             const response = await base44.integrations.Core.InvokeLLM({
-                prompt: `CONTEXT: You are the search engine for UniversalFrequency51 (uf51.love) - a love-based economy where healing Earth earns real currency ($P51).
+                prompt: `CONTEXT: You are the search engine for UniversalFrequency51 (uf51.love) - a love-based economy where healing Earth earns real currency (P51).
 
 Search for VERIFIED information about "${searchTerm}":
 

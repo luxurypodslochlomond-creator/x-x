@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
@@ -380,10 +379,10 @@ Format clearly for readability.`,
                         </div>
                         <div className="space-y-4 text-gray-300">
                             <p className="text-lg">
-                                <strong className="text-white">Someone cleans a beach.</strong> They earn $P51 (verified by photo + GPS).
+                                <strong className="text-white">Someone cleans a beach.</strong> They earn P51 (verified by photo + GPS).
                             </p>
                             <p className="text-lg">
-                                <strong className="text-white">They hear your song.</strong> They send you $P51.
+                                <strong className="text-white">They hear your song.</strong> They send you P51.
                             </p>
                             <p className="text-lg">
                                 <strong className="text-white">You get paid.</strong> From a planetary healing act. Not an ad. Not a subscription.
@@ -453,7 +452,7 @@ Format clearly for readability.`,
                         </div>
                         <div className="text-center space-y-4">
                             <div className="text-7xl font-black text-amber-400">90%</div>
-                            <p className="text-xl text-gray-300">You keep 90% of every $P51 sent to you.</p>
+                            <p className="text-xl text-gray-300">You keep 90% of every P51 sent to you.</p>
                             <p className="text-sm text-gray-400">10% flows to the Universal Love Treasury for planetary healing missions + funding new artist dreams.</p>
                         </div>
                         <div className="bg-black/40 p-4 rounded-lg border border-amber-500/30 mt-6">

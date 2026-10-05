@@ -41,7 +41,7 @@ export default function TradeCards() {
                             </div>
                             <div className="flex items-start gap-3">
                                 <Heart className="w-6 h-6 text-pink-400 mt-1 flex-shrink-0" />
-                                <p className="text-gray-300">Complete collections and earn bonus $P51</p>
+                                <p className="text-gray-300">Complete collections and earn bonus P51</p>
                             </div>
                             <div className="flex items-start gap-3">
                                 <Heart className="w-6 h-6 text-pink-400 mt-1 flex-shrink-0" />

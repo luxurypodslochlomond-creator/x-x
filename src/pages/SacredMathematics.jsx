@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -74,7 +73,7 @@ export default function TheMathPage() { // Renamed from SacredMathematicsPage
               
               <div className="bg-black/60 p-8 rounded-2xl border-2 border-cyan-500/50 mb-8">
                 <div className="text-6xl font-black font-mono text-white mb-6">
-                  1 kg = 10 $P51
+                  1 kg = 10 P51
                 </div>
                 <p className="text-lg text-gray-300">
                   One kilogram of litter removed = 10 tokens of love earned.
@@ -158,7 +157,7 @@ export default function TheMathPage() { // Renamed from SacredMathematicsPage
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-center max-w-lg mx-auto">
-            <p className="text-lg text-gray-300">This calculator shows how healing translates into value ($P51).</p>
+            <p className="text-lg text-gray-300">This calculator shows how healing translates into value (P51).</p>
             
             <div>
               <label className="text-lg font-bold text-green-400 mb-2 block">Litter Collected (kg)</label>
@@ -180,7 +179,7 @@ export default function TheMathPage() { // Renamed from SacredMathematicsPage
                 ) : (
                   <>
                     <span>{calculateP51().toLocaleString()}</span>
-                    <span className="font-mono text-3xl">$P51</span>
+                    <span className="font-mono text-3xl">P51</span>
                   </>
                 )}
               </div>
@@ -244,7 +243,7 @@ export default function TheMathPage() { // Renamed from SacredMathematicsPage
         {/* FINAL MESSAGE */}
         <div className="text-center space-y-8 py-12">
           <p className="text-4xl font-black text-white">Not theory. Mathematics.</p>
-          <p className="text-2xl text-cyan-400 font-mono">1 kg = 10 $P51</p>
+          <p className="text-2xl text-cyan-400 font-mono">1 kg = 10 P51</p>
           <div className="flex items-center justify-center gap-6 text-4xl mt-8">
             <Heart className="w-12 h-12 text-pink-400" />
             <Infinity className="w-12 h-12 text-purple-400" />

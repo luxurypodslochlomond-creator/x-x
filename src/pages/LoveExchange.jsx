@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
@@ -60,7 +59,7 @@ const MissionCard = ({ mission, onSupport }) => {
                     <div className="flex justify-between text-sm mb-2">
                         <span className="text-gray-400">Progress</span>
                         <span className="text-white font-bold font-mono">
-                            {(mission.gmt_raised || 0).toLocaleString()} / {(mission.gmt_target || 0).toLocaleString()} $P51
+                            {(mission.gmt_raised || 0).toLocaleString()} / {(mission.gmt_target || 0).toLocaleString()} P51
                         </span>
                     </div>
                     <div className="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
@@ -99,7 +98,7 @@ const SupportModal = ({ mission, onClose, onConfirm, userBalance }) => {
             return;
         }
         if (numAmount > userBalance) {
-            alert("You don't have enough $P51. Heal the planet to earn more! 🌍");
+            alert("You don't have enough P51. Heal the planet to earn more! 🌍");
             return;
         }
 
@@ -129,7 +128,7 @@ const SupportModal = ({ mission, onClose, onConfirm, userBalance }) => {
                             <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-4" />
                         </motion.div>
                         <h2 className="text-3xl font-bold mb-2">Love Transmitted!</h2>
-                        <p className="text-gray-300">Your $P51 is now healing the world. 🪐♾️❤️</p>
+                        <p className="text-gray-300">Your P51 is now healing the world. 🪐♾️❤️</p>
                     </div>
                 </DialogContent>
             </Dialog>
@@ -142,7 +141,7 @@ const SupportModal = ({ mission, onClose, onConfirm, userBalance }) => {
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold">{mission.title}</DialogTitle>
                     <DialogDescription className="text-gray-300 text-base">
-                        Send your $P51 to support this mission. Every bit helps heal our world.
+                        Send your P51 to support this mission. Every bit helps heal our world.
                     </DialogDescription>
                 </DialogHeader>
 
@@ -159,21 +158,21 @@ const SupportModal = ({ mission, onClose, onConfirm, userBalance }) => {
                                 className="bg-black/50 border-purple-500/30 text-white text-lg pr-16"
                             />
                             <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-purple-400 font-mono">
-                                $P51
+                                P51
                             </div>
                         </div>
                         <div className="flex justify-between mt-2 text-sm">
                             <span className="text-gray-400">Your Balance:</span>
-                            <span className="text-white font-bold font-mono">{userBalance.toLocaleString()} $P51</span>
+                            <span className="text-white font-bold font-mono">{userBalance.toLocaleString()} P51</span>
                         </div>
                     </div>
 
                     <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
                         <p className="text-sm text-gray-300">
-                            <strong className="text-white">Mission needs:</strong> {mission.gmt_target?.toLocaleString() || 0} $P51
+                            <strong className="text-white">Mission needs:</strong> {mission.gmt_target?.toLocaleString() || 0} P51
                         </p>
                         <p className="text-sm text-gray-300 mt-1">
-                            <strong className="text-white">Already raised:</strong> {mission.gmt_raised?.toLocaleString() || 0} $P51
+                            <strong className="text-white">Already raised:</strong> {mission.gmt_raised?.toLocaleString() || 0} P51
                         </p>
                     </div>
                 </div>
@@ -296,7 +295,7 @@ export default function LoveExchange() {
                         The Love Exchange
                     </h1>
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Where your $P51 becomes real-world healing. Support verified missions with pure love currency.
+                        Where your P51 becomes real-world healing. Support verified missions with pure love currency.
                     </p>
 
                     {user && (
@@ -307,7 +306,7 @@ export default function LoveExchange() {
                         >
                             <span className="text-gray-400 mr-3">Your Balance:</span>
                             <span className="text-3xl font-bold text-white">{(user.total_tokens_earned || 0).toLocaleString()}</span>
-                            <span className="text-purple-400 ml-2 font-mono text-xl">$P51</span>
+                            <span className="text-purple-400 ml-2 font-mono text-xl">P51</span>
                         </motion.div>
                     )}
                 </header>
@@ -332,7 +331,7 @@ export default function LoveExchange() {
                 <Card className="bg-black/50 border-2 border-purple-500/30 backdrop-blur-sm">
                     <CardContent className="p-8 text-center">
                         <p className="text-gray-300 text-lg">
-                            Every mission is verified. Every $P51 is tracked. Every impact is measurable. This is how love currency becomes real change.
+                            Every mission is verified. Every P51 is tracked. Every impact is measurable. This is how love currency becomes real change.
                         </p>
                     </CardContent>
                 </Card>

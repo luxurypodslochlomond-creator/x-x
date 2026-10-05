@@ -47,12 +47,12 @@ export default function Earth51Privacy() {
             <p>• Photos of litter (analyzed by AI, stored locally first)</p>
             <p>• Approximate location (city/region, NOT your exact address)</p>
             <p>• Weight you entered</p>
-            <p>• $P51 balance (stored on YOUR device)</p>
+            <p>• P51 balance (stored on YOUR device)</p>
             
             <p className="mt-3"><strong>WITH LOGIN (optional):</strong></p>
             <p>• Email address (for account recovery only)</p>
             <p>• Cleanup history (synced to cloud)</p>
-            <p>• $P51 balance (synced to cloud)</p>
+            <p>• P51 balance (synced to cloud)</p>
           </div>
         </div>
 

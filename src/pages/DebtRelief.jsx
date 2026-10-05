@@ -60,13 +60,13 @@ export default function DebtRelief() {
                     <div className="bg-black border border-green-500/30 p-4 rounded">
                         <p className="text-green-400 font-bold mb-2">1. EARN WHILE HEALING</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• Clean litter → earn $P51 → eventually cash out to £</p>
+                            <p>• Clean litter → earn P51 → eventually cash out to £</p>
                             <p>• Every cleanup = progress toward debt freedom</p>
                             <p>• Help Earth + earn = double win</p>
                             <p>• No boss, no extraction, your pace</p>
                         </div>
                         <div className="bg-green-900/20 border border-green-500/50 p-2 rounded mt-2">
-                            <p className="text-green-400 text-xs font-bold">Example: 100kg litter = 100 $P51 = ~£100 toward debt</p>
+                            <p className="text-green-400 text-xs font-bold">Example: 100kg litter = 100 P51 = ~£100 toward debt</p>
                         </div>
                     </div>
 
@@ -104,7 +104,7 @@ export default function DebtRelief() {
                     <div className="bg-gradient-to-r from-green-500/10 to-black border-l-4 border-green-500 p-4">
                         <p className="text-green-400 font-bold mb-2">STEP 1: START EARNING (NOW)</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• Clean litter daily → build $P51 balance</p>
+                            <p>• Clean litter daily → build P51 balance</p>
                             <p>• Upload healing music → start building audience</p>
                             <p>• Every action = progress toward cash-out</p>
                         </div>
@@ -115,7 +115,7 @@ export default function DebtRelief() {
                         <p className="text-cyan-400 font-bold mb-2">STEP 2: WAIT FOR CASH-OUT (8-10 WEEKS)</p>
                         <div className="text-gray-300 text-xs space-y-1">
                             <p>• CIC registration → Revolut account → conversion live</p>
-                            <p>• Then: $P51 → £ → pay debt directly</p>
+                            <p>• Then: P51 → £ → pay debt directly</p>
                             <p>• Keep earning while we build this</p>
                         </div>
                         <p className="text-amber-400 text-xs mt-2 font-bold">→ COMING SOON (BE PATIENT) ⏳</p>
@@ -153,8 +153,8 @@ export default function DebtRelief() {
                     <div className="bg-amber-900/20 border border-amber-500/50 p-3 rounded">
                         <p className="text-amber-400 font-bold mb-2">IF YOU CLEAN LITTER:</p>
                         <ul className="text-gray-300 space-y-1">
-                            <li>• 10kg/day = 10 $P51/day = ~£300/month</li>
-                            <li>• 20kg/day = 20 $P51/day = ~£600/month</li>
+                            <li>• 10kg/day = 10 P51/day = ~£300/month</li>
+                            <li>• 20kg/day = 20 P51/day = ~£600/month</li>
                             <li>• Not getting rich, but helps with debt</li>
                         </ul>
                     </div>
@@ -204,7 +204,7 @@ export default function DebtRelief() {
                     <div className="bg-black border border-green-500/30 p-4 rounded">
                         <p className="text-green-400 font-bold mb-2">THE NEW WAY (LIGHTER):</p>
                         <ul className="text-gray-300 space-y-1 text-xs">
-                            <li>• Clean Earth → earn $P51 → pay debt + help others</li>
+                            <li>• Clean Earth → earn P51 → pay debt + help others</li>
                             <li>• Create healing music → earn 90% → debt goes down</li>
                             <li>• Every action = healing Earth AND yourself</li>
                             <li>• Help others = not separate from paying debt</li>
@@ -301,7 +301,7 @@ export default function DebtRelief() {
                     <Link to={createPageUrl('NewCleanup')} className="block">
                         <div className="bg-gradient-to-r from-green-500/10 to-black border-l-4 border-green-500 p-4 hover:bg-green-500/20 transition-all">
                             <p className="text-green-400 font-bold mb-2">1. START CLEANING (TODAY)</p>
-                            <p className="text-gray-300 text-xs">Log cleanups → build $P51 balance → ready for cash-out when live</p>
+                            <p className="text-gray-300 text-xs">Log cleanups → build P51 balance → ready for cash-out when live</p>
                         </div>
                     </Link>
 
@@ -312,7 +312,7 @@ export default function DebtRelief() {
 
                     <div className="bg-gradient-to-r from-purple-500/10 to-black border-l-4 border-purple-500 p-4">
                         <p className="text-purple-400 font-bold mb-2">3. BE PATIENT (8-10 WEEKS)</p>
-                        <p className="text-gray-300 text-xs">CIC → Revolut → cash-out live → then you can pay debt with $P51</p>
+                        <p className="text-gray-300 text-xs">CIC → Revolut → cash-out live → then you can pay debt with P51</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-pink-500/10 to-black border-l-4 border-pink-500 p-4">
@@ -355,7 +355,7 @@ export default function DebtRelief() {
                     <p className="text-green-400 font-black font-mono text-lg">DEBT GOES DOWN • HELP GOES UP</p>
                     <Heart className="w-6 h-6 text-pink-400 animate-pulse" />
                 </div>
-                <p className="text-gray-600 text-xs font-mono">Clean Earth → Earn $P51 → Pay debt → Help others</p>
+                <p className="text-gray-600 text-xs font-mono">Clean Earth → Earn P51 → Pay debt → Help others</p>
                 <p className="text-cyan-400 text-xs font-mono mt-2">Same action, multiple healings ♾️❤️♾️</p>
                 <p className="text-pink-400 text-xs font-mono mt-2">Zero ego in asking • You're already on the wavelength</p>
             </div>

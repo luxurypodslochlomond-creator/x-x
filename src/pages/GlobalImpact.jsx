@@ -200,7 +200,7 @@ export default function GlobalImpactPage() {
                     />
                     <StatCard
                         icon={Heart}
-                        label="Total $P51 Earned"
+                        label="Total P51 Earned"
                         value={Math.round(totalTokens)}
                         unit={<P51Symbol showTooltip={false} />}
                         color="border-pink-500/50"

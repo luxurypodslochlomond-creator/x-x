@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -66,11 +65,11 @@ export default function SymbolForgePage() {
         },
         {
             id: 'dollar_p51',
-            name: '$P51',
+            name: 'P51',
             description: 'Currency symbol + Photo 51',
             component: () => (
                 <svg viewBox="0 0 100 100" className="w-full h-full">
-                    <text x="50" y="65" fontSize="45" fontWeight="900" textAnchor="middle" fill="#22d3ee" fontFamily="Arial, sans-serif">$P51</text>
+                    <text x="50" y="65" fontSize="45" fontWeight="900" textAnchor="middle" fill="#22d3ee" fontFamily="Arial, sans-serif">P51</text>
                 </svg>
             ),
             color: 'from-green-500 to-cyan-500',
@@ -178,7 +177,7 @@ export default function SymbolForgePage() {
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                         Every currency needs its symbol. Bitcoin has ₿. Ethereum has Ξ. 
                         <br/>
-                        <span className="text-pink-400 font-bold">What will $P51 become?</span>
+                        <span className="text-pink-400 font-bold">What will P51 become?</span>
                     </p>
                     <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-4 max-w-2xl mx-auto">
                         <p className="text-sm text-cyan-300">

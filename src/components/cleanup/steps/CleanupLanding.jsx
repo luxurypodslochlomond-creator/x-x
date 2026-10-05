@@ -210,7 +210,7 @@ export default function CleanupLanding({
                     </div>
                     <div className="pt-3 border-t border-[#141210]/20">
                       <p className="text-[#5a5246] font-mono text-[10px] uppercase tracking-widest">Contribution</p>
-                      <p className="text-[#141210] font-black text-3xl">{viewingPhoto.data.amount_contributed} $P51</p>
+                      <p className="text-[#141210] font-black text-3xl">{viewingPhoto.data.amount_contributed} P51</p>
                     </div>
                   </>
                 )}

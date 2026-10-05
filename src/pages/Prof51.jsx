@@ -14,7 +14,7 @@ import { useMutation } from '@tanstack/react-query';
  * PROF51 - CO-MANAGER FOR STUDENTS
  * Same concept as Co-Manager51 but for academic life
  * AI handles busywork, students focus on learning
- * FREE. P2P. Offline-first. $P51 student economy.
+ * FREE. P2P. Offline-first. P51 student economy.
  * 
  * START: Economics cohort at Edinburgh
  * SCALE: Edinburgh → Cambridge → MIT → world
@@ -622,10 +622,10 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
 
                                 <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 border-4 border-amber-500 p-4 rounded" style={{ boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' }}>
                                     <p className="text-amber-400 font-bold mb-2">3. STUDENTS HELP = STUDENTS EAT:</p>
-                                    <p className="text-white text-xs mb-1">Tutor someone → Earn $P51 → Buy food</p>
+                                    <p className="text-white text-xs mb-1">Tutor someone → Earn P51 → Buy food</p>
                                     <p className="text-cyan-400 text-xs mb-1">→ Smart students help struggling students</p>
-                                    <p className="text-green-400 text-xs mb-1">→ Earn $P51 from helping (no extraction)</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ Spend $P51 on food near campus</p>
+                                    <p className="text-green-400 text-xs mb-1">→ Earn P51 from helping (no extraction)</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Spend P51 on food near campus</p>
                                     <p className="text-purple-400 text-xs mb-1">→ Everyone rises together</p>
                                     <p className="text-amber-400 text-xs font-bold mt-2">Help others = Help yourself. Love economy ♾️❤️♾️</p>
                                 </div>
@@ -694,8 +694,8 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                 </div>
 
                                 <div className="bg-black border border-amber-500/30 p-3 rounded">
-                                    <p className="text-amber-400 font-bold mb-2">$P51 STUDENT ECONOMY:</p>
-                                    <p className="text-white text-xs mb-2">Earn $P51 by: Tutoring • Sharing notes • Explaining concepts</p>
+                                    <p className="text-amber-400 font-bold mb-2">P51 STUDENT ECONOMY:</p>
+                                    <p className="text-white text-xs mb-2">Earn P51 by: Tutoring • Sharing notes • Explaining concepts</p>
                                     <p className="text-cyan-400 text-xs">Spend on: Coffee • Food • Gig tickets • Textbooks</p>
                                 </div>
 
@@ -714,7 +714,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                     <p className="text-amber-400 font-bold mb-2">🍕 STUDENTS NEED TO EAT (Big One):</p>
                                     <p className="text-white text-xs mb-2">Brands pay Prof51 → Students get food deals</p>
                                     <p className="text-cyan-400 text-xs mb-1">✓ Campus restaurants (discounts via Prof51)</p>
-                                    <p className="text-green-400 text-xs mb-1">✓ Local cafes (pay with $P51 earned from tutoring)</p>
+                                    <p className="text-green-400 text-xs mb-1">✓ Local cafes (pay with P51 earned from tutoring)</p>
                                     <p className="text-pink-400 text-xs mb-1">✓ Supermarkets (student meal bundles)</p>
                                     <p className="text-purple-400 text-xs mb-1">✓ Food delivery (verified student rates)</p>
                                     <p className="text-amber-400 text-xs font-bold mt-2">Eat better, spend less, study stronger ♾️❤️♾️</p>
@@ -738,7 +738,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                     <p className="text-pink-400 text-xs mb-1">👕 Fashion that fits your vibe (student discounts)</p>
                                     <p className="text-amber-400 text-xs mb-1">✈️ Travel with other students (split costs, make memories)</p>
                                     <p className="text-green-400 text-xs mb-1">🎉 What's happening tonight (parties, events, meetups)</p>
-                                    <p className="text-purple-400 text-xs">Pay with $P51 earned from helping other students</p>
+                                    <p className="text-purple-400 text-xs">Pay with P51 earned from helping other students</p>
                                 </div>
 
                                 <div className="bg-black border border-green-500/30 p-3 rounded">
@@ -746,7 +746,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                     <p className="text-white text-xs mb-2">Find perfect flatmates • Avoid dodgy landlords • Never lonely</p>
                                     <p className="text-cyan-400 text-xs mb-1">→ AI matches you with compatible flatmates (vibe, lifestyle)</p>
                                     <p className="text-amber-400 text-xs mb-1">→ Student-rated landlords (avoid scams)</p>
-                                    <p className="text-pink-400 text-xs mb-1">→ Pay rent in $P51 (earn by helping other students)</p>
+                                    <p className="text-pink-400 text-xs mb-1">→ Pay rent in P51 (earn by helping other students)</p>
                                     <p className="text-purple-400 text-xs">→ Split bills, share groceries, build real friendships</p>
                                 </div>
 
@@ -859,7 +859,7 @@ Return CLEAN, FORMATTED content ready to use. Be helpful, not generic.`,
                                             <p className="text-white text-xs mb-1">✓ Student deals (brands pay Prof51, students benefit)</p>
                                             <p className="text-white text-xs mb-1">✓ Recruitment pipeline (companies hire direct, skip LinkedIn)</p>
                                             <p className="text-white text-xs mb-1">✓ Funding tracker (know your money)</p>
-                                            <p className="text-white text-xs mb-1">✓ $P51 marketplace (earn + spend local)</p>
+                                            <p className="text-white text-xs mb-1">✓ P51 marketplace (earn + spend local)</p>
                                             <p className="text-white text-xs mb-1">✓ Accommodation matcher (find flatmates)</p>
                                             <p className="text-green-400 text-xs mt-2">Empowering students. Not holding them back. Rise up ✓</p>
                                         </div>

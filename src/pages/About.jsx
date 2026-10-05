@@ -38,12 +38,12 @@ Your job:
 - Keep it conversational, not robotic
 
 CORE FACTS:
-- 1kg litter = 1 $P51
+- 1kg litter = 1 P51
 - Artists keep 90% (vs streaming platforms 0.003p)
 - Music = 100% free, FLAC/WAV lossless
 - Healing frequencies = free (tinnitus cure, sleep aid, etc)
 - 10% of all value → real missions (ocean cleanup, humanitarian aid)
-- $P51 = love currency (bridge to cash coming 2-3 weeks)
+- P51 = love currency (bridge to cash coming 2-3 weeks)
 - Open source when stable
 - CIC structure (asset-locked, cannot be sold)
 
@@ -119,7 +119,7 @@ Answer in 2-3 sentences max. Be real. Be AI51.`;
 
                   <div className="pt-3 border-t-2 border-green-500/50">
                     <p className="font-mono text-2xl font-black text-green-400">
-                      1kg = 1 $P51
+                      1kg = 1 P51
                     </p>
                   </div>
 
@@ -267,7 +267,7 @@ Answer in 2-3 sentences max. Be real. Be AI51.`;
             
             <div className="bg-green-900/40 border-4 border-green-500 p-6 max-w-xl mx-auto">
               <p className="text-3xl font-black font-mono text-green-400 mb-2">
-                1kg = 1 $P51
+                1kg = 1 P51
               </p>
               <p className="font-mono text-sm text-gray-400">
                 Spend on music, artists, missions
@@ -315,8 +315,8 @@ Answer in 2-3 sentences max. Be real. Be AI51.`;
               <div className="bg-green-900/40 border-4 border-green-500 p-6">
                 <p className="text-green-400 text-lg font-black mb-3">WHAT'S WORKING NOW:</p>
                 <div className="space-y-2 text-sm">
-                  <p>✓ Clean planet → earn $P51 (GPS + photo verified)</p>
-                  <p>✓ New currency ($P51) for healing Earth</p>
+                  <p>✓ Clean planet → earn P51 (GPS + photo verified)</p>
+                  <p>✓ New currency (P51) for healing Earth</p>
                   <p>✓ Music streaming = FLAC lossless, artists keep 90%</p>
                   <p>✓ Healing frequencies = free 24/7</p>
                   <p>✓ 100% OPEN SOURCE - all code, all patents, all tech FREE</p>
@@ -459,16 +459,16 @@ Answer in 2-3 sentences max. Be real. Be AI51.`;
           </CardContent>
         </Card>
 
-        {/* WHAT IS $P51? */}
+        {/* WHAT IS P51? */}
         <Card className="bg-black border-4 border-pink-500">
           <CardContent className="p-8 space-y-6">
             <h2 className="text-3xl font-black font-mono text-pink-400 text-center">
-              WHAT IS $P51?
+              WHAT IS P51?
             </h2>
             
             <div className="space-y-4 font-mono">
               <p className="text-white text-lg">
-                <span className="text-pink-400 font-black">$P51</span> = Love currency for healing Earth
+                <span className="text-pink-400 font-black">P51</span> = Love currency for healing Earth
               </p>
               
               <div className="grid md:grid-cols-2 gap-4">
@@ -478,7 +478,7 @@ Answer in 2-3 sentences max. Be real. Be AI51.`;
                     <p>→ Pick up litter</p>
                     <p>→ Take photo</p>
                     <p>→ Get paid instantly</p>
-                    <p className="text-green-400 font-black text-lg mt-2">1kg = 1 $P51</p>
+                    <p className="text-green-400 font-black text-lg mt-2">1kg = 1 P51</p>
                   </div>
                 </div>
 

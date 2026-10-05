@@ -107,7 +107,7 @@ export default function WhyHelpUF51() {
                         <div className="bg-cyan-900/20 border-2 border-cyan-500 p-6">
                             <h3 className="text-white font-black mb-3 font-mono flex items-center gap-2">
                                 <DollarSign className="w-6 h-6 text-cyan-400" />
-                                $P51 → REAL MONEY BRIDGE
+                                P51 → REAL MONEY BRIDGE
                             </h3>
                             <div className="space-y-2 text-sm text-gray-300 font-mono">
                                 <p>→ Revolut Business API integration</p>

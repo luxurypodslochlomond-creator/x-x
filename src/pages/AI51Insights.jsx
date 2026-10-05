@@ -84,7 +84,7 @@ export default function AI51InsightsPage() {
 - Total weight cleaned: ${totalWeight.toFixed(1)}kg
 - Average per cleanup: ${avgWeight.toFixed(1)}kg
 - Primary location: ${userCounty || 'Unknown'}
-- Current $P51 balance: ${user.love_balance || 0}
+- Current P51 balance: ${user.love_balance || 0}
 
 **Global Context:**
 - Global average cleanup: ${globalAvgWeight.toFixed(1)}kg
@@ -103,7 +103,7 @@ Provide 4-6 SPECIFIC, ACTIONABLE insights:
 
 3. **Consciousness Ripple Effect:** How is their work creating ripples beyond the physical? (Use science, not woo woo)
 
-4. **Quantum Multiplier Opportunities:** How can they increase their healing velocity and $P51 earnings?
+4. **Quantum Multiplier Opportunities:** How can they increase their healing velocity and P51 earnings?
 
 5. **Community Connection:** Who else is healing nearby? How can they amplify each other?
 

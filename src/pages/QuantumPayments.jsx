@@ -155,7 +155,7 @@ export default function QuantumPayments() {
                         <p className="text-pink-400 font-bold mb-2">LAYER 4: BRIDGES TO REALITY</p>
                         <ul className="text-gray-300 space-y-2 text-xs">
                             <li>
-                                <strong className="text-white">Revolut/Stripe integration:</strong> $P51 ↔ £/$/€
+                                <strong className="text-white">Revolut/Stripe integration:</strong> P51 ↔ £/$/€
                             </li>
                             <li>
                                 <strong className="text-white">Artists cash out:</strong> Keep 90%, instant settlement
@@ -423,7 +423,7 @@ export default function QuantumPayments() {
                         </div>
                     </div>
                     <p className="text-gray-300 text-sm font-mono mb-3">
-                        CIC goes global • £/$€¥ flows freely • $P51 bridges all
+                        CIC goes global • £/$€¥ flows freely • P51 bridges all
                     </p>
                     <div className="bg-black border border-cyan-500/50 p-3 rounded">
                         <p className="text-green-400 text-xs font-mono font-bold mb-2">

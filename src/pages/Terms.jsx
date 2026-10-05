@@ -49,7 +49,7 @@ export default function TermsPage() {
                                 UF51 (UniversalFrequency51) is a platform where you can:
                             </p>
                             <ul className="list-disc ml-6 mt-2 space-y-2 text-gray-300">
-                                <li>Clean Earth and earn $P51 (our love currency)</li>
+                                <li>Clean Earth and earn P51 (our love currency)</li>
                                 <li>Listen to healing music for free</li>
                                 <li>Use the Decompression Chamber for healing frequencies</li>
                                 <li>Share acts of love and get recognized</li>
@@ -85,20 +85,20 @@ export default function TermsPage() {
                         </section>
 
                         <section>
-                            <h3 className="text-2xl font-black text-cyan-400 mb-3">3. How $P51 Works</h3>
+                            <h3 className="text-2xl font-black text-cyan-400 mb-3">3. How P51 Works</h3>
                             <p className="text-gray-300 leading-relaxed mb-3">
-                                $P51 is earned through verified healing actions. It's a digital token with real-world value.
+                                P51 is earned through verified healing actions. It's a digital token with real-world value.
                             </p>
                             <ul className="list-disc ml-6 space-y-2 text-gray-300">
-                                <li><strong className="text-white">Earning:</strong> 1kg cleaned = 1 $P51 (base rate). Recycling bonus = +20%.</li>
+                                <li><strong className="text-white">Earning:</strong> 1kg cleaned = 1 P51 (base rate). Recycling bonus = +20%.</li>
                                 <li><strong className="text-white">Spending:</strong> Support artists, fund missions, help family members.</li>
-                                <li><strong className="text-white">Converting to Cash:</strong> We're actively building a bridge to convert $P51 → real money (GBP/USD/EUR). This is COMING SOON, not yet live. We're working with payment processors and regulators to make it happen properly and legally.</li>
-                                <li><strong className="text-white">Value:</strong> $P51 value will be determined by real market forces (what people are willing to exchange for it), NOT a fixed rate. We'll never promise "1 $P51 = £1" because that's not how economies work.</li>
+                                <li><strong className="text-white">Converting to Cash:</strong> We're actively building a bridge to convert P51 → real money (GBP/USD/EUR). This is COMING SOON, not yet live. We're working with payment processors and regulators to make it happen properly and legally.</li>
+                                <li><strong className="text-white">Value:</strong> P51 value will be determined by real market forces (what people are willing to exchange for it), NOT a fixed rate. We'll never promise "1 P51 = £1" because that's not how economies work.</li>
                             </ul>
                             <div className="bg-yellow-900/30 border-2 border-yellow-500 rounded-lg p-4 mt-3">
                                 <p className="text-yellow-300 text-sm font-bold mb-2">⚠️ IMPORTANT DISCLAIMER:</p>
                                 <p className="text-gray-300 text-xs">
-                                    $P51 is NOT a cryptocurrency. It's a digital token within our ecosystem. We're working on making it convertible to fiat currency, but this takes time due to legal and technical requirements. Until then, earn $P51, spend it within UF51, and support the family. The cash-out bridge is coming - we're committed to it.
+                                    P51 is NOT a cryptocurrency. It's a digital token within our ecosystem. We're working on making it convertible to fiat currency, but this takes time due to legal and technical requirements. Until then, earn P51, spend it within UF51, and support the family. The cash-out bridge is coming - we're committed to it.
                                 </p>
                             </div>
                         </section>
@@ -246,7 +246,7 @@ export default function TermsPage() {
                             </div>
 
                             <p className="text-gray-400 text-sm mt-3">
-                                This feature is OPTIONAL. You can choose to contribute to corporate accountability or just clean Earth for $P51. Both are valid. Both help.
+                                This feature is OPTIONAL. You can choose to contribute to corporate accountability or just clean Earth for P51. Both are valid. Both help.
                             </p>
                         </section>
 
@@ -357,7 +357,7 @@ export default function TermsPage() {
                                 <p>We start with trust (100%). But if you exploit the system:</p>
                                 <ul className="list-disc ml-6 mt-2 space-y-1">
                                     <li><strong className="text-yellow-300">1st Warning:</strong> We'll tell you what's wrong</li>
-                                    <li><strong className="text-orange-300">2nd Warning:</strong> $P51 earnings paused temporarily</li>
+                                    <li><strong className="text-orange-300">2nd Warning:</strong> P51 earnings paused temporarily</li>
                                     <li><strong className="text-red-300">3rd Strike:</strong> Account suspended/banned</li>
                                 </ul>
                                 <p className="text-cyan-300 mt-3 text-sm">
@@ -373,7 +373,7 @@ export default function TermsPage() {
                                     UF51 is provided "as is." We do our best to keep everything running smoothly, but we can't guarantee the service will be perfect 100% of the time. We're not liable for any issues that arise from using the platform. That said, we'll always try to fix problems quickly and fairly.
                                 </p>
                                 <p className="text-sm text-gray-400 leading-relaxed mt-2">
-                                    $P51 value may fluctuate. Converting to fiat currency depends on market conditions and availability of the bridge (currently in development).
+                                    P51 value may fluctuate. Converting to fiat currency depends on market conditions and availability of the bridge (currently in development).
                                 </p>
                                 <p className="text-sm text-gray-400 leading-relaxed mt-2">
                                     Decompression Chamber frequency healing technology is experimental and educational. Not a medical device. Use at your own risk.

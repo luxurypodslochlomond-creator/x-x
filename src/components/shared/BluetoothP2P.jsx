@@ -42,7 +42,7 @@ export default function BluetoothP2P({ amount, message, onSuccess }) {
             // DOUBLE-SPEND CHECK
             const availableBalance = LocalLedger.getBalance();
             if (parseFloat(amount) > availableBalance) {
-                throw new Error(`Insufficient balance: ${availableBalance.toFixed(1)} $P51`);
+                throw new Error(`Insufficient balance: ${availableBalance.toFixed(1)} P51`);
             }
 
             if (!navigator.bluetooth) {

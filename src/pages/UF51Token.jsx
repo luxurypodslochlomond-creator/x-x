@@ -114,7 +114,7 @@ export default function UF51TokenPage() {
           </div>
           <p><strong className="text-white">Not a coin.</strong> A continuity bookmark. The score and SHA-256 hash are derived only from live app state and hard-coded milestone flags we've genuinely landed.</p>
           <p><strong className="text-white">Zero-loss guarantee:</strong> same state in → same token out, always. Re-open weeks later and the token re-derives to the identical number, proving our score hasn't silently drifted.</p>
-          <p><strong className="text-white">No speculative claims.</strong> 1kg litter = 1 $P51 stays the only unit. This token is a receipt of integrity, not a tradable asset.</p>
+          <p><strong className="text-white">No speculative claims.</strong> 1kg litter = 1 P51 stays the only unit. This token is a receipt of integrity, not a tradable asset.</p>
         </div>
 
         <div className="text-center text-white/40 text-xs space-y-1">

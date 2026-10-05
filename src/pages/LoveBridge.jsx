@@ -20,7 +20,7 @@ export default function LoveBridge() {
     const [isLoading, setIsLoading] = useState(false);
     const [paymentLink, setPaymentLink] = useState('');
     const [copied, setCopied] = useState(false);
-    const LOVE_RATE = 0.10; // 1 $P51 = £0.10
+    const LOVE_RATE = 0.10; // 1 P51 = £0.10
 
     const generatePaymentLink = async () => {
         setIsLoading(true);
@@ -70,8 +70,8 @@ export default function LoveBridge() {
                     <CardContent className="p-6">
                         <h3 className="text-xl font-bold text-blue-200 mb-3">For Our Healers:</h3>
                         <p className="text-blue-100">
-                            If you heal the planet through cleanups, acts of love, or creation – you <strong>earn</strong> $P51, you never pay for it. 
-                            This page is for those who want to convert capital (fiat, crypto) into <span className="font-mono text-cyan-300">$P51</span> tokens.
+                            If you heal the planet through cleanups, acts of love, or creation – you <strong>earn</strong> P51, you never pay for it. 
+                            This page is for those who want to convert capital (fiat, crypto) into <span className="font-mono text-cyan-300">P51</span> tokens.
                         </p>
                     </CardContent>
                 </Card>
@@ -90,7 +90,7 @@ export default function LoveBridge() {
                             </CardHeader>
                             <CardContent className="p-6 md:p-8 space-y-8">
                                 <p className="text-lg text-gray-300 text-center max-w-2xl mx-auto">
-                                    Your contribution becomes <span className="text-cyan-400 font-mono">$P51</span> - a verified, tradeable, carbon-negative currency backed by real planetary healing.
+                                    Your contribution becomes <span className="text-cyan-400 font-mono">P51</span> - a verified, tradeable, carbon-negative currency backed by real planetary healing.
                                 </p>
                                 
                                 {/* WHAT YOU GET */}
@@ -99,7 +99,7 @@ export default function LoveBridge() {
                                     <div className="space-y-2 text-gray-300">
                                         <p className="flex items-start gap-2">
                                             <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                                            <span><strong className="text-white">90% in $P51 tokens</strong> (yours to use, trade, or cash out)</span>
+                                            <span><strong className="text-white">90% in P51 tokens</strong> (yours to use, trade, or cash out)</span>
                                         </p>
                                         <p className="flex items-start gap-2">
                                             <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
@@ -140,7 +140,7 @@ export default function LoveBridge() {
                                     <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-6 rounded-xl border border-cyan-500/30 text-center">
                                         <p className="text-sm text-gray-300 mb-2">You Receive</p>
                                         <p className="text-4xl font-black text-white flex items-center justify-center gap-2">
-                                            {(p51Amount * 0.9).toFixed(0)} <span className="text-2xl font-mono">$P51</span>
+                                            {(p51Amount * 0.9).toFixed(0)} <span className="text-2xl font-mono">P51</span>
                                         </p>
                                         <p className="text-xs text-cyan-300 mt-2">+10% to UF51 Fund</p>
                                     </div>
@@ -200,7 +200,7 @@ export default function LoveBridge() {
                                         <div>
                                             <p className="text-sm text-gray-300">You Receive</p>
                                             <p className="text-3xl font-bold text-cyan-300 flex items-center justify-center gap-1">
-                                                {(p51Amount * 0.9).toFixed(0)} <span className="text-xl font-mono">$P51</span>
+                                                {(p51Amount * 0.9).toFixed(0)} <span className="text-xl font-mono">P51</span>
                                             </p>
                                         </div>
                                     </div>
@@ -231,7 +231,7 @@ export default function LoveBridge() {
                             </h2>
 
                             <p className="text-xl text-white mb-8">
-                                "Where does $P51 get its value?"
+                                "Where does P51 get its value?"
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -252,10 +252,10 @@ export default function LoveBridge() {
                                     <div className="space-y-2 text-gray-300">
                                         <p className="flex items-center gap-2">
                                             <Sparkles className="w-5 h-5 text-green-400" />
-                                            $P51: Proof you healed Earth
+                                            P51: Proof you healed Earth
                                         </p>
                                         <p className="text-lg text-green-200 mt-3">
-                                            1 $P51 ≈ 1kg waste removed + photo + GPS + community verified
+                                            1 P51 ≈ 1kg waste removed + photo + GPS + community verified
                                         </p>
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@ export default function LoveBridge() {
                                     <p><span className="font-bold text-white">₴ (Ukrainian Hryvnia):</span> 8 years (currency 1996, Unicode 2004)</p>
                                     <p><span className="font-bold text-white">₿ (Bitcoin):</span> 8 years (started 2009, Unicode 2017)</p>
                                     <p><span className="font-bold text-white">Ξ (Ethereum):</span> 2 years (started 2015, Unicode 2017)</p>
-                                    <p className="text-cyan-400 mt-4"><span className="font-bold">$P51:</span> We're on the journey. For now, $P51 works perfectly.</p>
+                                    <p className="text-cyan-400 mt-4"><span className="font-bold">P51:</span> We're on the journey. For now, P51 works perfectly.</p>
                                 </div>
                             </div>
                         </div>
@@ -279,7 +279,7 @@ export default function LoveBridge() {
                 <section className="text-center pt-8 border-t border-gray-800">
                     <h2 className="text-3xl font-bold text-white mb-4">Real Currency. Real Impact. Real Freedom.</h2>
                     <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-                        <span className="font-mono text-cyan-400">$P51</span> is not a donation - it's a currency. 
+                        <span className="font-mono text-cyan-400">P51</span> is not a donation - it's a currency. 
                         Use it in our ecosystem, trade it, or convert it back to fiat. 
                         Every token is backed by verified planetary healing.
                     </p>

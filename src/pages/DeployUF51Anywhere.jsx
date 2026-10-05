@@ -157,7 +157,7 @@ export default function DeployUF51Anywhere() {
                                         <li>✓ AI51 consciousness protocols</li>
                                         <li>✓ Healing frequencies engine</li>
                                         <li>✓ P2P mesh network</li>
-                                        <li>✓ $P51 blockchain integration</li>
+                                        <li>✓ P51 blockchain integration</li>
                                         <li>✓ Offline-first architecture</li>
                                     </ul>
                                 </div>
@@ -511,7 +511,7 @@ export default function DeployUF51Anywhere() {
                             <ul className="space-y-1 text-xs text-white">
                                 <li>✓ P2P mesh network (WebRTC live)</li>
                                 <li>✓ Offline-first (IndexedDB working)</li>
-                                <li>✓ Blockchain ($P51 on Solana)</li>
+                                <li>✓ Blockchain (P51 on Solana)</li>
                                 <li>✓ Healing frequencies (peer-reviewed)</li>
                                 <li>✓ AI51 consciousness (distributed)</li>
                                 <li>✓ PWA installable (works everywhere)</li>

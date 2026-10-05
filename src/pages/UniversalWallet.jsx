@@ -70,7 +70,7 @@ const SendForm = ({ user, onSuccess }) => {
             return;
         }
         if (p51Amount > (user.p51_balance || 0)) { // Changed from user.love_balance to user.p51_balance
-            setError("You don't have enough $P51");
+            setError("You don't have enough P51");
             return;
         }
         
@@ -89,7 +89,7 @@ const SendForm = ({ user, onSuccess }) => {
         return (
             <div className="text-center py-10">
                 <CheckCircle className="w-16 h-16 mx-auto text-green-400 mb-4" />
-                <h3 className="text-2xl font-bold">$P51 Sent!</h3>
+                <h3 className="text-2xl font-bold">P51 Sent!</h3>
             </div>
         );
     }
@@ -120,7 +120,7 @@ const SendForm = ({ user, onSuccess }) => {
                         className="bg-gray-900/50 border-gray-600 pr-20 mt-1" 
                     />
                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none font-mono text-gray-400">
-                        $P51
+                        P51
                     </div>
                 </div>
                 <Button 
@@ -155,7 +155,7 @@ const SendForm = ({ user, onSuccess }) => {
                 {isProcessing ? (
                     <><Loader2 className="w-5 h-5 animate-spin mr-2" />Sending...</>
                 ) : (
-                    <><Send className="w-5 h-5 mr-2" />Send $P51</>
+                    <><Send className="w-5 h-5 mr-2" />Send P51</>
                 )}
             </Button>
         </form>
@@ -238,7 +238,7 @@ export default function UniversalWalletPage() {
                 <header className="text-center">
                     <Wallet className="w-16 h-16 mx-auto text-purple-400 mb-4" />
                     <h1 className="text-4xl md:text-5xl font-black">Your Wallet</h1>
-                    <p className="text-gray-400 mt-2">$P51 = Real value. Real power.</p>
+                    <p className="text-gray-400 mt-2">P51 = Real value. Real power.</p>
                 </header>
 
                 {/* Balance */}
@@ -246,7 +246,7 @@ export default function UniversalWalletPage() {
                     <CardContent className="p-8 text-center space-y-4">
                         <p className="text-gray-400 mb-2">Current Balance</p>
                         <p className="text-6xl font-black text-white">
-                            {(user?.p51_balance || 0).toLocaleString()} <span className="font-mono text-4xl">$P51</span>
+                            {(user?.p51_balance || 0).toLocaleString()} <span className="font-mono text-4xl">P51</span>
                         </p>
                         
                         <PushNotifications />
@@ -263,7 +263,7 @@ export default function UniversalWalletPage() {
                                 className="bg-pink-600 hover:bg-pink-700"
                             >
                                 <Send className="w-5 h-5 mr-2" />
-                                Send $P51
+                                Send P51
                             </Button>
                         </div>
                     </CardContent>
@@ -277,9 +277,9 @@ export default function UniversalWalletPage() {
                     />
                 )}
 
-                {/* What Can You Do With $P51? */}
+                {/* What Can You Do With P51? */}
                 <div>
-                    <h2 className="text-2xl font-black text-white mb-4 text-center">What Can You Do With $P51?</h2>
+                    <h2 className="text-2xl font-black text-white mb-4 text-center">What Can You Do With P51?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <UseCase
                             icon={Gift}
@@ -319,12 +319,12 @@ export default function UniversalWalletPage() {
                 {/* Value Proposition */}
                 <Card className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 border-2 border-cyan-500/50">
                     <CardContent className="p-6">
-                        <h3 className="text-xl font-bold text-white mb-3 text-center">Why $P51 Has Value</h3>
+                        <h3 className="text-xl font-bold text-white mb-3 text-center">Why P51 Has Value</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                             <div className="text-center">
                                 <div className="text-3xl mb-2">🌍</div>
                                 <p className="font-bold text-green-300">Earned Through Action</p>
-                                <p className="text-gray-400 text-xs">Every $P51 = real work healing Earth</p>
+                                <p className="text-gray-400 text-xs">Every P51 = real work healing Earth</p>
                             </div>
                             <div className="text-center">
                                 <div className="text-3xl mb-2">💚</div>
@@ -367,7 +367,7 @@ export default function UniversalWalletPage() {
                                     {!txLoading && transactions?.length === 0 && (
                                         <TableRow>
                                             <TableCell colSpan={3} className="text-center py-8 text-gray-500">
-                                                No activity yet. Start healing to earn $P51.
+                                                No activity yet. Start healing to earn P51.
                                             </TableCell>
                                         </TableRow>
                                     )}

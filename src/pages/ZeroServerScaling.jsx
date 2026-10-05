@@ -192,7 +192,7 @@ export default function ZeroServerScaling() {
                             <DollarSign className="w-6 h-6 text-amber-400 flex-shrink-0 mt-1" />
                             <div>
                                 <p className="text-white font-bold">Bitcoin Lightning = no middleman</p>
-                                <p className="text-gray-300 text-sm">When users cash out $P51, Lightning Network handles it peer-to-peer. No Stripe 3% cut. No payment servers.</p>
+                                <p className="text-gray-300 text-sm">When users cash out P51, Lightning Network handles it peer-to-peer. No Stripe 3% cut. No payment servers.</p>
                             </div>
                         </div>
                     </div>

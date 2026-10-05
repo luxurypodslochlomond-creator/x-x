@@ -56,7 +56,7 @@ export default function P2PTransfer({ userBalance, onSuccess }) {
             const amt = parseFloat(amount);
 
             if (amt > userBalance) {
-                throw new Error('Not enough $P51');
+                throw new Error('Not enough P51');
             }
 
             // Sign it
@@ -148,7 +148,7 @@ export default function P2PTransfer({ userBalance, onSuccess }) {
                     className="bg-black border-2 border-cyan-500/50 text-white font-mono text-2xl h-14"
                 />
                 <p className="text-cyan-400/60 text-xs font-mono mt-1">
-                    Available: {userBalance?.toFixed(1) || 0} $P51
+                    Available: {userBalance?.toFixed(1) || 0} P51
                 </p>
             </div>
 

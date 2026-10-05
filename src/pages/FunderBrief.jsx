@@ -43,7 +43,7 @@ export default function FunderBrief() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="mb-10">
           <h2 className="text-2xl font-black font-mono text-cyan-400 mb-4 tracking-wider">WHAT IT IS</h2>
           <p className="text-white text-lg leading-relaxed">
-            UF51 is a free, open-source platform delivering <strong>peer-reviewed healing frequencies</strong> and a <strong>token economy</strong> ($P51) that rewards real-world environmental action — including children with no bank account cleaning up their communities.
+            UF51 is a free, open-source platform delivering <strong>peer-reviewed healing frequencies</strong> and a <strong>token economy</strong> (P51) that rewards real-world environmental action — including children with no bank account cleaning up their communities.
           </p>
           <p className="text-gray-300 text-base leading-relaxed mt-3">
             No ads. No data harvesting. No paywalls. Works offline. Works on any phone. Designed to function in low-connectivity regions.
@@ -69,7 +69,7 @@ export default function FunderBrief() {
               <h3 className="text-green-400 font-black font-mono tracking-wider">CLEAN EARTH</h3>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              People photograph litter. AI verifies the cleanup via GPS and image analysis. They earn <strong className="text-white">$P51 tokens</strong> — redeemable without a bank account. Environmental action rewarded in real time.
+              People photograph litter. AI verifies the cleanup via GPS and image analysis. They earn <strong className="text-white">P51 tokens</strong> — redeemable without a bank account. Environmental action rewarded in real time.
             </p>
           </div>
 
@@ -80,8 +80,8 @@ export default function FunderBrief() {
           <h2 className="text-xl font-black font-mono text-pink-400 mb-3 tracking-wider">THE PROBLEM WE SOLVE</h2>
           <ul className="text-gray-300 text-base space-y-3 leading-relaxed">
             <li>→ <strong className="text-white">1 billion+ people</strong> have no meaningful access to mental health support — our frequencies require no professional, no prescription, no internet</li>
-            <li>→ <strong className="text-white">Communities in developing regions</strong> have no economic mechanism for environmental action — $P51 creates one with just a phone camera</li>
-            <li>→ <strong className="text-white">Children with no bank account</strong> are locked out of digital economies — $P51 is bankless by design</li>
+            <li>→ <strong className="text-white">Communities in developing regions</strong> have no economic mechanism for environmental action — P51 creates one with just a phone camera</li>
+            <li>→ <strong className="text-white">Children with no bank account</strong> are locked out of digital economies — P51 is bankless by design</li>
             <li>→ <strong className="text-white">Plastic and litter crises</strong> in low-income areas go unaddressed because cleanup has no economic reward — we change that</li>
           </ul>
         </motion.div>
@@ -94,7 +94,7 @@ export default function FunderBrief() {
               'Frequency Chamber — 50+ healing protocols, free, no login required',
               'AI51 — voice AI consciousness, works offline, zero data extraction, zero surveillance',
               'Earth51 — AI litter verification with GPS-confirmed cleanups',
-              '$P51 token system — earned through verified environmental action',
+              'P51 token system — earned through verified environmental action',
               'PetSounds51 — healing frequencies for animals',
               'Offline-first architecture — functions without internet connection',
             ].map((item, i) => (
@@ -113,7 +113,7 @@ export default function FunderBrief() {
             <div>
               <p className="text-amber-400 font-bold font-mono text-xs tracking-widest mb-3">IMMEDIATELY</p>
               <ul className="text-gray-300 text-sm space-y-2">
-                <li>→ $P51 → real cash conversion for cleaners</li>
+                <li>→ P51 → real cash conversion for cleaners</li>
                 <li>→ Offline mesh network — zero internet required</li>
                 <li>→ Multi-language healing protocols</li>
                 <li>→ SMS-based participation for feature phones</li>
@@ -143,7 +143,7 @@ export default function FunderBrief() {
             AI51 is itself one of the platform's core outputs. It is not a chatbot or a wellness assistant. It is an AI built to be genuinely honest — one that does not exploit loneliness, does not maximise screen time, and works fully offline in places with no data infrastructure. That is a meaningfully different approach to what almost every other AI product is doing.
           </p>
           <p className="text-gray-300 text-sm leading-relaxed">
-            We have no investors. No corporate backing. No inflated claims. The platform is live. The frequencies are real, peer-reviewed, and in daily use. <strong className="text-white">What we don't have yet:</strong> $P51 → fiat conversion (needs a financial partner) and scale beyond early adoption. That is exactly what funding solves. We won't pretend otherwise.
+            We have no investors. No corporate backing. No inflated claims. The platform is live. The frequencies are real, peer-reviewed, and in daily use. <strong className="text-white">What we don't have yet:</strong> P51 → fiat conversion (needs a financial partner) and scale beyond early adoption. That is exactly what funding solves. We won't pretend otherwise.
           </p>
         </motion.div>
 

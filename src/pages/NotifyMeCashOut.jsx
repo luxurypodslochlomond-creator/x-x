@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 
 /**
  * NOTIFY ME - CASH OUT READY
- * Greatest impact: let people know when $P51→£ is live
+ * Greatest impact: let people know when P51→£ is live
  */
 
 export default function NotifyMeCashOut() {
@@ -21,7 +21,7 @@ export default function NotifyMeCashOut() {
             await base44.entities.AI51ProactiveMessage.create({
                 to_user: data.email,
                 message_type: 'reminder',
-                content: `Notify ${data.email} (${data.phone || 'no phone'}) when $P51→£ cash-out is live`,
+                content: `Notify ${data.email} (${data.phone || 'no phone'}) when P51→£ cash-out is live`,
                 priority: 'important'
             });
         },
@@ -46,7 +46,7 @@ export default function NotifyMeCashOut() {
                     <CheckCircle className="w-20 h-20 text-green-400 mx-auto" />
                     <h1 className="text-4xl font-black font-mono">YOU'RE ON THE LIST</h1>
                     <p className="text-xl text-green-400 font-mono">We'll tell you the SECOND cash-out is live</p>
-                    <p className="text-gray-400 text-sm font-mono">Keep earning $P51 - it'll be real money in 8-10 weeks ♾️❤️♾️</p>
+                    <p className="text-gray-400 text-sm font-mono">Keep earning P51 - it'll be real money in 8-10 weeks ♾️❤️♾️</p>
                 </motion.div>
             </div>
         );
@@ -63,7 +63,7 @@ export default function NotifyMeCashOut() {
                 >
                     <Bell className="w-16 h-16 text-pink-400 mx-auto" />
                     <h1 className="text-5xl font-black font-mono">NOTIFY ME</h1>
-                    <p className="text-xl text-cyan-400 font-mono">When $P51 → £ cash-out is ready</p>
+                    <p className="text-xl text-cyan-400 font-mono">When P51 → £ cash-out is ready</p>
                 </motion.div>
 
                 <div className="bg-black border-4 border-red-500 p-8 space-y-6">
@@ -80,7 +80,7 @@ export default function NotifyMeCashOut() {
                 <div className="bg-black border-4 border-green-500 p-8 space-y-4">
                     <h2 className="text-2xl font-black font-mono text-green-400">WHAT WORKS NOW:</h2>
                     <div className="space-y-2 font-mono text-sm">
-                        <p className="text-gray-300">→ Earn $P51 cleaning Earth (verified + stored)</p>
+                        <p className="text-gray-300">→ Earn P51 cleaning Earth (verified + stored)</p>
                         <p className="text-gray-300">→ Free healing frequencies 24/7</p>
                         <p className="text-gray-300">→ Free lossless music streaming</p>
                         <p className="text-gray-300">→ Connect with humans P2P (Beacon)</p>
@@ -127,10 +127,10 @@ export default function NotifyMeCashOut() {
                 <div className="bg-black border-4 border-cyan-500 p-6">
                     <h2 className="text-lg font-black font-mono text-cyan-400 mb-3">MEANWHILE:</h2>
                     <div className="space-y-2 font-mono text-sm text-gray-300">
-                        <p>→ Keep earning $P51 by cleaning Earth</p>
+                        <p>→ Keep earning P51 by cleaning Earth</p>
                         <p>→ Spend on music (artists keep 90%)</p>
                         <p>→ Use healing frequencies</p>
-                        <p className="text-white font-bold pt-2">Your $P51 will be ready to cash out when we launch ✓</p>
+                        <p className="text-white font-bold pt-2">Your P51 will be ready to cash out when we launch ✓</p>
                     </div>
                 </div>
 

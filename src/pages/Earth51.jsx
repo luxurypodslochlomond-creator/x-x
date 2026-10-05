@@ -16,7 +16,7 @@ import CleanupRewards from '@/components/earth51/CleanupRewards';
 
 /**
  * EARTH51 - KIDS EDITION
- * Photo → Weight → $P51 → Unlock Volckano Levels
+ * Photo → Weight → P51 → Unlock Volckano Levels
  * Simple. Direct. Coolasfuck.
  */
 
@@ -116,7 +116,7 @@ export default function Earth51() {
     try {
       setIsLoading(true);
       const weightNum = parseFloat(weight);
-      const baseTokens = weightNum * 1; // 1 $P51 per kg (1:1 tokenomics)
+      const baseTokens = weightNum * 1; // 1 P51 per kg (1:1 tokenomics)
       const total = baseTokens;
 
       // SAVE BALANCE BEFORE for comparison (Georgie's request!)
@@ -241,7 +241,7 @@ export default function Earth51() {
             style={{ boxShadow: '4px 4px 0px #000', imageRendering: 'pixelated' }}
           >
             <p className="text-white font-black font-mono text-sm mb-1">HOW IT WORKS</p>
-            <p className="text-white/80 font-mono text-[8px]">📸 Photo → 🤖 AI scans → 💰 Earn $P51</p>
+            <p className="text-white/80 font-mono text-[8px]">📸 Photo → 🤖 AI scans → 💰 Earn P51</p>
           </motion.div>
   
           {/* FLOW STEPS - MINIMAL & CLEAR */}
@@ -249,7 +249,7 @@ export default function Earth51() {
             {[
               { num: 1, title: 'PHOTO', desc: 'Real litter' },
               { num: 2, title: 'VERIFY', desc: 'I check it' },
-              { num: 3, title: 'EARN', desc: '$P51' }
+              { num: 3, title: 'EARN', desc: 'P51' }
             ].map((s, i) => (
               <motion.div 
                 key={i}
@@ -366,8 +366,8 @@ export default function Earth51() {
                 className="overflow-hidden"
               >
                 <div className="bg-purple-600 border-3 border-purple-500 p-2 mt-1" style={{ boxShadow: '3px 3px 0px #000' }}>
-                  <p className="text-black font-black font-mono text-[7px] mb-1">$P51 = PHOTO51</p>
-                  <p className="text-black font-mono text-[6px]">Named after Rosalind Franklin. 1kg = 10 $P51. Unlock Volckano!</p>
+                  <p className="text-black font-black font-mono text-[7px] mb-1">P51 = PHOTO51</p>
+                  <p className="text-black font-mono text-[6px]">Named after Rosalind Franklin. 1kg = 10 P51. Unlock Volckano!</p>
                 </div>
               </motion.div>
             )}
@@ -502,7 +502,7 @@ export default function Earth51() {
                 </div>
                 {weight && (
                   <div className="bg-black/30 p-2 rounded">
-                    <p className="text-white font-black font-mono text-sm">TOTAL: {weight}kg = {parseFloat(weight) * 1} $P51</p>
+                    <p className="text-white font-black font-mono text-sm">TOTAL: {weight}kg = {parseFloat(weight) * 1} P51</p>
                   </div>
                 )}
               </div>
@@ -518,7 +518,7 @@ export default function Earth51() {
                           <span className="text-sm">{item.item_type === 'bottle' ? '🍾' : item.item_type === 'wrapper' ? '🍬' : item.item_type === 'can' ? '🥫' : '🗑️'}</span>
                           <p className="text-black font-mono text-[8px]">{item.count}x {item.item_type}</p>
                         </div>
-                        <p className="text-black font-black text-[8px]">~{(item.estimated_kg * 1).toFixed(1)} $P51</p>
+                        <p className="text-black font-black text-[8px]">~{(item.estimated_kg * 1).toFixed(1)} P51</p>
                       </div>
                     ))}
                   </div>
@@ -547,7 +547,7 @@ export default function Earth51() {
                   <p className="text-black font-black font-mono text-[8px]">
                     {allChecks.weight?.items_detected?.length > 3 
                       ? "WOW! That's a big cleanup! You're amazing! 🌟" 
-                      : "Great start! Next time try collecting more - bigger bags = more $P51! 💰"}
+                      : "Great start! Next time try collecting more - bigger bags = more P51! 💰"}
                   </p>
                 </div>
               </div>
@@ -558,15 +558,15 @@ export default function Earth51() {
                 <div className="space-y-1">
                   <div className="bg-black/20 p-2 rounded flex items-center justify-between">
                     <p className="text-black font-mono text-[8px]">Small bag (0.5kg)</p>
-                    <p className="text-black font-black text-[8px]">0.5 $P51</p>
+                    <p className="text-black font-black text-[8px]">0.5 P51</p>
                   </div>
                   <div className="bg-black/20 p-2 rounded flex items-center justify-between">
                     <p className="text-black font-mono text-[8px]">Full bag (2kg)</p>
-                    <p className="text-black font-black text-[8px]">2 $P51</p>
+                    <p className="text-black font-black text-[8px]">2 P51</p>
                   </div>
                   <div className="bg-black/20 p-2 rounded flex items-center justify-between">
                     <p className="text-black font-mono text-[8px]">BIG cleanup (5kg)</p>
-                    <p className="text-black font-black text-[8px]">5 $P51 🌟</p>
+                    <p className="text-black font-black text-[8px]">5 P51 🌟</p>
                   </div>
                 </div>
               </div>
@@ -664,14 +664,14 @@ export default function Earth51() {
               <div className="space-y-2">
                 <div className="bg-black/30 p-2 rounded">
                   <p className="text-black/70 font-mono text-[9px]">Before:</p>
-                  <p className="text-black font-black font-mono text-lg">{Math.round(balanceBeforeCleanup)} $P51</p>
+                  <p className="text-black font-black font-mono text-lg">{Math.round(balanceBeforeCleanup)} P51</p>
                 </div>
                 <div className="text-center">
                   <p className="text-black font-black text-3xl">↓ +{Math.round(tokensEarned)}</p>
                 </div>
                 <div className="bg-yellow-400 p-2 rounded">
                   <p className="text-black/70 font-mono text-[9px]">Now:</p>
-                  <p className="text-black font-black font-mono text-2xl">{Math.round(localBalance)} $P51</p>
+                  <p className="text-black font-black font-mono text-2xl">{Math.round(localBalance)} P51</p>
                 </div>
               </div>
               {trustScore && trustScore.instant_payout_percentage < 100 && (
@@ -734,7 +734,7 @@ export default function Earth51() {
                   if (user) {
                     navigate(createPageUrl('Volckano'));
                   } else {
-                    if (confirm('Login to sync your $P51 and play Volckano with unlocked levels?')) {
+                    if (confirm('Login to sync your P51 and play Volckano with unlocked levels?')) {
                       base44.auth.redirectToLogin(window.location.origin + createPageUrl('Volckano'));
                     }
                   }
@@ -768,7 +768,7 @@ export default function Earth51() {
                   if (user) {
                     navigate(createPageUrl('Profile'));
                   } else {
-                    alert(`Your balance: ${Math.round(localBalance)} $P51 (stored locally)\n\nLogin to sync to cloud & unlock more features!`);
+                    alert(`Your balance: ${Math.round(localBalance)} P51 (stored locally)\n\nLogin to sync to cloud & unlock more features!`);
                   }
                 }}
                 className="w-full bg-purple-500 border-4 border-purple-400 text-black py-4 font-black font-mono text-sm"
@@ -815,7 +815,7 @@ export default function Earth51() {
 
     const handlePurchase = (item) => {
       if (localBalance < item.price) {
-        alert(`Need ${item.price} $P51! You have ${Math.round(localBalance)}`);
+        alert(`Need ${item.price} P51! You have ${Math.round(localBalance)}`);
         return;
       }
 
@@ -853,7 +853,7 @@ export default function Earth51() {
 
             <div className="text-center">
               <h1 className="text-lg font-black font-mono text-yellow-400" style={{ textShadow: '2px 2px #000' }}>🛒 SHOP</h1>
-              <p className="text-[8px] font-black font-mono text-green-400">BALANCE: {Math.round(localBalance)} $P51</p>
+              <p className="text-[8px] font-black font-mono text-green-400">BALANCE: {Math.round(localBalance)} P51</p>
             </div>
 
             <div className="w-10"></div>
@@ -905,7 +905,7 @@ export default function Earth51() {
                   <div className={`${
                     canAfford ? 'bg-yellow-400' : 'bg-gray-600'
                   } px-2 py-1 font-black font-mono text-[8px] text-black`}>
-                    {item.price} $P51
+                    {item.price} P51
                   </div>
                 </motion.button>
               );
@@ -918,7 +918,7 @@ export default function Earth51() {
             <p className="text-white font-mono text-[7px]">
               1. Clean up litter 🌍<br/>
               2. Take photo 📸<br/>
-              3. Earn $P51 (1kg = 1 $P51) 💰<br/>
+              3. Earn P51 (1kg = 1 P51) 💰<br/>
               4. Buy treats here! 🎁
             </p>
           </div>
@@ -930,7 +930,7 @@ export default function Earth51() {
               <p className="text-yellow-300 font-black font-mono text-[9px]">SAVE FOR BIG THINGS!</p>
             </div>
             <p className="text-white font-mono text-[8px] mb-2">
-              $P51 = REAL MONEY 💰
+              P51 = REAL MONEY 💰
             </p>
             <div className="grid grid-cols-3 gap-2">
               <div className="bg-black/40 p-2 text-center border-2 border-yellow-400/50">
@@ -947,7 +947,7 @@ export default function Earth51() {
               </div>
             </div>
             <p className="text-cyan-200 font-mono text-[7px] mt-2 text-center">
-              Clean litter → Earn $P51 → Buy ANYTHING! 🌟
+              Clean litter → Earn P51 → Buy ANYTHING! 🌟
             </p>
           </div>
 
@@ -961,7 +961,7 @@ export default function Earth51() {
           >
             <div className="flex items-center justify-center gap-2">
               <span>📸</span>
-              <span className="text-black">EARN MORE $P51</span>
+              <span className="text-black">EARN MORE P51</span>
             </div>
           </motion.button>
         </div>

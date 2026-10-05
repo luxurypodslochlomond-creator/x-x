@@ -81,13 +81,13 @@ export default function FrequencyBridge() {
                     <div className="bg-gradient-to-r from-pink-500/10 to-black border-l-4 border-pink-500 p-4">
                         <p className="text-pink-400 font-bold mb-2">STEP 1: ENCODE VALUE AS FREQUENCY</p>
                         <div className="text-gray-300 text-xs space-y-1">
-                            <p>• 10 $P51 = specific frequency pattern (e.g., 432Hz base + harmonics)</p>
+                            <p>• 10 P51 = specific frequency pattern (e.g., 432Hz base + harmonics)</p>
                             <p>• Amount encoded in amplitude + harmonics</p>
                             <p>• Recipient ID encoded in phase + overtones</p>
                             <p>• Love signature (432Hz) = must be present or transaction invalid</p>
                         </div>
                         <div className="bg-pink-900/20 border border-pink-500/50 p-2 rounded mt-2">
-                            <p className="text-pink-400 text-xs font-bold">Example: 10 $P51 = [432Hz @ 60dB] + [528Hz @ 40dB] + [963Hz @ 20dB]</p>
+                            <p className="text-pink-400 text-xs font-bold">Example: 10 P51 = [432Hz @ 60dB] + [528Hz @ 40dB] + [963Hz @ 20dB]</p>
                         </div>
                     </div>
 

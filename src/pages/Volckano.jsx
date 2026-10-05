@@ -187,7 +187,7 @@ export default function Volckano() {
             });
         }
         
-        // Add collectible stars AND in-game litter (earns small $P51)
+        // Add collectible stars AND in-game litter (earns small P51)
         for (let i = 0; i < 8; i++) {
             collectibles.current.push({
                 x: 300 + (i * 100),
@@ -227,7 +227,7 @@ export default function Volckano() {
                     localStorage.setItem('volckano_highscore', score.toString());
                 }
                 
-                // Check for unlocks (stars + $P51 requirement)
+                // Check for unlocks (stars + P51 requirement)
                 CHARACTER_UNLOCKS.forEach(char => {
                     const hasStars = stars >= char.stars;
                     const hasP51 = p51Balance >= char.p51Required;
@@ -279,7 +279,7 @@ export default function Volckano() {
                     c.collected = true;
                     
                     if (c.type === 'litter') {
-                        // IN-GAME LITTER: 1 $P51 per pickup (whole numbers!)
+                        // IN-GAME LITTER: 1 P51 per pickup (whole numbers!)
                         setInGameP51(prev => {
                             const newBalance = prev + 1;
                             localStorage.setItem('volckano_ingame_p51', newBalance.toString());
@@ -710,7 +710,7 @@ export default function Volckano() {
                                                     </div>
                                                     {char.p51Required > 0 && (
                                                         <div className={`${hasP51 ? 'bg-green-600' : 'bg-pink-600'} text-white text-[9px] font-black px-1.5 py-0.5 border-2 border-white whitespace-nowrap font-mono`}>
-                                                            {char.p51Required} $P51
+                                                            {char.p51Required} P51
                                                         </div>
                                                     )}
                                                 </div>
@@ -720,12 +720,12 @@ export default function Volckano() {
                                 </div>
                             </div>
 
-                            {/* $P51 EXPLAINER */}
+                            {/* P51 EXPLAINER */}
                             <div className="bg-black border-4 border-green-500 p-4 mb-4" style={{ boxShadow: '4px 4px 0px #000' }}>
-                                <p className="text-green-400 font-black font-mono text-xs mb-2">HOW $P51 WORKS:</p>
+                                <p className="text-green-400 font-black font-mono text-xs mb-2">HOW P51 WORKS:</p>
                                 <div className="space-y-1 text-white font-mono text-[9px]">
-                                    <p>🌍 Clean REAL Earth = 10 $P51/kg</p>
-                                    <p>🎮 Clean in-game = 1 $P51/pickup</p>
+                                    <p>🌍 Clean REAL Earth = 10 P51/kg</p>
+                                    <p>🎮 Clean in-game = 1 P51/pickup</p>
                                     <p>💡 Real Earth 10x better!</p>
                                 </div>
                                 <div className="bg-pink-500 border-2 border-pink-400 p-2 mt-2">
@@ -804,7 +804,7 @@ export default function Volckano() {
                                         </div>
                                     </div>
                                     <p className="text-pink-400 text-[9px] font-mono">
-                                        Real Earth: {Math.round(p51Balance)} $P51
+                                        Real Earth: {Math.round(p51Balance)} P51
                                     </p>
                                 </div>
                                 

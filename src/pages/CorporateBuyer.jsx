@@ -14,7 +14,7 @@ const ECOSYSTEM = [
     tag: 'ENVIRONMENTAL',
     color: 'green',
     icon: Leaf,
-    what: 'AI-verified litter removal. Real people, real cleanups, GPS + photo proof. $P51 tokens reward verified environmental work.',
+    what: 'AI-verified litter removal. Real people, real cleanups, GPS + photo proof. P51 tokens reward verified environmental work.',
     impact: 'Sponsor verified cleanups in your local area. Your name on every IPFS record.',
     esg: 'Scope 3 / community environmental action',
     live: true,
@@ -149,7 +149,7 @@ const FAQ = [
   },
   {
     q: 'How much do the people cleaning up actually earn?',
-    a: 'Honestly — we\'re still calibrating this. The model is: businesses buy $P51 credits → that funds the token treasury → token holders (people who cleaned) convert to cash. More corporate funding = more money per kg. We are being straight: this is early stage, but the infrastructure is real and working.'
+    a: 'Honestly — we\'re still calibrating this. The model is: businesses buy P51 credits → that funds the token treasury → token holders (people who cleaned) convert to cash. More corporate funding = more money per kg. We are being straight: this is early stage, but the infrastructure is real and working.'
   },
   {
     q: 'Can we fund a specific product or community?',
@@ -312,10 +312,10 @@ export default function CorporateBuyer() {
             <div>
               <h2 className="text-xl font-black text-white mb-3">Honest about where we are</h2>
               <p className="text-gray-300 leading-relaxed mb-3">
-                We are early-stage. The technology works — the verification, the IPFS storage, the audio engines, the AI tools. The payment infrastructure connecting $P51 tokens to real cash is being built.
+                We are early-stage. The technology works — the verification, the IPFS storage, the audio engines, the AI tools. The payment infrastructure connecting P51 tokens to real cash is being built.
               </p>
               <p className="text-gray-300 leading-relaxed mb-3">
-                The exact conversion rate from $P51 to cash depends on how much funding comes in. More corporate partners = more money per kg for the people doing the work. That is the whole model, and we think it's a good one.
+                The exact conversion rate from P51 to cash depends on how much funding comes in. More corporate partners = more money per kg for the people doing the work. That is the whole model, and we think it's a good one.
               </p>
               <p className="text-yellow-400 font-bold">
                 We are not going to tell you numbers we don't have yet. We will tell you when we do.

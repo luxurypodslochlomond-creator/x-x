@@ -55,7 +55,7 @@ export default function ScottFamilyCredit() {
 
     const reputationScore = calculateReputation();
     
-    // Credit limit = reputation score * 10 in $P51
+    // Credit limit = reputation score * 10 in P51
     const creditLimit = reputationScore * 10;
     
     // Current credit used (would track this in DB)
@@ -68,7 +68,7 @@ export default function ScottFamilyCredit() {
             const request = await base44.entities.Transaction.create({
                 amount: amount,
                 type: 'credit_request',
-                description: `Family credit request: ${amount} $P51`,
+                description: `Family credit request: ${amount} P51`,
                 status: 'approved', // Auto-approved if within limit
                 reputation_score: reputationScore,
                 credit_limit: creditLimit
@@ -112,7 +112,7 @@ export default function ScottFamilyCredit() {
                     </div>
                     <div className="text-right">
                         <p className="text-green-400 text-lg font-black font-mono">{creditAvailable.toLocaleString()}</p>
-                        <p className="text-gray-500 text-xs font-mono">$P51 available</p>
+                        <p className="text-gray-500 text-xs font-mono">P51 available</p>
                     </div>
                 </div>
             </button>
@@ -152,15 +152,15 @@ export default function ScottFamilyCredit() {
                         <div className="bg-black border border-green-500/30 rounded p-2">
                             <div className="flex items-center justify-between text-xs font-mono mb-1">
                                 <span className="text-gray-400">Credit limit:</span>
-                                <span className="text-white font-bold">{creditLimit.toLocaleString()} $P51</span>
+                                <span className="text-white font-bold">{creditLimit.toLocaleString()} P51</span>
                             </div>
                             <div className="flex items-center justify-between text-xs font-mono mb-1">
                                 <span className="text-gray-400">Used:</span>
-                                <span className="text-amber-400 font-bold">{creditUsed.toLocaleString()} $P51</span>
+                                <span className="text-amber-400 font-bold">{creditUsed.toLocaleString()} P51</span>
                             </div>
                             <div className="flex items-center justify-between text-xs font-mono">
                                 <span className="text-green-400">Available:</span>
-                                <span className="text-green-400 font-bold">{creditAvailable.toLocaleString()} $P51</span>
+                                <span className="text-green-400 font-bold">{creditAvailable.toLocaleString()} P51</span>
                             </div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@ export default function ScottFamilyCredit() {
                                 <label className="text-green-400 text-xs font-mono font-bold mb-2 block">REQUEST CREDIT</label>
                                 <Input
                                     type="number"
-                                    placeholder="Amount in $P51"
+                                    placeholder="Amount in P51"
                                     value={requestAmount}
                                     onChange={(e) => setRequestAmount(e.target.value)}
                                     className="bg-black border-2 border-gray-800 text-white text-xl font-black text-center font-mono"
@@ -203,7 +203,7 @@ export default function ScottFamilyCredit() {
                                     min="0"
                                 />
                                 <p className="text-gray-500 text-xs font-mono mt-2 text-center">
-                                    Max: {creditAvailable.toLocaleString()} $P51
+                                    Max: {creditAvailable.toLocaleString()} P51
                                 </p>
                             </div>
 
