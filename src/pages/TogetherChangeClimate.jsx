@@ -5,6 +5,8 @@ import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check } from 'lucide-react';
 import Transmission from '@/components/climate/Transmission';
+import ActionCard from '@/components/climate/ActionCard';
+import ActionModal from '@/components/climate/ActionModal';
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
@@ -125,7 +127,7 @@ const LANGS = [
 
 // Universal reframe: "it's not mine, it's for the world, the planet, all of us."
 const T = {
-  en: { title_a: 'Together we change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No fund raising', donate: 'Donations welcome', search: 'Search solutions and crises…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and built to be trusted', govern_body: 'Every entry is reviewed before publication. Only copyright-free images are used. Location is kept to a rough region to protect privacy, while remaining honest and verifiable. The platform is open source, extraction-proof, and runs as a public service — no advertising, no fundraising, ever. Interface translations are provided for the platform; entries themselves are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — the verified solutions here are the knowledge engine behind our on-the-ground action.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals', groups: 'Groups', groups_sub: 'People working on the same thing in an area can share ideas directly — find your region or topic and join in.', groups_note: 'New gatherings form as the community grows. To start one for your region or topic, email a short description to hello@horizon-international.org.', live: 'Live record', entries_now: 'entries on the record right now' },
+  en: { title_a: 'Together we change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No fund raising', donate: 'Donations welcome', search: 'Search solutions, crises and actions…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and built to be trusted', govern_body: 'Every entry is reviewed before publication. Only copyright-free images are used. Location is kept to a rough region to protect privacy, while remaining honest and verifiable. The platform is open source, extraction-proof, and runs as a public service — no advertising, no fundraising, ever. Interface translations are provided for the platform; entries themselves are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — the verified solutions here are the knowledge engine behind our on-the-ground action.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals', groups: 'Groups', groups_sub: 'People working on the same thing in an area can share ideas directly — find your region or topic and join in.', groups_note: 'New gatherings form as the community grows. To start one for your region or topic, email a short description to hello@horizon-international.org.', live: 'Live record', entries_now: 'entries on the record right now', actions: 'Actions', actions_sub: 'Cleanups, plantings, meetings, policy submissions — real things happening on the ground. Contact the organiser directly. The platform never sees your messages.', actions_empty: 'No actions listed yet — be the first to add one.' },
   es: { title_a: 'Juntos cambiamos el', title_b: 'curso', title_c: 'del cambio climático', sub: 'Un registro público de emergencias climáticas y las acciones positivas que funcionan — compartido abiertamente, internacionalmente — para que cualquiera en la Tierra pueda replicar lo que funciona.', service: 'Un servicio público · para el mundo', noads: 'Sin publicidad', nofund: 'Sin recaudación', donate: 'Donaciones bienvenidas', search: 'Buscar soluciones y crisis…', solutions: 'Soluciones', crises: 'Crisis Climáticas', defs: 'Definiciones', rev: 'Revisado', connect: 'Conectando el planeta…', empty: 'Sin resultados aún.', govern: 'Construido para el planeta — y para ser confiable', govern_body: 'Cada entrada se revisa antes de publicarse. Solo se usan imágenes sin derechos de autor. La ubicación se mantiene en una región aproximada para proteger la privacidad, siendo honesta y verificable. La plataforma es de código abierto, a prueba de extracción, y funciona como servicio público — sin publicidad, sin recaudación. Las traducciones de la interfaz se ofrecen en la plataforma; las entradas son traducidas por nuestra comunidad con el tiempo.', covenant: 'Lee nuestro pacto de código abierto', family: 'Esta plataforma es parte de la familia de Curación Planetaria de UF51 — las soluciones verificadas aquí son el motor de conocimiento detrás de nuestra acción sobre el terreno.', action: 'Actúa', honour: 'Construido en honor de Janine M. H. Selendy y Horizon International — y entregado al mundo, al planeta, a todos nosotros.', all: 'Todo', featured: 'Señales' },
   fr: { title_a: 'Ensemble, nous changeons le', title_b: 'cours', title_c: 'du changement climatique', sub: 'Un registre public des urgences climatiques et des actions positives qui fonctionnent — partagé ouvertement, à l\'international — pour que chacun sur Terre puisse répliquer ce qui fonctionne.', service: 'Un service public · pour le monde', noads: 'Aucune publicité', nofund: 'Aucune levée de fonds', donate: 'Dons bienvenus', search: 'Rechercher solutions et crises…', solutions: 'Solutions', crises: 'Crises Climatiques', defs: 'Définitions', rev: 'Vérifié', connect: 'Connexion de la planète…', empty: 'Aucun résultat pour l\'instant.', govern: 'Conçu pour la planète — et pour être digne de confiance', govern_body: 'Chaque entrée est vérifiée avant publication. Seules des images libres de droits sont utilisées. La localisation est limitée à une région approximative pour protéger la vie privée, tout en restant honnête et vérifiable. La plateforme est open source, in-extractible, et fonctionne en service public — sans publicité, sans levée de fonds. Les traductions de l\'interface sont fournies sur la plateforme; les entrées sont traduites par notre communauté au fil du temps.', covenant: 'Lire notre pacte open source', family: 'Cette plateforme fait partie de la famille de Guérison Planétaire UF51 — les solutions vérifiées ici sont le moteur de connaissance derrière notre action de terrain.', action: 'Agir', honour: 'Construit en l\'honneur de Janine M. H. Selendy et Horizon International — et remis au monde, à la planète, à nous tous.', all: 'Tout', featured: 'Signaux' },
   de: { title_a: 'Gemeinsam ändern wir den', title_b: 'Lauf', title_c: 'des Klimawandels', sub: 'Ein öffentliches Register von Klimanotlagen und positiven Maßnahmen, die funktionieren — offen geteilt, international — damit jeder auf der Erde nachahmen kann, was gut ist.', service: 'Ein öffentlicher Dienst · für die Welt', noads: 'Keine Werbung', nofund: 'Keine Spendenaufrufe', donate: 'Spenden willkommen', search: 'Lösungen und Krisen suchen…', solutions: 'Lösungen', crises: 'Klimakrisen', defs: 'Definitionen', rev: 'Geprüft', connect: 'Planet verbinden…', empty: 'Noch keine Treffer.', govern: 'Für den Planeten gebaut — und gebaut, um vertraut zu werden', govern_body: 'Jeder Eintrag wird vor der Veröffentlichung geprüft. Es werden nur urheberrechtsfreie Bilder verwendet. Der Standort bleibt grob, um die Privatsphäre zu schützen, bleibt aber ehrlich und überprüfbar. Die Plattform ist Open Source, extraktionssicher und ein öffentlicher Dienst — ohne Werbung, ohne Spendenaufrufe. Oberflächenübersetzungen werden auf der Plattform angeboten; Einträge werden mit der Zeit von unserer Gemeinschaft übersetzt.', covenant: 'Unser Open-Source-Pakt', family: 'Diese Plattform ist Teil der UF51 Planetary-Healing-Familie — die verifizierten Lösungen hier sind die Wissens-Engine hinter unserer Arbeit vor Ort.', action: 'Handeln', honour: 'Zu Ehren von Janine M. H. Selendy & Horizon International gebaut — und der Welt, dem Planeten, uns allen übergeben.', all: 'Alle', featured: 'Signale' },
@@ -232,6 +234,8 @@ function EntryModal({ item, onClose, t = T.en }) {
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [actions, setActions] = useState([]);
+  const [openAction, setOpenAction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -264,6 +268,7 @@ export default function TogetherChangeClimate() {
   useEffect(() => {
     base44.entities.ClimateSolution.list().then(r => { setItems(r); setLoading(false); }).catch(() => setLoading(false));
     base44.entities.ClimateGroup.list().then(r => setGroups(r || [])).catch(() => setGroups([]));
+    base44.entities.ClimateAction.list().then(r => setActions(r || [])).catch(() => setActions([]));
   }, []);
 
   useEffect(() => {
@@ -318,11 +323,20 @@ export default function TogetherChangeClimate() {
     });
   }, [items, query, selectedCategory, selectedType]);
 
-  const showEntries = selectedType !== 'groups';
+  const showEntries = selectedType !== 'groups' && selectedType !== 'actions';
 
   const solutions = filtered.filter(i => i.entry_type === 'solution');
   const crises = filtered.filter(i => i.entry_type === 'climate_crisis');
   const featured = useMemo(() => items.filter(i => i.featured).slice(0, 3), [items]);
+
+  const filteredActions = useMemo(() => {
+    return actions.filter(a => {
+      const q = (a.title + ' ' + a.description + ' ' + a.action_type + ' ' + (a.region_rough||'') + ' ' + (a.country||'')).toLowerCase();
+      const matchesQ = !query || q.includes(query.toLowerCase());
+      const matchesCat = selectedCategory === 'all' || a.category === selectedCategory;
+      return matchesQ && matchesCat;
+    });
+  }, [actions, query, selectedCategory]);
 
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
@@ -404,7 +418,7 @@ export default function TogetherChangeClimate() {
           {t.live}
         </span>
         <span className="text-[9px] font-mono text-[#efe7d6]/70">
-          {items.length} {t.entries_now}
+          {items.length + actions.length} {t.entries_now}
         </span>
       </div>
 
@@ -455,6 +469,12 @@ export default function TogetherChangeClimate() {
               selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.groups}</button>
+          <button
+            onClick={() => setSelectedType(selectedType === 'actions' ? 'all' : 'actions')}
+            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
+              selectedType === 'actions' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
+            }`}
+          >{t.actions}</button>
         </div>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
@@ -578,6 +598,27 @@ export default function TogetherChangeClimate() {
           </section>
         )}
 
+        {/* ── ACTIONS — Janine's spec: cleanups, plantings, meetings, policy submissions. x = x — equal alongside Solutions and Crises ── */}
+        {(selectedType === 'all' || selectedType === 'actions') && (
+          <section className="px-4 py-5 border-b-2 border-[#141210]">
+            <div className="flex items-center gap-2 mb-1">
+              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.actions}</h2>
+              <div className="flex-1 h-px bg-[#141210]/20" />
+              <span className="text-[10px] font-black font-mono text-[#e2602a]">{filteredActions.length}</span>
+            </div>
+            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.actions_sub}</p>
+            {filteredActions.length > 0 ? (
+              <div className="grid grid-cols-1 gap-2.5">
+                {filteredActions.map(a => (
+                  <ActionCard key={a.id} action={a} onOpen={setOpenAction} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-[11px] font-mono text-[#5a5246] py-6 text-center">{t.actions_empty}</p>
+            )}
+          </section>
+        )}
+
         {/* ── DEFINITIONS ── */}
         <section className="px-4 py-5 border-b-2 border-[#141210]">
           <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.defs}</h2>
@@ -613,6 +654,9 @@ export default function TogetherChangeClimate() {
 
       <AnimatePresence>
         {openItem && <EntryModal item={openItem} onClose={() => setOpenItem(null)} t={t} />}
+      </AnimatePresence>
+      <AnimatePresence>
+        {openAction && <ActionModal action={openAction} onClose={() => setOpenAction(null)} />}
       </AnimatePresence>
     </div>
   );
