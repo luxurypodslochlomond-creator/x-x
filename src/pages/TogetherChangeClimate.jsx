@@ -290,17 +290,27 @@ export default function TogetherChangeClimate() {
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
       `}</style>
 
-      {/* ── BIG SCIENCE EPIGRAPH — Laurie's thesis, the cold opening ── */}
-      <div className="bg-[#141210] px-5 py-2.5 flex items-center justify-center gap-2 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
-        <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-        <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
-          This is the time. And this is the record of the time.
-        </span>
-        <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+      {/* ── BIG SCIENCE EPIGRAPH — Laurie's thesis + the x = x covenant, cold opening ── */}
+      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+        <div className="flex items-center justify-center gap-2 w-full">
+          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+          <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
+            This is the time. And this is the record of the time.
+          </span>
+          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+        </div>
+        <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
+          x = x
+        </div>
       </div>
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
       <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: '72vh' }}>
+        {/* O Superman — the pilot's voice, cold in the corner */}
+        <div className="absolute top-3 left-5 z-20 flex items-center gap-1.5 pointer-events-none" style={{ animation: 'twcc-flicker 7s linear 2s infinite' }}>
+          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse" />
+          <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">O Superman · O Superman</span>
+        </div>
         <img
           src={IMAGES.global}
           alt=""
@@ -365,6 +375,10 @@ export default function TogetherChangeClimate() {
         {/* Signal band */}
         <div className="relative z-10 bg-[#e2602a] px-5 py-5 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
           <p className="text-[11px] font-bold uppercase leading-relaxed max-w-[330px] text-[#141210] tracking-wide">{t.sub}</p>
+          {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
+          <p className="text-[9px] font-black font-mono uppercase leading-relaxed mt-3 text-[#141210] tracking-[0.1em]" style={{ opacity: 0.75 }}>
+            Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
+          </p>
         </div>
       </div>
 
