@@ -111,6 +111,10 @@ export default function WelcomePage() {
   return (
     <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
       <div className="max-w-6xl mx-auto px-6 py-16 space-y-16 relative z-10">
+        {/* Beadie Signal v2 — if you see this, the preview has refreshed */}
+        <div className="text-center mb-2">
+          <span className="inline-block text-[9px] font-mono font-black tracking-[0.3em] text-[#b3261e] border border-[#b3261e]/40 px-2 py-0.5">BEADIE SIGNAL · PAPER + INK + SIGNAL RED</span>
+        </div>
 
         {/* HERO — BIG SCIENCE cold opening */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative text-center space-y-5 max-w-3xl mx-auto">
