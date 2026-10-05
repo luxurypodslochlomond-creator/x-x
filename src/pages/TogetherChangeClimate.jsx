@@ -2,12 +2,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check } from 'lucide-react';
 import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
-import ActionModal from '@/components/climate/ActionModal';
-import RelatedTriangle from '@/components/climate/RelatedTriangle';
+
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
@@ -138,118 +137,50 @@ const T = {
   ar: { title_a: 'معًا نُغيّر', title_b: 'مسار', title_c: 'تغير المناخ', sub: 'سجلّ عام لحالات الطوارئ المناخية والإجراءات الإيجابية التي تنجح — مشترك علنًا، دوليًا — ليستطيع أي شخص على الأرض تكرار ما هو جيد.', service: 'خدمة عامة · للعالم', noads: 'لا إعلانات', nofund: 'لا جمع تبرعات', donate: 'التبرعات مرحب بها', search: 'ابحث عن الحلول والأزمات…', solutions: 'الحلول', crises: 'أزمات المناخ', defs: 'تعريفات', rev: 'تمت المراجعة', connect: 'جارٍ توصيل الكوكب…', empty: 'لا نتائج مطابقة بعد.', govern: 'مبني من أجل الكوكب — ومبني ليكون موثوقًا', govern_body: 'تتم مراجعة كل إدخال قبل النشر. تُستخدم الصور الخالية من حقوق النشر فقط. يُحافظ على الموقع كمنطقة تقريبية لحماية الخصوصية، مع بقائه صادقًا وقابلاً للتحقق. المنصة مفتوحة المصدر ومحمية من الاستغلال وتعمل كخدمة عامة — لا إعلانات ولا جمع تبرعات. تُقدَّم ترجمات الواجهة على المنصة؛ وتُترجم الإدخالات من قبل مجتمعنا بمرور الوقت.', covenant: 'اقرأ ميثاقنا مفتوح المصدر', family: 'هذه المنصة جزء من عائلة الشفاء الكوكبي UF51 — الحلول الموثقة هنا هي محرك المعرفة وراء عملنا الميداني.', action: 'اتخذ إجراء', honour: 'بُني تكريمًا لـ Janine M. H. Selendy وهورايزون إنترناشونال — وسُلّم إلى العالم، إلى الكوكب، إلى جميعنا.', all: 'الكل', featured: 'إشارات' },
 };
 
-function SolutionCard({ item, onOpen }) {
-  const isSolution = item.entry_type === 'solution';
-  return (
-    <motion.button
-      onClick={() => onOpen(item)}
-      initial={false}
-      animate={{ opacity: 1, y: 0 }}
-      whileTap={{ scale: 0.96 }}
-      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
-        isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
-      } min-h-[110px] flex items-end`}
-    >
-      <img
-        src={item.image_url || CATEGORY_IMAGE(item.category)}
-        alt=""
-        loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'grayscale(1) contrast(1.25)' }}
-        onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
-      />
-      {/* Gradient scrim — guarantees title readability on any image */}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
-      <div className="relative p-2.5 w-full">
-        <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
-          {isSolution ? 'Solution' : 'Crisis'}
-        </div>
-        <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
-          {item.title}
-        </h3>
-      </div>
-    </motion.button>
-  );
-}
-
-function EntryModal({ item, onClose, t = T.en, items = [], actions = [], onOpenItem, onOpenAction }) {
-  const Icon = CATEGORIES.find(c => c.id === item.category)?.icon || Globe;
-  // Lock body scroll while the sheet is open — stops the page drifting behind it on mobile
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = prev; };
-  }, []);
-  return (
-    <motion.div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center bg-black/90 p-0 sm:p-6" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.15 } }}>
-      <motion.div
-        className="bg-[#efe7d6] border-2 border-[#141210] w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-none"
-        onClick={e => e.stopPropagation()}
-        initial={{ y: '100%', opacity: 0.5 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: '100%', opacity: 0 }}
-        transition={{ type: 'spring', stiffness: 380, damping: 38, mass: 0.8 }}
-      >
-        {/* Native grab handle — bottom-sheet feel */}
-        <div className="sm:hidden flex justify-center pt-2.5 pb-1 bg-[#efe7d6]">
-          <div className="w-10 h-1 rounded-full bg-[#141210]/25" />
-        </div>
-        <div className="relative h-52 sm:h-60 bg-[#141210]">
-          <img src={item.image_url || CATEGORY_IMAGE(item.category)} alt={item.title} className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(226,96,42,.2), rgba(20,18,16,.5) 50%, #141210 100%)' }} />
-          <button onClick={onClose} aria-label="Close" className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors">
-            <X className="w-5 h-5" />
-          </button>
-          <div className="absolute bottom-3 left-4 right-4">
-            <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${
-              item.entry_type === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'
-            }`}>{item.entry_type === 'solution' ? 'Solution' : 'Climate Crisis'}</span>
-          </div>
-        </div>
-        <div className="p-5">
-          <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
-            <Icon className="w-4 h-4" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{item.category?.replaceAll('_', ' ')}</span>
-          </div>
-          <h2 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>{item.title}</h2>
-          <div className="flex items-center gap-2 text-[11px] font-mono text-[#5a5246] mt-3">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>{item.country}{item.region_rough ? ` · ${item.region_rough}` : ''}</span>
-          </div>
-          <p className="text-[13px] font-mono text-[#141210] leading-relaxed mt-4">{item.details || item.summary}</p>
-          <div className="mt-5 flex flex-wrap gap-2 text-[10px] font-mono font-bold uppercase">
-            <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {item.scale || '—'}</span>
-            <span className="px-2 py-1 border border-[#141210] text-[#141210]">{t.rev}: ✓</span>
-          </div>
-          {item.source_url && (
-            <a href={item.source_url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
-              View source <ArrowRight className="w-4 h-4" />
-            </a>
-          )}
-          <RelatedTriangle
-            category={item.category}
-            items={items}
-            actions={actions}
-            currentId={item.id}
-            onOpenItem={onOpenItem}
-            onOpenAction={onOpenAction}
-          />
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
+const MotionLink = motion(Link);
+ function SolutionCard({ item }) {
+   const isSolution = item.entry_type === 'solution';
+   return (
+     <MotionLink
+       to={`/ClimateDetail/${item.entry_type}/${item.id}`}
+       initial={false}
+       animate={{ opacity: 1, y: 0 }}
+       whileTap={{ scale: 0.96 }}
+       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+       className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
+         isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
+       } min-h-[110px] flex items-end block`}
+     >
+       <img
+         src={item.image_url || CATEGORY_IMAGE(item.category)}
+         alt=""
+         loading="lazy"
+         className="absolute inset-0 w-full h-full object-cover"
+         style={{ filter: 'grayscale(1) contrast(1.25)' }}
+         onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
+       />
+       {/* Gradient scrim — guarantees title readability on any image */}
+       <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
+       <div className="relative p-2.5 w-full">
+         <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
+           {isSolution ? 'Solution' : 'Crisis'}
+         </div>
+         <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
+           {item.title}
+         </h3>
+       </div>
+     </MotionLink>
+   );
+ }
 
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
   const [groups, setGroups] = useState([]);
   const [actions, setActions] = useState([]);
-  const [openAction, setOpenAction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
-  const [openItem, setOpenItem] = useState(null);
   const [lang, setLang] = useState(() => { try { return localStorage.getItem('climate51_lang') || 'auto'; } catch { return 'auto'; } });
   const [liveStrings, setLiveStrings] = useState(null);
   const [translating, setTranslating] = useState(false);
@@ -526,7 +457,7 @@ export default function TogetherChangeClimate() {
           <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
           <div className="grid grid-cols-2 gap-2.5">
             {featured.map((item) => (
-              <SolutionCard key={item.id} item={item} onOpen={setOpenItem} />
+              <SolutionCard key={item.id} item={item} />
             ))}
           </div>
         </div>
@@ -551,7 +482,7 @@ export default function TogetherChangeClimate() {
                 <div className="grid grid-cols-2 gap-2.5">
                   {solutions.map((item, i) => (
                     <div key={item.id}>
-                      <SolutionCard item={item} onOpen={setOpenItem} />
+                      <SolutionCard item={item} />
                     </div>
                   ))}
                 </div>
@@ -567,7 +498,7 @@ export default function TogetherChangeClimate() {
                 <div className="grid grid-cols-2 gap-2.5">
                   {crises.map((item, i) => (
                     <div key={item.id}>
-                      <SolutionCard item={item} onOpen={setOpenItem} />
+                      <SolutionCard item={item} />
                     </div>
                   ))}
                 </div>
@@ -619,7 +550,7 @@ export default function TogetherChangeClimate() {
             {filteredActions.length > 0 ? (
               <div className="grid grid-cols-1 gap-2.5">
                 {filteredActions.map(a => (
-                  <ActionCard key={a.id} action={a} onOpen={setOpenAction} />
+                  <ActionCard key={a.id} action={a} />
                 ))}
               </div>
             ) : (
@@ -661,31 +592,6 @@ export default function TogetherChangeClimate() {
         <p className="px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6]">{t.honour}</p>
       </div>
 
-      <AnimatePresence>
-        {openItem && (
-          <EntryModal
-            item={openItem}
-            onClose={() => setOpenItem(null)}
-            t={t}
-            items={items}
-            actions={actions}
-            onOpenItem={(next) => setOpenItem(next)}
-            onOpenAction={(next) => { setOpenItem(null); setOpenAction(next); }}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {openAction && (
-          <ActionModal
-            action={openAction}
-            onClose={() => setOpenAction(null)}
-            items={items}
-            actions={actions}
-            onOpenItem={(next) => { setOpenAction(null); setOpenItem(next); }}
-            onOpenAction={(next) => setOpenAction(next)}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }

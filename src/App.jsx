@@ -113,6 +113,7 @@ import PartnerEvidencePage from './pages/PartnerEvidence';
 import ExtractionProofCovenantPage from './pages/ExtractionProofCovenant';
 import UF51OverviewPage from './pages/UF51Overview';
 import TogetherChangeClimatePage from './pages/TogetherChangeClimate';
+import ClimateDetailPage from './pages/ClimateDetail';
 import UF51TokenPage from './pages/UF51Token';
 import UF51ThreadJournalPage from './pages/UF51ThreadJournal';
 const AdminUF51BudgetPage = React.lazy(() => import('./pages/AdminUF51Budget'));
@@ -248,6 +249,7 @@ const AuthenticatedApp = () => {
       <Route path="/UF51Overview" element={<LayoutWrapper currentPageName="UF51Overview"><UF51OverviewPage /></LayoutWrapper>} />
       <Route path="/TogetherChangeClimate" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><TogetherChangeClimatePage /></LayoutWrapper>} />
       <Route path="/ClimatePlatform" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><TogetherChangeClimatePage /></LayoutWrapper>} />
+      <Route path="/ClimateDetail/:type/:id" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><ClimateDetailPage /></LayoutWrapper>} />
       <Route path="/UF51Token" element={<LayoutWrapper currentPageName="UF51Token"><UF51TokenPage /></LayoutWrapper>} />
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />

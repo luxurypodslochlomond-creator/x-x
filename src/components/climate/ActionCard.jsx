@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, ArrowRight, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand } from 'lucide-react';
 
 // Action types from Janine's spec — each gets its own glyph so the card reads at a glance
 const ACTION_TYPES = {
@@ -22,17 +23,19 @@ function fmtDate(d) {
   } catch { return ''; }
 }
 
-export default function ActionCard({ action, onOpen }) {
+const MotionLink = motion(Link);
+
+export default function ActionCard({ action }) {
   const meta = ACTION_TYPES[action.action_type] || ACTION_TYPES.other;
   const Icon = meta.icon;
   return (
-    <motion.button
-      onClick={() => onOpen(action)}
+    <MotionLink
+      to={`/ClimateDetail/action/${action.id}`}
       initial={false}
       animate={{ opacity: 1, y: 0 }}
       whileTap={{ scale: 0.96 }}
       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      className="relative text-left w-full bg-[#f7f1e5] border border-[#141210] border-t-4 min-h-[110px] flex flex-col"
+      className="relative text-left w-full bg-[#f7f1e5] border border-[#141210] border-t-4 min-h-[110px] flex flex-col block"
       style={{ borderTopColor: meta.color }}
     >
       <div className="p-3 flex-1">
@@ -61,6 +64,6 @@ export default function ActionCard({ action, onOpen }) {
           </span>
         )}
       </div>
-    </motion.button>
+    </MotionLink>
   );
 }

@@ -1,0 +1,231 @@
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { base44 } from '@/api/base44Client';
+import { motion } from 'framer-motion';
+import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand, Globe } from 'lucide-react';
+import RelatedTriangle from '@/components/climate/RelatedTriangle';
+
+const CATEGORIES = [
+  { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
+  { id: 'water', icon: Globe, label: 'Water' },
+  { id: 'heat', icon: Globe, label: 'Heat' },
+  { id: 'coastal_erosion_protection', icon: Globe, label: 'Coastal' },
+  { id: 'seagrasses', icon: Globe, label: 'Seagrasses' },
+  { id: 'mangroves', icon: Sprout, label: 'Mangroves' },
+  { id: 'oceans', icon: Globe, label: 'Oceans' },
+  { id: 'zooplankton', icon: Globe, label: 'Zooplankton' },
+  { id: 'phytoplankton', icon: Globe, label: 'Phytoplankton' },
+  { id: 'forest_preservation', icon: Globe, label: 'Forests' },
+  { id: 'rewilding', icon: Sprout, label: 'Rewilding' },
+  { id: 'urban_geodesign', icon: Globe, label: 'Geodesign' },
+  { id: 'transportation', icon: Globe, label: 'Transport' },
+  { id: 'electric_vehicles', icon: Globe, label: 'EV' },
+  { id: 'renewable_energy', icon: Globe, label: 'Renewables' },
+  { id: 'solar_desalination', icon: Globe, label: 'Solar Desal' },
+  { id: 'drought', icon: Globe, label: 'Drought' },
+  { id: 'flooding', icon: Globe, label: 'Flooding' },
+  { id: 'extreme_weather', icon: Globe, label: 'Extreme Weather' },
+  { id: 'other', icon: Globe, label: 'Other' },
+];
+
+const ACTION_TYPES = {
+  cleanup: { label: 'Cleanup', icon: Recycle, color: '#1e3a2b' },
+  planting: { label: 'Planting', icon: Sprout, color: '#1e3a2b' },
+  meeting: { label: 'Meeting', icon: Users, color: '#e2602a' },
+  policy_submission: { label: 'Policy Submission', icon: FileText, color: '#e2602a' },
+  workshop: { label: 'Workshop', icon: Hammer, color: '#e2602a' },
+  monitoring: { label: 'Monitoring', icon: Eye, color: '#1e3a2b' },
+  other: { label: 'Action', icon: Hand, color: '#5a5246' },
+};
+
+function CATEGORY_IMAGE(cat) {
+  const map = {
+    mangroves: 'https://images.unsplash.com/photo-1518630124387-6a665f7e8e16?w=800',
+    seagrasses: 'https://images.unsplash.com/photo-1583211728689-29b9c4c6e3a2?w=800',
+    oceans: 'https://images.unsplash.com/photo-1505142468610-359e7d3dbebe?w=800',
+    forest_preservation: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800',
+    rewilding: 'https://images.unsplash.com/photo-1507119461-a4e3e3c5b8e3?w=800',
+    agriculture: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800',
+    water: 'https://images.unsplash.com/photo-1503554033630-8a9c0c0e0e0e?w=800',
+    renewable_energy: 'https://images.unsplash.com/photo-1466611653911-ef50e3f2c2e2?w=800',
+  };
+  return map[cat] || 'https://images.unsplash.com/photo-1611273426858-450d8e3c8fce?w=800';
+}
+
+function fmtDate(d) {
+  if (!d) return '';
+  try {
+    const dt = new Date(d);
+    if (isNaN(dt.getTime())) return '';
+    return dt.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  } catch { return ''; }
+}
+
+export default function ClimateDetail() {
+  const { type, id } = useParams();
+  const navigate = useNavigate();
+  const [record, setRecord] = useState(null);
+  const [allItems, setAllItems] = useState([]);
+  const [allActions, setAllActions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setRecord(null);
+    const entity = type === 'action' ? base44.entities.ClimateAction : base44.entities.ClimateSolution;
+    entity.get(id)
+      .then(r => { if (!cancelled) setRecord(r); })
+      .catch(() => { if (!cancelled) setRecord(null); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    // Load siblings for RelatedTriangle
+    base44.entities.ClimateSolution.list().then(r => { if (!cancelled) setAllItems(r || []); }).catch(() => {});
+    base44.entities.ClimateAction.list().then(r => { if (!cancelled) setAllActions(r || []); }).catch(() => {});
+    return () => { cancelled = true; };
+  }, [type, id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#efe7d6] flex flex-col items-center justify-center">
+        <div className="w-10 h-10 rounded-full border-2 border-[#141210]/20 border-t-[#e2602a] animate-spin" />
+        <p className="text-[#5a5246] text-[11px] font-mono uppercase mt-4">Connecting the planet…</p>
+      </div>
+    );
+  }
+
+  if (!record) {
+    return (
+      <div className="min-h-screen bg-[#efe7d6] flex flex-col items-center justify-center p-6 text-center">
+        <Globe className="w-12 h-12 text-[#5a5246] mb-4" />
+        <p className="text-[14px] font-black font-mono uppercase text-[#141210]">Entry not found</p>
+        <button onClick={() => navigate('/TogetherChangeClimate')} className="mt-6 px-5 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210]">
+          Back to the record
+        </button>
+      </div>
+    );
+  }
+
+  const isAction = type === 'action';
+  const isSolution = !isAction && record.entry_type === 'solution';
+
+  // Action detail
+  if (isAction) {
+    const meta = ACTION_TYPES[record.action_type] || ACTION_TYPES.other;
+    const Icon = meta.icon;
+    const catIcon = CATEGORIES.find(c => c.id === record.category)?.icon || Globe;
+    return (
+      <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+        {/* Sticky header — native back, action-type colour band */}
+        <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 border-b-2 border-[#141210]" style={{ background: meta.color }}>
+          <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="flex items-center gap-2 min-w-0">
+            <Icon className="w-5 h-5 text-[#efe7d6] flex-shrink-0" />
+            <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6] truncate">{meta.label}</span>
+          </div>
+        </div>
+
+        <div className="p-5">
+          <h1 className="text-2xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em', color: '#141210' }}>
+            {record.title}
+          </h1>
+
+          <div className="flex items-center gap-1.5 mt-3">
+            <catIcon className="w-4 h-4 text-[#1e3a2b]" />
+            <span className="text-[11px] font-black font-mono uppercase tracking-widest text-[#1e3a2b]">{record.category?.replaceAll('_', ' ')}</span>
+          </div>
+
+          {(record.date || record.country || record.region_rough) && (
+            <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-[#5a5246] mt-4">
+              {record.date && (
+                <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{fmtDate(record.date)}</span>
+              )}
+              {(record.country || record.region_rough) && (
+                <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" />{record.region_rough}{record.region_rough && record.country ? ' · ' : ''}{record.country || ''}</span>
+              )}
+            </div>
+          )}
+
+          <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{record.description}</p>
+
+          {record.source_url && (
+            <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
+              More info <ArrowRight className="w-4 h-4" />
+            </a>
+          )}
+
+          {record.contact_link && (
+            <a href={record.contact_link} target="_blank" rel="noopener noreferrer" className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#e2602a] text-[#141210] text-[13px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
+              Join in — contact organiser <ArrowRight className="w-4 h-4" />
+            </a>
+          )}
+          <p className="text-[9px] font-mono text-[#5a5246] mt-3 leading-relaxed">
+            The platform never sees your messages — you contact the organiser directly.
+          </p>
+
+          <RelatedTriangle
+            category={record.category}
+            items={allItems}
+            actions={allActions}
+            currentId={record.id}
+            onOpenItem={(next) => navigate(`/ClimateDetail/solution/${next.id}`)}
+            onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Solution / Crisis detail
+  const Icon = CATEGORIES.find(c => c.id === record.category)?.icon || Globe;
+  return (
+    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+      {/* Hero image — full-bleed, sticky back button overlaid */}
+      <div className="relative h-64 bg-[#141210]">
+        <img src={record.image_url || CATEGORY_IMAGE(record.category)} alt={record.title} className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
+        <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <div className="absolute bottom-4 left-5 right-5">
+          <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'}`}>
+            {isSolution ? 'Solution' : 'Climate Crisis'}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-5">
+        <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
+          <Icon className="w-4 h-4" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
+        </div>
+        <h1 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>
+          {record.title}
+        </h1>
+        <div className="flex items-center gap-2 text-[11px] font-mono text-[#5a5246] mt-3">
+          <MapPin className="w-3.5 h-3.5" />
+          <span>{record.country}{record.region_rough ? ` · ${record.region_rough}` : ''}</span>
+        </div>
+        <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{record.details || record.summary}</p>
+        <div className="mt-5 flex flex-wrap gap-2 text-[10px] font-mono font-bold uppercase">
+          <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {record.scale || '—'}</span>
+          <span className="px-2 py-1 border border-[#141210] text-[#141210]">Reviewed: ✓</span>
+        </div>
+        {record.source_url && (
+          <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
+            View source <ArrowRight className="w-4 h-4" />
+          </a>
+        )}
+
+        <RelatedTriangle
+          category={record.category}
+          items={allItems}
+          actions={allActions}
+          currentId={record.id}
+          onOpenItem={(next) => navigate(`/ClimateDetail/${next.entry_type}/${next.id}`)}
+          onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
+        />
+      </div>
+    </div>
+  );
+}
