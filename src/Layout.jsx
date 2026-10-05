@@ -208,6 +208,7 @@ const LayoutInner = ({ children, currentPageName }) => {
   const isTracktPage = currentPageName.startsWith('Trackt') || currentPageName === 'TracktDashboard';
     const isSortedPage = currentPageName === 'Family51' || currentPageName.startsWith('Sorted') || currentPageName === 'SortedFAQ';
   const isSortedSubPage = ['SortedPressRelease', 'SortedInvestorPress', 'SortedPartnerKit', 'PetSounds51InvestorPress'].includes(currentPageName);
+  const isClimatePage = currentPageName === 'TogetherChangeClimate' || currentPageName === 'ClimatePlatform' || currentPageName.startsWith('Climate');
 
   const isPublicPage = PUBLIC_PAGES.includes(currentPageName) || isTracktPage;
   const isOfflineOkPage = OFFLINE_OK_PAGES.includes(currentPageName);
@@ -334,10 +335,12 @@ const LayoutInner = ({ children, currentPageName }) => {
       ogImageUrl = '/api/functions/serveCB51OGImage';
     } else if (isSortedPage) {
       ogImageUrl = '/api/functions/serveSortedOGImage';
+    } else if (isClimatePage) {
+      ogImageUrl = '/api/functions/serveClimateOGImage';
     }
 
     const ogTags = {
-      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : 'Universal Frequency 51 • Heal the Planet',
+      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together We Change Climate — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
         : isPS51Page
@@ -346,6 +349,8 @@ const LayoutInner = ({ children, currentPageName }) => {
         ? 'Five-phase acoustic frequency therapy for post-operative wrist recovery. Built for professional performers. Free. No signup. Start Phase 01 today.'
         : isSortedPage
         ? 'Got a scary letter? Stuck in a dispute? SORTED decodes it in seconds — plain English, any language, nothing stored.'
+        : isClimatePage
+        ? 'Verified climate solutions & crises — after Janine Selendy. Every symbol, every number, every tongue. Nobody left behind. The noise is loud. The record is louder.'
         : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',
       'og:image': window.location.origin + ogImageUrl,
       'og:type': 'website',
