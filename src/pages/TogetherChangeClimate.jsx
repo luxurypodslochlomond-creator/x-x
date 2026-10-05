@@ -7,6 +7,7 @@ import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Lang
 import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
 import ActionModal from '@/components/climate/ActionModal';
+import RelatedTriangle from '@/components/climate/RelatedTriangle';
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
@@ -172,7 +173,7 @@ function SolutionCard({ item, onOpen }) {
   );
 }
 
-function EntryModal({ item, onClose, t = T.en }) {
+function EntryModal({ item, onClose, t = T.en, items = [], actions = [], onOpenItem, onOpenAction }) {
   const Icon = CATEGORIES.find(c => c.id === item.category)?.icon || Globe;
   // Lock body scroll while the sheet is open — stops the page drifting behind it on mobile
   useEffect(() => {
@@ -225,6 +226,14 @@ function EntryModal({ item, onClose, t = T.en }) {
               View source <ArrowRight className="w-4 h-4" />
             </a>
           )}
+          <RelatedTriangle
+            category={item.category}
+            items={items}
+            actions={actions}
+            currentId={item.id}
+            onOpenItem={onOpenItem}
+            onOpenAction={onOpenAction}
+          />
         </div>
       </motion.div>
     </motion.div>
@@ -653,10 +662,29 @@ export default function TogetherChangeClimate() {
       </div>
 
       <AnimatePresence>
-        {openItem && <EntryModal item={openItem} onClose={() => setOpenItem(null)} t={t} />}
+        {openItem && (
+          <EntryModal
+            item={openItem}
+            onClose={() => setOpenItem(null)}
+            t={t}
+            items={items}
+            actions={actions}
+            onOpenItem={(next) => setOpenItem(next)}
+            onOpenAction={(next) => { setOpenItem(null); setOpenAction(next); }}
+          />
+        )}
       </AnimatePresence>
       <AnimatePresence>
-        {openAction && <ActionModal action={openAction} onClose={() => setOpenAction(null)} />}
+        {openAction && (
+          <ActionModal
+            action={openAction}
+            onClose={() => setOpenAction(null)}
+            items={items}
+            actions={actions}
+            onOpenItem={(next) => { setOpenAction(null); setOpenItem(next); }}
+            onOpenAction={(next) => setOpenAction(next)}
+          />
+        )}
       </AnimatePresence>
     </div>
   );

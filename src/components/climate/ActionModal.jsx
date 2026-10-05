@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Calendar, ArrowRight, X, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand } from 'lucide-react';
+import RelatedTriangle from './RelatedTriangle';
 
 const ACTION_TYPES = {
   cleanup: { label: 'Cleanup', icon: Recycle, color: '#1e3a2b' },
@@ -21,7 +22,7 @@ function fmtDate(d) {
   } catch { return ''; }
 }
 
-export default function ActionModal({ action, onClose }) {
+export default function ActionModal({ action, onClose, items = [], actions = [], onOpenItem, onOpenAction }) {
   const meta = ACTION_TYPES[action.action_type] || ACTION_TYPES.other;
   const Icon = meta.icon;
 
@@ -90,6 +91,14 @@ export default function ActionModal({ action, onClose }) {
           <p className="text-[9px] font-mono text-[#5a5246] mt-3 leading-relaxed">
             The platform never sees your messages — you contact the organiser directly.
           </p>
+          <RelatedTriangle
+            category={action.category}
+            items={items}
+            actions={actions}
+            currentId={action.id}
+            onOpenItem={onOpenItem}
+            onOpenAction={onOpenAction}
+          />
         </div>
       </motion.div>
     </motion.div>
