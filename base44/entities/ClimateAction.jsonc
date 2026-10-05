@@ -1,0 +1,102 @@
+{
+  "name": "ClimateAction",
+  "type": "object",
+  "description": "Public climate actions on the 'Together We Change Climate' platform \u2014 cleanups, plantings, meetings, policy submissions. Reviewed before publication like solutions. No messaging stored on platform; organizers provide one contact link.",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "What's happening \u2014 e.g. 'Mangrove planting day, Cardigan Bay'"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "cleanup",
+        "planting",
+        "meeting",
+        "policy_submission",
+        "workshop",
+        "monitoring",
+        "other"
+      ],
+      "description": "Type of action"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Optional link to a ClimateGroup organizing this action"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the action is happening"
+    },
+    "region_rough": {
+      "type": "string",
+      "description": "Rough location \u2014 privacy-respecting, no precise coordinates"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country / region"
+    },
+    "description": {
+      "type": "string",
+      "description": "What, why, and how to join \u2014 plain language"
+    },
+    "contact_link": {
+      "type": "string",
+      "description": "One contact link \u2014 email, WhatsApp, Signal, or signup URL. The platform never sees the messages."
+    },
+    "source_url": {
+      "type": "string",
+      "description": "Optional link to more info or evidence"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "reviewed",
+        "published"
+      ],
+      "default": "published",
+      "description": "All material reviewed before publication, same as solutions"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "agriculture",
+        "water",
+        "heat",
+        "coastal_erosion_protection",
+        "seagrasses",
+        "mangroves",
+        "oceans",
+        "zooplankton",
+        "phytoplankton",
+        "forest_preservation",
+        "rewilding",
+        "urban_geodesign",
+        "transportation",
+        "electric_vehicles",
+        "renewable_energy",
+        "solar_desalination",
+        "drought",
+        "flooding",
+        "extreme_weather",
+        "other"
+      ],
+      "description": "Category from Janine's spec taxonomy \u2014 links action to the solution space"
+    }
+  },
+  "required": [
+    "title",
+    "action_type",
+    "description"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
