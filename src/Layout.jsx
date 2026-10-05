@@ -110,11 +110,11 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
   const [isOpen, setIsOpen] = useState(defaultOpen);
   
   const colorMap = {
-    pink: { border: 'border-pink-500', text: 'text-pink-400', desc: 'text-pink-300', bg: 'bg-pink-500/10' },
-    green: { border: 'border-green-500', text: 'text-green-400', desc: 'text-green-300', bg: 'bg-green-500/10' },
-    amber: { border: 'border-amber-600', text: 'text-amber-500', desc: 'text-amber-300', bg: 'bg-amber-600/10', highlight: 'border-amber-600 text-white bg-amber-600/10' },
-    cyan: { border: 'border-cyan-500', text: 'text-cyan-400', desc: 'text-cyan-300', bg: 'bg-cyan-500/10' },
-    gray: { border: 'border-gray-500', text: 'text-gray-400', desc: 'text-gray-300', bg: 'bg-gray-500/10' },
+    pink: { border: 'border-[#b3261e]', text: 'text-[#b3261e]', desc: 'text-[#6b6258]', bg: 'bg-[#b3261e]/5' },
+    green: { border: 'border-[#1e3a2b]', text: 'text-[#1e3a2b]', desc: 'text-[#6b6258]', bg: 'bg-[#1e3a2b]/5' },
+    amber: { border: 'border-[#b8860b]', text: 'text-[#b8860b]', desc: 'text-[#6b6258]', bg: 'bg-[#b8860b]/5' },
+    cyan: { border: 'border-[#1a1612]', text: 'text-[#1a1612]', desc: 'text-[#6b6258]', bg: 'bg-[#1a1612]/5' },
+    gray: { border: 'border-[#1a1612]/40', text: 'text-[#6b6258]', desc: 'text-[#6b6258]', bg: 'bg-[#1a1612]/5' },
   };
   const c = colorMap[color] || colorMap.cyan;
 
@@ -124,7 +124,7 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
         onClick={() => setIsOpen(!isOpen)}
         className="w-full mb-2"
       >
-        <div className={`bg-black border-2 ${c.border} ${isMobile ? 'px-3 py-2' : 'px-4 py-2'} flex items-center justify-between hover:${c.bg} transition-all`}>
+        <div className={`bg-[#efe7d6] border-2 ${c.border} ${isMobile ? 'px-3 py-2' : 'px-4 py-2'} flex items-center justify-between hover:${c.bg} transition-all`}>
           <div className={`${c.text} font-black font-mono ${isMobile ? 'text-xs' : 'text-sm'} tracking-wider`}>
             {emoji} {title}
           </div>
@@ -155,26 +155,22 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
                 key={item.url} 
                 to={item.url} 
                 className={`flex items-center gap-3 ${isMobile ? 'p-3' : 'p-3'} transition-all w-full rounded ${
-                  item.highlight && color === 'amber'
-                    ? 'border-2 border-green-500 text-white bg-green-500/10' 
-                    : item.highlight 
-                    ? 'border-2 border-pink-500 text-white bg-pink-500/10' 
+                  item.highlight
+                    ? 'border-2 border-[#b3261e] text-[#1a1612] bg-[#b3261e]/5'
                     : isActive 
-                      ? 'border-2 text-white' 
-                      : 'border border-white/10 hover:border-white/30 text-white hover:bg-white/5'
+                      ? 'border-2 border-[#1a1612] text-[#1a1612] bg-[#1a1612]/5'
+                      : 'border border-[#1a1612]/15 hover:border-[#1a1612]/40 text-[#1a1612] hover:bg-[#1a1612]/5'
                 }`}
                 style={
-                  item.highlight && color === 'amber' ? { boxShadow: '0 0 15px rgba(34, 197, 94, 0.3)' }
-                  : item.highlight ? { boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)' }
-                  : isActive && activeColor === 'amber' ? { border: '2px solid #d4a017', background: 'rgba(212,160,23,0.12)', boxShadow: '0 0 10px rgba(212,160,23,0.15)' }
-                  : isActive ? { border: '2px solid #06b6d4', background: 'rgba(6,182,212,0.12)', boxShadow: '0 0 10px rgba(34,211,238,0.2)' }
+                  item.highlight ? { boxShadow: '0 0 12px rgba(179,38,30,0.15)' }
+                  : isActive ? { boxShadow: 'none' }
                   : {}
                 }
               >
                 <IconComponent className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} flex-shrink-0`} />
                 <div className="flex-1 min-w-0">
                   <span className="text-sm font-bold block truncate">{item.title}</span>
-                  {item.description && <span className={`text-xs block truncate ${activeColor === 'amber' ? 'text-amber-300/70' : 'text-cyan-300'}`}>{item.description}</span>}
+                  {item.description && <span className="text-xs block truncate text-[#6b6258]">{item.description}</span>}
                 </div>
               </Link>
             );
@@ -680,7 +676,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         @keyframes glow-pulse { 0%, 100% { filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.8)); } 50% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 1)); } }
       `}</style>
       
-      <div className={`min-h-screen text-white overflow-x-hidden ${isCB51Page ? 'bg-black' : 'bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514]'}`}>
+      <div className="min-h-screen text-[#1a1612] overflow-x-hidden twcc-scanlines relative bg-[#f4efe4]">
         
         {isOffline && (
           <div className="fixed top-0 left-0 right-0 z-[70] flex items-center justify-center gap-2 py-1 px-4 bg-black/70 backdrop-blur-sm border-b border-white/10">
@@ -691,7 +687,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* MOBILE HEADER */}
         {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && (
-        <header className={`lg:hidden sticky ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#0a0f1a]/95 backdrop-blur-xl border-b ${isPS51Page ? 'border-amber-700/40' : 'border-cyan-500/30'}`}>
+        <header className={`lg:hidden sticky ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#f4efe4]/95 backdrop-blur-xl border-b border-[#1a1612]/15`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
               <a href={createPageUrl("CB51")} className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); window.location.href = createPageUrl("CB51"); setMobileMenuOpen(false); }}>
@@ -711,7 +707,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : (
               <a href={createPageUrl("Welcome")} className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); window.location.href = createPageUrl("Welcome"); setMobileMenuOpen(false); }}>
                 <COOLASFUCKWaves size={28} animate={true} />
-                <span className="text-xl font-black text-white">UF51</span>
+                <span className="text-xl font-black text-[#1a1612]">UF51</span>
               </a>
             )}
 
@@ -779,7 +775,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* MOBILE MENU */}
                   {isMobileMenuOpen && currentPageName !== 'Platform' && (
-                    <div className={`lg:hidden fixed inset-x-0 bottom-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#0a0f1a] z-[55] overflow-y-auto pb-6`} style={{ animation: 'sorted-enter 0.24s cubic-bezier(0,0,0.2,1)' }}>
+                    <div className={`lg:hidden fixed inset-x-0 bottom-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#f4efe4] z-[55] overflow-y-auto pb-6`} style={{ animation: 'sorted-enter 0.24s cubic-bezier(0,0,0.2,1)' }}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           {isCB51Page ? (
                             <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
@@ -816,7 +812,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                                         {user ? (
                 <>
                   <div className="h-px bg-white/20 my-3 w-full" />
-                    <button onClick={handleSignOut} className="w-full flex items-center gap-3 p-3 border-2 border-red-500/50 hover:border-red-500 bg-black/60 text-red-400">
+                    <button onClick={handleSignOut} className="w-full flex items-center gap-3 p-3 border-2 border-[#b3261e]/50 hover:border-[#b3261e] bg-[#efe7d6] text-[#b3261e]">
                     <LogOut className="w-5 h-5" />
                     <span className="font-bold">Sign Out</span>
                   </button>
@@ -824,7 +820,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               ) : (
                 <>
                   <div className="h-px bg-white/20 my-3 w-full" />
-                  <button onClick={() => base44.auth.redirectToLogin(window.location.href)} className="w-full flex items-center gap-3 p-3 border-2 border-green-500/50 hover:border-green-500 bg-black/60 text-green-400">
+                  <button onClick={() => base44.auth.redirectToLogin(window.location.href)} className="w-full flex items-center gap-3 p-3 border-2 border-[#1a1612]/50 hover:border-[#1a1612] bg-[#efe7d6] text-[#1a1612]">
                     <LogOut className="w-5 h-5" style={{ transform: 'scaleX(-1)' }} />
                     <span className="font-bold">Sign In</span>
                   </button>
@@ -849,8 +845,8 @@ const LayoutInner = ({ children, currentPageName }) => {
 
         {/* DESKTOP SIDEBAR */}
         {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && (
-        <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-cyan-500/30 bg-[#0a0f1a]/95 overflow-y-auto z-50`}>
-          <div className="p-6 border-b border-cyan-500/30">
+        <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-[#1a1612]/15 bg-[#f4efe4]/95 overflow-y-auto z-50`}>
+          <div className="p-6 border-b border-[#1a1612]/15">
             <Link to={createPageUrl(isCB51Page ? "CB51" : isPS51Page ? "PetSounds51" : "Welcome")} className="flex items-center gap-3 mb-4">
               {isCB51Page ? (
                 <>
@@ -870,7 +866,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               ) : (
                 <>
                   <COOLASFUCKWaves size={40} animate={true} />
-                  <span className="text-3xl font-black">UF51</span>
+                  <span className="text-3xl font-black text-[#1a1612]">UF51</span>
                 </>
               )}
             </Link>
@@ -939,7 +935,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             {user ? (
               <>
                 <div className="h-px bg-white/20 my-6" />
-                <button onClick={handleSignOut} className="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-red-900/20 text-red-400">
+                <button onClick={handleSignOut} className="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-[#b3261e]/10 text-[#b3261e]">
                   <LogOut className="w-6 h-6" />
                   <span className="text-lg font-bold">Sign Out</span>
                 </button>
@@ -947,7 +943,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : (
               <>
                 <div className="h-px bg-white/20 my-6" />
-                <button onClick={() => base44.auth.redirectToLogin(window.location.href)} className="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-green-900/20 text-green-400">
+                <button onClick={() => base44.auth.redirectToLogin(window.location.href)} className="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-[#1a1612]/10 text-[#1a1612]">
                   <LogOut className="w-6 h-6" style={{ transform: 'scaleX(-1)' }} />
                   <span className="text-lg font-bold">Sign In</span>
                 </button>
@@ -966,7 +962,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? 'lg:pt-6' : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
           {children}
               {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
-              <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
+              <footer className="border-t border-[#1a1612]/15 bg-[#efe7d6]/60">
               <LiveClock />
               {/* x = x — the covenant. We are all one. */}
               <p className="text-center py-2 font-mono font-black tracking-[0.3em] text-[10px]" style={{ color: 'rgba(239,231,214,0.25)' }}>

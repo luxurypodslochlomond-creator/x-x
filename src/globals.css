@@ -197,6 +197,18 @@ css
   100% { transform: scale(2.5); opacity: 0; }
 }
 
+/* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
+.beadie-paper { background-color: #f4efe4; }
+.beadie-bone { background-color: #efe7d6; }
+.beadie-ink { color: #1a1612; }
+.beadie-signal { color: #b3261e; }
+.beadie-signal-bright { color: #e2602a; }
+.beadie-muted { color: #6b6258; }
+.beadie-border { border-color: rgba(26,22,18,0.15); }
+.beadie-border-strong { border-color: #1a1612; }
+.beadie-signal-bg { background-color: #b3261e; }
+.beadie-signal-text-on { color: #f4efe4; }
+
 /* ── BIG SCIENCE — global cold scanline texture. x = x. We are all one. ── */
 /* Subtle transmission grain across the whole platform. Heavy duty coolasfuck. */
 .twcc-scanlines::before {
