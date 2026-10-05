@@ -285,8 +285,19 @@ export default function TogetherChangeClimate() {
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
         @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6, 0 0 24px rgba(226,96,42,.55); } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
+        @keyframes twcc-epigraph { from { opacity: 0; letter-spacing: 0.3em; } to { opacity: 1; letter-spacing: 0.15em; } }
+        @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 4px; } }
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
       `}</style>
+
+      {/* ── BIG SCIENCE EPIGRAPH — Laurie's thesis, the cold opening ── */}
+      <div className="bg-[#141210] px-5 py-2.5 flex items-center justify-center gap-2 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+        <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+        <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
+          This is the time. And this is the record of the time.
+        </span>
+        <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+      </div>
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
       <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: '72vh' }}>
@@ -297,6 +308,8 @@ export default function TogetherChangeClimate() {
           style={{ filter: 'grayscale(1) contrast(1.35)', mixBlendMode: 'screen', opacity: 0.46 }}
         />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(226,96,42,.26), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
+        {/* Scanline texture — cold transmission signal */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 0.8s linear infinite' }} />
 
         {/* Bone band */}
         <div className="relative z-10 bg-[#efe7d6] px-5 py-4 flex items-center justify-between gap-3"
@@ -337,9 +350,16 @@ export default function TogetherChangeClimate() {
             {t.title_a}<br />
             <span className="text-[#e2602a]">{t.title_b}</span> {t.title_c}
           </h1>
-          {/* Freedom stamp — unlabelled */}
-          <div className="absolute right-5 top-16 w-[104px] h-[104px] rounded-full border-8 border-[#e2602a] pointer-events-none"
-            style={{ transform: 'rotate(-17deg)', opacity: 0.9, boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6', animation: 'twcc-stamp .25s ease-out .1s both, twcc-stamp-pulse 3.2s ease-in-out .6s infinite' }} />
+          {/* Record-of-the-time seal — the stamp of truth */}
+          <div className="absolute right-5 top-16 w-[104px] h-[104px] pointer-events-none flex items-center justify-center"
+            style={{ transform: 'rotate(-17deg)', animation: 'twcc-stamp .25s ease-out .1s both, twcc-stamp-pulse 3.2s ease-in-out .6s infinite' }}>
+            <div className="absolute inset-0 rounded-full border-8 border-[#e2602a]" style={{ boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6' }} />
+            <div className="relative text-center" style={{ opacity: 0.9 }}>
+              <div className="text-[7px] font-black font-mono uppercase tracking-[0.1em] text-[#e2602a] leading-none">Record</div>
+              <div className="text-[6px] font-mono text-[#efe7d6]/70 leading-none mt-0.5">of the</div>
+              <div className="text-[7px] font-black font-mono uppercase tracking-[0.1em] text-[#e2602a] leading-none mt-0.5">Time</div>
+            </div>
+          </div>
         </div>
 
         {/* Signal band */}
