@@ -15,14 +15,34 @@
         window.addEventListener('unhandledrejection', function (e) {
           errs.push('promise: ' + ((e.reason && (e.reason.message || e.reason)) || 'rejected'));
         });
-        setTimeout(function () {
-          var txt = (document.body && document.body.innerText || '').trim();
-          if (txt.length > 20) return;
-          var d = document.createElement('div');
-          d.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#f4efe4;color:#1a1612;padding:16px;font:12px/1.5 monospace;overflow:auto;white-space:pre-wrap';
-          d.textContent = 'UF51 STARTUP DIAGNOSTIC\n\nThe app rendered blank. Errors caught:\n\n' + (errs.length ? errs.join('\n\n') : '(none caught - app mounted but drew nothing)');
-          document.body.appendChild(d);
-        }, 7000);
+        var mounted = false;
+        var origLog = console.log;
+        console.log = function () {
+          if (String(arguments[0]).indexOf('mounted OK') > -1) mounted = true;
+          return origLog.apply(console, arguments);
+        };
+        var t0 = Date.now();
+        var d = null;
+        setInterval(function () {
+          var root = document.getElementById('root');
+          var txt = ((root && root.innerText) || '').trim();
+          if (txt.length > 20) { if (d) { d.remove(); d = null; } return; }
+          if (Date.now() - t0 < 6000) return;
+          if (!d) {
+            d = document.createElement('div');
+            d.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#f4efe4;color:#1a1612;padding:16px;font:12px/1.5 monospace;overflow:auto;white-space:pre-wrap';
+            document.body.appendChild(d);
+          }
+          var res = performance.getEntriesByType('resource').length;
+          d.textContent = 'UF51 STARTUP DIAGNOSTIC (' + Math.round((Date.now() - t0) / 1000) + 's)\n\n' +
+            'root children: ' + (root ? root.children.length : 'no root') + '\n' +
+            'root html length: ' + (root ? root.innerHTML.length : 0) + '\n' +
+            'root text length: ' + txt.length + '\n' +
+            'main.jsx reported mounted: ' + mounted + '\n' +
+            'resources fetched: ' + res + '\n' +
+            'path: ' + location.pathname + '\n\n' +
+            'Errors caught:\n' + (errs.length ? errs.join('\n\n') : '(none)');
+        }, 1000);
       })();
     </script>
 
