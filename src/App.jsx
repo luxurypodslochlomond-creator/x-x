@@ -163,6 +163,7 @@ const AuthenticatedApp = () => {
   return (
     <>
       <SortedPageTransition isTransitioning={isTransitioning} />
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ background: '#f4efe4', color: '#1a1612', fontFamily: 'monospace', fontSize: 12, letterSpacing: '0.3em' }}>LOADING · x = x</div>}>
     <Routes>
       <Route path="/" element={
         <LayoutWrapper currentPageName={mainPageKey}>
@@ -255,6 +256,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </Suspense>
     </>
   );
 };
