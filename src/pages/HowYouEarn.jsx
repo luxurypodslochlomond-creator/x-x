@@ -5,7 +5,7 @@ import P51Symbol from '@/components/shared/P51Symbol';
 
 export default function HowYouEarnPage() {
   useEffect(() => {
-    document.title = "How You Earn $P51 | UF51.LOVE";
+    document.title = "How You Earn P51 | UF51.LOVE";
   }, []);
 
   return (
@@ -16,7 +16,7 @@ export default function HowYouEarnPage() {
         <header className="text-center space-y-6">
           <Sparkles className="w-20 h-20 text-yellow-400 mx-auto" />
           <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
-            How You Earn $P51
+            How You Earn P51
           </h1>
           <p className="text-2xl text-gray-300">Four ways to generate love currency.</p>
         </header>
@@ -37,14 +37,14 @@ export default function HowYouEarnPage() {
               <div className="bg-black/40 p-6 rounded-lg border border-green-500/30">
                 {/* Heart icon for acts of love */}
                 <p className="text-2xl font-bold text-green-300 mb-2 flex items-center"><Heart className="w-7 h-7 mr-3 text-red-400" /> Pick up litter</p>
-                <p><strong className="text-white">1 kg = 1 $P51</strong></p>
+                <p><strong className="text-white">1 kg = 1 P51</strong></p>
                 <p className="text-sm mt-2">Photo + GPS verified by AI51 instantly</p>
               </div>
 
               <div className="bg-black/40 p-6 rounded-lg border border-green-500/30">
                 {/* Heart icon for acts of love */}
                 <p className="text-2xl font-bold text-green-300 mb-2 flex items-center"><Heart className="w-7 h-7 mr-3 text-red-400" /> Recycle properly</p>
-                <p>Separate materials, document your process, earn $P51</p>
+                <p>Separate materials, document your process, earn P51</p>
               </div>
 
               <div className="bg-black/40 p-6 rounded-lg border border-green-500/30">
@@ -74,7 +74,7 @@ export default function HowYouEarnPage() {
             </CardHeader>
             <CardContent className="space-y-4">
                 <div className="bg-black/60 p-6 rounded-xl border border-gray-700 font-mono text-center">
-                    <p className="text-3xl text-white">1 kg litter = 1 $P51</p>
+                    <p className="text-3xl text-white">1 kg litter = 1 P51</p>
                 </div>
             </CardContent>
         </Card>

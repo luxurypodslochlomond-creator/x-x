@@ -736,7 +736,7 @@ export default function NewCleanupPage() {
     };
 
     const handleShare = async () => {
-        const shareText = `Just earned ${formData.tokens_awarded.toFixed(1)} $P51 cleaning ${formData.litter_weight}kg of litter from ${formData.location || 'my area'}!\n\nGet paid to heal Earth: uf51.love`;
+        const shareText = `Just earned ${formData.tokens_awarded.toFixed(1)} P51 cleaning ${formData.litter_weight}kg of litter from ${formData.location || 'my area'}!\n\nGet paid to heal Earth: uf51.love`;
 
         if (navigator.share) {
             try {

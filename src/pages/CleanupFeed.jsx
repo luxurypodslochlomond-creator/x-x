@@ -196,7 +196,7 @@ export default function CleanupFeedPage() {
                       )}
 
                       <div className="flex items-center gap-2">
-                        <span className="text-pink-400 font-bold">{cleanup.tokens_awarded || 0} $P51</span>
+                        <span className="text-pink-400 font-bold">{cleanup.tokens_awarded || 0} P51</span>
                       </div>
 
                       {cleanup.notes && (

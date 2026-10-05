@@ -125,7 +125,7 @@ export default function ProfilePage() {
     );
     const totalPages = Math.ceil(combinedActivity.length / itemsPerPage);
 
-    // AUTO BALANCE VERIFICATION - $P51 from genesis (1:1 forever )
+    // AUTO BALANCE VERIFICATION - P51 from genesis (1:1 forever )
     useEffect(() => {
         const verifyBalance = async () => {
             if (!user || !transactions) return;
@@ -149,7 +149,7 @@ export default function ProfilePage() {
                     t.from_user === user.email && t.to_user !== user.email
                 ).reduce((sum, t) => sum + (t.p51_amount || 0), 0);
                 
-                // TRUE BALANCE ($P51 1:1, always has been )
+                // TRUE BALANCE (P51 1:1, always has been )
                 const trueBalance = earned_cleanups + earned_proofs + incoming - outgoing;
                 
                 // Auto-fix if wrong (silent, automatic)
@@ -256,13 +256,13 @@ export default function ProfilePage() {
                                     <p className="text-4xl md:text-5xl font-black font-mono text-cyan-400">
                                         {(user.p51_balance || 0).toFixed(1)}
                                     </p>
-                                    <span className="text-base font-mono text-cyan-400">$P51</span>
+                                    <span className="text-base font-mono text-cyan-400">P51</span>
                                 </div>
                                 {microLitterCount > 0 && (
                                     <div className="border-t border-cyan-500/30 pt-3 space-y-1">
                                         <p className="text-amber-400 font-mono text-sm font-black">🌟 MICRO-LITTER BONUS</p>
                                         <p className="text-white/80 font-mono text-xs">
-                                            {microLitterCount} cleanups • +{totalBonusTokens.toFixed(1)} $P51 bonus
+                                            {microLitterCount} cleanups • +{totalBonusTokens.toFixed(1)} P51 bonus
                                         </p>
                                         <p className={`text-xs font-mono ${bonusChainValid.valid ? 'text-green-400' : 'text-red-400'}`}>
                                             {bonusChainValid.valid ? '✓ Verified unfuckable' : '⚠️ Chain integrity check'}
@@ -311,7 +311,7 @@ export default function ProfilePage() {
                             >
                                 <div className="bg-black border-4 border-cyan-500 p-5 space-y-5">
                                     <div className="flex items-center justify-between">
-                                        <h2 className="text-xl font-black font-mono text-cyan-400">SEND $P51</h2>
+                                        <h2 className="text-xl font-black font-mono text-cyan-400">SEND P51</h2>
                                         <button
                                             onClick={() => { playButtonTap(); setShowP2P(false); }}
                                             className="text-cyan-400 hover:text-white text-2xl font-black"
@@ -492,7 +492,7 @@ export default function ProfilePage() {
                                                             ) : null}
                                                             <div className="flex justify-between items-center">
                                                                 <span className="text-white font-mono">{c.cleanup_type || 'Cleanup'}</span>
-                                                                <span className="text-cyan-400 font-black font-mono">+{c.tokens_awarded} $P51</span>
+                                                                <span className="text-cyan-400 font-black font-mono">+{c.tokens_awarded} P51</span>
                                                             </div>
                                                             <p className="text-xs text-gray-400 font-mono">{c.location} • {new Date(c.created_date).toLocaleDateString()}</p>
                                                         </div>
@@ -511,7 +511,7 @@ export default function ProfilePage() {
                                                         <div key={p.id} className="bg-black/60 border-2 border-pink-500/30 p-3">
                                                             <div className="flex justify-between items-center">
                                                                 <span className="text-white font-mono">{p.love_type?.replace(/_/g, ' ') || 'Love Act'}</span>
-                                                                <span className="text-pink-400 font-black font-mono">+{p.p51_awarded} $P51</span>
+                                                                <span className="text-pink-400 font-black font-mono">+{p.p51_awarded} P51</span>
                                                             </div>
                                                             <p className="text-xs text-gray-400 font-mono truncate">{p.description}</p>
                                                             <p className="text-xs text-gray-400 font-mono">{new Date(p.created_date).toLocaleDateString()}</p>
@@ -651,7 +651,7 @@ export default function ProfilePage() {
                                                            {isProof && `+${activity.p51_awarded || 0}`}
                                                            {isTransaction && `${isSent ? '-' : '+'}${activity.p51_amount || 0}`}
                                                        </div>
-                                                       <p className="text-center text-xs text-white/60 font-mono mt-1">$P51</p>
+                                                       <p className="text-center text-xs text-white/60 font-mono mt-1">P51</p>
                                                    </div>
                                                </div>
                                             </div>
