@@ -197,6 +197,47 @@ css
   100% { transform: scale(2.5); opacity: 0; }
 }
 
+/* ── BIG SCIENCE — global cold scanline texture. x = x. We are all one. ── */
+/* Subtle transmission grain across the whole platform. Heavy duty coolasfuck. */
+.twcc-scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.03;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    #efe7d6 2px,
+    #efe7d6 3px
+  );
+  animation: twcc-scan 0.8s linear infinite;
+}
+
+@keyframes twcc-scan {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 3px; }
+}
+
+/* O Superman flicker — the pilot's voice, cold in the corner */
+@keyframes twcc-flicker {
+  0%, 100% { opacity: 1; }
+  47% { opacity: 1; }
+  48% { opacity: 0.3; }
+  49% { opacity: 1; }
+  72% { opacity: 1; }
+  73% { opacity: 0.5; }
+  74% { opacity: 1; }
+}
+
+/* Epigraph cold entrance */
+@keyframes twcc-epigraph {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Smooth scroll ONLY for anchor links — not programmatic scrolls */
 html {
   scroll-behavior: auto;

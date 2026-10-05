@@ -963,6 +963,10 @@ const LayoutInner = ({ children, currentPageName }) => {
               {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
               <footer className="border-t border-cyan-500/20 bg-[#0a0f1a]/60">
               <LiveClock />
+              {/* x = x — the covenant. We are all one. */}
+              <p className="text-center py-2 font-mono font-black tracking-[0.3em] text-[10px]" style={{ color: 'rgba(239,231,214,0.25)' }}>
+                x = x · y = y · 1 = 1
+              </p>
               <p className="text-xs text-center pb-1">
                 <Link to="/ExtractionProofCovenant" className="text-green-500/70 hover:text-green-400 font-mono tracking-wide">
                   🔓 Open Source · Extraction-Proof — our covenant

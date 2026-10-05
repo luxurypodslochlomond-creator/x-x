@@ -204,8 +204,13 @@ export default function WelcomePage() {
     <div className="min-h-screen bg-[#0a0f1a] text-white">
       <div className="max-w-6xl mx-auto px-6 py-16 space-y-16">
 
-        {/* HERO */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-5 max-w-3xl mx-auto">
+        {/* HERO — BIG SCIENCE cold opening */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative text-center space-y-5 max-w-3xl mx-auto">
+          {/* O Superman — the pilot's voice, cold in the corner */}
+          <div className="absolute -top-4 left-0 flex items-center gap-1.5 pointer-events-none" style={{ animation: 'twcc-flicker 7s linear 2s infinite' }}>
+            <span className="w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-white/20">O Superman · O Superman</span>
+          </div>
 
           <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
@@ -215,6 +220,11 @@ export default function WelcomePage() {
           <h1 className="text-5xl md:text-7xl font-black leading-none tracking-tight">
             <span className="text-white">UF</span><span className="text-cyan-400">51</span>
           </h1>
+
+          {/* x = x — the covenant. We are all one. */}
+          <div className="font-mono font-black tracking-[0.3em] text-[11px] text-cyan-400/60">
+            x = x · y = y · 1 = 1
+          </div>
 
           <p className="text-xl md:text-2xl font-bold leading-snug text-gray-200">
             Real tools. Real people. Real problems.<br />
