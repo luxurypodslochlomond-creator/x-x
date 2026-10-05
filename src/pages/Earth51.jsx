@@ -207,7 +207,7 @@ export default function Earth51() {
   // LANDING - TRUE 8-BIT GAME BOY RETRO
   if (step === 'landing') {
     return (
-      <div className="min-h-screen bg-black text-white" style={{ imageRendering: 'pixelated' }}>
+      <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative" style={{ imageRendering: 'pixelated' }}>
         {/* HEADER - AUTHENTIC 8-BIT */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-green-500">
           <div className="max-w-xl mx-auto p-3 flex items-center justify-between">
@@ -435,7 +435,7 @@ export default function Earth51() {
   // WEIGHT STEP
   if (step === 'weight') {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
         {/* 8-BIT HEADER */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-cyan-500">
           <div className="flex items-center justify-between p-3">
@@ -635,7 +635,7 @@ export default function Earth51() {
   // SUCCESS
   if (step === 'success') {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
         {/* 8-BIT HEADER */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-cyan-500">
           <div className="flex items-center justify-center p-3">
@@ -837,7 +837,7 @@ export default function Earth51() {
     };
 
     return (
-      <div className="min-h-screen bg-black text-white" style={{ imageRendering: 'pixelated' }}>
+      <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative" style={{ imageRendering: 'pixelated' }}>
         {/* HEADER */}
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b-4 border-yellow-500">
           <div className="max-w-xl mx-auto p-3 flex items-center justify-between">

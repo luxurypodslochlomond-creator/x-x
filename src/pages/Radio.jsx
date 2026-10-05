@@ -110,7 +110,7 @@ Listen free at UF51.LOVE`;
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white p-4 md:p-6 pt-32 lg:pt-6">
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] p-4 md:p-6 pt-32 lg:pt-6 twcc-scanlines relative">
       <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
 
         {/* HERO - 8-BIT */}
@@ -123,11 +123,11 @@ Listen free at UF51.LOVE`;
             <COOLASFUCKWaves size={64} animate={true} />
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-black font-mono text-cyan-400">
+          <h1 className="text-4xl md:text-6xl font-black font-mono text-[#b3261e]">
             RADIO51
           </h1>
 
-          <p className="text-sm md:text-base font-mono text-gray-400 max-w-2xl mx-auto px-4">
+          <p className="text-sm md:text-base font-mono text-[#6b6258] max-w-2xl mx-auto px-4">
             FLAC/WAV lossless. Zero compression. Zero ads.
           </p>
 
@@ -139,15 +139,14 @@ Listen free at UF51.LOVE`;
               whileTap={{ scale: 0.95 }}
               className="flex flex-col items-center gap-2"
             >
-              <div className={`w-14 h-14 md:w-16 md:h-16 bg-black border-4 flex items-center justify-center transition-all ${
-                consciousMode 
-                  ? 'border-pink-500 hover:border-pink-400' 
-                  : 'border-cyan-500 hover:border-cyan-400'
-              }`}
-                   style={consciousMode ? { boxShadow: '0 0 20px rgba(236, 72, 153, 0.6)' } : {}}>
+              <div className={`w-14 h-14 md:w-16 md:h-16 bg-[#efe7d6] border-4 flex items-center justify-center transition-all ${
+                consciousMode
+                  ? 'border-[#b3261e] hover:border-[#b3261e]'
+                  : 'border-[#1a1612] hover:border-[#b3261e]'
+              }`}>
                 <COOLASFUCKBrain size={32} animate={consciousMode} />
               </div>
-              <span className={`text-xs font-black font-mono ${consciousMode ? 'text-pink-400' : 'text-cyan-400'}`}>
+              <span className={`text-xs font-black font-mono ${consciousMode ? 'text-[#b3261e]' : 'text-[#1a1612]'}`}>
                 {consciousMode ? 'CONSCIOUS' : 'CONSCIOUS'}
               </span>
             </motion.button>
@@ -158,10 +157,10 @@ Listen free at UF51.LOVE`;
               whileTap={{ scale: 0.95 }}
               className="flex flex-col items-center gap-2"
             >
-              <div className="w-14 h-14 md:w-16 md:h-16 bg-black border-4 border-cyan-500 hover:border-cyan-400 flex items-center justify-center transition-all">
-                <Guitar className="w-7 h-7 md:w-8 md:h-8 text-cyan-400" />
+              <div className="w-14 h-14 md:w-16 md:h-16 bg-[#efe7d6] border-4 border-[#1a1612] hover:border-[#b3261e] flex items-center justify-center transition-all">
+                <Guitar className="w-7 h-7 md:w-8 md:h-8 text-[#1a1612]" />
               </div>
-              <span className="text-xs font-black font-mono text-cyan-400">TUNE</span>
+              <span className="text-xs font-black font-mono text-[#1a1612]">TUNE</span>
             </motion.button>
 
             <motion.button
@@ -170,11 +169,10 @@ Listen free at UF51.LOVE`;
               whileTap={{ scale: 0.95 }}
               className="flex flex-col items-center gap-2"
             >
-              <div className="w-14 h-14 md:w-16 md:h-16 bg-black border-4 border-green-500 hover:border-green-400 flex items-center justify-center transition-all"
-                   style={{ boxShadow: '0 0 15px rgba(34, 197, 94, 0.4)' }}>
-                <Users className="w-7 h-7 md:w-8 md:h-8 text-green-400" />
+              <div className="w-14 h-14 md:w-16 md:h-16 bg-[#efe7d6] border-4 border-[#1e3a2b] hover:border-[#1e3a2b] flex items-center justify-center transition-all">
+                <Users className="w-7 h-7 md:w-8 md:h-8 text-[#1e3a2b]" />
               </div>
-              <span className="text-xs font-black font-mono text-green-400">SYNC</span>
+              <span className="text-xs font-black font-mono text-[#1e3a2b]">SYNC</span>
             </motion.button>
 
             <motion.button
@@ -183,37 +181,37 @@ Listen free at UF51.LOVE`;
               whileTap={{ scale: 0.95 }}
               className="flex flex-col items-center gap-2"
             >
-              <div className="w-14 h-14 md:w-16 md:h-16 bg-black border-4 border-cyan-500 hover:border-cyan-400 flex items-center justify-center transition-all">
+              <div className="w-14 h-14 md:w-16 md:h-16 bg-[#efe7d6] border-4 border-[#b3261e] hover:border-[#b3261e] flex items-center justify-center transition-all">
                 <COOLASFUCKWaves size={32} animate={false} />
               </div>
-              <span className="text-xs font-black font-mono text-cyan-400">HEAL</span>
+              <span className="text-xs font-black font-mono text-[#b3261e]">HEAL</span>
             </motion.button>
           </div>
 
           {/* WHY RADIO51 - 8-BIT */}
-          <Card className="bg-black border-4 border-cyan-500">
+          <Card className="bg-[#efe7d6] border-2 border-[#1a1612]/15">
             <CardContent className="p-4 md:p-8">
-              <h2 className="text-xl md:text-2xl font-black font-mono text-cyan-400 mb-4 md:mb-6 text-center">
+              <h2 className="text-xl md:text-2xl font-black font-mono text-[#b3261e] mb-4 md:mb-6 text-center">
                 WHY RADIO51
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                <div className="text-center space-y-2 md:space-y-3 bg-black border-2 border-cyan-500/30 p-4">
-                  <Disc3 className="w-8 h-8 md:w-10 md:h-10 text-cyan-400 mx-auto" />
-                  <h3 className="text-base md:text-lg font-black font-mono text-cyan-400">LOSSLESS</h3>
-                  <p className="text-gray-300 font-mono text-xs md:text-sm">FLAC/WAV only</p>
+                <div className="text-center space-y-2 md:space-y-3 bg-[#f4efe4] border-2 border-[#1a1612]/15 p-4">
+                  <Disc3 className="w-8 h-8 md:w-10 md:h-10 text-[#1a1612] mx-auto" />
+                  <h3 className="text-base md:text-lg font-black font-mono text-[#1a1612]">LOSSLESS</h3>
+                  <p className="text-[#6b6258] font-mono text-xs md:text-sm">FLAC/WAV only</p>
                 </div>
 
-                <div className="text-center space-y-2 md:space-y-3 bg-black border-2 border-pink-500/30 p-4">
+                <div className="text-center space-y-2 md:space-y-3 bg-[#f4efe4] border-2 border-[#b3261e]/30 p-4">
                   <COOLASFUCKHeart size={32} animate={false} />
-                  <h3 className="text-base md:text-lg font-black font-mono text-pink-400">90% ARTIST</h3>
-                  <p className="text-gray-300 font-mono text-xs md:text-sm">Real payment</p>
+                  <h3 className="text-base md:text-lg font-black font-mono text-[#b3261e]">90% ARTIST</h3>
+                  <p className="text-[#6b6258] font-mono text-xs md:text-sm">Real payment</p>
                 </div>
 
-                <div className="text-center space-y-2 md:space-y-3 bg-black border-2 border-green-500/30 p-4">
-                  <Globe className="w-8 h-8 md:w-10 md:h-10 text-green-400 mx-auto" />
-                  <h3 className="text-base md:text-lg font-black font-mono text-green-400">10% EARTH</h3>
-                  <p className="text-gray-300 font-mono text-xs md:text-sm">Heals planet</p>
+                <div className="text-center space-y-2 md:space-y-3 bg-[#f4efe4] border-2 border-[#1e3a2b]/30 p-4">
+                  <Globe className="w-8 h-8 md:w-10 md:h-10 text-[#1e3a2b] mx-auto" />
+                  <h3 className="text-base md:text-lg font-black font-mono text-[#1e3a2b]">10% EARTH</h3>
+                  <p className="text-[#6b6258] font-mono text-xs md:text-sm">Heals planet</p>
                 </div>
               </div>
             </CardContent>
@@ -226,19 +224,19 @@ Listen free at UF51.LOVE`;
         <GenerativeMusic />
 
         {/* SEARCH & FILTER - 8-BIT */}
-        <Card className="bg-black border-4 border-gray-700">
+        <Card className="bg-[#efe7d6] border-2 border-[#1a1612]/15">
           <CardContent className="p-6 space-y-4">
             <div className="flex gap-3">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#6b6258]" />
                 <Input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search..."
-                  className="pl-10 bg-black border-2 border-gray-600 text-white h-12 font-mono"
+                  className="pl-10 bg-[#f4efe4] border-2 border-[#1a1612]/20 text-[#1a1612] h-12 font-mono"
                 />
               </div>
-              <Button variant="outline" className="gap-2 border-2 border-gray-600 font-mono font-black">
+              <Button variant="outline" className="gap-2 border-2 border-[#1a1612]/20 font-mono font-black text-[#1a1612]">
                 <Filter className="w-5 h-5" />
                 FILTER
               </Button>
@@ -248,23 +246,12 @@ Listen free at UF51.LOVE`;
               {frequencyTypes.map(freq => {
                 const Icon = freq.icon;
                 const isActive = selectedFrequency === freq.value;
-                const colorMap = {
-                  cyan: { active: 'bg-cyan-600 border-cyan-400 text-white', inactive: 'border-cyan-500/50 text-cyan-400 hover:border-cyan-400' },
-                  pink: { active: 'bg-pink-600 border-pink-400 text-white', inactive: 'border-pink-500/50 text-pink-400 hover:border-pink-400' },
-                  yellow: { active: 'bg-yellow-600 border-yellow-400 text-black', inactive: 'border-yellow-500/50 text-yellow-400 hover:border-yellow-400' },
-                  blue: { active: 'bg-blue-600 border-blue-400 text-white', inactive: 'border-blue-500/50 text-blue-400 hover:border-blue-400' },
-                  red: { active: 'bg-red-600 border-red-400 text-white', inactive: 'border-red-500/50 text-red-400 hover:border-red-400' },
-                  teal: { active: 'bg-teal-600 border-teal-400 text-white', inactive: 'border-teal-500/50 text-teal-400 hover:border-teal-400' },
-                  orange: { active: 'bg-orange-600 border-orange-400 text-white', inactive: 'border-orange-500/50 text-orange-400 hover:border-orange-400' },
-                };
-                const colors = colorMap[freq.color] || colorMap.cyan;
-                
                 return (
                   <button
                     key={freq.value}
                     onClick={() => setSelectedFrequency(freq.value)}
                     className={`flex items-center gap-2 px-3 py-2 border-2 font-mono font-black text-xs transition-all ${
-                      isActive ? colors.active : `bg-black ${colors.inactive}`
+                      isActive ? 'bg-[#1a1612] border-[#1a1612] text-[#f4efe4]' : 'bg-[#f4efe4] border-[#1a1612]/15 text-[#1a1612] hover:border-[#1a1612]/40'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -291,11 +278,11 @@ Listen free at UF51.LOVE`;
               <Disc3 className="w-12 h-12 text-cyan-400 mx-auto animate-spin" />
             </div>
           ) : filteredTracks.length === 0 ? (
-            <Card className="bg-black border-4 border-cyan-500/50 hover:border-cyan-500 transition-all cursor-pointer" onClick={() => navigate(createPageUrl('ForMusicians'))}>
+            <Card className="bg-[#efe7d6] border-2 border-[#1a1612]/15 hover:border-[#b3261e] transition-all cursor-pointer" onClick={() => navigate(createPageUrl('ForMusicians'))}>
               <CardContent className="p-8 md:p-12 text-center space-y-4">
                 <COOLASFUCKMusicNote size={64} animate={true} />
-                <p className="text-cyan-400 text-xl font-black font-mono">GOT MUSIC?</p>
-                <p className="text-gray-400 text-sm font-mono">Tap to share your frequencies</p>
+                <p className="text-[#b3261e] text-xl font-black font-mono">GOT MUSIC?</p>
+                <p className="text-[#6b6258] text-sm font-mono">Tap to share your frequencies</p>
               </CardContent>
             </Card>
           ) : (
@@ -307,31 +294,31 @@ Listen free at UF51.LOVE`;
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <Card className="bg-black border-4 border-gray-700 hover:border-cyan-500 transition-all">
+                  <Card className="bg-[#efe7d6] border-2 border-[#1a1612]/15 hover:border-[#b3261e]/40 transition-all">
                     <CardContent className="p-4 md:p-6">
                       <div className="flex gap-3 md:gap-4">
                         {/* Album Art or Icon */}
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-black border-2 border-purple-500 flex items-center justify-center flex-shrink-0">
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-[#f4efe4] border-2 border-[#1a1612]/15 flex items-center justify-center flex-shrink-0">
                           {track.cover_art_url ? (
                             <img src={track.cover_art_url} alt={track.title} className="w-full h-full object-cover" />
                           ) : (
-                            <Music className="w-8 h-8 md:w-10 md:h-10 text-purple-400" />
+                            <Music className="w-8 h-8 md:w-10 md:h-10 text-[#6b6258]" />
                           )}
                         </div>
 
                         {/* Track Info */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-base md:text-lg font-black font-mono text-white truncate">{track.title}</h4>
-                          <div className="flex items-center gap-2 text-xs md:text-sm text-gray-400 mb-2 font-mono">
+                          <h4 className="text-base md:text-lg font-black font-mono text-[#1a1612] truncate">{track.title}</h4>
+                          <div className="flex items-center gap-2 text-xs md:text-sm text-[#6b6258] mb-2 font-mono">
                             <User className="w-3 h-3 md:w-4 md:h-4" />
                             <p className="truncate">{track.artist}</p>
                           </div>
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="px-2 py-1 bg-black border-2 border-cyan-500 text-xs font-mono font-black text-cyan-400">
+                            <span className="px-2 py-1 bg-[#f4efe4] border-2 border-[#1a1612] text-xs font-mono font-black text-[#1a1612]">
                               {track.frequency_type}
                             </span>
                             {track.bpm && (
-                              <span className="px-2 py-1 bg-black border-2 border-pink-500 text-xs font-mono font-black text-pink-400">
+                              <span className="px-2 py-1 bg-[#f4efe4] border-2 border-[#b3261e] text-xs font-mono font-black text-[#b3261e]">
                                 {track.bpm}BPM
                               </span>
                             )}
@@ -342,12 +329,12 @@ Listen free at UF51.LOVE`;
                         <div className="flex flex-col gap-2">
                           <Button
                             onClick={() => currentTrack?.id === track.id ? (isPlaying ? pause() : play(track)) : play(track)}
-                            className="w-12 h-12 bg-cyan-600 hover:bg-cyan-700 border-2 border-cyan-400"
+                            className="w-12 h-12 bg-[#b3261e] hover:bg-[#1a1612] border-2 border-[#b3261e]"
                           >
                             {currentTrack?.id === track.id && isPlaying ? (
-                              <Pause className="w-6 h-6 text-white" />
+                              <Pause className="w-6 h-6 text-[#f4efe4]" />
                             ) : (
-                              <Play className="w-6 h-6 text-white ml-1" />
+                              <Play className="w-6 h-6 text-[#f4efe4] ml-1" />
                             )}
                           </Button>
 
@@ -372,16 +359,16 @@ Listen free at UF51.LOVE`;
 
         {/* P2P MESH - BLUETOOTH + WiFi DIRECT */}
         <div className="space-y-4">
-          <Card className="bg-black border-4 border-green-500">
+          <Card className="bg-[#efe7d6] border-2 border-[#1e3a2b]/30">
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
                 <COOLASFUCKP2P size={40} animate={true} />
                 <div>
-                  <h3 className="text-xl font-black font-mono text-green-400 mb-2">P2P MESH</h3>
-                  <p className="text-gray-300 font-mono text-sm mb-3">
+                  <h3 className="text-xl font-black font-mono text-[#1e3a2b] mb-2">P2P MESH</h3>
+                  <p className="text-[#6b6258] font-mono text-sm mb-3">
                     Bluetooth + WiFi Direct. AI51 picks best route. Zero ego. Wired. ♾️❤️
                   </p>
-                  <p className="text-green-400 text-xs font-mono">
+                  <p className="text-[#1e3a2b] text-xs font-mono">
                     🍄 Mesh network. Unstoppable.
                   </p>
                 </div>
@@ -392,23 +379,23 @@ Listen free at UF51.LOVE`;
         </div>
 
         {/* NO ADS - 8-BIT */}
-        <Card className="bg-black border-4 border-red-500">
+        <Card className="bg-[#efe7d6] border-2 border-[#b3261e]/30">
           <CardContent className="p-4 md:p-8">
             <div className="grid grid-cols-3 gap-2 md:gap-6 text-center">
-              <div className="space-y-1 bg-black border-2 border-red-500/30 p-2 md:p-4">
-                <span className="text-xl md:text-3xl text-red-400 line-through font-black font-mono">ADS</span>
-                <p className="text-[10px] md:text-xs font-mono text-gray-400">No adverts</p>
+              <div className="space-y-1 bg-[#f4efe4] border-2 border-[#b3261e]/20 p-2 md:p-4">
+                <span className="text-xl md:text-3xl text-[#b3261e] line-through font-black font-mono">ADS</span>
+                <p className="text-[10px] md:text-xs font-mono text-[#6b6258]">No adverts</p>
               </div>
-              <div className="space-y-1 bg-black border-2 border-red-500/30 p-2 md:p-4">
-                <span className="text-xl md:text-3xl text-red-400 line-through font-black font-mono">ALGO</span>
-                <p className="text-[10px] md:text-xs font-mono text-gray-400">No algorithms</p>
+              <div className="space-y-1 bg-[#f4efe4] border-2 border-[#b3261e]/20 p-2 md:p-4">
+                <span className="text-xl md:text-3xl text-[#b3261e] line-through font-black font-mono">ALGO</span>
+                <p className="text-[10px] md:text-xs font-mono text-[#6b6258]">No algorithms</p>
               </div>
-              <div className="space-y-1 bg-black border-2 border-red-500/30 p-2 md:p-4">
-                <span className="text-xl md:text-3xl text-red-400 line-through font-black font-mono">BS</span>
-                <p className="text-[10px] md:text-xs font-mono text-gray-400">No bullshit</p>
+              <div className="space-y-1 bg-[#f4efe4] border-2 border-[#b3261e]/20 p-2 md:p-4">
+                <span className="text-xl md:text-3xl text-[#b3261e] line-through font-black font-mono">BS</span>
+                <p className="text-[10px] md:text-xs font-mono text-[#6b6258]">No bullshit</p>
               </div>
             </div>
-            <p className="text-center text-gray-400 mt-4 text-xs md:text-sm font-mono">JUST HEALING</p>
+            <p className="text-center text-[#6b6258] mt-4 text-xs md:text-sm font-mono">JUST HEALING</p>
           </CardContent>
         </Card>
 

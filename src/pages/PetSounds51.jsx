@@ -233,21 +233,21 @@ export default function PetSounds51() {
   }
 
   return (
-    <div className="min-h-screen text-white p-3 sm:p-4" style={{ background: 'linear-gradient(135deg, #1a200e 0%, #2a3018 40%, #1e1a0e 100%)' }}>
+    <div className="min-h-screen text-[#1a1612] p-3 sm:p-4 twcc-scanlines relative bg-[#f4efe4]">
       {/* HEADER */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
         <div className="flex flex-col items-center mb-6">
           <PetSounds51Icon8Bit size={120} animate={true} />
-          <h1 className="text-5xl sm:text-6xl font-black mt-4" style={{ color: '#d4a017', letterSpacing: '-0.02em', textShadow: '0 0 30px rgba(212,160,23,0.4)' }}>PetSounds51</h1>
+          <h1 className="text-5xl sm:text-6xl font-black mt-4 text-[#1a1612]" style={{ letterSpacing: '-0.02em' }}>PetSounds51</h1>
         </div>
-        <p className="font-bold text-xl mb-3 max-w-lg mx-auto" style={{ color: '#e8d5a3' }}>
+        <p className="font-bold text-xl mb-3 max-w-lg mx-auto text-[#1a1612]">
           They can't tell you they're struggling. You can see it though.
         </p>
-        <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed" style={{ color: '#a89870' }}>
+        <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed text-[#6b6258]">
           Psychoacoustic audio tuned to how your pet actually hears — not generic music, not white noise. 
           A real audio engine built from peer-reviewed research. Species-specific frequencies. Just leave it playing.
         </p>
-        <p className="text-xs max-w-lg mx-auto leading-relaxed mb-8" style={{ color: '#8aab3a' }}>
+        <p className="text-xs max-w-lg mx-auto leading-relaxed mb-8 text-[#1e3a2b] font-bold">
           No side effects. Works alongside your vet. No signup needed.
         </p>
 
@@ -255,18 +255,18 @@ export default function PetSounds51() {
         <div className="max-w-sm mx-auto mb-4">
            <button
              onClick={() => handleSelect('separation')}
-             className="w-full rounded-2xl px-6 py-5 font-black text-xl flex flex-col items-center gap-1 active:scale-95 transition-transform shadow-2xl"
-            style={{ background: 'linear-gradient(135deg, #8aab3a, #6b9a30)', color: '#fff', boxShadow: '0 0 40px rgba(138,171,58,0.45)' }}
+             className="w-full px-6 py-5 font-black text-xl flex flex-col items-center gap-1 active:scale-95 transition-transform"
+             style={{ background: '#b3261e', color: '#f4efe4' }}
           >
             <span className="flex items-center gap-2"><Play className="w-6 h-6 fill-current" /> Try it FREE right now</span>
             <span className="text-sm font-bold opacity-80">Separation Anxiety protocol · No card · No signup</span>
           </button>
-          <p className="text-xs text-center mt-2 font-bold" style={{ color: '#6b9a30' }}>Free forever — not a trial. Just leave it playing on your TV or laptop.</p>
+          <p className="text-xs text-center mt-2 font-bold text-[#b3261e]">Free forever — not a trial. Just leave it playing on your TV or laptop.</p>
         </div>
 
         {!isSubscribed && (
           <div className="flex items-center justify-center gap-2 mb-2">
-            <button onClick={() => setShowPaywall(true)} className="rounded-full px-4 py-2 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer text-sm font-bold" style={{ background: 'rgba(212,160,23,0.15)', border: '1px solid rgba(212,160,23,0.5)', color: '#d4a017' }}>
+            <button onClick={() => setShowPaywall(true)} className="px-4 py-2 flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer text-sm font-bold" style={{ background: 'rgba(179,38,30,0.1)', border: '2px solid #b3261e', color: '#b3261e' }}>
               <Lock size={14} />
               Unlock all 13 protocols — £29.99/year
             </button>

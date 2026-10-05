@@ -544,7 +544,7 @@ export default function MissionsPage() {
     const criticalCount = missions?.filter(m => m.urgency_level === 'critical_life_threat').length || 0;
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-black via-blue-950 to-black text-white p-6 md:p-12 pb-32">
+        <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] p-6 md:p-12 pb-32 twcc-scanlines relative">
             {selectedMission && user && (
                 <FundMissionModal
                     mission={selectedMission}

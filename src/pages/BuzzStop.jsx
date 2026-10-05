@@ -46,7 +46,7 @@ export default function BuzzStopPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
 
       {/* ── OFFLINE/CACHED BADGE ── */}
       {swReady && !isOnline && (

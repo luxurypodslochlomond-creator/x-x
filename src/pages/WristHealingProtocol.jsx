@@ -306,7 +306,7 @@ export default function WristHealingProtocol() {
   const painTrend = recentPain.length > 1 ? recentPain[recentPain.length - 1] - recentPain[0] : 0;
 
   return (
-    <div className="min-h-screen text-white overflow-x-hidden relative" style={{ background: '#07060e', fontFamily: 'system-ui, sans-serif' }}>
+    <div className="min-h-screen text-[#1a1612] overflow-x-hidden relative twcc-scanlines" style={{ background: '#f4efe4', fontFamily: 'system-ui, sans-serif' }}>
       <PrecisionGrid />
 
       {/* ── NATIVE APP NAV ── */}

@@ -109,44 +109,44 @@ export default function FrequencyChamber() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-3 sm:p-4">
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] p-3 sm:p-4 twcc-scanlines relative">
 
       {/* HEADER */}
       <div className="max-w-6xl mx-auto mb-6 sm:mb-8 text-center px-2 relative">
-        <SacredGeometryBackground color="#d4a017" opacity={0.04} />
+        <SacredGeometryBackground color="#b3261e" opacity={0.03} />
         <div className="relative z-10">
         <div className="flex flex-col items-center gap-2 mb-4">
           <COOLASFUCKWaves size={48} animate={true} />
-          <h1 className="text-2xl sm:text-3xl font-black text-white">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#1a1612]">
             Mind · Body · Soul
           </h1>
-          <p className="text-cyan-400 font-bold text-sm sm:text-base font-mono tracking-widest">AI-DESIGNED AUDIO PROTOCOLS</p>
-          <p className="text-gray-400 text-xs sm:text-sm font-mono">Built on peer-reviewed neuroscience. MIT · Stanford · NHS-aligned.</p>
+          <p className="text-[#b3261e] font-bold text-sm sm:text-base font-mono tracking-widest">AI-DESIGNED AUDIO PROTOCOLS</p>
+          <p className="text-[#6b6258] text-xs sm:text-sm font-mono">Built on peer-reviewed neuroscience. MIT · Stanford · NHS-aligned.</p>
 
           <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
-            <span className="px-2 py-1 bg-green-500/10 border border-green-500/40 rounded text-[10px] font-bold text-green-400 font-mono">✓ NO ACCOUNT</span>
-            <span className="px-2 py-1 bg-cyan-500/10 border border-cyan-500/40 rounded text-[10px] font-bold text-cyan-400 font-mono">✓ NO TRACKING</span>
-            <span className="px-2 py-1 bg-pink-500/10 border border-pink-500/40 rounded text-[10px] font-bold text-pink-400 font-mono">✓ FREE FOREVER</span>
-            <span className="px-2 py-1 bg-purple-500/10 border border-purple-500/40 rounded text-[10px] font-bold text-purple-400 font-mono">✓ WORKS OFFLINE</span>
+            <span className="px-2 py-1 bg-[#1e3a2b]/10 border border-[#1e3a2b]/40 text-[10px] font-bold text-[#1e3a2b] font-mono">✓ NO ACCOUNT</span>
+            <span className="px-2 py-1 bg-[#b3261e]/10 border border-[#b3261e]/40 text-[10px] font-bold text-[#b3261e] font-mono">✓ NO TRACKING</span>
+            <span className="px-2 py-1 bg-[#b8860b]/10 border border-[#b8860b]/40 text-[10px] font-bold text-[#b8860b] font-mono">✓ FREE FOREVER</span>
+            <span className="px-2 py-1 bg-[#1a1612]/10 border border-[#1a1612]/40 text-[10px] font-bold text-[#1a1612] font-mono">✓ WORKS OFFLINE</span>
           </div>
-          <p className="text-white/40 text-xs mt-1 italic">Just you. Nobody knows you're here.</p>
+          <p className="text-[#6b6258] text-xs mt-1 italic">Just you. Nobody knows you're here.</p>
 
           {!isOnline && (
-            <div className="px-2 py-1 bg-green-500/20 border border-green-500 rounded text-[10px] font-bold text-green-400 font-mono">
+            <div className="px-2 py-1 bg-[#1e3a2b]/20 border border-[#1e3a2b] text-[10px] font-bold text-[#1e3a2b] font-mono">
               OFFLINE ✓
             </div>
           )}
         </div>
-        <p className="text-gray-400 text-base sm:text-lg mb-4">AI-designed audio protocols for pain, anxiety, depression, loneliness, sleep + more. Built on published neuroscience. Free forever. Works offline.</p>
+        <p className="text-[#6b6258] text-base sm:text-lg mb-4">AI-designed audio protocols for pain, anxiety, depression, loneliness, sleep + more. Built on published neuroscience. Free forever. Works offline.</p>
 
         <div className="flex flex-wrap items-center justify-center gap-2 mt-4 sm:mt-6">
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setDeviceFilter('all')}
-            className={`px-3 py-2 rounded-lg font-bold font-mono text-xs sm:text-sm border-2 transition-all ${
+            className={`px-3 py-2 font-bold font-mono text-xs sm:text-sm border-2 transition-all ${
               deviceFilter === 'all'
-                ? 'bg-cyan-500 border-cyan-500 text-black'
-                : 'bg-black border-cyan-500/30 text-cyan-400 hover:border-cyan-500/60'
+                ? 'bg-[#1a1612] border-[#1a1612] text-[#f4efe4]'
+                : 'bg-[#efe7d6] border-[#1a1612]/30 text-[#1a1612] hover:border-[#1a1612]/60'
             }`}
           >
             ALL
@@ -154,10 +154,10 @@ export default function FrequencyChamber() {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setDeviceFilter('speaker')}
-            className={`px-3 py-2 rounded-lg font-bold font-mono text-xs sm:text-sm border-2 transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-2 font-bold font-mono text-xs sm:text-sm border-2 transition-all flex items-center gap-1.5 ${
               deviceFilter === 'speaker'
-                ? 'bg-green-500 border-green-500 text-black'
-                : 'bg-black border-green-500/30 text-green-400 hover:border-green-500/60'
+                ? 'bg-[#1e3a2b] border-[#1e3a2b] text-[#f4efe4]'
+                : 'bg-[#efe7d6] border-[#1e3a2b]/30 text-[#1e3a2b] hover:border-[#1e3a2b]/60'
             }`}
           >
             <COOLASFUCKSpeaker size={16} animate={deviceFilter === 'speaker'} />
@@ -166,10 +166,10 @@ export default function FrequencyChamber() {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setDeviceFilter('headphones')}
-            className={`px-3 py-2 rounded-lg font-bold font-mono text-xs sm:text-sm border-2 transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-2 font-bold font-mono text-xs sm:text-sm border-2 transition-all flex items-center gap-1.5 ${
               deviceFilter === 'headphones'
-                ? 'bg-pink-500 border-pink-500 text-black'
-                : 'bg-black border-pink-500/30 text-pink-400 hover:border-pink-500/60'
+                ? 'bg-[#b3261e] border-[#b3261e] text-[#f4efe4]'
+                : 'bg-[#efe7d6] border-[#b3261e]/30 text-[#b3261e] hover:border-[#b3261e]/60'
             }`}
           >
             <COOLASFUCKHeadphones size={16} animate={deviceFilter === 'headphones'} />
@@ -223,7 +223,7 @@ export default function FrequencyChamber() {
           />
         ))
         ) : (
-          <div className="col-span-full flex items-center justify-center py-20 text-gray-600 font-mono text-xs">Tuning in…</div>
+          <div className="col-span-full flex items-center justify-center py-20 text-[#6b6258] font-mono text-xs">Tuning in…</div>
         )}
         </div>
 
@@ -243,16 +243,16 @@ export default function FrequencyChamber() {
         {showBuzzStop && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-[#1a1612]/90 backdrop-blur-sm flex items-center justify-center p-4"
           >
             <div className="w-full max-w-md">
               <div className="flex justify-end mb-2">
                 <button onClick={() => setShowBuzzStop(false)}
-                  className="text-gray-500 hover:text-white font-mono text-xs border border-gray-700 px-3 py-1 hover:border-gray-400 transition-colors">
+                  className="text-[#6b6258] hover:text-[#f4efe4] font-mono text-xs border border-[#f4efe4]/30 px-3 py-1 hover:border-[#f4efe4]/60 transition-colors">
                   ✕ CLOSE
                 </button>
               </div>
-              <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" /></div>}>
+              <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="w-8 h-8 border-2 border-[#b3261e] border-t-transparent rounded-full animate-spin" /></div>}>
                 <BuzzStopEngine onStop={() => setShowBuzzStop(false)} />
               </Suspense>
             </div>

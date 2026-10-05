@@ -180,7 +180,7 @@ function FAQItem({ q, a }) {
 
 export default function CorporateBuyer() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#0d1a0d] to-[#0a0514] text-white">
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
       <div className="max-w-4xl mx-auto px-6 pt-16 pb-24">
 
         {/* HERO */}

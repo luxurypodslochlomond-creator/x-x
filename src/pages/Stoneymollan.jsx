@@ -90,7 +90,7 @@ export default function Stoneymollan() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#050f05] via-[#0a1a0a] to-[#050f05] text-white">
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
 
       {/* HERO */}
       <div className="relative overflow-hidden">

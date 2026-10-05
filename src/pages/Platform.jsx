@@ -73,14 +73,14 @@ const CodeBlock = ({ code }) => {
   };
   return (
     <div className="relative group">
-      <pre className="bg-black/80 border border-white/10 rounded-lg p-4 text-xs text-green-400 font-mono overflow-x-auto whitespace-pre">
+      <pre className="bg-[#1a1612] border border-[#1a1612] p-4 text-xs text-[#1e3a2b] font-mono overflow-x-auto whitespace-pre">
         {code}
       </pre>
       <button
         onClick={handleCopy}
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 bg-white/10 hover:bg-white/20 rounded text-gray-400 hover:text-white"
+        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 bg-[#efe7d6]/10 hover:bg-[#efe7d6]/20 text-[#6b6258] hover:text-[#f4efe4]"
       >
-        {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
+        {copied ? <Check className="w-3 h-3 text-[#1e3a2b]" /> : <Copy className="w-3 h-3" />}
       </button>
     </div>
   );
@@ -171,7 +171,7 @@ export default function Platform() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
 
       {/* HERO */}
       <div className="max-w-4xl mx-auto px-6 py-20 text-center">
@@ -180,22 +180,22 @@ export default function Platform() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-cyan-400 font-mono text-xs tracking-widest mb-6 uppercase">UF51 Open Platform · API Documentation</p>
+          <p className="text-[#b3261e] font-mono text-xs tracking-widest mb-6 uppercase">UF51 Open Platform · API Documentation</p>
           <h1 className="text-5xl md:text-6xl font-black leading-tight mb-6">
             Open APIs.<br />
-            <span className="text-cyan-400">Free tier. No sales call.</span>
+            <span className="text-[#b3261e]">Free tier. No sales call.</span>
           </h1>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed mb-4">
+          <p className="text-lg text-[#6b6258] max-w-2xl mx-auto leading-relaxed mb-4">
             Three open REST APIs — AI tutoring, healing frequencies, and litter intelligence. Bearer token auth. JSON in, JSON out. 1,000 free requests per month. Key in your inbox in seconds.
           </p>
-          <p className="text-gray-600 text-sm">
+          <p className="text-[#6b6258] text-sm">
             UF51 is a UK-registered Community Interest Company. Open APIs are permanently open. Subscription products fund the infrastructure.
           </p>
         </motion.div>
       </div>
 
       {/* LIVE STATS BAR */}
-      <div className="border-y border-white/5 bg-white/2 py-6 mb-0">
+      <div className="border-y border-[#1a1612]/15 bg-[#efe7d6] py-6 mb-0">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
           {PLATFORM_STATS.map(stat => {
             const Icon = stat.icon;
@@ -205,8 +205,8 @@ export default function Platform() {
                   <Icon className="w-4 h-4" style={{ color: stat.color }} />
                 </div>
                 <div>
-                  <p className="text-white font-black text-lg leading-none">{stat.value}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{stat.label}</p>
+                  <p className="text-[#1a1612] font-black text-lg leading-none">{stat.value}</p>
+                  <p className="text-[#6b6258] text-xs mt-0.5">{stat.label}</p>
                 </div>
               </div>
             );
@@ -218,48 +218,48 @@ export default function Platform() {
 
         {/* GET YOUR API KEY — instant */}
         <div className="mb-24">
-          <h2 className="text-3xl font-black mb-2">Get your API key.</h2>
-          <p className="text-gray-500 mb-8">Fill this in. Key hits your inbox instantly. No waiting. No sales call.</p>
+          <h2 className="text-3xl font-black mb-2 text-[#1a1612]">Get your API key.</h2>
+          <p className="text-[#6b6258] mb-8">Fill this in. Key hits your inbox instantly. No waiting. No sales call.</p>
 
-          <div className="border border-cyan-500/30 rounded-2xl p-8 bg-cyan-500/5">
+          <div className="border-2 border-[#1a1612]/15 p-8 bg-[#efe7d6]">
             <AnimatePresence mode="wait">
               {keyDone ? (
                 <motion.div key="done" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center py-8">
-                  <Key className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-                  <h3 className="text-2xl font-black mb-2">Key sent.</h3>
-                  <p className="text-gray-400">Check your inbox — your API key is there now. Reply with any questions.</p>
+                  <Key className="w-12 h-12 text-[#b3261e] mx-auto mb-4" />
+                  <h3 className="text-2xl font-black mb-2 text-[#1a1612]">Key sent.</h3>
+                  <p className="text-[#6b6258]">Check your inbox — your API key is there now. Reply with any questions.</p>
                 </motion.div>
               ) : (
                 <motion.form key="form" onSubmit={handleKeyRequest} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-gray-500 font-mono block mb-1">YOUR NAME</label>
+                      <label className="text-xs text-[#6b6258] font-mono block mb-1">YOUR NAME</label>
                       <input
                         required
                         value={keyForm.name}
                         onChange={e => setKeyForm(f => ({ ...f, name: e.target.value }))}
                         placeholder="Your name"
-                        className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none"
+                        className="w-full bg-[#f4efe4] border border-[#1a1612]/20 px-4 py-3 text-[#1a1612] text-sm focus:border-[#b3261e] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-gray-500 font-mono block mb-1">YOUR EMAIL</label>
+                      <label className="text-xs text-[#6b6258] font-mono block mb-1">YOUR EMAIL</label>
                       <input
                         required
                         type="email"
                         value={keyForm.email}
                         onChange={e => setKeyForm(f => ({ ...f, email: e.target.value }))}
                         placeholder="you@yourproject.com"
-                        className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none"
+                        className="w-full bg-[#f4efe4] border border-[#1a1612]/20 px-4 py-3 text-[#1a1612] text-sm focus:border-[#b3261e] focus:outline-none"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 font-mono block mb-1">WHICH API</label>
+                    <label className="text-xs text-[#6b6258] font-mono block mb-1">WHICH API</label>
                     <select
                       value={keyForm.which_api}
                       onChange={e => setKeyForm(f => ({ ...f, which_api: e.target.value }))}
-                      className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none"
+                      className="w-full bg-[#f4efe4] border border-[#1a1612]/20 px-4 py-3 text-[#1a1612] text-sm focus:border-[#b3261e] focus:outline-none"
                     >
                       <option value="learn51">Learn51 AI — tutoring engine</option>
                       <option value="frequencies">Healing Frequencies — 500+ protocols</option>
@@ -268,23 +268,23 @@ export default function Platform() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 font-mono block mb-1">WHAT ARE YOU BUILDING?</label>
+                    <label className="text-xs text-[#6b6258] font-mono block mb-1">WHAT ARE YOU BUILDING?</label>
                     <textarea
                       required
                       value={keyForm.what_building}
                       onChange={e => setKeyForm(f => ({ ...f, what_building: e.target.value }))}
                       placeholder="One sentence is fine. Who's it for, what does it do."
                       rows={3}
-                      className="w-full bg-black/60 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-cyan-500/60 focus:outline-none resize-none"
+                      className="w-full bg-[#f4efe4] border border-[#1a1612]/20 px-4 py-3 text-[#1a1612] text-sm focus:border-[#b3261e] focus:outline-none resize-none"
                     />
                   </div>
-                  {keyError && <p className="text-red-400 text-sm">{keyError}</p>}
+                  {keyError && <p className="text-[#b3261e] text-sm">{keyError}</p>}
                   <div className="flex items-center justify-between">
-                    <p className="text-gray-600 text-xs">Free. 1,000 req/month. Key tied to stated purpose.</p>
+                    <p className="text-[#6b6258] text-xs">Free. 1,000 req/month. Key tied to stated purpose.</p>
                     <button
                       type="submit"
                       disabled={keyLoading}
-                      className="flex items-center gap-2 px-6 py-3 bg-cyan-500 text-black font-black rounded-xl hover:bg-cyan-400 transition-all disabled:opacity-50"
+                      className="flex items-center gap-2 px-6 py-3 bg-[#b3261e] text-[#f4efe4] font-black hover:bg-[#1a1612] transition-all disabled:opacity-50"
                     >
                       {keyLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                       {keyLoading ? 'Sending…' : 'Get my key'}
@@ -295,10 +295,10 @@ export default function Platform() {
             </AnimatePresence>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4 mt-6 text-sm text-gray-400">
-            <div className="border border-white/5 rounded-xl p-4"><span className="text-white font-bold block">Free tier</span>1,000 requests/month. No cost. No catch.</div>
-            <div className="border border-white/5 rounded-xl p-4"><span className="text-white font-bold block">Instant</span>Key in your inbox before you close this tab.</div>
-            <div className="border border-white/5 rounded-xl p-4"><span className="text-white font-bold block">Rate limit hit?</span>Email us. If it's good, we'll sort it.</div>
+          <div className="grid md:grid-cols-3 gap-4 mt-6 text-sm text-[#6b6258]">
+            <div className="border border-[#1a1612]/15 p-4"><span className="text-[#1a1612] font-bold block">Free tier</span>1,000 requests/month. No cost. No catch.</div>
+            <div className="border border-[#1a1612]/15 p-4"><span className="text-[#1a1612] font-bold block">Instant</span>Key in your inbox before you close this tab.</div>
+            <div className="border border-[#1a1612]/15 p-4"><span className="text-[#1a1612] font-bold block">Rate limit hit?</span>Email us. If it's good, we'll sort it.</div>
           </div>
         </div>
 
@@ -310,20 +310,20 @@ export default function Platform() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="border border-green-500/30 rounded-2xl p-8 bg-green-500/5"
+            className="border-2 border-[#1e3a2b]/30 p-8 bg-[#efe7d6]"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-green-400 font-mono text-sm font-bold tracking-widest">OPEN FOREVER</span>
+              <div className="w-3 h-3 rounded-full bg-[#1e3a2b] animate-pulse" />
+              <span className="text-[#1e3a2b] font-mono text-sm font-bold tracking-widest">OPEN FOREVER</span>
             </div>
-            <h2 className="text-2xl font-black mb-4">Open APIs.</h2>
-            <p className="text-gray-400 mb-6">
+            <h2 className="text-2xl font-black mb-4 text-[#1a1612]">Open APIs.</h2>
+            <p className="text-[#6b6258] mb-6">
               Three production APIs. Free tier at 1,000 req/month. Standard REST. No proprietary SDK. Key issued instantly on request.
             </p>
             <ul className="space-y-2">
               {['Learn51 AI tutoring engine', 'Healing frequency database', 'Litter cleanup AI', 'AI51 ethical layer (2026)'].map(item => (
-                <li key={item} className="flex items-center gap-2 text-gray-300 text-sm">
-                  <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" /> {item}
+                <li key={item} className="flex items-center gap-2 text-[#1a1612] text-sm">
+                  <CheckCircle className="w-4 h-4 text-[#1e3a2b] flex-shrink-0" /> {item}
                 </li>
               ))}
             </ul>
@@ -334,24 +334,24 @@ export default function Platform() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="border border-amber-500/30 rounded-2xl p-8 bg-amber-500/5"
+            className="border-2 border-[#b8860b]/30 p-8 bg-[#efe7d6]"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-3 h-3 rounded-full bg-amber-400" />
-              <span className="text-amber-400 font-mono text-sm font-bold tracking-widest">FUNDS EVERYTHING</span>
+              <div className="w-3 h-3 rounded-full bg-[#b8860b]" />
+              <span className="text-[#b8860b] font-mono text-sm font-bold tracking-widest">FUNDS EVERYTHING</span>
             </div>
-            <h2 className="text-2xl font-black mb-4">Paid products.</h2>
-            <p className="text-gray-400 mb-6">
+            <h2 className="text-2xl font-black mb-4 text-[#1a1612]">Paid products.</h2>
+            <p className="text-[#6b6258] mb-6">
               SORTED, PetSounds51, CB51 — subscription SaaS. Revenue from these funds the open APIs and infrastructure.
             </p>
             <ul className="space-y-3">
               {CLOSED_PRODUCTS.map(p => (
                 <li key={p.name} className="text-sm flex items-start justify-between gap-4">
                   <div>
-                    <span className="font-bold" style={{ color: p.color }}>{p.name}</span>
-                    <span className="text-gray-500 block text-xs mt-0.5">{p.why}</span>
+                    <span className="font-bold text-[#1a1612]">{p.name}</span>
+                    <span className="text-[#6b6258] block text-xs mt-0.5">{p.why}</span>
                   </div>
-                  <span className="text-gray-600 text-xs font-mono flex-shrink-0">{p.price}</span>
+                  <span className="text-[#6b6258] text-xs font-mono flex-shrink-0">{p.price}</span>
                 </li>
               ))}
             </ul>
@@ -360,8 +360,8 @@ export default function Platform() {
 
         {/* OPEN APIs */}
         <div className="mb-24">
-          <h2 className="text-3xl font-black mb-2">Open APIs.</h2>
-          <p className="text-gray-500 mb-10">No enterprise sales call. No pricing tiers. Just use it.</p>
+          <h2 className="text-3xl font-black mb-2 text-[#1a1612]">Open APIs.</h2>
+          <p className="text-[#6b6258] mb-10">No enterprise sales call. No pricing tiers. Just use it.</p>
 
           {/* API selector */}
           <div className="flex flex-wrap gap-3 mb-8">
@@ -369,10 +369,10 @@ export default function Platform() {
               <button
                 key={api.name}
                 onClick={() => setActiveApi(i)}
-                className={`px-4 py-2 rounded-lg font-mono text-sm font-bold transition-all border ${
+                className={`px-4 py-2 font-mono text-sm font-bold transition-all border ${
                   activeApi === i
-                    ? 'text-black'
-                    : 'bg-transparent text-gray-400 border-white/10 hover:border-white/30'
+                    ? 'text-[#f4efe4]'
+                    : 'bg-transparent text-[#6b6258] border-[#1a1612]/15 hover:border-[#1a1612]/40'
                 } ${api.status === 'coming' ? 'opacity-60' : ''}`}
                 style={activeApi === i ? { backgroundColor: api.color, borderColor: api.color } : {}}
               >
@@ -387,34 +387,34 @@ export default function Platform() {
             key={activeApi}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="border border-white/10 rounded-2xl p-8 bg-white/2"
+            className="border-2 border-[#1a1612]/15 p-8 bg-[#efe7d6]"
           >
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="font-mono text-sm px-3 py-1 rounded-full border" style={{ color: OPEN_APIS[activeApi].color, borderColor: OPEN_APIS[activeApi].color + '40' }}>
+                  <span className="font-mono text-sm px-3 py-1 border" style={{ color: OPEN_APIS[activeApi].color, borderColor: OPEN_APIS[activeApi].color + '40' }}>
                     {OPEN_APIS[activeApi].endpoint}
                   </span>
                   {OPEN_APIS[activeApi].status === 'open'
-                    ? <span className="text-green-400 text-xs font-mono">LIVE</span>
-                    : <span className="text-amber-400 text-xs font-mono">COMING 2026</span>
+                    ? <span className="text-[#1e3a2b] text-xs font-mono">LIVE</span>
+                    : <span className="text-[#b8860b] text-xs font-mono">COMING 2026</span>
                   }
                 </div>
-                <h3 className="text-2xl font-black mb-3">{OPEN_APIS[activeApi].name}</h3>
-                <p className="text-gray-400 mb-6">{OPEN_APIS[activeApi].description}</p>
-                <div className="bg-white/5 rounded-lg p-4 mb-3">
-                  <p className="text-xs text-gray-500 font-mono mb-2">WHAT YOU CAN BUILD</p>
-                  <p className="text-gray-300 text-sm">{OPEN_APIS[activeApi].what_you_can_build}</p>
+                <h3 className="text-2xl font-black mb-3 text-[#1a1612]">{OPEN_APIS[activeApi].name}</h3>
+                <p className="text-[#6b6258] mb-6">{OPEN_APIS[activeApi].description}</p>
+                <div className="bg-[#f4efe4] border border-[#1a1612]/10 p-4 mb-3">
+                  <p className="text-xs text-[#6b6258] font-mono mb-2">WHAT YOU CAN BUILD</p>
+                  <p className="text-[#1a1612] text-sm">{OPEN_APIS[activeApi].what_you_can_build}</p>
                 </div>
                 <div className="flex items-center gap-4 text-xs font-mono">
-                  <span className="text-gray-500">Free tier:</span>
-                  <span className="text-white font-bold">{OPEN_APIS[activeApi].free_tier}</span>
+                  <span className="text-[#6b6258]">Free tier:</span>
+                  <span className="text-[#1a1612] font-bold">{OPEN_APIS[activeApi].free_tier}</span>
                 </div>
               </div>
               <div>
-                <p className="text-xs text-gray-500 font-mono mb-3">EXAMPLE REQUEST</p>
+                <p className="text-xs text-[#6b6258] font-mono mb-3">EXAMPLE REQUEST</p>
                 <CodeBlock code={OPEN_APIS[activeApi].example} />
-                <p className="text-xs text-gray-600 mt-3">Endpoints are in closed beta — the live URL ships with your key. Email us first.</p>
+                <p className="text-xs text-[#6b6258] mt-3">Endpoints are in closed beta — the live URL ships with your key. Email us first.</p>
               </div>
             </div>
           </motion.div>
@@ -422,8 +422,8 @@ export default function Platform() {
 
         {/* WHO THIS IS FOR */}
         <div className="mb-24">
-          <h2 className="text-3xl font-black mb-2">Who this is for.</h2>
-          <p className="text-gray-500 mb-10">If you're building something that helps people — this is for you.</p>
+          <h2 className="text-3xl font-black mb-2 text-[#1a1612]">Who this is for.</h2>
+          <p className="text-[#6b6258] mb-10">If you're building something that helps people — this is for you.</p>
           
           <div className="grid md:grid-cols-2 gap-4">
             {WHO_ITS_FOR.map((item, i) => {
@@ -434,12 +434,12 @@ export default function Platform() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex gap-4 border border-white/10 rounded-xl p-5 hover:border-cyan-500/30 transition-all"
+                  className="flex gap-4 border border-[#1a1612]/15 p-5 hover:border-[#b3261e]/40 transition-all"
                 >
-                  <Icon className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <Icon className="w-5 h-5 text-[#b3261e] flex-shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-black mb-1">{item.who}</h3>
-                    <p className="text-gray-400 text-sm">{item.what}</p>
+                    <h3 className="font-black mb-1 text-[#1a1612]">{item.who}</h3>
+                    <p className="text-[#6b6258] text-sm">{item.what}</p>
                   </div>
                 </motion.div>
               );
@@ -449,15 +449,15 @@ export default function Platform() {
 
         {/* HOW WE KEEP IT SAFE — legal & ethical */}
         <div className="mb-24">
-          <h2 className="text-3xl font-black mb-2">How we keep it safe.</h2>
-          <p className="text-gray-500 mb-2">Open doesn't mean unguarded.</p>
-          <div className="border border-white/5 rounded-xl p-5 bg-white/2 mb-10">
-            <p className="text-gray-500 text-xs font-mono mb-3">LEGAL COMPLIANCE</p>
-            <div className="grid md:grid-cols-2 gap-3 text-xs text-gray-400">
-              <div><span className="text-white font-bold block mb-1">UK & EU</span>UK GDPR compliant. EU AI Act aligned. Data processed under UK adequacy decisions. No EEA transfer without safeguards.</div>
-              <div><span className="text-white font-bold block mb-1">USA</span>CCPA compliant for California users. No sale of personal data. No user profiling. COPPA compliant — no data collected from under-13s.</div>
-              <div><span className="text-white font-bold block mb-1">Global</span>We do not collect, store, or process biometric data. No cross-border data transfer without legal basis. API keys tied to a named responsible party in every jurisdiction.</div>
-              <div><span className="text-white font-bold block mb-1">Questions?</span>If your jurisdiction has specific AI or data law requirements, email us before integrating. We'll work through it. <a href="mailto:family@uf51.love?subject=Legal Compliance" className="text-cyan-400 hover:text-cyan-300">family@uf51.love</a></div>
+          <h2 className="text-3xl font-black mb-2 text-[#1a1612]">How we keep it safe.</h2>
+          <p className="text-[#6b6258] mb-2">Open doesn't mean unguarded.</p>
+          <div className="border border-[#1a1612]/15 p-5 bg-[#efe7d6] mb-10">
+            <p className="text-[#6b6258] text-xs font-mono mb-3">LEGAL COMPLIANCE</p>
+            <div className="grid md:grid-cols-2 gap-3 text-xs text-[#6b6258]">
+              <div><span className="text-[#1a1612] font-bold block mb-1">UK & EU</span>UK GDPR compliant. EU AI Act aligned. Data processed under UK adequacy decisions. No EEA transfer without safeguards.</div>
+              <div><span className="text-[#1a1612] font-bold block mb-1">USA</span>CCPA compliant for California users. No sale of personal data. No user profiling. COPPA compliant — no data collected from under-13s.</div>
+              <div><span className="text-[#1a1612] font-bold block mb-1">Global</span>We do not collect, store, or process biometric data. No cross-border data transfer without legal basis. API keys tied to a named responsible party in every jurisdiction.</div>
+              <div><span className="text-[#1a1612] font-bold block mb-1">Questions?</span>If your jurisdiction has specific AI or data law requirements, email us before integrating. We'll work through it. <a href="mailto:family@uf51.love?subject=Legal Compliance" className="text-[#b3261e] hover:text-[#1a1612]">family@uf51.love</a></div>
             </div>
           </div>
           <div className="space-y-4">
@@ -505,61 +505,61 @@ export default function Platform() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className="flex gap-6 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all"
+                  className="flex gap-6 border border-[#1a1612]/15 p-6 hover:border-[#1a1612]/40 transition-all"
                 >
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: layer.color + '20', color: layer.color }}>
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-black text-lg mb-2">{layer.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{layer.body}</p>
+                    <h3 className="font-black text-lg mb-2 text-[#1a1612]">{layer.title}</h3>
+                    <p className="text-[#6b6258] text-sm leading-relaxed">{layer.body}</p>
                   </div>
                 </motion.div>
               );
             })}
           </div>
-          <div className="mt-8 border border-white/5 rounded-xl p-6 bg-white/2 text-center">
-            <p className="text-gray-500 text-sm">The honest caveat: <span className="text-gray-300">no system is perfect. If you find a gap in our legal compliance or safety — tell us. We'd rather be corrected than wrong.</span></p>
-            <a href="mailto:family@uf51.love?subject=Safety Gap" className="text-cyan-400 text-sm font-bold mt-2 inline-block hover:text-cyan-300 transition-colors">family@uf51.love — subject: Safety Gap</a>
+          <div className="mt-8 border border-[#1a1612]/15 p-6 bg-[#efe7d6] text-center">
+            <p className="text-[#6b6258] text-sm">The honest caveat: <span className="text-[#1a1612]">no system is perfect. If you find a gap in our legal compliance or safety — tell us. We'd rather be corrected than wrong.</span></p>
+            <a href="mailto:family@uf51.love?subject=Safety Gap" className="text-[#b3261e] text-sm font-bold mt-2 inline-block hover:text-[#1a1612] transition-colors">family@uf51.love — subject: Safety Gap</a>
           </div>
         </div>
 
         {/* THE HONEST BIT */}
-        <div className="border border-white/10 rounded-2xl p-10 mb-24 bg-white/2">
-          <h2 className="text-2xl font-black mb-6">How the model works.</h2>
+        <div className="border-2 border-[#1a1612]/15 p-10 mb-24 bg-[#efe7d6]">
+          <h2 className="text-2xl font-black mb-6 text-[#1a1612]">How the model works.</h2>
           <div className="grid md:grid-cols-3 gap-6 text-sm">
-            <div className="border border-white/5 rounded-xl p-5">
-              <p className="text-cyan-400 font-mono text-xs mb-2">OPEN APIs</p>
-              <p className="font-bold mb-1">Free. Permanently.</p>
-              <p className="text-gray-400">Learn51, Frequencies, Cleanup Intelligence. 1,000 req/month free. No time limit. Key tied to stated purpose.</p>
+            <div className="border border-[#1a1612]/15 p-5">
+              <p className="text-[#b3261e] font-mono text-xs mb-2">OPEN APIs</p>
+              <p className="font-bold mb-1 text-[#1a1612]">Free. Permanently.</p>
+              <p className="text-[#6b6258]">Learn51, Frequencies, Cleanup Intelligence. 1,000 req/month free. No time limit. Key tied to stated purpose.</p>
             </div>
-            <div className="border border-white/5 rounded-xl p-5">
-              <p className="text-amber-400 font-mono text-xs mb-2">SUBSCRIPTIONS</p>
-              <p className="font-bold mb-1">Fund the open layer.</p>
-              <p className="text-gray-400">SORTED, PetSounds51, CB51 are paid products. Revenue covers infrastructure and keeps the free tier running.</p>
+            <div className="border border-[#1a1612]/15 p-5">
+              <p className="text-[#b8860b] font-mono text-xs mb-2">SUBSCRIPTIONS</p>
+              <p className="font-bold mb-1 text-[#1a1612]">Fund the open layer.</p>
+              <p className="text-[#6b6258]">SORTED, PetSounds51, CB51 are paid products. Revenue covers infrastructure and keeps the free tier running.</p>
             </div>
-            <div className="border border-white/5 rounded-xl p-5">
-              <p className="text-green-400 font-mono text-xs mb-2">LEGAL STRUCTURE</p>
-              <p className="font-bold mb-1">CIC — locked by law.</p>
-              <p className="text-gray-400">Registered at Companies House. Asset lock prevents the mission being changed by any future owner or acquirer.</p>
+            <div className="border border-[#1a1612]/15 p-5">
+              <p className="text-[#1e3a2b] font-mono text-xs mb-2">LEGAL STRUCTURE</p>
+              <p className="font-bold mb-1 text-[#1a1612]">CIC — locked by law.</p>
+              <p className="text-[#6b6258]">Registered at Companies House. Asset lock prevents the mission being changed by any future owner or acquirer.</p>
             </div>
           </div>
         </div>
 
         {/* FOUNDERS — Stripe powered */}
         <div className="mb-24" id="support-section">
-          <div className="border border-purple-500/20 rounded-2xl p-10 bg-purple-500/5">
+          <div className="border-2 border-[#b3261e]/20 p-10 bg-[#efe7d6]">
             <div className="max-w-2xl mx-auto text-center">
-              <p className="text-purple-400 font-mono text-xs tracking-widest mb-4">NO ACCOUNT REQUIRED · STRIPE-POWERED</p>
-              <h2 className="text-3xl font-black mb-4">Support the open layer.</h2>
+              <p className="text-[#b3261e] font-mono text-xs tracking-widest mb-4">NO ACCOUNT REQUIRED · STRIPE-POWERED</p>
+              <h2 className="text-3xl font-black mb-4 text-[#1a1612]">Support the open layer.</h2>
               {supported ? (
                 <div className="py-6 mb-6">
-                  <CheckCircle className="w-12 h-12 text-green-400 mx-auto mb-3" />
-                  <p className="text-green-400 font-black text-xl">Thank you. Seriously.</p>
-                  <p className="text-gray-400 mt-2">You're keeping the open layer alive for everyone who can't afford it.</p>
+                  <CheckCircle className="w-12 h-12 text-[#1e3a2b] mx-auto mb-3" />
+                  <p className="text-[#1e3a2b] font-black text-xl">Thank you. Seriously.</p>
+                  <p className="text-[#6b6258] mt-2">You're keeping the open layer alive for everyone who can't afford it.</p>
                 </div>
               ) : null}
-              <p className="text-gray-400 text-base leading-relaxed mb-8">
+              <p className="text-[#6b6258] text-base leading-relaxed mb-8">
                 The open APIs run on real infrastructure. If you use them and want to contribute, this is how. One-time. Any currency. No account needed.
               </p>
 
@@ -569,7 +569,7 @@ export default function Platform() {
                   <button
                     key={c.code}
                     onClick={() => setCurrency(c.code)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all border ${currency === c.code ? 'bg-purple-500 border-purple-500 text-white' : 'border-white/10 text-gray-400 hover:border-white/30 hover:text-white'}`}
+                    className={`px-3 py-1.5 text-xs font-black transition-all border ${currency === c.code ? 'bg-[#b3261e] border-[#b3261e] text-[#f4efe4]' : 'border-[#1a1612]/15 text-[#6b6258] hover:border-[#1a1612]/40 hover:text-[#1a1612]'}`}
                   >
                     {c.symbol} {c.label}
                   </button>
@@ -583,12 +583,12 @@ export default function Platform() {
                     key={amt}
                     onClick={() => handleOneOffDonation(amt, `quick_${amt}`)}
                     disabled={!!supportLoading}
-                    className="border border-white/10 hover:border-purple-500/60 rounded-xl py-3 font-black text-sm transition-all hover:bg-purple-500/10 disabled:opacity-50 flex items-center justify-center"
+                    className="border border-[#1a1612]/15 hover:border-[#b3261e]/60 py-3 font-black text-sm transition-all hover:bg-[#b3261e]/5 disabled:opacity-50 flex items-center justify-center"
                   >
                     {supportLoading === `quick_${amt}` ? (
-                      <Loader2 className="w-4 h-4 animate-spin text-purple-400" />
+                      <Loader2 className="w-4 h-4 animate-spin text-[#b3261e]" />
                     ) : (
-                      <span className="text-purple-300">{activeCurrency.symbol}{amt}</span>
+                      <span className="text-[#b3261e]">{activeCurrency.symbol}{amt}</span>
                     )}
                   </button>
                 ))}
@@ -601,23 +601,23 @@ export default function Platform() {
                     key={amt}
                     onClick={() => amt === 10000 ? window.location.href = 'mailto:family@uf51.love?subject=Big%20Donation' : handleOneOffDonation(amt, `big_${amt}`)}
                     disabled={!!supportLoading && supportLoading !== `big_${amt}`}
-                    className="border border-white/10 hover:border-purple-500/60 rounded-xl py-3 text-center transition-all hover:bg-purple-500/10 disabled:opacity-50 flex items-center justify-center"
+                    className="border border-[#1a1612]/15 hover:border-[#b3261e]/60 py-3 text-center transition-all hover:bg-[#b3261e]/5 disabled:opacity-50 flex items-center justify-center"
                   >
                     {supportLoading === `big_${amt}` ? (
-                      <Loader2 className="w-4 h-4 animate-spin text-purple-400" />
+                      <Loader2 className="w-4 h-4 animate-spin text-[#b3261e]" />
                     ) : (
-                      <span className="font-black text-purple-300">{activeCurrency.symbol}{amt.toLocaleString()}</span>
+                      <span className="font-black text-[#b3261e]">{activeCurrency.symbol}{amt.toLocaleString()}</span>
                     )}
                   </button>
                 ))}
               </div>
 
               {/* Custom amount */}
-              <div className="border border-white/10 rounded-xl p-4 mb-4">
-                <p className="text-xs text-gray-500 font-mono mb-3">YOUR OWN AMOUNT</p>
+              <div className="border border-[#1a1612]/15 p-4 mb-4">
+                <p className="text-xs text-[#6b6258] font-mono mb-3">YOUR OWN AMOUNT</p>
                 <div className="flex gap-3">
-                  <div className="flex items-center gap-2 flex-1 bg-black/60 border border-white/10 rounded-lg px-4">
-                    <span className="text-gray-400 font-bold">{activeCurrency.symbol}</span>
+                  <div className="flex items-center gap-2 flex-1 bg-[#f4efe4] border border-[#1a1612]/20 px-4">
+                    <span className="text-[#6b6258] font-bold">{activeCurrency.symbol}</span>
                     <input
                       type="number"
                       min="1"
@@ -625,9 +625,9 @@ export default function Platform() {
                       value={customAmount}
                       onChange={e => setCustomAmount(e.target.value)}
                       placeholder="Any amount"
-                      className="flex-1 bg-transparent py-3 text-white text-sm focus:outline-none"
+                      className="flex-1 bg-transparent py-3 text-[#1a1612] text-sm focus:outline-none"
                     />
-                    <span className="text-gray-600 text-xs font-mono">{activeCurrency.label}</span>
+                    <span className="text-[#6b6258] text-xs font-mono">{activeCurrency.label}</span>
                   </div>
                   <button
                     onClick={handleCustomDonate}

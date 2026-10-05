@@ -188,7 +188,7 @@ export default function ForMusiciansPage() {
     // STEP 1: INTRO
     if (step === 1) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
+            <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative p-6">
                 <div className="max-w-2xl mx-auto space-y-8 pt-12">
                     <motion.div
                         initial={{ scale: 0 }}
@@ -416,7 +416,7 @@ export default function ForMusiciansPage() {
     // STEP 2: FILE UPLOAD
     if (step === 2) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6">
+            <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative p-6">
                 <div className="max-w-2xl mx-auto space-y-8 pt-12">
                     <div className="text-center">
                         <h2 className="text-4xl font-black font-mono mb-2">UPLOAD YOUR TRACK</h2>
@@ -643,7 +643,7 @@ export default function ForMusiciansPage() {
     // STEP 3: TRACK DETAILS
     if (step === 3) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white p-6 pb-32">
+            <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative p-6 pb-32">
                 <div className="max-w-2xl mx-auto space-y-6 pt-12">
                     <div className="text-center mb-8">
                         <h2 className="text-4xl font-black font-mono mb-2">TELL YOUR STORY</h2>
@@ -830,7 +830,7 @@ export default function ForMusiciansPage() {
         // from a generic success message without backend response passing it back.
         // Assuming createPageUrl('Radio') will suffice.
         return (
-            <div className="min-h-screen bg-gradient-to-br from-[#0a0514] via-[#1a0f2a] to-[#0a0514] text-white flex items-center justify-center p-6">
+            <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative flex items-center justify-center p-6">
                 <motion.div
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}

@@ -71,7 +71,7 @@ export default function CleanupFeedPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-cyan-950 to-black text-white p-6">
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] p-6 twcc-scanlines relative">
       <div className="max-w-6xl mx-auto space-y-6">
         
         <motion.div
