@@ -156,3 +156,35 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+/* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
+.beadie-paper { background-color: #f4efe4; }
+.beadie-bone { background-color: #efe7d6; }
+.beadie-ink { color: #1a1612; }
+.beadie-signal { color: #b3261e; }
+.beadie-muted { color: #6b6258; }
+
+/* ── BIG SCIENCE — cold scanline transmission texture. x = x. ── */
+.twcc-scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.03;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, #1a1612 2px, #1a1612 3px);
+  animation: twcc-scan 0.8s linear infinite;
+}
+@keyframes twcc-scan { 0% { background-position: 0 0; } 100% { background-position: 0 3px; } }
+@keyframes twcc-flicker {
+  0%, 100% { opacity: 1; }
+  47% { opacity: 1; }
+  48% { opacity: 0.3; }
+  49% { opacity: 1; }
+  72% { opacity: 1; }
+  73% { opacity: 0.5; }
+  74% { opacity: 1; }
+}
+@keyframes twcc-epigraph { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sorted-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sorted-exit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-8px); } }

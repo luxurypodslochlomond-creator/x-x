@@ -5,6 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="/api/functions/serveFavicon?type=uf51" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- TEMP DIAGNOSTIC: if the app renders blank, show the real startup error on screen -->
+    <script>
+      (function () {
+        var errs = [];
+        window.addEventListener('error', function (e) {
+          errs.push((e.message || 'error') + (e.filename ? ' @ ' + e.filename.split('/').slice(-2).join('/') + ':' + e.lineno : ''));
+        });
+        window.addEventListener('unhandledrejection', function (e) {
+          errs.push('promise: ' + ((e.reason && (e.reason.message || e.reason)) || 'rejected'));
+        });
+        setTimeout(function () {
+          var txt = (document.body && document.body.innerText || '').trim();
+          if (txt.length > 20) return;
+          var d = document.createElement('div');
+          d.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#f4efe4;color:#1a1612;padding:16px;font:12px/1.5 monospace;overflow:auto;white-space:pre-wrap';
+          d.textContent = 'UF51 STARTUP DIAGNOSTIC\n\nThe app rendered blank. Errors caught:\n\n' + (errs.length ? errs.join('\n\n') : '(none caught - app mounted but drew nothing)');
+          document.body.appendChild(d);
+        }, 7000);
+      })();
+    </script>
+
     <!-- STATIC OG TAGS — visible to scrapers that don't run JS (WhatsApp, Telegram, etc.) -->
     <!-- JS below overrides these per-page for JS-capable clients -->
     <title>SORTED — Decode Scary Letters in 30 Seconds</title>
