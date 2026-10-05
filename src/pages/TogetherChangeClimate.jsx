@@ -174,14 +174,14 @@ function EntryModal({ item, onClose, t = T.en }) {
     return () => { document.body.style.overflow = prev; };
   }, []);
   return (
-    <motion.div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-sm p-0 sm:p-6" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center bg-black/90 p-0 sm:p-6" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.15 } }}>
       <motion.div
-        className="bg-[#efe7d6] border-2 border-[#141210] w-full max-w-lg max-h-[90vh] overflow-y-auto"
+        className="bg-[#efe7d6] border-2 border-[#141210] w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-none"
         onClick={e => e.stopPropagation()}
-        initial={{ y: 60, opacity: 0 }}
+        initial={{ y: '100%', opacity: 0.5 }}
         animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 40, opacity: 0 }}
-        transition={{ duration: 0.22, ease: [0.35, 0, 0.2, 1] }}
+        exit={{ y: '100%', opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 380, damping: 38, mass: 0.8 }}
       >
         <div className="relative h-52 sm:h-60 bg-[#141210]">
           <img src={item.image_url || CATEGORY_IMAGE(item.category)} alt={item.title} className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
