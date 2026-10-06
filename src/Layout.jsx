@@ -74,7 +74,7 @@ const PUBLIC_PAGES = [
   'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy',
   'BuzzTrip', 'BuzzTripAbout', 'UF51Overview',
   'NewCleanup', 'Earth51', 'CleanupFeed', 'Missions', 'Stoneymollan', 'StoneymollanMarketing',
-  'TogetherChangeClimate', 'ClimatePlatform', 'UF51Token', 'UF51ThreadJournal'
+  'TogetherChangeClimate', 'ClimatePlatform', 'UF51Token', 'UF51ThreadJournal', 'Franklin51'
 ];
 
 // OFFLINE-OK PAGES
@@ -501,6 +501,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
       { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
       { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
+      { title: "Franklin51", url: createPageUrl("Franklin51"), icon: Dna, description: "Photo 51 · the photograph that sees" },
 
     ];
 
