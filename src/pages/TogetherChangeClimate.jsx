@@ -313,6 +313,16 @@ export default function TogetherChangeClimate() {
         </div>
       </div>
 
+      {/* ── JANE GOODALL — her words, from Janine's spec ── */}
+      <div className="bg-[#141210] px-5 py-2.5 border-t border-[#e2602a]/15">
+        <p className="text-[9px] font-mono italic text-[#efe7d6]/50 text-center leading-relaxed">
+          "Every single day, we hold the power to shape the world around us."
+        </p>
+        <p className="text-[7px] font-mono uppercase tracking-widest text-[#efe7d6]/30 text-center mt-0.5">
+          Dr. Jane Goodall
+        </p>
+      </div>
+
       <ClimateImpactBar />
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
@@ -649,6 +659,9 @@ export default function TogetherChangeClimate() {
           <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-2 mt-4 px-3 py-2 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors">
             {t.covenant} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
+          <a href="https://www.solutions-site.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-2 px-3 py-2 bg-[#efe7d6] text-[#1e3a2b] text-[10px] font-black font-mono uppercase border border-[#efe7d6] hover:bg-[#e2602a] hover:text-[#141210] transition-colors">
+            Horizon Solutions Site ↗
+          </a>
           <p className="text-[11px] font-mono text-[#efe7d6]/80 mt-4 pt-4 border-t border-[#efe7d6]/20 leading-relaxed">
             {t.family}{' '}
             <Link to={createPageUrl('NewCleanup')} className="text-[#e2602a] hover:text-[#efe7d6] font-black uppercase">
