@@ -123,6 +123,8 @@ const AdminClimateReviewPage = React.lazy(() => import('./pages/AdminClimateRevi
 const ClimateMapPage = React.lazy(() => import('./pages/ClimateMapPage'));
 const AdminClimateCategoriesPage = React.lazy(() => import('./pages/AdminClimateCategories'));
 const ClimateImpactPage = React.lazy(() => import('./pages/ClimateImpact'));
+const ClimateTermsPage = React.lazy(() => import('./pages/ClimateTerms'));
+const ClimatePrivacyPage = React.lazy(() => import('./pages/ClimatePrivacy'));
 
 
 
@@ -266,6 +268,8 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateMap" element={<LayoutWrapper currentPageName="ClimateMap"><ClimateMapPage /></LayoutWrapper>} />
       <Route path="/AdminClimateCategories" element={<LayoutWrapper currentPageName="AdminClimateCategories"><AdminClimateCategoriesPage /></LayoutWrapper>} />
       <Route path="/ClimateImpact" element={<LayoutWrapper currentPageName="ClimateImpact"><ClimateImpactPage /></LayoutWrapper>} />
+      <Route path="/ClimateTerms" element={<LayoutWrapper currentPageName="ClimateTerms"><ClimateTermsPage /></LayoutWrapper>} />
+      <Route path="/ClimatePrivacy" element={<LayoutWrapper currentPageName="ClimatePrivacy"><ClimatePrivacyPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

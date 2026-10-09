@@ -1,0 +1,126 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
+// Coolasfuck Privacy — honest, short, Beadie Signal style.
+// What we hold, what we don't, why.
+
+export default function ClimatePrivacy() {
+  return (
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
+      <div className="relative z-10 max-w-2xl mx-auto px-4 py-8">
+
+        {/* BACK */}
+        <Link to={createPageUrl('TogetherChangeClimate')} className="inline-flex items-center gap-2 text-[11px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors mb-6">
+          <ArrowLeft className="w-3.5 h-3.5" /> The Record
+        </Link>
+
+        {/* HEADER */}
+        <header className="mb-8 pb-6 border-b-2 border-[#1a1612]">
+          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-[#b3261e] mb-2">TWCC · PRIVACY</p>
+          <h1 className="font-black uppercase text-[#1a1612] leading-[0.95]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '44px', letterSpacing: '-0.03em' }}>
+            What We Hold<br />What We Don't
+          </h1>
+          <p className="text-[12px] font-mono text-[#6b6258] mt-3 leading-relaxed">
+            No tracking. No selling. No surprises. Here is exactly what happens.
+          </p>
+        </header>
+
+        {/* 1. YOUR EMAIL */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            01 · Your Email
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              When you submit a solution, crisis, action, or comment, we ask for your email. We use it to contact you about your submission. That is it. We do not publish it on the record, sell it, or pass it to anyone.
+            </p>
+          </div>
+        </section>
+
+        {/* 2. YOUR COUNTRY */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            02 · Your Country
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              When you read an entry, we record the country you are reading from, so we can see the global reach of the record. We do not store your IP address. We do not know who you are. We only know someone in your country read something.
+            </p>
+          </div>
+        </section>
+
+        {/* 3. AI ADVISORY */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            03 · The AI Advisory Note
+          </h2>
+          <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              When you submit, an AI reads it first and writes an advisory note for the human reviewer. The AI checks for spam, harmful content, and whether the submission is relevant to climate. It does not judge the science. It does not publish anything. A human reads the note and makes the call.
+            </p>
+          </div>
+        </section>
+
+        {/* 4. WHAT WE DON'T HOLD */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            04 · What We Don't Hold
+          </h2>
+          <div className="bg-[#1e3a2b] text-[#efe7d6] border border-[#1a1612] p-4">
+            <ul className="space-y-2 text-[12px] font-mono leading-relaxed">
+              <li>— Your IP address. Never stored.</li>
+              <li>— Your name, unless you put it on your submission.</li>
+              <li>— Your precise location. Country only.</li>
+              <li>— Tracking cookies or ad profiles.</li>
+              <li>— Your data sold to anyone. Ever.</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* 5. YOUR RIGHTS */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            05 · Your Rights
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              You can ask us what we hold about you. You can ask us to correct it. You can ask us to remove your submission. Write to the address on the record and we will do it.
+            </p>
+          </div>
+        </section>
+
+        {/* 6. THE PROMISE */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            06 · The Promise
+          </h2>
+          <div className="bg-[#efe7d6] border-l-4 border-l-[#b3261e] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              This record exists to serve the people who use it, not to extract from them. That is the covenant. If we ever break it, you have every right to walk away and take your words with you.
+            </p>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section className="mt-8 pt-6 border-t-2 border-[#1a1612]">
+          <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed mb-3">
+            Questions about your data? Write to the address on the record. We read everything.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Link to={createPageUrl('ClimateTerms')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#1a1612] text-[#efe7d6] text-[10px] font-black font-mono uppercase border border-[#1a1612] hover:bg-[#b3261e] transition-colors">
+              Terms <ArrowRight className="w-3 h-3" />
+            </Link>
+            <Link to={createPageUrl('TogetherChangeClimate')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#efe7d6] text-[#1a1612] text-[10px] font-black font-mono uppercase border border-[#1a1612] hover:bg-[#1a1612] hover:text-[#efe7d6] transition-colors">
+              Back to the Record <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </section>
+
+        {/* FOOT */}
+        <p className="text-center mt-10 text-[9px] font-mono font-black tracking-[0.3em] text-[#6b6258]/40">x = x</p>
+      </div>
+    </div>
+  );
+}
