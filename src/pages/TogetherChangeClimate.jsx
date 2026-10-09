@@ -471,6 +471,12 @@ export default function TogetherChangeClimate() {
         >
           <Plus className="w-4 h-4" /> Submit a solution or crisis
         </button>
+        <Link
+          to={createPageUrl("ClimateMap")}
+          className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
+        >
+          <MapPin className="w-4 h-4" /> Transmission Map
+        </Link>
       </div>
 
       {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}

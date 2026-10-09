@@ -53,7 +53,7 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 | 17 | **Music** | "theme song when produced" | ⚠️ Future — "when produced" |
 | 18 | **Translations** | "Instant translations" — Google Translate 243-249 languages | ✅ Done — `translateClimate` + `useEntryTranslation` |
 | 19 | **Spam filter** | "Additional oversight (LinkedIn, other social media means of clearance) might be arranged with UNDP (with 1180 regional offices) and other international entities" | ✅ Done — `climateSpamFilter.js` scans content + draft→review→publish workflow (every submission read by a person before publication) |
-| 20 | **Mapping** | "Ready to be able to add mapping, for example by ESRI (ESRI may provide mapping) showing locations of climate crisis or positive action" | ❌ **MISS** — not yet implemented |
+| 20 | **Mapping** | "Ready to be able to add mapping, for example by ESRI (ESRI may provide mapping) showing locations of climate crisis or positive action" | ✅ Done — Big Science transmission map (react-leaflet), Beadie Signal aesthetic, privacy-respecting country centroids, signal markers for crises/solutions/actions |
 | 21 | **Public service statement** | "This platform is provided as a public service to help save our planet." | ✅ Done — "A public service · for the world" |
 | 22 | **No advertising** | Explicit | ✅ Done |
 | 23 | **No fund raising** | Explicit | ✅ Done |
@@ -91,7 +91,7 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 7. **More definitions** — she said "(add definitions)" — we have 3, more can be added as she sends them
 
 ### 🔲 Future / not yet built
-8. **Mapping (ESRI)** — she wants map showing locations of climate crisis or positive action. react-leaflet is installed; can be built when ready
+8. **~~Mapping~~** — ✅ NOW BUILT — Big Science transmission map with react-leaflet, Beadie Signal aesthetic, signal markers for crises/solutions/actions. Accessed via "Transmission Map" button on the climate record page.
 9. **Music / theme song** — "when produced" — waiting for the track
 10. **Structured subcategories** — agriculture subcategories (water supply, drought, resilient crops) — field exists as free text, could be structured later
 
