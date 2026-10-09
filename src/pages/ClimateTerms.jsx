@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 // Coolasfuck Terms — honest, short, Beadie Signal style.
-// Not legal shite. A letter from the record.
+// Not legal jargon. A letter from the record.
 
 export default function ClimateTerms() {
   return (
@@ -23,7 +23,7 @@ export default function ClimateTerms() {
             The Ground<br />We Stand On
           </h1>
           <p className="text-[12px] font-mono text-[#6b6258] mt-3 leading-relaxed">
-            Not legal shite. Just honest ground rules for the record. Read it in a minute.
+            Not legal jargon. Just honest ground rules for the record. Read it in a minute.
           </p>
         </header>
 
