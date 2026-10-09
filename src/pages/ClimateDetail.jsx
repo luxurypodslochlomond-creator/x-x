@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand, Globe } from 'lucide-react';
 import RelatedTriangle from '@/components/climate/RelatedTriangle';
+import ClimateCommentSection from '@/components/climate/ClimateCommentSection';
 import { useEntryTranslation } from '@/hooks/useEntryTranslation';
 
 const CATEGORIES = [
@@ -186,6 +187,8 @@ export default function ClimateDetail() {
             onOpenItem={(next) => navigate(`/ClimateDetail/solution/${next.id}`)}
             onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
           />
+
+          <ClimateCommentSection entryId={record.id} entryType="action" />
         </div>
       </div>
     );
@@ -247,6 +250,8 @@ export default function ClimateDetail() {
           onOpenItem={(next) => navigate(`/ClimateDetail/${next.entry_type}/${next.id}`)}
           onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
         />
+
+        <ClimateCommentSection entryId={record.id} entryType={record.entry_type} />
       </div>
     </div>
   );

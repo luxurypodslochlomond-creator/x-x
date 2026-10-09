@@ -1,0 +1,78 @@
+{
+  "name": "ClimateComment",
+  "type": "object",
+  "description": "Public comments on climate entries \u2014 solutions, crises, and actions. Email required per Janine's spec. Reviewed before publication (spam filter oversight).",
+  "properties": {
+    "entry_id": {
+      "type": "string",
+      "description": "ID of the entry this comment is on"
+    },
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "solution",
+        "climate_crisis",
+        "action"
+      ],
+      "description": "Type of entry this comment belongs to"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Commenter's name"
+    },
+    "author_email": {
+      "type": "string",
+      "description": "Commenter's email \u2014 required per Janine's spec for interaction"
+    },
+    "content": {
+      "type": "string",
+      "description": "The comment text"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published"
+      ],
+      "default": "draft",
+      "description": "Reviewed before publication \u2014 spam filter oversight"
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Flagged by spam filter for admin attention"
+    }
+  },
+  "required": [
+    "entry_id",
+    "entry_type",
+    "author_name",
+    "author_email",
+    "content"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

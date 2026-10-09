@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
-import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check } from 'lucide-react';
+import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus } from 'lucide-react';
 import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
+import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -187,6 +188,7 @@ export default function TogetherChangeClimate() {
   const [autoLang, setAutoLang] = useState('en');
   const [otherOpen, setOtherOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showSubmit, setShowSubmit] = useState(false);
 
   const handleShare = async () => {
     const origin = window.location.hostname.startsWith('preview--')
@@ -463,6 +465,12 @@ export default function TogetherChangeClimate() {
           />
         </div>
         <p className="text-[9px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
+        <button
+          onClick={() => setShowSubmit(true)}
+          className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+        >
+          <Plus className="w-4 h-4" /> Submit a solution or crisis
+        </button>
       </div>
 
       {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}
@@ -608,6 +616,11 @@ export default function TogetherChangeClimate() {
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Rewilding</h4>
               <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A large-scale conservation approach focused on restoring damaged ecosystems so nature can take care of itself.</p>
             </div>
+            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
+              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Heat</h4>
+              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">In England, the Unite union has been warning about heat exhaustion, heatstroke, and dehydration since phases of intense heat began in May. Heat is a growing climate crisis for workers and communities worldwide.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: Guardian, 081626</p>
+            </div>
           </div>
         </section>
 
@@ -629,6 +642,7 @@ export default function TogetherChangeClimate() {
         <p className="px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6]">{t.honour}</p>
       </div>
 
+      {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}
     </div>
   );
 }

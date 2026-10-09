@@ -1,7 +1,7 @@
 {
   "name": "ClimateSolution",
   "type": "object",
-  "description": "A verified climate solution or climate-crisis entry on the 'Together We Change Climate' public platform. Faithful to Janine Selendy's spec: two summary types (Solutions / Climate Crisis), her category taxonomy, rough location, image, and translation-ready fields.",
+  "description": "A verified climate solution or climate-crisis entry on the 'Together We Change Climate' public platform. Faithful to Janine Selendy's spec: two summary types (Solutions / Climate Crisis), her category taxonomy, rough location, image, and translation-ready fields. Public submissions welcome with email \u2014 reviewed before publication.",
   "properties": {
     "entry_type": {
       "type": "string",
@@ -85,7 +85,7 @@
         "published"
       ],
       "default": "published",
-      "description": "All material must be reviewed before publication (per Solutions Site model)"
+      "description": "All material must be reviewed before publication (per Solutions Site model). Public submissions default to draft."
     },
     "featured": {
       "type": "boolean",
@@ -102,6 +102,19 @@
         "global"
       ],
       "description": "Scale of this example, from individuals to whole countries (per her spec)"
+    },
+    "submitter_name": {
+      "type": "string",
+      "description": "Name of the person who submitted this entry"
+    },
+    "submitter_email": {
+      "type": "string",
+      "description": "Email of the submitter \u2014 required per Janine's spec for public submissions"
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Flagged by spam filter for admin attention"
     }
   },
   "required": [
@@ -111,8 +124,25 @@
     "category"
   ],
   "rls": {
-    "read": {},
-    "write": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
       "user_condition": {
         "role": "admin"
       }

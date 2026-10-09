@@ -1,7 +1,7 @@
 {
   "name": "ClimateAction",
   "type": "object",
-  "description": "Public climate actions on the 'Together We Change Climate' platform \u2014 cleanups, plantings, meetings, policy submissions. Reviewed before publication like solutions. No messaging stored on platform; organizers provide one contact link.",
+  "description": "Public climate actions on the 'Together We Change Climate' platform \u2014 cleanups, plantings, meetings, policy submissions. Reviewed before publication like solutions. No messaging stored on platform; organizers provide one contact link. Public submissions welcome with email.",
   "properties": {
     "title": {
       "type": "string",
@@ -57,7 +57,7 @@
         "published"
       ],
       "default": "published",
-      "description": "All material reviewed before publication, same as solutions"
+      "description": "All material reviewed before publication, same as solutions. Public submissions default to draft."
     },
     "category": {
       "type": "string",
@@ -84,6 +84,19 @@
         "other"
       ],
       "description": "Category from Janine's spec taxonomy \u2014 links action to the solution space"
+    },
+    "submitter_name": {
+      "type": "string",
+      "description": "Name of the person who submitted this action"
+    },
+    "submitter_email": {
+      "type": "string",
+      "description": "Email of the submitter \u2014 required per Janine's spec for public submissions"
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Flagged by spam filter for admin attention"
     }
   },
   "required": [
@@ -92,8 +105,25 @@
     "description"
   ],
   "rls": {
-    "read": {},
-    "write": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
       "user_condition": {
         "role": "admin"
       }
