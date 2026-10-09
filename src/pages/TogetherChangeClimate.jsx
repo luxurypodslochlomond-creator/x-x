@@ -149,11 +149,28 @@ const T = {
        className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
          isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
        } min-h-[110px] flex items-end active:scale-95 transition-transform duration-100`}
-     >
-...
-     </Link>
-   );
- }
+       >
+       <img
+         src={item.image_url || CATEGORY_IMAGE(item.category)}
+         alt=""
+         loading="lazy"
+         className="absolute inset-0 w-full h-full object-cover"
+         style={{ filter: 'grayscale(1) contrast(1.25)' }}
+         onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
+       />
+       {/* Gradient scrim — guarantees title readability on any image */}
+       <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
+       <div className="relative p-2.5 w-full">
+         <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
+           {isSolution ? 'Solution' : 'Crisis'}
+         </div>
+         <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
+           {item.title}
+         </h3>
+       </div>
+       </Link>
+       );
+       }
 
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
