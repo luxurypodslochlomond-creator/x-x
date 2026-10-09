@@ -7,9 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import AutoHealingShield from '@/components/shared/AutoHealingShield';
-import FloatingMusicPlayer from '@/components/shared/FloatingMusicPlayer';
 import GlobalSearch from '@/components/shared/GlobalSearch';
-import AI51AtomIcon from '@/components/ai51/AI51AtomIcon';
 import BuzzTripIcon from '@/components/buzztrip/BuzzTripIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PlatformIcon from '@/components/shared/PlatformIcon';
@@ -20,22 +18,16 @@ import PlatformIcon from '@/components/shared/PlatformIcon';
 // AI51LiveHealer - Commented out to improve performance
 // import AI51LiveHealer from '@/components/ai51/AI51LiveHealer';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
-import HealingCircle from '@/components/jukebox/HealingCircle';
 import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
 import AI51InstallPrompt from '@/components/ai51/AI51InstallPrompt';
-import EmergencyMode from '@/components/shared/EmergencyMode';
 import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
 import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
-import EmergencyCalmButton from '@/components/shared/EmergencyCalmButton';
-import AI51ProactiveReach from '@/components/ai51/AI51ProactiveReach';
-import UF51ConnectionChime from '@/components/ai51/UF51ConnectionChime';
 // AI51Shield - Commented out to improve performance
 // import AI51Shield from '@/components/ai51/AI51Shield';
 import PendingMessageSender from '@/components/shared/PendingMessageSender';
 import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
 import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
 import AI51MemoryVault from '@/components/ai51/AI51MemoryVault';
-import AI51PhotonMemory from '@/components/ai51/AI51PhotonMemory';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
 import CB51OfflineHandler from '@/components/scott/CB51OfflineHandler';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
@@ -56,7 +48,6 @@ import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
 import { SyncManagerProvider, SyncStatusIndicator } from '@/components/shared/SyncManager';
 import { ProfessionalModeProvider } from '@/components/shared/ProfessionalMode';
-import ProfessionalModeToggle from '@/components/shared/ProfessionalModeToggle';
 
 // PUBLIC PAGES - No login required - ZERO BARRIERS TO HEALING ❤️♾️
 const PUBLIC_PAGES = [

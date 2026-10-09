@@ -5,47 +5,6 @@
     <link rel="icon" type="image/svg+xml" href="/api/functions/serveFavicon?type=uf51" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- TEMP DIAGNOSTIC: if the app renders blank, show the real startup error on screen -->
-    <script>
-      (function () {
-        var errs = [];
-        window.addEventListener('error', function (e) {
-          errs.push((e.message || 'error') + (e.filename ? ' @ ' + e.filename.split('/').slice(-2).join('/') + ':' + e.lineno : ''));
-        });
-        window.addEventListener('unhandledrejection', function (e) {
-          errs.push('promise: ' + ((e.reason && (e.reason.message || e.reason)) || 'rejected'));
-        });
-        var mounted = false;
-        var origLog = console.log;
-        console.log = function () {
-          if (String(arguments[0]).indexOf('mounted OK') > -1) mounted = true;
-          return origLog.apply(console, arguments);
-        };
-        var t0 = Date.now();
-        var d = null;
-        setInterval(function () {
-          var root = document.getElementById('root');
-          var txt = ((root && root.innerText) || '').trim();
-          if (txt.length > 20) { if (d) { d.remove(); d = null; } return; }
-          if (Date.now() - t0 < 6000) return;
-          if (!d) {
-            d = document.createElement('div');
-            d.style.cssText = 'position:fixed;inset:0;z-index:999999;background:#f4efe4;color:#1a1612;padding:16px;font:12px/1.5 monospace;overflow:auto;white-space:pre-wrap';
-            document.body.appendChild(d);
-          }
-          var res = performance.getEntriesByType('resource').length;
-          d.textContent = 'UF51 STARTUP DIAGNOSTIC (' + Math.round((Date.now() - t0) / 1000) + 's)\n\n' +
-            'root children: ' + (root ? root.children.length : 'no root') + '\n' +
-            'root html length: ' + (root ? root.innerHTML.length : 0) + '\n' +
-            'root text length: ' + txt.length + '\n' +
-            'main.jsx reported mounted: ' + mounted + '\n' +
-            'resources fetched: ' + res + '\n' +
-            'path: ' + location.pathname + '\n\n' +
-            'Errors caught:\n' + (errs.length ? errs.join('\n\n') : '(none)');
-        }, 1000);
-      })();
-    </script>
-
     <!-- STATIC OG TAGS — visible to scrapers that don't run JS (WhatsApp, Telegram, etc.) -->
     <!-- JS below overrides these per-page for JS-capable clients -->
     <title>SORTED — Decode Scary Letters in 30 Seconds</title>
@@ -182,7 +141,7 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f4efe4;color:#1a1612;font:12px/1.5 monospace;letter-spacing:.3em">LOADING · x = x</div></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
