@@ -7,6 +7,7 @@ import RelatedTriangle from '@/components/climate/RelatedTriangle';
 import ClimateCommentSection from '@/components/climate/ClimateCommentSection';
 import { useEntryTranslation } from '@/hooks/useEntryTranslation';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
+import SignalCode from '@/components/climate/SignalCode';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -126,7 +127,7 @@ export default function ClimateDetail() {
   if (isAction) {
     const meta = ACTION_TYPES[record.action_type] || ACTION_TYPES.other;
     const Icon = meta.icon;
-    const catEmoji = categories.find(c => c.id === record.category)?.emoji || '🌍';
+    const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
     return (
       <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
         {/* Sticky header — native back, action-type colour band */}
@@ -146,7 +147,7 @@ export default function ClimateDetail() {
           </h1>
 
           <div className="flex items-center gap-1.5 mt-3">
-            <span className="text-base">{catEmoji}</span>
+            <SignalCode code={catCode} size="md" />
             <span className="text-[11px] font-black font-mono uppercase tracking-widest text-[#1e3a2b]">{record.category?.replaceAll('_', ' ')}</span>
           </div>
 
@@ -202,7 +203,7 @@ export default function ClimateDetail() {
   }
 
   // Solution / Crisis detail
-  const catEmoji = categories.find(c => c.id === record.category)?.emoji || '🌍';
+  const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Hero image — full-bleed, sticky back button overlaid */}
@@ -221,7 +222,7 @@ export default function ClimateDetail() {
 
       <div className="p-5">
         <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
-          <span className="text-base">{catEmoji}</span><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
+          <SignalCode code={catCode} size="md" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
         <h1 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>
           {tr.field('title')}

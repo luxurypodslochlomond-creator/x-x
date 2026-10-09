@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Plus, Trash2, Check, ArrowUp, ArrowDown, X } from 'lucide-react';
+import SignalCode from '@/components/climate/SignalCode';
 
 // Admin page for managing climate categories.
 // Janine can add, edit, reorder, and delete categories herself — no developer needed.
@@ -51,7 +52,7 @@ export default function AdminClimateCategories() {
         await base44.entities.ClimateCategory.update(editing.id, {
           name: form.name.trim(),
           slug,
-          icon: form.icon.trim() || '🌍',
+          icon: form.icon.trim().toUpperCase() || 'OT',
           description: form.description.trim(),
           sort_order: Number(form.sort_order) || 0,
         });
@@ -59,7 +60,7 @@ export default function AdminClimateCategories() {
         await base44.entities.ClimateCategory.create({
           name: form.name.trim(),
           slug,
-          icon: form.icon.trim() || '🌍',
+          icon: form.icon.trim().toUpperCase() || 'OT',
           description: form.description.trim(),
           sort_order: Number(form.sort_order) || 0,
           status: 'published',
@@ -130,7 +131,7 @@ export default function AdminClimateCategories() {
           <div className="space-y-2">
             {categories.map((cat, i) => (
               <div key={cat.id} className="flex items-center gap-3 px-3 py-3 bg-[#f7f1e5] border border-[#141210]/15">
-                <span className="text-xl flex-shrink-0">{cat.icon || '🌍'}</span>
+                <SignalCode code={cat.icon} size="md" />
                 <div className="flex-1 min-w-0">
                   <p className="text-[12px] font-black font-mono text-[#141210] truncate">{cat.name}</p>
                   <p className="text-[10px] font-mono text-[#5a5246] truncate">{cat.slug}</p>
@@ -176,8 +177,8 @@ export default function AdminClimateCategories() {
               <input value={form.slug} onChange={(e) => set('slug', e.target.value)} placeholder="mangroves" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             </div>
             <div>
-              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Icon (emoji)</label>
-              <input value={form.icon} onChange={(e) => set('icon', e.target.value)} placeholder="🌳" maxLength={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[20px] text-[#141210] outline-none focus:border-[#e2602a]" />
+              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Code (2-letter, e.g. AG)</label>
+              <input value={form.icon} onChange={(e) => set('icon', e.target.value.toUpperCase())} placeholder="AG" maxLength={3} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono uppercase tracking-widest text-[#141210] outline-none focus:border-[#e2602a]" />
             </div>
             <div>
               <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Description</label>

@@ -620,8 +620,8 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "📄 Graeme One-Pager", url: createPageUrl("GraemeOnePager"), icon: FileText, description: "3 products · market facts · PDF download" },
       { title: "📊 Partner Evidence Pack", url: createPageUrl("PartnerEvidence"), icon: FileText, description: "Sourced research · market data · PDF download" },
       { title: "🌳 National Parklife Logos", url: createPageUrl("AdminNationalParklife"), icon: Image, description: "Hammock brand · logo lab" },
-      { title: "🌍 Climate Review Queue", url: createPageUrl("AdminClimateReview"), icon: CheckCircle, description: "Review draft submissions · AI advisory note" },
-      { title: "🏷️ Climate Categories", url: createPageUrl("AdminClimateCategories"), icon: Tag, description: "Add, edit, and reorder categories" },
+      { title: "Climate Review Queue", url: createPageUrl("AdminClimateReview"), icon: CheckCircle, description: "Review draft submissions · AI advisory note" },
+      { title: "Climate Categories", url: createPageUrl("AdminClimateCategories"), icon: Tag, description: "Add, edit, and reorder categories" },
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };

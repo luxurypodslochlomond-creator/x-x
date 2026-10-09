@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Globe, Eye, Users } from 'lucide-react';
+import SignalCode from '@/components/climate/SignalCode';
 
 // Converts an ISO 2-letter country code to a display name.
 function countryName(code) {
@@ -12,16 +13,6 @@ function countryName(code) {
     return new Intl.DisplayNames(['en'], { type: 'region' }).of(code) || code;
   } catch {
     return code;
-  }
-}
-
-// Converts an ISO 2-letter country code to a flag emoji.
-function countryFlag(code) {
-  if (!code || code.length !== 2) return '🌍';
-  try {
-    return String.fromCodePoint(...[...code.toUpperCase()].map(c => 127397 + c.charCodeAt(0)));
-  } catch {
-    return '🌍';
   }
 }
 
@@ -131,7 +122,7 @@ export default function ClimateImpact() {
                 transition={{ duration: 0.25, delay: i * 0.03 }}
                 className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15"
               >
-                <span className="text-xl flex-shrink-0">{countryFlag(c.country)}</span>
+                <SignalCode code={c.country} size="md" />
                 <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{countryName(c.country)}</span>
                 <span className="text-[12px] font-black font-mono text-[#e2602a]">{c.views.toLocaleString()}</span>
                 <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">

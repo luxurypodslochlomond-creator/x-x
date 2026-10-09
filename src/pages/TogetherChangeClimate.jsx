@@ -9,6 +9,7 @@ import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
+import SignalCode from '@/components/climate/SignalCode';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -507,7 +508,7 @@ export default function TogetherChangeClimate() {
                 selectedCategory === c.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
               }`}
             >
-              <span className="text-xs">{c.emoji}</span>{c.label}
+              <SignalCode code={c.code} />{c.label}
             </button>
           ))}
         </div>
