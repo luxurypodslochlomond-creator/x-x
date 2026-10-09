@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { motion } from 'framer-motion';
 import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus } from 'lucide-react';
 import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
@@ -141,39 +140,18 @@ const T = {
   ar: { title_a: 'معًا نُغيّر', title_b: 'مسار', title_c: 'تغير المناخ', sub: 'سجلّ عام لحالات الطوارئ المناخية والإجراءات الإيجابية التي تنجح — مشترك علنًا، دوليًا — ليستطيع أي شخص على الأرض تكرار ما هو جيد.', service: 'خدمة عامة · للعالم', noads: 'لا إعلانات', nofund: 'لا جمع تبرعات', donate: 'التبرعات مرحب بها', search: 'ابحث عن الحلول والأزمات…', solutions: 'الحلول', crises: 'أزمات المناخ', defs: 'تعريفات', rev: 'تمت المراجعة', connect: 'جارٍ توصيل الكوكب…', empty: 'لا نتائج مطابقة بعد.', govern: 'مبني من أجل الكوكب — ومبني ليكون موثوقًا', govern_body: 'تتم مراجعة كل إدخال قبل النشر. تُستخدم الصور الخالية من حقوق النشر فقط. يُحافظ على الموقع كمنطقة تقريبية لحماية الخصوصية، مع بقائه صادقًا وقابلاً للتحقق. المنصة مفتوحة المصدر ومحمية من الاستغلال وتعمل كخدمة عامة — لا إعلانات ولا جمع تبرعات. تُقدَّم ترجمات الواجهة على المنصة؛ وتُترجم الإدخالات من قبل مجتمعنا بمرور الوقت.', covenant: 'اقرأ ميثاقنا مفتوح المصدر', family: 'هذه المنصة جزء من عائلة الشفاء الكوكبي UF51 — الحلول الموثقة هنا هي محرك المعرفة وراء عملنا الميداني.', action: 'اتخذ إجراء', honour: 'بُني تكريمًا لـ Janine M. H. Selendy وهورايزون إنترناشونال — وسُلّم إلى العالم، إلى الكوكب، إلى جميعنا.', all: 'الكل', featured: 'إشارات' },
 };
 
-const MotionLink = motion(Link);
+
  function SolutionCard({ item }) {
    const isSolution = item.entry_type === 'solution';
    return (
-     <MotionLink
+     <Link
        to={`/ClimateDetail/${item.entry_type}/${item.id}`}
-       initial={false}
-       animate={{ opacity: 1, y: 0 }}
-       whileTap={{ scale: 0.96 }}
-       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
        className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
          isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
-       } min-h-[110px] flex items-end block`}
+       } min-h-[110px] flex items-end active:scale-95 transition-transform duration-100`}
      >
-       <img
-         src={item.image_url || CATEGORY_IMAGE(item.category)}
-         alt=""
-         loading="lazy"
-         className="absolute inset-0 w-full h-full object-cover"
-         style={{ filter: 'grayscale(1) contrast(1.25)' }}
-         onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
-       />
-       {/* Gradient scrim — guarantees title readability on any image */}
-       <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
-       <div className="relative p-2.5 w-full">
-         <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
-           {isSolution ? 'Solution' : 'Crisis'}
-         </div>
-         <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
-           {item.title}
-         </h3>
-       </div>
-     </MotionLink>
+...
+     </Link>
    );
  }
 
@@ -192,7 +170,19 @@ export default function TogetherChangeClimate() {
   const [otherOpen, setOtherOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
+  const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
   const { categories } = useClimateCategories();
+
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/api/functions/serveClimateServiceWorker', { scope: '/' }).catch(() => {});
+    }
+    const onOnline = () => setIsOffline(false);
+    const onOffline = () => setIsOffline(true);
+    window.addEventListener('online', onOnline);
+    window.addEventListener('offline', onOffline);
+    return () => { window.removeEventListener('online', onOnline); window.removeEventListener('offline', onOffline); };
+  }, []);
 
   const handleShare = async () => {
     const origin = window.location.hostname.startsWith('preview--')
@@ -215,9 +205,20 @@ export default function TogetherChangeClimate() {
   };
 
   useEffect(() => {
-    base44.entities.ClimateSolution.list().then(r => { setItems(r); setLoading(false); }).catch(() => setLoading(false));
-    base44.entities.ClimateGroup.list().then(r => setGroups(r || [])).catch(() => setGroups([]));
-    base44.entities.ClimateAction.list().then(r => setActions(r || [])).catch(() => setActions([]));
+    const getCache = () => { try { return JSON.parse(localStorage.getItem('twcc_data_cache')); } catch { return null; } };
+    const saveCache = (s, g, a) => { try { localStorage.setItem('twcc_data_cache', JSON.stringify({ solutions: s, groups: g, actions: a, ts: Date.now() })); } catch {} };
+    Promise.allSettled([
+      base44.entities.ClimateSolution.list(),
+      base44.entities.ClimateGroup.list(),
+      base44.entities.ClimateAction.list(),
+    ]).then(([s, g, a]) => {
+      const cache = getCache();
+      const sols = s.status === 'fulfilled' ? s.value : (cache?.solutions || []);
+      const grps = g.status === 'fulfilled' ? g.value : (cache?.groups || []);
+      const acts = a.status === 'fulfilled' ? a.value : (cache?.actions || []);
+      setItems(sols); setGroups(grps); setActions(acts); setLoading(false);
+      if (s.status === 'fulfilled' || g.status === 'fulfilled' || a.status === 'fulfilled') saveCache(sols, grps, acts);
+    });
   }, []);
 
   useEffect(() => {
@@ -298,6 +299,12 @@ export default function TogetherChangeClimate() {
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 4px; } }
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } } body { background: #141210 !important; }
       `}</style>
+
+      {isOffline && (
+        <div className="bg-[#e2602a] text-[#141210] text-center py-1 text-[9px] font-black font-mono uppercase tracking-widest">
+          ● Offline — showing cached record
+        </div>
+      )}
 
       {/* ── BIG SCIENCE EPIGRAPH — Laurie's thesis + the x = x covenant, cold opening ── */}
       <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
