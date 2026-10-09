@@ -21,15 +21,22 @@ export default async function(req: Request): Promise<Response> {
 
     try {
       const aiResult = await base44.asServiceRole.integrations.Core.InvokeLLM({
-        prompt: `You are reviewing a submission for "Together We Change Climate" — a public-service climate platform after Janine Selendy / Horizon International. This is NOT social media. It is an institutional record of verified climate solutions and crises. Every entry is reviewed by a human before publication.
+        prompt: `You are an AI advisory note for "Together We Change Climate" — a public-service climate platform after Janine Selendy / Horizon International. This is NOT social media. It is an institutional record. Every entry is reviewed by a human before publication. Your role is advisory only — you never decide.
 
-Assess this submission honestly:
+CRITICAL — DO NOT HALLUCINATE:
+- Assess ONLY based on the text provided below. Do not invent facts, claims, or context not in the text.
+- Do NOT assess scientific accuracy — that is the human reviewer's job, not yours. You do not have the expertise to verify climate science.
+- If you are unsure about something, say so explicitly. Uncertainty is honest and useful.
+- Do not speculate about the submitter's intentions. Assess the text, not the person.
+
+Assess ONLY these three things:
 1. SPAM: Is this promotional content, advertising, or link spam unrelated to climate?
 2. RELEVANCE: Is it genuinely about climate change, environmental action, sustainability, or a related crisis?
-3. HARM: Does it contain harmful misinformation, dangerous advice, or misleading claims?
-4. QUALITY: Is it substantive enough for a public institutional platform?
+3. HARM: Does it contain dangerous advice (e.g., telling people to drink chemicals, ignore evacuation orders)?
 
-Be fair. Do not reject legitimate climate content. Be strict about spam and misinformation.
+Do NOT assess: scientific accuracy, quality, writing style, or whether the solution "works." Those are human judgments.
+
+Be fair. Do not flag legitimate climate content. Be strict only about clear spam and dangerous advice.
 
 Submission type: ${type}
 ${data.title ? `Title: ${data.title}` : ''}
@@ -39,13 +46,14 @@ Content: ${fullContent.slice(0, 2000)}`,
           properties: {
             verdict: { type: 'string', enum: ['clean', 'suspicious', 'reject'] },
             relevance: { type: 'string', enum: ['relevant', 'off_topic', 'unclear'] },
+            confidence: { type: 'string', enum: ['high', 'medium', 'low'] },
             reasons: { type: 'string' }
           }
         }
       });
 
       flagged = aiResult.verdict !== 'clean';
-      aiAssessment = `[${aiResult.verdict.toUpperCase()}] Relevance: ${aiResult.relevance} — ${aiResult.reasons}`;
+      aiAssessment = `[${aiResult.verdict.toUpperCase()}] Relevance: ${aiResult.relevance} · Confidence: ${aiResult.confidence || 'unknown'} — ${aiResult.reasons}`;
     } catch (aiError) {
       aiAssessment = 'AI assessment failed — manual review needed';
       flagged = true;
