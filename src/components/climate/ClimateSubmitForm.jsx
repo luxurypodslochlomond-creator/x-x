@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { X, Send, Check, Leaf, AlertTriangle } from 'lucide-react';
-import { checkClimateSpam } from '@/utils/climateSpamFilter';
+
 
 const CATEGORIES = [
   { id: 'agriculture', label: 'Agriculture' },
@@ -52,15 +52,11 @@ export default function ClimateSubmitForm({ onClose }) {
       return;
     }
 
-    const spam = checkClimateSpam(form.summary + ' ' + form.details);
-
     setSubmitting(true);
     try {
-      await base44.entities.ClimateSolution.create({
-        ...form,
-        entry_type: entryType,
-        status: 'draft',
-        flagged: spam.flagged,
+      await base44.functions.invoke('climateSubmitReview', {
+        type: entryType,
+        data: { ...form, entry_type: entryType }
       });
       setSubmitted(true);
     } catch (err) {

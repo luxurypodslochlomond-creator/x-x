@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { MessageSquare, Send, Check } from 'lucide-react';
-import { checkClimateSpam } from '@/utils/climateSpamFilter';
+
 
 export default function ClimateCommentSection({ entryId, entryType }) {
   const [comments, setComments] = useState([]);
@@ -36,18 +36,17 @@ export default function ClimateCommentSection({ entryId, entryType }) {
       return;
     }
 
-    const spam = checkClimateSpam(content);
-
     setSubmitting(true);
     try {
-      await base44.entities.ClimateComment.create({
-        entry_id: entryId,
-        entry_type: entryType,
-        author_name: name.trim(),
-        author_email: email.trim(),
-        content: content.trim(),
-        status: 'draft',
-        flagged: spam.flagged,
+      await base44.functions.invoke('climateSubmitReview', {
+        type: 'comment',
+        data: {
+          entry_id: entryId,
+          entry_type: entryType,
+          author_name: name.trim(),
+          author_email: email.trim(),
+          content: content.trim(),
+        }
       });
       setSubmitted(true);
       setName(''); setEmail(''); setContent('');

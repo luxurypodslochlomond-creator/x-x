@@ -119,6 +119,7 @@ const UF51TokenPage = React.lazy(() => import('./pages/UF51Token'));
 const UF51ThreadJournalPage = React.lazy(() => import('./pages/UF51ThreadJournal'));
 const ClimateBriefPage = React.lazy(() => import('./pages/ClimateBrief'));
 const AdminUF51BudgetPage = React.lazy(() => import('./pages/AdminUF51Budget'));
+const AdminClimateReviewPage = React.lazy(() => import('./pages/AdminClimateReview'));
 
 
 
@@ -258,6 +259,7 @@ const AuthenticatedApp = () => {
       <Route path="/Franklin51" element={<LayoutWrapper currentPageName="Franklin51"><Franklin51Page /></LayoutWrapper>} />
       <Route path="/ClimateBrief" element={<LayoutWrapper currentPageName="ClimateBrief"><ClimateBriefPage /></LayoutWrapper>} />
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />
+      <Route path="/AdminClimateReview" element={<LayoutWrapper currentPageName="AdminClimateReview"><AdminClimateReviewPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
