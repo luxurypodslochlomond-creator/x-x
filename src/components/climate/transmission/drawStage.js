@@ -98,12 +98,12 @@ function drawSweep(ctx, c, S) {
 }
 
 function drawRipples(ctx, c, S) {
-  S.ripples = S.ripples.filter((r) => c.now - r.born < 1800);
+  S.ripples = S.ripples.filter((r) => c.now - r.born < 3400); // waves of change travel slow
   S.ripples.forEach((r) => {
-    const age = (c.now - r.born) / 1800;
+    const age = (c.now - r.born) / 3400;
     const rad = c.R * 1.3 + age * (c.maxR - c.R * 1.3);
-    ctx.strokeStyle = `rgba(${SIG},${Math.pow(1 - age, 2) * 0.6 * r.s})`;
-    ctx.lineWidth = 1 + (1 - age) * 2.5;
+    ctx.strokeStyle = `rgba(${SIG},${Math.pow(1 - age, 1.5) * 0.5 * r.s})`;
+    ctx.lineWidth = 1 + (1 - age) * 2;
     ctx.beginPath(); ctx.arc(c.cx, c.cy, rad, 0, TAU); ctx.stroke();
   });
 }
@@ -217,20 +217,20 @@ function drawHud(ctx, c, S) {
   ctx.font = FONT; ctx.textBaseline = 'alphabetic';
   const on = c.E > 0.5;
   ctx.textAlign = 'left';
-  ctx.fillStyle = `rgba(${SIG},0.95)`; ctx.fillText('TX 51.0 MHz', 26, 24);
+  ctx.fillStyle = `rgba(${SIG},0.95)`; ctx.fillText('EARTH · 51 MHz', 26, 24);
   ctx.fillStyle = `rgba(${BONE},0.6)`; ctx.fillText('x = x', 26, 36);
   const deg = (((-S.rot * 180) / Math.PI) % 360 + 360) % 360;
   ctx.fillText(`LON ${deg <= 180 ? deg.toFixed(1) + '°E' : (360 - deg).toFixed(1) + '°W'}`, 26, c.h - 12);
   ctx.textAlign = 'right';
   ctx.fillStyle = on ? `rgba(${SIG},${0.65 + 0.35 * Math.sin(c.now * 0.008)})` : `rgba(${BONE},0.4)`;
-  ctx.fillText(on ? '● ON AIR' : '○ STANDBY', c.w - 26, 24);
+  ctx.fillText(on ? '● TRANSMITTING' : '○ STANDBY', c.w - 26, 24);
   ctx.fillStyle = `rgba(${BONE},0.6)`;
-  ctx.fillText(`${BPM} BPM`, c.w - 26, 36);
+  ctx.fillText(`♥ ${BPM}`, c.w - 26, 36);
   ctx.fillText(`SIG -${(60 - S.smoothBass * 48).toFixed(0)} dB`, c.w - 26, c.h - 12);
   if (c.E < 0.6) {
     ctx.textAlign = 'center';
     ctx.fillStyle = `rgba(${SIG},${(0.5 + 0.5 * Math.sin(c.now * 0.004)) * (1 - c.E * 1.6)})`;
-    ctx.fillText('▶  TAP THE PLANET TO TRANSMIT', c.cx, c.h - 12);
+    ctx.fillText('▶  TAP TO LISTEN — THE EARTH IS SPEAKING', c.cx, c.h - 12);
   }
 }
 
@@ -241,15 +241,15 @@ export function drawStage(ctx, w, h, now, dt, S, freq, grid, playing) {
   S.smoothBass += (bass - S.smoothBass) * Math.min(1, dt * 0.02);
   S.bassAvg += (bass - S.bassAvg) * Math.min(1, dt * 0.002);
 
-  if (E > 0.3 && bass > 0.5 && bass > S.bassAvg * 1.22 && now - S.lastKick > 240) {
+  if (E > 0.3 && bass > 0.5 && bass > S.bassAvg * 1.22 && now - S.lastKick > 700) { // each heartbeat sends one wave
     S.lastKick = now; S.flash = 1;
     S.ripples.push({ born: now, s: 0.6 + bass * 0.6 });
-    for (let i = 0; i < 3; i++) S.tears.push({ born: now, x: Math.random() * w * 0.6, y: Math.random() * h, w: 40 + Math.random() * w * 0.4, h: 1 + Math.random() * 2 });
+    S.tears.push({ born: now, x: Math.random() * w * 0.6, y: Math.random() * h, w: 40 + Math.random() * w * 0.4, h: 1 });
   }
-  if (E < 0.35 && now - S.lastPing > 2600) { S.lastPing = now; S.ripples.push({ born: now, s: 0.4 }); }
+  if (E < 0.35 && now - S.lastPing > 4200) { S.lastPing = now; S.ripples.push({ born: now, s: 0.4 }); } // the planet breathes
 
-  S.rot += dt * (0.00014 + E * 0.00028);
-  S.sweep += dt * (0.0011 + E * 0.0012);
+  S.rot += dt * (0.00008 + E * 0.00014); // the earth turns slow
+  S.sweep += dt * (0.0006 + E * 0.0007); // the radar scans for solutions
   S.flash = Math.max(0, S.flash - dt * 0.004);
 
   const maxR = Math.min(w, h) / 2 - 44;
