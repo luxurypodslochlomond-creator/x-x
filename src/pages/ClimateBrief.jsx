@@ -212,46 +212,29 @@ export default function ClimateBrief() {
           <div id="janine-email" className="bg-[#efe7d6] border-2 border-[#1a1612] px-5 py-5 text-[12px] font-mono text-[#1a1612] leading-relaxed whitespace-pre-wrap select-all">
 {`Dear Janine,
 
-Thank you for your 40 years of work. We have built the platform from your spec, and we want to tell you plainly what is live, what is planned, and what is not yet built — because your work deserves nothing less than the truth.
+I'm going to talk to you straight here, because your 40 years deserve that and I would not forgive myself for dressing it up.
 
-What is live now:
+You gave us a spec. We built it. Here is where every part of it actually stands today — done, planned, or not built. No spin.
 
-- Two entry types: Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to), exactly as you specified.
-- Your full 20-category taxonomy is implemented. 12 of 20 categories already have seeded entries; the rest are supported and ready.
-- Rough location only — country and region, no precise coordinates. Your privacy stance, kept.
-- Every entry is reviewed before publication, same as the Solutions Site model.
-- Copyright-free images only, with image credit stored on each entry.
-- Every entry links to its source — Horizon Solutions Site, peer-reviewed articles, verified reporting.
-- Scale field: individual, community, city, country, global.
-- Groups: people working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.
-- Actions: cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each carries one contact link — the organiser is contacted directly. The platform never sees the conversation.
-- The interface speaks 60+ languages, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori, and Ancient Greek. You can also free-type any language on Earth and it translates live.
-- No advertising. No fundraising. Stated on the page and enforced by design.
-- Open source, with a public covenant explaining how it resists corporate capture.
-- No likes, no upvotes, no ranking, no algorithm. Every entry is equal because it is true. We call this x = x. It is the whole engineering principle — there is no score field and no weight field in the database. The absence of a ranking algorithm is the feature.
+DONE — live right now:
 
-The record today: 14 entries (6 solutions, 8 crises) across 10 countries, 3 ground actions, 4 community groups. These numbers are live and grow as the community adds entries.
+Your two entry types are in. Solutions (things to replicate) and Climate Crises (emergencies to alert the world to), exactly as you asked. Your full 20-category taxonomy is in the database and filterable. 12 of the 20 already have entries; the other 8 are wired up and waiting for their first entries. Rough location only — country and region, no coordinates, your privacy stance kept. Every entry is reviewed before it goes public, same as the Solutions Site model. Copyright-free images only, credit stored on each one. Every entry links to its source. Scale field is in: individual, community, city, country, global. Groups are in — people on the same topic in the same area can form one, email required per your spec, and the platform stores none of their messages. Actions are in — cleanups, plantings, meetings, policy submissions, workshops, monitoring — each with one contact link, organiser contacted directly, platform sees nothing. The interface speaks 60+ languages including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek, and you can free-type any language on Earth. No advertising. No fundraising. Both stated on the page and enforced by design — there is no ad network and no donation flow on the record. Open source, with a public covenant on how it resists capture. And no likes, no upvotes, no ranking, no algorithm — every entry sits beside every other as an equal because it is true. We call that x = x. It is the whole engineering principle: there is no score field and no weight field in the database. The absence of a ranking algorithm is the feature.
 
-What is planned, not yet built:
+PLANNED — not yet built, and I will not pretend otherwise:
 
-- Entry translation by community: the interface is translated now; the solution text itself will be translated by our community over time, because accuracy matters more than speed.
-- 8 categories are empty and need their first entries: heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination.
-- A rough-region map of where solutions and crises are happening — privacy-respecting, no precise pins.
-- Linking ground-action photos to the climate record as visual proof, without storing personal data.
+The interface is translated now; the entry text itself (the solution words) is not auto-translated, because accuracy matters more than speed — our community will translate those over time. 8 categories are still empty and need their first entries: heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination. A rough-region map is designed but not built — privacy-respecting, no precise pins. Linking ground-action photos to the record as visual proof is designed but not built.
 
-What we will not do:
+WE WILL NOT DO:
 
-- No advertising, ever.
-- No fundraising on the climate record.
-- No likes, ranking, or engagement algorithms.
-- No precise location tracking.
-- No private messaging stored on the platform.
-- No speculative or unverified claims presented as fact.
-- No mixing of this record with token or crypto mechanics. The climate record stands alone, as a public service.
+No advertising, ever. No fundraising on the record. No likes, ranking or engagement algorithms. No precise location tracking. No private messaging stored on the platform. No speculative or unverified claims shown as fact. And no mixing this record with token or crypto mechanics — the climate record stands alone, as a public service. That one matters to me and I want it on the record from you to me.
 
-The live record is at the link below. A printable version of this brief is also there. We will add nothing we cannot stand behind.
+WHERE THE NUMBERS STAND TODAY:
 
-This platform is built in your honour, and in honour of Horizon International — and released to the world, the planet, all of us. Your 40 years are the foundation. Our job is to carry the record honestly, in every tongue, to every person on Earth.
+14 entries on the record — 6 solutions, 8 crises — across 10 countries. 3 ground actions listed. 4 community groups formed. 12 of 20 categories filled. 60+ languages the interface speaks. These numbers are live; they grow as the community adds entries, counted from the database on every visit.
+
+The live record and a printable version of this brief are at the links below. We will add nothing we cannot stand behind.
+
+This is built in your honour, and in honour of Horizon International — released to the world, the planet, all of us. Your 40 years are the foundation. My job is to carry the record honestly, in every tongue, to every person on Earth. I will not let you down on that.
 
 With gratitude and respect,
 Brian
