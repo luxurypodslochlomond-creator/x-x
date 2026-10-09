@@ -97,6 +97,10 @@
       "type": "boolean",
       "default": false,
       "description": "Flagged by spam filter for admin attention"
+    },
+    "ai_assessment": {
+      "type": "string",
+      "description": "AI pre-screener assessment \u2014 verdict, relevance, reasons"
     }
   },
   "required": [
