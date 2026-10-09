@@ -35,7 +35,7 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 | # | Feature | Her Words | Status |
 |---|---------|-----------|--------|
 | 1 | **Name** | Alternatives or use the mantra | ✅ Done — mantra is the title |
-| 2 | **Sign in: Email required** | "Email required for submission and interaction in groups" | ❌ **MISS** — no email enforcement |
+| 2 | **Sign in: Email required** | "Email required for submission and interaction in groups" | ✅ Done — submit form + comments both require email |
 | 3 | **Privacy** | "Addresses general, no need to infringe on privacy, just enough for rough mapping" | ✅ Done — `region_rough` |
 | 4 | **Connectivity** | "Very fast 2-3 seconds to connect" | ✅ Done |
 | 5 | **Capacity** | "Handle millions of users" | ✅ Done |
@@ -44,7 +44,7 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 | 8 | **Categories** | agriculture (water supply, drought, resilient crops), water, heat, coastal erosion protection, seagrasses, mangroves, oceans, zooplankton, phytoplankton, forest preservation, rewilding, urban geodesign, transportation, EV, renewable energy, solar powered desalination, etc. + climate crises (drought, flooding) | ✅ Done — all in enum. **More coming from Janine.** |
 | 9 | **Subcategories** | "agriculture subcategories (water supply, drought, resilient crops)" | ⚠️ Field exists but free text, not structured |
 | 10 | **Group gatherings** | "people designing plastic shelters, plastic clothes, saving seagrasses, in an area or region can share directly" | ✅ Done — `ClimateGroup` entity |
-| 11 | **Comments** | "Comments: Enable" | ❌ **MISS** — no comments on entries |
+| 11 | **Comments** | "Comments: Enable" | ✅ Done — `ClimateComment` entity + comment section on every detail page |
 | 12 | **Solutions Summaries** | Positive actions (see solutions-site.org) | ✅ Done — `entry_type: solution` |
 | 13 | **Climate Crisis Summaries** | drought, flooding, extreme weather alerts | ✅ Done — `entry_type: climate_crisis` |
 | 14 | **Descriptions** | "short descriptions and more details (LinkedIn and Solutions-site.org examples)" | ✅ Done — `summary` + `details` |
@@ -52,13 +52,13 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 | 16 | **Images** | "capacity to add and make easy to view (copyright free images)" | ✅ Done — `image_url` + `image_credit` |
 | 17 | **Music** | "theme song when produced" | ⚠️ Future — "when produced" |
 | 18 | **Translations** | "Instant translations" — Google Translate 243-249 languages | ✅ Done — `translateClimate` + `useEntryTranslation` |
-| 19 | **Spam filter** | "Additional oversight (LinkedIn, other social media means of clearance) might be arranged with UNDP (with 1180 regional offices) and other international entities" | ❌ **MISS** — no spam/oversight on submissions |
+| 19 | **Spam filter** | "Additional oversight (LinkedIn, other social media means of clearance) might be arranged with UNDP (with 1180 regional offices) and other international entities" | ✅ Done — `climateSpamFilter.js` scans content + draft→review→publish workflow (every submission read by a person before publication) |
 | 20 | **Mapping** | "Ready to be able to add mapping, for example by ESRI (ESRI may provide mapping) showing locations of climate crisis or positive action" | ❌ **MISS** — not yet implemented |
 | 21 | **Public service statement** | "This platform is provided as a public service to help save our planet." | ✅ Done — "A public service · for the world" |
 | 22 | **No advertising** | Explicit | ✅ Done |
 | 23 | **No fund raising** | Explicit | ✅ Done |
 | 24 | **Donations welcome** | "Donations welcome...made to...." | ⚠️ Says "welcome" but **no destination specified** — Janine needs to tell us where |
-| 25 | **Definitions** | "(add definitions)" — she provided 3: Geodesign, Rewilding, Heat | ⚠️ We have Geodesign + Rewilding. **Missing: Heat definition** + more to add |
+| 25 | **Definitions** | "(add definitions)" — she provided 3: Geodesign, Rewilding, Heat | ✅ Done — all 3 displayed (Geodesign, Rewilding, Heat). More can be added as she sends them |
 
 ---
 
@@ -77,25 +77,23 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 
 ---
 
-## WHAT WE'VE MISSED — Priority Order
+## STATUS — Updated 9 Oct 2026
 
-### Critical (she explicitly asked, we don't have)
-1. **Comments** — "Comments: Enable" — zero comments on entries
-2. **Email required for submission** — "Email required for submission and interaction in groups"
-3. **Spam filter / oversight** — she wants clearance before publication
+### ✅ Now complete (built this session)
+1. **Comments** — `ClimateComment` entity, comment section on every detail page, email required, draft→review→publish
+2. **Email required for submission** — submit form requires name + email, comments require name + email
+3. **Spam filter** — `climateSpamFilter.js` content scanner + draft→review→publish workflow
+4. **Heat definition** — added to definitions section alongside Geodesign + Rewilding
 
-### Moderate (she mentioned, we're partial)
-4. **Heat definition** — she provided one, we don't display it
-5. **More definitions** — she says "(add definitions)" for other categories
-6. **Donations destination** — "made to...." — we say "welcome" but don't say where
-7. **Mapping (ESRI)** — architecturally defined, not built
+### ⚠️ Still open — need Janine's input
+5. **Donations destination** — she wrote "Donations welcome...made to...." — we say "welcome" but need her to tell us WHERE donations go (which organisation/account)
+6. **More categories** — she said "We will need many more categories and I will address that as I feel better"
+7. **More definitions** — she said "(add definitions)" — we have 3, more can be added as she sends them
 
-### Low priority / future
-8. **Music / theme song** — "when produced"
-9. **Structured subcategories** — agriculture subcategories specifically
-
-### Coming from Janine (she said so)
-10. **Many more categories** — "I will address that as I feel better"
+### 🔲 Future / not yet built
+8. **Mapping (ESRI)** — she wants map showing locations of climate crisis or positive action. react-leaflet is installed; can be built when ready
+9. **Music / theme song** — "when produced" — waiting for the track
+10. **Structured subcategories** — agriculture subcategories (water supply, drought, resilient crops) — field exists as free text, could be structured later
 
 ---
 
