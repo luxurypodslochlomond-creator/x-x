@@ -10,7 +10,7 @@ import { useClimateCategories } from '@/hooks/useClimateCategories';
 const makeIcon = (type, longitude = 0) => {
   const isCrisis = type === 'climate_crisis';
   const isAction = type === 'action';
-  const delay = ((longitude + 180) / 360) * 6;
+  const delay = ((longitude + 180) / 360) * 8;
   const fadeIn = `animation:climate-marker-in 0.9s cubic-bezier(0.2,0.8,0.2,1) ${delay}s both;`;
 
   if (isCrisis) {
@@ -25,7 +25,7 @@ const makeIcon = (type, longitude = 0) => {
   if (isAction) {
     return L.divIcon({
       className: 'climate-marker-action',
-      html: `<div style="${fadeIn}"><div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #efe7d6;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div></div>`,
+      html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1e3a2b;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #efe7d6;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div></div></div>`,
       iconSize: [11, 11],
       iconAnchor: [5, 5],
       popupAnchor: [0, -6],
@@ -34,7 +34,7 @@ const makeIcon = (type, longitude = 0) => {
   // solution
   return L.divIcon({
     className: 'climate-marker-solution',
-    html: `<div style="${fadeIn}"><div style="width:11px;height:11px;background:#1a1612;border:2px solid #efe7d6;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div></div>`,
+    html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1a1612;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1a1612;border:2px solid #efe7d6;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div></div></div>`,
     iconSize: [11, 11],
     iconAnchor: [5, 5],
     popupAnchor: [0, -6],
@@ -135,10 +135,14 @@ export default function ClimateMap() {
           to { opacity: 1; transform: scale(1); }
         }
         @keyframes climate-sweep {
-          0% { left: -3%; opacity: 0; }
-          8% { opacity: 1; }
-          92% { opacity: 1; }
-          100% { left: 103%; opacity: 0; }
+          0% { left: -5%; opacity: 0; }
+          5% { opacity: 1; }
+          95% { opacity: 1; }
+          100% { left: 105%; opacity: 0; }
+        }
+        @keyframes climate-reveal {
+          0% { transform: scale(0.5); opacity: 0.9; }
+          100% { transform: scale(3.5); opacity: 0; }
         }
         @keyframes climate-breathe {
           0%, 100% { filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7); }
@@ -300,10 +304,10 @@ export default function ClimateMap() {
       {/* The sweep — signals received west to east, one shore at a time */}
       <div className="absolute inset-0 pointer-events-none z-[500]" style={{ overflow: 'hidden' }}>
         <div style={{
-          position: 'absolute', top: 0, bottom: 0, width: '1px',
-          background: 'linear-gradient(to bottom, transparent 3%, #e2602a 50%, transparent 97%)',
-          animation: 'climate-sweep 6s cubic-bezier(0.45,0,0.55,1) forwards',
-          boxShadow: '0 0 12px #e2602a, 0 0 28px rgba(226,96,42,0.35)',
+          position: 'absolute', top: 0, bottom: 0, width: '2px',
+          background: '#e2602a',
+          animation: 'climate-sweep 8s cubic-bezier(0.4,0,0.6,1) forwards',
+          boxShadow: '0 0 8px #e2602a, 0 0 20px rgba(226,96,42,0.5), -40px 0 30px rgba(226,96,42,0.12), -80px 0 50px rgba(226,96,42,0.06)',
         }} />
       </div>
 
