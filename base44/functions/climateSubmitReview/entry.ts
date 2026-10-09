@@ -15,7 +15,7 @@ export default async function(req: Request): Promise<Response> {
     const contentParts = [data.title, data.summary, data.details, data.description, data.content].filter(Boolean);
     const fullContent = contentParts.join('\n\n');
 
-    // 1. AI pre-screen
+    // 1. AI advisory note
     let aiAssessment = 'AI assessment unavailable';
     let flagged = false;
 
