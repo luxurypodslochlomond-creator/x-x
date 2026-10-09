@@ -288,7 +288,7 @@ export default function TogetherChangeClimate() {
   }, [actions, query, selectedCategory]);
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/40" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
@@ -296,7 +296,7 @@ export default function TogetherChangeClimate() {
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @keyframes twcc-epigraph { from { opacity: 0; letter-spacing: 0.3em; } to { opacity: 1; letter-spacing: 0.15em; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 4px; } }
-        @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+        @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } } body { background: #141210 !important; }
       `}</style>
 
       {/* ── BIG SCIENCE EPIGRAPH — Laurie's thesis + the x = x covenant, cold opening ── */}
@@ -376,13 +376,13 @@ export default function TogetherChangeClimate() {
 
         {/* Ink band */}
         <div className="relative z-10 px-5 pt-10 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
-          <h1 className="font-black uppercase leading-[0.94] max-w-[360px] relative z-10 text-[#efe7d6]"
-            style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: 'clamp(38px, 11vw, 58px)', letterSpacing: '-0.035em' }}>
+          <h1 className="font-black uppercase leading-[0.94] max-w-[360px] lg:max-w-[640px] relative z-10 text-[#efe7d6]"
+            style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: 'clamp(38px, 11vw, 72px)', letterSpacing: '-0.035em' }}>
             {t.title_a}<br />
             <span className="text-[#e2602a]">{t.title_b}</span> {t.title_c}
           </h1>
           {/* Record-of-the-time seal — the stamp of truth */}
-          <div className="absolute right-5 top-16 w-[104px] h-[104px] pointer-events-none flex items-center justify-center"
+          <div className="absolute right-5 top-16 w-[104px] h-[104px] lg:right-12 lg:top-20 pointer-events-none flex items-center justify-center"
             style={{ transform: 'rotate(-17deg)', animation: 'twcc-stamp .25s ease-out .1s both, twcc-stamp-pulse 3.2s ease-in-out .6s infinite' }}>
             <div className="absolute inset-0 rounded-full border-8 border-[#e2602a]" style={{ boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6' }} />
             <div className="relative text-center" style={{ opacity: 0.9 }}>
@@ -395,7 +395,7 @@ export default function TogetherChangeClimate() {
 
         {/* Signal band */}
         <div className="relative z-10 bg-[#e2602a] px-5 py-5 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
-          <p className="text-[11px] font-bold uppercase leading-relaxed max-w-[330px] text-[#141210] tracking-wide">{t.sub}</p>
+          <p className="text-[11px] font-bold uppercase leading-relaxed max-w-[330px] lg:max-w-[640px] text-[#141210] tracking-wide">{t.sub}</p>
           {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
           <p className="text-[9px] font-black font-mono uppercase leading-relaxed mt-3 text-[#141210] tracking-[0.1em]" style={{ opacity: 0.75 }}>
             Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
@@ -503,7 +503,7 @@ export default function TogetherChangeClimate() {
 
       {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}
       <div className="px-4 py-3 bg-[#efe7d6] border-b-2 border-[#141210]">
-        <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }} aria-label="Filter by category">
+        <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x lg:flex-wrap lg:overflow-x-visible lg:mx-0 lg:px-0" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }} aria-label="Filter by category">
           <button
             onClick={() => setSelectedCategory('all')}
             className={`flex-shrink-0 snap-start px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
@@ -528,7 +528,7 @@ export default function TogetherChangeClimate() {
       {featured.length > 0 && (
         <div className="px-4 py-5 bg-[#efe7d6] border-b-2 border-[#141210]">
           <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
             {featured.map((item) => (
               <SolutionCard key={item.id} item={item} />
             ))}
@@ -552,7 +552,7 @@ export default function TogetherChangeClimate() {
                   <div className="flex-1 h-px bg-[#141210]/20" />
                   <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{solutions.length}</span>
                 </div>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
                   {solutions.map((item, i) => (
                     <div key={item.id}>
                       <SolutionCard item={item} />
@@ -568,7 +568,7 @@ export default function TogetherChangeClimate() {
                   <div className="flex-1 h-px bg-[#141210]/20" />
                   <span className="text-[10px] font-black font-mono text-[#e2602a]">{crises.length}</span>
                 </div>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
                   {crises.map((item, i) => (
                     <div key={item.id}>
                       <SolutionCard item={item} />
@@ -595,7 +595,7 @@ export default function TogetherChangeClimate() {
               <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{groups.length}</span>
             </div>
             <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.groups_sub}</p>
-            <div className="space-y-2">
+            <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
               {groups.map(g => (
                 <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
                   <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] leading-tight">{g.name}</h4>
@@ -621,7 +621,7 @@ export default function TogetherChangeClimate() {
             </div>
             <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.actions_sub}</p>
             {filteredActions.length > 0 ? (
-              <div className="grid grid-cols-1 gap-2.5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
                 {filteredActions.map(a => (
                   <ActionCard key={a.id} action={a} />
                 ))}
@@ -635,7 +635,7 @@ export default function TogetherChangeClimate() {
         {/* ── DEFINITIONS ── */}
         <section className="px-4 py-5 border-b-2 border-[#141210]">
           <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.defs}</h2>
-          <div className="space-y-2.5">
+          <div className="space-y-2.5 md:grid md:grid-cols-3 md:gap-3 md:space-y-0">
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Geodesign</h4>
               <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A set of concepts and methods used to involve all stakeholders in collaboratively designing optimal solutions for spatial challenges in the built and natural environments.</p>
@@ -655,7 +655,7 @@ export default function TogetherChangeClimate() {
         {/* ── GOVERNANCE ── */}
         <section className="px-4 py-5 bg-[#1e3a2b] text-[#efe7d6]">
           <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.govern}</h2>
-          <p className="text-[11px] font-mono leading-relaxed text-[#efe7d6]">{t.govern_body}</p>
+          <p className="text-[11px] font-mono leading-relaxed text-[#efe7d6] max-w-full lg:max-w-[680px]">{t.govern_body}</p>
           <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-2 mt-4 px-3 py-2 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors">
             {t.covenant} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
