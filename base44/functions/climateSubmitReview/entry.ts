@@ -78,8 +78,9 @@ Content: ${fullContent.slice(0, 2000)}`,
             <p style="color: #6b6258;">A new ${type} submission is awaiting your review.</p>
             <div style="background: #efe7d6; border: 2px solid #1a1612; padding: 16px; margin: 16px 0;">
               <p style="margin: 4px 0; color: #1a1612;"><strong>Title:</strong> ${title}</p>
-              <p style="margin: 4px 0; color: #1a1612;"><strong>AI Assessment:</strong> ${aiAssessment}</p>
+              <p style="margin: 4px 0; color: #1a1612;"><strong>AI Advisory Note:</strong> ${aiAssessment}</p>
               <p style="margin: 4px 0; color: #1a1612;"><strong>Flagged:</strong> ${flagged ? 'Yes — needs attention' : 'No — looks clean'}</p>
+              <p style="margin: 4px 0; color: #6b6258; font-size: 11px;">A human reviews every submission before publication. The AI advises — the human decides.</p>
             </div>
             <a href="https://green-stride-d47e043c.base44.app/AdminClimateReview" style="background: #b3261e; color: #fff; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; font-family: monospace;">Review now</a>
           </div>`

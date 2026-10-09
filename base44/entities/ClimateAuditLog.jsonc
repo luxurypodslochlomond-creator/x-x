@@ -1,0 +1,68 @@
+{
+  "name": "ClimateAuditLog",
+  "type": "object",
+  "description": "Audit trail for climate submission reviews \u2014 records who reviewed, what action was taken, and the AI advisory note that informed the decision. Admin-only access. This is the accountability record review panels ask for.",
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "solution",
+        "action",
+        "comment"
+      ],
+      "description": "Type of entity that was reviewed"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "ID of the reviewed entity"
+    },
+    "entity_title": {
+      "type": "string",
+      "description": "Title or preview of the reviewed entity"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "published",
+        "rejected"
+      ],
+      "description": "Review action taken by the human reviewer"
+    },
+    "reviewer_email": {
+      "type": "string",
+      "description": "Email of the admin who performed the review"
+    },
+    "ai_assessment": {
+      "type": "string",
+      "description": "The AI advisory note that informed the human decision"
+    }
+  },
+  "required": [
+    "entity_type",
+    "entity_id",
+    "action",
+    "reviewer_email"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

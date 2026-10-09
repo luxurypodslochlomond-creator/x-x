@@ -193,6 +193,13 @@ export default function ClimateSubmitForm({ onClose }) {
 
         {error && <p className="text-[11px] font-mono text-[#b3261e] mt-4">{error}</p>}
 
+        <div className="mt-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] p-3">
+          <p className="text-[9px] font-black font-mono uppercase text-[#1e3a2b] mb-1">✓ Human Review Promise</p>
+          <p className="text-[10px] font-mono text-[#141210] leading-relaxed">
+            Every submission is reviewed by a human. AI assists our reviewers — it never decides.
+          </p>
+        </div>
+
         <button
           type="submit"
           disabled={submitting}

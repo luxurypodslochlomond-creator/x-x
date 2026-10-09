@@ -9,18 +9,22 @@ export default function AdminClimateReview() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('solutions');
   const [busy, setBusy] = useState(null);
+  const [userEmail, setUserEmail] = useState('');
+  const [auditLogs, setAuditLogs] = useState([]);
 
   const loadAll = useCallback(async () => {
     setLoading(true);
     try {
-      const [solPage, actPage, comPage] = await Promise.all([
+      const [solPage, actPage, comPage, logPage] = await Promise.all([
         base44.entities.ClimateSolution.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateAction.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateComment.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
+        base44.entities.ClimateAuditLog.filter({}, { sort: '-created_date', limit: 5 }),
       ]);
       setSolutions(solPage.items || []);
       setActions(actPage.items || []);
       setComments(comPage.items || []);
+      setAuditLogs(logPage.items || []);
     } catch (e) {
       // RLS will block non-admins — they see nothing
     } finally {
@@ -30,9 +34,23 @@ export default function AdminClimateReview() {
 
   useEffect(() => { loadAll(); }, [loadAll]);
 
+  useEffect(() => {
+    base44.auth.me().then(u => setUserEmail(u?.email || '')).catch(() => {});
+  }, []);
+
   const publish = async (entityName, id) => {
     setBusy(id);
     try {
+      const item = currentItems.find(i => i.id === id);
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment' };
+      await base44.entities.ClimateAuditLog.create({
+        entity_type: typeMap[entityName],
+        entity_id: id,
+        entity_title: item?.title || item?.content?.slice(0, 80) || 'Untitled',
+        action: 'published',
+        reviewer_email: userEmail,
+        ai_assessment: item?.ai_assessment || '',
+      });
       await base44.entities[entityName].update(id, { status: 'published' });
       await loadAll();
     } catch (e) {
@@ -46,6 +64,16 @@ export default function AdminClimateReview() {
     if (!confirm('Reject and delete this submission?')) return;
     setBusy(id);
     try {
+      const item = currentItems.find(i => i.id === id);
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment' };
+      await base44.entities.ClimateAuditLog.create({
+        entity_type: typeMap[entityName],
+        entity_id: id,
+        entity_title: item?.title || item?.content?.slice(0, 80) || 'Untitled',
+        action: 'rejected',
+        reviewer_email: userEmail,
+        ai_assessment: item?.ai_assessment || '',
+      });
       await base44.entities[entityName].delete(id);
       await loadAll();
     } catch (e) {
@@ -108,7 +136,7 @@ export default function AdminClimateReview() {
       {item.ai_assessment && (
         <div className="bg-[#efe7d6] border-l-4 border-l-[#1a1612] p-2 mb-2">
           <p className={`text-[9px] font-mono font-bold uppercase mb-0.5 ${getVerdictColor(item.ai_assessment)}`}>
-            AI Pre-Screen
+            AI Advisory Note
           </p>
           <p className="text-[10px] font-mono text-[#1a1612] leading-relaxed">{item.ai_assessment}</p>
         </div>
@@ -160,8 +188,8 @@ export default function AdminClimateReview() {
             </button>
           </div>
           <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed">
-            Every submission is pre-screened by AI, then reviewed by a human before publication.
-            The AI advises — the human decides.
+            Every submission receives an AI advisory note, then a human decides.
+            The AI advises — the human decides. Nothing is auto-published.
           </p>
         </div>
 
@@ -202,6 +230,24 @@ export default function AdminClimateReview() {
         ) : (
           <div>
             {currentItems.map(item => renderItem(item, currentEntity, activeTab))}
+          </div>
+        )}
+
+        {/* Audit Trail */}
+        {auditLogs.length > 0 && (
+          <div className="mt-8">
+            <p className="text-[9px] font-black font-mono uppercase text-[#6b6258] mb-2">Review Log</p>
+            <div className="space-y-1">
+              {auditLogs.map(log => (
+                <div key={log.id} className="flex items-center gap-2 text-[9px] font-mono text-[#6b6258] border-l-2 border-l-[#1a1612]/20 pl-2">
+                  <span className={log.action === 'published' ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}>
+                    {log.action === 'published' ? '✓ Published' : '✗ Rejected'}
+                  </span>
+                  <span className="truncate flex-1">{log.entity_title}</span>
+                  <span className="text-right whitespace-nowrap">{log.reviewer_email}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 

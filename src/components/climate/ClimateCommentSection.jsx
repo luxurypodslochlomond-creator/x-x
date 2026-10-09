@@ -105,9 +105,15 @@ export default function ClimateCommentSection({ entryId, entryType }) {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="bg-[#f7f1e5] border-2 border-[#141210] p-4">
-          <p className="text-[9px] font-mono text-[#5a5246] mb-3 leading-relaxed">
+          <p className="text-[9px] font-mono text-[#5a5246] mb-2 leading-relaxed">
             Email required — per the platform's public-service covenant. Your email is never shown publicly.
           </p>
+          <div className="bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] p-2 mb-3">
+            <p className="text-[9px] font-black font-mono uppercase text-[#1e3a2b] mb-0.5">✓ Human Review Promise</p>
+            <p className="text-[9px] font-mono text-[#141210] leading-relaxed">
+              Every comment is reviewed by a human. AI assists — it never decides.
+            </p>
+          </div>
           <div className="grid grid-cols-2 gap-2 mb-2">
             <input
               value={name}
