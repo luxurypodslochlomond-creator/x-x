@@ -7,6 +7,8 @@ import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Lang
 import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
+import { useClimateCategories } from '@/hooks/useClimateCategories';
+import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -189,6 +191,7 @@ export default function TogetherChangeClimate() {
   const [otherOpen, setOtherOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
+  const { categories } = useClimateCategories();
 
   const handleShare = async () => {
     const origin = window.location.hostname.startsWith('preview--')
@@ -308,6 +311,8 @@ export default function TogetherChangeClimate() {
           x = x
         </div>
       </div>
+
+      <ClimateImpactBar />
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
       <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: '72vh' }}>
@@ -477,6 +482,12 @@ export default function TogetherChangeClimate() {
         >
           <MapPin className="w-4 h-4" /> Transmission Map
         </Link>
+        <Link
+          to={createPageUrl("ClimateImpact")}
+          className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#1e3a2b] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
+        >
+          <Globe className="w-4 h-4" /> Global Impact
+        </Link>
       </div>
 
       {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}
@@ -488,7 +499,7 @@ export default function TogetherChangeClimate() {
               selectedCategory === 'all' ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
             }`}
           >{t.all}</button>
-          {CATEGORIES.map(c => (
+          {categories.map(c => (
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.id)}
@@ -496,7 +507,7 @@ export default function TogetherChangeClimate() {
                 selectedCategory === c.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
               }`}
             >
-              <c.icon className="w-3 h-3" />{c.label}
+              <span className="text-xs">{c.emoji}</span>{c.label}
             </button>
           ))}
         </div>

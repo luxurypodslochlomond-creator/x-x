@@ -1,32 +1,10 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { X, Send, Check, Leaf, AlertTriangle } from 'lucide-react';
-
-
-const CATEGORIES = [
-  { id: 'agriculture', label: 'Agriculture' },
-  { id: 'water', label: 'Water' },
-  { id: 'heat', label: 'Heat' },
-  { id: 'coastal_erosion_protection', label: 'Coastal Protection' },
-  { id: 'seagrasses', label: 'Seagrasses' },
-  { id: 'mangroves', label: 'Mangroves' },
-  { id: 'oceans', label: 'Oceans' },
-  { id: 'zooplankton', label: 'Zooplankton' },
-  { id: 'phytoplankton', label: 'Phytoplankton' },
-  { id: 'forest_preservation', label: 'Forests' },
-  { id: 'rewilding', label: 'Rewilding' },
-  { id: 'urban_geodesign', label: 'Urban Geodesign' },
-  { id: 'transportation', label: 'Transport' },
-  { id: 'electric_vehicles', label: 'Electric Vehicles' },
-  { id: 'renewable_energy', label: 'Renewable Energy' },
-  { id: 'solar_desalination', label: 'Solar Desalination' },
-  { id: 'drought', label: 'Drought' },
-  { id: 'flooding', label: 'Flooding' },
-  { id: 'extreme_weather', label: 'Extreme Weather' },
-  { id: 'other', label: 'Other' },
-];
+import { useClimateCategories } from '@/hooks/useClimateCategories';
 
 export default function ClimateSubmitForm({ onClose }) {
+  const { categories } = useClimateCategories();
   const [entryType, setEntryType] = useState('solution');
   const [form, setForm] = useState({
     title: '', summary: '', details: '', category: 'agriculture',
@@ -149,7 +127,7 @@ export default function ClimateSubmitForm({ onClose }) {
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Category *</label>
             <select value={form.category} onChange={e => set('category', e.target.value)} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] outline-none focus:border-[#e2602a]">
-              {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
+              {categories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
             </select>
           </div>
 

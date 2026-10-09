@@ -61,29 +61,7 @@
     },
     "category": {
       "type": "string",
-      "enum": [
-        "agriculture",
-        "water",
-        "heat",
-        "coastal_erosion_protection",
-        "seagrasses",
-        "mangroves",
-        "oceans",
-        "zooplankton",
-        "phytoplankton",
-        "forest_preservation",
-        "rewilding",
-        "urban_geodesign",
-        "transportation",
-        "electric_vehicles",
-        "renewable_energy",
-        "solar_desalination",
-        "drought",
-        "flooding",
-        "extreme_weather",
-        "other"
-      ],
-      "description": "Category from Janine's spec taxonomy \u2014 links action to the solution space"
+      "description": "Category \u2014 dynamic, managed by admins through the ClimateCategory entity. Falls back to the built-in taxonomy."
     },
     "submitter_name": {
       "type": "string",

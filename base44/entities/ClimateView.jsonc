@@ -1,0 +1,46 @@
+{
+  "name": "ClimateView",
+  "type": "object",
+  "description": "Anonymous view tracking for climate entries \u2014 records only the country (from request geo-headers, no IP stored) and the entry viewed. Powers the global impact view. Admin-only reads; anyone can create a view record.",
+  "properties": {
+    "entry_id": {
+      "type": "string",
+      "description": "ID of the entry that was viewed"
+    },
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "solution",
+        "climate_crisis",
+        "action"
+      ],
+      "description": "Type of entry viewed"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 2-letter country code from request geo-headers, or empty if unavailable. No IP address is ever stored."
+    }
+  },
+  "required": [
+    "entry_id",
+    "entry_type"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

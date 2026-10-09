@@ -5,18 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { resolveCoords } from './countryCentroids';
-
-const CATEGORY_LABELS = {
-  agriculture: 'Agriculture', water: 'Water', heat: 'Heat',
-  coastal_erosion_protection: 'Coastal Protection', seagrasses: 'Seagrasses',
-  mangroves: 'Mangroves', oceans: 'Oceans', zooplankton: 'Zooplankton',
-  phytoplankton: 'Phytoplankton', forest_preservation: 'Forests',
-  rewilding: 'Rewilding', urban_geodesign: 'Urban Geodesign',
-  transportation: 'Transport', electric_vehicles: 'EV',
-  renewable_energy: 'Renewables', solar_desalination: 'Solar Desalination',
-  drought: 'Drought', flooding: 'Flooding',
-  extreme_weather: 'Extreme Weather', other: 'Other',
-};
+import { useClimateCategories } from '@/hooks/useClimateCategories';
 
 const makeIcon = (type, longitude = 0) => {
   const isCrisis = type === 'climate_crisis';
@@ -63,6 +52,8 @@ const spiralOffset = (index) => {
 export default function ClimateMap() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { categories } = useClimateCategories();
+  const catLabel = (catId) => categories.find(c => c.id === catId)?.label || (catId || '').replaceAll('_', ' ');
 
   useEffect(() => {
     const load = async () => {
@@ -264,7 +255,7 @@ export default function ClimateMap() {
                         letterSpacing: '0.08em', color: '#b3261e',
                         border: '1px solid #b3261e', padding: '2px 5px',
                       }}>
-                        {CATEGORY_LABELS[m.category] || m.category}
+                        {catLabel(m.category)}
                       </span>
                     )}
                     {(m.country || m.region) && (

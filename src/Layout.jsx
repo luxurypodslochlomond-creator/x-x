@@ -39,7 +39,7 @@ import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsColle
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
   Menu, X, Heart, Home, LogOut, Sparkles, Music, Map, User, Globe,
-  BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image, Share2, Handshake, Bell
+  BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image, Share2, Handshake, Bell, Tag
 } from 'lucide-react';
 
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51, COOLASFUCKSorted, COOLASFUCKPaw } from '@/components/shared/COOLASFUCKIcon';
@@ -621,6 +621,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "📊 Partner Evidence Pack", url: createPageUrl("PartnerEvidence"), icon: FileText, description: "Sourced research · market data · PDF download" },
       { title: "🌳 National Parklife Logos", url: createPageUrl("AdminNationalParklife"), icon: Image, description: "Hammock brand · logo lab" },
       { title: "🌍 Climate Review Queue", url: createPageUrl("AdminClimateReview"), icon: CheckCircle, description: "Review draft submissions · AI advisory note" },
+      { title: "🏷️ Climate Categories", url: createPageUrl("AdminClimateCategories"), icon: Tag, description: "Add, edit, and reorder categories" },
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };

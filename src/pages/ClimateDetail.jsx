@@ -6,6 +6,7 @@ import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, Fil
 import RelatedTriangle from '@/components/climate/RelatedTriangle';
 import ClimateCommentSection from '@/components/climate/ClimateCommentSection';
 import { useEntryTranslation } from '@/hooks/useEntryTranslation';
+import { useClimateCategories } from '@/hooks/useClimateCategories';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -77,7 +78,12 @@ export default function ClimateDetail() {
     setRecord(null);
     const entity = type === 'action' ? base44.entities.ClimateAction : base44.entities.ClimateSolution;
     entity.get(id)
-      .then(r => { if (!cancelled) setRecord(r); })
+      .then(r => {
+        if (!cancelled) {
+          setRecord(r);
+          if (r) base44.functions.invoke('climateTrackView', { entry_id: id, entry_type: type }).catch(() => {});
+        }
+      })
       .catch(() => { if (!cancelled) setRecord(null); })
       .finally(() => { if (!cancelled) setLoading(false); });
     // Load siblings for RelatedTriangle
@@ -90,6 +96,7 @@ export default function ClimateDetail() {
   // Hooks must run before any early return — call unconditionally; hook handles null record.
   const [lang] = useState(() => { try { return localStorage.getItem('climate51_lang') || 'auto'; } catch { return 'auto'; } });
   const tr = useEntryTranslation(record, lang);
+  const { categories } = useClimateCategories();
 
   if (loading) {
     return (
@@ -119,7 +126,7 @@ export default function ClimateDetail() {
   if (isAction) {
     const meta = ACTION_TYPES[record.action_type] || ACTION_TYPES.other;
     const Icon = meta.icon;
-    const catIcon = CATEGORIES.find(c => c.id === record.category)?.icon || Globe;
+    const catEmoji = categories.find(c => c.id === record.category)?.emoji || '🌍';
     return (
       <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
         {/* Sticky header — native back, action-type colour band */}
@@ -139,7 +146,7 @@ export default function ClimateDetail() {
           </h1>
 
           <div className="flex items-center gap-1.5 mt-3">
-            <catIcon className="w-4 h-4 text-[#1e3a2b]" />
+            <span className="text-base">{catEmoji}</span>
             <span className="text-[11px] font-black font-mono uppercase tracking-widest text-[#1e3a2b]">{record.category?.replaceAll('_', ' ')}</span>
           </div>
 
@@ -195,7 +202,7 @@ export default function ClimateDetail() {
   }
 
   // Solution / Crisis detail
-  const Icon = CATEGORIES.find(c => c.id === record.category)?.icon || Globe;
+  const catEmoji = categories.find(c => c.id === record.category)?.emoji || '🌍';
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Hero image — full-bleed, sticky back button overlaid */}
@@ -214,7 +221,7 @@ export default function ClimateDetail() {
 
       <div className="p-5">
         <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
-          <Icon className="w-4 h-4" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
+          <span className="text-base">{catEmoji}</span><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
         <h1 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>
           {tr.field('title')}
