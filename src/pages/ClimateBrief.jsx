@@ -101,7 +101,7 @@ export default function ClimateBrief() {
           </h2>
           <div className="grid grid-cols-2 gap-2.5">
             {[
-              ['22', 'entries on the record (14 solutions, 8 crises)'],
+              ['14', 'entries on the record (6 solutions, 8 crises)'],
               ['10', 'countries represented'],
               ['12', 'of 20 categories with entries'],
               ['3', 'ground actions listed'],
@@ -230,7 +230,7 @@ What is live now:
 - Open source, with a public covenant explaining how it resists corporate capture.
 - No likes, no upvotes, no ranking, no algorithm. Every entry is equal because it is true. We call this x = x. It is the whole engineering principle — there is no score field and no weight field in the database. The absence of a ranking algorithm is the feature.
 
-The record today: 22 entries (14 solutions, 8 crises) across 10 countries, 3 ground actions, 4 community groups. These numbers are live and grow as the community adds entries.
+The record today: 14 entries (6 solutions, 8 crises) across 10 countries, 3 ground actions, 4 community groups. These numbers are live and grow as the community adds entries.
 
 What is planned, not yet built:
 
