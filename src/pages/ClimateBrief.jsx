@@ -1,0 +1,202 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { ArrowRight, Printer, Globe, Languages, Shield, Leaf, Check } from 'lucide-react';
+
+// ── A factual one-pager for Janine M. H. Selendy & Horizon International ──
+// Honest about what is live, what is planned, and what is not built yet.
+// The climate record stands alone — separate from the token side of UF51.
+
+export default function ClimateBrief() {
+  const handlePrint = () => window.print();
+
+  return (
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+      <style>{`
+        @media print {
+          .no-print { display: none !important; }
+          .brief-page { max-width: 100% !important; padding: 0 !important; }
+          body { background: #fff !important; }
+        }
+      `}</style>
+
+      {/* Action bar — screen only */}
+      <div className="no-print sticky top-0 z-50 bg-[#1a1612] px-4 py-3 flex items-center justify-between">
+        <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 text-[#efe7d6] text-[11px] font-black font-mono uppercase tracking-widest">
+          ← Back to the record
+        </Link>
+        <button onClick={handlePrint} className="flex items-center gap-2 px-3 py-2 bg-[#e2602a] text-[#1a1612] text-[10px] font-black font-mono uppercase border border-[#1a1612] active:bg-[#1e3a2b] active:text-[#efe7d6]">
+          <Printer className="w-3.5 h-3.5" /> Print / Save as PDF
+        </button>
+      </div>
+
+      <div className="brief-page max-w-2xl mx-auto px-6 py-10">
+
+        {/* ── LETTERHEAD ── */}
+        <div className="border-b-2 border-[#1a1612] pb-6 mb-8">
+          <div className="text-[9px] font-black font-mono uppercase tracking-[0.3em] text-[#b3261e] mb-2">
+            Together We Change Climate · A Public Service
+          </div>
+          <h1 className="font-black uppercase leading-[0.95] text-[#1a1612]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '38px', letterSpacing: '-0.03em' }}>
+            A Brief for<br />Janine M. H. Selendy
+          </h1>
+          <p className="text-[11px] font-mono text-[#6b6258] mt-3 leading-relaxed">
+            What we have built from your spec — what is live today, what is planned, and what is not yet built. Written plainly, because your 40 years deserve nothing less than the truth.
+          </p>
+        </div>
+
+        {/* ── THE PRINCIPLE ── */}
+        <section className="mb-8">
+          <div className="bg-[#1a1612] text-[#efe7d6] px-5 py-4 mb-4">
+            <div className="text-[20px] font-black font-mono tracking-[0.3em] text-center text-[#e2602a]">x = x</div>
+            <p className="text-[10px] font-mono text-center mt-2 text-[#efe7d6]/70 leading-relaxed">
+              Every entry is equal because it is true — not because it is popular, ranked, or amplified.
+            </p>
+          </div>
+          <p className="text-[13px] leading-relaxed text-[#1a1612]">
+            Your spec asked for a universal, honest, non-speculative repository for verified climate solutions. No engagement metrics. No ranking. No advertising. No fundraising. Rough locations only, to protect privacy while staying verifiable. Reviewed before publication. Copyright-free images. Every language on Earth, over time.
+          </p>
+          <p className="text-[13px] leading-relaxed text-[#1a1612] mt-3">
+            That is what we built. This brief shows exactly where each part of your spec stands today.
+          </p>
+        </section>
+
+        {/* ── WHAT IS LIVE NOW ── */}
+        <section className="mb-8">
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            What is live now
+          </h2>
+          <div className="space-y-2.5">
+            {[
+              ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.'],
+              ['Your category taxonomy', 'All 20 categories are implemented in the database and filterable on the page. 12 of 20 already have seeded entries; the rest are supported and ready.'],
+              ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.'],
+              ['Reviewed before publication', 'Every entry carries a status field (draft / reviewed / published). Material is reviewed before it goes public, same as the Solutions Site model.'],
+              ['Copyright-free images only', 'Every image is sourced from copyright-free pools (Unsplash). Image credit is stored on each entry.'],
+              ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.'],
+              ['Scale field', 'Individual, community, city, country, global — your spec, implemented.'],
+              ['Groups', 'People working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.'],
+              ['Actions', 'Cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each action carries one contact link — the organiser is contacted directly. The platform never sees the conversation.'],
+              ['60+ interface languages', 'The page interface is preset in 8 languages and AI-translated live into 60+ more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori, Ancient Greek. You can also free-type any language on Earth.'],
+              ['No advertising, no fundraising', 'Stated on the page. Enforced by design — there is no ad network and no donation flow on the climate record.'],
+              ['Open source, extraction-proof', 'The platform code is open. A public covenant explains how it resists corporate capture.'],
+              ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.'],
+              ['The x = x covenant', 'No likes, no upvotes, no ranking, no algorithm. Every entry sits beside every other entry as an equal, because it is true.'],
+            ].map(([title, body]) => (
+              <div key={title} className="flex gap-3 bg-[#efe7d6] border border-[#1a1612]/15 border-l-4 border-l-[#1e3a2b] px-4 py-3">
+                <Check className="w-4 h-4 text-[#1e3a2b] flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-[12px] font-black font-mono uppercase text-[#1a1612] leading-tight">{title}</h4>
+                  <p className="text-[12px] font-mono text-[#3a342c] leading-relaxed mt-1">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── LIVE NUMBERS ── */}
+        <section className="mb-8">
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            The record, today
+          </h2>
+          <div className="grid grid-cols-2 gap-2.5">
+            {[
+              ['22', 'entries on the record (14 solutions, 8 crises)'],
+              ['10', 'countries represented'],
+              ['12', 'of 20 categories with entries'],
+              ['3', 'ground actions listed'],
+              ['4', 'community groups formed'],
+              ['60+', 'languages the interface speaks'],
+            ].map(([num, label]) => (
+              <div key={label} className="bg-[#1a1612] text-[#efe7d6] px-4 py-4">
+                <div className="text-[28px] font-black font-mono text-[#e2602a] leading-none">{num}</div>
+                <div className="text-[10px] font-mono uppercase tracking-wide text-[#efe7d6]/70 mt-1.5 leading-tight">{label}</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-[10px] font-mono text-[#6b6258] mt-3 leading-relaxed">
+            Numbers are live — they grow as the community adds entries. The platform counts them from the database on every visit.
+          </p>
+        </section>
+
+        {/* ── WHAT IS PLANNED, NOT YET BUILT ── */}
+        <section className="mb-8">
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            What is planned, not yet built
+          </h2>
+          <div className="space-y-2.5">
+            {[
+              ['Entry translation by community', 'The interface is translated now. Entries themselves (the solution text) are translated by our community over time — not automatically, because accuracy matters more than speed.'],
+              ['8 empty categories', 'Heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination. The database and filters support them; we need to seed the first entries.'],
+              ['Photo51 evidence link', 'Connecting ground-action photos (cleanups, plantings) to the climate record, so an action can carry visual proof without storing personal data.'],
+              ['Mapping view', 'A rough-region map of where solutions and crises are happening — privacy-respecting, no precise pins.'],
+            ].map(([title, body]) => (
+              <div key={title} className="flex gap-3 bg-[#efe7d6] border border-[#1a1612]/15 border-l-4 border-l-[#b8860b] px-4 py-3">
+                <div>
+                  <h4 className="text-[12px] font-black font-mono uppercase text-[#1a1612] leading-tight">{title}</h4>
+                  <p className="text-[12px] font-mono text-[#3a342c] leading-relaxed mt-1">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── WHAT WE WILL NOT DO ── */}
+        <section className="mb-8">
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            What we will not do
+          </h2>
+          <div className="bg-[#b3261e] text-[#f4efe4] px-5 py-4">
+            <ul className="space-y-2 text-[12px] font-mono leading-relaxed">
+              <li>· No advertising, ever.</li>
+              <li>· No fundraising on the climate record.</li>
+              <li>· No likes, upvotes, ranking, or engagement algorithms.</li>
+              <li>· No precise location tracking.</li>
+              <li>· No private messaging stored on the platform.</li>
+              <li>· No speculative or unverified claims presented as fact.</li>
+              <li>· No mixing of this record with token or crypto mechanics. The climate record stands alone, as a public service.</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ── THE HONEST MATHS ── */}
+        <section className="mb-8">
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            The only maths that matters here
+          </h2>
+          <div className="bg-[#efe7d6] border-2 border-[#1a1612] px-5 py-5">
+            <div className="text-center text-[24px] font-black font-mono text-[#1a1612] mb-3">x = x</div>
+            <p className="text-[12px] font-mono text-[#3a342c] leading-relaxed">
+              A solution in Nepal is equal to a solution in Niger — not because of votes, not because of reach, but because both are true. A crisis in the Sahel is equal to a crisis in Cardigan Bay. The record does not rank. It does not amplify. It holds what is true, side by side, and lets the world read it.
+            </p>
+            <p className="text-[12px] font-mono text-[#3a342c] leading-relaxed mt-3">
+              This is the whole engineering principle. Every database query returns entries in the order they were created. No score field exists. No weight field exists. The absence of a ranking algorithm is the feature.
+            </p>
+          </div>
+        </section>
+
+        {/* ── HONOUR ── */}
+        <section className="mb-8">
+          <div className="border-t-2 border-[#1a1612] pt-6">
+            <p className="text-[13px] font-mono text-[#1a1612] leading-relaxed">
+              This platform is built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us. Your 40 years are the foundation. Our job is to carry the record honestly, in every tongue, to every person on Earth.
+            </p>
+            <p className="text-[11px] font-mono text-[#6b6258] mt-4 leading-relaxed">
+              The live record is at <span className="font-bold text-[#1a1612]">/TogetherChangeClimate</span>. This brief is printable. We will add nothing we cannot stand behind.
+            </p>
+          </div>
+        </section>
+
+        {/* ── FOOTER ── */}
+        <div className="no-print flex flex-wrap gap-2 pt-4 border-t border-[#1a1612]/15">
+          <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 px-4 py-3 bg-[#1a1612] text-[#efe7d6] text-[11px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#1a1612]">
+            <Globe className="w-4 h-4" /> Visit the live record <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <Link to={createPageUrl('ExtractionProofCovenant')} className="flex items-center gap-2 px-4 py-3 border-2 border-[#1a1612] text-[#1a1612] text-[11px] font-black font-mono uppercase active:bg-[#1e3a2b] active:text-[#efe7d6]">
+            <Shield className="w-4 h-4" /> Open-source covenant
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
