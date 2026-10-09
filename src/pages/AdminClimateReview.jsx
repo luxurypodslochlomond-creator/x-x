@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, RefreshCw } from 'lucide-react';
+import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, RefreshCw, Globe, Tag } from 'lucide-react';
 
 export default function AdminClimateReview() {
   const [solutions, setSolutions] = useState([]);
@@ -78,6 +80,40 @@ export default function AdminClimateReview() {
       await loadAll();
     } catch (e) {
       alert('Failed to reject: ' + e.message);
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const publishAllClean = async () => {
+    const allItems = [
+      ...solutions.map(i => ({ ...i, _entity: 'ClimateSolution' })),
+      ...actions.map(i => ({ ...i, _entity: 'ClimateAction' })),
+      ...comments.map(i => ({ ...i, _entity: 'ClimateComment' })),
+    ];
+    const cleanItems = allItems.filter(i => i.ai_assessment && i.ai_assessment.includes('[CLEAN]'));
+    if (cleanItems.length === 0) {
+      alert('No [CLEAN] submissions to bulk publish. All clean items are already published.');
+      return;
+    }
+    if (!confirm(`Publish ${cleanItems.length} submission(s) marked [CLEAN] by the AI advisory note?\n\nThis saves time when the queue is long. You can still review each one individually.`)) return;
+    setBusy('bulk');
+    try {
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment' };
+      for (const item of cleanItems) {
+        await base44.entities.ClimateAuditLog.create({
+          entity_type: typeMap[item._entity],
+          entity_id: item.id,
+          entity_title: item.title || item.content?.slice(0, 80) || 'Untitled',
+          action: 'published',
+          reviewer_email: userEmail,
+          ai_assessment: item.ai_assessment || '',
+        });
+        await base44.entities[item._entity].update(item.id, { status: 'published' });
+      }
+      await loadAll();
+    } catch (e) {
+      alert('Bulk publish failed: ' + e.message);
     } finally {
       setBusy(null);
     }
@@ -183,14 +219,35 @@ export default function AdminClimateReview() {
             <h1 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '28px', letterSpacing: '-0.02em' }}>
               Review Queue
             </h1>
-            <button onClick={loadAll} className="flex items-center gap-1.5 px-3 py-2 border-2 border-[#1a1612] text-[#1a1612] text-[10px] font-black font-mono uppercase bg-[#efe7d6] active:bg-[#1a1612] active:text-[#efe7d6] transition-colors">
-              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} /> Refresh
-            </button>
+            <div className="flex items-center gap-2">
+              <button onClick={publishAllClean} disabled={busy === 'bulk'} className="flex items-center gap-1.5 px-3 py-2 border-2 border-[#1e3a2b] text-[#1e3a2b] text-[10px] font-black font-mono uppercase bg-[#efe7d6] active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors disabled:opacity-50">
+                {busy === 'bulk' ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />} Publish all clean
+              </button>
+              <button onClick={loadAll} className="flex items-center gap-1.5 px-3 py-2 border-2 border-[#1a1612] text-[#1a1612] text-[10px] font-black font-mono uppercase bg-[#efe7d6] active:bg-[#1a1612] active:text-[#efe7d6] transition-colors">
+                <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} /> Refresh
+              </button>
+            </div>
           </div>
           <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed">
             Every submission receives an AI advisory note, then a human decides.
             The AI advises — the human decides. Nothing is auto-published.
           </p>
+        </div>
+
+        {/* Quick stats */}
+        <div className="flex items-center gap-2 mb-4">
+          <div className="flex-1 flex items-center gap-2 px-3 py-2.5 bg-[#efe7d6] border border-[#1a1612]/15">
+            <AlertTriangle className="w-3.5 h-3.5 text-[#b3261e] flex-shrink-0" />
+            <span className="text-[10px] font-mono text-[#1a1612]"><b className="font-black">{solutions.length + actions.length + comments.length}</b> pending</span>
+          </div>
+          <Link to={createPageUrl("ClimateImpact")} className="flex items-center gap-1.5 px-3 py-2.5 bg-[#1e3a2b] text-[#efe7d6] border border-[#1e3a2b] active:bg-[#1a1612] transition-colors">
+            <Globe className="w-3.5 h-3.5" />
+            <span className="text-[10px] font-black font-mono uppercase">Impact</span>
+          </Link>
+          <Link to={createPageUrl("AdminClimateCategories")} className="flex items-center gap-1.5 px-3 py-2.5 bg-[#efe7d6] text-[#1a1612] border border-[#1a1612]/20 active:bg-[#1a1612] active:text-[#efe7d6] transition-colors">
+            <Tag className="w-3.5 h-3.5" />
+            <span className="text-[10px] font-black font-mono uppercase">Cats</span>
+          </Link>
         </div>
 
         {/* Tabs */}
