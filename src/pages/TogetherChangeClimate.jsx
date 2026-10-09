@@ -189,7 +189,10 @@ export default function TogetherChangeClimate() {
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
-    const url = window.location.origin + '/TogetherChangeClimate';
+    const origin = window.location.hostname.startsWith('preview--')
+      ? 'https://' + window.location.hostname.replace('preview--', '')
+      : window.location.origin;
+    const url = origin + '/TogetherChangeClimate';
     const shareData = {
       title: 'Together We Change Climate',
       text: 'A public record of climate emergencies and the positive actions that work — every language on Earth.',
