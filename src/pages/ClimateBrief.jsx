@@ -187,6 +187,83 @@ export default function ClimateBrief() {
           </div>
         </section>
 
+        {/* ── EMAIL TO JANINE — copy-paste ready ── */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+              Email to Janine
+            </h2>
+            <button
+              onClick={() => {
+                const text = document.getElementById('janine-email').innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                  const btn = document.getElementById('copy-btn');
+                  const orig = btn.innerHTML;
+                  btn.innerHTML = '<span class="text-[10px] font-black font-mono uppercase">Copied ✓</span>';
+                  setTimeout(() => { btn.innerHTML = orig; }, 2000);
+                });
+              }}
+              id="copy-btn"
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#1a1612] text-[#efe7d6] text-[10px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#1a1612]"
+            >
+              Copy email
+            </button>
+          </div>
+          <div id="janine-email" className="bg-[#efe7d6] border-2 border-[#1a1612] px-5 py-5 text-[12px] font-mono text-[#1a1612] leading-relaxed whitespace-pre-wrap select-all">
+{`Dear Janine,
+
+Thank you for your 40 years of work. We have built the platform from your spec, and we want to tell you plainly what is live, what is planned, and what is not yet built — because your work deserves nothing less than the truth.
+
+What is live now:
+
+- Two entry types: Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to), exactly as you specified.
+- Your full 20-category taxonomy is implemented. 12 of 20 categories already have seeded entries; the rest are supported and ready.
+- Rough location only — country and region, no precise coordinates. Your privacy stance, kept.
+- Every entry is reviewed before publication, same as the Solutions Site model.
+- Copyright-free images only, with image credit stored on each entry.
+- Every entry links to its source — Horizon Solutions Site, peer-reviewed articles, verified reporting.
+- Scale field: individual, community, city, country, global.
+- Groups: people working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.
+- Actions: cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each carries one contact link — the organiser is contacted directly. The platform never sees the conversation.
+- The interface speaks 60+ languages, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori, and Ancient Greek. You can also free-type any language on Earth and it translates live.
+- No advertising. No fundraising. Stated on the page and enforced by design.
+- Open source, with a public covenant explaining how it resists corporate capture.
+- No likes, no upvotes, no ranking, no algorithm. Every entry is equal because it is true. We call this x = x. It is the whole engineering principle — there is no score field and no weight field in the database. The absence of a ranking algorithm is the feature.
+
+The record today: 22 entries (14 solutions, 8 crises) across 10 countries, 3 ground actions, 4 community groups. These numbers are live and grow as the community adds entries.
+
+What is planned, not yet built:
+
+- Entry translation by community: the interface is translated now; the solution text itself will be translated by our community over time, because accuracy matters more than speed.
+- 8 categories are empty and need their first entries: heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination.
+- A rough-region map of where solutions and crises are happening — privacy-respecting, no precise pins.
+- Linking ground-action photos to the climate record as visual proof, without storing personal data.
+
+What we will not do:
+
+- No advertising, ever.
+- No fundraising on the climate record.
+- No likes, ranking, or engagement algorithms.
+- No precise location tracking.
+- No private messaging stored on the platform.
+- No speculative or unverified claims presented as fact.
+- No mixing of this record with token or crypto mechanics. The climate record stands alone, as a public service.
+
+The live record is at the link below. A printable version of this brief is also there. We will add nothing we cannot stand behind.
+
+This platform is built in your honour, and in honour of Horizon International — and released to the world, the planet, all of us. Your 40 years are the foundation. Our job is to carry the record honestly, in every tongue, to every person on Earth.
+
+With gratitude and respect,
+Brian
+
+Live record: https://green-stride-d47e043c.base44.app/TogetherChangeClimate
+Printable brief: https://green-stride-d47e043c.base44.app/ClimateBrief`}
+          </div>
+          <p className="text-[10px] font-mono text-[#6b6258] mt-2 leading-relaxed">
+            Tap "Copy email" to copy the whole message, or tap and hold to select the text manually.
+          </p>
+        </section>
+
         {/* ── FOOTER ── */}
         <div className="no-print flex flex-wrap gap-2 pt-4 border-t border-[#1a1612]/15">
           <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 px-4 py-3 bg-[#1a1612] text-[#efe7d6] text-[11px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#1a1612]">
