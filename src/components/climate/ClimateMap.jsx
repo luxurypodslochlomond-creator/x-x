@@ -211,10 +211,9 @@ export default function ClimateMap() {
         style={{ height: '100%', width: '100%', background: '#efe7d6' }}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; OpenStreetMap contributors'
-          subdomains="abc"
-          maxZoom={19}
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}"
+          attribution='&copy; Esri, US National Park Service'
+          maxZoom={8}
         />
 
         {markers.map((m) => (
