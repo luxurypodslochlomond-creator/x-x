@@ -211,9 +211,9 @@ export default function ClimateMap() {
         style={{ height: '100%', width: '100%', background: '#efe7d6' }}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; OpenStreetMap &copy; CARTO'
-          subdomains="abcd"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; OpenStreetMap contributors'
+          subdomains="abc"
           maxZoom={19}
         />
 
