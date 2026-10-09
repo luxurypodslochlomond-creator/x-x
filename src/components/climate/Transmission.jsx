@@ -54,7 +54,7 @@ export default function Transmission() {
                 {TRACK_TITLE}
               </h3>
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#efe7d6]/50 mt-1 truncate">
-                {awaiting ? 'Tap to enter · deep house visualizer' : ARTIST_NAME}
+                {awaiting ? 'Tap to enter · quantum visualizer' : ARTIST_NAME}
               </p>
 
               {/* Signal bar */}

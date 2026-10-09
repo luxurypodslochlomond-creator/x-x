@@ -302,8 +302,14 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
   };
 
   return (
-    <div className="fixed inset-0 z-[100] bg-[#141210] flex flex-col">
-      <canvas ref={canvasRef} className="flex-1 w-full" />
+    <div className="fixed inset-0 z-[100] bg-[#141210]">
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+
+      {/* Vignette — pulls you into the signal */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 35%, rgba(20,18,16,0.75) 100%)' }} />
+
+      {/* Edge frame — transmission screen, not a modal */}
+      <div className="absolute inset-0 pointer-events-none border-2 border-[#e2602a]/15" />
 
       {hasAudio && <audio ref={audioRef} src={audioUrl} loop preload="metadata" />}
 
@@ -329,7 +335,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
           <div className="flex-1 min-w-0">
             <h3 className="text-[14px] font-black font-mono uppercase text-[#efe7d6] truncate">{trackTitle}</h3>
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#efe7d6]/50 truncate">
-              {hasAudio ? artistName : 'Deep House \u00B7 Generative'}
+              {hasAudio ? artistName : 'Quantum \u00B7 Generative'}
             </p>
           </div>
           {hasAudio && (
