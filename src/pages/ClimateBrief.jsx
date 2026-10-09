@@ -226,13 +226,13 @@ DONE — live right now:
 - Groups: people on the same topic in the same area can form one. Email required, per your spec. The platform stores no messages.
 - Actions: cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each carries one contact link — the organiser is contacted directly. The platform sees none of it.
 - The interface speaks 60+ languages, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. You can also free-type any language on Earth and it translates live.
+- Entry text itself translates too — when a reader picks a language, the actual solution and crisis content (title, summary, details) translates live, with a "view original (English)" toggle so nothing is hidden. Accuracy is transparent.
 - No advertising. No fundraising. Stated on the page, enforced by design.
 - Open source, with a public covenant on how it resists capture.
 - No likes, no upvotes, no ranking, no algorithm. Every entry is equal because it is true. We call this x = x. There is no score field and no weight field in the database — the absence of a ranking algorithm is the feature.
 
 PLANNED — not yet built:
 
-- Entry text translation: the interface is translated now; the solution words themselves will be translated by our community over time, because accuracy matters more than speed.
 - 8 categories are empty and need their first entries: heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination.
 - A rough-region map — designed, not built. Privacy-respecting, no precise pins.
 - Linking ground-action photos to the record as visual proof — designed, not built.

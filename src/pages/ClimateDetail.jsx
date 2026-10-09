@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand, Globe } from 'lucide-react';
 import RelatedTriangle from '@/components/climate/RelatedTriangle';
+import { useEntryTranslation } from '@/hooks/useEntryTranslation';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -84,6 +85,11 @@ export default function ClimateDetail() {
     return () => { cancelled = true; };
   }, [type, id]);
 
+  // Live entry-text translation — Janine's "every tongue, nobody left behind"
+  // Hooks must run before any early return — call unconditionally; hook handles null record.
+  const [lang] = useState(() => { try { return localStorage.getItem('climate51_lang') || 'auto'; } catch { return 'auto'; } });
+  const tr = useEntryTranslation(record, lang);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#efe7d6] flex flex-col items-center justify-center">
@@ -128,7 +134,7 @@ export default function ClimateDetail() {
 
         <div className="p-5">
           <h1 className="text-2xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em', color: '#141210' }}>
-            {record.title}
+            {tr.field('title')}
           </h1>
 
           <div className="flex items-center gap-1.5 mt-3">
@@ -147,7 +153,15 @@ export default function ClimateDetail() {
             </div>
           )}
 
-          <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{record.description}</p>
+          {tr.translating && (
+            <p className="text-[10px] font-mono text-[#5a5246] mt-4 animate-pulse">Translating into your language…</p>
+          )}
+          {tr.isTranslated && (
+            <button onClick={() => tr.setShowOriginal(!tr.showOriginal)} className="mt-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-2 py-1 active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
+              {tr.showOriginal ? 'Show translation' : 'View original (English)'}
+            </button>
+          )}
+          <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{tr.field('description')}</p>
 
           {record.source_url && (
             <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
@@ -200,13 +214,21 @@ export default function ClimateDetail() {
           <Icon className="w-4 h-4" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
         <h1 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>
-          {record.title}
+          {tr.field('title')}
         </h1>
         <div className="flex items-center gap-2 text-[11px] font-mono text-[#5a5246] mt-3">
           <MapPin className="w-3.5 h-3.5" />
           <span>{record.country}{record.region_rough ? ` · ${record.region_rough}` : ''}</span>
         </div>
-        <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{record.details || record.summary}</p>
+        {tr.translating && (
+          <p className="text-[10px] font-mono text-[#5a5246] mt-4 animate-pulse">Translating into your language…</p>
+        )}
+        {tr.isTranslated && (
+          <button onClick={() => tr.setShowOriginal(!tr.showOriginal)} className="mt-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-2 py-1 active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
+            {tr.showOriginal ? 'Show translation' : 'View original (English)'}
+          </button>
+        )}
+        <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{tr.field('details') || tr.field('summary')}</p>
         <div className="mt-5 flex flex-wrap gap-2 text-[10px] font-mono font-bold uppercase">
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {record.scale || '—'}</span>
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Reviewed: ✓</span>
