@@ -18,14 +18,16 @@ const CATEGORY_LABELS = {
   extreme_weather: 'Extreme Weather', other: 'Other',
 };
 
-const makeIcon = (type) => {
+const makeIcon = (type, longitude = 0) => {
   const isCrisis = type === 'climate_crisis';
   const isAction = type === 'action';
+  const delay = ((longitude + 180) / 360) * 6;
+  const fadeIn = `animation:climate-marker-in 0.9s cubic-bezier(0.2,0.8,0.2,1) ${delay}s both;`;
 
   if (isCrisis) {
     return L.divIcon({
       className: 'climate-marker-crisis',
-      html: '<div style="position:relative;width:14px;height:14px;"><div style="position:absolute;inset:-6px;border:2px solid #b3261e;border-radius:50%;animation:climate-ping 2s ease-out infinite;"></div><div style="position:absolute;inset:0;width:14px;height:14px;background:#b3261e;border:2px solid #efe7d6;border-radius:50%;box-shadow:0 0 10px rgba(179,38,30,0.7);"></div></div>',
+      html: `<div style="${fadeIn}"><div style="position:relative;width:14px;height:14px;"><div style="position:absolute;inset:-6px;border:2px solid #b3261e;border-radius:50%;animation:climate-ping 2s ease-out infinite ${delay}s;"></div><div style="position:absolute;inset:0;width:14px;height:14px;background:#b3261e;border:2px solid #efe7d6;border-radius:50%;box-shadow:0 0 10px rgba(179,38,30,0.7);"></div></div></div>`,
       iconSize: [14, 14],
       iconAnchor: [7, 7],
       popupAnchor: [0, -8],
@@ -34,7 +36,7 @@ const makeIcon = (type) => {
   if (isAction) {
     return L.divIcon({
       className: 'climate-marker-action',
-      html: '<div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #efe7d6;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div>',
+      html: `<div style="${fadeIn}"><div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #efe7d6;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div></div>`,
       iconSize: [11, 11],
       iconAnchor: [5, 5],
       popupAnchor: [0, -6],
@@ -43,7 +45,7 @@ const makeIcon = (type) => {
   // solution
   return L.divIcon({
     className: 'climate-marker-solution',
-    html: '<div style="width:11px;height:11px;background:#1a1612;border:2px solid #efe7d6;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div>',
+    html: `<div style="${fadeIn}"><div style="width:11px;height:11px;background:#1a1612;border:2px solid #efe7d6;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div></div>`,
     iconSize: [11, 11],
     iconAnchor: [5, 5],
     popupAnchor: [0, -6],
@@ -137,8 +139,23 @@ export default function ClimateMap() {
           0% { transform: scale(0.8); opacity: 0.9; }
           100% { transform: scale(3); opacity: 0; }
         }
+        @keyframes climate-marker-in {
+          from { opacity: 0; transform: scale(0.15); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes climate-sweep {
+          0% { left: -3%; opacity: 0; }
+          8% { opacity: 1; }
+          92% { opacity: 1; }
+          100% { left: 103%; opacity: 0; }
+        }
+        @keyframes climate-breathe {
+          0%, 100% { filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7); }
+          50% { filter: sepia(0.32) contrast(0.9) brightness(1.12) hue-rotate(-6deg) saturate(0.75); }
+        }
         .climate-map .leaflet-tile-pane {
           filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7);
+          animation: climate-breathe 7s ease-in-out infinite;
         }
         .climate-map .leaflet-container {
           background: #efe7d6;
@@ -201,7 +218,7 @@ export default function ClimateMap() {
         />
 
         {markers.map((m) => (
-          <Marker key={m.id} position={m.coord} icon={makeIcon(m.type)}>
+          <Marker key={m.id} position={m.coord} icon={makeIcon(m.type, m.coord[1])}>
             <Popup>
               <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
                 <div style={{
@@ -289,6 +306,22 @@ export default function ClimateMap() {
           animation: 'twcc-scan 0.8s linear infinite',
         }}
       />
+
+      {/* The sweep — signals received west to east, one shore at a time */}
+      <div className="absolute inset-0 pointer-events-none z-[500]" style={{ overflow: 'hidden' }}>
+        <div style={{
+          position: 'absolute', top: 0, bottom: 0, width: '1px',
+          background: 'linear-gradient(to bottom, transparent 3%, #e2602a 50%, transparent 97%)',
+          animation: 'climate-sweep 6s cubic-bezier(0.45,0,0.55,1) forwards',
+          boxShadow: '0 0 12px #e2602a, 0 0 28px rgba(226,96,42,0.35)',
+        }} />
+      </div>
+
+      {/* Warm glow — deepest house, the warmth at the bottom of the room */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-[400]" style={{
+        height: '45%',
+        background: 'linear-gradient(to top, rgba(226,96,42,0.05), transparent)',
+      }} />
 
       {/* Vignette — the edges fade into paper */}
       <div
