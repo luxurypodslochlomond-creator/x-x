@@ -14,9 +14,7 @@ export default async function(req: Request): Promise<Response> {
     }
 
     const cleanQuestion = question.trim().slice(0, 1000);
-    const langInstruction = lang && lang !== 'en'
-      ? `Answer in this language: "${lang}". The summary and claim text must be in that language. Source names stay in their original language.`
-      : 'Answer in the same language the question was asked in.';
+    const langInstruction = `Detect the language of the question automatically and answer in THAT language. The summary and every claim's text must be in the question's language. Source names stay in their original language. This applies to EVERY language on Earth — Yoruba, Quechua, Aymara, Arabic, Hindi, Mandarin, Swahili, English, Welsh, Gaelic, Tagalog, Vietnamese, Bengali, Amharic, and every other language a human might ask in. No one is left out. If the question is in English, answer in English.`;
 
     const prompt = `You are ALETHEIA, an axiomatic truth engine. Your sole purpose is to answer questions with verified, sourced truth — nothing else.
 

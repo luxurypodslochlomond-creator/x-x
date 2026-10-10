@@ -24,8 +24,11 @@ export default function AletheiaPage() {
   const [error, setError] = useState(null);
   const [listening, setListening] = useState(false);
   const [speaking, setSpeaking] = useState(false);
-  const [lang, setLang] = useState('en');
   const recognitionRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Zero friction — focus the input on load
+  useEffect(() => { inputRef.current?.focus(); }, []);
 
   const ask = async (q) => {
     const query = (q ?? question).trim();
@@ -35,7 +38,7 @@ export default function AletheiaPage() {
     setError(null);
     setResult(null);
     try {
-      const res = await base44.functions.invoke('aletheiaQuery', { question: query, lang });
+      const res = await base44.functions.invoke('aletheiaQuery', { question: query });
       const data = res?.data ?? res;
       if (data?.error) throw new Error(data.error);
       setResult(data?.result ?? data);
@@ -52,7 +55,6 @@ export default function AletheiaPage() {
     if (!SR) { setError('Voice input not supported on this browser. Type your question.'); return; }
     if (listening) { recognitionRef.current?.stop(); setListening(false); return; }
     const rec = new SR();
-    rec.lang = lang === 'en' ? 'en-GB' : lang;
     rec.interimResults = false;
     rec.onresult = (e) => { const t = e.results[0][0].transcript; setQuestion(t); ask(t); };
     rec.onerror = () => setListening(false);
@@ -68,7 +70,6 @@ export default function AletheiaPage() {
     if (speaking) { window.speechSynthesis.cancel(); setSpeaking(false); return; }
     const text = result.summary + '. ' + (result.claims || []).map(c => c.text).join('. ');
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang === 'en' ? 'en-GB' : lang;
     u.onend = () => setSpeaking(false);
     setSpeaking(true);
     window.speechSynthesis.speak(u);
@@ -93,7 +94,7 @@ export default function AletheiaPage() {
         <p className="font-mono text-[10px] tracking-[0.3em] text-[#b3261e] mb-6">TRUTH ENGINE · EVERY CLAIM SOURCED</p>
 
         {/* The eye */}
-        <AletheiaEye state={eyeState} size={200} />
+        <AletheiaEye state={eyeState} size={240} />
 
         {/* Five principles line */}
         <p className="font-mono text-[9px] tracking-widest text-[#6b6258] text-center mt-4 mb-6">
@@ -103,11 +104,12 @@ export default function AletheiaPage() {
         {/* Question input */}
         <div className="w-full flex gap-2 mb-3">
           <input
+            ref={inputRef}
             type="text"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && ask()}
-            placeholder="Ask anything. Every answer sourced."
+            placeholder="Ask anything, in any language…"
             disabled={loading}
             className="flex-1 bg-[#efe7d6] border-2 border-[#1a1612]/20 focus:border-[#b3261e] px-4 py-3 text-sm outline-none font-mono disabled:opacity-50"
           />
@@ -128,25 +130,10 @@ export default function AletheiaPage() {
           </button>
         </div>
 
-        {/* Language picker */}
-        <div className="w-full flex items-center gap-2 mb-6">
+        {/* Zero friction — auto-detects every language on Earth */}
+        <div className="w-full flex items-center justify-center gap-2 mb-6">
           <Globe className="w-3 h-3 text-[#6b6258]" />
-          <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value)}
-            className="bg-transparent border-b border-[#1a1612]/20 text-xs font-mono text-[#6b6258] outline-none cursor-pointer"
-          >
-            <option value="en">English</option>
-            <option value="yo">Yoruba</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="pt">Português</option>
-            <option value="sw">Kiswahili</option>
-            <option value="ar">العربية</option>
-            <option value="hi">हिन्दी</option>
-            <option value="zh">中文</option>
-            <option value="qu">Quechua</option>
-          </select>
+          <p className="font-mono text-[9px] tracking-widest text-[#6b6258]">ANY LANGUAGE · AUTO-DETECTED · NO ONE LEFT OUT</p>
         </div>
 
         {/* Sample questions */}
