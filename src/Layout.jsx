@@ -65,7 +65,8 @@ const PUBLIC_PAGES = [
   'BuzzStopAbout', 'BuzzStopTerms', 'BuzzStopPrivacy',
   'BuzzTrip', 'BuzzTripAbout', 'UF51Overview',
   'NewCleanup', 'Earth51', 'CleanupFeed', 'Missions', 'Stoneymollan', 'StoneymollanMarketing',
-  'TogetherChangeClimate', 'ClimateMap', 'ClimatePlatform', 'UF51Token', 'UF51ThreadJournal', 'Franklin51'
+  'TogetherChangeClimate', 'ClimateMap', 'ClimatePlatform', 'UF51Token', 'UF51ThreadJournal', 'Franklin51',
+  'Aletheia'
 ];
 
 // OFFLINE-OK PAGES
@@ -483,6 +484,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 6. LEARN (understand the ecosystem)
     const learnNav = [
+      { title: "👁️ ALETHEIA — Truth Engine", url: createPageUrl("Aletheia"), icon: Eye, highlight: true, description: "Ask · every claim sourced · any language" },
       { title: "🔓 Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Open source · build on UF51 · free" },
       { title: "Extraction-Proof Covenant", url: "/ExtractionProofCovenant", icon: Shield, description: "Open source · impossible to exploit" },
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
