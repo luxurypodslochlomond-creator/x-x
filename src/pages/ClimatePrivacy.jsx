@@ -103,10 +103,94 @@ export default function ClimatePrivacy() {
           </div>
         </section>
 
+        {/* 7. THE LAWFUL BASIS */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            07 · The Lawful Basis
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4 space-y-2">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              Under UK GDPR, we process your contact email on the basis of your consent, given when you submit. You can withdraw it at any time by asking us to remove your submission. We record the country a reader reads from on the basis of our legitimate interest in understanding the global reach of the record, with no personal data attached.
+            </p>
+          </div>
+        </section>
+
+        {/* 8. HOW LONG WE KEEP IT */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            08 · How Long We Keep It
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              Your submission stays on the record for the life of the record, unless you ask us to remove it. Your contact email is kept until you withdraw consent. The AI advisory note is kept as part of the audit trail. Country-level reading data is aggregated and kept indefinitely, with no link to any person. We do not keep your data longer than needed.
+            </p>
+          </div>
+        </section>
+
+        {/* 9. WHERE YOUR DATA SITS */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            09 · Where Your Data Sits
+          </h2>
+          <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              The record runs on cloud infrastructure provided by Base44, which may process data outside the UK and EEA. Where data leaves the UK or EEA, it is protected by Standard Contractual Clauses and the provider's binding corporate rules, as required by UK GDPR. We hold the minimum data needed to run a public record, and we do not give it to advertisers, brokers, or third parties.
+            </p>
+          </div>
+        </section>
+
+        {/* 10. IF YOU'RE UNDER 13 */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            10 · If You're Under 13
+          </h2>
+          <div className="bg-[#efe7d6] border-l-4 border-l-[#1e3a2b] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              We do not knowingly collect submissions from children under 13 without a parent or guardian. If you are under 13, ask a grown-up to submit for you. If you believe a child has submitted without consent, write to us and we will remove it.
+            </p>
+          </div>
+        </section>
+
+        {/* 11. IF SOMETHING BREAKS */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            11 · If Something Breaks
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              If a data breach is likely to risk your rights and freedoms, we notify the UK Information Commissioner's Office within 72 hours and tell affected users without undue delay. We keep an internal log of any incident and what we did about it.
+            </p>
+          </div>
+        </section>
+
+        {/* 12. YOUR RIGHT TO COMPLAIN */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            12 · Your Right to Complain
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              You have the right to complain to the UK Information Commissioner's Office (ico.org.uk) if you believe we have mishandled your data. You do not have to complain to us first, though we hope you will, so we can fix it.
+            </p>
+          </div>
+        </section>
+
+        {/* 13. WHO IS RESPONSIBLE */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            13 · Who Is Responsible
+          </h2>
+          <div className="bg-[#efe7d6] border-l-4 border-l-[#b3261e] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              The data controller for this record is UF51, responsible for decisions about how your data is used. For any privacy question, write to hello@horizon-international.org. We do not yet have a formal Data Protection Officer; the person who reads that inbox is accountable for your request and will respond personally.
+            </p>
+          </div>
+        </section>
+
         {/* CONTACT */}
         <section className="mt-8 pt-6 border-t-2 border-[#1a1612]">
           <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed mb-3">
-            Questions about your data? Write to the address on the record. We read everything.
+            Questions about your data? Write to hello@horizon-international.org. We read everything.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link to={createPageUrl('ClimateTerms')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#1a1612] text-[#efe7d6] text-[10px] font-black font-mono uppercase border border-[#1a1612] hover:bg-[#b3261e] transition-colors">

@@ -5,9 +5,9 @@ import { Shield, Lock, Scale, Users, Globe, Heart, FileText, Check } from 'lucid
 const PILLARS = [
   {
     icon: Lock,
-    title: 'Local-First Architecture',
+    title: 'Minimum Data, Maximum Review',
     status: 'BUILT & LIVE',
-    body: "User data lives on the user's device — not our servers. Cases, letters, and personal details never leave the phone. An extractor who copies this code inherits nothing to sell: no user database, no accounts to hold hostage, no captive audience. The architecture makes betrayal structurally worthless.",
+    body: "We hold the smallest set of data a public record needs: your submission, a contact email so we can reach you, and the country a reader reads from. No IP addresses. No tracking cookies. No ad profiles. No accounts. An extractor who copies this code inherits a reviewed, minimal database, not a surveillance engine. The architecture makes mass extraction structurally uninteresting. (Our sister tool SORTED goes further: nothing leaves your device at all. Different tools, same covenant: hold the minimum, never sell.)",
   },
   {
     icon: Scale,

@@ -102,10 +102,94 @@ export default function ClimateTerms() {
           </div>
         </section>
 
+        {/* 7. THE AI ADVISORY NOTE */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            07 · The AI Advisory Note
+          </h2>
+          <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              When you submit, an AI reads the text and writes an advisory note for the human reviewer. It checks for spam, harmful content, and relevance to climate. It does not judge the science. It does not publish anything. It does not train on your submission. The note and your text are kept only until a human reviews them, then the note is kept as part of the audit trail and your text stays on the record unless you ask us to remove it.
+            </p>
+          </div>
+        </section>
+
+        {/* 8. HOW LONG WE KEEP IT */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            08 · How Long We Keep It
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4 space-y-2">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              Your submission stays on the record for as long as the record exists, unless you ask us to take it down. Your contact email is kept so we can reach you about your submission; it is removed when you ask. The country a reader reads from is kept as an aggregate number, with no link back to any person.
+            </p>
+          </div>
+        </section>
+
+        {/* 9. IF YOU'RE UNDER 13 */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            09 · If You're Under 13
+          </h2>
+          <div className="bg-[#efe7d6] border-l-4 border-l-[#1e3a2b] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              If you are under 13, ask a grown-up to submit for you. We do not knowingly collect submissions from children under 13 without a parent or guardian. If you believe a child has submitted without consent, write to us and we will remove it.
+            </p>
+          </div>
+        </section>
+
+        {/* 10. TAKING SOMETHING DOWN */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            10 · Taking Something Down
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              If you see content that is yours, false, stolen, or harmful, write to hello@horizon-international.org with the entry title and the reason. A human reviews every takedown request within seven days. If the claim is valid, the entry is removed or corrected. This is our takedown process.
+            </p>
+          </div>
+        </section>
+
+        {/* 11. WHEN THINGS GO WRONG */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            11 · When Things Go Wrong
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              This is a free, community-run public record. We do our best, but we are not liable for indirect or consequential losses arising from the use of the record. Our total liability for any claim is limited to the amount you paid us, which for a free record is zero. Nothing here limits liability for death or personal injury caused by our negligence, or for fraud.
+            </p>
+          </div>
+        </section>
+
+        {/* 12. THE LAW THAT APPLIES */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            12 · The Law That Applies
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              These terms are governed by the laws of Scotland. Any dispute is resolved in the Scottish courts. If you are outside the UK, you may still submit and read freely; the governing law is there for the rare case a dispute needs a court.
+            </p>
+          </div>
+        </section>
+
+        {/* 13. WHEN THESE CHANGE */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            13 · When These Change
+          </h2>
+          <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
+            <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
+              These terms took effect on 19 October 2026. If we change them, we update the date at the top of this page and say what changed. If a change affects what we do with your submission, we tell you before it takes effect.
+            </p>
+          </div>
+        </section>
+
         {/* CONTACT */}
         <section className="mt-8 pt-6 border-t-2 border-[#1a1612]">
           <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed mb-3">
-            Questions about these terms? Write to the address on the record. We read everything.
+            Questions about these terms? Write to hello@horizon-international.org. We read everything.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link to={createPageUrl('ClimatePrivacy')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#1a1612] text-[#efe7d6] text-[10px] font-black font-mono uppercase border border-[#1a1612] hover:bg-[#b3261e] transition-colors">
