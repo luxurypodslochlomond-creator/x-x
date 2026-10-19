@@ -745,6 +745,9 @@ export default function TogetherChangeClimate() {
           Platform built by Brian Hughes ·{' '}
           <Link to={createPageUrl('Welcome')} className="text-[#5a5246] hover:text-[#b3261e] transition-colors">UF51</Link>
         </p>
+        <p className="px-4 pb-8 text-center text-[8px] font-mono text-[#5a5246]/40 bg-[#efe7d6]">
+          Signal palette after Brian Beadie — Glasgow
+        </p>
       </div>
 
       {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}
