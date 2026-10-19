@@ -76,6 +76,7 @@ export default async function(req) {
     });
 
     const byCountry = await base44.asServiceRole.entities.ClimateView.aggregate({
+      query: { entry_type: { $ne: 'region_self_id' } },
       groupBy: 'country',
       count: true,
       sort: '-count',
@@ -88,6 +89,7 @@ export default async function(req) {
 
     // Self-identified regions — nations that don't have their own ISO code
     const byRegion = await base44.asServiceRole.entities.ClimateView.aggregate({
+      query: { entry_type: { $ne: 'region_self_id' } },
       groupBy: 'reader_region',
       count: true,
       sort: '-count',
