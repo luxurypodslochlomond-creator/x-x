@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
@@ -161,6 +161,8 @@ export default function TogetherChangeClimate() {
   const [copied, setCopied] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
+  const contentRef = useRef(null);
+  const firstRender = useRef(true);
   const { categories } = useClimateCategories();
 
   useEffect(() => {
@@ -244,6 +246,11 @@ export default function TogetherChangeClimate() {
     return () => { cancelled = true; };
   }, [lang, autoLang]);
 
+  useEffect(() => {
+    if (firstRender.current) { firstRender.current = false; return; }
+    contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [selectedType]);
+
   const handleLang = (code) => {
     setLang(code);
     try { localStorage.setItem('climate51_lang', code); } catch { /* ignore */ }
@@ -278,6 +285,14 @@ export default function TogetherChangeClimate() {
       return matchesQ && matchesCat;
     });
   }, [actions, query, selectedCategory]);
+
+  const filteredGroups = useMemo(() => {
+    return groups.filter(g => {
+      const q = (g.name + ' ' + (g.topic||'') + ' ' + (g.region||'') + ' ' + (g.description||'')).toLowerCase();
+      const matchesQ = !query || q.includes(query.toLowerCase());
+      return matchesQ;
+    });
+  }, [groups, query]);
 
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/40" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
@@ -537,7 +552,7 @@ export default function TogetherChangeClimate() {
       )}
 
       {/* ── CONTENT ── */}
-      <div className="bg-[#efe7d6]">
+      <div ref={contentRef} className="bg-[#efe7d6]">
         {loading ? (
           <div className="flex flex-col items-center py-20">
             <div className="w-10 h-10 rounded-full border-2 border-[#141210]/20 border-t-[#e2602a] animate-spin" />
@@ -587,17 +602,17 @@ export default function TogetherChangeClimate() {
         )}
 
         {/* ── GROUPS — Janine's spec: people working on the same thing in an area can share ideas directly ── */}
-        {((selectedType === 'all' && groups.length > 0) || selectedType === 'groups') && (
+        {((selectedType === 'all' && filteredGroups.length > 0) || selectedType === 'groups') && (
           <section className="px-4 py-5 border-b-2 border-[#141210]">
             <div className="flex items-center gap-2 mb-1">
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.groups}</h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
-              <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{groups.length}</span>
+              <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{filteredGroups.length}</span>
             </div>
             <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.groups_sub}</p>
-            {groups.length > 0 ? (
+            {filteredGroups.length > 0 ? (
               <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
-                {groups.map(g => (
+                {filteredGroups.map(g => (
                   <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
                     <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] leading-tight">{g.name}</h4>
                     {g.topic && (
