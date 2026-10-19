@@ -24,6 +24,18 @@ const FALLBACK_CATEGORIES = [
   { id: 'drought', label: 'Drought', code: 'DR' },
   { id: 'flooding', label: 'Flooding', code: 'FL' },
   { id: 'extreme_weather', label: 'Extreme Weather', code: 'EW' },
+  { id: 'sanitation_hygiene', label: 'Sanitation & Hygiene', code: 'SH' },
+  { id: 'air_quality', label: 'Air Quality', code: 'AQ' },
+  { id: 'biodiversity', label: 'Biodiversity', code: 'BD' },
+  { id: 'coral_reefs', label: 'Coral Reefs', code: 'CR' },
+  { id: 'kelp_forests', label: 'Kelp Forests', code: 'KF' },
+  { id: 'fisheries', label: 'Fisheries', code: 'FI' },
+  { id: 'wetlands', label: 'Wetlands', code: 'WL' },
+  { id: 'peatlands', label: 'Peatlands', code: 'PT' },
+  { id: 'soil_health', label: 'Soil Health', code: 'SO' },
+  { id: 'food_security', label: 'Food Security', code: 'FS' },
+  { id: 'agroforestry', label: 'Agroforestry', code: 'AF' },
+  { id: 'desertification', label: 'Desertification', code: 'DE' },
   { id: 'other', label: 'Other', code: 'OT' },
 ];
 

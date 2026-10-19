@@ -682,6 +682,36 @@ export default function TogetherChangeClimate() {
               <p className="text-[11px] font-mono text-[#141210] leading-relaxed">In England, the Unite union has been warning about heat exhaustion, heatstroke, and dehydration since phases of intense heat began in May. Heat is a growing climate crisis for workers and communities worldwide.</p>
               <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: Guardian, 081626</p>
             </div>
+            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
+              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Climate Adaptation</h4>
+              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">The process of adjustment to actual or expected climate and its effects, to moderate harm or exploit beneficial opportunities.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
+            </div>
+            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
+              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Climate Mitigation</h4>
+              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A human intervention to reduce the sources of greenhouse gases or enhance the sinks that remove them from the atmosphere.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
+            </div>
+            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
+              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Blue Carbon</h4>
+              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">Carbon captured by coastal and marine ecosystems, including mangroves, seagrasses, salt marshes, and kelp forests.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: NOAA</p>
+            </div>
+            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
+              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Biodiversity</h4>
+              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">The variability among living organisms from all sources, including terrestrial, marine, and other aquatic ecosystems, and the ecological complexes of which they are part.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: UN Convention on Biological Diversity (1992)</p>
+            </div>
+            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
+              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Desertification</h4>
+              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">Land degradation in arid, semi-arid, and dry sub-humid areas resulting from various factors, including climatic variations and human activities.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: UN Convention to Combat Desertification</p>
+            </div>
+            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
+              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Food Security</h4>
+              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">When all people, at all times, have physical and economic access to sufficient, safe, and nutritious food that meets their dietary needs for an active and healthy life.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: FAO, World Food Summit (1996)</p>
+            </div>
           </div>
         </section>
 
