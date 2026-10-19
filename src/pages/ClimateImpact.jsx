@@ -5,6 +5,7 @@ import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
 import ClimateImpactMap from '@/components/climate/ClimateImpactMap';
+import SignalBeacon from '@/components/climate/SignalBeacon';
 import WorldReadingFeed from '@/components/climate/WorldReadingFeed';
 import WorldActionFeed from '@/components/climate/WorldActionFeed';
 
@@ -16,14 +17,6 @@ function countryName(code) {
   } catch {
     return code;
   }
-}
-
-// Converts an ISO 2-letter country code to a flag emoji (regional indicator symbols).
-function countryCodeToFlag(code) {
-  if (!code || code.length !== 2) return '';
-  const upper = code.toUpperCase();
-  if (!/^[A-Z]{2}$/.test(upper)) return '';
-  return String.fromCodePoint(...upper.split('').map(c => 0x1F1E6 + (c.charCodeAt(0) - 65)));
 }
 
 // Known ISO country names (lowercased) — so we can redirect readers who type a real country
@@ -273,8 +266,8 @@ export default function ClimateImpact() {
                 onClick={() => navigate(createPageUrl(`ClimateReachPlace/nation/${encodeURIComponent(r.region)}`))}
                 className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#b3261e]/20 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
-                <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/10 border border-[#b3261e]/30">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#b3261e]" style={{ animation: 'impact-breathe 2s ease-in-out infinite' }} />
+                <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/5 border border-[#b3261e]/20">
+                  <SignalBeacon size={22} />
                 </span>
                 <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{r.region}</span>
                 <span className="text-[12px] font-black font-mono text-[#b3261e]">{r.views.toLocaleString()}</span>
@@ -307,7 +300,9 @@ export default function ClimateImpact() {
                 onClick={() => navigate(createPageUrl(`ClimateReachPlace/country/${c.country}`))}
                 className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
-                <span className="w-7 h-7 flex items-center justify-center bg-[#f7f1e5] border border-[#141210]/15 text-[15px] leading-none">{countryCodeToFlag(c.country) || c.country}</span>
+                <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/5 border border-[#b3261e]/20">
+                  <SignalBeacon size={22} />
+                </span>
                 <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{countryName(c.country)}</span>
                 <span className="text-[12px] font-black font-mono text-[#e2602a]">{c.views.toLocaleString()}</span>
                 <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">
