@@ -39,6 +39,7 @@ export default function ClimateSubmitForm({ onClose }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [honeypot, setHoneypot] = useState(''); // hidden bot trap — humans never see this
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
@@ -46,9 +47,29 @@ export default function ClimateSubmitForm({ onClose }) {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
+  const RATE_LIMIT_KEY = 'climate_submit_times';
+  const MAX_PER_HOUR = 3;
+
+  const checkRateLimit = () => {
+    try {
+      const now = Date.now();
+      const times = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '[]')
+        .filter(t => now - t < 3600000); // keep only last hour
+      if (times.length >= MAX_PER_HOUR) return false;
+      localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify([...times, now]));
+      return true;
+    } catch { return true; } // if localStorage fails, don't block real users
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Honeypot — if filled, a bot did it. Silently pretend success.
+    if (honeypot) {
+      setSubmitted(true);
+      return;
+    }
 
     if (!form.title.trim() || !form.summary.trim() || !form.submitter_name.trim() || !form.submitter_email.trim()) {
       setError('Title, summary, your name, and your email are all needed.');
@@ -56,6 +77,10 @@ export default function ClimateSubmitForm({ onClose }) {
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.submitter_email.trim())) {
       setError('Please give a valid email.');
+      return;
+    }
+    if (!checkRateLimit()) {
+      setError('Too many submissions this hour. Please wait a bit and try again.');
       return;
     }
 
@@ -90,6 +115,18 @@ export default function ClimateSubmitForm({ onClose }) {
       </div>
 
       <form onSubmit={handleSubmit} className="p-5 max-w-[500px] mx-auto">
+        {/* Honeypot — hidden from humans, bots auto-fill it */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+          <label>Website (leave empty)</label>
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={e => setHoneypot(e.target.value)}
+            name="website"
+          />
+        </div>
         {/* Type toggle */}
         <div className="flex gap-2 mb-5">
           <button

@@ -11,6 +11,12 @@ export default async function(req: Request): Promise<Response> {
       return Response.json({ error: 'Missing type or data' }, { status: 400 });
     }
 
+    // Honeypot — if a bot filled the hidden field, silently pretend success.
+    // No record created. Bot doesn't know it was caught.
+    if (data.website) {
+      return Response.json({ success: true, id: 'rejected', flagged: false, ai_assessment: 'honeypot' });
+    }
+
     // Build content for AI assessment
     const contentParts = [data.title, data.summary, data.details, data.description, data.content].filter(Boolean);
     const fullContent = contentParts.join('\n\n');
