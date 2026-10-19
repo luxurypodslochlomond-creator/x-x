@@ -9,6 +9,7 @@ import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import SignalCode from '@/components/climate/SignalCode';
+import SignalBeacon from '@/components/climate/SignalBeacon';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -114,36 +115,67 @@ const T = {
 
 
  function SolutionCard({ item }) {
-   const isSolution = item.entry_type === 'solution';
-   return (
-     <Link
-       to={`/ClimateDetail/${item.entry_type}/${item.id}`}
-       className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
-         isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
-       } min-h-[110px] flex items-end active:scale-95 transition-transform duration-100`}
-       >
-       <img
-         src={item.image_url || CATEGORY_IMAGE(item.category)}
-         alt=""
-         loading="lazy"
-         decoding="async"
-         className="absolute inset-0 w-full h-full object-cover"
-         style={{ filter: 'grayscale(1) contrast(1.25)' }}
-         onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
-       />
-       {/* Gradient scrim — guarantees title readability on any image */}
-       <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
-       <div className="relative p-2.5 w-full">
-         <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
-           {isSolution ? 'Solution' : 'Crisis'}
-         </div>
-         <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
-           {item.title}
-         </h3>
-       </div>
-       </Link>
+     const isSolution = item.entry_type === 'solution';
+     const hasImage = !!item.image_url;
+
+     // ── Text-card fallback — for Janine's archive entries with rich text but no image.
+     // Paper background, signal beacon, prominent title. Looks intentional, not broken. ──
+     if (!hasImage) {
+       return (
+         <Link
+           to={`/ClimateDetail/${item.entry_type}/${item.id}`}
+           className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${
+             isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
+           } min-h-[110px] flex flex-col justify-between active:scale-95 transition-transform duration-100 p-2.5`}
+         >
+           <div className="flex items-center justify-between">
+             <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#e2602a]'}`}>
+               {isSolution ? 'Solution' : 'Crisis'}
+             </div>
+             <SignalBeacon size={14} color={isSolution ? '#1e3a2b' : '#e2602a'} />
+           </div>
+           <h3 className="text-[12px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-4">
+             {item.title}
+           </h3>
+           {item.region_rough && (
+             <div className="flex items-center gap-1 text-[#5a5246]">
+               <MapPin className="w-2.5 h-2.5" />
+               <span className="text-[8px] font-black font-mono uppercase tracking-widest">{item.region_rough}</span>
+             </div>
+           )}
+         </Link>
        );
-       }
+     }
+
+     return (
+       <Link
+         to={`/ClimateDetail/${item.entry_type}/${item.id}`}
+         className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
+           isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
+         } min-h-[110px] flex items-end active:scale-95 transition-transform duration-100`}
+       >
+         <img
+           src={item.image_url}
+           alt=""
+           loading="lazy"
+           decoding="async"
+           className="absolute inset-0 w-full h-full object-cover"
+           style={{ filter: 'grayscale(1) contrast(1.25)' }}
+           onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
+         />
+         {/* Gradient scrim — guarantees title readability on any image */}
+         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
+         <div className="relative p-2.5 w-full">
+           <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
+             {isSolution ? 'Solution' : 'Crisis'}
+           </div>
+           <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
+             {item.title}
+           </h3>
+         </div>
+         </Link>
+         );
+         }
 
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
