@@ -600,11 +600,19 @@ export default function TogetherChangeClimate() {
                 {groups.map(g => (
                   <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
                     <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] leading-tight">{g.name}</h4>
-                    <div className="flex items-center gap-1.5 text-[#1e3a2b] mt-1">
+                    {g.topic && (
+                      <span className="inline-block text-[8px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
+                    )}
+                    <div className="flex items-center gap-1.5 text-[#1e3a2b] mt-1.5">
                       <MapPin className="w-3 h-3" />
                       <span className="text-[9px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
                     <p className="text-[11px] font-mono text-[#141210] leading-relaxed mt-2">{g.description}</p>
+                    {g.created_by && (
+                      <a href={`mailto:${g.created_by}`} className="inline-flex items-center gap-1 mt-2.5 text-[10px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
+                        Contact organizer →
+                      </a>
+                    )}
                   </div>
                 ))}
               </div>
