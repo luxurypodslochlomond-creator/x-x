@@ -43,13 +43,25 @@ export default function ClimateImpact() {
     return () => { cancelled = true; clearInterval(interval); };
   }, []);
 
-  const saveRegion = () => {
+  const saveRegion = async () => {
     const trimmed = readerRegion.trim();
     try {
       if (trimmed) {
         localStorage.setItem('climate51_reader_region', trimmed);
         setSavedRegion(true);
         setTimeout(() => setSavedRegion(false), 2000);
+        // Register with the server immediately so the nation shows up right away
+        try {
+          await base44.functions.invoke('climateTrackView', {
+            entry_id: 'region_self_id',
+            entry_type: 'region_self_id',
+            reader_region: trimmed,
+          });
+          // Refresh stats so the new nation appears
+          base44.functions.invoke('climateImpactStats', {})
+            .then((res) => { const data = res?.data || res; if (data) setStats(data); })
+            .catch(() => {});
+        } catch {}
       } else {
         localStorage.removeItem('climate51_reader_region');
       }

@@ -8,7 +8,10 @@ export default async function(req) {
   try {
     const base44 = createClientFromRequest(req);
 
-    const totalViews = await base44.asServiceRole.entities.ClimateView.count({});
+    // Count only real entry reads — exclude region self-identifications
+    const totalViews = await base44.asServiceRole.entities.ClimateView.count({
+      entry_type: { $ne: 'region_self_id' }
+    });
 
     const byCountry = await base44.asServiceRole.entities.ClimateView.aggregate({
       groupBy: 'country',
