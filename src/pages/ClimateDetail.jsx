@@ -8,6 +8,7 @@ import ClimateCommentSection from '@/components/climate/ClimateCommentSection';
 import { useEntryTranslation } from '@/hooks/useEntryTranslation';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import SignalCode from '@/components/climate/SignalCode';
+import SignalBeacon from '@/components/climate/SignalBeacon';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -198,19 +199,31 @@ export default function ClimateDetail() {
   const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
-      {/* Hero image — full-bleed, sticky back button overlaid */}
-      <div className="relative h-64 bg-[#141210]">
-        <img src={record.image_url || CATEGORY_IMAGE(record.category)} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
-        <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-        <div className="absolute bottom-4 left-5 right-5">
+      {/* Hero — photo when available, paper-and-beacon when not (matches the text-card) */}
+      {record.image_url ? (
+        <div className="relative h-64 bg-[#141210]">
+          <img src={record.image_url} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
+          <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="absolute bottom-4 left-5 right-5">
+            <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'}`}>
+              {isSolution ? 'Solution' : 'Climate Crisis'}
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div className="relative min-h-[180px] bg-[#f7f1e5] border-b-2 border-[#141210] flex flex-col items-center justify-center gap-3 px-5 py-8">
+          <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#e2602a'} />
           <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'}`}>
             {isSolution ? 'Solution' : 'Climate Crisis'}
           </span>
         </div>
-      </div>
+      )}
 
       <div className="p-5">
         <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
@@ -240,6 +253,14 @@ export default function ClimateDetail() {
           <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
             View source <ArrowRight className="w-4 h-4" />
           </a>
+        )}
+
+        {/* Attribution — Janine's spec: credit the image source and the contributor */}
+        {(record.image_credit || record.submitter_name) && (
+          <div className="mt-5 pt-4 border-t border-[#141210]/15 text-[10px] font-mono text-[#5a5246] leading-relaxed">
+            {record.image_credit && <p>Image: {record.image_credit}</p>}
+            {record.submitter_name && <p>Submitted by {record.submitter_name}</p>}
+          </div>
         )}
 
         <RelatedTriangle
