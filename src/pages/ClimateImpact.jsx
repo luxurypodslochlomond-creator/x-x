@@ -7,6 +7,7 @@ import { ArrowLeft, Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
 import SignalCode from '@/components/climate/SignalCode';
 import ClimateImpactMap from '@/components/climate/ClimateImpactMap';
 import WorldReadingFeed from '@/components/climate/WorldReadingFeed';
+import WorldActionFeed from '@/components/climate/WorldActionFeed';
 
 // Converts an ISO 2-letter country code to a display name.
 function countryName(code) {
@@ -168,6 +169,9 @@ export default function ClimateImpact() {
 
       {/* The world is reading — which stories are reaching the most nations */}
       <WorldReadingFeed stories={stats?.top_stories || []} />
+
+      {/* The world is acting — what's happening next on the ground */}
+      <WorldActionFeed actions={stats?.upcoming_actions || []} />
 
       {/* Self-identification — "Where are you reading from?" */}
       <div className="px-5 py-6 bg-[#f7f1e5] border-b border-[#141210]/10">

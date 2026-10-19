@@ -171,6 +171,25 @@ export default async function(req) {
       .sort((a, b) => b.countries - a.countries || b.readers - a.readers)
       .slice(0, 10);
 
+    // Upcoming actions — the world is acting, not just reading.
+    // Published actions with a future date, soonest-first. No popularity ranking.
+    // This is the "doing" signal: a story landed here, and here's what's happening next.
+    const nowIso = new Date().toISOString();
+    const upcomingActionsPage = await base44.asServiceRole.entities.ClimateAction.filter(
+      { status: 'published', date: { $gte: nowIso } },
+      { sort: 'date', limit: 12, fields: ['title', 'action_type', 'category', 'country', 'region_rough', 'date'] }
+    ).catch(() => ({ items: [] }));
+
+    const upcoming_actions = (upcomingActionsPage.items || []).map((a) => ({
+      id: a.id,
+      title: a.title,
+      action_type: a.action_type,
+      category: a.category,
+      country: a.country,
+      region_rough: a.region_rough,
+      date: a.date,
+    }));
+
     return Response.json({
       total_views: totalViews,
       unique_countries: countries.length,
@@ -178,6 +197,7 @@ export default async function(req) {
       regions,
       published_entries: publishedSolutions + publishedActions,
       top_stories: topStories,
+      upcoming_actions: upcoming_actions,
     });
   } catch (error) {
     console.error('climateImpactStats error:', error.message);
@@ -188,6 +208,7 @@ export default async function(req) {
       regions: [],
       published_entries: 0,
       top_stories: [],
+      upcoming_actions: [],
     }, { status: 200 });
   }
 }
