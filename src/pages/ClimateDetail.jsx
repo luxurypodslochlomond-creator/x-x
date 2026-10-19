@@ -80,8 +80,8 @@ export default function ClimateDetail() {
       .catch(() => { if (!cancelled) setRecord(null); })
       .finally(() => { if (!cancelled) setLoading(false); });
     // Load siblings for RelatedTriangle
-    base44.entities.ClimateSolution.list().then(r => { if (!cancelled) setAllItems(r || []); }).catch(() => {});
-    base44.entities.ClimateAction.list().then(r => { if (!cancelled) setAllActions(r || []); }).catch(() => {});
+    base44.entities.ClimateSolution.list().then(r => { if (!cancelled) setAllItems(Array.isArray(r) ? r : (r?.items || [])); }).catch(() => {});
+    base44.entities.ClimateAction.list().then(r => { if (!cancelled) setAllActions(Array.isArray(r) ? r : (r?.items || [])); }).catch(() => {});
     return () => { cancelled = true; };
   }, [type, id]);
 

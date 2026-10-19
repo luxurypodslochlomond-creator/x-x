@@ -203,9 +203,10 @@ export default function TogetherChangeClimate() {
       base44.entities.ClimateAction.list(),
     ]).then(([s, g, a]) => {
       const cache = getCache();
-      const sols = s.status === 'fulfilled' ? s.value : (cache?.solutions || []);
-      const grps = g.status === 'fulfilled' ? g.value : (cache?.groups || []);
-      const acts = a.status === 'fulfilled' ? a.value : (cache?.actions || []);
+      const toArray = (v) => Array.isArray(v) ? v : (v?.items || []);
+      const sols = s.status === 'fulfilled' ? toArray(s.value) : (cache?.solutions || []);
+      const grps = g.status === 'fulfilled' ? toArray(g.value) : (cache?.groups || []);
+      const acts = a.status === 'fulfilled' ? toArray(a.value) : (cache?.actions || []);
       setItems(sols); setGroups(grps); setActions(acts); setLoading(false);
       if (s.status === 'fulfilled' || g.status === 'fulfilled' || a.status === 'fulfilled') saveCache(sols, grps, acts);
     });
