@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { X, Send, Check, Leaf, AlertTriangle } from 'lucide-react';
+import { X, Send, Check, Leaf, AlertTriangle, Sprout } from 'lucide-react';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 
 function SuccessScreen({ entryType, onClose }) {
@@ -16,7 +16,7 @@ function SuccessScreen({ entryType, onClose }) {
         Thank you
       </h2>
       <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[320px] mb-2">
-        Your {entryType === 'solution' ? 'solution' : 'climate crisis report'} is under review.
+        Your {entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate crisis report' : 'action'} is under review.
       </p>
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
         Every entry is read by a person before it appears on the record. This keeps the platform honest — a public service, not a firehose.
@@ -35,6 +35,8 @@ export default function ClimateSubmitForm({ onClose }) {
     title: '', summary: '', details: '', category: 'agriculture',
     country: '', region_rough: '', image_url: '', source_name: '', source_url: '',
     submitter_name: '', submitter_email: '',
+    // Action-specific fields
+    action_type: 'cleanup', date: '', contact_link: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -71,9 +73,17 @@ export default function ClimateSubmitForm({ onClose }) {
       return;
     }
 
-    if (!form.title.trim() || !form.summary.trim() || !form.submitter_name.trim() || !form.submitter_email.trim()) {
-      setError('Title, summary, your name, and your email are all needed.');
-      return;
+    const isAction = entryType === 'action';
+    if (isAction) {
+      if (!form.title.trim() || !form.description?.trim() || !form.contact_link.trim() || !form.submitter_name.trim() || !form.submitter_email.trim()) {
+        setError("Title, what's happening, a contact link, your name, and your email are all needed.");
+        return;
+      }
+    } else {
+      if (!form.title.trim() || !form.summary.trim() || !form.submitter_name.trim() || !form.submitter_email.trim()) {
+        setError('Title, summary, your name, and your email are all needed.');
+        return;
+      }
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.submitter_email.trim())) {
       setError('Please give a valid email.');
@@ -132,7 +142,7 @@ export default function ClimateSubmitForm({ onClose }) {
           <button
             type="button"
             onClick={() => setEntryType('solution')}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-3.5 text-[11px] font-black font-mono uppercase border-2 transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
               entryType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
             }`}
           >
@@ -141,36 +151,87 @@ export default function ClimateSubmitForm({ onClose }) {
           <button
             type="button"
             onClick={() => setEntryType('climate_crisis')}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-3.5 text-[11px] font-black font-mono uppercase border-2 transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
               entryType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
             }`}
           >
             <AlertTriangle className="w-4 h-4" /> Crisis
+          </button>
+          <button
+            type="button"
+            onClick={() => setEntryType('action')}
+            className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
+              entryType === 'action' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
+            }`}
+          >
+            <Sprout className="w-4 h-4" /> Action
           </button>
         </div>
 
         <p className="text-[10px] font-mono text-[#5a5246] mb-4 leading-relaxed">
           {entryType === 'solution'
             ? 'A positive action that others can replicate — at any scale, from individuals to whole countries.'
-            : 'A climate emergency that the world needs to be alerted to.'}
+            : entryType === 'climate_crisis'
+            ? 'A climate emergency that the world needs to be alerted to.'
+            : 'Something happening on the ground — a cleanup, planting, meeting, or policy push. One contact link. The platform never sees the messages.'}
         </p>
 
         {/* Fields */}
         <div className="space-y-3">
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Title *</label>
-            <input value={form.title} onChange={e => set('title', e.target.value)} placeholder="e.g. Mangrove restoration, Cardigan Bay" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <input value={form.title} onChange={e => set('title', e.target.value)} placeholder={entryType === 'action' ? "e.g. Mangrove planting day, Cardigan Bay" : "e.g. Mangrove restoration, Cardigan Bay"} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
           </div>
 
-          <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Summary *</label>
-            <textarea value={form.summary} onChange={e => set('summary', e.target.value)} placeholder="One or two sentences — what and why" rows={2} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
-          </div>
+          {entryType === 'action' ? (
+            <>
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Action type *</label>
+                <select value={form.action_type} onChange={e => set('action_type', e.target.value)} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] outline-none focus:border-[#e2602a]">
+                  <option value="cleanup">Cleanup</option>
+                  <option value="planting">Planting</option>
+                  <option value="meeting">Meeting</option>
+                  <option value="policy_submission">Policy submission</option>
+                  <option value="workshop">Workshop</option>
+                  <option value="monitoring">Monitoring</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
 
-          <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">More details</label>
-            <textarea value={form.details} onChange={e => set('details', e.target.value)} placeholder="Full description — how it works, evidence, who's involved" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
-          </div>
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">When *</label>
+                <input type="datetime-local" value={form.date} onChange={e => set('date', e.target.value)} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] outline-none focus:border-[#e2602a]" />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What's happening *</label>
+                <textarea value={form.description || ''} onChange={e => set('description', e.target.value)} placeholder="What, why, and how to join — plain language" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">One contact link *</label>
+                <input value={form.contact_link} onChange={e => set('contact_link', e.target.value)} placeholder="Email, WhatsApp, Signal, or signup URL" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <p className="text-[9px] font-mono text-[#5a5246] mt-1 leading-relaxed">The platform never sees the messages. One link only — people contact you directly.</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Summary *</label>
+                <textarea value={form.summary} onChange={e => set('summary', e.target.value)} placeholder="One or two sentences — what and why" rows={2} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">More details</label>
+                <textarea value={form.details} onChange={e => set('details', e.target.value)} placeholder="Full description — how it works, evidence, who's involved" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Image URL (copyright-free)</label>
+                <input value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+              </div>
+            </>
+          )}
 
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Category *</label>
@@ -188,11 +249,6 @@ export default function ClimateSubmitForm({ onClose }) {
               <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Region (rough)</label>
               <input value={form.region_rough} onChange={e => set('region_rough', e.target.value)} placeholder="e.g. West coast" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             </div>
-          </div>
-
-          <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Image URL (copyright-free)</label>
-            <input value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
           </div>
 
           <div>

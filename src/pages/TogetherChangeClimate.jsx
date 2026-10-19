@@ -485,7 +485,7 @@ export default function TogetherChangeClimate() {
           onClick={() => setShowSubmit(true)}
           className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
         >
-          <Plus className="w-4 h-4" /> Submit a solution or crisis
+          <Plus className="w-4 h-4" /> Submit a solution, crisis, or action
         </button>
         <Link
           to={createPageUrl("ClimateMap")}
