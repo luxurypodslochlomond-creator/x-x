@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Globe } from 'lucide-react';
 
@@ -23,12 +25,13 @@ export default function ClimateImpactBar() {
   if (!stats || stats.total_views === 0) return null;
 
   return (
-    <div className="px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]/20 flex items-center justify-center gap-2">
+    <Link to={createPageUrl('ClimateImpact')} className="block px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]/20 flex items-center justify-center gap-2 active:bg-[#e2602a]/10 transition-colors">
       <Globe className="w-3.5 h-3.5 text-[#e2602a] flex-shrink-0" />
       <p className="text-[10px] font-mono text-[#efe7d6]/80 leading-tight text-center">
         <span className="font-black text-[#e2602a]">{stats.total_views}</span> {stats.total_views === 1 ? 'person has' : 'people have'} read the record in{' '}
         <span className="font-black text-[#e2602a]">{stats.unique_countries}</span> {stats.unique_countries === 1 ? 'country' : 'countries'}
+        <span className="text-[#e2602a]/60 ml-1">→</span>
       </p>
-    </div>
+    </Link>
   );
 }
