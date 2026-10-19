@@ -35,35 +35,7 @@ const CATEGORIES = [
   { id: 'other', label: 'Other', icon: Globe },
 ];
 
-// ── Copyright-free image pool (Unsplash, valid stable URLs) ──
-const IMAGES = {
-  mangroves: 'https://images.unsplash.com/photo-1584473457406-6240489418ed?w=900&q=70',
-  renewable: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=900&q=70',
-  seagrass: 'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=900&q=70',
-  agriculture: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=70',
-  plastic: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=70',
-  global: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=70',
-  heat: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=900&q=70',
-  drought: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=900&q=70',
-  flooding: 'https://images.unsplash.com/photo-1547683905-f686c993aae5?w=900&q=70',
-  oceans: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=70',
-  forest: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=70',
-  water: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=70',
-};
-
-const CATEGORY_IMAGE = (cat) => {
-  const map = {
-    mangroves: IMAGES.mangroves, coastal_erosion_protection: IMAGES.mangroves,
-    renewable_energy: IMAGES.renewable, electric_vehicles: IMAGES.renewable, solar_desalination: IMAGES.renewable,
-    seagrasses: IMAGES.seagrass, oceans: IMAGES.oceans, zooplankton: IMAGES.oceans, phytoplankton: IMAGES.oceans,
-    agriculture: IMAGES.agriculture, water: IMAGES.water, drought: IMAGES.drought,
-    urban_geodesign: IMAGES.plastic, transportation: IMAGES.global,
-    extreme_weather: IMAGES.heat, heat: IMAGES.heat, flooding: IMAGES.flooding,
-    forest_preservation: IMAGES.forest, rewilding: IMAGES.forest,
-    other: IMAGES.global,
-  };
-  return map[cat] || IMAGES.global;
-};
+import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
 
 // ── Interface language support — Janine's "all languages" spec: broad preset list + free-type any language (AI-translated live) ──
 const LANGS = [

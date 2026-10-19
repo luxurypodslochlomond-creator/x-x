@@ -42,19 +42,7 @@ const ACTION_TYPES = {
   other: { label: 'Action', icon: Hand, color: '#5a5246' },
 };
 
-function CATEGORY_IMAGE(cat) {
-  const map = {
-    mangroves: 'https://images.unsplash.com/photo-1518630124387-6a665f7e8e16?w=800',
-    seagrasses: 'https://images.unsplash.com/photo-1583211728689-29b9c4c6e3a2?w=800',
-    oceans: 'https://images.unsplash.com/photo-1505142468610-359e7d3dbebe?w=800',
-    forest_preservation: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800',
-    rewilding: 'https://images.unsplash.com/photo-1507119461-a4e3e3c5b8e3?w=800',
-    agriculture: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800',
-    water: 'https://images.unsplash.com/photo-1503554033630-8a9c0c0e0e0e?w=800',
-    renewable_energy: 'https://images.unsplash.com/photo-1466611653911-ef50e3f2c2e2?w=800',
-  };
-  return map[cat] || 'https://images.unsplash.com/photo-1611273426858-450d8e3c8fce?w=800';
-}
+import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
 
 function fmtDate(d) {
   if (!d) return '';
