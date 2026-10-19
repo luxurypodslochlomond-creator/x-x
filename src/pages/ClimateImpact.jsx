@@ -5,6 +5,7 @@ import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
 import SignalCode from '@/components/climate/SignalCode';
+import ClimateImpactMap from '@/components/climate/ClimateImpactMap';
 
 // Converts an ISO 2-letter country code to a display name.
 function countryName(code) {
@@ -144,6 +145,23 @@ export default function ClimateImpact() {
             )}
           </div>
         </motion.div>
+      </div>
+
+      {/* Reader-impact map — the planet lighting up as people read */}
+      <div className="px-5 pt-6 pb-2">
+        <div className="flex items-center gap-2 mb-3">
+          <Globe className="w-4 h-4 text-[#b3261e]" />
+          <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+            Where the world is reading
+          </h2>
+          <div className="flex-1 h-px bg-[#141210]/20" />
+        </div>
+        <div className="border-2 border-[#141210]/15 overflow-hidden">
+          <ClimateImpactMap stats={stats} />
+        </div>
+        <p className="text-[9px] font-mono text-[#5a5246] mt-2 leading-relaxed">
+          Every dot is a reader. Red dots are countries (from geo, no IP stored). Gold dots are self-identified nations without their own country code. The planet, lighting up — honestly.
+        </p>
       </div>
 
       {/* Self-identification — "Where are you reading from?" */}
