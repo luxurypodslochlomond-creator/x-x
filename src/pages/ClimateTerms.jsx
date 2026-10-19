@@ -169,7 +169,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              These terms are governed by the laws of Scotland. Any dispute is resolved in the Scottish courts. If you are outside the UK, you may still submit and read freely; the governing law is there for the rare case a dispute needs a court.
+              These terms are governed by the laws of the State of Connecticut, United States of America, where Horizon International is based. Any dispute is resolved in the Connecticut courts. If you are outside the US, you may still submit and read freely; the governing law is there for the rare case a dispute needs a court.
             </p>
           </div>
         </section>

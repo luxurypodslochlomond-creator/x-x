@@ -170,7 +170,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              You have the right to complain to the UK Information Commissioner's Office (ico.org.uk) if you believe we have mishandled your data. You do not have to complain to us first, though we hope you will, so we can fix it.
+              If you are in the US, you have the right to complain to the Federal Trade Commission (ftc.gov) or your state attorney general. If you are in the UK or EU, you have the right to complain to the UK Information Commissioner's Office (ico.org.uk) or your national data protection authority. You do not have to complain to us first, though we hope you will, so we can fix it.
             </p>
           </div>
         </section>
@@ -182,7 +182,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#b3261e] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              The data controller for this record is UF51, responsible for decisions about how your data is used. For any privacy question, write to hello@horizon-international.org. We do not yet have a formal Data Protection Officer; the person who reads that inbox is accountable for your request and will respond personally.
+              The data controller for this record is Horizon International, based in Connecticut, USA, responsible for decisions about how your data is used. For any privacy question, write to hello@horizon-international.org. We do not yet have a formal Data Protection Officer; the person who reads that inbox is accountable for your request and will respond personally.
             </p>
           </div>
         </section>

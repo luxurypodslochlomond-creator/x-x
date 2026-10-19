@@ -7,7 +7,7 @@ const PILLARS = [
     icon: Lock,
     title: 'Minimum Data, Maximum Review',
     status: 'BUILT & LIVE',
-    body: "We hold the smallest set of data a public record needs: your submission, a contact email so we can reach you, and the country a reader reads from. No IP addresses. No tracking cookies. No ad profiles. No accounts. An extractor who copies this code inherits a reviewed, minimal database, not a surveillance engine. The architecture makes mass extraction structurally uninteresting. (Our sister tool SORTED goes further: nothing leaves your device at all. Different tools, same covenant: hold the minimum, never sell.)",
+    body: "We hold the smallest set of data a public record needs: your submission, a contact email so we can reach you, and the country a reader reads from. No IP addresses. No tracking cookies. No ad profiles. No accounts. An extractor who copies this code inherits a reviewed, minimal database, not a surveillance engine. The architecture makes mass extraction structurally uninteresting.",
   },
   {
     icon: Scale,
