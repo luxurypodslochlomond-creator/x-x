@@ -4,7 +4,6 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
-import SignalCode from '@/components/climate/SignalCode';
 import ClimateImpactMap from '@/components/climate/ClimateImpactMap';
 import WorldReadingFeed from '@/components/climate/WorldReadingFeed';
 import WorldActionFeed from '@/components/climate/WorldActionFeed';
@@ -19,12 +18,43 @@ function countryName(code) {
   }
 }
 
+// Converts an ISO 2-letter country code to a flag emoji (regional indicator symbols).
+function countryCodeToFlag(code) {
+  if (!code || code.length !== 2) return '';
+  const upper = code.toUpperCase();
+  if (!/^[A-Z]{2}$/.test(upper)) return '';
+  return String.fromCodePoint(...upper.split('').map(c => 0x1F1E6 + (c.charCodeAt(0) - 65)));
+}
+
+// Known ISO country names (lowercased) — so we can redirect readers who type a real country
+// into the self-ID box instead of polluting the nations list.
+const knownCountryNames = (() => {
+  const set = new Set();
+  try {
+    const names = new Intl.DisplayNames(['en'], { type: 'region' });
+    for (let i = 0; i < 26; i++) {
+      for (let j = 0; j < 26; j++) {
+        const code = String.fromCharCode(65 + i) + String.fromCharCode(65 + j);
+        const name = names.of(code);
+        if (name) set.add(name.toLowerCase());
+      }
+    }
+  } catch {}
+  return set;
+})();
+
+function isKnownCountryName(input) {
+  if (!input) return false;
+  return knownCountryNames.has(input.trim().toLowerCase());
+}
+
 export default function ClimateImpact() {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [readerRegion, setReaderRegion] = useState('');
   const [savedRegion, setSavedRegion] = useState(false);
+  const [countryNotice, setCountryNotice] = useState(false);
 
   useEffect(() => {
     try { setReaderRegion(localStorage.getItem('climate51_reader_region') || ''); } catch {}
@@ -51,6 +81,12 @@ export default function ClimateImpact() {
     const trimmed = readerRegion.trim();
     try {
       if (trimmed) {
+        if (isKnownCountryName(trimmed)) {
+          setCountryNotice(true);
+          setSavedRegion(false);
+          return;
+        }
+        setCountryNotice(false);
         localStorage.setItem('climate51_reader_region', trimmed);
         setSavedRegion(true);
         setTimeout(() => setSavedRegion(false), 2000);
@@ -191,7 +227,7 @@ export default function ClimateImpact() {
           <input
             type="text"
             value={readerRegion}
-            onChange={(e) => setReaderRegion(e.target.value)}
+            onChange={(e) => { setReaderRegion(e.target.value); setCountryNotice(false); }}
             placeholder="e.g. Scotland, Catalonia, Kurdistan…"
             maxLength={60}
             className="flex-1 px-3 py-2.5 bg-[#efe7d6] border-2 border-[#141210]/20 focus:border-[#e2602a] text-[12px] font-mono text-[#141210] placeholder:text-[#5a5246]/50 outline-none transition-colors"
@@ -207,6 +243,11 @@ export default function ClimateImpact() {
         {savedRegion && (
           <p className="text-[10px] text-[#1e3a2b] font-mono mt-2">
             Thank you. Your nation will show on the impact page the next time you read an entry.
+          </p>
+        )}
+        {countryNotice && (
+          <p className="text-[10px] text-[#b3261e] font-mono mt-2 leading-relaxed">
+            That's a country we already track by your location — you'll show up automatically when you read an entry. This box is for nations without their own country code (Scotland, Catalonia, Kurdistan…).
           </p>
         )}
       </div>
@@ -232,7 +273,9 @@ export default function ClimateImpact() {
                 onClick={() => navigate(createPageUrl(`ClimateReachPlace/nation/${encodeURIComponent(r.region)}`))}
                 className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#b3261e]/20 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
-                <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/10 border border-[#b3261e]/30 text-[#b3261e] text-[14px]">🏳️</span>
+                <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/10 border border-[#b3261e]/30">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#b3261e]" style={{ animation: 'impact-breathe 2s ease-in-out infinite' }} />
+                </span>
                 <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{r.region}</span>
                 <span className="text-[12px] font-black font-mono text-[#b3261e]">{r.views.toLocaleString()}</span>
                 <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">
@@ -264,7 +307,7 @@ export default function ClimateImpact() {
                 onClick={() => navigate(createPageUrl(`ClimateReachPlace/country/${c.country}`))}
                 className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
-                <SignalCode code={c.country} size="md" />
+                <span className="w-7 h-7 flex items-center justify-center bg-[#f7f1e5] border border-[#141210]/15 text-[15px] leading-none">{countryCodeToFlag(c.country) || c.country}</span>
                 <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{countryName(c.country)}</span>
                 <span className="text-[12px] font-black font-mono text-[#e2602a]">{c.views.toLocaleString()}</span>
                 <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">
