@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
 import SignalCode from '@/components/climate/SignalCode';
 import ClimateImpactMap from '@/components/climate/ClimateImpactMap';
+import WorldReadingFeed from '@/components/climate/WorldReadingFeed';
 
 // Converts an ISO 2-letter country code to a display name.
 function countryName(code) {
@@ -163,6 +164,9 @@ export default function ClimateImpact() {
           Every dot is a reader. Red dots are countries (from geo, no IP stored). Gold dots are self-identified nations without their own country code. The planet, lighting up — honestly.
         </p>
       </div>
+
+      {/* The world is reading — which stories are reaching the most nations */}
+      <WorldReadingFeed stories={stats?.top_stories || []} />
 
       {/* Self-identification — "Where are you reading from?" */}
       <div className="px-5 py-6 bg-[#f7f1e5] border-b border-[#141210]/10">

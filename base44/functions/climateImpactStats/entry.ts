@@ -40,12 +40,82 @@ export default async function(req) {
     const publishedSolutions = await base44.asServiceRole.entities.ClimateSolution.count({ status: 'published' });
     const publishedActions = await base44.asServiceRole.entities.ClimateAction.count({ status: 'published' });
 
+    // Top stories by country-reach — which entries the world is reaching for.
+    // Two aggregates (solutions + actions), each grouped by entry_id with distinct-country count.
+    // No dopamine, no ranking by "popularity" — just honest reach signal for the contributor and the panel.
+    const [solutionReach, actionReach] = await Promise.all([
+      base44.asServiceRole.entities.ClimateView.aggregate({
+        query: { entry_type: 'solution' },
+        groupBy: 'entry_id',
+        count: true,
+        countDistinct: 'country',
+        limit: 15,
+      }).catch(() => ({ rows: [] })),
+      base44.asServiceRole.entities.ClimateView.aggregate({
+        query: { entry_type: 'action' },
+        groupBy: 'entry_id',
+        count: true,
+        countDistinct: 'country',
+        limit: 15,
+      }).catch(() => ({ rows: [] })),
+    ]);
+
+    // Fetch all published entries (titles only) to join with the aggregate.
+    // The record is small enough that fetching all is cheaper than per-id lookups.
+    const [solutionsPage, actionsPage] = await Promise.all([
+      base44.asServiceRole.entities.ClimateSolution.filter(
+        { status: 'published' },
+        { fields: ['title', 'entry_type', 'category'], limit: 200 }
+      ).catch(() => ({ items: [] })),
+      base44.asServiceRole.entities.ClimateAction.filter(
+        { status: 'published' },
+        { fields: ['title', 'action_type', 'category'], limit: 200 }
+      ).catch(() => ({ items: [] })),
+    ]);
+
+    const solutionMap = new Map((solutionsPage.items || []).map((s) => [s.id, s]));
+    const actionMap = new Map((actionsPage.items || []).map((a) => [a.id, a]));
+
+    const topStories = [
+      ...(solutionReach.rows || []).map((r) => {
+        const entry = solutionMap.get(r.entry_id);
+        if (!entry) return null;
+        return {
+          id: r.entry_id,
+          type: 'solution',
+          entry_type: entry.entry_type || 'solution',
+          title: entry.title,
+          category: entry.category,
+          countries: r.count_distinct_country || 0,
+          readers: r.count || 0,
+        };
+      }),
+      ...(actionReach.rows || []).map((r) => {
+        const entry = actionMap.get(r.entry_id);
+        if (!entry) return null;
+        return {
+          id: r.entry_id,
+          type: 'action',
+          entry_type: 'action',
+          title: entry.title,
+          category: entry.category,
+          countries: r.count_distinct_country || 0,
+          readers: r.count || 0,
+        };
+      }),
+    ]
+      .filter(Boolean)
+      .filter((s) => s.countries > 0)
+      .sort((a, b) => b.countries - a.countries || b.readers - a.readers)
+      .slice(0, 10);
+
     return Response.json({
       total_views: totalViews,
       unique_countries: countries.length,
       countries,
       regions,
       published_entries: publishedSolutions + publishedActions,
+      top_stories: topStories,
     });
   } catch (error) {
     console.error('climateImpactStats error:', error.message);
@@ -55,6 +125,7 @@ export default async function(req) {
       countries: [],
       regions: [],
       published_entries: 0,
+      top_stories: [],
     }, { status: 200 });
   }
 }
