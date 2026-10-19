@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { createPageUrl } from '@/utils';
 import { resolveCoords } from './countryCentroids';
 
 // Converts an ISO 2-letter country code to a display name, then to coords.
@@ -20,6 +22,7 @@ function dotRadius(views) {
 }
 
 export default function ClimateImpactMap({ stats }) {
+  const navigate = useNavigate();
   const countries = stats?.countries || [];
   const regions = stats?.regions || [];
 
@@ -29,7 +32,7 @@ export default function ClimateImpactMap({ stats }) {
       .map((c) => {
         const name = countryName(c.country);
         const coord = resolveCoords(name, c.country);
-        return coord ? { coord, label: name, views: c.views, kind: 'country' } : null;
+        return coord ? { coord, label: name, views: c.views, kind: 'country', code: c.country } : null;
       })
       .filter(Boolean);
 
@@ -129,6 +132,12 @@ export default function ClimateImpactMap({ stats }) {
                 weight: isNation ? 2 : 1.5,
                 fillColor: fill,
                 fillOpacity: 0.55,
+              }}
+              eventHandlers={{
+                click: () => {
+                  const place = isNation ? encodeURIComponent(p.label) : p.code;
+                  navigate(createPageUrl(`ClimateReachPlace/${isNation ? 'nation' : 'country'}/${place}`));
+                },
               }}
             >
               <Tooltip direction="top" offset={[0, -r]} opacity={1}>

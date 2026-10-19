@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
@@ -19,6 +19,7 @@ function countryName(code) {
 }
 
 export default function ClimateImpact() {
+  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [readerRegion, setReaderRegion] = useState('');
@@ -224,7 +225,8 @@ export default function ClimateImpact() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25, delay: i * 0.03 }}
-                className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#b3261e]/20"
+                onClick={() => navigate(createPageUrl(`ClimateReachPlace/nation/${encodeURIComponent(r.region)}`))}
+                className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#b3261e]/20 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
                 <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/10 border border-[#b3261e]/30 text-[#b3261e] text-[14px]">🏳️</span>
                 <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{r.region}</span>
@@ -255,7 +257,8 @@ export default function ClimateImpact() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25, delay: i * 0.03 }}
-                className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15"
+                onClick={() => navigate(createPageUrl(`ClimateReachPlace/country/${c.country}`))}
+                className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
                 <SignalCode code={c.country} size="md" />
                 <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{countryName(c.country)}</span>

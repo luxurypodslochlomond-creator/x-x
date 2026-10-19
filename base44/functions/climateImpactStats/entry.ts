@@ -7,6 +7,68 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 export default async function(req) {
   try {
     const base44 = createClientFromRequest(req);
+    const body = await req.json().catch(() => ({}));
+    const place = body?.place;
+    const placeType = body?.place_type;
+
+    // Place-specific view: which stories reached a specific country or nation.
+    // The reader explores the signal — which stories landed where — without anyone being tracked.
+    if (place && placeType) {
+      const query = placeType === 'country'
+        ? { country: place, entry_type: { $ne: 'region_self_id' } }
+        : { reader_region: place, entry_type: { $ne: 'region_self_id' } };
+
+      const totalReaders = await base44.asServiceRole.entities.ClimateView.count(query);
+
+      const [solReach, actReach] = await Promise.all([
+        base44.asServiceRole.entities.ClimateView.aggregate({
+          query: { ...query, entry_type: 'solution' },
+          groupBy: 'entry_id',
+          count: true,
+          limit: 50,
+        }).catch(() => ({ rows: [] })),
+        base44.asServiceRole.entities.ClimateView.aggregate({
+          query: { ...query, entry_type: 'action' },
+          groupBy: 'entry_id',
+          count: true,
+          limit: 50,
+        }).catch(() => ({ rows: [] })),
+      ]);
+
+      const [sols, acts] = await Promise.all([
+        base44.asServiceRole.entities.ClimateSolution.filter(
+          { status: 'published' },
+          { fields: ['title', 'entry_type', 'category'], limit: 200 }
+        ).catch(() => ({ items: [] })),
+        base44.asServiceRole.entities.ClimateAction.filter(
+          { status: 'published' },
+          { fields: ['title', 'action_type', 'category'], limit: 200 }
+        ).catch(() => ({ items: [] })),
+      ]);
+
+      const solMap = new Map((sols.items || []).map((s) => [s.id, s]));
+      const actMap = new Map((acts.items || []).map((a) => [a.id, a]));
+
+      const stories = [
+        ...((solReach.rows || []).map((r) => {
+          const e = solMap.get(r.entry_id);
+          if (!e) return null;
+          return { id: r.entry_id, type: 'solution', entry_type: e.entry_type || 'solution', title: e.title, category: e.category, readers: r.count };
+        })),
+        ...((actReach.rows || []).map((r) => {
+          const e = actMap.get(r.entry_id);
+          if (!e) return null;
+          return { id: r.entry_id, type: 'action', entry_type: 'action', title: e.title, category: e.category, readers: r.count };
+        })),
+      ].filter(Boolean).sort((a, b) => b.readers - a.readers);
+
+      return Response.json({
+        place,
+        place_type: placeType,
+        total_readers: totalReaders,
+        stories,
+      });
+    }
 
     // Count only real entry reads — exclude region self-identifications
     const totalViews = await base44.asServiceRole.entities.ClimateView.count({

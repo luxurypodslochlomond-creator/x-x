@@ -126,6 +126,7 @@ const AdminClimateCategoriesPage = React.lazy(() => import('./pages/AdminClimate
 const ClimateImpactPage = React.lazy(() => import('./pages/ClimateImpact'));
 const ClimateTermsPage = React.lazy(() => import('./pages/ClimateTerms'));
 const ClimatePrivacyPage = React.lazy(() => import('./pages/ClimatePrivacy'));
+const ClimateReachPlacePage = React.lazy(() => import('./pages/ClimateReachPlace'));
 
 
 
@@ -272,6 +273,7 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateImpact" element={<LayoutWrapper currentPageName="ClimateImpact"><ClimateImpactPage /></LayoutWrapper>} />
       <Route path="/ClimateTerms" element={<LayoutWrapper currentPageName="ClimateTerms"><ClimateTermsPage /></LayoutWrapper>} />
       <Route path="/ClimatePrivacy" element={<LayoutWrapper currentPageName="ClimatePrivacy"><ClimatePrivacyPage /></LayoutWrapper>} />
+      <Route path="/ClimateReachPlace/:placeType/:place" element={<LayoutWrapper currentPageName="ClimateReachPlace"><ClimateReachPlacePage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
