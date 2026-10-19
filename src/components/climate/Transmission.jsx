@@ -36,7 +36,8 @@ export default function Transmission() {
           The transmission is tuned to the Earth's resonance — 7.83 Hz, the cavity
           between the planet's surface and the ionosphere, measured since 1952.
           The beat is the human heartbeat — 60 BPM. The groove doubles it — the pace
-          your body walks. When many tune in, the field strengthens. That is not
+          your body walks. Resonance is real physics — when a frequency matches a
+          system's natural frequency, the amplitude increases. That is not
           mysticism. It is how resonance works.
         </p>
       </div>
