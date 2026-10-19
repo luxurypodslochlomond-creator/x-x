@@ -670,10 +670,12 @@ export default function TogetherChangeClimate() {
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Geodesign</h4>
               <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A set of concepts and methods used to involve all stakeholders in collaboratively designing optimal solutions for spatial challenges in the built and natural environments.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: Steinitz, A Framework for Geodesign (2012)</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Rewilding</h4>
               <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A large-scale conservation approach focused on restoring damaged ecosystems so nature can take care of itself.</p>
+              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: Soulé &amp; Noss, Rewilding and Biodiversity (1998)</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Heat</h4>
