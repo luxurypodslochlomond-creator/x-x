@@ -709,6 +709,10 @@ export default function TogetherChangeClimate() {
         </div>
 
         <p className="px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6]">{t.honour}</p>
+        <p className="px-4 pb-8 pt-1 text-center text-[9px] font-mono text-[#5a5246]/70 bg-[#efe7d6]">
+          Platform built by Brian Hughes ·{' '}
+          <Link to={createPageUrl('Welcome')} className="text-[#5a5246] hover:text-[#b3261e] transition-colors">UF51</Link>
+        </p>
       </div>
 
       {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}
