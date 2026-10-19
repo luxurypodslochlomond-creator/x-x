@@ -1,7 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { X, Send, Check, Leaf, AlertTriangle } from 'lucide-react';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
+
+function SuccessScreen({ entryType, onClose }) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+  return (
+    <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-start p-6 pt-[16vh] text-center overflow-y-auto">
+      <div className="w-16 h-16 rounded-full bg-[#1e3a2b] flex items-center justify-center mb-5">
+        <Check className="w-8 h-8 text-[#efe7d6]" />
+      </div>
+      <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '28px', letterSpacing: '-0.02em' }}>
+        Thank you
+      </h2>
+      <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[320px] mb-2">
+        Your {entryType === 'solution' ? 'solution' : 'climate crisis report'} is under review.
+      </p>
+      <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
+        Every entry is read by a person before it appears on the record. This keeps the platform honest — a public service, not a firehose.
+      </p>
+      <button onClick={onClose} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
+        Back to the record
+      </button>
+    </div>
+  );
+}
 
 export default function ClimateSubmitForm({ onClose }) {
   const { categories } = useClimateCategories();
@@ -16,6 +41,10 @@ export default function ClimateSubmitForm({ onClose }) {
   const [error, setError] = useState('');
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,25 +74,7 @@ export default function ClimateSubmitForm({ onClose }) {
   };
 
   if (submitted) {
-    return (
-      <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-16 h-16 rounded-full bg-[#1e3a2b] flex items-center justify-center mb-5">
-          <Check className="w-8 h-8 text-[#efe7d6]" />
-        </div>
-        <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '28px', letterSpacing: '-0.02em' }}>
-          Thank you
-        </h2>
-        <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[320px] mb-2">
-          Your {entryType === 'solution' ? 'solution' : 'climate crisis report'} is under review.
-        </p>
-        <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
-          Every entry is read by a person before it appears on the record. This keeps the platform honest — a public service, not a firehose.
-        </p>
-        <button onClick={onClose} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
-          Back to the record
-        </button>
-      </div>
-    );
+    return <SuccessScreen entryType={entryType} onClose={onClose} />;
   }
 
   return (

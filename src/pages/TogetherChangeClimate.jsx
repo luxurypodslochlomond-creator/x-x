@@ -408,8 +408,8 @@ export default function TogetherChangeClimate() {
             {t.title_a}<br />
             <span className="text-[#e2602a]">{t.title_b}</span> {t.title_c}
           </h1>
-          {/* Record-of-the-time seal — the stamp of truth */}
-          <div className="absolute right-5 top-16 w-[104px] h-[104px] lg:right-12 lg:top-20 pointer-events-none flex items-center justify-center"
+          {/* Record-of-the-time seal — the stamp of truth (desktop only, avoids mobile title overlap) */}
+          <div className="hidden lg:flex absolute right-12 top-20 w-[104px] h-[104px] pointer-events-none items-center justify-center"
             style={{ transform: 'rotate(-17deg)', animation: 'twcc-stamp .25s ease-out .1s both, twcc-stamp-pulse 3.2s ease-in-out .6s infinite' }}>
             <div className="absolute inset-0 rounded-full border-8 border-[#e2602a]" style={{ boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6' }} />
             <div className="relative text-center" style={{ opacity: 0.9 }}>
