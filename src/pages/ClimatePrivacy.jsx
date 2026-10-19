@@ -110,7 +110,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4 space-y-2">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              Under UK GDPR, we process your contact email on the basis of your consent, given when you submit. You can withdraw it at any time by asking us to remove your submission. We record the country a reader reads from on the basis of our legitimate interest in understanding the global reach of the record, with no personal data attached.
+              Under UK GDPR (which applies to our UK and EU readers) and applicable US state privacy laws, we process your contact email on the basis of your consent, given when you submit. You can withdraw it at any time by asking us to remove your submission. We record the country a reader reads from on the basis of our legitimate interest in understanding the global reach of the record, with no personal data attached.
             </p>
           </div>
         </section>
@@ -158,7 +158,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              If a data breach is likely to risk your rights and freedoms, we notify the UK Information Commissioner's Office within 72 hours and tell affected users without undue delay. We keep an internal log of any incident and what we did about it.
+              If a data breach is likely to risk your rights and freedoms, we notify the UK Information Commissioner's Office within 72 hours (for UK and EU readers) and affected US state regulators and users as required by applicable US state breach laws. We keep an internal log of any incident and what we did about it.
             </p>
           </div>
         </section>
