@@ -1,7 +1,7 @@
 {
   "name": "ClimateView",
   "type": "object",
-  "description": "Anonymous view tracking for climate entries \u2014 records only the country (from request geo-headers, no IP stored) and the entry viewed. Powers the global impact view. Admin-only reads; anyone can create a view record.",
+  "description": "Anonymous view tracking for climate entries \u2014 records only the country (from request geo-headers, no IP stored) and the entry viewed. Readers may optionally self-identify their nation/region (e.g. Scotland, Catalonia, Kurdistan) \u2014 voluntary, stored in their browser, never tracked. Powers the global impact view. Admin-only reads; anyone can create a view record.",
   "properties": {
     "entry_id": {
       "type": "string",
@@ -19,6 +19,10 @@
     "country": {
       "type": "string",
       "description": "ISO 2-letter country code from request geo-headers, or empty if unavailable. No IP address is ever stored."
+    },
+    "reader_region": {
+      "type": "string",
+      "description": "Optional self-identified nation/region from the reader (e.g. Scotland, Catalonia, Kurdistan). Voluntary, stored in the reader's browser, sent with view tracking. Lets nations that don't have their own ISO code be visible on the impact page."
     }
   },
   "required": [

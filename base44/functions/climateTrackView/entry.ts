@@ -2,11 +2,13 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 
 // Records an anonymous view of a climate entry.
 // Stores only the country code from geo-headers — no IP, no user ID, no PII.
+// Also stores an optional self-identified reader_region (e.g. "Scotland") —
+// voluntary, lets nations without their own ISO code be visible.
 // Called from the ClimateDetail page when someone opens an entry.
 export default async function(req) {
   try {
     const base44 = createClientFromRequest(req);
-    const { entry_id, entry_type } = await req.json();
+    const { entry_id, entry_type, reader_region } = await req.json();
 
     if (!entry_id || !entry_type) {
       return Response.json({ ok: false });
@@ -20,10 +22,16 @@ export default async function(req) {
       req.headers.get('x-appengine-country') ||
       '';
 
+    // Sanitize reader_region — trim, cap length, strip HTML
+    const cleanRegion = reader_region
+      ? String(reader_region).trim().slice(0, 60).replace(/[<>]/g, '')
+      : '';
+
     await base44.asServiceRole.entities.ClimateView.create({
       entry_id,
       entry_type,
       country: country.toUpperCase(),
+      reader_region: cleanRegion || undefined,
     });
 
     return Response.json({ ok: true });

@@ -82,7 +82,11 @@ export default function ClimateDetail() {
       .then(r => {
         if (!cancelled) {
           setRecord(r);
-          if (r) base44.functions.invoke('climateTrackView', { entry_id: id, entry_type: type }).catch(() => {});
+          if (r) {
+            let reader_region = '';
+            try { reader_region = localStorage.getItem('climate51_reader_region') || ''; } catch {}
+            base44.functions.invoke('climateTrackView', { entry_id: id, entry_type: type, reader_region }).catch(() => {});
+          }
         }
       })
       .catch(() => { if (!cancelled) setRecord(null); })
