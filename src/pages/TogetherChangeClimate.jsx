@@ -35,7 +35,7 @@ const CATEGORIES = [
   { id: 'other', label: 'Other', icon: Globe },
 ];
 
-import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
+import { CATEGORY_IMAGE, IMAGES } from '@/components/climate/categoryImages';
 
 // ── Interface language support — Janine's "all languages" spec: broad preset list + free-type any language (AI-translated live) ──
 const LANGS = [
