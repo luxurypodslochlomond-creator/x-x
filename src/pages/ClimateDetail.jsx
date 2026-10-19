@@ -212,7 +212,7 @@ export default function ClimateDetail() {
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Hero image — full-bleed, sticky back button overlaid */}
       <div className="relative h-64 bg-[#141210]">
-        <img src={record.image_url || CATEGORY_IMAGE(record.category)} alt={record.title} className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
+        <img src={record.image_url || CATEGORY_IMAGE(record.category)} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
         <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
           <ArrowLeft className="w-5 h-5" />

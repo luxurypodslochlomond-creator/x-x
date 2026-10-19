@@ -1,0 +1,54 @@
+GNU Affero General Public License v3.0 (AGPL-3.0)
+==================================================
+
+Copyright (C) 2026  Together We Change Climate / Horizon International
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+---------------------------------------------------------------------------
+
+FULL LICENSE TEXT
+-----------------
+
+The complete text of the GNU Affero General Public License v3.0 is
+available at: https://www.gnu.org/licenses/agpl-3.0.txt
+
+When this repository is published on GitHub, replace this file with the
+full AGPL-3.0 text from the URL above. GitHub will then automatically
+detect the license and display the badge.
+
+---------------------------------------------------------------------------
+
+WHAT THIS MEANS
+---------------
+
+- You can read, study, and share this code freely.
+- You can modify and redistribute it, including for commercial use.
+- If you deploy a modified version as a network service, you MUST
+  publish your modified source code under the same AGPL-3.0 license.
+- You cannot close it. You cannot make it proprietary. That is the point.
+
+This is the strongest copyleft license — it keeps the code open, forever.
+
+---------------------------------------------------------------------------
+
+CONTENT vs CODE
+---------------
+
+The source CODE in this repository is AGPL-3.0 (this file).
+
+The CONTENT published on the platform — climate solutions, crisis reports,
+articles, images — is licensed under CC BY-SA 4.0. See CONTENT_LICENSE.md.
+
+Two layers, both open. Code is AGPL, content is Creative Commons.

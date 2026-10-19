@@ -154,6 +154,7 @@ const T = {
          src={item.image_url || CATEGORY_IMAGE(item.category)}
          alt=""
          loading="lazy"
+         decoding="async"
          className="absolute inset-0 w-full h-full object-cover"
          style={{ filter: 'grayscale(1) contrast(1.25)' }}
          onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
@@ -359,6 +360,8 @@ export default function TogetherChangeClimate() {
         <img
           src={IMAGES.global}
           alt=""
+          fetchpriority="high"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'grayscale(1) contrast(1.35)', mixBlendMode: 'screen', opacity: 0.46 }}
         />
