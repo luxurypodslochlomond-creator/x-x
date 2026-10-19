@@ -525,7 +525,7 @@ export default function TogetherChangeClimate() {
       </div>
 
       {/* ── FEATURED SIGNALS ── */}
-      {featured.length > 0 && (
+      {selectedType === 'all' && featured.length > 0 && (
         <div className="px-4 py-5 bg-[#efe7d6] border-b-2 border-[#141210]">
           <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
