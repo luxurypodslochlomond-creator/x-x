@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 const RedirectToSorted = () => <Navigate to="/Sorted" replace />;
 import SortedPageTransition from '@/components/shared/SortedPageTransition';
+import RoutePrefetcher from '@/components/shared/RoutePrefetcher';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -175,6 +176,7 @@ const AuthenticatedApp = () => {
   return (
     <>
       <SortedPageTransition isTransitioning={isTransitioning} />
+      <RoutePrefetcher />
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ background: '#f4efe4', color: '#1a1612', fontFamily: 'monospace', fontSize: 12, letterSpacing: '0.3em' }}>LOADING · x = x</div>}>
     <Routes>
       <Route path="/" element={

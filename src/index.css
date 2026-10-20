@@ -188,3 +188,19 @@ button:focus-visible {
 @keyframes twcc-epigraph { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes sorted-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes sorted-exit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-8px); } }
+
+/* ── NATIVE TOUCH FEEL ──
+   Taps land with no 300ms double-tap wait and no grey browser flash,
+   so every control answers your finger like it's part of the phone. */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+a,
+button,
+[role="button"],
+label,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
