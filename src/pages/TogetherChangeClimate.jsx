@@ -212,7 +212,10 @@ export default function TogetherChangeClimate() {
     const origin = window.location.hostname.startsWith('preview--')
       ? 'https://' + window.location.hostname.replace('preview--', '')
       : window.location.origin;
-    const url = origin + '/TogetherChangeClimate';
+    // Share through the preview service. WhatsApp, Telegram and LinkedIn do not run
+    // JavaScript, so they only ever see the app's default tags — which are SORTED's.
+    // This link carries the record's own title and image; people still land on the platform.
+    const url = origin + '/api/functions/ogRedirect?page=TogetherChangeClimate';
     const shareData = {
       title: 'Together We Change Climate',
       text: 'A public record of climate emergencies and the positive actions that work — every language on Earth.',
