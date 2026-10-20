@@ -29,7 +29,7 @@ const ACHIEVEMENTS = [
   {
     icon: Award,
     title: 'Recognition & Attribution',
-    body: 'National Science Foundation PI for a grant on oceans. Collaborator with several UN entities. Lecturer at Harvard, Yale, Tufts, and Johns Hopkins. Speaker at the World Bank, for the Government of Pakistan, and for the Princess Chulabhorn conference in Thailand. Cancer research at Tufts New-England Medical Center. The UN attributed her and her Horizon team with advancing shea butter production and use by women and children. IUCN, WWF, and the government of Peru attributed her with helping save the vicuña. Fellow Emeritus of the Explorers Club, 1996.',
+    body: 'National Science Foundation PI for a grant on oceans. Collaborator with several UN entities. Lecturer at Harvard, Yale, Tufts, and Johns Hopkins. Speaker at the World Bank, for the Government of Pakistan, and for the Princess Chulabhorn conference in Thailand. Cancer research at Tufts New-England Medical Center. The UN attributed her and her Horizon team with advancing shea butter production and use by women and children. IUCN, WWF, and the government of Peru attributed her with helping save the vicuña. Horizon International endorsed the One Health Initiative in 2013 — medicine, veterinary science and the environment working as one — joining more than 700 scientists and physicians worldwide. Fellow Emeritus of the Explorers Club, 1996.',
     color: '#1e3a2b',
   },
 ];
@@ -138,7 +138,7 @@ export default function ClimateFounder() {
 
           <div className="space-y-3">
             <a
-              href="http://www.solutions-site.org"
+              href="https://www.solutions-site.org"
               target="_blank"
               rel="noopener noreferrer"
               className="block border border-[#141210] bg-[#efe7d6] p-3 active:bg-[#e2602a] transition-colors"
@@ -152,7 +152,7 @@ export default function ClimateFounder() {
             </a>
 
             <a
-              href="http://www.youtube.com/user/jselendy"
+              href="https://www.youtube.com/user/jselendy"
               target="_blank"
               rel="noopener noreferrer"
               className="block border border-[#141210] bg-[#efe7d6] p-3 active:bg-[#e2602a] transition-colors"
