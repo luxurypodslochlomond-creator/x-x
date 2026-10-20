@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { prefetchPath } from '@/lib/routePrefetch';
 
 // ── TOGETHER WE CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -71,6 +72,19 @@ export default function ClimateLayout({ children, currentPage }) {
     }
     manifest.href = `/api/functions/serveManifest?brand=climate&v=${Date.now()}`;
   }, [location.pathname]);
+
+  // Warm the nav once the page has settled. On a phone a tap gives a prefetch
+  // almost no head start (hover only helps a mouse), so the next pages are
+  // fetched before the finger arrives. The map is left out: it pulls a mapping
+  // library, and should only load when a reader actually asks for it.
+  useEffect(() => {
+    if (navigator.connection?.saveData) return;
+    const timer = setTimeout(() => {
+      ['TogetherChangeClimate', 'ClimateImpact', 'ClimateFounder', 'ClimateTerms', 'ClimatePrivacy']
+        .forEach(prefetchPath);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const isActive = (page) => currentPage === page;
 
