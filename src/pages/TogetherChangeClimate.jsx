@@ -771,7 +771,9 @@ export default function TogetherChangeClimate() {
           <Link to={createPageUrl('ClimatePrivacy')} className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors">Privacy</Link>
         </div>
 
-        <p className="px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6]">{t.honour}</p>
+        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors">
+          {t.honour}
+        </Link>
         <p className="px-4 pb-8 pt-1 text-center text-[9px] font-mono text-[#5a5246]/70 bg-[#efe7d6]">
           Platform built by Brian Hughes ·{' '}
           <Link to={createPageUrl('Welcome')} className="text-[#5a5246] hover:text-[#b3261e] transition-colors">UF51</Link>
