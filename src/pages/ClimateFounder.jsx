@@ -17,7 +17,7 @@ const ACHIEVEMENTS = [
   {
     icon: BookOpen,
     title: 'Two Books, 75 Experts',
-    body: 'She conceived and was Editor of two books with original chapters written by 75 experts: Water and Sanitation Related Diseases and the Changing Environment — Challenges, Interventions and Preventive Measures. Published by Wiley-Blackwell with Horizon International. The Late Dr. Paul Farmer, University Professor at Harvard and Co-Founder of Partners In Health, wrote the Foreword.',
+    body: 'She conceived and was Editor of two books, with original chapters written by 75 experts, published by Wiley-Blackwell with Horizon International: Water and Sanitation-Related Diseases and the Environment — Challenges, Interventions, and Preventive Measures, and Water and Sanitation-Related Diseases and the Changing Environment — Challenges, Interventions, and Preventive Measures. The Late Dr. Paul Farmer, University Professor at Harvard and Co-Founder of Partners In Health, wrote the Foreword.',
     color: '#1e3a2b',
   },
   {
@@ -117,6 +117,59 @@ export default function ClimateFounder() {
             </div>
           );
         })}
+      </div>
+
+      {/* The signature — her formal attribution, exactly as she writes it.
+          The record has to be able to point back to the source. */}
+      <div className="px-5 pb-8">
+        <div className="bg-[#f7f1e5] border-2 border-[#141210] p-5" style={{ animation: 'twcc-epigraph .5s ease-out .5s both' }}>
+          <div className="flex items-center gap-2 mb-4">
+            <Globe className="w-4 h-4 text-[#e2602a]" />
+            <h3 className="text-[13px] font-black font-mono uppercase tracking-wide text-[#141210]">The Signature</h3>
+          </div>
+
+          <p className="text-[12px] font-black font-mono text-[#141210] leading-relaxed mb-1">
+            Janine M. H. Selendy
+          </p>
+          <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-5">
+            Founder, Horizon International<br />
+            Fellow Emeritus, The Explorers Club (FN'96)
+          </p>
+
+          <div className="space-y-3">
+            <a
+              href="http://www.solutions-site.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block border border-[#141210] bg-[#efe7d6] p-3 active:bg-[#e2602a] transition-colors"
+            >
+              <span className="block text-[9px] font-black font-mono uppercase tracking-widest text-[#5a5246] mb-1">
+                Horizon International Solutions Site
+              </span>
+              <span className="block text-[12px] font-mono text-[#141210] break-all">
+                solutions-site.org
+              </span>
+            </a>
+
+            <a
+              href="http://www.youtube.com/user/jselendy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block border border-[#141210] bg-[#efe7d6] p-3 active:bg-[#e2602a] transition-colors"
+            >
+              <span className="block text-[9px] font-black font-mono uppercase tracking-widest text-[#5a5246] mb-1">
+                Documentaries &amp; Film Clips
+              </span>
+              <span className="block text-[12px] font-mono text-[#141210] break-all">
+                youtube.com/user/jselendy
+              </span>
+            </a>
+          </div>
+
+          <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-5">
+            The Solutions Site was created by Horizon International with UNEP, UNDP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard — a forum where every accepted entry has been reviewed before publication. This platform follows that same model.
+          </p>
+        </div>
       </div>
 
       {/* Her vision — the mantra, cold ink */}
