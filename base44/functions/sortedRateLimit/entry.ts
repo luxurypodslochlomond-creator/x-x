@@ -29,6 +29,21 @@ Deno.serve(async (req) => {
 
     const base44 = createClientFromRequest(req);
 
+    // The ONLY thing that unlocks SORTED without counting: a payment Stripe has
+    // already confirmed. Read here on the server — the browser cannot claim it.
+    try {
+      const passes = await base44.asServiceRole.entities.SortedPass.filter({
+        fingerprint,
+        status: 'active'
+      });
+      if (passes.length > 0) {
+        console.log(`[RateLimit] PAID ${fingerprint.slice(0, 25)} — unlimited`);
+        return Response.json({ allowed: true, paid: true, remaining: null, used: 0 });
+      }
+    } catch (e) {
+      console.error('[RateLimit] pass lookup error:', e.message);
+    }
+
     let records = [];
     try {
       records = await base44.asServiceRole.entities.PrivacyAnalytics.filter({

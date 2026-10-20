@@ -1,9 +1,12 @@
-// Server-side rate limiting — IP fingerprinted, localStorage-bypass proof
-// Clearing localStorage does nothing. Only a real Stripe payment unlocks.
+// SORTED access is decided by the SERVER, never by the browser.
+// A daily free allowance keeps the door open for everyone; a Stripe payment
+// that the backend has confirmed unlocks it properly. Nothing stored locally
+// can grant access on its own — it can only prove which receipt is ours.
 import { useState, useEffect, useCallback } from 'react';
 import { sortedRateLimit } from '@/functions/sortedRateLimit';
+import { verifySortedPass } from '@/functions/verifySortedPass';
 
-const PAID_KEY = 'sorted_paid'; // still used as a UX hint only (not for enforcement)
+const PASS_KEY = 'sorted_pass_session'; // the Stripe receipt id, kept for this device
 
 export function useSortedUsage() {
   const [uses, setUses] = useState(0);
@@ -12,45 +15,58 @@ export function useSortedUsage() {
   const [isPaid, setIsPaid] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  // Check server-side status on mount
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const isStripeSuccess = params.get('sorted') === 'success';
+    let cancelled = false;
 
-    if (isStripeSuccess) {
-      // Coming back from Stripe — mark paid locally as UX hint, don't check rate limit
-      try { localStorage.setItem(PAID_KEY, 'true'); } catch {}
-      setIsPaid(true);
-      setIsLocked(false);
-      setRemaining(Infinity);
-      setLoaded(true);
-      return;
-    }
+    const applyStatus = (data) => {
+      setUses(data.used || 0);
+      setIsPaid(!!data.paid);
+      setRemaining(data.paid ? Infinity : (data.remaining ?? 10));
+      setIsLocked(!data.allowed && !data.paid);
+    };
 
-    // Check if locally marked as paid (from a previous successful payment on this device)
-    const localPaid = (() => { try { return localStorage.getItem(PAID_KEY) === 'true'; } catch { return false; } })();
-    if (localPaid) {
-      setIsPaid(true);
-      setIsLocked(false);
-      setRemaining(Infinity);
-      setLoaded(true);
-      return;
-    }
+    const check = async () => {
+      const res = await sortedRateLimit({ action: 'check' });
+      return res?.data ?? res;
+    };
 
-    // Ask the server how many uses this IP has had
-    sortedRateLimit({ action: 'check' })
-      .then(res => {
-        const data = res.data;
-        setUses(data.used || 0);
-        setRemaining(data.remaining ?? 10);
-        setIsLocked(!data.allowed);
-      })
-      .catch(() => {
-        // On error — be generous, never block a real user
-        setRemaining(10);
-        setIsLocked(false);
-      })
-      .finally(() => setLoaded(true));
+    const storedSession = () => {
+      try { return localStorage.getItem(PASS_KEY); } catch { return null; }
+    };
+
+    const run = async () => {
+      let status = null;
+      try {
+        const fromStripe = new URLSearchParams(window.location.search).get('session_id');
+        const sessionId = fromStripe || storedSession();
+
+        status = await check();
+
+        // Not unlocked on this device, but we hold a receipt — confirm it once
+        // with Stripe, then ask the server again.
+        if (!status?.paid && sessionId) {
+          const res = await verifySortedPass({ session_id: sessionId });
+          const verified = res?.data ?? res;
+          if (verified?.paid) {
+            try { localStorage.setItem(PASS_KEY, sessionId); } catch {}
+            status = await check();
+          } else if (fromStripe) {
+            try { localStorage.removeItem(PASS_KEY); } catch {}
+          }
+        }
+      } catch (err) {
+        // A network wobble must never lock someone out of help.
+        console.error('[SORTED] status check failed:', err?.message);
+      } finally {
+        if (!cancelled) {
+          applyStatus(status || { allowed: true, remaining: 10, used: 0 });
+          setLoaded(true);
+        }
+      }
+    };
+
+    run();
+    return () => { cancelled = true; };
   }, []);
 
   // Called each time the user runs a tool
@@ -59,20 +75,20 @@ export function useSortedUsage() {
 
     try {
       const res = await sortedRateLimit({ action: 'record' });
-      const data = res.data;
+      const data = res?.data ?? res;
       setUses(data.used || 0);
-      setRemaining(data.remaining ?? 0);
-      setIsLocked(!data.allowed);
-      return { allowed: data.allowed };
+      setIsPaid(!!data.paid);
+      setRemaining(data.paid ? Infinity : (data.remaining ?? 0));
+      setIsLocked(!data.allowed && !data.paid);
+      return { allowed: data.allowed || !!data.paid };
     } catch {
-      // On error — allow through
+      // On error — allow through, never block a real person
       return { allowed: true };
     }
   }, [isPaid]);
 
   const grantHardshipAccess = useCallback(() => {
     // Hardship: reset local counter hint, but server still tracks
-    // Best we can do without login — give them a fresh localStorage state
     try { localStorage.setItem('sorted_hardship_used', 'true'); } catch {}
   }, []);
 

@@ -1,10 +1,16 @@
 import Stripe from 'npm:stripe@14.21.0';
 
-const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY'));
-
-Deno.serve(async (req) => {
+export default async function(req) {
   try {
-    const { success_url, cancel_url } = await req.json();
+    // Where the buyer lands comes from the server-set app origin — never from the
+    // caller and never from the request Host. No header, no checkout session.
+    const appUrl = req.headers.get('X-Base44-App-Url');
+    if (!appUrl) {
+      console.error('[SortedCheckout] missing X-Base44-App-Url header — refusing to create a session');
+      return Response.json({ error: 'Checkout unavailable right now.' }, { status: 500 });
+    }
+
+    const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY'));
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -12,8 +18,10 @@ Deno.serve(async (req) => {
         price: 'price_1TM6esLgeWr0ng8pa8EX1QNP', // £9.99 one-time — Sorted For Life
         quantity: 1,
       }],
-      success_url: success_url || 'https://uf51.love/Sorted?sorted=success',
-      cancel_url:  cancel_url  || 'https://uf51.love/Sorted',
+      // {CHECKOUT_SESSION_ID} is filled in by Stripe. SORTED only unlocks after
+      // the backend has confirmed that id with Stripe.
+      success_url: `${appUrl}/Sorted?sorted=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/Sorted`,
       payment_method_types: ['card'],
       billing_address_collection: 'auto',
       metadata: {
@@ -22,9 +30,11 @@ Deno.serve(async (req) => {
       },
     });
 
+    console.log('[SortedCheckout] session created:', session.id);
     return Response.json({ url: session.url });
+
   } catch (error) {
     console.error('SORTED checkout error:', error.message);
     return Response.json({ error: error.message }, { status: 500 });
   }
-});
+}

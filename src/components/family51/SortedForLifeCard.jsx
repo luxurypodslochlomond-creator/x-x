@@ -9,26 +9,30 @@ export default function SortedForLifeCard({ compact = false }) {
   const geo = useSortedGeoPrice();
 
   const handleCheckout = async () => {
-    if (window.self !== window.top) {
-      alert('Checkout only works from the published app. Please open it directly.');
-      return;
-    }
     setLoading(true);
     setError('');
+    // Stripe Checkout has to be a real page. In the builder preview we are inside
+    // an iframe, so the tab is opened here — inside the click, before any await —
+    // or the browser blocks it.
+    const isFramed = window.self !== window.top;
+    const checkoutTab = isFramed ? window.open('', '_blank') : null;
+    if (isFramed && !checkoutTab) {
+      setLoading(false);
+      setError('Please allow popups, then try again.');
+      return;
+    }
+    if (checkoutTab) checkoutTab.opener = null;
+
     try {
-      const res = await sortedCheckout({
-        success_url: window.location.origin + '/Sorted?sorted=success',
-        cancel_url:  window.location.origin + '/Sorted',
-      });
-      if (res.data?.url) {
-        window.location.href = res.data.url;
-      } else {
-        setError('Could not start checkout. Try again in a moment.');
-      }
+      const res = await sortedCheckout({});
+      const url = res.data?.url;
+      if (!url) throw new Error('No checkout URL returned');
+      if (checkoutTab) checkoutTab.location.replace(url);
+      else window.location.assign(url);
     } catch (err) {
       console.error(err);
+      checkoutTab?.close();
       setError('Something went wrong. Please try again.');
-    } finally {
       setLoading(false);
     }
   };

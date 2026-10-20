@@ -1,0 +1,67 @@
+{
+  "name": "SortedPass",
+  "type": "object",
+  "description": "A confirmed SORTED payment. Written ONLY by the backend, after Stripe confirms the money actually arrived \u2014 never from the browser. Holds a customer email and a payment reference, so admin-only.",
+  "properties": {
+    "stripe_session_id": {
+      "type": "string",
+      "description": "The Stripe Checkout session id this pass was issued against. One per purchase \u2014 the receipt."
+    },
+    "email": {
+      "type": "string",
+      "description": "Customer email Stripe collected at checkout, for support and admin lookup."
+    },
+    "amount_paid": {
+      "type": "number",
+      "description": "Amount paid in the smallest currency unit (999 = \u00a39.99)."
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency Stripe charged in, e.g. gbp."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The device this pass is unlocked on, stamped server-side when the buyer returns from Stripe. No login needed."
+    },
+    "product": {
+      "type": "string",
+      "default": "sorted_for_life",
+      "description": "Which SORTED product this pass covers."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "refunded",
+        "revoked"
+      ],
+      "default": "active",
+      "description": "Set to refunded or revoked to close this pass."
+    }
+  },
+  "required": [
+    "stripe_session_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
