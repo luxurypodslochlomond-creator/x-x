@@ -5,6 +5,7 @@ Deno.serve(async (req) => {
     const referer = req.headers.get('referer') || '';
     const isCB51 = hostname.includes('cb51.') || referer.includes('/CB51') || referer.includes('/Scott') || url.searchParams.get('brand') === 'cb51';
     const isSorted = referer.includes('/Sorted') || referer.includes('/Family51') || url.searchParams.get('brand') === 'sorted';
+    const isClimate = url.searchParams.get('brand') === 'climate' || referer.includes('/TogetherChangeClimate') || referer.includes('/ClimatePlatform') || referer.includes('/Climate');
 
     const manifest = isSorted ? {
       name: "SORTED — We've Got You",
@@ -90,6 +91,37 @@ Deno.serve(async (req) => {
           ]
         }
       }
+    } : isClimate ? {
+      name: "Together We Change Climate — Record of the Time",
+      short_name: "Climate Record",
+      description: "A public record of climate emergencies and the positive actions that work — shared openly, internationally.",
+      start_url: "/TogetherChangeClimate",
+      scope: "/",
+      display: "standalone",
+      orientation: "portrait-primary",
+      background_color: "#141210",
+      theme_color: "#b3261e",
+      icons: [
+        { src: "/api/functions/serveClimateOGImage", sizes: "192x192", type: "image/png", purpose: "any" },
+        { src: "/api/functions/serveClimateOGImage", sizes: "512x512", type: "image/png", purpose: "any" }
+      ],
+      categories: ["education", "news"],
+      shortcuts: [
+        {
+          name: "Transmission Map",
+          short_name: "Map",
+          description: "Where the record is being read",
+          url: "/ClimateMap",
+          icons: [{ src: "/api/functions/serveClimateOGImage", sizes: "192x192" }]
+        },
+        {
+          name: "Global Impact",
+          short_name: "Impact",
+          description: "Reach by country and nation",
+          url: "/ClimateImpact",
+          icons: [{ src: "/api/functions/serveClimateOGImage", sizes: "192x192" }]
+        }
+      ]
     } : {
       name: "Universal Frequency 51",
       short_name: "UF51",

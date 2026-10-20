@@ -67,6 +67,7 @@ import SortedInvestorPressPage from './pages/SortedInvestorPress';
 import PetSounds51InvestorPressPage from './pages/PetSounds51InvestorPress';
 import SortedForOrgsPage from './pages/SortedForOrgs';
 import SortedLayout from './components/family51/SortedLayout';
+import ClimateLayout from './components/climate/ClimateLayout';
 import SortedGlobalAccessPage from './pages/SortedGlobalAccess';
 import SortedAboutPage from './pages/SortedAbout';
 import SortedResearchBriefPage from './pages/SortedResearchBrief';
@@ -259,23 +260,23 @@ const AuthenticatedApp = () => {
       <Route path="/PartnerEvidence" element={<PartnerEvidencePage />} />
       <Route path="/ExtractionProofCovenant" element={<LayoutWrapper currentPageName="ExtractionProofCovenant"><ExtractionProofCovenantPage /></LayoutWrapper>} />
       <Route path="/UF51Overview" element={<LayoutWrapper currentPageName="UF51Overview"><UF51OverviewPage /></LayoutWrapper>} />
-      <Route path="/TogetherChangeClimate" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><TogetherChangeClimatePage /></LayoutWrapper>} />
-      <Route path="/ClimatePlatform" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><TogetherChangeClimatePage /></LayoutWrapper>} />
-      <Route path="/ClimateDetail/:type/:id" element={<LayoutWrapper currentPageName="TogetherChangeClimate"><ClimateDetailPage /></LayoutWrapper>} />
+      <Route path="/TogetherChangeClimate" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />
+      <Route path="/ClimatePlatform" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />
+      <Route path="/ClimateDetail/:type/:id" element={<ClimateLayout currentPage="TogetherChangeClimate"><ClimateDetailPage /></ClimateLayout>} />
       <Route path="/UF51Token" element={<LayoutWrapper currentPageName="UF51Token"><UF51TokenPage /></LayoutWrapper>} />
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
       <Route path="/Franklin51" element={<LayoutWrapper currentPageName="Franklin51"><Franklin51Page /></LayoutWrapper>} />
       <Route path="/Aletheia" element={<AletheiaPage />} />
-      <Route path="/ClimateBrief" element={<LayoutWrapper currentPageName="ClimateBrief"><ClimateBriefPage /></LayoutWrapper>} />
+      <Route path="/ClimateBrief" element={<ClimateLayout currentPage="ClimateBrief"><ClimateBriefPage /></ClimateLayout>} />
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />
       <Route path="/AdminClimateReview" element={<LayoutWrapper currentPageName="AdminClimateReview"><AdminClimateReviewPage /></LayoutWrapper>} />
-      <Route path="/ClimateMap" element={<LayoutWrapper currentPageName="ClimateMap"><ClimateMapPage /></LayoutWrapper>} />
+      <Route path="/ClimateMap" element={<ClimateLayout currentPage="ClimateMap"><ClimateMapPage /></ClimateLayout>} />
       <Route path="/AdminClimateCategories" element={<LayoutWrapper currentPageName="AdminClimateCategories"><AdminClimateCategoriesPage /></LayoutWrapper>} />
-      <Route path="/ClimateImpact" element={<LayoutWrapper currentPageName="ClimateImpact"><ClimateImpactPage /></LayoutWrapper>} />
-      <Route path="/ClimateTerms" element={<LayoutWrapper currentPageName="ClimateTerms"><ClimateTermsPage /></LayoutWrapper>} />
-      <Route path="/ClimatePrivacy" element={<LayoutWrapper currentPageName="ClimatePrivacy"><ClimatePrivacyPage /></LayoutWrapper>} />
-      <Route path="/ClimateReachPlace/:placeType/:place" element={<LayoutWrapper currentPageName="ClimateReachPlace"><ClimateReachPlacePage /></LayoutWrapper>} />
-      <Route path="/ClimateFounder" element={<LayoutWrapper currentPageName="ClimateFounder"><ClimateFounderPage /></LayoutWrapper>} />
+      <Route path="/ClimateImpact" element={<ClimateLayout currentPage="ClimateImpact"><ClimateImpactPage /></ClimateLayout>} />
+      <Route path="/ClimateTerms" element={<ClimateLayout currentPage="ClimateTerms"><ClimateTermsPage /></ClimateLayout>} />
+      <Route path="/ClimatePrivacy" element={<ClimateLayout currentPage="ClimatePrivacy"><ClimatePrivacyPage /></ClimateLayout>} />
+      <Route path="/ClimateReachPlace/:placeType/:place" element={<ClimateLayout currentPage="ClimateImpact"><ClimateReachPlacePage /></ClimateLayout>} />
+      <Route path="/ClimateFounder" element={<ClimateLayout currentPage="ClimateFounder"><ClimateFounderPage /></ClimateLayout>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
