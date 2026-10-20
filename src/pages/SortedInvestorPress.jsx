@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { jsPDF } from 'jspdf';
 import { COLOR, FONT } from '@/components/family51/sortedDesignSystem';
 
 const { gold: GOLD, ink: INK, paper: PAPER, muted: MUTED, border: BORDER } = COLOR;
@@ -20,8 +19,9 @@ export default function SortedInvestorPress() {
     });
   };
 
-  const handlePDF = () => {
+  const handlePDF = async () => {
     setSaving(true);
+    const { jsPDF } = await import('jspdf');
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
     const margin = 20;
     const pageWidth = 210;

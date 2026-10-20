@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { jsPDF } from 'jspdf';
 
 // PetSounds51 — Investor & Partner Press Release
 // Designed for ESG investors, pet care market, HSBC-adjacent / financial services
@@ -17,8 +16,9 @@ export default function PetSounds51InvestorPress() {
     });
   };
 
-  const handlePDF = () => {
+  const handlePDF = async () => {
     setSaving(true);
+    const { jsPDF } = await import('jspdf');
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
     const margin = 20;
     const pageWidth = 210;
