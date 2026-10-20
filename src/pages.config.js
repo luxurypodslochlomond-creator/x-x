@@ -48,7 +48,12 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import React, { lazy } from 'react';
-import __Layout from './Layout.jsx';
+
+// The shared UF51 shell (sidebar, providers, background services, icons) is fetched on
+// demand instead of being baked into the first load. Pages that don't use it — SORTED
+// and the climate platform — never download it at all. Nothing is removed: the shell
+// still loads for every page that renders it, just later.
+const __Layout = lazy(() => import('./Layout.jsx'));
 
 // LAZY LOADING - pages only load when navigated to, not all at once
 // This fixes the white screen / memory overload on boot
