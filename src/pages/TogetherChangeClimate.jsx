@@ -392,7 +392,10 @@ export default function TogetherChangeClimate() {
         {/* Bone band */}
         <div className="relative z-10 bg-[#efe7d6] px-5 py-4 flex items-center justify-between gap-3"
           style={{ animation: 'twcc-enter .25s ease-out both' }}>
-          <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#141210]">{t.service}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#141210]">{t.service}</span>
+            <Link to={createPageUrl('ClimateFounder')} className="text-[9px] font-mono text-[#5a5246] hover:text-[#b3261e] transition-colors">· The founder →</Link>
+          </div>
           <div className="flex items-center gap-1.5">
             <Languages className="w-3.5 h-3.5 text-[#141210]" />
             <select
@@ -771,8 +774,8 @@ export default function TogetherChangeClimate() {
           <Link to={createPageUrl('ClimatePrivacy')} className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors">Privacy</Link>
         </div>
 
-        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors">
-          {t.honour}
+        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline">
+          {t.honour} <span className="text-[#b3261e]">→</span>
         </Link>
         <p className="px-4 pb-8 pt-1 text-center text-[9px] font-mono text-[#5a5246]/70 bg-[#efe7d6]">
           Platform built by Brian Hughes ·{' '}
