@@ -48,6 +48,7 @@ const HUBS = {
   climatemap: () => import('@/pages/ClimateMapPage'),
   climateimpact: () => import('@/pages/ClimateImpact'),
   climatefounder: () => import('@/pages/ClimateFounder'),
+  climatesupport: () => import('@/pages/ClimateSupport'),
   climatebrief: () => import('@/pages/ClimateBrief'),
   climateterms: () => import('@/pages/ClimateTerms'),
   climateprivacy: () => import('@/pages/ClimatePrivacy'),

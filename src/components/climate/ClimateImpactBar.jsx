@@ -1,29 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { base44 } from '@/api/base44Client';
 import { Globe } from 'lucide-react';
+import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 
 // A calm, dignified strip showing the global reach of the record.
 // "X people in Y countries have read the record of the time."
 // This is what moves Janine — seeing her life's work reach the world.
 // It holds its height in every state, so landing on the record never jumps.
+// It shares one read of the numbers with the impact page, so tapping through is instant.
 export default function ClimateImpactBar() {
-  const [stats, setStats] = useState(undefined);
-
-  useEffect(() => {
-    let cancelled = false;
-    base44.functions.invoke('climateImpactStats', {})
-      .then((res) => {
-        if (cancelled) return;
-        const data = res?.data || res;
-        setStats(data || { total_views: 0, unique_countries: 0 });
-      })
-      .catch(() => { if (!cancelled) setStats({ total_views: 0, unique_countries: 0 }); });
-    return () => { cancelled = true; };
-  }, []);
-
-  const loading = stats === undefined;
+  const { data: stats, isPending } = useClimateImpactStats();
   const views = stats?.total_views || 0;
   const countries = stats?.unique_countries || 0;
 
@@ -31,7 +18,7 @@ export default function ClimateImpactBar() {
     <Link to={createPageUrl('ClimateImpact')} className="flex items-center justify-center gap-2 px-4 py-3 min-h-[42px] bg-[#141210] border-b-2 border-[#e2602a]/20 active:bg-[#e2602a]/10 transition-colors">
       <Globe className="w-3.5 h-3.5 text-[#e2602a] flex-shrink-0" />
       <p className="text-[10px] font-mono text-[#efe7d6]/80 leading-tight text-center">
-        {loading ? (
+        {isPending ? (
           <span className="text-[#efe7d6]/25 tracking-[0.3em]">···</span>
         ) : views > 0 ? (
           <>

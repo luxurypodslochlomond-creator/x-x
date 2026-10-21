@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ArrowLeft } from 'lucide-react';
-import ClimateMap from '@/components/climate/ClimateMap';
+import ClimateMapPlaceholder from '@/components/climate/ClimateMapPlaceholder';
+
+// The mapping library is 150kB on its own. Loaded this way, the page's masthead
+// paints immediately and the map streams in behind a placeholder that holds its space.
+const ClimateMap = React.lazy(() => import('@/components/climate/ClimateMap'));
 
 export default function ClimateMapPage() {
   return (
@@ -70,7 +74,9 @@ export default function ClimateMapPage() {
 
       {/* MAP */}
       <div className="relative" style={{ height: 'calc(100vh - 220px)', minHeight: '400px' }}>
-        <ClimateMap />
+        <Suspense fallback={<ClimateMapPlaceholder />}>
+          <ClimateMap />
+        </Suspense>
       </div>
 
       {/* FOOTER */}
