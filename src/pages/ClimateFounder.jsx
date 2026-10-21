@@ -100,15 +100,24 @@ export default function ClimateFounder() {
         </p>
 
         {/* Build credit — asked for by Janine. Held apart from her own credentials by
-            a rule, so it reads as who built the page, never as a title she holds. */}
-        <div className="mt-6 pt-5 border-t border-[#141210]/15 max-w-[260px] mx-auto">
-          <p className="text-[10px] font-black font-mono uppercase tracking-[0.15em] text-[#e2602a]">
+            a rule, so it reads as who built the page, never as a title she holds.
+            The credit is the contact: the address is never printed on the page,
+            it only opens in the mail app when tapped. */}
+        <a
+          href="mailto:family@uf51.love"
+          aria-label="Write to UF51 CIC about this record"
+          className="block mt-6 pt-5 border-t border-[#141210]/15 max-w-[260px] mx-auto transition-opacity active:opacity-60"
+        >
+          <span className="block text-[10px] font-black font-mono uppercase tracking-[0.15em] text-[#e2602a]">
             Made in Scotland from photons
-          </p>
-          <p className="text-[10px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">
+          </span>
+          <span className="block text-[10px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">
             Platform by Brian Hughes · UF51 CIC
-          </p>
-        </div>
+          </span>
+          <span className="block text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#141210] mt-3 underline underline-offset-4 decoration-[#e2602a]">
+            Write to us
+          </span>
+        </a>
       </div>
 
       {/* Achievements — the record of the work */}
