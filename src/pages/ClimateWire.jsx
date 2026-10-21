@@ -122,7 +122,7 @@ export default function ClimateWire() {
         <div className="mt-8 bg-[#141210]/5 border-l-4 border-l-[#141210] p-4">
           <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Why there is nothing to click</p>
           <p className="text-[11px] font-mono leading-relaxed text-[#141210]">
-            No likes, no shares, no most-read. Attention is the thing that turns a news page into noise, so the wire does not measure it. Entries sit in date order and are read or not read. What a reader gets instead is the source, how well the claim is known, and one plain line on what can be copied.
+            No likes, no counters, no most-read. Attention is the thing that turns a news page into noise, so the wire does not measure it. Passing an entry on is not a counter — it is what the wire is for. Entries sit in date order and are read or not read. What a reader gets instead is the source, how well the claim is known, and one plain line on what can be copied.
           </p>
         </div>
       </div>

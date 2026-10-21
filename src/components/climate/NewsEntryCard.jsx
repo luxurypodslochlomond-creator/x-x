@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import ShareCardButton from '@/components/climate/ShareCardButton';
 
 // One entry on the wire. Dated, sourced, and honest about how well it is known —
 // the badge tells the reader whether one origin says this, two agree, or the body
@@ -87,6 +88,7 @@ export default function NewsEntryCard({ entry, linked = true }) {
             Read the source <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         )}
+        {linked && <div className="ml-auto self-center"><ShareCardButton entry={entry} compact /></div>}
       </div>
     </article>
   );
