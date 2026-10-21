@@ -26,9 +26,11 @@ export default async function (req) {
       });
     }
 
-    const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+    // Confirmed against the same climate account the gift was taken into — never
+    // another product's. If that account is not in place, no gift can exist.
+    const stripeKey = Deno.env.get('STRIPE_SECRET_KEY_CLIMATE');
     if (!stripeKey) {
-      console.error('[ClimateSupport] STRIPE_SECRET_KEY is not set');
+      console.error('[ClimateSupport] STRIPE_SECRET_KEY_CLIMATE is not set');
       return Response.json({ recorded: false, error: 'Could not confirm the gift' }, { status: 500 });
     }
 

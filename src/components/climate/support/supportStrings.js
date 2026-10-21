@@ -56,6 +56,10 @@ export const SUPPORT_STRINGS = {
     pledge_4: 'A name is shown only if the giver asked for it. Every gift is declared here, in the open.',
     back: 'Back to the record',
 
+    closed_heading: 'Giving is not open yet.',
+    closed_body: 'The record only ever takes gifts into a climate account of its own — never into another company\'s. That account is being arranged now, and until it is in place nothing is taken at all.',
+    closed_note: 'Everything else here is already true: no advertising, no sponsorship, no place on this record for sale. That will not change when giving opens.',
+
     lang_aria: 'Select language',
     lang_auto: 'Auto',
     lang_other: 'Type any language…',

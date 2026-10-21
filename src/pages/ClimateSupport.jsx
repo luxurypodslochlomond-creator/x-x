@@ -22,6 +22,7 @@ export default function ClimateSupport() {
   const [result, setResult] = useState(null);
   const [wall, setWall] = useState({ names: [], supporters: 0 });
   const [loadingWall, setLoadingWall] = useState(true);
+  const [givingOpen, setGivingOpen] = useState(false);
 
   const t = { ...SUPPORT_STRINGS.en, ...(liveStrings || {}) };
 
@@ -29,6 +30,7 @@ export default function ClimateSupport() {
     try {
       const res = await base44.functions.invoke('climateSupportWall', {});
       setWall(res.data || { names: [], supporters: 0 });
+      setGivingOpen(Boolean(res.data?.giving_open));
     } catch (error) {
       console.error('Could not load the wall', error);
     } finally {
@@ -72,12 +74,13 @@ export default function ClimateSupport() {
       <div className="mt-6 space-y-6">
         {result && <SupportThanks result={result} t={t} />}
 
-        <DonationForm t={t} />
-
         {loadingWall ? (
           <p className="border-2 border-record-ink/15 p-4 text-[11px] text-record-muted">{t.wall_loading}</p>
         ) : (
-          <SupportWall names={wall.names} supporters={wall.supporters} t={t} />
+          <>
+            <DonationForm t={t} open={givingOpen} />
+            <SupportWall names={wall.names} supporters={wall.supporters} t={t} />
+          </>
         )}
 
         <section className="border-t border-record-ink/20 pt-5">

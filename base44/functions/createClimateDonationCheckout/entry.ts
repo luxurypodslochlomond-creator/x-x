@@ -40,10 +40,13 @@ export default async function (req) {
       return Response.json({ error: 'Please add the name you would like shown, or give without one.' }, { status: 400 });
     }
 
-    const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+    // A climate gift must never land in another product's Stripe account. This is
+    // the climate record's OWN account key — set once the founder's handlers say
+    // where the money is held. Until then this stays closed and nothing is taken.
+    const stripeKey = Deno.env.get('STRIPE_SECRET_KEY_CLIMATE');
     if (!stripeKey) {
-      console.error('[ClimateSupport] STRIPE_SECRET_KEY is not set');
-      return Response.json({ error: 'Giving is unavailable right now. Please try again shortly.' }, { status: 500 });
+      console.error('[ClimateSupport] STRIPE_SECRET_KEY_CLIMATE is not set — climate giving is held closed');
+      return Response.json({ error: 'Giving is not open yet. The record only takes gifts into a climate account of its own.' }, { status: 503 });
     }
 
     const appId = Deno.env.get('BASE44_APP_ID') || '';

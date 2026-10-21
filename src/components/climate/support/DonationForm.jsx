@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import AmountPicker from './AmountPicker';
 import NameChoice from './NameChoice';
 
-export default function DonationForm({ t }) {
+export default function DonationForm({ t, open }) {
   const [amount, setAmount] = useState(500);
   const [frequency, setFrequency] = useState('one_time');
   const [visibility, setVisibility] = useState('anonymous');
@@ -12,6 +12,18 @@ export default function DonationForm({ t }) {
   const [error, setError] = useState('');
 
   const pounds = (amount / 100).toFixed(amount % 100 === 0 ? 0 : 2);
+
+  // Held closed until the climate record has an account of its own. The controls
+  // are hidden rather than broken: the page never invites a gift it cannot take.
+  if (!open) {
+    return (
+      <section className="border-2 border-record-ink bg-record-bone p-4 sm:p-5">
+        <h2 className="font-display text-xl font-bold uppercase leading-tight text-record-ink">{t.closed_heading}</h2>
+        <p className="mt-2 text-[12px] leading-relaxed text-record-muted">{t.closed_body}</p>
+        <p className="mt-3 pt-3 border-t border-record-ink/15 text-[11px] leading-relaxed text-record-muted">{t.closed_note}</p>
+      </section>
+    );
+  }
 
   const handleGive = async () => {
     setError('');

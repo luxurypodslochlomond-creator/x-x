@@ -19,9 +19,14 @@ export default async function (req) {
 
     const supporters = await base44.asServiceRole.entities.ClimateSupport.count({ status: 'paid' });
 
-    return Response.json({ names, supporters });
+    // Whether the record can honestly take a gift yet — true only once the climate
+    // account's own key is in place. The page uses this so it never offers a gift
+    // it cannot take, and never quietly takes one into someone else's account.
+    const giving_open = !!Deno.env.get('STRIPE_SECRET_KEY_CLIMATE');
+
+    return Response.json({ names, supporters, giving_open });
   } catch (error) {
     console.error('[ClimateSupport] wall error:', error.message);
-    return Response.json({ names: [], supporters: 0 });
+    return Response.json({ names: [], supporters: 0, giving_open: false });
   }
 }
