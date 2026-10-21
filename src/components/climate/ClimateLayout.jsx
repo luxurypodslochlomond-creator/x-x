@@ -106,21 +106,25 @@ export default function ClimateLayout({ children, currentPage }) {
           </nav>
         </div>
 
-        {/* Mobile — same links, thumb-scrollable */}
+        {/* Mobile — same links, thumb-scrollable, sitting centred under the masthead.
+            w-max inside the scroller keeps them centred while they fit, and still
+            scrolls from the left edge the moment a longer language pushes them wider. */}
         <nav
-          className="sm:hidden flex gap-2.5 px-3 py-2.5 overflow-x-auto overscroll-x-contain"
+          className="sm:hidden px-4 py-2.5 overflow-x-auto overscroll-x-contain"
           style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           aria-label="Platform"
         >
-          {NAV.map(item => (
-            <Link
-              key={item.page}
-              to={createPageUrl(item.page)}
-              className={`flex-shrink-0 py-1.5 text-[10px] font-black uppercase tracking-wide transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60'}`}
-            >
-              {item.label}
-            </Link>
-          ))}
+          <div className="mx-auto flex w-max gap-3">
+            {NAV.map(item => (
+              <Link
+                key={item.page}
+                to={createPageUrl(item.page)}
+                className={`flex-shrink-0 py-1.5 text-[10px] font-black uppercase tracking-wide transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60'}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </nav>
       </header>
 
