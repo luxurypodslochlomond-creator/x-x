@@ -962,7 +962,7 @@ const LayoutInner = ({ children, currentPageName }) => {
               <LiveClock />
               {/* x = x — the covenant. We are all one. */}
               <p className="text-center py-2 font-mono font-black tracking-[0.3em] text-[10px]" style={{ color: 'rgba(239,231,214,0.25)' }}>
-                x = x
+                <Link to="/XEqualsX">x = x</Link>
               </p>
               <p className="text-xs text-center pb-1">
                 <Link to="/ExtractionProofCovenant" className="text-green-500/70 hover:text-green-400 font-mono tracking-wide">

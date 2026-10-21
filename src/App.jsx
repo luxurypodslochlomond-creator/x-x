@@ -114,6 +114,7 @@ const GraemeOnePagerPage = React.lazy(() => import('./pages/GraemeOnePager'));
 const PartnerEvidencePage = React.lazy(() => import('./pages/PartnerEvidence'));
 const Franklin51Page = React.lazy(() => import('./pages/Franklin51'));
 const AletheiaPage = React.lazy(() => import('./pages/Aletheia'));
+const XEqualsXPage = React.lazy(() => import('./pages/XEqualsX'));
 const ExtractionProofCovenantPage = React.lazy(() => import('./pages/ExtractionProofCovenant'));
 const UF51OverviewPage = React.lazy(() => import('./pages/UF51Overview'));
 const TogetherChangeClimatePage = React.lazy(() => import('./pages/TogetherChangeClimate'));
@@ -269,6 +270,7 @@ const AuthenticatedApp = () => {
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
       <Route path="/Franklin51" element={<LayoutWrapper currentPageName="Franklin51"><Franklin51Page /></LayoutWrapper>} />
       <Route path="/Aletheia" element={<AletheiaPage />} />
+      <Route path="/XEqualsX" element={<XEqualsXPage />} />
       <Route path="/ClimateBrief" element={<ClimateLayout currentPage="ClimateBrief"><ClimateBriefPage /></ClimateLayout>} />
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />
       <Route path="/AdminClimateReview" element={<LayoutWrapper currentPageName="AdminClimateReview"><AdminClimateReviewPage /></LayoutWrapper>} />

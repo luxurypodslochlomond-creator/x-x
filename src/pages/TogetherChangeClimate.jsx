@@ -366,8 +366,14 @@ export default function TogetherChangeClimate() {
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/60">Dr. Jane Goodall</span>
         </div>
-        {/* The covenant sits underneath her words, not beside them. Let X = X. */}
-        <span className="text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">Let X = X</span>
+        {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why. */}
+        <Link
+          to="/XEqualsX"
+          className="px-3 py-1 text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
+          style={{ textDecorationColor: 'rgba(226,96,42,0.5)' }}
+        >
+          x = x
+        </Link>
       </div>
 
       <ClimateImpactBar />
