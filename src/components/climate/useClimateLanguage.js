@@ -115,7 +115,16 @@ export function useClimateLanguage(baseStrings) {
   const setLanguage = (code) => {
     setLang(code);
     try { localStorage.setItem(LANG_KEY, code); } catch { /* ignore */ }
+    // Tell the rest of the platform, so a tongue picked here holds site-wide.
+    window.dispatchEvent(new CustomEvent('uf51:lang', { detail: code }));
   };
+
+  // And follow the platform if the tongue is changed somewhere else.
+  useEffect(() => {
+    const follow = (e) => setLang(e.detail);
+    window.addEventListener('uf51:lang', follow);
+    return () => window.removeEventListener('uf51:lang', follow);
+  }, []);
 
   return {
     lang,

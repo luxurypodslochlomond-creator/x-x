@@ -32,6 +32,9 @@ import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwo
 import CB51OfflineHandler from '@/components/scott/CB51OfflineHandler';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
+import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
+import SiteTranslator from '@/components/shared/SiteTranslator';
+import LanguageButton from '@/components/shared/LanguageButton';
 
 // import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
 // import BackgroundSync from '@/components/shared/BackgroundSync';
@@ -667,6 +670,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       {/* <RealtimeDebugger /> */}
       {/* <PerformanceMonitor /> */}
       <GlobalErrorBoundary>
+      <SiteTranslator />
       <style>{`
         @media (display-mode: standalone) { body { -webkit-touch-callout: none; -webkit-user-select: none; } }
         @media print { header, aside, .floating-music-player, nav, footer { display: none !important; } main { margin: 0 !important; padding: 0 !important; } }
@@ -775,6 +779,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   {isMobileMenuOpen && currentPageName !== 'Platform' && (
                     <div className={`lg:hidden fixed inset-x-0 bottom-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#f4efe4] z-[55] overflow-y-auto pb-6`} style={{ animation: 'sorted-enter 0.24s cubic-bezier(0,0,0.2,1)' }}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
+                          <LanguageButton tone="paper" />
                           {isCB51Page ? (
                             <NavSection title="ARTIST MANAGEMENT" color="cyan" items={cb51Nav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                           ) : isPS51Page ? (
@@ -888,6 +893,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                 </Link>
               </>
             )}
+            <div className="mt-3"><LanguageButton tone="paper" /></div>
           </div>
 
           <div className="p-6 space-y-3">
@@ -1004,6 +1010,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     export default function Layout(props) {
       return (
+        <SiteLanguageProvider>
         <AutoHealingShield>
           <ProfessionalModeProvider>
             <MeshProvider>
@@ -1021,5 +1028,6 @@ const LayoutInner = ({ children, currentPageName }) => {
             </MeshProvider>
           </ProfessionalModeProvider>
         </AutoHealingShield>
+        </SiteLanguageProvider>
       );
     }
