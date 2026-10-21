@@ -213,6 +213,29 @@ button:focus-visible {
 html {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Native photo browsing: no timer fighting a finger, no page behind the viewer. */
+.climate-photo-rail { scrollbar-width: none; }
+.climate-photo-rail::-webkit-scrollbar { display: none; }
+.climate-photo-dialog {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: rgb(var(--record-ink));
+  color: rgb(var(--record-paper));
+}
+.climate-photo-dialog[open] { display: flex; flex-direction: column; }
+.climate-photo-dialog::backdrop { background: rgb(var(--record-ink)); }
+.climate-photo-viewer-top { padding-top: max(.5rem, env(safe-area-inset-top)); }
+.climate-photo-viewer-bottom { padding-bottom: env(safe-area-inset-bottom); background: rgb(var(--record-bone)); }
 a,
 button,
 [role="button"],

@@ -1,107 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { base44 } from '@/api/base44Client';
-import ClimatePhotoViewer from './ClimatePhotoViewer';
+import React, { useRef, useState } from 'react';
+import useClimatePhotos from '@/components/climate/useClimatePhotos';
+import ClimatePhotoSlide from '@/components/climate/ClimatePhotoSlide';
+import ClimatePhotoControls from '@/components/climate/ClimatePhotoControls';
+import ClimatePhotoViewer from '@/components/climate/ClimatePhotoViewer';
 
-// ── THE TOP CRAWL ──
-// Janine's photographs. Her top scroll: pictures drifting past, credited.
-//
-// A photograph is shown whole — never cut off at the edges, and never written
-// over: the caption and the photographer's name sit underneath it, on the ink,
-// where a person can actually read them. It drifts on its own, slowly, and steps
-// aside the moment a finger touches it, because a person looking is more
-// important than the loop. Nothing here counts you, ranks you, or keeps you.
 export default function ClimateImageCrawl() {
-  const [photos, setPhotos] = useState([]);
-  const [shapes, setShapes] = useState({});
+  const { photos, loading, error } = useClimatePhotos();
+  const [index, setIndex] = useState(0);
   const [openAt, setOpenAt] = useState(null);
   const railRef = useRef(null);
-  const holdUntil = useRef(0);
-
-  useEffect(() => {
-    let alive = true;
-    base44.entities.ClimatePhoto
-      .list({ sort: 'created_date', limit: 40 })
-      .then((page) => { if (alive) setPhotos(page.items ?? page); });
-    return () => { alive = false; };
-  }, []);
-
-  useEffect(() => {
-    if (photos.length === 0 || openAt !== null) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const step = window.setInterval(() => {
-      const rail = railRef.current;
-      if (!rail || Date.now() < holdUntil.current) return;
-      const second = rail.children[photos.length]; // the repeat, so the drift never runs out
-      if (!second) return;
-      const oneLength = second.offsetLeft;
-      if (rail.scrollLeft >= oneLength) rail.scrollLeft -= oneLength;
-      else rail.scrollLeft += 1;
-    }, 40);
-    return () => window.clearInterval(step);
-  }, [photos.length, openAt]);
-
-  if (photos.length === 0) return null;
-
-  const strip = [...photos, ...photos];
-  const hold = () => { holdUntil.current = Date.now() + 4000; };
-
-  // Each picture keeps its own shape, so the frame is as big as the photograph
-  // allows and nothing is cropped to fit a template.
-  const noteShape = (id, e) => {
-    const img = e.currentTarget;
-    if (!img.naturalWidth || !img.naturalHeight) return;
-    setShapes((s) => (s[id] ? s : { ...s, [id]: `${img.naturalWidth} / ${img.naturalHeight}` }));
+  const go = step => {
+    const rail = railRef.current;
+    const next = (index + step + photos.length) % photos.length;
+    rail.scrollTo({ left: next * rail.clientWidth, behavior: 'instant' });
+    setIndex(next);
   };
-
+  if (loading) return <div role="status" className="aspect-[3/2] w-full bg-record-bone"><span className="sr-only">Loading photographs</span></div>;
+  if (!photos.length) return error ? <p className="bg-record-bone p-4 text-sm text-record-muted">Connect to load the photographs.</p> : null;
   return (
-    <div className="relative bg-[#141210] border-b-2 border-[#141210]">
-      <style>{`
-        .twcc-rail { -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-        .twcc-rail::-webkit-scrollbar { display: none; }
-      `}</style>
-
-      <div
-        ref={railRef}
-        onPointerDown={hold}
-        onTouchMove={hold}
-        onWheel={hold}
-        className="twcc-rail flex gap-3 py-3 px-3 overflow-x-auto items-start"
-      >
-        {strip.map((photo, i) => (
-          <button
-            key={`${photo.id}-${i}`}
-            onClick={() => setOpenAt(i % photos.length)}
-            className="flex-shrink-0 w-[calc(100vw-1.5rem)] max-w-[560px] sm:w-[520px] text-left"
-          >
-            <span
-              className="block w-full bg-[#0d0c0a] border border-[#efe7d6]/25 overflow-hidden"
-              style={{ aspectRatio: shapes[photo.id] || '3 / 2', maxHeight: '68vh' }}
-            >
-              <img
-                src={photo.image_url}
-                alt={photo.caption || 'Photograph on the record'}
-                loading={i < 2 ? 'eager' : 'lazy'}
-                decoding="async"
-                onLoad={(e) => noteShape(photo.id, e)}
-                className="w-full h-full object-contain"
-              />
-            </span>
-            <span className="block pt-2">
-              {photo.caption && (
-                <span className="block text-[11px] font-mono uppercase tracking-wider text-[#efe7d6] leading-snug">
-                  {photo.caption}
-                </span>
-              )}
-              <span className="block text-[11px] font-mono text-[#e2602a] leading-snug">{photo.credit}</span>
-            </span>
-          </button>
-        ))}
+    <section dir="ltr" aria-label="Photographs from Ocean Image Bank" className="border-b-2 border-record-ink bg-record-bone">
+      <div className="mx-auto max-w-3xl">
+        <div ref={railRef} onScroll={event => setIndex(Math.max(0, Math.min(photos.length - 1, Math.round(event.currentTarget.scrollLeft / event.currentTarget.clientWidth))))} className="climate-photo-rail flex w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
+          {photos.map((photo, i) => <ClimatePhotoSlide key={photo.id} photo={photo} onOpen={() => setOpenAt(i)} />)}
+        </div>
+        <ClimatePhotoControls index={index} total={photos.length} onPrevious={() => go(-1)} onNext={() => go(1)} />
       </div>
-
-      {openAt !== null && (
-        <ClimatePhotoViewer photos={photos} startIndex={openAt} onClose={() => setOpenAt(null)} />
-      )}
-    </div>
+      {openAt !== null && <ClimatePhotoViewer photos={photos} startIndex={openAt} onClose={() => setOpenAt(null)} />}
+    </section>
   );
 }
