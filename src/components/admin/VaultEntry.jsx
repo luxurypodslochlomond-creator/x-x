@@ -1,13 +1,42 @@
 import React, { useState } from "react";
 import { Copy, Check } from "lucide-react";
 
+// The builder preview runs inside a frame where the modern clipboard call is refused,
+// so fall back to the older select-and-copy method, which still works there.
+function copyTheOldWay(text) {
+  const field = document.createElement("textarea");
+  field.value = text;
+  field.setAttribute("readonly", "");
+  field.style.position = "fixed";
+  field.style.top = "-1000px";
+  field.style.opacity = "0";
+  document.body.appendChild(field);
+  field.select();
+  field.setSelectionRange(0, text.length);
+  let done = false;
+  try {
+    done = document.execCommand("copy");
+  } catch {
+    done = false;
+  }
+  document.body.removeChild(field);
+  return done;
+}
+
 export default function VaultEntry({ entry }) {
   const [copied, setCopied] = useState(false);
 
-  const copy = () => {
-    navigator.clipboard.writeText(entry.value || "");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copy = async () => {
+    const text = entry.value || "";
+    let done = false;
+    try {
+      await navigator.clipboard.writeText(text);
+      done = true;
+    } catch {
+      done = copyTheOldWay(text);
+    }
+    setCopied(done);
+    if (done) setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -17,7 +46,7 @@ export default function VaultEntry({ entry }) {
           <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#6b6258]">
             {entry.label}
           </p>
-          <p className="mt-1 font-mono text-sm font-bold text-[#1a1612] break-words">
+          <p className="mt-1 font-mono text-sm font-bold text-[#1a1612] break-words select-all">
             {entry.value}
           </p>
           {entry.notes && (

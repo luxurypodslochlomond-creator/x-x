@@ -74,7 +74,7 @@ export default function AdminSecureVault() {
   });
 
   return (
-    <div className="min-h-screen beadie-paper px-4 py-10 lg:px-8">
+    <div className="min-h-screen beadie-paper px-4 pt-10 pb-32 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center gap-3">
           <Lock className="w-7 h-7 beadie-ink" />
