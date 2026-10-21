@@ -8,6 +8,7 @@ import ClimateImpactMap from '@/components/climate/ClimateImpactMap';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import WorldReadingFeed from '@/components/climate/WorldReadingFeed';
 import WorldActionFeed from '@/components/climate/WorldActionFeed';
+import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 
 // Converts an ISO 2-letter country code to a display name.
 function countryName(code) {
@@ -43,31 +44,15 @@ function isKnownCountryName(input) {
 
 export default function ClimateImpact() {
   const navigate = useNavigate();
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // Shares one read of the numbers with the record's impact strip: tapping through
+  // from the record shows them at once, and the page refreshes them behind the scenes.
+  const { data: stats, isPending, refetch } = useClimateImpactStats();
   const [readerRegion, setReaderRegion] = useState('');
   const [savedRegion, setSavedRegion] = useState(false);
   const [countryNotice, setCountryNotice] = useState(false);
 
   useEffect(() => {
     try { setReaderRegion(localStorage.getItem('climate51_reader_region') || ''); } catch {}
-  }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-    const load = () => {
-      base44.functions.invoke('climateImpactStats', {})
-        .then((res) => {
-          if (cancelled) return;
-          const data = res?.data || res;
-          if (data) setStats(data);
-        })
-        .catch(() => {})
-        .finally(() => { if (!cancelled) setLoading(false); });
-    };
-    load();
-    const interval = setInterval(load, 30000);
-    return () => { cancelled = true; clearInterval(interval); };
   }, []);
 
   const saveRegion = async () => {
@@ -91,9 +76,7 @@ export default function ClimateImpact() {
             reader_region: trimmed,
           });
           // Refresh stats so the new nation appears
-          base44.functions.invoke('climateImpactStats', {})
-            .then((res) => { const data = res?.data || res; if (data) setStats(data); })
-            .catch(() => {});
+          refetch();
         } catch {}
       } else {
         localStorage.removeItem('climate51_reader_region');
@@ -101,7 +84,7 @@ export default function ClimateImpact() {
     } catch {}
   };
 
-  if (loading) {
+  if (isPending) {
     return (
       <div className="min-h-screen bg-[#efe7d6] flex flex-col items-center justify-center">
         <div className="w-10 h-10 rounded-full border-2 border-[#141210]/20 border-t-[#e2602a] animate-spin" />
