@@ -1,0 +1,68 @@
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import SignalBeacon from '@/components/climate/SignalBeacon';
+
+// The record's page shell — the same cold bands the Founder page wears, so every
+// page of the record reads as one place: paper, ink, one orange signal, x = x.
+export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, children }) {
+  const navigate = useNavigate();
+
+  return (
+    <div dir={dir} className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+      {/* Header — paper, the way out, the page's name */}
+      <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 border-b-2 border-[#141210] bg-[#efe7d6]">
+        <button
+          onClick={() => navigate(-1)}
+          aria-label="Back"
+          className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{eyebrow}</span>
+      </div>
+
+      {/* Cold epigraph band — the covenant mark, same as the record */}
+      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+        <div className="flex items-center justify-center gap-2 w-full">
+          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+          <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">{marker}</span>
+          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+        </div>
+        <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">x = x</div>
+      </div>
+
+      {/* Hero — cold ink, the beacon, the page says what it is */}
+      <div className="relative bg-[#141210] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 0.8s linear infinite' }} />
+        <div className="relative z-10 px-6 py-10 flex flex-col items-center justify-center gap-4 text-center min-h-[220px]">
+          <SignalBeacon size={44} color="#e2602a" />
+          <h1
+            className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md"
+            style={{ fontFamily: 'var(--font-display)', fontSize: '30px', letterSpacing: '-0.02em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}
+          >
+            {title}
+          </h1>
+          {statement && (
+            <p className="text-[12px] font-mono leading-relaxed text-[#efe7d6]/70 max-w-sm" style={{ animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
+              {statement}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 py-8">{children}</div>
+
+      {/* Signal band — the way back to the record */}
+      <div className="bg-[#e2602a] px-5 py-5 text-center">
+        <Link to={returnTo} className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#efe7d6] active:text-[#141210] transition-colors">
+          {returnLabel} <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
+
+      {footer && (
+        <p className="px-5 py-6 text-center text-[9px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md mx-auto">{footer}</p>
+      )}
+    </div>
+  );
+}
