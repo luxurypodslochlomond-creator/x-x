@@ -15,7 +15,7 @@ export default function XEqualsX() {
         <header className="space-y-5 border-b-2 border-record-signal pb-8">
           <p className="font-mono text-sm font-bold tracking-[0.3em] text-record-red">x = x</p>
           <h1 className="font-display text-5xl font-bold uppercase leading-[0.98] tracking-tight sm:text-6xl">Nobody above<br />anybody.</h1>
-          <p className="max-w-xl text-lg leading-relaxed">On this climate record, x = x means equal human worth. An emergency does not matter less because fewer people are watching.</p>
+          <p className="max-w-xl text-lg leading-relaxed">On this climate record, x = x means equal human worth. An emergency does not matter less because fewer people are watching. Equal worth is not equal size: a crisis affecting millions is still a larger crisis, and we count that honestly. What we refuse is the smaller one being treated as though it never happened.</p>
         </header>
         <XEqualsXContext />
         <XEqualsXPrinciples />
