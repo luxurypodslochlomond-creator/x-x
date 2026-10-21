@@ -12,6 +12,7 @@ import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
+import RecordLanguageStrip from '@/components/climate/RecordLanguageStrip';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -191,7 +192,6 @@ export default function TogetherChangeClimate() {
   const [liveStrings, setLiveStrings] = useState(null);
   const [translating, setTranslating] = useState(false);
   const [autoLang, setAutoLang] = useState('en');
-  const [otherOpen, setOtherOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
@@ -291,6 +291,9 @@ export default function TogetherChangeClimate() {
   const handleLang = (code) => {
     setLang(code);
     try { localStorage.setItem('climate51_lang', code); } catch { /* ignore */ }
+    // One choice, everywhere: announce it, so the tongue picked here holds in the
+    // nav, in the tools, and on every other page of the platform.
+    window.dispatchEvent(new CustomEvent('uf51:lang', { detail: code }));
   };
 
   const chosen = lang === 'auto' ? autoLang : lang;
@@ -406,6 +409,17 @@ export default function TogetherChangeClimate() {
             {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
             {copied ? 'Copied' : 'Share'}
           </button>
+        </div>
+
+        {/* The record's own language control — it reads the reader's device language
+            automatically, and lets them overrule it in any tongue on Earth. */}
+        <div className="relative z-10">
+          <RecordLanguageStrip
+            lang={lang}
+            detected={autoLang}
+            onChange={handleLang}
+            translating={translating}
+          />
         </div>
 
         {/* Ink band */}
