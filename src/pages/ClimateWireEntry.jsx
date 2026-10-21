@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { ArrowLeft, ArrowRight, Copy, Check } from 'lucide-react';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
+import ShareCardButton from '@/components/climate/ShareCardButton';
 
 // One entry on its own permanent address. A researcher cites this page, not the front
 // page, so the entry, its source and how well it is known all travel together in the link.
@@ -67,6 +68,14 @@ export default function ClimateWireEntry() {
         {entry && (
           <>
             <NewsEntryCard entry={entry} linked={false} />
+
+            <div className="mt-6 bg-[#f7f1e5] border-2 border-[#141210] p-4">
+              <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Pass it on</p>
+              <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">
+                The card carries the headline, the date, the place, who says so and how well it is known — so the story travels with its origin attached, not as a screenshot nobody can trace.
+              </p>
+              <ShareCardButton entry={entry} />
+            </div>
 
             <div className="mt-6 bg-[#f7f1e5] border-2 border-[#141210] p-4">
               <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Cite this entry</p>
