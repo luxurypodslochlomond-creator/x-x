@@ -108,7 +108,7 @@ export default function ClimateLayout({ children, currentPage }) {
 
         {/* Mobile — same links, thumb-scrollable */}
         <nav
-          className="sm:hidden flex gap-4 px-4 py-2.5 overflow-x-auto overscroll-x-contain"
+          className="sm:hidden flex gap-2.5 px-3 py-2.5 overflow-x-auto overscroll-x-contain"
           style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           aria-label="Platform"
         >
@@ -116,7 +116,7 @@ export default function ClimateLayout({ children, currentPage }) {
             <Link
               key={item.page}
               to={createPageUrl(item.page)}
-              className={`flex-shrink-0 py-1.5 text-[11px] font-black uppercase tracking-wider transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60'}`}
+              className={`flex-shrink-0 py-1.5 text-[10px] font-black uppercase tracking-wide transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60'}`}
             >
               {item.label}
             </Link>

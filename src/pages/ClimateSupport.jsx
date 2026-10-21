@@ -66,7 +66,7 @@ export default function ClimateSupport() {
       </div>
 
       <p className="mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-record-signal">{t.eyebrow}</p>
-      <h1 className="mt-2 font-display text-3xl sm:text-4xl font-bold uppercase leading-[1.05] text-record-ink">
+      <h1 className="mt-2 font-display text-[26px] sm:text-4xl font-bold uppercase leading-[1.05] text-record-ink">
         {t.heading}
       </h1>
       <p className="mt-3 text-[13px] leading-relaxed text-record-ink">{t.intro}</p>
