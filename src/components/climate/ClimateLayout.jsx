@@ -16,6 +16,7 @@ const NAV = [
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
   { label: 'Founder', page: 'ClimateFounder' },
+  { label: 'Support', page: 'ClimateSupport' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
@@ -80,7 +81,7 @@ export default function ClimateLayout({ children, currentPage }) {
   useEffect(() => {
     if (navigator.connection?.saveData) return;
     const timer = setTimeout(() => {
-      ['TogetherChangeClimate', 'ClimateImpact', 'ClimateFounder', 'ClimateTerms', 'ClimatePrivacy']
+      ['TogetherChangeClimate', 'ClimateImpact', 'ClimateFounder', 'ClimateSupport', 'ClimateTerms', 'ClimatePrivacy']
         .forEach(prefetchPath);
     }, 1200);
     return () => clearTimeout(timer);

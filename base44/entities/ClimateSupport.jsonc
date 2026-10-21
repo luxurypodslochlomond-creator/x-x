@@ -1,0 +1,90 @@
+{
+  "name": "ClimateSupport",
+  "type": "object",
+  "description": "A gift that keeps the climate record running. Written ONLY by the backend, after Stripe confirms the money actually arrived. Holds a name the giver chose to show, an email and a payment reference, so admin-only. The public wall is served by a function that returns names only \u2014 never amounts.",
+  "properties": {
+    "stripe_session_id": {
+      "type": "string",
+      "description": "The Stripe Checkout session this gift was confirmed against. One per gift \u2014 the receipt."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The name the giver chose to show, if they chose to show one. Empty for an anonymous gift."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "anonymous",
+        "public",
+        "private"
+      ],
+      "default": "anonymous",
+      "description": "anonymous \u2014 no name anywhere. public \u2014 the name stands on the record's wall. private \u2014 the name is kept by the keepers, never shown."
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "one_time",
+        "monthly"
+      ],
+      "default": "one_time",
+      "description": "A single gift, or standing support each month."
+    },
+    "amount_paid": {
+      "type": "number",
+      "description": "Amount in the smallest currency unit (500 = \u00a35.00). Never shown on the public wall."
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency Stripe charged in, e.g. gbp."
+    },
+    "email": {
+      "type": "string",
+      "description": "Email Stripe collected at checkout, for the receipt and for support."
+    },
+    "wall_hidden": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set true to take a name off the public wall without touching the gift itself."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "paid",
+        "refunded"
+      ],
+      "default": "paid",
+      "description": "Set to refunded to close this gift."
+    },
+    "product": {
+      "type": "string",
+      "default": "climate_record",
+      "description": "Which record this gift keeps."
+    }
+  },
+  "required": [
+    "stripe_session_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

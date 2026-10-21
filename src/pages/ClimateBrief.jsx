@@ -83,7 +83,7 @@ export default function ClimateBrief() {
             </p>
           </div>
           <p className="text-[13px] leading-relaxed text-[#1a1612]">
-            Your spec asked for a universal, honest, non-speculative repository for verified climate solutions. No engagement metrics. No ranking. No advertising. No funding for the platform itself — donations to the climate work are separate, and welcome. Rough locations only, to protect privacy while staying verifiable. Reviewed before publication. Copyright-free images. Every language on Earth, over time.
+            Your spec asked for a universal, honest, non-speculative repository for verified climate solutions. No engagement metrics. No ranking. No advertising. No sponsorship. Money never buys a place on the record. Rough locations only, to protect privacy while staying verifiable. Reviewed before publication. Copyright-free images. Every language on Earth, over time.
           </p>
           <p className="text-[13px] leading-relaxed text-[#1a1612] mt-3">
             That is what we built. This brief shows exactly where each part of your spec stands today.
@@ -107,7 +107,7 @@ export default function ClimateBrief() {
               ['Groups', 'People working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.'],
               ['Actions', 'Cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each action carries one contact link — the organiser is contacted directly. The platform never sees the conversation.'],
               ['60+ interface languages', 'The page interface is preset in 8 languages and AI-translated live into 60+ more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori, Ancient Greek. You can also free-type any language on Earth.'],
-              ['No advertising, no funding for the platform', 'Stated on the page. Enforced by design — there is no ad network on the climate record, and the platform takes no funding for itself. Donations to the climate work are separate.'],
+              ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.'],
               ['Open source, extraction-proof', 'The platform code is open. A public covenant explains how it resists corporate capture.'],
               ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.'],
               ['The x = x covenant', 'No likes, no upvotes, no ranking, no algorithm. Every entry sits beside every other entry as an equal, because it is true.'],
@@ -178,7 +178,7 @@ export default function ClimateBrief() {
           <div className="bg-[#b3261e] text-[#f4efe4] px-5 py-4">
             <ul className="space-y-2 text-[12px] font-mono leading-relaxed">
               <li>· No advertising, ever.</li>
-              <li>· No funding for the platform itself — donations to the climate work are separate, and welcome.</li>
+              <li>· No sponsorship. Money never buys a place on the record.</li>
               <li>· No likes, upvotes, ranking, or engagement algorithms.</li>
               <li>· No precise location tracking.</li>
               <li>· No private messaging stored on the platform.</li>
@@ -257,7 +257,7 @@ DONE — live right now:
 - Actions: cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each carries one contact link — the organiser is contacted directly. The platform sees none of it.
 - The interface speaks 60+ languages, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. You can also free-type any language on Earth and it translates live.
 - Entry text itself translates too — when a reader picks a language, the actual solution and crisis content (title, summary, details) translates live, with a "view original (English)" toggle so nothing is hidden. Accuracy is transparent.
-- No advertising, and no funding for the platform itself. Stated on the page, enforced by design. Donations to the climate work are separate, and welcome.
+- No advertising, no sponsorship, and no way for money to buy a place on the record. Stated on the page, held in the code.
 - Open source, with a public covenant on how it resists capture.
 - No likes, no upvotes, no ranking, no algorithm. Every entry is equal because it is true. We call this x = x. There is no score field and no weight field in the database — the absence of a ranking algorithm is the feature.
 
@@ -269,7 +269,7 @@ PLANNED — not yet built:
 WE WILL NOT DO:
 
 - No advertising, ever.
-- No funding for the platform itself — donations to the climate work are separate, and welcome.
+- No sponsorship. Money never buys a place on the record.
 - No likes, ranking, or engagement algorithms.
 - No precise location tracking.
 - No private messaging stored on the platform.

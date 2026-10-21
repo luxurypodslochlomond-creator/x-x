@@ -79,7 +79,7 @@ export default function ClimateMapPage() {
           x = x
         </p>
         <p className="text-[8px] font-mono text-center mt-1 text-[#efe7d6]/40">
-          A public service · for the world · no ads · no platform funding · donations to the work welcome
+          A public service · for the world · no ads · no sponsorship · support welcome
         </p>
       </div>
     </div>
