@@ -91,15 +91,8 @@ export default function ClimateLayout({ children, currentPage }) {
   return (
     <div className="min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <header className="sticky top-0 z-50 bg-[#141210] border-b-2 border-[#e2602a]">
-        <div className="max-w-[1100px] mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
-          <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 min-w-0 active:opacity-70">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-            <span className="text-[13px] sm:text-[14px] font-black uppercase tracking-[0.16em] text-[#efe7d6] leading-none">
-              Record of the Time
-            </span>
-          </Link>
-
-          <nav className="hidden sm:flex items-center gap-3.5 flex-shrink-0" aria-label="Platform">
+        <div className="hidden sm:block max-w-[1100px] mx-auto px-4 py-2.5">
+          <nav className="flex items-center gap-4" aria-label="Platform">
             {NAV.map(item => (
               <Link
                 key={item.page}
@@ -114,7 +107,7 @@ export default function ClimateLayout({ children, currentPage }) {
 
         {/* Mobile — same links, thumb-scrollable */}
         <nav
-          className="sm:hidden flex gap-4 px-4 pb-2 overflow-x-auto overscroll-x-contain"
+          className="sm:hidden flex gap-4 px-4 py-2.5 overflow-x-auto overscroll-x-contain"
           style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           aria-label="Platform"
         >

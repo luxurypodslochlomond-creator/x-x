@@ -129,20 +129,20 @@ const T = {
            } min-h-[110px] flex flex-col justify-between active:scale-95 transition-transform duration-100 p-2.5`}
          >
            <div className="flex items-center justify-between">
-             <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#e2602a]'}`}>
+             <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#e2602a]'}`}>
                {isSolution ? 'Solution' : 'Crisis'}
              </div>
              <SignalBeacon size={14} color={isSolution ? '#1e3a2b' : '#e2602a'} />
-           </div>
-           <h3 className="text-[12px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-4">
-             {item.title}
-           </h3>
-           {item.region_rough && (
-             <div className="flex items-center gap-1 text-[#5a5246]">
-               <MapPin className="w-2.5 h-2.5" />
-               <span className="text-[8px] font-black font-mono uppercase tracking-widest">{item.region_rough}</span>
              </div>
-           )}
+             <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-4">
+             {item.title}
+             </h3>
+             {item.region_rough && (
+             <div className="flex items-center gap-1 text-[#5a5246]">
+               <MapPin className="w-3 h-3" />
+               <span className="text-[9px] font-black font-mono uppercase tracking-widest">{item.region_rough}</span>
+             </div>
+             )}
          </Link>
        );
      }
@@ -166,10 +166,10 @@ const T = {
          {/* Gradient scrim — guarantees title readability on any image */}
          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
          <div className="relative p-2.5 w-full">
-           <div className={`text-[8px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
+           <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
              {isSolution ? 'Solution' : 'Crisis'}
            </div>
-           <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
+           <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
              {item.title}
            </h3>
          </div>
@@ -342,7 +342,7 @@ export default function TogetherChangeClimate() {
       `}</style>
 
       {isOffline && (
-        <div className="bg-[#e2602a] text-[#141210] text-center py-1 text-[9px] font-black font-mono uppercase tracking-widest">
+        <div className="bg-[#e2602a] text-[#141210] text-center py-1 text-[10px] font-black font-mono uppercase tracking-widest">
           ● Offline — showing cached record
         </div>
       )}
@@ -366,7 +366,7 @@ export default function TogetherChangeClimate() {
         <p className="text-[12px] font-mono italic text-[#efe7d6]/75 text-center leading-relaxed">
           "Every single day, we hold the power to shape the world around us."
         </p>
-        <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/55 text-center mt-1">
+        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/60 text-center mt-1">
           Dr. Jane Goodall
         </p>
       </div>
@@ -461,11 +461,11 @@ export default function TogetherChangeClimate() {
 
       {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
       <div className="px-4 py-2 bg-[#141210] flex items-center justify-between gap-3">
-        <span className="flex items-center gap-1.5 text-[9px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
+        <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
           {t.live}
         </span>
-        <span className="text-[9px] font-mono text-[#efe7d6]/70">
+        <span className="text-[10px] font-mono text-[#efe7d6]/70">
           {items.length + actions.length} {t.entries_now}
         </span>
       </div>
@@ -533,7 +533,7 @@ export default function TogetherChangeClimate() {
             className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[13px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
           />
         </div>
-        <p className="text-[9px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
+        <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
         <button
           onClick={() => setShowSubmit(true)}
           className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
@@ -647,22 +647,22 @@ export default function TogetherChangeClimate() {
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{filteredGroups.length}</span>
             </div>
-            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.groups_sub}</p>
+            <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.groups_sub}</p>
             {filteredGroups.length > 0 ? (
               <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
                 {filteredGroups.map(g => (
                   <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
                     <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] leading-tight">{g.name}</h4>
                     {g.topic && (
-                      <span className="inline-block text-[8px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
+                      <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
                     )}
                     <div className="flex items-center gap-1.5 text-[#1e3a2b] mt-1.5">
                       <MapPin className="w-3 h-3" />
-                      <span className="text-[9px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
+                      <span className="text-[10px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
-                    <p className="text-[11px] font-mono text-[#141210] leading-relaxed mt-2">{g.description}</p>
+                    <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">{g.description}</p>
                     {g.created_by && (
-                      <a href={`mailto:${g.created_by}`} className="inline-flex items-center gap-1 mt-2.5 text-[10px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
+                      <a href={`mailto:${g.created_by}`} className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
                         Contact organizer →
                       </a>
                     )}
@@ -675,7 +675,7 @@ export default function TogetherChangeClimate() {
                 <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">{t.groups_empty}</p>
               </div>
             )}
-            <p className="text-[9px] font-mono text-[#5a5246] leading-relaxed mt-3">{t.groups_note}</p>
+            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-3">{t.groups_note}</p>
           </section>
         )}
 
@@ -687,7 +687,7 @@ export default function TogetherChangeClimate() {
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#e2602a]">{filteredActions.length}</span>
             </div>
-            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.actions_sub}</p>
+            <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.actions_sub}</p>
             {filteredActions.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
                 {filteredActions.map(a => (
@@ -706,48 +706,48 @@ export default function TogetherChangeClimate() {
           <div className="space-y-2.5 md:grid md:grid-cols-3 md:gap-3 md:space-y-0">
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Geodesign</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A set of concepts and methods used to involve all stakeholders in collaboratively designing optimal solutions for spatial challenges in the built and natural environments.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: Steinitz, A Framework for Geodesign (2012)</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">A set of concepts and methods used to involve all stakeholders in collaboratively designing optimal solutions for spatial challenges in the built and natural environments.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: Steinitz, A Framework for Geodesign (2012)</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Rewilding</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A large-scale conservation approach focused on restoring damaged ecosystems so nature can take care of itself.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: Soulé &amp; Noss, Rewilding and Biodiversity (1998)</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">A large-scale conservation approach focused on restoring damaged ecosystems so nature can take care of itself.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: Soulé &amp; Noss, Rewilding and Biodiversity (1998)</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Heat</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">In England, the Unite union has been warning about heat exhaustion, heatstroke, and dehydration since phases of intense heat began in May. Heat is a growing climate crisis for workers and communities worldwide.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: Guardian, 081626</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">In England, the Unite union has been warning about heat exhaustion, heatstroke, and dehydration since phases of intense heat began in May. Heat is a growing climate crisis for workers and communities worldwide.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: Guardian, 081626</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Climate Adaptation</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">The process of adjustment to actual or expected climate and its effects, to moderate harm or exploit beneficial opportunities.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">The process of adjustment to actual or expected climate and its effects, to moderate harm or exploit beneficial opportunities.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Climate Mitigation</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">A human intervention to reduce the sources of greenhouse gases or enhance the sinks that remove them from the atmosphere.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">A human intervention to reduce the sources of greenhouse gases or enhance the sinks that remove them from the atmosphere.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Blue Carbon</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">Carbon captured by coastal and marine ecosystems, including mangroves, seagrasses, salt marshes, and kelp forests.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: NOAA</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">Carbon captured by coastal and marine ecosystems, including mangroves, seagrasses, salt marshes, and kelp forests.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: NOAA</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Biodiversity</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">The variability among living organisms from all sources, including terrestrial, marine, and other aquatic ecosystems, and the ecological complexes of which they are part.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: UN Convention on Biological Diversity (1992)</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">The variability among living organisms from all sources, including terrestrial, marine, and other aquatic ecosystems, and the ecological complexes of which they are part.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: UN Convention on Biological Diversity (1992)</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Desertification</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">Land degradation in arid, semi-arid, and dry sub-humid areas resulting from various factors, including climatic variations and human activities.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: UN Convention to Combat Desertification</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">Land degradation in arid, semi-arid, and dry sub-humid areas resulting from various factors, including climatic variations and human activities.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: UN Convention to Combat Desertification</p>
             </div>
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Food Security</h4>
-              <p className="text-[11px] font-mono text-[#141210] leading-relaxed">When all people, at all times, have physical and economic access to sufficient, safe, and nutritious food that meets their dietary needs for an active and healthy life.</p>
-              <p className="text-[9px] font-mono text-[#5a5246] mt-2">Source: FAO, World Food Summit (1996)</p>
+              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">When all people, at all times, have physical and economic access to sufficient, safe, and nutritious food that meets their dietary needs for an active and healthy life.</p>
+              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: FAO, World Food Summit (1996)</p>
             </div>
           </div>
         </section>
@@ -755,7 +755,7 @@ export default function TogetherChangeClimate() {
         {/* ── GOVERNANCE ── */}
         <section className="px-4 py-5 bg-[#1e3a2b] text-[#efe7d6]">
           <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.govern}</h2>
-          <p className="text-[11px] font-mono leading-relaxed text-[#efe7d6] max-w-full lg:max-w-[680px]">{t.govern_body}</p>
+          <p className="text-[12px] font-mono leading-relaxed text-[#efe7d6] max-w-full lg:max-w-[680px]">{t.govern_body}</p>
           <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-2 mt-4 px-3 py-2 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors">
             {t.covenant} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -777,10 +777,10 @@ export default function TogetherChangeClimate() {
           <Link to={createPageUrl('ClimatePrivacy')} className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors">Privacy</Link>
         </div>
 
-        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[9px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline">
+        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[10px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline">
           {t.honour} <span className="text-[#b3261e]">→</span>
         </Link>
-        <p className="px-4 pb-8 pt-1 text-center text-[9px] font-mono text-[#5a5246]/70 bg-[#efe7d6]">
+        <p className="px-4 pb-8 pt-1 text-center text-[10px] font-mono text-[#5a5246]/70 bg-[#efe7d6]">
           Platform built by Brian Hughes ·{' '}
           <Link to={createPageUrl('Welcome')} className="text-[#5a5246] hover:text-[#b3261e] transition-colors">UF51</Link>
         </p>
