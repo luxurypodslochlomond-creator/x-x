@@ -30,7 +30,7 @@ self.addEventListener('fetch', (e) => {
       const cache = await caches.open(PHOTO_CACHE);
       const cached = await cache.match(e.request.url);
       if (cached) return cached;
-      const response = await fetch(e.request);
+      const response = await fetch(e.request.url, { mode: 'cors', credentials: 'omit' });
       if (response.ok) {
         e.waitUntil(cache.put(e.request.url, response.clone()).catch(() => {}));
       }

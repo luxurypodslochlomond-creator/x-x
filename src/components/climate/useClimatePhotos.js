@@ -10,6 +10,7 @@ export default function useClimatePhotos() {
   const { data, isPending, isError } = useQuery({
     queryKey: ['climatePhotos', 'published'],
     initialData: () => savedClimatePhotos().length ? savedClimatePhotos() : undefined,
+    initialDataUpdatedAt: 0,
     staleTime: 60000,
     refetchOnWindowFocus: false,
     retry: false,
