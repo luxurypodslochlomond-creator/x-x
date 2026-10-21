@@ -109,7 +109,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              When you submit, an AI reads the text and writes an advisory note for the human reviewer. It checks for spam, harmful content, and relevance to climate. It does not judge the science. It does not publish anything. It does not train on your submission. The note and your text are kept only until a human reviews them, then the note is kept as part of the audit trail and your text stays on the record unless you ask us to remove it.
+              When you submit, an AI screens the text for spam, harmful content, and relevance to climate. Clear entries go on the record straight away; anything unclear is held and a note is written for the human reviewer. The AI does not judge the science and does not train on your submission. The note is kept as part of the audit trail, and your text stays on the record unless you ask us to remove it.
             </p>
           </div>
         </section>

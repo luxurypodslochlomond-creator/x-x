@@ -248,7 +248,8 @@ DONE — live right now:
 - Two entry types: Solutions and Climate Crises, as you specified.
 - Your full 20-category taxonomy is in and filterable. 12 of 20 have entries; the other 8 are wired up and waiting.
 - Rough location only — country and region, no coordinates. Your privacy stance, kept.
-- Every entry reviewed before publication.
+- A transmission map: solutions and actions plotted by country and self-identified nation, rough regions only, never precise pins.
+- Every entry screened for spam as it arrives; clear entries go on the record at once, anything unclear waits for a human check.
 - Copyright-free images only, credit stored on each.
 - Every entry links to its source.
 - Scale field: individual, community, city, country, global.
@@ -263,7 +264,6 @@ DONE — live right now:
 PLANNED — not yet built:
 
 - 8 categories are empty and need their first entries: heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination.
-- A rough-region map — designed, not built. Privacy-respecting, no precise pins.
 - Linking ground-action photos to the record as visual proof — designed, not built.
 
 WE WILL NOT DO:
