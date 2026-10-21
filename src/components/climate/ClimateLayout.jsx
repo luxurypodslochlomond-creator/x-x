@@ -22,6 +22,11 @@ const NAV = [
   { label: 'Founder', page: 'ClimateFounder' },
   { label: 'Support', page: 'ClimateSupport' },
   { label: 'Method', page: 'ClimateMethod' },
+];
+
+// Terms and Privacy are kept off the reading nav — they are legal ground, not the record.
+// They sit in one quiet place, in the footer of every page of the record.
+const FOOTER_LINKS = [
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
@@ -139,6 +144,22 @@ export default function ClimateLayout({ children, currentPage }) {
       </header>
 
       {children}
+
+      <footer className="border-t-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-4">
+        <div className="max-w-[1100px] mx-auto flex items-center justify-center gap-3">
+          {FOOTER_LINKS.map((item, i) => (
+            <React.Fragment key={item.page}>
+              {i > 0 && <span className="text-[#6b6258]/40 text-[10px] font-mono">·</span>}
+              <Link
+                to={createPageUrl(item.page)}
+                className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors"
+              >
+                {item.label}
+              </Link>
+            </React.Fragment>
+          ))}
+        </div>
+      </footer>
     </div>
     </SiteLanguageProvider>
   );

@@ -779,12 +779,7 @@ export default function TogetherChangeClimate() {
           </p>
         </section>
 
-        {/* ── TERMS & PRIVACY ── */}
-        <div className="px-4 py-5 bg-[#efe7d6] border-t-2 border-[#1a1612] flex items-center justify-center gap-3">
-          <Link to={createPageUrl('ClimateTerms')} className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors">Terms</Link>
-          <span className="text-[#6b6258]/40 text-[10px] font-mono">·</span>
-          <Link to={createPageUrl('ClimatePrivacy')} className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors">Privacy</Link>
-        </div>
+        {/* Terms and Privacy now sit in the shared footer, on every page of the record. */}
 
         {/* The thesis, where it belongs — at the close, once the record has been read. */}
         <p className="px-4 pt-6 text-center text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#5a5246] bg-[#efe7d6]">
