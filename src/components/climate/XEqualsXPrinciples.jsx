@@ -9,7 +9,7 @@ const PRINCIPLES = [
 export default function XEqualsXPrinciples() {
   return (
     <section aria-labelledby="record-principles" className="space-y-5">
-      <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-record-red">What that means here</p>
+      <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-record-red">What x = x means here</p>
       <h2 id="record-principles" className="font-display text-3xl font-bold uppercase leading-tight">A record. Not a contest.</h2>
       <ol className="divide-y divide-record-ink/20 border-y border-record-ink/20">
         {PRINCIPLES.map(({ number, title, text }) => (

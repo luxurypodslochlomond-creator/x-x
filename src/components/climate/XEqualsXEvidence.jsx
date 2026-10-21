@@ -2,8 +2,8 @@ import React from 'react';
 
 const REFERENCES = [
   {
-    title: 'The business incentives',
-    text: 'A 2024 FTC staff report found that many major social-media and streaming services’ advertising models incentivised extensive personal-data collection. This concerns consumers broadly, not only children.',
+    title: 'The way they earn',
+    text: 'A 2024 FTC staff report found that the advertising business of many large social-media and streaming services pushed them to collect a great deal of personal data. This is about all of us, not only children.',
     citation: 'FTC · A Look Behind the Screens · September 2024',
     url: 'https://www.ftc.gov/reports/look-behind-screens-examining-data-practices-social-media-video-streaming-services',
   },
