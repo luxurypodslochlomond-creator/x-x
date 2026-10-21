@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// One picture, whole. The credit is part of the picture and stays on it —
-// a photograph on this record is never shown without the name of who made it.
+// One picture, whole, as big as the screen allows. The credit is part of the
+// picture and stays with it — a photograph on this record is never shown without
+// the name of who made it, and never in type too small to read.
 // No counts, no shares, no "next up": you look, you close, you carry on.
 export default function ClimatePhotoViewer({ photos, startIndex, onClose }) {
   const [index, setIndex] = useState(startIndex);
@@ -34,34 +35,41 @@ export default function ClimatePhotoViewer({ photos, startIndex, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[200] flex flex-col bg-[#141210]">
-      <div className="flex items-start justify-between gap-3 px-4 py-3 border-b border-[#efe7d6]/15">
-        <p className="text-[10px] font-mono text-[#e2602a] leading-snug pt-1">{photo.credit}</p>
+    <div className="fixed inset-0 z-[200] flex flex-col bg-[#0d0c0a]">
+      <div className="flex justify-end px-3 py-3">
         <button
           onClick={onClose}
           aria-label="Close"
-          className="w-10 h-10 flex items-center justify-center flex-shrink-0 border-2 border-[#efe7d6]/30 text-[#efe7d6] active:bg-[#efe7d6] active:text-[#141210] transition-colors"
+          className="w-11 h-11 flex items-center justify-center border-2 border-[#efe7d6]/30 text-[#efe7d6] active:bg-[#efe7d6] active:text-[#141210] transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
       </div>
 
       <div
-        className="flex-1 flex items-center justify-center px-2"
+        className="flex-1 flex items-center justify-center px-2 min-h-0"
         onTouchStart={(e) => setTouchFrom(e.touches[0].clientX)}
         onTouchEnd={onTouchEnd}
       >
-        <img src={photo.image_url} alt={photo.caption || ''} className="max-h-full max-w-full object-contain" />
+        <img
+          src={photo.image_url}
+          alt={photo.caption || 'Photograph on the record'}
+          className="max-h-full max-w-full object-contain"
+        />
       </div>
 
-      {photo.caption && (
-        <p className="px-4 pb-2 text-[11px] font-mono uppercase tracking-wider text-[#efe7d6] text-center">
-          {photo.caption}
-        </p>
-      )}
+      {/* The name of the person who made the picture — on its own, at the foot. */}
+      <div className="bg-[#efe7d6] border-t-4 border-[#e2602a] px-4 py-3.5">
+        {photo.caption && (
+          <p className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#5a5246] leading-snug">
+            {photo.caption}
+          </p>
+        )}
+        <p className="text-[13px] font-mono text-[#141210] leading-snug mt-1">{photo.credit}</p>
+      </div>
 
       {photos.length > 1 && (
-        <div className="flex items-center justify-between gap-3 px-4 pb-5">
+        <div className="flex items-center justify-between gap-3 px-4 py-3">
           <button
             onClick={() => go(-1)}
             aria-label="Previous picture"
@@ -69,7 +77,7 @@ export default function ClimatePhotoViewer({ photos, startIndex, onClose }) {
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <span className="text-[9px] font-mono text-[#6b6258]">swipe</span>
+          <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#6b6258]">swipe</span>
           <button
             onClick={() => go(1)}
             aria-label="Next picture"

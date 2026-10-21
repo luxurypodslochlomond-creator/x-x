@@ -4,12 +4,15 @@ import ClimatePhotoViewer from './ClimatePhotoViewer';
 
 // ── THE TOP CRAWL ──
 // Janine's photographs. Her top scroll: pictures drifting past, credited.
-// It drifts on its own, slowly, the way she asked — and steps aside the moment
-// a finger touches it, because a person looking is more important than the loop.
-// Nothing here counts you, ranks you, or keeps you: you can move it yourself and
-// open any picture whole.
+//
+// A photograph is shown whole — never cut off at the edges, and never written
+// over: the caption and the photographer's name sit underneath it, on the ink,
+// where a person can actually read them. It drifts on its own, slowly, and steps
+// aside the moment a finger touches it, because a person looking is more
+// important than the loop. Nothing here counts you, ranks you, or keeps you.
 export default function ClimateImageCrawl() {
   const [photos, setPhotos] = useState([]);
+  const [shapes, setShapes] = useState({});
   const [openAt, setOpenAt] = useState(null);
   const railRef = useRef(null);
   const holdUntil = useRef(0);
@@ -43,6 +46,14 @@ export default function ClimateImageCrawl() {
   const strip = [...photos, ...photos];
   const hold = () => { holdUntil.current = Date.now() + 4000; };
 
+  // Each picture keeps its own shape, so the frame is as big as the photograph
+  // allows and nothing is cropped to fit a template.
+  const noteShape = (id, e) => {
+    const img = e.currentTarget;
+    if (!img.naturalWidth || !img.naturalHeight) return;
+    setShapes((s) => (s[id] ? s : { ...s, [id]: `${img.naturalWidth} / ${img.naturalHeight}` }));
+  };
+
   return (
     <div className="relative bg-[#141210] border-b-2 border-[#141210]">
       <style>{`
@@ -55,31 +66,34 @@ export default function ClimateImageCrawl() {
         onPointerDown={hold}
         onTouchMove={hold}
         onWheel={hold}
-        className="twcc-rail flex gap-2.5 py-2.5 px-2.5 overflow-x-auto"
+        className="twcc-rail flex gap-3 py-3 px-3 overflow-x-auto items-start"
       >
         {strip.map((photo, i) => (
           <button
             key={`${photo.id}-${i}`}
             onClick={() => setOpenAt(i % photos.length)}
-            className="relative flex-shrink-0 w-[78vw] sm:w-[520px] h-[210px] sm:h-[268px] text-left"
+            className="flex-shrink-0 w-[calc(100vw-1.5rem)] max-w-[560px] sm:w-[520px] text-left"
           >
-            <img
-              src={photo.image_url}
-              alt={photo.caption || ''}
-              loading={i < 2 ? 'eager' : 'lazy'}
-              decoding="async"
-              className="w-full h-full object-cover border border-[#efe7d6]/20"
-            />
             <span
-              className="absolute bottom-0 left-0 right-0 px-2 py-1.5 block"
-              style={{ background: 'linear-gradient(0deg, rgba(20,18,16,.92), rgba(20,18,16,0))' }}
+              className="block w-full bg-[#0d0c0a] border border-[#efe7d6]/25 overflow-hidden"
+              style={{ aspectRatio: shapes[photo.id] || '3 / 2', maxHeight: '68vh' }}
             >
+              <img
+                src={photo.image_url}
+                alt={photo.caption || 'Photograph on the record'}
+                loading={i < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+                onLoad={(e) => noteShape(photo.id, e)}
+                className="w-full h-full object-contain"
+              />
+            </span>
+            <span className="block pt-2">
               {photo.caption && (
-                <span className="block text-[9px] font-mono uppercase tracking-wider text-[#efe7d6] leading-tight">
+                <span className="block text-[11px] font-mono uppercase tracking-wider text-[#efe7d6] leading-snug">
                   {photo.caption}
                 </span>
               )}
-              <span className="block text-[8px] font-mono text-[#e2602a] leading-tight">{photo.credit}</span>
+              <span className="block text-[11px] font-mono text-[#e2602a] leading-snug">{photo.credit}</span>
             </span>
           </button>
         ))}
