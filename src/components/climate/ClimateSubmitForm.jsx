@@ -302,7 +302,7 @@ export default function ClimateSubmitForm({ onClose }) {
         </button>
 
         <p className="text-[10px] font-mono text-[#5a5246] mt-3 text-center leading-relaxed">
-          Spam is screened automatically. Clear entries appear at once — anything unclear waits for a person. No advertising. No fundraising. Public service.
+          Spam is screened automatically. Clear entries appear at once — anything unclear waits for a person. No advertising, no funding for the platform. Public service. Donations to the climate work are separate, and welcome.
         </p>
       </form>
     </div>
