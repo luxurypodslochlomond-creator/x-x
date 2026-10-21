@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import { base44 } from '@/api/base44Client';
 import { User } from '@/entities/User';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lock, Building, CreditCard, FileText, Shield, Eye, EyeOff } from 'lucide-react';
@@ -9,6 +9,14 @@ export default function BusinessVault() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showSensitive, setShowSensitive] = useState(false);
+  const [vault, setVault] = useState({});
+
+  // Logins, bank details and phone numbers live in the admin-only vault now.
+  useEffect(() => {
+    base44.entities.SecureVault.list('sort_order', 200)
+      .then(rows => setVault(Object.fromEntries((Array.isArray(rows) ? rows : rows?.items || []).map(r => [r.label, r.value]))))
+      .catch(() => setVault({}));
+  }, []);
 
   useEffect(() => {
     User.me()
@@ -44,6 +52,8 @@ export default function BusinessVault() {
     );
   }
 
+  const fromVault = (label) => vault[label] || '';
+
   const businessInfo = {
     company: {
       name: "UniversalFamily51 CIC",
@@ -58,16 +68,16 @@ export default function BusinessVault() {
       accountingPeriodStart: "Date of incorporation"
     },
     governmentGateway: {
-      userID: "70 46 54 36 73 93",
-      password: "AI51BRO51101!",
+      userID: fromVault('Old login C - Gateway user ID'),
+      password: fromVault('Old login C - Password'),
       email: "family@uf51.love",
       purpose: "For managing company taxes and CIC filings online"
     },
     bank: {
       bankName: "Revolut Business",
-      accountName: "UniversalFamily51",
-      accountNumber: "01698230",
-      sortCode: "04-29-09",
+      accountName: fromVault('Account name'),
+      accountNumber: fromVault('Account number'),
+      sortCode: fromVault('Sort code'),
       currency: "GBP",
       iban: "TBD",
       swift: "TBD"
@@ -79,8 +89,8 @@ export default function BusinessVault() {
       partner: "Gill Hughes"
     },
     contact: {
-      brian_phone: "07494023328",
-      gill_phone: "07971501990",
+      brian_phone: fromVault('Brian - phone'),
+      gill_phone: fromVault('Gill - phone'),
       email: "family@uf51.love"
     },
     websites: {
@@ -113,9 +123,9 @@ export default function BusinessVault() {
       status: "In progress - October 13, 2024",
       registeredAddressPublic: "Stoneymollan, Balloch, G83 8RA, Scotland",
       principalPlacePrivate: "Upper Stoneymollan Cottage, Upper Stoneymollan Road, Alexandria, G83 8QU, Scotland",
-      hmrcContactPhone: "07494023328",
+      hmrcContactPhone: fromVault('Brian - phone'),
       hmrcContactEmail: "family@uf51.love",
-      hmrcBackupPhone: "07971501990",
+      hmrcBackupPhone: fromVault('Gill - phone'),
       replacingExistingBusiness: "No - brand new company",
       tradingStartDate: "Same day as incorporation",
       accountingStart: "Same day as incorporation",

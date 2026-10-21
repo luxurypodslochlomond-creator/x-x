@@ -7,15 +7,28 @@ import { Shield, Copy, CheckCircle } from 'lucide-react';
 
 export default function AdminCompaniesHouseCodesPage() {
     const [user, setUser] = useState(null);
-    const [brian_code, setBrianCode] = useState('XPJ·2H77·2223');
+    const [brian_code, setBrianCode] = useState('');
     const [gill_code, setGillCode] = useState('');
-    const [gill_password, setGillPassword] = useState('LochLomond101!');
-    const [gateway_user_id, setGatewayUserId] = useState('51 34 69 10 20 31');
-    const [gateway_password, setGatewayPassword] = useState('Stoneymollan101!');
+    const [gill_password, setGillPassword] = useState('');
+    const [gateway_user_id, setGatewayUserId] = useState('');
+    const [gateway_password, setGatewayPassword] = useState('');
     const [copied, setCopied] = useState(null);
 
     useEffect(() => {
         base44.auth.me().then(u => setUser(u)).catch(() => {});
+    }, []);
+
+    // The codes live in the admin-only vault now - this page reads them in.
+    useEffect(() => {
+        base44.entities.SecureVault.list('sort_order', 200)
+            .then(rows => {
+                const map = Object.fromEntries((Array.isArray(rows) ? rows : rows?.items || []).map(r => [r.label, r.value]));
+                if (map['Brian Hughes - personal code']) setBrianCode(map['Brian Hughes - personal code']);
+                if (map['Gill - Companies House verification password']) setGillPassword(map['Gill - Companies House verification password']);
+                if (map['Login B - Gateway user ID']) setGatewayUserId(map['Login B - Gateway user ID']);
+                if (map['Login B - Password']) setGatewayPassword(map['Login B - Password']);
+            })
+            .catch(() => {});
     }, []);
 
     if (!user || user.role !== 'admin') {

@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Building, User, FileText, CheckCircle, ExternalLink, Key } from 'lucide-react';
 
 export default function AdminCompaniesHouseDetailsPage() {
+  const [vault, setVault] = useState({});
+
+  // The logins live in the admin-only vault now - this page only reads them,
+  // so nothing is written into this page's own code.
+  useEffect(() => {
+    base44.entities.SecureVault.list('sort_order', 200)
+      .then(rows => setVault(Object.fromEntries((Array.isArray(rows) ? rows : rows?.items || []).map(r => [r.label, r.value]))))
+      .catch(() => setVault({}));
+  }, []);
+
+  const fromVault = (label) => vault[label] || '\u2014';
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-indigo-950 to-black text-white p-6">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -144,7 +157,7 @@ export default function AdminCompaniesHouseDetailsPage() {
             <div className="space-y-4">
               <div className="bg-green-900/30 border border-green-500/50 rounded-lg p-4">
                 <p className="text-gray-400 text-sm mb-2">Gateway User ID</p>
-                <p className="text-4xl font-mono font-black text-green-300">66 11 61 33 64 00</p>
+                <p className="text-4xl font-mono font-black text-green-300">{fromVault('Login A - Gateway user ID')}</p>
                 <p className="text-xs text-gray-400 mt-3">Sent to: family@uf51.love</p>
               </div>
 
@@ -153,11 +166,11 @@ export default function AdminCompaniesHouseDetailsPage() {
                 <div className="space-y-2">
                   <div>
                     <p className="text-xs text-gray-400">Password 1:</p>
-                    <p className="text-2xl font-mono font-black text-green-300">LochLomond101!</p>
+                    <p className="text-2xl font-mono font-black text-green-300">{fromVault('Login A - Password 1')}</p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-400">Password 2:</p>
-                    <p className="text-2xl font-mono font-black text-green-300">JohnMuir101!</p>
+                    <p className="text-2xl font-mono font-black text-green-300">{fromVault('Login A - Password 2')}</p>
                   </div>
                 </div>
               </div>
@@ -181,13 +194,13 @@ export default function AdminCompaniesHouseDetailsPage() {
             <div className="space-y-4">
               <div className="bg-cyan-900/30 border border-cyan-500/50 rounded-lg p-4">
                 <p className="text-gray-400 text-sm mb-2">Brian Hughes</p>
-                <p className="text-3xl font-mono font-black text-cyan-300">XPJ-2H77-2223</p>
-                <p className="text-xs text-gray-400 mt-2">DOB: 08/07/1974</p>
+                <p className="text-3xl font-mono font-black text-cyan-300">{fromVault('Brian Hughes - personal code')}</p>
+                <p className="text-xs text-gray-400 mt-2">DOB: {fromVault('Brian Hughes - date of birth')}</p>
               </div>
               <div className="bg-cyan-900/30 border border-cyan-500/50 rounded-lg p-4">
                 <p className="text-gray-400 text-sm mb-2">Gillian Barbara Brown</p>
-                <p className="text-3xl font-mono font-black text-cyan-300">XKFQ4972223</p>
-                <p className="text-xs text-gray-400 mt-2">DOB: 24/01/1976</p>
+                <p className="text-3xl font-mono font-black text-cyan-300">{fromVault('Gillian Barbara Brown - personal code')}</p>
+                <p className="text-xs text-gray-400 mt-2">DOB: {fromVault('Gillian Barbara Brown - date of birth')}</p>
               </div>
               <div className="bg-yellow-900/30 border border-yellow-500/50 rounded-lg p-3 mt-4">
                 <p className="text-xs text-yellow-300">
