@@ -1,17 +1,17 @@
 import React from 'react';
 
-const OPTIONS = [
-  { value: 'anonymous', label: 'No name', note: 'Nothing is written down about you but the fact that you gave.' },
-  { value: 'public', label: 'My name on the wall', note: 'Your name stands beside the record, in public, in the order it arrived.' },
-  { value: 'private', label: 'My name, with the keepers', note: 'The keepers know who you are. The world does not.' },
-];
+export default function NameChoice({ visibility, onVisibility, name, onName, t }) {
+  const options = [
+    { value: 'anonymous', label: t.name_none, note: t.name_none_note },
+    { value: 'public', label: t.name_public, note: t.name_public_note },
+    { value: 'private', label: t.name_private, note: t.name_private_note },
+  ];
 
-export default function NameChoice({ visibility, onVisibility, name, onName }) {
   return (
     <div>
-      <p className="text-[10px] font-black uppercase tracking-wider text-record-muted">Your name</p>
+      <p className="text-[10px] font-black uppercase tracking-wider text-record-muted">{t.name_label}</p>
       <div className="mt-2 space-y-2">
-        {OPTIONS.map(option => {
+        {options.map(option => {
           const chosen = visibility === option.value;
           return (
             <button
@@ -29,12 +29,12 @@ export default function NameChoice({ visibility, onVisibility, name, onName }) {
       </div>
       {visibility !== 'anonymous' && (
         <label className="mt-3 block">
-          <span className="text-[10px] font-black uppercase tracking-wider text-record-muted">The name to show</span>
+          <span className="text-[10px] font-black uppercase tracking-wider text-record-muted">{t.name_input_label}</span>
           <input
             value={name}
             onChange={e => onName(e.target.value)}
             maxLength={40}
-            placeholder="Name"
+            placeholder={t.name_placeholder}
             className="mt-1 w-full border-2 border-record-ink/25 focus:border-record-ink bg-record-paper px-3 py-3 min-h-[44px] text-[13px] text-record-ink placeholder-record-muted outline-none"
           />
         </label>
