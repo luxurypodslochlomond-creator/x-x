@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
+import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 
 // ── TOGETHER WE CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -137,6 +138,11 @@ export default function ClimateLayout({ children, currentPage }) {
             ))}
           </div>
         </nav>
+
+        {/* Every tongue on Earth — in the header, on every page of the record. */}
+        <div className="max-w-[1100px] mx-auto">
+          <ClimateLanguageBar />
+        </div>
       </header>
 
       {children}

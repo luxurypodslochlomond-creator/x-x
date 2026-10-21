@@ -12,7 +12,6 @@ import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
-import RecordLanguageStrip from '@/components/climate/RecordLanguageStrip';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -288,13 +287,13 @@ export default function TogetherChangeClimate() {
     contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [selectedType]);
 
-  const handleLang = (code) => {
-    setLang(code);
-    try { localStorage.setItem('climate51_lang', code); } catch { /* ignore */ }
-    // One choice, everywhere: announce it, so the tongue picked here holds in the
-    // nav, in the tools, and on every other page of the platform.
-    window.dispatchEvent(new CustomEvent('uf51:lang', { detail: code }));
-  };
+  // The tongue is chosen in the header, on every page of the record. The record's own
+  // copy follows it, so the story below reads in the language that was picked.
+  useEffect(() => {
+    const follow = (e) => setLang(e.detail);
+    window.addEventListener('uf51:lang', follow);
+    return () => window.removeEventListener('uf51:lang', follow);
+  }, []);
 
   const chosen = lang === 'auto' ? autoLang : lang;
   const t = { ...T.en, ...(T[chosen] || liveStrings || {}) };
@@ -409,17 +408,6 @@ export default function TogetherChangeClimate() {
             {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
             {copied ? 'Copied' : 'Share'}
           </button>
-        </div>
-
-        {/* The record's own language control — it reads the reader's device language
-            automatically, and lets them overrule it in any tongue on Earth. */}
-        <div className="relative z-10">
-          <RecordLanguageStrip
-            lang={lang}
-            detected={autoLang}
-            onChange={handleLang}
-            translating={translating}
-          />
         </div>
 
         {/* Ink band */}

@@ -44,6 +44,7 @@ export function SiteLanguageProvider({ children }) {
   return (
     <LanguageContext.Provider value={{
       lang,
+      autoLang,
       chosen,
       setLanguage,
       translating,
