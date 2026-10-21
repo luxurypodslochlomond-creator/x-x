@@ -351,22 +351,22 @@ export default function TogetherChangeClimate() {
       <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
+          <span className="text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#efe7d6]/75 text-center leading-snug">
             This is the time. And this is the record of the time.
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
-        <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
+        <div className="text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
           x = x
         </div>
       </div>
 
       {/* ── JANE GOODALL — her words, from Janine's spec ── */}
       <div className="bg-[#141210] px-5 py-2.5 border-t border-[#e2602a]/15">
-        <p className="text-[9px] font-mono italic text-[#efe7d6]/50 text-center leading-relaxed">
+        <p className="text-[12px] font-mono italic text-[#efe7d6]/75 text-center leading-relaxed">
           "Every single day, we hold the power to shape the world around us."
         </p>
-        <p className="text-[7px] font-mono uppercase tracking-widest text-[#efe7d6]/30 text-center mt-0.5">
+        <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/55 text-center mt-1">
           Dr. Jane Goodall
         </p>
       </div>
@@ -393,14 +393,14 @@ export default function TogetherChangeClimate() {
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 0.8s linear infinite' }} />
 
         {/* Bone band */}
-        <div className="relative z-10 bg-[#efe7d6] px-5 py-4 flex items-center justify-between gap-3"
+        <div className="relative z-10 bg-[#efe7d6] px-5 py-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5"
           style={{ animation: 'twcc-enter .25s ease-out both' }}>
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#141210]">{t.service}</span>
-            <Link to={createPageUrl('ClimateFounder')} className="text-[9px] font-mono text-[#5a5246] hover:text-[#b3261e] transition-colors">· The founder →</Link>
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+            <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
+            <Link to={createPageUrl('ClimateFounder')} className="text-[10px] font-mono text-[#5a5246] hover:text-[#b3261e] transition-colors">· The founder →</Link>
           </div>
           <div className="flex items-center gap-1.5">
-            <Languages className="w-3.5 h-3.5 text-[#141210]" />
+            <Languages className="w-4 h-4 text-[#141210]" />
             <select
               value={lang}
               onChange={e => {
@@ -409,7 +409,7 @@ export default function TogetherChangeClimate() {
               }}
               aria-label="Select language"
               size={1}
-              className="bg-transparent text-[#141210] border border-[#141210] px-1.5 py-1 text-[10px] font-mono font-bold outline-none cursor-pointer max-w-[150px] truncate"
+              className="bg-transparent text-[#141210] border border-[#141210] px-2 py-1.5 text-[11px] font-mono font-bold outline-none cursor-pointer max-w-[150px] truncate"
             >
               <option value="auto">🌐 Auto</option>
               {LANGS.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
@@ -419,7 +419,7 @@ export default function TogetherChangeClimate() {
             <button
               onClick={handleShare}
               aria-label="Share this platform"
-              className="ml-1 flex items-center gap-1 px-2.5 py-1.5 min-h-[36px] bg-[#141210] text-[#efe7d6] border border-[#141210] text-[10px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#141210] transition-colors"
+              className="ml-0.5 flex items-center gap-1.5 px-3 py-2 min-h-[40px] bg-[#141210] text-[#efe7d6] border border-[#141210] text-[11px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#141210] transition-colors"
             >
               {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
               {copied ? 'Copied' : 'Share'}
@@ -448,9 +448,9 @@ export default function TogetherChangeClimate() {
 
         {/* Signal band */}
         <div className="relative z-10 bg-[#e2602a] px-5 py-5 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
-          <p className="text-[11px] font-bold uppercase leading-relaxed max-w-[330px] lg:max-w-[640px] text-[#141210] tracking-wide">{t.sub}</p>
+          <p className="text-[12px] font-bold uppercase leading-relaxed max-w-[330px] lg:max-w-[640px] text-[#141210] tracking-wide">{t.sub}</p>
           {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
-          <p className="text-[9px] font-black font-mono uppercase leading-relaxed mt-3 text-[#141210] tracking-[0.1em]" style={{ opacity: 0.75 }}>
+          <p className="text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-[#141210] tracking-[0.09em]" style={{ opacity: 0.8 }}>
             Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
           </p>
         </div>

@@ -94,7 +94,7 @@ export default function ClimateLayout({ children, currentPage }) {
         <div className="max-w-[1100px] mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
           <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 min-w-0 active:opacity-70">
             <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.16em] text-[#efe7d6] leading-tight">
+            <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.12em] text-[#efe7d6] leading-tight">
               Together we can change the course of climate change
             </span>
           </Link>
@@ -104,7 +104,7 @@ export default function ClimateLayout({ children, currentPage }) {
               <Link
                 key={item.page}
                 to={createPageUrl(item.page)}
-                className={`text-[9px] font-black uppercase tracking-widest transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/45 hover:text-[#efe7d6]'}`}
+                className={`text-[11px] font-black uppercase tracking-wider transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60 hover:text-[#efe7d6]'}`}
               >
                 {item.label}
               </Link>
@@ -122,7 +122,7 @@ export default function ClimateLayout({ children, currentPage }) {
             <Link
               key={item.page}
               to={createPageUrl(item.page)}
-              className={`flex-shrink-0 py-1 text-[9px] font-black uppercase tracking-widest transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/45'}`}
+              className={`flex-shrink-0 py-1.5 text-[11px] font-black uppercase tracking-wider transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60'}`}
             >
               {item.label}
             </Link>
