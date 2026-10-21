@@ -34,7 +34,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              Together We Change Climate is a public record of verified climate solutions and crises, after Janine Selendy. Anyone can read it. Anyone can submit to it. Nothing gets published without a human reading it first.
+              Together we can change the course of climate change — this is a public record of climate solutions and crises, after Janine Selendy. Anyone can read it. Anyone can submit to it. Nothing gets published without a human reading it first.
             </p>
           </div>
         </section>
@@ -145,7 +145,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              If you see content that is yours, false, stolen, or harmful, write to hello@horizon-international.org with the entry title and the reason. A human reviews every takedown request within seven days. If the claim is valid, the entry is removed or corrected. This is our takedown process.
+              If you see content that is yours, false, stolen, or harmful, tell us with the entry title and the reason, at the contact address published here once the record's permanent home is arranged. A human reviews every takedown request within seven days. If the claim is valid, the entry is removed or corrected. This is our takedown process.
             </p>
           </div>
         </section>
@@ -169,7 +169,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              These terms are governed by the laws of the State of Connecticut, United States of America, where Horizon International is based. Any dispute is resolved in the Connecticut courts. If you are outside the US, you may still submit and read freely; the governing law is there for the rare case a dispute needs a court.
+              These terms are governed by the laws of the country in which the organisation that permanently runs this record is based. That organisation will be named here before the record moves to its own home. Until then, if something goes wrong, talk to us first — this clause exists only for the rare case a dispute needs a court.
             </p>
           </div>
         </section>
@@ -189,7 +189,7 @@ export default function ClimateTerms() {
         {/* CONTACT */}
         <section className="mt-8 pt-6 border-t-2 border-[#1a1612]">
           <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed mb-3">
-            Questions about these terms? Write to hello@horizon-international.org. We read everything.
+            Questions about these terms? A contact address will be published here as soon as the record's permanent home is arranged. Until then, this page is the promise — read it, question it, and tell us when we get it wrong.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link to={createPageUrl('ClimatePrivacy')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#1a1612] text-[#efe7d6] text-[10px] font-black font-mono uppercase border border-[#1a1612] hover:bg-[#b3261e] transition-colors">

@@ -35,7 +35,7 @@ export default function ClimateBrief() {
         {/* ── LETTERHEAD ── */}
         <div className="border-b-2 border-[#1a1612] pb-6 mb-8">
           <div className="text-[9px] font-black font-mono uppercase tracking-[0.3em] text-[#b3261e] mb-2">
-            Together We Change Climate · A Public Service
+            Together we can change the course of climate change · A Public Service
           </div>
           <h1 className="font-black uppercase leading-[0.95] text-[#1a1612]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '38px', letterSpacing: '-0.03em' }}>
             A Brief for<br />Janine M. H. Selendy
@@ -71,7 +71,7 @@ export default function ClimateBrief() {
               ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.'],
               ['Your category taxonomy', 'All 20 categories are implemented in the database and filterable on the page. 12 of 20 already have seeded entries; the rest are supported and ready.'],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.'],
-              ['Reviewed before publication', 'Every entry carries a status field (draft / reviewed / published). Material is reviewed before it goes public, same as the Solutions Site model.'],
+              ['Reviewed before publication', 'Every entry carries a status field (draft / reviewed / published). Material is reviewed before it goes public.'],
               ['Copyright-free images only', 'Every image is sourced from copyright-free pools (Unsplash). Image credit is stored on each entry.'],
               ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.'],
               ['Scale field', 'Individual, community, city, country, global — your spec, implemented.'],
@@ -219,7 +219,7 @@ DONE — live right now:
 - Two entry types: Solutions and Climate Crises, as you specified.
 - Your full 20-category taxonomy is in and filterable. 12 of 20 have entries; the other 8 are wired up and waiting.
 - Rough location only — country and region, no coordinates. Your privacy stance, kept.
-- Every entry reviewed before publication, same as the Solutions Site model.
+- Every entry reviewed before publication.
 - Copyright-free images only, credit stored on each.
 - Every entry links to its source.
 - Scale field: individual, community, city, country, global.

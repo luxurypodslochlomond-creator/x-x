@@ -8,7 +8,7 @@ import { prefetchPath } from '@/lib/routePrefetch';
 // No shop chrome beside it. Nothing of UF51's in the room.
 // x = x.
 
-const TITLE = 'Together We Change Climate — Record of the Time';
+const TITLE = 'Together we can change the course of climate change — Record of the Time';
 const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally. Every language on Earth.';
 
 const NAV = [
@@ -94,8 +94,8 @@ export default function ClimateLayout({ children, currentPage }) {
         <div className="max-w-[1100px] mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
           <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 min-w-0 active:opacity-70">
             <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.16em] text-[#efe7d6] truncate">
-              Together We Change Climate
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.16em] text-[#efe7d6] leading-tight">
+              Together we can change the course of climate change
             </span>
           </Link>
 

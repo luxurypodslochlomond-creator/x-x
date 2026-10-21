@@ -86,7 +86,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              You can ask us what we hold about you. You can ask us to correct it. You can ask us to remove your submission. Write to the address on the record and we will do it.
+              You can ask us what we hold about you. You can ask us to correct it. You can ask us to remove your submission. Ask, and we will do it — the contact address is published here as soon as the record's permanent home is arranged.
             </p>
           </div>
         </section>
@@ -182,7 +182,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#b3261e] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              The data controller for this record is Horizon International, based in Connecticut, USA, responsible for decisions about how your data is used. For any privacy question, write to hello@horizon-international.org. We do not yet have a formal Data Protection Officer; the person who reads that inbox is accountable for your request and will respond personally.
+              This record is run today as a public service by the team that built it. The organisation that will permanently hold and run it — and the person accountable for your data — will be named here before the record moves to its own home, which is being arranged now. Until then, every privacy question is answered personally by the people running the record, and your data is never passed to anyone else.
             </p>
           </div>
         </section>
@@ -190,7 +190,7 @@ export default function ClimatePrivacy() {
         {/* CONTACT */}
         <section className="mt-8 pt-6 border-t-2 border-[#1a1612]">
           <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed mb-3">
-            Questions about your data? Write to hello@horizon-international.org. We read everything.
+            Questions about your data? A contact address will be published here as soon as the record's permanent home is arranged. Until then, nothing you give us is sold, shared, or handed to anyone.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link to={createPageUrl('ClimateTerms')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#1a1612] text-[#efe7d6] text-[10px] font-black font-mono uppercase border border-[#1a1612] hover:bg-[#b3261e] transition-colors">
