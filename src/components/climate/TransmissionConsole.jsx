@@ -52,7 +52,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
             {playing ? <Pause className="w-6 h-6 text-[#141210]" fill="currentColor" /> : <Play className="w-6 h-6 text-[#e2602a] ml-1" fill="currentColor" />}
           </button>
           <div className="flex-1 min-w-0">
-            <h3 className="font-black uppercase leading-none text-[#efe7d6] truncate" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '28px', letterSpacing: '-0.025em' }}>
+            <h3 className="font-black uppercase leading-none text-[#efe7d6] truncate" style={{ fontFamily: 'var(--font-display)', fontSize: '28px', letterSpacing: '-0.025em' }}>
               {trackTitle}
             </h3>
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#efe7d6]/55 mt-1.5 truncate">

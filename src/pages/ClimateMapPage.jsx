@@ -49,7 +49,7 @@ export default function ClimateMapPage() {
         <h1
           className="font-black uppercase leading-[0.95] text-[#efe7d6] mt-3"
           style={{
-            fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif',
+            fontFamily: 'var(--font-display)',
             fontSize: 'clamp(32px, 9vw, 48px)',
             letterSpacing: '-0.035em',
           }}

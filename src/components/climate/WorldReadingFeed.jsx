@@ -34,7 +34,7 @@ export default function WorldReadingFeed({ stories }) {
 
       <div className="flex items-center gap-2 mb-1">
         <Radio className="w-4 h-4 text-[#b3261e]" style={{ animation: 'feed-signal 2.5s ease-in-out infinite' }} />
-        <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+        <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
           The world is reading
         </h2>
         <div className="flex-1 h-px bg-[#141210]/20" />

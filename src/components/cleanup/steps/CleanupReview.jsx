@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { AlertCircle, ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react';
 import P51Symbol from '@/components/shared/P51Symbol';
 
-const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+const headStyle = { fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' };
 
 export default function CleanupReview({
   formData, supportAmount, setSupportAmount,

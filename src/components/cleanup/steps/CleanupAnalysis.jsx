@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Eye, CheckCircle2, Sparkles, Recycle, Zap, AlertCircle, Globe, X, Camera } from 'lucide-react';
 import P51Symbol from '@/components/shared/P51Symbol';
 
-const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+const headStyle = { fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' };
 
 const Card = ({ accent = '#1e3a2b', className = '', children }) => (
   <div className={`bg-[#f7f1e5] border border-[#141210] border-l-4 p-4 ${className}`} style={{ borderLeftColor: accent }}>

@@ -37,7 +37,7 @@ const PRINCIPLES = [
   'Anyone may copy this to help people. No one may quietly close it to harvest them.',
 ];
 
-const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+const headStyle = { fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' };
 
 export default function ExtractionProofCovenant() {
   return (

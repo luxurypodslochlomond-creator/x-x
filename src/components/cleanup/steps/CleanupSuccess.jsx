@@ -8,7 +8,7 @@ import P51Symbol from '@/components/shared/P51Symbol';
 import FraudDetectionModal from '@/components/cleanup/FraudDetectionModal';
 import TechExplainerModal from '@/components/cleanup/TechExplainerModal';
 
-const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+const headStyle = { fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' };
 
 export default function CleanupSuccess({
   formData, step, setStep, setCapturedPhotos, setFormData, setAiAnalysis, setAfterPhoto,

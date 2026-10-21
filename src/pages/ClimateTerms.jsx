@@ -19,7 +19,7 @@ export default function ClimateTerms() {
         {/* HEADER */}
         <header className="mb-8 pb-6 border-b-2 border-[#1a1612]">
           <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-[#b3261e] mb-2">TWCC · TERMS</p>
-          <h1 className="font-black uppercase text-[#1a1612] leading-[0.95]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '44px', letterSpacing: '-0.03em' }}>
+          <h1 className="font-black uppercase text-[#1a1612] leading-[0.95]" style={{ fontFamily: 'var(--font-display)', fontSize: '44px', letterSpacing: '-0.03em' }}>
             The Ground<br />We Stand On
           </h1>
           <p className="text-[12px] font-mono text-[#6b6258] mt-3 leading-relaxed">
@@ -29,7 +29,7 @@ export default function ClimateTerms() {
 
         {/* 1. WHAT THIS IS */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             01 · What This Is
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -41,7 +41,7 @@ export default function ClimateTerms() {
 
         {/* 2. WHAT YOU CAN SUBMIT */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             02 · What You Can Submit
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4 space-y-2">
@@ -56,7 +56,7 @@ export default function ClimateTerms() {
 
         {/* 3. HUMAN REVIEW */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             03 · Human Review
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#1e3a2b] border border-[#1a1612] p-4">
@@ -68,7 +68,7 @@ export default function ClimateTerms() {
 
         {/* 4. BE HONEST */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             04 · Be Honest
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#b3261e] border border-[#1a1612] p-4">
@@ -80,7 +80,7 @@ export default function ClimateTerms() {
 
         {/* 5. YOUR WORDS */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             05 · Your Words
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -92,7 +92,7 @@ export default function ClimateTerms() {
 
         {/* 6. NO WARRANTY */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             06 · No Warranty
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -104,7 +104,7 @@ export default function ClimateTerms() {
 
         {/* 7. THE AI ADVISORY NOTE */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             07 · The AI Advisory Note
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
@@ -116,7 +116,7 @@ export default function ClimateTerms() {
 
         {/* 8. HOW LONG WE KEEP IT */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             08 · How Long We Keep It
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4 space-y-2">
@@ -128,7 +128,7 @@ export default function ClimateTerms() {
 
         {/* 9. IF YOU'RE UNDER 13 */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             09 · If You're Under 13
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#1e3a2b] border border-[#1a1612] p-4">
@@ -140,7 +140,7 @@ export default function ClimateTerms() {
 
         {/* 10. TAKING SOMETHING DOWN */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             10 · Taking Something Down
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -152,7 +152,7 @@ export default function ClimateTerms() {
 
         {/* 11. WHEN THINGS GO WRONG */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             11 · When Things Go Wrong
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -164,7 +164,7 @@ export default function ClimateTerms() {
 
         {/* 12. THE LAW THAT APPLIES */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             12 · The Law That Applies
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -176,7 +176,7 @@ export default function ClimateTerms() {
 
         {/* 13. WHEN THESE CHANGE */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             13 · When These Change
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">

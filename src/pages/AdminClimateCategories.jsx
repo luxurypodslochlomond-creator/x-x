@@ -106,7 +106,7 @@ export default function AdminClimateCategories() {
       <div className="max-w-[600px] mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.02em' }}>
+            <h1 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.02em' }}>
               Categories
             </h1>
             <p className="text-[10px] font-mono text-[#5a5246] mt-1">Add, edit, and reorder the platform's categories. Changes appear instantly.</p>
@@ -160,7 +160,7 @@ export default function AdminClimateCategories() {
       {showForm && (
         <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto">
           <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
-            <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+            <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
               {editing ? 'Edit category' : 'New category'}
             </h2>
             <button onClick={() => setShowForm(false)} className="w-10 h-10 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors">

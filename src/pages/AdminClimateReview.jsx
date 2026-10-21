@@ -216,7 +216,7 @@ export default function AdminClimateReview() {
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
-            <h1 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '28px', letterSpacing: '-0.02em' }}>
+            <h1 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'var(--font-display)', fontSize: '28px', letterSpacing: '-0.02em' }}>
               Review Queue
             </h1>
             <div className="flex items-center gap-2">

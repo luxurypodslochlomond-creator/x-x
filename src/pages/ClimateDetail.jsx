@@ -135,7 +135,7 @@ export default function ClimateDetail() {
         </div>
 
         <div className="p-5">
-          <h1 className="text-2xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em', color: '#141210' }}>
+          <h1 className="text-2xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em', color: '#141210' }}>
             {tr.field('title')}
           </h1>
 
@@ -233,7 +233,7 @@ export default function ClimateDetail() {
         <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
           <SignalCode code={catCode} size="md" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
-        <h1 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>
+        <h1 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
           {tr.field('title')}
         </h1>
         <div className="flex items-center gap-2 text-[11px] font-mono text-[#5a5246] mt-3">

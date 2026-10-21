@@ -19,7 +19,7 @@ export default function ClimatePrivacy() {
         {/* HEADER */}
         <header className="mb-8 pb-6 border-b-2 border-[#1a1612]">
           <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-[#b3261e] mb-2">TWCC · PRIVACY</p>
-          <h1 className="font-black uppercase text-[#1a1612] leading-[0.95]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '44px', letterSpacing: '-0.03em' }}>
+          <h1 className="font-black uppercase text-[#1a1612] leading-[0.95]" style={{ fontFamily: 'var(--font-display)', fontSize: '44px', letterSpacing: '-0.03em' }}>
             What We Hold<br />What We Don't
           </h1>
           <p className="text-[12px] font-mono text-[#6b6258] mt-3 leading-relaxed">
@@ -32,7 +32,7 @@ export default function ClimatePrivacy() {
 
         {/* 1. YOUR EMAIL */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             01 · Your Email
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -44,7 +44,7 @@ export default function ClimatePrivacy() {
 
         {/* 2. YOUR COUNTRY */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             02 · Your Country
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -56,7 +56,7 @@ export default function ClimatePrivacy() {
 
         {/* 3. AI ADVISORY */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             03 · The AI Advisory Note
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
@@ -68,7 +68,7 @@ export default function ClimatePrivacy() {
 
         {/* 4. WHAT WE DON'T HOLD */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             04 · What We Don't Hold
           </h2>
           <div className="bg-[#1e3a2b] text-[#efe7d6] border border-[#1a1612] p-4">
@@ -84,7 +84,7 @@ export default function ClimatePrivacy() {
 
         {/* 5. YOUR RIGHTS */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             05 · Your Rights
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -96,7 +96,7 @@ export default function ClimatePrivacy() {
 
         {/* 6. THE PROMISE */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             06 · The Promise
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#b3261e] border border-[#1a1612] p-4">
@@ -108,7 +108,7 @@ export default function ClimatePrivacy() {
 
         {/* 7. THE LAWFUL BASIS */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             07 · The Lawful Basis
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4 space-y-2">
@@ -120,7 +120,7 @@ export default function ClimatePrivacy() {
 
         {/* 8. HOW LONG WE KEEP IT */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             08 · How Long We Keep It
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -132,7 +132,7 @@ export default function ClimatePrivacy() {
 
         {/* 9. WHERE YOUR DATA SITS */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             09 · Where Your Data Sits
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
@@ -144,7 +144,7 @@ export default function ClimatePrivacy() {
 
         {/* 10. IF YOU'RE UNDER 13 */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             10 · If You're Under 13
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#1e3a2b] border border-[#1a1612] p-4">
@@ -156,7 +156,7 @@ export default function ClimatePrivacy() {
 
         {/* 11. IF SOMETHING BREAKS */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             11 · If Something Breaks
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -168,7 +168,7 @@ export default function ClimatePrivacy() {
 
         {/* 12. YOUR RIGHT TO COMPLAIN */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             12 · Your Right to Complain
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
@@ -180,7 +180,7 @@ export default function ClimatePrivacy() {
 
         {/* 13. WHO IS RESPONSIBLE */}
         <section className="mb-6">
-          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             13 · Who Is Responsible
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#b3261e] border border-[#1a1612] p-4">

@@ -66,7 +66,7 @@ export default function ClimateCommentSection({ entryId, entryType }) {
     <section className="mt-8 border-t-2 border-[#141210] pt-5">
       <div className="flex items-center gap-2 mb-3">
         <MessageSquare className="w-4 h-4 text-[#1e3a2b]" />
-        <h3 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+        <h3 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
           Comments
         </h3>
         <div className="flex-1 h-px bg-[#141210]/20" />

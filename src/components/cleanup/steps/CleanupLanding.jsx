@@ -8,7 +8,7 @@ import CryptoSecurityTooltip from '@/components/cleanup/CryptoSecurityTooltip';
 import RealtimeScanningOverlay from '@/components/shared/RealtimeScanningOverlay';
 import CleanupImage from '@/components/cleanup/CleanupImage';
 
-const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+const headStyle = { fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' };
 
 export default function CleanupLanding({
   formData, isOffline, isLoading, recentActivity,

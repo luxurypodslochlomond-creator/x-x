@@ -38,7 +38,7 @@ export default function WorldActionFeed({ actions }) {
 
       <div className="flex items-center gap-2 mb-1">
         <Sprout className="w-4 h-4 text-[#1e3a2b]" style={{ animation: 'action-pulse 3s ease-in-out infinite' }} />
-        <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+        <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
           The world is acting
         </h2>
         <div className="flex-1 h-px bg-[#141210]/20" />

@@ -66,7 +66,7 @@ export default function ClimateBrief() {
           <div className="text-[9px] font-black font-mono uppercase tracking-[0.3em] text-[#b3261e] mb-2">
             Together we can change the course of climate change · A Public Service
           </div>
-          <h1 className="font-black uppercase leading-[0.95] text-[#1a1612]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '38px', letterSpacing: '-0.03em' }}>
+          <h1 className="font-black uppercase leading-[0.95] text-[#1a1612]" style={{ fontFamily: 'var(--font-display)', fontSize: '38px', letterSpacing: '-0.03em' }}>
             A Brief for<br />Janine M. H. Selendy
           </h1>
           <p className="text-[11px] font-mono text-[#6b6258] mt-3 leading-relaxed">
@@ -92,7 +92,7 @@ export default function ClimateBrief() {
 
         {/* ── WHAT IS LIVE NOW ── */}
         <section className="mb-8">
-          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             What is live now
           </h2>
           <div className="space-y-2.5">
@@ -125,7 +125,7 @@ export default function ClimateBrief() {
 
         {/* ── LIVE NUMBERS ── */}
         <section className="mb-8">
-          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             The record, today
           </h2>
           <div className="grid grid-cols-2 gap-2.5">
@@ -150,7 +150,7 @@ export default function ClimateBrief() {
 
         {/* ── WHAT IS PLANNED, NOT YET BUILT ── */}
         <section className="mb-8">
-          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             What is planned, not yet built
           </h2>
           <div className="space-y-2.5">
@@ -172,7 +172,7 @@ export default function ClimateBrief() {
 
         {/* ── WHAT WE WILL NOT DO ── */}
         <section className="mb-8">
-          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             What we will not do
           </h2>
           <div className="bg-[#b3261e] text-[#f4efe4] px-5 py-4">
@@ -190,7 +190,7 @@ export default function ClimateBrief() {
 
         {/* ── THE HONEST MATHS ── */}
         <section className="mb-8">
-          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
             The only maths that matters here
           </h2>
           <div className="bg-[#efe7d6] border-2 border-[#1a1612] px-5 py-5">
@@ -219,7 +219,7 @@ export default function ClimateBrief() {
         {/* ── EMAIL TO JANINE — copy-paste ready ── */}
         <section className="mb-8">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            <h2 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
               Email to Janine
             </h2>
             <button

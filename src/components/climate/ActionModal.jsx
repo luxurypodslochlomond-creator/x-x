@@ -54,7 +54,7 @@ export default function ActionModal({ action, onClose, items = [], actions = [],
             <Icon className="w-5 h-5 text-[#efe7d6]" />
             <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">{meta.label}</span>
           </div>
-          <h2 className="text-2xl font-black uppercase text-[#efe7d6] leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>
+          <h2 className="text-2xl font-black uppercase text-[#efe7d6] leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
             {action.title}
           </h2>
         </div>

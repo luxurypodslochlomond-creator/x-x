@@ -103,7 +103,7 @@ const LANGS = [
 
 // Universal reframe: "it's not mine, it's for the world, the planet, all of us."
 const T = {
-  en: { title_a: 'Together we can change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No fund raising', donate: 'Donations welcome', search: 'Search solutions, crises and actions…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and built to be trusted', govern_body: 'Every entry is reviewed before publication. Only copyright-free images are used. Location is kept to a rough region to protect privacy, while remaining honest and verifiable. The platform is open source, extraction-proof, and runs as a public service — no advertising, no fundraising, ever. Interface translations are provided for the platform; entries themselves are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — the verified solutions here are the knowledge engine behind our on-the-ground action.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals', groups: 'Groups', groups_sub: 'People working on the same thing in an area can share ideas directly — find your region or topic and join in.', groups_note: 'New gatherings form as the community grows. To start one for your region or topic, send a short description — the record\'s contact address appears here as soon as its permanent home is arranged.', live: 'Live record', entries_now: 'entries on the record right now', actions: 'Actions', actions_sub: 'Cleanups, plantings, meetings, policy submissions — real things happening on the ground. Contact the organiser directly. The platform never sees your messages.', actions_empty: 'No actions listed yet — be the first to add one.', groups_empty: 'No gatherings yet — to start one for your region or topic, send a short description once the record\'s contact address appears here.' },
+  en: { title_a: 'Together we can change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No fund raising', donate: 'Donations welcome', search: 'Search solutions, crises and actions…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and built to be trusted', govern_body: 'Spam is screened automatically; clear entries go on the record at once, and anything unclear waits for a human check. Only copyright-free images are used. Location is kept to a rough region to protect privacy, while remaining honest and verifiable. The platform is open source, extraction-proof, and runs as a public service — no advertising, no fundraising, ever. Interface translations are provided for the platform; entries themselves are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — the verified solutions here are the knowledge engine behind our on-the-ground action.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals', groups: 'Groups', groups_sub: 'People working on the same thing in an area can share ideas directly — find your region or topic and join in.', groups_note: 'New gatherings form as the community grows. To start one for your region or topic, send a short description — the record\'s contact address appears here as soon as its permanent home is arranged.', live: 'Live record', entries_now: 'entries on the record right now', actions: 'Actions', actions_sub: 'Cleanups, plantings, meetings, policy submissions — real things happening on the ground. Contact the organiser directly. The platform never sees your messages.', actions_empty: 'No actions listed yet — be the first to add one.', groups_empty: 'No gatherings yet — to start one for your region or topic, send a short description once the record\'s contact address appears here.' },
   es: { title_a: 'Juntos cambiamos el', title_b: 'curso', title_c: 'del cambio climático', sub: 'Un registro público de emergencias climáticas y las acciones positivas que funcionan — compartido abiertamente, internacionalmente — para que cualquiera en la Tierra pueda replicar lo que funciona.', service: 'Un servicio público · para el mundo', noads: 'Sin publicidad', nofund: 'Sin recaudación', donate: 'Donaciones bienvenidas', search: 'Buscar soluciones y crisis…', solutions: 'Soluciones', crises: 'Crisis Climáticas', defs: 'Definiciones', rev: 'Revisado', connect: 'Conectando el planeta…', empty: 'Sin resultados aún.', govern: 'Construido para el planeta — y para ser confiable', govern_body: 'Cada entrada se revisa antes de publicarse. Solo se usan imágenes sin derechos de autor. La ubicación se mantiene en una región aproximada para proteger la privacidad, siendo honesta y verificable. La plataforma es de código abierto, a prueba de extracción, y funciona como servicio público — sin publicidad, sin recaudación. Las traducciones de la interfaz se ofrecen en la plataforma; las entradas son traducidas por nuestra comunidad con el tiempo.', covenant: 'Lee nuestro pacto de código abierto', family: 'Esta plataforma es parte de la familia de Curación Planetaria de UF51 — las soluciones verificadas aquí son el motor de conocimiento detrás de nuestra acción sobre el terreno.', action: 'Actúa', honour: 'Construido en honor de Janine M. H. Selendy y Horizon International — y entregado al mundo, al planeta, a todos nosotros.', all: 'Todo', featured: 'Señales' },
   fr: { title_a: 'Ensemble, nous changeons le', title_b: 'cours', title_c: 'du changement climatique', sub: 'Un registre public des urgences climatiques et des actions positives qui fonctionnent — partagé ouvertement, à l\'international — pour que chacun sur Terre puisse répliquer ce qui fonctionne.', service: 'Un service public · pour le monde', noads: 'Aucune publicité', nofund: 'Aucune levée de fonds', donate: 'Dons bienvenus', search: 'Rechercher solutions et crises…', solutions: 'Solutions', crises: 'Crises Climatiques', defs: 'Définitions', rev: 'Vérifié', connect: 'Connexion de la planète…', empty: 'Aucun résultat pour l\'instant.', govern: 'Conçu pour la planète — et pour être digne de confiance', govern_body: 'Chaque entrée est vérifiée avant publication. Seules des images libres de droits sont utilisées. La localisation est limitée à une région approximative pour protéger la vie privée, tout en restant honnête et vérifiable. La plateforme est open source, in-extractible, et fonctionne en service public — sans publicité, sans levée de fonds. Les traductions de l\'interface sont fournies sur la plateforme; les entrées sont traduites par notre communauté au fil du temps.', covenant: 'Lire notre pacte open source', family: 'Cette plateforme fait partie de la famille de Guérison Planétaire UF51 — les solutions vérifiées ici sont le moteur de connaissance derrière notre action de terrain.', action: 'Agir', honour: 'Construit en l\'honneur de Janine M. H. Selendy et Horizon International — et remis au monde, à la planète, à nous tous.', all: 'Tout', featured: 'Signaux' },
   de: { title_a: 'Gemeinsam ändern wir den', title_b: 'Lauf', title_c: 'des Klimawandels', sub: 'Ein öffentliches Register von Klimanotlagen und positiven Maßnahmen, die funktionieren — offen geteilt, international — damit jeder auf der Erde nachahmen kann, was gut ist.', service: 'Ein öffentlicher Dienst · für die Welt', noads: 'Keine Werbung', nofund: 'Keine Spendenaufrufe', donate: 'Spenden willkommen', search: 'Lösungen und Krisen suchen…', solutions: 'Lösungen', crises: 'Klimakrisen', defs: 'Definitionen', rev: 'Geprüft', connect: 'Planet verbinden…', empty: 'Noch keine Treffer.', govern: 'Für den Planeten gebaut — und gebaut, um vertraut zu werden', govern_body: 'Jeder Eintrag wird vor der Veröffentlichung geprüft. Es werden nur urheberrechtsfreie Bilder verwendet. Der Standort bleibt grob, um die Privatsphäre zu schützen, bleibt aber ehrlich und überprüfbar. Die Plattform ist Open Source, extraktionssicher und ein öffentlicher Dienst — ohne Werbung, ohne Spendenaufrufe. Oberflächenübersetzungen werden auf der Plattform angeboten; Einträge werden mit der Zeit von unserer Gemeinschaft übersetzt.', covenant: 'Unser Open-Source-Pakt', family: 'Diese Plattform ist Teil der UF51 Planetary-Healing-Familie — die verifizierten Lösungen hier sind die Wissens-Engine hinter unserer Arbeit vor Ort.', action: 'Handeln', honour: 'Zu Ehren von Janine M. H. Selendy & Horizon International gebaut — und der Welt, dem Planeten, uns allen übergeben.', all: 'Alle', featured: 'Signale' },
@@ -339,11 +339,11 @@ export default function TogetherChangeClimate() {
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/40" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <style>{`
-        @keyframes twcc-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
         @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6, 0 0 24px rgba(226,96,42,.55); } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
-        @keyframes twcc-epigraph { from { opacity: 0; letter-spacing: 0.3em; } to { opacity: 1; letter-spacing: 0.15em; } }
+        @keyframes twcc-epigraph { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 4px; } }
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } } body { background: #141210 !important; }
       `}</style>
@@ -424,7 +424,7 @@ export default function TogetherChangeClimate() {
         {/* Ink band */}
         <div className="relative z-10 px-5 pt-10 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
           <h1 className="font-black uppercase leading-[0.94] max-w-[360px] lg:max-w-[640px] relative z-10 text-[#efe7d6]"
-            style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: 'clamp(38px, 11vw, 72px)', letterSpacing: '-0.035em' }}>
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(38px, 11vw, 72px)', letterSpacing: '-0.035em' }}>
             {t.title_a}<br />
             <span className="text-[#e2602a]">{t.title_b}</span> {t.title_c}
           </h1>
@@ -450,18 +450,19 @@ export default function TogetherChangeClimate() {
         </div>
       </div>
 
-      {/* ── THE PICTURES — what people are doing and what is at risk, before anything else ── */}
-      {featured.length > 0 && (
+      {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
+             The space is held while the record loads, so nothing jumps on arrival. ── */}
+      {(loading || featured.length > 0) && (
         <div className="px-4 py-5 bg-[#efe7d6] border-b-2 border-[#141210]">
           <div className="flex items-center gap-2 mb-3">
-            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
+            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
             <div className="flex-1 h-px bg-[#141210]/20" />
             <span className="text-[10px] font-black font-mono text-[#e2602a]">{featured.length}</span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
-            {featured.map((item) => (
-              <SolutionCard key={item.id} item={item} />
-            ))}
+            {loading
+              ? [0, 1, 2, 3].map(i => <div key={i} className="min-h-[124px] bg-[#141210]/10 border border-[#141210]/15 animate-pulse" />)
+              : featured.map((item) => <SolutionCard key={item.id} item={item} />)}
           </div>
         </div>
       )}
@@ -599,7 +600,7 @@ export default function TogetherChangeClimate() {
             {showEntries && solutions.length > 0 && (
               <section className="px-4 py-5 border-b-2 border-[#141210]">
                 <div className="flex items-center gap-2 mb-3">
-                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.solutions}</h2>
+                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.solutions}</h2>
                   <div className="flex-1 h-px bg-[#141210]/20" />
                   <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{solutions.length}</span>
                 </div>
@@ -615,7 +616,7 @@ export default function TogetherChangeClimate() {
             {showEntries && crises.length > 0 && (
               <section className="px-4 py-5 border-b-2 border-[#141210]">
                 <div className="flex items-center gap-2 mb-3">
-                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.crises}</h2>
+                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.crises}</h2>
                   <div className="flex-1 h-px bg-[#141210]/20" />
                   <span className="text-[10px] font-black font-mono text-[#e2602a]">{crises.length}</span>
                 </div>
@@ -641,7 +642,7 @@ export default function TogetherChangeClimate() {
         {((selectedType === 'all' && filteredGroups.length > 0) || selectedType === 'groups') && (
           <section className="px-4 py-5 border-b-2 border-[#141210]">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.groups}</h2>
+              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.groups}</h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{filteredGroups.length}</span>
             </div>
@@ -681,7 +682,7 @@ export default function TogetherChangeClimate() {
         {(selectedType === 'all' || selectedType === 'actions') && (
           <section className="px-4 py-5 border-b-2 border-[#141210]">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.actions}</h2>
+              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.actions}</h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#e2602a]">{filteredActions.length}</span>
             </div>
@@ -700,7 +701,7 @@ export default function TogetherChangeClimate() {
 
         {/* ── DEFINITIONS ── */}
         <section className="px-4 py-5 border-b-2 border-[#141210]">
-          <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.defs}</h2>
+          <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.defs}</h2>
           <div className="space-y-2.5 md:grid md:grid-cols-3 md:gap-3 md:space-y-0">
             <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
               <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Geodesign</h4>
@@ -752,7 +753,7 @@ export default function TogetherChangeClimate() {
 
         {/* ── GOVERNANCE ── */}
         <section className="px-4 py-5 bg-[#1e3a2b] text-[#efe7d6]">
-          <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.govern}</h2>
+          <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.govern}</h2>
           <p className="text-[12px] font-mono leading-relaxed text-[#efe7d6] max-w-full lg:max-w-[680px]">{t.govern_body}</p>
           <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-2 mt-4 px-3 py-2 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors">
             {t.covenant} <ArrowRight className="w-3.5 h-3.5" />

@@ -128,7 +128,7 @@ export default function ClimateImpact() {
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div>
-          <h1 className="font-black uppercase text-[#efe7d6] leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+          <h1 className="font-black uppercase text-[#efe7d6] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
             Global Impact
           </h1>
           <p className="text-[9px] font-mono text-[#e2602a] uppercase tracking-widest mt-0.5">The record of the time</p>
@@ -147,7 +147,7 @@ export default function ClimateImpact() {
           className="text-center"
         >
           <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 mb-2">People have read the record</p>
-          <div className="font-black text-[#e2602a] leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: 'clamp(64px, 22vw, 96px)', letterSpacing: '-0.04em' }}>
+          <div className="font-black text-[#e2602a] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(64px, 22vw, 96px)', letterSpacing: '-0.04em' }}>
             {total.toLocaleString()}
           </div>
           <div className="flex items-center justify-center gap-4 mt-5">
@@ -186,7 +186,7 @@ export default function ClimateImpact() {
       <div className="px-5 pt-6 pb-2">
         <div className="flex items-center gap-2 mb-3">
           <Globe className="w-4 h-4 text-[#b3261e]" />
-          <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+          <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
             Where the world is reading
           </h2>
           <div className="flex-1 h-px bg-[#141210]/20" />
@@ -253,7 +253,7 @@ export default function ClimateImpact() {
         <div className="px-5 py-6">
           <div className="flex items-center gap-2 mb-4">
             <MapPin className="w-4 h-4 text-[#b3261e]" />
-            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
               By Nation
             </h2>
             <span className="text-[9px] font-mono text-[#5a5246] uppercase tracking-wider">Self-identified</span>
@@ -288,7 +288,7 @@ export default function ClimateImpact() {
         <div className="px-5 py-6">
           <div className="flex items-center gap-2 mb-4">
             <Users className="w-4 h-4 text-[#1e3a2b]" />
-            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
               By Country
             </h2>
             <div className="flex-1 h-px bg-[#141210]/20" />

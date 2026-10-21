@@ -14,7 +14,7 @@ function SuccessScreen({ entryType, onClose, published }) {
       <div className="w-16 h-16 rounded-full bg-[#1e3a2b] flex items-center justify-center mb-5">
         <Check className="w-8 h-8 text-[#efe7d6]" />
       </div>
-      <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '28px', letterSpacing: '-0.02em' }}>
+      <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '28px', letterSpacing: '-0.02em' }}>
         Thank you
       </h2>
       <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[320px] mb-2">
@@ -122,7 +122,7 @@ export default function ClimateSubmitForm({ onClose }) {
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Header */}
       <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
-        <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+        <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
           Submit to the record
         </h2>
         <button onClick={onClose} aria-label="Close" className="w-10 h-10 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors">

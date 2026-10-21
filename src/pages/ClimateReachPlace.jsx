@@ -71,7 +71,7 @@ export default function ClimateReachPlace() {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div className="min-w-0">
-          <h1 className="font-black uppercase text-[#efe7d6] leading-none truncate" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '20px', letterSpacing: '-0.02em' }}>
+          <h1 className="font-black uppercase text-[#efe7d6] leading-none truncate" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
             {displayName}
           </h1>
           <p className="text-[9px] font-mono text-[#e2602a] uppercase tracking-widest mt-0.5">
@@ -89,7 +89,7 @@ export default function ClimateReachPlace() {
           <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 mb-2">
             {placeType === 'country' ? 'Readers from this country' : 'Readers from this nation'}
           </p>
-          <div className="font-black text-[#e2602a] leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: 'clamp(56px, 18vw, 80px)', letterSpacing: '-0.04em' }}>
+          <div className="font-black text-[#e2602a] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(56px, 18vw, 80px)', letterSpacing: '-0.04em' }}>
             {totalReaders.toLocaleString()}
           </div>
           <div className="flex items-center justify-center gap-4 mt-5">

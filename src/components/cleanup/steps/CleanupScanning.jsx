@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Sparkles, Loader2, Zap, CheckCircle2, Eye } from 'lucide-react';
 
-const headStyle = { fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' };
+const headStyle = { fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' };
 
 export default function CleanupScanning({ formData, afterPhoto, setAfterPhoto, isOffline }) {
   return (

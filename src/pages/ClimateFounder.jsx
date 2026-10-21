@@ -91,7 +91,7 @@ export default function ClimateFounder() {
 
       {/* Name & role — bone band */}
       <div className="px-5 py-8 text-center border-b-2 border-[#141210] bg-[#f7f1e5]">
-        <h1 className="text-3xl font-black uppercase text-[#141210] leading-none" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', letterSpacing: '-0.02em' }}>
+        <h1 className="text-3xl font-black uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
           Janine M. H. Selendy
         </h1>
         <p className="text-[11px] font-mono text-[#5a5246] mt-3 leading-relaxed max-w-sm mx-auto">
@@ -102,7 +102,7 @@ export default function ClimateFounder() {
 
       {/* Achievements — the record of the work */}
       <div className="px-5 py-8 space-y-4">
-        <h2 className="text-center font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '22px', letterSpacing: '-0.025em' }}>
+        <h2 className="text-center font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.025em' }}>
           The Record of the Work
         </h2>
         {ACHIEVEMENTS.map((a, i) => {
