@@ -95,7 +95,7 @@ export default function ClimateFounder() {
           Janine M. H. Selendy
         </h1>
         <p className="text-[11px] font-mono text-[#5a5246] mt-3 leading-relaxed max-w-sm mx-auto">
-          Founder of Horizon International · Yale University<br />
+          Chairman, President and Publisher, Horizon International · Yale University<br />
           Four decades of finding and advancing solutions to the interrelated concerns of global health, environment, and poverty.
         </p>
       </div>
@@ -132,7 +132,7 @@ export default function ClimateFounder() {
             Janine M. H. Selendy
           </p>
           <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-5">
-            Founder, Horizon International<br />
+            Chairman, President and Publisher, Horizon International<br />
             Fellow Emeritus, The Explorers Club (FN'96)
           </p>
 
@@ -167,7 +167,7 @@ export default function ClimateFounder() {
           </div>
 
           <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-5">
-            The Solutions Site was created by Horizon International with UNEP, UNDP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard — a forum where every accepted entry has been reviewed before publication. This platform follows that same model.
+            The Solutions Site was created by Horizon International with UNEP, UNDP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard — a forum where every accepted entry has been reviewed before publication.
           </p>
         </div>
       </div>
