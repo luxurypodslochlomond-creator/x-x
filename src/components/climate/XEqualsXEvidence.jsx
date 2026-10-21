@@ -9,7 +9,7 @@ const REFERENCES = [
   },
   {
     title: 'Adult wellbeing',
-    text: 'In a randomised study, four weeks without Facebook increased participants’ subjective wellbeing, but also reduced factual news knowledge. This is evidence from a specific setting, not proof of the same effects for everyone or every platform.',
+    text: 'In a randomised experiment, people who stepped away from a large social media platform for four weeks reported feeling better, though they also knew less about the news. It is one study, in one setting, and it is not proof that the same would happen to everyone.',
     citation: 'Allcott et al. · American Economic Review 110(3), 629–676 · 2020',
     url: 'https://www.aeaweb.org/articles?id=10.1257/aer.20190658',
   },
@@ -24,7 +24,7 @@ const REFERENCES = [
 export default function XEqualsXEvidence() {
   return (
     <section aria-labelledby="record-evidence" className="space-y-5 border-t border-record-ink/20 pt-7">
-      <h2 id="record-evidence" className="font-display text-3xl font-bold uppercase leading-tight">Grounded in evidence.</h2>
+      <h2 id="record-evidence" className="font-display text-3xl font-bold uppercase leading-tight">Where this comes from.</h2>
       <div className="space-y-6">
         {REFERENCES.map(({ title, text, citation, url }) => (
           <article key={url} className="space-y-2">
