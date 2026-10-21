@@ -1,0 +1,102 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { base44 } from '@/api/base44Client';
+import { ArrowLeft, ArrowRight, Copy, Check } from 'lucide-react';
+import NewsEntryCard from '@/components/climate/NewsEntryCard';
+
+// One entry on its own permanent address. A researcher cites this page, not the front
+// page, so the entry, its source and how well it is known all travel together in the link.
+
+export default function ClimateWireEntry() {
+  const { id } = useParams();
+  const [entry, setEntry] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    base44.entities.ClimateNews.get(id)
+      .then(record => { if (!cancelled) setEntry(record); })
+      .catch(() => { if (!cancelled) setEntry(null); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [id]);
+
+  const citation = entry
+    ? `${entry.source_name}. "${entry.headline}" Together We Change Climate — the wire, ${entry.when_label}. ${window.location.href}`
+    : '';
+
+  const copyCitation = async () => {
+    try {
+      await navigator.clipboard.writeText(citation);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Clipboard is blocked in some in-app browsers. The citation sits in a
+      // selectable field below, so it can always be copied by hand.
+    }
+  };
+
+  return (
+    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+      <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 border-b-2 border-[#141210] bg-[#efe7d6]">
+        <Link to="/ClimateWire" aria-label="Back to the wire" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
+          <ArrowLeft className="w-5 h-5" />
+        </Link>
+        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">One entry · permanent address</span>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 py-6">
+        {loading && (
+          <div className="py-16 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-full animate-spin" style={{ border: '2px solid rgba(20,18,16,0.2)', borderTopColor: '#e2602a' }} />
+          </div>
+        )}
+
+        {!loading && !entry && (
+          <div className="bg-[#f7f1e5] border-2 border-[#141210]/30 p-6 text-center">
+            <p className="text-[12px] font-mono text-[#141210] leading-relaxed mb-4">
+              This entry is not on the record. Either it was taken down, or it is still waiting for a person to check its source.
+            </p>
+            <Link to="/ClimateWire" className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
+              Back to the wire <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
+
+        {entry && (
+          <>
+            <NewsEntryCard entry={entry} linked={false} />
+
+            <div className="mt-6 bg-[#f7f1e5] border-2 border-[#141210] p-4">
+              <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Cite this entry</p>
+              <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-3">
+                Copy the citation and it carries the source and the date with it. This page does not change: if the entry is corrected, the correction shows on it.
+              </p>
+              <textarea
+                readOnly
+                value={citation}
+                onFocus={e => e.target.select()}
+                rows={3}
+                className="w-full bg-[#efe7d6] border border-[#141210] px-3 py-2.5 text-[11px] font-mono text-[#141210] outline-none resize-none"
+              />
+              <button
+                onClick={copyCitation}
+                className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
+              >
+                {copied ? <><Check className="w-4 h-4" /> Copied</> : <><Copy className="w-4 h-4" /> Copy the citation</>}
+              </button>
+            </div>
+
+            <div className="mt-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] p-3">
+              <p className="text-[11px] font-mono leading-relaxed text-[#141210]">
+                Something here wrong? Tell us and it is corrected on the entry itself, with the date, in daylight — never quietly edited away. See{' '}
+                <Link to="/ClimateMethod" className="underline text-[#141210]">how this record is made</Link>.
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

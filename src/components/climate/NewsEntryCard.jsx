@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
 // One entry on the wire. Dated, sourced, and honest about how well it is known —
@@ -17,8 +18,10 @@ const KIND = {
   initiative: 'Initiative',
 };
 
-export default function NewsEntryCard({ entry }) {
+export default function NewsEntryCard({ entry, linked = true }) {
   const badge = VERIFICATION[entry.verification] || VERIFICATION.single_source;
+  const headlineClass = 'font-black uppercase leading-[1.1] text-[#141210]';
+  const headlineStyle = { fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.01em' };
 
   return (
     <article className="bg-[#f7f1e5] border-2 border-[#141210]">
@@ -33,12 +36,15 @@ export default function NewsEntryCard({ entry }) {
         {entry.where_label && <span className="text-[10px] font-mono text-[#5a5246] uppercase tracking-wide">· {entry.where_label}</span>}
       </div>
 
-      <h2
-        className="px-4 pt-3 font-black uppercase leading-[1.1] text-[#141210]"
-        style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.01em' }}
-      >
-        {entry.headline}
-      </h2>
+      {linked ? (
+        <Link to={`/ClimateWireEntry/${entry.id}`} className="block px-4 pt-3">
+          <h2 className={headlineClass} style={headlineStyle}>{entry.headline}</h2>
+        </Link>
+      ) : (
+        <div className="px-4 pt-3">
+          <h2 className={headlineClass} style={headlineStyle}>{entry.headline}</h2>
+        </div>
+      )}
 
       <p className="px-4 pt-2 text-[12.5px] font-mono leading-relaxed text-[#141210]">{entry.what_changed}</p>
 

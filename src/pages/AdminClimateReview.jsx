@@ -8,6 +8,7 @@ export default function AdminClimateReview() {
   const [solutions, setSolutions] = useState([]);
   const [actions, setActions] = useState([]);
   const [comments, setComments] = useState([]);
+  const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('solutions');
   const [busy, setBusy] = useState(null);
@@ -17,15 +18,17 @@ export default function AdminClimateReview() {
   const loadAll = useCallback(async () => {
     setLoading(true);
     try {
-      const [solPage, actPage, comPage, logPage] = await Promise.all([
+      const [solPage, actPage, comPage, newsPage, logPage] = await Promise.all([
         base44.entities.ClimateSolution.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateAction.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateComment.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
+        base44.entities.ClimateNews.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateAuditLog.filter({}, { sort: '-created_date', limit: 5 }),
       ]);
       setSolutions(solPage.items || []);
       setActions(actPage.items || []);
       setComments(comPage.items || []);
+      setNews(newsPage.items || []);
       setAuditLogs(logPage.items || []);
     } catch (e) {
       // RLS will block non-admins — they see nothing
@@ -44,11 +47,11 @@ export default function AdminClimateReview() {
     setBusy(id);
     try {
       const item = currentItems.find(i => i.id === id);
-      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment' };
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news' };
       await base44.entities.ClimateAuditLog.create({
         entity_type: typeMap[entityName],
         entity_id: id,
-        entity_title: item?.title || item?.content?.slice(0, 80) || 'Untitled',
+        entity_title: item?.title || item?.headline || item?.content?.slice(0, 80) || 'Untitled',
         action: 'published',
         reviewer_email: userEmail,
         ai_assessment: item?.ai_assessment || '',
@@ -67,11 +70,11 @@ export default function AdminClimateReview() {
     setBusy(id);
     try {
       const item = currentItems.find(i => i.id === id);
-      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment' };
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news' };
       await base44.entities.ClimateAuditLog.create({
         entity_type: typeMap[entityName],
         entity_id: id,
-        entity_title: item?.title || item?.content?.slice(0, 80) || 'Untitled',
+        entity_title: item?.title || item?.headline || item?.content?.slice(0, 80) || 'Untitled',
         action: 'rejected',
         reviewer_email: userEmail,
         ai_assessment: item?.ai_assessment || '',
@@ -90,6 +93,7 @@ export default function AdminClimateReview() {
       ...solutions.map(i => ({ ...i, _entity: 'ClimateSolution' })),
       ...actions.map(i => ({ ...i, _entity: 'ClimateAction' })),
       ...comments.map(i => ({ ...i, _entity: 'ClimateComment' })),
+      ...news.map(i => ({ ...i, _entity: 'ClimateNews' })),
     ];
     const cleanItems = allItems.filter(i => i.ai_assessment && i.ai_assessment.includes('[CLEAN]'));
     if (cleanItems.length === 0) {
@@ -99,12 +103,12 @@ export default function AdminClimateReview() {
     if (!confirm(`Publish ${cleanItems.length} submission(s) marked [CLEAN] by the AI advisory note?\n\nThis saves time when the queue is long. You can still review each one individually.`)) return;
     setBusy('bulk');
     try {
-      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment' };
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news' };
       for (const item of cleanItems) {
         await base44.entities.ClimateAuditLog.create({
           entity_type: typeMap[item._entity],
           entity_id: item.id,
-          entity_title: item.title || item.content?.slice(0, 80) || 'Untitled',
+          entity_title: item.title || item.headline || item.content?.slice(0, 80) || 'Untitled',
           action: 'published',
           reviewer_email: userEmail,
           ai_assessment: item.ai_assessment || '',
@@ -131,6 +135,7 @@ export default function AdminClimateReview() {
     { id: 'solutions', label: 'Solutions & Crises', count: solutions.length, icon: Leaf },
     { id: 'actions', label: 'Actions', count: actions.length, icon: Calendar },
     { id: 'comments', label: 'Comments', count: comments.length, icon: MessageSquare },
+    { id: 'news', label: 'Wire', count: news.length, icon: FileText },
   ];
 
   const renderItem = (item, entityName, type) => (
@@ -139,13 +144,20 @@ export default function AdminClimateReview() {
       <div className="flex items-start justify-between gap-3 mb-2">
         <div className="flex-1 min-w-0">
           <h3 className="font-black text-[#1a1612] text-sm truncate">
-            {item.title || item.content?.slice(0, 80) || 'Untitled'}
+            {item.title || item.headline || item.content?.slice(0, 80) || 'Untitled'}
           </h3>
           {item.entry_type && (
             <span className="text-[9px] font-mono uppercase text-[#6b6258]">
               {item.entry_type === 'climate_crisis' ? 'Crisis' : item.entry_type}
               {item.action_type ? ` · ${item.action_type}` : ''}
               {item.category ? ` · ${item.category}` : ''}
+            </span>
+          )}
+          {item.headline && (
+            <span className="text-[9px] font-mono uppercase text-[#6b6258] block truncate">
+              {(item.verification || 'single_source').replace(/_/g, ' ')}
+              {item.when_label ? ` · ${item.when_label}` : ''}
+              {item.source_name ? ` · ${item.source_name}` : ''}
             </span>
           )}
         </div>
@@ -157,9 +169,9 @@ export default function AdminClimateReview() {
       </div>
 
       {/* Content preview */}
-      {(item.summary || item.description || item.content) && (
+      {(item.summary || item.description || item.content || item.what_changed) && (
         <p className="text-[11px] font-mono text-[#1a1612] leading-relaxed mb-2 line-clamp-3">
-          {item.summary || item.description || item.content}
+          {item.summary || item.description || item.content || item.what_changed}
         </p>
       )}
       {item.details && (
@@ -207,8 +219,8 @@ export default function AdminClimateReview() {
     </div>
   );
 
-  const currentItems = activeTab === 'solutions' ? solutions : activeTab === 'actions' ? actions : comments;
-  const currentEntity = activeTab === 'solutions' ? 'ClimateSolution' : activeTab === 'actions' ? 'ClimateAction' : 'ClimateComment';
+  const currentItems = activeTab === 'solutions' ? solutions : activeTab === 'actions' ? actions : activeTab === 'comments' ? comments : news;
+  const currentEntity = activeTab === 'solutions' ? 'ClimateSolution' : activeTab === 'actions' ? 'ClimateAction' : activeTab === 'comments' ? 'ClimateComment' : 'ClimateNews';
 
   return (
     <div className="min-h-screen bg-[#f4efe4] twcc-scanlines relative">
@@ -237,7 +249,7 @@ export default function AdminClimateReview() {
         <div className="flex items-center gap-2 mb-4">
           <div className="flex-1 flex items-center gap-2 px-3 py-2.5 bg-[#efe7d6] border border-[#1a1612]/15">
             <AlertTriangle className="w-3.5 h-3.5 text-[#b3261e] flex-shrink-0" />
-            <span className="text-[10px] font-mono text-[#1a1612]"><b className="font-black">{solutions.length + actions.length + comments.length}</b> pending</span>
+            <span className="text-[10px] font-mono text-[#1a1612]"><b className="font-black">{solutions.length + actions.length + comments.length + news.length}</b> pending</span>
           </div>
           <Link to={createPageUrl("ClimateImpact")} className="flex items-center gap-1.5 px-3 py-2.5 bg-[#1e3a2b] text-[#efe7d6] border border-[#1e3a2b] active:bg-[#1a1612] transition-colors">
             <Globe className="w-3.5 h-3.5" />
