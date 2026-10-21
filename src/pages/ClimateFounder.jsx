@@ -180,9 +180,6 @@ export default function ClimateFounder() {
           <p className="text-[14px] font-black font-mono uppercase leading-relaxed max-w-sm mx-auto text-[#efe7d6]">
             “Together we can change the course of climate change.”
           </p>
-          <p className="text-[10px] font-mono text-[#efe7d6]/70 mt-4 leading-relaxed max-w-sm mx-auto">
-            This platform is built to carry that vision forward — a public record, open to every nation, every tongue, so no one is left behind.
-          </p>
         </div>
       </div>
 
@@ -197,6 +194,11 @@ export default function ClimateFounder() {
       <p className="px-5 py-6 text-center text-[9px] font-mono text-[#5a5246]/60 leading-relaxed">
         In honour of her life's work.<br />
         Horizon International · Yale University
+      </p>
+
+      {/* Our voice, in our own footer — never placed under her words. */}
+      <p className="px-5 pb-8 text-center text-[9px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md mx-auto">
+        This record is built by us, to carry that vision forward — a public service, open to every nation and every tongue.
       </p>
     </div>
   );

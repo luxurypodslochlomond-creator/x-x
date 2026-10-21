@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { ArrowRight, Printer, Globe, Languages, Shield, Leaf, Check } from 'lucide-react';
 
@@ -9,6 +10,34 @@ import { ArrowRight, Printer, Globe, Languages, Shield, Leaf, Check } from 'luci
 
 export default function ClimateBrief() {
   const handlePrint = () => window.print();
+
+  // The brief tells her the numbers are live — so they are. Counted from the
+  // database on every visit; today's verified figures are the fallback.
+  const [stats, setStats] = useState({
+    entries: 14, solutions: 6, crises: 8, locations: 10, categories: 12, actions: 3, groups: 4,
+  });
+
+  useEffect(() => {
+    (async () => {
+      const [solutions, crises, locationList, categoryList, actions, groups] = await Promise.all([
+        base44.entities.ClimateSolution.count({ entry_type: 'solution', status: 'published' }),
+        base44.entities.ClimateSolution.count({ entry_type: 'climate_crisis', status: 'published' }),
+        base44.entities.ClimateSolution.list({ distinct: 'country' }),
+        base44.entities.ClimateSolution.list({ distinct: 'category' }),
+        base44.entities.ClimateAction.count({ status: 'published' }),
+        base44.entities.ClimateGroup.count({}),
+      ]);
+      setStats({
+        entries: solutions + crises,
+        solutions,
+        crises,
+        locations: locationList.items.filter(Boolean).length,
+        categories: categoryList.items.filter(Boolean).length,
+        actions,
+        groups,
+      });
+    })();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#f4efe4] text-[#1a1612]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
@@ -101,11 +130,11 @@ export default function ClimateBrief() {
           </h2>
           <div className="grid grid-cols-2 gap-2.5">
             {[
-              ['14', 'entries on the record (6 solutions, 8 crises)'],
-              ['10', 'countries represented'],
-              ['12', 'of 20 categories with entries'],
-              ['3', 'ground actions listed'],
-              ['4', 'community groups formed'],
+              [String(stats.entries), `entries on the record (${stats.solutions} solutions, ${stats.crises} crises)`],
+              [String(stats.locations), 'locations represented — countries and regions'],
+              [String(stats.categories), 'of 20 categories with entries'],
+              [String(stats.actions), 'ground actions listed'],
+              [String(stats.groups), 'community groups formed'],
               ['60+', 'languages the interface speaks'],
             ].map(([num, label]) => (
               <div key={label} className="bg-[#1a1612] text-[#efe7d6] px-4 py-4">
@@ -249,7 +278,7 @@ WE WILL NOT DO:
 
 WHERE THE NUMBERS STAND TODAY:
 
-14 entries on the record — 6 solutions, 8 crises — across 10 countries. 3 ground actions. 4 community groups. 12 of 20 categories filled. 60+ languages. These are live and grow as the community adds entries.
+${stats.entries} entries on the record — ${stats.solutions} solutions, ${stats.crises} crises — across ${stats.locations} countries and regions. ${stats.actions} ground actions. ${stats.groups} community groups. ${stats.categories} of 20 categories filled. 60+ languages. These are live and grow as the community adds entries.
 
 The live record and a printable brief are at the links below.
 
