@@ -2,12 +2,12 @@ import React from 'react';
 import TransmissionConsole from './TransmissionConsole';
 
 // ── THE TRANSMISSION ──
-// Drop the artist's delivered track URL here when ready.
-// Until then, the console runs on its own generative signal.
-const TRANSMISSION_URL = ''; // ← swap with ASLOVE's delivered audio URL
-const ARTIST_NAME = 'ASLOVE';
+// No act is credited and no song is claimed — not until the tune is settled and
+// everyone involved has agreed their name goes on it. Until then the console runs
+// on its own generative signal. The artist name goes in here the day it's agreed.
+const TRANSMISSION_URL = ''; // ← the commissioned track goes here, once it's confirmed
 const TRACK_TITLE = 'Transmission';
-const DEDICATION = 'For Janine · for the planet · for all of us';
+const DEDICATION = 'For the planet · for all of us';
 
 export default function Transmission() {
   return (
@@ -15,7 +15,7 @@ export default function Transmission() {
       {/* ── THE INSTRUMENT ── the art and the transport in one panel: press play, the picture stays ── */}
       <TransmissionConsole
         audioUrl={TRANSMISSION_URL}
-        artistName={ARTIST_NAME}
+        artistName=""
         trackTitle={TRACK_TITLE}
         dedication={DEDICATION}
       />

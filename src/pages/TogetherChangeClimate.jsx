@@ -467,7 +467,7 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── TRANSMISSION — the soul of the platform, spoken in the artist's voice ── */}
+      {/* ── TRANSMISSION — the soul of the platform, in its own generative voice until a tune is chosen ── */}
       <Transmission />
 
       {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
