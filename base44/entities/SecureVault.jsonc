@@ -1,0 +1,54 @@
+{
+  "name": "SecureVault",
+  "type": "object",
+  "description": "The private vault - official company records, login details, filing references and personal codes for Universal Frequency51 CIC, held for Brian Hughes and Gillian Brown. Admin-only in every direction: only admins can read, add, change or remove anything here. Nothing in this table is ever sent to an ordinary visitor's browser.",
+  "properties": {
+    "section": {
+      "type": "string",
+      "description": "Grouping, e.g. 'Company identity' or 'Government Gateway logins'."
+    },
+    "label": {
+      "type": "string",
+      "description": "What this entry is, e.g. 'Government Gateway user ID (Login A)'. Required."
+    },
+    "value": {
+      "type": "string",
+      "description": "The value itself - the number, code, password or reference."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Anything worth knowing alongside it: where it came from, what it is for, or when it expires."
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "description": "Order in the vault - lower comes first."
+    }
+  },
+  "required": [
+    "section",
+    "label"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
