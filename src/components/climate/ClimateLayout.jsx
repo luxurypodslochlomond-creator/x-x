@@ -94,8 +94,8 @@ export default function ClimateLayout({ children, currentPage }) {
         <div className="max-w-[1100px] mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
           <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 min-w-0 active:opacity-70">
             <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-            <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.12em] text-[#efe7d6] leading-tight">
-              Together we can change the course of climate change
+            <span className="text-[13px] sm:text-[14px] font-black uppercase tracking-[0.16em] text-[#efe7d6] leading-none">
+              Record of the Time
             </span>
           </Link>
 

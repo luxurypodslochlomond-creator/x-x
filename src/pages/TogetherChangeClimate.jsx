@@ -351,7 +351,7 @@ export default function TogetherChangeClimate() {
       <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#efe7d6]/75 text-center leading-snug">
+          <span className="text-[11px] font-black font-mono uppercase tracking-[0.12em] text-[#efe7d6]/75 text-center leading-snug">
             This is the time. And this is the record of the time.
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
