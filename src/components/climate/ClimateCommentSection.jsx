@@ -11,6 +11,8 @@ export default function ClimateCommentSection({ entryId, entryType }) {
   const [content, setContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [published, setPublished] = useState(false);
+  const [refresh, setRefresh] = useState(0);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function ClimateCommentSection({ entryId, entryType }) {
       .catch(() => {})
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  }, [entryId]);
+  }, [entryId, refresh]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ export default function ClimateCommentSection({ entryId, entryType }) {
 
     setSubmitting(true);
     try {
-      await base44.functions.invoke('climateSubmitReview', {
+      const res = await base44.functions.invoke('climateSubmitReview', {
         type: 'comment',
         data: {
           entry_id: entryId,
@@ -48,6 +50,9 @@ export default function ClimateCommentSection({ entryId, entryType }) {
           content: content.trim(),
         }
       });
+      const wentUp = res?.data?.status === 'published';
+      setPublished(wentUp);
+      if (wentUp) setRefresh(r => r + 1); // it is live — show it without a reload
       setSubmitted(true);
       setName(''); setEmail(''); setContent('');
     } catch (err) {
@@ -94,10 +99,14 @@ export default function ClimateCommentSection({ entryId, entryType }) {
         <div className="bg-[#1e3a2b] text-[#efe7d6] p-4 border-2 border-[#141210]">
           <div className="flex items-center gap-2">
             <Check className="w-5 h-5" />
-            <p className="text-[12px] font-black font-mono uppercase">Thank you — your comment is under review.</p>
+            <p className="text-[12px] font-black font-mono uppercase">
+              {published ? 'Thank you — your comment is on the record.' : 'Thank you — a person will check this one first.'}
+            </p>
           </div>
           <p className="text-[10px] font-mono text-[#efe7d6]/80 mt-2 leading-relaxed">
-            Every comment is read by a person before it appears. This keeps the record honest.
+            {published
+              ? 'It is up now. Spam is screened automatically, so the information can flow.'
+              : 'The spam screen was unsure about this one, so a person reads it before it appears.'}
           </p>
           <button onClick={() => setSubmitted(false)} className="mt-3 text-[10px] font-black font-mono uppercase text-[#e2602a] underline">
             Add another
@@ -105,13 +114,13 @@ export default function ClimateCommentSection({ entryId, entryType }) {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="bg-[#f7f1e5] border-2 border-[#141210] p-4">
-          <p className="text-[9px] font-mono text-[#5a5246] mb-2 leading-relaxed">
+          <p className="text-[10px] font-mono text-[#5a5246] mb-2 leading-relaxed">
             Your email is required. It is never shown publicly — we use it only to reach you about this comment. Never shared, never sold.
           </p>
           <div className="bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] p-2 mb-3">
-            <p className="text-[9px] font-black font-mono uppercase text-[#1e3a2b] mb-0.5">✓ Human Review Promise</p>
-            <p className="text-[9px] font-mono text-[#141210] leading-relaxed">
-              Every comment is reviewed by a human. AI assists — it never decides.
+            <p className="text-[10px] font-black font-mono uppercase text-[#1e3a2b] mb-0.5">✓ Spam screened · Information flows</p>
+            <p className="text-[10px] font-mono text-[#141210] leading-relaxed">
+              Clear comments appear at once. Anything unclear waits for a person.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-2 mb-2">

@@ -57,6 +57,9 @@ export default function ClimateMapPage() {
           TRANSMISSION<br />
           <span className="text-[#e2602a]">MAP</span>
         </h1>
+        <p className="text-[11px] font-black font-mono uppercase leading-relaxed mt-2 text-[#e2602a] tracking-[0.14em] max-w-[330px]">
+          Together we can change the course of climate change
+        </p>
         <p className="text-[10px] font-bold uppercase leading-relaxed mt-2 text-[#efe7d6]/70 tracking-wide max-w-[330px]">
           Signals from a warming world — after Janine Selendy
         </p>

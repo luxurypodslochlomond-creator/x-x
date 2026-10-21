@@ -144,6 +144,10 @@ export default function ClimateDetail() {
             <span className="text-[11px] font-black font-mono uppercase tracking-widest text-[#1e3a2b]">{record.category?.replaceAll('_', ' ')}</span>
           </div>
 
+          <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#e2602a] mt-3">
+            Together we can change the course of climate change
+          </p>
+
           {(record.date || record.country || record.region_rough) && (
             <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-[#5a5246] mt-4">
               {record.date && (

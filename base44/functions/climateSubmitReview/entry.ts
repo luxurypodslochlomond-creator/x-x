@@ -27,7 +27,7 @@ export default async function(req: Request): Promise<Response> {
 
     try {
       const aiResult = await base44.asServiceRole.integrations.Core.InvokeLLM({
-        prompt: `You are an AI advisory note for "Together We Change Climate" — a public-service climate platform after Janine Selendy / Horizon International. This is NOT social media. It is an institutional record. Every entry is reviewed by a human before publication. Your role is advisory only — you never decide.
+        prompt: `You are an AI advisory note for "Together We Change Climate" — a public-service climate platform after Janine Selendy / Horizon International. This is NOT social media. It is an institutional record. Spam is screened automatically: clean entries go on the record at once, and only what you flag waits for a human. Your role is advisory only — you never decide.
 
 CRITICAL — DO NOT HALLUCINATE:
 - Assess ONLY based on the text provided below. Do not invent facts, claims, or context not in the text.
@@ -43,6 +43,8 @@ Assess ONLY these three things:
 Do NOT assess: scientific accuracy, quality, writing style, or whether the solution "works." Those are human judgments.
 
 Be fair. Do not flag legitimate climate content. Be strict only about clear spam and dangerous advice.
+
+A flag holds a real person's initiative back for a human check, so never flag on style, quality, spelling, or whether a solution "works" — only on clear spam, off-topic promotion, or dangerous advice. Small everyday acts belong here: saving a jumper, buying less, building a dog house from stuffed used plastic. The purpose of this platform is to inspire and encourage the sharing of initiatives, no matter how small.
 
 Submission type: ${type}
 ${data.title ? `Title: ${data.title}` : ''}
@@ -65,8 +67,11 @@ Content: ${fullContent.slice(0, 2000)}`,
       flagged = true;
     }
 
-    // 2. Create entity with AI assessment
-    const recordData = { ...data, status: 'draft', flagged, ai_assessment: aiAssessment };
+    // 2. Create the entry. Janine's instruction: clear out spam and let the information
+    // flow — the record exists to encourage sharing, not to peer-review everything the way
+    // the Solutions Site did. Clean entries publish at once; only flagged ones wait for a human.
+    const status = flagged ? 'draft' : 'published';
+    const recordData = { ...data, status, flagged, ai_assessment: aiAssessment };
     let record;
 
     if (type === 'comment') {
@@ -77,24 +82,24 @@ Content: ${fullContent.slice(0, 2000)}`,
       record = await base44.asServiceRole.entities.ClimateSolution.create(recordData);
     }
 
-    // 3. Email admin notification (non-critical)
-    const adminEmail = secrets.get('CLIMATE_ADMIN_EMAIL');
+    // 3. Email admin notification — only when a human is genuinely needed (non-critical)
+    const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
     if (adminEmail) {
       try {
         const title = data.title || (data.content ? data.content.slice(0, 60) : 'Untitled');
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: adminEmail,
-          subject: `Climate submission awaiting review: ${title}`,
+          subject: `Climate submission held for a check: ${title}`,
           html: `<div style="font-family: monospace; max-width: 500px; margin: 0 auto; padding: 20px; background: #f4efe4;">
             <div style="background: #b3261e; color: #fff; padding: 12px 20px; margin: -20px -20px 20px -20px;">
               <h2 style="margin: 0; font-size: 16px; letter-spacing: 0.1em;">TOGETHER WE CHANGE CLIMATE</h2>
             </div>
-            <p style="color: #6b6258;">A new ${type} submission is awaiting your review.</p>
+            <p style="color: #6b6258;">A new ${type} submission was held for a human check.</p>
             <div style="background: #efe7d6; border: 2px solid #1a1612; padding: 16px; margin: 16px 0;">
               <p style="margin: 4px 0; color: #1a1612;"><strong>Title:</strong> ${title}</p>
               <p style="margin: 4px 0; color: #1a1612;"><strong>AI Advisory Note:</strong> ${aiAssessment}</p>
               <p style="margin: 4px 0; color: #1a1612;"><strong>Flagged:</strong> ${flagged ? 'Yes — needs attention' : 'No — looks clean'}</p>
-              <p style="margin: 4px 0; color: #6b6258; font-size: 11px;">A human reviews every submission before publication. The AI advises — the human decides.</p>
+              <p style="margin: 4px 0; color: #6b6258; font-size: 11px;">Held for a human check — clean entries publish automatically.</p>
             </div>
             <a href="https://green-stride-d47e043c.base44.app/AdminClimateReview" style="background: #b3261e; color: #fff; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; font-family: monospace;">Review now</a>
           </div>`
@@ -104,7 +109,7 @@ Content: ${fullContent.slice(0, 2000)}`,
       }
     }
 
-    return Response.json({ success: true, id: record.id, flagged, ai_assessment: aiAssessment });
+    return Response.json({ success: true, id: record.id, status, flagged, ai_assessment: aiAssessment });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }

@@ -137,6 +137,9 @@ export default function ClimateImpact() {
 
       {/* Big numbers */}
       <div className="px-5 py-8 bg-[#141210]">
+        <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#e2602a] text-center mb-5">
+          Together we can change the course of climate change
+        </p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

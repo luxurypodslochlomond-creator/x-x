@@ -310,7 +310,14 @@ export default function TogetherChangeClimate() {
 
   const solutions = filtered.filter(i => i.entry_type === 'solution');
   const crises = filtered.filter(i => i.entry_type === 'climate_crisis');
-  const featured = useMemo(() => items.filter(i => i.featured).slice(0, 3), [items]);
+  // The opening pictures — Janine's ask: real entries, real photographs, straight away.
+  // Featured entries with images lead; if nothing is flagged as featured, the newest pictures do.
+  const featured = useMemo(() => {
+    const withImages = items.filter(i => i.image_url);
+    const picked = withImages.filter(i => i.featured);
+    const rest = withImages.filter(i => !i.featured);
+    return [...picked, ...rest].slice(0, 4);
+  }, [items]);
 
   const filteredActions = useMemo(() => {
     return actions.filter(a => {
@@ -347,39 +354,26 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── BIG SCIENCE EPIGRAPH — Laurie's thesis + the x = x covenant, cold opening ── */}
-      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      {/* ── OPENING BAND — her words and the covenant. One band, then straight into the record. ── */}
+      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[11px] font-black font-mono uppercase tracking-[0.12em] text-[#efe7d6]/75 text-center leading-snug">
-            This is the time. And this is the record of the time.
+          <span className="text-[12px] font-mono italic text-[#efe7d6]/75 text-center leading-relaxed">
+            "Every single day, we hold the power to shape the world around us."
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
-        <div className="text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
-          x = x
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/60">Dr. Jane Goodall</span>
+          <span className="text-[#e2602a]/40">·</span>
+          <span className="text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">x = x</span>
         </div>
-      </div>
-
-      {/* ── JANE GOODALL — her words, from Janine's spec ── */}
-      <div className="bg-[#141210] px-5 py-2.5 border-t border-[#e2602a]/15">
-        <p className="text-[12px] font-mono italic text-[#efe7d6]/75 text-center leading-relaxed">
-          "Every single day, we hold the power to shape the world around us."
-        </p>
-        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/60 text-center mt-1">
-          Dr. Jane Goodall
-        </p>
       </div>
 
       <ClimateImpactBar />
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
       <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: '72vh' }}>
-        {/* O Superman — the pilot's voice, cold in the corner */}
-        <div className="absolute top-3 left-5 z-20 flex items-center gap-1.5 pointer-events-none" style={{ animation: 'twcc-flicker 7s linear 2s infinite' }}>
-          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse" />
-          <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">O Superman · O Superman</span>
-        </div>
         <img
           src={IMAGES.global}
           alt=""
@@ -455,6 +449,22 @@ export default function TogetherChangeClimate() {
           </p>
         </div>
       </div>
+
+      {/* ── THE PICTURES — what people are doing and what is at risk, before anything else ── */}
+      {featured.length > 0 && (
+        <div className="px-4 py-5 bg-[#efe7d6] border-b-2 border-[#141210]">
+          <div className="flex items-center gap-2 mb-3">
+            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
+            <div className="flex-1 h-px bg-[#141210]/20" />
+            <span className="text-[10px] font-black font-mono text-[#e2602a]">{featured.length}</span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+            {featured.map((item) => (
+              <SolutionCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* ── TRANSMISSION — the soul of the platform, spoken in the artist's voice ── */}
       <Transmission />
@@ -576,18 +586,6 @@ export default function TogetherChangeClimate() {
           ))}
         </div>
       </div>
-
-      {/* ── FEATURED SIGNALS ── */}
-      {selectedType === 'all' && featured.length > 0 && (
-        <div className="px-4 py-5 bg-[#efe7d6] border-b-2 border-[#141210]">
-          <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
-            {featured.map((item) => (
-              <SolutionCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* ── CONTENT ── */}
       <div ref={contentRef} className="bg-[#efe7d6]">
@@ -777,6 +775,10 @@ export default function TogetherChangeClimate() {
           <Link to={createPageUrl('ClimatePrivacy')} className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors">Privacy</Link>
         </div>
 
+        {/* The thesis, where it belongs — at the close, once the record has been read. */}
+        <p className="px-4 pt-6 text-center text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#5a5246] bg-[#efe7d6]">
+          This is the time. And this is the record of the time.
+        </p>
         <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[10px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline">
           {t.honour} <span className="text-[#b3261e]">→</span>
         </Link>

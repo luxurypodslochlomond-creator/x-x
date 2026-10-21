@@ -4,10 +4,11 @@ import { X, Send, Check, Leaf, AlertTriangle, Sprout } from 'lucide-react';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import { createPageUrl } from '@/utils';
 
-function SuccessScreen({ entryType, onClose }) {
+function SuccessScreen({ entryType, onClose, published }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
+  const what = entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate crisis report' : 'action';
   return (
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-start p-6 pt-[16vh] text-center overflow-y-auto">
       <div className="w-16 h-16 rounded-full bg-[#1e3a2b] flex items-center justify-center mb-5">
@@ -17,10 +18,12 @@ function SuccessScreen({ entryType, onClose }) {
         Thank you
       </h2>
       <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[320px] mb-2">
-        Your {entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate crisis report' : 'action'} is under review.
+        {published ? `Your ${what} is on the record now.` : `Your ${what} is with us for a quick check.`}
       </p>
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
-        Every entry is read by a person before it appears on the record. This keeps the platform honest — a public service, not a firehose.
+        {published
+          ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A reviewer can take it down, and we would email you first.'
+          : 'The spam screen was unsure about this one, so a person will look before it appears. We will email you either way.'}
       </p>
       <button onClick={onClose} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
         Back to the record
@@ -41,6 +44,7 @@ export default function ClimateSubmitForm({ onClose }) {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [published, setPublished] = useState(false);
   const [error, setError] = useState('');
   const [honeypot, setHoneypot] = useState(''); // hidden bot trap — humans never see this
 
@@ -97,10 +101,11 @@ export default function ClimateSubmitForm({ onClose }) {
 
     setSubmitting(true);
     try {
-      await base44.functions.invoke('climateSubmitReview', {
+      const res = await base44.functions.invoke('climateSubmitReview', {
         type: entryType,
         data: { ...form, entry_type: entryType }
       });
+      setPublished(res?.data?.status === 'published');
       setSubmitted(true);
     } catch (err) {
       setError('Something went wrong. Please try again.');
@@ -110,7 +115,7 @@ export default function ClimateSubmitForm({ onClose }) {
   };
 
   if (submitted) {
-    return <SuccessScreen entryType={entryType} onClose={onClose} />;
+    return <SuccessScreen entryType={entryType} onClose={onClose} published={published} />;
   }
 
   return (
@@ -212,7 +217,7 @@ export default function ClimateSubmitForm({ onClose }) {
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">One contact link *</label>
                 <input value={form.contact_link} onChange={e => set('contact_link', e.target.value)} placeholder="Email, WhatsApp, Signal, or signup URL" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-                <p className="text-[9px] font-mono text-[#5a5246] mt-1 leading-relaxed">The platform never sees the messages. One link only — people contact you directly.</p>
+                <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">The platform never sees the messages. One link only — people contact you directly.</p>
               </div>
             </>
           ) : (
@@ -272,7 +277,7 @@ export default function ClimateSubmitForm({ onClose }) {
                 <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
             </div>
-            <p className="text-[9px] font-mono text-[#5a5246] mt-3 leading-relaxed">
+            <p className="text-[10px] font-mono text-[#5a5246] mt-3 leading-relaxed">
               By submitting, your words stay yours — you give the record permission to publish and translate them, and you can ask us to take them down at any time.
             </p>
           </div>
@@ -281,9 +286,9 @@ export default function ClimateSubmitForm({ onClose }) {
         {error && <p className="text-[11px] font-mono text-[#b3261e] mt-4">{error}</p>}
 
         <div className="mt-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] p-3">
-          <p className="text-[9px] font-black font-mono uppercase text-[#1e3a2b] mb-1">✓ Human Review Promise</p>
+          <p className="text-[10px] font-black font-mono uppercase text-[#1e3a2b] mb-1">✓ Spam screened · Information flows</p>
           <p className="text-[10px] font-mono text-[#141210] leading-relaxed">
-            Every submission is reviewed by a human. AI assists our reviewers — it never decides.
+            Every submission is screened for spam and harmful advice. Clear ones go on the record at once; anything unclear waits for a person.
           </p>
         </div>
 
@@ -293,11 +298,11 @@ export default function ClimateSubmitForm({ onClose }) {
           className="mt-5 w-full flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#141210] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors disabled:opacity-50"
         >
           <Send className="w-4 h-4" />
-          {submitting ? 'Sending…' : 'Submit for review'}
+          {submitting ? 'Sending…' : 'Submit to the record'}
         </button>
 
-        <p className="text-[9px] font-mono text-[#5a5246] mt-3 text-center leading-relaxed">
-          Every submission is reviewed by a person before publication. No advertising. No fundraising. Public service.
+        <p className="text-[10px] font-mono text-[#5a5246] mt-3 text-center leading-relaxed">
+          Spam is screened automatically. Clear entries appear at once — anything unclear waits for a person. No advertising. No fundraising. Public service.
         </p>
       </form>
     </div>

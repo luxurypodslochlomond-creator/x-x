@@ -25,6 +25,9 @@ export default function ClimatePrivacy() {
           <p className="text-[12px] font-mono text-[#6b6258] mt-3 leading-relaxed">
             No tracking. No selling. No surprises. Here is exactly what happens.
           </p>
+          <p className="text-[11px] font-mono font-black uppercase tracking-[0.14em] text-[#b3261e] mt-4">
+            Together we can change the course of climate change
+          </p>
         </header>
 
         {/* 1. YOUR EMAIL */}
