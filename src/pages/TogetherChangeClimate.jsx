@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, Languages, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
+import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
 import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
@@ -400,23 +400,9 @@ export default function TogetherChangeClimate() {
             <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
             <Link to={createPageUrl('ClimateFounder')} className="text-[10px] font-mono text-[#5a5246] hover:text-[#b3261e] transition-colors">· The founder →</Link>
           </div>
+          {/* Language: the record follows the reader's own device language automatically.
+              No picker in the band — the top of the record stays a statement, not a toolbar. */}
           <div className="flex items-center gap-1.5">
-            <Languages className="w-4 h-4 text-[#141210]" />
-            <select
-              value={lang}
-              onChange={e => {
-                if (e.target.value === '__other') { setOtherOpen(true); }
-                else { setOtherOpen(false); handleLang(e.target.value); }
-              }}
-              aria-label="Select language"
-              size={1}
-              className="bg-transparent text-[#141210] border border-[#141210] px-2 py-1.5 text-[11px] font-mono font-bold outline-none cursor-pointer max-w-[150px] truncate"
-            >
-              <option value="auto">🌐 Auto</option>
-              {LANGS.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
-              <option value="__other">✨ Type any language…</option>
-            </select>
-            {translating && <span className="text-[9px] font-mono text-[#1e3a2b] animate-pulse">…</span>}
             <button
               onClick={handleShare}
               aria-label="Share this platform"
@@ -490,32 +476,6 @@ export default function TogetherChangeClimate() {
           {items.length + actions.length} {t.entries_now}
         </span>
       </div>
-
-      {/* ── ANY-LANGUAGE INPUT ── */}
-      {otherOpen && (
-        <div className="px-4 py-3 bg-[#efe7d6] border-b-2 border-[#141210] flex items-center gap-2">
-          <span className="text-[10px] font-mono font-bold uppercase flex-shrink-0">Any language on Earth:</span>
-          <input
-            autoFocus
-            placeholder="e.g. Gàidhlig, Cymraeg, Quechua, Ancient Greek, Hawaiian…"
-            onKeyDown={e => {
-              if (e.key === 'Enter' && e.currentTarget.value.trim()) {
-                handleLang(e.currentTarget.value.trim());
-                setOtherOpen(false);
-              }
-            }}
-            className="flex-1 bg-[#f7f1e5] border border-[#141210] px-3 py-1.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none"
-          />
-          <button
-            onClick={(e) => {
-              const input = e.currentTarget.previousElementSibling;
-              if (input && input.value.trim()) { handleLang(input.value.trim()); setOtherOpen(false); }
-            }}
-            className="px-3 py-1.5 bg-[#141210] text-[#efe7d6] text-[10px] font-black font-mono uppercase"
-          >Go</button>
-          <button onClick={() => setOtherOpen(false)} aria-label="Close" className="w-9 h-9 flex items-center justify-center flex-shrink-0 border border-[#141210] bg-[#f7f1e5] text-[#141210] active:bg-[#e2602a] text-base leading-none">×</button>
-        </div>
-      )}
 
       {/* ── TOOLBAR — filters + search ── */}
       <div className="px-4 py-4 bg-[#efe7d6] border-b-2 border-[#141210]">

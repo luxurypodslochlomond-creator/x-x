@@ -4,7 +4,6 @@ import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
-import LanguageButton from '@/components/shared/LanguageButton';
 
 // ── TOGETHER WE CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -115,8 +114,6 @@ export default function ClimateLayout({ children, currentPage }) {
                 {item.label}
               </Link>
             ))}
-            <span className="flex-1" />
-            <LanguageButton tone="dark" />
           </nav>
         </div>
 
@@ -138,7 +135,6 @@ export default function ClimateLayout({ children, currentPage }) {
                 {item.label}
               </Link>
             ))}
-            <LanguageButton tone="dark" />
           </div>
         </nav>
       </header>
