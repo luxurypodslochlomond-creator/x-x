@@ -631,8 +631,8 @@ export default function TogetherChangeClimate() {
                       <span className="text-[10px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
                     <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">{g.description}</p>
-                    {g.created_by && (
-                      <a href={`mailto:${g.created_by}`} className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
+                    {g.contact_email && (
+                      <a href={`mailto:${g.contact_email}`} className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
                         Contact organizer →
                       </a>
                     )}

@@ -1,7 +1,7 @@
 {
   "name": "ClimateGroup",
   "type": "object",
-  "description": "Region/topic gatherings on the 'Together We Change Climate' platform \u2014 people working on the same thing in an area can share ideas directly. Faithful to Janine's spec.",
+  "description": "Region/topic gatherings on the 'Together We Change Climate' platform \u2014 people working on the same thing in an area can share ideas directly. Faithful to Janine's spec. The record shows only the address an organiser chooses to make public here; it never publishes the address of whoever happened to add the entry.",
   "properties": {
     "name": {
       "type": "string",
@@ -18,6 +18,10 @@
     "description": {
       "type": "string",
       "description": "What this group is doing together"
+    },
+    "contact_email": {
+      "type": "string",
+      "description": "The one address the organiser gives the record to be shown publicly on this group. Deliberately a separate field: the record never displays an account's own email, so nobody's private address ends up published by accident. Left empty when the organiser has not given one \u2014 an empty contact shows no contact line at all."
     },
     "created_by": {
       "type": "string",

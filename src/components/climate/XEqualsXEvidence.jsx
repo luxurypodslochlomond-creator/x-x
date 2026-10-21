@@ -1,4 +1,5 @@
 import React from 'react';
+import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 
 const REFERENCES = [
   {
@@ -23,18 +24,36 @@ const REFERENCES = [
 
 export default function XEqualsXEvidence() {
   return (
-    <section aria-labelledby="record-evidence" className="space-y-5 border-t border-record-ink/20 pt-7">
-      <h2 id="record-evidence" className="font-display text-3xl font-bold uppercase leading-tight">Where this comes from.</h2>
-      <div className="space-y-6">
+    <section aria-labelledby="record-evidence">
+      <RecordSectionHeading eyebrow="Read it for yourself" title="Where this comes from." />
+      <div className="space-y-3">
         {REFERENCES.map(({ title, text, citation, url }) => (
-          <article key={url} className="space-y-2">
-            <h3 className="text-base font-bold">{title}</h3>
-            <p className="text-sm leading-relaxed text-record-muted">{text}</p>
-            <a href={url} target="_blank" rel="noopener noreferrer" className="inline-block text-sm font-semibold leading-relaxed text-record-red underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">{citation}</a>
+          <article key={url} className="bg-[#f7f1e5] border-2 border-[#141210] p-4">
+            <h3 className="text-[12px] font-black font-mono uppercase text-[#141210] leading-tight">{title}</h3>
+            <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">{text}</p>
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2.5 text-[10px] font-black font-mono uppercase tracking-wide text-[#e2602a] underline underline-offset-2"
+            >
+              {citation} ↗
+            </a>
           </article>
         ))}
       </div>
-      <p className="border-t border-record-ink/15 pt-5 text-sm leading-relaxed text-record-muted">Further reading: <a href="https://www.panmacmillan.com/authors/sarah-wynn-williams/careless-people/9781035065967" target="_blank" rel="noopener noreferrer" className="font-semibold text-record-red underline underline-offset-4">Careless People, Sarah Wynn-Williams (2025)</a>. An insider’s account, not a court finding or an endorsement of this record. These sources explain the concern; they do not establish this platform’s effects.</p>
+      <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-4">
+        Further reading:{' '}
+        <a
+          href="https://www.panmacmillan.com/authors/sarah-wynn-williams/careless-people/9781035065967"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-black text-[#b3261e] underline underline-offset-2"
+        >
+          Careless People, Sarah Wynn-Williams (2025)
+        </a>
+        . An insider’s account, not a court finding or an endorsement of this record. These sources explain the concern; they do not establish this platform’s effects.
+      </p>
     </section>
   );
 }
