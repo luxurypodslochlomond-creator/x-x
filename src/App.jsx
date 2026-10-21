@@ -270,7 +270,7 @@ const AuthenticatedApp = () => {
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
       <Route path="/Franklin51" element={<LayoutWrapper currentPageName="Franklin51"><Franklin51Page /></LayoutWrapper>} />
       <Route path="/Aletheia" element={<AletheiaPage />} />
-      <Route path="/XEqualsX" element={<XEqualsXPage />} />
+      <Route path="/XEqualsX" element={<ClimateLayout currentPage="XEqualsX"><XEqualsXPage /></ClimateLayout>} />
       <Route path="/ClimateBrief" element={<ClimateLayout currentPage="ClimateBrief"><ClimateBriefPage /></ClimateLayout>} />
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />
       <Route path="/AdminClimateReview" element={<LayoutWrapper currentPageName="AdminClimateReview"><AdminClimateReviewPage /></LayoutWrapper>} />

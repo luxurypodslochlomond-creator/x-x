@@ -1,261 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Shield, ChevronDown } from 'lucide-react';
-
-// ── x = x ──
-// The mark on the record, and why we say it.
-// House rules: paper, ink, signal red. Mono labels. Zero rounded corners.
-// Plain sentences. No theatre, no hedging, every claim checkable.
-
-const STEPS = [
-  {
-    n: '01',
-    h: 'Attention is the scarce thing',
-    b: 'Big platforms earn from attention. When something is scarce, it gets sold. Herbert Simon said it in 1971: a wealth of information creates a poverty of attention.',
-  },
-  {
-    n: '02',
-    h: 'To sell attention you must rank it',
-    b: 'Ranking needs a number: likes, reach, dwell time, followers. The number becomes the market, and whoever owns the scale owns the value. Espeland and Stevens named the move in 1998: commensuration — putting unlike things on one scale.',
-  },
-  {
-    n: '03',
-    h: 'We removed the scale',
-    b: 'Not moderated away. Absent. There is no number on this record that could be ranked, sold, or bid on — so nothing here can be traded against anyone else.',
-  },
-];
-
-// ── The direct link: this is not theory any more. ──
-// Every line below is public record with a checkable source. No fingers pointed.
-const NOW = [
-  {
-    n: '01',
-    h: 'In court, in California',
-    b: 'The design claims against Meta, TikTok, Snap and YouTube over adolescent addiction are consolidated in one federal case: In re Social Media Adolescent Addiction/Personal Injury Products Liability Litigation, N.D. Cal., MDL No. 3047. Plaintiffs\' counsel includes Selendy Gay, the New York firm. Meta\'s chief executive has given evidence in it.',
-    src: 'CASE NO. 4:22-MD-03047-YGR · N.D. CAL · LAW.COM, 18 FEBRUARY 2026',
-  },
-  {
-    n: '02',
-    h: 'The largest settlement of its kind',
-    b: 'On 26 August 2026, New York\'s Attorney General announced a settlement with Meta of up to $17.1 billion plus enforceable reforms: limits on the time minors spend on Facebook and Instagram, and restrictions on addictive features and inappropriate content. The office called it the largest single-company settlement in its history.',
-    src: 'OFFICE OF THE NEW YORK STATE ATTORNEY GENERAL, 26 AUGUST 2026',
-  },
-  {
-    n: '03',
-    h: 'In law, on three continents',
-    b: 'The EU\'s Digital Services Act bans advertising that profiles children and requires the largest platforms to assess and mitigate systemic risks, with minors named as one. The UK\'s Online Safety Act children\'s codes came into force on 25 July 2025. Australia\'s under-16 restrictions took effect on 10 December 2025: 4.7 million under-16 accounts were removed by mid-December.',
-    src: 'REGULATION (EU) 2022/2065 ART. 28 · GOV.UK · ESAFETY COMMISSIONER',
-  },
-  {
-    n: '04',
-    h: 'In the words of the people who built it',
-    b: '“Careless People” by Sarah Wynn-Williams, a former Facebook director of public policy, was published on 11 March 2025. Meta obtained an emergency arbitration order requiring her to stop promoting it; her UK publisher said it would ignore the ruling, and she testified to the Senate Judiciary Committee on 9 April 2025.',
-    src: 'SENT TO THIS RECORD BY ITS FOUNDER',
-  },
-];
-
-const REMOVED = [
-  'No score field. No weight field.',
-  'No popularity sort. No trending. No "most read".',
-  'No follower counts. No karma. No badges.',
-  'No advertising. Ever.',
-  'No account needed to read any of it.',
-];
-
-const HONEST = [
-  'We earn from tools people choose to buy. We do not earn from attention, and no ad has ever run on this record.',
-  'AI screens submissions for spam as they arrive. Anything unclear waits for a human. The AI does not judge the science and does not publish on its own.',
-  'Rough places only: country and region. No coordinates, no IP addresses stored, no login needed to read.',
-  'This is a registry, not a journal. Read the source on an entry before you cite it.',
-  'None of the critique is ours. We are standing on published work, and we are happy to be held to it.',
-];
-
-const STANDING_ON = [
-  'Herbert A. Simon, 1971 — the scarcity of attention',
-  'Espeland & Stevens, Annual Review of Sociology, 1998 — commensuration',
-  'Shoshana Zuboff, The Age of Surveillance Capitalism, 2019 — behaviour as the commodity',
-  'Michael Sandel, What Money Can\'t Buy, 2012 — goods corrupted, not just priced',
-];
-
-const Card = ({ item }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 12 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    className="bg-[#efe7d6] border border-[#1a1612]/15 p-5 rounded-none"
-  >
-    <div className="flex items-baseline gap-3 mb-2">
-      <span className="font-mono font-black text-[11px] text-[#b3261e] tracking-widest">{item.n}</span>
-      <h3 className="font-black text-lg leading-tight">{item.h}</h3>
-    </div>
-    <p className="text-[#6b6258] text-sm leading-relaxed">{item.b}</p>
-    {item.src && (
-      <p className="font-mono text-[10px] tracking-wide text-[#1a1612]/50 mt-3 pt-3 border-t border-[#1a1612]/10">{item.src}</p>
-    )}
-  </motion.div>
-);
-
-const SectionLabel = ({ children }) => (
-  <div className="flex items-center gap-4">
-    <div className="h-px bg-[#1a1612]/20 flex-1" />
-    <p className="text-[11px] font-mono text-[#6b6258] tracking-widest text-center">{children}</p>
-    <div className="h-px bg-[#1a1612]/20 flex-1" />
-  </div>
-);
+import { ArrowLeft } from 'lucide-react';
+import XEqualsXContext from '@/components/climate/XEqualsXContext';
+import XEqualsXPrinciples from '@/components/climate/XEqualsXPrinciples';
+import XEqualsXEvidence from '@/components/climate/XEqualsXEvidence';
 
 export default function XEqualsX() {
-  const [honestOpen, setHonestOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
-      <div className="max-w-3xl mx-auto px-6 py-14 space-y-14 relative z-10">
-
-        {/* ── HERO ── */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-5">
-          <div className="bg-[#1a1612] py-3 px-4 -mx-6">
-            <p className="font-mono text-[10px] font-black tracking-[0.2em] text-[#efe7d6] opacity-80 leading-relaxed">
-              "EVERY SINGLE DAY, WE HOLD THE POWER TO SHAPE THE WORLD AROUND US."
-            </p>
-            <p className="font-mono text-[9px] font-black tracking-[0.25em] text-[#efe7d6] opacity-50 mt-1">
-              DR. JANE GOODALL · ON THE RECORD
-            </p>
-          </div>
-
-          <div className="pt-2 font-mono font-black tracking-[0.3em] text-[13px] text-[#b3261e]">x = x</div>
-
-          <h1 className="text-4xl md:text-6xl font-black leading-none tracking-tight">
-            Nobody above<br />anybody.
-          </h1>
-
-          <p className="text-[#6b6258] text-base leading-relaxed max-w-xl mx-auto">
-            Every platform you use is built to rank you — your posts, your reach, your worth, in a number. This record is built not to. That is the whole idea, and it is why the mark sits under her words.
-          </p>
-
-          <p className="text-lg md:text-xl font-bold text-[#b3261e] leading-snug">
-            No ranking. No advertising.<br />Nothing for sale.
-          </p>
-        </motion.div>
-
-        {/* ── WHY WE SAY IT ── */}
-        <div className="space-y-6">
-          <SectionLabel>WHY WE SAY IT</SectionLabel>
-          <div className="space-y-3 text-base leading-relaxed text-[#1a1612]/85">
-            <p>The record holds two things: solutions worth copying, and crises worth shouting about. Here they are the same size. A crisis in a village of two hundred sits exactly as large as a crisis in a capital of twenty million.</p>
-            <p>That is not moderation. It is absence. There is no field in this database that could rank an entry, because we never made one.</p>
-            <p className="text-[#6b6258]">The mark is the oldest rule in logic — a thing is itself, and not another thing. On this platform it means something warmer: nobody above anybody.</p>
-          </div>
-        </div>
-
-        {/* ── WHY OURS IS THE OPPOSITE ── */}
-        <div className="space-y-6">
-          <SectionLabel>WHY OURS IS THE OPPOSITE</SectionLabel>
-          <div className="space-y-3">
-            {STEPS.map((item) => (
-              <Card key={item.n} item={item} />
-            ))}
-          </div>
-          <div className="space-y-3 text-base leading-relaxed text-[#1a1612]/85">
-            <p>We are not claiming to be the opposite of the internet. We are the opposite of that model: attention turned into a score, and the score sold.</p>
-            <p>A platform that ranks you and a record that refuses to are opposite objects — and the refusal is checkable. There is no number here to buy.</p>
-          </div>
-        </div>
-
-        {/* ── WHAT'S BEING ARGUED RIGHT NOW ── */}
-        <div className="space-y-6">
-          <SectionLabel>WHAT'S BEING ARGUED RIGHT NOW</SectionLabel>
-          <p className="text-base leading-relaxed text-[#1a1612]/85">
-            None of this is theory any more. The model described above is in court and in parliament on three continents. Here is where it stands, with the checkable source of each line — so a reader can verify rather than take our word.
-          </p>
-          <div className="space-y-3">
-            {NOW.map((item) => (
-              <Card key={item.n} item={item} />
-            ))}
-          </div>
-          <div className="space-y-3 text-base leading-relaxed text-[#1a1612]/85">
-            <p>Every remedy being ordered in those cases — nothing designed to hold you, no profiling of children, no dark patterns — is what this record was built without from its first line.</p>
-            <p className="text-[#1a1612] font-bold">We didn't wait to be told. There is nothing here to order us to change.</p>
-          </div>
-        </div>
-
-        {/* ── WHAT WE REMOVED ── */}
-        <div className="space-y-6">
-          <SectionLabel>WHAT WE REMOVED</SectionLabel>
-          <div className="grid grid-cols-1 gap-2">
-            {REMOVED.map((r) => (
-              <div key={r} className="bg-[#efe7d6] border border-[#1a1612]/15 px-4 py-3 flex items-center gap-3 rounded-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#b3261e] flex-shrink-0" />
-                <span className="font-mono text-[13px] text-[#1a1612]">{r}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ── THE HONEST BIT ── */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="bg-[#efe7d6] border border-[#1a1612]/15 p-6 rounded-none">
-          <button onClick={() => setHonestOpen(!honestOpen)} className="w-full flex items-center justify-between text-left gap-4">
-            <h2 className="text-sm font-black font-mono text-[#1a1612] tracking-wide">THE HONEST BIT</h2>
-            <motion.div animate={{ rotate: honestOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
-              <ChevronDown className="w-5 h-5 text-[#6b6258]" />
-            </motion.div>
-          </button>
-
-          <motion.div
-            initial={false}
-            animate={{ height: honestOpen ? 'auto' : 0, opacity: honestOpen ? 1 : 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            <div className="pt-5 space-y-4 text-sm text-[#6b6258] leading-relaxed">
-              {HONEST.map((h) => (
-                <p key={h}>{h}</p>
-              ))}
-              <div className="pt-2 border-t border-[#1a1612]/15">
-                <p className="font-mono text-[10px] font-black tracking-[0.2em] text-[#1a1612] mb-2">STANDING ON</p>
-                <ul className="space-y-1.5">
-                  {STANDING_ON.map((s) => (
-                    <li key={s} className="font-mono text-[11px] text-[#1a1612]/70">{s}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* ── THE LINE ── */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-center space-y-4 pt-4">
-          <h2 className="text-3xl md:text-5xl font-black leading-none tracking-tight">
-            A registry,<br />not a feed.
-          </h2>
-          <p className="text-base text-[#1a1612]/80 max-w-lg mx-auto">
-            Nothing here is for sale, so there is nothing here to extract. That is not a promise we police — it is a thing we never built.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-3">
-            <Link to="/ExtractionProofCovenant">
-              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#b3261e] hover:bg-[#1a1612] text-[#f4efe4] font-bold px-6 py-3 text-sm transition-all">
-                <Shield className="w-4 h-4" />
-                The covenant behind the mark
-              </motion.button>
-            </Link>
-            <Link to="/TogetherChangeClimate">
-              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent border-2 border-[#1a1612] hover:bg-[#1a1612] hover:text-[#f4efe4] font-bold px-6 py-3 text-sm transition-all">
-                <ArrowLeft className="w-4 h-4" />
-                Back to the record
-              </motion.button>
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* ── THE MARK, QUIET ── */}
-        <div className="text-center pt-2">
-          <p className="font-mono font-black tracking-[0.3em] text-[12px] text-[#b3261e]">x = x</p>
-        </div>
-
+    <main className="min-h-screen bg-record-paper font-body text-record-ink">
+      <div className="border-b border-record-ink/15 bg-record-bone px-5 py-3">
+        <p className="mx-auto max-w-3xl font-mono text-[10px] font-bold uppercase leading-relaxed tracking-[0.16em]">Record of the Time · The meaning of the mark</p>
       </div>
-    </div>
+      <div className="mx-auto max-w-3xl space-y-10 px-5 py-9 sm:space-y-12 sm:px-8 sm:py-12">
+        <header className="space-y-5 border-b-2 border-record-signal pb-8">
+          <p className="font-mono text-sm font-bold tracking-[0.3em] text-record-red">x = x</p>
+          <h1 className="font-display text-5xl font-bold uppercase leading-[0.98] tracking-tight sm:text-6xl">Nobody above<br />anybody.</h1>
+          <p className="max-w-xl text-lg leading-relaxed">On this climate record, x = x means equal human worth. An emergency does not matter less because fewer people are watching.</p>
+        </header>
+        <XEqualsXContext />
+        <XEqualsXPrinciples />
+        <XEqualsXEvidence />
+        <footer className="space-y-5 border-t-2 border-record-ink pt-7">
+          <p className="font-display text-2xl font-bold uppercase leading-tight">The point is what we do beyond the screen.</p>
+          <nav aria-label="About the record" className="flex flex-col items-start gap-4 text-sm font-semibold sm:flex-row sm:items-center sm:justify-between">
+            <Link to="/TogetherChangeClimate" className="inline-flex min-h-11 items-center gap-2 bg-record-red px-4 py-3 text-record-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red">
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to the record
+            </Link>
+            <Link to="/ExtractionProofCovenant" className="inline-flex min-h-11 items-center text-record-red underline underline-offset-4">Read the covenant</Link>
+          </nav>
+          <p className="pt-3 font-mono text-xs font-bold tracking-[0.3em] text-record-red">x = x</p>
+        </footer>
+      </div>
+    </main>
   );
 }

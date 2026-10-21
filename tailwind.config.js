@@ -4,12 +4,24 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+      fontFamily: {
+        display: ['var(--font-display)'],
+        body: ['var(--font-body)'],
+      },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+        record: {
+          paper: 'rgb(var(--record-paper) / <alpha-value>)',
+          bone: 'rgb(var(--record-bone) / <alpha-value>)',
+          ink: 'rgb(var(--record-ink) / <alpha-value>)',
+          signal: 'rgb(var(--record-signal) / <alpha-value>)',
+          red: 'rgb(var(--record-red) / <alpha-value>)',
+          muted: 'rgb(var(--record-muted) / <alpha-value>)',
+        },
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
