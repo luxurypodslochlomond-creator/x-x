@@ -8,6 +8,7 @@ import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
+import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 
@@ -455,6 +456,9 @@ export default function TogetherChangeClimate() {
           </p>
         </div>
       </div>
+
+      {/* ── THE TOP CRAWL — Janine's photographs, fully credited, drifting slowly past the record. ── */}
+      <ClimateImageCrawl />
 
       {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
              The space is held while the record loads, so nothing jumps on arrival. ── */}
