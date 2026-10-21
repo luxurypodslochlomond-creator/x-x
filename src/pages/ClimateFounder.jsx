@@ -105,7 +105,7 @@ export default function ClimateFounder() {
             it only opens in the mail app when tapped. */}
         <a
           href="mailto:family@uf51.love"
-          aria-label="Write to UF51 CIC about this record"
+          aria-label="Contact UF51 CIC about this record"
           className="block mt-6 pt-5 border-t border-[#141210]/15 max-w-[260px] mx-auto transition-opacity active:opacity-60"
         >
           <span className="block text-[10px] font-black font-mono uppercase tracking-[0.15em] text-[#e2602a]">
@@ -115,7 +115,7 @@ export default function ClimateFounder() {
             Platform by Brian Hughes · UF51 CIC
           </span>
           <span className="block text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#141210] mt-3 underline underline-offset-4 decoration-[#e2602a]">
-            Write to us
+            Contact UF51 CIC
           </span>
         </a>
       </div>
