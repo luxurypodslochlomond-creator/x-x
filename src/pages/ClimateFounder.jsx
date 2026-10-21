@@ -98,6 +98,17 @@ export default function ClimateFounder() {
           Chairman, President and Publisher, Horizon International · Yale University<br />
           Four decades of finding and advancing solutions to the interrelated concerns of global health, environment, and poverty.
         </p>
+
+        {/* Build credit — asked for by Janine. Held apart from her own credentials by
+            a rule, so it reads as who built the page, never as a title she holds. */}
+        <div className="mt-6 pt-5 border-t border-[#141210]/15 max-w-[260px] mx-auto">
+          <p className="text-[10px] font-black font-mono uppercase tracking-[0.15em] text-[#e2602a]">
+            Made in Scotland from photons
+          </p>
+          <p className="text-[10px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">
+            Platform by Brian Hughes · UF51 CIC
+          </p>
+        </div>
       </div>
 
       {/* Achievements — the record of the work */}
