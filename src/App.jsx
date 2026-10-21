@@ -58,21 +58,22 @@ const WristHealingAboutPage = React.lazy(() => import('./pages/WristHealingAbout
 const WristHealingTermsPage = React.lazy(() => import('./pages/WristHealingTerms'));
 const WristHealingPrivacyPage = React.lazy(() => import('./pages/WristHealingPrivacy'));
 const Shed51Page = React.lazy(() => import('./pages/Shed51'));
-// Sorted pages - NOT lazy for instant loading
-import Family51Page from './pages/Family51';
-import SortedHome from './pages/SortedHome';
-import SortedTermsPage from './pages/SortedTerms';
-import SortedPrivacyPage from './pages/SortedPrivacy';
-import SortedFAQPage from './pages/SortedFAQ';
-import SortedInvestorPressPage from './pages/SortedInvestorPress';
-import PetSounds51InvestorPressPage from './pages/PetSounds51InvestorPress';
-import SortedForOrgsPage from './pages/SortedForOrgs';
-import SortedLayout from './components/family51/SortedLayout';
-import ClimateLayout from './components/climate/ClimateLayout';
-import SortedGlobalAccessPage from './pages/SortedGlobalAccess';
-import SortedAboutPage from './pages/SortedAbout';
-import SortedResearchBriefPage from './pages/SortedResearchBrief';
-import SortedReferralShowcasePage from './pages/SortedReferralShowcase';
+// SORTED + the climate shell — fetched on demand instead of riding in the first load.
+// The router prefetcher warms them on hover/tap, so opening one feels the same. Nothing removed.
+const Family51Page = React.lazy(() => import('./pages/Family51'));
+const SortedHome = React.lazy(() => import('./pages/SortedHome'));
+const SortedTermsPage = React.lazy(() => import('./pages/SortedTerms'));
+const SortedPrivacyPage = React.lazy(() => import('./pages/SortedPrivacy'));
+const SortedFAQPage = React.lazy(() => import('./pages/SortedFAQ'));
+const SortedInvestorPressPage = React.lazy(() => import('./pages/SortedInvestorPress'));
+const PetSounds51InvestorPressPage = React.lazy(() => import('./pages/PetSounds51InvestorPress'));
+const SortedForOrgsPage = React.lazy(() => import('./pages/SortedForOrgs'));
+const SortedLayout = React.lazy(() => import('./components/family51/SortedLayout'));
+const ClimateLayout = React.lazy(() => import('./components/climate/ClimateLayout'));
+const SortedGlobalAccessPage = React.lazy(() => import('./pages/SortedGlobalAccess'));
+const SortedAboutPage = React.lazy(() => import('./pages/SortedAbout'));
+const SortedResearchBriefPage = React.lazy(() => import('./pages/SortedResearchBrief'));
+const SortedReferralShowcasePage = React.lazy(() => import('./pages/SortedReferralShowcase'));
 const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
 const AdminLogoUploadPage = React.lazy(() => import('./pages/AdminLogoUpload'));

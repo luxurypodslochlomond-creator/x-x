@@ -28,6 +28,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://uf51.love" />
     <link rel="dns-prefetch" href="https://api.base44.com" />
+
+    <!-- FONTS OFF THE CRITICAL PATH: Oswald swaps in a moment later over the system fallback,
+         so first paint never waits on fonts.googleapis.com. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" /></noscript>
     
     <!-- INSTANT PAINT: Critical CSS inlined -->
     <style>
