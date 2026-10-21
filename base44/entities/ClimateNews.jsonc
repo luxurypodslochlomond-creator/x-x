@@ -1,0 +1,163 @@
+{
+  "name": "ClimateNews",
+  "type": "object",
+  "description": "The record's wire: dated, sourced entries \u2014 what changed, where, who says so, and what others can copy from it. Every entry carries its origin; nothing goes on without one. No likes, no rankings, no chasing volume. Public to read once published; anyone may send an entry in; only admins change or remove what is on the wire.",
+  "properties": {
+    "headline": {
+      "type": "string",
+      "description": "The entry in one line, plain language. Required."
+    },
+    "what_changed": {
+      "type": "string",
+      "description": "What actually happened or what is being reported \u2014 two or three sentences, no spin, no opinion. Required."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "initiative",
+        "emergency",
+        "milestone"
+      ],
+      "default": "initiative",
+      "description": "initiative \u2014 something working that others can copy. emergency \u2014 a climate emergency the world needs to know about. milestone \u2014 a report, warning, decision or record worth keeping."
+    },
+    "when_label": {
+      "type": "string",
+      "description": "When this happened, as the reader sees it, e.g. '10 August 2026', '2026', or 'ongoing'. Honest and exact where the date is known, rough where it is not. Required."
+    },
+    "when_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Only filled when the exact date is genuinely known. Used to order the wire."
+    },
+    "where_label": {
+      "type": "string",
+      "description": "Where this is, roughly, e.g. 'Benin' or 'Plymouth Sound, England'. Region only \u2014 never a precise location."
+    },
+    "country": {
+      "type": "string",
+      "description": "Country, for the wire's place line and for mapping."
+    },
+    "publisher_type": {
+      "type": "string",
+      "enum": [
+        "official_body",
+        "journal",
+        "news_media",
+        "ngo",
+        "field_dispatch",
+        "document"
+      ],
+      "description": "What kind of origin this is: an official body's own statement, a peer-reviewed journal, published media, an organisation working on the ground, a dispatch from someone there, or a document. Required."
+    },
+    "source_name": {
+      "type": "string",
+      "description": "Who says so \u2014 the body, journal, publisher or person. Nothing goes on the wire without this. Required."
+    },
+    "source_url": {
+      "type": "string",
+      "description": "The link to the origin itself. An entry with no link waits for a person to find one or leave it out."
+    },
+    "corroborating_source": {
+      "type": "string",
+      "description": "A second, independent origin saying the same thing, if one exists."
+    },
+    "verification": {
+      "type": "string",
+      "enum": [
+        "single_source",
+        "corroborated",
+        "official_record"
+      ],
+      "default": "single_source",
+      "description": "single_source \u2014 one origin says so. corroborated \u2014 two independent origins agree. official_record \u2014 the body itself has put this on the record. The reader sees which, on every entry."
+    },
+    "replicable": {
+      "type": "string",
+      "description": "What another person or community can copy from this, and where they would start. This is the line that makes the wire useful rather than just news."
+    },
+    "category": {
+      "type": "string",
+      "description": "Category, managed through the ClimateCategory entity. Left empty when the entry sits outside the taxonomy."
+    },
+    "image_url": {
+      "type": "string",
+      "description": "A copyright-free picture, stored publicly so the wire can show it to everyone."
+    },
+    "image_credit": {
+      "type": "string",
+      "description": "Source and photographer, e.g. 'Ocean Image Bank \u00b7 Photographer Alex Mustard'. Never separated from the picture."
+    },
+    "correction_note": {
+      "type": "string",
+      "description": "A correction, in the open, with the date it was made. Entries are corrected in daylight, never silently."
+    },
+    "editor": {
+      "type": "string",
+      "description": "The named editor who signed this entry onto the record."
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When a person last looked at this entry."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft"
+      ],
+      "default": "published",
+      "description": "Only published entries appear on the wire. Entries held back wait for a person."
+    },
+    "submitter_name": {
+      "type": "string",
+      "description": "Name of the person who sent this entry in, if it came from a reader."
+    },
+    "submitter_email": {
+      "type": "string",
+      "description": "Email of the sender \u2014 used only to reach them about this entry. Never published."
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Held back by the screener for a human look."
+    },
+    "ai_assessment": {
+      "type": "string",
+      "description": "The screener's advisory note \u2014 spam, relevance, harmful advice, and whether a traceable source was given. Advisory only; a person decides."
+    }
+  },
+  "required": [
+    "headline",
+    "what_changed",
+    "when_label",
+    "publisher_type",
+    "source_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

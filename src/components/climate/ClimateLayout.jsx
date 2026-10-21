@@ -13,10 +13,12 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 
 const NAV = [
   { label: 'Record', page: 'TogetherChangeClimate' },
+  { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
   { label: 'Founder', page: 'ClimateFounder' },
   { label: 'Support', page: 'ClimateSupport' },
+  { label: 'Method', page: 'ClimateMethod' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
@@ -81,7 +83,7 @@ export default function ClimateLayout({ children, currentPage }) {
   useEffect(() => {
     if (navigator.connection?.saveData) return;
     const timer = setTimeout(() => {
-      ['TogetherChangeClimate', 'ClimateImpact', 'ClimateFounder', 'ClimateSupport', 'ClimateTerms', 'ClimatePrivacy']
+      ['TogetherChangeClimate', 'ClimateWire', 'ClimateMethod', 'ClimateImpact', 'ClimateFounder', 'ClimateSupport', 'ClimateTerms', 'ClimatePrivacy']
         .forEach(prefetchPath);
     }, 1200);
     return () => clearTimeout(timer);

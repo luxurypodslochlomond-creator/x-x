@@ -18,7 +18,7 @@ export default async function(req: Request): Promise<Response> {
     }
 
     // Build content for AI assessment
-    const contentParts = [data.title, data.summary, data.details, data.description, data.content].filter(Boolean);
+    const contentParts = [data.title, data.headline, data.summary, data.details, data.description, data.content, data.what_changed, data.replicable].filter(Boolean);
     const fullContent = contentParts.join('\n\n');
 
     // 1. AI advisory note
@@ -70,6 +70,13 @@ Content: ${fullContent.slice(0, 2000)}`,
     // 2. Create the entry. Janine's instruction: clear out spam and let the information
     // flow — the record exists to encourage sharing, not to peer-review everything the way
     // the Solutions Site did. Clean entries publish at once; only flagged ones wait for a human.
+    // A wire entry with no traceable origin never goes up on the record. It waits for a
+    // person, who either finds the source or leaves the entry out.
+    if (type === 'news' && (!data.source_name || !data.source_url)) {
+      flagged = true;
+      aiAssessment = `${aiAssessment} · No traceable source given — held for a human.`;
+    }
+
     const status = flagged ? 'draft' : 'published';
     const recordData = { ...data, status, flagged, ai_assessment: aiAssessment };
     let record;
@@ -78,6 +85,8 @@ Content: ${fullContent.slice(0, 2000)}`,
       record = await base44.asServiceRole.entities.ClimateComment.create(recordData);
     } else if (type === 'action') {
       record = await base44.asServiceRole.entities.ClimateAction.create(recordData);
+    } else if (type === 'news') {
+      record = await base44.asServiceRole.entities.ClimateNews.create(recordData);
     } else {
       record = await base44.asServiceRole.entities.ClimateSolution.create(recordData);
     }
@@ -86,7 +95,7 @@ Content: ${fullContent.slice(0, 2000)}`,
     const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
     if (adminEmail) {
       try {
-        const title = data.title || (data.content ? data.content.slice(0, 60) : 'Untitled');
+        const title = data.title || data.headline || (data.content ? data.content.slice(0, 60) : 'Untitled');
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: adminEmail,
           subject: `Climate submission held for a check: ${title}`,
