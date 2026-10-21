@@ -17,7 +17,7 @@ async function saveCard(file) {
   try { await navigator.clipboard.writeText(window.location.href); } catch { /* selectable in the citation box below */ }
 }
 
-export default function ShareCardButton({ entry }) {
+export default function ShareCardButton({ entry, compact = false }) {
   const [state, setState] = useState('idle');
 
   const share = async () => {
@@ -55,6 +55,23 @@ export default function ShareCardButton({ entry }) {
     }
   };
 
+  const done = state === 'shared' || state === 'saved';
+  const Icon = done ? Check : Share2;
+
+  if (compact) {
+    const short = state === 'building' ? 'Drawing…' : state === 'shared' ? 'Shared' : state === 'saved' ? 'Saved' : 'Share';
+    return (
+      <button
+        onClick={share}
+        disabled={state === 'building'}
+        className="shrink-0 flex items-center gap-2 h-11 px-3 bg-[#f7f1e5] text-[#141210] text-[10px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors disabled:opacity-70"
+      >
+        <Icon className="w-3.5 h-3.5" />
+        {short}
+      </button>
+    );
+  }
+
   const label = state === 'building' ? 'Drawing the card…'
     : state === 'shared' ? 'Shared'
     : state === 'saved' ? 'Card saved · link copied'
@@ -66,7 +83,7 @@ export default function ShareCardButton({ entry }) {
       disabled={state === 'building'}
       className="w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors disabled:opacity-70"
     >
-      {state === 'shared' || state === 'saved' ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+      <Icon className="w-4 h-4" />
       {label}
     </button>
   );

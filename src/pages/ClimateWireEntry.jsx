@@ -45,6 +45,7 @@ export default function ClimateWireEntry() {
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">One entry · permanent address</span>
+        {entry && <div className="ml-auto"><ShareCardButton entry={entry} compact /></div>}
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-6">
