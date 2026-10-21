@@ -11,6 +11,7 @@ import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
+import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -668,6 +669,9 @@ export default function TogetherChangeClimate() {
             )}
           </section>
         )}
+
+        {/* ── SMALLEST GESTURES — Janine's list: what any of us can copy this afternoon ── */}
+        <SmallGesturesBand />
 
         {/* ── DEFINITIONS ── */}
         <section className="px-4 py-5 border-b-2 border-[#141210]">
