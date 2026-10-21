@@ -229,8 +229,7 @@ export default function AdminClimateReview() {
             </div>
           </div>
           <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed">
-            Every submission receives an AI advisory note, then a human decides.
-            The AI advises — the human decides. Nothing is auto-published.
+            Every submission receives an AI advisory note. Clear entries go on the record at once — anything flagged needs attention.
           </p>
         </div>
 
