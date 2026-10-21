@@ -624,6 +624,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "🌳 National Parklife Logos", url: createPageUrl("AdminNationalParklife"), icon: Image, description: "Hammock brand · logo lab" },
       { title: "Climate Review Queue", url: createPageUrl("AdminClimateReview"), icon: CheckCircle, description: "Review draft submissions · AI advisory note" },
       { title: "Climate Categories", url: createPageUrl("AdminClimateCategories"), icon: Tag, description: "Add, edit, and reorder categories" },
+      { title: "Top Crawl Photos", url: createPageUrl("AdminClimatePhotos"), icon: Image, description: "Credited pictures · shrunk for phones" },
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };

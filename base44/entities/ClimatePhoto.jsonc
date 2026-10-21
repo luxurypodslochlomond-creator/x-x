@@ -1,0 +1,65 @@
+{
+  "name": "ClimatePhoto",
+  "type": "object",
+  "description": "A photograph for the top crawl on the climate record \u2014 Janine's credited ocean pictures. Each picture is shrunk to a web size in the browser before it is stored, so it opens fast on a phone and on a desktop. The credit travels with the picture and is never separated from it. Public to read; only admins add, change, or remove.",
+  "properties": {
+    "image_url": {
+      "type": "string",
+      "description": "The web-sized picture, stored publicly so the record can show it to everyone."
+    },
+    "caption": {
+      "type": "string",
+      "description": "What the picture shows, in a few words, e.g. 'Mangroves above \u00b7 coral below'."
+    },
+    "credit": {
+      "type": "string",
+      "description": "Who made the picture \u2014 source and photographer, e.g. 'Ocean Image Bank \u00b7 Photographer Alex Mustard'. Required."
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "description": "Order in the crawl \u2014 lower comes first."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft"
+      ],
+      "default": "published",
+      "description": "Only published pictures appear in the crawl."
+    }
+  },
+  "required": [
+    "image_url"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
