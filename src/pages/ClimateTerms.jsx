@@ -1,45 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 
 // Coolasfuck Terms — honest, short, Beadie Signal style.
 // Not legal jargon. A letter from the record.
 
 export default function ClimateTerms() {
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210] twcc-scanlines relative">
-      <div className="relative z-10 max-w-2xl mx-auto px-4 py-8">
-
-        {/* BACK */}
-        <Link to={createPageUrl('TogetherChangeClimate')} className="inline-flex items-center gap-2 text-[11px] font-mono font-black uppercase text-[#5a5246] hover:text-[#e2602a] transition-colors mb-6">
-          <ArrowLeft className="w-3.5 h-3.5" /> The Record
-        </Link>
-
-        {/* HEADER */}
-        <header className="mb-8 pb-6 border-b-2 border-[#141210]">
-          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-[#e2602a] mb-2">TWCC · TERMS</p>
-          <h1 className="font-black uppercase text-[#141210] leading-[0.95]" style={{ fontFamily: 'var(--font-display)', fontSize: '44px', letterSpacing: '-0.03em' }}>
-            The Ground<br />We Stand On
-          </h1>
-          <p className="text-[12px] font-mono text-[#5a5246] mt-3 leading-relaxed">
-            Not legal jargon. Just honest ground rules for the record. Read it in a minute.
-          </p>
-        </header>
-
-        {/* The record's cold band — the same mark the founder page wears. */}
-        <div className="bg-[#141210] px-5 py-3 mb-8 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20">
-          <div className="flex items-center justify-center gap-2 w-full">
-            <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-            <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
-              The ground we stand on
-            </span>
-            <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          </div>
-          <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
-            x = x
-          </div>
-        </div>
+    <ClimateRecordShell
+      eyebrow="TWCC · Terms"
+      marker="The ground we stand on"
+      title="The Ground We Stand On"
+      statement="Not legal jargon. Just honest ground rules for the record. Read it in a minute."
+      returnTo={createPageUrl('TogetherChangeClimate')}
+      returnLabel="Back to the record"
+      footer="Read it. Question it. Tell us when we get it wrong."
+    >
+      <div className="relative">
 
         {/* 1. WHAT THIS IS */}
         <section className="mb-6">
@@ -218,6 +197,6 @@ export default function ClimateTerms() {
         {/* FOOT */}
         <p className="text-center mt-10 text-[9px] font-mono font-black tracking-[0.3em] text-[#5a5246]/40">x = x</p>
       </div>
-    </div>
+    </ClimateRecordShell>
   );
 }

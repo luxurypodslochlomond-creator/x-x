@@ -234,7 +234,7 @@ html {
 }
 .climate-photo-dialog[open] { display: flex; flex-direction: column; }
 .climate-photo-dialog::backdrop { background: rgb(var(--record-ink)); }
-.climate-photo-viewer-top { padding-top: max(.5rem, env(safe-area-inset-top)); }
+.climate-photo-viewer-top { position: absolute; top: 0; left: 0; right: 0; padding-top: max(.5rem, env(safe-area-inset-top)); }
 .climate-photo-viewer-bottom { padding-bottom: env(safe-area-inset-bottom); background: rgb(var(--record-bone)); }
 a,
 button,

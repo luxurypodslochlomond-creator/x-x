@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { useClimateLanguage } from '@/components/climate/useClimateLanguage';
 import ClimateLanguagePicker from '@/components/climate/ClimateLanguagePicker';
+import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import { SUPPORT_STRINGS } from '@/components/climate/support/supportStrings';
 import DonationForm from '@/components/climate/support/DonationForm';
 import SupportWall from '@/components/climate/support/SupportWall';
@@ -16,6 +16,7 @@ import SupportThanks from '@/components/climate/support/SupportThanks';
 //
 // Every tongue on Earth: the page carries the same language control as the record,
 // reads the same remembered tongue, and translates its own words live.
+// It wears the same cold bands as the Founder page, so the record reads as one place.
 
 export default function ClimateSupport() {
   const { lang, setLanguage, isRTL, translating, liveStrings } = useClimateLanguage(SUPPORT_STRINGS.en);
@@ -60,22 +61,26 @@ export default function ClimateSupport() {
   const pledge = [t.pledge_1, t.pledge_2, t.pledge_3, t.pledge_4];
 
   return (
-    <main dir={isRTL ? 'rtl' : 'ltr'} className="mx-auto w-full max-w-[680px] px-4 py-6 sm:py-10">
-      <div className="border-2 border-record-ink/20 bg-record-bone px-3 py-2.5">
+    <ClimateRecordShell
+      dir={isRTL ? 'rtl' : 'ltr'}
+      eyebrow={(t.eyebrow || '').replace(/^●\s*/, '')}
+      marker={t.pledge_1}
+      title={t.heading}
+      returnTo={createPageUrl('TogetherChangeClimate')}
+      returnLabel={t.back}
+      footer={`${t.pledge_2} ${t.pledge_3}`}
+    >
+      <div className="border border-[#141210] bg-[#f7f1e5] px-3 py-2.5">
         <ClimateLanguagePicker lang={lang} onChange={setLanguage} translating={translating} t={t} />
       </div>
 
-      <p className="mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-record-signal">{t.eyebrow}</p>
-      <h1 className="mt-2 font-display text-[26px] sm:text-4xl font-bold uppercase leading-[1.05] text-record-ink">
-        {t.heading}
-      </h1>
-      <p className="mt-3 text-[13px] leading-relaxed text-record-ink">{t.intro}</p>
+      <p className="mt-6 text-[12px] font-mono leading-relaxed text-[#141210]">{t.intro}</p>
 
       <div className="mt-6 space-y-6">
         {result && <SupportThanks result={result} t={t} />}
 
         {loadingWall ? (
-          <p className="border-2 border-record-ink/15 p-4 text-[11px] text-record-muted">{t.wall_loading}</p>
+          <p className="border border-[#141210] bg-[#f7f1e5] p-5 text-[11px] font-mono text-[#5a5246]">{t.wall_loading}</p>
         ) : (
           <>
             <DonationForm t={t} open={givingOpen} />
@@ -83,21 +88,17 @@ export default function ClimateSupport() {
           </>
         )}
 
-        <section className="border-t border-record-ink/20 pt-5">
-          <h2 className="font-display text-lg font-bold uppercase text-record-ink">{t.pledge_heading}</h2>
+        <section className="border-t-2 border-[#141210] pt-6">
+          <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            {t.pledge_heading}
+          </h2>
           <ul className="mt-3 space-y-2">
             {pledge.map(line => (
-              <li key={line} className="text-[12px] leading-relaxed text-record-muted">· {line}</li>
+              <li key={line} className="text-[12px] font-mono leading-relaxed text-[#141210]">· {line}</li>
             ))}
           </ul>
-          <Link
-            to={createPageUrl('TogetherChangeClimate')}
-            className="mt-4 inline-block text-[11px] font-black uppercase tracking-wider text-record-signal underline underline-offset-4"
-          >
-            {t.back}
-          </Link>
         </section>
       </div>
-    </main>
+    </ClimateRecordShell>
   );
 }

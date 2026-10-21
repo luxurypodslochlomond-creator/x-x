@@ -17,8 +17,8 @@ export default function DonationForm({ t, open }) {
   // are hidden rather than broken: the page never invites a gift it cannot take.
   if (!open) {
     return (
-      <section className="border-2 border-record-ink bg-record-bone p-4 sm:p-5">
-        <h2 className="font-display text-xl font-bold uppercase leading-tight text-record-ink">{t.closed_heading}</h2>
+      <section className="border border-[#141210] bg-[#f7f1e5] p-5">
+        <h2 className="font-display text-[22px] font-black uppercase leading-tight text-[#141210]">{t.closed_heading}</h2>
         <p className="mt-2 text-[12px] leading-relaxed text-record-muted">{t.closed_body}</p>
         <p className="mt-3 pt-3 border-t border-record-ink/15 text-[11px] leading-relaxed text-record-muted">{t.closed_note}</p>
       </section>
@@ -58,7 +58,7 @@ export default function DonationForm({ t, open }) {
 
   return (
     <section className="border-2 border-record-ink bg-record-bone p-4 sm:p-5">
-      <h2 className="font-display text-xl font-bold uppercase leading-tight text-record-ink">{t.form_heading}</h2>
+      <h2 className="font-display text-[22px] font-black uppercase leading-tight text-[#141210]">{t.form_heading}</h2>
       <p className="mt-1 text-[12px] leading-relaxed text-record-muted">{t.form_sub}</p>
 
       <div className="mt-4 flex gap-2">

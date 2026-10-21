@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function SupportWall({ names, supporters, t }) {
   return (
-    <section className="border-2 border-record-ink/20 bg-record-paper p-4 sm:p-5">
-      <h2 className="font-display text-xl font-bold uppercase leading-tight text-record-ink">{t.wall_heading}</h2>
+    <section className="border border-[#141210] bg-[#f7f1e5] p-5">
+      <h2 className="font-display text-[22px] font-black uppercase leading-tight text-[#141210]">{t.wall_heading}</h2>
       <p className="mt-1 text-[11px] leading-relaxed text-record-muted">{t.wall_sub}</p>
 
       {names.length === 0 ? (
