@@ -26,6 +26,35 @@ const STEPS = [
   },
 ];
 
+// ── The direct link: this is not theory any more. ──
+// Every line below is public record with a checkable source. No fingers pointed.
+const NOW = [
+  {
+    n: '01',
+    h: 'In court, in California',
+    b: 'The design claims against Meta, TikTok, Snap and YouTube over adolescent addiction are consolidated in one federal case: In re Social Media Adolescent Addiction/Personal Injury Products Liability Litigation, N.D. Cal., MDL No. 3047. Plaintiffs\' counsel includes Selendy Gay, the New York firm. Meta\'s chief executive has given evidence in it.',
+    src: 'CASE NO. 4:22-MD-03047-YGR · N.D. CAL · LAW.COM, 18 FEBRUARY 2026',
+  },
+  {
+    n: '02',
+    h: 'The largest settlement of its kind',
+    b: 'On 26 August 2026, New York\'s Attorney General announced a settlement with Meta of up to $17.1 billion plus enforceable reforms: limits on the time minors spend on Facebook and Instagram, and restrictions on addictive features and inappropriate content. The office called it the largest single-company settlement in its history.',
+    src: 'OFFICE OF THE NEW YORK STATE ATTORNEY GENERAL, 26 AUGUST 2026',
+  },
+  {
+    n: '03',
+    h: 'In law, on three continents',
+    b: 'The EU\'s Digital Services Act bans advertising that profiles children and requires the largest platforms to assess and mitigate systemic risks, with minors named as one. The UK\'s Online Safety Act children\'s codes came into force on 25 July 2025. Australia\'s under-16 restrictions took effect on 10 December 2025: 4.7 million under-16 accounts were removed by mid-December.',
+    src: 'REGULATION (EU) 2022/2065 ART. 28 · GOV.UK · ESAFETY COMMISSIONER',
+  },
+  {
+    n: '04',
+    h: 'In the words of the people who built it',
+    b: '“Careless People” by Sarah Wynn-Williams, a former Facebook director of public policy, was published on 11 March 2025. Meta obtained an emergency arbitration order requiring her to stop promoting it; her UK publisher said it would ignore the ruling, and she testified to the Senate Judiciary Committee on 9 April 2025.',
+    src: 'SENT TO THIS RECORD BY ITS FOUNDER',
+  },
+];
+
 const REMOVED = [
   'No score field. No weight field.',
   'No popularity sort. No trending. No "most read".',
@@ -48,6 +77,24 @@ const STANDING_ON = [
   'Shoshana Zuboff, The Age of Surveillance Capitalism, 2019 — behaviour as the commodity',
   'Michael Sandel, What Money Can\'t Buy, 2012 — goods corrupted, not just priced',
 ];
+
+const Card = ({ item }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className="bg-[#efe7d6] border border-[#1a1612]/15 p-5 rounded-none"
+  >
+    <div className="flex items-baseline gap-3 mb-2">
+      <span className="font-mono font-black text-[11px] text-[#b3261e] tracking-widest">{item.n}</span>
+      <h3 className="font-black text-lg leading-tight">{item.h}</h3>
+    </div>
+    <p className="text-[#6b6258] text-sm leading-relaxed">{item.b}</p>
+    {item.src && (
+      <p className="font-mono text-[10px] tracking-wide text-[#1a1612]/50 mt-3 pt-3 border-t border-[#1a1612]/10">{item.src}</p>
+    )}
+  </motion.div>
+);
 
 const SectionLabel = ({ children }) => (
   <div className="flex items-center gap-4">
@@ -104,25 +151,30 @@ export default function XEqualsX() {
         <div className="space-y-6">
           <SectionLabel>WHY OURS IS THE OPPOSITE</SectionLabel>
           <div className="space-y-3">
-            {STEPS.map((s) => (
-              <motion.div
-                key={s.n}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-[#efe7d6] border border-[#1a1612]/15 p-5 rounded-none"
-              >
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="font-mono font-black text-[11px] text-[#b3261e] tracking-widest">{s.n}</span>
-                  <h3 className="font-black text-lg leading-tight">{s.h}</h3>
-                </div>
-                <p className="text-[#6b6258] text-sm leading-relaxed">{s.b}</p>
-              </motion.div>
+            {STEPS.map((item) => (
+              <Card key={item.n} item={item} />
             ))}
           </div>
           <div className="space-y-3 text-base leading-relaxed text-[#1a1612]/85">
             <p>We are not claiming to be the opposite of the internet. We are the opposite of that model: attention turned into a score, and the score sold.</p>
             <p>A platform that ranks you and a record that refuses to are opposite objects — and the refusal is checkable. There is no number here to buy.</p>
+          </div>
+        </div>
+
+        {/* ── WHAT'S BEING ARGUED RIGHT NOW ── */}
+        <div className="space-y-6">
+          <SectionLabel>WHAT'S BEING ARGUED RIGHT NOW</SectionLabel>
+          <p className="text-base leading-relaxed text-[#1a1612]/85">
+            None of this is theory any more. The model described above is in court and in parliament on three continents. Here is where it stands, with the checkable source of each line — so a reader can verify rather than take our word.
+          </p>
+          <div className="space-y-3">
+            {NOW.map((item) => (
+              <Card key={item.n} item={item} />
+            ))}
+          </div>
+          <div className="space-y-3 text-base leading-relaxed text-[#1a1612]/85">
+            <p>Every remedy being ordered in those cases — nothing designed to hold you, no profiling of children, no dark patterns — is what this record was built without from its first line.</p>
+            <p className="text-[#1a1612] font-bold">We didn't wait to be told. There is nothing here to order us to change.</p>
           </div>
         </div>
 
