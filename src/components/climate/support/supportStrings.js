@@ -4,10 +4,10 @@ export const SUPPORT_STRINGS = {
   en: {
     heading: 'The record is kept by people.',
     eyebrow: '● Keeping the record',
-    intro: 'Nothing on this record is for sale — not a place, not a position, not a mention in an entry. Gifts keep the record itself: the keeping of it, the human check on every submission, and the translation into every language. They buy nothing else.',
+    intro: 'Nothing on this record is for sale — not a place, not a position, not a mention in an entry. Gifts keep the record itself: the keeping of it, the human check on everything flagged, and the translation into every language. They buy nothing else.',
 
     form_heading: 'Help keep the record',
-    form_sub: 'The keeping of the record, the human check on every submission, and the translation into every language. Payment is handled by Stripe — we never see your card.',
+    form_sub: 'The keeping of the record, the human check on everything flagged, and the translation into every language. Payment is handled by Stripe — we never see your card.',
     freq_once: 'One gift',
     freq_monthly: 'Each month',
     amount_label: 'Or give what you want',

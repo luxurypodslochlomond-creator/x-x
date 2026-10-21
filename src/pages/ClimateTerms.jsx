@@ -57,11 +57,11 @@ export default function ClimateTerms() {
         {/* 3. HUMAN REVIEW */}
         <section className="mb-6">
           <h2 className="font-black uppercase text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            03 · Human Review
+            03 · Human Check
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#1e3a2b] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              Every submission is read by a real person before it goes live. An AI advisory note helps screen for spam and relevance, but the AI never judges the science. A human decides. That is the promise.
+              An AI advisory note screens every submission for spam and relevance. The AI never judges the science, and it never decides. Clear entries go on the record at once. Anything it flags waits for a real person to check. That is the promise.
             </p>
           </div>
         </section>

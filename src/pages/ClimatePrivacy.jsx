@@ -61,7 +61,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#efe7d6] border-l-4 border-l-[#e2602a] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              When you submit, an AI reads it first and writes an advisory note for the human reviewer. The AI checks for spam, harmful content, and whether the submission is relevant to climate. It does not judge the science. It does not publish anything. A human reads the note and makes the call.
+              When you submit, an AI reads it first and writes an advisory note. The AI checks for spam, harmful content, and whether the submission is relevant to climate. It does not judge the science, and it never decides anything on its own. Clear entries go on the record at once; anything it flags waits for a real person to check.
             </p>
           </div>
         </section>

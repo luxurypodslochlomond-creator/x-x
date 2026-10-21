@@ -100,7 +100,7 @@ export default function ClimateBrief() {
               ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.'],
               ['Your category taxonomy', 'All 20 categories are implemented in the database and filterable on the page. 12 of 20 already have seeded entries; the rest are supported and ready.'],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.'],
-              ['Reviewed before publication', 'Every entry carries a status field (draft / reviewed / published). Material is reviewed before it goes public.'],
+              ['Screened as it arrives, never queued', 'Every entry carries a status field (draft / reviewed / published). An AI advisory note screens each submission — clear entries go on the record at once, anything flagged waits for a human check.'],
               ['Copyright-free images only', 'Every image is sourced from copyright-free pools (Unsplash). Image credit is stored on each entry.'],
               ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.'],
               ['Scale field', 'Individual, community, city, country, global — your spec, implemented.'],
