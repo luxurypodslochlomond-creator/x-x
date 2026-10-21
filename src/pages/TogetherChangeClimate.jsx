@@ -394,25 +394,18 @@ export default function TogetherChangeClimate() {
         {/* Scanline texture — cold transmission signal */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
-        {/* Bone band */}
-        <div className="relative z-10 bg-[#efe7d6] px-5 py-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5"
+        {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
+        <div className="relative z-10 bg-[#efe7d6] px-5 py-3 flex items-center justify-between gap-3"
           style={{ animation: 'twcc-enter .25s ease-out both' }}>
-          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-            <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
-            <Link to={createPageUrl('ClimateFounder')} className="text-[10px] font-mono text-[#5a5246] hover:text-[#b3261e] transition-colors">· The founder →</Link>
-          </div>
-          {/* Language: the record follows the reader's own device language automatically.
-              No picker in the band — the top of the record stays a statement, not a toolbar. */}
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={handleShare}
-              aria-label="Share this platform"
-              className="ml-0.5 flex items-center gap-1.5 px-3 py-2 min-h-[40px] bg-[#141210] text-[#efe7d6] border border-[#141210] text-[11px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#141210] transition-colors"
-            >
-              {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
-              {copied ? 'Copied' : 'Share'}
-            </button>
-          </div>
+          <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
+          <button
+            onClick={handleShare}
+            aria-label="Share this platform"
+            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 min-h-[40px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase tracking-wider whitespace-nowrap active:bg-[#e2602a] active:text-[#141210] transition-colors"
+          >
+            {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
+            {copied ? 'Copied' : 'Share'}
+          </button>
         </div>
 
         {/* Ink band */}
