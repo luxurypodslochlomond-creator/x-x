@@ -23,7 +23,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
   useTransmissionLoop({ stageRef, scopeRef, fallRef, flashRef, barRef, timeRef, durRef, apiRef });
 
   return (
-    <section className="relative bg-[#141210] text-[#efe7d6] overflow-hidden border-t-4 border-[#e2602a] border-b-2 border-b-[#141210]">
+    <section className="relative bg-[#141210] text-[#efe7d6] overflow-hidden border-b-2 border-b-[#141210]">
       <style>{`
         @keyframes tx-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(226,96,42,.55); } 50% { box-shadow: 0 0 0 14px rgba(226,96,42,0); } }
         @keyframes tx-bar { from { transform: translateY(-10%); } to { transform: translateY(1000%); } }
@@ -31,17 +31,54 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
       `}</style>
       {hasAudio && <audio ref={audioElRef} src={audioUrl} loop preload="metadata" crossOrigin="anonymous" />}
 
-      {/* Header */}
-      <div className="flex items-center gap-2 px-5 pt-4 pb-3" style={{ animation: 'tx-flick 7s linear infinite' }}>
-        <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
-        <span className="text-[10px] font-black font-mono uppercase tracking-[0.25em] text-[#e2602a]">Transmission</span>
-        <div className="flex-1 h-px bg-[#efe7d6]/15" />
-        <span className={`text-[9px] font-black font-mono uppercase tracking-widest ${playing ? 'text-[#e2602a] animate-pulse' : 'text-[#efe7d6]/40'}`}>
-          {playing ? 'On air' : 'Standby'}
-        </span>
+      {/* ── TRANSPORT — above the art, so the picture is never covered and play keeps it in view ── */}
+      <div className="px-4 pt-4 pb-3.5">
+        <div className="flex items-center gap-2 mb-3" style={{ animation: 'tx-flick 7s linear infinite' }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
+          <span className="text-[10px] font-black font-mono uppercase tracking-[0.25em] text-[#e2602a]">Transmission</span>
+          <div className="flex-1 h-px bg-[#efe7d6]/15" />
+          <span className={`text-[9px] font-black font-mono uppercase tracking-widest ${playing ? 'text-[#e2602a] animate-pulse' : 'text-[#efe7d6]/40'}`}>
+            {playing ? 'On air' : 'Standby'}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3.5">
+          <button
+            onClick={toggle}
+            aria-label={playing ? 'Pause transmission' : 'Start transmission'}
+            className={`relative flex-shrink-0 w-16 h-16 rounded-full border-2 border-[#e2602a] flex items-center justify-center active:scale-95 transition-colors ${playing ? 'bg-[#e2602a]' : 'bg-[#141210]'}`}
+            style={playing ? undefined : { animation: 'tx-ring 2s ease-in-out infinite' }}
+          >
+            {playing ? <Pause className="w-6 h-6 text-[#141210]" fill="currentColor" /> : <Play className="w-6 h-6 text-[#e2602a] ml-1" fill="currentColor" />}
+          </button>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-black uppercase leading-none text-[#efe7d6] truncate" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '28px', letterSpacing: '-0.025em' }}>
+              {trackTitle}
+            </h3>
+            <p className="text-[10px] font-mono uppercase tracking-widest text-[#efe7d6]/55 mt-1.5 truncate">
+              {hasAudio ? artistName : playing ? 'Generative signal · live' : 'Tap the planet · feel the signal'}
+            </p>
+          </div>
+          {hasAudio && (
+            <button onClick={toggleMute} aria-label={muted ? 'Unmute' : 'Mute'} className="flex-shrink-0 w-11 h-11 flex items-center justify-center text-[#efe7d6]/55 active:text-[#e2602a]">
+              {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+            </button>
+          )}
+        </div>
+
+        <div className="mt-3.5">
+          <div className="relative h-[3px] bg-[#efe7d6]/15 overflow-hidden">
+            <div ref={barRef} className="h-full bg-[#e2602a]" style={{ width: '0%' }} />
+            <div className="absolute inset-0 opacity-40" style={{ background: 'repeating-linear-gradient(90deg, transparent, transparent 9px, #141210 9px, #141210 10px)' }} />
+          </div>
+          <div className="flex items-center justify-between mt-1.5 text-[9px] font-mono text-[#efe7d6]/45">
+            <span ref={timeRef}>00:00</span>
+            <span ref={durRef}>{'\u221E'}</span>
+          </div>
+        </div>
       </div>
 
-      {/* Stage — tap the planet */}
+      {/* ── THE ART — tap the planet, feel the signal. Whole and uncovered. ── */}
       <div
         role="button"
         tabIndex={0}
@@ -49,7 +86,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
         onClick={toggle}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } }}
         className="relative w-full overflow-hidden bg-[#141210] cursor-pointer select-none touch-manipulation"
-        style={{ height: 'min(100vw, 460px)' }}
+        style={{ height: 'min(94vw, 430px)' }}
       >
         <canvas ref={stageRef} className="absolute inset-0 w-full h-full" />
         <div ref={flashRef} className="absolute inset-0 pointer-events-none bg-[#e2602a]" style={{ opacity: 0 }} />
@@ -69,44 +106,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center gap-4 px-5 pt-5">
-        <button
-          onClick={toggle}
-          aria-label={playing ? 'Pause transmission' : 'Start transmission'}
-          className={`relative flex-shrink-0 w-16 h-16 rounded-full border-2 border-[#e2602a] flex items-center justify-center active:scale-95 transition-colors ${playing ? 'bg-[#e2602a]' : 'bg-[#141210]'}`}
-          style={playing ? undefined : { animation: 'tx-ring 2s ease-in-out infinite' }}
-        >
-          {playing ? <Pause className="w-6 h-6 text-[#141210]" fill="currentColor" /> : <Play className="w-6 h-6 text-[#e2602a] ml-1" fill="currentColor" />}
-        </button>
-        <div className="flex-1 min-w-0">
-          <h3 className="font-black uppercase leading-none text-[#efe7d6] truncate" style={{ fontFamily: 'Impact, "Arial Narrow", system-ui, sans-serif', fontSize: '30px', letterSpacing: '-0.025em' }}>
-            {trackTitle}
-          </h3>
-          <p className="text-[10px] font-mono uppercase tracking-widest text-[#efe7d6]/50 mt-1.5 truncate">
-            {hasAudio ? artistName : playing ? 'Generative signal · live' : 'Tap the planet · feel the signal'}
-          </p>
-        </div>
-        {hasAudio && (
-          <button onClick={toggleMute} aria-label={muted ? 'Unmute' : 'Mute'} className="flex-shrink-0 w-10 h-10 flex items-center justify-center text-[#efe7d6]/50 active:text-[#e2602a]">
-            {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-          </button>
-        )}
-      </div>
-
-      {/* Progress */}
-      <div className="px-5 pt-4">
-        <div className="relative h-[3px] bg-[#efe7d6]/10 overflow-hidden">
-          <div ref={barRef} className="h-full bg-[#e2602a]" style={{ width: '0%' }} />
-          <div className="absolute inset-0 opacity-40" style={{ background: 'repeating-linear-gradient(90deg, transparent, transparent 9px, #141210 9px, #141210 10px)' }} />
-        </div>
-        <div className="flex items-center justify-between mt-1.5 text-[9px] font-mono text-[#efe7d6]/40">
-          <span ref={timeRef}>00:00</span>
-          <span ref={durRef}>{'\u221E'}</span>
-        </div>
-      </div>
-
-      <p className="px-5 pt-3 pb-5 text-[10px] font-mono text-[#efe7d6]/40 leading-relaxed italic">{dedication}</p>
+      <p className="px-5 pt-3.5 pb-5 text-[10px] font-mono text-[#efe7d6]/40 leading-relaxed italic">{dedication}</p>
     </section>
   );
 }
