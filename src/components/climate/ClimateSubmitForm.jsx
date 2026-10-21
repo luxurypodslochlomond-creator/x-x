@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { X, Send, Check, Leaf, AlertTriangle, Sprout } from 'lucide-react';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
+import { createPageUrl } from '@/utils';
 
 function SuccessScreen({ entryType, onClose }) {
   useEffect(() => {
@@ -258,7 +259,8 @@ export default function ClimateSubmitForm({ onClose }) {
 
           <div className="border-t-2 border-[#141210]/20 pt-3 mt-2">
             <p className="text-[10px] font-mono text-[#5a5246] mb-3 leading-relaxed">
-              Email required — per the platform's public-service covenant. Your email is never shown publicly. It's only used if we need to verify your submission.
+              Your email is required (marked *). We use it only to reach you about this submission — to ask a question about it, or to tell you when it goes on the record. It is never published, never shared, never sold. Everything we hold, and everything we don't, is set out on the{' '}
+              <a href={createPageUrl('ClimatePrivacy')} target="_blank" rel="noopener noreferrer" className="underline text-[#141210]">Privacy page</a>.
             </p>
             <div className="grid grid-cols-2 gap-2">
               <div>
@@ -270,6 +272,9 @@ export default function ClimateSubmitForm({ onClose }) {
                 <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
             </div>
+            <p className="text-[9px] font-mono text-[#5a5246] mt-3 leading-relaxed">
+              By submitting, your words stay yours — you give the record permission to publish and translate them, and you can ask us to take them down at any time.
+            </p>
           </div>
         </div>
 

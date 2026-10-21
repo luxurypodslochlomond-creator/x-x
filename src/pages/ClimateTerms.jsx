@@ -85,7 +85,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#efe7d6] border border-[#1a1612] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#1a1612]">
-              You keep the copyright to what you write. By submitting, you let us publish it on this record and translate it so nobody is left behind. You can ask us to take it down by emailing the address below.
+              You keep the copyright to what you write. By submitting, you let us publish it on this record and translate it so nobody is left behind. You can ask us to take it down at any time, by the process in "Taking Something Down" below.
             </p>
           </div>
         </section>

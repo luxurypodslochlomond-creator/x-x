@@ -106,7 +106,7 @@ export default function ClimateCommentSection({ entryId, entryType }) {
       ) : (
         <form onSubmit={handleSubmit} className="bg-[#f7f1e5] border-2 border-[#141210] p-4">
           <p className="text-[9px] font-mono text-[#5a5246] mb-2 leading-relaxed">
-            Email required — per the platform's public-service covenant. Your email is never shown publicly.
+            Your email is required. It is never shown publicly — we use it only to reach you about this comment. Never shared, never sold.
           </p>
           <div className="bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] p-2 mb-3">
             <p className="text-[9px] font-black font-mono uppercase text-[#1e3a2b] mb-0.5">✓ Human Review Promise</p>
