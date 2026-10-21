@@ -338,14 +338,14 @@ export default function TogetherChangeClimate() {
   }, [groups, query]);
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/40" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/40" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
         @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6, 0 0 24px rgba(226,96,42,.55); } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @keyframes twcc-epigraph { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 4px; } }
+        @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } } body { background: #141210 !important; }
       `}</style>
 
@@ -391,7 +391,7 @@ export default function TogetherChangeClimate() {
         />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(226,96,42,.26), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
         {/* Scanline texture — cold transmission signal */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 0.8s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         {/* Bone band */}
         <div className="relative z-10 bg-[#efe7d6] px-5 py-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5"

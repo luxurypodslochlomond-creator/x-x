@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import FitWorld, { WORLD_BOUNDS } from './FitWorld';
 import { createPageUrl } from '@/utils';
 import { resolveCoords } from './countryCentroids';
 
@@ -57,7 +58,7 @@ export default function ClimateImpactMap({ stats }) {
   }
 
   return (
-    <div className="relative w-full" style={{ height: '340px' }}>
+    <div className="relative w-full h-[340px] sm:h-[560px]">
       <style>{`
         @keyframes impact-breathe {
           0%, 100% { filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7); }
@@ -104,18 +105,22 @@ export default function ClimateImpactMap({ stats }) {
       <MapContainer
         center={[20, 0]}
         zoom={1}
-        minZoom={1}
+        zoomSnap={0}
+        minZoom={0}
         maxZoom={6}
         scrollWheelZoom={true}
         zoomControl={true}
         className="impact-map"
         style={{ height: '100%', width: '100%', background: '#efe7d6' }}
-        worldCopyJump={true}
+        maxBounds={WORLD_BOUNDS}
+        maxBoundsViscosity={1}
       >
+        <FitWorld />
         <TileLayer
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}"
           attribution='&copy; Esri, US National Park Service'
           maxZoom={8}
+          noWrap={true}
         />
 
         {points.map((p, i) => {

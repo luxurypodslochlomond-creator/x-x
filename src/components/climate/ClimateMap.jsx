@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import FitWorld, { WORLD_BOUNDS } from './FitWorld';
 import 'leaflet/dist/leaflet.css';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
@@ -199,16 +200,21 @@ export default function ClimateMap() {
       <MapContainer
         center={[20, 0]}
         zoom={2}
-        minZoom={2}
+        zoomSnap={0}
+        minZoom={0}
         maxZoom={10}
+        maxBounds={WORLD_BOUNDS}
+        maxBoundsViscosity={1}
         scrollWheelZoom={true}
         className="climate-map"
         style={{ height: '100%', width: '100%', background: '#efe7d6' }}
       >
+        <FitWorld />
         <TileLayer
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}"
           attribution='&copy; Esri, US National Park Service'
           maxZoom={8}
+          noWrap={true}
         />
 
         {markers.map((m) => (
@@ -297,7 +303,7 @@ export default function ClimateMap() {
         style={{
           opacity: 0.05,
           background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #1a1612 2px, #1a1612 3px)',
-          animation: 'twcc-scan 0.8s linear infinite',
+          animation: 'twcc-scan 3s linear infinite',
         }}
       />
 
@@ -306,8 +312,9 @@ export default function ClimateMap() {
         <div style={{
           position: 'absolute', top: 0, bottom: 0, width: '2px',
           background: '#e2602a',
-          animation: 'climate-sweep 8s cubic-bezier(0.4,0,0.6,1) forwards',
-          boxShadow: '0 0 8px #e2602a, 0 0 20px rgba(226,96,42,0.5), -40px 0 30px rgba(226,96,42,0.12), -80px 0 50px rgba(226,96,42,0.06)',
+          opacity: 0.55,
+          animation: 'climate-sweep 20s cubic-bezier(0.4,0,0.6,1) forwards',
+          boxShadow: '0 0 6px #e2602a, 0 0 16px rgba(226,96,42,0.35), -30px 0 26px rgba(226,96,42,0.08)',
         }} />
       </div>
 

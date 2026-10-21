@@ -13,7 +13,7 @@ export default function ClimateMapPage() {
     <div className="min-h-screen bg-[#efe7d6] text-[#1a1612]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <style>{`
         @keyframes twcc-epigraph { from { opacity: 0; letter-spacing: 0.3em; } to { opacity: 1; letter-spacing: 0.15em; } }
-        @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 4px; } }
+        @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; } }
       `}</style>
@@ -50,30 +50,32 @@ export default function ClimateMapPage() {
             <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">O Superman · O Superman</span>
           </div>
         </div>
-        <h1
-          className="font-black uppercase leading-[0.95] text-[#efe7d6] mt-3"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(32px, 9vw, 48px)',
-            letterSpacing: '-0.035em',
-          }}
-        >
-          TRANSMISSION<br />
-          <span className="text-[#e2602a]">MAP</span>
-        </h1>
-        <p className="text-[11px] font-black font-mono uppercase leading-relaxed mt-2 text-[#e2602a] tracking-[0.14em] max-w-[330px]">
-          Together we can change the course of climate change
-        </p>
-        <p className="text-[10px] font-bold uppercase leading-relaxed mt-2 text-[#efe7d6]/70 tracking-wide max-w-[330px]">
-          Signals from a warming world — after Janine Selendy
-        </p>
-        <p className="text-[8px] font-black font-mono uppercase leading-relaxed mt-2 text-[#e2602a] tracking-[0.1em]" style={{ opacity: 0.7 }}>
-          Every signal · every shore · nobody left behind
-        </p>
+        <div className="mx-auto w-full max-w-[520px] text-center">
+          <h1
+            className="font-black uppercase leading-[0.95] text-[#efe7d6] mt-3"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(32px, 9vw, 48px)',
+              letterSpacing: '-0.035em',
+            }}
+          >
+            TRANSMISSION<br />
+            <span className="text-[#e2602a]">MAP</span>
+          </h1>
+          <p className="text-[11px] font-black font-mono uppercase leading-relaxed mt-2 text-[#e2602a] tracking-[0.14em] mx-auto max-w-[330px]">
+            Together we can change the course of climate change
+          </p>
+          <p className="text-[10px] font-bold uppercase leading-relaxed mt-2 text-[#efe7d6]/70 tracking-wide mx-auto max-w-[330px]">
+            Signals from a warming world — after Janine Selendy
+          </p>
+          <p className="text-[8px] font-black font-mono uppercase leading-relaxed mt-2 text-[#e2602a] tracking-[0.1em]" style={{ opacity: 0.7 }}>
+            Every signal · every shore · nobody left behind
+          </p>
+        </div>
       </div>
 
       {/* MAP */}
-      <div className="relative" style={{ height: 'calc(100vh - 220px)', minHeight: '400px' }}>
+      <div className="relative mx-auto w-full lg:max-w-[720px]" style={{ height: 'calc(100vh - 240px)', minHeight: '380px', maxHeight: '720px' }}>
         <Suspense fallback={<ClimateMapPlaceholder />}>
           <ClimateMap />
         </Suspense>

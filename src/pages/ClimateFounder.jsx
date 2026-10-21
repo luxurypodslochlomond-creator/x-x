@@ -69,7 +69,7 @@ export default function ClimateFounder() {
           <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">Beirut · 1956</span>
         </div>
         {/* Scanline texture */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 0.8s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         <div className="relative z-10 px-6 py-12 flex flex-col items-center justify-center gap-5 text-center min-h-[300px]">
           <SignalBeacon size={48} color="#e2602a" />
@@ -121,7 +121,7 @@ export default function ClimateFounder() {
       </div>
 
       {/* Achievements — the record of the work */}
-      <div className="px-5 py-8 space-y-4">
+      <div className="mx-auto w-full max-w-[820px] px-5 py-8 space-y-4">
         <h2 className="text-center font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.025em' }}>
           The Record of the Work
         </h2>
@@ -141,7 +141,7 @@ export default function ClimateFounder() {
 
       {/* The signature — her formal attribution, exactly as she writes it.
           The record has to be able to point back to the source. */}
-      <div className="px-5 pb-8">
+      <div className="mx-auto w-full max-w-[820px] px-5 pb-8">
         <div className="bg-[#f7f1e5] border-2 border-[#141210] p-5" style={{ animation: 'twcc-epigraph .5s ease-out .5s both' }}>
           <div className="flex items-center gap-2 mb-4">
             <Globe className="w-4 h-4 text-[#e2602a]" />
@@ -194,7 +194,7 @@ export default function ClimateFounder() {
 
       {/* Her vision — the mantra, cold ink */}
       <div className="relative bg-[#141210] px-5 py-10 text-center overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 0.8s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10">
           <Heart className="w-6 h-6 text-[#e2602a] mx-auto mb-4" />
           <p className="text-[14px] font-black font-mono uppercase leading-relaxed max-w-sm mx-auto text-[#efe7d6]">
