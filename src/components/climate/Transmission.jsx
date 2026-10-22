@@ -4,9 +4,10 @@ import { createPageUrl } from '@/utils';
 import TransmissionConsole from './TransmissionConsole';
 
 // ── THE TRANSMISSION ──
-// Dillon Squire's track, given to the record and credited to him by name. Served
-// lossless: the master exactly as it left the studio, nothing thrown away between
-// the desk and the listener. The console only pulls the file when a person presses
+// Dillon Squire's track, given free to the record and credited to him by name.
+// It is not a stream and not for sale: nothing here charges for it, and the page
+// says so, so nobody has to wonder. Served lossless — the master exactly as it
+// left the studio, nothing thrown away between the desk and the listener. The console only pulls the file when a person presses
 // play, so nothing is spent until someone chooses to listen. The music drives the
 // picture — the scope and the falling spectrogram move to his sound, not a synth.
 const TRANSMISSION_URL = 'https://media.base44.com/files/public/6889f31e76713b9cd47e043c/06f236f63_DS_XRAYGIRL_MSTGB2_44_16.wav';
@@ -23,6 +24,15 @@ export default function Transmission() {
         trackTitle={TRACK_TITLE}
         dedication={DEDICATION}
       />
+
+      {/* ── THE GIFT ── said out loud, so nobody has to wonder what it costs ── */}
+      <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 py-4 border-t-2 border-[#141210]">
+        <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">Given, not sold</p>
+        <p className="text-[13px] leading-relaxed text-[#efe7d6]/90">
+          Dillon Squire made this for the record and gave it to it. Free to listen, nothing
+          to buy, no paywall, no ad. His name stays on it, and the record never charges for it.
+        </p>
+      </div>
 
       {/* ── HONEST CAPTION ── passes the panel, feels the truth ── */}
       <div className="bg-[#141210] text-[#efe7d6] px-5 py-4 border-t border-[#efe7d6]/10">
@@ -51,8 +61,8 @@ export default function Transmission() {
       {/* ── KEPT BY PEOPLE ── the honest moment to ask is the moment someone has just listened ── */}
       <div className="bg-[#efe7d6] px-5 py-4 border-t-2 border-[#141210] flex items-center gap-3">
         <div className="flex-1 min-w-0">
-          <p className="text-[11px] font-black font-mono uppercase tracking-wide text-[#141210]">Free to read. Free to listen.</p>
-          <p className="text-[11px] font-mono text-[#5a5246] mt-1 leading-relaxed">No ads. The record is kept running by the people who read it.</p>
+          <p className="text-[11px] font-black font-mono uppercase tracking-wide text-[#141210]">Free to read. Free to listen. Nothing for sale.</p>
+          <p className="text-[11px] font-mono text-[#5a5246] mt-1 leading-relaxed">The record is kept online by the people who read it — not by ads, and never by selling the music.</p>
         </div>
         <Link
           to={createPageUrl('ClimateSupport')}
