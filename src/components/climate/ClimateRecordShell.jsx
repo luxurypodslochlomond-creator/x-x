@@ -11,15 +11,17 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
   return (
     <div dir={dir} className="climate-record twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Header — paper, the way out, the page's name */}
-      <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 border-b-2 border-[#141210] bg-[#efe7d6]">
-        <button
-          onClick={() => navigate(-1)}
-          aria-label="Back"
-          className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{eyebrow}</span>
+      <div className="sticky top-0 lg:static z-50 border-b-2 border-[#141210] bg-[#efe7d6]">
+        <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
+          <button
+            onClick={() => navigate(-1)}
+            aria-label="Back"
+            className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{eyebrow}</span>
+        </div>
       </div>
 
       {/* Cold epigraph band — the covenant mark, same as the record */}
@@ -35,33 +37,33 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       {/* Hero — cold ink, the beacon, the page says what it is */}
       <div className="relative bg-[#141210] overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
-        <div className="relative z-10 px-6 py-10 flex flex-col items-center justify-center gap-4 text-center min-h-[220px]">
+        <div className="relative z-10 px-6 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">
           <SignalBeacon size={44} color="#7fc9e4" />
           <h1
-            className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md"
-            style={{ fontFamily: 'var(--font-display)', fontSize: '30px', letterSpacing: '-0.02em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}
+            className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md lg:max-w-3xl"
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.6vw, 54px)', letterSpacing: '-0.02em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}
           >
             {title}
           </h1>
           {statement && (
-            <p className="text-[12px] font-mono leading-relaxed text-[#efe7d6]/70 max-w-sm" style={{ animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
+            <p className="text-[12px] lg:text-[14px] font-mono leading-relaxed text-[#efe7d6]/70 max-w-sm lg:max-w-2xl" style={{ animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
               {statement}
             </p>
           )}
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-8">{children}</div>
+      <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 py-8 lg:py-14">{children}</div>
 
       {/* Signal band — the way back to the record */}
-      <div className="bg-[#e2602a] px-5 py-5 text-center">
+      <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
         <Link to={returnTo} className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#efe7d6] active:text-[#141210] transition-colors">
           {returnLabel} <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
 
       {footer && (
-        <p className="px-5 py-6 text-center text-[9px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md mx-auto">{footer}</p>
+        <p className="px-5 py-6 lg:py-8 text-center text-[9px] lg:text-[10px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md lg:max-w-2xl mx-auto">{footer}</p>
       )}
     </div>
   );

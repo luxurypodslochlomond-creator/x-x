@@ -40,11 +40,13 @@ export default function ClimateFounder() {
   return (
     <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Header — paper, beacon, back */}
-      <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 border-b-2 border-[#141210] bg-[#efe7d6]">
-        <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">The Founder</span>
+      <div className="sticky top-0 lg:static z-50 border-b-2 border-[#141210] bg-[#efe7d6]">
+        <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
+          <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">The Founder</span>
+        </div>
       </div>
 
       {/* Cold epigraph — the covenant mark, same as the record */}
@@ -71,9 +73,9 @@ export default function ClimateFounder() {
         {/* Scanline texture */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
-        <div className="relative z-10 px-6 py-12 flex flex-col items-center justify-center gap-5 text-center min-h-[300px]">
+        <div className="relative z-10 px-6 lg:px-10 py-12 lg:py-20 flex flex-col items-center justify-center gap-5 text-center min-h-[300px] lg:min-h-[400px]">
           <SignalBeacon size={48} color="#7fc9e4" />
-          <blockquote className="text-[14px] font-mono leading-relaxed text-[#efe7d6] max-w-md italic" style={{ animation: 'twcc-epigraph 1.4s ease-out .2s both' }}>
+          <blockquote className="text-[14px] lg:text-[18px] font-mono leading-relaxed text-[#efe7d6] max-w-md lg:max-w-3xl italic" style={{ animation: 'twcc-epigraph 1.4s ease-out .2s both' }}>
             “Startled by oil coating me as I surfaced after my long dive from the deck of the freighter into the Beirut, Lebanon, harbor water, it aroused my initial awareness to damage to Earth. I was 15 years old.”
           </blockquote>
           <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#e2602a]" style={{ animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
@@ -82,7 +84,7 @@ export default function ClimateFounder() {
         </div>
 
         {/* Signal band — the awakening, in orange */}
-        <div className="relative z-10 bg-[#e2602a] px-5 py-4" style={{ animation: 'twcc-enter .25s ease-out .08s both' }}>
+        <div className="relative z-10 bg-[#e2602a] px-5 lg:px-10 py-4 lg:py-5" style={{ animation: 'twcc-enter .25s ease-out .08s both' }}>
           <p className="text-[10px] font-black font-mono uppercase leading-relaxed text-[#141210] tracking-wide text-center">
             One moment of clarity became forty years of work
           </p>
@@ -90,11 +92,11 @@ export default function ClimateFounder() {
       </div>
 
       {/* Name & role — bone band */}
-      <div className="px-5 py-8 text-center border-b-2 border-[#141210] bg-[#f7f1e5]">
-        <h1 className="text-3xl font-black uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+      <div className="px-5 lg:px-10 py-8 lg:py-14 text-center border-b-2 border-[#141210] bg-[#f7f1e5]">
+        <h1 className="font-black uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.4vw, 54px)', letterSpacing: '-0.02em' }}>
           Janine M. H. Selendy
         </h1>
-        <p className="text-[11px] font-mono text-[#5a5246] mt-3 leading-relaxed max-w-sm mx-auto">
+        <p className="text-[11px] lg:text-[13px] font-mono text-[#5a5246] mt-4 leading-relaxed max-w-sm lg:max-w-2xl mx-auto">
           Chairman, President and Publisher, Horizon International · Yale University<br />
           Four decades of finding and advancing solutions to the interrelated concerns of global health, environment, and poverty.
         </p>
@@ -121,19 +123,19 @@ export default function ClimateFounder() {
       </div>
 
       {/* Achievements — the record of the work */}
-      <div className="mx-auto w-full max-w-[820px] px-5 py-8 space-y-4">
-        <h2 className="text-center font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.025em' }}>
+      <div className="mx-auto w-full max-w-[820px] lg:max-w-[900px] px-5 lg:px-0 py-8 lg:py-14 space-y-4 lg:space-y-5">
+        <h2 className="text-center font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>
           The Record of the Work
         </h2>
         {ACHIEVEMENTS.map((a, i) => {
           const Icon = a.icon;
           return (
-            <div key={a.title} className="bg-[#f7f1e5] border border-[#141210] border-t-4 p-5" style={{ borderTopColor: a.color, animation: `twcc-epigraph .5s ease-out ${0.1 * i}s both` }}>
+            <div key={a.title} className="bg-[#f7f1e5] border border-[#141210] border-t-4 p-5 lg:p-7" style={{ borderTopColor: a.color, animation: `twcc-epigraph .5s ease-out ${0.1 * i}s both` }}>
               <div className="flex items-center gap-2 mb-3">
                 <Icon className="w-4 h-4" style={{ color: a.color }} />
                 <h3 className="text-[13px] font-black font-mono uppercase tracking-wide text-[#141210]">{a.title}</h3>
               </div>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">{a.body}</p>
+              <p className="text-[12px] lg:text-[13.5px] font-mono text-[#141210] leading-relaxed lg:leading-[1.75]">{a.body}</p>
             </div>
           );
         })}
@@ -141,8 +143,8 @@ export default function ClimateFounder() {
 
       {/* The signature — her formal attribution, exactly as she writes it.
           The record has to be able to point back to the source. */}
-      <div className="mx-auto w-full max-w-[820px] px-5 pb-8">
-        <div className="bg-[#f7f1e5] border-2 border-[#141210] p-5" style={{ animation: 'twcc-epigraph .5s ease-out .5s both' }}>
+      <div className="mx-auto w-full max-w-[820px] lg:max-w-[900px] px-5 lg:px-0 pb-8 lg:pb-14">
+        <div className="bg-[#f7f1e5] border-2 border-[#141210] p-5 lg:p-7" style={{ animation: 'twcc-epigraph .5s ease-out .5s both' }}>
           <div className="flex items-center gap-2 mb-4">
             <Globe className="w-4 h-4 text-[#e2602a]" />
             <h3 className="text-[13px] font-black font-mono uppercase tracking-wide text-[#141210]">The Signature</h3>
@@ -193,18 +195,18 @@ export default function ClimateFounder() {
       </div>
 
       {/* Her vision — the mantra, cold ink */}
-      <div className="relative bg-[#141210] px-5 py-10 text-center overflow-hidden">
+      <div className="relative bg-[#141210] px-5 lg:px-10 py-10 lg:py-20 text-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10">
           <Heart className="w-6 h-6 text-[#e2602a] mx-auto mb-4" />
-          <p className="text-[14px] font-black font-mono uppercase leading-relaxed max-w-sm mx-auto text-[#efe7d6]">
+          <p className="text-[14px] lg:text-[19px] font-black font-mono uppercase leading-relaxed max-w-sm lg:max-w-2xl mx-auto text-[#efe7d6]">
             “Together we can change the course of climate change.”
           </p>
         </div>
       </div>
 
       {/* Signal band — return */}
-      <div className="bg-[#e2602a] px-5 py-5 text-center">
+      <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
         <Link to="/TogetherChangeClimate" className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#efe7d6] active:text-[#141210] transition-colors">
           Return to the record <ArrowRight className="w-4 h-4" />
         </Link>
