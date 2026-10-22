@@ -2,11 +2,13 @@ import React from 'react';
 import TransmissionConsole from './TransmissionConsole';
 
 // ── THE TRANSMISSION ──
-// No act is credited and no song is claimed — not until the tune is settled and
-// everyone involved has agreed their name goes on it. Until then the console runs
-// on its own generative signal. The artist name goes in here the day it's agreed.
-const TRANSMISSION_URL = ''; // ← the commissioned track goes here, once it's confirmed
-const TRACK_TITLE = 'Transmission';
+// Dillon Squire's track, given to the record and credited to him by name. Served
+// lossless: the master exactly as it left the studio, nothing thrown away between
+// the desk and the listener. The console only pulls the file when a person presses
+// play, so nothing is spent until someone chooses to listen. The music drives the
+// picture — the scope and the falling spectrogram move to his sound, not a synth.
+const TRANSMISSION_URL = 'https://media.base44.com/files/public/6889f31e76713b9cd47e043c/06f236f63_DS_XRAYGIRL_MSTGB2_44_16.wav';
+const TRACK_TITLE = 'X-Ray Girl';
 const DEDICATION = 'For the planet · for all of us';
 
 export default function Transmission() {
@@ -15,7 +17,7 @@ export default function Transmission() {
       {/* ── THE INSTRUMENT ── the art and the transport in one panel: press play, the picture stays ── */}
       <TransmissionConsole
         audioUrl={TRANSMISSION_URL}
-        artistName=""
+        artistName="Dillon Squire"
         trackTitle={TRACK_TITLE}
         dedication={DEDICATION}
       />
