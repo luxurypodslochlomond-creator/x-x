@@ -30,10 +30,10 @@ export default function Transmission() {
         <p className="text-[13px] leading-relaxed text-[#efe7d6]/80">
           The transmission is tuned to the Earth's resonance — 7.83 Hz, the cavity
           between the planet's surface and the ionosphere, measured since 1952.
-          The beat is the human heartbeat — 60 BPM. The groove doubles it — the pace
-          your body walks. Resonance is real physics — when a frequency matches a
-          system's natural frequency, the amplitude increases. That is not
-          mysticism. It is how resonance works.
+          Resonance is real physics: when a frequency matches a system's natural
+          frequency, the amplitude increases. That is not mysticism, it is how
+          resonance works. And what you hear is Dillon Squire's master, served
+          exactly as it left him — nothing compressed, nothing thrown away.
         </p>
       </div>
     </div>

@@ -213,7 +213,7 @@ function drawVU(ctx, c, S, freq) {
   ctx.fillText('L', 7, top - 6); ctx.fillText('R', c.w - 13, top - 6);
 }
 
-function drawHud(ctx, c, S) {
+function drawHud(ctx, c, S, live) {
   ctx.font = FONT; ctx.textBaseline = 'alphabetic';
   const on = c.E > 0.5;
   ctx.textAlign = 'left';
@@ -225,7 +225,9 @@ function drawHud(ctx, c, S) {
   ctx.fillStyle = on ? `rgba(${SIG},${0.65 + 0.35 * Math.sin(c.now * 0.008)})` : `rgba(${BONE},0.4)`;
   ctx.fillText(on ? '● TRANSMITTING' : '○ STANDBY', c.w - 26, 24);
   ctx.fillStyle = `rgba(${BONE},0.6)`;
-  ctx.fillText(`♥ ${BPM}`, c.w - 26, 36);
+  // A real master's tempo is its own — the 60 BPM heartbeat reads only when the
+  // signal is synthetic. With a track loaded the stamp carries its true spec instead.
+  ctx.fillText(live ? 'MASTER · 44.1/16' : `♥ ${BPM}`, c.w - 26, 36);
   ctx.fillText(`SIG -${(60 - S.smoothBass * 48).toFixed(0)} dB`, c.w - 26, c.h - 12);
   if (c.E < 0.6) {
     ctx.textAlign = 'center';
@@ -234,7 +236,7 @@ function drawHud(ctx, c, S) {
   }
 }
 
-export function drawStage(ctx, w, h, now, dt, S, freq, grid, playing) {
+export function drawStage(ctx, w, h, now, dt, S, freq, grid, playing, live) {
   S.energy += ((playing ? 1 : 0) - S.energy) * Math.min(1, dt * 0.0035);
   const E = S.energy;
   const bass = (freq[0] + freq[1] + freq[2] + freq[3]) / 1020;
@@ -268,5 +270,5 @@ export function drawStage(ctx, w, h, now, dt, S, freq, grid, playing) {
   drawSats(ctx, c, S);
   drawTears(ctx, c, S);
   drawVU(ctx, c, S, freq);
-  drawHud(ctx, c, S);
+  drawHud(ctx, c, S, live);
 }

@@ -39,7 +39,7 @@ export default function useTransmissionLoop({ stageRef, scopeRef, fallRef, flash
       const dt = Math.min(64, now - last); last = now; frame++;
       const api = apiRef.current;
       const { freq, wave } = api.read(now, S.energy);
-      drawStage(sctx, w, h, now, dt, S, freq, grid, api.isPlaying());
+      drawStage(sctx, w, h, now, dt, S, freq, grid, api.isPlaying(), api.isLive());
       drawScope(pctx, pw, ph, wave, S.energy);
       if (frame % 2 === 0) pushWaterfall(fctx, freq, fall.width, fall.height);
       if (flashRef.current) flashRef.current.style.opacity = String(S.flash * 0.2);

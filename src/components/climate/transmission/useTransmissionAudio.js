@@ -57,8 +57,17 @@ export default function useTransmissionAudio(audioUrl) {
     setMuted(audioElRef.current.muted);
   };
 
+  // Jump to a point in the master. The render loop reads currentTime every frame,
+  // so the rail follows the new position on its own.
+  const seek = (ratio) => {
+    const el = audioElRef.current;
+    if (!el || !el.duration || !isFinite(el.duration)) return;
+    el.currentTime = Math.max(0, Math.min(0.999, ratio)) * el.duration;
+  };
+
   apiRef.current = {
     isPlaying: () => playingRef.current,
+    isLive: () => hasAudio,
     read: (now, energy) => {
       if (hasAudio && playingRef.current && analyserRef.current) {
         analyserRef.current.getByteFrequencyData(freq.current);
@@ -85,5 +94,5 @@ export default function useTransmissionAudio(audioUrl) {
     try { ctxRef.current?.close(); } catch { /* already gone */ }
   }, []);
 
-  return { hasAudio, playing, muted, toggle, toggleMute, audioElRef, apiRef };
+  return { hasAudio, playing, muted, toggle, toggleMute, seek, audioElRef, apiRef };
 }
