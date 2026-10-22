@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import TransmissionConsole from './TransmissionConsole';
 import TransmissionRecord from './TransmissionRecord';
+import TransmissionFilm from './TransmissionFilm';
 
 // ── THE TRANSMISSION ──
 // Dillon Squire's track, given free to the record and credited to him by name.
@@ -25,6 +26,9 @@ export default function Transmission() {
         trackTitle={TRACK_TITLE}
         dedication={DEDICATION}
       />
+
+      {/* ── THE FILM ── Dillon's film from Stoneymollan, the ground this is all for ── */}
+      <TransmissionFilm />
 
       {/* ── THE GIFT ── said out loud, so nobody has to wonder what it costs ── */}
       <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 py-4 border-t-2 border-[#141210]">

@@ -1,33 +1,51 @@
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 
-// Janine's films open when tapped, never by themselves. A still frame costs almost
+// The record's films open when tapped, never by themselves. A still frame costs almost
 // nothing on a phone with expensive data; a film that starts on its own spends money
 // nobody agreed to spend and takes the choice away from the reader. So: a still,
-// a tap, then the film. Nothing from YouTube loads until the tap.
+// a tap, then the film. Nothing loads until the tap — neither a YouTube embed nor a
+// master video file.
 
 const youtubeId = (url = '') => {
   const match = String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([A-Za-z0-9_-]{11})/);
   return match ? match[1] : null;
 };
 
-export default function TapToPlayFilm({ url, title, credit }) {
+// A film given to the record as its own file — Dillon's Stoneymollan film — plays
+// natively: no third party in the middle, and the picture comes straight from us.
+const fileVideo = (url = '') => /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(String(url));
+
+export default function TapToPlayFilm({ url, title, credit, poster }) {
   const [playing, setPlaying] = useState(false);
   const id = youtubeId(url);
-  if (!id) return null;
+  const isFile = !id && fileVideo(url);
+  if (!id && !isFile) return null;
 
   return (
     <figure className="mt-4 border-2 border-[#141210] bg-[#141210]">
       {playing ? (
         <div className="relative w-full" style={{ aspectRatio: '16 / 9' }}>
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="absolute inset-0 w-full h-full"
-            style={{ border: 0 }}
-          />
+          {id ? (
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`}
+              title={title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+              style={{ border: 0 }}
+            />
+          ) : (
+            <video
+              src={url}
+              poster={poster}
+              title={title}
+              controls
+              autoPlay
+              playsInline
+              className="absolute inset-0 w-full h-full object-contain bg-black"
+            />
+          )}
         </div>
       ) : (
         <button
@@ -37,14 +55,16 @@ export default function TapToPlayFilm({ url, title, credit }) {
           className="relative block w-full text-left"
           style={{ aspectRatio: '16 / 9' }}
         >
-          <img
-            src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: 'grayscale(1) contrast(1.2)' }}
-          />
+          {id || poster ? (
+            <img
+              src={id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : poster}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: 'grayscale(1) contrast(1.2)' }}
+            />
+          ) : null}
           <span className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.1), rgba(20,18,16,0.74))' }} />
           <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-3">
             <span className="w-14 h-14 flex items-center justify-center rounded-full bg-[#e2602a] border-2 border-[#141210]">
