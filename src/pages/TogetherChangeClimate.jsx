@@ -332,13 +332,18 @@ export default function TogetherChangeClimate() {
     });
   }, [actions, query, selectedCategory]);
 
+  // A gathering only counts as a gathering when a person can actually be reached.
+  // Anything with no organiser's address is just a name on a page, so it stays off
+  // the record rather than sitting there half-empty. No invented contacts, ever.
+  const liveGroups = useMemo(() => groups.filter(g => g.contact_email), [groups]);
+
   const filteredGroups = useMemo(() => {
-    return groups.filter(g => {
+    return liveGroups.filter(g => {
       const q = (g.name + ' ' + (g.topic||'') + ' ' + (g.region||'') + ' ' + (g.description||'')).toLowerCase();
       const matchesQ = !query || q.includes(query.toLowerCase());
       return matchesQ;
     });
-  }, [groups, query]);
+  }, [liveGroups, query]);
 
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/40" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
@@ -490,12 +495,14 @@ export default function TogetherChangeClimate() {
               selectedType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.crises}</button>
+          {liveGroups.length > 0 && (
           <button
             onClick={() => setSelectedType(selectedType === 'groups' ? 'all' : 'groups')}
             className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
               selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
             }`}
           >{t.groups}</button>
+          )}
           <button
             onClick={() => setSelectedType(selectedType === 'actions' ? 'all' : 'actions')}
             className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
@@ -607,7 +614,7 @@ export default function TogetherChangeClimate() {
         )}
 
         {/* ── GROUPS — Janine's spec: people working on the same thing in an area can share ideas directly ── */}
-        {((selectedType === 'all' && filteredGroups.length > 0) || selectedType === 'groups') && (
+        {liveGroups.length > 0 && ((selectedType === 'all' && filteredGroups.length > 0) || selectedType === 'groups') && (
           <section className="px-4 py-5 border-b-2 border-[#141210]">
             <div className="flex items-center gap-2 mb-1">
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.groups}</h2>
@@ -637,12 +644,8 @@ export default function TogetherChangeClimate() {
                 ))}
               </div>
             ) : (
-              <div className="py-8 text-center bg-[#f7f1e5] border border-[#141210]/20">
-                <Users className="w-8 h-8 text-[#5a5246] mx-auto mb-2" />
-                <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">{t.groups_empty}</p>
-              </div>
+              <p className="text-[11px] font-mono text-[#5a5246] py-6 text-center">{t.empty}</p>
             )}
-            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-3">{t.groups_note}</p>
           </section>
         )}
 
