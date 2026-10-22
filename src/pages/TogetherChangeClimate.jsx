@@ -12,6 +12,7 @@ import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
+import DefinitionsBand from '@/components/climate/DefinitionsBand';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -128,7 +129,7 @@ const T = {
            to={`/ClimateDetail/${item.entry_type}/${item.id}`}
            className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${
              isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
-           } min-h-[110px] flex flex-col justify-between active:scale-95 transition-transform duration-100 p-2.5`}
+           } min-h-[110px] lg:min-h-[168px] flex flex-col justify-between active:scale-95 transition-transform duration-100 p-2.5`}
          >
            <div className="flex items-center justify-between">
              <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#e2602a]'}`}>
@@ -154,7 +155,7 @@ const T = {
          to={`/ClimateDetail/${item.entry_type}/${item.id}`}
          className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
            isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
-         } min-h-[110px] flex items-end active:scale-95 transition-transform duration-100`}
+         } min-h-[110px] lg:min-h-[168px] flex items-end active:scale-95 transition-transform duration-100`}
        >
          <img
            src={item.image_url}
@@ -393,7 +394,7 @@ export default function TogetherChangeClimate() {
       <ClimateImpactBar />
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
-      <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: '72vh' }}>
+      <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: 'clamp(460px, 62vh, 620px)' }}>
         <img
           src={IMAGES.global}
           alt=""
@@ -407,7 +408,7 @@ export default function TogetherChangeClimate() {
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
-        <div className="relative z-10 bg-[#efe7d6] px-5 py-3 flex items-center justify-between gap-3"
+        <div className="relative z-10 bg-[#efe7d6] px-5 lg:px-10 py-3 flex items-center justify-between gap-3"
           style={{ animation: 'twcc-enter .25s ease-out both' }}>
           <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
           <button
@@ -421,7 +422,7 @@ export default function TogetherChangeClimate() {
         </div>
 
         {/* Ink band */}
-        <div className="relative z-10 px-5 pt-10 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
+        <div className="relative z-10 px-5 lg:px-10 pt-10 lg:pt-16 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
           <h1 className="font-black uppercase leading-[0.94] max-w-[360px] lg:max-w-[640px] relative z-10 text-[#efe7d6]"
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(38px, 11vw, 72px)', letterSpacing: '-0.035em' }}>
             {t.title_a}<br />
@@ -440,7 +441,7 @@ export default function TogetherChangeClimate() {
         </div>
 
         {/* Signal band */}
-        <div className="relative z-10 bg-[#e2602a] px-5 py-5 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
+        <div className="relative z-10 bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
           <p className="text-[12px] font-bold uppercase leading-relaxed max-w-[330px] lg:max-w-[640px] text-[#141210] tracking-wide">{t.sub}</p>
           {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
           <p className="text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-[#141210] tracking-[0.09em]" style={{ opacity: 0.8 }}>
@@ -452,13 +453,13 @@ export default function TogetherChangeClimate() {
       {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
              The space is held while the record loads, so nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
-        <div className="px-4 py-5 bg-[#efe7d6] border-b-2 border-[#141210]">
+        <div className="px-4 lg:px-10 py-5 lg:py-8 bg-[#efe7d6] border-b-2 border-[#141210]">
           <div className="flex items-center gap-2 mb-3">
-            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.featured}</h2>
+            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.featured}</h2>
             <div className="flex-1 h-px bg-[#141210]/20" />
             <span className="text-[10px] font-black font-mono text-[#e2602a]">{featured.length}</span>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
             {loading
               ? [0, 1, 2, 3].map(i => <div key={i} className="min-h-[124px] bg-[#141210]/10 border border-[#141210]/15 animate-pulse" />)
               : featured.map((item) => <SolutionCard key={item.id} item={item} />)}
@@ -467,7 +468,7 @@ export default function TogetherChangeClimate() {
       )}
 
       {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
-      <div className="px-4 py-2 bg-[#141210] flex items-center justify-between gap-3">
+      <div className="px-4 lg:px-10 py-2 bg-[#141210] flex items-center justify-between gap-3">
         <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
           {t.live}
@@ -477,68 +478,77 @@ export default function TogetherChangeClimate() {
         </span>
       </div>
 
-      {/* ── TOOLBAR — filters + search ── */}
-      <div className="px-4 py-4 bg-[#efe7d6] border-b-2 border-[#141210]">
-        <div className="flex gap-2 mb-3">
-          <button
-            onClick={() => setSelectedType(selectedType === 'solution' ? 'all' : 'solution')}
-            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-              selectedType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
-            }`}
-          >{t.solutions}</button>
-          <button
-            onClick={() => setSelectedType(selectedType === 'climate_crisis' ? 'all' : 'climate_crisis')}
-            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-              selectedType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
-            }`}
-          >{t.crises}</button>
-          {liveGroups.length > 0 && (
-          <button
-            onClick={() => setSelectedType(selectedType === 'groups' ? 'all' : 'groups')}
-            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-              selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
-            }`}
-          >{t.groups}</button>
-          )}
-          <button
-            onClick={() => setSelectedType(selectedType === 'actions' ? 'all' : 'actions')}
-            className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-              selectedType === 'actions' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
-            }`}
-          >{t.actions}</button>
+      {/* ── TOOLBAR — filters and search on one side, the record's own doors on the
+             other. On a desktop that reads as a working toolbar; on a phone it still
+             stacks exactly as it did. ── */}
+      <div className="px-4 lg:px-10 py-4 lg:py-6 bg-[#efe7d6] border-b-2 border-[#141210]">
+        <div className="lg:flex lg:items-start lg:gap-8">
+          <div className="lg:flex-1 lg:min-w-0">
+            <div className="flex gap-2 mb-3 lg:max-w-[540px]">
+              <button
+                onClick={() => setSelectedType(selectedType === 'solution' ? 'all' : 'solution')}
+                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
+                  selectedType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
+                }`}
+              >{t.solutions}</button>
+              <button
+                onClick={() => setSelectedType(selectedType === 'climate_crisis' ? 'all' : 'climate_crisis')}
+                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
+                  selectedType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
+                }`}
+              >{t.crises}</button>
+              {liveGroups.length > 0 && (
+              <button
+                onClick={() => setSelectedType(selectedType === 'groups' ? 'all' : 'groups')}
+                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
+                  selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
+                }`}
+              >{t.groups}</button>
+              )}
+              <button
+                onClick={() => setSelectedType(selectedType === 'actions' ? 'all' : 'actions')}
+                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
+                  selectedType === 'actions' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
+                }`}
+              >{t.actions}</button>
+            </div>
+            <div className="relative lg:max-w-[540px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
+              <input
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder={t.search}
+                className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[13px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
+              />
+            </div>
+            <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
+          </div>
+
+          <div className="lg:w-[320px] lg:flex-shrink-0">
+            <button
+              onClick={() => setShowSubmit(true)}
+              className="mt-3 lg:mt-0 w-full flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Submit a solution, crisis, or action
+            </button>
+            <Link
+              to={createPageUrl("ClimateMap")}
+              className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
+            >
+              <MapPin className="w-4 h-4" /> Transmission Map
+            </Link>
+            <Link
+              to={createPageUrl("ClimateImpact")}
+              className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#1e3a2b] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
+            >
+              <Globe className="w-4 h-4" /> Global Impact
+            </Link>
+          </div>
         </div>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
-          <input
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            placeholder={t.search}
-            className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[13px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
-          />
-        </div>
-        <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
-        <button
-          onClick={() => setShowSubmit(true)}
-          className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
-        >
-          <Plus className="w-4 h-4" /> Submit a solution, crisis, or action
-        </button>
-        <Link
-          to={createPageUrl("ClimateMap")}
-          className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
-        >
-          <MapPin className="w-4 h-4" /> Transmission Map
-        </Link>
-        <Link
-          to={createPageUrl("ClimateImpact")}
-          className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#1e3a2b] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
-        >
-          <Globe className="w-4 h-4" /> Global Impact
-        </Link>
       </div>
 
       {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}
-      <div className="px-4 py-3 bg-[#efe7d6] border-b-2 border-[#141210]">
+      <div className="px-4 lg:px-10 py-3 lg:py-4 bg-[#efe7d6] border-b-2 border-[#141210]">
         <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x lg:flex-wrap lg:overflow-x-visible lg:mx-0 lg:px-0" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }} aria-label="Filter by category">
           <button
             onClick={() => setSelectedCategory('all')}
@@ -570,13 +580,13 @@ export default function TogetherChangeClimate() {
         ) : (
           <>
             {showEntries && solutions.length > 0 && (
-              <section className="px-4 py-5 border-b-2 border-[#141210]">
+              <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
                 <div className="flex items-center gap-2 mb-3">
-                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.solutions}</h2>
+                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.solutions}</h2>
                   <div className="flex-1 h-px bg-[#141210]/20" />
                   <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{solutions.length}</span>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
                   {solutions.map((item, i) => (
                     <div key={item.id}>
                       <SolutionCard item={item} />
@@ -586,13 +596,13 @@ export default function TogetherChangeClimate() {
               </section>
             )}
             {showEntries && crises.length > 0 && (
-              <section className="px-4 py-5 border-b-2 border-[#141210]">
+              <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
                 <div className="flex items-center gap-2 mb-3">
-                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.crises}</h2>
+                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.crises}</h2>
                   <div className="flex-1 h-px bg-[#141210]/20" />
                   <span className="text-[10px] font-black font-mono text-[#e2602a]">{crises.length}</span>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
                   {crises.map((item, i) => (
                     <div key={item.id}>
                       <SolutionCard item={item} />
@@ -612,9 +622,9 @@ export default function TogetherChangeClimate() {
 
         {/* ── GROUPS — Janine's spec: people working on the same thing in an area can share ideas directly ── */}
         {liveGroups.length > 0 && ((selectedType === 'all' && filteredGroups.length > 0) || selectedType === 'groups') && (
-          <section className="px-4 py-5 border-b-2 border-[#141210]">
+          <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.groups}</h2>
+              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.groups}</h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{filteredGroups.length}</span>
             </div>
@@ -648,9 +658,9 @@ export default function TogetherChangeClimate() {
 
         {/* ── ACTIONS — Janine's spec: cleanups, plantings, meetings, policy submissions. x = x — equal alongside Solutions and Crises ── */}
         {(selectedType === 'all' || selectedType === 'actions') && (
-          <section className="px-4 py-5 border-b-2 border-[#141210]">
+          <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.actions}</h2>
+              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.actions}</h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#e2602a]">{filteredActions.length}</span>
             </div>
@@ -670,57 +680,9 @@ export default function TogetherChangeClimate() {
         {/* ── SMALLEST GESTURES — Janine's list: what any of us can copy this afternoon ── */}
         <SmallGesturesBand />
 
-        {/* ── DEFINITIONS ── */}
-        <section className="px-4 py-5 border-b-2 border-[#141210]">
-          <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.defs}</h2>
-          <div className="space-y-2.5 md:grid md:grid-cols-3 md:gap-3 md:space-y-0">
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Geodesign</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">A set of concepts and methods used to involve all stakeholders in collaboratively designing optimal solutions for spatial challenges in the built and natural environments.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: Steinitz, A Framework for Geodesign (2012)</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Rewilding</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">A large-scale conservation approach focused on restoring damaged ecosystems so nature can take care of itself.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: Soulé &amp; Noss, Rewilding and Biodiversity (1998)</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Heat</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">In England, the Unite union has been warning about heat exhaustion, heatstroke, and dehydration since phases of intense heat began in May. Heat is a growing climate crisis for workers and communities worldwide.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: Guardian, 081626</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Climate Adaptation</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">The process of adjustment to actual or expected climate and its effects, to moderate harm or exploit beneficial opportunities.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Climate Mitigation</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">A human intervention to reduce the sources of greenhouse gases or enhance the sinks that remove them from the atmosphere.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: IPCC, AR6 (2022)</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Blue Carbon</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">Carbon captured by coastal and marine ecosystems, including mangroves, seagrasses, salt marshes, and kelp forests.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: NOAA</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Biodiversity</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">The variability among living organisms from all sources, including terrestrial, marine, and other aquatic ecosystems, and the ecological complexes of which they are part.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: UN Convention on Biological Diversity (1992)</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Desertification</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">Land degradation in arid, semi-arid, and dry sub-humid areas resulting from various factors, including climatic variations and human activities.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: UN Convention to Combat Desertification</p>
-            </div>
-            <div className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-4">
-              <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] mb-1">Food Security</h4>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">When all people, at all times, have physical and economic access to sufficient, safe, and nutritious food that meets their dietary needs for an active and healthy life.</p>
-              <p className="text-[10px] font-mono text-[#5a5246] mt-2">Source: FAO, World Food Summit (1996)</p>
-            </div>
-          </div>
-        </section>
+        {/* ── DEFINITIONS ── each term in the words of the body that defined it,
+               and the way through to that body so it can be checked. ── */}
+        <DefinitionsBand heading={t.defs} />
 
         {/* ── TRANSMISSION ── lower down, and found rather than announced: a reader who
                has read the whole record meets the music at the end of it. It was sitting
@@ -728,8 +690,8 @@ export default function TogetherChangeClimate() {
         <Transmission />
 
         {/* ── GOVERNANCE ── */}
-        <section className="px-4 py-5 bg-[#1e3a2b] text-[#efe7d6]">
-          <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>{t.govern}</h2>
+        <section className="px-4 lg:px-10 py-5 lg:py-8 bg-[#1e3a2b] text-[#efe7d6]">
+          <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.govern}</h2>
           <p className="text-[12px] font-mono leading-relaxed text-[#efe7d6] max-w-full lg:max-w-[680px]">{t.govern_body}</p>
           <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-2 mt-4 px-3 py-2 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors">
             {t.covenant} <ArrowRight className="w-3.5 h-3.5" />

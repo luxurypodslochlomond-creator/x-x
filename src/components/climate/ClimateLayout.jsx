@@ -104,13 +104,32 @@ export default function ClimateLayout({ children, currentPage }) {
     <SiteTranslator />
     <div className="climate-record min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <header className="sticky top-0 z-50 bg-[#141210] border-b-2 border-[#e2602a]">
-        <div className="hidden sm:block max-w-[1100px] mx-auto px-4 py-2.5">
-          <nav className="flex items-center gap-4" aria-label="Platform">
+        {/* Desktop — the record's masthead on the left, the way through the record on the
+            right. The item you are reading is marked with a rule, not only a colour, so it
+            still reads on a bad screen or a projector in a panel room. */}
+        <div className="hidden sm:flex max-w-[1100px] mx-auto px-4 lg:px-10 py-3 items-center justify-between gap-8">
+          <Link
+            to={createPageUrl('TogetherChangeClimate')}
+            className="flex items-center gap-2.5 flex-shrink-0 group"
+            aria-label="Record of the Time — the record's front page"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+            <span className="text-[#efe7d6] font-black font-mono text-[11px] uppercase tracking-[0.2em] leading-none group-hover:text-[#e2602a] transition-colors">
+              Record of the Time
+            </span>
+          </Link>
+
+          <nav className="flex items-center gap-5 lg:gap-6" aria-label="The record">
             {NAV.map(item => (
               <Link
                 key={item.page}
                 to={createPageUrl(item.page)}
-                className={`text-[11px] font-black uppercase tracking-wider transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60 hover:text-[#efe7d6]'}`}
+                aria-current={isActive(item.page) ? 'page' : undefined}
+                className={`pb-1 text-[11px] font-black uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${
+                  isActive(item.page)
+                    ? 'text-[#e2602a] border-[#e2602a]'
+                    : 'text-[#efe7d6]/75 border-transparent hover:text-[#efe7d6] hover:border-[#efe7d6]/40'
+                }`}
               >
                 {item.label}
               </Link>
