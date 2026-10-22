@@ -380,6 +380,11 @@ export default function TogetherChangeClimate() {
         </Link>
       </div>
 
+      {/* ── THE TOP CRAWL — Janine's credited photographs, straight under the covenant.
+             Her ask: the pictures belong near the top, so they are what catches the eye
+             before anything else is read. ── */}
+      <ClimateImageCrawl />
+
       <ClimateImpactBar />
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
@@ -438,9 +443,6 @@ export default function TogetherChangeClimate() {
           </p>
         </div>
       </div>
-
-      {/* ── THE TOP CRAWL — Janine's photographs, fully credited, drifting slowly past the record. ── */}
-      <ClimateImageCrawl />
 
       {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
              The space is held while the record loads, so nothing jumps on arrival. ── */}

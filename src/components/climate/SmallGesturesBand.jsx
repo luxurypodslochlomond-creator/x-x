@@ -3,8 +3,10 @@ import React from 'react';
 // Janine's list of the smallest gestures. Not advice, not a campaign — the things a
 // person can start today with nothing bought and nothing asked of anyone. x = x.
 
+// Mangrove planting was on this list. Janine asked for it to stand on its own — it is a
+// major item on the record, not a small gesture. It now lives under the Mangroves
+// category and its own entries, the Bonaire film among them.
 const GESTURES = [
-  'Mangrove planting',
   'Adding a sweater',
   'Buying less',
   'Walking',
