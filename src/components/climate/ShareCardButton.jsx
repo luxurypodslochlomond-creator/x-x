@@ -28,26 +28,40 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       const blob = await build(entry, { origin: window.location.origin });
       if (!blob) throw new Error('The card could not be drawn.');
       const file = new File([blob], `record-of-the-time-${entry.id}.png`, { type: 'image/png' });
+      const title = entry.headline || entry.title || 'Record of the time';
+      const line = `${title} — ${window.location.href}`;
 
+      // 1. The picture, when this device will carry a file into its share sheet.
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
-          await navigator.share({
-            files: [file],
-            title: entry.headline,
-            text: `${entry.headline} — ${window.location.href}`,
-          });
+          await navigator.share({ files: [file], title, text: line });
           setState('shared');
+          setTimeout(() => setState('idle'), 3500);
+          return;
         } catch (err) {
-          // Dismissing the share sheet is not a failure. A device that will not take
-          // the picture straight from here still gets the card, saved, with the link.
+          // Dismissing the sheet is not a failure — it is a change of mind.
           if (err?.name === 'AbortError') { setState('idle'); return; }
-          await saveCard(file);
-          setState('saved');
         }
-      } else {
-        await saveCard(file);
-        setState('saved');
       }
+
+      // 2. The link on its own. A browser inside another app (WhatsApp, Instagram) will
+      // not take a file through the sheet, but it does open the sheet — and that is where
+      // the email and WhatsApp options are. Never let a reader end up with a download
+      // when a sheet was there to be had.
+      if (navigator.share) {
+        try {
+          await navigator.share({ title, text: line });
+          setState('shared');
+          setTimeout(() => setState('idle'), 3500);
+          return;
+        } catch (err) {
+          if (err?.name === 'AbortError') { setState('idle'); return; }
+        }
+      }
+
+      // 3. No sheet anywhere: the card is saved to the device and the link copied.
+      await saveCard(file);
+      setState('saved');
       setTimeout(() => setState('idle'), 3500);
     } catch (err) {
       setState('idle');
