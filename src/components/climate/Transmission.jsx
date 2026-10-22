@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import TransmissionConsole from './TransmissionConsole';
+import TransmissionRecord from './TransmissionRecord';
 
 // ── THE TRANSMISSION ──
 // Dillon Squire's track, given free to the record and credited to him by name.
@@ -57,6 +58,9 @@ export default function Transmission() {
           and you hear the record he actually made.
         </p>
       </div>
+
+      {/* ── ON THE RECORD ── provenance and a citation, so the work can be checked and quoted ── */}
+      <TransmissionRecord />
 
       {/* ── KEPT BY PEOPLE ── the honest moment to ask is the moment someone has just listened ── */}
       <div className="bg-[#efe7d6] px-5 py-4 border-t-2 border-[#141210] flex items-center gap-3">
