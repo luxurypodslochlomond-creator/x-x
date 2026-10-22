@@ -34,7 +34,7 @@ export default function TransmissionTransport({
   const status = hasAudio ? artistName : playing ? 'Generative signal · live' : 'Tap the planet · feel the signal';
 
   return (
-    <div className="px-4 pt-4 pb-4">
+    <div className="px-4 lg:px-10 pt-4 pb-4">
       {/* ── MASTHEAD ── */}
       <div className="flex items-center gap-2 mb-3.5" style={{ animation: 'tx-flick 7s linear infinite' }}>
         <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />

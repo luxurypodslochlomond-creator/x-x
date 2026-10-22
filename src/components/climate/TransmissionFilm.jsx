@@ -18,7 +18,7 @@ const FILM_CREDIT =
 
 export default function TransmissionFilm() {
   return (
-    <div className="bg-[#efe7d6] px-5 py-5 border-t-2 border-[#141210]">
+    <div className="bg-[#efe7d6] px-5 lg:px-10 py-5 lg:py-6 border-t-2 border-[#141210]">
       <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#0f5f7a] mb-1.5">
         The film
       </p>

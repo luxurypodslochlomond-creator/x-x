@@ -49,7 +49,7 @@ export default function Transmission() {
       <TransmissionFilm />
 
       {/* ── THE GIFT ── said out loud, so nobody has to wonder what it costs ── */}
-      <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 py-4 border-t-2 border-[#141210] flex items-start gap-3">
+      <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210] flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">Given, not sold</p>
           <p className="text-[13px] leading-relaxed text-[#efe7d6]/90">
@@ -61,7 +61,7 @@ export default function Transmission() {
       </div>
 
       {/* ── HONEST CAPTION ── passes the panel, feels the truth ── */}
-      <div className="bg-[#141210] text-[#efe7d6] px-5 py-4 border-t border-[#efe7d6]/10">
+      <div className="bg-[#141210] text-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t border-[#efe7d6]/10">
         <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-2">
           The signal
         </p>
@@ -88,7 +88,7 @@ export default function Transmission() {
       <TransmissionRecord />
 
       {/* ── KEPT BY PEOPLE ── the honest moment to ask is the moment someone has just listened ── */}
-      <div className="bg-[#efe7d6] px-5 py-4 border-t-2 border-[#141210] flex items-center gap-3">
+      <div className="bg-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210] flex items-center gap-3">
         <div className="flex-1 min-w-0">
           <p className="text-[11px] font-black font-mono uppercase tracking-wide text-[#141210]">Free to read. Free to listen. Nothing for sale.</p>
           <p className="text-[11px] font-mono text-[#5a5246] mt-1 leading-relaxed">The record is kept online by the people who read it — not by ads, and never by selling the music.</p>

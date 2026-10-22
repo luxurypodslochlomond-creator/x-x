@@ -124,7 +124,7 @@ export default function ClimateDetail() {
     return (
       <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
         {/* Sticky header — native back, action-type colour band */}
-        <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 border-b-2 border-[#141210]" style={{ background: meta.color }}>
+        <div className="sticky top-0 z-50 flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-[#141210]" style={{ background: meta.color }}>
           <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -134,8 +134,8 @@ export default function ClimateDetail() {
           </div>
         </div>
 
-        <div className="p-5">
-          <h1 className="text-2xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em', color: '#141210' }}>
+        <div className="p-5 lg:px-10 lg:py-8 lg:max-w-[820px] lg:mx-auto">
+          <h1 className="text-2xl lg:text-4xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em', color: '#141210' }}>
             {tr.field('title')}
           </h1>
 
@@ -167,7 +167,7 @@ export default function ClimateDetail() {
               {tr.showOriginal ? 'Show translation' : 'View original (English)'}
             </button>
           )}
-          <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{tr.field('description')}</p>
+          <p className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('description')}</p>
 
           {record.source_url && (
             <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
@@ -176,7 +176,7 @@ export default function ClimateDetail() {
           )}
 
           {record.contact_link && (
-            <a href={record.contact_link} target="_blank" rel="noopener noreferrer" className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#e2602a] text-[#141210] text-[13px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
+            <a href={record.contact_link} target="_blank" rel="noopener noreferrer" className="mt-6 w-full lg:max-w-[420px] flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#e2602a] text-[#141210] text-[13px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
               Join in — contact organiser <ArrowRight className="w-4 h-4" />
             </a>
           )}
@@ -205,20 +205,20 @@ export default function ClimateDetail() {
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Hero — photo when available, paper-and-beacon when not (matches the text-card) */}
       {record.image_url ? (
-        <div className="relative h-64 bg-[#141210]">
+        <div className="relative h-64 lg:h-[420px] bg-[#141210]">
           <img src={record.image_url} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #e9eeec 100%)' }} />
           <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <div className="absolute bottom-4 left-5 right-5">
+          <div className="absolute bottom-4 lg:bottom-6 left-5 lg:left-10 right-5 lg:right-10">
             <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'}`}>
               {isSolution ? 'Solution' : 'Climate Crisis'}
             </span>
           </div>
         </div>
       ) : (
-        <div className="relative min-h-[180px] bg-[#f7f1e5] border-b-2 border-[#141210] flex flex-col items-center justify-center gap-3 px-5 py-8">
+        <div className="relative min-h-[180px] lg:min-h-[300px] bg-[#f7f1e5] border-b-2 border-[#141210] flex flex-col items-center justify-center gap-3 px-5 lg:px-10 py-8">
           <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -229,11 +229,11 @@ export default function ClimateDetail() {
         </div>
       )}
 
-      <div className="p-5">
+      <div className="p-5 lg:px-10 lg:py-10 lg:max-w-[820px] lg:mx-auto">
         <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
           <SignalCode code={catCode} size="md" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
-        <h1 className="text-2xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+        <h1 className="text-2xl lg:text-4xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
           {tr.field('title')}
         </h1>
         <div className="flex items-center gap-2 text-[11px] font-mono text-[#5a5246] mt-3">
@@ -248,7 +248,7 @@ export default function ClimateDetail() {
             {tr.showOriginal ? 'Show translation' : 'View original (English)'}
           </button>
         )}
-        <p className="text-[14px] font-mono text-[#141210] leading-relaxed mt-5">{tr.field('details') || tr.field('summary')}</p>
+        <p className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('details') || tr.field('summary')}</p>
         <div className="mt-5 flex flex-wrap gap-2 text-[10px] font-mono font-bold uppercase">
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {record.scale || '—'}</span>
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Reviewed: ✓</span>

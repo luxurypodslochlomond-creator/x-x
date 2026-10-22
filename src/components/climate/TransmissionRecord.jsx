@@ -36,7 +36,7 @@ export default function TransmissionRecord() {
   };
 
   return (
-    <div className="bg-[#efe7d6] px-5 py-4 border-t-2 border-[#141210]">
+    <div className="bg-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210]">
       <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#b3261e] mb-2.5">
         On the record
       </p>

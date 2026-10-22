@@ -53,8 +53,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
         aria-label={playing ? 'Pause transmission' : 'Start transmission'}
         onClick={toggle}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } }}
-        className="relative w-full overflow-hidden bg-[#141210] cursor-pointer select-none touch-manipulation"
-        style={{ height: 'min(94vw, 430px)' }}
+        className="relative w-full overflow-hidden bg-[#141210] cursor-pointer select-none touch-manipulation h-[min(94vw,430px)] lg:h-[520px]"
       >
         <canvas ref={stageRef} className="absolute inset-0 w-full h-full" />
         <div ref={flashRef} className="absolute inset-0 pointer-events-none bg-[#e2602a]" style={{ opacity: 0 }} />
@@ -74,7 +73,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
         </div>
       </div>
 
-      <p className="px-5 pt-3.5 pb-5 text-[10px] font-mono text-[#efe7d6]/40 leading-relaxed italic">{dedication}</p>
+      <p className="px-5 lg:px-10 pt-3.5 pb-5 text-[10px] font-mono text-[#efe7d6]/40 leading-relaxed italic">{dedication}</p>
     </section>
   );
 }

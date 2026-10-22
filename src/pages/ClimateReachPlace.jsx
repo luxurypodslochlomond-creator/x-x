@@ -63,7 +63,7 @@ export default function ClimateReachPlace() {
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Header */}
-      <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
+      <div className="sticky top-0 z-50 flex items-center gap-3 px-4 lg:px-10 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
         <button
           onClick={() => navigate(-1)}
           className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
@@ -81,7 +81,7 @@ export default function ClimateReachPlace() {
       </div>
 
       {/* Big number */}
-      <div className="px-5 py-8 bg-[#141210]">
+      <div className="px-5 lg:px-10 py-8 lg:py-12 bg-[#141210]">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#e2602a] text-center mb-5">
           Together we can change the course of climate change
         </p>
@@ -105,7 +105,7 @@ export default function ClimateReachPlace() {
       </div>
 
       {/* Honest framing */}
-      <div className="px-5 py-4 bg-[#f7f1e5] border-b border-[#141210]/10">
+      <div className="px-5 lg:px-10 py-4 lg:py-6 bg-[#f7f1e5] border-b border-[#141210]/10">
         <div className="flex items-start gap-2.5">
           <Heart className="w-4 h-4 text-[#b3261e] flex-shrink-0 mt-0.5" />
           <p className="text-[10px] text-[#5a5246] leading-relaxed">
@@ -116,7 +116,7 @@ export default function ClimateReachPlace() {
 
       {/* Stories list */}
       {stories.length > 0 ? (
-        <div className="px-5 py-6">
+        <div className="px-5 lg:px-10 py-6 lg:py-10 lg:max-w-[820px] lg:mx-auto">
           <div className="border-t border-[#141210]/15">
             {stories.map((s, i) => (
               <motion.div
@@ -154,7 +154,7 @@ export default function ClimateReachPlace() {
           </div>
         </div>
       ) : (
-        <div className="px-5 py-16 text-center">
+        <div className="px-5 lg:px-10 py-16 text-center">
           <Eye className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">
             No stories have reached {displayName} yet. When someone here reads the record, the stories they read will appear on this page.
@@ -166,7 +166,7 @@ export default function ClimateReachPlace() {
       )}
 
       {/* Footer */}
-      <div className="px-5 py-6 border-t-2 border-[#141210]/10">
+      <div className="px-5 lg:px-10 py-6 lg:py-8 border-t-2 border-[#141210]/10">
         <p className="text-[9px] font-mono text-[#5a5246] text-center leading-relaxed">
           No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry — the signal, not the surveiller. x = x.
         </p>
