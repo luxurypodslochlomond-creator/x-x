@@ -4,7 +4,8 @@ import { X, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 // ── THE QUANTUM EQUALISER ──
 // Deep house beyond quantum graphic equaliser.
 // Real FFT when audio exists · generative 122 BPM deep house when it doesn't.
-// Beadie Signal palette: ink #141210 · bone #efe7d6 · signal #e2602a · green #1e3a2b
+// Beadie Signal palette, in the ocean key: ink #141210 · paper #e9eeec · signal #7fc9e4 · green #1e3a2b
+// (the record's own colours, retinted once in src/climate-palette.css at Janine's asking)
 
 const BPM = 122;
 const BEAT_MS = 60000 / BPM;
@@ -128,12 +129,12 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       ctx.fillRect(0, 0, w, h);
 
       // 2. Scanlines
-      ctx.fillStyle = 'rgba(239,231,214,0.025)';
+      ctx.fillStyle = 'rgba(233,238,236,0.025)';
       for (let y = 0; y < h; y += 3) ctx.fillRect(0, y, w, 1);
 
       // 3. Radial grid
       const maxR = Math.max(60, minDim / 2 - 50);
-      ctx.strokeStyle = 'rgba(239,231,214,0.04)';
+      ctx.strokeStyle = 'rgba(233,238,236,0.04)';
       ctx.lineWidth = 1;
       for (let r = 50; r < maxR; r += 35) {
         ctx.beginPath();
@@ -159,8 +160,8 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
 
         let color;
         if (i < 12) color = '#1e3a2b';
-        else if (i < 36) color = '#e2602a';
-        else color = '#efe7d6';
+        else if (i < 36) color = '#7fc9e4';
+        else color = '#e9eeec';
 
         ctx.strokeStyle = color;
         ctx.lineWidth = 2.5;
@@ -183,7 +184,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       ctx.globalAlpha = 1;
 
       // 4b. Quantum threads — connect tips of high-energy adjacent bars
-      ctx.strokeStyle = 'rgba(226,96,42,0.12)';
+      ctx.strokeStyle = 'rgba(127,201,228,0.12)';
       ctx.lineWidth = 0.5;
       for (let i = 0; i < tips.length; i++) {
         const a = tips[i];
@@ -197,7 +198,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       }
 
       // 5. Waveform ring (circular oscilloscope)
-      ctx.strokeStyle = '#e2602a';
+      ctx.strokeStyle = '#7fc9e4';
       ctx.lineWidth = 1.5;
       ctx.globalAlpha = 0.7;
       ctx.beginPath();
@@ -218,16 +219,16 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       const bass = (freq[0] + freq[1] + freq[2] + freq[3]) / 4 / 255;
       const heartR = Math.max(8, 18 + bass * 35);
       const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, heartR);
-      grad.addColorStop(0, 'rgba(226,96,42,0.85)');
-      grad.addColorStop(0.4, 'rgba(226,96,42,0.25)');
-      grad.addColorStop(1, 'rgba(226,96,42,0)');
+      grad.addColorStop(0, 'rgba(127,201,228,0.85)');
+      grad.addColorStop(0.4, 'rgba(127,201,228,0.25)');
+      grad.addColorStop(1, 'rgba(127,201,228,0)');
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(cx, cy, heartR, 0, Math.PI * 2);
       ctx.fill();
 
       // 7. Inner core
-      ctx.fillStyle = '#efe7d6';
+      ctx.fillStyle = '#e9eeec';
       ctx.beginPath();
       ctx.arc(cx, cy, Math.max(2, 3 + bass * 5), 0, Math.PI * 2);
       ctx.fill();
@@ -247,7 +248,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       ctx.globalAlpha = 1;
 
       // 9. Frequency labels
-      ctx.fillStyle = 'rgba(239,231,214,0.25)';
+      ctx.fillStyle = 'rgba(233,238,236,0.25)';
       ctx.font = '8px ui-monospace, SFMono-Regular, monospace';
       ctx.textAlign = 'center';
       const labels = ['20Hz', '100Hz', '500Hz', '2kHz', '8kHz', '20kHz'];
@@ -270,16 +271,16 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
           const v = frame[f * 2] / 255;
           if (v < 0.05) continue;
           const y = wfY + wfH - (f / 64) * wfH;
-          if (v > 0.6) ctx.fillStyle = `rgba(226,96,42,${v})`;
+          if (v > 0.6) ctx.fillStyle = `rgba(127,201,228,${v})`;
           else if (v > 0.3) ctx.fillStyle = `rgba(30,58,43,${v})`;
-          else ctx.fillStyle = `rgba(239,231,214,${v * 0.4})`;
+          else ctx.fillStyle = `rgba(233,238,236,${v * 0.4})`;
           ctx.fillRect(xPos, y, colW + 1, 2);
         }
       }
 
       // 11. Beat indicator
       const beatNum = Math.floor((t / BEAT_MS) % 4) + 1;
-      ctx.fillStyle = 'rgba(239,231,214,0.3)';
+      ctx.fillStyle = 'rgba(233,238,236,0.3)';
       ctx.font = 'bold 9px ui-monospace, monospace';
       ctx.textAlign = 'left';
       ctx.fillText(`\u25C6 ${beatNum}/4 \u00B7 ${BPM} BPM`, 16, 24);

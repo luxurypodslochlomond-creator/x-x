@@ -36,11 +36,11 @@ const CATEGORIES = [
 const ACTION_TYPES = {
   cleanup: { label: 'Cleanup', icon: Recycle, color: '#1e3a2b' },
   planting: { label: 'Planting', icon: Sprout, color: '#1e3a2b' },
-  meeting: { label: 'Meeting', icon: Users, color: '#e2602a' },
-  policy_submission: { label: 'Policy Submission', icon: FileText, color: '#e2602a' },
-  workshop: { label: 'Workshop', icon: Hammer, color: '#e2602a' },
+  meeting: { label: 'Meeting', icon: Users, color: '#0f5f7a' },
+  policy_submission: { label: 'Policy Submission', icon: FileText, color: '#0f5f7a' },
+  workshop: { label: 'Workshop', icon: Hammer, color: '#0f5f7a' },
   monitoring: { label: 'Monitoring', icon: Eye, color: '#1e3a2b' },
-  other: { label: 'Action', icon: Hand, color: '#5a5246' },
+  other: { label: 'Action', icon: Hand, color: '#5b6b69' },
 };
 
 import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
@@ -207,7 +207,7 @@ export default function ClimateDetail() {
       {record.image_url ? (
         <div className="relative h-64 bg-[#141210]">
           <img src={record.image_url} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #e9eeec 100%)' }} />
           <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -222,7 +222,7 @@ export default function ClimateDetail() {
           <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#e2602a'} />
+          <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#0f5f7a'} />
           <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'}`}>
             {isSolution ? 'Solution' : 'Climate Crisis'}
           </span>

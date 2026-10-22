@@ -14,12 +14,12 @@ const FILM_TITLE = 'Stoneymollan — the transmission film';
 const FILM_POSTER =
   'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/52c6264c9_IMG_2858.jpeg';
 const FILM_CREDIT =
-  'Filmed at Stoneymollan, Loch Lomond, Scotland · 14 October 2026 · Film: Dillon Squire · Rough cut, still being finished';
+  'Filmed at Stoneymollan, Loch Lomond, Scotland · 14 October 2026 · Film and sound: Dillon Squire · Music: "X-Ray Girl" · Rough cut, still being finished';
 
 export default function TransmissionFilm() {
   return (
     <div className="bg-[#efe7d6] px-5 py-5 border-t-2 border-[#141210]">
-      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#b3261e] mb-1.5">
+      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#0f5f7a] mb-1.5">
         The film
       </p>
       <p className="text-[12px] font-mono text-[#1a1612]/70 leading-relaxed">

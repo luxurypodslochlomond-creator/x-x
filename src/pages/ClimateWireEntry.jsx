@@ -52,7 +52,7 @@ export default function ClimateWireEntry() {
       <div className="max-w-2xl mx-auto px-4 py-6">
         {loading && (
           <div className="py-16 flex items-center justify-center">
-            <div className="w-7 h-7 rounded-full animate-spin" style={{ border: '2px solid rgba(20,18,16,0.2)', borderTopColor: '#e2602a' }} />
+            <div className="w-7 h-7 rounded-full animate-spin" style={{ border: '2px solid rgba(20,18,16,0.2)', borderTopColor: '#0f5f7a' }} />
           </div>
         )}
 

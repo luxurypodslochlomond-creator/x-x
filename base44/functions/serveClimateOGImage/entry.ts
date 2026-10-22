@@ -1,12 +1,13 @@
 Deno.serve(async (req) => {
   try {
-    // Beadie Signal palette — paper, ink, signal red. BIG SCIENCE.
-    const PAPER = '#f4efe4';
+    // Beadie Signal palette, in the ocean key — cooler paper, blue signal, so a
+    // shared link looks like the record it stands for. Emergency red stays red.
+    const PAPER = '#edf2f0';
     const INK = '#1a1612';
     const SIGNAL = '#b3261e';
-    const SIGNAL_BRIGHT = '#e2602a';
-    const MUTED = '#6b6258';
-    const BONE = '#efe7d6';
+    const SIGNAL_BRIGHT = '#7fc9e4';
+    const MUTED = '#5e706e';
+    const BONE = '#e9eeec';
 
     const svg = `
       <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">

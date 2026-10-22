@@ -24,7 +24,7 @@ const ACHIEVEMENTS = [
     icon: Film,
     title: '20 Television Documentaries',
     body: 'Under her direction as Executive Producer, Producer, and Director, Horizon International produced 20 television documentaries — many addressing climate change, from the loss of coral reefs to sustainable energy. Swedish, German, Chinese, and Mexican TV stations were among the co-producers. Lynn Redgrave, Raso Ouedraogo, Johan Forssblad, and Sam Waterston were among the hosts and narrators.',
-    color: '#e2602a',
+    color: '#0f5f7a',
   },
   {
     icon: Award,
@@ -69,10 +69,10 @@ export default function ClimateFounder() {
           <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">Beirut · 1956</span>
         </div>
         {/* Scanline texture */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         <div className="relative z-10 px-6 py-12 flex flex-col items-center justify-center gap-5 text-center min-h-[300px]">
-          <SignalBeacon size={48} color="#e2602a" />
+          <SignalBeacon size={48} color="#7fc9e4" />
           <blockquote className="text-[14px] font-mono leading-relaxed text-[#efe7d6] max-w-md italic" style={{ animation: 'twcc-epigraph 1.4s ease-out .2s both' }}>
             “Startled by oil coating me as I surfaced after my long dive from the deck of the freighter into the Beirut, Lebanon, harbor water, it aroused my initial awareness to damage to Earth. I was 15 years old.”
           </blockquote>
@@ -194,7 +194,7 @@ export default function ClimateFounder() {
 
       {/* Her vision — the mantra, cold ink */}
       <div className="relative bg-[#141210] px-5 py-10 text-center overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10">
           <Heart className="w-6 h-6 text-[#e2602a] mx-auto mb-4" />
           <p className="text-[14px] font-black font-mono uppercase leading-relaxed max-w-sm mx-auto text-[#efe7d6]">

@@ -102,7 +102,7 @@ export default function ClimateLayout({ children, currentPage }) {
   return (
     <SiteLanguageProvider>
     <SiteTranslator />
-    <div className="min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="climate-record min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <header className="sticky top-0 z-50 bg-[#141210] border-b-2 border-[#e2602a]">
         <div className="hidden sm:block max-w-[1100px] mx-auto px-4 py-2.5">
           <nav className="flex items-center gap-4" aria-label="Platform">

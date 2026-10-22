@@ -73,23 +73,23 @@ export default function ClimateImpactMap({ stats }) {
           animation: impact-breathe 7s ease-in-out infinite;
         }
         .impact-map .leaflet-container {
-          background: #efe7d6;
+          background: #e9eeec;
           font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         }
         .impact-map .leaflet-control-zoom a {
-          background: #efe7d6 !important;
+          background: #e9eeec !important;
           border-color: #1a1612 !important;
           color: #1a1612 !important;
           font-family: monospace !important;
         }
         .impact-map .leaflet-control-attribution {
-          background: rgba(239,231,214,0.85) !important;
+          background: rgba(233,238,236,0.85) !important;
           font-size: 8px !important;
           font-family: monospace !important;
         }
         .impact-map .leaflet-tooltip {
           background: #141210;
-          color: #efe7d6;
+          color: #e9eeec;
           border: none;
           border-radius: 0;
           font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -111,7 +111,7 @@ export default function ClimateImpactMap({ stats }) {
         scrollWheelZoom={true}
         zoomControl={true}
         className="impact-map"
-        style={{ height: '100%', width: '100%', background: '#efe7d6' }}
+        style={{ height: '100%', width: '100%', background: '#e9eeec' }}
         maxBounds={WORLD_BOUNDS}
         maxBoundsViscosity={1}
       >
@@ -126,14 +126,14 @@ export default function ClimateImpactMap({ stats }) {
         {points.map((p, i) => {
           const r = dotRadius(p.views);
           const isNation = p.kind === 'nation';
-          const fill = isNation ? '#e2602a' : '#b3261e';
+          const fill = isNation ? '#0f5f7a' : '#b3261e';
           return (
             <CircleMarker
               key={`${p.kind}-${i}`}
               center={p.coord}
               radius={r}
               pathOptions={{
-                color: isNation ? '#e2602a' : '#b3261e',
+                color: isNation ? '#0f5f7a' : '#b3261e',
                 weight: isNation ? 2 : 1.5,
                 fillColor: fill,
                 fillOpacity: 0.55,

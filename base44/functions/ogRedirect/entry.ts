@@ -141,25 +141,25 @@ const PAGE_META = {
     title: 'Together We Change Climate — Record of the Time',
     description: 'A public record of climate emergencies and the positive actions that work. Verified solutions, real actions, every language on Earth, nobody left behind.',
     image: '/api/functions/serveClimateOGImage',
-    color: '#e2602a',
+    color: '#0f5f7a',
   },
   ClimatePlatform: {
     title: 'Together We Change Climate — Record of the Time',
     description: 'A public record of climate emergencies and the positive actions that work. Verified solutions, real actions, every language on Earth, nobody left behind.',
     image: '/api/functions/serveClimateOGImage',
-    color: '#e2602a',
+    color: '#0f5f7a',
   },
   ClimateMap: {
     title: 'Transmission Map — Together We Change Climate',
     description: 'Every climate solution, crisis and action on one map. See what is working, and where help is needed most.',
     image: '/api/functions/serveClimateOGImage',
-    color: '#e2602a',
+    color: '#0f5f7a',
   },
   ClimateImpact: {
     title: 'Global Impact — Together We Change Climate',
     description: 'How far the climate record has travelled. Readers by country and nation, solutions shared, actions taken.',
     image: '/api/functions/serveClimateOGImage',
-    color: '#e2602a',
+    color: '#0f5f7a',
   },
 
   default: {

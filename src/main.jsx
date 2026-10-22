@@ -2,6 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from '@/App.jsx'
 import '@/index.css'
+// The climate record's palette, retinted in the ocean key. Loaded after the
+// utilities so it wins, and scoped to .climate-record so nothing else moves.
+import '@/climate-palette.css'
 
 class RootErrorBoundary extends React.Component {
   constructor(props) {

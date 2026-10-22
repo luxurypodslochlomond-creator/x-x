@@ -90,11 +90,11 @@ export default function TransmissionTransport({
         className={`relative py-3 mt-1.5 ${hasAudio ? 'cursor-pointer touch-none' : ''}`}
       >
         <div className="relative h-[8px] bg-[#efe7d6]/12">
-          <div ref={barRef} className="relative h-full" style={{ width: '0%', background: 'linear-gradient(90deg, #b3261e, #e2602a)' }}>
+          <div ref={barRef} className="relative h-full" style={{ width: '0%', background: 'linear-gradient(90deg, #0f5f7a, #7fc9e4)' }}>
             {hasAudio && (
               <span
                 className="absolute right-0 top-1/2 w-[11px] h-[11px] bg-[#e2602a] rotate-45 -translate-y-1/2 translate-x-1/2 pointer-events-none"
-                style={{ boxShadow: '0 0 12px rgba(226,96,42,0.9)' }}
+                style={{ boxShadow: '0 0 12px rgba(127,201,228,0.9)' }}
               />
             )}
           </div>

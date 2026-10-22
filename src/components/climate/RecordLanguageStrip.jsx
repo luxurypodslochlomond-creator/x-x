@@ -20,7 +20,7 @@ export default function RecordLanguageStrip({ lang, detected, onChange, translat
 
   const ink = tone === 'ink';
   const dim = ink ? 'text-[#efe7d6]/60' : 'text-[#5a5246]';
-  const accent = ink ? '#e2602a' : '#b3261e';
+  const accent = ink ? '#7fc9e4' : '#b3261e';
   const field = ink
     ? 'border-[#efe7d6]/25 bg-transparent text-[#efe7d6]'
     : 'border-[#141210] bg-[#f7f1e5] text-[#141210]';
@@ -67,7 +67,7 @@ export default function RecordLanguageStrip({ lang, detected, onChange, translat
             type="button"
             onClick={commit}
             className="flex-shrink-0 px-3 py-2 min-h-[38px] text-[10px] font-black font-mono uppercase"
-            style={{ background: accent, color: ink ? '#141210' : '#f4efe4' }}
+            style={{ background: accent, color: ink ? '#141210' : '#edf2f0' }}
           >
             Go
           </button>

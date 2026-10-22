@@ -4,12 +4,12 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 
 // The record's page shell — the same cold bands the Founder page wears, so every
-// page of the record reads as one place: paper, ink, one orange signal, x = x.
+// page of the record reads as one place: paper, ink, one ocean signal, x = x.
 export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, children }) {
   const navigate = useNavigate();
 
   return (
-    <div dir={dir} className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div dir={dir} className="climate-record twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Header — paper, the way out, the page's name */}
       <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 border-b-2 border-[#141210] bg-[#efe7d6]">
         <button
@@ -34,9 +34,9 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
 
       {/* Hero — cold ink, the beacon, the page says what it is */}
       <div className="relative bg-[#141210] overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10 px-6 py-10 flex flex-col items-center justify-center gap-4 text-center min-h-[220px]">
-          <SignalBeacon size={44} color="#e2602a" />
+          <SignalBeacon size={44} color="#7fc9e4" />
           <h1
             className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md"
             style={{ fontFamily: 'var(--font-display)', fontSize: '30px', letterSpacing: '-0.02em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}

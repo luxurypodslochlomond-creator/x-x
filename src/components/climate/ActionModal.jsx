@@ -6,11 +6,11 @@ import RelatedTriangle from './RelatedTriangle';
 const ACTION_TYPES = {
   cleanup: { label: 'Cleanup', icon: Recycle, color: '#1e3a2b' },
   planting: { label: 'Planting', icon: Sprout, color: '#1e3a2b' },
-  meeting: { label: 'Meeting', icon: Users, color: '#e2602a' },
-  policy_submission: { label: 'Policy Submission', icon: FileText, color: '#e2602a' },
-  workshop: { label: 'Workshop', icon: Hammer, color: '#e2602a' },
+  meeting: { label: 'Meeting', icon: Users, color: '#0f5f7a' },
+  policy_submission: { label: 'Policy Submission', icon: FileText, color: '#0f5f7a' },
+  workshop: { label: 'Workshop', icon: Hammer, color: '#0f5f7a' },
   monitoring: { label: 'Monitoring', icon: Eye, color: '#1e3a2b' },
-  other: { label: 'Action', icon: Hand, color: '#5a5246' },
+  other: { label: 'Action', icon: Hand, color: '#5b6b69' },
 };
 
 function fmtDate(d) {

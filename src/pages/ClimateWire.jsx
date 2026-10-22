@@ -49,9 +49,9 @@ export default function ClimateWire() {
 
       {/* Hero — cold ink, the beacon, the page says exactly what it is */}
       <div className="relative bg-[#141210] overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10 px-6 py-10 flex flex-col items-center justify-center gap-4 text-center min-h-[220px]">
-          <SignalBeacon size={44} color="#e2602a" />
+          <SignalBeacon size={44} color="#7fc9e4" />
           <h1
             className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md"
             style={{ fontFamily: 'var(--font-display)', fontSize: '34px', letterSpacing: '-0.02em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}
@@ -103,7 +103,7 @@ export default function ClimateWire() {
         <div className="mt-4 space-y-5">
           {loading && (
             <div className="py-14 flex items-center justify-center">
-              <div className="w-7 h-7 rounded-full animate-spin" style={{ border: '2px solid rgba(20,18,16,0.2)', borderTopColor: '#e2602a' }} />
+              <div className="w-7 h-7 rounded-full animate-spin" style={{ border: '2px solid rgba(20,18,16,0.2)', borderTopColor: '#0f5f7a' }} />
             </div>
           )}
 

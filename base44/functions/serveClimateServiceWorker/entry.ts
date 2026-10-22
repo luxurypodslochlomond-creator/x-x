@@ -54,7 +54,7 @@ self.addEventListener('fetch', (e) => {
       .catch(() =>
         caches.match(e.request).then(cached =>
           cached || new Response(
-            '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Offline</title></head><body style="background:#141210;color:#efe7d6;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0"><div style="text-align:center"><p style="color:#e2602a;font-size:12px;letter-spacing:0.2em">OFFLINE</p><p style="font-size:11px;opacity:0.5">Reconnect to continue</p></div></body></html>',
+            '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Offline</title></head><body style="background:#141210;color:#e9eeec;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0"><div style="text-align:center"><p style="color:#7fc9e4;font-size:12px;letter-spacing:0.2em">OFFLINE</p><p style="font-size:11px;opacity:0.5">Reconnect to continue</p></div></body></html>',
             { status: 503, headers: { 'Content-Type': 'text/html' } }
           )
         )

@@ -134,7 +134,7 @@ const T = {
              <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#e2602a]'}`}>
                {isSolution ? 'Solution' : 'Crisis'}
              </div>
-             <SignalBeacon size={14} color={isSolution ? '#1e3a2b' : '#e2602a'} />
+             <SignalBeacon size={14} color={isSolution ? '#1e3a2b' : '#0f5f7a'} />
              </div>
              <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-4">
              {item.title}
@@ -350,7 +350,7 @@ export default function TogetherChangeClimate() {
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
-        @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6, 0 0 24px rgba(226,96,42,.55); } }
+        @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #e9eeec; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #e9eeec, 0 0 24px rgba(15,95,122,.55); } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @keyframes twcc-epigraph { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
@@ -379,7 +379,7 @@ export default function TogetherChangeClimate() {
         <Link
           to="/XEqualsX"
           className="px-3 py-1 text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
-          style={{ textDecorationColor: 'rgba(226,96,42,0.5)' }}
+          style={{ textDecorationColor: 'rgba(15,95,122,0.5)' }}
         >
           x = x
         </Link>
@@ -402,9 +402,9 @@ export default function TogetherChangeClimate() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'grayscale(1) contrast(1.35)', mixBlendMode: 'screen', opacity: 0.46 }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(226,96,42,.26), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(79,176,207,.26), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
         {/* Scanline texture — cold transmission signal */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
         <div className="relative z-10 bg-[#efe7d6] px-5 py-3 flex items-center justify-between gap-3"
@@ -465,9 +465,6 @@ export default function TogetherChangeClimate() {
           </div>
         </div>
       )}
-
-      {/* ── TRANSMISSION — the soul of the platform, in its own generative voice until a tune is chosen ── */}
-      <Transmission />
 
       {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
       <div className="px-4 py-2 bg-[#141210] flex items-center justify-between gap-3">
@@ -724,6 +721,11 @@ export default function TogetherChangeClimate() {
             </div>
           </div>
         </section>
+
+        {/* ── TRANSMISSION ── lower down, and found rather than announced: a reader who
+               has read the whole record meets the music at the end of it. It was sitting
+               above the reading, where it asked to be heard before anything was said. ── */}
+        <Transmission />
 
         {/* ── GOVERNANCE ── */}
         <section className="px-4 py-5 bg-[#1e3a2b] text-[#efe7d6]">
