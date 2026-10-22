@@ -65,6 +65,13 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       {footer && (
         <p className="px-5 py-6 lg:py-8 text-center text-[9px] lg:text-[10px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md lg:max-w-2xl mx-auto">{footer}</p>
       )}
+
+      {/* The credit — every page of the record names who built it. */}
+      <p className="px-5 pb-9 text-center text-[11px] font-mono text-[#5a5246] leading-relaxed">
+        Platform built by Brian Hughes ·{' '}
+        <Link to="/Welcome" className="hover:text-[#b3261e] underline decoration-dotted underline-offset-2 transition-colors">UF51 CIC</Link>
+        {' '}· Scotland
+      </p>
     </div>
   );
 }

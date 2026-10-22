@@ -716,13 +716,18 @@ export default function TogetherChangeClimate() {
         <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[10px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline">
           {t.honour} <span className="text-[#b3261e]">→</span>
         </Link>
-        <p className="px-4 pb-8 pt-1 text-center text-[10px] font-mono text-[#5a5246]/70 bg-[#efe7d6]">
-          Platform built by Brian Hughes ·{' '}
-          <Link to={createPageUrl('Welcome')} className="text-[#5a5246] hover:text-[#b3261e] transition-colors">UF51</Link>
-        </p>
-        <p className="px-4 pb-8 text-center text-[8px] font-mono text-[#5a5246]/40 bg-[#efe7d6]">
-          Signal palette after Brian Beadie — Glasgow
-        </p>
+        {/* ── CREDITS ── the record names who built it. Asked for by the founder, and
+               right on a record that expects every entry to carry its origin. ── */}
+        <div className="px-4 pb-10 pt-1 text-center bg-[#efe7d6] space-y-1.5">
+          <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed">
+            Platform built by Brian Hughes ·{' '}
+            <Link to={createPageUrl('Welcome')} className="text-[#5a5246] hover:text-[#b3261e] underline decoration-dotted underline-offset-2 transition-colors">UF51 CIC</Link>
+            {' '}· Scotland
+          </p>
+          <p className="text-[9px] font-mono text-[#5a5246]/60 leading-relaxed">
+            Signal palette after Brian Beadie — Glasgow
+          </p>
+        </div>
       </div>
 
       {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}
