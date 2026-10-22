@@ -11,7 +11,7 @@ const FILM_URL =
 const FILM_TITLE = 'Stoneymollan — the transmission film';
 // The cover is a real frame cut from his own footage — never a picture of something
 // that is not in the film.
-const FILM_POSTER =
+export const FILM_POSTER =
   'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/52c6264c9_IMG_2858.jpeg';
 const FILM_CREDIT =
   'Filmed at Stoneymollan, Loch Lomond, Scotland · 14 October 2026 · Film and sound: Dillon Squire · Music: "X-Ray Girl" · Rough cut, still being finished';

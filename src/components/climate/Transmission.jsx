@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import TransmissionConsole from './TransmissionConsole';
 import TransmissionRecord from './TransmissionRecord';
-import TransmissionFilm from './TransmissionFilm';
+import TransmissionFilm, { FILM_POSTER } from './TransmissionFilm';
+import ShareCardButton from './ShareCardButton';
+import { buildTransmissionShareCard } from './shareCardImage';
 
 // ── THE TRANSMISSION ──
 // Dillon Squire's track, given free to the record and credited to him by name.
@@ -15,6 +17,22 @@ import TransmissionFilm from './TransmissionFilm';
 const TRANSMISSION_URL = 'https://media.base44.com/files/public/6889f31e76713b9cd47e043c/06f236f63_DS_XRAYGIRL_MSTGB2_44_16.wav';
 const TRACK_TITLE = 'X-Ray Girl';
 const DEDICATION = 'For the planet · for all of us';
+
+// ── PASS IT ON ── the track leaves as the same kind of card the wire entries do: who made
+// it, that it was given and not sold, the master's real spec, and where it lives. The card
+// is drawn on the reader's own device, so a share needs no server and nobody is tracked.
+const TRACK_CARD = {
+  id: 'dillon-squire-x-ray-girl',
+  headline: 'X-Ray Girl — Dillon Squire, given free to the record',
+  title: TRACK_TITLE,
+  artist: 'Dillon Squire',
+  dedication: DEDICATION,
+  spec: 'WAV · 44.1 kHz · 16-bit',
+  body: 'Made for the record and given to it. Free to listen — nothing to buy, no paywall, no ad. His name stays on it, and the record never charges for it.',
+  image_url: FILM_POSTER,
+  image_credit: "Frame from Dillon Squire's film · Stoneymollan, Loch Lomond, Scotland",
+  url_path: '/TogetherChangeClimate',
+};
 
 export default function Transmission() {
   return (
@@ -31,12 +49,15 @@ export default function Transmission() {
       <TransmissionFilm />
 
       {/* ── THE GIFT ── said out loud, so nobody has to wonder what it costs ── */}
-      <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 py-4 border-t-2 border-[#141210]">
-        <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">Given, not sold</p>
-        <p className="text-[13px] leading-relaxed text-[#efe7d6]/90">
-          Dillon Squire made this for the record and gave it to it. Free to listen, nothing
-          to buy, no paywall, no ad. His name stays on it, and the record never charges for it.
-        </p>
+      <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 py-4 border-t-2 border-[#141210] flex items-start gap-3">
+        <div className="flex-1 min-w-0">
+          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">Given, not sold</p>
+          <p className="text-[13px] leading-relaxed text-[#efe7d6]/90">
+            Dillon Squire made this for the record and gave it to it. Free to listen, nothing
+            to buy, no paywall, no ad. His name stays on it, and the record never charges for it.
+          </p>
+        </div>
+        <ShareCardButton entry={TRACK_CARD} build={buildTransmissionShareCard} compact />
       </div>
 
       {/* ── HONEST CAPTION ── passes the panel, feels the truth ── */}

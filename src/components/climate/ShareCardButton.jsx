@@ -17,7 +17,7 @@ async function saveCard(file) {
   try { await navigator.clipboard.writeText(window.location.href); } catch { /* selectable in the citation box below */ }
 }
 
-export default function ShareCardButton({ entry, compact = false }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard }) {
   const [state, setState] = useState('idle');
 
   const share = async () => {
@@ -25,7 +25,7 @@ export default function ShareCardButton({ entry, compact = false }) {
     setState('building');
 
     try {
-      const blob = await buildWireShareCard(entry, { origin: window.location.origin });
+      const blob = await build(entry, { origin: window.location.origin });
       if (!blob) throw new Error('The card could not be drawn.');
       const file = new File([blob], `record-of-the-time-${entry.id}.png`, { type: 'image/png' });
 
