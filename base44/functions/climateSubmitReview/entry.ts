@@ -117,7 +117,9 @@ Content: ${fullContent.slice(0, 2000)}`,
     // link stays right on whatever domain the record is served from — never a stale host.
     // The sender name is the record's own name: a handler should never open a climate email
     // and find a different product's name on it.
-    const appUrl = (req.headers.get('x-base44-app-url') || 'https://green-stride-d47e043c.base44.app').replace(/\/$/, '');
+    // The record's real home is the fallback — never the platform's temporary app address,
+    // which must not travel out in an email or stand in front of a review panel.
+    const appUrl = (req.headers.get('x-base44-app-url') || 'https://uf51.love').replace(/\/$/, '');
     const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
     if (adminEmail) {
       try {

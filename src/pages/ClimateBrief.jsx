@@ -8,6 +8,15 @@ import { ArrowRight, Printer, Globe, Languages, Shield, Leaf, Check } from 'luci
 // Honest about what is live, what is planned, and what is not built yet.
 // The climate record stands alone — separate from the token side of UF51.
 
+// The record's own address, as the reader's browser knows it. On the platform's temporary
+// app address we print the record's real home instead — a link we cannot stand behind is
+// worse than no link at all. Change this line the day Janine's own domain is connected.
+const RECORD_HOME = 'https://uf51.love';
+function recordOrigin() {
+  if (typeof window === 'undefined') return RECORD_HOME;
+  return window.location.hostname.includes('base44.app') ? RECORD_HOME : window.location.origin;
+}
+
 export default function ClimateBrief() {
   const handlePrint = () => window.print();
 
@@ -286,8 +295,8 @@ This is built in your honour, and in honour of Horizon International. Your 40 ye
 
 Brian
 
-Live record: https://green-stride-d47e043c.base44.app/TogetherChangeClimate
-Printable brief: https://green-stride-d47e043c.base44.app/ClimateBrief`}
+Live record: ${recordOrigin()}/TogetherChangeClimate
+Printable brief: ${recordOrigin()}/ClimateBrief`}
           </div>
           <p className="text-[10px] font-mono text-[#6b6258] mt-2 leading-relaxed">
             Tap "Copy email" to copy the whole message, or tap and hold to select the text manually.
