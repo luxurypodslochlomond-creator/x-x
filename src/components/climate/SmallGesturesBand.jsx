@@ -37,7 +37,7 @@ export default function SmallGesturesBand() {
         ))}
       </div>
       <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-3">
-        Everything on this record carries a line on what can be copied from it. These can be copied by anyone, this afternoon.
+        From Janine Selendy's own list for the record.
       </p>
     </section>
   );
