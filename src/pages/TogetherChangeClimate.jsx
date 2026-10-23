@@ -533,6 +533,9 @@ export default function TogetherChangeClimate() {
             >
               <Plus className="w-4 h-4" /> Submit a solution, crisis, or action
             </button>
+            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-2">
+              Been sent an email? Paste it in — we read it and fill the form in for you. No account needed, nothing to install.
+            </p>
             <Link
               to={createPageUrl("ClimateMap")}
               className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"

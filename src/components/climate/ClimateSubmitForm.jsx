@@ -148,7 +148,8 @@ export default function ClimateSubmitForm({ onClose }) {
         {/* Sent an email? The machine reads it and fills the form in. */}
         <SmartPaste
           kind={entryType === 'action' ? 'action' : entryType}
-          accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'country', 'region_rough']}
+          categories={categories.map(c => ({ id: c.id, label: c.label }))}
+          accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'category', 'country', 'region_rough']}
           note="Been sent an email about this? Paste the whole mail — heading, link, quote and all. We read it and fill the form in."
           onParsed={(f) => setForm(prev => entryType === 'action'
             ? { ...prev, title: f.title || prev.title, description: f.details || f.summary || prev.description, country: f.country || prev.country }
@@ -161,6 +162,7 @@ export default function ClimateSubmitForm({ onClose }) {
                 source_url: f.source_url || prev.source_url,
                 source_author: f.source_author || prev.source_author,
                 source_date: f.source_date || prev.source_date,
+                category: f.category || prev.category,
                 country: f.country || prev.country,
                 region_rough: f.region_rough || prev.region_rough,
               })}

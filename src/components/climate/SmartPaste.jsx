@@ -13,7 +13,7 @@ import { Wand2, RefreshCw, Check, AlertTriangle, Link2 } from 'lucide-react';
 // person still sends it. The link is the one field the machine will not supply itself — it
 // fills it only when the address was actually in the mail, and never from the signature.
 
-export default function SmartPaste({ kind, accept, onParsed, note }) {
+export default function SmartPaste({ kind, accept, onParsed, note, categories }) {
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(false);
   const [outcome, setOutcome] = useState(null);
@@ -23,7 +23,7 @@ export default function SmartPaste({ kind, accept, onParsed, note }) {
     if (!text.trim()) return;
     setBusy(true); setError(''); setOutcome(null);
     try {
-      const res = await base44.functions.invoke('climateParseSubmission', { text, kind });
+      const res = await base44.functions.invoke('climateParseSubmission', { text, kind, categories: categories || [] });
       const data = res?.data ?? res;
       if (data?.error) throw new Error(data.error);
       const wanted = {};

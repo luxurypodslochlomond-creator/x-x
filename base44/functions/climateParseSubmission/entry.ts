@@ -34,11 +34,14 @@ const KINDS: Record<string, string> = {
 export default async function (req: Request): Promise<Response> {
   try {
     const base44 = createClientFromRequest(req);
-    const { text, kind = 'entry' } = await req.json();
+    const { text, kind = 'entry', categories = [] } = await req.json();
     if (!text || !String(text).trim()) {
       return Response.json({ error: 'Nothing pasted.' }, { status: 400 });
     }
     const pasted = String(text).slice(0, 8000);
+    // The record's own category list, as the page has it. Only an id from this list is ever
+    // returned: the machine picks one of the record's words, it does not invent a new one.
+    const categoryList: any[] = Array.isArray(categories) ? categories.filter((c: any) => c?.id) : [];
 
     // Every address that literally appears in the pasted text, minus the sender's signature.
     const urlsInText = Array.from(pasted.matchAll(/https?:\/\/[^\s<>"')\]]+/g))
@@ -62,6 +65,7 @@ THE RULES, and they matter more than filling every box:
 - Who says so: the body, paper or person that published it, as named in the mail — or, if the mail names nobody, the publisher the link's address clearly belongs to (e.g. theguardian.com → The Guardian).
 - Author and date: only if the mail states them. Otherwise leave empty.
 - Place: only if the mail says where.
+${categoryList.length ? `- Category: pick the closest fit for this entry from the record's own list, and return its id EXACTLY as written here — ${categoryList.map((c: any) => `${c.id} (${c.label || c.id})`).join(', ')}. If none of them genuinely fits, leave it empty. Never invent an id.` : ''}
 - Say what you could not tell in "unsure", in one short line. This is useful, not a failure.
 
 THE MAIL
@@ -76,6 +80,7 @@ ${pasted}`,
           source_url: { type: 'string', description: 'The origin link, copied exactly from the mail, or empty.' },
           source_author: { type: 'string', description: 'Author if named, else empty.' },
           source_date: { type: 'string', description: 'Publication date if stated, else empty.' },
+          category: { type: 'string', description: 'The id of the closest category from the list given, or empty.' },
           country: { type: 'string', description: 'Country if the mail says so, else empty.' },
           region_rough: { type: 'string', description: 'Rough place if the mail says so, else empty.' },
           publisher_type: { type: 'string', enum: ['official_body', 'journal', 'news_media', 'ngo', 'field_dispatch', 'document'] },
@@ -101,6 +106,7 @@ ${pasted}`,
       source_url: verified ? clean(verified) : '',
       source_author: String(result?.source_author || ''),
       source_date: String(result?.source_date || ''),
+      category: categoryList.some((c: any) => c.id === result?.category) ? result.category : '',
       country: String(result?.country || ''),
       region_rough: String(result?.region_rough || ''),
       publisher_type: result?.publisher_type || '',
