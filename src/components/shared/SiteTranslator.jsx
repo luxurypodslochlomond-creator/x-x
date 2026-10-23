@@ -38,7 +38,10 @@ const REFRESH_MS = 120;   // a word React rewrote goes back at once, not after a
 
 const originals = new Map(); // text node -> the words the app wrote in it
 
-const dictKey = (lang) => `uf51_site_dict_${lang}`;
+// The tongue a reader already holds on this device. A new name for it, deliberately: every
+// dictionary written under the old key was made while two engines were translating each
+// other's words, so those words are left where they are and are never read again.
+const dictKey = (lang) => `uf51_tongue_${lang}`;
 
 function loadDict(lang) {
   try { return JSON.parse(localStorage.getItem(dictKey(lang)) || '{}'); } catch { return {}; }

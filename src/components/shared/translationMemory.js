@@ -18,11 +18,20 @@ let loaded = false;
 // switches back, must never see them translated a second time.
 function loadFromDevice() {
   try {
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (!key || !key.startsWith('uf51_site_dict_')) continue;
-      const dict = JSON.parse(localStorage.getItem(key) || '{}');
-      Object.values(dict).forEach((v) => { if (typeof v === 'string' && v) produced.add(v.trim()); });
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) keys.push(localStorage.key(i));
+    for (const key of keys) {
+      if (!key) continue;
+      // A tongue as it stands now — made from the English, never from another tongue.
+      if (key.startsWith('uf51_tongue_')) {
+        const dict = JSON.parse(localStorage.getItem(key) || '{}');
+        Object.values(dict).forEach((v) => { if (typeof v === 'string' && v) produced.add(v.trim()); });
+      }
+      // Words from before the record had one engine. Some were made out of other translations,
+      // so they are neither trusted nor kept: they come off the device.
+      else if (key.startsWith('uf51_site_dict_')) {
+        localStorage.removeItem(key);
+      }
     }
   } catch { /* private mode — we simply start with nothing remembered */ }
 }
