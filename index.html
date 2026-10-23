@@ -41,6 +41,61 @@
       #root:not(:empty){animation:fadeIn .2s ease-out}
     </style>
 
+    <!-- Catch failed module downloads before the app's imports start. -->
+    <script id="uf51-boot-recovery">
+      (function () {
+        var key = 'uf51_build_reload';
+        var marker = '_uf51_reload';
+        window.__uf51RecoverBuild = function () {
+          if (navigator.onLine === false) return false;
+          var url = new URL(window.location.href);
+          var last = Number(url.searchParams.get(marker) || 0);
+          try { last = Math.max(last, Number(sessionStorage.getItem(key) || 0)); } catch (_) {}
+          if (Date.now() - last < 60000) return false;
+          var now = Date.now();
+          try { sessionStorage.setItem(key, String(now)); } catch (_) {}
+          url.searchParams.set(marker, String(now));
+          window.location.replace(url.href);
+          return true;
+        };
+        function failed(event) {
+          if (window.__uf51RecoverBuild()) {
+            if (event.cancelable) event.preventDefault();
+            return;
+          }
+          var loading = document.getElementById('uf51-startup');
+          if (!loading) return;
+          loading.style.flexDirection = 'column';
+          loading.style.gap = '16px';
+          loading.style.padding = '24px';
+          loading.style.textAlign = 'center';
+          loading.style.letterSpacing = 'normal';
+          loading.textContent = 'The page could not download. Please try again.';
+          var button = document.createElement('button');
+          button.textContent = 'Try again';
+          button.style.cssText = 'font:inherit;padding:12px 20px;border:2px solid currentColor;background:transparent;color:inherit;cursor:pointer';
+          button.onclick = function () {
+            var url = new URL(window.location.href);
+            url.searchParams.set(marker, String(Date.now()));
+            window.location.replace(url.href);
+          };
+          loading.appendChild(button);
+        }
+        function moduleFailure(error) {
+          return /Importing a module script failed|Failed to fetch dynamically imported module|error loading dynamically imported module|Outdated Optimize Dep|Unable to preload CSS/i.test(String(error && error.message || error || ''));
+        }
+        window.addEventListener('error', function (event) {
+          var target = event.target;
+          if ((target && target.tagName === 'SCRIPT' && target.type === 'module') ||
+              (target && target.tagName === 'LINK' && target.rel === 'modulepreload') || moduleFailure(event.error || event.message)) failed(event);
+        }, true);
+        window.addEventListener('unhandledrejection', function (event) {
+          if (moduleFailure(event.reason)) failed(event);
+        });
+        window.addEventListener('vite:preloadError', failed);
+      })();
+    </script>
+
     <!-- PATH-AWARE OG TAGS — set before React mounts so social scrapers see the right info -->
     <script>
       (function() {
@@ -148,7 +203,7 @@
     </script>
   </head>
   <body>
-    <div id="root"><div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f4efe4;color:#1a1612;font:12px/1.5 monospace;letter-spacing:.3em">LOADING · x = x</div></div>
+    <div id="root"><div id="uf51-startup" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f4efe4;color:#1a1612;font:12px/1.5 monospace;letter-spacing:.3em">LOADING · x = x</div></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
