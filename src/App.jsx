@@ -3,6 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 const RedirectToSorted = () => <Navigate to="/Sorted" replace />;
 import SortedPageTransition from '@/components/shared/SortedPageTransition';
 import RoutePrefetcher from '@/components/shared/RoutePrefetcher';
+import AdminOnly from '@/components/shared/AdminOnly';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -284,12 +285,12 @@ const AuthenticatedApp = () => {
       <Route path="/Aletheia" element={<AletheiaPage />} />
       <Route path="/XEqualsX" element={<ClimateLayout currentPage="XEqualsX"><XEqualsXPage /></ClimateLayout>} />
       <Route path="/ClimateBrief" element={<ClimateLayout currentPage="ClimateBrief"><ClimateBriefPage /></ClimateLayout>} />
-      <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminUF51BudgetPage /></LayoutWrapper>} />
-      <Route path="/AdminClimateReview" element={<LayoutWrapper currentPageName="AdminClimateReview"><AdminClimateReviewPage /></LayoutWrapper>} />
+      <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminOnly><AdminUF51BudgetPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminClimateReview" element={<LayoutWrapper currentPageName="AdminClimateReview"><AdminOnly><AdminClimateReviewPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/ClimateMap" element={<ClimateLayout currentPage="ClimateMap"><ClimateMapPage /></ClimateLayout>} />
-      <Route path="/AdminClimateCategories" element={<LayoutWrapper currentPageName="AdminClimateCategories"><AdminClimateCategoriesPage /></LayoutWrapper>} />
-      <Route path="/AdminClimatePhotos" element={<LayoutWrapper currentPageName="AdminClimatePhotos"><AdminClimatePhotosPage /></LayoutWrapper>} />
-      <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminSecureVaultPage /></LayoutWrapper>} />
+      <Route path="/AdminClimateCategories" element={<LayoutWrapper currentPageName="AdminClimateCategories"><AdminOnly><AdminClimateCategoriesPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminClimatePhotos" element={<LayoutWrapper currentPageName="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/ClimateImpact" element={<ClimateLayout currentPage="ClimateImpact"><ClimateImpactPage /></ClimateLayout>} />
       <Route path="/ClimateTerms" element={<ClimateLayout currentPage="ClimateTerms"><ClimateTermsPage /></ClimateLayout>} />
       <Route path="/ClimatePrivacy" element={<ClimateLayout currentPage="ClimatePrivacy"><ClimatePrivacyPage /></ClimateLayout>} />

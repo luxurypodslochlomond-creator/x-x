@@ -9,6 +9,7 @@ import { useEntryTranslation } from '@/hooks/useEntryTranslation';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
+import RecordCitation from '@/components/climate/RecordCitation';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -184,6 +185,13 @@ export default function ClimateDetail() {
             The platform never sees your messages — you contact the organiser directly.
           </p>
 
+          <RecordCitation
+            citation={`Together We Can Change Climate. "${record.title}" — ${meta.label}${record.region_rough ? ', ' + record.region_rough : ''}. ${window.location.href}`}
+            note={record.source_url
+              ? 'Quoting this action? The citation carries the record and the permanent address with it, so it can always be traced back.'
+              : 'This action names no source on the record: quote it as the record\u2019s own, and tell us the organiser\u2019s origin if you have it.'}
+          />
+
           <RelatedTriangle
             category={record.category}
             items={allItems}
@@ -266,6 +274,13 @@ export default function ClimateDetail() {
             {record.submitter_name && <p>Submitted by {record.submitter_name}</p>}
           </div>
         )}
+
+        <RecordCitation
+          citation={`${record.source_name ? record.source_name + '. ' : ''}"${record.title}" Together We Can Change Climate — ${isSolution ? 'solution' : 'climate crisis'}${record.country ? ', ' + record.country : ''}. ${window.location.href}`}
+          note={record.source_url
+            ? 'Quoting this entry? The citation carries its origin, the record and the permanent address with it.'
+            : 'This entry names no source on the record, so it can only be quoted as the record\u2019s own. If you know its origin, tell us and it is corrected in daylight, with the date.'}
+        />
 
         <RelatedTriangle
           category={record.category}

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, RefreshCw, Globe, Tag } from 'lucide-react';
+import ProvenanceSweep from '@/components/admin/ProvenanceSweep';
+import SourceLinkRow from '@/components/admin/SourceLinkRow';
 
 export default function AdminClimateReview() {
   const [solutions, setSolutions] = useState([]);
@@ -179,6 +181,12 @@ export default function AdminClimateReview() {
         )}
       </div>
 
+      {/* The origin, right where the decision is made — a solution, crisis or wire entry
+          with no source link waits here until someone pastes the link in. */}
+      {(entityName === 'ClimateSolution' || entityName === 'ClimateNews' || entityName === 'ClimateAction') && (
+        <SourceLinkRow item={item} entityName={entityName} onSaved={loadAll} />
+      )}
+
       {/* Content preview */}
       {(item.summary || item.description || item.content || item.what_changed) && (
         <p className="text-[11px] font-mono text-[#1a1612] leading-relaxed mb-2 line-clamp-3">
@@ -252,7 +260,7 @@ export default function AdminClimateReview() {
             </div>
           </div>
           <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed">
-            Every submission receives an AI advisory note. Clear entries go on the record at once — anything flagged needs attention.
+            Every submission receives an AI advisory note. Clear entries go on the record at once — anything flagged needs attention. Nothing on this record goes up without a link to its source: an entry that arrives without one waits here until someone finds it.
           </p>
         </div>
 
@@ -271,6 +279,9 @@ export default function AdminClimateReview() {
             <span className="text-[10px] font-black font-mono uppercase">Cats</span>
           </Link>
         </div>
+
+        {/* Provenance sweep — no entry without its origin */}
+        <ProvenanceSweep />
 
         {/* Tabs */}
         <div className="flex gap-1 mb-4 sticky top-0 bg-[#f4efe4] py-2 z-10">

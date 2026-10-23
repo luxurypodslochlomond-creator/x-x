@@ -77,6 +77,17 @@ Content: ${fullContent.slice(0, 2000)}`,
       aiAssessment = `${aiAssessment} · No traceable source given — held for a human.`;
     }
 
+    // A solution or a climate crisis is a claim about the world, and Janine's spec is exact:
+    // every entry carries a link to the original source body. An entry whose origin cannot be
+    // opened is the one thing that would cost this record its credibility with a research
+    // panel — one entry like that and the rest look unchecked too. So it waits for a person,
+    // who either finds the source or leaves the entry out. Nothing is lost: the whole
+    // submission is held with its text, and one tap publishes it once the link is in.
+    if (type === 'solution' && !data.source_url) {
+      flagged = true;
+      aiAssessment = `${aiAssessment} · No link to the source body — held for a person to find it.`;
+    }
+
     // A gathering is an introduction, not a conversation: the record carries a name, a topic,
     // a rough region, and the ONE contact line the organiser chose to publish. Without a name
     // and a topic there is nothing for anyone to find, so it waits for a person.
