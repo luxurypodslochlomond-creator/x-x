@@ -404,7 +404,10 @@ export default function TogetherChangeClimate() {
       <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[12px] font-mono italic text-[#efe7d6]/75 text-center leading-relaxed">
+          <span
+            className="text-center text-[#efe7d6] leading-[1.15] max-w-[46ch]"
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px, 4.6vw, 26px)', letterSpacing: '-0.01em' }}
+          >
             "Every single day, we hold the power to shape the world around us."
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
