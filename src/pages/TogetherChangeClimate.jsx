@@ -642,10 +642,14 @@ export default function TogetherChangeClimate() {
                       <span className="text-[10px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
                     <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">{g.description}</p>
-                    {g.contact_email && (
+                    {g.contact_email ? (
                       <a href={`mailto:${g.contact_email}`} className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
                         Contact organizer →
                       </a>
+                    ) : (
+                      <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-mono uppercase tracking-wide text-[#5a5246] leading-relaxed">
+                        Open gathering · contact line being arranged
+                      </p>
                     )}
                   </div>
                 ))}

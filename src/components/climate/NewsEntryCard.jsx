@@ -58,6 +58,11 @@ export default function NewsEntryCard({ entry, linked = true }) {
         </figure>
       )}
 
+      {/* A film or a picture is never shown without its credit — even when there is no frame. */}
+      {entry.image_credit && !entry.image_url && (
+        <p className="px-4 pt-2.5 text-[9px] font-mono uppercase tracking-wide text-[#5a5246]">{entry.image_credit}</p>
+      )}
+
       {entry.replicable && (
         <div className="mt-4 mx-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] px-3 py-2.5">
           <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] mb-1">What can be copied from this</p>

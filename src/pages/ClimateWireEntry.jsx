@@ -75,7 +75,7 @@ export default function ClimateWireEntry() {
             <TapToPlayFilm
               url={entry.source_url}
               title={entry.headline}
-              credit={entry.source_name ? `Film · ${entry.source_name}` : null}
+              credit={entry.image_credit ? `Film · ${entry.image_credit}` : entry.source_name ? `Film · ${entry.source_name}` : null}
             />
 
             <div className="mt-6 bg-[#f7f1e5] border-2 border-[#141210] p-4 lg:p-6">
