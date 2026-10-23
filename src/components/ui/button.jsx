@@ -1,5 +1,6 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+// Use the package's ESM directly; the preview's optimized Slot file can be missing.
+import { Slot } from "/node_modules/@radix-ui/react-slot/dist/index.mjs"
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils"

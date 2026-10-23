@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { Slot } from "/node_modules/@radix-ui/react-slot/dist/index.mjs"
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 import { cn } from "@/lib/utils"

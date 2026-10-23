@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { Slot } from "/node_modules/@radix-ui/react-slot/dist/index.mjs"
 import { cva } from "class-variance-authority";
 import { PanelLeft } from "lucide-react"
 
