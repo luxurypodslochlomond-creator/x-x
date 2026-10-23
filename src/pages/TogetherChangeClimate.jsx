@@ -10,6 +10,7 @@ import GatheringForm from '@/components/climate/GatheringForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
+import { recordOrigin } from '@/components/climate/recordAddress';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
@@ -228,9 +229,7 @@ export default function TogetherChangeClimate() {
   }, []);
 
   const handleShare = async () => {
-    const origin = window.location.hostname.startsWith('preview--')
-      ? 'https://' + window.location.hostname.replace('preview--', '')
-      : window.location.origin;
+    const origin = recordOrigin();
     // Share through the preview service. WhatsApp, Telegram and LinkedIn do not run
     // JavaScript, so they only ever see the app's default tags — which are SORTED's.
     // This link carries the record's own title and image; people still land on the platform.

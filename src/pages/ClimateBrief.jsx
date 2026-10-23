@@ -3,19 +3,14 @@ import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { ArrowRight, Printer, Globe, Languages, Shield, Leaf, Check } from 'lucide-react';
+import { recordOrigin } from '@/components/climate/recordAddress';
 
 // ── A factual one-pager for Janine M. H. Selendy & Horizon International ──
 // Honest about what is live, what is planned, and what is not built yet.
 // The climate record stands alone — separate from the token side of UF51.
 
-// The record's own address, as the reader's browser knows it. On the platform's temporary
-// app address we print the record's real home instead — a link we cannot stand behind is
-// worse than no link at all. Change this line the day Janine's own domain is connected.
-const RECORD_HOME = 'https://uf51.love';
-function recordOrigin() {
-  if (typeof window === 'undefined') return RECORD_HOME;
-  return window.location.hostname.includes('base44.app') ? RECORD_HOME : window.location.origin;
-}
+// The record's own address is defined once, in components/climate/recordAddress.js: the
+// platform's temporary app address is never printed as the record's home.
 
 export default function ClimateBrief() {
   const handlePrint = () => window.print();

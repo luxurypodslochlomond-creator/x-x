@@ -22,7 +22,7 @@ export default function TransmissionRecord() {
   const [copied, setCopied] = useState(false);
 
   const address =
-    typeof window !== 'undefined' ? window.location.origin + RECORD_PAGE : RECORD_PAGE;
+    typeof window !== 'undefined' ? recordAddress(RECORD_PAGE) : RECORD_PAGE;
   const reference = `${ARTIST}, '${WORK}' (2026). Lossless master, given free to the record. Together We Can Change Climate · Universal Frequency 51. ${address}`;
 
   const copyReference = () => {

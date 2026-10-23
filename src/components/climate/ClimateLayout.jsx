@@ -6,6 +6,7 @@ import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import ClimateNav from '@/components/climate/ClimateNav';
+import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -46,7 +47,7 @@ export default function ClimateLayout({ children, currentPage }) {
       el.setAttribute('content', value);
     };
 
-    const card = `${window.location.origin}/api/functions/serveClimateOGImage`;
+    const card = `${recordOrigin()}/api/functions/serveClimateOGImage`;
     setMeta('name', 'description', DESCRIPTION);
     setMeta('property', 'og:title', TITLE);
     setMeta('property', 'og:description', DESCRIPTION);
@@ -54,7 +55,7 @@ export default function ClimateLayout({ children, currentPage }) {
     setMeta('property', 'og:image:width', '1200');
     setMeta('property', 'og:image:height', '630');
     setMeta('property', 'og:type', 'website');
-    setMeta('property', 'og:url', window.location.href);
+    setMeta('property', 'og:url', recordAddress());
     setMeta('name', 'twitter:card', 'summary_large_image');
     setMeta('name', 'twitter:title', TITLE);
     setMeta('name', 'twitter:description', DESCRIPTION);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Share2, Check } from 'lucide-react';
 import { buildWireShareCard } from './shareCardImage';
 import ShareCardPreview from './ShareCardPreview';
+import { recordAddress, recordOrigin } from './recordAddress';
 
 // ── PASS IT ON ──
 // One tap: the entry leaves as a card that already carries its source, its date and
@@ -19,11 +20,11 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
     setState('building');
 
     try {
-      const blob = await build(entry, { origin: window.location.origin });
+      const blob = await build(entry, { origin: recordOrigin() });
       if (!blob) throw new Error('The card could not be drawn.');
       const file = new File([blob], `record-of-the-time-${entry.id}.png`, { type: 'image/png' });
       const title = entry.headline || entry.title || 'Record of the time';
-      const line = `${title} — ${window.location.href}`;
+      const line = `${title} — ${recordAddress()}`;
 
       const carriesFile = !!(navigator.canShare && navigator.canShare({ files: [file] }));
       const hasSheet = carriesFile || !!navigator.share;
@@ -55,7 +56,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       onClose={() => setCard(null)}
       blob={card?.blob}
       fileName={card?.fileName}
-      link={window.location.href}
+      link={recordAddress()}
       headline={entry.headline || entry.title || 'Record of the time'}
     />
   );

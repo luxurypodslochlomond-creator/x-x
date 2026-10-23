@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import RecordCitation from '@/components/climate/RecordCitation';
+import { recordAddress } from '@/components/climate/recordAddress';
 import SourceBlock from '@/components/climate/SourceBlock';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import TapToPlayFilm from '@/components/climate/TapToPlayFilm';
@@ -26,7 +27,7 @@ export default function ClimateWireEntry() {
   }, [id]);
 
   const citation = entry
-    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — the wire, ${entry.when_label}. ${window.location.href}`
+    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — the wire, ${entry.when_label}. ${recordAddress()}`
     : '';
 
   return (
