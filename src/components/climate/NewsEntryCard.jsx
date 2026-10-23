@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
-import VerificationBadge from '@/components/climate/VerificationBadge';
 
-// One entry on the wire. Dated, sourced, and honest about how well it is known —
-// the badge tells the reader whether one origin says this, two agree, or the body
-// itself has put it on the record. No likes, no counters, nothing to game.
+// One entry on the wire. Dated, sourced, and plain about what is known. No likes,
+// no counters, nothing to game. How well it is known waits on the entry itself —
+// never on the card, so the wire stays uncluttered and nothing is claimed by glance.
 
 const KIND = {
   emergency: 'Emergency',
@@ -22,7 +21,6 @@ export default function NewsEntryCard({ entry, linked = true }) {
     <article className="bg-[#f7f1e5] border-2 border-[#141210]">
       <div className="flex flex-wrap items-center gap-2 px-4 pt-4">
         <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{entry.when_label}</span>
-        <VerificationBadge entry={entry} />
         {entry.kind && (
           <span className="px-2 py-0.5 text-[9px] font-black font-mono uppercase tracking-wide border border-[#141210]/40 text-[#5a5246]">
             {KIND[entry.kind] || entry.kind}

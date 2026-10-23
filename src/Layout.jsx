@@ -11,6 +11,7 @@ import GlobalSearch from '@/components/shared/GlobalSearch';
 import BuzzTripIcon from '@/components/buzztrip/BuzzTripIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PlatformIcon from '@/components/shared/PlatformIcon';
+import { recordOrigin } from '@/components/climate/recordAddress';
 
 // import DisasterResilienceMode from '@/components/shared/DisasterResilienceMode';
 // import RealtimeDebugger from '@/components/shared/RealtimeDebugger';
@@ -319,6 +320,10 @@ const LayoutInner = ({ children, currentPageName }) => {
     const isWristPage = currentPageName.startsWith('WristHealing');
     const isSortedPage = currentPageName === 'Family51';
     
+    // The record never lets a shared link carry the address of the room it is standing in:
+    // on the record's own pages, the preview points at the record's home.
+    const ogOrigin = isClimatePage ? recordOrigin() : window.location.origin;
+
     let ogImageUrl = '/api/functions/serveOGImage';
     if (isPS51Page) {
       ogImageUrl = '/api/functions/servePetSounds51OGImage';
@@ -343,9 +348,9 @@ const LayoutInner = ({ children, currentPageName }) => {
         : isClimatePage
         ? 'Verified climate solutions & crises — after Janine Selendy. Every symbol, every number, every tongue. Nobody left behind. The noise is loud. The record is louder.'
         : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',
-      'og:image': window.location.origin + ogImageUrl,
+      'og:image': ogOrigin + ogImageUrl,
       'og:type': 'website',
-      'og:url': window.location.href,
+      'og:url': isClimatePage ? ogOrigin + window.location.pathname : window.location.href,
       'og:image:width': '1200',
       'og:image:height': '630'
     };
