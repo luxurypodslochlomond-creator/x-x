@@ -5,6 +5,7 @@ import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
+import ClimateNav from '@/components/climate/ClimateNav';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -14,16 +15,8 @@ import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 const TITLE = 'Together we can change the course of climate change — Record of the Time';
 const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally. Every language on Earth.';
 
-const NAV = [
-  { label: 'Record', page: 'TogetherChangeClimate' },
-  { label: 'Search', page: 'ClimateSearch' },
-  { label: 'Wire', page: 'ClimateWire' },
-  { label: 'Map', page: 'ClimateMap' },
-  { label: 'Impact', page: 'ClimateImpact' },
-  { label: 'Founder', page: 'ClimateFounder' },
-  { label: 'Support', page: 'ClimateSupport' },
-  { label: 'Method', page: 'ClimateMethod' },
-];
+// The way through the record lives in ClimateNav: places to read, and one action —
+// Search — drawn as a control so it can never be lost in a list of words.
 
 // Terms and Privacy are kept off the reading nav — they are legal ground, not the record.
 // They sit in one quiet place, in the footer of every page of the record.
@@ -98,8 +91,6 @@ export default function ClimateLayout({ children, currentPage }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const isActive = (page) => currentPage === page;
-
   return (
     <SiteLanguageProvider>
     <SiteTranslator />
@@ -120,22 +111,7 @@ export default function ClimateLayout({ children, currentPage }) {
             </span>
           </Link>
 
-          <nav className="flex items-center gap-5 lg:gap-6" aria-label="The record">
-            {NAV.map(item => (
-              <Link
-                key={item.page}
-                to={createPageUrl(item.page)}
-                aria-current={isActive(item.page) ? 'page' : undefined}
-                className={`pb-1 text-[11px] font-black uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${
-                  isActive(item.page)
-                    ? 'text-[#e2602a] border-[#e2602a]'
-                    : 'text-[#efe7d6]/75 border-transparent hover:text-[#efe7d6] hover:border-[#efe7d6]/40'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <ClimateNav currentPage={currentPage} />
         </div>
 
         {/* Mobile — same links, thumb-scrollable, sitting centred under the masthead.
@@ -146,17 +122,7 @@ export default function ClimateLayout({ children, currentPage }) {
           style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           aria-label="Platform"
         >
-          <div className="mx-auto flex w-max gap-3">
-            {NAV.map(item => (
-              <Link
-                key={item.page}
-                to={createPageUrl(item.page)}
-                className={`flex-shrink-0 py-1.5 text-[10px] font-black uppercase tracking-wide transition-colors ${isActive(item.page) ? 'text-[#e2602a]' : 'text-[#efe7d6]/60'}`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+          <ClimateNav currentPage={currentPage} variant="mobile" />
         </nav>
 
         {/* Every tongue on Earth — in the header, on every page of the record. */}

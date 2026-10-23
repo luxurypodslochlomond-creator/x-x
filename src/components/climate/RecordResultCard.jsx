@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 
 // One result, in the record's own voice: paper, ink, a fine rule, no hype.
-// Each card carries the entry's own words rather than a teaser, and links only where
-// the record really has a page for the thing.
+// Each card carries the entry's own words rather than a teaser, says who it came from,
+// and links only where the record really has a page for the thing. The origin is printed
+// on every card, because on this record a claim without an origin does not exist.
 
 const Tag = ({ children, tone = '#1e3a2b' }) => (
   <span
@@ -25,6 +26,14 @@ const Place = ({ region, country }) =>
     </div>
   ) : null;
 
+// Who says so. Always labelled, never dropped — the whole method in one line.
+const Origin = ({ name }) =>
+  name ? (
+    <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#b3261e] leading-relaxed">
+      Source · {name}
+    </p>
+  ) : null;
+
 export default function RecordResultCard({ kind, item }) {
   if (kind === 'solution' || kind === 'crisis') {
     const isCrisis = item.entry_type === 'climate_crisis';
@@ -38,6 +47,7 @@ export default function RecordResultCard({ kind, item }) {
         <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.title}</h3>
         {item.summary && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.summary}</p>}
         <Place region={item.region} country={item.country} />
+        <Origin name={item.source_name} />
       </Link>
     );
   }
@@ -83,7 +93,7 @@ export default function RecordResultCard({ kind, item }) {
     );
   }
 
-  // On the wire — headline, what changed, who says so, and the link to the origin.
+  // On the wire — headline, what changed, when and where, and who says so.
   return (
     <Link
       to={`/ClimateWireEntry/${item.id}`}
@@ -99,9 +109,16 @@ export default function RecordResultCard({ kind, item }) {
       </div>
       <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.headline}</h3>
       {item.what_changed && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.what_changed}</p>}
-      <p className="text-[10px] font-mono text-[#5a5246] uppercase tracking-wide mt-2">
-        {[item.when_label, item.where_label, item.source_name].filter(Boolean).join(' · ')}
-      </p>
+      {(item.when_label || item.where_label) && (
+        <p className="text-[10px] font-mono text-[#5a5246] uppercase tracking-wide mt-2">
+          {[item.when_label, item.where_label].filter(Boolean).join(' · ')}
+        </p>
+      )}
+      {item.source_name && (
+        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#b3261e] leading-relaxed">
+          Source · {item.source_name}
+        </p>
+      )}
     </Link>
   );
 }

@@ -7,9 +7,11 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 // If a reader's words find nothing and they are not searching in English, the query is
 // translated once and tried again — no one is left outside because of their tongue.
 
+// What a search reads. The origin is in here on purpose: a panel checking a body's work
+// should be able to type that body's name and see every entry resting on it.
 const FIELDS = {
-  ClimateSolution: ['title', 'summary', 'details', 'category', 'region_rough', 'country'],
-  ClimateAction: ['title', 'description', 'action_type', 'region_rough', 'country'],
+  ClimateSolution: ['title', 'summary', 'details', 'category', 'region_rough', 'country', 'source_name'],
+  ClimateAction: ['title', 'description', 'action_type', 'region_rough', 'country', 'source_url'],
   ClimateGroup: ['name', 'topic', 'region', 'description'],
   ClimateNews: ['headline', 'what_changed', 'replicable', 'source_name', 'where_label', 'country', 'category'],
 };
@@ -56,6 +58,7 @@ const shapeSolution = (i) => ({
   category: i.category,
   region: i.region_rough,
   country: i.country,
+  source_name: i.source_name,
 });
 
 const shapeAction = (i) => ({
