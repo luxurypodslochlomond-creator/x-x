@@ -41,7 +41,7 @@ const HUBS = {
   platform: () => import('@/pages/Platform'),
   aletheia: () => import('@/pages/Aletheia'),
 
-  // Together We Change Climate
+  // Together We Can Change Climate
   togetherchangeclimate: () => import('@/pages/TogetherChangeClimate'),
   climateplatform: () => import('@/pages/TogetherChangeClimate'),
   climatedetail: () => import('@/pages/ClimateDetail'),

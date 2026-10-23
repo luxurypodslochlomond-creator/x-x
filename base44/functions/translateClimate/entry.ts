@@ -11,7 +11,7 @@ export default async function(req) {
       return Response.json({ translations: strings || {} });
     }
 
-    const prompt = `You are a precise, professional UI translator for a public climate-action platform ("Together We Change Climate", built in honour of Horizon International). Translate every VALUE in this JSON object into the language indicated by: "${lang}" (this may be an ISO code like "fr" or a language name like "Yoruba" — figure out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, and brand names (Horizon International, UF51) unchanged. Tone: warm, clear, hopeful, plain. Return ONLY the JSON object.
+    const prompt = `You are a precise, professional UI translator for a public climate-action platform ("Together We Can Change Climate", built in honour of Horizon International). Translate every VALUE in this JSON object into the language indicated by: "${lang}" (this may be an ISO code like "fr" or a language name like "Yoruba" — figure out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, and brand names (Horizon International, UF51) unchanged. Tone: warm, clear, hopeful, plain. Return ONLY the JSON object.
 
 JSON:
 ${JSON.stringify(strings)}`;

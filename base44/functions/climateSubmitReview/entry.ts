@@ -27,7 +27,7 @@ export default async function(req: Request): Promise<Response> {
 
     try {
       const aiResult = await base44.asServiceRole.integrations.Core.InvokeLLM({
-        prompt: `You are an AI advisory note for "Together We Change Climate" — a public-service climate platform after Janine Selendy / Horizon International. This is NOT social media. It is an institutional record. Spam is screened automatically: clean entries go on the record at once, and only what you flag waits for a human. Your role is advisory only — you never decide.
+        prompt: `You are an AI advisory note for "Together We Can Change Climate" — a public-service climate platform after Janine Selendy / Horizon International. This is NOT social media. It is an institutional record. Spam is screened automatically: clean entries go on the record at once, and only what you flag waits for a human. Your role is advisory only — you never decide.
 
 CRITICAL — DO NOT HALLUCINATE:
 - Assess ONLY based on the text provided below. Do not invent facts, claims, or context not in the text.
@@ -102,16 +102,22 @@ Content: ${fullContent.slice(0, 2000)}`,
     }
 
     // 3. Email admin notification — only when a human is genuinely needed (non-critical)
+    // The way back is built from the app's own public address as the server sets it, so the
+    // link stays right on whatever domain the record is served from — never a stale host.
+    // The sender name is the record's own name: a handler should never open a climate email
+    // and find a different product's name on it.
+    const appUrl = (req.headers.get('x-base44-app-url') || 'https://green-stride-d47e043c.base44.app').replace(/\/$/, '');
     const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
     if (adminEmail) {
       try {
         const title = data.title || data.headline || data.name || (data.content ? data.content.slice(0, 60) : 'Untitled');
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: adminEmail,
+          from_name: 'Together We Can Change Climate',
           subject: `Climate submission held for a check: ${title}`,
           html: `<div style="font-family: monospace; max-width: 500px; margin: 0 auto; padding: 20px; background: #f4efe4;">
             <div style="background: #b3261e; color: #fff; padding: 12px 20px; margin: -20px -20px 20px -20px;">
-              <h2 style="margin: 0; font-size: 16px; letter-spacing: 0.1em;">TOGETHER WE CHANGE CLIMATE</h2>
+              <h2 style="margin: 0; font-size: 16px; letter-spacing: 0.1em;">TOGETHER WE CAN CHANGE CLIMATE</h2>
             </div>
             <p style="color: #6b6258;">A new ${type} submission was held for a human check.</p>
             <div style="background: #efe7d6; border: 2px solid #1a1612; padding: 16px; margin: 16px 0;">
@@ -120,11 +126,13 @@ Content: ${fullContent.slice(0, 2000)}`,
               <p style="margin: 4px 0; color: #1a1612;"><strong>Flagged:</strong> ${flagged ? 'Yes — needs attention' : 'No — looks clean'}</p>
               <p style="margin: 4px 0; color: #6b6258; font-size: 11px;">Held for a human check — clean entries publish automatically.</p>
             </div>
-            <a href="https://green-stride-d47e043c.base44.app/AdminClimateReview" style="background: #b3261e; color: #fff; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; font-family: monospace;">Review now</a>
+            <a href="${appUrl}/AdminClimateReview" style="background: #b3261e; color: #fff; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; font-family: monospace;">Review now</a>
           </div>`
         });
       } catch (emailError) {
-        // Email failure is non-critical
+        // Email failure never blocks a submission, but it must not be invisible either:
+        // a held entry nobody is told about is the one failure that matters here.
+        console.error('climateSubmitReview: held-entry email failed:', emailError.message);
       }
     }
 

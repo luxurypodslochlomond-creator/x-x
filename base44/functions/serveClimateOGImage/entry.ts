@@ -47,7 +47,7 @@ Deno.serve(async (req) => {
 
         <!-- Main headline -->
         <text x="600" y="370" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="64" font-weight="900" fill="${INK}" text-anchor="middle" letter-spacing="-1.5">
-          Together We Change Climate
+          Together We Can Change Climate
         </text>
 
         <!-- Subtitle — Janine's cred -->

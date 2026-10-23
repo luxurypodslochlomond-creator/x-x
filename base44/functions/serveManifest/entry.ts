@@ -92,7 +92,7 @@ Deno.serve(async (req) => {
         }
       }
     } : isClimate ? {
-      name: "Together We Change Climate — Record of the Time",
+      name: "Together We Can Change Climate — Record of the Time",
       short_name: "Climate Record",
       description: "A public record of climate emergencies and the positive actions that work — shared openly, internationally.",
       start_url: "/TogetherChangeClimate",

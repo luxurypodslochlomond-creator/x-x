@@ -333,7 +333,7 @@ export default function AdminClimateReview() {
         {/* Footer */}
         <div className="mt-8 pt-4 border-t border-[#1a1612]/15 text-center">
           <p className="text-[9px] font-mono text-[#6b6258]">
-            Together We Change Climate · Review Queue · x = x
+            Together We Can Change Climate · Review Queue · x = x
           </p>
         </div>
       </div>

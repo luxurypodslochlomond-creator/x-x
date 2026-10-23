@@ -331,7 +331,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     }
 
     const ogTags = {
-      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together We Change Climate — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
+      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together We Can Change Climate — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
         : isPS51Page
@@ -461,7 +461,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Missions", url: createPageUrl("Missions"), icon: Target, description: "Community impact actions" },
       { title: "How You Earn", url: createPageUrl("HowYouEarn"), icon: Heart, description: "Money from doing good" },
       { title: "Stoneymollan", url: createPageUrl("Stoneymollan"), icon: Globe, description: "Ancient coffin road · Loch Lomond" },
-      { title: "Together We Change Climate", url: createPageUrl("TogetherChangeClimate"), icon: Globe, highlight: true, description: "Janine Selendy's platform · verified solutions" },
+      { title: "Together We Can Change Climate", url: createPageUrl("TogetherChangeClimate"), icon: Globe, highlight: true, description: "Janine Selendy's platform · verified solutions" },
     ];
 
     // 4. MUSIC & RESEARCH

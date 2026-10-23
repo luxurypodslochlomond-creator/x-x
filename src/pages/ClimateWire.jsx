@@ -140,7 +140,7 @@ export default function ClimateWire() {
       </div>
 
       <p className="px-5 py-6 lg:py-8 text-center text-[9px] lg:text-[10px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md lg:max-w-2xl mx-auto">
-        The wire is part of Together We Change Climate — a public service record built in honour of Janine M. H. Selendy and Horizon International. No advertising, no sponsorship, and money never buys a place on it.
+        The wire is part of Together We Can Change Climate — a public service record built in honour of Janine M. H. Selendy and Horizon International. No advertising, no sponsorship, and money never buys a place on it.
       </p>
       <p className="px-5 pb-9 text-center text-[11px] font-mono text-[#5a5246] leading-relaxed">
         Platform built by Brian Hughes ·{' '}

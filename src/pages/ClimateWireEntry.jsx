@@ -25,7 +25,7 @@ export default function ClimateWireEntry() {
   }, [id]);
 
   const citation = entry
-    ? `${entry.source_name}. "${entry.headline}" Together We Change Climate — the wire, ${entry.when_label}. ${window.location.href}`
+    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — the wire, ${entry.when_label}. ${window.location.href}`
     : '';
 
   const copyCitation = async () => {

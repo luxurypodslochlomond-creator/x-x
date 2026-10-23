@@ -6,7 +6,7 @@ import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 
-// ── TOGETHER WE CHANGE CLIMATE — her own front door ──
+// ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
 // No shop chrome beside it. Nothing of UF51's in the room.
 // x = x.
