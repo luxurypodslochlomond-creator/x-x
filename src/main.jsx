@@ -34,6 +34,22 @@ class RootErrorBoundary extends React.Component {
   }
 }
 
+// A build can land while a reader is already on the page. The file names change, the old
+// pieces are gone, and the next page they open has nothing to fetch — which reads as
+// "Importing a module script failed" and leaves a blank screen. Pick the page up again,
+// once, quietly. At most once a minute, so a genuinely missing file can never loop.
+const BUILD_RELOAD_KEY = 'uf51_build_reload';
+const reloadForBuild = () => {
+  let allowed = true;
+  try {
+    const last = Number(sessionStorage.getItem(BUILD_RELOAD_KEY) || 0);
+    allowed = Date.now() - last > 60000;
+    if (allowed) sessionStorage.setItem(BUILD_RELOAD_KEY, String(Date.now()));
+  } catch { allowed = false; }
+  if (allowed) window.location.reload();
+};
+window.addEventListener('vite:preloadError', reloadForBuild);
+
 console.log('🚀 UF51 mounting...');
 
 try {
