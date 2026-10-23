@@ -54,6 +54,37 @@ function saveDict(lang, dict) {
   } catch { /* storage full or private mode — the page still reads, it just re-asks next time */ }
 }
 
+// ── A MADE TONGUE IS READ LIKE A PUBLISHED FILE, NOT PUT TOGETHER FOR EACH READER ──
+// The record's wording is finite and the same for everyone, so a made tongue is one small file:
+// the browser holds it, the edge holds it, and the platform is only asked when a tongue has
+// actually grown. A reader therefore costs the platform nothing for words, whether there are ten
+// of them or ten million. The keys below are worded so they can never be mistaken for a tongue.
+const TONGUE_CHECK_MS = 12 * 60 * 60 * 1000; // the record's wording changes rarely: look twice a day
+const versionKey = (lang) => `uf51_tonguever_${lang}`;
+const checkedKey = (lang) => `uf51_tongueat_${lang}`;
+
+async function pullTongue(lang) {
+  try {
+    const known = Number(localStorage.getItem(checkedKey(lang)) || 0);
+    if (known && Date.now() - known < TONGUE_CHECK_MS) return false;
+    const mine = localStorage.getItem(versionKey(lang)) || '';
+    const q = `lang=${encodeURIComponent(lang)}${mine ? `&v=${encodeURIComponent(mine)}` : ''}`;
+    let res = await fetch(`/functions/serveClimateTongue?${q}`);
+    if (!res.ok) res = await fetch(`/api/functions/serveClimateTongue?${q}`);
+    if (!res.ok) return false;
+    const body = await res.json();
+    localStorage.setItem(checkedKey(lang), String(Date.now()));
+    if (body.version) localStorage.setItem(versionKey(lang), String(body.version));
+    else localStorage.removeItem(versionKey(lang));
+    if (body.unchanged || !body.dict) return false;
+    const made = Object.keys(body.dict).length;
+    if (made) saveDict(lang, { ...loadDict(lang), ...body.dict });
+    return made > 0;
+  } catch {
+    return false; // no signal, or held back: the copy already on the device still stands
+  }
+}
+
 // Every word this platform has produced is remembered in translationMemory, shared with
 // the record's own hand-written copy — one store, so no engine ever translates another's
 // words. See that file for why this matters.
@@ -203,6 +234,18 @@ export default function SiteTranslator() {
     if (answered && missing.length > batch.length) setTimeout(run, 350);
   }, [chosen, restore, sweep, ask, setTranslating]);
 
+  // The tongue as a whole, once — every page of the record at once, not one page's worth of words
+  // at a time. It comes off the edge (see pullTongue), and the device keeps it from then on, so
+  // this page and every page after it are read in the right tongue with nothing asked for at all.
+  const refreshTongue = useCallback(async (lang) => {
+    const arrived = await pullTongue(lang);
+    if (!arrived) return;
+    const dict = loadDict(lang);
+    dictRef.current = dict;
+    translated.current = new Set(Object.values(dict));
+    markProduced(Object.values(dict)); // our own words — none of them is ever fed back in as English
+  }, []);
+
   // A new tongue, or a new page: the words we hold go in before the browser paints.
   useLayoutEffect(() => {
     originals.forEach((_, node) => { if (!node.isConnected) originals.delete(node); });
@@ -225,9 +268,12 @@ export default function SiteTranslator() {
     paint(dict);
     setTranslating(true); // what is left is on its way
 
-    const timer = setTimeout(run, SETTLE_MS);
+    const timer = setTimeout(async () => {
+      await refreshTongue(lang); // the whole tongue, off the edge — one cached read, twice a day at most
+      run();
+    }, SETTLE_MS);
     return () => clearTimeout(timer);
-  }, [chosen, location.pathname, paint, restore, restoreTranslated, run, setTranslating]);
+  }, [chosen, location.pathname, paint, refreshTongue, restore, restoreTranslated, run, setTranslating]);
 
   // Content that arrives late (lists, entries, lazy sections) and words React rewrites on
   // its own: only those nodes are visited, so a translated page never flickers and the

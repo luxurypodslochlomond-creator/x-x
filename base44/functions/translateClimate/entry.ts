@@ -70,9 +70,15 @@ async function holdTongue(base44, lang) {
 }
 
 async function keepTongue(base44, held, lang, dict) {
-  const body = { dict, words: Object.keys(dict).length, last_made: new Date().toISOString() };
   try {
-    if (held && held.id) await base44.asServiceRole.entities.ClimateTongue.update(held.id, body);
+    // Two readers can reach a tongue that has never been made in the same moment — at scale they
+    // will. So what is stored is read once more just before writing, and the words are merged
+    // rather than replaced: what one reader made is never lost to another.
+    const latest = await holdTongue(base44, lang);
+    const row = latest || held;
+    const merged = { ...((row && row.dict) || {}), ...(dict || {}) };
+    const body = { dict: merged, words: Object.keys(merged).length, last_made: new Date().toISOString() };
+    if (row && row.id) await base44.asServiceRole.entities.ClimateTongue.update(row.id, body);
     else await base44.asServiceRole.entities.ClimateTongue.create({ lang, ...body });
   } catch (error) {
     console.error('could not keep the tongue:', error && error.message ? error.message : error);
