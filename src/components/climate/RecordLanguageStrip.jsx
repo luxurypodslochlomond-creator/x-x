@@ -44,7 +44,7 @@ export default function RecordLanguageStrip({ lang, detected, onChange, translat
             else { setOtherOpen(false); onChange(e.target.value); }
           }}
           aria-label="Choose the record's language"
-          className={`flex-1 min-w-0 border px-2 py-1.5 min-h-[36px] text-[11px] font-black font-mono uppercase tracking-wide outline-none cursor-pointer truncate ${field}`}
+          className={`flex-1 min-w-0 border px-2 py-1.5 min-h-[36px] text-[13px] font-bold font-mono outline-none cursor-pointer truncate ${field}`}
         >
           <option value="auto" className="text-[#141210]">🌐 Auto — {nameFor(detected)}</option>
           {LANGS.map(l => <option key={l.code} value={l.code} className="text-[#141210]">{l.label}</option>)}
