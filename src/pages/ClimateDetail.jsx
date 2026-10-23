@@ -11,6 +11,8 @@ import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCitation from '@/components/climate/RecordCitation';
 import SourceBlock from '@/components/climate/SourceBlock';
+import VerificationBadge from '@/components/climate/VerificationBadge';
+import { VERIFICATION_NOTE } from '@/components/climate/verification';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -186,6 +188,22 @@ export default function ClimateDetail() {
             The platform never sees your messages — you contact the organiser directly.
           </p>
 
+          <div className="mt-6">
+            <VerificationBadge entry={record} />
+          </div>
+          <p className="mt-2 text-[11px] font-mono text-[#5a5246] leading-relaxed">
+            {VERIFICATION_NOTE[record.verification] || VERIFICATION_NOTE.single_source}
+          </p>
+          {record.corroborating_source && (
+            <p className="mt-1.5 text-[11px] font-mono text-[#141210]">Second origin · {record.corroborating_source}</p>
+          )}
+          {record.correction_note && (
+            <div className="mt-3 border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5">
+              <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-1">Correction</p>
+              <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{record.correction_note}</p>
+            </div>
+          )}
+
           <SourceBlock
             sourceName={record.source_name}
             sourceUrl={record.source_url}
@@ -267,10 +285,23 @@ export default function ClimateDetail() {
           </button>
         )}
         <p className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('details') || tr.field('summary')}</p>
-        <div className="mt-5 flex flex-wrap gap-2 text-[10px] font-mono font-bold uppercase">
+        <div className="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-mono font-bold uppercase">
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {record.scale || '—'}</span>
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Reviewed: ✓</span>
+          <VerificationBadge entry={record} />
         </div>
+        <p className="mt-2.5 text-[11px] font-mono text-[#5a5246] leading-relaxed">
+          {VERIFICATION_NOTE[record.verification] || VERIFICATION_NOTE.single_source}
+        </p>
+        {record.corroborating_source && (
+          <p className="mt-1.5 text-[11px] font-mono text-[#141210]">Second origin · {record.corroborating_source}</p>
+        )}
+        {record.correction_note && (
+          <div className="mt-4 border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5">
+            <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-1">Correction</p>
+            <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{record.correction_note}</p>
+          </div>
+        )}
         {record.source_url && (
           <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
             View source <ArrowRight className="w-4 h-4" />

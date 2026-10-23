@@ -1,7 +1,7 @@
 {
   "name": "ClimateSolution",
   "type": "object",
-  "description": "A verified climate solution or climate-crisis entry on the 'Together We Change Climate' public platform. Faithful to Janine Selendy's spec: two summary types (Solutions / Climate Crisis), her category taxonomy, rough location, image, and translation-ready fields. Public submissions welcome with email \u2014 reviewed before publication. Every entry must trace to its origin: the source fields below are the entry's reason for being on the record.",
+  "description": "A verified climate solution or climate-crisis entry on the 'Together We Change Climate' public platform. Faithful to Janine Selendy's spec: two summary types (Solutions / Climate Crisis), her category taxonomy, rough location, image, and translation-ready fields. Public submissions welcome with email \u2014 reviewed before publication. Every entry must trace to its origin: the source fields below are the entry's reason for being on the record, and how well it is known is said out loud on the entry itself.",
   "properties": {
     "entry_type": {
       "type": "string",
@@ -62,6 +62,24 @@
     "source_date": {
       "type": "string",
       "description": "When the original was published, as the origin states it \u2014 e.g. '21 April 2025'. Left empty when it is not stated: never guessed."
+    },
+    "verification": {
+      "type": "string",
+      "enum": [
+        "single_source",
+        "corroborated",
+        "official_record"
+      ],
+      "default": "single_source",
+      "description": "How well this entry is known, said out loud on the entry itself: single_source \u2014 one origin says so; corroborated \u2014 two independent origins agree; official_record \u2014 the body itself has put this on the record. Left at single_source until a second, independent origin is actually named, because that is the honest answer. Set by a person (admin), never by the entry's own text."
+    },
+    "corroborating_source": {
+      "type": "string",
+      "description": "A second, independent origin saying the same thing, when one exists \u2014 named here, never guessed. Shown on the entry beside the source, so 'corroborated' can always be checked."
+    },
+    "correction_note": {
+      "type": "string",
+      "description": "A correction, in the open, with the date it was made. Entries on the record are corrected in daylight, never silently."
     },
     "status": {
       "type": "string",

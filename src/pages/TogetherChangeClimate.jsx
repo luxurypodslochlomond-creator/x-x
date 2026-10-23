@@ -12,6 +12,7 @@ import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
+import VerificationBadge from '@/components/climate/VerificationBadge';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
 import DefinitionsBand from '@/components/climate/DefinitionsBand';
 
@@ -141,12 +142,15 @@ const T = {
              <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-4">
              {item.title}
              </h3>
-             {item.region_rough && (
-             <div className="flex items-center gap-1 text-[#5a5246]">
-               <MapPin className="w-3 h-3" />
-               <span className="text-[9px] font-black font-mono uppercase tracking-widest">{item.region_rough}</span>
+             <div className="flex items-center justify-between gap-1.5">
+               {item.region_rough && (
+               <div className="flex items-center gap-1 text-[#5a5246] min-w-0">
+                 <MapPin className="w-3 h-3 flex-shrink-0" />
+                 <span className="text-[9px] font-black font-mono uppercase tracking-widest truncate">{item.region_rough}</span>
+               </div>
+               )}
+               <VerificationBadge entry={item} className="flex-shrink-0" />
              </div>
-             )}
          </Link>
        );
      }
@@ -170,8 +174,11 @@ const T = {
          {/* Gradient scrim — guarantees title readability on any image */}
          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
          <div className="relative p-2.5 w-full">
-           <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
-             {isSolution ? 'Solution' : 'Crisis'}
+           <div className="flex items-center gap-1.5">
+             <span className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
+               {isSolution ? 'Solution' : 'Crisis'}
+             </span>
+             <VerificationBadge entry={item} />
            </div>
            <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
              {item.title}

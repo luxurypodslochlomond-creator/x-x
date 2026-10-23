@@ -1,7 +1,7 @@
 {
   "name": "ClimateAction",
   "type": "object",
-  "description": "Public climate actions on the 'Together We Change Climate' platform \u2014 cleanups, plantings, meetings, policy submissions. Reviewed before publication like solutions. No messaging stored on platform; organizers provide one contact link. Public submissions welcome with email.",
+  "description": "Public climate actions on the 'Together We Change Climate' platform \u2014 cleanups, plantings, meetings, policy submissions. Reviewed before publication like solutions. No messaging stored on platform; organizers provide one contact link. Public submissions welcome with email. An action that points at more information carries the link to its origin, and how well it is known is kept in the open.",
   "properties": {
     "title": {
       "type": "string",
@@ -48,6 +48,24 @@
     "source_url": {
       "type": "string",
       "description": "Optional link to more info or evidence"
+    },
+    "verification": {
+      "type": "string",
+      "enum": [
+        "single_source",
+        "corroborated",
+        "official_record"
+      ],
+      "default": "single_source",
+      "description": "How well this action is known, said out loud on the action itself: single_source \u2014 one origin says so; corroborated \u2014 two independent origins agree; official_record \u2014 the body behind it has put it on the record. Left at single_source until a second, independent origin is actually named, because that is the honest answer. Set by a person (admin), never by the action's own text."
+    },
+    "corroborating_source": {
+      "type": "string",
+      "description": "A second, independent origin saying the same thing, when one exists \u2014 named here, never guessed."
+    },
+    "correction_note": {
+      "type": "string",
+      "description": "A correction, in the open, with the date it was made. Actions on the record are corrected in daylight, never silently."
     },
     "status": {
       "type": "string",

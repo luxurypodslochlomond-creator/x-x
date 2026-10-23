@@ -2,16 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import VerificationBadge from '@/components/climate/VerificationBadge';
 
 // One entry on the wire. Dated, sourced, and honest about how well it is known —
 // the badge tells the reader whether one origin says this, two agree, or the body
 // itself has put it on the record. No likes, no counters, nothing to game.
-
-const VERIFICATION = {
-  official_record: { label: 'Official record', tone: 'bg-[#1e3a2b] text-[#efe7d6]' },
-  corroborated: { label: 'Corroborated', tone: 'bg-[#e2602a] text-[#141210]' },
-  single_source: { label: 'Single source', tone: 'bg-[#141210] text-[#efe7d6]' },
-};
 
 const KIND = {
   emergency: 'Emergency',
@@ -20,7 +15,6 @@ const KIND = {
 };
 
 export default function NewsEntryCard({ entry, linked = true }) {
-  const badge = VERIFICATION[entry.verification] || VERIFICATION.single_source;
   const headlineClass = 'font-black uppercase leading-[1.1] text-[#141210]';
   const headlineStyle = { fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.01em' };
 
@@ -28,7 +22,7 @@ export default function NewsEntryCard({ entry, linked = true }) {
     <article className="bg-[#f7f1e5] border-2 border-[#141210]">
       <div className="flex flex-wrap items-center gap-2 px-4 pt-4">
         <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{entry.when_label}</span>
-        <span className={`px-2 py-0.5 text-[9px] font-black font-mono uppercase tracking-wide ${badge.tone}`}>{badge.label}</span>
+        <VerificationBadge entry={entry} />
         {entry.kind && (
           <span className="px-2 py-0.5 text-[9px] font-black font-mono uppercase tracking-wide border border-[#141210]/40 text-[#5a5246]">
             {KIND[entry.kind] || entry.kind}
