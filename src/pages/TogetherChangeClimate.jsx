@@ -11,6 +11,7 @@ import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import { recordOrigin } from '@/components/climate/recordAddress';
+import { markProduced } from '@/components/shared/translationMemory';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
@@ -207,8 +208,6 @@ export default function TogetherChangeClimate() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
   const [lang, setLang] = useState(() => { try { return localStorage.getItem('climate51_lang') || 'auto'; } catch { return 'auto'; } });
-  const [liveStrings, setLiveStrings] = useState(null);
-  const [translating, setTranslating] = useState(false);
   const [autoLang, setAutoLang] = useState('en');
   const [copied, setCopied] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
@@ -278,31 +277,6 @@ export default function TogetherChangeClimate() {
   }, []);
 
   useEffect(() => {
-    const resolved = lang === 'auto' ? autoLang : lang;
-    if (T[resolved]) { setLiveStrings(null); return; }
-    if (resolved === 'en' || resolved === 'auto') { setLiveStrings(null); return; }
-    const cacheKey = 'climate51_t2_' + resolved;
-    try {
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) { setLiveStrings(JSON.parse(cached)); return; }
-    } catch { /* ignore */ }
-    let cancelled = false;
-    setTranslating(true);
-    base44.functions.invoke('translateClimate', { lang: resolved, strings: { ...T.en } })
-      .then(res => {
-        if (cancelled) return;
-        const out = res?.data?.translations || res?.translations;
-        if (out && out.title_a) {
-          setLiveStrings(out);
-          try { localStorage.setItem(cacheKey, JSON.stringify(out)); } catch { /* storage full */ }
-        }
-      })
-      .catch(() => { /* fall back to English silently */ })
-      .finally(() => { if (!cancelled) setTranslating(false); });
-    return () => { cancelled = true; };
-  }, [lang, autoLang]);
-
-  useEffect(() => {
     if (firstRender.current) { firstRender.current = false; return; }
     // The buttons carry you down to the list. The box does not: typing a kind word in the
     // filter still moves the kind, but the page stays where your thumb is, so the box
@@ -320,9 +294,21 @@ export default function TogetherChangeClimate() {
   }, []);
 
   const chosen = lang === 'auto' ? autoLang : lang;
-  const t = { ...T.en, ...(T[chosen] || liveStrings || {}) };
+  const t = { ...T.en, ...(T[chosen] || {}) };
   const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
   const isRTL = RTL_LANGS.has((chosen || '').split('-')[0]);
+
+  // ── ONE PAGE, ONE ENGINE ──
+  // Where the record's copy is written into it by hand, the record says those words itself:
+  // instantly, off the device, with nothing asked of anyone and nothing to wait for. Every
+  // other tongue is left to the single shared engine, which reads the English on the screen
+  // and translates the whole page in one ask — the same ask, and the same memory, that every
+  // other page of the record uses. What this page renders in another tongue is declared
+  // here, so that engine never translates it a second time, in a second direction.
+  useEffect(() => {
+    if (chosen === 'en') return;
+    markProduced(Object.values(T[chosen] || {}));
+  }, [chosen]);
 
   // One matching rule for the record's own box, and it is the rule the full search uses:
   // every word you type has to appear somewhere in the entry, in any order. Before, the

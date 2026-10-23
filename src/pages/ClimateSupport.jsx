@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
-import { useClimateLanguage } from '@/components/climate/useClimateLanguage';
+import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import ClimateLanguagePicker from '@/components/climate/ClimateLanguagePicker';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import { SUPPORT_STRINGS } from '@/components/climate/support/supportStrings';
@@ -14,18 +14,19 @@ import SupportThanks from '@/components/climate/support/SupportThanks';
 // sale — this is the page that has to keep that true, so a gift buys nothing here:
 // no place, no position, no mention. Names stand in the order they arrived.
 //
-// Every tongue on Earth: the page carries the same language control as the record,
-// reads the same remembered tongue, and translates its own words live.
+// Every tongue on Earth: the page carries the same language control as the record, reads the
+// same remembered tongue, and is translated by the one engine the whole record uses — the
+// same ask and the same memory as every other page, so nothing is ever translated twice.
 // It wears the same cold bands as the Founder page, so the record reads as one place.
 
 export default function ClimateSupport() {
-  const { lang, setLanguage, isRTL, translating, liveStrings } = useClimateLanguage(SUPPORT_STRINGS.en);
+  const { lang, setLanguage, isRTL, translating } = useSiteLanguage();
   const [result, setResult] = useState(null);
   const [wall, setWall] = useState({ names: [], supporters: 0 });
   const [loadingWall, setLoadingWall] = useState(true);
   const [givingOpen, setGivingOpen] = useState(false);
 
-  const t = { ...SUPPORT_STRINGS.en, ...(liveStrings || {}) };
+  const t = SUPPORT_STRINGS.en;
 
   const loadWall = async () => {
     try {

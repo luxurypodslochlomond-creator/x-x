@@ -82,7 +82,9 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
         aria-label="Choose the record's language"
         className={`w-full flex items-center justify-between gap-2 border px-2 py-1.5 min-h-[36px] text-[13px] font-bold font-mono text-left outline-none cursor-pointer ${field}`}
       >
-        <span className="truncate">{lang === 'auto' ? `🌐 Auto — ${nameFor(detected)}` : nameFor(lang)}</span>
+        {/* A language is named in its own words and never translated: a control that
+            renames itself in the tongue you are leaving cannot be trusted or used. */}
+        <span data-no-translate className="truncate">{lang === 'auto' ? `🌐 Auto — ${nameFor(detected)}` : nameFor(lang)}</span>
         <ChevronDown className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 
@@ -119,7 +121,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
                 onClick={() => choose('auto')}
                 className={`w-full flex items-center gap-2 px-3 py-2.5 min-h-[42px] text-left text-[13px] font-mono border-b ${divide} ${lang === 'auto' ? rowOn : rowIdle}`}
               >
-                <span className="flex-1 min-w-0 truncate">🌐 Auto — {nameFor(detected)}</span>
+                <span data-no-translate className="flex-1 min-w-0 truncate">🌐 Auto — {nameFor(detected)}</span>
                 <span className={`flex-shrink-0 text-[9px] font-mono uppercase tracking-widest ${dim}`}>device</span>
                 {lang === 'auto' && <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: accent }} />}
               </button>
@@ -135,7 +137,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
                   onClick={() => choose(l.code)}
                   className={`w-full flex items-center gap-2 px-3 py-2.5 min-h-[42px] text-left text-[13px] font-mono border-b ${divide} ${chosen === l.code ? rowOn : rowIdle}`}
                 >
-                  <span className="flex-1 min-w-0 truncate">{l.label}</span>
+                  <span data-no-translate className="flex-1 min-w-0 truncate">{l.label}</span>
                   {chosen === l.code && <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: accent }} />}
                 </button>
               ))}

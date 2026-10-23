@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
+import { producedWords, markProduced } from '@/components/shared/translationMemory';
 
 // ── EVERY TONGUE · NOBODY LEFT BEHIND, ON EVERY PAGE ──
 // Rather than rewriting hundreds of pages, this reads the words actually on the screen,
@@ -50,26 +51,9 @@ function saveDict(lang, dict) {
   } catch { /* storage full or private mode — the page still reads, it just re-asks next time */ }
 }
 
-// ── OUR OWN WORDS ARE NEVER THE SOURCE ──
-// Every word this translator has itself put on a page, in any tongue. A word in here is
-// never treated as the words the app wrote: when a reader changes tongue, the page is
-// holding OUR translation of the English, and taking that as the source asks for a
-// translation of a translation — which is how one page ends up in two tongues at once.
-let producedCache = null;
-function producedWords() {
-  if (producedCache) return producedCache;
-  const out = new Set();
-  try {
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (!key || !key.startsWith('uf51_site_dict_')) continue;
-      const dict = JSON.parse(localStorage.getItem(key) || '{}');
-      Object.values(dict).forEach((v) => { if (typeof v === 'string' && v) out.add(v.trim()); });
-    }
-  } catch { /* private mode — the guard simply starts empty */ }
-  producedCache = out;
-  return out;
-}
+// Every word this platform has produced is remembered in translationMemory, shared with
+// the record's own hand-written copy — one store, so no engine ever translates another's
+// words. See that file for why this matters.
 
 function translatable(node) {
   const parent = node.parentElement;
@@ -120,6 +104,10 @@ export default function SiteTranslator() {
     else if (held !== raw && !translated.current.has(raw.trim()) && !producedWords().has(raw.trim())) originals.set(node, raw);
     const source = (originals.get(node) || raw).trim();
     if (!source) return null;
+
+    // Our own words — the record's hand-written copy, or anything this engine has already
+    // put on a page — are not English, and are never translated and never asked about.
+    if (producedWords().has(source)) return null;
 
     const t = dict[source];
     if (t && t !== source && raw.includes(source)) {
@@ -177,7 +165,7 @@ export default function SiteTranslator() {
         const t = out[`s${i}`];
         if (typeof t === 'string' && t.trim()) {
           dict[s] = t.trim();
-          producedWords().add(t.trim()); // we made this word — it is never a source
+          markProduced([t.trim()]); // we made this word — it is never a source
         }
       });
       translated.current = new Set(Object.values(dict));
