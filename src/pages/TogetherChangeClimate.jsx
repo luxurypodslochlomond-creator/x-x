@@ -120,6 +120,9 @@ const T = {
 
 
  function SolutionCard({ item }) {
+     // Green says solution, red says emergency. A crisis card wears the record's red — it
+     // had been wearing the same blue as every other link here, so the most urgent entry
+     // on the page read as the calmest thing on it.
      const isSolution = item.entry_type === 'solution';
      const hasImage = !!item.image_url;
 
@@ -130,14 +133,14 @@ const T = {
          <Link
            to={`/ClimateDetail/${item.entry_type}/${item.id}`}
            className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${
-             isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
+             isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
            } min-h-[110px] lg:min-h-[168px] flex flex-col justify-between active:scale-95 transition-transform duration-100 p-2.5`}
-         >
+           >
            <div className="flex items-center justify-between">
-             <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#e2602a]'}`}>
+             <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}`}>
                {isSolution ? 'Solution' : 'Crisis'}
              </div>
-             <SignalBeacon size={14} color={isSolution ? '#1e3a2b' : '#0f5f7a'} />
+             <SignalBeacon size={14} color={isSolution ? '#1e3a2b' : '#b3261e'} />
              </div>
              <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-4">
              {item.title}
@@ -156,7 +159,7 @@ const T = {
        <Link
          to={`/ClimateDetail/${item.entry_type}/${item.id}`}
          className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
-           isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#e2602a]'
+           isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
          } min-h-[110px] lg:min-h-[168px] flex items-end active:scale-95 transition-transform duration-100`}
        >
          <img
@@ -171,7 +174,7 @@ const T = {
          {/* Gradient scrim — guarantees title readability on any image */}
          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
          <div className="relative p-2.5 w-full">
-           <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ff9a6b]'}`}>
+           <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ef5a4a]'}`}>
              {isSolution ? 'Solution' : 'Crisis'}
            </div>
            <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
@@ -399,32 +402,34 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── OPENING BAND — her words and the covenant. Petrol, not the good-earth green:
-             on this record green means a solution, and this band is the cold machine
-             opening the transmission. ── */}
-      <div className="bg-[#0f5f7a] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b-2 border-[#e2602a]/40" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      {/* ── OPENING BAND — her words and the covenant, on the record's own paper.
+             It was a coloured panel, and a coloured panel at the very top made the record
+             open cold: a mid-tone field between the paper and the black has nowhere to sit.
+             Her line is set in the reading face, not the display face, and not bold — so
+             it speaks instead of competing with the headline underneath it. ── */}
+      <div className="bg-[#efe7d6] px-5 py-5 flex flex-col items-center justify-center gap-1 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
-          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+          <span className="w-1 h-1 rounded-full bg-[#0f5f7a] animate-pulse flex-shrink-0" />
           <span
-            className="text-center text-[#efe7d6] leading-[1.15] max-w-[46ch]"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px, 4.6vw, 26px)', letterSpacing: '-0.01em' }}
+            className="text-center text-[#141210] font-normal leading-[1.5] max-w-[52ch]"
+            style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(15px, 3.6vw, 19px)' }}
           >
             "Every single day, we hold the power to shape the world around us."
           </span>
-          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+          <span className="w-1 h-1 rounded-full bg-[#0f5f7a] animate-pulse flex-shrink-0" />
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/80">Dr. Jane Goodall</span>
-          <span aria-hidden="true" className="h-3 w-px bg-[#efe7d6]/20" />
+          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#5a5246]">Dr. Jane Goodall</span>
+          <span aria-hidden="true" className="h-3 w-px bg-[#141210]/20" />
           {/* One house, named once. Roots & Shoots IS the Jane Goodall Institute's
               programme, so listing them as two separate voices read as two bodies
               standing behind one line. The link goes to the one that published it. */}
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/60">
+          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#5a5246]">
             <a
               href="https://www.rootsnshoots.org.uk"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-black text-[#e2602a] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
+              className="font-black text-[#0f5f7a] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
             >
               Roots &amp; Shoots
             </a>
@@ -434,19 +439,19 @@ export default function TogetherChangeClimate() {
         {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why.
             A hairline detaches it: it is the record's own mark, and inside her credit row it read
             as though it belonged to her. */}
-        <span aria-hidden="true" className="w-16 h-px bg-[#efe7d6]/25 mt-1" />
+        <span aria-hidden="true" className="w-16 h-px bg-[#141210]/20 mt-2" />
         <div className="flex items-center gap-2 flex-wrap justify-center">
           <Link
             to="/XEqualsX"
-            className="text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
+            className="text-[12px] font-black font-mono text-[#0f5f7a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
           >
             x = x
           </Link>
-          <span className="text-[9px] font-mono uppercase tracking-[0.16em] text-[#efe7d6]/50">the record's covenant</span>
+          <span className="text-[9px] font-mono uppercase tracking-[0.16em] text-[#5a5246]">the record's covenant</span>
         </div>
       </div>
 
-      {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
+      {/* ── HERO — two bands, bone and ink. The only colour in this block is one word. ── */}
       <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: 'clamp(460px, 62vh, 620px)' }}>
         <img
           src={IMAGES.global}
@@ -456,7 +461,9 @@ export default function TogetherChangeClimate() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'grayscale(1) contrast(1.35)', mixBlendMode: 'screen', opacity: 0.46 }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(15,95,122,.34), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
+        {/* Neutral wash, no blue in it: a blue wash over a full-width picture is a blue
+            field by another name, and the blue has to stay small to mean anything. */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,.42), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
         {/* Scanline texture — cold transmission signal */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
@@ -493,11 +500,13 @@ export default function TogetherChangeClimate() {
           </div>
         </div>
 
-        {/* Signal band */}
-        <div className="relative z-10 bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
-          <p className="text-[12px] font-bold uppercase leading-relaxed max-w-[330px] lg:max-w-[640px] text-[#141210] tracking-wide">{t.sub}</p>
+        {/* Closing band — ink, not a second colour. It was the brightest slab on the record,
+             and that slab spent the blue before a single entry had been read, so there was
+             nothing left for the blue to point at. The record opens deep and stays deep. */}
+        <div className="relative z-10 bg-[#141210] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
+          <p className="text-[12px] font-bold uppercase leading-relaxed max-w-[330px] lg:max-w-[640px] text-[#efe7d6] tracking-wide">{t.sub}</p>
           {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
-          <p className="text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-[#141210] tracking-[0.09em]" style={{ opacity: 0.8 }}>
+          <p className="text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-[#efe7d6] tracking-[0.09em]" style={{ opacity: 0.8 }}>
             Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
           </p>
         </div>
@@ -555,7 +564,7 @@ export default function TogetherChangeClimate() {
               <button
                 onClick={() => setSelectedType(selectedType === 'climate_crisis' ? 'all' : 'climate_crisis')}
                 className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-                  selectedType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
+                  selectedType === 'climate_crisis' ? 'bg-[#b3261e] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#b3261e] hover:text-[#efe7d6]'
                 }`}
               >{t.crises}</button>
               {/* The door is on the toolbar from the start, not only once a gathering exists:
@@ -656,7 +665,7 @@ export default function TogetherChangeClimate() {
                 <div className="flex items-center gap-2 mb-3">
                   <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.crises}</h2>
                   <div className="flex-1 h-px bg-[#141210]/20" />
-                  <span className="text-[10px] font-black font-mono text-[#e2602a]">{crises.length}</span>
+                  <span className="text-[10px] font-black font-mono text-[#b3261e]">{crises.length}</span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
                   {crises.map((item, i) => (

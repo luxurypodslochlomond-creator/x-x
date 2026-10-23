@@ -183,7 +183,7 @@ export default function ClimateSubmitForm({ onClose }) {
             type="button"
             onClick={() => setEntryType('climate_crisis')}
             className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
-              entryType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
+              entryType === 'climate_crisis' ? 'bg-[#b3261e] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
             }`}
           >
             <AlertTriangle className="w-4 h-4" /> Crisis

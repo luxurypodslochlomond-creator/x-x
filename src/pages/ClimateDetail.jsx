@@ -252,7 +252,7 @@ export default function ClimateDetail() {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="absolute bottom-4 lg:bottom-6 left-5 lg:left-10 right-5 lg:right-10">
-            <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'}`}>
+            <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#b3261e] text-[#efe7d6]'}`}>
               {isSolution ? 'Solution' : 'Climate Crisis'}
             </span>
           </div>
@@ -262,8 +262,8 @@ export default function ClimateDetail() {
           <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#0f5f7a'} />
-          <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#e2602a] text-[#141210]'}`}>
+          <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#b3261e'} />
+          <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#b3261e] text-[#efe7d6]'}`}>
             {isSolution ? 'Solution' : 'Climate Crisis'}
           </span>
         </div>

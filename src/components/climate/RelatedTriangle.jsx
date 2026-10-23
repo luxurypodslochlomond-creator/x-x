@@ -47,11 +47,11 @@ export default function RelatedTriangle({ category, items = [], actions = [], cu
           <button
             key={c.id}
             onClick={() => onOpenItem?.(c)}
-            className="w-full flex items-center gap-2.5 p-2.5 bg-[#f7f1e5] border border-[#e2602a]/40 hover:border-[#e2602a] active:scale-[0.98] transition-all text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 bg-[#f7f1e5] border border-[#b3261e]/40 hover:border-[#b3261e] active:scale-[0.98] transition-all text-left"
           >
-            <AlertTriangle className="w-4 h-4 text-[#e2602a] flex-shrink-0" />
+            <AlertTriangle className="w-4 h-4 text-[#b3261e] flex-shrink-0" />
             <div className="flex-1 min-w-0">
-              <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#e2602a] block">Crisis</span>
+              <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] block">Crisis</span>
               <span className="text-[11px] font-mono font-bold text-[#141210] block truncate">{c.title}</span>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-[#5a5246] flex-shrink-0" />
