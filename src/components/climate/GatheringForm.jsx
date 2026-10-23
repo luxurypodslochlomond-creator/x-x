@@ -24,7 +24,7 @@ function Done({ onClose, published }) {
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
         {published
           ? 'Anyone working on the same thing in your area can now find it and reach you directly. The record never sees or keeps your messages.'
-          : 'The spam screen was unsure about this one, so a person will look before it appears. We will email you either way.'}
+          : 'The spam screen was unsure about this one, so a person will look before it appears. Nothing goes on the record without someone reading it.'}
       </p>
       <button onClick={onClose} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
         Back to the record
