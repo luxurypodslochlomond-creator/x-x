@@ -69,6 +69,10 @@ export default function RecordSearchGuide() {
           searchable. Name one — Horizon International, a journal, an official body — and everything resting
           on it comes back.
         </p>
+        <p className="text-[11px] lg:text-[12px] font-mono text-[#efe7d6]/80 leading-relaxed mt-2.5">
+          The record answers for itself as well: the founder, who built it, how it is made, who decides, and
+          how to cite an entry.
+        </p>
         <div className="flex flex-wrap gap-2 mt-3.5">
           <Link
             to="/ClimateMethod"

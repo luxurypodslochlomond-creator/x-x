@@ -75,6 +75,8 @@ export default function ClimateSearch() {
 
   const results = data?.results;
   const sections = results ? SECTIONS.map((s) => ({ ...s, items: results[s.key] || [] })).filter((s) => s.items.length > 0) : [];
+  // The record's own pages — the founder, who built it, how it is made, how to cite it.
+  const about = data?.about || [];
 
   return (
     <ClimateRecordShell
@@ -124,7 +126,9 @@ export default function ClimateSearch() {
             <p className="text-[11px] font-mono text-[#141210]">
               {data.total > 0
                 ? `${data.total} ${data.total === 1 ? 'entry' : 'entries'} on the record match “${data.query}”`
-                : `Nothing on the record matches “${data.query}” yet`}
+                : about.length > 0
+                  ? `No entries match “${data.query}” — but the record's own pages do.`
+                  : `Nothing on the record matches “${data.query}” yet`}
             </p>
             {data.translatedFrom && (
               <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
@@ -133,7 +137,7 @@ export default function ClimateSearch() {
             )}
           </div>
 
-          {sections.length === 0 ? (
+          {sections.length === 0 && about.length === 0 ? (
             <div className="mt-6">
               <p className="text-[11px] font-mono uppercase tracking-widest text-[#5a5246] mb-2">
                 Nothing here for those words
@@ -160,6 +164,38 @@ export default function ClimateSearch() {
             </div>
           ) : (
             <div className="mt-6 space-y-6">
+              {/* The record answering about itself, before the sourced entries. Marked in
+                  the signal colour so it is never mistaken for an entry with an origin. */}
+              {about.length > 0 && (
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <h2
+                      className="font-black uppercase"
+                      style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 27px)', letterSpacing: '-0.022em', color: '#e2602a' }}
+                    >
+                      About the record
+                    </h2>
+                    <div className="flex-1 h-px bg-[#141210]/20" />
+                    <span className="text-[10px] font-black font-mono text-[#e2602a]">{about.length}</span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                    {about.map((a) => (
+                      <Link
+                        key={`${a.path}-${a.label}`}
+                        to={a.path}
+                        className="block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
+                      >
+                        <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest px-1.5 py-0.5 border border-[#e2602a] text-[#e2602a]">
+                          {a.label}
+                        </span>
+                        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{a.title}</h3>
+                        <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{a.line}</p>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               {sections.map((s) => (
                 <section key={s.key}>
                   <div className="flex items-center gap-2 mb-3">

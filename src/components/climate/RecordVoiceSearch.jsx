@@ -13,6 +13,15 @@ export default function RecordVoiceSearch({ onTranscript, disabled }) {
   const [error, setError] = useState(null);
   const recRef = useRef(null);
   const said = useRef('');
+  // A mic that fails silently is worse than no mic: it looks broken and the reader
+  // blames themselves. These two remember what actually happened, so the button can
+  // say plainly whether nothing was heard, or whether the browser refused to listen.
+  const caught = useRef(false);
+  const refused = useRef(false);
+
+  // Inside another page's frame (a preview, a panel's embed) browsers usually refuse the
+  // mic outright. Knowing that lets us answer honestly instead of just "try again".
+  const isFramed = typeof window !== 'undefined' && window.self !== window.top;
 
   useEffect(() => {
     const SR = getRecognition();
@@ -36,19 +45,36 @@ export default function RecordVoiceSearch({ onTranscript, disabled }) {
       }
       if (finalText) said.current += finalText;
       const heard = (said.current + interim).trim();
+      if (heard) caught.current = true;
       onTranscript(heard, Boolean(finalText) && !interim);
     };
 
     rec.onerror = (e) => {
       setListening(false);
+      refused.current = true;
       if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
-        setError('Mic blocked — allow it in your browser settings, or just type your words.');
-      } else if (e.error !== 'no-speech') {
-        setError('Could not hear you — try again, or just type your words.');
+        setError(
+          isFramed
+            ? 'This page is showing inside another page, and your browser blocks the mic there. Open the record in its own tab — or type your words, which always works.'
+            : 'The mic is blocked — allow it for this site in your browser settings, or simply type your words.'
+        );
+      } else if (e.error === 'audio-capture') {
+        setError('No microphone found on this device — type your words instead.');
+      } else if (e.error === 'no-speech') {
+        setError('I heard nothing — try again a little closer to the mic, or type your words.');
+      } else {
+        setError('The mic could not be used here — type your words instead.');
       }
     };
 
-    rec.onend = () => setListening(false);
+    rec.onend = () => {
+      setListening(false);
+      // Ended with nothing heard and no error reported: say so rather than going quiet,
+      // which is what made it feel dead.
+      if (!caught.current && !refused.current) {
+        setError('I heard nothing — try again, or type your words.');
+      }
+    };
 
     recRef.current = rec;
     return () => {
@@ -69,11 +95,13 @@ export default function RecordVoiceSearch({ onTranscript, disabled }) {
     }
     setError(null);
     said.current = '';
+    caught.current = false;
+    refused.current = false;
     try {
       recRef.current.start();
       setListening(true);
     } catch {
-      setError('Could not start the mic — try again.');
+      setError('Could not start the mic here — type your words instead.');
     }
   };
 

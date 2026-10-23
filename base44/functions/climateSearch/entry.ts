@@ -1,4 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
+import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 
 // CLIMATE RECORD SEARCH — one query, every kind of entry the record holds.
 // Public (no login required). Words are ANDed, so "seagrass scotland" finds entries
@@ -18,7 +19,20 @@ const FIELDS = {
 
 // A query is words, not a pattern. Anything that could break a search pattern is
 // dropped rather than escaped, so a stray bracket can never make the record unsearchable.
-const toWords = (s) =>
+//
+// Words that carry no meaning on their own are dropped before the cap, so a question asked
+// in plain speech keeps the words that matter: "who built this and how do I cite it"
+// searches on "built" and "cite" instead of spending its whole allowance on "who, built,
+// this, and, how, do" and losing the end of the sentence. A query made only of those words
+// is used as typed, rather than answering that nothing was given.
+const STOP = new Set([
+  'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'for', 'with', 'is', 'are', 'was', 'were',
+  'be', 'been', 'do', 'does', 'did', 'who', 'whose', 'what', 'when', 'where', 'how', 'that',
+  'this', 'these', 'those', 'it', 'its', 'i', 'me', 'my', 'we', 'our', 'you', 'your', 'can',
+  'could', 'should', 'would', 'about', 'from', 'by', 'at', 'as', 'so', 'if', 'then', 'than',
+]);
+
+const clean = (s) =>
   [
     ...new Set(
       String(s || '')
@@ -27,7 +41,13 @@ const toWords = (s) =>
         .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '').trim())
         .filter((w) => w.length > 1)
     ),
-  ].slice(0, 6);
+  ];
+
+const toWords = (s) => {
+  const all = clean(s);
+  const meaningful = all.filter((w) => !STOP.has(w));
+  return (meaningful.length > 0 ? meaningful : all).slice(0, 8);
+};
 
 const andAll = (entity, words) => ({
   $and: words.map((w) => ({
@@ -107,6 +127,7 @@ export default async function (req) {
     let total = found.sol.length + found.act.length + found.grp.length + found.news.length;
     let translatedFrom = null;
     let searched = words.join(' ');
+    let usedWords = words;
 
     // Nothing in the reader's own words. If those words are not English, the entries
     // themselves may simply not be written in their tongue yet — so try once in English
@@ -131,6 +152,7 @@ export default async function (req) {
             total = secondTotal;
             translatedFrom = english.english;
             searched = enWords.join(' ');
+            usedWords = enWords;
           }
         }
       } catch (e) {
@@ -143,6 +165,10 @@ export default async function (req) {
       searched,
       translatedFrom,
       total,
+      // The record's own pages, answering for the record itself — who is behind it, who
+      // built it, how it is made, how to cite it. Kept apart from the sourced entries on
+      // purpose: a page about the record is not evidence of anything on it.
+      about: matchRecordPages(usedWords).map(({ path, label, title, line }) => ({ path, label, title, line })),
       results: {
         solutions: found.sol.filter((i) => i.entry_type !== 'climate_crisis').map(shapeSolution),
         crises: found.sol.filter((i) => i.entry_type === 'climate_crisis').map(shapeSolution),
