@@ -9,16 +9,26 @@ import '@/climate-palette.css'
 class RootErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, refreshing: false };
   }
   static getDerivedStateFromError(error) {
     return { hasError: true, error };
   }
   componentDidCatch(error, info) {
     console.error('Root error:', error, info);
+    // A file that could not be fetched is not a broken app — pick the page up again.
+    if (isModuleLoadError(error)) this.setState({ refreshing: reloadForNewBuild() });
   }
   render() {
     if (this.state.hasError) {
+      // The page is already picking itself up: show calm, not a dead end.
+      if (this.state.refreshing) {
+        return (
+          <div style={{ minHeight: '100vh', background: '#000', color: '#06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'monospace', letterSpacing: '0.3em', fontSize: '12px' }}>
+            LOADING · x = x
+          </div>
+        );
+      }
       return (
         <div style={{ minHeight: '100vh', background: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '16px', fontFamily: 'monospace', padding: '24px', textAlign: 'center' }}>
           <div style={{ fontSize: '48px' }}>⚡</div>
@@ -39,16 +49,29 @@ class RootErrorBoundary extends React.Component {
 // "Importing a module script failed" and leaves a blank screen. Pick the page up again,
 // once, quietly. At most once a minute, so a genuinely missing file can never loop.
 const BUILD_RELOAD_KEY = 'uf51_build_reload';
-const reloadForBuild = () => {
-  let allowed = true;
+const reloadForNewBuild = () => {
   try {
     const last = Number(sessionStorage.getItem(BUILD_RELOAD_KEY) || 0);
-    allowed = Date.now() - last > 60000;
-    if (allowed) sessionStorage.setItem(BUILD_RELOAD_KEY, String(Date.now()));
-  } catch { allowed = false; }
-  if (allowed) window.location.reload();
+    if (Date.now() - last < 60000) return false;
+    sessionStorage.setItem(BUILD_RELOAD_KEY, String(Date.now()));
+  } catch { return false; }
+  window.location.reload();
+  return true;
 };
-window.addEventListener('vite:preloadError', reloadForBuild);
+window.addEventListener('vite:preloadError', reloadForNewBuild);
+
+// A piece of the app that could not be fetched. Every browser says it in its own words,
+// and none of them mean the app is broken: the file simply was not there at that moment
+// (a new build landed over the page, or the connection blinked). It must never leave a
+// reader on a dead screen.
+const MODULE_LOAD_MESSAGES = [
+  'Importing a module script failed',
+  'Failed to fetch dynamically imported module',
+  'error loading dynamically imported module',
+  'Outdated Optimize Dep',
+];
+const isModuleLoadError = (error) =>
+  MODULE_LOAD_MESSAGES.some((m) => `${error?.name || ''} ${error?.message || ''}`.includes(m));
 
 console.log('🚀 UF51 mounting...');
 
