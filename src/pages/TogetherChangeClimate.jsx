@@ -333,10 +333,10 @@ export default function TogetherChangeClimate() {
     });
   }, [actions, query, selectedCategory]);
 
-  // A gathering only counts as a gathering when a person can actually be reached.
-  // Anything with no organiser's address is just a name on a page, so it stays off
-  // the record rather than sitting there half-empty. No invented contacts, ever.
-  const liveGroups = useMemo(() => groups.filter(g => g.contact_email), [groups]);
+  // Every gathering on the record shows now, whether or not an organiser has given
+  // an address. One with an address carries its contact line; one without carries
+  // none at all — no invented contacts, and no gathering hidden away either.
+  const liveGroups = groups;
 
   const filteredGroups = useMemo(() => {
     return liveGroups.filter(g => {
