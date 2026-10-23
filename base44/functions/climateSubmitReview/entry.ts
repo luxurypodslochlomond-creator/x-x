@@ -18,7 +18,7 @@ export default async function(req: Request): Promise<Response> {
     }
 
     // Build content for AI assessment
-    const contentParts = [data.title, data.headline, data.summary, data.details, data.description, data.content, data.what_changed, data.replicable].filter(Boolean);
+    const contentParts = [data.title, data.headline, data.name, data.topic, data.region, data.summary, data.details, data.description, data.content, data.what_changed, data.replicable].filter(Boolean);
     const fullContent = contentParts.join('\n\n');
 
     // 1. AI advisory note
@@ -77,6 +77,14 @@ Content: ${fullContent.slice(0, 2000)}`,
       aiAssessment = `${aiAssessment} · No traceable source given — held for a human.`;
     }
 
+    // A gathering is an introduction, not a conversation: the record carries a name, a topic,
+    // a rough region, and the ONE contact line the organiser chose to publish. Without a name
+    // and a topic there is nothing for anyone to find, so it waits for a person.
+    if (type === 'group' && (!data.name || !data.topic)) {
+      flagged = true;
+      aiAssessment = `${aiAssessment} · Gathering with no name or topic — held for a human.`;
+    }
+
     const status = flagged ? 'draft' : 'published';
     const recordData = { ...data, status, flagged, ai_assessment: aiAssessment };
     let record;
@@ -87,6 +95,8 @@ Content: ${fullContent.slice(0, 2000)}`,
       record = await base44.asServiceRole.entities.ClimateAction.create(recordData);
     } else if (type === 'news') {
       record = await base44.asServiceRole.entities.ClimateNews.create(recordData);
+    } else if (type === 'group') {
+      record = await base44.asServiceRole.entities.ClimateGroup.create(recordData);
     } else {
       record = await base44.asServiceRole.entities.ClimateSolution.create(recordData);
     }
@@ -95,7 +105,7 @@ Content: ${fullContent.slice(0, 2000)}`,
     const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
     if (adminEmail) {
       try {
-        const title = data.title || data.headline || (data.content ? data.content.slice(0, 60) : 'Untitled');
+        const title = data.title || data.headline || data.name || (data.content ? data.content.slice(0, 60) : 'Untitled');
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: adminEmail,
           subject: `Climate submission held for a check: ${title}`,

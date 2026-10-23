@@ -1,7 +1,7 @@
 {
   "name": "ClimateAuditLog",
   "type": "object",
-  "description": "Audit trail for climate submission reviews \u2014 records who reviewed, what action was taken, and the AI advisory note that informed the decision. Covers solutions, crises, actions, comments and entries on the wire. Admin-only access. This is the accountability record review panels ask for.",
+  "description": "Audit trail for climate submission reviews \u2014 records who reviewed, what action was taken, and the AI advisory note that informed the decision. Covers solutions, crises, actions, comments, gatherings and entries on the wire. Admin-only access. This is the accountability record review panels ask for.",
   "properties": {
     "entity_type": {
       "type": "string",
@@ -9,7 +9,8 @@
         "solution",
         "action",
         "comment",
-        "news"
+        "news",
+        "group"
       ],
       "description": "Type of entity that was reviewed"
     },

@@ -1,15 +1,15 @@
 {
   "name": "ClimateGroup",
   "type": "object",
-  "description": "Region/topic gatherings on the 'Together We Change Climate' platform \u2014 people working on the same thing in an area can share ideas directly. Faithful to Janine's spec. The record shows only the address an organiser chooses to make public here; it never publishes the address of whoever happened to add the entry.",
+  "description": "Region/topic gatherings on the 'Together We Change Climate' platform \u2014 people working on the same thing in an area can share ideas directly. An organiser starts their own gathering; the record carries the introduction, never the conversation. The record shows only the address an organiser deliberately chooses to publish here; it never publishes the address of whoever happened to add the entry.",
   "properties": {
     "name": {
       "type": "string",
-      "description": "Group name, e.g. 'Seagrass Restorers \u2014 West Coast'"
+      "description": "Group name, e.g. 'Seagrass Restorers \u2014 West Coast'. Required."
     },
     "topic": {
       "type": "string",
-      "description": "Shared interest (plastic shelters, plastic clothes, saving seagrasses, etc)"
+      "description": "Shared interest (plastic shelters, plastic clothes, saving seagrasses, etc). Required."
     },
     "region": {
       "type": "string",
@@ -21,11 +21,37 @@
     },
     "contact_email": {
       "type": "string",
-      "description": "The one address the organiser gives the record to be shown publicly on this group. Deliberately a separate field: the record never displays an account's own email, so nobody's private address ends up published by accident. Left empty when the organiser has not given one \u2014 an empty contact shows no contact line at all."
+      "description": "The one address the organiser gives the record to be shown publicly on this gathering. Deliberately a separate field: the record never displays an account's own email, so nobody's private address ends up published by accident. Left empty when the organiser has not given one \u2014 an empty contact shows 'Open gathering \u00b7 contact line being arranged' rather than a blank or an invented address."
     },
     "created_by": {
       "type": "string",
       "description": "Creator email (email required for groups, per spec)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft"
+      ],
+      "default": "published",
+      "description": "Only published gatherings appear on the record. A gathering held back waits for a person \u2014 the same rule as every other entry."
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Held back by the screener for a human look."
+    },
+    "ai_assessment": {
+      "type": "string",
+      "description": "The screener's advisory note \u2014 spam, relevance, harmful advice, and whether it is genuinely a gathering. Advisory only; a person decides."
+    },
+    "submitter_name": {
+      "type": "string",
+      "description": "Name of the organiser who started this gathering. Never published."
+    },
+    "submitter_email": {
+      "type": "string",
+      "description": "Email of the organiser \u2014 used only to reach them about this gathering. Never published."
     }
   },
   "required": [
@@ -33,7 +59,18 @@
     "topic"
   ],
   "rls": {
-    "read": {},
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
     "create": {},
     "update": {
       "user_condition": {
