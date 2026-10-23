@@ -1,42 +1,54 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   THE RECORD'S PALETTE — IN THE OCEAN KEY
+   THE RECORD'S PALETTE — WARM PAPER, INK, AND ONE COLD SIGNAL
    ─────────────────────────────────────────────────────────────────────────────
    Janine asked for blue or green instead of the orange: "more universally
-   appealing". The record wears its palette as literal colours in forty-odd
-   files. Rather than open all of them — and risk two of them drifting apart —
-   the warmth is retinted here, once, and only here.
+   appealing". The first pass paid for that brief with the warmth of the paper
+   itself — and the record lost its contrast. Every tone ended up sitting at the
+   same middle, and it began to read as a brochure rather than a transmission.
+
+   So this is the record COMPOSED, not recoloured. Big Science, not an
+   infographic: warm words, delivered coldly and clearly.
+
+   BONE PAPER     #efe7d6 · #f4efe4 · #f7f1e5
+       The reading ground. Warm, human, used large. Left exactly as Beadie drew
+       it — the paper was never the thing Janine was asking about.
+
+   INK            #141210 · #1a1612
+       The dark. Large, black, untouched.
+
+   ONE BLUE, THREE DEPTHS — the cold machine voice, and the whole of it:
+       deep     #0f5f7a   the accent on paper: rules, borders, links — and the
+                          record's own deep panel at the head of it
+       electric #7fc9e4   the signal fill (ink sits on it) and every accent on a
+                          dark band. One electric line, used small and cold.
+       sky      #bfe8f7   the accent inside the deep panel itself, or it sinks
+
+   GROWTH GREEN   #1e3a2b
+       Kept, and given one job: it means a solution. Solution rules and labels,
+       the gathering door — and the record's own voice at the foot of it.
+
+   EMERGENCY RED  #b3261e
+       Untouched. On this record red means a climate emergency, and nothing else.
 
    Every rule matches on the exact class the record already wears, so the whole
    record turns together and nothing can go half-blue. If a future component
    uses a new warm class, add it to this list in the same breath.
 
-   ORANGE SIGNAL  #e2602a  →  ocean blue
-       fill (with ink on it)      #4fb0cf   light, so the ink stays readable
-       accent on paper            #0f5f7a   deep enough to read on light pages
-       accent inside an ink panel #7fc9e4   the light one, or it is invisible
-       accent in the ocean head panel #bfe8f7  lighter again, or it sinks
-
-   WARM PAPER     #efe7d6 / #f4efe4 / #f7f1e5  →  cool paper
-       #e9eeec  ·  #edf2f0  ·  #f4f8f7
-
-   WARM GREYS     #5a5246 / #6b6258 / #3a342c  →  cool greys
-
-   NOT CHANGED, ON PURPOSE:
-       #b3261e  emergency red — on this record red means a climate emergency
-       #1e3a2b  the deep green of solutions and of the record's own panels
-       #141210 / #1a1612  ink
    Scoped to .climate-record (the record's layout and page shell) so no other
-   part of the platform moves. To try another blue, change the three values
-   above — nothing else needs touching.
+   part of the platform moves.
    ───────────────────────────────────────────────────────────────────────────── */
 
-/* ── FILLS — the bright signal, now a light ocean ─────────────────────────── */
-.climate-record [class~="bg-[#e2602a]"] { background-color: #4fb0cf; }
-.climate-record [class~="bg-[#e2602a]/70"] { background-color: rgb(79 176 207 / 0.7); }
-.climate-record [class~="bg-[#e2602a]/10"] { background-color: rgb(79 176 207 / 0.1); }
-.climate-record [class~="hover:bg-[#e2602a]"]:hover { background-color: #4fb0cf; }
-.climate-record [class~="active:bg-[#e2602a]"]:active { background-color: #4fb0cf; }
-.climate-record [class~="active:bg-[#e2602a]/10"]:active { background-color: rgb(79 176 207 / 0.1); }
+/* ── THE SIGNAL FILL ─────────────────────────────────────────────────────────
+   Every fill on the record is worn with ink (#141210) on it, so the fill has to
+   stay the light step of the family. And it has to be the SAME blue as the
+   electric line — a second, brighter cyan standing beside it is what made the
+   first pass shout. */
+.climate-record [class~="bg-[#e2602a]"] { background-color: #7fc9e4; }
+.climate-record [class~="bg-[#e2602a]/70"] { background-color: rgb(127 201 228 / 0.7); }
+.climate-record [class~="bg-[#e2602a]/10"] { background-color: rgb(127 201 228 / 0.1); }
+.climate-record [class~="hover:bg-[#e2602a]"]:hover { background-color: #7fc9e4; }
+.climate-record [class~="active:bg-[#e2602a]"]:active { background-color: #7fc9e4; }
+.climate-record [class~="active:bg-[#e2602a]/10"]:active { background-color: rgb(127 201 228 / 0.1); }
 
 /* ── THE ACCENT ON PAPER ──────────────────────────────────────────────────── */
 .climate-record [class~="text-[#e2602a]"] { color: #0f5f7a; }
@@ -45,9 +57,9 @@
 .climate-record [class~="active:text-[#e2602a]"]:active { color: #0f5f7a; }
 .climate-record [class~="decoration-[#e2602a]"] { text-decoration-color: #0f5f7a; }
 
-/* ── THE SAME ACCENT INSIDE AN INK PANEL ──────────────────────────────────────
+/* ── THE SAME ACCENT INSIDE A DARK PANEL ──────────────────────────────────────
    Carries more weight than the paper rule, and so wins inside the dark bands
-   without any !important anywhere in this file. */
+   without any !important anywhere in this file. This is the electric line. */
 .climate-record [class~="bg-[#141210]"] [class~="text-[#e2602a]"],
 .climate-record [class~="bg-[#1e3a2b]"] [class~="text-[#e2602a]"],
 .climate-record [class~="bg-[#1a1612]"] [class~="text-[#e2602a]"],
@@ -58,16 +70,18 @@
 .climate-record [class~="bg-[#141210]"][class~="text-[#ff9a6b]"],
 .climate-record [class~="bg-[#1e3a2b]"] [class~="text-[#ff9a6b]"] { color: #7fc9e4; }
 
-/* ── THE OCEAN PANEL — the epigraph at the head of the record ─────────────────
-   The deep accent is lighter than ink, so the accent inside it takes one more
-   step up to the pale sky. Without this the covenant line and its two dots
-   would sit deep blue on deep blue and vanish. */
+/* ── THE DEEP PANEL — the epigraph at the head of the record ─────────────────
+   The deep blue is lighter than ink, so the accent inside it takes one more step
+   up to the pale sky. Without this the covenant line and its two dots would sit
+   deep blue on deep blue and vanish. */
 .climate-record [class~="bg-[#0f5f7a]"] [class~="text-[#e2602a]"],
 .climate-record [class~="bg-[#0f5f7a]"][class~="text-[#e2602a]"] { color: #bfe8f7; }
 .climate-record [class~="bg-[#0f5f7a]"] [class~="bg-[#e2602a]"],
 .climate-record [class~="bg-[#0f5f7a]"][class~="bg-[#e2602a]"] { background-color: #bfe8f7; }
 .climate-record [class~="bg-[#0f5f7a]"] [class~="border-[#e2602a]/20"],
 .climate-record [class~="bg-[#0f5f7a]"][class~="border-[#e2602a]/20"] { border-color: rgb(191 232 247 / 0.25); }
+.climate-record [class~="bg-[#0f5f7a]"] [class~="border-[#e2602a]/40"],
+.climate-record [class~="bg-[#0f5f7a]"][class~="border-[#e2602a]/40"] { border-color: rgb(191 232 247 / 0.3); }
 
 /* ── BORDERS ──────────────────────────────────────────────────────────────── */
 .climate-record [class~="border-[#e2602a]"] { border-color: #0f5f7a; }
@@ -88,49 +102,12 @@
 .climate-record [class~="bg-[#141210]"][class~="border-[#e2602a]/20"] { border-color: rgb(127 201 228 / 0.2); }
 
 /* ── GRADIENT STOP ────────────────────────────────────────────────────────── */
-.climate-record [class~="via-[#e2602a]/50"] { --tw-gradient-via: rgb(79 176 207 / 0.5); }
-.climate-record [class~="via-[#e2602a]/40"] { --tw-gradient-via: rgb(79 176 207 / 0.4); }
+.climate-record [class~="via-[#e2602a]/50"] { --tw-gradient-via: rgb(127 201 228 / 0.5); }
+.climate-record [class~="via-[#e2602a]/40"] { --tw-gradient-via: rgb(127 201 228 / 0.4); }
 
-/* ── PAPER — the warm sand becomes a cool paper, still paper ──────────────── */
-.climate-record [class~="bg-[#efe7d6]"] { background-color: #e9eeec; }
-.climate-record [class~="bg-[#efe7d6]/95"] { background-color: rgb(233 238 236 / 0.95); }
-.climate-record [class~="bg-[#efe7d6]/20"] { background-color: rgb(233 238 236 / 0.2); }
-.climate-record [class~="bg-[#efe7d6]/15"] { background-color: rgb(233 238 236 / 0.15); }
-.climate-record [class~="bg-[#efe7d6]/12"] { background-color: rgb(233 238 236 / 0.12); }
-.climate-record [class~="bg-[#efe7d6]/10"] { background-color: rgb(233 238 236 / 0.1); }
-.climate-record [class~="hover:bg-[#efe7d6]"]:hover { background-color: #e9eeec; }
-.climate-record [class~="active:bg-[#efe7d6]"]:active { background-color: #e9eeec; }
-.climate-record [class~="bg-[#f4efe4]"] { background-color: #edf2f0; }
-.climate-record [class~="bg-[#f7f1e5]"] { background-color: #f4f8f7; }
-.climate-record [class~="active:bg-[#f7f1e5]"]:active { background-color: #f4f8f7; }
-.climate-record [class~="placeholder-[#5a5246]"]::placeholder { color: #5b6b69; }
-
-/* ── LIGHT TYPE ON THE INK BANDS ──────────────────────────────────────────── */
-.climate-record [class~="text-[#efe7d6]"] { color: #e9eeec; }
-.climate-record [class~="text-[#efe7d6]/90"] { color: rgb(233 238 236 / 0.9); }
-.climate-record [class~="text-[#efe7d6]/80"] { color: rgb(233 238 236 / 0.8); }
-.climate-record [class~="text-[#efe7d6]/75"] { color: rgb(233 238 236 / 0.75); }
-.climate-record [class~="text-[#efe7d6]/70"] { color: rgb(233 238 236 / 0.7); }
-.climate-record [class~="text-[#efe7d6]/60"] { color: rgb(233 238 236 / 0.6); }
-.climate-record [class~="text-[#efe7d6]/55"] { color: rgb(233 238 236 / 0.55); }
-.climate-record [class~="text-[#efe7d6]/50"] { color: rgb(233 238 236 / 0.5); }
-.climate-record [class~="text-[#efe7d6]/45"] { color: rgb(233 238 236 / 0.45); }
-.climate-record [class~="text-[#efe7d6]/40"] { color: rgb(233 238 236 / 0.4); }
-.climate-record [class~="text-[#efe7d6]/35"] { color: rgb(233 238 236 / 0.35); }
-.climate-record [class~="text-[#efe7d6]/30"] { color: rgb(233 238 236 / 0.3); }
-.climate-record [class~="text-[#efe7d6]/25"] { color: rgb(233 238 236 / 0.25); }
-.climate-record [class~="text-[#f4efe4]"] { color: #edf2f0; }
-.climate-record [class~="border-[#efe7d6]"] { border-color: #d7e2de; }
-.climate-record [class~="border-[#efe7d6]/25"] { border-color: rgb(215 226 222 / 0.25); }
-.climate-record [class~="border-[#efe7d6]/20"] { border-color: rgb(215 226 222 / 0.2); }
-.climate-record [class~="border-[#efe7d6]/10"] { border-color: rgb(215 226 222 / 0.1); }
-
-/* ── THE QUIET TYPE ───────────────────────────────────────────────────────── */
-.climate-record [class~="text-[#5a5246]"] { color: #5b6b69; }
-.climate-record [class~="text-[#5a5246]/70"] { color: rgb(91 107 105 / 0.7); }
-.climate-record [class~="text-[#5a5246]/60"] { color: rgb(91 107 105 / 0.6); }
-.climate-record [class~="text-[#5a5246]/50"] { color: rgb(91 107 105 / 0.5); }
-.climate-record [class~="text-[#5a5246]/40"] { color: rgb(91 107 105 / 0.4); }
-.climate-record [class~="text-[#6b6258]"] { color: #5e706e; }
-.climate-record [class~="text-[#6b6258]/40"] { color: rgb(94 112 110 / 0.4); }
-.climate-record [class~="text-[#3a342c]"] { color: #3f4a48; }
+/* ── DELIBERATELY NOT OVERRIDDEN ──────────────────────────────────────────────
+   The paper, the ink, the quiet type and the bone type on dark bands are left
+   exactly as the record wears them: paper #efe7d6 / #f4efe4 / #f7f1e5, ink
+   #141210 / #1a1612, quiet type #5a5246 / #6b6258, bone #efe7d6 on every dark
+   band. The first pass cooled all of it to grey-green, and that is what took the
+   contrast out of the record. There is nothing left to remap here. */

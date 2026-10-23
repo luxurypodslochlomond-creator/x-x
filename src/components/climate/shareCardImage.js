@@ -11,12 +11,12 @@ const H = 1350;
 
 // The record's palette, in the ocean key — kept in step with src/climate-palette.css
 // so a card that travels looks like the page it came from. Emergency red stays red.
-const PAPER = '#edf2f0';
-const BONE = '#e9eeec';
+const PAPER = '#f4efe4';
+const BONE = '#efe7d6';
 const INK = '#141210';
 const SIGNAL = '#b3261e';
-const SIGNAL_BRIGHT = '#4fb0cf';
-const MUTED = '#5b6b69';
+const SIGNAL_BRIGHT = '#7fc9e4';
+const MUTED = '#5a5246';
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
 

@@ -73,11 +73,11 @@ export default function ClimateImpactMap({ stats }) {
           animation: impact-breathe 7s ease-in-out infinite;
         }
         .impact-map .leaflet-container {
-          background: #e9eeec;
+          background: #efe7d6;
           font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         }
         .impact-map .leaflet-control-zoom a {
-          background: #e9eeec !important;
+          background: #efe7d6 !important;
           border-color: #1a1612 !important;
           color: #1a1612 !important;
           font-family: monospace !important;
@@ -89,7 +89,7 @@ export default function ClimateImpactMap({ stats }) {
         }
         .impact-map .leaflet-tooltip {
           background: #141210;
-          color: #e9eeec;
+          color: #efe7d6;
           border: none;
           border-radius: 0;
           font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -111,7 +111,7 @@ export default function ClimateImpactMap({ stats }) {
         scrollWheelZoom={true}
         zoomControl={true}
         className="impact-map"
-        style={{ height: '100%', width: '100%', background: '#e9eeec' }}
+        style={{ height: '100%', width: '100%', background: '#efe7d6' }}
         maxBounds={WORLD_BOUNDS}
         maxBoundsViscosity={1}
       >

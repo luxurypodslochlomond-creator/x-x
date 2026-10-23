@@ -17,7 +17,7 @@ const makeIcon = (type, longitude = 0) => {
   if (isCrisis) {
     return L.divIcon({
       className: 'climate-marker-crisis',
-      html: `<div style="${fadeIn}"><div style="position:relative;width:14px;height:14px;"><div style="position:absolute;inset:-6px;border:2px solid #b3261e;border-radius:50%;animation:climate-ping 2s ease-out infinite ${delay}s;"></div><div style="position:absolute;inset:0;width:14px;height:14px;background:#b3261e;border:2px solid #e9eeec;border-radius:50%;box-shadow:0 0 10px rgba(179,38,30,0.7);"></div></div></div>`,
+      html: `<div style="${fadeIn}"><div style="position:relative;width:14px;height:14px;"><div style="position:absolute;inset:-6px;border:2px solid #b3261e;border-radius:50%;animation:climate-ping 2s ease-out infinite ${delay}s;"></div><div style="position:absolute;inset:0;width:14px;height:14px;background:#b3261e;border:2px solid #efe7d6;border-radius:50%;box-shadow:0 0 10px rgba(179,38,30,0.7);"></div></div></div>`,
       iconSize: [14, 14],
       iconAnchor: [7, 7],
       popupAnchor: [0, -8],
@@ -26,7 +26,7 @@ const makeIcon = (type, longitude = 0) => {
   if (isAction) {
     return L.divIcon({
       className: 'climate-marker-action',
-      html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1e3a2b;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #e9eeec;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div></div></div>`,
+      html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1e3a2b;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #efe7d6;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div></div></div>`,
       iconSize: [11, 11],
       iconAnchor: [5, 5],
       popupAnchor: [0, -6],
@@ -35,7 +35,7 @@ const makeIcon = (type, longitude = 0) => {
   // solution
   return L.divIcon({
     className: 'climate-marker-solution',
-    html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1a1612;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1a1612;border:2px solid #e9eeec;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div></div></div>`,
+    html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1a1612;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1a1612;border:2px solid #efe7d6;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div></div></div>`,
     iconSize: [11, 11],
     iconAnchor: [5, 5],
     popupAnchor: [0, -6],
@@ -154,11 +154,11 @@ export default function ClimateMap() {
           animation: climate-breathe 7s ease-in-out infinite;
         }
         .climate-map .leaflet-container {
-          background: #e9eeec;
+          background: #efe7d6;
           font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         }
         .climate-map .leaflet-popup-content-wrapper {
-          background: #e9eeec;
+          background: #efe7d6;
           border: 2px solid #1a1612;
           border-radius: 0;
           box-shadow: 0 6px 24px rgba(0,0,0,0.35);
@@ -171,12 +171,12 @@ export default function ClimateMap() {
           overflow-y: auto;
         }
         .climate-map .leaflet-popup-tip {
-          background: #e9eeec;
+          background: #efe7d6;
           border: 2px solid #1a1612;
           box-shadow: none;
         }
         .climate-map .leaflet-popup-close-button {
-          color: #e9eeec !important;
+          color: #efe7d6 !important;
           font-size: 20px !important;
           top: 4px !important;
           right: 6px !important;
@@ -185,7 +185,7 @@ export default function ClimateMap() {
           z-index: 10;
         }
         .climate-map .leaflet-control-zoom a {
-          background: #e9eeec !important;
+          background: #efe7d6 !important;
           border-color: #1a1612 !important;
           color: #1a1612 !important;
           font-family: monospace !important;
@@ -207,7 +207,7 @@ export default function ClimateMap() {
         maxBoundsViscosity={1}
         scrollWheelZoom={true}
         className="climate-map"
-        style={{ height: '100%', width: '100%', background: '#e9eeec' }}
+        style={{ height: '100%', width: '100%', background: '#efe7d6' }}
       >
         <FitWorld />
         <TileLayer
@@ -223,7 +223,7 @@ export default function ClimateMap() {
               <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
                 <div style={{
                   background: m.type === 'climate_crisis' ? '#b3261e' : m.type === 'action' ? '#1e3a2b' : '#1a1612',
-                  color: '#e9eeec',
+                  color: '#efe7d6',
                   padding: '6px 10px',
                   fontSize: '8px',
                   fontWeight: 900,
@@ -235,7 +235,7 @@ export default function ClimateMap() {
                 }}>
                   <span style={{
                     width: '5px', height: '5px', borderRadius: '50%',
-                    background: '#e9eeec', display: 'inline-block',
+                    background: '#efe7d6', display: 'inline-block',
                   }} />
                   {m.type === 'climate_crisis' ? 'CRISIS SIGNAL' : m.type === 'action' ? 'ACTION SIGNAL' : 'SOLUTION SIGNAL'}
                 </div>
@@ -248,7 +248,7 @@ export default function ClimateMap() {
                   </div>
                   {m.summary && (
                     <div style={{
-                      fontSize: '10px', color: '#5e706e', lineHeight: 1.4,
+                      fontSize: '10px', color: '#6b6258', lineHeight: 1.4,
                       marginBottom: '8px',
                       display: '-webkit-box',
                       WebkitLineClamp: 3,
@@ -271,8 +271,8 @@ export default function ClimateMap() {
                     {(m.country || m.region) && (
                       <span style={{
                         fontSize: '7px', fontWeight: 900, textTransform: 'uppercase',
-                        letterSpacing: '0.08em', color: '#5e706e',
-                        border: '1px solid #5e706e', padding: '2px 5px',
+                        letterSpacing: '0.08em', color: '#6b6258',
+                        border: '1px solid #6b6258', padding: '2px 5px',
                       }}>
                         {m.country || m.region}
                       </span>
@@ -282,7 +282,7 @@ export default function ClimateMap() {
                     to={`/ClimateDetail/${m.type === 'action' ? 'action' : 'solution'}/${m.id}`}
                     style={{
                       display: 'block', textAlign: 'center',
-                      background: '#1a1612', color: '#e9eeec',
+                      background: '#1a1612', color: '#efe7d6',
                       padding: '6px 10px', fontSize: '9px',
                       fontWeight: 900, textTransform: 'uppercase',
                       letterSpacing: '0.1em', textDecoration: 'none',
@@ -336,12 +336,12 @@ export default function ClimateMap() {
       <div className="absolute top-3 right-3 z-[1000] bg-[#141210]/95 border border-[#e2602a]/40 px-3 py-2 pointer-events-none">
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#e9eeec]">
+          <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
             {loading ? 'RECEIVING…' : `${markers.length} SIGNALS`}
           </span>
         </div>
         {!loading && markers.length > 0 && (
-          <div className="flex gap-2 mt-1 text-[7px] font-mono font-bold text-[#e9eeec]/60">
+          <div className="flex gap-2 mt-1 text-[7px] font-mono font-bold text-[#efe7d6]/60">
             <span><span style={{ color: '#b3261e' }}>●</span> {crisisCount}</span>
             <span><span style={{ color: '#1a1612' }}>■</span> {solutionCount}</span>
             <span><span style={{ color: '#1e3a2b' }}>◆</span> {actionCount}</span>
@@ -350,32 +350,32 @@ export default function ClimateMap() {
       </div>
 
       {/* Legend — bottom left */}
-      <div className="absolute bottom-3 left-3 z-[1000] bg-[#e9eeec]/95 border-2 border-[#1a1612] p-2.5 pointer-events-none">
+      <div className="absolute bottom-3 left-3 z-[1000] bg-[#efe7d6]/95 border-2 border-[#1a1612] p-2.5 pointer-events-none">
         <div className="text-[7px] font-black font-mono uppercase tracking-widest text-[#1a1612] mb-1.5">LEGEND</div>
         <div className="flex items-center gap-2 mb-1">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#b3261e] border border-[#e9eeec]" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#b3261e] border border-[#efe7d6]" />
           <span className="text-[8px] font-mono font-bold text-[#1a1612]">CRISIS</span>
         </div>
         <div className="flex items-center gap-2 mb-1">
-          <div className="w-2.5 h-2.5 bg-[#1a1612] border border-[#e9eeec]" />
+          <div className="w-2.5 h-2.5 bg-[#1a1612] border border-[#efe7d6]" />
           <span className="text-[8px] font-mono font-bold text-[#1a1612]">SOLUTION</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 bg-[#1e3a2b] border border-[#e9eeec] rotate-45" />
+          <div className="w-2.5 h-2.5 bg-[#1e3a2b] border border-[#efe7d6] rotate-45" />
           <span className="text-[8px] font-mono font-bold text-[#1a1612]">ACTION</span>
         </div>
       </div>
 
       {/* Loading overlay */}
       {loading && (
-        <div className="absolute inset-0 z-[1100] bg-[#e9eeec] flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 z-[1100] bg-[#efe7d6] flex items-center justify-center pointer-events-none">
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full bg-[#b3261e] animate-pulse" />
               <span className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#1a1612]">RECEIVING SIGNALS</span>
               <span className="w-2 h-2 rounded-full bg-[#b3261e] animate-pulse" />
             </div>
-            <div className="text-[8px] font-mono text-[#5e706e] tracking-widest">from a warming world…</div>
+            <div className="text-[8px] font-mono text-[#6b6258] tracking-widest">from a warming world…</div>
           </div>
         </div>
       )}

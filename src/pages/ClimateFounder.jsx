@@ -71,7 +71,7 @@ export default function ClimateFounder() {
           <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">Beirut · 1956</span>
         </div>
         {/* Scanline texture */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         <div className="relative z-10 px-6 lg:px-10 py-12 lg:py-20 flex flex-col items-center justify-center gap-5 text-center min-h-[300px] lg:min-h-[400px]">
           <SignalBeacon size={48} color="#7fc9e4" />
@@ -201,7 +201,7 @@ export default function ClimateFounder() {
 
       {/* Her vision — the mantra, cold ink */}
       <div className="relative bg-[#141210] px-5 lg:px-10 py-10 lg:py-20 text-center overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10">
           <Heart className="w-6 h-6 text-[#e2602a] mx-auto mb-4" />
           <p className="text-[14px] lg:text-[19px] font-black font-mono uppercase leading-relaxed max-w-sm lg:max-w-2xl mx-auto text-[#efe7d6]">

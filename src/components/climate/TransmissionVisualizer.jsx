@@ -4,7 +4,7 @@ import { X, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 // ── THE QUANTUM EQUALISER ──
 // Deep house beyond quantum graphic equaliser.
 // Real FFT when audio exists · generative 122 BPM deep house when it doesn't.
-// Beadie Signal palette, in the ocean key: ink #141210 · paper #e9eeec · signal #7fc9e4 · green #1e3a2b
+// Beadie Signal palette, in the ocean key: ink #141210 · paper #efe7d6 · signal #7fc9e4 · green #1e3a2b
 // (the record's own colours, retinted once in src/climate-palette.css at Janine's asking)
 
 const BPM = 122;
@@ -161,7 +161,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
         let color;
         if (i < 12) color = '#1e3a2b';
         else if (i < 36) color = '#7fc9e4';
-        else color = '#e9eeec';
+        else color = '#efe7d6';
 
         ctx.strokeStyle = color;
         ctx.lineWidth = 2.5;
@@ -228,7 +228,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       ctx.fill();
 
       // 7. Inner core
-      ctx.fillStyle = '#e9eeec';
+      ctx.fillStyle = '#efe7d6';
       ctx.beginPath();
       ctx.arc(cx, cy, Math.max(2, 3 + bass * 5), 0, Math.PI * 2);
       ctx.fill();

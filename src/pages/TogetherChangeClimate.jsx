@@ -386,7 +386,7 @@ export default function TogetherChangeClimate() {
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
-        @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #e9eeec; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #e9eeec, 0 0 24px rgba(15,95,122,.55); } }
+        @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6, 0 0 24px rgba(15,95,122,.55); } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @keyframes twcc-epigraph { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
@@ -399,8 +399,10 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── OPENING BAND — her words and the covenant. One band, then straight into the record. ── */}
-      <div className="bg-[#1e3a2b] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b-2 border-[#e2602a]/40" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      {/* ── OPENING BAND — her words and the covenant. Petrol, not the good-earth green:
+             on this record green means a solution, and this band is the cold machine
+             opening the transmission. ── */}
+      <div className="bg-[#0f5f7a] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b-2 border-[#e2602a]/40" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span
@@ -454,9 +456,9 @@ export default function TogetherChangeClimate() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'grayscale(1) contrast(1.35)', mixBlendMode: 'screen', opacity: 0.46 }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(79,176,207,.26), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(15,95,122,.34), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
         {/* Scanline texture — cold transmission signal */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
         <div className="relative z-10 bg-[#efe7d6] px-5 lg:px-10 py-3 flex items-center justify-between gap-3"

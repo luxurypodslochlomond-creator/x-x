@@ -58,7 +58,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
         <canvas ref={stageRef} className="absolute inset-0 w-full h-full" />
         <div ref={flashRef} className="absolute inset-0 pointer-events-none bg-[#e2602a]" style={{ opacity: 0 }} />
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 60%, rgba(20,18,16,0.5) 100%)' }} />
-        <div className="absolute inset-0 pointer-events-none opacity-[0.07]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #e9eeec 2px, #e9eeec 3px)' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.07]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)' }} />
         <div className="absolute inset-x-0 top-0 h-[2px] pointer-events-none bg-gradient-to-r from-transparent via-[#e2602a]/50 to-transparent" style={{ animation: 'tx-bar 5s linear infinite' }} />
         {CORNERS.map((c) => <span key={c} className={`absolute w-4 h-4 border-[#e2602a] pointer-events-none ${c}`} />)}
       </div>

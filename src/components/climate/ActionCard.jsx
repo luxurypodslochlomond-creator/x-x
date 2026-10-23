@@ -10,7 +10,7 @@ const ACTION_TYPES = {
   policy_submission: { label: 'Policy', icon: FileText, color: '#0f5f7a' },
   workshop: { label: 'Workshop', icon: Hammer, color: '#0f5f7a' },
   monitoring: { label: 'Monitoring', icon: Eye, color: '#1e3a2b' },
-  other: { label: 'Action', icon: Hand, color: '#5b6b69' },
+  other: { label: 'Action', icon: Hand, color: '#5a5246' },
 };
 
 function fmtDate(d) {
