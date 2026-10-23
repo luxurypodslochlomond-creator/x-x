@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
-import VerificationBadge from '@/components/climate/VerificationBadge';
 
 // One result, in the record's own voice: paper, ink, a fine rule, no hype.
 // Each card carries the entry's own words rather than a teaser, says who it came from,
@@ -44,10 +43,7 @@ export default function RecordResultCard({ kind, item }) {
         className="block bg-[#f7f1e5] border border-[#141210] border-t-4 p-3.5 active:bg-[#efe7d6] transition-colors"
         style={{ borderTopColor: isCrisis ? '#b3261e' : '#1e3a2b' }}
       >
-        <div className="flex flex-wrap items-center gap-1.5">
-          <Tag tone={isCrisis ? '#b3261e' : '#1e3a2b'}>{isCrisis ? 'Climate crisis' : 'Solution'}</Tag>
-          <VerificationBadge entry={item} />
-        </div>
+        <Tag tone={isCrisis ? '#b3261e' : '#1e3a2b'}>{isCrisis ? 'Climate crisis' : 'Solution'}</Tag>
         <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.title}</h3>
         {item.summary && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.summary}</p>}
         <Place region={item.region} country={item.country} />

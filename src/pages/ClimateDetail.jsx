@@ -13,6 +13,7 @@ import RecordCitation from '@/components/climate/RecordCitation';
 import SourceBlock from '@/components/climate/SourceBlock';
 import VerificationBadge from '@/components/climate/VerificationBadge';
 import { VERIFICATION_NOTE } from '@/components/climate/verification';
+import VerificationControl from '@/components/admin/VerificationControl';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -204,6 +205,8 @@ export default function ClimateDetail() {
             </div>
           )}
 
+          <VerificationControl entry={record} entityName="ClimateAction" onSaved={setRecord} />
+
           <SourceBlock
             sourceName={record.source_name}
             sourceUrl={record.source_url}
@@ -302,6 +305,9 @@ export default function ClimateDetail() {
             <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{record.correction_note}</p>
           </div>
         )}
+
+        <VerificationControl entry={record} entityName="ClimateSolution" onSaved={setRecord} />
+
         {record.source_url && (
           <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
             View source <ArrowRight className="w-4 h-4" />
