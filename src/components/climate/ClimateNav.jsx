@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Search as SearchIcon } from 'lucide-react';
@@ -39,64 +39,30 @@ function PlaceLink({ item, active }) {
   );
 }
 
+// The mobile door. The same words as the desk bar, sized for a thumb and never cut off:
+// the page you are on is marked with a rule as well as a colour, and the record's own
+// three sit one shade quieter so the places you read still lead.
+function MobileLink({ item, active, quiet }) {
+  return (
+    <Link
+      to={createPageUrl(item.page)}
+      aria-current={active ? 'page' : undefined}
+      className={`min-h-[28px] flex items-center px-0.5 text-[10px] font-black uppercase tracking-wide whitespace-nowrap border-b-2 transition-colors ${
+        active
+          ? 'text-[#e2602a] border-[#e2602a]'
+          : quiet
+            ? 'text-[#efe7d6]/45 border-transparent'
+            : 'text-[#efe7d6]/80 border-transparent'
+      }`}
+    >
+      {item.label}
+    </Link>
+  );
+}
+
 export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   const isActive = (page) => currentPage === page;
   const searchActive = isActive('ClimateSearch');
-  const railRef = useRef(null);
-  const activeRef = useRef(null);
-  const [edgeMask, setEdgeMask] = useState(null);
-
-  // A rail, not a list that folds onto a second line. Two things make it feel made for
-  // the thumb: the edge fades only when something really is beyond it — never a dead
-  // hint, never a scrollbar — and the item you are reading is carried into view when
-  // the page opens.
-  useEffect(() => {
-    if (variant !== 'mobile') return;
-    const rail = railRef.current;
-    if (!rail) return;
-
-    const readMask = () => {
-      // The fade is drawn to the run of the writing. Where the writing runs the other
-      // way, the rail still scrolls; it simply goes without the hint.
-      if (window.getComputedStyle(rail).direction === 'rtl') { setEdgeMask(null); return; }
-      const behind = rail.scrollLeft > 4;
-      const ahead = rail.scrollWidth - rail.clientWidth - rail.scrollLeft > 4;
-      if (!behind && !ahead) { setEdgeMask(null); return; }
-      const stops = [
-        behind ? 'transparent 0' : '#000 0',
-        behind ? '#000 20px' : null,
-        ahead ? '#000 calc(100% - 20px)' : null,
-        ahead ? 'transparent 100%' : '#000 100%',
-      ].filter(Boolean).join(', ');
-      setEdgeMask(`linear-gradient(to right, ${stops})`);
-    };
-
-    readMask();
-    rail.addEventListener('scroll', readMask, { passive: true });
-    window.addEventListener('resize', readMask);
-    // A longer tongue makes longer words: re-measure when the words change size.
-    const inner = rail.firstElementChild;
-    const observer = inner ? new ResizeObserver(readMask) : null;
-    if (observer) observer.observe(inner);
-
-    return () => {
-      rail.removeEventListener('scroll', readMask);
-      window.removeEventListener('resize', readMask);
-      if (observer) observer.disconnect();
-    };
-  }, [variant]);
-
-  // Carry the item you are on into view. Measured against the rail, so the page itself
-  // never shifts under it.
-  useEffect(() => {
-    if (variant !== 'mobile') return;
-    const rail = railRef.current;
-    const el = activeRef.current;
-    if (!rail || !el) return;
-    const railRect = rail.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    rail.scrollLeft += (elRect.left - railRect.left) - (rail.clientWidth - elRect.width) / 2;
-  }, [currentPage, variant]);
 
   const searchBox = (
     <Link
@@ -114,40 +80,23 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
     </Link>
   );
 
-  // On a phone the same bar, thumb-scrollable. Search leads it, because on a phone it is
-  // the fastest way to anything on the record that you did not already know was there.
-  // One line, always: the rail runs under the thumb rather than folding onto a second
-  // line, settles on the word your finger landed nearest, and ends flush to the screen.
+  // On a phone: two lines, every door on the screen at once — nothing hidden, nothing to
+  // swipe, no fade hinting at something you cannot see. The four places you read lead the
+  // first line with Search; the record's own three sit quietly underneath. A door you
+  // cannot see is not a door.
   if (variant === 'mobile') {
     return (
-      <nav
-        ref={railRef}
-        aria-label="The record"
-        className="climate-nav-rail overflow-x-auto overscroll-x-contain"
-        style={{
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch',
-          scrollSnapType: 'x proximity',
-          WebkitMaskImage: edgeMask,
-          maskImage: edgeMask,
-        }}
-      >
-        <div className="w-max mx-auto flex items-center gap-x-3.5 px-4 py-1.5">
+      <nav aria-label="The record" className="flex flex-col gap-0.5 px-4 py-1">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-0.5">
           {searchBox}
-          <span className="w-px h-5 bg-[#efe7d6]/20 flex-shrink-0" />
-          {[...PLACES, ...ABOUT].map((item) => (
-            <Link
-              key={item.page}
-              ref={isActive(item.page) ? activeRef : null}
-              to={createPageUrl(item.page)}
-              aria-current={isActive(item.page) ? 'page' : undefined}
-              style={{ scrollSnapAlign: 'center' }}
-              className={`flex-shrink-0 py-2 text-[10px] font-black uppercase tracking-wide border-b-2 transition-colors ${
-                isActive(item.page) ? 'text-[#e2602a] border-[#e2602a]' : 'text-[#efe7d6]/60 border-transparent'
-              }`}
-            >
-              {item.label}
-            </Link>
+          <span className="w-px h-4 bg-[#efe7d6]/20" />
+          {PLACES.map((item) => (
+            <MobileLink key={item.page} item={item} active={isActive(item.page)} />
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-x-3.5 gap-y-0.5">
+          {ABOUT.map((item) => (
+            <MobileLink key={item.page} item={item} active={isActive(item.page)} quiet />
           ))}
         </div>
       </nav>

@@ -212,6 +212,8 @@ export default function TogetherChangeClimate() {
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
   const contentRef = useRef(null);
   const firstRender = useRef(true);
+  // Set when the box moved the kind, rather than a filter button. The page must not jump.
+  const typedKind = useRef(false);
   const { categories } = useClimateCategories();
 
   useEffect(() => {
@@ -300,6 +302,10 @@ export default function TogetherChangeClimate() {
 
   useEffect(() => {
     if (firstRender.current) { firstRender.current = false; return; }
+    // The buttons carry you down to the list. The box does not: typing a kind word in the
+    // filter still moves the kind, but the page stays where your thumb is, so the box
+    // never leaves the screen mid-word and the keyboard never shuts under your hand.
+    if (typedKind.current) { typedKind.current = false; return; }
     contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [selectedType]);
 
@@ -331,7 +337,7 @@ export default function TogetherChangeClimate() {
     setQuery(value);
     const words = value.toLowerCase().trim().split(/\s+/).filter(Boolean);
     const kind = words.map(kindOfWord).find(Boolean);
-    if (kind) setSelectedType(kind);
+    if (kind && kind !== selectedType) { typedKind.current = true; setSelectedType(kind); }
   };
 
   const filtered = useMemo(() => {
@@ -543,18 +549,25 @@ export default function TogetherChangeClimate() {
                 }`}
               >{t.actions}</button>
             </div>
-            <div className="relative lg:max-w-[540px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
-              <input
-                value={query}
-                onChange={e => handleQueryChange(e.target.value)}
-                placeholder={`${t.solutions} · ${t.crises} · ${t.groups} · ${t.actions}`}
-                aria-label={t.search}
-                className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[13px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
-              />
-              {/* The box above searches what is on this page. This hands the same words
-                  straight to the search that reaches the whole record, so nobody has to
-                  guess which one they are looking at. */}
+            <div className="lg:max-w-[540px]">
+              {/* This box filters what is already on this page, and now it says so. The
+                  record's own search — the one that reaches everything, wire included — is
+                  the pill in the header, and the link below hands this box's words straight
+                  to it. Two controls, two names, so nobody has to guess which is which. */}
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <span className="text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246]">Filter · this page</span>
+                <span className="flex-1 h-px bg-[#141210]/15" />
+              </div>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
+                <input
+                  value={query}
+                  onChange={e => handleQueryChange(e.target.value)}
+                  placeholder={t.search}
+                  aria-label={`${t.search} — this page`}
+                  className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[16px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
+                />
+              </div>
               {query.trim() && (
                 <Link
                   to={`/ClimateSearch?q=${encodeURIComponent(query)}`}
