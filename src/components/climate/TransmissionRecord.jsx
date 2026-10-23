@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { recordAddress } from './recordAddress';
 
 // ── ON THE RECORD ── who gave it, on what terms, and how to cite it.
 // A research panel, a journalist or a reader in fifty years can take this one line
