@@ -6,10 +6,10 @@
 // the record holds — and a record that disagrees with itself is worth nothing to a panel.
 
 export const FIELDS: Record<string, string[]> = {
-  ClimateSolution: ['title', 'summary', 'details', 'category', 'region_rough', 'country', 'source_name'],
+  ClimateSolution: ['title', 'summary', 'details', 'category', 'subcategory', 'region_rough', 'country', 'source_name', 'source_url', 'source_author'],
   ClimateAction: ['title', 'description', 'action_type', 'region_rough', 'country', 'source_url'],
   ClimateGroup: ['name', 'topic', 'region', 'description'],
-  ClimateNews: ['headline', 'what_changed', 'replicable', 'source_name', 'where_label', 'country', 'category'],
+  ClimateNews: ['headline', 'what_changed', 'replicable', 'source_name', 'source_url', 'source_author', 'publisher_type', 'where_label', 'country', 'category'],
 };
 
 // Words that carry no meaning on their own. Dropped before the cap, so a question asked in
