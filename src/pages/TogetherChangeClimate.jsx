@@ -405,14 +405,16 @@ export default function TogetherChangeClimate() {
       {/* ── OPENING BAND — her words and the covenant, on the record's own paper.
              It was a coloured panel, and a coloured panel at the very top made the record
              open cold: a mid-tone field between the paper and the black has nowhere to sit.
-             Her line is set in the reading face, not the display face, and not bold — so
-             it speaks instead of competing with the headline underneath it. ── */}
+             The record speaks in exactly two voices — the condensed display face for
+             headlines, and monospace for everything a person reads. Her line is set in the
+             reading voice, regular weight, so it speaks instead of competing with the
+             headline — and so a third typeface never appears on this record. ── */}
       <div className="bg-[#efe7d6] px-5 py-5 flex flex-col items-center justify-center gap-1 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#0f5f7a] animate-pulse flex-shrink-0" />
           <span
-            className="text-center text-[#141210] font-normal leading-[1.5] max-w-[52ch]"
-            style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(15px, 3.6vw, 19px)' }}
+            className="text-center text-[#141210] font-normal leading-[1.6] max-w-[52ch]"
+            style={{ fontSize: 'clamp(15px, 3.7vw, 19px)' }}
           >
             "Every single day, we hold the power to shape the world around us."
           </span>
@@ -438,7 +440,8 @@ export default function TogetherChangeClimate() {
         </div>
         {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why.
             A hairline detaches it: it is the record's own mark, and inside her credit row it read
-            as though it belonged to her. */}
+            as though it belonged to her. The line that named it is gone — the mark says it on its
+            own, and it stands centred on the page by itself. */}
         <span aria-hidden="true" className="w-16 h-px bg-[#141210]/20 mt-2" />
         <div className="flex items-center gap-2 flex-wrap justify-center">
           <Link
@@ -447,7 +450,6 @@ export default function TogetherChangeClimate() {
           >
             x = x
           </Link>
-          <span className="text-[9px] font-mono uppercase tracking-[0.16em] text-[#5a5246]">the record's covenant</span>
         </div>
       </div>
 
