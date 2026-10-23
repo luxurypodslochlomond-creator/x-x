@@ -30,8 +30,8 @@ const KEEP = new Set([
 ]);
 const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'CODE', 'PRE', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'TITLE']);
 
-const BATCH_SIZE = 220;   // an ordinary page is one ask, not two
-const BATCH_CHARS = 12000;
+const BATCH_SIZE = 400;   // a whole page goes in ONE ask — never two, never a second wave
+const BATCH_CHARS = 40000;
 const DICT_LIMIT = 8000;
 const SETTLE_MS = 260;    // let a new page render before the first ask
 const REFRESH_MS = 120;   // a word React rewrote goes back at once, not after a beat
@@ -197,7 +197,7 @@ export default function SiteTranslator() {
 
     const answered = await ask(lang, batch, dict);
     // A very long page can hold more words than one ask. The rest follow, quietly.
-    if (answered && missing.length > batch.length) setTimeout(run, 1200);
+    if (answered && missing.length > batch.length) setTimeout(run, 350);
   }, [chosen, restore, sweep, ask, setTranslating]);
 
   // A new tongue, or a new page: the words we hold go in before the browser paints.

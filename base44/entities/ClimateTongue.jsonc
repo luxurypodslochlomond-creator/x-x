@@ -1,0 +1,50 @@
+{
+  "name": "ClimateTongue",
+  "type": "object",
+  "description": "A tongue of the climate record, already made. The record's wording is finite \u2014 the same copy, read by everyone \u2014 so each tongue is translated once, kept here, and handed to every reader after that: a lookup, not a wait. The first reader of a tongue that has never been made pays for it; every reader after, on any device anywhere, gets it in a moment. Written only by the backend, and read only by it: the words are served to the page, never read straight from a browser.",
+  "properties": {
+    "lang": {
+      "type": "string",
+      "description": "The tongue, exactly as the reader chose it \u2014 an ISO code like 'fr', or a name like 'Yoruba'."
+    },
+    "dict": {
+      "type": "object",
+      "description": "The tongue itself: each English word of the record, and the word it stands in for in this tongue. Grows only by the words it is actually missing."
+    },
+    "words": {
+      "type": "number",
+      "default": 0,
+      "description": "How many words of the record this tongue holds."
+    },
+    "last_made": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When a word was last added to this tongue."
+    }
+  },
+  "required": [
+    "lang"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
