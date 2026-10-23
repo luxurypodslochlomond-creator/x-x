@@ -1,6 +1,7 @@
 {
   "name": "PetSounds51Payment",
   "type": "object",
+  "description": "A PetSounds51 payment record \u2014 one per purchase, card or cash. Holds the customer's email and, for cash, the proof they uploaded, so this table is admin-only in every direction: only admins can read it, change a record's verification, or remove one. Anyone may still hand in a cash payment (a public page creates the record), but nobody can read the table back \u2014 a customer's email and payment history are not visible to another visitor, and cannot be altered or rejected by anyone but an admin.",
   "properties": {
     "email": {
       "type": "string",
@@ -80,5 +81,23 @@
     "price",
     "currency",
     "payment_method"
-  ]
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

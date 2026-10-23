@@ -1,6 +1,7 @@
 {
   "name": "PetSounds51CharityVerification",
   "type": "object",
+  "description": "A rescue or sanctuary asking to be verified so animals in its care get free access. Holds the charity's contact email and its registration proof, so this table is admin-only in every direction: only admins read it, decide it, or remove it. A charity may still put its application in (a public page creates the record) \u2014 but no applicant, and no other visitor, can read the table back or change another organisation's outcome.",
   "properties": {
     "charity_name": {
       "type": "string",
@@ -68,5 +69,23 @@
     "email",
     "charity_type",
     "proof_url"
-  ]
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }
