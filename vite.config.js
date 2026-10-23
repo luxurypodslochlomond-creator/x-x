@@ -5,6 +5,11 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   logLevel: 'error', // Suppress warnings, only show errors
+  // Slot is already browser-ready ESM. Load it directly rather than asking the
+  // preview for an optimized artifact that can be absent (504 on every reload).
+  optimizeDeps: {
+    exclude: ['@radix-ui/react-slot'],
+  },
   plugins: [
     base44({
       // Support for legacy code that imports the base44 SDK with @/integrations, @/entities, etc.
