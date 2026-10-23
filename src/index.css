@@ -245,3 +245,14 @@ select,
 textarea {
   touch-action: manipulation;
 }
+
+/* ── EVERY TONGUE, NO CAGE ──
+   In a tongue we did not write the layout in, a word can be half again as long. Under
+   any tongue but English, a single-line label is allowed to wrap instead of being cut
+   off: the same design, breathing. English — the language the platform was written in —
+   is left exactly as designed. */
+html[data-tongue]:not([data-tongue="en"]) .truncate {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
