@@ -21,8 +21,8 @@ export const RECORD_PAGES: RecordPage[] = [
   {
     path: '/ClimateFounder',
     label: 'The founder',
-    title: 'Janine M. H. Selendy · Horizon International · Yale University',
-    line: 'Chairman, President and Publisher of Horizon International, at Yale University and formerly a Guest of Harvard University. Four decades of finding and advancing solutions to the interrelated concerns of global health, environment and poverty: two books with original chapters by 75 experts, 20 television documentaries she directed and produced, a National Science Foundation grant on oceans, and the Solutions Site built with UNEP, UNDP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard.',
+    title: 'Janine M. H. Selendy · Founder, Horizon International',
+    line: 'Founder of Horizon International, at Yale University and formerly a Guest of Harvard University. Four decades of finding and advancing solutions to the interrelated concerns of global health, environment and poverty: two books with original chapters by 75 experts, 20 television documentaries she directed and produced, a National Science Foundation grant on oceans, and the Solutions Site built with UNEP, UNDP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard.',
     keywords: ['founder', 'janine', 'selendy', 'horizon', 'international', 'yale', 'harvard', 'explorers', 'custodian', 'director', 'documentaries', 'films', 'books', 'wiley', 'oceans', 'beirut', 'started', 'began', 'her', 'she'],
   },
   {

@@ -187,7 +187,13 @@ export default function ClimateFounder() {
             </a>
           </div>
 
+          {/* Her own closing credits, in her own words — the fellowship she prints
+              herself. Not a post she held, so it stays off the title line above. */}
           <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-5">
+            Selendy FN'96 Explorers Club. Fellow Emeritus.
+          </p>
+
+          <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-3">
             The Solutions Site was created by Horizon International with UNEP, UNDP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard — a forum where every accepted entry has been reviewed before publication.
           </p>
         </div>
