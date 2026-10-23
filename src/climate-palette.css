@@ -14,6 +14,7 @@
        fill (with ink on it)      #4fb0cf   light, so the ink stays readable
        accent on paper            #0f5f7a   deep enough to read on light pages
        accent inside an ink panel #7fc9e4   the light one, or it is invisible
+       accent in the ocean head panel #bfe8f7  lighter again, or it sinks
 
    WARM PAPER     #efe7d6 / #f4efe4 / #f7f1e5  →  cool paper
        #e9eeec  ·  #edf2f0  ·  #f4f8f7
@@ -56,6 +57,17 @@
 .climate-record [class~="bg-[#141210]"] [class~="text-[#ff9a6b]"],
 .climate-record [class~="bg-[#141210]"][class~="text-[#ff9a6b]"],
 .climate-record [class~="bg-[#1e3a2b]"] [class~="text-[#ff9a6b]"] { color: #7fc9e4; }
+
+/* ── THE OCEAN PANEL — the epigraph at the head of the record ─────────────────
+   The deep accent is lighter than ink, so the accent inside it takes one more
+   step up to the pale sky. Without this the covenant line and its two dots
+   would sit deep blue on deep blue and vanish. */
+.climate-record [class~="bg-[#0f5f7a]"] [class~="text-[#e2602a]"],
+.climate-record [class~="bg-[#0f5f7a]"][class~="text-[#e2602a]"] { color: #bfe8f7; }
+.climate-record [class~="bg-[#0f5f7a]"] [class~="bg-[#e2602a]"],
+.climate-record [class~="bg-[#0f5f7a]"][class~="bg-[#e2602a]"] { background-color: #bfe8f7; }
+.climate-record [class~="bg-[#0f5f7a]"] [class~="border-[#e2602a]/20"],
+.climate-record [class~="bg-[#0f5f7a]"][class~="border-[#e2602a]/20"] { border-color: rgb(191 232 247 / 0.25); }
 
 /* ── BORDERS ──────────────────────────────────────────────────────────────── */
 .climate-record [class~="border-[#e2602a]"] { border-color: #0f5f7a; }

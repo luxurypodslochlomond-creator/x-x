@@ -401,7 +401,7 @@ export default function TogetherChangeClimate() {
       )}
 
       {/* ── OPENING BAND — her words and the covenant. One band, then straight into the record. ── */}
-      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="bg-[#0f5f7a] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span
@@ -412,14 +412,32 @@ export default function TogetherChangeClimate() {
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/60">Dr. Jane Goodall</span>
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/80">Dr. Jane Goodall</span>
+          <span className="text-[10px] font-mono text-[#efe7d6]/40">·</span>
+          <a
+            href="https://www.rootsnshoots.org.uk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e2602a] underline decoration-dotted underline-offset-4 active:opacity-70"
+          >
+            Roots &amp; Shoots
+          </a>
+          <span className="text-[10px] font-mono text-[#efe7d6]/40">·</span>
+          <a
+            href="https://www.janegoodall.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e2602a] underline decoration-dotted underline-offset-4 active:opacity-70"
+          >
+            The Jane Goodall Institute
+          </a>
         </div>
         {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why. */}
         <Link
           to="/XEqualsX"
           className="px-3 py-1 text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
-          style={{ textDecorationColor: 'rgba(15,95,122,0.5)' }}
+          style={{ textDecorationColor: 'rgba(191,232,247,0.55)' }}
         >
           x = x
         </Link>
