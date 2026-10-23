@@ -16,7 +16,10 @@ export default async function(req) {
 JSON:
 ${JSON.stringify(strings)}`;
 
+    // A flash model: the words arrive in a fraction of the wait, which is what keeps a
+    // page from sitting in English while the reader waits. Same result, far less pause.
     const result = await base44.asServiceRole.integrations.Core.InvokeLLM({
+      model: 'gemini_3_8_flash',
       prompt,
       response_json_schema: {
         type: 'object',
