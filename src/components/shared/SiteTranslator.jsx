@@ -50,6 +50,27 @@ function saveDict(lang, dict) {
   } catch { /* storage full or private mode — the page still reads, it just re-asks next time */ }
 }
 
+// ── OUR OWN WORDS ARE NEVER THE SOURCE ──
+// Every word this translator has itself put on a page, in any tongue. A word in here is
+// never treated as the words the app wrote: when a reader changes tongue, the page is
+// holding OUR translation of the English, and taking that as the source asks for a
+// translation of a translation — which is how one page ends up in two tongues at once.
+let producedCache = null;
+function producedWords() {
+  if (producedCache) return producedCache;
+  const out = new Set();
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key || !key.startsWith('uf51_site_dict_')) continue;
+      const dict = JSON.parse(localStorage.getItem(key) || '{}');
+      Object.values(dict).forEach((v) => { if (typeof v === 'string' && v) out.add(v.trim()); });
+    }
+  } catch { /* private mode — the guard simply starts empty */ }
+  producedCache = out;
+  return out;
+}
+
 function translatable(node) {
   const parent = node.parentElement;
   if (!parent) return false;
@@ -96,7 +117,7 @@ export default function SiteTranslator() {
     const held = originals.get(node);
     if (held === undefined) originals.set(node, raw);
     // React rewrote this line itself (a counter, a list): that is the new English.
-    else if (held !== raw && !translated.current.has(raw.trim())) originals.set(node, raw);
+    else if (held !== raw && !translated.current.has(raw.trim()) && !producedWords().has(raw.trim())) originals.set(node, raw);
     const source = (originals.get(node) || raw).trim();
     if (!source) return null;
 
@@ -128,6 +149,20 @@ export default function SiteTranslator() {
     });
   }, []);
 
+  // A new tongue is about to go on: our own words come off first, so what is left on the
+  // page is English — the words the record actually stands behind — and the new tongue is
+  // translated from that. Only our own words are touched; a counter or a date the app wrote
+  // itself is left exactly where it is.
+  const restoreTranslated = useCallback(() => {
+    const produced = producedWords();
+    originals.forEach((raw, node) => {
+      try {
+        const now = node.nodeValue;
+        if (now && produced.has(now.trim())) node.nodeValue = raw;
+      } catch { /* node gone */ }
+    });
+  }, []);
+
   const ask = useCallback(async (lang, strings, dict) => {
     if (!strings.length || asking.current) return false;
     asking.current = true;
@@ -140,7 +175,10 @@ export default function SiteTranslator() {
       if (!out || typeof out !== 'object') return false;
       strings.forEach((s, i) => {
         const t = out[`s${i}`];
-        if (typeof t === 'string' && t.trim()) dict[s] = t.trim();
+        if (typeof t === 'string' && t.trim()) {
+          dict[s] = t.trim();
+          producedWords().add(t.trim()); // we made this word — it is never a source
+        }
       });
       translated.current = new Set(Object.values(dict));
       saveDict(lang, dict);
@@ -188,6 +226,8 @@ export default function SiteTranslator() {
       return;
     }
 
+    restoreTranslated();
+
     const dict = loadDict(lang);
     dictRef.current = dict;
     translated.current = new Set(Object.values(dict));
@@ -196,7 +236,7 @@ export default function SiteTranslator() {
 
     const timer = setTimeout(run, SETTLE_MS);
     return () => clearTimeout(timer);
-  }, [chosen, location.pathname, paint, restore, run, setTranslating]);
+  }, [chosen, location.pathname, paint, restore, restoreTranslated, run, setTranslating]);
 
   // Content that arrives late (lists, entries, lazy sections) and words React rewrites on
   // its own: only those nodes are visited, so a translated page never flickers and the
