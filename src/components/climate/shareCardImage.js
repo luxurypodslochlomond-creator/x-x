@@ -1,3 +1,5 @@
+import { recordOrigin } from './recordAddress';
+
 // ── RECORD OF THE TIME · THE WIRE CARD ──
 // One entry, drawn as a picture that can be sent anywhere. It carries the headline,
 // the date, the place, who says so and how well it is known — so a story never
@@ -96,7 +98,7 @@ function drawCover(ctx, img, x, y, w, h) {
 }
 
 export async function buildWireShareCard(entry, options = {}) {
-  const origin = String(options.origin || window.location.origin || '').replace(/^https?:\/\//, '');
+  const origin = String(options.origin || recordOrigin() || '').replace(/^https?:\/\//, '');
 
   const canvas = document.createElement('canvas');
   canvas.width = W;
@@ -244,7 +246,7 @@ export async function buildWireShareCard(entry, options = {}) {
 // lives. The picture's credit travels with the picture, inside the frame it belongs to.
 // Drawn on the reader's own device, so nothing of theirs leaves it.
 export async function buildTransmissionShareCard(track = {}, options = {}) {
-  const origin = String(options.origin || window.location.origin || '').replace(/^https?:\/\//, '');
+  const origin = String(options.origin || recordOrigin() || '').replace(/^https?:\/\//, '');
 
   const canvas = document.createElement('canvas');
   canvas.width = W;
