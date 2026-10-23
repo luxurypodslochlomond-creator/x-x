@@ -402,48 +402,66 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── OPENING BAND — her words and the covenant, on the record's own paper.
-             It was a coloured panel, and a coloured panel at the very top made the record
-             open cold: a mid-tone field between the paper and the black has nowhere to sit.
-             The record speaks in exactly two voices — the condensed display face for
-             headlines, and monospace for everything a person reads. Her line is set in the
-             reading voice, regular weight, so it speaks instead of competing with the
-             headline — and so a third typeface never appears on this record. ── */}
-      <div className="bg-[#efe7d6] px-5 py-5 flex flex-col items-center justify-center gap-1 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
-        <div className="flex items-center justify-center gap-2 w-full">
-          <span className="w-1 h-1 rounded-full bg-[#0f5f7a] animate-pulse flex-shrink-0" />
-          <span
-            className="text-center text-[#141210] font-normal leading-[1.6] max-w-[52ch]"
-            style={{ fontSize: 'clamp(15px, 3.7vw, 19px)' }}
-          >
-            "Every single day, we hold the power to shape the world around us."
-          </span>
-          <span className="w-1 h-1 rounded-full bg-[#0f5f7a] animate-pulse flex-shrink-0" />
-        </div>
-        <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#5a5246]">Dr. Jane Goodall</span>
-          <span aria-hidden="true" className="h-3 w-px bg-[#141210]/20" />
-          {/* One house, named once. Roots & Shoots IS the Jane Goodall Institute's
-              programme, so listing them as two separate voices read as two bodies
-              standing behind one line. The link goes to the one that published it. */}
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#5a5246]">
-            <a
-              href="https://www.rootsnshoots.org.uk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-black text-[#0f5f7a] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
+      {/* ── OPENING BAND — her words, carried the way this record carries every voice.
+             The founder page and the wire both open with a plate of ink: grain, a beacon,
+             the words in the reading voice, the name in signal blue. Her line was the only
+             quoted voice on this record sitting on flat paper with nothing around it, and
+             that flatness — not the typeface — is what read cold and linear. The warm paper
+             still holds the page open; the material now sits under her words, where it
+             belongs. Her words are the record's first transmission, so they get its plate. ── */}
+      <div className="bg-[#efe7d6] px-4 lg:px-8 py-5 lg:py-7 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+        <div className="relative mx-auto max-w-[760px] bg-[#141210] border-2 border-[#141210] px-5 pt-6 pb-6 overflow-hidden">
+          {/* The record's grain, inside her plate — the same texture the hero wears */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.07]"
+            style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }}
+          />
+
+          <div className="relative z-10 flex flex-col items-center gap-4 text-center">
+            <div className="flex items-center justify-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
+              <span className="text-[8px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/50 leading-tight">
+                A voice on the record
+              </span>
+              <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
+            </div>
+
+            <SignalBeacon size={38} color="#7fc9e4" />
+
+            <blockquote
+              className="text-[#efe7d6] max-w-[46ch] leading-[1.65]"
+              style={{ fontSize: 'clamp(15px, 2.4vw, 21px)' }}
             >
-              Roots &amp; Shoots
-            </a>
-            , the Jane Goodall Institute
-          </span>
+              “Every single day, we hold the power to shape the world around us.”
+            </blockquote>
+
+            <div className="flex flex-col items-center gap-1.5">
+              <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#7fc9e4]">
+                Dr. Jane Goodall
+              </p>
+              {/* One house, named once. Roots & Shoots IS the Jane Goodall Institute's
+                  programme, so listing them as two separate voices read as two bodies
+                  standing behind one line. The link goes to the one that published it. */}
+              <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/55">
+                <a
+                  href="https://www.rootsnshoots.org.uk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-black text-[#7fc9e4] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
+                >
+                  Roots &amp; Shoots
+                </a>
+                , the Jane Goodall Institute
+              </p>
+            </div>
+          </div>
         </div>
+
         {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why.
             A hairline detaches it: it is the record's own mark, and inside her credit row it read
-            as though it belonged to her. The line that named it is gone — the mark says it on its
-            own, and it stands centred on the page by itself. */}
-        <span aria-hidden="true" className="w-16 h-px bg-[#141210]/20 mt-2" />
-        <div className="flex items-center gap-2 flex-wrap justify-center">
+            as though it belonged to her. It stands centred on the page by itself. */}
+        <span aria-hidden="true" className="block w-16 h-px bg-[#141210]/20 mt-5 mx-auto" />
+        <div className="flex items-center justify-center gap-2 flex-wrap mt-3">
           <Link
             to="/XEqualsX"
             className="text-[12px] font-black font-mono text-[#0f5f7a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
