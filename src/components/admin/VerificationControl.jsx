@@ -30,6 +30,9 @@ export default function VerificationControl({ entry, entityName, onSaved }) {
   const [saving, setSaving] = useState(false);
   const [savedLabel, setSavedLabel] = useState('');
   const [error, setError] = useState('');
+  // Closed until an admin taps it: the entry page belongs to the reader, and a block of
+  // admin chrome sitting open in the middle of it reads as if the record had changed shape.
+  const [open, setOpen] = useState(false);
 
   // The record's rules already keep an ordinary visitor out of any write, but the panel
   // should not even appear for one: an empty box a reader cannot use reads as broken.
@@ -81,10 +84,21 @@ export default function VerificationControl({ entry, entityName, onSaved }) {
   const fieldClass = 'mt-1.5 w-full px-3 py-2.5 min-h-[46px] bg-[#efe7d6] border-2 border-[#141210]/30 text-[12px] font-mono text-[#141210] outline-none focus:border-[#141210] placeholder:text-[#5a5246]/60';
 
   return (
-    <div className="mt-6 border-2 border-dashed border-[#141210]/40 bg-[#f7f1e5] p-3.5">
-      <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-3.5">
-        Keeper's panel · admins only
-      </p>
+    <div className="mt-6 border-2 border-dashed border-[#141210]/40 bg-[#f7f1e5]">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-2 px-3.5 py-3 min-h-[48px] text-left"
+      >
+        <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e]">
+          Keeper's panel · admins only
+        </span>
+        <span className="text-[9px] font-black font-mono uppercase tracking-wide text-[#5a5246] flex-shrink-0">
+          {open ? 'Close' : `${VERIFICATION[level].label} · open`}
+        </span>
+      </button>
+
+      {open && (
+      <div className="px-3.5 pb-3.5">
 
       <span className={labelClass}>How well is this known?</span>
       <div className="flex flex-wrap gap-1.5 mt-1.5">
@@ -137,6 +151,8 @@ export default function VerificationControl({ entry, entityName, onSaved }) {
       >
         {saving ? 'Saving…' : 'Save to the record'}
       </button>
+      </div>
+      )}
     </div>
   );
 }
