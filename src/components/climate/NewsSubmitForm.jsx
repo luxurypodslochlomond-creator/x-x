@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { X, Send, Check } from 'lucide-react';
 import { createPageUrl } from '@/utils';
+import SmartPaste from '@/components/climate/SmartPaste';
 
 // Sending an entry to the wire. The source is not an optional extra here — it is the
 // entry's reason for existing. A hidden bot trap sits alongside it, same as the record.
@@ -18,7 +19,7 @@ const PUBLISHER_TYPES = [
 export default function NewsSubmitForm({ onClose, onSent }) {
   const [form, setForm] = useState({
     headline: '', what_changed: '', kind: 'initiative', when_label: '', where_label: '', country: '',
-    publisher_type: 'news_media', source_name: '', source_url: '', corroborating_source: '',
+    publisher_type: 'news_media', source_name: '', source_url: '', source_author: '', corroborating_source: '',
     replicable: '', image_url: '', image_credit: '', submitter_name: '', submitter_email: '',
   });
   const [honeypot, setHoneypot] = useState('');
@@ -98,6 +99,25 @@ export default function NewsSubmitForm({ onClose, onSent }) {
           An entry is a fact with a traceable origin. What changed, where, when, and who says so. Point at the origin and quote only a line or two — never paste somebody's article in full.
         </p>
 
+        <SmartPaste
+          kind="news"
+          accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'country', 'region_rough', 'publisher_type', 'kind']}
+          note="Been sent an email with a link in it? Paste the whole mail. We read it and fill the entry in — the origin link is copied across exactly as it arrived, never guessed."
+          onParsed={(f) => setForm(prev => ({
+            ...prev,
+            headline: f.title || prev.headline,
+            what_changed: f.details || f.summary || prev.what_changed,
+            when_label: f.source_date || prev.when_label,
+            where_label: f.region_rough || prev.where_label,
+            country: f.country || prev.country,
+            source_name: f.source_name || prev.source_name,
+            source_url: f.source_url || prev.source_url,
+            source_author: f.source_author || prev.source_author,
+            publisher_type: f.publisher_type || prev.publisher_type,
+            kind: f.kind || prev.kind,
+          }))}
+        />
+
         <div className="space-y-3">
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">The entry in one line *</label>
@@ -135,6 +155,10 @@ export default function NewsSubmitForm({ onClose, onSent }) {
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Who says so *</label>
                 <input value={form.source_name} onChange={e => set('source_name', e.target.value)} placeholder="e.g. World Meteorological Organization" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+              </div>
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Who wrote it</label>
+                <input value={form.source_author} onChange={e => set('source_author', e.target.value)} placeholder="e.g. Jack Leitzell" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Link to the origin</label>

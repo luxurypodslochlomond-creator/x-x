@@ -58,6 +58,10 @@
       "type": "string",
       "description": "The link to the origin itself. An entry with no link waits for a person to find one or leave it out."
     },
+    "source_author": {
+      "type": "string",
+      "description": "Who wrote the original, when the origin states it. Part of the citation, kept exactly as the origin gives it \u2014 never guessed."
+    },
     "corroborating_source": {
       "type": "string",
       "description": "A second, independent origin saying the same thing, if one exists."

@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { X, Send, Check, Leaf, AlertTriangle, Sprout } from 'lucide-react';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import { createPageUrl } from '@/utils';
+import SmartPaste from '@/components/climate/SmartPaste';
 
 function SuccessScreen({ entryType, onClose, published }) {
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function ClimateSubmitForm({ onClose }) {
   const [form, setForm] = useState({
     title: '', summary: '', details: '', category: 'agriculture',
     country: '', region_rough: '', image_url: '', source_name: '', source_url: '',
+    source_author: '', source_date: '',
     submitter_name: '', submitter_email: '',
     // Action-specific fields
     action_type: 'cleanup', date: '', contact_link: '',
@@ -143,6 +145,27 @@ export default function ClimateSubmitForm({ onClose }) {
             name="website"
           />
         </div>
+        {/* Sent an email? The machine reads it and fills the form in. */}
+        <SmartPaste
+          kind={entryType === 'action' ? 'action' : entryType}
+          accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'country', 'region_rough']}
+          note="Been sent an email about this? Paste the whole mail — heading, link, quote and all. We read it and fill the form in."
+          onParsed={(f) => setForm(prev => entryType === 'action'
+            ? { ...prev, title: f.title || prev.title, description: f.details || f.summary || prev.description, country: f.country || prev.country }
+            : {
+                ...prev,
+                title: f.title || prev.title,
+                summary: f.summary || prev.summary,
+                details: f.details || prev.details,
+                source_name: f.source_name || prev.source_name,
+                source_url: f.source_url || prev.source_url,
+                source_author: f.source_author || prev.source_author,
+                source_date: f.source_date || prev.source_date,
+                country: f.country || prev.country,
+                region_rough: f.region_rough || prev.region_rough,
+              })}
+        />
+
         {/* Type toggle */}
         <div className="flex gap-2 mb-5">
           <button
@@ -260,6 +283,18 @@ export default function ClimateSubmitForm({ onClose }) {
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Source link</label>
             <input value={form.source_url} onChange={e => set('source_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">Every entry on the record carries a link to its origin. Without one it waits for a person to find it — or it is left out.</p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Source author</label>
+              <input value={form.source_author} onChange={e => set('source_author', e.target.value)} placeholder="e.g. Jack Leitzell" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            </div>
+            <div>
+              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Source date</label>
+              <input value={form.source_date} onChange={e => set('source_date', e.target.value)} placeholder="e.g. 21 April 2025" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            </div>
           </div>
 
           <div className="border-t-2 border-[#141210]/20 pt-3 mt-2">

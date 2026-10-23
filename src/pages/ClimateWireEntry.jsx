@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import RecordCitation from '@/components/climate/RecordCitation';
+import SourceBlock from '@/components/climate/SourceBlock';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import TapToPlayFilm from '@/components/climate/TapToPlayFilm';
 
@@ -74,6 +75,16 @@ export default function ClimateWireEntry() {
               </p>
               <ShareCardButton entry={entry} />
             </div>
+
+            <SourceBlock
+              sourceName={entry.source_name}
+              sourceUrl={entry.source_url}
+              sourceAuthor={entry.source_author}
+              sourceDate={entry.when_label}
+              publisherType={entry.publisher_type}
+              kindLabel={entry.kind}
+              accessed={entry.created_date}
+            />
 
             <RecordCitation
               citation={citation}
