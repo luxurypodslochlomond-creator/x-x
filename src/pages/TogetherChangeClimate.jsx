@@ -412,26 +412,19 @@ export default function TogetherChangeClimate() {
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+        <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
           <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/80">Dr. Jane Goodall</span>
-          <span className="text-[10px] font-mono text-[#efe7d6]/40">·</span>
+          <span aria-hidden="true" className="h-3 w-px bg-[#efe7d6]/20" />
           <a
             href="https://www.rootsnshoots.org.uk"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e2602a] underline decoration-dotted underline-offset-4 active:opacity-70"
+            className="text-[10px] font-mono font-black uppercase tracking-[0.18em] text-[#e2602a] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
           >
             Roots &amp; Shoots
           </a>
-          <span className="text-[10px] font-mono text-[#efe7d6]/40">·</span>
-          <a
-            href="https://www.janegoodall.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e2602a] underline decoration-dotted underline-offset-4 active:opacity-70"
-          >
-            The Jane Goodall Institute
-          </a>
+          <span aria-hidden="true" className="h-3 w-px bg-[#efe7d6]/20" />
+          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/45">The Jane Goodall Institute</span>
         </div>
         {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why. */}
         <Link
