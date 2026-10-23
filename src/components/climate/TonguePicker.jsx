@@ -20,6 +20,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
   const [otherOpen, setOtherOpen] = useState(false);
   const [manual, setManual] = useState('');
   const wrapRef = useRef(null);
+  const searchRef = useRef(null);
 
   const ink = tone === 'ink';
   const accent = ink ? '#e2602a' : '#b3261e';
@@ -41,11 +42,19 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
     const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
     const onDown = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false); };
     document.addEventListener('keydown', onKey);
-    document.addEventListener('mousedown', onDown);
+    document.addEventListener('pointerdown', onDown);
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('pointerdown', onDown);
     };
+  }, [open]);
+
+  // A mouse can be sent straight to the search box. A finger cannot: on a phone
+  // that throws the keyboard up over the panel before the reader has looked at it,
+  // so on touch the field waits to be tapped instead.
+  useEffect(() => {
+    if (!open) return;
+    if (window.matchMedia?.('(hover: hover) and (pointer: fine)').matches) searchRef.current?.focus();
   }, [open]);
 
   const close = () => { setOpen(false); setQuery(''); setOtherOpen(false); };
@@ -78,7 +87,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
       </button>
 
       {open && (
-        <div className={`absolute right-0 top-full mt-1 z-[60] flex flex-col w-[min(92vw,560px)] max-h-[min(72vh,540px)] border-2 shadow-2xl shadow-black/50 ${panel}`}>
+        <div className={`absolute right-0 top-full mt-1 z-[60] flex flex-col w-[calc(100vw_-_2.5rem)] max-h-[min(60vh,480px)] sm:w-[min(92vw,560px)] sm:max-h-[min(72vh,540px)] border-2 shadow-2xl shadow-black/50 ${panel}`}>
           {/* The panel names itself, so what opens reads as part of the record and not as a browser menu. */}
           <div className={`flex items-center justify-between gap-2 px-3 py-2 border-b-2 ${divide}`}>
             <span className="text-[9px] font-black font-mono uppercase tracking-[0.2em]" style={{ color: accent }}>
@@ -91,7 +100,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
             <div className="relative">
               <Search className={`absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 ${dim}`} />
               <input
-                autoFocus
+                ref={searchRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search a language"
@@ -101,7 +110,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
             </div>
           </div>
 
-          <div role="listbox" aria-label="Languages" className="flex-1 overflow-y-auto overscroll-contain">
+          <div role="listbox" aria-label="Languages" className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
             {!query.trim() && (
               <button
                 type="button"
