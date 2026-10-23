@@ -97,7 +97,7 @@ export default function ClimateFounder() {
           Janine M. H. Selendy
         </h1>
         <p className="text-[11px] lg:text-[13px] font-mono text-[#5a5246] mt-4 leading-relaxed max-w-sm lg:max-w-2xl mx-auto">
-          Founder, Horizon International<br />
+          Founder<br />
           Four decades of finding and advancing solutions to the interrelated concerns of global health, environment, and poverty.
         </p>
 
@@ -154,7 +154,7 @@ export default function ClimateFounder() {
             Janine M. H. Selendy
           </p>
           <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-5">
-            Founder, Horizon International
+            Founder
           </p>
 
           <div className="space-y-3">
