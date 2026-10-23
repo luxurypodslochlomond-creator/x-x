@@ -400,7 +400,7 @@ export default function TogetherChangeClimate() {
       )}
 
       {/* ── OPENING BAND — her words and the covenant. One band, then straight into the record. ── */}
-      <div className="bg-[#0f5f7a] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="bg-[#1e3a2b] px-5 py-3 flex flex-col items-center justify-center gap-1 border-b-2 border-[#e2602a]/40" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span
@@ -414,25 +414,34 @@ export default function TogetherChangeClimate() {
         <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
           <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/80">Dr. Jane Goodall</span>
           <span aria-hidden="true" className="h-3 w-px bg-[#efe7d6]/20" />
-          <a
-            href="https://www.rootsnshoots.org.uk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[10px] font-mono font-black uppercase tracking-[0.18em] text-[#e2602a] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
-          >
-            Roots &amp; Shoots
-          </a>
-          <span aria-hidden="true" className="h-3 w-px bg-[#efe7d6]/20" />
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/45">The Jane Goodall Institute</span>
+          {/* One house, named once. Roots & Shoots IS the Jane Goodall Institute's
+              programme, so listing them as two separate voices read as two bodies
+              standing behind one line. The link goes to the one that published it. */}
+          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/60">
+            <a
+              href="https://www.rootsnshoots.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-black text-[#e2602a] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
+            >
+              Roots &amp; Shoots
+            </a>
+            , the Jane Goodall Institute
+          </span>
         </div>
-        {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why. */}
-        <Link
-          to="/XEqualsX"
-          className="px-3 py-1 text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
-          style={{ textDecorationColor: 'rgba(191,232,247,0.55)' }}
-        >
-          x = x
-        </Link>
+        {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why.
+            A hairline detaches it: it is the record's own mark, and inside her credit row it read
+            as though it belonged to her. */}
+        <span aria-hidden="true" className="w-16 h-px bg-[#efe7d6]/25 mt-1" />
+        <div className="flex items-center gap-2 flex-wrap justify-center">
+          <Link
+            to="/XEqualsX"
+            className="text-[12px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
+          >
+            x = x
+          </Link>
+          <span className="text-[9px] font-mono uppercase tracking-[0.16em] text-[#efe7d6]/50">the record's covenant</span>
+        </div>
       </div>
 
       {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
