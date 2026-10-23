@@ -217,6 +217,9 @@ html {
 /* Native photo browsing: no timer fighting a finger, no page behind the viewer. */
 .climate-photo-rail { scrollbar-width: none; }
 .climate-photo-rail::-webkit-scrollbar { display: none; }
+/* The record's way through, on a phone: one line under the thumb, no bar drawn. */
+.climate-nav-rail { scrollbar-width: none; -webkit-tap-highlight-color: transparent; }
+.climate-nav-rail::-webkit-scrollbar { display: none; }
 .climate-photo-dialog {
   position: fixed;
   inset: 0;

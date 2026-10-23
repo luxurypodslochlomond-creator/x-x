@@ -114,16 +114,11 @@ export default function ClimateLayout({ children, currentPage }) {
           <ClimateNav currentPage={currentPage} />
         </div>
 
-        {/* Mobile — same links, thumb-scrollable, sitting centred under the masthead.
-            w-max inside the scroller keeps them centred while they fit, and still
-            scrolls from the left edge the moment a longer language pushes them wider. */}
-        <nav
-          className="sm:hidden px-4 py-2.5 overflow-x-auto overscroll-x-contain"
-          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
-          aria-label="Platform"
-        >
+        {/* Mobile — the rail, on one line: centred while the words fit, thumb-scrollable
+            the moment they do not. The rail owns its own scroller. */}
+        <div className="sm:hidden">
           <ClimateNav currentPage={currentPage} variant="mobile" />
-        </nav>
+        </div>
 
         {/* Every tongue on Earth — in the header, on every page of the record. */}
         <div className="max-w-[1100px] mx-auto">
