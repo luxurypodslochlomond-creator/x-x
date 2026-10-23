@@ -5,9 +5,9 @@ import { Volume2, Mic, Square, ExternalLink, ArrowRight, Globe } from 'lucide-re
 
 const SAMPLE_QUESTIONS = [
   "What's most pressing on climate right now?",
-  "How many people are in extreme poverty in 2026?",
-  "Is Amazon deforestation getting better or worse?",
-  "What's happening with coral bleaching globally?",
+  "What is happening to seagrass meadows?",
+  "Is the Amazon rainforest getting better or worse?",
+  "Who built this record, and who is it for?",
   "What can I actually do about climate change?",
 ];
 
@@ -20,6 +20,8 @@ const CONFIDENCE_STYLES = {
 export default function AletheiaPage() {
   const [question, setQuestion] = useState('');
   const [result, setResult] = useState(null);
+  // The record's own pages on itself — kept apart from the sourced entries.
+  const [pages, setPages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [listening, setListening] = useState(false);
@@ -37,13 +39,15 @@ export default function AletheiaPage() {
     setLoading(true);
     setError(null);
     setResult(null);
+    setPages([]);
     try {
       const res = await base44.functions.invoke('aletheiaQuery', { question: query });
       const data = res?.data ?? res;
       if (data?.error) throw new Error(data.error);
       setResult(data?.result ?? data);
+      setPages(data?.pages || []);
     } catch (e) {
-      setError(e.message || 'The truth engine could not reach its sources. Try again.');
+      setError(e.message || 'The record could not be read just now. Try again.');
     } finally {
       setLoading(false);
     }
@@ -91,14 +95,17 @@ export default function AletheiaPage() {
         <h1 className="text-3xl font-black tracking-tight text-center mb-1">
           ALETHE<span className="text-[#b3261e]">I</span>A
         </h1>
-        <p className="font-mono text-[10px] tracking-[0.3em] text-[#b3261e] mb-6">TRUTH ENGINE · EVERY CLAIM SOURCED</p>
+        <p className="font-mono text-[10px] tracking-[0.3em] text-[#b3261e] mb-2">TRUTH ENGINE · THE RECORD ONLY</p>
+        <p className="font-mono text-[9px] tracking-widest text-[#6b6258] text-center mb-6 max-w-md">
+          IT ANSWERS ONLY FROM WHAT IS ON THIS RECORD. NOTHING IS FETCHED FROM THE OPEN WEB, AND NOTHING OUTSIDE IT IS EVER PRESENTED AS A FINDING.
+        </p>
 
         {/* The eye */}
         <AletheiaEye state={eyeState} size={240} />
 
         {/* Five principles line */}
         <p className="font-mono text-[9px] tracking-widest text-[#6b6258] text-center mt-4 mb-6">
-          ASK · RECEIVE · VERIFY EVERY CLAIM · SEE CONFIDENCE · HEAR "I DON'T KNOW"
+          ASK · RECEIVE · ONLY WHAT THE RECORD HOLDS · OPEN EVERY SOURCE · HEAR "I DON'T KNOW"
         </p>
 
         {/* Question input */}
@@ -109,7 +116,7 @@ export default function AletheiaPage() {
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && ask()}
-            placeholder="Ask anything, in any language…"
+            placeholder="Ask about climate — in any language…"
             disabled={loading}
             className="flex-1 bg-[#efe7d6] border-2 border-[#1a1612]/20 focus:border-[#b3261e] px-4 py-3 text-sm outline-none font-mono disabled:opacity-50"
           />
@@ -177,10 +184,32 @@ export default function AletheiaPage() {
               </button>
             </div>
 
+            {/* The record's own pages — its own account of itself, in its own words. Kept
+                apart from the sourced claims, because a page about the record is not
+                evidence of anything on it. */}
+            {pages.length > 0 && (
+              <div className="space-y-2">
+                <p className="font-mono text-[9px] tracking-widest text-[#6b6258]">FROM THE RECORD'S OWN PAGES</p>
+                {pages.map((p) => (
+                  <a
+                    key={`${p.path}-${p.label}`}
+                    href={p.path}
+                    className="block border-2 border-[#1a1612]/25 bg-[#efe7d6] p-4 hover:border-[#b3261e] transition-colors"
+                  >
+                    <span className="font-mono text-[8px] tracking-widest px-1.5 py-0.5 border border-[#e2602a] text-[#e2602a]">
+                      {p.label.toUpperCase()}
+                    </span>
+                    <p className="text-sm font-bold text-[#1a1612] mt-2">{p.title}</p>
+                    <p className="text-[12px] text-[#6b6258] leading-relaxed mt-1">{p.line}</p>
+                  </a>
+                ))}
+              </div>
+            )}
+
             {/* Claims */}
             {result.claims && result.claims.length > 0 && (
               <div className="space-y-2">
-                <p className="font-mono text-[9px] tracking-widest text-[#6b6258]">SOURCED CLAIMS — OPEN TO VERIFY</p>
+                <p className="font-mono text-[9px] tracking-widest text-[#6b6258]">ENTRIES ON THE RECORD — OPEN THE SOURCE</p>
                 {result.claims.map((c, i) => {
                   const conf = CONFIDENCE_STYLES[c.confidence] || CONFIDENCE_STYLES.medium;
                   return (
@@ -209,14 +238,14 @@ export default function AletheiaPage() {
             {/* Gaps — the most important field for trust */}
             {result.gaps && (
               <div className="border-2 border-dashed border-[#1a1612]/30 p-4">
-                <p className="font-mono text-[9px] tracking-widest text-[#6b6258] mb-1">WHAT I COULD NOT VERIFY</p>
+                <p className="font-mono text-[9px] tracking-widest text-[#6b6258] mb-1">WHAT THE RECORD DOES NOT COVER</p>
                 <p className="text-sm text-[#6b6258] italic leading-relaxed">{result.gaps}</p>
               </div>
             )}
 
             {/* Ask again */}
             <button
-              onClick={() => { setResult(null); setQuestion(''); }}
+              onClick={() => { setResult(null); setPages([]); setQuestion(''); }}
               className="w-full border-2 border-[#1a1612]/30 hover:border-[#1a1612] py-3 text-sm font-mono font-bold transition-all"
             >
               ASK ANOTHER
@@ -228,7 +257,7 @@ export default function AletheiaPage() {
       {/* Footer covenant */}
       <div className="text-center pb-4">
         <p className="font-mono font-black tracking-[0.3em] text-[10px] text-[#b3261e]">x = x</p>
-        <p className="font-mono text-[9px] text-[#6b6258] mt-1">Every claim traces to a source. Sources open in a new tab — verify, come back.</p>
+        <p className="font-mono text-[9px] text-[#6b6258] mt-1">Every claim is an entry on the record, with the origin that entry carries. Not on the record? It says so.</p>
       </div>
     </div>
   );

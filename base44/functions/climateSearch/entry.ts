@@ -1,4 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
+import { toWords, searchRecord, searchRecordAny, scoreMatches } from '../../shared/climateRecordRead.ts';
 import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 
 // CLIMATE RECORD SEARCH — one query, every kind of entry the record holds.
@@ -10,65 +11,10 @@ import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 
 // What a search reads. The origin is in here on purpose: a panel checking a body's work
 // should be able to type that body's name and see every entry resting on it.
-const FIELDS = {
-  ClimateSolution: ['title', 'summary', 'details', 'category', 'region_rough', 'country', 'source_name'],
-  ClimateAction: ['title', 'description', 'action_type', 'region_rough', 'country', 'source_url'],
-  ClimateGroup: ['name', 'topic', 'region', 'description'],
-  ClimateNews: ['headline', 'what_changed', 'replicable', 'source_name', 'where_label', 'country', 'category'],
-};
-
-// A query is words, not a pattern. Anything that could break a search pattern is
-// dropped rather than escaped, so a stray bracket can never make the record unsearchable.
-//
-// Words that carry no meaning on their own are dropped before the cap, so a question asked
-// in plain speech keeps the words that matter: "who built this and how do I cite it"
-// searches on "built" and "cite" instead of spending its whole allowance on "who, built,
-// this, and, how, do" and losing the end of the sentence. A query made only of those words
-// is used as typed, rather than answering that nothing was given.
-const STOP = new Set([
-  'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'for', 'with', 'is', 'are', 'was', 'were',
-  'be', 'been', 'do', 'does', 'did', 'who', 'whose', 'what', 'when', 'where', 'how', 'that',
-  'this', 'these', 'those', 'it', 'its', 'i', 'me', 'my', 'we', 'our', 'you', 'your', 'can',
-  'could', 'should', 'would', 'about', 'from', 'by', 'at', 'as', 'so', 'if', 'then', 'than',
-]);
-
-const clean = (s) =>
-  [
-    ...new Set(
-      String(s || '')
-        .toLowerCase()
-        .split(/\s+/)
-        .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '').trim())
-        .filter((w) => w.length > 1)
-    ),
-  ];
-
-const toWords = (s) => {
-  const all = clean(s);
-  const meaningful = all.filter((w) => !STOP.has(w));
-  return (meaningful.length > 0 ? meaningful : all).slice(0, 8);
-};
-
-const andAll = (entity, words) => ({
-  $and: words.map((w) => ({
-    $or: FIELDS[entity].map((f) => ({ [f]: { $regex: w, $options: 'i' } })),
-  })),
-});
-
-const searchAll = async (base44, words) => {
-  const [sol, act, grp, news] = await Promise.all([
-    base44.entities.ClimateSolution.filter(andAll('ClimateSolution', words), { limit: 12, sort: '-created_date' }),
-    base44.entities.ClimateAction.filter(andAll('ClimateAction', words), { limit: 12, sort: '-created_date' }),
-    base44.entities.ClimateGroup.filter(andAll('ClimateGroup', words), { limit: 12, sort: '-created_date' }),
-    base44.entities.ClimateNews.filter(andAll('ClimateNews', words), { limit: 12, sort: '-created_date' }),
-  ]);
-  return {
-    sol: sol.items || [],
-    act: act.items || [],
-    grp: grp.items || [],
-    news: news.items || [],
-  };
-};
+// Reading the record — which fields are searched, and how a query becomes words — lives in
+// one shared module, so the search and the record's own answering engine can never disagree
+// about what the record holds.
+const searchAll = (base44: any, words: string[]) => searchRecord(base44, words, 12);
 
 const shapeSolution = (i) => ({
   id: i.id,
@@ -124,7 +70,29 @@ export default async function (req) {
     }
 
     let found = await searchAll(base44, words);
-    let total = found.sol.length + found.act.length + found.grp.length + found.news.length;
+    let total = found.solutions.length + found.actions.length + found.gatherings.length + found.news.length;
+
+    // Nothing on the record held every word. A question asked in plain speech ("what is
+    // happening to seagrass meadows") must not come back empty because one word — "happening"
+    // — is in no entry, so the record is read again on any of the words. Each entry offered
+    // had to hold at least half of them, and the reader is told plainly that this is what
+    // happened rather than being handed a silent approximation.
+    let loose = false;
+    if (words.length > 1 && total === 0) {
+      const any = await searchRecordAny(base44, words, 24);
+      const scored = {
+        solutions: scoreMatches(any.solutions, 'ClimateSolution', words),
+        actions: scoreMatches(any.actions, 'ClimateAction', words),
+        gatherings: scoreMatches(any.gatherings, 'ClimateGroup', words),
+        news: scoreMatches(any.news, 'ClimateNews', words),
+      };
+      const scoredTotal = scored.solutions.length + scored.actions.length + scored.gatherings.length + scored.news.length;
+      if (scoredTotal > 0) {
+        found = scored;
+        total = scoredTotal;
+        loose = true;
+      }
+    }
     let translatedFrom = null;
     let searched = words.join(' ');
     let usedWords = words;
@@ -146,7 +114,7 @@ export default async function (req) {
         const enWords = toWords(english && english.english);
         if (enWords.length > 0) {
           const second = await searchAll(base44, enWords);
-          const secondTotal = second.sol.length + second.act.length + second.grp.length + second.news.length;
+          const secondTotal = second.solutions.length + second.actions.length + second.gatherings.length + second.news.length;
           if (secondTotal > 0) {
             found = second;
             total = secondTotal;
@@ -165,15 +133,16 @@ export default async function (req) {
       searched,
       translatedFrom,
       total,
+      loose,
       // The record's own pages, answering for the record itself — who is behind it, who
       // built it, how it is made, how to cite it. Kept apart from the sourced entries on
       // purpose: a page about the record is not evidence of anything on it.
       about: matchRecordPages(usedWords).map(({ path, label, title, line }) => ({ path, label, title, line })),
       results: {
-        solutions: found.sol.filter((i) => i.entry_type !== 'climate_crisis').map(shapeSolution),
-        crises: found.sol.filter((i) => i.entry_type === 'climate_crisis').map(shapeSolution),
-        actions: found.act.map(shapeAction),
-        gatherings: found.grp.map(shapeGroup),
+        solutions: found.solutions.filter((i) => i.entry_type !== 'climate_crisis').map(shapeSolution),
+        crises: found.solutions.filter((i) => i.entry_type === 'climate_crisis').map(shapeSolution),
+        actions: found.actions.map(shapeAction),
+        gatherings: found.gatherings.map(shapeGroup),
         wire: found.news.map(shapeWire),
       },
     });

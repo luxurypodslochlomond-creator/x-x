@@ -130,6 +130,11 @@ export default function ClimateSearch() {
                   ? `No entries match “${data.query}” — but the record's own pages do.`
                   : `Nothing on the record matches “${data.query}” yet`}
             </p>
+            {data.loose && (
+              <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
+                No entry matched all of your words — the entries below match part of the question.
+              </p>
+            )}
             {data.translatedFrom && (
               <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
                 Nothing in those exact words — searched in English for “{data.translatedFrom}” and found {data.total}.
