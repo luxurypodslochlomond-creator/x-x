@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { Search, Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
+import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
 import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
@@ -514,9 +514,10 @@ export default function TogetherChangeClimate() {
         </span>
       </div>
 
-      {/* ── TOOLBAR — filters and search on one side, the record's own doors on the
-             other. On a desktop that reads as a working toolbar; on a phone it still
-             stacks exactly as it did. ── */}
+      {/* ── TOOLBAR — the record's filters on one side, its own doors on the other.
+             The search that reaches everything is the one pill in the header: one
+             search, not two. On a desktop that reads as a working toolbar; on a phone
+             it stacks. ── */}
       <div className="px-4 lg:px-10 py-4 lg:py-6 bg-[#efe7d6] border-b-2 border-[#141210]">
         <div className="lg:flex lg:items-start lg:gap-8">
           <div className="lg:flex-1 lg:min-w-0">
@@ -548,34 +549,6 @@ export default function TogetherChangeClimate() {
                   selectedType === 'actions' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
                 }`}
               >{t.actions}</button>
-            </div>
-            <div className="lg:max-w-[540px]">
-              {/* This box filters what is already on this page, and now it says so. The
-                  record's own search — the one that reaches everything, wire included — is
-                  the pill in the header, and the link below hands this box's words straight
-                  to it. Two controls, two names, so nobody has to guess which is which. */}
-              <div className="flex items-center gap-1.5 mb-1.5">
-                <span className="text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246]">Filter · this page</span>
-                <span className="flex-1 h-px bg-[#141210]/15" />
-              </div>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
-                <input
-                  value={query}
-                  onChange={e => handleQueryChange(e.target.value)}
-                  placeholder={t.search}
-                  aria-label={`${t.search} — this page`}
-                  className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[16px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
-                />
-              </div>
-              {query.trim() && (
-                <Link
-                  to={`/ClimateSearch?q=${encodeURIComponent(query)}`}
-                  className="flex items-center mt-2 text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e] active:text-[#e2602a]"
-                >
-                  Search the whole record →
-                </Link>
-              )}
             </div>
             <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
           </div>
@@ -675,7 +648,7 @@ export default function TogetherChangeClimate() {
                 <Globe className="w-10 h-10 text-[#5a5246] mx-auto" />
                 <p className="text-[#5a5246] text-[11px] font-mono uppercase mt-3">{t.empty}</p>
                 <Link
-                  to={`/ClimateSearch?q=${encodeURIComponent(query)}`}
+                  to="/ClimateSearch"
                   className="inline-flex items-center gap-1.5 mt-4 text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e] active:text-[#e2602a]"
                 >
                   Search the whole record →
