@@ -303,13 +303,20 @@ export default function TogetherChangeClimate() {
   const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
   const isRTL = RTL_LANGS.has((chosen || '').split('-')[0]);
 
+  // One matching rule for the record's own box, and it is the rule the full search uses:
+  // every word you type has to appear somewhere in the entry, in any order. Before, the
+  // words had to sit together as one phrase, so an obvious search like "seagrass
+  // protection" came back empty on a page that plainly holds both words. The body of an
+  // entry and its origin are searched too, not just the headline.
+  const queryWords = useMemo(() => query.toLowerCase().trim().split(/\s+/).filter(Boolean), [query]);
+  const matchesWords = (hay) => queryWords.length === 0 || queryWords.every(w => hay.includes(w));
+
   const filtered = useMemo(() => {
     return items.filter(i => {
-      const q = (i.title + ' ' + i.summary + ' ' + i.category + ' ' + (i.region_rough||'') + ' ' + (i.country||'')).toLowerCase();
-      const matchesQ = !query || q.includes(query.toLowerCase());
+      const q = (i.title + ' ' + (i.summary||'') + ' ' + (i.details||'') + ' ' + (i.category||'') + ' ' + (i.region_rough||'') + ' ' + (i.country||'') + ' ' + (i.source_name||'') + ' ' + (i.source_author||'')).toLowerCase();
       const matchesCat = selectedCategory === 'all' || i.category === selectedCategory;
       const matchesType = selectedType === 'all' || i.entry_type === selectedType;
-      return matchesQ && matchesCat && matchesType;
+      return matchesWords(q) && matchesCat && matchesType;
     });
   }, [items, query, selectedCategory, selectedType]);
 
@@ -328,10 +335,9 @@ export default function TogetherChangeClimate() {
 
   const filteredActions = useMemo(() => {
     return actions.filter(a => {
-      const q = (a.title + ' ' + a.description + ' ' + a.action_type + ' ' + (a.region_rough||'') + ' ' + (a.country||'')).toLowerCase();
-      const matchesQ = !query || q.includes(query.toLowerCase());
+      const q = (a.title + ' ' + (a.description||'') + ' ' + (a.action_type||'') + ' ' + (a.region_rough||'') + ' ' + (a.country||'')).toLowerCase();
       const matchesCat = selectedCategory === 'all' || a.category === selectedCategory;
-      return matchesQ && matchesCat;
+      return matchesWords(q) && matchesCat;
     });
   }, [actions, query, selectedCategory]);
 
@@ -343,8 +349,7 @@ export default function TogetherChangeClimate() {
   const filteredGroups = useMemo(() => {
     return liveGroups.filter(g => {
       const q = (g.name + ' ' + (g.topic||'') + ' ' + (g.region||'') + ' ' + (g.description||'')).toLowerCase();
-      const matchesQ = !query || q.includes(query.toLowerCase());
-      return matchesQ;
+      return matchesWords(q);
     });
   }, [liveGroups, query]);
 
@@ -522,6 +527,17 @@ export default function TogetherChangeClimate() {
                 placeholder={t.search}
                 className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[13px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
               />
+              {/* The box above searches what is on this page. This hands the same words
+                  straight to the search that reaches the whole record, so nobody has to
+                  guess which one they are looking at. */}
+              {query.trim() && (
+                <Link
+                  to={`/ClimateSearch?q=${encodeURIComponent(query)}`}
+                  className="flex items-center mt-2 text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e] active:text-[#e2602a]"
+                >
+                  Search the whole record →
+                </Link>
+              )}
             </div>
             <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
           </div>

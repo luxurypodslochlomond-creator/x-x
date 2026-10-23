@@ -63,7 +63,7 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   // the fastest way to anything on the record that you did not already know was there.
   if (variant === 'mobile') {
     return (
-      <div className="mx-auto flex w-max items-center gap-2.5">
+      <div className="mx-auto flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5">
         {searchBox}
         <span className="w-px h-5 bg-[#efe7d6]/20 flex-shrink-0" />
         {[...PLACES, ...ABOUT].map((item) => (

@@ -30,8 +30,8 @@ export default function ClimateMethod() {
       marker="Method · sources · who decides · corrections"
       title="How this record is made"
       statement="Read this before you trust a single entry on it. Every claim here can be checked against the thing it came from."
-      returnTo="/ClimateWire"
-      returnLabel="Back to the wire"
+      returnTo="/TogetherChangeClimate"
+      returnLabel="Back to the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
       <Block n="01" title="What this is, and what it is not">
