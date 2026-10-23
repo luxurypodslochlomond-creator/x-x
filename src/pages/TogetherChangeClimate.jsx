@@ -617,6 +617,12 @@ export default function TogetherChangeClimate() {
               <div className="py-20 text-center px-4">
                 <Globe className="w-10 h-10 text-[#5a5246] mx-auto" />
                 <p className="text-[#5a5246] text-[11px] font-mono uppercase mt-3">{t.empty}</p>
+                <Link
+                  to={`/ClimateSearch?q=${encodeURIComponent(query)}`}
+                  className="inline-flex items-center gap-1.5 mt-4 text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e] active:text-[#e2602a]"
+                >
+                  Search the whole record →
+                </Link>
               </div>
             )}
           </>
