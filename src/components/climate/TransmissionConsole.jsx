@@ -25,7 +25,7 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
   return (
     <section className="relative bg-[#141210] text-[#efe7d6] overflow-hidden border-b-2 border-b-[#141210]">
       <style>{`
-        @keyframes tx-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(127,201,228,.55); } 50% { box-shadow: 0 0 0 14px rgba(127,201,228,0); } }
+        @keyframes tx-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(63,191,127,.55); } 50% { box-shadow: 0 0 0 14px rgba(63,191,127,0); } }
         @keyframes tx-spin { to { transform: rotate(360deg); } }
         @keyframes tx-bar { from { transform: translateY(-10%); } to { transform: translateY(1000%); } }
         @keyframes tx-flick { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .7; } }

@@ -67,7 +67,7 @@ export default function TapToPlayFilm({ url, title, credit, poster }) {
           ) : null}
           <span className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.1), rgba(20,18,16,0.74))' }} />
           <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-3">
-            <span className="w-14 h-14 flex items-center justify-center rounded-full bg-[#e2602a] border-2 border-[#141210]">
+            <span className="w-14 h-14 flex items-center justify-center rounded-full bg-[#3fbf7f] border-2 border-[#141210]">
               <Play className="w-6 h-6 text-[#141210]" fill="#141210" />
             </span>
             <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6] text-center">

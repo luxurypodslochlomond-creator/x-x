@@ -2,7 +2,7 @@ import React from 'react';
 import TapToPlayFilm from './TapToPlayFilm';
 
 // ── THE FILM ── Dillon's film from Stoneymollan, the old coffin road above Loch
-// Lomond. That ground is ours, so the credit says so. It opens on a tap and never by
+// Lomond. That land is ancient, and it is where the film was made. It opens on a tap and never by
 // itself, and it carries its own honest label: this is a rough cut. A research panel
 // must never mistake a work in progress for a finished work, and the day the finished
 // film arrives it replaces this one and the label comes off.
@@ -23,7 +23,8 @@ export default function TransmissionFilm() {
         The film
       </p>
       <p className="text-[12px] font-mono text-[#1a1612]/70 leading-relaxed">
-        Stoneymollan, above Loch Lomond — our ground, on the record. Ten seconds of it, so far.
+        Stoneymollan, above Loch Lomond — ancient land, a special place, and where the film was
+        made. Ten seconds of it, so far.
       </p>
       <TapToPlayFilm url={FILM_URL} title={FILM_TITLE} credit={FILM_CREDIT} poster={FILM_POSTER} />
     </div>

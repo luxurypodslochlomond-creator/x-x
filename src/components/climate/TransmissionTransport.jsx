@@ -45,7 +45,7 @@ export default function TransmissionTransport({
             Lossless
           </span>
         )}
-        <span className={`text-[9px] font-black font-mono uppercase tracking-widest ${playing ? 'text-[#e2602a] animate-pulse' : 'text-[#efe7d6]/40'}`}>
+        <span className={`text-[9px] font-black font-mono uppercase tracking-widest ${playing ? 'text-[#3fbf7f] animate-pulse' : 'text-[#efe7d6]/40'}`}>
           {playing ? 'On air' : 'Standby'}
         </span>
       </div>
@@ -55,11 +55,11 @@ export default function TransmissionTransport({
         <button
           onClick={onToggle}
           aria-label={playing ? 'Pause transmission' : 'Start transmission'}
-          className={`relative flex-shrink-0 w-[76px] h-[76px] rounded-full border-2 border-[#e2602a] flex items-center justify-center active:scale-95 transition-colors ${playing ? 'bg-[#e2602a]' : 'bg-[#141210]'}`}
+          className={`relative flex-shrink-0 w-[76px] h-[76px] rounded-full border-2 border-[#3fbf7f] flex items-center justify-center active:scale-95 transition-colors ${playing ? 'bg-[#3fbf7f]' : 'bg-[#141210]'}`}
           style={playing ? undefined : { animation: 'tx-ring 2s ease-in-out infinite' }}
         >
-          {playing && <span className="absolute inset-[-8px] rounded-full border border-dashed border-[#e2602a]/45 pointer-events-none" style={{ animation: 'tx-spin 9s linear infinite' }} />}
-          {playing ? <Pause className="w-7 h-7 text-[#141210]" fill="currentColor" /> : <Play className="w-7 h-7 text-[#e2602a] ml-1" fill="currentColor" />}
+          {playing && <span className="absolute inset-[-8px] rounded-full border border-dashed border-[#3fbf7f]/45 pointer-events-none" style={{ animation: 'tx-spin 9s linear infinite' }} />}
+          {playing ? <Pause className="w-7 h-7 text-[#141210]" fill="currentColor" /> : <Play className="w-7 h-7 text-[#3fbf7f] ml-1" fill="currentColor" />}
         </button>
 
         <div className="flex-1 min-w-0">
