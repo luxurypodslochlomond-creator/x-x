@@ -181,6 +181,19 @@ const T = {
          );
          }
 
+// Typing a kind of entry — "crises", "groups" — means "show me those", not "find this
+// word". The record answers it: the button above moves to that kind and the list follows,
+// so the box and the buttons can never disagree. A kind word is never also searched as
+// text, or a search for "crises" would come back empty on a page full of them.
+const KIND_WORDS = {
+  solution: ['solution', 'solutions'],
+  climate_crisis: ['crisis', 'crises', 'emergency', 'emergencies'],
+  groups: ['group', 'groups', 'gathering', 'gatherings'],
+  actions: ['action', 'actions'],
+};
+const ALL_KIND_WORDS = new Set(Object.values(KIND_WORDS).flat());
+const kindOfWord = (word) => Object.keys(KIND_WORDS).find(k => KIND_WORDS[k].includes(word)) || null;
+
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
   const [groups, setGroups] = useState([]);
@@ -308,8 +321,18 @@ export default function TogetherChangeClimate() {
   // words had to sit together as one phrase, so an obvious search like "seagrass
   // protection" came back empty on a page that plainly holds both words. The body of an
   // entry and its origin are searched too, not just the headline.
-  const queryWords = useMemo(() => query.toLowerCase().trim().split(/\s+/).filter(Boolean), [query]);
+  const queryWords = useMemo(
+    () => query.toLowerCase().trim().split(/\s+/).filter(Boolean).filter(w => !ALL_KIND_WORDS.has(w)),
+    [query]
+  );
   const matchesWords = (hay) => queryWords.length === 0 || queryWords.every(w => hay.includes(w));
+
+  const handleQueryChange = (value) => {
+    setQuery(value);
+    const words = value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    const kind = words.map(kindOfWord).find(Boolean);
+    if (kind) setSelectedType(kind);
+  };
 
   const filtered = useMemo(() => {
     return items.filter(i => {
@@ -504,14 +527,15 @@ export default function TogetherChangeClimate() {
                   selectedType === 'climate_crisis' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
                 }`}
               >{t.crises}</button>
-              {liveGroups.length > 0 && (
+              {/* The door is on the toolbar from the start, not only once a gathering exists:
+                  a kind with no entries yet still needs its way in, and the section below
+                  carries the honest empty state for it. */}
               <button
                 onClick={() => setSelectedType(selectedType === 'groups' ? 'all' : 'groups')}
                 className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
                   selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
                 }`}
               >{t.groups}</button>
-              )}
               <button
                 onClick={() => setSelectedType(selectedType === 'actions' ? 'all' : 'actions')}
                 className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
@@ -523,8 +547,9 @@ export default function TogetherChangeClimate() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5a5246]" />
               <input
                 value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder={t.search}
+                onChange={e => handleQueryChange(e.target.value)}
+                placeholder={`${t.solutions} · ${t.crises} · ${t.groups} · ${t.actions}`}
+                aria-label={t.search}
                 className="w-full bg-[#f7f1e5] border border-[#141210] pl-9 pr-4 py-3 min-h-[44px] text-[13px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
               />
               {/* The box above searches what is on this page. This hands the same words
@@ -713,7 +738,9 @@ export default function TogetherChangeClimate() {
                 ))}
               </div>
             ) : (
-              <p className="text-[11px] font-mono text-[#5a5246] py-6 text-center">{t.actions_empty}</p>
+              // "nothing here yet" and "nothing matched what you typed" are different
+              // sentences, and the record says which one it is.
+              <p className="text-[11px] font-mono text-[#5a5246] py-6 text-center">{actions.length === 0 ? t.actions_empty : t.empty}</p>
             )}
           </section>
         )}
