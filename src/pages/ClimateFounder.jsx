@@ -97,7 +97,7 @@ export default function ClimateFounder() {
           Janine M. H. Selendy
         </h1>
         <p className="text-[11px] lg:text-[13px] font-mono text-[#5a5246] mt-4 leading-relaxed max-w-sm lg:max-w-2xl mx-auto">
-          Chairman, President and Publisher, Horizon International · Yale University<br />
+          Founder, Horizon International<br />
           Four decades of finding and advancing solutions to the interrelated concerns of global health, environment, and poverty.
         </p>
 
@@ -141,8 +141,8 @@ export default function ClimateFounder() {
         })}
       </div>
 
-      {/* The signature — her formal attribution, exactly as she writes it.
-          The record has to be able to point back to the source. */}
+      {/* The signature — her own words only: "Founder". She asked for the other
+          titles to come off, at the top and at the end, 23 October 2026. */}
       <div className="mx-auto w-full max-w-[820px] lg:max-w-[900px] px-5 lg:px-0 pb-8 lg:pb-14">
         <div className="bg-[#f7f1e5] border-2 border-[#141210] p-5 lg:p-7" style={{ animation: 'twcc-epigraph .5s ease-out .5s both' }}>
           <div className="flex items-center gap-2 mb-4">
@@ -154,8 +154,7 @@ export default function ClimateFounder() {
             Janine M. H. Selendy
           </p>
           <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-5">
-            Chairman, President and Publisher, Horizon International<br />
-            Fellow Emeritus, The Explorers Club (FN'96)
+            Founder, Horizon International
           </p>
 
           <div className="space-y-3">
