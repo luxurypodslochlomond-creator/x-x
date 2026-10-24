@@ -98,8 +98,9 @@ export default function WordForm({ trackId, onLeft }) {
 
       <p className="mt-2 text-[9px] font-mono text-[#5a5246] leading-relaxed">
         Kept as you write it. Nobody edits it: not the artist, not the record. No email is asked for,
-        nothing is counted, and there is nothing to reply to. Only a keeper can take down a line that
-        breaks the law.
+        nothing is counted, and there is nothing to reply to. Disagreeing with the work is welcome —
+        criticism is not abuse and does not come down. Only a keeper can take down a line for
+        something unlawful.
       </p>
     </div>
   );

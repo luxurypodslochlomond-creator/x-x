@@ -22,6 +22,9 @@ export default function TrackPlate({ track }) {
   // A set is one continuous work by a selector. It is described as a set and not as a track,
   // because the first words a reader meets about a piece should be the true ones.
   const isSet = track.kind === 'set';
+  // The giver's own choice, kept as theirs. A piece given to be heard here is not offered for
+  // taking — so the page says that, instead of promising a file it is not going to give.
+  const takeable = track.master_offer !== 'listen_here_only';
 
   const card = {
     id: track.id,
@@ -67,9 +70,9 @@ export default function TrackPlate({ track }) {
           {/* Read out of the master's own header, never typed in by anyone. */}
           <p className="text-[11px] font-mono text-[#efe7d6]/80 leading-relaxed">{meta.join(' · ')}</p>
           {/* Zero loss, zero barrier: the master's own file, whole. If the player above cannot
-              read this format on your device, the file is still here to take — nothing was ever
-              converted, so what you take is exactly what the artist handed over. */}
-          {track.audio_url && (
+              read this format on your device and the giver offered the file to take, it is here —
+              nothing was ever converted, so what you take is exactly what the artist handed over. */}
+          {track.audio_url && takeable && (
             <p className="mt-2">
               <a
                 href={track.audio_url}
@@ -79,6 +82,17 @@ export default function TrackPlate({ track }) {
               >
                 The master's own file, whole — take it and play it anywhere. Nothing has been converted.
               </a>
+              <span className="block mt-1 text-[10px] font-mono text-[#efe7d6]/40 leading-relaxed">
+                Given to be taken whole: a gift that travels, not a licence. The artist's name stays on the work.
+              </span>
+            </p>
+          )}
+          {/* Where the file is not offered, the record does not offer it and does not pretend it is
+              elsewhere: it says out loud what the giver asked for, in their place on the page. */}
+          {track.audio_url && !takeable && (
+            <p className="mt-2 text-[10px] font-mono text-[#efe7d6]/55 leading-relaxed">
+              Given to be heard here, not taken. The master is kept exactly as it was given and never converted —
+              the artist asked that it be listened to on the record rather than kept.
             </p>
           )}
           {track.artist_link && (

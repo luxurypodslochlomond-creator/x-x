@@ -53,7 +53,7 @@ export default function ClimateMusic() {
       statement="Music made for the record and given to it. Free to listen, the master whole, and the artist's name kept on it."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone with an account-free link. What is printed beside each track is the file's own truth: its format comes out of the master's header, its date is the moment the record took it in, and its fingerprint is read on the artist's own device before the file is ever sent — so nothing here has to be taken on trust."
+      footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone who comes to hear it, and whether it may be taken is the giver\u2019s own choice, said on the track itself. What is printed beside each track is the file's own truth: its format comes out of the master's header, its date is the moment the record took it in, and its fingerprint is read on the artist's own device before the file is ever sent — so nothing here has to be taken on trust."
     >
       {loading ? (
         <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">

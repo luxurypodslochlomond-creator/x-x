@@ -1,7 +1,7 @@
 {
   "name": "ClimateTrack",
   "type": "object",
-  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. A set is the same thing with many works inside it: one continuous piece by a selector, served whole and never cut into chapters, with the works inside it listed in the selector's own order and on their word. The spec, the length and the fingerprint are read from the file itself, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in.",
+  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. Whether the master is offered to be taken is the giver's own choice, made once when they hand it over and said plainly on the track \u2014 take it whole, or heard here only \u2014 and the record adds no condition of its own to either. A set is the same thing with many works inside it: one continuous piece by a selector, served whole and never cut into chapters, with the works inside it listed in the selector's own order and on their word. The spec, the length and the fingerprint are read from the file itself, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in.",
   "properties": {
     "title": {
       "type": "string",
@@ -44,6 +44,15 @@
     "audio_url": {
       "type": "string",
       "description": "The master itself, stored publicly so anyone may hear it without signing in and without an app. The exact file the artist gave: never re-encoded, never trimmed, never replaced. Required."
+    },
+    "master_offer": {
+      "type": "string",
+      "enum": [
+        "take_it_whole",
+        "listen_here_only"
+      ],
+      "default": "take_it_whole",
+      "description": "The giver's own choice about the master, made once at the door and kept as theirs, then said plainly on the track so nobody has to ask them. take_it_whole \u2014 anyone may take the master, play it out and pass it on, with the artist's name staying on the work: a gift that travels, not a licence. listen_here_only \u2014 it is heard on the record and not offered for keeping. The generous answer is the default, because a room that has to be asked before it gives you the file is not a gift. Neither choice is a lock and neither adds a condition: the master is stored exactly as given either way, and the record never sells, licenses or counts it."
     },
     "spec": {
       "type": "string",

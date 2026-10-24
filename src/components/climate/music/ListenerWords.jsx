@@ -20,9 +20,16 @@ export default function ListenerWords({ track }) {
         In the listener's own words
       </summary>
       <p className="mt-3 text-[10px] font-mono text-[#5a5246] leading-relaxed">
-        Why a piece lands cannot be read out of a file, so no machine is asked to guess at it here.
-        What is kept is what a person actually said. Nothing is counted, nothing is ranked, and there
-        is nothing to reply to.
+        Why a piece lands cannot be read out of a file, so no machine is asked to guess at it here. What is kept is
+        what a person actually said, exactly as they said it — nothing corrected, nothing tidied.
+      </p>
+      <p className="mt-2 text-[10px] font-mono text-[#5a5246] leading-relaxed">
+        Nothing here is counted, scored or ranked, and the artist is never graded by it. There is no reply box: under a
+        piece of work this is a room of listeners, not a forum, and nobody answers back under a track.
+      </p>
+      <p className="mt-2 text-[10px] font-mono text-[#5a5246] leading-relaxed">
+        Disagreeing with the work is not abuse, and it stays. A line is taken down only for what is unlawful, only by a
+        keeper — and it is never quietly.
       </p>
       <WordsList trackId={track.id} reloadKey={reloadKey} />
       <WordForm trackId={track.id} onLeft={() => setReloadKey((k) => k + 1)} />

@@ -26,6 +26,12 @@ import { secrets } from 'base44:runtime';
 
 const KINDS = ['song', 'instrumental', 'field_recording', 'spoken_word', 'score', 'set', 'other'];
 
+// The giver's own choice about the master, made once when they hand it over and kept as
+// theirs: offered to be taken whole, or heard here only. The generous answer is the
+// default, because a room that has to be asked before it gives you the file is not a gift.
+// Neither choice is a lock, and neither is inferred: it is only ever what they said.
+const MASTER_OFFERS = ['take_it_whole', 'listen_here_only'];
+
 export default async function(req: Request): Promise<Response> {
   try {
     const base44 = createClientFromRequest(req);
@@ -115,6 +121,8 @@ The works inside it, as the selector listed them (a set only): ${String(data.tra
       // it, or move a work to a name they did not give.
       tracklist: data.tracklist ? String(data.tracklist).slice(0, 6000) : '',
       audio_url: audioUrl,
+      // Their choice, not ours — stored as it was given, and never changed afterwards.
+      master_offer: MASTER_OFFERS.includes(data.master_offer) ? data.master_offer : 'take_it_whole',
       spec: data.spec ? String(data.spec).slice(0, 160) : '',
       seconds: typeof data.seconds === 'number' && isFinite(data.seconds) ? data.seconds : undefined,
       // Only a real fingerprint is kept: 64 hex characters read off the master on the

@@ -28,6 +28,7 @@ export default function MusicSubmitForm({ onSubmitted }) {
   const [tracklist, setTracklist] = useState('');
   const [email, setEmail] = useState('');
   const [master, setMaster] = useState(null);
+  const [masterOffer, setMasterOffer] = useState('take_it_whole');
   const [masterSpec, setMasterSpec] = useState('');
   const [masterSeconds, setMasterSeconds] = useState(null);
   const [masterPrint, setMasterPrint] = useState('');
@@ -70,6 +71,7 @@ export default function MusicSubmitForm({ onSubmitted }) {
           spec: masterSpec,
           seconds: masterSeconds ?? undefined,
           master_sha256: masterPrint,
+          master_offer: masterOffer,
           kind: isSet ? 'set' : undefined,
           tracklist: isSet ? tracklist : undefined,
         },
@@ -100,6 +102,7 @@ export default function MusicSubmitForm({ onSubmitted }) {
         </p>
         <p className="text-[10px] font-mono text-[#5a5246] mt-2 leading-relaxed">
           It is never edited, re-encoded, sold or counted, and no one can take your name off it.
+          {' '}Your choice about the master stands written on the track, where anyone can read it.
         </p>
       </div>
     );
@@ -168,8 +171,39 @@ export default function MusicSubmitForm({ onSubmitted }) {
         <p className="text-[9px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">
           Give the master itself, in whatever format and resolution you work at. Nothing is converted, ever — what you
           hand over is what is kept and what is served. A FLAC plays in nearly every browser as it stands; a WAV or an
-          AIFF may not stream on every device, which is why the master's own file is always there to take and play
-          anywhere. Stored publicly — anyone with the link can open them. That is the whole point: anyone, anywhere, no account, nothing to buy.
+          AIFF may not stream on every device, which is why the file you give can also be offered to take and play
+          anywhere — your choice, below. Stored publicly — anyone with the link can open them. That is the whole point: anyone, anywhere, no account, nothing to buy.
+        </p>
+      </div>
+
+      {/* The giver's choice, made once, at the door — and said plainly on the track after this,
+          so nobody has to ask them for it. Not a licence either way, and no lock: a lock on a
+          file is the one thing this record does not do. The generous answer is the default. */}
+      <div>
+        <label className={LABEL}>How your master is offered</label>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { key: 'take_it_whole', label: 'Take it whole' },
+            { key: 'listen_here_only', label: 'Heard here only' },
+          ].map((option) => (
+            <button
+              key={option.key}
+              type="button"
+              onClick={() => setMasterOffer(option.key)}
+              className={`px-3 py-3 min-h-[44px] border-2 text-[11px] font-black font-mono uppercase transition-colors ${
+                masterOffer === option.key
+                  ? 'bg-[#141210] text-[#efe7d6] border-[#141210]'
+                  : 'bg-[#f7f1e5] text-[#141210] border-[#141210]/25 active:border-[#141210]'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+        <p className="text-[10px] font-mono text-[#5a5246] mt-2 leading-relaxed">
+          {masterOffer === 'take_it_whole'
+            ? 'Anyone may take the master, play it out and pass it on — your name stays on the work. Not a licence, and nothing added to it: the work stays yours, and this is a gift that travels.'
+            : 'It is heard on the record and not offered for taking. The file is still kept exactly as you gave it — and said plainly: it sits at a public address, so someone who goes looking can reach it. The record will not pretend otherwise.'}
         </p>
       </div>
 
