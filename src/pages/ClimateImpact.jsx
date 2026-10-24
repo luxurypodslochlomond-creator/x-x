@@ -150,7 +150,7 @@ export default function ClimateImpact() {
                 <Eye className="w-4 h-4 text-[#efe7d6]/60" />
                 <span className="font-black text-[#efe7d6]" style={{ fontSize: '28px' }}>{entries}</span>
               </div>
-              <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Entries</p>
+              <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Entries listed</p>
             </div>
             {regions.length > 0 && (
               <>
@@ -165,6 +165,12 @@ export default function ClimateImpact() {
               </>
             )}
           </div>
+          {/* The big number was labelled "Entries", which read as everything on the record — it is
+              not. It is the three doors that carry reach. Said plainly here so nobody reading a
+              funder's page has to guess what the figure covers. */}
+          <p className="text-[8px] font-mono text-[#efe7d6]/40 mt-3 leading-relaxed max-w-[320px] mx-auto">
+            Entries listed = the solutions, the crises and the actions on the record. The wire, the gatherings and the music given to it stand on the record too, and are not part of this count.
+          </p>
         </motion.div>
       </div>
 
@@ -307,7 +313,7 @@ export default function ClimateImpact() {
         <div className="px-5 py-16 text-center">
           <Globe className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">
-            The record is live. As people around the world read it, this page will come alive — every country, every nation, every view, in real time.
+            The record is live. As people around the world read it, this page will come alive — every country, every nation, every read counted.
           </p>
           <Link to={createPageUrl('TogetherChangeClimate')} className="mt-6 inline-block px-5 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
             Back to the record
