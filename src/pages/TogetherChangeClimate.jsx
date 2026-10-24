@@ -434,19 +434,21 @@ export default function TogetherChangeClimate() {
               <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#7fc9e4]">
                 Dr. Jane Goodall
               </p>
-              {/* One house, named once. Roots & Shoots IS the Jane Goodall Institute's
-                  programme, so listing them as two separate voices read as two bodies
-                  standing behind one line. The link goes to the one that published it. */}
+              {/* One house, named once — and the name ON the line is the house the
+                  link OPENS. Dr. Jane's own institute published this line, and it is
+                  the body that answers for it, so both the words and the tap point at
+                  it: a reader who taps through lands on the name they just read, never
+                  beside it. A credit that named one body and opened another would be
+                  the one kind of wrong this record does not allow itself. */}
               <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/55">
                 <a
-                  href="https://www.rootsnshoots.org.uk"
+                  href="https://www.janegoodall.org.uk/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-black text-[#7fc9e4] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
                 >
-                  Roots &amp; Shoots
+                  the Jane Goodall Institute UK
                 </a>
-                , the Jane Goodall Institute
               </p>
             </div>
           </div>
