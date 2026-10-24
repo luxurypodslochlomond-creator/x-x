@@ -73,6 +73,19 @@ export default function TrackPlate({ track }) {
         <ShareCardButton entry={card} build={buildTransmissionShareCard} compact />
       </div>
 
+      {track.master_sha256 && (
+        <details className="bg-[#efe7d6] px-5 lg:px-10 py-4 border-t-2 border-[#141210]">
+          <summary className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#141210] min-h-[44px] flex items-center cursor-pointer">
+            The master's own fingerprint, in full
+          </summary>
+          <p className="mt-3 text-[11px] font-mono text-[#141210] leading-relaxed break-all">{track.master_sha256}</p>
+          <p className="mt-2 text-[10px] font-mono text-[#5a5246] leading-relaxed">
+            SHA-256, read from the master on the artist's own device before the file was sent — not taken afterwards, and not touched since.
+            It is the record's receipt for the file: the bytes kept here are the bytes handed over, and that can be checked instead of trusted.
+          </p>
+        </details>
+      )}
+
       {track.lyric && (
         <details className="bg-[#efe7d6] px-5 lg:px-10 py-4 border-t-2 border-[#141210]">
           <summary className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#141210] min-h-[44px] flex items-center cursor-pointer">

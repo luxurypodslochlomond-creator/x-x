@@ -1,7 +1,7 @@
 {
   "name": "ClimateTrack",
   "type": "object",
-  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. The spec is read from the file's own header, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in.",
+  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. The spec, the length and the fingerprint are read from the file itself, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in.",
   "properties": {
     "title": {
       "type": "string",
@@ -47,6 +47,10 @@
     "seconds": {
       "type": "number",
       "description": "Its length in seconds, read from the same header. Empty when the file's format could not be read."
+    },
+    "master_sha256": {
+      "type": "string",
+      "description": "The fingerprint of the exact bytes the artist gave, taken on their own device before the file was sent \u2014 so the file kept here can be checked against the file handed over, rather than trusted. Never computed from a copy and never re-derived afterwards."
     },
     "cover_url": {
       "type": "string",

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Music, Check, AlertTriangle } from 'lucide-react';
 import { readMasterSpec } from './audioSpec';
+import { fingerprintMaster } from './masterPrint';
 
 // ── GIVE THE RECORD YOUR TRACK ──────────────────────────────────────────────────
 // The artist's own door, and nothing is asked of them that costs them anything: no
@@ -27,6 +28,7 @@ export default function MusicSubmitForm({ onSubmitted }) {
   const [master, setMaster] = useState(null);
   const [masterSpec, setMasterSpec] = useState('');
   const [masterSeconds, setMasterSeconds] = useState(null);
+  const [masterPrint, setMasterPrint] = useState('');
   const [cover, setCover] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -35,10 +37,13 @@ export default function MusicSubmitForm({ onSubmitted }) {
   const pickMaster = async (file) => {
     setMaster(file || null);
     setMasterSpec('');
+    setMasterSeconds(null);
+    setMasterPrint('');
     if (file) {
       const { spec, seconds } = await readMasterSpec(file);
       setMasterSpec(spec);
       setMasterSeconds(seconds);
+      setMasterPrint(await fingerprintMaster(file));
     }
   };
 
@@ -60,6 +65,7 @@ export default function MusicSubmitForm({ onSubmitted }) {
           audio_url: audioUrl, cover_url: coverUrl, submitter_email: email,
           spec: masterSpec,
           seconds: masterSeconds ?? undefined,
+          master_sha256: masterPrint,
         },
       });
       setResult(res?.data || { success: false });
@@ -114,6 +120,12 @@ export default function MusicSubmitForm({ onSubmitted }) {
         {masterSpec && (
           <p className="text-[10px] font-mono text-[#1e3a2b] mt-2 leading-relaxed">
             The record read your master: <b className="font-black">{masterSpec}</b>
+          </p>
+        )}
+        {masterPrint && (
+          <p className="text-[10px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">
+            Its own fingerprint, read on your device: <b className="font-black break-all">{masterPrint.slice(0, 16)}…</b> Kept with the track,
+            so what you gave can never quietly become something else — and anyone can check it rather than trust it.
           </p>
         )}
         <p className="text-[9px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">

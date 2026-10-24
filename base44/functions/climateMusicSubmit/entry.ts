@@ -101,6 +101,10 @@ Lyric: ${String(data.lyric || '').slice(0, 4000) || '(none given)'}`,
       audio_url: audioUrl,
       spec: data.spec ? String(data.spec).slice(0, 160) : '',
       seconds: typeof data.seconds === 'number' && isFinite(data.seconds) ? data.seconds : undefined,
+      // Only a real fingerprint is kept: 64 hex characters read off the master on the
+      // artist's own device. Anything else is dropped rather than stored, because a
+      // fingerprint that cannot be checked is worse than none at all.
+      master_sha256: /^[0-9a-f]{64}$/i.test(String(data.master_sha256 || '')) ? String(data.master_sha256).toLowerCase() : '',
       cover_url: data.cover_url ? String(data.cover_url) : '',
       submitter_email: data.submitter_email ? String(data.submitter_email).slice(0, 200) : '',
       kind,
