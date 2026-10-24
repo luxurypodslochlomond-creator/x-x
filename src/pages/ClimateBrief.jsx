@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
-import { ArrowRight, Printer, Globe, Languages, Shield, Leaf, Check } from 'lucide-react';
+import { ArrowRight, Globe, Languages, Shield, Leaf, Check } from 'lucide-react';
 import { recordOrigin } from '@/components/climate/recordAddress';
 
 // ── A factual one-pager for Janine M. H. Selendy & Horizon International ──
@@ -13,8 +13,6 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 // platform's temporary app address is never printed as the record's home.
 
 export default function ClimateBrief() {
-  const handlePrint = () => window.print();
-
   // The brief tells her the numbers are live — so they are. Counted from the
   // database on every visit; today's verified figures are the fallback.
   const [stats, setStats] = useState({
@@ -58,9 +56,6 @@ export default function ClimateBrief() {
         <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 text-[#efe7d6] text-[11px] font-black font-mono uppercase tracking-widest">
           ← Back to the record
         </Link>
-        <button onClick={handlePrint} className="flex items-center gap-2 px-3 py-2 bg-[#e2602a] text-[#1a1612] text-[10px] font-black font-mono uppercase border border-[#1a1612] active:bg-[#1e3a2b] active:text-[#efe7d6]">
-          <Printer className="w-3.5 h-3.5" /> Print / Save as PDF
-        </button>
       </div>
 
       <div className="brief-page max-w-2xl mx-auto px-6 py-10">
@@ -215,7 +210,7 @@ export default function ClimateBrief() {
               This platform is built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us. Your 40 years are the foundation. Our job is to carry the record honestly, in every tongue, to every person on Earth.
             </p>
             <p className="text-[11px] font-mono text-[#6b6258] mt-4 leading-relaxed">
-              The live record is at <span className="font-bold text-[#1a1612]">/TogetherChangeClimate</span>. This brief is printable. We will add nothing we cannot stand behind.
+              The live record is at <span className="font-bold text-[#1a1612]">/TogetherChangeClimate</span>. We will add nothing we cannot stand behind.
             </p>
           </div>
         </section>
@@ -284,14 +279,14 @@ WHERE THE NUMBERS STAND TODAY:
 
 ${stats.entries} entries on the record — ${stats.solutions} solutions, ${stats.crises} crises — across ${stats.locations} countries and regions. ${stats.actions} ground actions. ${stats.groups} community groups. ${stats.categories} of 20 categories filled. 60+ languages. These are live and grow as the community adds entries.
 
-The live record and a printable brief are at the links below.
+The live record and this brief are at the links below.
 
 This is built in your honour, and in honour of Horizon International. Your 40 years are the foundation.
 
 Brian
 
 Live record: ${recordOrigin()}/TogetherChangeClimate
-Printable brief: ${recordOrigin()}/ClimateBrief`}
+This brief: ${recordOrigin()}/ClimateBrief`}
           </div>
           <p className="text-[10px] font-mono text-[#6b6258] mt-2 leading-relaxed">
             Tap "Copy email" to copy the whole message, or tap and hold to select the text manually.
