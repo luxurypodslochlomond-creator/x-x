@@ -14,6 +14,7 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 import { markProduced } from '@/components/shared/translationMemory';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
+import PeaceBell from '@/components/climate/PeaceBell';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
 import DefinitionsBand from '@/components/climate/DefinitionsBand';
 
@@ -412,7 +413,11 @@ export default function TogetherChangeClimate() {
               <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
             </div>
 
-            <SignalBeacon size={38} color="#7fc9e4" />
+            {/* Her own mark, here and nowhere else: the bell she rings to name a
+                commitment, and her ask that everyone with her make one too. It does
+                the job the beacon does — one wordless mark, ringing outward — but in
+                her voice rather than the record's. The beacon keeps the record. */}
+            <PeaceBell size={44} color="#7fc9e4" />
 
             {/* The first human voice on the record — in the reading voice, which is
                 what this plate always said it was. The label above and the credit
