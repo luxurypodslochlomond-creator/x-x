@@ -1,0 +1,70 @@
+{
+  "name": "ClimateWord",
+  "type": "object",
+  "description": "A line a listener left under a track, in their own words. This is the record's one honest answer to why a piece landed: not a machine's guess, not a number, but a person saying so. Nothing here is counted, scored, ranked or replied to, and the artist is never graded by it. A listener gives a name only if they choose to, and is never asked for an email \u2014 they owe the record nothing. A line is kept exactly as it was written: never corrected, paraphrased or shortened by anyone. Written only by the backend, after screening, so no line reaches the record around the screen; only a keeper can take a line down, and only for something unlawful. The public may read it; the record never edits what a listener said.",
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "description": "The track the line sits under. A line is left under a work, never in mid-air. Required."
+    },
+    "word": {
+      "type": "string",
+      "description": "The listener's own line, kept exactly as it was written \u2014 punctuation, spelling and dialect all as given. Nothing here is corrected or tidied. Required."
+    },
+    "listener_name": {
+      "type": "string",
+      "description": "A name, given only if the listener chose to give one. Empty on most lines \u2014 and empty is not a gap to fill: an unnamed line is still a person's."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft"
+      ],
+      "default": "published",
+      "description": "A clean line goes up the moment it is left, so a listener is never left waiting on a person. Only a flagged line waits, and it waits with a keeper's note beside it."
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Held back by the screener for a human look. Never set for disagreement: a listener criticising the artist, the track or the record is not abuse and is never flagged for it."
+    },
+    "ai_assessment": {
+      "type": "string",
+      "description": "The screener's advisory note \u2014 spam, unlawful or abusive words, or private details about somebody who did not put them here. Advisory only; a person decides."
+    }
+  },
+  "required": [
+    "track_id",
+    "word"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

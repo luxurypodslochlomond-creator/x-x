@@ -4,6 +4,7 @@ import ShareCardButton from '../ShareCardButton';
 import { buildTransmissionShareCard } from '../shareCardImage';
 import { clock } from './audioSpec';
 import { givenStamp } from './stamp';
+import ListenerWords from './ListenerWords';
 
 // ── ONE TRACK, STANDING THE SAME WAY AS EVERY OTHER ─────────────────────────────
 // Dillon's track and an artist's track uploaded this morning are drawn by this same
@@ -94,6 +95,10 @@ export default function TrackPlate({ track }) {
           <p className="mt-3 text-[13px] font-mono text-[#141210] leading-relaxed whitespace-pre-wrap">{track.lyric}</p>
         </details>
       )}
+
+      {/* Keyed on the track, so switching tracks clears the half-written line and loads
+          that track's own — a line is never left under the wrong piece of work. */}
+      <ListenerWords key={track.id} track={track} />
     </div>
   );
 }
