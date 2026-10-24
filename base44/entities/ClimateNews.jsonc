@@ -1,7 +1,7 @@
 {
   "name": "ClimateNews",
   "type": "object",
-  "description": "The record's wire: dated, sourced entries \u2014 what changed, where, who says so, and what others can copy from it. Every entry carries its origin; nothing goes on without one. No likes, no rankings, no chasing volume. Public to read once published; anyone may send an entry in; only admins change or remove what is on the wire.",
+  "description": "The record's wire: dated, sourced entries \u2014 what changed, where, who says so, and what others can copy from it. Every entry carries its origin; nothing goes on without one. No likes, no rankings, no chasing volume. Public to read once published; anyone may send an entry in; only admins change or remove what is on the wire. The sender's own email is never part of what a reader receives: it is kept so the record can reach the sender about their entry, and it belongs to them, not to the wire.",
   "properties": {
     "headline": {
       "type": "string",
@@ -116,11 +116,18 @@
     },
     "submitter_name": {
       "type": "string",
-      "description": "Name of the person who sent this entry in, if it came from a reader."
+      "description": "Name of the person who sent this entry in, if it came from a reader. Never published."
     },
     "submitter_email": {
       "type": "string",
-      "description": "Email of the sender \u2014 used only to reach them about this entry. Never published."
+      "description": "Email of the sender \u2014 used only to reach them about this entry. Never published, and never handed to a reader: only a keeper may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "flagged": {
       "type": "boolean",

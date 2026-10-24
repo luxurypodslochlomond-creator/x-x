@@ -1,7 +1,7 @@
 {
   "name": "ClimateTrack",
   "type": "object",
-  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. Whether the master is offered to be taken is the giver's own choice, made once when they hand it over and said plainly on the track \u2014 take it whole, or heard here only \u2014 and the record adds no condition of its own to either. A set is the same thing with many works inside it: one continuous piece by a selector, served whole and never cut into chapters, with the works inside it listed in the selector's own order and on their word. The spec, the length and the fingerprint are read from the file itself, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in. And where a keeper takes down a listener's line for something unlawful, a note stays in its place, in the open: the line is never reprinted, and a removal on this record is never quiet.",
+  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. Whether the master is offered to be taken is the giver's own choice, made once when they hand it over and said plainly on the track \u2014 take it whole, or heard here only \u2014 and the record adds no condition of its own to either. A set is the same thing with many works inside it: one continuous piece by a selector, served whole and never cut into chapters, with the works inside it listed in the selector's own order and on their word. The spec, the length and the fingerprint are read from the file itself, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in. And where a keeper takes down a listener's line for something unlawful, a note stays in its place, in the open: the line is never reprinted, and a removal on this record is never quiet. The giver's own email is kept back the same way: it is how the record reaches them about their own work, and never part of what a listener receives.",
   "properties": {
     "title": {
       "type": "string",
@@ -94,7 +94,14 @@
     },
     "submitter_email": {
       "type": "string",
-      "description": "The artist's email \u2014 used only to reach them about their own track, and never published. Never shown to another visitor, and never on a card."
+      "description": "The artist's email \u2014 used only to reach them about their own track, and never published. Never shown to another visitor, never on a card, and never handed to a listener: only a keeper may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     }
   },
   "required": [

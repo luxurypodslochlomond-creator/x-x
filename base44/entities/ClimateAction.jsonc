@@ -1,7 +1,7 @@
 {
   "name": "ClimateAction",
   "type": "object",
-  "description": "Public climate actions on the 'Together We Change Climate' platform \u2014 cleanups, plantings, meetings, policy submissions. Reviewed before publication like solutions. No messaging stored on platform; organizers provide one contact link. Public submissions welcome with email. An action that points at more information carries the link to its origin, and how well it is known is kept in the open.",
+  "description": "Public climate actions on the 'Together We Change Climate' platform \u2014 cleanups, plantings, meetings, policy submissions. Reviewed before publication like solutions. No messaging stored on platform; organizers provide one contact link. Public submissions welcome with email. An action that points at more information carries the link to its origin, and how well it is known is kept in the open. The organiser's own email is kept back: it is how the record reaches them, never something a reader receives.",
   "properties": {
     "title": {
       "type": "string",
@@ -87,7 +87,14 @@
     },
     "submitter_email": {
       "type": "string",
-      "description": "Email of the submitter \u2014 required per Janine's spec for public submissions"
+      "description": "Email of the submitter \u2014 required per Janine's spec for public submissions. Used only to reach them about this action: never published, and never handed to a reader. Only a keeper may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "flagged": {
       "type": "boolean",

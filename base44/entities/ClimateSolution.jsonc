@@ -1,7 +1,7 @@
 {
   "name": "ClimateSolution",
   "type": "object",
-  "description": "A verified climate solution or climate-crisis entry on the 'Together We Change Climate' public platform. Faithful to Janine Selendy's spec: two summary types (Solutions / Climate Crisis), her category taxonomy, rough location, image, and translation-ready fields. Public submissions welcome with email \u2014 reviewed before publication. Every entry must trace to its origin: the source fields below are the entry's reason for being on the record, and how well it is known is said out loud on the entry itself.",
+  "description": "A verified climate solution or climate-crisis entry on the 'Together We Change Climate' public platform. Faithful to Janine Selendy's spec: two summary types (Solutions / Climate Crisis), her category taxonomy, rough location, image, and translation-ready fields. Public submissions welcome with email \u2014 reviewed before publication. Every entry must trace to its origin: the source fields below are the entry's reason for being on the record, and how well it is known is said out loud on the entry itself. The submitter's own email stays theirs: it is kept so the record can reach them about their entry, and a reader never receives it.",
   "properties": {
     "entry_type": {
       "type": "string",
@@ -113,7 +113,14 @@
     },
     "submitter_email": {
       "type": "string",
-      "description": "Email of the submitter \u2014 required per Janine's spec for public submissions"
+      "description": "Email of the submitter \u2014 required per Janine's spec for public submissions. Used only to reach them about this entry: never published, and never handed to a reader. Only a keeper may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "flagged": {
       "type": "boolean",

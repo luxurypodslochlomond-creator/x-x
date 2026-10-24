@@ -1,7 +1,7 @@
 {
   "name": "ClimateComment",
   "type": "object",
-  "description": "Public comments on climate entries \u2014 solutions, crises, and actions. Email required per Janine's spec. Reviewed before publication (spam filter oversight).",
+  "description": "Public comments on climate entries \u2014 solutions, crises, and actions. Email required per Janine's spec. Reviewed before publication (spam filter oversight). A commenter's email is kept so the record can reach them about their own comment, and is never handed to a reader: the words stand, the address stays theirs.",
   "properties": {
     "entry_id": {
       "type": "string",
@@ -22,7 +22,14 @@
     },
     "author_email": {
       "type": "string",
-      "description": "Commenter's email \u2014 required per Janine's spec for interaction"
+      "description": "Commenter's email \u2014 required per Janine's spec for interaction. Used only to reach them about their own comment: never published, and never handed to a reader. Only a keeper may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "content": {
       "type": "string",

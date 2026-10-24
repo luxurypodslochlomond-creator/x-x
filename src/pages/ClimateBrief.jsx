@@ -21,23 +21,27 @@ export default function ClimateBrief() {
 
   useEffect(() => {
     (async () => {
-      const [solutions, crises, locationList, categoryList, actions, groups] = await Promise.all([
+      // Locations and categories are counted on the server, not by listing the record and
+      // counting distinct values in the browser: the record no longer hands out the address
+      // a submitter gave, and a field held back that way also stops a browser's own
+      // counting query. The two numbers still come from the real published entries.
+      const [solutions, crises, facets, actions, groups] = await Promise.all([
         base44.entities.ClimateSolution.count({ entry_type: 'solution', status: 'published' }),
         base44.entities.ClimateSolution.count({ entry_type: 'climate_crisis', status: 'published' }),
-        base44.entities.ClimateSolution.list({ distinct: 'country' }),
-        base44.entities.ClimateSolution.list({ distinct: 'category' }),
+        base44.functions.invoke('climateRecordFacets', {}).then(r => r?.data || {}),
         base44.entities.ClimateAction.count({ status: 'published' }),
         base44.entities.ClimateGroup.count({}),
       ]);
-      setStats({
+      setStats(prev => ({
+        ...prev,
         entries: solutions + crises,
         solutions,
         crises,
-        locations: locationList.items.filter(Boolean).length,
-        categories: categoryList.items.filter(Boolean).length,
+        locations: facets.countries ?? prev.locations,
+        categories: facets.categories ?? prev.categories,
         actions,
         groups,
-      });
+      }));
     })();
   }, []);
 

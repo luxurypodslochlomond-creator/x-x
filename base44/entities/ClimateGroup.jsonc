@@ -51,7 +51,14 @@
     },
     "submitter_email": {
       "type": "string",
-      "description": "Email of the organiser \u2014 used only to reach them about this gathering. Never published."
+      "description": "Email of the organiser \u2014 used only to reach them about this gathering. Never published, and never handed to a reader. Only a keeper may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     }
   },
   "required": [
