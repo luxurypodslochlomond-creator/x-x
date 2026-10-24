@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, RefreshCw, Globe, Tag } from 'lucide-react';
+import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, RefreshCw, Globe, Tag, Music, Play } from 'lucide-react';
 import ProvenanceSweep from '@/components/admin/ProvenanceSweep';
 import SourceLinkRow from '@/components/admin/SourceLinkRow';
 
@@ -12,6 +12,7 @@ export default function AdminClimateReview() {
   const [comments, setComments] = useState([]);
   const [news, setNews] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('solutions');
   const [busy, setBusy] = useState(null);
@@ -21,12 +22,13 @@ export default function AdminClimateReview() {
   const loadAll = useCallback(async () => {
     setLoading(true);
     try {
-      const [solPage, actPage, comPage, newsPage, grpPage, logPage] = await Promise.all([
+      const [solPage, actPage, comPage, newsPage, grpPage, trkPage, logPage] = await Promise.all([
         base44.entities.ClimateSolution.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateAction.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateComment.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateNews.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateGroup.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
+        base44.entities.ClimateTrack.filter({ status: 'draft' }, { sort: '-created_date', limit: 50 }),
         base44.entities.ClimateAuditLog.filter({}, { sort: '-created_date', limit: 5 }),
       ]);
       setSolutions(solPage.items || []);
@@ -34,6 +36,7 @@ export default function AdminClimateReview() {
       setComments(comPage.items || []);
       setNews(newsPage.items || []);
       setGroups(grpPage.items || []);
+      setTracks(trkPage.items || []);
       setAuditLogs(logPage.items || []);
     } catch (e) {
       // RLS will block non-admins — they see nothing
@@ -52,7 +55,7 @@ export default function AdminClimateReview() {
     setBusy(id);
     try {
       const item = currentItems.find(i => i.id === id);
-      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news', ClimateGroup: 'group' };
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news', ClimateGroup: 'group', ClimateTrack: 'track' };
       await base44.entities.ClimateAuditLog.create({
         entity_type: typeMap[entityName],
         entity_id: id,
@@ -75,7 +78,7 @@ export default function AdminClimateReview() {
     setBusy(id);
     try {
       const item = currentItems.find(i => i.id === id);
-      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news', ClimateGroup: 'group' };
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news', ClimateGroup: 'group', ClimateTrack: 'track' };
       await base44.entities.ClimateAuditLog.create({
         entity_type: typeMap[entityName],
         entity_id: id,
@@ -100,6 +103,7 @@ export default function AdminClimateReview() {
       ...comments.map(i => ({ ...i, _entity: 'ClimateComment' })),
       ...news.map(i => ({ ...i, _entity: 'ClimateNews' })),
       ...groups.map(i => ({ ...i, _entity: 'ClimateGroup' })),
+      ...tracks.map(i => ({ ...i, _entity: 'ClimateTrack' })),
     ];
     const cleanItems = allItems.filter(i => i.ai_assessment && i.ai_assessment.includes('[CLEAN]'));
     if (cleanItems.length === 0) {
@@ -109,7 +113,7 @@ export default function AdminClimateReview() {
     if (!confirm(`Publish ${cleanItems.length} submission(s) marked [CLEAN] by the AI advisory note?\n\nThis saves time when the queue is long. You can still review each one individually.`)) return;
     setBusy('bulk');
     try {
-      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news', ClimateGroup: 'group' };
+      const typeMap = { ClimateSolution: 'solution', ClimateAction: 'action', ClimateComment: 'comment', ClimateNews: 'news', ClimateGroup: 'group', ClimateTrack: 'track' };
       for (const item of cleanItems) {
         await base44.entities.ClimateAuditLog.create({
           entity_type: typeMap[item._entity],
@@ -143,6 +147,7 @@ export default function AdminClimateReview() {
     { id: 'comments', label: 'Comments', count: comments.length, icon: MessageSquare },
     { id: 'news', label: 'Wire', count: news.length, icon: FileText },
     { id: 'groups', label: 'Gatherings', count: groups.length, icon: Globe },
+    { id: 'tracks', label: 'Music', count: tracks.length, icon: Music },
   ];
 
   const renderItem = (item, entityName, type) => (
@@ -172,6 +177,23 @@ export default function AdminClimateReview() {
               {item.topic}{item.region ? ` · ${item.region}` : ''}
               {item.contact_email ? ` · shows: ${item.contact_email}` : ' · no contact line — prints as an open gathering'}
             </span>
+          )}
+          {/* A track: who made it, what the file actually is, and the way to hear it
+              before deciding — a keeper should never rule on music they have not heard. */}
+          {item.audio_url && (
+            <>
+              <span className="text-[9px] font-mono uppercase text-[#6b6258] block truncate">
+                {item.artist_name}{item.kind ? ` · read as ${item.kind.replaceAll('_', ' ')}` : ''}{item.spec ? ` · ${item.spec}` : ''}
+              </span>
+              <a
+                href={item.audio_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 mt-2 px-3 py-2 min-h-[36px] bg-[#efe7d6] border-2 border-[#1a1612]/25 text-[9px] font-black font-mono uppercase text-[#1a1612] active:bg-[#1a1612] active:text-[#efe7d6] transition-colors"
+              >
+                <Play className="w-3 h-3" /> Listen before deciding
+              </a>
+            </>
           )}
         </div>
         {item.flagged && (
@@ -238,8 +260,8 @@ export default function AdminClimateReview() {
     </div>
   );
 
-  const currentItems = { solutions, actions, comments, news, groups }[activeTab] || [];
-  const currentEntity = { solutions: 'ClimateSolution', actions: 'ClimateAction', comments: 'ClimateComment', news: 'ClimateNews', groups: 'ClimateGroup' }[activeTab];
+  const currentItems = { solutions, actions, comments, news, groups, tracks }[activeTab] || [];
+  const currentEntity = { solutions: 'ClimateSolution', actions: 'ClimateAction', comments: 'ClimateComment', news: 'ClimateNews', groups: 'ClimateGroup', tracks: 'ClimateTrack' }[activeTab];
 
   return (
     <div className="min-h-screen bg-[#f4efe4] twcc-scanlines relative">
@@ -262,13 +284,16 @@ export default function AdminClimateReview() {
           <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed">
             Every submission receives an AI advisory note. Clear entries go on the record at once — anything flagged needs attention. Nothing on this record goes up without a link to its source: an entry that arrives without one waits here until someone finds it.
           </p>
+          <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed mt-1.5">
+            Music is held only when the screener flags it — a track needs no source, and a clean one is on the record the moment it was given. It is never judged on taste, genre or quality here: listen, then publish or turn it away.
+          </p>
         </div>
 
         {/* Quick stats */}
         <div className="flex items-center gap-2 mb-4">
           <div className="flex-1 flex items-center gap-2 px-3 py-2.5 bg-[#efe7d6] border border-[#1a1612]/15">
             <AlertTriangle className="w-3.5 h-3.5 text-[#b3261e] flex-shrink-0" />
-            <span className="text-[10px] font-mono text-[#1a1612]"><b className="font-black">{solutions.length + actions.length + comments.length + news.length + groups.length}</b> pending</span>
+            <span className="text-[10px] font-mono text-[#1a1612]"><b className="font-black">{solutions.length + actions.length + comments.length + news.length + groups.length + tracks.length}</b> pending</span>
           </div>
           <Link to={createPageUrl("ClimateImpact")} className="flex items-center gap-1.5 px-3 py-2.5 bg-[#1e3a2b] text-[#efe7d6] border border-[#1e3a2b] active:bg-[#1a1612] transition-colors">
             <Globe className="w-3.5 h-3.5" />

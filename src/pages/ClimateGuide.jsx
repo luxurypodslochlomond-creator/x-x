@@ -75,6 +75,11 @@ const SEND = [
     to: createPageUrl('TogetherChangeClimate'),
     what: 'People working on the same thing in one area. A name, a topic, a region, and one contact line.',
   },
+  {
+    label: '🎵 Give the record your track',
+    to: createPageUrl('ClimateMusic'),
+    what: 'The artist\u2019s own door, on the music page: no account, no signature, no fee, and their name stays on the work. A track is read at once, not queued — a clean one goes up the moment it is given, and the record prints the master\u2019s real format, read out of the file\u2019s own header.',
+  },
 ];
 
 const READING = [
@@ -173,7 +178,7 @@ export default function ClimateGuide() {
       statement="Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="Handed to a host or handler, this page is the whole of the manual. Nothing on it needs memorising: the record\u2019s buttons are words, and each one says what it does."
+      footer="Handed to a host or handler, this page is the whole of the manual. Nothing on it needs memorising: the record’s buttons are words, and each one says what it does."
     >
       <GuideBand
         number="01"
@@ -185,7 +190,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="02"
         heading="Sending something in"
-        note="Anyone may send an entry in. A person reads every one before it stands on the record, and the sender\u2019s email is used only to reach them about it."
+        note="Anyone may send an entry in. A person reads every entry before it stands on the record, and the sender’s email is used only to reach them about it. Music is the one exception, and it is deliberate: a track needs no source and no gate, so a clean one is on the record the moment it is given, and only a flagged one waits."
         items={SEND}
       />
 
@@ -213,7 +218,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="When you are the handler"
-        note="Four buttons sit behind the keeper\u2019s door, on the address the record was given for you. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
+        note="Four buttons sit behind the keeper’s door, on the address the record was given for you. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
         items={HANDLER}
       />
     </ClimateRecordShell>

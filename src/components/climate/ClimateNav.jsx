@@ -30,19 +30,26 @@ const ABOUT = [
   { label: 'Method', page: 'ClimateMethod' },
 ];
 
+// The music door is the one thing in this bar that is not a word, and it is lit rather
+// than printed: signal orange, with a glow that lifts it off the ink so it reads as a
+// live thing at a glance — the same orange the record uses for its own signal. It
+// carries a name for anyone who cannot see it, and the page it opens says in words
+// what it means.
 function PlaceLink({ item, active }) {
+  const tone = item.glyph
+    ? 'text-[17px] leading-none text-[#e2602a] drop-shadow-[0_0_7px_rgba(226,96,42,0.75)] hover:text-[#ffb27a] hover:drop-shadow-[0_0_14px_rgba(226,96,42,1)] hover:scale-110 transition-transform'
+    : `text-[11px] font-black uppercase tracking-wider ${
+        active
+          ? 'text-[#e2602a] border-[#e2602a]'
+          : 'text-[#efe7d6]/75 border-transparent hover:text-[#efe7d6] hover:border-[#efe7d6]/40'
+      }`;
+
   return (
     <Link
       to={createPageUrl(item.page)}
       aria-label={item.aria}
       aria-current={active ? 'page' : undefined}
-      className={`pb-1 whitespace-nowrap border-b-2 transition-colors ${
-        item.glyph ? 'text-[16px] leading-none' : 'text-[11px] font-black uppercase tracking-wider'
-      } ${
-        active
-          ? 'text-[#e2602a] border-[#e2602a]'
-          : 'text-[#efe7d6]/75 border-transparent hover:text-[#efe7d6] hover:border-[#efe7d6]/40'
-      }`}
+      className={`pb-1 whitespace-nowrap border-b-2 transition-colors ${tone}`}
     >
       {item.label}
     </Link>
@@ -64,9 +71,9 @@ function MobileLink({ item, active, quiet }) {
     >
       <span
         className={`pb-0.5 border-b-2 ${
-          item.glyph ? 'text-[18px] leading-none' : 'text-[11px] font-black uppercase tracking-wide whitespace-nowrap'
-        } ${
-          active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'
+          item.glyph
+            ? 'text-[20px] leading-none text-[#e2602a] drop-shadow-[0_0_8px_rgba(226,96,42,0.8)]'
+            : `text-[11px] font-black uppercase tracking-wide whitespace-nowrap ${active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'}`
         }`}
       >
         {item.label}

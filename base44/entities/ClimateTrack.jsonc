@@ -1,0 +1,108 @@
+{
+  "name": "ClimateTrack",
+  "type": "object",
+  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. The spec is read from the file's own header, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in.",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The track's name. Required."
+    },
+    "artist_name": {
+      "type": "string",
+      "description": "Who made it. Kept on the track, on its card and on the page it plays from \u2014 never separated from the work. Required."
+    },
+    "artist_link": {
+      "type": "string",
+      "description": "One link of the artist's own, if they want one \u2014 their site, their page. The record adds nothing to it and earns nothing from it."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "song",
+        "instrumental",
+        "field_recording",
+        "spoken_word",
+        "score",
+        "other"
+      ],
+      "default": "other",
+      "description": "What kind of piece this is, so the music can be found. Set by the screener when the track arrives, so the artist is never asked to categorise themselves."
+    },
+    "statement": {
+      "type": "string",
+      "description": "The artist's own words about it, if they gave any. Quoted, never paraphrased."
+    },
+    "lyric": {
+      "type": "string",
+      "description": "The words of the track, as written, if there are any and if the artist gave them. Shown as the artist's own text \u2014 the record does not correct it."
+    },
+    "audio_url": {
+      "type": "string",
+      "description": "The master itself, stored publicly so anyone may hear it without signing in and without an app. The exact file the artist gave: never re-encoded, never trimmed, never replaced. Required."
+    },
+    "spec": {
+      "type": "string",
+      "description": "The master's real format, read from the file's own header when it arrived \u2014 e.g. 'WAV \u00b7 44.1 kHz \u00b7 16-bit \u00b7 stereo \u00b7 2:42'. Never typed in by anyone, so it cannot overstate a master."
+    },
+    "seconds": {
+      "type": "number",
+      "description": "Its length in seconds, read from the same header. Empty when the file's format could not be read."
+    },
+    "cover_url": {
+      "type": "string",
+      "description": "A picture the artist made for the track, if they gave one, stored publicly. Shown with the track and carried on its card."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft"
+      ],
+      "default": "published",
+      "description": "A track the screener clears goes up at once, so the artist is never left waiting on a person. Only a flagged track waits, and it waits with a keeper's note beside it."
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "Held back by the screener for a human look. Never set by anything the artist is: the screener reads the words given, not the person who gave them."
+    },
+    "ai_assessment": {
+      "type": "string",
+      "description": "The screener's advisory note \u2014 whether this is a track at all, whether the words given are unlawful or abusive, and the kind it read. Advisory only; a person decides what waits."
+    },
+    "submitter_email": {
+      "type": "string",
+      "description": "The artist's email \u2014 used only to reach them about their own track, and never published. Never shown to another visitor, and never on a card."
+    }
+  },
+  "required": [
+    "title",
+    "artist_name",
+    "audio_url"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
