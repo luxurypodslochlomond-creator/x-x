@@ -498,8 +498,15 @@ export default function TogetherChangeClimate() {
 
         {/* Ink band */}
         <div className="relative z-10 px-5 lg:px-10 pt-10 lg:pt-16 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
+          {/* The record's own name — the one heading on the record allowed to lead.
+              It was built so the phone's width beat the floor: 11vw gave 43px on a
+              393px screen and 47px at 430px, which made this the largest opening
+              anywhere on the record by a wide margin, and is what made the page feel
+              heavy in the hand. It now opens at 36px on a phone (40px at 430px) — one
+              clear step above every other page's title (30-35px), still the largest.
+              From 782px up it is the same 72px it always was. */}
           <h1 className="font-black uppercase leading-[0.94] max-w-[360px] lg:max-w-[640px] relative z-10 text-[#efe7d6]"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(38px, 11vw, 72px)', letterSpacing: '-0.035em' }}>
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 9.2vw, 72px)', letterSpacing: '-0.035em' }}>
             {t.title_a}<br />
             <span className="text-[#e2602a]">{t.title_b}</span> {t.title_c}
           </h1>
