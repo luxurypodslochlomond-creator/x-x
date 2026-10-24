@@ -3,6 +3,7 @@ import TransmissionConsole from '../TransmissionConsole';
 import ShareCardButton from '../ShareCardButton';
 import { buildTransmissionShareCard } from '../shareCardImage';
 import { clock } from './audioSpec';
+import { givenStamp } from './stamp';
 
 // ── ONE TRACK, STANDING THE SAME WAY AS EVERY OTHER ─────────────────────────────
 // Dillon's track and an artist's track uploaded this morning are drawn by this same
@@ -16,6 +17,8 @@ import { clock } from './audioSpec';
 export default function TrackPlate({ track }) {
   if (!track) return null;
 
+  const given = givenStamp(track.created_date);
+
   const card = {
     id: track.id,
     headline: `${track.title} — ${track.artist_name}, given free to the record`,
@@ -23,7 +26,7 @@ export default function TrackPlate({ track }) {
     artist: track.artist_name,
     dedication: track.statement || '',
     spec: track.spec || '',
-    body: `${track.artist_name} gave this to the record: free to listen, the master whole, nothing to buy.`,
+    body: `${track.artist_name} gave this to the record${given ? ` on ${given}` : ''}: free to listen, the master whole, nothing to buy.`,
     image_url: track.cover_url || '',
     image_credit: track.cover_url ? `Picture given by ${track.artist_name}` : '',
     url_path: '/ClimateMusic',
@@ -49,6 +52,11 @@ export default function TrackPlate({ track }) {
           <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">
             Given, not sold · {track.artist_name}
           </p>
+          {given && (
+            <p className="text-[10px] font-mono text-[#efe7d6]/55 mb-1.5">
+              Taken into the record on {given}. The stamp is the record's own — nobody types it.
+            </p>
+          )}
           {/* Read out of the master's own header, never typed in by anyone. */}
           <p className="text-[11px] font-mono text-[#efe7d6]/80 leading-relaxed">{meta.join(' · ')}</p>
           {track.artist_link && (

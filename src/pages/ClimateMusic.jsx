@@ -5,6 +5,7 @@ import { Music, Plus, X, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import TrackPlate from '@/components/climate/music/TrackPlate';
 import MusicSubmitForm from '@/components/climate/music/MusicSubmitForm';
+import { givenStamp } from '@/components/climate/music/stamp';
 
 // ── THE RECORD'S MUSIC ──────────────────────────────────────────────────────────
 // Music arrives here the same way a photograph or an entry does: someone gives it,
@@ -52,7 +53,7 @@ export default function ClimateMusic() {
       statement="Music made for the record and given to it. Free to listen, the master whole, and the artist's name kept on it."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone with an account-free link, and the format printed beside each track is read out of the file's own header, not typed in."
+      footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone with an account-free link, the format printed beside each track is read out of the file's own header, not typed in, and the date it carries is the moment the record took it in — so the order tracks stand in can be checked by anyone reading them."
     >
       {loading ? (
         <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
@@ -86,7 +87,9 @@ export default function ClimateMusic() {
                     <span className="flex-1 min-w-0">
                       <span className="block text-[12px] font-black font-mono uppercase truncate">{track.title}</span>
                       <span className={`block text-[10px] font-mono truncate ${on ? 'text-[#efe7d6]/60' : 'text-[#5a5246]'}`}>
-                        {track.artist_name}{track.seconds ? ` · ${Math.floor(track.seconds / 60)}:${String(Math.round(track.seconds % 60)).padStart(2, '0')}` : ''}
+                        {track.artist_name}
+                        {givenStamp(track.created_date, 'short') ? ` · ${givenStamp(track.created_date, 'short')}` : ''}
+                        {track.seconds ? ` · ${Math.floor(track.seconds / 60)}:${String(Math.round(track.seconds % 60)).padStart(2, '0')}` : ''}
                       </span>
                     </span>
                   </button>
