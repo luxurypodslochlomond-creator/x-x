@@ -10,6 +10,8 @@ import { useClimateCategories } from '@/hooks/useClimateCategories';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCitation from '@/components/climate/RecordCitation';
+import ShareCardButton from '@/components/climate/ShareCardButton';
+import { buildEntryShareCard } from '@/components/climate/shareCardImage';
 import SourceBlock from '@/components/climate/SourceBlock';
 import VerificationBadge from '@/components/climate/VerificationBadge';
 import { recordAddress } from '@/components/climate/recordAddress';
@@ -224,6 +226,13 @@ export default function ClimateDetail() {
               : 'This action names no source on the record: quote it as the record\u2019s own, and tell us the organiser\u2019s origin if you have it.'}
           />
 
+          <div className="mt-4">
+            <ShareCardButton
+              entry={record}
+              build={(entry, opts) => buildEntryShareCard(entry, { ...opts, kindLabel: meta.label })}
+            />
+          </div>
+
           <RelatedTriangle
             category={record.category}
             items={allItems}
@@ -337,6 +346,13 @@ export default function ClimateDetail() {
             ? 'Quoting this entry? The citation carries its origin, the record and the permanent address with it.'
             : 'This entry names no source on the record, so it can only be quoted as the record\u2019s own. If you know its origin, tell us and it is corrected in daylight, with the date.'}
         />
+
+        <div className="mt-4">
+          <ShareCardButton
+            entry={record}
+            build={(entry, opts) => buildEntryShareCard(entry, { ...opts, kindLabel: isSolution ? 'Solution' : 'Climate crisis' })}
+          />
+        </div>
 
         <RelatedTriangle
           category={record.category}

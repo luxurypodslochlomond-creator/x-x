@@ -89,7 +89,7 @@ const READING = [
   },
   {
     label: 'Share this entry as a card',
-    what: 'On the wire, and on every wire entry. The card carries the source, the date and how well the entry is known, so nothing travels without its origin.',
+    what: 'On the wire, and on every entry\u2019s own page. The card carries its origin, its place and how well it is known, so nothing travels without where it came from.',
   },
   {
     label: 'Correction',
