@@ -1,33 +1,22 @@
 /* Oswald is loaded from index.html, off the critical path — first paint never waits on a font. */
 
 /* ── THE READING VOICE ──────────────────────────────────────────────────────────
-   The record has always claimed two voices and only ever had one. Its own notes
-   say the founder's plate carries "the words in the reading voice" — but nothing
-   ever set a reading face, so every sentence on the record came out in the
-   machine's lettering, the same lettering as a date or a source.
+   The record claims two voices. It has one face: the machine's lettering.
 
-   Two voices, one page:
-     MACHINE  (monospace) — the ledger's voice. Dates, numbers, sources, codes,
-              labels, controls. It never changes, and it is what makes the
-              evidence believable.
-     READING  (Minion Pro)  — the human voice. The words a person actually reads
-              and feels: a quoted voice, the record's own why, its close.
-   Warm paper has always been the ground. Now the words on it can be warm too. */
-@font-face {
-  font-family: 'Minion Pro';
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/minion-pro-400-normal.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Minion Pro';
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/minion-pro-700-normal.woff2') format('woff2');
-}
+   That is not a shortage, it is the point. A second, warmer face was tried and
+   taken off. Every voice this record listens to — Anderson's pilot, Janine at
+   fifteen in the harbour, a group saying what it actually did — arrives through
+   the same lettering a date and a source arrive in. The feeling comes from the
+   restraint, not from the typeface; a warm book serif is the language people are
+   already tuned out of.
 
+   So the human voice is not a different face. It is the same face, given air:
+   larger, looser, a longer line, and rare enough that seeing it still means
+   something. MACHINE (monospace) carries everything, including the words.
+   READING (--font-reading) is set apart by size and rhythm alone — a quoted
+   voice, the record's own why, its close. Nothing administrative is set in it.
+
+   Warm paper has always been the ground. The words are stated plainly on it. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -110,9 +99,10 @@ button:focus-visible {
        so headings look the same on Android, iOS and desktop. */
     --font-display: 'Oswald', Impact, 'Haettenschweiler', 'Arial Narrow', system-ui, sans-serif;
     --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    /* The human voice of the record. Scripts Minion Pro does not carry fall back
-       to a system serif, so every tongue still reads properly. */
-    --font-reading: 'Minion Pro', Georgia, 'Times New Roman', serif;
+    /* The human voice of the record is the record's own lettering, given air. One
+       face for everything, so a tongue we have not seen yet is never handed a
+       fallback: there is nothing to fall back from. */
+    --font-reading: ui-monospace, SFMono-Regular, Menlo, monospace;
     --record-paper: 244 239 228;
     --record-bone: 239 231 214;
     --record-ink: 20 18 16;
