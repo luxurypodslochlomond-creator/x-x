@@ -1,5 +1,33 @@
 /* Oswald is loaded from index.html, off the critical path — first paint never waits on a font. */
 
+/* ── THE READING VOICE ──────────────────────────────────────────────────────────
+   The record has always claimed two voices and only ever had one. Its own notes
+   say the founder's plate carries "the words in the reading voice" — but nothing
+   ever set a reading face, so every sentence on the record came out in the
+   machine's lettering, the same lettering as a date or a source.
+
+   Two voices, one page:
+     MACHINE  (monospace) — the ledger's voice. Dates, numbers, sources, codes,
+              labels, controls. It never changes, and it is what makes the
+              evidence believable.
+     READING  (Recoleta)  — the human voice. The words a person actually reads
+              and feels: a quoted voice, the record's own why, its close.
+   Warm paper has always been the ground. Now the words on it can be warm too. */
+@font-face {
+  font-family: 'Recoleta';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/recoleta-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Recoleta';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/recoleta-700-normal.woff2') format('woff2');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,6 +110,9 @@ button:focus-visible {
        so headings look the same on Android, iOS and desktop. */
     --font-display: 'Oswald', Impact, 'Haettenschweiler', 'Arial Narrow', system-ui, sans-serif;
     --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* The human voice of the record. Scripts Recoleta does not carry fall back
+       to a system serif, so every tongue still reads properly. */
+    --font-reading: 'Recoleta', Georgia, 'Times New Roman', serif;
     --record-paper: 244 239 228;
     --record-bone: 239 231 214;
     --record-ink: 20 18 16;

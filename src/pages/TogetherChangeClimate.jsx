@@ -395,7 +395,7 @@ export default function TogetherChangeClimate() {
              that flatness — not the typeface — is what read cold and linear. The warm paper
              still holds the page open; the material now sits under her words, where it
              belongs. Her words are the record's first transmission, so they get its plate. ── */}
-      <div className="bg-[#efe7d6] px-4 lg:px-8 py-5 lg:py-7 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="relative mx-auto max-w-[760px] bg-[#141210] border-2 border-[#141210] px-5 pt-6 pb-6 overflow-hidden">
           {/* The record's grain, inside her plate — the same texture the hero wears */}
           <div
@@ -414,9 +414,12 @@ export default function TogetherChangeClimate() {
 
             <SignalBeacon size={38} color="#7fc9e4" />
 
+            {/* The first human voice on the record — in the reading voice, which is
+                what this plate always said it was. The label above and the credit
+                below stay in the machine voice: the record's frame, her words. */}
             <blockquote
-              className="text-[#efe7d6] max-w-[46ch] leading-[1.65]"
-              style={{ fontSize: 'clamp(15px, 2.4vw, 21px)' }}
+              className="text-[#efe7d6] max-w-[42ch] leading-[1.5]"
+              style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(17px, 2.6vw, 23px)' }}
             >
               “Every single day, we hold the power to shape the world around us.”
             </blockquote>
@@ -510,7 +513,9 @@ export default function TogetherChangeClimate() {
              and that slab spent the blue before a single entry had been read, so there was
              nothing left for the blue to point at. The record opens deep and stays deep. */}
         <div className="relative z-10 bg-[#141210] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
-          <p className="text-[12px] font-bold uppercase leading-relaxed max-w-[330px] lg:max-w-[640px] text-[#efe7d6] tracking-wide">{t.sub}</p>
+          {/* The record's own sentence, in its own voice — sentence case, on the deep
+              band. Everything else in this band stays as it was. */}
+          <p className="text-[14px] leading-[1.6] max-w-[360px] lg:max-w-[620px] text-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>{t.sub}</p>
           {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
           <p className="text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-[#efe7d6] tracking-[0.09em]" style={{ opacity: 0.8 }}>
             Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
@@ -708,14 +713,14 @@ export default function TogetherChangeClimate() {
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{filteredGroups.length}</span>
             </div>
-            <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.groups_sub}</p>
+            <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-3" style={{ fontFamily: 'var(--font-reading)' }}>{t.groups_sub}</p>
             <button
               onClick={() => setShowGathering(true)}
               className="w-full lg:w-auto lg:px-6 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#1e3a2b] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
             >
               <Users className="w-4 h-4" /> Start a gathering
             </button>
-            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-2 mb-3">{t.groups_note}</p>
+            <p className="text-[12px] text-[#5a5246] leading-[1.65] mt-2 mb-3" style={{ fontFamily: 'var(--font-reading)' }}>{t.groups_note}</p>
             {filteredGroups.length > 0 ? (
               <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
                 {filteredGroups.map(g => (
@@ -755,7 +760,7 @@ export default function TogetherChangeClimate() {
               <div className="flex-1 h-px bg-[#141210]/20" />
               <span className="text-[10px] font-black font-mono text-[#e2602a]">{filteredActions.length}</span>
             </div>
-            <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">{t.actions_sub}</p>
+            <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-3" style={{ fontFamily: 'var(--font-reading)' }}>{t.actions_sub}</p>
             {filteredActions.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
                 {filteredActions.map(a => (
@@ -785,7 +790,7 @@ export default function TogetherChangeClimate() {
         {/* ── GOVERNANCE ── */}
         <section className="px-4 lg:px-10 py-5 lg:py-8 bg-[#1e3a2b] text-[#efe7d6]">
           <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.govern}</h2>
-          <p className="text-[12px] font-mono leading-relaxed text-[#efe7d6] max-w-full lg:max-w-[680px]">{t.govern_body}</p>
+          <p className="text-[14px] leading-[1.7] text-[#efe7d6] max-w-full lg:max-w-[640px]" style={{ fontFamily: 'var(--font-reading)' }}>{t.govern_body}</p>
           <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-2 mt-4 px-3 py-2 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors">
             {t.covenant} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -803,10 +808,10 @@ export default function TogetherChangeClimate() {
         {/* Terms and Privacy now sit in the shared footer, on every page of the record. */}
 
         {/* The thesis, where it belongs — at the close, once the record has been read. */}
-        <p className="px-4 pt-6 text-center text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#5a5246] bg-[#efe7d6]">
+        <p className="px-4 pt-8 text-center text-[14px] text-[#141210] bg-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>
           This is the time. And this is the record of the time.
         </p>
-        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[10px] font-mono uppercase tracking-wide text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline">
+        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[12px] text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline" style={{ fontFamily: 'var(--font-reading)' }}>
           {t.honour} <span className="text-[#b3261e]">→</span>
         </Link>
         {/* ── CREDITS ── the record names who built it. Asked for by the founder, and
