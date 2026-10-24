@@ -87,7 +87,7 @@ export default function ClimateReachPlace() {
         </p>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="text-center">
           <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 mb-2">
-            {placeType === 'country' ? 'Readers from this country' : 'Readers from this nation'}
+            {placeType === 'country' ? 'Reads counted from this country' : 'Reads counted from this nation'}
           </p>
           <div className="font-black text-[#e2602a] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(56px, 18vw, 80px)', letterSpacing: '-0.04em' }}>
             {totalReaders.toLocaleString()}
@@ -146,7 +146,7 @@ export default function ClimateReachPlace() {
                     {s.title}
                   </p>
                   <p className="text-[10px] font-mono text-[#5a5246]">
-                    <span className="font-black text-[#b3261e]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'reader' : 'readers'} from {displayName}
+                    <span className="font-black text-[#b3261e]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'read' : 'reads'} from {displayName}
                   </p>
                 </Link>
               </motion.div>

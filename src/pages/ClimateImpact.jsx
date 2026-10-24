@@ -129,10 +129,13 @@ export default function ClimateImpact() {
           transition={{ duration: 0.4 }}
           className="text-center"
         >
-          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 mb-2">People have read the record</p>
+          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 mb-2">Reads of the record</p>
           <div className="font-black text-[#e2602a] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(64px, 22vw, 96px)', letterSpacing: '-0.04em' }}>
             {total.toLocaleString()}
           </div>
+          <p className="text-[9px] font-mono text-[#efe7d6]/45 mt-3 leading-relaxed max-w-[320px] mx-auto">
+            An entry opened. A place is counted once per entry per half hour. This is never a count of people.
+          </p>
           <div className="flex items-center justify-center gap-4 mt-5">
             <div className="text-center">
               <div className="flex items-center gap-1.5 justify-center">
@@ -178,7 +181,7 @@ export default function ClimateImpact() {
           <ClimateImpactMap stats={stats} />
         </div>
         <p className="text-[9px] font-mono text-[#5a5246] mt-2 leading-relaxed">
-          Every dot is a reader. Red dots are countries (from geo, no IP stored). Gold dots are self-identified nations without their own country code. The planet, lighting up — honestly.
+          Every dot is a place reads came from — not a person, and not anybody's location: red is a country (from geo, no IP stored), blue a self-identified nation with no country code of its own. Dot size is how many reads were counted there. The planet, lighting up — honestly.
         </p>
       </div>
 
@@ -315,7 +318,7 @@ export default function ClimateImpact() {
       {/* Footer */}
       <div className="px-5 py-6 border-t-2 border-[#141210]/10">
         <p className="text-[9px] font-mono text-[#5a5246] text-center leading-relaxed">
-          No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry — the signal, not the surveiller. x = x.
+          No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry. A place is counted once per entry per half hour, so what you see here is reads counted — never people, and never inflated. The signal, not the surveiller. x = x.
         </p>
       </div>
     </div>

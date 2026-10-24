@@ -7,7 +7,7 @@ import { Radio } from 'lucide-react';
 // Calm, honest feed: which stories the world is reaching for.
 // No dopamine. No ticking counters. No "trending" labels. No ranking bars.
 // Just the signal — a transmission log of love reaching the planet.
-// Each line: type · title · "Reaching N countries · M readers"
+// Each line: type · title · "Reaching N countries · M reads" — reads, never people.
 export default function WorldReadingFeed({ stories }) {
   if (!stories || stories.length === 0) return null;
 
@@ -75,7 +75,7 @@ export default function WorldReadingFeed({ stories }) {
               <p className="text-[10px] font-mono text-[#5a5246]">
                 Reaching <span className="font-black text-[#b3261e]">{s.countries}</span> {s.countries === 1 ? 'country' : 'countries'}
                 <span className="text-[#141210]/30 mx-1.5">·</span>
-                <span className="font-black text-[#141210]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'reader' : 'readers'}
+                <span className="font-black text-[#141210]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'read' : 'reads'}
               </p>
             </Link>
           </motion.div>

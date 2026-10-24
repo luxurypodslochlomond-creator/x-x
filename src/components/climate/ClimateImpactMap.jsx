@@ -51,7 +51,7 @@ export default function ClimateImpactMap({ stats }) {
     return (
       <div className="px-5 py-12 text-center bg-[#f7f1e5] border-y border-[#141210]/10">
         <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[280px] mx-auto">
-          The map will light up as people around the world read the record. Every dot is a reader. No IP. No tracker. Just the signal.
+          The map will light up as the record is read around the world. Every dot is a place reads came from. No IP. No tracker. Just the signal.
         </p>
       </div>
     );
@@ -150,7 +150,7 @@ export default function ClimateImpactMap({ stats }) {
                   {isNation ? '🏳️ ' : ''}{p.label}
                 </span>
                 <span style={{ display: 'block', opacity: 0.7, fontSize: '9px', marginTop: '2px' }}>
-                  {p.views.toLocaleString()} {p.views === 1 ? 'reader' : 'readers'}
+                  {p.views.toLocaleString()} {p.views === 1 ? 'read' : 'reads'}
                 </span>
               </Tooltip>
             </CircleMarker>
@@ -160,15 +160,20 @@ export default function ClimateImpactMap({ stats }) {
 
       {/* Legend */}
       <div className="absolute bottom-3 left-3 z-[1000] bg-[#efe7d6]/95 border-2 border-[#1a1612] p-2.5 pointer-events-none">
-        <div className="text-[7px] font-black font-mono uppercase tracking-widest text-[#1a1612] mb-1.5">READERS</div>
+        <div className="text-[7px] font-black font-mono uppercase tracking-widest text-[#1a1612] mb-1.5">READS BY PLACE</div>
+        {/* The swatches carry the dots' own colours as they are actually drawn. The record's
+            palette remaps warm classes inside .climate-record, so a class here would show a
+            different colour from the dot on the map — and a legend that disagrees with the
+            thing it explains is worse than no legend. */}
         <div className="flex items-center gap-2 mb-1">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#b3261e]" />
+          <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#b3261e' }} />
           <span className="text-[8px] font-mono font-bold text-[#1a1612]">COUNTRY</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#e2602a]" />
+          <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#0f5f7a' }} />
           <span className="text-[8px] font-mono font-bold text-[#1a1612]">NATION 🏳️</span>
         </div>
+        <div className="text-[7px] font-mono text-[#5a5246] mt-1.5 leading-tight max-w-[132px] uppercase">Bigger dot · more reads counted</div>
       </div>
 
       {/* Scanline overlay — cold transmission signal */}

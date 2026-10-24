@@ -5,7 +5,8 @@ import { Globe } from 'lucide-react';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 
 // A calm, dignified strip showing the global reach of the record.
-// "X people in Y countries have read the record of the time."
+// "X reads of the record, from Y countries." Reads, never people: one entry opened
+// counts once per place per half hour, so the number can never quietly inflate.
 // This is what moves Janine — seeing her life's work reach the world.
 // It holds its height in every state, so landing on the record never jumps.
 // It shares one read of the numbers with the impact page, so tapping through is instant.
@@ -22,7 +23,7 @@ export default function ClimateImpactBar() {
           <span className="text-[#efe7d6]/25 tracking-[0.3em]">···</span>
         ) : views > 0 ? (
           <>
-            <span className="font-black text-[#e2602a]">{views}</span> {views === 1 ? 'person has' : 'people have'} read the record in{' '}
+            <span className="font-black text-[#e2602a]">{views}</span> {views === 1 ? 'read' : 'reads'} of the record, from{' '}
             <span className="font-black text-[#e2602a]">{countries}</span> {countries === 1 ? 'country' : 'countries'}
             <span className="text-[#e2602a]/60 ml-1">→</span>
           </>
