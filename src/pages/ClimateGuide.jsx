@@ -88,8 +88,8 @@ const READING = [
     what: 'On the entry\u2019s own page. The entry, its origin and its date, ready to quote.',
   },
   {
-    label: 'Share the entry',
-    what: 'On the entry\u2019s own page. A share card, so a single entry can travel on its own.',
+    label: 'Share this entry as a card',
+    what: 'On the wire, and on every wire entry. The card carries the source, the date and how well the entry is known, so nothing travels without its origin.',
   },
   {
     label: 'Correction',
@@ -173,7 +173,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The bar at the top of every page"
-        note="These eight ride on every page of the record. Five are places to read, Search is a door, and the last three are the record itself."
+        note="These eight ride on every page of the record. Search wears a box and an icon, so it reads as a door; four places to read follow it; the last three are the record itself."
         items={BAR}
       />
 
