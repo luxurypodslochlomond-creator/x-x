@@ -417,7 +417,7 @@ export default function TogetherChangeClimate() {
                 commitment, and her ask that everyone with her make one too. It does
                 the job the beacon does — one wordless mark, ringing outward — but in
                 her voice rather than the record's. The beacon keeps the record. */}
-            <PeaceBell size={44} color="#7fc9e4" />
+            <PeaceBell size={40} color="#7fc9e4" href="https://webtv.un.org/en/asset/k13/k13z7vjtvs" />
 
             {/* The first human voice on the record — in the reading voice, which is
                 what this plate always said it was. The label above and the credit
