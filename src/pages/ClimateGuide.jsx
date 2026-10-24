@@ -38,6 +38,11 @@ const BAR = [
     what: 'How many people have read the record, and from which countries. No one is tracked.',
   },
   {
+    label: '🎵 Music',
+    to: createPageUrl('ClimateMusic'),
+    what: 'The music given to the record: Dillon Squire\u2019s track, free to listen, the master whole, nothing to buy. The glyph is the door.',
+  },
+  {
     label: 'Founder',
     to: createPageUrl('ClimateFounder'),
     what: 'Janine M. H. Selendy, and the work the record stands on.',
@@ -173,7 +178,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The bar at the top of every page"
-        note="These eight ride on every page of the record. Search wears a box and an icon, so it reads as a door; four places to read follow it; the last three are the record itself."
+        note="These nine ride on every page of the record. Search wears a box and an icon, so it reads as a door; the places you read follow it, and then the glyph for the music given to the record; the last three are the record itself."
         items={BAR}
       />
 

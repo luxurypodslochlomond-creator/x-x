@@ -9,12 +9,19 @@ import { Search as SearchIcon } from 'lucide-react';
 // the record itself. Then one action: Search, which wears a box and an icon so it can
 // never read as one more word in a list. Nothing is removed from the record; the door
 // that matters most just looks like a door.
+//
+// Last of the places is the music, and it is drawn as a glyph rather than a word: one
+// track, given to the record, is recognised at a glance, and the door stays light
+// enough not to compete with the reading. It carries a name a screen reader can speak,
+// and the page it opens says in words what the glyph means — so nothing is asked of a
+// reader who cannot read it.
 
 const PLACES = [
   { label: 'Record', page: 'TogetherChangeClimate' },
   { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
+  { label: '🎵', page: 'ClimateMusic', aria: 'Music — given to the record', glyph: true },
 ];
 
 const ABOUT = [
@@ -27,8 +34,11 @@ function PlaceLink({ item, active }) {
   return (
     <Link
       to={createPageUrl(item.page)}
+      aria-label={item.aria}
       aria-current={active ? 'page' : undefined}
-      className={`pb-1 text-[11px] font-black uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${
+      className={`pb-1 whitespace-nowrap border-b-2 transition-colors ${
+        item.glyph ? 'text-[16px] leading-none' : 'text-[11px] font-black uppercase tracking-wider'
+      } ${
         active
           ? 'text-[#e2602a] border-[#e2602a]'
           : 'text-[#efe7d6]/75 border-transparent hover:text-[#efe7d6] hover:border-[#efe7d6]/40'
@@ -46,13 +56,16 @@ function MobileLink({ item, active, quiet }) {
   return (
     <Link
       to={createPageUrl(item.page)}
+      aria-label={item.aria}
       aria-current={active ? 'page' : undefined}
       className={`min-h-[44px] flex items-center px-2 transition-colors active:text-[#e2602a] ${
         quiet ? 'text-[#efe7d6]/45' : 'text-[#efe7d6]/80'
       }`}
     >
       <span
-        className={`pb-0.5 text-[11px] font-black uppercase tracking-wide whitespace-nowrap border-b-2 ${
+        className={`pb-0.5 border-b-2 ${
+          item.glyph ? 'text-[18px] leading-none' : 'text-[11px] font-black uppercase tracking-wide whitespace-nowrap'
+        } ${
           active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'
         }`}
       >
