@@ -36,7 +36,8 @@ export default function ClimateMethod() {
     >
       <Block n="01" title="What this is, and what it is not">
         <p>This is a record, not a feed. A feed is built to hold attention and pays for itself with it. This is built to be checked, cited and copied, and it makes no money from anybody's attention.</p>
-        <p>Three consequences, in plain terms: entries are ordered by date and never by popularity. Nothing on the platform counts likes, shares, views or reach. And there is no ranking at all, so there is nothing to game.</p>
+        <p>Three consequences, in plain terms: entries are ordered by date and never by popularity. Nothing counts likes, shares or followers. No entry is scored, and nothing can be pushed up by paying, so there is nothing here to game.</p>
+        <p>One thing is counted, and only one: a read. That means an entry was opened. It is counted once per place per half hour, never per person, and the place is never an address. Reads are kept so that reach can be seen honestly on the impact page — and they never order this record and never change what is on it.</p>
         <Rule>If a claim on this record cannot be traced to something outside it, it does not belong here.</Rule>
       </Block>
 
