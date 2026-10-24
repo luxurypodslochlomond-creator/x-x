@@ -140,6 +140,7 @@ const ClimateWirePage = React.lazy(() => import('./pages/ClimateWire'));
 const ClimateMethodPage = React.lazy(() => import('./pages/ClimateMethod'));
 const ClimateSearchPage = React.lazy(() => import('./pages/ClimateSearch'));
 const ClimateWireEntryPage = React.lazy(() => import('./pages/ClimateWireEntry'));
+const ClimateGuidePage = React.lazy(() => import('./pages/ClimateGuide'));
 
 
 
@@ -281,6 +282,7 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateMethod" element={<ClimateLayout currentPage="ClimateMethod"><ClimateMethodPage /></ClimateLayout>} />
       <Route path="/ClimateSearch" element={<ClimateLayout currentPage="ClimateSearch"><ClimateSearchPage /></ClimateLayout>} />
       <Route path="/ClimateWireEntry/:id" element={<ClimateLayout currentPage="ClimateWire"><ClimateWireEntryPage /></ClimateLayout>} />
+      <Route path="/ClimateGuide" element={<ClimateLayout currentPage="ClimateGuide"><ClimateGuidePage /></ClimateLayout>} />
       <Route path="/UF51Token" element={<LayoutWrapper currentPageName="UF51Token"><UF51TokenPage /></LayoutWrapper>} />
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
       <Route path="/Franklin51" element={<LayoutWrapper currentPageName="Franklin51"><Franklin51Page /></LayoutWrapper>} />

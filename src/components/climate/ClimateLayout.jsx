@@ -20,8 +20,11 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // Search — drawn as a control so it can never be lost in a list of words.
 
 // Terms and Privacy are kept off the reading nav — they are legal ground, not the record.
-// They sit in one quiet place, in the footer of every page of the record.
+// They sit in one quiet place, in the footer of every page of the record. The Buttons —
+// the page that lists every button and what it does — sits here too: a host or handler
+// is handed the link, and finds it again at the foot of any page of the record.
 const FOOTER_LINKS = [
+  { label: 'The Buttons', page: 'ClimateGuide' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
