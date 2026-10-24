@@ -15,8 +15,16 @@ import { secrets } from 'base44:runtime';
 //
 // The artist keeps everything: their name stays on the track, the master is stored as
 // it was given, and nothing here is sold, licensed or counted.
+//
+// A SET arrives the same way and is treated the same way, with one thing more: it is one
+// continuous piece of work given as a single file, and nobody here cuts it into chapters.
+// The works inside it are kept as the selector's own list — their order, their spelling,
+// their text — and the record says out loud that it takes that list on their word, because
+// it cannot check another person's tracklist and will not pretend to. Naming the music you
+// played is the credit, not a fault, so the screener is told never to flag a set for it.
+// A set is also simply a longer file, and length is never a fault either.
 
-const KINDS = ['song', 'instrumental', 'field_recording', 'spoken_word', 'score', 'other'];
+const KINDS = ['song', 'instrumental', 'field_recording', 'spoken_word', 'score', 'set', 'other'];
 
 export default async function(req: Request): Promise<Response> {
   try {
@@ -47,6 +55,9 @@ export default async function(req: Request): Promise<Response> {
     // 1. The advisory note. It reads the words given — nothing else.
     let aiAssessment = 'Screener unavailable — a keeper will read this track.';
     let flagged = true;
+    // A set is named by whoever made it: the arc of a set is theirs to name, and no machine
+    // here hears a mix. Everything else the screener reads and names.
+    const declaredSet = data.kind === 'set';
     let kind = KINDS.includes(data.kind) ? data.kind : 'other';
 
     try {
@@ -57,6 +68,7 @@ WHAT YOU MUST NEVER DO:
 - Never assess the music itself: not its quality, genre, production, taste, or whether it is "good". You cannot hear it. An artist is never judged by a machine on this record.
 - Never flag on style, language, dialect, accent, spelling, punctuation, subject matter, sadness, anger or profanity used as art.
 - Never ask for a source: a track is not a claim about the world, and a musician needs no citation.
+- Never flag a set for naming the works inside it: a selector naming the music they played is giving the credit, which is what this record is for. A set is one continuous work, and a long file is not a fault.
 
 Assess ONLY these two things, from the words given below:
 1. IS THIS A TRACK AT ALL? (spam: advertising, unrelated promotion, a link with no work behind it)
@@ -69,7 +81,8 @@ If you are unsure, say so in your reasons and choose "clean". Holding a track wr
 Title: ${title}
 Artist: ${artistName}
 The artist's own words: ${String(data.statement || '').slice(0, 1200) || '(none given)'}
-Lyric: ${String(data.lyric || '').slice(0, 4000) || '(none given)'}`,
+Lyric: ${String(data.lyric || '').slice(0, 4000) || '(none given)'}
+The works inside it, as the selector listed them (a set only): ${String(data.tracklist || '').slice(0, 4000) || '(not a set, or none given)'}`,
         response_json_schema: {
           type: 'object',
           properties: {
@@ -82,7 +95,7 @@ Lyric: ${String(data.lyric || '').slice(0, 4000) || '(none given)'}`,
       });
 
       flagged = aiResult.verdict !== 'clean';
-      if (KINDS.includes(aiResult.kind)) kind = aiResult.kind;
+      if (!declaredSet && KINDS.includes(aiResult.kind)) kind = aiResult.kind;
       aiAssessment = `[${String(aiResult.verdict).toUpperCase()}] Read as: ${kind.replace(/_/g, ' ')} · Confidence: ${aiResult.confidence || 'unknown'} — ${aiResult.reasons}`;
     } catch (aiError) {
       // The screener failing never blocks a track — it holds it, in the open, and tells a keeper.
@@ -98,6 +111,9 @@ Lyric: ${String(data.lyric || '').slice(0, 4000) || '(none given)'}`,
       artist_link: data.artist_link ? String(data.artist_link).slice(0, 300) : '',
       statement: data.statement ? String(data.statement).slice(0, 1200) : '',
       lyric: data.lyric ? String(data.lyric).slice(0, 6000) : '',
+      // The selector's own list, kept as their text. The record does not verify it, split
+      // it, or move a work to a name they did not give.
+      tracklist: data.tracklist ? String(data.tracklist).slice(0, 6000) : '',
       audio_url: audioUrl,
       spec: data.spec ? String(data.spec).slice(0, 160) : '',
       seconds: typeof data.seconds === 'number' && isFinite(data.seconds) ? data.seconds : undefined,

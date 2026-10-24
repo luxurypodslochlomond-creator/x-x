@@ -19,6 +19,9 @@ export default function TrackPlate({ track }) {
   if (!track) return null;
 
   const given = givenStamp(track.created_date);
+  // A set is one continuous work by a selector. It is described as a set and not as a track,
+  // because the first words a reader meets about a piece should be the true ones.
+  const isSet = track.kind === 'set';
 
   const card = {
     id: track.id,
@@ -51,7 +54,7 @@ export default function TrackPlate({ track }) {
       <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 lg:px-10 py-4 border-t-2 border-[#141210] flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">
-            Given, not sold · {track.artist_name}
+            Given, not sold · {isSet ? 'a set by ' : ''}{track.artist_name}
           </p>
           {given && (
             <p className="text-[10px] font-mono text-[#efe7d6]/55 mb-1.5">
@@ -60,6 +63,21 @@ export default function TrackPlate({ track }) {
           )}
           {/* Read out of the master's own header, never typed in by anyone. */}
           <p className="text-[11px] font-mono text-[#efe7d6]/80 leading-relaxed">{meta.join(' · ')}</p>
+          {/* Zero loss, zero barrier: the master's own file, whole. If the player above cannot
+              read this format on your device, the file is still here to take — nothing was ever
+              converted, so what you take is exactly what the artist handed over. */}
+          {track.audio_url && (
+            <p className="mt-2">
+              <a
+                href={track.audio_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-mono text-[#efe7d6]/55 underline decoration-dotted underline-offset-2"
+              >
+                The master's own file, whole — take it and play it anywhere. Nothing has been converted.
+              </a>
+            </p>
+          )}
           {track.artist_link && (
             <a
               href={track.artist_link}
@@ -83,6 +101,21 @@ export default function TrackPlate({ track }) {
           <p className="mt-2 text-[10px] font-mono text-[#5a5246] leading-relaxed">
             SHA-256, read from the master on the artist's own device before the file was sent — not taken afterwards, and not touched since.
             It is the record's receipt for the file: the bytes kept here are the bytes handed over, and that can be checked instead of trusted.
+          </p>
+        </details>
+      )}
+
+      {isSet && track.tracklist && (
+        <details className="bg-[#efe7d6] px-5 lg:px-10 py-4 border-t-2 border-[#141210]">
+          <summary className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#141210] min-h-[44px] flex items-center cursor-pointer">
+            The works inside it, as the selector listed them
+          </summary>
+          <p className="mt-3 text-[13px] font-mono text-[#141210] leading-relaxed whitespace-pre-wrap">{track.tracklist}</p>
+          <p className="mt-3 text-[10px] font-mono text-[#5a5246] leading-relaxed">
+            Written by the selector, kept as their text, in their order and their spelling. The record takes this list
+            on their word: it does not check another person's tracklist, it does not cut the set into chapters or
+            timings, and it never moves a work to a name they did not give. The set itself is served whole — the arc is
+            the work.
           </p>
         </details>
       )}

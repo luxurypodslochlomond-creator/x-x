@@ -24,6 +24,8 @@ export default function MusicSubmitForm({ onSubmitted }) {
   const [title, setTitle] = useState('');
   const [statement, setStatement] = useState('');
   const [lyric, setLyric] = useState('');
+  const [giving, setGiving] = useState('track');
+  const [tracklist, setTracklist] = useState('');
   const [email, setEmail] = useState('');
   const [master, setMaster] = useState(null);
   const [masterSpec, setMasterSpec] = useState('');
@@ -33,6 +35,8 @@ export default function MusicSubmitForm({ onSubmitted }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
+
+  const isSet = giving === 'set';
 
   const pickMaster = async (file) => {
     setMaster(file || null);
@@ -66,6 +70,8 @@ export default function MusicSubmitForm({ onSubmitted }) {
           spec: masterSpec,
           seconds: masterSeconds ?? undefined,
           master_sha256: masterPrint,
+          kind: isSet ? 'set' : undefined,
+          tracklist: isSet ? tracklist : undefined,
         },
       });
       setResult(res?.data || { success: false });
@@ -89,8 +95,8 @@ export default function MusicSubmitForm({ onSubmitted }) {
         </div>
         <p className="text-[12px] font-mono text-[#141210] leading-relaxed">
           {live
-            ? `Your track is on the record and anyone can hear it — your name on it, the master exactly as you gave it. Read as: ${String(result.kind || 'other').replace(/_/g, ' ')}.`
-            : 'Nothing is lost and nothing is thrown away: your track is held, with its file and your words, until a keeper has read it. Your name stays on it, and it goes up as it is.'}
+            ? `Your ${isSet ? 'set' : 'track'} is on the record and anyone can hear it — your name on it, the master exactly as you gave it${isSet ? ', whole and uncut' : ''}. Read as: ${String(result.kind || 'other').replace(/_/g, ' ')}.`
+            : `Nothing is lost and nothing is thrown away: your ${isSet ? 'set' : 'track'} is held, with its file and your words, until a keeper has read it. Your name stays on it, and it goes up as it is.`}
         </p>
         <p className="text-[10px] font-mono text-[#5a5246] mt-2 leading-relaxed">
           It is never edited, re-encoded, sold or counted, and no one can take your name off it.
@@ -106,6 +112,37 @@ export default function MusicSubmitForm({ onSubmitted }) {
           No account, no signature, no exclusive — you keep everything, and your name stays on it.
           Your master is kept exactly as you give it: never re-encoded, never trimmed, never sold.
         </p>
+      </div>
+
+      {/* What is being given. A set is named by the person who made it, because the arc of a
+          set is theirs to name and nothing here hears the work. */}
+      <div>
+        <label className={LABEL}>What you are giving</label>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { key: 'track', label: 'One track' },
+            { key: 'set', label: 'A whole set' },
+          ].map((option) => (
+            <button
+              key={option.key}
+              type="button"
+              onClick={() => setGiving(option.key)}
+              className={`px-3 py-3 min-h-[44px] border-2 text-[11px] font-black font-mono uppercase transition-colors ${
+                giving === option.key
+                  ? 'bg-[#141210] text-[#efe7d6] border-[#141210]'
+                  : 'bg-[#f7f1e5] text-[#141210] border-[#141210]/25 active:border-[#141210]'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+        {isSet && (
+          <p className="text-[10px] font-mono text-[#5a5246] mt-2 leading-relaxed">
+            A set is one piece of work and it is kept whole: this record never cuts it into chapters, never
+            splits the file, and never serves it in pieces. The arc is the work.
+          </p>
+        )}
       </div>
 
       <div>
@@ -129,7 +166,10 @@ export default function MusicSubmitForm({ onSubmitted }) {
           </p>
         )}
         <p className="text-[9px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">
-          Stored publicly — anyone with the link can open them. That is the whole point: anyone, anywhere, no account, nothing to buy.
+          Give the master itself, in whatever format and resolution you work at. Nothing is converted, ever — what you
+          hand over is what is kept and what is served. A FLAC plays in nearly every browser as it stands; a WAV or an
+          AIFF may not stream on every device, which is why the master's own file is always there to take and play
+          anywhere. Stored publicly — anyone with the link can open them. That is the whole point: anyone, anywhere, no account, nothing to buy.
         </p>
       </div>
 
@@ -153,6 +193,18 @@ export default function MusicSubmitForm({ onSubmitted }) {
         <label className={LABEL} htmlFor="track-lyric">The words of the track <span className="normal-case tracking-normal">(if there are any)</span></label>
         <textarea id="track-lyric" value={lyric} onChange={(e) => setLyric(e.target.value)} rows={4} className={FIELD} placeholder="Shown as your text, kept as your text." />
       </div>
+
+      {isSet && (
+        <div>
+          <label className={LABEL} htmlFor="track-tracklist">The works inside it, in your own order</label>
+          <textarea id="track-tracklist" value={tracklist} onChange={(e) => setTracklist(e.target.value)} rows={6} className={FIELD} placeholder={'One to a line, as you would write them.\nArtists, titles, anything you want said.'} />
+          <p className="text-[9px] font-mono text-[#5a5246] mt-1.5 leading-relaxed">
+            Kept exactly as you write it, in your order and your spelling, and shown as your text. The record takes this
+            list on your word: it does not check another person's tracklist, and it never moves a work to a name you did
+            not give. Leave it empty if you would rather — a set without a list is still a set.
+          </p>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>

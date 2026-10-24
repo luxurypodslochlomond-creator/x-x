@@ -101,7 +101,7 @@ const SEND = [
   {
     label: '🎵 Give the record your track',
     to: createPageUrl('ClimateMusic'),
-    what: 'The artist\u2019s own door, on the music page: no account, no signature, no fee, and their name stays on the work. A track is read at once, not queued — a clean one goes up the moment it is given, and the record prints the master\u2019s real format, read out of the file\u2019s own header.',
+    what: 'The artist\u2019s own door, on the music page: no account, no signature, no fee, and their name stays on the work. A track is read at once, not queued — a clean one goes up the moment it is given, and the record prints the master\u2019s real format, read out of the file\u2019s own header. A set can be given the same way: one continuous work by a selector with many works inside it, kept whole and never cut into chapters, with the works inside it shown as the selector\u2019s own text and taken on their word. Nothing is ever converted — the master\u2019s own file is always there to take, so a format a browser will not stream is never a door closed.',
   },
 ];
 

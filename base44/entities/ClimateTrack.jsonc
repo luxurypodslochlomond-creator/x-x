@@ -1,7 +1,7 @@
 {
   "name": "ClimateTrack",
   "type": "object",
-  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. The spec, the length and the fingerprint are read from the file itself, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in.",
+  "description": "A track given to the climate record by the artist who made it, for anyone to hear without an account. Nothing here is bought, sold, licensed or counted: the artist keeps their name and keeps their rights, the master is stored exactly as it was given, and the record never re-encodes, edits or charges for it. A set is the same thing with many works inside it: one continuous piece by a selector, served whole and never cut into chapters, with the works inside it listed in the selector's own order and on their word. The spec, the length and the fingerprint are read from the file itself, so what the record says about a master is the master's own truth \u2014 never a claim someone typed in.",
   "properties": {
     "title": {
       "type": "string",
@@ -9,7 +9,7 @@
     },
     "artist_name": {
       "type": "string",
-      "description": "Who made it. Kept on the track, on its card and on the page it plays from \u2014 never separated from the work. Required."
+      "description": "Who made it. For a set, the selector who made it. Kept on the track, on its card and on the page it plays from \u2014 never separated from the work. Required."
     },
     "artist_link": {
       "type": "string",
@@ -23,18 +23,23 @@
         "field_recording",
         "spoken_word",
         "score",
+        "set",
         "other"
       ],
       "default": "other",
-      "description": "What kind of piece this is, so the music can be found. Set by the screener when the track arrives, so the artist is never asked to categorise themselves."
+      "description": "What kind of piece this is, so the music can be found \u2014 a song, an instrumental, a field recording, spoken word, a score, or a set: one continuous work by a selector with many works inside it. Set by the screener when the piece arrives, so the giver is never made to categorise themselves. A giver who says outright that they are giving a set keeps that word, because the arc of a set is theirs to name and no machine hears it."
     },
     "statement": {
       "type": "string",
-      "description": "The artist's own words about it, if they gave any. Quoted, never paraphrased."
+      "description": "The artist's own words about it, if they gave any. Quoted, never paraphrased. For a set this is where the thing itself is said \u2014 where it was played, how the room took it, what it was for."
     },
     "lyric": {
       "type": "string",
       "description": "The words of the track, as written, if there are any and if the artist gave them. Shown as the artist's own text \u2014 the record does not correct it."
+    },
+    "tracklist": {
+      "type": "string",
+      "description": "For a set: the works inside it, in the selector's own order and their own spelling, exactly as they gave the list. Kept as their text and shown as their text. The record does not verify another person's tracklist, does not cut a set into chapters or timings, and never moves a work to a name the selector did not give. Empty for a single track."
     },
     "audio_url": {
       "type": "string",
@@ -46,7 +51,7 @@
     },
     "seconds": {
       "type": "number",
-      "description": "Its length in seconds, read from the same header. Empty when the file's format could not be read."
+      "description": "Its length in seconds, read from the same header. Empty when the file's format could not be read. A set is simply a longer one, and the length is read the same way."
     },
     "master_sha256": {
       "type": "string",
