@@ -96,8 +96,13 @@ export default function ClimateFounder() {
         <h1 className="font-black uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.4vw, 54px)', letterSpacing: '-0.02em' }}>
           Janine M. H. Selendy
         </h1>
-        <p className="text-[11px] lg:text-[13px] font-mono text-[#5a5246] mt-4 leading-relaxed max-w-sm lg:max-w-2xl mx-auto">
-          Founder<br />
+        {/* Her role gets its own line and one clear step above the sentence that
+            explains it. Both used to sit in one paragraph at one size, so the eye
+            could not tell her title from its own description. Her name is untouched. */}
+        <p className="text-[15px] lg:text-[17px] font-black font-mono uppercase tracking-[0.16em] text-[#141210] mt-5">
+          Founder
+        </p>
+        <p className="text-[11px] lg:text-[13px] font-mono text-[#5a5246] mt-3 leading-relaxed max-w-sm lg:max-w-2xl mx-auto">
           Four decades of finding and advancing solutions to the interrelated concerns of global health, environment, and poverty.
         </p>
 
