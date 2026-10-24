@@ -270,7 +270,9 @@ const AuthenticatedApp = () => {
       <Route path="/RealityCheck" element={<RealityCheckPage />} />
       <Route path="/GraemeOnePager" element={<GraemeOnePagerPage />} />
       <Route path="/PartnerEvidence" element={<PartnerEvidencePage />} />
-      <Route path="/ExtractionProofCovenant" element={<LayoutWrapper currentPageName="ExtractionProofCovenant"><ExtractionProofCovenantPage /></LayoutWrapper>} />
+      {/* The covenant is the record's own page — it wears the record's shell and its nav,
+          so a reader arriving from the record's governance line stays in the record. */}
+      <Route path="/ExtractionProofCovenant" element={<ClimateLayout currentPage="ExtractionProofCovenant"><ExtractionProofCovenantPage /></ClimateLayout>} />
       <Route path="/UF51Overview" element={<LayoutWrapper currentPageName="UF51Overview"><UF51OverviewPage /></LayoutWrapper>} />
       <Route path="/TogetherChangeClimate" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />
       <Route path="/ClimatePlatform" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />

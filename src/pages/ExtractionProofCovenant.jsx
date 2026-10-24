@@ -1,147 +1,131 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Shield, Lock, Scale, Users, Globe, Heart, FileText, Check } from 'lucide-react';
+import { createPageUrl } from '@/utils';
+import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+
+// ── THE COVENANT, SAID IN THE RECORD'S OWN VOICE ───────────────────────────────
+// This page used to open as its own small website: its own bands, its own type sizes,
+// its own way out. Anyone arriving from the record's governance line landed somewhere
+// that did not look like the record — and a page about trust cannot afford to look
+// like a different place. It now wears the record's shell, the same bands as Method,
+// Support and the Founder page, so the covenant reads as part of the record it governs.
+//
+// Every claim below is written so a reviewer can check it against the code and the
+// record's own privacy note (ClimatePrivacy), and each pillar says out loud how far
+// along it is: BUILT, LICENCE IN PLACE, PLANNED, GROWING. Nothing is stated as
+// finished when it is not — on this record, how well a thing is known is said on the
+// thing itself. The names used are the record's own; the products that share the
+// CIC's roof are not named here, because this record stands on its own.
 
 const PILLARS = [
   {
-    icon: Lock,
-    title: 'Minimum Data, Maximum Review',
-    status: 'BUILT & LIVE',
-    body: "We hold the smallest set of data a public record needs: your submission, a contact email so we can reach you, and the country a reader reads from. No IP addresses. No tracking cookies. No ad profiles. No accounts. An extractor who copies this code inherits a reviewed, minimal database, not a surveillance engine. There is nothing here worth harvesting.",
+    n: '01',
+    status: 'BUILT · LIVE',
+    title: 'The smallest set of data a record needs',
+    body: 'What you submit, a contact email so we can reach you about it, and the country a reader reads from. No IP address is stored. No tracking cookies. No ad profiles. No accounts. Anyone who copies this code inherits a reviewed, minimal database — not a surveillance engine. There is nothing here worth harvesting.',
   },
   {
-    icon: Scale,
-    title: 'AGPL-3.0 Licensing',
-    status: 'COMMITTED',
-    body: 'When our code is published, it ships under the GNU AGPL-3.0 — fully open source, with one condition: anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — becomes legally impossible.',
+    n: '02',
+    status: 'LICENCE IN PLACE',
+    title: 'AGPL-3.0',
+    body: 'The GNU AGPL-3.0 licence is already written into this project. Fully open source, with one condition: anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — becomes legally impossible. Making the code itself public is the step that follows.',
   },
   {
-    icon: FileText,
-    title: 'Protected Names',
+    n: '03',
     status: 'PLANNED',
-    body: "SORTED, UF51, PetSounds51, CB51 — the code can be forked, but the names and the trust they carry cannot. Trademark protection means a copycat can't inherit our reputation, our track record, or the confidence of the people we serve. They start from zero, in the open, under their own name.",
+    title: 'The name stays with the record',
+    body: 'Together We Change Climate, and the record itself. The code can be copied; the name, and the trust readers have placed in it, cannot be taken along with it. Anyone building on this starts under their own name, in the open, from zero.',
   },
   {
-    icon: Users,
-    title: 'The Part Nobody Can Copy: Evidence',
+    n: '04',
     status: 'GROWING DAILY',
-    body: 'Our live counters of people helped, our organisational partnerships, our anonymised outcome data — that history exists only here. A fork starts with zero trust and zero track record. In tools built for people in crisis, trust is the product. It cannot be copied, only earned.',
+    title: 'The part nobody can copy: the evidence',
+    body: 'The public counts of entries and readers, the review trail behind every entry, the outcome data — that history exists only here. A copy begins with none of it. In a record kept for the public, trust is the whole product: it cannot be copied, only earned.',
   },
 ];
 
-const PRINCIPLES = [
+const COMMITMENTS = [
   'The good use is the default path — extraction is not in the codebase to exploit.',
   'AI does the understanding; the human always keeps the deciding.',
-  'Free for individuals, funded by organisations whose interests align with users.',
-  'Every privacy claim is verifiable in the architecture, not just the marketing.',
+  'Free to read, always. Money never buys a place on the record.',
+  'Every privacy claim is verifiable in the architecture, and in the record’s own privacy note — not only in the marketing.',
   'Anyone may copy this to help people. No one may quietly close it to harvest them.',
 ];
 
-const headStyle = { fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' };
+function Pillar({ n, status, title, body }) {
+  return (
+    <section className="border-2 border-[#141210] bg-[#f7f1e5]">
+      <div className="flex items-center justify-between gap-3 px-4 py-2.5 border-b-2 border-[#141210] bg-[#efe7d6]">
+        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{n}</span>
+        <span className="text-[9px] font-black font-mono uppercase tracking-widest px-2 py-0.5 border border-[#141210] bg-[#e2602a] text-[#141210]">
+          {status}
+        </span>
+      </div>
+      <div className="px-4 py-3.5">
+        <h2
+          className="font-black uppercase text-[#141210] leading-tight mb-2"
+          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}
+        >
+          {title}
+        </h2>
+        <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">{body}</p>
+      </div>
+    </section>
+  );
+}
 
 export default function ExtractionProofCovenant() {
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
-      <style>{`
-        @keyframes epc-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes epc-stamp { from { opacity: 0; transform: rotate(-15deg) scale(1.03); } to { opacity: .9; transform: rotate(-15deg) scale(1); } }
-        @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
-      `}</style>
+    <ClimateRecordShell
+      eyebrow="Public covenant"
+      marker="Open source · extraction-proof"
+      title="Open source. Extraction-proof."
+      statement="Anyone can copy this record's code — we invite it. What no one can copy is a reason to betray the people using it. Helping is the easy path; extraction is the pointless one."
+      returnTo={createPageUrl('TogetherChangeClimate')}
+      returnLabel="Back to the record"
+      footer="This page is part of the record's method: it says what the record is made of, so that anyone — a reader, a funder, a review panel — can check it against the code and the privacy note, and say so if it does not hold."
+    >
+      <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210] mb-6">
+        This record is built so that copying it helps people, and closing it does not pay. Four things hold that
+        up. Each one says out loud how far along it is, because a promise about the future is worth less than a
+        thing already done.
+      </p>
 
-      {/* ── HERO — three-band signal stack: bone / ink / signal ── */}
-      <div className="relative bg-[#141210] overflow-hidden">
-        {/* Bone band */}
-        <div className="relative z-10 bg-[#efe7d6] px-5 py-4 flex items-center gap-2" style={{ animation: 'epc-enter .25s ease-out both' }}>
-          <Globe className="w-3.5 h-3.5 text-[#141210]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#141210]">Public Covenant</span>
-        </div>
-
-        {/* Ink band */}
-        <div className="relative z-10 px-5 pt-10 pb-9" style={{ animation: 'epc-enter .25s ease-out .04s both' }}>
-          {/* Same construction the record's own name now uses, so this page opens with
-              the record instead of shouting over it. It was the last page still built
-              the old way: 11vw gave 43px on a 393px phone — larger than the record's
-              own name. Opens at 36px on a phone; desktop unchanged at 60px. */}
-          <h1 className="font-black uppercase leading-[0.94] max-w-[300px] relative z-10 text-[#efe7d6]" style={{ ...headStyle, fontSize: 'clamp(32px, 9.2vw, 60px)' }}>
-            Open<br />Source.<br />
-            <span className="text-[#e2602a]">Extraction-<br />Proof.</span>
-          </h1>
-          {/* Freedom stamp — unlabelled */}
-          <div className="absolute right-5 top-10 w-[92px] h-[92px] rounded-full border-8 border-[#e2602a] pointer-events-none"
-            style={{ transform: 'rotate(-15deg)', opacity: 0.9, boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6', animation: 'epc-stamp .25s ease-out .1s both' }} />
-        </div>
-
-        {/* Signal band */}
-        <div className="relative z-10 bg-[#e2602a] px-5 py-5" style={{ animation: 'epc-enter .25s ease-out .08s both' }}>
-          <p className="text-[11px] font-bold uppercase leading-relaxed max-w-[330px] text-[#141210] tracking-wide">
-            Anyone can copy our code — we invite it. What no one can copy is a reason to betray the people using it. Helping is the easy path; extraction is the pointless one.
-          </p>
-        </div>
+      <div className="space-y-3">
+        {PILLARS.map((p) => (
+          <Pillar key={p.n} {...p} />
+        ))}
       </div>
 
-      {/* ── PILLARS ── */}
-      <div className="px-4 py-6 space-y-3">
-        {PILLARS.map((p, i) => {
-          const Icon = p.icon;
-          return (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08 + i * 0.05 }}
-              className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-4"
-            >
-              <div className="flex items-start gap-3 mb-2.5">
-                <div className="w-9 h-9 flex items-center justify-center flex-shrink-0 bg-[#1e3a2b] border border-[#141210]">
-                  <Icon className="w-[18px] h-[18px] text-[#efe7d6]" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h2 className="text-[14px] font-black font-mono uppercase leading-tight text-[#141210]">{p.title}</h2>
-                  <span className="inline-block mt-1 text-[9px] font-black font-mono uppercase tracking-widest px-2 py-0.5 border border-[#141210] bg-[#e2602a] text-[#141210]">{p.status}</span>
-                </div>
-              </div>
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">{p.body}</p>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* ── PRINCIPLES ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="mx-4 mb-6 bg-[#f7f1e5] border-2 border-[#141210] p-5"
-      >
-        <div className="flex items-center gap-2 mb-4">
-          <Shield className="w-5 h-5 text-[#1e3a2b]" />
-          <h2 className="font-black uppercase text-[#141210]" style={{ ...headStyle, fontSize: 'clamp(25px, 2.2vw, 32px)' }}>The Five Commitments</h2>
-        </div>
+      {/* ── THE COMMITMENTS ── */}
+      <section className="mt-8 border-2 border-[#141210] bg-[#f7f1e5] p-5">
+        <h2
+          className="font-black uppercase text-[#141210] mb-4"
+          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}
+        >
+          The five commitments
+        </h2>
         <ul className="space-y-3">
-          {PRINCIPLES.map((principle, i) => (
+          {COMMITMENTS.map((line, i) => (
             <li key={i} className="flex items-start gap-3">
-              <div className="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#1e3a2b] border border-[#141210]">
-                <Check className="w-3 h-3 text-[#efe7d6]" strokeWidth={3.5} />
-              </div>
-              <span className="text-[12px] font-mono text-[#141210] leading-relaxed">{principle}</span>
+              <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#1e3a2b] border border-[#141210] text-[#efe7d6] text-[10px] font-black font-mono leading-none">
+                {i + 1}
+              </span>
+              <span className="text-[12px] lg:text-[13px] font-mono text-[#141210] leading-relaxed lg:leading-[1.75]">{line}</span>
             </li>
           ))}
         </ul>
-      </motion.div>
+      </section>
 
-      {/* ── CLOSING ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.45 }}
-        className="px-5 py-8 bg-[#1e3a2b] text-[#efe7d6] border-t-4 border-[#e2602a]"
-      >
-        <Heart className="w-5 h-5 text-[#e2602a] mb-3" />
-        <p className="text-[12px] font-mono leading-relaxed mb-3">
-          You cannot stop bad actors from using AI. You can make good AI win on merit — by building tools where the honest version is the easiest one to build, use, and fund.
+      {/* ── THE CLOSE — the record's own note, at the end of the argument ── */}
+      <section className="mt-6 bg-[#141210] px-5 py-6">
+        <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#efe7d6] mb-4">
+          You cannot stop bad actors from using AI. You can make the good version the easiest one to build, use
+          and fund — by leaving the honest path as the shortest one through the code.
         </p>
-        <p className="text-[10px] font-mono font-black uppercase tracking-widest text-[#efe7d6]/70">UF51 · Built for humans, not harvests</p>
-      </motion.div>
-    </div>
+        <p className="text-[10px] font-black font-mono uppercase tracking-[0.18em] text-[#e2602a] leading-relaxed">
+          This is the time. And this is the record of the time.
+        </p>
+      </section>
+    </ClimateRecordShell>
   );
 }
