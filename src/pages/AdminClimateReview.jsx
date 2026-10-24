@@ -193,6 +193,24 @@ export default function AdminClimateReview() {
               >
                 <Play className="w-3 h-3" /> Listen before deciding
               </a>
+              {/* The words the screener judged, shown to the person who decides. A keeper
+                  should never have to rule on text they cannot read — and when a set is held,
+                  the works inside it are exactly what the flag may be about. */}
+              {item.statement && (
+                <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed mt-2 whitespace-pre-wrap">
+                  <span className="uppercase">their words · </span>{item.statement}
+                </p>
+              )}
+              {item.lyric && (
+                <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed mt-1.5 whitespace-pre-wrap">
+                  <span className="uppercase">the words of it · </span>{item.lyric}
+                </p>
+              )}
+              {item.tracklist && (
+                <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed mt-1.5 whitespace-pre-wrap">
+                  <span className="uppercase">the works inside it · </span>{item.tracklist}
+                </p>
+              )}
             </>
           )}
         </div>
