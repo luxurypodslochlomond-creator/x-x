@@ -573,3 +573,141 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
 
   return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
 }
+
+// ── THE MANUAL CARD ──
+// The Buttons leaves as a picture the same way a wire entry and a track do, because the
+// person who needs it most is the one handing the record to somebody else: a host, a
+// handler, a panel. So it carries the whole thing at a glance — what the page is for, the
+// six parts it holds, and where it lives — instead of travelling as a screenshot with its
+// link cut off. It has no "who says so" block, and that is deliberate: the manual is not a
+// claim about the world, it is the record describing itself, so there is no origin to name
+// and none is invented. Drawn on the reader's own device: nothing of theirs leaves it.
+export async function buildGuideShareCard(guide = {}, options = {}) {
+  const origin = String(options.origin || recordOrigin() || '').replace(/^https?:\/\//, '');
+
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  try {
+    await Promise.all([
+      document.fonts.load('900 66px Oswald'),
+      document.fonts.load('900 22px ui-monospace'),
+    ]);
+  } catch { /* the system faces still read fine */ }
+
+  // Paper, cold scanline grain.
+  ctx.fillStyle = PAPER;
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(20,18,16,0.035)';
+  for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
+
+  // Epigraph band.
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, 0, W, 74);
+  ctx.fillStyle = BONE;
+  ctx.globalAlpha = 0.7;
+  ctx.font = `900 15px ${MONO}`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = SIGNAL_BRIGHT;
+  ctx.beginPath(); ctx.arc(W / 2 - 330, 38, 4, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(W / 2 + 330, 38, 4, 0, Math.PI * 2); ctx.fill();
+
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+
+  // What it is — the record's own name for the page, and the one thing a stranger needs
+  // to know before they open it.
+  let y = 118;
+  ctx.font = `900 20px ${MONO}`;
+  const badgeText = 'THE MANUAL';
+  const badgeW = ctx.measureText(badgeText).width + 32;
+  ctx.fillStyle = INK;
+  ctx.fillRect(PAD, y - 24, badgeW, 36);
+  ctx.fillStyle = BONE;
+  ctx.fillText(badgeText, PAD + 16, y + 1);
+
+  const chipText = 'NO ACCOUNT NEEDED';
+  const chipW = ctx.measureText(chipText).width + 28;
+  ctx.strokeStyle = 'rgba(20,18,16,0.45)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(PAD + badgeW + 12, y - 24, chipW, 36);
+  ctx.fillStyle = MUTED;
+  ctx.fillText(chipText, PAD + badgeW + 26, y + 1);
+
+  // The line the page carries under its title, drawn exactly as the page carries it.
+  y += 44;
+  if (guide.marker) {
+    ctx.font = `700 20px ${MONO}`;
+    ctx.fillStyle = MUTED;
+    ctx.fillText(fitText(ctx, guide.marker, MAXW), PAD, y);
+    y += 46;
+  }
+
+  // The title — the record's display voice.
+  ctx.fillStyle = INK;
+  const size = 66;
+  ctx.font = `900 ${size}px ${DISPLAY}`;
+  const head = wrapLines(ctx, String(guide.title || 'The Buttons').toUpperCase(), MAXW, 2);
+  const headLine = Math.round(size * 1.08);
+  const headBase = y + size;
+  drawLines(ctx, head, PAD, headBase, headLine);
+  y = headBase + headLine * (head.length - 1) + 34;
+
+  // What the page is for, in the page's own words — never a paraphrase of them.
+  ctx.fillStyle = 'rgba(20,18,16,0.88)';
+  ctx.font = `500 26px ${MONO}`;
+  const body = wrapLines(ctx, guide.body, MAXW, 4);
+  drawLines(ctx, body, PAD, y + 26, 40);
+  y = y + 26 + 40 * Math.max(0, body.length - 1);
+
+  // What is inside it — all six parts, so the whole manual is on the card.
+  const inside = Array.isArray(guide.inside) ? guide.inside.slice(0, 6) : [];
+  if (inside.length) {
+    y += 74;
+    ctx.fillStyle = MUTED;
+    ctx.font = `900 20px ${MONO}`;
+    ctx.fillText('WHAT IS INSIDE', PAD, y);
+    ctx.fillStyle = INK;
+    ctx.font = `900 24px ${MONO}`;
+    inside.forEach((item, i) => {
+      ctx.fillText(fitText(ctx, item, MAXW), PAD, y + 44 + i * 40);
+    });
+  }
+
+  // The close, in the record's own words — set just above the footer so it stands in the
+  // same place however long the list above it runs.
+  if (guide.closing) {
+    ctx.fillStyle = MUTED;
+    ctx.font = `500 22px ${MONO}`;
+    const close = wrapLines(ctx, guide.closing, MAXW, 3);
+    drawLines(ctx, close, PAD, FOOTER_TOP - 160 - 34 * (close.length - 1), 34);
+  }
+
+  // Footer — the mark, the covenant, and where the manual lives.
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, FOOTER_TOP, W, 150);
+  ctx.fillStyle = SIGNAL_BRIGHT;
+  ctx.font = `900 24px ${MONO}`;
+  ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
+  ctx.textAlign = 'right';
+  ctx.fillStyle = BONE;
+  ctx.globalAlpha = 0.6;
+  ctx.font = `900 22px ${MONO}`;
+  ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
+  ctx.globalAlpha = 1;
+  ctx.textAlign = 'left';
+  ctx.fillStyle = BONE;
+  ctx.font = `700 18px ${MONO}`;
+  ctx.fillText(fitText(ctx, `${origin}${guide.url_path || '/ClimateGuide'}`, MAXW), PAD, FOOTER_TOP + 100);
+
+  // Signal edge, drawn last so it stays on top.
+  ctx.fillStyle = SIGNAL;
+  ctx.fillRect(0, 74, 8, H - 74);
+
+  return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
+}

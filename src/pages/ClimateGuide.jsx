@@ -2,6 +2,8 @@ import React from 'react';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import GuideBand from '@/components/climate/GuideBand';
+import ShareCardButton from '@/components/climate/ShareCardButton';
+import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 
 // ── THE BUTTONS ──────────────────────────────────────────────────────────────────
 // What Janine asked for, kept in the record's own hand: the list of buttons, in the
@@ -10,6 +12,27 @@ import GuideBand from '@/components/climate/GuideBand';
 // paper, the same ink and the same lettering — and so the buttons it names can be
 // tapped straight from the list. Nothing is described that is not there, and nothing
 // behind the keeper's door is handed to a reader.
+
+// The page's own card. It is built from the page's own lines — the marker, the statement,
+// the six headings and the close — so the manual that leaves the record says exactly what
+// the manual on the record says. Nothing is added for the card and nothing is dropped.
+const BUTTONS_CARD = {
+  id: 'the-buttons',
+  title: 'The Buttons',
+  headline: 'The Buttons — every way through the record',
+  marker: 'Every way through the record · nothing hidden',
+  body: 'Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there.',
+  inside: [
+    '01 · The bar at the top of every page',
+    '02 · Sending something in',
+    '03 · Reading one entry',
+    '04 · Every tongue on Earth',
+    '05 · The first five minutes',
+    '06 · When you are the handler',
+  ],
+  closing: "Nothing on it needs memorising: the record's buttons are words, and each one says what it does.",
+  url_path: '/ClimateGuide',
+};
 
 const BAR = [
   {
@@ -99,7 +122,7 @@ const READING = [
   },
   {
     label: 'Share this entry as a card',
-    what: 'On every entry\u2019s own page, on the wire, on every track, and in the band under the music on the front page. One tap draws the card and offers it to the share sheet already on the device, picture and link together. It is drawn portrait, for a phone, not as a wide desktop banner, so it goes into a post as it is. The origin, the place and how well it is known ride inside the picture, so nothing goes out with its source cut off. Where a device has no share sheet, the card is put on screen to keep and pass on, never a silent download. Nothing is counted, and nothing follows anyone.',
+    what: 'On every entry\u2019s own page, on the wire, on every track, and in the band under the music on the front page. One tap draws the card and offers it to the share sheet already on the device, picture and link together. It is drawn portrait, for a phone, not as a wide desktop banner, so it goes into a post as it is. The origin, the place and how well it is known ride inside the picture, so nothing goes out with its source cut off. Where a device has no share sheet, the card is put on screen to keep and pass on, never a silent download. Nothing is counted, and nothing follows anyone. This page has one of its own, above the bands, so the whole manual can be taken in one piece and handed on.',
   },
   {
     label: 'Correction',
@@ -180,6 +203,16 @@ export default function ClimateGuide() {
       returnLabel="Back to the record"
       footer="Handed to a host or handler, this page is the whole of the manual. Nothing on it needs memorising: the record’s buttons are words, and each one says what it does."
     >
+      {/* The manual's own door out: one tap draws the whole page as a card, so a host or a
+          handler can take it with them and hand it on the way a track or an entry travels. */}
+      <div className="mb-6">
+        <ShareCardButton
+          entry={BUTTONS_CARD}
+          build={buildGuideShareCard}
+          label="Share the manual as a card"
+        />
+      </div>
+
       <GuideBand
         number="01"
         heading="The bar at the top of every page"

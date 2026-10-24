@@ -11,7 +11,7 @@ import { recordAddress, recordOrigin } from './recordAddress';
 // file (an app's own browser). Where the sheet is refused altogether — the editor's
 // own frame — the card is put on screen to keep and pass on, never a silent download.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
 
@@ -82,7 +82,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
 
   const label = state === 'building' ? 'Drawing the card…'
     : state === 'shared' ? 'Shared'
-    : 'Share this entry as a card';
+    : givenLabel || 'Share this entry as a card';
 
   return (
     <>
