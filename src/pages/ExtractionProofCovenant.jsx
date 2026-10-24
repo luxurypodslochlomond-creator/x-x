@@ -7,7 +7,7 @@ const PILLARS = [
     icon: Lock,
     title: 'Minimum Data, Maximum Review',
     status: 'BUILT & LIVE',
-    body: "We hold the smallest set of data a public record needs: your submission, a contact email so we can reach you, and the country a reader reads from. No IP addresses. No tracking cookies. No ad profiles. No accounts. An extractor who copies this code inherits a reviewed, minimal database, not a surveillance engine. The architecture makes mass extraction structurally uninteresting.",
+    body: "We hold the smallest set of data a public record needs: your submission, a contact email so we can reach you, and the country a reader reads from. No IP addresses. No tracking cookies. No ad profiles. No accounts. An extractor who copies this code inherits a reviewed, minimal database, not a surveillance engine. There is nothing here worth harvesting.",
   },
   {
     icon: Scale,
@@ -23,7 +23,7 @@ const PILLARS = [
   },
   {
     icon: Users,
-    title: 'The Unfindable Moat: Evidence',
+    title: 'The Part Nobody Can Copy: Evidence',
     status: 'GROWING DAILY',
     body: 'Our live counters of people helped, our organisational partnerships, our anonymised outcome data — that history exists only here. A fork starts with zero trust and zero track record. In tools built for people in crisis, trust is the product. It cannot be copied, only earned.',
   },
@@ -58,7 +58,11 @@ export default function ExtractionProofCovenant() {
 
         {/* Ink band */}
         <div className="relative z-10 px-5 pt-10 pb-9" style={{ animation: 'epc-enter .25s ease-out .04s both' }}>
-          <h1 className="font-black uppercase leading-[0.94] max-w-[300px] relative z-10 text-[#efe7d6]" style={{ ...headStyle, fontSize: 'clamp(38px, 11vw, 60px)' }}>
+          {/* Same construction the record's own name now uses, so this page opens with
+              the record instead of shouting over it. It was the last page still built
+              the old way: 11vw gave 43px on a 393px phone — larger than the record's
+              own name. Opens at 36px on a phone; desktop unchanged at 60px. */}
+          <h1 className="font-black uppercase leading-[0.94] max-w-[300px] relative z-10 text-[#efe7d6]" style={{ ...headStyle, fontSize: 'clamp(32px, 9.2vw, 60px)' }}>
             Open<br />Source.<br />
             <span className="text-[#e2602a]">Extraction-<br />Proof.</span>
           </h1>
@@ -111,7 +115,7 @@ export default function ExtractionProofCovenant() {
       >
         <div className="flex items-center gap-2 mb-4">
           <Shield className="w-5 h-5 text-[#1e3a2b]" />
-          <h2 className="font-black uppercase text-[#141210]" style={{ ...headStyle, fontSize: '24px' }}>The Five Commitments</h2>
+          <h2 className="font-black uppercase text-[#141210]" style={{ ...headStyle, fontSize: 'clamp(25px, 2.2vw, 32px)' }}>The Five Commitments</h2>
         </div>
         <ul className="space-y-3">
           {PRINCIPLES.map((principle, i) => (
