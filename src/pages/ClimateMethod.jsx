@@ -45,6 +45,7 @@ export default function ClimateMethod() {
         <p>An entry is a fact with an origin. It may come from an official body's own statement, a peer-reviewed journal, published media, an organisation working on the ground, a first-hand dispatch from somebody there, or a document. Which one it is, is printed on the entry.</p>
         <p>We point at the origin and quote a line or two. We do not republish somebody else's article, and we do not pull content out of closed networks or private accounts.</p>
         <p>Anyone may send an entry in — a community group, a researcher, a reader who spotted something. It travels through exactly the same check as anything the record's own team writes.</p>
+        <p>An action is traced differently, and the record says which. An action is the organiser's own word about something they are doing, and the organiser's own contact line is printed on it so that anyone can reach them — on the record, that line is the origin. Where an action also points at more information, the link to it is printed beside it. Its label is the lowest one, one origin says so, until a person has a second, independent origin to name.</p>
       </Block>
 
       <Block n="03" title="The ladder — how well a claim is known">
