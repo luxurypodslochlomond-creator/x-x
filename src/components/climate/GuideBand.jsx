@@ -29,6 +29,9 @@ export default function GuideBand({ number, heading, note, items }) {
             <>
               <div className="flex items-center gap-2">
                 {item.door && <Lock className="w-3 h-3 text-[#b3261e] flex-shrink-0" />}
+                {/* A row may carry the record's own mark for the thing it names — the tuning
+                    fork for music — rather than a glyph borrowed from the platform it runs on. */}
+                {item.icon}
                 <span className="text-[11px] font-black font-mono uppercase tracking-wide text-[#141210] group-hover:text-[#b3261e] transition-colors">
                   {item.label}
                 </span>

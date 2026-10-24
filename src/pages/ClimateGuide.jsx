@@ -4,6 +4,12 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import GuideBand from '@/components/climate/GuideBand';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
+import MusicSignalIcon from '@/components/climate/music/MusicSignalIcon';
+
+// The record's own mark for music, at the size of the words it stands beside. The note
+// glyph is gone from this page: the fork is the record's, and the guide of the record's
+// own buttons should not point at music with somebody else's sign.
+const FORK = <MusicSignalIcon size={13} className="text-[#141210] flex-shrink-0" />;
 
 // ── THE BUTTONS ──────────────────────────────────────────────────────────────────
 // What Janine asked for, kept in the record's own hand: the list of buttons, in the
@@ -61,7 +67,8 @@ const BAR = [
     what: 'How many people have read the record, and from which countries. No one is tracked.',
   },
   {
-    label: '🎵 Music',
+    label: 'Music',
+    icon: FORK,
     to: createPageUrl('ClimateMusic'),
     what: 'The music given to the record: Dillon Squire\u2019s track, free to listen, the master whole, nothing to buy. The glyph is the door.',
   },
@@ -99,7 +106,8 @@ const SEND = [
     what: 'People working on the same thing in one area. A name, a topic, a region, and one contact line.',
   },
   {
-    label: '🎵 Give the record your track',
+    label: 'Give the record your track',
+    icon: FORK,
     to: createPageUrl('ClimateMusic'),
     what: 'The artist\u2019s own door, on the music page: no account, no signature, no fee, and their name stays on the work. A track is read at once, not queued — a clean one goes up the moment it is given, and the record prints the master\u2019s real format, read out of the file\u2019s own header. A set can be given the same way: one continuous work by a selector with many works inside it, kept whole and never cut into chapters, with the works inside it shown as the selector\u2019s own text and taken on their word. Nothing is ever converted — the master\u2019s own file is always there to take, so a format a browser will not stream is never a door closed.',
   },
