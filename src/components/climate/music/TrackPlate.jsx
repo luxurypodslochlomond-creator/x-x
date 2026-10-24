@@ -44,11 +44,14 @@ export default function TrackPlate({ track }) {
 
   return (
     <div className="border-t-4 border-[#e2602a]">
+      {/* A statement printed under the player with no attribution reads as the record
+          saying it — and the record only ever says what it can stand behind. A giver's
+          line stays their line, so it is named as theirs, in the place it is shown. */}
       <TransmissionConsole
         audioUrl={track.audio_url}
         artistName={track.artist_name}
         trackTitle={track.title}
-        dedication={track.statement || ''}
+        dedication={track.statement ? `The giver's own words · ${track.statement}` : ''}
       />
 
       <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 lg:px-10 py-4 border-t-2 border-[#141210] flex items-start gap-3">
