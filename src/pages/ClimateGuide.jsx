@@ -99,7 +99,7 @@ const READING = [
   },
   {
     label: 'Share this entry as a card',
-    what: 'On the wire, and on every entry\u2019s own page. The card carries its origin, its place and how well it is known, so nothing travels without where it came from.',
+    what: 'On every entry\u2019s own page, on the wire, on every track, and in the band under the music on the front page. One tap draws the card and offers it to the share sheet already on the device, picture and link together. It is drawn portrait, for a phone, not as a wide desktop banner, so it goes into a post as it is. The origin, the place and how well it is known ride inside the picture, so nothing goes out with its source cut off. Where a device has no share sheet, the card is put on screen to keep and pass on, never a silent download. Nothing is counted, and nothing follows anyone.',
   },
   {
     label: 'Correction',
