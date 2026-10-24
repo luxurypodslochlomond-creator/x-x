@@ -1,7 +1,7 @@
 {
   "name": "ClimateWord",
   "type": "object",
-  "description": "A line a listener left under a track, in their own words. This is the record's one honest answer to why a piece landed: not a machine's guess, not a number, but a person saying so. Nothing here is counted, scored, ranked or replied to, and the artist is never graded by it. A listener gives a name only if they choose to, and is never asked for an email \u2014 they owe the record nothing. A line is kept exactly as it was written: never corrected, paraphrased or shortened by anyone. Written only by the backend, after screening, so no line reaches the record around the screen; only a keeper can take a line down, and only for something unlawful. The public may read it; the record never edits what a listener said.",
+  "description": "A line a listener left under a track, in their own words. This is the record's one honest answer to why a piece landed: not a machine's guess, not a number, but a person saying so. Nothing here is counted, scored, ranked or replied to, and the artist is never graded by it. A listener gives a name only if they choose to, and is never asked for an email \u2014 they owe the record nothing. A line is kept exactly as it was written: never corrected, paraphrased or shortened by anyone. Written only by the backend, after screening, so no line reaches the record around the screen; only a keeper can take a line down, and only for something unlawful \u2014 and when one is taken down, the record says so in the open on the track itself, never quietly. The public may read it; the record never edits what a listener said.",
   "properties": {
     "track_id": {
       "type": "string",

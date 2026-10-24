@@ -5,6 +5,7 @@ import { base44 } from '@/api/base44Client';
 import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, RefreshCw, Globe, Tag, Music, Play } from 'lucide-react';
 import ProvenanceSweep from '@/components/admin/ProvenanceSweep';
 import SourceLinkRow from '@/components/admin/SourceLinkRow';
+import ListenerLinesPanel from '@/components/admin/ListenerLinesPanel';
 
 export default function AdminClimateReview() {
   const [solutions, setSolutions] = useState([]);
@@ -305,6 +306,9 @@ export default function AdminClimateReview() {
           <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed mt-1.5">
             Music is held only when the screener flags it — a track needs no source, and a clean one is on the record the moment it was given. It is never judged on taste, genre or quality here: listen, then publish or turn it away.
           </p>
+          <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed mt-1.5">
+            Lines left under the music go up at once and are the listener's own words. Only you can take one down, and only for something unlawful — and taking one down leaves a note in the open, where the line stood, saying so and why. Disagreement with the work is never a ground.
+          </p>
         </div>
 
         {/* Quick stats */}
@@ -349,6 +353,9 @@ export default function AdminClimateReview() {
         </div>
 
         {/* Content */}
+        {/* Under the music: the lines listeners left, and the one thing a keeper may do to
+            one of them — take it down for something unlawful, and say so in the open. */}
+        {activeTab === 'tracks' && !loading && <ListenerLinesPanel />}
         {loading ? (
           <div className="text-center py-12">
             <RefreshCw className="w-6 h-6 animate-spin text-[#6b6258] mx-auto mb-3" />

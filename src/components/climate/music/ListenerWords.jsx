@@ -31,6 +31,20 @@ export default function ListenerWords({ track }) {
         Disagreeing with the work is not abuse, and it stays. A line is taken down only for what is unlawful, only by a
         keeper — and it is never quietly.
       </p>
+      {/* A line that came down does not vanish without trace: the record leaves its own note
+          where the line stood — that one was taken down, when, and on what grounds. The line
+          itself is never reprinted, and the removal is never quiet. */}
+      {track.words_note && (
+        <div className="mt-4 border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-3">
+          <p className="text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#b3261e]">
+            A line was taken down · in the open
+          </p>
+          <p className="mt-1.5 text-[11px] font-mono text-[#141210] leading-relaxed whitespace-pre-wrap">{track.words_note}</p>
+          <p className="mt-1.5 text-[9px] font-mono text-[#5a5246] leading-relaxed">
+            It is not reprinted here. Taking a line down is not the same as erasing that it happened.
+          </p>
+        </div>
+      )}
       <WordsList trackId={track.id} reloadKey={reloadKey} />
       <WordForm trackId={track.id} onLeft={() => setReloadKey((k) => k + 1)} />
     </details>
