@@ -10,8 +10,10 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
 
   return (
     <div dir={dir} className="climate-record twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
-      {/* Header — paper, the way out, the page's name */}
-      <div className="sticky top-0 lg:static z-50 border-b-2 border-[#141210] bg-[#efe7d6]">
+      {/* Header — paper, the way out, the page's name. It scrolls with the page, and
+          does not pin: the record's masthead above it already owns the top edge, and a
+          second bar pinned to the same edge sat over the nav and ate the taps. */}
+      <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
         <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
           <button
             onClick={() => navigate(-1)}

@@ -54,7 +54,7 @@ export default function ClimateBrief() {
       `}</style>
 
       {/* Action bar — screen only */}
-      <div className="no-print sticky top-0 z-50 bg-[#1a1612] px-4 py-3 flex items-center justify-between">
+      <div className="no-print bg-[#1a1612] px-4 py-3 flex items-center justify-between">
         <Link to={createPageUrl('TogetherChangeClimate')} className="flex items-center gap-2 text-[#efe7d6] text-[11px] font-black font-mono uppercase tracking-widest">
           ← Back to the record
         </Link>

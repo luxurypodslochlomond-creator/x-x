@@ -47,15 +47,17 @@ function MobileLink({ item, active, quiet }) {
     <Link
       to={createPageUrl(item.page)}
       aria-current={active ? 'page' : undefined}
-      className={`min-h-[28px] flex items-center px-0.5 text-[10px] font-black uppercase tracking-wide whitespace-nowrap border-b-2 transition-colors ${
-        active
-          ? 'text-[#e2602a] border-[#e2602a]'
-          : quiet
-            ? 'text-[#efe7d6]/45 border-transparent'
-            : 'text-[#efe7d6]/80 border-transparent'
+      className={`min-h-[44px] flex items-center px-2 transition-colors active:text-[#e2602a] ${
+        quiet ? 'text-[#efe7d6]/45' : 'text-[#efe7d6]/80'
       }`}
     >
-      {item.label}
+      <span
+        className={`pb-0.5 text-[11px] font-black uppercase tracking-wide whitespace-nowrap border-b-2 ${
+          active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'
+        }`}
+      >
+        {item.label}
+      </span>
     </Link>
   );
 }
@@ -69,7 +71,7 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
       to={createPageUrl('ClimateSearch')}
       aria-current={searchActive ? 'page' : undefined}
       aria-label="Search the record"
-      className={`flex items-center gap-1.5 px-2.5 py-1.5 border-2 text-[10px] font-black font-mono uppercase tracking-wider whitespace-nowrap transition-colors ${
+      className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-2.5 min-h-[44px] sm:min-h-0 border-2 text-[10px] font-black font-mono uppercase tracking-wider whitespace-nowrap transition-colors ${
         searchActive
           ? 'bg-[#e2602a] border-[#e2602a] text-[#141210]'
           : 'border-[#efe7d6]/35 text-[#efe7d6] hover:border-[#e2602a] hover:text-[#e2602a]'
@@ -86,15 +88,15 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   // cannot see is not a door.
   if (variant === 'mobile') {
     return (
-      <nav aria-label="The record" className="flex flex-col gap-0.5 px-4 py-1">
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-0.5">
+      <nav aria-label="The record" className="flex flex-col px-2 py-0.5">
+        <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-0">
           {searchBox}
           <span className="w-px h-4 bg-[#efe7d6]/20" />
           {PLACES.map((item) => (
             <MobileLink key={item.page} item={item} active={isActive(item.page)} />
           ))}
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-x-3.5 gap-y-0.5">
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0">
           {ABOUT.map((item) => (
             <MobileLink key={item.page} item={item} active={isActive(item.page)} quiet />
           ))}

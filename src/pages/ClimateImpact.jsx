@@ -106,7 +106,7 @@ export default function ClimateImpact() {
       `}</style>
 
       {/* Header */}
-      <div className="sticky top-0 z-50 flex items-center gap-3 px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
+      <div className="flex items-center gap-3 px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
         <Link to={createPageUrl('TogetherChangeClimate')} className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
           <ArrowLeft className="w-5 h-5" />
         </Link>

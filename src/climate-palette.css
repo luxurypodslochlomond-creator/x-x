@@ -41,6 +41,14 @@
    part of the platform moves.
    ───────────────────────────────────────────────────────────────────────────── */
 
+/* ── NOTHING ON THE RECORD IS WIDER THAN THE READER'S SCREEN ─────────────────
+   A page that is a few pixels wider than a phone can be pushed sideways with a
+   thumb, dragging a blank gap in at the edge. Nothing on the record is meant to
+   move that way, so the record cannot: it is clipped, not scrolled. Clipping
+   (rather than hiding) leaves the masthead pinned exactly as it was, and the
+   photographs keep their own scroller, so the pictures still swipe. */
+.climate-record { overflow-x: clip; }
+
 /* ── THE SIGNAL FILL ─────────────────────────────────────────────────────────
    Every fill on the record is worn with ink (#141210) on it, so the fill has to
    stay the light step of the family. And it has to be the SAME blue as the

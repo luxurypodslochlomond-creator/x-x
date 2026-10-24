@@ -40,7 +40,7 @@ export default function ClimateFounder() {
   return (
     <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       {/* Header — paper, beacon, back */}
-      <div className="sticky top-0 lg:static z-50 border-b-2 border-[#141210] bg-[#efe7d6]">
+      <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
         <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
           <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
             <ArrowLeft className="w-5 h-5" />
