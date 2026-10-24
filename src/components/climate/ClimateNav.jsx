@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Search as SearchIcon } from 'lucide-react';
+import MusicSignalIcon from '@/components/climate/music/MusicSignalIcon';
 
 // ── THE WAY THROUGH THE RECORD ───────────────────────────────────────────────────
 // Two different kinds of thing live in this bar, and they are drawn differently on
@@ -10,18 +11,20 @@ import { Search as SearchIcon } from 'lucide-react';
 // never read as one more word in a list. Nothing is removed from the record; the door
 // that matters most just looks like a door.
 //
-// Last of the places is the music, and it is drawn as a glyph rather than a word: one
-// track, given to the record, is recognised at a glance, and the door stays light
-// enough not to compete with the reading. It carries a name a screen reader can speak,
-// and the page it opens says in words what the glyph means — so nothing is asked of a
-// reader who cannot read it.
+// Last of the places is the music, and it is drawn as the record's own mark rather than
+// a word: one track, given to the record, is recognised at a glance, and the door stays
+// light enough not to compete with the reading. The mark is made here — a tuning fork
+// with sound leaving it — because the note glyph everyone else uses belongs to the
+// platform that drew it, and this door belongs to the artists who gave the work. It
+// carries a name a screen reader can speak, and the page it opens says in words what
+// the mark means — so nothing is asked of a reader who cannot see it.
 
 const PLACES = [
   { label: 'Record', page: 'TogetherChangeClimate' },
   { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
-  { label: '🎵', page: 'ClimateMusic', aria: 'Music — given to the record', glyph: true },
+  { page: 'ClimateMusic', aria: 'Music — given to the record', glyph: true },
 ];
 
 const ABOUT = [
@@ -37,7 +40,7 @@ const ABOUT = [
 // what it means.
 function PlaceLink({ item, active }) {
   const tone = item.glyph
-    ? 'text-[17px] leading-none text-[#e2602a] drop-shadow-[0_0_7px_rgba(226,96,42,0.75)] hover:text-[#ffb27a] hover:drop-shadow-[0_0_14px_rgba(226,96,42,1)] hover:scale-110 transition-transform'
+    ? 'flex items-center text-[#e2602a] drop-shadow-[0_0_7px_rgba(226,96,42,0.75)] hover:text-[#ffb27a] hover:drop-shadow-[0_0_14px_rgba(226,96,42,1)] hover:scale-110 transition-transform'
     : `text-[11px] font-black uppercase tracking-wider ${
         active
           ? 'text-[#e2602a] border-[#e2602a]'
@@ -51,7 +54,7 @@ function PlaceLink({ item, active }) {
       aria-current={active ? 'page' : undefined}
       className={`pb-1 whitespace-nowrap border-b-2 transition-colors ${tone}`}
     >
-      {item.label}
+      {item.glyph ? <MusicSignalIcon size={19} /> : item.label}
     </Link>
   );
 }
@@ -72,11 +75,11 @@ function MobileLink({ item, active, quiet }) {
       <span
         className={`pb-0.5 border-b-2 ${
           item.glyph
-            ? 'text-[20px] leading-none text-[#e2602a] drop-shadow-[0_0_8px_rgba(226,96,42,0.8)]'
+            ? 'flex items-center text-[#e2602a] drop-shadow-[0_0_8px_rgba(226,96,42,0.8)]'
             : `text-[11px] font-black uppercase tracking-wide whitespace-nowrap ${active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'}`
         }`}
       >
-        {item.label}
+        {item.glyph ? <MusicSignalIcon size={21} /> : item.label}
       </span>
     </Link>
   );
