@@ -416,12 +416,12 @@ export default function TogetherChangeClimate() {
                   the one kind of wrong this record does not allow itself. */}
               <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/55">
                 <a
-                  href="https://www.janegoodall.org.uk/"
+                  href="https://janegoodall.org/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-black text-[#7fc9e4] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
                 >
-                  the Jane Goodall Institute UK
+                  the Jane Goodall Institute
                 </a>
               </p>
             </div>
