@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Languages, X } from 'lucide-react';
 import { LANGS, useSiteLanguage } from '@/components/shared/SiteLanguage';
+import { refuseAncientScript } from '@/components/climate/ancientScripts';
 
 // The one language control for the whole platform. Reads and writes the same choice the
 // record uses, so a tongue picked here is already picked when the reader opens the record.
@@ -10,6 +11,19 @@ export default function LanguageButton({ tone = 'dark' }) {
   const { lang, chosen, setLanguage, translating } = useSiteLanguage();
   const [open, setOpen] = useState(false);
   const [other, setOther] = useState('');
+  const [refusal, setRefusal] = useState('');
+
+  // An ancient script is refused in the open, never quietly swapped for a machine's guess.
+  const commitOther = () => {
+    const typed = other.trim();
+    if (!typed) return;
+    const refused = refuseAncientScript(typed);
+    if (refused) { setRefusal(refused); return; }
+    setRefusal('');
+    setLanguage(typed);
+    setOther('');
+    setOpen(false);
+  };
 
   const current = LANGS.find(l => l.code === chosen);
   const label = lang === 'auto' ? 'Auto' : (current?.label || chosen);
@@ -77,17 +91,22 @@ export default function LanguageButton({ tone = 'dark' }) {
                 <input
                   value={other}
                   onChange={e => setOther(e.target.value)}
-                  onKeyDown={e => { if (e.key === 'Enter' && other.trim()) { setLanguage(other.trim()); setOther(''); setOpen(false); } }}
+                  onKeyDown={e => { if (e.key === 'Enter') commitOther(); }}
                   placeholder="Type it, e.g. Yoruba, Scots Gaelic, Kurdish"
                   className="flex-1 min-w-0 bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
                 />
                 <button
-                  onClick={() => { if (other.trim()) { setLanguage(other.trim()); setOther(''); setOpen(false); } }}
+                  onClick={commitOther}
                   className="px-4 py-2.5 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[10px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
                 >
                   Go
                 </button>
               </div>
+              {refusal && (
+                <p className="mt-3 text-[11px] font-mono leading-relaxed text-[#141210] border-l-2 border-[#b3261e] pl-2">
+                  {refusal}
+                </p>
+              )}
               <p className="text-[10px] font-mono text-[#5a5246] mt-3 leading-relaxed">
                 Machine translation runs as you read. A name, a number or a place may come back in English — and for anything that matters, the English on the page is the words the record stands behind.
               </p>

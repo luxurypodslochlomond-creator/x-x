@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { Languages } from 'lucide-react';
 import { LANGS } from './useClimateLanguage';
+import { refuseAncientScript } from './ancientScripts';
 
 // The record's own language control, in one place: the preset list, plus
 // "type any language on Earth" for anything not on it.
 export default function ClimateLanguagePicker({ lang, onChange, translating, t }) {
   const [otherOpen, setOtherOpen] = useState(false);
   const [manual, setManual] = useState('');
+  const [refusal, setRefusal] = useState('');
 
   const commit = () => {
-    if (!manual.trim()) return;
-    onChange(manual.trim());
+    const typed = manual.trim();
+    if (!typed) return;
+    // An ancient script is refused here, in the open, rather than silently swapped for a guess.
+    const refused = refuseAncientScript(typed);
+    if (refused) { setRefusal(refused); return; }
+    setRefusal('');
+    onChange(typed);
     setManual('');
     setOtherOpen(false);
   };
@@ -62,6 +69,12 @@ export default function ClimateLanguagePicker({ lang, onChange, translating, t }
             ×
           </button>
         </div>
+      )}
+
+      {refusal && (
+        <p className="mt-2 text-[11px] leading-relaxed text-record-ink border-l-2 border-record-red pl-2">
+          {refusal}
+        </p>
       )}
     </div>
   );

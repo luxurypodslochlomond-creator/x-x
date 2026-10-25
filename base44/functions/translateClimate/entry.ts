@@ -25,6 +25,15 @@ export default async function(req) {
       return Response.json({ translations: strings || {}, kept: 0, made: 0 });
     }
 
+    // An ancient script is refused at the door, not invented. Nobody alive can check a
+    // machine's wording in it, so anything produced would be a guess published as fact.
+    // Refused here as well as in the reader's own language box, because a call can arrive
+    // without going through it. The reader keeps English; nothing false reaches the page.
+    if (isRefusedScript(String(lang))) {
+      console.log('refused an ancient script:', lang);
+      return Response.json({ translations: null, refused: true }, { status: 200 });
+    }
+
     const asked = Object.values(strings).filter(s => typeof s === 'string' && s.trim());
     if (!asked.length) return Response.json({ translations: strings, kept: 0, made: 0 });
 
@@ -56,6 +65,23 @@ export default async function(req) {
     console.error('translateClimate error:', error && error.message ? error.message : error);
     return Response.json({ translations: null, error: String((error && error.message) || error) }, { status: 200 });
   }
+}
+
+// ── SCRIPTS THE RECORD WILL NOT PUT A MACHINE'S WORDS INTO ──
+// The scripts below have no living community writing them, so a machine's wording in them
+// cannot be checked by anyone. A real inscription is still welcome on the record as a quoted
+// line, with its published reading and its source named beside it. Kept in step with the
+// reader's own language box (src/components/climate/ancientScripts.js).
+const REFUSED_SCRIPTS = [
+  'hieroglyph', 'hieratic', 'egyptian demotic', 'ancient egyptian', 'middle egyptian', 'old egyptian',
+  'cuneiform', 'sumerian', 'akkadian', 'hittite', 'elamite',
+  'linear a', 'linear b', 'rongorongo', 'proto-sinaitic', 'ugaritic', 'oracle bone',
+  'maya glyph', 'mayan glyph', 'maya hieroglyph', 'mayan hieroglyph', 'maya script', 'mayan script',
+];
+
+function isRefusedScript(lang) {
+  const asked = lang.toLowerCase();
+  return REFUSED_SCRIPTS.some(term => asked.includes(term));
 }
 
 async function holdTongue(base44, lang) {

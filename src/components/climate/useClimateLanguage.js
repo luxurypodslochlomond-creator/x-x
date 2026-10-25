@@ -62,6 +62,7 @@ export const LANGS = [
   { code: 'mi', label: 'Te Reo Māori' },
   { code: 'sm', label: 'Gagana Sāmoa' },
   { code: 'fj', label: 'Vosa Vakaviti' },
+  { code: 'chr', label: 'Cherokee (Tsalagi)' },
   { code: 'la', label: 'Latina (Latin)' },
   { code: 'grc', label: 'Ἀρχαία ἑλληνική (Ancient Greek)' },
 ];
