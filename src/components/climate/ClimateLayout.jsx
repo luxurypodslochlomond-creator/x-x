@@ -133,7 +133,12 @@ export default function ClimateLayout({ children, currentPage }) {
       {children}
 
       <footer className="border-t-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-4">
-        <div className="max-w-[1100px] mx-auto flex items-center justify-center gap-3">
+        {/* One line, always one. In a tongue whose words are longer, the line slides inside
+            itself rather than wrapping into a second one — so the foot of every page of the
+            record keeps the same height and nothing the reader is looking at moves while a
+            tongue is being written in. */}
+        <div className="max-w-[1100px] mx-auto overflow-x-auto climate-nav-rail">
+          <div className="flex items-center justify-center gap-3 w-max mx-auto">
           {FOOTER_LINKS.map((item, i) => (
             <React.Fragment key={item.page}>
               {i > 0 && <span className="text-[#6b6258]/40 text-[10px] font-mono">·</span>}
@@ -145,6 +150,7 @@ export default function ClimateLayout({ children, currentPage }) {
               </Link>
             </React.Fragment>
           ))}
+          </div>
         </div>
       </footer>
     </div>

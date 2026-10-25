@@ -112,24 +112,35 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   if (variant === 'mobile') {
     return (
       <nav aria-label="The record" className="flex flex-col px-2 py-0.5">
-        <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-0">
-          {searchBox}
-          <span className="w-px h-4 bg-[#efe7d6]/20" />
-          {PLACES.map((item) => (
-            <MobileLink key={item.page} item={item} active={isActive(item.page)} />
-          ))}
+        {/* Always two lines, never three and never one. This bar is stuck to the top of the
+            screen, so while it wrapped, every tongue that arrived made its words longer, the
+            lines re-wrapped, the bar changed height and the whole page moved under the reader.
+            Two lines of fixed height cannot do that: while a tongue's words fit, the line is
+            centred exactly as before; the moment they grow past the screen, the line slides
+            under the thumb instead of stacking, and the bar's height never changes. Nothing is
+            hidden — every door stays in the bar, at every width, in every tongue. */}
+        <div className="overflow-x-auto climate-nav-rail">
+          <div className="flex items-center gap-x-1 w-max mx-auto">
+            {searchBox}
+            <span className="w-px h-4 bg-[#efe7d6]/20" />
+            {PLACES.map((item) => (
+              <MobileLink key={item.page} item={item} active={isActive(item.page)} />
+            ))}
+          </div>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0">
-          {ABOUT.map((item) => (
-            <MobileLink key={item.page} item={item} active={isActive(item.page)} quiet />
-          ))}
+        <div className="overflow-x-auto climate-nav-rail">
+          <div className="flex items-center gap-x-2 w-max mx-auto">
+            {ABOUT.map((item) => (
+              <MobileLink key={item.page} item={item} active={isActive(item.page)} quiet />
+            ))}
+          </div>
         </div>
       </nav>
     );
   }
 
   return (
-    <nav className="flex items-center gap-4 lg:gap-5" aria-label="The record">
+    <nav className="flex items-center gap-4 lg:gap-5 min-w-0 overflow-x-auto climate-nav-rail" aria-label="The record">
       {searchBox}
       <span className="w-px h-4 bg-[#efe7d6]/20" />
       {PLACES.map((item) => (
