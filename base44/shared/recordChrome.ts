@@ -31,6 +31,14 @@ export const RECORD_CHROME: Record<string, string> = {
   'Terms': 'the terms of use \u2014 the ground rules for using the record',
   'Privacy': 'the privacy notice \u2014 what the record keeps, and what it never keeps',
   'Record of the Time': 'the record\u2019s own name, printed on its masthead',
+
+  // The picker is part of the frame too: every reader meets it, on every page, and its words stand
+  // alone in a list with no sentence around them.
+  'Every tongue on Earth': 'the record\u2019s own name for its language picker \u2014 every language anyone speaks, anywhere',
+  'on the list': 'standing after a number, in the picker: how many tongues the picker holds',
+  'Any other language on Earth': 'the last row of the picker \u2014 for a tongue that is not listed, typed in by hand',
+  'device': 'standing beside a language name, in the picker: the tongue this device is already set to',
+  'Go': 'the button in the picker that accepts a language typed in by hand',
 };
 
 export const chromeKey = (word: string) => CHROME_PREFIX + word;

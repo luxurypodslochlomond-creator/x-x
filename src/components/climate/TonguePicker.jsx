@@ -113,7 +113,9 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
             <span className="text-[9px] font-black font-mono uppercase tracking-[0.2em]" style={{ color: accent }}>
               Every tongue on Earth
             </span>
-            <span className={`text-[9px] font-mono ${dim}`}>{LANGS.length + 1} on the list</span>
+            {/* The count keeps its own span so the words beside it are read as words and
+                translated, while the number itself is left to the app. */}
+            <span className={`text-[9px] font-mono ${dim}`}><span>{LANGS.length + 1}</span>{' '}<span>on the list</span></span>
           </div>
 
           <div className={`p-2 border-b ${divide}`}>

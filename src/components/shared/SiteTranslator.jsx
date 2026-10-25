@@ -14,8 +14,8 @@ import { producedWords, markProduced } from '@/components/shared/translationMemo
 // Four things keep it smooth, and each one matters:
 //  1. The words we already hold go in BEFORE the browser paints — a page read in this
 //     tongue before is never seen in English, not even for a frame.
-//  2. What we hold is applied, and what we are missing is collected, in ONE pass, and one
-//     ask then covers a whole page instead of a queue of them.
+//  2. What we hold is applied and what we are missing is collected in ONE pass; the missing
+//     words then leave in short pieces, one after another, instead of one lump that waits.
 //  3. The English a word was written in is remembered per node, so a translated word is
 //     never fed back in for a second translation, and the engine never chases its own
 //     writes around the page.
@@ -30,8 +30,15 @@ const KEEP = new Set([
 ]);
 const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'CODE', 'PRE', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'TITLE']);
 
-const BATCH_SIZE = 400;   // a whole page goes in ONE ask — never two, never a second wave
-const BATCH_CHARS = 40000;
+// ── ONE PIECE AT A TIME ──
+// A page is not asked for in one lump. It is asked for in pieces the record can answer quickly, and
+// the next piece leaves the moment the last one lands. This matters more than it looks: a lump big
+// enough to hold a whole page is a lump slow enough to time out, and a lump that times out leaves
+// every word in it English AND refuses the words behind it while it hangs — which is how a page
+// ends up half in a tongue and half in English. Short pieces mean the words arrive while the reader
+// is already reading, and one slow piece never costs the rest.
+const PIECE_SIZE = 40;      // words per ask, with room for the record's frame alongside them
+const PIECE_CHARS = 1200;
 const DICT_LIMIT = 8000;
 const SETTLE_MS = 260;    // let a new page render before the first ask
 const REFRESH_MS = 120;   // a word React rewrote goes back at once, not after a beat
@@ -114,7 +121,8 @@ export default function SiteTranslator() {
   const dictRef = useRef({});
   const translated = useRef(new Set()); // every word this tongue has produced so far
   const asked = useRef(new Set());      // what we have sent for, so nothing is asked twice
-  const asking = useRef(false);
+  const queue = useRef(new Set());      // words met on the page, waiting their turn in a piece
+  const working = useRef(false);        // one piece is in flight at a time — the rest follow it
 
   useEffect(() => { document.documentElement.dir = isRTL ? 'rtl' : 'ltr'; }, [isRTL]);
 
@@ -228,17 +236,28 @@ export default function SiteTranslator() {
     repaint(dict);
   }, [repaint]);
 
-  const ask = useCallback(async (lang, strings, dict) => {
-    if (!strings.length || asking.current) return false;
-    asking.current = true;
-    strings.forEach((s) => asked.current.add(s));
-    setTranslating(true);
+  // A word met on the page is put in the queue, once. One piece leaves at a time and the next goes
+  // the moment the last has landed, so a long page fills in while the reader is reading it.
+  const enqueue = useCallback((word) => {
+    if (!word || asked.current.has(word)) return;
+    asked.current.add(word);
+    queue.current.add(word);
+  }, []);
+
+  // One short piece, answered. What comes back goes straight onto the page. If nothing comes back,
+  // those words are free to be asked again rather than written off for the rest of the visit.
+  const askPiece = useCallback(async (lang, words) => {
+    const dict = dictRef.current; // the tongue this piece was asked for
     try {
-      const payload = Object.fromEntries(strings.map((s, i) => [`s${i}`, s]));
+      const payload = Object.fromEntries(words.map((s, i) => [`s${i}`, s]));
       const res = await base44.functions.invoke('translateClimate', { lang, strings: payload });
       const out = res?.data?.translations || res?.translations;
-      if (!out || typeof out !== 'object') return false;
-      strings.forEach((s, i) => {
+      if (!out || typeof out !== 'object') { words.forEach((w) => asked.current.delete(w)); return; }
+      // The reader has moved to another tongue, or another page: this answer is not for what is on
+      // the screen now, so it is let go. Nothing is lost — the words are kept on the record's side,
+      // and the tongue is read again the moment it is wanted.
+      if (dictRef.current !== dict) return;
+      words.forEach((s, i) => {
         const t = out[`s${i}`];
         if (typeof t === 'string' && t.trim()) {
           dict[s] = t.trim();
@@ -252,39 +271,56 @@ export default function SiteTranslator() {
       // So the whole current tongue is taken once more, right now, and put on the page: a reader
       // reading in that tongue never has to come back to be given the better wording.
       if (Number(res?.data?.made || 0) > 0) await refreshTongue(lang, true);
-      return true;
     } catch {
-      return false; // a word that never arrives simply stays English
-    } finally {
-      asking.current = false;
-      setTranslating(false);
+      // A piece that does not arrive leaves its words in English for now and is asked again on the
+      // next page. It never holds up the pieces behind it.
+      words.forEach((w) => asked.current.delete(w));
     }
-  }, [paint, refreshTongue, setTranslating]);
+  }, [paint, refreshTongue]);
 
-  const run = useCallback(async () => {
+  // The queue, drained: pieces leave one after another until the page has nothing left waiting.
+  const drain = useCallback(async () => {
+    if (working.current) return; // the piece in flight picks up whatever is waiting when it lands
+    const lang = chosen;
+    if (!lang || lang === 'en') { queue.current.clear(); return; }
+    if (!queue.current.size) { setTranslating(false); return; }
+    working.current = true;
+    setTranslating(true);
+    const tongue = dictRef.current; // the tongue this page is reading in
+    try {
+      while (queue.current.size) {
+        // The reader has changed tongue, or page: what is still waiting belongs to the new one,
+        // which has its own pass. Nothing is lost by letting it go.
+        if (dictRef.current !== tongue) { queue.current.clear(); break; }
+        const piece = [];
+        let chars = 0;
+        for (const w of queue.current) {
+          if (piece.length >= PIECE_SIZE || chars + w.length > PIECE_CHARS) break;
+          piece.push(w);
+        }
+        piece.forEach((w) => queue.current.delete(w));
+        await askPiece(lang, piece);
+      }
+    } finally {
+      working.current = false;
+      setTranslating(false);
+      // A word that arrived as the last piece landed still gets its turn.
+      if (queue.current.size && dictRef.current === tongue) drain();
+    }
+  }, [chosen, askPiece, setTranslating]);
+
+  const run = useCallback(() => {
     const lang = chosen;
     if (!lang || lang === 'en') { restore(); setTranslating(false); return; }
-    const dict = dictRef.current;
-    const missing = sweep(dict);
-    if (!missing.length) { setTranslating(false); return; }
-
-    const batch = [];
-    let chars = 0;
-    for (const s of missing) {
-      if (batch.length >= BATCH_SIZE || chars + s.length > BATCH_CHARS) break;
-      batch.push(s);
-      chars += s.length;
-    }
-
-    const answered = await ask(lang, batch, dict);
-    // A very long page can hold more words than one ask. The rest follow, quietly.
-    if (answered && missing.length > batch.length) setTimeout(run, 350);
-  }, [chosen, restore, sweep, ask, setTranslating]);
+    sweep(dictRef.current).forEach(enqueue);
+    drain();
+  }, [chosen, restore, sweep, enqueue, drain, setTranslating]);
 
   // A new tongue, or a new page: the words we hold go in before the browser paints.
   useLayoutEffect(() => {
     originals.forEach((_, node) => { if (!node.isConnected) originals.delete(node); });
-    asked.current = new Set();
+    asked.current = new Set();   // what this page has sent for, so nothing is asked twice
+    queue.current.clear();       // and what it had waiting: a new tongue is not served by old words
 
     const lang = chosen;
     if (!lang || lang === 'en') {
@@ -325,20 +361,17 @@ export default function SiteTranslator() {
       if (!touched.size) return;
       clearTimeout(timer);
       timer = setTimeout(() => {
-        const dict = dictRef.current;
-        const missing = new Set();
         touched.forEach((node) => {
           if (!node.isConnected) return;
-          const need = visit(node, dict);
-          if (need && !asked.current.has(need)) missing.add(need);
+          enqueue(visit(node, dictRef.current));
         });
         touched.clear();
-        if (missing.size) ask(chosen, [...missing], dict);
+        if (queue.current.size) drain();
       }, REFRESH_MS);
     });
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
     return () => { observer.disconnect(); clearTimeout(timer); };
-  }, [chosen, ask, eachTextNode, visit]);
+  }, [chosen, drain, eachTextNode, enqueue, visit]);
 
   return null;
 }
