@@ -1,4 +1,4 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { isChromeKey, plainOfChromeKey } from '../../shared/recordChrome.ts';
 
 // ── A MADE TONGUE IS HANDED OUT LIKE A PUBLISHED FILE ──
@@ -74,6 +74,6 @@ export default async function(req) {
   } catch (error) {
     console.error('serveClimateTongue error:', error && error.message ? error.message : error);
     // Never a failed page: an empty answer simply leaves the reader with the copy they hold.
-    return hand({ version: null, dict: {} }, 30);
+    return Response.json({ error: 'Could not load this language.', dict: {} }, { status: 503 });
   }
 }

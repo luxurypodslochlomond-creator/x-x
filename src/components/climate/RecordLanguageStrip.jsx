@@ -17,9 +17,9 @@ export default function RecordLanguageStrip({ lang, detected, onChange, translat
     <div className={ink ? 'relative bg-[#141210] border-b border-[#e2602a]/20' : 'relative bg-[#efe7d6] border-b-2 border-[#141210]'}>
       <div className="px-5 py-2.5 flex items-center gap-2.5">
         <Languages className="w-4 h-4 flex-shrink-0" style={{ color: accent }} />
-        <span className={`flex-shrink-0 text-[9px] font-black font-mono uppercase tracking-widest ${dim}`}>Every tongue</span>
+        <span className={`w-[5.5rem] flex-shrink-0 overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-black font-mono uppercase tracking-widest ${dim}`}>Every tongue</span>
         <TonguePicker lang={lang} detected={detected} onChange={onChange} tone={tone} />
-        {translating && <span className="flex-shrink-0 text-[10px] font-mono animate-pulse" style={{ color: accent }}>…</span>}
+        <span data-no-translate role="status" aria-label={translating ? 'Translating' : undefined} className="w-3 flex-shrink-0 text-[10px] font-mono" style={{ color: accent }}>{translating ? '…' : ''}</span>
       </div>
     </div>
   );

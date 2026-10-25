@@ -1,6 +1,7 @@
 import React from 'react';
 import RecordLanguageStrip from './RecordLanguageStrip';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
+import LanguageStatus from '@/components/climate/LanguageStatus';
 
 // ── ONE TONGUE, THE WHOLE RECORD ──
 // The tongue is chosen here, in the header, on every page of the climate record —
@@ -11,11 +12,9 @@ export default function ClimateLanguageBar() {
   const { lang, autoLang, setLanguage, translating } = useSiteLanguage();
 
   return (
-    <RecordLanguageStrip
-      lang={lang}
-      detected={autoLang}
-      onChange={setLanguage}
-      translating={translating}
-    />
+    <>
+      <RecordLanguageStrip lang={lang} detected={autoLang} onChange={setLanguage} translating={translating} />
+      <LanguageStatus />
+    </>
   );
 }

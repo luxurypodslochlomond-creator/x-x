@@ -119,7 +119,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
       >
         {/* A language is named in its own words and never translated: a control that
             renames itself in the tongue you are leaving cannot be trusted or used. */}
-        <span data-no-translate className="truncate">{lang === 'auto' ? `🌐 Auto — ${nameFor(detected)}` : nameFor(lang)}</span>
+        <span data-no-translate className="block min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">{lang === 'auto' ? `🌐 Auto — ${nameFor(detected)}` : nameFor(lang)}</span>
         <ChevronDown className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 

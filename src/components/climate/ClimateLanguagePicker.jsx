@@ -44,11 +44,12 @@ export default function ClimateLanguagePicker({ lang, onChange, translating, t }
           }}
           aria-label={t.lang_aria}
           size={1}
+          data-no-translate
           className="flex-1 min-w-0 bg-transparent text-record-ink border border-record-ink px-2 py-2 min-h-[40px] text-[13px] font-bold outline-none cursor-pointer truncate"
         >
           <option value="auto">🌐 {t.lang_auto}</option>
           {LANGS.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
-          <option value="__other">✨ {t.lang_other}</option>
+          <option value="__other">{t.lang_other}</option>
         </select>
         {translating && <span className="text-[10px] text-record-muted animate-pulse">…</span>}
       </div>

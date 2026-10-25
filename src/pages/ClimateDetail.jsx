@@ -6,6 +6,8 @@ import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, Fil
 import RelatedTriangle from '@/components/climate/RelatedTriangle';
 import ClimateCommentSection from '@/components/climate/ClimateCommentSection';
 import { useEntryTranslation } from '@/hooks/useEntryTranslation';
+import { useSiteLanguage } from '@/components/shared/SiteLanguage';
+import EntryLanguageStatus from '@/components/climate/EntryLanguageStatus';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
@@ -96,7 +98,7 @@ export default function ClimateDetail() {
 
   // Live entry-text translation — Janine's "every tongue, nobody left behind"
   // Hooks must run before any early return — call unconditionally; hook handles null record.
-  const [lang] = useState(() => { try { return localStorage.getItem('climate51_lang') || 'auto'; } catch { return 'auto'; } });
+  const { chosen: lang } = useSiteLanguage();
   const tr = useEntryTranslation(record, lang);
   const { categories } = useClimateCategories();
 
@@ -143,7 +145,7 @@ export default function ClimateDetail() {
         </div>
 
         <div className="p-5 lg:px-10 lg:py-8 lg:max-w-[820px] lg:mx-auto">
-          <h1 className="text-2xl lg:text-4xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em', color: '#141210' }}>
+          <h1 data-no-translate className="text-2xl lg:text-4xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em', color: '#141210' }}>
             {tr.field('title')}
           </h1>
 
@@ -167,15 +169,8 @@ export default function ClimateDetail() {
             </div>
           )}
 
-          {tr.translating && (
-            <p className="text-[10px] font-mono text-[#5a5246] mt-4 animate-pulse">Translating into your language…</p>
-          )}
-          {tr.isTranslated && (
-            <button onClick={() => tr.setShowOriginal(!tr.showOriginal)} className="mt-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-2 py-1 active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
-              {tr.showOriginal ? 'Show translation' : 'View original (English)'}
-            </button>
-          )}
-          <p className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('description')}</p>
+          <EntryLanguageStatus translation={tr} />
+          <p data-no-translate className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('description')}</p>
 
           {record.source_url && (
             <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
@@ -282,22 +277,15 @@ export default function ClimateDetail() {
         <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
           <SignalCode code={catCode} size="md" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
-        <h1 className="text-2xl lg:text-4xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+        <h1 data-no-translate className="text-2xl lg:text-4xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
           {tr.field('title')}
         </h1>
         <div className="flex items-center gap-2 text-[11px] font-mono text-[#5a5246] mt-3">
           <MapPin className="w-3.5 h-3.5" />
           <span>{record.country}{record.region_rough ? ` · ${record.region_rough}` : ''}</span>
         </div>
-        {tr.translating && (
-          <p className="text-[10px] font-mono text-[#5a5246] mt-4 animate-pulse">Translating into your language…</p>
-        )}
-        {tr.isTranslated && (
-          <button onClick={() => tr.setShowOriginal(!tr.showOriginal)} className="mt-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-2 py-1 active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
-            {tr.showOriginal ? 'Show translation' : 'View original (English)'}
-          </button>
-        )}
-        <p className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('details') || tr.field('summary')}</p>
+        <EntryLanguageStatus translation={tr} />
+        <p data-no-translate className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('details') || tr.field('summary')}</p>
         <div className="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-mono font-bold uppercase">
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {record.scale || '—'}</span>
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Reviewed: ✓</span>

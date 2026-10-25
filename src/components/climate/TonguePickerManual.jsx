@@ -21,7 +21,7 @@ export default function TonguePickerManual({ theme, otherOpen, setOtherOpen, man
       ) : (
         <button type="button" onClick={() => setOtherOpen(true)}
           className={`w-full px-2 py-2.5 min-h-[42px] text-left text-[12px] font-mono ${rowIdle}`}>
-          ✨ Any other language on Earth…
+          Any other language on Earth
         </button>
       )}
       {refusal && <p className={`mt-2 border-l-2 border-record-signal pl-2 text-[11px] font-mono leading-relaxed ${dim}`}>{refusal}</p>}

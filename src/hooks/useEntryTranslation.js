@@ -1,65 +1,34 @@
-import { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { useEffect, useState } from 'react';
+import { getDictionary, pullDictionary, translateWords } from '@/components/shared/translation/translationCache';
+import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 
-// Translates a climate record's text fields into the user's selected language.
-// Caches per record+lang in localStorage. Falls back to original on failure.
-// Transparency: exposes showOriginal so the UI can let readers verify against English.
 export function useEntryTranslation(record, lang) {
-  const [translated, setTranslated] = useState(null);
+  const [ready, setReady] = useState('');
   const [translating, setTranslating] = useState(false);
   const [showOriginal, setShowOriginal] = useState(false);
-
-  const resolvedLang = (() => {
-    if (!lang || lang === 'auto') {
-      try {
-        const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
-        return (nav.split('-')[0] || 'en').toLowerCase();
-      } catch { return 'en'; }
-    }
-    return lang;
-  })();
+  const [error, setError] = useState(false);
+  const { translationRevision } = useSiteLanguage();
+  const identity = `${record?.id || ''}:${record?.updated_date || ''}:${lang}:${translationRevision}`;
+  const fields = ['title', 'summary', 'details', 'description'];
 
   useEffect(() => {
-    if (!record || !record.id || resolvedLang === 'en') {
-      setTranslated(null);
-      setTranslating(false);
-      return;
-    }
-    // Only translate the text fields that carry the actual content
-    const strings = {};
-    if (record.title) strings.title = record.title;
-    if (record.summary) strings.summary = record.summary;
-    if (record.details) strings.details = record.details;
-    if (record.description) strings.description = record.description;
-    if (Object.keys(strings).length === 0) { setTranslated(null); return; }
-
-    const cacheKey = `climate51_entry_${record.id}_${resolvedLang}`;
-    try {
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) { setTranslated(JSON.parse(cached)); setTranslating(false); return; }
-    } catch { /* ignore */ }
-
-    let cancelled = false;
+    let active = true;
+    setShowOriginal(false);
+    setReady('');
+    setError(false);
+    if (!record || lang === 'en') { setTranslating(false); return; }
+    const words = fields.map((key) => record[key]).filter(Boolean);
     setTranslating(true);
-    base44.functions.invoke('translateClimate', { lang: resolvedLang, strings })
-      .then(res => {
-        if (cancelled) return;
-        const out = res?.data?.translations || res?.translations;
-        if (out && out.title) {
-          setTranslated(out);
-          try { localStorage.setItem(cacheKey, JSON.stringify(out)); } catch { /* storage full */ }
-        }
-      })
-      .catch(() => { /* fall back to original silently */ })
-      .finally(() => { if (!cancelled) setTranslating(false); });
-    return () => { cancelled = true; };
-  }, [record?.id, resolvedLang]);
+    pullDictionary(lang).catch(() => {}).then(() => translateWords(lang, words, () => active)).then((result) => {
+      if (active) setError(result.incomplete);
+    }).finally(() => {
+      if (active) { setReady(identity); setTranslating(false); }
+    });
+    return () => { active = false; };
+  }, [identity]);
 
-  const isTranslated = !!translated && resolvedLang !== 'en';
-  const field = (key) => {
-    if (!isTranslated || showOriginal) return record?.[key] || '';
-    return translated?.[key] || record?.[key] || '';
-  };
-
-  return { field, translating, isTranslated, showOriginal, setShowOriginal, lang: resolvedLang };
+  const dict = getDictionary(lang);
+  const isTranslated = ready === identity && lang !== 'en' && fields.some((key) => dict[record?.[key]]);
+  const field = (key) => !isTranslated || showOriginal ? record?.[key] || '' : dict[record?.[key]] || record?.[key] || '';
+  return { field, translating, isTranslated, showOriginal, setShowOriginal, lang, error };
 }

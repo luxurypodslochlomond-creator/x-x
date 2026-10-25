@@ -1,4 +1,4 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { RECORD_CHROME, chromeKey } from '../../shared/recordChrome.ts';
 
 // ── A TONGUE OF THE RECORD IS MADE ONCE ──
@@ -55,7 +55,7 @@ export default async function(req) {
     const frameMissing = Object.keys(RECORD_CHROME).filter(w => !tongue[chromeKey(w)]);
     let made = 0;
     if (missing.length || frameMissing.length) {
-      const fresh = await makeWords(base44, [...frameMissing, ...missing], lang);
+      const fresh = await makeWords(base44, [...new Set([...frameMissing, ...missing])], lang);
       // A frame word is stored apart from the body's words, so a wording that reads wrong in a
       // tongue — a wire returned as an electrical cable — can be replaced without touching the
       // record's own copy.
@@ -78,10 +78,12 @@ export default async function(req) {
     for (const [key, word] of Object.entries(strings)) {
       // The frame's own entry wins over any plain word left from before it was kept apart: what
       // is handed back is the wording the record stands behind now, not an older one.
-      translations[key] = (typeof word === 'string' && (tongue[chromeKey(word)] || tongue[word])) || word;
+      translations[key] = typeof word === 'string' ? (tongue[chromeKey(word)] || tongue[word] || null) : word;
     }
 
-    return Response.json({ translations, kept: Object.keys(tongue).length, made });
+    const frame = Object.fromEntries(Object.keys(RECORD_CHROME).filter(word => tongue[chromeKey(word)]).map(word => [word, tongue[chromeKey(word)]]));
+    const incomplete = asked.some(word => !tongue[chromeKey(word)] && !tongue[word]);
+    return Response.json({ translations, frame, incomplete, kept: Object.keys(tongue).length, made });
   } catch (error) {
     console.error('translateClimate error:', error && error.message ? error.message : error);
     return Response.json({ translations: null, error: String((error && error.message) || error) }, { status: 200 });
@@ -160,7 +162,10 @@ async function askOnce(base44, words, lang) {
     ? `\n\nSome of these are the record's own frame — the words of its navigation bar, its footer and its masthead, read on every page with no sentence around them. Translate each one as the thing it means here, in the noun sense a place is named with, short and plain — never as the same word standing alone, and never as a verb:\n${frame.map(w => `- "${w}" — ${RECORD_CHROME[w]}`).join('\n')}`
     : '';
 
-  const prompt = `You are a precise, professional translator for a public climate-action record — "Together We Can Change Climate", built in honour of Horizon International. Translate every VALUE in this JSON object into ${lang} (this may be an ISO code like "fr" or a language name like "Yoruba" — work out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, capitalisation style and brand names (Horizon International, UF51, SORTED, Roots & Shoots, Dr. Jane Goodall) unchanged. Tone: warm, clear, hopeful, plain.${frameNote} Return ONLY the JSON object.
+  const target = /^(chr|cherokee|tsalagi|ᏣᎳᎩ)$/i.test(String(lang).trim())
+    ? 'Cherokee (ᏣᎳᎩ, ISO 639-3 chr), written in the Cherokee syllabary, not Latin transliteration. Cherokee is a living language. Do not invent words: return an empty value for any wording you cannot translate reliably'
+    : lang;
+  const prompt = `You are a precise, professional translator for a public climate-action record — "Together We Can Change Climate", built in honour of Horizon International. Translate every VALUE in this JSON object into ${target} (this may be an ISO code like "fr" or a language name like "Yoruba" — work out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, capitalisation style and brand names (Horizon International, UF51, SORTED, Roots & Shoots, Dr. Jane Goodall) unchanged. Tone: warm, clear, hopeful, plain.${frameNote} Return ONLY the JSON object.
 
 JSON:
 ${JSON.stringify(payload)}`;

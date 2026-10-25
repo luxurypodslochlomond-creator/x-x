@@ -11,7 +11,8 @@ import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import { recordOrigin } from '@/components/climate/recordAddress';
-import { markProduced } from '@/components/shared/translationMemory';
+import { seedTranslations } from '@/components/shared/translation/translationCache';
+import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import PeaceBell from '@/components/climate/PeaceBell';
@@ -120,6 +121,7 @@ const T = {
   ar: { title_a: 'معًا نُغيّر', title_b: 'مسار', title_c: 'تغير المناخ', sub: 'سجلّ عام لحالات الطوارئ المناخية والإجراءات الإيجابية التي تنجح — مشترك علنًا، دوليًا — ليستطيع أي شخص على الأرض تكرار ما هو جيد.', service: 'خدمة عامة · للعالم', noads: 'لا إعلانات', nofund: 'لا رعاية', donate: 'الدعم مرحّب به', search: 'ابحث عن الحلول والأزمات…', solutions: 'الحلول', crises: 'أزمات المناخ', defs: 'تعريفات', rev: 'تمت المراجعة', connect: 'جارٍ توصيل الكوكب…', empty: 'لا نتائج مطابقة بعد.', govern: 'مبني من أجل الكوكب — ومبني ليكون موثوقًا', govern_body: 'تتم مراجعة كل إدخال قبل النشر. تُستخدم الصور الخالية من حقوق النشر فقط. يُحافظ على الموقع كمنطقة تقريبية لحماية الخصوصية، مع بقائه صادقًا وقابلاً للتحقق. المنصة مفتوحة المصدر ومحمية من الاستغلال وتعمل كخدمة عامة — لا إعلانات ولا رعاية، والمال لا يشتري مكانًا في السجل. الدعم مرحّب به ويُعلن في العلن. تُقدَّم ترجمات الواجهة على المنصة؛ وتُترجم الإدخالات من قبل مجتمعنا بمرور الوقت.', covenant: 'اقرأ ميثاقنا مفتوح المصدر', family: 'هذه المنصة جزء من عائلة الشفاء الكوكبي UF51 — الحلول الموثقة هنا هي محرك المعرفة وراء عملنا الميداني.', action: 'اتخذ إجراء', honour: 'بُني تكريمًا لـ Janine M. H. Selendy وهورايزون إنترناشونال — وسُلّم إلى العالم، إلى الكوكب، إلى جميعنا.', all: 'الكل', featured: 'إشارات' },
 };
 
+seedTranslations(T);
 
  function SolutionCard({ item }) {
      // Green says solution, red says emergency. A crisis card wears the record's red — it
@@ -208,8 +210,7 @@ export default function TogetherChangeClimate() {
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
-  const [lang, setLang] = useState(() => { try { return localStorage.getItem('climate51_lang') || 'auto'; } catch { return 'auto'; } });
-  const [autoLang, setAutoLang] = useState('en');
+  const { isRTL } = useSiteLanguage();
   const [copied, setCopied] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
   const [showGathering, setShowGathering] = useState(false);
@@ -270,12 +271,6 @@ export default function TogetherChangeClimate() {
     });
   }, []);
 
-  useEffect(() => {
-    try {
-      const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
-      setAutoLang((nav || 'en').split('-')[0].toLowerCase() || 'en');
-    } catch { setAutoLang('en'); }
-  }, []);
 
   useEffect(() => {
     if (firstRender.current) { firstRender.current = false; return; }
@@ -286,30 +281,9 @@ export default function TogetherChangeClimate() {
     contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [selectedType]);
 
-  // The tongue is chosen in the header, on every page of the record. The record's own
-  // copy follows it, so the story below reads in the language that was picked.
-  useEffect(() => {
-    const follow = (e) => setLang(e.detail);
-    window.addEventListener('uf51:lang', follow);
-    return () => window.removeEventListener('uf51:lang', follow);
-  }, []);
-
-  const chosen = lang === 'auto' ? autoLang : lang;
-  const t = { ...T.en, ...(T[chosen] || {}) };
-  const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
-  const isRTL = RTL_LANGS.has((chosen || '').split('-')[0]);
-
-  // ── ONE PAGE, ONE ENGINE ──
-  // Where the record's copy is written into it by hand, the record says those words itself:
-  // instantly, off the device, with nothing asked of anyone and nothing to wait for. Every
-  // other tongue is left to the single shared engine, which reads the English on the screen
-  // and translates the whole page in one ask — the same ask, and the same memory, that every
-  // other page of the record uses. What this page renders in another tongue is declared
-  // here, so that engine never translates it a second time, in a second direction.
-  useEffect(() => {
-    if (chosen === 'en') return;
-    markProduced(Object.values(T[chosen] || {}));
-  }, [chosen]);
+  // React always renders the source copy; the shared translator alone displays another language.
+  // Existing hand-written translations are seeded above, keyed by that exact source.
+  const t = T.en;
 
   // One matching rule for the record's own box, and it is the rule the full search uses:
   // every word you type has to appear somewhere in the entry, in any order. Before, the
